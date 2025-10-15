@@ -69,7 +69,6 @@ public class LuceneItalianTokenizer extends BaseTokenizer {
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {
-        return getTokenStream(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE,
-                stopWordsAllowed);
+        return getTokenStream(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stopWordsAllowed);
     }
 }

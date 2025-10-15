@@ -284,7 +284,7 @@
        <varlistentry id="dialogs.preferences.glossary.use.full.stemming">
            <term id="dialogs.preferences.glossary.use.full.stemming.title"><option>Use full stemming</option></term>
            <listitem>
-               <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, only Italian is implemented.</para>
+               <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, Italian and French are implemented.</para>
            </listitem>
        </varlistentry> 
 	</variablelist>

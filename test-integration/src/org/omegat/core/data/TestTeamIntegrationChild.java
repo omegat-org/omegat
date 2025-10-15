@@ -210,7 +210,8 @@ public final class TestTeamIntegrationChild {
     /**
      * replacement of ProjectFactory.loadProject for test.
      * 
-     * @param projectProperties target project to load
+     * @param projectProperties
+     *            target project to load
      */
     static void loadProject(ProjectProperties projectProperties) throws Exception {
         Core.getAutoSave().disable();

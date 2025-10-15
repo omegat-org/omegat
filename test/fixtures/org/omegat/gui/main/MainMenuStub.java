@@ -24,11 +24,9 @@
  **************************************************************************/
 package org.omegat.gui.main;
 
-import org.omegat.util.Platform;
 import org.omegat.util.gui.MenuExtender;
 
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 public class MainMenuStub implements IMainMenu {
 
@@ -51,10 +49,12 @@ public class MainMenuStub implements IMainMenu {
     public JMenu getMachineTranslationMenu() {
         return null;
     }
+
     @Override
     public JMenu getGlossaryMenu() {
         return null;
     }
+
     @Override
     public JMenu getAutoCompletionMenu() {
         return null;

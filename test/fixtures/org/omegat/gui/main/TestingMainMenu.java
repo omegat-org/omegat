@@ -119,10 +119,12 @@ public class TestingMainMenu implements IMainMenu {
     public JMenu getMachineTranslationMenu() {
         return machineTranslationMenu;
     }
+
     @Override
     public JMenu getGlossaryMenu() {
         return glossaryMenu;
     }
+
     @Override
     public JMenu getAutoCompletionMenu() {
         return autoCompleteMenu;
@@ -183,6 +185,7 @@ public class TestingMainMenu implements IMainMenu {
         }
         return gotoMenu;
     }
+
     @Override
     public void invokeAction(String action, int modifiers) {
     }

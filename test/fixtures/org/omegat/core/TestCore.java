@@ -64,11 +64,13 @@ public abstract class TestCore {
     /**
      * Set-up OmegaT Core properties for unit and functional test.
      * <p>
-     * Create a temporary directory for user configuration.
-     * This keeps developers' omegat configuration folder clean and
-     * provides stable test conditions.
-     * It also initializes a main window and editor with modular functions.
-     * @throws Exception if file I/O failed.
+     * Create a temporary directory for user configuration. This keeps
+     * developers' omegat configuration folder clean and provides stable test
+     * conditions. It also initializes a main window and editor with modular
+     * functions.
+     * 
+     * @throws Exception
+     *             if file I/O failed.
      */
     @Before
     public final void setUpCore() throws Exception {
@@ -88,6 +90,7 @@ public abstract class TestCore {
             public void enable() {
                 // ignore all
             }
+
             @Override
             public void disable() {
                 // ignore all
@@ -115,25 +118,31 @@ public abstract class TestCore {
             @Override
             public void addDockable(Dockable pane) {
             }
+
             @Override
             public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
             }
+
             @Override
             public Font getApplicationFont() {
                 return new Font("Dialog", Font.PLAIN, 12);
             }
+
             @Override
             public JFrame getApplicationFrame() {
                 return new JFrame();
             }
+
             @Override
             public void showLengthMessage(String messageText) {
                 // do nothing
             }
+
             @Override
             public void showProgressMessage(String messageText) {
                 // do nothing
             }
+
             @Override
             public IMainMenu getMainMenu() {
                 return mainMenu;
@@ -152,7 +161,9 @@ public abstract class TestCore {
 
     /**
      * Clean up a temporary directory for configuration.
-     * @throws IOException if file access failed.
+     * 
+     * @throws IOException
+     *             if file access failed.
      */
     @After
     public final void tearDownCore() throws IOException {

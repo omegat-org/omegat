@@ -60,6 +60,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
 
 import org.jetbrains.annotations.Nullable;
@@ -838,8 +839,7 @@ public class RealProject implements IProject {
 
         Core.getAutoSave().disable();
         try {
-
-            Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(false);
+            setProjectMenuEnabled(false);
             try {
                 Preferences.save();
 
@@ -879,7 +879,7 @@ public class RealProject implements IProject {
                 stat.updateStatisticsInfo(hotStat);
                 Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
-                Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
+                setProjectMenuEnabled(true);
             }
 
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
@@ -889,6 +889,13 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_SAVE_END");
 
         isSaving = false;
+    }
+
+    private void setProjectMenuEnabled(boolean enabled) {
+        JMenu projectMenu = CoreState.getInstance().getMainWindow().getMainMenu().getProjectMenu();
+        if (projectMenu != null) {
+            projectMenu.setEnabled(enabled);
+        }
     }
 
     /**

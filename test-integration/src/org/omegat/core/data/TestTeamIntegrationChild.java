@@ -42,8 +42,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JMenu;
-
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
@@ -57,12 +55,9 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.editor.EditorSettings;
+import org.omegat.gui.editor.EditorSettingsStub;
+import org.omegat.gui.editor.EditorStub;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.IPopupMenuConstructor;
-import org.omegat.gui.editor.autocompleter.IAutoCompleter;
-import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
@@ -70,13 +65,13 @@ import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainMenuStub;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
-import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
 import gen.core.project.RepositoryDefinition;
@@ -111,7 +106,7 @@ public final class TestTeamIntegrationChild {
     static Set<String> glossaries = new HashSet<>();
     static long glossaryIndex = 0;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         if (args.length != 6) {
             System.err.println("Wrong arguments count");
             System.exit(1);
@@ -157,17 +152,17 @@ public final class TestTeamIntegrationChild {
             }
             projectProperties.autocreateDirectories();
             Core.setProject(new NotLoadedProject());
-            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new TestGlossaryTextArea()));
+            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new GlossaryTextAreaStub()));
             loadProject(projectProperties);
 
             key = new EntryKey[segCount];
             ste = new SourceTextEntry[segCount];
             for (int c = 0; c < segCount; c++) {
                 key[c] = new EntryKey("file", source + "/" + c, null, null, null, null);
-                ste[c] = new SourceTextEntry(key[c], 0, null, null, new ArrayList<ProtectedPart>());
+                ste[c] = new SourceTextEntry(key[c], 0, null, null, new ArrayList<>());
             }
             keyC = new EntryKey("file", CONCURRENT_NAME, null, null, null, null);
-            steC = new SourceTextEntry(keyC, 0, null, null, new ArrayList<ProtectedPart>());
+            steC = new SourceTextEntry(keyC, 0, null, null, new ArrayList<>());
 
             v = new long[segCount];
             mc: while (true) {
@@ -216,7 +211,7 @@ public final class TestTeamIntegrationChild {
      * replacement of ProjectFactory.loadProject for test.
      * 
      * @param projectProperties
-     * @throws Exception
+     *            target project to load
      */
     static void loadProject(ProjectProperties projectProperties) throws Exception {
         Core.getAutoSave().disable();
@@ -343,7 +338,12 @@ public final class TestTeamIntegrationChild {
 
     static void checkTranslation(int index) {
         TMXEntry en = Core.getProject().getTranslationInfo(ste[index]);
-        String sv = en == null || !en.isTranslated() ? "" : en.translation;
+        String sv;
+        if (en == null || !en.isTranslated()) {
+            sv = "";
+        } else {
+            sv = en.translation;
+        }
         if (v[index] == 0 && sv.isEmpty()) {
             return;
         }
@@ -351,7 +351,7 @@ public final class TestTeamIntegrationChild {
             return;
         }
         throw new RuntimeException(source + ": Wrong value in " + source + "/" + index + ": expected "
-                + v[index] + " but contains " + en.translation);
+                + v[index] + " but contains " + sv);
     }
 
     static void checkTranslationFromFile(ProjectTMX tmx, int index) throws Exception {
@@ -413,234 +413,7 @@ public final class TestTeamIntegrationChild {
         }
     };
 
-    static IEditor editor = new IEditor() {
-
-        @Override
-        public void windowDeactivated() {
-        }
-
-        @Override
-        public void undo() {
-        }
-
-        @Override
-        public void setFilter(IEditorFilter filter) {
-        }
-
-        @Override
-        public void setAlternateTranslationForCurrentEntry(boolean alternate) {
-        }
-
-        @Override
-        public void requestFocus() {
-        }
-
-        @Override
-        public void replaceEditTextAndMark(String text) {
-        }
-
-        @Override
-        public void replaceEditText(String text) {
-        }
-
-        @Override
-        public void replaceEditTextAndMark(final String text, final String origin) {
-        }
-
-        @Override
-        public void removeFilter() {
-        }
-
-        @Override
-        public void remarkOneMarker(String markerClassName) {
-        }
-
-        @Override
-        public void registerUntranslated() {
-        }
-
-        @Override
-        public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
-        }
-
-        @Override
-        public void registerIdenticalTranslation() {
-        }
-
-        @Override
-        public void registerEmptyTranslation() {
-        }
-
-        @Override
-        public void refreshViewAfterFix(List<Integer> fixedEntries) {
-        }
-
-        @Override
-        public void refreshView(boolean doCommit) {
-        }
-
-        @Override
-        public void redo() {
-        }
-
-        @Override
-        public void prevEntryWithNote() {
-        }
-
-        @Override
-        public void prevEntry() {
-        }
-
-        @Override
-        public void nextXAutoEntry() {
-        }
-
-        @Override
-        public void prevXAutoEntry() {
-        }
-
-        @Override
-        public void nextXEnforcedEntry() {
-        }
-
-        @Override
-        public void prevXEnforcedEntry() {
-        }
-
-        @Override
-        public void nextUntranslatedEntry() {
-        }
-
-        @Override
-        public void nextUniqueEntry() {
-        }
-
-        @Override
-        public void nextTranslatedEntry() {
-        }
-
-        @Override
-        public void nextEntryWithNote() {
-        }
-
-        @Override
-        public void nextEntry() {
-        }
-
-        @Override
-        public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                String markerClassName) {
-        }
-
-        @Override
-        public void insertText(String text) {
-        }
-
-        @Override
-        public void insertTag(String tag) {
-        }
-
-        @Override
-        public void gotoHistoryForward() {
-        }
-
-        @Override
-        public void gotoHistoryBack() {
-        }
-
-        @Override
-        public void gotoFile(int fileIndex) {
-        }
-
-        @Override
-        public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
-        }
-
-        @Override
-        public void gotoEntry(String srcString, EntryKey key) {
-        }
-
-        @Override
-        public void gotoEntry(int entryNum) {
-        }
-
-        @Override
-        public void gotoEntry(int entryNum, CaretPosition pos) {
-        }
-
-        @Override
-        public EditorSettings getSettings() {
-            return null;
-        }
-
-        @Override
-        public String getSelectedText() {
-            return null;
-        }
-
-        @Override
-        public void selectSourceText() {
-        }
-
-        @Override
-        public IEditorFilter getFilter() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentTranslation() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentFile() {
-            return null;
-        }
-
-        @Override
-        public int getCurrentEntryNumber() {
-            return 0;
-        }
-
-        @Override
-        public SourceTextEntry getCurrentEntry() {
-            return null;
-        }
-
-        @Override
-        public void commitAndLeave() {
-        }
-
-        @Override
-        public void commitAndDeactivate() {
-        }
-
-        @Override
-        public void changeCase(CHANGE_CASE_TO newCase) {
-        }
-
-        @Override
-        public void replaceEditText(final String text, final String origin) {
-        }
-
-        @Override
-        public void activateEntry() {
-        }
-
-        @Override
-        public IAutoCompleter getAutoCompleter() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentTargetFile() {
-            return null;
-        }
-
-        @Override
-        public void insertTextAndMark(String text) {
-        }
-    };
+    static IEditor editor = new EditorStub(new EditorSettingsStub());
 
     static IMainWindow mainWindow = new ConsoleWindow() {
         @Override
@@ -659,45 +432,7 @@ public final class TestTeamIntegrationChild {
         public void lockUI() {
         }
 
-        final IMainMenu menu = new IMainMenu() {
-
-            public JMenu getToolsMenu() {
-                return null;
-            }
-
-            public JMenu getProjectMenu() {
-                return new JMenu();
-            }
-
-            public JMenu getOptionsMenu() {
-                return null;
-            }
-
-            public JMenu getMachineTranslationMenu() {
-                return null;
-            }
-
-            public JMenu getGlossaryMenu() {
-                return null;
-            }
-
-            public JMenu getAutoCompletionMenu() {
-                return null;
-            }
-
-            @Override
-            public JMenu getHelpMenu() {
-                return null;
-            }
-
-            @Override
-            public JMenu getMenu(MenuKey marker) {
-                return null;
-            }
-
-            public void invokeAction(String action, int modifiers) {
-            }
-        };
+        final IMainMenu menu = new MainMenuStub();
 
         public IMainMenu getMainMenu() {
             return menu;
@@ -849,7 +584,7 @@ public final class TestTeamIntegrationChild {
         }
     }
 
-    private static class TestGlossaryTextArea implements IGlossaries {
+    private static class GlossaryTextAreaStub implements IGlossaries {
         @Override
         public List<GlossaryEntry> getDisplayedEntries() {
             return null;

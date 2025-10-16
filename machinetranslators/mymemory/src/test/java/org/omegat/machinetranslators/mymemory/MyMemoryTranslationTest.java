@@ -51,7 +51,6 @@ public class MyMemoryTranslationTest extends TestCoreWireMock {
         System.setProperty(AbstractMyMemoryTranslate.MYMEMORY_API_KEY, "apikey");
         System.setProperty(AbstractMyMemoryTranslate.MYMEMORY_API_EMAIL, "api@mail");
 
-        String sourceText = "Hello, how are you today?";
         Map<String, StringValuePattern> params = new HashMap<>();
         params.put("q", WireMock.equalTo("Hello World!"));
         params.put("of", WireMock.equalTo("json"));
@@ -101,7 +100,6 @@ public class MyMemoryTranslationTest extends TestCoreWireMock {
         System.setProperty(AbstractMyMemoryTranslate.MYMEMORY_API_KEY, "apikey");
         System.setProperty(AbstractMyMemoryTranslate.MYMEMORY_API_EMAIL, "api@mail");
 
-        String sourceText = "Hello, how are you today?";
         Map<String, StringValuePattern> params = new HashMap<>();
         params.put("q", WireMock.equalTo("Hello World!"));
         params.put("of", WireMock.equalTo("json"));

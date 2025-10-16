@@ -58,7 +58,7 @@ morfologik = "2.1.9"
 swing_extra_locales = "0.3.3"
 mockito = "5.20.0"
 json_java = "20250517"
-protobuf_java = "4.32.1"
+protobuf_java = "4.33.0"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}

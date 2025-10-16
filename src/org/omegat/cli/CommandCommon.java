@@ -53,13 +53,12 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-final class Common {
+public final class CommandCommon {
 
-    private Common() {
+    private CommandCommon() {
     }
 
     /**
@@ -67,7 +66,7 @@ final class Common {
      * project listener because the SwingUtilities.invokeLater method used in
      * CoreEvents doesn't stop the project processing in console mode.
      */
-    static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType, Parameters params) {
+    static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType, CommonParameters params) {
         if (params.scriptName != null) {
             File script = new File(params.scriptName);
             Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
@@ -100,7 +99,7 @@ final class Common {
      * warning, the errors are printed, but the program continues. In all other
      * cases, no tag validation is done.
      */
-    static void validateTagsConsoleMode(Parameters params) {
+    static void validateTagsConsoleMode(CommonParameters params) {
         List<ErrorReport> stes;
         if ("abort".equalsIgnoreCase(params.tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
@@ -121,6 +120,25 @@ final class Common {
         }
     }
 
+    public static void parseCommonParams(CommonParameters params) {
+        if (!params.team) {
+            RuntimePreferences.setNoTeam();
+        }
+        if (params.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (params.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
+        if (params.tokenizerSource != null) {
+            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
+        }
+        if (params.tokenizerTarget != null) {
+            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
+        }
+        validateTagsConsoleMode(params);
+    }
+
     /**
      * creates the project class and adds it to the Core. Loads the project if
      * specified. An exit occurs on error loading the project. This method is
@@ -130,7 +148,7 @@ final class Common {
      *            load the project or not
      * @return the project.
      */
-    static RealProject selectProjectConsoleMode(boolean loadProject, Parameters params) {
+    public static RealProject selectProjectConsoleMode(boolean loadProject, CommonParameters params) {
 
         if (params.projectLocation == null) {
             Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -163,7 +181,7 @@ final class Common {
         return p;
     }
 
-    static void showStartUpLogInfo() {
+    public static void showStartUpLogInfo() {
         // initialize logging backend and loading configuration.
         Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
                 DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
@@ -176,7 +194,7 @@ final class Common {
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
     }
 
-    static void initializeApp() {
+    public static void initializeApp() {
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
@@ -188,13 +206,12 @@ final class Common {
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(Collections.emptyMap());
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
     }
 
-    static void logLevelInitialize(Parameters params) {
+    public static void logLevelInitialize(CommonParameters params) {
         if (params.verbose) {
             Log.setConsoleLevel(java.util.logging.Level.INFO);
         }

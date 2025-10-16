@@ -62,7 +62,7 @@ public class StartCommand implements Callable<Integer> {
     @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    @Nullable Parameters params;
+    @Nullable CommonParameters params;
 
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested = false;
@@ -84,9 +84,9 @@ public class StartCommand implements Callable<Integer> {
      * Execute standard GUI.
      */
     int runGUI() {
-        Common.showStartUpLogInfo();
+        CommandCommon.showStartUpLogInfo();
         if (params != null) {
-            Common.logLevelInitialize(params);
+            CommandCommon.logLevelInitialize(params);
             if (params.tokenizerSource != null) {
                 RuntimePreferences.setTokenizerSource(params.tokenizerSource);
             }
@@ -95,7 +95,7 @@ public class StartCommand implements Callable<Integer> {
             }
         }
 
-        Common.initializeApp();
+        CommandCommon.initializeApp();
 
         if ((params != null && !params.team) || (legacyParams != null && legacyParams.noTeam)) {
             RuntimePreferences.setNoTeam();

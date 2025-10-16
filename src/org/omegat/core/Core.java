@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -104,6 +105,7 @@ public final class Core {
             .synchronizedList(new ArrayList<>());
 
     private static final List<IMarker> MARKERS = new ArrayList<>();
+
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -328,6 +330,17 @@ public final class Core {
      */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
         PluginUtils.getSpellCheckClasses().add(clazz);
+    }
+
+    /**
+     * Register a CLI subcommand to be added to the application's PicoCLI parser.
+     * This allows modules/plugins to contribute console commands.
+     *
+     * @param name the subcommand name used on the command line
+     * @param subcommand the class annotated with picocli @Command
+     */
+    public static void registerConsoleCommand(String name, Class<?> subcommand) {
+        SubCommands.registerConsoleCommand(name, subcommand);
     }
 
     /**

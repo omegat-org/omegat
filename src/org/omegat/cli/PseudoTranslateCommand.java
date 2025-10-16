@@ -47,7 +47,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
     @Nullable LegacyParameters legacyParameters;
 
     @CommandLine.Mixin
-    @Nullable Parameters params;
+    @Nullable CommonParameters params;
 
     @CommandLine.Option(names = { "--type" }, paramLabel = "<type>", defaultValue = "empty",
             descriptionKey = "PSEUDO_TRANSLATE_TYPE")
@@ -82,15 +82,15 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         if (params == null || legacyParameters == null) {
             return 1;
         }
-        Common.showStartUpLogInfo();
-        Common.logLevelInitialize(params);
+        CommandCommon.showStartUpLogInfo();
+        CommandCommon.logLevelInitialize(params);
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         if (!params.team || legacyParameters.noTeam) {
             RuntimePreferences.setNoTeam();
         }
 
-        Common.initializeApp();
+        CommandCommon.initializeApp();
         Core.initializeConsole();
 
         if (legacyParameters.disableProjectLocking) {
@@ -107,9 +107,9 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             type = legacyParameters.pseudoTranslateTypeName;
         }
 
-        RealProject p = Common.selectProjectConsoleMode(true, params);
+        RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
 
-        Common.validateTagsConsoleMode(params);
+        CommandCommon.validateTagsConsoleMode(params);
 
         Log.logInfoRB("CONSOLE_CREATE_PSEUDOTMX");
 

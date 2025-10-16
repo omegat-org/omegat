@@ -47,7 +47,7 @@ public class TranslateCommand implements Callable<Integer> {
     @Nullable String project;
 
     @CommandLine.Mixin
-    @Nullable Parameters params;
+    @Nullable CommonParameters params;
 
     @Override
     public Integer call() {
@@ -67,15 +67,15 @@ public class TranslateCommand implements Callable<Integer> {
             return 1;
         }
 
-        Common.showStartUpLogInfo();
-        Common.logLevelInitialize(params);
+        CommandCommon.showStartUpLogInfo();
+        CommandCommon.logLevelInitialize(params);
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         if (params.projectLocation == null) {
             params.setProjectLocation(legacyParams.project);
         }
 
-        Common.initializeApp();
+        CommandCommon.initializeApp();
         Core.initializeConsole();
 
         if (!params.team || legacyParams.noTeam) {
@@ -94,9 +94,9 @@ public class TranslateCommand implements Callable<Integer> {
             RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
         }
 
-        RealProject p = Common.selectProjectConsoleMode(true, params);
+        RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
 
-        Common.validateTagsConsoleMode(params);
+        CommandCommon.validateTagsConsoleMode(params);
 
         Log.logInfoRB("CONSOLE_TRANSLATING");
 
@@ -110,10 +110,10 @@ public class TranslateCommand implements Callable<Integer> {
 
         // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
-        Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE, params);
+        CommandCommon.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE, params);
 
         p.closeProject();
-        Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE, params);
+        CommandCommon.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE, params);
         Log.logInfoRB("CONSOLE_FINISHED");
 
         return 0;

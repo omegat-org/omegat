@@ -58,6 +58,8 @@ public final class AlignerModule implements IApplicationEventListener {
     public static void loadPlugins() {
         alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
+        // Register CLI subcommand and hook
+        org.omegat.core.Core.registerConsoleCommand("aligner", AlignerCommand.class);
     }
 
     public static void unloadPlugins() {

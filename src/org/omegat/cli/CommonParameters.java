@@ -29,7 +29,7 @@ import picocli.CommandLine;
 
 import static picocli.CommandLine.Option;
 
-public class Parameters {
+public class CommonParameters {
 
     /**
      * CLI parameter to disable team functionality (treat as local project)
@@ -74,8 +74,11 @@ public class Parameters {
             ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "params.ALTERNATE_FILENAME_TO")
     @Nullable String alternateFilenameTo;
 
-    // Development
-    public static final String DEV_MANIFESTS = "dev-manifests";
+    @Option(names = { "--no-project-locking" }, descriptionKey = "omegat.DISABLE_PROJECT_LOCKING")
+    boolean disableProjectLocking;
+
+    @Option(names = { "--no-location-save" }, descriptionKey = "omegat.DISABLE_LOCATION_SAVE")
+    boolean disableLocationSave;
 
     @Nullable String projectLocation;
 

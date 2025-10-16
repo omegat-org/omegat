@@ -49,7 +49,7 @@ public class StatsCommand implements Callable<Integer> {
     @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    @Nullable Parameters params;
+    @Nullable CommonParameters params;
 
     @CommandLine.Option(names = {
             "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml", descriptionKey = "STATS_TYPE")
@@ -89,8 +89,8 @@ public class StatsCommand implements Callable<Integer> {
         if (params == null || legacyParams == null) {
             return 1;
         }
-        Common.showStartUpLogInfo();
-        Common.logLevelInitialize(params);
+        CommandCommon.showStartUpLogInfo();
+        CommandCommon.logLevelInitialize(params);
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         if (output == null) {
@@ -100,7 +100,7 @@ public class StatsCommand implements Callable<Integer> {
             format = legacyParams.statsType;
         }
 
-        Common.initializeApp();
+        CommandCommon.initializeApp();
         Core.initializeConsole();
 
         if (!params.team || legacyParams.noTeam) {
@@ -119,7 +119,7 @@ public class StatsCommand implements Callable<Integer> {
             RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
         }
 
-        RealProject p = Common.selectProjectConsoleMode(true, params);
+        RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
         StatOutputFormat statsMode;
 

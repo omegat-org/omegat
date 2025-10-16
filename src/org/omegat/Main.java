@@ -37,10 +37,14 @@ import java.lang.management.RuntimeMXBean;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.omegat.cli.LegacyParameters;
+import org.omegat.cli.SubCommands;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
@@ -61,15 +65,33 @@ import org.omegat.util.StaticUtils;
  */
 public final class Main {
 
+    // Development
+    public static final String DEV_MANIFESTS = "dev-manifests";
+
     private Main() {
     }
 
     public static void main(String[] args) {
+        // Stage 2: Load plugins with configuration
+        Map<String, String> pluginConfig = extractPluginConfiguration(args);
+        PluginUtils.loadPlugins(pluginConfig);
+
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
         // construct parser and execute
         CommandLine commandLine = new CommandLine(new LegacyParameters());
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
+
+        // Register subcommands provided by modules/plugins
+        for (SubCommands.SubCommandEntry entry : SubCommands.getSubCommandSet()) {
+            commandLine.addSubcommand(entry.name, entry.subcommand);
+        }
+
+        // Explicitly handle top-level help to ensure `./OmegaT --help` prints usage
+        if (args != null && args.length == 1 && ("--help".equals(args[0]) || "-h".equals(args[0]))) {
+            commandLine.usage(System.out);
+            return;
+        }
         int status = commandLine.execute(args);
         if (status != 0) {
             // Should not call exit when starting GUI.
@@ -123,6 +145,26 @@ public final class Main {
             Log.log(e);
             System.exit(1);
         }
+    }
+
+    /**
+     * Extract plugin-related configuration from command-line arguments
+     * before full parsing. This allows plugins to be loaded with proper
+     * configuration before subcommands are registered.
+     */
+    private static Map<String, String> extractPluginConfiguration(String[] args) {
+        Map<String, String> config = new HashMap<>();
+        if (args == null) {
+            return config;
+        }
+
+        for (int i = 0; i < args.length; i++) {
+            if ("--dev-manifests".equals(args[i]) && i + 1 < args.length) {
+                config.put(DEV_MANIFESTS, args[i + 1]);
+                break;
+            }
+        }
+        return config;
     }
 
     private static void constructCommandParams(List<String> command) {

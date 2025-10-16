@@ -41,7 +41,7 @@ import java.util.concurrent.Callable;
 import static picocli.CommandLine.Option;
 
 @CommandLine.Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0", subcommands = {
-        StartCommand.class, AlignCommand.class, TranslateCommand.class, StatsCommand.class, TeamCommand.class,
+        StartCommand.class, TranslateCommand.class, StatsCommand.class, TeamCommand.class,
         PseudoTranslateCommand.class, CommandLine.HelpCommand.class })
 public class LegacyParameters implements Callable<Integer> {
 
@@ -109,12 +109,6 @@ public class LegacyParameters implements Callable<Integer> {
             PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TYPE")
     @Nullable String pseudoTranslateTypeName;
 
-    // CONSOLE_ALIGN mode
-    public static final String ALIGNDIR = "--alignDir";
-    @Option(names = {
-            ALIGNDIR }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "ALIGN_DIR")
-    @Nullable String alignDirPath;
-
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
@@ -139,8 +133,8 @@ public class LegacyParameters implements Callable<Integer> {
      */
     @Override
     public Integer call() {
-        Parameters params = new Parameters();
-        Common.logLevelInitialize(params);
+        CommonParameters params = new CommonParameters();
+        CommandCommon.logLevelInitialize(params);
         if (project != null) {
             params.setProjectLocation(project);
         }
@@ -159,19 +153,6 @@ public class LegacyParameters implements Callable<Integer> {
                         translateCommand.project = project;
                     }
                     return translateCommand.runConsoleTranslate();
-                case "console-align":
-                    AlignCommand alignCommand = new AlignCommand();
-                    alignCommand.params = params;
-                    alignCommand.legacyParams = this;
-                    if (project != null) {
-                        alignCommand.project = project;
-                    }
-                    try {
-                        return alignCommand.runConsoleAlign();
-                    } catch (Exception e) {
-                        Log.logErrorRB(e, "CT_ERROR_ALIGNING_PROJECT", alignDirPath == null ? "" : alignDirPath);
-                    }
-                    return 1;
                 case "console-stats":
                     StatsCommand statsCommand = new StatsCommand();
                     statsCommand.legacyParams = this;

@@ -79,13 +79,12 @@ public class RemoteRepositoryProvider {
     private String[] forceExcludes = {};
 
     public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions,
-            ProjectProperties props) throws Exception {
+            ProjectProperties props) {
         this(projectRoot, repositoriesDefinitions);
         setForceExcludesFromProjectProperties(props);
     }
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions)
-            throws Exception {
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) {
         this.projectRoot = projectRoot;
         this.repositoriesDefinitions = repositoriesDefinitions;
         if (repositoriesDefinitions != null) {
@@ -137,11 +136,16 @@ public class RemoteRepositoryProvider {
     /**
      * Initialize repositories instances.
      */
-    protected void initializeRepositories() throws Exception {
+    protected void initializeRepositories() {
         for (RepositoryDefinition r : repositoriesDefinitions) {
             IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
-            repo.init(r, getRepositoryDir(r), teamSettings);
-            repositories.add(repo);
+            try {
+                repo.init(r, getRepositoryDir(r), teamSettings);
+                repositories.add(repo);
+            } catch (Exception e) {
+                Log.log(e);
+                break;
+            }
         }
     }
 

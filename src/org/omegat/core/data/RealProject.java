@@ -231,16 +231,11 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
-        try {
-            if (RuntimePreferenceStore.getInstance().isNoTeam()) {
-                remoteRepositoryProvider = new RemoteRepositoryProvider(config.projectRootDir, null, config);
-            } else {
-                remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
-                        config.getRepositories(), config);
-            }
-        } catch (Exception ex) {
-            // TODO
-            throw new RuntimeException(ex);
+        if (!RuntimePreferenceStore.getInstance().isNoTeam()) {
+            remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
+                    config.getRepositories(), config);
+        } else {
+            remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
         projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
@@ -1036,7 +1031,7 @@ public class RealProject implements IProject {
         }
         Log.logInfoRB("TEAM_REBASE_START");
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
-        if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+        if (remoteRepositoryProvider.isManaged() && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             synchronized (projectTMX) {
                 tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
                         tmxPath, getTMXRebaseOperation());
@@ -1957,5 +1952,4 @@ public class RealProject implements IProject {
             }
         }
     }
-
 }

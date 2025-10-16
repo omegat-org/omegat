@@ -31,6 +31,8 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.snowball.SnowballFilter;
+import org.tartarus.snowball.ext.FrenchStemmer;
 
 /**
  * The LuceneFrenchTokenizer is a specialized tokenizer intended for processing
@@ -50,13 +52,25 @@ public class LuceneFrenchTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+    protected TokenStream getTokenStream(final String strOrig, final StemmingMode stemmingMode,
             final boolean stopWordsAllowed) throws IOException {
-        if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
-            return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
-        } else {
+        CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+        switch (stemmingMode) {
+        case NONE:
             return getStandardTokenStream(strOrig);
+        case GLOSSARY_FULL:
+        case MATCHING_FULL:
+            return new SnowballFilter(
+                    new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig)),
+                    new FrenchStemmer());
+        default:
+            return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         }
+    }
+
+    @Override
+    protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
+            throws IOException {
+        return getTokenStream(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stopWordsAllowed);
     }
 }

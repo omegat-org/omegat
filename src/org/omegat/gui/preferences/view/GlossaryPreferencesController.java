@@ -35,6 +35,7 @@ import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
+import org.openide.awt.Mnemonics;
 
 /**
  * @author Aaron Madlon-Kay
@@ -67,6 +68,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
                 return value.getName();
             }
         });
+        Mnemonics.setLocalizedText(panel.useFullStemmingCheckBox, OStrings.getString("PREFS_GLOSSARY_STEMMING_FULL"));
     }
 
     @Override
@@ -88,6 +90,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
                 Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false));
         panel.sortByTextLengthCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH,
                 false));
+        panel.useFullStemmingCheckBox.setSelected(Preferences.isPreference(Preferences.GLOSSARY_STEMMING_FULL));
     }
 
     @Override
@@ -101,6 +104,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.mergeAlternateDefinitionsCheckBox.setSelected(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT);
         panel.sortBySrcTextLengthCheckBox.setSelected(false);
         panel.sortByTextLengthCheckBox.setSelected(false);
+        panel.useFullStemmingCheckBox.setSelected(false);
     }
 
     @Override
@@ -117,5 +121,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, panel.sortByTextLengthCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH,
                 panel.sortBySrcTextLengthCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_STEMMING_FULL, panel.useFullStemmingCheckBox.isSelected());
     }
 }

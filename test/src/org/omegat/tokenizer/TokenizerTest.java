@@ -43,8 +43,14 @@ public class TokenizerTest extends TokenizerTestBase {
                 tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
         assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi",
                 "lazy", "dog" }, tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
+        assertResult(new String[] { "the", "quick", "brown", "x0", "jump", "jumped", "over", "1", "lazi",
+                "lazy", "dog" }, tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY_FULL));
         assertResult(new String[] { "quick", "brown", "jump", "jumped", "over", "lazi", "lazy", "dog" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
+        assertResult(new String[] { "organis", "organisation", "organ", "organization" },
+                tok.tokenizeWordsToStrings("organisation organization", StemmingMode.GLOSSARY));
+        assertResult(new String[] { "organi", "organisation", "organ", "organization" },
+                tok.tokenizeWordsToStrings("organisation organization", StemmingMode.GLOSSARY_FULL));
     }
 
     /**
@@ -191,6 +197,14 @@ public class TokenizerTest extends TokenizerTestBase {
                 tok.tokenizeWordsToStrings("pr\u00e4sentierte", StemmingMode.GLOSSARY));
         assertResult(new String[] { "prasentier", "pr\u00e4sentieren" },
                 tok.tokenizeWordsToStrings("pr\u00e4sentieren", StemmingMode.GLOSSARY));
+    }
+
+    @Test
+    public void testItalian() {
+        ITokenizer tok = new LuceneItalianTokenizer();
+        assertResult(new String[] { "paesi" }, tok.tokenizeWordsToStrings("paesi", StemmingMode.GLOSSARY));
+        assertResult(new String[] { "paes", "paesi" },
+                tok.tokenizeWordsToStrings("paesi", StemmingMode.GLOSSARY_FULL));
     }
 
     /**

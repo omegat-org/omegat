@@ -764,9 +764,11 @@ public final class PluginUtils {
             Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
             return true;
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
+            String message = ex.getMessage();
+            Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(),
+                    message == null ? "" : message);
             Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
-                    ex.getClass().getSimpleName(), ex.getMessage()));
+                    ex.getClass().getSimpleName(), message == null ? "" : message));
             return false;
         }
     }

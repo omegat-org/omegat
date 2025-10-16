@@ -25,6 +25,7 @@
 package org.omegat.languages;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.Nullable;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.languagetool.JLanguageTool;
@@ -59,7 +60,8 @@ public class LanguageModuleTestBase {
         Files.createDirectory(configDir.resolve("spelling"));
     }
 
-    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, String good, String bad) throws Exception {
+    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, @Nullable String good,
+                                        @Nullable String bad) throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language(languageCode));
         Core.setProject(new NotLoadedProject() {

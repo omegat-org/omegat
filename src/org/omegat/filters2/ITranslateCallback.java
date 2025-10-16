@@ -59,7 +59,7 @@ public interface ITranslateCallback {
      *            path of segment
      * @return translation or null if translation not exist
      */
-    @Nullable String getTranslation(@Nullable String id, String source, String path);
+    @Nullable String getTranslation(@Nullable String id, String source, @Nullable String path);
 
     /**
      * Old call without path, for compatibility

@@ -25,10 +25,12 @@
 
 package org.omegat.core.data;
 
+import org.jetbrains.annotations.Nullable;
+
 public final class TMXEntryFactoryForTest {
     private final PrepareTMXEntry prep;
     private boolean defaultTranslation = true;
-    public TMXEntry.ExternalLinked linked;
+    public @Nullable TMXEntry.ExternalLinked linked;
 
     public TMXEntryFactoryForTest() {
         prep = new PrepareTMXEntry();

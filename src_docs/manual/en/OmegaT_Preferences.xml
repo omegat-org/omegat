@@ -42,7 +42,7 @@
           <keycap>Tab</keycap> instead.</para>
 
 		  <para>This option is useful with some Chinese,
-          Japanese or Korean character input systems.</para>
+          Japanese, or Korean character input systems.</para>
         </listitem>
       </varlistentry>
 
@@ -284,7 +284,7 @@
        <varlistentry id="dialogs.preferences.glossary.use.full.stemming">
            <term id="dialogs.preferences.glossary.use.full.stemming.title"><option>Use full stemming</option></term>
            <listitem>
-               <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, Italian and French are implemented.</para>
+               <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, English, French, and Italian are implemented.</para>
            </listitem>
        </varlistentry> 
 	</variablelist>

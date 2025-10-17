@@ -67,11 +67,13 @@ public class CommonParameters {
     // Undocumented CLI options
     public static final String ALTERNATE_FILENAME_FROM = "--alternate-filename-from";
     @Option(names = {
-            ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "params.ALTERNATE_FILENAME_FROM")
+            ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true,
+            descriptionKey = "params.ALTERNATE_FILENAME_FROM")
     @Nullable String alternateFilenameFrom;
     public static final String ALTERNATE_FILENAME_TO = "--alternate-filename-to";
     @Option(names = {
-            ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "params.ALTERNATE_FILENAME_TO")
+            ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true,
+            descriptionKey = "params.ALTERNATE_FILENAME_TO")
     @Nullable String alternateFilenameTo;
 
     @Option(names = { "--no-project-locking" }, descriptionKey = "omegat.DISABLE_PROJECT_LOCKING")

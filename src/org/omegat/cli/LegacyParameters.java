@@ -101,25 +101,30 @@ public class LegacyParameters implements Callable<Integer> {
     // CONSOLE_CREATEPSEUDOTRANSLATETMX mode
     public static final String PSEUDOTRANSLATETMX = "--pseudotranslatetmx";
     @Option(names = {
-            PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TMX")
+            PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "PSEUDO_TRANSLATE_TMX")
     @Nullable String pseudoTranslateTmxPath;
 
     public static final String PSEUDOTRANSLATETYPE = "--pseudotranslatetype";
     @Option(names = {
-            PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TYPE")
+            PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "PSEUDO_TRANSLATE_TYPE")
     @Nullable String pseudoTranslateTypeName;
 
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
     @Option(names = {
-            STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "OUTPUT_FILE")
+            STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "OUTPUT_FILE")
     @Nullable String statsOutput;
     @Option(names = {
-            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "STATS_TYPE")
+            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "STATS_TYPE")
     @Nullable String statsType;
 
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE, arity = "0..1")
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE,
+            arity = "0..1")
     @Nullable String project;
 
     public void initialize() {

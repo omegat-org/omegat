@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Aaron Madlon-Kay
-               2025 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,19 +35,19 @@ public final class SubCommands {
     /**
      * Plugin interface.
      */
-    private static final Set<SubCommandEntry> subCommandSet = new HashSet<>();
+    private static final Set<SubCommandEntry> SUB_COMMAND_ENTRIES = new HashSet<>();
 
     /**
-     * register command plugin.
+     * register a command plugin.
      * @param name command string.
      * @param subcommand class of command, it should be runnable with "@Command" annotation.
      */
     public static synchronized void registerConsoleCommand(String name, Class<?> subcommand) {
-        subCommandSet.add(new SubCommandEntry(name, subcommand));
+        SUB_COMMAND_ENTRIES.add(new SubCommandEntry(name, subcommand));
     }
 
-    public static Set<SubCommandEntry> getSubCommandSet() {
-        return subCommandSet;
+    public static Set<SubCommandEntry> getSubCommandEntries() {
+        return SUB_COMMAND_ENTRIES;
     }
 
     /**

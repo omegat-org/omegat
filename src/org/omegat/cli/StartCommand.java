@@ -163,8 +163,8 @@ public class StartCommand implements Callable<Integer> {
         return 0;
     }
 
-    private boolean isProjectRemote(@NotNull String project) {
-        return project.startsWith("http://") || project.startsWith("https://");
+    private boolean isProjectRemote(@NotNull String projectPath) {
+        return projectPath.startsWith("http://") || projectPath.startsWith("https://");
     }
 
     private void showError(Throwable ex) {

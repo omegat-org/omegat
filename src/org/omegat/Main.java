@@ -83,7 +83,7 @@ public final class Main {
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
 
         // Register subcommands provided by modules/plugins
-        for (SubCommands.SubCommandEntry entry : SubCommands.getSubCommandSet()) {
+        for (SubCommands.SubCommandEntry entry : SubCommands.getSubCommandEntries()) {
             commandLine.addSubcommand(entry.name, entry.subcommand);
         }
 
@@ -175,11 +175,16 @@ public final class Main {
         if (RuntimePreferences.isQuietMode()) {
             command.add("--quiet");
         }
-        if (RuntimePreferences.getAlternateFilenameFrom() != null && RuntimePreferences.getAlternateFilenameTo() != null) {
+        if (useAlternateFilename()) {
             command.add("--alternate-filename-from");
             command.add(RuntimePreferences.getAlternateFilenameFrom());
             command.add("--alternate-filenames-to");
             command.add(RuntimePreferences.getAlternateFilenameTo());
         }
+    }
+
+    private static boolean useAlternateFilename() {
+        return RuntimePreferences.getAlternateFilenameFrom() != null
+                && RuntimePreferences.getAlternateFilenameTo() != null;
     }
 }

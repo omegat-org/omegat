@@ -27,7 +27,13 @@ steps:
       path: '$(GRADLE_USER_HOME)'
   - task: Gradle@3
     inputs:
-      tasks: 'clean sourceDistZip distZip mac linux win javadoc manualHtmls'
+      tasks: 'clean javadoc manualHtmls'
+      options: '--build-cache -PenvIsCi'
+      jdkVersionOption: '1.17'
+    displayName: 'Build docs'
+  - task: Gradle@3
+    inputs:
+      tasks: 'sourceDistZip distZip mac linux win'
       options: '--build-cache -PenvIsCi --scan -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
-    displayName: 'Build distribution packages and docs'
+    displayName: 'Build distribution packages'

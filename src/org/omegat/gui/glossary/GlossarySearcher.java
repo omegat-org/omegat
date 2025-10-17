@@ -244,7 +244,11 @@ public class GlossarySearcher {
         // Make comparison case-insensitive
         String strLower = str.toLowerCase(srcLang.getLocale());
         if (isGlossaryStemming()) {
-            return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            if (Preferences.isPreference(Preferences.GLOSSARY_STEMMING_FULL)) {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY_FULL);
+            } else {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            }
         } else {
             // skip whitespace tokens
             return Arrays.stream(tok.tokenizeVerbatim(strLower)).filter(tok -> !StringUtil.isWhiteSpace(

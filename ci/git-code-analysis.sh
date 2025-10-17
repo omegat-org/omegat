@@ -15,6 +15,7 @@ echo
 MAIN_PATHS=(
   "src"
   "aligner/src/main"
+  "language-modules/*/src/main"
   "machinetranslators/apertium/src/main"
   "machinetranslators/belazar/src/main"
   "machinetranslators/dummy/src/main"
@@ -34,6 +35,7 @@ TEST_PATHS=(
   "test-integration"
   "test-acceptance"
   "aligner/src/test"
+  "language-modules/*/src/test"
   "machinetranslators/apertium/src/test"
   "machinetranslators/belazar/src/test"
   "machinetranslators/google/src/test"
@@ -63,21 +65,36 @@ function join_paths() {
 function analyze_contributions() {
   local paths=("$@")
   local range="${LAST_TAG}..${CURRENT_BRANCH}"
+  local expanded_paths=()
+
+  for path in "${paths[@]}"; do
+    if [[ "$path" == *"*"* ]]; then
+      # Expand the glob pattern
+      shopt -s nullglob
+      local matches=($path)
+      shopt -u nullglob
+      if [ ${#matches[@]} -gt 0 ]; then
+        expanded_paths+=("${matches[@]}")
+      fi
+    else
+      expanded_paths+=("$path")
+    fi
+  done
 
   # Get unique authors who modified files in the specified paths
-  git log --use-mailmap --no-merges --format='%aN' "$range" -- "${paths[@]}" 2>/dev/null | sort -u | while read -r author; do
+  git log --use-mailmap --no-merges --format='%aN' "$range" -- "${expanded_paths[@]}" 2>/dev/null | sort -u | while read -r author; do
     [ -z "$author" ] && continue
 
     echo "--- $author ---"
 
     # Use -- to explicitly separate paths from options
-    COMMITS=$(git log --use-mailmap --no-merges --author="$author" "$range" -- "${paths[@]}" --pretty=oneline 2>/dev/null | wc -l)
+    COMMITS=$(git log --use-mailmap --no-merges --author="$author" "$range" -- "${expanded_paths[@]}" --pretty=oneline 2>/dev/null | wc -l)
 
     # Store numstat output in a variable for debugging
-    NUMSTAT_OUTPUT=$(git log --use-mailmap --no-merges --author="$author" "$range" --numstat -- "${paths[@]}" 2>/dev/null)
+    NUMSTAT_OUTPUT=$(git log --use-mailmap --no-merges --author="$author" "$range" --numstat -- "${expanded_paths[@]}" 2>/dev/null)
 
     # Number of files changed
-    FILES=$(git log --use-mailmap --author="$author"  "$range" --name-only --pretty=format:  -- "${paths[@]}" 2>/dev/null | \
+    FILES=$(git log --use-mailmap --author="$author"  "$range" --name-only --pretty=format:  -- "${expanded_paths[@]}" 2>/dev/null | \
           sort | uniq | grep -v '^$' | wc -l)
 
     STATS=$(echo "$NUMSTAT_OUTPUT" | \

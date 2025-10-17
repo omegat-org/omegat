@@ -90,7 +90,8 @@ public class TagIssue implements IIssue {
 
     @Override
     public String getDescription() {
-        Map<TagError, Long> freq = Stream.of(report.srcErrors, report.transErrors).flatMap(m -> m.values().stream())
+        Map<TagError, Long> freq = Stream.of(report.srcErrors, report.transErrors)
+                .flatMap(m -> m.values().stream())
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return "<html>" + freq.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(e -> {
             TagError error = e.getKey();
@@ -151,7 +152,8 @@ public class TagIssue implements IIssue {
             return Collections.emptyList();
         } else {
             JMenuItem doFix = new JMenuItem();
-            org.openide.awt.Mnemonics.setLocalizedText(doFix, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
+            org.openide.awt.Mnemonics.setLocalizedText(doFix,
+                    OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
             doFix.addActionListener(getFixActionListener(fixText));
             return Collections.singletonList(doFix);
         }
@@ -161,8 +163,8 @@ public class TagIssue implements IIssue {
         return e -> {
             if (!doFix(report, fixText)) {
                 JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                        OStrings.getString("TAG_FIX_ERROR_MESSAGE"), OStrings.getString("TAG_FIX_ERROR_TITLE"),
-                        JOptionPane.ERROR_MESSAGE);
+                        OStrings.getString("TAG_FIX_ERROR_MESSAGE"),
+                        OStrings.getString("TAG_FIX_ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         };
     }

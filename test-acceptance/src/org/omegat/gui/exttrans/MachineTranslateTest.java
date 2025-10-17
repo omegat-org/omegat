@@ -3,10 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,19 +22,31 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.scripting;
 
-import java.awt.Component;
+package org.omegat.gui.exttrans;
 
-import javax.swing.JMenuBar;
-import javax.swing.JTextArea;
+import org.junit.Test;
+import org.omegat.core.data.TestCoreState;
+import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.machinetranslators.dummy.DummyMachineTranslator;
 
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    // XXX setText(String s) does not seem to work directly on the subclasses ?
-    public abstract JTextArea getTextArea();
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static org.junit.Assert.assertEquals;
+
+public class MachineTranslateTest extends TestCoreGUI {
+
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+
+    @Test
+    public void testMachineTranslation() throws Exception {
+        // load project
+        openSampleProject(PROJECT_PATH);
+        robot().waitForIdle();
+        //
+        MachineTranslateTextArea machineTranslateTextArea = TestCoreState.getInstance().getMachineTranslatePane();
+        assertEquals(DummyMachineTranslator.ENGINE_NAME, machineTranslateTextArea.getDisplayedTranslation().translatorName);
+        assertEquals(DummyMachineTranslator.TRANSLATION, machineTranslateTextArea.getDisplayedTranslation().result);
+    }
 }

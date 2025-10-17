@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,32 +28,56 @@ package org.omegat.core.machinetranslators;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.omegat.core.data.CoreState;
 import org.omegat.gui.exttrans.IMachineTranslation;
+import org.omegat.util.Log;
 
 /**
- * A class for aggregating machine translation connectors. Old-style plugins
- * ("OmegaT-Plugin: machinetranslator") are added here by the
- * MachineTranslateTextArea and so should not add themselves manually. New-style
- * plugins ("OmegaT-Plugins: &lt;classname&gt;") should add themselves with
- * {@link #add(IMachineTranslation)} in the loadPlugins() method.
+ * A class for aggregating machine translation connectors.
+ * <p>
+ * You can register your MT plugin through a Core method as follows;
+ * <code>
+ * public class ExamplePlugin {
+ *     public static void loadPlugins() {
+ *         Core.registerMachineTranslationClass(ExamplePlugin.class);
+ *     }
+ *     public static void unloadPlugins() {
+ *     }
+ *     public ExamplePlugin() {
+ *         // You can initialize internal resources here.
+ *         // Because the class will be instantiated in a dynamic way through
+ *         // Core.registerMachineTranslationClass API, only a default constructor
+ *         // can be used, and unable to expect static initialization of the class.
+ *     }
+ * }
+ * </code>
  *
  * @author Aaron Madlon-Kay
- *
+ * @author Hiroshi Miura
  */
+@Deprecated(since = "6.1.0", forRemoval = true)
+@SuppressWarnings("unused")
 public final class MachineTranslators {
-
-    private static final List<IMachineTranslation> TRANSLATORS = new CopyOnWriteArrayList<>();
 
     private MachineTranslators() {
     }
 
     public static void add(IMachineTranslation machineTranslator) {
-        TRANSLATORS.add(machineTranslator);
+        MachineTranslatorsManager mt = CoreState.getInstance().getMachineTranslatorsManager();
+        if (mt == null) {
+            Log.logDebug("MachineTranslatorsManager is null.");
+            return;
+        }
+        mt.add(machineTranslator);
     }
 
     public static List<IMachineTranslation> getMachineTranslators() {
-        return Collections.unmodifiableList(TRANSLATORS);
+        MachineTranslatorsManager mt = CoreState.getInstance().getMachineTranslatorsManager();
+        if (mt == null) {
+            Log.logDebug("MachineTranslatorsManager is null.");
+            return Collections.emptyList();
+        }
+        return mt.getMachineTranslators();
     }
 }

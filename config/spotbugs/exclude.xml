@@ -282,7 +282,6 @@
             <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
             <Class name="org.omegat.gui.dialogs.FilenamePatternsEditorController"/>
             <Class name="org.omegat.gui.editor.ViewLabel"/>
-            <Class name="org.omegat.gui.scripting.ScriptRunner"/>
             <Class name="org.omegat.util.OStrings"/>
             <Class name="org.omegat.util.Preferences"/>
             <Class name="org.omegat.util.gui.UIDesignManager"/>

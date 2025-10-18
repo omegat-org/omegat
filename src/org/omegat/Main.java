@@ -377,7 +377,9 @@ public final class Main {
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-        tweakX11AppName();
+        if (Platform.isUnixLike()) {
+            tweakX11AppName();
+        }
         System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
@@ -409,9 +411,6 @@ public final class Main {
     }
 
     private static void tweakX11AppName() {
-        if (Platform.isMacOSX() || Platform.isWindows) {
-            return;
-        }
         try {
             // Set X11 application class name to make some desktop user interfaces
             // (like Gnome Shell) recognize OmegaT

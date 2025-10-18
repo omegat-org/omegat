@@ -39,7 +39,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
@@ -68,11 +71,10 @@ import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
-import org.omegat.util.Preferences;
-
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.

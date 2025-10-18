@@ -135,6 +135,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      * Exception thrown when processing should stop.
      */
     static class StoppedException extends Exception {
+        private static final long serialVersionUID = 1L;
         StoppedException() {
             super("MT processing stopped");
         }

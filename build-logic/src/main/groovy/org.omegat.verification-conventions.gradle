@@ -73,7 +73,10 @@ tasks.jacocoTestCoverageVerification {
 }
 
 tasks.named("run") {
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')
@@ -103,7 +106,10 @@ tasks.register('runOnJava11', JavaExec) {
     }
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     group = 'application'
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
@@ -120,7 +126,10 @@ tasks.register('runOnJava21', JavaExec) {
     }
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     group = 'application'
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`

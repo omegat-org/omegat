@@ -102,6 +102,15 @@ public final class Main {
     public static void restartGUI(String projectDir) {
         // Check we have `java` command in java.home
         Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
+        String installDir = StaticUtils.installDir();
+        Path parent = null;
+        if (installDir != null) {
+            parent = Paths.get(installDir).getParent();
+        }
+        if (!javaBin.toFile().exists()) {
+            // on Windows
+            javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java.exe");
+        }
         List<String> command = new ArrayList<>();
         if (javaBin.toFile().exists()) {
             // Build command: java -cp ... org.omegat.Main
@@ -112,25 +121,19 @@ public final class Main {
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
             constructCommandParams(command);
-        } else {
-            // assumes jpackage
-            String installDir = StaticUtils.installDir();
-            if (installDir == null) {
-                return;
-            } else {
-                Path parent = Paths.get(installDir).getParent();
-                if (parent == null) {
-                    return;
-                }
-                javaBin = parent.resolve("bin/OmegaT");
-                if (!javaBin.toFile().exists()) {
-                    // abort restart
-                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
-                    return;
-                }
-                command.add(javaBin.toString());
-                constructCommandParams(command);
+        } else if (parent != null) {
+            // assumes jpackage or Windows installer
+            javaBin = parent.resolve("bin/OmegaT");
+            if (!javaBin.toFile().exists()) {
+                javaBin = parent.resolve("OmegaT.exe");
             }
+            if (!javaBin.toFile().exists()) {
+                // abort restart
+                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                return;
+            }
+            command.add(javaBin.toString());
+            constructCommandParams(command);
         }
         if (projectDir != null) {
             command.add(projectDir);

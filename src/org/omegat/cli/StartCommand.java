@@ -110,8 +110,9 @@ public class StartCommand implements Callable<Integer> {
 
         // Set X11 application class name to make some desktop user interfaces
         // (like Gnome Shell) recognize OmegaT
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Class<?> cls = toolkit.getClass();
+        if (Platform.isUnixLike()) {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Class<?> cls = toolkit.getClass();
             if (cls.getName().equals("sun.awt.X11.XToolkit")) {
                 try {
                     Field field = cls.getDeclaredField("awtAppClassName");
@@ -122,6 +123,7 @@ public class StartCommand implements Callable<Integer> {
                     Log.log(ex);
                 }
             }
+        }
 
         System.setProperty("swing.aatext", "true");
         try {

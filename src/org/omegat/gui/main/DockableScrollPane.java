@@ -34,6 +34,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.gui.IPaneMenu;
 
 import com.vlsolutions.swing.docking.DockKey;
@@ -64,7 +65,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
     }
 
     @Override
-    public String getName() {
+    public @Nullable String getName() {
         if (dockKey == null) {
             return null;
         }
@@ -72,7 +73,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
     }
 
     /** Creates a new instance of DockableScrollBox */
-    public DockableScrollPane(String key, String name, Component view, boolean detouchable) {
+    public DockableScrollPane(String key, String name, @Nullable Component view, boolean detouchable) {
         super(view);
         if (view instanceof JTextComponent && UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
             JTextComponent c = (JTextComponent) view;

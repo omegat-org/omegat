@@ -227,11 +227,10 @@ public class GlossarySearcher {
             return Collections.emptyList();
         }
         List<Token[]> result = new ArrayList<>();
-        result.add(new Token[] { new Token(term, i) });
-        while ((i = fullText.indexOf(term, i + 1)) != -1) {
-            result.add(new Token[] { new Token(term, i) });
-        }
-        return result;
+        do {
+            result.add(new Token[]{new Token(term, i)});
+        } while ((i = fullText.indexOf(term, i + 1)) != -1);
+        return Collections.unmodifiableList(result);
     }
 
     @VisibleForTesting

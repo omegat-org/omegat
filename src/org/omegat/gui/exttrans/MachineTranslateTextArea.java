@@ -42,6 +42,7 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -122,7 +123,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
      * 
      * @return currently displayed translation or null if none is displayed
      */
-    public MachineTranslationInfo getDisplayedTranslation() {
+    public @Nullable MachineTranslationInfo getDisplayedTranslation() {
         return controller.getDisplayedResult();
     }
 

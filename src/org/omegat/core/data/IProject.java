@@ -89,7 +89,7 @@ public interface IProject {
      *            Whether or not we should perform external post-processing.
      * @param commitTargetFiles
      *            Whether or not we should commit target files
-     * @throws Exception
+     * @throws Exception If any error occurs during the compilation process.
      */
     void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
@@ -102,7 +102,7 @@ public interface IProject {
 
     /**
      * Commit source files in a team project.
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception if any error occurs during the commit process
      */
     void commitSourceFiles() throws Exception;
 
@@ -142,7 +142,7 @@ public interface IProject {
 
     /**
      * Set translation for entry.
-     *
+     * <p>
      * Optimistic locking will not be checked.
      *
      * @param entry
@@ -180,9 +180,7 @@ public interface IProject {
     void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note);
 
     /**
-     * Get statistics for project.
-     *
-     * @return
+     * Get statistics info.
      */
     StatisticsInfo getStatistics();
 
@@ -268,20 +266,24 @@ public interface IProject {
     void setSourceFilesOrder(List<String> filesList);
 
     class FileInfo {
-        public String filePath;
+        public @Nullable String filePath;
+
         /**
          * IFilter implementing Class that was used to parse the file
          */
-        public Class<?> filterClass;
+        public @Nullable Class<?> filterClass;
+
         /**
          * Human readable name of the file format as defined by the filter.
          */
-        public String filterFileFormatName;
+        public @Nullable String filterFileFormatName;
+
         /**
          * Characterset name used for parsing the source file.
          */
-        public String fileEncoding;
-        public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+        public @Nullable String fileEncoding;
+
+        public List<SourceTextEntry> entries = new ArrayList<>();
     }
 
     public interface DefaultTranslationsIterator {
@@ -296,19 +298,19 @@ public interface IProject {
      * These translations can't be null. Only value or EMPTY_TRANSLATION.
      */
     class AllTranslations {
-        protected TMXEntry defaultTranslation;
-        protected TMXEntry alternativeTranslation;
-        protected TMXEntry currentTranslation;
+        protected @Nullable TMXEntry defaultTranslation;
+        protected @Nullable TMXEntry alternativeTranslation;
+        protected @Nullable TMXEntry currentTranslation;
 
-        public TMXEntry getDefaultTranslation() {
+        public @Nullable TMXEntry getDefaultTranslation() {
             return defaultTranslation;
         }
 
-        public TMXEntry getAlternativeTranslation() {
+        public @Nullable TMXEntry getAlternativeTranslation() {
             return alternativeTranslation;
         }
 
-        public TMXEntry getCurrentTranslation() {
+        public @Nullable TMXEntry getCurrentTranslation() {
             return currentTranslation;
         }
     }

@@ -54,7 +54,7 @@ public final class CLIParameters {
     /**
      * Regexp for parse parameters.
      */
-    protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+    private static final Pattern PARAM = Pattern.compile("--([A-Za-z\\-]+)(=(.+))?");
 
     // Help
     public static final String HELP_SHORT = "-h";
@@ -171,7 +171,7 @@ public final class CLIParameters {
         return s.toUpperCase(Locale.ENGLISH).replace('-', '_');
     }
 
-    static TreeMap<String, String> parseArgs(String... args) {
+    static Map<String, String> parseArgs(String... args) {
         TreeMap<String, String> params = new TreeMap<>();
 
         /*

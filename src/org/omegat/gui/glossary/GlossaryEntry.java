@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ITranslationEntry;
 import org.omegat.util.StringUtil;
 
@@ -42,7 +43,8 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik
  */
 public class GlossaryEntry implements ITranslationEntry {
-    public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary, String[] origins) {
+    public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary,
+                         @Nullable String[] origins) {
         mSource = StringUtil.normalizeUnicode(src);
         mTargets = loc;
         normalize(mTargets);
@@ -52,9 +54,9 @@ public class GlossaryEntry implements ITranslationEntry {
         mOrigins = origins;
     }
 
-    public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary, String origin) {
+    public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary, @Nullable String origin) {
         this(src, new String[] { loc }, new String[] { com }, new boolean[] { fromPriorityGlossary },
-                new String[] { origin });
+                origin == null ? null : new String[] { origin });
     }
 
     public String getSrcText() {
@@ -62,11 +64,13 @@ public class GlossaryEntry implements ITranslationEntry {
     }
 
     /* Method for ITranslationEntry */
+    @Override
     public String getSourceText() {
         return mSource;
     }
 
     /* Method for ITranslationEntry */
+    @Override
     public String getTranslationText() {
         return mTargets.length > 0 ? mTargets[0] : "";
     }
@@ -123,7 +127,7 @@ public class GlossaryEntry implements ITranslationEntry {
     }
 
     public boolean getPriority() {
-        return mPriorities.length > 0 ? mPriorities[0] : false;
+        return mPriorities != null && (mPriorities.length > 0 && mPriorities[0]);
     }
 
     public boolean[] getPriorities() {
@@ -139,11 +143,11 @@ public class GlossaryEntry implements ITranslationEntry {
 
     @Override
     public boolean equals(Object o) {
+        if (!(o instanceof GlossaryEntry)) {
+            return false;
+        }
         if (this == o) {
             return true;
-        }
-        if (o == null || o.getClass() != this.getClass()) {
-            return false;
         }
         GlossaryEntry otherGlossaryEntry = (GlossaryEntry) o;
 
@@ -167,9 +171,9 @@ public class GlossaryEntry implements ITranslationEntry {
         }
     }
 
-    private String mSource;
-    private String[] mTargets;
-    private String[] mComments;
-    private boolean[] mPriorities;
-    private String[] mOrigins;
+    private final String mSource;
+    private final String[] mTargets;
+    private final String[] mComments;
+    private final boolean[] mPriorities;
+    private final @Nullable String[] mOrigins;
 }

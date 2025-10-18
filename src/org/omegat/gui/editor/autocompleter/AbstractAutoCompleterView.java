@@ -31,6 +31,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.BadLocationException;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;
@@ -47,12 +48,12 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the name appearing in the auto-completer.
      */
-    private String name;
+    private final String name;
 
     /**
      * the completer
      */
-    protected AutoCompleter completer;
+    protected @Nullable AutoCompleter completer;
 
     /**
      * Creates a new auto-completer view.
@@ -65,6 +66,8 @@ public abstract class AbstractAutoCompleterView {
     }
 
     /**
+     * Get the name of this view.
+     *
      * @return the name
      */
     public String getName() {
@@ -74,7 +77,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * Set the AutoCompleter that this view belongs to.
      * 
-     * @param completer
+     * @param completer the completer
      */
     public void setParent(AutoCompleter completer) {
         this.completer = completer;
@@ -107,28 +110,28 @@ public abstract class AbstractAutoCompleterView {
     /**
      * return the size of the data list / array.
      * 
-     * @return
+     * @return the size of the data list / array.
      */
     public abstract int getRowCount();
 
     /**
      * get the preferred height of the component
      * 
-     * @return
+     * @return the preferred height of the component
      */
     public abstract int getPreferredHeight();
 
     /**
      * get the preferred width of the component
      * 
-     * @return
+     * @return the preferred width of the component
      */
     public abstract int getPreferredWidth();
 
     /**
      * get the selected value
      * 
-     * @return
+     * @return the selected value
      */
     public abstract AutoCompleterItem getSelectedValue();
 
@@ -191,7 +194,7 @@ public abstract class AbstractAutoCompleterView {
      * the view will not be shown in any circumstances (whether automatically or
      * manually).
      *
-     * @return
+     * @return true if the view is enabled, false otherwise
      */
     protected boolean isEnabled() {
         return true;

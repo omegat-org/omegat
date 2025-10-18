@@ -409,6 +409,9 @@ public final class Main {
     }
 
     private static void tweakX11AppName() {
+        if (Platform.isMacOSX() || Platform.isWindows) {
+            return;
+        }
         try {
             // Set X11 application class name to make some desktop user interfaces
             // (like Gnome Shell) recognize OmegaT

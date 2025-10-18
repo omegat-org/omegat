@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import picocli.CommandLine;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,16 +40,32 @@ public final class SubCommands {
     private static final Set<SubCommandEntry> SUB_COMMAND_ENTRIES = new HashSet<>();
 
     /**
-     * register a command plugin.
-     * @param name command string.
-     * @param subcommand class of command, it should be runnable with "@Command" annotation.
+     * Registers a console command by associating a command name with its corresponding subcommand class.
+     * This method adds the specified command to a collection of subcommands, enabling it to be later
+     * utilized or executed through the command-line interface.
+     *
+     * @param name       the name of the console command to be registered.
+     * @param subcommand the class representing the subcommand implementation associated with the given name.
      */
     public static synchronized void registerConsoleCommand(String name, Class<?> subcommand) {
         SUB_COMMAND_ENTRIES.add(new SubCommandEntry(name, subcommand));
     }
 
-    public static Set<SubCommandEntry> getSubCommandEntries() {
-        return SUB_COMMAND_ENTRIES;
+    /**
+     * Registers all subcommand entries stored in the collection to the provided
+     * command line object.
+     * <p>
+     * This method iterates through the predefined set of
+     * subcommand entries and dynamically adds them to the given command line
+     * instance.
+     *
+     * @param commandLine the command line object to which the subcommand
+     *                    entries will be registered.
+     */
+    public static void registerSubCommandEntriesToCommandLine(CommandLine commandLine) {
+        for (SubCommandEntry entry : SUB_COMMAND_ENTRIES) {
+            commandLine.addSubcommand(entry.name, entry.subcommand);
+        }
     }
 
     /**

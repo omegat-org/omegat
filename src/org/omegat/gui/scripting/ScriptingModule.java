@@ -28,11 +28,6 @@ package org.omegat.gui.scripting;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
-import org.omegat.util.Log;
-
-import java.io.File;
-import java.util.HashMap;
 
 /**
  * Script module entry point.

@@ -81,11 +81,7 @@ public final class Main {
         CommandLine commandLine = new CommandLine(new LegacyParameters());
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
-
-        // Register subcommands provided by modules/plugins
-        for (SubCommands.SubCommandEntry entry : SubCommands.getSubCommandEntries()) {
-            commandLine.addSubcommand(entry.name, entry.subcommand);
-        }
+        SubCommands.registerSubCommandEntriesToCommandLine(commandLine);
 
         // Explicitly handle top-level help to ensure `./OmegaT --help` prints usage
         if (args != null && args.length == 1 && ("--help".equals(args[0]) || "-h".equals(args[0]))) {

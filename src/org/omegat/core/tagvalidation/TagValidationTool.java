@@ -145,7 +145,7 @@ public class TagValidationTool implements ITagValidation {
         }
 
         // Extra checks for PO files:
-        if (fi.filterClass.getCanonicalName().equals("PoFilter")) {
+        if (fi.filterClass != null && fi.filterClass.getCanonicalName().equals("PoFilter")) {
             TagValidation.inspectPOWhitespace(report);
         }
 

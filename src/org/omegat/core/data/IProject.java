@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import gen.core.tbx.P;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
@@ -268,31 +267,42 @@ public interface IProject {
     void setSourceFilesOrder(List<String> filesList);
 
     class FileInfo {
-        public String filePath = "";
+        public String filePath;
 
         /**
          * IFilter implementing Class that was used to parse the file
          */
-        public @Nullable Class<?> filterClass;
+        public Class<?> filterClass;
 
         /**
          * Human readable name of the file format as defined by the filter.
          */
-        public @Nullable String filterFileFormatName;
+        public String filterFileFormatName;
 
         /**
          * Characterset name used for parsing the source file.
          */
-        public @Nullable String fileEncoding;
+        public String fileEncoding;
 
         public List<SourceTextEntry> entries = new ArrayList<>();
+
+        public FileInfo(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public FileInfo(String filePath, Class<?> filterClass, String filterName, String fileEncoding) {
+            this.filePath = filePath;
+            this.filterClass = filterClass;
+            this.filterFileFormatName = filterName;
+            this.fileEncoding = fileEncoding;
+        }
     }
 
-    public interface DefaultTranslationsIterator {
+    interface DefaultTranslationsIterator {
         void iterate(String source, TMXEntry trans);
     }
 
-    public interface MultipleTranslationsIterator {
+    interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
 

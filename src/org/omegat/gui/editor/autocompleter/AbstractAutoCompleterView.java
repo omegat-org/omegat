@@ -31,7 +31,6 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.BadLocationException;
 
-import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;

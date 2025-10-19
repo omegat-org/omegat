@@ -32,7 +32,6 @@ import java.util.Map;
 
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.filters2.TranslationException;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 

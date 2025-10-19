@@ -111,6 +111,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.filters.Filters;
 
+import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
+
 /**
  * Loaded project implementation. Only translation could be changed after
  * project will be loaded and set by Core.setProject.
@@ -203,14 +205,6 @@ public class RealProject implements IProject {
 
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
-
-    /** This instance returned if translation not exist. */
-    private static final TMXEntry EMPTY_TRANSLATION;
-    static {
-        PrepareTMXEntry empty = new PrepareTMXEntry();
-        empty.source = "";
-        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
-    }
 
     private final boolean allowTranslationEqualToSource = Preferences
             .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
@@ -1509,25 +1503,10 @@ public class RealProject implements IProject {
     }
 
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        AllTranslations r = new AllTranslations();
         synchronized (projectTMX) {
-            r.defaultTranslation = projectTMX.getDefaultTranslation(ste.getSrcText());
-            r.alternativeTranslation = projectTMX.getMultipleTranslation(ste.getKey());
-            if (r.alternativeTranslation != null) {
-                r.currentTranslation = r.alternativeTranslation;
-            } else if (r.defaultTranslation != null) {
-                r.currentTranslation = r.defaultTranslation;
-            } else {
-                r.currentTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.defaultTranslation == null) {
-                r.defaultTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.alternativeTranslation == null) {
-                r.alternativeTranslation = EMPTY_TRANSLATION;
-            }
+            return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()),
+                    projectTMX.getMultipleTranslation(ste.getKey()));
         }
-        return r;
     }
 
     /**

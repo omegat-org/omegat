@@ -60,8 +60,14 @@ public abstract class AbstractAutoCompleterView {
      * @param name
      *            the name of this view
      */
+    @Deprecated
     public AbstractAutoCompleterView(String name) {
         this.name = name;
+    }
+
+    public AbstractAutoCompleterView(String name, AutoCompleter completer) {
+        this.name = name;
+        this.completer = completer;
     }
 
     /**

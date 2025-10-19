@@ -48,8 +48,8 @@ import org.omegat.util.StringUtil;
  */
 public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
-    public GlossaryAutoCompleterView() {
-        super(OStrings.getString("AC_GLOSSARY_VIEW"));
+    public GlossaryAutoCompleterView(AutoCompleter autoCompleter) {
+        super(OStrings.getString("AC_GLOSSARY_VIEW"), autoCompleter);
     }
 
     /* Users with gigantic glossaries can get too many popups, so adjust the behavior here.

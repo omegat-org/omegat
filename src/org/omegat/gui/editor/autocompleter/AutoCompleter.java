@@ -112,12 +112,12 @@ public class AutoCompleter implements IAutoCompleter {
         scroll.getHorizontalScrollBar().setFocusable(false);
 
         // add any views here
-        addView(new GlossaryAutoCompleterView());
-        addView(new AutotextAutoCompleterView());
-        addView(new TagAutoCompleterView());
-        addView(new CharTableAutoCompleterView());
-        addView(new HistoryCompleter());
-        addView(new HistoryPredictor());
+        views.add(new GlossaryAutoCompleterView(this));
+        views.add(new AutotextAutoCompleterView(this));
+        views.add(new TagAutoCompleterView(this));
+        views.add(new CharTableAutoCompleterView(this));
+        views.add(new HistoryCompleter(this));
+        views.add(new HistoryPredictor(this));
 
         viewLabel = new JLabel();
         viewLabel.setBorder(new CompoundBorder(

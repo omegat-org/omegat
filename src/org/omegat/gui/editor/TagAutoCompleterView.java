@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.tokenizer.ITokenizer;
@@ -49,8 +50,8 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     private static final ITokenizer TAG_TOKENIZER = new TagTokenizer();
 
-    public TagAutoCompleterView() {
-        super(OStrings.getString("AC_TAG_VIEW"));
+    public TagAutoCompleterView(AutoCompleter autoCompleter) {
+        super(OStrings.getString("AC_TAG_VIEW"), autoCompleter);
     }
 
     @Override

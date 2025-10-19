@@ -32,6 +32,8 @@ import java.awt.Point;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
+import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.gui.editor.autocompleter.AutoCompleterTableView;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -47,8 +49,8 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
 
     DefaultTableCellRenderer renderer;
 
-    public CharTableAutoCompleterView() {
-        super(OStrings.getString("AC_CHARTABLE_VIEW"));
+    public CharTableAutoCompleterView(AutoCompleter autoCompleter) {
+        super(OStrings.getString("AC_CHARTABLE_VIEW"), autoCompleter);
         model = new CharTableModel(null);
         getTable().setModel(model);
         getTable().setShowGrid(true);

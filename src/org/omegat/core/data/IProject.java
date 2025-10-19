@@ -303,6 +303,19 @@ public interface IProject {
 
         public static final TMXEntry EMPTY_TRANSLATION = new TMXEntry(new PrepareTMXEntry("", null), true, null);
 
+        /**
+         * Creates empty AllTranslations.
+         */
+        @SuppressWarnings("unused")
+        public AllTranslations() {
+            this(null, null);
+        }
+
+        /**
+         * Creates AllTranslations with default and alternative translations.
+         * @param defaultTranslation default translation
+         * @param alternativeTranslation alternative translation
+         */
         public AllTranslations(TMXEntry defaultTranslation, TMXEntry alternativeTranslation) {
             TMXEntry current = null;
             if (alternativeTranslation != null) {

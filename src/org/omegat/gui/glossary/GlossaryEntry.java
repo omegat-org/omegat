@@ -175,5 +175,5 @@ public class GlossaryEntry implements ITranslationEntry {
     private final String[] mTargets;
     private final String[] mComments;
     private final boolean[] mPriorities;
-    private final @Nullable String[] mOrigins;
+    private final String[] mOrigins;
 }

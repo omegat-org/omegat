@@ -47,7 +47,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the name appearing in the auto-completer.
      */
-    private String name;
+    private final String name;
 
     /**
      * the completer
@@ -65,12 +65,18 @@ public abstract class AbstractAutoCompleterView {
         this.name = name;
     }
 
+    /**
+     * Creates a new auto-completer view.
+      * @param name the name of this view
+     * @param completer the completer
+     */
     public AbstractAutoCompleterView(String name, AutoCompleter completer) {
         this.name = name;
         this.completer = completer;
     }
 
     /**
+     * Return the name of this view.
      * @return the name
      */
     public String getName() {
@@ -80,7 +86,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * Set the AutoCompleter that this view belongs to.
      * 
-     * @param completer
+     * @param completer the completer
      */
     public void setParent(AutoCompleter completer) {
         this.completer = completer;
@@ -113,33 +119,33 @@ public abstract class AbstractAutoCompleterView {
     /**
      * return the size of the data list / array.
      * 
-     * @return
+     * @return the size of the data list / array.
      */
     public abstract int getRowCount();
 
     /**
      * get the preferred height of the component
      * 
-     * @return
+     * @return the preferred height of the component
      */
     public abstract int getPreferredHeight();
 
     /**
      * get the preferred width of the component
      * 
-     * @return
+     * @return the preferred width of the component
      */
     public abstract int getPreferredWidth();
 
     /**
      * get the selected value
      * 
-     * @return
+     * @return the selected value
      */
     public abstract AutoCompleterItem getSelectedValue();
 
     /**
-     * Update the view data
+     * Update the view data.
      */
     public abstract void updateViewData();
 
@@ -197,7 +203,7 @@ public abstract class AbstractAutoCompleterView {
      * the view will not be shown in any circumstances (whether automatically or
      * manually).
      *
-     * @return
+     * @return Whether or not the view should be considered "on"
      */
     protected boolean isEnabled() {
         return true;

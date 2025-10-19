@@ -163,7 +163,7 @@ public class RealProjectTest {
         props.setTargetTokenizer(DefaultTokenizer.class);
         project = new RealProjectWithTMXAccess(props);
 
-        fi = new IProject.FileInfo();
+        fi = new IProject.FileInfo("source.txt");
         project.getProjectFilesList().add(fi);
 
         tmx = project.getTMX();
@@ -173,7 +173,7 @@ public class RealProjectTest {
             boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
-                new ArrayList<ProtectedPart>());
+                new ArrayList<>());
         ste.setSourceTranslationFuzzy(translationFuzzy);
         fi.entries.add(ste);
     }

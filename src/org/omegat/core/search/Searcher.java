@@ -654,9 +654,8 @@ public class Searcher {
         try (Stream<@NotNull Path> walker = Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS)) {
             walker.filter(Files::isRegularFile).forEach(path -> {
                 String filename = path.toString();
-                FileInfo fi = new FileInfo();
                 // determine actual file name w/ no root path info
-                fi.filePath = root.relativize(path).toString();
+                FileInfo fi = new FileInfo(root.relativize(path).toString());
 
                 searchCallback.setCurrentFile(fi);
                 try {

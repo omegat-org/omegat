@@ -77,7 +77,7 @@ public class SearcherTest {
         props.setTargetTokenizer(DefaultTokenizer.class);
         proj = new RealProjectWithTMX(props);
         Core.setProject(proj);
-        fi = new IProject.FileInfo();
+        fi = new IProject.FileInfo("source.txt");
         proj.getProjectFilesList().add(fi);
     }
 

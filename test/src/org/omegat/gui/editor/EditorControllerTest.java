@@ -216,14 +216,12 @@ public class EditorControllerTest extends TestCore {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
             files = new ArrayList<>();
-            FileInfo file1 = new FileInfo();
-            file1.filePath = "source.txt";
+            FileInfo file1 = new FileInfo("source.txt");
             file1.entries = new ArrayList<>();
             file1.entries.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
                     1, null, null, Collections.emptyList()));
             files.add(file1);
-            FileInfo file2 = new FileInfo();
-            file2.filePath = "website/download.html";
+            FileInfo file2 = new FileInfo("website/download.html");
             file2.entries = new ArrayList<>();
             file2.entries.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
                     "For installation on Linux.",

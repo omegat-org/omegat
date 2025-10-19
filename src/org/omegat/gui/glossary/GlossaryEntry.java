@@ -44,7 +44,7 @@ import org.omegat.util.StringUtil;
  */
 public class GlossaryEntry implements ITranslationEntry {
     public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary,
-                         @Nullable String[] origins) {
+                         String[] origins) {
         mSource = StringUtil.normalizeUnicode(src);
         mTargets = loc;
         normalize(mTargets);
@@ -56,7 +56,7 @@ public class GlossaryEntry implements ITranslationEntry {
 
     public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary, @Nullable String origin) {
         this(src, new String[] { loc }, new String[] { com }, new boolean[] { fromPriorityGlossary },
-                origin == null ? null : new String[] { origin });
+                new String[] { origin });
     }
 
     public String getSrcText() {
@@ -77,7 +77,7 @@ public class GlossaryEntry implements ITranslationEntry {
 
     /**
      * Return the first target-language term string.
-     *
+     * <p>
      * Glossary entries can have multiple target strings
      * if they have been combined for display purposes.
      * Access all target strings with {@link GlossaryEntry#getLocTerms(boolean)}.
@@ -99,19 +99,19 @@ public class GlossaryEntry implements ITranslationEntry {
         if (!uniqueOnly || mTargets.length == 1) {
             return mTargets;
         }
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < mTargets.length; i++) {
             if (i > 0 && mTargets[i].equals(mTargets[i - 1])) {
                 continue;
             }
             list.add(mTargets[i]);
         }
-        return list.toArray(new String[list.size()]);
+        return list.toArray(new String[0]);
     }
 
     /**
      * Return the first comment string.
-     *
+     * <p>
      * Glossary entries can have multiple comment strings
      * if they have been combined for display purposes.
      * Access all comment strings with {@link GlossaryEntry#getComments()}.

@@ -31,7 +31,9 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import gen.core.tbx.P;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
@@ -266,7 +268,7 @@ public interface IProject {
     void setSourceFilesOrder(List<String> filesList);
 
     class FileInfo {
-        public @Nullable String filePath;
+        public String filePath = "";
 
         /**
          * IFilter implementing Class that was used to parse the file
@@ -298,21 +300,55 @@ public interface IProject {
      * These translations can't be null. Only value or EMPTY_TRANSLATION.
      */
     class AllTranslations {
-        protected @Nullable TMXEntry defaultTranslation;
-        protected @Nullable TMXEntry alternativeTranslation;
-        protected @Nullable TMXEntry currentTranslation;
+        protected TMXEntry defaultTranslation;
+        protected TMXEntry alternativeTranslation;
+        protected TMXEntry currentTranslation;
 
-        public @Nullable TMXEntry getDefaultTranslation() {
+        public static final TMXEntry EMPTY_TRANSLATION = new TMXEntry(new PrepareTMXEntry("", null), true, null);
+
+        public AllTranslations(TMXEntry defaultTranslation, TMXEntry alternativeTranslation) {
+            TMXEntry current = null;
+            if (alternativeTranslation != null) {
+                this.alternativeTranslation = alternativeTranslation;
+                current = alternativeTranslation;
+            } else {
+                this.alternativeTranslation = EMPTY_TRANSLATION;
+            }
+            if (defaultTranslation != null) {
+                this.defaultTranslation = defaultTranslation;
+                if (current == null) {
+                    current = defaultTranslation;
+                }
+            } else {
+                this.defaultTranslation = EMPTY_TRANSLATION;
+            }
+            currentTranslation = Objects.requireNonNullElse(current, EMPTY_TRANSLATION);
+        }
+
+        public TMXEntry getDefaultTranslation() {
             return defaultTranslation;
         }
 
-        public @Nullable TMXEntry getAlternativeTranslation() {
+        public TMXEntry getAlternativeTranslation() {
             return alternativeTranslation;
         }
 
-        public @Nullable TMXEntry getCurrentTranslation() {
+        public TMXEntry getCurrentTranslation() {
             return currentTranslation;
         }
+
+        public void setAlternativeTranslation(TMXEntry entry) {
+            alternativeTranslation = entry;
+        }
+
+        public void setDefaultTranslation(TMXEntry entry) {
+            defaultTranslation = entry;
+        }
+
+        public void setCurrentTranslation(TMXEntry entry) {
+            currentTranslation = entry;
+        }
+
     }
 
     /**

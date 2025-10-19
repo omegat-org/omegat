@@ -53,7 +53,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the completer
      */
-    protected @Nullable AutoCompleter completer;
+    protected AutoCompleter completer;
 
     /**
      * Creates a new auto-completer view.

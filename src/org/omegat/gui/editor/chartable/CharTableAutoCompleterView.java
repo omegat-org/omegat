@@ -33,7 +33,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
-import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.gui.editor.autocompleter.AutoCompleterTableView;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

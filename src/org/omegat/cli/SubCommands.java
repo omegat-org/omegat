@@ -26,18 +26,15 @@ package org.omegat.cli;
 
 import picocli.CommandLine;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class SubCommands {
 
     private SubCommands() {
     }
 
-    /**
-     * Plugin interface.
-     */
-    private static final Set<SubCommandEntry> SUB_COMMAND_ENTRIES = new HashSet<>();
+    private static final Map<String, Class<?>> SUB_COMMAND_ENTRIES = new HashMap<>();
 
     /**
      * Registers a console command by associating a command name with its corresponding subcommand class.
@@ -48,7 +45,7 @@ public final class SubCommands {
      * @param subcommand the class representing the subcommand implementation associated with the given name.
      */
     public static synchronized void registerConsoleCommand(String name, Class<?> subcommand) {
-        SUB_COMMAND_ENTRIES.add(new SubCommandEntry(name, subcommand));
+        SUB_COMMAND_ENTRIES.put(name, subcommand);
     }
 
     /**
@@ -63,21 +60,8 @@ public final class SubCommands {
      *                    entries will be registered.
      */
     public static void registerSubCommandEntriesToCommandLine(CommandLine commandLine) {
-        for (SubCommandEntry entry : SUB_COMMAND_ENTRIES) {
-            commandLine.addSubcommand(entry.name, entry.subcommand);
-        }
-    }
-
-    /**
-     * Subcommand POJO.
-     */
-    public static class SubCommandEntry {
-        public String name;
-        public Class<?> subcommand;
-
-        SubCommandEntry(String name, Class<?> subcommand) {
-            this.name = name;
-            this.subcommand = subcommand;
+        for (Map.Entry<String, Class<?>> entry : SUB_COMMAND_ENTRIES.entrySet()) {
+            commandLine.addSubcommand(entry.getKey(), entry.getValue());
         }
     }
 }

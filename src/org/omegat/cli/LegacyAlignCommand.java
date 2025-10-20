@@ -22,75 +22,59 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.align;
 
-import org.jetbrains.annotations.Nullable;
-import org.omegat.cli.CommandCommon;
-import org.omegat.cli.CommonParameters;
+package org.omegat.cli;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
-import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.TMXWriter2;
-import org.omegat.util.gui.UIDesignManager;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.Callable;
 
-/**
- * CLI subcommand to trigger the Aligner feature provided by the aligner module.
- */
-@Command(name = "aligner", description = "Launch the Aligner window to align files")
-public class AlignerCommand implements Callable<Integer> {
+public class LegacyAlignCommand {
 
-    @CommandLine.Mixin
-    CommonParameters params;
+    LegacyParameters legacyParams;
 
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>")
-    String project;
-
-    @Option(names = { "-G", "--gui" })
-    boolean gui = false;
-
-
-    @Override
-    public Integer call() throws Exception {
-        Core.initializeConsole();
-        int status;
-        if (gui) {
-           status = runGUIAligner();
-
-        } else {
-            status = runConsoleAlign();
-        }
-        return status;
+    public LegacyAlignCommand(LegacyParameters legacyParams) {
+        this.legacyParams = legacyParams;
     }
 
     int runConsoleAlign() throws Exception {
-        CommandCommon.showStartUpLogInfo();
-        CommandCommon.logLevelInitialize(params);
-        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
+        if (legacyParams.alignDirPath == null) {
+            Log.logErrorRB("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED");
+            return 1;
+        }
 
         CommandCommon.initializeApp();
         Core.initializeConsole();
 
-        CommandCommon.parseCommonParams(params);
+        if (legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+        if (legacyParams.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParams.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
+
+        CommonParameters params = new CommonParameters();
+        params.setProjectLocation(legacyParams.project);
+
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+
+        Log.logInfoRB("CONSOLE_ALIGN_AGAINST", legacyParams.alignDirPath);
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
         boolean alt = !config.isSupportDefaultTranslations();
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
                 config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(project))),
+            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(legacyParams.alignDirPath))),
                     alt);
         }
         p.closeProject();
@@ -98,22 +82,4 @@ public class AlignerCommand implements Callable<Integer> {
         return 0;
     }
 
-    int runGUIAligner() {
-        if (params == null) {
-            return 1;
-        }
-        CommandCommon.showStartUpLogInfo();
-        CommandCommon.logLevelInitialize(params);
-        String dir = project;
-        try {
-            UIDesignManager.initialize();
-        } catch (IOException e) {
-            Log.log(e);
-            return 1;
-        }
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        AlignerModule.alignerShow(dir);
-        return 0;
-    }
 }

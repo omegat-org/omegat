@@ -111,6 +111,10 @@ public class LegacyParameters implements Callable<Integer> {
             descriptionKey = "PSEUDO_TRANSLATE_TYPE")
     @Nullable String pseudoTranslateTypeName;
 
+    public static final String ALIGNDIR = "--alignDir";
+    @Option(names = { ALIGNDIR }, paramLabel = "<path>", description = "The folder containing the translated files.")
+    @Nullable String alignDirPath;
+
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
@@ -150,6 +154,10 @@ public class LegacyParameters implements Callable<Integer> {
         } else {
             try {
                 switch (consoleMode) {
+                case "console-align":
+                    LegacyAlignCommand alignCommand = new LegacyAlignCommand(this);
+                    alignCommand.legacyParams = this;
+                    return alignCommand.runConsoleAlign();
                 case "console-translate":
                     TranslateCommand translateCommand = new TranslateCommand();
                     translateCommand.params = params;

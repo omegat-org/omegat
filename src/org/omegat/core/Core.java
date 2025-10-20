@@ -107,7 +107,6 @@ public final class Core {
 
     private static final List<IMarker> MARKERS = new ArrayList<>();
 
-
     /** Get project instance. */
     public static IProject getProject() {
         return CoreState.getInstance().getProject();

@@ -99,7 +99,7 @@ public final class CommandCommon {
      * warning, the errors are printed, but the program continues. In all other
      * cases, no tag validation is done.
      */
-    static void validateTagsConsoleMode(CommonParameters params) {
+    public static void validateTagsConsoleMode(CommonParameters params) {
         List<ErrorReport> stes;
         if ("abort".equalsIgnoreCase(params.tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));

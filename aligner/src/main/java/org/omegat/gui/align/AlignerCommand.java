@@ -47,18 +47,17 @@ import java.util.concurrent.Callable;
 /**
  * CLI subcommand to trigger the Aligner feature provided by the aligner module.
  */
-@Command(name = "aligner", description = "Launch the Aligner window to align files")
+@Command(name = "aligner", description = "Launch the Aligner")
 public class AlignerCommand implements Callable<Integer> {
 
     @CommandLine.Mixin
     CommonParameters params;
 
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>")
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", description = "The project folder to align.")
     String project;
 
-    @Option(names = { "-G", "--gui" })
+    @Option(names = { "-G", "--gui" }, negatable = true, description = "Launch the aligner window")
     boolean gui = false;
-
 
     @Override
     public Integer call() throws Exception {
@@ -83,6 +82,7 @@ public class AlignerCommand implements Callable<Integer> {
 
         CommandCommon.parseCommonParams(params);
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+        CommandCommon.validateTagsConsoleMode(params);
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();

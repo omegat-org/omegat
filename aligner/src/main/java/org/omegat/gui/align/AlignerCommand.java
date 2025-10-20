@@ -24,7 +24,6 @@
  **************************************************************************/
 package org.omegat.gui.align;
 
-import org.jetbrains.annotations.Nullable;
 import org.omegat.cli.CommandCommon;
 import org.omegat.cli.CommonParameters;
 import org.omegat.core.Core;

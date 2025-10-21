@@ -285,7 +285,7 @@ public interface IProject {
          */
         public String fileEncoding;
 
-        public List<SourceTextEntry> entries = new ArrayList<>();
+        public final List<SourceTextEntry> entries = new ArrayList<>();
 
         public FileInfo(String filePath) {
             this.filePath = filePath;

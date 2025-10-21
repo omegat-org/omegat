@@ -18,6 +18,7 @@ dependencies {
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)
+        compileOnly(libs.picocli)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

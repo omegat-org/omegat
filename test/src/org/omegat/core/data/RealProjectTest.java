@@ -36,7 +36,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -61,8 +60,9 @@ public class RealProjectTest {
     @Before
     public final void setUp() throws Exception {
         tempDir = Files.createTempDirectory("omegat-core-ut");
+        Core.initializeConsole();
         TestPreferencesInitializer.init();
-        Core.initializeConsole(new TreeMap<>());
+        Core.initializeConsole();
     }
 
     @After

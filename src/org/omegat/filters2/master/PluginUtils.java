@@ -56,7 +56,7 @@ import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
-import org.omegat.CLIParameters;
+import org.omegat.Main;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
@@ -374,7 +374,7 @@ public final class PluginUtils {
         try {
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg
-                String manifests = params.get(CLIParameters.DEV_MANIFESTS);
+                String manifests = params.get(Main.DEV_MANIFESTS);
                 if (manifests != null) {
                     for (String mf : manifests.split(File.pathSeparator)) {
                         try (InputStream in = Files.newInputStream(Paths.get(mf))) {

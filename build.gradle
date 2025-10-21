@@ -98,6 +98,9 @@ dependencies {
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
 
+        // cli
+        implementation(libs.picocli)
+
         // jaxb gen compilation
         implementation(libs.jaxb4.api)
         runtimeOnly(libs.jaxb4.core)

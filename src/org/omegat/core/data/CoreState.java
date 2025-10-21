@@ -48,9 +48,6 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
-import java.util.Collections;
-import java.util.Map;
-
 public class CoreState {
 
     protected static volatile CoreState instance = new CoreState();
@@ -94,7 +91,6 @@ public class CoreState {
         return instance;
     }
 
-    private Map<String, String> cmdLineParams = Collections.emptyMap();
     private IProject project;
     private Segmenter segmenter;
     private FilterMaster filterMaster;
@@ -121,14 +117,6 @@ public class CoreState {
             return false;
         }
         return project.isProjectLoaded();
-    }
-
-    public Map<String, String> getCmdLineParams() {
-        return cmdLineParams;
-    }
-
-    public void setCmdLineParams(Map<String, String> cmdLineParams) {
-        this.cmdLineParams = cmdLineParams;
     }
 
     public IProject getProject() {

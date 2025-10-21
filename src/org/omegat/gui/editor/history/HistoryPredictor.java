@@ -52,6 +52,11 @@ public class HistoryPredictor extends AutoCompleterListView {
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
+    @Deprecated
+    public HistoryPredictor() {
+        this(null);
+    }
+
     public HistoryPredictor(AutoCompleter completer) {
         super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"), completer);
 

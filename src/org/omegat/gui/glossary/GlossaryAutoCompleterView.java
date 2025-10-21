@@ -48,6 +48,11 @@ import org.omegat.util.StringUtil;
  */
 public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
+    @Deprecated
+    public GlossaryAutoCompleterView() {
+        this(null);
+    }
+
     public GlossaryAutoCompleterView(AutoCompleter autoCompleter) {
         super(OStrings.getString("AC_GLOSSARY_VIEW"), autoCompleter);
     }

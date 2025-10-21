@@ -47,6 +47,11 @@ import org.omegat.util.Preferences;
  */
 public class AutotextAutoCompleterView extends AutoCompleterListView {
 
+    @Deprecated
+    public AutotextAutoCompleterView() {
+        this(null);
+    }
+
     public AutotextAutoCompleterView(AutoCompleter autoCompleter) {
         super(OStrings.getString("AC_AUTOTEXT_VIEW"), autoCompleter);
     }

@@ -50,6 +50,11 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     private static final ITokenizer TAG_TOKENIZER = new TagTokenizer();
 
+    @Deprecated
+    public TagAutoCompleterView() {
+        this(null);
+    }
+
     public TagAutoCompleterView(AutoCompleter autoCompleter) {
         super(OStrings.getString("AC_TAG_VIEW"), autoCompleter);
     }
@@ -68,7 +73,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             }
         }
 
-        List<String> matchGroups = new ArrayList<String>();
+        List<String> matchGroups = new ArrayList<>();
         if (!"".equals(wordChunk)) {
             // Check for partial matches among missing tag groups.
             for (String g : missingGroups) {
@@ -87,7 +92,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     }
 
     private static List<AutoCompleterItem> convertList(List<String> list, int replacementLength) {
-        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
+        List<AutoCompleterItem> result = new ArrayList<>();
         for (String s : list) {
             int sep = s.indexOf(TagUtil.TAG_SEPARATOR_SENTINEL);
             String cleaned = s;
@@ -164,7 +169,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             if (protectedParts.length == 0) {
                 return null;
             }
-            List<String> initials = new ArrayList<String>();
+            List<String> initials = new ArrayList<>();
             for (ProtectedPart pp : protectedParts) {
                 String part = pp.getTextInSourceSegment();
                 String initial = part.substring(0, part.offsetByCodePoints(0, 1));

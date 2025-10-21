@@ -44,9 +44,14 @@ import org.omegat.util.Preferences;
  */
 public class CharTableAutoCompleterView extends AutoCompleterTableView {
 
-    private CharTableModel model;
+    private final CharTableModel model;
 
     DefaultTableCellRenderer renderer;
+
+    @Deprecated
+    public CharTableAutoCompleterView() {
+        this(null);
+    }
 
     public CharTableAutoCompleterView(AutoCompleter autoCompleter) {
         super(OStrings.getString("AC_CHARTABLE_VIEW"), autoCompleter);

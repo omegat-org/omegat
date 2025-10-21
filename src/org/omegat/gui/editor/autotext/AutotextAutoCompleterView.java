@@ -74,7 +74,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
             }
         }
 
-        Collections.sort(result, new AutotextComparator());
+        result.sort(new AutotextComparator());
 
         return result;
     }
@@ -97,9 +97,9 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
 
     class AutotextComparator implements Comparator<AutoCompleterItem> {
 
-        private boolean byLength = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH);
-        private boolean alphabetically = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY);
-        private boolean sortFullText = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT);
+        private final boolean byLength = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH);
+        private final boolean alphabetically = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY);
+        private final boolean sortFullText = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT);
 
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {

@@ -26,7 +26,6 @@
 package org.omegat.core.search;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -77,7 +76,7 @@ public class SearcherTest {
         props.setTargetTokenizer(DefaultTokenizer.class);
         proj = new RealProjectWithTMX(props);
         Core.setProject(proj);
-        fi = new IProject.FileInfo();
+        fi = new IProject.FileInfo("source.txt");
         proj.getProjectFilesList().add(fi);
     }
 
@@ -335,7 +334,7 @@ public class SearcherTest {
 
         List<SearchResultEntry> results = searcher.getSearchResults();
         assertEquals(2, results.size());
-        assertNull(results.get(0).getPreamble());
+        assertEquals("source.txt", results.get(0).getPreamble());
         assertEquals("OmegaT is great", results.get(0).getSrcText());
         assertEquals("OmegaT est génial", results.get(0).getTranslation());
         assertEquals("Orphan segments", results.get(1).getPreamble());
@@ -387,7 +386,7 @@ public class SearcherTest {
         // Verify results
         List<SearchResultEntry> results = searcher.getSearchResults();
         assertEquals(2, results.size());
-        assertEquals(OStrings.getString("SW_NR_MATCHES", 2), results.get(0).getPreamble());
+        assertEquals(OStrings.getString("SW_FILE_AND_NR_OF_MORE", "source.txt", 1), results.get(0).getPreamble());
         assertEquals("Duplicate entry", results.get(0).getSrcText());
         assertEquals(OStrings.getString("CT_ORPHAN_STRINGS"), results.get(1).getPreamble());
         assertEquals("Duplicate entry", results.get(1).getSrcText());

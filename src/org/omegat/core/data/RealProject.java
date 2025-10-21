@@ -1258,10 +1258,8 @@ public class RealProject implements IProject {
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            FileInfo fi = new FileInfo();
-            fi.filePath = filepath;
-
             try {
+                FileInfo fi = new FileInfo(filepath);
                 loadFilesCallback.setCurrentFile(fi);
                 IFilter filter = fm.loadFile(config.getSourceRoot() + filepath, new FilterContext(config),
                         loadFilesCallback);
@@ -1287,7 +1285,7 @@ public class RealProject implements IProject {
 
         findNonUniqueSegments();
 
-        if (errorSrcList.size() > 0) {
+        if (!errorSrcList.isEmpty()) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_SKIP_FILES");
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");

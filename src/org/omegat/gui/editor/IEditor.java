@@ -32,6 +32,7 @@ package org.omegat.gui.editor;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
@@ -39,7 +40,7 @@ import org.omegat.gui.editor.mark.Mark;
 
 /**
  * Interface for access to editor functionality.
- *
+ * <p>
  * Almost all methods must be called from UI thread.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -65,8 +66,9 @@ public interface IEditor {
      * Storage for caret position and selection.
      */
     class CaretPosition {
-        Integer position;
-        Integer selectionStart, selectionEnd;
+        @Nullable Integer position;
+        @Nullable Integer selectionStart;
+        @Nullable Integer selectionEnd;
 
         public CaretPosition(int position) {
             this.position = position;
@@ -119,30 +121,29 @@ public interface IEditor {
 
     /**
      * Get current active entry.
-     *
+     * <p>
      * Can be called from any thread.
      */
     SourceTextEntry getCurrentEntry();
 
     /**
      * Get current active entry number.
-     *
+     * <p>
      * Can be called from any thread.
      */
     int getCurrentEntryNumber();
 
     /**
      * Activate entry for edit.
-     *
+     * <p>
      * Must be called only from UI thread.
-     *
      * Will position cursor at the start of segment
      */
     void activateEntry();
 
     /**
      * Commits the translation and deactivate entry. Translation will be saved.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void commitAndDeactivate();
@@ -150,83 +151,84 @@ public interface IEditor {
     /**
      * Commits the translation and leave entry activated. Translation will be
      * saved.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void commitAndLeave();
 
     /**
      * Move to next entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextEntry();
 
     /**
      * Move to previous entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void prevEntry();
 
     /**
      * Move to next x-auto translated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextXAutoEntry();
 
     /**
      * Move to previous x-auto translated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void prevXAutoEntry();
 
     /**
      * Move to next x-enforced translated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextXEnforcedEntry();
 
     /**
      * Move to previous x-enforced translated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void prevXEnforcedEntry();
 
     /**
      * Move to next entry with a note.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextEntryWithNote();
 
     /**
      * Move to previous entry with a note.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void prevEntryWithNote();
 
     /**
      * Move to next untranslated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextUntranslatedEntry();
 
     /**
      * Move to next translated entry.
-     *
+     * <p>
      * Must be called only from UI thread.
      */
     void nextTranslatedEntry();
 
     /**
      * Move to the first non-unique entry.
+     * <p>
      * Must be called from UI thread.
      */
     void nextUniqueEntry();

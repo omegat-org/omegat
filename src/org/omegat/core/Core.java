@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -381,7 +382,7 @@ public final class Core {
         }
     }
 
-    private static StackTraceElement[] runningStackTrace;
+    private static @Nullable StackTraceElement[] runningStackTrace;
 
     public interface RunnableWithException {
         void run() throws Exception;

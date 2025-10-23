@@ -30,6 +30,7 @@
 
 package org.omegat.gui.exttrans;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -81,8 +82,8 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      *             if isStopped returns true
      */
     @VisibleForTesting
-    static MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
-            SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
+    static @Nullable MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
+                                                             SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
 
         if (isStopped.isStopped()) {
             throw new StoppedException();
@@ -114,7 +115,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
             } catch (MachineTranslateError e) {
                 Log.log(e);
                 Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
-                        e.getLocalizedMessage());
+                        e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getMessage());
                 return null;
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");

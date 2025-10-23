@@ -40,7 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,11 +71,10 @@ import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
-import org.omegat.util.Preferences;
-
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -128,9 +127,9 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected final EditorController controller;
 
-    protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<PopupMenuConstructorInfo>();
+    protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<>();
 
-    protected String currentWord;
+    protected @Nullable String currentWord;
 
     protected AutoCompleter autoCompleter = new AutoCompleter(this);
 
@@ -154,16 +153,18 @@ public class EditorTextArea3 extends JEditorPane {
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
+            @Override
             public ViewFactory getViewFactory() {
                 return FACTORY3;
             }
 
+            @Override
             protected void createInputAttributes(Element element, MutableAttributeSet set) {
                 set.removeAttributes(set);
                 EditorController c = EditorTextArea3.this.controller;
                 try {
                     c.m_docSegList[c.displayedEntryIndex].createInputAttributes(element, set);
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
                 }
             }
         });
@@ -294,7 +295,7 @@ public class EditorTextArea3 extends JEditorPane {
             if (e.isPopupTrigger()) {
                 doPopup(e.getPoint());
             }
-        };
+        }
 
         @Override
         public void mouseReleased(MouseEvent e) {
@@ -316,7 +317,7 @@ public class EditorTextArea3 extends JEditorPane {
 
         PopupMenuConstructorInfo[] cons;
         synchronized (popupConstructors) {
-            /**
+            /*
              * Copy constructors - for disable blocking in the procesing time.
              */
             cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
@@ -349,7 +350,7 @@ public class EditorTextArea3 extends JEditorPane {
     protected void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         synchronized (popupConstructors) {
             popupConstructors.add(new PopupMenuConstructorInfo(priority, constructor));
-            Collections.sort(popupConstructors, (o1, o2) -> o1.priority - o2.priority);
+            popupConstructors.sort(Comparator.comparingInt(o -> o.priority));
         }
     }
 
@@ -550,7 +551,7 @@ public class EditorTextArea3 extends JEditorPane {
                 Rectangle r = modelToView2D(caret.getDot()).getBounds();
                 caret.damage(r);
             } catch (BadLocationException e) {
-                e.printStackTrace();
+                Log.log(e);
             }
         } else {
             // reset to default insert caret
@@ -831,6 +832,7 @@ public class EditorTextArea3 extends JEditorPane {
      * Factory for create own view.
      */
     public static final ViewFactory FACTORY3 = new ViewFactory() {
+        @Override
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {
@@ -852,7 +854,7 @@ public class EditorTextArea3 extends JEditorPane {
         }
     };
 
-    private static class PopupMenuConstructorInfo {
+    protected static class PopupMenuConstructorInfo {
         final int priority;
         final IPopupMenuConstructor constructor;
 

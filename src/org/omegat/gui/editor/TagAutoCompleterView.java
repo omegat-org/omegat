@@ -50,6 +50,13 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     private static final ITokenizer TAG_TOKENIZER = new TagTokenizer();
 
+    public static void loadPlugins() {
+        Core.registerAutoCompleterClass(TagAutoCompleterView.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     @Deprecated
     public TagAutoCompleterView() {
         this(null);

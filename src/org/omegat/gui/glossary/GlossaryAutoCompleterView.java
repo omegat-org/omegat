@@ -48,6 +48,10 @@ import org.omegat.util.StringUtil;
  */
 public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
+    public static void loadPlugins() {
+        Core.registerAutoCompleterClass(GlossaryAutoCompleterView.class);
+    }
+
     @Deprecated
     public GlossaryAutoCompleterView() {
         this(null);
@@ -75,7 +79,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         String wordChunk = getLastToken(prevText);
         String sortMatchTo = wordChunk;
 
-        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
+        List<AutoCompleterItem> result = new ArrayList<>();
         List<GlossaryEntry> entries = Core.getGlossary().getDisplayedEntries();
 
         // Get contextual results
@@ -87,7 +91,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             sortMatchTo = null;
         }
 
-        Collections.sort(result, new GlossaryComparator(entries, sortMatchTo));
+        result.sort(new GlossaryComparator(entries, sortMatchTo));
 
         return result;
     }
@@ -96,9 +100,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
      * Fill provided result list with AutCompleterItems matching the provided wordChunk.
      * If the wordChunk is null, all available items will be added. However if the wordChunk is
      * empty ("") then no items will be added.
-     * @param result
-     * @param glossary
-     * @param context
+     * @param result the list to fill
+     * @param glossary the glossary to search
+     * @param context the context to match (can be null)
      */
     private void fillMatchingTerms(List<AutoCompleterItem> result, List<GlossaryEntry> glossary, String context) {
         if ("".equals(context)) {

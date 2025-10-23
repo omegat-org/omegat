@@ -68,6 +68,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
+import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -132,7 +133,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected String currentWord;
 
-    protected AutoCompleter autoCompleter = new AutoCompleter(this);
+    protected IAutoCompleter autoCompleter = new AutoCompleter(this);
 
     /**
      * Whether or not we are confining the cursor to the editable part of the

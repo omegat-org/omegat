@@ -35,7 +35,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -83,7 +82,7 @@ public final class Autotext {
         list = new ArrayList<>(items);
     }
 
-    public static List<AutotextItem> load (File file) throws IOException {
+    public static List<AutotextItem> load(File file) throws IOException {
         try (var lines = Files.lines(file.toPath())) {
             return lines.filter(line -> !line.trim().isEmpty())
                     .map(Autotext::parseAutotextLine)

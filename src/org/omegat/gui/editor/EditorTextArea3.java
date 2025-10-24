@@ -133,7 +133,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected String currentWord;
 
-    protected IAutoCompleter autoCompleter = new AutoCompleter(this);
+    protected transient IAutoCompleter autoCompleter;
 
     /**
      * Whether or not we are confining the cursor to the editable part of the
@@ -206,6 +206,7 @@ public class EditorTextArea3 extends JEditorPane {
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
 
         updateLockInsertMessage();
+        autoCompleter = new AutoCompleter(this);
     }
 
     @Override

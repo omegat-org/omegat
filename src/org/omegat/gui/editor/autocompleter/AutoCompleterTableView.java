@@ -48,8 +48,13 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
      */
     private static JTable table;
 
+    @Deprecated
     public AutoCompleterTableView(String name) {
-        super(name);
+        this(name, null);
+    }
+
+    public AutoCompleterTableView(String name, AutoCompleter completer) {
+        super(name, completer);
         getTable().changeSelection(0, 0, false, false);
     }
 

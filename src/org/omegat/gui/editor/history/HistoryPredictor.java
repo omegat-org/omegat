@@ -52,6 +52,14 @@ public class HistoryPredictor extends AutoCompleterListView {
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
+    public static void registerPlugins() {
+        Core.registerAutoCompleterClass(HistoryPredictor.class);
+    }
+
+    public static void unloadPlugins() {
+        // nothing to do.
+    }
+
     @Deprecated
     public HistoryPredictor() {
         this(null);

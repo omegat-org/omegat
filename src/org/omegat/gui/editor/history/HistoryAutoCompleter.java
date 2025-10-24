@@ -28,13 +28,20 @@ package org.omegat.gui.editor.history;
 import org.omegat.core.Core;
 
 @SuppressWarnings("unused")
-public class HistoryAutoCompleter {
+public final class HistoryAutoCompleter {
 
+    private HistoryAutoCompleter() {
+    }
+
+    /**
+     * Registers the plugins used by the HistoryAutoCompleter.
+     */
     public static void registerPlugins() {
         Core.registerAutoCompleterClass(HistoryCompleter.class);
         Core.registerAutoCompleterClass(HistoryPredictor.class);
     }
 
     public static void unloadPlugins() {
+        // nothing to do.
     }
 }

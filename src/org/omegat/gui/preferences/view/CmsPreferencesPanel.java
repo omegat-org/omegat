@@ -31,17 +31,17 @@ public class CmsPreferencesPanel extends JPanel {
 
     private final TargetsTableModel model = new TargetsTableModel();
     private final JTable table = new JTable(model);
-    private final JButton addButton = new JButton("Add");
-    private final JButton editButton = new JButton("Edit");
-    private final JButton removeButton = new JButton("Remove");
 
     public CmsPreferencesPanel() {
         super(new BorderLayout());
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         add(new JScrollPane(table), BorderLayout.CENTER);
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton addButton = new JButton("Add");
         buttons.add(addButton);
+        JButton editButton = new JButton("Edit");
         buttons.add(editButton);
+        JButton removeButton = new JButton("Remove");
         buttons.add(removeButton);
         add(buttons, BorderLayout.SOUTH);
 

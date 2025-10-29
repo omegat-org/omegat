@@ -37,10 +37,10 @@ import org.jetbrains.annotations.Nullable;
 public class CmsTarget implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String connectorId = "";
-    private String projectId = "";
-    private @Nullable String baseUrl; // optional custom URL
-    private @Nullable String defaultPage; // optional default page
+    private final String connectorId;
+    private final String projectId;
+    private final @Nullable String baseUrl; // optional custom URL
+    private final @Nullable String defaultPage; // optional default page
 
     public CmsTarget(String connectorId, String projectId, @Nullable String baseUrl,
             @Nullable String defaultPage) {
@@ -54,32 +54,16 @@ public class CmsTarget implements Serializable {
         return connectorId;
     }
 
-    public void setConnectorId(String connectorId) {
-        this.connectorId = connectorId != null ? connectorId : "";
-    }
-
     public String getProjectId() {
         return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId != null ? projectId : "";
     }
 
     public @Nullable String getBaseUrl() {
         return baseUrl;
     }
 
-    public void setBaseUrl(@Nullable String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
     public @Nullable String getDefaultPage() {
         return defaultPage;
-    }
-
-    public void setDefaultPage(@Nullable String defaultPage) {
-        this.defaultPage = defaultPage;
     }
 
     @Override

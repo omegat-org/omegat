@@ -58,7 +58,6 @@ public class CmsPanel extends JPanel {
 
     private final JComboBox<CmsTarget> targetCombo;
     private final JTextField pageField;
-    private final JButton searchPageButton;
     private final JTextField urlField;
     private final JButton launchButton;
 
@@ -73,7 +72,7 @@ public class CmsPanel extends JPanel {
 
         targetCombo = new JComboBox<>();
         pageField = new JTextField(20);
-        searchPageButton = new JButton("Search...");
+        JButton searchPageButton = new JButton("Search...");
         urlField = new JTextField(30);
         launchButton = new JButton("Launch");
 

@@ -26,6 +26,7 @@
 package org.omegat.cms.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -48,7 +49,7 @@ import org.omegat.cms.spi.CmsConnector;
 import org.omegat.core.data.CoreState;
 import org.omegat.cms.dto.CmsTarget;
 import org.omegat.cms.config.CmsXmlStore;
-import org.omegat.util.Preferences;
+import org.omegat.util.OStrings;
 
 /**
  * Modal panel for External CMS import. Updated to use configured targets and
@@ -72,18 +73,18 @@ public class CmsPanel extends JPanel {
 
         targetCombo = new JComboBox<>();
         pageField = new JTextField(20);
-        JButton searchPageButton = new JButton("Search...");
+        JButton searchPageButton = new JButton(OStrings.getString("TF_CMS_IMPORT_SEARCH"));
         urlField = new JTextField(30);
-        launchButton = new JButton("Launch");
+        launchButton = new JButton(OStrings.getString("TF_CMS_IMPORT_BUTTON"));
 
         int row = 0;
         // Title
-        add(new JLabel("External CMS import"), BorderLayout.NORTH);
+        add(new JLabel(OStrings.getString("TF_CMS_IMPORT_TITLE")), BorderLayout.NORTH);
 
         // Target row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel("Target"), gc);
+        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_TARGET")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -93,7 +94,7 @@ public class CmsPanel extends JPanel {
         // Page row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel("Page"), gc);
+        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_PAGE")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -106,7 +107,7 @@ public class CmsPanel extends JPanel {
         // URL row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel("Custom URL"), gc);
+        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_URL")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -130,9 +131,9 @@ public class CmsPanel extends JPanel {
         targetCombo.setModel(new DefaultComboBoxModel<>(targets.toArray(new CmsTarget[0])));
         targetCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
             @Override
-            public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index,
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                     boolean isSelected, boolean cellHasFocus) {
-                java.awt.Component c = super.getListCellRendererComponent(list, value, index, isSelected,
+                Component c = super.getListCellRendererComponent(list, value, index, isSelected,
                         cellHasFocus);
                 if (value instanceof CmsTarget) {
                     CmsTarget t = (CmsTarget) value;
@@ -157,7 +158,7 @@ public class CmsPanel extends JPanel {
         }
         try {
             List<CmsResource> resources = connector.listResources(target.getProjectId());
-            JDialog dlg = new JDialog((java.awt.Frame) null, "Select Page", true);
+            JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_CMS_SELECT_PAGE"), true);
             JTextField filter = new JTextField(20);
             javax.swing.DefaultListModel<CmsResource> listModel = new javax.swing.DefaultListModel<>();
             for (CmsResource r : resources) {
@@ -222,8 +223,6 @@ public class CmsPanel extends JPanel {
     }
 
     public void loadDefaults() {
-        // Pre-fill custom URL if any
-        urlField.setText(Preferences.getPreferenceDefault("cms.default.url", ""));
     }
 
     public JButton getLaunchButton() {

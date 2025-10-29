@@ -232,8 +232,9 @@ public class CmsPanel extends JPanel {
 
     public CmsConnector getSelectedConnector() {
         CmsTarget target = (CmsTarget) targetCombo.getSelectedItem();
-        if (target == null)
+        if (target == null) {
             return null;
+        }
         return CoreState.getInstance().getCmsConnectors().get(target.getConnectorId());
     }
 

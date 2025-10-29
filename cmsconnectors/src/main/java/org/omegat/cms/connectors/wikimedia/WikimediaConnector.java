@@ -55,10 +55,10 @@ public class WikimediaConnector extends AbstractCmsConnector {
     public static void unloadPlugins() {
     }
 
-    private static final Map<String, String> config = new HashMap<>();
+    private static final Map<String, String> CONFIG = new HashMap<>();
 
     static {
-        config.put("Wikipedia", "https://www.wikipedia.org");
+        CONFIG.put("Wikipedia", "https://www.wikipedia.org");
     }
 
     @Override
@@ -85,7 +85,7 @@ public class WikimediaConnector extends AbstractCmsConnector {
     public List<CmsProject> listProjects() throws CmsException {
         // MediaWiki instance may not have projects; return single pseudo
         // project from base URL if provided
-        return List.of(new CmsProject(config.get("Wikipedia"), "Wikimedia"));
+        return List.of(new CmsProject(CONFIG.get("Wikipedia"), "Wikimedia"));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class WikimediaConnector extends AbstractCmsConnector {
 
     @Override
     public InputStream fetchResource(String projectId, String resourceId) throws CmsException {
-        String joined = getResourceUrl(config.get(projectId) + "/index.php?title=" + resourceId);
+        String joined = getResourceUrl(CONFIG.get(projectId) + "/index.php?title=" + resourceId);
         String page = httpGet(joined);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }

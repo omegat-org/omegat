@@ -37,10 +37,14 @@ import org.jetbrains.annotations.Nullable;
 public class CmsTarget implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final String connectorId;
-    private final String projectId;
-    private final @Nullable String baseUrl; // optional custom URL
-    private final @Nullable String defaultPage; // optional default page
+    private String connectorId;
+    private String projectId;
+    private @Nullable String baseUrl; // optional custom URL
+    private @Nullable String defaultPage; // optional default page
+
+    @SuppressWarnings("unused")
+    public CmsTarget() {
+    }
 
     public CmsTarget(String connectorId, String projectId, @Nullable String baseUrl,
             @Nullable String defaultPage) {

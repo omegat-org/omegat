@@ -1,6 +1,8 @@
 package org.omegat.cms.spi;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +25,7 @@ public interface CmsConnector {
 
     List<CmsResource> listResources(String projectId) throws CmsException;
 
-    InputStream fetchResource(String projectId, String resourceId) throws CmsException;
+    InputStream fetchResource(String projectId, String resourceId) throws CmsException, IOException;
 
     void pushTranslation(String projectId, String resourceId, InputStream translated) throws CmsException;
 

@@ -1,5 +1,6 @@
 package org.omegat.cms;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -17,10 +18,10 @@ public class CmsConnectors {
     private final Map<String, CmsConnector> connectorMap = new LinkedHashMap<>();
 
     public CmsConnectors() {
-        for (Class<? extends CmsConnector> clazz : PluginUtils.getCMSConnectorClasses() ) {
+        for (Class<?> clazz : PluginUtils.getCMSConnectorClasses() ) {
             try {
-                register(clazz.newInstance());
-            } catch (InstantiationException | IllegalAccessException e) {
+                register((CmsConnector) clazz.getDeclaredConstructor().newInstance());
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 Log.log(e);
             }
         }

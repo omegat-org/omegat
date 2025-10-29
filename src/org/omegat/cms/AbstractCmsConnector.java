@@ -2,6 +2,7 @@ package org.omegat.cms;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +45,7 @@ public abstract class AbstractCmsConnector implements CmsConnector {
     }
 
     @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws CmsException {
+    public InputStream fetchResource(String projectId, String resourceId) throws CmsException, IOException {
         throw new CmsException("Fetch not implemented");
     }
 

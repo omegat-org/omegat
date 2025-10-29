@@ -69,7 +69,7 @@ public abstract class AbstractCmsConnector implements CmsConnector {
     }
 
     @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws CmsException, IOException {
+    public InputStream fetchResource(String projectId, String resourceId) throws CmsException {
         throw new CmsException("Fetch not implemented");
     }
 

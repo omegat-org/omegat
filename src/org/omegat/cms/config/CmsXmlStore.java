@@ -83,7 +83,7 @@ public final class CmsXmlStore {
      * Save the provided list of targets to cms.xml. Creates parent dir if
      * needed.
      */
-    public static boolean saveTargets(List<CmsTarget> targets) {
+    public static void saveTargets(List<CmsTarget> targets) {
         File file = getFile();
         try {
             Files.createDirectories(file.getParentFile().toPath());
@@ -91,10 +91,8 @@ public final class CmsXmlStore {
             cfg.setVersion("1");
             cfg.setTargets(targets != null ? targets : new ArrayList<>());
             MAPPER.writeValue(file, cfg);
-            return true;
         } catch (IOException e) {
             Log.log(e);
-            return false;
         }
     }
 }

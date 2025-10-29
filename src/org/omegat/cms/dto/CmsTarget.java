@@ -42,9 +42,6 @@ public class CmsTarget implements Serializable {
     private @Nullable String baseUrl; // optional custom URL
     private @Nullable String defaultPage; // optional default page
 
-    public CmsTarget() {
-    }
-
     public CmsTarget(String connectorId, String projectId, @Nullable String baseUrl,
             @Nullable String defaultPage) {
         this.connectorId = connectorId != null ? connectorId : "";

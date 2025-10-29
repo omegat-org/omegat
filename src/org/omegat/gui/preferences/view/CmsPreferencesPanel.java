@@ -29,9 +29,6 @@ import org.omegat.core.data.CoreState;
  */
 public class CmsPreferencesPanel extends JPanel {
 
-    public static final String PREF_CMS_TARGETS = "cms.targets"; // JSON-serialized
-                                                                 // list
-
     private final TargetsTableModel model = new TargetsTableModel();
     private final JTable table = new JTable(model);
     private final JButton addButton = new JButton("Add");
@@ -70,7 +67,7 @@ public class CmsPreferencesPanel extends JPanel {
     }
 
     public void saveToPrefs() {
-        // Persist to XML store; legacy JSON preference is no longer written.
+        // Persist to XML store.
         CmsXmlStore.saveTargets(getTargets());
     }
 
@@ -210,7 +207,6 @@ public class CmsPreferencesPanel extends JPanel {
             gc.weightx = 1;
             panel.add(defaultPageField, gc);
             gc.weightx = 0;
-            row++;
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             JButton ok = new JButton("OK");

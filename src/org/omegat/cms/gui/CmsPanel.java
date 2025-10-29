@@ -118,7 +118,6 @@ public class CmsPanel extends JPanel {
         gc.gridx = 1;
         gc.gridy = row;
         form.add(launchButton, gc);
-        row++;
 
         add(form, BorderLayout.CENTER);
         loadTargetsFromPrefs();

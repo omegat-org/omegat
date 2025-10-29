@@ -269,26 +269,41 @@ public interface IProject {
 
     class FileInfo {
         public String filePath;
+
         /**
          * IFilter implementing Class that was used to parse the file
          */
         public Class<?> filterClass;
+
         /**
          * Human readable name of the file format as defined by the filter.
          */
         public String filterFileFormatName;
+
         /**
          * Characterset name used for parsing the source file.
          */
         public String fileEncoding;
-        public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+
+        public final List<SourceTextEntry> entries = new ArrayList<>();
+
+        public FileInfo(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public FileInfo(String filePath, Class<?> filterClass, String filterName, String fileEncoding) {
+            this.filePath = filePath;
+            this.filterClass = filterClass;
+            this.filterFileFormatName = filterName;
+            this.fileEncoding = fileEncoding;
+        }
     }
 
-    public interface DefaultTranslationsIterator {
+    interface DefaultTranslationsIterator {
         void iterate(String source, TMXEntry trans);
     }
 
-    public interface MultipleTranslationsIterator {
+    interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
 

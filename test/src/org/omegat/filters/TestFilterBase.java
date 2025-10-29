@@ -583,8 +583,7 @@ public abstract class TestFilterBase extends TestCore {
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            TestFileInfo fi = new TestFileInfo();
-            fi.filePath = file;
+            TestFileInfo fi = new TestFileInfo(file);
 
             loadFilesCallback.setCurrentFile(fi);
 
@@ -657,5 +656,9 @@ public abstract class TestFilterBase extends TestCore {
 
     public static class TestFileInfo extends FileInfo {
         public ExternalTMX referenceEntries;
+
+        public TestFileInfo(String filePath) {
+            super(filePath);
+        }
     }
 }

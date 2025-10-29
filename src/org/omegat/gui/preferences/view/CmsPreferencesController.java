@@ -2,7 +2,6 @@ package org.omegat.gui.preferences.view;
 
 import org.omegat.gui.preferences.BasePreferencesController;
 
-import javax.swing.JComponent;
 import java.awt.Component;
 import java.util.ArrayList;
 

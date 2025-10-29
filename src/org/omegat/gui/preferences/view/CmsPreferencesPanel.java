@@ -23,13 +23,14 @@ import org.omegat.cms.config.CmsXmlStore;
 import org.omegat.core.data.CoreState;
 
 /**
- * Preferences view panel for External CMS settings.
- * Users can manage a list of target projects per connector with a base URL and optional default page.
- * This panel is embedded by {@link CmsPreferencesController}.
+ * Preferences view panel for External CMS settings. Users can manage a list of
+ * target projects per connector with a base URL and optional default page. This
+ * panel is embedded by {@link CmsPreferencesController}.
  */
 public class CmsPreferencesPanel extends JPanel {
 
-    public static final String PREF_CMS_TARGETS = "cms.targets"; // JSON-serialized list
+    public static final String PREF_CMS_TARGETS = "cms.targets"; // JSON-serialized
+                                                                 // list
 
     private final TargetsTableModel model = new TargetsTableModel();
     private final JTable table = new JTable(model);
@@ -105,31 +106,41 @@ public class CmsPreferencesPanel extends JPanel {
     }
 
     static class TargetsTableModel extends AbstractTableModel {
-        final String[] COLS = {"Type", "Project", "Base URL", "Default Page"};
+        final String[] COLS = { "Type", "Project", "Base URL", "Default Page" };
         final List<CmsTarget> items = new ArrayList<>();
 
         @Override
-        public int getRowCount() { return items.size(); }
+        public int getRowCount() {
+            return items.size();
+        }
 
         @Override
-        public int getColumnCount() { return COLS.length; }
+        public int getColumnCount() {
+            return COLS.length;
+        }
 
         @Override
-        public String getColumnName(int column) { return COLS[column]; }
+        public String getColumnName(int column) {
+            return COLS[column];
+        }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             CmsTarget t = items.get(rowIndex);
             switch (columnIndex) {
-                case 0: return t.getConnectorId();
-                case 1: return t.getProjectId();
-                case 2: return t.getBaseUrl() == null ? "" : t.getBaseUrl();
-                case 3: return t.getDefaultPage() == null ? "" : t.getDefaultPage();
-                default: return "";
+            case 0:
+                return t.getConnectorId();
+            case 1:
+                return t.getProjectId();
+            case 2:
+                return t.getBaseUrl() == null ? "" : t.getBaseUrl();
+            case 3:
+                return t.getDefaultPage() == null ? "" : t.getDefaultPage();
+            default:
+                return "";
             }
         }
     }
-
 
     /** Simple modal editor dialog for a CMS target row. */
     class CmsTargetEditor {
@@ -145,45 +156,82 @@ public class CmsPreferencesPanel extends JPanel {
                     "Edit CMS Target", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
             java.awt.GridBagConstraints gc = new java.awt.GridBagConstraints();
-            gc.insets = new java.awt.Insets(4,4,4,4);
+            gc.insets = new java.awt.Insets(4, 4, 4, 4);
             gc.anchor = java.awt.GridBagConstraints.WEST;
             gc.fill = java.awt.GridBagConstraints.HORIZONTAL;
             int row = 0;
 
             typeCombo = new JComboBox<>();
             List<CmsConnector> connectors = CoreState.getInstance().getCmsConnectors().getAll();
-            for (CmsConnector c : connectors) { typeCombo.addItem(c); }
+            for (CmsConnector c : connectors) {
+                typeCombo.addItem(c);
+            }
 
             projectField = new JTextField(20);
             baseUrlField = new JTextField(25);
             defaultPageField = new JTextField(20);
 
             // Row: Type
-            gc.gridx=0; gc.gridy=row; panel.add(new JLabel("Type"), gc);
-            gc.gridx=1; gc.gridy=row; gc.weightx=1; panel.add(typeCombo, gc); gc.weightx=0; row++;
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel("Type"), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(typeCombo, gc);
+            gc.weightx = 0;
+            row++;
             // Row: Project
-            gc.gridx=0; gc.gridy=row; panel.add(new JLabel("Project"), gc);
-            gc.gridx=1; gc.gridy=row; gc.weightx=1; panel.add(projectField, gc); gc.weightx=0; row++;
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel("Project"), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(projectField, gc);
+            gc.weightx = 0;
+            row++;
             // Row: Base URL
-            gc.gridx=0; gc.gridy=row; panel.add(new JLabel("Base URL"), gc);
-            gc.gridx=1; gc.gridy=row; gc.weightx=1; panel.add(baseUrlField, gc); gc.weightx=0; row++;
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel("Base URL"), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(baseUrlField, gc);
+            gc.weightx = 0;
+            row++;
             // Row: Default Page
-            gc.gridx=0; gc.gridy=row; panel.add(new JLabel("Default Page"), gc);
-            gc.gridx=1; gc.gridy=row; gc.weightx=1; panel.add(defaultPageField, gc); gc.weightx=0; row++;
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel("Default Page"), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(defaultPageField, gc);
+            gc.weightx = 0;
+            row++;
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             JButton ok = new JButton("OK");
             JButton cancel = new JButton("Cancel");
-            buttons.add(ok); buttons.add(cancel);
+            buttons.add(ok);
+            buttons.add(cancel);
 
             ok.addActionListener(e -> {
                 CmsConnector sel = (CmsConnector) typeCombo.getSelectedItem();
-                if (sel == null) { return; }
+                if (sel == null) {
+                    return;
+                }
                 result = new CmsTarget(sel.getId(), projectField.getText().trim(),
-                        emptyToNull(baseUrlField.getText().trim()), emptyToNull(defaultPageField.getText().trim()));
+                        emptyToNull(baseUrlField.getText().trim()),
+                        emptyToNull(defaultPageField.getText().trim()));
                 dialog.dispose();
             });
-            cancel.addActionListener(e -> { result = null; dialog.dispose(); });
+            cancel.addActionListener(e -> {
+                result = null;
+                dialog.dispose();
+            });
 
             JPanel root = new JPanel(new BorderLayout());
             root.add(panel, BorderLayout.CENTER);
@@ -194,7 +242,7 @@ public class CmsPreferencesPanel extends JPanel {
 
             if (initial != null) {
                 // Preselect connector by id
-                for (int i=0;i<typeCombo.getItemCount();i++) {
+                for (int i = 0; i < typeCombo.getItemCount(); i++) {
                     CmsConnector c = typeCombo.getItemAt(i);
                     if (Objects.equals(c.getId(), initial.getConnectorId())) {
                         typeCombo.setSelectedIndex(i);
@@ -207,7 +255,9 @@ public class CmsPreferencesPanel extends JPanel {
             }
         }
 
-        private String emptyToNull(String s) { return s == null || s.isEmpty() ? null : s; }
+        private String emptyToNull(String s) {
+            return s == null || s.isEmpty() ? null : s;
+        }
 
         CmsTarget showDialog() {
             dialog.setVisible(true);

@@ -59,7 +59,6 @@ import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
-import org.omegat.cms.spi.CmsConnector;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;

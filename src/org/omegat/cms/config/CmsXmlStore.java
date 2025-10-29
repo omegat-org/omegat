@@ -1,3 +1,28 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2025 Hiroshi Miura
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ **************************************************************************/
+
 package org.omegat.cms.config;
 
 import java.io.File;
@@ -16,7 +41,8 @@ import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
 /**
- * Persists CMS configuration to an XML file located under the user config directory (cms.xml).
+ * Persists CMS configuration to an XML file located under the user config
+ * directory (cms.xml).
  */
 public final class CmsXmlStore {
     private static final String FILE_NAME = "cms.xml";
@@ -29,13 +55,17 @@ public final class CmsXmlStore {
         MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
-    private CmsXmlStore() {}
+    private CmsXmlStore() {
+    }
 
     private static File getFile() {
         return new File(StaticUtils.getConfigDir(), FILE_NAME);
     }
 
-    /** Load list of CMS targets from cms.xml, or migrate from legacy preferences if file doesn't exist. */
+    /**
+     * Load list of CMS targets from cms.xml, or migrate from legacy preferences
+     * if file doesn't exist.
+     */
     public static List<CmsTarget> loadTargets() {
         File file = getFile();
         if (file.isFile()) {
@@ -49,7 +79,10 @@ public final class CmsXmlStore {
         return new ArrayList<>();
     }
 
-    /** Save the provided list of targets to cms.xml. Creates parent dir if needed. */
+    /**
+     * Save the provided list of targets to cms.xml. Creates parent dir if
+     * needed.
+     */
     public static boolean saveTargets(List<CmsTarget> targets) {
         File file = getFile();
         try {

@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.omegat.cms.CmsConnectors;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -78,6 +79,7 @@ import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.cms.spi.CmsConnector;
 
 /**
  * Class which contains all components' instances.
@@ -258,6 +260,7 @@ public final class Core {
         coreState.setSegmenter(new Segmenter(Preferences.getSRX()));
         coreState.setFilterMaster(new FilterMaster(Preferences.getFilters()));
         coreState.setMachineTranslatorsManager(new MachineTranslatorsManager());
+        coreState.setCmsConnectors(new CmsConnectors());
 
         // 4. Initialize other components. They add themselves to the main
         // window.
@@ -307,6 +310,11 @@ public final class Core {
 
     public static Map<String, String> getParams() {
         return CoreState.getInstance().getCmdLineParams();
+    }
+
+    // CMS connectors registration API
+    public static void registerCmsConnectorClass(Class<? extends CmsConnector> clazz) {
+        PluginUtils.getCMSConnectorClasses().add(clazz);
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

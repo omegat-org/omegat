@@ -246,7 +246,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE");
         projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE");
         projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT");
-        projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT");
+        projectCmsImportMenuItem = createMenuItem("TF_MENU_CMS_IMPORT");
         projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT");
         projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
         projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
@@ -466,7 +466,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.add(projectSaveMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectImportMenuItem);
-        projectMenu.add(projectWikiImportMenuItem);
+        projectMenu.add(projectCmsImportMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectCommitSourceFiles);
         projectMenu.add(projectCommitTargetFiles);
@@ -829,7 +829,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem,
                 projectOpenMenuItem };
 
-        JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
+        JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectCmsImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
 
@@ -1109,7 +1109,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectClearRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
-    JMenuItem projectWikiImportMenuItem;
+    JMenuItem projectCmsImportMenuItem;
     JMenu projectAccessProjectFilesMenu;
     JMenuItem projectAccessRootMenuItem;
     JMenuItem projectAccessDictionaryMenuItem;

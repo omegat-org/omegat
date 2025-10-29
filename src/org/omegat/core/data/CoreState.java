@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.cms.CmsConnectors;
 import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -102,6 +103,7 @@ public class CoreState {
     private ITagValidation tagValidation;
     private IIssues issuesWindow;
     private MachineTranslatorsManager machineTranslatorsManager;
+    private CmsConnectors cmsConnectors;
 
     // GUI panes
     private IMainWindow mainWindow;
@@ -281,4 +283,11 @@ public class CoreState {
         this.machineTranslatorsManager = machineTranslatorsManager;
     }
 
+    public CmsConnectors getCmsConnectors() {
+        return cmsConnectors;
+    }
+
+    public void setCmsConnectors(CmsConnectors cmsConnectors) {
+        this.cmsConnectors = cmsConnectors;
+    }
 }

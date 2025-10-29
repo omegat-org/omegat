@@ -31,6 +31,7 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -315,6 +316,40 @@ public interface IProject {
         protected TMXEntry alternativeTranslation;
         protected TMXEntry currentTranslation;
 
+        public static final TMXEntry EMPTY_TRANSLATION = new TMXEntry(new PrepareTMXEntry("", null), true, null);
+
+        /**
+         * Creates empty AllTranslations.
+         */
+        @SuppressWarnings("unused")
+        public AllTranslations() {
+            this(null, null);
+        }
+
+        /**
+         * Creates AllTranslations with default and alternative translations.
+         * @param defaultTranslation default translation
+         * @param alternativeTranslation alternative translation
+         */
+        public AllTranslations(TMXEntry defaultTranslation, TMXEntry alternativeTranslation) {
+            TMXEntry current = null;
+            if (alternativeTranslation != null) {
+                this.alternativeTranslation = alternativeTranslation;
+                current = alternativeTranslation;
+            } else {
+                this.alternativeTranslation = EMPTY_TRANSLATION;
+            }
+            if (defaultTranslation != null) {
+                this.defaultTranslation = defaultTranslation;
+                if (current == null) {
+                    current = defaultTranslation;
+                }
+            } else {
+                this.defaultTranslation = EMPTY_TRANSLATION;
+            }
+            currentTranslation = Objects.requireNonNullElse(current, EMPTY_TRANSLATION);
+        }
+
         public TMXEntry getDefaultTranslation() {
             return defaultTranslation;
         }
@@ -325,6 +360,17 @@ public interface IProject {
 
         public TMXEntry getCurrentTranslation() {
             return currentTranslation;
+        }
+        public void setAlternativeTranslation(TMXEntry entry) {
+            alternativeTranslation = entry;
+        }
+
+        public void setDefaultTranslation(TMXEntry entry) {
+            defaultTranslation = entry;
+        }
+
+        public void setCurrentTranslation(TMXEntry entry) {
+            currentTranslation = entry;
         }
     }
 

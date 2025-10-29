@@ -44,7 +44,7 @@ public class CmsPanelController {
     public void show() {
         Frame owner = Core.getMainWindow().getApplicationFrame();
         CmsPanel panel = new CmsPanel();
-        JDialog dialog = new JDialog(owner, OStrings.getString("CF_CMS_IMPORT_TITLE"), true);
+        JDialog dialog = new JDialog(owner, OStrings.getString("TF_CMS_IMPORT_TITLE"), true);
         dialog.getContentPane().add(panel);
         dialog.pack();
         dialog.setLocationRelativeTo(owner);

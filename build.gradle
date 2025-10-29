@@ -431,8 +431,8 @@ makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskNam
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
-    dependsOn linuxDebDist
-    dependsOn linuxRpmDist
+    dependsOn linuxDistDeb
+    dependsOn linuxDistRpm
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')

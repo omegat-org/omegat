@@ -114,7 +114,7 @@ tasks.register('jpackage', Exec) {
 }
 
 // generate DEB package
-tasks.register("linuxDebDist", Exec) {
+tasks.register("linuxDistDeb", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
@@ -143,11 +143,11 @@ tasks.register("linuxDebDist", Exec) {
             '--linux-menu-group', 'Office',
             '--linux-package-name', 'omegat',
             '--linux-shortcut')
-    assemble.dependsOn linuxDebDist
+    assemble.dependsOn linuxDistDeb
 }
 
 // generate RPM package
-tasks.register("linuxRpmDist", Exec) {
+tasks.register("linuxDistRpm", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
@@ -175,5 +175,5 @@ tasks.register("linuxRpmDist", Exec) {
             '--linux-package-name', 'omegat',
             '--linux-rpm-license-type', 'GPLv3+',
             '--linux-shortcut')
-    assemble.dependsOn linuxRpmDist
+    assemble.dependsOn linuxDistRpm
 }

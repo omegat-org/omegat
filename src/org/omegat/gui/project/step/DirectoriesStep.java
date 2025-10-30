@@ -28,6 +28,7 @@ package org.omegat.gui.project.step;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -69,16 +70,12 @@ public class DirectoriesStep implements Step {
 
     public DirectoriesStep(ProjectConfigMode mode) {
         this.mode = mode;
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createDirsBox());
     }
 
     private Box createDirsBox() {
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box dirsBox = Box.createVerticalBox();
-        dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-                OStrings.getString("PP_DIRECTORIES")));
-
         JLabel srcRootLabel = new JLabel();
         Mnemonics.setLocalizedText(srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
         Box bSrcRootLabel = Box.createHorizontalBox();

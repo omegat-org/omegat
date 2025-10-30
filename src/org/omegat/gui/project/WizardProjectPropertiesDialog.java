@@ -90,16 +90,17 @@ class WizardProjectPropertiesDialog extends JDialog {
 
     private void buildSteps() {
         steps.add(new LanguagesAndOptionsStep(mode));
-        steps.add(new SegmentationStep(mode));
-        steps.add(new FilterDefinitionStep(mode));
-        steps.add(new RepositoriesMappingStep(mode));
-        steps.add(new ExternalFinderStep(mode));
         steps.add(new DirectoriesStep(mode));
         steps.add(new ExportAndCommandStep(mode));
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
             steps.add(new ContributorStep(c));
         }
+        // Optional steps
+        steps.add(new FilterDefinitionStep(mode));
+        steps.add(new RepositoriesMappingStep(mode));
+        steps.add(new SegmentationStep(mode));
+        steps.add(new ExternalFinderStep(mode));
         // Initialize
         steps.forEach(s -> s.onLoad(props));
     }

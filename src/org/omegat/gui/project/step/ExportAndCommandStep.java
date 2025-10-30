@@ -24,20 +24,30 @@
  **************************************************************************/
 package org.omegat.gui.project.step;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
@@ -54,7 +64,7 @@ public class ExportAndCommandStep implements Step {
     private final JCheckBox exportOmegaT;
     private final JCheckBox exportL1;
     private final JCheckBox exportL2;
-    private final JTextArea externalCmd;
+    private final JTextArea externalCommandTextArea;
 
     public ExportAndCommandStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -84,8 +94,51 @@ public class ExportAndCommandStep implements Step {
         JLabel externalCmdLabel = new JLabel();
         Mnemonics.setLocalizedText(externalCmdLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
         panel.add(externalCmdLabel);
-        externalCmd = new JTextArea(4, 40);
-        panel.add(new JScrollPane(externalCmd));
+        externalCommandTextArea = new JTextArea(3, 40);
+        Box externalCommandBox = Box.createVerticalBox();
+        externalCommandBox.setBorder(new EtchedBorder());
+        externalCommandTextArea.setRows(3);
+        externalCommandTextArea.setLineWrap(true);
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                    OStrings.getString("PP_EXTERNAL_COMMAND")));
+        } else {
+            externalCommandTextArea.setEditable(false);
+            externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                    OStrings.getString("PP_EXTERN_CMD_DISABLED")));
+        }
+        externalCommandTextArea.setName(EXTERNAL_COMMAND_TEXTAREA_NAME);
+        final JScrollPane externalCommandScrollPane = new JScrollPane();
+        externalCommandScrollPane.setViewportView(externalCommandTextArea);
+        externalCommandBox.add(externalCommandScrollPane);
+        variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
+        variablesList.setName(VARIABLE_LIST_NAME);
+
+        // Add variable insertion controls only if project external commands are
+        // enabled.
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
+            Box bIC = Box.createHorizontalBox();
+            bIC.setBorder(emptyBorder);
+            Mnemonics.setLocalizedText(variablesLabel,
+                    OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
+            bIC.add(variablesLabel);
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
+            bIC.add(variablesList);
+            Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
+            insertButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString());
+                }
+            });
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
+            bIC.add(insertButton);
+            externalCommandBox.add(bIC);
+        }
+
+        panel.add(externalCommandBox);
     }
 
     private JPanel buildRow(String label, JComponent comp) {
@@ -114,15 +167,15 @@ public class ExportAndCommandStep implements Step {
         exportOmegaT.setSelected(lvls.contains("omegat"));
         exportL1.setSelected(lvls.contains("level1"));
         exportL2.setSelected(lvls.contains("level2"));
-        externalCmd.setText(p.getExternalCommand());
+        externalCommandTextArea.setText(p.getExternalCommand());
         if (!Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            externalCmd.setEnabled(false);
+            externalCommandTextArea.setEnabled(false);
         }
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             exportOmegaT.setEnabled(false);
             exportL1.setEnabled(false);
             exportL2.setEnabled(false);
-            externalCmd.setEnabled(false);
+            externalCommandTextArea.setEnabled(false);
         }
     }
 
@@ -139,7 +192,7 @@ public class ExportAndCommandStep implements Step {
     public void onSave(ProjectProperties p) {
         p.setExportTMRoot(ensureSep(exportTmRoot.getText()));
         p.setExportTmLevels(exportOmegaT.isSelected(), exportL1.isSelected(), exportL2.isSelected());
-        p.setExternalCommand(externalCmd.getText());
+        p.setExternalCommand(externalCommandTextArea.getText());
     }
 
     private String ensureSep(String s) {
@@ -147,4 +200,14 @@ public class ExportAndCommandStep implements Step {
             return "";
         return s.endsWith(File.separator) ? s : s + File.separator;
     }
+
+    JButton insertButton = new JButton();
+
+    // extern command
+    JLabel variablesLabel = new javax.swing.JLabel();
+    JComboBox<String> variablesList;
+
+    public static final String VARIABLE_LIST_NAME = "project_properties_variable_list";
+    public static final String EXTERNAL_COMMAND_TEXTAREA_NAME =
+            "project_properties_external_command_textarea";
 }

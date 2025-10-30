@@ -27,14 +27,19 @@
 package org.omegat.gui.project.step;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
@@ -48,44 +53,132 @@ import org.openide.awt.Mnemonics;
 public class DirectoriesStep implements Step {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
-    private final JTextField srcDir;
-    private final JTextField trgDir;
-    private final JTextField glosDir;
-    private final JTextField writableGlos;
-    private final JTextField tmDir;
-    private final JTextField dictDir;
+    private final JTextField srcRootField = new JTextField(40);
+    private final JButton srcExcludesBtn = new JButton();
+    private final JButton srcBrowse = new JButton();
+    private final JButton tmBrowse = new JButton();
+    private final JButton glosBrowse = new JButton();
+    private final JButton wGlosBrowse = new JButton();
+    private final JTextField dictRootField = new JTextField(40);
+    private final JButton dictBrowse = new JButton();
+    private final JTextField locRootField = new JTextField(40);
+    private final JButton locBrowse = new JButton();
+    private final JTextField writeableGlosField = new JTextField(40);
+    private final JTextField tmRootField = new JTextField(40);
+    private final JTextField glosRootField = new JTextField(40);
 
     public DirectoriesStep(ProjectConfigMode mode) {
         this.mode = mode;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        srcDir = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_SRC_ROOT"), srcDir));
-        panel.add(Box.createVerticalStrut(6));
-        trgDir = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_LOC_ROOT"), trgDir));
-        panel.add(Box.createVerticalStrut(6));
-        glosDir = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_GLOS_ROOT"), glosDir));
-        panel.add(Box.createVerticalStrut(6));
-        writableGlos = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_WRITEABLE_GLOS"), writableGlos));
-        panel.add(Box.createVerticalStrut(6));
-        tmDir = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_TM_ROOT"), tmDir));
-        panel.add(Box.createVerticalStrut(6));
-        dictDir = new JTextField(40);
-        panel.add(buildRowWithMnemonic(OStrings.getString("PP_DICT_ROOT"), dictDir));
+        panel.add(createDirsBox());
     }
 
-    private JPanel buildRowWithMnemonic(String labelText, JTextField field) {
-        JPanel row = new JPanel();
-        row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
-        JLabel label = new JLabel();
-        Mnemonics.setLocalizedText(label, labelText);
-        row.add(label);
-        row.add(Box.createHorizontalStrut(8));
-        row.add(field);
-        return row;
+    private Box createDirsBox() {
+        Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
+        Box dirsBox = Box.createVerticalBox();
+        dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_DIRECTORIES")));
+
+        JLabel srcRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
+        Box bSrcRootLabel = Box.createHorizontalBox();
+        bSrcRootLabel.add(srcRootLabel);
+        bSrcRootLabel.add(Box.createHorizontalGlue());
+        Box bSrc = Box.createHorizontalBox();
+        bSrc.setBorder(emptyBorder);
+        bSrc.add(srcRootField);
+        Mnemonics.setLocalizedText(srcExcludesBtn, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
+        srcExcludesBtn.setName(SRC_EXCLUDES_BUTTON_NAME);
+        bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
+        bSrc.add(srcExcludesBtn);
+        bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
+        bSrc.add(srcBrowse);
+        Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bSrcRootLabel);
+        dirsBox.add(bSrc);
+
+        JLabel tmRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(tmRootLabel, OStrings.getString("PP_TM_ROOT"));
+        Box bTmRootLabel = Box.createHorizontalBox();
+        bTmRootLabel.add(tmRootLabel);
+        bTmRootLabel.add(Box.createHorizontalGlue());
+        Box bTM = Box.createHorizontalBox();
+        bTM.setBorder(emptyBorder);
+        bTM.add(tmRootField);
+        Mnemonics.setLocalizedText(tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
+        tmBrowse.setName(TM_BROWSE_BUTTON_NAME);
+        bTM.add(Box.createRigidArea(new Dimension(5, 0)));
+        bTM.add(tmBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bTmRootLabel);
+        dirsBox.add(bTM);
+
+        JLabel glosRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(glosRootLabel, OStrings.getString("PP_GLOS_ROOT"));
+        Box bGlosRootLabel = Box.createHorizontalBox();
+        bGlosRootLabel.add(glosRootLabel);
+        bGlosRootLabel.add(Box.createHorizontalGlue());
+        Box bGlos = Box.createHorizontalBox();
+        bGlos.setBorder(emptyBorder);
+        bGlos.add(glosRootField);
+        Mnemonics.setLocalizedText(glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
+        glosBrowse.setName(GLOSSARY_BROWSE_BUTTON_NAME);
+        bGlos.add(Box.createRigidArea(new Dimension(5, 0)));
+        bGlos.add(glosBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bGlosRootLabel);
+        dirsBox.add(bGlos);
+
+        JLabel writeableGlosLabel = new JLabel();
+        Mnemonics.setLocalizedText(writeableGlosLabel, OStrings.getString("PP_WRITEABLE_GLOS"));
+        Box bWriteableGlosLabel = Box.createHorizontalBox();
+        bWriteableGlosLabel.add(writeableGlosLabel);
+        bWriteableGlosLabel.add(Box.createHorizontalGlue());
+        Box bwGlos = Box.createHorizontalBox();
+        bwGlos.setBorder(emptyBorder);
+        bwGlos.add(writeableGlosField);
+        Mnemonics.setLocalizedText(wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
+        wGlosBrowse.setName(WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME);
+        bwGlos.add(Box.createRigidArea(new Dimension(5, 0)));
+        bwGlos.add(wGlosBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bWriteableGlosLabel);
+        dirsBox.add(bwGlos);
+
+        JLabel locDictLabel = new JLabel();
+        Mnemonics.setLocalizedText(locDictLabel, OStrings.getString("PP_DICT_ROOT"));
+        Box bLocDictLabel = Box.createHorizontalBox();
+        bLocDictLabel.add(locDictLabel);
+        bLocDictLabel.add(Box.createHorizontalGlue());
+        Box bDict = Box.createHorizontalBox();
+        bDict.setBorder(emptyBorder);
+        bDict.add(dictRootField);
+        Mnemonics.setLocalizedText(dictBrowse, OStrings.getString("PP_BUTTON_BROWSE_DICT"));
+        dictBrowse.setName(DICTIONARY_BROWSE_BUTTON_NAME);
+        bDict.add(Box.createRigidArea(new Dimension(5, 0)));
+        bDict.add(dictBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bLocDictLabel);
+        dirsBox.add(bDict);
+
+        JLabel locRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(locRootLabel, OStrings.getString("PP_LOC_ROOT"));
+        Box bLocRootLabel = Box.createHorizontalBox();
+        bLocRootLabel.add(locRootLabel);
+        bLocRootLabel.add(Box.createHorizontalGlue());
+        Box bLoc = Box.createHorizontalBox();
+        bLoc.setBorder(emptyBorder);
+        bLoc.add(locRootField);
+        Mnemonics.setLocalizedText(locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
+        locBrowse.setName(LOC_BROWSE_BUTTON_NAME);
+        bLoc.add(Box.createRigidArea(new Dimension(5, 0)));
+        bLoc.add(locBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bLocRootLabel);
+        dirsBox.add(bLoc);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        return dirsBox;
     }
 
     @Override
@@ -100,25 +193,25 @@ public class DirectoriesStep implements Step {
 
     @Override
     public void onLoad(ProjectProperties p) {
-        srcDir.setText(p.getSourceRoot());
-        trgDir.setText(p.getTargetRoot());
-        glosDir.setText(p.getGlossaryRoot());
-        writableGlos.setText(p.getWriteableGlossary());
-        tmDir.setText(p.getTMRoot());
-        dictDir.setText(p.getDictRoot());
+        srcRootField.setText(p.getSourceRoot());
+        locRootField.setText(p.getTargetRoot());
+        glosRootField.setText(p.getGlossaryRoot());
+        writeableGlosField.setText(p.getWriteableGlossary());
+        tmRootField.setText(p.getTMRoot());
+        dictRootField.setText(p.getDictRoot());
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // Highlight missing directories in red
-            paintIfMissing(srcDir);
-            paintIfMissing(trgDir);
-            paintIfMissing(glosDir);
+            paintIfMissing(srcRootField);
+            paintIfMissing(locRootField);
+            paintIfMissing(glosRootField);
             // Writable glossary must be inside glossary dir
-            File wg = new File(writableGlos.getText());
+            File wg = new File(writeableGlosField.getText());
             File wParent = wg.getParentFile();
-            if (wParent == null || !wParent.equals(new File(glosDir.getText()))) {
-                writableGlos.setForeground(Color.RED);
+            if (wParent == null || !wParent.equals(new File(glosRootField.getText()))) {
+                writeableGlosField.setForeground(Color.RED);
             }
-            paintIfMissing(tmDir);
-            paintIfMissing(dictDir);
+            paintIfMissing(tmRootField);
+            paintIfMissing(dictRootField);
         }
     }
 
@@ -131,23 +224,23 @@ public class DirectoriesStep implements Step {
     @Override
     public @Nullable String validateInput() {
         if (mode != ProjectConfigMode.NEW_PROJECT) {
-            if (!new File(srcDir.getText()).isDirectory()) {
+            if (!new File(srcRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST");
             }
-            if (!new File(trgDir.getText()).isDirectory()) {
+            if (!new File(locRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_TRANSDIR_DOESNT_EXIST");
             }
-            if (!new File(glosDir.getText()).isDirectory()) {
+            if (!new File(glosRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST");
             }
-            File wg = new File(writableGlos.getText());
-            if (wg.getParentFile() == null || !wg.getParentFile().equals(new File(glosDir.getText()))) {
+            File wg = new File(writeableGlosField.getText());
+            if (wg.getParentFile() == null || !wg.getParentFile().equals(new File(glosRootField.getText()))) {
                 return OStrings.getString("NP_W_GLOSDIR_NOT_INSIDE_GLOS");
             }
-            if (!new File(tmDir.getText()).isDirectory()) {
+            if (!new File(tmRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_TMDIR_DOESNT_EXIST");
             }
-            if (!new File(dictDir.getText()).isDirectory()) {
+            if (!new File(dictRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_DICTDIR_DOESNT_EXIST");
             }
         }
@@ -156,12 +249,12 @@ public class DirectoriesStep implements Step {
 
     @Override
     public void onSave(ProjectProperties p) {
-        p.setSourceRoot(ensureSep(srcDir.getText()));
-        p.setTargetRoot(ensureSep(trgDir.getText()));
-        p.setGlossaryRoot(ensureSep(glosDir.getText()));
-        p.setWriteableGlossary(writableGlos.getText());
-        p.setTMRoot(ensureSep(tmDir.getText()));
-        p.setDictRoot(ensureSep(dictDir.getText()));
+        p.setSourceRoot(ensureSep(srcRootField.getText()));
+        p.setTargetRoot(ensureSep(locRootField.getText()));
+        p.setGlossaryRoot(ensureSep(glosRootField.getText()));
+        p.setWriteableGlossary(writeableGlosField.getText());
+        p.setTMRoot(ensureSep(tmRootField.getText()));
+        p.setDictRoot(ensureSep(dictRootField.getText()));
     }
 
     private String ensureSep(String s) {
@@ -170,4 +263,11 @@ public class DirectoriesStep implements Step {
         }
         return s.endsWith(File.separator) ? s : s + File.separator;
     }
+    public static final String SRC_EXCLUDES_BUTTON_NAME = "project_properties_src_excludes_button";
+    public static final String TM_BROWSE_BUTTON_NAME = "project_properties_tm_browse";
+    public static final String GLOSSARY_BROWSE_BUTTON_NAME = "project_properties_glossary_browse_button";
+    public static final String WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME =
+            "project_properties_writable_glossary_browse_button";
+    public static final String LOC_BROWSE_BUTTON_NAME = "project_properties_loc_browse_button";
+    public static final String DICTIONARY_BROWSE_BUTTON_NAME = "project_properties_dictionary_browse_button";
 }

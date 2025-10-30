@@ -51,6 +51,8 @@ import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.project.ProjectConfigMode;
+import org.omegat.gui.project.ProjectConfigUI;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -63,6 +65,11 @@ import org.omegat.util.gui.StaticUIUtils;
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
 
+/**
+ * Deprecated: Use the modular controllers under org.omegat.gui.project, e.g.,
+ * ProjectConfigUI.showDialog(...), which provides simplified and wizard UIs.
+ */
+@Deprecated
 public class ProjectPropertiesDialogController {
 
     private final ProjectProperties projectProperties;
@@ -596,13 +603,6 @@ public class ProjectPropertiesDialogController {
 
     public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
-        if (dialogTypeValue == null) {
-            throw new RuntimeException("Unexpected null argument");
-        }
-        ProjectPropertiesDialog dialog = new ProjectPropertiesDialog(parent, projectProperties, projFileName,
-                dialogTypeValue);
-        dialog.setVisible(true);
-        dialog.dispose();
-        return dialog.getResult();
+        return ProjectConfigUI.showDialog(parent, projectProperties, projFileName, dialogTypeValue);
     }
 }

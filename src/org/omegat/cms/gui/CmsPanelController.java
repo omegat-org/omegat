@@ -57,7 +57,7 @@ public class CmsPanelController {
                 String projectId = panel.getProjectId();
                 String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
                 if (url != null && !url.trim().isEmpty()) {
-                    cmsRetrieval.retrieveResourceFromUrl(connector, projectId, url.trim(), srcRoot);
+                    cmsRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
                 } else {
                     String resourceId = panel.getResourceId();
                     cmsRetrieval.retrieveResource(connector, projectId, resourceId, srcRoot);

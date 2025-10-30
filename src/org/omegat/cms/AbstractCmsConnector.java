@@ -66,12 +66,16 @@ public abstract class AbstractCmsConnector implements CmsConnector {
     }
 
     @Override
+    public InputStream fetchResource(String url) throws CmsException {
+        throw new CmsException("Fetch not implemented");
+    }
+
+    @Override
     public void pushTranslation(String projectId, String resourceId, InputStream translated)
             throws CmsException {
         throw new CmsException("Push not supported");
     }
 
-    /** HTTP helpers, delegating to HttpConnectionUtils */
     protected String httpGet(String url) throws CmsException {
         try {
             return HttpConnectionUtils.getURL(new URL(url));

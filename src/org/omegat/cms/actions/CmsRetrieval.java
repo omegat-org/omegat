@@ -48,8 +48,8 @@ public class CmsRetrieval {
         }
     }
 
-    public void retrieveResourceFromUrl(CmsConnector connector, String projectId, String url, String targetDir) throws Exception {
-        InputStream in = connector.fetchResource(projectId, url);
+    public void retrieveResourceFromUrl(CmsConnector connector, String url, String targetDir) throws Exception {
+        InputStream in = connector.fetchResource(url);
         if (in != null) {
             Path dir = Paths.get(targetDir);
             String fileName = extractFileNameFromUrl(url);

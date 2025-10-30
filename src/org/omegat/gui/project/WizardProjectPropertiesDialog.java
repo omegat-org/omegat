@@ -49,6 +49,7 @@ import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.SegmentationStep;
 import org.omegat.gui.project.step.FilterDefinitionStep;
 import org.omegat.gui.project.step.ExternalFinderStep;
+import org.omegat.gui.project.step.RepositoriesMappingStep;
 import org.omegat.util.OStrings;
 import org.omegat.gui.project.step.Step;
 import org.openide.awt.Mnemonics;
@@ -91,6 +92,7 @@ class WizardProjectPropertiesDialog extends JDialog {
         steps.add(new LanguagesAndOptionsStep(mode));
         steps.add(new SegmentationStep(mode));
         steps.add(new FilterDefinitionStep(mode));
+        steps.add(new RepositoriesMappingStep(mode));
         steps.add(new ExternalFinderStep(mode));
         steps.add(new DirectoriesStep(mode));
         steps.add(new ExportAndCommandStep(mode));

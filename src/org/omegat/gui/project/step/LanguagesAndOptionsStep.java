@@ -27,7 +27,6 @@ package org.omegat.gui.project.step;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -37,12 +36,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import gen.core.project.RepositoryDefinition;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.dialogs.RepositoriesMappingController;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -56,7 +53,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -81,10 +77,6 @@ public class LanguagesAndOptionsStep implements Step {
     // Options
     private final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
     private final JCheckBox allowDefaultsCheckBox = new JCheckBox();
-
-
-    // Repositories mapping
-    JButton repositoriesButton = new JButton();
 
     public LanguagesAndOptionsStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -231,15 +223,6 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        // Repositories mapping
-        Mnemonics.setLocalizedText(repositoriesButton, OStrings.getString("PP_REPOSITORIES"));
-        repositoriesButton.setName(REPOSITORIES_BUTTON_NAME);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        optionsBox.add(repositoriesButton, gbc);
-
-
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
         allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
@@ -302,12 +285,6 @@ public class LanguagesAndOptionsStep implements Step {
         allowDefaultsCheckBox.setSelected(p.isSupportDefaultTranslations());
         removeTagsCheckBox.setSelected(p.isRemoveTags());
 
-        repositoriesButton.addActionListener(e -> {
-            List<RepositoryDefinition> r = new RepositoriesMappingController().show(null, p.getRepositories());
-            if (r != null) {
-                p.setRepositories(r);
-            }
-        });
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // In resolve mode, all these are informational and disabled
             sourceLocaleField.setEnabled(false);
@@ -356,15 +333,11 @@ public class LanguagesAndOptionsStep implements Step {
     }
 
     // component name definitions for ui test.
-    public static final String EXTERNAL_FINDER_BUTTON_NAME = "project_properties_external_finder_button";
     public static final String SENTENCE_SEGMENTING_CB_NAME = "project_properties_sentence_segmenting_cb";
-    public static final String SENTENCE_SEGMENTING_BUTTON_NAME = "project_properties_sentence_segmenting_button";
     public static final String ALLOW_DEFAULTS_CB_NAME = "project_properties_allow_defaults_cb";
     public static final String REMOVE_TAGS_CB_NAME = "project_properties_remove_tags_cb";
-    public static final String FILE_FILTER_BUTTON_NAME = "project_properties_file_filter_button";
     public static final String SOURCE_TOKENIZER_FIELD_NAME = "project_properties_source_tokenizer_field";
     public static final String TARGET_TOKENIZER_FIELD_NAME = "project_properties_target_tokenizer_field";
     public static final String SOURCE_LOCALE_CB_NAME = "project_properties_source_locale_cb";
     public static final String TARGET_LOCALE_CB_NAME = "project_properties_target_locale_cb";
-    public static final String REPOSITORIES_BUTTON_NAME = "project_properties_repositories_button";
 }

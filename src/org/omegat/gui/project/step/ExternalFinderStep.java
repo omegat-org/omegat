@@ -65,7 +65,8 @@ public class ExternalFinderStep implements Step {
     @Override
     public void onLoad(ProjectProperties p) {
         ExternalFinderConfiguration cfg = ExternalFinder.getProjectConfig();
-        controller = new ExternalFinderPreferencesController(true, cfg);
+        controller = new ExternalFinderPreferencesController(true,
+                cfg == null ? ExternalFinderConfiguration.empty() : cfg);
         panel.removeAll();
         panel.add(controller.getGui(), BorderLayout.CENTER);
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
@@ -73,11 +74,6 @@ public class ExternalFinderStep implements Step {
                 c.setEnabled(false);
             }
         }
-    }
-
-    @Override
-    public @Nullable String validateInput() {
-        return null;
     }
 
     @Override

@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -84,22 +85,17 @@ public final class Autotext {
 
     public static List<AutotextItem> load(File file) throws IOException {
         try (var lines = Files.lines(file.toPath())) {
-            return lines.filter(line -> !line.trim().isEmpty())
-                    .map(Autotext::parseAutotextLine)
-                    .flatMap(Optional::stream)
-                    .collect(Collectors.toList());
+            return lines.map(Autotext::parseAutotextLine).flatMap(Optional::stream).collect(Collectors.toList());
         }
     }
 
     private static Optional<AutotextItem> parseAutotextLine(String line) {
-        String[] parts = line.split("\t");
-        if (parts.length < 2) {
-            return Optional.empty();
+        String[] parts = StringUtils.split(line, '\t');
+        if (parts.length >= 2) {
+            return Optional.of(new AutotextItem(parts[0], parts[1], Arrays.copyOfRange(parts, 2, parts.length)));
         }
-        return Optional.of(new AutotextItem(parts[0], parts[1],
-                Arrays.copyOfRange(parts, 2, parts.length)));
+        return Optional.empty();
     }
-
 
     public static void save(Collection<AutotextItem> items, File file) throws IOException {
         Files.write(file.toPath(), items.stream().map(AutotextItem::toString).collect(Collectors.toList()),

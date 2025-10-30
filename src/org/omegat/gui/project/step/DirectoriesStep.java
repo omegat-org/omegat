@@ -40,6 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
  * Step to configure directory paths.
@@ -58,30 +59,32 @@ public class DirectoriesStep implements Step {
         this.mode = mode;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         srcDir = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_SRC_ROOT"), srcDir));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_SRC_ROOT"), srcDir));
         panel.add(Box.createVerticalStrut(6));
         trgDir = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_LOC_ROOT"), trgDir));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_LOC_ROOT"), trgDir));
         panel.add(Box.createVerticalStrut(6));
         glosDir = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_GLOS_ROOT"), glosDir));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_GLOS_ROOT"), glosDir));
         panel.add(Box.createVerticalStrut(6));
         writableGlos = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_WRITEABLE_GLOS"), writableGlos));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_WRITEABLE_GLOS"), writableGlos));
         panel.add(Box.createVerticalStrut(6));
         tmDir = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_TM_ROOT"), tmDir));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_TM_ROOT"), tmDir));
         panel.add(Box.createVerticalStrut(6));
         dictDir = new JTextField(40);
-        panel.add(buildRow(OStrings.getString("PP_DICT_ROOT"), dictDir));
+        panel.add(buildRowWithMnemonic(OStrings.getString("PP_DICT_ROOT"), dictDir));
     }
 
-    private JPanel buildRow(String label, JComponent comp) {
+    private JPanel buildRowWithMnemonic(String labelText, JTextField field) {
         JPanel row = new JPanel();
         row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
-        row.add(new JLabel(label));
+        JLabel label = new JLabel();
+        Mnemonics.setLocalizedText(label, labelText);
+        row.add(label);
         row.add(Box.createHorizontalStrut(8));
-        row.add(comp);
+        row.add(field);
         return row;
     }
 
@@ -128,20 +131,25 @@ public class DirectoriesStep implements Step {
     @Override
     public @Nullable String validateInput() {
         if (mode != ProjectConfigMode.NEW_PROJECT) {
-            if (!new File(srcDir.getText()).isDirectory())
+            if (!new File(srcDir.getText()).isDirectory()) {
                 return OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST");
-            if (!new File(trgDir.getText()).isDirectory())
+            }
+            if (!new File(trgDir.getText()).isDirectory()) {
                 return OStrings.getString("NP_TRANSDIR_DOESNT_EXIST");
-            if (!new File(glosDir.getText()).isDirectory())
+            }
+            if (!new File(glosDir.getText()).isDirectory()) {
                 return OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST");
+            }
             File wg = new File(writableGlos.getText());
             if (wg.getParentFile() == null || !wg.getParentFile().equals(new File(glosDir.getText()))) {
                 return OStrings.getString("NP_W_GLOSDIR_NOT_INSIDE_GLOS");
             }
-            if (!new File(tmDir.getText()).isDirectory())
+            if (!new File(tmDir.getText()).isDirectory()) {
                 return OStrings.getString("NP_TMDIR_DOESNT_EXIST");
-            if (!new File(dictDir.getText()).isDirectory())
+            }
+            if (!new File(dictDir.getText()).isDirectory()) {
                 return OStrings.getString("NP_DICTDIR_DOESNT_EXIST");
+            }
         }
         return null;
     }
@@ -157,8 +165,9 @@ public class DirectoriesStep implements Step {
     }
 
     private String ensureSep(String s) {
-        if (s == null)
+        if (s == null) {
             return "";
+        }
         return s.endsWith(File.separator) ? s : s + File.separator;
     }
 }

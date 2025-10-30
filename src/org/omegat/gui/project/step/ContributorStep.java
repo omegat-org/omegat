@@ -35,7 +35,7 @@ import org.omegat.gui.project.ProjectPropertiesContributor;
  */
 public class ContributorStep implements Step {
     private final ProjectPropertiesContributor delegate;
-    private JComponent comp;
+    private final JComponent comp;
 
     public ContributorStep(ProjectPropertiesContributor delegate) {
         this.delegate = delegate;

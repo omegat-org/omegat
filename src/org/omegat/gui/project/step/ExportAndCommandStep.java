@@ -42,6 +42,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.openide.awt.Mnemonics;
 
 /**
  * Step to configure Export TM root/levels and external command.
@@ -63,11 +64,16 @@ public class ExportAndCommandStep implements Step {
         panel.add(Box.createVerticalStrut(6));
         JPanel exLevels = new JPanel();
         exLevels.setLayout(new BoxLayout(exLevels, BoxLayout.X_AXIS));
-        exLevels.add(new JLabel(OStrings.getString("PP_EXPORT_TM_LEVELS")));
+        JLabel exLevelsLabel = new JLabel();
+        Mnemonics.setLocalizedText(exLevelsLabel, OStrings.getString("PP_EXPORT_TM_LEVELS"));
+        exLevels.add(exLevelsLabel);
         exLevels.add(Box.createHorizontalStrut(8));
-        exportOmegaT = new JCheckBox(OStrings.getString("PP_EXPORT_TM_OMEGAT"));
-        exportL1 = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL1"));
-        exportL2 = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL2"));
+        exportOmegaT = new JCheckBox();
+        Mnemonics.setLocalizedText(exportOmegaT, OStrings.getString("PP_EXPORT_TM_OMEGAT"));
+        exportL1 = new JCheckBox();
+        Mnemonics.setLocalizedText(exportL1, OStrings.getString("PP_EXPORT_TM_LEVEL1"));
+        exportL2 = new JCheckBox();
+        Mnemonics.setLocalizedText(exportL2, OStrings.getString("PP_EXPORT_TM_LEVEL2"));
         exLevels.add(exportOmegaT);
         exLevels.add(Box.createHorizontalStrut(8));
         exLevels.add(exportL1);
@@ -75,7 +81,9 @@ public class ExportAndCommandStep implements Step {
         exLevels.add(exportL2);
         panel.add(exLevels);
         panel.add(Box.createVerticalStrut(12));
-        panel.add(new JLabel(OStrings.getString("PP_EXTERNAL_COMMAND")));
+        JLabel externalCmdLabel = new JLabel();
+        Mnemonics.setLocalizedText(externalCmdLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
+        panel.add(externalCmdLabel);
         externalCmd = new JTextArea(4, 40);
         panel.add(new JScrollPane(externalCmd));
     }

@@ -43,6 +43,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
+import org.openide.awt.Mnemonics;
 
 /**
  * Minimal, streamlined dialog for capturing core Project Properties. Focuses on
@@ -75,7 +76,9 @@ class SimpleProjectPropertiesDialog extends JDialog {
         // Languages
         JPanel row1 = new JPanel();
         row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
-        row1.add(new JLabel(OStrings.getString("PP_SRC_LANG")));
+        JLabel srcLangLabel = new JLabel();
+        Mnemonics.setLocalizedText(srcLangLabel, OStrings.getString("PP_SRC_LANG"));
+        row1.add(srcLangLabel);
         row1.add(Box.createHorizontalStrut(8));
         var langs1 = Language.getLanguages();
         srcLang = new JComboBox<>(new DefaultComboBoxModel<>(langs1.toArray(new Language[0])));
@@ -89,7 +92,9 @@ class SimpleProjectPropertiesDialog extends JDialog {
 
         JPanel row2 = new JPanel();
         row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
-        row2.add(new JLabel(OStrings.getString("PP_LOC_LANG")));
+        JLabel trgLangLabel = new JLabel();
+        Mnemonics.setLocalizedText(trgLangLabel, OStrings.getString("PP_LOC_LANG"));
+        row2.add(trgLangLabel);
         row2.add(Box.createHorizontalStrut(8));
         var langs2 = Language.getLanguages();
         trgLang = new JComboBox<>(new DefaultComboBoxModel<>(langs2.toArray(new Language[0])));
@@ -103,9 +108,11 @@ class SimpleProjectPropertiesDialog extends JDialog {
 
         // Buttons
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton ok = new JButton(OStrings.getString("BUTTON_OK"));
+        JButton ok = new JButton();
+        Mnemonics.setLocalizedText(ok, OStrings.getString("BUTTON_OK"));
         ok.addActionListener(this::onOk);
-        JButton cancel = new JButton(OStrings.getString("BUTTON_CANCEL"));
+        JButton cancel = new JButton();
+        Mnemonics.setLocalizedText(cancel, OStrings.getString("BUTTON_CANCEL"));
         cancel.addActionListener(e -> {
             cancelled = true;
             setVisible(false);
@@ -116,7 +123,6 @@ class SimpleProjectPropertiesDialog extends JDialog {
 
         setContentPane(content);
     }
-
     private void onOk(ActionEvent e) {
         String src = srcLang.getSelectedItem().toString();
         String trg = trgLang.getSelectedItem().toString();

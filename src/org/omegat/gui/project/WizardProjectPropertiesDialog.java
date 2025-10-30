@@ -45,10 +45,10 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.ContributorStep;
 import org.omegat.gui.project.step.DirectoriesStep;
 import org.omegat.gui.project.step.ExportAndCommandStep;
-import org.omegat.gui.project.step.LanguagesStep;
-import org.omegat.gui.project.step.TokenizersAndOptionsStep;
+import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.util.OStrings;
 import org.omegat.gui.project.step.Step;
+import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
 class WizardProjectPropertiesDialog extends JDialog {
@@ -63,16 +63,20 @@ class WizardProjectPropertiesDialog extends JDialog {
     private final JPanel cards = new JPanel(new CardLayout());
     private final JPanel left = new JPanel();
 
-    private final JButton backBtn = new JButton("Back");
-    private final JButton nextBtn = new JButton("Next");
-    private final JButton finishBtn = new JButton("Finish");
-    private final JButton cancelBtn = new JButton(OStrings.getString("BUTTON_CANCEL"));
+    private final JButton backBtn = new JButton();
+    private final JButton nextBtn = new JButton();
+    private final JButton finishBtn = new JButton();
+    private final JButton cancelBtn = new JButton();
 
     WizardProjectPropertiesDialog(Frame parent, ProjectProperties props, ProjectConfigMode mode) {
         super(parent, true);
         this.props = props;
         this.mode = mode;
         setTitle(OStrings.getString("PP_TITLE"));
+        Mnemonics.setLocalizedText(backBtn, OStrings.getString("BUTTON_BACK"));
+        Mnemonics.setLocalizedText(nextBtn, OStrings.getString("BUTTON_NEXT"));
+        Mnemonics.setLocalizedText(finishBtn, OStrings.getString("BUTTON_FINISH"));
+        Mnemonics.setLocalizedText(cancelBtn, OStrings.getString("BUTTON_CANCEL"));
         buildSteps();
         buildUI();
         pack();
@@ -81,8 +85,7 @@ class WizardProjectPropertiesDialog extends JDialog {
     }
 
     private void buildSteps() {
-        steps.add(new LanguagesStep(mode));
-        steps.add(new TokenizersAndOptionsStep(mode));
+        steps.add(new LanguagesAndOptionsStep(mode));
         steps.add(new DirectoriesStep(mode));
         steps.add(new ExportAndCommandStep(mode));
         // Load contributions

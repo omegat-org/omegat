@@ -25,6 +25,47 @@
 
 package org.omegat.cms.actions;
 
+import org.omegat.cms.spi.CmsConnector;
+
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 public class CmsRetrieval {
 
+    public void retrieveResource(CmsConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
+        InputStream in = connector.fetchResource(projectId, resourceId);
+        if (in != null) {
+            Path dir = Paths.get(targetDir);
+            String fileName = (resourceId == null || resourceId.isEmpty()) ? "cms-resource.txt" : resourceId;
+            Path out = dir.resolve(fileName);
+            Files.createDirectories(dir);
+            try (in) {
+                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+    }
+
+    public void retrieveResourceFromUrl(CmsConnector connector, String projectId, String url, String targetDir) throws Exception {
+        InputStream in = connector.fetchResource(projectId, url);
+        if (in != null) {
+            Path dir = Paths.get(targetDir);
+            String fileName = extractFileNameFromUrl(url);
+            Path out = dir.resolve(fileName);
+            Files.createDirectories(dir);
+            try (in) {
+                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+    }
+
+    private String extractFileNameFromUrl(String url) {
+        String fileName = url.substring(url.lastIndexOf('/') + 1);
+        if (!fileName.contains(".")) {
+            fileName = "cms-resource.txt";
+        }
+        return fileName;
+    }
 }

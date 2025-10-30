@@ -88,17 +88,10 @@ public final class ProjectConfigUI {
      * @return Updated properties, or null if cancelled
      */
     public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-            String projFileName, ProjectConfigMode dialogTypeValue) {
-        if (dialogTypeValue == ProjectConfigMode.NEW_PROJECT) {
-            SimpleProjectPropertiesDialog dlg = new SimpleProjectPropertiesDialog(parent, projectProperties,
-                    dialogTypeValue);
-            dlg.setVisible(true);
-            return dlg.isCancelled() ? null : projectProperties;
-        } else {
-            WizardProjectPropertiesDialog dlg = new WizardProjectPropertiesDialog(parent, projectProperties,
-                    dialogTypeValue);
-            dlg.setVisible(true);
-            return dlg.isCancelled() ? null : projectProperties;
-        }
+        String projFileName, ProjectConfigMode dialogTypeValue) {
+        WizardProjectPropertiesDialog dlg = new WizardProjectPropertiesDialog(parent, projectProperties,
+                dialogTypeValue);
+        dlg.setVisible(true);
+        return dlg.isCancelled() ? null : projectProperties;
     }
 }

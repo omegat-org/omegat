@@ -37,14 +37,19 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import gen.core.project.RepositoryDefinition;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.externalfinder.ExternalFinder;
+import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.dialogs.RepositoriesMappingController;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
@@ -53,7 +58,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.BorderLayout;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -66,11 +73,10 @@ public class LanguagesAndOptionsStep implements Step {
 
     // Remove Tags
     JCheckBox removeTagsCheckBox = new JCheckBox();
-    JButton sentenceSegmentingButton = new JButton();
 
     // Languages
-    private JComboBox<Language> sourceLocaleField;
-    private JComboBox<Language> targetLocaleField;
+    private JComboBox<Language> sourceLocaleField = new JComboBox<>();
+    private JComboBox<Language> targetLocaleField = new JComboBox<>();
 
     // Tokenizers
     private JComboBox<Class<?>> sourceTokenizerField;
@@ -80,8 +86,6 @@ public class LanguagesAndOptionsStep implements Step {
     private final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
     private final JCheckBox allowDefaultsCheckBox = new JCheckBox();
 
-    // File Filters
-    JButton fileFiltersButton = new JButton();
 
     // Repositories mapping
     JButton repositoriesButton = new JButton();
@@ -234,22 +238,6 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
-        sentenceSegmentingButton.setName(SENTENCE_SEGMENTING_BUTTON_NAME);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.weightx = 1.0;
-        optionsBox.add(sentenceSegmentingButton, gbc);
-
-        // File Filters
-        Mnemonics.setLocalizedText(fileFiltersButton, OStrings.getString("TF_MENU_DISPLAY_LOCAL_FILTERS"));
-        fileFiltersButton.setName(FILE_FILTER_BUTTON_NAME);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        optionsBox.add(fileFiltersButton, gbc);
-
         // Repositories mapping
         Mnemonics.setLocalizedText(repositoriesButton, OStrings.getString("PP_REPOSITORIES"));
         repositoriesButton.setName(REPOSITORIES_BUTTON_NAME);
@@ -258,7 +246,7 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(repositoriesButton, gbc);
 
-        // Repositories mapping
+        // External finder
         Mnemonics.setLocalizedText(externalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
         externalFinderButton.setName(EXTERNAL_FINDER_BUTTON_NAME);
         gbc.gridx = 1;
@@ -328,6 +316,20 @@ public class LanguagesAndOptionsStep implements Step {
         allowDefaultsCheckBox.setSelected(p.isSupportDefaultTranslations());
         removeTagsCheckBox.setSelected(p.isRemoveTags());
 
+        repositoriesButton.addActionListener(e -> {
+            List<RepositoryDefinition> r = new RepositoriesMappingController().show(null, p.getRepositories());
+            if (r != null) {
+                p.setRepositories(r);
+            }
+        });
+        externalFinderButton.addActionListener(e -> {
+            var externalFinderConfig = ExternalFinder.getProjectConfig();
+            ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
+            if (dlg.show(null)) {
+                externalFinderConfig = dlg.getResult();
+                ExternalFinder.setProjectConfig(externalFinderConfig);
+            }
+        });
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // In resolve mode, all these are informational and disabled
             sourceLocaleField.setEnabled(false);
@@ -372,6 +374,7 @@ public class LanguagesAndOptionsStep implements Step {
         p.setSentenceSegmentingEnabled(sentenceSegmentingCheckBox.isSelected());
         p.setSupportDefaultTranslations(allowDefaultsCheckBox.isSelected());
         p.setRemoveTags(removeTagsCheckBox.isSelected());
+
     }
 
     // component name definitions for ui test.

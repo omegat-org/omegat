@@ -41,15 +41,12 @@ import gen.core.project.RepositoryDefinition;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
-import org.omegat.externalfinder.ExternalFinder;
-import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.RepositoriesMappingController;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
@@ -58,7 +55,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.BorderLayout;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
@@ -89,9 +85,6 @@ public class LanguagesAndOptionsStep implements Step {
 
     // Repositories mapping
     JButton repositoriesButton = new JButton();
-
-    // Repositories mapping
-    JButton externalFinderButton = new JButton();
 
     public LanguagesAndOptionsStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -246,13 +239,6 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(repositoriesButton, gbc);
 
-        // External finder
-        Mnemonics.setLocalizedText(externalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
-        externalFinderButton.setName(EXTERNAL_FINDER_BUTTON_NAME);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        optionsBox.add(externalFinderButton, gbc);
 
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
@@ -320,14 +306,6 @@ public class LanguagesAndOptionsStep implements Step {
             List<RepositoryDefinition> r = new RepositoriesMappingController().show(null, p.getRepositories());
             if (r != null) {
                 p.setRepositories(r);
-            }
-        });
-        externalFinderButton.addActionListener(e -> {
-            var externalFinderConfig = ExternalFinder.getProjectConfig();
-            ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
-            if (dlg.show(null)) {
-                externalFinderConfig = dlg.getResult();
-                ExternalFinder.setProjectConfig(externalFinderConfig);
             }
         });
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {

@@ -27,7 +27,9 @@ package org.omegat.gui.project.step;
 import java.awt.BorderLayout;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
@@ -49,6 +51,8 @@ public class FilterDefinitionStep implements Step {
     private final JPanel panel = new JPanel(new BorderLayout());
 
     private FiltersCustomizerController controller;
+    private @Nullable JLabel disabledLabel;
+    private @Nullable JComponent controllerGui;
 
     public FilterDefinitionStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -66,15 +70,22 @@ public class FilterDefinitionStep implements Step {
 
     @Override
     public void onLoad(ProjectProperties p) {
-        controller = new FiltersCustomizerController(true,
-                FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), p.getProjectFilters());
+        controller = new FiltersCustomizerController(true, FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), p.getProjectFilters());
         panel.removeAll();
-        panel.add(controller.getGui(), BorderLayout.CENTER);
+        controllerGui = controller.getGui();
+        // Info label explaining why disabled
+        if (disabledLabel == null) {
+            disabledLabel = new JLabel(OStrings.getString("WIZ_FILTERS_DISABLED_MESSAGE"));
+            disabledLabel.setBorder(new EmptyBorder(8, 8, 8, 8));
+            disabledLabel.setName("wizard_filters_disabled_label");
+        }
+        panel.add(disabledLabel, BorderLayout.NORTH);
+        panel.add(controllerGui, BorderLayout.CENTER);
+        disabledLabel.setVisible(false); // default hidden until wizard toggles
 
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            for (java.awt.Component c : panel.getComponents()) {
-                c.setEnabled(false);
-            }
+            controllerGui.setEnabled(false);
+            disabledLabel.setVisible(false);
         }
     }
 
@@ -88,6 +99,22 @@ public class FilterDefinitionStep implements Step {
         if (controller != null) {
             Filters filters = controller.getResult();
             p.setProjectFilters(filters);
+        }
+    }
+
+    /**
+     * Allows the wizard to enable or disable the filters editing based on
+     * the selection in LanguagesAndOptionsStep.
+     */
+    public void setProjectSpecificFiltersEnabled(boolean enabled) {
+        if (controller != null) {
+            controller.setProjectSpecificEnabled(enabled);
+        }
+        if (controllerGui != null) {
+            controllerGui.setEnabled(enabled);
+        }
+        if (disabledLabel != null) {
+            disabledLabel.setVisible(!enabled && mode != ProjectConfigMode.RESOLVE_DIRS);
         }
     }
 }

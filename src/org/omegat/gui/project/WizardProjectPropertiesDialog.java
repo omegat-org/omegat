@@ -89,6 +89,7 @@ class WizardProjectPropertiesDialog extends JDialog {
 
     private LanguagesAndOptionsStep languagesAndOptionsStep;
     private SegmentationStep segmentationStep;
+    private FilterDefinitionStep filterDefinitionStep;
 
     private void buildSteps() {
         languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
@@ -99,18 +100,25 @@ class WizardProjectPropertiesDialog extends JDialog {
             steps.add(new ContributorStep(c));
         }
         // Optional steps
-        steps.add(new FilterDefinitionStep(mode));
+        filterDefinitionStep = new FilterDefinitionStep(mode);
+        steps.add(filterDefinitionStep);
         steps.add(new RepositoriesMappingStep(mode));
         segmentationStep = new SegmentationStep(mode);
         steps.add(segmentationStep);
         steps.add(new ExternalFinderStep(mode));
         // Initialize
         steps.forEach(s -> s.onLoad(props));
-        // Synchronize segmentation step enablement with checkbox in languages step
-        boolean enabled = languagesAndOptionsStep.isProjectSpecificSegmentationSelected();
-        segmentationStep.setProjectSpecificSegmentationEnabled(enabled);
+        // Synchronize step enablement with checkboxes in languages step
+        boolean segEnabled = languagesAndOptionsStep.isProjectSpecificSegmentationSelected();
+        segmentationStep.setProjectSpecificSegmentationEnabled(segEnabled);
+        boolean filtersEnabled = languagesAndOptionsStep.isProjectSpecificFiltersSelected();
+        filterDefinitionStep.setProjectSpecificFiltersEnabled(filtersEnabled);
         languagesAndOptionsStep.addProjectSpecificSegmentationListener(e -> {
             segmentationStep.setProjectSpecificSegmentationEnabled(languagesAndOptionsStep.isProjectSpecificSegmentationSelected());
+            updateNav();
+        });
+        languagesAndOptionsStep.addProjectSpecificFiltersListener(e -> {
+            filterDefinitionStep.setProjectSpecificFiltersEnabled(languagesAndOptionsStep.isProjectSpecificFiltersSelected());
             updateNav();
         });
     }

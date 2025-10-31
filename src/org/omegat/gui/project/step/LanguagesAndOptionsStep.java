@@ -78,6 +78,7 @@ public class LanguagesAndOptionsStep implements Step {
     private final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
     private final JCheckBox allowDefaultsCheckBox = new JCheckBox();
     private final JCheckBox projectSpecificSegmentationCheckBox = new JCheckBox();
+    private final JCheckBox projectSpecificFiltersCheckBox = new JCheckBox();
 
     public LanguagesAndOptionsStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -224,11 +225,29 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
+        // Project-specific segmentation rules
+        Mnemonics.setLocalizedText(projectSpecificSegmentationCheckBox,
+                OStrings.getString("PP_CHECKBOX_PROJECT_SPECIFIC_SEGMENTATION_RULES"));
+        projectSpecificSegmentationCheckBox.setName(PROJECT_SPECIFIC_SEGMENTATION_CB_NAME);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsBox.add(projectSpecificSegmentationCheckBox, gbc);
+
+        // Project-specific file filters
+        Mnemonics.setLocalizedText(projectSpecificFiltersCheckBox,
+                OStrings.getString("FILTERSCUSTOMIZER_CHECKBOX_PROJECTSPECIFIC"));
+        projectSpecificFiltersCheckBox.setName(PROJECT_SPECIFIC_FILTERS_CB_NAME);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsBox.add(projectSpecificFiltersCheckBox, gbc);
+
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
         allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(allowDefaultsCheckBox, gbc);
 
@@ -236,18 +255,9 @@ public class LanguagesAndOptionsStep implements Step {
         Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
         removeTagsCheckBox.setName(REMOVE_TAGS_CB_NAME);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(removeTagsCheckBox, gbc);
-
-        // Project-specific segmentation rules
-        Mnemonics.setLocalizedText(projectSpecificSegmentationCheckBox,
-                OStrings.getString("PP_CHECKBOX_PROJECT_SPECIFIC_SEGMENTATION_RULES"));
-        projectSpecificSegmentationCheckBox.setName(PROJECT_SPECIFIC_SEGMENTATION_CB_NAME);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        optionsBox.add(projectSpecificSegmentationCheckBox, gbc);
 
         return optionsBox;
     }
@@ -297,6 +307,8 @@ public class LanguagesAndOptionsStep implements Step {
 
         // Project-specific segmentation checkbox
         projectSpecificSegmentationCheckBox.setSelected(p.getProjectSRX() != null);
+        // Project-specific filters checkbox
+        projectSpecificFiltersCheckBox.setSelected(p.getProjectFilters() != null);
 
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // In resolve mode, all these are informational and disabled
@@ -308,6 +320,7 @@ public class LanguagesAndOptionsStep implements Step {
             allowDefaultsCheckBox.setEnabled(false);
             removeTagsCheckBox.setEnabled(false);
             projectSpecificSegmentationCheckBox.setEnabled(false);
+            projectSpecificFiltersCheckBox.setEnabled(false);
         }
     }
 
@@ -348,15 +361,28 @@ public class LanguagesAndOptionsStep implements Step {
             // Explicitly clear project-specific SRX if user disabled it
             p.setProjectSRX(null);
         }
+        // Do not set project filters here; FilterDefinitionStep will handle it based on checkbox state.
+        if (!projectSpecificFiltersCheckBox.isSelected()) {
+            // Explicitly clear project-specific filters if user disabled it
+            p.setProjectFilters(null);
+        }
     }
 
-    // Expose state and listener for wizard to enable/disable SegmentationStep
+    // Expose state and listener for wizard to enable/disable steps
     public boolean isProjectSpecificSegmentationSelected() {
         return projectSpecificSegmentationCheckBox.isSelected();
     }
 
     public void addProjectSpecificSegmentationListener(java.awt.event.ActionListener l) {
         projectSpecificSegmentationCheckBox.addActionListener(l);
+    }
+
+    public boolean isProjectSpecificFiltersSelected() {
+        return projectSpecificFiltersCheckBox.isSelected();
+    }
+
+    public void addProjectSpecificFiltersListener(java.awt.event.ActionListener l) {
+        projectSpecificFiltersCheckBox.addActionListener(l);
     }
 
     // component name definitions for ui test.
@@ -368,4 +394,5 @@ public class LanguagesAndOptionsStep implements Step {
     public static final String SOURCE_LOCALE_CB_NAME = "project_properties_source_locale_cb";
     public static final String TARGET_LOCALE_CB_NAME = "project_properties_target_locale_cb";
     public static final String PROJECT_SPECIFIC_SEGMENTATION_CB_NAME = "project_properties_project_specific_segmentation_cb";
+    public static final String PROJECT_SPECIFIC_FILTERS_CB_NAME = "project_properties_project_specific_filters_cb";
 }

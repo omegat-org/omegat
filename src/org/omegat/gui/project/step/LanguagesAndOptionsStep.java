@@ -84,6 +84,7 @@ public class LanguagesAndOptionsStep implements Step {
         this.mode = mode;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createLocalesBox());
+        panel.add(createProjectSpecificOptionsBox());
         panel.add(createOptionsBox());
     }
 
@@ -225,29 +226,12 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        // Project-specific segmentation rules
-        Mnemonics.setLocalizedText(projectSpecificSegmentationCheckBox,
-                OStrings.getString("PP_CHECKBOX_PROJECT_SPECIFIC_SEGMENTATION_RULES"));
-        projectSpecificSegmentationCheckBox.setName(PROJECT_SPECIFIC_SEGMENTATION_CB_NAME);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        optionsBox.add(projectSpecificSegmentationCheckBox, gbc);
-
-        // Project-specific file filters
-        Mnemonics.setLocalizedText(projectSpecificFiltersCheckBox,
-                OStrings.getString("FILTERSCUSTOMIZER_CHECKBOX_PROJECTSPECIFIC"));
-        projectSpecificFiltersCheckBox.setName(PROJECT_SPECIFIC_FILTERS_CB_NAME);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        optionsBox.add(projectSpecificFiltersCheckBox, gbc);
-
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
         allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(allowDefaultsCheckBox, gbc);
 
@@ -255,11 +239,55 @@ public class LanguagesAndOptionsStep implements Step {
         Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
         removeTagsCheckBox.setName(REMOVE_TAGS_CB_NAME);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(removeTagsCheckBox, gbc);
 
         return optionsBox;
+    }
+
+    private Box createProjectSpecificOptionsBox() {
+        Box projectSpecificOptionsBox = Box.createHorizontalBox();
+        JPanel optionsPanel = new JPanel(new GridBagLayout());
+        optionsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_PROJECT_SPECIFIC_OPTIONS")));
+        // Explanation label
+        JLabel explanationLabel = new JLabel("<html><i>" +
+                OStrings.getString("PP_PROJECT_SPECIFIC_OPTIONS_EXPLANATION") + "</i></html>");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(3, 3, 3, 3);
+
+        optionsPanel.add(Box.createRigidArea(new Dimension(0, 5)), gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsPanel.add(explanationLabel, gbc);
+
+        // Project-specific segmentation rules
+        Mnemonics.setLocalizedText(projectSpecificSegmentationCheckBox,
+                OStrings.getString("PP_CHECKBOX_PROJECT_SPECIFIC_SEGMENTATION_RULES"));
+        projectSpecificSegmentationCheckBox.setName(PROJECT_SPECIFIC_SEGMENTATION_CB_NAME);
+        optionsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsPanel.add(projectSpecificSegmentationCheckBox, gbc);
+
+        // Project-specific filters
+        Mnemonics.setLocalizedText(projectSpecificFiltersCheckBox,
+                OStrings.getString("FILTERSCUSTOMIZER_CHECKBOX_PROJECTSPECIFIC"));
+        projectSpecificFiltersCheckBox.setName(PROJECT_SPECIFIC_FILTERS_CB_NAME);
+        projectSpecificOptionsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsPanel.add(projectSpecificFiltersCheckBox, gbc);
+
+        projectSpecificOptionsBox.add(optionsPanel);
+        return projectSpecificOptionsBox;
     }
 
     @Override

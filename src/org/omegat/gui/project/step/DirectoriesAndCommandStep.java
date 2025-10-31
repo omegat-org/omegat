@@ -63,21 +63,21 @@ public class DirectoriesAndCommandStep implements Step {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
     // Directories section
-    private final JTextField srcRootField = new JTextField(40);
+    private final JTextField srcRootField = new JTextField();
     private final JButton srcExcludesBtn = new JButton();
     private final JButton srcBrowse = new JButton();
     private final JButton tmBrowse = new JButton();
     private final JButton glosBrowse = new JButton();
     private final JButton wGlosBrowse = new JButton();
-    private final JTextField dictRootField = new JTextField(40);
+    private final JTextField dictRootField = new JTextField();
     private final JButton dictBrowse = new JButton();
-    private final JTextField locRootField = new JTextField(40);
+    private final JTextField locRootField = new JTextField();
     private final JButton locBrowse = new JButton();
-    private final JTextField writeableGlosField = new JTextField(40);
-    private final JTextField tmRootField = new JTextField(40);
-    private final JTextField glosRootField = new JTextField(40);
+    private final JTextField writeableGlosField = new JTextField();
+    private final JTextField tmRootField = new JTextField();
+    private final JTextField glosRootField = new JTextField();
     // Export TM + External Command section
-    private final JTextField exportTmRoot = new JTextField(40);
+    private final JTextField exportTmRoot = new JTextField();
     private final JCheckBox exportOmegaT = new JCheckBox();
     private final JCheckBox exportL1 = new JCheckBox();
     private final JCheckBox exportL2 = new JCheckBox();
@@ -214,7 +214,7 @@ public class DirectoriesAndCommandStep implements Step {
         exportRootRow.add(exportTmRoot);
         bExportTmRoot.add(exportRootRow);
         container.add(bExportTmRoot);
-        container.add(Box.createVerticalStrut(12));
+        container.add(Box.createVerticalStrut(8));
 
         // Export TM levels
         Box bExportTmLevels = Box.createHorizontalBox();
@@ -235,10 +235,10 @@ public class DirectoriesAndCommandStep implements Step {
         bExportTmLevels.add(exLevels);
         bExportTmLevels.add(Box.createVerticalGlue());
         container.add(bExportTmLevels);
-        container.add(Box.createVerticalStrut(12));
+        container.add(Box.createVerticalStrut(8));
 
         // External command area
-        externalCommandTextArea.setRows(12);
+        externalCommandTextArea.setRows(3);
         externalCommandTextArea.setLineWrap(true);
         Box externalCommandBox = Box.createVerticalBox();
         externalCommandBox.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));

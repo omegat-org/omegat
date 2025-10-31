@@ -83,7 +83,7 @@ class WizardProjectPropertiesDialog extends JDialog {
         buildSteps();
         buildUI();
         pack();
-        setMinimumSize(new Dimension(800, 400));
+        setMinimumSize(new Dimension(800, 500));
         setLocationRelativeTo(parent);
     }
 

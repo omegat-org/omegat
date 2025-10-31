@@ -28,32 +28,41 @@ package org.omegat.gui.project.step;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.io.File;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 
 /**
  * Step to configure directory paths.
  */
-public class DirectoriesStep implements Step {
+public class DirectoriesAndCommandStep implements Step {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
+    // Directories section
     private final JTextField srcRootField = new JTextField(40);
     private final JButton srcExcludesBtn = new JButton();
     private final JButton srcBrowse = new JButton();
@@ -67,10 +76,23 @@ public class DirectoriesStep implements Step {
     private final JTextField writeableGlosField = new JTextField(40);
     private final JTextField tmRootField = new JTextField(40);
     private final JTextField glosRootField = new JTextField(40);
+    // Export TM + External Command section
+    private final JTextField exportTmRoot = new JTextField(40);
+    private final JCheckBox exportOmegaT = new JCheckBox();
+    private final JCheckBox exportL1 = new JCheckBox();
+    private final JCheckBox exportL2 = new JCheckBox();
+    private final JTextArea externalCommandTextArea = new JTextArea(3, 40);
+    private final JButton insertButton = new JButton();
+    private final JLabel variablesLabel = new JLabel();
+    private JComboBox<String> variablesList = new JComboBox<>();
 
-    public DirectoriesStep(ProjectConfigMode mode) {
+    public DirectoriesAndCommandStep(ProjectConfigMode mode) {
         this.mode = mode;
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createDirsBox());
+        panel.add(Box.createVerticalStrut(12));
+        panel.add(createExportAndCommandBox());
+        panel.add(Box.createVerticalGlue());
     }
 
     private Box createDirsBox() {
@@ -175,7 +197,86 @@ public class DirectoriesStep implements Step {
         dirsBox.add(bLocRootLabel);
         dirsBox.add(bLoc);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(Box.createVerticalGlue());
         return dirsBox;
+    }
+
+    private Box createExportAndCommandBox() {
+        Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
+        Box container = Box.createVerticalBox();
+
+        // Export TM root
+        Box bExportTmRoot = Box.createHorizontalBox();
+        bExportTmRoot.setBorder(emptyBorder);
+        JPanel exportRootRow = new JPanel();
+        exportRootRow.add(new JLabel(OStrings.getString("PP_EXPORT_TM_ROOT")));
+        exportRootRow.add(Box.createHorizontalStrut(8));
+        exportRootRow.add(exportTmRoot);
+        bExportTmRoot.add(exportRootRow);
+        container.add(bExportTmRoot);
+        container.add(Box.createVerticalStrut(12));
+
+        // Export TM levels
+        Box bExportTmLevels = Box.createHorizontalBox();
+        bExportTmLevels.setBorder(emptyBorder);
+        JPanel exLevels = new JPanel();
+        JLabel exLevelsLabel = new JLabel();
+        Mnemonics.setLocalizedText(exLevelsLabel, OStrings.getString("PP_EXPORT_TM_LEVELS"));
+        exLevels.add(exLevelsLabel);
+        exLevels.add(Box.createHorizontalStrut(8));
+        Mnemonics.setLocalizedText(exportOmegaT, OStrings.getString("PP_EXPORT_TM_OMEGAT"));
+        Mnemonics.setLocalizedText(exportL1, OStrings.getString("PP_EXPORT_TM_LEVEL1"));
+        Mnemonics.setLocalizedText(exportL2, OStrings.getString("PP_EXPORT_TM_LEVEL2"));
+        exLevels.add(exportOmegaT);
+        exLevels.add(Box.createHorizontalStrut(8));
+        exLevels.add(exportL1);
+        exLevels.add(Box.createHorizontalStrut(8));
+        exLevels.add(exportL2);
+        bExportTmLevels.add(exLevels);
+        bExportTmLevels.add(Box.createVerticalGlue());
+        container.add(bExportTmLevels);
+        container.add(Box.createVerticalStrut(12));
+
+        // External command area
+        externalCommandTextArea.setRows(12);
+        externalCommandTextArea.setLineWrap(true);
+        Box externalCommandBox = Box.createVerticalBox();
+        externalCommandBox.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                    OStrings.getString("PP_EXTERNAL_COMMAND")));
+        } else {
+            externalCommandTextArea.setEditable(false);
+            externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                    OStrings.getString("PP_EXTERN_CMD_DISABLED")));
+        }
+        externalCommandTextArea.setName(EXTERNAL_COMMAND_TEXTAREA_NAME);
+        final JScrollPane externalCommandScrollPane = new JScrollPane();
+        externalCommandScrollPane.setViewportView(externalCommandTextArea);
+        externalCommandBox.add(externalCommandScrollPane);
+
+        variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
+        variablesList.setName(VARIABLE_LIST_NAME);
+
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            Box bIC = Box.createHorizontalBox();
+            bIC.setBorder(emptyBorder);
+            Mnemonics.setLocalizedText(variablesLabel,
+                    OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
+            bIC.add(variablesLabel);
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
+            bIC.add(variablesList);
+            Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
+            insertButton.addActionListener(e ->
+                    externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString()));
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
+            bIC.add(insertButton);
+            externalCommandBox.add(bIC);
+        }
+
+        container.add(externalCommandBox);
+        return container;
     }
 
     @Override
@@ -190,12 +291,23 @@ public class DirectoriesStep implements Step {
 
     @Override
     public void onLoad(ProjectProperties p) {
+        // Directories
         srcRootField.setText(p.getSourceRoot());
         locRootField.setText(p.getTargetRoot());
         glosRootField.setText(p.getGlossaryRoot());
         writeableGlosField.setText(p.getWriteableGlossary());
         tmRootField.setText(p.getTMRoot());
         dictRootField.setText(p.getDictRoot());
+        // Export TM + External command
+        exportTmRoot.setText(p.getExportTMRoot());
+        List<String> lvls = p.getExportTmLevels();
+        exportOmegaT.setSelected(lvls.contains("omegat"));
+        exportL1.setSelected(lvls.contains("level1"));
+        exportL2.setSelected(lvls.contains("level2"));
+        externalCommandTextArea.setText(p.getExternalCommand());
+        if (!Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            externalCommandTextArea.setEnabled(false);
+        }
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // Highlight missing directories in red
             paintIfMissing(srcRootField);
@@ -209,6 +321,11 @@ public class DirectoriesStep implements Step {
             }
             paintIfMissing(tmRootField);
             paintIfMissing(dictRootField);
+            // Disable export/command controls
+            exportOmegaT.setEnabled(false);
+            exportL1.setEnabled(false);
+            exportL2.setEnabled(false);
+            externalCommandTextArea.setEnabled(false);
         }
     }
 
@@ -240,6 +357,9 @@ public class DirectoriesStep implements Step {
             if (!new File(dictRootField.getText()).isDirectory()) {
                 return OStrings.getString("NP_DICTDIR_DOESNT_EXIST");
             }
+            if (!new File(exportTmRoot.getText()).isDirectory()) {
+                return OStrings.getString("NP_EXPORT_TMDIR_DOESNT_EXIST");
+            }
         }
         return null;
     }
@@ -252,6 +372,9 @@ public class DirectoriesStep implements Step {
         p.setWriteableGlossary(writeableGlosField.getText());
         p.setTMRoot(ensureSep(tmRootField.getText()));
         p.setDictRoot(ensureSep(dictRootField.getText()));
+        p.setExportTMRoot(ensureSep(exportTmRoot.getText()));
+        p.setExportTmLevels(exportOmegaT.isSelected(), exportL1.isSelected(), exportL2.isSelected());
+        p.setExternalCommand(externalCommandTextArea.getText());
     }
 
     private String ensureSep(String s) {
@@ -267,4 +390,8 @@ public class DirectoriesStep implements Step {
             "project_properties_writable_glossary_browse_button";
     public static final String LOC_BROWSE_BUTTON_NAME = "project_properties_loc_browse_button";
     public static final String DICTIONARY_BROWSE_BUTTON_NAME = "project_properties_dictionary_browse_button";
+
+    // Names for external command components (kept for UI tests/accessibility parity)
+    public static final String VARIABLE_LIST_NAME = "project_properties_variable_list";
+    public static final String EXTERNAL_COMMAND_TEXTAREA_NAME = "project_properties_external_command_textarea";
 }

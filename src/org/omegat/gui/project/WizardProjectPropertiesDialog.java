@@ -43,8 +43,7 @@ import javax.swing.JScrollPane;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.ContributorStep;
-import org.omegat.gui.project.step.DirectoriesStep;
-import org.omegat.gui.project.step.ExportAndCommandStep;
+import org.omegat.gui.project.step.DirectoriesAndCommandStep;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.SegmentationStep;
 import org.omegat.gui.project.step.FilterDefinitionStep;
@@ -84,14 +83,13 @@ class WizardProjectPropertiesDialog extends JDialog {
         buildSteps();
         buildUI();
         pack();
-        setMinimumSize(new Dimension(800, 560));
+        setMinimumSize(new Dimension(800, 400));
         setLocationRelativeTo(parent);
     }
 
     private void buildSteps() {
         steps.add(new LanguagesAndOptionsStep(mode));
-        steps.add(new DirectoriesStep(mode));
-        steps.add(new ExportAndCommandStep(mode));
+        steps.add(new DirectoriesAndCommandStep(mode));
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
             steps.add(new ContributorStep(c));

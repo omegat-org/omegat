@@ -108,6 +108,9 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.ScriptsManager;
+
+
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -140,6 +143,17 @@ public final class Main {
     private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
+
+
+        // Initialize external scripts directory (macOS fix)
+        try {
+            org.omegat.util.ScriptsManager.ensureUserScriptsWithDefaults();
+        } catch (Exception ex) {
+            System.err.println("Could not initialize user scripts dir: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+
         if (args.length > 0
                 && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
             System.out.println(

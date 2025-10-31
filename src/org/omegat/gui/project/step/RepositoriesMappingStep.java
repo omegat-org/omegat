@@ -229,7 +229,17 @@ public class RepositoriesMappingStep implements Step {
     }
 
     private void initTableModels() {
-        modelRepo = new AbstractTableModel() {
+        modelRepo = createRepositoryTableModel();
+        tableRepositories.setModel(modelRepo);
+        configureRepositoryTableColumns();
+
+        modelMapping = createMappingTableModel();
+        tableMapping.setModel(modelMapping);
+        configureMappingTableColumns();
+    }
+
+    private AbstractTableModel createRepositoryTableModel() {
+        return new AbstractTableModel() {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 if (rowIndex >= listRepo.size()) {
@@ -291,8 +301,9 @@ public class RepositoriesMappingStep implements Step {
                 return null;
             }
         };
-        tableRepositories.setModel(modelRepo);
-        // Provide a combo renderer/editor for types
+    }
+
+    private void configureRepositoryTableColumns() {
         javax.swing.JComboBox<RepoType> typeCombo = new javax.swing.JComboBox<>(RepoType.values());
         typeCombo.setRenderer(new DelegatingComboBoxRenderer<RepoType, String>() {
             @Override
@@ -314,8 +325,10 @@ public class RepositoriesMappingStep implements Step {
             }
         });
         TableColumnSizer.autoSize(tableRepositories, 1, true);
+    }
 
-        modelMapping = new AbstractTableModel() {
+    private AbstractTableModel createMappingTableModel() {
+        return new AbstractTableModel() {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 if (rowIndex >= listMapping.size()) {
@@ -391,7 +404,9 @@ public class RepositoriesMappingStep implements Step {
                 return null;
             }
         };
-        tableMapping.setModel(modelMapping);
+    }
+
+    private void configureMappingTableColumns() {
         reinitRepoUrlDropdown();
         TableColumnSizer.autoSize(tableMapping, 0, true);
     }

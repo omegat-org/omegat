@@ -29,7 +29,6 @@ import java.awt.BorderLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.gui.ExternalFinderPreferencesController;

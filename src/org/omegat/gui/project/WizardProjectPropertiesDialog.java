@@ -82,6 +82,7 @@ class WizardProjectPropertiesDialog extends JDialog {
         Mnemonics.setLocalizedText(cancelBtn, OStrings.getString("BUTTON_CANCEL"));
         buildSteps();
         buildUI();
+        setName(DIALOG_NAME);
         pack();
         setMinimumSize(new Dimension(800, 500));
         setLocationRelativeTo(parent);
@@ -144,10 +145,12 @@ class WizardProjectPropertiesDialog extends JDialog {
         backBtn.addActionListener(this::onBack);
         nextBtn.addActionListener(this::onNext);
         finishBtn.addActionListener(this::onFinish);
+        finishBtn.setName(OK_BUTTON_NAME);
         cancelBtn.addActionListener(e -> {
             cancelled = true;
             setVisible(false);
         });
+        cancelBtn.setName(CANCEL_BUTTON_NAME);
         nav.add(backBtn);
         nav.add(nextBtn);
         nav.add(cancelBtn);
@@ -213,4 +216,8 @@ class WizardProjectPropertiesDialog extends JDialog {
     boolean isCancelled() {
         return cancelled;
     }
+    public static final String DIALOG_NAME = "wizaard_project_properties_dialog";
+    public static final String OK_BUTTON_NAME = "wizard_project_properties_ok_button";
+    public static final String CANCEL_BUTTON_NAME = "wizard_project_properties_cancel_button";
+
 }

@@ -28,7 +28,6 @@ import java.awt.Frame;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 
 /**
  * Entry point for the new modular Project Properties UI.

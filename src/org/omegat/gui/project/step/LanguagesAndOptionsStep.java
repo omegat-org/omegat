@@ -77,6 +77,7 @@ public class LanguagesAndOptionsStep implements Step {
     // Options
     private final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
     private final JCheckBox allowDefaultsCheckBox = new JCheckBox();
+    private final JCheckBox projectSpecificSegmentationCheckBox = new JCheckBox();
 
     public LanguagesAndOptionsStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -239,6 +240,15 @@ public class LanguagesAndOptionsStep implements Step {
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(removeTagsCheckBox, gbc);
 
+        // Project-specific segmentation rules
+        Mnemonics.setLocalizedText(projectSpecificSegmentationCheckBox,
+                OStrings.getString("PP_CHECKBOX_PROJECT_SPECIFIC_SEGMENTATION_RULES"));
+        projectSpecificSegmentationCheckBox.setName(PROJECT_SPECIFIC_SEGMENTATION_CB_NAME);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsBox.add(projectSpecificSegmentationCheckBox, gbc);
+
         return optionsBox;
     }
 
@@ -285,6 +295,9 @@ public class LanguagesAndOptionsStep implements Step {
         allowDefaultsCheckBox.setSelected(p.isSupportDefaultTranslations());
         removeTagsCheckBox.setSelected(p.isRemoveTags());
 
+        // Project-specific segmentation checkbox
+        projectSpecificSegmentationCheckBox.setSelected(p.getProjectSRX() != null);
+
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // In resolve mode, all these are informational and disabled
             sourceLocaleField.setEnabled(false);
@@ -294,6 +307,7 @@ public class LanguagesAndOptionsStep implements Step {
             sentenceSegmentingCheckBox.setEnabled(false);
             allowDefaultsCheckBox.setEnabled(false);
             removeTagsCheckBox.setEnabled(false);
+            projectSpecificSegmentationCheckBox.setEnabled(false);
         }
     }
 
@@ -329,7 +343,20 @@ public class LanguagesAndOptionsStep implements Step {
         p.setSentenceSegmentingEnabled(sentenceSegmentingCheckBox.isSelected());
         p.setSupportDefaultTranslations(allowDefaultsCheckBox.isSelected());
         p.setRemoveTags(removeTagsCheckBox.isSelected());
+        // Do not set project SRX here; SegmentationStep will handle it based on checkbox state.
+        if (!projectSpecificSegmentationCheckBox.isSelected()) {
+            // Explicitly clear project-specific SRX if user disabled it
+            p.setProjectSRX(null);
+        }
+    }
 
+    // Expose state and listener for wizard to enable/disable SegmentationStep
+    public boolean isProjectSpecificSegmentationSelected() {
+        return projectSpecificSegmentationCheckBox.isSelected();
+    }
+
+    public void addProjectSpecificSegmentationListener(java.awt.event.ActionListener l) {
+        projectSpecificSegmentationCheckBox.addActionListener(l);
     }
 
     // component name definitions for ui test.
@@ -340,4 +367,5 @@ public class LanguagesAndOptionsStep implements Step {
     public static final String TARGET_TOKENIZER_FIELD_NAME = "project_properties_target_tokenizer_field";
     public static final String SOURCE_LOCALE_CB_NAME = "project_properties_source_locale_cb";
     public static final String TARGET_LOCALE_CB_NAME = "project_properties_target_locale_cb";
+    public static final String PROJECT_SPECIFIC_SEGMENTATION_CB_NAME = "project_properties_project_specific_segmentation_cb";
 }

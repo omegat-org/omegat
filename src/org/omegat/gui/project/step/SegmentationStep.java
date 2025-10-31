@@ -27,7 +27,9 @@ package org.omegat.gui.project.step;
 import java.awt.BorderLayout;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
@@ -46,7 +48,9 @@ public class SegmentationStep implements Step {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel(new BorderLayout());
 
-    private SegmentationCustomizerController controller;
+    private @Nullable SegmentationCustomizerController controller;
+    private @Nullable JLabel disabledLabel;
+    private @Nullable JComponent controllerGui;
 
     public SegmentationStep(ProjectConfigMode mode) {
         this.mode = mode;
@@ -64,16 +68,24 @@ public class SegmentationStep implements Step {
 
     @Override
     public void onLoad(ProjectProperties p) {
-        // Initialize and embed controller GUI
-        controller = new SegmentationCustomizerController(true, SRX.getDefault(), Preferences.getSRX(), p.getProjectSRX());
+        // Initialize and embed controller GUI, hiding internal project-specific checkbox in wizard
+        controller = new SegmentationCustomizerController(true, false, SRX.getDefault(), Preferences.getSRX(), p.getProjectSRX());
         panel.removeAll();
-        panel.add(controller.getGui(), BorderLayout.CENTER);
+        controllerGui = controller.getGui();
+        // Info label explaining why disabled
+        if (disabledLabel == null) {
+            disabledLabel = new JLabel(OStrings.getString("WIZ_SEGMENTATION_DISABLED_MESSAGE"));
+            disabledLabel.setBorder(new EmptyBorder(8, 8, 8, 8));
+            disabledLabel.setName("wizard_segmentation_disabled_label");
+        }
+        panel.add(disabledLabel, BorderLayout.NORTH);
+        panel.add(controllerGui, BorderLayout.CENTER);
+        disabledLabel.setVisible(false); // default hidden until wizard toggles
 
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // Disable interaction in resolve mode
-            for (java.awt.Component c : panel.getComponents()) {
-                c.setEnabled(false);
-            }
+            controllerGui.setEnabled(false);
+            disabledLabel.setVisible(false);
         }
     }
 
@@ -88,6 +100,23 @@ public class SegmentationStep implements Step {
         if (controller != null) {
             SRX srx = controller.getResult();
             p.setProjectSRX(srx);
+        }
+    }
+
+    /**
+     * Allows the wizard to enable or disable the segmentation editing based on
+     * the selection in LanguagesAndOptionsStep.
+     */
+    public void setProjectSpecificSegmentationEnabled(boolean enabled) {
+        if (controller != null) {
+            controller.setProjectSpecificEnabled(enabled);
+        }
+        // Enable/disable only the editor UI, keep the info label readable
+        if (controllerGui != null) {
+            controllerGui.setEnabled(enabled);
+        }
+        if (disabledLabel != null) {
+            disabledLabel.setVisible(!enabled && mode != ProjectConfigMode.RESOLVE_DIRS);
         }
     }
 }

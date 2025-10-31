@@ -87,8 +87,12 @@ class WizardProjectPropertiesDialog extends JDialog {
         setLocationRelativeTo(parent);
     }
 
+    private LanguagesAndOptionsStep languagesAndOptionsStep;
+    private SegmentationStep segmentationStep;
+
     private void buildSteps() {
-        steps.add(new LanguagesAndOptionsStep(mode));
+        languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
+        steps.add(languagesAndOptionsStep);
         steps.add(new DirectoriesAndCommandStep(mode));
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
@@ -97,10 +101,18 @@ class WizardProjectPropertiesDialog extends JDialog {
         // Optional steps
         steps.add(new FilterDefinitionStep(mode));
         steps.add(new RepositoriesMappingStep(mode));
-        steps.add(new SegmentationStep(mode));
+        segmentationStep = new SegmentationStep(mode);
+        steps.add(segmentationStep);
         steps.add(new ExternalFinderStep(mode));
         // Initialize
         steps.forEach(s -> s.onLoad(props));
+        // Synchronize segmentation step enablement with checkbox in languages step
+        boolean enabled = languagesAndOptionsStep.isProjectSpecificSegmentationSelected();
+        segmentationStep.setProjectSpecificSegmentationEnabled(enabled);
+        languagesAndOptionsStep.addProjectSpecificSegmentationListener(e -> {
+            segmentationStep.setProjectSpecificSegmentationEnabled(languagesAndOptionsStep.isProjectSpecificSegmentationSelected());
+            updateNav();
+        });
     }
 
     private void buildUI() {

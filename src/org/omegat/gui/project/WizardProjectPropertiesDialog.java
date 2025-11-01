@@ -42,18 +42,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JComponent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import java.awt.Component;
-import java.awt.Container;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.ContributorStep;
 import org.omegat.gui.project.step.DirectoriesAndExportTMStep;
 import org.omegat.gui.project.step.ExternalCommandStep;
+import org.omegat.gui.project.step.SourceFilesStep;
 import org.omegat.util.Preferences;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.SegmentationStep;
@@ -123,6 +119,8 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
         steps.add(languagesAndOptionsStep);
         steps.add(new DirectoriesAndExportTMStep(mode));
+        // New step to select source files and copy them into the project source folder after finishing
+        steps.add(new SourceFilesStep());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             steps.add(new ExternalCommandStep(mode));
         }
@@ -234,24 +232,6 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
                 updateNav();
             }
         });
-    }
-
-    private static @Nullable JTextField findTextFieldByName(Component comp, String name) {
-        if (comp instanceof JTextField) {
-            String n = comp.getName();
-            if (name.equals(n)) {
-                return (JTextField) comp;
-            }
-        }
-        if (comp instanceof Container) {
-            for (Component child : ((Container) comp).getComponents()) {
-                JTextField tf = findTextFieldByName(child, name);
-                if (tf != null) {
-                    return tf;
-                }
-            }
-        }
-        return null;
     }
 
     private void onBack(ActionEvent e) {

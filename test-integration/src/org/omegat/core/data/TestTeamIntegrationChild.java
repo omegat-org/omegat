@@ -33,7 +33,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -133,7 +132,7 @@ public final class TestTeamIntegrationChild {
             // Init UI stubs. In a CI environment, errors can occur when
             // initializing the RemoteRepositoryProvider, so we need to make
             // sure the "main window" is available for logging first.
-            Core.initializeConsole(Collections.emptyMap());
+            Core.initializeConsole();
             TestCoreInitializer.initMainWindow(mainWindow);
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);

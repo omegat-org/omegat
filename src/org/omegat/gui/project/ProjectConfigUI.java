@@ -93,6 +93,6 @@ public final class ProjectConfigUI {
             dlg = new WizardProjectPropertiesDialog(parent, projectProperties, mode);
         }
         dlg.showDialog();
-        return dlg.isCancelled() ? null : projectProperties;
+        return dlg.isCancelled() ? null : dlg.getResultProperties();
     }
 }

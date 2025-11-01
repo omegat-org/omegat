@@ -44,6 +44,7 @@ import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
@@ -193,18 +194,6 @@ public class LanguagesAndOptionsStep implements Step {
         sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(sourceTokenizerField);
 
-        String cliTokSrc = RuntimePreferenceStore.getInstance().getTokenizerSource();
-        if (cliTokSrc != null) {
-            try {
-                Class<?> srcTokClass = Class.forName(cliTokSrc);
-                sourceTokenizerField.setEnabled(false);
-                sourceTokenizerField.addItem(srcTokClass);
-                sourceTokenizerField.setSelectedItem(cliTokSrc);
-            } catch (ClassNotFoundException | LinkageError ex) {
-                Log.log(ex);
-            }
-        }
-
         // Target tokenizer label
         JLabel targetTokenizerLabel = new JLabel();
         Mnemonics.setLocalizedText(targetTokenizerLabel, OStrings.getString("PP_LOC_TOK"));
@@ -223,19 +212,6 @@ public class LanguagesAndOptionsStep implements Step {
         targetTokenizerField.setEditable(false);
         targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(targetTokenizerField);
-
-        String cliTokTrg = RuntimePreferenceStore.getInstance().getTokenizerTarget();
-        if (cliTokTrg != null) {
-            try {
-                Class<?> trgTokClass = Class.forName(cliTokTrg);
-                targetTokenizerField.setEnabled(false);
-                targetTokenizerField.addItem(trgTokClass);
-                targetTokenizerField.setSelectedItem(cliTokTrg);
-            } catch (ClassNotFoundException | LinkageError ex) {
-                Log.log(ex);
-            }
-
-        }
         return localesBox;
     }
 
@@ -332,6 +308,10 @@ public class LanguagesAndOptionsStep implements Step {
 
     @Override
     public void onLoad(ProjectProperties p) {
+        if (mode == ProjectConfigMode.NEW_PROJECT) {
+            p.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
+            p.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
+        }
         // Languages
         sourceLocaleField.setSelectedItem(p.getSourceLanguage());
         targetLocaleField.setSelectedItem(p.getTargetLanguage());

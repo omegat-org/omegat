@@ -50,6 +50,13 @@ abstract class AbstractProjectPropertiesDialog extends JDialog {
         return cancelled;
     }
 
+    /**
+     * Returns the properties resulting from this dialog.
+     * Default implementation returns the instance passed in the constructor.
+     */
+    ProjectProperties getResultProperties() {
+        return props;
+    }
 
     protected void updateUIText() {
         switch (mode) {
@@ -64,5 +71,4 @@ abstract class AbstractProjectPropertiesDialog extends JDialog {
             break;
         }
     }
-
 }

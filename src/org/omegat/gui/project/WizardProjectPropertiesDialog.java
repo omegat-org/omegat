@@ -30,6 +30,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
@@ -41,6 +42,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JComponent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import java.awt.Component;
+import java.awt.Container;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.ContributorStep;
@@ -54,11 +62,12 @@ import org.omegat.gui.project.step.ExternalFinderStep;
 import org.omegat.gui.project.step.RepositoriesMappingStep;
 import org.omegat.util.OStrings;
 import org.omegat.gui.project.step.Step;
+import org.omegat.gui.project.step.ProjectFolderStep;
+import org.jetbrains.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
 class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
-
 
     private final List<Step> steps = new ArrayList<>();
     private int current = 0;
@@ -71,6 +80,18 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     private final JButton finishBtn = new JButton();
     private final JButton cancelBtn = new JButton();
 
+    private @Nullable ProjectProperties resultProps;
+    private boolean remainingStepsBuilt = false;
+
+    @Nullable
+    private LanguagesAndOptionsStep languagesAndOptionsStep;
+    @Nullable
+    private SegmentationStep segmentationStep;
+    @Nullable
+    private FilterDefinitionStep filterDefinitionStep;
+    @Nullable
+    private ProjectFolderStep folderStep;
+
     WizardProjectPropertiesDialog(Frame parent, ProjectProperties props, ProjectConfigMode mode) {
         super(parent, true, props, mode);
         updateUIText();
@@ -82,11 +103,21 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         setLocationRelativeTo(parent);
     }
 
-    private LanguagesAndOptionsStep languagesAndOptionsStep;
-    private SegmentationStep segmentationStep;
-    private FilterDefinitionStep filterDefinitionStep;
-
     private void buildSteps() {
+        if (mode == ProjectConfigMode.NEW_PROJECT) {
+            // First step: choose project folder. Build all remaining steps now but delay initialization until folder selected.
+            folderStep = new ProjectFolderStep();
+            steps.add(folderStep);
+            buildRemainingSteps();
+        } else {
+            folderStep = null;
+            buildRemainingSteps();
+            initializeRemainingSteps(props);
+            remainingStepsBuilt = true;
+        }
+    }
+
+    private void buildRemainingSteps() {
         languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
         steps.add(languagesAndOptionsStep);
         steps.add(new DirectoriesAndExportTMStep(mode));
@@ -97,29 +128,43 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
             steps.add(new ContributorStep(c));
         }
-        // Optional steps
-        steps.add(new ExternalCommandStep(mode));
         filterDefinitionStep = new FilterDefinitionStep(mode);
         steps.add(filterDefinitionStep);
         steps.add(new RepositoriesMappingStep(mode));
         segmentationStep = new SegmentationStep(mode);
         steps.add(segmentationStep);
         steps.add(new ExternalFinderStep(mode));
-        // Initialize
-        steps.forEach(s -> s.onLoad(props));
+    }
+
+    private void initializeRemainingSteps(ProjectProperties loadProps) {
+        // Initialize UI state for all steps
+        steps.forEach(s -> s.onLoad(loadProps));
         // Synchronize step enablement with checkboxes in languages step
-        boolean segEnabled = languagesAndOptionsStep.isProjectSpecificSegmentationSelected();
-        segmentationStep.setProjectSpecificSegmentationEnabled(segEnabled);
-        boolean filtersEnabled = languagesAndOptionsStep.isProjectSpecificFiltersSelected();
-        filterDefinitionStep.setProjectSpecificFiltersEnabled(filtersEnabled);
-        languagesAndOptionsStep.addProjectSpecificSegmentationListener(e -> {
-            segmentationStep.setProjectSpecificSegmentationEnabled(languagesAndOptionsStep.isProjectSpecificSegmentationSelected());
-            updateNav();
-        });
-        languagesAndOptionsStep.addProjectSpecificFiltersListener(e -> {
-            filterDefinitionStep.setProjectSpecificFiltersEnabled(languagesAndOptionsStep.isProjectSpecificFiltersSelected());
-            updateNav();
-        });
+        final LanguagesAndOptionsStep lang = this.languagesAndOptionsStep;
+        final SegmentationStep seg = this.segmentationStep;
+        final FilterDefinitionStep filt = this.filterDefinitionStep;
+        if (lang != null) {
+            boolean segEnabled = lang.isProjectSpecificSegmentationSelected();
+            if (seg != null) {
+                seg.setProjectSpecificSegmentationEnabled(segEnabled);
+            }
+            boolean filtersEnabled = lang.isProjectSpecificFiltersSelected();
+            if (filt != null) {
+                filt.setProjectSpecificFiltersEnabled(filtersEnabled);
+            }
+            if (seg != null) {
+                lang.addProjectSpecificSegmentationListener(e -> {
+                    seg.setProjectSpecificSegmentationEnabled(lang.isProjectSpecificSegmentationSelected());
+                    updateNav();
+                });
+            }
+            if (filt != null) {
+                lang.addProjectSpecificFiltersListener(e -> {
+                    filt.setProjectSpecificFiltersEnabled(lang.isProjectSpecificFiltersSelected());
+                    updateNav();
+                });
+            }
+        }
     }
 
     private void buildUI() {
@@ -160,7 +205,51 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         content.add(nav, BorderLayout.SOUTH);
 
         setContentPane(content);
-        updateNav();
+        if (mode == ProjectConfigMode.NEW_PROJECT && folderStep != null) {
+            wireFolderFieldUpdates();
+        }
+        showCurrent();
+    }
+
+    private void wireFolderFieldUpdates() {
+        JComponent root = folderStep.getComponent();
+        JTextField tf = findTextFieldByName(root, ProjectFolderStep.FOLDER_FIELD_NAME);
+        if (tf != null) {
+            tf.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    updateNav();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    updateNav();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    updateNav();
+                }
+            });
+        }
+    }
+
+    private static @Nullable JTextField findTextFieldByName(Component comp, String name) {
+        if (comp instanceof JTextField) {
+            String n = comp.getName();
+            if (name.equals(n)) {
+                return (JTextField) comp;
+            }
+        }
+        if (comp instanceof Container) {
+            for (Component child : ((Container) comp).getComponents()) {
+                JTextField tf = findTextFieldByName(child, name);
+                if (tf != null) {
+                    return tf;
+                }
+            }
+        }
+        return null;
     }
 
     private void onBack(ActionEvent e) {
@@ -178,6 +267,17 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
             // invalid.
             return;
         }
+        if (mode == ProjectConfigMode.NEW_PROJECT && !remainingStepsBuilt && current == 0 && folderStep != null) {
+            // Initialize properties and remaining steps now (UI already built)
+            File dir = folderStep.getSelectedDir();
+            resultProps = new ProjectProperties(dir);
+            initializeRemainingSteps(resultProps);
+            remainingStepsBuilt = true;
+            // Move to the next step (languages)
+            current = 1;
+            showCurrent();
+            return;
+        }
         if (current < steps.size() - 1) {
             current++;
             showCurrent();
@@ -191,7 +291,8 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
                 return;
             }
         }
-        steps.forEach(s -> s.onSave(props));
+        ProjectProperties targetProps = (resultProps != null) ? resultProps : props;
+        steps.forEach(s -> s.onSave(targetProps));
         cancelled = false;
         setVisible(false);
     }
@@ -202,10 +303,20 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         updateNav();
     }
 
+
     private void updateNav() {
         backBtn.setEnabled(current > 0);
-        nextBtn.setEnabled(current < steps.size() - 1);
-        finishBtn.setEnabled(true);
+        boolean canProceed = true;
+        if (mode == ProjectConfigMode.NEW_PROJECT && !remainingStepsBuilt && current == 0 && folderStep != null) {
+            // Do lightweight validation
+            canProceed = folderStep.validateInput() == null;
+        }
+        boolean hasNext = current < steps.size() - 1 || (mode == ProjectConfigMode.NEW_PROJECT &&
+                !remainingStepsBuilt && current == 0);
+        nextBtn.setEnabled(hasNext && canProceed);
+        // Finish only enabled once the project folder has been selected and remaining steps built in NEW_PROJECT
+        boolean finishEnabled = (mode != ProjectConfigMode.NEW_PROJECT) || remainingStepsBuilt;
+        finishBtn.setEnabled(finishEnabled);
         // Highlight current step label
         for (int i = 0; i < left.getComponentCount(); i += 2) {
             if (left.getComponent(i) instanceof JLabel) {
@@ -219,4 +330,8 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     public static final String OK_BUTTON_NAME = "wizard_project_properties_ok_button";
     public static final String CANCEL_BUTTON_NAME = "wizard_project_properties_cancel_button";
 
+    @Override
+    ProjectProperties getResultProperties() {
+        return (resultProps != null) ? resultProps : super.getResultProperties();
+    }
 }

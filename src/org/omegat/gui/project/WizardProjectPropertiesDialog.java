@@ -44,7 +44,9 @@ import javax.swing.JScrollPane;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.ContributorStep;
-import org.omegat.gui.project.step.DirectoriesAndCommandStep;
+import org.omegat.gui.project.step.DirectoriesAndExportTMStep;
+import org.omegat.gui.project.step.ExternalCommandStep;
+import org.omegat.util.Preferences;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.SegmentationStep;
 import org.omegat.gui.project.step.FilterDefinitionStep;
@@ -87,12 +89,16 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     private void buildSteps() {
         languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
         steps.add(languagesAndOptionsStep);
-        steps.add(new DirectoriesAndCommandStep(mode));
+        steps.add(new DirectoriesAndExportTMStep(mode));
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            steps.add(new ExternalCommandStep(mode));
+        }
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
             steps.add(new ContributorStep(c));
         }
         // Optional steps
+        steps.add(new ExternalCommandStep(mode));
         filterDefinitionStep = new FilterDefinitionStep(mode);
         steps.add(filterDefinitionStep);
         steps.add(new RepositoriesMappingStep(mode));

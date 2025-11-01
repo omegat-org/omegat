@@ -40,7 +40,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.project.step.DirectoriesAndCommandStep;
+import org.omegat.gui.project.step.DirectoriesAndExportTMStep;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.Step;
 import org.omegat.util.OStrings;
@@ -68,7 +68,7 @@ class SingleProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
     private void buildUI(ProjectConfigMode mode) {
         if (Objects.requireNonNull(mode) == ProjectConfigMode.RESOLVE_DIRS) {
-            step = new DirectoriesAndCommandStep(mode);
+            step = new DirectoriesAndExportTMStep(mode);
         } else {
             step = new LanguagesAndOptionsStep(mode);
         }

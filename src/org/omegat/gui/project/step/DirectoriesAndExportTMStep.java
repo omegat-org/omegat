@@ -4,8 +4,8 @@
          glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2025 Hiroshi Miura
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
+              Home page: https://www.omegat.org/
+              Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -28,36 +28,28 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
-import java.util.Vector;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 
 import org.jetbrains.annotations.Nullable;
-import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
 
 /**
- * Step to configure directory paths.
+ * Step to configure directory paths and Export TM.
  */
-public class DirectoriesAndCommandStep implements Step {
+public class DirectoriesAndExportTMStep implements Step {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
     // Directories section
@@ -74,22 +66,18 @@ public class DirectoriesAndCommandStep implements Step {
     private final JTextField writeableGlosField = new JTextField();
     private final JTextField tmRootField = new JTextField();
     private final JTextField glosRootField = new JTextField();
-    // Export TM + External Command section
+    // Export TM section
     private final JTextField exportTmRoot = new JTextField();
     private final JCheckBox exportOmegaT = new JCheckBox();
     private final JCheckBox exportL1 = new JCheckBox();
     private final JCheckBox exportL2 = new JCheckBox();
-    private final JTextArea externalCommandTextArea = new JTextArea(3, 40);
-    private final JButton insertButton = new JButton();
-    private final JLabel variablesLabel = new JLabel();
-    private JComboBox<String> variablesList = new JComboBox<>();
 
-    public DirectoriesAndCommandStep(ProjectConfigMode mode) {
+    public DirectoriesAndExportTMStep(ProjectConfigMode mode) {
         this.mode = mode;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createDirsBox());
         panel.add(Box.createVerticalStrut(12));
-        panel.add(createExportAndCommandBox());
+        panel.add(createExportBox());
         panel.add(Box.createVerticalGlue());
     }
 
@@ -199,7 +187,7 @@ public class DirectoriesAndCommandStep implements Step {
         return dirsBox;
     }
 
-    private Box createExportAndCommandBox() {
+    private Box createExportBox() {
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box container = Box.createVerticalBox();
 
@@ -233,47 +221,6 @@ public class DirectoriesAndCommandStep implements Step {
         bExportTmLevels.add(exLevels);
         bExportTmLevels.add(Box.createVerticalGlue());
         container.add(bExportTmLevels);
-        container.add(Box.createVerticalStrut(8));
-
-        // External command area
-        externalCommandTextArea.setRows(3);
-        externalCommandTextArea.setLineWrap(true);
-        Box externalCommandBox = Box.createVerticalBox();
-        externalCommandBox.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-                    OStrings.getString("PP_EXTERNAL_COMMAND")));
-        } else {
-            externalCommandTextArea.setEditable(false);
-            externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-                    OStrings.getString("PP_EXTERN_CMD_DISABLED")));
-        }
-        externalCommandTextArea.setName(EXTERNAL_COMMAND_TEXTAREA_NAME);
-        final JScrollPane externalCommandScrollPane = new JScrollPane();
-        externalCommandScrollPane.setViewportView(externalCommandTextArea);
-        externalCommandBox.add(externalCommandScrollPane);
-
-        variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
-        variablesList.setName(VARIABLE_LIST_NAME);
-
-        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            Box bIC = Box.createHorizontalBox();
-            bIC.setBorder(emptyBorder);
-            Mnemonics.setLocalizedText(variablesLabel,
-                    OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
-            bIC.add(variablesLabel);
-            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
-            bIC.add(variablesList);
-            Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
-            insertButton.addActionListener(e ->
-                    externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString()));
-            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
-            bIC.add(insertButton);
-            externalCommandBox.add(bIC);
-        }
-
-        container.add(externalCommandBox);
         return container;
     }
 
@@ -296,16 +243,12 @@ public class DirectoriesAndCommandStep implements Step {
         writeableGlosField.setText(p.getWriteableGlossary());
         tmRootField.setText(p.getTMRoot());
         dictRootField.setText(p.getDictRoot());
-        // Export TM + External command
+        // Export TM
         exportTmRoot.setText(p.getExportTMRoot());
         List<String> lvls = p.getExportTmLevels();
         exportOmegaT.setSelected(lvls.contains("omegat"));
         exportL1.setSelected(lvls.contains("level1"));
         exportL2.setSelected(lvls.contains("level2"));
-        externalCommandTextArea.setText(p.getExternalCommand());
-        if (!Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            externalCommandTextArea.setEnabled(false);
-        }
         if (mode == ProjectConfigMode.RESOLVE_DIRS) {
             // Highlight missing directories in red
             paintIfMissing(srcRootField);
@@ -319,11 +262,10 @@ public class DirectoriesAndCommandStep implements Step {
             }
             paintIfMissing(tmRootField);
             paintIfMissing(dictRootField);
-            // Disable export/command controls
+            // Disable export controls
             exportOmegaT.setEnabled(false);
             exportL1.setEnabled(false);
             exportL2.setEnabled(false);
-            externalCommandTextArea.setEnabled(false);
         }
     }
 
@@ -372,7 +314,6 @@ public class DirectoriesAndCommandStep implements Step {
         p.setDictRoot(ensureSep(dictRootField.getText()));
         p.setExportTMRoot(ensureSep(exportTmRoot.getText()));
         p.setExportTmLevels(exportOmegaT.isSelected(), exportL1.isSelected(), exportL2.isSelected());
-        p.setExternalCommand(externalCommandTextArea.getText());
     }
 
     private String ensureSep(String s) {
@@ -381,6 +322,7 @@ public class DirectoriesAndCommandStep implements Step {
         }
         return s.endsWith(File.separator) ? s : s + File.separator;
     }
+
     public static final String SRC_EXCLUDES_BUTTON_NAME = "project_properties_src_excludes_button";
     public static final String TM_BROWSE_BUTTON_NAME = "project_properties_tm_browse";
     public static final String GLOSSARY_BROWSE_BUTTON_NAME = "project_properties_glossary_browse_button";
@@ -388,8 +330,4 @@ public class DirectoriesAndCommandStep implements Step {
             "project_properties_writable_glossary_browse_button";
     public static final String LOC_BROWSE_BUTTON_NAME = "project_properties_loc_browse_button";
     public static final String DICTIONARY_BROWSE_BUTTON_NAME = "project_properties_dictionary_browse_button";
-
-    // Names for external command components (kept for UI tests/accessibility parity)
-    public static final String VARIABLE_LIST_NAME = "project_properties_variable_list";
-    public static final String EXTERNAL_COMMAND_TEXTAREA_NAME = "project_properties_external_command_textarea";
 }

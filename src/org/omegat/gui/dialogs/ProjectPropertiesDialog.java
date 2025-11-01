@@ -86,10 +86,6 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  * <li>If some directories are missing while opening a project.
  * <li>For editing project properties.
  * </ul>
- * <p>
- * Deprecated: Use the modular UIs under org.omegat.gui.project instead, such as
- * ProjectConfigUI.showDialog(...), SimpleProjectPropertiesDialog, or
- * WizardProjectPropertiesDialog.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -146,7 +142,6 @@ public class ProjectPropertiesDialog extends JDialog {
      *            {@link ProjectPropertiesDialog.Mode#RESOLVE_DIRS} or
      *            {@link ProjectPropertiesDialog.Mode#EDIT_PROJECT}).
      */
-    @SuppressWarnings("unused")
     public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
                                    Mode dialogTypeValue) {
         super(parent, true);

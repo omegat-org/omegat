@@ -42,7 +42,6 @@ import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.Language;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.LanguageComboBoxRenderer;

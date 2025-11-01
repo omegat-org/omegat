@@ -52,6 +52,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.util.Comparator;
 import java.util.Vector;
 
@@ -84,8 +85,37 @@ public class LanguagesAndOptionsStep implements Step {
         this.mode = mode;
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createLocalesBox());
-        panel.add(createProjectSpecificOptionsBox());
         panel.add(createOptionsBox());
+        panel.add(createProjectSpecificOptionsBox());
+        initializeActions(mode);
+    }
+
+    private void initializeActions(ProjectConfigMode mode) {
+        // Configure locale actions and initialize
+        ActionListener sourceLocaleListener = e -> {
+            if (!sourceLocaleField.isEnabled()) {
+                return;
+            }
+            Object newLang = sourceLocaleField.getSelectedItem();
+            if (newLang instanceof String) {
+                newLang = new Language((String) newLang);
+            }
+            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            sourceTokenizerField.setSelectedItem(newTok);
+        };
+        sourceLocaleField.addActionListener(sourceLocaleListener);
+        ActionListener targetLocaleListener = e -> {
+            if (!targetLocaleField.isEnabled()) {
+                return;
+            }
+            Object newLang = targetLocaleField.getSelectedItem();
+            if (newLang instanceof String) {
+                newLang = new Language((String) newLang);
+            }
+            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            targetTokenizerField.setSelectedItem(newTok);
+        };
+        targetLocaleField.addActionListener(targetLocaleListener);
     }
 
     private Box createLocalesBox() {
@@ -308,25 +338,40 @@ public class LanguagesAndOptionsStep implements Step {
 
         // Tokenizers, respecting CLI overrides
         String cliTokSrc = RuntimePreferenceStore.getInstance().getTokenizerSource();
+        Class<?> sourceTokenizer = null;
         if (cliTokSrc != null) {
             try {
-                sourceTokenizerField.setSelectedItem(Class.forName(cliTokSrc));
+                sourceTokenizer = Class.forName(cliTokSrc);
                 sourceTokenizerField.setEnabled(false);
             } catch (Exception ignored) {
             }
-        } else {
-            sourceTokenizerField.setSelectedItem(p.getSourceTokenizer());
         }
+        if (sourceTokenizer == null) {
+            if (mode == ProjectConfigMode.NEW_PROJECT) {
+                sourceTokenizer = PluginUtils.getTokenizerClassForLanguage(p.getSourceLanguage());
+            } else {
+                sourceTokenizer = p.getSourceTokenizer();
+            }
+        }
+        sourceTokenizerField.setSelectedItem(sourceTokenizer);
+
         String cliTokTrg = RuntimePreferenceStore.getInstance().getTokenizerTarget();
+        Class<?> targetTokenizer = null;
         if (cliTokTrg != null) {
             try {
-                targetTokenizerField.setSelectedItem(Class.forName(cliTokTrg));
+                targetTokenizer = Class.forName(cliTokTrg);
                 targetTokenizerField.setEnabled(false);
             } catch (Exception ignored) {
             }
-        } else {
-            targetTokenizerField.setSelectedItem(p.getTargetTokenizer());
         }
+        if (targetTokenizer == null) {
+            if (mode == ProjectConfigMode.NEW_PROJECT) {
+                targetTokenizer = PluginUtils.getTokenizerClassForLanguage(p.getTargetLanguage());
+            } else {
+                targetTokenizer = p.getTargetTokenizer();
+            }
+        }
+        targetTokenizerField.setSelectedItem(targetTokenizer);
 
         // Options
         sentenceSegmentingCheckBox.setSelected(p.isSentenceSegmentingEnabled());

@@ -251,10 +251,6 @@ public class ProjectPropertiesDialogController {
             glossaryFile = true;
         }
         String title = getBrowserTitle(browseTarget);
-        if (title == null) {
-            return;
-        }
-
         OmegaTFileChooser browser = new OmegaTFileChooser();
         browser.setDialogTitle(title);
         if (fileMode) {
@@ -311,7 +307,7 @@ public class ProjectPropertiesDialogController {
         case 7:
             return OStrings.getString("PP_BROWSE_TITLE_EXPORT_TM");
         default:
-            return null;
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 
@@ -373,12 +369,11 @@ public class ProjectPropertiesDialogController {
         case 7:
             return Preferences.getPreference(Preferences.EXPORT_TM_FOLDER);
         default:
-            return null;
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 
-    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget,
-            String str) {
+    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget, String str) {
         // reset the appropriate path - store preferred directory
         switch (browseTarget) {
         case 1:
@@ -447,6 +442,8 @@ public class ProjectPropertiesDialogController {
                 field.setForeground(java.awt.SystemColor.textText);
             }
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 

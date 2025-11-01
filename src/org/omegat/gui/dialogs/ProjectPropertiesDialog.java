@@ -655,6 +655,8 @@ public class ProjectPropertiesDialog extends JDialog {
         case EDIT_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
             break;
+        default:
+            throw new IllegalStateException("Unknown dialog type: " + dialogType);
         }
     }
 

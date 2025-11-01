@@ -39,7 +39,7 @@ public class ExternalServiceRetrieval {
         InputStream in = connector.fetchResource(projectId, resourceId);
         if (in != null) {
             Path dir = Paths.get(targetDir);
-            String fileName = (resourceId == null || resourceId.isEmpty()) ? "cms-resource.txt" : resourceId;
+            String fileName = (resourceId == null || resourceId.isEmpty()) ? "external-resource.txt" : resourceId;
             Path out = dir.resolve(fileName);
             Files.createDirectories(dir);
             try (in) {

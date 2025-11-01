@@ -41,8 +41,8 @@ import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
 /**
- * Persists CMS configuration to an XML file located under the user config
- * directory (cms.xml).
+ * Persists configuration to an XML file located under the user config
+ * directory (external_connectors.xml).
  */
 public final class ExternalConnectorXmlStore {
     private static final String FILE_NAME = "external_connectors.xml";

@@ -25,7 +25,7 @@
 package org.omegat.connectors.spi;
 
 /**
- * Exception thrown by CMS connectors for any operation failure.
+ * Exception thrown by connectors for any operation failure.
  */
 public class ConnectorException extends Exception {
     public ConnectorException() {

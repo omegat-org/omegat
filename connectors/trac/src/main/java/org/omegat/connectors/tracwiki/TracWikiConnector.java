@@ -25,7 +25,7 @@
 
 package org.omegat.connectors.tracwiki;
 
-import org.omegat.connectors.AbstractConnector;
+import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorCapability;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.core.Core;
@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TracWikiConnector extends AbstractConnector {
+public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     public static void loadPlugins() {
         Core.registerCmsConnectorClass(TracWikiConnector.class);

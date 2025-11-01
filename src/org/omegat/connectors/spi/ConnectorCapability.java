@@ -25,7 +25,7 @@
 package org.omegat.connectors.spi;
 
 /**
- * Capabilities supported by a CMS connector.
+ * Capabilities supported by a connector.
  */
 public enum ConnectorCapability {
     READ, WRITE, LIST_PROJECTS, SEARCH, OAUTH

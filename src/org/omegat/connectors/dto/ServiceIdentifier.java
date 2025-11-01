@@ -26,7 +26,7 @@
 package org.omegat.connectors.dto;
 
 /**
- * Common shape for CMS DTOs that have an id and an optional display name.
+ * Common shape for DTOs that have an id and an optional display name.
  */
 public interface ServiceIdentifier {
     String getId();

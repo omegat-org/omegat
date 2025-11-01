@@ -38,9 +38,9 @@ import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.util.HttpConnectionUtils;
 
 /**
- * Base class for CMS connectors with common helpers and defaults.
+ * Base class for External service connectors with common helpers and defaults.
  */
-public abstract class AbstractConnector implements ExternalServiceConnector {
+public abstract class AbstractExternalServiceConnector implements ExternalServiceConnector {
 
     @Override
     public String toString() {

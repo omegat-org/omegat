@@ -37,7 +37,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 
 /**
- * Registry/manager for CMS connectors.
+ * Registry/manager for connectors.
  */
 public class ExternalConnectors {
     private final Map<String, ExternalServiceConnector> connectorMap = new LinkedHashMap<>();

@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
-import org.omegat.connectors.AbstractConnector;
+import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.ConnectorCapability;
@@ -46,7 +46,7 @@ import org.omegat.util.WikiGet;
  * Connector for Wikimedia/MediaWiki content retrieval.
  */
 @SuppressWarnings("unused")
-public class WikimediaConnector extends AbstractConnector {
+public class WikimediaConnector extends AbstractExternalServiceConnector {
 
     public static void loadPlugins() {
         Core.registerCmsConnectorClass(WikimediaConnector.class);

@@ -32,7 +32,7 @@ import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
 
 /**
- * Service Provider Interface for External CMS connectors.
+ * Service Provider Interface for External service connectors.
  */
 public interface ExternalServiceConnector {
     String getId();

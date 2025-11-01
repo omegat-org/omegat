@@ -31,7 +31,7 @@ import java.util.Objects;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * DTO representing a configured CMS target (connector + project + optional
+ * DTO representing a configured target (connector + project + optional
  * URL/page).
  */
 public class ServiceTarget implements Serializable {

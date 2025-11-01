@@ -40,9 +40,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -100,7 +100,6 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  * @author Aaron Madlon-Kay
  * @author Yu Tang
  */
-@Deprecated
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
 
@@ -147,6 +146,7 @@ public class ProjectPropertiesDialog extends JDialog {
      *            {@link ProjectPropertiesDialog.Mode#RESOLVE_DIRS} or
      *            {@link ProjectPropertiesDialog.Mode#EDIT_PROJECT}).
      */
+    @SuppressWarnings("unused")
     public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
                                    Mode dialogTypeValue) {
         super(parent, true);
@@ -444,12 +444,8 @@ public class ProjectPropertiesDialog extends JDialog {
             bIC.add(Box.createRigidArea(new Dimension(5, 0)));
             bIC.add(variablesList);
             Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
-            insertButton.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString());
-                }
-            });
+            insertButton.addActionListener(e -> externalCommandTextArea.replaceSelection(
+                    Objects.requireNonNull(variablesList.getSelectedItem()).toString()));
             bIC.add(Box.createRigidArea(new Dimension(5, 0)));
             bIC.add(insertButton);
             externalCommandBox.add(bIC);

@@ -30,13 +30,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ServiceLoader;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -54,13 +55,10 @@ import org.omegat.gui.project.step.Step;
 import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
-class WizardProjectPropertiesDialog extends JDialog {
+class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
-    private final ProjectProperties props;
-    private final ProjectConfigMode mode;
-    private boolean cancelled = true;
 
-    private final java.util.List<org.omegat.gui.project.step.Step> steps = new java.util.ArrayList<>();
+    private final List<Step> steps = new ArrayList<>();
     private int current = 0;
 
     private final JPanel cards = new JPanel(new CardLayout());
@@ -72,17 +70,11 @@ class WizardProjectPropertiesDialog extends JDialog {
     private final JButton cancelBtn = new JButton();
 
     WizardProjectPropertiesDialog(Frame parent, ProjectProperties props, ProjectConfigMode mode) {
-        super(parent, true);
-        this.props = props;
-        this.mode = mode;
-        setTitle(OStrings.getString("PP_TITLE"));
-        Mnemonics.setLocalizedText(backBtn, OStrings.getString("BUTTON_BACK"));
-        Mnemonics.setLocalizedText(nextBtn, OStrings.getString("BUTTON_NEXT"));
-        Mnemonics.setLocalizedText(finishBtn, OStrings.getString("BUTTON_FINISH"));
-        Mnemonics.setLocalizedText(cancelBtn, OStrings.getString("BUTTON_CANCEL"));
+        super(parent, true, props, mode);
+        updateUIText();
+        setName(DIALOG_NAME);
         buildSteps();
         buildUI();
-        setName(DIALOG_NAME);
         pack();
         setMinimumSize(new Dimension(800, 500));
         setLocationRelativeTo(parent);
@@ -142,6 +134,10 @@ class WizardProjectPropertiesDialog extends JDialog {
         content.add(cards, BorderLayout.CENTER);
 
         JPanel nav = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        Mnemonics.setLocalizedText(backBtn, OStrings.getString("BUTTON_BACK"));
+        Mnemonics.setLocalizedText(nextBtn, OStrings.getString("BUTTON_NEXT"));
+        Mnemonics.setLocalizedText(finishBtn, OStrings.getString("BUTTON_FINISH"));
+        Mnemonics.setLocalizedText(cancelBtn, OStrings.getString("BUTTON_CANCEL"));
         backBtn.addActionListener(this::onBack);
         nextBtn.addActionListener(this::onNext);
         finishBtn.addActionListener(this::onFinish);
@@ -213,9 +209,6 @@ class WizardProjectPropertiesDialog extends JDialog {
         }
     }
 
-    boolean isCancelled() {
-        return cancelled;
-    }
     public static final String DIALOG_NAME = "wizaard_project_properties_dialog";
     public static final String OK_BUTTON_NAME = "wizard_project_properties_ok_button";
     public static final String CANCEL_BUTTON_NAME = "wizard_project_properties_cancel_button";

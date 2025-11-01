@@ -72,6 +72,8 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
 import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.gui.project.ProjectConfigUI;
 import org.omegat.gui.editor.SegmentExportImport;
@@ -139,8 +141,7 @@ public final class ProjectUICommands {
                 props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
                 final ProjectProperties newProps = ProjectConfigUI.showDialog(
-                        Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
-                        ProjectConfigMode.NEW_PROJECT);
+                        Core.getMainWindow().getApplicationFrame(), props, ProjectConfigMode.NEW_PROJECT);
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -149,7 +150,10 @@ public final class ProjectUICommands {
 
                 if (newProps == null) {
                     // user clicks on 'Cancel'
-                    dir.delete();
+                    try {
+                        Files.delete(dir.toPath());
+                    } catch (IOException ignored) {
+                    }
                     mainWindow.setCursor(oldCursor);
                     return null;
                 }
@@ -489,13 +493,12 @@ public final class ProjectUICommands {
                 props.autocreateDirectories();
             } else {
                 // not a team project
-                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                 props.autocreateDirectories();
                 while (!props.isProjectValid()) {
                     // something wrong with the project.
                     // We display open dialog to fix it.
                     props = ProjectConfigUI.showDialog(Core.getMainWindow().getApplicationFrame(), props,
-                            projectFile.getAbsolutePath(), ProjectConfigMode.RESOLVE_DIRS);
+                            ProjectConfigMode.RESOLVE_DIRS);
                     if (props == null) {
                         // user clicks on 'Cancel'
                         return;
@@ -866,9 +869,10 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
-        final ProjectProperties newProps = ProjectConfigUI.showDialog(frame,
-                Core.getProject().getProjectProperties(),
-                Core.getProject().getProjectProperties().getProjectName(), ProjectConfigMode.EDIT_PROJECT);
+        final ProjectProperties newProps =
+                ProjectPropertiesDialogController.showDialog(frame, Core.getProject().getProjectProperties(),
+                        Core.getProject().getProjectProperties().getProjectName(),
+                        ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
             return;
         }

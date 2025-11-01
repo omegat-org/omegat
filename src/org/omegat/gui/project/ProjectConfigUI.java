@@ -50,7 +50,7 @@ public final class ProjectConfigUI {
      * @return Updated properties, or null if cancelled
      */
     public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-            String projFileName, org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode dialogTypeValue) {
+            org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode dialogTypeValue) {
         final ProjectConfigMode mode;
         switch (dialogTypeValue) {
         case NEW_PROJECT:
@@ -65,32 +65,34 @@ public final class ProjectConfigUI {
         default:
             throw new IllegalArgumentException("Unexpected dialog type: " + dialogTypeValue);
         }
-        return showDialog(parent, projectProperties, projFileName, mode);
+        return showDialog(parent, projectProperties, mode);
     }
 
     /**
      * Show the new Project Properties UI.
      * <p>
-     * For NEW_PROJECT: shows a simplified dialog that focuses on core settings
-     * (languages). For EDIT_PROJECT and RESOLVE_DIRS: shows a wizard with steps
+     * For NEW_PROJECT: shows a wizard with steps
      * for Languages and Locations, plus optional contributions from extensions
      * via {@link ProjectPropertiesContributor}.
+     * For RESOLVE_DIRS: shows a wizard with a single file step.
      *
      * @param parent
      *            Parent frame
      * @param projectProperties
      *            properties instance to read/update
-     * @param projFileName
-     *            project file name (currently unused, reserved for future)
-     * @param dialogTypeValue
-     *            legacy dialog mode
-     * @return Updated properties, or null if cancelled
+     * @param mode
+     *            dialog mode
+     * @return Updated properties, or null if canceled
      */
     public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-        String projFileName, ProjectConfigMode dialogTypeValue) {
-        WizardProjectPropertiesDialog dlg = new WizardProjectPropertiesDialog(parent, projectProperties,
-                dialogTypeValue);
-        dlg.setVisible(true);
+        ProjectConfigMode mode) {
+        AbstractProjectPropertiesDialog dlg;
+        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
+            dlg = new SingleProjectPropertiesDialog(parent, projectProperties, mode);
+        } else {
+            dlg = new WizardProjectPropertiesDialog(parent, projectProperties, mode);
+        }
+        dlg.showDialog();
         return dlg.isCancelled() ? null : projectProperties;
     }
 }

@@ -35,8 +35,12 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -64,11 +68,6 @@ import org.omegat.util.gui.StaticUIUtils;
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
 
-/**
- * Deprecated: Use the modular controllers under org.omegat.gui.project, e.g.,
- * ProjectConfigUI.showDialog(...), which provides simplified and wizard UIs.
- */
-@Deprecated
 public class ProjectPropertiesDialogController {
 
     private final ProjectProperties projectProperties;
@@ -452,7 +451,8 @@ public class ProjectPropertiesDialogController {
     }
 
     private void doOK() {
-        if (!Language.verifySingleLangCode(dialog.sourceLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(
+                Objects.requireNonNull(dialog.sourceLocaleField.getSelectedItem()).toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -461,7 +461,8 @@ public class ProjectPropertiesDialogController {
             return;
         }
         projectProperties.setSourceLanguage(dialog.sourceLocaleField.getSelectedItem().toString());
-        if (!Language.verifySingleLangCode(dialog.targetLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(
+                Objects.requireNonNull(dialog.targetLocaleField.getSelectedItem()).toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -591,10 +592,13 @@ public class ProjectPropertiesDialogController {
     private void doCancel() {
         // delete project dir in case of a new project
         // to fix bug 1476591 the project root is created before everything else
-        // and if the new project is cancelled, the project root still exists,
+        // and if the new project is canceled, the project root still exists,
         // so it must be deleted
         if (isModeNewProject()) {
-            new File(projectProperties.getProjectRoot()).delete();
+            try {
+                Files.deleteIfExists(Path.of(projectProperties.getProjectRoot()));
+            } catch (IOException ignored) {
+            }
         }
         dialogCancelled = true;
         dialog.setVisible(false);
@@ -602,6 +606,16 @@ public class ProjectPropertiesDialogController {
 
     public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
-        return ProjectConfigUI.showDialog(parent, projectProperties, projFileName, dialogTypeValue);
+        if (dialogTypeValue == null) {
+            throw new RuntimeException("Unexpected null argument");
+        }
+        if (dialogTypeValue == ProjectPropertiesDialog.Mode.NEW_PROJECT) {
+            return ProjectConfigUI.showDialog(parent, projectProperties, dialogTypeValue);
+        }
+        ProjectPropertiesDialog dialog = new ProjectPropertiesDialog(parent, projectProperties, projFileName,
+                dialogTypeValue);
+        dialog.setVisible(true);
+        dialog.dispose();
+        return dialog.getResult();
     }
 }

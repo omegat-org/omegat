@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.connectors.wikimedia;
+package org.omegat.connectors.wiki.wikimedia;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -35,18 +35,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
-import org.omegat.cms.AbstractCmsConnector;
-import org.omegat.cms.dto.CmsProject;
-import org.omegat.cms.dto.CmsResource;
-import org.omegat.cms.spi.CmsCapability;
-import org.omegat.cms.spi.CmsException;
+import org.omegat.connectors.AbstractConnector;
+import org.omegat.connectors.dto.ExternalProject;
+import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.spi.ConnectorCapability;
+import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.util.WikiGet;
 
 /**
  * Connector for Wikimedia/MediaWiki content retrieval.
  */
 @SuppressWarnings("unused")
-public class WikimediaConnector extends AbstractCmsConnector {
+public class WikimediaConnector extends AbstractConnector {
 
     public static void loadPlugins() {
         Core.registerCmsConnectorClass(WikimediaConnector.class);
@@ -72,8 +72,8 @@ public class WikimediaConnector extends AbstractCmsConnector {
     }
 
     @Override
-    public Set<CmsCapability> getCapabilities() {
-        return Set.of(CmsCapability.READ, CmsCapability.SEARCH);
+    public Set<ConnectorCapability> getCapabilities() {
+        return Set.of(ConnectorCapability.READ, ConnectorCapability.SEARCH);
     }
 
     @Override
@@ -82,26 +82,26 @@ public class WikimediaConnector extends AbstractCmsConnector {
     }
 
     @Override
-    public List<CmsProject> listProjects() throws CmsException {
+    public List<ExternalProject> listProjects() throws ConnectorException {
         // MediaWiki instance may not have projects; return single pseudo
         // project from base URL if provided
-        return List.of(new CmsProject(CONFIG.get("Wikipedia"), "Wikimedia"));
+        return List.of(new ExternalProject(CONFIG.get("Wikipedia"), "Wikimedia"));
     }
 
     @Override
-    public List<CmsResource> listResources(String projectId) throws CmsException {
+    public List<ExternalResource> listResources(String projectId) throws ConnectorException {
         // Not implemented: would require API query; return empty
         return Collections.emptyList();
     }
 
     @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws CmsException {
+    public InputStream fetchResource(String projectId, String resourceId) throws ConnectorException {
         String joined = getResourceUrl(CONFIG.get(projectId) + "/index.php?title=" + resourceId);
         String page = httpGet(joined);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 
-    public InputStream fetchResource(String remoteUrl) throws CmsException {
+    public InputStream fetchResource(String remoteUrl) throws ConnectorException {
         String page = httpGet(getResourceUrl(remoteUrl));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }

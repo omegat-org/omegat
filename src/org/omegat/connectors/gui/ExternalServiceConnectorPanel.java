@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.gui;
+package org.omegat.connectors.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -44,25 +44,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import org.omegat.cms.dto.CmsResource;
-import org.omegat.cms.spi.CmsConnector;
+import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.core.data.CoreState;
-import org.omegat.cms.dto.CmsTarget;
-import org.omegat.cms.config.CmsXmlStore;
+import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.util.OStrings;
 
 /**
  * Modal panel for External CMS import. Updated to use configured targets and
  * provide a page search UI.
  */
-public class CmsPanel extends JPanel {
+public class ExternalServiceConnectorPanel extends JPanel {
 
-    private final JComboBox<CmsTarget> targetCombo;
+    private final JComboBox<ServiceTarget> targetCombo;
     private final JTextField pageField;
     private final JTextField urlField;
     private final JButton launchButton;
 
-    public CmsPanel() {
+    public ExternalServiceConnectorPanel() {
         super(new BorderLayout());
         JPanel form = new JPanel(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
@@ -127,16 +127,16 @@ public class CmsPanel extends JPanel {
     }
 
     private void loadTargetsFromPrefs() {
-        List<CmsTarget> targets = CmsXmlStore.loadTargets();
-        targetCombo.setModel(new DefaultComboBoxModel<>(targets.toArray(new CmsTarget[0])));
+        List<ServiceTarget> targets = ExternalConnectorXmlStore.loadTargets();
+        targetCombo.setModel(new DefaultComboBoxModel<>(targets.toArray(new ServiceTarget[0])));
         targetCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                     boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected,
                         cellHasFocus);
-                if (value instanceof CmsTarget) {
-                    CmsTarget t = (CmsTarget) value;
+                if (value instanceof ServiceTarget) {
+                    ServiceTarget t = (ServiceTarget) value;
                     setText(t.getProjectId() + " (" + t.getConnectorId() + ")");
                 }
                 return c;
@@ -148,23 +148,23 @@ public class CmsPanel extends JPanel {
     }
 
     private void openSearchDialog() {
-        CmsTarget target = (CmsTarget) targetCombo.getSelectedItem();
+        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
         if (target == null) {
             return;
         }
-        CmsConnector connector = CoreState.getInstance().getCmsConnectors().get(target.getConnectorId());
+        ExternalServiceConnector connector = CoreState.getInstance().getCmsConnectors().get(target.getConnectorId());
         if (connector == null) {
             return;
         }
         try {
-            List<CmsResource> resources = connector.listResources(target.getProjectId());
+            List<ExternalResource> resources = connector.listResources(target.getProjectId());
             JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_CMS_SELECT_PAGE"), true);
             JTextField filter = new JTextField(20);
-            javax.swing.DefaultListModel<CmsResource> listModel = new javax.swing.DefaultListModel<>();
-            for (CmsResource r : resources) {
+            javax.swing.DefaultListModel<ExternalResource> listModel = new javax.swing.DefaultListModel<>();
+            for (ExternalResource r : resources) {
                 listModel.addElement(r);
             }
-            JList<CmsResource> list = new JList<>(listModel);
+            JList<ExternalResource> list = new JList<>(listModel);
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JPanel top = new JPanel(new BorderLayout());
             top.add(new JLabel("Filter:"), BorderLayout.WEST);
@@ -186,7 +186,7 @@ public class CmsPanel extends JPanel {
                 private void refilter() {
                     String q = filter.getText().toLowerCase(Locale.ROOT);
                     listModel.clear();
-                    for (CmsResource r : resources) {
+                    for (ExternalResource r : resources) {
                         String nm = r.getName() != null ? r.getName() : r.getId();
                         if (nm.toLowerCase(Locale.ROOT).contains(q)) {
                             listModel.addElement(r);
@@ -208,7 +208,7 @@ public class CmsPanel extends JPanel {
             });
 
             ok.addActionListener(e -> {
-                CmsResource sel = list.getSelectedValue();
+                ExternalResource sel = list.getSelectedValue();
                 if (sel != null) {
                     pageField.setText(sel.getId());
                 }
@@ -229,8 +229,8 @@ public class CmsPanel extends JPanel {
         return launchButton;
     }
 
-    public CmsConnector getSelectedConnector() {
-        CmsTarget target = (CmsTarget) targetCombo.getSelectedItem();
+    public ExternalServiceConnector getSelectedConnector() {
+        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
         if (target == null) {
             return null;
         }
@@ -238,7 +238,7 @@ public class CmsPanel extends JPanel {
     }
 
     public String getProjectId() {
-        CmsTarget target = (CmsTarget) targetCombo.getSelectedItem();
+        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
         return target != null ? target.getProjectId() : "";
     }
 

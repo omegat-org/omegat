@@ -22,58 +22,38 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.connectors.spi;
 
-package org.omegat.cms.dto;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Set;
 
-import java.io.Serializable;
-import java.util.Objects;
+import org.omegat.connectors.dto.ExternalProject;
+import org.omegat.connectors.dto.ExternalResource;
 
-public class CmsResource implements CmsIdentified, Serializable {
-    private static final long serialVersionUID = 1L;
+/**
+ * Service Provider Interface for External CMS connectors.
+ */
+public interface ExternalServiceConnector {
+    String getId();
 
-    private final String id;
-    private final String name;
-    private final String path;
+    String getName();
 
-    public CmsResource(String id, String name, String path) {
-        this.id = id;
-        this.name = name;
-        this.path = path;
-    }
+    Set<ConnectorCapability> getCapabilities();
 
-    @Override
-    public String getId() {
-        return id;
-    }
+    String getPreferenceName();
 
-    @Override
-    public String getName() {
-        return name;
-    }
+    List<ExternalProject> listProjects() throws ConnectorException;
 
-    public String getPath() {
-        return path;
-    }
+    List<ExternalResource> listResources(String projectId) throws ConnectorException;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CmsResource that = (CmsResource) o;
-        return Objects.equals(id, that.id);
-    }
+    InputStream fetchResource(String projectId, String resourceId) throws ConnectorException;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    InputStream fetchResource(String url) throws ConnectorException;
 
-    @Override
-    public String toString() {
-        return name != null ? name : id;
+    void pushTranslation(String projectId, String resourceId, InputStream translated) throws ConnectorException;
+
+    default boolean supports(ConnectorCapability c) {
+        return getCapabilities() != null && getCapabilities().contains(c);
     }
 }

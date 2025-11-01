@@ -23,10 +23,10 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.gui;
+package org.omegat.connectors.gui;
 
-import org.omegat.cms.actions.CmsRetrieval;
-import org.omegat.cms.spi.CmsConnector;
+import org.omegat.connectors.actions.ExternalServiceRetrieval;
+import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.core.Core;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
@@ -35,13 +35,13 @@ import org.omegat.util.OStrings;
 import javax.swing.JDialog;
 import java.awt.Frame;
 
-public class CmsPanelController {
+public class ExternalServiceConnectorPanelController {
 
-    private final CmsRetrieval cmsRetrieval = new CmsRetrieval();
+    private final ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();
 
     public void show() {
         Frame owner = Core.getMainWindow().getApplicationFrame();
-        CmsPanel panel = new CmsPanel();
+        ExternalServiceConnectorPanel panel = new ExternalServiceConnectorPanel();
         JDialog dialog = new JDialog(owner, OStrings.getString("TF_CMS_IMPORT_TITLE"), true);
         dialog.getContentPane().add(panel);
         dialog.pack();
@@ -50,17 +50,17 @@ public class CmsPanelController {
         panel.getLaunchButton().addActionListener(e -> {
             String url = panel.getCustomUrl();
             try {
-                CmsConnector connector = panel.getSelectedConnector();
+                ExternalServiceConnector connector = panel.getSelectedConnector();
                 if (connector == null) {
                     return;
                 }
                 String projectId = panel.getProjectId();
                 String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
                 if (url != null && !url.trim().isEmpty()) {
-                    cmsRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
+                    externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
                 } else {
                     String resourceId = panel.getResourceId();
-                    cmsRetrieval.retrieveResource(connector, projectId, resourceId, srcRoot);
+                    externalServiceRetrieval.retrieveResource(connector, projectId, resourceId, srcRoot);
                 }
                 ProjectUICommands.projectReload();
             } catch (Exception ex) {

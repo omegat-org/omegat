@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms;
+package org.omegat.connectors;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,16 +31,16 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import org.omegat.cms.dto.CmsProject;
-import org.omegat.cms.dto.CmsResource;
-import org.omegat.cms.spi.CmsConnector;
-import org.omegat.cms.spi.CmsException;
+import org.omegat.connectors.dto.ExternalProject;
+import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Base class for CMS connectors with common helpers and defaults.
  */
-public abstract class AbstractCmsConnector implements CmsConnector {
+public abstract class AbstractConnector implements ExternalServiceConnector {
 
     @Override
     public String toString() {
@@ -51,36 +51,36 @@ public abstract class AbstractCmsConnector implements CmsConnector {
     public abstract String getPreferenceName();
 
     @Override
-    public List<CmsProject> listProjects() throws CmsException {
+    public List<ExternalProject> listProjects() throws ConnectorException {
         return Collections.emptyList();
     }
 
     @Override
-    public List<CmsResource> listResources(String projectId) throws CmsException {
+    public List<ExternalResource> listResources(String projectId) throws ConnectorException {
         return Collections.emptyList();
     }
 
     @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws CmsException {
-        throw new CmsException("Fetch not implemented");
+    public InputStream fetchResource(String projectId, String resourceId) throws ConnectorException {
+        throw new ConnectorException("Fetch not implemented");
     }
 
     @Override
-    public InputStream fetchResource(String url) throws CmsException {
-        throw new CmsException("Fetch not implemented");
+    public InputStream fetchResource(String url) throws ConnectorException {
+        throw new ConnectorException("Fetch not implemented");
     }
 
     @Override
     public void pushTranslation(String projectId, String resourceId, InputStream translated)
-            throws CmsException {
-        throw new CmsException("Push not supported");
+            throws ConnectorException {
+        throw new ConnectorException("Push not supported");
     }
 
-    protected String httpGet(String url) throws CmsException {
+    protected String httpGet(String url) throws ConnectorException {
         try {
             return HttpConnectionUtils.getURL(new URL(url));
         } catch (IOException e) {
-            throw new CmsException("GET failed: " + url, e);
+            throw new ConnectorException("GET failed: " + url, e);
         }
     }
 }

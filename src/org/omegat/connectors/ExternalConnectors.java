@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms;
+package org.omegat.connectors;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -32,20 +32,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.omegat.cms.spi.CmsConnector;
+import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 
 /**
  * Registry/manager for CMS connectors.
  */
-public class CmsConnectors {
-    private final Map<String, CmsConnector> connectorMap = new LinkedHashMap<>();
+public class ExternalConnectors {
+    private final Map<String, ExternalServiceConnector> connectorMap = new LinkedHashMap<>();
 
-    public CmsConnectors() {
+    public ExternalConnectors() {
         for (Class<?> clazz : PluginUtils.getCMSConnectorClasses()) {
             try {
-                register((CmsConnector) clazz.getDeclaredConstructor().newInstance());
+                register((ExternalServiceConnector) clazz.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | NoSuchMethodException e) {
                 Log.log(e);
@@ -53,18 +53,18 @@ public class CmsConnectors {
         }
     }
 
-    private synchronized void register(CmsConnector connector) {
+    private synchronized void register(ExternalServiceConnector connector) {
         if (connector == null) {
             return;
         }
         connectorMap.put(connector.getId(), connector);
     }
 
-    public synchronized CmsConnector get(String id) {
+    public synchronized ExternalServiceConnector get(String id) {
         return connectorMap.get(id);
     }
 
-    public synchronized List<CmsConnector> getAll() {
+    public synchronized List<ExternalServiceConnector> getAll() {
         return Collections.unmodifiableList(new ArrayList<>(connectorMap.values()));
     }
 }

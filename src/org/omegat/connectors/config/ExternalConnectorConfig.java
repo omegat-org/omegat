@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.config;
+package org.omegat.connectors.config;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,13 +34,13 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import org.omegat.cms.dto.CmsTarget;
+import org.omegat.connectors.dto.ServiceTarget;
 
 /**
  * XML root for CMS integration configuration persisted in cms.xml.
  */
 @JacksonXmlRootElement(localName = "cms")
-public class CmsConfig implements Serializable {
+public class ExternalConnectorConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JacksonXmlProperty(localName = "version")
@@ -49,7 +49,7 @@ public class CmsConfig implements Serializable {
 
     @JacksonXmlProperty(localName = "target")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<CmsTarget> targets = new ArrayList<>();
+    private List<ServiceTarget> targets = new ArrayList<>();
 
     public String getVersion() {
         return version;
@@ -59,11 +59,11 @@ public class CmsConfig implements Serializable {
         this.version = version;
     }
 
-    public List<CmsTarget> getTargets() {
+    public List<ServiceTarget> getTargets() {
         return targets;
     }
 
-    public void setTargets(List<CmsTarget> targets) {
+    public void setTargets(List<ServiceTarget> targets) {
         this.targets = targets != null ? targets : new ArrayList<>();
     }
 }

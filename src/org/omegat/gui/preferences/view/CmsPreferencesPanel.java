@@ -41,9 +41,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.cms.spi.CmsConnector;
-import org.omegat.cms.dto.CmsTarget;
-import org.omegat.cms.config.CmsXmlStore;
+import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.core.data.CoreState;
 
 /**
@@ -74,11 +74,11 @@ public class CmsPreferencesPanel extends JPanel {
         removeButton.addActionListener(e -> onRemove());
     }
 
-    public List<CmsTarget> getTargets() {
+    public List<ServiceTarget> getTargets() {
         return new ArrayList<>(model.items);
     }
 
-    public void setTargets(List<CmsTarget> items) {
+    public void setTargets(List<ServiceTarget> items) {
         model.items.clear();
         if (items != null) {
             model.items.addAll(items);
@@ -87,17 +87,17 @@ public class CmsPreferencesPanel extends JPanel {
     }
 
     public void loadFromPrefs() {
-        setTargets(CmsXmlStore.loadTargets());
+        setTargets(ExternalConnectorXmlStore.loadTargets());
     }
 
     public void saveToPrefs() {
         // Persist to XML store.
-        CmsXmlStore.saveTargets(getTargets());
+        ExternalConnectorXmlStore.saveTargets(getTargets());
     }
 
     private void onAdd() {
         CmsTargetEditor dlg = new CmsTargetEditor(null);
-        CmsTarget t = dlg.showDialog();
+        ServiceTarget t = dlg.showDialog();
         if (t != null) {
             model.items.add(t);
             model.fireTableDataChanged();
@@ -109,9 +109,9 @@ public class CmsPreferencesPanel extends JPanel {
         if (idx < 0) {
             return;
         }
-        CmsTarget src = model.items.get(idx);
+        ServiceTarget src = model.items.get(idx);
         CmsTargetEditor dlg = new CmsTargetEditor(src);
-        CmsTarget t = dlg.showDialog();
+        ServiceTarget t = dlg.showDialog();
         if (t != null) {
             model.items.set(idx, t);
             model.fireTableRowsUpdated(idx, idx);
@@ -128,7 +128,7 @@ public class CmsPreferencesPanel extends JPanel {
 
     static class TargetsTableModel extends AbstractTableModel {
         final String[] COLS = { "Type", "Project", "Base URL", "Default Page" };
-        final List<CmsTarget> items = new ArrayList<>();
+        final List<ServiceTarget> items = new ArrayList<>();
 
         @Override
         public int getRowCount() {
@@ -147,7 +147,7 @@ public class CmsPreferencesPanel extends JPanel {
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            CmsTarget t = items.get(rowIndex);
+            ServiceTarget t = items.get(rowIndex);
             switch (columnIndex) {
             case 0:
                 return t.getConnectorId();
@@ -166,13 +166,13 @@ public class CmsPreferencesPanel extends JPanel {
     /** Simple modal editor dialog for a CMS target row. */
     class CmsTargetEditor {
         private final JDialog dialog;
-        private final JComboBox<CmsConnector> typeCombo;
+        private final JComboBox<ExternalServiceConnector> typeCombo;
         private final JTextField projectField;
         private final JTextField baseUrlField;
         private final JTextField defaultPageField;
-        private CmsTarget result;
+        private ServiceTarget result;
 
-        CmsTargetEditor(CmsTarget initial) {
+        CmsTargetEditor(ServiceTarget initial) {
             dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(CmsPreferencesPanel.this),
                     "Edit CMS Target", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
@@ -183,8 +183,8 @@ public class CmsPreferencesPanel extends JPanel {
             int row = 0;
 
             typeCombo = new JComboBox<>();
-            List<CmsConnector> connectors = CoreState.getInstance().getCmsConnectors().getAll();
-            for (CmsConnector c : connectors) {
+            List<ExternalServiceConnector> connectors = CoreState.getInstance().getCmsConnectors().getAll();
+            for (ExternalServiceConnector c : connectors) {
                 typeCombo.addItem(c);
             }
 
@@ -239,11 +239,11 @@ public class CmsPreferencesPanel extends JPanel {
             buttons.add(cancel);
 
             ok.addActionListener(e -> {
-                CmsConnector sel = (CmsConnector) typeCombo.getSelectedItem();
+                ExternalServiceConnector sel = (ExternalServiceConnector) typeCombo.getSelectedItem();
                 if (sel == null) {
                     return;
                 }
-                result = new CmsTarget(sel.getId(), projectField.getText().trim(),
+                result = new ServiceTarget(sel.getId(), projectField.getText().trim(),
                         emptyToNull(baseUrlField.getText().trim()),
                         emptyToNull(defaultPageField.getText().trim()));
                 dialog.dispose();
@@ -263,7 +263,7 @@ public class CmsPreferencesPanel extends JPanel {
             if (initial != null) {
                 // Preselect connector by id
                 for (int i = 0; i < typeCombo.getItemCount(); i++) {
-                    CmsConnector c = typeCombo.getItemAt(i);
+                    ExternalServiceConnector c = typeCombo.getItemAt(i);
                     if (Objects.equals(c.getId(), initial.getConnectorId())) {
                         typeCombo.setSelectedIndex(i);
                         break;
@@ -279,7 +279,7 @@ public class CmsPreferencesPanel extends JPanel {
             return s == null || s.isEmpty() ? null : s;
         }
 
-        CmsTarget showDialog() {
+        ServiceTarget showDialog() {
             dialog.setVisible(true);
             return result;
         }

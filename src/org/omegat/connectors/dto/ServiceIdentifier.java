@@ -23,51 +23,16 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.dto;
+package org.omegat.connectors.dto;
 
-import java.io.Serializable;
-import java.util.Objects;
+/**
+ * Common shape for CMS DTOs that have an id and an optional display name.
+ */
+public interface ServiceIdentifier {
+    String getId();
 
-public class CmsProject implements CmsIdentified, Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private final String id;
-    private final String name;
-
-    public CmsProject(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CmsProject that = (CmsProject) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return name != null ? name : id;
-    }
+    /**
+     * Optional human-friendly name. May return null.
+     */
+    String getName();
 }

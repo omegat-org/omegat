@@ -22,38 +22,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.cms.spi;
-
-import java.io.InputStream;
-import java.util.List;
-import java.util.Set;
-
-import org.omegat.cms.dto.CmsProject;
-import org.omegat.cms.dto.CmsResource;
+package org.omegat.connectors.spi;
 
 /**
- * Service Provider Interface for External CMS connectors.
+ * Capabilities supported by a CMS connector.
  */
-public interface CmsConnector {
-    String getId();
-
-    String getName();
-
-    Set<CmsCapability> getCapabilities();
-
-    String getPreferenceName();
-
-    List<CmsProject> listProjects() throws CmsException;
-
-    List<CmsResource> listResources(String projectId) throws CmsException;
-
-    InputStream fetchResource(String projectId, String resourceId) throws CmsException;
-
-    InputStream fetchResource(String url) throws CmsException;
-
-    void pushTranslation(String projectId, String resourceId, InputStream translated) throws CmsException;
-
-    default boolean supports(CmsCapability c) {
-        return getCapabilities() != null && getCapabilities().contains(c);
-    }
+public enum ConnectorCapability {
+    READ, WRITE, LIST_PROJECTS, SEARCH, OAUTH
 }

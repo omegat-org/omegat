@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.dto;
+package org.omegat.connectors.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
  * DTO representing a configured CMS target (connector + project + optional
  * URL/page).
  */
-public class CmsTarget implements Serializable {
+public class ServiceTarget implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String connectorId;
@@ -43,11 +43,11 @@ public class CmsTarget implements Serializable {
     private @Nullable String defaultPage; // optional default page
 
     @SuppressWarnings("unused")
-    public CmsTarget() {
+    public ServiceTarget() {
     }
 
-    public CmsTarget(String connectorId, String projectId, @Nullable String baseUrl,
-            @Nullable String defaultPage) {
+    public ServiceTarget(String connectorId, String projectId, @Nullable String baseUrl,
+                         @Nullable String defaultPage) {
         this.connectorId = connectorId != null ? connectorId : "";
         this.projectId = projectId != null ? projectId : "";
         this.baseUrl = baseUrl;
@@ -75,10 +75,10 @@ public class CmsTarget implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof CmsTarget)) {
+        if (!(o instanceof ServiceTarget)) {
             return false;
         }
-        CmsTarget that = (CmsTarget) o;
+        ServiceTarget that = (ServiceTarget) o;
         return Objects.equals(connectorId, that.connectorId) && Objects.equals(projectId, that.projectId)
                 && Objects.equals(baseUrl, that.baseUrl) && Objects.equals(defaultPage, that.defaultPage);
     }

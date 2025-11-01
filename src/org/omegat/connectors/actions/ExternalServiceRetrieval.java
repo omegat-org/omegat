@@ -23,9 +23,9 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.cms.actions;
+package org.omegat.connectors.actions;
 
-import org.omegat.cms.spi.CmsConnector;
+import org.omegat.connectors.spi.ExternalServiceConnector;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -33,9 +33,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class CmsRetrieval {
+public class ExternalServiceRetrieval {
 
-    public void retrieveResource(CmsConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
+    public void retrieveResource(ExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(projectId, resourceId);
         if (in != null) {
             Path dir = Paths.get(targetDir);
@@ -48,7 +48,7 @@ public class CmsRetrieval {
         }
     }
 
-    public void retrieveResourceFromUrl(CmsConnector connector, String url, String targetDir) throws Exception {
+    public void retrieveResourceFromUrl(ExternalServiceConnector connector, String url, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(url);
         if (in != null) {
             Path dir = Paths.get(targetDir);

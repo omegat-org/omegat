@@ -22,25 +22,25 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.cms.spi;
+package org.omegat.connectors.spi;
 
 /**
  * Exception thrown by CMS connectors for any operation failure.
  */
-public class CmsException extends Exception {
-    public CmsException() {
+public class ConnectorException extends Exception {
+    public ConnectorException() {
         super();
     }
 
-    public CmsException(String message) {
+    public ConnectorException(String message) {
         super(message);
     }
 
-    public CmsException(String message, Throwable cause) {
+    public ConnectorException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public CmsException(Throwable cause) {
+    public ConnectorException(Throwable cause) {
         super(cause);
     }
 }

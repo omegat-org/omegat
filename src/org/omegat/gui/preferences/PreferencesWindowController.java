@@ -106,6 +106,7 @@ import org.omegat.gui.preferences.view.AppearanceController;
 import org.omegat.gui.preferences.view.AutoCompleterController;
 import org.omegat.gui.preferences.view.AutotextAutoCompleterOptionsController;
 import org.omegat.gui.preferences.view.CharTableAutoCompleterOptionsController;
+import org.omegat.gui.preferences.view.CmsPreferencesController;
 import org.omegat.gui.preferences.view.CustomColorSelectionController;
 import org.omegat.gui.preferences.view.DictionaryPreferencesController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
@@ -378,6 +379,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));
         root.add(new HideableNode(new TagProcessingOptionsController()));
+        root.add(new HideableNode(new CmsPreferencesController()));
         HideableNode teamNode = new HideableNode(new TeamOptionsController());
         teamNode.add(new HideableNode(new RepositoriesCredentialsController()));
         root.add(teamNode);

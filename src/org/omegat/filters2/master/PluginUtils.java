@@ -667,6 +667,10 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<Class<?>> getCMSConnectorClasses() {
+        return CMS_CONNECTOR_CLASSES;
+    }
+
     /**
      * Retrieves the {@link ClassLoader} associated with the specified
      * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the
@@ -697,6 +701,8 @@ public final class PluginUtils {
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+
+    private static final List<Class<?>> CMS_CONNECTOR_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.

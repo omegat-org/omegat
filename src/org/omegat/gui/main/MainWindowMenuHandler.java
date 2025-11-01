@@ -47,6 +47,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import org.omegat.connectors.gui.ExternalServiceConnectorPanelController;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -139,8 +140,9 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         ProjectUICommands.doPromptImportSourceFiles();
     }
 
-    public void projectWikiImportMenuItemActionPerformed() {
-        ProjectUICommands.doWikiImport();
+    public void projectCmsImportMenuItemActionPerformed() {
+        ExternalServiceConnectorPanelController controller = new ExternalServiceConnectorPanelController();
+        controller.show();
     }
 
     public void projectReloadMenuItemActionPerformed() {

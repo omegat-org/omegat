@@ -33,7 +33,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.gui.ExternalFinderPreferencesController;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 
 /**
@@ -41,13 +40,11 @@ import org.omegat.util.OStrings;
  */
 public class ExternalFinderStep implements Step {
 
-    private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel(new BorderLayout());
 
     private ExternalFinderPreferencesController controller;
 
-    public ExternalFinderStep(ProjectConfigMode mode) {
-        this.mode = mode;
+    public ExternalFinderStep() {
     }
 
     @Override
@@ -68,11 +65,6 @@ public class ExternalFinderStep implements Step {
                 cfg == null ? ExternalFinderConfiguration.empty() : cfg);
         panel.removeAll();
         panel.add(controller.getGui(), BorderLayout.CENTER);
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            for (java.awt.Component c : panel.getComponents()) {
-                c.setEnabled(false);
-            }
-        }
     }
 
     @Override

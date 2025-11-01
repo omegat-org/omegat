@@ -34,7 +34,6 @@ import javax.swing.border.EmptyBorder;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -45,15 +44,13 @@ import org.omegat.util.Preferences;
  */
 public class SegmentationStep implements Step {
 
-    private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel(new BorderLayout());
 
     private @Nullable SegmentationCustomizerController controller;
     private @Nullable JLabel disabledLabel;
     private @Nullable JComponent controllerGui;
 
-    public SegmentationStep(ProjectConfigMode mode) {
-        this.mode = mode;
+    public SegmentationStep() {
     }
 
     @Override
@@ -81,12 +78,6 @@ public class SegmentationStep implements Step {
         panel.add(disabledLabel, BorderLayout.NORTH);
         panel.add(controllerGui, BorderLayout.CENTER);
         disabledLabel.setVisible(false); // default hidden until wizard toggles
-
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            // Disable interaction in resolve mode
-            controllerGui.setEnabled(false);
-            disabledLabel.setVisible(false);
-        }
     }
 
     @Override
@@ -116,7 +107,7 @@ public class SegmentationStep implements Step {
             controllerGui.setEnabled(enabled);
         }
         if (disabledLabel != null) {
-            disabledLabel.setVisible(!enabled && mode != ProjectConfigMode.RESOLVE_DIRS);
+            disabledLabel.setVisible(!enabled);
         }
     }
 }

@@ -122,18 +122,18 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         // New step to select source files and copy them into the project source folder after finishing
         steps.add(new SourceFilesStep());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            steps.add(new ExternalCommandStep(mode));
+            steps.add(new ExternalCommandStep());
         }
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
             steps.add(new ContributorStep(c));
         }
-        filterDefinitionStep = new FilterDefinitionStep(mode);
+        filterDefinitionStep = new FilterDefinitionStep();
         steps.add(filterDefinitionStep);
-        steps.add(new RepositoriesMappingStep(mode));
-        segmentationStep = new SegmentationStep(mode);
+        steps.add(new RepositoriesMappingStep());
+        segmentationStep = new SegmentationStep();
         steps.add(segmentationStep);
-        steps.add(new ExternalFinderStep(mode));
+        steps.add(new ExternalFinderStep());
     }
 
     private void initializeRemainingSteps(ProjectProperties loadProps) {

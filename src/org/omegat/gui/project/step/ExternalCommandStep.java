@@ -43,7 +43,6 @@ import javax.swing.border.EtchedBorder;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.openide.awt.Mnemonics;
@@ -53,7 +52,6 @@ import org.openide.awt.Mnemonics;
  * This step is only included when Preferences.ALLOW_PROJECT_EXTERN_CMD is true.
  */
 public class ExternalCommandStep implements Step {
-    private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
 
     private final JTextArea externalCommandTextArea = new JTextArea(3, 40);
@@ -61,8 +59,7 @@ public class ExternalCommandStep implements Step {
     private final JLabel variablesLabel = new JLabel();
     private JComboBox<String> variablesList = new JComboBox<>();
 
-    public ExternalCommandStep(ProjectConfigMode mode) {
-        this.mode = mode;
+    public ExternalCommandStep() {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(createExternalCommandBox());
         panel.add(Box.createVerticalGlue());

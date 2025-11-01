@@ -48,7 +48,6 @@ import javax.swing.table.TableColumnModel;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
@@ -64,8 +63,6 @@ import gen.core.project.RepositoryMapping;
  * in an embedded panel suitable for the wizard.
  */
 public class RepositoriesMappingStep implements Step {
-
-    private final ProjectConfigMode mode;
 
     private final JPanel panel = new JPanel(new BorderLayout());
 
@@ -83,8 +80,7 @@ public class RepositoriesMappingStep implements Step {
     private AbstractTableModel modelRepo;
     private AbstractTableModel modelMapping;
 
-    public RepositoriesMappingStep(ProjectConfigMode mode) {
-        this.mode = mode;
+    public RepositoriesMappingStep() {
         buildUI();
     }
 
@@ -106,9 +102,6 @@ public class RepositoriesMappingStep implements Step {
         putData(p.getRepositories());
         initTableModels();
         updateState();
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            setEnabledRecursive(panel, false);
-        }
     }
 
     @Override
@@ -509,17 +502,6 @@ public class RepositoriesMappingStep implements Step {
 
     private String normalizeMapping(String mapping) {
         return StringUtil.isEmpty(mapping) ? "/" : mapping;
-    }
-
-    private static void setEnabledRecursive(JComponent comp, boolean enabled) {
-        comp.setEnabled(enabled);
-        for (java.awt.Component c : comp.getComponents()) {
-            if (c instanceof JComponent) {
-                setEnabledRecursive((JComponent) c, enabled);
-            } else {
-                c.setEnabled(enabled);
-            }
-        }
     }
 
     private enum RepoType {

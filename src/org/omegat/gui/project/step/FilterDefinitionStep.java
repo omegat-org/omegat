@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.filters2.FiltersCustomizerController;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
@@ -47,15 +46,13 @@ import gen.core.filters.Filters;
  */
 public class FilterDefinitionStep implements Step {
 
-    private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel(new BorderLayout());
 
     private FiltersCustomizerController controller;
     private @Nullable JLabel disabledLabel;
     private @Nullable JComponent controllerGui;
 
-    public FilterDefinitionStep(ProjectConfigMode mode) {
-        this.mode = mode;
+    public FilterDefinitionStep() {
     }
 
     @Override
@@ -82,16 +79,6 @@ public class FilterDefinitionStep implements Step {
         panel.add(disabledLabel, BorderLayout.NORTH);
         panel.add(controllerGui, BorderLayout.CENTER);
         disabledLabel.setVisible(false); // default hidden until wizard toggles
-
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            controllerGui.setEnabled(false);
-            disabledLabel.setVisible(false);
-        }
-    }
-
-    @Override
-    public @Nullable String validateInput() {
-        return null;
     }
 
     @Override
@@ -114,7 +101,7 @@ public class FilterDefinitionStep implements Step {
             controllerGui.setEnabled(enabled);
         }
         if (disabledLabel != null) {
-            disabledLabel.setVisible(!enabled && mode != ProjectConfigMode.RESOLVE_DIRS);
+            disabledLabel.setVisible(!enabled);
         }
     }
 }

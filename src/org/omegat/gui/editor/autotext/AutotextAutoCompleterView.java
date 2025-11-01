@@ -27,11 +27,11 @@
 package org.omegat.gui.editor.autotext;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.gui.editor.autotext.Autotext.AutotextItem;
@@ -46,8 +46,13 @@ import org.omegat.util.Preferences;
  */
 public class AutotextAutoCompleterView extends AutoCompleterListView {
 
+    @Deprecated
     public AutotextAutoCompleterView() {
-        super(OStrings.getString("AC_AUTOTEXT_VIEW"));
+        this(null);
+    }
+
+    public AutotextAutoCompleterView(AutoCompleter autoCompleter) {
+        super(OStrings.getString("AC_AUTOTEXT_VIEW"), autoCompleter);
     }
 
     @Override
@@ -68,7 +73,7 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
             }
         }
 
-        Collections.sort(result, new AutotextComparator());
+        result.sort(new AutotextComparator());
 
         return result;
     }
@@ -91,9 +96,9 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
 
     class AutotextComparator implements Comparator<AutoCompleterItem> {
 
-        private boolean byLength = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH);
-        private boolean alphabetically = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY);
-        private boolean sortFullText = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT);
+        private final boolean byLength = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_BY_LENGTH);
+        private final boolean alphabetically = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_ALPHABETICALLY);
+        private final boolean sortFullText = Preferences.isPreference(Preferences.AC_AUTOTEXT_SORT_FULL_TEXT);
 
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {

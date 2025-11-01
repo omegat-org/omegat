@@ -39,7 +39,7 @@ public class ExternalServiceRetrieval {
         InputStream in = connector.fetchResource(projectId, resourceId);
         if (in != null) {
             Path dir = Paths.get(targetDir);
-            String fileName = (resourceId == null || resourceId.isEmpty()) ? "external-resource.txt" : resourceId;
+            String fileName = (resourceId == null || resourceId.isEmpty()) ? "external-service-resource.txt" : resourceId;
             Path out = dir.resolve(fileName);
             Files.createDirectories(dir);
             try (in) {
@@ -64,7 +64,7 @@ public class ExternalServiceRetrieval {
     private String extractFileNameFromUrl(String url) {
         String fileName = url.substring(url.lastIndexOf('/') + 1);
         if (!fileName.contains(".")) {
-            fileName = "cms-resource.txt";
+            fileName = "external-service-resource.txt";
         }
         return fileName;
     }

@@ -40,7 +40,6 @@ import javax.swing.JTextField;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
-import org.omegat.gui.project.ProjectConfigMode;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 

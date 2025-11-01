@@ -127,9 +127,6 @@ public class ExternalCommandStep implements Step {
         if (!Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             externalCommandTextArea.setEnabled(false);
         }
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
-            // No special handling; external command unrelated to directories
-        }
     }
 
     @Override

@@ -35,8 +35,12 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -51,6 +55,7 @@ import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.project.ProjectConfigUI;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -246,10 +251,6 @@ public class ProjectPropertiesDialogController {
             glossaryFile = true;
         }
         String title = getBrowserTitle(browseTarget);
-        if (title == null) {
-            return;
-        }
-
         OmegaTFileChooser browser = new OmegaTFileChooser();
         browser.setDialogTitle(title);
         if (fileMode) {
@@ -306,7 +307,7 @@ public class ProjectPropertiesDialogController {
         case 7:
             return OStrings.getString("PP_BROWSE_TITLE_EXPORT_TM");
         default:
-            return null;
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 
@@ -368,12 +369,11 @@ public class ProjectPropertiesDialogController {
         case 7:
             return Preferences.getPreference(Preferences.EXPORT_TM_FOLDER);
         default:
-            return null;
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 
-    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget,
-            String str) {
+    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget, String str) {
         // reset the appropriate path - store preferred directory
         switch (browseTarget) {
         case 1:
@@ -442,11 +442,14 @@ public class ProjectPropertiesDialogController {
                 field.setForeground(java.awt.SystemColor.textText);
             }
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + browseTarget);
         }
     }
 
     private void doOK() {
-        if (!Language.verifySingleLangCode(dialog.sourceLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(
+                Objects.requireNonNull(dialog.sourceLocaleField.getSelectedItem()).toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -455,7 +458,8 @@ public class ProjectPropertiesDialogController {
             return;
         }
         projectProperties.setSourceLanguage(dialog.sourceLocaleField.getSelectedItem().toString());
-        if (!Language.verifySingleLangCode(dialog.targetLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(
+                Objects.requireNonNull(dialog.targetLocaleField.getSelectedItem()).toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -585,10 +589,13 @@ public class ProjectPropertiesDialogController {
     private void doCancel() {
         // delete project dir in case of a new project
         // to fix bug 1476591 the project root is created before everything else
-        // and if the new project is cancelled, the project root still exists,
+        // and if the new project is canceled, the project root still exists,
         // so it must be deleted
         if (isModeNewProject()) {
-            new File(projectProperties.getProjectRoot()).delete();
+            try {
+                Files.deleteIfExists(Path.of(projectProperties.getProjectRoot()));
+            } catch (IOException ignored) {
+            }
         }
         dialogCancelled = true;
         dialog.setVisible(false);
@@ -598,6 +605,9 @@ public class ProjectPropertiesDialogController {
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");
+        }
+        if (dialogTypeValue == ProjectPropertiesDialog.Mode.NEW_PROJECT) {
+            return ProjectConfigUI.showDialog(parent, projectProperties, dialogTypeValue);
         }
         ProjectPropertiesDialog dialog = new ProjectPropertiesDialog(parent, projectProperties, projFileName,
                 dialogTypeValue);

@@ -70,10 +70,11 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.FileCollisionDialog;
-import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
+import org.omegat.gui.project.ProjectConfigMode;
+import org.omegat.gui.project.ProjectConfigUI;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
@@ -118,29 +119,13 @@ public final class ProjectUICommands {
             return;
         }
 
-        // ask for new project dir
-        NewProjectFileChooser ndc = new NewProjectFileChooser();
-        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
-        if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
-            // user press 'Cancel' in project creation dialog
-            return;
-        }
-        final File dir = ndc.getSelectedFile();
-        if (!ensureProjectDir(dir)) {
-            return;
-        }
-
+        // Show the project properties wizard, which will ask for project folder as the first step
         new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() {
-
                 // ask about new project properties
-                ProjectProperties props = new ProjectProperties(dir);
-                props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
-                props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
-                final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
-                        Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
-                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
+                final ProjectProperties newProps = ProjectConfigUI.showDialog(
+                        Core.getMainWindow().getApplicationFrame(), null, ProjectConfigMode.NEW_PROJECT);
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -149,13 +134,12 @@ public final class ProjectUICommands {
 
                 if (newProps == null) {
                     // user clicks on 'Cancel'
-                    dir.delete();
                     mainWindow.setCursor(oldCursor);
                     return null;
                 }
 
+                File dir = newProps.getProjectRootDir();
                 final String projectRoot = newProps.getProjectRoot();
-
                 if (!StringUtil.isEmpty(projectRoot)) {
                     // create project
                     try {
@@ -164,10 +148,11 @@ public final class ProjectUICommands {
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    } finally {
+                        mainWindow.setCursor(oldCursor);
                     }
                 }
 
-                mainWindow.setCursor(oldCursor);
                 return null;
             }
         }.execute();
@@ -181,9 +166,12 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
-            @Nullable File projectRoot;
-            @Nullable IMainWindow mainWindow;
-            @Nullable Cursor oldCursor;
+            @Nullable
+            File projectRoot;
+            @Nullable
+            IMainWindow mainWindow;
+            @Nullable
+            Cursor oldCursor;
 
             @Override
             protected Void doInBackground() throws Exception {
@@ -486,14 +474,12 @@ public final class ProjectUICommands {
                 props.autocreateDirectories();
             } else {
                 // not a team project
-                File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                 props.autocreateDirectories();
                 while (!props.isProjectValid()) {
                     // something wrong with the project.
                     // We display open dialog to fix it.
-                    props = ProjectPropertiesDialogController.showDialog(
-                            Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
-                            ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
+                    props = ProjectConfigUI.showDialog(Core.getMainWindow().getApplicationFrame(), props,
+                            ProjectConfigMode.RESOLVE_DIRS);
                     if (props == null) {
                         // user clicks on 'Cancel'
                         return;
@@ -866,8 +852,8 @@ public final class ProjectUICommands {
         // displaying the dialog to change paths and other properties
         final ProjectProperties newProps =
                 ProjectPropertiesDialogController.showDialog(frame, Core.getProject().getProjectProperties(),
-                Core.getProject().getProjectProperties().getProjectName(),
-                ProjectPropertiesDialog.Mode.EDIT_PROJECT);
+                        Core.getProject().getProjectProperties().getProjectName(),
+                        ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
             return;
         }

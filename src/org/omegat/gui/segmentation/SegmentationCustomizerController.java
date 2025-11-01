@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
@@ -67,20 +68,27 @@ public class SegmentationCustomizerController extends BasePreferencesController 
      * Flag if this customizer shows project specific segmentation rules or not
      */
     private boolean isProjectSpecific;
+    private boolean showProjectSpecificToggle = true;
 
     public SegmentationCustomizerController() {
         this(false, SRX.getDefault(), Preferences.getSRX(), null);
     }
 
     public SegmentationCustomizerController(boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
+        this(projectSpecific, true, defaultSRX, userSRX, projectSRX);
+    }
+
+    public SegmentationCustomizerController(boolean projectSpecific, boolean showProjectSpecificToggle,
+            SRX defaultSRX, SRX userSRX, SRX projectSRX) {
         this.isProjectSpecific = projectSpecific;
+        this.showProjectSpecificToggle = showProjectSpecificToggle;
         this.defaultSRX = defaultSRX;
         this.userSRX = userSRX;
         this.projectSRX = projectSRX;
     }
 
     @Override
-    public JComponent getGui() {
+    public @NotNull JComponent getGui() {
         if (panel == null) {
             initGui();
             initFromPrefs();
@@ -273,7 +281,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
 
     @Override
     protected void initFromPrefs() {
-        panel.projectSpecificCB.setVisible(isProjectSpecific);
+        panel.projectSpecificCB.setVisible(isProjectSpecific && showProjectSpecificToggle);
         panel.projectSpecificCB.setSelected(projectSRX != null);
         setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX : userSRX);
         updateEnabledness();
@@ -297,6 +305,17 @@ public class SegmentationCustomizerController extends BasePreferencesController 
         panel.mapTable.setEnabled(enabled);
         panel.mapTable.setFocusable(enabled);
         panel.mapInsertButton.setEnabled(enabled);
+    }
+
+    /**
+     * Programmatically control whether project-specific segmentation is enabled when the
+     * internal checkbox is hidden in wizard context.
+     */
+    public void setProjectSpecificEnabled(boolean enabled) {
+        if (panel != null) {
+            panel.projectSpecificCB.setSelected(enabled);
+            updateEnabledness();
+        }
     }
 
     protected void setEditableSRX(SRX srx) {

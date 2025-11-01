@@ -105,7 +105,9 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
     private void buildSteps() {
         if (mode == ProjectConfigMode.NEW_PROJECT) {
-            // First step: choose project folder. Build all remaining steps now but delay initialization until folder selected.
+            // First step: choose the project folder.
+            // Build all remaining steps now but delay initialization
+            // until the folder is selected.
             folderStep = new ProjectFolderStep();
             steps.add(folderStep);
             buildRemainingSteps();
@@ -139,18 +141,19 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     private void initializeRemainingSteps(ProjectProperties loadProps) {
         // Initialize UI state for all steps
         steps.forEach(s -> s.onLoad(loadProps));
+
         // Synchronize step enablement with checkboxes in languages step
         final LanguagesAndOptionsStep lang = this.languagesAndOptionsStep;
         final SegmentationStep seg = this.segmentationStep;
-        final FilterDefinitionStep filt = this.filterDefinitionStep;
+        final FilterDefinitionStep filterStep = this.filterDefinitionStep;
         if (lang != null) {
             boolean segEnabled = lang.isProjectSpecificSegmentationSelected();
             if (seg != null) {
                 seg.setProjectSpecificSegmentationEnabled(segEnabled);
             }
             boolean filtersEnabled = lang.isProjectSpecificFiltersSelected();
-            if (filt != null) {
-                filt.setProjectSpecificFiltersEnabled(filtersEnabled);
+            if (filterStep != null) {
+                filterStep.setProjectSpecificFiltersEnabled(filtersEnabled);
             }
             if (seg != null) {
                 lang.addProjectSpecificSegmentationListener(e -> {
@@ -158,9 +161,9 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
                     updateNav();
                 });
             }
-            if (filt != null) {
+            if (filterStep != null) {
                 lang.addProjectSpecificFiltersListener(e -> {
-                    filt.setProjectSpecificFiltersEnabled(lang.isProjectSpecificFiltersSelected());
+                    filterStep.setProjectSpecificFiltersEnabled(lang.isProjectSpecificFiltersSelected());
                     updateNav();
                 });
             }
@@ -205,33 +208,32 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
         content.add(nav, BorderLayout.SOUTH);
 
         setContentPane(content);
-        if (mode == ProjectConfigMode.NEW_PROJECT && folderStep != null) {
-            wireFolderFieldUpdates();
-        }
+        wireFolderFieldUpdates();
         showCurrent();
     }
 
     private void wireFolderFieldUpdates() {
-        JComponent root = folderStep.getComponent();
-        JTextField tf = findTextFieldByName(root, ProjectFolderStep.FOLDER_FIELD_NAME);
-        if (tf != null) {
-            tf.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    updateNav();
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    updateNav();
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    updateNav();
-                }
-            });
+        if (mode != ProjectConfigMode.NEW_PROJECT || folderStep == null) {
+            return;
         }
+
+        // Enable buttons when the project folder is selected
+        folderStep.getFolderField().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateNav();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateNav();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateNav();
+            }
+        });
     }
 
     private static @Nullable JTextField findTextFieldByName(Component comp, String name) {

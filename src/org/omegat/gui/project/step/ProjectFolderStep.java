@@ -49,7 +49,7 @@ import org.openide.awt.Mnemonics;
  */
 public class ProjectFolderStep implements Step {
     private final JPanel panel = new JPanel();
-    private final JTextField folderField = new JTextField();
+    private final JTextField folderField = new JTextField(40);
     private final JButton browseBtn = new JButton();
 
     private File selectedDir;
@@ -128,6 +128,10 @@ public class ProjectFolderStep implements Step {
     @Override
     public void onSave(ProjectProperties props) {
         // No-op; wizard will read selectedDir and construct properties
+    }
+
+    public JTextField getFolderField() {
+        return folderField;
     }
 
     public File getSelectedDir() {

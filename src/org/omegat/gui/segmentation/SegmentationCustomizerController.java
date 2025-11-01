@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
@@ -87,7 +88,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     }
 
     @Override
-    public JComponent getGui() {
+    public @NotNull JComponent getGui() {
         if (panel == null) {
             initGui();
             initFromPrefs();

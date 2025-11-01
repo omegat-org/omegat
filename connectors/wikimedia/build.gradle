@@ -1,0 +1,15 @@
+plugins {
+    id 'org.omegat.module'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.slf4j.format.jdk14)
+        implementation(libs.jetbrains.annotations)
+    }
+    testImplementation(testFixtures(project.rootProject))
+}

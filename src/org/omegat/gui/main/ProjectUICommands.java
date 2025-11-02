@@ -138,13 +138,14 @@ public final class ProjectUICommands {
                     return null;
                 }
 
-                File dir = newProps.getProjectRootDir();
                 final String projectRoot = newProps.getProjectRoot();
                 if (!StringUtil.isEmpty(projectRoot)) {
                     // create project
                     try {
+                        File projectRootDir = newProps.getProjectRootDir();
+                        Files.createDirectory(projectRootDir.toPath());
                         ProjectFactory.createProject(newProps);
-                        RecentProjects.add(dir.getAbsolutePath());
+                        RecentProjects.add(projectRootDir.getAbsolutePath());
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

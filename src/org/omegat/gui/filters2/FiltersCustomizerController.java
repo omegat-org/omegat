@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
@@ -105,7 +106,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
     }
 
     @Override
-    public JComponent getGui() {
+    public @NotNull JComponent getGui() {
         if (panel == null) {
             initGui();
             initFromPrefs();

@@ -43,6 +43,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.DirectoriesAndExportTMStep;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
 import org.omegat.gui.project.step.ProjectWizardStep;
+import org.omegat.gui.project.step.SourceFilesStep;
 import org.omegat.util.OStrings;
 
 /**
@@ -67,10 +68,16 @@ class SingleProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     }
 
     private void buildUI(ProjectConfigMode mode) {
-        if (Objects.requireNonNull(mode) == ProjectConfigMode.RESOLVE_DIRS) {
+        switch (Objects.requireNonNull(mode)) {
+        case RESOLVE_DIRS:
             projectWizardStep = new DirectoriesAndExportTMStep(mode);
-        } else {
+            break;
+        case IMPORT_SOURCE:
+            projectWizardStep = new SourceFilesStep();
+            break;
+        default:
             projectWizardStep = new LanguagesAndOptionsStep(mode);
+            break;
         }
         projectWizardStep.onLoad(props);
 

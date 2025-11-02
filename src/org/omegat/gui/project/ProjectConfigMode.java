@@ -51,4 +51,8 @@ public enum ProjectConfigMode {
      * This UI is used to edit language and tokenizers.
      */
     EDIT_LOCALE_AND_SEGMENTATION,
+    /**
+     * This UI is used to import source files from filesystem.
+     */
+    IMPORT_SOURCE,
 }

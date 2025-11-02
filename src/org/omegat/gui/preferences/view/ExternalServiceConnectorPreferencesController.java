@@ -29,9 +29,9 @@ import org.omegat.gui.preferences.BasePreferencesController;
 import java.awt.Component;
 import java.util.ArrayList;
 
-public class CmsPreferencesController extends BasePreferencesController {
+public class ExternalServiceConnectorPreferencesController extends BasePreferencesController {
 
-    private CmsPreferencesPanel panel;
+    private ExternalServiceConnectorPreferencesPanel panel;
 
     @Override
     protected void initFromPrefs() {
@@ -48,7 +48,7 @@ public class CmsPreferencesController extends BasePreferencesController {
     @Override
     public Component getGui() {
         if (panel == null) {
-            panel = new CmsPreferencesPanel();
+            panel = new ExternalServiceConnectorPreferencesPanel();
             panel.loadFromPrefs();
         }
         return panel;

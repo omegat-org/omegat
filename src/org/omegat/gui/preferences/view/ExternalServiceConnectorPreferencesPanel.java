@@ -49,14 +49,14 @@ import org.omegat.core.data.CoreState;
 /**
  * Preferences view panel for External CMS settings. Users can manage a list of
  * target projects per connector with a base URL and optional default page. This
- * panel is embedded by {@link CmsPreferencesController}.
+ * panel is embedded by {@link ExternalServiceConnectorPreferencesController}.
  */
-public class CmsPreferencesPanel extends JPanel {
+public class ExternalServiceConnectorPreferencesPanel extends JPanel {
 
     private final TargetsTableModel model = new TargetsTableModel();
     private final JTable table = new JTable(model);
 
-    public CmsPreferencesPanel() {
+    public ExternalServiceConnectorPreferencesPanel() {
         super(new BorderLayout());
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         add(new JScrollPane(table), BorderLayout.CENTER);
@@ -173,7 +173,7 @@ public class CmsPreferencesPanel extends JPanel {
         private ServiceTarget result;
 
         CmsTargetEditor(ServiceTarget initial) {
-            dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(CmsPreferencesPanel.this),
+            dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
                     "Edit CMS Target", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
             java.awt.GridBagConstraints gc = new java.awt.GridBagConstraints();
@@ -258,7 +258,7 @@ public class CmsPreferencesPanel extends JPanel {
             root.add(buttons, BorderLayout.SOUTH);
             dialog.getContentPane().add(root);
             dialog.pack();
-            dialog.setLocationRelativeTo(CmsPreferencesPanel.this);
+            dialog.setLocationRelativeTo(ExternalServiceConnectorPreferencesPanel.this);
 
             if (initial != null) {
                 // Preselect connector by id

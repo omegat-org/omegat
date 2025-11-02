@@ -35,19 +35,14 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -108,7 +103,7 @@ public class ProjectPropertiesDialogController {
     /**
      * Return new properties or null if dialog cancelled.
      */
-    public @Nullable ProjectProperties getResult() {
+    public ProjectProperties getResult() {
         return dialogCancelled ? null : projectProperties;
     }
 
@@ -449,8 +444,7 @@ public class ProjectPropertiesDialogController {
     }
 
     private void doOK() {
-        if (!Language.verifySingleLangCode(
-                Objects.requireNonNull(dialog.sourceLocaleField.getSelectedItem()).toString())) {
+        if (!Language.verifySingleLangCode(dialog.sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -459,8 +453,7 @@ public class ProjectPropertiesDialogController {
             return;
         }
         projectProperties.setSourceLanguage(dialog.sourceLocaleField.getSelectedItem().toString());
-        if (!Language.verifySingleLangCode(
-                Objects.requireNonNull(dialog.targetLocaleField.getSelectedItem()).toString())) {
+        if (!Language.verifySingleLangCode(dialog.targetLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(dialog,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"),
@@ -590,19 +583,16 @@ public class ProjectPropertiesDialogController {
     private void doCancel() {
         // delete project dir in case of a new project
         // to fix bug 1476591 the project root is created before everything else
-        // and if the new project is canceled, the project root still exists,
+        // and if the new project is cancelled, the project root still exists,
         // so it must be deleted
         if (isModeNewProject()) {
-            try {
-                Files.deleteIfExists(Path.of(projectProperties.getProjectRoot()));
-            } catch (IOException ignored) {
-            }
+            new File(projectProperties.getProjectRoot()).delete();
         }
         dialogCancelled = true;
         dialog.setVisible(false);
     }
 
-    public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
+    public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");

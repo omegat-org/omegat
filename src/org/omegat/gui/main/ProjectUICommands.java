@@ -123,6 +123,7 @@ public final class ProjectUICommands {
         new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() {
+
                 // ask about new project properties
                 final ProjectProperties newProps = ProjectConfigUI.showDialog(
                         Core.getMainWindow().getApplicationFrame(), null, ProjectConfigMode.NEW_PROJECT);
@@ -139,9 +140,12 @@ public final class ProjectUICommands {
                 }
 
                 final String projectRoot = newProps.getProjectRoot();
+
                 if (!StringUtil.isEmpty(projectRoot)) {
-                    // create project
+                    // create the project
                     try {
+                        // We should create the target directory at first.
+                        // then create the project.
                         File projectRootDir = newProps.getProjectRootDir();
                         Files.createDirectory(projectRootDir.toPath());
                         ProjectFactory.createProject(newProps);

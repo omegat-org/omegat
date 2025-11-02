@@ -33,7 +33,7 @@ import org.omegat.gui.project.ProjectPropertiesContributor;
 /**
  * Wraps a ProjectPropertiesContributor as a wizard Step.
  */
-public class ContributorStep implements Step {
+public class ContributorStep implements ProjectWizardStep {
     private final ProjectPropertiesContributor delegate;
     private final JComponent comp;
 

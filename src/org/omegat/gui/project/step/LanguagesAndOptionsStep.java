@@ -60,7 +60,7 @@ import java.util.Vector;
  * Combined step to select languages and configure tokenizers and core options.
  * Merges former LanguagesStep and TokenizersAndOptionsStep.
  */
-public class LanguagesAndOptionsStep implements Step {
+public class LanguagesAndOptionsStep implements ProjectWizardStep {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
 

@@ -62,7 +62,7 @@ import gen.core.project.RepositoryMapping;
  * Replicates the behavior of the legacy RepositoriesMappingController dialog
  * in an embedded panel suitable for the wizard.
  */
-public class RepositoriesMappingStep implements Step {
+public class RepositoriesMappingStep implements ProjectWizardStep {
 
     private final JPanel panel = new JPanel(new BorderLayout());
 

@@ -69,6 +69,11 @@ abstract class AbstractProjectPropertiesDialog extends JDialog {
         case EDIT_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
             break;
+        case EDIT_LOCALE_AND_SEGMENTATION:
+            setTitle(OStrings.getString("PP_EDIT_PROJECT"));
+            break;
+        default:
+           throw new IllegalArgumentException("Unexpected dialog type: " + mode);
         }
     }
 }

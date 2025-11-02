@@ -51,7 +51,7 @@ import org.openide.awt.Mnemonics;
  * Wizard step to select files and/or directories to be copied into the project's
  * source folder after the wizard finishes.
  */
-public class SourceFilesStep implements Step {
+public class SourceFilesStep implements ProjectWizardStep {
     private final JPanel panel = new JPanel();
     private final DefaultListModel<File> model = new DefaultListModel<>();
     private final JList<File> list = new JList<>(model);

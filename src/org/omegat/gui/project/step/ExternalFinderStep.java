@@ -38,7 +38,7 @@ import org.omegat.util.OStrings;
 /**
  * Dedicated wizard step for configuring project-specific External Finder settings.
  */
-public class ExternalFinderStep implements Step {
+public class ExternalFinderStep implements ProjectWizardStep {
 
     private final JPanel panel = new JPanel(new BorderLayout());
 

@@ -49,7 +49,7 @@ import org.openide.awt.Mnemonics;
 /**
  * Step to configure directory paths and Export TM.
  */
-public class DirectoriesAndExportTMStep implements Step {
+public class DirectoriesAndExportTMStep implements ProjectWizardStep {
     private final ProjectConfigMode mode;
     private final JPanel panel = new JPanel();
     // Directories section

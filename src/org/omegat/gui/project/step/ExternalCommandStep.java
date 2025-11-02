@@ -51,7 +51,7 @@ import org.openide.awt.Mnemonics;
  * Optional step to configure an external command executed on Save/Compile.
  * This step is only included when Preferences.ALLOW_PROJECT_EXTERN_CMD is true.
  */
-public class ExternalCommandStep implements Step {
+public class ExternalCommandStep implements ProjectWizardStep {
     private final JPanel panel = new JPanel();
 
     private final JTextArea externalCommandTextArea = new JTextArea(3, 40);

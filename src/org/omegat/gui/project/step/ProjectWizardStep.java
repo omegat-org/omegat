@@ -32,7 +32,7 @@ import org.omegat.core.data.ProjectProperties;
 /**
  * A single step in the Project Properties wizard.
  */
-public interface Step {
+public interface ProjectWizardStep {
     String getTitle();
 
     JComponent getComponent();

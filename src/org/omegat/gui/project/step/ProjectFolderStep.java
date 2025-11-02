@@ -46,7 +46,7 @@ import org.openide.awt.Mnemonics;
 /**
  * First step to select the new project folder. Navigation cannot proceed until a valid folder is chosen.
  */
-public class ProjectFolderStep implements Step {
+public class ProjectFolderStep implements ProjectWizardStep {
     private final JPanel panel = new JPanel();
     private final JTextField folderField = new JTextField(40);
     private final JButton browseBtn = new JButton();

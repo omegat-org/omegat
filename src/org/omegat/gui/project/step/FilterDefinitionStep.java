@@ -44,7 +44,7 @@ import gen.core.filters.Filters;
  * Dedicated wizard step for editing project-specific file filter definitions
  * using FiltersCustomizerController.
  */
-public class FilterDefinitionStep implements Step {
+public class FilterDefinitionStep implements ProjectWizardStep {
 
     private final JPanel panel = new JPanel(new BorderLayout());
 

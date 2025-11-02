@@ -42,7 +42,7 @@ import javax.swing.JScrollPane;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.project.step.DirectoriesAndExportTMStep;
 import org.omegat.gui.project.step.LanguagesAndOptionsStep;
-import org.omegat.gui.project.step.Step;
+import org.omegat.gui.project.step.ProjectWizardStep;
 import org.omegat.util.OStrings;
 
 /**
@@ -54,7 +54,7 @@ class SingleProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
     private final JPanel cards = new JPanel(new CardLayout());
     private final JPanel left = new JPanel();
-    private Step step;
+    private ProjectWizardStep projectWizardStep;
 
     SingleProjectPropertiesDialog(Frame parent, ProjectProperties props, ProjectConfigMode mode) {
         super(parent, true, props, mode);
@@ -68,19 +68,19 @@ class SingleProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
     private void buildUI(ProjectConfigMode mode) {
         if (Objects.requireNonNull(mode) == ProjectConfigMode.RESOLVE_DIRS) {
-            step = new DirectoriesAndExportTMStep(mode);
+            projectWizardStep = new DirectoriesAndExportTMStep(mode);
         } else {
-            step = new LanguagesAndOptionsStep(mode);
+            projectWizardStep = new LanguagesAndOptionsStep(mode);
         }
-        step.onLoad(props);
+        projectWizardStep.onLoad(props);
 
         JPanel content = new JPanel(new BorderLayout());
         left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JLabel lbl = new JLabel(step.getTitle());
+        JLabel lbl = new JLabel(projectWizardStep.getTitle());
         lbl.setName("wizardStepLabel");
         left.add(lbl);
-        cards.add(new JScrollPane(step.getComponent()), "step");
+        cards.add(new JScrollPane(projectWizardStep.getComponent()), "step");
         content.add(left, BorderLayout.WEST);
         content.add(cards, BorderLayout.CENTER);
 
@@ -103,11 +103,11 @@ class SingleProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     }
 
     private void onOk(ActionEvent e) {
-        String err = step.validateInput();
+        String err = projectWizardStep.validateInput();
         if (err != null) {
             return;
         }
-        step.onSave(props);
+        projectWizardStep.onSave(props);
         cancelled = false;
         setVisible(false);
     }

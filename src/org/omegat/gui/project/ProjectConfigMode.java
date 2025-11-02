@@ -35,12 +35,20 @@ package org.omegat.gui.project;
  * reference it. New and refactored code should prefer this enum.
  */
 public enum ProjectConfigMode {
-    /** This UI is used to create a new project. */
+    /**
+     * This UI is used to create a new project.
+     */
     NEW_PROJECT,
     /**
      * This UI is used to resolve missing directories of an existing project.
      */
     RESOLVE_DIRS,
-    /** This UI is used to edit project properties. */
-    EDIT_PROJECT
+    /**
+     * This UI is used to edit project properties.
+     */
+    EDIT_PROJECT,
+    /**
+     * This UI is used to edit language and tokenizers.
+     */
+    EDIT_LOCALE_AND_SEGMENTATION,
 }

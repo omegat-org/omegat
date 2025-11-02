@@ -42,7 +42,7 @@ import org.omegat.util.Preferences;
  * Dedicated wizard step for editing project-specific segmentation rules
  * using SegmentationCustomizerController.
  */
-public class SegmentationStep implements Step {
+public class SegmentationStep implements ProjectWizardStep {
 
     private final JPanel panel = new JPanel(new BorderLayout());
 

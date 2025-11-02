@@ -57,7 +57,7 @@ import org.omegat.gui.project.step.FilterDefinitionStep;
 import org.omegat.gui.project.step.ExternalFinderStep;
 import org.omegat.gui.project.step.RepositoriesMappingStep;
 import org.omegat.util.OStrings;
-import org.omegat.gui.project.step.Step;
+import org.omegat.gui.project.step.ProjectWizardStep;
 import org.omegat.gui.project.step.ProjectFolderStep;
 import org.jetbrains.annotations.Nullable;
 import org.openide.awt.Mnemonics;
@@ -65,7 +65,7 @@ import org.openide.awt.Mnemonics;
 @SuppressWarnings("serial")
 class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
-    private final List<Step> steps = new ArrayList<>();
+    private final List<ProjectWizardStep> projectWizardSteps = new ArrayList<>();
     private int current = 0;
 
     private final JPanel cards = new JPanel(new CardLayout());
@@ -105,7 +105,7 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
             // Build all remaining steps now but delay initialization
             // until the folder is selected.
             folderStep = new ProjectFolderStep();
-            steps.add(folderStep);
+            projectWizardSteps.add(folderStep);
             buildRemainingSteps();
         } else {
             folderStep = null;
@@ -117,28 +117,28 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
     private void buildRemainingSteps() {
         languagesAndOptionsStep = new LanguagesAndOptionsStep(mode);
-        steps.add(languagesAndOptionsStep);
-        steps.add(new DirectoriesAndExportTMStep(mode));
+        projectWizardSteps.add(languagesAndOptionsStep);
+        projectWizardSteps.add(new DirectoriesAndExportTMStep(mode));
         // New step to select source files and copy them into the project source folder after finishing
-        steps.add(new SourceFilesStep());
+        projectWizardSteps.add(new SourceFilesStep());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            steps.add(new ExternalCommandStep());
+            projectWizardSteps.add(new ExternalCommandStep());
         }
         // Load contributions
         for (ProjectPropertiesContributor c : ServiceLoader.load(ProjectPropertiesContributor.class)) {
-            steps.add(new ContributorStep(c));
+            projectWizardSteps.add(new ContributorStep(c));
         }
         filterDefinitionStep = new FilterDefinitionStep();
-        steps.add(filterDefinitionStep);
-        steps.add(new RepositoriesMappingStep());
+        projectWizardSteps.add(filterDefinitionStep);
+        projectWizardSteps.add(new RepositoriesMappingStep());
         segmentationStep = new SegmentationStep();
-        steps.add(segmentationStep);
-        steps.add(new ExternalFinderStep());
+        projectWizardSteps.add(segmentationStep);
+        projectWizardSteps.add(new ExternalFinderStep());
     }
 
     private void initializeRemainingSteps(ProjectProperties loadProps) {
         // Initialize UI state for all steps
-        steps.forEach(s -> s.onLoad(loadProps));
+        projectWizardSteps.forEach(s -> s.onLoad(loadProps));
 
         // Synchronize step enablement with checkboxes in languages step
         final LanguagesAndOptionsStep lang = this.languagesAndOptionsStep;
@@ -173,8 +173,8 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
 
         left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        for (int i = 0; i < steps.size(); i++) {
-            Step s = steps.get(i);
+        for (int i = 0; i < projectWizardSteps.size(); i++) {
+            ProjectWizardStep s = projectWizardSteps.get(i);
             JLabel lbl = new JLabel((i + 1) + ". " + s.getTitle());
             lbl.setName("wizardStepLabel" + i);
             left.add(lbl);
@@ -242,7 +242,7 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
     }
 
     private void onNext(ActionEvent e) {
-        Step s = steps.get(current);
+        ProjectWizardStep s = projectWizardSteps.get(current);
         String err = s.validateInput();
         if (err != null) {
             // Keep it simple: do not show a dialog, just ignore move when
@@ -260,21 +260,21 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
             showCurrent();
             return;
         }
-        if (current < steps.size() - 1) {
+        if (current < projectWizardSteps.size() - 1) {
             current++;
             showCurrent();
         }
     }
 
     private void onFinish(ActionEvent e) {
-        for (Step s : steps) {
+        for (ProjectWizardStep s : projectWizardSteps) {
             String err = s.validateInput();
             if (err != null) {
                 return;
             }
         }
         ProjectProperties targetProps = (resultProps != null) ? resultProps : props;
-        steps.forEach(s -> s.onSave(targetProps));
+        projectWizardSteps.forEach(s -> s.onSave(targetProps));
         cancelled = false;
         setVisible(false);
     }
@@ -293,7 +293,7 @@ class WizardProjectPropertiesDialog extends AbstractProjectPropertiesDialog {
             // Do lightweight validation
             canProceed = folderStep.validateInput() == null;
         }
-        boolean hasNext = current < steps.size() - 1 || (mode == ProjectConfigMode.NEW_PROJECT &&
+        boolean hasNext = current < projectWizardSteps.size() - 1 || (mode == ProjectConfigMode.NEW_PROJECT &&
                 !remainingStepsBuilt && current == 0);
         nextBtn.setEnabled(hasNext && canProceed);
         // Finish only enabled once the project folder has been selected and remaining steps built in NEW_PROJECT

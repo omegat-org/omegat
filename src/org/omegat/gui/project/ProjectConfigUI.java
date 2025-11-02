@@ -87,7 +87,7 @@ public final class ProjectConfigUI {
     public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
         ProjectConfigMode mode) {
         AbstractProjectPropertiesDialog dlg;
-        if (mode == ProjectConfigMode.RESOLVE_DIRS) {
+        if (mode == ProjectConfigMode.RESOLVE_DIRS || mode == ProjectConfigMode.EDIT_LOCALE_AND_SEGMENTATION) {
             dlg = new SingleProjectPropertiesDialog(parent, projectProperties, mode);
         } else {
             dlg = new WizardProjectPropertiesDialog(parent, projectProperties, mode);

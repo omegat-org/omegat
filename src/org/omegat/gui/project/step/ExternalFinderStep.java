@@ -44,9 +44,6 @@ public class ExternalFinderStep implements Step {
 
     private ExternalFinderPreferencesController controller;
 
-    public ExternalFinderStep() {
-    }
-
     @Override
     public String getTitle() {
         // Reuse preferences title for local (project) external finder configuration

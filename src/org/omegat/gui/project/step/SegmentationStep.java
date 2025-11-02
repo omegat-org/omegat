@@ -50,9 +50,6 @@ public class SegmentationStep implements Step {
     private @Nullable JLabel disabledLabel;
     private @Nullable JComponent controllerGui;
 
-    public SegmentationStep() {
-    }
-
     @Override
     public String getTitle() {
         return OStrings.getString("GUI_SEGMENTATION_TITLE_PROJECTSPECIFIC");

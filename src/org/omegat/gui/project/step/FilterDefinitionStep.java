@@ -52,9 +52,6 @@ public class FilterDefinitionStep implements Step {
     private @Nullable JLabel disabledLabel;
     private @Nullable JComponent controllerGui;
 
-    public FilterDefinitionStep() {
-    }
-
     @Override
     public String getTitle() {
         return OStrings.getString("FILTERSCUSTOMIZER_TITLE_PROJECTSPECIFIC");

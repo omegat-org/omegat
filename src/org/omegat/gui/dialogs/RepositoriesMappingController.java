@@ -73,7 +73,8 @@ public class RepositoriesMappingController {
 
     private List<RepositoryDefinition> result;
 
-    private RepositoriesMappingDialog dialog;
+    private RepositoriesMappingDialog repositoryMappingDialog;
+    private RepositoriesMappingPanel repositoriesMappingPanel;
     private AbstractTableModel modelRepo;
     private List<RowRepo> listRepo;
     private AbstractTableModel modelMapping;
@@ -83,38 +84,39 @@ public class RepositoriesMappingController {
     private TableColumnSizer mappingSizer;
 
     public List<RepositoryDefinition> show(Frame parent, List<RepositoryDefinition> input) {
-        dialog = new RepositoriesMappingDialog(parent, true);
-        dialog.setLocationRelativeTo(parent);
+        repositoryMappingDialog = new RepositoriesMappingDialog(parent, true);
+        repositoryMappingDialog.setLocationRelativeTo(parent);
+        repositoriesMappingPanel = repositoryMappingDialog.getPanel();
 
-        dialog.getRootPane().setDefaultButton(dialog.okButton);
+        repositoriesMappingPanel.getRootPane().setDefaultButton(repositoryMappingDialog.okButton);
 
-        StaticUIUtils.setEscapeClosable(dialog);
+        StaticUIUtils.setEscapeClosable(repositoryMappingDialog);
 
-        listRepo = new ArrayList<RowRepo>();
-        listMapping = new ArrayList<RowMapping>();
+        listRepo = new ArrayList<>();
+        listMapping = new ArrayList<>();
         putData(input);
 
         initTableModels();
         initButtons();
         reinitRepoUrlDropdown();
 
-        dialog.tableRepositories.getSelectionModel().addListSelectionListener(e -> updateState());
-        dialog.tableMapping.getSelectionModel().addListSelectionListener(e -> updateState());
-        dialog.tableRepositories.getModel().addTableModelListener(e -> updateState());
+        repositoriesMappingPanel.tableRepositories.getSelectionModel().addListSelectionListener(e -> updateState());
+        repositoriesMappingPanel.tableMapping.getSelectionModel().addListSelectionListener(e -> updateState());
+        repositoriesMappingPanel.tableRepositories.getModel().addTableModelListener(e -> updateState());
 
-        repoSizer = TableColumnSizer.autoSize(dialog.tableRepositories, 1, true);
-        mappingSizer = TableColumnSizer.autoSize(dialog.tableMapping, 0, true);
+        repoSizer = TableColumnSizer.autoSize(repositoriesMappingPanel.tableRepositories, 1, true);
+        mappingSizer = TableColumnSizer.autoSize(repositoriesMappingPanel.tableMapping, 0, true);
 
         updateState();
 
-        dialog.setVisible(true);
+        repositoryMappingDialog.setVisible(true);
         return result;
     }
 
     private void updateState() {
-        dialog.btnRepoRemove.setEnabled(dialog.tableRepositories.getSelectedRow() != -1);
-        dialog.btnMappingRemove.setEnabled(dialog.tableMapping.getSelectedRow() != -1);
-        dialog.btnMappingAdd.setEnabled(dialog.tableRepositories.getRowCount() > 0);
+        repositoriesMappingPanel.btnRepoRemove.setEnabled(repositoriesMappingPanel.tableRepositories.getSelectedRow() != -1);
+        repositoriesMappingPanel.btnMappingRemove.setEnabled(repositoriesMappingPanel.tableMapping.getSelectedRow() != -1);
+        repositoriesMappingPanel.btnMappingAdd.setEnabled(repositoriesMappingPanel.tableRepositories.getRowCount() > 0);
     }
 
     @SuppressWarnings("serial")
@@ -181,7 +183,7 @@ public class RepositoriesMappingController {
                 return null;
             }
         };
-        dialog.tableRepositories.setModel(modelRepo);
+        repositoriesMappingPanel.tableRepositories.setModel(modelRepo);
 
         JComboBox<RepoType> comboBox = new JComboBox<>(RepoType.values());
         comboBox.setRenderer(new DelegatingComboBoxRenderer<RepoType, String>() {
@@ -190,7 +192,7 @@ public class RepositoriesMappingController {
                 return value == null ? "" : value.getLocalizedString();
             }
         });
-        dialog.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
+        repositoriesMappingPanel.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
 
         modelMapping = new AbstractTableModel() {
 
@@ -272,70 +274,70 @@ public class RepositoriesMappingController {
                 return null;
             }
         };
-        dialog.tableMapping.setModel(modelMapping);
+        repositoriesMappingPanel.tableMapping.setModel(modelMapping);
     }
 
     void initButtons() {
-        dialog.cancelButton.addActionListener(new ActionListener() {
+        repositoryMappingDialog.cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
+                repositoryMappingDialog.dispose();
             }
         });
-        dialog.okButton.addActionListener(new ActionListener() {
+        repositoryMappingDialog.okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean doneEditing = Stream.of(dialog.tableMapping, dialog.tableRepositories)
+                boolean doneEditing = Stream.of(repositoriesMappingPanel.tableMapping, repositoriesMappingPanel.tableRepositories)
                         .map(JTable::getCellEditor).allMatch(editor -> editor == null || editor.stopCellEditing());
                 if (!doneEditing) {
                     return;
                 }
                 String r = isValid();
                 if (r != null) {
-                    JOptionPane.showMessageDialog(dialog, r, OStrings.getString("TF_ERROR"),
+                    JOptionPane.showMessageDialog(repositoriesMappingPanel, r, OStrings.getString("TF_ERROR"),
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 result = getData();
-                dialog.dispose();
+                repositoryMappingDialog.dispose();
             }
         });
-        dialog.btnRepoAdd.addActionListener(new ActionListener() {
+        repositoriesMappingPanel.btnRepoAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 listRepo.add(new RowRepo());
                 int row = listRepo.size() - 1;
                 modelRepo.fireTableRowsInserted(row, row);
-                dialog.tableRepositories.setRowSelectionInterval(row, row);
+                repositoriesMappingPanel.tableRepositories.setRowSelectionInterval(row, row);
             }
         });
-        dialog.btnRepoRemove.addActionListener(new ActionListener() {
+        repositoriesMappingPanel.btnRepoRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int r = dialog.tableRepositories.getSelectedRow();
+                int r = repositoriesMappingPanel.tableRepositories.getSelectedRow();
                 if (r >= 0) {
                     listRepo.remove(r);
                     modelRepo.fireTableRowsDeleted(r, r);
                 }
             }
         });
-        dialog.btnMappingAdd.addActionListener(new ActionListener() {
+        repositoriesMappingPanel.btnMappingAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RowMapping mapping = new RowMapping();
-                if (dialog.tableRepositories.getRowCount() == 1) {
-                    mapping.repoUrl = (String) dialog.tableRepositories.getValueAt(0, 1);
+                if (repositoriesMappingPanel.tableRepositories.getRowCount() == 1) {
+                    mapping.repoUrl = (String) repositoriesMappingPanel.tableRepositories.getValueAt(0, 1);
                 }
                 listMapping.add(mapping);
                 int row = listMapping.size() - 1;
                 modelMapping.fireTableRowsInserted(row, row);
-                dialog.tableMapping.setRowSelectionInterval(row, row);
+                repositoriesMappingPanel.tableMapping.setRowSelectionInterval(row, row);
             }
         });
-        dialog.btnMappingRemove.addActionListener(new ActionListener() {
+        repositoriesMappingPanel.btnMappingRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int r = dialog.tableMapping.getSelectedRow();
+                int r = repositoriesMappingPanel.tableMapping.getSelectedRow();
                 if (r >= 0) {
                     listMapping.remove(r);
                     modelMapping.fireTableRowsDeleted(r, r);
@@ -364,7 +366,7 @@ public class RepositoriesMappingController {
         for (RowRepo r : listRepo) {
             comboBox.addItem(r.url);
         }
-        dialog.tableMapping.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
+        repositoriesMappingPanel.tableMapping.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
     }
 
     /**

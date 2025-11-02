@@ -28,8 +28,8 @@ import javax.swing.JComponent;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.dialogs.RepositoriesMappingController;
-import org.omegat.gui.dialogs.RepositoriesMappingPanel;
+import org.omegat.gui.repositoriesmapping.RepositoriesMappingController;
+import org.omegat.gui.repositoriesmapping.RepositoriesMappingPanel;
 import org.omegat.util.OStrings;
 
 import gen.core.project.RepositoryDefinition;
@@ -41,12 +41,11 @@ import gen.core.project.RepositoryDefinition;
 public class RepositoriesMappingStep implements ProjectWizardStep {
 
     private final RepositoriesMappingPanel panel;
-    private final RepositoriesMappingController controller;
+    private RepositoriesMappingController controller;
 
     public RepositoriesMappingStep() {
-        // no-op; controller will be bound on load
         panel = new RepositoriesMappingPanel();
-        controller = new RepositoriesMappingController();
+        controller = new RepositoriesMappingController(panel, java.util.Collections.emptyList());
     }
 
     @Override
@@ -61,7 +60,7 @@ public class RepositoriesMappingStep implements ProjectWizardStep {
 
     @Override
     public void onLoad(ProjectProperties p) {
-        controller.bindToPanel(panel, p.getRepositories());
+        controller = new RepositoriesMappingController(panel, p.getRepositories());
     }
 
     @Override

@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.dialogs;
+package org.omegat.gui.repositoriesmapping;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,7 +70,6 @@ public class RepositoriesMappingController {
     }
 
     private List<RepositoryDefinition> result;
-
     private RepositoriesMappingPanel repositoriesMappingPanel;
     private AbstractTableModel modelRepo;
     private List<RowRepo> listRepo;
@@ -81,8 +80,8 @@ public class RepositoriesMappingController {
     private TableColumnSizer mappingSizer;
 
 
-    /** Bind controller to an existing panel. */
-    public void bindToPanel(RepositoriesMappingPanel panel, List<RepositoryDefinition> input) {
+    /** Create controller bound to an existing panel. */
+    public RepositoriesMappingController(RepositoriesMappingPanel panel, List<RepositoryDefinition> input) {
         this.repositoriesMappingPanel = panel;
         this.listRepo = new ArrayList<>();
         this.listMapping = new ArrayList<>();

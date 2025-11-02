@@ -24,7 +24,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.dialogs;
+package org.omegat.gui.repositoriesmapping;
 
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
@@ -39,8 +39,6 @@ import javax.swing.JTable;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-
-import static javax.swing.BoxLayout.*;
 
 /**
  * UI for repository mapping.
@@ -59,7 +57,7 @@ public class RepositoriesMappingPanel extends JPanel {
 
     private void initComponents() {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new BoxLayout(this, PAGE_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         GridBagConstraints gridBagConstraints;
 

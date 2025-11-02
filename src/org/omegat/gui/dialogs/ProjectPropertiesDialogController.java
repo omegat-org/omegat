@@ -180,7 +180,7 @@ public class ProjectPropertiesDialogController {
 
         dialog.repositoriesButton.addActionListener(e -> {
             RepositoriesMappingDialog rmd = new RepositoriesMappingDialog(parent, true);
-            List<RepositoryDefinition> r = rmd.show(parent, projectProperties.getRepositories());
+            List<RepositoryDefinition> r = rmd.show(projectProperties.getRepositories());
             if (r != null) {
                 projectProperties.setRepositories(r);
             }

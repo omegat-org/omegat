@@ -1,13 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  60 Enhancement
+  62 Enhancement
   96 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Improve TMX validation error reporting: Show detailed parser errors in dialog instead of only in log file
+  https://sourceforge.net/p/omegat/feature-requests/1787/
+
+  - Tokenizer to support the snowball generated stemming mode
+  https://sourceforge.net/p/omegat/feature-requests/1785/
 
   - Support Windows 11 and Linux on ARM64 for development environment
   https://sourceforge.net/p/omegat/feature-requests/1773/

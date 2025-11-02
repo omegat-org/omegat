@@ -692,7 +692,6 @@ public class ProjectPropertiesDialog extends JDialog {
     /**
      * Return new properties or null if dialog cancelled.
      */
-    @SuppressWarnings("NullAway")
     public @Nullable ProjectProperties getResult() {
         return controller.getResult();
 

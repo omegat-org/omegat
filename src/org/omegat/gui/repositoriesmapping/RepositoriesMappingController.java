@@ -70,14 +70,14 @@ public class RepositoriesMappingController {
     }
 
     private List<RepositoryDefinition> result;
-    private RepositoriesMappingPanel repositoriesMappingPanel;
+    private final RepositoriesMappingPanel repositoriesMappingPanel;
     private AbstractTableModel modelRepo;
-    private List<RowRepo> listRepo;
+    private final List<RowRepo> listRepo;
     private AbstractTableModel modelMapping;
-    private List<RowMapping> listMapping;
+    private final List<RowMapping> listMapping;
 
-    private TableColumnSizer repoSizer;
-    private TableColumnSizer mappingSizer;
+    private final TableColumnSizer repoSizer;
+    private final TableColumnSizer mappingSizer;
 
 
     /** Create controller bound to an existing panel. */

@@ -25,7 +25,6 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
@@ -39,14 +38,12 @@ import java.util.stream.Stream;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
-import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
 import gen.core.project.RepositoryDefinition;
@@ -57,13 +54,14 @@ import gen.core.project.RepositoryMapping;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("NullAway")
 public class RepositoriesMappingController {
 
     /**
      * Enum of supported repository types corresponding to
      * org.omegat.core.team2.impl.*RemoteRepository*
      */
-    enum RepoType {
+    public enum RepoType {
         GIT, SVN, HTTP, FILE;
 
         public String getLocalizedString() {
@@ -73,7 +71,6 @@ public class RepositoriesMappingController {
 
     private List<RepositoryDefinition> result;
 
-    private RepositoriesMappingDialog repositoryMappingDialog;
     private RepositoriesMappingPanel repositoriesMappingPanel;
     private AbstractTableModel modelRepo;
     private List<RowRepo> listRepo;
@@ -83,39 +80,62 @@ public class RepositoriesMappingController {
     private TableColumnSizer repoSizer;
     private TableColumnSizer mappingSizer;
 
-    public List<RepositoryDefinition> show(Frame parent, List<RepositoryDefinition> input) {
-        repositoryMappingDialog = new RepositoriesMappingDialog(parent, true);
-        repositoryMappingDialog.setLocationRelativeTo(parent);
-        repositoriesMappingPanel = repositoryMappingDialog.getPanel();
 
-        repositoriesMappingPanel.getRootPane().setDefaultButton(repositoryMappingDialog.okButton);
-
-        StaticUIUtils.setEscapeClosable(repositoryMappingDialog);
-
-        listRepo = new ArrayList<>();
-        listMapping = new ArrayList<>();
+    /** Bind controller to an existing panel. */
+    public void bindToPanel(RepositoriesMappingPanel panel, List<RepositoryDefinition> input) {
+        this.repositoriesMappingPanel = panel;
+        this.listRepo = new ArrayList<>();
+        this.listMapping = new ArrayList<>();
         putData(input);
 
         initTableModels();
-        initButtons();
+        initPanelButtons();
         reinitRepoUrlDropdown();
 
+        // selection/model listeners that control enablement
         repositoriesMappingPanel.tableRepositories.getSelectionModel().addListSelectionListener(e -> updateState());
         repositoriesMappingPanel.tableMapping.getSelectionModel().addListSelectionListener(e -> updateState());
         repositoriesMappingPanel.tableRepositories.getModel().addTableModelListener(e -> updateState());
 
+        // column sizing
         repoSizer = TableColumnSizer.autoSize(repositoriesMappingPanel.tableRepositories, 1, true);
         mappingSizer = TableColumnSizer.autoSize(repositoriesMappingPanel.tableMapping, 0, true);
 
         updateState();
+    }
 
-        repositoryMappingDialog.setVisible(true);
-        return result;
+    /** Generic OK logic usable from both dialog and embedded contexts. */
+    public String onOk() {
+        // stop editing if any
+        boolean doneEditing =
+                Stream.of(repositoriesMappingPanel.tableMapping, repositoriesMappingPanel.tableRepositories)
+                .map(JTable::getCellEditor).allMatch(editor -> editor == null || editor.stopCellEditing());
+        if (!doneEditing) {
+            return OStrings.getString("TF_ERROR");
+        }
+        String r = isValid();
+        if (r != null) {
+            return r;
+        }
+        result = getData();
+        return null;
+    }
+
+    /** Generic Cancel logic. */
+    public void onCancel() {
+        result = null;
+    }
+
+    /** Validate current content; return null if OK, otherwise an error message. */
+    public String validateInput() {
+        return isValid();
     }
 
     private void updateState() {
-        repositoriesMappingPanel.btnRepoRemove.setEnabled(repositoriesMappingPanel.tableRepositories.getSelectedRow() != -1);
-        repositoriesMappingPanel.btnMappingRemove.setEnabled(repositoriesMappingPanel.tableMapping.getSelectedRow() != -1);
+        repositoriesMappingPanel.btnRepoRemove.setEnabled(
+                repositoriesMappingPanel.tableRepositories.getSelectedRow() != -1);
+        repositoriesMappingPanel.btnMappingRemove.setEnabled(
+                repositoriesMappingPanel.tableMapping.getSelectedRow() != -1);
         repositoriesMappingPanel.btnMappingAdd.setEnabled(repositoriesMappingPanel.tableRepositories.getRowCount() > 0);
     }
 
@@ -153,8 +173,10 @@ public class RepositoriesMappingController {
                     reinitRepoUrlDropdown();
                     break;
                 }
-                repoSizer.reset();
-                repoSizer.adjustTableColumns();
+                if (repoSizer != null) {
+                    repoSizer.reset();
+                    repoSizer.adjustTableColumns();
+                }
             }
 
             @Override
@@ -192,7 +214,8 @@ public class RepositoriesMappingController {
                 return value == null ? "" : value.getLocalizedString();
             }
         });
-        repositoriesMappingPanel.tableRepositories.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
+        repositoriesMappingPanel.tableRepositories.getColumnModel().getColumn(0)
+                .setCellEditor(new DefaultCellEditor(comboBox));
 
         modelMapping = new AbstractTableModel() {
 
@@ -277,31 +300,8 @@ public class RepositoriesMappingController {
         repositoriesMappingPanel.tableMapping.setModel(modelMapping);
     }
 
-    void initButtons() {
-        repositoryMappingDialog.cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repositoryMappingDialog.dispose();
-            }
-        });
-        repositoryMappingDialog.okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean doneEditing = Stream.of(repositoriesMappingPanel.tableMapping, repositoriesMappingPanel.tableRepositories)
-                        .map(JTable::getCellEditor).allMatch(editor -> editor == null || editor.stopCellEditing());
-                if (!doneEditing) {
-                    return;
-                }
-                String r = isValid();
-                if (r != null) {
-                    JOptionPane.showMessageDialog(repositoriesMappingPanel, r, OStrings.getString("TF_ERROR"),
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                result = getData();
-                repositoryMappingDialog.dispose();
-            }
-        });
+
+    private void initPanelButtons() {
         repositoriesMappingPanel.btnRepoAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -366,7 +366,8 @@ public class RepositoriesMappingController {
         for (RowRepo r : listRepo) {
             comboBox.addItem(r.url);
         }
-        repositoriesMappingPanel.tableMapping.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(comboBox));
+        repositoriesMappingPanel.tableMapping.getColumnModel().getColumn(0).setCellEditor(
+                new DefaultCellEditor(comboBox));
     }
 
     /**
@@ -440,6 +441,13 @@ public class RepositoriesMappingController {
             }
         }
         return result;
+    }
+
+    /**
+     * Result after ok. In embedded use, if onOk() hasn't been called, returns current data snapshot.
+     */
+    public List<RepositoryDefinition> getResult() {
+        return result != null ? result : getData();
     }
 
     String normalizeMapping(String mapping) {

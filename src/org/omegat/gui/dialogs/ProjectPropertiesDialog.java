@@ -62,6 +62,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.openide.awt.Mnemonics;
 
@@ -691,7 +692,8 @@ public class ProjectPropertiesDialog extends JDialog {
     /**
      * Return new properties or null if dialog cancelled.
      */
-    public ProjectProperties getResult() {
+    @SuppressWarnings("NullAway")
+    public @Nullable ProjectProperties getResult() {
         return controller.getResult();
 
     }

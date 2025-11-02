@@ -27,12 +27,14 @@
 package org.omegat.gui.dialogs;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -63,6 +65,36 @@ public class RepositoriesMappingDialog extends JDialog {
 
     public RepositoriesMappingPanel getPanel() {
         return panel;
+    }
+
+    /**
+     * Show the dialog and return the resulting repositories definitions, or null if cancelled.
+     */
+    public java.util.List<gen.core.project.RepositoryDefinition> show(Frame owner,
+            java.util.List<gen.core.project.RepositoryDefinition> input) {
+        setLocationRelativeTo(owner);
+        // Core controller binds logic to the panel
+        RepositoriesMappingController controller = new RepositoriesMappingController();
+        panel.getRootPane().setDefaultButton(okButton);
+        StaticUIUtils.setEscapeClosable(this);
+        controller.bindToPanel(panel, input);
+
+        okButton.addActionListener(e -> {
+            String err = controller.onOk();
+            if (err != null) {
+                JOptionPane.showMessageDialog(panel, err, OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            setVisible(false);
+        });
+        cancelButton.addActionListener(e -> {
+            controller.onCancel();
+            setVisible(false);
+        });
+
+        setVisible(true);
+        dispose();
+        return controller.getResult();
     }
 
     private void initComponents() {

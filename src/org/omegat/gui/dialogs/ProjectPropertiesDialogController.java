@@ -47,6 +47,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -107,7 +108,7 @@ public class ProjectPropertiesDialogController {
     /**
      * Return new properties or null if dialog cancelled.
      */
-    public ProjectProperties getResult() {
+    public @Nullable ProjectProperties getResult() {
         return dialogCancelled ? null : projectProperties;
     }
 
@@ -178,8 +179,8 @@ public class ProjectPropertiesDialogController {
         }
 
         dialog.repositoriesButton.addActionListener(e -> {
-            List<RepositoryDefinition> r = new RepositoriesMappingController().show(parent,
-                    projectProperties.getRepositories());
+            RepositoriesMappingDialog rmd = new RepositoriesMappingDialog(parent, true);
+            List<RepositoryDefinition> r = rmd.show(parent, projectProperties.getRepositories());
             if (r != null) {
                 projectProperties.setRepositories(r);
             }
@@ -601,7 +602,7 @@ public class ProjectPropertiesDialogController {
         dialog.setVisible(false);
     }
 
-    public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
+    public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");

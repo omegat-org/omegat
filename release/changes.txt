@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   60 Enhancement
-  93 Bug fixes
+  96 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -182,6 +182,9 @@
 
   Bug fixes:
 
+  - .PO filter bug: display issue when a msgctxt spans several lines
+  https://sourceforge.net/p/omegat/bugs/1305/
+
   - Unable to import a team project to a path containing Chinese characters
   https://sourceforge.net/p/omegat/bugs/1302/
 
@@ -205,6 +208,9 @@
 
   - Fix the IllegalArgumentError on sort with filter(Objects::nonNull)
   https://sourceforge.net/p/omegat/bugs/1279/
+
+  - OmegaT failed to start if there are 'jar' file w/o manifest in plugin folder
+  https://sourceforge.net/p/omegat/bugs/1276/
 
   - aligner average distance can be {0} which expected a numeric value
   https://sourceforge.net/p/omegat/bugs/1275/
@@ -435,6 +441,9 @@
 
   - Fails to load TM using tags
   https://sourceforge.net/p/omegat/bugs/1090
+
+  - Autosuggestion and IME malfunctioning
+  https://sourceforge.net/p/omegat/bugs/965/
 
   - Ctrl+Z incorrectly erases contents of segment Note
   https://sourceforge.net/p/omegat/bugs/903/

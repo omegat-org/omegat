@@ -29,6 +29,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javax.swing.AbstractAction;
@@ -59,19 +60,16 @@ import org.omegat.gui.preferences.view.GeneralOptionsController;
  */
 public class FirstTimeConfigWizardDialog extends JDialog {
 
+    // Center: steps cards
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel cardPanel = new JPanel(cardLayout);
 
+    // South: nav
     private final JButton backButton = new JButton();
     private final JButton nextButton = new JButton();
     private final JButton finishButton = new JButton();
     private final JButton cancelButton = new JButton();
     private final JLabel statusLabel = new JLabel();
-
-    private final IPreferencesController[] steps;
-    private int index = 0;
-
-    private boolean finished = false;
 
     // West: steps list
     private final DefaultListModel<String> stepsModel = new DefaultListModel<>();
@@ -83,6 +81,10 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     private final JTextArea explanation = new JTextArea();
 
     private final ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.firsttime.Bundle");
+
+    private final IPreferencesController[] steps;
+    private int index = 0;
+    private boolean finished = false;
 
     public FirstTimeConfigWizardDialog(Frame owner) {
         super(owner, "Welcome to OmegaT", true);
@@ -134,7 +136,31 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         add(eastPanel, BorderLayout.EAST);
 
         // NAVIGATION
+        configureActions();
         JPanel nav = new JPanel();
+        nav.add(backButton);
+        nav.add(nextButton);
+        nav.add(finishButton);
+        nav.add(cancelButton);
+        // South container with buttons and status bar
+        JPanel southPanel = new JPanel(new BorderLayout());
+        southPanel.add(nav, BorderLayout.CENTER);
+        statusLabel.setBorder(BorderFactory.createEmptyBorder(4, 8, 6, 8));
+        southPanel.add(statusLabel, BorderLayout.SOUTH);
+        add(southPanel, BorderLayout.SOUTH);
+
+        // Header
+        JLabel header = new JLabel(getString("header.text", "Let's set up a few preferences"));
+        header.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        add(header, BorderLayout.NORTH);
+
+        setPreferredSize(new Dimension(980, 560));
+        pack();
+        setLocationRelativeTo(owner);
+        updateState();
+    }
+
+    private void configureActions() {
         backButton.setAction(new AbstractAction(getString("button.back", "Back")) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -166,9 +192,10 @@ public class FirstTimeConfigWizardDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Validate all steps
-                for (IPreferencesController c : steps) {
+                for (int i = 0; i < steps.length; i++) {
+                    IPreferencesController c = steps[i];
                     if (!c.validate()) {
-                        index = indexOf(c);
+                        index = i;
                         updateState();
                         return;
                     }
@@ -187,34 +214,6 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                 dispose();
             }
         });
-        nav.add(backButton);
-        nav.add(nextButton);
-        nav.add(finishButton);
-        nav.add(cancelButton);
-        // South container with buttons and status bar
-        JPanel southPanel = new JPanel(new BorderLayout());
-        southPanel.add(nav, BorderLayout.CENTER);
-        statusLabel.setBorder(BorderFactory.createEmptyBorder(4, 8, 6, 8));
-        southPanel.add(statusLabel, BorderLayout.SOUTH);
-        add(southPanel, BorderLayout.SOUTH);
-
-        // Header
-        JLabel header = new JLabel(getString("header.text", "Let's set up a few preferences"));
-        header.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        add(header, BorderLayout.NORTH);
-
-        setPreferredSize(new Dimension(980, 560));
-        pack();
-        setLocationRelativeTo(owner);
-        updateState();
-    }
-
-    private int indexOf(IPreferencesController c) {
-        for (int i = 0; i < steps.length; i++) {
-            if (steps[i] == c)
-                return i;
-        }
-        return 0;
     }
 
     private void updateState() {
@@ -243,7 +242,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
             textKey = "explain.greeting";
             break;
         default:
-            textKey = ""; // No explanation for the First Steps page
+            textKey = ""; // No explanation
             break;
         }
         explanation.setText(textKey.isEmpty() ? "" : getString(textKey, ""));
@@ -263,11 +262,6 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     }
     
     public boolean isRestartRequired() {
-        for (IPreferencesController c : steps) {
-            if (c.isRestartRequired()) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(steps).anyMatch(IPreferencesController::isRestartRequired);
     }
 }

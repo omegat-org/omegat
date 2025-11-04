@@ -38,8 +38,7 @@ import java.util.ResourceBundle;
 
 public final class TipOfTheDayModule {
 
-    // FIXME: disabled for 6.1 release
-    static final boolean ENABLED = false;
+    static final boolean ENABLED = true;
 
     private static @Nullable TipOfTheDayModuleListener listener;
 

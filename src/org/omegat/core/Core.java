@@ -55,6 +55,7 @@ import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.MarkerController;
+import org.omegat.gui.editor.autocompleter.AbstractAutoCompleterView;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
@@ -331,6 +332,13 @@ public final class Core {
      */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
         PluginUtils.getSpellCheckClasses().add(clazz);
+    }
+
+    /**
+     * Register autocompleter.
+     */
+    public static void registerAutoCompleterClass(Class<? extends AbstractAutoCompleterView> clazz) {
+        PluginUtils.getAutoCompleterViewsClasses().add(clazz);
     }
 
     /**

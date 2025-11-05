@@ -131,6 +131,13 @@
         <Class name="org.omegat.util.JsonParser"/>
     </Match>
 
+    <!-- CLI: picoCLI annotated fields can be ignored -->
+    <Match>
+        <Package name="org.omegat.cli"/>
+        <Bug pattern="URF_UNREAD_FIELD"/>
+    </Match>
+
+
     <!-- GlossaryTextArea class has so many issues that should be fixed. -->
     <Match>
         <Class name="org.omegat.gui.glossary.GlossaryTextArea"/>

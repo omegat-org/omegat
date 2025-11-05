@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -220,15 +221,14 @@ public final class Core {
     @Deprecated(since = "6.1.0", forRemoval = true)
     @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
-        initializeGUI(params);
+        initializeGUI();
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI() throws Exception {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
         coreState.setProject(new NotLoadedProject());
@@ -283,9 +283,8 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) {
+    public static void initializeConsole() {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
         coreState.setTagValidation(new TagValidationTool());
         coreState.setProject(new NotLoadedProject());
         coreState.setMainWindow(new ConsoleWindow());
@@ -306,7 +305,8 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return CoreState.getInstance().getCmdLineParams();
+        // FIXME
+        return null;
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {
@@ -331,6 +331,17 @@ public final class Core {
      */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
         PluginUtils.getSpellCheckClasses().add(clazz);
+    }
+
+    /**
+     * Register a CLI subcommand to be added to the application's PicoCLI parser.
+     * This allows modules/plugins to contribute console commands.
+     *
+     * @param name the subcommand name used on the command line
+     * @param subcommand the class annotated with picocli @Command
+     */
+    public static void registerConsoleCommand(String name, Class<?> subcommand) {
+        SubCommands.registerConsoleCommand(name, subcommand);
     }
 
     /**

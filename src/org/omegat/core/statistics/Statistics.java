@@ -168,7 +168,8 @@ public final class Statistics {
                 StatOutputFormat.getDefaultFormats());
         for (StatOutputFormat format : StatOutputFormat.values()) {
             if (format.isSelected(outputFormats)) {
-                writeStat(dir, result, format);
+                File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+                writeStat(statFile, result, format);
             }
         }
     }
@@ -182,8 +183,16 @@ public final class Statistics {
      * @param result the statistics result object containing the data to be written
      * @param format the format in which the statistics should be written (TEXT, XML, or JSON)
      */
+    @Deprecated
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+        writeStat(statFile, result, format);
+    }
+
+    /**
+     * Write statistics to a file in specified format.
+     */
+    public static void writeStat(File statFile, StatsResult result, StatOutputFormat format) {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
                 StandardCharsets.UTF_8)) {
             switch (format) {

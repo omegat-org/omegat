@@ -116,7 +116,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
-                              final BaseMainWindowMenuHandler mainWindowMenuHandler) {
+            final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
@@ -371,7 +371,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
         viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
         viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
-        viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO", VIEW_MODIFICATION_INFO_SUBMENU);
+        viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO",
+                VIEW_MODIFICATION_INFO_SUBMENU);
 
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(

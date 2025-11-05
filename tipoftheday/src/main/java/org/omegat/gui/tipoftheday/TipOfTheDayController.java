@@ -29,7 +29,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.URL;
-import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JDialog;

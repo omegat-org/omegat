@@ -31,6 +31,7 @@ import org.omegat.util.gui.MenuExtender;
 
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -74,10 +75,14 @@ public final class TipOfTheDayModule {
 
         private void initUI() {
             ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.tipoftheday.Bundle");
+            UIDefaults defaults = UIManager.getDefaults();
             for (Enumeration<String> keys = bundle.getKeys(); keys.hasMoreElements();) {
                 String key = keys.nextElement();
-                UIManager.getDefaults().put(key, bundle.getObject(key));
+                defaults.put(key, bundle.getObject(key));
             }
+            defaults.put("TipOfTheDay.background", defaults.getColor("TextPane.background"));
+            defaults.put("TipOfTheDay.foreground", defaults.getColor("TextPane.foreground"));
+            defaults.put("TipOfTheDay.borderColor", defaults.getColor("TextPane.borderColor"));
         }
 
         private void initMenu() {

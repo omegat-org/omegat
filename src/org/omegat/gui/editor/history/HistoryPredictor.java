@@ -37,6 +37,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
@@ -51,8 +52,21 @@ public class HistoryPredictor extends AutoCompleterListView {
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
+    public static void registerPlugins() {
+        Core.registerAutoCompleterClass(HistoryPredictor.class);
+    }
+
+    public static void unloadPlugins() {
+        // nothing to do.
+    }
+
+    @Deprecated
     public HistoryPredictor() {
-        super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"));
+        this(null);
+    }
+
+    public HistoryPredictor(AutoCompleter completer) {
+        super(OStrings.getString("AC_HISTORY_PREDICTIONS_VIEW"), completer);
 
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (isEnabled() && eventType == PROJECT_CHANGE_TYPE.LOAD) {

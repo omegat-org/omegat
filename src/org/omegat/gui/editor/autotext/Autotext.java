@@ -35,8 +35,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
@@ -46,6 +49,13 @@ import org.omegat.util.StaticUtils;
  * @author Aaron Madlon-Kay
  */
 public final class Autotext {
+
+    public static void loadPlugins() {
+        Core.registerAutoCompleterClass(AutotextAutoCompleterView.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     private Autotext() {
     }
@@ -74,11 +84,17 @@ public final class Autotext {
     }
 
     public static List<AutotextItem> load(File file) throws IOException {
-        return Files.lines(file.toPath()).filter(line -> !line.trim().isEmpty())
-                .map(line -> line.split("\t")).filter(parts -> parts.length >= 2)
-                .map(parts -> new AutotextItem(parts[0], parts[1],
-                        Arrays.copyOfRange(parts, 2, parts.length)))
-                .collect(Collectors.toList());
+        try (var lines = Files.lines(file.toPath())) {
+            return lines.map(Autotext::parseAutotextLine).flatMap(Optional::stream).collect(Collectors.toList());
+        }
+    }
+
+    private static Optional<AutotextItem> parseAutotextLine(String line) {
+        String[] parts = StringUtils.split(line, '\t');
+        if (parts.length >= 2) {
+            return Optional.of(new AutotextItem(parts[0], parts[1], Arrays.copyOfRange(parts, 2, parts.length)));
+        }
+        return Optional.empty();
     }
 
     public static void save(Collection<AutotextItem> items, File file) throws IOException {

@@ -1,0 +1,44 @@
+hr {
+    background-color: #4a4a4a;
+}
+
+h1, h2, h3, h4, dt {
+    color: #9BC65A;
+}
+
+h2 {
+    border-bottom: 1px solid #4a4a4a;
+}
+
+a {
+	text-decoration-color: #FF8A5B;
+}
+
+.figure-title {
+    color: #9BC65A;
+}
+
+.keycap,
+td>span.keycaps,
+span.term>span.keycap {
+    border: 1px solid #555;
+    background: #2b2b2b;
+    color: #e0e0e0;
+}
+
+kbd {
+    border: 1px solid #9BC65A;
+}
+
+samp {
+    background-color:  #2a3a2a;
+}
+
+dfn {
+    border-bottom: 1px dotted #9BC65A;
+}
+
+pre {
+    background-color: #2a3a2a;
+    border: 1px dotted #9BC65A;
+}

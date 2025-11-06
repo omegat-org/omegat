@@ -1,9 +1,6 @@
-/**********************************/
-/* Reset some of the WH styesheet */
-/**********************************/
-
-* {
-}
+/************************/
+/* Style without colors */
+/************************/
 
 body {
 	font-family:sans-serif;
@@ -34,21 +31,15 @@ hr {
 hr {
     height: 1px;
     border-style: none;
-    background-color: #BCBCBC;
 }
 
 blockquote {
     margin: 2em 4em;
 }
 
-
 /***********/
 /* Headers */
 /***********/
-
-h1, h2, h3, h4, dt {
-    color: #77A43B;
-}
 
 h1 {
     line-height: 1.13;
@@ -67,7 +58,6 @@ h2 {
     line-height: 1.2;
     margin: 0.8em 0;
     padding-top: 1em;
-    border-bottom: 1px solid #BCBCBC;
 }
 
 h3 {
@@ -79,10 +69,8 @@ h3 {
 h4 {
     font-size:1.08em;
     line-height: 1.39;
-    margin: 0.92em 0;
+    margin: 1.5rem 0 .2rem 0;
     font-style:italic;
-    margin-top:1.5rem;
-    margin-bottom:.2rem;
 }
 
 h1:first-child,
@@ -94,17 +82,14 @@ h6:first-child {
     margin-top: 0;
 }
 
-
 /*********/
 /* Links */
 /*********/
 
 a {
-	color: #DE5B17;
 	text-decoration-line: underline;
 	text-decoration-style: dotted;
 	text-decoration-thickness: 1px;
-	text-decoration-color: #DE5B17;
 }
 
 a.ulink::after {
@@ -113,7 +98,6 @@ a.ulink::after {
 
 .figure-title {
     font-style:italic;
-    color: #77A43B;
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -136,17 +120,13 @@ span.term>span.keycap {
     border: 1px solid;
     border-radius:4px;
     margin: 0 .2rem;
-    background: whitesmoke;
-    color: black;
 	padding-left:.3rem;
 	padding-right:1.2rem; 
 }
 
-
 /*****************************************/
-/* Various font, colors and box settings */
+/* Various font and box settings */
 /*****************************************/
-
 
 .literal {
     font-weight: bold;
@@ -164,13 +144,12 @@ pre {
 
 kbd {
     font-weight: bold;
-    border: 1px solid #77A43B;
+    border: 1px solid;
     border-radius: 3px;
     padding: 0.125em 0.25em;
 }
 
 samp {
-    background-color: lightgreen;
     padding: 0.125em 0.25em;
 }
 
@@ -189,13 +168,12 @@ cite {
 
 dfn {
     font-style: italic;
-    border-bottom: 1px dotted #77A43B;
+    border-bottom: 1px dotted;
 }
 
 pre {
     white-space: pre;
-    background-color: lightgreen;
-    border: 1px dotted #77A43B;
+    border: 1px dotted;
     padding: 0.5em;
     margin: 1.1em 0;
 }
@@ -235,6 +213,12 @@ dd {
     margin-bottom: 1em;
 }
 
+
+span.guimenu::before,
+span.guisubmenu::before,
+span.guimenuitem::before {
+	content: "> ";
+}
 
 span.guimenu,
 span.guimenuitem,

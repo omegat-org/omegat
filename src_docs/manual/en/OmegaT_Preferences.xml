@@ -1385,8 +1385,21 @@ ${filePath}></programlisting></para>
 					<literal>${targetLanguage}</literal>
 				  </entry>
 				  <entry>The segment target language.</entry>
-				</row>
+        			</row>
+				
+				<row>
+				  <entry>
+					<literal>@[<replaceable role="nobreak">tmxPropType</replaceable>][<replaceable role="nobreak">keyValueSep</replaceable>][<replaceable role="nobreak">valuesSep</replaceable>]</literal>
+				  </entry>
+				  <entry><para>Inserts matching TMX entry property values for the given <literal>type</literal> of <literal>prop</literal>, if any.</para>
 
+				  <example id="dialog.preferences.tm.matches.template.tmxprop.example">
+					  <title id="dialog.preferences.tm.matches.template.tmxprop.example.title">Displaying a property</title>
+					  For example, for a TMX entry property <literal>&lt;prop type="Att::Doc. Type"&gt;Regulation&lt;/prop&gt;</literal>,
+					  the template <literal>[Att::Doc. Type][=][,]</literal> would render as <literal>Att::Doc. Type=Regulation</literal>.
+				  </example>
+				</entry>
+				</row>
 			  </tbody>
 			</tgroup>
 		  </table>

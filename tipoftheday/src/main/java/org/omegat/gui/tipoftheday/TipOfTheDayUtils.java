@@ -25,14 +25,13 @@
 
 package org.omegat.gui.tipoftheday;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Locale;
 
-import org.jetbrains.annotations.Nullable;
-import org.omegat.util.Log;
+import org.omegat.util.StaticUtils;
 
 public final class TipOfTheDayUtils {
 
@@ -41,8 +40,12 @@ public final class TipOfTheDayUtils {
 
     static final String INDEX_YAML = "tips.yaml";
 
-    static @Nullable URI getTipsFileURI(String filename) {
-        return getTipsURI(filename, getLocale());
+    static URI getTipsFileURI(String filename) {
+        // detect build environment, run as gradle test
+        if (Paths.get(StaticUtils.installDir(), "src_docs", "tips").toFile().exists()) {
+            return Paths.get(StaticUtils.installDir(), "src_docs", "tips", getLocale(), filename).toUri();
+        }
+        return Paths.get(StaticUtils.installDir(), "tips", getLocale(), filename).toUri();
     }
 
     static String getLocale() {
@@ -58,27 +61,16 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    private static @Nullable URI getTipsURI(String filename, String lang) {
-        URL url = TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + filename);
-        if (url != null) {
-            try {
-                return url.toURI();
-            } catch (URISyntaxException ignored) {
-                Log.log("Wrong tips configuration:" + url);
-            }
-        }
-        return null;
-    }
-
-    static InputStream getIndexStream() {
-        return TipOfTheDayUtils.class
-                .getResourceAsStream("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
+    static InputStream getIndexStream() throws IOException {
+        return getTipsFileURI(INDEX_YAML).toURL().openStream();
     }
 
     static boolean hasIndex() {
-        URL url = TipOfTheDayUtils.class
-                .getResource("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
-        return url != null;
+        try (InputStream is = getIndexStream()) { // validate exists
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

@@ -52,7 +52,7 @@ public class HistoryPredictor extends AutoCompleterListView {
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
-    public static void registerPlugins() {
+    public static void loadPlugins() {
         Core.registerAutoCompleterClass(HistoryPredictor.class);
     }
 
@@ -180,9 +180,6 @@ public class HistoryPredictor extends AutoCompleterListView {
      * <p>
      * If the language is not space-delimited, use the last token, as we have no
      * way of distinguishing a completed word from an incomplete one.
-     *
-     * @param tokens
-     * @return
      */
     private String lastFullWordToken(String[] tokens) {
         int startOffset = isLanguageSpaceDelimited() ? 2 : 1;

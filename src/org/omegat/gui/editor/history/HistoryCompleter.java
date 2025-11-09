@@ -52,7 +52,7 @@ public class HistoryCompleter extends AutoCompleterListView {
     private SourceTextEntry currentEntry;
     private boolean isCurrentEntryTranslated;
 
-    public static void registerPlugins() {
+    public static void loadPlugins() {
         Core.registerAutoCompleterClass(HistoryCompleter.class);
     }
 

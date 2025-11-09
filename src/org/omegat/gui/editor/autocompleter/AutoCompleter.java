@@ -109,8 +109,9 @@ public class AutoCompleter implements IAutoCompleter {
 
         for (Class<?> viewClass : PluginUtils.getAutoCompleterViewsClasses()) {
             try {
-               AbstractAutoCompleterView view = (AbstractAutoCompleterView) viewClass.getDeclaredConstructor(IAutoCompleter.class).newInstance(this);
-                views.add(view);
+               AbstractAutoCompleterView view = (AbstractAutoCompleterView) viewClass.getDeclaredConstructor(
+                       AutoCompleter.class).newInstance(this);
+               views.add(view);
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
                      NoSuchMethodException e) {
                 Log.log(e);

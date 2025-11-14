@@ -1,11 +1,9 @@
 parameters:
-  condition: false
   omegatVersion: "6.1.0"
 
 steps:
   - task: Bash@3
     displayName: Configure SSH to disable host key checking and store private key
-    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
@@ -17,16 +15,15 @@ steps:
         chmod 600 ~/.ssh/id_rsa
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
-    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
         sudo apt-get update
         sudo apt-get install -q -y lftp
         echo "Push manuals to sourceforge project web"
-        srcdir=$(system.defaultworkingdirectory)/build/docs/manual/
+        srcdir=$(system.defaultworkingdirectory)/docs/manual/
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/manual/${{ parameters.omegatVersion }}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot
-        cmd="mkdir -p $destdir ; lcd $(system.defaultworkingdirectory)/build/docs/manual/ ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
         ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_CI_PASS) lftp --env-password -e \"$cmd\" $dest"

@@ -53,6 +53,13 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
+tasks.register('tipsHtmls', Sync) {
+    description = 'Copy tips html/css contents into build folder'
+    group = 'documentation'
+    from project.layout.projectDirectory.dir('src_docs/tips')
+    into layout.buildDirectory.dir('docs/tips')
+}
+
 def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
         .map { it.split(',') }
 manualLangsProvider.get().each { lang ->

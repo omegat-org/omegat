@@ -1,0 +1,17 @@
+/**
+ * "Tip Of The Day" feature
+ */
+
+plugins {
+    id 'org.omegat.module'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+    } else {
+        implementation(libs.jetbrains.annotations)
+        compileOnly(libs.jackson.yaml)
+    }
+}

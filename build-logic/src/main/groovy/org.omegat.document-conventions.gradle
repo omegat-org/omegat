@@ -93,6 +93,7 @@ manualLangsProvider.get().each { lang ->
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
+        css.set("omegat.css")
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 
@@ -204,7 +205,7 @@ def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs
         .map { it.split(',') }
 firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
-        from layout.projectDirectory.file("src_docs/style/omegat.css")
+        from layout.projectDirectory.file("src_docs/style/greeting.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
     def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
@@ -212,6 +213,7 @@ firstStepLangsProvider.get().each { lang ->
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        css.set("greeting.css")
         finalizedBy(firstStepsHtmlFinally)
     }
     firstSteps.dependsOn(firstStepsHtml)

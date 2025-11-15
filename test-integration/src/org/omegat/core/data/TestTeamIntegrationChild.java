@@ -42,17 +42,15 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.madlonkay.supertmxmerge.data.ITuv;
-import org.madlonkay.supertmxmerge.data.Key;
-import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.operation.GlossaryRebaseOperation;
+import org.omegat.core.team2.operation.TMXRebaseOperation;
+import org.omegat.core.team2.operation.TestingGlossaryRebaseOperation;
+import org.omegat.core.team2.operation.TestingTMXRebaseOperation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.EditorSettingsStub;
@@ -68,7 +66,6 @@ import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainMenuStub;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
@@ -88,7 +85,7 @@ public final class TestTeamIntegrationChild {
 
     public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
 
-    static final String CONCURRENT_NAME = "concurrent";
+    public static final String CONCURRENT_NAME = "concurrent";
 
     static long finishTime;
     static String source;
@@ -472,69 +469,13 @@ public final class TestTeamIntegrationChild {
         }
 
         @Override
-        protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-            Log.log("Base:   " + baseTMX);
-            Log.log("Mine:   " + projectTMX);
-            Log.log("Theirs: " + headTMX);
-            if (!checkMergeInput(baseTMX, projectTMX)) {
-                Log.log("'Mine' TM is not a valid derivative of 'Base' TM");
-                // Exceptions thrown here are suppressed in
-                // RealProject.saveProject(boolean) so this is the easiest way
-                // to early-exit
-                System.exit(1);
-            }
-            if (!checkMergeInput(baseTMX, headTMX)) {
-                Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
-                System.exit(1);
-            }
-            StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
-                    .setResolutionStrategy(new ResolutionStrategy() {
-                        @Override
-                        public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                            TMXEntry enBase = baseTuv != null
-                                    ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
-                                    : null;
-                            TMXEntry enProject = projectTuv != null
-                                    ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
-                                    : null;
-                            TMXEntry enHead = headTuv != null
-                                    ? (TMXEntry) headTuv.getUnderlyingRepresentation()
-                                    : null;
-                            String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
-                                    + tr(enHead) + " project=" + tr(enProject);
-                            if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
-                                if (v(enHead) < v(enBase)) {
-                                    throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
-                                }
-                                if (v(enProject) < v(enBase)) {
-                                    throw new RuntimeException("Rebase project: wrong concurrent: " + s);
-                                }
-                                if (v(enHead) > v(enProject)) {
-                                    System.err.println(s + ": result=head");
-                                    return headTuv;
-                                } else {
-                                    System.err.println(s + ": result=project");
-                                    return projectTuv;
-                                }
-                            } else {
-                                throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
-                            }
-                        }
-                    });
-            String srcLang = config.getSourceLanguage().getLanguage();
-            String trgLang = config.getTargetLanguage().getLanguage();
-            ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                    new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                    new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                    new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-            Log.log("Merged: " + mergedTMX);
-            if (!checkMergeInput(baseTMX, mergedTMX)) {
-                Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-                System.exit(1);
-            }
-            commitDetails.append('\n');
-            commitDetails.append(props.getReport().toString());
-            return mergedTMX;
+        TMXRebaseOperation getTMXRebaseOperation() {
+            return new TestingTMXRebaseOperation(projectTMX, config);
+        }
+
+        @Override
+        GlossaryRebaseOperation getGlossaryRebaseOperation() {
+            return new TestingGlossaryRebaseOperation(config);
         }
 
         /**
@@ -576,11 +517,6 @@ public final class TestTeamIntegrationChild {
             } else {
                 return e.translation;
             }
-        }
-
-        @Override
-        protected void notifyGlossaryManagerFileChanged(File file) {
-            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
         }
     }
 

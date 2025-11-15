@@ -75,7 +75,7 @@ public class DictionaryManager {
      * returns a list of full names of dictionaries from a dictionary code list
      */
     public List<String> getDictionaryNameList(List<String> aList) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         for (String dic : aList) {
             String[] parts = dic.split("_");
@@ -147,7 +147,7 @@ public class DictionaryManager {
      *
      * @param lang
      *            : the language code (xx_YY) of the dictionary to be deleted
-     * @returns true upon success, otherwise false
+     * @return true upon success, otherwise false
      */
     public boolean uninstallDictionary(String lang) {
         if (lang == null || lang.isEmpty()) {
@@ -183,7 +183,7 @@ public class DictionaryManager {
 
         List<String> remoteDicList = getRemoteDictionaryCodeList();
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         // compare the two lists
         for (String dicCode : remoteDicList) {
@@ -192,6 +192,7 @@ public class DictionaryManager {
             }
         }
 
+        result.sort(String::compareToIgnoreCase);
         return result;
     }
 
@@ -199,7 +200,7 @@ public class DictionaryManager {
      * downloads the list of available dictionaries from the net
      */
     private List<String> getRemoteDictionaryCodeList() throws IOException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         // download the file
         URL url = new URL(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
@@ -233,7 +234,7 @@ public class DictionaryManager {
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
         // [ 2138846 ] French dictionary cannot be downloaded and installed
-        int pos = langCode.indexOf("_1-3-2", 0);
+        int pos = langCode.indexOf("_1-3-2");
         if (pos != -1) {
             langCode = langCode.substring(0, pos);
         }

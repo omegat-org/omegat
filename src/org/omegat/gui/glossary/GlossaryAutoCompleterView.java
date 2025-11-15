@@ -51,6 +51,10 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         Core.registerAutoCompleterClass(GlossaryAutoCompleterView.class);
     }
 
+    public static void unloadPlugins() {
+        // nothing to do
+    }
+
     @Deprecated
     public GlossaryAutoCompleterView() {
         this(null);

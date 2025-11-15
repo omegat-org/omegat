@@ -27,26 +27,18 @@ package org.omegat.gui.tipoftheday;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.nio.file.Paths;
 import java.util.Locale;
 
-import org.omegat.util.StaticUtils;
+import org.omegat.help.Help;
 
 public final class TipOfTheDayUtils {
+
+    static final String TIPS_DIR = "tips";
 
     private TipOfTheDayUtils() {
     }
 
     static final String INDEX_YAML = "tips.yaml";
-
-    static URI getTipsFileURI(String filename) {
-        // detect build environment, run as gradle test
-        if (Paths.get(StaticUtils.installDir(), "src_docs", "tips").toFile().exists()) {
-            return Paths.get(StaticUtils.installDir(), "src_docs", "tips", getLocale(), filename).toUri();
-        }
-        return Paths.get(StaticUtils.installDir(), "tips", getLocale(), filename).toUri();
-    }
 
     static String getLocale() {
         // Get the system locale (language and country)
@@ -62,7 +54,7 @@ public final class TipOfTheDayUtils {
     }
 
     static InputStream getIndexStream() throws IOException {
-        return getTipsFileURI(INDEX_YAML).toURL().openStream();
+        return Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML).toURL().openStream();
     }
 
     static boolean hasIndex() {

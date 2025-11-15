@@ -259,6 +259,16 @@ public class FiltersCustomizerController extends BasePreferencesController {
         return !isProjectSpecific || panel.projectSpecificCB.isSelected();
     }
 
+    /**
+     * Programmatically control whether project-specific filters are enabled when the
+     * internal checkbox is hidden in wizard context.
+     */
+    public void setProjectSpecificEnabled(boolean enabled) {
+        if (panel != null) {
+            panel.projectSpecificCB.setSelected(enabled);
+        }
+    }
+
     public Filters getResult() {
         if (isEditable()) {
             return editableFilters;

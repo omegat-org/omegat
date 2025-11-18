@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -146,7 +146,7 @@ public class RealProject implements IProject {
      * Status required for execute prepare/rebase/commit in the correct order.
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
-    private volatile @Nullable RebaseAndCommit.Prepared tmxPrepared;
+    private volatile RebaseAndCommit.Prepared tmxPrepared;
     private volatile RebaseAndCommit.Prepared glossaryPrepared;
 
     private boolean isOnlineMode;

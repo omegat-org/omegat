@@ -29,7 +29,6 @@ package org.omegat.filters3.xml.resx;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.Core;
@@ -149,7 +148,7 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public @Nullable String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
             entryText = entry;
             return entry;

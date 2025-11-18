@@ -31,6 +31,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
@@ -79,7 +80,7 @@ public class FiltersTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
+    public @Nullable Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
         case 0:
             return String.class;
@@ -95,7 +96,7 @@ public class FiltersTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public @Nullable Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:
             return filters.get(rowIndex).filterName;
@@ -107,11 +108,9 @@ public class FiltersTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        switch (columnIndex) {
-        case 1:
+        if (columnIndex == 1) {
             filters.get(rowIndex).filter.setEnabled((Boolean) aValue);
-            break;
-        default:
+        } else {
             throw new IllegalArgumentException(OStrings.getString("FILTERS_ERROR_COLUMN_INDEX_NOT_1"));
         }
     }
@@ -135,11 +134,9 @@ public class FiltersTableModel extends AbstractTableModel {
         String key = filter.getClassName();
         IFilter fi = FilterMaster.getFilterInstance(key);
         if (fi != null) {
-            FilterData oldData =
-                    filters.stream().filter(data -> data.className.equals(key)).findFirst().orElse(null);
-            if (oldData != null) {
-                filters.set(filters.indexOf(oldData), new FilterData(key, fi.getFileFormatName(), filter));
-            }
+            filters.stream().filter(data -> data.className.equals(key)).findFirst()
+                    .ifPresent(oldData -> filters.set(filters.indexOf(oldData),
+                            new FilterData(key, fi.getFileFormatName(), filter)));
         }
     }
 

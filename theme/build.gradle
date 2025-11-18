@@ -5,10 +5,12 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedModuleLibsDir, include: '**/flatlaf*.jar')
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*.jar'])
     } else {
         // platform independent dark theme
         implementation(libs.flatlaf)
+        compileOnly(libs.jspecify)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

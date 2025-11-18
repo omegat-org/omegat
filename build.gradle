@@ -174,12 +174,12 @@ dependencies {
         }
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)
 
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
 
         implementation(libs.bundles.caffeine) {
             attributes {
@@ -219,6 +219,7 @@ dependencies {
         exclude module: 'protobuf-java'
     }
     testFixturesImplementation(libs.jetbrains.annotations)
+    testFixturesImplementation(libs.jspecify)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)

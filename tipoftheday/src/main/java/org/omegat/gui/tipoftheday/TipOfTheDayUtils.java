@@ -31,9 +31,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Locale;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 
+@NullMarked
 public final class TipOfTheDayUtils {
 
     private TipOfTheDayUtils() {
@@ -70,7 +72,7 @@ public final class TipOfTheDayUtils {
         return null;
     }
 
-    static InputStream getIndexStream() {
+    static @Nullable InputStream getIndexStream() {
         return TipOfTheDayUtils.class
                 .getResourceAsStream("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
     }

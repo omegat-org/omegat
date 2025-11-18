@@ -617,7 +617,7 @@ public class Searcher {
             if (searchExpression.searchNotes && searchString(note)) {
                 noteMatches = foundMatches.toArray(new SearchMatch[0]);
             }
-            if (searchExpression.searchComments) {
+            if (searchExpression.searchComments && properties != null) {
                 // loop over values only, not keys.
                 for (int i = 1; i <= properties.length; i = i + 2) {
                     if (searchString(properties[i], true)) {

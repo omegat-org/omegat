@@ -21,7 +21,7 @@ steps:
         sudo apt-get update
         sudo apt-get install -q -y lftp
         echo "Push manuals to sourceforge project web"
-        srcdir=$(Pipeline.Workspace)/docs/manual/
+        srcdir=$(Pipeline.Workspace)/build/docs/manual/
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/manual/${{ parameters.omegatVersion }}/
         target=/home/project-web/omegat/htdocs/manual-standard

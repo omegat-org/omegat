@@ -21,7 +21,7 @@ steps:
         sudo apt-get update
         sudo apt-get install -q -y lftp
         echo "Push javadoc to sourceforge project web"
-        srcdir=$(Pipeline.Workspace)/docs/javadoc/
+        srcdir=$(Pipeline.Workspace)/build/docs/javadoc/
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/javadoc/${{ parameters.omegatVersion }}/
         target=/home/project-web/omegat/htdocs/javadoc-standard

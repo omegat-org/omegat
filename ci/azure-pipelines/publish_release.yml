@@ -26,7 +26,7 @@ steps:
         sudo apt-get update
         sudo apt-get install -y lftp
         echo "Push OmegaT files to SourceForge file manager"
-        srcdir=$(Pipeline.Workspace)/distributions/
+        srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
         dest=$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/"

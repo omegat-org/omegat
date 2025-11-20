@@ -21,7 +21,7 @@ steps:
         sudo apt-get update
         sudo apt-get install -q -y lftp
         echo "Push manuals to sourceforge project web"
-        srcdir=$(system.defaultworkingdirectory)/docs/manual/
+        srcdir=$(system.defaultworkingdirectory)/build/docs/manual/
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/manual/${{ parameters.omegatVersion }}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot

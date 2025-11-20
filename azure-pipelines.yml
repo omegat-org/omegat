@@ -173,11 +173,14 @@ stages:
     variables:
       omegatVersion: $[ dependencies.WeeklyBuild.outputs['setVersion.version'] ]
     steps:
+      - script: |
+          echo "Release version: $(omegatVersion)"
+          mkdir -p $(Pipeline.Workspace)/build
       - task: DownloadPipelineArtifact@2
         displayName: 'Download distributions artifact'
         inputs:
           artifact: 'distributions'
-          path: '$(Pipeline.Workspace)/distributions'
+          path: '$(Pipeline.Workspace)/build/distributions'
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(omegatVersion)
@@ -185,7 +188,7 @@ stages:
         displayName: 'Download docs artifact'
         inputs:
           artifact: 'docs'
-          path: '$(Pipeline.Workspace)/docs'
+          path: '$(Pipeline.Workspace)/build/docs'
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
         parameters:
           omegatVersion: $(omegatVersion)
@@ -215,7 +218,7 @@ stages:
         condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n 1)
-          echo "##vso[task.setvariable variable=version;isOutput=true]$version"
+          echo "##vso[task.setvariable variable=version]$version"
           # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
           ./gradlew --stop
           # Check task result
@@ -224,38 +227,12 @@ stages:
           fi
         condition: always()
         displayName: Stop Gradle daemon
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish documents artifact'
-        inputs:
-          targetPath: '$(System.DefaultWorkingDirectory)/build/docs'
-          artifact: 'docs'
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish distributions artifact'
-        inputs:
-          targetPath: '$(System.DefaultWorkingDirectory)/build/distributions'
-          artifact: 'distributions'
-
-  - job: ReleasePublish
-    dependsOn: ReleaseBuild
-    variables:
-      omegatVersion: $[ dependencies.ReleaseBuild.outputs['setVersion.version'] ]
-    steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download distributions artifact'
-        inputs:
-          artifact: 'distributions'
-          path: '$(Pipeline.Workspace)/distributions'
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
-          omegatVersion: $(omegatVersion)
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download docs artifact'
-        inputs:
-          artifact: 'docs'
-          path: '$(Pipeline.Workspace)/docs'
+          omegatVersion: $(version)
       - template: ci/azure-pipelines/publish_manual.yml
         parameters:
-          omegatVersion: $(omegatVersion)
+          omegatVersion: $(version)
       - template: ci/azure-pipelines/publish_javadoc.yml
         parameters:
-          omegatVersion: $(omegatVersion)
+          omegatVersion: $(version)

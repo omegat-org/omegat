@@ -148,7 +148,7 @@ stages:
         condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n 1)
-          echo "##vso[task.setvariable variable=version]$version"
+          echo "##vso[task.setvariable variable=version;isOutput=true]$version"
           # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
           ./gradlew --stop
           # Check task result
@@ -157,14 +157,41 @@ stages:
           fi
         condition: always()
         displayName: Stop Gradle daemon
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish documents artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/build/docs'
+          artifact: 'docs'
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish distributions artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/build/distributions'
+          artifact: 'distributions'
+
+  - job: WeeklyPublish
+    dependsOn: WeeklyBuild
+    variables:
+      omegatVersion: $[ dependencies.WeeklyBuild.outputs['setVersion.version'] ]
+    steps:
+      - script: |
+          echo "Release version: $(omegatVersion)"
+          mkdir -p $(Pipeline.Workspace)/build
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download distributions artifact'
+        inputs:
+          artifact: 'distributions'
+          path: '$(Pipeline.Workspace)/build/distributions'
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
-          omegatVersion: $(version)
-          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
+          omegatVersion: $(omegatVersion)
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download docs artifact'
+        inputs:
+          artifact: 'docs'
+          path: '$(Pipeline.Workspace)/build/docs'
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
         parameters:
-          omegatVersion: $(version)
-          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
+          omegatVersion: $(omegatVersion)
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
@@ -203,12 +230,9 @@ stages:
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(version)
-          condition: eq(variables['Agent.JobStatus'], 'Succeeded')
       - template: ci/azure-pipelines/publish_manual.yml
         parameters:
           omegatVersion: $(version)
-          condition: eq(variables['Agent.JobStatus'], 'Succeeded')
       - template: ci/azure-pipelines/publish_javadoc.yml
         parameters:
           omegatVersion: $(version)
-          condition: eq(variables['Agent.JobStatus'], 'Succeeded')

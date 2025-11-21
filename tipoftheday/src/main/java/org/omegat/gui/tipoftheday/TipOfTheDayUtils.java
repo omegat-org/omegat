@@ -25,27 +25,24 @@
 
 package org.omegat.gui.tipoftheday;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Locale;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
+import org.omegat.help.Help;
 
 @NullMarked
 public final class TipOfTheDayUtils {
+
+    static final String TIPS_DIR = "tips";
 
     private TipOfTheDayUtils() {
     }
 
     static final String INDEX_YAML = "tips.yaml";
-
-    static @Nullable URI getTipsFileURI(String filename) {
-        return getTipsURI(filename, getLocale());
-    }
 
     static String getLocale() {
         // Get the system locale (language and country)
@@ -72,15 +69,16 @@ public final class TipOfTheDayUtils {
         return null;
     }
 
-    static @Nullable InputStream getIndexStream() {
-        return TipOfTheDayUtils.class
-                .getResourceAsStream("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
+    static @Nullable InputStream getIndexStream() throws IOException {
+        return Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML).toURL().openStream();
     }
 
     static boolean hasIndex() {
-        URL url = TipOfTheDayUtils.class
-                .getResource("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
-        return url != null;
+        try (InputStream is = getIndexStream()) { // validate exists
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

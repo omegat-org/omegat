@@ -57,18 +57,6 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    private static @Nullable URI getTipsURI(String filename, String lang) {
-        URL url = TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + filename);
-        if (url != null) {
-            try {
-                return url.toURI();
-            } catch (URISyntaxException ignored) {
-                Log.log("Wrong tips configuration:" + url);
-            }
-        }
-        return null;
-    }
-
     static @Nullable InputStream getIndexStream() throws IOException {
         return Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML).toURL().openStream();
     }

@@ -51,6 +51,7 @@ import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.project.ProjectConfigUI;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -595,6 +596,9 @@ public class ProjectPropertiesDialogController {
             String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");
+        }
+        if (dialogTypeValue == ProjectPropertiesDialog.Mode.NEW_PROJECT) {
+            return ProjectConfigUI.showDialog(parent, projectProperties, dialogTypeValue);
         }
         ProjectPropertiesDialog dialog = new ProjectPropertiesDialog(parent, projectProperties, projFileName,
                 dialogTypeValue);

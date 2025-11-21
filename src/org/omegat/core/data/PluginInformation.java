@@ -31,6 +31,7 @@ import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
 
@@ -269,7 +270,7 @@ public final class PluginInformation {
          * @return PluginInformation object.
          */
         public static PluginInformation fromManifest(final String className, final Manifest manifest,
-                final URL mu, final Status defaultStatus) {
+                                                     @Nullable URL mu, final Status defaultStatus) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
             String packageName = className == null ? ""
                     : className.substring(0, className.lastIndexOf(".") + 1).replace(".", "/");

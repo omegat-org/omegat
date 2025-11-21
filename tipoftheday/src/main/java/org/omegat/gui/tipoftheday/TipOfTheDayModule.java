@@ -24,7 +24,8 @@
  */
 package org.omegat.gui.tipoftheday;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.gui.MenuExtender;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+@NullMarked
 public final class TipOfTheDayModule {
 
     static final boolean ENABLED = true;

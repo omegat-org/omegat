@@ -9,12 +9,12 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar','**/cssbox-*.jar',
                                                                        '**/jstyleparser-*.jar'])
     } else {
         implementation(libs.tipoftheday)
-        implementation(libs.jetbrains.annotations)
+        compileOnly(libs.jspecify)
         compileOnly(libs.jackson.yaml)
     }
 }

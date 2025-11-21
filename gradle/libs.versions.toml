@@ -19,6 +19,7 @@ lucene_gosen = "8.11.1"
 checkstyle = "8.45.1"
 guava = "33.4.8-jre"
 annotations = "23.0.0"
+jspecify = "1.0.0"
 jgit = "6.10.1.202505221210-r"
 svnkit = "1.10.11"
 ivy = "2.5.3"
@@ -114,6 +115,7 @@ lucene-analyzers-stempel = {group = "org.apache.lucene", name = "lucene-analyzer
 lucene-gosen = {group = "org.omegat.lucene", name = "lucene-gosen", version.ref = "lucene_gosen"}
 guava = {group = "com.google.guava", name = "guava", version.ref = "guava"}
 jetbrains-annotations = {group = "org.jetbrains", name = "annotations", version.ref = "annotations"}
+jspecify = {group = "org.jspecify", name = "jspecify", version.ref = "jspecify"}
 groovy-jsr223 = {group = "org.apache.groovy", name = "groovy-jsr223", version.ref = "groovy"}
 groovy-dateutil = {group = "org.apache.groovy", name = "groovy-dateutil", version.ref = "groovy"}
 groovy-json = {group = "org.apache.groovy", name = "groovy-json", version.ref = "groovy"}

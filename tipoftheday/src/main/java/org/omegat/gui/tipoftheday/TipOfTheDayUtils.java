@@ -27,10 +27,14 @@ package org.omegat.gui.tipoftheday;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Locale;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.help.Help;
 
+@NullMarked
 public final class TipOfTheDayUtils {
 
     static final String TIPS_DIR = "tips";
@@ -53,16 +57,19 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    static InputStream getIndexStream() throws IOException {
-        return Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML).toURL().openStream();
+    static @Nullable InputStream getIndexStream() throws IOException {
+        URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML);
+        if (uri == null) {
+            return null;
+        }
+        return uri.toURL().openStream();
     }
 
     static boolean hasIndex() {
-        try (InputStream is = getIndexStream()) { // validate exists
+        try (InputStream ignored = getIndexStream()) { // validate exists
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-
 }

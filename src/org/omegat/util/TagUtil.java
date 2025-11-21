@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -382,7 +383,7 @@ public final class TagUtil {
      * gray in editor and take part in tag validation.
      */
     public static List<ProtectedPart> applyCustomProtectedParts(String source, Pattern protectedPartsPatterns,
-            List<ProtectedPart> protectedParts) {
+            @Nullable List<ProtectedPart> protectedParts) {
         List<ProtectedPart> result;
         if (protectedParts != null) {
             // Remove already defined protected parts first to prevent

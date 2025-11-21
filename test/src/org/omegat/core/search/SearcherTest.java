@@ -91,7 +91,7 @@ public class SearcherTest {
     public void testSearchCheckEntrySrcText() {
         addSTE(fi, "id1", "OmegaT is great", null);
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
         searcher.checkEntry("OmegaT is great", null, null, null, null, 0, "");
         assertFalse(searcher.getRawSearchResults().isEmpty());
@@ -101,9 +101,9 @@ public class SearcherTest {
     public void testSearchCheckEntryLocalizedText() {
         addSTE(fi, "id1", "OmegaT is great", null);
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
-        searcher.checkEntry(null, "OmegaT is great", null, null, null, 0, "");
+        searcher.checkEntry("", "OmegaT is great", null, null, null, 0, "");
         assertFalse(searcher.getRawSearchResults().isEmpty());
     }
 
@@ -111,9 +111,9 @@ public class SearcherTest {
     public void testSearchCheckEntryNote() {
         addSTE(fi, "id1", "OmegaT is great", null);
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
-        searcher.checkEntry(null, null, "OmegaT is great", null, null, 0, "");
+        searcher.checkEntry("", null, "OmegaT is great", null, null, 0, "");
         assertFalse(searcher.getRawSearchResults().isEmpty());
     }
 
@@ -123,9 +123,9 @@ public class SearcherTest {
         addSTE(fi, "id1", "OmegaT is great", null, comments);
         String searchKeyword = "Comment 2";
         SearchExpression s = createSearchExpression(searchKeyword, SearchExpressionType.EXACT, true, false);
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher(searchKeyword);
-        searcher.checkEntry(null, null, null, comments, null, 0, "");
+        searcher.checkEntry("", null, null, comments, null, 0, "");
         assertFalse(searcher.getRawSearchResults().isEmpty());
     }
 
@@ -135,7 +135,7 @@ public class SearcherTest {
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
         s.author = "author 1";
         s.searchAuthor = true;
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
         PrepareTMXEntry entry = new PrepareTMXEntry();
         entry.source = "OmegaT is great";
@@ -152,7 +152,7 @@ public class SearcherTest {
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
         s.author = "author 1";
         s.searchAuthor = true;
-        Searcher searcher = new Searcher(null, s);
+        Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
         PrepareTMXEntry entry = new PrepareTMXEntry();
         entry.source = "OmegaT is great";

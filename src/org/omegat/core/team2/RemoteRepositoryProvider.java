@@ -97,7 +97,7 @@ public class RemoteRepositoryProvider {
     }
 
     public boolean isManaged() {
-        return repositoriesDefinitions != null;
+        return teamSettings != null;
     }
 
     public void setForceExcludesFromProjectProperties(ProjectProperties props) {

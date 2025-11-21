@@ -94,7 +94,7 @@ public final class FontUtil {
             return pickFirstAvailable(available, Arrays.asList("Segoe UI", "Arial", Preferences.TF_FONT_DEFAULT));
         } else if (Platform.isMacOSX()) {
             // On macOS, the system UI font is San Francisco, exposed with ".SF NS Text" names.
-            return pickFirstAvailable(available, Arrays.asList(".SF NS Text", ".SF NS Display", "Helvetica Neue",
+            return pickFirstAvailable(available, Arrays.asList(".AppleSystemUIFont", ".SF NS Text", ".SF NS Display", "Helvetica Neue",
                     "Helvetica", "Arial", Preferences.TF_FONT_DEFAULT));
         } else if (Platform.isLinux() || Platform.isBSD() || Platform.isUnixLike()) {
             return pickFirstAvailable(available,

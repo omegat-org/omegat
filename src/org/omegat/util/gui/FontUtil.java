@@ -27,10 +27,14 @@
 package org.omegat.util.gui;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 
 public final class FontUtil {
@@ -45,11 +49,11 @@ public final class FontUtil {
     public static FontUIResource getDefaultFont() {
         int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
                 Preferences.TF_FONT_SIZE_DEFAULT);
-        return createCompositeFont(Preferences.TF_FONT_DEFAULT, Font.PLAIN, fontSize);
+        return createCompositeFont(getPlatformDefaultFontFamily(), Font.PLAIN, fontSize);
     }
 
     public static String getConfiguredFontName() {
-        return Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
+        return Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, getPlatformDefaultFontFamily());
     }
 
     /**
@@ -62,7 +66,7 @@ public final class FontUtil {
     }
 
     private static FontUIResource getFont(int fontSize) {
-        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
+        String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, getPlatformDefaultFontFamily());
         return createCompositeFont(fontName, Font.PLAIN, fontSize);
     }
 
@@ -77,5 +81,36 @@ public final class FontUtil {
         // characters
         Font font = StyleContext.getDefaultStyleContext().getFont(family, style, size);
         return (font instanceof FontUIResource) ? (FontUIResource) font : new FontUIResource(font);
+    }
+
+    /**
+     * Resolve a sensible default UI font family for the current platform.
+     * Falls back to Preferences.TF_FONT_DEFAULT if none of the candidates are available.
+     */
+    private static String getPlatformDefaultFontFamily() {
+        String[] families = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        List<String> available = Arrays.asList(families);
+        if (Platform.isWindows) {
+            return pickFirstAvailable(available, Arrays.asList("Segoe UI", "Arial", Preferences.TF_FONT_DEFAULT));
+        } else if (Platform.isMacOSX()) {
+            // On macOS, the system UI font is San Francisco, exposed with ".SF NS Text" names.
+            return pickFirstAvailable(available, Arrays.asList(".AppleSystemUIFont", ".SF NS Text", ".SF NS Display", "Helvetica Neue",
+                    "Helvetica", "Arial", Preferences.TF_FONT_DEFAULT));
+        } else if (Platform.isLinux() || Platform.isBSD() || Platform.isUnixLike()) {
+            return pickFirstAvailable(available,
+                    Arrays.asList("Noto Sans", "DejaVu Sans", "Ubuntu", "Cantarell", "Liberation Sans",
+                            Preferences.TF_FONT_DEFAULT));
+        } else {
+            return Preferences.TF_FONT_DEFAULT;
+        }
+    }
+
+    private static String pickFirstAvailable(List<String> available, List<String> candidates) {
+        for (String name : candidates) {
+            if (available.contains(name)) {
+                return name;
+            }
+        }
+        return Preferences.TF_FONT_DEFAULT;
     }
 }

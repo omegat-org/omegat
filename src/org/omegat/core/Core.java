@@ -34,6 +34,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -94,6 +96,7 @@ import org.omegat.util.gui.UIDesignManager;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
+@NullMarked
 public final class Core {
 
     private Core() {
@@ -367,7 +370,7 @@ public final class Core {
      * @param run
      *            code for execute
      * @throws Exception
-     *            Throw exception from runnable if received.
+     *            Throw an exception from runnable if received.
      */
     public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
             throws Exception {
@@ -389,7 +392,7 @@ public final class Core {
         }
     }
 
-    private static StackTraceElement[] runningStackTrace;
+    private static StackTraceElement @Nullable [] runningStackTrace;
 
     public interface RunnableWithException {
         void run() throws Exception;

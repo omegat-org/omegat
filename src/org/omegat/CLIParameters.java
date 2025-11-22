@@ -171,7 +171,7 @@ public final class CLIParameters {
         return s.toUpperCase(Locale.ENGLISH).replace('-', '_');
     }
 
-    static TreeMap<String, String> parseArgs(String... args) {
+    static Map<String, String> parseArgs(String... args) {
         TreeMap<String, String> params = new TreeMap<>();
 
         /*

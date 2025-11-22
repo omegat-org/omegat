@@ -91,6 +91,7 @@ import javax.swing.text.StyledDocument;
 import org.apache.commons.io.FilenameUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
@@ -119,14 +120,15 @@ import gen.core.filters.Filters;
  *
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class AlignPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private final String defaultSaveDir;
+    private final @Nullable String defaultSaveDir;
     private boolean modified = false;
-    private SRX customizedSRX;
-    private Filters customizedFilters;
+    private @Nullable SRX customizedSRX;
+    private @Nullable Filters customizedFilters;
 
-    private SwingWorker<?, ?> loader;
+    private @Nullable SwingWorker<?, ?> loader;
 
     private boolean doHighlight = true;
     private Pattern highlightPattern = Pattern.compile(Preferences.getPreferenceDefault(
@@ -135,8 +137,8 @@ public class AlignPanelController {
     private int ppRow = -1;
     private int ppCol = -1;
 
-    private AlignPanel alignPanel;
-    private AlignMenuFrame alignMenuFrame;
+    private final AlignPanel alignPanel;
+    private final AlignMenuFrame alignMenuFrame;
 
     /**
      * The alignment workflow is separated into two phases:
@@ -158,8 +160,10 @@ public class AlignPanelController {
 
     private Phase phase = Phase.ALIGN;
 
-    public AlignPanelController(String defaultSaveDir) {
+    public AlignPanelController(@Nullable String defaultSaveDir) {
         this.defaultSaveDir = defaultSaveDir;
+        alignPanel = new AlignPanel();
+        alignMenuFrame = new AlignMenuFrame();
     }
 
     /**
@@ -170,7 +174,6 @@ public class AlignPanelController {
      *            Parent window of the align tool
      */
     public void show(Component parent, Aligner aligner) {
-        alignMenuFrame = new AlignMenuFrame();
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -181,7 +184,6 @@ public class AlignPanelController {
             }
         });
 
-        alignPanel = new AlignPanel();
         // set names
         alignPanel.setName("align_panel");
         alignPanel.controlsPanel.setName("align_controls_panel");
@@ -970,7 +972,8 @@ public class AlignPanelController {
      *            Parent component for dialog boxes
      */
     private void confirmSaveSRX(Component comp) {
-        if (Core.getMainWindow() == null || customizedSRX == null) {
+        Core.getMainWindow();
+        if (customizedSRX == null) {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
@@ -1380,9 +1383,12 @@ public class AlignPanelController {
          * Split the specified bead into two: the first with the specified count
          * of lines, and the second with the remainder.
          *
-         * @param bead
-         * @param count
-         * @return The remainder bead
+         * @param bead the bead to be split. It is modified in place to contain only
+         *             the first 'count' lines of its source and target.
+         * @param count the number of lines to retain in the original bead's source
+         *              and target lines.
+         * @return a new MutableBead object containing the remaining source and target
+         *         lines after the split.
          */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
             List<String> splitSrc = new ArrayList<>(bead.sourceLines);
@@ -1416,11 +1422,8 @@ public class AlignPanelController {
          * <code>col</code> can be moved in the indicated direction. A line is
          * movable if it is not blocked by another line in the same bead.
          *
-         * @param row
-         * @param col
          * @param up
          *            Up (toward index=0) when true, down when false
-         * @return
          */
         boolean canMove(int row, int col, boolean up) {
             if (!isEditableColumn(col)) {
@@ -1483,9 +1486,6 @@ public class AlignPanelController {
 
         /**
          * Get a list of rows covered by the bead at <code>row</code>.
-         *
-         * @param row
-         * @return
          */
         List<Integer> getRowExtentsForBeadAtRow(int row) {
             MutableBead bead = rowToBead.get(row);
@@ -1585,7 +1585,6 @@ public class AlignPanelController {
                 int row = rows.get(i);
                 String line = lines.get(row);
                 toCombine.add(line);
-                // XXX: Bead modified
                 MutableBead bead = rowToBead.get(row);
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 bead.status = Status.DEFAULT;
@@ -1628,10 +1627,8 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
-            // XXX: Bead modified
             trgLines.set(insertAt++, split[0]);
             for (int i = 1; i < split.length; i++) {
-                // XXX: Bead modified
                 trgLines.add(insertAt++, split[i]);
             }
             trgBead.status = Status.DEFAULT;
@@ -1649,9 +1646,9 @@ public class AlignPanelController {
          * specified <code>newVal</code>. This is destructive in that it removes
          * the original line entirely.
          *
-         * @param row
-         * @param col
-         * @param newVal
+         * @param row Row index of the cell to edit
+         * @param col Column index of the cell to edit
+         * @param newVal New text value to replace the existing content
          */
         void editRow(int row, int col, String newVal) {
             if (!isEditableColumn(col)) {
@@ -1661,7 +1658,6 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
-            // XXX: Bead modified
             trgLines.set(insertAt, newVal);
             makeCache();
         }
@@ -1755,12 +1751,9 @@ public class AlignPanelController {
 
         /**
          * Get the number of beads contained within the specified rows.
-         *
-         * @param rows
-         * @return
          */
         int beadsInRowSpan(int... rows) {
-            List<MutableBead> beads = new ArrayList<MutableBead>();
+            List<MutableBead> beads = new ArrayList<>();
             for (int row : rows) {
                 MutableBead bead = rowToBead.get(row);
                 if (!beads.contains(bead)) {
@@ -1774,9 +1767,7 @@ public class AlignPanelController {
          * Split the lines specified at <code>rows</code> and <code>col</code>
          * into multiple beads.
          *
-         * @param rows
-         * @return A two-member array indicating the first and last resulting
-         *         rows
+         * @param rows  rows
          */
         void splitBead(int[] rows) {
             int origRowCount = getRowCount();
@@ -1785,10 +1776,6 @@ public class AlignPanelController {
             for (int row : rows) {
                 String line = rowToSourceLine.get(row);
                 List<String> indexFrom = bead.sourceLines;
-                if (line == null) {
-                    line = rowToTargetLine.get(row);
-                    indexFrom = bead.targetLines;
-                }
                 int index = Util.indexByIdentity(indexFrom, line);
                 if (index == -1) {
                     throw new IllegalArgumentException();
@@ -2067,7 +2054,7 @@ public class AlignPanelController {
         }
 
         @Override
-        protected String getDisplayText(T value) {
+        protected @Nullable String getDisplayText(@Nullable T value) {
             if (value == null) {
                 return null;
             }

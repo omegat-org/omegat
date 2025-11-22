@@ -697,7 +697,7 @@ public final class Preferences {
         try {
             FilterMaster.saveConfig(filters, filtersFile);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
         // Must manually check for equality (see FiltersUtil.filtersEqual()
         // Javadoc)

@@ -25,6 +25,7 @@
 
 package org.omegat.connectors.gui;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.actions.ExternalServiceRetrieval;
 import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.core.Core;
@@ -35,6 +36,7 @@ import org.omegat.util.OStrings;
 import javax.swing.JDialog;
 import java.awt.Frame;
 
+@NullMarked
 public class ExternalServiceConnectorPanelController {
 
     private final ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();

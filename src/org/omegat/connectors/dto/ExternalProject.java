@@ -25,9 +25,12 @@
 
 package org.omegat.connectors.dto;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@NullMarked
 public class ExternalProject implements ServiceIdentifier, Serializable {
     private static final long serialVersionUID = 1L;
 

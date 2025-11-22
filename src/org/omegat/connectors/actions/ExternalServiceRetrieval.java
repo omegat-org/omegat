@@ -25,6 +25,7 @@
 
 package org.omegat.connectors.actions;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.spi.ExternalServiceConnector;
 
 import java.io.InputStream;
@@ -33,6 +34,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+@NullMarked
 public class ExternalServiceRetrieval {
 
     public void retrieveResource(ExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {

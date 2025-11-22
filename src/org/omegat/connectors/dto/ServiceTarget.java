@@ -28,12 +28,14 @@ package org.omegat.connectors.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * DTO representing a configured target (connector + project + optional
  * URL/page).
  */
+@NullMarked
 public class ServiceTarget implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -44,6 +45,7 @@ import org.omegat.util.StaticUtils;
  * Persists configuration to an XML file located under the user config
  * directory (external_connectors.xml).
  */
+@NullMarked
 public final class ExternalConnectorXmlStore {
     private static final String FILE_NAME = "external_connectors.xml";
     private static final XmlMapper MAPPER;

@@ -25,9 +25,12 @@
 
 package org.omegat.connectors.dto;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Common shape for DTOs that have an id and an optional display name.
  */
+@NullMarked
 public interface ServiceIdentifier {
     String getId();
 

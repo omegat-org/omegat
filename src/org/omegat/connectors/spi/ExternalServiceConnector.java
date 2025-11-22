@@ -28,12 +28,14 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
 
 /**
  * Service Provider Interface for External service connectors.
  */
+@NullMarked
 public interface ExternalServiceConnector {
     String getId();
 

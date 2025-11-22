@@ -24,9 +24,12 @@
  **************************************************************************/
 package org.omegat.connectors.spi;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Exception thrown by connectors for any operation failure.
  */
+@NullMarked
 public class ConnectorException extends Exception {
     public ConnectorException() {
         super();

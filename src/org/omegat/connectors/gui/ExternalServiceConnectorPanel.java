@@ -44,6 +44,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.core.data.CoreState;
@@ -55,6 +56,7 @@ import org.omegat.util.OStrings;
  * Modal panel for External CMS import. Updated to use configured targets and
  * provide a page search UI.
  */
+@NullMarked
 public class ExternalServiceConnectorPanel extends JPanel {
 
     private final JComboBox<ServiceTarget> targetCombo;

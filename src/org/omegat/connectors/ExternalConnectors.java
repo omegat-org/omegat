@@ -32,6 +32,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.spi.ExternalServiceConnector;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
@@ -39,6 +41,7 @@ import org.omegat.util.Log;
 /**
  * Registry/manager for connectors.
  */
+@NullMarked
 public class ExternalConnectors {
     private final Map<String, ExternalServiceConnector> connectorMap = new LinkedHashMap<>();
 
@@ -53,7 +56,7 @@ public class ExternalConnectors {
         }
     }
 
-    private synchronized void register(ExternalServiceConnector connector) {
+    private synchronized void register(@Nullable ExternalServiceConnector connector) {
         if (connector == null) {
             return;
         }

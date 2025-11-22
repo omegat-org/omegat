@@ -24,9 +24,12 @@
  **************************************************************************/
 package org.omegat.connectors.spi;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Capabilities supported by a connector.
  */
+@NullMarked
 public enum ConnectorCapability {
     READ, WRITE, LIST_PROJECTS, SEARCH, OAUTH
 }

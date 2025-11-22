@@ -1538,15 +1538,15 @@ public class RealProject implements IProject {
 
         synchronized (projectTMX) {
             AllTranslations current = getAllTranslations(entry);
-            boolean wasAlternative = current.alternativeTranslation.isTranslated();
+            boolean wasAlternative = current.getAlternativeTranslation().isTranslated();
             if (defaultTranslation) {
-                if (!current.defaultTranslation.equals(previous.defaultTranslation)) {
+                if (!current.getDefaultTranslation().equals(previous.getDefaultTranslation())) {
                     throw new OptimisticLockingFail(previous.getDefaultTranslation().translation,
                             current.getDefaultTranslation().translation, current);
                 }
                 if (wasAlternative) {
                     // alternative -> default
-                    if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                    if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                         throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                                 current.getAlternativeTranslation().translation, current);
                     }
@@ -1555,7 +1555,7 @@ public class RealProject implements IProject {
                 }
             } else {
                 // new is alternative translation
-                if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                     throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                             current.getAlternativeTranslation().translation, current);
                 }

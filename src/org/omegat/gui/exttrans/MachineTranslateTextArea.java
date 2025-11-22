@@ -42,6 +42,8 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -67,6 +69,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
+@NullMarked
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo>
         implements IPaneMenu {
 
@@ -122,7 +125,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
      * 
      * @return currently displayed translation or null if none is displayed
      */
-    public MachineTranslationInfo getDisplayedTranslation() {
+    public @Nullable MachineTranslationInfo getDisplayedTranslation() {
         return controller.getDisplayedResult();
     }
 
@@ -164,7 +167,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     }
 
     @Override
-    protected void setFoundResult(final SourceTextEntry se, final MachineTranslationInfo data) {
+    protected void setFoundResult(final SourceTextEntry se, @Nullable MachineTranslationInfo data) {
         UIThreadsUtil.mustBeSwingThread();
         if (data != null && data.result != null) {
             controller.setFoundResult(data);

@@ -30,21 +30,31 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.omegat.help.Help;
+import org.jspecify.annotations.Nullable;
 import tokyo.northside.tipoftheday.data.HtmlTipData;
 import tokyo.northside.tipoftheday.tips.DefaultTip;
 import tokyo.northside.tipoftheday.tips.Tip;
 import tokyo.northside.tipoftheday.tips.TipOfTheDayModel;
 
+import org.omegat.help.Help;
 import org.omegat.util.Log;
 
 import static org.omegat.gui.tipoftheday.TipOfTheDayUtils.TIPS_DIR;
 import static org.omegat.gui.tipoftheday.TipOfTheDayUtils.getLocale;
 
+/**
+ * The OmegaTTipOfTheDayModel class is responsible for managing and providing
+ * tips for the "Tip of the Day" feature in the OmegaT application.
+ * <p>
+ * This implementation retrieves tips data from a predefined JSON index file
+ * and supports localized tips.
+ * The class initializes the tip data upon instantiation by reading the index
+ * file and validating the individual tips. Tips can be accessed in a sequential
+ * and indexed manner.
+ */
 public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     private final List<Tip> tips;
@@ -58,7 +68,10 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     }
 
     @Override
-    public Tip getTipAt(int index) {
+    public @Nullable Tip getTipAt(int index) {
+        if (index < 0 || index >= tips.size()) {
+            return null;
+        }
         return tips.get(index);
     }
 
@@ -69,6 +82,9 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     private void initTips() {
         try (InputStream is = TipOfTheDayUtils.getIndexStream()) {
+            if (is == null) {
+                return;
+            }
             JsonNode data = mapper.readTree(is);
             if (data != null) {
                 data.get("tips").forEach(this::addIfExist);
@@ -82,11 +98,21 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
         String title = tip.get("name").asText();
         String filename = tip.get("file").asText();
         URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), filename);
-        try (InputStream ignored = Objects.requireNonNull(uri).toURL().openStream()) {
-            // validated existence
+        if (isValidTipUri(uri)) {
             tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
-        } catch (Exception e) {
+        } else {
             Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
+        }
+    }
+
+    private boolean isValidTipUri(@Nullable URI uri) {
+        if (uri == null) {
+            return false;
+        }
+        try (InputStream is = uri.toURL().openStream()) {
+            return is != null;
+        } catch (IOException e) {
+            return false;
         }
     }
 }

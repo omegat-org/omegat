@@ -73,18 +73,18 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
         targetCombo = new JComboBox<>();
         pageField = new JTextField(20);
-        JButton searchPageButton = new JButton(OStrings.getString("TF_CMS_IMPORT_SEARCH"));
+        JButton searchPageButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_SEARCH"));
         urlField = new JTextField(30);
-        launchButton = new JButton(OStrings.getString("TF_CMS_IMPORT_BUTTON"));
+        launchButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_BUTTON"));
 
         int row = 0;
         // Title
-        add(new JLabel(OStrings.getString("TF_CMS_IMPORT_TITLE")), BorderLayout.NORTH);
+        add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_TITLE")), BorderLayout.NORTH);
 
         // Target row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_TARGET")), gc);
+        form.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_TARGET")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -94,7 +94,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
         // Page row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_PAGE")), gc);
+        form.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_PAGE")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -107,7 +107,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
         // URL row
         gc.gridx = 0;
         gc.gridy = row;
-        form.add(new JLabel(OStrings.getString("TF_CMS_IMPORT_URL")), gc);
+        form.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_URL")), gc);
         gc.gridx = 1;
         gc.gridy = row;
         gc.weightx = 1;
@@ -158,7 +158,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
         }
         try {
             List<ExternalResource> resources = connector.listResources(target.getProjectId());
-            JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_CMS_SELECT_PAGE"), true);
+            JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"),
+                    true);
             JTextField filter = new JTextField(20);
             javax.swing.DefaultListModel<ExternalResource> listModel = new javax.swing.DefaultListModel<>();
             for (ExternalResource r : resources) {

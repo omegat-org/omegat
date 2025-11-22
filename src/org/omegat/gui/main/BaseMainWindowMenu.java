@@ -246,7 +246,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE");
         projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE");
         projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT");
-        projectCmsImportMenuItem = createMenuItem("TF_MENU_CMS_IMPORT");
+        projectExternalServiceImportMenuItem = createMenuItem("TF_MENU_EXTERNAL_SERVICE_IMPORT");
         projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT");
         projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
         projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
@@ -466,7 +466,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.add(projectSaveMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectImportMenuItem);
-        projectMenu.add(projectCmsImportMenuItem);
+        projectMenu.add(projectExternalServiceImportMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectCommitSourceFiles);
         projectMenu.add(projectCommitTargetFiles);
@@ -829,7 +829,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem,
                 projectOpenMenuItem };
 
-        JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectCmsImportMenuItem,
+        JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectExternalServiceImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
 
@@ -1109,7 +1109,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectClearRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
-    JMenuItem projectCmsImportMenuItem;
+    JMenuItem projectExternalServiceImportMenuItem;
     JMenu projectAccessProjectFilesMenu;
     JMenuItem projectAccessRootMenuItem;
     JMenuItem projectAccessDictionaryMenuItem;

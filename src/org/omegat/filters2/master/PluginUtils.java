@@ -667,8 +667,8 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static List<Class<?>> getCMSConnectorClasses() {
-        return CMS_CONNECTOR_CLASSES;
+    public static List<Class<?>> getExternalServiceConnectorClasses() {
+        return EXTERNAL_SERVICE_CONNECTOR_CLASSES;
     }
 
     /**
@@ -702,7 +702,7 @@ public final class PluginUtils {
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> CMS_CONNECTOR_CLASSES = new ArrayList<>();
+    private static final List<Class<?>> EXTERNAL_SERVICE_CONNECTOR_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.

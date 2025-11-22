@@ -43,7 +43,7 @@ public class ExternalConnectors {
     private final Map<String, ExternalServiceConnector> connectorMap = new LinkedHashMap<>();
 
     public ExternalConnectors() {
-        for (Class<?> clazz : PluginUtils.getCMSConnectorClasses()) {
+        for (Class<?> clazz : PluginUtils.getExternalServiceConnectorClasses()) {
             try {
                 register((ExternalServiceConnector) clazz.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException

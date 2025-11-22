@@ -314,7 +314,7 @@ public final class Core {
 
     // CMS connectors registration API
     public static void registerCmsConnectorClass(Class<? extends ExternalServiceConnector> clazz) {
-        PluginUtils.getCMSConnectorClasses().add(clazz);
+        PluginUtils.getExternalServiceConnectorClasses().add(clazz);
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

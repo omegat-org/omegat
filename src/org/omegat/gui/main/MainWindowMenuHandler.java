@@ -140,7 +140,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         ProjectUICommands.doPromptImportSourceFiles();
     }
 
-    public void projectCmsImportMenuItemActionPerformed() {
+    public void projectExternalServiceImportMenuItemActionPerformed() {
         ExternalServiceConnectorPanelController controller = new ExternalServiceConnectorPanelController();
         controller.show();
     }

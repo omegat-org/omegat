@@ -39,27 +39,23 @@ public class ExternalServiceRetrieval {
 
     public void retrieveResource(ExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(projectId, resourceId);
-        if (in != null) {
-            Path dir = Paths.get(targetDir);
-            String fileName = (resourceId == null || resourceId.isEmpty()) ? "external-service-resource.txt" : resourceId;
-            Path out = dir.resolve(fileName);
-            Files.createDirectories(dir);
-            try (in) {
-                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
-            }
+        Path dir = Paths.get(targetDir);
+        String fileName = resourceId.isEmpty() ? "external-service-resource.txt" : resourceId;
+        Path out = dir.resolve(fileName);
+        Files.createDirectories(dir);
+        try (in) {
+            Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
     public void retrieveResourceFromUrl(ExternalServiceConnector connector, String url, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(url);
-        if (in != null) {
-            Path dir = Paths.get(targetDir);
-            String fileName = extractFileNameFromUrl(url);
-            Path out = dir.resolve(fileName);
-            Files.createDirectories(dir);
-            try (in) {
-                Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
-            }
+        Path dir = Paths.get(targetDir);
+        String fileName = extractFileNameFromUrl(url);
+        Path out = dir.resolve(fileName);
+        Files.createDirectories(dir);
+        try (in) {
+            Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 

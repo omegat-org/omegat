@@ -125,8 +125,8 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param targetFile
      *            The path to the target file to be aligned.
      */
-    public void alignerShow(String sourceLanguage, @Nullable String sourceFile,
-                            String targetLanguage, @Nullable String targetFile) {
+    public void alignerShow(@Nullable String sourceLanguage, @Nullable String sourceFile,
+                            @Nullable String targetLanguage, @Nullable String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
         if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
@@ -189,7 +189,7 @@ public final class AlignerModule implements IApplicationEventListener {
      * the file alignment interface to the user.
      */
     public static void alignerShow() {
-        (new AlignerModule()).alignerShow(null, null, null, null, null, null);
+        new AlignerModule().alignerShow(null, null, null, null, null, null);
     }
 
     /**

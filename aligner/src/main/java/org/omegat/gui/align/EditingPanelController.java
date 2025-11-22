@@ -39,6 +39,8 @@ import java.util.ResourceBundle;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -47,10 +49,11 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class EditingPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final String text;
-    private String result;
+    private @Nullable String result;
 
     /**
      * Create the controller with the default text.
@@ -69,7 +72,7 @@ public class EditingPanelController {
      *            The parent window of the dialog
      * @return The result of editing
      */
-    public String show(Window parent) {
+    public @Nullable String show(Window parent) {
         final JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_EDITOR"),
                 ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

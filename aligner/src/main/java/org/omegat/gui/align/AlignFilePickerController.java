@@ -49,7 +49,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -75,7 +76,7 @@ public class AlignFilePickerController {
     private @Nullable String targetDefaultDir;
     private @Nullable String defaultSaveDir;
 
-    private Language sourceLanguage;
+    private @Nullable Language sourceLanguage;
     private Language targetLanguage;
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
@@ -163,7 +164,7 @@ public class AlignFilePickerController {
      * @param parent
      *            Parent window of file picker and align window
      */
-    public void show(final Component parent) {
+    public void show(@Nullable Component parent) {
         JFrame frame = initGUI(parent);
         frame.setLocationRelativeTo(parent);
         frame.setVisible(true);
@@ -219,7 +220,6 @@ public class AlignFilePickerController {
 
     /**
      * Initialize FilePicker.
-     * @return FilePicker frame.
      */
     private void initializeFilePicker(AlignFilePicker picker) {
         picker.setName("align_picker_panel");
@@ -394,7 +394,7 @@ public class AlignFilePickerController {
                     } else if (results[0] && !results[1]) {
                         message = StringUtil.format(BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE"),
                                 trgFile.getName());
-                    } else if (!results[0] && !results[1]) {
+                    } else if (!results[0]) {
                         message = BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_BOTH_FILES");
                     }
                 } catch (CancellationException e) {
@@ -421,7 +421,7 @@ public class AlignFilePickerController {
         return result;
     }
 
-    static File chooseFile(Component parent, String title, String dir, String name) {
+    static @Nullable File chooseFile(Component parent, String title, String dir, String name) {
         JFileChooser chooser = new JFileChooser(dir);
         chooser.setName(name);
         chooser.setDialogTitle(title);

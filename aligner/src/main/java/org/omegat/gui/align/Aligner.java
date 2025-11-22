@@ -164,7 +164,8 @@ public class Aligner {
     private Segmenter segmenter;
     private final FilterMaster fm;
 
-    public Aligner(String srcFile, Language srcLang, String trgFile, Language trgLang) {
+    public Aligner(@Nullable String srcFile, @Nullable Language srcLang, @Nullable String trgFile,
+                   @Nullable Language trgLang) {
         this.srcFile = srcFile;
         this.srcLang = srcLang;
         this.trgFile = trgFile;
@@ -334,6 +335,9 @@ public class Aligner {
         if (!allowedModes.contains(ComparisonMode.PARSEWISE)) {
             throw new UnsupportedOperationException();
         }
+        if (srcRaw == null || trgRaw == null) {
+            throw new IllegalStateException("Input files not loaded");
+        }
         return IntStream.range(0, srcRaw.size())
                 .mapToObj(i -> new Alignment(Collections.singletonList(srcRaw.get(i)),
                         Collections.singletonList(trgRaw.get(i))));
@@ -349,6 +353,9 @@ public class Aligner {
     private Stream<Alignment> alignParsewiseSegmented() {
         if (!allowedModes.contains(ComparisonMode.PARSEWISE)) {
             throw new UnsupportedOperationException();
+        }
+        if (srcRaw == null || trgRaw == null) {
+            throw new IllegalStateException("Input files not loaded");
         }
         return IntStream.range(0, srcRaw.size()).mapToObj(i -> {
             List<String> source = segmenter.segment(srcLang, srcRaw.get(i), null, null).stream()

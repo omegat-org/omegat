@@ -311,6 +311,7 @@ jar {
 test {
     // some test case depends on modules from subproject
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn tasks.named('tipsHtmls')
 }
 
 distributions {

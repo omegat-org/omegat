@@ -42,7 +42,7 @@ public final class TipOfTheDayUtils {
     private TipOfTheDayUtils() {
     }
 
-    static final String INDEX_YAML = "tips.yaml";
+    static final String INDEX = "index.json";
 
     static String getLocale() {
         // Get the system locale (language and country)
@@ -58,7 +58,7 @@ public final class TipOfTheDayUtils {
     }
 
     static @Nullable InputStream getIndexStream() throws IOException {
-        URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML);
+        URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX);
         if (uri == null) {
             return null;
         }
@@ -66,8 +66,8 @@ public final class TipOfTheDayUtils {
     }
 
     static boolean hasIndex() {
-        try (InputStream ignored = getIndexStream()) { // validate exists
-            return true;
+        try (InputStream in = getIndexStream()) { // validate exists
+            return in != null;
         } catch (Exception e) {
             return false;
         }

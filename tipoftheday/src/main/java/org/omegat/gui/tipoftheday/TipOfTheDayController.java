@@ -51,6 +51,9 @@ public final class TipOfTheDayController {
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
 
     public void start(final boolean force) {
+        if (!TipOfTheDayUtils.hasIndex()) {
+            return;
+        }
         if (force || Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, ENABLED)) {
             showComponent();
         }

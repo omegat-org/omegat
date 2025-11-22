@@ -53,7 +53,7 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
-tasks.register('tipsHtmls', Sync) {
+def tipsHtmls = tasks.register('tipsHtmls', Sync) {
     description = 'Copy tips html/css contents into build folder'
     group = 'documentation'
     from project.layout.projectDirectory.dir('src_docs/tips')

@@ -34,7 +34,6 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
@@ -64,7 +63,6 @@ public final class TipOfTheDayModule {
     public static class TipOfTheDayModuleListener implements IApplicationEventListener {
 
         private final TipOfTheDayController controller = new TipOfTheDayController();
-        private @Nullable JMenuItem totdMenu;
 
         @Override
         public void onApplicationStartup() {
@@ -88,7 +86,7 @@ public final class TipOfTheDayModule {
         }
 
         private void initMenu() {
-            totdMenu = new JMenuItem();
+            JMenuItem totdMenu = new JMenuItem();
             totdMenu.setText(UIManager.getDefaults().getString("TipOfTheDay.menuItemText"));
             totdMenu.setToolTipText(UIManager.getDefaults().getString("TipOfTheDay.menuToolTipText"));
             // show Tip of the Day dialog on startup.
@@ -98,9 +96,7 @@ public final class TipOfTheDayModule {
 
         @Override
         public void onApplicationShutdown() {
-            if (ENABLED) {
-                MenuExtender.removeMenuItems(MenuExtender.MenuKey.HELP, Collections.singletonList(totdMenu));
-            }
+            // nothing to do.
         }
     }
 }

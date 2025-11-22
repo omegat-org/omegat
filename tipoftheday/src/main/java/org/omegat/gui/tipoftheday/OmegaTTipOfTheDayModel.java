@@ -30,10 +30,10 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.omegat.help.Help;
 import tokyo.northside.tipoftheday.data.HtmlTipData;
 import tokyo.northside.tipoftheday.tips.DefaultTip;
@@ -52,7 +52,7 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     public OmegaTTipOfTheDayModel() {
         tips = new ArrayList<>();
-        mapper = new ObjectMapper(new YAMLFactory());
+        mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
         initTips();
     }
@@ -82,9 +82,10 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
         String title = tip.get("name").asText();
         String filename = tip.get("file").asText();
         URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), filename);
-        try (InputStream is = uri.toURL().openStream()) { // validate exists
+        try (InputStream ignored = Objects.requireNonNull(uri).toURL().openStream()) {
+            // validated existence
             tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
         }
     }

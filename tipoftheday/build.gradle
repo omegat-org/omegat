@@ -18,3 +18,7 @@ dependencies {
         compileOnly(libs.jackson.yaml)
     }
 }
+
+// enforce TIPS contents to be built in build/docs/tips
+// and bundled in the distributions
+jar.dependsOn rootProject.tasks.named('tipsHtmls')

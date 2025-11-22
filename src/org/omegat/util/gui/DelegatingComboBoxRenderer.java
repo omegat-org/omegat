@@ -25,6 +25,9 @@
 
 package org.omegat.util.gui;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.awt.Component;
 
 import javax.swing.JComboBox;
@@ -37,6 +40,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public abstract class DelegatingComboBoxRenderer<T, U> implements ListCellRenderer<T> {
 
     private final ListCellRenderer<Object> original = new JComboBox<Object>().getRenderer();
@@ -47,5 +51,5 @@ public abstract class DelegatingComboBoxRenderer<T, U> implements ListCellRender
         return original.getListCellRendererComponent(list, getDisplayText(value), index, isSelected, cellHasFocus);
     }
 
-    protected abstract U getDisplayText(T value);
+    protected abstract @Nullable U getDisplayText(T value);
 }

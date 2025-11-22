@@ -37,6 +37,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
@@ -57,6 +60,7 @@ import org.omegat.util.Token;
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  */
+@NullMarked
 public class GlossarySearcher {
     private final ITokenizer tok;
     private final Language srcLang;
@@ -227,11 +231,10 @@ public class GlossarySearcher {
             return Collections.emptyList();
         }
         List<Token[]> result = new ArrayList<>();
-        result.add(new Token[] { new Token(term, i) });
-        while ((i = fullText.indexOf(term, i + 1)) != -1) {
-            result.add(new Token[] { new Token(term, i) });
-        }
-        return result;
+        do {
+            result.add(new Token[]{new Token(term, i)});
+        } while ((i = fullText.indexOf(term, i + 1)) != -1);
+        return Collections.unmodifiableList(result);
     }
 
     @VisibleForTesting
@@ -296,7 +299,7 @@ public class GlossarySearcher {
      *             If the entries list is null.
      */
     List<GlossaryEntry> sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
-            List<GlossaryEntry> entries) throws IllegalArgumentException {
+            @Nullable List<GlossaryEntry> entries) throws IllegalArgumentException {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
         }

@@ -90,7 +90,7 @@ public interface IProject {
      *            Whether or not we should perform external post-processing.
      * @param commitTargetFiles
      *            Whether or not we should commit target files
-     * @throws Exception
+     * @throws Exception If any error occurs during the compilation process.
      */
     void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
@@ -103,7 +103,7 @@ public interface IProject {
 
     /**
      * Commit source files in a team project.
-     * @throws java.lang.Exception
+     * @throws Exception if any error occurs during the commit process
      */
     void commitSourceFiles() throws Exception;
 
@@ -143,7 +143,7 @@ public interface IProject {
 
     /**
      * Set translation for entry.
-     *
+     * <p>
      * Optimistic locking will not be checked.
      *
      * @param entry
@@ -181,9 +181,7 @@ public interface IProject {
     void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note);
 
     /**
-     * Get statistics for project.
-     *
-     * @return
+     * Get statistics info.
      */
     StatisticsInfo getStatistics();
 
@@ -361,6 +359,7 @@ public interface IProject {
         public TMXEntry getCurrentTranslation() {
             return currentTranslation;
         }
+
         public void setAlternativeTranslation(TMXEntry entry) {
             alternativeTranslation = entry;
         }

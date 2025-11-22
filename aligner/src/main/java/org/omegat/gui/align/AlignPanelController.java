@@ -1006,7 +1006,8 @@ public class AlignPanelController {
      *            Parent component for dialog boxes
      */
     private void confirmSaveFilters(Component comp) {
-        if (Core.getMainWindow() == null || customizedFilters == null) {
+        Core.getMainWindow();
+        if (customizedFilters == null) {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,

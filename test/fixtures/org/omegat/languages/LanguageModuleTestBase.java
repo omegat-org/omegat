@@ -25,6 +25,8 @@
 package org.omegat.languages;
 
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.languagetool.JLanguageTool;
@@ -43,10 +45,12 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
+@NullMarked
 public class LanguageModuleTestBase {
 
-    private static Path tmpDir;
+    private static @Nullable Path tmpDir;
 
     @BeforeClass
     public static void setUpClass() throws IOException {
@@ -59,7 +63,10 @@ public class LanguageModuleTestBase {
         Files.createDirectory(configDir.resolve("spelling"));
     }
 
-    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, String good, String bad) throws Exception {
+    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, @Nullable String good,@Nullable String bad) throws Exception {
+        if (tmpDir == null) {
+            fail();
+        }
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language(languageCode));
         Core.setProject(new NotLoadedProject() {
@@ -79,6 +86,8 @@ public class LanguageModuleTestBase {
 
     @AfterClass
     public static void tearDownClass() throws IOException {
-        FileUtils.forceDeleteOnExit(tmpDir.toFile());
+        if (tmpDir != null) {
+            FileUtils.forceDeleteOnExit(tmpDir.toFile());
+        }
     }
 }

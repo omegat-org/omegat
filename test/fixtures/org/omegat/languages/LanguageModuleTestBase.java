@@ -63,7 +63,8 @@ public class LanguageModuleTestBase {
         Files.createDirectory(configDir.resolve("spelling"));
     }
 
-    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, @Nullable String good,@Nullable String bad) throws Exception {
+    protected void testDictionaryHelper(ISpellChecker checker, String languageCode, @Nullable String good,
+                                        @Nullable String bad) throws Exception {
         if (tmpDir == null) {
             fail();
         }

@@ -211,7 +211,7 @@ public class TMXWriter2 implements AutoCloseable {
     }
 
     public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note, String creator,
-                           long creationDate, String changer, long changeDate, @Nullable List<String> propValues)
+                           long creationDate, @Nullable String changer, long changeDate, @Nullable List<String> propValues)
             throws Exception {
         if (source == null && translation == null) {
             throw new NullPointerException(

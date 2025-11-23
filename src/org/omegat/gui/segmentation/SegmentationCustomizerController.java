@@ -74,7 +74,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     }
 
     public SegmentationCustomizerController(boolean projectSpecific, SRX defaultSRX, @Nullable SRX userSRX,
-                                            @Nullable SRX projectSRX) {
+            @Nullable SRX projectSRX) {
         this.isProjectSpecific = projectSpecific;
         this.defaultSRX = defaultSRX;
         this.userSRX = userSRX;
@@ -269,7 +269,8 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     protected void initFromPrefs() {
         panel.projectSpecificCB.setVisible(isProjectSpecific);
         panel.projectSpecificCB.setSelected(projectSRX != null);
-        setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX : userSRX != null ? userSRX : defaultSRX);
+        setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX
+                : userSRX != null ? userSRX : defaultSRX);
         updateEnabledness();
     }
 

@@ -32,11 +32,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jetbrains.annotations.VisibleForTesting;
-import org.omegat.core.data.IProject.AllTranslations;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil.Tag;
+
+import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
 
 /**
  * A class to encapuslate information about tag errors. Tag errors are stored
@@ -51,9 +54,9 @@ public class ErrorReport {
     public final Map<Tag, TagError> srcErrors = new HashMap<>();
     public final Map<Tag, TagError> transErrors = new HashMap<>();
 
-    public final SourceTextEntry ste;
+    public final @Nullable SourceTextEntry ste;
     public final String source;
-    public final TMXEntry tmxEntry;
+    public final @Nullable TMXEntry tmxEntry;
     public final String translation;
     public final int entryNum;
 
@@ -73,7 +76,7 @@ public class ErrorReport {
     @VisibleForTesting
     ErrorReport(String source, String translation) {
         this.ste = null;
-        this.tmxEntry = AllTranslations.EMPTY_TRANSLATION;
+        this.tmxEntry = EMPTY_TRANSLATION;
         this.entryNum = -1;
         this.source = source;
         this.translation = translation;

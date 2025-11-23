@@ -128,7 +128,7 @@ public final class AlignerModule implements IApplicationEventListener {
      *            The path to the target file to be aligned.
      */
     public void alignerShow(@Nullable String sourceLanguage, @Nullable String sourceFile,
-                            @Nullable String targetLanguage, @Nullable String targetFile) {
+            @Nullable String targetLanguage, @Nullable String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
         if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
@@ -158,8 +158,8 @@ public final class AlignerModule implements IApplicationEventListener {
      *            The default directory used for saving aligned files.
      */
     public void alignerShow(@Nullable Language sourceLanguage, @Nullable String sourceFile,
-                            @Nullable Language targetLanguage, @Nullable String targetFile, @Nullable String defaultDir,
-                            @Nullable String defaultSaveDir) {
+            @Nullable Language targetLanguage, @Nullable String targetFile, @Nullable String defaultDir,
+            @Nullable String defaultSaveDir) {
         AlignFilePickerController picker = new AlignFilePickerController();
         if (sourceLanguage != null) {
             picker.setSourceLanguage(sourceLanguage);

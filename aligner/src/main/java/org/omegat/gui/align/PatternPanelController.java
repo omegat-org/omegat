@@ -29,8 +29,6 @@ import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -70,7 +68,8 @@ public class PatternPanelController {
     }
 
     /**
-     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * Show the dialog. The dialog is modal, so this method will block until
+     * complete.
      *
      * @param parent
      *            The parent window of the dialog
@@ -111,10 +110,12 @@ public class PatternPanelController {
             public void removeUpdate(DocumentEvent e) {
                 updatePattern(panel);
             }
+
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updatePattern(panel);
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 updatePattern(panel);

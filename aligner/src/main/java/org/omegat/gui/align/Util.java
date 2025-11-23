@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
 import org.omegat.util.Language;
 
 /**
- *  Utility methods for AlignPanel.
+ * Utility methods for AlignPanel.
  *
  * @author Aaron Madlon-Kay
  */
@@ -41,10 +41,13 @@ public final class Util {
     }
 
     /**
-     * Get the index of an item in a list, not based on equality but on object identity (<code>==</code>).
+     * Get the index of an item in a list, not based on equality but on object
+     * identity (<code>==</code>).
      *
-     * @param items List of items to search
-     * @param item Item to find
+     * @param items
+     *            List of items to search
+     * @param item
+     *            Item to find
      * @return Index of item in list, or -1 if not found
      */
     static <T> int indexByIdentity(List<T> items, @Nullable T item) {
@@ -60,10 +63,13 @@ public final class Util {
     }
 
     /**
-     * Remove an item from a list, not based on equality but on object identity (<code>==</code>).
+     * Remove an item from a list, not based on equality but on object identity
+     * (<code>==</code>).
      *
-     * @param items List of items to search
-     * @param item Item to remove
+     * @param items
+     *            List of items to search
+     * @param item
+     *            Item to remove
      * @return true if item was found and removed, false otherwise
      */
     static <T> boolean removeByIdentity(List<T> items, T item) {
@@ -102,8 +108,8 @@ public final class Util {
     }
 
     /**
-     * Join a list of objects with a delimiter appropriate for the given language (empty delimiter, or U+0020
-     * SPACE).
+     * Join a list of objects with a delimiter appropriate for the given
+     * language (empty delimiter, or U+0020 SPACE).
      *
      * @param lang
      *            Language of items

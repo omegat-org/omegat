@@ -66,7 +66,8 @@ public class EditingPanelController {
     }
 
     /**
-     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * Show the dialog. The dialog is modal, so this method will block until
+     * complete.
      *
      * @param parent
      *            The parent window of the dialog

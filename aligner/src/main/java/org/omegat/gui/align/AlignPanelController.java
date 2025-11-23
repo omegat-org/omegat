@@ -820,8 +820,8 @@ public class AlignPanelController {
                 alignPanel.continueButton.setEnabled(true);
                 alignPanel.progressBar.setVisible(false);
                 List<ComparisonMode> modes = aligner.allowedModes;
-                alignPanel.comparisonComboBox.setModel(
-                        new DefaultComboBoxModel<>(modes != null ? modes.toArray(new ComparisonMode[0]) : new ComparisonMode[0]));
+                alignPanel.comparisonComboBox.setModel(new DefaultComboBoxModel<>(
+                        modes != null ? modes.toArray(new ComparisonMode[0]) : new ComparisonMode[0]));
 
                 String distanceValue;
                 if (beads != null) {
@@ -1097,7 +1097,6 @@ public class AlignPanelController {
                     case NEEDS_REVIEW:
                         comp.setBackground(Styles.EditorColor.COLOR_ALIGNER_NEEDSREVIEW.getColor());
                         break;
-                    case DEFAULT:
                     default:
                         // Leave color as-is
                     }
@@ -1354,38 +1353,20 @@ public class AlignPanelController {
         }
 
         /**
-         * Split the specified bead into two: one with an equal number of source
-         * and target lines (e.g. 1-1) and one with the remainder (e.g. 0-1).
-         * The new bead is inserted into the underlying data store.
-         *
-         * @param bead
-         *            to split.
-         * @return The remainder bead
-         */
-        private MutableBead splitBead(MutableBead bead) {
-            if (bead.isBalanced()) {
-                return bead;
-            }
-            int index = data.indexOf(bead);
-            bead = splitBeadByCount(bead, Math.min(bead.sourceLines.size(), bead.targetLines.size()));
-            data.add(index + 1, bead);
-            return bead;
-        }
-
-        /**
          * Split the specified bead into two: the first with the specified count
          * of lines, and the second with the remainder.
          *
-         * @param bead the bead to be split. It is modified in place to contain only
-         *             the first 'count' lines of its source and target.
-         * @param count the number of lines to retain in the original bead's source
-         *              and target lines.
-         * @return a new MutableBead object containing the remaining source and target
-         *         lines after the split.
+         * @param bead
+         *            the bead to be split. It is modified in place to contain
+         *            only the first 'count' lines of its source and target.
+         * @param count
+         *            the number of lines to retain in the original bead's
+         *            source and target lines.
+         * @return a new MutableBead object containing the remaining source and
+         *         target lines after the split.
          */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
             List<String> splitSrc = new ArrayList<>(bead.sourceLines);
-            // XXX: Bead modified here
             bead.sourceLines.clear();
             List<String> splitTrg = new ArrayList<>(bead.targetLines);
             bead.targetLines.clear();
@@ -1461,12 +1442,6 @@ public class AlignPanelController {
                 if (srcBead == trgBead) {
                     return false;
                 }
-            }
-            // Check no non-empty cells in path
-            int inc = up ? -1 : 1;
-            for (int r = row + inc; r != trgRow && r >= 0 && r < rowToSourceLine.size(); r += inc) {
-                String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(r);
-                return false;
             }
             return true;
         }
@@ -1636,9 +1611,12 @@ public class AlignPanelController {
          * specified <code>newVal</code>. This is destructive in that it removes
          * the original line entirely.
          *
-         * @param row Row index of the cell to edit
-         * @param col Column index of the cell to edit
-         * @param newVal New text value to replace the existing content
+         * @param row
+         *            Row index of the cell to edit
+         * @param col
+         *            Column index of the cell to edit
+         * @param newVal
+         *            New text value to replace the existing content
          */
         void editRow(int row, int col, String newVal) {
             if (!isEditableColumn(col)) {
@@ -1690,9 +1668,6 @@ public class AlignPanelController {
             for (int row : rows) {
                 List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
                 String line = lines.get(row);
-                if (line == null) {
-                    throw new IllegalArgumentException();
-                }
                 selected.add(line);
                 MutableBead bead = rowToBead.get(row);
                 int trgRow = row + offset;
@@ -1750,7 +1725,8 @@ public class AlignPanelController {
          * Split the lines specified at <code>rows</code> and <code>col</code>
          * into multiple beads.
          *
-         * @param rows  rows
+         * @param rows
+         *            rows
          */
         void splitBead(int[] rows) {
             int origRowCount = getRowCount();
@@ -1800,9 +1776,11 @@ public class AlignPanelController {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
             }
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            for (int i = row + 1; i < lines.size(); i++) {
-                return i;
+            // Clarify which list we operate on
+            List<String> selectedColumnLines = (col == COL_SRC) ? rowToSourceLine : rowToTargetLine;
+            int nextIndex = row + 1;
+            if (nextIndex < selectedColumnLines.size()) {
+                return nextIndex;
             }
             return -1;
         }
@@ -1969,7 +1947,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
             if (ARRAY2DFLAVOR.equals(flavor)) {
                 return new int[][] { rows, cols };
             }
@@ -2012,6 +1990,9 @@ public class AlignPanelController {
         private boolean equals(DropLocation oldVal, DropLocation newVal) {
             if (oldVal == newVal) {
                 return true;
+            }
+            if (oldVal == null || newVal == null) {
+                return false;
             }
             return oldVal.getColumn() == newVal.getColumn() && oldVal.getRow() == newVal.getRow();
         }

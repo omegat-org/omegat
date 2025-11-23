@@ -356,14 +356,16 @@ public class AlignFilePickerController {
             }
         });
 
-        picker.sourceLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
-            sourceFile = picker.sourceLanguageFileField.getText();
-            updatePicker(picker);
-        }));
-        picker.targetLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
-            targetFile = picker.targetLanguageFileField.getText();
-            updatePicker(picker);
-        }));
+        picker.sourceLanguageFileField.getDocument()
+                .addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+                    sourceFile = picker.sourceLanguageFileField.getText();
+                    updatePicker(picker);
+                }));
+        picker.targetLanguageFileField.getDocument()
+                .addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+                    targetFile = picker.targetLanguageFileField.getText();
+                    updatePicker(picker);
+                }));
         picker.setTransferHandler(new PickerTransferHandler(picker));
     }
 
@@ -529,8 +531,10 @@ public class AlignFilePickerController {
      * <li>Target file path
      * </ol>
      *
-     * @param args command arguments.
-     * @throws Exception when failed to ininitalize OmegaT core.
+     * @param args
+     *            command arguments.
+     * @throws Exception
+     *             when failed to ininitalize OmegaT core.
      */
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");

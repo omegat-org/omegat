@@ -95,6 +95,7 @@ import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
@@ -173,7 +174,7 @@ public class AlignPanelController {
      * @param parent
      *            Parent window of the align tool
      */
-    public void show(Component parent, Aligner aligner) {
+    public void show(@Nullable Component parent, Aligner aligner) {
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -255,7 +256,7 @@ public class AlignPanelController {
             }
         };
         alignPanel.counterComboBox.addActionListener(counterListener);
-        alignPanel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
+        alignPanel.counterComboBox.setRenderer(new EnumRenderer<>("ALIGNER_ENUM_COUNTER_TYPE_"));
 
         ActionListener segmentingListener = e -> {
             boolean newValue = ((AbstractButton) e.getSource()).isSelected();
@@ -272,8 +273,9 @@ public class AlignPanelController {
 
         ActionListener segmentingRulesListener = e -> {
             if (confirmReset(alignMenuFrame)) {
+                Segmenter segmenter = aligner.getSegmenter();
                 SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
-                        aligner.getSegmenter().getSRX(), null);
+                        segmenter != null ? segmenter.getSRX() : null, null);
                 if (customizer.show(alignMenuFrame)) {
                     customizedSRX = customizer.getResult();
                     aligner.updateSegmenter(customizedSRX);
@@ -397,9 +399,13 @@ public class AlignPanelController {
                     }
                     List<MutableBead> beads = ((BeadTableModel) alignPanel.table.getModel()).getData();
                     try {
-                        aligner.writePairsToTMX(file,
-                                MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
-                        modified = false;
+                        if (aligner.srcLang != null && aligner.trgLang != null) {
+                            aligner.writePairsToTMX(file,
+                                    MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
+                            modified = false;
+                        } else {
+                            throw new IllegalArgumentException("srcLang and trgLang must not be null");
+                        }
                     } catch (Exception ex) {
                         Log.log(ex);
                         JOptionPane.showMessageDialog(alignMenuFrame,
@@ -485,9 +491,7 @@ public class AlignPanelController {
 
         alignMenuFrame.keepNoneItem.addActionListener(e -> toggleAllEnabled(false));
 
-        alignMenuFrame.realignPendingItem.addActionListener(e -> {
-            realignPending(aligner);
-        });
+        alignMenuFrame.realignPendingItem.addActionListener(e -> realignPending(aligner));
 
         alignMenuFrame.pinpointAlignStartItem.addActionListener(e -> {
             phase = Phase.PINPOINT;
@@ -497,9 +501,8 @@ public class AlignPanelController {
             updatePanel(aligner);
         });
 
-        alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> {
-            pinpointAlign(aligner, alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn());
-        });
+        alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> pinpointAlign(aligner,
+                alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn()));
 
         alignMenuFrame.pinpointAlignCancelItem.addActionListener(e -> {
             phase = Phase.EDIT;
@@ -715,9 +718,7 @@ public class AlignPanelController {
         List<String> toRelocate = new ArrayList<>();
         for (int i = Math.min(ppRow, row); i <= Math.max(ppRow, row); i++) {
             String line = model.removeLine(i, relocateCol);
-            if (line != null) {
-                toRelocate.add(line);
-            }
+            toRelocate.add(line);
         }
         int resultRow = model.insertLines(toRelocate, Math.max(ppRow, row), relocateCol);
         model.setStatusAtRow(resultRow, Status.ACCEPTED);
@@ -818,8 +819,9 @@ public class AlignPanelController {
                 }
                 alignPanel.continueButton.setEnabled(true);
                 alignPanel.progressBar.setVisible(false);
+                List<ComparisonMode> modes = aligner.allowedModes;
                 alignPanel.comparisonComboBox.setModel(
-                        new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
+                        new DefaultComboBoxModel<>(modes != null ? modes.toArray(new ComparisonMode[0]) : new ComparisonMode[0]));
 
                 String distanceValue;
                 if (beads != null) {
@@ -893,12 +895,7 @@ public class AlignPanelController {
 
         updateCommandAvailability(alignPanel, alignMenuFrame);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                resizeRows(alignPanel.table);
-            }
-        });
+        SwingUtilities.invokeLater(() -> resizeRows(alignPanel.table));
     }
 
     private void updateHighlight() {
@@ -946,7 +943,7 @@ public class AlignPanelController {
     private String getOutFileName(Aligner aligner) {
         String src = FilenameUtils.getBaseName(aligner.srcFile);
         String trg = FilenameUtils.getBaseName(aligner.trgFile);
-        if (src.equals(trg)) {
+        if (src.equals(trg) && aligner.srcLang != null && aligner.trgLang != null) {
             return src + "_" + aligner.srcLang.getLanguage() + "_" + aligner.trgLang.getLanguage() + ".tmx";
         } else {
             return src + "_" + trg + ".tmx";
@@ -1078,11 +1075,9 @@ public class AlignPanelController {
             } else {
                 doStyling(textArea, table, isSelected, hasFocus, row, column);
                 textArea.setText(null);
-                if (value != null) {
-                    String text = value.toString();
-                    textArea.setText(text);
-                    doHighlighting(text);
-                }
+                String text = value.toString();
+                textArea.setText(text);
+                doHighlighting(text);
                 return textArea;
             }
         }
@@ -1131,7 +1126,7 @@ public class AlignPanelController {
         void doHighlighting(String text) {
             StyledDocument doc = textArea.getStyledDocument();
             doc.setCharacterAttributes(0, text.length(), new SimpleAttributeSet(), true);
-            if (!doHighlight || highlightPattern == null) {
+            if (!doHighlight) {
                 return;
             }
             Matcher m = highlightPattern.matcher(text);
@@ -1338,18 +1333,15 @@ public class AlignPanelController {
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             for (int row : rows) {
                 String line = lines.get(row);
-                if (line == null) {
-                    throw new IllegalArgumentException();
-                }
                 selected.add(line);
                 MutableBead bead = rowToBead.get(row);
                 if (bead == trgBead) {
                     continue;
                 }
-                Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
-                int insertIndex = trgRow > row ? 0 : trgLines.size();
-                // XXX: Bead modified here
-                trgLines.add(insertIndex, line);
+                if (Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line)) {
+                    int insertIndex = trgRow > row ? 0 : trgLines.size();
+                    trgLines.add(insertIndex, line);
+                }
             }
             trgBead.status = Status.DEFAULT;
             makeCache();
@@ -1474,9 +1466,7 @@ public class AlignPanelController {
             int inc = up ? -1 : 1;
             for (int r = row + inc; r != trgRow && r >= 0 && r < rowToSourceLine.size(); r += inc) {
                 String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(r);
-                if (line != null) {
-                    return false;
-                }
+                return false;
             }
             return true;
         }
@@ -1519,7 +1509,7 @@ public class AlignPanelController {
          * @return list of row numbers cell in.
          */
         List<Integer> realCellsInRowSpan(int col, int... rows) {
-            List<Integer> result = new ArrayList<Integer>();
+            List<Integer> result = new ArrayList<>();
             for (int row : rows) {
                 if (getValueAt(row, col) != null) {
                     result.add(row);
@@ -1593,8 +1583,7 @@ public class AlignPanelController {
             MutableBead trgBead = rowToBead.get(rows.get(0));
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
-            String combined = Util.join(lang, toCombine);
-            // XXX: Bead modified
+            String combined = lang != null ? Util.join(lang, toCombine) : null;
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
             trgBead.status = Status.DEFAULT;
             makeCache();
@@ -1720,15 +1709,8 @@ public class AlignPanelController {
                     trgBead = rowToBead.get(trgRow);
                 }
                 if (trgBead == bead) {
-                    if (lines.get(trgRow) != null) {
-                        // Already in target bead
-                        continue;
-                    } else {
-                        // Moving down in unbalanced bead where target is blank
-                        // cell -> split bead and place
-                        // into resulting remainder bead
-                        trgBead = splitBead(trgBead);
-                    }
+                    // Already in target bead
+                    continue;
                 }
                 // XXX: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
@@ -1793,7 +1775,7 @@ public class AlignPanelController {
         }
 
         void toggleBeadsAtRows(int... rows) {
-            List<MutableBead> beads = new ArrayList<MutableBead>(rows.length);
+            List<MutableBead> beads = new ArrayList<>(rows.length);
             for (int row : rows) {
                 MutableBead bead = rowToBead.get(row);
                 if (!beads.contains(bead)) {
@@ -1820,9 +1802,7 @@ public class AlignPanelController {
             }
             List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             for (int i = row + 1; i < lines.size(); i++) {
-                if (lines.get(i) != null) {
-                    return i;
-                }
+                return i;
             }
             return -1;
         }
@@ -1882,7 +1862,7 @@ public class AlignPanelController {
         }
 
         @Override
-        protected Transferable createTransferable(JComponent c) {
+        protected @Nullable Transferable createTransferable(JComponent c) {
             if (!(c instanceof JTable)) {
                 return null;
             }
@@ -1989,7 +1969,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
             if (ARRAY2DFLAVOR.equals(flavor)) {
                 return new int[][] { rows, cols };
             }
@@ -2033,9 +2013,6 @@ public class AlignPanelController {
             if (oldVal == newVal) {
                 return true;
             }
-            if (oldVal == null || newVal == null) {
-                return false;
-            }
             return oldVal.getColumn() == newVal.getColumn() && oldVal.getRow() == newVal.getRow();
         }
 
@@ -2055,9 +2032,9 @@ public class AlignPanelController {
         }
 
         @Override
-        protected @Nullable String getDisplayText(@Nullable T value) {
+        protected String getDisplayText(@Nullable T value) {
             if (value == null) {
-                return null;
+                return "";
             }
             try {
                 return BUNDLE.getString(keyPrefix + value.name());

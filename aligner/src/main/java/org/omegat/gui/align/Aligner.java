@@ -82,10 +82,10 @@ import gen.core.filters.Filters;
  */
 public class Aligner {
 
-    final String srcFile;
-    final Language srcLang;
-    final String trgFile;
-    final Language trgLang;
+    final @Nullable String srcFile;
+    final @Nullable Language srcLang;
+    final @Nullable String trgFile;
+    final @Nullable Language trgLang;
 
     boolean segment = true;
     boolean removeTags = false;
@@ -118,6 +118,7 @@ public class Aligner {
 
     enum AlgorithmClass {
         /**
+         * Viterbi algorithm.
          * @see <a href=
          *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/filter/aligner/align/hmm/viterbi/ViterbiAlgorithm.java">
          *      ViterbiAlgorithm.java</a>
@@ -125,6 +126,7 @@ public class Aligner {
         VITERBI,
 
         /**
+         * Forward-backward algorithm.
          * @see <a href=
          *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/filter/aligner/align/hmm/fb/ForwardBackwardAlgorithm.java">
          *      ForwardBackwardAlgorithm.java</a>
@@ -134,6 +136,7 @@ public class Aligner {
 
     enum CalculatorType {
         /**
+         * Normal distribution calculator.
          * @see <a href=
          *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/calculator/length/NormalDistributionCalculator.java">
          *      NormalDistributionCalculator.java</a>
@@ -141,6 +144,7 @@ public class Aligner {
         NORMAL,
 
         /**
+         * Poisson distribution calculator.
          * @see <a href=
          *      "https://github.com/loomchild/maligna/blob/3.0.0/maligna/src/main/java/net/loomchild/maligna/calculator/length/PoissonDistributionCalculator.java">
          *      PoissonDistributionCalculator.java</a>
@@ -149,19 +153,26 @@ public class Aligner {
     }
 
     enum CounterType {
-        CHAR, WORD
+        /**
+         * Represents the counter type for characters.
+         */
+        CHAR,
+        /**
+         * Represents the counter type for words.
+         */
+        WORD
     }
 
     @Nullable ComparisonMode comparisonMode;
-    AlgorithmClass algorithmClass;
-    CalculatorType calculatorType;
-    CounterType counterType;
+    @Nullable AlgorithmClass algorithmClass;
+    @Nullable CalculatorType calculatorType;
+    @Nullable CounterType counterType;
 
     private @Nullable List<String> srcRaw;
     private @Nullable List<String> trgRaw;
     private @Nullable List<Entry<String, String>> idPairs;
-    List<ComparisonMode> allowedModes;
-    private Segmenter segmenter;
+    @Nullable List<ComparisonMode> allowedModes;
+    private @Nullable Segmenter segmenter;
     private final FilterMaster fm;
 
     public Aligner(@Nullable String srcFile, @Nullable Language srcLang, @Nullable String trgFile,
@@ -182,7 +193,7 @@ public class Aligner {
         segmenter = new Segmenter(srx);
     }
 
-    Segmenter getSegmenter() {
+    @Nullable Segmenter getSegmenter() {
         return segmenter;
     }
 
@@ -195,7 +206,12 @@ public class Aligner {
      * @throws Exception
      *             If the parsing fails for whatever reason
      */
+    @SuppressWarnings("NullAway")
     void loadFiles() throws Exception {
+        if (srcFile == null || trgFile == null) {
+            idPairs = null;
+            return;
+        }
         Entry<List<String>, List<String>> srcResult = parseFile(srcFile);
         srcRaw = srcResult.getValue();
         Entry<List<String>, List<String>> trgResult = parseFile(trgFile);
@@ -203,12 +219,12 @@ public class Aligner {
 
         List<ComparisonMode> allowed = new ArrayList<>();
         allowed.add(ComparisonMode.HEAPWISE);
-        if (srcRaw != null && trgRaw != null && srcRaw.size() == trgRaw.size()) {
+        if (srcRaw != null && srcRaw.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.PARSEWISE);
         }
         List<String> srcIds = srcResult.getKey();
         List<String> trgIds = trgResult.getKey();
-        if (srcRaw != null && trgRaw != null && srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
+        if (srcRaw != null && srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.ID);
             comparisonMode = ComparisonMode.ID;
 
@@ -217,7 +233,7 @@ public class Aligner {
             idPairs = IntStream.range(0, srcRaw.size()).mapToObj(i -> {
                 String src = srcRaw.get(i);
                 String trg = trgMap.get(srcIds.get(i));
-                if (src != null && trg != null) {
+                if (trg != null) {
                     return new AbstractMap.SimpleImmutableEntry<>(src, trg);
                 } else {
                     return null;
@@ -245,7 +261,7 @@ public class Aligner {
         comparisonMode = ComparisonMode.HEAPWISE;
         algorithmClass = AlgorithmClass.VITERBI;
         calculatorType = CalculatorType.NORMAL;
-        if (!srcLang.isSpaceDelimited() || !trgLang.isSpaceDelimited()) {
+        if ((srcLang != null && !srcLang.isSpaceDelimited()) || (trgLang != null && !trgLang.isSpaceDelimited())) {
             counterType = CounterType.CHAR;
         } else {
             counterType = CounterType.WORD;
@@ -281,8 +297,9 @@ public class Aligner {
                     }
 
                     @Override
-                    public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                            String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                    public void addEntry(@Nullable String id, String source, @Nullable String translation,
+                                         boolean isFuzzy, @Nullable String comment, @Nullable String path,
+                                         IFilter filter, @Nullable List<ProtectedPart> protectedParts) {
                         process(source, id != null ? id : path);
                     }
 
@@ -294,7 +311,7 @@ public class Aligner {
 
                     }
 
-                    private void process(String text, String id) {
+                    private void process(String text, @Nullable String id) {
                         boolean removeSpaces = fm.getConfig().isRemoveSpacesNonseg();
                         text = StringUtil.normalizeUnicode(ParseEntry.stripSomeChars(text,
                                 new ParseEntryResult(), removeTags, removeSpaces));
@@ -332,11 +349,9 @@ public class Aligner {
      *         index with each entry of {@link #trgRaw}
      */
     private Stream<Alignment> alignParsewiseNotSegmented() {
-        if (!allowedModes.contains(ComparisonMode.PARSEWISE)) {
+        if (allowedModes == null || !allowedModes.contains(ComparisonMode.PARSEWISE) || srcRaw == null ||
+                trgRaw == null) {
             throw new UnsupportedOperationException();
-        }
-        if (srcRaw == null || trgRaw == null) {
-            throw new IllegalStateException("Input files not loaded");
         }
         return IntStream.range(0, srcRaw.size())
                 .mapToObj(i -> new Alignment(Collections.singletonList(srcRaw.get(i)),
@@ -409,13 +424,13 @@ public class Aligner {
      * @return List of beads aligned heapwise
      */
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
-        if (srcRaw == null) {
+        if (srcRaw == null || srcLang == null || trgRaw == null || trgLang == null) {
             return Stream.empty();
+        }
+        if (algorithmClass == null || calculatorType == null || counterType == null) {
+            throw new IllegalStateException("Algorithm not set");
         }
         List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
-        if (trgRaw == null) {
-            return Stream.empty();
-        }
         List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
         return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
     }
@@ -433,6 +448,9 @@ public class Aligner {
     public void writePairsToTMX(File outFile, List<Entry<String, String>> pairs) throws Exception {
         String creator = OStrings.getApplicationName() + " Aligner";
         long time = System.currentTimeMillis();
+        if (srcLang == null || trgLang == null) {
+            throw new IllegalStateException("Language not set");
+        }
         try (TMXWriter2 writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false)) {
             for (Entry<String, String> e : pairs) {
                 writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null);
@@ -560,6 +578,9 @@ public class Aligner {
     }
 
     List<MutableBead> doAlign(List<MutableBead> beads) {
+        if (algorithmClass == null || calculatorType == null || counterType == null) {
+            throw new IllegalStateException("Algorithm class, calculator type, or counter type not set");
+        }
         List<String> source = new ArrayList<>();
         List<String> target = new ArrayList<>();
         for (MutableBead bead : beads) {

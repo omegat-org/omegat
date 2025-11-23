@@ -55,11 +55,13 @@ public final class AlignerModule implements IApplicationEventListener {
     /**
      * Register plugins into OmegaT.
      */
+    @SuppressWarnings("unused")
     public static void loadPlugins() {
         alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
     }
 
+    @SuppressWarnings("unused")
     public static void unloadPlugins() {
         if (alignerListener != null) {
             CoreEvents.unregisterApplicationEventListener(alignerListener);
@@ -203,6 +205,6 @@ public final class AlignerModule implements IApplicationEventListener {
      *            The root directory containing the source files to be aligned.
      */
     public static void alignerShow(String srcRoot) {
-        (new AlignerModule()).alignerShow(null, null, null, null, srcRoot, null);
+        new AlignerModule().alignerShow(null, null, null, null, srcRoot, null);
     }
 }

@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
@@ -57,22 +58,23 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     /** SRX from OmegaT. */
     private final SRX defaultSRX;
     /** SRX from user preferences. */
-    private final SRX userSRX;
+    private final @Nullable SRX userSRX;
     /** Project-specific SRX */
-    private final SRX projectSRX;
+    private final @Nullable SRX projectSRX;
     /** SRX which editable now. */
     private SRX editableSRX;
 
     /**
      * Flag if this customizer shows project specific segmentation rules or not
      */
-    private boolean isProjectSpecific;
+    private final boolean isProjectSpecific;
 
     public SegmentationCustomizerController() {
         this(false, SRX.getDefault(), Preferences.getSRX(), null);
     }
 
-    public SegmentationCustomizerController(boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
+    public SegmentationCustomizerController(boolean projectSpecific, SRX defaultSRX, @Nullable SRX userSRX,
+                                            @Nullable SRX projectSRX) {
         this.isProjectSpecific = projectSpecific;
         this.defaultSRX = defaultSRX;
         this.userSRX = userSRX;
@@ -114,16 +116,8 @@ public class SegmentationCustomizerController extends BasePreferencesController 
                 int selrow = panel.mapTable.getSelectedRow();
                 int rows = panel.mapTable.getRowCount();
 
-                if (selrow > 0) {
-                    panel.mapUpButton.setEnabled(true);
-                } else {
-                    panel.mapUpButton.setEnabled(false);
-                }
-                if (selrow < (rows - 1)) {
-                    panel.mapDownButton.setEnabled(true);
-                } else {
-                    panel.mapDownButton.setEnabled(false);
-                }
+                panel.mapUpButton.setEnabled(selrow > 0);
+                panel.mapDownButton.setEnabled(selrow < (rows - 1));
                 MapRule maprule = this.editableSRX.getMappingRules().get(selrow);
                 SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
                 panel.ruleTable.setModel(model);
@@ -275,7 +269,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     protected void initFromPrefs() {
         panel.projectSpecificCB.setVisible(isProjectSpecific);
         panel.projectSpecificCB.setSelected(projectSRX != null);
-        setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX : userSRX);
+        setEditableSRX(isProjectSpecific && projectSRX != null ? projectSRX : userSRX != null ? userSRX : defaultSRX);
         updateEnabledness();
     }
 

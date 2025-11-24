@@ -696,23 +696,60 @@ public class EditorTextArea3 extends JEditorPane {
                 String text = getOmDocument().getText(segment.getStartPosition(),
                         segment.getEndPosition() - segment.getStartPosition());
                 int off = pos - segment.getStartPosition();
-                if (off < 0 || off >= text.length()) {
-                    return false;
-                }
-                for (ProtectedPart pp : ste.getProtectedParts()) {
-                    int p = -1;
-                    while ((p = text.indexOf(pp.getTextInSourceSegment(), p + 1)) >= 0) {
-                        if (p <= off && off < p + pp.getTextInSourceSegment().length()) {
-                            p += segment.getStartPosition();
-                            select(p, p + pp.getTextInSourceSegment().length());
+                if (off >= 0 && off < text.length()) {
+                    for (ProtectedPart pp : ste.getProtectedParts()) {
+                        if (findAndSelectPart(text, off, pp, segment.getStartPosition())) {
                             return true;
                         }
                     }
                 }
             } catch (BadLocationException ex) {
+                Log.log(ex);
             }
         }
         return false;
+    }
+
+    private boolean findAndSelectPart(String text, int off, ProtectedPart pp, int segmentStart) {
+        String protectedPartText = pp.getTextInSourceSegment();
+        if (protectedPartText == null) {
+            return false;
+        }
+        int p = -1;
+        while ((p = text.indexOf(protectedPartText, p + 1)) >= 0) {
+            if (p <= off && off < p + protectedPartText.length()) {
+                int start = expandSelectionStart(text, p);
+                int end = expandSelectionEnd(text,  p + protectedPartText.length());
+
+                select(start + segmentStart, end + segmentStart);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int expandSelectionStart(String text, int start) {
+        // expand selection if surrounded by bidi marks (up to 2 chars)
+        for (int i = 0; i < 2; i++) {
+            if (start > 0 && isDirectionChar(text.charAt(start - 1))) {
+                start--;
+            }
+        }
+        return start;
+    }
+
+    private int expandSelectionEnd(String text, int end) {
+        // expand selection if surrounded by bidi marks (up to 2 chars)
+        for (int i = 0; i < 2; i++) {
+            if (end < text.length() && isDirectionChar(text.charAt(end))) {
+                end++;
+            }
+        }
+        return end;
+    }
+
+    private boolean isDirectionChar(char ch) {
+        return ch == '\u200E' || ch == '\u200F' || ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
     }
 
     /**
@@ -820,13 +857,13 @@ public class EditorTextArea3 extends JEditorPane {
      * Remove invisible direction chars on the copy text into clipboard.
      */
     @Override
-    public String getSelectedText() {
+    public @Nullable String getSelectedText() {
         String st = super.getSelectedText();
         return st != null ? EditorUtils.removeDirectionChars(st) : null;
     }
 
     @Override
-    public String getToolTipText(MouseEvent event) {
+    public @Nullable String getToolTipText(MouseEvent event) {
         int pos = EditorTextArea3.this.viewToModel2D(event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
         return s < 0 ? null : controller.markerController.getToolTips(s, pos);

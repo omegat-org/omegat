@@ -48,7 +48,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
      * A map of attribute-name and attribute value pairs that, if exist in a
      * tag, indicate that this tag should not be translated
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private final HashMap<String, String> ignoreTagsAttributes;
 
     public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
@@ -58,7 +58,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
 
         defineShortcut("link", "li");
 
-        ignoreTagsAttributes = new HashMap<String, String>();
+        ignoreTagsAttributes = new HashMap<>();
         ignoreTagsAttributes.put("TRANSLATE=FALSE", "");
     }
 
@@ -82,11 +82,20 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
     @Override
     public Boolean validateIntactTag(String tag, Attributes atts) {
         if (atts != null) {
+            // Primary path: generic key=value check against configured ignore pairs
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);
                 if (checkIgnoreTags(oneAttribute.getName(), oneAttribute.getValue())) {
                     return true;
                 }
+            }
+
+            // Extra safety for Help & Manual files: honor translate="false" regardless
+            // of case and even if not listed in ignoreTagsAttributes.
+            String translate = atts.getValueByName("translate");
+            if (translate != null) {
+                String v = translate.trim().toLowerCase(Locale.ENGLISH);
+                return "false".equals(v) || "no".equals(v) || "0".equals(v); // Do not translate contents
             }
         }
         // If no key=value pair is found, the tag can be translated

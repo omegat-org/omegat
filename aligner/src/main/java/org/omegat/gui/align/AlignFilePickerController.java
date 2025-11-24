@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Vector;
 import java.util.concurrent.CancellationException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -49,7 +48,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -75,8 +75,8 @@ public class AlignFilePickerController {
     private @Nullable String targetDefaultDir;
     private @Nullable String defaultSaveDir;
 
-    private Language sourceLanguage;
-    private Language targetLanguage;
+    private @Nullable Language sourceLanguage;
+    private @Nullable Language targetLanguage;
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
 
@@ -127,7 +127,7 @@ public class AlignFilePickerController {
     }
 
     /**
-     * Set source defualt directory.
+     * Set the source default directory.
      * 
      * @param sourceDefaultDir
      *            source default directory.
@@ -137,7 +137,7 @@ public class AlignFilePickerController {
     }
 
     /**
-     * Set target default directory.
+     * Set the target default directory.
      * 
      * @param targetDefaultDir
      *            target default directory.
@@ -147,7 +147,7 @@ public class AlignFilePickerController {
     }
 
     /**
-     * Set default save directory.
+     * Set the default save directory.
      * 
      * @param defaultSaveDir
      *            default save directory to set.
@@ -163,7 +163,7 @@ public class AlignFilePickerController {
      * @param parent
      *            Parent window of file picker and align window
      */
-    public void show(final Component parent) {
+    public void show(@Nullable Component parent) {
         JFrame frame = initGUI(parent);
         frame.setLocationRelativeTo(parent);
         frame.setVisible(true);
@@ -171,7 +171,7 @@ public class AlignFilePickerController {
 
     // public for test only
     @SuppressWarnings("serial")
-    public JFrame initGUI(Component parent) {
+    public JFrame initGUI(@Nullable Component parent) {
         final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
@@ -219,18 +219,17 @@ public class AlignFilePickerController {
 
     /**
      * Initialize FilePicker.
-     * @return FilePicker frame.
      */
     private void initializeFilePicker(AlignFilePicker picker) {
         picker.setName("align_picker_panel");
         picker.sourceLanguagePicker
-                .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
+                .setModel(new DefaultComboBoxModel<>(Language.getLanguages().toArray(new Language[0])));
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
         picker.sourceLanguagePicker.setName("sourceLanguagePicker");
 
         picker.targetLanguagePicker
-                .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
+                .setModel(new DefaultComboBoxModel<>(Language.getLanguages().toArray(new Language[0])));
         picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.targetLanguagePicker.setSelectedItem(targetLanguage);
         picker.targetLanguagePicker.setName("targetLanguagePicker");
@@ -327,8 +326,12 @@ public class AlignFilePickerController {
             updatePicker(picker);
         });
         picker.sourceChooseFileButton.addActionListener(e -> {
-            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
-                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile, "aligner_choose_source");
+            String sourceDir = StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile;
+            if (sourceDir == null) {
+                sourceDir = ".";
+            }
+            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"), sourceDir,
+                    "aligner_choose_source");
             if (file != null) {
                 sourceDefaultDir = file.getParent();
                 targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
@@ -338,8 +341,12 @@ public class AlignFilePickerController {
             }
         });
         picker.targetChooseFileButton.addActionListener(e -> {
-            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
-                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile, "aligner_choose_target");
+            String targetDir = StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile;
+            if (targetDir == null) {
+                targetDir = ".";
+            }
+            File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"), targetDir,
+                    "aligner_choose_target");
             if (file != null) {
                 targetDefaultDir = file.getParent();
                 sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
@@ -349,14 +356,16 @@ public class AlignFilePickerController {
             }
         });
 
-        picker.sourceLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
-            sourceFile = picker.sourceLanguageFileField.getText();
-            updatePicker(picker);
-        }));
-        picker.targetLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
-            targetFile = picker.targetLanguageFileField.getText();
-            updatePicker(picker);
-        }));
+        picker.sourceLanguageFileField.getDocument()
+                .addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+                    sourceFile = picker.sourceLanguageFileField.getText();
+                    updatePicker(picker);
+                }));
+        picker.targetLanguageFileField.getDocument()
+                .addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+                    targetFile = picker.targetLanguageFileField.getText();
+                    updatePicker(picker);
+                }));
         picker.setTransferHandler(new PickerTransferHandler(picker));
     }
 
@@ -375,7 +384,7 @@ public class AlignFilePickerController {
         }
         new SwingWorker<boolean[], Void>() {
             @Override
-            protected boolean[] doInBackground() throws Exception {
+            protected boolean[] doInBackground() {
                 FilterMaster fm = Core.getFilterMaster();
                 return new boolean[] { fm.isFileSupported(srcFile, false),
                         fm.isFileSupported(trgFile, false) };
@@ -394,7 +403,7 @@ public class AlignFilePickerController {
                     } else if (results[0] && !results[1]) {
                         message = StringUtil.format(BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_ONE_FILE"),
                                 trgFile.getName());
-                    } else if (!results[0] && !results[1]) {
+                    } else if (!results[0]) {
                         message = BUNDLE.getString("ALIGNER_FILEPICKER_ERROR_BOTH_FILES");
                     }
                 } catch (CancellationException e) {
@@ -410,7 +419,7 @@ public class AlignFilePickerController {
     }
 
     private static List<File> getSupportedFiles(List<?> files) {
-        List<File> result = new ArrayList<File>(files.size());
+        List<File> result = new ArrayList<>(files.size());
         FilterMaster fm = Core.getFilterMaster();
         for (Object o : files) {
             File file = (File) o;
@@ -421,7 +430,7 @@ public class AlignFilePickerController {
         return result;
     }
 
-    static File chooseFile(Component parent, String title, String dir, String name) {
+    static @Nullable File chooseFile(Component parent, String title, String dir, String name) {
         JFileChooser chooser = new JFileChooser(dir);
         chooser.setName(name);
         chooser.setDialogTitle(title);
@@ -522,8 +531,10 @@ public class AlignFilePickerController {
      * <li>Target file path
      * </ol>
      *
-     * @param args command arguments.
-     * @throws Exception when failed to ininitalize OmegaT core.
+     * @param args
+     *            command arguments.
+     * @throws Exception
+     *             when failed to ininitalize OmegaT core.
      */
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");

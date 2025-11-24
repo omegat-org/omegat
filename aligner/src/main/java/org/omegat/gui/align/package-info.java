@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Aaron Madlon-Kay
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,36 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.segmentation;
+@NullMarked
+package org.omegat.gui.align;
 
-import java.awt.Window;
-
-import org.jetbrains.annotations.Nullable;
-import org.omegat.core.segmentation.SRX;
-import org.omegat.gui.dialogs.PreferencesDialog;
-
-/**
- * A convenience class implementing a similar API to the old SegmentationCustomizer implementation, now based
- * on {@link SegmentationCustomizerController} and {@link PreferencesDialog}.
- *
- * @author Aaron Madlon-Kay
- */
-public class SegmentationCustomizer {
-
-    private final SegmentationCustomizerController view;
-    private final PreferencesDialog dialog;
-
-    public SegmentationCustomizer(boolean projectSpecific, SRX defaultSRX, @Nullable SRX userSRX,
-            @Nullable SRX projectSRX) {
-        this.view = new SegmentationCustomizerController(projectSpecific, defaultSRX, userSRX, projectSRX);
-        this.dialog = new PreferencesDialog(view);
-    }
-
-    public boolean show(Window parent) {
-        return dialog.show(parent);
-    }
-
-    public SRX getResult() {
-        return view.getResult();
-    }
-}
+import org.jspecify.annotations.NullMarked;

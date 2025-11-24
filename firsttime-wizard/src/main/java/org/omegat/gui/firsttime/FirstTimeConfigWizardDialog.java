@@ -30,7 +30,6 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
-import java.util.ResourceBundle;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -80,7 +79,6 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     private final JPanel eastPanel = new JPanel(eastLayout);
     private final JTextArea explanation = new JTextArea();
 
-    private final ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.firsttime.Bundle");
 
     private final IPreferencesController[] steps;
     private int index = 0;
@@ -89,14 +87,14 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     public FirstTimeConfigWizardDialog(Frame owner) {
         super(owner, "Welcome to OmegaT", true);
         // Now that the dialog is constructed, set localized title
-        setTitle(getString("wizard.title", "Welcome to OmegaT"));
+        setTitle(FirstTimeConfigurationWizardUtil.getString("wizard.title", "Welcome to OmegaT"));
 
         // Instantiate controllers
         AppearanceController appearance = new AppearanceController();
         FontSelectionController font = new FontSelectionController();
         GeneralOptionsController general = new GeneralOptionsController();
         // Add a final step for Greetings (First Steps) as a named controller class.
-        IPreferencesController greetingStep = new GreetingStepController(bundle);
+        IPreferencesController greetingStep = new GreetingStepController();
         steps = new IPreferencesController[] { appearance, font, general, greetingStep };
 
         setLayout(new BorderLayout());
@@ -111,7 +109,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         stepsList.setVisibleRowCount(steps.length);
         JScrollPane westScroll = new JScrollPane(stepsList);
         westScroll.setPreferredSize(new Dimension(220, 100));
-        westScroll.setBorder(BorderFactory.createTitledBorder(getString("steps.title", "Steps")));
+        westScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("steps.title", "Steps")));
         add(westScroll, BorderLayout.WEST);
 
         // CENTER: cards with actual step UIs
@@ -130,7 +128,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         explanation.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         JScrollPane explainScroll = new JScrollPane(explanation);
         explainScroll.setPreferredSize(new Dimension(280, 100));
-        explainScroll.setBorder(BorderFactory.createTitledBorder(getString("explain.title", "Explanation")));
+        explainScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("explain.title", "Explanation")));
         eastPanel.add(explainScroll, "explain");
 
         add(eastPanel, BorderLayout.EAST);
@@ -150,7 +148,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         add(southPanel, BorderLayout.SOUTH);
 
         // Header
-        JLabel header = new JLabel(getString("header.text", "Let's set up a few preferences"));
+        JLabel header = new JLabel(FirstTimeConfigurationWizardUtil.getString("header.text", "Let's set up a few preferences"));
         header.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         add(header, BorderLayout.NORTH);
 
@@ -161,7 +159,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     }
 
     private void configureActions() {
-        backButton.setAction(new AbstractAction(getString("button.back", "Back")) {
+        backButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.back", "Back")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (index > 0) {
@@ -170,7 +168,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                 }
             }
         });
-        nextButton.setAction(new AbstractAction(getString("button.next", "Next")) {
+        nextButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.next", "Next")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (index < steps.length - 1) {
@@ -181,14 +179,14 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                     index++;
                     updateState();
                     if (restartRequired) {
-                        statusLabel.setText(getString("status.restartRequired", "Changes on the previous step require restarting OmegaT."));
+                        statusLabel.setText(FirstTimeConfigurationWizardUtil.getString("status.restartRequired", "Changes on the previous step require restarting OmegaT."));
                     } else {
                         statusLabel.setText("");
                     }
                 }
             }
         });
-        finishButton.setAction(new AbstractAction(getString("button.finish", "Finish")) {
+        finishButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.finish", "Finish")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Validate all steps
@@ -207,7 +205,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                 dispose();
             }
         });
-        cancelButton.setAction(new AbstractAction(getString("button.cancel", "Cancel")) {
+        cancelButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.cancel", "Cancel")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 finished = false;
@@ -245,16 +243,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
             textKey = ""; // No explanation
             break;
         }
-        explanation.setText(textKey.isEmpty() ? "" : getString(textKey, ""));
+        explanation.setText(textKey.isEmpty() ? "" : FirstTimeConfigurationWizardUtil.getString(textKey, ""));
         explanation.setCaretPosition(0);
-    }
-
-    private String getString(String key, String deflt) {
-        try {
-            return bundle.getString(key);
-        } catch (Exception e) {
-            return deflt;
-        }
     }
 
     public boolean isFinished() {

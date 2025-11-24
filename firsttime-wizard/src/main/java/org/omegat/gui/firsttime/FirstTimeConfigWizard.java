@@ -36,10 +36,10 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.MenuExtender;
+import org.openide.awt.Mnemonics;
 
+@SuppressWarnings("unused")
 public final class FirstTimeConfigWizard {
-
-    private static final String PREF_NO_FIRST_TIME_WIZARD = "no_first_time_config_wizard_on_start";
 
     private static final FirstTimeConfigWizardModuleListener LISTENER = new FirstTimeConfigWizardModuleListener();
 
@@ -61,13 +61,12 @@ public final class FirstTimeConfigWizard {
         public void onApplicationStartup() {
             initMenu();
             // Show wizard once if not suppressed
-            if (!Preferences.isPreferenceDefault(PREF_NO_FIRST_TIME_WIZARD, false)) {
+            if (Preferences.isFirstRun()) {
                 SwingUtilities.invokeLater(() -> {
                     FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                             Core.getMainWindow().getApplicationFrame());
                     dlg.setVisible(true);
                     if (dlg.isFinished()) {
-                        Preferences.setPreference(PREF_NO_FIRST_TIME_WIZARD, true);
                         // Restart OmegaT to apply theme and other changes
                         ProjectUICommands.projectRestart(null);
                     }
@@ -76,13 +75,13 @@ public final class FirstTimeConfigWizard {
         }
 
         private void initMenu() {
-            menuItem = new JMenuItem("First-time configuration...");
+            menuItem = new JMenuItem();
+            Mnemonics.setLocalizedText(menuItem, FirstTimeConfigurationWizardUtil.getString("menu.firsttimewizard", "First Time Configuration..."));
             menuItem.addActionListener(e -> {
                 FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                         Core.getMainWindow().getApplicationFrame());
                 dlg.setVisible(true);
                 if (dlg.isFinished()) {
-                    Preferences.setPreference(PREF_NO_FIRST_TIME_WIZARD, true);
                     if (dlg.isRestartRequired()) {
                         ProjectUICommands.projectRestart(null);
                     }

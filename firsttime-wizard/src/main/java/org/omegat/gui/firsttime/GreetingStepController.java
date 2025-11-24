@@ -29,7 +29,6 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ResourceBundle;
 
 import org.omegat.gui.preferences.IPreferencesController;
 import org.omegat.help.Help;
@@ -48,10 +47,8 @@ import javax.swing.JTextPane;
 final class GreetingStepController implements IPreferencesController {
 
     private final JTextPane greetingPane = new JTextPane();
-    private final ResourceBundle bundle;
 
-    GreetingStepController(ResourceBundle bundle) {
-        this.bundle = bundle;
+    GreetingStepController() {
         initGreetingPane();
     }
 
@@ -71,7 +68,7 @@ final class GreetingStepController implements IPreferencesController {
         }
         JScrollPane greetScroll = new JScrollPane(greetingPane);
         greetScroll.setPreferredSize(new Dimension(280, 100));
-        greetScroll.setBorder(BorderFactory.createTitledBorder(getString("explain.title", "Explanation")));
+        greetScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("explain.title", "Explanation")));
     }
 
     private String detectFirstStepsLanguage() {
@@ -85,14 +82,6 @@ final class GreetingStepController implements IPreferencesController {
             return language;
         }
         return "en";
-    }
-
-    private String getString(String key, String deflt) {
-        try {
-            return bundle.getString(key);
-        } catch (Exception e) {
-            return deflt;
-        }
     }
 
     @Override
@@ -117,11 +106,7 @@ final class GreetingStepController implements IPreferencesController {
 
     @Override
     public String toString() {
-        try {
-            return bundle.getString("step.greeting");
-        } catch (Exception e) {
-            return "Next step guide";
-        }
+        return FirstTimeConfigurationWizardUtil.getString("step.greeting", "Next step guide");
     }
 
     @Override
@@ -132,11 +117,6 @@ final class GreetingStepController implements IPreferencesController {
     @Override
     public void persist() {
         // no-op
-    }
-
-    @Override
-    public boolean validate() {
-        return true;
     }
 
     @Override

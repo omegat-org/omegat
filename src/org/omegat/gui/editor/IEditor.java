@@ -107,7 +107,7 @@ public interface IEditor {
      * <p>
      * Can be called from any thread.
      */
-    String getCurrentFile();
+    @Nullable String getCurrentFile();
 
     /**
      * Get the relative path (under <code>target</code>) of the target file
@@ -117,14 +117,14 @@ public interface IEditor {
      * <p>
      * Can be called from any thread.
      */
-    String getCurrentTargetFile();
+    @Nullable String getCurrentTargetFile();
 
     /**
      * Get current active entry.
      *
      * Can be called from any thread.
      */
-    SourceTextEntry getCurrentEntry();
+    @Nullable SourceTextEntry getCurrentEntry();
 
     /**
      * Get current active entry number.

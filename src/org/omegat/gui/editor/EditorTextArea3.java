@@ -63,7 +63,6 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
@@ -87,7 +86,6 @@ import org.omegat.util.gui.UIDesignManager;
  * @author Zoltan Bartko
  */
 @SuppressWarnings("serial")
-@NullMarked
 public class EditorTextArea3 extends JEditorPane {
 
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
@@ -455,9 +453,13 @@ public class EditorTextArea3 extends JEditorPane {
                 if (!processed) {
                     int offset = getCaretPosition();
                     int nextWord = Utilities.getNextWord(this, offset);
-                    int c = Math.min(nextWord, doc.getTranslationEnd());
                     setSelectionStart(offset);
-                    setSelectionEnd(c);
+                    if (doc != null) {
+                        int c = Math.min(nextWord, doc.getTranslationEnd());
+                        setSelectionEnd(c);
+                    } else {
+                        setSelectionEnd(nextWord);
+                    }
                     replaceSelection("");
 
                     processed = true;
@@ -870,10 +872,11 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public void replaceSelection(String content) {
-        // Overwrite current selection, and if at the end of the segment, allow
-        // inserting new text.
-        if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()
-                && getCaretPosition() < getOmDocument().getTranslationEnd()) {
+        // Overwrite the current selection, and if at the end of the segment,
+        // allow inserting new text.
+        var omDocument = getOmDocument();
+        if (isEditable() && omDocument != null && overtypeMode && getSelectionStart() == getSelectionEnd()
+                && getCaretPosition() < omDocument.getTranslationEnd()) {
             int pos = getCaretPosition();
             int lastPos = Math.min(getDocument().getLength(), pos + content.length());
             select(pos, lastPos);

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
@@ -171,7 +172,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
          *
          * @return regex string
          */
-        private String buildRegex() {
+        private @Nullable String buildRegex() {
             ProtectedPart[] protectedParts = Core.getEditor().getCurrentEntry().getProtectedParts();
             if (protectedParts.length == 0) {
                 return null;
@@ -196,7 +197,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         }
 
         @Override
-        public String[] getSupportedLanguages() {
+        public String @Nullable [] getSupportedLanguages() {
             return null;
         }
     }

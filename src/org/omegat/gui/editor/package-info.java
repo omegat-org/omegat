@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,26 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
+@NullMarked
 package org.omegat.gui.editor;
 
-import java.awt.Component;
-
-import org.jspecify.annotations.Nullable;
-import org.omegat.core.data.SourceTextEntry;
-
-/**
- * Interface for editor's filter.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public interface IEditorFilter {
-    boolean allowed(@Nullable SourceTextEntry ste);
-
-    Component getControlComponent();
-
-    /**
-     * True if editor should insert source text as empty translation even if it's not allowed by editor
-     * behavior settings.
-     */
-    boolean isSourceAsEmptyTranslation();
-}
+import org.jspecify.annotations.NullMarked;

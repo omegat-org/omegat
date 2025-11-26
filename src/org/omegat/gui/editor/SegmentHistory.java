@@ -42,7 +42,7 @@ class SegmentHistory {
      */
     private int pointer = -1;
 
-    private List<Integer> history = new ArrayList<Integer>();
+    private final List<Integer> history = new ArrayList<>();
 
     /** Creates a new instance of SegmentHistory */
     protected SegmentHistory() {
@@ -81,8 +81,8 @@ class SegmentHistory {
                  * List subList = history.subList(pointer + 1, history.size());
                  * history.removeAll(subList);
                  */
-                for (int i = history.size() - 1; i > pointer; i--) {
-                    history.remove(i);
+                if (history.size() > pointer + 1) {
+                    history.subList(pointer + 1, history.size()).clear();
                 }
             }
         }
@@ -111,9 +111,8 @@ class SegmentHistory {
         if (pointer > 0) {
             pointer--;
         }
-        int result = get(pointer);
 
-        return result;
+        return get(pointer);
     }
 
     /**

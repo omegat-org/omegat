@@ -42,6 +42,7 @@ import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -105,12 +106,12 @@ public class SegmentBuilder {
     /**
      * Source text of entry with internal bidi chars, or null if not displayed.
      */
-    private String sourceText;
+    private @Nullable String sourceText;
     /**
      * Translation text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    private String translationText;
+    private @Nullable String translationText;
     /** True if entry is active. */
     private boolean active;
     /** True if translation exist for entry. */
@@ -130,14 +131,14 @@ public class SegmentBuilder {
     protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1;
-    protected Position endPosM1;
+    protected @Nullable Position beginPosP1;
+    protected @Nullable Position endPosM1;
 
     /** Source start position - for marks. */
-    protected Position posSourceBeg;
+    protected @Nullable Position posSourceBeg;
     protected int posSourceLength;
     /** Translation start position - for marks. */
-    protected Position posTranslationBeg;
+    protected @Nullable Position posTranslationBeg;
     protected int posTranslationLength;
 
     /** current offset in document to insert new stuff */
@@ -148,7 +149,7 @@ public class SegmentBuilder {
      *
      * Array of displayed marks. 1nd dimension - marker, 2nd dimension - marks
      */
-    protected MarkInfo[][] marks;
+    protected MarkInfo @Nullable [] @Nullable [] marks;
 
     /**
      * True if source OR target languages is RTL. In this case, we will insert
@@ -433,7 +434,7 @@ public class SegmentBuilder {
      * Get source text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    public String getSourceText() {
+    public @Nullable String getSourceText() {
         return sourceText;
     }
 
@@ -441,7 +442,7 @@ public class SegmentBuilder {
      * Get translation text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    public String getTranslationText() {
+    public @Nullable String getTranslationText() {
         return translationText;
     }
 

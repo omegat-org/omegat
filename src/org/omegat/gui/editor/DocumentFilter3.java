@@ -32,6 +32,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.StyleConstants;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -53,7 +54,7 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+    public void insertString(FilterBypass fb, int offset, String string, @Nullable AttributeSet attr)
             throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -68,7 +69,7 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+    public void replace(FilterBypass fb, int offset, int length, String text, @Nullable AttributeSet attrs)
             throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -131,13 +132,19 @@ public class DocumentFilter3 extends DocumentFilter {
 
     private boolean isOffsetWithinProtectedTag(String text, ProtectedPart protectedPart, int relativeOffset,
             int length, SegmentBuilder segmentBuilder, Document3 doc) {
-        int position = -1;
-        while ((position = text.indexOf(protectedPart.getTextInSourceSegment(), position + 1)) >= 0) {
-            int checkPos = position;
-            int checkLen = protectedPart.getTextInSourceSegment().length();
+        String protectedPartText = protectedPart.getTextInSourceSegment();
+        if (protectedPartText == null) {
+            return false;
+        }
 
-            if (segmentBuilder.hasRTL && doc.getController().targetLangIsRTL
-                    && EditorUtils.hasBidiAroundTag(text, protectedPart.getTextInSourceSegment(), position)) {
+        boolean checkRTL = segmentBuilder.hasRTL && doc.getController().targetLangIsRTL;
+        int position = -1;
+
+        while ((position = text.indexOf(protectedPartText, position + 1)) >= 0) {
+            int checkPos = position;
+            int checkLen = protectedPartText.length();
+
+            if (checkRTL && EditorUtils.hasBidiAroundTag(text, protectedPart.getTextInSourceSegment(), position)) {
                 checkPos -= BIDI_TAG_PADDING;
                 checkLen += BIDI_TAG_PADDING * 2;
             }

@@ -38,6 +38,7 @@ import javax.swing.text.LayeredHighlighter;
 import javax.swing.text.Position;
 import javax.swing.text.View;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 
 /**
@@ -113,7 +114,7 @@ public class UnderlineFactory {
 
     public abstract static class Underliner extends LayeredHighlighter.LayerPainter {
 
-        public Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds, JTextComponent c, View view) {
+        public @Nullable Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds, JTextComponent c, View view) {
             Rectangle rect = null;
             if (offs0 == view.getStartOffset() && offs1 == view.getEndOffset()) {
                 if (bounds instanceof Rectangle) {

@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.apache.commons.io.IOUtils;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -90,7 +91,7 @@ public class SegmentExportImport {
     /**
      * Export the current source and target segments in text files.
      */
-    public synchronized void exportCurrentSegment(final SourceTextEntry ste) {
+    public synchronized void exportCurrentSegment(@Nullable SourceTextEntry ste) {
         importFile.delete();
         if (ste == null) {
             // entry deactivated

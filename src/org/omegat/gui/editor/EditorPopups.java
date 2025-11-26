@@ -414,6 +414,9 @@ public final class EditorPopups {
                 return;
             }
             SourceTextEntry ste = ec.getCurrentEntry();
+            if (ste == null) {
+                return;
+            }
             List<SourceTextEntry> dups = ste.getDuplicates();
             if (dups.isEmpty()) {
                 return;

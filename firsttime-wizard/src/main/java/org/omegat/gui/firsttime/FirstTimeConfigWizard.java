@@ -69,8 +69,10 @@ public final class FirstTimeConfigWizard {
                             Core.getMainWindow().getApplicationFrame());
                     dlg.setVisible(true);
                     if (dlg.isFinished()) {
-                        // Restart OmegaT to apply theme and other changes
-                        ProjectUICommands.projectRestart(null);
+                        // Restart OmegaT to apply theme and other changes.
+                        // If no project is loaded, skip any confirmation dialogs.
+                        boolean noProjectLoaded = !Core.getProject().isProjectLoaded();
+                        ProjectUICommands.projectRestart(null, noProjectLoaded);
                     }
                 });
             }
@@ -85,7 +87,8 @@ public final class FirstTimeConfigWizard {
                 dlg.setVisible(true);
                 if (dlg.isFinished()) {
                     if (dlg.isRestartRequired()) {
-                        ProjectUICommands.projectRestart(null);
+                        boolean noProjectLoaded = !Core.getProject().isProjectLoaded();
+                        ProjectUICommands.projectRestart(null, noProjectLoaded);
                     }
                 }
             });

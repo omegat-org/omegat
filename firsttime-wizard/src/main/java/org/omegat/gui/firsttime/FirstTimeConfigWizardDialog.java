@@ -194,14 +194,13 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                     if (!steps[index].validate()) {
                         return; // stay until valid
                     }
-                    boolean restartRequired = steps[index].isRestartRequired();
                     index++;
                     updateState();
-                    if (restartRequired) {
-                        statusLabel.setText(FirstTimeConfigurationWizardUtil.getString("status.restartRequired", "Changes on the previous step require restarting OmegaT."));
-                    } else {
-                        statusLabel.setText("");
-                    }
+                }
+                if (isRestartRequired()) {
+                    statusLabel.setText(FirstTimeConfigurationWizardUtil.getString("status.restartRequired", "Changes on the previous step require restarting OmegaT."));
+                } else {
+                    statusLabel.setText("");
                 }
             }
         });

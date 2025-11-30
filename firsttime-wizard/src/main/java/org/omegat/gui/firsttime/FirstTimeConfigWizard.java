@@ -68,8 +68,8 @@ public final class FirstTimeConfigWizard {
                     FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                             Core.getMainWindow().getApplicationFrame());
                     dlg.setVisible(true);
-                    if (dlg.isFinished()) {
-                        // Restart OmegaT to apply theme and other changes.
+                    // Restart OmegaT only when required by changes made in the wizard.
+                    if (dlg.isFinished() && dlg.isRestartRequired()) {
                         // If no project is loaded, skip any confirmation dialogs.
                         boolean noProjectLoaded = !Core.getProject().isProjectLoaded();
                         ProjectUICommands.projectRestart(null, noProjectLoaded);

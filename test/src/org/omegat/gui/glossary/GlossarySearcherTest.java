@@ -76,8 +76,8 @@ public class GlossarySearcherTest extends TestCore {
         // mocking methods to change behavior without Preferences values.
 
         private boolean doGlossaryStemming = true;
-        void enableGlossaryStemming(boolean enable) {
-            doGlossaryStemming = enable;
+        void disableGlossaryStemming() {
+            doGlossaryStemming = false;
         }
 
         @Override
@@ -86,8 +86,8 @@ public class GlossarySearcherTest extends TestCore {
         }
 
         private boolean requireSimilarCase = Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT;
-        void setRequireSimilarCase(boolean requireSimilarCase) {
-            this.requireSimilarCase = requireSimilarCase;
+        void enableRequireSimilarCase() {
+            this.requireSimilarCase = true;
         }
 
         @Override
@@ -312,6 +312,35 @@ public class GlossarySearcherTest extends TestCore {
 
         assertEquals(1, result.size());
         assertEquals("apple", result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testNumericTermWithTrailingPeriodMatches() {
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("fr");
+        setupProject(srcLang);
+        ITokenizer tok = new DefaultTokenizer();
+
+        String segmentText = "foreign language term corresponding to server 11";
+        // Glossary entries: with and without numeral and punctuation
+        GlossaryEntry entryServer = new GlossaryEntry("server", "server-trg", "", true, null);
+        GlossaryEntry entryServer11Dot = new GlossaryEntry("server 11.", "server11dot-trg", "", true, null);
+
+        List<GlossaryEntry> entries = Arrays.asList(entryServer, entryServer11Dot);
+
+        EntryKey key = new EntryKey("file", segmentText, "id", null, null, null);
+        SourceTextEntry ste = new SourceTextEntry(key, 1, null, segmentText, Collections.emptyList());
+
+        // Use MockGlossarySearcher to disable stemming so numerals are tokenized verbatim
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trgLang, false);
+        searcher.disableGlossaryStemming();
+
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        // Expect both "server" and "server 11." to match the segment containing "server 11"
+        assertEquals("server", result.get(0).getSrcText());
+        assertEquals(2, result.size());
+        assertEquals("server 11.", result.get(1).getSrcText());
     }
 
     @Test
@@ -545,7 +574,7 @@ public class GlossarySearcherTest extends TestCore {
                 1, null, segmentText, Collections.emptyList());
 
         MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trLang, false);
-        searcher.setRequireSimilarCase(true);
+        searcher.enableRequireSimilarCase();
         List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
 
         assertTrue(result.isEmpty());
@@ -788,7 +817,7 @@ public class GlossarySearcherTest extends TestCore {
         Language trgLang = new Language("pl");
         ITokenizer tokenizer = new DefaultTokenizer();
         MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
-        searcher.enableGlossaryStemming(false);
+        searcher.disableGlossaryStemming();
         Token[] result = searcher.tokenize(input);
 
         assertEquals(9, result.length);
@@ -810,7 +839,7 @@ public class GlossarySearcherTest extends TestCore {
         Language trgLang = new Language("pl");
         ITokenizer tokenizer = new DefaultTokenizer();
         MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
-        searcher.enableGlossaryStemming(false);
+        searcher.disableGlossaryStemming();
         Token[] result = searcher.tokenize(input);
 
         assertEquals(0, result.length);
@@ -823,7 +852,7 @@ public class GlossarySearcherTest extends TestCore {
         Language trgLang = new Language("pl");
         ITokenizer tokenizer = new DefaultTokenizer();
         MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
-        searcher.enableGlossaryStemming(false);
+        searcher.disableGlossaryStemming();
         Token[] result = searcher.tokenize(input);
 
         assertEquals(0, result.length);
@@ -836,7 +865,7 @@ public class GlossarySearcherTest extends TestCore {
         Language trgLang = new Language("pl");
         ITokenizer tokenizer = new DefaultTokenizer();
         MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
-        searcher.enableGlossaryStemming(false);
+        searcher.disableGlossaryStemming();
         Token[] result = searcher.tokenize(input);
 
         assertEquals(27, result.length);

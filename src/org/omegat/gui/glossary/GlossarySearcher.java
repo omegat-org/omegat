@@ -33,7 +33,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -162,8 +161,20 @@ public class GlossarySearcher {
             return Collections.emptyList();
         }
         boolean notExact = isGlossaryNotExactMatch();
-        List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
+        List<Token[]> foundTokens = new ArrayList<>(DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact));
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
+        if (foundTokens.isEmpty()) {
+            // If no match was found, try again after stripping trailing punctuation from the term.
+            String stripped = stripTrailingPunctuation(term);
+            if (!stripped.equals(term)) {
+                Token[] strippedTokens = tokenize(stripped);
+                if (strippedTokens.length > 0) {
+                    List<Token[]> retry = DefaultTokenizer.searchAll(fullTextTokens, strippedTokens, notExact);
+                    retry.removeIf(toks -> !keepMatch(toks, fullText, stripped));
+                    foundTokens.addAll(retry);
+                }
+            }
+        }
         if (StringUtil.isCJK(term)) {
             // This is a workaround for a high reported hash collision rate for
             // short Japanese strings. This assumes that every matched term will
@@ -175,6 +186,25 @@ public class GlossarySearcher {
             foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
         }
         return foundTokens;
+    }
+
+    /**
+     * Remove any trailing non-letter/digit characters from the end of the term.
+     * This makes glossary matching robust to terminal punctuation like '.' or ','.
+     */
+    private static String stripTrailingPunctuation(String s) {
+        int end = s.length();
+        while (end > 0) {
+            int cp = s.codePointBefore(end);
+            if (Character.isLetterOrDigit(cp)) {
+                break;
+            }
+            end -= Character.charCount(cp);
+        }
+        if (end <= 0) {
+            return s; // don't alter to empty; keep original
+        }
+        return end == s.length() ? s : s.substring(0, end);
     }
 
     private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
@@ -304,7 +334,7 @@ public class GlossarySearcher {
             throw new IllegalArgumentException("entries must not be null");
         }
         return entries
-                .stream().filter(Objects::nonNull).sorted((o1, o2) -> compareGlossaryEntries(o1, o2,
+                .stream().sorted((o1, o2) -> compareGlossaryEntries(o1, o2,
                         srcLangCollator, targetLangCollator)).collect(Collectors.toList());
     }
 
@@ -483,18 +513,12 @@ public class GlossarySearcher {
             List<String> origins = new ArrayList<>();
 
             for (GlossaryEntry e : sortList) {
-                for (String s : e.getLocTerms(false)) {
-                    locTxts.add(s);
-                }
-                for (String s : e.getComments()) {
-                    comTxts.add(s);
-                }
+                Collections.addAll(locTxts, e.getLocTerms(false));
+                Collections.addAll(comTxts, e.getComments());
                 for (boolean s : e.getPriorities()) {
                     prios.add(s);
                 }
-                for (String o : e.getOrigins(false)) {
-                    origins.add(o);
-                }
+                Collections.addAll(origins, e.getOrigins(false));
             }
             boolean[] priorities = new boolean[prios.size()];
             for (int j = 0; j < prios.size(); j++) {
@@ -502,8 +526,8 @@ public class GlossarySearcher {
             }
 
             GlossaryEntry combineEntry = new GlossaryEntry(srcTxt,
-                    locTxts.toArray(new String[locTxts.size()]), comTxts.toArray(new String[comTxts.size()]),
-                    priorities, origins.toArray(new String[origins.size()]));
+                    locTxts.toArray(new String[0]), comTxts.toArray(new String[0]),
+                    priorities, origins.toArray(new String[0]));
             returnList.add(combineEntry);
         }
         return returnList;

@@ -136,7 +136,7 @@ public class TranslationUndoManager implements UndoableEditListener {
             Change ch = new Change();
             ch.text = editor.getOmDocument().extractTranslation();
             if (currentState != null) {
-                if (ch.text.equals(currentState.text)) {
+                if (currentState.text.equals(ch.text)) {
                     return;
                 }
                 currentState.caretPos = caretPos;

@@ -488,6 +488,90 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
+     * Holder for parameters used to compute the AttributeSet for editor segments.
+     * Using a single object avoids long parameter lists at call sites.
+     */
+    public static class AttributeRequest {
+        public final boolean isSource;
+        public final boolean isPlaceholder;
+        public final boolean isRemoveText;
+        public final DUPLICATE duplicate;
+        public final boolean active;
+        public final boolean translationExists;
+        public final boolean hasNote;
+        public final boolean isNBSP;
+
+        private AttributeRequest(Builder b) {
+            this.isSource = b.isSource;
+            this.isPlaceholder = b.isPlaceholder;
+            this.isRemoveText = b.isRemoveText;
+            this.duplicate = b.duplicate;
+            this.active = b.active;
+            this.translationExists = b.translationExists;
+            this.hasNote = b.hasNote;
+            this.isNBSP = b.isNBSP;
+        }
+
+        /**
+         * Builder for {@link AttributeRequest}. Use fluent setters and call {@link #build()}.
+         */
+        public static class Builder {
+            private boolean isSource;
+            private boolean isPlaceholder;
+            private boolean isRemoveText;
+            private DUPLICATE duplicate;
+            private boolean active;
+            private boolean translationExists;
+            private boolean hasNote;
+            private boolean isNBSP;
+
+            public Builder isSource(boolean val) {
+                this.isSource = val;
+                return this;
+            }
+
+            public Builder isPlaceholder(boolean val) {
+                this.isPlaceholder = val;
+                return this;
+            }
+
+            public Builder isRemoveText(boolean val) {
+                this.isRemoveText = val;
+                return this;
+            }
+
+            public Builder duplicate(DUPLICATE val) {
+                this.duplicate = val;
+                return this;
+            }
+
+            public Builder active(boolean val) {
+                this.active = val;
+                return this;
+            }
+
+            public Builder translationExists(boolean val) {
+                this.translationExists = val;
+                return this;
+            }
+
+            public Builder hasNote(boolean val) {
+                this.hasNote = val;
+                return this;
+            }
+
+            public Builder isNBSP(boolean val) {
+                this.isNBSP = val;
+                return this;
+            }
+
+            public AttributeRequest build() {
+                return new AttributeRequest(this);
+            }
+        }
+    }
+
+    /**
      * Choose segment's attributes based on rules.
      *
      * @param isSource
@@ -509,17 +593,37 @@ public class EditorSettings implements IEditorSettings {
      *            is the text a non-breakable space
      * @return proper AttributeSet to use on displaying the segment.
      */
+    @SuppressWarnings("unused,ParameterNumber")
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
+        AttributeRequest req = new AttributeRequest.Builder()
+                .isSource(isSource)
+                .isPlaceholder(isPlaceholder)
+                .isRemoveText(isRemoveText)
+                .duplicate(duplicate)
+                .active(active)
+                .translationExists(translationExists)
+                .hasNote(hasNote)
+                .isNBSP(isNBSP)
+                .build();
+        return getAttributeSet(req);
+    }
+
+    /**
+     * Choose segment's attributes based on rules.
+     */
+    public AttributeSet getAttributeSet(AttributeRequest req) {
         // determine foreground color
-        Color fg = getForegroundColor(isSource, isPlaceholder, isRemoveText, duplicate, active, translationExists, hasNote);
+        Color fg = getForegroundColor(req.isSource, req.isPlaceholder, req.isRemoveText, req.duplicate, req.active,
+                req.translationExists, req.hasNote);
 
         // determine background color
-        Color bg = getBackgroundColor(isSource, duplicate, active, translationExists, hasNote, isNBSP);
+        Color bg = getBackgroundColor(req.isSource, req.duplicate, req.active, req.translationExists, req.hasNote,
+                req.isNBSP);
 
         // determine bold and italic
-        boolean bold = isSource && (viewSourceBold || (active && viewActiveSourceBold));
-        boolean italic = isRemoveText && isSource;
+        boolean bold = req.isSource && (viewSourceBold || (req.active && viewActiveSourceBold));
+        boolean italic = req.isRemoveText && req.isSource;
 
         return Styles.createAttributeSet(fg, bg, bold, italic);
     }

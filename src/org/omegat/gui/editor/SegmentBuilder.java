@@ -703,8 +703,17 @@ public class SegmentBuilder {
      * @return the attributes to format the text
      */
     public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText, boolean isNBSP) {
-        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active,
-                transExist, noteExist, isNBSP);
+        EditorSettings.AttributeRequest req = new EditorSettings.AttributeRequest.Builder()
+                .isSource(isSource)
+                .isPlaceholder(isPlaceholder)
+                .isRemoveText(isRemoveText)
+                .duplicate(ste.getDuplicate())
+                .active(active)
+                .translationExists(transExist)
+                .hasNote(noteExist)
+                .isNBSP(isNBSP)
+                .build();
+        return settings.getAttributeSet(req);
     }
 
     /**

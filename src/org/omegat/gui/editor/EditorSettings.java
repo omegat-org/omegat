@@ -491,7 +491,7 @@ public class EditorSettings implements IEditorSettings {
      * Holder for parameters used to compute the AttributeSet for editor segments.
      * Using a single object avoids long parameter lists at call sites.
      */
-    public static class AttributeRequest {
+    public static final class AttributeRequest {
         public final boolean isSource;
         public final boolean isPlaceholder;
         public final boolean isRemoveText;
@@ -513,7 +513,8 @@ public class EditorSettings implements IEditorSettings {
         }
 
         /**
-         * Builder for {@link AttributeRequest}. Use fluent setters and call {@link #build()}.
+         * Builder for {@link AttributeRequest}.
+         * Use fluent setters and call {@link #build()}.
          */
         public static class Builder {
             private boolean isSource;
@@ -525,31 +526,52 @@ public class EditorSettings implements IEditorSettings {
             private boolean hasNote;
             private boolean isNBSP;
 
+            /**
+             * is it a source segment or a target segment.
+             */
             public Builder isSource(boolean val) {
                 this.isSource = val;
                 return this;
             }
 
+            /**
+             * is it for a placeholder (OmegaT tag or sprintf-variable etc.)
+             * or regular text inside the segment.
+             */
             public Builder isPlaceholder(boolean val) {
                 this.isPlaceholder = val;
                 return this;
             }
 
+            /**
+             * is it text that should be removed from translation.
+             */
             public Builder isRemoveText(boolean val) {
                 this.isRemoveText = val;
                 return this;
             }
 
+            /**
+             * is the sourceTextEntry a duplicate or not? values:
+             * DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.
+             * {@see SourceTextEntry.getDuplicate()}
+             */
             public Builder duplicate(DUPLICATE val) {
                 this.duplicate = val;
                 return this;
             }
 
+            /**
+             * is it an active segment?
+             */
             public Builder active(boolean val) {
                 this.active = val;
                 return this;
             }
 
+            /**
+             * does a translation already exist.
+             */
             public Builder translationExists(boolean val) {
                 this.translationExists = val;
                 return this;
@@ -560,40 +582,26 @@ public class EditorSettings implements IEditorSettings {
                 return this;
             }
 
+            /**
+             * is the text a non-breakable space.
+             */
             public Builder isNBSP(boolean val) {
                 this.isNBSP = val;
                 return this;
             }
 
+            /**
+             * Build the request data class.
+             */
             public AttributeRequest build() {
                 return new AttributeRequest(this);
             }
         }
     }
 
-    /**
-     * Choose segment's attributes based on rules.
-     *
-     * @param isSource
-     *            is it a source segment or a target segment
-     * @param isPlaceholder
-     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.)
-     *            or regular text inside the segment?
-     * @param isRemoveText
-     *            is it text that should be removed from translation?
-     * @param duplicate
-     *            is the sourceTextEntry a duplicate or not? values:
-     *            DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See
-     *            sourceTextEntryste.getDuplicate()
-     * @param active
-     *            is it an active segment?
-     * @param translationExists
-     *            does a translation already exist
-     * @param isNBSP
-     *            is the text a non-breakable space
-     * @return proper AttributeSet to use on displaying the segment.
-     */
-    @SuppressWarnings("unused,ParameterNumber")
+    // CHECKSTYLE:OFF: ParameterNumberCheck
+    @SuppressWarnings("unused")
+    @Deprecated(since = "6.1.0", forRemoval = true)
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
         AttributeRequest req = new AttributeRequest.Builder()
@@ -608,9 +616,12 @@ public class EditorSettings implements IEditorSettings {
                 .build();
         return getAttributeSet(req);
     }
+    // CHECKSTYLE:ON
 
     /**
      * Choose segment's attributes based on rules.
+     * @param req the request data class.
+     * @return proper AttributeSet to use on displaying the segment.
      */
     public AttributeSet getAttributeSet(AttributeRequest req) {
         // determine foreground color

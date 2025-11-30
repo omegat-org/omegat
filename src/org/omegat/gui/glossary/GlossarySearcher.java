@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
-               2024 Hiroshi Miura
+               2024-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

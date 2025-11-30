@@ -29,7 +29,6 @@
 package org.omegat.gui.editor;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 
 import javax.swing.text.AttributeSet;
 
@@ -117,14 +116,6 @@ public class EditorSettings implements IEditorSettings {
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
     }
 
-    public char getAdvancerChar() {
-        if (useTabForAdvance) {
-            return KeyEvent.VK_TAB;
-        } else {
-            return KeyEvent.VK_ENTER;
-        }
-    }
-
     public boolean isUseTabForAdvance() {
         return useTabForAdvance;
     }
@@ -195,10 +186,6 @@ public class EditorSettings implements IEditorSettings {
 
     public boolean isMarkNonUniqueSegments() {
         return markNonUniqueSegments;
-    }
-
-    public boolean isHideDuplicateSegments() {
-        return true;
     }
 
     public boolean isMarkNotedSegments() {

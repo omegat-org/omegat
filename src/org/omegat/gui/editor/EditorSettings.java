@@ -525,6 +525,20 @@ public class EditorSettings implements IEditorSettings {
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
         // determine foreground color
+        Color fg = getForegroundColor(isSource, isPlaceholder, isRemoveText, duplicate, active, translationExists, hasNote);
+
+        // determine background color
+        Color bg = getBackgroundColor(isSource, duplicate, active, translationExists, hasNote, isNBSP);
+
+        // determine bold and italic
+        boolean bold = isSource && (viewSourceBold || (active && viewActiveSourceBold));
+        boolean italic = isRemoveText && isSource;
+
+        return Styles.createAttributeSet(fg, bg, bold, italic);
+    }
+
+    private Color getForegroundColor(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate,
+                                     boolean active, boolean translationExists, boolean hasNote) {
         Color fg = null;
 
         // Custom foreground colors
@@ -571,8 +585,11 @@ public class EditorSettings implements IEditorSettings {
         if (isRemoveText && !isSource) {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
+        return fg;
+    }
 
-        // determine background color
+    private Color getBackgroundColor(boolean isSource, DUPLICATE duplicate, boolean active, boolean translationExists,
+                                     boolean hasNote, boolean isNBSP) {
         Color bg = null;
         if (active) {
             if (isSource) {
@@ -613,32 +630,15 @@ public class EditorSettings implements IEditorSettings {
                 break;
             }
         }
-        if (isNBSP && isMarkNBSP()) { // overwrite others, because space is
-                                      // smallest.
+        // overwrite others, because space is smallest.
+        if (isNBSP && isMarkNBSP()) {
             bg = Styles.EditorColor.COLOR_NBSP.getColor();
         }
-
-        // determine bold
-        Boolean bold = false;
-        if (isSource) {
-            if (viewSourceBold || (active && viewActiveSourceBold)) {
-                bold = true;
-            }
-        }
-
-        // determine italic
-        Boolean italic = false;
-        if (isRemoveText && isSource) {
-            italic = true;
-        }
-
-        return Styles.createAttributeSet(fg, bg, bold, italic);
+        return bg;
     }
 
     /**
      * Returns font attributes for paragraph start
-     * 
-     * @return
      */
     public AttributeSet getParagraphStartAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), null, false,
@@ -647,8 +647,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for the modification info line.
-     * 
-     * @return
      */
     public AttributeSet getModificationInfoAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG.getColor(),
@@ -657,8 +655,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for the segment marker.
-     *
-     * @return
      */
     public AttributeSet getSegmentMarkerAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(),
@@ -667,8 +663,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for other languages translation.
-     *
-     * @return
      */
     public AttributeSet getOtherLanguageTranslationAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG.getColor(),

@@ -89,6 +89,9 @@ public final class Preferences {
     public static final String TF_SRC_FONT_SIZE = "source_font_size";
     public static final int TF_FONT_SIZE_DEFAULT = 14;
 
+    /** Preference flag to suppress First Time Configuration wizard in the future. */
+    public static final String FIRST_TIME_WIZARD_DONE = "first_time_wizard_done";
+
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
     /**

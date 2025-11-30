@@ -61,7 +61,9 @@ public final class FirstTimeConfigWizard {
         public void onApplicationStartup() {
             initMenu();
             // Show wizard once if not suppressed
-            if (Preferences.isFirstRun()) {
+            boolean suppressWizard = Boolean.parseBoolean(
+                    Preferences.getPreferenceDefault(Preferences.FIRST_TIME_WIZARD_DONE, "false"));
+            if (Preferences.isFirstRun() && !suppressWizard) {
                 SwingUtilities.invokeLater(() -> {
                     FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                             Core.getMainWindow().getApplicationFrame());

@@ -48,14 +48,19 @@ import org.omegat.gui.preferences.IPreferencesController;
 import org.omegat.gui.preferences.view.AppearanceController;
 import org.omegat.gui.preferences.view.FontSelectionController;
 import org.omegat.gui.preferences.view.GeneralOptionsController;
+import org.omegat.gui.preferences.view.PluginsPreferencesController;
+import org.omegat.gui.preferences.PreferencesWindowController;
+import org.omegat.util.Preferences;
 
 /**
  * Simple wizard dialog for first-time configuration.
  * Steps:
- * 1) Theme (AppearanceController)
- * 2) Font (FontSelectionController)
- * 3) General options (GeneralOptionsController)
- * 4) First Steps (Greeting)
+ * 1) Start options Step
+ * 2) Plugins (PluginsPreferencesController)
+ * 2) Theme (AppearanceController)
+ * 3) Font (FontSelectionController)
+ * 4) General options (GeneralOptionsController)
+ * 5) First Steps and philosophy (Greeting)
  */
 public class FirstTimeConfigWizardDialog extends JDialog {
 
@@ -90,12 +95,21 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         setTitle(FirstTimeConfigurationWizardUtil.getString("wizard.title", "Welcome to OmegaT"));
 
         // Instantiate controllers
+        PluginsPreferencesController plugins = new PluginsPreferencesController();
         AppearanceController appearance = new AppearanceController();
         FontSelectionController font = new FontSelectionController();
         GeneralOptionsController general = new GeneralOptionsController();
         // Add a final step for Greetings (First Steps) as a named controller class.
         IPreferencesController greetingStep = new GreetingStepController();
-        steps = new IPreferencesController[] { appearance, font, general, greetingStep };
+
+        // First page: start options with two buttons
+        StartOptionsStepController start = new StartOptionsStepController(
+                // Start with default configuration
+                this::finishWithDefaults,
+                // Advanced configuration (open full Preferences)
+                this::openAdvancedPreferences);
+
+        steps = new IPreferencesController[] { start, plugins, appearance, font, general, greetingStep };
 
         setLayout(new BorderLayout());
 
@@ -201,6 +215,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                 for (IPreferencesController c : steps) {
                     c.persist();
                 }
+                // Mark wizard as done so it won't be shown again automatically
+                Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
                 finished = true;
                 dispose();
             }
@@ -213,6 +229,26 @@ public class FirstTimeConfigWizardDialog extends JDialog {
             }
         });
     }
+
+    private void finishWithDefaults() {
+        // No changes necessary: simply finish the wizard.
+        Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
+        finished = true;
+        dispose();
+    }
+
+    private void openAdvancedPreferences() {
+        // Close wizard and open full Preferences window for advanced users
+        // Mark wizard as done: user opted to configure via full preferences
+        Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
+        dispose();
+        PreferencesWindowController pwc = new PreferencesWindowController();
+        java.awt.Window owner = getOwner();
+        // Open at Appearance as a sensible default category
+        pwc.show(owner, org.omegat.gui.preferences.view.AppearanceController.class);
+    }
+
+    // Removed jumpToPluginsStep: plugin review button eliminated from first page
 
     private void updateState() {
         cardLayout.show(cardPanel, "step" + index);
@@ -228,19 +264,26 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         String textKey;
         switch (index) {
         case 0:
-            textKey = "explain.appearance";
+            textKey = "explain.start";
             break;
         case 1:
-            textKey = "explain.font";
+            textKey = "explain.plugins";
             break;
         case 2:
-            textKey = "explain.general";
+            textKey = "explain.appearance";
             break;
         case 3:
-            textKey = "explain.greeting";
+            textKey = "explain.font";
             break;
         default:
-            textKey = ""; // No explanation
+            // 4 -> general, 5 -> greeting
+            if (index == 4) {
+                textKey = "explain.general";
+            } else if (index == 5) {
+                textKey = "explain.greeting";
+            } else {
+                textKey = ""; // No explanation
+            }
             break;
         }
         explanation.setText(textKey.isEmpty() ? "" : FirstTimeConfigurationWizardUtil.getString(textKey, ""));

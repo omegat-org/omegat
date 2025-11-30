@@ -191,7 +191,7 @@ public class PreferencesXML implements IPrefsPersistence {
         private static final long serialVersionUID = 1L;
 
         @SuppressWarnings("unused")
-        public Serializer() {
+        Serializer() {
             this(null);
         }
 

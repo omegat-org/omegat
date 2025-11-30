@@ -95,19 +95,12 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         setTitle(FirstTimeConfigurationWizardUtil.getString("wizard.title", "Welcome to OmegaT"));
 
         // Instantiate controllers
+        StartOptionsStepController start = new StartOptionsStepController(this::openAdvancedPreferences);
         PluginsPreferencesController plugins = new PluginsPreferencesController();
         AppearanceController appearance = new AppearanceController();
         FontSelectionController font = new FontSelectionController();
         GeneralOptionsController general = new GeneralOptionsController();
-        // Add a final step for Greetings (First Steps) as a named controller class.
         IPreferencesController greetingStep = new GreetingStepController();
-
-        // First page: start options with two buttons
-        StartOptionsStepController start = new StartOptionsStepController(
-                // Start with default configuration
-                this::finishWithDefaults,
-                // Advanced configuration (open full Preferences)
-                this::openAdvancedPreferences);
 
         steps = new IPreferencesController[] { start, plugins, appearance, font, general, greetingStep };
 

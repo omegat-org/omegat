@@ -24,7 +24,6 @@
  */
 package org.omegat.gui.firsttime;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
@@ -43,13 +42,11 @@ import org.omegat.gui.preferences.IPreferencesController;
  */
 final class StartOptionsStepController implements IPreferencesController {
 
-    private final Runnable onStartDefault;
     private final Runnable onAdvanced;
 
     private JPanel panel;
 
-    StartOptionsStepController(Runnable onStartDefault, Runnable onAdvanced) {
-        this.onStartDefault = onStartDefault;
+    StartOptionsStepController(Runnable onAdvanced) {
         this.onAdvanced = onAdvanced;
     }
 

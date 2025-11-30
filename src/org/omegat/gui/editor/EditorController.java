@@ -1238,19 +1238,21 @@ public class EditorController implements IEditor {
 
         editor.undoManager.reset();
 
-        // validate tags if required
+        // Check issues if required (unified: tag + providers)
         if (Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
             String file = getCurrentFile();
-            new SwingWorker<Boolean, Void>() {
+            new SwingWorker<java.util.List<org.omegat.gui.issues.IIssue>, Void>() {
                 @Override
-                protected Boolean doInBackground() throws Exception {
-                    return Core.getTagValidation().checkInvalidTags(entry);
+                protected java.util.List<org.omegat.gui.issues.IIssue> doInBackground() throws Exception {
+                    // Use centralized IssueChecker; no duplicate filtering for a single file view
+                    return org.omegat.gui.issues.IssueChecker.collectIssues(Pattern.quote(file), false);
                 }
 
                 @Override
                 protected void done() {
                     try {
-                        if (Boolean.FALSE.equals(get())) {
+                        java.util.List<org.omegat.gui.issues.IIssue> issues = get();
+                        if (!issues.isEmpty()) {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {

@@ -27,9 +27,12 @@ package org.omegat.gui.align;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Language;
 
 /**
+ * Utility methods for AlignPanel.
+ *
  * @author Aaron Madlon-Kay
  */
 public final class Util {
@@ -38,13 +41,19 @@ public final class Util {
     }
 
     /**
-     * Get the index of an item in a list, not based on equality but on object identity (<code>==</code>).
+     * Get the index of an item in a list, not based on equality but on object
+     * identity (<code>==</code>).
      *
      * @param items
+     *            List of items to search
      * @param item
-     * @return
+     *            Item to find
+     * @return Index of item in list, or -1 if not found
      */
-    static <T> int indexByIdentity(List<T> items, T item) {
+    static <T> int indexByIdentity(List<T> items, @Nullable T item) {
+        if (item == null) {
+            return -1;
+        }
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) == item) {
                 return i;
@@ -54,11 +63,14 @@ public final class Util {
     }
 
     /**
-     * Remove an item from a list, not based on equality but on object identity (<code>==</code>).
+     * Remove an item from a list, not based on equality but on object identity
+     * (<code>==</code>).
      *
      * @param items
+     *            List of items to search
      * @param item
-     * @return
+     *            Item to remove
+     * @return true if item was found and removed, false otherwise
      */
     static <T> boolean removeByIdentity(List<T> items, T item) {
         for (int i = 0; i < items.size(); i++) {
@@ -87,8 +99,8 @@ public final class Util {
             return String.valueOf(items.get(0));
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < items.size(); i++) {
-            sb.append(items.get(i));
+        for (Object item : items) {
+            sb.append(item);
             sb.append(delimiter);
         }
         sb.delete(sb.length() - delimiter.length(), sb.length());
@@ -96,8 +108,8 @@ public final class Util {
     }
 
     /**
-     * Join a list of objects with a delimiter appropriate for the given language (empty delimiter, or U+0020
-     * SPACE).
+     * Join a list of objects with a delimiter appropriate for the given
+     * language (empty delimiter, or U+0020 SPACE).
      *
      * @param lang
      *            Language of items

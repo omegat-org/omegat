@@ -55,11 +55,13 @@ public final class AlignerModule implements IApplicationEventListener {
     /**
      * Register plugins into OmegaT.
      */
+    @SuppressWarnings("unused")
     public static void loadPlugins() {
         alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
     }
 
+    @SuppressWarnings("unused")
     public static void unloadPlugins() {
         if (alignerListener != null) {
             CoreEvents.unregisterApplicationEventListener(alignerListener);
@@ -125,8 +127,8 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param targetFile
      *            The path to the target file to be aligned.
      */
-    public void alignerShow(String sourceLanguage, @Nullable String sourceFile,
-                            String targetLanguage, @Nullable String targetFile) {
+    public void alignerShow(@Nullable String sourceLanguage, @Nullable String sourceFile,
+            @Nullable String targetLanguage, @Nullable String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
         if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
@@ -156,8 +158,8 @@ public final class AlignerModule implements IApplicationEventListener {
      *            The default directory used for saving aligned files.
      */
     public void alignerShow(@Nullable Language sourceLanguage, @Nullable String sourceFile,
-                            @Nullable Language targetLanguage, @Nullable String targetFile, @Nullable String defaultDir,
-                            @Nullable String defaultSaveDir) {
+            @Nullable Language targetLanguage, @Nullable String targetFile, @Nullable String defaultDir,
+            @Nullable String defaultSaveDir) {
         AlignFilePickerController picker = new AlignFilePickerController();
         if (sourceLanguage != null) {
             picker.setSourceLanguage(sourceLanguage);
@@ -189,7 +191,7 @@ public final class AlignerModule implements IApplicationEventListener {
      * the file alignment interface to the user.
      */
     public static void alignerShow() {
-        (new AlignerModule()).alignerShow(null, null, null, null, null, null);
+        new AlignerModule().alignerShow(null, null, null, null, null, null);
     }
 
     /**
@@ -203,6 +205,6 @@ public final class AlignerModule implements IApplicationEventListener {
      *            The root directory containing the source files to be aligned.
      */
     public static void alignerShow(String srcRoot) {
-        (new AlignerModule()).alignerShow(null, null, null, null, srcRoot, null);
+        new AlignerModule().alignerShow(null, null, null, null, srcRoot, null);
     }
 }

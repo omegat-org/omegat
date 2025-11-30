@@ -26,17 +26,13 @@ package org.omegat.gui.firsttime;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import org.omegat.gui.preferences.IPreferencesController;
 
@@ -94,36 +90,20 @@ final class StartOptionsStepController implements IPreferencesController {
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-
-        String desc = FirstTimeConfigurationWizardUtil.getString(
-                "start.description",
-                "Choose how to begin configuring OmegaT. You can start with the defaults or open the full Preferences window.");
-        JTextArea text = new JTextArea(desc);
-        text.setEditable(false);
-        text.setLineWrap(true);
-        text.setWrapStyleWord(true);
-        text.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
-        panel.add(text);
-
-        JPanel buttons = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(4, 0, 4, 0);
-
-        JButton startDefaultBtn = new JButton(FirstTimeConfigurationWizardUtil.getString(
-                "button.startDefault", "Start with default configuration"));
-        startDefaultBtn.addActionListener(e -> onStartDefault.run());
-        buttons.add(startDefaultBtn, gbc);
-
-        gbc.gridy++;
+        JLabel normalSteps = new JLabel(FirstTimeConfigurationWizardUtil.getString("label.normalSteps",
+                "Click next button and customize settings."));
+        panel.add(normalSteps);
+        panel.add(Box.createVerticalStrut(8));
+        JPanel advancedPanel = new JPanel();
+        advancedPanel.setLayout(new BoxLayout(advancedPanel, BoxLayout.Y_AXIS));
+        JLabel advancedLabel = new JLabel(FirstTimeConfigurationWizardUtil.getString(
+                "label.advancedPrefs", "Go directly to regular preferences dialog and dismiss this wizard"));
+        advancedPanel.add(advancedLabel);
         JButton advancedBtn = new JButton(FirstTimeConfigurationWizardUtil.getString(
                 "button.advancedPrefs", "Go to advanced configuration"));
         advancedBtn.addActionListener(e -> onAdvanced.run());
-        buttons.add(advancedBtn, gbc);
-
-        panel.add(buttons);
+        advancedPanel.add(advancedBtn);
+        panel.add(advancedPanel);
     }
 
     @Override

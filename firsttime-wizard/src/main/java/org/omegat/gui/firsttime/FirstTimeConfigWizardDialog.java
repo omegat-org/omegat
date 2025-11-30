@@ -221,11 +221,13 @@ public class FirstTimeConfigWizardDialog extends JDialog {
                 dispose();
             }
         });
-        cancelButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.cancel", "Cancel")) {
+        // Replace the traditional "Cancel" with "Start with default" per requirements.
+        // This triggers the same flow as the first-page "Start with default" action.
+        cancelButton.setAction(new AbstractAction(
+                FirstTimeConfigurationWizardUtil.getString("button.startDefault", "Start with default configuration")) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                finished = false;
-                dispose();
+                finishWithDefaults();
             }
         });
     }
@@ -258,36 +260,51 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         finishButton.setEnabled(index == steps.length - 1);
         // Clear any previous status message when changing steps
         statusLabel.setText("");
-        // Always show the explanation area on the east side
-        eastLayout.show(eastPanel, "explain");
         // Update explanation text based on current step
-        String textKey;
+        String explanation;
         switch (index) {
         case 0:
-            textKey = "explain.start";
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.start", "");
             break;
         case 1:
-            textKey = "explain.plugins";
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.plugins", "");
             break;
         case 2:
-            textKey = "explain.appearance";
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.appearance", "");
             break;
         case 3:
-            textKey = "explain.font";
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.font", "");
+            break;
+        case 4:
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.general", "");
+            break;
+        case 5:
+            explanation = FirstTimeConfigurationWizardUtil.getString("explain.greeting", "");
             break;
         default:
-            // 4 -> general, 5 -> greeting
-            if (index == 4) {
-                textKey = "explain.general";
-            } else if (index == 5) {
-                textKey = "explain.greeting";
-            } else {
-                textKey = ""; // No explanation
-            }
+            explanation = ""; // No explanation
             break;
         }
-        explanation.setText(textKey.isEmpty() ? "" : FirstTimeConfigurationWizardUtil.getString(textKey, ""));
-        explanation.setCaretPosition(0);
+        boolean hasExplanation = explanation != null && !explanation.trim().isEmpty();
+
+        // Show or hide the explanation panel depending on availability
+        if (hasExplanation) {
+            this.explanation.setText(explanation);
+            this.explanation.setCaretPosition(0);
+            eastLayout.show(eastPanel, "explain");
+            if (!eastPanel.isVisible()) {
+                eastPanel.setVisible(true);
+            }
+        } else {
+            // Hide the panel entirely when there's no explanation for this step
+            this.explanation.setText("");
+            if (eastPanel.isVisible()) {
+                eastPanel.setVisible(false);
+            }
+        }
+        // Refresh layout in case visibility changed
+        revalidate();
+        repaint();
     }
 
     public boolean isFinished() {

@@ -151,7 +151,7 @@ manualLangsProvider.get().each { lang ->
     assemble.dependsOn(zipTask)
     manualZips.dependsOn(zipTask)
 
-    def languageName = new Locale(lang).displayName
+    def languageName = Locale.forLanguageTag(lang.replace('_', '-')).displayName
 
     // Create a new publication for this language
     def publication = publishing.publications.create("manual${lang.capitalize()}", MavenPublication) {
@@ -216,6 +216,14 @@ firstStepLangsProvider.get().each { lang ->
         css.set("greeting.css")
         finalizedBy(firstStepsHtmlFinally)
     }
+    def philosophyHtml = tasks.register("philosophy${lang.capitalize()}", DocbookHtmlTask) {
+        description = 'Generates a philosophy HTML'
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/Philosophy.xml"))
+        outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/philosophy.html"))
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        css.set("greeting.css")
+    }
     firstSteps.dependsOn(firstStepsHtml)
+    firstSteps.dependsOn(philosophyHtml)
     firstSteps.dependsOn(firstStepsHtmlFinally)
 }

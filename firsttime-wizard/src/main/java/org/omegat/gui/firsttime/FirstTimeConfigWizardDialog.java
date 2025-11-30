@@ -56,11 +56,11 @@ import org.omegat.util.Preferences;
  * Simple wizard dialog for first-time configuration.
  * Steps:
  * 1) Start options Step
- * 2) Plugins (PluginsPreferencesController)
  * 2) Theme (AppearanceController)
  * 3) Font (FontSelectionController)
  * 4) General options (GeneralOptionsController)
- * 5) First Steps and philosophy (Greeting)
+ * 5) Plugins (PluginsPreferencesController)
+ * 6) Freedoms (GreetingStepController)
  */
 public class FirstTimeConfigWizardDialog extends JDialog {
 
@@ -102,7 +102,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         GeneralOptionsController general = new GeneralOptionsController();
         IPreferencesController greetingStep = new GreetingStepController();
 
-        steps = new IPreferencesController[] { start, plugins, appearance, font, general, greetingStep };
+        steps = new IPreferencesController[] { start, appearance, font, general, plugins, greetingStep };
 
         setLayout(new BorderLayout());
 

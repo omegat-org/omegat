@@ -42,9 +42,11 @@ import javax.swing.JTextPane;
 
 /**
  * Simple preferences controller used for the last step of the First Time Config wizard.
- * It shows the localized "First Steps" greeting content and contains no settings.
+ * It shows the localized "Philosophy" content and contains no settings.
  */
 final class GreetingStepController implements IPreferencesController {
+
+    private static final String PHILOSOPHY = "philosophy.html";
 
     private final JTextPane greetingPane = new JTextPane();
 
@@ -60,7 +62,7 @@ final class GreetingStepController implements IPreferencesController {
             greetingPane.setName("GreetingPane");
             greetingPane.setComponentOrientation(
                     BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT : ComponentOrientation.LEFT_TO_RIGHT);
-            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
+            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, PHILOSOPHY);
             if (uri != null) {
                 greetingPane.setPage(uri.toURL());
             }

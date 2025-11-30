@@ -61,7 +61,7 @@ import org.omegat.util.Token;
 public class GlossarySearcherTest extends TestCore {
 
     List<GlossaryEntry> glossarySearcherCommon(String sourceText, ITokenizer tok, Language srcLang,
-                                                       Language trLang, List<GlossaryEntry> entries) {
+            Language trLang, List<GlossaryEntry> entries) {
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         GlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trLang, false);
@@ -76,6 +76,7 @@ public class GlossarySearcherTest extends TestCore {
         // mocking methods to change behavior without Preferences values.
 
         private boolean doGlossaryStemming = true;
+
         void disableGlossaryStemming() {
             doGlossaryStemming = false;
         }
@@ -86,6 +87,7 @@ public class GlossarySearcherTest extends TestCore {
         }
 
         private boolean requireSimilarCase = Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT;
+
         void enableRequireSimilarCase() {
             this.requireSimilarCase = true;
         }
@@ -96,6 +98,7 @@ public class GlossarySearcherTest extends TestCore {
         }
 
         private boolean notExactMatch = false;
+
         public void setGlossaryNotExactMatch(boolean b) {
             this.notExactMatch = b;
         }
@@ -106,6 +109,7 @@ public class GlossarySearcherTest extends TestCore {
         }
 
         private boolean doGlossarySortBySrcLength = false;
+
         void enableGlossarySortSrcLength(boolean enable) {
             doGlossarySortBySrcLength = enable;
         }
@@ -116,6 +120,7 @@ public class GlossarySearcherTest extends TestCore {
         }
 
         private boolean doGlossarySortByLength = false;
+
         void enableGlossarySortLength(boolean enable) {
             doGlossarySortByLength = enable;
         }
@@ -331,13 +336,15 @@ public class GlossarySearcherTest extends TestCore {
         EntryKey key = new EntryKey("file", segmentText, "id", null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, 1, null, segmentText, Collections.emptyList());
 
-        // Use MockGlossarySearcher to disable stemming so numerals are tokenized verbatim
+        // Use MockGlossarySearcher to disable stemming so numerals are
+        // tokenized verbatim
         MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trgLang, false);
         searcher.disableGlossaryStemming();
 
         List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
 
-        // Expect both "server" and "server 11." to match the segment containing "server 11"
+        // Expect both "server" and "server 11." to match the segment containing
+        // "server 11"
         assertEquals("server", result.get(0).getSrcText());
         assertEquals(2, result.size());
         assertEquals("server 11.", result.get(1).getSrcText());

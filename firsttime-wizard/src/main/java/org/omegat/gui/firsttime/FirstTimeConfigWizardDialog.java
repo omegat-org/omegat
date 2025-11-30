@@ -86,6 +86,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
 
 
     private final IPreferencesController[] steps;
+    // Explanations resolved from bundle, aligned with the `steps` array order
+    private final String[] stepExplanations;
     private int index = 0;
     private boolean finished = false;
 
@@ -103,6 +105,16 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         IPreferencesController greetingStep = new GreetingStepController();
 
         steps = new IPreferencesController[] { start, appearance, font, general, plugins, greetingStep };
+        stepExplanations = new String[] {
+                FirstTimeConfigurationWizardUtil.getString("explain.start", ""),
+                FirstTimeConfigurationWizardUtil.getString("explain.appearance", ""),
+                FirstTimeConfigurationWizardUtil.getString("explain.font", ""),
+                FirstTimeConfigurationWizardUtil.getString("explain.general", ""),
+                FirstTimeConfigurationWizardUtil.getString("explain.plugins", ""),
+                FirstTimeConfigurationWizardUtil.getString("explain.greeting", "")
+        };
+        // Keep explanations strictly aligned with the `steps` array.
+        assert(stepExplanations.length == steps.length);
 
         setLayout(new BorderLayout());
 
@@ -253,30 +265,12 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         finishButton.setEnabled(index == steps.length - 1);
         // Clear any previous status message when changing steps
         statusLabel.setText("");
-        // Update explanation text based on current step
+        // Update explanation text based on current step using the unified definition
         String explanation;
-        switch (index) {
-        case 0:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.start", "");
-            break;
-        case 1:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.plugins", "");
-            break;
-        case 2:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.appearance", "");
-            break;
-        case 3:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.font", "");
-            break;
-        case 4:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.general", "");
-            break;
-        case 5:
-            explanation = FirstTimeConfigurationWizardUtil.getString("explain.greeting", "");
-            break;
-        default:
-            explanation = ""; // No explanation
-            break;
+        if (index >= 0 && index < stepExplanations.length) {
+            explanation = stepExplanations[index];
+        } else {
+            explanation = ""; // Safety fallback
         }
         boolean hasExplanation = explanation != null && !explanation.trim().isEmpty();
 

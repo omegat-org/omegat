@@ -1158,6 +1158,21 @@ public class EditorController implements IEditor {
         commitAndDeactivate(null, newTrans);
     }
 
+    /**
+     * Commits any changes to the translation and deactivates the current editing session.
+     * Handles translation updates, note changes, and optional forced translation scenarios.
+     * Ensures proper synchronization, updates translation entries across matching segments,
+     * and validates tags if the preference is enabled.
+     * <p>
+     * There is one exception.
+     * When the entry linked to enforced TM entry, it is deactivated without a commit.
+     *
+     * @param forceTranslation  An optional forced translation mode indicating how the translation
+     *                          should be set (e.g., untranslated, empty, or equal to the source).
+     *                          Can be null.
+     * @param newTrans          An optional new translation text to be set for the current segment.
+     *                          Can be null.
+     */
     void commitAndDeactivate(@Nullable ForceTranslation forceTranslation, @Nullable String newTrans) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1169,16 +1184,21 @@ public class EditorController implements IEditor {
         SourceTextEntry entry = sb.ste;
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
-        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED;
-        if (isEnforced) {
+        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED && oldTE.defaultTranslation;
+        boolean defaultTranslation = sb.isDefaultTranslation();
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
+        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
+
+        // When the entry translation is linked with xENFORCED
+        // and the user does not set it as an alternate translation.
+        if (isEnforced && !isNewAltTrans) {
             deactivateWithoutCommit();
             return;
         }
 
-        PrepareTMXEntry newen = new PrepareTMXEntry();
-        newen.source = sb.ste.getSrcText();
-        newen.note = Core.getNotes().getNoteText();
+        PrepareTMXEntry newen;
         if (forceTranslation != null) { // there is force translation
+            newen = new PrepareTMXEntry();
             switch (forceTranslation) {
             case UNTRANSLATED:
                 newen.translation = null;
@@ -1193,12 +1213,11 @@ public class EditorController implements IEditor {
                 throw new AssertionError();
             }
         } else {
-            getTranslationFromEditor(newTrans, oldTE, newen);
+            newen = getTranslationFromEditor(newTrans, oldTE);
         }
+        newen.source = sb.ste.getSrcText();
+        newen.note = Core.getNotes().getNoteText();
 
-        boolean defaultTranslation = sb.isDefaultTranslation();
-        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
-        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
         resetOrigin();
@@ -1276,7 +1295,8 @@ public class EditorController implements IEditor {
         }
     }
 
-    private void getTranslationFromEditor(@Nullable String newTrans, TMXEntry oldTE, PrepareTMXEntry newen) {
+    private PrepareTMXEntry getTranslationFromEditor(@Nullable String newTrans, TMXEntry oldTE) {
+        PrepareTMXEntry newen = new PrepareTMXEntry();
         // translation from editor
         if (newTrans == null || newTrans.isEmpty()) { // empty translation
             if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
@@ -1309,6 +1329,7 @@ public class EditorController implements IEditor {
                 newen.otherProperties.add(new TMXProp(ProjectTMX.PROP_ORIGIN, currentEntryOrigin));
             }
         }
+        return newen;
     }
 
     private void storeTranslation(SourceTextEntry entry, PrepareTMXEntry newen, boolean defaultTranslation) {
@@ -1714,7 +1735,7 @@ public class EditorController implements IEditor {
      * Change case of the selected text or if none is selected, of the current word.
      *
      * @param toWhat
-     *            : lower, title, upper or cycle
+     *            : lower, title, upper, or cycle
      */
     @Override
     public void changeCase(CHANGE_CASE_TO toWhat) {

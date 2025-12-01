@@ -105,6 +105,8 @@ import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.issues.IIssue;
+import org.omegat.gui.issues.IssueChecker;
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.IMainMenu;
@@ -1209,7 +1211,22 @@ public class EditorController implements IEditor {
         m_docSegList[displayedEntryIndex].createSegmentElement(false,
                 Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste), defaultTranslation);
 
-        // find all identical sources and redraw them
+        findAllIdenticalSources(translationChanged, noteChanged, entry, defaultTranslation);
+
+        Core.getNotes().clear();
+
+        // then add new marks
+        markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
+
+        editor.undoManager.reset();
+
+        checkIssuesOnLeave(entry);
+        synchronizeTeam();
+    }
+
+    // find all identical sources and redraw them
+    private void findAllIdenticalSources(boolean translationChanged, boolean noteChanged, SourceTextEntry entry,
+                                         boolean defaultTranslation) {
         if (translationChanged || noteChanged) {
             for (int i = 0; i < m_docSegList.length; i++) {
                 if (i == displayedEntryIndex) {
@@ -1230,38 +1247,38 @@ public class EditorController implements IEditor {
                 }
             }
         }
+    }
 
-        Core.getNotes().clear();
-
-        // then add new marks
-        markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
-
-        editor.undoManager.reset();
-
-        // Check issues if required (unified: tag + providers)
-        if (Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
-            String file = getCurrentFile();
-            new SwingWorker<java.util.List<org.omegat.gui.issues.IIssue>, Void>() {
-                @Override
-                protected java.util.List<org.omegat.gui.issues.IIssue> doInBackground() throws Exception {
-                    // Use centralized IssueChecker; no duplicate filtering for a single file view
-                    return org.omegat.gui.issues.IssueChecker.collectIssues(Pattern.quote(file), false);
-                }
-
-                @Override
-                protected void done() {
-                    try {
-                        java.util.List<org.omegat.gui.issues.IIssue> issues = get();
-                        if (!issues.isEmpty()) {
-                            Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
-                        }
-                    } catch (InterruptedException | ExecutionException e) {
-                        Log.logErrorRB(e, "LOG_ERROR_TAG_VALIDATION_FAILED");
-                    }
-                }
-            }.execute();
+    private void checkIssuesOnLeave(SourceTextEntry entry) {
+        if (!Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
+            return;
+        }
+        final String file = getCurrentFile();
+        if (file == null) {
+            return;
         }
 
+        new SwingWorker<List<IIssue>, Void>() {
+            @Override
+            protected List<IIssue> doInBackground() throws Exception {
+                return IssueChecker.collectIssues(Pattern.quote(file), false);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    List<IIssue> issues = get();
+                    if (!issues.isEmpty()) {
+                        Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
+                    }
+                } catch (InterruptedException | ExecutionException e) {
+                    Log.logErrorRB(e, "LOG_ERROR_TAG_VALIDATION_FAILED");
+                }
+            }
+        }.execute();
+    } 
+
+    private void synchronizeTeam() {
         // team sync for save thread
         if (Core.getProject().isTeamSyncPrepared()) {
             try {
@@ -1271,7 +1288,7 @@ public class EditorController implements IEditor {
             } catch (Exception ex) {
                 Log.log(ex);
             }
-        }
+        }        
     }
 
     private void getTranslationFromEditor(@Nullable String newTrans, TMXEntry oldTE, PrepareTMXEntry newen) {

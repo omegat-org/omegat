@@ -28,6 +28,7 @@ package org.omegat.gui.issues;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,7 +38,6 @@ import java.util.regex.Pattern;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -46,15 +46,16 @@ import org.omegat.core.data.TMXEntryFactoryForTest;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.data.TestCoreState;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
- * Functional tests for IssueChecker aggregation and filtering behavior.
- *
- * We verify:
+ * Test for IssueChecker aggregation and filtering behavior.
+ * <p>
+ * Verifying:
  * - Aggregation of Tag issues and Provider issues
  * - File pattern filtering
- * - Duplicate filtering when filterDuplicates flag is enabled
+ * - Duplicate filtering when the filterDuplicates flag is enabled.
  */
 public class IssueCheckerTest {
 
@@ -63,26 +64,6 @@ public class IssueCheckerTest {
 
     private static List<SourceTextEntry> entries;
     private static Map<SourceTextEntry, TMXEntry> translations;
-
-    /**
-     * Simple provider that emits one TestingIssue per translated entry.
-     */
-    private static class TestProvider implements IIssueProvider {
-        @Override
-        public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-            return tmxEntry.isTranslated() ? List.of(new TestingIssue(sourceEntry, tmxEntry)) : List.of();
-        }
-
-        @Override
-        public String getId() {
-            return "testprovider";
-        }
-
-        @Override
-        public String getName() {
-            return "Test Provider";
-        }
-    }
 
     /**
      * Fake tag validation that returns exactly one tag error for the first entry in FILE2
@@ -121,7 +102,7 @@ public class IssueCheckerTest {
     /**
      * Minimal project that serves a fixed list of entries and translations.
      */
-    private static class StubProject extends NotLoadedProject {
+    private static class TestingProject extends NotLoadedProject {
         @Override
         public boolean isProjectLoaded() {
             return true;
@@ -139,12 +120,12 @@ public class IssueCheckerTest {
     }
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUpClass() throws Exception {
         TestPreferencesInitializer.init();
         // Disable built-in providers to keep test deterministic
         String disabled = SpellingIssueProvider.class.getCanonicalName() + ","
                 + TerminologyIssueProvider.class.getCanonicalName();
-        org.omegat.util.Preferences.setPreference(org.omegat.util.Preferences.ISSUE_PROVIDERS_DISABLED, disabled);
+        Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DISABLED, disabled);
 
         // Reset core state and install our stubs
         TestCoreState.resetState();
@@ -179,7 +160,7 @@ public class IssueCheckerTest {
                 null, null, Collections.emptyList());
         // Mark as duplicate of e3 by setting firstInstance via reflection
         try {
-            java.lang.reflect.Field fi = SourceTextEntry.class.getDeclaredField("firstInstance");
+            Field fi = SourceTextEntry.class.getDeclaredField("firstInstance");
             fi.setAccessible(true);
             fi.set(e4, e3);
         } catch (Exception ex) {
@@ -190,11 +171,10 @@ public class IssueCheckerTest {
         entries.add(e4);
 
         // Install project and tag validation
-        CoreState.getInstance().setProject(new StubProject());
-        CoreState.getInstance().setTagValidation(new FakeTagValidation());
+        TestCoreState.getInstance().setProject(new TestingProject());
+        TestCoreState.getInstance().setTagValidation(new FakeTagValidation());
 
-        // Register test provider
-        IssueProviders.addIssueProvider(new TestProvider());
+        IssueProviders.addIssueProvider(new TestingIssueProvider());
     }
 
     @Test

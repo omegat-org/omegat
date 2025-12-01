@@ -70,13 +70,14 @@ public final class Help {
 
     private static final String MANUAL_SNAPSHOT = "https://omegat.sourceforge.io/manual-snapshot/";
     private static final String MANUAL_STANDARD = "https://omegat.sourceforge.io/manual-standard/";
-    private static final String JAVADOC_URL = "https://omegat.sourceforge.io/javadoc-standard/";
+    private static final String JAVADOC_SNAPSHOT = "https://omegat.sourceforge.io/javadoc-snapshot/";
+    private static final String JAVADOC_STANDARD = "https://omegat.sourceforge.io/javadoc-standard/";
 
     /**
      * URL for the online manual.
      */
     public static final String ONLINE_HELP_URL = OStrings.IS_BETA ? MANUAL_SNAPSHOT : MANUAL_STANDARD;
-    public static final String ONLINE_JAVADOC_URL = JAVADOC_URL;
+    public static final String ONLINE_JAVADOC_URL =  OStrings.IS_BETA ? JAVADOC_SNAPSHOT : JAVADOC_STANDARD;
 
     public static void showJavadoc() throws IOException {
         URI uri = URI.create(ONLINE_JAVADOC_URL);

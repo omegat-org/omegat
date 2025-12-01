@@ -73,7 +73,10 @@ tasks.jacocoTestCoverageVerification {
 }
 
 tasks.named("run") {
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')
@@ -103,7 +106,10 @@ tasks.register('runOnJava11', JavaExec) {
     }
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     group = 'application'
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
@@ -120,7 +126,10 @@ tasks.register('runOnJava21', JavaExec) {
     }
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    if (System.getProperty("os.name").toLowerCase().contains("linux") ||
+            System.getProperty("os.name").toLowerCase().contains("bsd")) {
+        jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    }
     group = 'application'
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
@@ -153,22 +162,6 @@ tasks.register('testIntegration', JavaExec) {
     maxHeapSize = findProperty('testMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
-}
-
-tasks.register('testOnJava21', Test) {
-    description = 'Runs test cases on Java 21.'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PtestMaxHeapSize=1024M testOnJava21`
-    maxHeapSize = findProperty('testMaxHeapSize')
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
 }
 
 project.ext.xvfbPid = ""
@@ -220,6 +213,9 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PtestMaxHeapSize=1024M testOnJava21`
+    maxHeapSize = findProperty('testMaxHeapSize')
     dependsOn firstSteps
     dependsOn ':aligner:jar'
 }

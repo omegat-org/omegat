@@ -42,7 +42,7 @@ import java.util.regex.PatternSyntaxException;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -109,7 +109,8 @@ public class HTMLFilter2 extends AbstractFilter {
     protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
         String encoding = filterContext.getInEncoding();
         if (encoding == null && isSourceEncodingVariable()) {
-            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), StandardCharsets.UTF_8.name())) {
+            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(),
+                    StandardCharsets.UTF_8.name())) {
                 encoding = hreader.getEncoding();
             }
         }
@@ -213,7 +214,7 @@ public class HTMLFilter2 extends AbstractFilter {
     // ////////////////////////////////////////////////////////////////////////
 
     /** Package-internal processEntry to give it to FilterVisitor */
-    public String privateProcessEntry(String entry, String comment) {
+    public String privateProcessEntry(String entry, @Nullable String comment) {
         if (skipRegExpPattern != null) {
             if (skipRegExpPattern.matcher(entry).matches()) {
                 return entry;
@@ -287,7 +288,7 @@ public class HTMLFilter2 extends AbstractFilter {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);
             if (EditOptionsDialog.RET_OK == dialog.getReturnStatus()) {
-                return dialog.getOptions().getOptionsMap();
+                return dialog.getConfiguration();
             } else {
                 return null;
             }

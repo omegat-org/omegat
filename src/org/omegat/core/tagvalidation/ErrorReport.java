@@ -31,10 +31,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil.Tag;
+
+import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
 
 /**
  * A class to encapuslate information about tag errors. Tag errors are stored
@@ -46,12 +51,12 @@ import org.omegat.util.TagUtil.Tag;
  */
 public class ErrorReport {
 
-    public final Map<Tag, TagError> srcErrors = new HashMap<Tag, TagError>();
-    public final Map<Tag, TagError> transErrors = new HashMap<Tag, TagError>();
+    public final Map<Tag, TagError> srcErrors = new HashMap<>();
+    public final Map<Tag, TagError> transErrors = new HashMap<>();
 
-    public final SourceTextEntry ste;
+    public final @Nullable SourceTextEntry ste;
     public final String source;
-    public final TMXEntry tmxEntry;
+    public final @Nullable TMXEntry tmxEntry;
     public final String translation;
     public final int entryNum;
 
@@ -63,19 +68,15 @@ public class ErrorReport {
         this.entryNum = ste.entryNum();
     }
 
-    /**
-     * For testing
-     */
+    @VisibleForTesting
     ErrorReport() {
-        this((String) null, (String) null);
+        this("", "");
     }
 
-    /**
-     * For testing
-     */
+    @VisibleForTesting
     ErrorReport(String source, String translation) {
         this.ste = null;
-        this.tmxEntry = null;
+        this.tmxEntry = EMPTY_TRANSLATION;
         this.entryNum = -1;
         this.source = source;
         this.translation = translation;
@@ -92,7 +93,7 @@ public class ErrorReport {
      * @return A map between errors and tags
      */
     public Map<TagError, List<Tag>> inverseReport() {
-        Map<TagError, List<Tag>> result = new HashMap<TagError, List<Tag>>();
+        Map<TagError, List<Tag>> result = new HashMap<>();
         fillInverseReport(srcErrors, result);
         fillInverseReport(transErrors, result);
         return result;
@@ -100,11 +101,7 @@ public class ErrorReport {
 
     private static void fillInverseReport(Map<Tag, TagError> input, Map<TagError, List<Tag>> collector) {
         for (Entry<Tag, TagError> e : input.entrySet()) {
-            List<Tag> existing = collector.get(e.getValue());
-            if (existing == null) {
-                existing = new ArrayList<Tag>();
-                collector.put(e.getValue(), existing);
-            }
+            List<Tag> existing = collector.computeIfAbsent(e.getValue(), k -> new ArrayList<Tag>());
             existing.add(e.getKey());
         }
     }

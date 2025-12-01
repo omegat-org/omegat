@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -16,6 +16,7 @@ dependencies {
         }
         compileOnly(libs.morfologik.stemming)
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
@@ -24,8 +25,6 @@ dependencies {
     testImplementation project(":spellchecker:morfologik")
     testImplementation(libs.commons.io)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

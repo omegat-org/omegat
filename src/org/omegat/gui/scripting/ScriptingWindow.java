@@ -31,6 +31,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -86,11 +87,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
+import org.omegat.gui.scripting.ui.AbstractScriptEditor;
+import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
 import org.omegat.util.Java8Compat;
@@ -112,28 +114,19 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    static ScriptingWindow window;
+    private final JFrame frame;
 
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
+    public Frame getParent() {
+        return frame;
     }
 
-    public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
+    public void addContent(Component content) {
+        frame.getContentPane().add(content);
     }
 
-    final JFrame frame;
+    public void dispose() {
+        frame.dispose();
+    }
 
     public ScriptingWindow() {
 
@@ -153,7 +146,7 @@ public class ScriptingWindow {
         });
 
         setScriptsDirectory(
-                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
+                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, ScriptingModule.DEFAULT_SCRIPTS_DIR));
 
         initWindowLayout();
 
@@ -173,7 +166,7 @@ public class ScriptingWindow {
 
     private String listScriptEngines() {
         StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
-        for (ScriptEngineFactory engine : ScriptRunner.getManager().getEngineFactories()) {
+        for (ScriptEngineFactory engine : ScriptRunner.getEngineFactories()) {
             sb.append(" - ");
             sb.append(engine.getEngineName());
             sb.append(" ");
@@ -385,18 +378,12 @@ public class ScriptingWindow {
     // CHECKSTYLE:ON
 
     private AbstractScriptEditor getScriptEditor() {
-
         try {
-            Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.RichScriptEditor");
-            return (AbstractScriptEditor) richScriptEditorClass.getDeclaredConstructor().newInstance();
-        } catch (ClassNotFoundException e) {
-            // RichScriptEditor not present, fallback to the standard editor
-            logResult("RichScriptEditor not present, fallback to the standard editor");
+            return new org.omegat.gui.scripting.ui.RichScriptEditor();
         } catch (Exception e) {
-            logResult("Error loading RichScriptEditor: ", e);
+            logResult("Error loading RichScriptEditor, fallback to the standard editor: ", e);
+            return new StandardScriptEditor();
         }
-
-        return new StandardScriptEditor();
     }
 
     private class QuickScriptUpdater implements ActionListener {
@@ -541,7 +528,7 @@ public class ScriptingWindow {
             executeScript(m_currentScriptItem);
         } else {
             // No file is found for this script, it is executed as standalone.
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
+            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_EDITOR_SCRIPT")));
             executeScript(new ScriptItem(m_txtScriptEditor.getTextArea().getText()));
         }
 
@@ -563,7 +550,7 @@ public class ScriptingWindow {
         @Override
         protected String doInBackground() throws Exception {
             start = System.currentTimeMillis();
-            return ScriptRunner.executeScript(scriptString, scriptItem, bindings);
+            return AbstractScriptRunner.getActiveRunner().executeScript(scriptString, scriptItem, bindings);
         }
 
         @Override
@@ -1088,8 +1075,6 @@ public class ScriptingWindow {
     }
 
     // CHECKSTYLE:OFF
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
-
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 
     private JList<ScriptItem> m_scriptList;

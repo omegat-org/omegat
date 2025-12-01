@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -19,11 +19,9 @@ dependencies {
         compileOnly(libs.jackson.core)
         compileOnly(libs.jackson.databind)
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.jackson.core)
     testImplementation(libs.jackson.databind)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
-

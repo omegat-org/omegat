@@ -14,8 +14,8 @@ dependencies {
 tasks.register('genMac') {
     def appbundlerClasspath = configurations.genMac.asPath
     def outDir = layout.buildDirectory.file("appbundler").get().toString()
-    def appName = appName
-    def appClass = mainClassName
+    def appName = project.property('org.omegat.appName')
+    def appClass = project.property('org.omegat.mainClassName')
     description = 'Generates the macOS .app skeleton. Depends on AppBundler (https://github.com/TheInfiniteKind/appbundler).'
     outputs.dir layout.buildDirectory.file("appbundler")
     doLast {
@@ -88,6 +88,7 @@ ext.makeMacTask = { args ->
     String notarizeTaskName = args.name + "Notarize"
     String stapledNotarizedDistZipTaskName = args.name + "StapledNotarized"
     def parentTask = tasks.getByName(args.parentTaskName)
+    def versionPart = project.ext.omtVersion.version + project.ext.omtVersion.beta
 
     def distZipTask = tasks.register(distZipTaskName, Zip) {
         description = "Creates a macOS distribution for ${args.name}."
@@ -115,7 +116,7 @@ ext.makeMacTask = { args ->
             exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        archiveFileName.set("${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.zip")
+        archiveFileName.set("${application.applicationName}_${versionPart}_${args.suffix}.zip")
         if (args.jrePath && !args.jrePath.empty) {
             from(tarTree(args.jrePath.singleFile)) {
                 into 'OmegaT.app/Contents/PlugIns'
@@ -221,7 +222,7 @@ ext.makeMacTask = { args ->
     }
 
     def signedZipTask = tasks.register(signedZipTaskName, Zip) {
-        def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Signed"
+        def zipRoot = "${application.applicationName}_${versionPart}_${args.suffix}_Signed"
         from signedInstallTask
         into zipRoot
         archiveFileName.set("${zipRoot}.zip")
@@ -250,7 +251,7 @@ ext.makeMacTask = { args ->
     }
 
     tasks.register(stapledNotarizedDistZipTaskName, Zip) {
-        def zipRoot = "${application.applicationName}_${project.version}${omtVersion.beta}_${args.suffix}_Notarized"
+        def zipRoot = "${application.applicationName}_${versionPart}_${args.suffix}_Notarized"
         from signedInstallTask
         into zipRoot
         onlyIf {

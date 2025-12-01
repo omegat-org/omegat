@@ -62,7 +62,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
@@ -119,7 +118,7 @@ public class MainWindow implements IMainWindow {
      */
     private FontUIResource font;
 
-    protected MainWindowStatusBar mainWindowStatusBar;
+    private MainWindowStatusBarController mainWindowStatusBarController;
 
     protected DockingDesktop desktop;
 
@@ -194,8 +193,8 @@ public class MainWindow implements IMainWindow {
                 menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
                         .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
                         .newInstance(this, mainWindowMenuHandler);
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                     InvocationTargetException e) {
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                    | InvocationTargetException e) {
                 // fall back to default when loading failed.
                 menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
             }
@@ -247,23 +246,27 @@ public class MainWindow implements IMainWindow {
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
-        mainWindowStatusBar = new MainWindowStatusBar();
-        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
+        mainWindowStatusBarController = new MainWindowStatusBarController();
+        applicationFrame.getContentPane().add(mainWindowStatusBarController.getUI(), BorderLayout.SOUTH);
         applicationFrame.pack();
     }
 
+    @Override
     public JFrame getApplicationFrame() {
         return applicationFrame;
     }
 
+    @Override
     public Font getApplicationFont() {
         return font;
     }
 
+    @Override
     public IMainMenu getMainMenu() {
         return menu;
     }
 
+    @Override
     public void addDockable(Dockable pane) {
         desktop.addDockable(pane);
     }
@@ -361,77 +364,27 @@ public class MainWindow implements IMainWindow {
     }
 
     public void showStatusMessageRB(final String messageKey, final Object... params) {
-        final String msg = getLocalizedString(messageKey, params);
-        UIThreadsUtil.executeInSwingThread(new Runnable() {
-            @Override
-            public void run() {
-                mainWindowStatusBar.setStatusLabel(msg);
-            }
-        });
-    }
-
-    private String getLocalizedString(String messageKey, Object... params) {
-        if (messageKey == null) {
-            return " ";
-        } else if (params == null) {
-            return OStrings.getString(messageKey);
-        } else {
-            return StringUtil.format(OStrings.getString(messageKey), params);
-        }
+        mainWindowStatusBarController.showStatusMessageRB(messageKey, params);
     }
 
     @Override
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
-        showStatusMessageRB(messageKey, params);
-
-        if (messageKey == null) {
-            return;
-        }
-
-        // clear the message after 10 seconds
-        String localizedString = getLocalizedString(messageKey, params);
-        Timer timer = new Timer(10_000, evt -> {
-            String text = mainWindowStatusBar.getStatusLabel();
-            if (localizedString.equals(text)) {
-                mainWindowStatusBar.setStatusLabel(null);
-            }
-        });
-        timer.setRepeats(false); // one-time only
-        timer.start();
+        mainWindowStatusBarController.showTimedStatusMessageRB(messageKey, params);
     }
 
-    /**
-     * Show message in progress bar.
-     *
-     * @param messageText
-     *            message text
-     */
+    @Override
     public void showProgressMessage(String messageText) {
-        mainWindowStatusBar.setProgressLabel(messageText);
+        mainWindowStatusBarController.showProgressMessage(messageText);
     }
 
-    /*
-     * Set progress bar tooltip text.
-     *
-     * @param tooltipText tooltip text
-     */
-    public void setProgressToolTipText(String toolTipText) {
-        mainWindowStatusBar.setProgressToolTip(toolTipText);
-    }
-
-    /**
-     * Show message in length label.
-     *
-     * @param messageText
-     *            message text
-     */
+    @Override
     public void showLengthMessage(String messageText) {
-        mainWindowStatusBar.setLengthLabel(messageText);
+        mainWindowStatusBarController.showLengthMessage(messageText);
     }
 
+    @Override
     public void showLockInsertMessage(String messageText, String toolTip) {
-        mainWindowStatusBar.setLockInsertLabel(messageText);
-        mainWindowStatusBar.setLockInsertToolTipText(toolTip);
+        mainWindowStatusBarController.showLockInsertMessage(messageText, toolTip);
     }
 
     // /////////////////////////////////////////////////////////////
@@ -441,10 +394,12 @@ public class MainWindow implements IMainWindow {
     private JPanel lastDialogText;
     private String lastDialogKey;
 
+    @Override
     public void displayWarningRB(String warningKey, Object... params) {
         displayWarningRB(warningKey, null, params);
-    };
+    }
 
+    @Override
     public void displayWarningRB(final String warningKey, final String supercedesKey,
             final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
@@ -471,13 +426,14 @@ public class MainWindow implements IMainWindow {
             });
             lastDialogKey = warningKey;
 
-            mainWindowStatusBar.setStatusLabel(messages[0]);
+            mainWindowStatusBarController.showStatusMessage(messages[0]);
 
             JOptionPane.showMessageDialog(applicationFrame, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
         });
     }
 
+    @Override
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
@@ -488,7 +444,7 @@ public class MainWindow implements IMainWindow {
             }
 
             String[] messages = msg.split("\\n");
-            mainWindowStatusBar.setStatusLabel(messages[0]);
+            mainWindowStatusBarController.showStatusMessage(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
@@ -530,6 +486,7 @@ public class MainWindow implements IMainWindow {
         });
     }
 
+    @Override
     public void lockUI() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -553,6 +510,7 @@ public class MainWindow implements IMainWindow {
         }
     }
 
+    @Override
     public void unlockUI() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -576,9 +534,7 @@ public class MainWindow implements IMainWindow {
         applicationFrame.setEnabled(true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void showErrorDialogRB(String title, String message, Object... args) {
 
         JOptionPane.showMessageDialog(this.getApplicationFrame(),
@@ -592,18 +548,18 @@ public class MainWindow implements IMainWindow {
      * @see JOptionPane#showConfirmDialog(java.awt.Component, Object, String,
      *      int, int)
      */
+    @Override
     public int showConfirmDialog(Object message, String title, int optionType, int messageType)
             throws HeadlessException {
         return JOptionPane.showConfirmDialog(applicationFrame, message, title, optionType, messageType);
     }
 
+    @Override
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(applicationFrame, message);
     }
 
-    /**
-     * get DockableDesktop object.
-     */
+    @Override
     public DockingDesktop getDesktop() {
         return desktop;
     }

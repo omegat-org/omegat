@@ -22,7 +22,7 @@ pluginManagement {
 
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
-    id 'com.gradle.develocity' version '4.0.2'
+    id 'com.gradle.develocity' version '4.2.2'
 }
 develocity {
     buildScan {
@@ -38,7 +38,6 @@ include("machinetranslators:apertium",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
-        "machinetranslators:dummy",
         "language-modules:ar",
         "language-modules:ast",
         "language-modules:be",
@@ -70,8 +69,8 @@ include("machinetranslators:apertium",
         "language-modules:uk",
         "language-modules:zh",
         "aligner",
-        "theme",
         "spellchecker:hunspell",
         "spellchecker:lucene",
         "spellchecker:morfologik",
+        "theme",
         "tipoftheday")

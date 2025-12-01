@@ -30,9 +30,20 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.omegat.core.Core;
+import org.tartarus.snowball.ext.EnglishStemmer;
 
 /**
+ * The LuceneEnglishTokenizer class provides a tokenization implementation for
+ * the English language using Lucene's EnglishAnalyzer. It is integrated as the
+ * default tokenizer for the "en" (English) language in OmegaT.
+ * <p>
+ * This tokenizer can handle stop words and word stemming based on the provided
+ * configuration flags. It supports tokenization of text using either Lucene's
+ * standard tokenization or with additional analysis features such as stemming
+ * and stop word removal.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "en" }, isDefault = true)
@@ -50,13 +61,25 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
+    protected TokenStream getTokenStream(String strOrig, StemmingMode stemmingMode, boolean stopWordsAllowed)
+            throws IOException {
+        CharArraySet stopWords = stopWordsAllowed ? EnglishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+        switch (stemmingMode) {
+        case NONE:
+            return getStandardTokenStream(strOrig);
+        case GLOSSARY_FULL:
+        case MATCHING_FULL:
+            return new SnowballFilter(
+                    new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig)),
+                    new EnglishStemmer());
+        default:
+            return new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
+        }
+    }
+
+    @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {
-        if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? EnglishAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
-            return new EnglishAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
-        } else {
-            return getStandardTokenStream(strOrig);
-        }
+        return getTokenStream(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stopWordsAllowed);
     }
 }

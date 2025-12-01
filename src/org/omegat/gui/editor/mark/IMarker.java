@@ -42,13 +42,13 @@ public interface IMarker {
      * <p>
      * Note to implementers: Both <code>sourceText</code> and <code>translationText</code> might be null!
 
-     * @param ste
+     * @param ste entry to calculate marks for
      * @param sourceText might be null!
      * @param translationText might be null!
      * @param isActive is this an active segment in the document?
      * @return null if nothing changed, or list of new marks. Empty list must be returned if marks shouldn't
      *         be displayed
-     * @throws Exception
+     * @throws Exception if something went wrong
      */
     List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception;

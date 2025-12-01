@@ -26,6 +26,8 @@
 
 package org.omegat.core.search;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Storage for a search result entry.
  *
@@ -47,9 +49,10 @@ public class SearchResultEntry {
      * @param note
      *            Note text of the corresponding entry within a project
      */
-    public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch,
-            SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
+    public SearchResultEntry(int num, @Nullable String preamble, @Nullable String srcPrefix, String src,
+                             @Nullable String target, @Nullable String note, @Nullable String properties,
+                             @Nullable SearchMatch[] srcMatch, @Nullable SearchMatch[] targetMatch,
+                             @Nullable SearchMatch[] noteMatch, @Nullable SearchMatch[] propertiesMatch) {
         entryNum = num;
         preambleText = preamble;
         this.srcPrefix = srcPrefix;
@@ -71,12 +74,12 @@ public class SearchResultEntry {
      * directory)
      */
     public int getEntryNum() {
-        return (entryNum);
+        return entryNum;
     }
 
     /** Returns information about where this entry comes from. */
-    public String getPreamble() {
-        return (preambleText);
+    public @Nullable String getPreamble() {
+        return preambleText;
     }
 
     public void setPreamble(String preamble) {
@@ -85,54 +88,54 @@ public class SearchResultEntry {
 
     /** Returns the source text of the corresponding entry within a project. */
     public String getSrcText() {
-        return (sourceText);
+        return sourceText;
     }
 
     /** Returns the target text of the corresponding entry within a project. */
-    public String getTranslation() {
-        return (targetText);
+    public @Nullable String getTranslation() {
+        return targetText;
     }
 
     /** Returns the note text of the corresponding entry within a project. */
-    public String getNote() {
-        return (note);
+    public @Nullable String getNote() {
+        return note;
     }
 
-    public String getProperties() {
+    public @Nullable String getProperties() {
         return propertiesString;
     }
 
-    public String getSrcPrefix() {
+    public @Nullable String getSrcPrefix() {
         return srcPrefix;
     }
 
-    public SearchMatch[] getSrcMatch() {
+    public @Nullable SearchMatch[] getSrcMatch() {
         return srcMatch;
     }
 
-    public SearchMatch[] getTargetMatch() {
+    public @Nullable SearchMatch[] getTargetMatch() {
         return targetMatch;
     }
 
-    public SearchMatch[] getNoteMatch() {
+    public @Nullable SearchMatch[] getNoteMatch() {
         return noteMatch;
     }
 
-    public SearchMatch[] getPropertiesMatch() {
+    public @Nullable SearchMatch[] getPropertiesMatch() {
         return propertiesMatch;
     }
 
     private final int entryNum;
-    private String preambleText;
-    private final String srcPrefix;
+    private @Nullable String preambleText;
+    private final @Nullable String srcPrefix;
     private final String sourceText;
-    private final String targetText;
-    private final String note;
-    private final String propertiesString;
-    private final SearchMatch[] srcMatch;
-    private final SearchMatch[] targetMatch;
-    private final SearchMatch[] noteMatch;
-    private final SearchMatch[] propertiesMatch;
+    private final @Nullable String targetText;
+    private final @Nullable String note;
+    private final @Nullable String propertiesString;
+    private final @Nullable SearchMatch[] srcMatch;
+    private final @Nullable SearchMatch[] targetMatch;
+    private final @Nullable SearchMatch[] noteMatch;
+    private final @Nullable SearchMatch[] propertiesMatch;
 
     public static Builder builder() {
         return new Builder();
@@ -140,69 +143,69 @@ public class SearchResultEntry {
 
     public static class Builder {
         private int entryNum;
-        private String preambleText;
-        private String srcPrefix;
+        private @Nullable String preambleText;
+        private @Nullable String srcPrefix;
         private String sourceText;
-        private String targetText;
-        private String note;
-        private String propertiesString;
-        private SearchMatch[] srcMatch;
-        private SearchMatch[] targetMatch;
-        private SearchMatch[] noteMatch;
-        private SearchMatch[] propertiesMatch;
+        private @Nullable String targetText;
+        private @Nullable String note;
+        private @Nullable String propertiesString;
+        private SearchMatch @Nullable [] srcMatch;
+        private SearchMatch @Nullable [] targetMatch;
+        private SearchMatch @Nullable [] noteMatch;
+        private SearchMatch @Nullable [] propertiesMatch;
 
-        public Builder entryNum(int entryNum) {
-            this.entryNum = entryNum;
+        public Builder entryNum(int newEntryNum) {
+            this.entryNum = newEntryNum;
             return this;
         }
 
-        public Builder preambleText(String preambleText) {
-            this.preambleText = preambleText;
+        public Builder preambleText(@Nullable String newPreambleText) {
+            this.preambleText = newPreambleText;
             return this;
         }
 
-        public Builder srcPrefix(String srcPrefix) {
-            this.srcPrefix = srcPrefix;
+        public Builder srcPrefix(@Nullable String newSrcPrefix) {
+            this.srcPrefix = newSrcPrefix;
             return this;
         }
 
-        public Builder sourceText(String sourceText) {
-            this.sourceText = sourceText;
+        public Builder sourceText(String newSourceText) {
+            this.sourceText = newSourceText;
             return this;
         }
 
-        public Builder targetText(String targetText) {
-            this.targetText = targetText;
+        public Builder targetText(@Nullable String newTargetText) {
+            this.targetText = newTargetText;
             return this;
         }
 
-        public Builder note(String note) {
-            this.note = note;
+        public Builder note(@Nullable String newNote) {
+            this.note = newNote;
             return this;
         }
 
-        public Builder propertiesString(String propertiesString) {
-            this.propertiesString = propertiesString;
+        public Builder propertiesString(@Nullable String properties) {
+            this.propertiesString = properties;
             return this;
         }
 
-        public Builder srcMatch(SearchMatch[] srcMatch) {
-            this.srcMatch = srcMatch;
+        public Builder srcMatch(SearchMatch @Nullable [] match) {
+            this.srcMatch = match;
             return this;
         }
 
-        public Builder targetMatch(SearchMatch[] targetMatch) {
-            this.targetMatch = targetMatch;
+        public Builder targetMatch(SearchMatch @Nullable [] match) {
+            this.targetMatch = match;
             return this;
         }
 
-        public Builder noteMatch(SearchMatch[] noteMatch) {
-            this.noteMatch = noteMatch;
+        public Builder noteMatch(SearchMatch @Nullable [] match) {
+            this.noteMatch = match;
             return this;
         }
 
-        public Builder propertiesMatch(SearchMatch[] propertiesMatch) {
-            this.propertiesMatch = propertiesMatch;
+        public Builder propertiesMatch(SearchMatch @Nullable [] newPropertiesMatch) {
+            this.propertiesMatch = newPropertiesMatch;
             return this;
         }
 

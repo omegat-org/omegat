@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'org.omegat.version-conventions'
+    id 'org.omegat.version'
     id 'org.omegat.document-conventions'
     id 'org.omegat.main-utilities'
     id 'org.omegat.java-conventions'
@@ -13,6 +13,7 @@ plugins {
     id 'org.omegat.jpkg-conventions'
     id 'org.omegat.publish-conventions'
     id 'org.omegat.verification-conventions'
+    id 'org.omegat.spotless-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
     id 'com.google.osdetector' version '1.7.3'
@@ -20,8 +21,8 @@ plugins {
 }
 
 application {
-    applicationName = appName
-    mainClass = mainClassName
+    applicationName = project.property('org.omegat.appName')
+    mainClass = project.property('org.omegat.mainClassName')
 }
 
 def os = osdetector.os
@@ -34,7 +35,7 @@ tasks.withType(Wrapper.class).configureEach {
     gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
-version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+version = omtVersion.version
 
 // Definition of bundled JRE file names
 def assetDir = findProperty('assetDir') ?: '../'
@@ -42,9 +43,6 @@ def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
 def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
 def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
-def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
-def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
-def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -95,6 +93,7 @@ dependencies {
         implementation(libs.commons.lang3)
         implementation(libs.commons.text)
         implementation(libs.commons.validator)
+        implementation(libs.commons.codec)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
@@ -175,12 +174,12 @@ dependencies {
         }
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)
 
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
 
         implementation(libs.bundles.caffeine) {
             attributes {
@@ -220,11 +219,14 @@ dependencies {
         exclude module: 'protobuf-java'
     }
     testFixturesImplementation(libs.jetbrains.annotations)
+    testFixturesImplementation(libs.jspecify)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)
     testImplementation(libs.assertj)
-    testImplementation(libs.bundles.xmlunit)
+    testImplementation(libs.bundles.xmlunit) {
+        exclude module: 'assertj-core'
+    }
     testImplementation(libs.slf4j.api)
     testImplementation(libs.mockito.core)
     testImplementation(libs.languagetool.server)
@@ -241,6 +243,7 @@ dependencies {
     testAcceptanceImplementation(testFixtures(project.rootProject))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
+    testAcceptanceImplementation(libs.bundles.lucene)
     testAcceptanceImplementation(project(':aligner'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
@@ -302,7 +305,7 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    archiveFileName.set(omegatJarFilename)
+    archiveFileName.set(project.property('org.omegat.omegatJarFilename'))
 }
 
 test {
@@ -336,11 +339,16 @@ distributions {
                 ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            project.tasks.matching {it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
-                from(it.outputs) { into 'docs/greetings' }
+            into('docs/greetings') {
+                from(tasks.firstSteps)
+                from(layout.buildDirectory.dir('docs/greetings'))
             }
-            project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
-                from(it.outputs) { into 'docs/manuals' }
+            into('docs/manuals') {
+                from(tasks.manualZips)
+                from(layout.buildDirectory.dir('docs/manuals'))
+            }
+            into('docs/tips') {
+                from('src_docs/tips')
             }
             from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
@@ -354,7 +362,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : project.property('org.omegat.omegatJarFilename')
                 ]
                 filePermissions {
                     unix(0755)
@@ -363,7 +371,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : project.property('org.omegat.omegatJarFilename')
                 ])
             }
             from(layout.settingsDirectory.dir('lib/licenses')) {
@@ -376,6 +384,7 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
+                def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
@@ -426,8 +435,8 @@ makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskNam
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
-    dependsOn linuxDebDist
-    dependsOn linuxRpmDist
+    dependsOn linuxDistDeb
+    dependsOn linuxDistRpm
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
@@ -436,15 +445,6 @@ makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE,
 startScripts.enabled = false
 // installDist insists on destination executable directory even when disable start script.
 application.executableDir = ""
-
-tasks.register('win') {
-    description = 'Builds the Windows distributions.'
-    group = 'omegat distribution'
-}
-makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64', parentTask: 'win')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32, parentTask: 'win')
-makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE, parentTask: 'win')
 
 // Disable .tar distributions for everyone but Linux
 tasks.withType(Tar).configureEach {
@@ -484,29 +484,8 @@ processResources {
     }
 }
 
-def manualLangs = project.property("manualLangs").split(',')
-manualLangs.each { lang ->
-    makeDocumentationTasks(lang)
-}
-
-def firstStepLangs = project.property("firstStepLangs").split(',')
-firstStepLangs.each { lang ->
-    makeFirstStepTask(lang)
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
-
-remotes {
-    sourceforgeWeb {
-        host = 'web.sourceforge.net'
-        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
-        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
-        agent = true
-    }
-}
-publishAtomically(name: 'webManual', sourceTask: manualHtmls)
-publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 allprojects {
     afterEvaluate {

@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.core.data.TestRuntimePreferenceStore;
 
 /**
  * An initializer for ensuring that tests can't pollute (or be polluted by)
@@ -48,7 +49,7 @@ public final class TestPreferencesInitializer {
      * prefs files are read and written. Convenience method for
      * {@link #init(String)}.
      *
-     * @throws IOException
+     * @throws IOException if target directory access failed.
      */
     public static void init() throws IOException {
         Path tmp = Files.createTempDirectory("omegat");
@@ -60,10 +61,11 @@ public final class TestPreferencesInitializer {
      * Init the preferences system using the supplied path as the config dir
      * where prefs files are read and written.
      *
-     * @param configDir
+     * @param configDir OmegaT user configuration directory for test.
      */
     public static synchronized void init(String configDir) {
-        RuntimePreferences.setConfigDir(configDir);
+        TestRuntimePreferenceStore.reset();
+        TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();

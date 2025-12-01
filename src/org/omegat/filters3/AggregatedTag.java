@@ -25,6 +25,8 @@
 
 package org.omegat.filters3;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ import java.util.List;
 public class AggregatedTag extends Tag {
 
     /** Creates a new instance of Aggregated Tag */
-    public AggregatedTag(String tag, String shortcut, Type type, Attributes attributes) {
+    public AggregatedTag(String tag, @Nullable String shortcut, Type type, Attributes attributes) {
         super(tag, shortcut, type, attributes);
     }
 
@@ -53,6 +55,7 @@ public class AggregatedTag extends Tag {
     /**
      * Returns the tags belonging to this aggregated tag in their original form.
      */
+    @Override
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
@@ -64,5 +67,5 @@ public class AggregatedTag extends Tag {
     }
 
     /** List of aggregated tags. */
-    private List<Tag> tags = new ArrayList<Tag>();
+    private final List<Tag> tags = new ArrayList<>();
 }

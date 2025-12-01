@@ -1,0 +1,19 @@
+#: multiple_lines
+msgid ""
+"Multiline\n"
+"message ID with linefeed character."
+msgstr ""
+
+#: one_line_only_with_ctx
+msgctxt "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident"
+msgid "Long context in only one line."
+msgstr "Placeholder target"
+
+#: multiple_lines_with_ctx
+msgctxt ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+"Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n"
+"Excepteur sint occaecat cupidatat non proident"
+msgid "Long context in several lines."
+msgstr "Placeholder target"

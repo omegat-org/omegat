@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -12,6 +12,7 @@ dependencies {
         // Aligner
         implementation(libs.tokyo.northside.maligna)
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
         compileOnly(libs.jaxb4.api)
         compileOnly(libs.jaxb4.runtime)
         compileOnly(libs.madlonkay.supertmxmerge)
@@ -22,5 +23,3 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))

@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -45,13 +46,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Position;
 
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.EditorTextArea3;
-import org.omegat.gui.editor.TagAutoCompleterView;
-import org.omegat.gui.editor.autotext.AutotextAutoCompleterView;
-import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
-import org.omegat.gui.editor.history.HistoryCompleter;
-import org.omegat.gui.editor.history.HistoryPredictor;
-import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -68,19 +64,21 @@ public class AutoCompleter implements IAutoCompleter {
 
     private static final int MIN_VIEWPORT_HEIGHT = 50;
     private static final int MAX_POPUP_WIDTH = 500;
+    private static final int POPUP_DELAY = 100;
 
-    JPopupMenu popup = new JPopupMenu();
-    private EditorTextArea3 editor;
+    private final JPopupMenu popup = new JPopupMenu();
+    private final EditorTextArea3 editor;
     private AutoCompleterKeys keys;
 
     public static final int PAGE_ROW_COUNT = 10;
 
+    private final Timer popupTimer;
     boolean didPopUpAutomatically = false;
 
     /**
      * a list of the views associated with this auto-completer
      */
-    List<AbstractAutoCompleterView> views = new ArrayList<AbstractAutoCompleterView>();
+    List<AbstractAutoCompleterView> views = new ArrayList<>();
 
     /**
      * the current view
@@ -93,6 +91,13 @@ public class AutoCompleter implements IAutoCompleter {
     public AutoCompleter(EditorTextArea3 editor) {
         this.editor = editor;
 
+        popupTimer = new Timer(POPUP_DELAY, e -> {
+            Point p = getDisplayPoint();
+            popup.show(editor, p.x, p.y);
+            editor.requestFocus();
+        });
+        popupTimer.setRepeats(false);
+
         scroll = new JScrollPane();
         scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
         scroll.setPreferredSize(new Dimension(200, 200));
@@ -102,13 +107,16 @@ public class AutoCompleter implements IAutoCompleter {
         scroll.getVerticalScrollBar().setFocusable(false);
         scroll.getHorizontalScrollBar().setFocusable(false);
 
-        // add any views here
-        addView(new GlossaryAutoCompleterView());
-        addView(new AutotextAutoCompleterView());
-        addView(new TagAutoCompleterView());
-        addView(new CharTableAutoCompleterView());
-        addView(new HistoryCompleter());
-        addView(new HistoryPredictor());
+        for (Class<?> viewClass : PluginUtils.getAutoCompleterViewsClasses()) {
+            try {
+               AbstractAutoCompleterView view = (AbstractAutoCompleterView) viewClass.getDeclaredConstructor(
+                       AutoCompleter.class).newInstance(this);
+               views.add(view);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
+                     NoSuchMethodException e) {
+                Log.log(e);
+            }
+        }
 
         viewLabel = new JLabel();
         viewLabel.setBorder(new CompoundBorder(
@@ -124,6 +132,7 @@ public class AutoCompleter implements IAutoCompleter {
     }
 
     @Override
+    @Deprecated
     public void addView(AbstractAutoCompleterView view) {
         view.setParent(this);
         views.add(view);
@@ -138,6 +147,7 @@ public class AutoCompleter implements IAutoCompleter {
      * @param e the key event to process
      * @return true if a key has been processed, false if otherwise.
      */
+    @Override
     public boolean processKeys(KeyEvent e) {
 
         KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
@@ -180,13 +190,11 @@ public class AutoCompleter implements IAutoCompleter {
             }
 
             if (s.equals(keys.prevView)) {
-                selectPreviousView();
-                return true;
+                return selectPreviousView();
             }
 
             if (s.equals(keys.nextView)) {
-                selectNextView();
-                return true;
+                return selectNextView();
             }
         }
 
@@ -203,7 +211,6 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Returns the currently selected value.
-     * @return
      */
     private AutoCompleterItem getSelectedValue() {
         return views.get(currentView).getSelectedValue();
@@ -212,6 +219,7 @@ public class AutoCompleter implements IAutoCompleter {
     /**
      * Show the popup list.
      */
+    @Override
     public void updatePopup(boolean onlyIfVisible) {
         if (onlyIfVisible && !isVisible()) {
             return;
@@ -243,7 +251,7 @@ public class AutoCompleter implements IAutoCompleter {
         int fontSize = editor.getFont().getSize();
         try {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
-            x = editor.getUI().modelToView2D(editor, pos, Position.Bias.Forward).getBounds().x;;
+            x = editor.getUI().modelToView2D(editor, pos, Position.Bias.Forward).getBounds().x;
             y = editor.getUI().modelToView2D(editor, editor.getCaret().getDot(),
                     Position.Bias.Forward).getBounds().y + fontSize;
         } catch (BadLocationException e) {
@@ -255,7 +263,7 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Replace the text in the editor with the accepted item.
-     * @param selected
+     * @param selected the selected item
      */
     protected void acceptedListItem(AutoCompleterItem selected) {
         if (selected == null) {
@@ -297,9 +305,8 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Get the view number of the previous view.
-     * @return
      */
-    private int prevViewNumber(int start) {
+    private int prevViewNumber() {
         for (int n = 1; n <= views.size(); n++) {
             int index = (currentView + views.size() - n) % views.size();
             if (views.get(index).isEnabled()) {
@@ -327,7 +334,7 @@ public class AutoCompleter implements IAutoCompleter {
                         views.get(nextViewN).getName()));
             }
 
-            int prevViewN = prevViewNumber(currentView);
+            int prevViewN = prevViewNumber();
             if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
                 sb.append(OStrings.getString("AC_PREV_VIEW",
@@ -364,7 +371,7 @@ public class AutoCompleter implements IAutoCompleter {
 
     /** select the previous view */
     private boolean selectPreviousView() {
-        int prevViewN = prevViewNumber(currentView);
+        int prevViewN = prevViewNumber();
         if (prevViewN == -1) {
             return false;
         }
@@ -373,21 +380,17 @@ public class AutoCompleter implements IAutoCompleter {
         return true;
     }
 
+    @Override
     public boolean isVisible() {
         return popup.isVisible();
     }
 
+    @Override
     public void setVisible(boolean isVisible) {
         if (isVisible) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    Point p = getDisplayPoint();
-                    popup.show(editor, p.x, p.y);
-                    editor.requestFocus();
-                }
-            });
+            popupTimer.restart();
         } else {
+            popupTimer.stop();
             popup.setVisible(false);
             didPopUpAutomatically = false;
         }
@@ -399,14 +402,13 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * get the key text
-     * @param base
-     * @param modifier
-     * @return
      */
+    @SuppressWarnings("unused")
     public String keyText(int base, int modifier) {
         return KeyEvent.getModifiersExText(modifier) + "+" + KeyEvent.getKeyText(base);
     }
 
+    @Override
     public void textDidChange() {
         if (isVisible() && !didPopUpAutomatically) {
             updatePopup(true);

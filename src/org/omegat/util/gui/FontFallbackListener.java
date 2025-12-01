@@ -99,7 +99,8 @@ public class FontFallbackListener implements DocumentListener {
                             for (int cpn, ccn, j = i; j < seg.getEndIndex(); j += ccn) {
                                 cpn = Character.codePointAt(seg, j - seg.getBeginIndex());
                                 ccn = Character.charCount(cpn);
-                                if (!FontFallbackManager.canDisplay(defaultFont, cpn) && FontFallbackManager.canDisplay(font, cpn)) {
+                                if (!FontFallbackManager.canDisplay(defaultFont, cpn)
+                                        && FontFallbackManager.canDisplay(font, cpn)) {
                                     i += ccn;
                                 } else {
                                     break;

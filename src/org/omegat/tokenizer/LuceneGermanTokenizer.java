@@ -39,6 +39,16 @@ import org.apache.lucene.analysis.miscellaneous.SetKeywordMarkerFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 
 /**
+ * LuceneGermanTokenizer class provides tokenization functionality specifically
+ * designed for German language text. It extends the BaseTokenizer class and
+ * implements a customizable token stream that supports stemming and includes
+ * options for enabling or disabling stop words during the tokenization
+ * process. This tokenizer uses a German-specific analyzer to produce the
+ * appropriate tokens.
+ * <p>
+ * The tokenizer is set as the default for German language ("de") based on the
+ * language annotation.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

@@ -33,6 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.nl.DutchAnalyzer;
 
 /**
+ * LuceneDutchTokenizer is a specialized tokenizer for processing
+ * Dutch language text. It provides tokenization capabilities
+ * with optional support for stemming and stop word filtering.
+ * <p>
+ * This tokenizer utilizes the Lucene DutchAnalyzer, leveraging its
+ * default stop word set when stop word filtering is enabled.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

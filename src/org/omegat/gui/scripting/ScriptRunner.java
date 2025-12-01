@@ -25,27 +25,21 @@
 
 package org.omegat.gui.scripting;
 
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
+
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.script.Bindings;
-import javax.script.Invocable;
-import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.swing.SwingUtilities;
 
-import org.apache.commons.io.FilenameUtils;
-import org.omegat.core.Core;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
-
+/**
+ * Scripting window entry point.
+ * @author Hiroshi Miura
+ */
 public final class ScriptRunner {
 
     private ScriptRunner() {
@@ -58,6 +52,8 @@ public final class ScriptRunner {
     public static final String SCRIPT_GUI_FUNCTION_NAME = "gui";
 
     public static final String DEFAULT_SCRIPT = "groovy";
+
+    // definition of global variables available to scripts.
     public static final String VAR_CONSOLE = "console";
     public static final String VAR_MAINWINDOW = "mainWindow";
     public static final String VAR_GLOSSARY = "glossary";
@@ -66,12 +62,10 @@ public final class ScriptRunner {
     public static final String VAR_PROJECT = "project";
     public static final String VAR_RESOURCES = "res";
 
-    private static ScriptEngineManager manager;
-
     /**
      * Execute as read from the file associated with the supplied
      * {@link ScriptItem}. This is a convenience method for
-     * {@link #executeScript(String, ScriptItem, Map)}.
+     * {@link AbstractScriptRunner#executeScript(String, ScriptItem, Map)}.
      *
      * @param item
      *            The associated {@link ScriptItem}. Must not be null. If
@@ -117,39 +111,17 @@ public final class ScriptRunner {
      * @throws IOException when I/O error occurred.
      * @throws ScriptException when script engine raises error.
      */
-    public static String executeScript(String script, ScriptItem item, Map<String, Object> additionalBindings)
-            throws IOException, ScriptException {
-        Map<String, Object> bindings = new HashMap<>();
-        if (additionalBindings != null) {
-            bindings.putAll(additionalBindings);
-        }
-        bindings.put(VAR_RESOURCES, item.getResourceBundle());
-        String extension = DEFAULT_SCRIPT;
-        if (item.getFile() != null) {
-            extension = FilenameUtils.getExtension(item.getFileName());
-        }
-        ScriptEngine engine = getManager().getEngineByExtension(extension);
-        if (engine == null) {
-            engine = getManager().getEngineByName(DEFAULT_SCRIPT);
-        }
-        if (StringUtil.isEmpty(script)) {
-            script = item.getText();
-        }
-
-        StringBuilder result = new StringBuilder();
-        Object eval = executeScript(script, engine, bindings);
-        if (eval != null) {
-            result.append(OStrings.getString("SCW_SCRIPT_RESULT")).append('\n');
-            result.append(eval).append('\n');
-        }
-        return result.toString();
+    public static String executeScript(String script, ScriptItem item,
+                                       Map<String, Object> additionalBindings) throws IOException, ScriptException {
+        return AbstractScriptRunner.getActiveRunner().executeScript(script, item, additionalBindings);
     }
 
     public static ScriptEngineManager getManager() {
-        if (manager == null) {
-            manager = new ScriptEngineManager(ScriptRunner.class.getClassLoader());
-        }
-        return manager;
+        return AbstractScriptRunner.getActiveRunner().getManager();
+    }
+
+    public static List<ScriptEngineFactory> getEngineFactories() {
+        return AbstractScriptRunner.getActiveRunner().getManager().getEngineFactories();
     }
 
     /**
@@ -163,60 +135,15 @@ public final class ScriptRunner {
      *            A map of bindings that will be included along with other
      *            bindings
      * @return The evaluation result
-     * @throws ScriptException
+     * @throws ScriptException when script engine raises error.
      */
+    @SuppressWarnings("unused")
     public static Object executeScript(String script, ScriptEngine engine,
-            Map<String, Object> additionalBindings) throws ScriptException {
-        // logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"),
-        // engine.getFactory().getEngineName()));
-        Bindings bindings = engine.createBindings();
-        bindings.put(VAR_PROJECT, Core.getProject());
-        bindings.put(VAR_EDITOR, Core.getEditor());
-        bindings.put(VAR_GLOSSARY, Core.getGlossary());
-        bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
-        bindings.put(VAR_CORE, Core.class);
-
-        if (additionalBindings != null) {
-            bindings.putAll(additionalBindings);
-        }
-        engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
-        Object result = engine.eval(script);
-        if (engine instanceof Invocable) {
-            invokeGuiScript((Invocable) engine);
-        }
-        return result;
-    }
-
-    private static void invokeGuiScript(Invocable engine) throws ScriptException {
-        Runnable invoke = () -> {
-            try {
-                engine.invokeFunction(SCRIPT_GUI_FUNCTION_NAME);
-            } catch (NoSuchMethodException e) {
-                // No GUI invocation defined
-            } catch (ScriptException e) {
-                throw new RuntimeException(e);
-            }
-        };
-        if (SwingUtilities.isEventDispatchThread()) {
-            invoke.run();
-        } else {
-            try {
-                SwingUtilities.invokeAndWait(invoke);
-            } catch (InvocationTargetException e) {
-                // The original cause is double-wrapped at this point
-                if (e.getCause().getCause() instanceof ScriptException) {
-                    throw (ScriptException) e.getCause().getCause();
-                } else {
-                    Log.log(e);
-                }
-            } catch (InterruptedException e) {
-                Log.log(e);
-            }
-        }
+                                       Map<String, Object> additionalBindings) throws ScriptException {
+        return AbstractScriptRunner.getActiveRunner().executeScript(script, engine, additionalBindings);
     }
 
     public static List<String> getAvailableScriptExtensions() {
-        return getManager().getEngineFactories().stream().flatMap(factory -> factory.getExtensions().stream())
-                .collect(Collectors.toList());
+        return AbstractScriptRunner.getActiveRunner().getAvailableScriptExtensions();
     }
 }

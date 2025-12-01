@@ -43,6 +43,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -68,6 +70,7 @@ import org.omegat.util.PatternConsts;
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Factory for SAX parsers. */
     private final SAXParserFactory parserFactory;
@@ -122,10 +125,10 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /** Detected encoding of the input XML file. */
-    private String encoding;
+    private @Nullable String encoding;
 
     /** Detected EOL chars. */
-    private String eol;
+    private @Nullable String eol;
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
@@ -164,54 +167,51 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *             If any I/O Error occurs upon writer creation
      */
     @Override
-    public BufferedWriter createWriter(File outFile, String outEncoding)
+    public BufferedWriter createWriter(@Nullable File outFile, @Nullable String outEncoding)
             throws UnsupportedEncodingException, IOException {
-        if (outEncoding == null) {
-            outEncoding = this.encoding;
-        }
         if (outFile == null) {
             return new BufferedWriter(new StringWriter());
         } else {
-            return new BufferedWriter(new XMLWriter(outFile, outEncoding, eol));
+            return new BufferedWriter(new XMLWriter(outFile, outEncoding == null ? this.encoding : outEncoding, eol));
         }
     }
 
     /**
      * Target language of the project
      */
-    private Language targetLanguage;
+    private @Nullable Language targetLanguage;
 
     /**
      * @return The target language of the project
      */
     @Override
-    public Language getTargetLanguage() {
+    public @Nullable Language getTargetLanguage() {
         return targetLanguage;
     }
 
     /**
      * Source language of the project
      */
-    private Language sourceLanguage;
+    private @Nullable Language sourceLanguage;
 
     /**
      * @return The source language of the project
      */
     @Override
-    public Language getSourceLanguage() {
+    public @Nullable Language getSourceLanguage() {
         return sourceLanguage;
     }
 
     /** Processes an XML file. */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc)
+    public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
             sourceLanguage = fc.getSourceLang();
             InputSource source = new InputSource(inReader);
-            source.setSystemId(inFile.toURI().toString());
+            source.setSystemId(inFile.toURI().toASCIIString());
             SAXParser parser = parserFactory.newSAXParser();
             Handler handler = new Handler(this, dialect, inFile, outFile, fc);
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
@@ -258,7 +258,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * core and receive translation.
      */
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, null, null, this, protectedParts);
             return entry;
@@ -336,19 +336,19 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     @Override
-    public void tagStart(String path, Attributes atts) {
+    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
     }
 
     @Override
-    public void tagEnd(String path) {
+    public void tagEnd(@Nullable String path) {
     }
 
     @Override
-    public void comment(String comment) {
+    public void comment(@Nullable String comment) {
     }
 
     @Override
-    public void text(String text) {
+    public void text(@Nullable String text) {
     }
 
     @Override

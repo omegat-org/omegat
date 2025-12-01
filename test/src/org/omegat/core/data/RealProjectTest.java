@@ -61,8 +61,8 @@ public class RealProjectTest {
     @Before
     public final void setUp() throws Exception {
         tempDir = Files.createTempDirectory("omegat-core-ut");
-        Core.initializeConsole(new TreeMap<>());
         TestPreferencesInitializer.init();
+        Core.initializeConsole(new TreeMap<>());
     }
 
     @After
@@ -163,7 +163,7 @@ public class RealProjectTest {
         props.setTargetTokenizer(DefaultTokenizer.class);
         project = new RealProjectWithTMXAccess(props);
 
-        fi = new IProject.FileInfo();
+        fi = new IProject.FileInfo("source.txt");
         project.getProjectFilesList().add(fi);
 
         tmx = project.getTMX();
@@ -173,7 +173,7 @@ public class RealProjectTest {
             boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
-                new ArrayList<ProtectedPart>());
+                new ArrayList<>());
         ste.setSourceTranslationFuzzy(translationFuzzy);
         fi.entries.add(ste);
     }
@@ -303,7 +303,6 @@ public class RealProjectTest {
     protected static class RealProjectWithTMXAccess extends RealProject {
         public RealProjectWithTMXAccess(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

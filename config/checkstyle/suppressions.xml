@@ -51,7 +51,7 @@
 
     <!-- interfaces -->
     <!-- Keep names for compatibility -->
-    <suppress files="(IParseCallback|CalcMatchStatisticsTest)\.java" checks="ParameterNumber"/>
+    <suppress files="(IParseCallback|TestingParseCallback)\.java" checks="ParameterNumber"/>
     <suppress checks="TypeName" files="IProjectEventListener\.java" lines="35"/>
 
     <!-- ignore Auto generated source files -->
@@ -65,9 +65,10 @@
     <suppress checks="WhitespaceAround"
             files="(AlignFilePicker|InstanceEditor|CreateGlossaryEntry|NewTeamProject|FilenamePatternsEditor|FilterEditor|SegmentPropertiesListCell|FilterBarReplace|ProjectFilesList)\.java"/>
     <suppress checks="ParameterNumber" files="EntryListPane\.java" lines="304"/>
+    <suppress checks="LineLength" files="(CreateGlossaryEntry|FilterBarReplace|FilterEditor|InstanceEditor|NewTeamProject|ProjectFilesList)\.java"/>
 
     <!-- Suppress for readability -->
-    <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>
+    <suppress files="PluginInformation\.java" checks="NeedBraces" lines="190-250"/>
     <!-- core/data/* -->
     <suppress checks="ParameterNumber" files="PluginInformation\.java" lines="60"/>
     <suppress checks="ParameterNumber" files="ParseEntry\.java" lines="130-150,200-277"/>
@@ -75,7 +76,7 @@
     <suppress checks="(ParameterNumber|FileLength)" files="RealProject\.java"/>
 
     <!-- util/Platform -->
-    <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
+    <suppress files="Platform\.java" checks="ConstantName" lines="61-85"/>
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
     <!-- util/xml -->
@@ -99,7 +100,7 @@
     <suppress files="JTextPaneLinkifier\.java" checks="EmptyBlock"/>
     <suppress files="RepositoriesMappingController\.java:" checks="MethodLength"/>
     <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="525"/>
-    <suppress files="(IssuesPanel|PreferencesWindow)Controller\.java" checks="MethodLength"/>
+    <suppress files="PreferencesWindowController\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>
     <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
@@ -119,6 +120,7 @@
     <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
 
     <suppress files="StaticUtils\.java" checks="EmptyStatement" lines="158,162,549"/>
+    <suppress files="StaticUtils\.java" checks="LineLength" lines="715"/>
     <suppress files="PatternConsts\.java" checks="LineLength" lines="50,259,294"/>
 
     <!-- repository -->
@@ -126,8 +128,8 @@
     <suppress checks="MemberName" files="SVNAuthenticationManager\.java" lines="236"/>
     <suppress files="FileRepository\.java" checks="StaticVariableName" lines="49"/>
 
-    <!-- GITExternalGpgSigner -->
-    <suppress files="GITExternalGpgSigner\.java" checks="ConstantName" lines="74-84"/>
+    <!-- GITExternalGpgSigner: ignore because the class will be deprecated in OmegaT 6.2.0 -->
+    <suppress files="GITExternalGpgSigner\.java" checks="ConstantName"/>
 
     <!-- Searcher -->
     <suppress files="Searcher\.java" checks="ParameterNumber"/>
@@ -159,7 +161,6 @@
     <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="44"/>
     <suppress files="Entry\.java" checks="MethodLength"/>
-    <suppress files="Handler\.java" checks="EmptyBlock" lines="857"/>
 
     <!-- filters4 -->
     <!-- There are tons of errors in filters4 that are contributed from stax-filter -->

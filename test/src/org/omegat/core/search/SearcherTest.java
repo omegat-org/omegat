@@ -26,7 +26,6 @@
 package org.omegat.core.search;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -77,7 +76,7 @@ public class SearcherTest {
         props.setTargetTokenizer(DefaultTokenizer.class);
         proj = new RealProjectWithTMX(props);
         Core.setProject(proj);
-        fi = new IProject.FileInfo();
+        fi = new IProject.FileInfo("source.txt");
         proj.getProjectFilesList().add(fi);
     }
 
@@ -86,6 +85,84 @@ public class SearcherTest {
         FileUtils.deleteDirectory(tempDir);
     }
 
+    // ----- Unit tests -----
+
+    @Test
+    public void testSearchCheckEntrySrcText() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry("OmegaT is great", null, null, null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryLocalizedText() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry("", "OmegaT is great", null, null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryNote() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry("", null, "OmegaT is great", null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryComments() {
+        String[] comments = new String[] { "Comment 1", "Comment 2" };
+        addSTE(fi, "id1", "OmegaT is great", null, comments);
+        String searchKeyword = "Comment 2";
+        SearchExpression s = createSearchExpression(searchKeyword, SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher(searchKeyword);
+        searcher.checkEntry("", null, null, comments, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryAuthor() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        s.author = "author 1";
+        s.searchAuthor = true;
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher("OmegaT is great");
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "OmegaT is great";
+        entry.creator = "author 1";
+        searcher.checkEntry("OmegaT is great", null, null, null, entry, 0, "");
+        List<SearchResultEntry> result = searcher.getRawSearchResults();
+        assertFalse(result.isEmpty());
+        assertEquals("OmegaT is great", result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testSearchCheckEntryNotAuthor() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        s.author = "author 1";
+        s.searchAuthor = true;
+        Searcher searcher = new Searcher(proj, s);
+        searcher.addToMatcher("OmegaT is great");
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "OmegaT is great";
+        entry.creator = "author 2";
+        searcher.checkEntry("OmegaT is great", null, null, null, entry, 0, "");
+        List<SearchResultEntry> result = searcher.getRawSearchResults();
+        assertTrue(result.isEmpty());
+    }
+
+    // ----- Functional tests -----
     @Test
     public void testSearchStringExactMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT is great", null);
@@ -257,7 +334,7 @@ public class SearcherTest {
 
         List<SearchResultEntry> results = searcher.getSearchResults();
         assertEquals(2, results.size());
-        assertNull(results.get(0).getPreamble());
+        assertEquals("source.txt", results.get(0).getPreamble());
         assertEquals("OmegaT is great", results.get(0).getSrcText());
         assertEquals("OmegaT est génial", results.get(0).getTranslation());
         assertEquals("Orphan segments", results.get(1).getPreamble());
@@ -309,7 +386,7 @@ public class SearcherTest {
         // Verify results
         List<SearchResultEntry> results = searcher.getSearchResults();
         assertEquals(2, results.size());
-        assertEquals(OStrings.getString("SW_NR_MATCHES", 2), results.get(0).getPreamble());
+        assertEquals(OStrings.getString("SW_FILE_AND_NR_OF_MORE", "source.txt", 1), results.get(0).getPreamble());
         assertEquals("Duplicate entry", results.get(0).getSrcText());
         assertEquals(OStrings.getString("CT_ORPHAN_STRINGS"), results.get(1).getPreamble());
         assertEquals("Duplicate entry", results.get(1).getSrcText());
@@ -341,6 +418,8 @@ public class SearcherTest {
         s.widthInsensitive = widthInsensitive;
         s.excludeOrphans = false;
         s.replacement = null;
+        s.searchNotes = true;
+        s.searchAuthor = false;
         return s;
     }
 
@@ -352,8 +431,13 @@ public class SearcherTest {
     }
 
     private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation) {
+        return addSTE(fi, id, source, translation, null);
+    }
+
+    private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation,
+                                   String[] properties) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, properties, translation,
                 new ArrayList<>());
         ste.setSourceTranslationFuzzy(false);
         fi.entries.add(ste);
@@ -371,7 +455,6 @@ public class SearcherTest {
     protected static class RealProjectWithTMX extends RealProject {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

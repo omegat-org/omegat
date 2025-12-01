@@ -27,6 +27,7 @@ package org.omegat.util;
 
 import java.util.Locale;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -35,15 +36,16 @@ import org.junit.runners.model.Statement;
  * Locale rule to force specific runtime locale.
  * <p>
  * <code>
- *      @Rule
+ *      {@literal @}Rule
  *      public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
  * </code>
  */
 public class LocaleRule implements TestRule {
     private final Locale testLocale;
-    private Locale originalLocale;
+    private final Locale originalLocale;
 
-    public LocaleRule(Locale locale) {
+    public LocaleRule(@NotNull Locale locale) {
+        originalLocale = Locale.getDefault();
         this.testLocale = locale;
     }
 
@@ -52,7 +54,6 @@ public class LocaleRule implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                originalLocale = Locale.getDefault();
                 Locale.setDefault(testLocale);
                 OStrings.loadBundle(testLocale);
                 try {
@@ -63,5 +64,27 @@ public class LocaleRule implements TestRule {
                 }
             }
         };
+    }
+
+    /**
+     * Apply locale rule for class initialization.
+     * This method should be called in @BeforeClass methods.
+     *
+     * @param locale the locale to set
+     */
+    public static void applyLocaleForClass(@NotNull Locale locale) {
+        Locale.setDefault(locale);
+        OStrings.loadBundle(locale);
+    }
+
+    /**
+     * Restore original locale for class teardown.
+     * This method should be called in @AfterClass methods.
+     *
+     * @param originalLocale the original locale to restore
+     */
+    public static void restoreLocaleForClass(@NotNull Locale originalLocale) {
+        Locale.setDefault(originalLocale);
+        OStrings.loadBundle(originalLocale);
     }
 }

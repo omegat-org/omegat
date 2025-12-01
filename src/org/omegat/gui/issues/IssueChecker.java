@@ -28,6 +28,7 @@ package org.omegat.gui.issues;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -81,19 +82,19 @@ public final class IssueChecker {
         return providers.stream().flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream());
     }
 
-    private static java.util.Optional<Map.Entry<SourceTextEntry, TMXEntry>> makeEntryPair(SourceTextEntry ste,
+    private static Optional<Map.Entry<SourceTextEntry, TMXEntry>> makeEntryPair(SourceTextEntry ste,
             boolean filterDuplicates) {
         IProject project = Core.getProject();
         if (!project.isProjectLoaded()) {
-            return java.util.Optional.empty();
+            return Optional.empty();
         }
         TMXEntry tmxEntry = project.getTranslationInfo(ste);
         if (!tmxEntry.isTranslated()) {
-            return java.util.Optional.empty();
+            return Optional.empty();
         }
         if (filterDuplicates && DataUtils.isDuplicate(ste, tmxEntry)) {
-            return java.util.Optional.empty();
+            return Optional.empty();
         }
-        return java.util.Optional.of(new AbstractMap.SimpleImmutableEntry<>(ste, tmxEntry));
+        return Optional.of(new AbstractMap.SimpleImmutableEntry<>(ste, tmxEntry));
     }
 }

@@ -1152,11 +1152,10 @@ public class EditorController implements IEditor {
         }
 
         // remove internal bidi chars
-        String transWithControlChars = doc.extractTranslation();
-        String newTrans = EditorUtils.removeDirectionCharsAroundTags(transWithControlChars, getCurrentEntry());
-        if (newTrans != null) {
-            commitAndDeactivate(null, newTrans);
-        }
+        String transWithControlChars = Objects.requireNonNull(doc.extractTranslation());
+        SourceTextEntry currentEntry = Objects.requireNonNull(getCurrentEntry());
+        String newTrans = EditorUtils.removeDirectionCharsAroundTags(transWithControlChars, currentEntry);
+        commitAndDeactivate(null, newTrans);
     }
 
     void commitAndDeactivate(@Nullable ForceTranslation forceTranslation, @Nullable String newTrans) {
@@ -1170,6 +1169,11 @@ public class EditorController implements IEditor {
         SourceTextEntry entry = sb.ste;
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
+        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED;
+        if (isEnforced) {
+            deactivateWithoutCommit();
+            return;
+        }
 
         PrepareTMXEntry newen = new PrepareTMXEntry();
         newen.source = sb.ste.getSrcText();

@@ -59,12 +59,14 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
     /**
      * affix file extension
      */
-    public static final String SC_AFFIX_FILENAME = "index.aff";
+    public static final String SC_AFFIX_FILE_EXTENSION = ".aff";
+    public static final String SC_AFFIX_FILENAME = "index" + SC_AFFIX_FILE_EXTENSION;
 
     /**
      * dictionary file extension
      */
-    public static final String SC_DICTIONARY_FILENAME = "index.dic";
+    public static final String SC_DICTIONARY_FILE_EXTENSION = ".dic";
+    public static final String SC_DICTIONARY_FILENAME = "index" + SC_DICTIONARY_FILE_EXTENSION;
 
     /**
      * Register plugins into OmegaT.
@@ -89,7 +91,12 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
 
         if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-            return Optional.empty();
+            // try to load <language>.dic/aff
+            affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
+            dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
+            if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
+                return Optional.empty();
+            }
         }
 
         try {

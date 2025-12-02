@@ -66,6 +66,7 @@ public class XHTMLOptions extends AbstractOptions {
     public static final String OPTION_SKIP_REGEXP = "skipRegExp";
     public static final String OPTION_SKIP_META = "skipMeta";
     public static final String OPTION_IGNORE_TAGS = "ignoreTags";
+    public static final String OPTION_IGNORE_DOCTYPE = "ignoreDoctype";
 
     public XHTMLOptions(Map<String, String> options) {
         super(options);
@@ -216,4 +217,11 @@ public class XHTMLOptions extends AbstractOptions {
         setString(OPTION_IGNORE_TAGS, ignoreTags);
     }
 
+    public boolean getIgnoreDoctype() {
+        return getString(OPTION_IGNORE_DOCTYPE, "false").equals("true");
+    }
+
+    public void setIgnoreDoctype(boolean ignoreDoctype) {
+        setString(OPTION_IGNORE_DOCTYPE, ignoreDoctype ? "true" : "false");
+    }
 }

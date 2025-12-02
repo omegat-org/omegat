@@ -26,14 +26,12 @@
 package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.junit.Test;
 
@@ -283,28 +281,5 @@ public class HTMLFilter2Test extends TestFilterBase {
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFMETA");
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
-    }
-
-    @Test
-    public void testP000Source() throws Exception {
-        String f = "test/data/filters/html/p-000-source.xhtml";
-        String expected = "test/data/filters/html/p-000-source-compress-space.xhtml";
-        HTMLFilter2 filter = new HTMLFilter2();
-
-        Map<String, String> config = new TreeMap<>();
-        final String TRUE = Boolean.toString(true);
-        final String FALSE = Boolean.toString(false);
-        config.put(HTMLOptions.OPTION_COMPRESS_WHITESPACE, FALSE);
-        config.put(HTMLOptions.OPTION_SKIP_META, TRUE);
-        config.put(HTMLOptions.OPTION_TRANSLATE_SRC, TRUE);
-        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, FALSE);
-        config.put(HTMLOptions.OPTION_IGNORE_TAGS, "");
-        Core.getFilterMaster().getConfig().setRemoveTags(true);
-
-        assertTrue(filter.isFileSupported(new File(f), config, new FilterContext(new Language("zh_TW"),
-                new Language("en"), false)));
-
-        translate(new HTMLFilter2(), f, config);
-        compareBinary(new File(expected), outFile);
     }
 }

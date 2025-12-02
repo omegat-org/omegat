@@ -29,6 +29,7 @@ package org.omegat.filters;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.TreeMap;
 
 import org.custommonkey.xmlunit.XMLUnit;
@@ -38,11 +39,16 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
+import org.omegat.filters3.xml.xhtml.XHTMLOptions;
 import org.omegat.util.Language;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import static org.junit.Assert.assertTrue;
 
 public class XHTMLFilterTest extends TestFilterBase {
     @Before
@@ -136,5 +142,27 @@ public class XHTMLFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("en", null, null, null);
         checkMultiNoPrevNext("<c0>This</c0> is <i1>first</i1> line.", null, null, null);
         translateXML(filter, f);
+    }
+
+    @Test
+    public void testBadDocTypeIgnore() throws Exception {
+        String f = "test/data/filters/xhtml/p-000-source.xhtml";
+        String expected = "test/data/filters/xhtml/p-000-source-compress-space.xhtml";
+        var filter = new XHTMLFilter();
+
+        Map<String, String> config = new TreeMap<>();
+        final String TRUE = Boolean.toString(true);
+        final String FALSE = Boolean.toString(false);
+        config.put(XHTMLOptions.OPTION_SKIP_META, TRUE);
+        config.put(XHTMLOptions.OPTION_TRANSLATE_SRC, TRUE);
+        config.put(XHTMLOptions.OPTION_IGNORE_TAGS, "");
+        config.put(XHTMLOptions.OPTION_IGNORE_DOCTYPE, TRUE);
+        Core.getFilterMaster().getConfig().setRemoveTags(true);
+
+        assertTrue(filter.isFileSupported(new File(f), config, new FilterContext(new Language("zh_TW"),
+                new Language("en"), false)));
+
+        translate(filter, f, config);
+        compareXML(new File(expected), outFile);
     }
 }

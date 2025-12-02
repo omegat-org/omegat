@@ -53,10 +53,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
     private static final Pattern XHTML_PUBLIC_DTD = Pattern.compile("-//W3C//DTD XHTML.*");
 
     public XHTMLDialect() {
-        defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, XHTML_PUBLIC_DTD);
+
     }
 
-    private static final Pattern PUBLIC_XHTML = Pattern.compile("-//W3C//DTD\\s+XHTML.+");
 
     private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";
 
@@ -87,7 +86,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
      */
     @Override
     public InputSource resolveEntity(String publicId, String systemId) {
-        if (publicId != null && PUBLIC_XHTML.matcher(publicId).matches() && systemId.endsWith(".dtd")) {
+        if (publicId != null && XHTML_PUBLIC_DTD.matcher(publicId).matches() && systemId.endsWith(".dtd")) {
             URL dtdresource = XHTMLDialect.class.getResource(DTD);
             return new InputSource(dtdresource.toExternalForm());
         } else {
@@ -100,6 +99,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
      * options are not known at that step.
      */
     public void defineDialect(XHTMLOptions options) {
+        if (!options.getIgnoreDoctype()) {
+            defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, XHTML_PUBLIC_DTD);
+        }
         defineParagraphTags(new String[] { "html", "head", "title", "body", "address", "blockquote",
                 "center", "div", "h1", "h2", "h3", "h4", "h5", "table", "th", "tr", "td", "p", "ol", "ul",
                 "li", "dl", "dt", "dd", "form", "textarea", "fieldset", "legend", "label", "select",

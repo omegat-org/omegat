@@ -27,12 +27,14 @@
 package org.omegat.filters3.xml.xhtml;
 
 import java.awt.Window;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -122,18 +124,19 @@ public class XHTMLFilter extends XMLFilter {
      */
     private boolean doNotSendToCore;
 
+    private XHTMLOptions options;
+
     /** Checking whether it is a valid XHTML file. */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
+        // Defining the dialect
+        XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+        dialect.defineDialect(new XHTMLOptions(config));
         boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
             try {
                 doNotSendToCore = true;
-                // Defining the actual dialect, because at this step
-                // we have the options
-                XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
-                dialect.defineDialect(new XHTMLOptions(config));
-                super.processFile(inFile, null, context);
+               super.processFile(inFile, null, context);
             } catch (IOException | TranslationException e) {
                 Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;

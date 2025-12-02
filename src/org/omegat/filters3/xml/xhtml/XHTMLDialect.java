@@ -130,8 +130,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
         if (options.getTranslateHreflang()) {
             defineTranslatableAttribute("hreflang");
         }
-        if ((this.translateValue = options.getTranslateValue())
-                || (this.translateButtonValue = options.getTranslateButtonValue())) {
+        translateValue = options.getTranslateValue();
+        translateButtonValue = options.getTranslateButtonValue();
+        if (translateValue || translateButtonValue) {
             defineTranslatableTagAttribute("input", "value");
         }
 

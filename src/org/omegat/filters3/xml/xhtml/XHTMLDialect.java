@@ -33,6 +33,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.InputSource;
 
 import org.omegat.filters3.Attribute;
@@ -66,28 +67,31 @@ public class XHTMLDialect extends DefaultXMLDialect {
      * A regular Expression Pattern to be matched to the strings to be
      * translated. If there is a match, the string should not be translated
      */
-    private Pattern skipRegExpPattern;
+    private @Nullable Pattern skipRegExpPattern;
 
     /**
      * A map of attribute-name and attribute value pairs that, if exist in a
      * meta-tag, indicate that the meta-tag should not be translated
      */
-    private HashMap<String, String> skipMetaAttributes;
+    private @Nullable HashMap<String, String> skipMetaAttributes;
 
     /**
      * A map of attribute-name and attribute value pairs that, if exist in a
      * tag, indicate that this tag should not be translated
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private @Nullable HashMap<String, String> ignoreTagsAttributes;
 
     /**
      * Resolves external entites if child filter needs it. Default
      * implementation returns <code>null</code>.
      */
     @Override
-    public InputSource resolveEntity(String publicId, String systemId) {
+    public @Nullable InputSource resolveEntity(@Nullable String publicId, String systemId) {
         if (publicId != null && XHTML_PUBLIC_DTD.matcher(publicId).matches() && systemId.endsWith(".dtd")) {
             URL dtdresource = XHTMLDialect.class.getResource(DTD);
+            if (dtdresource == null) {
+                return null;
+            }
             return new InputSource(dtdresource.toExternalForm());
         } else {
             return null;
@@ -230,20 +234,26 @@ public class XHTMLDialect extends DefaultXMLDialect {
         }
     }
 
-    public Pattern getSkipRegExpPattern() {
+    public @Nullable Pattern getSkipRegExpPattern() {
         return skipRegExpPattern;
     }
 
-    public HashMap<String, String> getSkipMetaAttributes() {
-        return skipMetaAttributes;
+    public @Nullable HashMap<String, String> getSkipMetaAttributes() {
+        return skipMetaAttributes == null ? null : skipMetaAttributes;
     }
 
     public boolean checkDoSkipMetaTag(String key, String value) {
+        if (skipMetaAttributes == null) {
+            return false;
+        }
         return skipMetaAttributes
                 .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     private boolean checkIgnoreTags(String key, String value) {
+        if (ignoreTagsAttributes == null) {
+            return false;
+        }
         return ignoreTagsAttributes
                 .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
@@ -261,7 +271,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);

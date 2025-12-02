@@ -27,14 +27,13 @@
 package org.omegat.filters3.xml.xhtml;
 
 import java.awt.Window;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -152,7 +151,7 @@ public class XHTMLFilter extends XMLFilter {
      * translate items that match regular expression.
      */
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (doNotSendToCore) {
             return entry;
         } else {
@@ -184,7 +183,7 @@ public class XHTMLFilter extends XMLFilter {
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

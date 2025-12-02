@@ -7,6 +7,7 @@
                2007-2008 Didier Briel, Martin Fleurke
                2009 Didier Briel
                2012 Martin Fleurke, Didier Briel
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

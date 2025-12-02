@@ -7,6 +7,7 @@
                2008 Martin Fleurke
                2009 Alex Buloichik
                2012 Didier Briel
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -49,6 +50,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Hiroshi Miura
  */
 public class XHTMLFilter extends XMLFilter {
 

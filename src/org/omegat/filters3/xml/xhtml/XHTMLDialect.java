@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Alex Buloichik, Martin Fleurke
                2012 Didier Briel
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -49,6 +50,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Alex Buloichik
  * @author Martin Fleurke
+ * @author Hiroshi Miura
  */
 public class XHTMLDialect extends DefaultXMLDialect {
     private static final Pattern XHTML_PUBLIC_DTD = Pattern.compile("-//W3C//DTD XHTML.*");

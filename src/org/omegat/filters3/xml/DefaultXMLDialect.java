@@ -449,50 +449,31 @@ public class DefaultXMLDialect implements XMLDialect {
      */
     private boolean tagsAggregationEnabled = false;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setTagsAggregationEnabled(boolean onOff) {
         tagsAggregationEnabled = onOff;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Boolean getTagsAggregationEnabled() {
         return tagsAggregationEnabled;
     }
     private boolean forceSpacePreserving = false;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Boolean getForceSpacePreserving() {
         return forceSpacePreserving;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setForceSpacePreserving(boolean onOff) {
         forceSpacePreserving = onOff;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handleXMLTag(XMLTag tag, boolean translated) {
-        return;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
         protectedParts.clear();

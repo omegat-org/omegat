@@ -54,12 +54,6 @@ import org.omegat.util.StringUtil;
  */
 public class XHTMLDialect extends DefaultXMLDialect {
     private static final Pattern XHTML_PUBLIC_DTD = Pattern.compile("-//W3C//DTD XHTML.*");
-
-    public XHTMLDialect() {
-
-    }
-
-
     private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";
 
     private Boolean translateValue = false;
@@ -154,19 +148,19 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
         // Prepare set of attributes that indicate not to translate a meta-tag
         String skipMetaString = options.getSkipMeta();
-        skipMetaAttributes = new HashMap<String, String>();
+        skipMetaAttributes = new HashMap<>();
         String[] skipMetaAttributesStringarray = skipMetaString.split(",");
-        for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
-            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
+        for (String s : skipMetaAttributesStringarray) {
+            String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
             skipMetaAttributes.put(keyvalue, "");
         }
 
         // Prepare set of attributes that indicate that a tag should be intact
         String ignoreTagsString = options.getIgnoreTags();
-        ignoreTagsAttributes = new HashMap<String, String>();
+        ignoreTagsAttributes = new HashMap<>();
         String[] ignoreTagsAttributesStringarray = ignoreTagsString.split(",");
-        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
-            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
+        for (String s : ignoreTagsAttributesStringarray) {
+            String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
             ignoreTagsAttributes.put(keyvalue, "");
         }
 

@@ -125,8 +125,6 @@ public class XHTMLFilter extends XMLFilter {
      */
     private boolean doNotSendToCore;
 
-    private XHTMLOptions options;
-
     /** Checking whether it is a valid XHTML file. */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {

@@ -187,7 +187,7 @@ public class OpenDocFilter extends AbstractFilter {
         zipOut.closeEntry();
     }
 
-    private void cleanUpTempFile(File file) {
+    private void cleanUpTempFile(@Nullable File file) {
         if (file == null) {
             return;
         }

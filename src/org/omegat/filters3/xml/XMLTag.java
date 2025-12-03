@@ -62,7 +62,7 @@ public class XMLTag extends Tag {
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
-        boolean isRtl = BiDiUtils.isRtl(targetLanguage.getLanguageCode());
+        boolean isRtl = targetLanguage != null && BiDiUtils.isRtl(targetLanguage.getLanguageCode());
         boolean differentDir = isDifferentDirection(isRtl);
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);

@@ -31,7 +31,6 @@ import java.io.BufferedReader;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
@@ -150,9 +149,8 @@ public class DocBookFilter extends XMLFilter {
      * @return <code>true</code> or <code>false</code>
      */
     @Override
-    public boolean isFileSupported(@Nullable BufferedReader reader) {
+    public boolean isFileSupported(BufferedReader reader) {
         XMLDialect dialect = getDialect();
-        dialect.getConstraints();
         if (dialect.getConstraints().isEmpty()) {
             return true;
         }

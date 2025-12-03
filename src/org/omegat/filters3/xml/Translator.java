@@ -47,7 +47,6 @@ import org.omegat.util.Language;
  * @author Didier Briel
  * @author Alex Buloichik
  */
-@NullMarked
 public interface Translator {
     /**
      * The method the Handler would call to pass translatable content to OmegaT

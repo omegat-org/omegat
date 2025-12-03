@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.properties;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -37,6 +38,7 @@ import org.omegat.util.OStrings;
  *
  * @author Tony Graham
  */
+@NullMarked
 public class PropertiesFilter extends XMLFilter {
 
     /**

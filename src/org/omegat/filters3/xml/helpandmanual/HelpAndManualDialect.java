@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -44,6 +46,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * @author Guido Leenders
  * @author Didier Briel
  */
+@NullMarked
 public class HelpAndManualDialect extends DefaultXMLDialect {
     public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic|map|helpproject");
 
@@ -71,7 +74,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
         addIgnoreAttributeValues("translate", "false", "no", "0");
     }
 
-    private boolean checkIgnoreTags(String key, String value) {
+    private boolean checkIgnoreTags(@Nullable String key, @Nullable String value) {
         if (key == null || value == null) {
             return false;
         }
@@ -81,7 +84,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
         return values != null && values.contains(v);
     }
 
-    private void addIgnoreAttributeValues(String attributeName, String... values) {
+    private void addIgnoreAttributeValues(@Nullable String attributeName, @Nullable String... values) {
         if (attributeName == null || values == null) {
             return;
         }
@@ -107,7 +110,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (atts != null) {
             // Check configured attribute/value pairs that mark a tag as non-translatable
             for (int i = 0; i < atts.size(); i++) {

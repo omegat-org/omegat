@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2011 Didier Briel
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -24,28 +23,8 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters3.xml.flash;
 
-import java.util.regex.Pattern;
+@NullMarked
+package org.omegat.filters3.xml.openxml;
 
 import org.jspecify.annotations.NullMarked;
-import org.omegat.filters3.xml.DefaultXMLDialect;
-
-/**
- * This class specifies the Flash XML Dialect.
- *
- * @author Didier Briel
- */
-@NullMarked
-public class FlashDialect extends DefaultXMLDialect {
-    public static final Pattern FLASH_XMLNS = Pattern
-            .compile("xmlns(:\\w+)?=\"http://ns.adobe.com/xfl/2008/\"");
-
-    public FlashDialect() {
-
-        defineParagraphTags(new String[] { "characters"});
-
-        defineIntactTags(new String[] { "script" });
-    }
-
-}

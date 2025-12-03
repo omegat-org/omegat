@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -57,7 +56,6 @@ import org.xml.sax.InputSource;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-@NullMarked
 public class DefaultXMLDialect implements XMLDialect {
     /** The set of defined paragraph tags. */
     private final Set<String> paragraphTags = new HashSet<>();

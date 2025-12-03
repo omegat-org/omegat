@@ -34,7 +34,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters3.Attributes;
@@ -50,7 +49,6 @@ import org.xml.sax.InputSource;
  * @author Martin Fleurke
  * @author Didier Briel
  */
-@NullMarked
 public interface XMLDialect {
     /**
      * Returns the set of paragraph tags.

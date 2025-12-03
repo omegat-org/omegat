@@ -279,9 +279,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * {@link XMLDialect} against them.
      */
     @Override
-    public boolean isFileSupported(BufferedReader reader) {
-        if (dialect.getConstraints() == null || dialect.getConstraints().isEmpty()) {
+    public boolean isFileSupported(@Nullable BufferedReader reader) {
+        dialect.getConstraints();
+        if (dialect.getConstraints().isEmpty()) {
             return true;
+        }
+        if (reader == null) {
+            return false;
         }
 
         try {

@@ -180,7 +180,10 @@ public abstract class Tag implements Element {
             buf.append("/");
         }
         buf.append(getTag());
-        buf.append(getAttributes());
+        Attributes atts = getAttributes();
+        if (atts != null) {
+            buf.append(atts);
+        }
         if (Type.ALONE == getType()) {
             buf.append("/");
         }

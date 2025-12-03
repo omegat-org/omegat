@@ -48,6 +48,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -81,6 +82,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     private final Translator translator;
     private final XMLDialect dialect;
@@ -387,7 +389,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      *         InputSource.
      * @throws SAXException If there is an error during XML parsing.
      */
-    public InputSource doResolve(String publicId, String systemId) throws SAXException {
+    public InputSource doResolve(String publicId, @Nullable String systemId) throws SAXException {
         inDTD = isDTDMatch(publicId, systemId);
         if (systemId != null && (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA))) {
             return resolveLocalEntity(publicId, systemId);
@@ -529,15 +531,17 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     private void processTranslatableAttributes(Tag xmltag, String tag) {
-        if (xmltag.getAttributes() != null) { // always expect notNull
-            org.omegat.filters3.Attributes attributes = xmltag.getAttributes();
-            for (int i = 0; i < attributes.size(); i++) {
-                Attribute attr = attributes.get(i);
-                if (isTranslatableAttribute(tag, attr.getName())
-                        && dialect.validateTranslatableTagAttribute(tag, attr.getName(), attributes)) {
-                    String translatedAttributeValue = translateAttributeValue(attr.getValue());
-                    attr.setValue(translatedAttributeValue);
-                }
+        if (xmltag.getAttributes() == null) {
+            // always expect notNull but enforce
+            return;
+        }
+        org.omegat.filters3.Attributes attributes = xmltag.getAttributes();
+        for (int i = 0; i < attributes.size(); i++) {
+            Attribute attr = attributes.get(i);
+            if (isTranslatableAttribute(tag, attr.getName())
+                    && dialect.validateTranslatableTagAttribute(tag, attr.getName(), attributes)) {
+                String translatedAttributeValue = translateAttributeValue(attr.getValue());
+                attr.setValue(translatedAttributeValue);
             }
         }
     }

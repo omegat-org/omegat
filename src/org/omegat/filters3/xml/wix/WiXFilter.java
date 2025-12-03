@@ -28,6 +28,8 @@ package org.omegat.filters3.xml.wix;
 
 import java.util.List;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.Core;
@@ -41,8 +43,9 @@ import org.omegat.util.OStrings;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class WiXFilter extends XMLFilter {
-    private String id;
+    private @Nullable String id;
 
     /**
      * Register plugin into OmegaT.
@@ -89,12 +92,15 @@ public class WiXFilter extends XMLFilter {
     }
 
     @Override
-    public void tagStart(String path, Attributes atts) {
+    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
+        if (atts == null) {
+            return;
+        }
         id = atts.getValue("Id");
     }
 
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(id, entry, null, false, null, null, this, protectedParts);
             return entry;

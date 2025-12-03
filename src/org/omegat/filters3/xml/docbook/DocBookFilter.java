@@ -30,6 +30,8 @@ import java.io.BufferedReader;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 
@@ -47,6 +49,7 @@ import org.omegat.util.OStrings;
  * @author Fabian Mandelbaum
  * @author Didier Briel
  */
+@NullMarked
 public class DocBookFilter extends XMLFilter {
 
     /**
@@ -83,6 +86,7 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return File format name
      */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("DocBook_FILTER_NAME");
     }
@@ -95,6 +99,7 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return The hint for editing the filter in a non-geek language.
      */
+    @Override
     public String getHint() {
         return OStrings.getString("DocBook_HINT");
     }
@@ -108,6 +113,7 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return Default filter instances
      */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml", null, null), new Instance("*.dbk", null, null), };
     }
@@ -117,6 +123,7 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return <code>false</code>
      */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
@@ -126,10 +133,12 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return <code>true</code>
      */
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
 
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -140,9 +149,11 @@ public class DocBookFilter extends XMLFilter {
      *
      * @return <code>true</code> or <code>false</code>
      */
-    public boolean isFileSupported(BufferedReader reader) {
+    @Override
+    public boolean isFileSupported(@Nullable BufferedReader reader) {
         XMLDialect dialect = getDialect();
-        if (dialect.getConstraints() == null || dialect.getConstraints().isEmpty()) {
+        dialect.getConstraints();
+        if (dialect.getConstraints().isEmpty()) {
             return true;
         }
         try {

@@ -34,6 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.data.ProtectedPart;
@@ -46,6 +47,7 @@ import org.omegat.util.Language;
  * @author Didier Briel
  * @author Alex Buloichik
  */
+@NullMarked
 public interface Translator {
     /**
      * The method the Handler would call to pass translatable content to OmegaT
@@ -122,7 +124,7 @@ public interface Translator {
      */
     boolean isInIgnored();
 
-    Language getTargetLanguage();
+    @Nullable Language getTargetLanguage();
 
-    Language getSourceLanguage();
+    @Nullable Language getSourceLanguage();
 }

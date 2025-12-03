@@ -64,20 +64,7 @@ public class XMLIntactTag extends Tag {
      * should return absolutely the same.
      */
     public String toOriginal() {
-        StringBuilder buf = new StringBuilder();
-
-        buf.append("<");
-        buf.append(getTag());
-        buf.append(getAttributes().toString());
-        buf.append(">");
-
-        buf.append(intactContents.sourceToOriginal());
-
-        buf.append("<");
-        buf.append("/");
-        buf.append(getTag());
-        buf.append(">");
-
-        return buf.toString();
+        String atts = getAttributes() != null ? getAttributes().toString() : "";
+        return "<" + getTag() + atts  + ">" + intactContents.sourceToOriginal() + "<" + "/" + getTag() + ">";
     }
 }

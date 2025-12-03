@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -149,7 +151,7 @@ public class XHTMLFilter extends XMLFilter {
      * translate items that match regular expression.
      */
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (doNotSendToCore) {
             return entry;
         } else {

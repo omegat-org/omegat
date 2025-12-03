@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.txml;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -37,6 +38,7 @@ import org.omegat.util.OStrings;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class TXMLFilter extends XMLFilter {
 
     /**
@@ -61,6 +63,7 @@ public class TXMLFilter extends XMLFilter {
      *
      * @return File format name
      */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("TXML_FILTER_NAME");
     }
@@ -74,6 +77,7 @@ public class TXMLFilter extends XMLFilter {
      *
      * @return Default filter instances
      */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txml", null, null), };
     }

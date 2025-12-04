@@ -47,6 +47,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
@@ -122,7 +123,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
-        String initModeClassName = Preferences.getPreferenceDefault(Preferences.SEGPROPS_INITIAL_MODE, null);
+        String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);
         if (initModeClassName != null) {
             try {
                 initModeClass = getClass().getClassLoader().loadClass(initModeClassName);
@@ -282,10 +283,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             if (value) {
                 return OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase(Locale.ENGLISH));
             } else {
                 return OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase(Locale.ENGLISH));
             }
         } catch (MissingResourceException ex) {
             // fallback to default expression
@@ -297,7 +298,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
-    private void setProperties(SourceTextEntry ste) {
+    private void setProperties(@Nullable SourceTextEntry ste) {
         var oldProperties = new ArrayList<>(properties);
         properties.clear();
         if (ste == null) {

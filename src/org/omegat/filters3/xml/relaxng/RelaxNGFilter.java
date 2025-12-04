@@ -117,7 +117,6 @@ public class RelaxNGFilter extends XMLFilter {
     */
     public boolean isFileSupported(BufferedReader reader) {
         XMLDialect dialect = getDialect();
-        dialect.getConstraints();
         if (dialect.getConstraints().isEmpty()) {
             return true;
         }

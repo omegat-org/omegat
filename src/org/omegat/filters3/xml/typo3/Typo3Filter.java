@@ -113,7 +113,6 @@ public class Typo3Filter extends XMLFilter {
      */
     public boolean isFileSupported(BufferedReader reader) {
         XMLDialect dialect = getDialect();
-        dialect.getConstraints();
         if (dialect.getConstraints().isEmpty()) {
             return true;
         }

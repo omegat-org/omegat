@@ -85,9 +85,9 @@ dependencies {
         api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
             '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
-                '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+                '**/jaxb-runtime-*.jar'])
         runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
-            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -161,17 +161,8 @@ dependencies {
         // Credentials encryption
         implementation(libs.jasypt)
 
-        // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
-        // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly(libs.bundles.groovy)
-
-        // Javascript used for scripts
-        implementation(libs.nashorn.core)
-
-        // Script editor
-        implementation(libs.bundles.fifesoft) {
-            exclude module: 'rhino'
-        }
+        // Javascript engine used for scripts
+        runtimeOnly(libs.nashorn.core)
 
         implementation(libs.guava)
 
@@ -232,8 +223,6 @@ dependencies {
     testImplementation(libs.languagetool.server)
     testRuntimeOnly(libs.json)
     testRuntimeOnly(libs.protobuf)
-    testRuntimeOnly(libs.bundles.groovy)
-    testRuntimeOnly(libs.nashorn.core)
     testRuntimeOnly(libs.slf4j.jdk14)
 
     testAcceptanceImplementation sourceSets.main.output

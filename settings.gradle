@@ -71,5 +71,6 @@ include("machinetranslators:apertium",
         "aligner",
         "spellchecker:hunspell",
         "spellchecker:morfologik",
+        "scripting",
         "theme",
         "tipoftheday")

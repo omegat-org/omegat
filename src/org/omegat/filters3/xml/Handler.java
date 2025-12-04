@@ -172,7 +172,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * If we collect normal text, returns {@link #entry}, else returns the last
      * of {@link #outofturnEntries}.
      */
-    private Entry currEntry() {
+    private @Nullable Entry currEntry() {
         if (collectingIntactText()) {
             return intacttagEntry;
         } else if (collectingOutOfTurnText()) {
@@ -387,9 +387,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      *         InputSource.
      * @throws SAXException If there is an error during XML parsing.
      */
-    public InputSource doResolve(String publicId, @Nullable String systemId) throws SAXException {
+    public InputSource doResolve(String publicId, String systemId) throws SAXException {
         inDTD = isDTDMatch(publicId, systemId);
-        if (systemId != null && (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA))) {
+        if (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA)) {
             return resolveLocalEntity(publicId, systemId);
         } else {
             return resolveDialectEntity(publicId, systemId);
@@ -427,7 +427,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     private InputSource resolveLocalEntity(String publicId, String systemId) throws SAXException {
         try {
-            if (!isValidLocalEntty(systemId)) {
+            if (!isValidLocalEntity(systemId)) {
                 return new InputSource(new StringReader(""));
             }
 
@@ -454,7 +454,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private boolean isValidLocalEntty(String systemId) throws URISyntaxException {
+    private boolean isValidLocalEntity(String systemId) throws URISyntaxException {
         // checking if the systemID is a file schema, and if so, we need to
         // resolve it from the source folder
         if (systemId.startsWith(START_FILESCHEMA)) {

@@ -25,6 +25,7 @@
 
 package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Tag;
 
 /**
@@ -42,14 +43,14 @@ public class XMLIntactTag extends Tag {
 
     /** Creates a new instance of XML Tag */
     public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut,
-            org.xml.sax.Attributes attributes) {
+            org.xml.sax.@Nullable Attributes attributes) {
         super(tag, shortcut, Type.ALONE, XMLUtils.convertAttributes(attributes));
         this.intactContents = new XMLIntactEntry(xmlDialect, handler);
     }
 
     /** Creates a new instance of XML Tag */
     public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut, Type type,
-            org.xml.sax.Attributes attributes) {
+            org.xml.sax.@Nullable Attributes attributes) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.intactContents = new XMLIntactEntry(xmlDialect, handler);
     }

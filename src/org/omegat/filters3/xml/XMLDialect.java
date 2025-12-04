@@ -293,7 +293,7 @@ public interface XMLDialect {
 
     /**
      * Implement general purpose function to handle XML tag/attributes when necessary.
-     * @param tag
+     * @param tag XML tag to handle.
      */
     void handleXMLTag(XMLTag tag, boolean translated);
 }

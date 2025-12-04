@@ -34,7 +34,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.data.ProtectedPart;

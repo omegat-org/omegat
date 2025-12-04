@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
-               2024 Hiroshi Miura
+               2024-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,7 +33,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -96,7 +95,7 @@ public class GlossarySearcher {
         }
 
         // After the matched entries have been tokenized and listed,
-        // we reorder entries as
+        // we reorder entries as;
         // 1) by priority
         // 2) by length of source text if one contains another (optional)
         // 3) by alphabet of source term
@@ -162,19 +161,54 @@ public class GlossarySearcher {
             return Collections.emptyList();
         }
         boolean notExact = isGlossaryNotExactMatch();
-        List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
-        foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
+        List<Token[]> foundTokens = new ArrayList<>(
+                DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact));
+        foundTokens.removeIf(toks -> filterOutMatch(toks, fullText, term));
+        if (foundTokens.isEmpty()) {
+            // If no match was found, try again after stripping trailing
+            // punctuation from the term.
+            String stripped = stripTrailingPunctuation(term);
+            if (!stripped.equals(term)) {
+                Token[] strippedTokens = tokenize(stripped);
+                if (strippedTokens.length > 0) {
+                    List<Token[]> retry = DefaultTokenizer.searchAll(fullTextTokens, strippedTokens,
+                            notExact);
+                    retry.removeIf(toks -> filterOutMatch(toks, fullText, stripped));
+                    foundTokens.addAll(retry);
+                }
+            }
+        }
         if (StringUtil.isCJK(term)) {
-            // This is a workaround for a high reported hash collision rate for
-            // short Japanese strings. This assumes that every matched term will
-            // have at least one token that is a prefix of the term itself; this
-            // doesn't necessarily hold in general for stemming/lemmatizing for
-            // all languages, but it seems probably OK for CJK.
-            //
-            // See https://sourceforge.net/p/omegat/bugs/1034/
+            /* This is a workaround for a high reported hash collision rate for
+             * short Japanese strings. This assumes that every matched term will
+             * have at least one token that is a prefix of the term itself; this
+             * doesn't necessarily hold in general for stemming/lemmatizing for
+             * all languages, but it seems probably OK for CJK.
+             * See https://sourceforge.net/p/omegat/bugs/1034/
+             */
             foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
         }
         return foundTokens;
+    }
+
+    /**
+     * Remove any trailing non-letter/digit characters from the end of the term.
+     * This makes glossary matching robust to terminal punctuation like '.' or
+     * ','.
+     */
+    private static String stripTrailingPunctuation(String s) {
+        int end = s.length();
+        while (end > 0) {
+            int cp = s.codePointBefore(end);
+            if (Character.isLetterOrDigit(cp)) {
+                break;
+            }
+            end -= Character.charCount(cp);
+        }
+        if (end <= 0) {
+            return s; // don't alter to empty; keep original
+        }
+        return end == s.length() ? s : s.substring(0, end);
     }
 
     private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
@@ -192,18 +226,20 @@ public class GlossarySearcher {
                 Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT);
     }
 
-    private boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
-        // Filter out matches where the glossary entry is all caps but the
-        // source-text match is not.
+    /**
+     * Filter out matches where the glossary entry is all caps but the
+     * source-text match is not.
+     */
+    private boolean filterOutMatch(Token[] tokens, String srcTxt, String locTxt) {
         if (isRequireSimilarCase() && StringUtil.isUpperCase(locTxt)) {
-            for (Token tok : tokens) {
-                String matched = tok.getTextFromString(srcTxt);
+            for (Token token : tokens) {
+                String matched = token.getTextFromString(srcTxt);
                 if (!StringUtil.isUpperCase(matched)) {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     protected static boolean isCjkMatch(String fullText, String term) {
@@ -232,14 +268,15 @@ public class GlossarySearcher {
         }
         List<Token[]> result = new ArrayList<>();
         do {
-            result.add(new Token[]{new Token(term, i)});
+            result.add(new Token[] { new Token(term, i) });
         } while ((i = fullText.indexOf(term, i + 1)) != -1);
         return Collections.unmodifiableList(result);
     }
 
     @VisibleForTesting
     boolean isGlossaryStemming() {
-        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, Preferences.GLOSSARY_STEMMING_DEFAULT);
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
+                Preferences.GLOSSARY_STEMMING_DEFAULT);
     }
 
     @VisibleForTesting
@@ -254,8 +291,9 @@ public class GlossarySearcher {
             }
         } else {
             // skip whitespace tokens
-            return Arrays.stream(tok.tokenizeVerbatim(strLower)).filter(tok -> !StringUtil.isWhiteSpace(
-                    strLower.charAt(tok.getOffset()))).toArray(Token[]::new);
+            return Arrays.stream(tok.tokenizeVerbatim(strLower))
+                    .filter(token -> !StringUtil.isWhiteSpace(strLower.charAt(token.getOffset())))
+                    .toArray(Token[]::new);
         }
     }
 
@@ -303,9 +341,9 @@ public class GlossarySearcher {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
         }
-        return entries
-                .stream().filter(Objects::nonNull).sorted((o1, o2) -> compareGlossaryEntries(o1, o2,
-                        srcLangCollator, targetLangCollator)).collect(Collectors.toList());
+        return entries.stream()
+                .sorted((o1, o2) -> compareGlossaryEntries(o1, o2, srcLangCollator, targetLangCollator))
+                .collect(Collectors.toList());
     }
 
     @VisibleForTesting
@@ -483,27 +521,20 @@ public class GlossarySearcher {
             List<String> origins = new ArrayList<>();
 
             for (GlossaryEntry e : sortList) {
-                for (String s : e.getLocTerms(false)) {
-                    locTxts.add(s);
-                }
-                for (String s : e.getComments()) {
-                    comTxts.add(s);
-                }
+                Collections.addAll(locTxts, e.getLocTerms(false));
+                Collections.addAll(comTxts, e.getComments());
                 for (boolean s : e.getPriorities()) {
                     prios.add(s);
                 }
-                for (String o : e.getOrigins(false)) {
-                    origins.add(o);
-                }
+                Collections.addAll(origins, e.getOrigins(false));
             }
             boolean[] priorities = new boolean[prios.size()];
             for (int j = 0; j < prios.size(); j++) {
                 priorities[j] = prios.get(j);
             }
 
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt,
-                    locTxts.toArray(new String[locTxts.size()]), comTxts.toArray(new String[comTxts.size()]),
-                    priorities, origins.toArray(new String[origins.size()]));
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxts.toArray(new String[0]),
+                    comTxts.toArray(new String[0]), priorities, origins.toArray(new String[0]));
             returnList.add(combineEntry);
         }
         return returnList;

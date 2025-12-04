@@ -46,7 +46,7 @@ import org.omegat.util.OStrings;
  * @author Volker Berlin
  */
 public class DokuWikiFilter extends AbstractFilter {
-    private Pattern codeTag = Pattern.compile("\\<code|\\<file|\\<html|\\<php|\\/\\*");
+    private final Pattern codeTag = Pattern.compile("\\<code|\\<file|\\<html|\\<php|\\/\\*");
 
     /**
      * Register plugin into OmegaT.

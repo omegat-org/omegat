@@ -35,6 +35,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.Core;
@@ -55,19 +57,20 @@ import org.omegat.util.StringUtil;
  * @author Piotr Kulik
  * @author Alex Buloichik
  */
+@NullMarked
 public class XLIFFFilter extends XMLFilter {
 
-    private String resname;
+    private @Nullable String resname;
     private boolean ignored;
-    private ArrayList<String> groupResname = new ArrayList<String>();
+    private final ArrayList<String> groupResname = new ArrayList<>();
     private int groupLevel;
-    private ArrayList<String> props = new ArrayList<String>();
-    private StringBuilder text = new StringBuilder();
-    private ArrayList<String> entryText = new ArrayList<String>();
-    private ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<List<ProtectedPart>>();
-    private HashSet<String> altIDCache = new HashSet<String>();
+    private final ArrayList<String> props = new ArrayList<>();
+    private final StringBuilder text = new StringBuilder();
+    private final ArrayList<String> entryText = new ArrayList<>();
+    private final ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<>();
+    private final HashSet<String> altIDCache = new HashSet<>();
 
-    private String id;
+    private @Nullable String id;
 
     /**
      * Sets whether alternative translations are identified by previous and next
@@ -161,7 +164,7 @@ public class XLIFFFilter extends XMLFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditXLIFFOptionsDialog dialog = new EditXLIFFOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
@@ -204,17 +207,19 @@ public class XLIFFFilter extends XMLFilter {
      * as comment, based on ResXFilter code
      */
     @Override
-    public void tagStart(String path, Attributes atts) {
-        if (atts != null && path.endsWith("trans-unit")) {
-            // resname may or may not be present.
-            resname = atts.getValue("resname");
-            id = atts.getValue("id");
-        }
-        // not all <group> tags have resname attribute
-        if (path.endsWith("/group")) {
-            // <group> only, it can be nested
-            groupLevel++;
-            groupResname.add(atts.getValue("resname"));
+    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
+        if (path != null && atts != null) {
+            if (path.endsWith("trans-unit")) {
+                // resname may or may not be present.
+                resname = atts.getValue("resname");
+                id = atts.getValue("id");
+            }
+            // not all <group> tags have resname attribute
+            if (path.endsWith("/group")) {
+                // <group> only, it can be nested
+                groupLevel++;
+                groupResname.add(atts.getValue("resname"));
+            }
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
@@ -223,7 +228,10 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     @Override
-    public void tagEnd(String path) {
+    public void tagEnd(@Nullable String path) {
+        if (path == null) {
+            return;
+        }
         if (path.endsWith("trans-unit/note")) {
             // <trans-unit> <note>'s only
             addProperty("note", text.toString());
@@ -272,14 +280,14 @@ public class XLIFFFilter extends XMLFilter {
         props.add(value);
     }
 
-    private String[] finalizeProperties() {
+    private String @Nullable [] finalizeProperties() {
         if (props.isEmpty()) {
             return null;
         }
-        return props.toArray(new String[props.size()]);
+        return props.toArray(new String[0]);
     }
 
-    private String getSegID() {
+    private @Nullable String getSegID() {
         String segID = null;
         switch (altTransIDType) {
         case ELEMENT_ID:
@@ -316,16 +324,18 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     @Override
-    public void text(String newText) {
+    public void text(@Nullable String newText) {
         this.text.append(newText);
     }
 
     @Override
-    public String translate(String entry, List<ProtectedPart> givenProtectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> givenProtectedParts) {
         if (entryParseCallback != null) {
             if (!StringUtil.isEmpty(entry)) {
                 entryText.add(entry);
-                this.protectedParts.add(givenProtectedParts);
+                if (givenProtectedParts != null) {
+                    this.protectedParts.add(givenProtectedParts);
+                }
             }
             return entry;
         } else if (entryTranslateCallback != null) {

@@ -25,6 +25,8 @@
 
 package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * XML content based tag for create shortcuts based on content, not on tag name.
  *
@@ -37,7 +39,7 @@ public class XMLContentBasedTag extends XMLIntactTag {
 
     /** Creates a new instance of XML Tag */
     public XMLContentBasedTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut, Type type,
-            org.xml.sax.Attributes attributes) {
+            org.xml.sax.@Nullable Attributes attributes) {
         super(xmlDialect, handler, tag, shortcut, type, attributes);
     }
 

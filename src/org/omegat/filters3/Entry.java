@@ -106,7 +106,7 @@ public class Entry {
     /**
      * Returns an instance of {@link Text} class used to populate this entry.
      */
-    private Text getTextInstance() {
+    private @Nullable Text getTextInstance() {
         detectAndEnumerateTags();
         return textInstance;
     }

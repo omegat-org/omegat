@@ -44,6 +44,7 @@ import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -119,7 +120,7 @@ public class OpenDocFilter extends AbstractFilter {
      * consisting of many XML files, some of which should be translated.
      */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc)
+    public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         try (ZipFile zipFile = new ZipFile(inFile);
                 ZipOutputStream zipOut = outFile != null ? new ZipOutputStream(new FileOutputStream(outFile))
@@ -133,7 +134,7 @@ public class OpenDocFilter extends AbstractFilter {
         }
     }
 
-    private void processZipEntry(ZipFile zipFile, ZipEntry entry, ZipOutputStream zipOut, FilterContext fc,
+    private void processZipEntry(ZipFile zipFile, ZipEntry entry, @Nullable ZipOutputStream zipOut, FilterContext fc,
             File inFile) throws IOException, TranslationException {
         String shortName = extractShortName(entry.getName());
 
@@ -149,7 +150,7 @@ public class OpenDocFilter extends AbstractFilter {
         return lastIndex >= 0 ? name.substring(lastIndex + 1) : name;
     }
 
-    private void handleTranslatableEntry(ZipFile zipFile, ZipEntry entry, ZipOutputStream zipOut,
+    private void handleTranslatableEntry(ZipFile zipFile, ZipEntry entry, @Nullable ZipOutputStream zipOut,
             FilterContext fc, File inFile) throws IOException, TranslationException {
         File tmpIn = tmp();
         File tmpOut = zipOut != null ? tmp() : null;
@@ -186,7 +187,7 @@ public class OpenDocFilter extends AbstractFilter {
         zipOut.closeEntry();
     }
 
-    private void cleanUpTempFile(File file) {
+    private void cleanUpTempFile(@Nullable File file) {
         if (file == null) {
             return;
         }
@@ -198,27 +199,32 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /** Human-readable OpenDocument filter name. */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("OpenDoc_FILTER_NAME");
     }
 
     /** Extensions... */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.sx?"), new Instance("*.st?"), new Instance("*.od?"),
                 new Instance("*.ot?"), };
     }
 
     /** Source encoding can not be varied by the user. */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
 
     /** Target encoding can not be varied by the user. */
+    @Override
     public boolean isTargetEncodingVariable() {
         return false;
     }
 
     /** Not implemented. */
+
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
         throw new IOException("Not Implemented!");

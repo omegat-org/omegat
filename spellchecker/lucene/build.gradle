@@ -1,0 +1,17 @@
+plugins {
+    id 'org.omegat.module'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-analyzers-common-8*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.bundles.lucene)
+    }
+    testImplementation(libs.junit4)
+    testImplementation(libs.assertj)
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+}

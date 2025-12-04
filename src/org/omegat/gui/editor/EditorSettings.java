@@ -29,7 +29,6 @@
 package org.omegat.gui.editor;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 
 import javax.swing.text.AttributeSet;
 
@@ -117,14 +116,6 @@ public class EditorSettings implements IEditorSettings {
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
     }
 
-    public char getAdvancerChar() {
-        if (useTabForAdvance) {
-            return KeyEvent.VK_TAB;
-        } else {
-            return KeyEvent.VK_ENTER;
-        }
-    }
-
     public boolean isUseTabForAdvance() {
         return useTabForAdvance;
     }
@@ -195,10 +186,6 @@ public class EditorSettings implements IEditorSettings {
 
     public boolean isMarkNonUniqueSegments() {
         return markNonUniqueSegments;
-    }
-
-    public boolean isHideDuplicateSegments() {
-        return true;
     }
 
     public boolean isMarkNotedSegments() {
@@ -501,30 +488,159 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
-     * Choose segment's attributes based on rules.
-     *
-     * @param isSource
-     *            is it a source segment or a target segment
-     * @param isPlaceholder
-     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.)
-     *            or regular text inside the segment?
-     * @param isRemoveText
-     *            is it text that should be removed from translation?
-     * @param duplicate
-     *            is the sourceTextEntry a duplicate or not? values:
-     *            DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See
-     *            sourceTextEntryste.getDuplicate()
-     * @param active
-     *            is it an active segment?
-     * @param translationExists
-     *            does a translation already exist
-     * @param isNBSP
-     *            is the text a non-breakable space
-     * @return proper AttributeSet to use on displaying the segment.
+     * Holder for parameters used to compute the AttributeSet for editor segments.
+     * Using a single object avoids long parameter lists at call sites.
      */
+    public static final class AttributeRequest {
+        public final boolean isSource;
+        public final boolean isPlaceholder;
+        public final boolean isRemoveText;
+        public final DUPLICATE duplicate;
+        public final boolean active;
+        public final boolean translationExists;
+        public final boolean hasNote;
+        public final boolean isNBSP;
+
+        private AttributeRequest(Builder b) {
+            this.isSource = b.isSource;
+            this.isPlaceholder = b.isPlaceholder;
+            this.isRemoveText = b.isRemoveText;
+            this.duplicate = b.duplicate;
+            this.active = b.active;
+            this.translationExists = b.translationExists;
+            this.hasNote = b.hasNote;
+            this.isNBSP = b.isNBSP;
+        }
+
+        /**
+         * Builder for {@link AttributeRequest}.
+         * Use fluent setters and call {@link #build()}.
+         */
+        public static class Builder {
+            private boolean isSource;
+            private boolean isPlaceholder;
+            private boolean isRemoveText;
+            private DUPLICATE duplicate;
+            private boolean active;
+            private boolean translationExists;
+            private boolean hasNote;
+            private boolean isNBSP;
+
+            /**
+             * is it a source segment or a target segment.
+             */
+            public Builder isSource(boolean val) {
+                this.isSource = val;
+                return this;
+            }
+
+            /**
+             * is it for a placeholder (OmegaT tag or sprintf-variable etc.)
+             * or regular text inside the segment.
+             */
+            public Builder isPlaceholder(boolean val) {
+                this.isPlaceholder = val;
+                return this;
+            }
+
+            /**
+             * is it text that should be removed from translation.
+             */
+            public Builder isRemoveText(boolean val) {
+                this.isRemoveText = val;
+                return this;
+            }
+
+            /**
+             * is the sourceTextEntry a duplicate or not? values:
+             * DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.
+             * {@see SourceTextEntry.getDuplicate()}
+             */
+            public Builder duplicate(DUPLICATE val) {
+                this.duplicate = val;
+                return this;
+            }
+
+            /**
+             * is it an active segment?
+             */
+            public Builder active(boolean val) {
+                this.active = val;
+                return this;
+            }
+
+            /**
+             * does a translation already exist.
+             */
+            public Builder translationExists(boolean val) {
+                this.translationExists = val;
+                return this;
+            }
+
+            public Builder hasNote(boolean val) {
+                this.hasNote = val;
+                return this;
+            }
+
+            /**
+             * is the text a non-breakable space.
+             */
+            public Builder isNBSP(boolean val) {
+                this.isNBSP = val;
+                return this;
+            }
+
+            /**
+             * Build the request data class.
+             */
+            public AttributeRequest build() {
+                return new AttributeRequest(this);
+            }
+        }
+    }
+
+    // CHECKSTYLE:OFF: ParameterNumberCheck
+    @SuppressWarnings("unused")
+    @Deprecated(since = "6.1.0", forRemoval = true)
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
+        AttributeRequest req = new AttributeRequest.Builder()
+                .isSource(isSource)
+                .isPlaceholder(isPlaceholder)
+                .isRemoveText(isRemoveText)
+                .duplicate(duplicate)
+                .active(active)
+                .translationExists(translationExists)
+                .hasNote(hasNote)
+                .isNBSP(isNBSP)
+                .build();
+        return getAttributeSet(req);
+    }
+    // CHECKSTYLE:ON
+
+    /**
+     * Choose segment's attributes based on rules.
+     * @param req the request data class.
+     * @return proper AttributeSet to use on displaying the segment.
+     */
+    public AttributeSet getAttributeSet(AttributeRequest req) {
         // determine foreground color
+        Color fg = getForegroundColor(req.isSource, req.isPlaceholder, req.isRemoveText, req.duplicate, req.active,
+                req.translationExists, req.hasNote);
+
+        // determine background color
+        Color bg = getBackgroundColor(req.isSource, req.duplicate, req.active, req.translationExists, req.hasNote,
+                req.isNBSP);
+
+        // determine bold and italic
+        boolean bold = req.isSource && (viewSourceBold || (req.active && viewActiveSourceBold));
+        boolean italic = req.isRemoveText && req.isSource;
+
+        return Styles.createAttributeSet(fg, bg, bold, italic);
+    }
+
+    private Color getForegroundColor(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate,
+                                     boolean active, boolean translationExists, boolean hasNote) {
         Color fg = null;
 
         // Custom foreground colors
@@ -571,8 +687,11 @@ public class EditorSettings implements IEditorSettings {
         if (isRemoveText && !isSource) {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
+        return fg;
+    }
 
-        // determine background color
+    private Color getBackgroundColor(boolean isSource, DUPLICATE duplicate, boolean active, boolean translationExists,
+                                     boolean hasNote, boolean isNBSP) {
         Color bg = null;
         if (active) {
             if (isSource) {
@@ -613,32 +732,15 @@ public class EditorSettings implements IEditorSettings {
                 break;
             }
         }
-        if (isNBSP && isMarkNBSP()) { // overwrite others, because space is
-                                      // smallest.
+        // overwrite others, because space is smallest.
+        if (isNBSP && isMarkNBSP()) {
             bg = Styles.EditorColor.COLOR_NBSP.getColor();
         }
-
-        // determine bold
-        Boolean bold = false;
-        if (isSource) {
-            if (viewSourceBold || (active && viewActiveSourceBold)) {
-                bold = true;
-            }
-        }
-
-        // determine italic
-        Boolean italic = false;
-        if (isRemoveText && isSource) {
-            italic = true;
-        }
-
-        return Styles.createAttributeSet(fg, bg, bold, italic);
+        return bg;
     }
 
     /**
      * Returns font attributes for paragraph start
-     * 
-     * @return
      */
     public AttributeSet getParagraphStartAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), null, false,
@@ -647,8 +749,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for the modification info line.
-     * 
-     * @return
      */
     public AttributeSet getModificationInfoAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG.getColor(),
@@ -657,8 +757,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for the segment marker.
-     *
-     * @return
      */
     public AttributeSet getSegmentMarkerAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(),
@@ -667,8 +765,6 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for other languages translation.
-     *
-     * @return
      */
     public AttributeSet getOtherLanguageTranslationAttributeSet() {
         return Styles.createAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG.getColor(),

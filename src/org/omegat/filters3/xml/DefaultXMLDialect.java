@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters3.Attributes;
@@ -404,7 +405,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * implementation returns <code>null</code>.
      */
     @Override
-    public InputSource resolveEntity(String publicId, String systemId) {
+    public @Nullable InputSource resolveEntity(@Nullable String publicId, String systemId) {
         return null;
     }
 
@@ -449,50 +450,31 @@ public class DefaultXMLDialect implements XMLDialect {
      */
     private boolean tagsAggregationEnabled = false;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setTagsAggregationEnabled(boolean onOff) {
         tagsAggregationEnabled = onOff;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Boolean getTagsAggregationEnabled() {
         return tagsAggregationEnabled;
     }
     private boolean forceSpacePreserving = false;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Boolean getForceSpacePreserving() {
         return forceSpacePreserving;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setForceSpacePreserving(boolean onOff) {
         forceSpacePreserving = onOff;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void handleXMLTag(XMLTag tag, boolean translated) {
-        return;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
         protectedParts.clear();

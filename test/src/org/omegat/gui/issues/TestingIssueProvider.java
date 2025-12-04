@@ -33,7 +33,7 @@ import java.util.List;
 public class TestingIssueProvider implements IIssueProvider {
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        return List.of();
+        return tmxEntry.isTranslated() ? List.of(new TestingIssue(sourceEntry, tmxEntry)) : List.of();
     }
 
     @Override

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,7 +26,6 @@
 
 package org.omegat.gui.issues;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.omegat.core.data.CoreState;
 import org.omegat.util.Preferences;
 
 /**
@@ -41,27 +42,23 @@ import org.omegat.util.Preferences;
  * providers here with {@link #addIssueProvider(IIssueProvider)}.
  *
  * @author Aaron Madlon-Kay
- *
+ * @author Hiroshi Miura
  */
 public final class IssueProviders {
 
     static final String ISSUE_IDS_DELIMITER = ",";
 
-    private static final List<IIssueProvider> ISSUE_PROVIDERS = new ArrayList<>();
-    static {
-        addIssueProvider(new SpellingIssueProvider());
-        addIssueProvider(new TerminologyIssueProvider());
-    }
-
     private IssueProviders() {
     }
 
     public static List<IIssueProvider> getIssueProviders() {
-        return Collections.unmodifiableList(ISSUE_PROVIDERS);
+        ensureDefaultsInstalled();
+        return Collections.unmodifiableList(CoreState.getInstance().getIssueProvidersRegistry());
     }
 
     public static void addIssueProvider(IIssueProvider provider) {
-        ISSUE_PROVIDERS.add(provider);
+        ensureDefaultsInstalled();
+        CoreState.getInstance().getIssueProvidersRegistry().add(provider);
     }
 
     /**
@@ -89,8 +86,23 @@ public final class IssueProviders {
     }
 
     static List<IIssueProvider> getEnabledProviders() {
+        ensureDefaultsInstalled();
         Set<String> disabled = getDisabledProviderIds();
-        return ISSUE_PROVIDERS.stream().filter(p -> !disabled.contains(p.getId())).collect(Collectors.toList());
+        return CoreState.getInstance().getIssueProvidersRegistry().stream()
+                .filter(p -> !disabled.contains(p.getId()))
+                .collect(Collectors.toList());
+    }
+
+    private static void ensureDefaultsInstalled() {
+        List<IIssueProvider> reg = CoreState.getInstance().getIssueProvidersRegistry();
+
+        // Remove existing occurrences to avoid duplicates and to ensure ordering
+        reg.removeIf(p -> SpellingIssueProvider.class.getCanonicalName().equals(p.getId())
+                || TerminologyIssueProvider.class.getCanonicalName().equals(p.getId()));
+
+        // Add defaults at the front in a stable order: Spelling, then Terminology
+        reg.add(0, new TerminologyIssueProvider());
+        reg.add(0, new SpellingIssueProvider());
     }
 
     public static void setProviderEnabled(String id, boolean enabled) {

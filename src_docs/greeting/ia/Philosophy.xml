@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article lang="ia" id="philosophy.article">
+  <section>
+	<title id="freedoms">Libertates de uso e modification</title>
+	<para>OmegaT es un application gratuite de traduction assistite per le computator (CAT), pro traductores professional. Il es distribuite sub le terminos del <emphasis>GNU General Public License, version 3.0</emphasis>. Vider <guimenu>&gt; Adjutar</guimenu> <guimenu>&gt; Re</guimenu>. Le licentia te concede le libertates sequente:<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>Le libertate de exequer OmegaT como tu desidera, pro qualcunque scopo.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Le libertate de studiar como OmegaT functiona, e cambiar lo assi que illo computa como tu desidera.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Le libertate de redistribuer copia assi que tu pote adjutar alteres.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Le libertate de distribuer copia de tu versiones modificate a alteres.</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article lang="ja" id="first.steps">
+  <section>
+	<title id="freedoms">自由について</title>
+	<para>OmegaT は、プロの翻訳者のための、フリー のコンピューター翻訳支援ツールです。このソフトウエアは、<emphasis>GNU General Public License, version 3.0</emphasis>の条件で頒布されています。 <guimenu>&gt; ヘルプ</guimenu> <guimenu>&gt; OmegaTについて</guimenu>から参照してください。このライセンスは、ユーザに次の自由を保障しています。<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>OmegaTをいかなる目的に対しても利用することができる自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>OmegaTがどのように動作しているのかを学び、望みに応じて自分で好きなように変更する自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>他の方を助けるためにソフトウエアを再配布する自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>変更したバージョンを他の方に配布する自由。</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

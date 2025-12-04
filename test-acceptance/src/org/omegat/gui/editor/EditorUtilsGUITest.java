@@ -56,15 +56,23 @@ public final class EditorUtilsGUITest {
 
         @Test
         public void testEditorUtilsGetWordFirstSteps() throws BadLocationException {
-            int offs = 518;
+            // First_Steps 3rd paragraph:
+            //    OmegaT will create a folder set that contains your files. It
+            //    will also create an empty translation memory that it will fill in the
+            //    background, one segment at as time as you type your translation. Matches
+            // We test the last word in the first segment in the paragraph.
+            String target = "translation";
+            int begin = 500;
+            int offs = begin + target.length() / 2;
+            int end = begin + target.length();
             assertNotNull(window);
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
             String word = editPane.getText(posStart, posEnd - posStart);
-            assertEquals("translation", word);
-            assertEquals(508, posStart);
-            assertEquals(519, posEnd);
+            assertEquals(target, word);
+            assertEquals(begin, posStart);
+            assertEquals(end, posEnd);
         }
     }
 

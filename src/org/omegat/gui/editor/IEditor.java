@@ -417,6 +417,7 @@ public interface IEditor {
      *
      *         Must be called only from UI thread.
      */
+    @Nullable
     String getSelectedText();
 
     /**

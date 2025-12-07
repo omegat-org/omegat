@@ -34,11 +34,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -65,7 +67,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
 
-    private final List<ProviderStorage> providers = new ArrayList<ProviderStorage>();
+    private final List<ProviderStorage> providers = new ArrayList<>();
 
     private final DockableScrollPane scrollPane;
 
@@ -96,7 +98,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
 
         List<ProviderStorage> list;
         synchronized (providers) {
-            list = new ArrayList<ProviderStorage>(providers);
+            list = new ArrayList<>(providers);
         }
         StringBuilder text = new StringBuilder(1024);
         for (ProviderStorage ps : list) {
@@ -160,17 +162,10 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
 
     @Override
     public void addCommentProvider(ICommentProvider provider, int priority) {
-        ProviderStorage s = new ProviderStorage();
-        s.provider = provider;
-        s.priority = priority;
+        ProviderStorage s = new ProviderStorage(provider, priority);
         synchronized (providers) {
             providers.add(s);
-            Collections.sort(providers, new Comparator<ProviderStorage>() {
-                @Override
-                public int compare(ProviderStorage o1, ProviderStorage o2) {
-                    return o1.priority < o2.priority ? -1 : o1.priority > o2.priority ? 1 : 0;
-                }
-            });
+            providers.sort(Comparator.comparingInt(o -> o.priority));
         }
     }
 
@@ -187,8 +182,13 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     }
 
     static class ProviderStorage {
-        ICommentProvider provider;
-        int priority;
+        final ICommentProvider provider;
+        final int priority;
+
+       ProviderStorage(ICommentProvider provider, int priority) {
+           this.provider = provider;
+           this.priority = priority;
+       }
     }
 
     @Override

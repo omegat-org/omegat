@@ -233,8 +233,7 @@ public class GlossarySearcher {
                 && StringUtil.isCJK(term) && fullText.contains(term);
     }
 
-    @VisibleForTesting
-    static List<Token[]> getCjkMatchingTokens(String fullText, String term) {
+    private static List<Token[]> getCjkMatchingTokens(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so
         // include if word appears anywhere in source string.
         IProject project = Core.getProject();

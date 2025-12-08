@@ -31,8 +31,6 @@ package org.omegat.gui.dictionaries;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
@@ -69,7 +67,6 @@ import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
 import org.omegat.core.dictionaries.IDictionary;
 import org.omegat.core.dictionaries.IDictionaryFactory;
-import org.omegat.core.events.IEditorEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -126,11 +123,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
-        CoreEvents.registerEditorEventListener(new IEditorEventListener() {
-            public void onNewWord(String newWord) {
-                callDictionary(newWord);
-            }
-        });
+        CoreEvents.registerEditorEventListener(newWord -> callDictionary(newWord));
 
         Core.getEditor().registerPopupMenuConstructors(750, new DictionaryPopup());
 
@@ -384,7 +377,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
      */
     public class DictionaryEntriesSearchThread extends EntryInfoSearchThread<List<DictionaryEntry>> {
         protected final String src;
-        protected final ITokenizer tok;
+        protected final @Nullable ITokenizer tok;
 
         public DictionaryEntriesSearchThread(final SourceTextEntry newEntry) {
             super(DictionariesTextArea.this, newEntry);
@@ -393,7 +386,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
 
         @Override
-        protected List<DictionaryEntry> search() {
+        protected @Nullable List<DictionaryEntry> search() {
             if (tok == null) {
                 return null;
             }

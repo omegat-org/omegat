@@ -123,7 +123,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
-        CoreEvents.registerEditorEventListener(newWord -> callDictionary(newWord));
+        CoreEvents.registerEditorEventListener(this::callDictionary);
+        CoreEvents.registerFontChangedEventListener(this::updateFont);
 
         Core.getEditor().registerPopupMenuConstructors(750, new DictionaryPopup());
 
@@ -136,6 +137,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
+    }
+
+    private void updateFont(Font font) {
+        setFont(font);
         if (!displayedWords.isEmpty()) {
             initDocument();
             refresh();
@@ -317,7 +322,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     // recreating the document from scratch is actually faster for very large
     // content. See https://sourceforge.net/p/omegat/bugs/1068/
     private void fastReplaceContent(String txt) {
-        Document doc = getDocument();
+        Document doc;
         try {
             EditorKit editorKit = getEditorKit();
             doc = editorKit.createDefaultDocument();

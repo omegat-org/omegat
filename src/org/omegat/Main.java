@@ -70,7 +70,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
 import tokyo.northside.logging.ILogger;
@@ -137,7 +137,7 @@ public final class Main {
     private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0

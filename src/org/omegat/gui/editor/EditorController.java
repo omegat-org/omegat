@@ -84,6 +84,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
@@ -194,12 +195,12 @@ public class EditorController implements IEditor {
 
     private String introPaneTitle;
     private String emptyProjectPaneTitle;
-    private JTextPane introPane;
+    private @Nullable JTextPane introPane;
     private JTextPane emptyProjectPane;
     protected final IMainWindow mw;
 
     /** Currently displayed segments info. */
-    protected SegmentBuilder[] m_docSegList;
+    protected SegmentBuilder @Nullable [] m_docSegList;
 
     protected int firstLoaded;
     protected int lastLoaded;
@@ -245,22 +246,22 @@ public class EditorController implements IEditor {
         NO_CHANGE
     }
 
-    BiDiUtils.ORIENTATION currentOrientation;
+    BiDiUtils.@Nullable ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL;
     protected boolean targetLangIsRTL;
 
-    volatile IEditorFilter entriesFilter;
-    private Component entriesFilterControlComponent;
+    volatile @Nullable IEditorFilter entriesFilter;
+    private @Nullable Component entriesFilterControlComponent;
 
-    private SegmentExportImport segmentExportImport;
+    private final SegmentExportImport segmentExportImport;
 
-    protected String currentEntryOrigin;
-    protected String translationFromOrigin;
+    protected @Nullable String currentEntryOrigin;
+    protected @Nullable String translationFromOrigin;
 
     /**
      * Previous translations. Used for optimistic locking.
      */
-    private IProject.AllTranslations previousTranslations;
+    private IProject.@Nullable AllTranslations previousTranslations;
 
     public EditorController(final IMainWindow mainWindow) {
         this.mw = mainWindow;
@@ -366,11 +367,13 @@ public class EditorController implements IEditor {
                 int sizeDelta = editor.getDocument().getLength() - docSize;
                 try {
                     scrollPane.getViewport()
-                            .setViewPosition(editor.modelToView2D(visiblePos + sizeDelta).getBounds().getLocation());
+                            .setViewPosition(editor.modelToView2D(visiblePos + sizeDelta)
+                                    .getBounds().getLocation());
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                 }
-            } else if (lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
+            } else if (m_docSegList != null
+                    && lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
                 // Load enough segments to restore scrollbar value to the
                 // range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                 // Formula is obtained by solving the following equations for loadCount:
@@ -438,12 +441,15 @@ public class EditorController implements IEditor {
     };
 
     private synchronized void loadDown(int count) {
-        if (lastLoaded < 0 || lastLoaded >= m_docSegList.length - 1) {
+        if (lastLoaded < 0 || m_docSegList == null || lastLoaded >= m_docSegList.length - 1) {
             return;
         }
         int loadFrom = lastLoaded + 1;
         int loadTo = Math.min(m_docSegList.length - 1, loadFrom + count - 1);
         Document3 doc = editor.getOmDocument();
+        if (doc == null) {
+            return;
+        }
         for (int i = loadFrom; i <= loadTo; i++) {
             SegmentBuilder builder = m_docSegList[i];
             insertStartParagraphMark(doc, builder, doc.getLength());
@@ -456,7 +462,7 @@ public class EditorController implements IEditor {
     }
 
     private synchronized void loadUp(int count) {
-        if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
+        if (firstLoaded <= 0 || m_docSegList == null || firstLoaded >= m_docSegList.length) {
             return;
         }
         int loadFrom = firstLoaded - 1;
@@ -470,7 +476,10 @@ public class EditorController implements IEditor {
             // offsets changing as content is prepended, but I (AMK) have not
             // properly investigated.
             markerController.reprocessImmediately(builder);
-            insertStartParagraphMark(editor.getOmDocument(), builder, 0);
+            var omDocument = editor.getOmDocument();
+            if (omDocument != null) {
+                insertStartParagraphMark(omDocument, builder, 0);
+            }
         }
         firstLoaded = loadTo;
     }
@@ -511,7 +520,7 @@ public class EditorController implements IEditor {
 
         updateTitle(updatedTitle);
 
-        if (scrollPane.getViewport().getView() != data) {
+        if (data != null && scrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
@@ -562,7 +571,7 @@ public class EditorController implements IEditor {
             // Invoke later so we can return successfully right away.
             SwingUtilities.invokeLater(() -> ProjectUICommands.projectImportFiles(
                     Core.getProject().getProjectProperties().getSourceRoot(),
-                    files.toArray(new File[files.size()])));
+                    files.toArray(new File[0])));
             return true;
         }
 
@@ -619,7 +628,7 @@ public class EditorController implements IEditor {
      */
     @Override
     public boolean isOrientationAllLtr() {
-        return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
+        return BiDiUtils.ORIENTATION.ALL_LTR.equals(currentOrientation);
     }
 
     @Override
@@ -628,12 +637,12 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public SourceTextEntry getCurrentEntry() {
+    public @Nullable SourceTextEntry getCurrentEntry() {
         SegmentBuilder builder = getCurrentSegmentBuilder();
         return builder == null ? null : builder.ste;
     }
 
-    public SegmentBuilder getCurrentSegmentBuilder() {
+    public @Nullable SegmentBuilder getCurrentSegmentBuilder() {
         if (m_docSegList == null || displayedEntryIndex < 0 || m_docSegList.length <= displayedEntryIndex) {
             // there is no current entry
             return null;
@@ -642,9 +651,9 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public String getCurrentFile() {
+    public @Nullable String getCurrentFile() {
         IProject proj = Core.getProject();
-        if (proj == null || !proj.isProjectLoaded()) {
+        if (!proj.isProjectLoaded()) {
             return null;
         }
         if (proj.getProjectFiles().isEmpty()) {
@@ -660,7 +669,7 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public String getCurrentTargetFile() {
+    public @Nullable String getCurrentTargetFile() {
         String currentSource = getCurrentFile();
         if (currentSource == null) {
             return null;
@@ -707,7 +716,7 @@ public class EditorController implements IEditor {
                 tmpSegList.add(sb);
             }
         }
-        m_docSegList = tmpSegList.toArray(new SegmentBuilder[tmpSegList.size()]);
+        m_docSegList = tmpSegList.toArray(new SegmentBuilder[0]);
 
         // Clamp displayedSegment to actually available entries.
         displayedEntryIndex = Math.max(0, Math.min(m_docSegList.length - 1, displayedEntryIndex));
@@ -823,7 +832,7 @@ public class EditorController implements IEditor {
             return;
         }
 
-        SegmentBuilder builder = m_docSegList[displayedEntryIndex];
+        SegmentBuilder builder = Objects.requireNonNull(m_docSegList)[displayedEntryIndex];
 
         // If the builder has not been created then we are trying to jump to a
         // segment that is in the current document but not yet loaded. To avoid
@@ -864,8 +873,9 @@ public class EditorController implements IEditor {
             segmentExportImport.exportCurrentSegment(ste);
         }
 
-        int te = editor.getOmDocument().getTranslationEnd();
-        int ts = editor.getOmDocument().getTranslationStart();
+        Document3 omDocument = Objects.requireNonNull(editor.getOmDocument());
+        int te = omDocument.getTranslationEnd();
+        int ts = omDocument.getTranslationStart();
         //
         // Navigate to entry as requested.
         //
@@ -898,7 +908,7 @@ public class EditorController implements IEditor {
     private void setMenuEnabled() {
         // update history menu items
         IMainMenu menu = Core.getMainWindow().getMainMenu();
-        if (menu instanceof BaseMainWindowMenu) {
+        if (menu instanceof BaseMainWindowMenu && m_docSegList != null) {
             BaseMainWindowMenu mainMenu = (BaseMainWindowMenu) menu;
             mainMenu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
             mainMenu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
@@ -911,9 +921,9 @@ public class EditorController implements IEditor {
      * Display length of source and translation parts in the status bar.
      */
     void showLengthMessage() {
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = Objects.requireNonNull(editor.getOmDocument());
         String trans = doc.extractTranslation();
-        if (trans != null) {
+        if (trans != null && m_docSegList != null) {
             SourceTextEntry ste = m_docSegList[displayedEntryIndex].ste;
             String lMsg = " " + ste.getSrcText().length() + "/" + trans.length() + " ";
             mw.showLengthMessage(lMsg);
@@ -924,11 +934,11 @@ public class EditorController implements IEditor {
      * Called on the text changed in document. Required for recalculate marks for active segment.
      */
     void onTextChanged() {
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = Objects.requireNonNull(editor.getOmDocument());
         if (doc.getTrustedChangesInProgress() || doc.getTextBeingComposed()) {
             return;
         }
-        if (doc.isEditMode()) {
+        if (doc.isEditMode() && m_docSegList != null) {
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(() -> {
@@ -962,7 +972,7 @@ public class EditorController implements IEditor {
      * coordinates. Returns null if the specified segment index is invalid or if
      * the segment has not been loaded yet.
      */
-    private Rectangle getSegmentBounds(int index) {
+    private @Nullable Rectangle getSegmentBounds(int index) {
         if (index < 0 || index >= m_docSegList.length) {
             return null;
         }
@@ -1105,10 +1115,13 @@ public class EditorController implements IEditor {
      * Refresh some entries. Usually after external translation changes replacement.
      */
     public void refreshEntries(Set<Integer> entryNumbers) {
-        for (int i = 0; i < m_docSegList.length; i++) {
-            if (entryNumbers.contains(m_docSegList[i].ste.entryNum())) {
+        if (m_docSegList == null) {
+            return;
+        }
+        for (SegmentBuilder segmentBuilder : m_docSegList) {
+            if (entryNumbers.contains(segmentBuilder.ste.entryNum())) {
                 // the same source text - need to update
-                m_docSegList[i].createSegmentElement(false, Core.getProject().getTranslationInfo(m_docSegList[i].ste));
+                segmentBuilder.createSegmentElement(false, Core.getProject().getTranslationInfo(segmentBuilder.ste));
             }
         }
     }
@@ -1146,10 +1159,10 @@ public class EditorController implements IEditor {
         }
     }
 
-    void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
+    void commitAndDeactivate(@Nullable ForceTranslation forceTranslation, @Nullable String newTrans) {
         UIThreadsUtil.mustBeSwingThread();
 
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = Objects.requireNonNull(editor.getOmDocument());
         doc.stopEditMode();
 
         // segment was active
@@ -1259,9 +1272,9 @@ public class EditorController implements IEditor {
         }
     }
 
-    private void getTranslationFromEditor(String newTrans, TMXEntry oldTE, PrepareTMXEntry newen) {
+    private void getTranslationFromEditor(@Nullable String newTrans, TMXEntry oldTE, PrepareTMXEntry newen) {
         // translation from editor
-        if (newTrans.isEmpty()) { // empty translation
+        if (newTrans == null || newTrans.isEmpty()) { // empty translation
             if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
                 // It's an empty translation that should remain empty
                 newen.translation = "";
@@ -1627,7 +1640,7 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public void gotoEntry(String srcString, EntryKey key) {
+    public void gotoEntry(@Nullable String srcString, @Nullable EntryKey key) {
         UIThreadsUtil.mustBeSwingThread();
 
         /*
@@ -1673,7 +1686,7 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public void refreshViewAfterFix(List<Integer> fixedEntries) {
+    public void refreshViewAfterFix(@Nullable List<Integer> fixedEntries) {
         // Don't commit the current translation text if we fixed this entry
         // or one of its duplicates (the fixed version will be clobbered).
         boolean doCommit = fixedEntries != null && fixedEntries.contains(getCurrentEntryNumber());
@@ -2107,7 +2120,7 @@ public class EditorController implements IEditor {
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
         // Prevent NullPointerErrors in loadDocument. Only load if there is a document.
-        if (doc != null && project != null && project.getProjectFiles() != null && curEntry != null) {
+        if (doc != null && project.getProjectFiles() != null && curEntry != null) {
             int curEntryNum = curEntry.entryNum();
             loadDocument(); // rebuild entrylist
             if (entriesFilter == null || entriesFilter.allowed(curEntry)) {

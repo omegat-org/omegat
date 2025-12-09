@@ -70,6 +70,12 @@ tasks.register('jpackageAppContentModules', Sync) {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
     dependsOn jpackage
 }
+tasks.register('jpackageAppContentTips', Sync) {
+    from layout.buildDirectory.file('docs/tips')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/tips")
+    dependsOn jpackage
+    dependsOn tipsHtmls
+}
 tasks.register('jpackageAppContent') {
     dependsOn jpackageAppContentGreetings
     dependsOn jpackageAppContentManuals
@@ -77,6 +83,7 @@ tasks.register('jpackageAppContent') {
     dependsOn jpackageAppContentImages
     dependsOn jpackageAppContentModules
     dependsOn jpackageAppContentScripts
+    dependsOn jpackageAppContentTips
 }
 
 // construct package contents in standard file tree
@@ -114,7 +121,7 @@ tasks.register('jpackage', Exec) {
 }
 
 // generate DEB package
-tasks.register("linuxDebDist", Exec) {
+tasks.register("linuxDistDeb", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
@@ -143,11 +150,11 @@ tasks.register("linuxDebDist", Exec) {
             '--linux-menu-group', 'Office',
             '--linux-package-name', 'omegat',
             '--linux-shortcut')
-    assemble.dependsOn linuxDebDist
+    assemble.dependsOn linuxDistDeb
 }
 
 // generate RPM package
-tasks.register("linuxRpmDist", Exec) {
+tasks.register("linuxDistRpm", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
@@ -175,5 +182,5 @@ tasks.register("linuxRpmDist", Exec) {
             '--linux-package-name', 'omegat',
             '--linux-rpm-license-type', 'GPLv3+',
             '--linux-shortcut')
-    assemble.dependsOn linuxRpmDist
+    assemble.dependsOn linuxDistRpm
 }

@@ -12,6 +12,7 @@ dependencies {
         // Aligner
         implementation(libs.tokyo.northside.maligna)
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
         compileOnly(libs.jaxb4.api)
         compileOnly(libs.jaxb4.runtime)
         compileOnly(libs.madlonkay.supertmxmerge)

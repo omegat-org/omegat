@@ -28,6 +28,7 @@ package org.omegat.gui.tipoftheday;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.JDialog;
@@ -35,11 +36,13 @@ import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import org.omegat.util.gui.Styles;
 import tokyo.northside.tipoftheday.TipOfTheDay;
 
 import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.UIDesignManager;
 
 import static org.omegat.gui.tipoftheday.TipOfTheDayModule.ENABLED;
 
@@ -56,6 +59,25 @@ public final class TipOfTheDayController {
     public void showComponent() {
         TipOfTheDay totd = new TipOfTheDay(new OmegaTTipOfTheDayModel());
         totd.setPreferredSize(new Dimension(900, 450));
+
+        // respect theme colors
+        totd.clearUserStyleSheets();
+        String background = Styles.EditorColor.COLOR_BACKGROUND.toHex();
+        String foreground = Styles.EditorColor.COLOR_FOREGROUND.toHex();
+        String bodyCss = "body { background-color: " + background + "; color: " + foreground + "; }";
+        totd.addUserStyleSheetText(bodyCss);
+        // Apply theme-specific CSS to TipOfTheDay content
+        boolean dark = UIDesignManager.isDarkTheme(UIManager.getLookAndFeelDefaults());
+        String cssPath = dark ? "/tips/dark.css" : "/tips/light.css";
+        try {
+            URL url = getClass().getResource(cssPath);
+            if (url != null) {
+                totd.addUserStyleSheetUri(url.toURI());
+            }
+        } catch (Exception e) {
+            Log.log(e);
+        }
+        //
         String current = Preferences.getPreference(TIPOFTHEDAY_CURRENT_TIP);
         int currentTip = 0;
         if (current != null) {

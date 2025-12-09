@@ -122,25 +122,9 @@ public class TestingProject extends NotLoadedProject implements IProject {
 
     @Override
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        TestingAllTranslations r = new TestingAllTranslations();
         synchronized (projectTMX) {
-            r.setDefaultTranslation(projectTMX.getDefaultTranslation(ste.getSrcText()));
-            r.setAlternativeTranslation(projectTMX.getMultipleTranslation(ste.getKey()));
-            if (r.getAlternativeTranslation() != null) {
-                r.setCurrentTranslation(r.getAlternativeTranslation());
-            } else if (r.getDefaultTranslation() != null) {
-                r.setCurrentTranslation(r.getDefaultTranslation());
-            } else {
-                r.setCurrentTranslation(EMPTY_TRANSLATION);
-            }
-            if (r.getDefaultTranslation() == null) {
-                r.setDefaultTranslation(EMPTY_TRANSLATION);
-            }
-            if (r.getAlternativeTranslation() == null) {
-                r.setAlternativeTranslation(EMPTY_TRANSLATION);
-            }
+            return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()), projectTMX.getMultipleTranslation(ste.getKey()));
         }
-        return r;
     }
 
     @Override
@@ -172,19 +156,4 @@ public class TestingProject extends NotLoadedProject implements IProject {
             setProjectRoot(tmpDir.toString());
         }
     }
-
-    public static class TestingAllTranslations extends IProject.AllTranslations {
-        public void setAlternativeTranslation(TMXEntry entry) {
-            alternativeTranslation = entry;
-        }
-
-        public void setDefaultTranslation(TMXEntry entry) {
-            defaultTranslation = entry;
-        }
-
-        public void setCurrentTranslation(TMXEntry entry) {
-            currentTranslation = entry;
-        }
-    }
-
 }

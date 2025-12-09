@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
 import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -111,6 +111,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.filters.Filters;
 
+import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
+
 /**
  * Loaded project implementation. Only translation could be changed after
  * project will be loaded and set by Core.setProject.
@@ -144,7 +146,7 @@ public class RealProject implements IProject {
      * Status required for execute prepare/rebase/commit in the correct order.
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
-    private volatile @Nullable RebaseAndCommit.Prepared tmxPrepared;
+    private volatile RebaseAndCommit.Prepared tmxPrepared;
     private volatile RebaseAndCommit.Prepared glossaryPrepared;
 
     private boolean isOnlineMode;
@@ -203,14 +205,6 @@ public class RealProject implements IProject {
 
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
-
-    /** This instance returned if translation not exist. */
-    private static final TMXEntry EMPTY_TRANSLATION;
-    static {
-        PrepareTMXEntry empty = new PrepareTMXEntry();
-        empty.source = "";
-        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
-    }
 
     private final boolean allowTranslationEqualToSource = Preferences
             .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
@@ -1258,10 +1252,8 @@ public class RealProject implements IProject {
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            FileInfo fi = new FileInfo();
-            fi.filePath = filepath;
-
             try {
+                FileInfo fi = new FileInfo(filepath);
                 loadFilesCallback.setCurrentFile(fi);
                 IFilter filter = fm.loadFile(config.getSourceRoot() + filepath, new FilterContext(config),
                         loadFilesCallback);
@@ -1287,7 +1279,7 @@ public class RealProject implements IProject {
 
         findNonUniqueSegments();
 
-        if (errorSrcList.size() > 0) {
+        if (!errorSrcList.isEmpty()) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_SKIP_FILES");
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
@@ -1509,25 +1501,10 @@ public class RealProject implements IProject {
     }
 
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        AllTranslations r = new AllTranslations();
         synchronized (projectTMX) {
-            r.defaultTranslation = projectTMX.getDefaultTranslation(ste.getSrcText());
-            r.alternativeTranslation = projectTMX.getMultipleTranslation(ste.getKey());
-            if (r.alternativeTranslation != null) {
-                r.currentTranslation = r.alternativeTranslation;
-            } else if (r.defaultTranslation != null) {
-                r.currentTranslation = r.defaultTranslation;
-            } else {
-                r.currentTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.defaultTranslation == null) {
-                r.defaultTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.alternativeTranslation == null) {
-                r.alternativeTranslation = EMPTY_TRANSLATION;
-            }
+            return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()),
+                    projectTMX.getMultipleTranslation(ste.getKey()));
         }
-        return r;
     }
 
     /**
@@ -1561,15 +1538,15 @@ public class RealProject implements IProject {
 
         synchronized (projectTMX) {
             AllTranslations current = getAllTranslations(entry);
-            boolean wasAlternative = current.alternativeTranslation.isTranslated();
+            boolean wasAlternative = current.getAlternativeTranslation().isTranslated();
             if (defaultTranslation) {
-                if (!current.defaultTranslation.equals(previous.defaultTranslation)) {
+                if (!current.getDefaultTranslation().equals(previous.getDefaultTranslation())) {
                     throw new OptimisticLockingFail(previous.getDefaultTranslation().translation,
                             current.getDefaultTranslation().translation, current);
                 }
                 if (wasAlternative) {
                     // alternative -> default
-                    if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                    if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                         throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                                 current.getAlternativeTranslation().translation, current);
                     }
@@ -1578,7 +1555,7 @@ public class RealProject implements IProject {
                 }
             } else {
                 // new is alternative translation
-                if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                     throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                             current.getAlternativeTranslation().translation, current);
                 }

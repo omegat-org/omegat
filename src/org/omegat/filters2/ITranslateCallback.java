@@ -25,7 +25,7 @@
 
 package org.omegat.filters2;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Callback for translate files.
@@ -34,8 +34,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface ITranslateCallback {
     /**
-     * Set current pass number
-     *
+     * Set current pass number.
+     * <p>
      * Any filter called in one-pass mode by default. But if it require second pass for support prev/next
      * segments, it can set flag 'needSecondPass'.
      * @param pass The current path number, i.e., 1 or 2
@@ -59,7 +59,7 @@ public interface ITranslateCallback {
      *            path of segment
      * @return translation or null if translation not exist
      */
-    @Nullable String getTranslation(@Nullable String id, String source, String path);
+    @Nullable String getTranslation(@Nullable String id, String source, @Nullable String path);
 
     /**
      * Old call without path, for compatibility

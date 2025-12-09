@@ -285,8 +285,10 @@ public class CalcMatchStatistics extends LongProcessThread {
      */
     Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
         // If we have more than one available processor then we do the
-        // calculation in parallel.
-        boolean doParallel = Runtime.getRuntime().availableProcessors() > 1;
+        // calculation in parallel unless explicitly disabled via system property.
+        // Property: omegat.stats.parallel = true|false (default: true)
+        boolean parallelAllowed = Boolean.parseBoolean(System.getProperty("omegat.stats.parallel", "true"));
+        boolean doParallel = parallelAllowed && Runtime.getRuntime().availableProcessors() > 1;
         Stream<SourceTextEntry> stream = doParallel ? untranslatedEntries.parallelStream()
                 : untranslatedEntries.stream();
         long startTime = System.currentTimeMillis();

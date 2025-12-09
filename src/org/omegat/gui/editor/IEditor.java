@@ -32,6 +32,7 @@ package org.omegat.gui.editor;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
@@ -65,8 +66,9 @@ public interface IEditor {
      * Storage for caret position and selection.
      */
     class CaretPosition {
-        Integer position;
-        Integer selectionStart, selectionEnd;
+        @Nullable Integer position;
+        @Nullable Integer selectionStart;
+        @Nullable Integer selectionEnd;
 
         public CaretPosition(int position) {
             this.position = position;
@@ -105,7 +107,7 @@ public interface IEditor {
      * <p>
      * Can be called from any thread.
      */
-    String getCurrentFile();
+    @Nullable String getCurrentFile();
 
     /**
      * Get the relative path (under <code>target</code>) of the target file
@@ -115,14 +117,14 @@ public interface IEditor {
      * <p>
      * Can be called from any thread.
      */
-    String getCurrentTargetFile();
+    @Nullable String getCurrentTargetFile();
 
     /**
      * Get current active entry.
      *
      * Can be called from any thread.
      */
-    SourceTextEntry getCurrentEntry();
+    @Nullable SourceTextEntry getCurrentEntry();
 
     /**
      * Get current active entry number.

@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -195,7 +196,7 @@ public class MoodlePHPFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             MoodlePHPOptionsDialog dialog = new MoodlePHPOptionsDialog(parent, config);
             dialog.setVisible(true);

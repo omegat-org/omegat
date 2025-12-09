@@ -15,8 +15,12 @@
 
     <para>ドロップダウンの一覧から原文言語と訳文言語を選択するか、手動で入力します。</para>
 
-	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
-	
+	<para>OmegaTは便利な2文字の言語コードリストを提供しますが、適切なフィールドに任意のコードを入力できます。</para>
+
+	<warning>
+	  <para>OmegaTは入力した言語コードの有効性をチェックしません。2つの言語コードが<emphasis>異なる</emphasis>こと、OmegaTの使用に適していること、そしてそのような言語コードを必要とする他のすべての場所が、ここで割り当てたものと一致していることを確認してください。</para>
+	</warning>
+
 	<para>言語コードは、 OmegaTの様々な箇所で使用されています：</para>
 	
 	<itemizedlist>
@@ -35,12 +39,17 @@
 	  <listitem>
 		<para> <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> 設定などで規則集を選択して、文法エラーや綴りの間違いをチェックしたり、</para>
 	  </listitem>
+
+	  <listitem>
+		<para>プロジェクトが作成するTMXファイルで使用される言語を指定すること(標準準拠のためには、TMXには<ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink>言語コードを使用しなければなりません)。</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>などなどです。</para>
 
 	<warning>
-	  <para>正しい言語コードを入力し、そのようなコードを必要とする他のすべての場所が、ここで割り当てたものと正確に一致することを確認してください。言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</para>
+	  <para>言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</para>
 	</warning>
 
 	  

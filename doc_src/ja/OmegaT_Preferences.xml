@@ -214,7 +214,21 @@
           <para>用語集の用語に複数の定義があったときに、同じ行に一度に表示します。</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>用語の原文の長さ順に並べ替える</option></term>
+		  <listitem>
+			  <para>一部の用語集項目がソース用語テキストで類似しており、そのうちの1つに別の用語テキストが含まれている場合は、ソーステキストの長さでソートします。</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>用語の原文の長さ順に並べ替える</option></term>
+			<listitem>
+				<para>用語集の項目に複数の定義がある場合は、定義テキストの長さで並べ替えます。</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
@@ -345,7 +359,7 @@
 
 	  <example id="dialogs.preferences.segmentation.setup.scope.example">
 		<title id="dialogs.preferences.segmentation.setup.scope.example.title">日本語の規則</title>
-		<para>日本語からの翻訳では、<emphasis></emphasis><code>JA.*</code>パターンに関連付けられた規則集と<code>.*</code>に関連付けられた汎用の規則のみが考慮されます。</para>
+		<para>日本語からの翻訳では、<code>JA.*</code>パターンに関連付けられた規則集と<code>.*</code>に関連付けられた汎用の規則<emphasis>のみ</emphasis>が考慮されます。</para>
 	  </example>
 
 	  <para>ダイアログの上半分にある言語の構成例をクリックすると、関連付けられたルールのリストがダイアログの下半分に表示されます。</para>
@@ -462,7 +476,7 @@
 	  <varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
 		<term id="dialog.preferences.spellchecker.dictionary.folder.title"><option>スペルチェック辞書の場所</option></term>
 		<listitem>
-		  <para>OmegaTがスペルチェック辞書をインストールして検索するフォルダー。通常は<link linkend="configuration.folder" endterm="configuration.folder.title"/>フォルダーにあります。</para>
+		  <para>OmegaTが綴り確認用辞書をインストールして検索するフォルダー。通常は<link linkend="configuration.folder" endterm="configuration.folder.title"/>フォルダーにあります。</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -471,7 +485,7 @@
 		<listitem>
 		  <para>上記フォルダーに現存する辞書の一覧があります</para>
 
-		  <para>何も表示されない場合は、スペルチェック辞書がまだインストールされていないか、プロジェクトでスペルチェックフォルダーを含まない特定の設定辞書が使用されていることを意味します。</para>
+		  <para>何も表示されない場合は、綴り確認用辞書がまだインストールされていないか、プロジェクトで綴り確認用辞書を含まない特定の設定が使用されていることを意味します。</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -807,7 +821,7 @@
 	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
 		<term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><option>カスタムタグ</option></term>
 		<listitem>
-		  <para>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<literal></literal>(正規表現&lt;の「OR」に相当)でグループを区切ります。</para>
+		  <para>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<literal>|</literal>(正規表現&lt;の「OR」に相当)でグループを区切ります。</para>
 
 		  <para>たとえば、<userinput>\d+</userinput>を使用すると、すべての数値をタグとして扱うことができ、変換時に数値が誤って変更されていないことを確認できます。</para>
 

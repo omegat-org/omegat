@@ -378,9 +378,11 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
-          <para>このファイルには、プロジェクト固有の分節化規則が含まれています。</para>
+          <para>このファイルには、プロジェクト固有の分節化規則が<ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>形式で含まれています。<note><para>もし以前のバージョンの<filename>segmentation.conf</filename>ファイルが存在すれば、OmegaTは自動的に変換します。</para>
+			</note>
+		  </para>
         </listitem>
       </varlistentry>
 

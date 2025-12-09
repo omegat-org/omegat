@@ -11,13 +11,13 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>標準版:OmegaT 6.0.0</term>
+	  <term>標準版: OmegaT 6.0.2</term>
 	  <listitem>
 		<para>デイリーユースにおすすめのエディションです。</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>開発版:OmegaT Nightly</term>
+	  <term>開発版:OmegaT Weekly</term>
 	  <listitem>
 		<para>この版は、新しいコードがOmegaTに追加されるたびに自動的に生成されます。テスト目的で使用されます。</para>
 	  </listitem>
@@ -27,7 +27,7 @@
   <para>ファイルは<ulink url="https://omegat.org/download">https://omegat.org</ulink>から直接ダウンロードできます。</para>
 
   <note>
-	<para>OmegaT 6.0.0 の実行には、Java 11 Runtime Environment（JRE) が必要です。</para>
+	<para>OmegaT 6.0.2 の実行には、Java 11 Runtime Environment（JRE) が必要です。</para>
 
 	<para>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 11 Runtime Environmentに依存します。</para>
 
@@ -59,7 +59,7 @@
 
       <para>スクリプトを実行するには、<filename>sudo</filename>パスワードを入力する必要があります。</para>
 
-      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<filename>/opt/omegat/OmegaT_6.0.0</filename>にプログラムをインストールし、デフォルトバージョンとして設定します(<filename>/opt/omegat/OmegaT-default</filename>)。</para>
+      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。If there isn’t one, it installs the program in <filename>/opt/omegat/OmegaT_6.0.1</filename> and sets it as the default version (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</para>

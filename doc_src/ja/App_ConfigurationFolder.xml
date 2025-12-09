@@ -143,9 +143,11 @@
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</term>
 	  <listitem>
-		<para>これは、分節化ルールをカスタマイズするためのファイルです。詳細については、<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>環境設定を参照してください。</para>
+		<para>これは、分節化ルールをカスタマイズするための<ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX2.0</ulink>フォーマットのファイルです。詳細の<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>環境設定を参照してください。<note><para>もし以前のバージョンの<filename>segmentation.conf</filename>ファイルが存在すれば、OmegaTは自動的に変換します。</para>
+		  </note>
+		</para>
 	  </listitem>
 	</varlistentry>
 	

@@ -166,16 +166,20 @@
 
 	<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/>を利用して、空のフォルダーか、 プロジェクト名のあたらしいフォルダーを作成します。</para>
 
+	<warning>
+	  <para>OmegaTはプロジェクトを作成するフォルダを修正できる必要があります。共有ドライブにプロジェクトをインストールしたい場合は、ドライブの上部にインストールせず、プロジェクトをインストールするフォルダを作成してください。</para>
+	</warning>
+
     <para>OmegaTプロジェクトは、一連のフォルダーからなり、すべてのデフォルトのプロジェクト資材がそこに格納されます。</para>
 
     <para>プロジェクトに名前をつけたら、 <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログが開きます。</para>
 
 	<para>そのダイアログで原文ファイルと訳文ファイルの言語を選択し、オプション設定を調整して<guibutton>確定</guibutton>をクリックします。</para>
 
-	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
+	<para>OmegaTは便利な2文字の言語コードリストを提供しますが、適切なフィールドに任意のコードを入力できます。</para>
 
 	<warning>
-	  <para>正しい言語コードを入力し、言語コードを必要とする他のすべての場所で、ここで割り当てたコードと一致していることを確認してください。詳細は<link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>項をご覧ください。</para>
+	  <para>OmegaTは入力した言語コードの有効性をチェックしません。2つの言語コードが<emphasis>異なる</emphasis>こと、OmegaTの使用に適していること、そしてそのような言語コードを必要とする他のすべての場所が、ここで割り当てたものと一致していることを確認してください。詳細は<link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>項をご覧ください。</para>
 	</warning>
 	
     <para> プロジェクトを作成したあとも、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>を使用すれば、いつでもこのダイアログに戻ってくることができます。</para>
@@ -499,7 +503,7 @@
 
 	  <para>2～5の一致の1つがより適切な場合は、<keycombo><keycap>C</keycap><keycap>2</keycap></keycombo>(または他の番号)で選択して、<keycombo><keycap>C</keycap><keycap>I</keycap></keycombo>で候補を挿入(Insert)できます。</para>
 
-	  <para>一部の分節で、あとで修正が必要になりました。そこで <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>N</keycap></keycombo>を使ってメモ帳に移動し、自分のために メモを書きます。そして、 <keycombo><keycap>A</keycap><keycap>C</keycap><keycap>E</keycap></keycombo>を使って編集ウィンドウに戻ります。</para>
+	  <para>一部の分節で、あとで修正が必要になりました。そこで <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo>を使ってメモ帳に移動し、自分のために メモを書きます。そして、 <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>を使って編集ウィンドウに戻ります。</para>
 	  
 	  <para>現在の対象ファイルの終わりに近づくまでに<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>を1回または2回使用して、以前の変換からすでに自動的に入力された参考訳文をもとに、現在の訳文を改善した訳文に置き換えました。</para>
 

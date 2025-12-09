@@ -5,13 +5,11 @@
 
   <para>チームプロジェクトでは、プロジェクトメンバー間の同期メカニズムを使用します。</para>
 
-  <para>OmegaTチームプロジェクトがサーバにインストールされると、管理者は、プロジェクトの場所を示すURLまたは<filename>OmegaT.project</filename>ファイルなど、プロジェクトにアクセスするために必要な情報をメンバーに送信します。</para>
+  <para>OmegaTチームプロジェクトがサーバにインストールされると、プロジェクト管理者は、プロジェクトの場所を示すURLまたは<filename>OmegaT.project</filename>ファイルなど、プロジェクトにアクセスするために必要な情報をメンバーに送信します。</para>
 
   <para>ダウンロードされた後は、プロジェクトは自分の環境で開始されて、サーバと同期するようになります。</para>
 
   <para>リポジトリ認証情報は<link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/>ファイルに保存され、必要に応じて<link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>環境設定で削除できます。</para>
-
-  <para>同期はデフォルトではで3分ごとに行われるため、同じタイミングで作業していると、別のメンバーによって既に翻訳され、まだ同期されて取得されていない分節を、同時に翻訳したり修正することがあります。その場合、どちらの訳文を使うのか、選択する必要があります。</para>
 
   <para>チームのメンバーは、ファイルの翻訳とレビューを交代で行うこともできます。検索機能では、例えば、特定の人が翻訳したコンテンツや、特定の時間の後または前に翻訳されたコンテンツを編集ウィンドウにフィルターすることができます。</para>
   
@@ -25,7 +23,7 @@
 
 			<para><link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/>を使用して、<guilabel>チームプロジェクトをダウンロード</guilabel>ダイアログを表示します。</para>
 
-			<para>ダイアログの上部にある<guilabel>リポジトリURL:</guilabel>欄に、チームプロジェクト管理者から提供されたURLを入力し、<guilabel>新規ローカルプロジェクトフォルダー:</guilabel>欄に、プロジェクトのフォルダーを指定します。プロジェクト管理者が、プロジェクト特有のブランチ名を指示していない限り、<guilabel>標準ブランチ</guilabel>設定はオンのままにします。</para>
+			<para>ダイアログの上部にある<guilabel>リポジトリURL:</guilabel>欄に、プロジェクトマネージャから提供されたURLを入力し、<guilabel>新規ローカルプロジェクトフォルダー:</guilabel>欄に、プロジェクトのフォルダーを指定します。プロジェクトマネージャが、プロジェクト特有のブランチ名を指示していない限り、<guilabel>標準ブランチ</guilabel>設定はオンのままにします。</para>
 		  </listitem>
 
 		  <listitem>
@@ -40,9 +38,10 @@
 
 		  <para>サーバがユーザー名/パスワード認証に依存している場合に、プロジェクトを最初にダウンロードするときか、またはプロセスの後半でユーザー名とパスワードを要求された際に、<guilabel>認証</guilabel>ダイアログを表示して入力を依頼します。明示的に削除しない限り、OmegaTはその特定のプロジェクトの認証情報を記憶します。詳細の<link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>環境設定を参照してください。</para>
 
+		  <para>セキュリティを強化するため、一部のサーバーは外部プロセスにパスワードの代わりに別のアクセストークンを使って接続することを求めています。パスワードが機能しない場合はサーバーのドキュメントを確認してください。</para>
 		  <para>サーバがSSH認証を使用している場合は、プロジェクトをダウンロードする前に、そのサーバに接続できるようにユーザのSSH設定(通常ホームディレクトの.ssh/configファイル)を更新してください。そうしないと、認証エラーが発生し、プロジェクトは読み込みに失敗します。</para>
 
-		  <para>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</para>
+		  <para>同じサーバーで複数のプロジェクトを使用する場合、そのサーバーに対して資格情報の入力は一度だけ求められます。</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -66,9 +65,47 @@
         <para>同期の際には、<filename>omegat.project</filename>(下記参照)を除き、他のすべてのローカルファイルはリモートOmegaTのバージョンで上書きされます。</para>
 
         <para>OmegaTチームプロジェクトを開いたり、再ロードしたり、閉じたり、保存したりすると、チームプロジェクトが同期されます。つまり、自動保存機能は、<link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>設定で指定された時間間隔で、サーバのバージョンと同期させます。</para>
+
+        <warning>
+          <para>メンバーが必ずしも同時にプロジェクトを同期しているわけではないため、ローカル翻訳のある分節に、サーバー上で他のメンバーと異なる翻訳が存在することもあります。プロジェクトを同期すると、OmegaTはローカル版と修正版をマッチングし、どの翻訳バージョンを保持するか選ぶように言われます。</para>
+        </warning>
       </listitem>
     </varlistentry>
 
+    <varlistentry>
+      <term>翻訳の競合の解決</term>
+
+      <listitem>
+        <para>OmegaTがローカル翻訳とリモートメモリの違いを自動的に解決できない場合、<guilabel>マージ</guilabel>ダイアログを表示します。</para>
+
+        <para>ダイアログでは翻訳された分節の3つのバージョンから選択できます。<variablelist>
+          <varlistentry>
+            <term><guilabel>自分の変更</guilabel></term>
+            <listitem><para>結果はあなたのローカルバージョンで、まだサーバーに送って共有されていません。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>サーバー（変更前）</guilabel></term>
+            <listitem><para>これは「ベース」バージョンであり、ここから、さまざまなバージョンが生まれました。</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>サーバー（変更後）</guilabel></term>
+            <listitem><para>これは、あなたが最後にこのプロジェクトに携わって以来、他のメンバーと共有されたバージョンです。</para></listitem>
+          </varlistentry>
+        </variablelist>
+        </para>
+
+        <para>表示される各分節ごとに適切な翻訳を一つずつ選択できます。また、特定のバージョンの「すべての」翻訳を選択することも可能です。</para>
+
+        <para><guibutton>リストビュー</guibutton>と<guibutton>詳細ビュー</guibutton>は、分節の別ビューを表示または非表示または表示できます。</para>
+
+        <para>翻訳を選択したら、<guibutton>「完了」</guibutton>をクリックすると、選択した翻訳をサーバーに保存し、他のチームメンバーと共有します。</para>
+
+        <note>
+          <para>チームメンバーに翻訳の異なる部分を同時に担当させ、翻訳の競合を減らすようにしましょう。</para>
+        </note>
+      </listitem>
+    </varlistentry>
+    
     <varlistentry>
       <term>チームプロジェクトの設定</term>
 
@@ -81,7 +118,7 @@
           <listitem>
             <para><emphasis>基本プロジェクト構成:</emphasis>原文ファイル、原文言語、訳文言語、トークナイザー、およびプロジェクトフォルダー構造の持ち方。</para>
 
-			<para>チームプロジェクトでは、ローカルのプロジェクトの基本プロジェクト構成は、プロジェクト管理者が最初に設定したサーバの設定によって常に上書きされます。</para>
+			<para>チームプロジェクトでは、ローカルのプロジェクトの基本プロジェクト構成は、プロジェクトマネージャが最初に設定したサーバの設定によって常に上書きされます。</para>
           </listitem>
 
           <listitem>
@@ -105,7 +142,7 @@
               </listitem>
 
               <listitem>
-                <para>プロジェクト管理者から提供された<filename>OmegaT.project</filename>ファイルを使用してリモートプロジェクトを最初にダウンロードする時は、OmegaTはそのファイル内のマッピング(定義されている場合)を使用します。</para>
+                <para>プロジェクトマネージャから提供された<filename>OmegaT.project</filename>ファイルを使用してリモートプロジェクトを最初にダウンロードする時は、OmegaTはそのファイル内のマッピング(定義されている場合)を使用します。</para>
               </listitem>
 
               <listitem>
@@ -135,7 +172,7 @@
       <term>訳文ファイル</term>
 
       <listitem>
-        <para>訳文ファイルを生成した後、プロジェクト管理者から要求された場合は、<link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/>を使用してサーバに追加します。</para>
+        <para>訳文ファイルを生成した後、プロジェクトマネージャから要求された場合は、<link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/>を使用してサーバに追加します。ターゲット・ファイルをコミットすると、統計ファイルもサーバーにアップロードされます。</para>
       </listitem>
     </varlistentry>
 

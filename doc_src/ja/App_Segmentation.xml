@@ -101,28 +101,28 @@
 		</thead>
 		<tbody>
 		  <row>
-			<entry>例外ルール、チェックボックスがオフ、リストの上位</entry>
+			<entry>改節を禁止するルールは、<guilabel>分割する/しない</guilabel>チェックボックスにチェックを入れずに、リストの上位におきます。</entry>
 			<entry>Ms.の後に分節化しない</entry>
 			<entry align="center">Ms\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Msの後にピリオドと空白が続きます。</entry>
 		  </row>
 		  <row>
-			<entry>例外ルール、チェックボックスがオフ、リストの上位</entry>
+			<entry>改節を禁止するルールは、<guilabel>分割する/しない</guilabel>チェックボックスにチェックを入れずに、リストの上位におきます。</entry>
 			<entry>分節を表さない改行のあるExcelセル</entry>
 			<entry align="center">\n</entry>
-			<entry align="center"></entry>
+			<entry align="center">.</entry>
 			<entry>改行、その後に任意の文字。</entry>
 		  </row>
 		  <row>
-			<entry>リストの下にあるチェックボックスをオンにした分節規則</entry>
+			<entry>改節する規則は、<guilabel>［分割する/しない］&gt;</guilabel>チェックボックスにチェックを入れ、リストの下位に置きます。</entry>
 			<entry>新しい分節は、ピリオドの後にスペース、タブ、またはその他の空白が続いた後に開始します。</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>
 			<entry>空白が後に続くピリオド</entry>
 		  </row>
 		  <row>
-			<entry>リストの下にあるチェックボックスをオンにした分節規則</entry>
+			<entry>改節する規則は、<guilabel>［分割する/しない］&gt;</guilabel>チェックボックスにチェックを入れ、リストの下位に置きます。</entry>
 			<entry>「。」の後に新しい分節を開始します。</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>

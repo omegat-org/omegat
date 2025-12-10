@@ -42,7 +42,7 @@ public class ExternalServiceConnectorPreferencesController extends BasePreferenc
 
     @Override
     public String toString() {
-        return "CMS";
+        return "External Service Connector";
     }
 
     @Override

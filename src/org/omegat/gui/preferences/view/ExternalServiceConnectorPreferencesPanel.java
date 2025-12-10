@@ -47,7 +47,7 @@ import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.core.data.CoreState;
 
 /**
- * Preferences view panel for External CMS settings. Users can manage a list of
+ * Preferences view panel for External Service settings. Users can manage a list of
  * target projects per connector with a base URL and optional default page. This
  * panel is embedded by {@link ExternalServiceConnectorPreferencesController}.
  */
@@ -163,7 +163,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         }
     }
 
-    /** Simple modal editor dialog for a CMS target row. */
+    /** Simple modal editor dialog for a External Service Integration target row. */
     class CmsTargetEditor {
         private final JDialog dialog;
         private final JComboBox<IExternalServiceConnector> typeCombo;
@@ -174,7 +174,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
 
         CmsTargetEditor(ServiceTarget initial) {
             dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
-                    "Edit CMS Target", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+                    "Edit External Service Integration", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
             java.awt.GridBagConstraints gc = new java.awt.GridBagConstraints();
             gc.insets = new java.awt.Insets(4, 4, 4, 4);

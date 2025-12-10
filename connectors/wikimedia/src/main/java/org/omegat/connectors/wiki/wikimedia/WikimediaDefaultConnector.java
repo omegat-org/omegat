@@ -55,7 +55,11 @@ public class WikimediaDefaultConnector extends AbstractWikimediaConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String page = httpGet(getResourceUrl(target.getBaseUrl() + "index.php?tilte=" + resourceId));
+        var base = target.getBaseUrl();
+        if (!base.endsWith("/")) {
+            base += "/";
+        }
+        String page = httpGet(getResourceUrl(base + "index.php?tilte=" + resourceId));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

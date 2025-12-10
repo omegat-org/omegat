@@ -55,7 +55,11 @@ public class WikimediaCleanUrlConnector extends AbstractWikimediaConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String page = httpGet(getResourceUrl(target.getBaseUrl() + resourceId));
+        String base = target.getBaseUrl();
+        if (!base.endsWith("/")) {
+            base += "/";
+        }
+        String page = httpGet(getResourceUrl(base + resourceId));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

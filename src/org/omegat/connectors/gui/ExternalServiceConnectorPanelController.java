@@ -34,12 +34,15 @@ import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.core.Core;
 import org.omegat.core.data.CoreState;
+import org.omegat.gui.dialogs.PreferencesDialog;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 import javax.swing.JDialog;
 import java.awt.Frame;
+import java.awt.Window;
 import java.util.List;
 
 public class ExternalServiceConnectorPanelController {
@@ -84,8 +87,20 @@ public class ExternalServiceConnectorPanelController {
         dialog.setLocationRelativeTo(owner);
 
         panel.addSearchButtonActionListener(e -> openSearchDialog());
+        panel.addDefineTargetButtonActionListener(e -> openPreferenceDialog());
         panel.getLaunchButton().addActionListener(e -> retrieveResource(dialog));
+
+        StaticUIUtils.setEscapeClosable(dialog);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        panel.cancelButton.addActionListener(e -> dialog.dispose());
+
         dialog.setVisible(true);
+    }
+    
+    private void openPreferenceDialog() {
+        ExternalServiceConnectorCustomizer customizer = new ExternalServiceConnectorCustomizer();
+        customizer.show(Core.getMainWindow().getApplicationFrame());
+        panel.loadTargetsFromPrefs();
     }
 
     private void retrieveResource(JDialog dialog) {
@@ -115,6 +130,19 @@ public class ExternalServiceConnectorPanelController {
             Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
         } finally {
             dialog.dispose();
+        }
+    }
+
+    public static class ExternalServiceConnectorCustomizer {
+        private final PreferencesDialog dialog;
+
+        public ExternalServiceConnectorCustomizer() {
+            ExternalServiceConnectorPreferencesController view = new ExternalServiceConnectorPreferencesController();
+            this.dialog = new PreferencesDialog(view);
+        }
+
+        public boolean show(Window parent) {
+            return dialog.show(parent);
         }
     }
 }

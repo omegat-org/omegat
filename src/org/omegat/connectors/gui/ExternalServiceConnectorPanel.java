@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -52,6 +53,7 @@ import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
  * Modal panel for External CMS import. Updated to use configured targets and
@@ -65,6 +67,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
     private final JTextField urlField;
     private final JButton launchButton;
     private final JButton searchPageButton;
+    private final JButton defineTargetButton;
+    final JButton cancelButton;
 
     public ExternalServiceConnectorPanel() {
         super(new BorderLayout());
@@ -77,9 +81,15 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
         targetCombo = new JComboBox<>();
         pageField = new JTextField(20);
-        searchPageButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_SEARCH"));
         urlField = new JTextField(30);
-        launchButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_BUTTON"));
+        searchPageButton = new JButton();
+        Mnemonics.setLocalizedText(searchPageButton, OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_SEARCH"));
+        launchButton = new JButton();
+        Mnemonics.setLocalizedText(launchButton, OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_BUTTON"));
+        defineTargetButton = new JButton();
+        Mnemonics.setLocalizedText(defineTargetButton, OStrings.getString("TF_EXTERNAL_SERVICE_DEFINE_TARGET"));
+        cancelButton = new JButton();
+        Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
 
         int row = 0;
         // Title
@@ -93,6 +103,9 @@ public class ExternalServiceConnectorPanel extends JPanel {
         gc.gridy = row;
         gc.weightx = 1;
         form.add(targetCombo, gc);
+        gc.gridx = 2;
+        gc.gridy = row;
+        form.add(defineTargetButton, gc);
         gc.weightx = 0;
         row++;
         // Page row
@@ -122,18 +135,25 @@ public class ExternalServiceConnectorPanel extends JPanel {
         gc.gridx = 1;
         gc.gridy = row;
         form.add(launchButton, gc);
+        gc.gridx = 2;
+        gc.gridy = row;
+        form.add(cancelButton, gc);
 
         add(form, BorderLayout.CENTER);
         loadTargetsFromPrefs();
+        setTargetRenderer();
     }
 
-    private void loadTargetsFromPrefs() {
+    void loadTargetsFromPrefs() {
         List<ServiceTarget> targets = ExternalConnectorXmlStore.loadTargets();
         targetCombo.setModel(new DefaultComboBoxModel<>(targets.toArray(new ServiceTarget[0])));
+    }
+
+    private void setTargetRenderer() {
         targetCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                    boolean isSelected, boolean cellHasFocus) {
+                                                          boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected,
                         cellHasFocus);
                 if (value instanceof ServiceTarget) {
@@ -149,7 +169,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
         JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"),
                 true);
         JTextField filter = new JTextField(20);
-        javax.swing.DefaultListModel<ExternalResource> listModel = new javax.swing.DefaultListModel<>();
+        DefaultListModel<ExternalResource> listModel = new DefaultListModel<>();
         for (ExternalResource r : resources) {
             listModel.addElement(r);
         }
@@ -224,5 +244,9 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
     public void addSearchButtonActionListener(ActionListener l) {
         searchPageButton.addActionListener(l);
+    }
+
+    public void addDefineTargetButtonActionListener(ActionListener l) {
+        defineTargetButton.addActionListener(l);
     }
 }

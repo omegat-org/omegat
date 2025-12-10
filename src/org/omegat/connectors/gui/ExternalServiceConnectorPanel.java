@@ -64,10 +64,10 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
     private final JComboBox<ServiceTarget> targetCombo;
     private final JTextField pageField;
-    private final JTextField urlField;
     private final JButton launchButton;
-    private final JButton searchPageButton;
     private final JButton defineTargetButton;
+    final JTextField urlField;
+    final JButton searchPageButton;
     final JButton cancelButton;
 
     public ExternalServiceConnectorPanel() {
@@ -240,6 +240,10 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
     public @Nullable ServiceTarget getSelectedTarget() {
         return (ServiceTarget) targetCombo.getSelectedItem();
+    }
+
+    public void addTargetActionListener(ActionListener l) {
+        targetCombo.addActionListener(l);
     }
 
     public void addSearchButtonActionListener(ActionListener l) {

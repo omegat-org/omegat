@@ -74,5 +74,6 @@ include("machinetranslators:apertium",
         "theme",
         "tipoftheday",
         "connectors:wikimedia",
-        "connectors:trac"
+        "connectors:trac",
+        "connectors:translatewiki"
 )

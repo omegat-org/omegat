@@ -39,6 +39,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.util.EntityUtils;
+import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorException;
@@ -63,7 +64,12 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     public abstract String getPreferenceName();
 
     @Override
-    public List<ExternalResource> listResources(ServiceTarget target) {
+    public @Nullable String getDefaultBaseUrl() {
+        return null;
+    }
+
+    @Override
+    public List<ExternalResource> listResources(ServiceTarget target, String keyword) throws ConnectorException {
         return Collections.emptyList();
     }
 

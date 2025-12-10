@@ -38,8 +38,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class TracWikiConnector extends AbstractExternalServiceConnector {
@@ -77,6 +75,11 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     @Override
     public String getFileExtension() {
         return "txt";
+    }
+
+    @Override
+    public boolean allowCustomUrl() {
+        return true;
     }
 
     @Override

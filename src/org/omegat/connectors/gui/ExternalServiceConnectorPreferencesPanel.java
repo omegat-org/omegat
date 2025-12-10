@@ -155,9 +155,9 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             case 1:
                 return t.getProjectId();
             case 2:
-                return t.getBaseUrl() == null ? "" : t.getBaseUrl();
+                return t.getBaseUrl();
             case 3:
-                return t.getDefaultPage() == null ? "" : t.getDefaultPage();
+                return t.getDefaultPage();
             default:
                 return "";
             }
@@ -259,7 +259,12 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 result = null;
                 dialog.dispose();
             });
-
+            typeCombo.addActionListener(e -> {
+                IExternalServiceConnector connector = (IExternalServiceConnector) typeCombo.getSelectedItem();
+                if (connector != null && connector.getDefaultBaseUrl() != null) {
+                    baseUrlField.setText(connector.getDefaultBaseUrl());
+                }
+            });
             JPanel root = new JPanel(new BorderLayout());
             root.add(panel, BorderLayout.CENTER);
             root.add(buttons, BorderLayout.SOUTH);
@@ -282,6 +287,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             }
         }
 
+        @Nullable
         ServiceTarget showDialog() {
             dialog.setVisible(true);
             return result;

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.ServiceTarget;
 
@@ -45,12 +46,20 @@ public interface IExternalServiceConnector {
 
     String getFileExtension();
 
-    List<ExternalResource> listResources(ServiceTarget target) throws ConnectorException;
+    @Nullable
+    String getDefaultBaseUrl();
+
+    default boolean allowCustomUrl() {
+        return false;
+    }
+
+    List<ExternalResource> listResources(ServiceTarget target, String keyword) throws ConnectorException;
 
     InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException;
 
     InputStream fetchResource(String url) throws ConnectorException;
 
+    @SuppressWarnings("unused")
     void pushTranslation(String projectId, String resourceId, InputStream translated) throws ConnectorException;
 
     default boolean supports(ConnectorCapability c) {

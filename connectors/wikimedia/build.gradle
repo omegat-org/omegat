@@ -5,7 +5,7 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar', '**/*jspecify*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)

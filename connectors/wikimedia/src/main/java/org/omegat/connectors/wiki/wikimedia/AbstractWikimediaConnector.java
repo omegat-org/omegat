@@ -52,6 +52,8 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
         // do nothing
     }
 
+    private static final String DEFAULT_BASE_URL = "https://en.wikipedia.org/wiki/";
+
     @Override
     public Set<ConnectorCapability> getCapabilities() {
         return Set.of(ConnectorCapability.READ);
@@ -60,6 +62,16 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
     @Override
     public String getFileExtension() {
         return "UTF8";
+    }
+
+    @Override
+    public String getDefaultBaseUrl() {
+        return DEFAULT_BASE_URL;
+    }
+
+    @Override
+    public boolean allowCustomUrl() {
+        return true;
     }
 
     @Override

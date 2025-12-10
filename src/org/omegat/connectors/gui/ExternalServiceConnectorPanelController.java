@@ -71,8 +71,12 @@ public class ExternalServiceConnectorPanelController {
         if (!connector.supports(ConnectorCapability.LIST)) {
             return;
         }
+        var keyword = panel.getResourceId();
+        if (keyword == null || keyword.isBlank()) {
+            return;
+        }
         try {
-            List<ExternalResource> resources = connector.listResources(target);
+            List<ExternalResource> resources = connector.listResources(target, keyword);
             panel.openSearchDialog(resources);
         } catch (ConnectorException ex) {
             Log.log(ex);
@@ -86,6 +90,8 @@ public class ExternalServiceConnectorPanelController {
         dialog.pack();
         dialog.setLocationRelativeTo(owner);
 
+        activateFields();
+        panel.addTargetActionListener(e -> activateFields());
         panel.addSearchButtonActionListener(e -> openSearchDialog());
         panel.addDefineTargetButtonActionListener(e -> openPreferenceDialog());
         panel.getLaunchButton().addActionListener(e -> retrieveResource(dialog));
@@ -95,6 +101,15 @@ public class ExternalServiceConnectorPanelController {
         panel.cancelButton.addActionListener(e -> dialog.dispose());
 
         dialog.setVisible(true);
+    }
+
+    private void activateFields() {
+        IExternalServiceConnector connector = getSelectedConnector();
+        if (connector == null) {
+            return;
+        }
+        panel.searchPageButton.setEnabled(connector.supports(ConnectorCapability.LIST));
+        panel.urlField.setEnabled(connector.allowCustomUrl());
     }
     
     private void openPreferenceDialog() {

@@ -25,32 +25,91 @@
 
 package org.omegat.connectors.gui;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.actions.ExternalServiceRetrieval;
+import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.connectors.spi.ConnectorCapability;
+import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.core.Core;
+import org.omegat.core.data.CoreState;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 import javax.swing.JDialog;
 import java.awt.Frame;
+import java.util.List;
 
 public class ExternalServiceConnectorPanelController {
 
     private final ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();
+    private ExternalServiceConnectorPanel panel;
+
+    private @Nullable IExternalServiceConnector getSelectedConnector() {
+        ServiceTarget target = panel.getSelectedTarget();
+        if (target == null) {
+            return null;
+        }
+        return CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
+    }
+
+    private void computeAndSetUrlFromInputs() {
+        ServiceTarget target = panel.getSelectedTarget();
+        String base = target != null ? target.getBaseUrl() : null;
+        String page = panel.getResourceId();
+        if (base == null || base.trim().isEmpty() || page == null || page.trim().isEmpty()) {
+            return;
+        }
+        String b = base.trim();
+        String p = page.trim();
+        // ensure single slash between base and page
+        if (b.endsWith("/") && p.startsWith("/")) {
+            p = p.substring(1);
+        } else if (!b.endsWith("/") && !p.startsWith("/")) {
+            b = b + "/";
+        }
+        panel.setCustomUrl(b + p);
+    }
+
+    private void openSearchDialog() {
+        ServiceTarget target = panel.getSelectedTarget();
+        if (target == null) {
+            return;
+        }
+        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
+        if (connector == null) {
+            return;
+        }
+        if (!connector.supports(ConnectorCapability.SEARCH)) {
+            return;
+        }
+        try {
+            List<ExternalResource> resources = connector.listResources(target.getProjectId());
+            panel.openSearchDialog(resources);
+        } catch (ConnectorException ex) {
+            Log.log(ex);
+        }
+    }
 
     public void show() {
         Frame owner = Core.getMainWindow().getApplicationFrame();
-        ExternalServiceConnectorPanel panel = new ExternalServiceConnectorPanel();
-        JDialog dialog = new JDialog(owner, OStrings.getString("TF_CMS_IMPORT_TITLE"), true);
+        panel = new ExternalServiceConnectorPanel();
+        JDialog dialog = new JDialog(owner, OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_TITLE"), true);
         dialog.getContentPane().add(panel);
         dialog.pack();
         dialog.setLocationRelativeTo(owner);
 
+        // Update URL field based on selected target's base URL and page field
+        panel.addPageFieldActionListener(e -> computeAndSetUrlFromInputs());
+        panel.addTargetSelectionListener(e -> computeAndSetUrlFromInputs());
+        panel.addSearchButtonActionListener(e -> openSearchDialog());
+
         panel.getLaunchButton().addActionListener(e -> {
             String url = panel.getCustomUrl();
             try {
-                IExternalServiceConnector connector = panel.getSelectedConnector();
+                IExternalServiceConnector connector = getSelectedConnector();
                 if (connector == null) {
                     return;
                 }
@@ -65,7 +124,7 @@ public class ExternalServiceConnectorPanelController {
                 ProjectUICommands.projectReload();
             } catch (Exception ex) {
                 Log.log(ex);
-                Core.getMainWindow().displayErrorRB(ex, "TF_CMS_IMPORT_FAILED");
+                Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
             } finally {
                 dialog.dispose();
             }

@@ -44,12 +44,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionListener;
 
 import org.jspecify.annotations.Nullable;
 
 import org.omegat.connectors.dto.ExternalResource;
-import org.omegat.connectors.spi.IExternalServiceConnector;
-import org.omegat.core.data.CoreState;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.util.OStrings;
@@ -64,6 +63,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
     private final JTextField pageField;
     private final JTextField urlField;
     private final JButton launchButton;
+    private final JButton searchPageButton;
 
     public ExternalServiceConnectorPanel() {
         super(new BorderLayout());
@@ -76,7 +76,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
         targetCombo = new JComboBox<>();
         pageField = new JTextField(20);
-        JButton searchPageButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_SEARCH"));
+        searchPageButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_SEARCH"));
         urlField = new JTextField(30);
         launchButton = new JButton(OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_BUTTON"));
 
@@ -125,8 +125,6 @@ public class ExternalServiceConnectorPanel extends JPanel {
         add(form, BorderLayout.CENTER);
         loadTargetsFromPrefs();
         loadDefaults();
-
-        searchPageButton.addActionListener(e -> openSearchDialog());
     }
 
     private void loadTargetsFromPrefs() {
@@ -150,80 +148,67 @@ public class ExternalServiceConnectorPanel extends JPanel {
         }
     }
 
-    private void openSearchDialog() {
-        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
-        if (target == null) {
-            return;
+    void openSearchDialog(List<ExternalResource> resources) {
+        JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"),
+                true);
+        JTextField filter = new JTextField(20);
+        javax.swing.DefaultListModel<ExternalResource> listModel = new javax.swing.DefaultListModel<>();
+        for (ExternalResource r : resources) {
+            listModel.addElement(r);
         }
-        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
-        if (connector == null) {
-            return;
-        }
-        try {
-            List<ExternalResource> resources = connector.listResources(target.getProjectId());
-            JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"),
-                    true);
-            JTextField filter = new JTextField(20);
-            javax.swing.DefaultListModel<ExternalResource> listModel = new javax.swing.DefaultListModel<>();
-            for (ExternalResource r : resources) {
-                listModel.addElement(r);
-            }
-            JList<ExternalResource> list = new JList<>(listModel);
-            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            JPanel top = new JPanel(new BorderLayout());
-            top.add(new JLabel("Filter:"), BorderLayout.WEST);
-            top.add(filter, BorderLayout.CENTER);
-            JPanel root = new JPanel(new BorderLayout());
-            root.add(top, BorderLayout.NORTH);
-            root.add(new JScrollPane(list), BorderLayout.CENTER);
-            JPanel buttons = new JPanel();
-            JButton ok = new JButton("OK");
-            JButton cancel = new JButton("Cancel");
-            buttons.add(ok);
-            buttons.add(cancel);
-            root.add(buttons, BorderLayout.SOUTH);
-            dlg.getContentPane().add(root);
-            dlg.setSize(400, 400);
-            dlg.setLocationRelativeTo(this);
+        JList<ExternalResource> list = new JList<>(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JPanel top = new JPanel(new BorderLayout());
+        top.add(new JLabel("Filter:"), BorderLayout.WEST);
+        top.add(filter, BorderLayout.CENTER);
+        JPanel root = new JPanel(new BorderLayout());
+        root.add(top, BorderLayout.NORTH);
+        root.add(new JScrollPane(list), BorderLayout.CENTER);
+        JPanel buttons = new JPanel();
+        JButton ok = new JButton("OK");
+        JButton cancel = new JButton("Cancel");
+        buttons.add(ok);
+        buttons.add(cancel);
+        root.add(buttons, BorderLayout.SOUTH);
+        dlg.getContentPane().add(root);
+        dlg.setSize(400, 400);
+        dlg.setLocationRelativeTo(this);
 
-            filter.getDocument().addDocumentListener(new DocumentListener() {
-                private void refilter() {
-                    String q = filter.getText().toLowerCase(Locale.ROOT);
-                    listModel.clear();
-                    for (ExternalResource r : resources) {
-                        String nm = r.getName();
-                        if (nm.toLowerCase(Locale.ROOT).contains(q)) {
-                            listModel.addElement(r);
-                        }
+        filter.getDocument().addDocumentListener(new DocumentListener() {
+            private void refilter() {
+                String q = filter.getText().toLowerCase(Locale.ROOT);
+                listModel.clear();
+                for (ExternalResource r : resources) {
+                    String nm = r.getName();
+                    if (nm.toLowerCase(Locale.ROOT).contains(q)) {
+                        listModel.addElement(r);
                     }
                 }
+            }
 
-                public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                    refilter();
-                }
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                refilter();
+            }
 
-                public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                    refilter();
-                }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                refilter();
+            }
 
-                public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                    refilter();
-                }
-            });
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                refilter();
+            }
+        });
 
-            ok.addActionListener(e -> {
-                ExternalResource sel = list.getSelectedValue();
-                if (sel != null) {
-                    pageField.setText(sel.getId());
-                }
-                dlg.dispose();
-            });
-            cancel.addActionListener(e -> dlg.dispose());
+        ok.addActionListener(e -> {
+            ExternalResource sel = list.getSelectedValue();
+            if (sel != null) {
+                pageField.setText(sel.getId());
+            }
+            dlg.dispose();
+        });
+        cancel.addActionListener(e -> dlg.dispose());
 
-            dlg.setVisible(true);
-        } catch (Exception ex) {
-            org.omegat.util.Log.log(ex);
-        }
+        dlg.setVisible(true);
     }
 
     public void loadDefaults() {
@@ -231,14 +216,6 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
     public JButton getLaunchButton() {
         return launchButton;
-    }
-
-    public @Nullable IExternalServiceConnector getSelectedConnector() {
-        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
-        if (target == null) {
-            return null;
-        }
-        return CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
     }
 
     public String getProjectId() {
@@ -252,5 +229,25 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
     public @Nullable String getCustomUrl() {
         return urlField.getText();
+    }
+
+    public void setCustomUrl(String url) {
+        urlField.setText(url);
+    }
+
+    public @Nullable ServiceTarget getSelectedTarget() {
+        return (ServiceTarget) targetCombo.getSelectedItem();
+    }
+
+    public void addPageFieldActionListener(ActionListener l) {
+        pageField.addActionListener(l);
+    }
+
+    public void addTargetSelectionListener(ActionListener l) {
+        targetCombo.addActionListener(l);
+    }
+
+    public void addSearchButtonActionListener(ActionListener l) {
+        searchPageButton.addActionListener(l);
     }
 }

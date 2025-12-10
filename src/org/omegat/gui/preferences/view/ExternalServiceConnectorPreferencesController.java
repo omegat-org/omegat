@@ -59,8 +59,6 @@ public class ExternalServiceConnectorPreferencesController extends BasePreferenc
         if (panel != null) {
             panel.saveToPrefs();
         }
-        setReloadRequired(false);
-        setRestartRequired(false);
     }
 
     @Override

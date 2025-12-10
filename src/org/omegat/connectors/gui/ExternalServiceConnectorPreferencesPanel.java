@@ -41,6 +41,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
@@ -52,6 +53,7 @@ import org.omegat.core.data.CoreState;
  * panel is embedded by {@link ExternalServiceConnectorPreferencesController}.
  */
 public class ExternalServiceConnectorPreferencesPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
 
     private final TargetsTableModel model = new TargetsTableModel();
     private final JTable table = new JTable(model);
@@ -80,9 +82,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
 
     public void setTargets(List<ServiceTarget> items) {
         model.items.clear();
-        if (items != null) {
-            model.items.addAll(items);
-        }
+        model.items.addAll(items);
         model.fireTableDataChanged();
     }
 
@@ -96,7 +96,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     }
 
     private void onAdd() {
-        CmsTargetEditor dlg = new CmsTargetEditor(null);
+        ExternalServiceTargetEditor dlg = new ExternalServiceTargetEditor(null);
         ServiceTarget t = dlg.showDialog();
         if (t != null) {
             model.items.add(t);
@@ -110,7 +110,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             return;
         }
         ServiceTarget src = model.items.get(idx);
-        CmsTargetEditor dlg = new CmsTargetEditor(src);
+        ExternalServiceTargetEditor dlg = new ExternalServiceTargetEditor(src);
         ServiceTarget t = dlg.showDialog();
         if (t != null) {
             model.items.set(idx, t);
@@ -127,6 +127,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     }
 
     static class TargetsTableModel extends AbstractTableModel {
+        private static final long serialVersionUID = 1L;
         final String[] COLS = { "Type", "Project", "Base URL", "Default Page" };
         final List<ServiceTarget> items = new ArrayList<>();
 
@@ -164,15 +165,15 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     }
 
     /** Simple modal editor dialog for a External Service Integration target row. */
-    class CmsTargetEditor {
+    class ExternalServiceTargetEditor {
         private final JDialog dialog;
         private final JComboBox<IExternalServiceConnector> typeCombo;
         private final JTextField projectField;
         private final JTextField baseUrlField;
         private final JTextField defaultPageField;
-        private ServiceTarget result;
+        private @Nullable ServiceTarget result;
 
-        CmsTargetEditor(ServiceTarget initial) {
+        ExternalServiceTargetEditor(@Nullable ServiceTarget initial) {
             dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
                     "Edit External Service Integration", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
@@ -243,9 +244,15 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 if (sel == null) {
                     return;
                 }
-                result = new ServiceTarget(sel.getId(), projectField.getText().trim(),
-                        emptyToNull(baseUrlField.getText().trim()),
-                        emptyToNull(defaultPageField.getText().trim()));
+                var projectId = projectField.getText().trim();
+                if (projectId.isEmpty()) {
+                    return;
+                }
+                var baseUrl = baseUrlField.getText().trim();
+                if (baseUrl.isEmpty()) {
+                    return;
+                }
+                result = new ServiceTarget(sel.getId(), projectId, baseUrl, defaultPageField.getText().trim());
                 dialog.dispose();
             });
             cancel.addActionListener(e -> {
@@ -270,13 +277,9 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                     }
                 }
                 projectField.setText(initial.getProjectId());
-                baseUrlField.setText(initial.getBaseUrl() == null ? "" : initial.getBaseUrl());
-                defaultPageField.setText(initial.getDefaultPage() == null ? "" : initial.getDefaultPage());
+                baseUrlField.setText(initial.getBaseUrl());
+                defaultPageField.setText(initial.getDefaultPage());
             }
-        }
-
-        private String emptyToNull(String s) {
-            return s == null || s.isEmpty() ? null : s;
         }
 
         ServiceTarget showDialog() {

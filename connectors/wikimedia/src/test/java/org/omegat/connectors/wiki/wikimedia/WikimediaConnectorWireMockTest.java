@@ -68,7 +68,7 @@ public class WikimediaConnectorWireMockTest {
                         .withBody("== Hello from MediaWiki ==\nSample content")));
 
         String remote = "http://localhost:" + server.port() + "/index.php?title=Main Page";
-        WikimediaConnector connector = new WikimediaConnector();
+        WikimediaDefaultConnector connector = new WikimediaDefaultConnector();
 
         try (InputStream is = connector.fetchResource(remote)) {
             assertNotNull(is);
@@ -88,7 +88,7 @@ public class WikimediaConnectorWireMockTest {
                         .withBody("Rewritten OK")));
 
         String remote = "http://localhost:" + server.port() + "/Wiki/Main Page";
-        WikimediaConnector connector = new WikimediaConnector();
+        WikimediaCleanUrlConnector connector = new WikimediaCleanUrlConnector();
 
         try (InputStream is = connector.fetchResource(remote)) {
             assertNotNull(is);

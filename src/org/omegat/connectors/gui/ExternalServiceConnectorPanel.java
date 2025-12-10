@@ -58,6 +58,7 @@ import org.omegat.util.OStrings;
  * provide a page search UI.
  */
 public class ExternalServiceConnectorPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
 
     private final JComboBox<ServiceTarget> targetCombo;
     private final JTextField pageField;
@@ -124,7 +125,6 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
         add(form, BorderLayout.CENTER);
         loadTargetsFromPrefs();
-        loadDefaults();
     }
 
     private void loadTargetsFromPrefs() {
@@ -143,9 +143,6 @@ public class ExternalServiceConnectorPanel extends JPanel {
                 return c;
             }
         });
-        if (targetCombo.getItemCount() > 0) {
-            targetCombo.setSelectedIndex(0);
-        }
     }
 
     void openSearchDialog(List<ExternalResource> resources) {
@@ -201,9 +198,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
 
         ok.addActionListener(e -> {
             ExternalResource sel = list.getSelectedValue();
-            if (sel != null) {
-                pageField.setText(sel.getId());
-            }
+            pageField.setText(sel.getId());
             dlg.dispose();
         });
         cancel.addActionListener(e -> dlg.dispose());
@@ -211,16 +206,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
         dlg.setVisible(true);
     }
 
-    public void loadDefaults() {
-    }
-
     public JButton getLaunchButton() {
         return launchButton;
-    }
-
-    public String getProjectId() {
-        ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
-        return target != null ? target.getProjectId() : "";
     }
 
     public @Nullable String getResourceId() {
@@ -231,20 +218,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
         return urlField.getText();
     }
 
-    public void setCustomUrl(String url) {
-        urlField.setText(url);
-    }
-
     public @Nullable ServiceTarget getSelectedTarget() {
         return (ServiceTarget) targetCombo.getSelectedItem();
-    }
-
-    public void addPageFieldActionListener(ActionListener l) {
-        pageField.addActionListener(l);
-    }
-
-    public void addTargetSelectionListener(ActionListener l) {
-        targetCombo.addActionListener(l);
     }
 
     public void addSearchButtonActionListener(ActionListener l) {

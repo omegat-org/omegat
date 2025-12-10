@@ -88,6 +88,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
 
+import org.omegat.connectors.gui.ExternalServiceConnectorPanelController;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -191,7 +192,7 @@ public class ProjectFilesListController implements IProjectFilesList {
         defaultFont = list.tableFiles.getFont();
         if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
             String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
-            int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
+            int fontSize = Integer.parseInt(Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE, "14"));
             setFont(new Font(fontName, Font.PLAIN, fontSize));
         } else {
             setFont(defaultFont);
@@ -912,7 +913,8 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     private void doWikiImport() {
-        ProjectUICommands.doWikiImport();
+        ExternalServiceConnectorPanelController controller = new ExternalServiceConnectorPanelController();
+        controller.show();
     }
 
     /** Updates the Import Files button status. */
@@ -1077,7 +1079,7 @@ public class ProjectFilesListController implements IProjectFilesList {
                     excluded++;
                 }
             }
-            viewToModel = new ArrayList<Integer>(modelToView.length - excluded);
+            viewToModel = new ArrayList<>(modelToView.length - excluded);
             for (int i = 0, j = 0; i < modelToView.length; i++) {
                 if (modelToView[i] != -1) {
                     viewToModel.add(j++, i);
@@ -1229,8 +1231,8 @@ public class ProjectFilesListController implements IProjectFilesList {
             newPos = Math.max(newPos, 0);
             newPos = Math.min(newPos, viewToModel.size());
 
-            for (int i = 0; i < temp.length; i++) {
-                viewToModel.add(newPos, temp[i]);
+            for (int j : temp) {
+                viewToModel.add(newPos, j);
             }
             recalc();
             save();

@@ -22,28 +22,40 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.connectors.spi;
+
+package org.omegat.connectors.wiki.wikimedia;
+
+import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.connectors.spi.ConnectorException;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
- * Exception thrown by connectors for any operation failure.
+ * Connector for Wikimedia/MediaWiki content retrieval.
  */
 @SuppressWarnings("unused")
-public class ConnectorException extends Exception {
-    private static final long serialVersionUID = 1L;
+public class WikimediaDefaultConnector extends AbstractWikimediaConnector {
 
-    public ConnectorException() {
-        super();
+    @Override
+    public String getId() {
+        return "wikimedia_default";
     }
 
-    public ConnectorException(String message) {
-        super(message);
+    @Override
+    public String getName() {
+        return "Wikimedia(Default)";
     }
 
-    public ConnectorException(String message, Throwable cause) {
-        super(message, cause);
+    @Override
+    public String getPreferenceName() {
+        return "wikimedia_default";
     }
 
-    public ConnectorException(Throwable cause) {
-        super(cause);
+    @Override
+    public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
+        String page = httpGet(getResourceUrl(target.getBaseUrl() + "index.php?tilte=" + resourceId));
+        return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

@@ -192,6 +192,8 @@ dependencies {
         implementation(libs.jfa) {
             exclude module: 'jna'
         }
+
+        implementation(libs.apache.httpclient)
     }
 
     // Test dependencies

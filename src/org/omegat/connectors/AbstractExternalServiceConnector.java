@@ -28,22 +28,31 @@ package org.omegat.connectors;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
-import org.omegat.connectors.dto.ExternalProject;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+import org.apache.http.util.EntityUtils;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.core.Core;
 import org.omegat.util.HttpConnectionUtils;
+import org.omegat.util.OStrings;
+
+import javax.swing.JOptionPane;
 
 /**
  * Base class for External service connectors with common helpers and defaults.
  */
 public abstract class AbstractExternalServiceConnector implements IExternalServiceConnector {
-
-    private ServiceTarget currentTarget;
 
     @Override
     public String toString() {
@@ -54,7 +63,7 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     public abstract String getPreferenceName();
 
     @Override
-    public List<ExternalResource> listResources(ServiceTarget target) throws ConnectorException {
+    public List<ExternalResource> listResources(ServiceTarget target) {
         return Collections.emptyList();
     }
 
@@ -75,10 +84,51 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     }
 
     protected String httpGet(String url) throws ConnectorException {
+        if (!HttpConnectionUtils.checkUrl(url)) {
+            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"),
+                    OStrings.getString("TF_WIKI_IMPORT_URL_ERROR_TITLE"), JOptionPane.WARNING_MESSAGE);
+            throw new ConnectorException(OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"));
+        }
         try {
-            return HttpConnectionUtils.getURL(new URL(url));
+            return getURL(new URL(url), 10000);
         } catch (IOException e) {
             throw new ConnectorException("GET failed: " + url, e);
+        }
+    }
+
+    /**
+     * Download a file to memory.
+     *
+     * @param url
+     *            resource URL to download
+     * @param timeout
+     *            timeout to connect and read.
+     * @return returned string
+     * @throws IOException
+     *             when connection and read method error.
+     */
+    public String getURL(URL url, int timeout) throws IOException {
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(timeout)
+                .setSocketTimeout(timeout)
+                .setConnectionRequestTimeout(timeout)
+                .build();
+
+        try (CloseableHttpClient httpClient = HttpClients.custom()
+                .setRedirectStrategy(new LaxRedirectStrategy())
+                .setDefaultRequestConfig(config)
+                .useSystemProperties()
+                .build()) {
+            HttpGet httpGet = new HttpGet(url.toString());
+            try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+                } else {
+                    throw new IOException("Unexpected response status: " + status);
+                }
+            }
         }
     }
 }

@@ -27,18 +27,12 @@ package org.omegat.connectors.wiki.wikimedia;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.core.Core;
 import org.omegat.connectors.AbstractExternalServiceConnector;
-import org.omegat.connectors.dto.ExternalProject;
-import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.ConnectorCapability;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.util.WikiGet;
@@ -47,24 +41,15 @@ import org.omegat.util.WikiGet;
  * Connector for Wikimedia/MediaWiki content retrieval.
  */
 @SuppressWarnings("unused")
-public class WikimediaConnector extends AbstractExternalServiceConnector {
+public abstract class AbstractWikimediaConnector extends AbstractExternalServiceConnector {
 
     public static void loadPlugins() {
-        Core.registerExternalServiceConnectorClass(WikimediaConnector.class);
+        Core.registerExternalServiceConnectorClass(WikimediaCleanUrlConnector.class);
+        Core.registerExternalServiceConnectorClass(WikimediaDefaultConnector.class);
     }
 
     public static void unloadPlugins() {
         // do nothing
-    }
-
-    @Override
-    public String getId() {
-        return "wikimedia";
-    }
-
-    @Override
-    public String getName() {
-        return "Wikimedia";
     }
 
     @Override
@@ -73,35 +58,23 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public String getPreferenceName() {
-        return "wikimedia";
-    }
-
-    @Override
     public String getFileExtension() {
-        return "txt";
+        return "UTF8";
     }
 
     @Override
-    public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String joined = getResourceUrl(target.getBaseUrl() + "/index.php?title=" + resourceId);
-        String page = httpGet(joined);
-        return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
-    }
-
     public InputStream fetchResource(String remoteUrl) throws ConnectorException {
         String page = httpGet(getResourceUrl(remoteUrl));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 
-    private String getResourceUrl(String remoteUrl) {
+    protected String getResourceUrl(String remoteUrl) {
         if (remoteUrl.indexOf("index.php?title=") > 0) {
             // We're directly calling the mediawiki index.php script
             String[] splitted = remoteUrl.split("index.php\\?title=");
             String s = splitted[splitted.length - 1];
             s = s.replaceAll(" ", "_");
-            // s=URLEncoder.encode(s, "UTF-8"); // breaks previously
-            // correctly encoded page names
+            s = URLEncoder.encode(s, StandardCharsets.UTF_8);
             splitted[splitted.length - 1] = s;
             return WikiGet.joinString("index.php?title=", splitted) + "&action=raw";
         } else {
@@ -110,7 +83,7 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
             String[] splitted = remoteUrl.split("/");
             String s = splitted[splitted.length - 1];
             s = s.replaceAll(" ", "_");
-            // s=URLEncoder.encode(s, "UTF-8");
+            s = URLEncoder.encode(s, StandardCharsets.UTF_8);
             splitted[splitted.length - 1] = s;
             return WikiGet.joinString("/", splitted) + "?action=raw";
         }

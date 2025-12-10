@@ -11,7 +11,6 @@ dependencies {
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.jspecify)
-        implementation(libs.apache.xmlrpc)
         implementation(libs.jsoup)
     }
     testImplementation(testFixtures(project.rootProject))

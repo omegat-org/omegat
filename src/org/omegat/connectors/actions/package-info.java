@@ -22,40 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.connectors.spi;
-
-import java.io.InputStream;
-import java.util.List;
-import java.util.Set;
+@NullMarked
+package org.omegat.connectors.actions;
 
 import org.jspecify.annotations.NullMarked;
-import org.omegat.connectors.dto.ExternalProject;
-import org.omegat.connectors.dto.ExternalResource;
-
-/**
- * Service Provider Interface for External service connectors.
- */
-@NullMarked
-public interface ExternalServiceConnector {
-    String getId();
-
-    String getName();
-
-    Set<ConnectorCapability> getCapabilities();
-
-    String getPreferenceName();
-
-    List<ExternalProject> listProjects() throws ConnectorException;
-
-    List<ExternalResource> listResources(String projectId) throws ConnectorException;
-
-    InputStream fetchResource(String projectId, String resourceId) throws ConnectorException;
-
-    InputStream fetchResource(String url) throws ConnectorException;
-
-    void pushTranslation(String projectId, String resourceId, InputStream translated) throws ConnectorException;
-
-    default boolean supports(ConnectorCapability c) {
-        return getCapabilities() != null && getCapabilities().contains(c);
-    }
-}

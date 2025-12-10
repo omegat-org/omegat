@@ -36,7 +36,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
-import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -45,7 +44,6 @@ import org.omegat.util.StaticUtils;
  * Persists configuration to an XML file located under the user config
  * directory (external_connectors.xml).
  */
-@NullMarked
 public final class ExternalConnectorXmlStore {
     private static final String FILE_NAME = "external_connectors.xml";
     private static final XmlMapper MAPPER;
@@ -65,7 +63,7 @@ public final class ExternalConnectorXmlStore {
     }
 
     /**
-     * Load list of CMS targets from cms.xml, or migrate from legacy preferences
+     * Load list of CMS targets from external_connectors.xml, or migrate from legacy preferences
      * if file doesn't exist.
      */
     public static List<ServiceTarget> loadTargets() {
@@ -73,7 +71,7 @@ public final class ExternalConnectorXmlStore {
         if (file.isFile()) {
             try {
                 ExternalConnectorConfig cfg = MAPPER.readValue(file, ExternalConnectorConfig.class);
-                return cfg != null && cfg.getTargets() != null ? cfg.getTargets() : new ArrayList<>();
+                return cfg.getTargets();
             } catch (IOException e) {
                 Log.log(e);
             }
@@ -82,7 +80,7 @@ public final class ExternalConnectorXmlStore {
     }
 
     /**
-     * Save the provided list of targets to cms.xml. Creates parent dir if
+     * Save the provided list of targets to external_connectors.xml. Creates parent dir if
      * needed.
      */
     public static void saveTargets(List<ServiceTarget> targets) {
@@ -91,7 +89,7 @@ public final class ExternalConnectorXmlStore {
             Files.createDirectories(file.getParentFile().toPath());
             ExternalConnectorConfig cfg = new ExternalConnectorConfig();
             cfg.setVersion("1");
-            cfg.setTargets(targets != null ? targets : new ArrayList<>());
+            cfg.setTargets(targets);
             MAPPER.writeValue(file, cfg);
         } catch (IOException e) {
             Log.log(e);

@@ -37,7 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-import org.omegat.connectors.ExternalConnectors;
+import org.omegat.connectors.ExternalConnectorsManager;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -83,7 +83,7 @@ import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 
 /**
  * Class which contains all components' instances.
@@ -265,7 +265,7 @@ public final class Core {
         coreState.setSegmenter(new Segmenter(Preferences.getSRX()));
         coreState.setFilterMaster(new FilterMaster(Preferences.getFilters()));
         coreState.setMachineTranslatorsManager(new MachineTranslatorsManager());
-        coreState.setCmsConnectors(new ExternalConnectors());
+        coreState.setExternalConnectorsManager(new ExternalConnectorsManager());
 
         // 4. Initialize other components. They add themselves to the main
         // window.
@@ -318,7 +318,7 @@ public final class Core {
     }
 
     // CMS connectors registration API
-    public static void registerCmsConnectorClass(Class<? extends ExternalServiceConnector> clazz) {
+    public static void registerCmsConnectorClass(Class<? extends IExternalServiceConnector> clazz) {
         PluginUtils.getExternalServiceConnectorClasses().add(clazz);
     }
 

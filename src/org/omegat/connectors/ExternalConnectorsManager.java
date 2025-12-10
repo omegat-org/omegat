@@ -32,23 +32,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 
 /**
  * Registry/manager for connectors.
  */
-@NullMarked
-public class ExternalConnectors {
-    private final Map<String, ExternalServiceConnector> connectorMap = new LinkedHashMap<>();
+public class ExternalConnectorsManager {
+    private final Map<String, IExternalServiceConnector> connectorMap = new LinkedHashMap<>();
 
-    public ExternalConnectors() {
+    public ExternalConnectorsManager() {
         for (Class<?> clazz : PluginUtils.getExternalServiceConnectorClasses()) {
             try {
-                register((ExternalServiceConnector) clazz.getDeclaredConstructor().newInstance());
+                register((IExternalServiceConnector) clazz.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | NoSuchMethodException e) {
                 Log.log(e);
@@ -56,18 +54,18 @@ public class ExternalConnectors {
         }
     }
 
-    private synchronized void register(@Nullable ExternalServiceConnector connector) {
+    private synchronized void register(@Nullable IExternalServiceConnector connector) {
         if (connector == null) {
             return;
         }
         connectorMap.put(connector.getId(), connector);
     }
 
-    public synchronized ExternalServiceConnector get(String id) {
+    public synchronized @Nullable IExternalServiceConnector get(String id) {
         return connectorMap.get(id);
     }
 
-    public synchronized List<ExternalServiceConnector> getAll() {
+    public synchronized List<IExternalServiceConnector> getAll() {
         return Collections.unmodifiableList(new ArrayList<>(connectorMap.values()));
     }
 }

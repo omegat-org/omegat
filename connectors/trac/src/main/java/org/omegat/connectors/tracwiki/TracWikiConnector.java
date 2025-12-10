@@ -44,6 +44,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     }
 
     public static void unloadPlugins() {
+        // do nothing
     }
 
     private static final Map<String, String> CONFIG = new HashMap<>();

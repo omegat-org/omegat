@@ -41,7 +41,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.core.data.CoreState;
@@ -166,7 +166,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     /** Simple modal editor dialog for a CMS target row. */
     class CmsTargetEditor {
         private final JDialog dialog;
-        private final JComboBox<ExternalServiceConnector> typeCombo;
+        private final JComboBox<IExternalServiceConnector> typeCombo;
         private final JTextField projectField;
         private final JTextField baseUrlField;
         private final JTextField defaultPageField;
@@ -183,8 +183,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             int row = 0;
 
             typeCombo = new JComboBox<>();
-            List<ExternalServiceConnector> connectors = CoreState.getInstance().getCmsConnectors().getAll();
-            for (ExternalServiceConnector c : connectors) {
+            List<IExternalServiceConnector> connectors = CoreState.getInstance().getExternalConnectorsManager().getAll();
+            for (IExternalServiceConnector c : connectors) {
                 typeCombo.addItem(c);
             }
 
@@ -239,7 +239,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             buttons.add(cancel);
 
             ok.addActionListener(e -> {
-                ExternalServiceConnector sel = (ExternalServiceConnector) typeCombo.getSelectedItem();
+                IExternalServiceConnector sel = (IExternalServiceConnector) typeCombo.getSelectedItem();
                 if (sel == null) {
                     return;
                 }
@@ -263,7 +263,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             if (initial != null) {
                 // Preselect connector by id
                 for (int i = 0; i < typeCombo.getItemCount(); i++) {
-                    ExternalServiceConnector c = typeCombo.getItemAt(i);
+                    IExternalServiceConnector c = typeCombo.getItemAt(i);
                     if (Objects.equals(c.getId(), initial.getConnectorId())) {
                         typeCombo.setSelectedIndex(i);
                         break;

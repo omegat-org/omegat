@@ -29,13 +29,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 
 /**
  * DTO representing a configured target (connector + project + optional
  * URL/page).
  */
-@NullMarked
 public class ServiceTarget implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -46,12 +44,14 @@ public class ServiceTarget implements Serializable {
 
     @SuppressWarnings("unused")
     public ServiceTarget() {
+        connectorId = "";
+        projectId = "";
     }
 
     public ServiceTarget(String connectorId, String projectId, @Nullable String baseUrl,
                          @Nullable String defaultPage) {
-        this.connectorId = connectorId != null ? connectorId : "";
-        this.projectId = projectId != null ? projectId : "";
+        this.connectorId = connectorId;
+        this.projectId = projectId;
         this.baseUrl = baseUrl;
         this.defaultPage = defaultPage;
     }

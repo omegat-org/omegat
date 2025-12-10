@@ -9,6 +9,7 @@ dependencies {
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)
+        compileOnly(libs.jspecify)
         implementation(libs.jetbrains.annotations)
     }
     testImplementation(testFixtures(project.rootProject))

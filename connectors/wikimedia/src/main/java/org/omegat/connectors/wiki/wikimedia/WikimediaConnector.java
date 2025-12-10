@@ -53,6 +53,7 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
     }
 
     public static void unloadPlugins() {
+        // do nothing
     }
 
     private static final Map<String, String> CONFIG = new HashMap<>();

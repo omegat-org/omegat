@@ -22,52 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+@NullMarked
+package org.omegat.connectors.spi;
 
-package org.omegat.connectors.dto;
-
-import java.io.Serializable;
-import java.util.Objects;
-
-public class ExternalProject implements ServiceIdentifier, Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private final String id;
-    private final String name;
-
-    public ExternalProject(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ExternalProject that = (ExternalProject) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return name != null ? name : id;
-    }
-}
+import org.jspecify.annotations.NullMarked;

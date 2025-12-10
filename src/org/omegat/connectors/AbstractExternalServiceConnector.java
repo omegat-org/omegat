@@ -31,18 +31,16 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import org.jspecify.annotations.NullMarked;
 import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Base class for External service connectors with common helpers and defaults.
  */
-@NullMarked
-public abstract class AbstractExternalServiceConnector implements ExternalServiceConnector {
+public abstract class AbstractExternalServiceConnector implements IExternalServiceConnector {
 
     @Override
     public String toString() {

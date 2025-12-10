@@ -22,52 +22,39 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.connectors.spi;
 
-package org.omegat.connectors.dto;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Set;
 
-import java.io.Serializable;
-import java.util.Objects;
+import org.omegat.connectors.dto.ExternalProject;
+import org.omegat.connectors.dto.ExternalResource;
 
-public class ExternalProject implements ServiceIdentifier, Serializable {
-    private static final long serialVersionUID = 1L;
+/**
+ * Service Provider Interface for External service connectors.
+ */
+public interface IExternalServiceConnector {
+    String getId();
 
-    private final String id;
-    private final String name;
+    String getName();
 
-    public ExternalProject(String id, String name) {
-        this.id = id;
-        this.name = name;
+    Set<ConnectorCapability> getCapabilities();
+
+    String getPreferenceName();
+
+    List<ExternalProject> listProjects() throws ConnectorException;
+
+    List<ExternalResource> listResources(String projectId) throws ConnectorException;
+
+    InputStream fetchResource(String projectId, String resourceId) throws ConnectorException;
+
+    InputStream fetchResource(String url) throws ConnectorException;
+
+    void pushTranslation(String projectId, String resourceId, InputStream translated) throws ConnectorException;
+
+    default boolean supports(ConnectorCapability c) {
+        return getCapabilities().contains(c);
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ExternalProject that = (ExternalProject) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return name != null ? name : id;
-    }
 }

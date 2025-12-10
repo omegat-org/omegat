@@ -34,15 +34,13 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.ServiceTarget;
 
 /**
- * XML root for CMS integration configuration persisted in cms.xml.
+ * XML root for External Service integration configuration persisted in cms.xml.
  */
-@NullMarked
-@JacksonXmlRootElement(localName = "cms")
+@JacksonXmlRootElement(localName = "externalconnectors")
 public class ExternalConnectorConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 

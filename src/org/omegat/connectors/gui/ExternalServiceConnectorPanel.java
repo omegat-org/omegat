@@ -43,10 +43,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentListener;
 
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.connectors.dto.ExternalResource;
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.core.data.CoreState;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
@@ -56,7 +58,6 @@ import org.omegat.util.OStrings;
  * Modal panel for External CMS import. Updated to use configured targets and
  * provide a page search UI.
  */
-@NullMarked
 public class ExternalServiceConnectorPanel extends JPanel {
 
     private final JComboBox<ServiceTarget> targetCombo;
@@ -154,7 +155,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
         if (target == null) {
             return;
         }
-        ExternalServiceConnector connector = CoreState.getInstance().getCmsConnectors().get(target.getConnectorId());
+        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
         if (connector == null) {
             return;
         }
@@ -185,12 +186,12 @@ public class ExternalServiceConnectorPanel extends JPanel {
             dlg.setSize(400, 400);
             dlg.setLocationRelativeTo(this);
 
-            filter.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            filter.getDocument().addDocumentListener(new DocumentListener() {
                 private void refilter() {
                     String q = filter.getText().toLowerCase(Locale.ROOT);
                     listModel.clear();
                     for (ExternalResource r : resources) {
-                        String nm = r.getName() != null ? r.getName() : r.getId();
+                        String nm = r.getName();
                         if (nm.toLowerCase(Locale.ROOT).contains(q)) {
                             listModel.addElement(r);
                         }
@@ -232,12 +233,12 @@ public class ExternalServiceConnectorPanel extends JPanel {
         return launchButton;
     }
 
-    public ExternalServiceConnector getSelectedConnector() {
+    public @Nullable IExternalServiceConnector getSelectedConnector() {
         ServiceTarget target = (ServiceTarget) targetCombo.getSelectedItem();
         if (target == null) {
             return null;
         }
-        return CoreState.getInstance().getCmsConnectors().get(target.getConnectorId());
+        return CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
     }
 
     public String getProjectId() {
@@ -245,11 +246,11 @@ public class ExternalServiceConnectorPanel extends JPanel {
         return target != null ? target.getProjectId() : "";
     }
 
-    public String getResourceId() {
+    public @Nullable String getResourceId() {
         return pageField.getText();
     }
 
-    public String getCustomUrl() {
+    public @Nullable String getCustomUrl() {
         return urlField.getText();
     }
 }

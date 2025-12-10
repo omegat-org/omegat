@@ -25,8 +25,7 @@
 
 package org.omegat.connectors.actions;
 
-import org.jspecify.annotations.NullMarked;
-import org.omegat.connectors.spi.ExternalServiceConnector;
+import org.omegat.connectors.spi.IExternalServiceConnector;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -34,10 +33,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-@NullMarked
 public class ExternalServiceRetrieval {
 
-    public void retrieveResource(ExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
+    public void retrieveResource(IExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(projectId, resourceId);
         Path dir = Paths.get(targetDir);
         String fileName = resourceId.isEmpty() ? "external-service-resource.txt" : resourceId;
@@ -48,7 +46,7 @@ public class ExternalServiceRetrieval {
         }
     }
 
-    public void retrieveResourceFromUrl(ExternalServiceConnector connector, String url, String targetDir) throws Exception {
+    public void retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(url);
         Path dir = Paths.get(targetDir);
         String fileName = extractFileNameFromUrl(url);

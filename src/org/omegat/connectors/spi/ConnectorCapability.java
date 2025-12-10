@@ -24,12 +24,29 @@
  **************************************************************************/
 package org.omegat.connectors.spi;
 
-import org.jspecify.annotations.NullMarked;
-
 /**
  * Capabilities supported by a connector.
  */
-@NullMarked
 public enum ConnectorCapability {
-    READ, WRITE, LIST_PROJECTS, SEARCH, OAUTH
+    /**
+     * Ability of a connector to read from external service.
+     */
+    READ,
+    /**
+     * Ability of a connector to write to external service.
+     */
+    WRITE,
+    /**
+     * Ability of a connector to list projects from an external service.
+     */
+    LIST_PROJECTS,
+    /**
+     * Ability of a connector to perform search operations on an external service.
+     */
+    SEARCH,
+    /**
+     * Indicates the ability of a connector to use OAuth as an authentication mechanism
+     * for interacting with external services.
+     */
+    OAUTH
 }

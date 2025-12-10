@@ -6,11 +6,15 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/*xmlrpc*.jar', '**/*jsoup*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.jspecify)
-        implementation(libs.jetbrains.annotations)
+        implementation(libs.apache.xmlrpc)
+        implementation(libs.jsoup)
     }
     testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.junit4)
+    testImplementation(libs.wiremock)
 }

@@ -55,24 +55,6 @@ public class ExternalServiceConnectorPanelController {
         return CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
     }
 
-    private void computeAndSetUrlFromInputs() {
-        ServiceTarget target = panel.getSelectedTarget();
-        String base = target != null ? target.getBaseUrl() : null;
-        String page = panel.getResourceId();
-        if (base == null || base.trim().isEmpty() || page == null || page.trim().isEmpty()) {
-            return;
-        }
-        String b = base.trim();
-        String p = page.trim();
-        // ensure single slash between base and page
-        if (b.endsWith("/") && p.startsWith("/")) {
-            p = p.substring(1);
-        } else if (!b.endsWith("/") && !p.startsWith("/")) {
-            b = b + "/";
-        }
-        panel.setCustomUrl(b + p);
-    }
-
     private void openSearchDialog() {
         ServiceTarget target = panel.getSelectedTarget();
         if (target == null) {
@@ -101,9 +83,6 @@ public class ExternalServiceConnectorPanelController {
         dialog.pack();
         dialog.setLocationRelativeTo(owner);
 
-        // Update URL field based on selected target's base URL and page field
-        panel.addPageFieldActionListener(e -> computeAndSetUrlFromInputs());
-        panel.addTargetSelectionListener(e -> computeAndSetUrlFromInputs());
         panel.addSearchButtonActionListener(e -> openSearchDialog());
 
         panel.getLaunchButton().addActionListener(e -> {

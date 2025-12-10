@@ -49,7 +49,7 @@ import org.omegat.util.WikiGet;
 public class WikimediaConnector extends AbstractExternalServiceConnector {
 
     public static void loadPlugins() {
-        Core.registerCmsConnectorClass(WikimediaConnector.class);
+        Core.registerExternalServiceConnectorClass(WikimediaConnector.class);
     }
 
     public static void unloadPlugins() {

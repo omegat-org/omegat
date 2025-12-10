@@ -28,7 +28,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
-import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.ServiceTarget;
 

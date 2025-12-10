@@ -132,14 +132,17 @@ public class ExternalServiceConnectorPanelController {
             }
             String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
             ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();
+            boolean status;
             if (url != null && !url.trim().isEmpty()) {
-                externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
+                status = externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
             } else if (panel.getResourceId() != null) {
-                externalServiceRetrieval.retrieveResource(connector, target, panel.getResourceId(), srcRoot);
+                status = externalServiceRetrieval.retrieveResource(connector, target, panel.getResourceId(), srcRoot);
             } else {
                 return;
             }
-            ProjectUICommands.projectReload();
+            if (status) {
+                ProjectUICommands.projectReload();
+            }
         } catch (Exception ex) {
             Log.log(ex);
             Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");

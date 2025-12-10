@@ -26,7 +26,10 @@
 package org.omegat.connectors.actions;
 
 import org.omegat.connectors.dto.ServiceTarget;
+import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.spi.IExternalServiceConnector;
+import org.omegat.core.Core;
+import org.omegat.util.Log;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -36,26 +39,43 @@ import java.nio.file.StandardCopyOption;
 
 public class ExternalServiceRetrieval {
 
-    public void retrieveResource(IExternalServiceConnector connector, ServiceTarget target, String resourceId, String targetDir) throws Exception {
-        InputStream in = connector.fetchResource(target, resourceId);
+    public boolean retrieveResource(IExternalServiceConnector connector, ServiceTarget target, String resourceId, String targetDir) throws Exception {
         Path dir = Paths.get(targetDir);
         String ext = "." + connector.getFileExtension();
         String fileName = (resourceId.isEmpty() ? "external-service-resource" : resourceId) + ext;
         Path out = dir.resolve(fileName);
         Files.createDirectories(dir);
-        try (in) {
+        try (InputStream in = connector.fetchResource(target, resourceId)) {
             Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+        } catch (ConnectorException ex) {
+            showErrorMessage(ex, resourceId);
+            return false;
         }
+        return true;
     }
 
-    public void retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir) throws Exception {
-        InputStream in = connector.fetchResource(url);
+    public boolean retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir) throws Exception {
         Path dir = Paths.get(targetDir);
         String fileName = extractFileNameFromUrl(connector, url);
         Path out = dir.resolve(fileName);
         Files.createDirectories(dir);
-        try (in) {
+        try (InputStream in = connector.fetchResource(url)) {
             Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+        } catch (ConnectorException ex) {
+            showErrorMessage(ex, url);
+            return false;
+        }
+        return true;
+    }
+
+    private void showErrorMessage(ConnectorException ex, String url) {
+        if (ex.getStatus() >= 300) {
+            Log.logErrorRB("TF_EXTERNAL_SERVICE_IMPORT_FAILED_HTTP_CODE", url, ex.getStatus());
+            Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED_HTTP_CODE", url,
+                    ex.getStatus());
+        } else {
+            Log.logErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
+            Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
         }
     }
 

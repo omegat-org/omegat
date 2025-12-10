@@ -31,6 +31,8 @@ package org.omegat.connectors.spi;
 public class ConnectorException extends Exception {
     private static final long serialVersionUID = 1L;
 
+    private int status = 0;
+
     public ConnectorException() {
         super();
     }
@@ -45,5 +47,14 @@ public class ConnectorException extends Exception {
 
     public ConnectorException(Throwable cause) {
         super(cause);
+    }
+
+    public ConnectorException(String message, int status) {
+        super(message);
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

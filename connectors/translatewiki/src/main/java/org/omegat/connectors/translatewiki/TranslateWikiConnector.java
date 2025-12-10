@@ -67,6 +67,9 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     private static final String QUERY_ACTION = "action=translationentitysearch&format=json";
     private static final String QUERY_GROUPS = "&entitytype=groups&limit=50&query=";
 
+    private static final String REFERER_PATH = "w/i.php";
+    private static final String REFERER_QUERY = "title=Special:ExportTranslations";
+
     @Override
     public String getId() {
         return "translatewiki";
@@ -145,7 +148,7 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public InputStream fetchResource(String url) throws ConnectorException {
-        String page = httpGet(url);
+        String page = httpGet(url, BASE_URL + REFERER_PATH + "?" + REFERER_QUERY);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

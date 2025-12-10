@@ -27,7 +27,6 @@ package org.omegat.connectors;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
@@ -96,11 +95,11 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
                     OStrings.getString("TF_WIKI_IMPORT_URL_ERROR_TITLE"), JOptionPane.WARNING_MESSAGE);
             throw new ConnectorException(OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"));
         }
-        try {
-            return getURL(new URL(url), 10000);
-        } catch (IOException e) {
-            throw new ConnectorException("GET failed: " + url, e);
-        }
+        return httpGet(url, null);
+    }
+    
+    protected String httpGet(String url, @Nullable String referer) throws ConnectorException {
+        return getURL(url, referer, 10000);
     }
 
     /**
@@ -111,10 +110,10 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
      * @param timeout
      *            timeout to connect and read.
      * @return returned string
-     * @throws IOException
+     * @throws ConnectorException
      *             when connection and read method error.
      */
-    public String getURL(URL url, int timeout) throws IOException {
+    public String getURL(String url, @Nullable String referer, int timeout) throws ConnectorException {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout)
                 .setSocketTimeout(timeout)
@@ -126,15 +125,20 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
                 .setDefaultRequestConfig(config)
                 .useSystemProperties()
                 .build()) {
-            HttpGet httpGet = new HttpGet(url.toString());
+            HttpGet httpGet = new HttpGet(url);
+            if (referer != null && !referer.isEmpty()) {
+                httpGet.setHeader("Referer", referer);
+            }
             try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
                     return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
                 } else {
-                    throw new IOException("Unexpected response status: " + status);
+                    throw new ConnectorException("Unexpected response to GET: " + url, status);
                 }
             }
+        } catch (IOException e) {
+            throw new ConnectorException(url, e);
         }
     }
 }

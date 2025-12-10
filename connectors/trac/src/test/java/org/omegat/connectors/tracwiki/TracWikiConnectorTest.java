@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.connectors.wiki.wikimedia;
+package org.omegat.connectors.tracwiki;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -30,15 +30,19 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.omegat.connectors.dto.ServiceTarget;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class WikimediaConnectorWireMockTest {
+public class TracWikiConnectorTest {
 
     private WireMockServer server;
 
@@ -57,43 +61,44 @@ public class WikimediaConnectorWireMockTest {
     }
 
     @Test
-    public void testFetchResourceWithIndexPhpForm() throws Exception {
-        // Expectation: spaces are converted to underscores and action=raw is appended
-        server.stubFor(get(urlPathEqualTo("/index.php"))
-                .withQueryParam("title", equalTo("Main_Page"))
-                .withQueryParam("action", equalTo("raw"))
+    public void testFetchResourceWithServiceTarget() throws Exception {
+        // Trac edit page: /wiki/PageName?action=edit returns HTML containing <textarea name="text">raw</textarea>
+        server.stubFor(get(urlPathEqualTo("/wiki/SamplePage"))
+                .withQueryParam("action", equalTo("edit"))
                 .willReturn(aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "text/plain; charset=utf-8")
-                        .withBody("== Hello from MediaWiki ==\nSample content")));
+                        .withHeader("Content-Type", "text/html; charset=utf-8")
+                        .withBody("<html><body><form><textarea name=\"text\">Hello Trac</textarea></form></body></html>")));
 
-        String remote = "http://localhost:" + server.port() + "/index.php?title=Main Page";
-        WikimediaDefaultConnector connector = new WikimediaDefaultConnector();
+        String base = "http://localhost:" + server.port() + "/wiki";
+        ServiceTarget target = new ServiceTarget("tracwiki", "project", base, "");
+        TracWikiConnector connector = new TracWikiConnector();
 
-        try (InputStream is = connector.fetchResource(remote)) {
+        try (InputStream is = connector.fetchResource(target, "SamplePage")) {
             assertNotNull(is);
             String text = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-            assertEquals("== Hello from MediaWiki ==\nSample content", text);
+            assertEquals("Hello Trac", text);
         }
     }
 
     @Test
-    public void testFetchResourceWithRewrittenPathForm() throws Exception {
-        // Expectation: last path segment uses underscores and ?action=raw is appended
-        server.stubFor(get(urlPathEqualTo("/Wiki/Main_Page"))
-                .withQueryParam("action", equalTo("raw"))
+    public void testFetchResourceWithStringUrl() throws Exception {
+        // Given an incoming URL like http://host/project/wiki/PageName,
+        // connector should request ?action=edit and extract textarea content
+        server.stubFor(get(urlPathEqualTo("/project/wiki/AnotherPage"))
+                .withQueryParam("action", equalTo("edit"))
                 .willReturn(aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "text/plain; charset=utf-8")
-                        .withBody("Rewritten OK")));
+                        .withHeader("Content-Type", "text/html; charset=utf-8")
+                        .withBody("<html><body><textarea id=\"text\">Raw content</textarea></body></html>")));
 
-        String remote = "http://localhost:" + server.port() + "/Wiki/Main Page";
-        WikimediaCleanUrlConnector connector = new WikimediaCleanUrlConnector();
+        String remote = "http://localhost:" + server.port() + "/project/wiki/AnotherPage";
+        TracWikiConnector connector = new TracWikiConnector();
 
         try (InputStream is = connector.fetchResource(remote)) {
             assertNotNull(is);
             String text = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-            assertEquals("Rewritten OK", text);
+            assertEquals("Raw content", text);
         }
     }
 }

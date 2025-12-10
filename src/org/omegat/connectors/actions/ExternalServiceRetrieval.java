@@ -39,7 +39,8 @@ public class ExternalServiceRetrieval {
     public void retrieveResource(IExternalServiceConnector connector, ServiceTarget target, String resourceId, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(target, resourceId);
         Path dir = Paths.get(targetDir);
-        String fileName = resourceId.isEmpty() ? "external-service-resource.txt" : resourceId + ".txt";
+        String ext = "." + connector.getFileExtension();
+        String fileName = (resourceId.isEmpty() ? "external-service-resource" : resourceId) + ext;
         Path out = dir.resolve(fileName);
         Files.createDirectories(dir);
         try (in) {
@@ -50,7 +51,7 @@ public class ExternalServiceRetrieval {
     public void retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir) throws Exception {
         InputStream in = connector.fetchResource(url);
         Path dir = Paths.get(targetDir);
-        String fileName = extractFileNameFromUrl(url);
+        String fileName = extractFileNameFromUrl(connector, url);
         Path out = dir.resolve(fileName);
         Files.createDirectories(dir);
         try (in) {
@@ -58,10 +59,10 @@ public class ExternalServiceRetrieval {
         }
     }
 
-    private String extractFileNameFromUrl(String url) {
+    private String extractFileNameFromUrl(IExternalServiceConnector connector, String url) {
         String fileName = url.substring(url.lastIndexOf('/') + 1);
         if (!fileName.contains(".")) {
-            fileName = "external-service-resource.txt";
+            fileName = "external-service-resource." + connector.getFileExtension();
         }
         return fileName;
     }

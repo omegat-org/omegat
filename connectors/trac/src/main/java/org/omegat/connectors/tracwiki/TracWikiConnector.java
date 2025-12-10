@@ -75,6 +75,11 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
+    public String getFileExtension() {
+        return "txt";
+    }
+
+    @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
         String baseWikiUrl = target.getBaseUrl();
         String editUrl = buildEditUrl(baseWikiUrl, resourceId);

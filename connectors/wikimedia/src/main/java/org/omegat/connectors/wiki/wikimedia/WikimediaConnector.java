@@ -78,6 +78,11 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
+    public String getFileExtension() {
+        return "txt";
+    }
+
+    @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
         String joined = getResourceUrl(target.getBaseUrl() + "/index.php?title=" + resourceId);
         String page = httpGet(joined);

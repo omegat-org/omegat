@@ -40,14 +40,15 @@ import org.omegat.util.OStrings;
 
 import javax.swing.JDialog;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ExternalServiceConnectorPanelController {
 
-    private final ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();
-    private ExternalServiceConnectorPanel panel;
+    private final ExternalServiceConnectorPanel panel;
+
+    public ExternalServiceConnectorPanelController() {
+        panel = new ExternalServiceConnectorPanel();
+    }
 
     private @Nullable IExternalServiceConnector getSelectedConnector() {
         ServiceTarget target = panel.getSelectedTarget();
@@ -62,11 +63,9 @@ public class ExternalServiceConnectorPanelController {
         if (target == null) {
             return;
         }
-        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(target.getConnectorId());
-        if (connector == null) {
-            return;
-        }
-        if (!connector.supports(ConnectorCapability.SEARCH)) {
+        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(
+                target.getConnectorId());
+        if (!connector.supports(ConnectorCapability.LIST)) {
             return;
         }
         try {
@@ -79,53 +78,43 @@ public class ExternalServiceConnectorPanelController {
 
     public void show() {
         Frame owner = Core.getMainWindow().getApplicationFrame();
-        panel = new ExternalServiceConnectorPanel();
         JDialog dialog = new JDialog(owner, OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_TITLE"), true);
         dialog.getContentPane().add(panel);
         dialog.pack();
         dialog.setLocationRelativeTo(owner);
 
         panel.addSearchButtonActionListener(e -> openSearchDialog());
-
-        panel.getLaunchButton().addActionListener(new RetrieveAction(dialog));
-
+        panel.getLaunchButton().addActionListener(e -> retrieveResource(dialog));
         dialog.setVisible(true);
     }
 
-    private class RetrieveAction implements ActionListener {
-        private final JDialog dialog;
-
-        public RetrieveAction(JDialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String url = panel.getCustomUrl();
-            try {
-                IExternalServiceConnector connector = ExternalServiceConnectorPanelController.this.getSelectedConnector();
-                if (connector == null) {
-                    return;
-                }
-                // Always provide selected target to the connector
-                ServiceTarget target = panel.getSelectedTarget();
-                if (target == null) {
-                    return;
-                }
-                String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
-                if (url != null && !url.trim().isEmpty()) {
-                    externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
-                } else {
-                    String resourceId = panel.getResourceId();
-                    externalServiceRetrieval.retrieveResource(connector, target, resourceId, srcRoot);
-                }
-                ProjectUICommands.projectReload();
-            } catch (Exception ex) {
-                Log.log(ex);
-                Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
-            } finally {
-                dialog.dispose();
+    private void retrieveResource(JDialog dialog) {
+        String url = panel.getCustomUrl();
+        try {
+            IExternalServiceConnector connector = getSelectedConnector();
+            if (connector == null) {
+                return;
             }
+            // Always provide selected target to the connector
+            ServiceTarget target = panel.getSelectedTarget();
+            if (target == null) {
+                return;
+            }
+            String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
+            ExternalServiceRetrieval externalServiceRetrieval = new ExternalServiceRetrieval();
+            if (url != null && !url.trim().isEmpty()) {
+                externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
+            } else if (panel.getResourceId() != null) {
+                externalServiceRetrieval.retrieveResource(connector, target, panel.getResourceId(), srcRoot);
+            } else {
+                return;
+            }
+            ProjectUICommands.projectReload();
+        } catch (Exception ex) {
+            Log.log(ex);
+            Core.getMainWindow().displayErrorRB(ex, "TF_EXTERNAL_SERVICE_IMPORT_FAILED");
+        } finally {
+            dialog.dispose();
         }
     }
 }

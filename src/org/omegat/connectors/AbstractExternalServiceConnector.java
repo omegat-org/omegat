@@ -81,14 +81,4 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
             throw new ConnectorException("GET failed: " + url, e);
         }
     }
-
-    @Override
-    public void setServiceTarget(ServiceTarget target) {
-        this.currentTarget = target;
-    }
-
-    @Override
-    public ServiceTarget getServiceTarget() {
-        return currentTarget;
-    }
 }

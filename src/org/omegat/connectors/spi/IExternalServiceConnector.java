@@ -44,6 +44,8 @@ public interface IExternalServiceConnector {
 
     String getPreferenceName();
 
+    String getFileExtension();
+
     List<ExternalResource> listResources(ServiceTarget target) throws ConnectorException;
 
     InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException;

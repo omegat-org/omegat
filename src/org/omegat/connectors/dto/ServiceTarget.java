@@ -28,8 +28,6 @@ package org.omegat.connectors.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jspecify.annotations.Nullable;
-
 /**
  * DTO representing a configured target (connector + project + optional
  * URL/page).
@@ -39,17 +37,14 @@ public class ServiceTarget implements Serializable {
 
     private String connectorId;
     private String projectId;
-    private @Nullable String baseUrl; // optional custom URL
-    private @Nullable String defaultPage; // optional default page
+    private String baseUrl;
+    private String defaultPage;
 
     @SuppressWarnings("unused")
     public ServiceTarget() {
-        connectorId = "";
-        projectId = "";
     }
 
-    public ServiceTarget(String connectorId, String projectId, @Nullable String baseUrl,
-                         @Nullable String defaultPage) {
+    public ServiceTarget(String connectorId, String projectId, String baseUrl, String defaultPage) {
         this.connectorId = connectorId;
         this.projectId = projectId;
         this.baseUrl = baseUrl;
@@ -64,11 +59,11 @@ public class ServiceTarget implements Serializable {
         return projectId;
     }
 
-    public @Nullable String getBaseUrl() {
+    public String getBaseUrl() {
         return baseUrl;
     }
 
-    public @Nullable String getDefaultPage() {
+    public String getDefaultPage() {
         return defaultPage;
     }
 

@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.preferences.view;
+package org.omegat.connectors.gui;
 
 import org.omegat.gui.preferences.BasePreferencesController;
 

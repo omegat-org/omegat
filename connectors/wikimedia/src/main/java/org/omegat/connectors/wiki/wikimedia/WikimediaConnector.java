@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.core.Core;
 import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalProject;
@@ -56,12 +57,6 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
         // do nothing
     }
 
-    private static final Map<String, String> CONFIG = new HashMap<>();
-
-    static {
-        CONFIG.put("Wikipedia", "https://www.wikipedia.org");
-    }
-
     @Override
     public String getId() {
         return "wikimedia";
@@ -74,7 +69,7 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
 
     @Override
     public Set<ConnectorCapability> getCapabilities() {
-        return Set.of(ConnectorCapability.READ, ConnectorCapability.SEARCH);
+        return Set.of(ConnectorCapability.READ);
     }
 
     @Override
@@ -83,21 +78,8 @@ public class WikimediaConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public List<ExternalProject> listProjects() throws ConnectorException {
-        // MediaWiki instance may not have projects; return single pseudo
-        // project from base URL if provided
-        return List.of(new ExternalProject(CONFIG.get("Wikipedia"), "Wikimedia"));
-    }
-
-    @Override
-    public List<ExternalResource> listResources(String projectId) throws ConnectorException {
-        // Not implemented: would require API query; return empty
-        return Collections.emptyList();
-    }
-
-    @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws ConnectorException {
-        String joined = getResourceUrl(CONFIG.get(projectId) + "/index.php?title=" + resourceId);
+    public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
+        String joined = getResourceUrl(target.getBaseUrl() + "/index.php?title=" + resourceId);
         String page = httpGet(joined);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }

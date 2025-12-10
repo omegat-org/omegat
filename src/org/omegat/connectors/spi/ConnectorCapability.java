@@ -37,16 +37,7 @@ public enum ConnectorCapability {
      */
     WRITE,
     /**
-     * Ability of a connector to list projects from an external service.
+     * Ability of a connector to perform list resources operations on an external service.
      */
-    LIST_PROJECTS,
-    /**
-     * Ability of a connector to perform search operations on an external service.
-     */
-    SEARCH,
-    /**
-     * Indicates the ability of a connector to use OAuth as an authentication mechanism
-     * for interacting with external services.
-     */
-    OAUTH
+    LIST
 }

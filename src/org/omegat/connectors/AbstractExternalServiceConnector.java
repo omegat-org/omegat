@@ -35,12 +35,15 @@ import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorException;
+import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Base class for External service connectors with common helpers and defaults.
  */
 public abstract class AbstractExternalServiceConnector implements IExternalServiceConnector {
+
+    private ServiceTarget currentTarget;
 
     @Override
     public String toString() {
@@ -51,17 +54,12 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     public abstract String getPreferenceName();
 
     @Override
-    public List<ExternalProject> listProjects() throws ConnectorException {
+    public List<ExternalResource> listResources(ServiceTarget target) throws ConnectorException {
         return Collections.emptyList();
     }
 
     @Override
-    public List<ExternalResource> listResources(String projectId) throws ConnectorException {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public InputStream fetchResource(String projectId, String resourceId) throws ConnectorException {
+    public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
         throw new ConnectorException("Fetch not implemented");
     }
 
@@ -82,5 +80,15 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
         } catch (IOException e) {
             throw new ConnectorException("GET failed: " + url, e);
         }
+    }
+
+    @Override
+    public void setServiceTarget(ServiceTarget target) {
+        this.currentTarget = target;
+    }
+
+    @Override
+    public ServiceTarget getServiceTarget() {
+        return currentTarget;
     }
 }

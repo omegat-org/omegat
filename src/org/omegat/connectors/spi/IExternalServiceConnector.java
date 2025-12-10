@@ -30,6 +30,7 @@ import java.util.Set;
 
 import org.omegat.connectors.dto.ExternalProject;
 import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.dto.ServiceTarget;
 
 /**
  * Service Provider Interface for External service connectors.
@@ -43,11 +44,9 @@ public interface IExternalServiceConnector {
 
     String getPreferenceName();
 
-    List<ExternalProject> listProjects() throws ConnectorException;
+    List<ExternalResource> listResources(ServiceTarget target) throws ConnectorException;
 
-    List<ExternalResource> listResources(String projectId) throws ConnectorException;
-
-    InputStream fetchResource(String projectId, String resourceId) throws ConnectorException;
+    InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException;
 
     InputStream fetchResource(String url) throws ConnectorException;
 
@@ -56,5 +55,4 @@ public interface IExternalServiceConnector {
     default boolean supports(ConnectorCapability c) {
         return getCapabilities().contains(c);
     }
-
 }

@@ -40,6 +40,8 @@ import org.omegat.util.OStrings;
 
 import javax.swing.JDialog;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ExternalServiceConnectorPanelController {
@@ -68,7 +70,7 @@ public class ExternalServiceConnectorPanelController {
             return;
         }
         try {
-            List<ExternalResource> resources = connector.listResources(target.getProjectId());
+            List<ExternalResource> resources = connector.listResources(target);
             panel.openSearchDialog(resources);
         } catch (ConnectorException ex) {
             Log.log(ex);
@@ -85,20 +87,37 @@ public class ExternalServiceConnectorPanelController {
 
         panel.addSearchButtonActionListener(e -> openSearchDialog());
 
-        panel.getLaunchButton().addActionListener(e -> {
+        panel.getLaunchButton().addActionListener(new RetrieveAction(dialog));
+
+        dialog.setVisible(true);
+    }
+
+    private class RetrieveAction implements ActionListener {
+        private final JDialog dialog;
+
+        public RetrieveAction(JDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
             String url = panel.getCustomUrl();
             try {
-                IExternalServiceConnector connector = getSelectedConnector();
+                IExternalServiceConnector connector = ExternalServiceConnectorPanelController.this.getSelectedConnector();
                 if (connector == null) {
                     return;
                 }
-                String projectId = panel.getProjectId();
+                // Always provide selected target to the connector
+                ServiceTarget target = panel.getSelectedTarget();
+                if (target == null) {
+                    return;
+                }
                 String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
                 if (url != null && !url.trim().isEmpty()) {
                     externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
                 } else {
                     String resourceId = panel.getResourceId();
-                    externalServiceRetrieval.retrieveResource(connector, projectId, resourceId, srcRoot);
+                    externalServiceRetrieval.retrieveResource(connector, target, resourceId, srcRoot);
                 }
                 ProjectUICommands.projectReload();
             } catch (Exception ex) {
@@ -107,8 +126,6 @@ public class ExternalServiceConnectorPanelController {
             } finally {
                 dialog.dispose();
             }
-        });
-
-        dialog.setVisible(true);
+        }
     }
 }

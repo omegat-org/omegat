@@ -25,6 +25,7 @@
 
 package org.omegat.connectors.actions;
 
+import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 
 import java.io.InputStream;
@@ -35,10 +36,10 @@ import java.nio.file.StandardCopyOption;
 
 public class ExternalServiceRetrieval {
 
-    public void retrieveResource(IExternalServiceConnector connector, String projectId, String resourceId, String targetDir) throws Exception {
-        InputStream in = connector.fetchResource(projectId, resourceId);
+    public void retrieveResource(IExternalServiceConnector connector, ServiceTarget target, String resourceId, String targetDir) throws Exception {
+        InputStream in = connector.fetchResource(target, resourceId);
         Path dir = Paths.get(targetDir);
-        String fileName = resourceId.isEmpty() ? "external-service-resource.txt" : resourceId;
+        String fileName = resourceId.isEmpty() ? "external-service-resource.txt" : resourceId + ".txt";
         Path out = dir.resolve(fileName);
         Files.createDirectories(dir);
         try (in) {

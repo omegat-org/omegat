@@ -61,7 +61,7 @@ public class ExternalConnectorsManager {
         connectorMap.put(connector.getId(), connector);
     }
 
-    public synchronized @Nullable IExternalServiceConnector get(String id) {
+    public synchronized IExternalServiceConnector get(String id) {
         return connectorMap.get(id);
     }
 

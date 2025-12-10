@@ -26,9 +26,9 @@ package org.omegat.connectors.tracwiki;
 
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
-import org.jspecify.annotations.Nullable;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TracWikiRpc {
@@ -51,13 +51,13 @@ public class TracWikiRpc {
     public List<String> getAllPages() throws Exception {
         Object result = client.execute("wiki.getAllPages", new Object[]{});
         if (result == null) {
-            return java.util.Collections.emptyList();
+            return List.of();
         }
         if (result instanceof Object[]) {
             Object[] arr = (Object[]) result;
-            java.util.ArrayList<String> list = new java.util.ArrayList<>(arr.length);
+            List<String> list = new ArrayList<>(arr.length);
             for (Object o : arr) {
-                list.add(o != null ? o.toString() : null);
+                list.add(o.toString());
             }
             return list;
         }
@@ -65,13 +65,13 @@ public class TracWikiRpc {
             // Some implementations may return a List
             @SuppressWarnings("unchecked")
             List<Object> objList = (List<Object>) result;
-            java.util.ArrayList<String> list = new java.util.ArrayList<>(objList.size());
+            List<String> list = new ArrayList<>(objList.size());
             for (Object o : objList) {
-                list.add(o != null ? o.toString() : null);
+                list.add(o.toString());
             }
             return list;
         }
         // Fallback to single value
-        return java.util.List.of(result.toString());
+        return List.of(result.toString());
     }
 }

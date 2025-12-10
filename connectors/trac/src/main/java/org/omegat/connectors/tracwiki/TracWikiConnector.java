@@ -52,12 +52,14 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     public static final String PREF_USE_XMLRPC = "tracwiki.useXmlRpc";
 
+    @SuppressWarnings("unused")
     public static void loadPlugins() {
         Core.registerExternalServiceConnectorClass(TracWikiConnector.class);
         // Register preferences UI for this connector
         PreferencesControllers.addSupplier(TracWikiPreferencesController::new);
     }
 
+    @SuppressWarnings("unused")
     public static void unloadPlugins() {
         // do nothing
     }
@@ -90,7 +92,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public List<ExternalProject> listProjects() throws ConnectorException {
+    public List<ExternalProject> listProjects() {
         // Expose configured Trac instances as projects
         List<ExternalProject> projects = new ArrayList<>();
         for (Map.Entry<String, String> e : CONFIG.entrySet()) {
@@ -113,8 +115,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         TracWikiRpc rpc = createRpcFromWikiUrl(baseWikiUrl);
         List<String> pages;
         try {
-            List<String> res = rpc.getAllPages();
-            pages = res != null ? res : Collections.emptyList();
+            pages = rpc.getAllPages();
         } catch (Exception e) {
             throw new ConnectorException("Failed to list wiki pages via RPC", e);
         }
@@ -198,7 +199,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         String path = u.getPath();
         int idx = path.indexOf("/wiki/");
         if (idx >= 0) {
-            b.append(path.substring(0, idx)).append("/wiki/").append(pageName).append("?action=edit");
+            b.append(path, 0, idx).append("/wiki/").append(pageName).append("?action=edit");
         } else {
             b.append(path);
             if (!path.endsWith("/")) {
@@ -243,7 +244,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
             StringBuilder ep = new StringBuilder();
             ep.append(u.getScheme()).append("://").append(u.getHost());
             if (u.getPort() != -1) {
-                ep.append(":" ).append(u.getPort());
+                ep.append(":").append(u.getPort());
             }
             // Prefer anonymous RPC when possible
             ep.append("/rpc");

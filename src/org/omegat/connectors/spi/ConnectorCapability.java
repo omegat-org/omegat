@@ -29,15 +29,11 @@ package org.omegat.connectors.spi;
  */
 public enum ConnectorCapability {
     /**
-     * Ability of a connector to read from external service.
+     * Ability of a connector to perform read resource.
      */
     READ,
     /**
-     * Ability of a connector to write to external service.
-     */
-    WRITE,
-    /**
-     * Ability of a connector to perform list resources operations on an external service.
+     * Ability of a connector to perform list resources.
      */
     LIST
 }

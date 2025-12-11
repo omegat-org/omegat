@@ -59,9 +59,6 @@ public interface IExternalServiceConnector {
 
     InputStream fetchResource(String url) throws ConnectorException;
 
-    @SuppressWarnings("unused")
-    void pushTranslation(String projectId, String resourceId, InputStream translated) throws ConnectorException;
-
     default boolean supports(ConnectorCapability c) {
         return getCapabilities().contains(c);
     }

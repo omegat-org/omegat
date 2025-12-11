@@ -52,7 +52,7 @@
 		<listitem id="how.to.translate.other.files.third.party.utilities.po4a">
 		  <para><ulink url="https://po4a.org">po4a</ulink></para>
 
-		  <para>ライセンス: GNU General Public License v2</para>
+		  <para> ライセンス: GNU General Public License v2</para>
 
 		  <para>po4aは、サイトのフロント・ページにリストされているように、多数のフリー・ソフトウェアの文書ファイル形式をサポートしており、po書式との間の変換ツールを提供しています。詳細は<link linkend="file.filters.po" endterm="file.filters.po.title"/>項をご覧ください。</para>
 		</listitem>
@@ -60,7 +60,7 @@
 		<listitem>
 		  <para><ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink>のコンバータ</para>
 
-		  <para>ライセンス: GNU General Public License v2</para>
+		  <para> ライセンス: GNU General Public License v2</para>
 
 		  <para>Translate Toolkitには、po書式との間の変換ツールがいくつか用意されています。詳細については、<ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">コンバータ</ulink>を参照してください。</para>
 		</listitem>

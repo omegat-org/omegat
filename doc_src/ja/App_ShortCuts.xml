@@ -608,35 +608,35 @@
             </row>
 
             <row>
-              <entry>参考訳文の選択/参考訳文１を選択</entry>
+              <entry>参考訳文の選択/参考訳文#1を選択</entry>
               <entry>editSelectFuzzy1MenuItem</entry>
               <entry>ctrl 1</entry>
               <entry>meta 1</entry>
             </row>
 
             <row>
-              <entry>参考訳文の選択/参考訳文２を選択</entry>
+              <entry>参考訳文の選択/参考訳文#2を選択</entry>
               <entry>editSelectFuzzy2MenuItem</entry>
               <entry>ctrl 2</entry>
               <entry>meta 2</entry>
             </row>
 
             <row>
-              <entry>参考訳文の選択/参考訳文３を選択</entry>
+              <entry>参考訳文の選択/参考訳文#3を選択</entry>
               <entry>editSelectFuzzy3MenuItem</entry>
               <entry>ctrl 3</entry>
               <entry>meta 3</entry>
             </row>
 
             <row>
-              <entry>参考訳文の選択/参考訳文４を選択</entry>
+              <entry>参考訳文の選択/参考訳文#4を選択</entry>
               <entry>editSelectFuzzy4MenuItem</entry>
               <entry>ctrl 4</entry>
               <entry>meta 4</entry>
             </row>
 
             <row>
-              <entry>参考訳文の選択/参考訳文５を選択</entry>
+              <entry>参考訳文の選択/参考訳文#5を選択</entry>
               <entry>editSelectFuzzy5MenuItem</entry>
               <entry>ctrl 5</entry>
               <entry>meta 5</entry>
@@ -653,7 +653,7 @@
             </row>
             
             <row>
-              <entry>BiDi制御文字/右から左への記号の挿入(RLM U+200F)</entry>
+              <entry>BiDi制御文字/右から左への記号の挿入(RLM U+202A)</entry>
               <entry>insertCharsLRE</entry>
             </row>
 

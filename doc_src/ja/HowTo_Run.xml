@@ -214,7 +214,7 @@
 		  <listitem>
 			<para><option>-Duser.country=CC</option></para>
 
-			<para><code>CC</code>を<ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>リストから希望する2文字の国コードに置き換えます。</para>
+			<para><code>CC</code>を<ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>リストから希望する二文字の国コードに置き換えます。</para>
 
 			<para>この設定は、ひとつ前のユーザーインターフェース言語の引数と結合して、地域のバリエーションを指定します。それが利用できない場合は、ユーザーインターフェースは上記と同じ優先順位になります。</para>
 		  </listitem>

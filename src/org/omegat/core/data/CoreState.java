@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -139,11 +140,17 @@ public class CoreState {
         this.project = project;
     }
 
-    public IMainWindow getMainWindow() {
+    public @Nullable IMainWindow getMainWindow() {
         return mainWindow;
     }
 
-    public void setMainWindow(IMainWindow mainWindow) {
+    /**
+     * Sets the main window instance for the application.
+     *
+     * @param mainWindow the instance of IMainWindow to be set as the main window.
+     *                   Can be null when testing.
+     */
+    public void setMainWindow(@Nullable IMainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 

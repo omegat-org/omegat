@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Alex Buloichik
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,20 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.comments;
+@NullMarked
+package org.omegat.core.machinetranslators;
 
-import org.jspecify.annotations.Nullable;
-import org.omegat.core.data.SourceTextEntry;
-
-/**
- * Provider for some type of comments. It should work enough fast, without any network and disk calls.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public interface ICommentProvider {
-    /**
-     * Create comment for specific entry.
-     */
-    @Nullable
-    String getComment(SourceTextEntry newEntry);
-}
+import org.jspecify.annotations.NullMarked;

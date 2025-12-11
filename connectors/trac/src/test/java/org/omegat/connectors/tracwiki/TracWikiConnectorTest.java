@@ -71,7 +71,7 @@ public class TracWikiConnectorTest {
                         .withBody("<html><body><form><textarea name=\"text\">Hello Trac</textarea></form></body></html>")));
 
         String base = "http://localhost:" + server.port() + "/wiki";
-        ServiceTarget target = new ServiceTarget("tracwiki", "project", base, "");
+        ServiceTarget target = new ServiceTarget("tracwiki", "project", base, "", false);
         TracWikiConnector connector = new TracWikiConnector();
 
         try (InputStream is = connector.fetchResource(target, "SamplePage")) {

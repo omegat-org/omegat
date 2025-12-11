@@ -52,6 +52,10 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         // do nothing
     }
 
+    private static final String USER_KEY = "tracwiki.api.username";
+    private static final String PASS_KEY = "tracwiki.api.password";
+
+
     @Override
     public String getId() {
         return "tracwiki";
@@ -86,7 +90,26 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
         String baseWikiUrl = target.getBaseUrl();
         String editUrl = buildEditUrl(baseWikiUrl, resourceId);
-        String html = httpGet(editUrl);
+        String html;
+        if (target.isLoginRequired()) {
+            String userId = getCredential(USER_KEY);
+            String password = getCredential(PASS_KEY);
+            String credStr;
+            if (userId.isEmpty() || password.isEmpty()) {
+                String[] cred = askCredentials("Please enter username and password", "");
+                if (cred == null || cred.length != 2) {
+                    throw new ConnectorException("Invalid credentials");
+                }
+                setCredential(USER_KEY, cred[0], false);
+                setCredential(PASS_KEY, cred[1], false);
+                credStr = cred[0] + ":" + cred[1];
+            } else {
+                credStr = userId + ":" + password;
+            }
+            html = getURL(editUrl, credStr, 10000);
+        } else {
+            html = httpGet(editUrl);
+        }
         String text = extractWikiTextFromEditHtml(html);
         return new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
     }

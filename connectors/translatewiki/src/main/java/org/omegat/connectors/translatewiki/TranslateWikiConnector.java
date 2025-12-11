@@ -141,27 +141,27 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
         String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE + VALUE_ENGLISH + "&"
                 + GROUP + resourceId;
-        return fetchResource(url);
-    }
-
-    @Override
-    public InputStream fetchResource(String url) throws ConnectorException {
-        String userId = getCredential(USER_KEY);
-        String password = getCredential(PASS_KEY);
-        String credStr;
-        if (userId.isEmpty() || password.isEmpty()) {
-            String[] cred = askCredentials("Please enter Bot user ID(User@BotName) and a passcode",
-                    "Please create bot password from https://translatewiki.net/wiki/Special:BotPasswords");
-            if (cred == null || cred.length != 2) {
-                throw new ConnectorException("Invalid credentials");
+        String page;
+        if (target.isLoginRequired()) {
+            String userId = getCredential(USER_KEY);
+            String password = getCredential(PASS_KEY);
+            String credStr;
+            if (userId.isEmpty() || password.isEmpty()) {
+                String[] cred = askCredentials("Please enter Bot user ID(User@BotName) and a passcode",
+                        "Please create bot password from https://translatewiki.net/wiki/Special:BotPasswords");
+                if (cred == null || cred.length != 2) {
+                    throw new ConnectorException("Invalid credentials");
+                }
+                setCredential(USER_KEY, cred[0], false);
+                setCredential(PASS_KEY, cred[1], false);
+                credStr = cred[0] + ":" + cred[1];
+            } else {
+                credStr = userId + ":" + password;
             }
-            setCredential(USER_KEY, cred[0], false);
-            setCredential(PASS_KEY, cred[1], false);
-            credStr = cred[0] + ":" + cred[1];
+            page = getURL(url, credStr, 10000);
         } else {
-            credStr = userId + ":" + password;
+            page = httpGet(url);
         }
-        String page = getURL(url, credStr, 10000);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

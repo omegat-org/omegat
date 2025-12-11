@@ -41,15 +41,18 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
+import org.eclipse.jgit.lib.ObjectStream;
 import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.core.data.CoreState;
+import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
  * Preferences view panel for External Service settings. Users can manage a list of
- * target projects per connector with a base URL and optional default page. This
+ * target projects per connector with a base URL, target language, and login requirement. This
  * panel is embedded by {@link ExternalServiceConnectorPreferencesController}.
  */
 public class ExternalServiceConnectorPreferencesPanel extends JPanel {
@@ -128,7 +131,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
 
     static class TargetsTableModel extends AbstractTableModel {
         private static final long serialVersionUID = 1L;
-        final String[] COLS = { "Type", "Project", "Base URL", "Default Page" };
+        final String[] COLS = { "Type", "Project", "Base URL", "Target Language", "Login Required" };
         final List<ServiceTarget> items = new ArrayList<>();
 
         @Override
@@ -147,6 +150,11 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         }
 
         @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            return columnIndex == 4 ? Boolean.class : String.class;
+        }
+
+        @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             ServiceTarget t = items.get(rowIndex);
             switch (columnIndex) {
@@ -157,7 +165,9 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             case 2:
                 return t.getBaseUrl();
             case 3:
-                return t.getDefaultPage();
+                return t.getTargetLanguage();
+            case 4:
+                return t.isLoginRequired();
             default:
                 return "";
             }
@@ -170,12 +180,13 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         private final JComboBox<IExternalServiceConnector> typeCombo;
         private final JTextField projectField;
         private final JTextField baseUrlField;
-        private final JTextField defaultPageField;
+        private final JTextField targetLanguageField;
+        private final javax.swing.JCheckBox loginRequiredCheck;
         private @Nullable ServiceTarget result;
 
         ExternalServiceTargetEditor(@Nullable ServiceTarget initial) {
             dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
-                    "Edit External Service Integration", java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+                    OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE"), java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
             java.awt.GridBagConstraints gc = new java.awt.GridBagConstraints();
             gc.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -191,12 +202,13 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
 
             projectField = new JTextField(20);
             baseUrlField = new JTextField(25);
-            defaultPageField = new JTextField(20);
+            targetLanguageField = new JTextField(20);
+            loginRequiredCheck = new javax.swing.JCheckBox();
 
             // Row: Type
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel("Type"), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_TYPE")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -206,7 +218,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Project
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel("Project"), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_PROJECT")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -216,26 +228,38 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Base URL
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel("Base URL"), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_BASEURL")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
             panel.add(baseUrlField, gc);
             gc.weightx = 0;
             row++;
-            // Row: Default Page
+            // Row: Target Language
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel("Default Page"), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_LANGUAGE")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
-            panel.add(defaultPageField, gc);
+            panel.add(targetLanguageField, gc);
+            gc.weightx = 0;
+            row++;
+            // Row: Login Required
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_LOGIN")), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(loginRequiredCheck, gc);
             gc.weightx = 0;
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            JButton ok = new JButton("OK");
-            JButton cancel = new JButton("Cancel");
+            JButton ok = new JButton();
+            Mnemonics.setLocalizedText(ok, OStrings.getString("BUTTON_OK"));
+            JButton cancel = new JButton();
+            Mnemonics.setLocalizedText(cancel, OStrings.getString("BUTTON_CANCEL"));
             buttons.add(ok);
             buttons.add(cancel);
 
@@ -252,7 +276,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 if (baseUrl.isEmpty()) {
                     return;
                 }
-                result = new ServiceTarget(sel.getId(), projectId, baseUrl, defaultPageField.getText().trim());
+                result = new ServiceTarget(sel.getId(), projectId, baseUrl, targetLanguageField.getText().trim(),
+                        loginRequiredCheck.isSelected());
                 dialog.dispose();
             });
             cancel.addActionListener(e -> {
@@ -283,7 +308,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 }
                 projectField.setText(initial.getProjectId());
                 baseUrlField.setText(initial.getBaseUrl());
-                defaultPageField.setText(initial.getDefaultPage());
+                targetLanguageField.setText(initial.getTargetLanguage());
+                loginRequiredCheck.setSelected(initial.isLoginRequired());
             }
         }
 

@@ -38,17 +38,20 @@ public class ServiceTarget implements Serializable {
     private String connectorId;
     private String projectId;
     private String baseUrl;
-    private String defaultPage;
+    private String targetLanguage;
+    private boolean loginRequired;
 
     @SuppressWarnings("unused")
     public ServiceTarget() {
     }
 
-    public ServiceTarget(String connectorId, String projectId, String baseUrl, String defaultPage) {
+    public ServiceTarget(String connectorId, String projectId, String baseUrl, String targetLanguage,
+            boolean loginRequired) {
         this.connectorId = connectorId;
         this.projectId = projectId;
         this.baseUrl = baseUrl;
-        this.defaultPage = defaultPage;
+        this.targetLanguage = targetLanguage;
+        this.loginRequired = loginRequired;
     }
 
     public String getConnectorId() {
@@ -63,8 +66,12 @@ public class ServiceTarget implements Serializable {
         return baseUrl;
     }
 
-    public String getDefaultPage() {
-        return defaultPage;
+    public String getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public boolean isLoginRequired() {
+        return loginRequired;
     }
 
     @Override
@@ -77,12 +84,13 @@ public class ServiceTarget implements Serializable {
         }
         ServiceTarget that = (ServiceTarget) o;
         return Objects.equals(connectorId, that.connectorId) && Objects.equals(projectId, that.projectId)
-                && Objects.equals(baseUrl, that.baseUrl) && Objects.equals(defaultPage, that.defaultPage);
+                && Objects.equals(baseUrl, that.baseUrl) && Objects.equals(targetLanguage, that.targetLanguage)
+                && loginRequired == that.loginRequired;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(connectorId, projectId, baseUrl, defaultPage);
+        return Objects.hash(connectorId, projectId, baseUrl, targetLanguage, loginRequired);
     }
 
     @Override

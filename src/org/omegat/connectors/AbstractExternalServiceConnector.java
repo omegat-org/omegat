@@ -28,6 +28,7 @@ package org.omegat.connectors;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,15 +40,21 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.util.EntityUtils;
 import org.jspecify.annotations.Nullable;
+
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.core.Core;
+import org.omegat.util.CredentialsManager;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.OStrings;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  * Base class for External service connectors with common helpers and defaults.
@@ -82,12 +89,15 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
         throw new ConnectorException("Fetch not implemented");
     }
 
-    @Override
-    public void pushTranslation(String projectId, String resourceId, InputStream translated)
-            throws ConnectorException {
-        throw new ConnectorException("Push not supported");
-    }
-
+    /**
+     * Sends an HTTP GET request to the specified URL and retrieves the response as a string.
+     * If the URL is invalid or cannot be reached, a warning message is displayed,
+     * and a {@link ConnectorException} is thrown.
+     *
+     * @param url the URL to which the HTTP GET request should be sent
+     * @return the response from the server as a string
+     * @throws ConnectorException if the URL is invalid or an error occurs during the request
+     */
     protected String httpGet(String url) throws ConnectorException {
         if (!HttpConnectionUtils.checkUrl(url)) {
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
@@ -95,11 +105,7 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
                     OStrings.getString("TF_WIKI_IMPORT_URL_ERROR_TITLE"), JOptionPane.WARNING_MESSAGE);
             throw new ConnectorException(OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"));
         }
-        return httpGet(url, null);
-    }
-    
-    protected String httpGet(String url, @Nullable String referer) throws ConnectorException {
-        return getURL(url, referer, 10000);
+        return getURL(url, null, 10000);
     }
 
     /**
@@ -107,13 +113,15 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
      *
      * @param url
      *            resource URL to download
+     * @param cred
+     *            BotPassword credential, can be null.
      * @param timeout
      *            timeout to connect and read.
      * @return returned string
      * @throws ConnectorException
      *             when connection and read method error.
      */
-    public String getURL(String url, @Nullable String referer, int timeout) throws ConnectorException {
+    public String getURL(String url, @Nullable String cred, int timeout) throws ConnectorException {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout)
                 .setSocketTimeout(timeout)
@@ -126,8 +134,9 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
                 .useSystemProperties()
                 .build()) {
             HttpGet httpGet = new HttpGet(url);
-            if (referer != null && !referer.isEmpty()) {
-                httpGet.setHeader("Referer", referer);
+            if (cred != null && !cred.isEmpty()) {
+                httpGet.setHeader("Authorization", "Basic " + Base64.getEncoder().encodeToString(
+                        cred.getBytes()));
             }
             try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
                 int status = response.getStatusLine().getStatusCode();
@@ -140,5 +149,63 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
         } catch (IOException e) {
             throw new ConnectorException(url, e);
         }
+    }
+
+    /**
+     * Retrieve a credential with the given ID. First checks temporary system
+     * properties, then falls back to the program's persistent preferences.
+     * Store a credential with {@link #setCredential(String, String, boolean)}.
+     *
+     * @param id
+     *            ID or key of the credential to retrieve
+     * @return the credential value in plain text
+     */
+    protected String getCredential(String id) {
+        String property = System.getProperty(id);
+        if (property != null) {
+            return property;
+        }
+        return CredentialsManager.getInstance().retrieve(id).orElse("");
+    }
+
+    /**
+     * Store a credential. Credentials are stored in temporary system properties
+     * and, if <code>temporary</code> is <code>false</code>, in the program's
+     * persistent preferences encoded in Base64. Retrieve a credential with
+     * {@link #getCredential(String)}.
+     *
+     * @param id
+     *            ID or key of the credential to store
+     * @param value
+     *            value of the credential to store
+     * @param temporary
+     *            if <code>false</code>, encode with Base64 and store in
+     *            persistent preferences as well
+     */
+    protected void setCredential(String id, String value, boolean temporary) {
+        System.setProperty(id, value);
+        CredentialsManager.getInstance().store(id, temporary ? "" : value);
+    }
+
+    protected String @Nullable [] askCredentials(String title, String message) {
+        JTextField userField = new JTextField("", 20);
+        JPasswordField passField = new JPasswordField(20);
+        JPanel panel = new JPanel();
+        panel.setLayout(new java.awt.GridLayout(0, 1));
+        panel.add(new JLabel(OStrings.getString("LOGIN_USER")));
+        panel.add(userField);
+        panel.add(new JLabel(OStrings.getString("LOGIN_PASSWORD")));
+        panel.add(passField);
+        panel.add(new JLabel(message));
+        int result = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(), panel, title,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            String u = userField.getText().trim();
+            String p = new String(passField.getPassword());
+            if (!u.isEmpty() && !p.isEmpty()) {
+                return new String[] { u, p };
+            }
+        }
+        return null;
     }
 }

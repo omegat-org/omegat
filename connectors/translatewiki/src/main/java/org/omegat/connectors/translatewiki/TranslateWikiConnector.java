@@ -55,20 +55,18 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
         // do nothing
     }
 
+    private static final String USER_KEY = "translatewiki.api.username";
+    private static final String PASS_KEY = "translatewiki.api.password";
     private static final String BASE_URL = "https://translatewiki.net/";
-    private static final String GET_PATH = "wiki/Special:ExportTranslations";
-    private static final String QUERY_FORMAT = "format=";
-    private static final String VALUE_FORMAT_PO = "export-as-po";
-    private static final String QUERY_LANGUAGE = "language=";
-    private static final String VALUE_ENGLISH = "en";
-    private static final String GROUP = "group=";
-
     private static final String API_PATH = "w/api.php";
+
+    private static final String EXPORT_ACTION = "action=query&list=messagecollection&format=json";
+    private static final String QUERY_LANGUAGE = "mclanguage=";
+    private static final String VALUE_ENGLISH = "en";
+    private static final String GROUP = "mcgroup=";
+
     private static final String QUERY_ACTION = "action=translationentitysearch&format=json";
     private static final String QUERY_GROUPS = "&entitytype=groups&limit=50&query=";
-
-    private static final String REFERER_PATH = "w/i.php";
-    private static final String REFERER_QUERY = "title=Special:ExportTranslations";
 
     @Override
     public String getId() {
@@ -97,7 +95,7 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public String getFileExtension() {
-        return "po";
+        return "json";
     }
 
     @Override
@@ -141,14 +139,29 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String url = target.getBaseUrl() + GET_PATH + "?" + QUERY_FORMAT + VALUE_FORMAT_PO + "&" + QUERY_LANGUAGE
-                + VALUE_ENGLISH + "&" + GROUP + resourceId;
+        String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE + VALUE_ENGLISH + "&"
+                + GROUP + resourceId;
         return fetchResource(url);
     }
 
     @Override
     public InputStream fetchResource(String url) throws ConnectorException {
-        String page = httpGet(url, BASE_URL + REFERER_PATH + "?" + REFERER_QUERY);
+        String userId = getCredential(USER_KEY);
+        String password = getCredential(PASS_KEY);
+        String credStr;
+        if (userId.isEmpty() || password.isEmpty()) {
+            String[] cred = askCredentials("Please enter Bot user ID(User@BotName) and a passcode",
+                    "Please create bot password from https://translatewiki.net/wiki/Special:BotPasswords");
+            if (cred == null || cred.length != 2) {
+                throw new ConnectorException("Invalid credentials");
+            }
+            setCredential(USER_KEY, cred[0], false);
+            setCredential(PASS_KEY, cred[1], false);
+            credStr = cred[0] + ":" + cred[1];
+        } else {
+            credStr = userId + ":" + password;
+        }
+        String page = getURL(url, credStr, 10000);
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

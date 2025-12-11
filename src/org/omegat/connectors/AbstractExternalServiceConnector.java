@@ -47,7 +47,6 @@ import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.core.Core;
 import org.omegat.util.CredentialsManager;
-import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.OStrings;
 
 import javax.swing.JLabel;
@@ -102,12 +101,6 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
      *             if the URL is invalid or an error occurs during the request
      */
     protected String httpGet(String url) throws ConnectorException {
-        if (!HttpConnectionUtils.checkUrl(url)) {
-            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"),
-                    OStrings.getString("TF_WIKI_IMPORT_URL_ERROR_TITLE"), JOptionPane.WARNING_MESSAGE);
-            throw new ConnectorException(OStrings.getString("TF_WIKI_IMPORT_URL_ERROR"));
-        }
         return getURL(url, null, 10000);
     }
 

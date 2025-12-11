@@ -7,6 +7,7 @@
                2007-2008 Didier Briel, Martin Fleurke
                2009 Didier Briel
                2012 Martin Fleurke, Didier Briel
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -72,6 +73,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
         skipRegExpTF.setText(options.getSkipRegExp());
         skipMetaTF.setText(options.getSkipMeta());
         ignoreTagsTF.setText(options.getIgnoreTags());
+        ignoreDoctypeCB.setSelected(options.getIgnoreDoctype());
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -122,6 +124,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
         skipMetaTF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         ignoreTagsTF = new javax.swing.JTextField();
+        ignoreDoctypeCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("XHTML_Filter_Options")); // NOI18N
         setResizable(false);
@@ -200,6 +203,10 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
         jPanel1.add(jLabel6);
         jPanel1.add(ignoreTagsTF);
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(ignoreDoctypeCB, bundle.getString("HTML_IGNORE_DOCTYPE_DTD")); // NOI18N
+        jPanel1.add(ignoreDoctypeCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -241,6 +248,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
         options.setSkipRegExp(skipRegExpTF.getText());
         options.setSkipMeta(skipMetaTF.getText());
         options.setIgnoreTags(ignoreTagsTF.getText());
+        options.setIgnoreDoctype(ignoreDoctypeCB.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -263,6 +271,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox ignoreDoctypeCB;
     private javax.swing.JTextField ignoreTagsTF;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

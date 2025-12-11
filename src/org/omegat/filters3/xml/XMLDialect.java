@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
@@ -165,7 +166,7 @@ public interface XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validateParagraphTag(String tag, Attributes atts);
+    Boolean validateParagraphTag(String tag, @Nullable Attributes atts);
 
     /**
      * For a given tag, return wether the content of this tag is a preformat
@@ -249,7 +250,7 @@ public interface XMLDialect {
      * Resolves external entites if child filter needs it. Should return
      * <code>null</code> if it doesn't or cannot.
      */
-    InputSource resolveEntity(String publicId, String systemId);
+    @Nullable InputSource resolveEntity(String publicId, String systemId);
 
     /**
      * Sets closingTag to <code>true</code> or <code>false</code>
@@ -292,7 +293,7 @@ public interface XMLDialect {
 
     /**
      * Implement general purpose function to handle XML tag/attributes when necessary.
-     * @param tag
+     * @param tag XML tag to handle.
      */
     void handleXMLTag(XMLTag tag, boolean translated);
 }

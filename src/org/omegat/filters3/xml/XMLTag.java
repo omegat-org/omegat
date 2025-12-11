@@ -29,6 +29,7 @@ package org.omegat.filters3.xml;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Tag;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
@@ -41,8 +42,8 @@ import org.omegat.util.Language;
  * @author Briac Pilpre
  */
 public class XMLTag extends Tag {
-    private final Language sourceLanguage;
-    private final Language targetLanguage;
+    private final @Nullable Language sourceLanguage;
+    private final @Nullable Language targetLanguage;
 
     /** Creates a new instance of XML Tag */
     public XMLTag(String tag, String shortcut, Type type, @Nullable org.xml.sax.Attributes attributes,
@@ -61,7 +62,7 @@ public class XMLTag extends Tag {
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
-        boolean isRtl = BiDiUtils.isRtl(targetLanguage.getLanguageCode());
+        boolean isRtl = targetLanguage != null && BiDiUtils.isRtl(targetLanguage.getLanguageCode());
         boolean differentDir = isDifferentDirection(isRtl);
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);
@@ -90,22 +91,23 @@ public class XMLTag extends Tag {
             buf.append(getTag());
         }
 
-        buf.append(getAttributes());
-
-        // If that's an Open XML document, we preserve spaces for all <w:t> tags
-        if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
-            boolean preserve = false;
-            if (getAttributes() != null) {
-                for (int i = 0; i < getAttributes().size(); i++) {
-                    Attribute oneAttribute = getAttributes().get(i);
-                    if (oneAttribute.getName().equalsIgnoreCase("xml:space")) { // If XML:space is already there
+        Attributes atts = getAttributes();
+        if (atts != null) {
+            buf.append(atts);
+            // If that's an Open XML document, we preserve spaces for all <w:t> tags
+            if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
+                boolean preserve = false;
+                for (int i = 0; i < atts.size(); i++) {
+                    Attribute oneAttribute = atts.get(i);
+                    // If XML:space is already there
+                    if (oneAttribute.getName().equalsIgnoreCase("xml:space")) {
                         preserve = true; // We do nothing
                         break;
                     }
                 }
-            }
-            if (!preserve) {
-                buf.append(" xml:space=\"preserve\"");
+                if (!preserve) {
+                    buf.append(" xml:space=\"preserve\"");
+                }
             }
         }
 

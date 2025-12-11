@@ -27,6 +27,8 @@ package org.omegat.filters3.xml.android;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -36,6 +38,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public class AndroidDialect extends DefaultXMLDialect {
     public static final Pattern ROOT_PATTERN = Pattern.compile("resources");
 
@@ -45,7 +48,7 @@ public class AndroidDialect extends DefaultXMLDialect {
     }
 
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);

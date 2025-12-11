@@ -31,6 +31,8 @@ package org.omegat.filters3.xml.xliff;
 
 import java.util.List;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters3.Attribute;
@@ -57,6 +59,7 @@ import org.omegat.util.StringUtil;
  * @author Piotr Kulik
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
@@ -115,7 +118,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      *         <code>false</code> otherwise
      */
     @Override
-    public Boolean validatePreformatTag(String tag, Attributes atts) {
+    public Boolean validatePreformatTag(String tag, @Nullable Attributes atts) {
         if (!tag.equalsIgnoreCase("mrk")) {
             return false;
         }
@@ -139,7 +142,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (tag.startsWith("str:")) { // All str:* tags should be ignored
             return true;
         }

@@ -25,6 +25,7 @@
 
 package org.omegat.filters3.xml;
 
+import org.omegat.filters3.Entry;
 import org.omegat.filters3.OutOfTurnTag;
 
 /**
@@ -54,20 +55,9 @@ public class XMLOutOfTurnTag extends OutOfTurnTag {
      * </code>.
      */
     public String toOriginal() {
-        StringBuilder buf = new StringBuilder();
-
-        buf.append("<");
-        buf.append(getTag());
-        buf.append(getAttributes().toString());
-        buf.append(">");
-
-        buf.append(getEntry().translationToOriginal());
-
-        buf.append("</");
-        buf.append(getTag());
-        buf.append(">");
-
-        return buf.toString();
+        Entry entry = getEntry();
+        String originalEntry = entry != null ? entry.translationToOriginal() : "";
+        String atts = getAttributes() != null ? getAttributes().toString() : "";
+        return "<" + getTag() + atts + ">" + originalEntry + "</" + getTag() + ">";
     }
-
 }

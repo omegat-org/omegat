@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.infix;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -35,6 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class InfixDialect extends DefaultXMLDialect {
     public static final Pattern ROOT_TAG = Pattern.compile("DOC");
 

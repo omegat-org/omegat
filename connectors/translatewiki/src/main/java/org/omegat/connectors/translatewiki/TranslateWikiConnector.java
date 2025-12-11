@@ -62,7 +62,6 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     private static final String EXPORT_ACTION = "action=query&list=messagecollection&format=json";
     private static final String QUERY_LANGUAGE = "mclanguage=";
-    private static final String VALUE_ENGLISH = "en";
     private static final String GROUP = "mcgroup=";
 
     private static final String QUERY_ACTION = "action=translationentitysearch&format=json";
@@ -139,7 +138,7 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE + VALUE_ENGLISH + "&"
+        String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE + target.getTargetLanguage() + "&"
                 + GROUP + resourceId;
         String page;
         if (target.isLoginRequired()) {

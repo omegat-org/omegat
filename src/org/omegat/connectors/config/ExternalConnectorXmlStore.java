@@ -41,8 +41,8 @@ import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
 /**
- * Persists configuration to an XML file located under the user config
- * directory (external_connectors.xml).
+ * Persists configuration to an XML file located under the user config directory
+ * (external_connectors.xml).
  */
 public final class ExternalConnectorXmlStore {
     private static final String FILE_NAME = "external_connectors.xml";
@@ -63,8 +63,8 @@ public final class ExternalConnectorXmlStore {
     }
 
     /**
-     * Load list of CMS targets from external_connectors.xml, or migrate from legacy preferences
-     * if file doesn't exist.
+     * Load list of CMS targets from external_connectors.xml, or migrate from
+     * legacy preferences if file doesn't exist.
      */
     public static List<ServiceTarget> loadTargets() {
         File file = getFile();
@@ -80,8 +80,8 @@ public final class ExternalConnectorXmlStore {
     }
 
     /**
-     * Save the provided list of targets to external_connectors.xml. Creates parent dir if
-     * needed.
+     * Save the provided list of targets to external_connectors.xml. Creates
+     * parent dir if needed.
      */
     public static void saveTargets(List<ServiceTarget> targets) {
         File file = getFile();

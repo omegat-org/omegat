@@ -87,7 +87,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
         launchButton = new JButton();
         Mnemonics.setLocalizedText(launchButton, OStrings.getString("TF_EXTERNAL_SERVICE_IMPORT_BUTTON"));
         defineTargetButton = new JButton();
-        Mnemonics.setLocalizedText(defineTargetButton, OStrings.getString("TF_EXTERNAL_SERVICE_DEFINE_TARGET"));
+        Mnemonics.setLocalizedText(defineTargetButton,
+                OStrings.getString("TF_EXTERNAL_SERVICE_DEFINE_TARGET"));
         cancelButton = new JButton();
         Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
 
@@ -153,7 +154,7 @@ public class ExternalServiceConnectorPanel extends JPanel {
         targetCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                          boolean isSelected, boolean cellHasFocus) {
+                    boolean isSelected, boolean cellHasFocus) {
                 Component c = super.getListCellRendererComponent(list, value, index, isSelected,
                         cellHasFocus);
                 if (value instanceof ServiceTarget) {
@@ -166,8 +167,8 @@ public class ExternalServiceConnectorPanel extends JPanel {
     }
 
     void openSearchDialog(List<ExternalResource> resources) {
-        JDialog dlg = new JDialog((java.awt.Frame) null, OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"),
-                true);
+        JDialog dlg = new JDialog((java.awt.Frame) null,
+                OStrings.getString("TF_EXTERNAL_SERVICE_SELECT_PAGE"), true);
         JTextField filter = new JTextField(20);
         DefaultListModel<ExternalResource> listModel = new DefaultListModel<>();
         for (ExternalResource r : resources) {

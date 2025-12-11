@@ -62,13 +62,12 @@ public class TracWikiConnectorTest {
 
     @Test
     public void testFetchResourceWithServiceTarget() throws Exception {
-        // Trac edit page: /wiki/PageName?action=edit returns HTML containing <textarea name="text">raw</textarea>
-        server.stubFor(get(urlPathEqualTo("/wiki/SamplePage"))
-                .withQueryParam("action", equalTo("edit"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "text/html; charset=utf-8")
-                        .withBody("<html><body><form><textarea name=\"text\">Hello Trac</textarea></form></body></html>")));
+        // Trac edit page: /wiki/PageName?action=edit returns HTML containing
+        // <textarea name="text">raw</textarea>
+        server.stubFor(get(urlPathEqualTo("/wiki/SamplePage")).withQueryParam("action", equalTo("edit"))
+                .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/html; charset=utf-8")
+                        .withBody(
+                                "<html><body><form><textarea name=\"text\">Hello Trac</textarea></form></body></html>")));
 
         String base = "http://localhost:" + server.port() + "/wiki";
         ServiceTarget target = new ServiceTarget("tracwiki", "project", base, "", false);
@@ -87,9 +86,7 @@ public class TracWikiConnectorTest {
         // connector should request ?action=edit and extract textarea content
         server.stubFor(get(urlPathEqualTo("/project/wiki/AnotherPage"))
                 .withQueryParam("action", equalTo("edit"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "text/html; charset=utf-8")
+                .willReturn(aResponse().withStatus(200).withHeader("Content-Type", "text/html; charset=utf-8")
                         .withBody("<html><body><textarea id=\"text\">Raw content</textarea></body></html>")));
 
         String remote = "http://localhost:" + server.port() + "/project/wiki/AnotherPage";

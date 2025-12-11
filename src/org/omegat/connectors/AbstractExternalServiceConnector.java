@@ -75,7 +75,8 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     }
 
     @Override
-    public List<ExternalResource> listResources(ServiceTarget target, String keyword) throws ConnectorException {
+    public List<ExternalResource> listResources(ServiceTarget target, String keyword)
+            throws ConnectorException {
         return Collections.emptyList();
     }
 
@@ -90,13 +91,15 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     }
 
     /**
-     * Sends an HTTP GET request to the specified URL and retrieves the response as a string.
-     * If the URL is invalid or cannot be reached, a warning message is displayed,
-     * and a {@link ConnectorException} is thrown.
+     * Sends an HTTP GET request to the specified URL and retrieves the response
+     * as a string. If the URL is invalid or cannot be reached, a warning
+     * message is displayed, and a {@link ConnectorException} is thrown.
      *
-     * @param url the URL to which the HTTP GET request should be sent
+     * @param url
+     *            the URL to which the HTTP GET request should be sent
      * @return the response from the server as a string
-     * @throws ConnectorException if the URL is invalid or an error occurs during the request
+     * @throws ConnectorException
+     *             if the URL is invalid or an error occurs during the request
      */
     protected String httpGet(String url) throws ConnectorException {
         if (!HttpConnectionUtils.checkUrl(url)) {
@@ -122,21 +125,16 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
      *             when connection and read method error.
      */
     public String getURL(String url, @Nullable String cred, int timeout) throws ConnectorException {
-        RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(timeout)
-                .setSocketTimeout(timeout)
-                .setConnectionRequestTimeout(timeout)
-                .build();
+        RequestConfig config = RequestConfig.custom().setConnectTimeout(timeout).setSocketTimeout(timeout)
+                .setConnectionRequestTimeout(timeout).build();
 
         try (CloseableHttpClient httpClient = HttpClients.custom()
-                .setRedirectStrategy(new LaxRedirectStrategy())
-                .setDefaultRequestConfig(config)
-                .useSystemProperties()
-                .build()) {
+                .setRedirectStrategy(new LaxRedirectStrategy()).setDefaultRequestConfig(config)
+                .useSystemProperties().build()) {
             HttpGet httpGet = new HttpGet(url);
             if (cred != null && !cred.isEmpty()) {
-                httpGet.setHeader("Authorization", "Basic " + Base64.getEncoder().encodeToString(
-                        cred.getBytes()));
+                httpGet.setHeader("Authorization",
+                        "Basic " + Base64.getEncoder().encodeToString(cred.getBytes(StandardCharsets.UTF_8)));
             }
             try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
                 int status = response.getStatusLine().getStatusCode();

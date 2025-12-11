@@ -61,14 +61,12 @@ public class WikimediaConnectorTest {
 
     @Test
     public void testFetchResourceWithIndexPhpForm() throws Exception {
-        // Expectation: spaces are converted to underscores and action=raw is appended
-        server.stubFor(get(urlPathEqualTo("/index.php"))
-                .withQueryParam("title", equalTo("Main_Page"))
-                .withQueryParam("action", equalTo("raw"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "text/plain; charset=utf-8")
-                        .withBody("== Hello from MediaWiki ==\nSample content")));
+        // Expectation: spaces are converted to underscores and action=raw is
+        // appended
+        server.stubFor(get(urlPathEqualTo("/index.php")).withQueryParam("title", equalTo("Main_Page"))
+                .withQueryParam("action", equalTo("raw")).willReturn(
+                        aResponse().withStatus(200).withHeader("Content-Type", "text/plain; charset=utf-8")
+                                .withBody("== Hello from MediaWiki ==\nSample content")));
 
         String remote = "http://localhost:" + server.port() + "/index.php?title=Main Page";
         WikimediaDefaultConnector connector = new WikimediaDefaultConnector();
@@ -82,13 +80,11 @@ public class WikimediaConnectorTest {
 
     @Test
     public void testFetchResourceWithRewrittenPathForm() throws Exception {
-        // Expectation: last path segment uses underscores and ?action=raw is appended
-        server.stubFor(get(urlPathEqualTo("/Wiki/Main_Page"))
-                .withQueryParam("action", equalTo("raw"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "text/plain; charset=utf-8")
-                        .withBody("Rewritten OK")));
+        // Expectation: last path segment uses underscores and ?action=raw is
+        // appended
+        server.stubFor(get(urlPathEqualTo("/Wiki/Main_Page")).withQueryParam("action", equalTo("raw"))
+                .willReturn(aResponse().withStatus(200)
+                        .withHeader("Content-Type", "text/plain; charset=utf-8").withBody("Rewritten OK")));
 
         String remote = "http://localhost:" + server.port() + "/Wiki/Main Page";
         WikimediaCleanUrlConnector connector = new WikimediaCleanUrlConnector();

@@ -41,7 +41,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import org.eclipse.jgit.lib.ObjectStream;
 import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
@@ -51,9 +50,10 @@ import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
 /**
- * Preferences view panel for External Service settings. Users can manage a list of
- * target projects per connector with a base URL, target language, and login requirement. This
- * panel is embedded by {@link ExternalServiceConnectorPreferencesController}.
+ * Preferences view panel for External Service settings. Users can manage a list
+ * of target projects per connector with a base URL, target language, and login
+ * requirement. This panel is embedded by
+ * {@link ExternalServiceConnectorPreferencesController}.
  */
 public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -174,7 +174,9 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         }
     }
 
-    /** Simple modal editor dialog for a External Service Integration target row. */
+    /**
+     * Simple modal editor dialog for a External Service Integration target row.
+     */
     class ExternalServiceTargetEditor {
         private final JDialog dialog;
         private final JComboBox<IExternalServiceConnector> typeCombo;
@@ -185,8 +187,11 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         private @Nullable ServiceTarget result;
 
         ExternalServiceTargetEditor(@Nullable ServiceTarget initial) {
-            dialog = new JDialog(javax.swing.SwingUtilities.getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
-                    OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE"), java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+            dialog = new JDialog(
+                    javax.swing.SwingUtilities
+                            .getWindowAncestor(ExternalServiceConnectorPreferencesPanel.this),
+                    OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE"),
+                    java.awt.Dialog.ModalityType.APPLICATION_MODAL);
             JPanel panel = new JPanel(new java.awt.GridBagLayout());
             java.awt.GridBagConstraints gc = new java.awt.GridBagConstraints();
             gc.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -195,7 +200,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             int row = 0;
 
             typeCombo = new JComboBox<>();
-            List<IExternalServiceConnector> connectors = CoreState.getInstance().getExternalConnectorsManager().getAll();
+            List<IExternalServiceConnector> connectors = CoreState.getInstance()
+                    .getExternalConnectorsManager().getAll();
             for (IExternalServiceConnector c : connectors) {
                 typeCombo.addItem(c);
             }
@@ -276,8 +282,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 if (baseUrl.isEmpty()) {
                     return;
                 }
-                result = new ServiceTarget(sel.getId(), projectId, baseUrl, targetLanguageField.getText().trim(),
-                        loginRequiredCheck.isSelected());
+                result = new ServiceTarget(sel.getId(), projectId, baseUrl,
+                        targetLanguageField.getText().trim(), loginRequiredCheck.isSelected());
                 dialog.dispose();
             });
             cancel.addActionListener(e -> {

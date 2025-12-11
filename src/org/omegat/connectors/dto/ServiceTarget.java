@@ -84,8 +84,8 @@ public class ServiceTarget implements Serializable {
         }
         ServiceTarget that = (ServiceTarget) o;
         return Objects.equals(connectorId, that.connectorId) && Objects.equals(projectId, that.projectId)
-                && Objects.equals(baseUrl, that.baseUrl) && Objects.equals(targetLanguage, that.targetLanguage)
-                && loginRequired == that.loginRequired;
+                && Objects.equals(baseUrl, that.baseUrl)
+                && Objects.equals(targetLanguage, that.targetLanguage) && loginRequired == that.loginRequired;
     }
 
     @Override

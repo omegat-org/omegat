@@ -98,7 +98,8 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public List<ExternalResource> listResources(ServiceTarget target, String keyword) throws ConnectorException {
+    public List<ExternalResource> listResources(ServiceTarget target, String keyword)
+            throws ConnectorException {
         String queryUrl;
         try {
             String encoded = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
@@ -111,7 +112,8 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
             String json = HttpConnectionUtils.getURL(new URL(queryUrl));
             ObjectMapper mapper = new ObjectMapper();
             com.fasterxml.jackson.databind.JsonNode root = mapper.readTree(json);
-            com.fasterxml.jackson.databind.JsonNode messages = root.path("translationentitysearch").path("groups");
+            com.fasterxml.jackson.databind.JsonNode messages = root.path("translationentitysearch")
+                    .path("groups");
 
             if (messages == null || !messages.isArray()) {
                 return Collections.emptyList();
@@ -127,7 +129,8 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
                 if (group == null || group.isEmpty()) {
                     continue;
                 }
-                // Use pattern as both id and name; path is not used at this stage
+                // Use pattern as both id and name; path is not used at this
+                // stage
                 result.add(new ExternalResource(group, label, ""));
             }
             return result;
@@ -138,8 +141,8 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
-        String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE + target.getTargetLanguage() + "&"
-                + GROUP + resourceId;
+        String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE
+                + target.getTargetLanguage() + "&" + GROUP + resourceId;
         String page;
         if (target.isLoginRequired()) {
             String userId = getCredential(USER_KEY);

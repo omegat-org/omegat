@@ -66,8 +66,8 @@ public class ExternalServiceConnectorPanelController {
         if (target == null) {
             return;
         }
-        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager().get(
-                target.getConnectorId());
+        IExternalServiceConnector connector = CoreState.getInstance().getExternalConnectorsManager()
+                .get(target.getConnectorId());
         if (!connector.supports(ConnectorCapability.LIST)) {
             return;
         }
@@ -111,7 +111,7 @@ public class ExternalServiceConnectorPanelController {
         panel.searchPageButton.setEnabled(connector.supports(ConnectorCapability.LIST));
         panel.urlField.setEnabled(connector.allowCustomUrl());
     }
-    
+
     private void openPreferenceDialog() {
         ExternalServiceConnectorCustomizer customizer = new ExternalServiceConnectorCustomizer();
         customizer.show(Core.getMainWindow().getApplicationFrame());
@@ -136,7 +136,8 @@ public class ExternalServiceConnectorPanelController {
             if (url != null && !url.trim().isEmpty()) {
                 status = externalServiceRetrieval.retrieveResourceFromUrl(connector, url.trim(), srcRoot);
             } else if (panel.getResourceId() != null) {
-                status = externalServiceRetrieval.retrieveResource(connector, target, panel.getResourceId(), srcRoot);
+                status = externalServiceRetrieval.retrieveResource(connector, target, panel.getResourceId(),
+                        srcRoot);
             } else {
                 return;
             }

@@ -55,7 +55,6 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     private static final String USER_KEY = "tracwiki.api.username";
     private static final String PASS_KEY = "tracwiki.api.password";
 
-
     @Override
     public String getId() {
         return "tracwiki";
@@ -136,7 +135,8 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     private String buildEditUrl(String baseWikiUrl, String pageName) {
         // Expect base like https://host/wiki
-        String base = baseWikiUrl.endsWith("/") ? baseWikiUrl.substring(0, baseWikiUrl.length() - 1) : baseWikiUrl;
+        String base = baseWikiUrl.endsWith("/") ? baseWikiUrl.substring(0, baseWikiUrl.length() - 1)
+                : baseWikiUrl;
         if (!base.contains("/wiki")) {
             // Try to append wiki path
             base = base + "/wiki";
@@ -168,7 +168,8 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     private String extractWikiTextFromEditHtml(String html) throws ConnectorException {
         try {
             Document doc = Jsoup.parse(html);
-            // Trac edit form typically has <textarea id="text" name="text">raw</textarea>
+            // Trac edit form typically has <textarea id="text"
+            // name="text">raw</textarea>
             Element ta = doc.selectFirst("textarea[name=text]");
             if (ta == null) {
                 ta = doc.getElementById("text");

@@ -39,7 +39,8 @@ import java.nio.file.StandardCopyOption;
 
 public class ExternalServiceRetrieval {
 
-    public boolean retrieveResource(IExternalServiceConnector connector, ServiceTarget target, String resourceId, String targetDir) throws Exception {
+    public boolean retrieveResource(IExternalServiceConnector connector, ServiceTarget target,
+            String resourceId, String targetDir) throws Exception {
         Path dir = Paths.get(targetDir);
         String ext = "." + connector.getFileExtension();
         String fileName = (resourceId.isEmpty() ? "external-service-resource" : resourceId) + ext;
@@ -54,7 +55,8 @@ public class ExternalServiceRetrieval {
         return true;
     }
 
-    public boolean retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir) throws Exception {
+    public boolean retrieveResourceFromUrl(IExternalServiceConnector connector, String url, String targetDir)
+            throws Exception {
         Path dir = Paths.get(targetDir);
         String fileName = extractFileNameFromUrl(connector, url);
         Path out = dir.resolve(fileName);

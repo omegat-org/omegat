@@ -27,6 +27,7 @@ package org.omegat.connectors.translatewiki;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.ServiceTarget;
@@ -48,6 +49,29 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * A connector for interacting with the TranslateWiki API. This class allows OmegaT to
+ * communicate with TranslateWiki for retrieving external resources such as translations
+ * or message groups. It provides capabilities to query translations and fetch specific
+ * translation resources in JSON format.
+ * <p>
+ * The connector supports the following capabilities:
+ * <ul>
+ * <li>Reading translation entries.</li>
+ * <li>Listing available resources based on a keyword search.</li>
+ * </ul>
+ * <p>
+ * This class integrates with the OmegaT core by registering itself as an external
+ * service connector.
+ * <p>
+ * Features:
+ * <ul>
+ * <li>Ability to fetch translation data for a specific group and target language.</li>
+ * <li>Automatic handling of authentication for APIs that require login credentials.</li>
+ * </ul>
+ *
+ * @author Hiroshi Miura
+ */
 @SuppressWarnings("unused")
 public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 

@@ -28,6 +28,7 @@ package org.omegat.connectors.translatewiki;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.ServiceTarget;
@@ -36,6 +37,8 @@ import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.core.Core;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.nlp.PluralData;
+import org.omegat.util.nlp.PluralInfo;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -43,6 +46,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -176,29 +181,113 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public InputStream fetchResource(ServiceTarget target, String resourceId) throws ConnectorException {
+        String po = convertJsonToPo(fetchResourceAsJson(target, resourceId));
+        return new ByteArrayInputStream(po.getBytes(StandardCharsets.UTF_8));
+    }
+
+    @VisibleForTesting
+    String fetchResourceAsJson(ServiceTarget target, String resourceId) throws ConnectorException {
         String url = target.getBaseUrl() + API_PATH + "?" + EXPORT_ACTION + "&" + QUERY_LANGUAGE
                 + target.getTargetLanguage() + "&" + GROUP + resourceId;
-        String page;
-        if (target.isLoginRequired()) {
-            String userId = getCredential(USER_KEY);
-            String password = getCredential(PASS_KEY);
-            String credStr;
-            if (userId.isEmpty() || password.isEmpty()) {
-                String[] cred = askCredentials(bundle.getString("TRANSLATEWIKI_LOGIN_REQUIRED"),
-                        bundle.getString("TRANSLATEWIKI_BOTPASSWORD_REQUIRED"));
-                if (cred == null || cred.length != 2) {
-                    throw new ConnectorException(bundle.getString("CREDENTIAL_ERROR"));
-                }
-                setCredential(USER_KEY, cred[0], false);
-                setCredential(PASS_KEY, cred[1], false);
-                credStr = cred[0] + ":" + cred[1];
-            } else {
-                credStr = userId + ":" + password;
+        return getURL(url, target.isLoginRequired() ? getCredStr() : null, 10000);
+    }
+
+    @VisibleForTesting
+    String convertJsonToPo(String json) {
+        // Convert TranslateWiki JSON payload to a PO formatted string.
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(json);
+            JsonNode collection = root.path("query").path("messagecollection");
+
+            if (collection == null || !collection.isArray() || collection.isEmpty()) {
+                return "";
             }
-            page = getURL(url, credStr, 10000);
-        } else {
-            page = httpGet(url);
+
+            // Determine language and group from the first entry
+            JsonNode first = collection.get(0);
+            String language = first.path("targetLanguage").asText("");
+            String primaryGroup = first.path("primaryGroup").asText("");
+
+            String pluralForms;
+            PluralInfo pluralInfo = PluralData.getInstance().getPlural(language);
+            if  (pluralInfo != null) {
+                pluralForms = pluralInfo.getGettextExpression();
+            } else {
+                // Generic default
+                pluralForms = "PluralForms: nplurals=2; plural=(n != 1);";
+            }
+
+            // Timestamp in UTC without colon in offset (e.g., +0000)
+            OffsetDateTime now = OffsetDateTime.now(java.time.ZoneOffset.UTC);
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssxxxx");
+            String timestamp = now.format(fmt);
+
+            StringBuilder sb = new StringBuilder();
+
+            // Header
+            sb.append("#\n");
+            sb.append("msgid \"\"\n");
+            sb.append("msgstr \"\"\n");
+            // The sample includes an extra empty quoted line before header fields
+            sb.append("\"\"\n");
+            appendHeaderLine(sb, "PO-Revision-Date: " + timestamp + "\\n");
+            appendHeaderLine(sb, "POT-Creation-Date: " + timestamp + "\\n");
+            appendHeaderLine(sb, "Content-Type: text/plain; charset=UTF-8\\n");
+            appendHeaderLine(sb, "Content-Transfer-Encoding: 8bit\\n");
+            appendHeaderLine(sb, "Language: " + language + "\\n");
+            appendHeaderLine(sb, "Project-Id-Version: " + primaryGroup + "\\n");
+            appendHeaderLine(sb, "Report-Msgid-Bugs-To: translatewiki.net\\n");
+            appendHeaderLine(sb, "X-Translation-Project: translatewiki.net <https://translatewiki.net>\\n");
+            appendHeaderLine(sb, "X-Language-Code: " + language + "\\n");
+            appendHeaderLine(sb, "X-Message-Group: " + primaryGroup + "\\n");
+            appendHeaderLine(sb, pluralForms + "\\n");
+            sb.append('\n');
+
+            for (JsonNode n : collection) {
+                String key = n.path("key").asText("");
+                String definition = n.path("definition").asText("");
+                String translation = n.path("translation").asText("");
+
+                sb.append("#\n");
+                sb.append("msgctxt \"").append(escapePo(key)).append("\"\n");
+                sb.append("msgid \"").append(escapePo(definition)).append("\"\n");
+                sb.append("msgstr \"").append(escapePo(translation)).append("\"\n\n");
+            }
+
+            return sb.toString();
+        } catch (IOException e) {
+            // If parsing fails, return original
+            return json;
         }
-        return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static void appendHeaderLine(StringBuilder sb, String content) {
+        sb.append('"').append(content).append('"').append('\n');
+    }
+
+    private static String escapePo(String s) {
+        String out = s.replace("\\", "\\\\").replace("\"", "\\\"");
+        out = out.replace("\n", "\\n");
+        return out;
+    }
+
+    private String getCredStr() throws ConnectorException {
+        String userId = getCredential(USER_KEY);
+        String password = getCredential(PASS_KEY);
+        String credStr;
+        if (userId.isEmpty() || password.isEmpty()) {
+            String[] cred = askCredentials(bundle.getString("TRANSLATEWIKI_LOGIN_REQUIRED"),
+                    bundle.getString("TRANSLATEWIKI_BOTPASSWORD_REQUIRED"));
+            if (cred == null || cred.length != 2) {
+                throw new ConnectorException(bundle.getString("CREDENTIAL_ERROR"));
+            }
+            setCredential(USER_KEY, cred[0], false);
+            setCredential(PASS_KEY, cred[1], false);
+            credStr = cred[0] + ":" + cred[1];
+        } else {
+            credStr = userId + ":" + password;
+        }
+        return credStr;
     }
 }

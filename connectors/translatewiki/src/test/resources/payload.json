@@ -4,48 +4,43 @@
     "mcoffset": "follows.destroy.not_followed",
     "continue": "-||"
   },
-  "warnings": {
-    "messagecollection": {
-      "*": "The source language of this group is English. Please select another language to translate into.\nYou are translating into English. It is a variant of English, which is already the source language of these messages. Make sure the selected language is correct, and consider the differences across the language variants to provide a good translation."
-    }
-  },
   "query": {
     "metadata": {
       "state": null,
-      "resultsize": 24,
-      "remaining": 23
+      "resultsize": 4,
+      "remaining": 2
     },
     "messagecollection": [
       {
         "key": "date.formats.heatmap",
         "definition": "%B %-d",
-        "translation": "%B %-d",
-        "title": "Osm:Date.formats.heatmap/en",
-        "targetLanguage": "en",
+        "translation": "",
+        "title": "Osm:Date.formats.heatmap/ja",
+        "targetLanguage": "ja",
         "primaryGroup": "out-osm-site"
       },
       {
         "key": "helpers.file.prompt",
         "definition": "Choose file",
-        "translation": "Choose file",
-        "title": "Osm:Helpers.file.prompt/en",
-        "targetLanguage": "en",
+        "translation": "ファイルを選択",
+        "title": "Osm:Helpers.file.prompt/ja",
+        "targetLanguage": "ja",
         "primaryGroup": "out-osm-site"
       },
       {
         "key": "errors.not_found.description",
         "definition": "Couldn't find a file/directory/API operation by that name on the OpenStreetMap server (HTTP 404)",
-        "translation": "Couldn't find a file/directory/API operation by that name on the OpenStreetMap server (HTTP 404)",
-        "title": "Osm:Errors.not found.description/en",
-        "targetLanguage": "en",
+        "translation": "OpenStreetMapサーバ上に、その名称のファイル/ディレクトリ/API操作はありません (HTTP 404)",
+        "title": "Osm:Errors.not found.description/ja",
+        "targetLanguage": "ja",
         "primaryGroup": "out-osm-site"
       },
       {
         "key": "follows.destroy.success",
         "definition": "You successfully unfollowed %{name}.",
-        "translation": "You successfully unfollowed %{name}.",
-        "title": "Osm:Follows.destroy.success/en",
-        "targetLanguage": "en",
+        "translation": "",
+        "title": "Osm:Follows.destroy.success/ja",
+        "targetLanguage": "ja",
         "primaryGroup": "out-osm-site"
       }
     ]

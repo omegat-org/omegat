@@ -23,6 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 package org.omegat.connectors.translatewiki;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
@@ -36,8 +37,15 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.junit.Assert.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TranslateWikiConnectorTest {
 
@@ -96,8 +104,40 @@ public class TranslateWikiConnectorTest {
     }
 
     @Test
-    public void testFetchResource() throws Exception {
+    public void testFetchResourceAsJson() throws Exception {
         // Load real sample payload from test resources
+        byte[] payload;
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("payload.json")) {
+            assertNotNull("core.json must be on test classpath", is);
+            payload = is.readAllBytes();
+        }
+
+        // Stub translatewiki export API for messagecollection
+        server.stubFor(get(urlPathEqualTo("/w/api.php"))
+                .withQueryParam("action", equalTo("query"))
+                .withQueryParam("list", equalTo("messagecollection"))
+                .withQueryParam("format", equalTo("json"))
+                .withQueryParam("mclanguage", equalTo("ja"))
+                .withQueryParam("mcgroup", equalTo("core"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json; charset=utf-8")
+                        .withBody(payload)));
+
+        String base = "http://localhost:" + server.port() + "/";
+        ServiceTarget target = new ServiceTarget("translatewiki", "omegat", base, "ja", false);
+        TranslateWikiConnector connector = new TranslateWikiConnector();
+
+        String json = connector.fetchResourceAsJson(target, "core");
+        byte[] received = json.getBytes(StandardCharsets.UTF_8);
+        assertArrayEquals(payload, received);
+        // quick sanity check for JSON start
+        String head = new String(received, 0, Math.min(received.length, 20), StandardCharsets.UTF_8).trim();
+        assertTrue(head.startsWith("{") || head.startsWith("[{"));
+    }
+
+    @Test
+    public void testFetchResource() throws Exception {
         byte[] payload;
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("payload.json")) {
             assertNotNull("core.json must be on test classpath", is);
@@ -122,11 +162,61 @@ public class TranslateWikiConnectorTest {
 
         try (InputStream is = connector.fetchResource(target, "core")) {
             assertNotNull(is);
-            byte[] received = is.readAllBytes();
-            assertArrayEquals(payload, received);
-            // quick sanity check for JSON start
-            String head = new String(received, 0, Math.min(received.length, 20), StandardCharsets.UTF_8).trim();
-            assertTrue(head.startsWith("{") || head.startsWith("[{"));
+            String text = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            assertTrue(text.contains("\"X-Translation-Project: translatewiki.net <https://translatewiki.net>\\n\""));
+            assertTrue(text.contains("\"X-Language-Code: ja\\n\""));
+            //
+            assertTrue(text.contains("msgctxt \"date.formats.heatmap\""));
+            assertTrue(text.contains("msgid \"Choose file\""));
         }
+    }
+
+    @Test
+    public void testConvertJsonToPo() {
+        // Test case 1: Valid JSON payload
+        String jsonPayload = "{" +
+                "\"query\": {" +
+                "\"messagecollection\": [" +
+                "{" +
+                "\"key\": \"welcome.key\"," +
+                "\"definition\": \"Welcome to TranslateWiki!\"," +
+                "\"translation\": \"ようこそ TranslateWiki へ！\"," +
+                "\"targetLanguage\": \"ja\"," +
+                "\"primaryGroup\": \"core\"" +
+                "}" +
+                "]}}";
+
+        TranslateWikiConnector connector = new TranslateWikiConnector();
+        String po = connector.convertJsonToPo(jsonPayload);
+
+        // Assert the output contains key elements
+        assertTrue(po.contains("msgctxt \"welcome.key\""));
+        assertTrue(po.contains("msgid \"Welcome to TranslateWiki!\""));
+        assertTrue(po.contains("msgstr \"ようこそ TranslateWiki へ！\""));
+        assertTrue(po.contains("Language: ja"));
+        assertTrue(po.contains("Project-Id-Version: core"));
+
+        // Test case 2: Empty JSON
+        String emptyJsonPayload = "{}";
+
+        String result = connector.convertJsonToPo(emptyJsonPayload);
+        assertEquals("", result);
+
+        // Test case 3: Missing fields
+        String incompleteJsonPayload = "{" +
+                "\"query\": {" +
+                "\"messagecollection\": [" +
+                "{" +
+                "\"key\": \"incomplete.key\"," +
+                "\"definition\": \"Incomplete entry\"," +
+                "\"translation\": \"\"" +
+                "}" +
+                "]}}";
+
+        String poOutput = connector.convertJsonToPo(incompleteJsonPayload);
+
+        // Verify the partial output for valid fields
+        assertTrue(poOutput.contains("msgid \"Incomplete entry\""));
+        assertTrue(poOutput.contains("msgstr \"\""));
     }
 }

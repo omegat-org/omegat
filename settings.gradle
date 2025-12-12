@@ -73,4 +73,8 @@ include("machinetranslators:apertium",
         "spellchecker:lucene",
         "spellchecker:morfologik",
         "theme",
-        "tipoftheday")
+        "tipoftheday",
+        "connectors:wikimedia",
+        "connectors:trac",
+        "connectors:translatewiki"
+)

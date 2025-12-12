@@ -27,6 +27,8 @@ package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.Nullable;
+
+import org.omegat.connectors.ExternalConnectorsManager;
 import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -103,6 +105,7 @@ public class CoreState {
     private ITagValidation tagValidation;
     private IIssues issuesWindow;
     private MachineTranslatorsManager machineTranslatorsManager;
+    private ExternalConnectorsManager externalConnectorsManager;
 
     // GUI panes
     private IMainWindow mainWindow;
@@ -288,4 +291,11 @@ public class CoreState {
         this.machineTranslatorsManager = machineTranslatorsManager;
     }
 
+    public ExternalConnectorsManager getExternalConnectorsManager() {
+        return externalConnectorsManager;
+    }
+
+    public void setExternalConnectorsManager(ExternalConnectorsManager externalConnectorsManager) {
+        this.externalConnectorsManager = externalConnectorsManager;
+    }
 }

@@ -33,7 +33,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
-public class PluralData {
+public final class PluralData {
 
     private static final PluralData INSTANCE = new PluralData();
 

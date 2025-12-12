@@ -38,8 +38,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -617,7 +615,7 @@ public class PoFilter extends AbstractFilter {
                     String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
                     PluralInfo pluralInfo = PluralData.getInstance().getPlural(lang);
                     if (pluralInfo != null) {
-                        plurals = pluralInfo.plurals;
+                        plurals = pluralInfo.getPlurals();
                     }
                 }
                 // update the number of targets according to new plural number

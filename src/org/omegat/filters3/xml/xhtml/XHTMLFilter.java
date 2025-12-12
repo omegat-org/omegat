@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
@@ -48,6 +50,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Hiroshi Miura
  */
 public class XHTMLFilter extends XMLFilter {
 
@@ -125,15 +128,14 @@ public class XHTMLFilter extends XMLFilter {
     /** Checking whether it is a valid XHTML file. */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
+        // Defining the dialect
+        XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+        dialect.defineDialect(new XHTMLOptions(config));
         boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
             try {
                 doNotSendToCore = true;
-                // Defining the actual dialect, because at this step
-                // we have the options
-                XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
-                dialect.defineDialect(new XHTMLOptions(config));
-                super.processFile(inFile, null, context);
+               super.processFile(inFile, null, context);
             } catch (IOException | TranslationException e) {
                 Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;
@@ -149,7 +151,7 @@ public class XHTMLFilter extends XMLFilter {
      * translate items that match regular expression.
      */
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (doNotSendToCore) {
             return entry;
         } else {
@@ -181,7 +183,7 @@ public class XHTMLFilter extends XMLFilter {
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

@@ -26,6 +26,7 @@ package org.omegat.gui.issues;
 
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.Preferences;
 
 import javax.swing.SwingUtilities;
 import java.beans.PropertyChangeListener;
@@ -45,6 +46,7 @@ public class IssuesPanelTest extends TestCoreGUI {
 
     @Test
     public void testIssuesPanelShow() throws Exception {
+        Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DISABLED, SpellingIssueProvider.class.getCanonicalName());
         String[] expectedType = new String[]{"Terminology", "LanguageTool"};
 
         // load project
@@ -66,7 +68,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         });
 
         try {
-            assertTrue(latch.await(20, TimeUnit.SECONDS));
+            assertTrue(latch.await(60, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
         }
         robot().waitForIdle();

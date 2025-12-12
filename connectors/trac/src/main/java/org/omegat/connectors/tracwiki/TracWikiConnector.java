@@ -38,9 +38,20 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.net.URI;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 public class TracWikiConnector extends AbstractExternalServiceConnector {
+
+    private static final String USER_KEY = "tracwiki.api.username";
+    private static final String PASS_KEY = "tracwiki.api.password";
+    private static final String CONNECTOR_ID = "tracwiki";
+    private static final String PREFERENCE_NAME = "tracwiki";
+    private static final String WIKI = "/wiki";
+    private static final String ACTION_EDIT = "?action=edit";
+    private static final String HTML_QUERY = "textarea[name=text]";
+    private static final String TEXT_ELEMENT = "text";
+    private static final String TXT = "txt";
 
     @SuppressWarnings("unused")
     public static void loadPlugins() {
@@ -52,17 +63,16 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         // do nothing
     }
 
-    private static final String USER_KEY = "tracwiki.api.username";
-    private static final String PASS_KEY = "tracwiki.api.password";
+    private final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/connectors/tracwiki/Bundle");
 
     @Override
     public String getId() {
-        return "tracwiki";
+        return CONNECTOR_ID;
     }
 
     @Override
     public String getName() {
-        return "Trac connector";
+        return bundle.getString("TRACWIKI_NAME");
     }
 
     @Override
@@ -72,12 +82,12 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public String getPreferenceName() {
-        return "tracwiki";
+        return PREFERENCE_NAME;
     }
 
     @Override
     public String getFileExtension() {
-        return "txt";
+        return TXT;
     }
 
     @Override
@@ -95,9 +105,9 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
             String password = getCredential(PASS_KEY);
             String credStr;
             if (userId.isEmpty() || password.isEmpty()) {
-                String[] cred = askCredentials("Please enter username and password", "");
+                String[] cred = askCredentials(bundle.getString("TRACWIKI_CREDENTIAL_TITLE"), "");
                 if (cred == null || cred.length != 2) {
-                    throw new ConnectorException("Invalid credentials");
+                    throw new ConnectorException(bundle.getString("TRACWIKI_CREDENTIAL_ERROR"));
                 }
                 setCredential(USER_KEY, cred[0], false);
                 setCredential(PASS_KEY, cred[1], false);
@@ -118,8 +128,8 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         try {
             URI u = URI.create(url);
             String path = u.getPath();
-            if (path != null && path.contains("/wiki/")) {
-                String pageName = path.substring(path.indexOf("/wiki/") + 6);
+            if (path != null && path.contains(WIKI + "/")) {
+                String pageName = path.substring(path.indexOf(WIKI + "/") + (WIKI + "/").length());
                 String editUrl = buildEditUrl(u, pageName);
                 String html = httpGet(editUrl);
                 String text = extractWikiTextFromEditHtml(html);
@@ -137,11 +147,10 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         // Expect base like https://host/wiki
         String base = baseWikiUrl.endsWith("/") ? baseWikiUrl.substring(0, baseWikiUrl.length() - 1)
                 : baseWikiUrl;
-        if (!base.contains("/wiki")) {
-            // Try to append wiki path
-            base = base + "/wiki";
+        if (!base.contains(WIKI)) {
+            base = base + WIKI;
         }
-        return base + "/" + pageName + "?action=edit";
+        return base + "/" + pageName + ACTION_EDIT;
     }
 
     private String buildEditUrl(URI u, String pageName) {
@@ -152,15 +161,18 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
         }
         // up to /wiki
         String path = u.getPath();
-        int idx = path.indexOf("/wiki/");
+        int idx = path.indexOf(WIKI + "/");
         if (idx >= 0) {
-            b.append(path, 0, idx).append("/wiki/").append(pageName).append("?action=edit");
+            b.append(path, 0, idx).append(WIKI).append('/')
+                    .append(pageName).append(ACTION_EDIT);
         } else {
             b.append(path);
             if (!path.endsWith("/")) {
                 b.append('/');
             }
-            b.append("wiki/").append(pageName).append("?action=edit");
+            // Append without leading slash since we ensured trailing slash above
+            b.append(WIKI.substring(1)).append('/')
+                    .append(pageName).append(ACTION_EDIT);
         }
         return b.toString();
     }
@@ -170,19 +182,19 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
             Document doc = Jsoup.parse(html);
             // Trac edit form typically has <textarea id="text"
             // name="text">raw</textarea>
-            Element ta = doc.selectFirst("textarea[name=text]");
+            Element ta = doc.selectFirst(HTML_QUERY);
             if (ta == null) {
-                ta = doc.getElementById("text");
+                ta = doc.getElementById(TEXT_ELEMENT);
             }
             if (ta == null) {
-                throw new ConnectorException("Failed to locate wiki text textarea in edit form");
+                throw new ConnectorException(bundle.getString("TRACWIKI_WIKITEXT_ERROR"));
             }
             return ta.text();
         } catch (Exception e) {
             if (e instanceof ConnectorException) {
                 throw (ConnectorException) e;
             }
-            throw new ConnectorException("Failed to parse Trac edit page HTML", e);
+            throw new ConnectorException(bundle.getString("TRACWIKI_PARSE_ERROR"), e);
         }
     }
 }

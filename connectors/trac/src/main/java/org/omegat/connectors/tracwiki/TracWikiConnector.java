@@ -41,6 +41,26 @@ import java.net.URI;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * TracWikiConnector is a subclass of AbstractExternalServiceConnector that provides
+ * integration with Trac's wiki functionality. This connector enables the reading
+ * of wiki pages by fetching the content from Trac's edit interface.
+ * <p>
+ * The connector supports fetching wiki content using both URL-based access and service-targeted
+ * access. It uses authentication credentials when required, allowing interaction with secure
+ * or restricted Trac wiki instances.
+ * <p>>
+ * Key features and behaviors:
+ * - Handles APIs that require login credentials, with support for dynamically prompting
+ *   users to input their credentials.
+ * - Uses HTTP GET requests to fetch wiki page content.
+ * - Extracts raw wiki text from the HTML of the edit page.
+ * - Provides a preference name and file extension specific to its functionality.
+ * - Allows custom URL configuration for flexible integration.
+ *
+ * @author Hiroshi Miura
+ */
+@SuppressWarnings("unused")
 public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     private static final String USER_KEY = "tracwiki.api.username";
@@ -53,12 +73,10 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     private static final String TEXT_ELEMENT = "text";
     private static final String TXT = "txt";
 
-    @SuppressWarnings("unused")
     public static void loadPlugins() {
         Core.registerExternalServiceConnectorClass(TracWikiConnector.class);
     }
 
-    @SuppressWarnings("unused")
     public static void unloadPlugins() {
         // do nothing
     }

@@ -770,8 +770,7 @@ public class PoFilter extends AbstractFilter {
             PluralInfo pluralInfo = PluralData.getInstance().getPlural(lang);
             if (pluralInfo != null) {
                 return header.replaceAll("Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;",
-                        "Plural-Forms: nplurals=" + pluralInfo.plurals + "; plural=" + pluralInfo.expression
-                                + ";");
+                        pluralInfo.getGettextExpression());
             }
         }
         return header;

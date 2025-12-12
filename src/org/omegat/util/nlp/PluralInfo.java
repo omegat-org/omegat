@@ -92,4 +92,8 @@ public class PluralInfo {
     public String toString() {
         return expression;
     }
+
+    public String getGettextExpression() {
+        return "Plural-Forms: nplurals=" + plurals + "; plural=" + expression + ";";
+    }
 }

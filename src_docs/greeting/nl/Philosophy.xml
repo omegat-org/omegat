@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article lang="nl" id="first.steps">
+  <section>
+	<title id="freedoms">Vrijheden</title>
+	<para>OmegaT is een gratis en vrije computer-assisted translation (CAT) oplossing voor professionele vertalers. Het wordt gedistribueerd onder de termen van de <emphasis>GNU General Public License, versie 3.0</emphasis>. Bekijk <guimenu>&gt; Help</guimenu> <guimenu>&gt; Over</guimenu>. De licentie geeft u de volgende vrijheden:<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>De vrijheid om OmegaT uit te voeren zoals u dat wilt, voor elk doel.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om te bestuderen hoe OmegaT werkt, en het te wijzigen zodat het uw computerwerk uitvoert zoals u dat wilt.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om kopieën opnieuw te distribueren, zodat u anderen kunt helpen.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>De vrijheid om kopieën van uw aangepaste versies te distribueren aan anderen.</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

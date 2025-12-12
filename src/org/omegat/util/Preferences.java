@@ -90,6 +90,9 @@ public final class Preferences {
     public static final String TF_SRC_FONT_SIZE = "source_font_size";
     public static final int TF_FONT_SIZE_DEFAULT = 14;
 
+    /** Preference flag to suppress First Time Configuration wizard in the future. */
+    public static final String FIRST_TIME_WIZARD_DONE = "first_time_wizard_done";
+
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
     /**
@@ -732,6 +735,17 @@ public final class Preferences {
         preferences.save();
     }
 
+    /**
+     * Returns true if this looks like the first run (no existing omegat.prefs when initialized).
+     * If the underlying persistence does not provide the information, returns false.
+     */
+    public static boolean isFirstRun() {
+        if (preferences instanceof PreferencesImpl) {
+            return preferences.isFirstRun();
+        }
+        return false;
+    }
+
     public interface IPreferences {
 
         String getPreference(String key);
@@ -752,6 +766,10 @@ public final class Preferences {
         Object setPreference(String key, Object value);
 
         void save();
+
+        default boolean isFirstRun() {
+            return false;
+        }
     }
 
     /**
@@ -767,7 +785,7 @@ public final class Preferences {
      * <p>
      * When the preferences system is required but actual user preferences
      * shouldn't be loaded or altered (testing scenarios), use
-     * {@link org.omegat.util.TestPreferencesInitializer} methods or be sure to
+     * org.omegat.util.TestPreferencesInitializer methods or be sure to
      * set the config dir with {@link RuntimePreferences#setConfigDir(String)}
      * before calling this method.
      */

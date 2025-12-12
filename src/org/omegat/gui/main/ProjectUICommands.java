@@ -1183,14 +1183,25 @@ public final class ProjectUICommands {
     }
 
     public static void projectExit() {
-        prepareForExit(() -> System.exit(-1));
+        prepareForExit(false, () -> System.exit(-1));
     }
 
     public static void projectRestart(String projectDir) {
-        prepareForExit(() -> Main.restartGUI(projectDir));
+        prepareForExit(false, () -> Main.restartGUI(projectDir));
     }
 
-    private static void prepareForExit(Runnable onCompletion) {
+    /**
+     * Restart the application, optionally skipping any confirmation dialogs.
+     *
+     * @param projectDir project to open after restart, or null
+     * @param skipConfirm if true, do not show any confirmation dialog even if preferences would
+     *                    normally require it and even if a project is open but unmodified
+     */
+    public static void projectRestart(String projectDir, boolean skipConfirm) {
+        prepareForExit(skipConfirm, () -> Main.restartGUI(projectDir));
+    }
+
+    private static void prepareForExit(boolean skipConfirm, Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually
         // change it
@@ -1204,7 +1215,7 @@ public final class ProjectUICommands {
         }
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+        if (!skipConfirm && (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT))) {
             if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {

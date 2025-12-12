@@ -25,6 +25,7 @@
 
 package org.omegat.connectors.translatewiki;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalResource;
@@ -33,6 +34,7 @@ import org.omegat.connectors.spi.ConnectorCapability;
 import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.core.Core;
 import org.omegat.util.HttpConnectionUtils;
+import org.omegat.util.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -40,20 +42,18 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
-    public static void loadPlugins() {
-        Core.registerExternalServiceConnectorClass(TranslateWikiConnector.class);
-    }
-
-    public static void unloadPlugins() {
-        // do nothing
-    }
+    private static final String CONNECTOR_ID = "translatewiki";
+    private static final String PREFERENCE_NAME = "translatewiki";
+    private static final String FILE_EXTENSION = "json";
 
     private static final String USER_KEY = "translatewiki.api.username";
     private static final String PASS_KEY = "translatewiki.api.password";
@@ -66,15 +66,27 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     private static final String QUERY_ACTION = "action=translationentitysearch&format=json";
     private static final String QUERY_GROUPS = "&entitytype=groups&limit=50&query=";
+    private static final String TRANSLATIONENTITYSEARCH = "translationentitysearch";
+    private static final String GROUPS = "groups";
+
+    public static void loadPlugins() {
+        Core.registerExternalServiceConnectorClass(TranslateWikiConnector.class);
+    }
+
+    public static void unloadPlugins() {
+        // do nothing
+    }
+
+    private final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/connectors/translatewiki/Bundle");
 
     @Override
     public String getId() {
-        return "translatewiki";
+        return CONNECTOR_ID;
     }
 
     @Override
     public String getName() {
-        return "TranslateWiki";
+        return bundle.getString("TRANSLATEWIKI_NAME");
     }
 
     @Override
@@ -89,12 +101,12 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public String getPreferenceName() {
-        return "transaltewiki";
+        return PREFERENCE_NAME;
     }
 
     @Override
     public String getFileExtension() {
-        return "json";
+        return FILE_EXTENSION;
     }
 
     @Override
@@ -105,22 +117,21 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
             String encoded = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
             queryUrl = target.getBaseUrl() + API_PATH + "?" + QUERY_ACTION + QUERY_GROUPS + encoded;
         } catch (Exception e) {
-            throw new ConnectorException("Failed to build query URL", e);
+            throw new ConnectorException(bundle.getString("TRANSLATEWIKI_URL_BUILD_ERROR"), e);
         }
 
         try {
             String json = HttpConnectionUtils.getURL(new URL(queryUrl));
             ObjectMapper mapper = new ObjectMapper();
-            com.fasterxml.jackson.databind.JsonNode root = mapper.readTree(json);
-            com.fasterxml.jackson.databind.JsonNode messages = root.path("translationentitysearch")
-                    .path("groups");
+            JsonNode root = mapper.readTree(json);
+            JsonNode messages = root.path(TRANSLATIONENTITYSEARCH).path(GROUPS);
 
             if (messages == null || !messages.isArray()) {
                 return Collections.emptyList();
             }
 
-            java.util.ArrayList<ExternalResource> result = new java.util.ArrayList<>();
-            for (com.fasterxml.jackson.databind.JsonNode n : messages) {
+            List<ExternalResource> result = new ArrayList<>();
+            for (JsonNode n : messages) {
                 String label = n.path("label").asText(null);
                 String group = n.path("group").asText(null);
                 if (label == null || label.isEmpty()) {
@@ -135,7 +146,7 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
             }
             return result;
         } catch (IOException e) {
-            throw new ConnectorException("GET failed: " + queryUrl, e);
+            throw new ConnectorException(StringUtil.format(bundle.getString("TRANSLATEWIKI_GET_ERROR"), queryUrl), e);
         }
     }
 
@@ -149,10 +160,10 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
             String password = getCredential(PASS_KEY);
             String credStr;
             if (userId.isEmpty() || password.isEmpty()) {
-                String[] cred = askCredentials("Please enter Bot user ID(User@BotName) and a passcode",
-                        "Please create bot password from https://translatewiki.net/wiki/Special:BotPasswords");
+                String[] cred = askCredentials(bundle.getString("TRANSLATEWIKI_LOGIN_REQUIRED"),
+                        bundle.getString("TRANSLATEWIKI_BOTPASSWORD_REQUIRED"));
                 if (cred == null || cred.length != 2) {
-                    throw new ConnectorException("Invalid credentials");
+                    throw new ConnectorException(bundle.getString("CREDENTIAL_ERROR"));
                 }
                 setCredential(USER_KEY, cred[0], false);
                 setCredential(PASS_KEY, cred[1], false);

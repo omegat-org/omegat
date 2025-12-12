@@ -39,9 +39,17 @@ import org.omegat.util.WikiGet;
 
 /**
  * Connector for Wikimedia/MediaWiki content retrieval.
+ *
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
 public abstract class AbstractWikimediaConnector extends AbstractExternalServiceConnector {
+
+    private static final String FILE_EXT = "UTF8";
+    private static final String DEFAULT_BASE_URL = "https://en.wikipedia.org/wiki/";
+    private static final String ACTION_RAW = "action=raw";
+    private static final String INDEX_PHP_TITLE = "index.php?title=";
+    private static final String INDEX_PHP_TITLE_ESCAPED = "index.php\\?title=";
 
     public static void loadPlugins() {
         Core.registerExternalServiceConnectorClass(WikimediaCleanUrlConnector.class);
@@ -52,8 +60,6 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
         // do nothing
     }
 
-    private static final String DEFAULT_BASE_URL = "https://en.wikipedia.org/wiki/";
-
     @Override
     public Set<ConnectorCapability> getCapabilities() {
         return Set.of(ConnectorCapability.READ);
@@ -61,7 +67,7 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
 
     @Override
     public String getFileExtension() {
-        return "UTF8";
+        return FILE_EXT;
     }
 
     @Override
@@ -81,14 +87,14 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
     }
 
     protected String getResourceUrl(String remoteUrl) {
-        if (remoteUrl.indexOf("index.php?title=") > 0) {
+        if (remoteUrl.indexOf(INDEX_PHP_TITLE) > 0) {
             // We're directly calling the mediawiki index.php script
-            String[] splitted = remoteUrl.split("index.php\\?title=");
+            String[] splitted = remoteUrl.split(INDEX_PHP_TITLE_ESCAPED);
             String s = splitted[splitted.length - 1];
             s = s.replaceAll(" ", "_");
             s = URLEncoder.encode(s, StandardCharsets.UTF_8);
             splitted[splitted.length - 1] = s;
-            return WikiGet.joinString("index.php?title=", splitted) + "&action=raw";
+            return WikiGet.joinString(INDEX_PHP_TITLE, splitted) + "&" + ACTION_RAW;
         } else {
             // assume script is behind some sort
             // of url-rewriting
@@ -97,7 +103,7 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
             s = s.replaceAll(" ", "_");
             s = URLEncoder.encode(s, StandardCharsets.UTF_8);
             splitted[splitted.length - 1] = s;
-            return WikiGet.joinString("/", splitted) + "?action=raw";
+            return WikiGet.joinString("/", splitted) + "?" + ACTION_RAW;
         }
     }
 }

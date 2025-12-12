@@ -31,26 +31,35 @@ import org.omegat.connectors.spi.ConnectorException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 
 /**
  * Connector for Wikimedia/MediaWiki content retrieval.
+ *
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
 public class WikimediaDefaultConnector extends AbstractWikimediaConnector {
 
+    private static final String WIKIMEDIA_ID = "wikimedia_default";
+    private static final String PREFERENCE_NAME = "wikimedia_default";
+    private static final String INDEX_PHP_TITLE = "index.php?title=";
+
+    private final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/connectors/wiki/wikimedia/Bundle");
+
     @Override
     public String getId() {
-        return "wikimedia_default";
+        return WIKIMEDIA_ID;
     }
 
     @Override
     public String getName() {
-        return "Wikimedia(Default)";
+        return bundle.getString("WIKIMEDIA_CONNECTOR_NAME");
     }
 
     @Override
     public String getPreferenceName() {
-        return "wikimedia_default";
+        return PREFERENCE_NAME;
     }
 
     @Override
@@ -59,7 +68,7 @@ public class WikimediaDefaultConnector extends AbstractWikimediaConnector {
         if (!base.endsWith("/")) {
             base += "/";
         }
-        String page = httpGet(getResourceUrl(base + "index.php?tilte=" + resourceId));
+        String page = httpGet(getResourceUrl(base + INDEX_PHP_TITLE + resourceId));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
     }
 }

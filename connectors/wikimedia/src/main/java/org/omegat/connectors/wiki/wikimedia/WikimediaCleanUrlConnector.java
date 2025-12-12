@@ -31,26 +31,34 @@ import org.omegat.connectors.spi.ConnectorException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
 
 /**
  * Connector for Wikimedia/MediaWiki content retrieval.
+ *
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
 public class WikimediaCleanUrlConnector extends AbstractWikimediaConnector {
 
+    private static final String WIKIMEDIA_ID = "wikimedia";
+    private static final String PREFERENCE_NAME = "wikimedia";
+
+    private final ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/connectors/wiki/wikimedia/Bundle");
+
     @Override
     public String getId() {
-        return "wikimedia";
+        return WIKIMEDIA_ID;
     }
 
     @Override
     public String getName() {
-        return "Wikimedia(Clean URL)";
+        return bundle.getString("WIKIMEDIA_CLEANURL_CONNECTOR_NAME");
     }
 
     @Override
     public String getPreferenceName() {
-        return "wikimedia";
+        return PREFERENCE_NAME;
     }
 
     @Override

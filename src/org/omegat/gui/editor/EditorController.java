@@ -1193,6 +1193,7 @@ public class EditorController implements IEditor {
         // and the user does not set it as an alternate translation.
         if (isEnforced && !isNewAltTrans) {
             deactivateWithoutCommit();
+            mw.displayWarningRB("EC_WARNING_REVERT_ENFORCED_SEGMENT");
             return;
         }
 

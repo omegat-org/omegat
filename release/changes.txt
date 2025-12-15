@@ -1,11 +1,17 @@
 ----------------------------------------------------------------------
- OmegaT 6.0.2
+ OmegaT 6.0.2 (2025-12-25)
 ----------------------------------------------------------------------
-
-  2 Enhancement
- 10 Bug fixes
+  1 Removed features
+  4 Enhancement
+ 12 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
+6.0.2 vs 6.0.1
+
+  Removed features:
+
+  - Remove DeepL machine translation connector.
+  https://github.com/omegat-org/omegat/pull/1291
 
   Implemented requests:
 
@@ -15,7 +21,16 @@
   - Change the "break/exception" checkbox label
   https://sourceforge.net/p/omegat/feature-requests/484/
 
+  - Improve handling of SSH Agent connection issues in Git integration
+  https://github.com/omegat-org/omegat/pull/1615
+
+  - Support javascript scripting on Java 17
+  https://github.com/omegat-org/omegat/pull/1397
+
   Bug fixes:
+
+  - Make OpenXmlFilter disabled by default
+  https://github.com/omegat-org/omegat/pull/1611
 
   - List of available spellcheck dictionaries not usefully sorted
     https://sourceforge.net/p/omegat/bugs/1310/
@@ -23,8 +38,11 @@
   - Unable to import a team project to a path containing Chinese characters
   https://sourceforge.net/p/omegat/bugs/1302/
 
-  - [6.0] [Security] vulnerability on dependencies
+  - [Security] vulnerability on dependencies
   https://sourceforge.net/p/omegat/bugs/1293/
+
+  - Checking for problems throws error: "Comparison method violates its general contract"
+  https://sourceforge.net/p/omegat/bugs/1279/
 
   - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/

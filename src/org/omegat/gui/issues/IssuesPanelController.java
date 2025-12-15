@@ -50,7 +50,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -536,11 +535,8 @@ public class IssuesPanelController implements IIssues {
         @Override
         protected List<IIssue> doInBackground() throws Exception {
             long start = System.currentTimeMillis();
-            Stream<IIssue> tagErrors = Core.getTagValidation().listInvalidTags(filePattern).stream()
-                    .map(TagIssue::new);
-            List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
-            Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
-            List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
+            // Delegate to centralized checker so this controller only handles display
+            List<IIssue> result = IssueChecker.collectIssues(filePattern, isShowingAllFiles());
             if (Log.isDebugEnabled()) {
                 Log.logDebug(String.format("Issue detection took %.3f s",
                         (System.currentTimeMillis() - start) / 1000f));

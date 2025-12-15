@@ -405,7 +405,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * implementation returns <code>null</code>.
      */
     @Override
-    public @Nullable InputSource resolveEntity(String publicId, String systemId) {
+    public @Nullable InputSource resolveEntity(@Nullable String publicId, String systemId) {
         return null;
     }
 

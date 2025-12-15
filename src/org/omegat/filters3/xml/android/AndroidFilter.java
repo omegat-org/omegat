@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.Core;
@@ -44,6 +46,7 @@ import org.omegat.util.OStrings;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public class AndroidFilter extends XMLFilter {
     static final String DO_NOT_TRANSLATE = "do not translate";
     static final String DONT_TRANSLATE = "don't translate";
@@ -51,10 +54,10 @@ public class AndroidFilter extends XMLFilter {
     static final Set<String> NAMED_TAGS = new HashSet<>(Arrays.asList("/resources/string", "/resources/color",
             "/resources/array", "/resources/string-array", "/resources/integer-array"));
 
-    private String id;
+    private @Nullable String id;
     private String idPlurals = "";
-    private String comment;
-    private String idComment;
+    private @Nullable String comment;
+    private @Nullable String idComment;
 
     /**
      * Register plugin into OmegaT.
@@ -71,26 +74,31 @@ public class AndroidFilter extends XMLFilter {
     }
 
     /** Human-readable filter name. */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("Android_FILTER_NAME");
     }
 
     /** Extensions... */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml") };
     }
 
     /** Source encoding can not be varied by the user. */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
 
     /** Target encoding can not be varied by the user. */
+    @Override
     public boolean isTargetEncodingVariable() {
         return false;
     }
 
-    public void tagStart(String path, Attributes atts) {
+    @Override
+    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
         if (atts != null) {
             if (NAMED_TAGS.contains(path)) {
                 id = atts.getValue("name");
@@ -104,7 +112,8 @@ public class AndroidFilter extends XMLFilter {
         }
     }
 
-    public void tagEnd(String path) {
+    @Override
+    public void tagEnd(@Nullable String path) {
         comment = null;
         if ("/resources/string".equals(path)) {
             idComment = null;
@@ -113,7 +122,8 @@ public class AndroidFilter extends XMLFilter {
         }
     }
 
-    public void comment(String newComment) {
+    @Override
+    public void comment(@Nullable String newComment) {
         if (this.comment == null) {
             this.comment = newComment;
         } else {
@@ -124,8 +134,9 @@ public class AndroidFilter extends XMLFilter {
     /**
      * Filter-specific chars processing.
      */
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
-        /**
+    @Override
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
+        /*
          * Android sources has some entries without translatable="false" but
          * with this comment. Yes, it's dirty hack, but there is no other way.
          */

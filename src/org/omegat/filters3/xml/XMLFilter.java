@@ -280,7 +280,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      */
     @Override
     public boolean isFileSupported(BufferedReader reader) {
-        if (dialect.getConstraints() == null || dialect.getConstraints().isEmpty()) {
+        if (dialect.getConstraints().isEmpty()) {
             return true;
         }
 

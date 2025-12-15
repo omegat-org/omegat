@@ -122,7 +122,7 @@ public interface Translator {
      */
     boolean isInIgnored();
 
-    Language getTargetLanguage();
+    @Nullable Language getTargetLanguage();
 
-    Language getSourceLanguage();
+    @Nullable Language getSourceLanguage();
 }

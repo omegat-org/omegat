@@ -34,6 +34,7 @@ package org.omegat.gui.scripting;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("unused")
 public interface IScriptLogger {
 
     void print(Object o);

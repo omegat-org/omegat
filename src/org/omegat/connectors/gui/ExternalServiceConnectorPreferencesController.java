@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.connectors.gui;
 
+import org.jspecify.annotations.Nullable;
+import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.gui.preferences.BasePreferencesController;
 
 import java.awt.Component;
@@ -31,12 +33,12 @@ import java.util.ArrayList;
 
 public class ExternalServiceConnectorPreferencesController extends BasePreferencesController {
 
-    private ExternalServiceConnectorPreferencesPanel panel;
+    private @Nullable ExternalServiceConnectorPreferencesPanel panel;
 
     @Override
     protected void initFromPrefs() {
         if (panel != null) {
-            panel.loadFromPrefs();
+            panel.setTargets(ExternalConnectorXmlStore.loadTargets());
         }
     }
 
@@ -49,15 +51,16 @@ public class ExternalServiceConnectorPreferencesController extends BasePreferenc
     public Component getGui() {
         if (panel == null) {
             panel = new ExternalServiceConnectorPreferencesPanel();
-            panel.loadFromPrefs();
+            panel.setTargets(ExternalConnectorXmlStore.loadTargets());
         }
         return panel;
     }
 
     @Override
     public void persist() {
+        // Persist to XML store.
         if (panel != null) {
-            panel.saveToPrefs();
+            ExternalConnectorXmlStore.saveTargets(panel.getTargets());
         }
     }
 
@@ -65,7 +68,7 @@ public class ExternalServiceConnectorPreferencesController extends BasePreferenc
     public void restoreDefaults() {
         if (panel != null) {
             panel.setTargets(new ArrayList<>());
-            panel.saveToPrefs();
+            ExternalConnectorXmlStore.saveTargets(panel.getTargets());
         }
     }
 }

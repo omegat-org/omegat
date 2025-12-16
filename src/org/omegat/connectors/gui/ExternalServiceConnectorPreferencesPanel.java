@@ -89,15 +89,6 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         model.fireTableDataChanged();
     }
 
-    public void loadFromPrefs() {
-        setTargets(ExternalConnectorXmlStore.loadTargets());
-    }
-
-    public void saveToPrefs() {
-        // Persist to XML store.
-        ExternalConnectorXmlStore.saveTargets(getTargets());
-    }
-
     private void onAdd() {
         ExternalServiceTargetEditor dlg = new ExternalServiceTargetEditor(null);
         ServiceTarget t = dlg.showDialog();
@@ -175,7 +166,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     }
 
     /**
-     * Simple modal editor dialog for a External Service Integration target row.
+     * Simple modal editor dialog for an External Service Integration target row.
      */
     class ExternalServiceTargetEditor {
         private final JDialog dialog;

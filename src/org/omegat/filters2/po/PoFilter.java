@@ -57,8 +57,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
-import org.omegat.util.nlp.PluralData;
-import org.omegat.util.nlp.PluralInfo;
+import org.omegat.util.plural.PluralData;
+import org.omegat.util.plural.PluralInfo;
 
 /**
  * Filter to support po files (in various encodings).

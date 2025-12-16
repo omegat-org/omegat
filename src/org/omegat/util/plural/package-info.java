@@ -1,4 +1,4 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
@@ -23,9 +23,9 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
 
 @NullMarked
-package org.omegat.util.nlp;
+package org.omegat.util.plural;
 
 import org.jspecify.annotations.NullMarked;

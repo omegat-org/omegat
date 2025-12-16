@@ -37,8 +37,8 @@ import org.omegat.connectors.spi.ConnectorException;
 import org.omegat.core.Core;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.nlp.PluralData;
-import org.omegat.util.nlp.PluralInfo;
+import org.omegat.util.plural.PluralData;
+import org.omegat.util.plural.PluralInfo;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

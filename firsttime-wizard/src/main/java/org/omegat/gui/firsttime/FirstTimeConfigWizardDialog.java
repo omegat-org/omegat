@@ -124,7 +124,19 @@ public class FirstTimeConfigWizardDialog extends JDialog {
             stepsModel.addElement((i + 1) + ". " + name);
         }
         stepsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        stepsList.setEnabled(false); // display only
+        // Allow user to click to jump to any step
+        stepsList.setEnabled(true);
+        stepsList.addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            int sel = stepsList.getSelectedIndex();
+            if (sel >= 0 && sel < steps.length && sel != index) {
+                // Do not force validation here; Finish will validate all steps
+                index = sel;
+                updateState();
+            }
+        });
         stepsList.setVisibleRowCount(steps.length);
         JScrollPane westScroll = new JScrollPane(stepsList);
         westScroll.setPreferredSize(new Dimension(220, 100));

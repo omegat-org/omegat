@@ -177,6 +177,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
         private final JTextField baseUrlField;
         private final JTextField targetLanguageField;
         private final javax.swing.JCheckBox loginRequiredCheck;
+        private final JButton ok = new JButton();
+        private final JButton cancel = new JButton();
         private @Nullable ServiceTarget result;
 
         ExternalServiceTargetEditor(@Nullable ServiceTarget initial) {
@@ -266,13 +268,58 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             gc.weightx = 0;
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            JButton ok = new JButton();
             Mnemonics.setLocalizedText(ok, OStrings.getString("BUTTON_OK"));
-            JButton cancel = new JButton();
             Mnemonics.setLocalizedText(cancel, OStrings.getString("BUTTON_CANCEL"));
             buttons.add(ok);
             buttons.add(cancel);
+            JPanel root = new JPanel(new BorderLayout());
+            root.add(panel, BorderLayout.CENTER);
+            root.add(buttons, BorderLayout.SOUTH);
+            dialog.getContentPane().add(root);
+            dialog.pack();
+            dialog.setLocationRelativeTo(ExternalServiceConnectorPreferencesPanel.this);
+            setActionListeners();
+            setInitialPreset(initial);
+        }
 
+        private void setInitialPreset(@Nullable ServiceTarget initial) {
+            if (initial != null) {
+                // Preselect connector by id
+                for (int i = 0; i < typeCombo.getItemCount(); i++) {
+                    IExternalServiceConnector c = typeCombo.getItemAt(i);
+                    if (Objects.equals(c.getId(), initial.getConnectorId())) {
+                        typeCombo.setSelectedIndex(i);
+                        break;
+                    }
+                }
+                // If presets exist and match the initial base,
+                // try to select matching preset
+                IExternalServiceConnector conn = (IExternalServiceConnector) typeCombo.getSelectedItem();
+                projectField.setText(initial.getProjectId());
+                baseUrlField.setText(initial.getBaseUrl());
+                targetLanguageField.setText(initial.getTargetLanguage());
+                loginRequiredCheck.setSelected(initial.isLoginRequired());
+                if (conn != null) {
+                    var presets = conn.getPresets();
+                    if (!presets.isEmpty()) {
+                        // populate combo (in case listener not fired yet)
+                        presetCombo.removeAllItems();
+                        for (var p : presets) {
+                            presetCombo.addItem(p);
+                        }
+                        for (int i = 0; i < presetCombo.getItemCount(); i++) {
+                            var p = presetCombo.getItemAt(i);
+                            if (Objects.equals(p.getBaseUrl(), initial.getBaseUrl())) {
+                                presetCombo.setSelectedIndex(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void setActionListeners() {
             ok.addActionListener(e -> {
                 IExternalServiceConnector sel = (IExternalServiceConnector) typeCombo.getSelectedItem();
                 if (sel == null) {
@@ -312,7 +359,6 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                     presetCombo.setSelectedIndex(0);
                 }
             });
-
             // Apply preset change to name and base URL
             presetCombo.addActionListener(e -> {
                 var sel = (PresetService) presetCombo.getSelectedItem();
@@ -320,48 +366,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                     baseUrlField.setText(sel.getBaseUrl());
                     projectField.setText(sel.getName());
                 }
-            });
-            JPanel root = new JPanel(new BorderLayout());
-            root.add(panel, BorderLayout.CENTER);
-            root.add(buttons, BorderLayout.SOUTH);
-            dialog.getContentPane().add(root);
-            dialog.pack();
-            dialog.setLocationRelativeTo(ExternalServiceConnectorPreferencesPanel.this);
-
-            if (initial != null) {
-                // Preselect connector by id
-                for (int i = 0; i < typeCombo.getItemCount(); i++) {
-                    IExternalServiceConnector c = typeCombo.getItemAt(i);
-                    if (Objects.equals(c.getId(), initial.getConnectorId())) {
-                        typeCombo.setSelectedIndex(i);
-                        break;
-                    }
-                }
-                // If presets exist and match the initial base,
-                // try to select matching preset
-                IExternalServiceConnector conn = (IExternalServiceConnector) typeCombo.getSelectedItem();
-                projectField.setText(initial.getProjectId());
-                baseUrlField.setText(initial.getBaseUrl());
-                targetLanguageField.setText(initial.getTargetLanguage());
-                loginRequiredCheck.setSelected(initial.isLoginRequired());
-                if (conn != null) {
-                    var presets = conn.getPresets();
-                    if (!presets.isEmpty()) {
-                        // populate combo (in case listener not fired yet)
-                        presetCombo.removeAllItems();
-                        for (var p : presets) {
-                            presetCombo.addItem(p);
-                        }
-                        for (int i = 0; i < presetCombo.getItemCount(); i++) {
-                            var p = presetCombo.getItemAt(i);
-                            if (Objects.equals(p.getBaseUrl(), initial.getBaseUrl())) {
-                                presetCombo.setSelectedIndex(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+            });         
         }
 
         @Nullable

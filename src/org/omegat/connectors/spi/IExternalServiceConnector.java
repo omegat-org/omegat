@@ -29,7 +29,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.ExternalResource;
 import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.dto.ServiceTarget;

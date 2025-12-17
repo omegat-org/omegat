@@ -45,7 +45,6 @@ import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
-import org.omegat.connectors.config.ExternalConnectorXmlStore;
 import org.omegat.core.data.CoreState;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;

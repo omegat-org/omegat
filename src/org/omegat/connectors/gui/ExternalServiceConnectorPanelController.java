@@ -109,7 +109,7 @@ public class ExternalServiceConnectorPanelController {
             return;
         }
         panel.searchPageButton.setEnabled(connector.supports(ConnectorCapability.LIST));
-        panel.urlField.setEnabled(connector.allowCustomUrl());
+        panel.urlField.setEnabled(connector.supports(ConnectorCapability.READ_URL));
     }
 
     private void openPreferenceDialog() {

@@ -26,6 +26,7 @@
 package org.omegat.connectors.tracwiki;
 
 import org.omegat.connectors.AbstractExternalServiceConnector;
+import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.spi.ConnectorCapability;
 import org.omegat.connectors.spi.ConnectorException;
@@ -38,6 +39,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.net.URI;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -95,7 +97,7 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
 
     @Override
     public Set<ConnectorCapability> getCapabilities() {
-        return Set.of(ConnectorCapability.READ);
+        return Set.of(ConnectorCapability.READ, ConnectorCapability.READ_URL);
     }
 
     @Override
@@ -109,8 +111,8 @@ public class TracWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public boolean allowCustomUrl() {
-        return true;
+    public List<PresetService> getPresets() {
+        return List.of(new PresetService("trac.edgewall.org", "https://trac.edgewall.org/wiki"));
     }
 
     @Override

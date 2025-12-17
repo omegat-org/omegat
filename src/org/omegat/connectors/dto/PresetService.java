@@ -22,19 +22,49 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.connectors.spi;
+package org.omegat.connectors.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
- * Capabilities supported by a connector.
+ * DTO representing a preset service suggestion for a connector.
+ * Contains a human readable name and a default base URL.
  */
-public enum ConnectorCapability {
-    /**
-     * Ability of a connector to perform read resource.
-     */
-    READ,
-    READ_URL,
-    /**
-     * Ability of a connector to perform list resources.
-     */
-    LIST
+public class PresetService implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private final String name;
+    private final String baseUrl;
+
+    public PresetService(String name, String baseUrl) {
+        this.name = name;
+        this.baseUrl = baseUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PresetService)) return false;
+        PresetService that = (PresetService) o;
+        return Objects.equals(name, that.name) && Objects.equals(baseUrl, that.baseUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, baseUrl);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

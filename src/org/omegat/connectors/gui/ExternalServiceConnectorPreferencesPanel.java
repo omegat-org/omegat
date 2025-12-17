@@ -42,6 +42,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
 import org.jspecify.annotations.Nullable;
+import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.spi.IExternalServiceConnector;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.config.ExternalConnectorXmlStore;
@@ -171,6 +172,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
     class ExternalServiceTargetEditor {
         private final JDialog dialog;
         private final JComboBox<IExternalServiceConnector> typeCombo;
+        private final JComboBox<PresetService> presetCombo;
         private final JTextField projectField;
         private final JTextField baseUrlField;
         private final JTextField targetLanguageField;
@@ -201,6 +203,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             baseUrlField = new JTextField(25);
             targetLanguageField = new JTextField(20);
             loginRequiredCheck = new javax.swing.JCheckBox();
+            presetCombo = new JComboBox<>();
 
             // Row: Type
             gc.gridx = 0;
@@ -210,6 +213,16 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             gc.gridy = row;
             gc.weightx = 1;
             panel.add(typeCombo, gc);
+            gc.weightx = 0;
+            row++;
+            // Row: Preset (optional)
+            gc.gridx = 0;
+            gc.gridy = row;
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_PRESET")), gc);
+            gc.gridx = 1;
+            gc.gridy = row;
+            gc.weightx = 1;
+            panel.add(presetCombo, gc);
             gc.weightx = 0;
             row++;
             // Row: Project
@@ -281,10 +294,37 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 result = null;
                 dialog.dispose();
             });
+            // Populate presets and default base URL on connector change
             typeCombo.addActionListener(e -> {
                 IExternalServiceConnector connector = (IExternalServiceConnector) typeCombo.getSelectedItem();
-                if (connector != null && connector.getDefaultBaseUrl() != null) {
-                    baseUrlField.setText(connector.getDefaultBaseUrl());
+                presetCombo.removeAllItems();
+                if (connector != null) {
+                    // Add customize entry first
+                    presetCombo.addItem(new PresetService(
+                            OStrings.getString("TF_EXTERNAL_SERVICE_PRESET_CUSTOMIZE"), ""));
+                    var presets = connector.getPresets();
+                    if (!presets.isEmpty()) {
+                        for (var p : presets) {
+                            presetCombo.addItem(p);
+                        }
+                    }
+                    // Default selection is Customize
+                    presetCombo.setSelectedIndex(0);
+                    // Prefill with connector's default base URL if any; fields remain editable
+                    if (connector.getDefaultBaseUrl() != null) {
+                        baseUrlField.setText(connector.getDefaultBaseUrl());
+                    } else {
+                        baseUrlField.setText("");
+                    }
+                }
+            });
+
+            // Apply preset change to name and base URL
+            presetCombo.addActionListener(e -> {
+                var sel = (PresetService) presetCombo.getSelectedItem();
+                if (sel != null) {
+                    baseUrlField.setText(sel.getBaseUrl());
+                    projectField.setText(sel.getName());
                 }
             });
             JPanel root = new JPanel(new BorderLayout());
@@ -303,10 +343,29 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                         break;
                     }
                 }
+                // If presets exist and match initial base, try select matching preset
+                IExternalServiceConnector conn = (IExternalServiceConnector) typeCombo.getSelectedItem();
                 projectField.setText(initial.getProjectId());
                 baseUrlField.setText(initial.getBaseUrl());
                 targetLanguageField.setText(initial.getTargetLanguage());
                 loginRequiredCheck.setSelected(initial.isLoginRequired());
+                if (conn != null) {
+                    var presets = conn.getPresets();
+                    if (presets != null && !presets.isEmpty()) {
+                        // populate combo (in case listener not fired yet)
+                        presetCombo.removeAllItems();
+                        for (var p : presets) {
+                            presetCombo.addItem(p);
+                        }
+                        for (int i = 0; i < presetCombo.getItemCount(); i++) {
+                            var p = presetCombo.getItemAt(i);
+                            if (p != null && Objects.equals(p.getBaseUrl(), initial.getBaseUrl())) {
+                                presetCombo.setSelectedIndex(i);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 

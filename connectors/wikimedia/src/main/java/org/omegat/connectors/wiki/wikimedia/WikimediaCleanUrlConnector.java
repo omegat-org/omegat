@@ -25,12 +25,14 @@
 
 package org.omegat.connectors.wiki.wikimedia;
 
+import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.spi.ConnectorException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -69,5 +71,12 @@ public class WikimediaCleanUrlConnector extends AbstractWikimediaConnector {
         }
         String page = httpGet(getResourceUrl(base + resourceId));
         return new ByteArrayInputStream(page.getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public List<PresetService> getPresets() {
+        return List.of(
+                new PresetService("Wikipedia.org", "https://en.wikipedia.org/wiki/"),
+                new PresetService("Wikivoyage", "https://en.wikivoyage.org/wiki/"));
     }
 }

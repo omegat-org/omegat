@@ -25,11 +25,13 @@
 package org.omegat.connectors.spi;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import org.jspecify.annotations.Nullable;
 import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.dto.ServiceTarget;
 
 /**
@@ -49,8 +51,13 @@ public interface IExternalServiceConnector {
     @Nullable
     String getDefaultBaseUrl();
 
-    default boolean allowCustomUrl() {
-        return false;
+    /**
+     * Optional list of preset services this connector can target. Each preset
+     * provides a human-readable name and a default base URL. Implementations
+     * may return an empty list if there are no presets.
+     */
+    default List<PresetService> getPresets() {
+        return Collections.emptyList();
     }
 
     List<ExternalResource> listResources(ServiceTarget target, String keyword) throws ConnectorException;

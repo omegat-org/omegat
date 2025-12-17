@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.connectors.AbstractExternalServiceConnector;
 import org.omegat.connectors.dto.ExternalResource;
+import org.omegat.connectors.dto.PresetService;
 import org.omegat.connectors.dto.ServiceTarget;
 import org.omegat.connectors.spi.ConnectorCapability;
 import org.omegat.connectors.spi.ConnectorException;
@@ -136,6 +137,11 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     @Override
     public String getFileExtension() {
         return FILE_EXTENSION;
+    }
+
+    @Override
+    public java.util.List<PresetService> getPresets() {
+        return java.util.List.of(new PresetService("translatewiki.net", BASE_URL));
     }
 
     @Override

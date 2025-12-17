@@ -62,7 +62,7 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
 
     @Override
     public Set<ConnectorCapability> getCapabilities() {
-        return Set.of(ConnectorCapability.READ);
+        return Set.of(ConnectorCapability.READ, ConnectorCapability.READ_URL);
     }
 
     @Override
@@ -73,11 +73,6 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
     @Override
     public String getDefaultBaseUrl() {
         return DEFAULT_BASE_URL;
-    }
-
-    @Override
-    public boolean allowCustomUrl() {
-        return true;
     }
 
     @Override

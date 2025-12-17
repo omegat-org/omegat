@@ -208,7 +208,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Type
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_TYPE")), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TYPE")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -228,7 +228,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Project
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_PROJECT")), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_PROJECT")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -238,7 +238,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Base URL
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_BASEURL")), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_BASEURL")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -248,7 +248,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Target Language
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_LANGUAGE")), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_LANGUAGE")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -258,7 +258,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
             // Row: Login Required
             gc.gridx = 0;
             gc.gridy = row;
-            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_TITLE_LOGIN")), gc);
+            panel.add(new JLabel(OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_LOGIN")), gc);
             gc.gridx = 1;
             gc.gridy = row;
             gc.weightx = 1;
@@ -301,7 +301,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 if (connector != null) {
                     // Add customize entry first
                     presetCombo.addItem(new PresetService(
-                            OStrings.getString("TF_EXTERNAL_SERVICE_PRESET_CUSTOMIZE"), ""));
+                            OStrings.getString("TF_EXTERNAL_SERVICE_PREFERENCE_PRESET_CUSTOM"), "https://"));
                     var presets = connector.getPresets();
                     if (!presets.isEmpty()) {
                         for (var p : presets) {
@@ -314,7 +314,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                     if (connector.getDefaultBaseUrl() != null) {
                         baseUrlField.setText(connector.getDefaultBaseUrl());
                     } else {
-                        baseUrlField.setText("");
+                        baseUrlField.setText("https://");
                     }
                 }
             });
@@ -343,7 +343,8 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                         break;
                     }
                 }
-                // If presets exist and match initial base, try select matching preset
+                // If presets exist and match the initial base,
+                // try to select matching preset
                 IExternalServiceConnector conn = (IExternalServiceConnector) typeCombo.getSelectedItem();
                 projectField.setText(initial.getProjectId());
                 baseUrlField.setText(initial.getBaseUrl());
@@ -351,7 +352,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                 loginRequiredCheck.setSelected(initial.isLoginRequired());
                 if (conn != null) {
                     var presets = conn.getPresets();
-                    if (presets != null && !presets.isEmpty()) {
+                    if (!presets.isEmpty()) {
                         // populate combo (in case listener not fired yet)
                         presetCombo.removeAllItems();
                         for (var p : presets) {
@@ -359,7 +360,7 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                         }
                         for (int i = 0; i < presetCombo.getItemCount(); i++) {
                             var p = presetCombo.getItemAt(i);
-                            if (p != null && Objects.equals(p.getBaseUrl(), initial.getBaseUrl())) {
+                            if (Objects.equals(p.getBaseUrl(), initial.getBaseUrl())) {
                                 presetCombo.setSelectedIndex(i);
                                 break;
                             }

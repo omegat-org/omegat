@@ -83,7 +83,7 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
 
     private static final String CONNECTOR_ID = "translatewiki";
     private static final String PREFERENCE_NAME = "translatewiki";
-    private static final String FILE_EXTENSION = "json";
+    private static final String FILE_EXTENSION = "po";
 
     private static final String USER_KEY = "translatewiki.api.username";
     private static final String PASS_KEY = "translatewiki.api.password";
@@ -140,8 +140,8 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public java.util.List<PresetService> getPresets() {
-        return java.util.List.of(new PresetService("translatewiki.net", BASE_URL));
+    public List<PresetService> getPresets() {
+        return List.of(new PresetService("translatewiki.net", BASE_URL));
     }
 
     @Override

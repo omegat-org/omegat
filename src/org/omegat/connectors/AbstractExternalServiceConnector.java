@@ -69,11 +69,6 @@ public abstract class AbstractExternalServiceConnector implements IExternalServi
     public abstract String getPreferenceName();
 
     @Override
-    public @Nullable String getDefaultBaseUrl() {
-        return null;
-    }
-
-    @Override
     public List<ExternalResource> listResources(ServiceTarget target, String keyword)
             throws ConnectorException {
         return Collections.emptyList();

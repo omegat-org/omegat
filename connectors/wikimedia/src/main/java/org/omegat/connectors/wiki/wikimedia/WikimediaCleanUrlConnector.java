@@ -43,6 +43,7 @@ import java.util.ResourceBundle;
 @SuppressWarnings("unused")
 public class WikimediaCleanUrlConnector extends AbstractWikimediaConnector {
 
+    private static final String DEFAULT_BASE_URL = "https://en.wikipedia.org/wiki/";
     private static final String WIKIMEDIA_ID = "wikimedia";
     private static final String PREFERENCE_NAME = "wikimedia";
 
@@ -76,7 +77,7 @@ public class WikimediaCleanUrlConnector extends AbstractWikimediaConnector {
     @Override
     public List<PresetService> getPresets() {
         return List.of(
-                new PresetService("Wikipedia.org", "https://en.wikipedia.org/wiki/"),
+                new PresetService("Wikipedia.org", DEFAULT_BASE_URL),
                 new PresetService("Wikivoyage", "https://en.wikivoyage.org/wiki/"));
     }
 }

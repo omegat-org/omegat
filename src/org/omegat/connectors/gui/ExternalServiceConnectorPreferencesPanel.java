@@ -310,12 +310,6 @@ public class ExternalServiceConnectorPreferencesPanel extends JPanel {
                     }
                     // Default selection is Customize
                     presetCombo.setSelectedIndex(0);
-                    // Prefill with connector's default base URL if any; fields remain editable
-                    if (connector.getDefaultBaseUrl() != null) {
-                        baseUrlField.setText(connector.getDefaultBaseUrl());
-                    } else {
-                        baseUrlField.setText("https://");
-                    }
                 }
             });
 

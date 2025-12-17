@@ -48,9 +48,6 @@ public interface IExternalServiceConnector {
 
     String getFileExtension();
 
-    @Nullable
-    String getDefaultBaseUrl();
-
     /**
      * Optional list of preset services this connector can target. Each preset
      * provides a human-readable name and a default base URL. Implementations

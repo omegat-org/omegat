@@ -125,11 +125,6 @@ public class TranslateWikiConnector extends AbstractExternalServiceConnector {
     }
 
     @Override
-    public String getDefaultBaseUrl() {
-        return BASE_URL;
-    }
-
-    @Override
     public String getPreferenceName() {
         return PREFERENCE_NAME;
     }

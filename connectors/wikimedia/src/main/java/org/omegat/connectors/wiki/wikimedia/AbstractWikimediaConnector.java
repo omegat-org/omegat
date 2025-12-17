@@ -46,7 +46,6 @@ import org.omegat.util.WikiGet;
 public abstract class AbstractWikimediaConnector extends AbstractExternalServiceConnector {
 
     private static final String FILE_EXT = "UTF8";
-    private static final String DEFAULT_BASE_URL = "https://en.wikipedia.org/wiki/";
     private static final String ACTION_RAW = "action=raw";
     private static final String INDEX_PHP_TITLE = "index.php?title=";
     private static final String INDEX_PHP_TITLE_ESCAPED = "index.php\\?title=";
@@ -68,11 +67,6 @@ public abstract class AbstractWikimediaConnector extends AbstractExternalService
     @Override
     public String getFileExtension() {
         return FILE_EXT;
-    }
-
-    @Override
-    public String getDefaultBaseUrl() {
-        return DEFAULT_BASE_URL;
     }
 
     @Override

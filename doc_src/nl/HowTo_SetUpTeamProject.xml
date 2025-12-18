@@ -3,12 +3,12 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Instellen van een Teamproject</title>
 
-  <para>Beheren van een teamproject vereist enige kennis van ofwel de<emphasis>SVN</emphasis> of <emphasis>Git</emphasis> versiesystemen (<emphasis>VCS</emphasis> in de rest van dit gedeelte).</para>
+  <para>Beheren van een teamproject vereist enige kennis van ofwel de<emphasis>Git</emphasis> of <emphasis>SVN</emphasis> versiesystemen (<emphasis>VCS</emphasis> in de rest van dit gedeelte).</para>
 
-  <para>Deze handleiding beperkt zich tot het beschrijven van hun gebruik in de context van een project van OmegaT team omdat informatie over deze onderwerpen reeds uitgebreid beschikbaar is.</para>
+  <para>Deze handleiding beperkt zich tot het beschrijven van hun gebruik in de context van een teamproject van OmegaT, omdat informatie over deze onderwerpen reeds uitgebreid beschikbaar is.</para>
 
   <note>
-	<para>Een teamproject van OmegaT synchroniseert het vertaalgeheugen van het project <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> en de beschrijfbare woordenlijst van het project <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> met de hostserver en alle deelnemende teamleden, en beheert alle mogelijke conflicten tussen hen.</para>
+	<para>Een teamproject van OmegaT synchroniseert het vertaalgeheugen  van het project <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> en de beschrijfbare woordenlijst van het project <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> met de hostserver en alle deelnemende teamleden, en beheert alle mogelijke conflicten tussen hen.</para>
   </note>
 
   <section id="how.to.setup.team.project.prepare.the.repository">
@@ -17,32 +17,34 @@
 	<para>Hier zijn de stappen om een teamproject in te stellen:</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">Maak een lege opslagplaats op uw VCS hostserver</para>
+      <listitem>
+		<para>Maak een lege opslagplaats op uw VCS hostserver</para>
 
 		<para>Dit wordt normaal gesproken gedaan via een webinterface, een grafische toepassing, of de opdrachtregel. Bekijk de documentatie voor uw server of hostservice voor details.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">Gebruik het lokale VCS om een lokale kopie te maken (clone)</para>
+	  <listitem>
+		<para>Gebruik het lokale VCS om een lokale kopie te maken (clone)</para>
 
 		<note>
-		  <para>Deze lokale versie bevat uw kopie van de <emphasis>projectbeheerder</emphasis> van het project van OmegaT. Gebruik het om aanpassingen te maken die betrekking hebben op het gehele team.</para>
+		  <para>Deze lokale versie bevat uw kopie van de <emphasis>projectbeheerder</emphasis> van het project van OmegaT. Gebruik deze kopie om aanpassingen te maken die betrekking hebben op het gehele team.</para>
 		</note>
 
-		<para>De lokale opslagplaats wordt gebruikt om het initiële project toe te voegen aan de server, en kan ook worden gebruikt voor onderhoudstaken, zoals het verwijderen van bestanden, die niet direct binnen OmegaT kunnen worden uitgevoerd.</para>
-		<para>We raden aan dat u vermijdt om die map voor taken met betrekking de vertaling te gebruiken. Wanneer u taken voor vertaling of nakijken moet uitvoeren in dat project, gebruik dan OmegaT om een afzonderlijk kopie van het teamproject te downloaden en werk vanuit daar. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para>
+		<para>De lokale versie wordt gebruikt om het initiële project toe te voegen aan de versie op de server, als ook voor bepaalde onderhoudstaken. Bekijk het gedeelte <link linkend="how.to.manage.team.project" endterm="how.to.manage.team.project.title"/> voor details.</para>
+
+		<para>We raden aan dat u vermijdt om die map voor taken met betrekking de vertaling te gebruiken. Wanneer u taken voor vertaling of nakijken moet uitvoeren in dat project, gebruik dan OmegaT om een afzonderlijk kopie van het teamproject te downloaden en werk vanuit daar. Bekijk de how-to <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> voor details.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">Vul d leke lokale kopie met een echt project van OmegaT</para>
+	  <listitem>
+		<para>Vul de lege lokale kopie met een echt project van OmegaT</para>
 		<itemizedlist>
 		  <listitem>
 			<para>Maak de structuur van het project</para>
 
-			<para>Wanneer u een nieuw leeg project maakt kunt u de <link linkend="introduction.create.and.open.new.project">procedure voor de gebruikersinterface</link> volgen, of het direct maken vanaf de opdrachtregel: <command>java -jar OmegaT.jar team init &lt;brontaal&gt; &lt;doeltaal&gt;</command></para>
+			<para>Wanneer u een nieuw leeg project maakt, kunt u de <link linkend="introduction.create.and.open.new.project">procedure voor de gebruikersinterface</link> volgen, of het direct maken vanaf de opdrachtregel: <!-- TODO we’ll need to update the CL when we have integrated the
+				 new CL framework --> <command>java -jar OmegaT.jar team init &lt;brontaal&gt; &lt;doeltaal&gt;</command></para>
 
-			<para>Deze opdracht registreert ook automatisch het project in het versiesysteem.</para>
+			<para>Deze opdracht registreert ook automatisch het project in het VCS.</para>
 		  </listitem>
 		  <listitem>
 			<para>Kies de van toepassing zijnde instellingen</para>
@@ -55,67 +57,67 @@
 
 			<para>Voeg op soortgelijke wijze relevante lijsten van bestanden voor spellingscontrole toe die u beschikbaar wilt maken voor iedereen die aan het project werkt. Bekijk <link linkend="project.folder.omegat.spellcheck">bestanden voor spellingscontrole</link> voor details.</para>
 
-			<para>Wanneer u een bestaand project converteert, zorg er dan voor dat u bestanden, die u niet nodig hebt, verwijderd of wilt uploaden naar de server voordat u doorgaat met de volgende stap.</para>
+			<para>Wanneer u een bestaand project converteert, zorg er dan voor dat u bestanden, die u niet nodig hebt, verwijdert of wilt uploaden naar de server, voordat u doorgaat met de volgende stap.</para>
 
-			<para>Kopieer de te vertalen bestanden naar de map source/, en gebruik uw SVN- of Git-cliënt, of de opdrachtregel, om ze toe te voegen en te publiceren in de opslagplaats. Gebruik <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> om bestanden vanuit OmegaT toe te voegen.</para>
+			<para>Kopieer de te vertalen bestanden naar de map source/, en gebruik uw VCS-cliënt, of de opdrachtregel, om ze toe te voegen en te publiceren in de opslagplaats. Gebruik <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> om bronbestanden vanuit OmegaT toe te voegen.</para>
 
-			<para>U moet uw SVN- of Git-cliënt, of de opdrachtregel, gebruiken om woordenboeken, woordenlijsten vertaalgeheugens of andere bestanden, die u wilt opnemen in het project, toe te voegen en te publiceren.</para>
+			<para>U moet uw VCS-cliënt, of de opdrachtregel, gebruiken om woordenboeken, woordenlijsten, vertaalgeheugens of andere bestanden, die u wilt opnemen in het project, toe te voegen en te publiceren.</para>
 
-			<para>Deze stap kan worden uitgevoerd voor het voor de eerste keer registreren en publiceren van het project, en kan ook worden gebruikt om nieuwe bestanden toe te voegen, of bestaande bij te werken nadat het project werd gemaakt.</para>
+			<para>Deze stap kan worden uitgevoerd voor het voor de eerste keer registreren en publiceren van het project.</para>
 		  </listitem>
 		</itemizedlist>
 
 		<note>
           <para>In teamprojecten die een eenvoudige route gebruiken tussen de lokale opslagplaats en de opslagplaats op afstand (de standaard), <emphasis role="bold">en alleen in dergelijke projecten</emphasis>, kunnen de bron- en doelbestanden lokaal worden aangepast en geüpload naar de server met <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> en <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>.</para>
 
-          <para>De beheerder van het teamproject moet het lokale VCS gebruiken om deze bestanden <emphasis role="bold">aan te passen</emphasis> of <emphasis role="bold">te verwijderen</emphasis>. Sommige plug-ins kunnen deze taak eenvoudiger maken. Bekijk de voorkeur <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voor details.</para>
+          <para>De projectbeheerder moet het lokale VCS gebruiken om deze bestanden <emphasis role="bold">aan te passen</emphasis> of <emphasis role="bold">te verwijderen</emphasis>. Sommige plug-ins kunnen deze taak eenvoudiger maken. Bekijk de voorkeur <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voor details.</para>
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">Registreer de projectbestanden in het lokale VCS</para>
+	  <listitem>
+		<para>Registreer de projectbestanden in het lokale VCS</para>
 
 		<para>Wanneer u het project hebt gemaakt vanuit de gebruikersinterface, moet u het expliciet toevoegen aan het versiesysteem (<command>add</command> in zowel SVN als Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">Plaats de geregistreerde bestanden op de hostserver</para>
+	  <listitem>
+		<para>Plaats de geregistreerde bestanden op de hostserver</para>
 
 		<para>Publiceer tenslotte uw project op de server op afstand (<command>commit</command> in SVN, <command>commit</command> en <command>push</command> in Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">Geef toegangsrechten aan uw team</para>
+	  <listitem>
+		<para>Geef toegangsrechten aan uw team</para>
 
 		<note>
 		  <para>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</para>
 		</note>
 
-		<para>Nadat het project gereed is en is geüpload naar de server, moet de beheerder van het teamtoegang instellen voor de vertalers. Toegang tot een teamproject vereist de volgende informatie:</para>
+		<para>Nadat het project gereed is en is geüpload naar de server, moet de projectbeheerder toegang voor de vertalers instellen. Toegang tot een teamproject vereist de volgende informatie:</para>
 
 		<orderedlist>
           <listitem>
 			<para>Projecten op een hostservice</para>
 
-			<para>De vertalers zullen een account voor de service moeten maken, en hun gebruikersnaam doorsturen naar de beheerder van het teamproject.</para>
+			<para>De vertalers zullen een account voor de service moeten maken, en hun gebruikersnaam doorsturen naar de projectbeheerder.</para>
 
-			<para>De beheerder zal dan toegang voor schrijven verlenen voor de opslagplaats, voor die accounts.</para>
+			<para>De projectbeheerder zal dan toegang voor schrijven verlenen voor de opslagplaats, voor die accounts.</para>
           </listitem>
 
           <listitem>
 			<para>Projecten op een zelf-gehoste server</para>
 
-			<para>Als de server zelf gehost wordt en geen voorziening heeft om de vertalers zelf een account te laten maken, moet de beheerder van het teamproject accounts met toegang voor schrijven maken voor de vertalers.</para>
+			<para>Als de server zelf gehost wordt en geen voorziening heeft om de vertalers zelf een account te laten maken, moet de projectbeheerder accounts met toegang voor schrijven maken voor de vertalers.</para>
 
-			<para>Nadat de accounts zijn gemaakt moet de beheerder hen hun individuele inloggegevens sturen.</para>
+			<para>Nadat de accounts zijn gemaakt moet de projectbeheerder de vertalers hun individuele inloggegevens sturen.</para>
           </listitem>
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">Laat iedereen het project downloaden vanaf OmegaT</para>
+	  <listitem>
+		<para>Laat iedereen het project downloaden vanaf OmegaT</para>
 
-		<para>Beheerders hebben twee opties voor het verzenden van de locatie van het project naar de vertalers:</para>
+		<para>Projectbeheerders hebben twee opties voor het verzenden van de locatie van het project naar de vertalers:</para>
 
 		<orderedlist>
           <listitem>
@@ -123,31 +125,56 @@
           </listitem>
 
           <listitem>
-			<para>Stuur een bestand <filename>omegat.project</filename> dat de URL voor het project bevat, en laat de vertalers die kopiëren naar een lege map en het  openen in OmegaT. Dit kan nuttig zijn als het project is ingesteld om verschillende <link linkend="how.to.setup.team.project.mapping.parameters">routes</link> voor elke vertaler te gebruiken.</para>
+			<para>Stuur een bestand <filename>omegat.project</filename> dat de URL voor het project bevat, en laat de vertalers die kopiëren naar een lege map en het openen in OmegaT. Dit kan nuttig zijn als het project is ingesteld om verschillende <link linkend="how.to.setup.team.project.mapping.parameters">routes</link> voor elke vertaler te gebruiken.</para>
           </listitem>
 		</orderedlist>
 
-		<para>Nadat de beheerder van het teamproject heeft bevestigd dat een vertaler in staat moet zijn het teamproject te openen, is het een goed idee om ervoor te zorgen dat de <link linkend="menus.tools.statistics">statistieken van het project</link> hetzelfde zijn voor zowel de beheerder (op de server) en de vertaler (lokaal).</para>
+		<para>Nadat de projectbeheerder heeft bevestigd dat een vertaler in staat moet zijn het teamproject te openen, is het een goed idee om ervoor te zorgen dat de <link linkend="menus.tools.statistics">statistieken van het project</link> hetzelfde zijn voor zowel de projectbeheerder (op de server) als voor de vertaler (lokaal).</para>
 
-		<para>Indien zij niet overeenkomen, zorg ervoor dat de bestanden <filename>filters.xml</filename> en <filename>segmentation.conf</filename> op de juiste wijze worden gedeeld.</para>
+		<para>Indien zij niet overeenkomen, zorg er dan voor dat dezelfde instellingen voor filters en segmentatie gebruikt worden, door te controleren of de bestanden <filename>filters.xml</filename> en <filename>segmentation.conf</filename> op de juiste wijze worden gedeeld.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het lokale teamproject</para>
-	  </listitem>
-
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">U kunt nu ook met het team aan het project werken</para>
+	  <listitem>
+		<para>Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het originele lokale teamproject</para>
 	  </listitem>
 	</orderedlist>
   </section>
 
+  <section id="how.to.manage.team.project">
+  <title id="how.to.manage.team.project.title">Een teamproject beheren</title>
+
+  <para>Teamprojecten hebben een aantal beheerstaken die niet direct zijn gerelateerd aan vertalen. Projectbeheerder zouden kunnen vinden dat het voordelen heeft—misschien zelfs noodzakelijk—om dergelijke taken direct af te handelen via het VCS, in het bijzonder voor gevallen waar de projectbeheerder slechts optreedt als een coördinator en niet is betrokken bij het vertaalproces zelf.</para>
+    <variablelist>
+	  <varlistentry>
+		<term>Bestanden toevoegen</term>
+		<listitem>
+		  <para>Hoewel OmegaT een mechanisme verschaft voor het toevoegen van bron- en doelbestanden voor vertalingen aan de opslagplaats, moet de projectbeheerder alle andere bestanden, zoals woordenboeken, woordenlijsten of vertaalgeheugens met verwijzingen, vanuit de opslagplaats van het VCS toevoegen.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>Bestanden verwijderen</term>
+	    <listitem>
+		  <para>OmegaT heeft geen mechanisme om bestanden uit een teamproject te verwijderen. Als bestanden in een gedeeld teamproject niet langer nodig zijn, <emphasis>moet</emphasis> de projectbeheerder ze verwijderen uit de opslagplaats van het VCS.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Projectstatistieken raadplegen</term>
+		<listitem>
+		  <note>
+			<para>Dit is alleen van toepassing op werkstromen die vertalers vragen om de vertaalde doelbestanden als leveringen in te dienen bij de opslagplaats.</para>
+		  </note>
+		  <para>Wanneer OmegaT de doelbestanden indient, commit het ook de projectstatistieken in de indelingen <filename>.txt</filename> en <filename>.json</filename>. Dat stelt de projectbeheerder in staat de statistieken te raadplegen, en mogelijk hun verwerking te automatiseren, zonder noodzaak om OmegaT te moeten openen.</para>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
   <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">Routes in opslagplaats</title>
+	<title id="how.to.setup.team.project.mapping.parameters.title">Routes naar opslagplaats</title>
 
-	<para>Het is mogelijk om routes naar verschillende locaties op afstand naar lokale bestanden te maken via de gebruikersinterface van OmegaT met <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, of door het bestand <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/> te bewerken. Hoewel de mogelijkheid voor routes primair is bedoeld voor het verzamelen van bronbestanden vanaf afzonderlijke, kan het ook worden gebruikt van andere typen bestanden.</para>
+	<para>Het is mogelijk om routes naar verschillende locaties op afstand naar lokale bestanden te maken via de gebruikersinterface van OmegaT met <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, of door het bestand <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/> te bewerken. Hoewel de mogelijkheid voor routes primair is bedoeld voor het verzamelen van bronbestanden vanaf afzonderlijke locaties, kan het ook worden gebruikt voor andere typen bestanden.</para>
 
-	<para>Een lijst met parameters voor routes wordt hieronder weergegeven, en verbeelden van hun gebruik worden in het volgende gedeelte verschaft.</para>
+	<para>Een lijst met parameters voor routes wordt hieronder weergegeven, en voorbeelden van hun gebruik worden in het volgende gedeelte verschaft.</para>
 
 	<variablelist>
       <varlistentry>
@@ -203,13 +230,13 @@
 	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-	<para>Alle inhoud van <filename>https://opslag_voor_OmegaT_teamproject</filename> volgt de route naar het lokale project van OmegaT</para>
+	<para>Alle inhoud van <filename>https://opslagplaats_voor_OmegaT_teamproject</filename> volgt de route naar het lokale project van OmegaT</para>
 
 	<para>Route voor projecten in een submap van de opslagplaats:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_teamprojecten&quot;&gt;
 	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
 &lt;/repository&gt;</programlisting></para>
 
-	<para>Alle inhoud van <filename>https://opslag_voor_alle_OmegaT_teamprojecten/En-US_DE_project</filename> volgt de route naar het lokale project van OmegaT.</para>
+	<para>Alle inhoud van <filename>https://opslagplaats_voor_alle_OmegaT_teamprojecten/En-US_DE_project</filename> volgt de route naar het lokale project van OmegaT.</para>
 
 	<para>Routes naar aanvullende bronnen uit de opslagplaats op afstand, met filters:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_bronnen_van_teamproject&quot;&gt;
 	&lt;mapping local=&quot;source/submap&quot; repository=&quot;&quot;&gt;
@@ -255,6 +282,6 @@
 
 	<para>Het is ook mogelijk een configuratie voor een teamproject te gebruiken waar verschillende vertalers het bestand <filename>project_save.tmx</filename> delen, en alleen een subset van de andere bestanden.</para>
 
-	<para>In dit geval is de procedure essentieel hetzelfde, maar voegt de projectbeheerder niet elk bestand toe aan het project met versie-controle op de server. De resterende bestanden kopiëren de vertalers  zelf, of routes, die de bestanden van andere locaties synchroniseren, worden gedefinieerd.</para>
+	<para>In dit geval is de basisprocedure essentieel hetzelfde, maar voegt de projectbeheerder niet elk bestand toe aan het project op de server met versie-controle. De resterende bestanden kopiëren de vertalers zelf, of routes, die de bestanden van andere locaties synchroniseren, worden gedefinieerd.</para>
   </section>
 </section>

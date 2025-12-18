@@ -80,7 +80,7 @@
           <para>Selecteer, in de lijst van beschikbare machinevertalingen in OmegaT, het vak <guilabel>Ingeschakeld</guilabel> voor elke provider waar u toegang voor wilt. Gebruik de knop <guibutton>Configureren</guibutton> om uw gegevens voor authenticatie voor die provider te beheren.</para>
 
 		  <note>
-			<para>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg er voor dat u de juiste inloggegevens hebt voordat u deze functie gebruikt.</para>
+			<para>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg ervoor dat u de juiste inloggegevens hebt, voordat u deze functie gebruikt.</para>
 		  </note>
 
 		  <table id="dialogs.preferences.mt.provider.list.configuration">
@@ -213,13 +213,27 @@
           <para>Als een term in de woordenlijst meerdere definities heeft, zullen zij op dezelfde regel worden weergegeven.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sorteer op lengte van de bron-tekstterm</option></term>
+		  <listitem>
+			  <para>Als sommige items van de woordenlijst soortgelijk zijn in een bron-tekstterm, en een bevat een andere tekstterm, sorteer dan op de lengte van de brontekst.</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Sorteer op lengte van de bron-tekstterm</option></term>
+			<listitem>
+				<para>Als een term in de woordenlijst meerdere definities heeft, sorteer dan op lengte van de tekst van de definitie.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
     <title id="dialogs.preferences.dictionary.title"><guilabel>Woordenboeken</guilabel></title>
 
-	<para>Voorkeuren definiëren hier hoe de inhoud van de map <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> die wordt weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+	<para>De voorkeuren hier definiëren hoe de inhoud van de map <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> zal worden weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
 	
     <variablelist>
       <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
@@ -349,11 +363,11 @@
 
 	  <para>Wanneer u klikt op een taalpatroon in de bovenste helft van het dialoogvenster, zal een lijst met geassocieerde regels worden weergegeven in de onderste helft van het dialoogvenster.</para>
 
-	  <para>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger meten staan dan die standaard zijn.</para>
+	  <para>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger moeten staan dan die welke standaard zijn.</para>
 
 	  <example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
-		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Cascaderende prioriteiten</title>
-		<para>De regels voor <emphasis>FR-CA</emphasis> zouden hoger moeten zijn ingesteld dan die voor <emphasis>FR.*</emphasis>, die op zijn beurt hoger zou moeten staan dan de algemene set <emphasis>.*</emphasis>.</para>
+		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Stapelende prioriteiten</title>
+		<para>De regels voor <emphasis>FR-CA</emphasis> zouden hoger moeten zijn ingesteld dan die voor <emphasis>FR.*</emphasis>, die op hun beurt hoger zouden moeten staan dan de algemene set <emphasis>.*</emphasis>.</para>
 
 		<para>Dus, bij het vertalen vanuit Canadees Frans worden de regels voor Canadees Frans—indien aanwezig—eerst worden toegepast, gevolgd door de regels voor Frans en tenslotte de standaard regels.</para>
 	  </example>
@@ -365,7 +379,7 @@
 		</listitem>
 		
 		<listitem>
-		  <para>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon komt is een reguliere expressie.</para>
+		  <para>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon is een reguliere expressie.</para>
 		</listitem>
 
 		<listitem>
@@ -387,7 +401,7 @@
 		  <term id="segmentation.rules.exceptionrule.title"><option>Uitzonderingen</option></term>
 
 		  <listitem>
-			<para>Selecteer het vak <guilabel>Afbreken/Uitzondering </guilabel>niet om een uitzonderingsregel te definiëren.</para>
+			<para>Selecteer niet het vak <guilabel>Afbreken/Uitzondering </guilabel>om een uitzonderingsregel te definiëren.</para>
 
 			<para>Specificeer tekstcombinaties die uitzonderingen voor een afbreekregel zijn. <emphasis>Mrs. Dalloway</emphasis> zou, bijvoorbeeld, niet worden gesplitst in twee segmenten, zelfs niet omdat een afbreekregel voor <emphasis>punt, gevolgd door een spatie</emphasis> over het algemeen een zin definieert.</para>
 			
@@ -398,7 +412,7 @@
 		  <term id="segmentation.rules.breakrule.title"><option>Afbrekingen</option></term>
 
 		  <listitem>
-			<para>Selecteer het vak <guilabel>Afbreken/Uitzondering</guilabel> om een afbreekregel te definiëren.</para>
+			<para>Selecteer het vak <guilabel>Afbreken/Uitzondering</guilabel> om een regel voor afbreken te definiëren.</para>
 
 			<para>Verdeelt de brontekst in segmenten. Bijvoorbeeld: <emphasis>punt, gevolgd door een spatie</emphasis> definieert over het algemeen het einde van een zin in het Engels.</para>
 		  </listitem>
@@ -446,7 +460,7 @@
 	<para>OmegaT heeft een ingebouwde spellingscontrole, maar vereist dat u woordenboeken voor spellingscontrole installeert, gebaseerd op uw doeltalen.</para>
 
 	<warning>
-	  <para>OmegaT zal het woordenboek voor de  taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Een woordenboek<emphasis>FR-FR</emphasis> zal geen spellingscontrole uitvoeren voor doelsegmenten in <emphasis>FR</emphasis>. Pas, indien nodig, de naam van het woordenboek aan of wijzig de taalinstellingen voor uw project.</para>
+	  <para>OmegaT zal het woordenboek voor de taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Een woordenboek<emphasis>FR-FR</emphasis> zal geen spellingscontrole uitvoeren voor doelsegmenten in <emphasis>FR</emphasis>. Pas, indien nodig, de naam van het woordenboek aan of wijzig de taalinstellingen voor uw project.</para>
 	</warning>
 
 	<variablelist>
@@ -523,7 +537,7 @@
 
   <section id="dialogs.preferences.external.searches">
 	<title id="dialogs.preferences.external.searches.title"><guilabel>Globaal extern zoeken</guilabel></title>
-	<para>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</para>
+	<para>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten, die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter hebben. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</para>
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
@@ -569,7 +583,7 @@
 
 			<para>Dit opent een zoekactie voor de term {target} op DuckDuckGo met een aantal parameters voor het zoeken.</para></example>
 
-			<para>Opdrachten worden geopend op de opdrachtregel. Het <guilabel>Scheidingsteken</guilabel>definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code>|</code>.</para>
+			<para>Opdrachten worden geopend op de opdrachtregel. Het <guilabel>Scheidingsteken</guilabel> definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code>|</code>.</para>
 
 		  <example id="dialogs.preferences.external.search.items.command.example">
 			<title id="dialogs.preferences.external.search.items.command.example.title">Voorbeeld opdracht</title>
@@ -590,7 +604,7 @@
 		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>De brontekst invoegen</option></term>
 
 		<listitem>
-		  <para>Gebruik deze optie tijdelijk voor delen van de vertaling die niet veel transformatie vereisen.</para>
+		  <para>Gebruik deze optie voor delen van de vertaling die niet veel transformatie vereisen.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -707,9 +721,9 @@
 		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Status voor automatisch vergroten van vertalingen opslaan</option></term>
 
 		<listitem>
-		  <para>Vertaalgeheugens, geplaatst in <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> kunnen het geheugen van het project automatisch vullen. Segmenten die op die tijd een geautomatiseerde vertaling krijgen kunnen worden gemarkeerd in het venster <guilabel>Bewerken</guilabel> door <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> te gebruiken.</para>
+		  <para>Vertaalgeheugens, geplaatst in <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> kunnen het geheugen van het project automatisch vullen. Segmenten, die op dat moment een geautomatiseerde vertaling hebben ontvangen, kunnen worden gemarkeerd in het venster <guilabel>Bewerken</guilabel> door <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> te gebruiken.</para>
 
-		  <para>Bekijk de <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> how-to voor details.</para>
+		  <para>Bekijk de how-to <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -836,7 +850,7 @@
 	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
 		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Inloggegevens opslagplaats</option></term>
 		<listitem>
-		  <para>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar logingegevens vraagt, als u toegang wilt.</para>
+		  <para>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar inloggegevens vraagt, als u toegang wilt.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -1056,7 +1070,7 @@ ${filePath}&gt;</programlisting></para>
 	  <varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
 		<term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><option>Alle bronsegmenten VET weergeven</option></term>
 		<listitem>
-		  <para>standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</para>
+		  <para>Standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -1077,7 +1091,7 @@ ${filePath}&gt;</programlisting></para>
 	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
 		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Helptips van tags vereenvoudigen</option></term>
 		<listitem>
-		  <para>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer die de originele inhoud van de tag bevat als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</para>
+		  <para>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer, die de originele inhoud van de tag bevat, als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -1156,12 +1170,12 @@ ${filePath}&gt;</programlisting></para>
 
 		<listitem>
 		  <warning>
-			<para>Opdrachten voor <link linkend="dialogs.project.properties.external.processing.command">lokale nabewerking</link> zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+			<para>Opdrachten voor <link linkend="dialogs.project.properties.external.processing.command">lokaal nabewerken</link> zijn om veiligheidsredenen standaard uitgeschakeld.</para>
 		  </warning>
 
-		  <para>U kunt ook lokale opdrachten voor nabewerking definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
+		  <para>U kunt ook lokale opdrachten voor nabewerken definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
 
-		  <para>Opdrachten voor lokale opdrachten voor nabewerking worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</para>
+		  <para>Opdrachten voor lokale opdrachten voor nabewerken worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</para>
 
 	  	  <note>
 			<para>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</para>

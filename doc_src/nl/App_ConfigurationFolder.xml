@@ -15,7 +15,7 @@
 	</variablelist></para>
 
 	<note>
-	  <para>Normaal gesproken is het niet nodig om OmegaT te starten vanaf de opdrachtregel. Bekijk de <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> how-to voor details.</para>
+	  <para>Normaal gesproken is het niet nodig om OmegaT te starten vanaf de opdrachtregel. Bekijk de how-to <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> voor details.</para>
 
 	  <para>Aangepaste voorkeuren worden opgeslagen in de configuratiemap die wordt gebruikt door het project. Als u de standaard configuratiemap niet gebruikt, zullen alle wijzigingen die worden gemaakt in de <link linkend="chapter.dialogs.preferences">voorkeuren</link> worden opgeslagen in de gespecificeerde configuratiemap en en zullen niet verschijnen wanneer u uw werk voortzet met de standaard configuratiemap.</para>
 	</note>
@@ -56,7 +56,7 @@
 		<listitem>
 		  <para>Deze map bevat een aantal logbestanden. Het meest recente is <filename>OmegaT.log</filename>.</para>
 
-		  <para>Deze bestanden leggen verschillende interne status en berichten voor programmagebeurtenissen vast, gegenereerd terwijl OmegaT wordt uitgevoerd. Als OmegaT zich vreemd lijkt te gedragen is neem dan dit bestand, of het relevante gedeelte daarvan, op in uw foutenrapport.</para>
+		  <para>Deze bestanden leggen verschillende interne status en berichten voor programmagebeurtenissen vast, gegenereerd terwijl OmegaT wordt uitgevoerd. Als OmegaT zich vreemd lijkt te gedragen neem dan dit bestand, of het relevante gedeelte daarvan, op in uw foutenrapport.</para>
 
 		  <para>Gebruik <link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/> om de inhoud van het bestand te bekijken.</para>
 		</listitem>
@@ -138,21 +138,23 @@
 	<varlistentry id="configuration.folder.extra.contents.repositories">
 	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
 	  <listitem>
-		<para>Dit bestand bevat de informatie voor het inloggen in uw opslagplaatsen voor teamprojecten.<warning><para>De bestandsinhoud is niet versleuteld.</para></warning>Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
+		<para>Dit bestand bevat de informatie voor het inloggen in uw opslagplaatsen voor teamprojecten.<warning><para>De bestandsinhoud is niet versleuteld.</para></warning>Bekijk de how-to <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> voor details.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</term>
 	  <listitem>
-		<para>Dit parameterbestand bevat aangepaste parameters voor segmentatie. Bekijk de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> voor details.</para>
+		<para>Dit parameterbestand bevat aangepaste parameters voor segmentatie in de indeling <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>. Bekijk de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> voor details.<note><para>Als er een bestaand bestand <filename>segmentation.conf</filename> uit eerdere versies bestaat, converteert OmegaT het automatisch.</para>
+		  </note>
+		</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plug-ins/</term>
 	  <listitem>
-		<para>Deze map verschaft de standaard locatie voor handmatig geïnstalleerde plug-ins voor uitbreiding van OmegaT. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeur voor details.</para>
+		<para>Deze map verschaft de standaard locatie voor handmatig geïnstalleerde plug-ins voor uitbreiding van OmegaT. Bekijk de voorkeur <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voor details.</para>
 		<para>Het is ook mogelijk plug-ins te installeren in de map <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> voor de toepassing.</para>
 	  </listitem>
 	</varlistentry>

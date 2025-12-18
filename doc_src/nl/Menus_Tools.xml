@@ -24,7 +24,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><guilabel>Problemen met tags</guilabel> (altijd geselecteerd): detecteert ontbrekend of misplaatste tags, inclusief aangepaste tags en gevlagde tekst. Bekijk de <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> voorkeuren voor details.</para>
+            <para><guilabel>Problemen met tags</guilabel> (altijd geselecteerd): detecteert ontbrekende of misplaatste tags, inclusief aangepaste tags en gevlagde tekst. Bekijk de voorkeuren <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> voor details.</para>
 
 			<note>
 			  <para>Deze optie is altijd geselecteerd.</para>
@@ -32,15 +32,15 @@
           </listitem>
 
           <listitem>
-            <para><guilabel>Spellingproblemen</guilabel> (optioneel): detecteert spelfouten. Werkt alleen als een woordenboek voor spelling is geïnstalleerd. Bekijk de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voorkeuren voor details.</para>
+            <para><guilabel>Spellingproblemen</guilabel> (optioneel): detecteert spelfouten. Werkt alleen als een woordenboek voor spelling is geïnstalleerd. Bekijk de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voor details.</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>Problemen met terminologie</guilabel> (optioneel): detecteert alle items uit de woordenlijsten die niet juist zijn vertaald. Bekijk de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voorkeuren voor details.</para>
+            <para><guilabel>Problemen met terminologie</guilabel> (optioneel): detecteert alle items uit de woordenlijsten die niet juist zijn vertaald. Bekijk de voorkeuren <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voor details.</para>
           </listitem>
 
 		  <listitem>
-            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel): detecteert grammaticale of typografische problemen. Bekijk de <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voorkeuren voor details.</para>
+            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel): detecteert grammaticale of typografische problemen. Bekijk de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voor details.</para>
           </listitem>
         </itemizedlist>
 
@@ -94,11 +94,11 @@
 			</listitem>
 
 			<listitem>
-			  <para>Tags: Tags van OmegaT worden nooit meegeteld in de statistieken, maar in sommige gevallen kunnen termen splitsen en afwijkingen maken op de manier waarop OmegaT ze telt. Bekijk de voorkeur <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> voor details.</para>
+			  <para>Tags: Tags van OmegaT worden nooit meegeteld in de statistieken, maar in sommige gevallen kunnen termen splitsen en afwijkingen veroorzaken in de manier waarop OmegaT ze telt. Bekijk de voorkeur <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> voor details.</para>
 			</listitem>
 
 			<listitem>
-			  <para>Aangepaste tags en gevlagde tekst: net als met tags van OmegaT, zij worden niet standaard geteld in de statistieken, maar u kunt OmegaT ze laten tellen als woorden. Bekijk de <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> voorkeur voor details.</para>
+			  <para>Aangepaste tags en gevlagde tekst: net als met tags van OmegaT, zij worden niet standaard geteld in de statistieken, maar u kunt OmegaT ze laten tellen als woorden. Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> voor details.</para>
 			</listitem>
 		  </itemizedlist>
 		</note>
@@ -162,7 +162,7 @@
     <varlistentry id="menus.tools.external.search.commands">
       <term id="menus.tools.external.search.commands.title">Externe opdrachten voor zoeken</term>
       <listitem>
-        <para>Als u in de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> opdrachten zijn gedefinieerd om externe zoekacties uit te voeren, dan zijn zij hier vermeld en toegankelijk.</para>
+        <para>Als u in de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> externe zoekacties hebt gedefinieerd om uit te voeren, dan worden zij hier vermeld en van hieruit toegankelijk.</para>
       </listitem>
     </varlistentry>
   </variablelist>

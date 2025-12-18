@@ -8,7 +8,7 @@
   <para>OmegaT biedt ook een op de opdrachtregel gebaseerde uitlijning voor op toetsen gebaseerde indelingen. Bekijk de optie <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> voor details.</para>
 
   <warning>
-    <para>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Door dat te doen heeft het het toegevoegde voordeel van het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het  handmatig corrigeren een stuk soepeler maakt.</para>
+    <para>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Het toegevoegde voordeel, door het op die manier te doen, is het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het handmatig corrigeren een stuk soepeler maakt.</para>
   </warning>
 
 
@@ -38,7 +38,7 @@
     <para>Als u een vertaalproject hebt geopend, zal de uitlijner automatisch de talen uit dat project gebruiken, als ook, indien aanwezig, de project-specifieke segmentatieregels.</para>
   </note>
 
-  <para>Klik, na het selecteren van de taal en bestanden, op de knop <guibutton>OK</guibutton> om het venster <guilabel>Uitlijnen</guilabel> top te roepen, dat de resultaten van het automatisch uitlijnen weergeeft.</para>
+  <para>Klik, na het selecteren van de taal en bestanden, op de knop <guibutton>OK</guibutton> om het venster <guilabel>Uitlijnen</guilabel> op te roepen, dat de resultaten van het automatisch uitlijnen weergeeft.</para>
 
   <para>Het hoofdgedeelte van het venster is opgedeeld in drie kolommen:</para>
   

@@ -5,7 +5,7 @@
 %manualvariables;
 ]>
 <chapter id="chapter.dialogs.preferences">
-  <title id="chapter.dialogs.preferences.title"><guilabel>Voorkeuren</guilabel></title>
+  <title id="chapter.dialogs.preferences.title"><link linkend="chapter.dialogs.preferences"> </link><guilabel>Voorkeuren</guilabel></title>
 
   <para>Gebruik <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/> om toegang te krijgen tot dit dialoogvenster (het menu <literal>OmegaT</literal> op macOS).</para>
 
@@ -18,11 +18,11 @@
   </note>
 
   <section id="dialogs.preferences.general">
-    <title id="dialogs.preferences.general.title"><guilabel>Algemeen</guilabel></title>
+    <title id="dialogs.preferences.general.title"><link linkend="dialogs.preferences.general"> </link><guilabel>Algemeen</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.preferences.general.use.tab.to.advance">
-        <term id="dialogs.preferences.general.use.tab.to.advance.title"><option>Tab gebruiken om door te gaan</option></term>
+        <term id="dialogs.preferences.general.use.tab.to.advance.title"><link linkend="dialogs.preferences.general.use.tab.to.advance"> </link><option>Tab gebruiken om door te gaan</option></term>
 
         <listitem>
 		  <para>De standaard toets om een segment te valideren en te verlaten is <keycap>Enter</keycap>.</para>
@@ -33,7 +33,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.general.always.confirm.quit">
-        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>Afsluiten altijd bevestigen</option></term>
+        <term id="dialogs.preferences.general.always.confirm.quit.title"><link linkend="dialogs.preferences.general.always.confirm.quit"> </link><option>Afsluiten altijd bevestigen</option></term>
 
         <listitem>
           <para>Het programma zal u om bevestiging vragen voordat het afsluit.</para>
@@ -41,7 +41,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.general.access.configuration.folder">
-        <term id="dialogs.preferences.general.access.configuration.folder.title"><option>Ga naar map voor configuratie</option></term>
+        <term id="dialogs.preferences.general.access.configuration.folder.title"><link linkend="dialogs.preferences.general.access.configuration.folder"> </link><option>Ga naar map voor configuratie</option></term>
 		<listitem>
           <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen.</para>
 		  <note>
@@ -54,19 +54,19 @@
   </section>
 
   <section id="dialogs.preferences.mt">
-    <title id="dialogs.preferences.mt.title"><guilabel>Machinevertaling</guilabel></title>
+    <title id="dialogs.preferences.mt.title"><link linkend="dialogs.preferences.mt"> </link><guilabel>Machinevertaling</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
-        <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Automatisch vertalingen ophalen</option></term>
+        <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><link linkend="dialogs.preferences.mt.automatically.fetch.translations"> </link><option>Automatisch vertalingen ophalen</option></term>
 
-        <listitem>
-          <para>Als u deze optie uitschakelt zullen machinevertalingen alleen worden opgehaald als u drukt op <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> in het huidige segment. Daarna moet u nogmaals op die combinatie drukken om de suggestie in te voeren.</para>
-        </listitem>
+		<listitem>
+		  <para>Schakel deze optie in om automatisch machinevertalingen op te halen van de providers die u hebt ingeschakeld en geconfigureerd. Als u deze optie uitgeschakeld laat, worden machinevertalingen alleen opgehaald als u <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> gebruikt in het huidige segment. Daarna moet u nogmaals op die combinatie drukken om de suggestie in te voeren.</para>
+		</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
-        <term id="dialogs.preferences.mt.untranslated.segments.only.title"><option>Alleen niet-vertaalde segmenten</option></term>
+        <term id="dialogs.preferences.mt.untranslated.segments.only.title"><link linkend="dialogs.preferences.mt.untranslated.segments.only"> </link><option>Alleen niet-vertaalde segmenten</option></term>
 
         <listitem>
           <para>Selecteer dit vak om alleen niet-vertaalde segmenten naar de services voor machinevertaling te sturen.</para>
@@ -74,17 +74,18 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.provider.list">
-        <term id="dialogs.preferences.mt.provider.list.title"><option>Providerlijst</option></term>
+        <term id="dialogs.preferences.mt.provider.list.title"><link linkend="dialogs.preferences.mt.provider.list"> </link><option>Providerlijst</option></term>
 
         <listitem>
           <para>Selecteer, in de lijst van beschikbare machinevertalingen in OmegaT, het vak <guilabel>Ingeschakeld</guilabel> voor elke provider waar u toegang voor wilt. Gebruik de knop <guibutton>Configureren</guibutton> om uw gegevens voor authenticatie voor die provider te beheren.</para>
 
 		  <note>
-			<para>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg er voor dat u de juiste inloggegevens hebt voordat u deze functie gebruikt.</para>
+			<para>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg ervoor dat u de juiste inloggegevens hebt, voordat u deze functie gebruikt.</para>
 		  </note>
 
 		  <table id="dialogs.preferences.mt.provider.list.configuration">
-			<title id="dialogs.preferences.mt.provider.list.configuration.title"><option>Vereiste inloggegevens</option></title>
+			<title id="dialogs.preferences.mt.provider.list.configuration.title">
+              <option>Vereiste inloggegevens</option></title>
 
 			<tgroup align="left" cols="3" rowsep="1">
 			  <colspec align="left" colnum="1"/>
@@ -140,11 +141,11 @@
   </section>
 
   <section id="dialogs.preferences.glossary">
-    <title id="dialogs.preferences.glossary.title"><guilabel>Woordenlijsten</guilabel></title>
+	<title id="dialogs.preferences.glossary.title"><link linkend="dialogs.preferences.glossary"> </link><guilabel>Woordenlijsten</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
-        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Beschrijving context voor TBX-woordenlijsten weergeven (TBX 2)</option></term>
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><link linkend="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries"> </link><option>Beschrijving context voor TBX-woordenlijsten weergeven (TBX 2)</option></term>
 
         <listitem>
           <para>Deselecteer deze optie als de weergegeven beschrijving van de context voor elk item van de woordenlijst onnodig of te lang is.</para>
@@ -152,7 +153,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">
-        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><option>Laat groepen van termen overeenkomen, zelfs als de termen afzonderlijk verschijnen</option></term>
+        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><link linkend="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text"> </link><option>Laat groepen van termen overeenkomen, zelfs als de termen afzonderlijk verschijnen</option></term>
 
         <listitem>
           <para>Wanneer een term uit een woordenlijst een samengesteld woord is, zal de term overeenkomen, zelfs als de woorden afzonderlijk in de brontekst voorkomen.</para>
@@ -160,7 +161,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">
-        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"><option>Stemming gebruiken</option></term>
+        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"><link linkend="dialogs.preferences.glossary.use.stemming.for.glossary.entries"> </link><option>Stemming gebruiken</option></term>
 
         <listitem>
           <para>OmegaT zal de geassocieerde tokenizer gebruiken om overeenkomsten te vinden.</para>
@@ -168,7 +169,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">
-        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title"><option>Overeenkomsten vervangen bij invoegen brontekst</option></term>
+        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title"><link linkend="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text"> </link><option>Overeenkomsten vervangen bij invoegen brontekst</option></term>
         <listitem>
           <para>Wanneer u gebruikt</para>
 		  
@@ -191,7 +192,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
-        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><option>Overeenkomsten met hele andere letters negeren (bijv. USER vs user)</option></term>
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><link linkend="dialogs.preferences.glossary.ignore.hits.with.very.different.case"> </link><option>Overeenkomsten met hele andere letters negeren (bijv. USER vs user)</option></term>
 
         <listitem>
           <para>Overeenkomsten met hele andere letters worden niet weergegeven.</para>
@@ -199,7 +200,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.glossary.layout">
-        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Lay-out</option></term>
+        <term id="dialogs.preferences.glossary.glossary.layout.title"><link linkend="dialogs.preferences.glossary.glossary.layout"> </link><option>Lay-out</option></term>
 
         <listitem>
           <para>Selecteer een lay-out voor de inhoud van het venster Woordenlijst. Aanvullende lay-outs kunnen als plug-ins worden toegevoegd.</para>
@@ -207,23 +208,44 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
-        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><option>Verschillende definities voor dezelfde term samenvoegen</option></term>
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><link linkend="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term"> </link><option>Verschillende definities voor dezelfde term samenvoegen</option></term>
 
         <listitem>
           <para>Als een term in de woordenlijst meerdere definities heeft, zullen zij op dezelfde regel worden weergegeven.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+        <term id="dialogs.preferences.glossary.sort.by.source.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.source.term.length"> </link><option>Sorteer op lengte van de bron-tekstterm</option></term>
+		<listitem>
+		  <para>Als sommige items van de woordenlijst soortgelijk zijn in een bron-tekstterm, en een bevat een andere tekstterm, sorteer dan op de lengte van de brontekst.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+        <term id="dialogs.preferences.glossary.sort.by.target.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.target.term.length"> </link><option>Sorteer op lengte van de bron-tekstterm</option></term>
+		<listitem>
+		  <para>Als een term in de woordenlijst meerdere definities heeft, sorteer dan op lengte van de tekst van de definitie.</para>
+		</listitem>
+	  </varlistentry>
+        
+       <varlistentry id="dialogs.preferences.glossary.use.full.stemming">
+           <term id="dialogs.preferences.glossary.use.full.stemming.title"><option>Volledige stemming gebruiken</option></term>
+           <listitem>
+               <para>Sommige tokenizers bieden een fijnere woord-stemming voor een beperkt aantal talen. Momenteel zijn Engels, Frans en Italiaans geïmplementeerd.</para>
+           </listitem>
+       </varlistentry> 
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
-    <title id="dialogs.preferences.dictionary.title"><guilabel>Woordenboeken</guilabel></title>
+	<title id="dialogs.preferences.dictionary.title"><link linkend="dialogs.preferences.dictionary"> </link><guilabel>Woordenboeken</guilabel></title>
 
-	<para>Voorkeuren definiëren hier hoe de inhoud van de map <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> die wordt weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+	<para>De voorkeuren hier definiëren hoe de inhoud van de map <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> zal worden weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
 	
     <variablelist>
       <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
-        <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><option>Automatisch zoeken</option></term>
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><link linkend="dialogs.preferences.dictionary.automatically.search.segment"> </link><option>Automatisch zoeken</option></term>
 
         <listitem>
           <para>Terwijl de functie is uitgeschakeld, gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/> om te zoeken naar overeenkomsten van de selectie of van alle termen in de bron van het segment.</para>
@@ -232,7 +254,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
-        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>Fuzzy-overeenkomsten gebruiken</option></term>
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries"> </link><option>Fuzzy-overeenkomsten gebruiken</option></term>
 
         <listitem>
           <para>OmegaT zal de geassocieerde tokenizer gebruiken om overeenkomsten te vinden.</para>
@@ -240,7 +262,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.dictionary.use.condensed.view">
-        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>Gecomprimeerde weergave gebruiken</option></term>
+        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><link linkend="dialogs.preferences.dictionary.use.condensed.view"> </link><option>Gecomprimeerde weergave gebruiken</option></term>
 
         <listitem>
           <para>Sommige stuurprogramma's voor woordenboeken, verschaft als plug-ins, ondersteunen deze mogelijkheid niet.</para>
@@ -250,11 +272,11 @@
   </section>
 
   <section id="dialogs.preferences.appearance">
-    <title id="dialogs.preferences.appearance.title"><guilabel>Uiterlijk</guilabel></title>
+	<title id="dialogs.preferences.appearance.title"><link linkend="dialogs.preferences.appearance"> </link><guilabel>Uiterlijk</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.preferences.appearance.theme">
-        <term id="dialogs.preferences.appearance.theme.title"><option>Thema</option></term>
+        <term id="dialogs.preferences.appearance.theme.title"><link linkend="dialogs.preferences.appearance.theme"> </link><option>Thema</option></term>
 
         <listitem>
           <para>Selecteer een thema voor de gebruikersinterface van OmegaT.</para>
@@ -266,7 +288,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.appearance.restore.main.window">
-        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Hoofdvenster herstellen</option></term>
+        <term id="dialogs.preferences.appearance.restore.main.window.title"><link linkend="dialogs.preferences.appearance.restore.main.window"> </link><option>Hoofdvenster herstellen</option></term>
 
         <listitem>
           <para>Herstelt de vensters van OmegaT naar hun standaard schikking.</para>
@@ -277,7 +299,7 @@
     </variablelist>
 	
 	<section id="dialogs.preferences.fonts">
-      <title id="dialogs.preferences.fonts.title"><guilabel>Lettertype</guilabel></title>
+	  <title id="dialogs.preferences.fonts.title"><link linkend="dialogs.preferences.fonts"> </link><guilabel>Lettertype</guilabel></title>
 
       <para>Selecteer het lettertype en grootte daarvan om de tekst in de vensters weer te geven.</para>
 
@@ -286,15 +308,15 @@
 	  </note>
 
 	  <variablelist>
-		<varlistentry>
-		  <term><option>Dit lettertype op tabulaire gegevens toepassen (projectbestanden, statistieken, etc.)</option></term>
+		<varlistentry id="dialogs.preferences.fonts.apply.font.to.tabular.data">
+          <term id="dialogs.preferences.fonts.apply.font.to.tabular.data.title"><link linkend="dialogs.preferences.fonts.apply.font.to.tabular.data"> </link><option>Dit lettertype op tabulaire gegevens toepassen (projectbestanden, statistieken etc.)</option></term>
 		  <listitem>
 			<para>Tabulaire gegevens worden standaard weergegeven in een monospaced lettertype dat de kolommen netjes uitgelijnd houdt. Gebruiken van een proportioneel lettertype zal die lay-out verstoren.</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term><option>Pas een andere grootte lettertype toe voor het venster Woordenboek</option></term>
+		<varlistentry id="dialogs.preferences.fonts.apply.different.font.to.dictionaries">
+          <term id="dialogs.preferences.fonts.apply.different.font.to.dictionaries.title"><link linkend="dialogs.preferences.fonts.apply.different.font.to.dictionaries"> </link><option>Pas een andere grootte lettertype toe voor het venster Woordenboek</option></term>
 		  <listitem>
 			<para>Standaard gebruikt het venster Woordenboek dezelfde grootte voor het lettertype als de andere vensters.</para>
 		  </listitem>
@@ -303,7 +325,7 @@
 	</section>
 
 	<section id="dialogs.preferences.colours">
-      <title id="dialogs.preferences.colours.title"><guilabel>Kleuren</guilabel></title>
+	  <title id="dialogs.preferences.colours.title"><link linkend="dialogs.preferences.colours"> </link><guilabel>Kleuren</guilabel></title>
 
       <para>U kunt verschillende kleuren toewijzen aan de verschillende delen van de gebruikersinterface.</para>
 
@@ -316,7 +338,7 @@
   </section>
 
   <section id="dialogs.preferences.file.filters">
-	<title id="dialogs.preferences.file.filters.title"><guilabel>Globale bestandsfilters</guilabel></title>
+	<title id="dialogs.preferences.file.filters.title"><link linkend="dialogs.preferences.file.filters"> </link><guilabel>Globale bestandsfilters</guilabel></title>
 
 	<para>Dit dialoogvenster vermeldt de beschikbare bestandsfilters voor projecten die geen lokale filters gebruiken.</para>
 
@@ -329,7 +351,7 @@
 
 
   <section id="dialogs.preferences.segmentation.setup">
-	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>Globale segmentatieregels</guilabel></title>
+	<title id="dialogs.preferences.segmentation.setup.title"><link linkend="dialogs.preferences.segmentation.setup"> </link><guilabel>Globale segmentatieregels</guilabel></title>
 
 	<para>Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor algemene uitleg over segmentatie (globaal of lokaal, alinea of zin, etc.).</para>
 
@@ -338,7 +360,7 @@
 	</warning>
 	
 	<section id="dialogs.preferences.segmentation.setup.scope">
-	  <title id="dialogs.preferences.segmentation.setup.scope.title">Taalinstellingen</title>
+	  <title id="dialogs.preferences.segmentation.setup.scope.title"><link linkend="dialogs.preferences.segmentation.setup.scope"> </link>Taalinstellingen</title>
 
 	  <para>Alleen de regels die zijn geassocieerd met taalpatronen die corresponderen met de brontaal van uw project worden toegepast. Bekijk de projecteigenschap <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>.</para>
 
@@ -349,11 +371,11 @@
 
 	  <para>Wanneer u klikt op een taalpatroon in de bovenste helft van het dialoogvenster, zal een lijst met geassocieerde regels worden weergegeven in de onderste helft van het dialoogvenster.</para>
 
-	  <para>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger meten staan dan die standaard zijn.</para>
+	  <para>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger moeten staan dan die welke standaard zijn.</para>
 
 	  <example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
-		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Cascaderende prioriteiten</title>
-		<para>De regels voor <emphasis>FR-CA</emphasis> zouden hoger moeten zijn ingesteld dan die voor <emphasis>FR.*</emphasis>, die op zijn beurt hoger zou moeten staan dan de algemene set <emphasis>.*</emphasis>.</para>
+		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Stapelende prioriteiten</title>
+		<para>De regels voor <emphasis>FR-CA</emphasis> zouden hoger moeten zijn ingesteld dan die voor <emphasis>FR.*</emphasis>, die op hun beurt hoger zouden moeten staan dan de algemene set <emphasis>.*</emphasis>.</para>
 
 		<para>Dus, bij het vertalen vanuit Canadees Frans worden de regels voor Canadees Frans—indien aanwezig—eerst worden toegepast, gevolgd door de regels voor Frans en tenslotte de standaard regels.</para>
 	  </example>
@@ -365,7 +387,7 @@
 		</listitem>
 		
 		<listitem>
-		  <para>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon komt is een reguliere expressie.</para>
+		  <para>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon is een reguliere expressie.</para>
 		</listitem>
 
 		<listitem>
@@ -375,7 +397,7 @@
 	</section>
 
 	<section id="segmentation.rules">
-	  <title id="segmentation.rules.title"><guilabel>Inhoud instellingen</guilabel></title>
+	  <title id="segmentation.rules.title"><link linkend="segmentation.rules"> </link><guilabel>Inhoud instellingen</guilabel></title>
 	  <warning>
 		<para>Regels voor uitzonderingen zouden <emphasis>boven</emphasis> afbreekregels moeten staan. </para>
 
@@ -384,7 +406,7 @@
 	  
 	  <variablelist>
 		<varlistentry id="segmentation.rules.exceptionrule">
-		  <term id="segmentation.rules.exceptionrule.title"><option>Uitzonderingen</option></term>
+          <term id="segmentation.rules.exceptionrule.title"><link linkend="segmentation.rules.exceptionrule"> </link><option>Uitzonderingen</option></term>
 
 		  <listitem>
 			<para>Selecteer het vak <guilabel>Afbreken/Uitzondering </guilabel>niet om een uitzonderingsregel te definiëren.</para>
@@ -395,7 +417,7 @@
 		</varlistentry>
 
 		<varlistentry id="segmentation.rules.breakrule">
-		  <term id="segmentation.rules.breakrule.title"><option>Afbrekingen</option></term>
+          <term id="segmentation.rules.breakrule.title"><link linkend="segmentation.rules.breakrule"> </link><option>Afbrekingen</option></term>
 
 		  <listitem>
 			<para>Selecteer het vak <guilabel>Afbreken/Uitzondering</guilabel> om een afbreekregel te definiëren.</para>
@@ -405,7 +427,7 @@
 		</varlistentry>
 
 		<varlistentry id="creating.new.rule">
-		  <term id="creating.new.rule.title"><guibutton>Toevoegen</guibutton></term>
+          <term id="creating.new.rule.title"><link linkend="creating.new.rule"> </link><guibutton>Toevoegen</guibutton></term>
 		  <listitem>
 			<para>Het patroon <emphasis role="bold">Patroon vóór</emphasis> identificeert de delen die vóór het breekpunt of punt voor de uitzondering moeten staan.</para>
 
@@ -421,7 +443,7 @@
   </section>
 
   <section id="dialog.preferences.auto.completion">
-	<title id="dialog.preferences.auto.completion.title"><guilabel>Auto-aanvullen</guilabel></title>
+	<title id="dialog.preferences.auto.completion.title"><link linkend="dialog.preferences.auto.completion"> </link><guilabel>Auto-aanvullen</guilabel></title>
 
 	<para>Het menu auto-aanvullen is beschikbaar in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>. Bekijk het gedeelte <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> voor details.</para>
 	
@@ -441,32 +463,34 @@
   </section>
 
   <section id="dialog.preferences.spellchecker">
-	<title id="dialog.preferences.spellchecker.title"><guilabel>Spellingscontrole</guilabel></title>
+	<title id="dialog.preferences.spellchecker.title"><link linkend="dialog.preferences.spellchecker"> </link><guilabel>Spellingscontrole</guilabel></title>
 
 	<para>OmegaT heeft een ingebouwde spellingscontrole, maar vereist dat u woordenboeken voor spellingscontrole installeert, gebaseerd op uw doeltalen.</para>
 
 	<warning>
-	  <para>OmegaT zal het woordenboek voor de  taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Een woordenboek<emphasis>FR-FR</emphasis> zal geen spellingscontrole uitvoeren voor doelsegmenten in <emphasis>FR</emphasis>. Pas, indien nodig, de naam van het woordenboek aan of wijzig de taalinstellingen voor uw project.</para>
+	  <para>OmegaT zal het woordenboek voor de taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Een woordenboek<emphasis>FR-FR</emphasis> zal geen spellingscontrole uitvoeren voor doelsegmenten in <emphasis>FR</emphasis>. Pas, indien nodig, de naam van het woordenboek aan of wijzig de taalinstellingen voor uw project.</para>
 	</warning>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.spellchecker.automatic.check">
-		<term id="dialog.preferences.spellchecker.automatic.check.title"><option>Spellingscontrole voor de vertaling</option></term>
+        <term id="dialog.preferences.spellchecker.automatic.check.title"><link linkend="dialog.preferences.spellchecker.automatic.check"> </link><option>Spellingscontrole voor de vertaling</option></term>
 		<listitem>
 		  <para>Schakel na het installeren een woordenboek voor spellingscontrole in. OmegaT zal spelfouten onderstrepen met rode golvende lijnen.</para>
-		  <para>Gebruik het <link linkend="panes.editor.context.menu">contextmenu van het venster Bewerken</link> om de fout te corrigeren, of <guimenuitem>Alles negeren</guimenuitem> of <guimenuitem>Aan woordenboek toevoegen</guimenuitem>. Bekijk <link linkend="project.folder.omegat.spellcheck">bestanden voor spellingscontrole</link> voor details.</para>
+		  <para>Gebruik het <link linkend="panes.editor.context.menu">contextmenu van het venster Bewerken</link> om de fout te corrigeren, of <guimenuitem>Alles negeren</guimenuitem> of <guimenuitem>Aan woordenboek toevoegen</guimenuitem>. Bekijk <link linkend="project.folder.omegat.ignored.words">bestanden voor spellingscontrole</link> voor details.</para>
 		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
-		<term id="dialog.preferences.spellchecker.dictionary.folder.title"><option>Locatie van de woordenboeken voor spellingscontrole</option></term>
+        <term id="dialog.preferences.spellchecker.dictionary.folder.title"><link linkend="dialog.preferences.spellchecker.dictionary.folder"> </link><option>Locatie van de woordenboeken voor spellingscontrole</option></term>
 		<listitem>
 		  <para>De map waar OmegaT woordenboeken voor spellingscontrole zal instellen en er naar zoeken. Dat is over het algemeen de map <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>
+		  <para>Als de OmegaT taalmodule voor de doeltaal van uw project een woordenboek van Hunspell verschaft, zal het dat automatisch installeren in deze map als u spellingscontrole inschakelt. Als de module een woordenboek van Morfologik verschaft, werkt spellingscontrole zonder een woordenboek in de map te hoeven installeren.</para>
+		  <para>U kunt een woordenboek in deze map plaatsen om een aangepast woordenboek voor spellingscontrole te gebruiken, of wanneer uw doeltaal van uw project niet wordt gedekt door een taalmodule van OmegaT.</para>		  
 		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.spellchecker.already.installed">
-		<term id="dialog.preferences.spellchecker.already.installed.title"><option>Beschikbare talen</option></term>
+        <term id="dialog.preferences.spellchecker.already.installed.title"><link linkend="dialog.preferences.spellchecker.already.installed"> </link><option>Beschikbare talen</option></term>
 		<listitem>
 		  <para>De lijst met woordenboeken die aanwezig zijn in de hierboven genoemde map.</para>
 
@@ -475,7 +499,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.spellchecker.url">
-		<term id="dialog.preferences.spellchecker.url.title"><option>URL van te downloaden woordenboeken voor spellingscontrole</option></term>
+        <term id="dialog.preferences.spellchecker.url.title"><link linkend="dialog.preferences.spellchecker.url"> </link><option>URL van te downloaden woordenboeken voor spellingscontrole:</option></term>
 		<listitem>
 		  <para>De standaard URL waar OmegaT zal zoeken naar te installeren woordenboeken.</para>
 
@@ -483,7 +507,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.spellchecker.install.new">
-		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>Nieuwe taal installeren…</guibutton></term>
+        <term id="dialog.preferences.spellchecker.install.new.title"><link linkend="dialog.preferences.spellchecker.install.new"> </link><guibutton>Nieuwe taal installeren…</guibutton></term>
 		<listitem>
 		  <para>Geeft de lijst met woordenboeken weer die beschikbaar zijn vanaf de hierboven genoemde URL.</para>
 
@@ -498,11 +522,11 @@
   </section>
   
   <section id="dialog.preferences.languagetool.plugin">
-	<title id="dialog.preferences.languagetool.plugin.title"><guilabel>LanguageTool</guilabel></title>
+    <title id="dialog.preferences.languagetool.plugin.title"><link linkend="dialog.preferences.languagetool.plugin"> </link><guilabel>LanguageTool</guilabel></title>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.languagetool.plugin.servicetype">
-		<term id="dialog.preferences.languagetool.plugin.servicetype.title"><option>Type service</option></term>
+        <term id="dialog.preferences.languagetool.plugin.servicetype.title"><link linkend="dialog.preferences.languagetool.plugin.servicetype"> </link><option>Type service</option></term>
 
 		<listitem>
 		  <para>Selecteer de locatie van de taalcontrole.</para>
@@ -512,7 +536,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.languagetool.plugin.rules">
-		<term id="dialog.preferences.languagetool.plugin.rules.title"><option>Regels</option></term>
+        <term id="dialog.preferences.languagetool.plugin.rules.title"><link linkend="dialog.preferences.languagetool.plugin.rules"> </link><option>Regels</option></term>
 
 		<listitem>
 		  <para>Selecteer de regels, afhankelijk van het feit of zij relevant zijn voor het type tekst dat u vertaalt.</para>
@@ -522,12 +546,12 @@
   </section>
 
   <section id="dialogs.preferences.external.searches">
-	<title id="dialogs.preferences.external.searches.title"><guilabel>Globaal extern zoeken</guilabel></title>
-	<para>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</para>
+	<title id="dialogs.preferences.external.searches.title"><link linkend="dialogs.preferences.external.searches"> </link><guilabel>Globaal extern zoeken</guilabel></title>
+	<para>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten, die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter hebben. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</para>
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
-		<term id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Opdrachten voor lokaal extern zoeken toestaan</option></term>
+        <term id="dialogs.preferences.external.search.enable.project.specific.commands.title"><link linkend="dialogs.preferences.external.search.enable.project.specific.commands"> </link><option>Opdrachten voor lokaal extern zoeken toestaan</option></term>
 
 		<listitem>
 		  <warning>
@@ -539,7 +563,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.external.search.context.menu.priority">
-		<term id="dialogs.preferences.external.search.context.menu.priority.title"><option>Prioriteit contextmenu</option></term>
+        <term id="dialogs.preferences.external.search.context.menu.priority.title"><link linkend="dialogs.preferences.external.search.context.menu.priority"> </link><option>Prioriteit contextmenu:</option></term>
 
 		<listitem>
 		  <para>Deze optie stelt u in staat de volgorde van de opdrachten in het venster Bewerken  <link linkend="panes.editor.context.menu">contextmenu</link> te wijzigen. Waarden rond 100 geeft opdrachten aan de bovenkant weer, en waarden rond 900 geven ze aan de onderkant weer.</para>
@@ -551,7 +575,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.preferences.external.search.items">
-		<term id="dialogs.preferences.external.search.items.title"><option>Instellingen</option></term>
+        <term id="dialogs.preferences.external.search.items.title"><link linkend="dialogs.preferences.external.search.items"> </link><option>Sets</option></term>
 		<listitem>
 		  <para>Elke set geeft een groep zoekacties op het web of lokale opdrachten weer die gelijktijdig zijn gestart.</para>
 
@@ -564,15 +588,15 @@
 		  <para>URL's worden geopend met de standaard webbrowser, één per tab.</para>
 
 		  <example id="dialogs.preferences.external.search.items.url.search.example">
-			<title id="dialogs.preferences.external.search.items.url.search.example.title">Voorbeeld URL zoekactie</title>
+			<title id="dialogs.preferences.external.search.items.url.search.example.title"><link linkend="dialogs.preferences.external.search.items.url.search.example"> </link>Voorbeeld URL zoekactie</title>
 			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
 
 			<para>Dit opent een zoekactie voor de term {target} op DuckDuckGo met een aantal parameters voor het zoeken.</para></example>
 
-			<para>Opdrachten worden geopend op de opdrachtregel. Het <guilabel>Scheidingsteken</guilabel>definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code>|</code>.</para>
+		  <para>Opdrachten worden geopend op de opdrachtregel. Het <guilabel>Scheidingsteken</guilabel> definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code>|</code>.</para>
 
 		  <example id="dialogs.preferences.external.search.items.command.example">
-			<title id="dialogs.preferences.external.search.items.command.example.title">Voorbeeld opdracht</title>
+			<title id="dialogs.preferences.external.search.items.command.example.title"><link linkend="dialogs.preferences.external.search.items.command.example"> </link>Voorbeeld opdracht</title>
 			<programlisting>/usr/bin/open|dict://{target}</programlisting>
 
 			<para>Dit opent de toepassing voor het woordenboek dat het protocol <code>dict</code> implementeert op uw machine om te zoeken naar de term {target}.</para></example>
@@ -582,12 +606,12 @@
   </section>
 
   <section id="dialogs.preferences.editor">
-	<title id="dialogs.preferences.editor.title"><guilabel>venster Bewerken</guilabel></title>
+	<title id="dialogs.preferences.editor.title"><link linkend="dialogs.preferences.editor"> </link><guilabel>venster Bewerken</guilabel></title>
 
 	<para>Bij het invoeren van een leeg segment:</para>
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.editor.insert.the.source.text">
-		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>De brontekst invoegen</option></term>
+        <term id="dialogs.preferences.editor.insert.the.source.text.title"><link linkend="dialogs.preferences.editor.insert.the.source.text"> </link><option>De brontekst invoegen</option></term>
 
 		<listitem>
 		  <para>Gebruik deze optie tijdelijk voor delen van de vertaling die niet veel transformatie vereisen.</para>
@@ -595,7 +619,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.leave.the.segment.empty">
-		<term id="dialogs.preferences.editor.leave.the.segment.empty.title"><option>Segment leeg laten</option></term>
+        <term id="dialogs.preferences.editor.leave.the.segment.empty.title"><link linkend="dialogs.preferences.editor.leave.the.segment.empty"> </link><option>Segment &amp;leeg laten</option></term>
 
 		<listitem>
 		  <para>U kunt uw vertaling direct invoeren.</para>
@@ -603,7 +627,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.insert.the.best.fuzzy.match">
-		<term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><option>Beste overeenkomst invoegen</option></term>
+        <term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"> </link><option>Beste overeenkomst invoegen</option></term>
 
 		<listitem>
 		  <para>OmegaT voegt de vertaling van de tekenreeks in met het hoogste percentage van overeenkomst boven de waarde die in dit dialoogvenster is ingesteld.</para>
@@ -615,7 +639,7 @@
 	
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
-		<term id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Poging om fuzzy overeenkomsten in nummers te vervangen</option></term>
+        <term id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><link linkend="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match"> </link><option>Poging om fuzzy overeenkomsten in &amp;nummers te vervangen</option></term>
 
 		<listitem>
 		  <para>Wanneer een fuzzy overeenkomst wordt ingevoegd, probeert OmegaT de nummers in de fuzzy overeenkomst te vervangen door de nummers in de brontekst.</para>
@@ -624,15 +648,15 @@
 			<para>Alleen gehele getallen (integers) en eenvoudige floats (bijv. 5.4) worden in overweging genomen.</para>
 		  </note>
 
-		  <example id="convert.match.numbers">
-			<title>Converteren van nummer in fuzzy overeenkomst</title>
+		  <example id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.convert.match.numbers">
+			<title id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.convert.match.numbers.title"><link linkend="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.convert.match.numbers"> </link>Converteren van nummer in fuzzy overeenkomst</title>
 			<para><token>2001</token> in de bron:</para>
 			<para>
-			  <programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
+			<programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
 			
 			<para><token>2003</token> in de fuzzy overeenkomst:</para>
 			<para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
-[[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
+            [[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
 
 			<para>Als de overeenkomst wordt ingevoegd, zal OmegaT <token>2003</token> converteren naar <token>2001</token>:</para>
 
@@ -642,17 +666,26 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
-		<term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><option>Vertaling mag gelijk zijn aan brontekst</option></term>
+        <term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source"> </link><option>Vertaling mag gelijk zijn aan brontekst</option></term>
 
 		<listitem>
 		  <para>Een vertaling die identiek is aan de brontekst wordt niet standaard als een vertaling herkend. OmegaT zal het wissen en het segment als niet-vertaald tellen.</para>
 
 		  <para>Gebruik deze optie om te forceren dat OmegaT dergelijke items registreert en ze als vertaald telt.</para>
+
 		</listitem>
 	  </varlistentry>
 
+		<varlistentry id="dialogs.preferences.editor.activate.segment.with.single.click">
+			<term id="dialogs.preferences.editor.activate.segment.with.single.click.title"><link linkend="dialogs.preferences.editor.activate.segment.with.single.click"> </link><option>Segment activeren met een enkele klik</option></term>
+			<listitem>
+				<para>Standaard vereist OmegaT een dubbelklik om naar het segment onder de cursor te gaan. Gebruik deze optie als u de voorkeur hebt om met een klik in segmenten te gaan.</para>
+				<note><para>Als de cursor niet vergrendeld is kan geen enkele klik, noch een dubbelklik worden gebruikt om in het segment te gaan. Bekijk de instelling <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/>.</para></note>
+			</listitem>
+		</varlistentry>
+
 	  <varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
-		<term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><option>Segment naar tekstbestand exporteren</option></term>
+        <term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><link linkend="dialogs.preferences.editor.export.the.segment.to.text.files"> </link><option>Segment naar tekstbestand exporteren</option></term>
 
 		<listitem>
 		  <para>Wanneer OmegaT een segment ingaat,</para>
@@ -680,7 +713,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
-		<term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><option>Stop bij segmenten die niet vertaald zijn en alternatieve vertalingen hebben</option></term>
+        <term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><link linkend="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation"> </link><option>Stop bij segmenten die niet vertaald zijn en alternatieve vertalingen hebben</option></term>
 
 		<listitem>
 		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>stopt ook bij segmenten met alternatieve vertalingen.</para>
@@ -688,7 +721,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.allow.tag.editing">
-		<term id="dialogs.preferences.editor.allow.tag.editing.title"><option>Bewerken van tags toestaan</option></term>
+        <term id="dialogs.preferences.editor.allow.tag.editing.title"><link linkend="dialogs.preferences.editor.allow.tag.editing"> </link><option>Bewerken van tags toestaan</option></term>
 
 		<listitem>
 		  <para>Tags zouden over het algemeen niet moeten worden aangepast, maar dat is mogelijk als deze optie is ingeschakeld.</para>
@@ -696,7 +729,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
-		<term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"><option>Tags bij het verlaten van een segment controleren</option></term>
+        <term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"><link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment"> </link><option>Tags bij het verlaten van een segment controleren</option></term>
 
 		<listitem>
 		  <para>OmegaT voert een controle op problemen uit op het segment als u dat verlaat. De optie is equivalent aan het gebruiken van <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>.</para>
@@ -704,17 +737,17 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
-		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Status voor automatisch vergroten van vertalingen opslaan</option></term>
+        <term id="dialogs.preferences.editor.save.auto-populated.status.title"><link linkend="dialogs.preferences.editor.save.auto-populated.status"> </link><option>Status voor automatisch vergroten van vertalingen opslaan</option></term>
 
 		<listitem>
-		  <para>Vertaalgeheugens, geplaatst in <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> kunnen het geheugen van het project automatisch vullen. Segmenten die op die tijd een geautomatiseerde vertaling krijgen kunnen worden gemarkeerd in het venster <guilabel>Bewerken</guilabel> door <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> te gebruiken.</para>
+		  <para>Vertaalgeheugens, geplaatst in <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> kunnen het geheugen van het project automatisch vullen. Segmenten, die op dat moment een geautomatiseerde vertaling hebben ontvangen, kunnen worden gemarkeerd in het venster <guilabel>Bewerken</guilabel> door <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> te gebruiken.</para>
 
-		  <para>Bekijk de <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> how-to voor details.</para>
+		  <para>Bekijk de how-to <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 
       <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
-		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Bron van vertaling opslaan</option></term>
+        <term id="dialogs.preferences.editor.save.orgin.of.translation.title"><link linkend="dialogs.preferences.editor.save.orgin.of.translation"> </link><option>Bron van vertaling opslaan</option></term>
 
 		<listitem>
           <para>Als machinevertaling is ingeschakeld, registreert OmegaT de naam van het programma dat werd gebruikt om een bepaald segment te vullen.</para>
@@ -722,7 +755,7 @@
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
-		<term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><option>Initieel aantal geladen segmenten</option></term>
+        <term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><link linkend="dialogs.preferences.editor.initially.load.this.many.segments"> </link><option>Initieel aantal geladen segmenten</option></term>
 
 		<listitem>
 		  <para>Het venster Bewerken laadt en geeft 2.000 initiële segmenten weer, en laadt progressief meer als u naar boven of beneden scrollt. Dit getal kan worden gewijzigd overeenkomstig het uitvoeren op uw machine.</para>
@@ -730,7 +763,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
-		<term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><option>Indeling alinea-scheiding</option></term>
+        <term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><link linkend="dialogs.preferences.editor.paragraph.delimitation.format"> </link><option>Indeling alinea-scheiding</option></term>
 
 		<listitem>
 		  <para>Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/> om segmenten te identificeren die tot dezelfde alinea behoren.</para>
@@ -740,33 +773,33 @@
   </section>
 
   <section id="dialogs.preferences.tag.processing">
-	<title id="dialogs.preferences.tag.processing.title"><guilabel>Tag verwerken</guilabel></title>
+	<title id="dialogs.preferences.tag.processing.title"><link linkend="dialogs.preferences.tag.processing"> </link><guilabel>Tag verwerken</guilabel></title>
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.tag.processing.programming.variables">
-		<term id="dialogs.preferences.tag.processing.programming.variables.title"><option>Printf-variabelen controleren</option></term>
+        <term id="dialogs.preferences.tag.processing.programming.variables.title"><link linkend="dialogs.preferences.tag.processing.programming.variables"> </link><option>Printf-variabelen controleren</option></term>
 		<listitem>
 		  <para>Controleren van printf-variabelen in andere bestandsindelingen dan de indeling PO. Het filter PO handelt al variabelen af die zijn gemarkeerd met <literal>%</literal>.</para>
 
 		  <para>U kunt selecteren</para>
 		  
 		  <variablelist>
-			<varlistentry>
-			  <term><option>Geen</option></term>
+			<varlistentry id="dialogs.preferences.tag.processing.programming.variables.none">
+              <term id="dialogs.preferences.tag.processing.programming.variables.none.title"><link linkend="dialogs.preferences.tag.processing.programming.variables.none"> </link><option>&lt;geen&gt;</option></term>
 			  <listitem>
 				<para>Geen van de patronen voor variabelen worden gecontroleerd.</para>
 			  </listitem>
 			</varlistentry>
 			
-			<varlistentry>
-			  <term><option>Eenvoudige variabelen (bijv. %s, %d)</option></term>
+			<varlistentry id="dialogs.preferences.tag.processing.programming.variables.simple">
+              <term id="dialogs.preferences.tag.processing.programming.variables.simple.title"><link linkend="dialogs.preferences.tag.processing.programming.variables.simple"> </link><option>Eenvoudige variabelen (bijv. %s, %d)</option></term>
 			  <listitem>
 				<para>Alleen de eenvoudige patronen voor variabelen worden gecontroleerd.</para>
 			  </listitem>
 			</varlistentry>
 
-			<varlistentry>
-			  <term><option>Alle variabelen (bijv. %s, %-s)</option></term>
+			<varlistentry id="dialogs.preferences.tag.processing.programming.variables.all">
+              <term id="dialogs.preferences.tag.processing.programming.variables.all.title"><link linkend="dialogs.preferences.tag.processing.programming.variables.all"> </link><option>Alle variabelen (bijv. %s, %-s)</option></term>
 			  <listitem>
 				<para>Dit kan resulteren in valse positieven in sommige bestanden.</para>
 			  </listitem>
@@ -776,35 +809,35 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
-		<term id="dialogs.preferences.tag.processing.simple.java.messageformat.title"><option>Controleer eenvoudige plaatsvervangers voor Java MessageFormat</option></term>
+        <term id="dialogs.preferences.tag.processing.simple.java.messageformat.title"><link linkend="dialogs.preferences.tag.processing.simple.java.messageformat"> </link><option>Controleer eenvoudige plaatsvervangers voor Java MessageFormat</option></term>
 		<listitem>
 		  <para>Controleer plaatsvervangers voor Java MessageFormat in andere bestandsindelingen dan de indeling Java Bundles. Het filter Java Bundles handelt al plaatsvervangers af die zijn gemarkeerd met <literal>{#}</literal> waar <literal>#</literal> een getal is.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
-		<term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><option>Toestaan dat vertaalde tags in een andere volgorde staan</option></term>
+        <term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><link linkend="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order"> </link><option>Toestaan dat vertaalde tags in een andere volgorde staan</option></term>
 		<listitem>
 		  <para>Tags in een andere volgorde dan de bron zullen niet verschijnen in de lijst met van problemen met tags. Bekijk het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
-		<term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><option>Sta het maken van vertaalde bestanden bij problemen met tags niet toe</option></term>
+        <term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues"> </link><option>Sta het maken van vertaalde bestanden bij problemen met tags niet toe</option></term>
 		<listitem>
 		  <para>Als u probeert de vertaalde bestanden te maken, zal OmegaT het dialoogvenster met problemen weergeven totdat er geen problemen meer zijn gevonden. Bekijk het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
-		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>Gevlagde tekst en aangepaste tags in statistieken tellen</option></term>
+        <term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics"> </link><option>Gevlagde tekst en aangepaste tags in statistieken tellen</option></term>
 		<listitem>
 		  <para>Anders dan tags van OmegaT, worden gevlagde tekst en aangepaste tags standaard wel geteld in de statistieken. Bekijk het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
-		<term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><option>Aangepaste tags</option></term>
+        <term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"> </link><option>Aangepaste tags</option></term>
 		<listitem>
 		  <para>Gebruik reguliere expressies om aangepaste tags te definiëren. Definiëren van een lijst met tags, groepeer elke tag tussen haakjes en scheid de groepen met <literal>|</literal> (equivalent voor &quot;OR&quot; in reguliere expressies).</para>
 
@@ -819,7 +852,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>Gevlagde tekst</option></term>
+        <term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"> </link><option>Gevlagde tekst</option></term>
 		<listitem>
 		  <para>Tekst in het doelsegment die overeenkomt met deze expressie wordt gemarkeerd in rood en geïdentificeerd als een extra tag voor het controleren van problemen. Bekijk het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> voor details.</para>
 		</listitem>
@@ -828,26 +861,26 @@
   </section>
 
   <section id="dialog.preferences.team">
-	<title id="dialog.preferences.team.title"><guilabel>Team</guilabel></title>
+	<title id="dialog.preferences.team.title"><link linkend="dialog.preferences.team"> </link><guilabel>Team</guilabel></title>
 
 	<para>De naam die u hier invoert, zal worden gekoppeld aan alle door u vertaalde segmenten.</para>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
-		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Inloggegevens opslagplaats</option></term>
+        <term id="dialog.preferences.team.title.repository.credentials.title"><link linkend="dialog.preferences.team.title.repository.credentials"> </link><option>Inloggegevens opslagplaats</option></term>
 		<listitem>
-		  <para>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar logingegevens vraagt, als u toegang wilt.</para>
+		  <para>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar inloggegevens vraagt, als u toegang wilt.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
   </section>
 
   <section id="dialog.preferences.tm.matches">
-	<title id="dialog.preferences.tm.matches.title"><option>Overeenkomsten TM</option></title>
+	<title id="dialog.preferences.tm.matches.title"><link linkend="dialog.preferences.tm.matches"> </link><option>Overeenkomsten TM</option></title>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
-		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>Fuzzy overeenkomsten sorteren op:</option></term>
+        <term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><link linkend="dialog.preferences.tm.matches.sort.fuzzy.matches.by"> </link><option>Fuzzy overeenkomsten sorteren op:</option></term>
 
 		<listitem>
 		  <para>Standaard wordt stemming gebruikt om de dichtstbijzijnde overeenkomsten te bepalen die worden weergegeven in het venster <guilabel>Fuzzy overeenkomsten</guilabel>.</para>
@@ -857,17 +890,17 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
-		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>Minimale drempel om een fuzzy overeenkomst weer te geven</option></term>
+        <term id="dialog.preferences.tm.matches.minimum.threshold.title"><link linkend="dialog.preferences.tm.matches.minimum.threshold"> </link><option>Minimale drempel om een fuzzy overeenkomst weer te geven</option></term>
 		<listitem>
 		  <para>OmegaT geeft standaard de vijf beste fuzzy overeenkomsten boven 30% weer. U kunt die drempel hier wijzigen.</para>
-			<note>
-				<para>Elk van de drie types van overeenkomende percentages die worden weergegeven in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> wordt overwogen om te bepalen of een overeenkomst moet worden weergegeven. Potentiële overeenkomsten worden geweigerd als alle drie de percentages onder de drempel liggen.</para>
-			</note>
+		  <note>
+			<para>Elk van de drie types van overeenkomende percentages die worden weergegeven in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> wordt overwogen om te bepalen of een overeenkomst moet worden weergegeven. Potentiële overeenkomsten worden geweigerd als alle drie de percentages onder de drempel liggen.</para>
+		  </note>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
-		<term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title"><option>Selecteer hoe tags van niet-OmegaT TMX-en zouden moeten worden weergegeven.</option></term>
+        <term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title"><link linkend="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs"> </link><option>Selecteer hoe tags van niet-OmegaT TMX-en zouden moeten worden weergegeven</option></term>
 
 		<listitem>
 		  <para>Bepaal hoe tags af te handelen in TMX-bestanden die zijn gemaakt door andere programma's.</para>
@@ -877,7 +910,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.tm.matches.other.languages">
-		<term id="dialog.preferences.tm.matches.other.languages.title"><option>Inclusief overeenkomsten van andere talen</option></term>
+        <term id="dialog.preferences.tm.matches.other.languages.title"><link linkend="dialog.preferences.tm.matches.other.languages"> </link><option>Inclusief overeenkomsten van andere talen</option></term>
 		<listitem>
 		  <para>Segmenten die overeenkomsten in andere talen hebben kunnen ook worden weergegeven in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. U kunt een straf toepassen op dergelijke overeenkomsten.</para>
 		</listitem>
@@ -885,7 +918,7 @@
 
 	  
 	  <varlistentry id="dialog.preferences.tm.matches.match.display.template">
-		<term id="dialog.preferences.tm.matches.match.display.template.title"><option>Sjabloon voor weergave van overeenkomsten</option></term>
+        <term id="dialog.preferences.tm.matches.match.display.template.title"><link linkend="dialog.preferences.tm.matches.match.display.template"> </link><option>Sjabloon voor weergave van overeenkomsten</option></term>
 
 		<listitem>
 		  <para>Wijzigen hoe fuzzy overeenkomsten weergegeven worden, door vooraf geconfigureerde variabelen te gebruiken.</para>
@@ -903,13 +936,13 @@ ${filePath}&gt;</programlisting></para>
 [NEW]▷ ${diff}
 			
 [OLD]◀ ${diffReversed}
-◀ ${targetText}</programlisting></para>
+     ◀ ${targetText}</programlisting></para>
 
 
 		  <para>De variabelen van het sjabloon zijn ook beschikbaar in een keuzemenu en kunnen worden ingevoegd met een knop</para>
 
 		  <table id="table.match.pane.setup" colsep="0" rowsep="0">
-			<title id="table.match.pane.setup.title">Overeenkomst sjabloon variabelen</title>
+			<title id="table.match.pane.setup.title"><link linkend="table.match.pane.setup"> </link>Overeenkomst sjabloon variabelen</title>
 
 			<tgroup cols="2" colsep="1" rowsep="1">
 			  <colspec align="left"/>
@@ -1046,43 +1079,49 @@ ${filePath}&gt;</programlisting></para>
 		  </table>
 		</listitem>
 	  </varlistentry>
+          <varlistentry id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx">
+		  <term id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title">
+			  <option>Verzamelde overeenkomsten uit meerdere segmenten weergeven</option></term>
+            <listitem><para>Schakel overeenkomsten in voor samengestelde alinea's die zijn gevonden in overeenkomsten in gesegmenteerde geheugenitems van een gesegmenteerde brontekst in een project dat alinea-segmentatie gebruikt.</para>
+            </listitem>
+          </varlistentry>
 	</variablelist>
   </section>
 
   <section id="dialog.preferences.view">
-	<title id="dialog.preferences.view.title"><guilabel>Weergave</guilabel></title>
+	<title id="dialog.preferences.view.title"><link linkend="dialog.preferences.view"> </link><guilabel>Weergave</guilabel></title>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
-		<term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><option>Alle bronsegmenten VET weergeven</option></term>
+        <term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><link linkend="dialog.preferences.view.display.all.source.segments.in.bold"> </link><option>Alle bronsegmenten VET weergeven</option></term>
 		<listitem>
-		  <para>standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</para>
+		  <para>Standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
-		<term id="dialog.preferences.view.display.active.source.segment.in.bold.title"><option>Actieve bronsegment vet weergeven</option></term>
+        <term id="dialog.preferences.view.display.active.source.segment.in.bold.title"><link linkend="dialog.preferences.view.display.active.source.segment.in.bold"> </link><option>Actieve bronsegment vet weergeven</option></term>
 		<listitem>
 		  <para>Als bronsegmenten worden weergegeven in hun normale letterbeeld, kunt u deze optie gebruiken om alleen het huidige bronsegment vet weer te geven.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
-		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Alle herhaalde segmenten markeren</option></term>
+        <term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><link linkend="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments"> </link><option>Alle herhaalde segmenten markeren</option></term>
 		<listitem>
 		  <para>Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> om de tweede en volgende kopie van herhaalde segmenten te markeren. Gebruik deze optie om ook de eerste kopie van het segment te markeren.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
-		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Helptips van tags vereenvoudigen</option></term>
+        <term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><link linkend="dialog.preferences.view.simplify.tooltip.on.protected.parts"> </link><option>Helptips van tags vereenvoudigen</option></term>
 		<listitem>
-		  <para>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer die de originele inhoud van de tag bevat als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</para>
+		  <para>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer, die de originele inhoud van de tag bevat, als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
-		<term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><option>Aangepaste sjablonen voor Info over wijzigingen segmenten gebruiken</option></term>
+        <term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><link linkend="dialog.preferences.view.use.custom.templates.for.modification.info"> </link><option>Aangepaste sjablonen voor Info over wijzigingen segmenten gebruiken</option></term>
 		<listitem>
 		  <para>Informatie over het aanpassen van het segment wordt over het segment weergegeven. de standaard instelling geeft weer wie de vertaling het laatste aanpaste en wanneer:</para>
 
@@ -1100,14 +1139,14 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.view.modification.info.template">
-		<term id="dialog.preferences.view.modification.info.template.title"><option>Standaard sjabloon</option></term>
+        <term id="dialog.preferences.view.modification.info.template.title"><link linkend="dialog.preferences.view.modification.info.template"> </link><option>Standaard sjabloon</option></term>
 		<listitem>
 		  <para>Gebruik de variabelen voor sjablonen om dit sjabloon aan te passen naar uw behoeften.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.modification.info.template.for.segments.without.date">
-		<term id="dialog.preferences.view.modification.info.template.for.segments.without.date.title"><option>Sjabloon voor segmenten zonder datum</option></term>
+        <term id="dialog.preferences.view.modification.info.template.for.segments.without.date.title"><link linkend="dialog.preferences.view.modification.info.template.for.segments.without.date"> </link><option>Sjabloon voor segmenten zonder datum</option></term>
 		<listitem>
 		  <para>Gebruik de variabelen voor sjablonen om dit sjabloon aan te passen naar uw behoeften.</para>
 		</listitem>
@@ -1116,11 +1155,11 @@ ${filePath}&gt;</programlisting></para>
   </section>
 
   <section id="dialogs.preferences.saving.and.output">
-	<title id="dialogs.preferences.saving.and.output.title"><guilabel>Opslaan en uitvoer</guilabel></title>
+	<title id="dialogs.preferences.saving.and.output.title"><link linkend="dialogs.preferences.saving.and.output"> </link><guilabel>Opslaan en uitvoer</guilabel></title>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.saving.and.output.interval">
-		<term id="dialog.preferences.saving.and.output.interval.title"><option>Interval voor opslaan van projectgegevens</option></term>
+        <term id="dialog.preferences.saving.and.output.interval.title"><link linkend="dialog.preferences.saving.and.output.interval"> </link><option>Interval voor opslaan van projectgegevens</option></term>
 		<listitem>
 		  <para>Stelt de gebruiker in staat om de interval tussen het opeenvolgend automatisch opslaan van het project te selecteren. Bekijk het gedeelte <link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/> voor details.</para>
 
@@ -1139,7 +1178,7 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
-		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Globale opdrachten voor nabewerken</option></term>
+        <term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><link linkend="dialogs.preferences.saving.and.output.external.post-processing.command"> </link><option>Globale opdrachten voor nabewerken</option></term>
 
 		<listitem>
 		  <para>OmegaT kan automatisch opdrachten uitvoeren nadat u <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> hebt gebruikt. U kunt dergelijke opdrachten hier definiëren.</para>
@@ -1152,16 +1191,16 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
-		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Lokale opdrachten voor nabewerken toestaan</option></term>
+        <term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"> </link><option>Lokale opdrachten voor nabewerken toestaan</option></term>
 
 		<listitem>
 		  <warning>
-			<para>Opdrachten voor <link linkend="dialogs.project.properties.external.processing.command">lokale nabewerking</link> zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+			<para>Opdrachten voor <link linkend="dialogs.project.properties.external.processing.command">lokaal nabewerken</link> zijn om veiligheidsredenen standaard uitgeschakeld.</para>
 		  </warning>
 
-		  <para>U kunt ook lokale opdrachten voor nabewerking definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
+		  <para>U kunt ook lokale opdrachten voor nabewerken definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
 
-		  <para>Opdrachten voor lokale opdrachten voor nabewerking worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</para>
+		  <para>Opdrachten voor lokale opdrachten voor nabewerken worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</para>
 
 	  	  <note>
 			<para>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</para>
@@ -1173,13 +1212,13 @@ ${filePath}&gt;</programlisting></para>
   </section>
 
   <section id="dialogs.preferences.proxy.login">
-	<title id="dialogs.preferences.proxy.login.title"><guilabel>Inloggen proxy</guilabel></title>
+	<title id="dialogs.preferences.proxy.login.title"><link linkend="dialogs.preferences.proxy.login"> </link><guilabel>Inloggen proxy</guilabel></title>
 
 	<para>Indien u een proxyserver voor authenticatie gebruikt voor toegang tot het internet, voer dan hier uw inloggegevens in.</para>
   </section>
 
   <section id="dialogs.preferences.secure.store">
-	<title id="dialogs.preferences.secure.store.title"><guilabel>Veilig opslaan</guilabel></title>
+	<title id="dialogs.preferences.secure.store.title"><link linkend="dialogs.preferences.secure.store"> </link><guilabel>Veilig opslaan</guilabel></title>
 
 	<para>Definieer of herstel het hoofdwachtwoord dat wordt gebruikt om inloggegevens te beveiligen, als ook toegangssleutels voor services voor machinevertaling.</para>
 
@@ -1187,17 +1226,21 @@ ${filePath}&gt;</programlisting></para>
   </section>
 
   <section id="dialogs.preferences.plugins">
-	<title id="dialogs.preferences.plugins.title"><guilabel>Plug-ins</guilabel></title>
+	<title id="dialogs.preferences.plugins.title"><link linkend="dialogs.preferences.plugins"> </link><guilabel>Plug-ins</guilabel></title>
 
 	<para>Geeft de lijst met alle geïnstalleerde plug-ins weer.</para>
 
 	<para>Plug-ins worden standaard geïnstalleerd in de <link linkend="configuration.folder">map voor de configuratie</link>, maar mogen ook worden geïnstalleerd in de map <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> in de map van de <link linkend="application.folder">toepassing</link>.</para>
 
-	<para>Aanvullende plug-ins zijn te vinden op de <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">site voor ontwikkeling van OmegaT</ulink>.</para>
+	<para>Aanvullende plug-ins zijn te vinden op de <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">wikisite van OmegaT</ulink>.</para>
+	<para>Gebruik de knop <guibutton>Plug-in installeren vanaf schijf</guibutton> om uw plug-in te installeren op op te waarderen. Plug-inbestanden zijn JAR-bestanden met een extensie <filename>.jar</filename>. OmegaT accepteert ook zip-archieven die een JAR plug-inbestand bevatten. Plug-ins van derde partijen worden veelal gedistribueerd als zip-archieven die het plug-inbestand zelf bevatten, als ook bestanden README en LICENSE.</para>
+	<warning>
+	  <para>Het installatieprogramma voor plug-ins accepteert alleen archieven die een JAR-plug-in bevatten. Het herkent geen plug-inbestanden die zijn hernoemd met een extensie <filename>.zip</filename>.</para>
+	</warning>
   </section>
 
   <section id="dialogs.preferences.updates">
-	<title id="dialogs.preferences.updates.title"><guilabel>Updates</guilabel></title>
+	<title id="dialogs.preferences.updates.title"><link linkend="dialogs.preferences.updates"> </link><guilabel>Updates</guilabel></title>
 
 	<para>Gebruik deze optie om te kiezen of u automatisch in kennis moet worden gesteld of er updates voor OmegaT zijn.</para>
 

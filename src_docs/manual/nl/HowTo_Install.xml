@@ -17,9 +17,9 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Ontwikkelversie: OmegaT Nightly</term>
+	  <term>Ontwikkelaars: OmegaT Weekly</term>
 	  <listitem>
-		<para>Deze uitgave wordt automatisch gemaakt, elke keer als er nieuwe code wordt toegevoegd aan OmegaT. Het wordt gebruikt om te testen.</para>
+		<para>Dit is de editie van OmegaT die actief ontwikkeld wordt. Hij wordt elke week automatisch gemaakt, en dient als een bèta-versie voor testdoeleinden.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -31,9 +31,9 @@
 
 	<para>Pakketten van OmegaT zijn zowel beschikbaar in versies die zijn gebundeld met Java, en versies zonder. Pakketten zonder Java vertrouwen erop dat een Java 11 Runtime Environment systeembreed is geïnstalleerd.</para>
 
-	<para>OmegaT 5.8.0 en later kunnen ook worden uitgevoerd met Java 11 Runtime Environment op elk platform.</para>
+	<para>OmegaT 6.1.0 en later kunnen ook worden uitgevoerd met Java 17 Runtime Environment op elk platform.</para>
 
-	<para>In verband met overwegingen met betrekking tot de licentie beveelt het team van OmegaT de Eclipse Temurin Java runtime aan, verschaft door het Eclipse Foundation's Adoptium Project, maar elke Java 8 compatibele runtime environment zou moeten werken. Bekijk <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>.</para>
+	<para>In verband met overwegingen met betrekking tot de licentie beveelt het team van OmegaT de Eclipse Temurin Java runtime aan, verschaft door het Eclipse Foundation's Adoptium Project, maar elke Java 11 compatibele runtime environment zou moeten werken. Bekijk <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>.</para>
 
 	<para>IBM levert JRE's voor Linux PowerPC op <ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/></para>
   </note>
@@ -90,9 +90,9 @@
   <section id="update.and.delete.omegat">
 	<title id="update.and.delete.omegat.title">Bijwerken</title>
 
-	<para>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> voorkeur voor details.</para>
+	<para>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de voorkeur <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> voor details.</para>
 
-	<para>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand<ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> op de pagina's voor ontwikkelaars.</para>
+	<para>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> op de pagina's voor ontwikkelaars.</para>
 
 	<note>
 	  <para>Als u besluit een nieuwe versie te installeren, denk dan aan het volgende:</para>
@@ -131,7 +131,7 @@
 	  <listitem>
 		<para>Hiermee kunt u elk aantal versies naast elkaar inschakelen, wat u zou kunnen doen totdat u zich op uw gemak voelt met de nieuwe versie.</para>
 
-	  <para>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT  zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <literal>--config-dir=&lt;path&gt;</literal> op de opdrachtregel. Bekijk het gedeelte <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>.</para>
+	  <para>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <literal>--config-dir=&lt;path&gt;</literal> op de opdrachtregel. Bekijk het gedeelte <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>.</para>
 
 	  <para>Alle parameters die zijn geplaatst in een <link linkend="chapter.project.folder">projectmap</link> zullen van toepassing zijn voor dat project, ongeacht welke versie van OmegaT het opent.</para>
 	  </listitem>

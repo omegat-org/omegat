@@ -59,7 +59,7 @@
     <para>Alle woordenlijst moeten zijn geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>. Woordenlijsten die zijn geplaatst in geneste mappen worden ook herkend.</para>
 
     <para>Binnen die map voor woordenlijsten ter verwijzing kunt u meerdere submappen voor terminologie maken, gerangschikt op onderwerp, cliënt of elke andere categorie die geschikt is voor uw werkstroom.</para>
-    <para>Gebruik de <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> projecteigenschap om de locatie van de map voor woordenlijsten in te stellen. Deze map mag buiten het project worden ingesteld, wat u in staat stelt het te gebruiken, of een van de specifieke submappen, in andere projecten.</para>
+    <para>Gebruik de projecteigenschap <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> om de locatie van de map voor woordenlijsten in te stellen. Deze map mag buiten het project worden ingesteld, wat u in staat stelt het, of een van de specifieke submappen, te gebruiken in andere projecten.</para>
   </section>
 
   <section id="glossaries.default.glossary">
@@ -77,7 +77,7 @@
 
     <para>Woordenlijsten mogen &quot;tab gescheiden waarden&quot; (TSV)-bestanden of &quot;komma gescheiden waarden&quot; (CSV)-bestanden zijn of mogen de indeling TermBase eXchange (TBX 2) gebruiken.</para>
 
-    <para>Een beschrijfbare woordenlijst die is gemaakt voor het project door OmegaT zal altijd een TSV-bestand zijn dat is opgeslagen in UTF-8. Door gebruikers gemaakte bestanden die alleen Latijns tekens bevatten kunnen worden herkend en behandeld als ISO-8859-1 als zij geen niet-ASCII-tekens bevatten of andere tekens die worden geïnterpreteerd als UTF-8.</para>
+    <para>Een beschrijfbare woordenlijst die is gemaakt voor het project door OmegaT zal altijd een TSV-bestand zijn dat is opgeslagen in UTF-8. Door gebruikers gemaakte bestanden die alleen Latijnse tekens bevatten kunnen worden herkend en behandeld als ISO-8859-1, als zij geen niet-ASCII-tekens bevatten, of andere tekens die worden geïnterpreteerd als UTF-8.</para>
 
     <para>De codering die wordt gebruikt voor het lezen van woordenlijsten voor verwijzing is afhankelijk van hun bestandsextensie:</para>
 

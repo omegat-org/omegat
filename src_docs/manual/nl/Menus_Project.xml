@@ -6,7 +6,7 @@
 
   <example id="example.new.project.shortcut">
 	<title id="example.new.project.shortcut.title">Voorbeeld omschrijving sneltoets</title>
-	<para>Op Windows and Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
+	<para>Op Windows en Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
 	</para>
 
 	<para>Op macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo>
@@ -28,7 +28,7 @@
     <varlistentry id="menus.project.download.team.project">
       <term id="menus.project.download.team.project.title"><guimenuitem>Teamproject downloaden…</guimenuitem></term>
       <listitem>
-        <para>Maakt een a lokale kopie van een OmegaT-project op afstand. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para>
+        <para>Maakt een lokale kopie van een OmegaT-project op afstand. Bekijk de how-to <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
@@ -69,7 +69,7 @@
       <term id="menus.project.save.title"><guimenuitem>Opslaan</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
         <para>Slaat het vertaalgeheugen van het project (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) op en synchroniseert teamprojecten.</para>
-		<para>OmegaT slaat automatisch elke drie minuten vertalingen op en ook als u het project sluit of OmegaT afsluit. Bekijk de <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> voorkeur voor details.</para>
+		<para>OmegaT slaat automatisch elke drie minuten vertalingen op en ook als u het project sluit of OmegaT afsluit. Bekijk de voorkeur <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
@@ -108,7 +108,7 @@ kunt plakken. De brongegevens van de pagina zullen worden gekopieerd naar de map
       <term id="menus.project.create.translated.documents.title"><guimenuitem>Vertaalde documenten maken</guimenuitem> <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>Maakt de doelbestanden op basis van uw vertaling. De gemaakte doelbestanden zijn geplaatst in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
-		<note><para>U kunt het maken van doelbestanden voorkomen als er problemen met tags worden gevonden. Bekijk de <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> voorkeur voor details.</para></note>
+		<note><para>U kunt het maken van doelbestanden voorkomen als er problemen met tags worden gevonden. Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> voor details.</para></note>
 		<para>Elke keer als u de vertaalde bestanden maakt, slaat OmegaT het project op (bekijk het menu-item <link linkend="menus.project.save" endterm="menus.project.save.title"/> hierboven), en maakt vertaalgeheugens voor verwijzing die de vertaalde segmenten van de huidige set bronbestanden bevat.</para>
       </listitem>
     </varlistentry>
@@ -216,7 +216,7 @@ kunt plakken. De brongegevens van de pagina zullen worden gekopieerd naar de map
 			<listitem>
 			  <para>Het huidige bronbestand is geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
-			  <para>Opent het bestand in de geassocieerde toepassing.</para>
+              <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat. Als u de ALT-toets ingedrukt houdt bij het selecteren van het menu-item opent de map die het bestand bevat, door de standaard bestandsbeheerder van het besturingssysteem, zoals Finder of bestandsverkenner, in plaats van het bestand te openen.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -225,7 +225,7 @@ kunt plakken. De brongegevens van de pagina zullen worden gekopieerd naar de map
 			<listitem>
 			  <para>Het huidige doelbestand is geplaatst in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
 
-			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat.</para>
+			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat. Als u de ALT-toets ingedrukt houdt bij het selecteren van het menu-item opent de map die het bestand bevat, door de standaard bestandsbeheerder van het besturingssysteem, zoals Finder of bestandsverkenner, in plaats van het bestand te openen.</para>
 			</listitem>
 		  </varlistentry>
 
@@ -234,7 +234,7 @@ kunt plakken. De brongegevens van de pagina zullen worden gekopieerd naar de map
 			<listitem>
 			  <para>De beschrijfbare woordenlijst is geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
-			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat.</para>
+			  <para>Opent het bestand in de geassocieerde toepassing, als het bestand bestaat. Als u de ALT-toets ingedrukt houdt bij het selecteren van het menu-item opent de map die het bestand bevat, door de standaard bestandsbeheerder van het besturingssysteem, zoals Finder of bestandsverkenner, in plaats van het bestand te openen.</para>
 			</listitem>
 		  </varlistentry>
 		</variablelist>

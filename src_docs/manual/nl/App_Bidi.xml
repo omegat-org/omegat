@@ -14,7 +14,7 @@
 	</listitem>
   </itemizedlist>
   
-  <para>Deze beheerstekens wijzigen de richting, maar zijn onzichtbaar. Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om een visuele indicatie van hun psitie weer te geven.</para>
+  <para>Deze beheerstekens wijzigen de richting, maar zijn onzichtbaar. Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om een visuele indicatie van hun positie weer te geven.</para>
 
   <section id="app.bidi.marks">
 	<title id="app.bidi.marks.title">Markeringen</title>

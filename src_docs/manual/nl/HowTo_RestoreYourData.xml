@@ -10,9 +10,9 @@
   <section id="how.to.restore.your.data.automatic.backup">
 	<title id="how.to.restore.your.data.automatic.backup.title">Automatische back-ups</title>
 
-	<para>OmegaT maakt back-ups van uw projectinstellingen om er voor te zorgen dat het ze bij problemen weer kan terughalen. Bekijk het gedeelte <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> voor details.</para>
+	<para>OmegaT maakt back-ups van uw projectinstellingen om ervoor te zorgen dat het ze, bij problemen, weer kan terughalen. Bekijk het gedeelte <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> voor details.</para>
 	  
-	<para>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> dat is geplaats in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</para>
+	<para>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, dat is geplaatst in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</para>
 
 	<orderedlist>
 	  <listitem>
@@ -88,7 +88,7 @@
 	<para>Deze actie zal uw vertaling herstellen naar zijn status op het punt dat de geselecteerde back-up werd gemaakt. U zou, indien nodig, deze bewerking kunnen herhalen om eerdere statussen terug te vinden. Overweeg het veilig opslaan van alle verschillende bestanden die u hernoemt, om ze eventueel later opnieuw te kunnen gebruiken. Onthoud ook om in de tussentijd niet de configuratie van het project aan te passen of TMX-bestanden toe te voegen, omdat dat de resultaten zou kunnen beïnvloeden.</para>
 
 	<note>
-	  <para>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan nadat u bent begonnen met uw vertaling zou er toe kunnen leiden dat sommige segmenten verdwijnen of dat er onverwacht nieuwe segmenten verschijnen.</para>
+	  <para>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan, nadat u bent begonnen met uw vertaling, zou er toe kunnen leiden dat sommige segmenten verdwijnen, of dat er onverwacht nieuwe segmenten verschijnen.</para>
 	</note>
   </section>
 
@@ -101,11 +101,11 @@
 
 	<orderedlist>
       <listitem>
-		<para>Identificeer de projectmap die OmegaT weigert te openen en open het in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <link linkend="chapter.project.folder">project</link>.</para>
+		<para>Identificeer de projectmap die OmegaT weigert te openen en open die in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <link linkend="chapter.project.folder">project</link>.</para>
       </listitem>
 
 	  <listitem>
-		<para>In de map zou u een bestand <filename>omegat.project</filename>, als ook een bestand <filename>omegat.project.bak</filename>. Zorg ervoor dat de bestanden identiek zijn.</para>
+		<para>In de map zou u een bestand <filename>omegat.project</filename>, als ook een bestand <filename>omegat.project.bak</filename>, moeten aantreffen. Zorg ervoor dat de bestanden identiek zijn.</para>
       </listitem>
 
       <listitem>

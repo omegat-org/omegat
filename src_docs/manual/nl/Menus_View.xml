@@ -18,7 +18,7 @@
     <varlistentry id="menus.view.mark.untranslated.segments">
       <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Niet-vertaalde segmenten accentueren</guimenuitem></term>
       <listitem>
-        <para>Indien geselecteerd, worden niet-vertaalde segmenten in paars  geaccentueerd.</para>
+        <para>Indien geselecteerd, worden niet-vertaalde segmenten in paars geaccentueerd.</para>
       </listitem>
     </varlistentry>
 
@@ -77,7 +77,7 @@
       <listitem>
         <para>Indien geselecteerd, worden segmenten die automatisch zijn gevuld geaccentueerd in verschillende kleuren.</para>
 
-		<para>Bekijk de <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> voorkeur voor details.</para>
+		<para>Bekijk de voorkeur <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 

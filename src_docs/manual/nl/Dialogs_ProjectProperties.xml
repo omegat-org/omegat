@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.project.properties">
-  <title id="dialogs.project.properties.title"><guilabel>Projecteigenschappen</guilabel></title>
+  <title id="dialogs.project.properties.title"><link linkend="dialogs.project.properties"> </link><guilabel>Projecteigenschappen</guilabel></title>
 
   <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om het dialoogvenster te openen.</para>
   
@@ -11,11 +11,11 @@
   
 
   <section id="dialogs.project.properties.languages">
-    <title id="dialogs.project.properties.languages.title"><guilabel>Talen</guilabel></title>
+	<title id="dialogs.project.properties.languages.title"><link linkend="dialogs.project.properties.languages"> </link><guilabel>Talen</guilabel></title>
 
-    <para>Selecteer de bron- en doeltalen  uit de keuzelijst, of voer ze handmatig in.</para>
+    <para>Selecteer de bron- en doeltalen uit de keuzelijst, of voer ze handmatig in.</para>
 
-	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (inclusief de drie-letter taalcodes), in het toepasselijk veld invoeren.</para>
+	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (inclusief de drie-letter taalcodes), in het toepasselijke veld invoeren.</para>
 	
 	<para>Taalcodes worden ook op verschillende plaatsen binnen OmegaT gebruikt om:</para>
 	
@@ -37,22 +37,22 @@
 	  </listitem>
 	</itemizedlist>
 
-	  <para>enzovoort.</para>
+	<para>enzovoort.</para>
 
 	<warning>
 	  <para>Zorg ervoor dat u de juiste taalcodes invoert en dat alle andere locaties die een dergelijke code vereisen, exact overeenkomen met die welke u hier toewijst. Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</para>
 	</warning>
 
-	  
-      <para>OmegaT selecteert automatisch de tokenizers die corresponderen met de bron- en de doeltaal, maar u kunt deze instellingen handmatig aanpassen. Tokenizers stellen OmegaT in staat om betere overeenkomsten te verschaffen.</para>
+	
+    <para>OmegaT selecteert automatisch de tokenizers die corresponderen met de bron- en de doeltaal, maar u kunt deze instellingen handmatig aanpassen. Tokenizers stellen OmegaT in staat om betere overeenkomsten te verschaffen.</para>
   </section>
 
   <section id="dialogs.project.properties.options">
-    <title id="dialogs.project.properties.options.title"><guilabel>Opties</guilabel></title>
+	<title id="dialogs.project.properties.options.title"><link linkend="dialogs.project.properties.options"> </link><guilabel>Opties</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title"><option>Segmentatie op niveau van de zin</option></term>
+		<term id="dialogs.project.properties.options.segmentation.title"><link linkend="dialogs.project.properties.options.segmentation"> </link><option>Segmentatie op niveau van de zin</option></term>
 
 		<listitem>		  
           <para>Segmentatie op niveau van de zin splitst alinea's of andere tekstblokken in het bronbestand in segmenten, gebaseerd op segmentatieregels.</para>
@@ -73,7 +73,8 @@
 		  
 		  <para>Wijzigen van de instellingen voor de segmentatieregels gedurende een vertaling past niet de segmentatie aan van de in het vertaalgeheugen van het project geregistreerde segmenten.</para>
 		  
-		  <para>Schakelen van <emphasis role="bold">zin-</emphasis> naar <emphasis role="bold">alinea-</emphasis>segmentatie tijdens de vertaling zou OmegaT kunnen forceren om oude vertaalgeheugens, die geen zin-segmentatie gebruikten, te upgraden, maar niet vice versa. OmegaT zal echter proberen ook fuzzy overeenkomsten te maken voor alinea's door bestaande vertalingen van zinnen te combineren.</para>
+		  <para>Schakelen van <emphasis role="bold">zin-</emphasis> naar <emphasis role="bold">alinea-</emphasis>segmentatie tijdens de vertaling zou OmegaT kunnen forceren om oude vertaalgeheugens, die geen zin-segmentatie gebruikten, te upgraden, maar niet vice versa.</para>
+		  <para>OmegaT kan echter ook optioneel proberen fuzzy overeenkomsten te maken voor alinea's door bestaande vertalingen van zinnen te combineren. Bekijk <link linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx" endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/> om die mogelijkheid in te schakelen.</para>
 
 		  <para>Als u de segmentatie wijzigt tijdens het vertalen, moet u het project herladen vóórdat de nieuwe segmentatie effect heeft. Dit zal sommige eerder vertaalde segmenten splitsen of samenvoegen, en die daarom niet langer vertaald zullen zijn. Hun originele vertaling zal echter nog steeds in het projectgeheugen staan.</para>
 
@@ -82,12 +83,12 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.local.segmentation">
-        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Lokale segmentatieregels…</guibutton></term>
+		<term id="dialogs.project.properties.local.segmentation.title"><link linkend="dialogs.project.properties.local.segmentation"> </link><guibutton>Lokale segmentatieregels…</guibutton></term>
 
 		<listitem>
 		  <para>Standaard zijn de segmentatieregels globaal en van toepassing op alle projecten.</para>
 		  
-			<para>De segmentatieregels die worden weergegeven als u de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> opent (met <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>) zijn de globale regels.</para>
+		  <para>De segmentatieregels die worden weergegeven als u de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> opent (met <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>) zijn de globale regels.</para>
 
 		  <para>Gebruik deze knop om lokale regels te maken, specifiek voor uw project. Selecteer het vak <option>Segmentatieregels projectspecifiek maken</option>, en pas de segmentatieregels aan zoals u wilt.</para>
 		  
@@ -105,7 +106,7 @@
 	  
 	  
       <varlistentry id="dialogs.project.properties.auto.propagation">
-        <term id="dialogs.project.properties.auto.propagation.title"><option>Automatisch vergroten van vertalingen</option></term>
+		<term id="dialogs.project.properties.auto.propagation.title"><link linkend="dialogs.project.properties.auto.propagation"> </link><option>Automatisch vergroten van vertalingen</option></term>
 
 		<listitem>
           <para>Als er herhaalde segmenten in de brondocumenten staan zal het selecteren van deze optie het eerste vertaalde segment als de standaard vertaling en automatisch dezelfde doeltekst gebruiken in de resterende herhaalde segmenten.</para>
@@ -117,7 +118,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.hide.tags">
-        <term id="dialogs.project.properties.hide.tags.title"><option>Tags verbergen</option></term>
+		<term id="dialogs.project.properties.hide.tags.title"><link linkend="dialogs.project.properties.hide.tags"> </link><option>Tags verbergen</option></term>
 
 		<listitem>
           <para>Tags zijn over het algemeen nuttig om specifieke lay-outs of karakteristieken van de brontekst te reproduceren in de vertaalde tekst.</para>
@@ -129,24 +130,24 @@
 		  <note>
 			<para>Verborgen tags worden eenvoudigweg opgestapeld aan het einde van het segment. Hoewel dit normaal gesproken voorkomt dat het vertaalde bestand wordt geopend, zouden de volgende punten moeten worden onthouden bij het gebruiken van deze functie:</para>
 			<itemizedlist>
-				<listitem>
-					<para>U zult handmatig vet, cursief, of andere tekstdecoraties moeten toepassen in het vertaalde bestand.</para>
-				</listitem>
-				<listitem>
-					<para>Wanneer u eenvoudigweg het aantal tags in een document van <application>Microsoft Word</application> (2007 en later) wilt beperken, kunt u het script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/>.</para>
-					<para>Bekijk het gedeelte <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
-				</listitem>
+			  <listitem>
+				<para>U zult handmatig vet, cursief, of andere tekstdecoraties moeten toepassen in het vertaalde bestand.</para>
+			  </listitem>
+			  <listitem>
+				<para>Wanneer u eenvoudigweg het aantal tags in een document van <application>Microsoft Word</application> (2007 en later) wilt beperken, kunt u het script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> gebruiken.</para>
+				<para>Bekijk het gedeelte <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
+			  </listitem>
 			</itemizedlist>
-			</note>
-      </listitem>
+		  </note>
+		</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
-        <term id="dialogs.project.properties.external.processing.command.title"><option>Lokale opdrachten voor nabewerken</option></term>
+		<term id="dialogs.project.properties.external.processing.command.title"><link linkend="dialogs.project.properties.external.processing.command"> </link><option>Lokale opdrachten voor nabewerken</option></term>
 
 		<listitem>
 		  <warning>
-			<para>Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+			<para>Opdrachten voor lokaal nabewerken zijn om veiligheidsredenen standaard uitgeschakeld.</para>
 
 			<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> voor details.</para>
 		  </warning>
@@ -157,13 +158,13 @@
 
 		  <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de doelbestanden te maken en activeer de opdracht.</para>
 
-		  <para>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel lokale opdrachten voor nabewerking alleen in als u de bron van dat bestand vertrouwt.</para>
-		
+		  <para>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel lokale opdrachten voor nabewerken alleen in als u de bron van dat bestand vertrouwt.</para>
+		  
 		  <para>De lijst van variabelen voor sjablonen geeft u toegang tot de verschillende projectgegevens en systeemvariabelen.</para>
 
 		  <para>Bekijk de appendix <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> voor details.</para>
 
-		  <para>U kunt ook globale opdrachten voor nabewerking definiëren die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  <para>U kunt ook globale opdrachten voor nabewerken definiëren, die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 
 		  <note>
 			<para>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</para>
@@ -172,7 +173,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>Lokale bestandsfilters…</guibutton></term>
+		<term id="dialogs.project.properties.filters.title"><link linkend="dialogs.project.properties.filters"> </link><guibutton>Lokale bestandsfilters…</guibutton></term>
 
         <listitem>
           <para>Standaard zijn de instellingen voor bestandsfilters globaal en worden gedeeld door alle projecten. Zij zijn te vinden in de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
@@ -190,7 +191,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.repository.mapping">
-        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Mappen in opslagplaats…</guibutton></term>
+		<term id="dialogs.project.properties.repository.mapping.title"><link linkend="dialogs.project.properties.repository.mapping"> </link><guibutton>Mappen in opslagplaats…</guibutton></term>
 
         <listitem>
           <para>Dit venster stelt u in staat, bij het werken aan een teamproject, de routes te definiëren tussen de mappen op afstand en lokale mappen.</para>
@@ -200,7 +201,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.searches">
-        <term id="dialogs.project.properties.external.searches.title"><guibutton>Lokaal extern zoeken</guibutton></term>
+		<term id="dialogs.project.properties.external.searches.title"><link linkend="dialogs.project.properties.external.searches"> </link><guibutton>Lokaal extern zoeken</guibutton></term>
 
         <listitem>
           <para>Standaard zijn externe zoekacties globaal en worden gedeeld door alle projecten. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
@@ -222,7 +223,7 @@
   </section>
 
   <section id="dialogs.project.properties.file.locations">
-    <title id="dialogs.project.properties.file.locations.title"><guilabel>Bestandslocaties</guilabel></title>
+	<title id="dialogs.project.properties.file.locations.title"><link linkend="dialogs.project.properties.file.locations"> </link><guilabel>Bestandslocaties</guilabel></title>
 
 	<para>Een vertaalproject van OmegaT bestaat uit een aantal bronnen in afzonderlijke mappen.</para>
 
@@ -238,7 +239,7 @@
 
 	<variablelist>
 	  <varlistentry id="dialogs.project.properties.file.locations.browse">
-		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Bladeren</guibutton></term>
+		<term id="dialogs.project.properties.file.locations.browse.title"><link linkend="dialogs.project.properties.file.locations.browse"> </link><guibutton>Bladeren</guibutton></term>
 
 		<listitem>
 		  <para>De knop <guibutton>Bladeren</guibutton> is beschikbaar voor alle door de gebruiker te definiëren bronnen voor het project.</para>
@@ -252,7 +253,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
-		<term id="dialogs.project.properties.file.locations.source.files.title"><option>map Bronbestanden</option></term>
+		<term id="dialogs.project.properties.file.locations.source.files.title"><link linkend="dialogs.project.properties.file.locations.source.files"> </link><option>map Bronbestanden:</option></term>
 
 		<listitem>
 		  <para>Deze map bevat de bestanden die u wilt vertalen. OmegaT probeert in één keer alle bestanden te lezen, en geeft de vertaalbare inhoud die het vind weer in het venster Bewerken.</para>
@@ -263,11 +264,11 @@
 
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
-			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Uitgesloten…</guibutton></term>
+			  <term id="dialogs.project.properties.file.locations.exclusions.title"><link linkend="dialogs.project.properties.file.locations.exclusions"> </link><guibutton>Uitgesloten…</guibutton></term>
 
 			  <listitem>
 				<para>Klik op de knop <guibutton>Uitgesloten…</guibutton> om de bestanden of mappen te specificeren die door OmegaT zouden moeten worden genegeerd. Een genegeerd bestand of map wordt:</para>
-		  
+				
 				<itemizedlist>
 				  <listitem>
 					<para>niet weergegeven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>,</para>
@@ -290,7 +291,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
-		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>map Vertaalgeheugen</option></term>
+		<term id="dialogs.project.properties.file.locations.translation.memories.title"><link linkend="dialogs.project.properties.file.locations.translation.memories"> </link><option>map Vertaalgeheugen</option></term>
 		<listitem>
 		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar vertaalgeheugens. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
 
@@ -301,7 +302,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
-		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>map Woordenlijst</option></term>
+		<term id="dialogs.project.properties.file.locations.glossaries.title"><link linkend="dialogs.project.properties.file.locations.glossaries"> </link><option>map Woordenlijsten</option></term>
 
 		<listitem>
 		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar woordenlijsten. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
@@ -315,7 +316,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
-		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Beschrijfbaar woordenlijstbestand</option></term>
+		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><link linkend="dialogs.project.properties.file.locations.writable.glossary"> </link><option>Te beschrijven bestand voor de woordenlijst:</option></term>
 
 		<listitem>
 		  <para>Het beschrijfbaar woordenlijstbestand is het bestand dat OmegaT gebruikt wanneer u vertaalde termen aan de woordenlijst toevoegt aan uw project met de opdracht <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
@@ -329,7 +330,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
-		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>map Woordenboek</option></term>
+		<term id="dialogs.project.properties.file.locations.dictionaries.title"><link linkend="dialogs.project.properties.file.locations.dictionaries"> </link><option>map Woordenboek</option></term>
 
 		<listitem>
 		  <para>Deze map bevat de bestanden die u wilt gebruiken als verwijzing naar een woordenboek. OmegaT probeert in één keer alle bestanden te lezen en vergelijkt hun inhoud met het segment dat u aan het vertalen bent.</para>
@@ -341,7 +342,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
-		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>map Vertaalde documenten</option></term>
+		<term id="dialogs.project.properties.file.locations.translated.files.title"><link linkend="dialogs.project.properties.file.locations.translated.files"> </link><option>map Vertaalde documenten</option></term>
 
 		<listitem>
 		  <para>Dit is de map waarin OmegaT de vertaalde bestanden maakt.</para>
@@ -349,7 +350,7 @@
 		  <para>De vertaalde bestanden zijn de vertaalde versies van de bestanden die zijn geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
 		  <para>Segmenten die zijn vertaald worden vervangen door hun vertaling en niet vertaalde segmenten worden behouden in de brontaal.</para>
-		
+		  
 		  <para>De mappenstructuur komt overeen met die van de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>. Bestanden die niet worden ondersteund door de bestandsfilters van Omega worden zonder aanpassingen gekopieerd.</para>
 
 		  <para>Gebruik <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de vertaalde bestanden te maken.</para>
@@ -358,7 +359,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
-		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>Map voor exporteren van vertaalgeheugens</option></term>
+		<term id="dialogs.project.properties.file.locations.exported.tms.title"><link linkend="dialogs.project.properties.file.locations.exported.tms"> </link><option>Map voor exporteren van vertaalgeheugens</option></term>
 
 		<listitem>
 		  <para>Dit is de map waar OmegaT de huidige status van de vertaling kopieert, in de vorm van TMX-bestanden als u de vertaalde bestanden maakt.</para>
@@ -366,40 +367,40 @@
 		  <note>
 			<para>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen.</para>
 
-			<para>Bekijk de <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> how-to voor details.</para>
+			<para>Bekijk de how-to <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> voor details.</para>
 		  </note>
-		
+		  
 		  <para>De TMX-bestanden bevatten alleen de segmenten uit de bestanden die momenteel zijn opgeslagen in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
 		  <para>Gebruik <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de vertaalde bestanden en de geëxporteerde TMX-bestanden te maken.</para>
 
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
-			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Te exporteren vertaalgeheugens</option></term>
+			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><link linkend="dialogs.project.properties.file.locations.tms.to.export"> </link><option>Te exporteren vertaalgeheugens:</option></term>
 			  <listitem>
 				<para>Dit keuzevak laat u de indelingen kiezen waarin u wilt dat OmegaT de hierboven vermelde TMX-bestanden maakt.</para>
 
-				<para>Bekijk de <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> how-to voor details.</para>
-		
+				<para>Bekijk de how-to <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> voor details.</para>
+				
 				<variablelist>
-				  <varlistentry>
-					<term><option>OmegaT</option></term>
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.omegat">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.omegat.title"><link linkend="dialogs.project.properties.file.locations.tms.to.export.omegat"> </link><option>Omegat.</option></term>
 					<listitem>
-					  <para>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT in een vorm die alleen op de juiste wijze kan worden door een project van OmegaT.</para>
+					  <para>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT, in een vorm die alleen op de juiste wijze kan worden gebruikt door een project van OmegaT.</para>
 					</listitem>
 				  </varlistentry>
-		  
-				  <varlistentry>
-					<term><option>TMX Niveau 1</option></term>
+				  
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level1">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level1.title"><link linkend="dialogs.project.properties.file.locations.tms.to.export.level1"> </link><option>TMX Niveau 1</option></term>
 					<listitem>
 					  <para>Een TMX “niveau 1” verwijdert alle informatie over tags en bevat alleen tekstuele informatie.</para>
 					</listitem>
 				  </varlistentry>
-				
-				  <varlistentry>
-					<term><option>TMX Niveau 2</option></term>
+				  
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level2">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level2.title"><link linkend="dialogs.project.properties.file.locations.tms.to.export.level2"> </link><option>TMX Niveau 2</option></term>
 					<listitem>
-					  <para>Een TMX “level 2” bevat tekstuele gegevens met tags die zijn ingekapseld in een vorm die compatibel is met andere programma's voor CAT.</para>
+					  <para>Een TMX “niveau 2” bevat tekstuele gegevens met tags die zijn ingekapseld, in een vorm die compatibel is met andere programma's voor CAT.</para>
 					</listitem>
 				  </varlistentry>
 				</variablelist>

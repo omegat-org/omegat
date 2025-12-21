@@ -423,18 +423,14 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 
 						<para>De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx. De bestandstypen die kunnen worden uitgelijnd zijn afhankelijk van het feit of de uitlijning wordt ondersteund door het bestandsfilter. Enkele ondersteunde filters omvatten: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles en Windows Resources</para>
 
-						<para>The <emphasis>--alignDir</emphasis> parameter is
-						used to specify the location of the data in the target
-						language, which must be a folder containing the
-						translated files.</para>
+						<para>De parameter <emphasis>--alignDir</emphasis> wordt gebruikt om de locatie te specificeren van de gegevens in de doeltaal, wat een map moet zijn die de vertaalde bestanden bevat.</para>
 
-						<para>Die map moet een vertaling bevatten in de doeltaal van het project. For instance, if the project is EN-to-FR, the folder must contain a bundle ending with _fr. De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx.</para>
+						<para>Die map moet een vertaling bevatten in de doeltaal van het project. Als het project bijvoorbeeld EN-naar-FR is, moet de map een bundel bevatten die eindigt op _fr. De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx.</para>
 					  </listitem>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.stats">
-					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats
-					  <emphasis>&lt;path&gt;</emphasis></option></term>
+					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats <emphasis>&lt;pad&gt;</emphasis></option></term>
 					  <listitem>
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.console.stats.output.file">
@@ -474,7 +470,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 			  </varlistentry>
 				
 			  <varlistentry id="launch.with.command.line.script.">
-				<term id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;pad&gt;</emphasis></option></term>
 				<listitem>
 				  <para>Een bestand met een script dat moet worden uitgevoerd als een gebeurtenis in het project wordt geactiveerd.</para>
 				</listitem>
@@ -496,7 +492,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 				  </itemizedlist>
 
 				  <note>
-					<para>Rapporten over problemen met problemen met tags  worden uitgevoerd naar het venster van de terminal.</para>
+					<para>Rapporten over problemen met problemen met tags worden uitgevoerd naar het venster van de terminal.</para>
 				  </note>
 				</listitem>
 			  </varlistentry>

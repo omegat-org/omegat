@@ -11,7 +11,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Standaard: OmegaT 6.0.0</term>
+	  <term>Standaard: OmegaT 6.0.2</term>
 	  <listitem>
 		<para>Deze uitgave wordt aanbevolen voor elke dag-gebruik.</para>
 	  </listitem>
@@ -27,7 +27,7 @@
   <para>De bestanden zijn direct te downloaden vanaf <ulink url="https://omegat.org/download">https://omegat.org</ulink>.</para>
 
   <note>
-	<para>OmegaT 6.0.0 vereist een Java 11 Runtime Environment (JRE) om te kunnen worden uitgevoerd.</para>
+	<para>OmegaT 6.0.2 vereist een Java 11 Runtime Environment (JRE) om te kunnen worden uitgevoerd.</para>
 
 	<para>Pakketten van OmegaT zijn zowel beschikbaar in versies die zijn gebundeld met Java, en versies zonder. Pakketten zonder Java vertrouwen erop dat een Java 11 Runtime Environment systeembreed is geïnstalleerd.</para>
 
@@ -59,7 +59,7 @@
 
       <para>Uitvoeren van het script zal u vragen naar uw wachtwoord voor <filename>sudo</filename>.</para>
 
-      <para>Het script controleert op een bestaande installatie van dezelfde versie van OmegaT in <filename>/opt/omegat/</filename>. Als er geen is installeert het het programma in <filename>/opt/omegat/OmegaT_6.0.0</filename> en stelt het in als de standaard versie (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>Het script controleert op een bestaande installatie van dezelfde versie van OmegaT in <filename>/opt/omegat/</filename>. Als er geen is installeert het het programma in <filename>/opt/omegat/OmegaT_6.0.2</filename> en stelt het in als de standaard versie (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Als het uitpakken of installeren is voltooid kunt u het gedownloade bestand verwijderen omdat het niet langer nodig is.</para>
@@ -90,9 +90,9 @@
   <section id="update.and.delete.omegat">
 	<title id="update.and.delete.omegat.title">Bijwerken</title>
 
-	<para>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> voorkeur voor details.</para>
+	<para>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de voorkeur <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> voor details.</para>
 
-	<para>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand<ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> op de pagina's voor ontwikkelaars.</para>
+	<para>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> op de pagina's voor ontwikkelaars.</para>
 
 	<note>
 	  <para>Als u besluit een nieuwe versie te installeren, denk dan aan het volgende:</para>
@@ -131,7 +131,7 @@
 	  <listitem>
 		<para>Hiermee kunt u elk aantal versies naast elkaar inschakelen, wat u zou kunnen doen totdat u zich op uw gemak voelt met de nieuwe versie.</para>
 
-	  <para>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT  zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <literal>--config-dir=&lt;path&gt;</literal> op de opdrachtregel. Bekijk het gedeelte <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>.</para>
+	  <para>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <literal>--config-dir=&lt;path&gt;</literal> op de opdrachtregel. Bekijk het gedeelte <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>.</para>
 
 	  <para>Alle parameters die zijn geplaatst in een <link linkend="chapter.project.folder">projectmap</link> zullen van toepassing zijn voor dat project, ongeacht welke versie van OmegaT het opent.</para>
 	  </listitem>

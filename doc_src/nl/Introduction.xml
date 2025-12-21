@@ -27,13 +27,13 @@
 	<section id="introduction.omegat.principles.translation.memories">
       <title id="introduction.omegat.principles.translation.memories.title">Vertaalgeheugens</title>
 
-      <para>Vertalers hoven geen vertaalgeheugen <emphasis>te maken</emphasis> of er een <emphasis>te associëren</emphasis> aan een nieuw project. OmegaT regelt dat <emphasis>automatisch</emphasis>.</para>
+      <para>Vertalers hoeven geen vertaalgeheugen <emphasis>te maken</emphasis> of er een <emphasis>te associëren</emphasis> aan een nieuw project. OmegaT regelt dat <emphasis>automatisch</emphasis>.</para>
 
-      <para>Vertalers kunnen heel eenvoudig het vertaalgeheugen van een project opnieuw gebruiken door eenvoudigweg nieuwe te vertalen bestanden toe te voegen aan een bestaand project, of door een bestaan vertaalgeheugen te kopiëren naar een nieuw project.</para>
+      <para>Vertalers kunnen heel eenvoudig het vertaalgeheugen van een project opnieuw gebruiken door eenvoudigweg nieuwe te vertalen bestanden toe te voegen aan een bestaand project, of door een bestaand vertaalgeheugen te kopiëren naar een nieuw project.</para>
 
       <para>Er is geen beperking voor het aantal vertaalgeheugens dat als een verwijzing kan worden gebruikt in een vertaalproject, en OmegaT maakt het heel eenvoudig om verschillende niveaus van prioriteit toe te wijzen aan deze aanvullende geheugens.</para>
 
-      <para>Bekijk de <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> how-to voor details.</para>
+      <para>Bekijk de how-to <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> voor details.</para>
 	</section>
 
 	<section id="introduction.omegat.principles.collaboration">
@@ -41,9 +41,9 @@
 
       <para>Eenvoudige instellingen stellen vertalers in staat om gemakkelijk bronnen te delen en samen te werken aan een project.</para>
 
-      <para>De team-functionaliteit biedt robuustheid op industrieel niveau en de flexibiliteit om bronnen van het project te synchroniseren tussen teamleden, waarbij het gemakkelijk wordt gemaakt conflicten de verschillende vertalingen op te lossen.</para>
+      <para>De team-functionaliteit biedt robuustheid op industrieel niveau en de flexibiliteit om bronnen van het project te synchroniseren tussen teamleden, waarbij het gemakkelijk wordt gemaakt conflicten tussen de verschillende vertalingen op te lossen.</para>
 
-      <para>Bekijk de <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> how-to voor details.</para>
+      <para>Bekijk de how-to <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> voor details.</para>
 	</section>
 
 	<section id="introduction.omegat.principles.made.for.translators">
@@ -52,13 +52,13 @@
 	  <para>OmegaT is niet alleen ontworpen om het vertaalproces te faciliteren, maar ook om er voor te zorgen dat de vertaler niet bang hoeft te zijn voor verlies van gegevens.</para>
 
 	  <note>
-		<para>Als OmegaT nog niet hebt gebruikt, maar denk aan de keren dat u aan het vertalen was in uw tekstbewerker en een storing in de computer de boekvertaling waaraan u de laatste zes maanden had gewerkt wiste, of het rapport dat over een uur moest worden ingeleverd.</para>
+		<para>Als u OmegaT nog niet hebt gebruikt, maar denkt aan de keren dat u aan het vertalen was in uw tekstbewerker en een storing in de computer de boekvertaling wiste, waaraan u de laatste zes maanden had gewerkt, of het rapport dat over een uur moest worden ingeleverd.</para>
 
 		<para>U verweegt OmegaT, maar…</para>
 
 		<para>Hoe kan OmegaT helpen bij dergelijke storingen?</para>
 
-		<para>Geen zorgen. Het robuuste ontwerp van OmegaT maakt het <emphasis>bijzonder</emphasis> onwaarschijnlijk dat u meer dan een paar minuten werk hebt verloren.</para>
+		<para>Geen zorgen. Het robuuste ontwerp van OmegaT maakt het <emphasis>bijzonder</emphasis> onwaarschijnlijk dat u meer dan een paar minuten werk bent verloren.</para>
 
 		<para>Geen paniek, zelfs niet als dingen er heel slecht uitzien. Volg gewoonweg de eenvoudige stappen, beschreven in de how-to <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/>.</para>
 	  </note>
@@ -101,7 +101,7 @@
 	  <varlistentry>
 		<term>Panelen, vensters, dialoogvensters</term>
 		<listitem>
-		  <para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+		  <para>Het <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -166,31 +166,35 @@
 
 	<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/> en selecteer een lege map of maak een nieuwe met de naam voor uw project.</para>
 
+	<warning>
+	  <para>OmegaT moet in staat zijn de map aan te passen waarin u het project hebt gemaakt. Als u uw project wilt installeren op een gedeelde schijf, installeer het niet op het hoogste niveau van de schijf, maar maak in plaats daarvan een map waarin u het project zult installeren.</para>
+	</warning>
+
     <para>Een project van OmegaT is eenvoudigweg een set mappen die al uw standaard bronnen bevat.</para>
 
-    <para>Het  dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> opent nadat u uw project een naam hebt gegeven.</para>
+    <para>Het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> opent nadat u uw project een naam hebt gegeven.</para>
 
-	<para>Selecteer, in dat dialoogvenster, of voer de talen voor uw bron en vertaalde bestanden in, stel de verschillende opties in, en klik op <guibutton>OK</guibutton> om door te gaan.</para>
+	<para>In dat dialoogvenster, selecteer of voer de talen voor uw bron en vertaalde bestanden in, stel de verschillende opties in, en klik op <guibutton>OK</guibutton> om door te gaan.</para>
 
-	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (inclusief de drie-letter taalcodes), in het toepasselijk veld invoeren.</para>
+	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code in het toepasselijke veld invoeren.</para>
 
 	<warning>
-	  <para>Zorg er voor dat u de juiste taalcodes invoert en dat alle andere locaties die een taalcode vereisen, overeenkomen met de code die u hier toewijst. Bekijk het gedeelte <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> voor details.</para>
+	  <para>OmegaT controleert niet de geldigheid van de taalcodes die u invoert. Zorg ervoor dat de twee taalcodes <emphasis>verschillend</emphasis> zijn, dat ze toepasselijk zijn voor uw gebruik van OmegaT en dat alle andere locaties, die een taalcode vereisen, overeenkomen met de code die u hier toewijst. Bekijk het gedeelte <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> voor details.</para>
 	</warning>
 	
     <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om terug te keren naar dit dialoogvenster nadat u het project hebt gemaakt.</para>
 
 	<note>
-	  <para>U kunt de structuur van een project op elk moment aanpassen nadat u bent begonnen met vertalen. In het dialoogvenster vertel OmegaT gewoon wat de nieuwe te gebruiken mappen voor de bronnen zijn. Het zal u dan vragen het project op nieuw te laden en te beginnen met het gebruiken van de nieuwe locaties.</para>
+	  <para>U kunt de structuur van een project op elk moment aanpassen nadat u bent begonnen met vertalen. Vertel, in het dialoogvenster, OmegaT gewoon wat de nieuwe te gebruiken mappen voor de bronnen zijn. Het zal u dan vragen het project opnieuw te laden en te beginnen met het gebruiken van de nieuwe locaties.</para>
 	</note>
 	
-    <para>Vervolgens open het dialoogvenster <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
+    <para>Vervolgens opent het dialoogvenster <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
 
 	<para>Klik op <link linkend="windows.source.files.list.copy.files" endterm="windows.source.files.list.copy.files.title"/> of <link linkend="windows.source.files.list.download.page" endterm="windows.source.files.list.download.page.title"/> en voeg de bronbestanden toe.</para>
 
 	<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> als u niet meer weet waar uw project staat.</para>
 
-	<para>Als u de inhoud van een bestand niet ziet in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, zou dat bestand leeg kunnen zijn, of in een indeling die niet wordt ondersteund door OmegaT. Gebruik <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/> om de lijst met ondersteunde bestandsindelingen te openen. Als de indeling van uw bestand niet is vermeld, gebruik dan plug-ins van derde partijen of converteer het bestand naar een indeling die wel wordt ondersteund. Bekijk de <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> how-to voor details.</para>
+	<para>Als u de inhoud van een bestand niet ziet in het <link linkend="panes.editor" endterm="panes.editor.title"/>, zou dat bestand leeg kunnen zijn, of in een indeling die niet wordt ondersteund door OmegaT. Gebruik <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/> om de lijst met ondersteunde bestandsindelingen te openen. Als de indeling van uw bestand niet is vermeld, gebruik dan plug-ins van derde partijen of converteer het bestand naar een indeling die wel wordt ondersteund. Bekijk de how-to <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> voor details.</para>
   </section>
 
   <section id="introduction.install.spellchecker.dictionary">
@@ -221,7 +225,7 @@
 
 		<itemizedlist>
 		  <listitem>
-			<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> gebruiken om de doeltaal van het project te wijzigen naar <emphasis role="bold">fr-fr</emphasis>, or</para>
+			<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> gebruiken om de doeltaal van het project te wijzigen naar <emphasis role="bold">fr-fr</emphasis>, of</para>
 		  </listitem>
 		  <listitem>
 			<para><link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> gebruiken om toegang te krijgen tot de <link linkend="configuration.folder">configuratie</link>map en de bestandsnamen van de woordenboeken wijzigen naar <emphasis role="bold">fr</emphasis>.</para>
@@ -267,7 +271,7 @@
 
   <section id="introduction.make.it.look.good">
 	<title id="introduction.make.it.look.good.title">Laat het er goed uitzien!</title>
-	<para>Als dat allemaal is gedaan verschijnen de bronbestanden in OmegaT in die er als volgt uitziet:</para>
+	<para>Als dat allemaal is gedaan verschijnen de bronbestanden in OmegaT, in een lay-out die er als volgt uitziet:</para>
 
 	<figure id="default.omegat.layout">
       <title id="default.omegat.layout.title">Standaard lay-out OmegaT op macOS</title>
@@ -283,25 +287,25 @@
 
 	<orderedlist>
 	  <listitem>
-		<para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+		<para>Het <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.notes" endterm="panes.notes.title"/>.</para>
+		<para>Het <link linkend="panes.notes" endterm="panes.notes.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
+		<para>Het <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+		<para>Het <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/>.</para>
+		<para>Het <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.comments" endterm="panes.comments.title"/>.</para>
+		<para>Het <link linkend="panes.comments" endterm="panes.comments.title"/>.</para>
 	  </listitem>
 	  <listitem>
-		<para>Het venster <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/>.</para>
+		<para>Het <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/>.</para>
 	  </listitem>
 	  <listitem>
 		<para>De vensters <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> en <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/> zijn vastgezet</para>
@@ -311,14 +315,14 @@
 	  </listitem>
 	</orderedlist>
 	
-	<para>Gebruik de verschillende opties in het menu <link linkend="menus.view" endterm="menus.view.title"/> en verplaats de verschillende  <link linkend="chapter.panes">vensters</link> om de lay-out te krijgen die het beste bij uw werkstroom past.</para>
+	<para>Gebruik de verschillende opties in het menu <link linkend="menus.view" endterm="menus.view.title"/> en verplaats de verschillende  <link linkend="chapter.panes">vensters</link> om de lay-out te krijgen die het beste bij uw werkwijze past.</para>
 	
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
     <title id="introduction.translate.the.segments.one.by.one.title">Uw bestanden vertalen</title>
 
-    <para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/> is waar u uw vertaling typt.</para>
+    <para>Het <link linkend="panes.editor" endterm="panes.editor.title"/> is waar u uw vertaling typt.</para>
 
 	<note>
 	  <para>Bekijk het gedeelte <link linkend="app.shortcuts.streamline.workflow" endterm="app.shortcuts.streamline.workflow.title"/> om te zien hoe efficiënt u kunt zijn met sneltoetsen.</para>
@@ -331,7 +335,7 @@
 	<para>Bekijk het menu <link linkend="menus.goto" endterm="menus.goto.title"/> voor meer opties om te navigeren.</para>
 
 	<note>
-	  <para>OmegaT wijst niet verschillende statussen toe aan vertaalde segmenten. Een segment is vertaald, of het is dat niet.</para>
+	  <para>OmegaT wijst geen verschillende statussen toe aan vertaalde segmenten. Een segment is vertaald, of het is dat niet.</para>
 
 	  <para>Als u een specifiek proces voor nakijken nodig hebt kunt u, bijvoorbeeld:</para>
 
@@ -341,7 +345,7 @@
 
 		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> om naar Notepad te gaan en voeg uw opmerking in.</para>
 
-		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> om terug te gaan naar Bewerken en ga door met uw vertaling.</para>
+		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> om terug te gaan naar Bewerken en door te gaan met uw vertaling.</para>
 		</listitem>
 
 		<listitem>
@@ -376,14 +380,14 @@
 
     <para>Als de documenten die u vertaalt elementen in vet, cursief of andere decoratie hebben, zal OmegaT deze elementen converteren naar tags die de decoratieve tekst omsluiten. Dergelijke bestanden omvatten bijvoorbeeld bestanden van LibreOffice, HTML-bestanden en bestanden van Microsoft Office. Documenten bevatten vaak ook tags die niets te maken hebben met opmaak, maar niettegenstaande dat van belang zijn in de bronbestanden (en, als consequentie daarvan, in de vertaalde bestanden).</para>
 
-	<para>Een zin zou er uit kunnen zien zoals dit in zijn originele toepassing:</para>
+	<para>Een zin zou er, in zijn originele toepassing, uit kunnen zien zoals dit:</para>
     
 	<example id="example.source.segment.with.decorations">
 	  <title id="example.source.segment.with.decorations.title">Zin met decoratieve opmaak</title>
 	  <para>OmegaT is een <emphasis role="bold">eenvoudig-te gebruiken</emphasis> programma voor <emphasis>gretige</emphasis> vertalers</para>
 	</example>
 
-    <para>Afhankelijk van de originele indeling echter zal OmegaT deze zin weergeven op een manier die soortgelijk is aan deze:</para>
+    <para>Afhankelijk van de originele indeling zal OmegaT deze zin echter weergeven op een manier die soortgelijk is aan deze:</para>
 
 	<example id="example.how.decorations.are.displayed">
 	  <title id="example.how.decorations.are.displayed.title">Hoe decoraties worden weergegeven in OmegaT</title>
@@ -444,9 +448,9 @@
 	<warning>
 	  <para>Elke keer als u de vertaalde bestanden maakt zullen eerder gemaakte bestanden met dezelfde naam worden overschreven. Hernoem bestanden waarvan u niet wilt dat ze worden overschreven nadat u ze gemaakt hebt. U kunt wijzigingen voor bestandsnamen automatiseren met de optie <link linkend="edit.filter.dialog" endterm="edit.filter.dialog.title"/> voor het bestandsfilter.</para>
 	
-	  <para>Uw vertalingen worden <emphasis>altijd</emphasis> opgeslagen in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, wat het vertaalgeheugen voor het project is, geplaatst de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van uw project.</para>
+	  <para>Uw vertalingen worden <emphasis>altijd</emphasis> opgeslagen in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, wat het vertaalgeheugen voor het project is, geplaatst in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van uw project.</para>
 
-	  <para>Verwijderen van de inhoud van de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> heeft <emphasis>nooit</emphasis> invloed op de inhoud van uw vertalingen.</para>
+	  <para>Verwijderen van de inhoud uit de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> heeft <emphasis>nooit</emphasis> invloed op de inhoud van uw vertalingen.</para>
 	</warning>
 
 	<para>De documenten worden gemaakt in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> van uw project. Eerder gemaakte bestanden worden door het proces overschreven, tenzij u ze hebt hernoemd…</para>
@@ -475,7 +479,7 @@
   </section>
 
   <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">Een op sneltoetsen gebaseerd werkstroom</title>
+    <title id="app.shortcuts.streamline.workflow.title">Een op sneltoetsen gebaseerde werkwijze</title>
 
     <para>Onthouden van de belangrijkste sneltoetsen voor bewerken en navigatie (of <link linkend="app.shortcuts.customization">ze aanpassen zodat ze aan uw behoeften voldoen</link>) kan helpen uw werk te stroomlijnen.</para>
     <para>Dit wordt het beste geïllustreerd met een voorbeeld:</para>
@@ -483,7 +487,7 @@
     <example id="example.shortcuts.streamline.workflow">
       <title id="example.shortcuts.streamline.workflow.title">Gebruiken van sneltoetsen om het vertaalproces te stroomlijnen</title>
 
-      <para>Stel uzelf voor dat uw taak is een bijgewerkte versie van een handleiding uit een eerdere taak te vertalen. Bekijk de <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> how-to voor details.</para>
+      <para>Stel uzelf voor dat uw taak is een bijgewerkte versie van een handleiding uit een eerdere taak te vertalen. Bekijk de how-to <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> voor details.</para>
         
       <para>Omdat de eerste paar pagina's niet zijn gewijzigd, wordt u begroet door een scherm vol met reeds vertaalde segmenten uit het geheugen van de eerdere taak bij het openen van het project.</para>
 
@@ -495,15 +499,15 @@
 		
       <para>U bereikt dan een gereviseerd gedeelte van de tekst waar het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> een aantal soortgelijke segmenten weergeeft uit de eerdere taak.</para>
 
-	  <para>Nadat u snel het gedrukt op <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> om de overeenkomst in te voegen, maakt u de noodzakelijke wijzigingen zodat de gereviseerde tekst overeenkomt.</para>
+	  <para>Nadat u snel hebt gedrukt op <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> om de overeenkomst in te voegen, maakt u de noodzakelijke wijzigingen zodat de gereviseerde tekst overeenkomt.</para>
 
 	  <para>Dit gaat zo door, met de reeks van <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (of een ander nummer) gevolgd door <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> als een van de overeenkomsten van 2 tot en met 5 meer geschikt is.</para>
 
-	  <para>Sommige segmenten zullen later nadere aanpassingen nodig hebben, dus u gebruikt <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo> om naar het venster Notepad te gaan, uzelf een opmerking te sturen en en terug te komen naar het venster Bewerken met <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
+	  <para>Sommige segmenten zullen later nadere aanpassingen nodig hebben, dus gebruikt u <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo> om naar het venster Notepad te gaan, uzelf een opmerking te sturen en terug te komen in het venster Bewerken met <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
 	  
-	  <para>Tegen de tijd dat u bij het einde van het gedeelte komt, heeft u ook een of tweemaal <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> gebruikt om reeds automatisch ingevoerde fuzzy overeenkomsten uit de eerdere vertaling te vervangen met betere overeenkomsten van eerder in het huidige gedeelte.</para>
+	  <para>Tegen de tijd dat u bij het einde van het gedeelte komt, heeft u ook een of tweemaal <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> gebruikt om, reeds automatisch ingevoerde fuzzy overeenkomsten uit de eerdere vertaling, te vervangen door betere overeenkomsten van eerdere overeenkomsten in het huidige gedeelte.</para>
 
-      <para>Later vindt u ene betere manier om een enigszins lastige expressie, die eerder naar voren kwam,  beter te formuleren dus selecteert u het in de brontekst, drukt op <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link linkend="windows.text.search">om </link> het te zoeken, en gebruikt dan <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> om direct naar dat segment te springen van het dialoogvenster Zoeken.</para>
+      <para>Later vindt u een betere manier om een enigszins lastige expressie, die eerder naar voren kwam, beter te formuleren dus selecteert u het in de brontekst, drukt op <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo> <link linkend="windows.text.search">om </link> het te zoeken, en gebruikt dan <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo> om direct naar dat segment te springen vanuit het dialoogvenster Zoeken.</para>
 
 	  <para>Omdat OmegaT uw geschiedenis van de navigatie heeft geregistreerd, hoeft u alleen maar <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>J</keycap></keycombo> te gebruiken om direct door te gaan waar u ophield.</para>
 
@@ -511,12 +515,12 @@
         
       <para>Tijd voor een pauze. Als u zich uw koffie laat smaken, reflecteert u over hoeveel sneller u in staat was de verschillende functies van OmegaT te gebruiken, vergeleken met wanneer u gewoon was begonnen en veel tijd kwijt zou zijn geweest aan het klikken door de menu's.</para>
 
-      <para>De snellere werkstroom, op zijn beurt, stelde u in staat u beter te focussen op de vertaling zelf.</para>
+      <para>De snellere werkwijze, op zijn beurt, stelde u in staat u beter te focussen op de vertaling zelf.</para>
         
-      <para>Tegelijkertijd realiseert u zich dat gedurende uw sessie, u het menu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> gebruikte en ook de cursortoetsen verschillende keren, en besluit om <link linkend="example.shortcut.addition">een nieuwe sneltoets toe te voegen</link> om ook dat gedeelte van het proces beter te stroomlijnen.</para>
+      <para>Tegelijkertijd realiseert u zich dat, gedurende uw sessie, u het menu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> gebruikte en ook de cursortoetsen verschillende keren, en besluit om <link linkend="example.shortcut.addition">een nieuwe sneltoets toe te voegen</link> om ook dat gedeelte van het proces beter te stroomlijnen.</para>
 	  
     </example>
     
-    <para>De tijd nemen om de sneltoetsen te leren voor de functies die u vaak gebruikt zal zich zeker terugbetalen.</para>
+    <para>De tijd nemen, om de sneltoetsen te leren voor de functies die u vaak gebruikt, zal zich zeker terugbetalen.</para>
   </section>  
 </chapter>

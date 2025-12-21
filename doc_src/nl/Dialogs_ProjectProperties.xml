@@ -13,10 +13,14 @@
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title"><guilabel>Talen</guilabel></title>
 
-    <para>Selecteer de bron- en doeltalen  uit de keuzelijst, of voer ze handmatig in.</para>
+    <para>Selecteer de bron- en doeltalen uit de keuzelijst, of voer ze handmatig in.</para>
 
-	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (inclusief de drie-letter taalcodes), in het toepasselijk veld invoeren.</para>
-	
+	<para>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code in het toepasselijke veld invoeren.</para>
+
+	<warning>
+	  <para>OmegaT controleert niet de geldigheid van de taalcodes die u invoert. Zorg ervoor dat de twee taalcodes <emphasis>verschillend</emphasis> zijn, dat ze toepasselijk zijn voor uw gebruik van OmegaT en dat alle andere locaties, die een taalcode vereisen, overeenkomen met de code die u hier toewijst.</para>
+	</warning>
+
 	<para>Taalcodes worden ook op verschillende plaatsen binnen OmegaT gebruikt om:</para>
 	
 	<itemizedlist>
@@ -29,18 +33,23 @@
 	  </listitem>
 
 	  <listitem>
-		<para>spelfouten te zoeken in de woordenlijsten die zijn geïnstalleerd in de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>,</para>
+		<para>zoeken spelfouten met de woordenboeken die zijn geïnstalleerd in de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>grammaticale en typografische fouten te zoeken voor de regels die zijn ingesteld in de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>,</para>
+		<para>zoeken grammatische en typografische fouten met de regels die zijn ingesteld in de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>,</para>
 	  </listitem>
+
+	  <listitem>
+		<para>specificeren de in de TMX-bestanden gebruikte talen die worden gemaakt door het project (om conform te zijn moet een TMX de taalcodes van <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink> gebruiken),</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>enzovoort.</para>
 
 	<warning>
-	  <para>Zorg ervoor dat u de juiste taalcodes invoert en dat alle andere locaties die een dergelijke code vereisen, exact overeenkomen met die welke u hier toewijst. Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</para>
+	  <para>Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</para>
 	</warning>
 
 	  
@@ -133,7 +142,7 @@
 					<para>U zult handmatig vet, cursief, of andere tekstdecoraties moeten toepassen in het vertaalde bestand.</para>
 				</listitem>
 				<listitem>
-					<para>Wanneer u eenvoudigweg het aantal tags in een document van <application>Microsoft Word</application> (2007 en later) wilt beperken, kunt u het script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/>.</para>
+					<para>Wanneer u eenvoudigweg het aantal tags in een document van <application>Microsoft Word</application> (2007 en later) wilt beperken, kunt u het script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> gebruiken.</para>
 					<para>Bekijk het gedeelte <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
 				</listitem>
 			</itemizedlist>
@@ -146,7 +155,7 @@
 
 		<listitem>
 		  <warning>
-			<para>Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+			<para>Opdrachten voor lokaal nabewerken zijn om veiligheidsredenen standaard uitgeschakeld.</para>
 
 			<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> voor details.</para>
 		  </warning>
@@ -157,13 +166,13 @@
 
 		  <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> om de doelbestanden te maken en activeer de opdracht.</para>
 
-		  <para>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel lokale opdrachten voor nabewerking alleen in als u de bron van dat bestand vertrouwt.</para>
+		  <para>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Schakel lokale opdrachten voor nabewerken alleen in als u de bron van dat bestand vertrouwt.</para>
 		
 		  <para>De lijst van variabelen voor sjablonen geeft u toegang tot de verschillende projectgegevens en systeemvariabelen.</para>
 
 		  <para>Bekijk de appendix <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> voor details.</para>
 
-		  <para>U kunt ook globale opdrachten voor nabewerking definiëren die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  <para>U kunt ook globale opdrachten voor nabewerken definiëren, die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 
 		  <note>
 			<para>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</para>
@@ -366,7 +375,7 @@
 		  <note>
 			<para>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen.</para>
 
-			<para>Bekijk de <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> how-to voor details.</para>
+			<para>Bekijk de how-to <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> voor details.</para>
 		  </note>
 		
 		  <para>De TMX-bestanden bevatten alleen de segmenten uit de bestanden die momenteel zijn opgeslagen in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
@@ -379,13 +388,13 @@
 			  <listitem>
 				<para>Dit keuzevak laat u de indelingen kiezen waarin u wilt dat OmegaT de hierboven vermelde TMX-bestanden maakt.</para>
 
-				<para>Bekijk de <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> how-to voor details.</para>
+				<para>Bekijk de how-to <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> voor details.</para>
 		
 				<variablelist>
 				  <varlistentry>
 					<term><option>OmegaT</option></term>
 					<listitem>
-					  <para>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT in een vorm die alleen op de juiste wijze kan worden door een project van OmegaT.</para>
+					  <para>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT, in een vorm die alleen op de juiste wijze kan worden gebruikt door een project van OmegaT.</para>
 					</listitem>
 				  </varlistentry>
 		  
@@ -399,7 +408,7 @@
 				  <varlistentry>
 					<term><option>TMX Niveau 2</option></term>
 					<listitem>
-					  <para>Een TMX “level 2” bevat tekstuele gegevens met tags die zijn ingekapseld in een vorm die compatibel is met andere programma's voor CAT.</para>
+					  <para>Een TMX “niveau 2” bevat tekstuele gegevens met tags die zijn ingekapseld, in een vorm die compatibel is met andere programma's voor CAT.</para>
 					</listitem>
 				  </varlistentry>
 				</variablelist>

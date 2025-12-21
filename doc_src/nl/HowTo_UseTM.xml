@@ -103,7 +103,7 @@
 
       <para>OmegaT kan TMX-standaard conforme geheugens lezen die zijn gemaakt door andere programma's.</para>
 
-      <para>Sommige programma's produceren onder bepaalde omstandigheden ongeldige TMX-bestanden maken. U zult ze moeten repareren als u ze wilt gebruiken als geheugens voor verwijzingen, of OmegaT zal een fout rapporteren en het weigeren ze te laden. Reparaties zijn over het algemeen eenvoudig, en het foutbericht dat OmegaT  verschaft zal u helpen de fout te lokaliseren. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</para>
+      <para>Sommige programma's produceren, onder bepaalde omstandigheden, ongeldige TMX-bestanden. U zult ze moeten repareren, als u ze wilt gebruiken als geheugens voor verwijzingen, of OmegaT zal een fout rapporteren en weigeren ze te laden. Reparaties zijn over het algemeen eenvoudig, en het foutbericht dat OmegaT verschaft zal u helpen de fout te lokaliseren. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</para>
 	</section>
 
 	<section id="how.to.use.tm.store.your.tm">
@@ -115,7 +115,7 @@
 	<section id="how.to.tm.creating.a.tm.for.selected.documents">
       <title id="how.to.tm.creating.a.tm.for.selected.documents.title">Een TM maken, specifiek voor geselecteerde documenten</title>
 
-      <para>In situaties waar u een TMX moet delen die alleen de tekst uit bepaalde speciefieke bestanden bevat en ander inhoud uitsluit, volg dan de procedure hieronder:</para>
+      <para>In situaties waar u een TMX moet delen, die alleen de tekst uit bepaalde specifieke bestanden bevat, en andere inhoud uitsluit, volg dan de procedure hieronder:</para>
 
       <itemizedlist>
 		<listitem>
@@ -161,9 +161,9 @@
 
 		<para>Omgekeerd kunt u uw partner vragen de TMX-bestanden voor het project weg te schijven naar een gedeelde schijf die u kunt toewijzen als uw map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> voor de huidige vertaling.</para>
 
-		<para>OmegaT herkent onmiddellijk aanpassingen aan de TMX-bestanden. Daarom zal, iedere keer als één kant een dergelijke TMX maakt of aanpast met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, hoeft de andere kant niets te doen om er voor te zorgen dat de TMX lkaal wordt herkend.</para>
+		<para>OmegaT herkent onmiddellijk aanpassingen aan de TMX-bestanden. Daarom zal, iedere keer als één kant een dergelijke TMX maakt of aanpast met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, de andere kant niets hoeven te doen, om ervoor te zorgen dat de TMX lokaal wordt herkend.</para>
 
-		<para>Deze benadering werkt net zo goed voor het delen van woordenlijsten waar de beschrijfbare woordenlijst van het project (met een niet-standaard naam om overschrijven van het bestand te voorkomen) is geplaatst in een gedeelde map glossary. Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
+		<para>Deze benadering werkt net zo goed voor het delen van woordenlijsten, waar de beschrijfbare woordenlijst van het project (met een niet-standaard naam om overschrijven van het bestand te voorkomen) is geplaatst in een gedeelde map glossary. Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
 
 		<note>
 		  <para>Deze benadering werkt goed als het gat tussen updates van de TMX niet belangrijk is: een vertaler die bijvoorbeeld enkele keren per dag gegevens naar een recensent stuurt.</para>
@@ -176,14 +176,14 @@
 	  <listitem>
 		<para>OmegaT gebruikt collaboratieve versiesystemen om gegevens te delen.</para>
 
-		<para>Dergelijke systemen zijn vrij te gebruiken, te installeren en te beheren en worden breed gebruikt in de wereld van het ontwikkelen van computersoftware, war ze extreem robuust maakt.</para>
+		<para>Dergelijke systemen zijn vrij te gebruiken, te installeren en te beheren en worden breed gebruikt in de wereld van het ontwikkelen van computersoftware, wat ze extreem robuust maakt.</para>
 
-		<para>Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
+		<para>Bekijk de how-to <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> voor details.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
   <warning>
-	<para>Wees voorzichtig als u een heel project in een systeem voor het delen van bestanden, zoals DropBox, OneCloud en soortgelijke, plaatst.</para>
+	<para>Wees voorzichtig als u een heel project in een systeem voor het delen van bestanden, zoals DropBox, OneCloud en dergelijke, plaatst.</para>
 	<para><emphasis>Dergelijke systemen zijn niet ontworpen om de interne wijzigingen in een bepaald bestand bij te houden.</emphasis></para>
 	<para>Een project van OmegaT is een complexe set bestanden. Dergelijke systemen zullen niet altijd in staat zijn om u te voorzien van de meest recente versie van uw gegevens, zou zelfs sommige bestanden kunnen vergrendelen zonder duidelijke reden en kunnen zelfs teamproject gerelateerde bestanden corrumperen.</para>
 	<para>Zorg er voor dat u de lay-out van uw project deugdelijk hebt getest en stel een afzonderlijk back-up van de gegevens in, voordat u gegevens deelt in een dergelijk systeem.</para>
@@ -195,9 +195,9 @@
 
   <para>OmegaT geeft fuzzy overeenkomsten weer in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Standaard zijn deze overeenkomsten beperkt tot de bron- en doeltalen, gedefinieerd in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
 
-  <para>U kunt overeenkomsten toevoegen in talen die niet de doeltaal zijn. Bekijk de <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> voorkeur voor details.</para>
+  <para>U kunt overeenkomsten toevoegen in talen die niet de doeltaal zijn. Bekijk de voorkeur <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> voor details.</para>
 
-  <para>Als u een TMX hebt dat correspondeert met uw brondocument en zijn vertaling in een andere taal bevat, kunt u ook die taal <emphasis>direct onder</emphasis> het bronsegment weergeven, om te gebruiken als een aanvullende taal voor verwijzing.</para>
+  <para>Als u een TMX hebt, die correspondeert met uw brondocument en zijn vertaling in een andere taal bevat, kunt u ook die taal <emphasis>direct onder</emphasis> het bronsegment weergeven, om te gebruiken als een aanvullende taal voor verwijzing.</para>
 
   <para>Om dit te bereiken:</para>
 

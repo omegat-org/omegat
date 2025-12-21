@@ -6,7 +6,7 @@
   <para>De toepassingsmap bevat de toepassing <filename>OmegaT.jar</filename> en een aantal andere belangrijke bestanden.</para>
 
   <note>
-	<para>De locatie van de toepassingsmap is afhankelijk van uw  platform en de manier waarop OmegaT hebt geïnstalleerd. De aanbevolen of standaard locaties zijn de volgende:</para>
+	<para>De locatie van de toepassingsmap is afhankelijk van uw platform en de manier waarop OmegaT hebt geïnstalleerd. De aanbevolen of standaard locaties zijn de volgende:</para>
 
 	<variablelist>
 	  <varlistentry>
@@ -143,7 +143,7 @@
 	<varlistentry id="application.folder.plugins">
 	  <term id="application.folder.plugins.title">plug-ins/</term>
 	  <listitem>
-		<para>De map waar u externe plug-ins kunt installeren. De voorkeurslocatie voor plug-in handmatige installatie is de map <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>, geplaatst in de map <link linkend="configuration.folder">configuration</link>. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeuren voor details.</para>
+		<para>De map waar u externe plug-ins kunt installeren. De voorkeurslocatie voor het handmatig installeren van plug-ins is de map <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>, geplaatst in de <link linkend="configuration.folder">configuratie</link>map. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeuren voor details.</para>
 	  </listitem>
 	</varlistentry>
 

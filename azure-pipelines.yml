@@ -131,6 +131,12 @@ stages:
           version=$(./gradlew -qq printVersion | head -n 1)
           echo "##vso[task.setvariable variable=version;isOutput=true]$version"
         name: setVersion
+      - template: ci/azure-pipelines/build_doc_steps.yml
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish documents artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/docs'
+          artifact: 'docs'
       - template: ci/azure-pipelines/build_steps.yml
       - task: PublishPipelineArtifact@1
         displayName: 'Publish distributions artifact'
@@ -152,5 +158,13 @@ stages:
           artifact: 'distributions'
           path: '$(Pipeline.Workspace)/build/distributions'
       - template: ci/azure-pipelines/publish_release.yml
+        parameters:
+          omegatVersion: $(omegatVersion)
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download docs artifact'
+        inputs:
+          artifact: 'docs'
+          path: '$(Pipeline.Workspace)/docs'
+      - template: ci/azure-pipelines/publish_manual.yml
         parameters:
           omegatVersion: $(omegatVersion)

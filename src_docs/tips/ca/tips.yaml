@@ -1,6 +1,72 @@
 ---
 tips:
-  - file: project_folders.html
-    name: Carpeta del projecte
-  - file: automatic_backup.html
-    name: Automatic backup
+- file: shortcut_help.html
+  name: Obre el manual de l'usuari
+- file: automatic_backup.html
+  name: Còpia de seguretat automàtica
+- file: howto_download_dictionary.html
+  name: Com baixar un diccionari
+- file: bridge_two_languages.html
+  name: Pont entre dues llengües amb una memòria de traducció intermèdia
+- file: change_theme.html
+  name: Tema de l'OmegaT
+- file: create_your_own_tms.html
+  name: Creació de les vostres pròpies memòries de traducció
+- file: default_layout_restore_window.html
+  name: Reinicialització de la disposició de la finestra
+- file: dictionary_installation.html
+  name: Instal·lació de diccionaris
+- file: editor_unlock_cursor_f2.html
+  name: Desblocatge del cursor amb F2
+- file: exported_tms_folder.html
+  name: Selecció de la carpeta de les memòries de traducció exportades
+- file: glossary_writable_glossary_txt.html
+  name: El glossari modificable glossary.txt
+- file: pane_fuzzy_matches_navigation.html
+  name: Navegació i inserció de coincidències parcials
+- file: panes_default_layout_overview.html
+  name: Disposició per defecte
+- file: panes_principles_manipulation.html
+  name: Manipulació de subfinestres i disposició
+- file: project_folder_default_structure.html
+  name: Estructura per defecte de la carpeta del projecte
+- file: project_folders.html
+  name: Carpetes del projecte
+- file: project_folder_tm_auto.html
+  name: Carpeta «tm/auto»
+- file: project_omegat_folder_overview.html
+  name: Carpeta «omegat»
+- file: project_wont_open_recover.html
+  name: Si un projecte no s'obre
+- file: recover_project_when_locked.html
+  name: Si un projecte està blocat
+- file: reset_configuration.html
+  name: Reinicialització de la configuració
+- file: restore_translation_from_backup.html
+  name: Restauració de traduccions perdudes
+- file: reuse_translation_memories.html
+  name: Reutilització de memòries de traducció
+- file: setup_team_project_preparations.html
+  name: Preparació del repositori d'un projecte en equip
+- file: share_translation_memories.html
+  name: Ús compartit de memòries de traducció
+- file: shortcut_note.html
+  name: Drecera d'accés al bloc de notes
+- file: source_folder_add_files.html
+  name: Addició de fitxers a la carpeta de fitxers d'origen
+- file: target_folder_create_translated_files.html
+  name: Creació de fitxers traduïts en la carpeta «target»
+- file: tm_auto_auto_populate.html
+  name: Ús de «tm/auto» per a emplenar automàticament les coincidències exactes
+- file: tm_enforce_overwrite.html
+  name: Ús de «tm/enforce» per a sobreescriure traduccions
+- file: tm_mt_highlight.html
+  name: Ressaltat de coincidències inserides amb la carpeta «tm/mt»
+- file: tm_penalty_folder.html
+  name: Aplicació de penalitzacions a coincidències amb «tm/penalty-xxx»
+- file: translated_file_wont_open.html
+  name: Si el fitxer traduït no s'obre
+- file: use_check_issues_for_tags.html
+  name: Ús de la comprovació d'errors per a detectar problemes d'etiquetes
+- file: ignore_dictionary_word.html
+  name: Omissió de paraules del diccionari

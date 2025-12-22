@@ -8,8 +8,8 @@
 
 	<para>La primera vegada que inicieu l'OmegaT, la finestra principal mostra la disposició per defecte següent:</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
+		<figure id="default.omegat.layout.macos">
+      <title id="default.omegat.layout.macos.title">Disposició per defecte de l'OmegaT en el macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -555,7 +555,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 
     <para>Les coincidències provenen tant de la memòria de traducció del projecte interna creada en temps real mentre traduïu el projecte com de les memòries externes que heu importat de projectes anteriors o que heu rebut de tercers. Consulteu la guia <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/> per a conèixer més detalls.</para>
 
-    <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap> </keycombo> o utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
+    <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap></keycombo> per a seleccionar una coincidència específica o desplaçar-vos cíclicament per les coincidències disponibles amb <keycombo><keycap>C</keycap><keycap>↑ o ↓</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↑ o ↓</keycap></keycombo> en el macOS). Com a alternativa, podeu utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">Segment buit i les dues primeres coincidències</title>
@@ -683,7 +683,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
 
-    <para>Aquesta finestra, quan s'obre, conté els suggeriments per al segment actual produïts per un o més motors de traducció automàtica habilitats. Quan hi ha suggeriments disponibles de més d'un motor:</para>
+    <para>Si heu habilitat i configurat com a mínim un motor de traducció automàtica, aquesta subfinestra mostra els suggeriments del segment actual generats pels motors disponibles. Quan hi ha suggeriments disponibles de més d'un motor de traducció automàtica:</para>
 	
     <itemizedlist>
       <listitem>
@@ -784,9 +784,9 @@ Folder = <token>Dossier</token></programlisting>
 
 	<example id="panes.statusbar.messages">
       <title id="panes.statusbar.messages.title">Exemples de missatges de la barra d'estat</title>
-	  <para><literal>Sincronització de dipòsits</literal></para>
+	  <para><literal>Sincronització de repositoris</literal></para>
 
-	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el dipòsit remot.</para>
+	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el repositori remot.</para>
 
 	  <para><literal>S'està saltant al darrer segment editat...</literal></para>
 

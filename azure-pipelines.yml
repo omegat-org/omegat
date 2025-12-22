@@ -22,15 +22,6 @@ pr:
       - docs_devel
       - README.md
 
-schedules:
-  - cron: '0 12 * * 6'
-    displayName: Weekly saturday build
-    branches:
-      include:
-        - master
-        - releases/*
-    always: true
-
 variables:
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
@@ -70,7 +61,7 @@ stages:
 
   # Weekly release steps will be triggered after integration-test succeeded.
 - stage: Weekly
-  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
+  condition: eq(variables['Build.Reason'], 'Manual')
   jobs:
   - job: CheckForWeekly
     displayName: Test and Check

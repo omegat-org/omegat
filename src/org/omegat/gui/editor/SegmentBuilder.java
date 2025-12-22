@@ -520,7 +520,6 @@ public class SegmentBuilder {
      *            is text the source text (true) or translation text (false)
      * @param text
      *            segment part text
-     * @throws BadLocationException
      */
     private String addInactiveSegPart(boolean isSource, String text) throws BadLocationException {
         int prevOffset = offset;
@@ -538,7 +537,6 @@ public class SegmentBuilder {
      *
      * @param text
      *            other language translation text
-     * @throws BadLocationException
      */
     private void addOtherLanguagePart(String text, Language language) throws BadLocationException {
         int prevOffset = offset;
@@ -562,7 +560,6 @@ public class SegmentBuilder {
      *
      * @param trans
      *            The translation entry (can be null)
-     * @throws BadLocationException
      */
     private void addModificationInfoPart(TMXEntry trans) throws BadLocationException {
         if (!trans.isTranslated()) {

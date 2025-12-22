@@ -28,6 +28,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.MenuExtender;
 
 import javax.swing.JMenuItem;
@@ -71,7 +72,9 @@ public final class TipOfTheDayModule {
             if (ENABLED && TipOfTheDayUtils.hasIndex()) {
                 initUI();
                 initMenu();
-                SwingUtilities.invokeLater(() -> controller.start(false));
+                if (!Preferences.isFirstRun()) {
+                    SwingUtilities.invokeLater(() -> controller.start(false));
+                }
             }
         }
 

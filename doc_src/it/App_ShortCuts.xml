@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.shortcuts">
+  <title id="app.shortcuts.title">Scorciatoie di OmegaT</title>
+
+  <section id="app.shortcuts.description">
+    <title id="app.shortcuts.description.title">Descrizione</title>
+
+    <para>L'interfaccia di OmegaT non si basa, in generale, su pulsanti di accesso alle funzioni del programma. Queste vengono richiamate, invece, dai menu o, per la maggior parte di esse, dalla scorciatoia a loro assegnata.</para>
+  
+    <para>Il tempo necessario ad apprendere le scorciatoie più frequenti non è superiore a quello impiegato per iniziare a lavorare con OmegaT. Le scorciatoie vengono indicate accanto alle voci di ciascun menu, consentendo all'utente di impararle man mano che utilizza il programma.</para>
+
+    <para>In OmegaT è possibile personalizzare la maggior parte delle scorciatoie. Vedere la sezione <link endterm="app.shortcuts.customization.title" linkend="app.shortcuts.customization"/> per i dettagli.</para>
+
+    <para>OmegaT funziona su qualsiasi piattaforma esegue un Java Runtime Environment (considerando Windows, macOS e Linux come sistemi principali). I tasti modificatori che formano le scorciatoie variano leggermente a seconda della piattaforma utilizzata. Al fine di rendere semplice la lettura dei tasti modificatori è stata adottata la convenzione seguente:</para>
+	
+    <table id="app.shortcut.description">
+      <title id="app.shortcut.description.title">Identificatori tasti modificatori</title>
+
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Linux/Windows</entry>
+            <entry>Identificatore tasto</entry>
+            <entry>macOS</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><keycap>Maiusc</keycap></entry>
+            <entry><keycap>S</keycap></entry>
+            <entry><keycap>Maiusc (Shift)</keycap> o <keycap>⇧</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Ctrl</keycap> o <keycap>Control</keycap></entry>
+            <entry><keycap>C</keycap></entry>
+            <entry><keycap>command (Cmd)</keycap> o <keycap>⌘</keycap></entry>
+          </row>
+
+          <row>
+            <entry><keycap>Alt</keycap></entry>
+            <entry><keycap>A</keycap></entry>
+            <entry><keycap>Alt / Opzione (Option)</keycap> o <keycap>⌥</keycap></entry>
+          </row>
+
+          <row>
+            <entry/>
+            <entry><keycap>Ctrl</keycap></entry>
+            <entry><keycap>control</keycap> o <keycap>⌃</keycap></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+        
+    <para>Gli <emphasis role="bold">identificatori tasto</emphasis> sopra indicati permettono di evitare un elenco di notazioni multiple per ciascuna scorciatoia.</para>
+
+    <example id="example.avoid.listing.multiple.notations">
+	  <title id="example.avoid.listing.multiple.notations.title">Come evitiamo l'elenco di notazioni multiple:</title>
+	  <para>In Windows e Linux: <keycombo><keycap>Ctrl</keycap><keycap>Maiusc</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>In macOS: <keycombo><keycap>Maiusc (Shift)</keycap><keycap>Cmd</keycap><keycap>N</keycap></keycombo></para>
+
+	  <para>In questo manuale: <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
+	</example>
+  </section>
+  
+  <section id="app.shortcuts.customization">
+    <title id="app.shortcuts.customization.title">Personalizzazione</title>
+
+    <para>OmegaT assegna scorciatoie alla maggior parte delle funzioni disponibili nei menu <link linkend="menus.project" endterm="menus.project.title"/>, <link linkend="menus.edit" endterm="menus.edit.title"/> e <link linkend="menus.goto" endterm="menus.goto.title"/>, e ad alcune funzioni nel pannello <link linkend="panes.editor" endterm="panes.editor.title"/>. È possibile anche aggiungere o modificare le scorciatoie per la maggior parte delle funzioni.</para>
+
+	<para>Per farlo è necessario inserire il corretto file di definizione delle scorciatoie nella propria cartella di configurazione di OmegaT. Vedere l'appendice <link endterm="configuration.folder.title" linkend="configuration.folder"/>per i dettagli.</para>
+
+    <para>Esistono due file di definizione delle scorciatoie.</para>
+
+	<variablelist>
+      <varlistentry>
+        <term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
+        <listitem>
+          <para>Il file di definizione delle scorciatoie per i menu e alcuni altri elementi.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
+        <listitem><para>Il file di definizione delle scorciatoie per l'editor.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Affinché le nuove scorciatoie siano attive dopo aver modificato un file di definizione delle scorciatoie, OmegaT deve essere riavviato.</para>
+
+    <note>
+      <para>È possibile copiare i file delle scorciatoie predefinite di OmegaT nella <link linkend="configuration.folder">propria cartella di configurazione</link> dal sito di sviluppo OmegaT in Sourceforge e modificarli in base alle proprie necessità:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Scorciatoie predefinite per Windows e Linux</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.properties">MainMenuShortcuts.properties</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.properties">EditorShortcuts.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+		
+        <varlistentry><term>Scorciatoie predefinite per macOS</term>
+          <listitem>
+            <itemizedlist>
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">MainMenuShortcuts.mac.properties</ulink></para>
+              </listitem>
+
+              <listitem>
+                <para><ulink url="https://github.com/omegat-org/omegat/tree/master/src/org/omegat/gui/main/EditorShortcuts.mac.properties">EditorShortcuts.mac.properties</ulink></para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>I file macOS devono essere rinominati <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> e <link linkend="EditorShortcuts.properties" endterm="EditorShortcuts.properties"/> affinché OmegaT li riconosca.</para>
+    </note>
+
+    <para>La sezione seguente descrive la sintassi utilizzata nei file di definizione delle scorciatoie e fornisce un esempio di modifica.</para>
+  </section>
+
+  <section id="app.shortcuts.syntax">
+    <title id="app.shortcuts.syntax.title">Sintassi</title>
+
+    <para>La sintassi di base dei file di definizione delle scorciatoie è semplice:</para>
+
+    <para><code>codice funzione=scorciatoia</code></para>
+
+	<para>Utilizzare le tabelle nella sezione <link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> riportata sotto per individuare i valori per il <code>codice funzione</code>.</para>
+    
+    <para>La <code>scorciatoia</code> rappresenta la combinazione di tasti premuta dall'utente. Assume la forma seguente:</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para><code>modificatore</code> 0 o più</para>
+      </listitem>
+    
+      <listitem>
+        <para>seguito da <code>evento</code> 0 o 1</para>
+      </listitem>
+    
+      <listitem>
+        <para>seguito da <code>tasto</code> 1</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>dove <code>modificatore</code> può essere: <literal>maiusc</literal>, <literal>ctrl</literal>, <literal>meta</literal>, <literal>alt</literal> o <literal>altGraph</literal></para>
+
+        <note>
+          <para><literal>meta</literal> fa riferimento al tasto con il logo Windows nella maggior parte delle tastiere per sistemi Windows o Linux, e a <literal>command</literal> in macOS.</para>
+
+          <para><literal>altGraph</literal> fa riferimento al tasto <emphasis>Alt</emphasis> che si trova alla destra della barra spaziatrice nelle tastiere con due tasti <emphasis>Alt</emphasis>.</para>
+        </note>
+      </listitem>
+
+      <listitem>
+        <para><code>evento</code> può essere: <option>typed</option>, <option>pressed</option>, <option>released</option></para>
+      </listitem>
+
+      <listitem>
+        <para>e <code>tasto</code> può essere qualsiasi tasto disponibile nella propria tastiera. Si può fare riferimento alla <link linkend="app.shortcuts.lists.function.codes.editor.table">tabella che presenta le diverse scorciatoie dell'editor</link> per trovare i valori dei tasti quali <literal>Home</literal>, <literal>PagSu</literal> o i tasti freccia.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>È possibile aggiungere righe vuote e commenti per organizzare l'elenco e renderlo di facile lettura. Una riga di commento inizia con <code>#</code>, e l'applicazione ignora tutto quello che vi si trova dietro.</para>
+
+    <para>Il modo migliore per modificare le scorciatoie è scaricare una copia dei file predefiniti nella <link linkend="configuration.folder">propria cartella di configurazione</link>, come detto in precedenza, e apportare lì le modifiche volute.</para>
+    
+    <example id="example.shortcut.modification">
+      <title id="example.shortcut.modification.title">Modificare una scorciatoia</title>
+
+      <para>La scorciatoia predefinita per <link linkend="menus.project.close">chiudere un progetto</link> è definita in Windows e Linux come:</para>
+
+	  <para><code>projectCloseMenuItem=ctrl shift W</code></para>
+
+      <para>e in macOS come:</para>
+	  
+	  <para><code>projectCloseMenuItem=meta shift W</code></para>
+
+      <para>Tuttavia, si potrebbe voler rimuovere il tasto <keycap>S</keycap> dalla scorciatoia per trasformarla solo in <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (o <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> in macOS) in modo da farla corrispondere a quella utilizzata nelle altre applicazioni.</para>
+
+	  <para>Per farlo, modificare <filename>MainMenuShortcuts.properties</filename> per Windows o Linux nel modo seguente:</para>
+
+	  <para><code>projectCloseMenuItem=ctrl W</code></para>
+
+	  <para>o per macOS nel modo seguente:</para>
+
+      <para><code>projectCloseMenuItem=meta W</code></para>
+    </example>
+
+    <example id="example.shortcut.addition">
+      <title id="example.shortcut.addition.title">Aggiungere una scorciatoia</title>
+
+      <para>Se la propria coppia linguistica richiama frequentemente <link linkend="menus.edit.create.alternative.translation">traduzioni alternative</link>, si potrebbe voler assegnare una scorciatoia a quella funzione, dato che essa non ne possiede una predefinita.</para>
+
+      <para>I passaggi che seguono illustrano come assegnare la scorciatoia <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> alla voce di menu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>.</para>
+	  
+      <orderedlist>
+        <listitem>
+          <para>Aprire <filename>MainMenuShortcuts.properties</filename> che è stato copiato nella <link linkend="configuration.folder">propria cartella di configurazione</link> in un editor di testo.</para>
+        </listitem>
+
+		<listitem>
+          <para>Come mostrato nella <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">tabella del menu Modifica</link> sottostante, il codice funzione per la funzione <guimenuitem>Crea traduzione alternativa</guimenuitem> è <code>editMultipleAlternate</code>.</para>
+
+          <para>Ricercando quel codice nel file si arriva alla riga seguente:</para>
+		  
+          <para><code>#	editMultipleAlternate=</code></para>
+        </listitem>
+
+		<listitem>
+            <para>La riga è attualmente un commento. Eliminare il carattere <code>#</code> all'inizio della riga in modo che OmegaT riconosca la scorciatoia e aggiungere <option>alt X</option> dopo il segno <code>=</code> alla fine della riga:</para>
+			
+            <para><code>editMultipleAlternate=alt X</code></para>
+        </listitem>
+
+		<listitem>
+            <para>Salvare e chiudere il file. Al prossimo avvio di OmegaT la nuova scorciatoia creata dovrebbe essere attiva e mostrata accanto al nome della funzione nel menu.</para>
+          </listitem>
+        </orderedlist>
+    </example>
+
+    <para>Salvare il file dopo aver completato le modifiche. Nel caso in cui fosse aperto, bisognerà riavviare OmegaT affinché le modifiche diventino attive.</para>
+    <para>Le scorciatoie modificate o aggiunte saranno ora visibili accanto alle voci del menu che sono state modificate. Saranno disponibili in OmegaT nel momento in cui non siano presenti conflitti con altre funzioni o con le scorciatoie globali del sistema.</para>
+
+    <para>La sezione seguente illustra le tabelle dei codici funzione e la corrispondente scorciatoia predefinita per ciascun menu o funzione dell'editor in OmegaT.</para>
+  </section>
+
+  
+
+  <section id="app.shortcuts.lists">
+    <title id="app.shortcuts.lists.title">Elenchi di funzioni e codici</title>
+    <section id="app.shortcuts.lists.function.codes.menus">
+      <title id="app.shortcuts.lists.function.codes.menus.title">Funzioni del Menu</title>
+
+      <para>Le tabelle sotto riportate illustrano le funzioni modificabili nel file <filename>MainMenuShortcuts.properties</filename>, insieme con i loro valori predefiniti. Le scorciatoie tra parentesi sono alternative per la stessa funzione presente in <filename>EditorShortcuts.properties</filename>.</para>
+
+      <table id="app.shortcuts.lists.function.codes.project.menu.table">
+        <title id="app.shortcuts.lists.function.codes.project.menu.table.title">Menu Progetto</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Nuovo...</entry>
+              <entry>projectNewMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Scarica il progetto in collaborazione...</entry>
+              <entry>projectTeamNewMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Apri...</entry>
+              <entry>projectOpenMenuItem</entry>
+              <entry>ctrl O</entry>
+              <entry>meta O</entry>
+            </row>
+
+            <row>
+              <entry>Apri recente...</entry>
+              <entry>projectOpenRecentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Ricarica</entry>
+              <entry>projectReloadMenuItem</entry>
+              <entry namest="3" nameend="4">F5</entry>
+            </row>
+
+            <row>
+              <entry>Chiudi</entry>
+              <entry>projectCloseMenuItem</entry>
+              <entry>ctrl shift W</entry>
+              <entry>meta shift W</entry>
+            </row>
+
+            <row>
+              <entry>Salva</entry>
+              <entry>projectSaveMenuItem</entry>
+              <entry>ctrl S</entry>
+              <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry>Aggiungi file...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Aggiungi pagina MediaWiki...</entry>
+              <entry>projectWikiImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Invia i file di partenza</entry>
+              <entry>projectCommitSourceFiles</entry>
+            </row>
+
+            <row>
+              <entry>Invia i file di arrivo</entry>
+              <entry>projectCommitTargetFiles</entry>
+            </row>
+
+            <row>
+              <entry>Crea i file tradotti</entry>
+              <entry>projectCompileMenuItem</entry>
+              <entry>ctrl D</entry>
+              <entry>meta D</entry>
+            </row>
+
+            <row>
+              <entry>Crea i file tradotti correnti</entry>
+              <entry>projectSingleCompileMenuItem</entry>
+              <entry>ctrl shift D</entry>
+              <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>Apri progetto MED...</entry>
+              <entry>projectMedOpenMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Crea progetto MED</entry>
+              <entry>projectMedCreateMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Proprietà...</entry>
+              <entry>projectEditMenuItem</entry>
+              <entry>ctrl E</entry>
+              <entry>meta E</entry>
+            </row>
+
+            <row>
+              <entry>File di partenza...</entry>
+              <entry>viewFileListMenuItem</entry>
+              <entry>ctrl L</entry>
+              <entry>meta L</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Cartella del progetto</entry>
+              <entry>projectAccessRootMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Dizionari</entry>
+              <entry>projectAccessDictionaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Glossari</entry>
+              <entry>projectAccessGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/File di partenza</entry>
+              <entry>projectAccessSourceMenuItem </entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/File di arrivo</entry>
+              <entry>projectAccessTargetMenuItem</entry>
+            </row>
+            
+            <row>
+              <entry>Accedi al contenuto del progetto//TM</entry>
+              <entry>projectAccessTMMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto//TM esportate</entry>
+              <entry>projectAccessExportTMMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Documento di partenza corrente</entry>
+              <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Documento di arrivo corrente</entry>
+              <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi al contenuto del progetto/Glossario scrivibile</entry>
+              <entry>projectAccessWriteableGlossaryMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Riavvia</entry>
+              <entry>projectRestartMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Esci</entry>
+              <entry>projectExitMenuItem</entry>
+              <entry>ctrl Q</entry>
+              <entry>meta Q</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.edit.menu.table">
+        <title id="app.shortcuts.lists.function.codes.edit.menu.table.title">Menu Modifica</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Annulla</entry>
+              <entry>editUndoMenuItem</entry>
+              <entry>ctrl Z</entry>
+              <entry>meta Z</entry>
+            </row>
+
+            <row>
+              <entry>Ripristina</entry>
+              <entry>editRedoMenuItem</entry>
+              <entry>ctrl Y</entry>
+              <entry>meta Y</entry>
+            </row>
+
+            <row>
+              <entry>Sostituisci con concordanza o selezione</entry>
+              <entry>editOverwriteTranslationMenuItem</entry>
+              <entry>ctrl R</entry>
+              <entry>meta R</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci concordanza o selezione</entry>
+              <entry>editInsertTranslationMenuItem</entry>
+              <entry>ctrl I</entry>
+              <entry>meta I</entry>
+            </row>
+
+            <row>
+              <entry>Sostituisci col testo di partenza</entry>
+              <entry>editOverwriteSourceMenuItem</entry>
+              <entry>ctrl shift R</entry>
+              <entry>meta shift R</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci il testo di partenza</entry>
+              <entry>editInsertSourceMenuItem</entry>
+              <entry>ctrl shift I</entry>
+              <entry>meta shift I</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona testo di partenza</entry>
+              <entry>editSelectSourceMenuItem</entry>
+              <entry>ctrl shift A</entry>
+              <entry>meta shift A</entry>
+            </row>
+
+            <row>
+              <entry>Sostituisci con la Traduzione automatica</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci i tag mancanti</entry>
+              <entry>editTagPainterMenuItem</entry>
+              <entry>ctrl shift T</entry>
+              <entry>meta shift T</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci il tag mancante successivo</entry>
+              <entry>editTagNextMissedMenuItem</entry>
+              <entry>ctrl T</entry>
+              <entry>meta T</entry>
+            </row>
+
+            <row>
+              <entry>Esporta la selezione</entry>
+              <entry>editExportSelectionMenuItem</entry>
+              <entry>ctrl shift C</entry>
+              <entry>meta shift C</entry>
+            </row>
+
+            <row>
+              <entry>Crea voce di glossario</entry>
+              <entry>editCreateGlossaryEntryMenuItem</entry>
+              <entry>ctrl shift G</entry>
+              <entry>meta shift G</entry>
+            </row>
+
+            <row>
+              <entry>Cerca...</entry>
+              <entry>editFindInProjectMenuItem</entry>
+              <entry>ctrl F</entry>
+              <entry>meta F</entry>
+            </row>
+
+            <row>
+              <entry>(richiama l'ultima finestra di ricerca)</entry>
+              <entry>findInProjectReuseLastWindow</entry>
+              <entry>ctrl shift F</entry>
+              <entry>meta shift F</entry>
+            </row>
+
+            <row>
+              <entry>Sostituisci...</entry>
+              <entry>editReplaceInProjectMenuItem</entry>
+              <entry>ctrl K</entry>
+              <entry>meta K</entry>
+            </row>
+
+            <row>
+              <entry>Cerca dizionari</entry>
+              <entry>editSearchDictionaryMenuItem</entry>
+              <entry namest="3" nameend="4">alt shift D</entry>
+            </row>
+
+            <row>
+              <entry>Commuta carattere in/minuscolo</entry>
+              <entry>lowerCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Commuta carattere in/MAIUSCOLO</entry>
+              <entry>upperCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Commuta carattere in/Prima lettera maiuscola</entry>
+              <entry>titleCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Commuta carattere in/Maiuscola/minuscola a inizio frase</entry>
+              <entry>sentenceCaseMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Commuta carattere in/Alterna</entry>
+              <entry>cycleSwitchCaseMenuItem</entry>
+              <entry namest="3" nameend="4">shift F3</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona la concordanza precedente</entry>
+              <entry>editSelectFuzzyPrevMenuItem</entry>
+              <entry>ctrl UP</entry>
+              <entry>meta UP</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona la concordanza successiva</entry>
+              <entry>editSelectFuzzyNextMenuItem</entry>
+              <entry>ctrl DOWN</entry>
+              <entry>meta DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona concordanza #1</entry>
+              <entry>editSelectFuzzy1MenuItem</entry>
+              <entry>ctrl 1</entry>
+              <entry>meta 1</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona concordanza #2</entry>
+              <entry>editSelectFuzzy2MenuItem</entry>
+              <entry>ctrl 2</entry>
+              <entry>meta 2</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona concordanza #3</entry>
+              <entry>editSelectFuzzy3MenuItem</entry>
+              <entry>ctrl 3</entry>
+              <entry>meta 3</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona concordanza #4</entry>
+              <entry>editSelectFuzzy4MenuItem</entry>
+              <entry>ctrl 4</entry>
+              <entry>meta 4</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona concordanza/Seleziona concordanza #5</entry>
+              <entry>editSelectFuzzy5MenuItem</entry>
+              <entry>ctrl 5</entry>
+              <entry>meta 5</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci carattere di controllo Bidi/Marca da sinistra a destra (LRM U+200E)</entry>
+              <entry>insertCharsLRM</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci carattere di controllo Bidi/Marca da destra a sinistra (RLM U+200F)</entry>
+              <entry>insertCharsRLM</entry>
+            </row>
+            
+            <row>
+              <entry>Inserisci carattere di controllo Bidi/Incorporazione da sinistra a destra (LRE U+202A)</entry>
+              <entry>insertCharsLRE</entry>
+            </row>
+
+             <row>
+              <entry>Inserisci carattere di controllo Bidi/Incorporazione da destra a sinistra (RLE U+202B)</entry>
+              <entry>insertCharsRLE</entry>
+            </row>
+            
+            <row>
+              <entry>Inserisci carattere di controllo Bidi/Pop Directional Formatting (PDF U+202C)</entry>
+              <entry>insertCharsPDF</entry>
+            </row>
+
+            <row>
+              <entry>Usa come traduzione predefinita</entry>
+              <entry>editMultipleDefault</entry>
+            </row>
+
+            <row>
+              <entry>Crea traduzione alternativa</entry>
+              <entry>editMultipleAlternate</entry>
+            </row>
+
+            <row>
+              <entry>Rimuovi traduzione</entry>
+              <entry>editRegisterUntranslatedMenuItem</entry>
+              <entry>ctrl shift X</entry>
+              <entry>meta shift X</entry>
+            </row>
+
+            <row>
+              <entry>Imposta traduzione vuota</entry>
+              <entry>editRegisterEmptyMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Registra traduzione uguale</entry>
+              <entry>editRegisterIdenticalMenuItem</entry>
+              <entry>ctrl shift S</entry>
+              <entry>meta shift S</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.goto.menu.table">
+        <title id="app.shortcuts.lists.function.codes.goto.menu.table.title">Menu Vai</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Prossimo segmento non tradotto</entry>
+              <entry>gotoNextUntranslatedMenuItem</entry>
+              <entry>ctrl U</entry>
+              <entry>meta U</entry>
+            </row>
+
+            <row>
+              <entry>Segmento tradotto successivo</entry>
+              <entry>gotoNextTranslatedMenuItem</entry>
+              <entry>ctrl shift U</entry>
+              <entry>meta shift U</entry>
+            </row>
+
+            <row>
+              <entry>Segmento successivo</entry>
+              <entry>gotoNextSegmentMenuItem</entry>
+              <entry>ctrl N (Enter/Tab)</entry>
+              <entry>meta N (Enter/Tab)</entry>
+            </row>
+
+            <row>
+              <entry>Segmento precedente</entry>
+              <entry>gotoPreviousSegmentMenuItem</entry>
+              <entry>ctrl P (ctrl Enter / ctrl Tab)</entry>
+              <entry>meta P (meta Enter / shift Tab)</entry>
+            </row>
+
+            <row>
+              <entry>Numero di segmento...</entry>
+              <entry>gotoSegmentMenuItem</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+
+            <row>
+              <entry>Nota successiva</entry>
+              <entry>gotoNextNoteMenuItem</entry>
+              <entry>ctrl alt N</entry>
+              <entry>meta alt N</entry>
+            </row>
+
+            <row>
+              <entry>Nota precedente</entry>
+              <entry>gotoPreviousNoteMenuItem</entry>
+              <entry>ctrl alt P</entry>
+              <entry>meta alt P</entry>
+            </row>
+
+            <row>
+              <entry>Segmento univoco successivo</entry>
+              <entry>gotoNextUniqueMenuItem</entry>
+              <entry>ctrl shift K</entry>
+              <entry>meta shift K</entry>
+            </row>
+
+            <row>
+              <entry>Origine della concordanza selezionata</entry>
+              <entry>gotoMatchSourceSegment</entry>
+              <entry>ctrl shift M</entry>
+              <entry>meta shift M</entry>
+            </row>
+
+            <row>
+              <entry>Segmenti popolati automaticamente/Segmento successivo da tm/auto/</entry>
+              <entry>gotoNextXAutoMenuItem</entry>
+              <entry>ctrl alt VIRGOLA</entry>
+              <entry>meta alt VIRGOLA</entry>
+            </row>
+
+            <row>
+              <entry>Segmenti popolati automaticamente/Segmento precedente da tm/auto/</entry>
+              <entry>gotoPrevXAutoMenuItem</entry>
+              <entry>ctrl alt shift VIRGOLA</entry>
+              <entry>meta alt shift VIRGOLA</entry>
+            </row>
+
+            <row>
+              <entry>Segmenti popolati automaticamente/Segmento successivo da tm/enforce/</entry>
+              <entry>gotoNextXEnforcedMenuItem</entry>
+              <entry>ctrl alt PUNTO</entry>
+              <entry>meta alt PUNTO</entry>
+            </row>
+
+            <row>
+              <entry>Segmenti popolati automaticamente/Segmento precedente da tm/enforce/</entry>
+              <entry>gotoPrevXEnforcedMenuItem</entry>
+              <entry>ctrl alt shift PUNTO</entry>
+              <entry>meta alt shift PUNTO</entry>
+            </row>
+
+            <row>
+              <entry>Indietro nella cronologia</entry>
+              <entry>gotoHistoryBackMenuItem</entry>
+              <entry>ctrl shift P</entry>
+              <entry>meta shift P</entry>
+            </row>
+
+            <row>
+              <entry>Avanti nella cronologia</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>Blocco note</entry>
+              <entry>gotoNotesPanelMenuItem</entry>
+              <entry>ctrl alt 9</entry>
+              <entry>meta alt 9</entry>
+            </row>
+
+            <row>
+              <entry>Editor</entry>
+              <entry>gotoEditorPanelMenuItem</entry>
+              <entry>ctrl alt 0</entry>
+              <entry>meta alt 0</entry>
+            </row>
+
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.view.menu.table">
+        <title id="app.shortcuts.lists.function.codes.view.menu.table.title">Menu Vista</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Evidenzia i segmenti tradotti</entry>
+              <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia i segmenti non tradotti</entry>
+              <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra le delimitazioni dei paragrafi</entry>
+              <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra i segmenti di origine</entry>
+              <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia i segmenti ripetuti</entry>
+              <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia i segmenti con note</entry>
+              <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra gli spazi non divisibili</entry>
+              <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra spazio vuoto</entry>
+              <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra caratteri di controllo algoritmo bidirezionale</entry>
+              <entry>viewMarkBidiCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia i segmenti popolati automaticamente</entry>
+              <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia le concordanze del glossario</entry>
+              <entry>viewMarkGlossaryMatchesCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Evidenzia i problemi di verifica linguistica</entry>
+              <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Usa la sostituzione aggressiva del carattere</entry>
+              <entry>viewMarkFontFallbackCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra informazioni sulla modifica/Nessuna</entry>
+              <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra informazioni sulla modifica/Per il segmento attivo</entry>
+              <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Mostra informazioni sulla modifica/Per tutti i segmenti</entry>
+              <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Ripristina la finestra di OmegaT</entry>
+              <entry>viewRestoreGUIMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.tools.menu.table">
+        <title id="app.shortcuts.lists.function.codes.tools.menu.table.title">Menu Strumenti</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Verifica problemi...</entry>
+              <entry>toolsCheckIssuesMenuItem</entry>
+              <entry>ctrl shift V</entry>
+              <entry>meta shift V</entry>
+            </row>
+
+            <row>
+              <entry>Verifica problemi per il file attivo</entry>
+              <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Statistiche</entry>
+              <entry>toolsShowStatisticsStandardMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Statistiche delle concordanze</entry>
+              <entry>toolsShowStatisticsMatchesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Statistiche delle concordanze per file</entry>
+              <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Allinea file...</entry>
+              <entry>toolsAlignFilesMenuItem</entry>
+            </row>            
+          </tbody>
+        </tgroup>
+      </table>
+
+      <note>
+        <para>L'elemento <link linkend="windows.scripts" endterm="windows.scripts.title"/> nel menu <link linkend="menus.tools" endterm="menus.tools.title"/> rappresenta un'eccezione.</para>
+
+        <para>Non è possibile aggiungere una scorciatoia per richiamare l'editor degli script o modificare le scorciatoie assegnate agli script.</para>
+      </note>
+
+      <table id="app.shortcuts.lists.function.codes.options.menu.table">
+        <title id="app.shortcuts.lists.function.codes.options.menu.table.title">Menu Opzioni</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Preferenze</entry>
+              <entry>optionsPreferencesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Traduzione automatica/Recupera automaticamente le traduzioni</entry>
+              <entry>optionsMTAutoFetchCheckboxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Glossari/Usa concordanze parziali</entry>
+              <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Dizionari/Glossari/Usa concordanze parziali</entry>
+              <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Completamento automatico/Mostra automaticamente i suggerimenti pertinenti</entry>
+              <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
+            </row>
+
+            <row>
+              <entry>Completamento automatico/Completamento cronologia</entry>
+              <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Completamento automatico/Predizione cronologia</entry>
+              <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Filtri dei file globali...</entry>
+              <entry>optionsSetupFileFiltersMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Regole di segmentazione globali...</entry>
+              <entry>optionsSentsegMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Editor...</entry>
+              <entry>optionsWorkflowMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Accedi alla cartella di configurazione</entry>
+              <entry>optionsAccessConfigDirMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.help.menu.table">
+        <title id="app.shortcuts.lists.function.codes.help.menu.table.title">Menu Aiuto</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Manuale dell'utente...</entry>
+              <entry>helpContentsMenuItem</entry>
+              <entry namest="3" nameend="4">F1</entry>
+            </row>
+
+            <row>
+              <entry>Informazioni su...</entry>
+              <entry>helpAboutMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Ultime modifiche...</entry>
+              <entry>helpLastChangesMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Registro...</entry>
+              <entry>helpLogMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>Controlla aggiornamenti...</entry>
+              <entry>helpUpdateCheckMenuItem</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <table id="app.shortcuts.lists.function.codes.search.window.table">
+        <title id="app.shortcuts.lists.function.codes.search.window.table.title">Finestra di ricerca</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Voce del menu</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Passa alla voce nell'Editor</entry>
+              <entry>jumpToEntryInEditor</entry>
+              <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  
+    <section id="app.shortcuts.lists.function.codes.windows">
+      <title id="app.shortcuts.lists.function.codes.windows.title">Funzioni dell'Editor</title>
+
+      <para>La tabella sotto riportata illustra le scorciatoie modificabili nel file <filename>EditorShortcuts.properties</filename>, insieme con i loro valori predefiniti.</para>
+
+      <table id="app.shortcuts.lists.function.codes.editor.table">
+        <title id="app.shortcuts.lists.function.codes.editor.table.title">Editor</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Funzione</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row id="shortcuts.open.contextual.menu">
+              <entry>Apri menu contestuale</entry>
+              <entry>editorContextMenu</entry>
+              <entry>CONTEXT_MENU</entry>
+              <entry>shift ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>Vai al segmento successivo</entry>
+              <entry>editorNextSegment</entry>
+              <entry namest="3" nameend="4">TAB</entry>
+            </row>
+
+            <row>
+              <entry>Vai al segmento precedente</entry>
+              <entry>editorPrevSegment</entry>
+              <entry namest="3" nameend="4">shift TAB</entry>
+            </row>
+
+            <row>
+              <entry>Vai al segmento successivo (non TAB)</entry>
+              <entry>editorNextSegmentNotTab</entry>
+              <entry namest="3" nameend="4">ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Vai al segmento precedente (non TAB)</entry>
+              <entry>editorPrevSegmentNotTab</entry>
+              <entry>ctrl ENTER</entry>
+              <entry>meta ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Inserisci interruzione di riga</entry>
+              <entry>editorInsertLineBreak</entry>
+              <entry namest="3" nameend="4">shift ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Seleziona tutto</entry>
+              <entry>editorSelectAll</entry>
+              <entry>ctrl A</entry>
+              <entry>meta A</entry>
+            </row>
+
+            <row>
+              <entry>Elimina Token precedente</entry>
+              <entry>editorDeletePrevToken</entry>
+              <entry>ctrl BACK_SPACE</entry>
+              <entry>alt BACK_SPACE</entry>
+            </row>
+
+            <row>
+              <entry>Elimina Token successivo</entry>
+              <entry>editorDeleteNextToken</entry>
+              <entry>ctrl DELETE</entry>
+              <entry>alt DELETE</entry>
+            </row>
+
+            <row>
+              <entry>Vai al primo segmento</entry>
+              <entry>editorFirstSegment</entry>
+              <entry>ctrl PAGE_UP</entry>
+              <entry>meta PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>Vai all'ultimo segmento</entry>
+              <entry>editorLastSegment</entry>
+              <entry>ctrl PAGE_DOWN</entry>
+              <entry>meta PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Salta Token successivo</entry>
+              <entry>editorSkipNextToken</entry>
+              <entry>ctrl RIGHT</entry>
+              <entry>alt RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>Salta Token precedente</entry>
+              <entry>editorSkipPrevToken</entry>
+              <entry>ctrl LEFT</entry>
+              <entry>alt LEFT</entry>
+            </row>
+
+            <row>
+              <entry>Salta Token successivo con selezione</entry>
+              <entry>editorSkipNextTokenWithSelection</entry>
+              <entry>ctrl shift RIGHT</entry>
+              <entry>alt shift RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>Salta Token precedente con selezione</entry>
+              <entry>editorSkipPrevTokenWithSelection</entry>
+              <entry>ctrl shift LEFT</entry>
+              <entry>alt shift LEFT</entry>
+            </row>
+
+            <row>
+              <entry>Attiva/disattiva blocco cursore</entry>
+              <entry>editorToggleCursorLock</entry>
+              <entry namest="3" nameend="4">F2</entry>
+            </row>
+
+            <row>
+              <entry>Attiva/disattiva Sovrascrittura</entry>
+              <entry>editorToggleOvertype</entry>
+              <entry>INSERT</entry>
+              <entry>F3</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table id="app.shortcuts.lists.function.codes.autocompleter.table">
+        <title id="app.shortcuts.lists.function.codes.autocompleter.table.title">Completamento automatico</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Funzione</entry>
+              <entry>Codice funzione</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Apri completamento automatico</entry>
+              <entry>autocompleterTrigger</entry>
+              <entry>ctrl SPACE</entry>
+              <entry>ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>Apri completamento automatico - vista successiva</entry>
+              <entry>autocompleterNextView</entry>
+              <entry>ctrl SPACE</entry>
+              <entry>ctrl DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Apri completamento automatico - vista precedente</entry>
+              <entry>autocompleterPrevView</entry>
+              <entry>ctrl shift SPACE</entry>
+              <entry>ctrl UP</entry>
+            </row>
+
+            <row>
+              <entry>Conferma e chiudi completamento automatico</entry>
+              <entry>autocompleterConfirmAndClose</entry>
+              <entry namest="3" nameend="4">ENTER</entry>
+            </row>
+
+            <row>
+              <entry>Conferma completamento automatico senza chiudere</entry>
+              <entry>autocompleterConfirmWithoutClose</entry>
+              <entry namest="3" nameend="4">INSERT</entry>
+            </row>
+
+            <row>
+              <entry>Chiudi completamento automatico</entry>
+              <entry>autocompleterClose</entry>
+              <entry namest="3" nameend="4">ESCAPE</entry>
+            </row>
+
+            <row>
+              <entry>Vai su nell'elenco</entry>
+              <entry>autocompleterListUp</entry>
+              <entry namest="3" nameend="4">UP</entry>
+            </row>
+
+            <row>
+              <entry>Vai giù nell'elenco</entry>
+              <entry>autocompleterListDown</entry>
+              <entry namest="3" nameend="4">DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Vai su di una pagina</entry>
+              <entry>autocompleterListPageUp</entry>
+              <entry namest="3" nameend="4">PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>Vai giù di una pagina</entry>
+              <entry>autocompleterListPageDown</entry>
+              <entry namest="3" nameend="4">PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Vai su nella tabella</entry>
+              <entry>autocompleterTableUp</entry>
+              <entry namest="3" nameend="4">UP</entry>
+            </row>
+
+            <row>
+              <entry>Vai giù nella tabella</entry>
+              <entry>autocompleterTableDown</entry>
+              <entry namest="3" nameend="4">DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Vai a sinistra nella tabella</entry>
+              <entry>autocompleterTableLeft</entry>
+              <entry namest="3" nameend="4">LEFT</entry>
+            </row>
+
+            <row>
+              <entry>Vai a destra nella tabella</entry>
+              <entry>autocompleterTableRight</entry>
+              <entry namest="3" nameend="4">RIGHT</entry>
+            </row>
+
+            <row>
+              <entry>Vai su di una pagina nella tabella</entry>
+              <entry>autocompleterTablePageUp</entry>
+              <entry namest="3" nameend="4">PAGE_UP</entry>
+            </row>
+
+            <row>
+              <entry>Vai giù di una pagina nella tabella</entry>
+              <entry>autocompleterTablePageDown</entry>
+              <entry namest="3" nameend="4">PAGE_DOWN</entry>
+            </row>
+
+            <row>
+              <entry>Vai alla prima tabella</entry>
+              <entry>autocompleterTableFirst</entry>
+              <entry>ctrl HOME</entry>
+              <entry>meta HOME</entry>
+            </row>
+
+            <row>
+              <entry>Vai all'ultima tabella</entry>
+              <entry>autocompleterTableLast</entry>
+              <entry>ctrl END</entry>
+              <entry>meta END</entry>
+            </row>
+
+            <row>
+              <entry>Vai alla prima riga nella tabella</entry>
+              <entry>autocompleterTableFirstInRow</entry>
+              <entry namest="3" nameend="4">HOME</entry>
+            </row>
+
+            <row>
+              <entry>Vai all'ultima riga nella tabella</entry>
+              <entry>autocompleterTableLastInRow</entry>
+              <entry namest="3" nameend="4">END</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</section>

@@ -1,55 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title>Allineatore</title>
+  <title id="windows.aligner.title"><guilabel>Allinea file</guilabel></title>
 
-  <para>L'allineamento comporta la creazione di una memoria di traduzione bilingue da documenti monolingue che sono stati già tradotti.</para>
+  <para>Usare <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> per accedere a questo strumento.</para>
 
-  <para>Per accedere a questa finestra, selezionare <menuchoice> <guimenuitem>Strumenti</guimenuitem> <guimenuitem>Allinea file...</guimenuitem> </menuchoice>.</para>
+  <para>OmegaT offre, per i formati basati su chiavi, anche una modalità di allineamento basata su riga di comando. Vedere l'opzione <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> per i dettagli.</para>
 
-  <section>
-    <title>Passaggio 1: regolare i parametri di allineamento</title>
+  <warning>
+    <para>L'allineatore non consente di salvare parzialmente il proprio lavoro tramite un allineamento. È dunque consigliato dividere i file per allinearli in file più piccoli, in modo da poterli allineare comodamente in un'unica sessione. Seguendo questo metodo si ha il vantaggio di ridurre le corrispondenze sbagliate nell'allineamento iniziale e si rende più semplice la correzione manuale successiva.</para>
+  </warning>
 
-    <para>Se si rende necessario dover migliorare l'allineamento, provare a cambiare i parametri. Nella maggior parte dei casi, più basso è il <guilabel>Punteggio medio</guilabel>, migliore sarà l'allineamento.</para>
 
-    <para>In modalità confronto <guilabel>Heapwise</guilabel>, i testi vengono valutati globalmente. In modalità confronto <guilabel>Parsewise</guilabel>, essi vengono valutati per singolo segmento. L'opzione compare solo quando tale selezione è possibile.</para>
+  <para>Allineare significa creare una memoria di traduzione bilingue ricavata da una coppia di documenti monolingue già tradotti. L'allineamento del contenuto dei file è un procedimento a quattro fasi:</para>
 
-    <para>Usare la modalità confronto <guilabel>ID</guilabel> per allineare i testi Chiave=Valore. Questo sistema funziona anche se le chiavi nei due file non si trovano nello stesso ordine e, o in alternativa, se i due file non contengono la stessa quantità di informazioni. Questa opzione compare solo se i file selezionati sono entrambi riconosciuti come file Chiave=Valore.</para>
+  <orderedlist>
+	<listitem>
+	  <para>Specificare la lingua di partenza e quella di destinazione, e selezionare i due file da allineare.</para>
+	</listitem>
 
-    <para>Gli algoritmi <guilabel>Viterbi</guilabel> e <guilabel>Forward-Backward</guilabel> sono due metodi di calcolo differenti. Scegliere quello che restituisce i risultati migliori.</para>
+	<listitem>
+	  <para>L'allineatore legge i file e tenta di far coincidere i segmenti che corrispondono tra di loro nei due testi, l'originale e il tradotto.</para>
+	</listitem>
 
-    <para>Fare clic su <guibutton>Continua</guibutton> per andare al passaggio successivo.</para>
+	<listitem>
+	  <para>Ricontrollare i risultati e apportare a mano le necessarie modifiche.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Salvare il risultato in un file TMX.</para>
+	</listitem>
+  </orderedlist>
+
+  <para>L'allineatore è in grado di leggere tutti i formati di file supportati da OmegaT.</para>
+  
+  <note>
+    <para>Se è aperto un progetto di traduzione, l'allineatore utilizzerà automaticamente le lingue di quel progetto, così come le regole di segmentazione specifiche del progetto, se presenti.</para>
+  </note>
+
+  <para>Dopo aver selezionato la lingua e i file, fare clic sul pulsante <guibutton>OK</guibutton> per richiamare la finestra <guilabel>Allinea</guilabel>, che mostra i risultati dell'allineamento automatico.</para>
+
+  <para>La parte principale della finestra è divisa in tre colonne:</para>
+  
+  <itemizedlist>
+    <listitem>
+      <para><guilabel>Mantieni</guilabel>: le coppie dei segmenti nelle righe che possiedono attivato questo riquadro vengono salvate nel file della memoria di traduzione. Le righe non spuntate vengono scartate.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Source</guilabel>: i segmenti dal testo originale.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Target</guilabel>: i segmenti dal testo tradotto.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.aligner.adjust">
+    <title id="windows.aligner.adjust.title">Impostazioni</title>
+
+    <para>In questo passaggio, la parte inferiore della finestra mostra vari parametri e opzioni modificabili, se ci sono possibilità di migliorare l'allineamento iniziale. Mostra anche il risultato di un <guilabel>Punteggio medio</guilabel> per l'allineamento. Come regola, più è basso il punteggio, più è accurato l'allineamento. Quando si modifica un parametro l'allineamento viene subito ricalcolato, permettendo di provare in modo rapido diverse combinazioni e ottenere il risultato migliore.</para>
+
+    <para>I parametri e le opzioni disponibili sono:</para>
+
+    <variablelist>
+	  <title>Parametri</title>
+	  <varlistentry>
+        <term>Metodo di confronto</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Heapwise</guilabel>: questo metodo confronta globalmente i documenti.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Parsewise</guilabel>: questo metodo confronta i documenti segmento per segmento. Viene mostrato solo quando è disponibile per i file che si stanno allineando.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>ID</guilabel>: questo metodo si applica ai file che consistono di voci <literal>chiave = valore</literal>. Funziona anche se l'ordine delle chiavi è diverso in ogni file, e quando i file hanno un numero diverso di voci. Viene mostrato solo quando entrambi i file selezionati sono riconosciuti come file chiave=valore.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Algoritmo:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Viterbi</guilabel>: gli algoritmi predefiniti utilizzati per allineare i documenti.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Forward-Backward</guilabel>: un algoritmo alternativo utilizzabile per allineare i documenti.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Non esiste una regola precisa e definita riguardo l'algoritmo da scegliere. Si consiglia di provarli entrambi e utilizzare quello che restituisce i risultati migliori per i propri file.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Calcolatore:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Normal</guilabel>: la distribuzione statistica predefinita utilizzata per allineare i documenti.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Poisson</guilabel>: una distribuzione statistica alternativa utilizzabile per allineare i documenti.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Come per gli algoritmi, non esiste una regola precisa e definita riguardo la distribuzione statistica da scegliere. Try both and use the one that yields the better result for your files.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Contatore:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Carattere</guilabel>: l'unità di base utilizzata per determinare la dimensione dei segmenti nelle lingue che non utilizzano uno spazio per delimitare le parole.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Parola</guilabel>: l'unità di base utilizzata per determinare la dimensione dei segmenti nelle lingue che utilizzano uno spazio per delimitare le parole.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>L'allineatore seleziona in automatico il contatore basato sulle lingue di partenza e di arrivo dei file da allineare. È impostato in modo predefinito a <guilabel>Carattere</guilabel> se almeno una delle lingue non delimita le parole con spazi, in caso contrario viene impostato a <guilabel>Parola</guilabel>. Se si sta lavorando con una delle due, si può provare ad alternare le due opzioni per vedere quale restituisce i risultati migliori.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+	  <title>Opzioni</title>
+      <varlistentry>
+        <term>Segmento</term>
+        <listitem>
+          <para>L'allineatore utilizza in modo predefinito la segmentazione a livello di frase. Deselezionare la casella per utilizzare la segmentazione a livello di paragrafo. Vedere le preferenze <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Rimuovi i tag</term>
+        <listitem>
+          <para>L'allineatore include, per impostazione predefinita, i tag nei segmenti. Deselezionare la casella per rimuovere tutti i tag dall'allineamento e dalla memoria di traduzione (TMX) risultante.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.aligner.adjust.highlight">
+        <term id="windows.aligner.adjust.highlight.title">Evidenzia</term>
+        <listitem>
+		  <para>Deselezionare la casella per disattivare l'evidenziazione.</para>
+
+          <para>L'allineatore utilizza l'espressione regolare <code>\d+</code> per evidenziare tutti i numeri nei segmenti di partenza e di arrivo.</para>
+		  <para>È possibile modificare l'espressione regolare per aggiungere parti evidenziate. Vedere il capitolo <link linkend="app.regex" endterm="app.regex.title"/> per i dettagli.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Regole...</term>
+        <listitem>
+          <para>Facendo clic su questo pulsante è possibile modificare le regole di segmentazione che si applicano a questo progetto. Vedere l'appendice <link linkend="app.segmentation" endterm="app.segmentation.title"/>per i dettagli.</para>
+
+          <warning>
+            <para>Se si modificano le regole di segmentazione, alla chiusura dell'allineatore verrà chiesto se tali modifiche debbano essere salvate. La scelta predefinita è <guibutton>Sì</guibutton>, la quale potrebbe non essere la scelta voluta se si modificano le regole di segmentazione globali di OmegaT.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Filtri...</term>
+        <listitem>
+          <para>Facendo clic su questo pulsante è possibile modificare i filtri dei file segmentazione che si applicano a questo progetto. Vedere le preferenze <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> per i dettagli.</para>
+
+          <warning>
+            <para>Se si modificano i filtri dei file, alla chiusura dell'allineatore verrà chiesto se tali modifiche debbano essere salvate. La scelta predefinita è <guibutton>Sì</guibutton>, la quale potrebbe non essere la scelta voluta se si modificano i filtri dei file globali di OmegaT.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Schema...</term>
+        <listitem>
+          <para>Questa opzione permette di inserire un'espressione regolare per definire lo schema utilizzato per evidenziare il testo nei segmenti di partenza e arrivo. Per impostazioni predefinita l'allineatore usa <literal>\d+</literal> per evidenziare i numeri. Se i testi con cui si lavora contengono altri elementi utili da evidenziare, modificare l'espressione regolare per includere tali elementi, utilizzando il simbolo <literal>|</literal> per separarli.</para>
+        </listitem>
+      </varlistentry>      
+    </variablelist>
+
+    <para>Tramite l'opzione <guilabel>Evidenzia</guilabel> e nella finestra di dialogo relativa è possibile modificare lo schema dal menu <guimenu>Vista</guimenu>, e le altre opzioni dal menu <guimenu>Opzioni</guimenu>.</para>
+
+    <para>In aggiunta, il menu <guimenu>File</guimenu> fornisce i comandi seguenti:</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para><guimenuitem>Salva TMX...</guimenuitem>: questo elemento è disabilitato fino al completamento del passaggio successivo.</para>
+      </listitem>
+	  
+      <listitem>
+        <para><guimenuitem>Ripristina</guimenuitem>: questo comando ripristina tutti i parametri al loro valore predefinito. È possibile anche richiamare il comando facendo clic su <guibutton>Ripristina</guibutton> sulla parte inferiore destra della finestra o premendo la combinazione di tasti <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>.</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Ricarica</guimenuitem>: questo comando ricarica il file dal disco. Se si rende necessario modificare il contenuto dei file, è possibile utilizzare questo comando per analizzarli e allinearli di nuovo.</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Chiudi</guimenuitem>: chiude la finestra di dialogo <guilabel>Allinea</guilabel>. Procedendo in tal senso, si annulla l'allineamento senza salvare alcun dato all'interno del file della memoria di traduzione. È possibile anche richiamare questo comando premendo la combinazione di tasti <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>In questo passaggio il menu <guimenu>Modifica</guimenu> è disabilitato.</para>
+
+    <para>Una volta che si è soddisfatti con i risultati di questo passaggio, premere il pulsante <guibutton>Continua</guibutton> per procedere al passaggio successivo.</para>
   </section>
 
-  <section>
-    <title>Passaggio 2: eseguire le correzioni manuali</title>
+  <section id="windows.aligner.manual.corrections">
+    <title id="windows.aligner.manual.corrections.title">Correzioni</title>
 
-    <para>Dopo l'elaborazione automatica, l'allineamento di due file richiede in genere correzioni manuali.</para>
+    <para>Dopo la prima fase di allineamento automatico sono in genere necessarie delle regolazioni manuali. Questo in genere comporta lo spostamento di segmenti in alto o in basso per regolare il loro allineamento con i segmenti corretti nell'altra lingua, così come procedere alla separazione o all'unione di segmenti. L'allineatore consente anche di modificare il contenuto di un segmento, che risulta utile quando si rilevano errori come i refusi ortografici.</para>
 
-    <para>Le unità di traduzione si trovano nelle celle all'interno delle due ultime colonne.</para>
+    <para>È possibile accedere a tutte le azioni disponibili dal menu <guimenu>Modifica</guimenu> oppure premendo la scorciatoia da tastiera corrispondente. Le azioni più comuni sono raggiungibili anche dai pulsanti che si trovano alla destra del pannello principale.</para>
 
-    <para>Per allineare due segmenti sulla stessa riga:</para>
+    <note>
+      <para>È bene ricordarsi le scorciatoie da tastiera, se si utilizza spesso l'allineatore o se si lavora su documenti di grande dimensione, in quanto ciò permette di eseguire le azioni in modo molto rapido.</para>
+    </note>
 
-    <orderedlist>
-      <listitem>
-        <para>Selezionare il primo segmento.</para>
-      </listitem>
+    <para>Per eseguire un'azione, selezionare il segmento o il blocco di segmenti consecutivi applicabili. I singoli segmenti sono selezionabili con il mouse o i tasti freccia. I blocchi di segmenti sono selezionabili con il mouse facendo clic sul primo segmento e poi sull'ultimo segmento mentre si tiene premuto il tasto <keycap>Maiusc</keycap>.</para>
 
-      <listitem>
-        <para>Premere la barra spaziatrice (scorciatoia per <menuchoice> <guimenuitem>Modifica</guimenuitem> <guimenuitem>Avvia allineamento millimetrico</guimenuitem> </menuchoice>).</para>
-      </listitem>
+	<para>In alternativa, per selezionare segmenti consecutivi è possibile premere i tasti freccia mentre si tiene premuto il tasto <keycap>Maiusc</keycap>. Le azioni disponibili sono riportate di seguito.</para>
 
-      <listitem>
-        <para>Fare clic nell'altra colonna sulla traduzione che corrisponde al primo segmento.</para>
-      </listitem>
-    </orderedlist>
+    <variablelist>
+      <varlistentry>
+        <term>Sposta in alto (<keycap>l</keycap>)</term>
+        <listitem>
+          <para>Sposta in alto di una riga il segmento selezionato o il blocco di segmenti consecutivi.</para>
+          <para>Questo comando è disponibile anche dal pulsante che si trova alla destra del pannello della finestra principale.</para>
+        </listitem>
+      </varlistentry>
 
-    <para>Dopo aver compiuto varie volte questa operazione, selezionare <menuchoice> <guimenuitem>Modifica</guimenuitem> <guimenuitem>Riallinea In sospeso</guimenuitem> </menuchoice> per aggiornare l'allineamento degli altri segmenti.</para>
+      <varlistentry>
+        <term>Sposta in basso (<keycap>b</keycap>)</term>
+        <listitem>
+          <para>Sposta in basso di una riga il segmento selezionato o il blocco di segmenti consecutivi.</para>
 
-    <para>Per modificare singolarmente la posizione di uno o più segmenti, selezionare il segmento, o i segmenti, e premere <userinput>U</userinput> (<guilabel>Sposta in alto</guilabel>) o <userinput>D</userinput> (<guilabel>Sposta in basso</guilabel>).</para>
+          <para>Questo comando è disponibile anche dal pulsante che si trova alla destra del pannello della finestra principale.</para>
+        </listitem>
+      </varlistentry>
 
-    <para>Quando sarà creata la memoria di traduzione, saranno incluse solo le righe che nella prima colonna presentano marcata l'opzione <guilabel>Mantieni</guilabel>.</para>
+      <varlistentry>
+        <term>Dividi (<keycap>S</keycap>)</term>
+        <listitem>
+          <para>Se è selezionato un segmento singolo, questo comando apre la finestra di dialogo <guilabel>Dividi testo</guilabel>. Utilizzare il mouse o i tasti freccia per posizionare il cursore alla posizione in cui si desidera dividere il testo e fare clic sul pulsante <guibutton>OK</guibutton> oppure premere il tasto <keycap>Invio</keycap>.</para>
 
-    <para>Quando si ritiene che le due colonne siano sufficientemente allineate, premere il pulsante <guibutton>Salva TMX...</guibutton> per creare la memoria di traduzione risultante.</para>
+          <para>Se sono selezionati due o più segmenti che occupano celle separate nella stessa riga (segmenti a più celle che contengono senza una casella <guilabel>Mantieni</guilabel>), questo comando dividerà le celle selezionate di nuovo in righe separate (con una casella <guilabel>Mantieni</guilabel>).</para>
+
+		  <para>Questo comando è disponibile anche dal pulsante che si trova alla destra del pannello della finestra principale.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Unisci (<keycap>U</keycap>)</term>
+        <listitem>
+          <para>Se è selezionato solo un segmento, l'allineatore lo unirà col segmento che segue. Se sono selezionati due o più segmenti, essi saranno tutti uniti ma resteranno in celle separate. Richiamando il comando sulla stessa selezione un'ulteriore volta, si unirà il contenuto delle celle selezionate in un'unica cella.</para>
+
+		  <para>Questo comando è disponibile anche dal pulsante che si trova alla destra del pannello della finestra principale.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Modifica (<keycap>M</keycap>)</term>
+        <listitem>
+          <para>Questo comando può essere eseguito solo su un singolo segmento. Richiamando questo comando si apre la finestra di dialogo <guilabel>Modifica testo</guilabel>, che permette di apportare modifiche al testo del segmento. Usare il pulsante <guibutton>OK</guibutton> per chiudere la finestra di dialogo, una volta terminato. In questa finestra, il comando <keycap>Invio</keycap> inserisce un'interruzione di riga nel testo.</para>
+
+		  <para>Usare <keycombo><keycap>C</keycap><keycap>Invio</keycap></keycombo> per chiuderla senza utilizzare il mouse.</para>
+
+		  <para>Questo comando è disponibile anche dal pulsante che si trova alla destra del pannello della finestra principale.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Segna Accettato (<keycap>A</keycap>)</term>
+        <listitem>
+          <para>Utilizzare questo comando per confermare che l'allineamento nella riga o nel blocco di righe selezionato è corretto. Verrà evidenziata la corrispondente colonna <guilabel>Mantieni</guilabel> in verde.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Segna Necessita revisione (<keycap>R</keycap>)</term>
+        <listitem>
+          <para>Utilizzare questo comando per identificare una riga o un blocco di righe per il quale l'allineamento dei segmenti è in dubbio. Verrà evidenziata la corrispondente colonna <guilabel>Mantieni</guilabel> in rosso.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Azzera marcatura (<keycap>C</keycap>)</term>
+        <listitem>
+          <para>Utilizzare questo comando per rimuovere una o più marcature impostate dai comandi <guilabel>Segna accettato</guilabel> o <guilabel>Segna Necessita revisione</guilabel>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Riallinea In sospeso (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
+        <listitem>
+          <para>Se tutte le righe sono state contrassegnate come accettate, utilizzare questo comando per aggiornare l'allineamento delle righe rimanenti.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Mantieni tutto</term>
+        <listitem>
+          <para>Utilizzare questo comando per selezionare la casella <guilabel>Mantieni</guilabel> per tutte le righe.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Non mantenere nulla</term>
+        <listitem>
+          <para>Utilizzare questo comando per deselezionare la casella <guilabel>Mantieni</guilabel> per tutte le righe.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Alterna selezionati (<keycap>K</keycap>)</term>
+        <listitem>
+          <para>Utilizzare questo comando per alternare la casella <guilabel>Mantieni</guilabel> della riga o il blocco di righe selezionato tra attivato e disattivato, o viceversa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Avvia allineamento millimetrico (<keycap>Barra spaziatrice</keycap>)</term>
+        <listitem>
+          <para>Se i segmenti che corrispondono sono diverse righe in posizioni lontane e si desidera allinearle rapidamente, utilizzare questo comando per selezionare il primo segmento e poi fare clic sul segmento corrispondente nell'altra colonna.</para>
+		  
+		  <para>È possibile utilizzare anche i tasti freccia e premere la <keycap>barra spaziatrice</keycap> nel segmento corrispondente.</para>
+		  
+          <para>I segmenti allineati con questo metodo vengono contrassegnati automaticamente come accettati.</para>
+
+		  <para>Potrebbe risultare utile eseguire il comando <guimenuitem>Riallinea In sospeso</guimenuitem> dopo aver utilizzato l'allineamento millimetrico un paio di volte.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Dopo aver completato l'allineamento delle due colonne, fare clic sul pulsante <guibutton>Salva TMX...</guibutton> per creare la memoria di traduzione.</para>
+
+    <note>
+      <para>Nella memoria di traduzione saranno salvate soltanto le righe con la casella <guilabel>Mantieni</guilabel> selezionata nella prima colonna.</para>
+    </note>
+
+
+    <para>Oltre al pulsante <guibutton>Salva TMX...</guibutton>, la parte inferiore della finestra <guilabel>Allinea</guilabel>, nel passaggio di correzione manuale, presenta la stessa casella <guilabel>Evidenzia</guilabel> e lo stesso pulsante <guibutton>Schema...</guibutton> come nel primo passaggio. A questa opzione si può accedere anche dal menu <guimenu>Vista</guimenu>.</para>
+
+    <warning>
+      <para>Nella parte inferiore della finestra è presente anche un pulsante <guibutton>Ripristina</guibutton>. <emphasis role="bold">Utilizzare questo comando con attenzione!</emphasis> Fare clic su questo pulsante scarterà tutte le modifiche e riporterà le operazioni allo stato iniziale del primo passaggio.</para>
+    </warning>    
+    
   </section>
 </section>

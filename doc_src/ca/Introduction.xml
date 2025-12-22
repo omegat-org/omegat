@@ -166,16 +166,20 @@
 
 	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/>, seleccioneu una carpeta buida o creeu-ne una de nova amb el nom del projecte.</para>
 
+	<warning>
+	  <para>L'OmegaT necessita poder modificar la carpeta en què creeu el projecte. Si voleu instal·lar el projecte en una unitat compartida, no l'instal·leu a l'arrel de la unitat, sinó que creeu una carpeta per a instal·lar-hi el projecte.</para>
+	</warning>
+
     <para>Un projecte de l'OmegaT és senzillament un conjunt de carpetes que contenen tots els recursos per defecte.</para>
 
     <para>El quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> s'obre després de donar un nom al projecte.</para>
 
 	<para>En aquest quadre de diàleg, seleccioneu o indiqueu les llengües dels fitxers d'origen i de destinació, definiu les diferents opcions i feu clic en el botó <guibutton>D'acord</guibutton> per a continuar.</para>
 
-	<para>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu indicar qualsevol codi que s'ajusti al <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (incloent-hi codis de llengua de tres lletres) en el camp corresponent.</para>
+	<para>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu escriure qualsevol codi en el camp corresponent.</para>
 
 	<warning>
-	  <para>Assegureu-vos que indiqueu les llengües correctes i que els codis que indiqueu en qualsevol altre lloc coincideixin amb els que indiqueu aquí. Consulteu la secció <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> per a conèixer més detalls.</para>
+	  <para>L'OmegaT no comprova la validesa dels codis de llengua que introduïu. Assegureu-vos que els dos codis de llengua siguin <emphasis>diferents</emphasis>, que siguin adequats per a l'ús que feu de l'OmegaT i que els codis de llengua assignats coincideixin en qualsevol altra ubicació on els feu servir. Consulteu la secció <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> per a conèixer més detalls.</para>
 	</warning>
 	
     <para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a tornar a aquest quadre de diàleg després de crear el projecte.</para>

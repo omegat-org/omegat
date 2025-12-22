@@ -138,14 +138,16 @@
 	<varlistentry id="configuration.folder.extra.contents.repositories">
 	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
 	  <listitem>
-		<para>Aquest fitxer conté la informació d'inici de sessió per als dipòsits dels projectes en equip.<warning><para>El contingut del fitxer no està xifrat.</para></warning>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+		<para>Aquest fitxer conté la informació d'inici de sessió per als repositoris dels projectes en equip.<warning><para>El contingut del fitxer no està xifrat.</para></warning>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</term>
 	  <listitem>
-		<para>Aquest fitxer de paràmetres conté els paràmetres personalitzats de segmentació. Consulteu les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> per a conèixer més detalls.</para>
+		<para>Aquest fitxer de paràmetres conté paràmetres de segmentació personalitzats en el format <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>. Consulteu les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> per a conèixer més detalls.<note><para>Si es detecta un fitxer <filename>segmentation.conf</filename> existent d'una versió anterior, l'OmegaT el converteix automàticament.</para>
+		  </note>
+		</para>
 	  </listitem>
 	</varlistentry>
 	

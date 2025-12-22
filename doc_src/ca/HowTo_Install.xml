@@ -11,7 +11,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Estàndard: OmegaT 6.0.0</term>
+	  <term>Estàndard: OmegaT 6.0.2</term>
 	  <listitem>
 		<para>Es recomana aquesta versió per a l'ús diari.</para>
 	  </listitem>
@@ -27,7 +27,7 @@
   <para>Els fitxers es poden baixar directament des del lloc web <ulink url="https://omegat.org/download">https://omegat.org</ulink>.</para>
 
   <note>
-	<para>L'OmegaT 6.0.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</para>
+	<para>L'OmegaT 6.0.2 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</para>
 
 	<para>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</para>
 
@@ -59,7 +59,7 @@
 
       <para>En executar l'script haureu d'introduir la contrasenya de <filename>sudo</filename>.</para>
 
-      <para>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <filename>/opt/omegat/</filename>. Si no n'hi ha cap, instal·la el programa en la carpeta <filename>/opt/omegat/OmegaT_6.0.0</filename> i l'estableix com a versió per defecte (en la carpeta <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <filename>/opt/omegat/</filename>. Si no n'hi ha cap, instal·la el programa en la carpeta <filename>/opt/omegat/OmegaT_6.0.2</filename> i l'estableix com a versió per defecte (en la carpeta <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</para>
@@ -150,7 +150,7 @@
   <section id="build.omegat.from.source">
 	<title id="build.omegat.from.source.title">Compilació de l'OmegaT</title>
 
-	<para>Podeu baixar el codi font de la versió actual directament des de la <ulink url="https://omegat.org/download">pàgina de baixada</ulink> de l'OmegaT, o bé clonar-lo des dels dipòsits de <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> o <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
+	<para>Podeu baixar el codi font de la versió actual directament des de la <ulink url="https://omegat.org/download">pàgina de baixada</ulink> de l'OmegaT, o bé clonar-lo des dels repositoris de <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> o <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
 	<para>Una vegada baixat el codi, obriu un terminal en la carpeta amb el codi font (<filename>omegat-code/</filename> si l'heu clonat des de Sourceforge, o <filename>/omegat</filename> si l'heu clonat des de GitHub) i escriviu l'ordre següent:</para>
 
 	<programlisting>./gradlew installDist</programlisting>

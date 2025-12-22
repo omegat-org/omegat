@@ -213,7 +213,21 @@
           <para>Si un element del glossari té diverses definicions, es mostraran en la mateixa línia.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Ordena per longitud del terme d'origen</option></term>
+		  <listitem>
+			  <para>Si uns elements del glossari són similars en un text del terme d'origen i un conté el text d'un altre terme, s'ordena per la longitud del text d'origen.</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Ordena per longitud del terme d'origen</option></term>
+			<listitem>
+				<para>Si un element del glossari té diverses definicions, s'ordenen per la longitud del text de la definició.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
@@ -269,7 +283,7 @@
         <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Reinicialitza la finestra principal</option></term>
 
         <listitem>
-          <para>Reinicialitza la disposició de les subfinestres de l'OmegaT a la disposició per defecte.</para>
+          <para>Reinicialitza la disposició de les subfinestres de l'OmegaT.</para>
 
 		  <para>Utilitzeu aquesta característica quan no pugueu reinicialitzar la disposició desitjada després de desacoblar, moure o amagar una o més subfinestres. Podeu utilitzar-la quan les subfinestres no apareguin com esperàveu després d'una actualització de l'OmegaT.</para>
         </listitem>
@@ -387,7 +401,7 @@
 		  <term id="segmentation.rules.exceptionrule.title"><option>Excepcions</option></term>
 
 		  <listitem>
-			<para>Per a definir una regla d'excepció, deixeu la casella de selecció <guilabel>Divisió/excepció</guilabel> sense marcar.</para>
+			<para>Per a definir una regla d'excepció, deixeu la casella <guilabel>Divisió</guilabel> sense marcar.</para>
 
 			<para>Especifiqueu combinacions de text que siguin excepcions a una regla de divisió. Per exemple, <emphasis>Mrs. Dalloway</emphasis> no s'ha de dividir en dos segments tot i que una regla de divisió per a <emphasis>punt seguit d'un espai</emphasis> generalment defineix una frase.</para>
 			
@@ -398,7 +412,7 @@
 		  <term id="segmentation.rules.breakrule.title"><option>Divisions</option></term>
 
 		  <listitem>
-			<para>Per a definir una regla de divisió, marqueu la casella <guilabel>Divisió/excepció</guilabel>.</para>
+			<para>Per a definir una regla de divisió, marqueu la casella <guilabel>Divisió</guilabel>.</para>
 
 			<para>Separa el text d'origen en segments. Per exemple, un <emphasis>punt seguit d'un espai</emphasis> generalment defineix un final de frase en anglès.</para>
 		  </listitem>
@@ -590,7 +604,7 @@
 		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>Insereix el text d'origen</option></term>
 
 		<listitem>
-		  <para>Utilitzeu aquesta opció temporalment per a parts de la traducció que no requereixin gaire transformació.</para>
+		  <para>Utilitzeu aquesta opció per a parts de la traducció que no requereixin gaire transformació.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -714,7 +728,7 @@
 	  </varlistentry>
 
       <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
-		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Desa la font de la traducció</option></term>
+		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Desa l'origen de la traducció</option></term>
 
 		<listitem>
           <para>Quan s'habilita la traducció automàtica, l'OmegaT registra el nom del motor utilitzat per a traduir un segment determinat.</para>
@@ -834,7 +848,7 @@
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
-		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Credencials dels dipòsits</option></term>
+		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Credencials dels repositoris</option></term>
 		<listitem>
 		  <para>Llista de projectes per als quals s'han desat detalls d'inici de sessió en l'OmegaT. Suprimiu un projecte d'aquesta llista si voleu que l'OmegaT us demani les credencials la pròxima vegada que hi accediu.</para>
 		</listitem>

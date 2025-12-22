@@ -66,12 +66,12 @@
 		</listitem>
 
 		<listitem>
-		  <para>Si la carpeta és un dipòsit buit i el fitxer <filename>omegat.project</filename> conté informació d'un dipòsit remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
+		  <para>Si la carpeta és un repositori buit i el fitxer <filename>omegat.project</filename> conté informació d'un repositori remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
 		  
 		  <programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/DIPÒSIT/DEL/PROJECTE/REMOT&quot;&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/REPOSITORI/DEL/PROJECTE/REMOT&quot;&gt;
             &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
@@ -289,7 +289,7 @@
       </listitem>
 	  
       <listitem>
-        <para>Extreu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
+        <para>Extraieu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
       </listitem>
     </orderedlist>
 
@@ -378,9 +378,11 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
-          <para>Aquest fitxer conté les regles de segmentació específiques del projecte.</para>
+          <para>Aquest fitxer conté les regles de segmentació específiques del projecte en el format <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>.<note><para>Si es detecta un fitxer <filename>segmentation.conf</filename> existent d'una versió anterior, l'OmegaT el converteix automàticament.</para>
+			</note>
+		  </para>
         </listitem>
       </varlistentry>
 

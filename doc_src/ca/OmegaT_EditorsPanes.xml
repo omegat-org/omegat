@@ -8,8 +8,8 @@
 
 	<para>La primera vegada que inicieu l'OmegaT, la finestra principal mostra la disposició per defecte següent:</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
+	<figure id="panes.default.omegat.layout">
+      <title id="panes.default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -784,9 +784,9 @@ Folder = <token>Dossier</token></programlisting>
 
 	<example id="panes.statusbar.messages">
       <title id="panes.statusbar.messages.title">Exemples de missatges de la barra d'estat</title>
-	  <para><literal>Sincronització de dipòsits</literal></para>
+	  <para><literal>Sincronització de repositoris</literal></para>
 
-	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el dipòsit remot.</para>
+	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el repositori remot.</para>
 
 	  <para><literal>S'està saltant al darrer segment editat...</literal></para>
 

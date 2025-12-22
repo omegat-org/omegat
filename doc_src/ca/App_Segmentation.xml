@@ -101,28 +101,28 @@
 		</thead>
 		<tbody>
 		  <row>
-			<entry>Regla d'excepció, casella sense marcar, més amunt en la llista</entry>
+			<entry>Regla d'excepció, casella <guilabel>Divisió</guilabel> sense marcar, més amunt en la llista</entry>
 			<entry>No segmentar després de Sr.</entry>
 			<entry align="center">Sr\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Sr seguit d'un punt i un espai en blanc.</entry>
 		  </row>
 		  <row>
-			<entry>Regla d'excepció, casella sense marcar, més amunt en la llista</entry>
+			<entry>Regla d'excepció, casella <guilabel>Divisió</guilabel> sense marcar, més amunt en la llista</entry>
 			<entry>Cel·les de l'Excel amb salts de línia que no representen segments</entry>
 			<entry align="center">\n</entry>
 			<entry align="center">.</entry>
 			<entry>Salt de línia, seguit de qualsevol caràcter.</entry>
 		  </row>
 		  <row>
-			<entry>Regla de separació, casella marcada, més avall en la llista</entry>
+			<entry>Regla de separació, casella <guilabel>Divisió</guilabel> marcada, més avall en la llista</entry>
 			<entry>Començar un segment nou després d'un punt seguir d'un espai, una tabulació o un altre espai en blanc</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Punt seguir d'un espai en blanc.</entry>
 		  </row>
 		  <row>
-			<entry>Regla de separació, casella marcada, més avall en la llista</entry>
+			<entry>Regla de separació, casella <guilabel>Divisió</guilabel> marcada, més avall en la llista</entry>
 			<entry>Iniciar un segment nou després de «。» (punt japonès)</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>

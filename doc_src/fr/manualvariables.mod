@@ -1,4 +1,4 @@
-<!ENTITY vernb "6.0.1">
+<!ENTITY vernb "6.0.2">
 <!ENTITY javaversionshort "Java 11">
 <!ENTITY javaversionlong "Java 11 Runtime Environment">
 <!ENTITY javaregex "https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">

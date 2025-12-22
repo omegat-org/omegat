@@ -1187,7 +1187,7 @@
 
           <tbody>
             <row id="shortcuts.open.contextual.menu">
-              <entry>ouvrir le menu contextuel</entry>
+              <entry>Ouvrir le menu contextuel</entry>
               <entry>editorContextMenu</entry>
               <entry>CONTEXT_MENU</entry>
               <entry>shift ESCAPE</entry>

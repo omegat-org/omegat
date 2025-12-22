@@ -21,7 +21,7 @@
 		<para>OmegaT conserve jusqu’à dix de ces fichiers.</para>
 
 		<note>
-		  <para>Le nom du fichier de sauvegarde suit le modèle <filename>projet_save.tmx.AAAAMMJJhhmm.bak</filename>, dans lequel <code>AAAA</code> correspond aux 4 chiffres de l’année, <code>MM</code> au mois, <code>JJ</code> au jour, et <code>hh</code> et <code>mm</code> indiquent les heures et les minutes.</para>
+		  <para>Le nom du fichier de sauvegarde suit le modèle <filename>project_save.tmx.AAAAMMJJhhmm.bak</filename>, dans lequel <code>AAAA</code> correspond aux 4 chiffres de l’année, <code>MM</code> au mois, <code>JJ</code> au jour, et <code>hh</code> et <code>mm</code> indiquent les heures et les minutes.</para>
 		</note>
 	  </listitem>
 	  
@@ -38,7 +38,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>OmegaT crée un fichier de sauvegarde nommé <filename>projet_save.tmx.bak</filename>.</para>
+		<para>OmegaT crée un fichier de sauvegarde nommé <filename>project_save.tmx.bak</filename>.</para>
 
 		<para>Ce fichier est une copie de <filename>project_save.tmx</filename> <emphasis>avant</emphasis> sa modification.</para>
 	  </listitem>
@@ -69,7 +69,7 @@
       </listitem>
 
       <listitem>
-		<para>Renommez le fichier actuel <filename>projet_save.tmx</filename> (en <filename>projet_save.tmx.tmp</filename>, par exemple).</para>
+		<para>Renommez le fichier actuel <filename>project_save.tmx</filename> (en <filename>project_save.tmx.tmp</filename>, par exemple).</para>
       </listitem>
 
       <listitem>
@@ -145,7 +145,7 @@
       </listitem>
 
       <listitem>
-		<para>Renommez-le en <filename>projet_save.tmx</filename> si nécessaire.</para>
+		<para>Renommez-le en <filename>project_save.tmx</filename> si nécessaire.</para>
       </listitem>
 
       <listitem>

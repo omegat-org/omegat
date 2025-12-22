@@ -213,7 +213,24 @@
           <para>Si un élément de glossaire comporte plusieurs définitions, celles-ci seront affichées sur la même ligne.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort by source
+			  text term length</option></term>
+		  <listitem>
+			  <para>If some glossary items are similar in a source term text,
+				  and one contains another term text, sort by a length of source text.</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Sort by source
+				text term length</option></term>
+			<listitem>
+				<para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
@@ -387,7 +404,8 @@
 		  <term id="segmentation.rules.exceptionrule.title"><option>Exceptions</option></term>
 
 		  <listitem>
-			<para>Pour définir une règle d’exception, ne cochez pas la case <guilabel>Segmentation/Exception </guilabel>.</para>
+			<para>To define an exception rule, leave the <guilabel>Break
+			</guilabel>check box unchecked.</para>
 
 			<para>Indiquez les combinaisons de textes qui constituent des exceptions à une règle de segmentation. Par exemple, <emphasis>Mrs. Dalloway</emphasis> ne doit pas être divisé en deux segments, même si une règle de césure pour un <emphasis>point suivi d’une espace</emphasis> définit généralement une phrase.</para>
 			
@@ -398,7 +416,8 @@
 		  <term id="segmentation.rules.breakrule.title"><option>Segmentations</option></term>
 
 		  <listitem>
-			<para>Pour définir une règle de segmentation, cochez la case <guilabel>Segmentation</guilabel>.</para>
+			<para>To define a break rule, check the
+			<guilabel>Break</guilabel> box.</para>
 
 			<para>Sépare le texte source en segments. Par exemple, un <emphasis>point suivi d’une espace</emphasis> définit généralement une fin de phrase en anglais.</para>
 		  </listitem>
@@ -590,7 +609,8 @@
 		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>Insérer le texte source</option></term>
 
 		<listitem>
-		  <para>Utilisez cette option temporairement pour les parties de la traduction qui ne nécessitent pas beaucoup de transformation.</para>
+		  <para>Use this option for parts of the translation that do not require
+		  much transformation.</para>
 		</listitem>
 	  </varlistentry>
 

@@ -15,8 +15,17 @@
 
     <para>Sélectionnez les langues source et cible dans la liste déroulante ou saisissez-les manuellement.</para>
 
-	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
-	
+	<para>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</para>
+
+	<warning>
+	  <para>OmegaT does not check the validity of the language codes that you
+	  enter. Make sure that the two language codes are
+	  <emphasis>different</emphasis>, that they are appropriate for your use
+	  of OmegaT, and that all other locations requiring a language code
+	  match the codes you assign here.</para>
+	</warning>
+
 	<para>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</para>
 	
 	<itemizedlist>
@@ -29,18 +38,28 @@
 	  </listitem>
 
 	  <listitem>
-		<para>pour trouver des erreurs d’orthographe à partir des dictionnaires installés dans les préférences <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>.</para>
+		<para>find spelling mistakes using the dictionaries installed in the
+		<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> preferences,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>pour trouver des erreurs grammaticales et typographiques à partir des règles définies dans les préférences <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>, etc.</para>
+		<para>find grammatical and typographical mistakes using the rules set
+		in the <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>
+		preferences,</para>
 	  </listitem>
+
+	  <listitem>
+		<para>specify the languages used in the TMX files that are created by
+		the project (to be compliant, a TMX must use <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink> language
+		codes),</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>et ainsi de suite.</para>
 
 	<warning>
-	  <para>Veillez à saisir les codes de langue corrects et à vérifier que tous les autres emplacements nécessitant un tel code utilisent exactement les codes que vous saisissez ici. Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</para>
+	  <para>Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</para>
 	</warning>
 
 	  

@@ -166,16 +166,24 @@
 
 	<para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/> et sélectionnez un dossier vide ou créez-en un nouveau avec le nom de votre projet.</para>
 
+	<warning>
+	  <para>OmegaT needs to be able to modify the folder within which you create
+	  the project. If you want to install your project on a shared drive, do not
+	  install it at the top of the drive, but rather create a folder in which
+	  you will install the project.</para>
+	</warning>
+
     <para>Un projet OmegaT est simplement un ensemble de dossiers contenant toutes les ressources par défaut.</para>
 
     <para>La boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> s’ouvre une fois que vous avez nommé votre projet.</para>
 
 	<para>Dans cette boite de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
 
-	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
+	<para>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</para>
 
 	<warning>
-	  <para>Assurez-vous que les bonnes langues sont saisies et que tous les autres emplacements nécessitant un code de langue correspondent au code que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
+	  <para>OmegaT does not check the validity of the language codes that you enter. Make sure that the two language codes are <emphasis>different</emphasis>, that they are appropriate for your use of OmegaT, and that all other locations requiring a language code match the codes you assign here. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
 	</warning>
 	
     <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour revenir à cette boite de dialogue après avoir créé le projet.</para>

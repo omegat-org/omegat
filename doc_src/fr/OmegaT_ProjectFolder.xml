@@ -333,7 +333,7 @@
 	  <varlistentry id="project.folder.project.save.tmx.bak">
 		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
-		  <para>Ce fichier est une sauvegarde de <filename>projet_save.tmx</filename> et est automatiquement recréé chaque fois que <filename>projet_save.tmx</filename> a été modifié : soit après avoir utilisé <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, soit en tant que sauvegarde régulière toutes les 3 minutes par défaut. Voir le paramètre <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> pour en savoir plus.</para>
+		  <para>Ce fichier est une sauvegarde de <filename>project_save.tmx</filename> et est automatiquement recréé chaque fois que <filename>project_save.tmx</filename> a été modifié : soit après avoir utilisé <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, soit en tant que sauvegarde régulière toutes les 3 minutes par défaut. Voir le paramètre <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> pour en savoir plus.</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -378,9 +378,14 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
-          <para>Ce fichier contient les règles de segmentation spécifiques au projet.</para>
+          <para>This file contains the project-specific segmentation
+          rules in the <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink> format.
+			<note><para>If there is an existing <filename>segmentation.conf</filename>
+			file from earlier versions, OmegaT converts it automatically.</para>
+			</note>
+		  </para>
         </listitem>
       </varlistentry>
 

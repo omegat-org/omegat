@@ -8,8 +8,8 @@
 
 	<para>Lorsque vous lancez OmegaT pour la première fois, la fenêtre principale affiche par défaut la présentation suivante :</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
+	<figure id="panes.default.omegat.layout">
+      <title id="panes.default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>

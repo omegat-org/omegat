@@ -101,28 +101,32 @@
 		</thead>
 		<tbody>
 		  <row>
-			<entry>Règle d’exception, case non cochée, plus haut dans la liste</entry>
+			<entry>Exception rule, <guilabel>Break</guilabel> box unchecked,
+			higher in the list</entry>
 			<entry>Ne pas segmenter après Ms.</entry>
 			<entry align="center">M\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Ms, suivi d’un point, suivi d’un caractère d’espacement.</entry>
 		  </row>
 		  <row>
-			<entry>Règle d’exception, case non cochée, plus haut dans la liste</entry>
+			<entry>Exception rule, <guilabel>Break</guilabel> box unchecked,
+			higher in the list</entry>
 			<entry>Cellules Excel avec des sauts de ligne qui ne représentent pas des segments.</entry>
 			<entry align="center">\n</entry>
 			<entry align="center">.</entry>
 			<entry>Saut de ligne, suivi de n’importe quoi.</entry>
 		  </row>
 		  <row>
-			<entry>Règle de segmentation, case cochée, plus bas sur la liste</entry>
+			<entry>Break rule, <guilabel>Break</guilabel> box checked, lower in
+			the list</entry>
 			<entry>Commencer un nouveau segment après un point suivi d’une espace, une tabulation, ou autre caractère d’espacement.</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Un point, suivi d’un caractère d’espacement.</entry>
 		  </row>
 		  <row>
-			<entry>Règle de segmentation, case cochée, plus bas sur la liste</entry>
+			<entry>Break rule, <guilabel>Break</guilabel> box checked, lower in
+			the list</entry>
 			<entry>Commencer un nouveau segment après « 。» (point japonais).</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>

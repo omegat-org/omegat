@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Gebruikershandleiding</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -232,8 +232,14 @@
                      </div>
                   </div>
                </div>
-               <p>Selecteer de bron- en doeltalen  uit de keuzelijst, of voer ze handmatig in.</p>
-               <p>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code, die zich conformeert aan <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> (inclusief de drie-letter taalcodes), in het toepasselijk veld invoeren.</p>
+               <p>Selecteer de bron- en doeltalen uit de keuzelijst, of voer ze handmatig in.</p>
+               <p>OmegaT verschaft een handige lijst met verkorte twee-letter taalcodes, maar u mag elke code in het toepasselijke veld invoeren.</p>
+               <div class="warning">
+                  <h3 class="title">Waarschuwing</h3>
+                  <p>OmegaT controleert niet de geldigheid van de taalcodes die u invoert. Zorg ervoor dat de twee taalcodes <span class="emphasis">
+                        <em>verschillend</em>
+                     </span> zijn, dat ze toepasselijk zijn voor uw gebruik van OmegaT en dat alle andere locaties, die een taalcode vereisen, overeenkomen met de code die u hier toewijst.</p>
+               </div>
                <p>Taalcodes worden ook op verschillende plaatsen binnen OmegaT gebruikt om:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -248,21 +254,24 @@
                            </a>,</p>
                      </li>
                      <li class="listitem">
-                        <p>spelfouten te zoeken in de woordenlijsten die zijn geïnstalleerd in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Spellingscontrole">
+                        <p>zoeken spelfouten met de woordenboeken die zijn geïnstalleerd in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Spellingscontrole">
                               <span class="guilabel">Spellingscontrole</span>
                            </a>,</p>
                      </li>
                      <li class="listitem">
-                        <p>grammaticale en typografische fouten te zoeken voor de regels die zijn ingesteld in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                        <p>zoeken grammatische en typografische fouten met de regels die zijn ingesteld in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
                               <span class="guilabel">LanguageTool</span>
                            </a>,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>specificeren de in de TMX-bestanden gebruikte talen die worden gemaakt door het project (om conform te zijn moet een TMX de taalcodes van <a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a> gebruiken),</p>
                      </li>
                   </ul>
                </div>
                <p>enzovoort.</p>
                <div class="warning">
                   <h3 class="title">Waarschuwing</h3>
-                  <p>Zorg ervoor dat u de juiste taalcodes invoert en dat alle andere locaties die een dergelijke code vereisen, exact overeenkomen met die welke u hier toewijst. Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</p>
+                  <p>Functies die afhankelijk zijn van een taal ofwel falen of produceren incorrecte resultaten als de twee taalcodes niet overeenkomen.</p>
                </div>
                <p>OmegaT selecteert automatisch de tokenizers die corresponderen met de bron- en de doeltaal, maar u kunt deze instellingen handmatig aanpassen. Tokenizers stellen OmegaT in staat om betere overeenkomsten te verschaffen.</p>
             </section>
@@ -326,7 +335,7 @@
                               <span class="guimenuitem">Globale segmentatieregels…</span>
                            </a>) zijn de globale regels.</p>
                         <p>Gebruik deze knop om lokale regels te maken, specifiek voor uw project. Selecteer het vak <code class="option">Segmentatieregels projectspecifiek maken</code>, en pas de segmentatieregels aan zoals u wilt.</p>
-                        <p>Het project zal de nieuwe set regels opslaan in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a>, geplaatst in zijn map <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Deze regels hebben voorrang boven de globale segmentatieregels.</p>
+                        <p>Het project zal de nieuwe set regels opslaan in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a>, geplaatst in zijn map <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Deze regels hebben voorrang boven de globale segmentatieregels.</p>
                         <p>Schakel deze optie uit of verwijder het bestand om lokale segmentatieregels uit te schakelen.</p>
                         <div class="warning">
                            <h3 class="title">Waarschuwing</h3>
@@ -367,7 +376,7 @@
                                     <p>U zult handmatig vet, cursief, of andere tekstdecoraties moeten toepassen in het vertaalde bestand.</p>
                                  </li>
                                  <li class="listitem">
-                                    <p>Wanneer u eenvoudigweg het aantal tags in een document van <span class="application">Microsoft Word</span> (2007 en later) wilt beperken, kunt u het script <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Tags verwijderen</a>.</p>
+                                    <p>Wanneer u eenvoudigweg het aantal tags in een document van <span class="application">Microsoft Word</span> (2007 en later) wilt beperken, kunt u het script <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Tags verwijderen</a> gebruiken.</p>
                                     <p>Bekijk het gedeelte <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripten">
                                           <span class="guilabel">Scripten</span>
                                        </a> voor details.</p>
@@ -384,7 +393,7 @@
                      <dd>
                         <div class="warning">
                            <h3 class="title">Waarschuwing</h3>
-                           <p>Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</p>
+                           <p>Opdrachten voor lokaal nabewerken zijn om veiligheidsredenen standaard uitgeschakeld.</p>
                            <p>Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
                                  <code class="option">Lokale opdrachten voor nabewerken toestaan</code>
                               </a> voor details.</p>
@@ -414,10 +423,10 @@
                                  <strong>D</strong>
                               </span>
                            </a> om de doelbestanden te maken en activeer de opdracht.</p>
-                        <p>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a>. Schakel lokale opdrachten voor nabewerking alleen in als u de bron van dat bestand vertrouwt.</p>
+                        <p>Hier gespecificeerde opdrachten zijn alleen beschikbaar in dit project. Zij worden opgeslagen in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a>. Schakel lokale opdrachten voor nabewerken alleen in als u de bron van dat bestand vertrouwt.</p>
                         <p>De lijst van variabelen voor sjablonen geeft u toegang tot de verschillende projectgegevens en systeemvariabelen.</p>
-                        <p>Bekijk de appendix <a class="link" href="chapter.appendices.html#post.processing.commands" title="Opdrachten voor nabewerking">Opdrachten voor nabewerking</a> voor details.</p>
-                        <p>U kunt ook globale opdrachten voor nabewerking definiëren die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.external.post-processing.command">
+                        <p>Bekijk de appendix <a class="link" href="chapter.appendices.html#post.processing.commands" title="Opdrachten voor nabewerken">Opdrachten voor nabewerken</a> voor details.</p>
+                        <p>U kunt ook globale opdrachten voor nabewerken definiëren, die beschikbaar zijn voor alle projecten die dezelfde map voor configuratie gebruiken. Dergelijke opdrachten worden gedefinieerd in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.external.post-processing.command">
                               <code class="option">Globale opdrachten voor nabewerken</code>
                            </a>.</p>
                         <div class="note">
@@ -449,7 +458,7 @@
                      </dt>
                      <dd>
                         <p>Dit venster stelt u in staat, bij het werken aan een teamproject, de routes te definiëren tussen de mappen op afstand en lokale mappen.</p>
-                        <p>Bekijk het gedeelte <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes in opslagplaats">Routes in opslagplaats</a> van de <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> how-to voor details.</p>
+                        <p>Bekijk het gedeelte <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes naar opslagplaats">Routes naar opslagplaats</a> van de <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> how-to voor details.</p>
                      </dd>
                      <dt id="dialogs.project.properties.external.searches">
                         <span class="term" id="dialogs.project.properties.external.searches.title">
@@ -661,7 +670,7 @@
                         <div class="note">
                            <h3 class="title">Opmerking</h3>
                            <p>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen.</p>
-                           <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="TM's delen">TM's delen</a> how-to voor details.</p>
+                           <p>Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="TM's delen">TM's delen</a> voor details.</p>
                         </div>
                         <p>De TMX-bestanden bevatten alleen de segmenten uit de bestanden die momenteel zijn opgeslagen in de map <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>.</p>
                         <p>Gebruik <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
@@ -690,7 +699,7 @@
                               </dt>
                               <dd>
                                  <p>Dit keuzevak laat u de indelingen kiezen waarin u wilt dat OmegaT de hierboven vermelde TMX-bestanden maakt.</p>
-                                 <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Vertaalgeheugens gebruiken">Vertaalgeheugens gebruiken</a> how-to voor details.</p>
+                                 <p>Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Vertaalgeheugens gebruiken">Vertaalgeheugens gebruiken</a> voor details.</p>
                                  <div class="variablelist">
                                     <dl class="variablelist">
                                        <dt>
@@ -699,7 +708,7 @@
                                           </span>
                                        </dt>
                                        <dd>
-                                          <p>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT in een vorm die alleen op de juiste wijze kan worden door een project van OmegaT.</p>
+                                          <p>Een TMX van “OmegaT” bevat de tags die zijn gemaakt door OmegaT, in een vorm die alleen op de juiste wijze kan worden gebruikt door een project van OmegaT.</p>
                                        </dd>
                                        <dt>
                                           <span class="term">
@@ -715,7 +724,7 @@
                                           </span>
                                        </dt>
                                        <dd>
-                                          <p>Een TMX “level 2” bevat tekstuele gegevens met tags die zijn ingekapseld in een vorm die compatibel is met andere programma's voor CAT.</p>
+                                          <p>Een TMX “niveau 2” bevat tekstuele gegevens met tags die zijn ingekapseld, in een vorm die compatibel is met andere programma's voor CAT.</p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -1324,7 +1333,7 @@
             <p>Voer de tekenreeks die u wilt invoegen om uw zoekterm te vervangen in in het veld <span class="guilabel">Vervangen door:</span> en klik op <span class="guibutton">Zoeken</span>, of druk op <span class="keycap">
                   <strong>Enter</strong>
                </span> als de cursor nog steeds in het veld staat.</p>
-            <p>Overeenkomsten  voor het zoeken worden weergegeven in vette blauwe tekens, en de aangepaste tekenreeksen worden weergegeven in oranje om het resultaat van het vervangen weer te geven.</p>
+            <p>Overeenkomsten voor het zoeken worden weergegeven in vette blauwe tekens, en de aangepaste tekenreeksen worden weergegeven in oranje om het resultaat van het vervangen weer te geven.</p>
             <div class="example" id="replace.with.allemand">
                <div class="example-title">Voorbeeld 19. Een term vervangen</div>
                <div class="example-contents">
@@ -1631,7 +1640,7 @@
                </a> voor details.</p>
             <div class="warning">
                <h3 class="title">Waarschuwing</h3>
-               <p>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Door dat te doen heeft het het toegevoegde voordeel van het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het  handmatig corrigeren een stuk soepeler maakt.</p>
+               <p>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Het toegevoegde voordeel, door het op die manier te doen, is het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het handmatig corrigeren een stuk soepeler maakt.</p>
             </div>
             <p>Uitlijnen is het proces van het maken van een tweetalig vertaalgeheugen vanuit een paar al vertaalde eentalige documenten. Uitlijnen van de inhoud van de bestanden is een proces met vier stappen:</p>
             <div class="orderedlist">
@@ -2123,7 +2132,7 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>U kunt dan op het nummer klikken om  het toegewezen script uit te voeren. U kunt het script ook uitvoeren vanuit het menu <a class="link" href="chapter.menus.html#menus.tools" title="Extra">
+                        <p>U kunt dan op het nummer klikken om het toegewezen script uit te voeren. U kunt het script ook uitvoeren vanuit het menu <a class="link" href="chapter.menus.html#menus.tools" title="Extra">
                               <span class="guimenu">Extra</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.tools.scripting">

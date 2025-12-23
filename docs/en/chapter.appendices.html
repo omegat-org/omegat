@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.1 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1317,7 +1317,8 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Exception rule, box unchecked, higher in the list</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Exception rule, <span class="guilabel">Break</span> box unchecked,
+			higher in the list</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Do not segment after Ms.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">Ms\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
@@ -1325,7 +1326,8 @@
 			whitespace.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Exception rule, box unchecked, higher in the list</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Exception rule, <span class="guilabel">Break</span> box unchecked,
+			higher in the list</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Excel cells with lines breaks that do not represent
 			segments</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
@@ -1333,7 +1335,8 @@
                               <td style="text-align: left; border-bottom: 1px solid ; ">Line break, followed by anything.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Break rule, box checked, lower in the list</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Break rule, <span class="guilabel">Break</span> box checked, lower in
+			the list</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Start a new segment after a period followed by a
 			space, tab, or other whitespace.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
@@ -1341,7 +1344,8 @@
                               <td style="text-align: left; border-bottom: 1px solid ; ">A period followed by a whitespace</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; ">Break rule, box checked, lower in the list</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">Break rule, <span class="guilabel">Break</span> box checked, lower in
+			the list</td>
                               <td style="text-align: left; border-right: 1px solid ; ">Start a new segment after “。” (Japanese period).</td>
                               <td style="text-align: center; border-right: 1px solid ; ">。</td>
                               <td style="text-align: center; border-right: 1px solid ; "> </td>
@@ -5738,15 +5742,25 @@
                         <p>See the <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Set up a team project">Set up a team project</a> how-to for details.</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.segmentation">
-                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</span>
+                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</span>
                      </dt>
                      <dd>
-                        <p>This parameter file contains customized segmentation
-		parameters. See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Global Segmentation Rules">
+                        <p>This parameter file contains customized segmentation parameters in
+		the <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX
+		2.0</a> format. See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Global Segmentation Rules">
                               <span class="guilabel">Global
 	Segmentation Rules</span>
                            </a> preferences for
-		details.</p>
+		details.
+		  </p>
+                        <div class="note">
+                           <h3 class="title">Note</h3>
+                           <p>If there is an existing <code class="filename">segmentation.conf</code>
+		  file from earlier versions, OmegaT converts it automatically.</p>
+                        </div>
+                        <p>
+		
+                        </p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.plugin">
                         <span class="term" id="configuration.folder.extra.contents.plugin.title">plugins/</span>

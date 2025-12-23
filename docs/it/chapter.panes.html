@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Pannelli</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.how.to.html" rel="prev" title="Guide all'uso..." />
+      <link href="chapter.menus.html" rel="next" title="Menu" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - User Manual</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Pannelli</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Indietro</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Avanti</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.panes">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Pannelli</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.default.layout">Disposizione predefinita</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.principles">Principi</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.editor">
+                        <span class="guilabel">Editor</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.fuzzy.matches">
+                        <span class="guilabel">Concordanze parziali (fuzzy)</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.glossary">
+                        <span class="guilabel">Glossari</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.dictionary">
+                        <span class="guilabel">Dizionari</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.machinetranslation">
+                        <span class="guilabel">Traduzioni automatiche</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.multipletranslations">
+                        <span class="guilabel">Traduzioni multiple</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.notes">
+                        <span class="guilabel">Blocco note</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.comments">
+                        <span class="guilabel">Commenti</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.segment.properties">
+                        <span class="guilabel">Proprietà segmento</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.statusbar">
+                        <span class="guilabel">Barra di stato</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="panes.default.layout">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Disposizione predefinita</h2>
+                  </div>
+               </div>
+            </div>
+            <p>La prima volta che si utilizza OmegaT, la finestra principale mostra la seguente disposizione predefinita:</p>
+            <div class="figure" id="panes.default.omegat.layout">
+               <div class="figure-title">Figura 1. Disposizione predefinita di OmegaT in macOS</div>
+               <div class="figure-contents">
+                  <div class="mediaobject">
+                     <img alt="Disposizione predefinita di OmegaT in macOS" src="images/defaultOmegaTLayout.png" />
+                  </div>
+               </div>
+            </div>
+            <br class="figure-break" />
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                           <span class="guilabel">Editor</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.notes" title="Blocco note">
+                           <span class="guilabel">Blocco note</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Concordanze parziali (fuzzy)">
+                           <span class="guilabel">Concordanze parziali (fuzzy)</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.glossary" title="Glossari">
+                           <span class="guilabel">Glossari</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.segment.properties" title="Proprietà segmento">
+                           <span class="guilabel">Proprietà segmento</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.comments" title="Commenti">
+                           <span class="guilabel">Commenti</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il pannello <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Traduzioni multiple">
+                           <span class="guilabel">Traduzioni multiple</span>
+                        </a>
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>I pannelli <a class="link" href="chapter.panes.html#panes.dictionary" title="Dizionari">
+                           <span class="guilabel">Dizionari</span>
+                        </a> e <a class="link" href="chapter.panes.html#panes.machinetranslation" title="Traduzioni automatiche">
+                           <span class="guilabel">Traduzioni automatiche</span>
+                        </a> sono agganciati</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra di stato">
+                           <span class="guilabel">Barra di stato</span>
+                        </a> (sulla destra), che contiene le informazioni sul progetto</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Usa le varie opzioni nel menu <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                  <span class="guimenu">Vista</span>
+               </a> e sposta i <a class="link" href="chapter.panes.html" title="Pannelli">pannelli</a> per ottenere la disposizione che si adatta meglio alle tue esigenze di lavoro.</p>
+            <div class="warning">
+               <h3 class="title">Avvertimento</h3>
+               <p>Usare <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                     <span class="guimenu">Vista</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                     <span class="guimenuitem">Ripristina la finestra di OmegaT</span>
+                  </a> se si verificano problemi durante la disposizione della finestra.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.principles">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Principi</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="panes.manipulation">
+                     <span class="term" id="panes.manipulation.title">Manipolazione</span>
+                  </dt>
+                  <dd>
+                     <p>La finestra principale di OmegaT è composta da vari pannelli, qui descritti, menu, descritti nel capitolo <a class="link" href="chapter.menus.html" title="Menu">Menu</a> e una barra di stato, descritta <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra di stato">sotto</a>. È possibile tenere premuto il nome di un pannello e trascinarlo in una nuova posizione, oppure sganciarlo come finestra separata.</p>
+                     <p>L'angolo superiore destro di ciascun pannello mostra icone diverse in base al tipo di pannello e il suo stato attuale:</p>
+                     <div class="table" id="table.pane.widgets">
+                        <div class="table-title">Tabella 1. Widget del pannello</div>
+                        <div class="table-contents">
+                           <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                              <colgroup>
+                                 <col />
+                                 <col />
+                              </colgroup>
+                              <tbody>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Settings.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">Elenca varia <span class="bold">
+                                          <strong>azioni</strong>
+                                       </span> aggiuntive disponibili nel pannello.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Minimize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Minimizza</strong>
+                                       </span> il pannello in una scheda nella parte inferiore della finestra.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Maximize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Massimizza</strong>
+                                       </span> il pannello</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Restore.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Ripristina</strong>
+                                       </span> una pannello che è stato massimizzato al suo stato precedente.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Undock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Sgancia</strong>
+                                       </span> il pannello dalla finestra principale.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Dock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td>
+                                       <span class="bold">
+                                          <strong>Riporta</strong>
+                                       </span> il pannello nella finestra principale.</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <br class="table-break" />
+                     <p>È possibile raggruppare i pannelli nella stessa area della finestra. Questa azione mostra una scheda col nome del pannello in cima al gruppo. I pannelli possono essere ridimensionati trascinando i loro separatori.</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>Usare <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                              <span class="guimenu">Vista</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                              <span class="guimenuitem">Ripristina la finestra di OmegaT</span>
+                           </a> per tornare alla disposizione predefinita nel caso si perda traccia delle modifiche apportate all'interfaccia utente e non si riescano più a vedere determinati pannelli.</p>
+                     </div>
+                  </dd>
+                  <dt id="panes.context.menus">
+                     <span class="term" id="panes.context.menus.title">Menu contestuali</span>
+                  </dt>
+                  <dd>
+                     <p>Alcuni pannelli possiedono un menu contestuale. È possibile richiamare questo menu utilizzando il metodo standard del proprio sistema operativo o mediante le scorciatoie definite in OmegaT:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>In Windows e Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>In macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="panes.drag.and.drop">
+                     <span class="term" id="panes.drag.and.drop.title">Trascinamento e rilascio</span>
+                  </dt>
+                  <dd>
+                     <p>I file possono essere trascinati e rilasciati in certi pannelli, ottenendo i seguenti risultati:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">Finestra dell'Editor</span>
+                           </dt>
+                           <dd>
+                              <p>Rilasciare qui un file di progetto OmegaT (<code class="filename">omegat.project</code>) o un intero progetto aprirà il progetto corrispondente dopo aver chiuso il progetto attualmente aperto, se presente.</p>
+                              <p>Rilasciare qui altri file li copierà nella cartella <code class="filename">source</code>. Questo vale anche per la finestra <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="File di partenza">
+                                    <span class="guilabel">File di partenza</span>
+                                 </a>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Pannello delle concordanze parziali</span>
+                           </dt>
+                           <dd>
+                              <p>Rilasciare qui file <code class="filename">.tmx</code> li copierà nella cartella <code class="filename">tm</code>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">Pannello dei glossari</span>
+                           </dt>
+                           <dd>
+                              <p>Rilasciare qui file con un'estensione di glossario riconosciuta (<code class="filename">.txt</code>, <code class="filename">.tab</code>, ecc.) li copierà nella cartella <code class="filename">glossary</code>.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="panes.notifications">
+                     <span class="term" id="panes.notifications.title">Notifiche</span>
+                  </dt>
+                  <dd>
+                     <p>Se un pannello è chiuso ma ha del contenuto da visualizzare, OmegaT può evidenziare temporaneamente la linguetta del pannello in arancione quando si passa al segmento.</p>
+                     <p>Per impostazione predefinita, le notifiche dei pannelli <span class="guilabel">Commenti</span> e <span class="guilabel">Note</span> sono attivate.</p>
+                     <p>Per attivare o disattivare le notifiche:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Entrare nel pannello.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Fare clic sul widget <span class="guilabel">Azione</span> che si trova in alto a destra.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Selezionare <span class="guilabel">Notifica quando un segmento ha...</span> (dove ... varia in base al pannello per cui si stanno attivando le notifiche.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Possono fornire notifiche i pannelli seguenti:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Commenti</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Dizionari</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Concordanze parziali (fuzzy)</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Glossari</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Traduzioni multiple</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Blocco note</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Proprietà segmento</p>
+                              <p>Il pannello <span class="guilabel">Proprietà segmento</span> consente di impostare le notifiche per ciascuno dei suoi elementi.</p>
+                              <p>Nella <span class="guilabel">Vista tabella</span>, fare clic col destro sull'elemento e selezionare <span class="guilabel">Notifica quando un segmento ha...</span> (dove ... varia in base alla notifica desiderata).</p>
+                              <p>Nella <span class="guilabel">Vista elenco</span>, fare clic col destro sul widget <span class="guilabel">Azione</span> all'estrema destra della riga della proprietà selezionata e selezionare <span class="guilabel">Notifica quando un segmento ha...</span> (dove ... varia in base alla notifica desiderata).</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.editor">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Editor</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo è luogo in cui scrivere e modificare le traduzioni.</p>
+            <p>Il testo è diviso in segmenti numerati. È possibile scorrere il documento e fare doppio clic su ogni singolo segmento per aprirlo e modificarlo.</p>
+            <div class="example" id="panes.editor.default.editor.writing.space">
+               <div class="example-title">Esempio 2. Area di scrittura predefinita dell'editor</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Hide Tags</span>
+|Nascondi i tag<span class="token">&lt;segmento 2148 ¶&gt;</span>
+
+— ¶ —————————————————————
+
+Se attivata, tutte le formattazioni nei segmenti di partenza vengono nascoste.</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>La prima riga, in grassetto e con sfondo verde, è il testo originale da tradurre.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La seconda riga è l'<span class="bold">
+                           <strong>area di traduzione</strong>
+                        </span>, che si trova tra il bordo sinistro e il marcatore del segmento sulla destra. L'<span class="bold">
+                           <strong>area di traduzione</strong>
+                        </span> è il luogo in cui si inserisce la traduzione.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Il marcatore di segmenti è <code class="literal">&lt;segmento 2148 ¶&gt;</code>.</p>
+                     <p>
+                        <code class="literal">2148</code> è il numero del segmento nel progetto e il simbolo <code class="literal">¶</code> indica che il segmento è il primo segmento in un paragrafo.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Per impostazione predefinita, il cursore viene bloccato all'interno dell'area di traduzione.</p>
+                     <p>Usare <span class="keycap">
+                           <strong>F2</strong>
+                        </span> per sbloccarlo e muoverlo liberamente avanti e indietro tra l'area di traduzione e altre parti del pannello.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La riga sotto l'area di traduzione è un segmento diverso.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Utilizzare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                           <span class="guimenu">Vai</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
+                           <span class="guimenuitem">Prossimo segmento non tradotto</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>U</strong>
+                           </span>
+                        </a> o gli altri comandi di navigazione per:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p>registrare il contenuto dell'area di traduzione all'interno della memoria di traduzione del progetto, e</p>
+                           </li>
+                           <li class="listitem">
+                              <p>passare al segmento successivo da tradurre.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Vedere il menu <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                           <span class="guimenu">Vai</span>
+                        </a> per i dettagli.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Modificare la vista dell'Editor in base alle proprie esigenze.</p>
+               <p>Le modifiche possono includere:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>cambiare il tipo di carattere, come descritto nella preferenza <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Tipo di carattere">
+                              <span class="guilabel">Tipo di carattere</span>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>mostrare o nascondere le delimitazioni dei paragrafi utilizzando <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                              <span class="guimenu">Vista</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.paragraph.delimitations">
+                              <span class="guimenuitem">Mostra le delimitazioni dei paragrafi</span>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>cambiare la delimitazione del formato del paragrafo, definito nella preferenza <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                              <code class="option">Formato delimitazione paragrafi</code>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>mostrare le informazioni di modifica dei segmenti utilizzando <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                              <span class="guimenu">Vista</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.modification.info">
+                              <span class="guisubmenu">Mostra informazioni sulla modifica</span>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>mostrare o nascondere i segmenti di partenza utilizzando <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                              <span class="guimenu">Vista</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.display.source.segments">
+                              <span class="guimenuitem">Mostra i segmenti di origine</span>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>evidenziare i segmenti &amp;tradotti utilizzando <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                              <span class="guimenu">Vista</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.translated.segments">
+                              <span class="guimenuitem">Evidenzia i segmenti tradotti</span>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>inserire automaticamente il testo di partenza nell'area di traduzione disattivando la preferenza <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.leave.the.segment.empty">
+                              <code class="option">Lascia il segmento vuoto</code>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>inserire la concordanza parziale migliore sopra la soglia definita nella preferenza <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                              <code class="option">Inserisci la concordanza parziale migliore</code>
+                           </a>;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>definire il testo da escludere dalla traduzione, abilitato nella preferenza <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                              <code class="option">Testo contrassegnato</code>
+                           </a>.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Vedere le preferenze <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="Editor">
+                     <span class="guilabel">Editor</span>
+                  </a> e il menu <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                     <span class="guimenu">Vista</span>
+                  </a> per i dettagli.</p>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Traduzioni vuote</span>
+                  </dt>
+                  <dd>
+                     <p>Se si lascia l'area di traduzione vuota, OmegaT considererà non tradotto il segmento  e lo manterrà nella lingua originale quando creerà i documenti di arrivo.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Traduzioni uguali agli originali</span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT è in grado di memorizzare traduzioni che risultano identiche al testo di partenza. Si tratta di una funzione che risulta particolarmente utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure sezioni che devono rimanere nella lingua originaria e non richiedono traduzione.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Trascinamento di testo</span>
+                  </dt>
+                  <dd>
+                     <p>È possibile trascinare del testo da qualsiasi punto all'interno della finestra principale e rilasciarlo all'interno dell'area di traduzione. Il testo trascinato dall'esterno dell'area di traduzione viene copiato, mentre quello trascinato dal suo interno viene spostato.</p>
+                  </dd>
+                  <dt id="panes.editor.overwriting">
+                     <span class="term" id="panes.editor.overwriting.title">Sovrascrittura</span>
+                  </dt>
+                  <dd>
+                     <p>Secondo le impostazioni predefinite, il testo digitato si inserisce dopo il cursore, seguendo la direzione di digitazione. Per sovrascrivere il testo esistente, usare i tasti seguenti:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>In Windows e Linux: <span class="keycap">
+                                    <strong>INS</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>In macOS: <span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>La modalità di scrittura (sovrascrittura - <span class="guilabel">SSC</span> o inserimento - <span class="guilabel">INS</span>) è indicata alla destra della <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra di stato">barra di stato</a>. Pigiare lo stesso tasto per alternare tra le modalità.</p>
+                  </dd>
+                  <dt id="panes.editor.cursor.lock">
+                     <span class="term" id="panes.editor.cursor.lock.title">Blocco cursore</span>
+                  </dt>
+                  <dd>
+                     <p>Secondo le impostazioni predefinite, il cursore viene bloccato all'interno dell'area di traduzione e non è possibile utilizzare i tasti freccia per spostarsi nel testo di partenza.</p>
+                     <p>Premendo il tasto <span class="keycap">
+                           <strong>F2</strong>
+                        </span> si sblocca il cursore e si rende possibile l'uso dei tasti  freccia nel testo di partenza o in qualsiasi altra parte dell'editor. Questa azione consente la selezione del testo tramite la tastiera.</p>
+                     <p>Lo stato del cursore (bloccato - <span class="guilabel">BLC</span> o sbloccato - <span class="guilabel">SBC</span>) è indicata alla destra della <a class="link" href="chapter.panes.html#panes.statusbar" title="Barra di stato">barra di stato</a>. Pigiare lo stesso tasto per alternare tra le modalità di blocco e sblocco del cursore.</p>
+                  </dd>
+                  <dt id="panes.editor.context.menu">
+                     <span class="term" id="panes.editor.context.menu.title">Menu contestuale</span>
+                  </dt>
+                  <dd>
+                     <p>Scorciatoia predefinita:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>In Windows e Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>In macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>È possibile richiamare il menu facendo clic col pulsante destro del mouse (<span class="keycap">
+                           <strong>C</strong>
+                        </span> + <span class="keycap">
+                           <strong>clic</strong>
+                        </span> in macOS).</p>
+                     <p>Il menu contestuale del pannello dell'Editor offre diverse funzioni, disponibili dal menu <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                           <span class="guimenu">Modifica</span>
+                        </a>, in particolare:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Gli elementi dei glossari corrispondenti, con commenti, se presenti, presentati come suggerimento. Usare <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                                    <span class="guimenu">Vista</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                                    <span class="guimenuitem">Evidenzia le concordanze del glossario</span>
+                                 </a> per attivare questa funzionalità.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Funzioni di <span class="guilabel">Taglia</span>, <span class="guilabel">Copia</span>, <span class="guilabel">Incolla</span>,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Vai al segmento</span> (per passare al segmento che si trova sotto il puntatore).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Cerca dizionari</span> (per ricercare il termine selezionato all'interno di un dizionario installato).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Aggiungi voce di glossario</span> (che è equivalente all'utilizzo di <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                                    <span class="guimenu">Modifica</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                                    <span class="guimenuitem">Crea voce di glossario...</span> 
+                                    <span class="keycap">
+                                       <strong>C</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>S</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>G</strong>
+                                    </span>
+	  
+                                 </a>).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Se è stato selezionato del testo e definite delle voci nelle preferenze <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Ricerche esterne globali">
+                           <span class="guilabel">Ricerche esterne globali</span>
+                        </a>, esse saranno mostrate in questo menu (in quanto ricerca locale).</p>
+                  </dd>
+                  <dt id="panes.editor.auto.completion.menu">
+                     <span class="term" id="panes.editor.auto.completion.menu.title">Menu di completamento automatico</span>
+                  </dt>
+                  <dd>
+                     <p>Scorciatoia predefinita:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>In Windows e Linux: <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Barra spaziatrice</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>In macOS: <span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Questo menu propone le opzioni di completamento automatico impostate nelle preferenze <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Completamento automatico">
+                           <span class="guilabel">Completamento automatico</span>
+                        </a>.</p>
+                  </dd>
+                  <dt id="panes.editor.navigation">
+                     <span class="term" id="panes.editor.navigation.title">Navigazione</span>
+                  </dt>
+                  <dd>
+                     <p>Usare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                           <span class="guimenu">Vai</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                           <span class="guimenuitem">Blocco note</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </a> accedere al pannello e aggiungere o modificare una nota.</p>
+                     <p>Usare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                           <span class="guimenu">Vai</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                           <span class="guimenuitem">Editor</span>
+      
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> per tornare all'Editor.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.fuzzy.matches">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Concordanze parziali (fuzzy)</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il pannello delle concordanze parziali mostra i segmenti contenuti nelle memorie di traduzione che risultano più simili al segmento in fase di traduzione.</p>
+            <p>Le concordanze vengono ricavate sia dalla memoria di traduzione interna del progetto, creata in tempo reale durante la traduzione, sia dalle memorie esterne importate da progetti precedenti o ricevute da fonti esterne. Vedere la guida all'uso <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Uso di memorie di traduzione">Uso di memorie di traduzione</a> per i dettagli.</p>
+            <p>Quando si accede a un segmento, la prima concordanza parziale, ossia quella con la percentuale di concordanza più alta, viene selezionata automaticamente. È possibile premere <span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>2, 3, 4, o 5</strong>
+               </span>, oppure utilizzare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.select.match">
+                  <span class="guisubmenu">Seleziona la concordanza</span>
+               </a>, per selezionare una concordanza diversa.</p>
+            <div class="example" id="the.first.match">
+               <div class="example-title">Esempio 3. Un segmento vuoto e le sue due prime concordanze</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <div class="informaltable" id="table.pane.matches">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                        <colgroup>
+                           <col />
+                           <col />
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td style="border-right: 1px solid ; ">
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Application Folder</span>
+|<span class="token">&lt;segmento 1879 ¶&gt;</span>
+
+— ¶ —————————————————————
+</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                              <td>
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">1. <span class="token">Top</span> Folder
+Cartella in alto
+&lt;50/50/66% Segmenti orfani (+1 altro)&gt;</pre>
+
+                                                <pre class="programlisting">2. Configuration Folder
+Cartella di configurazione
+&lt;50/50/66% &gt;</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>La concordanza parziale selezionata è evidenziata in <span class="bold">
+                  <strong>grassetto</strong>
+               </span>. Le parti mancanti dal segmento in fase di traduzione sono mostrate in <span class="bold">
+                  <strong>blu</strong>
+               </span>, mentre le parti adiacenti in <span class="bold">
+                  <strong>verde</strong>
+               </span> (se la parte adiacente è uno spazio, come mostrato sopra, non viene colorata).</p>
+            <p>La concordanza riporta anche tre indicatori di percentuale.</p>
+            <p>Questi hanno il seguente significato, nell'ordine:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>La percentuale calcolata <span class="bold">
+                           <strong>senza l'analisi della radice</strong>
+                        </span> basata sul tokenizer della lingua di partenza, e <span class="bold">
+                           <strong>ignorando i tag e i numeri</strong>
+                        </span> (generalmente la più alta).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La percentuale calcolata <span class="bold">
+                           <strong>senza l'analisi della radice</strong>
+                        </span>, sempre <span class="bold">
+                           <strong>ignorando i tag e i numeri</strong>
+                        </span> (in genere leggermente più bassa).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>La percentuale calcolata sull'<span class="bold">
+                           <strong>intero testo, inclusi i tag e i numeri</strong>
+                        </span> (in genere la più bassa).</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>Se il segmento contiene solo numeri o simboli, questa percentuale risulterà la più alta.</p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p>È possibile modificare la visualizzazione o l'ordine delle concordanze. Vedere le preferenze <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches" title="Concordanze TM">
+                  <code class="option">Concordanze TM</code>
+               </a> per i dettagli.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.match.or.selection">
+                  <span class="guimenuitem">Sostituisci con concordanza o selezione</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>R</strong>
+                  </span>
+	  
+               </a> per sostituire il testo da tradurre con la concordanza, oppure <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.insert.match.or.selection">
+                  <span class="guimenuitem">Inserisci concordanza o selezione</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>I</strong>
+                  </span>
+               </a> per inserirla alla posizione del cursore.</p>
+         </section>
+         <section class="section" id="panes.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Glossari</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo pannello mostra i termini contenuti nei propri file di glossario che corrispondono ai termini presenti nel segmento attivo. I file dei glossari sono memorizzati nella cartella <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> del progetto.</p>
+            <p>Il termine di partenza viene visualizzato prima del segno &quot; = &quot;, mentre quello di arrivo dopo. Se la voce contiene dei commenti, questi sono numerati e mostrati sotto i termini, in righe separate. I termini rinvenuti nel glossario modificabile sono mostrati in grassetto, mentre quelli provenienti da altri glossari in testo semplice.</p>
+            <div class="example" id="glossary.matches">
+               <div class="example-title">Esempio 4. Concordanze del glossario</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">Project = <span class="token">Progetto</span>
+1. Progetto di traduzione
+
+Folder = <span class="token">Cartella</span>
+                  </pre>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>Il nome del file del glossario compare come suggerimento quando si passa sopra il mouse su un termine.</p>
+            <p>Il campo del commento di una voce può contenere collegamenti ipertestuali, che si possono avviare con un clic per ulteriori informazioni.</p>
+            <p>I collegamenti ai file locali (<code class="filename">file:///PERCORSO/nome_file</code>) si aprono nel programma associato. Gli indirizzi web (<code class="filename">https://...</code>) si aprono nel browser predefinito.</p>
+            <p>È possibile selezionare un termine nel pannello e fare clic col pulsante destro del mouse per inserirlo nella traduzione.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.view" title="Vista">
+                  <span class="guimenu">Vista</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                  <span class="guimenuitem">Evidenzia le concordanze del glossario</span>
+               </a> per sottolineare le concordanze del glossario.</p>
+            <p>È quindi possibile fare clic col pulsante destro del mouse sulla parola sottolineata nel segmento di partenza per aprire un menu che elenca le traduzioni disponibili nei glossari. Selezionarne una per inserirla all'interno del segmento, alla posizione attuale del cursore.</p>
+            <p>È possibile utilizzare le preferenze del glossario per regolare nel dettagli la loro visualizzazione. Vedere le preferenze <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossari">
+                  <span class="guilabel">Glossari</span>
+               </a> per i dettagli.</p>
+            <p>Le modifiche apportate a qualsiasi file di glossario sono immediatamente riconosciute da OmegaT e visualizzate nel pannello dei glossari.</p>
+            <p>OmegaT include un file di glossario scrivibile per progetto. Usare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                  <span class="guimenuitem">Crea voce di glossario...</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>G</strong>
+                  </span>
+	  
+               </a> per aggiungere termine a quel file.</p>
+            <p>Vedere l'appendice <a class="link" href="chapter.appendices.html#app.glossaries" title="Glossari">Glossari</a>per i dettagli.</p>
+         </section>
+         <section class="section" id="panes.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Dizionari</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo pannello mostra i termini contenuti nei propri file di dizionario che corrispondono ai termini presenti nel segmento attivo. I file dei dizionari sono memorizzati nella cartella <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="dictionary">dictionary</a> del progetto. Vedere le preferenze <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Dizionari">
+                  <span class="guilabel">Dizionari</span>
+               </a> per i dettagli.</p>
+         </section>
+         <section class="section" id="panes.machinetranslation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Traduzioni automatiche</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se è stato abilitato e configurato almeno un motore di traduzione automatica, questo pannello mostra i suggerimenti per il segmento attivo prodotti dai motori disponibilità. Se sono disponibili suggerimenti da più di un motore di traduzione,</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>il nome del motore compare dopo il testo tradotto,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>i risultati sono ordinati alfabeticamente in base al nome del motore e</p>
+                  </li>
+                  <li class="listitem">
+                     <p>viene evidenziata la traduzione attualmente selezionata.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt.title">
+                  <span class="guimenuitem">Sostituisci con la Traduzione automatica</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>M</strong>
+                  </span>
+	  
+               </a> per sostituire la traduzione del segmento attivo con quella del motore di traduzione selezionato.</p>
+            <p>Il nome del motore selezionato viene assegnato alla proprietà <em class="parameter">
+                  <code>Origine</code>
+               </em> del segmento attivo.</p>
+            <p>Se si verifica un errore di connessione o di autenticazione con un motore di traduzione automatica, la barra di stato, nella parte inferiore della finestra, mostrerà un messaggio di stato.</p>
+            <p>Assicurarsi di aver abilitato il servizio e inserito le credenziali corrette. Nel caso siano correttamente inserite, potrebbe essere necessario dover contattare il fornitore del servizio per ottenere assistenza. Analogamente, un errore tipo <code class="literal">Impossibile analizzare la risposta del servizio di traduzione</code> suggerisce che potrebbe esserci un problema di comunicazione tra il proprio sistema e il server del fornitore.</p>
+            <p>Vedere le preferenze <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Traduzione automatica">
+                  <span class="guilabel">Traduzione automatica</span>
+               </a> per i dettagli.</p>
+         </section>
+         <section class="section" id="panes.multipletranslations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Traduzioni multiple</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un segmento di partenza che compare in più punti all'interno del progetto potrebbe necessitare traduzioni diverse a seconda del contesto.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                  <span class="guimenuitem">Crea traduzione alternativa</span>
+               </a> per registrare una traduzione alternativa, se la traduzione attuale del segmento non è adatta. La traduzione inserita verrà quindi considerata come traduzione alternativa del segmento di partenza.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.edit" title="Modifica">
+                  <span class="guimenu">Modifica</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.use.as.default.translation">
+                  <span class="guimenuitem">Usa come traduzione predefinita</span>
+               </a> per definire una delle alternative (per esempio la più comune o la più probabile) come traduzione predefinita.</p>
+         </section>
+         <section class="section" id="panes.notes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Blocco note</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo pannello è uno spazio <span class="emphasis">
+                  <em>modificabile</em>
+               </span> in cui è possibile aggiungere delle note al segmento attivo.</p>
+            <p>Le note sono utili, per esempio, per ritornare sulla traduzione in un secondo momento, verificare la correttezza delle traduzioni alternative o, in progetti condivisi, chiedere un parere ai colleghi.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                  <span class="guimenu">Vai</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.next.note">
+                  <span class="guimenuitem">Nota successiva</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> e <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                  <span class="guimenu">Vai</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.previous.note">
+                  <span class="guimenuitem">Nota precedente</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>
+               </a> per navigare tra le note.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                  <span class="guimenu">Vai</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                  <span class="guimenuitem">Blocco note</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> accedere al pannello e aggiungere o modificare una nota.</p>
+            <p>Usare <a class="link" href="chapter.menus.html#menus.goto" title="Vai">
+                  <span class="guimenu">Vai</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                  <span class="guimenuitem">Editor</span>
+      
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> per tornare all'Editor.</p>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Le note vengono memorizzate nella memoria di traduzione del progetto. <span class="emphasis">
+                     <em>Non</em>
+                  </span> vengono memorizzate nei file tradotti.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.comments">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Commenti</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alcuni formati di file, come il formato PO, possono contenere commenti, rivolti ai traduttori, relativi al contesto della traduzione. Questi commenti vengono visualizzati qui.</p>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Il pannello <span class="guilabel">Commenti</span> 
+                  <span class="emphasis">
+                     <em>non</em>
+                  </span> è modificabile. Mostra solo le informazioni contenute nel file.</p>
+               <p>Usare il pannello <a class="link" href="chapter.panes.html#panes.notes" title="Blocco note">
+                     <span class="guilabel">Blocco note</span>
+                  </a> per aggiungere i propri commenti riguardo una traduzione.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.segment.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Proprietà segmento</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tutti i segmenti possiedono delle proprietà. Esse sono visualizzate questo pannello.</p>
+            <p>Le proprietà comuni includono:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">È una ripetizione</span>
+                  </dt>
+                  <dd>
+                     <p>Indica che un segmento è una ripetizione e specifica se si tratta della PRIMA istanza.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">File</span>
+                  </dt>
+                  <dd>
+                     <p>Indica in quale file è contenuto il segmento.</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">Nota</h3>
+               <p>Il pannello delle proprietà <span class="emphasis">
+                     <em>non</em>
+                  </span> è modificabile. Mostra solo le informazioni relative al segmento.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.statusbar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Barra di stato</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La parte inferiore della finestra ospita la barra di stato.</p>
+            <p>La sua parte sinistra mostra informazioni sulle azioni nel progetto o messaggi di errore.</p>
+            <div class="example" id="panes.statusbar.messages">
+               <div class="example-title">Esempio 5. Esempi di messaggi nella barra di stato</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">Sincronizzazione dei depositi</code>
+                  </p>
+                  <p>→ OmegaT sta aprendo un progetto in collaborazione e sincronizza col deposito remoto.</p>
+                  <p>
+                     <code class="literal">Sto passando all'ultimo segmento modificato...</code>
+                  </p>
+                  <p>→ OmegaT apre l'ultimo segmento modificato nell'ultima sessione.</p>
+                  <p>
+                     <code class="literal">Progetto salvato automaticamente alle 10:48</code>
+                  </p>
+                  <p>→ OmegaT ha appena salvato il progetto.</p>
+                  <p>
+                     <code class="literal">I file tradotti sono stati creati</code>
+                  </p>
+                  <p>→ I file che sono stati creati dall'utente.</p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>La sua parte destra indica se il cursore è bloccato all'interno del segmento (vedere l'impostazione <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">Blocco cursore</a>) e se è in modalità di sovrascrittura (vedere l'impostazione <a class="link" href="chapter.panes.html#panes.editor.overwriting">Sovrascrittura</a>). Mostra anche informazioni sull'avanzamento della traduzione.</p>
+            <p>Fare clic sulle cifre per alternare la visualizzazione tra numeri o percentuali.</p>
+            <div class="example" id="panes.statusbar.widgets">
+               <div class="example-title">Esempio 6. Informazioni sulla barra di stato</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">BLC | SSC <span class="token">257/271 (12292/154896, 177692)</span>
+                        <span class="token"> 35/0 </span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Stato del cursore</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">BLC</code> indica che il cursore è bloccato all'interno del segmento.</p>
+                           <p>
+                              <code class="literal">SSC</code> indica che il cursore sovrascrive il testo esistente.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel file</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>257</strong>
+                              </span> = numero di segmenti tradotti / <span class="bold">
+                                 <strong>271</strong>
+                              </span> = numero totale di segmenti</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel progetto</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>12292</strong>
+                              </span> = numero di segmenti univoci tradotti / <span class="bold">
+                                 <strong>154896</strong>
+                              </span> = numero totale di segmenti univoci, <span class="bold">
+                                 <strong>(177692)</strong>
+                              </span> = numero totale di segmenti</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel segmento</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = numero di caratteri nell'originale / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = numero di caratteri nell'area di arrivo fino a ora</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="example" id="panes.statusbar.widgets.percentage">
+               <div class="example-title">Esempio 7. Informazioni sulla barra di stato, modalità percentuale</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">SBC | INS <span class="token">94.8% (14 restanti) / 7.9% (142,604 restanti), 177,692</span> 
+                        <span class="token">35/0</span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Stato del cursore</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">SBC</code> indica che il cursore non è bloccato all'interno del segmento e si può navigare nella finestra dell'editor con i comandi di navigazione standard.</p>
+                           <p>
+                              <code class="literal">INS</code> indica che il cursore inserisce il testo.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel file</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>94.8%</strong>
+                              </span> = % di segmenti tradotti / <span class="bold">
+                                 <strong>14</strong>
+                              </span> = numero di segmenti non tradotti</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel progetto</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>7.9%</strong>
+                              </span> = % di segmenti tradotti / <span class="bold">
+                                 <strong>142,604</strong>
+                              </span> = numero di segmenti non tradotti, <span class="bold">
+                                 <strong>(177,692)</strong>
+                              </span> = numero totale di segmenti</p>
+                        </dd>
+                        <dt>
+                           <span class="term">Nel segmento</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = numero di caratteri nell'originale / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = numero di caratteri nell'area di arrivo fino a ora</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Indietro</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Avanti</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">Guide all'uso... </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Partenza</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Menu</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

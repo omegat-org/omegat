@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -236,7 +236,13 @@
                   </div>
                </div>
                <p>ドロップダウンの一覧から原文言語と訳文言語を選択するか、手動で入力します。</p>
-               <p>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</p>
+               <p>OmegaTは便利な2文字の言語コードリストを提供しますが、適切なフィールドに任意のコードを入力できます。</p>
+               <div class="warning">
+                  <h3 class="title">警告</h3>
+                  <p>OmegaTは入力した言語コードの有効性をチェックしません。2つの言語コードが<span class="emphasis">
+                        <em>異なる</em>
+                     </span>こと、OmegaTの使用に適していること、そしてそのような言語コードを必要とする他のすべての場所が、ここで割り当てたものと一致していることを確認してください。</p>
+               </div>
                <p>言語コードは、 OmegaTの様々な箇所で使用されています：</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -264,12 +270,15 @@
                               <span class="guilabel">LanguageTool</span>
                            </a> 設定などで規則集を選択して、文法エラーや綴りの間違いをチェックしたり、</p>
                      </li>
+                     <li class="listitem">
+                        <p>プロジェクトが作成するTMXファイルで使用される言語を指定すること(標準準拠のためには、TMXには<a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>言語コードを使用しなければなりません)。</p>
+                     </li>
                   </ul>
                </div>
                <p>などなどです。</p>
                <div class="warning">
                   <h3 class="title">警告</h3>
-                  <p>正しい言語コードを入力し、そのようなコードを必要とする他のすべての場所が、ここで割り当てたものと正確に一致することを確認してください。言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</p>
+                  <p>言語に依存する関数は、言語コード間に不一致がある場合、失敗するか、誤った結果を生成します。</p>
                </div>
                <p>OmegaTは原文言語と訳文言語に対応するトークナイザーを自動的に選択しますが、設定を手動で変更することもできます。トークナイザーは、OmegaTが検索結果を良くするのに重要な働きをしています。</p>
             </section>
@@ -335,7 +344,7 @@
                               <span class="guilabel">ユーザーレベルの分節化規則</span>
                            </a>設定を開いたときに表示される分節化規則は、ユーザーレベルです。</p>
                         <p>プロジェクト専用のルールを作成するには、このボタンを使用します。<code class="option">［分節化規則をプロジェクト専用にする］</code>チェックボックスにチェックを入れてから、分節化規則を必要な状態に変更してください。</p>
-                        <p>新しい規則集は、プロジェクトと共に<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>フォルダーの<a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a>ファイルに保存されます。またユーザーレベルの分節化規則集には干渉しません。</p>
+                        <p>新しい規則集は、プロジェクトと共に<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>フォルダーの<a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a>ファイルに保存されます。またユーザーレベルの分節化規則集には干渉しません。</p>
                         <p>プロジェクト専用の分節化規則を削除したい場合は、この設定オプションを無効にするか、このファイルを削除してください。</p>
                         <div class="warning">
                            <h3 class="title">警告</h3>
@@ -1851,7 +1860,7 @@
                         <span class="term">パターン...</span>
                      </dt>
                      <dd>
-                        <p>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<code class="literal">\d+</code>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<code class="literal"></code>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</p>
+                        <p>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<code class="literal">\d+</code>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<code class="literal">|</code>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</p>
                      </dd>
                   </dl>
                </div>
@@ -1899,7 +1908,7 @@
                      </div>
                   </div>
                </div>
-               <p>通常の場合、最初の自動整合プロセスの後に手動調整が必要です。分節を上下に移動して他方の言語の正しい分節と対応関係を整合する作業と、分節を分割または結合する作業を行なっていきます。整合ツールでは、分節の内容を編集することもできます。これは、分節のスペルミスなどのエラーに気付いた場合に便利です。</p>
+               <p>通常の場合、最初の自動整合プロセスの後に手動調整が必要です。分節を上下に移動して他方の言語の正しい分節と対応関係を整合する作業と、分節を分割または結合する作業を行なっていきます。整合ツールでは、分節の内容を編集することもできます。これは、分節の綴りい間違いなどのエラーに気付いた場合に便利です。</p>
                <p>整合に必要な操作は<span class="guimenu">編集</span>メニューから実行できるほか、対応するショートカットキーを押すことでも利用できます。最も一般的な操作は、メインウィンドウの右側にあるボタンからもアクセスできます。</p>
                <div class="note">
                   <h3 class="title">注記</h3>

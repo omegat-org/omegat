@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Gebruikershandleiding</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -161,7 +161,12 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters">Routes in opslagplaats</a>
+                           <a href="chapter.how.to.html#how.to.manage.team.project">Een teamproject beheren</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters">Routes naar opslagplaats</a>
                         </span>
                      </li>
                      <li>
@@ -277,8 +282,8 @@
                      </div>
                   </div>
                </div>
-               <p>OmegaT maakt back-ups van uw projectinstellingen om er voor te zorgen dat het ze bij problemen weer kan terughalen. Bekijk het gedeelte <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a> voor details.</p>
-               <p>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> dat is geplaats in de map <a class="link" href="chapter.project.folder.html#project.folder.omegat">omegat</a> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</p>
+               <p>OmegaT maakt back-ups van uw projectinstellingen om ervoor te zorgen dat het ze, bij problemen, weer kan terughalen. Bekijk het gedeelte <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a> voor details.</p>
+               <p>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>, dat is geplaatst in de map <a class="link" href="chapter.project.folder.html#project.folder.omegat">omegat</a> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -373,7 +378,7 @@
                <p>Deze actie zal uw vertaling herstellen naar zijn status op het punt dat de geselecteerde back-up werd gemaakt. U zou, indien nodig, deze bewerking kunnen herhalen om eerdere statussen terug te vinden. Overweeg het veilig opslaan van alle verschillende bestanden die u hernoemt, om ze eventueel later opnieuw te kunnen gebruiken. Onthoud ook om in de tussentijd niet de configuratie van het project aan te passen of TMX-bestanden toe te voegen, omdat dat de resultaten zou kunnen beïnvloeden.</p>
                <div class="note">
                   <h3 class="title">Opmerking</h3>
-                  <p>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan nadat u bent begonnen met uw vertaling zou er toe kunnen leiden dat sommige segmenten verdwijnen of dat er onverwacht nieuwe segmenten verschijnen.</p>
+                  <p>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan, nadat u bent begonnen met uw vertaling, zou er toe kunnen leiden dat sommige segmenten verdwijnen, of dat er onverwacht nieuwe segmenten verschijnen.</p>
                </div>
             </section>
             <section class="section" id="how.to.restore.your.data.project.locked">
@@ -389,10 +394,10 @@
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Identificeer de projectmap die OmegaT weigert te openen en open het in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <a class="link" href="chapter.project.folder.html" title="Projectmap">project</a>.</p>
+                        <p>Identificeer de projectmap die OmegaT weigert te openen en open die in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <a class="link" href="chapter.project.folder.html" title="Projectmap">project</a>.</p>
                      </li>
                      <li class="listitem">
-                        <p>In de map zou u een bestand <code class="filename">omegat.project</code>, als ook een bestand <code class="filename">omegat.project.bak</code>. Zorg ervoor dat de bestanden identiek zijn.</p>
+                        <p>In de map zou u een bestand <code class="filename">omegat.project</code>, als ook een bestand <code class="filename">omegat.project.bak</code>, moeten aantreffen. Zorg ervoor dat de bestanden identiek zijn.</p>
                      </li>
                      <li class="listitem">
                         <p>Hernoem het bestand <code class="filename">omegat.project</code> (bijvoorbeeld naar <code class="filename">omegat.project.vergrendeld</code>).</p>
@@ -716,7 +721,7 @@
                      </div>
                   </div>
                   <p>OmegaT kan TMX-standaard conforme geheugens lezen die zijn gemaakt door andere programma's.</p>
-                  <p>Sommige programma's produceren onder bepaalde omstandigheden ongeldige TMX-bestanden maken. U zult ze moeten repareren als u ze wilt gebruiken als geheugens voor verwijzingen, of OmegaT zal een fout rapporteren en het weigeren ze te laden. Reparaties zijn over het algemeen eenvoudig, en het foutbericht dat OmegaT  verschaft zal u helpen de fout te lokaliseren. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</p>
+                  <p>Sommige programma's produceren, onder bepaalde omstandigheden, ongeldige TMX-bestanden. U zult ze moeten repareren, als u ze wilt gebruiken als geheugens voor verwijzingen, of OmegaT zal een fout rapporteren en weigeren ze te laden. Reparaties zijn over het algemeen eenvoudig, en het foutbericht dat OmegaT verschaft zal u helpen de fout te lokaliseren. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</p>
                </section>
                <section class="section" id="how.to.use.tm.store.your.tm">
                   <div class="titlepage">
@@ -738,7 +743,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>In situaties waar u een TMX moet delen die alleen de tekst uit bepaalde speciefieke bestanden bevat en ander inhoud uitsluit, volg dan de procedure hieronder:</p>
+                  <p>In situaties waar u een TMX moet delen, die alleen de tekst uit bepaalde specifieke bestanden bevat, en andere inhoud uitsluit, volg dan de procedure hieronder:</p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
@@ -824,8 +829,8 @@
                               </span>+<span class="keycap">
                                  <strong>D</strong>
                               </span>
-                           </a>, hoeft de andere kant niets te doen om er voor te zorgen dat de TMX lkaal wordt herkend.</p>
-                        <p>Deze benadering werkt net zo goed voor het delen van woordenlijsten waar de beschrijfbare woordenlijst van het project (met een niet-standaard naam om overschrijven van het bestand te voorkomen) is geplaatst in een gedeelde map glossary. Bekijk de appendix <a class="link" href="chapter.appendices.html#app.glossaries" title="Woordenlijsten">Woordenlijsten</a> voor details.</p>
+                           </a>, de andere kant niets hoeven te doen, om ervoor te zorgen dat de TMX lokaal wordt herkend.</p>
+                        <p>Deze benadering werkt net zo goed voor het delen van woordenlijsten, waar de beschrijfbare woordenlijst van het project (met een niet-standaard naam om overschrijven van het bestand te voorkomen) is geplaatst in een gedeelde map glossary. Bekijk de appendix <a class="link" href="chapter.appendices.html#app.glossaries" title="Woordenlijsten">Woordenlijsten</a> voor details.</p>
                         <div class="note">
                            <h3 class="title">Opmerking</h3>
                            <p>Deze benadering werkt goed als het gat tussen updates van de TMX niet belangrijk is: een vertaler die bijvoorbeeld enkele keren per dag gegevens naar een recensent stuurt.</p>
@@ -836,14 +841,14 @@
                      </dt>
                      <dd>
                         <p>OmegaT gebruikt collaboratieve versiesystemen om gegevens te delen.</p>
-                        <p>Dergelijke systemen zijn vrij te gebruiken, te installeren en te beheren en worden breed gebruikt in de wereld van het ontwikkelen van computersoftware, war ze extreem robuust maakt.</p>
-                        <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> how-to voor details.</p>
+                        <p>Dergelijke systemen zijn vrij te gebruiken, te installeren en te beheren en worden breed gebruikt in de wereld van het ontwikkelen van computersoftware, wat ze extreem robuust maakt.</p>
+                        <p>Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> voor details.</p>
                      </dd>
                   </dl>
                </div>
                <div class="warning">
                   <h3 class="title">Waarschuwing</h3>
-                  <p>Wees voorzichtig als u een heel project in een systeem voor het delen van bestanden, zoals DropBox, OneCloud en soortgelijke, plaatst.</p>
+                  <p>Wees voorzichtig als u een heel project in een systeem voor het delen van bestanden, zoals DropBox, OneCloud en dergelijke, plaatst.</p>
                   <p>
                      <span class="emphasis">
                         <em>Dergelijke systemen zijn niet ontworpen om de interne wijzigingen in een bepaald bestand bij te houden.</em>
@@ -866,10 +871,10 @@
                   </a>. Standaard zijn deze overeenkomsten beperkt tot de bron- en doeltalen, gedefinieerd in het dialoogvenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projecteigenschappen">
                      <span class="guilabel">Projecteigenschappen</span>
                   </a>.</p>
-               <p>U kunt overeenkomsten toevoegen in talen die niet de doeltaal zijn. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+               <p>U kunt overeenkomsten toevoegen in talen die niet de doeltaal zijn. Bekijk de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                      <code class="option">Inclusief overeenkomsten van andere talen</code>
-                  </a> voorkeur voor details.</p>
-               <p>Als u een TMX hebt dat correspondeert met uw brondocument en zijn vertaling in een andere taal bevat, kunt u ook die taal <span class="emphasis">
+                  </a> voor details.</p>
+               <p>Als u een TMX hebt, die correspondeert met uw brondocument en zijn vertaling in een andere taal bevat, kunt u ook die taal <span class="emphasis">
                      <em>direct onder</em>
                   </span> het bronsegment weergeven, om te gebruiken als een aanvullende taal voor verwijzing.</p>
                <p>Om dit te bereiken:</p>
@@ -984,7 +989,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Bestandsfilters hebben een lijst met bestandsextensies die ermee zijn geassocieerd. Als de indeling die u wilt vertalen structureel dicht bij een reeds ondersteunde indeling ligt, voeg dan eenvoudigweg de bestandsextensie toe aan de lijst met ondersteunde extensies voor die indeling, of  wijzig de bestandsextensie naar een die wordt geaccepteerd door het bestandsfilter dat u wilt gebruiken. Bekijk het hoofdstuk <a class="link" href="chapter.appendices.html#file.filters" title="Bestandsfilters">Bestandsfilters</a> voor details.</p>
+               <p>Bestandsfilters hebben een lijst met bestandsextensies die ermee zijn geassocieerd. Als de indeling die u wilt vertalen structureel dicht bij een reeds ondersteunde indeling ligt, voeg dan eenvoudigweg de bestandsextensie toe aan de lijst met ondersteunde extensies voor die indeling, of wijzig de bestandsextensie naar een die wordt geaccepteerd door het bestandsfilter dat u wilt gebruiken. Bekijk het hoofdstuk <a class="link" href="chapter.appendices.html#file.filters" title="Bestandsfilters">Bestandsfilters</a> voor details.</p>
                <p>U kunt ook de functie voor aangepaste tags van OmegaT gebruiken om specifieke tekenreeksen voor de indeling te registreren en OmegaT ze laten afhandelen alsof het normale tags waren. Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
                      <code class="option">Aangepaste tags</code>
                   </a> voor details.</p>
@@ -997,7 +1002,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Het heeft soms de voorkeur om het bestand te converteren naar een ondersteunde indeling en dan het vertaalde document terug te converteren naar de originele indeling om er voor te zorgen dat met alle eigenschappen van een indeling op de juiste wijze rekening wordt gehouden.</p>
+               <p>Het heeft soms de voorkeur om het bestand te converteren naar een ondersteunde indeling en dan het vertaalde document terug te converteren naar de originele indeling om ervoor te zorgen dat met alle eigenschappen van een indeling op de juiste wijze rekening wordt gehouden.</p>
                <p>Een aantal gratis softwareprogramma's van derde partijen verschaffen een dergelijk “rondgang”-conversie, inclusief:</p>
                <div class="itemizedlist" id="how.to.translate.other.files.third.party.utilities">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -1031,7 +1036,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </ul>
                </div>
                <p>Sommige indelingen, zoals PDF, kunnen niet correct worden afgehandeld door “rondgang”-conversies. Zij vereisen een tussenliggende conversie naar een ondersteunde indeling die dient als een basis om handmatig een correct document in de doeltaal te maken.</p>
-               <p>U kunt een aantal mogelijkheden van online- of offline-programma's die PDF converteren naar veel voorkomende indelingen van kantoorpaketten, maar de conversie zal altijd uitgebreide handmatige aanpassingen vereisen aan het doeldocument, vóórdat een correct PDF-document kan worden geproduceerd. Zorg er voor dat u de vereisten voor de indeling begrijpt wanneer u begint te werken aan een PDF of soortgelijk bestand.</p>
+               <p>U kunt een aantal mogelijkheden van online- of offline-programma's die PDF converteren naar veel voorkomende indelingen van kantoorpaketten, maar de conversie zal altijd uitgebreide handmatige aanpassingen vereisen aan het doeldocument, vóórdat een correct PDF-document kan worden geproduceerd. Zorg ervoor dat u de vereisten voor de indeling begrijpt, wanneer u begint te werken aan een PDF of soortgelijk bestand.</p>
             </section>
             <section class="section" id="how.to.translate.other.files.third.party.plugins">
                <div class="titlepage">
@@ -1047,7 +1052,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         <p>De Okapi Filters Plugin voor OmegaT, van het <a class="ulink" href="https://okapiframework.org" target="_top">Okapi Framework</a>
                         </p>
                         <p>Licentie: Apache License Version 2.0</p>
-                        <p>Niet alle bestandsfilters van  het Okapi Framework zijn opgenomen in de plug-in met de bestandsfilters. Bekijk <a class="ulink" href="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included" target="_top">Opgenomen filters</a> voor details.</p>
+                        <p>Niet alle bestandsfilters van het Okapi Framework zijn opgenomen in de plug-in met de bestandsfilters. Bekijk <a class="ulink" href="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included" target="_top">Opgenomen filters</a> voor details.</p>
                         <p>Wanneer geïnstalleerd biedt de plug-in direct toegang tot de toegevoegde indelingen en stelt u ook in staat een bestand met parameters voor een aangepast bestandsfilter, gemaakt in Rainbow, te associëren. Zie <a class="link" href="chapter.how.to.html#how.to.translate.other.files.third.party.utilities.rainbow">boven</a>.</p>
                      </li>
                   </ul>
@@ -1074,16 +1079,16 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
             </div>
             <p>Beheren van een teamproject vereist enige kennis van ofwel de<span class="emphasis">
-                  <em>SVN</em>
-               </span> of <span class="emphasis">
                   <em>Git</em>
+               </span> of <span class="emphasis">
+                  <em>SVN</em>
                </span> versiesystemen (<span class="emphasis">
                   <em>VCS</em>
                </span> in de rest van dit gedeelte).</p>
-            <p>Deze handleiding beperkt zich tot het beschrijven van hun gebruik in de context van een project van OmegaT team omdat informatie over deze onderwerpen reeds uitgebreid beschikbaar is.</p>
+            <p>Deze handleiding beperkt zich tot het beschrijven van hun gebruik in de context van een teamproject van OmegaT, omdat informatie over deze onderwerpen reeds uitgebreid beschikbaar is.</p>
             <div class="note">
                <h3 class="title">Opmerking</h3>
-               <p>Een teamproject van OmegaT synchroniseert het vertaalgeheugen van het project <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> en de beschrijfbare woordenlijst van het project <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> met de hostserver en alle deelnemende teamleden, en beheert alle mogelijke conflicten tussen hen.</p>
+               <p>Een teamproject van OmegaT synchroniseert het vertaalgeheugen  van het project <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> en de beschrijfbare woordenlijst van het project <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> met de hostserver en alle deelnemende teamleden, en beheert alle mogelijke conflicten tussen hen.</p>
             </div>
             <section class="section" id="how.to.setup.team.project.prepare.the.repository">
                <div class="titlepage">
@@ -1096,32 +1101,32 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <p>Hier zijn de stappen om een teamproject in te stellen:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">Maak een lege opslagplaats op uw VCS hostserver</p>
+                     <li class="listitem">
+                        <p>Maak een lege opslagplaats op uw VCS hostserver</p>
                         <p>Dit wordt normaal gesproken gedaan via een webinterface, een grafische toepassing, of de opdrachtregel. Bekijk de documentatie voor uw server of hostservice voor details.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">Gebruik het lokale VCS om een lokale kopie te maken (clone)</p>
+                     <li class="listitem">
+                        <p>Gebruik het lokale VCS om een lokale kopie te maken (clone)</p>
                         <div class="note">
                            <h3 class="title">Opmerking</h3>
                            <p>Deze lokale versie bevat uw kopie van de <span class="emphasis">
                                  <em>projectbeheerder</em>
-                              </span> van het project van OmegaT. Gebruik het om aanpassingen te maken die betrekking hebben op het gehele team.</p>
+                              </span> van het project van OmegaT. Gebruik deze kopie om aanpassingen te maken die betrekking hebben op het gehele team.</p>
                         </div>
-                        <p>De lokale opslagplaats wordt gebruikt om het initiële project toe te voegen aan de server, en kan ook worden gebruikt voor onderhoudstaken, zoals het verwijderen van bestanden, die niet direct binnen OmegaT kunnen worden uitgevoerd.</p>
-                        <p>We raden aan dat u vermijdt om die map voor taken met betrekking de vertaling te gebruiken. Wanneer u taken voor vertaling of nakijken moet uitvoeren in dat project, gebruik dan OmegaT om een afzonderlijk kopie van het teamproject te downloaden en werk vanuit daar. Bekijk de <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Een Teamproject gebruiken">Een Teamproject gebruiken</a> how-to voor details.</p>
+                        <p>De lokale versie wordt gebruikt om het initiële project toe te voegen aan de versie op de server, als ook voor bepaalde onderhoudstaken. Bekijk het gedeelte <a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="Een teamproject beheren">Een teamproject beheren</a> voor details.</p>
+                        <p>We raden aan dat u vermijdt om die map voor taken met betrekking de vertaling te gebruiken. Wanneer u taken voor vertaling of nakijken moet uitvoeren in dat project, gebruik dan OmegaT om een afzonderlijk kopie van het teamproject te downloaden en werk vanuit daar. Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Een Teamproject gebruiken">Een Teamproject gebruiken</a> voor details.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">Vul d leke lokale kopie met een echt project van OmegaT</p>
+                     <li class="listitem">
+                        <p>Vul de lege lokale kopie met een echt project van OmegaT</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>Maak de structuur van het project</p>
-                                 <p>Wanneer u een nieuw leeg project maakt kunt u de <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Een nieuw project maken">procedure voor de gebruikersinterface</a> volgen, of het direct maken vanaf de opdrachtregel: <span class="command">
+                                 <p>Wanneer u een nieuw leeg project maakt, kunt u de <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Een nieuw project maken">procedure voor de gebruikersinterface</a> volgen, of het direct maken vanaf de opdrachtregel:  <span class="command">
                                        <strong>java -jar OmegaT.jar team init &lt;brontaal&gt; &lt;doeltaal&gt;</strong>
                                     </span>
                                  </p>
-                                 <p>Deze opdracht registreert ook automatisch het project in het versiesysteem.</p>
+                                 <p>Deze opdracht registreert ook automatisch het project in het VCS.</p>
                               </li>
                               <li class="listitem">
                                  <p>Kies de van toepassing zijnde instellingen</p>
@@ -1132,15 +1137,15 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <li class="listitem">
                                  <p>Voeg de benodigde bestanden toe</p>
                                  <p>Voeg op soortgelijke wijze relevante lijsten van bestanden voor spellingscontrole toe die u beschikbaar wilt maken voor iedereen die aan het project werkt. Bekijk <a class="link" href="chapter.project.folder.html#project.folder.omegat.spellcheck">bestanden voor spellingscontrole</a> voor details.</p>
-                                 <p>Wanneer u een bestaand project converteert, zorg er dan voor dat u bestanden, die u niet nodig hebt, verwijderd of wilt uploaden naar de server voordat u doorgaat met de volgende stap.</p>
-                                 <p>Kopieer de te vertalen bestanden naar de map source/, en gebruik uw SVN- of Git-cliënt, of de opdrachtregel, om ze toe te voegen en te publiceren in de opslagplaats. Gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                                 <p>Wanneer u een bestaand project converteert, zorg er dan voor dat u bestanden, die u niet nodig hebt, verwijdert of wilt uploaden naar de server, voordat u doorgaat met de volgende stap.</p>
+                                 <p>Kopieer de te vertalen bestanden naar de map source/, en gebruik uw VCS-cliënt, of de opdrachtregel, om ze toe te voegen en te publiceren in de opslagplaats. Gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
                                        <span class="guimenu">Project</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem">Bronbestanden indienen</span>
-                                    </a> om bestanden vanuit OmegaT toe te voegen.</p>
-                                 <p>U moet uw SVN- of Git-cliënt, of de opdrachtregel, gebruiken om woordenboeken, woordenlijsten vertaalgeheugens of andere bestanden, die u wilt opnemen in het project, toe te voegen en te publiceren.</p>
-                                 <p>Deze stap kan worden uitgevoerd voor het voor de eerste keer registreren en publiceren van het project, en kan ook worden gebruikt om nieuwe bestanden toe te voegen, of bestaande bij te werken nadat het project werd gemaakt.</p>
+                                    </a> om bronbestanden vanuit OmegaT toe te voegen.</p>
+                                 <p>U moet uw VCS-cliënt, of de opdrachtregel, gebruiken om woordenboeken, woordenlijsten, vertaalgeheugens of andere bestanden, die u wilt opnemen in het project, toe te voegen en te publiceren.</p>
+                                 <p>Deze stap kan worden uitgevoerd voor het voor de eerste keer registreren en publiceren van het project.</p>
                               </li>
                            </ul>
                         </div>
@@ -1159,7 +1164,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                                  <span class="guimenuitem">Doelbestanden indienen</span>
                               </a>.</p>
-                           <p>De beheerder van het teamproject moet het lokale VCS gebruiken om deze bestanden <span class="bold">
+                           <p>De projectbeheerder moet het lokale VCS gebruiken om deze bestanden <span class="bold">
                                  <strong>aan te passen</strong>
                               </span> of <span class="bold">
                                  <strong>te verwijderen</strong>
@@ -1168,14 +1173,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               </a> voor details.</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">Registreer de projectbestanden in het lokale VCS</p>
+                     <li class="listitem">
+                        <p>Registreer de projectbestanden in het lokale VCS</p>
                         <p>Wanneer u het project hebt gemaakt vanuit de gebruikersinterface, moet u het expliciet toevoegen aan het versiesysteem (<span class="command">
                               <strong>add</strong>
                            </span> in zowel SVN als Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">Plaats de geregistreerde bestanden op de hostserver</p>
+                     <li class="listitem">
+                        <p>Plaats de geregistreerde bestanden op de hostserver</p>
                         <p>Publiceer tenslotte uw project op de server op afstand (<span class="command">
                               <strong>commit</strong>
                            </span> in SVN, <span class="command">
@@ -1184,31 +1189,31 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <strong>push</strong>
                            </span> in Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">Geef toegangsrechten aan uw team</p>
+                     <li class="listitem">
+                        <p>Geef toegangsrechten aan uw team</p>
                         <div class="note">
                            <h3 class="title">Opmerking</h3>
                            <p>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</p>
                         </div>
-                        <p>Nadat het project gereed is en is geüpload naar de server, moet de beheerder van het teamtoegang instellen voor de vertalers. Toegang tot een teamproject vereist de volgende informatie:</p>
+                        <p>Nadat het project gereed is en is geüpload naar de server, moet de projectbeheerder toegang voor de vertalers instellen. Toegang tot een teamproject vereist de volgende informatie:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>Projecten op een hostservice</p>
-                                 <p>De vertalers zullen een account voor de service moeten maken, en hun gebruikersnaam doorsturen naar de beheerder van het teamproject.</p>
-                                 <p>De beheerder zal dan toegang voor schrijven verlenen voor de opslagplaats, voor die accounts.</p>
+                                 <p>De vertalers zullen een account voor de service moeten maken, en hun gebruikersnaam doorsturen naar de projectbeheerder.</p>
+                                 <p>De projectbeheerder zal dan toegang voor schrijven verlenen voor de opslagplaats, voor die accounts.</p>
                               </li>
                               <li class="listitem">
                                  <p>Projecten op een zelf-gehoste server</p>
-                                 <p>Als de server zelf gehost wordt en geen voorziening heeft om de vertalers zelf een account te laten maken, moet de beheerder van het teamproject accounts met toegang voor schrijven maken voor de vertalers.</p>
-                                 <p>Nadat de accounts zijn gemaakt moet de beheerder hen hun individuele inloggegevens sturen.</p>
+                                 <p>Als de server zelf gehost wordt en geen voorziening heeft om de vertalers zelf een account te laten maken, moet de projectbeheerder accounts met toegang voor schrijven maken voor de vertalers.</p>
+                                 <p>Nadat de accounts zijn gemaakt moet de projectbeheerder de vertalers hun individuele inloggegevens sturen.</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">Laat iedereen het project downloaden vanaf OmegaT</p>
-                        <p>Beheerders hebben twee opties voor het verzenden van de locatie van het project naar de vertalers:</p>
+                     <li class="listitem">
+                        <p>Laat iedereen het project downloaden vanaf OmegaT</p>
+                        <p>Projectbeheerders hebben twee opties voor het verzenden van de locatie van het project naar de vertalers:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
@@ -1220,27 +1225,62 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                     </a> te gebruiken om een lokale kopie van het project op hun eigen systeem te maken.</p>
                               </li>
                               <li class="listitem">
-                                 <p>Stuur een bestand <code class="filename">omegat.project</code> dat de URL voor het project bevat, en laat de vertalers die kopiëren naar een lege map en het  openen in OmegaT. Dit kan nuttig zijn als het project is ingesteld om verschillende <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes in opslagplaats">routes</a> voor elke vertaler te gebruiken.</p>
+                                 <p>Stuur een bestand <code class="filename">omegat.project</code> dat de URL voor het project bevat, en laat de vertalers die kopiëren naar een lege map en het openen in OmegaT. Dit kan nuttig zijn als het project is ingesteld om verschillende <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes naar opslagplaats">routes</a> voor elke vertaler te gebruiken.</p>
                               </li>
                            </ol>
                         </div>
-                        <p>Nadat de beheerder van het teamproject heeft bevestigd dat een vertaler in staat moet zijn het teamproject te openen, is het een goed idee om ervoor te zorgen dat de <a class="link" href="chapter.menus.html#menus.tools.statistics">statistieken van het project</a> hetzelfde zijn voor zowel de beheerder (op de server) en de vertaler (lokaal).</p>
-                        <p>Indien zij niet overeenkomen, zorg ervoor dat de bestanden <code class="filename">filters.xml</code> en <code class="filename">segmentation.conf</code> op de juiste wijze worden gedeeld.</p>
+                        <p>Nadat de projectbeheerder heeft bevestigd dat een vertaler in staat moet zijn het teamproject te openen, is het een goed idee om ervoor te zorgen dat de <a class="link" href="chapter.menus.html#menus.tools.statistics">statistieken van het project</a> hetzelfde zijn voor zowel de projectbeheerder (op de server) als voor de vertaler (lokaal).</p>
+                        <p>Indien zij niet overeenkomen, zorg er dan voor dat dezelfde instellingen voor filters en segmentatie gebruikt worden, door te controleren of de bestanden <code class="filename">filters.xml</code> en <code class="filename">segmentation.conf</code> op de juiste wijze worden gedeeld.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het lokale teamproject</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">U kunt nu ook met het team aan het project werken</p>
+                     <li class="listitem">
+                        <p>Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het originele lokale teamproject</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">Een teamproject beheren</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Teamprojecten hebben een aantal beheerstaken die niet direct zijn gerelateerd aan vertalen. Projectbeheerder zouden kunnen vinden dat het voordelen heeft—misschien zelfs noodzakelijk—om dergelijke taken direct af te handelen via het VCS, in het bijzonder voor gevallen waar de projectbeheerder slechts optreedt als een coördinator en niet is betrokken bij het vertaalproces zelf.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">Bestanden toevoegen</span>
+                     </dt>
+                     <dd>
+                        <p>Hoewel OmegaT een mechanisme verschaft voor het toevoegen van bron- en doelbestanden voor vertalingen aan de opslagplaats, moet de projectbeheerder alle andere bestanden, zoals woordenboeken, woordenlijsten of vertaalgeheugens met verwijzingen, vanuit de opslagplaats van het VCS toevoegen.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Bestanden verwijderen</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT heeft geen mechanisme om bestanden uit een teamproject te verwijderen. Als bestanden in een gedeeld teamproject niet langer nodig zijn, <span class="emphasis">
+                              <em>moet</em>
+                           </span> de projectbeheerder ze verwijderen uit de opslagplaats van het VCS.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Projectstatistieken raadplegen</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">Opmerking</h3>
+                           <p>Dit is alleen van toepassing op werkstromen die vertalers vragen om de vertaalde doelbestanden als leveringen in te dienen bij de opslagplaats.</p>
+                        </div>
+                        <p>Wanneer OmegaT de doelbestanden indient, commit het ook de projectstatistieken in de indelingen <code class="filename">.txt</code> en <code class="filename">.json</code>. Dat stelt de projectbeheerder in staat de statistieken te raadplegen, en mogelijk hun verwerking te automatiseren, zonder noodzaak om OmegaT te moeten openen.</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Routes in opslagplaats</h3>
+                        <h3 class="title">Routes naar opslagplaats</h3>
                      </div>
                   </div>
                </div>
@@ -1248,8 +1288,8 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <span class="guibutton">Mappen in opslagplaats…</span>
                   </a> in het dialoogvenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projecteigenschappen">
                      <span class="guilabel">Projecteigenschappen</span>
-                  </a>, of door het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file.title">omegat.project</a> te bewerken. Hoewel de mogelijkheid voor routes primair is bedoeld voor het verzamelen van bronbestanden vanaf afzonderlijke, kan het ook worden gebruikt van andere typen bestanden.</p>
-               <p>Een lijst met parameters voor routes wordt hieronder weergegeven, en verbeelden van hun gebruik worden in het volgende gedeelte verschaft.</p>
+                  </a>, of door het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file.title">omegat.project</a> te bewerken. Hoewel de mogelijkheid voor routes primair is bedoeld voor het verzamelen van bronbestanden vanaf afzonderlijke locaties, kan het ook worden gebruikt voor andere typen bestanden.</p>
+               <p>Een lijst met parameters voor routes wordt hieronder weergegeven, en voorbeelden van hun gebruik worden in het volgende gedeelte verschaft.</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>
@@ -1317,12 +1357,12 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_OmegaT_teamproject&quot;&gt;
 	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</pre>
-               <p>Alle inhoud van <code class="filename">https://opslag_voor_OmegaT_teamproject</code> volgt de route naar het lokale project van OmegaT</p>
+               <p>Alle inhoud van <code class="filename">https://opslagplaats_voor_OmegaT_teamproject</code> volgt de route naar het lokale project van OmegaT</p>
                <p>Route voor projecten in een submap van de opslagplaats:</p>
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_teamprojecten&quot;&gt;
 	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
 &lt;/repository&gt;</pre>
-               <p>Alle inhoud van <code class="filename">https://opslag_voor_alle_OmegaT_teamprojecten/En-US_DE_project</code> volgt de route naar het lokale project van OmegaT.</p>
+               <p>Alle inhoud van <code class="filename">https://opslagplaats_voor_alle_OmegaT_teamprojecten/En-US_DE_project</code> volgt de route naar het lokale project van OmegaT.</p>
                <p>Routes naar aanvullende bronnen uit de opslagplaats op afstand, met filters:</p>
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_bronnen_van_teamproject&quot;&gt;
 	&lt;mapping local=&quot;source/submap&quot; repository=&quot;&quot;&gt;
@@ -1364,7 +1404,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
                <p>Het proces hierboven beschrijft de meest voorkomende scenario's, waar de projectbeheerder volledige controle heeft over het project en waar alle bestanden (en de statistieken) identiek zijn aan beide zijden (aan de zijde van de server en aan de zijde van de lokale systemen van de vertaler).</p>
                <p>Het is ook mogelijk een configuratie voor een teamproject te gebruiken waar verschillende vertalers het bestand <code class="filename">project_save.tmx</code> delen, en alleen een subset van de andere bestanden.</p>
-               <p>In dit geval is de procedure essentieel hetzelfde, maar voegt de projectbeheerder niet elk bestand toe aan het project met versie-controle op de server. De resterende bestanden kopiëren de vertalers  zelf, of routes, die de bestanden van andere locaties synchroniseren, worden gedefinieerd.</p>
+               <p>In dit geval is de basisprocedure essentieel hetzelfde, maar voegt de projectbeheerder niet elk bestand toe aan het project op de server met versie-controle. De resterende bestanden kopiëren de vertalers zelf, of routes, die de bestanden van andere locaties synchroniseren, worden gedefinieerd.</p>
             </section>
          </section>
          <section class="section" id="how.to.use.team.project">
@@ -1376,12 +1416,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
             </div>
             <p>Teamprojecten gebruiken mechanismen voor synchronisatie tussen projectleden.</p>
-            <p>Als een teamproject van OmegaT eenmaal is geïnstalleerd op een server, stuurt de beheerder de informatie, die zij nodig hebben om toegang te verkrijgen, naar de leden: een URL die de locatie van het project aangeeft, of een bestand <code class="filename">omegat.project</code>.</p>
-            <p>Nadat het project is gedownload, het lokaal is geïnstalleerd en hoeft alleen lokaal te worden geopend om te synchroniseren met de server.</p>
+            <p>Als een teamproject van OmegaT eenmaal is geïnstalleerd op een server, stuurt de projectbeheerder de informatie, die ze nodig hebben om toegang te verkrijgen, naar de leden: een URL die de locatie van het project aangeeft, of een bestand <code class="filename">omegat.project</code>.</p>
+            <p>Nadat het project is gedownload en lokaal is geïnstalleerd, hoeft het alleen nog lokaal te worden geopend om te synchroniseren met de server.</p>
             <p>Logingegevens voor de opslagplaats worden opgeslagen in het bestand <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a> en kunnen worden verwijderd vanuit de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                   <code class="option">Inloggegevens opslagplaats</code>
                </a>.</p>
-            <p>Synchronisatie gebeurt standaard elke drie minuten en dus zullen projectleden soms een segment vertalen of aanpassen dat als eerder werd vertaald door een ander lid, maar nog niet is gesynchroniseerd. Als dat gebeurt moeten leden de toepasselijke vertaling selecteren.</p>
             <p>Leden kunnen beurtelings de bestanden vertalen en nakijken. De functie Zoeken stelt hen in staat het venster Bewerken te filteren op inhoud die is vertaald door een bepaald persoon, of bijvoorbeeld op inhoud die is vertaald vóór of na een bepaalde opgegeven tijd.</p>
             <div class="variablelist">
                <dl class="variablelist">
@@ -1399,7 +1438,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <a class="link" href="chapter.menus.html#menus.project.download.team.project">
                                     <span class="guimenuitem">Teamproject downloaden…</span>
                                  </a> om het dialoogvenster <span class="guilabel">Teamproject downloaden</span> op te roepen.</p>
-                              <p>Voer de URL in die is verschaft door de beheerder van het teamproject in het veld <span class="guilabel">URL opslagplaats:</span> aan de bovenzijde van het dialoogvenster, en specificeer een map voor het project in het veld <span class="guilabel">Nieuwe lokale projectmap:</span>. Laat de optie <span class="guilabel">Standaard branch</span> geselecteerd, tenzij de beheerder van het project instructies heeft gegeven om een aangepaste branch te gebruiken.</p>
+                              <p>Voer de URL in die is verschaft door de projectbeheerder in het veld <span class="guilabel">URL opslagplaats:</span> aan de bovenzijde van het dialoogvenster, en specificeer een map voor het project in het veld <span class="guilabel">Nieuwe lokale projectmap:</span>. Laat de optie <span class="guilabel">Standaard tak</span> geselecteerd, tenzij de beheerder van het project instructies heeft gegeven om een aangepaste tak te gebruiken.</p>
                            </li>
                            <li class="listitem">
                               <p>Vanuit een bestand <code class="filename">omegat.project</code>
@@ -1415,11 +1454,12 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                            </span>, of <span class="emphasis">
                               <em>SSH</em>
                            </span>.</p>
-                        <p>Als de server authenticatie met gebruikersnaam/wachtwoord gebruikt, zal OmegaT u een dialoogvenster <span class="guilabel">Authenticatie</span> laten zien om uw gebruikersnaam en wachtwoord in te voeren ofwel als u het project voor het eerst download the project of later in het proces. OmegaT zal dan uw inloggegevens onthouden voor dat specifieke project, tenzij u ze expliciet verwijdert. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
+                        <p>Als de server authenticatie met gebruikersnaam/wachtwoord gebruikt, zal OmegaT u een dialoogvenster <span class="guilabel">Authenticatie</span> laten zien om uw gebruikersnaam en wachtwoord in te voeren, ofwel als u het project voor het eerst download, of later in het proces. OmegaT zal dan uw inloggegevens onthouden voor dat specifieke project, tenzij u ze expliciet verwijdert. Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                               <code class="option">Inloggegevens opslagplaats</code>
-                           </a> voorkeuren voor details.</p>
-                        <p>Als de server SSH-authenticatie gebruikt, zorg er dan voor dat uw uw configuratie van SSH bijwerkt om die server op te nemen, voordat u probeert het project te downloaden, anders zult u een fout in de authenticatie krijgen en het project zal niet laden.</p>
-                        <p>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</p>
+                           </a> voor details.</p>
+                        <p>Voor het verhogen van de beveiliging vereisen sommige servers externe processen om te verbinden met een afzonderlijk toegangstoken in plaats van met een wachtwoord. Controleer de documentatie van de server als uw wachtwoord niet werkt.</p>
+                        <p>Als de server SSH-authenticatie gebruikt, zorg er dan voor dat u uw configuratie van SSH bijwerkt om die server op te nemen, voordat u probeert het project te downloaden, anders zult u een fout in de authenticatie krijgen en zal het project niet laden.</p>
+                        <p>Wanneer u meerdere projecten op dezelfde server gebruikt, zult u slechts één keer worden gevraagd naar de inloggegevens voor die server.</p>
                      </div>
                   </dd>
                   <dt>
@@ -1445,6 +1485,56 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <p>OmegaT synchroniseert een teamproject wanneer het wordt geopend, opnieuw geladen, gesloten of opgeslagen. Dit betekent dat de geautomatiseerde functie voor opslaan ook regelmatig lokale versies synchroniseert met de versie op de server met de interval die is gespecificeerd in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Interval voor opslaan van projectgegevens</code>
                         </a>.</p>
+                     <div class="warning">
+                        <h3 class="title">Waarschuwing</h3>
+                        <p>Omdat leden niet noodzakelijkerwijze hun projecten tegelijkertijd synchroniseren, kan een segment met een lokale vertaling soms ook een andere vertaling, van een ander lid, hebben dat beschikbaar is op de server. Wanneer u het project synchroniseert, zal OmegaT de lokale en aangepaste versies met elkaar vergelijken en u vragen te kiezen welke versie van de vertaling moet worden behouden.</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">Conflicten in vertalingen oplossen</span>
+                  </dt>
+                  <dd>
+                     <p>Wanneer OmegaT niet automatisch een verschil tussen een lokale vertaling en het geheugen op afstand kan oplossen, laat het een dialoogvenster <span class="guilabel">Samenvoegen</span> zien.</p>
+                     <p>Het dialoogvenster biedt de keuze tussen drie versies van het vertaalde segment:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Mijn</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dit is uw lokale versie, die nog niet naar de server is verzonden om te worden gedeeld.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (origineel)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dit is de “basis”-versie van waaruit de verschillende versies werden gemaakt.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (bijgewerkt)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dit is de versie die werd gedeeld met andere leden sinds u voor het laatst werkte aan het project.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>Het is mogelijk om een voor een de toepasselijke vertaling te selecteren door erop te klikken voor elk weergegeven segment. Het is ook mogelijk om “alle” vertalingen van een bepaalde versie te selecteren.</p>
+                     <p>
+                        <span class="guibutton">Lijstweergave</span> en <span class="guibutton">Detailweergave</span> bieden alternatieve weergaven van een segment door verschillende eigenschappen van het segment te verbergen of weer te geven.</p>
+                     <p>Als de vertalingen eenmaal zijn geselecteerd, zal klikken op <span class="guibutton">Voltooien</span> de geselecteerde vertalingen opslaan naar de server om te delen met andere teamleden.</p>
+                     <div class="note">
+                        <h3 class="title">Opmerking</h3>
+                        <p>Laat teamleden op een bepaald moment aan verschillende delen van een vertaling werken om de kans te verkleinen voor het krijgen van conflicten in vertalingen.</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">Configuratie teamproject </span>
@@ -1459,15 +1549,15 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <span class="emphasis">
                                     <em>Basisconfiguratie van het project:</em>
                                  </span> Bron en talen, tokenizers, en de hiërarchie van de projectmap.</p>
-                              <p>In een team project worden parameters van de basisconfiguratie van het lokale project altijd overschreven door de configuratie op de server, origineel ingesteld door de beheerder.</p>
+                              <p>In een teamproject worden parameters van de basisconfiguratie van het lokale project altijd overschreven door de configuratie op de server, origineel ingesteld door de projectbeheerder.</p>
                            </li>
                            <li class="listitem">
                               <p>
                                  <span class="emphasis">
-                                    <em>Routes in opslagplaats</em>
+                                    <em>Routes naar opslagplaats</em>
                                  </span>
                               </p>
-                              <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes in opslagplaats">Routes in opslagplaats</a> how-to voor details.</p>
+                              <p>Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Routes naar opslagplaats">Routes naar opslagplaats</a> voor details.</p>
                               <div class="itemizedlist">
                                  <ul class="itemizedlist" style="list-style-type: circle; ">
                                     <li class="listitem">
@@ -1481,7 +1571,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                        <p>Veel hostservices ondersteunen, bijvoorbeeld, toegang tot dezelfde opslagplaats met ofwel het SSH +Git of HTTPS-protocol. OmegaT zal de selectie van het lokale protocol respecteren.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Wanneer u eerst het project op afstand download met een bestand <code class="filename">omegat.project</code> dat is verschaft door de projectbeheerder, zal OmegaT de routes in dat bestand gebruiken, indien aanwezig.</p>
+                                       <p>Wanneer u voor het eerst het project op afstand downloadt met een bestand <code class="filename">omegat.project</code> dat is verschaft door de projectbeheerder, zal OmegaT de routes in dat bestand gebruiken, indien aanwezig.</p>
                                     </li>
                                     <li class="listitem">
                                        <p>Als er een conflict is tussen het project op afstand en de lokale versies van het bestand <code class="filename">omegat.project</code> en de lokale versie wordt overschreven, maakt OmegaT een back-upbestand, genaamd <code class="filename">omegat.project.JJJJMMDDhhmm.bak</code>. OmegaT maakt maximaal tien back-upbestanden, en oudere back-ups worden op hun beurt automatisch verwijderd.</p>
@@ -1514,12 +1604,12 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <span class="term">Doelbestanden</span>
                   </dt>
                   <dd>
-                     <p>Nadat u de doelbestanden hebt gemaakt, gebruik dan <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                     <p>Nadat u de doelbestanden hebt gemaakt, gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
                            <span class="guimenu">Project</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                            <span class="guimenuitem">Doelbestanden indienen</span>
-                        </a> om ze aan de server toe te voegen, als de projectbeheerder u heeft gevraagd om dat te doen.</p>
+                        </a> om ze aan de server toe te voegen, als de projectbeheerder u heeft gevraagd om dat te doen. Indienen van de doelbestanden uploadt ook de bestanden met statistieken naar de server.</p>
                   </dd>
                   <dt>
                      <span class="term">Bestanden verwijderen</span>
@@ -1531,7 +1621,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <span class="term">Offline werken</span>
                   </dt>
                   <dd>
-                     <p>U kunt een teamproject openen en er offline aan werken. Alle wijzigingen zullen de volgende keer als een verbinding beschikbaar worden gesynchroniseerd.</p>
+                     <p>U kunt een teamproject openen en er offline aan werken. Alle wijzigingen zullen de volgende keer, als een verbinding beschikbaar is, worden gesynchroniseerd.</p>
                      <p>Er zijn twee manieren om offline te werken:</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -1561,7 +1651,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Standaard: OmegaT 6.0.0</span>
+                     <span class="term">Standaard: OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>Deze uitgave wordt aanbevolen voor elke dag-gebruik.</p>
@@ -1577,7 +1667,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>De bestanden zijn direct te downloaden vanaf <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Opmerking</h3>
-               <p>OmegaT 6.0.0 vereist een Java 11 Runtime Environment (JRE) om te kunnen worden uitgevoerd.</p>
+               <p>OmegaT 6.0.2 vereist een Java 11 Runtime Environment (JRE) om te kunnen worden uitgevoerd.</p>
                <p>Pakketten van OmegaT zijn zowel beschikbaar in versies die zijn gebundeld met Java, en versies zonder. Pakketten zonder Java vertrouwen erop dat een Java 11 Runtime Environment systeembreed is geïnstalleerd.</p>
                <p>OmegaT 5.8.0 en later kunnen ook worden uitgevoerd met Java 11 Runtime Environment op elk platform.</p>
                <p>In verband met overwegingen met betrekking tot de licentie beveelt het team van OmegaT de Eclipse Temurin Java runtime aan, verschaft door het Eclipse Foundation's Adoptium Project, maar elke Java 8 compatibele runtime environment zou moeten werken. Bekijk <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">The Eclipse Temurin™ project</a>.</p>
@@ -1609,7 +1699,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">Opmerking</h3>
                   <p>Hoewel u OmegaT direct kunt uitvoeren vanuit de beschikbare bestanden, kunt u ook het script <code class="filename">linux-install.sh</code> uitvoeren dat daar staat om OmegaT geïnstalleerd te krijgen op meer toepasselijke locaties.</p>
                   <p>Uitvoeren van het script zal u vragen naar uw wachtwoord voor <code class="filename">sudo</code>.</p>
-                  <p>Het script controleert op een bestaande installatie van dezelfde versie van OmegaT in <code class="filename">/opt/omegat/</code>. Als er geen is installeert het het programma in <code class="filename">/opt/omegat/OmegaT_6.0.0</code> en stelt het in als de standaard versie (in <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>Het script controleert op een bestaande installatie van dezelfde versie van OmegaT in <code class="filename">/opt/omegat/</code>. Als er geen is installeert het het programma in <code class="filename">/opt/omegat/OmegaT_6.0.2</code> en stelt het in als de standaard versie (in <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Als het uitpakken of installeren is voltooid kunt u het gedownloade bestand verwijderen omdat het niet langer nodig is.</p>
             </section>
@@ -1648,10 +1738,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.updates" title="Updates">
+               <p>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.updates" title="Updates">
                      <span class="guilabel">Updates</span>
-                  </a> voorkeur voor details.</p>
-               <p>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand<a class="ulink" href="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt" target="_top">changes.txt</a> op de pagina's voor ontwikkelaars.</p>
+                  </a> voor details.</p>
+               <p>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand <a class="ulink" href="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt" target="_top">changes.txt</a> op de pagina's voor ontwikkelaars.</p>
                <div class="note">
                   <h3 class="title">Opmerking</h3>
                   <p>Als u besluit een nieuwe versie te installeren, denk dan aan het volgende:</p>
@@ -1691,7 +1781,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </dt>
                      <dd>
                         <p>Hiermee kunt u elk aantal versies naast elkaar inschakelen, wat u zou kunnen doen totdat u zich op uw gemak voelt met de nieuwe versie.</p>
-                        <p>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT  zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <code class="literal">--config-dir=&lt;path&gt;</code> op de opdrachtregel. Bekijk het gedeelte <a class="link" href="chapter.how.to.html#launch.with.command.line.omegat.options" title="Opties voor OmegaT">Opties voor OmegaT</a>.</p>
+                        <p>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <code class="literal">--config-dir=&lt;path&gt;</code> op de opdrachtregel. Bekijk het gedeelte <a class="link" href="chapter.how.to.html#launch.with.command.line.omegat.options" title="Opties voor OmegaT">Opties voor OmegaT</a>.</p>
                         <p>Alle parameters die zijn geplaatst in een <a class="link" href="chapter.project.folder.html" title="Projectmap">projectmap</a> zullen van toepassing zijn voor dat project, ongeacht welke versie van OmegaT het opent.</p>
                      </dd>
                   </dl>
@@ -2264,19 +2354,15 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</pre>
                                                    <em>--alignDir</em>
                                                 </span> hieronder gespecificeerde locatie.</p>
                                              <p>De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx. De bestandstypen die kunnen worden uitgelijnd zijn afhankelijk van het feit of de uitlijning wordt ondersteund door het bestandsfilter. Enkele ondersteunde filters omvatten: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles en Windows Resources</p>
-                                             <p>The <span class="emphasis">
+                                             <p>De parameter <span class="emphasis">
                                                    <em>--alignDir</em>
-                                                </span> parameter is
-						used to specify the location of the data in the target
-						language, which must be a folder containing the
-						translated files.</p>
-                                             <p>Die map moet een vertaling bevatten in de doeltaal van het project. For instance, if the project is EN-to-FR, the folder must contain a bundle ending with _fr. De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx.</p>
+                                                </span> wordt gebruikt om de locatie te specificeren van de gegevens in de doeltaal, wat een map moet zijn die de vertaalde bestanden bevat.</p>
+                                             <p>Die map moet een vertaling bevatten in de doeltaal van het project. Als het project bijvoorbeeld EN-naar-FR is, moet de map een bundel bevatten die eindigt op _fr. De resulterende TMX wordt opgeslagen in de map /omegat onder de naam align.tmx.</p>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.stats">
                                              <span class="term" id="launch.with.command.line.mode.console.stats.title">
-                                                <code class="option">--mode=console-stats
-					  <span class="emphasis">
-                                                      <em>&lt;path&gt;</em>
+                                                <code class="option">--mode=console-stats <span class="emphasis">
+                                                      <em>&lt;pad&gt;</em>
                                                    </span>
                                                 </code>
                                              </span>
@@ -2336,7 +2422,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</pre>
                                  <dt id="launch.with.command.line.script.">
                                     <span class="term" id="launch.with.command.line.script.title">
                                        <code class="option">--script=<span class="emphasis">
-                                             <em>&lt;path&gt;</em>
+                                             <em>&lt;pad&gt;</em>
                                           </span>
                                        </code>
                                     </span>
@@ -2363,7 +2449,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</pre>
                                     </div>
                                     <div class="note">
                                        <h3 class="title">Opmerking</h3>
-                                       <p>Rapporten over problemen met problemen met tags  worden uitgevoerd naar het venster van de terminal.</p>
+                                       <p>Rapporten over problemen met problemen met tags worden uitgevoerd naar het venster van de terminal.</p>
                                     </div>
                                  </dd>
                               </dl>

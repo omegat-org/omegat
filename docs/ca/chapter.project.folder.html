@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,12 +55,12 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10449">Estructura per defecte</a>
+                     <a href="chapter.project.folder.html#d0e10565">Estructura per defecte</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10527">Contingut mínim</a>
+                     <a href="chapter.project.folder.html#d0e10643">Contingut mínim</a>
                   </span>
                </li>
                <li>
@@ -105,7 +105,7 @@
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e10449">
+         <section class="section" id="d0e10565">
             <div class="titlepage">
                <div>
                   <div>
@@ -184,11 +184,11 @@
                         <p>L'OmegaT reconeixerà qualsevol carpeta que contingui un fitxer <code class="filename">omegat.project</code> com a projecte de traducció (fins i tot si necessita ajustaments manuals).</p>
                      </li>
                      <li class="listitem">
-                        <p>Si la carpeta és un dipòsit buit i el fitxer <code class="filename">omegat.project</code> conté informació d'un dipòsit remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</p>
+                        <p>Si la carpeta és un repositori buit i el fitxer <code class="filename">omegat.project</code> conté informació d'un repositori remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</p>
                         <pre class="programlisting">...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/DIPÒSIT/DEL/PROJECTE/REMOT&quot;&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/REPOSITORI/DEL/PROJECTE/REMOT&quot;&gt;
             &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
@@ -200,7 +200,7 @@
                </div>
             </div>
          </section>
-         <section class="section" id="d0e10527">
+         <section class="section" id="d0e10643">
             <div class="titlepage">
                <div>
                   <div>
@@ -482,7 +482,7 @@
                      <p>Baixeu el fitxer; hauria de ser un arxiu tarball (extensió <code class="filename">tar.bz</code> o <code class="filename">tar.bz2</code>).</p>
                   </li>
                   <li class="listitem">
-                     <p>Extreu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <code class="filename">dz</code>, <code class="filename">idx</code> i <code class="filename">ifo</code>.</p>
+                     <p>Extraieu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <code class="filename">dz</code>, <code class="filename">idx</code> i <code class="filename">ifo</code>.</p>
                   </li>
                </ol>
             </div>
@@ -614,10 +614,17 @@
                      <p>Si ja teniu una llista de paraules que voleu que el corrector ortogràfic ignori o accepti, només cal que les deseu en fitxers de text amb els noms corresponents i copieu els fitxers a la carpeta <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> del projecte actual.</p>
                   </dd>
                   <dt id="project.folder.omegat.segmentation">
-                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.srx</span>
                   </dt>
                   <dd>
-                     <p>Aquest fitxer conté les regles de segmentació específiques del projecte.</p>
+                     <p>Aquest fitxer conté les regles de segmentació específiques del projecte en el format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>.</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>Si es detecta un fitxer <code class="filename">segmentation.conf</code> existent d'una versió anterior, l'OmegaT el converteix automàticament.</p>
+                     </div>
+                     <p>
+		  
+                     </p>
                   </dd>
                   <dt id="project.folder.omegat.filters">
                      <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>

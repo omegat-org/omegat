@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -157,6 +157,11 @@
                      <li>
                         <span class="section">
                            <a href="chapter.how.to.html#how.to.setup.team.project.prepare.the.repository">準備作業</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.manage.team.project">チームプロジェクトを管理する</a>
                         </span>
                      </li>
                      <li>
@@ -1024,13 +1029,13 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         <p>
                            <a class="ulink" href="https://po4a.org" target="_top">po4a</a>
                         </p>
-                        <p>サイセンス: GNU General Public License v2</p>
+                        <p> ライセンス: GNU General Public License v2</p>
                         <p>po4aは、サイトのフロント・ページにリストされているように、多数のフリー・ソフトウェアの文書ファイル形式をサポートしており、po書式との間の変換ツールを提供しています。詳細は<a class="link" href="chapter.appendices.html#file.filters.po">PO ファイル</a>項をご覧ください。</p>
                      </li>
                      <li class="listitem">
                         <p>
                            <a class="ulink" href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html" target="_top">Translate Toolkit</a>のコンバータ</p>
-                        <p>サイセンス: GNU General Public License v2</p>
+                        <p> ライセンス: GNU General Public License v2</p>
                         <p>Translate Toolkitには、po書式との間の変換ツールがいくつか用意されています。詳細については、<a class="ulink" href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html" target="_top">コンバータ</a>を参照してください。</p>
                      </li>
                      <li class="listitem" id="how.to.translate.other.files.third.party.utilities.openxliff">
@@ -1085,13 +1090,13 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
             </div>
-            <p>チームプロジェクトを管理するには、<span class="emphasis">
-                  <em>SVN</em>
-               </span>または<span class="emphasis">
+            <p>チーム プロジェクトを管理するには、<span class="emphasis">
                   <em>Git</em>
-               </span>バージョン管理システム(Virsion Control System、 以降<span class="emphasis">
+               </span> または <span class="emphasis">
+                  <em>SVN</em>
+               </span> バージョン管理システム (以降<span class="emphasis">
                   <em>VCS</em>
-               </span>と呼ぶ)の知識が必要です。</p>
+               </span>) に関するある程度の知識が必要です。</p>
             <p>これらのトピックに関する情報は容易に入手できるため、この取扱説明書では、OmegaTのチームプロジェクトのコンテキストでの使用についてのみ説明します。</p>
             <div class="note">
                <h3 class="title">注記</h3>
@@ -1108,12 +1113,12 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <p>チームプロジェクトを設定する手順を示します。</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">VCSサーバ上に空のプロジェクトを作成します</p>
+                     <li class="listitem">
+                        <p>VCSサーバ上に空のプロジェクトを作成します</p>
                         <p>これは通常、Webインターフェース、グラフィカルプログラム、またはコマンドラインを使用して実行できます。詳細については、サーバまたはホスティングサービスのマニュアルを参照してください。</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">ローカルのVCSを使用してワーキングディレクトリ(クローン)を作成します。</p>
+                     <li class="listitem">
+                        <p>ローカルのVCSを使用してワーキングディレクトリ(クローン)を作成します。</p>
                         <div class="note">
                            <h3 class="title">注記</h3>
                            <p>
@@ -1121,11 +1126,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <em>プロジェクトマネージャ</em>
                               </span>用のOmegaTプロジェクトのコピーがこのローカルのディレクトリにあります。チーム全体に影響する変更を行う場合に使用します。</p>
                         </div>
-                        <p>ローカルリポジトリは、最初のプロジェクトをサーバに追加するために使用されます。また、OmegaT内で直接実行できないファイルの削除などのメンテナンスタスクにも使用できます。</p>
+                        <p>ローカルバージョンは、初期プロジェクトをサーバーバージョンに追加するため、および特定のメンテナンスタスクに使用されます。詳細は<a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="チームプロジェクトを管理する">チームプロジェクトを管理する</a>項をご覧ください。</p>
                         <p>このフォルダーを翻訳作業に使用しないことをお勧めします。そのプロジェクトで翻訳やレビュー作業も行う必要がある場合は、チームプロジェクト管理用と別に、OmegaTを使用して翻訳作業用のプロジェクトをダウンロードします。詳細については、 <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="チームプロジェクトを使用する">チームプロジェクトを使用する</a>を参照してください。</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">空のローカルコピーを実際のOmegaTプロジェクトで埋める</p>
+                     <li class="listitem">
+                        <p>空のローカルコピーを実際のOmegaTプロジェクトで埋める</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
@@ -1146,14 +1151,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <p>必要なファイルを追加します。</p>
                                  <p>同様に、プロジェクトで作業しているすべての人が使用できるようにするスペルチェッカーファイルの関連リストを追加します。詳細については、<a class="link" href="chapter.project.folder.html#project.folder.omegat.spellcheck">スペルチェッカーファイル</a>を参照してください。</p>
                                  <p>既存のプロジェクトを変換する場合は、次の手順に進む前に、プロジェクト内の不要なファイルや、サーバにアップロードしたくないファイルを、すべて削除してください。</p>
-                                 <p>原文フォルダーにファイルをコピーし、SVNまたはGitクライアント、またはコマンドラインを使用して、それらをリポジトリに追加して共有します。<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                                 <p>原文フォルダーにファイルをコピーし、VCSクライアント、またはコマンドラインを使用して、それらをリポジトリに追加して共有します。<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
                                        <span class="guimenu">プロジェクト</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem"> 原文ファイルをコミット</span>
-                                    </a> を使用して、OmegaTからファイルを追加します。</p>
-                                 <p>プロジェクトに含める辞書、用語集、翻訳メモリ、その他のファイルを追加して公開するには、SVNまたはGitクライアントかコマンドを使用する必要があります。</p>
-                                 <p>この手順は、プロジェクトを初めて登録して共有する前に実行できます。また、プロジェクトの作成後に新しいファイルを追加したり、既存のファイルを更新したりする場合にも使用できます。</p>
+                                    </a> を使用して、OmegaTから原文ファイルを追加します。</p>
+                                 <p>プロジェクトに含める辞書、用語集、翻訳メモリ、その他のファイルを追加して公開するには、VCSクライアントかコマンドを使用する必要があります。</p>
+                                 <p>この手順は、プロジェクトを初めて登録して共有する前に実行できます。</p>
                               </li>
                            </ul>
                         </div>
@@ -1172,7 +1177,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                                  <span class="guimenuitem">訳文ファイルをコミット</span>
                               </a>コマンドを使用して、サーバにアップロードできます。</p>
-                           <p>チームプロジェクト管理者は、ローカルVCSを使用して、これらのファイルを<span class="bold">
+                           <p>プロジェクト管理者は、ローカルVCSを使用して、これらのファイルを<span class="bold">
                                  <strong>変更</strong>
                               </span>または<span class="bold">
                                  <strong>削除</strong>
@@ -1181,14 +1186,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               </a>の設定を参照してください。</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">プロジェクトファイルをローカルVCSに登録します。</p>
+                     <li class="listitem">
+                        <p>プロジェクトファイルをローカルVCSに登録します。</p>
                         <p>GUIからプロジェクトを作成した場合は、バージョン管理システムに明示的に追加する必要があります(SVNとGitの両方で<span class="command">
                               <strong>add</strong>
                            </span>)。</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">登録したファイルをホストサーバに配置する</p>
+                     <li class="listitem">
+                        <p>登録したファイルをホストサーバに配置する</p>
                         <p>最後に、プロジェクトをリモートサーバに送信します(SVNでは<span class="command">
                               <strong>commit</strong>
                            </span>、Gitでは<span class="command">
@@ -1197,31 +1202,31 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <strong>push</strong>
                            </span>)。</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">チームにアクセス権を付与する</p>
+                     <li class="listitem">
+                        <p>チームにアクセス権を付与する</p>
                         <div class="note">
                            <h3 class="title">注記</h3>
                            <p>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</p>
                         </div>
-                        <p>プロジェクトが準備され、サーバにアップロードされた後、チームプロジェクト管理者は翻訳者へのアクセス権を設定する必要があります。チームプロジェクトにアクセスするには、次の情報が必要です。</p>
+                        <p>プロジェクトが準備され、サーバにアップロードされた後、プロジェクト管理者は翻訳者へのアクセス権を設定する必要があります。チームプロジェクトにアクセスするには、次の情報が必要です。</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>ホスティングサービス上のプロジェクト</p>
-                                 <p>翻訳者はサービス用のアカウントを作成し、チームプロジェクト管理者にユーザー名を送信する必要があります。</p>
+                                 <p>翻訳者はサービス用のアカウントを作成し、プロジェクト管理者にユーザー名を送信する必要があります。</p>
                                  <p>管理者は、これらのアカウントにリポジトリへの書き込みアクセス権を付与します。</p>
                               </li>
                               <li class="listitem">
                                  <p>自前サーバでのプロジェクト</p>
-                                 <p>翻訳者が自分でアカウントを登録することができない自前サーバの場合、チームプロジェクト管理者は、翻訳者の書き込みアクセス権を持つアカウントを作成する必要があります。</p>
-                                 <p>アカウントを作成した後、管理者は翻訳者に個々の資格情報を送信する必要があります。</p>
+                                 <p>翻訳者が自分でアカウントを登録することができない自前サーバの場合、プロジェクト管理者は、翻訳者の書き込みアクセス権を持つアカウントを作成する必要があります。</p>
+                                 <p>アカウントを作成した後、プロジェクト管理者は翻訳者に個々の資格情報を送信する必要があります。</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">OmegaTからプロジェクトをダウンロードしてもらう</p>
-                        <p>管理者が、プロジェクトの場所を翻訳者に共有するには、おおきく2つの方法があります。</p>
+                     <li class="listitem">
+                        <p>OmegaTからプロジェクトをダウンロードしてもらう</p>
+                        <p>プロジェクト管理者が、プロジェクトの場所を翻訳者に共有するには、おおきく2つの方法があります。</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
@@ -1237,16 +1242,51 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               </li>
                            </ol>
                         </div>
-                        <p>チームプロジェクト管理者が翻訳者がチームプロジェクトを開くことができたことを確認した後、<a class="link" href="chapter.menus.html#menus.tools.statistics">プロジェクト翻訳状況</a>が管理者(サーバ上)と翻訳者(ローカル)の両方で同じであることを確認することをお勧めします。</p>
+                        <p>プロジェクト管理者が翻訳者がチームプロジェクトを開くことができたことを確認した後、<a class="link" href="chapter.menus.html#menus.tools.statistics">プロジェクト翻訳状況</a>が管理者(サーバ上)と翻訳者(ローカル)の両方で同じであることを確認することをお勧めします。</p>
                         <p>これらが一致しない場合は、<code class="filename">filters.xml</code>ファイルと<code class="filename">segmentation.conf</code>ファイルが正しく共有されていることを確認してください。</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">プロジェクトで作業する必要がある場合は、ローカルチームプロジェクトの場所とは異なるローカルの場所にプロジェクトを自分でダウンロードします。</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">これで、チームと一緒にプロジェクトで作業することもできます。</p>
+                     <li class="listitem">
+                        <p>プロジェクトで作業する必要がある場合は、ローカルチームプロジェクトの場所とは異なるローカルの場所にプロジェクトを自分でダウンロードします。</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">チームプロジェクトを管理する</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>チームプロジェクトには、翻訳に直接関係しない多くの管理タスクが含まれます。プロジェクト管理者は、特にコーディネーターとしてのみ機能し翻訳プロセス自体に関与しない場合、VCSを通じてそのようなタスクを直接処理することが有利である、あるいは必要性を感じるかもしれません。</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">ファイルの追加</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT には、翻訳ソースファイルとターゲットファイルをリポジトリに追加するメカニズムが用意されていますが、プロジェクトマネージャは、辞書、用語集、参照翻訳メモリなどの他のファイルを VCS クライアントから追加する必要があります。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">ファイルを削除</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT には、チーム プロジェクトからファイルを削除するメカニズムはありません。共有チーム プロジェクト ファイルが不要になった場合、プロジェクト管理者は VCS を使用してリポジトリから削除<span class="emphasis">
+                              <em>する必要があります</em>
+                           </span>。</p>
+                     </dd>
+                     <dt>
+                        <span class="term">コンサルティングプロジェクト統計</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">注記</h3>
+                           <p>これは、翻訳されたターゲットファイルを成果物としてリポジトリにコミットするように翻訳者に依頼するワークフローにのみ適用されます。</p>
+                        </div>
+                        <p>OmegaT はターゲット ファイルをコミットすると、プロジェクト統計も<code class="filename">.txt</code>形式でコミット<code class="filename">.json</code>。これにより、プロジェクトマネージャーはOmegaTを開くことなく、統計を参照し、場合によってはその処理を自動化することができます。</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
@@ -1348,7 +1388,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
 	&lt;/mapping&gt;
 &lt;/repository&gt;</pre>
                <p>
-                  <code class="filename">https://repo_for_All_OmegaT_team_project_sources</code>のすべては、<code class="filename">.bak</code>拡張子のファイルを除いて、ローカルOmegaTプロジェクトの原文フォルダーにマップされます。However, the <code class="filename">readme.bak</code> is also included.</p>
+                  <code class="filename">https://repo_for_All_OmegaT_team_project_sources</code>のすべては、<code class="filename">.bak</code>拡張子のファイルを除いて、ローカルOmegaTプロジェクトの原文フォルダーにマップされます。ただし、<code class="filename">readme.bak</code>も入っています。</p>
                <p>Webからの追加ソース・ファイルのマッピング:</p>
                <pre class="programlisting">&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
 	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
@@ -1382,7 +1422,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
                <p>上記のプロセスでは、プロジェクトマネージャがプロジェクトを完全に制御し、ファイル(および翻訳状況)が両方の側(サーバ側と通訳者側)で同一である通常のケースについて説明しています。</p>
                <p>OmegaTチームプロジェクトは、複数の翻訳者が<code class="filename">project_save.tmx</code>ファイルを共有しますが、(ソース)ファイルの(すべて)は共有しない、異なる方法で設定することもできます。</p>
-               <p>この場合も手順は同じですが、プロジェクト管理者はプロジェクトに(すべての)ファイルをバージョン管理に追加するわけではありません。代わりに、翻訳者はファイル自体をコピーするか、マッピングを追加して他の場所からファイルを同期します。</p>
+               <p>この場合も手順は同じですが、プロジェクトマネージャはプロジェクトに(すべての)ファイルをバージョン管理に追加するわけではありません。代わりに、翻訳者はファイル自体をコピーするか、マッピングを追加して他の場所からファイルを同期します。</p>
             </section>
          </section>
          <section class="section" id="how.to.use.team.project">
@@ -1394,12 +1434,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
             </div>
             <p>チームプロジェクトでは、プロジェクトメンバー間の同期メカニズムを使用します。</p>
-            <p>OmegaTチームプロジェクトがサーバにインストールされると、管理者は、プロジェクトの場所を示すURLまたは<code class="filename">OmegaT.project</code>ファイルなど、プロジェクトにアクセスするために必要な情報をメンバーに送信します。</p>
+            <p>OmegaTチームプロジェクトがサーバにインストールされると、プロジェクト管理者は、プロジェクトの場所を示すURLまたは<code class="filename">OmegaT.project</code>ファイルなど、プロジェクトにアクセスするために必要な情報をメンバーに送信します。</p>
             <p>ダウンロードされた後は、プロジェクトは自分の環境で開始されて、サーバと同期するようになります。</p>
             <p>リポジトリ認証情報は<a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a>ファイルに保存され、必要に応じて<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                   <code class="option">リポジトリ認証情報</code>
                </a>環境設定で削除できます。</p>
-            <p>同期はデフォルトではで3分ごとに行われるため、同じタイミングで作業していると、別のメンバーによって既に翻訳され、まだ同期されて取得されていない分節を、同時に翻訳したり修正することがあります。その場合、どちらの訳文を使うのか、選択する必要があります。</p>
             <p>チームのメンバーは、ファイルの翻訳とレビューを交代で行うこともできます。検索機能では、例えば、特定の人が翻訳したコンテンツや、特定の時間の後または前に翻訳されたコンテンツを編集ウィンドウにフィルターすることができます。</p>
             <div class="variablelist">
                <dl class="variablelist">
@@ -1418,7 +1457,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <a class="link" href="chapter.menus.html#menus.project.download.team.project">
                                     <span class="guimenuitem">チームプロジェクトをダウンロード...</span>
                                  </a>を使用して、<span class="guilabel">チームプロジェクトをダウンロード</span>ダイアログを表示します。</p>
-                              <p>ダイアログの上部にある<span class="guilabel">リポジトリURL:</span>欄に、チームプロジェクト管理者から提供されたURLを入力し、<span class="guilabel">新規ローカルプロジェクトフォルダー:</span>欄に、プロジェクトのフォルダーを指定します。プロジェクト管理者が、プロジェクト特有のブランチ名を指示していない限り、<span class="guilabel">標準ブランチ</span>設定はオンのままにします。</p>
+                              <p>ダイアログの上部にある<span class="guilabel">リポジトリURL:</span>欄に、プロジェクトマネージャから提供されたURLを入力し、<span class="guilabel">新規ローカルプロジェクトフォルダー:</span>欄に、プロジェクトのフォルダーを指定します。プロジェクトマネージャが、プロジェクト特有のブランチ名を指示していない限り、<span class="guilabel">標準ブランチ</span>設定はオンのままにします。</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -1438,8 +1477,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         <p>サーバがユーザー名/パスワード認証に依存している場合に、プロジェクトを最初にダウンロードするときか、またはプロセスの後半でユーザー名とパスワードを要求された際に、<span class="guilabel">認証</span>ダイアログを表示して入力を依頼します。明示的に削除しない限り、OmegaTはその特定のプロジェクトの認証情報を記憶します。詳細の<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                               <code class="option">リポジトリ認証情報</code>
                            </a>環境設定を参照してください。</p>
+                        <p>セキュリティを強化するため、一部のサーバーは外部プロセスにパスワードの代わりに別のアクセストークンを使って接続することを求めています。パスワードが機能しない場合はサーバーのドキュメントを確認してください。</p>
                         <p>サーバがSSH認証を使用している場合は、プロジェクトをダウンロードする前に、そのサーバに接続できるようにユーザのSSH設定(通常ホームディレクトの.ssh/configファイル)を更新してください。そうしないと、認証エラーが発生し、プロジェクトは読み込みに失敗します。</p>
-                        <p>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</p>
+                        <p>同じサーバーで複数のプロジェクトを使用する場合、そのサーバーに対して資格情報の入力は一度だけ求められます。</p>
                      </div>
                   </dd>
                   <dt>
@@ -1465,6 +1505,56 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <p>OmegaTチームプロジェクトを開いたり、再ロードしたり、閉じたり、保存したりすると、チームプロジェクトが同期されます。つまり、自動保存機能は、<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">プロジェクト保存間隔</code>
                         </a>設定で指定された時間間隔で、サーバのバージョンと同期させます。</p>
+                     <div class="warning">
+                        <h3 class="title">警告</h3>
+                        <p>メンバーが必ずしも同時にプロジェクトを同期しているわけではないため、ローカル翻訳のある分節に、サーバー上で他のメンバーと異なる翻訳が存在することもあります。プロジェクトを同期すると、OmegaTはローカル版と修正版をマッチングし、どの翻訳バージョンを保持するか選ぶように言われます。</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">翻訳の競合の解決</span>
+                  </dt>
+                  <dd>
+                     <p>OmegaTがローカル翻訳とリモートメモリの違いを自動的に解決できない場合、<span class="guilabel">マージ</span>ダイアログを表示します。</p>
+                     <p>ダイアログでは翻訳された分節の3つのバージョンから選択できます。</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">自分の変更</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>結果はあなたのローカルバージョンで、まだサーバーに送って共有されていません。</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">サーバー（変更前）</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>これは「ベース」バージョンであり、ここから、さまざまなバージョンが生まれました。</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">サーバー（変更後）</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>これは、あなたが最後にこのプロジェクトに携わって以来、他のメンバーと共有されたバージョンです。</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>表示される各分節ごとに適切な翻訳を一つずつ選択できます。また、特定のバージョンの「すべての」翻訳を選択することも可能です。</p>
+                     <p>
+                        <span class="guibutton">リストビュー</span>と<span class="guibutton">詳細ビュー</span>は、分節の別ビューを表示または非表示または表示できます。</p>
+                     <p>翻訳を選択したら、<span class="guibutton">「完了」</span>をクリックすると、選択した翻訳をサーバーに保存し、他のチームメンバーと共有します。</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>チームメンバーに翻訳の異なる部分を同時に担当させ、翻訳の競合を減らすようにしましょう。</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">チームプロジェクトの設定</span>
@@ -1479,7 +1569,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <span class="emphasis">
                                     <em>基本プロジェクト構成:</em>
                                  </span>原文ファイル、原文言語、訳文言語、トークナイザー、およびプロジェクトフォルダー構造の持ち方。</p>
-                              <p>チームプロジェクトでは、ローカルのプロジェクトの基本プロジェクト構成は、プロジェクト管理者が最初に設定したサーバの設定によって常に上書きされます。</p>
+                              <p>チームプロジェクトでは、ローカルのプロジェクトの基本プロジェクト構成は、プロジェクトマネージャが最初に設定したサーバの設定によって常に上書きされます。</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -1501,7 +1591,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                        <p>たとえば、多くの商業ホスティングサービスにおいて、SSH +Gitまたはhttpsプロトコルを使用して同じリポジトリにアクセスすることができます。OmegaTは、ユーザが指定したプロトコルを尊重します。</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>プロジェクト管理者から提供された<code class="filename">OmegaT.project</code>ファイルを使用してリモートプロジェクトを最初にダウンロードする時は、OmegaTはそのファイル内のマッピング(定義されている場合)を使用します。</p>
+                                       <p>プロジェクトマネージャから提供された<code class="filename">OmegaT.project</code>ファイルを使用してリモートプロジェクトを最初にダウンロードする時は、OmegaTはそのファイル内のマッピング(定義されている場合)を使用します。</p>
                                     </li>
                                     <li class="listitem">
                                        <p>
@@ -1536,12 +1626,12 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <span class="term">訳文ファイル</span>
                   </dt>
                   <dd>
-                     <p>訳文ファイルを生成した後、プロジェクト管理者から要求された場合は、<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
+                     <p>訳文ファイルを生成した後、プロジェクトマネージャから要求された場合は、<a class="link" href="chapter.menus.html#menus.project" title="プロジェクト">
                            <span class="guimenu">プロジェクト</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                            <span class="guimenuitem">訳文ファイルをコミット</span>
-                        </a>を使用してサーバに追加します。</p>
+                        </a>を使用してサーバに追加します。ターゲット・ファイルをコミットすると、統計ファイルもサーバーにアップロードされます。</p>
                   </dd>
                   <dt>
                      <span class="term">ファイルを削除</span>
@@ -1584,13 +1674,13 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">標準版:OmegaT 6.0.0</span>
+                     <span class="term">標準版: OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>デイリーユースにおすすめのエディションです。</p>
                   </dd>
                   <dt>
-                     <span class="term">開発版:OmegaT Nightly</span>
+                     <span class="term">開発版:OmegaT Weekly</span>
                   </dt>
                   <dd>
                      <p>この版は、新しいコードがOmegaTに追加されるたびに自動的に生成されます。テスト目的で使用されます。</p>
@@ -1600,7 +1690,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>ファイルは<a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>から直接ダウンロードできます。</p>
             <div class="note">
                <h3 class="title">注記</h3>
-               <p>OmegaT 6.0.0 の実行には、Java 11 Runtime Environment（JRE) が必要です。</p>
+               <p>OmegaT 6.0.2 の実行には、Java 11 Runtime Environment（JRE) が必要です。</p>
                <p>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 11 Runtime Environmentに依存します。</p>
                <p>OmegaT 5.8.0以降では、すべてのプラットフォームでJava 11 Runtime Environmentもサポートしています。</p>
                <p>OmegaTチームはEclipse FoundationのAdoptium Projectが提供するJavaランタイムEclipse Temurinを推奨していますが、Java 8互換のランタイム環境であればどれでも動作するはずです。 <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">The Eclipse Temurin™ project</a>を参照。</p>
@@ -1631,7 +1721,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">注記</h3>
                   <p>使用可能なファイルからOmegaTを直接実行することもできますが、そこにある<code class="filename">linux-install.sh</code>スクリプトを実行して、OmegaTをより適切な場所にインストールすることもできます。</p>
                   <p>スクリプトを実行するには、<code class="filename">sudo</code>パスワードを入力する必要があります。</p>
-                  <p>このスクリプトは、<code class="filename">/opt/OmegaT/</code>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<code class="filename">/opt/omegat/OmegaT_6.0.0</code>にプログラムをインストールし、デフォルトバージョンとして設定します(<code class="filename">/opt/omegat/OmegaT-default</code>)。</p>
+                  <p>このスクリプトは、<code class="filename">/opt/OmegaT/</code>にある同じバージョンのOmegaTの既存のインストールをチェックします。If there isn’t one, it installs the program in <code class="filename">/opt/omegat/OmegaT_6.0.1</code> and sets it as the default version (in <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</p>
             </section>
@@ -2015,7 +2105,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <code class="option">-Duser.country=CC</code>
                            </p>
                            <p>
-                              <code class="code">CC</code>を<a class="ulink" href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_top">ISO 3166-1 alpha-2</a>リストから希望する2文字の国コードに置き換えます。</p>
+                              <code class="code">CC</code>を<a class="ulink" href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_top">ISO 3166-1 alpha-2</a>リストから希望する二文字の国コードに置き換えます。</p>
                            <p>この設定は、ひとつ前のユーザーインターフェース言語の引数と結合して、地域のバリエーションを指定します。それが利用できない場合は、ユーザーインターフェースは上記と同じ優先順位になります。</p>
                         </dd>
                         <dt id="launch.with.command.line.maximum.memory.assignment">

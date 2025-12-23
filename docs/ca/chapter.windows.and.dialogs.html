@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -233,7 +233,13 @@
                   </div>
                </div>
                <p>Seleccioneu les llengües d'origen i de destinació en la llista desplegable o indiqueu-les manualment.</p>
-               <p>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu indicar qualsevol codi que s'ajusti al <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> (incloent-hi codis de llengua de tres lletres) en el camp corresponent.</p>
+               <p>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu escriure qualsevol codi en el camp corresponent.</p>
+               <div class="warning">
+                  <h3 class="title">Avís</h3>
+                  <p>L'OmegaT no comprova la validesa dels codis de llengua que introduïu. Assegureu-vos que els dos codis de llengua siguin <span class="emphasis">
+                        <em>diferents</em>
+                     </span>, que siguin adequats per a l'ús que feu de l'OmegaT i que els codis de llengua assignats coincideixin en qualsevol altra ubicació on els feu servir.</p>
+               </div>
                <p>Els codis de llengua s'utilitzen en diverses parts de l'OmegaT amb diverses finalitats:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -248,21 +254,24 @@
                            </a>.</p>
                      </li>
                      <li class="listitem">
-                        <p>Cercar errors ortogràfics a partir dels diccionaris instal·lats en les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Corrector ortogràfic">
+                        <p>Cercar errors ortogràfics amb els diccionaris instal·lats en les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Corrector ortogràfic">
                               <span class="guilabel">Corrector ortogràfic</span>
                            </a>.</p>
                      </li>
                      <li class="listitem">
-                        <p>Cercar errors gramaticals i tipogràfics a partir de les regles establertes en les preferències del <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                        <p>Cercar errors gramaticals i tipogràfics amb les regles establertes en les preferències del <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
                               <span class="guilabel">LanguageTool</span>
-                           </a>, etc.</p>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Especificar les llengües utilitzades en els fitxers TMX creats pel projecte (per a complir amb l'especificació, un fitxer TMX ha de fer servir codis de llengua <a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>).</p>
                      </li>
                   </ul>
                </div>
                <p>Altres funcions.</p>
                <div class="warning">
                   <h3 class="title">Avís</h3>
-                  <p>Assegureu-vos que indiqueu els codis de llengua correctes i que els codis que indiqueu en qualsevol altre lloc coincideixin exactament amb els que indiqueu aquí. Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</p>
+                  <p>Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</p>
                </div>
                <p>L'OmegaT selecciona automàticament els lematitzadors que corresponen a les llengües d'origen i de destinació, però podeu modificar els paràmetres manualment. Els lematitzadors permeten que l'OmegaT proporcioni millors coincidències.</p>
             </section>
@@ -326,7 +335,7 @@
                               <span class="guimenuitem">Regles de segmentació globals...</span>
                            </a>) són regles globals.</p>
                         <p>Utilitzeu aquest botó per a crear regles locals específiques del vostre projecte. Marqueu la casella <code class="option">Utilitza regles de segmentació locals</code> i ajusteu les regles de segmentació com vulgueu.</p>
-                        <p>El projecte emmagatzemarà el nou conjunt de regles en el fitxer <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a> de la carpeta <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Aquestes regles substituiran les regles de segmentació globals.</p>
+                        <p>El projecte emmagatzemarà el nou conjunt de regles en el fitxer <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a> de la carpeta <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Aquestes regles substituiran les regles de segmentació globals.</p>
                         <p>Per a inhabilitar les regles de segmentació locals, inhabiliteu aquesta opció o suprimiu el fitxer.</p>
                         <div class="warning">
                            <h3 class="title">Avís</h3>
@@ -367,7 +376,7 @@
                                     <p>Haureu d'aplicar manualment la negreta, la cursiva i altres opcions de format del text en el fitxer traduït.</p>
                                  </li>
                                  <li class="listitem">
-                                    <p>Si només voleu reduir el nombre d'etiquetes en un document del <span class="application">Microsoft Word</span> (2007 o posterior), podeu utilitzar l'script <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Neteja les etiquetes</a>.</p>
+                                    <p>Si només voleu reduir el nombre d'etiquetes en un document del <span class="application">Microsoft Word</span> (2007 o posterior), podeu utilitzar l'script <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts.distribution.tagwipe">Neteja d'etiquetes</a>.</p>
                                     <p>Consulteu la secció <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripts">
                                           <span class="guilabel">Scripts</span>
                                        </a> per a conèixer més detalls.</p>
@@ -449,7 +458,7 @@
                      </dt>
                      <dd>
                         <p>Quan treballeu en un projecte en equip, aquesta finestra us permet definir l'assignació entre les carpetes remotes i locals.</p>
-                        <p>Consulteu la secció <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de dipòsits">Assignacions de dipòsits</a> de la guia <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Configuració d'un projecte en equip">Configuració d'un projecte en equip</a> per a conèixer més detalls.</p>
+                        <p>Consulteu la secció <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de repositoris">Assignacions de repositoris</a> de la guia <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Configuració d'un projecte en equip">Configuració d'un projecte en equip</a> per a conèixer més detalls.</p>
                      </dd>
                      <dt id="dialogs.project.properties.external.searches">
                         <span class="term" id="dialogs.project.properties.external.searches.title">
@@ -2308,7 +2317,7 @@
                         <p>Substitueix el text de destinació actual per una coincidència sense etiquetes.</p>
                      </dd>
                      <dt id="windows.scripts.distribution.tagwipe">
-                        <span class="term" id="windows.scripts.distribution.tagwipe.title">Neteja les etiquetes</span>
+                        <span class="term" id="windows.scripts.distribution.tagwipe.title">Neteja d'etiquetes</span>
                      </dt>
                      <dd>
                         <p>Suprimeix les etiquetes supèrflues dels documents DOCX.</p>

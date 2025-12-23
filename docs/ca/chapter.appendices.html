@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -288,7 +288,7 @@
             </div>
             <p>Per a modificar les extensions de fitxer, el nom dels fitxers de destinació i les codificacions associades a un filtre, seleccioneu-lo en la llista i feu clic en el botó <span class="guibutton">Edita...</span>.</p>
             <p>Alguns filtres proporcionen un botó <span class="guibutton">Opcions...</span> per a personalitzar encara més els paràmetres.</p>
-            <p>Feu clic en el botó <span class="guibutton">Reinicialitza els valors per defecte</span> per a reinicialitzar els filtres de fitxer als paràmetres per defecte.</p>
+            <p>Feu clic en el botó <span class="guibutton">Reinicialitza els valors</span> per a reinicialitzar els filtres de fitxers.</p>
             <p>Les preferències dels filtres de fitxers globals modificades es desen en <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a>, en la carpeta de configuració. Consulteu <a class="link" href="chapter.appendices.html#configuration.folder" title="Carpeta de configuració">Carpeta de configuració</a> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres.</p>
             <p>Els filtres de fitxers locals modificats es desen en el fitxer <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a>, dins de la carpeta del projecte. Consulteu el capítol <a class="link" href="chapter.project.folder.html" title="Carpeta del projecte">Carpeta del projecte</a> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres i el projecte torna a utilitzar els filtres de fitxers globals.</p>
             <section class="section" id="file.filters.general">
@@ -1107,28 +1107,28 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla d'excepció, casella sense marcar, més amunt en la llista</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla d'excepció, casella <span class="guilabel">Divisió</span> sense marcar, més amunt en la llista</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">No segmentar després de Sr.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">Sr\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Sr seguit d'un punt i un espai en blanc.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla d'excepció, casella sense marcar, més amunt en la llista</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla d'excepció, casella <span class="guilabel">Divisió</span> sense marcar, més amunt en la llista</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Cel·les de l'Excel amb salts de línia que no representen segments</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">.</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Salt de línia, seguit de qualsevol caràcter.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla de separació, casella marcada, més avall en la llista</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Regla de separació, casella <span class="guilabel">Divisió</span> marcada, més avall en la llista</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Començar un segment nou després d'un punt seguir d'un espai, una tabulació o un altre espai en blanc</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Punt seguir d'un espai en blanc.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; ">Regla de separació, casella marcada, més avall en la llista</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">Regla de separació, casella <span class="guilabel">Divisió</span> marcada, més avall en la llista</td>
                               <td style="text-align: left; border-right: 1px solid ; ">Iniciar un segment nou després de «。» (punt japonès)</td>
                               <td style="text-align: center; border-right: 1px solid ; ">。</td>
                               <td style="text-align: center; border-right: 1px solid ; "> </td>
@@ -4943,7 +4943,7 @@
                         <span class="term" id="configuration.folder.extra.contents.repositories.title">repositories.properties</span>
                      </dt>
                      <dd>
-                        <p>Aquest fitxer conté la informació d'inici de sessió per als dipòsits dels projectes en equip.</p>
+                        <p>Aquest fitxer conté la informació d'inici de sessió per als repositoris dels projectes en equip.</p>
                         <div class="warning">
                            <h3 class="title">Avís</h3>
                            <p>El contingut del fitxer no està xifrat.</p>
@@ -4951,12 +4951,19 @@
                         <p>Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Configuració d'un projecte en equip">Configuració d'un projecte en equip</a> per a conèixer més detalls.</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.segmentation">
-                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</span>
+                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</span>
                      </dt>
                      <dd>
-                        <p>Aquest fitxer de paràmetres conté els paràmetres personalitzats de segmentació. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Regles de segmentació globals">
+                        <p>Aquest fitxer de paràmetres conté paràmetres de segmentació personalitzats en el format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Regles de segmentació globals">
                               <span class="guilabel">Regles de segmentació globals</span>
                            </a> per a conèixer més detalls.</p>
+                        <div class="note">
+                           <h3 class="title">Nota</h3>
+                           <p>Si es detecta un fitxer <code class="filename">segmentation.conf</code> existent d'una versió anterior, l'OmegaT el converteix automàticament.</p>
+                        </div>
+                        <p>
+		
+                        </p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.plugin">
                         <span class="term" id="configuration.folder.extra.contents.plugin.title">plugins/</span>

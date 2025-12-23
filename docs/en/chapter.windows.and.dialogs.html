@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.1 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -247,10 +247,18 @@
                </div>
                <p>Select the source and target languages from the drop-down list,
     or enter them manually.</p>
-               <p>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a>
-	(including the three-letter language codes) into the appropriate
-	field.</p>
+               <p>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</p>
+               <div class="warning">
+                  <h3 class="title">Warning</h3>
+                  <p>OmegaT does not check the validity of the language codes that you
+	  enter. Make sure that the two language codes are
+	  <span class="emphasis">
+                        <em>different</em>
+                     </span>, that they are appropriate for your use
+	  of OmegaT, and that all other locations requiring a language code
+	  match the codes you assign here.</p>
+               </div>
                <p>Language codes are used in various places in OmegaT to:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -267,28 +275,30 @@
 		preferences,</p>
                      </li>
                      <li class="listitem">
-                        <p>find spelling mistakes from the dictionaries installed in the
+                        <p>find spelling mistakes using the dictionaries installed in the
 		<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Spellchecker">
                               <span class="guilabel">Spellchecker</span>
                            </a> preferences,</p>
                      </li>
                      <li class="listitem">
-                        <p>find grammatical and typographical mistakes from the rules set
+                        <p>find grammatical and typographical mistakes using the rules set
 		in the <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
                               <span class="guilabel">LanguageTool</span>
                            </a>
 		preferences,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>specify the languages used in the TMX files that are created by
+		the project (to be compliant, a TMX must use <a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a> language
+		codes),</p>
                      </li>
                   </ul>
                </div>
                <p>and so on.</p>
                <div class="warning">
                   <h3 class="title">Warning</h3>
-                  <p>Make sure you enter the correct language codes and that
-	  all other locations requiring such a code match the one you
-	  assign here exactly. Functions that depend on a language either
-	  fail or produce incorrect results if there is a mismatch between
-	  the language codes.</p>
+                  <p>Functions that depend on a language either fail or produce incorrect
+	  results if there is a mismatch between the language codes.</p>
                </div>
                <p>OmegaT automatically selects the tokenizers that correspond to the
     source and target languages but you can manually modify those
@@ -387,7 +397,7 @@
                         <p>Use this button to create local rules specific to your
 		  project. Check the <code class="option">Use local segmentation rules</code>
 		  box, and adjust the segmentation rules as desired.</p>
-                        <p>The project will store the new set of rules in the <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a> file located in
+                        <p>The project will store the new set of rules in the <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a> file located in
 		  its <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> folder. These rules
 		  will supersede the global segmentation rules.</p>
                         <p>To disable local segmentation rules, disable this option or

@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              更新\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["プロジェクトフォルダー","chapter.project.folder.html",[
-["デフォルトの構造","chapter.project.folder.html#d0e10235",null],
-["最小のコンテンツ","chapter.project.folder.html#d0e10311",null],
+["デフォルトの構造","chapter.project.folder.html#d0e10356",null],
+["最小のコンテンツ","chapter.project.folder.html#d0e10432",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1be15j2rn0vde-1353vtzlqtmhs";
+var storageId = "-16dfoyvlokq54-175powgjl2e4y";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

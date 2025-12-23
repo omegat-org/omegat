@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,12 +55,12 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10235">デフォルトの構造</a>
+                     <a href="chapter.project.folder.html#d0e10356">デフォルトの構造</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10311">最小のコンテンツ</a>
+                     <a href="chapter.project.folder.html#d0e10432">最小のコンテンツ</a>
                   </span>
                </li>
                <li>
@@ -105,7 +105,7 @@
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e10235">
+         <section class="section" id="d0e10356">
             <div class="titlepage">
                <div>
                   <div>
@@ -202,7 +202,7 @@
                </div>
             </div>
          </section>
-         <section class="section" id="d0e10311">
+         <section class="section" id="d0e10432">
             <div class="titlepage">
                <div>
                   <div>
@@ -629,10 +629,17 @@
                      <p>すでに修正済で、綴り確認機能に無視させるか学習させる単語は、対応する名前で文書ファイルに入力して、<a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> フォルダーに保存しておきます。</p>
                   </dd>
                   <dt id="project.folder.omegat.segmentation">
-                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.srx</span>
                   </dt>
                   <dd>
-                     <p>このファイルには、プロジェクト固有の分節化規則が含まれています。</p>
+                     <p>このファイルには、プロジェクト固有の分節化規則が<a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>形式で含まれています。</p>
+                     <div class="note">
+                        <h3 class="title">注記</h3>
+                        <p>もし以前のバージョンの<code class="filename">segmentation.conf</code>ファイルが存在すれば、OmegaTは自動的に変換します。</p>
+                     </div>
+                     <p>
+		  
+                     </p>
                   </dd>
                   <dt id="project.folder.omegat.filters">
                      <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.1 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -164,6 +164,11 @@
                      <li>
                         <span class="section">
                            <a href="chapter.how.to.html#how.to.setup.team.project.prepare.the.repository">Preparations</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.manage.team.project">Manage a team project</a>
                         </span>
                      </li>
                      <li>
@@ -1342,9 +1347,9 @@ third line is the current translation to French.</p>
             </div>
             <p>Managing a team project calls for some knowledge of either the
   <span class="emphasis">
-                  <em>SVN</em>
-               </span> or <span class="emphasis">
                   <em>Git</em>
+               </span> or <span class="emphasis">
+                  <em>SVN</em>
                </span> version control system
   (<span class="emphasis">
                   <em>VCS</em>
@@ -1354,9 +1359,9 @@ third line is the current translation to French.</p>
   project.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>An OmegaT team projects synchronizes the project translation memory
+               <p>An OmegaT team project synchronizes the project translation memory
 	<a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> and the project writable
-	glossary <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> between the hosting server and
+	glossary <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> between the VCS hosting server and
 	all the participating team members, and manages all possible conflicts
 	between them.</p>
             </div>
@@ -1371,34 +1376,34 @@ third line is the current translation to French.</p>
                <p>Here are the steps to set up a team project:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">Create an
-		empty repository on your VCS hosting server</p>
+                     <li class="listitem">
+                        <p>Create an empty repository on your VCS hosting
+		server</p>
                         <p>This can normally be done through a web interface, a graphical
 		application, or the command line. Consult the documentation for your
 		server or hosting service for details.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">Use the local
+                     <li class="listitem">
+                        <p>Use the local
 		VCS to make a local copy (clone)</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
                            <p>This local version contains your <span class="emphasis">
                                  <em>project
 		  manager</em>
-                              </span> copy of the OmegaT project. Use it to make
+                              </span> copy of the OmegaT project. Use this copy to make
 		  modifications that affect the entire team.</p>
                         </div>
-                        <p>The local repository is used to add the initial project to the
-		server, and can also be used for maintenance tasks, such as deleting
-		files, that cannot be performed directly within OmegaT.</p>
+                        <p>The local version is used to add the initial project to the
+		server version, as well as for certain maintenance tasks. See the
+		<a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="Manage a team project">Manage a team project</a> section for details.</p>
                         <p>We recommend that you avoid using that folder for translation
 		tasks. If you need to perform translation or review tasks on that
 		project, use OmegaT to download a separate copy of the team project and
 		work from there. See the <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Use a team project">Use a team project</a> how-to for details.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">Fill the
+                     <li class="listitem">
+                        <p>Fill the
 		empty local copy with a real OmegaT project</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -1407,13 +1412,14 @@ third line is the current translation to French.</p>
                                  <p>If you are creating a new empty project, you can follow the
 			<a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Create a new project">GUI
 			procedure</a>, or create it directly from the command line:
+			
 			<span class="command">
                                        <strong>java -jar OmegaT.jar team init &lt;source language&gt;
 			&lt;target language&gt;</strong>
                                     </span>
                                  </p>
                                  <p>This command also automatically registers the project in the
-			version control system.</p>
+			VCS.</p>
                               </li>
                               <li class="listitem">
                                  <p>Choose the appropriate settings</p>
@@ -1434,21 +1440,21 @@ third line is the current translation to French.</p>
 			delete any files in the project that you do not need or want to
 			upload to the server before proceeding to the next step.</p>
                                  <p>Copy the files to translate to the source/ folder, and use
-			your SVN or Git client, or the command line, to add and publish them
+			your VCS client, or the command line, to add and publish them
 			to the repository. Use <a class="link" href="chapter.menus.html#menus.project" title="Project">
                                        <span class="guimenu">Project</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem">Commit
       Source Files</span>
-                                    </a> to add files
+                                    </a> to add source files
 			from OmegaT.</p>
-                                 <p>You must use your SVN or Git client, or the command line, to
+                                 <p>You must use your VCS client, or the command line, to
 			add and publish any dictionaries, glossaries, translation memories
 			or other files you want to include in the project.</p>
-                                 <p>This step can be performed before the registering and publishing
-			the project for the first time, and can also be used to add new files,
-			or update existing ones after the project has been created.</p>
+                                 <p>This step can be performed either before or after
+			registering and publishing the project for the first
+			time.</p>
                               </li>
                            </ul>
                         </div>
@@ -1472,7 +1478,7 @@ third line is the current translation to French.</p>
                                  <span class="guimenuitem">Commit
       Target Files</span>
                               </a>.</p>
-                           <p>The team project administrator must use the local VCS to
+                           <p>The project manager must use the local VCS to
           <span class="bold">
                                  <strong>modify</strong>
                               </span> or <span class="bold">
@@ -1484,18 +1490,16 @@ third line is the current translation to French.</p>
           details.</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">Register the project
-		files into the local VCS</p>
+                     <li class="listitem">
+                        <p>Register the project files into the local VCS</p>
                         <p>If you created the project from the GUI, you then have to
 		explicitly add it to the version control system (<span class="command">
                               <strong>add</strong>
                            </span>
 		in both SVN and Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">Put the registered files
-		on the hosting server</p>
+                     <li class="listitem">
+                        <p>Put the registered files on the hosting server</p>
                         <p>Finally, publish your project to the remote server
 		(<span class="command">
                               <strong>commit</strong>
@@ -1506,43 +1510,42 @@ third line is the current translation to French.</p>
                               <strong>push</strong>
                            </span> in Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">Give
-		access rights to your team</p>
+                     <li class="listitem">
+                        <p>Give access rights to your team</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
                            <p>If you use multiple projects on the same server, credentials
 		  will only be asked once for that server.</p>
                         </div>
                         <p>After the project is ready and has been uploaded to the server,
-		the team project administrator has to set up access for the translators.
+		the project manager has to set up access for the translators.
 		Accessing a team project requires the following information:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>Projects on a hosting service</p>
-                                 <p>The translators will have to create an account for the
-			service, and send their user name to the team project
-			administrator.</p>
-                                 <p>The administrator will then grant write access to the
+                                 <p>The translators will have to create an account for
+			the service, and send their user name to the project
+			manager.</p>
+                                 <p>The project manager will then grant write access to the
 			repository to those accounts.</p>
                               </li>
                               <li class="listitem">
                                  <p>Projects on a self-hosted server</p>
                                  <p>If the server is self-hosted and does not have a provision
-			for translators to register an account themselves, the team project
-			administrator must create accounts with write access for the
+			for translators to register an account themselves, the project
+			manager must create accounts with write access for the
 			translators.</p>
-                                 <p>After creating the accounts, the administrator must send the
+                                 <p>After creating the accounts, the project manager must send the
 			translators their individual credentials.</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">Have
+                     <li class="listitem">
+                        <p>Have
 		everybody download the project from OmegaT</p>
-                        <p>Administrators have two options for sending the location of the
+                        <p>Project managers have two options for sending the location of the
 		project to the translators:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
@@ -1565,25 +1568,76 @@ third line is the current translation to French.</p>
                               </li>
                            </ol>
                         </div>
-                        <p>After the team project administrator confirms that a translator
-		has been able to open the team project, it is a good idea to make sure
-		that the <a class="link" href="chapter.menus.html#menus.tools.statistics">project
-		statistics</a> are the same for both the administrator (on the
-		server) and the translator (locally).</p>
-                        <p>If they do not match, make sure the
+                        <p>After the project manager confirms that a translator has
+		been able to open the team project, it is a good idea to make
+		sure that the <a class="link" href="chapter.menus.html#menus.tools.statistics">project
+		statistics</a> are the same for both the project manager
+		(on the server) and the translator (locally).</p>
+                        <p>If they do not match, make sure the two projects use the
+		same filters and segmentation settings by checking that
 		<code class="filename">filters.xml</code> and
-		<code class="filename">segmentation.conf</code> files are properly shared.</p>
+		<code class="filename">segmentation.conf</code> are properly
+		shared.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">If you
-		need to work on the project too, download the project yourself to a
-		local location different from the local team project location</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">You can now also
-		work on the project with the team</p>
+                     <li class="listitem">
+                        <p>If you need to work on the project too, download the
+		project yourself to a local location different from the
+		original team project location</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">Manage a team project</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Team projects involve a number of management tasks not directly related
+  to translation. Project managers may find it advantageous—or even necessary—to
+  handle such tasks directly from the VCS repository, particularly in cases where
+  the project manager only acts as a coordinator and is not involved in the translation
+  process itself.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">Adding files</span>
+                     </dt>
+                     <dd>
+                        <p>Although OmegaT provides a mechanism for adding translation source and
+		  target files to the repository, the project manager must add any other files,
+		  such as dictionaries, glossaries or reference translation memories, from the
+		  VCS repository.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Deleting files</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT does not provide a mechanism to delete files from a team project.
+		  If any shared team project files have become unnecessary, the project manager
+		  <span class="emphasis">
+                              <em>must</em>
+                           </span> delete them from the VCS repository.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Consulting project statistics</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">Note</h3>
+                           <p>This only applies to workflows that ask translators
+			to commit the translated target files to the repository as
+			deliverables.</p>
+                        </div>
+                        <p>When OmegaT commits the target files, it also commits
+		  the project statistics in <code class="filename">.txt</code> and
+		  <code class="filename">.json</code> format. This enable the project
+		  manager to consult the statistics, and possibly automate
+		  their processing, without the need to open OmegaT.</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
@@ -1761,14 +1815,14 @@ third line is the current translation to French.</p>
                   </div>
                </div>
                <p>The above process describes the most common scenario, in which the
-	team project administrator has full control of the project and all files
+	project manager has full control of the project and all files
 	(and statistics) are identical in all instances of the project, both on the
 	server and the local systems of the translators.</p>
                <p>It is also possible to use a team project configuration where several
 	translators share the <code class="filename">project_save.tmx</code> file, and only a
 	subset of the other files.</p>
                <p>The basic procedure is essentially the same, except that the team
-	project administrator does not add every file to the version-controlled
+	project manager does not add every file to the version-controlled
 	project on the server. The remaining files are either copied by the
 	translators themselves, or mappings that synchronize files from other
 	locations are defined.</p>
@@ -1783,7 +1837,7 @@ third line is the current translation to French.</p>
                </div>
             </div>
             <p>Team projects use synchronization mechanisms between project members.</p>
-            <p>Once a OmegaT team project is installed on a server, the administrator
+            <p>Once a OmegaT team project is installed on a server, the project manager
   sends members the information they need to access it: a URL indicating the
   location of the project, or an <code class="filename">omegat.project</code>
   file.</p>
@@ -1795,10 +1849,6 @@ third line is the current translation to French.</p>
 		Credentials</code>
                </a>
   preferences.</p>
-            <p>Since synchronization takes place by default every three minutes, 
-  project members will sometime translate or modify a segment that has already
-  been translated by another member but not synchronized yet. When that happens,
-  members have to select the appropriate translation.</p>
             <p>Members can take turns translating and reviewing the files. The Search
   function allows them to filter the Editor pane on contents translated by a
   given person, or on contents translated after or before a given time,
@@ -1821,11 +1871,11 @@ third line is the current translation to French.</p>
       Team Project...</span>
                                  </a> to bring up the
 			<span class="guilabel">Download Team Project</span> dialog.</p>
-                              <p>Enter the URL provided by the team project administrator in the
+                              <p>Enter the URL provided by the project manager in the
 			<span class="guilabel">Repository URL:</span> field at the top of the dialog,
 			and specify a folder for the project in the <span class="guilabel">New Local
 			Project Folder:</span> field. Leave the <span class="guilabel">Default
-			branch</span> option checked unless the project administrator
+			branch</span> option checked unless the project manager
 			has provided instructions for using a custom branch.</p>
                            </li>
                            <li class="listitem">
@@ -1855,12 +1905,15 @@ third line is the current translation to French.</p>
 		Credentials</code>
                            </a>
 		  preferences for details.</p>
+                        <p>To enhance security, some servers require external processes
+		  to connect using a separate access token instead of a password. Check
+          the server documentation if your password does not work.</p>
                         <p>If the server uses SSH authentication, make sure you update your
 		  SSH configuration to include that server before attempting to download
 		  the project, otherwise you will get an authentication error and the
 		  project will fail to load.</p>
-                        <p>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</p>
+                        <p>If you use multiple projects on the same server, you will only be
+          asked for your credentials once for that server.</p>
                      </div>
                   </dd>
                   <dt>
@@ -1895,6 +1948,75 @@ third line is the current translation to French.</p>
 		data saving interval</code>
                         </a>
         preference.</p>
+                     <div class="warning">
+                        <h3 class="title">Warning</h3>
+                        <p>Since members do not necessarily synchronize their projects
+          at the same time, a segment with a local translation will occasionally
+          also have a different translation from another member available on the
+          server. When you synchronize the project, OmegaT will match the local
+          and modified versions, and ask you to choose which version of the
+          translation to keep.</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">Solving translation conflicts</span>
+                  </dt>
+                  <dd>
+                     <p>When OmegaT cannot automatically solve a difference between a
+        local translation and the remote memory, it displays a
+        <span class="guilabel">Merge</span> dialog.</p>
+                     <p>The dialog offers the choice between three versions of the
+        translated segment:
+        </p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Mine</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>This is your local version, which has not yet
+            been sent to the server for sharing.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (original)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>This is the “base” version from which various
+            versions were created.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (updated)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>This is the version that was shared with other
+            members since you last worked on the project.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>It is possible to select the appropriate translations one by one
+        by clicking on them for each displayed segment. It is also possible to
+        select “all” the translations of a given version.</p>
+                     <p>
+                        <span class="guibutton">List View</span> and <span class="guibutton">Detail
+        View</span> offer alternative views of a segment either hiding or
+        displaying various segment properties.</p>
+                     <p>Once the translations have been selected, clicking on
+        <span class="guibutton">Done</span> will save the selected translations to the
+        server for sharing with other team members.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Have team members work on different parts of a translation at any
+          given time to reduce the chances of having translation conflicts.</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">Team project configuration</span>
@@ -1917,7 +2039,7 @@ third line is the current translation to French.</p>
             languages, tokenizers, and the project folder hierarchy.</p>
                               <p>In a team project, the basic configuration parameters of the
 			local project are always overridden by the configuration on the
-			server originally set by the project administrator.</p>
+			server originally set by the project manager.</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -1952,7 +2074,7 @@ third line is the current translation to French.</p>
                                     <li class="listitem">
                                        <p>If you first download the remote project using an
                 <code class="filename">omegat.project</code> file provided by the project
-                administrator, OmegaT will use the mappings in that file, if
+                manager, OmegaT will use the mappings in that file, if
                 any.</p>
                                     </li>
                                     <li class="listitem">
@@ -1981,7 +2103,7 @@ third line is the current translation to French.</p>
                   <dd>
                      <div class="warning">
                         <h3 class="title">Warning</h3>
-                        <p>Only the project administrator should use <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                        <p>Only the project manager should use <a class="link" href="chapter.menus.html#menus.project" title="Project">
                               <span class="guimenu">Project</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
@@ -2002,7 +2124,8 @@ third line is the current translation to French.</p>
                            <span class="guimenuitem">Commit
       Target Files</span>
                         </a> to add them to the
-        server, if the project administrator has requested you to do so.</p>
+        server, if the project manager has requested you to do so.
+        Committing the target files also uploads the statistics files to the server.</p>
                   </dd>
                   <dt>
                      <span class="term">Deleting files</span>
@@ -2011,7 +2134,7 @@ third line is the current translation to French.</p>
                      <p>Files in a team project cannot be deleted from OmegaT or the local
         file system. They will be restored the next time the project is
         synchronized. This task is normally performed by the project
-        administrator.</p>
+        manager.</p>
                   </dd>
                   <dt>
                      <span class="term">Working offline</span>
@@ -2052,7 +2175,7 @@ third line is the current translation to French.</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Standard: OmegaT 6.0.1</span>
+                     <span class="term">Standard: OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>This edition is recommended for everyday use.</p>
@@ -2070,7 +2193,7 @@ third line is the current translation to French.</p>
             <p>The files are downloadable directly from <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>OmegaT 6.0.1 requires a Java 11 Runtime Environment (JRE) to run.</p>
+               <p>OmegaT 6.0.2 requires a Java 11 Runtime Environment (JRE) to run.</p>
                <p>OmegaT packages are available both in versions bundled with Java, and
 	versions without it. Packages without Java rely on a Java 11 Runtime Environment
 	installed systemwide.</p>
@@ -2118,7 +2241,7 @@ third line is the current translation to French.</p>
       <code class="filename">sudo</code> password.</p>
                   <p>The script checks for an existing installation of the same OmegaT
       version in <code class="filename">/opt/omegat/</code>. If there isn’t one, it
-      installs the program in <code class="filename">/opt/omegat/OmegaT_6.0.1</code>
+      installs the program in <code class="filename">/opt/omegat/OmegaT_6.0.2</code>
       and sets it as the default version (in
       <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>

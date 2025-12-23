@@ -16,3 +16,7 @@ dependencies {
         compileOnly(libs.jackson.yaml)
     }
 }
+
+tasks.named('jar') {
+    dependsOn rootProject.tasks.named('philosophyHtml')
+}

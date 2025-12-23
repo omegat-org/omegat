@@ -28,6 +28,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
@@ -50,17 +51,12 @@ import org.omegat.gui.preferences.view.FontSelectionController;
 import org.omegat.gui.preferences.view.GeneralOptionsController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.PreferencesWindowController;
-import org.omegat.util.Preferences;
 
 /**
- * Simple wizard dialog for first-time configuration.
- * Steps:
- * 1) Start options Step
- * 2) Theme (AppearanceController)
- * 3) Font (FontSelectionController)
- * 4) General options (GeneralOptionsController)
- * 5) Plugins (PluginsPreferencesController)
- * 6) Freedoms (GreetingStepController)
+ * Simple wizard dialog for first-time configuration. Steps: 1) Start options
+ * Step 2) Theme (AppearanceController) 3) Font (FontSelectionController) 4)
+ * General options (GeneralOptionsController) 5) Plugins
+ * (PluginsPreferencesController) 6) Freedoms (GreetingStepController)
  */
 public class FirstTimeConfigWizardDialog extends JDialog {
 
@@ -84,7 +80,6 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     private final JPanel eastPanel = new JPanel(eastLayout);
     private final JTextArea explanation = new JTextArea();
 
-
     private final IPreferencesController[] steps;
     // Explanations resolved from bundle, aligned with the `steps` array order
     private final String[] stepExplanations;
@@ -105,16 +100,14 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         IPreferencesController greetingStep = new GreetingStepController();
 
         steps = new IPreferencesController[] { start, appearance, font, general, plugins, greetingStep };
-        stepExplanations = new String[] {
-                FirstTimeConfigurationWizardUtil.getString("explain.start", ""),
+        stepExplanations = new String[] { FirstTimeConfigurationWizardUtil.getString("explain.start", ""),
                 FirstTimeConfigurationWizardUtil.getString("explain.appearance", ""),
                 FirstTimeConfigurationWizardUtil.getString("explain.font", ""),
                 FirstTimeConfigurationWizardUtil.getString("explain.general", ""),
                 FirstTimeConfigurationWizardUtil.getString("explain.plugins", ""),
-                FirstTimeConfigurationWizardUtil.getString("explain.greeting", "")
-        };
+                FirstTimeConfigurationWizardUtil.getString("explain.greeting", "") };
         // Keep explanations strictly aligned with the `steps` array.
-        assert(stepExplanations.length == steps.length);
+        assert (stepExplanations.length == steps.length);
 
         setLayout(new BorderLayout());
 
@@ -140,7 +133,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         stepsList.setVisibleRowCount(steps.length);
         JScrollPane westScroll = new JScrollPane(stepsList);
         westScroll.setPreferredSize(new Dimension(220, 100));
-        westScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("steps.title", "Steps")));
+        westScroll.setBorder(BorderFactory
+                .createTitledBorder(FirstTimeConfigurationWizardUtil.getString("steps.title", "Steps")));
         add(westScroll, BorderLayout.WEST);
 
         // CENTER: cards with actual step UIs
@@ -159,7 +153,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         explanation.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         JScrollPane explainScroll = new JScrollPane(explanation);
         explainScroll.setPreferredSize(new Dimension(280, 100));
-        explainScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("explain.title", "Explanation")));
+        explainScroll.setBorder(BorderFactory.createTitledBorder(
+                FirstTimeConfigurationWizardUtil.getString("explain.title", "Explanation")));
         eastPanel.add(explainScroll, "explain");
 
         add(eastPanel, BorderLayout.EAST);
@@ -179,7 +174,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         add(southPanel, BorderLayout.SOUTH);
 
         // Header
-        JLabel header = new JLabel(FirstTimeConfigurationWizardUtil.getString("header.text", "Let's set up a few preferences"));
+        JLabel header = new JLabel(
+                FirstTimeConfigurationWizardUtil.getString("header.text", "Let's set up a few preferences"));
         header.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         add(header, BorderLayout.NORTH);
 
@@ -190,57 +186,62 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     }
 
     private void configureActions() {
-        backButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.back", "Back")) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (index > 0) {
-                    index--;
-                    updateState();
-                }
-            }
-        });
-        nextButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.next", "Next")) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (index < steps.length - 1) {
-                    if (!steps[index].validate()) {
-                        return; // stay until valid
+        backButton.setAction(
+                new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.back", "Back")) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (index > 0) {
+                            index--;
+                            updateState();
+                        }
                     }
-                    index++;
-                    updateState();
-                }
-                if (isRestartRequired()) {
-                    statusLabel.setText(FirstTimeConfigurationWizardUtil.getString("status.restartRequired", "Changes on the previous step require restarting OmegaT."));
-                } else {
-                    statusLabel.setText("");
-                }
-            }
-        });
-        finishButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.finish", "Finish")) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Validate all steps
-                for (int i = 0; i < steps.length; i++) {
-                    IPreferencesController c = steps[i];
-                    if (!c.validate()) {
-                        index = i;
-                        updateState();
-                        return;
+                });
+        nextButton.setAction(
+                new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.next", "Next")) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (index < steps.length - 1) {
+                            if (!steps[index].validate()) {
+                                return; // stay until valid
+                            }
+                            index++;
+                            updateState();
+                        }
+                        if (isRestartRequired()) {
+                            statusLabel.setText(
+                                    FirstTimeConfigurationWizardUtil.getString("status.restartRequired",
+                                            "Changes on the previous step require restarting OmegaT."));
+                        } else {
+                            statusLabel.setText("");
+                        }
                     }
-                }
-                for (IPreferencesController c : steps) {
-                    c.persist();
-                }
-                // Mark wizard as done so it won't be shown again automatically
-                Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
-                finished = true;
-                dispose();
-            }
-        });
-        // Replace the traditional "Cancel" with "Start with default" per requirements.
-        // This triggers the same flow as the first-page "Start with default" action.
-        cancelButton.setAction(new AbstractAction(
-                FirstTimeConfigurationWizardUtil.getString("button.startDefault", "Start with default configuration")) {
+                });
+        finishButton.setAction(
+                new AbstractAction(FirstTimeConfigurationWizardUtil.getString("button.finish", "Finish")) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Validate all steps
+                        for (int i = 0; i < steps.length; i++) {
+                            IPreferencesController c = steps[i];
+                            if (!c.validate()) {
+                                index = i;
+                                updateState();
+                                return;
+                            }
+                        }
+                        for (IPreferencesController c : steps) {
+                            c.persist();
+                        }
+                        finished = true;
+                        dispose();
+                    }
+                });
+        // Replace the traditional "Cancel" with "Start with default" per
+        // requirements.
+        // This triggers the same flow as the first-page "Start with default"
+        // action.
+        cancelButton.setAction(new AbstractAction(FirstTimeConfigurationWizardUtil
+                .getString("button.startDefault", "Start with default configuration")) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 finishWithDefaults();
@@ -249,8 +250,6 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     }
 
     private void finishWithDefaults() {
-        // No changes necessary: simply finish the wizard.
-        Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
         finished = true;
         dispose();
     }
@@ -258,15 +257,15 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     private void openAdvancedPreferences() {
         // Close wizard and open full Preferences window for advanced users
         // Mark wizard as done: user opted to configure via full preferences
-        Preferences.setPreference(Preferences.FIRST_TIME_WIZARD_DONE, Boolean.TRUE.toString());
         dispose();
         PreferencesWindowController pwc = new PreferencesWindowController();
-        java.awt.Window owner = getOwner();
+        Window owner = getOwner();
         // Open at Appearance as a sensible default category
-        pwc.show(owner, org.omegat.gui.preferences.view.AppearanceController.class);
+        pwc.show(owner, AppearanceController.class);
     }
 
-    // Removed jumpToPluginsStep: plugin review button eliminated from first page
+    // Removed jumpToPluginsStep: plugin review button eliminated from first
+    // page
 
     private void updateState() {
         cardLayout.show(cardPanel, "step" + index);
@@ -276,7 +275,8 @@ public class FirstTimeConfigWizardDialog extends JDialog {
         finishButton.setEnabled(index == steps.length - 1);
         // Clear any previous status message when changing steps
         statusLabel.setText("");
-        // Update explanation text based on current step using the unified definition
+        // Update explanation text based on current step using the unified
+        // definition
         String explanation;
         if (index >= 0 && index < stepExplanations.length) {
             explanation = stepExplanations[index];
@@ -308,7 +308,7 @@ public class FirstTimeConfigWizardDialog extends JDialog {
     public boolean isFinished() {
         return finished;
     }
-    
+
     public boolean isRestartRequired() {
         return Arrays.stream(steps).anyMatch(IPreferencesController::isRestartRequired);
     }

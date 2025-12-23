@@ -48,6 +48,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -92,6 +94,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
@@ -133,6 +136,8 @@ public final class Main {
                     OStrings.getNameAndVersion()));
             System.exit(0);
         }
+
+        ensureUserScriptsWithDefaults();
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
@@ -626,7 +631,7 @@ public final class Main {
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script").toString());
+            File script = new File(PARAMS.get("script"));
             Log.log(OStrings.getString("CONSOLE_EXECUTE_SCRIPT", script, eventType));
             if (script.isFile()) {
                 HashMap<String, Object> binding = new HashMap<>();
@@ -664,6 +669,25 @@ public final class Main {
         default:
             System.err.println(MessageFormat.format(OStrings.getString("CONSOLE_ERROR"), msg));
             break;
+        }
+    }
+
+    /**
+     * Ensures that the external scripts folder exists.
+     * If it is empty, copies the default scripts from the project's "scripts" directory.
+     */
+    private static void ensureUserScriptsWithDefaults() {
+        Path userDir = StaticUtils.getUserScriptsDir();
+        Path bundledScripts = Paths.get(StaticUtils.getScriptDir());
+        try {
+            if (!Files.exists(userDir)) {
+                Files.createDirectories(userDir);
+            }
+            if (Files.exists(bundledScripts) && Files.isDirectory(bundledScripts)) {
+                FileUtils.copyDirectory(bundledScripts.toFile(), userDir.toFile());
+            }
+        } catch (IOException e) {
+            Log.logErrorRB(e, "STARTUP_SCRIPTS_COPY_ERROR", userDir);
         }
     }
 }

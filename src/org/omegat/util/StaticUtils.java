@@ -40,6 +40,7 @@ import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,21 @@ public final class StaticUtils {
      * Configuration directory on Mac OS X
      */
     private static final String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
+    /**
+     * Application data directory on Windows platforms.
+     */
+    private static final String WINDOWS_LOCAL_DATA_DIR = "AppData\\Local";
+    private static final String WINDOWS_DATA_DIR = "\\OmegaT\\";
+
+    /**
+     * Application data directory on UNIX platforms.
+     */
+    private static final String UNIX_DATA_DIR = "/.local/share/OmegaT/";
+
+    /**
+     * Application data directory on macOS.
+     */
+    private static final  String OSX_DATA_DIR = "/Library/Application Support/OmegaT/";
 
     /**
      * Script directory
@@ -306,6 +322,83 @@ public final class StaticUtils {
 
         // we should have a correct, existing config dir now
         return configDir;
+    }
+
+    /**
+     * Get application data directory.
+     * @return directory path to store application data.
+     */
+    public static String getApplicationDataDir() {
+        String dataDir = null;
+        String home = getHomeDir();
+        // if os or user home is null or empty, we cannot reliably determine
+        // the data dir, so we use the current working dir (= empty string)
+        if (StringUtil.isEmpty(home)) {
+            dataDir = new File(".").getAbsolutePath() + File.separator;
+            return dataDir;
+        }
+
+        if (Platform.isWindows()) {
+            File appDataFile = new File(home, WINDOWS_LOCAL_DATA_DIR);
+            if (appDataFile.exists()) {
+                dataDir = appDataFile.getAbsolutePath() + WINDOWS_DATA_DIR;
+            }
+        } else if (Platform.isLinux()) {
+            dataDir = home + UNIX_DATA_DIR;
+        } else if (Platform.isMacOSX()) {
+            // "~/Library/Application Suppport/OmegaT/"
+            dataDir = home + OSX_DATA_DIR;
+        } else {
+            // use the user's home directory by default
+            dataDir = home + File.separator;
+        }
+        if (dataDir == null || dataDir.isEmpty()) {
+            return new File(".").getAbsolutePath() + File.separator;
+        }
+        try {
+            // check if the dir exists
+            File dir = new File(dataDir);
+            if (!dir.exists()) {
+                // create the dir
+                boolean created = dir.mkdirs();
+                if (!created) {
+                    Log.logErrorRB("SU_DATA_DIR_CREATE_ERROR");
+                    dataDir = new File(".").getAbsolutePath() + File.separator;
+                }
+            }
+        } catch (SecurityException e) {
+            // the system doesn't want us to write where we want to write
+            dataDir = new File(".").getAbsolutePath() + File.separator;
+            Log.log(e.toString());
+        }
+        return dataDir;
+    }
+
+    public static String getHomeDir() {
+        String home; // user home directory
+        // get os and user home properties
+        try {
+            // get the user's home directory
+            home = System.getProperty("user.home");
+        } catch (SecurityException e) {
+            // log the exception, only do this after the config dir
+            // has been set to the current working dir, otherwise
+            // the log method will probably fail
+            Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
+            Log.log(e.toString());
+            return null;
+        }
+        return home;
+    }
+
+    /**
+     * Returns the user scripts directory for each OS.
+     * macOS:   ~/Library/Application Support/OmegaT/scripts
+     * Windows: %APPDATA%/OmegaT/scripts
+     * Linux:   ~/.config/omegat/scripts
+     */
+    public static Path getUserScriptsDir() {
+        return Paths.get(getApplicationDataDir(),  SCRIPT_DIR);
     }
 
     public static String getScriptDir() {

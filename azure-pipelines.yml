@@ -22,15 +22,6 @@ pr:
       - docs_devel
       - README.md
 
-schedules:
-  - cron: '0 12 * * 6'
-    displayName: Weekly saturday build
-    branches:
-      include:
-        - master
-        - releases/*
-    always: true
-
 variables:
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
   isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
@@ -39,12 +30,12 @@ variables:
 
 stages:
 - stage: TestAndDocCI
-  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables .isRelease, true))
+  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables['isRelease'], true))
   jobs:
-  - job: TestOnJava11
-    displayName: on linux
+  - job: testOnLinux
+    displayName: on Linux
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-24.04'
     steps:
       - checkout: self
         fetchDepth: 1
@@ -68,14 +59,14 @@ stages:
         fetchTags: false
       - template: ci/azure-pipelines/test_steps.yml
 
-  # Weekly release steps will be triggerred after integration-test succeeded.
+  # Weekly release steps will be triggered after integration-test succeeded.
 - stage: Weekly
-  condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
+  condition: eq(variables['Build.Reason'], 'Manual')
   jobs:
   - job: CheckForWeekly
     displayName: Test and Check
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-24.04'
     steps:
       - template: ci/azure-pipelines/check_steps.yml
   - job: WeeklyBuild
@@ -83,29 +74,38 @@ stages:
     dependsOn:
       - CheckForWeekly
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-24.04'
     steps:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
+      - script: |   
+          version=$(./gradlew -qq printVersion | head -n 1)
+          echo "##vso[task.setvariable variable=version;isOutput=true]$version"
+        name: setVersion
       - template: ci/azure-pipelines/build_steps.yml
-      - script: echo "##vso[task.setvariable variable=result;]false"
-        condition: failed()
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish distributions artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/build/distributions'
+          artifact: 'distributions'
+
+  - job: WeeklyPublish
+    dependsOn: WeeklyBuild
+    variables:
+      omegatVersion: $[ dependencies.WeeklyBuild.outputs['setVersion.version'] ]
+    steps:
       - script: |
-          version=$(./gradlew -qq printVersion | head -n -1 )
-          echo "##vso[task.setvariable variable=version]$version"
-          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-          ./gradlew --stop
-          # Check task result
-          if [[ "$(result)" == "false" ]]; then
-            exit 1
-          fi
-        condition: always()
-        displayName: Stop Gradle daemon
+          echo "Release version: $OMEGATVERSION"
+          mkdir -p $(Pipeline.Workspace)/build
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download distributions artifact'
+        inputs:
+          artifact: 'distributions'
+          path: '$(Pipeline.Workspace)/build/distributions'
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
-          omegatVersion: $(version)
-          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
+          omegatVersion: $(omegatVersion)
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
@@ -114,33 +114,57 @@ stages:
   - job: CheckForRelease
     displayName: Test and Check
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-24.04'
     steps:
       - checkout: self
         fetchDepth: 2
       - template: ci/azure-pipelines/check_steps.yml
   - job: ReleaseBuild
+    dependsOn: CheckForRelease
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-24.04'
     steps:
       - checkout: self
         fetchDepth: 0
         fetchTags: true
-      - template: ci/azure-pipelines/build_steps.yml
-      - script: echo "##vso[task.setvariable variable=result;]false"
-        condition: failed()
       - script: |
-          version=$(./gradlew -qq printVersion | head -n -1 )
-          echo "##vso[task.setvariable variable=version]$version"
-          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-          ./gradlew --stop
-          # Check task result
-          if [[ "$(result)" == "false" ]]; then
-            exit 1
-          fi
-        condition: always()
-        displayName: Stop Gradle daemon
+          version=$(./gradlew -qq printVersion | head -n 1)
+          echo "##vso[task.setvariable variable=version;isOutput=true]$version"
+        name: setVersion
+      - template: ci/azure-pipelines/build_doc_steps.yml
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish documents artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/docs'
+          artifact: 'docs'
+      - template: ci/azure-pipelines/build_steps.yml
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish distributions artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/build/distributions'
+          artifact: 'distributions'
+
+  - job: ReleasePublish
+    dependsOn: ReleaseBuild
+    variables:
+      omegatVersion: $[ dependencies.ReleaseBuild.outputs['setVersion.version'] ]
+    steps:
+      - script: |
+          echo "Release version: $OMEGATVERSION"
+          mkdir -p $(Pipeline.Workspace)/build
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download distributions artifact'
+        inputs:
+          artifact: 'distributions'
+          path: '$(Pipeline.Workspace)/build/distributions'
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
-          omegatVersion: $(version)
-          condition: eq(variables['Agent.JobStatus'], 'Succeeded')
+          omegatVersion: $(omegatVersion)
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download docs artifact'
+        inputs:
+          artifact: 'docs'
+          path: '$(Pipeline.Workspace)/docs'
+      - template: ci/azure-pipelines/publish_manual.yml
+        parameters:
+          omegatVersion: $(omegatVersion)

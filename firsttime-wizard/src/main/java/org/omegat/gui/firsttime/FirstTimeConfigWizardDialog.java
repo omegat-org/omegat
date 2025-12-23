@@ -53,10 +53,16 @@ import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 
 /**
- * Simple wizard dialog for first-time configuration. Steps: 1) Start options
- * Step 2) Theme (AppearanceController) 3) Font (FontSelectionController) 4)
- * General options (GeneralOptionsController) 5) Plugins
- * (PluginsPreferencesController) 6) Freedoms (GreetingStepController)
+ * Simple wizard dialog for first-time configuration.
+ * <p>
+ * Steps:<ol>
+ *     <li>Start options</li>
+ *     <li>Theme (AppearanceController)</li>
+ *     <li>Font (FontSelectionController)</li>
+ *     <li>General options (GeneralOptionsController)</li>
+ *     <li>Plugins (PluginsPreferencesController)</li>
+ *     <li>Freedoms (GreetingStepController)</li>
+ * </ol>
  */
 public class FirstTimeConfigWizardDialog extends JDialog {
 

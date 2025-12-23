@@ -517,6 +517,20 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
+["Introduzione a OmegaT","chapter.instant.start.guide.html",[
+["Principi","chapter.instant.start.guide.html#introduction.omegat.principles",null],
+["Convenzioni utilizzate in questo manuale","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["Creare un nuovo progetto","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["Dizionari ortografici","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["Gestire i segmenti","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["Sembra che vada bene!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
+["Tradurre i file","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
+["Gestire i tag","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
+["Revisionare la traduzione","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["Creare i file tradotti","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["Gestire i progetti","chapter.instant.start.guide.html#introduction.one.more.thing",null],
+["Flusso di lavoro basato sulle scorciatoie","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
+]],
 ["Guide all\'uso...","chapter.how.to.html",[
 ["Risoluzione dei problemi","chapter.how.to.html#how.to.restore.your.data",null],
 ["Uso di memorie di traduzione","chapter.how.to.html#how.to.use.tm",null],
@@ -581,8 +595,8 @@ var toc_entries = [
 ["\n                              Aggiornamenti\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Cartella del progetto","chapter.project.folder.html",[
-["Struttura predefinita","chapter.project.folder.html#d0e9666",null],
-["Contenuto minimo","chapter.project.folder.html#d0e9744",null],
+["Struttura predefinita","chapter.project.folder.html#d0e10571",null],
+["Contenuto minimo","chapter.project.folder.html#d0e10649",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -876,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-12w4cd8honv16-1q3cm0l65dzis";
+var storageId = "-808m186rfoad-1q6bhwk6azkdp";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

@@ -66,12 +66,12 @@
 		</listitem>
 
 		<listitem>
-		  <para>Si la carpeta és un dipòsit buit i el fitxer <filename>omegat.project</filename> conté informació d'un dipòsit remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
+		  <para>Si la carpeta és un repositori buit i el fitxer <filename>omegat.project</filename> conté informació d'un repositori remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
 		  
 		  <programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/DIPÒSIT/DEL/PROJECTE/REMOT&quot;&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/REPOSITORI/DEL/PROJECTE/REMOT&quot;&gt;
             &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
@@ -289,7 +289,7 @@
       </listitem>
 	  
       <listitem>
-        <para>Extreu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
+        <para>Extraieu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
       </listitem>
     </orderedlist>
 

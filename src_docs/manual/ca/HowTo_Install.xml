@@ -17,9 +17,9 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Desenvolupament: OmegaT (compilació nocturna)</term>
+	  <term>Desenvolupament: OmegaT setmanal</term>
 	  <listitem>
-		<para>Aquesta versió es genera automàticament cada vegada que s'afegeix codi a l'OmegaT. S'utilitza amb finalitats de proves.</para>
+		<para>Aquesta és l'edició de l'OmegaT en desenvolupament actiu. Es genera automàticament cada setmana i serveix de versió beta per a proves.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -31,9 +31,9 @@
 
 	<para>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</para>
 
-	<para>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</para>
+	<para>L'OmegaT 6.1.0 i les versions posteriors també es poden executar amb el Java 17 Runtime Environment en qualsevol plataforma.</para>
 
-	<para>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 8 hauria de funcionar. Consulteu <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">Projecte Eclipse Temurin™</ulink>.</para>
+	<para>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 11 hauria de funcionar. Consulteu <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">Projecte Eclipse Temurin™</ulink>.</para>
 
 	<para>IBM proporciona JRE per a PowerPC amb Linux en la pàgina <ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>.</para>
   </note>
@@ -150,7 +150,7 @@
   <section id="build.omegat.from.source">
 	<title id="build.omegat.from.source.title">Compilació de l'OmegaT</title>
 
-	<para>Podeu baixar el codi font de la versió actual directament des de la <ulink url="https://omegat.org/download">pàgina de baixada</ulink> de l'OmegaT, o bé clonar-lo des dels dipòsits de <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> o <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
+	<para>Podeu baixar el codi font de la versió actual directament des de la <ulink url="https://omegat.org/download">pàgina de baixada</ulink> de l'OmegaT, o bé clonar-lo des dels repositoris de <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> o <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
 	<para>Una vegada baixat el codi, obriu un terminal en la carpeta amb el codi font (<filename>omegat-code/</filename> si l'heu clonat des de Sourceforge, o <filename>/omegat</filename> si l'heu clonat des de GitHub) i escriviu l'ordre següent:</para>
 
 	<programlisting>./gradlew installDist</programlisting>

@@ -27,9 +27,7 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,7 +66,7 @@ public class YamlFilterTest extends TestFilterBase {
 
         YamlFilter filter = new YamlFilter();
 
-        // Run the actual translate flow to produce outFile
+        // Run the actual translation flow to produce outFile
         translate(filter, "test/data/filters/yaml/sample1.yaml");
 
         // Parse source and produced YAML and compare the list of textual scalars
@@ -86,7 +84,9 @@ public class YamlFilterTest extends TestFilterBase {
     }
 
     private static void collectTextScalars(JsonNode node, java.util.List<String> out) {
-        if (node == null) return;
+        if (node == null) {
+            return;
+        }
         if (node.isTextual()) {
             out.add(node.asText());
             return;

@@ -15,8 +15,12 @@
 
     <para>Seleccioneu les llengües d'origen i de destinació en la llista desplegable o indiqueu-les manualment.</para>
 
-	<para>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu indicar qualsevol codi que s'ajusti al <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (incloent-hi codis de llengua de tres lletres) en el camp corresponent.</para>
-	
+	<para>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu escriure qualsevol codi en el camp corresponent.</para>
+
+	<warning>
+	  <para>L'OmegaT no comprova la validesa dels codis de llengua que introduïu. Assegureu-vos que els dos codis de llengua siguin <emphasis>diferents</emphasis>, que siguin adequats per a l'ús que feu de l'OmegaT i que els codis de llengua assignats coincideixin en qualsevol altra ubicació on els feu servir.</para>
+	</warning>
+
 	<para>Els codis de llengua s'utilitzen en diverses parts de l'OmegaT amb diverses finalitats:</para>
 	
 	<itemizedlist>
@@ -29,18 +33,23 @@
 	  </listitem>
 
 	  <listitem>
-		<para>Cercar errors ortogràfics a partir dels diccionaris instal·lats en les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>.</para>
+		<para>Cercar errors ortogràfics amb els diccionaris instal·lats en les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Cercar errors gramaticals i tipogràfics a partir de les regles establertes en les preferències del <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>, etc.</para>
+		<para>Cercar errors gramaticals i tipogràfics amb les regles establertes en les preferències del <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>.</para>
 	  </listitem>
+
+	  <listitem>
+		<para>Especificar les llengües utilitzades en els fitxers TMX creats pel projecte (per a complir amb l'especificació, un fitxer TMX ha de fer servir codis de llengua <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink>).</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>Altres funcions.</para>
 
 	<warning>
-	  <para>Assegureu-vos que indiqueu els codis de llengua correctes i que els codis que indiqueu en qualsevol altre lloc coincideixin exactament amb els que indiqueu aquí. Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</para>
+	  <para>Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</para>
 	</warning>
 
 	  

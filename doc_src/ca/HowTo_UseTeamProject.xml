@@ -5,13 +5,11 @@
 
   <para>Els projectes en equip utilitzen mecanismes de sincronització entre els membres del projecte.</para>
 
-  <para>Quan s'instal·la un projecte en equip de l'OmegaT en un servidor, l'administrador envia als membres la informació que necessiten per a accedir-hi: un URL que indica la ubicació del projecte, o un fitxer <filename>omegat.project</filename>.</para>
+  <para>Quan s'instal·la un projecte en equip de l'OmegaT en un servidor, el gestor del projecte envia als membres la informació que necessiten per a accedir-hi: un URL que indica la ubicació del projecte, o un fitxer <filename>omegat.project</filename>.</para>
 
   <para>Una vegada baixat el projecte, s'instal·la localment i només cal obrir-lo localment per a sincronitzar-lo amb el servidor.</para>
 
-  <para>Les credencials del dipòsit s'emmagatzemen en el fitxer <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> i es poden suprimir des de les preferències de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
-
-  <para>Com que, per defecte, el projecte se sincronitza cada 3 minuts, de vegades els membres del projecte traduiran o modificaran un segment traduït per un altre membre, però que encara no s'havia sincronitzat. Quan això succeeix, els membres han de seleccionar la traducció adequada.</para>
+  <para>Les credencials del repositori s'emmagatzemen en el fitxer <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> i es poden suprimir des de les preferències de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
   <para>Els membres poden traduir i revisar els fitxers per torns. La funció de cerca els permet filtrar la subfinestra «Editor» segons el contingut traduït per una persona determinada o segons el contingut traduït després o abans d'un moment determinat, per exemple.</para>
   
@@ -25,7 +23,7 @@
 
 			<para>Utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> per a mostrar el quadre de diàleg <guilabel>Baixada d'un projecte en equip</guilabel>.</para>
 
-			<para>Indiqueu l'URL proporcionat l'administrador del projecte en equip en el camp <guilabel>URL del dipòsit:</guilabel> de la part superior del quadre de diàleg, i indiqueu una carpeta per al projecte en el camp <guilabel>Carpeta de projecte local nova</guilabel>. Deixeu marcada l'opció <guilabel>Branca per defecte</guilabel>, excepte si l'administrador del projecte us ha donat instruccions per a utilitzar una branca personalitzada.</para>
+			<para>Indiqueu l'URL proporcionat pel gestor del projecte en el camp <guilabel>URL del repositori:</guilabel> de la part superior del quadre de diàleg i indiqueu una carpeta per al projecte en el camp <guilabel>Carpeta de projecte local nova:</guilabel>. Deixeu marcada l'opció <guilabel>Branca per defecte</guilabel>, excepte si el gestor del projecte us ha donat instruccions per a utilitzar una branca personalitzada.</para>
 		  </listitem>
 
 		  <listitem>
@@ -40,9 +38,10 @@
 
 		  <para>Si el servidor depèn de l'autenticació amb nom d'usuari/contrasenya, l'OmegaT us presentarà un quadre de diàleg <guilabel>Autenticació</guilabel> perquè indiqueu el nom d'usuari i la contrasenya quan baixeu el projecte per primera vegada, o més endavant. L'OmegaT recordarà les credencials per a aquest projecte específic, tret que les suprimiu explícitament. Consulteu les preferències de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> per a conèixer més detalls.</para>
 
+		  <para>Per a millorar la seguretat, alguns servidors requereixen processos externs per a connectar-s'hi amb un testimoni d'accés independent en comptes d'una contrasenya. Consulteu la documentació del servidor si la vostra contrasenya no funciona.</para>
 		  <para>Si el servidor utilitza l'autenticació SSH, assegureu-vos d'actualitzar la configuració de l'SSH per a incloure aquest servidor abans d'intentar baixar el projecte; en cas contrari, obtindreu un error d'autenticació i el projecte no es carregarà.</para>
 
-		  <para>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</para>
+		  <para>Si utilitzeu diversos projectes en el mateix servidor, només se us demanarà que indiqueu les credencials del servidor una vegada.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -66,9 +65,47 @@
         <para>Durant la sincronització, la resta de fitxers locals se sobreescriuen amb les versions del servidor remot, excepte el fitxer<filename>omegat.project</filename> (consulteu l'apartat següent).</para>
 
         <para>L'OmegaT sincronitza un projecte en equip quan s'obre, es torna a carregar, es tanca o es desa. Això vol dir que la funció de desament automàtic també sincronitza periòdicament les versions locals amb la versió del servidor segons l'interval especificat en la preferència <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>.</para>
+
+        <warning>
+          <para>Com que els membres no necessàriament sincronitzen els projectes alhora, de vegades un segment amb una traducció local també tindrà una traducció diferent d'un altre membre disponible al servidor. Quan sincronitzeu el projecte, l'OmegaT farà coincidir les versions local i modificada i us demanarà quina versió de la traducció voleu conservar.</para>
+        </warning>
       </listitem>
     </varlistentry>
 
+    <varlistentry>
+      <term>Resolució de conflictes de traducció</term>
+
+      <listitem>
+        <para>Quan l'OmegaT no pot resoldre automàticament les diferències entre una traducció local i la memòria remota, mostra un quadre de diàleg de <guilabel>Combinació</guilabel>.</para>
+
+        <para>El quadre de diàleg permet triar entre tres versions del segment traduït:<variablelist>
+          <varlistentry>
+            <term><guilabel>La meva</guilabel></term>
+            <listitem><para>La vostra versió local, que encara no s'ha enviat al servidor ni compartit.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Servidor (original)</guilabel></term>
+            <listitem><para>Versió «base» a partir de la qual s'han creat diverses versions.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Servidor (actualitzat)</guilabel></term>
+            <listitem><para>Versió compartida per altres membres des de la darrera vegada que heu treballat en el projecte.</para></listitem>
+          </varlistentry>
+        </variablelist>
+        </para>
+
+        <para>És possible seleccionar les traduccions adequades una per una fent-hi clic per a cada segment mostrat. També és possible seleccionar «totes» les traduccions d'una versió determinada.</para>
+
+        <para><guibutton>Visualització de llista</guibutton> i <guibutton>Visualització detallada</guibutton> ofereixen visualitzacions alternatives d'un segment i mostren o amaguen diverses propietats del segment.</para>
+
+        <para>Un cop seleccionades les traduccions, si feu clic en <guibutton>Fet</guibutton>, les traduccions seleccionades es desaran en el servidor i es compartiran amb la resta de membres de l'equip.</para>
+
+        <note>
+          <para>Feu que els membres de l'equip treballin en parts diferents d'una traducció per a reduir la possibilitat que hi hagi conflictes de traducció.</para>
+        </note>
+      </listitem>
+    </varlistentry>
+    
     <varlistentry>
       <term>Configuració del projecte en equip</term>
 
@@ -81,11 +118,11 @@
           <listitem>
             <para><emphasis>Configuració del projecte bàsica:</emphasis> llengües d'origen i destinació, lematitzadors i jerarquia de la carpeta del projecte.</para>
 
-			<para>En un projecte en equip, els paràmetres de configuració bàsics del projecte local sempre se substitueixen per la configuració del servidor definida originalment per l'administrador del projecte.</para>
+			<para>En un projecte en equip, els paràmetres de configuració bàsics del projecte local sempre se substitueixen per la configuració del servidor definida originalment pel gestor del projecte.</para>
           </listitem>
 
           <listitem>
-            <para><emphasis>Assignacions de dipòsits</emphasis></para>
+            <para><emphasis>Assignacions de repositoris</emphasis></para>
 
             <para>Consulteu la guia <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> per a conèixer més detalls.</para>
 
@@ -101,11 +138,11 @@
               <listitem>
                 <para>Si el projecte remot especifica un protocol d'URL i el baixeu mitjançant un protocol diferent, es conservarà la configuració local.</para>
 
-                <para>Per exemple, molts serveis d'allotjament permeten l'accés al mateix dipòsit utilitzant el protocol SSH+Git o https. L'OmegaT respectarà la selecció de protocol local.</para>
+                <para>Per exemple, molts serveis d'allotjament permeten l'accés al mateix repositori utilitzant el protocol SSH+Git o https. L'OmegaT respectarà la selecció de protocol local.</para>
               </listitem>
 
               <listitem>
-                <para>Si primer baixeu el projecte remot mitjançant un fitxer <filename>omegat.project</filename> proporcionat per l'administrador del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</para>
+                <para>Si primer baixeu el projecte remot mitjançant un fitxer <filename>omegat.project</filename> proporcionat pel gestor del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</para>
               </listitem>
 
               <listitem>
@@ -126,7 +163,7 @@
 
       <listitem>
         <warning>
-		  <para>Només l'administrador del projecte hauria d'utilitzar <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
+		  <para>Només el gestor del projecte hauria d'utilitzar <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -135,7 +172,7 @@
       <term>Fitxers de destinació</term>
 
       <listitem>
-        <para>Després de generar els fitxers de destinació, utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> per a afegir-los al servidor, si l'administrador del projecte us ho ha demanat.</para>
+        <para>Després de generar els fitxers de destinació, utilitzeu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> per a afegir-los al servidor, si el gestor del projecte us ho ha demanat. Publicar els fitxers de destinació també puja els fitxers d'estadístiques al servidor.</para>
       </listitem>
     </varlistentry>
 
@@ -143,7 +180,7 @@
       <term>Supressió de fitxers</term>
 
       <listitem>
-        <para>Els fitxers d'un projecte en equip no es poden suprimir de l'OmegaT ni del sistema de fitxers local. Es restauraran la pròxima vegada que se sincronitzi el projecte. Aquesta tasca normalment la duu a terme l'administrador del projecte.</para>
+        <para>Els fitxers d'un projecte en equip no es poden suprimir de l'OmegaT ni del sistema de fitxers local. Es restauraran la pròxima vegada que se sincronitzi el projecte. Aquesta tasca normalment la duu a terme el gestor del projecte.</para>
       </listitem>
     </varlistentry>
 

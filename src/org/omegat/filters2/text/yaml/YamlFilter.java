@@ -74,18 +74,7 @@ public class YamlFilter extends AbstractFilter {
 
     @Override
     public String getFileFormatName() {
-        // Using a literal to avoid adding new resource keys for now.
-        String key = "YAML";
-        try {
-            // If a localized string exists in bundles, prefer it
-            String localized = OStrings.getString("YAMLFILTER_FILTER_NAME");
-            if (!Objects.equals(localized, "!YAMLFILTER_FILTER_NAME!")) {
-                return localized;
-            }
-        } catch (Throwable ignored) {
-            // fallback to literal
-        }
-        return key;
+        return OStrings.getString("YAML_FILTER_NAME");
     }
 
     @Override
@@ -113,7 +102,7 @@ public class YamlFilter extends AbstractFilter {
         try {
             root = mapper.readTree(input);
         } catch (IOException e) {
-            throw new TranslationException("Failed to parse YAML: " + e.getMessage(), e);
+            throw new TranslationException(OStrings.getString("YAML_PARSE_ERROR", e.getMessage()), e);
         }
 
         if (root != null) {

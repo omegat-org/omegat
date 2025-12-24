@@ -40,8 +40,10 @@ import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -103,7 +105,7 @@ public final class StaticUtils {
     /**
      * Script directory
      */
-    private static final String SCRIPT_DIR = "script";
+    private static final String SCRIPT_DIR = "scripts";
 
     /**
      * Char which should be used instead protected parts. It should be non-letter char, to be able to have
@@ -126,6 +128,7 @@ public final class StaticUtils {
      * files.
      */
     private static String scriptDir = null;
+    private static Path userScriptsDir = null;
 
     /**
      * Check if specified key pressed.
@@ -398,7 +401,30 @@ public final class StaticUtils {
      * Linux:   ~/.config/omegat/scripts
      */
     public static Path getUserScriptsDir() {
-        return Paths.get(getApplicationDataDir(),  SCRIPT_DIR);
+        // If the script directory has already been determined, return it
+        if (userScriptsDir != null) {
+            return userScriptsDir;
+        }
+        userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
+        // ensure directory exists
+        if (Files.exists(userScriptsDir)) {
+            return userScriptsDir;
+        }
+        // it seems first run.
+        try {
+            Files.createDirectories(userScriptsDir);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+            userScriptsDir = Paths.get(getConfigDir() + SCRIPT_DIR);
+        }
+        try {
+            // ensure default script files installed
+            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
+            Files.copy(defaultScripts, userScriptsDir, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+        }
+        return userScriptsDir;
     }
 
     public static String getScriptDir() {
@@ -536,7 +562,6 @@ public final class StaticUtils {
 
     /**
      * Download a file to memory.
-     * @Deprecated
      * This method is replaced to HttpConnectionUtils.getURL(url, timeout)
      */
     @Deprecated

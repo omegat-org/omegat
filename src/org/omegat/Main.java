@@ -137,8 +137,6 @@ public final class Main {
             System.exit(0);
         }
 
-        ensureUserScriptsWithDefaults();
-
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
@@ -669,25 +667,6 @@ public final class Main {
         default:
             System.err.println(MessageFormat.format(OStrings.getString("CONSOLE_ERROR"), msg));
             break;
-        }
-    }
-
-    /**
-     * Ensures that the external scripts folder exists.
-     * If it is empty, copies the default scripts from the project's "scripts" directory.
-     */
-    private static void ensureUserScriptsWithDefaults() {
-        Path userDir = StaticUtils.getUserScriptsDir();
-        Path bundledScripts = Paths.get(StaticUtils.getScriptDir());
-        try {
-            if (!Files.exists(userDir)) {
-                Files.createDirectories(userDir);
-            }
-            if (Files.exists(bundledScripts) && Files.isDirectory(bundledScripts)) {
-                FileUtils.copyDirectory(bundledScripts.toFile(), userDir.toFile());
-            }
-        } catch (IOException e) {
-            Log.logErrorRB(e, "STARTUP_SCRIPTS_COPY_ERROR", userDir);
         }
     }
 }

@@ -29,7 +29,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,6 +37,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -93,33 +93,22 @@ public class YamlFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
-            throws IOException, TranslationException {
-        // Read entire YAML content from reader
-        String input = readAll(inFile);
-
+    protected void processFile(BufferedReader inFile, @Nullable BufferedWriter outFile, FilterContext fc)
+            throws TranslationException {
         JsonNode root;
         try {
-            root = mapper.readTree(input);
+            root = mapper.readTree(inFile);
         } catch (IOException e) {
             throw new TranslationException(OStrings.getString("YAML_PARSE_ERROR", e.getMessage()), e);
         }
-
-        if (root != null) {
-            JsonNode translated = translateNode(root);
-            // Write YAML back
-            mapper.writeValue(outFile, translated);
+        JsonNode translated = translateNode(root, null);
+        if (outFile != null) {
+            try {
+                mapper.writeValue(outFile, translated);
+            } catch (IOException e) {
+                throw new TranslationException(OStrings.getString("YAML_WRITE_ERROR", e.getMessage()), e);
+            }
         }
-    }
-
-    private static String readAll(BufferedReader reader) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        char[] buf = new char[4096];
-        int r;
-        while ((r = reader.read(buf)) != -1) {
-            sb.append(buf, 0, r);
-        }
-        return sb.toString();
     }
 
     /**
@@ -127,21 +116,20 @@ public class YamlFilter extends AbstractFilter {
      * for translation and replace the value with the translation (or same as
      * source when parsing).
      */
-    private JsonNode translateNode(JsonNode node) {
+    private JsonNode translateNode(@Nullable JsonNode node, @Nullable String comment) {
         if (node == null) {
             // Should not happen with Jackson, but keep behavior
             return TextNode.valueOf("");
         }
         if (node.isTextual()) {
             String src = node.asText();
-            String trg = processEntry(src);
-            // Replace only if necessary; TextNode is immutable, but cheap.
+            String trg = processEntry(src, comment);
             return TextNode.valueOf(trg);
         } else if (node.isArray()) {
             ArrayNode array = node.deepCopy();
             for (int i = 0; i < array.size(); i++) {
                 JsonNode item = array.get(i);
-                JsonNode newItem = translateNode(item);
+                JsonNode newItem = translateNode(item, comment + "[" + i + "]");
                 if (newItem != null && !newItem.equals(item)) {
                     array.set(i, newItem);
                 }
@@ -153,7 +141,7 @@ public class YamlFilter extends AbstractFilter {
                 String key = it.next();
                 // Keys are not translated. Only process values.
                 JsonNode v = obj.get(key);
-                JsonNode newV = translateNode(v);
+                JsonNode newV = translateNode(v, comment == null ? key : comment + "." + key);
                 if (newV != null && !newV.equals(v)) {
                     obj.set(key, newV);
                 }

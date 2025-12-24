@@ -27,6 +27,8 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -72,11 +74,11 @@ public class YamlFilterTest extends TestFilterBase {
         // Parse source and produced YAML and compare the list of textual scalars
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         JsonNode src =
-                mapper.readTree(new java.io.File("test/data/filters/yaml/sample1.yaml"));
+                mapper.readTree(new File("test/data/filters/yaml/sample1.yaml"));
         JsonNode trg = mapper.readTree(outFile);
 
-        java.util.List<String> srcTexts = new java.util.ArrayList<>();
-        java.util.List<String> trgTexts = new java.util.ArrayList<>();
+        java.util.List<String> srcTexts = new ArrayList<>();
+        java.util.List<String> trgTexts = new ArrayList<>();
         collectTextScalars(src, srcTexts);
         collectTextScalars(trg, trgTexts);
 
@@ -111,14 +113,14 @@ public class YamlFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         // id/path/prev/next/comment are null for this filter
-        checkMulti("Welcome", null, null, null, null, null);
-        checkMulti("Home", null, null, null, null, null);
-        checkMulti("About", null, null, null, null, null);
-        checkMulti("Contact", null, null, null, null, null);
-        checkMulti("(c) 2025 Example Co.", null, null, null, null, null);
-        checkMulti("/help", null, null, null, null, null);
-        checkMulti("/terms", null, null, null, null, null);
-        checkMulti("Enabled features", null, null, null, null, null);
+        checkMulti("Welcome", null, null, null, null, "title");
+        checkMulti("Home", null, null, null, null, "menu.items[0]");
+        checkMulti("About", null, null, null, null, "menu.items[1]");
+        checkMulti("Contact", null, null, null, null, "menu.items[2]");
+        checkMulti("(c) 2025 Example Co.", null, null, null, null, "footer.copyright");
+        checkMulti("/help", null, null, null, null, "footer.links.help");
+        checkMulti("/terms", null, null, null, null, "footer.links.terms");
+        checkMulti("Enabled features", null, null, null, null, "features.description");
         checkMultiEnd();
     }
 }

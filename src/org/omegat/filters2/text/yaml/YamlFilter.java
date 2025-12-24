@@ -116,11 +116,7 @@ public class YamlFilter extends AbstractFilter {
      * for translation and replace the value with the translation (or same as
      * source when parsing).
      */
-    private JsonNode translateNode(@Nullable JsonNode node, @Nullable String comment) {
-        if (node == null) {
-            // Should not happen with Jackson, but keep behavior
-            return TextNode.valueOf("");
-        }
+    private JsonNode translateNode(JsonNode node, @Nullable String comment) {
         if (node.isTextual()) {
             String src = node.asText();
             String trg = processEntry(src, comment);
@@ -130,7 +126,7 @@ public class YamlFilter extends AbstractFilter {
             for (int i = 0; i < array.size(); i++) {
                 JsonNode item = array.get(i);
                 JsonNode newItem = translateNode(item, comment + "[" + i + "]");
-                if (newItem != null && !newItem.equals(item)) {
+                if (!newItem.equals(item)) {
                     array.set(i, newItem);
                 }
             }
@@ -142,7 +138,7 @@ public class YamlFilter extends AbstractFilter {
                 // Keys are not translated. Only process values.
                 JsonNode v = obj.get(key);
                 JsonNode newV = translateNode(v, comment == null ? key : comment + "." + key);
-                if (newV != null && !newV.equals(v)) {
+                if (!newV.equals(v)) {
                     obj.set(key, newV);
                 }
             }

@@ -70,7 +70,8 @@ final class GreetingStepController implements IPreferencesController {
         }
         JScrollPane greetScroll = new JScrollPane(greetingPane);
         greetScroll.setPreferredSize(new Dimension(280, 100));
-        greetScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString("explain.title", "Explanation")));
+        greetScroll.setBorder(BorderFactory.createTitledBorder(FirstTimeConfigurationWizardUtil.getString(
+                "explain.title", "Explanation")));
     }
 
     private String detectFirstStepsLanguage() {

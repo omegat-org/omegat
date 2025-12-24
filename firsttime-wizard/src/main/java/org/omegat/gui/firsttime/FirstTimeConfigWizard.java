@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.gui.firsttime;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 
 import javax.swing.JMenuItem;
@@ -43,7 +44,8 @@ public final class FirstTimeConfigWizard {
 
     private static final FirstTimeConfigWizardModuleListener LISTENER = new FirstTimeConfigWizardModuleListener();
 
-    private FirstTimeConfigWizard() {}
+    private FirstTimeConfigWizard() {
+    }
 
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(LISTENER);
@@ -60,17 +62,26 @@ public final class FirstTimeConfigWizard {
         @Override
         public void onApplicationStartup() {
             initMenu();
-            // Show wizard once if not suppressed
-            boolean suppressWizard = Boolean.parseBoolean(
-                    Preferences.getPreferenceDefault(Preferences.FIRST_TIME_WIZARD_DONE, "false"));
-            if (Preferences.isFirstRun() && !suppressWizard) {
+
+            boolean isFirstRun;
+            try {
+                Method isFirstRunMethod = Preferences.class.getMethod("isFirstRun");
+                isFirstRun = (Boolean) isFirstRunMethod.invoke(null);
+            } catch (Exception e) {
+                // Method not found or invocation failed, default to false
+                isFirstRun = false;
+            }
+
+            if (isFirstRun) {
                 SwingUtilities.invokeLater(() -> {
                     FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                             Core.getMainWindow().getApplicationFrame());
                     dlg.setVisible(true);
-                    // Restart OmegaT only when required by changes made in the wizard.
+                    // Restart OmegaT only when required by changes made in the
+                    // wizard.
                     if (dlg.isFinished() && dlg.isRestartRequired()) {
-                        // If no project is loaded, skip any confirmation dialogs.
+                        // If no project is loaded, skip any confirmation
+                        // dialogs.
                         boolean noProjectLoaded = !Core.getProject().isProjectLoaded();
                         ProjectUICommands.projectRestart(null, noProjectLoaded);
                     }
@@ -80,7 +91,8 @@ public final class FirstTimeConfigWizard {
 
         private void initMenu() {
             menuItem = new JMenuItem();
-            Mnemonics.setLocalizedText(menuItem, FirstTimeConfigurationWizardUtil.getString("menu.firsttimewizard", "First Time Configuration..."));
+            Mnemonics.setLocalizedText(menuItem, FirstTimeConfigurationWizardUtil
+                    .getString("menu.firsttimewizard", "First Time Configuration..."));
             menuItem.addActionListener(e -> {
                 FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
                         Core.getMainWindow().getApplicationFrame());

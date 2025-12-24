@@ -1,0 +1,22 @@
+body {
+	font-family:sans-serif;
+}
+
+p,
+pre,
+ol,
+dl,
+ul,
+table,
+hr {
+    margin: 1em 0;
+}
+
+hr {
+    height: 1px;
+    border-style: none;
+}
+
+blockquote {
+    margin: 2em 4em;
+}

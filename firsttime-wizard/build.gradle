@@ -1,9 +1,16 @@
-/**
- * "Tip Of The Day" feature
- */
+import org.omegat.documentation.DocbookHtmlTask
 
 plugins {
+    id 'org.omegat.documentation'
     id 'org.omegat.module'
+}
+
+def documentRootDir = 'src_docs'
+def styleRootDir = 'src_docs/xsl'
+docConfig {
+    styleDir.set(rootProject.layout.settingsDirectory.dir(styleRootDir))
+    docRoot.set(rootProject.layout.settingsDirectory.dir(documentRootDir))
+    outputRoot.set(rootProject.layout.buildDirectory.dir('docs'))
 }
 
 dependencies {
@@ -15,4 +22,24 @@ dependencies {
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.jackson.yaml)
     }
+}
+
+def langs = project.findProperty('org.omegat.philosophyLanguages')?.split(',') ?: ['en']
+langs.each { lang ->
+
+    def copyCss = tasks.register("copyPhilosophyCss${lang.capitalize()}", Copy) {
+        description = 'Copies CSS file.'
+        from rootProject.layout.settingsDirectory.file("${documentRootDir}/style/philosophy.css")
+        into rootProject.layout.buildDirectory.dir("docs/greetings/${lang}")
+    }
+
+    def philosophyHtml = tasks.register("philosophy${lang.capitalize()}", DocbookHtmlTask) {
+        description = 'Generates a philosophy HTML'
+        inputFile.set(rootProject.layout.settingsDirectory.file("${documentRootDir}/greeting/${lang}/Philosophy.xml"))
+        outputFile.set(rootProject.layout.buildDirectory.file("docs/greetings/${lang}/philosophy.html"))
+        styleSheetFile.set(rootProject.layout.settingsDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        css.set("philosophy.css")
+        dependsOn copyCss
+    }
+    jar.dependsOn(philosophyHtml)
 }

@@ -106,6 +106,7 @@ import org.omegat.gui.preferences.view.AppearanceController;
 import org.omegat.gui.preferences.view.AutoCompleterController;
 import org.omegat.gui.preferences.view.AutotextAutoCompleterOptionsController;
 import org.omegat.gui.preferences.view.CharTableAutoCompleterOptionsController;
+import org.omegat.connectors.gui.ExternalServiceConnectorPreferencesController;
 import org.omegat.gui.preferences.view.CustomColorSelectionController;
 import org.omegat.gui.preferences.view.DictionaryPreferencesController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
@@ -375,6 +376,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(acNode);
         root.add(new HideableNode(new SpellcheckerConfigurationController()));
         root.add(new HideableNode(new LanguageToolConfigurationController()));
+        root.add(new HideableNode(new ExternalServiceConnectorPreferencesController()));
         root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));
         root.add(new HideableNode(new TagProcessingOptionsController()));

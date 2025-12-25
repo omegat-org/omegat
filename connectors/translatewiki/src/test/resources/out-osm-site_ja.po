@@ -1,0 +1,37 @@
+#
+msgid ""
+msgstr ""
+""
+"PO-Revision-Date: 2025-12-12 02:46:01+0000\n"
+"POT-Creation-Date: 2025-12-12 02:46:01+0000\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Project-Id-Version: OpenStreetMap - Website\n"
+"Report-Msgid-Bugs-To: translatewiki.net\n"
+"X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
+"X-Generator: MediaWiki 1.46.0-alpha; Translate 2025-07-31\n"
+"X-Language-Code: ja\n"
+"X-Message-Group: out-osm-site\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#
+msgctxt "date.formats.heatmap"
+msgid "%B %-d"
+msgstr ""
+
+#
+msgctxt "helpers.file.prompt"
+msgid "Choose file"
+msgstr "ファイルを選択"
+
+#
+msgctxt "errors.not_found.description"
+msgid "Couldn't find a file/directory/API operation by that name on the OpenStreetMap server (HTTP 404)"
+msgstr "OpenStreetMapサーバ上に、その名称のファイル/ディレクトリ/API操作はありません (HTTP 404)"
+
+#
+msgctxt "follows.destroy.success"
+msgid "You successfully unfollowed %{name}."
+msgstr ""
+

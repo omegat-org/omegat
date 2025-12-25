@@ -179,11 +179,10 @@
 
 	<para>Dans cette boite de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
 
-	<para>OmegaT provides a convenient short list of two-letter language codes,
-	but you can type any code into the appropriate field.</para>
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code dans le champ de saisie.</para>
 
 	<warning>
-	  <para>OmegaT does not check the validity of the language codes that you enter. Make sure that the two language codes are <emphasis>different</emphasis>, that they are appropriate for your use of OmegaT, and that all other locations requiring a language code match the codes you assign here. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
+	  <para>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <emphasis>différents</emphasis>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
 	</warning>
 	
     <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour revenir à cette boite de dialogue après avoir créé le projet.</para>

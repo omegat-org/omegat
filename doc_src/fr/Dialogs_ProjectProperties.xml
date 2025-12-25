@@ -15,15 +15,10 @@
 
     <para>Sélectionnez les langues source et cible dans la liste déroulante ou saisissez-les manuellement.</para>
 
-	<para>OmegaT provides a convenient short list of two-letter language codes,
-	but you can type any code into the appropriate field.</para>
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code dans le champ de saisie.</para>
 
 	<warning>
-	  <para>OmegaT does not check the validity of the language codes that you
-	  enter. Make sure that the two language codes are
-	  <emphasis>different</emphasis>, that they are appropriate for your use
-	  of OmegaT, and that all other locations requiring a language code
-	  match the codes you assign here.</para>
+	  <para>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <emphasis>différents</emphasis>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici.</para>
 	</warning>
 
 	<para>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</para>
@@ -38,20 +33,15 @@
 	  </listitem>
 
 	  <listitem>
-		<para>find spelling mistakes using the dictionaries installed in the
-		<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> preferences,</para>
+		<para>pour trouver des erreurs d’orthographe à l’aide des dictionnaires installés dans les préférences <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>find grammatical and typographical mistakes using the rules set
-		in the <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>
-		preferences,</para>
+		<para>pour trouver des erreurs grammaticales et typographiques à l’aide des règles définies dans les préférences <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>specify the languages used in the TMX files that are created by
-		the project (to be compliant, a TMX must use <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink> language
-		codes),</para>
+		<para>spécifier les langues utiliser dans les fichiers TMX qui sont créés par le projet (un fichier TMX conforme à la norme doit utiliser des codes de langue <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFV 3066</ulink>),</para>
 	  </listitem>
 
 	</itemizedlist>

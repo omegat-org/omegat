@@ -3,18 +3,12 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
-  <para>Managing a team project calls for some knowledge of either the
-  <emphasis>Git</emphasis> or <emphasis>SVN</emphasis> version control system
-  (<emphasis>VCS</emphasis> in the rest of this section).</para>
+  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>Git</emphasis> ou <emphasis>SVN</emphasis> (que nous appellerons collectivement <emphasis>logiciel de gestion de version</emphasis> dans le reste de ce document). </para>
 
   <para>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</para>
 
   <note>
-	<para>An OmegaT team project synchronizes the project translation memory
-	<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and the project writable
-	glossary <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> between the VCS hosting server and
-	all the participating team members, and manages all possible conflicts
-	between them.</para>
+	<para>Un projet en équipe OmegaT synchronise la mémoire de traduction du projet <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et le glossaire modifiable du projet <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> entre le serveur d’hébergement et tous les membres de l’équipe. Le projet en équipe gère aussi tous les conflits possibles entre eux.</para>
   </note>
 
   <section id="how.to.setup.team.project.prepare.the.repository">
@@ -33,10 +27,10 @@
 		<para>Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
 
 		<note>
-		  <para>Cette version locale contient votre copie du projet OmegaT qui servira de <emphasis>gestionnaire de projet</emphasis>. Use this copy to make modifications that affect the entire team.</para>
+		  <para>Cette version locale contient votre copie du projet OmegaT qui servira de <emphasis>gestionnaire de projet</emphasis>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</para>
 		</note>
 
-		<para>The local version is used to add the initial project to the server version, as well as for certain maintenance tasks. Voir la section <link linkend="how.to.manage.team.project" endterm="how.to.manage.team.project.title"/> pour en savoir plus.</para>
+		<para>Cette version locale est utilisée pour ajouter le projet initial à la version sur le serveur, ainsi que pour certaines tâches d’entretien. Voir la section <link linkend="how.to.manage.team.project" endterm="how.to.manage.team.project.title"/> pour en savoir plus.</para>
 
 		<para>Nous vous recommandons d’éviter d’utiliser ce dossier pour des tâches de traduction. Si vous avez besoin d’effectuer des traductions ou des tâches de révisions sur ce projet, utilisez OmegaT pour télécharger une copie séparée du projet en équipe et travaillez à partir de celle-ci. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
 	  </listitem>
@@ -47,16 +41,10 @@
 		  <listitem>
 			<para>Créez la structure du projet</para>
 
-			<para>If you are creating a new empty project, you can follow the
-			<link linkend="introduction.create.and.open.new.project">GUI
-			procedure</link>, or create it directly from the command line:
-			<!-- TODO we’ll need to update the CL when we have integrated the
-				 new CL framework -->
-			<command>java -jar OmegaT.jar team init &lt;source language&gt;
-			&lt;target language&gt;</command></para>
+			<para>Si vous créez un nouveau projet vide, vous pouvez suivre la <link linkend="introduction.create.and.open.new.project">procédure via interface graphique</link>, ou directement le créer avec la commande : <!-- TODO we’ll need to update the CL when we have integrated the
+				 new CL framework --> <command>java -jar OmegaT.jar team init &lt;langue source&gt; &lt;langue cible&gt;</command></para>
 
-			<para>This command also automatically registers the project in the
-			VCS.</para>
+			<para>Cette commande effectue également l’enregistrement automatique du projet dans le logiciel de gestion de version.</para>
 		  </listitem>
 		  <listitem>
 			<para>Choisissez les paramètres appropriés</para>

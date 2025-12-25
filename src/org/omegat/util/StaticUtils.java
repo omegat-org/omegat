@@ -400,15 +400,15 @@ public final class StaticUtils {
      * Windows: %APPDATA%/OmegaT/scripts
      * Linux:   ~/.config/omegat/scripts
      */
-    public static Path getUserScriptsDir() {
+    public static String getUserScriptsDir() {
         // If the script directory has already been determined, return it
         if (userScriptsDir != null) {
-            return userScriptsDir;
+            return userScriptsDir.toString();
         }
         userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
         // ensure directory exists
         if (Files.exists(userScriptsDir)) {
-            return userScriptsDir;
+            return userScriptsDir.toString();
         }
         // it seems first run.
         try {
@@ -424,7 +424,7 @@ public final class StaticUtils {
         } catch (IOException e) {
             Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
         }
-        return userScriptsDir;
+        return userScriptsDir.toString();
     }
 
     public static String getScriptDir() {

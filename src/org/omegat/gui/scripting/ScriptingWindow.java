@@ -88,6 +88,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -154,7 +155,8 @@ public class ScriptingWindow {
             }
         });
 
-        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
+        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY,
+                StaticUtils.getUserScriptsDir()));
 
         initWindowLayout();
 
@@ -1081,8 +1083,6 @@ public class ScriptingWindow {
     }
 
     // CHECKSTYLE:OFF
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
-
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 
     private JList<ScriptItem> m_scriptList;

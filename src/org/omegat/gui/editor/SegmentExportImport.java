@@ -66,7 +66,7 @@ public class SegmentExportImport {
 
     public SegmentExportImport(EditorController controller) {
         this.controller = controller;
-        importFile = new File(StaticUtils.getScriptDir(), "import.txt");
+        importFile = getFile("import.txt");
         new Thread() {
             public void run() {
                 try {

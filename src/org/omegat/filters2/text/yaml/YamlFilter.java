@@ -28,7 +28,9 @@ package org.omegat.filters2.text.yaml;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,10 +59,12 @@ import org.omegat.util.OStrings;
 public class YamlFilter extends AbstractFilter {
 
     private final ObjectMapper mapper;
+    private final Map<String, Integer> counters;
 
     public YamlFilter() {
         mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
+        counters = new HashMap<>();
     }
 
     /** Register plugin into OmegaT. */
@@ -116,16 +120,24 @@ public class YamlFilter extends AbstractFilter {
      * for translation and replace the value with the translation (or same as
      * source when parsing).
      */
-    private JsonNode translateNode(JsonNode node, @Nullable String comment) {
+    private JsonNode translateNode(JsonNode node, @Nullable String path) {
         if (node.isTextual()) {
             String src = node.asText();
-            String trg = processEntry(src, comment);
+            String currentPath = path == null ? "" : path;
+            int index = counters.getOrDefault(currentPath, 0);
+            counters.put(currentPath, index + 1);
+
+            String id = currentPath + "_" + index;
+            String comment = "name=" + currentPath;
+
+            String trg = processEntry(id, src, comment);
             return TextNode.valueOf(trg);
         } else if (node.isArray()) {
             ArrayNode array = node.deepCopy();
             for (int i = 0; i < array.size(); i++) {
                 JsonNode item = array.get(i);
-                JsonNode newItem = translateNode(item, comment + "[" + i + "]");
+                String nextPath = (path == null || path.isEmpty()) ? "[" + i + "]" : path + "[" + i + "]";
+                JsonNode newItem = translateNode(item, nextPath);
                 if (!newItem.equals(item)) {
                     array.set(i, newItem);
                 }
@@ -137,7 +149,8 @@ public class YamlFilter extends AbstractFilter {
                 String key = it.next();
                 // Keys are not translated. Only process values.
                 JsonNode v = obj.get(key);
-                JsonNode newV = translateNode(v, comment == null ? key : comment + "." + key);
+                String nextPath = (path == null || path.isEmpty()) ? key : path + "/" + key;
+                JsonNode newV = translateNode(v, nextPath);
                 if (!newV.equals(v)) {
                     obj.set(key, newV);
                 }
@@ -146,6 +159,18 @@ public class YamlFilter extends AbstractFilter {
         } else {
             // numbers, booleans, null, etc. — leave as is
             return node;
+        }
+    }
+
+    private String processEntry(String id, String entry, String comment) {
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(id, entry, null, false, comment, null, this, null);
+            return entry;
+        } else if (entryTranslateCallback != null) {
+            String translation = entryTranslateCallback.getTranslation(id, entry, null);
+            return translation != null ? translation : entry;
+        } else {
+            return entry;
         }
     }
 }

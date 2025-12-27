@@ -8,6 +8,8 @@
 - 2025002 [Refactor Core Class Static State Management](2025002.CoreStateSingleton.md)
 - 2025004 [Format Compliance and Purpose of `project_save.tmx` and TMX Validation Strategy](2025004.TMXFormatAndValidation.md)
 - 2025007 [CLI Plugin API Implementation](2025007.CLIPluginAPI.md)
+- 2025008 [Adoption of JSpecify for Null-Safety](2025008.AdoptionJSpecifyForNullSafety.md)
+- 2025012 [Machine Translation SPI with multi-level context for LLM Support](2025012.MultiLevelContextSupportForMT.md)
 
 ## OmegaT build system
 
@@ -25,4 +27,5 @@
 ## Bundled Plugins and Extensions
 
 - 2025006 [User Script Debugging Support Architecture](2025006.UserScriptDebugging.md)
+- 2025010 [First Time Configuration Wizard](2025010.FirstTimeWizard.md)
  

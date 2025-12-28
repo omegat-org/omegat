@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -146,7 +146,7 @@
                <li>
                   <span class="section">
                      <a href="chapter.windows.and.dialogs.html#windows.aligner">
-                        <span class="guilabel">Aligner des fichiers</span>
+                        <span class="guilabel">Aligner deux fichiers</span>
                      </a>
                   </span>
                   <ul>
@@ -233,8 +233,14 @@
                   </div>
                </div>
                <p>Sélectionnez les langues source et cible dans la liste déroulante ou saisissez-les manuellement.</p>
-               <p>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> (y compris les codes de langue à trois lettres) dans le champ de saisie.</p>
-               <p>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</p>
+               <p>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code dans le champ de saisie.</p>
+               <div class="warning">
+                  <h3 class="title">Avertissement</h3>
+                  <p>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <span class="emphasis">
+                        <em>différents</em>
+                     </span>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici.</p>
+               </div>
+               <p>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -248,21 +254,24 @@
                            </a>,</p>
                      </li>
                      <li class="listitem">
-                        <p>pour trouver des erreurs d’orthographe à partir des dictionnaires installés dans les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Vérificateur orthographique">
+                        <p>pour trouver des erreurs d’orthographe à l’aide des dictionnaires installés dans les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Vérificateur orthographique">
                               <span class="guilabel">Vérificateur orthographique</span>
                            </a>.</p>
                      </li>
                      <li class="listitem">
-                        <p>pour trouver des erreurs grammaticales et typographiques à partir des règles définies dans les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                        <p>pour trouver des erreurs grammaticales et typographiques à l’aide des règles définies dans les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
                               <span class="guilabel">LanguageTool</span>
-                           </a>, etc.</p>
+                           </a>,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>spécifier les langues utiliser dans les fichiers TMX qui sont créés par le projet (un fichier TMX conforme à la norme doit utiliser des codes de langue <a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFV 3066</a>),</p>
                      </li>
                   </ul>
                </div>
                <p>et ainsi de suite.</p>
                <div class="warning">
                   <h3 class="title">Avertissement</h3>
-                  <p>Veillez à saisir les codes de langue corrects et à vérifier que tous les autres emplacements nécessitant un tel code utilisent exactement les codes que vous saisissez ici. Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</p>
+                  <p>Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</p>
                </div>
                <p>OmegaT sélectionne automatiquement les lemmatiseurs qui correspondent à la langue source et à la langue cible, mais vous pouvez modifier manuellement ces paramètres. Les lemmatiseurs permettent à OmegaT de fournir de meilleures correspondances.</p>
             </section>
@@ -326,7 +335,7 @@
                               <span class="guimenuitem">Règles de segmentation générales…</span>
                            </a>) sont les règles globales.</p>
                         <p>Utilisez ce bouton pour créer des règles locales spécifiques à votre projet. Cochez la case <code class="option">Utiliser les règles de segmentation locales</code> et ajustez les règles de segmentation comme vous le souhaitez.</p>
-                        <p>Le projet stockera le nouvel ensemble de règles dans le fichier <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a> situé dans son dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Ces règles remplaceront les règles de segmentation globales.</p>
+                        <p>Le projet stockera le nouvel ensemble de règles dans le fichier <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a> situé dans son dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Ces règles remplaceront les règles de segmentation globales.</p>
                         <p>Pour désactiver les règles de segmentation locales, désactivez cette option ou supprimez ce fichier.</p>
                         <div class="warning">
                            <h3 class="title">Avertissement</h3>
@@ -360,7 +369,7 @@
                         <p>Cette fonction est particulièrement utile lorsqu’il s’agit de textes pour lesquels le formatage en ligne n’est pas particulièrement utile (par exemple, PDF OCR ou fichiers .odt ou .docx mal convertis.)</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
-                           <p>Les balises dissimulées sont simplement empilées à la fin du segment. Bien que cela n’empêche normalement pas l’ouverture du fichier traduit, gardez les points suivants à l’esprit lorsque vous utilisez cette fonction :</p>
+                           <p>Les balises dissimulées sont simplement empilées à la fin du segment. Bien que cela n’empêche normalement pas l’ouverture du fichier traduit, gardez les points suivants à l’esprit lorsque vous utilisez cette fonction :</p>
                            <div class="itemizedlist">
                               <ul class="itemizedlist" style="list-style-type: disc; ">
                                  <li class="listitem">
@@ -531,7 +540,7 @@
                                  </span>
                               </dt>
                               <dd>
-                                 <p>Cliquez sur le bouton <span class="guibutton">Exclusions…</span> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</p>
+                                 <p>Cliquez sur le bouton <span class="guibutton">Exclusions…</span> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</p>
                                  <div class="itemizedlist">
                                     <ul class="itemizedlist" style="list-style-type: disc; ">
                                        <li class="listitem">
@@ -749,15 +758,15 @@
                      <strong>L</strong>
                   </span>
                </a>.</p>
-            <p>La fenêtre affiche les informations suivantes :</p>
+            <p>La fenêtre affiche les informations suivantes :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Dans le titre de la fenêtre : le nombre total de fichiers traduisibles dans le projet.</p>
+                     <p>Dans le titre de la fenêtre : le nombre total de fichiers traduisibles dans le projet.</p>
                      <p>Il s’agit des fichiers présents dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> dans un format reconnu par OmegaT.</p>
                   </li>
                   <li class="listitem">
-                     <p>Sous forme de liste : tous les fichiers traduisibles du projet.</p>
+                     <p>Sous forme de liste : tous les fichiers traduisibles du projet.</p>
                      <p>En cliquant sur un fichier, celui-ci s’ouvre dans le volet <a class="link" href="chapter.panes.html#panes.editor" title="Éditeur">
                            <span class="guilabel">Éditeur</span>
                         </a> pour être traduit.</p>
@@ -788,7 +797,7 @@
                   <span class="guimenuitem">Statistiques</span>
                </a> pour plus d’informations.</p>
             <p>Modifier les règles de segmentation peut changer le nombre de segments/segments uniques. Toutefois, il est généralement préférable d’éviter de le faire une fois que vous avez commencé à traduire le projet. Voir l’annexe <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentation">Segmentation</a> pour en savoir plus.</p>
-            <p>Les boutons situés en bas de la fenêtre permettent d’ajouter des fichiers à votre projet  :</p>
+            <p>Les boutons situés en bas de la fenêtre permettent d’ajouter des fichiers à votre projet  :</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt id="windows.source.files.list.copy.files">
@@ -924,7 +933,7 @@
                   </li>
                   <li class="listitem">
                      <p>
-                        <span class="guimenu">Édition</span> &gt; <span class="guimenuitem">Remplacer par la source</span> (<span class="keycap">
+                        <span class="guimenu">Édition</span> &gt; <span class="guimenuitem">Remplacer par le texte source</span> (<span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
                            <strong>Maj</strong>
@@ -1140,7 +1149,7 @@
                      </dd>
                      <dt>
                         <span class="term">
-                           <span class="guibutton">Options de recherche MT</span>
+                           <span class="guibutton">Options de recherche dans les mémoires</span>
                         </span>
                      </dt>
                      <dd>
@@ -1152,13 +1161,13 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Ignorer la différence entre pleine et demi-largeur de caractère</span>
+                                 <span class="term">Ignorer la largeur des caractères</span>
                               </dt>
                               <dd>
                                  <p>Affiche les résultats qui correspondent à la fois aux formes pleine et demi-largeur (caractères CJC) des caractères dans les termes recherchés.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Nombre de segments correspondants :</span>
+                                 <span class="term">Nombre de segments correspondants :</span>
                               </dt>
                               <dd>
                                  <p>Définit le nombre maximum de correspondances affichées dans le champ de résultats de recherche.</p>
@@ -1317,8 +1326,8 @@
 	  
                </a>. La sélection sera automatiquement entrée dans le champ de recherche.</p>
             <p>Vous pouvez ouvrir plusieurs fenêtres de remplacement de texte en même temps.</p>
-            <p>Cliquez sur les flèches du menu déroulant des champs <span class="guilabel">Rechercher :</span> ou <span class="guilabel">Remplacer par :</span> pour accéder aux dix dernières saisies.</p>
-            <p>Saisissez la chaine de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <span class="guilabel">Remplacer par :</span> et cliquez sur <span class="guibutton">Recherche</span>, ou appuyez sur <span class="keycap">
+            <p>Cliquez sur les flèches du menu déroulant des champs <span class="guilabel">Rechercher :</span> ou <span class="guilabel">Remplacer par :</span> pour accéder aux dix dernières saisies.</p>
+            <p>Saisissez la chaine de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <span class="guilabel">Remplacer par :</span> et cliquez sur <span class="guibutton">Recherche</span>, ou appuyez sur <span class="keycap">
                   <strong>Entrée</strong>
                </span> si le curseur se trouve toujours dans le champ.</p>
             <p>Les résultats de la recherche sont affichés en caractères bleus gras et les chaines modifiées sont affichées en orange pour indiquer le résultat du remplacement.</p>
@@ -1340,12 +1349,12 @@
                <h3 class="title">Note</h3>
                <p>Ici, aucun remplacement n’a encore été effectué.</p>
             </div>
-            <p>Cliquez sur l’une des options suivantes :</p>
+            <p>Cliquez sur l’une des options suivantes :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>
-                        <span class="guibutton">Remplacer tout</span> : remplace chaque occurrence (après l’affichage d’une fenêtre de confirmation indiquant le nombre d’occurrences).</p>
+                        <span class="guibutton">Remplacer tout</span> : remplace chaque occurrence (après l’affichage d’une fenêtre de confirmation indiquant le nombre d’occurrences).</p>
                   </li>
                   <li class="listitem">
                      <p>
@@ -1358,11 +1367,11 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>
-                        <span class="guibutton">Fermer</span> : fermer la fenêtre sans apporter de modifications.</p>
+                        <span class="guibutton">Fermer</span> : fermer la fenêtre sans apporter de modifications.</p>
                   </li>
                </ul>
             </div>
-            <p>La fenêtre de remplacement de texte dispose de ses propres menus :</p>
+            <p>La fenêtre de remplacement de texte dispose de ses propres menus :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -1393,7 +1402,7 @@
                   </li>
                   <li class="listitem">
                      <p>
-                        <span class="guimenu">Édition</span> &gt; <span class="guimenuitem">Remplacer par la source</span> (<span class="keycap">
+                        <span class="guimenu">Édition</span> &gt; <span class="guimenuitem">Remplacer par le texte source</span> (<span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
                            <strong>Maj</strong>
@@ -1450,7 +1459,7 @@
                         <p>Il s’agit de l’équivalent d’une recherche web entre guillemets.</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
-                           <p>Les caractères génériques <code class="code">*</code> et <code class="code">?</code> peuvent être utilisés dans les recherches exactes :</p>
+                           <p>Les caractères génériques <code class="code">*</code> et <code class="code">?</code> peuvent être utilisés dans les recherches exactes :</p>
                            <div class="itemizedlist">
                               <ul class="itemizedlist" style="list-style-type: disc; ">
                                  <li class="listitem">
@@ -1515,7 +1524,7 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Ignorer la différence entre pleine et demi-largeur de caractère</span>
+                                 <span class="term">Ignorer la largeur des caractères</span>
                               </dt>
                               <dd>
                                  <p>Affiche les résultats qui correspondent à la fois aux formes pleine et demi-largeur (caractères CJC) des caractères dans les termes recherchés.</p>
@@ -1539,7 +1548,7 @@
                <p>Double-cliquer sur un segment pour l’ouvrir dans le volet <a class="link" href="chapter.panes.html#panes.editor" title="Éditeur">
                      <span class="guilabel">Éditeur</span>
                   </a>.</p>
-               <p>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</p>
+               <p>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>
@@ -1608,7 +1617,7 @@
                <div>
                   <div>
                      <h2 class="title" style="clear: both">
-                        <span class="guilabel">Aligner des fichiers</span>
+                        <span class="guilabel">Aligner deux fichiers</span>
                      </h2>
                   </div>
                </div>
@@ -1629,7 +1638,7 @@
                <h3 class="title">Avertissement</h3>
                <p>Cet outil ne vous permet pas d’enregistrer votre travail au cours d’un alignement. Il est donc recommandé de diviser les fichiers à aligner en fichiers plus courts que vous pourrez aisément aligner en une seule fois. Cela a pour avantage supplémentaire de réduire les incohérences dans l’alignement automatique initial, ce qui rend l’étape de la correction manuelle plus facile.</p>
             </div>
-            <p>L’alignement est le processus de création d’une mémoire de traduction bilingue à partir d’une paire de documents monolingues déjà traduits. L’alignement du contenu des dossiers se fait en quatre étapes :</p>
+            <p>L’alignement est le processus de création d’une mémoire de traduction bilingue à partir de deux documents monolingues déjà traduits. L’alignement du contenu des dossiers se fait en quatre étapes :</p>
             <div class="orderedlist">
                <ol class="orderedlist" type="1">
                   <li class="listitem">
@@ -1652,20 +1661,20 @@
                <p>Si vous avez un projet de traduction ouvert, l’aligneur utilisera automatiquement les langues de ce projet, ainsi que les règles de segmentation spécifiques au projet, le cas échéant.</p>
             </div>
             <p>Après avoir sélectionné la langue et les fichiers, cliquez sur le bouton <span class="guibutton">OK</span> pour faire apparaitre la fenêtre <span class="guilabel">Aligner</span>, qui montre les résultats de l’alignement automatique.</p>
-            <p>La partie principale de la fenêtre est divisée en trois colonnes :</p>
+            <p>La partie principale de la fenêtre est divisée en trois colonnes :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>
-                        <span class="guilabel">Conserver</span> : les paires de segments des lignes dont la case est cochée sont conservées dans le fichier de mémoire de traduction. Les lignes non cochées sont écartées.</p>
+                        <span class="guilabel">Conserver</span> : les paires de segments des lignes dont la case est cochée sont conservées dans le fichier de mémoire de traduction. Les lignes non cochées sont écartées.</p>
                   </li>
                   <li class="listitem">
                      <p>
-                        <span class="guilabel">Source</span> : Les segments du texte original.</p>
+                        <span class="guilabel">Source</span> : Les segments du texte original.</p>
                   </li>
                   <li class="listitem">
                      <p>
-                        <span class="guilabel">Cible</span> : les segments du texte traduit.</p>
+                        <span class="guilabel">Cible</span> : les segments du texte traduit.</p>
                   </li>
                </ul>
             </div>
@@ -1678,80 +1687,80 @@
                   </div>
                </div>
                <p>Dans cette étape, la partie inférieure de la fenêtre présente divers paramètres et options que vous pouvez modifier si l’alignement initial peut être amélioré. Elle affiche également un résultat <span class="guilabel">Score moyen</span> pour l’alignement. En règle générale, plus le score est bas, plus l’alignement est précis. La modification d’un paramètre recalcule immédiatement l’alignement, ce qui vous permet d’essayer rapidement différentes combinaisons pour obtenir les meilleurs résultats.</p>
-               <p>Les paramètres et options disponibles sont les suivants :</p>
+               <p>Les paramètres et options disponibles sont les suivants :</p>
                <div class="variablelist">
                   <div class="variablelist-title">Paramètres</div>
                   <dl class="variablelist">
                      <dt>
-                        <span class="term">Mode de comparaison  :</span>
+                        <span class="term">Mode de comparaison :</span>
                      </dt>
                      <dd>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Globale</span> : ce mode compare les documents dans leur ensemble.</p>
+                                    <span class="guilabel">Par tas</span> : ce mode compare les documents dans leur ensemble.</p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Par segments</span> : ce mode compare les documents segment par segment. Il n’est affiché que lorsqu’il est applicable pour les fichiers en cours d’alignement.</p>
+                                    <span class="guilabel">Par analyse syntaxique</span> : ce mode compare les documents segment par segment. Il n’est affiché que lorsqu’il est applicable pour les fichiers en cours d’alignement.</p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Identifiant</span> : ce mode s’applique aux fichiers constitués d’entrées <code class="literal">clé = valeur</code>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparait que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</p>
+                                    <span class="guilabel">Identifiant</span> : ce mode s’applique aux fichiers constitués d’entrées <code class="literal">clé = valeur</code>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparait que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</p>
                               </li>
                            </ul>
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Algorithme :</span>
+                        <span class="term">Algorithme :</span>
                      </dt>
                      <dd>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Viterbi</span> : Les algorithmes par défaut utilisés pour aligner les documents.</p>
+                                    <span class="guilabel">Viterbi</span> : Les algorithmes par défaut utilisés pour aligner les documents.</p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Avant-Arrière</span> : Un algorithme alternatif qui peut être utilisé pour aligner les documents.</p>
+                                    <span class="guilabel">Progressif-rétrogressif</span> : Un algorithme alternatif qui peut être utilisé pour aligner les documents.</p>
                               </li>
                            </ul>
                         </div>
                         <p>Il n’y a pas de règle absolue quant au choix de l’algorithme. Essayez les deux, et utilisez celui qui donne le meilleur résultat pour vos fichiers.</p>
                      </dd>
                      <dt>
-                        <span class="term">Calcul :</span>
+                        <span class="term">Calcul :</span>
                      </dt>
                      <dd>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Normal</span> : La répartition statistique par défaut utilisée pour aligner les documents.</p>
+                                    <span class="guilabel">Normal</span> : La répartition statistique par défaut utilisée pour aligner les documents.</p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Poisson</span> : Une répartition statistique alternative qui peut être utilisée pour aligner les documents.</p>
+                                    <span class="guilabel">Poisson</span> : Une répartition statistique alternative qui peut être utilisée pour aligner les documents.</p>
                               </li>
                            </ul>
                         </div>
                         <p>Comme pour les algorithmes, il n’y a pas de règle absolue quant au choix de la répartition statistique. Essayez les deux, et utilisez celui qui donne le meilleur résultat pour vos fichiers.</p>
                      </dd>
                      <dt>
-                        <span class="term">Compteur :</span>
+                        <span class="term">Compteur :</span>
                      </dt>
                      <dd>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Caractère</span> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui n’utilisent pas d’espace pour délimiter les mots.</p>
+                                    <span class="guilabel">Caractère</span> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui n’utilisent pas d’espace pour délimiter les mots.</p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <span class="guilabel">Mot</span> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui utilisent une espace pour délimiter les mots.</p>
+                                    <span class="guilabel">Mot</span> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui utilisent une espace pour délimiter les mots.</p>
                               </li>
                            </ul>
                         </div>
@@ -1777,7 +1786,7 @@
                         <p>L’aligneur inclut par défaut des balises dans les segments. Décochez la case pour supprimer toutes les balises de l’alignement et du fichier TMX final.</p>
                      </dd>
                      <dt id="windows.aligner.adjust.highlight">
-                        <span class="term" id="windows.aligner.adjust.highlight.title">Mettre en évidence</span>
+                        <span class="term" id="windows.aligner.adjust.highlight.title">Surligner</span>
                      </dt>
                      <dd>
                         <p>Décochez la case pour désactiver la mise en évidence.</p>
@@ -1815,16 +1824,16 @@
                   </dl>
                </div>
                <p>Vous pouvez également accéder à l’option <span class="guilabel">Mise en évidence</span> et à la boite de dialogue permettant de modifier le masque à partir du menu <span class="guimenu">Affichage</span>, et aux autres options à partir du menu <span class="guimenu">Options</span>.</p>
-               <p>De plus, le menu <span class="guimenu">Fichier</span> propose les commandes suivantes :</p>
+               <p>De plus, le menu <span class="guimenu">Fichier</span> propose les commandes suivantes :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>
-                           <span class="guimenuitem">Enregistrer la TMX…</span> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</p>
+                           <span class="guimenuitem">Enregistrer la TMX…</span> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</p>
                      </li>
                      <li class="listitem">
                         <p>
-                           <span class="guimenuitem">Réinitialiser</span> : Cette commande rétablit la valeur par défaut de tous les paramètres. Cette commande peut également être exécutée en appuyant sur le bouton <span class="guibutton">Réinitialiser</span> situé en bas à droite de la fenêtre ou en appuyant sur <span class="keycap">
+                           <span class="guimenuitem">Réinitialiser</span> : Cette commande rétablit la valeur par défaut de tous les paramètres. Cette commande peut également être exécutée en appuyant sur le bouton <span class="guibutton">Réinitialiser</span> situé en bas à droite de la fenêtre ou en appuyant sur <span class="keycap">
                               <strong>C</strong>
                            </span>+<span class="keycap">
                               <strong>S</strong>
@@ -1835,11 +1844,11 @@
                      </li>
                      <li class="listitem">
                         <p>
-                           <span class="guimenuitem">Recharger</span> : Cette commande recharge le fichier à partir du disque. Vous pouvez utiliser cette commande pour analyser et aligner à nouveau les fichiers si vous avez dû en modifier le contenu.</p>
+                           <span class="guimenuitem">Recharger</span> : Cette commande recharge le fichier à partir du disque. Vous pouvez utiliser cette commande pour analyser et aligner à nouveau les fichiers si vous avez dû en modifier le contenu.</p>
                      </li>
                      <li class="listitem">
                         <p>
-                           <span class="guimenuitem">Fermer</span> : Cette option permet de fermer la boite de dialogue <span class="guilabel">Aligner</span>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <span class="keycap">
+                           <span class="guimenuitem">Fermer</span> : Cette option permet de fermer la boite de dialogue <span class="guilabel">Aligner</span>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <span class="keycap">
                               <strong>C</strong>
                            </span>+<span class="keycap">
                               <strong>W</strong>
@@ -1928,7 +1937,7 @@
                         <p>Cette commande est également disponible à partir du bouton situé à droite de la fenêtre principale.</p>
                      </dd>
                      <dt>
-                        <span class="term">Marquer accepté (<span class="keycap">
+                        <span class="term">Colorer les segments acceptés (<span class="keycap">
                               <strong>A</strong>
                            </span>)</span>
                      </dt>
@@ -1936,7 +1945,7 @@
                         <p>Cette commande permet de confirmer que l’alignement des segments de la ligne ou du bloc de lignes sélectionné est correct. La colonne <span class="guilabel">Conserver</span> apparait en vert.</p>
                      </dd>
                      <dt>
-                        <span class="term">Marquer à vérifier (<span class="keycap">
+                        <span class="term">Colorer les segments à vérifier (<span class="keycap">
                               <strong>R</strong>
                            </span>)</span>
                      </dt>
@@ -1949,7 +1958,7 @@
                            </span>)</span>
                      </dt>
                      <dd>
-                        <p>Utilisez cette commande pour supprimer une ou plusieurs marques définies par les commandes <span class="guilabel">Marquer accepté</span> ou <span class="guilabel">Marquer à vérifier</span>.</p>
+                        <p>Utilisez cette commande pour supprimer une ou plusieurs marques définies par les commandes <span class="guilabel">Colorer les segments acceptés</span> ou <span class="guilabel">Colorer les segments à vérifier</span>.</p>
                      </dd>
                      <dt>
                         <span class="term">Réaligner les éléments en attente (<span class="keycap">
@@ -1962,7 +1971,7 @@
                         <p>Si des lignes ont été marquées comme acceptées, utilisez cette commande pour mettre à jour l’alignement des lignes restantes.</p>
                      </dd>
                      <dt>
-                        <span class="term">Conserver tout</span>
+                        <span class="term">Tout conserver</span>
                      </dt>
                      <dd>
                         <p>Cette commande permet de cocher la case <span class="guilabel">Conserver</span> pour toutes les lignes.</p>
@@ -2113,7 +2122,7 @@
                            </span> pour exécuteur le script immédiatement.</p>
                      </li>
                      <li class="listitem">
-                        <p>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic droit sur l’un des boutons de <span class="guibutton">&lt;1&gt;</span> à <span class="guibutton">&lt;12&gt;</span> en bas de la fenêtre et sélectionnez <span class="guilabel">Ajouter le script</span> pour assigner le script à ce numéro.</p>
+                        <p>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic droit sur l’un des boutons de <span class="guibutton">&lt;1&gt;</span> à <span class="guibutton">&lt;12&gt;</span> en bas de la fenêtre et sélectionnez <span class="guilabel">Associer le script</span> pour assigner le script à ce numéro.</p>
                         <p>Si vous souhaitez détacher le script du raccourci, faites un clic droit sur le bouton et sélectionnez <span class="guilabel">Supprimer le script</span>.</p>
                      </li>
                      <li class="listitem">
@@ -2199,7 +2208,7 @@
                         <p>Exemple qui montre comment modifier un segment.</p>
                      </dd>
                      <dt id="windows.scripts.distribution.example.search.and.replace">
-                        <span class="term" id="windows.scripts.distribution.example.search.and.replace.title">Exemple : recherche et remplacement</span>
+                        <span class="term" id="windows.scripts.distribution.example.search.and.replace.title">Exemple : recherche et remplacement</span>
                      </dt>
                      <dd>
                         <p>Un script simple de recherche et remplacement.</p>

@@ -33,7 +33,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.general.always.confirm.quit">
-        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>Quitter toujours confirmé</option></term>
+        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>Confirmer avant de quitter</option></term>
 
         <listitem>
           <para>Le programme demandera une confirmation avant la fermeture.</para>
@@ -61,7 +61,7 @@
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Récupérer automatiquement les traductions</option></term>
 
 				<listitem>
-					<para>Enable this option to automatically fetch machine translations from the providers you have enabled and configured. If you leave this option disabled, machine translations are only fetched when you use <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> in the current segment. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</para>
+					<para>Activez cette option pour récupérer automatiquement les traductions des moteurs que vous avez activés et configurés. Si cette option est désactivée, les traductions automatiques ne seront récupérées que lorsque vous utiliserez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> dans le segment actuel. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</para>
 				</listitem>
       </varlistentry>
 
@@ -199,10 +199,10 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.glossary.layout">
-        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Mise en page</option></term>
+        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Disposition</option></term>
 
         <listitem>
-          <para>Sélectionnez une mise en page pour le volet des glossaires. Des mises en page supplémentaires peuvent être ajoutées sous forme d’extensions.</para>
+          <para>Sélectionnez une disposition pour le volet des glossaires. Des dispositions supplémentaires peuvent être ajoutées sous forme d’extensions.</para>
         </listitem>
       </varlistentry>
 
@@ -215,8 +215,7 @@
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
-		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort by source
-			  text term length</option></term>
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Trier par longueur de terme source</option></term>
 		  <listitem>
 			  <para>If some glossary items are similar in a source term text,
 				  and one contains another term text, sort by a length of source text.</para>
@@ -224,8 +223,7 @@
 	  </varlistentry>
 
 		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
-			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Sort by source
-				text term length</option></term>
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Trier par longueur de terme source</option></term>
 			<listitem>
 				<para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
 			</listitem>
@@ -304,7 +302,7 @@
 
 	  <variablelist>
 		<varlistentry>
-		  <term><option>Appliquer cette police aux données tabulaires (fichiers de projet, statistiques, etc.)</option></term>
+		  <term><option>Afficher les données tabulaires (liste des fichiers, statistiques, etc.) avec cette police</option></term>
 		  <listitem>
 			<para>Les données tabulaires sont affichées par défaut dans une police de caractères unique qui permet d’aligner correctement les colonnes. L’utilisation d’une police proportionnelle rompra cette disposition.</para>
 		  </listitem>
@@ -375,7 +373,7 @@
 		<para>Ainsi, lors d’une traduction à partir du français canadien, les règles pour le français canadien - s’il y en a - s’appliqueront en premier, suivies par les règles pour le français et, enfin, par les règles génériques.</para>
 	  </example>
 	  
-	  <para>Pour créer un nouvel ensemble de règles :</para>
+	  <para>Pour créer un nouvel ensemble de règles :</para>
 	  <orderedlist>
 		<listitem>
 		  <para>Cliquez sur <guibutton>ajouter</guibutton>. Une ligne vide apparait en bas du tableau.</para>
@@ -404,8 +402,7 @@
 		  <term id="segmentation.rules.exceptionrule.title"><option>Exceptions</option></term>
 
 		  <listitem>
-			<para>To define an exception rule, leave the <guilabel>Break
-			</guilabel>check box unchecked.</para>
+			<para>Pour définir une exception, laisser la case <guilabel>Segmentation</guilabel> non cochée.</para>
 
 			<para>Indiquez les combinaisons de textes qui constituent des exceptions à une règle de segmentation. Par exemple, <emphasis>Mrs. Dalloway</emphasis> ne doit pas être divisé en deux segments, même si une règle de césure pour un <emphasis>point suivi d’une espace</emphasis> définit généralement une phrase.</para>
 			
@@ -416,8 +413,7 @@
 		  <term id="segmentation.rules.breakrule.title"><option>Segmentations</option></term>
 
 		  <listitem>
-			<para>To define a break rule, check the
-			<guilabel>Break</guilabel> box.</para>
+			<para>Pour définir une règle de segmentation, cochez la case <guilabel>Segmentation</guilabel>.</para>
 
 			<para>Sépare le texte source en segments. Par exemple, un <emphasis>point suivi d’une espace</emphasis> définit généralement une fin de phrase en anglais.</para>
 		  </listitem>
@@ -494,7 +490,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialog.preferences.spellchecker.url">
-		<term id="dialog.preferences.spellchecker.url.title"><option>URL des dictionnaires orthographiques téléchargeables :</option></term>
+		<term id="dialog.preferences.spellchecker.url.title"><option>URL des dictionnaires orthographiques téléchargeables :</option></term>
 		<listitem>
 		  <para>L’URL par défaut où OmegaT cherchera les dictionnaires à installer.</para>
 
@@ -603,14 +599,13 @@
   <section id="dialogs.preferences.editor">
 	<title id="dialogs.preferences.editor.title"><guilabel>Éditeur</guilabel></title>
 
-	<para>En entrant dans un segment vide :</para>
+	<para>En entrant dans un segment vide :</para>
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.editor.insert.the.source.text">
 		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>Insérer le texte source</option></term>
 
 		<listitem>
-		  <para>Use this option for parts of the translation that do not require
-		  much transformation.</para>
+		  <para>Utilisez cette option pour les parties de la traduction qui ne nécessitent pas beaucoup de transformation.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -646,15 +641,15 @@
 
 		  <example id="convert.match.numbers">
 			<title>Conversion des chiffres des correspondances</title>
-			<para><token>2001</token> dans la source :</para>
+			<para><token>2001</token> dans la source :</para>
 			<para>
 			  <programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
 			
-			<para><token>2003</token> dans la correspondance partielle :</para>
+			<para><token>2003</token> dans la correspondance partielle :</para>
 			<para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
 [[<token>2003</token>]], elle acquiert la nationalité allemande.</programlisting></para>
 
-			<para>Lorsque la correspondance est insérée, OmegaT convertit <token>2003</token> en <token>2001</token> :</para>
+			<para>Lorsque la correspondance est insérée, OmegaT convertit <token>2003</token> en <token>2001</token> :</para>
 
 			<para><programlisting>[[<token>2001</token>]], elle acquiert la nationalité allemande.</programlisting></para>
 		  </example>
@@ -833,7 +828,7 @@
 
 		  <para>De même, utilisez <userinput>&lt;/ ?[^&gt;]+&gt;</userinput> pour vous assurer que les balises HTML (ou similaires) introduites dans le texte source sont conservées sans modification dans la traduction.</para>
 
-		  <para>Utilisez des parenthèses et <literal>|</literal> pour qu’OmegaT prenne en compte les deux balises : <userinput>(\d+)|(&lt;/ ?[^&gt;]+&gt;)</userinput>.</para>
+		  <para>Utilisez des parenthèses et <literal>|</literal> pour qu’OmegaT prenne en compte les deux balises : <userinput>(\d+)|(&lt;/ ?[^&gt;]+&gt;)</userinput>.</para>
 
 		  <para>Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
 		</listitem>
@@ -868,7 +863,7 @@
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
-		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>Trier les correspondances partielles par :</option></term>
+		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>Trier les correspondances partielles par :</option></term>
 
 		<listitem>
 		  <para>Par défaut, la lemmatisation est utilisée pour déterminer les correspondances les plus proches affichées dans le volet <guilabel>Correspondances</guilabel>.</para>
@@ -911,13 +906,13 @@
 		<listitem>
 		  <para>Changez la façon dont les correspondances sont affichées en utilisant des variables prédéfinies.</para>
 
-		  <para>La valeur par défaut est :</para>
+		  <para>La valeur par défaut est :</para>
 		  
 		  <para><programlisting>${id} ${fuzzyFlag}${sourceText} ${targetText}
 &lt;${score}/${noStemScore}/${adjustedScore}%
 ${filePath}&gt;</programlisting></para>
 
-		  <para>Voici une alternative possible :</para>
+		  <para>Voici une alternative possible :</para>
 
 		  <para>
 			<programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
@@ -1105,12 +1100,12 @@ ${filePath}&gt;</programlisting></para>
 	  <varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
 		<term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><option>Personnaliser les informations de modification du segment</option></term>
 		<listitem>
-		  <para>Les informations relatives à la modification du segment sont affichées au-dessus du segment. Le paramètre par défaut indique qui a modifié la traduction pour la dernière fois et quand :</para>
+		  <para>Les informations relatives à la modification du segment sont affichées au-dessus du segment. Le paramètre par défaut indique qui a modifié la traduction pour la dernière fois et quand :</para>
 
 		  <example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
 			<title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">Affichage par défaut</title>
 			<para>
-			  <programlisting>Dernière modification de la traduction par suzume le 6 octobre 2022 à 14 :18 :27
+			  <programlisting>Dernière modification de la traduction par suzume le 6 octobre 2022 à 14 :18 :27
 [[チューリッヒ大学]]大学院博士課程修了。
 [[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</programlisting>
 			</para>
@@ -1145,7 +1140,7 @@ ${filePath}&gt;</programlisting></para>
 		<listitem>
 		  <para>Permet de sélectionner l’intervalle entre les enregistrements automatiques des données du projet. Voir la section <link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/> pour en savoir plus.</para>
 
-		  <para>Modifier l’intervalle par défaut (3 minutes) selon les caractéristiques du projet :</para>
+		  <para>Modifier l’intervalle par défaut (3 minutes) selon les caractéristiques du projet :</para>
 
 		  <itemizedlist>
 			<listitem>

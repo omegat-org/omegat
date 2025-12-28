@@ -30,12 +30,12 @@
 
 	<varlistentry>
       <term>\h?</term>
-      <listitem><para>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie « caractère d’espacement vertical  » : \v.)</para>
+      <listitem><para>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie « caractère d’espacement vertical  » : \v.)</para>
       </listitem>
     </varlistentry>
   </variablelist>    
   
-  <para>De nombreuses fonctions d’OmegaT dépendent des expressions régulières ou les proposent en option :</para>
+  <para>De nombreuses fonctions d’OmegaT dépendent des expressions régulières ou les proposent en option :</para>
 
   <variablelist>
     <varlistentry>
@@ -79,7 +79,7 @@
       <listitem>
         <para>Les règles de segmentation et les masques de langage sont définis à l’aide d’expressions régulières. Vous pouvez les modifier librement pour améliorer la segmentation d’un document ou ajouter des règles générales supplémentaires. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
 
-        <para>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</para>
+        <para>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</para>
 
 		<para>Un masque de langue qui correspond à la langue source du projet s’appliquera à ce projet.</para>
 	  </listitem>
@@ -130,7 +130,7 @@
         <listitem>
           <para>Cette signification doit être annulée par un autre caractère pour correspondre au caractère lui-même.</para>
 
-          <para>La liste complète de ces caractères est <link linkend="app.regex.twelve.characters">ci-dessous</link>. Par exemple, <literal>.</literal> : lorsqu’il est utilisé seul, il a une signification particulière qui permet de correspondre à<emphasis>tout caractère unique</emphasis>.</para>
+          <para>La liste complète de ces caractères est <link linkend="app.regex.twelve.characters">ci-dessous</link>. Par exemple, <literal>.</literal> : lorsqu’il est utilisé seul, il a une signification particulière qui permet de correspondre à<emphasis>tout caractère unique</emphasis>.</para>
 
 		  <para>Pour trouver un point normal, il faut annuler ce sens en utilisant le <literal>\</literal>, pour faire l’expression <literal>\.</literal>, qui correspond juste à un point.</para>
         </listitem>
@@ -156,7 +156,7 @@
     
       <variablelist>
         <varlistentry>
-          <term>La BARRE OBLIQUE INVERSÉE : <literal>\</literal></term>
+          <term>La BARRE OBLIQUE INVERSÉE : <literal>\</literal></term>
           <listitem>
             <para>Ce caractère annule ou active la signification particulière du caractère suivant.</para>
             
@@ -225,7 +225,7 @@
                     <entry>
                       <orderedlist>
                         <listitem>
-                          <para>Le « A » majuscule dans la phrase suivante : « Au-dessus des étangs, au-dessus des vallées ».</para>
+                          <para>Le « A » majuscule dans la phrase suivante : « Au-dessus des étangs, au-dessus des vallées ».</para>
                         </listitem>
 
                         <listitem>
@@ -240,7 +240,7 @@
                     <entry>
                       <orderedlist>
                         <listitem>
-                          <para>Le « A » majuscule dans la phrase suivante : « Baudelaire a écrit : <emphasis>« Au-dessus des étangs, au-dessus des vallées »</emphasis> ».</para>
+                          <para>Le « A » majuscule dans la phrase suivante : « Baudelaire a écrit : <emphasis>« Au-dessus des étangs, au-dessus des vallées »</emphasis> ».</para>
                         </listitem>
                       
                         <listitem>
@@ -256,7 +256,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Le SYMBOLE DOLLAR : <literal>$</literal></term>
+          <term>Le SYMBOLE DOLLAR : <literal>$</literal></term>
           <listitem>
             <para>Lorsqu’il est le dernier caractère d’une expression, le symbole <emphasis>dollar</emphasis> correspond à la fin d’une ligne.</para>
             <informaltable>
@@ -273,16 +273,16 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Une ligne qui se compose d’un seul mot et se termine par deux-points :</para>
-                      <para><emphasis>Questions :</emphasis></para>
+                      <para>Une ligne qui se compose d’un seul mot et se termine par deux-points :</para>
+                      <para><emphasis>Questions :</emphasis></para>
                     </entry>
                   </row>
 
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Une ligne qui se compose d’un seul mot, mais qui ne se termine pas par deux-points :</para>
-                      <para><emphasis>Questions ?</emphasis></para>
+                      <para>Une ligne qui se compose d’un seul mot, mais qui ne se termine pas par deux-points :</para>
+                      <para><emphasis>Questions ?</emphasis></para>
                     </entry>
                   </row>
                 </tbody>
@@ -292,7 +292,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Le POINT : <literal>.</literal></term>
+          <term>Le POINT : <literal>.</literal></term>
           <listitem>
             <para>Correspond à tout caractère unique.</para>
 
@@ -310,7 +310,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <emphasis>des</emphasis> », « <emphasis>dis</emphasis> », « <emphasis>dos</emphasis> », ou même des combinaisons qui n’ont pas de sens, comme « <emphasis>dzs</emphasis> » ou « <emphasis>dqs</emphasis> ».</para>
+                      <para>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <emphasis>des</emphasis> », « <emphasis>dis</emphasis> », « <emphasis>dos</emphasis> », ou même des combinaisons qui n’ont pas de sens, comme « <emphasis>dzs</emphasis> » ou « <emphasis>dqs</emphasis> ».</para>
                     </entry>
                   </row>
 
@@ -318,7 +318,7 @@
                     <entry>Ne correspond pas à</entry>
                     <entry>
                       <para>Des combinaisons contenant trois lettres qui commencent par « d » et se terminent par « s », mais qui sont réparties sur plus d’une ligne.</para>
-                      <para>Quelle est la lettre manquante ?</para>
+                      <para>Quelle est la lettre manquante ?</para>
                         <simplelist>
                           <member><literal>d</literal></member>
                           <member><literal/></member>
@@ -333,7 +333,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>La BARRE VERTICALE : <literal>|</literal></term>
+          <term>La BARRE VERTICALE : <literal>|</literal></term>
           <listitem>
             <para>Ce caractère fonctionne comme un &quot;OU&quot;, permettant de choisir une des expressions qui le précèdent ou le suivent.</para>
 
@@ -351,7 +351,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
                           <member>« Une pomme par jour… »</member>
                           <member>« La prunelle de mes yeux… »</member>
                         </simplelist>
@@ -362,7 +362,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
                           <member>« Un récit intitulé <emphasis>Une Héroïne Inconnue</emphasis>. »</member>
                           <member>« Il travaille pour le journal <emphasis>La Provence</emphasis>. »</member>
                         </simplelist>
@@ -376,7 +376,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Le POINT D’INTERROGATION : <literal>?</literal></term>
+          <term>Le POINT D’INTERROGATION : <literal>?</literal></term>
           <listitem>
             <para>Ce caractère indique que le caractère ou l’expression qui le précède doit correspondre zéro ou une fois.</para>
 
@@ -395,7 +395,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Soit le « est » ou le « es » dans : <simplelist>
+                      <para>Soit le « est » ou le « es » dans : <simplelist>
                           <member>« C’est une bonne question. »</member>
                           <member>« Tu es un excellent médecin. »</member>
                         </simplelist>
@@ -408,8 +408,8 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Ni le « est » ni le « es » dans : <simplelist>
-                          <member>Le verbe être : « est » (ou « es »).</member>
+                      <para>Ni le « est » ni le « es » dans : <simplelist>
+                          <member>Le verbe être : « est » (ou « es »).</member>
                         </simplelist>
                       </para>
                       <para>Il n’est pas suivi d’une espace.</para>
@@ -422,7 +422,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>L’ASTÉRISQUE : <literal>*</literal></term>
+          <term>L’ASTÉRISQUE : <literal>*</literal></term>
           <listitem>
             <para>Ce caractère indique que zéro ou plusieurs occurrences du caractère ou de l’expression qui le précède doivent être recherchées.</para>
 
@@ -457,7 +457,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Le signe PLUS : <literal>+</literal></term>
+          <term>Le signe PLUS : <literal>+</literal></term>
           <listitem>
             <para>Ce caractère indique qu’une ou plusieurs occurrences du caractère ou de l’expression qui le précède doivent correspondre.</para>
 
@@ -492,7 +492,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>La PARENTHÈSE OUVRANTE : <literal>(</literal></term>
+          <term>La PARENTHÈSE OUVRANTE : <literal>(</literal></term>
 
           <listitem>
             <para>Ce caractère commence un <emphasis>groupe</emphasis>, qui est un ensemble de caractères traités comme une seule unité. Les groupes sont numérotés, et leur contenu est stocké dans la mémoire. Ils peuvent être réutilisés ultérieurement dans l’expression de recherche en utilisant <literal>\<option>n</option></literal>, où <option>n</option> est le numéro du groupe.</para>
@@ -517,7 +517,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Des mots doublés séparés par une espace, comme le terme « une » consécutif dans la phrase suivante :</para>
+                      <para>Des mots doublés séparés par une espace, comme le terme « une » consécutif dans la phrase suivante :</para>
 
 					  <para>« J’ai acheté une une pomme. »</para>
                     </entry>
@@ -526,7 +526,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Le « ça, ça » dans la phrase suivante :</para>
+                      <para>Le « ça, ça » dans la phrase suivante :</para>
 
 					  <para>« Mais ça, ça dépasse les limites », car le premier « ça » est suivi à la fois d’une virgule et d’une espace et non d’une simple espace.</para>
                     </entry>
@@ -538,7 +538,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>La PARENTHÈSE FERMANTE : <literal>)</literal></term>
+          <term>La PARENTHÈSE FERMANTE : <literal>)</literal></term>
 
           <listitem>
             <para>Ce caractère clôt un groupe. Il est spécial, car il ne peut jamais être utilisé seul. Il doit être précédé de <literal>\</literal> si vous devez faire correspondre le caractère de la parenthèse fermante à lui-même.</para>
@@ -557,7 +557,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</para>
+                      <para>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</para>
 
                       <simplelist>
                         <member>1) Pommes</member>
@@ -572,7 +572,7 @@
                     <entry>
                       <para>Les nombres séquentiels qui ne sont pas au début d’une ligne.</para>
 
-                      <para>Procédez comme suit :</para>
+                      <para>Procédez comme suit :</para>
                       <simplelist>
                         <member>Étape 1) Préparation</member>
                         <member>Étape 2) …</member>
@@ -586,7 +586,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Le CROCHET OUVRANT : <literal>[</literal></term>
+          <term>Le CROCHET OUVRANT : <literal>[</literal></term>
 
           <listitem>
             <para>Ce caractère doit être associé au crochet fermant pour contenir un ensemble de caractères individuels qui représentent chacun une correspondance potentielle valide.</para>
@@ -624,7 +624,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>L’ACCOLADE OUVRANTE : <literal>{</literal></term>
+          <term>L’ACCOLADE OUVRANTE : <literal>{</literal></term>
 
           <listitem>
             <para>Ce caractère doit être associé à l’accolade fermante pour contenir un <emphasis>nombre exact</emphasis>, <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>, ou <emphasis>gamme</emphasis> précisant combien d’occurrences du caractère ou du groupe précédent doivent être correspondantes.</para>
@@ -653,7 +653,7 @@
                     <entry>Ne correspond pas à</entry>
                     <entry>
                       <para>Les codes tels que « 123/45 », « 1472/6985 », ou « 95133/15746 ».</para>
-                      <para><emphasis role="bold">Attention :</emphasis> Bien que les deux derniers codes ci-dessus ne soient pas complètement correspondants, l’expression donnera la partie « <emphasis>1472/698</emphasis> » de « 1472/6985 », ainsi que la partie « <emphasis>5133/157</emphasis> » de « 95133/15746 ».</para>
+                      <para><emphasis role="bold">Attention :</emphasis> Bien que les deux derniers codes ci-dessus ne soient pas complètement correspondants, l’expression donnera la partie « <emphasis>1472/698</emphasis> » de « 1472/6985 », ainsi que la partie « <emphasis>5133/157</emphasis> » de « 95133/15746 ».</para>
                     </entry>
                   </row>
                 </tbody>
@@ -727,9 +727,9 @@
       <title id="app.regex.types.of.expressions.case.title">Casse</title>
 
       
-      <para>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</para>
+      <para>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</para>
 
-      <para>En revanche, les Expressions régulières sont sensibles à la casse par défaut. Cela signifie qu’une expression régulière recherchant « OmegaT », par exemple, ne correspondra pas à « omegat ». Cependant, il est possible de définir la sensibilité à la casse au sein de l’expression régulière en utilisant des modificateurs spéciaux :</para>
+      <para>En revanche, les Expressions régulières sont sensibles à la casse par défaut. Cela signifie qu’une expression régulière recherchant « OmegaT », par exemple, ne correspondra pas à « omegat ». Cependant, il est possible de définir la sensibilité à la casse au sein de l’expression régulière en utilisant des modificateurs spéciaux :</para>
 
       <variablelist>
         <varlistentry>
@@ -746,7 +746,7 @@
         </varlistentry>
       </variablelist>
 	  
-      <para>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, qui correspond à un « o » insensible à la casse, suivi d’un « mega » sensible à la casse, suivi d’un « t » insensible à la casse.</para>
+      <para>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, qui correspond à un « o » insensible à la casse, suivi d’un « mega » sensible à la casse, suivi d’un « t » insensible à la casse.</para>
     </section>
 
     <section id="app.regex.types.of.expressions.classes">
@@ -762,7 +762,7 @@
 		<para>Vous pouvez rechercher n’importe lequel des quatre caractères spéciaux de la classe comme des caractères normaux en les faisant précéder d’une barre oblique inverse. Il est possible de rechercher le caret, le crochet fermant et le trait d’union en les positionnant à un endroit qui n’active pas leur signification particulière. Pour cela, il faut les placer n’importe où sauf juste après le crochet ouvrant pour le caret, immédiatement après le crochet ouvrant ou le caret qui le suit pour le crochet fermant, et juste après le crochet ouvrant ou juste avant le crochet fermant pour le trait d’union.</para>
       </note>
 
-	  <para>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <literal>\d</literal> est une abréviation de <literal>[0-9]</literal>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <literal>\D</literal> correspond à tout caractère qui n’est <emphasis role="bold">pas</emphasis> un chiffre.</para>
+	  <para>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <literal>\d</literal> est une abréviation de <literal>[0-9]</literal>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <literal>\D</literal> correspond à tout caractère qui n’est <emphasis role="bold">pas</emphasis> un chiffre.</para>
       <para>Le tableau ci-dessous fournit plusieurs exemples supplémentaires. Ces classes ne représentent pas uniquement la lettre utilisée pour former l’abréviation.</para>
       
       <table id="app.regex.classes">
@@ -794,7 +794,7 @@
               <entry>
                 <para>Un caractère dans la gamme de lettres allant de « C » à « X ».</para>
 
-				<para>Une gamme est définie par le premier caractère d’une série, suivi d’un trait d’union, suivi du dernier caractère de la série. Il est possible de définir un nombre quelconque de gammes : <literal>[a-zA-Z0-9]</literal> désigne tout caractère minuscule de « a » à « z », ou tout caractère majuscule de « A » à « Z », ou tout chiffre de « 0 » à « 9 ». Un trait d’union placé en dehors de la série ne représente qu’un trait d’union : <literal>[a-z-]</literal> signifie tout caractère minuscule de « a » à « z », ou le caractère trait d’union lui-même.</para>
+				<para>Une gamme est définie par le premier caractère d’une série, suivi d’un trait d’union, suivi du dernier caractère de la série. Il est possible de définir un nombre quelconque de gammes : <literal>[a-zA-Z0-9]</literal> désigne tout caractère minuscule de « a » à « z », ou tout caractère majuscule de « A » à « Z », ou tout chiffre de « 0 » à « 9 ». Un trait d’union placé en dehors de la série ne représente qu’un trait d’union : <literal>[a-z-]</literal> signifie tout caractère minuscule de « a » à « z », ou le caractère trait d’union lui-même.</para>
               </entry>
             </row>
             
@@ -1036,7 +1036,7 @@
           <row>
             <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
             <entry>
-              <para>Trouver des dates en chaine numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</para>
+              <para>Trouver des dates en chaine numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</para>
 			  
                 <itemizedlist>
                   <listitem>

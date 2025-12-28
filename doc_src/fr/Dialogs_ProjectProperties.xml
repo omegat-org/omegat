@@ -21,7 +21,7 @@
 	  <para>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <emphasis>différents</emphasis>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici.</para>
 	</warning>
 
-	<para>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</para>
+	<para>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</para>
 	
 	<itemizedlist>
 	  <listitem>
@@ -136,7 +136,7 @@
 		  <para>Cette fonction est particulièrement utile lorsqu’il s’agit de textes pour lesquels le formatage en ligne n’est pas particulièrement utile (par exemple, PDF OCR ou fichiers .odt ou .docx mal convertis.)</para>
 
 		  <note>
-			<para>Les balises dissimulées sont simplement empilées à la fin du segment. Bien que cela n’empêche normalement pas l’ouverture du fichier traduit, gardez les points suivants à l’esprit lorsque vous utilisez cette fonction :</para>
+			<para>Les balises dissimulées sont simplement empilées à la fin du segment. Bien que cela n’empêche normalement pas l’ouverture du fichier traduit, gardez les points suivants à l’esprit lorsque vous utilisez cette fonction :</para>
 			<itemizedlist>
 				<listitem>
 					<para>Vous devrez appliquer manuellement des caractères gras, italiques ou d’autres décorations de texte dans le fichier traduit.</para>
@@ -275,7 +275,7 @@
 			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions…</guibutton></term>
 
 			  <listitem>
-				<para>Cliquez sur le bouton <guibutton>Exclusions…</guibutton> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</para>
+				<para>Cliquez sur le bouton <guibutton>Exclusions…</guibutton> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</para>
 		  
 				<itemizedlist>
 				  <listitem>

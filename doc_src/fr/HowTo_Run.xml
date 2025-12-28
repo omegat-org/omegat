@@ -10,7 +10,7 @@
   <section id="running.omegat.on.windows">
 	<title id="running.omegat.on.windows.title">Sur Windows</title>
 	
-	<para>La façon la plus simple de lancer OmegaT est d’exécuter le programme <filename>OmegaT.exe</filename>. Les options de démarrage du programme sont lues depuis le fichier <filename>OmegaT.l4J.ini</filename>, qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié pour être adapté à votre installation. L’exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue et le Canada comme pays :</para>
+	<para>La façon la plus simple de lancer OmegaT est d’exécuter le programme <filename>OmegaT.exe</filename>. Les options de démarrage du programme sont lues depuis le fichier <filename>OmegaT.l4J.ini</filename>, qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié pour être adapté à votre installation. L’exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue et le Canada comme pays :</para>
 
 	<programlisting># OmegaT.exe runtime configuration
 	# To use a parameter, remove the '#' before the '-'
@@ -22,7 +22,7 @@
 	-Duser.country=CA</programlisting>
 
 
-	<para>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</para>
+	<para>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</para>
 
 	<programlisting>-Dsun.java2d.noddraw=false</programlisting>
   </section>
@@ -152,10 +152,10 @@
 	<section id="launch.with.command.line.omegat.terminal.command.syntax">
 	  <title id="launch.with.command.line.omegat.terminal.command.syntax.title">Syntaxe de commande</title>
 
-	  <para>La syntaxe pour lancer OmegaT depuis le terminal est :<programlisting>java -jar &lt;paramètres java&gt; chemin/à/OmegaT.jar &lt;options OmegaT&gt; </programlisting></para>
+	  <para>La syntaxe pour lancer OmegaT depuis le terminal est :<programlisting>java -jar &lt;paramètres java&gt; chemin/à/OmegaT.jar &lt;options OmegaT&gt; </programlisting></para>
 
 	  <note>
-		<para>Sur macOS, il est également possible d’utiliser <filename>OmegaT.app</filename> directement dans le terminal, auquel cas les paramètres java ne peuvent pas être ajoutés :<programlisting>open chemin/vers/OmegaT.app
+		<para>Sur macOS, il est également possible d’utiliser <filename>OmegaT.app</filename> directement dans le terminal, auquel cas les paramètres java ne peuvent pas être ajoutés :<programlisting>open chemin/vers/OmegaT.app
 		-n --args &lt;options OmegaT&gt;</programlisting>ici, <userinput>-n</userinput> est utilisé pour créer une nouvelle instance d’OmegaT.</para>
 	  </note>
 

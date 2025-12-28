@@ -26,7 +26,7 @@
 	  </listitem>
 	  
 	  <listitem>
-		<para>À chaque modification du fichier <filename>project_save.tmx</filename> :</para>
+		<para>À chaque modification du fichier <filename>project_save.tmx</filename> :</para>
 		
 		<itemizedlist>
 		  <listitem>
@@ -57,11 +57,11 @@
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">Vous avez perdu votre traduction ?</title>
+	<title id="how.to.restore.your.data.lost.in.translation.title">Vous avez perdu votre traduction ?</title>
 
 	<para>Même si vous craignez d’avoir perdu des données de traduction, elles sont surement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</para>
 
-	<para>Procédez comme suit :</para>
+	<para>Procédez comme suit :</para>
 	
 	<orderedlist>
       <listitem>
@@ -93,11 +93,11 @@
   </section>
 
   <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">Votre projet est verrouillé ?</title>
+	<title id="how.to.restore.your.data.project.locked.title">Votre projet est verrouillé ?</title>
 
 	<para>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, le système d’exploitation peut verrouiller le fichier <filename>omegat.project</filename> et vous empêcher de le rouvrir après le redémarrage de l’ordinateur.</para>
 
-	<para>Procédez comme suit :</para>
+	<para>Procédez comme suit :</para>
 
 	<orderedlist>
       <listitem>
@@ -125,11 +125,11 @@
   </section>
   
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s'ouvre pas ?</title>
+	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s'ouvre pas ?</title>
 
 	<para>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, certains fichiers importants peuvent être corrompus et empêcher la réouverture du projet après le redémarrage de votre système.</para>
 
-	<para>Procédez comme suit :</para>
+	<para>Procédez comme suit :</para>
 
 	<orderedlist>
       <listitem>
@@ -161,11 +161,11 @@
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s'ouvre pas ?</title>
+	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s'ouvre pas ?</title>
 
 	<para>Très souvent, les fichiers de suites bureautiques contiennent des balises qui doivent être copiées dans la traduction pour que le fichier traduit puisse être ouvert dans l’application d’origine. Dans certains cas, les balises manquantes empêchent l’ouverture du fichier.</para>
 	
-	<para>Procédez comme suit :</para>
+	<para>Procédez comme suit :</para>
 
 	<orderedlist>
       <listitem>
@@ -193,11 +193,11 @@
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT ne fonctionne pas correctement ?</title>
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT ne fonctionne pas correctement ?</title>
 
-	<para>Quelque chose s’est produit et OmegaT ne fonctionne plus correctement. Vous avez tout essayé et ne parvenez pas à résoudre le problème. Avant d’appeler à l’aide, tentez une dernière manipulation : redémarrez OmegaT avec les paramètres par défaut.</para>
+	<para>Quelque chose s’est produit et OmegaT ne fonctionne plus correctement. Vous avez tout essayé et ne parvenez pas à résoudre le problème. Avant d’appeler à l’aide, tentez une dernière manipulation : redémarrez OmegaT avec les paramètres par défaut.</para>
 
-	<para>Procédez comme suit :</para>
+	<para>Procédez comme suit :</para>
 	
 	<orderedlist>
 	  <listitem>

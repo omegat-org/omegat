@@ -47,7 +47,7 @@
 	  </listitem>
 
 	  <listitem>
-		<para>utiliser un dossier de glossaire provenant d’un projet distinct mais connexe, ou</para>
+		<para>utiliser un dossier des glossaires provenant d’un projet distinct mais connexe, ou</para>
 	  </listitem>
 
 	  <listitem>
@@ -58,7 +58,7 @@
 	<para>La création d’un projet lui confère une hiérarchie de base, mais sa structure finale n’est pas figée. Vous pouvez à tout moment supprimer ou ajouter des fichiers et des dossiers au projet.</para>
 
 	<note>
-	  <para>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers existants dans un nouveau dossier :</para>
+	  <para>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers existants dans un nouveau dossier :</para>
 	  
 	  <itemizedlist>
 		<listitem>
@@ -66,7 +66,7 @@
 		</listitem>
 
 		<listitem>
-		  <para>Si le dossier est un dépôt vide et que le fichier <filename>omegat.project</filename> contient des informations sur le dépôt distant, le projet sera reconnu par OmegaT comme un projet d’équipe :</para>
+		  <para>Si le dossier est un dépôt vide et que le fichier <filename>omegat.project</filename> contient des informations sur le dépôt distant, le projet sera reconnu par OmegaT comme un projet d’équipe :</para>
 		  
 		  <programlisting>…
     &lt;external_command&gt;&lt;/external_command&gt;
@@ -148,7 +148,7 @@
 
 	<para>Ces correspondances sont par défaut limitées aux langues source et cible définies dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, mais vous pouvez également ajouter des correspondances dans des langues autres que la langue cible. Voir les préférences <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> pour en savoir plus.</para>
 
-	<para>Le dossier peut contenir un nombre illimité de sous-dossiers, dont certains ont des fonctions spéciales :</para>
+	<para>Le dossier peut contenir un nombre illimité de sous-dossiers, dont certains ont des fonctions spéciales :</para>
 
 	<variablelist>
       <varlistentry id="project.folder.tm.auto">
@@ -215,7 +215,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Prenez une décision concernant la pérennité des segments renforcés :</para>
+			  <para>Prenez une décision concernant la pérennité des segments renforcés :</para>
 			  
 			  <itemizedlist>
 				<listitem>
@@ -264,7 +264,7 @@
 	</variablelist>
 
 	<note>
-	  <para>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions. Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
+	  <para>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions. Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
 	</note>
   </section>
 
@@ -281,7 +281,7 @@
 
     <para>OmegaT prend en charge les dictionnaires au format StarDict ou Lingvo DSL. Vous pouvez trouver certains dictionnaires sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki OmegaT</ulink>.</para>
 
-	<para>Pour installer les dictionnaires :</para>
+	<para>Pour installer les dictionnaires :</para>
 
     <orderedlist>
       <listitem>
@@ -333,7 +333,7 @@
 	  <varlistentry id="project.folder.project.save.tmx.bak">
 		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
-		  <para>Ce fichier est une sauvegarde de <filename>project_save.tmx</filename> et est automatiquement recréé chaque fois que <filename>project_save.tmx</filename> a été modifié : soit après avoir utilisé <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, soit en tant que sauvegarde régulière toutes les 3 minutes par défaut. Voir le paramètre <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> pour en savoir plus.</para>
+		  <para>Ce fichier est une sauvegarde de <filename>project_save.tmx</filename> et est automatiquement recréé chaque fois que <filename>project_save.tmx</filename> a été modifié : soit après avoir utilisé <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, soit en tant que sauvegarde régulière toutes les 3 minutes par défaut. Voir le paramètre <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> pour en savoir plus.</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -380,9 +380,7 @@
       <varlistentry id="project.folder.omegat.segmentation">
         <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
-          <para>This file contains the project-specific segmentation
-          rules in the <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink> format.
-			<note><para>Si un fichier <filename>segmentation.conf</filename> d’une version plus ancienne est présent, OmegaT le convertira automatiquement.</para>
+          <para>Ce fichier contient les règles de segmentation spécifiques au projet dans le format <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>. <note><para>Si un fichier <filename>segmentation.conf</filename> d’une version plus ancienne est présent, OmegaT le convertira automatiquement.</para>
 			</note>
 		  </para>
         </listitem>

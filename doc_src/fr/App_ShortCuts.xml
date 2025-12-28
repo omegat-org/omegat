@@ -12,7 +12,7 @@
 
     <para>Vous pouvez personnaliser la plupart des raccourcis sur OmegaT. Voir la section <link endterm="app.shortcuts.customization.title" linkend="app.shortcuts.customization"/> pour en savoir plus.</para>
 
-    <para>OmegaT fonctionne sur toutes les plateformes qui utilisent un système d’exploitation Java ( Windows, macOS et Linux étant les plus courants). Les touches de modification qui forment les raccourcis varient légèrement selon les plateformes. Pour faciliter la lecture, nous avons adopté la convention suivante pour les touches de modification :</para>
+    <para>OmegaT fonctionne sur toutes les plateformes qui utilisent un système d’exploitation Java ( Windows, macOS et Linux étant les plus courants). Les touches de modification qui forment les raccourcis varient légèrement selon les plateformes. Pour faciliter la lecture, nous avons adopté la convention suivante pour les touches de modification :</para>
 	
     <table id="app.shortcut.description">
       <title id="app.shortcut.description.title">Identifiants des touches de modification</title>
@@ -57,12 +57,12 @@
     <para>Les <emphasis role="bold">identifiants de clés</emphasis> ci-dessus nous permettent d’éviter d’énumérer de multiples notations pour chaque raccourci.</para>
 
     <example id="example.avoid.listing.multiple.notations">
-	  <title id="example.avoid.listing.multiple.notations.title">Comment évitons-nous d’énumérer de multiples notations :</title>
-	  <para>Sous Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo></para>
+	  <title id="example.avoid.listing.multiple.notations.title">Comment évitons-nous d’énumérer de multiples notations :</title>
+	  <para>Sous Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo></para>
 
-	  <para>Sous macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>N</keycap></keycombo></para>
+	  <para>Sous macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>N</keycap></keycombo></para>
 
-	  <para>Dans ce manuel : <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
+	  <para>Dans ce manuel : <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
 	</example>
   </section>
   
@@ -93,7 +93,7 @@
     <para>OmegaT doit être redémarré après la modification d’un fichier de définition de raccourci pour que les nouveaux raccourcis soient pris en compte.</para>
 
     <note>
-      <para>Vous pouvez copier les fichiers de raccourcis OmegaT par défaut du site de développement d’OmegaT sur Sourceforge vers <link linkend="configuration.folder"> votre dossier de configuration </link> et les modifier selon vos besoins :</para>
+      <para>Vous pouvez copier les fichiers de raccourcis OmegaT par défaut du site de développement d’OmegaT sur Sourceforge vers <link linkend="configuration.folder"> votre dossier de configuration </link> et les modifier selon vos besoins :</para>
 
       <variablelist>
         <varlistentry>
@@ -135,13 +135,13 @@
   <section id="app.shortcuts.syntax">
     <title id="app.shortcuts.syntax.title">Syntaxe</title>
 
-    <para>La syntaxe de base des fichiers de définition des raccourcis est simple :</para>
+    <para>La syntaxe de base des fichiers de définition des raccourcis est simple :</para>
 
     <para><code>code de fonction = raccourci</code></para>
 
 	<para>Utilisez les tableaux dans la section ci-dessous<link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> afin de trouver les valeurs pour <code>le code de la fonction</code>.</para>
     
-    <para>Le <code>raccourci</code> représente la combinaison de touches que vous saisissez. Cela prend la forme suivante :</para>
+    <para>Le <code>raccourci</code> représente la combinaison de touches que vous saisissez. Cela prend la forme suivante :</para>
     
     <itemizedlist>
       <listitem>
@@ -159,7 +159,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>où la <code>touche modificatrice</code> peut être : <literal>shift</literal>, <literal>ctrl</literal>, <literal>meta</literal>, <literal>alt</literal>, ou <literal>altGraph</literal></para>
+        <para>où la <code>touche modificatrice</code> peut être : <literal>shift</literal>, <literal>ctrl</literal>, <literal>meta</literal>, <literal>alt</literal>, ou <literal>altGraph</literal></para>
 
         <note>
           <para><literal>meta</literal> fait référence à la touche portant le logo Windows sur la plupart des claviers Windows ou Linux, et à la touche <literal>commande</literal> sur macOS.</para>
@@ -169,7 +169,7 @@
       </listitem>
 
       <listitem>
-        <para>L’<code>évènement</code> peut être :<option>typed</option>, <option>pressed</option>, <option>released</option></para>
+        <para>L’<code>évènement</code> peut être :<option>typed</option>, <option>pressed</option>, <option>released</option></para>
       </listitem>
 
       <listitem>
@@ -184,21 +184,21 @@
     <example id="example.shortcut.modification">
       <title id="example.shortcut.modification.title">Modification d’un raccourci</title>
 
-      <para>Le raccourci par défaut pour <link linkend="menus.project.close">fermer un projet</link> est défini sous Windows et Linus comme :</para>
+      <para>Le raccourci par défaut pour <link linkend="menus.project.close">fermer un projet</link> est défini sous Windows et Linus comme :</para>
 
 	  <para><code>projectCloseMenuItem=ctrl shift W</code></para>
 
-      <para>et sous macOS comme :</para>
+      <para>et sous macOS comme :</para>
 	  
 	  <para><code>projectCloseMenuItem=meta shift W</code></para>
 
       <para>Cependant, vous voulez peut-être supprimer la touche <keycap>S</keycap> du raccourci pour qu’il se définisse uniquement par <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (ou <keycombo><keycap>commande</keycap><keycap>W</keycap></keycombo> sous macOS) pour qu’il corresponde au raccourci que vous utilisez dans d’autres applications.</para>
 
-	  <para>Pour ce faire, modifier le <filename>MainMenuShortcuts.properties</filename> de la manière suivante pour Windows ou Linux :</para>
+	  <para>Pour ce faire, modifier le <filename>MainMenuShortcuts.properties</filename> de la manière suivante pour Windows ou Linux :</para>
 
 	  <para><code>projectCloseMenuItem=ctrl W</code></para>
 
-	  <para>ou de la manière suivante pour macOS :</para>
+	  <para>ou de la manière suivante pour macOS :</para>
 
       <para><code>projectCloseMenuItem=meta W</code></para>
     </example>
@@ -218,13 +218,13 @@
 		<listitem>
           <para>Comme le montre le <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">tableau du menu édition</link> ci-dessous, le code de la fonction <guimenuitem>Créer une traduction alternative</guimenuitem> est <code>editMultipleAlternate</code>.</para>
 
-          <para>En recherchant ce code dans le fichier, vous arriverez à la ligne suivante :</para>
+          <para>En recherchant ce code dans le fichier, vous arriverez à la ligne suivante :</para>
 		  
           <para><code>#	editMultipleAlternate=</code></para>
         </listitem>
 
 		<listitem>
-            <para>La ligne est actuellement un commentaire. Supprimez le caractère <code>#</code> en début de ligne pour qu’OmegaT reconnaisse le raccourci, et ajoutez <option>alt X</option> après le signe <code>=</code> en fin de ligne :</para>
+            <para>La ligne est actuellement un commentaire. Supprimez le caractère <code>#</code> en début de ligne pour qu’OmegaT reconnaisse le raccourci, et ajoutez <option>alt X</option> après le signe <code>=</code> en fin de ligne :</para>
 			
             <para><code>editMultipleAlternate=alt X</code></para>
         </listitem>
@@ -277,7 +277,7 @@
             </row>
 
             <row>
-              <entry>Télécharger projet en équipe…</entry>
+              <entry>Télécharger un projet en équipe…</entry>
               <entry>projectTeamNewMenuItem</entry>
             </row>
 
@@ -484,7 +484,7 @@
             </row>
 
             <row>
-              <entry>Remplacer par la source</entry>
+              <entry>Remplacer par le texte source</entry>
               <entry>editOverwriteSourceMenuItem</entry>
               <entry>ctrl shift R</entry>
               <entry>meta shift R</entry>
@@ -910,7 +910,7 @@
             </row>
 
             <row>
-              <entry>Souligner les correspondances de glossaire</entry>
+              <entry>Souligner les correspondances des glossaire</entry>
               <entry>viewMarkGlossaryMatchesCheckBoxMenuItem</entry>
             </row>
 

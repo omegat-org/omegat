@@ -11,13 +11,13 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Version standard : OmegaT 6.0.2</term>
+	  <term>Version standard : OmegaT 6.0.2</term>
 	  <listitem>
 		<para>Cette version est recommandée pour un usage quotidien.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Version de développement : OmegaT Nightly</term>
+	  <term>Version de développement : OmegaT Nightly</term>
 	  <listitem>
 		<para>Cette version est générée automatiquement à chaque fois que du code nouveau est intégré à OmegaT. Elle est utilisée pour effectuer des tests.</para>
 	  </listitem>
@@ -68,7 +68,7 @@
   <section id="Installing.omegat.macos">
     <title id="Installing.omegat.macos.title">Sur macOS</title>
 
-    <para>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <filename>OmegaT</filename> va être créé. Il contient deux fichiers : <filename>index.html</filename> (le fichier d’entrée du manuel d’utilisation) et <filename>OmegaT.app</filename> (l’application). Copiez le dossier dans un emplacement approprié (ex .: <filename>Applications</filename>).</para>
+    <para>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <filename>OmegaT</filename> va être créé. Il contient deux fichiers : <filename>index.html</filename> (le fichier d’entrée du manuel d’utilisation) et <filename>OmegaT.app</filename> (l’application). Copiez le dossier dans un emplacement approprié (ex .: <filename>Applications</filename>).</para>
 
     <para>Si vous le souhaitez, vous pouvez faire glisser l’application <filename>OmegaT.app</filename> et la déposer dans le Dock pour un accès plus facile.</para>
 
@@ -95,7 +95,7 @@
 	<para>Les changements entre votre version et la nouvelle sont documentés dans le fichier <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> sur le site du développement.</para>
 
 	<note>
-	  <para>Si vous décidez d’installer une nouvelle version, gardez les éléments suivants à l’esprit :</para>
+	  <para>Si vous décidez d’installer une nouvelle version, gardez les éléments suivants à l’esprit :</para>
 
 	  <itemizedlist>
 		<listitem>
@@ -151,17 +151,17 @@
 	<title id="build.omegat.from.source.title">Compiler OmegaT</title>
 
 	<para>Le code source pour la version actuelle peut être téléchargé directement depuis la <ulink url="https://omegat.org/fr/download">page de téléchargement</ulink> d’OmegaT, ou bien cloné depuis les dépôts <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> ou <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
-	<para>Une fois le code téléchargé, ouvrez un terminal dans le dossier source (<filename>omegat-code</filename> si vous l’avez cloné de Sourceforge, ou <filename>/omegat</filename> si vous l’avez cloné de GitHub) et entrez :</para>
+	<para>Une fois le code téléchargé, ouvrez un terminal dans le dossier source (<filename>omegat-code</filename> si vous l’avez cloné de Sourceforge, ou <filename>/omegat</filename> si vous l’avez cloné de GitHub) et entrez :</para>
 
 	<programlisting>./gradlew installDist</programlisting>
 
 	<para>Cette commande crée une distribution d’OmegaT complète et prête à être lancée dans le dossier <filename>build/install/OmegaT</filename>.</para>
 
-	<para>Vous pouvez aussi lancer l’application directement avec la commande suivante :</para>
+	<para>Vous pouvez aussi lancer l’application directement avec la commande suivante :</para>
 
 	<programlisting>./gradlew run</programlisting>
 
-	<para>Pour obtenir la liste de toutes les tâches disponibles, utilisez la commande :</para>
+	<para>Pour obtenir la liste de toutes les tâches disponibles, utilisez la commande :</para>
 
 	<programlisting>./gradlew tasks</programlisting>
 

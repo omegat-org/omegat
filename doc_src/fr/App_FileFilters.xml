@@ -10,7 +10,7 @@
   <warning>
 	<para>Les filtres de fichiers sont soit locaux et spécifiques à un projet donné, soit globaux et disponibles pour tous les projets qui partagent un dossier de configuration.</para>
 
-	<para>Pour en savoir plus, voir :</para>
+	<para>Pour en savoir plus, voir :</para>
 	<itemizedlist>
 	  <listitem>
 		<para><link linkend="dialogs.project.properties.filters" endterm="dialogs.project.properties.filters.title"/></para>
@@ -100,11 +100,11 @@
 	  <para>Vous pouvez changer ou ajouter des masques de nom de fichier pour associer différents fichiers à un filtre.</para>
 		
 	  <warning>
-		<para>Associer une extension de fichier à un filtre n’est pas suffisant pour que ce dernier puisse traiter le fichier. La structure du fichier doit être compatible avec le filtre : même si vous associez <literal>.odt</literal> au filtre XHTML, le filtre ne sera pas capable de comprendre le contenu d’un fichier LibreOffice Writer.</para>
+		<para>Associer une extension de fichier à un filtre n’est pas suffisant pour que ce dernier puisse traiter le fichier. La structure du fichier doit être compatible avec le filtre : même si vous associez <literal>.odt</literal> au filtre XHTML, le filtre ne sera pas capable de comprendre le contenu d’un fichier LibreOffice Writer.</para>
 	  </warning>
 		
 		
-	  <para>Les masques de nom de fichier source utilisent des caractères génériques : le caractère <literal>*</literal> correspond à zéro ou plus de caractères, alors que le caractère <literal>?</literal> correspond à exactement un caractère.</para>
+	  <para>Les masques de nom de fichier source utilisent des caractères génériques : le caractère <literal>*</literal> correspond à zéro ou plus de caractères, alors que le caractère <literal>?</literal> correspond à exactement un caractère.</para>
 
 	  <para>Par exemple, utilisez le masque <literal>read*</literal> si vous souhaitez que le filtre texte traite les fichiers lisez-moi (<literal>readme, read.me</literal>, ou <literal>readme.txt</literal>).</para>
     </section>
@@ -114,7 +114,7 @@
 
 	  <para>La plupart des formats de fichiers permettent plusieurs encodages. Par défaut, l’encodage du fichier traduit est le même que celui du fichier source.</para>
 
-	  <para>Les champs d’encodage cible et source utilisent des listes déroulantes incluant tous les encodages supportés. Sélectionner l’option <guilabel>&lt;auto&gt;</guilabel> laisse le choix de l’encodage à OmegaT, selon les critères suivants  :</para>
+	  <para>Les champs d’encodage cible et source utilisent des listes déroulantes incluant tous les encodages supportés. Sélectionner l’option <guilabel>&lt;auto&gt;</guilabel> laisse le choix de l’encodage à OmegaT, selon les critères suivants  :</para>
 
 	  <itemizedlist>
         <listitem>
@@ -142,7 +142,7 @@
 
 	  <para>OmegaT peut automatiquement créer de nouveaux noms pour les fichiers que vous créez, en y ajoutant un code de langue ou une date, par exemple.</para>
 
-	  <para>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boite de dialogue <guilabel>Modifier le Masque</guilabel>. La boite de dialogue propose plusieurs options :</para>
+	  <para>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boite de dialogue <guilabel>Modifier le Masque</guilabel>. La boite de dialogue propose plusieurs options :</para>
 
 	  <variablelist>
         <varlistentry>
@@ -252,31 +252,31 @@
 
 	  <example id="target.name.example">
 		<title id="target.name.example.title">Noms de fichier cible</title>
-		<para>Pour un fichier source nommé Document.xx.docx, utiliser les variantes de variables ci-dessous produira les résultats suivants :</para>
+		<para>Pour un fichier source nommé Document.xx.docx, utiliser les variantes de variables ci-dessous produira les résultats suivants :</para>
 
 		<itemizedlist>
           <listitem>
-			<para><literal>${nameOnly-0}</literal> : <filename>Document</filename></para>
+			<para><literal>${nameOnly-0}</literal> : <filename>Document</filename></para>
           </listitem>
 
           <listitem>
-			<para><literal>${nameOnly-1}</literal> : <filename>Document.xx</filename></para>
+			<para><literal>${nameOnly-1}</literal> : <filename>Document.xx</filename></para>
           </listitem>
 
           <listitem>
-			<para><literal>${nameOnly-2}</literal> : <filename>Document.xx.docx</filename></para>
+			<para><literal>${nameOnly-2}</literal> : <filename>Document.xx.docx</filename></para>
           </listitem>
 
           <listitem>
-			<para><literal>${extension-0}</literal> : <filename>docx</filename></para>
+			<para><literal>${extension-0}</literal> : <filename>docx</filename></para>
           </listitem>
 
           <listitem>
-			<para><literal>${extension-1}</literal> : <filename>xx.docx</filename></para>
+			<para><literal>${extension-1}</literal> : <filename>xx.docx</filename></para>
           </listitem>
 
           <listitem>
-			<para><literal>${extension-2}</literal> : <filename>Document.xx.docx</filename></para>
+			<para><literal>${extension-2}</literal> : <filename>Document.xx.docx</filename></para>
           </listitem>
 		</itemizedlist>
 	  </example>
@@ -288,7 +288,7 @@
 
     <para>Plusieurs filtres proposent des options. Sélectionnez le filtre dans la liste et cliquez sur <guibutton>Options…</guibutton> pour le modifier.</para>
 
-	<para>Les options disponibles sont :</para>
+	<para>Les options disponibles sont :</para>
 
 	<variablelist>
 	  <varlistentry id="file.filters.text">
@@ -297,7 +297,7 @@
 		  <para>
 			<variablelist>
 			  <varlistentry>
-				<term>Nouveaux paragraphes à chaque :</term>
+				<term>Nouveaux paragraphes à chaque :</term>
 				<listitem>
 				  <para>Les fichiers texte n’ont pas de marqueurs de paragraphe génériques. Choisissez ici la manière dont OmegaT créer les paragraphes dans vos fichiers texte.</para>
 				</listitem>
@@ -340,7 +340,7 @@
 		  <para>Vous pouvez choisir des éléments de documents supplémentaire à traduire. Ils apparaitront en segments séparés dans l’éditeur.</para>
 		  <variablelist>
 			<varlistentry>
-			  <term>Word</term>
+			  <term>Mot</term>
 			  <listitem>
 				<para>Textes d’instruction non visibles, commentaires, notes de bas de pages, notes de fin de document, pieds de page, texte de remplacement en double et propriétés du document.</para>
 			  </listitem>
@@ -356,7 +356,7 @@
 			  <varlistentry>
 				<term>Power Point</term>
 				<listitem>
-				  <para>Commentaires des diapositives, masques des diapositives, et mise en page des diapositives.</para>
+				  <para>Commentaires des diapositives, masques des diapositives et disposition des diapositives.</para>
 				</listitem>
 			  </varlistentry>
 
@@ -368,7 +368,7 @@
 			  </varlistentry>
 			  
 			  <varlistentry>
-				<term>Autres options :</term>
+				<term>Autres options :</term>
 				<listitem>
 				  <variablelist>
 					<varlistentry>
@@ -431,12 +431,12 @@
 				
 				<example id="file.filters.xhtml.example">
 				  <title id="file.filters.xhtml.example.title">Ignorer la partie &quot;content&quot; de &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
-				  <para>Pour ignorer ce contenu :</para>
+				  <para>Pour ignorer ce contenu :</para>
 
 				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
 				  follow&quot;&gt;</code></para>
 
-				  <para>utilisez :</para>
+				  <para>utilisez :</para>
 
 				  <para><literal>name=robots</literal></para>					
 				</example>
@@ -452,12 +452,12 @@
 
 				<example id="file.filters.xhtml.ignore.translate.no">
 				  <title id="file.filters.xhtml.ignore.translate.no.title">Ignorer les balises qui contiennent translate=&quot;no&quot;</title>
-				  <para>Pour ignorer ce contenu :</para>
+				  <para>Pour ignorer ce contenu :</para>
 
 				  <para><code>&lt;span translate=&quot;no&quot;&gt;This content
 				  is not translatable&lt;/span&gt;</code></para>
 
-				  <para>utilisez : <literal>translate=no</literal>.</para>
+				  <para>utilisez : <literal>translate=no</literal>.</para>
 
 				  <para>Tous les tags marqués avec un <code> translate=&quot;no&quot;</code> seront ignorés.</para>
 				</example>
@@ -585,7 +585,7 @@
 			  </varlistentry>
 
 			  <varlistentry>
-				<term>Format :</term>
+				<term>Format :</term>
 				<listitem>
 				  <variablelist>
 					<varlistentry>
@@ -625,7 +625,7 @@
 	  <varlistentry id="file.filter.java.bundle">
 		<term id="file.filter.java.bundle.title">Paquets de ressources Java</term>
 		<listitem>
-			<para>Le filtre vérifie les masques Java MessageFormat (ex. : \{0\}) par défaut. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> pour en savoir plus.</para>
+			<para>Le filtre vérifie les masques Java MessageFormat (ex. : \{0\}) par défaut. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> pour en savoir plus.</para>
 
 			<variablelist>
 			  <varlistentry>
@@ -685,7 +685,7 @@
 			  <varlistentry>
 				<term>Identifiant utilisé pour les traductions alternatives</term>
 				<listitem>
-				  <para>Vous pouvez faire le choix parmi trois options : les paragraphes suivants et précédents, l’ID &lt;trans unit&gt;, ou l’attribut resname de &lt;trans-unit&gt; lorsqu’il est disponible. S’il ne l’est pas, l’ID sera utilisé à la place.</para>
+				  <para>Vous pouvez faire le choix parmi trois options : les paragraphes suivants et précédents, l’ID &lt;trans unit&gt;, ou l’attribut resname de &lt;trans-unit&gt; lorsqu’il est disponible. S’il ne l’est pas, l’ID sera utilisé à la place.</para>
 				</listitem>
 			  </varlistentry>
 			  

@@ -5,10 +5,7 @@
 
   <para>Les projets en équipe emploient des mécanismes de synchronisation entre les membres du projet.</para>
 
-  <para>Once a OmegaT team project is installed on a server, the project manager
-  sends members the information they need to access it: a URL indicating the
-  location of the project, or an <filename>omegat.project</filename>
-  file.</para>
+  <para>Lorsque le projet en équipe OmegaT est installé sur un serveur, la gestionnaire envoie aux membres les informations nécessaires pour y accéder ; soit une URL qui indique l’emplacement du projet, soit un fichier <filename>omegat.project</filename>.</para>
 
   <para>Une fois le projet téléchargé, il est installé localement et il suffit de l’ouvrir localement pour le synchroniser avec le serveur.</para>
 
@@ -24,14 +21,9 @@
 		  <listitem>
 			<para>Depuis une URL</para>
 
-			<para>Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> pour afficher la boite de dialogue <guilabel>Télécharger projet en équipe</guilabel>.</para>
+			<para>Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> pour afficher la boite de dialogue <guilabel>Télécharger un projet en équipe</guilabel>.</para>
 
-			<para>Enter the URL provided by the project manager in the
-			<guilabel>Repository URL:</guilabel> field at the top of the dialog,
-			and specify a folder for the project in the <guilabel>New Local
-			Project Folder:</guilabel> field. Leave the <guilabel>Default
-			branch</guilabel> option checked unless the project manager
-			has provided instructions for using a custom branch.</para>
+			<para>Entrez l’URL fournie par la gestionnaire du projet en équipe dans le champ <guilabel>URL du dépôt</guilabel> en haut de la boite de dialogue et sélectionnez un dossier pour le projet dans le champ <guilabel>Nouveau dossier du projet local</guilabel>. Laissez l’option <guilabel>Branche par défaut</guilabel> cochée sauf si la gestionnaire du projet a fourni des instructions pour utiliser une branche spécifique.</para>
 		  </listitem>
 
 		  <listitem>
@@ -46,13 +38,10 @@
 
 		  <para>Si le serveur recourt à une authentification par identifiant/mot de passe, OmegaT vous présentera une boite de dialogue <guilabel>Authentification</guilabel> afin d’entrer votre identifiant et votre mot de passe, soit lors du téléchargement initial du projet, soit plus tard dans le processus. OmegaT se souviendra alors de vos informations d’identification pour ce projet spécifique sauf si vous les supprimez formellement. Voir les préférences <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> pour en savoir plus.</para>
 
-		  <para>To enhance security, some servers require external processes
-		  to connect using a separate access token instead of a password. Check
-          the server documentation if your password does not work.</para>
+		  <para>Pour améliorer la sécurité, certains serveurs demandent aux processus externes de se connecter à l’aide d’un jeton d’accès plutôt que d’un mot de passe. Consultez la documentation de votre système si votre mot de passe ne fonctionne pas.</para>
 		  <para>Si le serveur utilise une authentification SSH, veillez à mettre à jour votre configuration SSH afin d’inclure ce serveur avant d’essayer de télécharger le projet, sinon vous rencontrerez une erreur d’authentification et le chargement du projet échouera.</para>
 
-		  <para>If you use multiple projects on the same server, you will only be
-          asked for your credentials once for that server.</para>
+		  <para>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne vous seront demandées qu’une fois pour ce serveur.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -78,60 +67,40 @@
         <para>OmegaT synchronise un projet en équipe lorsqu’il est ouvert, rechargé, fermé ou enregistré. Cela signifie que la fonctionnalité d’enregistrement automatique synchronise aussi régulièrement les versions locales avec la version sur le serveur aux intervalles spécifiés dans la préférence <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/>.</para>
 
         <warning>
-          <para>Since members do not necessarily synchronize their projects
-          at the same time, a segment with a local translation will occasionally
-          also have a different translation from another member available on the
-          server. When you synchronize the project, OmegaT will match the local
-          and modified versions, and ask you to choose which version of the
-          translation to keep.</para>
+          <para>Puisque les membres d’un projet ne synchronisent pas le projet au même moment, un segment traduit localement pourra exister sur le serveur dans une autre version envoyée préalablement par un autre membre. Lors de votre synchronisation, OmegaT affichera la correspondance entre votre version locale et la version du serveur et vous demandera quelle version conserver.</para>
         </warning>
       </listitem>
     </varlistentry>
 
     <varlistentry>
-      <term>Solving translation conflicts</term>
+      <term>Gérer les conflits de version</term>
 
       <listitem>
-        <para>When OmegaT cannot automatically solve a difference between a
-        local translation and the remote memory, it displays a
-        <guilabel>Merge</guilabel> dialog.</para>
+        <para>Quand OmetaT ne peut pas résoudre automatiquement un conflit entre la version locale et la version en ligne d’une traduction, il affiche un dialogue de <guilabel>fusionnement</guilabel>.</para>
 
-        <para>The dialog offers the choice between three versions of the
-        translated segment:
-        <variablelist>
-          <varlistentry>
-            <term><guilabel>Mine</guilabel></term>
-            <listitem><para>This is your local version, which has not yet
-            been sent to the server for sharing.</para></listitem>
+        <para>Le dialogue offre le choix entre trois versions du segment traduit : <variablelist> <varlistentry>
+            <term><guilabel>Mes traductions</guilabel></term>
+            <listitem><para>Ceci est votre version locale, qui n’a pas encore été envoyée sur le serveur pour partage.</para></listitem>
           </varlistentry>
           <varlistentry>
-            <term><guilabel>Server (original)</guilabel></term>
-            <listitem><para>This is the “base” version from which various
-            versions were created.</para></listitem>
+            <term><guilabel>Serveur (originales)</guilabel></term>
+            <listitem><para>Ceci est la version de « base » à partir de laquelle les autres versions ont été créées.</para></listitem>
           </varlistentry>
           <varlistentry>
-            <term><guilabel>Server (updated)</guilabel></term>
-            <listitem><para>This is the version that was shared with other
-            members since you last worked on the project.</para></listitem>
+            <term><guilabel>Serveur (mises à jour)</guilabel></term>
+            <listitem><para>Ceci est la version qui a été mise en partage avec les autres membres après votre dernière synchronisation.</para></listitem>
           </varlistentry>
         </variablelist>
         </para>
 
-        <para>It is possible to select the appropriate translations one by one
-        by clicking on them for each displayed segment. It is also possible to
-        select “all” the translations of a given version.</para>
+        <para>Il est possible de choisir les traductions appropriées une par une en cliquant dessus pour chaque segment affiché. Il est également possible de choisir « toutes » les traductions d’une version donnée.</para>
 
-        <para><guibutton>List View</guibutton> and <guibutton>Detail
-        View</guibutton> offer alternative views of a segment either hiding or
-        displaying various segment properties.</para>
+        <para><guibutton>Affichage en liste</guibutton> et <guibutton>Affichage détaillé</guibutton> offrent des modes d’affichage alternatifs d’un segment donné, soit en dissimulant, soit en affichant diverses propriétés du segment.</para>
 
-        <para>Once the translations have been selected, clicking on
-        <guibutton>Done</guibutton> will save the selected translations to the
-        server for sharing with other team members.</para>
+        <para>Une fois les traductions sélectionnées, cliquez sur <guibutton>Terminer</guibutton> pour enregistrer la sélection sur le serveur pour mise en partage avec les autres membres.</para>
 
         <note>
-          <para>Have team members work on different parts of a translation at any
-          given time to reduce the chances of having translation conflicts.</para>
+          <para>Il est préférable de demander aux membres d’une équipe de travailler sur différentes parties d’une traduction pour réduire les probabilités d’avoir des conflits de version pendant leur travail.</para>
         </note>
       </listitem>
     </varlistentry>
@@ -148,9 +117,7 @@
           <listitem>
             <para><emphasis>Configuration de base du projet :</emphasis> la source et les langues, les lemmatiseurs, la hiérarchie des dossiers du projet.</para>
 
-			<para>In a team project, the basic configuration parameters of the
-			local project are always overridden by the configuration on the
-			server originally set by the project manager.</para>
+			<para>Dans un projet en équipe, les paramètres de configuration de base du projet local sont toujours écrasées par la configuration paramétrée à l’origine par la gestionnaire du projet sur le serveur.</para>
           </listitem>
 
           <listitem>
@@ -174,10 +141,7 @@
               </listitem>
 
               <listitem>
-                <para>If you first download the remote project using an
-                <filename>omegat.project</filename> file provided by the project
-                manager, OmegaT will use the mappings in that file, if
-                any.</para>
+                <para>Si vous téléchargez le projet distant à l’aide d’un fichier <filename>omegat.project</filename> fourni par la gestionnaire du projet, OmegaT utilisera les mises en correspondance qui s’y trouveront.</para>
               </listitem>
 
               <listitem>
@@ -198,7 +162,7 @@
 
       <listitem>
         <warning>
-		  <para>Only the project manager should use <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
+		  <para>Seul la gestionnaire du projet devrait utiliser le menu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -207,10 +171,7 @@
       <term>Fichiers cible</term>
 
       <listitem>
-        <para>After you generate the target files use
-        <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> to add them to the
-        server, if the project manager has requested you to do so.
-        Committing the target files also uploads the statistics files to the server.</para>
+        <para>Après avoir généré les fichiers cible, utilisez le menu <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> pour les ajouter au serveur, si la gestionnaire du projet vous a demandé de le faire. Ajouter les fichiers traduits met également en partage les données du projet sur le serveur.</para>
       </listitem>
     </varlistentry>
 
@@ -218,7 +179,7 @@
       <term>Supprimer des fichiers</term>
 
       <listitem>
-        <para>Les fichiers d’un projet en équipe ne peuvent pas être supprimés à partir d’OmegaT ou du système de fichiers local. Ils seront restaurés lors de la prochaine synchronisation du projet. This task is normally performed by the project manager.</para>
+        <para>Les fichiers d’un projet en équipe ne peuvent pas être supprimés à partir d’OmegaT ou du système de fichiers local. Ils seront restaurés lors de la prochaine synchronisation du projet. Cette tâche est normalement effectuée par la gestionnaire du projet.</para>
       </listitem>
     </varlistentry>
 

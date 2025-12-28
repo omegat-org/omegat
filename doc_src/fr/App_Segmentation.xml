@@ -37,7 +37,7 @@
 
 		  <para>Vous pouvez visualiser la segmentation comme le processus qui consiste à bouger le curseur le long du texte, un caractère à la fois, en recherchant la position où une rupture se produira, ou la position où une rupture n’est pas autorisée.</para>
 
-		  <para>Chaque fois que le curseur passe au caractère suivant, OmegaT vérifie :</para>
+		  <para>Chaque fois que le curseur passe au caractère suivant, OmegaT vérifie :</para>
 		  
 		  <itemizedlist>
 			<listitem>
@@ -76,7 +76,7 @@
 	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Règles</title>
 	<para>OmegaT fournit des règles prédéfinies de segmentation, et vous pouvez utiliser des expressions régulières pour les modifier. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
 
-	<para>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</para>
+	<para>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</para>
 	
 	<warning>
 	  <para>Si vous changez la segmentation pendant la traduction, vous devrez recharger le projet afin que celle-ci soit prise en compte. Ce procédé va diviser ou fusionner certains segments précédemment traduits, qui ne seront donc plus considérés comme traduits. Néanmoins, leur traduction originale sera toujours dans la mémoire du projet.</para>

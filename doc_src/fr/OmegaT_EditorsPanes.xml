@@ -4,12 +4,12 @@
   <title id="chapter.panes.title">Volets</title>
 
   <section id="panes.default.layout">
-	<title id="panes.default.layout.title">Présentation par défaut</title>
+	<title id="panes.default.layout.title">Disposition par défaut</title>
 
-	<para>Lorsque vous lancez OmegaT pour la première fois, la fenêtre principale affiche par défaut la présentation suivante :</para>
+	<para>Lorsque vous lancez OmegaT pour la première fois, la fenêtre principale utilise par défaut la disposition suivante :</para>
 
 	<figure id="panes.default.omegat.layout">
-      <title id="panes.default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
+      <title id="panes.default.omegat.layout.title">Disposition par défaut d’OmegaT sur macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -50,7 +50,7 @@
 	  </listitem>
 	</orderedlist>
 	
-	<para>Utilisez les différentes options du menu <link linkend="menus.view" endterm="menus.view.title"/> et déplacez les différents <link linkend="chapter.panes">volets</link> pour obtenir la présentation qui vous convient le mieux.</para>
+	<para>Utilisez les différentes options du menu <link linkend="menus.view" endterm="menus.view.title"/> et déplacez les différents <link linkend="chapter.panes">volets</link> pour obtenir la disposition qui vous convient le mieux.</para>
 
 	<warning>
 	  <para>Utiliser <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> si vous rencontrez des problèmes lors de la réorganisation de la disposition des fenêtres.</para>
@@ -67,7 +67,7 @@
         <listitem>
           <para>La fenêtre principale est composée de différents volets décrits ici, différents menus décrits dans le chapitre <link linkend="chapter.menus" endterm="chapter.menus.title"/>, et une barre d’état décrite <link linkend="panes.statusbar">plus bas</link>. Vous pouvez cliquer et maintenir le nom d’un volet pour le faire glisser vers une nouvelle position, ou même le détacher en tant que fenêtre distincte.</para>
 
-          <para>Le coin supérieur droit de chaque volet affiche différentes icônes en fonction du type de volet et de son état actuel :</para>
+          <para>Le coin supérieur droit de chaque volet affiche différentes icônes en fonction du type de volet et de son état actuel :</para>
 
           <table id="table.pane.widgets">
             <title id="table.pane.widgets.title">Éléments graphiques des volets</title>
@@ -164,7 +164,7 @@
           <para>Vous pouvez regrouper des volets dans la même zone de la fenêtre. Les volets se présenteront alors sous la même zone, mais sous des onglets différents portant le nom du volet. Les volets peuvent être redimensionnés en faisant glisser les séparateurs entre eux.</para>
 
           <note>
-            <para>Utiliser <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> pour rétablir la présentation par défaut si vous perdez notion des modifications apportées à l’interface graphique et que vous ne pouvez plus voir certains volets.</para>
+            <para>Utiliser <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> pour rétablir la disposition par défaut si vos modifications apportées à l’interface graphique rendent invisibles certains volets.</para>
           </note>
         </listitem>
       </varlistentry>
@@ -173,13 +173,13 @@
         <term id="panes.context.menus.title">Menus contextuels</term>
 
         <listitem>
-          <para>Certains volets disposent d’un menu contextuel. Vous pouvez appeler ce menu en utilisant la méthode standard de votre système d’exploitation ou les raccourcis définis par OmegaT :<itemizedlist>
+          <para>Certains volets disposent d’un menu contextuel. Vous pouvez appeler ce menu en utilisant la méthode standard de votre système d’exploitation ou les raccourcis définis par OmegaT :<itemizedlist>
               <listitem>
-                <para>Sous Windows et Linux : <keycap>Menu</keycap></para>
+                <para>Sous Windows et Linux : <keycap>Menu</keycap></para>
               </listitem>
 
               <listitem>
-                <para>Sous macOS : <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo>.</para>
+                <para>Sous macOS : <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo>.</para>
               </listitem>
             </itemizedlist></para>
         </listitem>
@@ -189,7 +189,7 @@
         <term id="panes.drag.and.drop.title">Glisser-déplacer</term>
 
         <listitem>
-          <para>Les fichiers peuvent être glissés et déposés sur certains volets, avec les résultats suivants :</para>
+          <para>Les fichiers peuvent être glissés et déposés sur certains volets, avec les résultats suivants :</para>
 
           <variablelist>
             <varlistentry>
@@ -245,7 +245,7 @@
 			</listitem>
 		  </itemizedlist>
 
-		  <para>Les volets suivants peuvent envoyer des notifications :</para>
+		  <para>Les volets suivants peuvent envoyer des notifications :</para>
 
 		  <itemizedlist>
 			<listitem>
@@ -279,7 +279,7 @@
 
 			  <para>Dans <guilabel>Affichage tabulaire</guilabel>, faites un clic droit sur l’élément et sélectionnez <guilabel>M’avertir lorsqu’un segment comporte…</guilabel> (où … varie en fonction de la notification choisie).</para>
 
-			  <para>Dans <guilabel>Affichage liste</guilabel>, faites un clic droit sur le widget <guilabel>Actions et paramètres</guilabel> à droite de la ligne de propriété choisie et sélectionnez <guilabel>M’avertir lorsqu’un segment comporte…</guilabel> (où … varie en fonction de la notification choisie).</para>
+			  <para>Dans <guilabel>Affichage en liste</guilabel>, faites un clic droit sur le widget <guilabel>Actions et paramètres</guilabel> à droite de la ligne de propriété choisie et sélectionnez <guilabel>M’avertir lorsqu’un segment comporte…</guilabel> (où … varie en fonction de la notification choisie).</para>
 			</listitem>
 		  </itemizedlist>
 		</listitem>
@@ -333,7 +333,7 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
       </listitem>
 
       <listitem>
-        <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> ou d’autres commandes de navigation pour :</para>
+        <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> ou d’autres commandes de navigation pour :</para>
 
 		<itemizedlist>
           <listitem>
@@ -370,7 +370,7 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
 	  <!-- — ¶ —————————————————————</programlisting></para> -->
 	  <!--   </example> -->
 
-	  <para>Les modifications peuvent inclure :</para>
+	  <para>Les modifications peuvent inclure :</para>
 	  
 	  <itemizedlist>
 		<listitem>
@@ -442,15 +442,15 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
         <term id="panes.editor.overwriting.title">Remplacement</term>
 
         <listitem>
-          <para>Par défaut, la saisie de texte insère le nouveau texte après le curseur dans le sens de la saisie. Pour remplacer le texte existant, utilisez les touches suivantes :</para>
+          <para>Par défaut, la saisie de texte insère le nouveau texte après le curseur dans le sens de la saisie. Pour remplacer le texte existant, utilisez les touches suivantes :</para>
 
 		  <itemizedlist>
             <listitem>
-              <para>Sous Windows et Linux : <keycombo> <keycap>INSERT</keycap> </keycombo></para>
+              <para>Sous Windows et Linux : <keycombo> <keycap>INSERT</keycap> </keycombo></para>
             </listitem>
 
             <listitem>
-              <para>Sous macOS : <keycap>F3</keycap></para>
+              <para>Sous macOS : <keycap>F3</keycap></para>
             </listitem>
           </itemizedlist>
 
@@ -474,21 +474,21 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
         <term id="panes.editor.context.menu.title">Menu contextuel</term>
 
         <listitem>
-          <para>Raccourci par défaut :</para>
+          <para>Raccourci par défaut :</para>
 
 		  <itemizedlist>
 			<listitem>
-              <para>Sous Windows et Linux : <keycap>Menu</keycap></para>
+              <para>Sous Windows et Linux : <keycap>Menu</keycap></para>
 			</listitem>
 
 			<listitem>
-              <para>Sous macOS : <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+              <para>Sous macOS : <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
 			</listitem>
           </itemizedlist>
 
 		  <para>Vous pouvez également faire apparaitre le menu en cliquant avec le bouton droit de la souris (<keycap>C</keycap> + <keycap>clic</keycap> sur macOS).</para>
 
-          <para>Le menu contextuel du volet éditeur offre diverses fonctions disponibles à partir du menu <link endterm="menus.edit.title" linkend="menus.edit"/>, notamment :</para>
+          <para>Le menu contextuel du volet éditeur offre diverses fonctions disponibles à partir du menu <link endterm="menus.edit.title" linkend="menus.edit"/>, notamment :</para>
 
 		  <itemizedlist>
 			<listitem>
@@ -521,15 +521,15 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
         <term id="panes.editor.auto.completion.menu.title">Menu de saisie automatique</term>
 
         <listitem>
-          <para>Raccourci par défaut :</para>
+          <para>Raccourci par défaut :</para>
 		  
 		  <itemizedlist>
 			<listitem>
-              <para>Sous Windows et Linux : <keycombo><keycap>C</keycap><keycap>Espace</keycap></keycombo></para>
+              <para>Sous Windows et Linux : <keycombo><keycap>C</keycap><keycap>Espace</keycap></keycombo></para>
 			</listitem>
 
 			<listitem>
-              <para>Sous macOS : <keycap>Esc</keycap></para>
+              <para>Sous macOS : <keycap>Esc</keycap></para>
 			</listitem>
           </itemizedlist>
 		  			
@@ -612,7 +612,7 @@ Dossier de configuration
 
     <para>La correspondance affiche également trois pourcentages de correspondance.</para>
 
-    <para>Ces pourcentages signifient, dans l’ordre, ce qui suit :</para>
+    <para>Ces pourcentages signifient, dans l’ordre, ce qui suit :</para>
 
 	<itemizedlist>
       <listitem>
@@ -667,7 +667,7 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>Vous pouvez utiliser les préférences du glossaire pour affiner l’affichage des glossaires. Voir le paramètre <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> pour en savoir plus.</para>
 
-    <para>Les modifications apportées à un fichier de glossaire dans le dossier glossaire sont immédiatement reconnues par OmegaT et affichées dans le volet des glossaires.</para>
+    <para>Les modifications apportées à un fichier de glossaire dans le dossier des glossaires sont immédiatement reconnues par OmegaT et affichées dans le volet des glossaires.</para>
 
     <para>OmegaT comprend un fichier de glossaire modifiable par projet. Utilisez <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> pour ajouter des termes à ce fichier.</para>
 
@@ -683,10 +683,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Traductions automatiques</guilabel></title>
 
-    <para>If you have enabled and configured at least one machine translation
-      engine this pane shows the suggestions for the current segment produced
-      by the available engines. When suggestions from more than one translation
-      engine are available,</para>
+    <para>Si vous avez activé et configuré au moins un moteur de traducteur automatique, ce volet affichera les suggestions pour le segment actuel produites par les moteurs en question. Lorsque plusieurs moteurs sont activés,</para>
 	
     <itemizedlist>
       <listitem>
@@ -756,7 +753,7 @@ Folder = <token>Dossier</token></programlisting>
     <title id="panes.segment.properties.title"><guilabel>Propriétés du segment</guilabel></title>
 
     <para>Tous les segments ont des propriétés. Les propriétés sont affichées dans ce volet.</para>
-	<para>Les propriétés les plus courantes sont les suivantes :</para>
+	<para>Les propriétés les plus courantes sont les suivantes :</para>
 	
 	<variablelist>
 	  <varlistentry>

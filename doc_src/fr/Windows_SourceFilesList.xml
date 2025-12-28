@@ -5,17 +5,17 @@
 
   <para>Cette fenêtre s’affiche automatiquement lors du chargement d’un projet par OmegaT et peut être consultée à tout moment via <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
 
-  <para>La fenêtre affiche les informations suivantes :</para>
+  <para>La fenêtre affiche les informations suivantes :</para>
 
   <itemizedlist>
     <listitem>
-      <para>Dans le titre de la fenêtre : le nombre total de fichiers traduisibles dans le projet.</para>
+      <para>Dans le titre de la fenêtre : le nombre total de fichiers traduisibles dans le projet.</para>
 
 	  <para>Il s’agit des fichiers présents dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/> dans un format reconnu par OmegaT.</para>
     </listitem>
 
     <listitem>
-      <para>Sous forme de liste : tous les fichiers traduisibles du projet.</para>
+      <para>Sous forme de liste : tous les fichiers traduisibles du projet.</para>
 
 	  <para>En cliquant sur un fichier, celui-ci s’ouvre dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/> pour être traduit.</para>
     </listitem>
@@ -43,7 +43,7 @@
 
   <para>Modifier les règles de segmentation peut changer le nombre de segments/segments uniques. Toutefois, il est généralement préférable d’éviter de le faire une fois que vous avez commencé à traduire le projet. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
 
-  <para>Les boutons situés en bas de la fenêtre permettent d’ajouter des fichiers à votre projet  :</para>
+  <para>Les boutons situés en bas de la fenêtre permettent d’ajouter des fichiers à votre projet  :</para>
   
   <variablelist>
 	<varlistentry id="windows.source.files.list.copy.files">

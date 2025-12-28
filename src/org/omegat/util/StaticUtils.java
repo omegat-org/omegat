@@ -103,9 +103,14 @@ public final class StaticUtils {
     private static final  String OSX_DATA_DIR = "/Library/Application Support/OmegaT/";
 
     /**
-     * Script directory
+     * Script directory under config dir (e.g., $HOME/.omegat).
      */
-    private static final String SCRIPT_DIR = "scripts";
+    private static final String SCRIPT_DIR = "script";
+
+    /**
+     * User Scripts directory in application data folder.
+     */
+    private static final String SCRIPTS_DIR = "scripts";
 
     /**
      * Char which should be used instead protected parts. It should be non-letter char, to be able to have
@@ -402,29 +407,50 @@ public final class StaticUtils {
      */
     public static String getUserScriptsDir() {
         // If the script directory has already been determined, return it
+        return getUserScriptsPath().toString();
+    }
+
+    private static Path getUserScriptsPath() {
         if (userScriptsDir != null) {
-            return userScriptsDir.toString();
+            return userScriptsDir;
         }
-        userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
-        // ensure directory exists
-        if (Files.exists(userScriptsDir)) {
-            return userScriptsDir.toString();
+
+        String configured = Preferences.getPreference(Preferences.SCRIPTS_DIRECTORY);
+        if (!StringUtil.isEmpty(configured) && new File(configured).exists()) {
+            userScriptsDir = Paths.get(configured);
+            return userScriptsDir;
         }
-        // it seems first run.
-        try {
-            Files.createDirectories(userScriptsDir);
-        } catch (IOException e) {
-            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
-            userScriptsDir = Paths.get(getConfigDir() + SCRIPT_DIR);
+
+        userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPTS_DIR);
+        if (!Files.exists(userScriptsDir)) {
+            try {
+                Files.createDirectories(userScriptsDir);
+                Log.logInfoRB("SU_SCRIPT_DIR_CREATE", userScriptsDir.toString());
+            } catch (IOException e) {
+                // fallback
+                Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+                userScriptsDir = Paths.get(getConfigDir() + SCRIPTS_DIR);
+            }
         }
-        try {
-            // ensure default script files installed
-            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
-            Files.copy(defaultScripts, userScriptsDir, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
+        return userScriptsDir;
+    }
+
+    public static void ensureUserScriptsDir() {
+        Path userScriptsPath = getUserScriptsPath();
+        if (!Files.exists(userScriptsPath.resolve("application_startup"))) {
+            try {
+                // ensure default script files installed
+                File defaultScripts = Paths.get(installDir(), SCRIPTS_DIR).toFile();
+                FileUtils.copyDirectory(defaultScripts, userScriptsPath.toFile());
+                Log.logInfoRB("SU_SCRIPT_DIR_COPY", userScriptsPath.toString());
+            } catch (IOException e) {
+                Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+                // fallback to app install dir
+                userScriptsDir = Paths.get(installDir() + SCRIPTS_DIR);
+                Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
+            }
         }
-        return userScriptsDir.toString();
     }
 
     public static String getScriptDir() {
@@ -710,4 +736,5 @@ public final class StaticUtils {
     public static int getMB(long bytes) {
         return (int)(bytes >> 20);
     }
+
 } // StaticUtils

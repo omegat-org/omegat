@@ -148,8 +148,7 @@ public class ScriptingWindow {
     public ScriptingWindow(JFrame frame) {
         this.frame = frame;
 
-        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY,
-                StaticUtils.getUserScriptsDir()));
+        setScriptsDirectory(StaticUtils.getUserScriptsDir());
 
         if (frame != null) {
             StaticUIUtils.setWindowIcon(frame);

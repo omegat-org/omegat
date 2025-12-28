@@ -190,6 +190,7 @@ public final class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
+        StaticUtils.ensureUserScriptsDir();
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();

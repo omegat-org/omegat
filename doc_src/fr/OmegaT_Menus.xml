@@ -11,7 +11,7 @@
 
 	<para>Les éléments de menu qui ne mentionnent pas de raccourci n’en ont pas par défaut. Voir l’annexe <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> si vous souhaitez modifier ou ajouter des raccourcis.</para>
 
-  <note><para>Rappel de la description des raccourcis clavier :<table id="menus.shortcut.description">
+  <note><para>Rappel de la description des raccourcis clavier :<table id="menus.shortcut.description">
       <title id="menus.shortcut.description.title">Identifiants des touches de modification</title>
 
       <tgroup cols="3">

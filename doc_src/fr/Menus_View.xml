@@ -82,7 +82,7 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.glossary.matches">
-      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances de glossaire</guimenuitem></term>
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances des glossaires</guimenuitem></term>
       <listitem>
         <para>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré à la position du curseur dans le texte cible.</para>
 	  </listitem>
@@ -109,7 +109,7 @@
     <varlistentry id="menus.view.modification.info">
       <term id="menus.view.modification.info.title"><guisubmenu>Afficher les informations de modification</guisubmenu></term>
       <listitem>
-        <para>Affiche l’heure et l’auteur de la dernière modification apportée à un segment.</para>
+        <para>Affiche l’heure et l’auteurice de la dernière modification apportée à un segment.</para>
 		
 		<para>Par défaut, la fonction est réglée sur <guimenuitem>Segment actuel</guimenuitem> mais elle peut aussi être réglée sur <guimenuitem>Tous les segments</guimenuitem> ou <guimenuitem>Aucun</guimenuitem>.</para>
 

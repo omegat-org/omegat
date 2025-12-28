@@ -9,7 +9,7 @@
 	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo>
 	</para>
 
-	<para>Sous macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>N</keycap></keycombo>
+	<para>Sous macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>N</keycap></keycombo>
 	</para>
 
 	<para><emphasis role="bold">Dans ce manuel :</emphasis> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>N</keycap></keycombo>
@@ -26,7 +26,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title"><guimenuitem>Télécharger projet en équipe…</guimenuitem></term>
+      <term id="menus.project.download.team.project.title"><guimenuitem>Télécharger un projet en équipe…</guimenuitem></term>
       <listitem>
         <para>Crée une copie locale d’un projet distant OmegaT. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
       </listitem>
@@ -90,7 +90,7 @@
     <varlistentry id="menus.project.commit.source.files">
       <term id="menus.project.commit.source.files.title"><guimenuitem>Envoyer les fichiers source</guimenuitem></term>
       <listitem>
-        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>Seul le responsable du projet en équipe devrait utiliser cette fonction</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
+        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>Seul la gestionnaire du projet en équipe devrait utiliser cette fonction</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
         <para>Envoie les fichiers ajoutés ou modifiés localement à partir du dossier <filename class="directory">source</filename> au dépôt du projet en équipe.</para>
       </listitem>
     </varlistentry>
@@ -98,7 +98,7 @@
     <varlistentry id="menus.project.commit.target.files">
       <term id="menus.project.commit.target.files.title"><guimenuitem>Envoyer les fichiers cible</guimenuitem></term>
       <listitem>
-        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>N’utilisez cette fonction que si le responsable du projet en équipe vous l’a demandé</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
+        <warning><para>Cette fonction est spécifique aux projets en équipe. <emphasis>N’utilisez cette fonction que si la gestionnaire du projet en équipe vous l’a demandé</emphasis>. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para></warning>
         <para>Envoie les fichiers traduits créés localement à partir du dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/> au dépôt du projet en équipe.</para>
       </listitem>
     </varlistentry>

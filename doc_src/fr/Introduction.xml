@@ -56,7 +56,7 @@
 
 		<para>Vous envisagez d’utiliser OmegaT, mais…</para>
 
-		<para>Comment OmegaT peut-il aider à éviter de tels problèmes  ?</para>
+		<para>Comment OmegaT peut-il aider à éviter de tels problèmes  ?</para>
 
 		<para>Pas de panique. Grâce à la conception robuste d’OmegaT, il est <emphasis>très peu</emphasis> probable que vous ayez perdu plus de quelques minutes de travail.</para>
 
@@ -72,7 +72,7 @@
 
   <section id="introduction.how.to.use.the.manual">
 	<title id="introduction.how.to.use.the.manual.title">Conventions utilisées dans ce manuel</title>
-	<para>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <emphasis>utiliser</emphasis> un élément de menu, ou <emphasis>cliquer</emphasis> sur un bouton.</para>
+	<para>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <emphasis>utiliser</emphasis> un élément de menu, ou <emphasis>cliquer</emphasis> sur un bouton.</para>
 
 	<para>De même, les liens vers les différentes parties du manuel sont présentés de manière à identifier plus facilement la fonction de l’élément lié.</para>
 
@@ -141,11 +141,11 @@
 		  <example id="example.introduction.note.on.shortcuts">
 			<title id="example.introduction.note.on.shortcuts.title">Les modificateurs de touches sont identifiés par une seule lettre.</title>
 
-			<para>Sous Windows et Linux : <keycombo><keycap>Contrôle</keycap><keycap>E</keycap></keycombo></para>
+			<para>Sous Windows et Linux : <keycombo><keycap>Contrôle</keycap><keycap>E</keycap></keycombo></para>
 
-			<para>Sous macOS : <keycombo><keycap>commande</keycap><keycap>E</keycap></keycombo></para>
+			<para>Sous macOS : <keycombo><keycap>commande</keycap><keycap>E</keycap></keycombo></para>
 
-			<para><emphasis role="bold">Dans ce manuel  :</emphasis><keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></para>
+			<para><emphasis role="bold">Dans ce manuel  :</emphasis><keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></para>
 		  </example>
 		</listitem>
 	  </varlistentry>
@@ -166,16 +166,20 @@
 
 	<para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/> et sélectionnez un dossier vide ou créez-en un nouveau avec le nom de votre projet.</para>
 
+	<warning>
+	  <para>OmegaT doit pouvoir modifier le dossier dans lequel vous avez créé le projet. Si vous souhaitez installer votre projet dans un disque partagé, assurez-vous que vous le créez dans un dossier que vous avez au préalable créé à cet effet.</para>
+	</warning>
+
     <para>Un projet OmegaT est simplement un ensemble de dossiers contenant toutes les ressources par défaut.</para>
 
     <para>La boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> s’ouvre une fois que vous avez nommé votre projet.</para>
 
 	<para>Dans cette boite de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
 
-	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code dans le champ de saisie.</para>
 
 	<warning>
-	  <para>Assurez-vous que les bonnes langues sont saisies et que tous les autres emplacements nécessitant un code de langue correspondent au code que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
+	  <para>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <emphasis>différents</emphasis>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
 	</warning>
 	
     <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour revenir à cette boite de dialogue après avoir créé le projet.</para>
@@ -217,7 +221,7 @@
 
 	  <example>
 		<title>Code de la langue cible du projet et nom du dictionnaire de vérification orthographique</title>
-		<para>Si la langue cible du projet est <emphasis role="bold">fr</emphasis> et que le nom du dictionnaire est <emphasis role="bold">fr_fr</emphasis> ou <emphasis role="bold">fr-fr</emphasis>, vous pouvez soit :</para>
+		<para>Si la langue cible du projet est <emphasis role="bold">fr</emphasis> et que le nom du dictionnaire est <emphasis role="bold">fr_fr</emphasis> ou <emphasis role="bold">fr-fr</emphasis>, vous pouvez soit :</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -239,7 +243,7 @@
 	<para>Les segments d’un paragraphe peuvent être segmentés davantage ou « non segmentés  » (fusionnés). Ajoutez une règle de segmentation pour les segmenter davantage, ou une règle d’exception pour les fusionner avec la partie dont ils ont été séparés. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
 
 	<note>
-	  <para>Le caractère espace standard est souvent utilisé comme limite de segment. Vous pouvez suivre les étapes ci-dessous pour fusionner deux sections de texte séparées par un caractère espace :</para>
+	  <para>Le caractère espace standard est souvent utilisé comme limite de segment. Vous pouvez suivre les étapes ci-dessous pour fusionner deux sections de texte séparées par un caractère espace :</para>
 	  
 	  <orderedlist>
 		<listitem>
@@ -267,10 +271,10 @@
 
   <section id="introduction.make.it.look.good">
 	<title id="introduction.make.it.look.good.title">Pour le plaisir des yeux !</title>
-	<para>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</para>
+	<para>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</para>
 
 	<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
+      <title id="default.omegat.layout.title">Disposition par défaut d’OmegaT sur macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -311,7 +315,7 @@
 	  </listitem>
 	</orderedlist>
 	
-	<para>Utilisez les différentes options du menu <link linkend="menus.view" endterm="menus.view.title"/> et déplacez les différents <link linkend="chapter.panes">volets</link> pour obtenir la présentation qui vous convient le mieux.</para>
+	<para>Utilisez les différentes options du menu <link linkend="menus.view" endterm="menus.view.title"/> et déplacez les différents <link linkend="chapter.panes">volets</link> pour obtenir la disposition qui vous convient le mieux.</para>
 	
   </section>
 
@@ -333,7 +337,7 @@
 	<note>
 	  <para>OmegaT n’associe pas aux segments traduits des statuts différents. Soit un segment est traduit, soit il ne l’est pas.</para>
 
-	  <para>Si vous avez besoin d’un processus de révision spécifique, vous pouvez par exemple :</para>
+	  <para>Si vous avez besoin d’un processus de révision spécifique, vous pouvez par exemple :</para>
 
 	  <itemizedlist>
 		<listitem>
@@ -360,7 +364,7 @@
 
 	<para>Le menu <link linkend="menus.edit" endterm="menus.edit.title"/> permet de gérer les correspondances de la mémoire de traduction et d’exécuter d’autres fonctions utiles.</para>
 
-	<para>La fonction <link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> vous permet de rechercher des termes, des morceaux de phrases, etc. dans l’ensemble du projet, en utilisant des recherches exactes, par mots-clés ou par expressions régulières. Vous pouvez également restreindre le champ de la recherche en fonction d’informations telles que l’auteur ou la date.</para>
+	<para>La fonction <link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> vous permet de rechercher des termes, des morceaux de phrases, etc. dans l’ensemble du projet, en utilisant des recherches exactes, par mots-clés ou par expressions régulières. Vous pouvez également restreindre le champ de la recherche en fonction d’informations telles que l’auteurice ou la date.</para>
 
 	<para>Vous pouvez également vous concentrer uniquement sur les résultats en les filtrant dans l’Éditeur. Voir la section <link linkend="windows.text.search" endterm="windows.text.search.title"/> pour en savoir plus.</para>
 
@@ -376,14 +380,14 @@
 
     <para>Si les documents que vous traduisez utilisent du gras, de l’italique ou d’autres éléments décoratifs, OmegaT convertit ces éléments en balises qui entourent le texte décoré. Ces fichiers comprennent par exemple les fichiers LibreOffice, les fichiers HTML et les fichiers Microsoft Office. Les documents contiennent souvent aussi des balises qui n’ont rien à voir avec les décorations, mais qui sont néanmoins importantes dans les fichiers sources (et, par conséquent, dans les fichiers traduits).</para>
 
-	<para>Voici à quoi peut ressembler une phrase dans son format d’origine :</para>
+	<para>Voici à quoi peut ressembler une phrase dans son format d’origine :</para>
     
 	<example id="example.source.segment.with.decorations">
 	  <title id="example.source.segment.with.decorations.title">Phrase avec une mise en forme décorative</title>
 	  <para>OmegaT est un programme <emphasis role="bold">facile à utiliser</emphasis> pour les traductaires <emphasis>sagaces</emphasis>.</para>
 	</example>
 
-    <para>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</para>
+    <para>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</para>
 
 	<example id="example.how.decorations.are.displayed">
 	  <title id="example.how.decorations.are.displayed.title">Affichage des décorations dans OmegaT</title>
@@ -431,7 +435,7 @@
   <section id="introduction.review.the.translation">
     <title id="introduction.review.the.translation.title">Réviser votre traduction</title>
 
-	<para>N’hésitez pas à modifier la présentation des <link linkend="chapter.panes" endterm="chapter.panes.title"/> et les options <link linkend="menus.view" endterm="menus.view.title"/> lors de la révision de la traduction.</para>
+	<para>N’hésitez pas à modifier la disposition des <link linkend="chapter.panes" endterm="chapter.panes.title"/> et les options <link linkend="menus.view" endterm="menus.view.title"/> lors de la révision de la traduction.</para>
 
 	<para>Utilisez l’option <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour effectuer divers contrôles sur le contenu de votre traduction.</para>
   </section>
@@ -478,7 +482,7 @@
     <title id="app.shortcuts.streamline.workflow.title">Fluidifier le travail grâce aux raccourcis</title>
 
     <para>Vous pouvez fluidifier votre travail en gardant à l’esprit les principaux raccourcis d’édition et de navigation (ou en les <link linkend="app.shortcuts.customization">modifiant en fonction de vos besoins</link>).</para>
-    <para>Un exemple illustre mieux ce point :</para>
+    <para>Un exemple illustre mieux ce point :</para>
 
     <example id="example.shortcuts.streamline.workflow">
       <title id="example.shortcuts.streamline.workflow.title">Utiliser des raccourcis pour fluidifier le processus de traduction</title>

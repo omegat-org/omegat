@@ -3,7 +3,7 @@
 <section id="how.to.translate.other.files">
   <title id="how.to.translate.other.files.title">Prendre en charge d’autres formats</title>
 
-  <para>Les filtres de fichiers d’OmegaT permettent de prendre en charge un grand nombre de formats de fichiers courants et moins courants. Si vous devez prendre en charge des formats qui ne sont pas traités par OmegaT, il y a quatre façons de le faire :</para>
+  <para>Les filtres de fichiers d’OmegaT permettent de prendre en charge un grand nombre de formats de fichiers courants et moins courants. Si vous devez prendre en charge des formats qui ne sont pas traités par OmegaT, il y a quatre façons de le faire :</para>
 
   <itemizedlist>
 	<listitem>
@@ -42,7 +42,7 @@
 		<listitem id="how.to.translate.other.files.third.party.utilities.rainbow">
 		  <para>Rainbow, d’<ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
 
-		  <para>Licence : Licence Apache Version 2.0</para>
+		  <para>Licence : Licence Apache Version 2.0</para>
 
 		  <para>L’Okapi Framework comporte un certain nombre de filtres de fichiers, dont certains ne sont pas pris en charge nativement par OmegaT. Voir <ulink url="https://okapiframework.org/wiki/index.php?title=Filters">Liste des filtres de fichiers</ulink> pour en savoir plus.</para>
 
@@ -52,7 +52,7 @@
 		<listitem id="how.to.translate.other.files.third.party.utilities.po4a">
 		  <para><ulink url="https://po4a.org">po4a</ulink></para>
 
-		  <para>Licence : Licence Publique Générale GNU v2</para>
+		  <para>Licence : Licence Publique Générale GNU v2</para>
 
 		  <para>po4a prend en charge un certain nombre de formats de documentation de logiciels libres, énumérés sur la page d’accueil du site, et propose des outils de conversion vers et depuis le format po. Voir la section <link linkend="file.filters.po" endterm="file.filters.po.title"/> pour en savoir plus.</para>
 		</listitem>
@@ -60,7 +60,7 @@
 		<listitem>
 		  <para>Les convertisseurs de <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink></para>
 
-		  <para>Licence : Licence Publique Générale GNU v2</para>
+		  <para>Licence : Licence Publique Générale GNU v2</para>
 
 		  <para>Le Translate Toolkit offre un certain nombre d’outils de conversion vers et depuis le format po. Voir <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Convertisseurs</ulink> pour en savoir plus.</para>
 		</listitem>
@@ -68,7 +68,7 @@
 		<listitem id="how.to.translate.other.files.third.party.utilities.openxliff">
 		  <para>OpenXLIFF de <ulink url="https://maxprograms.com/">Maxprograms</ulink></para>
 
-		  <para>Licence : Eclipse Public License v1.0</para>
+		  <para>Licence : Eclipse Public License v1.0</para>
 
 		  <para>OpenXLIFF prend en charge un certain nombre de filtres de fichiers, dont quelques-uns non pris en charge nativement par OmegaT. Voir <ulink url="https://maxprograms.com/products/openxliff.html">Filtres OpenXLIFF</ulink> pour en savoir plus. Maxprograms propose également <ulink url="https://maxprograms.com/products/xliffmanager.html">XLIFF Manager</ulink>, une interface graphique pour les filtres OpenXLIFF.</para>
 
@@ -88,7 +88,7 @@
 		  <listitem>
 			<para>L’extension Okapi Filters pour OmegaT, d’<ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
 
-			<para>Licence : Licence Apache Version 2.0</para>
+			<para>Licence : Licence Apache Version 2.0</para>
 
 			<para>L’extension de filtre de fichier n’inclut pas tous les filtres de fichier d’Okapi Framework. Voir <ulink url="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included">Filtres inclus</ulink> pour en savoir plus.</para>
 

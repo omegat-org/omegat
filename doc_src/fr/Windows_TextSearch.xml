@@ -42,7 +42,7 @@
     </listitem>
 
     <listitem>
-      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Remplacer par la source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>) : remplace le contenu du champ de recherche par celui du segment source actuel.</para>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Remplacer par le texte source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>) : remplace le contenu du champ de recherche par celui du segment source actuel.</para>
     </listitem>
 
     <listitem>
@@ -241,7 +241,7 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>Options de recherche MT</guibutton></term>
+		<term><guibutton>Options de recherche dans les mémoires</guibutton></term>
 		<listitem>
 		  <para>Permet de choisir des critères supplémentaires tels que la personne qui a écrit ou modifié la traduction, la date et l’heure de la traduction (modification), ou si les segments orphelins doivent être exclus.</para>
 
@@ -251,14 +251,14 @@
 
 		  <variablelist>
 			<varlistentry>
-			  <term>Ignorer la différence entre pleine et demi-largeur de caractère</term>
+			  <term>Ignorer la largeur des caractères</term>
 			  <listitem>
 				<para>Affiche les résultats qui correspondent à la fois aux formes pleine et demi-largeur (caractères CJC) des caractères dans les termes recherchés.</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>Nombre de segments correspondants :</term>
+			  <term>Nombre de segments correspondants :</term>
 			  <listitem>
 				<para>Définit le nombre maximum de correspondances affichées dans le champ de résultats de recherche.</para>
 			  </listitem>

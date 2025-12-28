@@ -306,7 +306,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.tagwipe">
-        <term id="windows.scripts.distribution.tagwipe.title">Neteja les etiquetes</term>
+        <term id="windows.scripts.distribution.tagwipe.title">Neteja d'etiquetes</term>
 
         <listitem>
           <para>Suprimeix les etiquetes supèrflues dels documents DOCX.</para>

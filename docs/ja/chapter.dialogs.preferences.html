@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0-取扱説明書</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - 取扱説明書</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -534,6 +534,22 @@
                   <dd>
                      <p>用語集の用語に複数の定義があったときに、同じ行に一度に表示します。</p>
                   </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.source.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.source.term.length.title">
+                        <code class="option">用語の原文の長さ順に並べ替える</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>一部の用語集項目がソース用語テキストで類似しており、そのうちの1つに別の用語テキストが含まれている場合は、ソーステキストの長さでソートします。</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.target.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.target.term.length.title">
+                        <code class="option">用語の原文の長さ順に並べ替える</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>用語集の項目に複数の定義がある場合は、定義テキストの長さで並べ替えます。</p>
+                  </dd>
                </dl>
             </div>
          </section>
@@ -730,10 +746,9 @@
                <div class="example" id="dialogs.preferences.segmentation.setup.scope.example">
                   <div class="example-title">例20 日本語の規則</div>
                   <div class="example-contents">
-                     <p>日本語からの翻訳では、<span class="emphasis">
-                           <em></em>
-                        </span>
-                        <code class="code">JA.*</code>パターンに関連付けられた規則集と<code class="code">.*</code>に関連付けられた汎用の規則のみが考慮されます。</p>
+                     <p>日本語からの翻訳では、<code class="code">JA.*</code>パターンに関連付けられた規則集と<code class="code">.*</code>に関連付けられた汎用の規則<span class="emphasis">
+                           <em>のみ</em>
+                        </span>が考慮されます。</p>
                   </div>
                </div>
                <br class="example-break" />
@@ -908,7 +923,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>OmegaTがスペルチェック辞書をインストールして検索するフォルダー。通常は<a class="link" href="chapter.appendices.html#configuration.folder" title="設定フォルダー">設定フォルダー</a>フォルダーにあります。</p>
+                     <p>OmegaTが綴り確認用辞書をインストールして検索するフォルダー。通常は<a class="link" href="chapter.appendices.html#configuration.folder" title="設定フォルダー">設定フォルダー</a>フォルダーにあります。</p>
                   </dd>
                   <dt id="dialog.preferences.spellchecker.already.installed">
                      <span class="term" id="dialog.preferences.spellchecker.already.installed.title">
@@ -917,7 +932,7 @@
                   </dt>
                   <dd>
                      <p>上記フォルダーに現存する辞書の一覧があります</p>
-                     <p>何も表示されない場合は、スペルチェック辞書がまだインストールされていないか、プロジェクトでスペルチェックフォルダーを含まない特定の設定辞書が使用されていることを意味します。</p>
+                     <p>何も表示されない場合は、綴り確認用辞書がまだインストールされていないか、プロジェクトで綴り確認用辞書を含まない特定の設定が使用されていることを意味します。</p>
                   </dd>
                   <dt id="dialog.preferences.spellchecker.url">
                      <span class="term" id="dialog.preferences.spellchecker.url.title">
@@ -1369,7 +1384,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<code class="literal"></code>(正規表現&lt;の「OR」に相当)でグループを区切ります。</p>
+                     <p>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<code class="literal">|</code>(正規表現&lt;の「OR」に相当)でグループを区切ります。</p>
                      <p>たとえば、<strong class="userinput">
                            <code>\d+</code>
                         </strong>を使用すると、すべての数値をタグとして扱うことができ、変換時に数値が誤って変更されていないことを確認できます。</p>

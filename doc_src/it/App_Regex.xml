@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">Espressioni regolari</title>
+
+  <para>Questa appendice è pensata per gli utenti interessati a esplorare un metodo avanzato per aumentare la propria produttività. Sebbene viste come complesse e scoraggianti, anche le espressioni regolari, spesso abbreviate in <emphasis>regex</emphasis> o <emphasis>regexp</emphasis>, più semplici sono estremamente utili non solo in OmegaT, ma in molte altre applicazioni di uso quotidiano, con alcune differenze.</para>
+
+  <para>Qui verranno trattate solo quelle fondamentali più utili ai traduttori. La sezione <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> alla fine di questa appendice fornisce alcuni punti di partenza per esplorare gli usi avanzati o complessi oltre lo scopo di questo manuale. Nel caso sia necessario un aiuto specifico, è possibile formulare domande nei vari canali di supporto.</para>
+  
+  <para>Le espressioni regolari usano una combinazione di lettere, cifre e simboli (noti nel loro insieme come <emphasis>caratteri</emphasis>) per definire una <emphasis>espressione</emphasis> che rappresenta un modello di testo specifico.</para>
+
+  <para>Di seguito alcuni esempi.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Qualsiasi cifra singola da 0 a 9.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>Rappresenta uno più “caratteri della parola”, segnatamente le lettere dell'alfabeto, cifre e simboli di sottolineatura.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>Rappresenta zero o un carattere di spazio vuoto orizzontale (questo include gli spazi regolari e unificatori (insecabili), così come le tabulazioni, ma non i caratteri di interruzione riga, che appartengono alla categoria “spazio vuoto verticale”: \v.)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>Molte funzioni di OmegaT si basano sulle espressioni regolari o le rendono disponibili come opzione:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Ricerche</term>
+      <listitem>
+        <para>Le ricerche includono un'opzione <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> che permette la ricerca estremamente avanzata tra i file.</para>
+
+        <para>La stessa opzione nella finestra di dialogo <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> permette di applicare le espressioni regolari sia al testo ricercato sia a quello sostituito.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tag personalizzati</term>
+      <listitem>
+        <para>I tag personalizzati sono tag definiti con espressioni regolari che sono gestiti esattamente come i tag nativi di OmegaT. Vedere la preferenza <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> per i dettagli.</para>
+
+		<para>Usare il carattere (OR) <code>|</code> per separare le definizioni dei singoli tag.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Testo contrassegnato</term>
+      <listitem>
+        <para>La preferenza <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> permette di definire le stringhe che OmegaT contrassegnerà in rosso in modo predefinito, e che saranno trattate come tag estranei per ragioni di convalida.</para>
+
+		<para>Usare il carattere (OR) <code>|</code> per separare le definizioni dei singoli frammenti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenziazione del testo negli allineamenti</term>
+      <listitem>
+        <para>Le indicazioni visive possono aiutare a controllare che il proprio allineamento sia corretto. L'impostazione <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/>permette di definire stringhe che OmegaT evidenzierà nei documenti allineati.</para>
+
+		<para>Usare il carattere (OR) <code>|</code> per separare le singole espressioni.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>Segmentazione</term>
+      <listitem>
+        <para>Le regole di segmentazione e i modelli linguistici vengono definiti con espressioni regolari. È possibile modificarle liberamente per migliorare la segmentazione di un documento o aggiungere regole generali supplementari. Vedere l'appendice <link linkend="app.segmentation" endterm="app.segmentation.title"/>per i dettagli.</para>
+
+        <para>La segmentazione o le regole di eccezione definiscono la posizione in cui deve essere eseguita una divisione all'interno di in un segmento. Per definire tale posizione sono necessarie due espressioni regolari: un'espressione “prima” per definire il modello di testo davanti a dove deve essere applicata la regola; e un'espressione “dopo” per definire il modello di testo che segue tale posizione.</para>
+
+		<para>Un modello linguistico che corrisponda alla lingua di partenza del progetto verrà applicato a quel progetto.</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">Le quattro regole</title>
+
+    <para>Le espressioni regolari vengono utilizzate per trovare testo, inclusi i caratteri non visibili sullo schermo o sulla stampa, quali spazi, tabulazioni o interruzioni di riga. Qualsiasi espressione regolare specificata o <emphasis>corrisponde</emphasis> o <emphasis><emphasis role="bold">non</emphasis> corrisponde</emphasis> a una parola, una frase o un'altra sequenza di testo.</para>
+    
+    <para>Ciascuno e qualsiasi carattere nell'espressione è importante per determinare la corrispondenza.</para>
+    <para>Diversi caratteri o combinazioni di caratteri in una espressione regolare possiedono uno speciale significato.</para>
+    
+    <warning>
+      <para>Le espressioni regolari individuano solo testo. Non possono individuare decorazioni tipo <emphasis>grassetto</emphasis>, <emphasis>corsivo</emphasis> o altri <emphasis>effetti stilistici</emphasis>.</para>
+    </warning>
+
+    <para>Ci sono quattro regole da tenere presenti.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>La maggior parte dei caratteri semplicemente individua se stesso</term>
+        <listitem>
+          <para>La maggioranza dei caratteri in un'espressione regolare semplicemente <emphasis>cerca se stesso</emphasis> nella sequenza di testo.</para>
+
+		  <para>Per esempio, le sette lettere della parola “<emphasis>esempio</emphasis>” indicano semplicemente alla funzione di ricerca di individuare esattamente quelle lettere, in quell'ordine. In altri termini, la ricerca cerca solo la parola “<emphasis>esempio</emphasis>”.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Le cifre e le lettere dell'alfabeto precedute da una barra rovesciata (<literal>\</literal>) acquistano un significato speciale</term>
+        <listitem>
+          <para>A differenza di una lettera singola che, come accennato sopra, rappresenta semplicemente se stessa, una lettera preceduta da <literal>\</literal> possiede una funzione speciale in un'espressione regolare.</para>
+
+		  <para>Per esempio, <emphasis>r</emphasis> è un carattere normale, ma preceduta da <literal>\</literal> e resa <literal>\r</literal> si trasforma in una speciale combinazione che individua un <emphasis>carattere di ritorno a capo</emphasis>. In modo simile, <literal>\R</literal> individua <emphasis>qualsiasi carattere di interruzione riga</emphasis>.</para>
+		  
+          <note>
+            <para>Soltanto le lettere <emphasis>i j l m o</emphasis> e <emphasis>y</emphasis>, sia maiuscole che minuscole, non hanno alcun significato specifico quando precedute da una barra rovesciata. Questo manuale descrive solo un piccolo sottoinsieme di lettere che assume un significato speciale.</para>
+
+			<para>Consultare i siti indicati nella sezione <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> riportata più avanti per informazioni sulle combinazioni non trattate qui.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Dodici caratteri hanno, per impostazione predefinita, un significato speciale</term>
+        <listitem>
+          <para>Quel significato speciale deve essere annullato da un altro carattere per individuare se stesso.</para>
+
+          <para>L'elenco completo dei caratteri viene riportato <link linkend="app.regex.twelve.characters">sotto</link>. Un esempio è <literal>.</literal>: da solo, possiede lo speciale significato di corrispondere a <emphasis>qualsiasi carattere singolo</emphasis>.</para>
+
+		  <para>Per trovare un punto normale, tale significato va annullato utilizzando <literal>\</literal>, per creare l'espressione <literal>\.</literal>, che individua semplicemente un punto.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Il carattere <literal>\</literal> è un carattere molto speciale</term>
+        <listitem>
+          <para>Come affermato sopra, il carattere <literal>\</literal> possiede lo speciale significato o di annullare o di attivare il significato speciale di altri caratteri. Non ha alcun effetto se posizionato davanti a un carattere con nessun significato speciale (sia per impostazione predefinita, sia per aggiunta).</para>
+
+          <para><literal>\</literal> può annullare il proprio significato speciale raddoppiandosi in <literal>\\</literal>, che semplicemente individua lo stesso carattere di <emphasis>barra rovesciata</emphasis>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">I dodici caratteri</title>
+  
+    <para>I dodici caratteri speciali sono: <emphasis>barra rovesciata</emphasis> <literal>\</literal>, <emphasis>accento circonflesso</emphasis> <literal>^</literal>, <emphasis>segno del dollaro</emphasis> <literal>$</literal>, <emphasis>punto</emphasis> <literal>.</literal>, <emphasis>barra verticale</emphasis> (o <emphasis>pipe</emphasis>) <literal>|</literal>, <emphasis>punto interrogativo</emphasis> <literal>?</literal>, <emphasis>asterisco</emphasis> (o <emphasis>stella</emphasis>) <literal>*</literal>, <emphasis>segno più</emphasis> <literal>+</literal>, <emphasis>parentesi</emphasis> di apertura <literal>(</literal>, <emphasis>parentesi</emphasis> di chiusura <literal>)</literal>, <emphasis>parentesi quadra</emphasis> di apertura <literal>[</literal>, e <emphasis>parentesi graffa</emphasis> di apertura <literal>{</literal>.</para>
+
+    <para>Ciascun carattere viene descritto brevemente di seguito, con esempi di espressioni regolari che si basano sul carattere e con esempi di testo che individuano oppure no.</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>La BARRA ROVESCIATA: <literal>\</literal></term>
+          <listitem>
+            <para>Questo carattere annulla oppure attiva il significato speciale del carattere che segue.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Un numero tra <emphasis>0.0</emphasis> e <emphasis>0.9</emphasis>, oppure solo lo <emphasis>0.5</emphasis> finale nei numeri tipo 10.5 o 560.5.</para>
+
+                      <para><literal>\.</literal> annulla il significato “qualsiasi carattere” del punto per individuare il punto decimale, mentre <literal>\d</literal> trasforma l'ordinaria lettera minuscola “d” in un'espressione che individua qualsiasi cifra tra 0 e 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Le sequenze tipo 0,1, 0-3, o i primi tre caratteri di 0x002E, che corrisponderebbe se l'espressione fosse semplicemente <literal>0.[0-9]</literal>, senza barra rovesciata prima del punto.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>L'ACCENTO CIRCONFLESSO: <literal>^</literal></term>
+          <listitem>
+            <para>Quando è il primo carattere nell'espressione, il carattere <emphasis>accento circonflesso</emphasis> individua l'inizio di una riga.</para>
+
+            <para>Quando è il primo carattere in <link linkend="app.regex.types.of.expressions.classes">una classe di caratteri racchiusa tra parentesi quadre</link>, individua tutti i caratteri che non fanno parte di quella classe.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>La lettera “A” maiuscola nella frase seguente: “A long, but exciting journey was about to begin”.</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Qualsiasi carattere che <emphasis>non</emphasis> sia “a”, “b” o “c”. Nella parola “back”, per esempio, viene individuata solo la lettera “k”.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>La lettera “A” maiuscola nella frase seguente: “My friend is writing a book called <emphasis>A Long Journey</emphasis>”.</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>Le lettere minuscole “a”, “b” o “c” nella parola “back”.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Il simbolo del DOLLARO: <literal>$</literal></term>
+          <listitem>
+            <para>Quando è l'ultimo carattere in un'espressione, il simbolo del <emphasis>dollaro</emphasis> individua la fine di una riga.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Una riga formata da una parola singola e che termina per due punti :</para>
+                      <para><emphasis>Domande:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Una riga formata da una parola singola ma che non termina per due punti :</para>
+                      <para><emphasis>Domande?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Il PUNTO: <literal>.</literal></term>
+          <listitem>
+            <para>Individua qualsiasi carattere singolo.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Tutte le combinazioni di tre lettere che iniziano per “c” e terminano per “t”: “<emphasis>cat</emphasis>”, “<emphasis>cut</emphasis>”, “<emphasis>cot</emphasis>”, o persino combinazioni senza senso tipo “<emphasis>czt</emphasis>” o “<emphasis>cqt</emphasis>”.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Combinazioni contenenti tre lettere che iniziano per “c” e terminano per “t” ma sono divise in più di una riga.</para>
+                      <para>Qual è la lettera mancante?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal/></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La BARRA VERTICALE: <literal>|</literal></term>
+          <listitem>
+            <para>Questo carattere funziona come un “O” e individua qualsiasi espressione che lo precede o lo segue.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Il PUNTO INTERROGATIVO: <literal>?</literal></term>
+          <listitem>
+            <para>Questo carattere specifica che devono essere individuati o zero o un'istanza del carattere o espressione che precede.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>an?␣</literal> (dove “␣” rappresenta un singolo spazio).</entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>O “a ” o “an ” in:<simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>Trova anche la “an ” finale di “Can ” in una frase tipo “Can I help you?”, o la “a” finale di “pasta ” in “We had pasta for lunch.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Né “a” né “an” in:<simplelist>
+                          <member>L'articolo indefinito: “a” (o “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>Essi non sono seguiti da uno spazio.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>L'ASTERISCO: <literal>*</literal></term>
+          <listitem>
+            <para>Questo carattere specifica che devono essere individuate zero o più istanze del carattere o espressione che precede.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>La parola “run”, così come “runs”, “runner”, “runway”, “runt” in “grunt” o “brunt” e qualsiasi altra parola o sequenza di caratteri che contiene “run” seguita da zero o più “<emphasis>caratteri di parola</emphasis>” (che include cifre e il trattino basso, per cui anche la parte davanti al simbolo “@” in un indirizzo di posta elettronica, tipo run_123@example.email.org, viene individuata).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>La frase completa in “run-on” o “run'n'gun”, perché il trattino o l'apostrofo non vengono inclusi in <literal>\w</literal>. In tali frasi viene individuata solo “run” iniziale.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Il segno PIÙ: <literal>+</literal></term>
+          <listitem>
+            <para>Questo carattere specifica che devono essere individuate una o più istanze del carattere o espressione che precede.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>I numeri tipo “1.5”, “23.2” o “5235.8” con il punto come decimale singolo e qualsiasi numero di cifre prima del punto decimale.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Il valore intero dei numeri tipo “5,235.8” o “21,571.9”. Verrà individuata solo la porzione dopo il separatore delle migliaia (in questo caso la virgola).</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTESI DI APERTURA: <literal>(</literal></term>
+
+          <listitem>
+            <para>Questo carattere inizia un <emphasis>gruppo</emphasis>, che è un insieme di caratteri considerato come una singola unità. I gruppi sono numerati e il loro contenuto è salvato in memoria. Possono essere riutilizzati in un momento successivo nell'espressione di ricerca che utilizza <literal>\<option>n</option></literal>, dove <option>n</option> indica il numero del gruppo.</para>
+
+            <note>
+              <para>Il contenuto del gruppo può essere utilizzato anche nel <link linkend="windows.text.replace">testo di sostituzione</link>. Usare <literal>$<option>n</option></literal>, dove <option>n</option> è il numero del gruppo definito nella ricerca.</para>
+            </note>
+
+            <para>Le parentesi sono sempre utilizzate in coppie di apertura e chiusura. Se si tenta di usare solo la parentesi di apertura o di chiusura in modo indipendente, verrà restituito un errore.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Le parole doppie separate da uno spazio, come la “an” consecutiva nella frase seguente:</para>
+
+					  <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>“that, that” nella frase seguente:</para>
+
+					  <para>“But that, that is just unbelievable”, perché il primo “that” è seguito sia da una virgola, sia da uno spazio, piuttosto che da solo uno spazio.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTESI DI CHIUSURA: <literal>)</literal></term>
+
+          <listitem>
+            <para>Questo carattere chiude un gruppo. È speciale perché non può mai essere utilizzato da solo. Deve essere preceduto da <literal>\</literal> se il carattere da individuare è la stessa parentesi di chiusura.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Il numero in sequenza (inclusa la parentesi) all'inizio di ciascuna riga in un elenco tipo:</para>
+
+                      <simplelist>
+                        <member>1) Mele</member>
+                        <member>2) Arance</member>
+                        <member>3) Pere</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Numeri in sequenza che non si trovano all'inizio di una riga.</para>
+
+                      <para>Seguire questi passaggi:</para>
+                      <simplelist>
+                        <member>Passaggio 1) preparazione</member>
+                        <member>Passaggio 2) …</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTESI QUADRA DI APERTURA: <literal>[</literal></term>
+
+          <listitem>
+            <para>Questo carattere deve essere accoppiato con la parentesi quadra di chiusura in modo da racchiudere un gruppo di caratteri singoli in cui ciascuno rappresenta una potenziale corrispondenza valida.</para>
+
+            <para>Soltanto la parentesi di apertura è considerata speciale e per far parte anch'essa della ricerca deve essere preceduta da una barra rovesciata. Se si ricerca soltanto la parentesi di chiusura, non è necessario che questa venga preceduta dalla barra rovesciata (è ancora possibile aggiungerla, ma non avrà alcun effetto sull'espressione o il risultato.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Le grafie corrette di “licence” e “license”, come pure quelle potenziali scorrette di “lisence” e “lisense” misspellings</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Grafie scorrette più gravi tipo “licensse” o “lissense”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>La PARENTESI GRAFFA DI APERTURA: <literal>{</literal></term>
+
+          <listitem>
+            <para>Questo carattere deve essere accoppiato con la parentesi graffa di chiusura per racchiudere un <emphasis>numero esatto</emphasis>, un <emphasis>minimo</emphasis>, un <emphasis>massimo</emphasis> o un <emphasis>intervallo</emphasis> che specifichi quante istanze del carattere o gruppo che precede devono essere individuate.</para>
+
+            <para>Soltanto la parentesi graffa di apertura è considerata speciale e per far parte anch'essa della ricerca deve essere preceduta da una barra rovesciata. Se si ricerca soltanto la parentesi graffa di chiusura, non è necessario che questa venga preceduta dalla barra rovesciata (è ancora possibile aggiungerla, ma non avrà alcun effetto sull'espressione o il risultato.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Individua</entry>
+                    <entry>
+                      <para>Codici tipo “1234/5”, “1472/69” o “9513/842” formati da quattro cifre, una barra e da una a tre cifre aggiuntive.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Non individua</entry>
+                    <entry>
+                      <para>Codici tipo “123/45”, “1472/6985” o “95133/15746”.</para>
+                      <para><emphasis role="bold">Attenzione:</emphasis> sebbene i due codici citati sopra non vengano esattamente individuati, l'espressione restituirà la “porzione <emphasis>1472/698</emphasis>” di “1472/6985”, e anche la “porzione <emphasis>5133/157</emphasis>” di “95133/15746”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">Un sacco di espressioni</title>
+
+    <para>Questa sezione riporta vari tipi di espressione regolare, sia semplici, sia complessi.</para>
+      
+    <note>
+      <para>È bene tenere a mente che la maggior parte dei caratteri <emphasis>alfabetici</emphasis> preceduti da una <literal>\</literal> si trasformano in un'espressione che rappresenta <emphasis>non il carattere in sé ma il suo speciale significato associato</emphasis>.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">Espressioni semplici</title>
+      <para>L'espressione regolare più semplice consiste di un singolo carattere, oppure di una combinazione di una barra rovesciata (<literal>\</literal>) e un carattere che costituisce un'unità con un unico significato.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Caratteri</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Espressione</entry>
+              <entry align="left">Corrispondenza</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>Il carattere “x” in sé</para>
+                <para>La maggior parte dei caratteri individua se stesso.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>Il carattere di tabulazione, non la lettera “t”.</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>Carattere corrispondente a un avanzamento di riga (line feed, LF), non la lettera “n”.</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>Carattere corrispondente a un ritorno di carrello (carriage-return, CR), non la lettera “r”.</para>
+                <para>In modo simile, <literal>\R</literal> corrisponde a qualsiasi carattere di interruzione riga.</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Maiuscole/minuscole</title>
+
+      
+      <para>Le normali ricerche di OmegaT non distinguono tra maiuscole e minuscole: esse individuano sia i caratteri maiuscoli, sia quelli minuscoli, a meno che non si abiliti l'opzione <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Questa opzione farà sì che l'intera espressione di ricerca distingua tra maiuscole e minuscole.</para>
+
+      <para>Al contrario, le espressioni regolari distinguono tra maiuscole e minuscole per impostazione predefinita. Ciò implica che un'espressione regolare che ricerca “OmegaT”, per esempio, non individuerà “omegat”. Le espressioni regolari, comunque, sono provviste di speciali modificatori utili a non distinguere tra maiuscole e minuscole all'interno dell'espressione:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Rende la parte dell'espressione, alla destra del modificatore, insensibile a maiuscole e minuscole.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Rende la parte dell'espressione, alla destra del modificatore, sensibile a maiuscole e minuscole.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>È possibile applicare questa opzione per regolare finemente le ricerche in base alla distinzione tra maiuscole e minuscole. Si ipotizzi, per esempio, di voler trovare istanze di “OmegaT” e “omegat” ma non di “OMEGAT”. Per farlo, si utilizzi l'espressione seguente: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, la quale rappresenta una “o” non sensibile a maiuscole/minuscole seguita da “mega”, sensibile a maiuscole/minuscole, seguita da una “t” non sensibile.</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Classi</title>
+
+      <para>Le espressioni regolari consentono di creare gruppi di caratteri conosciuti come <emphasis>classi</emphasis>. Le ricerche individueranno qualsiasi carattere facente parte del gruppo.</para>
+
+	  <para>Le classi sono definite racchiudendo tra parentesi quadre i caratteri desiderati, e possono essere specificati o elencando ciascun carattere da includere, o specificando un intervallo di caratteri. Per esempio, sarebbe possibile creare la classe <literal>[£€$]</literal> per trovare nel testo ciascun simbolo di valuta dei tre specificati, oppure la classe [1-3] per trovare il numero 1, 2 o 3.</para>
+
+      <note>
+        <para>Allinterno di una classe sono considerati speciali solo i caratteri barra rovesciata (<literal>\</literal>), accento circonflesso (<literal>^</literal>), parentesi quadra di chiusura (<literal>]</literal>) e trattino (<literal>-</literal>). Il resto degli altri dodici caratteri sono considerati normale e non devono essere preceduti da una barra rovesciata per essere ricercati.</para>
+
+		<para>Per eseguire una ricerca, è possibile considerare normali, anziché speciali, i quattro caratteri di classe facendoli precedere da una barra rovesciata. È possibile anche ricercare l'accento circonflesso, la parentesi quadra di chiusura e il trattino, come normali caratteri, posizionandoli in un punto che non attivi il loro significato speciale, ossia: per l'accento circonflesso, ovunque ad eccezione della destra dopo la parentesi graffa di apertura; per la parentesi graffa di chiusura, immediatamente dopo o la parentesi graffa di apertura o l'accento circonflesso che lo segue; per il trattino, o subito dopo la parentesi graffa di apertura o subito prima la parentesi graffa di chiusura.</para>
+      </note>
+
+	  <para>I gruppi frequentemente utilizzati possiedono una forma abbreviata che consiste di una barra rovesciata seguita da una lettera dell'alfabeto. Per esempio, <literal>\d</literal> è un'abbreviazione per <literal>[0-9]</literal>, che individua qualsiasi cifra compresa tra 0 e 9. In molti casi, la maiuscola successiva corrispondente viene utilizzata per negare la classe: <literal>\D</literal> individua qualsiasi carattere che <emphasis role="bold">non</emphasis> sia una cifra.</para>
+      <para>La tabella riportata sotto fornisce alcuni esempi aggiuntivi. Queste classi non rappresentano mai solo la lettera reale utilizzata per formare l'abbreviazione.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Esempi di classi</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Espressione</entry>
+              <entry align="left">Corrispondenza</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>La lettera “a”, “b” o “c”.</para>
+
+				<para>Una classe semplice consiste di qualsiasi numero di caratteri racchiuso tra <literal>[</literal> e <literal>]</literal>.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>Un carattere nell'intervallo di lettere da “C” a “X”.</para>
+
+				<para>Un intervallo in una serie è definito dal primo carattere seguito da un trattino, poi seguito dall'ultimo carattere della serie. Può essere definito qualsiasi numero di intervalli: <literal>[a-zA-Z0-9]</literal> significa qualsiasi carattere minuscolo da “a” a “z”, o qualsiasi carattere maiuscolo da “A” a “Z”, o qualsiasi cifra da “0” a “9”. Un trattino posizionato al di fuori della serie è semplicemente un trattino: <literal>[a-z-]</literal> significa qualsiasi carattere minuscolo da “a” a “z”, oppure il carattere trattino in sé.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Qualsiasi carattere <emphasis>eccetto</emphasis> un avanzamento di riga, un ritorno di carrello o una tabulazione.</para>
+
+                <para>L'accento circonflesso posizionato immediatamente dopo la parentesi quadra di apertura esclude il resto dei caratteri nella classe.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>Un carattere parola, generalmente definito come <literal>[A-Za-z0-9_]</literal>.</para>
+
+                <para><literal>\W</literal> è qualsiasi carattere che <emphasis role="bold">non</emphasis> sia un carattere parola (<literal>[^\w]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>Un carattere spazio bianco, incluso i caratteri di spazio e di tabulazione, così come le interruzioni di riga.</para>
+
+                <para><literal>\S</literal>è qualsiasi carattere che <emphasis role="bold">non</emphasis> sia un carattere spazio bianco (<literal>[^\s]</literal>).</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> e <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Spazio bianco orizzontale e verticale (preferito in genere a <literal>\s</literal>).</para>
+
+				<para><literal>\H </literal> è qualsiasi carattere che <emphasis role="bold">non</emphasis> sia uno spazio bianco orizzontale, e <literal>\V</literal> qualsiasi carattere che <emphasis role="bold">non</emphasis> sia uno spazio bianco verticale (<literal>[^\h]</literal> e <literal>[^\v]</literal>, rispettivamente).</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Le espressioni regolari non sono limitate ai caratteri alfanumerici. Esse coprono l'intero set di caratteri Unicode. Usare i blocchi, gli script e le categorie Unicode per specificare le classi di caratteri al di fuori dell'intervallo di caratteri alfanumerici. Alcuni esempi vengono riportati nella tabella sottostante.</para>
+
+      <para>Per un'analisi più dettagliata delle espressioni regolari Unicode, si veda anche <ulink url="https://www.regular-expressions.info/unicode.html">Espressioni regolari Unicode</ulink>.</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Categorie, script e blocchi Unicode</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Espressione</entry>
+              <entry align="left">Corrispondenza</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>Un carattere nel blocco greco (<ulink url="https://unicode.org/reports/tr18/#Blocks">blocco Unicode</ulink>)</para>
+				
+                <para><literal>\P{InGreek}</literal> è qualsiasi carattere che <emphasis role="bold">non</emphasis> sia nel blocco Greek.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>Un logogramma (carattere <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) trovato nelle lingue CJK (<ulink url="https://unicode.org/reports/tr18/#Script_Property">script Unicode</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>Una lettera maiuscola (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>Un simbolo di valuta, che è anche una <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</ulink>.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">Espressioni più avanzate</title>
+      
+      <para>Alcune espressioni specificano una posizione piuttosto che un carattere. Esse indicano dove guardare nel testo per la corrispondenza, ma non includono alcun carattere in quella corrispondenza. La tabella sotto riportata elenca alcuni tra gli esempi più comuni. Per ulteriori informazioni, si consultino i siti riportati nella sezione <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Espressioni che contrassegnano una posizione</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Espressione</entry>
+              <entry align="left">Corrispondenza</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>Inizio di una riga</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>Fine di una riga</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>Limite di una parola</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Non</emphasis> il limite di una parola</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>Un carattere seguito da una “u”.</para>
+				
+                <para>Per esempio, <literal>q(?=u)</literal> individua la lettera “q” quando è seguita da una “u”. Individua dunque la “q” presente in “equal” o “question”, ma <emphasis>non</emphasis> quella presente in “qigong” o “Iraq”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>Un carattere che <emphasis>non</emphasis> è seguito dalla lettera “u”.</para>
+				
+                <para>Per esempio, <literal>q(?!u)</literal> individua la lettera “q” quando <emphasis>non</emphasis> è seguita da una “u”. Individua dunque la “q” presente in “qigong” o “Iraq”, ma <emphasis>non</emphasis> quella in “equal” o “question”.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>Un carattere preceduto dalla lettera “q”.</para>
+				
+                <para>Per esempio, <literal>(?&lt;=q)u</literal> individua la lettera “u” se viene dopo “q”. Individua dunque la “u” presente in “quick”, ma non quella in “run”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>Un carattere che <emphasis>non</emphasis> è preceduto dalla lettera “q”.</para>
+				
+                <para>Per esempio, <literal>(?&lt;!q)u</literal> individua la lettera “u” se <emphasis>non</emphasis> viene dopo la “q”. Individua dunque la “u” presente in “run”, ma <emphasis>non</emphasis> quella in “quick”.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">Altri esempi</title>
+
+    <para>Questa sezione riporta alcuni esempi che dimostrano come le varie espressioni descritte sopra possono essere combinate per eseguire ricerche avanzate in OmegaT.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Esempi di espressioni regolari che utilizzano le espressioni riportate descritte sopra</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Espressione</entry>
+            <entry>Scopo</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Trova parole doppie.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Trova le frasi che iniziano per virgola seguite da un carattere di spazio bianco, contiene una o più parole (incluse quelle racchiuse tra virgolette doppie, contrazioni, e i nomi file con estensione), e termina con una virgola o un punto.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Trova spazi bianchi aggiuntivi dopo il punto alla fine di una riga.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Trova parole che iniziano per vocale che viene dopo l'articolo “a” piuttosto che “an”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>Il contrario dell'esempio precedente. Trova parole che iniziano per consonante che viene dopo “an” piuttosto che “a”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Trova date numeriche (esempio in formato anglosassone) in ordine di anno, mese e giorno con il mese e il giorno separati da una barra, un punto o un trattino, tipo:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>Questa expressione individua modelli di numeri e separatori che corrispondono a possibili date, però non le convalida. Individua anche tipi come “5136/36/71”.</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Trova un punto seguito da una lettera maiuscola. Utile per individuare possibili spazi mancanti tra il punto e l'inizio di una nuova frase.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>Trova “is” come parola intera in una frase, senza individuare “this”, “isn’t”, o persino “Is”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>Trova un indirizzo di posta elettronica. Questa semplice espressione potrebbe non individuare tutti i formati di posta elettronica possibili.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">Riferimenti</title>
+
+    <para>Sebbene OmegaT non offra colorazioni elaborate per le espressioni regolari, è possibile sfruttare questa funzionalità utilizzando la finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/> in quanto OmegaT colora i risultati delle corrispondenze.</para>
+    
+    <para>Di seguito sono riportate alcune risorse aggiuntive.</para>
+
+    <para>Il riferimento tecnico di Java è utile come riferimento standard.<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentazione Java Regex</ulink></term>
+          <listitem>
+            <para>Il riferimento ufficiale per le espressioni regolari utilizzate in Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>Per approfondire l'uso delle espressioni regolari, sono risultati molto utili i due siti di seguito riportati:<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>Un &quot;verificatore&quot; di espressioni regolari in linea che permette di inserire il testo da ricercare e le espressioni regolari da provare.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>Punto di riferimento nel web, tra le più complete esercitazioni sulle espressioni regolari.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT non supporta alcuno di questi siti, in alcun modo. Chi avesse contezza di altri riferimenti interessanti, in qualsiasi lingua, può segnalarlo alla squadra di OmegaT, che sarà lieta di verificarne la validità.</para>
+      </note>
+    </para>
+  </section>
+</section>

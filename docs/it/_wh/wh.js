@@ -517,90 +517,105 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["Installazione e avvio di OmegaT\n                     ","chapter.installing.and.running.html",[
-["Utenti di Windows","chapter.installing.and.running.html#d0e17",null],
-["Utenti di Linux (Intel)","chapter.installing.and.running.html#Linux.Intel.users",null],
-["Utenti di macOS","chapter.installing.and.running.html#MAC.OSX.users",null],
-["Altri sistemi","chapter.installing.and.running.html#other.systems",null],
-["Trascinare e rilasciare (Drag and drop)","chapter.installing.and.running.html#drag.and.drop",null],
-["Uso di Java Web Start","chapter.installing.and.running.html#using.Java.Web.Start",null],
-["Avvio di OmegaT da riga di comando","chapter.installing.and.running.html#commandline.launching",null],
-["Costruire un pacchetto OmegaT dai sorgenti","chapter.installing.and.running.html#building.OmegaT.from.source",null]
+["Introduzione a OmegaT","chapter.instant.start.guide.html",[
+["Principi","chapter.instant.start.guide.html#introduction.omegat.principles",null],
+["Convenzioni utilizzate in questo manuale","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["Creare un nuovo progetto","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["Dizionari ortografici","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["Gestire i segmenti","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["Sembra che vada bene!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
+["Tradurre i file","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
+["Gestire i tag","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
+["Revisionare la traduzione","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["Creare i file tradotti","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["Gestire i progetti","chapter.instant.start.guide.html#introduction.one.more.thing",null],
+["Flusso di lavoro basato sulle scorciatoie","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
 ]],
-["Menu","menus.html",[
-["Progetto","menus.html#menus.project",null],
-["Modifica","menus.html#menus.edit",null],
-["Vai","menus.html#menus.goto",null],
-["Vista","menus.html#menus.view",null],
-["Strumenti","menus.html#menus.tools",null],
-["Opzioni","menus.html#menus.options",null],
-["Aiuto","menus.html#menus.help",null]
+["Guide all\'uso...","chapter.how.to.html",[
+["Risoluzione dei problemi","chapter.how.to.html#how.to.restore.your.data",null],
+["Uso di memorie di traduzione","chapter.how.to.html#how.to.use.tm",null],
+["Supporto di altri formati","chapter.how.to.html#how.to.translate.other.files",null],
+["Impostare un progetto in collaborazione","chapter.how.to.html#how.to.setup.team.project",null],
+["Uso di progetti in collaborazione","chapter.how.to.html#how.to.use.team.project",null],
+["Installare OmegaT","chapter.how.to.html#how.to.installing.omegat",null],
+["Eseguire OmegaT","chapter.how.to.html#how.to.running.omegat",null]
 ]],
-["Finestre e finestre di dialogo","windows.and.dialogs.html",[
-["Proprietà del progetto","windows.and.dialogs.html#dialogs.projectproperties",null],
-["File del progetto","windows.and.dialogs.html#windows.projectfiles",null],
-["Ricerca testo","windows.and.dialogs.html#windows.textsearch",null],
-["Sostituzione testo","windows.and.dialogs.html#windows.textreplace",null],
-["Allineatore","windows.and.dialogs.html#windows.aligner",null],
-["Script","windows.and.dialogs.html#windows.scripts",null],
-["Preferenze generali","windows.and.dialogs.html#dialogs.preferences",null]
+["Pannelli","chapter.panes.html",[
+["Disposizione predefinita","chapter.panes.html#panes.default.layout",null],
+["Principi","chapter.panes.html#panes.principles",null],
+["\n                              Editor\n                           ","chapter.panes.html#panes.editor",null],
+["\n                              Concordanze parziali (fuzzy)\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
+["\n                              Glossari\n                           ","chapter.panes.html#panes.glossary",null],
+["\n                              Dizionari\n                           ","chapter.panes.html#panes.dictionary",null],
+["\n                              Traduzioni automatiche\n                           ","chapter.panes.html#panes.machinetranslation",null],
+["\n                              Traduzioni multiple\n                           ","chapter.panes.html#panes.multipletranslations",null],
+["\n                              Blocco note\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              Commenti\n                           ","chapter.panes.html#panes.comments",null],
+["\n                              Proprietà segmento\n                           ","chapter.panes.html#panes.segment.properties",null],
+["\n                              Barra di stato\n                           ","chapter.panes.html#panes.statusbar",null]
 ]],
-["Pannelli","panes.html",[
-["Editor","panes.html#editor.pane",null],
-["Concordanze parziali (fuzzy)","panes.html#d0e4360",null],
-["Glossario","panes.html#d0e4409",null],
-["Dizionario","panes.html#d0e4422",null],
-["Traduzione automatica","panes.html#d0e4429",null],
-["Traduzioni multiple","panes.html#d0e4437",null],
-["Note","panes.html#d0e4447",null],
-["Commenti","panes.html#d0e4458",null],
-["Barra di stato","panes.html#d0e4463",null]
+["Menu","chapter.menus.html",[
+["\n                              Progetto\n                           ","chapter.menus.html#menus.project",null],
+["\n                              Modifica\n                           ","chapter.menus.html#menus.edit",null],
+["\n                              Vai\n                           ","chapter.menus.html#menus.goto",null],
+["\n                              Vista\n                           ","chapter.menus.html#menus.view",null],
+["\n                              Strumenti\n                           ","chapter.menus.html#menus.tools",null],
+["\n                              Opzioni\n                           ","chapter.menus.html#menus.options",null],
+["\n                              Aiuto\n                           ","chapter.menus.html#menus.help",null]
 ]],
-["Cartella del progetto","project.folder.html",[
-["source","project.folder.html#d0e4503",null],
-["target","project.folder.html#d0e4508",null],
-["tm","project.folder.html#d0e4531",null],
-["dictionary","project.folder.html#d0e4642",null],
-["glossary","project.folder.html#d0e4650",null],
-["omegat","project.folder.html#folder.omegat",null],
-["omegat.project (file)","project.folder.html#d0e4717",null],
-[".repositories","project.folder.html#d0e4725",null]
+["Finestre e finestre di dialogo","chapter.windows.and.dialogs.html",[
+["\n                              Proprietà del progetto\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
+["\n                              File di partenza\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
+["\n                              Ricerca testo\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
+["\n                              Sostituzione testo\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
+["\n                              Allinea file\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              Azioni di script\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
-["Guide all\'uso...","howtos.html",[
-["Impostazione di un progetto in collaborazione","howtos.html#howto.setupteamproject",null],
-["Uso di progetti in collaborazione","howtos.html#howto.useteamproject",null],
-["Riutilizzo delle memorie di traduzione","howtos.html#howto.reusetm",null],
-["Prevenzione della perdina di dati","howtos.html#howto.preventdataloss",null],
-["Traduzione di un file PDF","howtos.html#howto.translatepdf",null],
-["Gestione delle lingue da destra a sinistra (Right-To-Left, RTL)","howtos.html#howto.managerighttoleft",null]
+["\n                        Preferenze\n                     ","chapter.dialogs.preferences.html",[
+["\n                              Generale\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.general",null],
+["\n                              Traduzione automatica\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.mt",null],
+["\n                              Glossari\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.glossary",null],
+["\n                              Dizionari\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.dictionary",null],
+["\n                              Aspetto\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.appearance",null],
+["\n                              Filtri dei file globali\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.file.filters",null],
+["\n                              Regole globali di segmentazione\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup",null],
+["\n                              Completamento automatico\n                           ","chapter.dialogs.preferences.html#dialog.preferences.auto.completion",null],
+["\n                              Correttore ortografico\n                           ","chapter.dialogs.preferences.html#dialog.preferences.spellchecker",null],
+["\n                              LanguageTool\n                           ","chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
+["\n                              Ricerche esterne globali\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.external.searches",null],
+["\n                              Editor\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.editor",null],
+["\n                              Elaborazione dei tag\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.tag.processing",null],
+["\n                              Squadra...\n                           ","chapter.dialogs.preferences.html#dialog.preferences.team",null],
+["\n                              Concordanze TM\n                           ","chapter.dialogs.preferences.html#dialog.preferences.tm.matches",null],
+["\n                              Vista\n                           ","chapter.dialogs.preferences.html#dialog.preferences.view",null],
+["\n                              Salvataggio e risultato\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
+["\n                              Accesso proxy\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.proxy.login",null],
+["\n                              Memorizzazione sicura\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.secure.store",null],
+["\n                              Plugin\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.plugins",null],
+["\n                              Aggiornamenti\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
-["A. Dizionari","appendix.dictionaries.html",[
-["Come scaricare e installare dizionari","appendix.dictionaries.html#d0e5524",null],
-["Problemi con i dizionari","appendix.dictionaries.html#d0e5593",null]
+["Cartella del progetto","chapter.project.folder.html",[
+["Struttura predefinita","chapter.project.folder.html#d0e10571",null],
+["Contenuto minimo","chapter.project.folder.html#d0e10649",null],
+["source","chapter.project.folder.html#project.folder.source",null],
+["target","chapter.project.folder.html#project.folder.target",null],
+["tm","chapter.project.folder.html#project.folder.tm",null],
+["exported tms folder","chapter.project.folder.html#project.folder.exported.tm",null],
+["dictionary","chapter.project.folder.html#project.folder.dictionary",null],
+["glossary","chapter.project.folder.html#project.folder.glossary",null],
+["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
+[".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
-["B. Glossari","appendix.glossaries.html",[
-["Glossario predefinito","appendix.glossaries.html#d0e5629",null],
-["Uso","appendix.glossaries.html#d0e5653",null],
-["Formato dei file","appendix.glossaries.html#d0e5703",null],
-["Problemi comuni dei glossari","appendix.glossaries.html#d0e5819",null]
-]],
-["C. Correttore ortografico","appendix.spellchecker.html",[
-["Installazione dei dizionari ortografici","appendix.spellchecker.html#d0e5869",null],
-["Uso dei dizionari ortografici","appendix.spellchecker.html#d0e5918",null],
-["Consigli","appendix.spellchecker.html#hints",null]
-]],
-["D. Espressioni regolari","appendix.regexp.html",[
-["Strumenti per le espressioni regolari ed esempi di utilizzo","appendix.regexp.html#regex.tools.and.examples.of.use",null]
-]],
-["E. Personalizzazione delle scorciatoie","appendix.shortcut.custom.html",[
-["Personalizzazione delle scorciatoie","appendix.shortcut.custom.html#ch04.shortcuts.customization",null],
-["Menu Progetto","appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu",null],
-["Menu Modifica","appendix.shortcut.custom.html#ch04.shortcuts.EditMenu",null],
-["Menu Vai","appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu",null],
-["Menu Vista","appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu",null],
-["Menu Strumenti","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
-["Menu Opzioni","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
-["Menu Aiuto","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
+["Appendici","chapter.appendices.html",[
+["Filtri dei file","chapter.appendices.html#file.filters",null],
+["Segmentazione","chapter.appendices.html#app.segmentation",null],
+["Espressioni regolari","chapter.appendices.html#app.regex",null],
+["Glossari","chapter.appendices.html#app.glossaries",null],
+["Caratteri di formattazione direzionale","chapter.appendices.html#app.bidi",null],
+["Comandi di post-elaborazione","chapter.appendices.html#post.processing.commands",null],
+["Scorciatoie di OmegaT","chapter.appendices.html#app.shortcuts",null],
+["Cartella di configurazione","chapter.appendices.html#configuration.folder",null],
+["Cartella dell\'applicazione","chapter.appendices.html#application.folder",null]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -875,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "ipc59cfhtg1b-1syco5wmb0kwt";
+var storageId = "-808m186rfoad-1q6bhwk6azkdp";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

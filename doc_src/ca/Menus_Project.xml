@@ -91,7 +91,7 @@
       <term id="menus.project.commit.source.files.title"><guimenuitem>Publica els fitxers d'origen</guimenuitem></term>
       <listitem>
         <warning><para>Aquesta funció és específica dels projectes en equip. <emphasis>Només el gestor del projecte en equip hauria d'utilitzar aquesta funció</emphasis>. Consulteu la guia <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per a conèixer més detalls.</para></warning>
-        <para>Puja els fitxers afegits o modificats localment de la carpeta <filename class="directory">source</filename> al dipòsit del projecte en equip.</para>
+        <para>Puja els fitxers afegits o modificats localment de la carpeta <filename class="directory">source</filename> al repositori del projecte en equip.</para>
       </listitem>
     </varlistentry>
 
@@ -99,7 +99,7 @@
       <term id="menus.project.commit.target.files.title"><guimenuitem>Publica els fitxers de destinació</guimenuitem></term>
       <listitem>
         <warning><para>Aquesta funció és específica dels projectes en equip. <emphasis>Utilitzeu aquesta funció només si el gestor del projecte en equip us ho ha demanat</emphasis>. Consulteu la guia <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per a conèixer més detalls.</para></warning>
-        <para>Puja els fitxers traduïts creats localment de la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> al dipòsit del projecte en equip.</para>
+        <para>Puja els fitxers traduïts creats localment de la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> al repositori del projecte en equip.</para>
       </listitem>
     </varlistentry>
 

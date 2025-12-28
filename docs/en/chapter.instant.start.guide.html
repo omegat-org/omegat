@@ -4,13 +4,13 @@
       <title>Introduction to OmegaT</title>
       <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
-      <link href="index_.html" rel="prev" title="OmegaT 6.0.1 - User Manual" />
+      <link href="index_.html" rel="prev" title="OmegaT 6.0.2 - User Manual" />
       <link href="chapter.how.to.html" rel="next" title="How To..." />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.1 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -446,6 +446,13 @@
 	  
                </a>, and select
 	an empty folder or create a new one with the name of your project.</p>
+            <div class="warning">
+               <h3 class="title">Warning</h3>
+               <p>OmegaT needs to be able to modify the folder within which you create
+	  the project. If you want to install your project on a shared drive, do not
+	  install it at the top of the drive, but rather create a folder in which
+	  you will install the project.</p>
+            </div>
             <p>An OmegaT project is simply a set of folders that holds
     all your default resources.</p>
             <p>The <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Project Properties">
@@ -456,15 +463,17 @@
             <p>In that dialog, select or enter the languages of your source and
 	translated files, set the various options, and click on <span class="guibutton">OK</span>
 	to continue.</p>
-            <p>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a>
-	(including the three-letter language codes) into the appropriate
-	field.</p>
+            <p>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</p>
             <div class="warning">
                <h3 class="title">Warning</h3>
-               <p>Make sure that you enter the correct languages and that all other
-	  locations requiring a language code match the code you assign here. See
-	  the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Languages">
+               <p>OmegaT does not check the validity of the language codes that you
+	  enter. Make sure that the two language codes are
+	  <span class="emphasis">
+                     <em>different</em>
+                  </span>, that they are appropriate for your use
+	  of OmegaT, and that all other locations requiring a language code
+	  match the codes you assign here. See the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Languages">
                      <span class="guilabel">Languages</span>
                   </a> section for
 	  details.</p>
@@ -570,7 +579,7 @@
                <h3 class="title">Warning</h3>
                <p>OmegaT does not recognize languages automatically, and only uses
 	  a dictionary if its name matches the target language code.</p>
-               <div class="example" id="d0e350">
+               <div class="example" id="d0e353">
                   <div class="example-title">Example 2. Project target language code and spellchecking dictionary
 		name</div>
                   <div class="example-contents">
@@ -1462,7 +1471,7 @@
                   </td>
                </tr>
                <tr>
-                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.1 - User Manual </td>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.2 - User Manual </td>
                   <td style="width: 20%; text-align: center; ">
                      <a accesskey="h" href="index_.html">Home</a>
                   </td>

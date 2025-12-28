@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -161,7 +161,12 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters">Assignacions de dipòsits</a>
+                           <a href="chapter.how.to.html#how.to.manage.team.project">Gestió d'un projecte en equip</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters">Assignacions de repositoris</a>
                         </span>
                      </li>
                      <li>
@@ -1075,16 +1080,16 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
             </div>
             <p>La gestió d'un projecte en equip requereix un cert coneixement dels sistemes de control de versions <span class="emphasis">
-                  <em>SVN</em>
-               </span> o <span class="emphasis">
                   <em>Git</em>
+               </span> o <span class="emphasis">
+                  <em>SVN</em>
                </span> (<span class="emphasis">
                   <em>VCS</em>
                </span> al llarg d'aquesta secció).</p>
             <p>Com que hi ha molta informació disponible sobre aquests temes, aquest manual es limita a descriure el seu ús en el context d'un projecte en equip de l'OmegaT.</p>
             <div class="note">
                <h3 class="title">Nota</h3>
-               <p>Un projecte en equip de l'OmegaT sincronitza la memòria de traducció del projecte <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> i el glossari modificable del projecte <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> entre el servidor d'allotjament i tots els membres participants de l'equip, i gestiona tots els possibles conflictes.</p>
+               <p>Un projecte en equip de l'OmegaT sincronitza la memòria de traducció del projecte <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> i el glossari modificable del projecte <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> entre el servidor d'allotjament del VCS i tots els membres participants de l'equip, i gestiona tots els possibles conflictes.</p>
             </div>
             <section class="section" id="how.to.setup.team.project.prepare.the.repository">
                <div class="titlepage">
@@ -1097,23 +1102,23 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <p>Aquests són els passos per a crear un projecte en equip:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">Creació d'un dipòsit buit en el servidor d'allotjament del VCS</p>
+                     <li class="listitem">
+                        <p>Creeu un repositori buit en el servidor d'allotjament del VCS</p>
                         <p>Això normalment es pot fer a través d'una interfície web, una aplicació gràfica o la línia d'ordres. Consulteu la documentació del servidor o del servei d'allotjament per a conèixer més detalls.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">Ús del VCS local per a crear una còpia local (clonació)</p>
+                     <li class="listitem">
+                        <p>Ús del VCS local per a crear una còpia local (clonació)</p>
                         <div class="note">
                            <h3 class="title">Nota</h3>
                            <p>Aquesta versió local conté la còpia del projecte de l'OmegaT per al <span class="emphasis">
                                  <em>gestor del projecte</em>
-                              </span>. Utilitzeu-la per a aplicar modificacions que afectin tot l'equip.</p>
+                              </span>. Utilitzeu aquesta còpia per a aplicar modificacions que afectin tot l'equip.</p>
                         </div>
-                        <p>El dipòsit local s'utilitza per a afegir el projecte inicial al servidor, i també es pot utilitzar per a tasques de manteniment, com ara la supressió de fitxers, que no es poden fer directament des de l'OmegaT.</p>
+                        <p>La versió local es fa servir per a afegir el projecte inicial a la versió del servidor, així com per a certes tasques de manteniment. Consulteu la secció <a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="Gestió d'un projecte en equip">Gestió d'un projecte en equip</a> per a conèixer més detalls.</p>
                         <p>Us recomanem que eviteu utilitzar aquesta carpeta per a tasques de traducció. Si heu de fer tasques de traducció o revisió en aquest projecte, utilitzeu l'OmegaT per a baixar una còpia independent del projecte en equip i treballeu des d'allà. Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Ús d'un projecte en equip">Ús d'un projecte en equip</a> per a conèixer més detalls.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">Emplenament de la còpia local buida amb un projecte de l'OmegaT real</p>
+                     <li class="listitem">
+                        <p>Emplenament de la còpia local buida amb un projecte de l'OmegaT real</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
@@ -1122,7 +1127,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                        <strong>java -jar OmegaT.jar team init &lt;llengua d'origen&gt; &lt;llengua de destinació&gt;</strong>
                                     </span>
                                  </p>
-                                 <p>Aquesta ordre també registra automàticament el projecte en el sistema de control de versions.</p>
+                                 <p>Aquesta ordre també registra automàticament el projecte en el VCS.</p>
                               </li>
                               <li class="listitem">
                                  <p>Trieu els paràmetres adequats</p>
@@ -1134,14 +1139,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <p>Afegiu els fitxers necessaris</p>
                                  <p>De la mateixa manera, afegiu qualsevol llista rellevant de fitxers de correcció ortogràfica que vulgueu posar a disposició de totes les persones que treballin en el projecte. Consulteu l'apartat sobre <a class="link" href="chapter.project.folder.html#project.folder.omegat.spellcheck">fitxers de correcció ortogràfica</a> per a conèixer més detalls.</p>
                                  <p>Si esteu convertint un projecte existent, assegureu-vos que suprimiu qualsevol fitxer del projecte que no necessiteu ni vulgueu pujar al servidor abans de continuar amb el pas següent.</p>
-                                 <p>Copieu els fitxers per a traduir a la carpeta «source/» i utilitzeu un client de l'SVN o el Git, o bé la línia d'ordres, per a afegir-los i publicar-los en el dipòsit. Utilitzeu <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
+                                 <p>Copieu els fitxers per a traduir a la carpeta «source/» i utilitzeu un client de VCS, o bé la línia d'ordres, per a afegir-los i publicar-los en el repositori. Utilitzeu <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
                                        <span class="guimenu">Projecte</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem">Publica els fitxers d'origen</span>
-                                    </a> per a afegir fitxers des de l'OmegaT.</p>
-                                 <p>Heu d'utilitzar un client de l'SVN o el Git, o bé la línia d'ordres, per a afegir i publicar diccionaris, glossaris, memòries de traducció o altres fitxers que vulgueu incloure en el projecte.</p>
-                                 <p>Aquest pas es pot fer abans de registrar i publicar el projecte per primera vegada, i també es pot utilitzar per a afegir fitxers nous o actualitzar els existents després de crear el projecte.</p>
+                                    </a> per a afegir fitxers d'origen des de l'OmegaT.</p>
+                                 <p>Heu d'utilitzar un client de VCS, o bé la línia d'ordres, per a afegir i publicar diccionaris, glossaris, memòries de traducció o altres fitxers que vulgueu incloure en el projecte.</p>
+                                 <p>Aquest pas es pot fer abans o després de registrar i publicar el projecte la primera vegada.</p>
                               </li>
                            </ul>
                         </div>
@@ -1160,7 +1165,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                                  <span class="guimenuitem">Publica els fitxers de destinació</span>
                               </a>.</p>
-                           <p>L'administrador del projecte en equip ha d'utilitzar el VCS local per a <span class="bold">
+                           <p>El gestor del projecte ha d'utilitzar el VCS local per a <span class="bold">
                                  <strong>modificar</strong>
                               </span> o <span class="bold">
                                  <strong>suprimir</strong>
@@ -1169,14 +1174,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               </a> per a conèixer més detalls.</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">Registre dels fitxers del projecte amb el VCS local</p>
+                     <li class="listitem">
+                        <p>Registre dels fitxers del projecte amb el VCS local</p>
                         <p>Si heu creat el projecte des de la GUI, haureu d'afegir-lo explícitament al sistema de control de versions (<span class="command">
                               <strong>add</strong>
                            </span> tant a l'SVN com al Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">Publicació dels fitxers registrats en el servidor d'allotjament</p>
+                     <li class="listitem">
+                        <p>Publicació dels fitxers registrats en el servidor d'allotjament</p>
                         <p>Finalment, publiqueu el projecte en el servidor remot (<span class="command">
                               <strong>commit</strong>
                            </span> en l'SVN; <span class="command">
@@ -1185,31 +1190,31 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <strong>push</strong>
                            </span> en el Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">Activació dels drets d'accés de l'equip</p>
+                     <li class="listitem">
+                        <p>Activació dels drets d'accés de l'equip</p>
                         <div class="note">
                            <h3 class="title">Nota</h3>
                            <p>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</p>
                         </div>
-                        <p>Quan el projecte estigui a punt i s'hagi pujat al servidor, l'administrador del projecte en equip ha de configurar l'accés per als traductors. L'accés a un projecte en equip requereix la informació següent:</p>
+                        <p>Quan el projecte estigui a punt i s'hagi pujat al servidor, el gestor del projecte ha de configurar l'accés per als traductors. L'accés a un projecte en equip requereix la informació següent:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>Projectes en un servei d'allotjament</p>
-                                 <p>Els traductors hauran de crear un compte per al servei i enviar el seu nom d'usuari a l'administrador del projecte en equip.</p>
-                                 <p>A continuació, l'administrador concedirà accés d'escriptura al dipòsit a aquests comptes.</p>
+                                 <p>Els traductors hauran de crear un compte per al servei i enviar el seu nom d'usuari al gestor del projecte.</p>
+                                 <p>A continuació, el gestor del projecte concedirà accés d'escriptura al repositori a aquests comptes.</p>
                               </li>
                               <li class="listitem">
                                  <p>Projectes en un servidor autoallotjat</p>
-                                 <p>Si el servidor està autoallotjat i no ofereix un mètode perquè els traductors registrin un compte pel seu compte, l'administrador del projecte en equip ha de crear comptes amb accés d'escriptura per als traductors.</p>
-                                 <p>Després de crear els comptes, l'administrador ha d'enviar als traductors les credencials individuals.</p>
+                                 <p>Si el servidor està autoallotjat i no ofereix un mètode perquè els traductors registrin un compte pel seu compte, el gestor del projecte ha de crear comptes amb accés d'escriptura per als traductors.</p>
+                                 <p>Després de crear els comptes, el gestor del projecte ha d'enviar als traductors les credencials individuals.</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">Baixada del projecte amb l'OmegaT per part de l'equip</p>
-                        <p>Els administradors tenen dues opcions per a enviar la ubicació del projecte als traductors:</p>
+                     <li class="listitem">
+                        <p>Baixada del projecte amb l'OmegaT per part de l'equip</p>
+                        <p>Els gestors del projecte tenen dues opcions per a enviar la ubicació del projecte als traductors:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
@@ -1221,27 +1226,62 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                     </a> per a crear una còpia local del projecte en el sistema.</p>
                               </li>
                               <li class="listitem">
-                                 <p>Enviar un fitxer <code class="filename">omegat.project</code> que contingui l'URL del projecte i demanar els traductors que el copiïn a una carpeta buida i l'obrin amb l'OmegaT. Això pot ser útil si el projecte està configurat per a utilitzar <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de dipòsits">assignacions</a> diferents per a cada traductor.</p>
+                                 <p>Enviar un fitxer <code class="filename">omegat.project</code> que contingui l'URL del projecte i demanar els traductors que el copiïn a una carpeta buida i l'obrin amb l'OmegaT. Això pot ser útil si el projecte està configurat per a utilitzar <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de repositoris">assignacions</a> diferents per a cada traductor.</p>
                               </li>
                            </ol>
                         </div>
-                        <p>Després que l'administrador del projecte en equip confirmi que un traductor ha pogut obrir el projecte en equip, és bona idea assegurar-se que les <a class="link" href="chapter.menus.html#menus.tools.statistics">estadístiques del projecte</a> siguin les mateixes tant per a l'administrador (en el servidor) com per al traductor (localment).</p>
-                        <p>Si no coincideixen, assegureu-vos que els fitxers <code class="filename">filters.xml</code> i <code class="filename">segmentation.conf</code> s'hagin compartit correctament.</p>
+                        <p>Després que el gestor del projecte en equip confirmi que un traductor ha pogut obrir el projecte en equip, és bona idea assegurar-se que les <a class="link" href="chapter.menus.html#menus.tools.statistics">estadístiques del projecte</a> siguin les mateixes tant per al gestor (en el servidor) com per al traductor (localment).</p>
+                        <p>Si no coincideixen, assegureu-vos que els dos projectes utilitzin els mateixos paràmetres de filtres i segmentació comprovant que els fitxers <code class="filename">filters.xml</code> i <code class="filename">segmentation.conf</code> estiguin compartits correctament.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">En cas que calgui treballar en el projecte, baixada del projecte a una ubicació local diferent de la ubicació del projecte en equip local</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">Treball en el projecte amb l'equip</p>
+                     <li class="listitem">
+                        <p>En cas que calgui treballar en el projecte, baixeu el projecte a una ubicació local diferent de la ubicació del projecte en equip original</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">Gestió d'un projecte en equip</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Els projectes en equip inclouen diverses de tasques de gestió que no estan relacionades directament amb la traducció. Els gestors del projecte pot trobar beneficiós (o fins i tot necessari) fer aquestes tasques directament a través del repositori de VCS, especialment en els casos en què el gestor del projecte només actua com a coordinador i no s'involucra en el procés de traducció en si.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">Addició de fitxers</span>
+                     </dt>
+                     <dd>
+                        <p>Encara que l'OmegaT proporciona un mecanisme per afegir fitxers d'origen i de destinació al repositori, el gestor del projecte ha d'afegir qualsevol altre fitxer, com ara diccionaris, glossaris o memòries de traducció de referència, des del repositori de VCS.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Supressió de fitxers</span>
+                     </dt>
+                     <dd>
+                        <p>L'OmegaT no proporciona cap mecanisme per a suprimir fitxers d'un projecte en equip. Si qualsevol fitxer del projecte en equip esdevé innecessari, el gestor del projecte <span class="emphasis">
+                              <em>ha d'utilitzar</em>
+                           </span> el VCS per a suprimir-lo del repositori.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Consulta de les estadístiques del projecte</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">Nota</h3>
+                           <p>Això només s'aplica als fluxos de treball que requereixen que els traductors publiquin els fitxers de destinació traduïts al repositori com a material de lliurament.</p>
+                        </div>
+                        <p>Quan l'OmegaT publica els fitxers de destinació, també publica les estadístiques del projecte en format <code class="filename">.TXT</code> i <code class="filename">.JSON</code>. Això permet al gestor del projecte consultar les estadístiques i, possiblement, automatitzar-ne el processament, sense la necessitat d'obrir l'OmegaT.</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Assignacions de dipòsits</h3>
+                        <h3 class="title">Assignacions de repositoris</h3>
                      </div>
                   </div>
                </div>
@@ -1283,7 +1323,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         <span class="term">mapping repository</span>
                      </dt>
                      <dd>
-                        <p>Nom de la carpeta o del fitxer remot, relatiu a l'URL del dipòsit.</p>
+                        <p>Nom de la carpeta o del fitxer remot, relatiu a l'URL del repositori.</p>
                      </dd>
                      <dt>
                         <span class="term">excludes</span>
@@ -1318,20 +1358,20 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_d'un_projecte_en_equip_de_l'OmegaT&quot;&gt;
 	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
 &lt;/repository&gt;</pre>
-               <p>Tots els continguts de l'URL <code class="filename">https://dipòsit_d'un_projecte_en_equip_de_l'OmegaT</code> s'assignen al projecte local de l'OmegaT</p>
-               <p>Assignació per a projectes en una subcarpeta del dipòsit:</p>
+               <p>Tots els continguts de l'URL <code class="filename">https://repositori_del_projecte_en_equip_de_l'OmegaT</code> s'assignen al projecte local de l'OmegaT</p>
+               <p>Assignació per a projectes en una subcarpeta del repositori:</p>
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_de_tots_els_projectes_en_equip_de_l'OmegaT&quot;&gt;
 	&lt;mapping local=&quot;&quot; repository=&quot;Projecte_En-US_DE&quot;/&gt;
 &lt;/repository&gt;</pre>
-               <p>Tots els continguts de l'URL <code class="filename">https://dipòsit_de_tots_els_projectes_en_equip_de_l'OmegaT/Projecte_En-US_DE</code> s'assignen al projecte local de l'OmegaT</p>
-               <p>Mapatge de fitxers d'origen addicionals d'un repositori remot, amb filtres:</p>
+               <p>Tots els continguts de l'URL <code class="filename">https://repositori_de_tots_els_projectes_en_equip_de_l'OmegaT/Projecte_En-US_DE</code> s'assignen al projecte local de l'OmegaT</p>
+               <p>Assignació de fitxers d'origen addicionals d'un repositori remot, amb filtres:</p>
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://dipòsit_de_tots_els_fitxers_d'origen_del_projecte_en_equip_de_l'OmegaT&quot;&gt;
 	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
     	&lt;includes&gt;readme.bak&lt;/includes&gt;
 	&lt;/mapping&gt;
 &lt;/repository&gt;</pre>
-               <p>Tots els continguts de l'URL <code class="filename">https://dipòsit_de_tots_els_fitxers_d'origen_del_projecte_en_equip_de_l'OmegaT</code> s'assignen a la carpeta de fitxers d'origen del projecte de l'OmegaT, excepte els fitxers amb una extensió <code class="filename">.bak</code>. Ara bé, també s'inclou el fitxer <code class="filename">readme.bak</code>.</p>
+               <p>Tots els continguts de l'URL <code class="filename">https://repositori_de_tots_els_fitxers_d'origen_del_projecte_en_equip_de_l'OmegaT</code> s'assignen a la carpeta de fitxers d'origen del projecte de l'OmegaT, excepte els fitxers amb una extensió <code class="filename">.bak</code>. Ara bé, també s'inclou el fitxer <code class="filename">readme.bak</code>.</p>
                <p>Assignació de fitxers d'origen addicionals des d'Internet:</p>
                <pre class="programlisting">&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
 	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
@@ -1348,7 +1388,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
 	&lt;mapping local=&quot;source/fitxer.txt&quot; repository=&quot;primer/fitxer.txt&quot;/&gt;
 	&lt;mapping local=&quot;source/fitxer2.txt&quot; repository=&quot;segon/fitxer.txt&quot;/&gt;
 &lt;/repository&gt;</pre>
-               <p>El fitxer local <code class="filename">/home/usuari/fitxers/primer/fitxer.txt</code> està assignat al fitxer local <code class="filename">source/fitxer.txt</code> i <code class="filename">/home/usuari/fitxers/segon/fitxer.txt</code> està assignat al fitxer local <code class="filename">source/fitxer2&gt;txt</code>.</p>
+               <p>El fitxer local <code class="filename">/home/usuari/fitxers/primer/fitxer.txt</code> s'assigna al fitxer local <code class="filename">source/fitxer.txt</code> i <code class="filename">/home/usuari/fitxers/segon/fitxer.txt</code> s'assigna al fitxer local <code class="filename">source/fitxer2&gt;txt</code>.</p>
                <div class="warning">
                   <h3 class="title">Avís</h3>
                   <p>El projecte no es carregarà si no existeix un fitxer especificat en una assignació.</p>
@@ -1363,9 +1403,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>El procés anterior descriu el cas més habitual, en què l'administrador del projecte en equip té tot el control del projecte i tots els fitxers (i estadístiques) són idèntics en totes les instàncies del projecte, tant en el servidor com en els sistemes locals dels traductors.</p>
+               <p>El procés anterior descriu el cas més habitual, en què el gestor del projecte té tot el control del projecte i tots els fitxers (i estadístiques) són idèntics en totes les instàncies del projecte, tant en el servidor com en els sistemes locals dels traductors.</p>
                <p>També és possible utilitzar una configuració de projecte en equip en què diversos traductors comparteixin el fitxer <code class="filename">project.save.tmx</code> i només un subconjunt de la resta de fitxers.</p>
-               <p>El procediment bàsic és essencialment el mateix, excepte que l'administrador del projecte en equip no afegeix tots els fitxers al projecte amb control de versions del servidor. Els fitxers restants els copien els mateixos traductors o es defineixen assignacions que sincronitzen fitxers d'altres ubicacions.</p>
+               <p>El procediment bàsic és essencialment el mateix, excepte que el gestor del projecte en equip no afegeix tots els fitxers al projecte amb control de versions del servidor. Els fitxers restants els copien els mateixos traductors o es defineixen assignacions que sincronitzen fitxers d'altres ubicacions.</p>
             </section>
          </section>
          <section class="section" id="how.to.use.team.project">
@@ -1377,12 +1417,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
             </div>
             <p>Els projectes en equip utilitzen mecanismes de sincronització entre els membres del projecte.</p>
-            <p>Quan s'instal·la un projecte en equip de l'OmegaT en un servidor, l'administrador envia als membres la informació que necessiten per a accedir-hi: un URL que indica la ubicació del projecte, o un fitxer <code class="filename">omegat.project</code>.</p>
+            <p>Quan s'instal·la un projecte en equip de l'OmegaT en un servidor, el gestor del projecte envia als membres la informació que necessiten per a accedir-hi: un URL que indica la ubicació del projecte, o un fitxer <code class="filename">omegat.project</code>.</p>
             <p>Una vegada baixat el projecte, s'instal·la localment i només cal obrir-lo localment per a sincronitzar-lo amb el servidor.</p>
-            <p>Les credencials del dipòsit s'emmagatzemen en el fitxer <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a> i es poden suprimir des de les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
-                  <code class="option">Credencials dels dipòsits</code>
+            <p>Les credencials del repositori s'emmagatzemen en el fitxer <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a> i es poden suprimir des de les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
+                  <code class="option">Credencials dels repositoris</code>
                </a>.</p>
-            <p>Com que, per defecte, el projecte se sincronitza cada 3 minuts, de vegades els membres del projecte traduiran o modificaran un segment traduït per un altre membre, però que encara no s'havia sincronitzat. Quan això succeeix, els membres han de seleccionar la traducció adequada.</p>
             <p>Els membres poden traduir i revisar els fitxers per torns. La funció de cerca els permet filtrar la subfinestra «Editor» segons el contingut traduït per una persona determinada o segons el contingut traduït després o abans d'un moment determinat, per exemple.</p>
             <div class="variablelist">
                <dl class="variablelist">
@@ -1400,7 +1439,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <a class="link" href="chapter.menus.html#menus.project.download.team.project">
                                     <span class="guimenuitem">Baixa un projecte en equip...</span>
                                  </a> per a mostrar el quadre de diàleg <span class="guilabel">Baixada d'un projecte en equip</span>.</p>
-                              <p>Indiqueu l'URL proporcionat l'administrador del projecte en equip en el camp <span class="guilabel">URL del dipòsit:</span> de la part superior del quadre de diàleg, i indiqueu una carpeta per al projecte en el camp <span class="guilabel">Carpeta de projecte local nova</span>. Deixeu marcada l'opció <span class="guilabel">Branca per defecte</span>, excepte si l'administrador del projecte us ha donat instruccions per a utilitzar una branca personalitzada.</p>
+                              <p>Indiqueu l'URL proporcionat pel gestor del projecte en el camp <span class="guilabel">URL del repositori:</span> de la part superior del quadre de diàleg i indiqueu una carpeta per al projecte en el camp <span class="guilabel">Carpeta de projecte local nova:</span>. Deixeu marcada l'opció <span class="guilabel">Branca per defecte</span>, excepte si el gestor del projecte us ha donat instruccions per a utilitzar una branca personalitzada.</p>
                            </li>
                            <li class="listitem">
                               <p>Des d'un fitxer <code class="filename">omegat.project</code>
@@ -1417,10 +1456,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                               <em>SSH</em>
                            </span>.</p>
                         <p>Si el servidor depèn de l'autenticació amb nom d'usuari/contrasenya, l'OmegaT us presentarà un quadre de diàleg <span class="guilabel">Autenticació</span> perquè indiqueu el nom d'usuari i la contrasenya quan baixeu el projecte per primera vegada, o més endavant. L'OmegaT recordarà les credencials per a aquest projecte específic, tret que les suprimiu explícitament. Consulteu les preferències de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
-                              <code class="option">Credencials dels dipòsits</code>
+                              <code class="option">Credencials dels repositoris</code>
                            </a> per a conèixer més detalls.</p>
+                        <p>Per a millorar la seguretat, alguns servidors requereixen processos externs per a connectar-s'hi amb un testimoni d'accés independent en comptes d'una contrasenya. Consulteu la documentació del servidor si la vostra contrasenya no funciona.</p>
                         <p>Si el servidor utilitza l'autenticació SSH, assegureu-vos d'actualitzar la configuració de l'SSH per a incloure aquest servidor abans d'intentar baixar el projecte; en cas contrari, obtindreu un error d'autenticació i el projecte no es carregarà.</p>
-                        <p>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</p>
+                        <p>Si utilitzeu diversos projectes en el mateix servidor, només se us demanarà que indiqueu les credencials del servidor una vegada.</p>
                      </div>
                   </dd>
                   <dt>
@@ -1446,6 +1486,56 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      <p>L'OmegaT sincronitza un projecte en equip quan s'obre, es torna a carregar, es tanca o es desa. Això vol dir que la funció de desament automàtic també sincronitza periòdicament les versions locals amb la versió del servidor segons l'interval especificat en la preferència <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Interval de desament de les dades del projecte</code>
                         </a>.</p>
+                     <div class="warning">
+                        <h3 class="title">Avís</h3>
+                        <p>Com que els membres no necessàriament sincronitzen els projectes alhora, de vegades un segment amb una traducció local també tindrà una traducció diferent d'un altre membre disponible al servidor. Quan sincronitzeu el projecte, l'OmegaT farà coincidir les versions local i modificada i us demanarà quina versió de la traducció voleu conservar.</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">Resolució de conflictes de traducció</span>
+                  </dt>
+                  <dd>
+                     <p>Quan l'OmegaT no pot resoldre automàticament les diferències entre una traducció local i la memòria remota, mostra un quadre de diàleg de <span class="guilabel">Combinació</span>.</p>
+                     <p>El quadre de diàleg permet triar entre tres versions del segment traduït:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">La meva</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>La vostra versió local, que encara no s'ha enviat al servidor ni compartit.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Servidor (original)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Versió «base» a partir de la qual s'han creat diverses versions.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Servidor (actualitzat)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Versió compartida per altres membres des de la darrera vegada que heu treballat en el projecte.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>És possible seleccionar les traduccions adequades una per una fent-hi clic per a cada segment mostrat. També és possible seleccionar «totes» les traduccions d'una versió determinada.</p>
+                     <p>
+                        <span class="guibutton">Visualització de llista</span> i <span class="guibutton">Visualització detallada</span> ofereixen visualitzacions alternatives d'un segment i mostren o amaguen diverses propietats del segment.</p>
+                     <p>Un cop seleccionades les traduccions, si feu clic en <span class="guibutton">Fet</span>, les traduccions seleccionades es desaran en el servidor i es compartiran amb la resta de membres de l'equip.</p>
+                     <div class="note">
+                        <h3 class="title">Nota</h3>
+                        <p>Feu que els membres de l'equip treballin en parts diferents d'una traducció per a reduir la possibilitat que hi hagi conflictes de traducció.</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">Configuració del projecte en equip</span>
@@ -1460,15 +1550,15 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <span class="emphasis">
                                     <em>Configuració del projecte bàsica:</em>
                                  </span> llengües d'origen i destinació, lematitzadors i jerarquia de la carpeta del projecte.</p>
-                              <p>En un projecte en equip, els paràmetres de configuració bàsics del projecte local sempre se substitueixen per la configuració del servidor definida originalment per l'administrador del projecte.</p>
+                              <p>En un projecte en equip, els paràmetres de configuració bàsics del projecte local sempre se substitueixen per la configuració del servidor definida originalment pel gestor del projecte.</p>
                            </li>
                            <li class="listitem">
                               <p>
                                  <span class="emphasis">
-                                    <em>Assignacions de dipòsits</em>
+                                    <em>Assignacions de repositoris</em>
                                  </span>
                               </p>
-                              <p>Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de dipòsits">Assignacions de dipòsits</a> per a conèixer més detalls.</p>
+                              <p>Consulteu la guia <a class="link" href="chapter.how.to.html#how.to.setup.team.project.mapping.parameters" title="Assignacions de repositoris">Assignacions de repositoris</a> per a conèixer més detalls.</p>
                               <div class="itemizedlist">
                                  <ul class="itemizedlist" style="list-style-type: circle; ">
                                     <li class="listitem">
@@ -1479,10 +1569,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                     </li>
                                     <li class="listitem">
                                        <p>Si el projecte remot especifica un protocol d'URL i el baixeu mitjançant un protocol diferent, es conservarà la configuració local.</p>
-                                       <p>Per exemple, molts serveis d'allotjament permeten l'accés al mateix dipòsit utilitzant el protocol SSH+Git o https. L'OmegaT respectarà la selecció de protocol local.</p>
+                                       <p>Per exemple, molts serveis d'allotjament permeten l'accés al mateix repositori utilitzant el protocol SSH+Git o https. L'OmegaT respectarà la selecció de protocol local.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Si primer baixeu el projecte remot mitjançant un fitxer <code class="filename">omegat.project</code> proporcionat per l'administrador del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</p>
+                                       <p>Si primer baixeu el projecte remot mitjançant un fitxer <code class="filename">omegat.project</code> proporcionat pel gestor del projecte, l'OmegaT utilitzarà les assignacions en aquest fitxer, si n'hi ha.</p>
                                     </li>
                                     <li class="listitem">
                                        <p>Si hi ha un conflicte entre les versions remotes i locals del fitxer <code class="filename">omegat.project</code> i se sobreescriu la versió local, l'OmegaT crea un fitxer de còpia de seguretat anomenat <code class="filename">omegat.project.AAAAMMDDhhmm.bak</code>. L'OmegaT crea un màxim de deu fitxers de còpia de seguretat i les còpies més antigues se suprimeixen en ordre.</p>
@@ -1503,7 +1593,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <dd>
                      <div class="warning">
                         <h3 class="title">Avís</h3>
-                        <p>Només l'administrador del projecte hauria d'utilitzar <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
+                        <p>Només el gestor del projecte hauria d'utilitzar <a class="link" href="chapter.menus.html#menus.project" title="Projecte">
                               <span class="guimenu">Projecte</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
@@ -1520,13 +1610,13 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                            <span class="guimenuitem">Publica els fitxers de destinació</span>
-                        </a> per a afegir-los al servidor, si l'administrador del projecte us ho ha demanat.</p>
+                        </a> per a afegir-los al servidor, si el gestor del projecte us ho ha demanat. Publicar els fitxers de destinació també puja els fitxers d'estadístiques al servidor.</p>
                   </dd>
                   <dt>
                      <span class="term">Supressió de fitxers</span>
                   </dt>
                   <dd>
-                     <p>Els fitxers d'un projecte en equip no es poden suprimir de l'OmegaT ni del sistema de fitxers local. Es restauraran la pròxima vegada que se sincronitzi el projecte. Aquesta tasca normalment la duu a terme l'administrador del projecte.</p>
+                     <p>Els fitxers d'un projecte en equip no es poden suprimir de l'OmegaT ni del sistema de fitxers local. Es restauraran la pròxima vegada que se sincronitzi el projecte. Aquesta tasca normalment la duu a terme el gestor del projecte.</p>
                   </dd>
                   <dt>
                      <span class="term">Treball fora de línia</span>
@@ -1562,7 +1652,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Estàndard: OmegaT 6.0.0</span>
+                     <span class="term">Estàndard: OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>Es recomana aquesta versió per a l'ús diari.</p>
@@ -1578,7 +1668,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>Els fitxers es poden baixar directament des del lloc web <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Nota</h3>
-               <p>L'OmegaT 6.0.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</p>
+               <p>L'OmegaT 6.0.2 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</p>
                <p>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</p>
                <p>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</p>
                <p>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 8 hauria de funcionar. Consulteu <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Projecte Eclipse Temurin™</a>.</p>
@@ -1609,7 +1699,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">Nota</h3>
                   <p>Tot i que podeu executar l'OmegaT directament des dels fitxers disponibles, també podeu executar l'script <code class="filename">linux-install.sh</code> per a instal·lar l'OmegaT en una ubicació més adequada.</p>
                   <p>En executar l'script haureu d'introduir la contrasenya de <code class="filename">sudo</code>.</p>
-                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_6.0.0</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_6.0.2</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</p>
             </section>
@@ -1717,7 +1807,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                      </div>
                   </div>
                </div>
-               <p>Podeu baixar el codi font de la versió actual directament des de la <a class="ulink" href="https://omegat.org/download" target="_top">pàgina de baixada</a> de l'OmegaT, o bé clonar-lo des dels dipòsits de <a class="ulink" href="https://git.code.sf.net/p/omegat/code" target="_top">Sourceforge</a> o <a class="ulink" href="https://github.com/omegat-org/omegat.git" target="_top">GitHub</a>.</p>
+               <p>Podeu baixar el codi font de la versió actual directament des de la <a class="ulink" href="https://omegat.org/download" target="_top">pàgina de baixada</a> de l'OmegaT, o bé clonar-lo des dels repositoris de <a class="ulink" href="https://git.code.sf.net/p/omegat/code" target="_top">Sourceforge</a> o <a class="ulink" href="https://github.com/omegat-org/omegat.git" target="_top">GitHub</a>.</p>
                <p>Una vegada baixat el codi, obriu un terminal en la carpeta amb el codi font (<code class="filename">omegat-code/</code> si l'heu clonat des de Sourceforge, o <code class="filename">/omegat</code> si l'heu clonat des de GitHub) i escriviu l'ordre següent:</p>
                <pre class="programlisting">./gradlew installDist</pre>
                <p>Això crearà una distribució completa de l'OmegaT en la carpeta <code class="filename">build/install/OmegaT</code>, a punt per a iniciar-la.</p>

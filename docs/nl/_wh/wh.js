@@ -529,7 +529,7 @@ var toc_entries = [
 ["Uw vertaling nakijken","chapter.instant.start.guide.html#introduction.review.the.translation",null],
 ["De vertaalde documenten maken","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
 ["Uw projecten beheren","chapter.instant.start.guide.html#introduction.one.more.thing",null],
-["Een op sneltoetsen gebaseerd werkstroom","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
+["Een op sneltoetsen gebaseerde werkwijze","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
 ]],
 ["How-to…","chapter.how.to.html",[
 ["Problemen oplossen","chapter.how.to.html#how.to.restore.your.data",null],
@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Projectmap","chapter.project.folder.html",[
-["Standaard structuur","chapter.project.folder.html#d0e10458",null],
-["Minimale inhoud","chapter.project.folder.html#d0e10536",null],
+["Standaard structuur","chapter.project.folder.html#d0e10574",null],
+["Minimale inhoud","chapter.project.folder.html#d0e10652",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -612,7 +612,7 @@ var toc_entries = [
 ["Reguliere uitdrukkingen","chapter.appendices.html#app.regex",null],
 ["Woordenlijsten","chapter.appendices.html#app.glossaries",null],
 ["Directionele opmaaktekens","chapter.appendices.html#app.bidi",null],
-["Opdrachten voor nabewerking","chapter.appendices.html#post.processing.commands",null],
+["Opdrachten voor nabewerken","chapter.appendices.html#post.processing.commands",null],
 ["OmegaT sneltoetsen","chapter.appendices.html#app.shortcuts",null],
 ["Configuratiemap","chapter.appendices.html#configuration.folder",null],
 ["Toepassingsmap","chapter.appendices.html#application.folder",null]
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-nbg27zavb3ub-1tsgr4zrbq2qv";
+var storageId = "-jnfp0dx0ulff-1bejhv4n2ymv0";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

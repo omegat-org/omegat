@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Gebruikershandleiding</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -345,7 +345,7 @@
                      <p>Selecteer, in de lijst van beschikbare machinevertalingen in OmegaT, het vak <span class="guilabel">Ingeschakeld</span> voor elke provider waar u toegang voor wilt. Gebruik de knop <span class="guibutton">Configureren</span> om uw gegevens voor authenticatie voor die provider te beheren.</p>
                      <div class="note">
                         <h3 class="title">Opmerking</h3>
-                        <p>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg er voor dat u de juiste inloggegevens hebt voordat u deze functie gebruikt.</p>
+                        <p>De meeste providers vereisen enige soort van registratie, vóórdat hun services kunnen worden gebruikt. Zorg ervoor dat u de juiste inloggegevens hebt, voordat u deze functie gebruikt.</p>
                      </div>
                      <div class="table" id="dialogs.preferences.mt.provider.list.configuration">
                         <div class="table-title">Tabel 3. <code class="option">Vereiste inloggegevens</code>
@@ -531,6 +531,22 @@
                   <dd>
                      <p>Als een term in de woordenlijst meerdere definities heeft, zullen zij op dezelfde regel worden weergegeven.</p>
                   </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.source.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.source.term.length.title">
+                        <code class="option">Sorteer op lengte van de bron-tekstterm</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Als sommige items van de woordenlijst soortgelijk zijn in een bron-tekstterm, en een bevat een andere tekstterm, sorteer dan op de lengte van de brontekst.</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.target.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.target.term.length.title">
+                        <code class="option">Sorteer op lengte van de bron-tekstterm</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Als een term in de woordenlijst meerdere definities heeft, sorteer dan op lengte van de tekst van de definitie.</p>
+                  </dd>
                </dl>
             </div>
          </section>
@@ -544,7 +560,7 @@
                   </div>
                </div>
             </div>
-            <p>Voorkeuren definiëren hier hoe de inhoud van de map <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Woordenboek">Woordenboek</a> die wordt weergegeven in het venster <a class="link" href="chapter.panes.html#panes.dictionary" title="Woordenboeken">
+            <p>De voorkeuren hier definiëren hoe de inhoud van de map <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Woordenboek">Woordenboek</a> zal worden weergegeven in het venster <a class="link" href="chapter.panes.html#panes.dictionary" title="Woordenboeken">
                   <span class="guilabel">Woordenboeken</span>
                </a>.</p>
             <div class="variablelist">
@@ -734,15 +750,15 @@
                </div>
                <br class="example-break" />
                <p>Wanneer u klikt op een taalpatroon in de bovenste helft van het dialoogvenster, zal een lijst met geassocieerde regels worden weergegeven in de onderste helft van het dialoogvenster.</p>
-               <p>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger meten staan dan die standaard zijn.</p>
+               <p>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden in de opgegeven volgorde toegepast. Regels voor specifieke taalregio's zouden hoger moeten staan dan die welke standaard zijn.</p>
                <div class="example" id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
-                  <div class="example-title">Voorbeeld 21. Cascaderende prioriteiten</div>
+                  <div class="example-title">Voorbeeld 21. Stapelende prioriteiten</div>
                   <div class="example-contents">
                      <p>De regels voor <span class="emphasis">
                            <em>FR-CA</em>
                         </span> zouden hoger moeten zijn ingesteld dan die voor <span class="emphasis">
                            <em>FR.*</em>
-                        </span>, die op zijn beurt hoger zou moeten staan dan de algemene set <span class="emphasis">
+                        </span>, die op hun beurt hoger zouden moeten staan dan de algemene set <span class="emphasis">
                            <em>.*</em>
                         </span>.</p>
                      <p>Dus, bij het vertalen vanuit Canadees Frans worden de regels voor Canadees Frans—indien aanwezig—eerst worden toegepast, gevolgd door de regels voor Frans en tenslotte de standaard regels.</p>
@@ -756,7 +772,7 @@
                         <p>Klik op <span class="guibutton">Toevoegen</span>. Er zal een lege regel aan de onderzijde van de tabel verschijnen.</p>
                      </li>
                      <li class="listitem">
-                        <p>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon komt is een reguliere expressie.</p>
+                        <p>Wijzig de naam van de set regels en het taalpatroon naar die van de betrokken taal en het corresponderende taalpatroon. Het taalpatroon is een reguliere expressie.</p>
                      </li>
                      <li class="listitem">
                         <p>Gebruik de knop <span class="guibutton">Naar boven</span> om de prioriteit voor de set in te stellen.</p>
@@ -789,7 +805,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Selecteer het vak <span class="guilabel">Afbreken/Uitzondering </span>niet om een uitzonderingsregel te definiëren.</p>
+                        <p>Selecteer niet het vak <span class="guilabel">Afbreken/Uitzondering </span>om een uitzonderingsregel te definiëren.</p>
                         <p>Specificeer tekstcombinaties die uitzonderingen voor een afbreekregel zijn. <span class="emphasis">
                               <em>Mrs. Dalloway</em>
                            </span> zou, bijvoorbeeld, niet worden gesplitst in twee segmenten, zelfs niet omdat een afbreekregel voor <span class="emphasis">
@@ -802,7 +818,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Selecteer het vak <span class="guilabel">Afbreken/Uitzondering</span> om een afbreekregel te definiëren.</p>
+                        <p>Selecteer het vak <span class="guilabel">Afbreken/Uitzondering</span> om een regel voor afbreken te definiëren.</p>
                         <p>Verdeelt de brontekst in segmenten. Bijvoorbeeld: <span class="emphasis">
                               <em>punt, gevolgd door een spatie</em>
                            </span> definieert over het algemeen het einde van een zin in het Engels.</p>
@@ -868,7 +884,7 @@
             <p>OmegaT heeft een ingebouwde spellingscontrole, maar vereist dat u woordenboeken voor spellingscontrole installeert, gebaseerd op uw doeltalen.</p>
             <div class="warning">
                <h3 class="title">Waarschuwing</h3>
-               <p>OmegaT zal het woordenboek voor de  taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Talen">
+               <p>OmegaT zal het woordenboek voor de taal gebruiken dat dezelfde naam heeft als de ingestelde taalcode in de projecteigenschap <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Talen">
                      <span class="guilabel">Talen</span>
                   </a>. Een woordenboek<span class="emphasis">
                      <em>FR-FR</em>
@@ -971,7 +987,7 @@
                   </div>
                </div>
             </div>
-            <p>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</p>
+            <p>Externe zoekacties zijn ofwel zoekacties op het web of lokale opdrachten, die de tekenreeks, die is geselecteerd in het venster Bewerken, als een parameter hebben. De zoekacties op het web worden geopend in de standaard browser en de opdrachten zijn equivalent aan de items die zijn gestart op de opdrachtregel.</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt id="dialogs.preferences.external.search.enable.project.specific.commands">
@@ -1020,7 +1036,7 @@
                         </div>
                      </div>
                      <br class="example-break" />
-                     <p>Opdrachten worden geopend op de opdrachtregel. Het <span class="guilabel">Scheidingsteken</span>definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code class="code">|</code>.</p>
+                     <p>Opdrachten worden geopend op de opdrachtregel. Het <span class="guilabel">Scheidingsteken</span> definieert het scheidingsteken tussen de parameters voor de opdracht. Het standaard scheidingsteken is <code class="code">|</code>.</p>
                      <div class="example" id="dialogs.preferences.external.search.items.command.example">
                         <div class="example-title">Voorbeeld 23. Voorbeeld opdracht</div>
                         <div class="example-contents">
@@ -1052,7 +1068,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Gebruik deze optie tijdelijk voor delen van de vertaling die niet veel transformatie vereisen.</p>
+                     <p>Gebruik deze optie voor delen van de vertaling die niet veel transformatie vereisen.</p>
                   </dd>
                   <dt id="dialogs.preferences.editor.leave.the.segment.empty">
                      <span class="term" id="dialogs.preferences.editor.leave.the.segment.empty.title">
@@ -1198,12 +1214,12 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Vertaalgeheugens, geplaatst in <a class="link" href="chapter.project.folder.html#project.folder.tm.auto">tm/auto</a> en <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a> kunnen het geheugen van het project automatisch vullen. Segmenten die op die tijd een geautomatiseerde vertaling krijgen kunnen worden gemarkeerd in het venster <span class="guilabel">Bewerken</span> door <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                     <p>Vertaalgeheugens, geplaatst in <a class="link" href="chapter.project.folder.html#project.folder.tm.auto">tm/auto</a> en <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a> kunnen het geheugen van het project automatisch vullen. Segmenten, die op dat moment een geautomatiseerde vertaling hebben ontvangen, kunnen worden gemarkeerd in het venster <span class="guilabel">Bewerken</span> door <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
                            <span class="guimenu">Weergave</span>
                         </a>.<a class="link" href="chapter.menus.html#menus.view.mark.auto.populated.segments">
                            <span class="guimenuitem">Segmenten van Automatisch vergroten van vertalingen markeren</span>
                         </a> te gebruiken.</p>
-                     <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.use.tm.reuse.tm" title="TM's opnieuw gebruiken">TM's opnieuw gebruiken</a> how-to voor details.</p>
+                     <p>Bekijk de how-to <a class="link" href="chapter.how.to.html#how.to.use.tm.reuse.tm" title="TM's opnieuw gebruiken">TM's opnieuw gebruiken</a> voor details.</p>
                   </dd>
                   <dt id="dialogs.preferences.editor.save.orgin.of.translation">
                      <span class="term" id="dialogs.preferences.editor.save.orgin.of.translation.title">
@@ -1407,7 +1423,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar logingegevens vraagt, als u toegang wilt.</p>
+                     <p>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt dat OmegaT u naar inloggegevens vraagt, als u toegang wilt.</p>
                   </dd>
                </dl>
             </div>
@@ -1667,7 +1683,7 @@ ${filePath}&gt;</pre>
                      </span>
                   </dt>
                   <dd>
-                     <p>standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</p>
+                     <p>Standaard wordt alleen het huidige segment in vet letterbeeld weergegeven.</p>
                   </dd>
                   <dt id="dialog.preferences.view.display.active.source.segment.in.bold">
                      <span class="term" id="dialog.preferences.view.display.active.source.segment.in.bold.title">
@@ -1696,7 +1712,7 @@ ${filePath}&gt;</pre>
                      </span>
                   </dt>
                   <dd>
-                     <p>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer die de originele inhoud van de tag bevat als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</p>
+                     <p>Tags van OmegaT zijn beveiligde tekst die opmaak-specifieke tags in het brondocument weergeven. OmegaT geeft een helptip weer, die de originele inhoud van de tag bevat, als u met de muis over een tag van OmegaT gaat. Als die inhoud origineel was omsloten door gepaarde tags, kunnen de gepaarde tags worden verwijderd uit de helptip, voor betere leesbaarheid.</p>
                   </dd>
                   <dt id="dialog.preferences.view.use.custom.templates.for.modification.info">
                      <span class="term" id="dialog.preferences.view.use.custom.templates.for.modification.info.title">
@@ -1817,12 +1833,12 @@ ${filePath}&gt;</pre>
                   <dd>
                      <div class="warning">
                         <h3 class="title">Waarschuwing</h3>
-                        <p>Opdrachten voor <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">lokale nabewerking</a> zijn om veiligheidsredenen standaard uitgeschakeld.</p>
+                        <p>Opdrachten voor <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">lokaal nabewerken</a> zijn om veiligheidsredenen standaard uitgeschakeld.</p>
                      </div>
-                     <p>U kunt ook lokale opdrachten voor nabewerking definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">
+                     <p>U kunt ook lokale opdrachten voor nabewerken definiëren die alleen beschikbaar zijn voor een bepaald project. Dergelijke opdrachten worden gedefinieerd in het venster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">
                            <code class="option">Lokale opdrachten voor nabewerken</code>
                         </a>.</p>
-                     <p>Opdrachten voor lokale opdrachten voor nabewerking worden opgeslagen in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</p>
+                     <p>Opdrachten voor lokale opdrachten voor nabewerken worden opgeslagen in het bestand <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">omegat.project</a>. Schakel deze optie alleen in als u de bron van dat bestand vertrouwt.</p>
                      <div class="note">
                         <h3 class="title">Opmerking</h3>
                         <p>Lokale opdrachten worden uitgevoerd vóór globale opdrachten.</p>

@@ -241,10 +241,10 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
-        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><link linkend="dialogs.preferences.glossary.ignore.hits.with.very.different.case"> </link><option>Ignore matches with very different case (e.g., USER vs user)</option></term>
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><link linkend="dialogs.preferences.glossary.ignore.hits.with.very.different.case"> </link><option>Ignore matches using very different casing (e.g., USER vs user)</option></term>
 
         <listitem>
-          <para>Matches with very different case are not displayed.</para>
+          <para>Do not show matches when terms contain many characters that have a different case.</para>
         </listitem>
       </varlistentry>
 
@@ -258,26 +258,24 @@
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
-        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><link linkend="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term"> </link><option>Merge alternate definition of the same term</option></term>
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><link linkend="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term"> </link><option>Merge alternative definitions of the same term</option></term>
 
         <listitem>
-          <para>If a glossary item has multiple definitions, they will be
-          displayed on the same line.</para>
+          <para>Show all definitions on the same line for glossary items with multiple definitions.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
-        <term id="dialogs.preferences.glossary.sort.by.source.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.source.term.length"> </link><option>Sort by source text term length</option></term>
+        <term id="dialogs.preferences.glossary.sort.by.source.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.source.term.length"> </link><option>Sort by source term length</option></term>
 		<listitem>
-		  <para>If some glossary items are similar in a source term text,
-		  and one contains another term text, sort by a length of source text.</para>
+		  <para>This option sorts entries starting with the same characters or prefix by the length of the source text, with shorter terms listed first.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
-        <term id="dialogs.preferences.glossary.sort.by.target.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.target.term.length"> </link><option>Sort by source text term length</option></term>
+        <term id="dialogs.preferences.glossary.sort.by.target.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.target.term.length"> </link><option>Sort by definition length</option></term>
 		<listitem>
-		  <para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
+		  <para>This option sorts entries containing multiple definitions by the length of the definitions, with shorter definitions shown first.</para>
 		</listitem>
 	  </varlistentry>
         

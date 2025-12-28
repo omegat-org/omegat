@@ -429,7 +429,6 @@ public final class StaticUtils {
         if (!Files.exists(userScriptsDir)) {
             try {
                 Files.createDirectories(userScriptsDir);
-                Log.logInfoRB("SU_SCRIPT_DIR_CREATE", userScriptsDir.toString());
             } catch (IOException e) {
                 // fallback
                 Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
@@ -450,9 +449,7 @@ public final class StaticUtils {
                 // ensure default script files installed
                 File defaultScripts = Paths.get(installDir(), SCRIPTS_DIR).toFile();
                 FileUtils.copyDirectory(defaultScripts, userScriptsPath.toFile());
-                Log.logInfoRB("SU_SCRIPT_DIR_COPY", userScriptsPath.toString());
             } catch (IOException e) {
-                Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
                 // fallback to app install dir which contains default scripts
                 userScriptsDir = Paths.get(installDir() + SCRIPTS_DIR);
                 Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());

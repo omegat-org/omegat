@@ -334,6 +334,9 @@ public final class StaticUtils {
 
     /**
      * Get application data directory.
+     * macOS:   ~/Library/Application Support/OmegaT
+     * Windows: %APPDATA%/OmegaT
+     * Linux:   ~/.local/share/OmegaT
      * @return directory path to store application data.
      */
     public static String getApplicationDataDir() {
@@ -401,16 +404,17 @@ public final class StaticUtils {
 
     /**
      * Returns the user scripts directory for each OS.
+     * It respects user configuration, then the default.
      * macOS:   ~/Library/Application Support/OmegaT/scripts
      * Windows: %APPDATA%/OmegaT/scripts
-     * Linux:   ~/.config/omegat/scripts
+     * Linux:   ~/.local/share/OmegaT/scripts
      */
     public static String getUserScriptsDir() {
-        // If the script directory has already been determined, return it
         return getUserScriptsPath().toString();
     }
 
     private static Path getUserScriptsPath() {
+        // If the script directory has already been determined, return it
         if (userScriptsDir != null) {
             return userScriptsDir;
         }
@@ -436,6 +440,9 @@ public final class StaticUtils {
         return userScriptsDir;
     }
 
+    /**
+     * Ensure user scripts directory exists and contains scripts.
+     */
     public static void ensureUserScriptsDir() {
         Path userScriptsPath = getUserScriptsPath();
         if (!Files.exists(userScriptsPath.resolve("application_startup"))) {
@@ -446,13 +453,24 @@ public final class StaticUtils {
                 Log.logInfoRB("SU_SCRIPT_DIR_COPY", userScriptsPath.toString());
             } catch (IOException e) {
                 Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
-                // fallback to app install dir
+                // fallback to app install dir which contains default scripts
                 userScriptsDir = Paths.get(installDir() + SCRIPTS_DIR);
                 Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
             }
         }
     }
 
+    /**
+     * Determines and returns the path to the 'script' directory.
+     * <p>
+     * This directory is used to communicate user script and OmegaT core.
+     * If the directory does not exist, it attempts to create it. In case of
+     * failure to create or access the script directory, it defaults to the
+     * configuration directory path.
+     *
+     * @return The absolute path to the script directory, including a trailing
+     *         path separator.
+     */
     public static String getScriptDir() {
         // If the script directory has already been determined, return it
         if (scriptDir != null) {

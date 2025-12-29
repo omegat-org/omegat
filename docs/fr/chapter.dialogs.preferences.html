@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -276,7 +276,7 @@
                   </dd>
                   <dt id="dialogs.preferences.general.always.confirm.quit">
                      <span class="term" id="dialogs.preferences.general.always.confirm.quit.title">
-                        <code class="option">Quitter toujours confirmé</code>
+                        <code class="option">Confirmer avant de quitter</code>
                      </span>
                   </dt>
                   <dd>
@@ -315,9 +315,9 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Enable this option to automatically fetch machine translations from the providers you have enabled and configured. If you leave this option disabled, machine translations are only fetched when you use <a class="link" href="chapter.menus.html#menus.edit" title="Édition">
+                     <p>Activez cette option pour récupérer automatiquement les traductions des moteurs que vous avez activés et configurés. Si cette option est désactivée, les traductions automatiques ne seront récupérées que lorsque vous utiliserez <a class="link" href="chapter.menus.html#menus.edit" title="Édition">
                            <span class="guimenu">Édition</span>
-                        </a> 
+                        </a>
                         <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt">
                            <span class="guimenuitem">Remplacer par une traduction automatique</span> 
                            <span class="keycap">
@@ -326,7 +326,7 @@
                               <strong>M</strong>
                            </span>
 	  
-                        </a> in the current segment. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</p>
+                        </a> dans le segment actuel. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</p>
                   </dd>
                   <dt id="dialogs.preferences.mt.untranslated.segments.only">
                      <span class="term" id="dialogs.preferences.mt.untranslated.segments.only.title">
@@ -470,7 +470,7 @@
                                     <span class="guimenu">Édition</span>
                                  </a>
                                  <a class="link" href="chapter.menus.html#menus.edit.replace.with.source">
-                                    <span class="guimenuitem">Remplacer par la source</span> 
+                                    <span class="guimenuitem">Remplacer par le texte source</span> 
                                     <span class="keycap">
                                        <strong>C</strong>
                                     </span>+<span class="keycap">
@@ -517,11 +517,11 @@
                   </dd>
                   <dt id="dialogs.preferences.glossary.glossary.layout">
                      <span class="term" id="dialogs.preferences.glossary.glossary.layout.title">
-                        <code class="option">Mise en page</code>
+                        <code class="option">Disposition</code>
                      </span>
                   </dt>
                   <dd>
-                     <p>Sélectionnez une mise en page pour le volet des glossaires. Des mises en page supplémentaires peuvent être ajoutées sous forme d’extensions.</p>
+                     <p>Sélectionnez une disposition pour le volet des glossaires. Des dispositions supplémentaires peuvent être ajoutées sous forme d’extensions.</p>
                   </dd>
                   <dt id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
                      <span class="term" id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title">
@@ -530,6 +530,23 @@
                   </dt>
                   <dd>
                      <p>Si un élément de glossaire comporte plusieurs définitions, celles-ci seront affichées sur la même ligne.</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.source.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.source.term.length.title">
+                        <code class="option">Trier par longueur de terme source</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>If some glossary items are similar in a source term text,
+				  and one contains another term text, sort by a length of source text.</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.target.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.target.term.length.title">
+                        <code class="option">Trier par longueur de terme source</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>If a glossary item has multiple definitions, sort by a length of definition text.</p>
                   </dd>
                </dl>
             </div>
@@ -642,7 +659,7 @@
                   <dl class="variablelist">
                      <dt>
                         <span class="term">
-                           <code class="option">Appliquer cette police aux données tabulaires (fichiers de projet, statistiques, etc.)</code>
+                           <code class="option">Afficher les données tabulaires (liste des fichiers, statistiques, etc.) avec cette police</code>
                         </span>
                      </dt>
                      <dd>
@@ -749,7 +766,7 @@
                   </div>
                </div>
                <br class="example-break" />
-               <p>Pour créer un nouvel ensemble de règles :</p>
+               <p>Pour créer un nouvel ensemble de règles :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -789,7 +806,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Pour définir une règle d’exception, ne cochez pas la case <span class="guilabel">Segmentation/Exception </span>.</p>
+                        <p>Pour définir une exception, laisser la case <span class="guilabel">Segmentation</span> non cochée.</p>
                         <p>Indiquez les combinaisons de textes qui constituent des exceptions à une règle de segmentation. Par exemple, <span class="emphasis">
                               <em>Mrs. Dalloway</em>
                            </span> ne doit pas être divisé en deux segments, même si une règle de césure pour un <span class="emphasis">
@@ -906,7 +923,7 @@
                   </dd>
                   <dt id="dialog.preferences.spellchecker.url">
                      <span class="term" id="dialog.preferences.spellchecker.url.title">
-                        <code class="option">URL des dictionnaires orthographiques téléchargeables :</code>
+                        <code class="option">URL des dictionnaires orthographiques téléchargeables :</code>
                      </span>
                   </dt>
                   <dd>
@@ -1042,7 +1059,7 @@
                   </div>
                </div>
             </div>
-            <p>En entrant dans un segment vide :</p>
+            <p>En entrant dans un segment vide :</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt id="dialogs.preferences.editor.insert.the.source.text">
@@ -1051,7 +1068,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Utilisez cette option temporairement pour les parties de la traduction qui ne nécessitent pas beaucoup de transformation.</p>
+                     <p>Utilisez cette option pour les parties de la traduction qui ne nécessitent pas beaucoup de transformation.</p>
                   </dd>
                   <dt id="dialogs.preferences.editor.leave.the.segment.empty">
                      <span class="term" id="dialogs.preferences.editor.leave.the.segment.empty.title">
@@ -1091,16 +1108,16 @@
                         <div class="example-title">Exemple 24. Conversion des chiffres des correspondances</div>
                         <div class="example-contents">
                            <p>
-                              <span class="token">2001</span> dans la source :</p>
+                              <span class="token">2001</span> dans la source :</p>
                            <p>
 			  
                            </p>
                            <pre class="programlisting">[[<span class="token">2001</span>年]]、ドイツの永住権を取得。</pre>
                            <p>
-                              <span class="token">2003</span> dans la correspondance partielle :</p>
+                              <span class="token">2003</span> dans la correspondance partielle :</p>
                            <pre class="programlisting">[[<span class="token">2003</span>年]]、ドイツの永住権を取得。
 [[<span class="token">2003</span>]], elle acquiert la nationalité allemande.</pre>
-                           <p>Lorsque la correspondance est insérée, OmegaT convertit <span class="token">2003</span> en <span class="token">2001</span> :</p>
+                           <p>Lorsque la correspondance est insérée, OmegaT convertit <span class="token">2003</span> en <span class="token">2001</span> :</p>
                            <pre class="programlisting">[[<span class="token">2001</span>]], elle acquiert la nationalité allemande.</pre>
                         </div>
                      </div>
@@ -1360,7 +1377,7 @@
                      <p>De même, utilisez <strong class="userinput">
                            <code>&lt;/ ?[^&gt;]+&gt;</code>
                         </strong> pour vous assurer que les balises HTML (ou similaires) introduites dans le texte source sont conservées sans modification dans la traduction.</p>
-                     <p>Utilisez des parenthèses et <code class="literal">|</code> pour qu’OmegaT prenne en compte les deux balises : <strong class="userinput">
+                     <p>Utilisez des parenthèses et <code class="literal">|</code> pour qu’OmegaT prenne en compte les deux balises : <strong class="userinput">
                            <code>(\d+)|(&lt;/ ?[^&gt;]+&gt;)</code>
                         </strong>.</p>
                      <p>Voir l’annexe <a class="link" href="chapter.appendices.html#app.regex" title="Expressions régulières">Expressions régulières</a> pour en savoir plus.</p>
@@ -1426,7 +1443,7 @@
                <dl class="variablelist">
                   <dt id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
                      <span class="term" id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title">
-                        <code class="option">Trier les correspondances partielles par :</code>
+                        <code class="option">Trier les correspondances partielles par :</code>
                      </span>
                   </dt>
                   <dd>
@@ -1473,11 +1490,11 @@
                   </dt>
                   <dd>
                      <p>Changez la façon dont les correspondances sont affichées en utilisant des variables prédéfinies.</p>
-                     <p>La valeur par défaut est :</p>
+                     <p>La valeur par défaut est :</p>
                      <pre class="programlisting">${id} ${fuzzyFlag}${sourceText} ${targetText}
 &lt;${score}/${noStemScore}/${adjustedScore}%
 ${filePath}&gt;</pre>
-                     <p>Voici une alternative possible :</p>
+                     <p>Voici une alternative possible :</p>
                      <p>
 			
                      </p>
@@ -1704,14 +1721,14 @@ ${filePath}&gt;</pre>
                      </span>
                   </dt>
                   <dd>
-                     <p>Les informations relatives à la modification du segment sont affichées au-dessus du segment. Le paramètre par défaut indique qui a modifié la traduction pour la dernière fois et quand :</p>
+                     <p>Les informations relatives à la modification du segment sont affichées au-dessus du segment. Le paramètre par défaut indique qui a modifié la traduction pour la dernière fois et quand :</p>
                      <div class="example" id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
                         <div class="example-title">Exemple 25. Affichage par défaut</div>
                         <div class="example-contents">
                            <p>
 			  
                            </p>
-                           <pre class="programlisting">Dernière modification de la traduction par suzume le 6 octobre 2022 à 14 :18 :27
+                           <pre class="programlisting">Dernière modification de la traduction par suzume le 6 octobre 2022 à 14 :18 :27
 [[チューリッヒ大学]]大学院博士課程修了。
 [[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</pre>
                            <p>
@@ -1765,7 +1782,7 @@ ${filePath}&gt;</pre>
                   </dt>
                   <dd>
                      <p>Permet de sélectionner l’intervalle entre les enregistrements automatiques des données du projet. Voir la section <a class="link" href="chapter.how.to.html#how.to.restore.your.data.automatic.backup" title="Sauvegardes automatiques">Sauvegardes automatiques</a> pour en savoir plus.</p>
-                     <p>Modifier l’intervalle par défaut (3 minutes) selon les caractéristiques du projet :</p>
+                     <p>Modifier l’intervalle par défaut (3 minutes) selon les caractéristiques du projet :</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">

@@ -541,7 +541,7 @@ var toc_entries = [
 ["Lancer OmegaT","chapter.how.to.html#how.to.running.omegat",null]
 ]],
 ["Volets","chapter.panes.html",[
-["Présentation par défaut","chapter.panes.html#panes.default.layout",null],
+["Disposition par défaut","chapter.panes.html#panes.default.layout",null],
 ["Les principes","chapter.panes.html#panes.principles",null],
 ["\n                              Éditeur\n                           ","chapter.panes.html#panes.editor",null],
 ["\n                              Correspondances\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
@@ -568,7 +568,7 @@ var toc_entries = [
 ["\n                              Fichiers source\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
 ["\n                              Recherche textuelle\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
 ["\n                              Remplacement de texte\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
-["\n                              Aligner des fichiers\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              Aligner deux fichiers\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
 ["\n                              Scripts\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
 ["\n                        Préférences\n                     ","chapter.dialogs.preferences.html",[
@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Mises à jour\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Racine du projet","chapter.project.folder.html",[
-["Structure par défaut","chapter.project.folder.html#d0e10453",null],
-["Contenu minimal","chapter.project.folder.html#d0e10531",null],
+["Structure par défaut","chapter.project.folder.html#d0e10569",null],
+["Contenu minimal","chapter.project.folder.html#d0e10647",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],

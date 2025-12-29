@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,12 +55,12 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10453">Structure par défaut</a>
+                     <a href="chapter.project.folder.html#d0e10569">Structure par défaut</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10531">Contenu minimal</a>
+                     <a href="chapter.project.folder.html#d0e10647">Contenu minimal</a>
                   </span>
                </li>
                <li>
@@ -105,7 +105,7 @@
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e10453">
+         <section class="section" id="d0e10569">
             <div class="titlepage">
                <div>
                   <div>
@@ -167,7 +167,7 @@
                      <p>créer les fichiers traduits dans un dossier partagé en dehors du dossier du projet, dans un endroit facilement accessible à votre réviseur, ou</p>
                   </li>
                   <li class="listitem">
-                     <p>utiliser un dossier de glossaire provenant d’un projet distinct mais connexe, ou</p>
+                     <p>utiliser un dossier des glossaires provenant d’un projet distinct mais connexe, ou</p>
                   </li>
                   <li class="listitem">
                      <p>utiliser un dossier de mémoire de traduction de référence que vous avez créé pour des projets connexes, etc.</p>
@@ -177,14 +177,14 @@
             <p>La création d’un projet lui confère une hiérarchie de base, mais sa structure finale n’est pas figée. Vous pouvez à tout moment supprimer ou ajouter des fichiers et des dossiers au projet.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers existants dans un nouveau dossier :</p>
+               <p>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers existants dans un nouveau dossier :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Tout dossier contenant un fichier <code class="filename">omegat.project</code> valide sera reconnu comme projet de traduction par OmegaT (même si des ajustements manuels sont nécessaires par la suite).</p>
                      </li>
                      <li class="listitem">
-                        <p>Si le dossier est un dépôt vide et que le fichier <code class="filename">omegat.project</code> contient des informations sur le dépôt distant, le projet sera reconnu par OmegaT comme un projet d’équipe :</p>
+                        <p>Si le dossier est un dépôt vide et que le fichier <code class="filename">omegat.project</code> contient des informations sur le dépôt distant, le projet sera reconnu par OmegaT comme un projet d’équipe :</p>
                         <pre class="programlisting">…
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
@@ -200,7 +200,7 @@
                </div>
             </div>
          </section>
-         <section class="section" id="d0e10531">
+         <section class="section" id="d0e10647">
             <div class="titlepage">
                <div>
                   <div>
@@ -314,7 +314,7 @@
                </a>, mais vous pouvez également ajouter des correspondances dans des langues autres que la langue cible. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                   <code class="option">Inclure les correspondances dans d’autres langues</code>
                </a> pour en savoir plus.</p>
-            <p>Le dossier peut contenir un nombre illimité de sous-dossiers, dont certains ont des fonctions spéciales :</p>
+            <p>Le dossier peut contenir un nombre illimité de sous-dossiers, dont certains ont des fonctions spéciales :</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt id="project.folder.tm.auto">
@@ -389,7 +389,7 @@
                               <p>Effectuez une modification mineure n’importe où dans le projet et enregistrez-la. Cela met à jour la mémoire de traduction du projet.</p>
                            </li>
                            <li class="listitem">
-                              <p>Prenez une décision concernant la pérennité des segments renforcés :</p>
+                              <p>Prenez une décision concernant la pérennité des segments renforcés :</p>
                               <div class="itemizedlist">
                                  <ul class="itemizedlist" style="list-style-type: disc; ">
                                     <li class="listitem">
@@ -447,7 +447,7 @@
             </div>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions. Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <code class="filename">tm/mt/penalty-010</code> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</p>
+               <p>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions. Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <code class="filename">tm/mt/penalty-010</code> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</p>
             </div>
          </section>
          <section class="section" id="project.folder.exported.tm">
@@ -475,7 +475,7 @@
                   <span class="guilabel">Dictionnaires</span>
                </a> pour en savoir plus.</p>
             <p>OmegaT prend en charge les dictionnaires au format StarDict ou Lingvo DSL. Vous pouvez trouver certains dictionnaires sur le <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/" target="_top">Wiki OmegaT</a>.</p>
-            <p>Pour installer les dictionnaires :</p>
+            <p>Pour installer les dictionnaires :</p>
             <div class="orderedlist">
                <ol class="orderedlist" type="1">
                   <li class="listitem">
@@ -547,7 +547,7 @@
                      <span class="term" id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</span>
                   </dt>
                   <dd>
-                     <p>Ce fichier est une sauvegarde de <code class="filename">projet_save.tmx</code> et est automatiquement recréé chaque fois que <code class="filename">projet_save.tmx</code> a été modifié : soit après avoir utilisé <a class="link" href="chapter.menus.html#menus.project" title="Projet">
+                     <p>Ce fichier est une sauvegarde de <code class="filename">project_save.tmx</code> et est automatiquement recréé chaque fois que <code class="filename">project_save.tmx</code> a été modifié : soit après avoir utilisé <a class="link" href="chapter.menus.html#menus.project" title="Projet">
                            <span class="guimenu">Projet</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.save">
@@ -614,10 +614,17 @@
                      <p>Si vous disposez déjà d’une collection de mots que vous souhaitez que le correcteur orthographique ignore ou accepte, il vous suffit de les enregistrer dans des fichiers texte portant les noms correspondants et de copier ces fichiers dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> de votre projet en cours.</p>
                   </dd>
                   <dt id="project.folder.omegat.segmentation">
-                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.srx</span>
                   </dt>
                   <dd>
-                     <p>Ce fichier contient les règles de segmentation spécifiques au projet.</p>
+                     <p>Ce fichier contient les règles de segmentation spécifiques au projet dans le format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>. </p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Si un fichier <code class="filename">segmentation.conf</code> d’une version plus ancienne est présent, OmegaT le convertira automatiquement.</p>
+                     </div>
+                     <p>
+		  
+                     </p>
                   </dd>
                   <dt id="project.folder.omegat.filters">
                      <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>

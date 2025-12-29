@@ -9,9 +9,9 @@
 
   <para>Vous pouvez ouvrir plusieurs fenêtres de remplacement de texte en même temps.</para>
 
-  <para>Cliquez sur les flèches du menu déroulant des champs <guilabel>Rechercher :</guilabel> ou <guilabel>Remplacer par :</guilabel> pour accéder aux dix dernières saisies.</para>
+  <para>Cliquez sur les flèches du menu déroulant des champs <guilabel>Rechercher :</guilabel> ou <guilabel>Remplacer par :</guilabel> pour accéder aux dix dernières saisies.</para>
 
-  <para>Saisissez la chaine de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <guilabel>Remplacer par :</guilabel> et cliquez sur <guibutton>Recherche</guibutton>, ou appuyez sur <keycap>Entrée</keycap> si le curseur se trouve toujours dans le champ.</para>
+  <para>Saisissez la chaine de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <guilabel>Remplacer par :</guilabel> et cliquez sur <guibutton>Recherche</guibutton>, ou appuyez sur <keycap>Entrée</keycap> si le curseur se trouve toujours dans le champ.</para>
 
   <para>Les résultats de la recherche sont affichés en caractères bleus gras et les chaines modifiées sont affichées en orange pour indiquer le résultat du remplacement.</para>
 
@@ -30,11 +30,11 @@
 	<para>Ici, aucun remplacement n’a encore été effectué.</para>
   </note>
 
-  <para>Cliquez sur l’une des options suivantes :</para>
+  <para>Cliquez sur l’une des options suivantes :</para>
 
   <itemizedlist>
     <listitem>
-      <para><guibutton>Remplacer tout</guibutton> : remplace chaque occurrence (après l’affichage d’une fenêtre de confirmation indiquant le nombre d’occurrences).</para>
+      <para><guibutton>Remplacer tout</guibutton> : remplace chaque occurrence (après l’affichage d’une fenêtre de confirmation indiquant le nombre d’occurrences).</para>
     </listitem>
 
     <listitem>
@@ -45,11 +45,11 @@
 
   <itemizedlist>
     <listitem>
-      <para><guibutton>Fermer</guibutton> : fermer la fenêtre sans apporter de modifications.</para>
+      <para><guibutton>Fermer</guibutton> : fermer la fenêtre sans apporter de modifications.</para>
     </listitem>
   </itemizedlist>
 
-  <para>La fenêtre de remplacement de texte dispose de ses propres menus :</para>
+  <para>La fenêtre de remplacement de texte dispose de ses propres menus :</para>
  
   <itemizedlist>
     <listitem>
@@ -65,7 +65,7 @@
     </listitem>
 
     <listitem>
-      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Remplacer par la source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>) : remplace le contenu du champ de recherche par celui du segment source actuel.</para>
+      <para><guimenu>Édition</guimenu> &gt; <guimenuitem>Remplacer par le texte source</guimenuitem> (<keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>) : remplace le contenu du champ de recherche par celui du segment source actuel.</para>
     </listitem>
 
     <listitem>
@@ -93,7 +93,7 @@
 		  <para>Il s’agit de l’équivalent d’une recherche web entre guillemets.</para>
 
 		  <note>
-			<para>Les caractères génériques <code>*</code> et <code>?</code> peuvent être utilisés dans les recherches exactes :</para>
+			<para>Les caractères génériques <code>*</code> et <code>?</code> peuvent être utilisés dans les recherches exactes :</para>
 
 			<itemizedlist>
 			  <listitem>
@@ -155,7 +155,7 @@
 
 		  <variablelist>
 			<varlistentry>
-			  <term>Ignorer la différence entre pleine et demi-largeur de caractère</term>
+			  <term>Ignorer la largeur des caractères</term>
 			  <listitem>
 				<para>Affiche les résultats qui correspondent à la fois aux formes pleine et demi-largeur (caractères CJC) des caractères dans les termes recherchés.</para>
 			  </listitem>
@@ -174,7 +174,7 @@
 
 	<para>Double-cliquer sur un segment pour l’ouvrir dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
-    <para>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</para>
+    <para>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</para>
 	
 	<variablelist>
 	  <varlistentry>

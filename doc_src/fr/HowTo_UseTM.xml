@@ -166,7 +166,7 @@
 		<para>Cette méthode fonctionne également pour le partage de glossaires lorsque le glossaire modifiable du projet (avec un nom différent de celui par défaut pour éviter d’écraser le fichier) est situé dans un dossier de glossaire partagé. Voir l’annexe <link linkend="app.glossaries" endterm="app.glossaries.title"/> pour en savoir plus.</para>
 
 		<note>
-		  <para>Cette méthode de partage fonctionne bien lorsque le décalage entre les mises à jour de la TMX n’a pas une grande importance : par exemple, si les données peuvent être envoyées à la révision seulement quelques fois par jour.</para>
+		  <para>Cette méthode de partage fonctionne bien lorsque le décalage entre les mises à jour de la TMX n’a pas une grande importance : par exemple, si les données peuvent être envoyées à la révision seulement quelques fois par jour.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -186,7 +186,7 @@
 	<para>Faites preuve de prudence lorsque vous placez un projet entier dans un système de partage de fichiers tel que DropBox, OneCloud et autre.</para>
 	<para><emphasis>Ces systèmes ne sont pas conçus pour suivre les modifications internes d’un fichier donné.</emphasis></para>
 	<para>Un projet OmegaT est un ensemble complexe de fichiers. De tels systèmes ne sont pas toujours en mesure de fournir la version la plus récente de vos données, et peuvent même bloquer certains fichiers sans raison apparente, voire corrompre des fichiers liés à des projets d’équipe.</para>
-	<para>Assurez-vous d'avoir correctement testé la présentation de votre projet et de procéder à une sauvegarde séparée de vos données avant de les partager dans un tel système.</para>
+	<para>Assurez-vous d’avoir correctement testé la structure de votre projet et réalisé une sauvegarde séparée de vos données avant de partager celles-ci dans ce type de système.</para>
   </warning>
 </section>
 

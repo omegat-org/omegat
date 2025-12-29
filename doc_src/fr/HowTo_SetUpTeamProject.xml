@@ -3,7 +3,7 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
-  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des <emphasis>logiciels de gestion de version</emphasis> : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
+  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>Git</emphasis> ou <emphasis>SVN</emphasis> (que nous appellerons collectivement <emphasis>logiciel de gestion de version</emphasis> dans le reste de ce document). </para>
 
   <para>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</para>
 
@@ -17,32 +17,34 @@
 	<para>Voici les étapes à suivre afin de mettre en place un projet en équipe :</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</para>
+      <listitem>
+		<para>Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</para>
 
 		<para>Cela peut normalement se faire par l’intermédiaire d’une interface web, d’une application graphique, ou en ligne de commande. Consultez la documentation de votre serveur ou de votre service d’hébergement pour en savoir plus.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
+	  <listitem>
+		<para>Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
 
 		<note>
-		  <para>Cette version locale contient votre copie du projet OmegaT qui servira de <emphasis>gestionnaire de projet</emphasis>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</para>
+		  <para>Cette version locale contient la copie du projet OmegaT qui servira à la <emphasis>gestionnaire de projet</emphasis>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</para>
 		</note>
 
-		<para>Le dépôt local est utilisé pour ajouter le projet initial au serveur, et peut aussi servir à effectuer des tâches de maintenance qui ne peuvent pas être réalisées directement dans OmegaT, comme la suppression de fichiers.</para>
+		<para>Cette version locale est utilisée pour ajouter le projet initial à la version sur le serveur, ainsi que pour certaines tâches d’entretien. Voir la section <link linkend="how.to.manage.team.project" endterm="how.to.manage.team.project.title"/> pour en savoir plus.</para>
+
 		<para>Nous vous recommandons d’éviter d’utiliser ce dossier pour des tâches de traduction. Si vous avez besoin d’effectuer des traductions ou des tâches de révisions sur ce projet, utilisez OmegaT pour télécharger une copie séparée du projet en équipe et travaillez à partir de celle-ci. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">Remplissez la copie locale vide avec un vrai projet OmegaT.</para>
+	  <listitem>
+		<para>Remplissez la copie locale vide avec un vrai projet OmegaT.</para>
 		<itemizedlist>
 		  <listitem>
 			<para>Créez la structure du projet</para>
 
-			<para>Si vous créez un nouveau projet vide, vous pouvez suivre la <link linkend="introduction.create.and.open.new.project">procédure via interface graphique</link>, ou directement le créer avec la commande : <command>java -jar OmegaT.jar team init &lt;langue source&gt; &lt;langue cible&gt;</command></para>
+			<para>Si vous créez un nouveau projet vide, vous pouvez suivre la <link linkend="introduction.create.and.open.new.project">procédure via interface graphique</link>, ou directement le créer avec la commande : <!-- TODO we’ll need to update the CL when we have integrated the
+				 new CL framework --> <command>java -jar OmegaT.jar team init &lt;langue source&gt; &lt;langue cible&gt;</command></para>
 
-			<para>Cette commande permet aussi d’enregistrer automatiquement le projet dans le logiciel de gestion de version.</para>
+			<para>Cette commande effectue également l’enregistrement automatique du projet dans le logiciel de gestion de version.</para>
 		  </listitem>
 		  <listitem>
 			<para>Choisissez les paramètres appropriés</para>
@@ -57,65 +59,65 @@
 
 			<para>Si vous convertissez un projet existant, veillez à supprimer tous les fichiers du projet dont vous n’avez pas besoin ou que vous ne souhaitez pas envoyer au serveur avant de passer à la prochaine étape.</para>
 
-			<para>Copiez les fichiers à traduire dans le dossier source/ et utilisez votre client SVN ou Git, ou une ligne de commande, pour les ajouter et les publier dans le dépôt. Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> pour ajouter les fichiers à partir d’OmegaT.</para>
+			<para>Copiez les fichiers à traduire dans le dossier source/ et utilisez votre client de logiciel de gestion de version, ou une ligne de commande, pour les ajouter et les publier dans le dépôt. Utilisez <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/> pour ajouter des fichiers source à partir d’OmegaT.</para>
 
-			<para>Vous devez utiliser votre client SVN ou Git, ou la ligne de commande, pour ajouter et publier tout dictionnaire, glossaire, mémoire de traduction, ou autre fichier que vous souhaitez inclure dans le projet.</para>
+			<para>Vous devez utiliser votre client logiciel de gestion de version, ou la ligne de commande, pour ajouter et publier tout dictionnaire, glossaire, mémoire de traduction, ou autre fichier que vous souhaitez inclure dans le projet.</para>
 
-			<para>Cette étape peut être réalisée avant d’enregistrer et de publier le projet pour la première fois, et peut aussi être utilisée pour ajouter de nouveaux fichiers, ou même mettre à jour les fichiers existants après la création du projet.</para>
+			<para>Cette étape peut être réalisée soit avant soit après l’enregistrement et la publication du projet pour la première fois.</para>
 		  </listitem>
 		</itemizedlist>
 
 		<note>
           <para>Dans les projets en équipe qui utilisent une simple mise en correspondance entre le dépôt local et le dépôt distant (par défaut), <emphasis role="bold">et seulement dans ces projets</emphasis>, les fichiers source et cible peuvent être modifiés localement et envoyés vers le serveur en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> et <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/>.</para>
 
-          <para>L’administrateur du projet en équipe doit utiliser le logiciel de gestion de version local pour <emphasis role="bold">modifier</emphasis> ou <emphasis role="bold">supprimer</emphasis> ces fichiers. Certaines extensions peuvent faciliter cette tâche. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
+          <para>La gestionnaire du projet en équipe doit utiliser le logiciel de gestion de version local pour <emphasis role="bold">modifier</emphasis> ou <emphasis role="bold">supprimer</emphasis> ces fichiers. Certaines extensions peuvent faciliter cette tâche. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">Enregistrez les fichiers du projet dans le logiciel de gestion de version local</para>
+	  <listitem>
+		<para>Enregistrez les fichiers du projet dans le logiciel de gestion de version local</para>
 
 		<para>Si vous avez créé le projet à partir de l’interface graphique, vous devrez alors explicitement l’ajouter au logiciel de gestion de version (<command>add</command> dans SVN et Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">Placez les fichiers enregistrés dans le serveur d’hébergement</para>
+	  <listitem>
+		<para>Placez les fichiers enregistrés dans le serveur d’hébergement</para>
 
 		<para>Enfin, publiez votre projet sur le serveur distant (<command>commit</command> sur SVN, <command>commit</command> et <command>push</command> sur Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">Donnez les droits d’accès à votre équipe.</para>
+	  <listitem>
+		<para>Donnez les droits d’accès à votre équipe.</para>
 
 		<note>
 		  <para>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</para>
 		</note>
 
-		<para>Une fois le projet prêt et téléchargé sur le serveur, l’administrateur du projet en équipe doit configurer l’accès des membres de l’équipe de traduction. L’accès à un projet en équipe nécessite les informations suivantes :</para>
+		<para>Une fois le projet prêt et téléchargé sur le serveur, la gestionnaire du projet doit configurer l’accès des membres de l’équipe de traduction. L’accès à un projet en équipe nécessite les informations suivantes :</para>
 
 		<orderedlist>
           <listitem>
 			<para>Projets sur un service d’hébergement</para>
 
-			<para>Les membres de l’équipe de traduction doivent créer un compte pour ce service et envoyer leur identifiant à l’administrateur du projet en équipe.</para>
+			<para>Les membres de l’équipe de traduction doivent créer un compte pour ce service et envoyer leur identifiant à la gestionnaire du projet.</para>
 
-			<para>L’administrateur va alors accorder à ces comptes un accès en écriture au dépôt.</para>
+			<para>Cette dernière va alors accorder à ces comptes un accès en écriture au dépôt.</para>
           </listitem>
 
           <listitem>
 			<para>Projets sur un serveur autohébergé</para>
 
-			<para>Si le serveur est autohébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, l’administrateur du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</para>
+			<para>Si le serveur est autohébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, la gestionnaire du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</para>
 
-			<para>Après avoir créé les comptes, l’administrateur doit envoyer aux membres leurs identifiants individuels.</para>
+			<para>Après avoir créé les comptes, cette dernière devra envoyer aux membres leurs identifiants individuels.</para>
           </listitem>
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">Demandez à tout le monde de télécharger le projet à partir d’OmegaT</para>
+	  <listitem>
+		<para>Le projet devra alors être téléchargé par les membres à partir d’OmegaT.</para>
 
-		<para>Les administrateurs ont deux options pour envoyer l’emplacement du projet aux membres :</para>
+		<para>La gestionnaire du projet a deux options pour envoyer l’emplacement du projet aux membres :</para>
 
 		<orderedlist>
           <listitem>
@@ -127,19 +129,44 @@
           </listitem>
 		</orderedlist>
 
-		<para>Une fois que l’administrateur du projet en équipe a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <link linkend="menus.tools.statistics">statistiques du projet</link> soient les mêmes pour l’administrateur (sur le serveur) et pour les membres (localement).</para>
+		<para>Une fois que la gestionnaire du projet a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <link linkend="menus.tools.statistics">statistiques du projet</link> soient les mêmes pour celle-ci (sur le serveur) et pour les membres (localement).</para>
 
-		<para>Si elles ne correspondent pas, vérifiez que les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont partagés correctement.</para>
+		<para>Si elles ne correspondent pas, il faudra vérifier que les deux projets utilisent les mêmes filtres et préférences de segmentation en s’[assurant que <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont partagés correctement.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</para>
-	  </listitem>
-
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">Vous pouvez maintenant travailler sur le projet avec votre équipe.</para>
+	  <listitem>
+		<para>Si la gestionnaire doit également travailler sur le projet, il est préférable qu’elle télécharge le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</para>
 	  </listitem>
 	</orderedlist>
+  </section>
+
+  <section id="how.to.manage.team.project">
+  <title id="how.to.manage.team.project.title">Gestion d’un projet en équipe</title>
+
+  <para>Les projets en équipe nécessitent l’exécution de tâches de gestion qui ne sont pas directement en lien avec la traduction. La gestionnaire du projet trouvera plus avantageux, et même parfois nécessaire, d’exécuter ces tâches directement dans le dépôt du logiciel de gestion de version, en particulier dans les cas où elle n’a q’un rôle de coordinatrice et n’est pas associée au travail de traduction lui-même.</para>
+    <variablelist>
+	  <varlistentry>
+		<term>Ajouter des fichiers</term>
+		<listitem>
+		  <para>Bien qu’OmegaT mette à disposition un mécanisme pour ajouter des fichiers à traduire et des fichiers traduits au dépôt, la gestionnaire du projet devra ajouter les autres fichiers (dictionnaires, glossaires, mémoire de référence), à partir du logiciel de gestion de version.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>Supprimer des fichiers</term>
+	    <listitem>
+		  <para>OmegaT ne met pas à disposition un mécanisme pour effacer des fichiers d’un projet en équipe. Si des fichiers partagés deviennent inutiles, la gestionnaire du projet <emphasis>devra</emphasis> utiliser le logiciel de gestion de version pour les retirer du projet.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Consulter les données du projet</term>
+		<listitem>
+		  <note>
+			<para>Cette fonction ne concerne que les procédures où l’on demande aux traductaires d’ajouter les fichiers traduits au dépôt en tant que produits livrés.</para>
+		  </note>
+		  <para>Quand OmegaT ajoute les fichiers traduits, les données du projet sont également ajoutées au dépôt dans les formats <filename>.txt</filename> et <filename>.json</filename>. Ceci permet à la gestionnaire du projet de consulter ces données et éventuellement d’automatiser leur traitement sans avoir besoin d’ouvrir OmegaT.</para>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
@@ -211,7 +238,7 @@
 
 	<para>La totalité du contenu du <filename>https://dépôt_de_tous_les_projets_OmegaT_en_équipe/Projet_En-US_FR</filename> est mise en correspondance avec le projet OmegaT local.</para>
 
-	<para>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe&quot;&gt;
+	<para>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe&quot;&gt;
 	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
     	&lt;includes&gt;readme.bak&lt;/includes&gt;
@@ -251,10 +278,10 @@
   <section id="how.to.setup.team.project.selective.sharing">
 	<title id="how.to.setup.team.project.selective.sharing.title">Partage sélectif</title>
 
-	<para>Le processus ci-dessus décrit le scénario le plus courant, dans lequel l’administrateur du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</para>
+	<para>Le processus ci-dessus décrit le scénario le plus courant, dans lequel la gestionnaire du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</para>
 
 	<para>Il est également possible d’utiliser une configuration de projet en équipe dans laquelle plusieurs membres partagent le fichier <filename>project_save.tmx</filename>, et seulement un sous-ensemble d’autres fichiers.</para>
 
-	<para>La procédure de base est essentiellement la même, sauf que l’administrateur du projet en équipe n’ajoute pas chaque fichier au projet géré par version sur le serveur. Les fichiers restants sont copiés par les membres, ou bien des mises en correspondance permettant de synchroniser des fichiers à partir d’autres emplacements sont définies.</para>
+	<para>La procédure de base est essentiellement la même, sauf que la gestionnaire du projet en équipe n’ajoute pas chaque fichier au projet géré par version sur le serveur. Les fichiers restants sont copiés par les membres, ou bien des mises en correspondance permettant de synchroniser des fichiers à partir d’autres emplacements sont définies.</para>
   </section>
 </section>

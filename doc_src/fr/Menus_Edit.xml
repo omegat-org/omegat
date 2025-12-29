@@ -54,7 +54,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title"><guimenuitem>Remplacer par la source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>
+      <term id="menus.edit.replace.with.source.title"><guimenuitem>Remplacer par le texte source</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Remplace l’ensemble du segment cible par le segment source.</para>

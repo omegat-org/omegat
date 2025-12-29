@@ -45,7 +45,7 @@
 		  </row>
 		  <row>
 			<entry>${glossaryRoot}</entry>
-			<entry>Chemin complet vers le dossier du glossaire</entry>
+			<entry>Chemin complet vers le dossier des glossaires</entry>
 		  </row>
 		  <row>
 			<entry>${tmRoot}</entry>
@@ -109,7 +109,7 @@
   </section>
   
   <example id="post.processing.commands.example">
-	  <title id="post.processing.commands.example.title">Exemple simple de commande de posttraitement :</title>
+	  <title id="post.processing.commands.example.title">Exemple simple de commande de posttraitement :</title>
 	  <variablelist>
 		<varlistentry>
 		  <term>Ouvrir le dossier cible sous Linux</term>

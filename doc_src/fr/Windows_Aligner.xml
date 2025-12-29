@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Aligner des fichiers</guilabel></title>
+  <title id="windows.aligner.title"><guilabel>Aligner deux fichiers</guilabel></title>
 
   <para>Utilisez <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> pour accéder à cet outil.</para>
 
@@ -12,7 +12,7 @@
   </warning>
 
 
-  <para>L’alignement est le processus de création d’une mémoire de traduction bilingue à partir d’une paire de documents monolingues déjà traduits. L’alignement du contenu des dossiers se fait en quatre étapes :</para>
+  <para>L’alignement est le processus de création d’une mémoire de traduction bilingue à partir de deux documents monolingues déjà traduits. L’alignement du contenu des dossiers se fait en quatre étapes :</para>
 
   <orderedlist>
 	<listitem>
@@ -40,19 +40,19 @@
 
   <para>Après avoir sélectionné la langue et les fichiers, cliquez sur le bouton <guibutton>OK</guibutton> pour faire apparaitre la fenêtre <guilabel>Aligner</guilabel>, qui montre les résultats de l’alignement automatique.</para>
 
-  <para>La partie principale de la fenêtre est divisée en trois colonnes :</para>
+  <para>La partie principale de la fenêtre est divisée en trois colonnes :</para>
   
   <itemizedlist>
     <listitem>
-      <para><guilabel>Conserver</guilabel> : les paires de segments des lignes dont la case est cochée sont conservées dans le fichier de mémoire de traduction. Les lignes non cochées sont écartées.</para>
+      <para><guilabel>Conserver</guilabel> : les paires de segments des lignes dont la case est cochée sont conservées dans le fichier de mémoire de traduction. Les lignes non cochées sont écartées.</para>
     </listitem>
 
     <listitem>
-      <para><guilabel>Source</guilabel> : Les segments du texte original.</para>
+      <para><guilabel>Source</guilabel> : Les segments du texte original.</para>
     </listitem>
 
     <listitem>
-      <para><guilabel>Cible</guilabel> : les segments du texte traduit.</para>
+      <para><guilabel>Cible</guilabel> : les segments du texte traduit.</para>
     </listitem>
   </itemizedlist>
 
@@ -61,39 +61,39 @@
 
     <para>Dans cette étape, la partie inférieure de la fenêtre présente divers paramètres et options que vous pouvez modifier si l’alignement initial peut être amélioré. Elle affiche également un résultat <guilabel>Score moyen</guilabel> pour l’alignement. En règle générale, plus le score est bas, plus l’alignement est précis. La modification d’un paramètre recalcule immédiatement l’alignement, ce qui vous permet d’essayer rapidement différentes combinaisons pour obtenir les meilleurs résultats.</para>
 
-    <para>Les paramètres et options disponibles sont les suivants :</para>
+    <para>Les paramètres et options disponibles sont les suivants :</para>
 
     <variablelist>
 	  <title>Paramètres</title>
 	  <varlistentry>
-        <term>Mode de comparaison  :</term>
+        <term>Mode de comparaison :</term>
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Globale</guilabel> : ce mode compare les documents dans leur ensemble.</para>
+              <para><guilabel>Par tas</guilabel> : ce mode compare les documents dans leur ensemble.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Par segments</guilabel> : ce mode compare les documents segment par segment. Il n’est affiché que lorsqu’il est applicable pour les fichiers en cours d’alignement.</para>
+              <para><guilabel>Par analyse syntaxique</guilabel> : ce mode compare les documents segment par segment. Il n’est affiché que lorsqu’il est applicable pour les fichiers en cours d’alignement.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Identifiant</guilabel> : ce mode s’applique aux fichiers constitués d’entrées <literal>clé = valeur</literal>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparait que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</para>
+              <para><guilabel>Identifiant</guilabel> : ce mode s’applique aux fichiers constitués d’entrées <literal>clé = valeur</literal>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparait que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</para>
             </listitem>
           </itemizedlist>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Algorithme :</term>
+        <term>Algorithme :</term>
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Viterbi</guilabel> : Les algorithmes par défaut utilisés pour aligner les documents.</para>
+              <para><guilabel>Viterbi</guilabel> : Les algorithmes par défaut utilisés pour aligner les documents.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Avant-Arrière</guilabel> : Un algorithme alternatif qui peut être utilisé pour aligner les documents.</para>
+              <para><guilabel>Progressif-rétrogressif</guilabel> : Un algorithme alternatif qui peut être utilisé pour aligner les documents.</para>
             </listitem>
           </itemizedlist>
 
@@ -102,15 +102,15 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Calcul :</term>
+        <term>Calcul :</term>
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Normal</guilabel> : La répartition statistique par défaut utilisée pour aligner les documents.</para>
+              <para><guilabel>Normal</guilabel> : La répartition statistique par défaut utilisée pour aligner les documents.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Poisson</guilabel> : Une répartition statistique alternative qui peut être utilisée pour aligner les documents.</para>
+              <para><guilabel>Poisson</guilabel> : Une répartition statistique alternative qui peut être utilisée pour aligner les documents.</para>
             </listitem>
           </itemizedlist>
 
@@ -119,15 +119,15 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Compteur :</term>
+        <term>Compteur :</term>
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Caractère</guilabel> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui n’utilisent pas d’espace pour délimiter les mots.</para>
+              <para><guilabel>Caractère</guilabel> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui n’utilisent pas d’espace pour délimiter les mots.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Mot</guilabel> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui utilisent une espace pour délimiter les mots.</para>
+              <para><guilabel>Mot</guilabel> : L’unité de base utilisée pour déterminer la taille des segments dans les langues qui utilisent une espace pour délimiter les mots.</para>
             </listitem>
           </itemizedlist>
 
@@ -153,7 +153,7 @@
       </varlistentry>
 
       <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">Mettre en évidence</term>
+        <term id="windows.aligner.adjust.highlight.title">Surligner</term>
         <listitem>
 		  <para>Décochez la case pour désactiver la mise en évidence.</para>
 
@@ -194,23 +194,23 @@
 
     <para>Vous pouvez également accéder à l’option <guilabel>Mise en évidence</guilabel> et à la boite de dialogue permettant de modifier le masque à partir du menu <guimenu>Affichage</guimenu>, et aux autres options à partir du menu <guimenu>Options</guimenu>.</para>
 
-    <para>De plus, le menu <guimenu>Fichier</guimenu> propose les commandes suivantes :</para>
+    <para>De plus, le menu <guimenu>Fichier</guimenu> propose les commandes suivantes :</para>
 	
     <itemizedlist>
       <listitem>
-        <para><guimenuitem>Enregistrer la TMX…</guimenuitem> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</para>
+        <para><guimenuitem>Enregistrer la TMX…</guimenuitem> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</para>
       </listitem>
 	  
       <listitem>
-        <para><guimenuitem>Réinitialiser</guimenuitem> : Cette commande rétablit la valeur par défaut de tous les paramètres. Cette commande peut également être exécutée en appuyant sur le bouton <guibutton>Réinitialiser</guibutton> situé en bas à droite de la fenêtre ou en appuyant sur <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo></para>
+        <para><guimenuitem>Réinitialiser</guimenuitem> : Cette commande rétablit la valeur par défaut de tous les paramètres. Cette commande peut également être exécutée en appuyant sur le bouton <guibutton>Réinitialiser</guibutton> situé en bas à droite de la fenêtre ou en appuyant sur <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo></para>
       </listitem>
 
       <listitem>
-        <para><guimenuitem>Recharger</guimenuitem> : Cette commande recharge le fichier à partir du disque. Vous pouvez utiliser cette commande pour analyser et aligner à nouveau les fichiers si vous avez dû en modifier le contenu.</para>
+        <para><guimenuitem>Recharger</guimenuitem> : Cette commande recharge le fichier à partir du disque. Vous pouvez utiliser cette commande pour analyser et aligner à nouveau les fichiers si vous avez dû en modifier le contenu.</para>
       </listitem>
 
       <listitem>
-        <para><guimenuitem>Fermer</guimenuitem> : Cette option permet de fermer la boite de dialogue <guilabel>Aligner</guilabel>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
+        <para><guimenuitem>Fermer</guimenuitem> : Cette option permet de fermer la boite de dialogue <guilabel>Aligner</guilabel>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
@@ -284,14 +284,14 @@
       </varlistentry>
 
 	  <varlistentry>
-        <term>Marquer accepté (<keycap>A</keycap>)</term>
+        <term>Colorer les segments acceptés (<keycap>A</keycap>)</term>
         <listitem>
           <para>Cette commande permet de confirmer que l’alignement des segments de la ligne ou du bloc de lignes sélectionné est correct. La colonne <guilabel>Conserver</guilabel> apparait en vert.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
-        <term>Marquer à vérifier (<keycap>R</keycap>)</term>
+        <term>Colorer les segments à vérifier (<keycap>R</keycap>)</term>
         <listitem>
           <para>Cette commande permet d’identifier une ligne ou un bloc de lignes dont l’alignement des segments est incertain. La colonne <guilabel>Conserver</guilabel> apparait en rouge.</para>
         </listitem>
@@ -300,7 +300,7 @@
       <varlistentry>
         <term>Effacer la marque (<keycap>C</keycap>)</term>
         <listitem>
-          <para>Utilisez cette commande pour supprimer une ou plusieurs marques définies par les commandes <guilabel>Marquer accepté</guilabel> ou <guilabel>Marquer à vérifier</guilabel>.</para>
+          <para>Utilisez cette commande pour supprimer une ou plusieurs marques définies par les commandes <guilabel>Colorer les segments acceptés</guilabel> ou <guilabel>Colorer les segments à vérifier</guilabel>.</para>
         </listitem>
       </varlistentry>
 
@@ -312,7 +312,7 @@
       </varlistentry>
 
 	  <varlistentry>
-        <term>Conserver tout</term>
+        <term>Tout conserver</term>
         <listitem>
           <para>Cette commande permet de cocher la case <guilabel>Conserver</guilabel> pour toutes les lignes.</para>
         </listitem>

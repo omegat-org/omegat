@@ -4,13 +4,13 @@
       <title>Introduction à OmegaT</title>
       <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
-      <link href="index_.html" rel="prev" title="OmegaT 6.0.0 - Manuel d'utilisation" />
+      <link href="index_.html" rel="prev" title="OmegaT 6.0.2 - Manuel d’utilisation" />
       <link href="chapter.how.to.html" rel="next" title="Guides pratiques" />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -207,7 +207,7 @@
                   <h3 class="title">Note</h3>
                   <p>Vous n’avez pas encore utilisé OmegaT, mais vous vous souvenez des fois où vous traduisiez dans votre traitement de texte et où un problème informatique a fait disparaitre la traduction du livre sur lequel vous travailliez depuis six mois, ou le rapport que vous deviez rendre dans une heure.</p>
                   <p>Vous envisagez d’utiliser OmegaT, mais…</p>
-                  <p>Comment OmegaT peut-il aider à éviter de tels problèmes  ?</p>
+                  <p>Comment OmegaT peut-il aider à éviter de tels problèmes  ?</p>
                   <p>Pas de panique. Grâce à la conception robuste d’OmegaT, il est <span class="emphasis">
                         <em>très peu</em>
                      </span> probable que vous ayez perdu plus de quelques minutes de travail.</p>
@@ -226,7 +226,7 @@
                   </div>
                </div>
             </div>
-            <p>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <span class="emphasis">
+            <p>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <span class="emphasis">
                   <em>utiliser</em>
                </span> un élément de menu, ou <span class="emphasis">
                   <em>cliquer</em>
@@ -317,13 +317,13 @@
                      <div class="example" id="example.introduction.note.on.shortcuts">
                         <div class="example-title">Exemple 1. Les modificateurs de touches sont identifiés par une seule lettre.</div>
                         <div class="example-contents">
-                           <p>Sous Windows et Linux : <span class="keycap">
+                           <p>Sous Windows et Linux : <span class="keycap">
                                  <strong>Contrôle</strong>
                               </span>+<span class="keycap">
                                  <strong>E</strong>
                               </span>
                            </p>
-                           <p>Sous macOS : <span class="keycap">
+                           <p>Sous macOS : <span class="keycap">
                                  <strong>commande</strong>
                               </span>+<span class="keycap">
                                  <strong>E</strong>
@@ -331,7 +331,7 @@
                            </p>
                            <p>
                               <span class="bold">
-                                 <strong>Dans ce manuel  :</strong>
+                                 <strong>Dans ce manuel  :</strong>
                               </span>
                               <span class="keycap">
                                  <strong>C</strong>
@@ -374,15 +374,21 @@
                   </span>
 	  
                </a> et sélectionnez un dossier vide ou créez-en un nouveau avec le nom de votre projet.</p>
+            <div class="warning">
+               <h3 class="title">Avertissement</h3>
+               <p>OmegaT doit pouvoir modifier le dossier dans lequel vous avez créé le projet. Si vous souhaitez installer votre projet dans un disque partagé, assurez-vous que vous le créez dans un dossier que vous avez au préalable créé à cet effet.</p>
+            </div>
             <p>Un projet OmegaT est simplement un ensemble de dossiers contenant toutes les ressources par défaut.</p>
             <p>La boite de dialogue <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Propriétés du projet">
                   <span class="guilabel">Propriétés du projet</span>
                </a> s’ouvre une fois que vous avez nommé votre projet.</p>
             <p>Dans cette boite de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <span class="guibutton">OK</span> pour continuer.</p>
-            <p>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> (y compris les codes de langue à trois lettres) dans le champ de saisie.</p>
+            <p>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code dans le champ de saisie.</p>
             <div class="warning">
                <h3 class="title">Avertissement</h3>
-               <p>Assurez-vous que les bonnes langues sont saisies et que tous les autres emplacements nécessitant un code de langue correspondent au code que vous indiquez ici. Voir la section <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Langues">
+               <p>OmegaT ne vérifie pas la validité des codes de langue que vous choisissez. Assurez-vous que les deux codes de langue sont <span class="emphasis">
+                     <em>différents</em>
+                  </span>, qu’ils correspondent à vos besoins dans OmegaT, et que tous les autres emplacements nécessitant des codes de langue correspondent aux codes que vous indiquez ici. Voir la section <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Langues">
                      <span class="guilabel">Langues</span>
                   </a> pour en savoir plus.</p>
             </div>
@@ -456,7 +462,7 @@
             <div class="warning">
                <h3 class="title">Avertissement</h3>
                <p>OmegaT ne reconnait pas les langues automatiquement et n’utilise un dictionnaire que si son nom correspond au code de la langue cible.</p>
-               <div class="example" id="d0e346">
+               <div class="example" id="d0e349">
                   <div class="example-title">Exemple 2. Code de la langue cible du projet et nom du dictionnaire de vérification orthographique</div>
                   <div class="example-contents">
                      <p>Si la langue cible du projet est <span class="bold">
@@ -465,7 +471,7 @@
                            <strong>fr_fr</strong>
                         </span> ou <span class="bold">
                            <strong>fr-fr</strong>
-                        </span>, vous pouvez soit :</p>
+                        </span>, vous pouvez soit :</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
@@ -518,7 +524,7 @@
             <p>Les segments d’un paragraphe peuvent être segmentés davantage ou « non segmentés  » (fusionnés). Ajoutez une règle de segmentation pour les segmenter davantage, ou une règle d’exception pour les fusionner avec la partie dont ils ont été séparés. Voir l’annexe <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentation">Segmentation</a> pour en savoir plus.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>Le caractère espace standard est souvent utilisé comme limite de segment. Vous pouvez suivre les étapes ci-dessous pour fusionner deux sections de texte séparées par un caractère espace :</p>
+               <p>Le caractère espace standard est souvent utilisé comme limite de segment. Vous pouvez suivre les étapes ci-dessous pour fusionner deux sections de texte séparées par un caractère espace :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -561,12 +567,12 @@
                   </div>
                </div>
             </div>
-            <p>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</p>
+            <p>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</p>
             <div class="figure" id="default.omegat.layout">
-               <div class="figure-title">Figure 1. Présentation par défaut d’OmegaT sur macOS</div>
+               <div class="figure-title">Figure 1. Disposition par défaut d’OmegaT sur macOS</div>
                <div class="figure-contents">
                   <div class="mediaobject">
-                     <img alt="Présentation par défaut d’OmegaT sur macOS" src="images/defaultOmegaTLayout.png" />
+                     <img alt="Disposition par défaut d’OmegaT sur macOS" src="images/defaultOmegaTLayout.png" />
                   </div>
                </div>
             </div>
@@ -631,7 +637,7 @@
             </div>
             <p>Utilisez les différentes options du menu <a class="link" href="chapter.menus.html#menus.view" title="Affichage">
                   <span class="guimenu">Affichage</span>
-               </a> et déplacez les différents <a class="link" href="chapter.panes.html" title="Volets">volets</a> pour obtenir la présentation qui vous convient le mieux.</p>
+               </a> et déplacez les différents <a class="link" href="chapter.panes.html" title="Volets">volets</a> pour obtenir la disposition qui vous convient le mieux.</p>
          </section>
          <section class="section" id="introduction.translate.the.segments.one.by.one">
             <div class="titlepage">
@@ -666,7 +672,7 @@
             <div class="note">
                <h3 class="title">Note</h3>
                <p>OmegaT n’associe pas aux segments traduits des statuts différents. Soit un segment est traduit, soit il ne l’est pas.</p>
-               <p>Si vous avez besoin d’un processus de révision spécifique, vous pouvez par exemple :</p>
+               <p>Si vous avez besoin d’un processus de révision spécifique, vous pouvez par exemple :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -735,7 +741,7 @@
                   <span class="guimenu">Affichage</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
-                  <span class="guimenuitem">Souligner les correspondances de glossaire</span>
+                  <span class="guimenuitem">Souligner les correspondances des glossaires</span>
                </a> et <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Saisie automatique">
                   <span class="guilabel">Saisie automatique</span>
                </a> pour gérer les correspondances avec le glossaire.</p>
@@ -756,7 +762,7 @@
                      <strong>F</strong>
                   </span>
 	  
-               </a> vous permet de rechercher des termes, des morceaux de phrases, etc. dans l’ensemble du projet, en utilisant des recherches exactes, par mots-clés ou par expressions régulières. Vous pouvez également restreindre le champ de la recherche en fonction d’informations telles que l’auteur ou la date.</p>
+               </a> vous permet de rechercher des termes, des morceaux de phrases, etc. dans l’ensemble du projet, en utilisant des recherches exactes, par mots-clés ou par expressions régulières. Vous pouvez également restreindre le champ de la recherche en fonction d’informations telles que l’auteurice ou la date.</p>
             <p>Vous pouvez également vous concentrer uniquement sur les résultats en les filtrant dans l’Éditeur. Voir la section <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Recherche textuelle">
                   <span class="guilabel">Recherche textuelle</span>
                </a> pour en savoir plus.</p>
@@ -807,7 +813,7 @@
                </div>
             </div>
             <p>Si les documents que vous traduisez utilisent du gras, de l’italique ou d’autres éléments décoratifs, OmegaT convertit ces éléments en balises qui entourent le texte décoré. Ces fichiers comprennent par exemple les fichiers LibreOffice, les fichiers HTML et les fichiers Microsoft Office. Les documents contiennent souvent aussi des balises qui n’ont rien à voir avec les décorations, mais qui sont néanmoins importantes dans les fichiers sources (et, par conséquent, dans les fichiers traduits).</p>
-            <p>Voici à quoi peut ressembler une phrase dans son format d’origine :</p>
+            <p>Voici à quoi peut ressembler une phrase dans son format d’origine :</p>
             <div class="example" id="example.source.segment.with.decorations">
                <div class="example-title">Exemple 3. Phrase avec une mise en forme décorative</div>
                <div class="example-contents">
@@ -819,7 +825,7 @@
                </div>
             </div>
             <br class="example-break" />
-            <p>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</p>
+            <p>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</p>
             <div class="example" id="example.how.decorations.are.displayed">
                <div class="example-title">Exemple 4. Affichage des décorations dans OmegaT</div>
                <div class="example-contents">
@@ -924,7 +930,7 @@
                   </div>
                </div>
             </div>
-            <p>N’hésitez pas à modifier la présentation des <a class="link" href="chapter.panes.html" title="Volets">Volets</a> et les options <a class="link" href="chapter.menus.html#menus.view" title="Affichage">
+            <p>N’hésitez pas à modifier la disposition des <a class="link" href="chapter.panes.html" title="Volets">Volets</a> et les options <a class="link" href="chapter.menus.html#menus.view" title="Affichage">
                   <span class="guimenu">Affichage</span>
                </a> lors de la révision de la traduction.</p>
             <p>Utilisez l’option <a class="link" href="chapter.menus.html#menus.tools.check.issues">
@@ -971,8 +977,8 @@
             <p>Une fois les fichiers traduits créés, vous pouvez les ouvrir dans leur application d’origine pour vérifier leur contenu et les modifier. Ces modifications externes ne seront <span class="emphasis">
                   <em>pas</em>
                </span> reflétées dans OmegaT.</p>
-            <p>Les modifications effectuées en dehors d’OmegaT peuvent être réinsérées dans OmegaT (et donc dans la mémoire de traduction du projet, pour la maintenir à jour). Soit en les introduisant manuellement dans les segments concernés, soit en alignant le fichier original et le fichier final traduit pour créer un nouveau fichier de mémoire de traduction (TMX) qui sera placé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a> du dossier de votre projet. Voir la section <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner" title="Aligner des fichiers">
-                  <span class="guilabel">Aligner des fichiers</span>
+            <p>Les modifications effectuées en dehors d’OmegaT peuvent être réinsérées dans OmegaT (et donc dans la mémoire de traduction du projet, pour la maintenir à jour). Soit en les introduisant manuellement dans les segments concernés, soit en alignant le fichier original et le fichier final traduit pour créer un nouveau fichier de mémoire de traduction (TMX) qui sera placé dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a> du dossier de votre projet. Voir la section <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner" title="Aligner deux fichiers">
+                  <span class="guilabel">Aligner deux fichiers</span>
                </a> pour en savoir plus.</p>
          </section>
          <section class="section" id="introduction.one.more.thing">
@@ -1027,7 +1033,7 @@
                </div>
             </div>
             <p>Vous pouvez fluidifier votre travail en gardant à l’esprit les principaux raccourcis d’édition et de navigation (ou en les <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Personnalisation">modifiant en fonction de vos besoins</a>).</p>
-            <p>Un exemple illustre mieux ce point :</p>
+            <p>Un exemple illustre mieux ce point :</p>
             <div class="example" id="example.shortcuts.streamline.workflow">
                <div class="example-title">Exemple 5. Utiliser des raccourcis pour fluidifier le processus de traduction</div>
                <div class="example-contents">
@@ -1145,7 +1151,7 @@
                   </td>
                </tr>
                <tr>
-                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.0 - Manuel d'utilisation </td>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.2 - Manuel d’utilisation </td>
                   <td style="width: 20%; text-align: center; ">
                      <a accesskey="h" href="index_.html">Sommaire</a>
                   </td>

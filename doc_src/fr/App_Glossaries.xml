@@ -9,7 +9,7 @@
 
   <para>Les termes source peuvent être des expressions multimots.</para>
 
-  <para>Il y a 2 types de fichiers de glossaires :</para>
+  <para>Il y a 2 types de fichiers de glossaires :</para>
 
   <variablelist>
 	<varlistentry>
@@ -26,7 +26,7 @@
 		<note>
           <para>Si vous utilisez un fichier existant comme glossaire par défaut, toutes les nouvelles entrées seront enregistrées dans un format séparé par des tabulations et sauvegardées en UTF-8 par défaut.</para>
 
-		  <para>Pour indiquer un encodage différent, vous pouvez ajouter un commentaire «  magique » sous la forme suivante :</para>
+		  <para>Pour indiquer un encodage différent, vous pouvez ajouter un commentaire «  magique » sous la forme suivante :</para>
 
 		  <simplelist>
             <member>
@@ -79,7 +79,7 @@
 
     <para>Un glossaire modifiable créé par OmegaT pour le projet, sera un fichier TSV enregistré en UTF-8. Les fichiers qui n’utilisent que des caractères latins peuvent être reconnus et traités comme s’ils étaient encodés en ISO-8859-1 s’ils ne contiennent pas de caractères non ASCII ou d’autres caractères interprétables en UTF-8.</para>
 
-    <para>L’encodage utilisé pour lire les glossaires de référence dépend de leur extension de fichier :</para>
+    <para>L’encodage utilisé pour lire les glossaires de référence dépend de leur extension de fichier :</para>
 
     <table id="glossary.extensions">
       <title>Format, extension et encodage attendu</title>

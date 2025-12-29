@@ -72,7 +72,7 @@
       </listitem>
 
       <listitem>
-		<para>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic droit sur l’un des boutons de <guibutton>&lt;1&gt;</guibutton> à <guibutton>&lt;12&gt;</guibutton> en bas de la fenêtre et sélectionnez <guilabel>Ajouter le script</guilabel> pour assigner le script à ce numéro.</para>
+		<para>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic droit sur l’un des boutons de <guibutton>&lt;1&gt;</guibutton> à <guibutton>&lt;12&gt;</guibutton> en bas de la fenêtre et sélectionnez <guilabel>Associer le script</guilabel> pour assigner le script à ce numéro.</para>
 
 		<para>Si vous souhaitez détacher le script du raccourci, faites un clic droit sur le bouton et sélectionnez <guilabel>Supprimer le script</guilabel>.</para>
       </listitem>
@@ -162,7 +162,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.search.and.replace">
-        <term id="windows.scripts.distribution.example.search.and.replace.title">Exemple : recherche et remplacement</term>
+        <term id="windows.scripts.distribution.example.search.and.replace.title">Exemple : recherche et remplacement</term>
 
         <listitem>
           <para>Un script simple de recherche et remplacement.</para>

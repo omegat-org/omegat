@@ -26,6 +26,8 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
+import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
@@ -42,13 +44,16 @@ import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.issues.IIssues;
+import org.omegat.gui.issues.IIssueProvider;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+import java.util.List;
 
 public class CoreState {
 
@@ -100,6 +105,7 @@ public class CoreState {
     private GlossaryManager glossaryManager;
     private ITagValidation tagValidation;
     private IIssues issuesWindow;
+    private MachineTranslatorsManager machineTranslatorsManager;
 
     // GUI panes
     private IMainWindow mainWindow;
@@ -114,11 +120,27 @@ public class CoreState {
     private SegmentPropertiesArea segmentPropertiesArea;
     private SpellCheckerManager spellCheckerManager;
 
+    // Issues providers registry (per CoreState instance)
+    private List<IIssueProvider> issueProvidersRegistry;
+
     public boolean isProjectLoaded() {
         if (project == null) {
             return false;
         }
         return project.isProjectLoaded();
+    }
+
+    /**
+     * Returns the mutable registry list of issue providers bound to this CoreState instance.
+     * The list is lazily initialized but not pre-populated here to avoid cross-package
+     * visibility issues. Default providers are installed by the IssueProviders facade
+     * in the org.omegat.gui.issues package.
+     */
+    public synchronized List<IIssueProvider> getIssueProvidersRegistry() {
+        if (issueProvidersRegistry == null) {
+            issueProvidersRegistry = new ArrayList<>();
+        }
+        return issueProvidersRegistry;
     }
 
     public Map<String, String> getCmdLineParams() {
@@ -137,11 +159,17 @@ public class CoreState {
         this.project = project;
     }
 
-    public IMainWindow getMainWindow() {
+    public @Nullable IMainWindow getMainWindow() {
         return mainWindow;
     }
 
-    public void setMainWindow(IMainWindow mainWindow) {
+    /**
+     * Sets the main window instance for the application.
+     *
+     * @param mainWindow the instance of IMainWindow to be set as the main window.
+     *                   Can be null when testing.
+     */
+    public void setMainWindow(@Nullable IMainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
@@ -270,4 +298,13 @@ public class CoreState {
     public ISpellChecker getCurrentSpellChecker() {
         return spellCheckerManager.getCurrentSpellChecker();
     }
+
+    public MachineTranslatorsManager getMachineTranslatorsManager() {
+        return machineTranslatorsManager;
+    }
+
+    public void setMachineTranslatorsManager(MachineTranslatorsManager machineTranslatorsManager) {
+        this.machineTranslatorsManager = machineTranslatorsManager;
+    }
+
 }

@@ -78,7 +78,7 @@
       </listitem>
 
       <listitem>
-		<para>U kunt dan op het nummer klikken om  het toegewezen script uit te voeren. U kunt het script ook uitvoeren vanuit het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> door het van toepassing zijnde menu-item te selecteren of door te drukken op de geassocieerde sneltoets (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 tot en met F12</keycap></keycombo>).</para>
+		<para>U kunt dan op het nummer klikken om het toegewezen script uit te voeren. U kunt het script ook uitvoeren vanuit het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> door het van toepassing zijnde menu-item te selecteren of door te drukken op de geassocieerde sneltoets (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 tot en met F12</keycap></keycombo>).</para>
       </listitem>
 	</itemizedlist>
 

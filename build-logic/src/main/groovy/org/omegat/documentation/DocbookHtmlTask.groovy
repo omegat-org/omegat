@@ -1,11 +1,20 @@
 package org.omegat.documentation
 
 import groovy.transform.CompileStatic
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.Input
 
 import javax.xml.transform.Transformer
 
 @CompileStatic
 class DocbookHtmlTask extends TransformationTask {
+
+    private final Provider<String> css = project.objects.property(String)
+
+    @Input
+    Provider<String> getCss() {
+        return css
+    }
 
     private static String extractRootName(File file) {
         def fileName = file.getName()
@@ -34,7 +43,7 @@ class DocbookHtmlTask extends TransformationTask {
         transformer.setParameter("toc.max.depth", 2)
         transformer.setParameter("generate.toc", "book toc,title,figure,table chapter toc appendix toc")
         transformer.setParameter("generate.index", 1)
-        transformer.setParameter("html.stylesheet", "omegat.css")
+        transformer.setParameter("html.stylesheet", css.get())
         transformer.setParameter("docbook.css.link", 0)
         transformer.setParameter("saxon.character.representation", "native;decimal")
     }

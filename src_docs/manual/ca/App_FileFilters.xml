@@ -36,7 +36,7 @@
 
   <para>Alguns filtres proporcionen un botó <guibutton>Opcions...</guibutton> per a personalitzar encara més els paràmetres.</para>
 	
-  <para>Feu clic en el botó <guibutton>Reinicialitza els valors per defecte</guibutton> per a reinicialitzar els filtres de fitxer als paràmetres per defecte.</para>
+  <para>Feu clic en el botó <guibutton>Reinicialitza els valors</guibutton> per a reinicialitzar els filtres de fitxers.</para>
 
   <para>Les preferències dels filtres de fitxers globals modificades es desen en <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, en la carpeta de configuració. Consulteu <link linkend="configuration.folder" endterm="configuration.folder.title"/> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres.</para>
 

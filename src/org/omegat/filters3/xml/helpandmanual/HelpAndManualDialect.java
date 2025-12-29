@@ -28,9 +28,14 @@
 package org.omegat.filters3.xml.helpandmanual;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -41,14 +46,19 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * @author Guido Leenders
  * @author Didier Briel
  */
+@NullMarked
 public class HelpAndManualDialect extends DefaultXMLDialect {
     public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic|map|helpproject");
 
     /*
-     * A map of attribute-name and attribute value pairs that, if exist in a
-     * tag, indicate that this tag should not be translated
+     * A map of attribute-name to a set of attribute values that, if present on a
+     * tag, indicate that this tag should not be translated.
+     *
+     * Keys and values are expected to be case-insensitive. Internally, both are
+     * stored in upper-case using the ROOT locale to avoid locale-specific
+     * case-folding issues.
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private final Map<String, Set<String>> ignoreTagsAttributes;
 
     public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
@@ -58,13 +68,33 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
 
         defineShortcut("link", "li");
 
-        ignoreTagsAttributes = new HashMap<String, String>();
-        ignoreTagsAttributes.put("TRANSLATE=FALSE", "");
+        ignoreTagsAttributes = new HashMap<>();
+
+        // Default rules for Help & Manual: translate="false|no|0" means do not translate
+        addIgnoreAttributeValues("translate", "false", "no", "0");
     }
 
-    private boolean checkIgnoreTags(String key, String value) {
-        return ignoreTagsAttributes
-                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
+    private boolean checkIgnoreTags(@Nullable String key, @Nullable String value) {
+        if (key == null || value == null) {
+            return false;
+        }
+        String k = key.trim().toUpperCase(Locale.ENGLISH);
+        String v = value.trim().toUpperCase(Locale.ENGLISH);
+        Set<String> values = ignoreTagsAttributes.get(k);
+        return values != null && values.contains(v);
+    }
+
+    private void addIgnoreAttributeValues(@Nullable String attributeName, @Nullable String... values) {
+        if (attributeName == null || values == null) {
+            return;
+        }
+        String key = attributeName.trim().toUpperCase(Locale.ENGLISH);
+        Set<String> set = ignoreTagsAttributes.computeIfAbsent(key, k -> new HashSet<>());
+        for (String v : values) {
+            if (v != null) {
+                set.add(v.trim().toUpperCase(Locale.ENGLISH));
+            }
+        }
     }
 
     /**
@@ -80,8 +110,9 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (atts != null) {
+            // Check configured attribute/value pairs that mark a tag as non-translatable
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);
                 if (checkIgnoreTags(oneAttribute.getName(), oneAttribute.getValue())) {

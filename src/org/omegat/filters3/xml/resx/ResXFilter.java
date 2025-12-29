@@ -29,7 +29,8 @@ package org.omegat.filters3.xml.resx;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.Core;
@@ -45,12 +46,13 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Guido Leenders
  */
+@NullMarked
 public class ResXFilter extends XMLFilter {
 
-    private String id = "";
-    private String entryText;
-    private String comment;
-    private String text;
+    private @Nullable String id = "";
+    private @Nullable String entryText;
+    private @Nullable String comment;
+    private @Nullable String text;
 
     /**
      * Register plugin into OmegaT.
@@ -122,7 +124,7 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public void tagStart(String path, Attributes atts) {
+    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
         if ("/root/data".equals(path)) {
             id = StringUtil.nvl(atts.getValue("name"), "");
             comment = null;
@@ -130,7 +132,7 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public void tagEnd(String path) {
+    public void tagEnd(@Nullable String path) {
         if ("/root/data/comment".equals(path)) {
             comment = text;
         } else if ("/root/data".equals(path)) {
@@ -144,12 +146,12 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public void text(String newText) {
+    public void text(@Nullable String newText) {
         this.text = newText;
     }
 
     @Override
-    public @Nullable String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, @Nullable List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
             entryText = entry;
             return entry;

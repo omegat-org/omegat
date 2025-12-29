@@ -207,6 +207,6 @@ Informes d'error (en anglès), en el lloc web de SourceForge:
 
   https://sourceforge.net/p/omegat/bugs/
 
-OmegaT Contribution Guide
+Guia de col·laboració de l'OmegaT
 
   https://omegat.readthedocs.io/en/latest/

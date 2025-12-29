@@ -25,10 +25,12 @@
 
 package org.omegat.languages.ta;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
+@NullMarked
 public final class TamilPlugin {
 
     private static final String TAMIL = "org.languagetool.language.Tamil";

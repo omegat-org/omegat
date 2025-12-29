@@ -26,7 +26,7 @@
   
   <para>Filters in vet worden gebruikt door het huidige project.</para>
 
-  <para>Schakel een filter uit door zijn vak te deselecteren als u wilt dat de bestanden die ermee zijn geassocieerd, niet moeten worden vertaald. Hun inhoud zal niet worden weergegeven voor vertaling.</para>
+  <para>Schakel een filter uit door zijn vak te deselecteren als u wilt dat de bestanden, die ermee zijn geassocieerd, niet moeten worden vertaald. Hun inhoud zal niet worden weergegeven voor vertaling.</para>
 
   <note>
 	<para>U kunt de filters sorteren op naam óf of zij zijn ingeschakeld. Klik op de relevante kop om ze in op- of aflopende volgorde te sorteren.</para>
@@ -40,16 +40,16 @@
 
   <para>Aangepaste globale voorkeuren voor bestandsfilters worden opgeslagen in de <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, in de map voor de configuratie. Bekijk <link linkend="configuration.folder" endterm="configuration.folder.title"/> voor de details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter.</para>
 
-  <para>Aangepaste lokale bestandsfilters worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, geplaats in de map voor het project. Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter en zet het project terug naar globale bestandsfilters.</para>
+  <para>Aangepaste lokale bestandsfilters worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, geplaatst in de map voor het project. Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter en zet het project terug naar globale bestandsfilters.</para>
 
   <section id="file.filters.general">
 	<title id="file.filters.general.title">Algemene voorkeuren</title>
 	  
 	<variablelist>
 	  <varlistentry>
-		<term>Voorafgaande en achterliggende  tags verbergen</term>
+		<term>Voorafgaande en achterliggende tags verbergen</term>
 		<listitem>
-		  <para>Voorafgaan de en achterliggende tags worden over het algemeen vereist door OmegaT om op de juiste manier het vertaalde segment te kunnen maken. Ze verbergen in de te vertalen inhoud zorgt ervoor dat u ze niet zult wissen of per ongeluk zal aanpassen.</para>
+		  <para>Voorafgaande en achterliggende tags worden over het algemeen vereist door OmegaT, om het vertaalde segment op de juiste manier te kunnen maken. Ze verbergen in de te vertalen inhoud zorgt ervoor dat u ze niet zult wissen of per ongeluk zal aanpassen.</para>
 
 		  <para>Als u de voorafgaande en achterliggende tags behoud, zorg er dan voor dat u ze ook opneemt in de vertaalde tekst.</para>
 		</listitem>
@@ -86,7 +86,7 @@
 
 	<para>Klik op <guibutton>Toevoegen…</guibutton> om een nieuw patroon voor een bestandsfilter toe te voegen, om een soortgelijk dialoogvenster te openen.</para>
 
-	<para>Beide dialoogvensters stellen u in staat de patronen voor de bestandsnamen aan  te passen voor de bron- en doelbestanden die zijn geassocieerd aan dit filter, en hun respectievelijke codering te selecteren.</para>
+	<para>Beide dialoogvensters stellen u in staat de patronen voor de bestandsnamen aan te passen voor de bron- en doelbestanden die zijn geassocieerd aan dit filter, en hun respectievelijke codering te selecteren.</para>
 
 	<para>Gebruik het keuzemenu <guilabel>Bestandsnaam variabelen</guilabel> om de doel-bestandsnaam aan te passen.</para>
 
@@ -118,13 +118,13 @@
 
 	  <itemizedlist>
         <listitem>
-		  <para>OmegaT gebruikt de codering van de declaratie van het bronbestand, indien aanwezig, om  de codering te identificeren (HTML- of op XML- gebaseerde bestanden).</para>
+		  <para>OmegaT gebruikt de codering van de declaratie van het bronbestand, indien aanwezig, om de codering te identificeren (HTML- of op XML-gebaseerde bestanden).</para>
         </listitem>
 	  </itemizedlist>
 
 	  <itemizedlist>
         <listitem>
-		  <para>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsformaten ( Java-properties bijvoorbeeld)</para>
+		  <para>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsindelingen (Java-properties bijvoorbeeld)</para>
         </listitem>
 	  </itemizedlist>
 
@@ -138,7 +138,7 @@
     <section id="target.name">
 	  <title id="target.name.title">Vertaalde bestandsnaam</title>
 	  
-	  <para>Bestanden in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> worden, elke keer als u ze opnieuw maakt, overschreven, zelfs als zij worden gemaakt dezelfde naam.</para>
+	  <para>Bestanden in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> worden, elke keer als u ze opnieuw maakt, overschreven, zelfs als zij worden gemaakt met dezelfde naam.</para>
 
 	  <para>OmegaT kan automatisch nieuwe bestandsnamen maken voor de bestanden die u maakt, door bijvoorbeeld een taalcode of tijdstempel toe te voegen.</para>
 
@@ -506,7 +506,7 @@
 			  <listitem>
 				<para>Witruimte buiten de tags wordt als niet significant beschouwd in HTML/XHTML.</para>
 
-				<para>Deze optie converteert meerdere van dergelijke  doorlopende witruimten naar één enkele spatie in het vertaalde document.</para>
+				<para>Deze optie converteert meerdere van dergelijke doorlopende witruimten naar één enkele spatie in het vertaalde document.</para>
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
@@ -552,7 +552,7 @@
 	  <varlistentry id="file.filters.po">
 		<term id="file.filters.po.title">PO-bestanden</term>
 		<listitem>
-			<para>Het filter controleert standaard printf-variabelen ('%s', etc.). Bekijk de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voorkeur voor details.</para>
+			<para>Het filter controleert standaard printf-variabelen ('%s', etc.). Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voor details.</para>
 
 			<variablelist>
 			  <varlistentry>
@@ -565,7 +565,7 @@
 			  <varlistentry>
 				<term>Blanco bronsegmenten vertalen</term>
 				<listitem>
-				  <para>Blanco  bronsegmenten acteren soms als plaatsvervangers voor delen die niet bestaan in de brontaal, maar nodig zijn in de doeltaal. Gebruik deze optie om een vertaling te maken die is gebaseerd op de geassocieerde opmerkingen.</para>
+				  <para>Blanco bronsegmenten acteren soms als plaatsvervangers voor delen die niet bestaan in de brontaal, maar nodig zijn in de doeltaal. Gebruik deze optie om een vertaling te maken die is gebaseerd op de geassocieerde opmerkingen.</para>
 				</listitem>
 			  </varlistentry>
 			  
@@ -597,7 +597,7 @@
 					<varlistentry>
 					  <term>Eéntalig</term>
 					  <listitem>
-						<para>PO-bestanden die <literal>msgid</literal> gebruiken als een ID-code, <literal>msgstr</literal> gebruiken als de broncontainer en verwachten dat de vertaling overschrijft <literal>msgstr</literal></para>
+						<para>PO-bestanden, die <literal>msgid</literal> gebruiken als een ID-code, <literal>msgstr</literal> gebruiken als de broncontainer en verwachten dat de vertaling <literal>msgstr</literal> overschrijft</para>
 					  </listitem>
 					</varlistentry>
 				  </variablelist>
@@ -624,7 +624,7 @@
 	  <varlistentry id="file.filter.java.bundle">
 		<term id="file.filter.java.bundle.title">Java Resource Bundles</term>
 		<listitem>
-			<para>Het filter controleert standaard patronen van Java MessageFormat (bijv. \{0\}). Bekijk de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voorkeur voor details.</para>
+			<para>Het filter controleert standaard patronen van Java MessageFormat (bijv. \{0\}). Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voor details.</para>
 
 			<variablelist>
 			  <varlistentry>

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
@@ -54,8 +55,8 @@ import org.omegat.gui.editor.IEditorFilter;
  */
 public class ReplaceFilter implements IEditorFilter {
     private final Map<Integer, SourceTextEntry> entries = new HashMap<Integer, SourceTextEntry>();
-    private FilterBarReplace controlComponent;
-    private Searcher searcher;
+    private final FilterBarReplace controlComponent;
+    private final Searcher searcher;
     private int minEntryNum, maxEntryNum;
 
     public ReplaceFilter(List<Integer> entriesList, Searcher searcher) {
@@ -63,7 +64,7 @@ public class ReplaceFilter implements IEditorFilter {
 
         minEntryNum = Integer.MAX_VALUE;
         maxEntryNum = Integer.MIN_VALUE;
-        Set<Integer> display = new HashSet<Integer>(entriesList);
+        Set<Integer> display = new HashSet<>(entriesList);
         for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
             minEntryNum = Math.min(minEntryNum, ste.entryNum());
             maxEntryNum = Math.max(maxEntryNum, ste.entryNum());
@@ -75,17 +76,20 @@ public class ReplaceFilter implements IEditorFilter {
         controlComponent = new FilterBarReplace();
 
         controlComponent.btnCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 Core.getEditor().commitAndDeactivate(); // Make sure that any change done in the current segment is not lost
                 Core.getEditor().removeFilter();
             }
         });
         controlComponent.btnSkip.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 skip();
             }
         });
         controlComponent.btnReplaceNext.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 replace();
             }
@@ -108,7 +112,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue;
             }
             // Avoid to replace more than once with variables when entries have duplicates
-            if ((en.defaultTranslation) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
+            if (en.defaultTranslation && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
                 continue; // Already replaced when we parsed the first entry
             }
             List<SearchMatch> found = getReplacementsForEntry(trans);
@@ -138,7 +142,7 @@ public class ReplaceFilter implements IEditorFilter {
         return controlComponent;
     }
 
-    public List<SearchMatch> getReplacementsForEntry(String translationText) {
+    public @Nullable List<SearchMatch> getReplacementsForEntry(String translationText) {
         if (searcher.searchString(translationText, false)) {
             return searcher.getFoundMatches();
         } else {
@@ -236,7 +240,7 @@ public class ReplaceFilter implements IEditorFilter {
      * Returns text of entry where replacement should be found. It can be translation or source text depends
      * on settings, or null if entry should be skipped.
      */
-    private String getEntryText(SourceTextEntry ste, TMXEntry en) {
+    private @Nullable String getEntryText(SourceTextEntry ste, TMXEntry en) {
         if (en.isTranslated()) {
             return en.translation;
         } else if (searcher.getExpression().replaceUntranslated) {

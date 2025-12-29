@@ -101,7 +101,7 @@
 	  <listitem>
         <para>Navigeer tussen segmenten die automatisch werden gevuld door exacte overeenkomsten uit de submappen <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>.</para>
 
-		<para>Bekijk de <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> how-to voor details.</para>
+		<para>Bekijk de how-to <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> voor details.</para>
 
 		<itemizedlist>
 		  <listitem id="menus.goto.auto.populated.segments.next.auto">
@@ -135,7 +135,7 @@
       <term id="menus.goto.back.in.history.title"><guimenuitem>Terug in geschiedenis</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
         <para>OmegaT onthoudt uw geschiedenis van het navigeren door de segmenten.</para>
-        <para>Deze opdracht laat u één segment per keer terug gaan naar segmenten die u eerder hebt bezocht.</para>
+        <para>Deze opdracht laat u één segment per keer teruggaan naar segmenten die u eerder hebt bezocht.</para>
       </listitem>
     </varlistentry>
     
@@ -144,7 +144,7 @@
       <listitem>
         <para>OmegaT onthoudt uw geschiedenis van het navigeren door de segmenten.</para>
 
-        <para>Deze opdracht laat u één segment per keer terug gaan naar segmenten die u eerder hebt bezocht met de opdracht <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> hierboven.</para>
+        <para>Deze opdracht laat u één segment per keer doorgaan naar segmenten die u eerder hebt bezocht met de opdracht <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> hierboven.</para>
       </listitem>
     </varlistentry>
 
@@ -152,14 +152,14 @@
       <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
 	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Voer de <link linkend="panes.notes" endterm="panes.notes.title"/> in om een notitie te schrijven of aan te passen die is geassocieerd met het huidige segment.</para>
+        <para>Voer <link linkend="panes.notes" endterm="panes.notes.title"/> in om een notitie te schrijven of aan te passen die is geassocieerd met het huidige segment.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.editor.pane">
       <term id="menus.goto.editor.pane.title"><guimenuitem>venster Bewerken</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Voer de <link linkend="panes.editor" endterm="panes.editor.title"/> in om door te gaan met uw vertaling.</para>
+        <para>Voer <link linkend="panes.editor" endterm="panes.editor.title"/> in om door te gaan met uw vertaling.</para>
       </listitem>
     </varlistentry>
   </variablelist>

@@ -50,7 +50,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -75,8 +74,8 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -100,6 +99,7 @@ import org.omegat.util.gui.TableColumnSizer;
  * @author Aaron Madlon-Kay
  *
  */
+@NullMarked
 public class IssuesPanelController implements IIssues {
 
     private static final String ACTION_KEY_JUMP_TO_SELECTED_ISSUE = "jumpToSelectedIssue";
@@ -527,7 +527,7 @@ public class IssuesPanelController implements IIssues {
 
         private int progress = 0;
 
-        IssueLoader(int jumpToEntry, @NotNull List<String> jumpToTypes) {
+        IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
             this.jumpToEntry = jumpToEntry;
             this.jumpToTypes = jumpToTypes;
         }
@@ -535,11 +535,8 @@ public class IssuesPanelController implements IIssues {
         @Override
         protected List<IIssue> doInBackground() throws Exception {
             long start = System.currentTimeMillis();
-            Stream<IIssue> tagErrors = Core.getTagValidation().listInvalidTags(filePattern).stream()
-                    .map(TagIssue::new);
-            List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
-            Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
-            List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
+            // Delegate to centralized checker so this controller only handles display
+            List<IIssue> result = IssueChecker.collectIssues(filePattern, isShowingAllFiles());
             if (Log.isDebugEnabled()) {
                 Log.logDebug(String.format("Issue detection took %.3f s",
                         (System.currentTimeMillis() - start) / 1000f));
@@ -549,13 +546,16 @@ public class IssuesPanelController implements IIssues {
 
         private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String pattern) {
             Stream<SourceTextEntry> allEntries = Core.getProject().getAllEntries().parallelStream();
-            Stream<SourceTextEntry> filteredByPattern = allEntries.filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file));
+            Stream<SourceTextEntry> filteredByPattern = allEntries
+                    .filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file));
             Stream<SourceTextEntry> filteredByProgress = filteredByPattern.filter(this::progressFilter);
-            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = filteredByProgress.flatMap(ste -> makeEntryPair(ste).stream());
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = filteredByProgress
+                    .flatMap(ste -> makeEntryPair(ste).stream());
             return entriesStream.flatMap(entry -> getIssuesForEntry(entry, providers));
         }
 
-        private Stream<IIssue> getIssuesForEntry(Map.Entry<SourceTextEntry, TMXEntry> entry, List<IIssueProvider> providers) {
+        private Stream<IIssue> getIssuesForEntry(Map.Entry<SourceTextEntry, TMXEntry> entry,
+                List<IIssueProvider> providers) {
             return providers.stream()
                     .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream());
         }
@@ -691,8 +691,8 @@ public class IssuesPanelController implements IIssues {
                     OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String fileName = extractFilePathFromPattern();
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName, shownItems,
-                    totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName,
+                    shownItems, totalItems));
         }
     }
 

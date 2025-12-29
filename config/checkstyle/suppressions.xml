@@ -158,7 +158,6 @@
     <suppress checks="MethodLength" files="PoFilter\.java"/>
     <suppress checks="(TypeName|MissingSwitchDefault)" files="srtFilter\.java" lines="55,102"/>
     <suppress checks="TypeName" files="XLIFFOptions\.java" lines="67"/>
-    <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="44"/>
     <suppress files="Entry\.java" checks="MethodLength"/>
 

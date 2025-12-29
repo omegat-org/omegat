@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.util.StringUtil;
@@ -42,7 +43,7 @@ public final class XMLUtils {
     }
 
     /** Converts attributes from org.xml.sax package to OmegaT's. */
-    public static Attributes convertAttributes(org.xml.sax.Attributes attributes) {
+    public static Attributes convertAttributes(org.xml.sax.@Nullable Attributes attributes) {
         Attributes res = new Attributes();
         if (attributes == null) {
             return res;

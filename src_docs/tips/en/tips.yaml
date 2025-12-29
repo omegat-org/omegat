@@ -1,0 +1,72 @@
+---
+tips:
+- file: shortcut_help.html
+  name: Call user manual
+- file: automatic_backup.html
+  name: Automatic backup
+- file: howto_download_dictionary.html
+  name: How to download dictionary
+- file: bridge_two_languages.html
+  name: Bridge two languages with an intermediate TM
+- file: change_theme.html
+  name: OmegaT theme
+- file: create_your_own_tms.html
+  name: Create your own translation memories
+- file: default_layout_restore_window.html
+  name: Restore the default window layout
+- file: dictionary_installation.html
+  name: Install dictionaries
+- file: editor_unlock_cursor_f2.html
+  name: Unlock the cursor with F2
+- file: exported_tms_folder.html
+  name: Choose a folder for exported TMs
+- file: glossary_writable_glossary_txt.html
+  name: The writable glossary glossary.txt
+- file: pane_fuzzy_matches_navigation.html
+  name: Navigate and insert from Fuzzy Matches
+- file: panes_default_layout_overview.html
+  name: Default layout overview
+- file: panes_principles_manipulation.html
+  name: Manipulate panes and layout
+- file: project_folder_default_structure.html
+  name: Project folder default structure
+- file: project_folders.html
+  name: Project folders
+- file: project_folder_tm_auto.html
+  name: tm/auto folder
+- file: project_omegat_folder_overview.html
+  name: The omegat folder
+- file: project_wont_open_recover.html
+  name: If a project won’t open
+- file: recover_project_when_locked.html
+  name: If a project is locked
+- file: reset_configuration.html
+  name: Reset configuration to defaults
+- file: restore_translation_from_backup.html
+  name: Restore lost translations
+- file: reuse_translation_memories.html
+  name: Reuse translation memories
+- file: setup_team_project_preparations.html
+  name: Prepare a team project repository
+- file: share_translation_memories.html
+  name: Share translation memories
+- file: shortcut_note.html
+  name: Notepad access shortcut
+- file: source_folder_add_files.html
+  name: Add files to the source folder
+- file: target_folder_create_translated_files.html
+  name: Target folder creates translated files
+- file: tm_auto_auto_populate.html
+  name: Use tm/auto to auto-populate exact matches
+- file: tm_enforce_overwrite.html
+  name: Use tm/enforce to overwrite translations
+- file: tm_mt_highlight.html
+  name: tm/mt folder highlights inserted matches
+- file: tm_penalty_folder.html
+  name: Apply penalties to matches with tm/penalty-xxx
+- file: translated_file_wont_open.html
+  name: If the translated file won't open
+- file: use_check_issues_for_tags.html
+  name: Use Check Issues for tag problems
+- file: ignore_dictionary_word.html
+  name: Ignore a word in the dictionary

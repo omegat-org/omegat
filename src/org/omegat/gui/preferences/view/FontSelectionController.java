@@ -43,6 +43,13 @@ import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.UIScale;
 
 /**
+ * The FontSelectionController class manages the font selection preferences
+ * for a user interface.
+ * <p>
+ * It controls the font settings, including font name, size, and specific
+ * component behavior, persisting these preferences and applying them to
+ * different parts of the application.
+ *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Aaron Madlon-Kay

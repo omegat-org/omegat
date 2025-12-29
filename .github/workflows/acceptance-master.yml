@@ -19,7 +19,7 @@ jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: setup xvfb environment
       run: sudo apt-get install -f -q xvfb libsm-dev libxrender1 libxext-dev libxtst-dev libxcb1-dev fonts-dejavu xfonts-base xfonts-scalable
     - uses: actions/setup-java@v5

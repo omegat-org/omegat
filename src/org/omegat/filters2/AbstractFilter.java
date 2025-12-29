@@ -265,6 +265,9 @@ public abstract class AbstractFilter implements IFilter {
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try (BufferedReader reader = createReader(inFile, fc.getInEncoding())) {
+            if (reader == null) {
+                return false;
+            }
             return isFileSupported(reader);
         } catch (IOException | TranslationException e) {
             return false;

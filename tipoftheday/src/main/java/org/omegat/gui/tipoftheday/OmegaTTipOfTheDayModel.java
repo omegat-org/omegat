@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2023-2025 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -34,12 +34,16 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.omegat.help.Help;
 import tokyo.northside.tipoftheday.data.HtmlTipData;
 import tokyo.northside.tipoftheday.tips.DefaultTip;
 import tokyo.northside.tipoftheday.tips.Tip;
 import tokyo.northside.tipoftheday.tips.TipOfTheDayModel;
 
 import org.omegat.util.Log;
+
+import static org.omegat.gui.tipoftheday.TipOfTheDayUtils.TIPS_DIR;
+import static org.omegat.gui.tipoftheday.TipOfTheDayUtils.getLocale;
 
 public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
@@ -65,9 +69,6 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     private void initTips() {
         try (InputStream is = TipOfTheDayUtils.getIndexStream()) {
-            if (is == null) {
-                return;
-            }
             JsonNode data = mapper.readTree(is);
             if (data != null) {
                 data.get("tips").forEach(this::addIfExist);
@@ -80,11 +81,11 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     private void addIfExist(JsonNode tip) {
         String title = tip.get("name").asText();
         String filename = tip.get("file").asText();
-        URI uri = TipOfTheDayUtils.getTipsFileURI(filename);
-        if (uri == null) {
+        URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), filename);
+        try (InputStream is = uri.toURL().openStream()) { // validate exists
+            tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
+        } catch (IOException e) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
-            return;
         }
-        tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
     }
 }

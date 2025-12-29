@@ -28,6 +28,7 @@ package org.omegat.filters2;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Represents an instance of a filter configuration with attributes such as
@@ -44,22 +45,18 @@ public class Instance implements Serializable {
 
     private @Nullable String sourceFilenameMask;
 
-    public String getSourceFilenameMask() {
+    public @Nullable String getSourceFilenameMask() {
         return sourceFilenameMask;
     }
 
-    public void setSourceFilenameMask(String sourceFilenameMask) {
+    public void setSourceFilenameMask(@Nullable String sourceFilenameMask) {
         this.sourceFilenameMask = sourceFilenameMask;
     }
 
     private @Nullable String sourceEncoding;
 
     public String getSourceEncodingHuman() {
-        if (sourceEncoding == null) {
-            return AbstractFilter.ENCODING_AUTO_HUMAN;
-        } else {
-            return sourceEncoding;
-        }
+        return Objects.requireNonNullElse(sourceEncoding, AbstractFilter.ENCODING_AUTO_HUMAN);
     }
 
     public @Nullable String getSourceEncoding() {
@@ -77,11 +74,7 @@ public class Instance implements Serializable {
     private @Nullable String targetEncoding;
 
     public String getTargetEncodingHuman() {
-        if (targetEncoding == null) {
-            return AbstractFilter.ENCODING_AUTO_HUMAN;
-        } else {
-            return targetEncoding;
-        }
+        return Objects.requireNonNullElse(targetEncoding, AbstractFilter.ENCODING_AUTO_HUMAN);
     }
 
     public @Nullable String getTargetEncoding() {
@@ -138,7 +131,7 @@ public class Instance implements Serializable {
      * the name of the translated file should be the same as the name of the
      * input file.
      */
-    public Instance(String sourceFilenameMask, String sourceEncoding, String targetEncoding) {
+    public Instance(String sourceFilenameMask, @Nullable String sourceEncoding, @Nullable String targetEncoding) {
         init(sourceFilenameMask, sourceEncoding, targetEncoding, AbstractFilter.TARGET_DEFAULT);
     }
 

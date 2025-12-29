@@ -56,6 +56,7 @@ import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
@@ -601,7 +602,7 @@ public final class PluginUtils {
         return DefaultTokenizer.class;
     }
 
-    private static boolean isDefault(Class<?> c) {
+    private static boolean isDefault(@Nullable Class<?> c) {
         if (c == null) {
             return false;
         }
@@ -609,7 +610,7 @@ public final class PluginUtils {
         return ann != null && ann.isDefault();
     }
 
-    private static Class<?> searchForTokenizer(String lang) {
+    private static @Nullable Class<?> searchForTokenizer(String lang) {
         if (lang.isEmpty()) {
             return null;
         }
@@ -667,6 +668,10 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<Class<?>> getAutoCompleterViewsClasses() {
+        return AUTOCOMPLETER_CLASSES;
+    }
+
     /**
      * Retrieves the {@link ClassLoader} associated with the specified
      * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the
@@ -677,7 +682,7 @@ public final class PluginUtils {
      * @return the {@link ClassLoader} associated with the specified plugin
      *         type, or {@code null} if the type is {@code UNKNOWN}.
      */
-    public static ClassLoader getClassLoader(PluginType type) {
+    public static @Nullable ClassLoader getClassLoader(PluginType type) {
         if (type == PluginType.UNKNOWN) {
             return null;
         }
@@ -697,6 +702,8 @@ public final class PluginUtils {
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+
+    private static final List<Class<?>> AUTOCOMPLETER_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -766,7 +773,7 @@ public final class PluginUtils {
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
             Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
-                    ex.getClass().getSimpleName(), ex.getMessage()));
+                    ex.getClass().getSimpleName(), ex.getMessage() != null ? ex.getMessage() : ""));
             return false;
         }
     }

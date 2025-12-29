@@ -56,7 +56,8 @@ public final class MainWindowStatusBarController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 MainWindowStatusBar.StatusBarMode[] modes = MainWindowStatusBar.StatusBarMode.values();
-                MainWindowStatusBar.StatusBarMode progressMode = modes[(getProgressMode().ordinal() + 1) % modes.length];
+                MainWindowStatusBar.StatusBarMode progressMode = modes[(getProgressMode().ordinal() + 1)
+                        % modes.length];
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
                 updateProgressText(progressMode);
             }
@@ -70,11 +71,13 @@ public final class MainWindowStatusBarController {
     }
 
     private void resetLengthLabel() {
-        Mnemonics.setLocalizedText(mainWindowStatusBar.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+        Mnemonics.setLocalizedText(mainWindowStatusBar.lengthLabel,
+                OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
 
     private MainWindowStatusBar.StatusBarMode getProgressMode() {
-        return Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, MainWindowStatusBar.StatusBarMode.DEFAULT);
+        return Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                MainWindowStatusBar.StatusBarMode.DEFAULT);
     }
 
     private void updateProgressText(MainWindowStatusBar.StatusBarMode progressMode) {
@@ -113,6 +116,7 @@ public final class MainWindowStatusBarController {
             return StringUtil.format(OStrings.getString(messageKey), params);
         }
     }
+
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
         showStatusMessageRB(messageKey, params);
 

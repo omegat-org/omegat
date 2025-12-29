@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="post.processing.commands">
-  <title id="post.processing.commands.title">Opdrachten voor nabewerking</title>
+  <title id="post.processing.commands.title">Opdrachten voor nabewerken</title>
 
-  <para>Bekijk de projecteigenschap <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>  voor projectspecifieke opdrachten.</para>
+  <para>Bekijk de projecteigenschap <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> voor projectspecifieke opdrachten.</para>
 
   <para>Bekijk de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> voor globale opdrachten.</para>
 	
@@ -98,7 +98,7 @@
   
   <section id="post.processing.commands.user.defined.scripts">
     <title id="post.processing.commands.user.defined.scripts.title">Locale scripts</title>
-    <para>In aanvulling op een reguliere opdracht, kunt u een script aanroepen. Voer nooit scripts voor bewerken uit vanuit niet vertrouwde bronnen. Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+    <para>In aanvulling op een reguliere opdracht, kunt u een script aanroepen. Voer nooit scripts voor bewerken uit vanuit niet vertrouwde bronnen. Opdrachten voor lokaal nabewerken zijn om veiligheidsredenen standaard uitgeschakeld.</para>
     <para>Variabelen voor sjablonen kunnen worden gebruikt met zowel reguliere opdrachten als met aangepaste scripts. U moet misschien een absoluut pad gebruiken voor uw script. Het gebruiken van PATH OmegaT zou niet hetzelfde hoeven te zijn als het PATH van de huidige gebruiker.</para>
     <para>STDOUT en STDERR worden geschreven naar het bestand <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. De exitcode en STDERR of de laatste STDOUT zullen op de statusbalk verschijnen.</para>
   </section>

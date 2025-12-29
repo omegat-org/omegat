@@ -31,19 +31,25 @@ import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.po.PoFilter;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testParse() throws Exception {

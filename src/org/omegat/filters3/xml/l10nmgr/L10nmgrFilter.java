@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.l10nmgr;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -36,6 +37,7 @@ import org.omegat.util.OStrings;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class L10nmgrFilter extends XMLFilter {
 
     /**
@@ -55,26 +57,14 @@ public class L10nmgrFilter extends XMLFilter {
         super(new L10nmgrDialect());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("L10NMGR_FILTER_NAME");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml", null, null), };
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isSourceEncodingVariable() {
-        return false;
     }
 
     /**

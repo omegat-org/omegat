@@ -25,25 +25,24 @@
 
 package org.omegat.gui.tipoftheday;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Locale;
 
-import org.jetbrains.annotations.Nullable;
-import org.omegat.util.Log;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.omegat.help.Help;
 
+@NullMarked
 public final class TipOfTheDayUtils {
+
+    static final String TIPS_DIR = "tips";
 
     private TipOfTheDayUtils() {
     }
 
     static final String INDEX_YAML = "tips.yaml";
-
-    static @Nullable URI getTipsFileURI(String filename) {
-        return getTipsURI(filename, getLocale());
-    }
 
     static String getLocale() {
         // Get the system locale (language and country)
@@ -58,27 +57,19 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    private static @Nullable URI getTipsURI(String filename, String lang) {
-        URL url = TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + filename);
-        if (url != null) {
-            try {
-                return url.toURI();
-            } catch (URISyntaxException ignored) {
-                Log.log("Wrong tips configuration:" + url);
-            }
+    static @Nullable InputStream getIndexStream() throws IOException {
+        URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), INDEX_YAML);
+        if (uri == null) {
+            return null;
         }
-        return null;
-    }
-
-    static InputStream getIndexStream() {
-        return TipOfTheDayUtils.class
-                .getResourceAsStream("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
+        return uri.toURL().openStream();
     }
 
     static boolean hasIndex() {
-        URL url = TipOfTheDayUtils.class
-                .getResource("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
-        return url != null;
+        try (InputStream ignored = getIndexStream()) { // validate exists
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-
 }

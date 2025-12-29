@@ -37,6 +37,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
@@ -57,6 +60,7 @@ import org.omegat.util.Token;
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  */
+@NullMarked
 public class GlossarySearcher {
     private final ITokenizer tok;
     private final Language srcLang;
@@ -105,6 +109,24 @@ public class GlossarySearcher {
                 mergeAltDefinitions);
     }
 
+    /**
+     * Searches for matching tokens between the source text of a {@code SourceTextEntry}
+     * and the source text of a {@code GlossaryEntry}.
+     * <p>
+     * The method tokenizes the source text and compares it with the glossary
+     * entry's source text. If no matches are found,
+     * it attempts to find matches using rules specific to CJK (Chinese,
+     * Japanese, Korean) text.
+     *
+     * @param ste
+     *              the source text entry containing the text to be tokenized
+     *              and matched
+     * @param entry
+     *              the glossary entry containing the source text to be matched
+     *              against
+     * @return   a mutable list of token arrays representing the matched
+     *           tokens between the source text entry and the glossary entry
+     */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
         // Compute source entry tokens
         Token[] strTokens = tokenize(ste.getSrcText(),
@@ -217,20 +239,19 @@ public class GlossarySearcher {
         IProject project = Core.getProject();
         if (!project.isProjectLoaded()
                 || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         if (!StringUtil.isCJK(term)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         int i = fullText.indexOf(term);
         if (i == -1) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         List<Token[]> result = new ArrayList<>();
-        result.add(new Token[] { new Token(term, i) });
-        while ((i = fullText.indexOf(term, i + 1)) != -1) {
-            result.add(new Token[] { new Token(term, i) });
-        }
+        do {
+            result.add(new Token[]{new Token(term, i)});
+        } while ((i = fullText.indexOf(term, i + 1)) != -1);
         return result;
     }
 
@@ -244,7 +265,11 @@ public class GlossarySearcher {
         // Make comparison case-insensitive
         String strLower = str.toLowerCase(srcLang.getLocale());
         if (isGlossaryStemming()) {
-            return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            if (Preferences.isPreference(Preferences.GLOSSARY_STEMMING_FULL)) {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY_FULL);
+            } else {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            }
         } else {
             // skip whitespace tokens
             return Arrays.stream(tok.tokenizeVerbatim(strLower)).filter(tok -> !StringUtil.isWhiteSpace(
@@ -292,7 +317,7 @@ public class GlossarySearcher {
      *             If the entries list is null.
      */
     List<GlossaryEntry> sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
-            List<GlossaryEntry> entries) throws IllegalArgumentException {
+            @Nullable List<GlossaryEntry> entries) throws IllegalArgumentException {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
         }

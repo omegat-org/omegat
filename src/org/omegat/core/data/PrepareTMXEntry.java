@@ -58,6 +58,11 @@ public class PrepareTMXEntry implements ITMXEntry {
     public PrepareTMXEntry() {
     }
 
+    public PrepareTMXEntry(String source, String translation) {
+        this.source = source;
+        this.translation = translation;
+    }
+
     public PrepareTMXEntry(TMXEntry e) {
         source = e.source;
         translation = e.translation;

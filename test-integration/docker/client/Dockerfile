@@ -46,6 +46,7 @@ RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-${GRAD
     && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip) && mv /opt/gradle-${GRADLE} /opt/gradle
 RUN mkdir -p /gradle-cache && chown -R omegat:omegat /gradle-cache
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen &&  locale-gen
+RUN mkdir -p /workdir && chmod 1777 /workdir
 
 USER omegat
 

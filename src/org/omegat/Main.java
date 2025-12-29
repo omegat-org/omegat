@@ -70,7 +70,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
 import tokyo.northside.logging.ILogger;
@@ -137,7 +137,7 @@ public final class Main {
     private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -276,6 +276,15 @@ public final class Main {
     public static void restartGUI(String projectDir) {
         // Check we have `java` command in java.home
         Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
+        String installDir = StaticUtils.installDir();
+        Path parent = null;
+        if (installDir != null) {
+            parent = Paths.get(installDir).getParent();
+        }
+        if (!javaBin.toFile().exists()) {
+            // on Windows
+            javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java.exe");
+        }
         List<String> command = new ArrayList<>();
         if (javaBin.toFile().exists()) {
             // Build command: java -cp ... org.omegat.Main
@@ -286,25 +295,19 @@ public final class Main {
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
             command.addAll(CLIParameters.unparseArgs(PARAMS));
-        } else {
-            // assumes jpackage
-            String installDir = StaticUtils.installDir();
-            if (installDir == null) {
-                return;
-            } else {
-                Path parent = Paths.get(installDir).getParent();
-                if (parent == null) {
-                    return;
-                }
-                javaBin = parent.resolve("bin/OmegaT");
-                if (!javaBin.toFile().exists()) {
-                    // abort restart
-                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
-                    return;
-                }
-                command.add(javaBin.toString());
-                command.addAll(CLIParameters.unparseArgs(PARAMS));
+        } else if (parent != null) {
+            // assumes jpackage or Windows installer
+            javaBin = parent.resolve("bin/OmegaT");
+            if (!javaBin.toFile().exists()) {
+                javaBin = parent.resolve("OmegaT.exe");
             }
+            if (!javaBin.toFile().exists()) {
+                // abort restart
+                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                return;
+            }
+            command.add(javaBin.toString());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -377,7 +380,9 @@ public final class Main {
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-        tweakX11AppName();
+        if (Platform.isUnixLike()) {
+            tweakX11AppName();
+        }
         System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);

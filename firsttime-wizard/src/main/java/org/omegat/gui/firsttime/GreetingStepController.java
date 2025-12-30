@@ -29,7 +29,6 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.gui.preferences.IPreferencesController;

@@ -71,8 +71,6 @@ final class GreetingStepController implements IPreferencesController {
         try {
             greetingPane.setPage(url);
         } catch (IOException ignored) {
-            greetingPane.setText(FirstTimeConfigurationWizardUtil.getString("philosophy.description",
-                    "Message read error"));
         }
         JScrollPane greetScroll = new JScrollPane(greetingPane);
         greetScroll.setPreferredSize(new Dimension(280, 100));

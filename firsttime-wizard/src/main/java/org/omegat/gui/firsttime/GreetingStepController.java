@@ -28,10 +28,10 @@ import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.io.IOException;
-import java.net.URI;
+import java.net.URL;
+import java.util.Objects;
 
 import org.omegat.gui.preferences.IPreferencesController;
-import org.omegat.help.Help;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -57,16 +57,22 @@ final class GreetingStepController implements IPreferencesController {
     private void initGreetingPane() {
         greetingPane.setEditable(false);
         greetingPane.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        String language = detectFirstStepsLanguage();
+        greetingPane.setName("GreetingPane");
+        greetingPane.setComponentOrientation(
+                BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT : ComponentOrientation.LEFT_TO_RIGHT);
+        URL url = GreetingStepController.class.getResource(
+                "/" + OConsts.HELP_DIR + "/" + OConsts.HELP_FIRST_STEPS_PREFIX + "/" + language + "/" + PHILOSOPHY);
+        if (url == null) {
+            // fallback to English
+            url = Objects.requireNonNull(GreetingStepController.class.getResource(
+                    "/" + OConsts.HELP_DIR + "/" + OConsts.HELP_FIRST_STEPS_PREFIX + "/en/" + PHILOSOPHY));
+        }
         try {
-            String language = detectFirstStepsLanguage();
-            greetingPane.setName("GreetingPane");
-            greetingPane.setComponentOrientation(
-                    BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT : ComponentOrientation.LEFT_TO_RIGHT);
-            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, PHILOSOPHY);
-            if (uri != null) {
-                greetingPane.setPage(uri.toURL());
-            }
+            greetingPane.setPage(url);
         } catch (IOException ignored) {
+            greetingPane.setText(FirstTimeConfigurationWizardUtil.getString("philosophy.description",
+                    "Message read error"));
         }
         JScrollPane greetScroll = new JScrollPane(greetingPane);
         greetScroll.setPreferredSize(new Dimension(280, 100));
@@ -78,10 +84,12 @@ final class GreetingStepController implements IPreferencesController {
         String language = Language.getLowerCaseLanguageFromLocale();
         String country = Language.getUpperCaseCountryFromLocale();
         String fullLocale = language + "_" + country;
-        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, fullLocale, OConsts.HELP_FIRST_STEPS) != null) {
+        if (GreetingStepController.class.getResource(
+                "/" + OConsts.HELP_DIR + "/" + OConsts.HELP_FIRST_STEPS_PREFIX + "/" + fullLocale + "/" + PHILOSOPHY) != null) {
             return fullLocale;
         }
-        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS) != null) {
+        if (GreetingStepController.class.getResource(
+                "/" + OConsts.HELP_DIR + "/" + OConsts.HELP_FIRST_STEPS_PREFIX + "/" + language + "/" + PHILOSOPHY) != null) {
             return language;
         }
         return "en";

@@ -124,7 +124,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
         String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);
-        if (initModeClassName != null) {
+        if (!StringUtil.isEmpty(initModeClassName)) {
             try {
                 initModeClass = getClass().getClassLoader().loadClass(initModeClassName);
             } catch (ClassNotFoundException e1) {

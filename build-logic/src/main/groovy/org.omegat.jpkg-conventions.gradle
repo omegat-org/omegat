@@ -19,7 +19,7 @@ tasks.register('jars', Sync) {
     dependsOn tasks.jar
 }
 
-// prepare japckage contents
+// prepare jpackage contents
 tasks.register('jpackageAppContentGreetings', Sync) {
     dependsOn jpackage
     dependsOn tasks.findByName('firstSteps')

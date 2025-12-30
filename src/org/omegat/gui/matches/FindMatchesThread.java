@@ -103,7 +103,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      * @return result as a list of NearString.
      */
     @VisibleForTesting
-    static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged, int threshold) {
+    static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged, int threshold)
+            throws FindMatches.StoppedException {
         FindMatches finder = new FindMatches(project, CoreState.getInstance().getSegmenter(), OConsts.MAX_NEAR_STRINGS,
                 false, threshold);
         return finder.search(srcText, true, isEntryChanged);

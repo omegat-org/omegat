@@ -3,9 +3,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "quarterly"
   - package-ecosystem: gradle
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "quarterly"
     open-pull-requests-limit: 20

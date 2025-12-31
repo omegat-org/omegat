@@ -92,6 +92,24 @@ public class GlossarySearcher {
         return filterGlossary(sortGlossaryEntries(result), mergeAltDefinitions);
     }
 
+    /**
+     * Searches for matching tokens between the source text of a {@code SourceTextEntry}
+     * and the source text of a {@code GlossaryEntry}.
+     * <p>
+     * The method tokenizes the source text and compares it with the glossary
+     * entry's source text. If no matches are found,
+     * it attempts to find matches using rules specific to CJK (Chinese,
+     * Japanese, Korean) text.
+     *
+     * @param ste
+     *              the source text entry containing the text to be tokenized
+     *              and matched
+     * @param entry
+     *              the glossary entry containing the source text to be matched
+     *              against
+     * @return   a mutable list of token arrays representing the matched
+     *           tokens between the source text entry and the glossary entry
+     */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
         // Compute source entry tokens
         Token[] strTokens = tokenize(ste.getSrcText(),
@@ -194,14 +212,14 @@ public class GlossarySearcher {
         IProject project = Core.getProject();
         if (!project.isProjectLoaded()
                 || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         if (!StringUtil.isCJK(term)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         int i = fullText.indexOf(term);
         if (i == -1) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         List<Token[]> result = new ArrayList<>();
         result.add(new Token[] { new Token(term, i) });

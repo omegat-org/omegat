@@ -267,26 +267,25 @@
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
-        <term id="dialogs.preferences.glossary.sort.by.source.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.source.term.length"> </link><option>Sort by source text term length</option></term>
-		<listitem>
-		  <para>If some glossary items are similar in a source term text,
-		  and one contains another term text, sort by a length of source text.</para>
-		</listitem>
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort source terms by length</option></term>
+		  <listitem>
+			  <para>Longer source terms appear first.</para>
+		  </listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
         <term id="dialogs.preferences.glossary.sort.by.target.term.length.title"><link linkend="dialogs.preferences.glossary.sort.by.target.term.length"> </link><option>Sort by source text term length</option></term>
 		<listitem>
-		  <para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
+		  <para>Shorter definitions appear first.</para>
 		</listitem>
 	  </varlistentry>
-        
+
        <varlistentry id="dialogs.preferences.glossary.use.full.stemming">
            <term id="dialogs.preferences.glossary.use.full.stemming.title"><option>Use full stemming</option></term>
            <listitem>
                <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, English, French, and Italian are implemented.</para>
            </listitem>
-       </varlistentry> 
+       </varlistentry>
 	</variablelist>
   </section>
 
@@ -655,7 +654,7 @@
 		  enable spell checking. If the module provides a Morfologik dictionary,
 		  spellchecking works without having to install a dictionary in the folder.</para>
 		  <para>You can put a dictionary in this folder to a use custom spelling dictionary,
-		  or if your project target language is not covered by an OmegaT language module.</para>		  
+		  or if your project target language is not covered by an OmegaT language module.</para>
 		</listitem>
 	  </varlistentry>
 	  

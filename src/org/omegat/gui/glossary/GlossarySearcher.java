@@ -343,8 +343,7 @@ public class GlossarySearcher {
         boolean sortBySrcLength = isGlossarySortBySrcLength();
         boolean sortByLength = isGlossarySortByLength();
         int c = p1 - p2;
-        if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
-                || o1.getSrcText().startsWith(o2.getSrcText()))) {
+        if (c == 0 && sortBySrcLength) {
             c = o2.getSrcText().length() - o1.getSrcText().length();
         }
         if (c == 0) {

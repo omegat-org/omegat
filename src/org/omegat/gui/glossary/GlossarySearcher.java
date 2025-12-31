@@ -326,14 +326,33 @@ public class GlossarySearcher {
                         srcLangCollator, targetLangCollator)).collect(Collectors.toList());
     }
 
+    /**
+     * Determines whether glossary entries should be sorted by the length of source term.
+     * Can be used to prioritize longer glossary entries in sorting operations.
+     *
+     * @return {@code true} if glossary entries are to be sorted by source length,
+     *         {@code false} otherwise.
+     */
     @VisibleForTesting
     boolean isGlossarySortBySrcLength() {
         return Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
     }
 
+    /**
+     * Determines whether glossary entries should be sorted by definition length.
+     * Can be used to prioritize longer glossary entries in sorting operations.
+     *
+     * @return {@code true} if glossary entries are to be sorted by definition length,
+     *         {@code false} otherwise.
+     */
     @VisibleForTesting
     boolean isGlossarySortByLength() {
         return Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+    }
+
+    // Prioritize longer glossary entries in sorting operations
+    private int compareLonger(String s1, String s2) {
+        return s2.length() - s1.length();
     }
 
     private int compareGlossaryEntries(GlossaryEntry o1, GlossaryEntry o2, Collator srcLangCollator,
@@ -344,13 +363,13 @@ public class GlossarySearcher {
         boolean sortByLength = isGlossarySortByLength();
         int c = p1 - p2;
         if (c == 0 && sortBySrcLength) {
-            c = o2.getSrcText().length() - o1.getSrcText().length();
+            c = compareLonger(o1.getSrcText(), o2.getSrcText());
         }
         if (c == 0) {
             c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
         }
         if (c == 0 && sortByLength) {
-            c = o2.getLocText().length() - o1.getLocText().length();
+            c = compareLonger(o1.getLocText(), o2.getLocText());
         }
         if (c == 0) {
             c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());

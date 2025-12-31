@@ -74,12 +74,12 @@ public class FindGlossaryThreadTest extends TestCore {
         //
         entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
-        assertEquals("cat", entries.get(1).getSrcText());
-        assertEquals("catty", entries.get(1).getLocText());
+        assertEquals("horse", entries.get(1).getSrcText());
         assertEquals("cat", entries.get(2).getSrcText());
-        assertEquals("mikeneko", entries.get(2).getLocText());
-        assertEquals("dog", entries.get(3).getSrcText());
-        assertEquals("horse", entries.get(4).getSrcText());
+        assertEquals("catty", entries.get(2).getLocText());
+        assertEquals("cat", entries.get(3).getSrcText());
+        assertEquals("mikeneko", entries.get(3).getLocText());
+        assertEquals("dog", entries.get(4).getSrcText());
         assertEquals("enhance", entries.get(5).getLocText());
         assertEquals("up", entries.get(6).getLocText());
         assertEquals("direct", entries.get(7).getLocText());

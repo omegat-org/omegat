@@ -297,7 +297,7 @@
 		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
 			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Sort definitions by length</option></term>
 			<listitem>
-				<para>Shorter definitions appear first.</para>
+				<para>Longer definitions appear first.</para>
 			</listitem>
 		</varlistentry>
 	</variablelist>

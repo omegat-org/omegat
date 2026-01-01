@@ -26,6 +26,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -246,12 +247,12 @@ public class GlossarySearcher {
             return tokens;
         }
         List<Token> result = new ArrayList<>(tokens.length);
-        for (Token tok : tokens) {
-            if (!tokenInTag(tok, tags)) {
-                result.add(tok);
+        for (Token token : tokens) {
+            if (!tokenInTag(token, tags)) {
+                result.add(token);
             }
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     private static boolean tokenInTag(Token tok, List<Tag> tags) {
@@ -264,6 +265,17 @@ public class GlossarySearcher {
         return false;
     }
 
+    /**
+     * Sorts a list of glossary entries based on various criteria, including
+     * priority, source text length, source text alphabetical order, target text
+     * length, and target text alphabetical order.
+     *
+     * @param entries
+     *            The list of glossary entries to be sorted.
+     * @return A sorted list of glossary entries.
+     * @throws IllegalArgumentException
+     *             If the entries list is null.
+     */
     static List<GlossaryEntry> sortGlossaryEntries(List<GlossaryEntry> entries) {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
@@ -274,8 +286,8 @@ public class GlossarySearcher {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0 && sortBySrcLength && (o2.getSrcText().contains(o1.getSrcText())
-                    || o1.getSrcText().contains(o2.getSrcText()))) {
+            if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
+                    || o1.getSrcText().startsWith(o2.getSrcText()))) {
                 // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }

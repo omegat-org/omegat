@@ -274,7 +274,9 @@ public class GlossarySearcher {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0 && sortBySrcLength) {
+            if (c == 0 && sortBySrcLength && (o2.getSrcText().contains(o1.getSrcText())
+                    || o1.getSrcText().contains(o2.getSrcText()))) {
+                // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }
             // sort source text alphabetically, first ignore a case, then

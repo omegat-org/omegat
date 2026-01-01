@@ -288,7 +288,7 @@
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
-		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort source terms by length</option></term>
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort similar terms by length</option></term>
 		  <listitem>
 			  <para>Longer source terms appear first.</para>
 		  </listitem>

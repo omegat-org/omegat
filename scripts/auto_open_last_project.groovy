@@ -1,4 +1,4 @@
-/** :name=Auto Open Last Project :description=Allow to automatically open last used OmegaT project
+/**
  *
  *  Allow to automatically open last used OmegaT project
  *

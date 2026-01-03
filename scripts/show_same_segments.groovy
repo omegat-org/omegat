@@ -1,6 +1,5 @@
-/* :name=Show Same Segments :description=Display a list of segments where source and target identical content
- *
- * Display a list of segments where source and target identical content
+/**
+ * Display a list of segments where source and target identical content.
  *
  * @author  Kos Ivantsov
  * @date    2013-11-29

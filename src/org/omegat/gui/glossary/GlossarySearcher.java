@@ -92,6 +92,24 @@ public class GlossarySearcher {
         return filterGlossary(sortGlossaryEntries(result), mergeAltDefinitions);
     }
 
+    /**
+     * Searches for matching tokens between the source text of a {@code SourceTextEntry}
+     * and the source text of a {@code GlossaryEntry}.
+     * <p>
+     * The method tokenizes the source text and compares it with the glossary
+     * entry's source text. If no matches are found,
+     * it attempts to find matches using rules specific to CJK (Chinese,
+     * Japanese, Korean) text.
+     *
+     * @param ste
+     *              the source text entry containing the text to be tokenized
+     *              and matched
+     * @param entry
+     *              the glossary entry containing the source text to be matched
+     *              against
+     * @return   a mutable list of token arrays representing the matched
+     *           tokens between the source text entry and the glossary entry
+     */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
         // Compute source entry tokens
         Token[] strTokens = tokenize(ste.getSrcText(),
@@ -194,14 +212,14 @@ public class GlossarySearcher {
         IProject project = Core.getProject();
         if (!project.isProjectLoaded()
                 || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         if (!StringUtil.isCJK(term)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         int i = fullText.indexOf(term);
         if (i == -1) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         List<Token[]> result = new ArrayList<>();
         result.add(new Token[] { new Token(term, i) });
@@ -228,12 +246,12 @@ public class GlossarySearcher {
             return tokens;
         }
         List<Token> result = new ArrayList<>(tokens.length);
-        for (Token tok : tokens) {
-            if (!tokenInTag(tok, tags)) {
-                result.add(tok);
+        for (Token token : tokens) {
+            if (!tokenInTag(token, tags)) {
+                result.add(token);
             }
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     private static boolean tokenInTag(Token tok, List<Tag> tags) {
@@ -246,6 +264,17 @@ public class GlossarySearcher {
         return false;
     }
 
+    /**
+     * Sorts a list of glossary entries based on various criteria, including
+     * priority, source text length, source text alphabetical order, target text
+     * length, and target text alphabetical order.
+     *
+     * @param entries
+     *            The list of glossary entries to be sorted.
+     * @return A sorted list of glossary entries.
+     * @throws IllegalArgumentException
+     *             If the entries list is null.
+     */
     static List<GlossaryEntry> sortGlossaryEntries(List<GlossaryEntry> entries) {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
@@ -256,8 +285,8 @@ public class GlossarySearcher {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0 && sortBySrcLength && (o2.getSrcText().contains(o1.getSrcText())
-                    || o1.getSrcText().contains(o2.getSrcText()))) {
+            if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
+                    || o1.getSrcText().startsWith(o2.getSrcText()))) {
                 // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }

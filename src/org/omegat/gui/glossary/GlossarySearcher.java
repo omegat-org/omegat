@@ -26,7 +26,6 @@
 
 package org.omegat.gui.glossary;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;

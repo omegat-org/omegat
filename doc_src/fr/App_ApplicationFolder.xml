@@ -6,7 +6,7 @@
   <para>Le dossier application contient l’application <filename>OmegaT.jar</filename> ainsi qu’un certain nombre de fichiers importants.</para>
 
   <note>
-	<para>L’emplacement du dossier application dépend de votre plateforme et de la manière dont vous avez installé OmegaT. L’emplacement recommandé ou par défaut est le suivant :</para>
+	<para>L’emplacement du dossier application dépend de votre plateforme et de la manière dont vous avez installé OmegaT. L’emplacement recommandé ou par défaut est le suivant :</para>
 
 	<variablelist>
 	  <varlistentry>

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -65,27 +65,27 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.lost.in.translation">Vous avez perdu votre traduction ?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.lost.in.translation">Vous avez perdu votre traduction ?</a>
                         </span>
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.project.locked">Votre projet est verrouillé ?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.project.locked">Votre projet est verrouillé ?</a>
                         </span>
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.project.wont.open">Votre projet ne s'ouvre pas ?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.project.wont.open">Votre projet ne s'ouvre pas ?</a>
                         </span>
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.translated.file.broken">Votre fichier traduit ne s'ouvre pas ?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.translated.file.broken">Votre fichier traduit ne s'ouvre pas ?</a>
                         </span>
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.how.to.html#how.to.restore.your.data.omegat.wont.behave">OmegaT ne fonctionne pas correctement ?</a>
+                           <a href="chapter.how.to.html#how.to.restore.your.data.omegat.wont.behave">OmegaT ne fonctionne pas correctement ?</a>
                         </span>
                      </li>
                      <li>
@@ -157,6 +157,11 @@
                      <li>
                         <span class="section">
                            <a href="chapter.how.to.html#how.to.setup.team.project.prepare.the.repository">Préparations</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.manage.team.project">Gestion d’un projet en équipe</a>
                         </span>
                      </li>
                      <li>
@@ -286,11 +291,11 @@
                         <p>OmegaT conserve jusqu’à dix de ces fichiers.</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
-                           <p>Le nom du fichier de sauvegarde suit le modèle <code class="filename">projet_save.tmx.AAAAMMJJhhmm.bak</code>, dans lequel <code class="code">AAAA</code> correspond aux 4 chiffres de l’année, <code class="code">MM</code> au mois, <code class="code">JJ</code> au jour, et <code class="code">hh</code> et <code class="code">mm</code> indiquent les heures et les minutes.</p>
+                           <p>Le nom du fichier de sauvegarde suit le modèle <code class="filename">project_save.tmx.AAAAMMJJhhmm.bak</code>, dans lequel <code class="code">AAAA</code> correspond aux 4 chiffres de l’année, <code class="code">MM</code> au mois, <code class="code">JJ</code> au jour, et <code class="code">hh</code> et <code class="code">mm</code> indiquent les heures et les minutes.</p>
                         </div>
                      </li>
                      <li class="listitem">
-                        <p>À chaque modification du fichier <code class="filename">project_save.tmx</code> :</p>
+                        <p>À chaque modification du fichier <code class="filename">project_save.tmx</code> :</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
@@ -311,7 +316,7 @@
                               </li>
                            </ul>
                         </div>
-                        <p>OmegaT crée un fichier de sauvegarde nommé <code class="filename">projet_save.tmx.bak</code>.</p>
+                        <p>OmegaT crée un fichier de sauvegarde nommé <code class="filename">project_save.tmx.bak</code>.</p>
                         <p>Ce fichier est une copie de <code class="filename">project_save.tmx</code> 
                            <span class="emphasis">
                               <em>avant</em>
@@ -344,19 +349,19 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Vous avez perdu votre traduction ?</h3>
+                        <h3 class="title">Vous avez perdu votre traduction ?</h3>
                      </div>
                   </div>
                </div>
                <p>Même si vous craignez d’avoir perdu des données de traduction, elles sont surement stockées en toute sécurité dans la mémoire de sauvegarde la plus récente, qui n’a généralement pas plus de quelques minutes.</p>
-               <p>Procédez comme suit :</p>
+               <p>Procédez comme suit :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
                         <p>Fermez le projet pour éviter toute modification de l’état des fichiers de sauvegarde.</p>
                      </li>
                      <li class="listitem">
-                        <p>Renommez le fichier actuel <code class="filename">projet_save.tmx</code> (en <code class="filename">projet_save.tmx.tmp</code>, par exemple).</p>
+                        <p>Renommez le fichier actuel <code class="filename">project_save.tmx</code> (en <code class="filename">project_save.tmx.tmp</code>, par exemple).</p>
                      </li>
                      <li class="listitem">
                         <p>Choisissez la sauvegarde de la mémoire de traduction la plus susceptible de contenir les données recherchées.</p>
@@ -379,12 +384,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Votre projet est verrouillé ?</h3>
+                        <h3 class="title">Votre projet est verrouillé ?</h3>
                      </div>
                   </div>
                </div>
                <p>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, le système d’exploitation peut verrouiller le fichier <code class="filename">omegat.project</code> et vous empêcher de le rouvrir après le redémarrage de l’ordinateur.</p>
-               <p>Procédez comme suit :</p>
+               <p>Procédez comme suit :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -410,12 +415,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Votre projet ne s'ouvre pas ?</h3>
+                        <h3 class="title">Votre projet ne s'ouvre pas ?</h3>
                      </div>
                   </div>
                </div>
                <p>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, certains fichiers importants peuvent être corrompus et empêcher la réouverture du projet après le redémarrage de votre système.</p>
-               <p>Procédez comme suit :</p>
+               <p>Procédez comme suit :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -428,7 +433,7 @@
                         <p>Dans l’ancien projet, choisissez le fichier de mémoire de traduction (principal ou de sauvegarde) qui contient le plus probablement les données que vous recherchez.</p>
                      </li>
                      <li class="listitem">
-                        <p>Renommez-le en <code class="filename">projet_save.tmx</code> si nécessaire.</p>
+                        <p>Renommez-le en <code class="filename">project_save.tmx</code> si nécessaire.</p>
                      </li>
                      <li class="listitem">
                         <p>Copiez-le dans le dossier <code class="filename">omegat/</code> de votre nouveau projet.</p>
@@ -444,12 +449,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Votre fichier traduit ne s'ouvre pas ?</h3>
+                        <h3 class="title">Votre fichier traduit ne s'ouvre pas ?</h3>
                      </div>
                   </div>
                </div>
                <p>Très souvent, les fichiers de suites bureautiques contiennent des balises qui doivent être copiées dans la traduction pour que le fichier traduit puisse être ouvert dans l’application d’origine. Dans certains cas, les balises manquantes empêchent l’ouverture du fichier.</p>
-               <p>Procédez comme suit :</p>
+               <p>Procédez comme suit :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -497,12 +502,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">OmegaT ne fonctionne pas correctement ?</h3>
+                        <h3 class="title">OmegaT ne fonctionne pas correctement ?</h3>
                      </div>
                   </div>
                </div>
-               <p>Quelque chose s’est produit et OmegaT ne fonctionne plus correctement. Vous avez tout essayé et ne parvenez pas à résoudre le problème. Avant d’appeler à l’aide, tentez une dernière manipulation : redémarrez OmegaT avec les paramètres par défaut.</p>
-               <p>Procédez comme suit :</p>
+               <p>Quelque chose s’est produit et OmegaT ne fonctionne plus correctement. Vous avez tout essayé et ne parvenez pas à résoudre le problème. Avant d’appeler à l’aide, tentez une dernière manipulation : redémarrez OmegaT avec les paramètres par défaut.</p>
+               <p>Procédez comme suit :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -827,7 +832,7 @@
                         <p>Cette méthode fonctionne également pour le partage de glossaires lorsque le glossaire modifiable du projet (avec un nom différent de celui par défaut pour éviter d’écraser le fichier) est situé dans un dossier de glossaire partagé. Voir l’annexe <a class="link" href="chapter.appendices.html#app.glossaries" title="Glossaires">Glossaires</a> pour en savoir plus.</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
-                           <p>Cette méthode de partage fonctionne bien lorsque le décalage entre les mises à jour de la TMX n’a pas une grande importance : par exemple, si les données peuvent être envoyées à la révision seulement quelques fois par jour.</p>
+                           <p>Cette méthode de partage fonctionne bien lorsque le décalage entre les mises à jour de la TMX n’a pas une grande importance : par exemple, si les données peuvent être envoyées à la révision seulement quelques fois par jour.</p>
                         </div>
                      </dd>
                      <dt>
@@ -849,7 +854,7 @@
                      </span>
                   </p>
                   <p>Un projet OmegaT est un ensemble complexe de fichiers. De tels systèmes ne sont pas toujours en mesure de fournir la version la plus récente de vos données, et peuvent même bloquer certains fichiers sans raison apparente, voire corrompre des fichiers liés à des projets d’équipe.</p>
-                  <p>Assurez-vous d'avoir correctement testé la présentation de votre projet et de procéder à une sauvegarde séparée de vos données avant de les partager dans un tel système.</p>
+                  <p>Assurez-vous d’avoir correctement testé la structure de votre projet et réalisé une sauvegarde séparée de vos données avant de partager celles-ci dans ce type de système.</p>
                </div>
             </section>
             <section class="section" id="how.to.tm.bridge.two.languages">
@@ -953,7 +958,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   </div>
                </div>
             </div>
-            <p>Les filtres de fichiers d’OmegaT permettent de prendre en charge un grand nombre de formats de fichiers courants et moins courants. Si vous devez prendre en charge des formats qui ne sont pas traités par OmegaT, il y a quatre façons de le faire :</p>
+            <p>Les filtres de fichiers d’OmegaT permettent de prendre en charge un grand nombre de formats de fichiers courants et moins courants. Si vous devez prendre en charge des formats qui ne sont pas traités par OmegaT, il y a quatre façons de le faire :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -1002,7 +1007,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      <li class="listitem" id="how.to.translate.other.files.third.party.utilities.rainbow">
                         <p>Rainbow, d’<a class="ulink" href="https://okapiframework.org" target="_top">Okapi Framework</a>
                         </p>
-                        <p>Licence : Licence Apache Version 2.0</p>
+                        <p>Licence : Licence Apache Version 2.0</p>
                         <p>L’Okapi Framework comporte un certain nombre de filtres de fichiers, dont certains ne sont pas pris en charge nativement par OmegaT. Voir <a class="ulink" href="https://okapiframework.org/wiki/index.php?title=Filters" target="_top">Liste des filtres de fichiers</a> pour en savoir plus.</p>
                         <p>Rainbow peut créer des fichiers conformes à XLIFF 1.2 ou des projets OmegaT à partir de tous les fichiers définis comme fichiers « d’entrée ». Les fichiers pris en charge par Rainbow sont convertis en XLIFF et insérés en tant que fichiers source dans un projet OmegaT à part entière que vous pouvez ouvrir immédiatement avec OmegaT. Voir <a class="ulink" href="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project" target="_top">Rainbow TKit - Projet OmegaT</a> pour en savoir plus.</p>
                      </li>
@@ -1010,19 +1015,19 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                         <p>
                            <a class="ulink" href="https://po4a.org" target="_top">po4a</a>
                         </p>
-                        <p>Licence : Licence Publique Générale GNU v2</p>
+                        <p>Licence : Licence Publique Générale GNU v2</p>
                         <p>po4a prend en charge un certain nombre de formats de documentation de logiciels libres, énumérés sur la page d’accueil du site, et propose des outils de conversion vers et depuis le format po. Voir la section <a class="link" href="chapter.appendices.html#file.filters.po">Fichiers PO</a> pour en savoir plus.</p>
                      </li>
                      <li class="listitem">
                         <p>Les convertisseurs de <a class="ulink" href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html" target="_top">Translate Toolkit</a>
                         </p>
-                        <p>Licence : Licence Publique Générale GNU v2</p>
+                        <p>Licence : Licence Publique Générale GNU v2</p>
                         <p>Le Translate Toolkit offre un certain nombre d’outils de conversion vers et depuis le format po. Voir <a class="ulink" href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html" target="_top">Convertisseurs</a> pour en savoir plus.</p>
                      </li>
                      <li class="listitem" id="how.to.translate.other.files.third.party.utilities.openxliff">
                         <p>OpenXLIFF de <a class="ulink" href="https://maxprograms.com/" target="_top">Maxprograms</a>
                         </p>
-                        <p>Licence : Eclipse Public License v1.0</p>
+                        <p>Licence : Eclipse Public License v1.0</p>
                         <p>OpenXLIFF prend en charge un certain nombre de filtres de fichiers, dont quelques-uns non pris en charge nativement par OmegaT. Voir <a class="ulink" href="https://maxprograms.com/products/openxliff.html" target="_top">Filtres OpenXLIFF</a> pour en savoir plus. Maxprograms propose également <a class="ulink" href="https://maxprograms.com/products/xliffmanager.html" target="_top">XLIFF Manager</a>, une interface graphique pour les filtres OpenXLIFF.</p>
                         <p>OpenXLIFF génère des fichiers compatibles avec XLIFF 1.2.</p>
                      </li>
@@ -1044,7 +1049,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      <li class="listitem">
                         <p>L’extension Okapi Filters pour OmegaT, d’<a class="ulink" href="https://okapiframework.org" target="_top">Okapi Framework</a>
                         </p>
-                        <p>Licence : Licence Apache Version 2.0</p>
+                        <p>Licence : Licence Apache Version 2.0</p>
                         <p>L’extension de filtre de fichier n’inclut pas tous les filtres de fichier d’Okapi Framework. Voir <a class="ulink" href="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included" target="_top">Filtres inclus</a> pour en savoir plus.</p>
                         <p>Une fois installée, l’extension donne un accès direct aux formats ajoutés et permet également d’associer un fichier de paramètres de filtrage personnalisé créé dans Rainbow. Voir <a class="link" href="chapter.how.to.html#how.to.translate.other.files.third.party.utilities.rainbow">ci-dessus</a>.</p>
                      </li>
@@ -1071,13 +1076,13 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   </div>
                </div>
             </div>
-            <p>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des <span class="emphasis">
-                  <em>logiciels de gestion de version</em>
-               </span> : <span class="emphasis">
-                  <em>SVN</em>
-               </span> ou <span class="emphasis">
+            <p>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <span class="emphasis">
                   <em>Git</em>
-               </span>.</p>
+               </span> ou <span class="emphasis">
+                  <em>SVN</em>
+               </span> (que nous appellerons collectivement <span class="emphasis">
+                  <em>logiciel de gestion de version</em>
+               </span> dans le reste de ce document). </p>
             <p>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</p>
             <div class="note">
                <h3 class="title">Note</h3>
@@ -1094,32 +1099,32 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                <p>Voici les étapes à suivre afin de mettre en place un projet en équipe :</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</p>
+                     <li class="listitem">
+                        <p>Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</p>
                         <p>Cela peut normalement se faire par l’intermédiaire d’une interface web, d’une application graphique, ou en ligne de commande. Consultez la documentation de votre serveur ou de votre service d’hébergement pour en savoir plus.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</p>
+                     <li class="listitem">
+                        <p>Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
-                           <p>Cette version locale contient votre copie du projet OmegaT qui servira de <span class="emphasis">
+                           <p>Cette version locale contient la copie du projet OmegaT qui servira à la <span class="emphasis">
                                  <em>gestionnaire de projet</em>
                               </span>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</p>
                         </div>
-                        <p>Le dépôt local est utilisé pour ajouter le projet initial au serveur, et peut aussi servir à effectuer des tâches de maintenance qui ne peuvent pas être réalisées directement dans OmegaT, comme la suppression de fichiers.</p>
+                        <p>Cette version locale est utilisée pour ajouter le projet initial à la version sur le serveur, ainsi que pour certaines tâches d’entretien. Voir la section <a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="Gestion d’un projet en équipe">Gestion d’un projet en équipe</a> pour en savoir plus.</p>
                         <p>Nous vous recommandons d’éviter d’utiliser ce dossier pour des tâches de traduction. Si vous avez besoin d’effectuer des traductions ou des tâches de révisions sur ce projet, utilisez OmegaT pour télécharger une copie séparée du projet en équipe et travaillez à partir de celle-ci. Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Utiliser un projet en équipe">Utiliser un projet en équipe</a> pour en savoir plus.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">Remplissez la copie locale vide avec un vrai projet OmegaT.</p>
+                     <li class="listitem">
+                        <p>Remplissez la copie locale vide avec un vrai projet OmegaT.</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>Créez la structure du projet</p>
-                                 <p>Si vous créez un nouveau projet vide, vous pouvez suivre la <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Créer un nouveau projet">procédure via interface graphique</a>, ou directement le créer avec la commande : <span class="command">
+                                 <p>Si vous créez un nouveau projet vide, vous pouvez suivre la <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Créer un nouveau projet">procédure via interface graphique</a>, ou directement le créer avec la commande :  <span class="command">
                                        <strong>java -jar OmegaT.jar team init &lt;langue source&gt; &lt;langue cible&gt;</strong>
                                     </span>
                                  </p>
-                                 <p>Cette commande permet aussi d’enregistrer automatiquement le projet dans le logiciel de gestion de version.</p>
+                                 <p>Cette commande effectue également l’enregistrement automatique du projet dans le logiciel de gestion de version.</p>
                               </li>
                               <li class="listitem">
                                  <p>Choisissez les paramètres appropriés</p>
@@ -1131,14 +1136,14 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                                  <p>Ajoutez les fichiers nécessaires</p>
                                  <p>Ajoutez également toute liste de fichiers de vérification orthographique pertinente que vous souhaitez mettre à la disposition de toutes les personnes qui travaillent sur le projet. Voir <a class="link" href="chapter.project.folder.html#project.folder.omegat.spellcheck">fichiers de vérification orthographique</a> pour en savoir plus.</p>
                                  <p>Si vous convertissez un projet existant, veillez à supprimer tous les fichiers du projet dont vous n’avez pas besoin ou que vous ne souhaitez pas envoyer au serveur avant de passer à la prochaine étape.</p>
-                                 <p>Copiez les fichiers à traduire dans le dossier source/ et utilisez votre client SVN ou Git, ou une ligne de commande, pour les ajouter et les publier dans le dépôt. Utilisez <a class="link" href="chapter.menus.html#menus.project" title="Projet">
+                                 <p>Copiez les fichiers à traduire dans le dossier source/ et utilisez votre client de logiciel de gestion de version, ou une ligne de commande, pour les ajouter et les publier dans le dépôt. Utilisez <a class="link" href="chapter.menus.html#menus.project" title="Projet">
                                        <span class="guimenu">Projet</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem">Envoyer les fichiers source</span>
-                                    </a> pour ajouter les fichiers à partir d’OmegaT.</p>
-                                 <p>Vous devez utiliser votre client SVN ou Git, ou la ligne de commande, pour ajouter et publier tout dictionnaire, glossaire, mémoire de traduction, ou autre fichier que vous souhaitez inclure dans le projet.</p>
-                                 <p>Cette étape peut être réalisée avant d’enregistrer et de publier le projet pour la première fois, et peut aussi être utilisée pour ajouter de nouveaux fichiers, ou même mettre à jour les fichiers existants après la création du projet.</p>
+                                    </a> pour ajouter des fichiers source à partir d’OmegaT.</p>
+                                 <p>Vous devez utiliser votre client logiciel de gestion de version, ou la ligne de commande, pour ajouter et publier tout dictionnaire, glossaire, mémoire de traduction, ou autre fichier que vous souhaitez inclure dans le projet.</p>
+                                 <p>Cette étape peut être réalisée soit avant soit après l’enregistrement et la publication du projet pour la première fois.</p>
                               </li>
                            </ul>
                         </div>
@@ -1157,7 +1162,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                               <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                                  <span class="guimenuitem">Envoyer les fichiers cible</span>
                               </a>.</p>
-                           <p>L’administrateur du projet en équipe doit utiliser le logiciel de gestion de version local pour <span class="bold">
+                           <p>La gestionnaire du projet en équipe doit utiliser le logiciel de gestion de version local pour <span class="bold">
                                  <strong>modifier</strong>
                               </span> ou <span class="bold">
                                  <strong>supprimer</strong>
@@ -1166,14 +1171,14 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                               </a> pour en savoir plus.</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">Enregistrez les fichiers du projet dans le logiciel de gestion de version local</p>
+                     <li class="listitem">
+                        <p>Enregistrez les fichiers du projet dans le logiciel de gestion de version local</p>
                         <p>Si vous avez créé le projet à partir de l’interface graphique, vous devrez alors explicitement l’ajouter au logiciel de gestion de version (<span class="command">
                               <strong>add</strong>
                            </span> dans SVN et Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">Placez les fichiers enregistrés dans le serveur d’hébergement</p>
+                     <li class="listitem">
+                        <p>Placez les fichiers enregistrés dans le serveur d’hébergement</p>
                         <p>Enfin, publiez votre projet sur le serveur distant (<span class="command">
                               <strong>commit</strong>
                            </span> sur SVN, <span class="command">
@@ -1182,31 +1187,31 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                               <strong>push</strong>
                            </span> sur Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">Donnez les droits d’accès à votre équipe.</p>
+                     <li class="listitem">
+                        <p>Donnez les droits d’accès à votre équipe.</p>
                         <div class="note">
                            <h3 class="title">Note</h3>
                            <p>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</p>
                         </div>
-                        <p>Une fois le projet prêt et téléchargé sur le serveur, l’administrateur du projet en équipe doit configurer l’accès des membres de l’équipe de traduction. L’accès à un projet en équipe nécessite les informations suivantes :</p>
+                        <p>Une fois le projet prêt et téléchargé sur le serveur, la gestionnaire du projet doit configurer l’accès des membres de l’équipe de traduction. L’accès à un projet en équipe nécessite les informations suivantes :</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>Projets sur un service d’hébergement</p>
-                                 <p>Les membres de l’équipe de traduction doivent créer un compte pour ce service et envoyer leur identifiant à l’administrateur du projet en équipe.</p>
-                                 <p>L’administrateur va alors accorder à ces comptes un accès en écriture au dépôt.</p>
+                                 <p>Les membres de l’équipe de traduction doivent créer un compte pour ce service et envoyer leur identifiant à la gestionnaire du projet.</p>
+                                 <p>Cette dernière va alors accorder à ces comptes un accès en écriture au dépôt.</p>
                               </li>
                               <li class="listitem">
                                  <p>Projets sur un serveur autohébergé</p>
-                                 <p>Si le serveur est autohébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, l’administrateur du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</p>
-                                 <p>Après avoir créé les comptes, l’administrateur doit envoyer aux membres leurs identifiants individuels.</p>
+                                 <p>Si le serveur est autohébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, la gestionnaire du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</p>
+                                 <p>Après avoir créé les comptes, cette dernière devra envoyer aux membres leurs identifiants individuels.</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">Demandez à tout le monde de télécharger le projet à partir d’OmegaT</p>
-                        <p>Les administrateurs ont deux options pour envoyer l’emplacement du projet aux membres :</p>
+                     <li class="listitem">
+                        <p>Le projet devra alors être téléchargé par les membres à partir d’OmegaT.</p>
+                        <p>La gestionnaire du projet a deux options pour envoyer l’emplacement du projet aux membres :</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
@@ -1214,7 +1219,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                                        <span class="guimenu">Projet</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.download.team.project">
-                                       <span class="guimenuitem">Télécharger projet en équipe…</span>
+                                       <span class="guimenuitem">Télécharger un projet en équipe…</span>
                                     </a> pour créer une copie locale du projet sur leur propre système.</p>
                               </li>
                               <li class="listitem">
@@ -1222,16 +1227,51 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                               </li>
                            </ol>
                         </div>
-                        <p>Une fois que l’administrateur du projet en équipe a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <a class="link" href="chapter.menus.html#menus.tools.statistics">statistiques du projet</a> soient les mêmes pour l’administrateur (sur le serveur) et pour les membres (localement).</p>
-                        <p>Si elles ne correspondent pas, vérifiez que les fichiers <code class="filename">filters.xml</code> et <code class="filename">segmentation.conf</code> sont partagés correctement.</p>
+                        <p>Une fois que la gestionnaire du projet a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <a class="link" href="chapter.menus.html#menus.tools.statistics">statistiques du projet</a> soient les mêmes pour celle-ci (sur le serveur) et pour les membres (localement).</p>
+                        <p>Si elles ne correspondent pas, il faudra vérifier que les deux projets utilisent les mêmes filtres et préférences de segmentation en s’[assurant que <code class="filename">filters.xml</code> et <code class="filename">segmentation.conf</code> sont partagés correctement.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">Vous pouvez maintenant travailler sur le projet avec votre équipe.</p>
+                     <li class="listitem">
+                        <p>Si la gestionnaire doit également travailler sur le projet, il est préférable qu’elle télécharge le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">Gestion d’un projet en équipe</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Les projets en équipe nécessitent l’exécution de tâches de gestion qui ne sont pas directement en lien avec la traduction. La gestionnaire du projet trouvera plus avantageux, et même parfois nécessaire, d’exécuter ces tâches directement dans le dépôt du logiciel de gestion de version, en particulier dans les cas où elle n’a q’un rôle de coordinatrice et n’est pas associée au travail de traduction lui-même.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">Ajouter des fichiers</span>
+                     </dt>
+                     <dd>
+                        <p>Bien qu’OmegaT mette à disposition un mécanisme pour ajouter des fichiers à traduire et des fichiers traduits au dépôt, la gestionnaire du projet devra ajouter les autres fichiers (dictionnaires, glossaires, mémoire de référence), à partir du logiciel de gestion de version.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Supprimer des fichiers</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT ne met pas à disposition un mécanisme pour effacer des fichiers d’un projet en équipe. Si des fichiers partagés deviennent inutiles, la gestionnaire du projet <span class="emphasis">
+                              <em>devra</em>
+                           </span> utiliser le logiciel de gestion de version pour les retirer du projet.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Consulter les données du projet</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">Note</h3>
+                           <p>Cette fonction ne concerne que les procédures où l’on demande aux traductaires d’ajouter les fichiers traduits au dépôt en tant que produits livrés.</p>
+                        </div>
+                        <p>Quand OmegaT ajoute les fichiers traduits, les données du projet sont également ajoutées au dépôt dans les formats <code class="filename">.txt</code> et <code class="filename">.json</code>. Ceci permet à la gestionnaire du projet de consulter ces données et éventuellement d’automatiser leur traitement sans avoir besoin d’ouvrir OmegaT.</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
@@ -1321,7 +1361,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
 	&lt;mapping local=&quot;&quot; repository=&quot;EN-US_FR_project&quot;/&gt;
 &lt;/repository&gt;</pre>
                <p>La totalité du contenu du <code class="filename">https://dépôt_de_tous_les_projets_OmegaT_en_équipe/Projet_En-US_FR</code> est mise en correspondance avec le projet OmegaT local.</p>
-               <p>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :</p>
+               <p>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :</p>
                <pre class="programlisting">&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe&quot;&gt;
 	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
@@ -1360,9 +1400,9 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      </div>
                   </div>
                </div>
-               <p>Le processus ci-dessus décrit le scénario le plus courant, dans lequel l’administrateur du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</p>
+               <p>Le processus ci-dessus décrit le scénario le plus courant, dans lequel la gestionnaire du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</p>
                <p>Il est également possible d’utiliser une configuration de projet en équipe dans laquelle plusieurs membres partagent le fichier <code class="filename">project_save.tmx</code>, et seulement un sous-ensemble d’autres fichiers.</p>
-               <p>La procédure de base est essentiellement la même, sauf que l’administrateur du projet en équipe n’ajoute pas chaque fichier au projet géré par version sur le serveur. Les fichiers restants sont copiés par les membres, ou bien des mises en correspondance permettant de synchroniser des fichiers à partir d’autres emplacements sont définies.</p>
+               <p>La procédure de base est essentiellement la même, sauf que la gestionnaire du projet en équipe n’ajoute pas chaque fichier au projet géré par version sur le serveur. Les fichiers restants sont copiés par les membres, ou bien des mises en correspondance permettant de synchroniser des fichiers à partir d’autres emplacements sont définies.</p>
             </section>
          </section>
          <section class="section" id="how.to.use.team.project">
@@ -1374,12 +1414,11 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                </div>
             </div>
             <p>Les projets en équipe emploient des mécanismes de synchronisation entre les membres du projet.</p>
-            <p>Lorsque le projet en équipe OmegaT est installé sur un serveur, l’administrateur envoie aux membres les informations nécessaires pour y accéder ; soit une URL qui indique l’emplacement du projet, soit un fichier <code class="filename">omegat.project</code>.</p>
+            <p>Lorsque le projet en équipe OmegaT est installé sur un serveur, la gestionnaire envoie aux membres les informations nécessaires pour y accéder ; soit une URL qui indique l’emplacement du projet, soit un fichier <code class="filename">omegat.project</code>.</p>
             <p>Une fois le projet téléchargé, il est installé localement et il suffit de l’ouvrir localement pour le synchroniser avec le serveur.</p>
             <p>Les identifiants de dépôt sont entreposés dans le fichier <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a> et peuvent être effacés à partir des préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                   <code class="option">Informations d’identification du dépôt</code>
                </a>.</p>
-            <p>Puisque la synchronisation se fait par défaut toutes les trois minutes, il arrive que des membres du projet traduisent ou modifient un segment qui a déjà été traduit par un autre membre, mais qui n’a pas encore été synchronisé. Dans une telle situation, les membres devront choisir la traduction appropriée.</p>
             <p>Les membres peuvent se relayer afin de traduire et réviser les fichiers. La fonction de Recherche leur permet de filtrer le volet Éditeur pour afficher le contenu traduit par une personne spécifique, ou pour afficher le contenu traduit après ou avant une date spécifique, par exemple.</p>
             <div class="variablelist">
                <dl class="variablelist">
@@ -1395,9 +1434,9 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                                     <span class="guimenu">Projet</span>
                                  </a>
                                  <a class="link" href="chapter.menus.html#menus.project.download.team.project">
-                                    <span class="guimenuitem">Télécharger projet en équipe…</span>
-                                 </a> pour afficher la boite de dialogue <span class="guilabel">Télécharger projet en équipe</span>.</p>
-                              <p>Entrez l’URL fournie par l’administrateur du projet en équipe dans le champ <span class="guilabel">URL du dépôt</span> en haut de la boite de dialogue et sélectionnez un dossier pour le projet dans le champ <span class="guilabel">Nouveau dossier du projet local</span>. Laissez l’option <span class="guilabel">Branche par défaut</span> cochée sauf si l’administrateur du projet a fourni des instructions pour utiliser une branche spécifique.</p>
+                                    <span class="guimenuitem">Télécharger un projet en équipe…</span>
+                                 </a> pour afficher la boite de dialogue <span class="guilabel">Télécharger un projet en équipe</span>.</p>
+                              <p>Entrez l’URL fournie par la gestionnaire du projet en équipe dans le champ <span class="guilabel">URL du dépôt</span> en haut de la boite de dialogue et sélectionnez un dossier pour le projet dans le champ <span class="guilabel">Nouveau dossier du projet local</span>. Laissez l’option <span class="guilabel">Branche par défaut</span> cochée sauf si la gestionnaire du projet a fourni des instructions pour utiliser une branche spécifique.</p>
                            </li>
                            <li class="listitem">
                               <p>Depuis un fichier <code class="filename">omegat.project</code>
@@ -1416,8 +1455,9 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                         <p>Si le serveur recourt à une authentification par identifiant/mot de passe, OmegaT vous présentera une boite de dialogue <span class="guilabel">Authentification</span> afin d’entrer votre identifiant et votre mot de passe, soit lors du téléchargement initial du projet, soit plus tard dans le processus. OmegaT se souviendra alors de vos informations d’identification pour ce projet spécifique sauf si vous les supprimez formellement. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                               <code class="option">Informations d’identification du dépôt</code>
                            </a> pour en savoir plus.</p>
+                        <p>Pour améliorer la sécurité, certains serveurs demandent aux processus externes de se connecter à l’aide d’un jeton d’accès plutôt que d’un mot de passe. Consultez la documentation de votre système si votre mot de passe ne fonctionne pas.</p>
                         <p>Si le serveur utilise une authentification SSH, veillez à mettre à jour votre configuration SSH afin d’inclure ce serveur avant d’essayer de télécharger le projet, sinon vous rencontrerez une erreur d’authentification et le chargement du projet échouera.</p>
-                        <p>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</p>
+                        <p>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne vous seront demandées qu’une fois pour ce serveur.</p>
                      </div>
                   </dd>
                   <dt>
@@ -1443,6 +1483,56 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      <p>OmegaT synchronise un projet en équipe lorsqu’il est ouvert, rechargé, fermé ou enregistré. Cela signifie que la fonctionnalité d’enregistrement automatique synchronise aussi régulièrement les versions locales avec la version sur le serveur aux intervalles spécifiés dans la préférence <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Intervalle d’enregistrement des données du projet</code>
                         </a>.</p>
+                     <div class="warning">
+                        <h3 class="title">Avertissement</h3>
+                        <p>Puisque les membres d’un projet ne synchronisent pas le projet au même moment, un segment traduit localement pourra exister sur le serveur dans une autre version envoyée préalablement par un autre membre. Lors de votre synchronisation, OmegaT affichera la correspondance entre votre version locale et la version du serveur et vous demandera quelle version conserver.</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">Gérer les conflits de version</span>
+                  </dt>
+                  <dd>
+                     <p>Quand OmetaT ne peut pas résoudre automatiquement un conflit entre la version locale et la version en ligne d’une traduction, il affiche un dialogue de <span class="guilabel">fusionnement</span>.</p>
+                     <p>Le dialogue offre le choix entre trois versions du segment traduit : </p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Mes traductions</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ceci est votre version locale, qui n’a pas encore été envoyée sur le serveur pour partage.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Serveur (originales)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ceci est la version de « base » à partir de laquelle les autres versions ont été créées.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Serveur (mises à jour)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Ceci est la version qui a été mise en partage avec les autres membres après votre dernière synchronisation.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>Il est possible de choisir les traductions appropriées une par une en cliquant dessus pour chaque segment affiché. Il est également possible de choisir « toutes » les traductions d’une version donnée.</p>
+                     <p>
+                        <span class="guibutton">Affichage en liste</span> et <span class="guibutton">Affichage détaillé</span> offrent des modes d’affichage alternatifs d’un segment donné, soit en dissimulant, soit en affichant diverses propriétés du segment.</p>
+                     <p>Une fois les traductions sélectionnées, cliquez sur <span class="guibutton">Terminer</span> pour enregistrer la sélection sur le serveur pour mise en partage avec les autres membres.</p>
+                     <div class="note">
+                        <h3 class="title">Note</h3>
+                        <p>Il est préférable de demander aux membres d’une équipe de travailler sur différentes parties d’une traduction pour réduire les probabilités d’avoir des conflits de version pendant leur travail.</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">Configuration du projet en équipe</span>
@@ -1457,7 +1547,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                                  <span class="emphasis">
                                     <em>Configuration de base du projet :</em>
                                  </span> la source et les langues, les lemmatiseurs, la hiérarchie des dossiers du projet.</p>
-                              <p>Dans un projet en équipe, les paramètres de configuration de base du projet local sont toujours remplacés par la configuration présente sur le serveur, définie à l’origine par l’administrateur du projet.</p>
+                              <p>Dans un projet en équipe, les paramètres de configuration de base du projet local sont toujours écrasées par la configuration paramétrée à l’origine par la gestionnaire du projet sur le serveur.</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -1479,7 +1569,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                                        <p>Par exemple, de nombreux services d’hébergement permettent l’accès au même dépôt en utilisant soit le protocole SSH + Git soit le protocole https. OmegaT se conforme au choix du protocole local.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Si vous téléchargez d’abord le projet distant en utilisant un fichier <code class="filename">omegat.project</code> fourni par l’administrateur du projet, OmegaT utilisera les mises en correspondance de ce fichier, le cas échéant.</p>
+                                       <p>Si vous téléchargez le projet distant à l’aide d’un fichier <code class="filename">omegat.project</code> fourni par la gestionnaire du projet, OmegaT utilisera les mises en correspondance qui s’y trouveront.</p>
                                     </li>
                                     <li class="listitem">
                                        <p>S’il y a un conflit entre la version locale et la version distante du fichier <code class="filename">omegat.project</code>, et que la version locale est remplacée, OmegaT crée un fichier de sauvegarde appelé <code class="filename">omegat.project.AAAAMMJJhhmm.bak</code>. OmegaT peut créer jusqu’à dix fichiers de sauvegarde, et supprime automatiquement les sauvegardes les plus anciennes l’une après l’autre.</p>
@@ -1500,7 +1590,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   <dd>
                      <div class="warning">
                         <h3 class="title">Avertissement</h3>
-                        <p>Seul l’administrateur du projet devrait utiliser le menu <a class="link" href="chapter.menus.html#menus.project" title="Projet">
+                        <p>Seul la gestionnaire du projet devrait utiliser le menu <a class="link" href="chapter.menus.html#menus.project" title="Projet">
                               <span class="guimenu">Projet</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
@@ -1517,13 +1607,13 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                            <span class="guimenuitem">Envoyer les fichiers cible</span>
-                        </a> pour les ajouter au serveur, si l’administrateur du projet vous a demandé de le faire.</p>
+                        </a> pour les ajouter au serveur, si la gestionnaire du projet vous a demandé de le faire. Ajouter les fichiers traduits met également en partage les données du projet sur le serveur.</p>
                   </dd>
                   <dt>
                      <span class="term">Supprimer des fichiers</span>
                   </dt>
                   <dd>
-                     <p>Les fichiers d’un projet en équipe ne peuvent pas être supprimés à partir d’OmegaT ou du système de fichiers local. Ils seront restaurés lors de la prochaine synchronisation du projet. Cette tâche est normalement effectuée par l’administrateur du projet.</p>
+                     <p>Les fichiers d’un projet en équipe ne peuvent pas être supprimés à partir d’OmegaT ou du système de fichiers local. Ils seront restaurés lors de la prochaine synchronisation du projet. Cette tâche est normalement effectuée par la gestionnaire du projet.</p>
                   </dd>
                   <dt>
                      <span class="term">Travailler hors connexion</span>
@@ -1559,13 +1649,13 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Version standard : OmegaT 6.0.0</span>
+                     <span class="term">Version standard : OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>Cette version est recommandée pour un usage quotidien.</p>
                   </dd>
                   <dt>
-                     <span class="term">Version de développement : OmegaT Nightly</span>
+                     <span class="term">Version de développement : OmegaT Nightly</span>
                   </dt>
                   <dd>
                      <p>Cette version est générée automatiquement à chaque fois que du code nouveau est intégré à OmegaT. Elle est utilisée pour effectuer des tests.</p>
@@ -1575,7 +1665,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
             <p>Les fichiers sont téléchargeables directement à partir de <a class="ulink" href="https://omegat.org/fr/download" target="_top">https://omegat.org/fr</a>.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>Java 11 Runtime Environment (JRE) est nécessaire à l'exécution d'OmegaT 6.0.0.</p>
+               <p>Java 11 Runtime Environment (JRE) est nécessaire à l’exécution d’OmegaT 6.0.2</p>
                <p>Les paquets d’OmegaT sont disponibles à la fois dans des versions avec Java, et dans des versions sans. Les paquets sans Java nécessitent l’installation d’un environnement d’exécution Java 11 sur l’ensemble du système.</p>
                <p>OmegaT 5.8.0 et les versions ultérieures peuvent aussi fonctionner avec l’environnement d’exécution Java 11 sur n’importe quelle plateforme.</p>
                <p>Pour des raisons de licence, l’équipe d’OmegaT recommande l’environnement d’exécution Eclipse Temurin Java fourni avec le projet Adoptium de la Fondation Eclipse, mais n’importe quel environnement d’exécution compatible avec Java 8 devrait fonctionner. Voir <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Le projet Eclipse Temurin™</a>.</p>
@@ -1606,7 +1696,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   <h3 class="title">Note</h3>
                   <p>Bien qu’il soit possible de lancer OmegaT directement à partir des fichiers disponibles, vous pouvez aussi exécuter le script <code class="filename">linux-install.sh</code> qui s’y trouve pour installer OmegaT dans un emplacement plus approprié.</p>
                   <p>L’exécution du script vous demandera d’entrer votre mot de passe <code class="filename">sudo</code>.</p>
-                  <p>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <code class="filename">/opt/omegat/</code> et, dans le cas contraire, installe le programme dans <code class="filename">/opt/omegat/OmegaT_6.0.0</code> en le définissant comme version par défaut (dans <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <code class="filename">/opt/omegat/</code> et dans le cas contraire, installe le programme dans <code class="filename">/opt/omegat/OmegaT_6.0.2</code> en le définissant comme version par défaut (dans <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Une fois la décompression ou l’installation terminée, vous pouvez supprimer le fichier téléchargé, car il n’est plus utile.</p>
             </section>
@@ -1618,7 +1708,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      </div>
                   </div>
                </div>
-               <p>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <code class="filename">OmegaT</code> va être créé. Il contient deux fichiers : <code class="filename">index.html</code> (le fichier d’entrée du manuel d’utilisation) et <code class="filename">OmegaT.app</code> (l’application). Copiez le dossier dans un emplacement approprié (ex .: <code class="filename">Applications</code>).</p>
+               <p>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <code class="filename">OmegaT</code> va être créé. Il contient deux fichiers : <code class="filename">index.html</code> (le fichier d’entrée du manuel d’utilisation) et <code class="filename">OmegaT.app</code> (l’application). Copiez le dossier dans un emplacement approprié (ex .: <code class="filename">Applications</code>).</p>
                <p>Si vous le souhaitez, vous pouvez faire glisser l’application <code class="filename">OmegaT.app</code> et la déposer dans le Dock pour un accès plus facile.</p>
                <p>Quand vous avez terminé, vous pouvez supprimer le paquet téléchargé, car il n’est plus utile.</p>
             </section>
@@ -1651,7 +1741,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                <p>Les changements entre votre version et la nouvelle sont documentés dans le fichier <a class="ulink" href="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt" target="_top">changes.txt</a> sur le site du développement.</p>
                <div class="note">
                   <h3 class="title">Note</h3>
-                  <p>Si vous décidez d’installer une nouvelle version, gardez les éléments suivants à l’esprit :</p>
+                  <p>Si vous décidez d’installer une nouvelle version, gardez les éléments suivants à l’esprit :</p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
@@ -1714,12 +1804,12 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                   </div>
                </div>
                <p>Le code source pour la version actuelle peut être téléchargé directement depuis la <a class="ulink" href="https://omegat.org/fr/download" target="_top">page de téléchargement</a> d’OmegaT, ou bien cloné depuis les dépôts <a class="ulink" href="https://git.code.sf.net/p/omegat/code" target="_top">Sourceforge</a> ou <a class="ulink" href="https://github.com/omegat-org/omegat.git" target="_top">GitHub</a>.</p>
-               <p>Une fois le code téléchargé, ouvrez un terminal dans le dossier source (<code class="filename">omegat-code</code> si vous l’avez cloné de Sourceforge, ou <code class="filename">/omegat</code> si vous l’avez cloné de GitHub) et entrez :</p>
+               <p>Une fois le code téléchargé, ouvrez un terminal dans le dossier source (<code class="filename">omegat-code</code> si vous l’avez cloné de Sourceforge, ou <code class="filename">/omegat</code> si vous l’avez cloné de GitHub) et entrez :</p>
                <pre class="programlisting">./gradlew installDist</pre>
                <p>Cette commande crée une distribution d’OmegaT complète et prête à être lancée dans le dossier <code class="filename">build/install/OmegaT</code>.</p>
-               <p>Vous pouvez aussi lancer l’application directement avec la commande suivante :</p>
+               <p>Vous pouvez aussi lancer l’application directement avec la commande suivante :</p>
                <pre class="programlisting">./gradlew run</pre>
-               <p>Pour obtenir la liste de toutes les tâches disponibles, utilisez la commande :</p>
+               <p>Pour obtenir la liste de toutes les tâches disponibles, utilisez la commande :</p>
                <pre class="programlisting">./gradlew tasks</pre>
                <p>Vous trouverez les informations détaillées concernant la compilation d’OmegaT dans le fichier <a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt" target="_top">README.txt</a> situé dans le sous-dossier <code class="filename">docs_devel</code>.</p>
             </section>
@@ -1740,7 +1830,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                      </div>
                   </div>
                </div>
-               <p>La façon la plus simple de lancer OmegaT est d’exécuter le programme <code class="filename">OmegaT.exe</code>. Les options de démarrage du programme sont lues depuis le fichier <code class="filename">OmegaT.l4J.ini</code>, qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié pour être adapté à votre installation. L’exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue et le Canada comme pays :</p>
+               <p>La façon la plus simple de lancer OmegaT est d’exécuter le programme <code class="filename">OmegaT.exe</code>. Les options de démarrage du programme sont lues depuis le fichier <code class="filename">OmegaT.l4J.ini</code>, qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié pour être adapté à votre installation. L’exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue et le Canada comme pays :</p>
                <pre class="programlisting"># OmegaT.exe runtime configuration
 	# To use a parameter, remove the '#' before the '-'
 	# Memory
@@ -1749,7 +1839,7 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
 	-Duser.language=FR
 	# Country
 	-Duser.country=CA</pre>
-               <p>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</p>
+               <p>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</p>
                <pre class="programlisting">-Dsun.java2d.noddraw=false</pre>
             </section>
             <section class="section" id="running.omegat.on.linux">
@@ -1892,11 +1982,11 @@ Un caractère d’espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 
                         </div>
                      </div>
                   </div>
-                  <p>La syntaxe pour lancer OmegaT depuis le terminal est :</p>
+                  <p>La syntaxe pour lancer OmegaT depuis le terminal est :</p>
                   <pre class="programlisting">java -jar &lt;paramètres java&gt; chemin/à/OmegaT.jar &lt;options OmegaT&gt; </pre>
                   <div class="note">
                      <h3 class="title">Note</h3>
-                     <p>Sur macOS, il est également possible d’utiliser <code class="filename">OmegaT.app</code> directement dans le terminal, auquel cas les paramètres java ne peuvent pas être ajoutés :</p>
+                     <p>Sur macOS, il est également possible d’utiliser <code class="filename">OmegaT.app</code> directement dans le terminal, auquel cas les paramètres java ne peuvent pas être ajoutés :</p>
                      <pre class="programlisting">open chemin/vers/OmegaT.app
 		-n --args &lt;options OmegaT&gt;</pre>
                      <p>ici, <strong class="userinput">

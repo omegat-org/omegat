@@ -87,7 +87,9 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -140,26 +142,30 @@ public class ScriptingWindow {
     final JFrame frame;
 
     public ScriptingWindow() {
+        this(new JFrame(OStrings.getString("SCW_TITLE")));
+    }
 
-        frame = new JFrame(OStrings.getString("SCW_TITLE"));
+    public ScriptingWindow(JFrame frame) {
+        this.frame = frame;
 
-        StaticUIUtils.setWindowIcon(frame);
+        setScriptsDirectory(StaticUtils.getUserScriptsDir());
 
-        StaticUIUtils.setEscapeClosable(frame);
+        if (frame != null) {
+            StaticUIUtils.setWindowIcon(frame);
+            StaticUIUtils.setEscapeClosable(frame);
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    monitor.stop();
+                }
+            });
+        }
 
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                monitor.stop();
-            }
-        });
-
-        setScriptsDirectory(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
-
-        initWindowLayout();
-
-        addScriptCommandToOmegaT();
-        addRunShortcutToOmegaT();
+        if (frame != null) {
+            initWindowLayout();
+            addScriptCommandToOmegaT();
+            addRunShortcutToOmegaT();
+        }
 
         updateQuickScripts();
 
@@ -170,6 +176,11 @@ public class ScriptingWindow {
 
         logResult(listScriptEngines());
 
+    }
+
+    @VisibleForTesting
+    public File getScriptsFolder() {
+        return m_scriptsDirectory;
     }
 
     private String listScriptEngines() {
@@ -716,7 +727,9 @@ public class ScriptingWindow {
     }
 
     private void logResult(String s, boolean newLine) {
-        logResultToWindow(s, newLine);
+        if (frame != null && frame.isVisible()) {
+            logResultToWindow(s, newLine);
+        }
         LOGGER.log(Level.INFO, s);
     }
 
@@ -747,7 +760,9 @@ public class ScriptingWindow {
         }
         m_scriptsDirectory = dir;
         Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir);
-        OSXIntegration.setProxyIcon(frame.getRootPane(), m_scriptsDirectory);
+        if (frame != null) {
+            OSXIntegration.setProxyIcon(frame.getRootPane(), m_scriptsDirectory);
+        }
 
         if (monitor != null) {
             monitor.stop();
@@ -1081,8 +1096,6 @@ public class ScriptingWindow {
     }
 
     // CHECKSTYLE:OFF
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
-
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 
     private JList<ScriptItem> m_scriptList;

@@ -1,0 +1,48 @@
+{
+  "batchcomplete": "",
+  "continue": {
+    "mcoffset": "follows.destroy.not_followed",
+    "continue": "-||"
+  },
+  "query": {
+    "metadata": {
+      "state": null,
+      "resultsize": 4,
+      "remaining": 2
+    },
+    "messagecollection": [
+      {
+        "key": "date.formats.heatmap",
+        "definition": "%B %-d",
+        "translation": "",
+        "title": "Osm:Date.formats.heatmap/ja",
+        "targetLanguage": "ja",
+        "primaryGroup": "out-osm-site"
+      },
+      {
+        "key": "helpers.file.prompt",
+        "definition": "Choose file",
+        "translation": "ファイルを選択",
+        "title": "Osm:Helpers.file.prompt/ja",
+        "targetLanguage": "ja",
+        "primaryGroup": "out-osm-site"
+      },
+      {
+        "key": "errors.not_found.description",
+        "definition": "Couldn't find a file/directory/API operation by that name on the OpenStreetMap server (HTTP 404)",
+        "translation": "OpenStreetMapサーバ上に、その名称のファイル/ディレクトリ/API操作はありません (HTTP 404)",
+        "title": "Osm:Errors.not found.description/ja",
+        "targetLanguage": "ja",
+        "primaryGroup": "out-osm-site"
+      },
+      {
+        "key": "follows.destroy.success",
+        "definition": "You successfully unfollowed %{name}.",
+        "translation": "",
+        "title": "Osm:Follows.destroy.success/ja",
+        "targetLanguage": "ja",
+        "primaryGroup": "out-osm-site"
+      }
+    ]
+  }
+}

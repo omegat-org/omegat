@@ -2,6 +2,7 @@ package org.omegat.module
 
 import com.github.spotbugs.snom.SpotBugsExtension
 import net.ltgt.gradle.nullaway.NullAwayExtension
+import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -96,6 +97,21 @@ class OmegatModulePlugin implements Plugin<Project> {
             nullaway.annotatedPackages.add("org.omegat")
         }
 
+        // Register a metadata validation task and wire it into the verification lifecycle
+        def validateTask = project.tasks.register("validateModuleMetadata") {
+            group = "verification"
+            description = "Validate OmegaT module metadata (e.g., org.omegat.module.category)."
+            doLast {
+                def category = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
+                def allowed = resolveAllowedCategoriesFromSource(project)
+                def normalized = category?.toString()?.trim()?.toLowerCase(Locale.ENGLISH)
+                if (!allowed.contains(normalized)) {
+                    throw new GradleException("Invalid org.omegat.module.category '${category}' for project ${project.path}. Allowed values discovered from PluginType: ${allowed.join(', ')}")
+                }
+            }
+        }
+        project.tasks.named("check").configure { dependsOn(validateTask) }
+
         configureTestEnvironment(project)
     }
 
@@ -150,5 +166,42 @@ class OmegatModulePlugin implements Plugin<Project> {
     private static String getPropertyOrDefault(Project project, String propertyName, String defaultValue) {
         return project.hasProperty(propertyName) ?
                 project.property(propertyName).toString() : defaultValue
+    }
+
+    /**
+     * Derive allowed module categories from Java source enum PluginUtils.PluginType to avoid duplication.
+     * Falls back to a conservative set if the source cannot be parsed.
+     */
+    private static Set<String> resolveAllowedCategoriesFromSource(Project project) {
+        Set<String> fallback = ['language', 'spellcheck', 'machinetranslator', 'theme', 'miscellaneous'] as Set
+        try {
+            def srcPath = 'src/org/omegat/filters2/master/PluginUtils.java'
+            def file = project.rootProject.file(srcPath)
+            if (!file.exists()) {
+                project.logger.info("[OmegatModulePlugin] PluginType source not found at ${file}. Using fallback categories: ${fallback}")
+                return fallback
+            }
+            String text = file.getText('UTF-8')
+            // Regex to capture enum constants with a single string constructor argument
+            def matcher = (text =~ /(?m)^\s*([A-Z_]+)\s*\(\s*"([^"]+)"\s*\)\s*[,;]?\s*$/)
+            Set<String> values = new LinkedHashSet<>()
+            matcher.each { m ->
+                String value = m[2]
+                if (value) {
+                    String v = value.trim().toLowerCase(Locale.ENGLISH)
+                    if (!v.equalsIgnoreCase('undefined')) {
+                        values.add(v)
+                    }
+                }
+            }
+            if (values.isEmpty()) {
+                project.logger.info("[OmegatModulePlugin] No values parsed from PluginType. Using fallback: ${fallback}")
+                return fallback
+            }
+            return values
+        } catch (Throwable t) {
+            project.logger.info("[OmegatModulePlugin] Failed to parse PluginType: ${t.class.simpleName}: ${t.message}. Using fallback: ${fallback}")
+            return fallback
+        }
     }
 }

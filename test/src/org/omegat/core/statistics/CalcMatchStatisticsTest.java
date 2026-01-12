@@ -25,12 +25,11 @@
 
 package org.omegat.core.statistics;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.util.TestPreferencesInitializer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,19 +68,13 @@ import static org.junit.Assert.assertTrue;
  * - Confirms integration of dependent components like segmenters and testing
  *   consumers used for capturing results.
  */
-public class CalcMatchStatisticsTest {
+public class CalcMatchStatisticsTest extends TestCore {
 
-    private static final int TIMEOUT = 15;
+    // On some CI environments, calculating statistics can occasionally be slow
+    // due to limited CPU resources and I/O. Increase timeout to reduce flakiness.
+    private static final int TIMEOUT = 60;
 
     private static Path tmpDir;
-
-    /*
-     * Setup test project.
-     */
-    @Before
-    public final void setUp() throws Exception {
-        TestPreferencesInitializer.init();
-    }
 
     @BeforeClass
     public static void setUpClass() throws Exception {

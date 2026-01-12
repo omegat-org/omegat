@@ -8,7 +8,7 @@
 
     <para>De interface van OmegaT vertrouwd over het algemeen niet op knoppen om toegang te verschaffen tot zijn functies. In plaats daarvan worden zij aangeroepen vanuit de menu's of, voor de meerderheid van functies, via hun aangewezen standaard sneltoets.</para>
   
-    <para>Leren van de meest frequente sneltoetsen zal niet lang duren als u eenmaal begint te werken met OmegaT. De sneltoetsen worden aangegeven naast elk menu-item, wat het mogelijk maakt nieuwe sneltoetsen langzamerhand te leren als u de software gebruikt.</para>
+    <para>Leren kennen van de meest frequente sneltoetsen zal niet lang duren als u eenmaal begint te werken met OmegaT. De sneltoetsen worden aangegeven naast elk menu-item, wat het mogelijk maakt nieuwe sneltoetsen langzamerhand te leren als u de software gebruikt.</para>
 
     <para>U kunt de meerderheid van de sneltoetsen in OmegaT aanpassen. Bekijk het gedeelte <link endterm="app.shortcuts.customization.title" linkend="app.shortcuts.customization"/> voor details.</para>
 
@@ -139,7 +139,7 @@
 
     <para><code>functiecode=sneltoets</code></para>
 
-	<para>Gebruik de tabellen in het gedeelte <link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> hieronder om te zoeken naar warden voor de <code>functiecode</code>.</para>
+	<para>Gebruik de tabellen in het gedeelte <link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> hieronder om te zoeken naar waarden voor de <code>functiecode</code>.</para>
     
     <para>De <code>sneltoets</code> geeft de toetscombinatie weer die door de gebruiker moet worden ingedrukt. Het bestaat in de volgende vorm:</para>
     
@@ -173,7 +173,7 @@
       </listitem>
 
       <listitem>
-        <para>en <code>&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord. U kunt de tabel <link linkend="app.shortcuts.lists.function.codes.editor.table">bekijken die de verschillende sneltoetsen voor de bewerker </link> weergeef om te zoeken naar de waarden voor toetsen zoals <literal>Home</literal>, <literal>Page Up</literal>, of de pijltjestoetsen.</para>
+        <para>en <code>&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord. U kunt de tabel <link linkend="app.shortcuts.lists.function.codes.editor.table">bekijken die de verschillende sneltoetsen voor de bewerker </link> weergeeft, om te zoeken naar de waarden voor toetsen, zoals <literal>Home</literal>, <literal>Page Up</literal>, of de pijltjestoetsen.</para>
       </listitem>
     </itemizedlist>
 

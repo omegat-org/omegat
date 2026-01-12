@@ -38,6 +38,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 import org.omegat.util.PatternConsts;
 
@@ -52,16 +53,16 @@ import org.omegat.util.PatternConsts;
  */
 public class XMLWriter extends Writer {
     /** Internal Buffer to collect the output */
-    private StringWriter writer;
+    private final StringWriter writer;
 
     /** real writer to a file */
-    private BufferedWriter realWriter;
+    private final BufferedWriter realWriter;
 
     /** Replacement string for XML header */
-    private String xmlHeader;
+    private final String xmlHeader;
 
     /** Detected EOL chars. */
-    private String eol;
+    private final String eol;
 
     /**
      * Creates new XMLWriter.
@@ -73,7 +74,7 @@ public class XMLWriter extends Writer {
      * @param eol
      *            End-Of-Line character
      */
-    public XMLWriter(File file, String encoding, String eol)
+    public XMLWriter(File file, @Nullable String encoding, String eol)
             throws FileNotFoundException, UnsupportedEncodingException {
         if (encoding == null) {
             xmlHeader = "<?xml version=\"1.0\"?>";

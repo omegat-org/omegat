@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.infix;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -36,6 +37,7 @@ import org.omegat.util.OStrings;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class InfixFilter extends XMLFilter {
 
     /**
@@ -60,6 +62,7 @@ public class InfixFilter extends XMLFilter {
      *
      * @return File format name
      */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("INFIX_FILTER_NAME");
     }
@@ -73,6 +76,7 @@ public class InfixFilter extends XMLFilter {
      *
      * @return Default filter instances
      */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml") };
     }
@@ -82,6 +86,7 @@ public class InfixFilter extends XMLFilter {
      *
      * @return <code>false</code>
      */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
@@ -91,6 +96,7 @@ public class InfixFilter extends XMLFilter {
      *
      * @return <code>true</code>
      */
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

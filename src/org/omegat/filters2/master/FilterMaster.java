@@ -56,7 +56,8 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -91,6 +92,7 @@ import gen.core.filters.Filters;
  * @author Guido Leenders
  * @author Thomas Cordonnier
  */
+@NullMarked
 public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
@@ -381,7 +383,7 @@ public class FilterMaster {
      *            The file to check
      * @param quick
      *            When true, check only the file name
-     * @return Whether or not the file is supported
+     * @return Whether the file is supported
      */
     public boolean isFileSupported(File file, boolean quick) {
         FilterContext fc = new FilterContext(null, null, true);
@@ -472,7 +474,7 @@ public class FilterMaster {
      * @throws IOException
      *             if an I/O error occurs while reading the configuration file
      */
-    public static Filters loadConfig(File configFile) throws IOException {
+    public static @Nullable Filters loadConfig(File configFile) throws IOException {
         if (!configFile.exists()) {
             return null;
         }
@@ -589,7 +591,7 @@ public class FilterMaster {
     }
 
     private static String getTargetForSource(String srcRelPath, LookupInformation lookup,
-            Language targetLang) {
+            @Nullable Language targetLang) {
         File srcRelFile = new File(srcRelPath);
         return new File(srcRelFile.getParent(),
                 constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), srcRelFile.getName(),
@@ -651,7 +653,7 @@ public class FilterMaster {
      * @return The changed filename
      */
     private static String constructTargetFilename(String sourceMask, String filename, String pattern,
-            Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
+            @Nullable Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
         int dot = 0;
         if (lastStarPos >= 0) {
@@ -679,13 +681,15 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_NAMEONLY, nameOnly);
         res = res.replace(AbstractFilter.TFP_EXTENSION, extension);
 
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
-        // Replace also old variable spelling
-        res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        if (targetLang != null) {
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
+            // Replace also old variable spelling
+            res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        }
         //
         // System generation time
         //

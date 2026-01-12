@@ -51,6 +51,7 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -130,6 +131,7 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() {
 
                 // ask about new project properties
@@ -179,10 +181,11 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
-            File projectRoot;
-            IMainWindow mainWindow;
-            Cursor oldCursor;
+            @Nullable File projectRoot;
+            @Nullable IMainWindow mainWindow;
+            @Nullable Cursor oldCursor;
 
+            @Override
             protected Void doInBackground() throws Exception {
                 mainWindow = Core.getMainWindow();
                 mainWindow.showStatusMessageRB(null);
@@ -232,8 +235,6 @@ public final class ProjectUICommands {
                 // We write in all cases, because we might have added default
                 // excludes, for instance
                 ProjectFileStorage.writeProjectFile(props);
-                mainWindow.setCursor(oldCursor);
-                oldCursor = null;
                 return null;
             }
 
@@ -253,7 +254,8 @@ public final class ProjectUICommands {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
-                    if (oldCursor != null) {
+                } finally {
+                    if (oldCursor != null && mainWindow != null) {
                         mainWindow.setCursor(oldCursor);
                     }
                 }
@@ -288,6 +290,7 @@ public final class ProjectUICommands {
             if (closeCurrent) {
                 // Register to try again after closing the current project.
                 CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+                    @Override
                     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                         if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
                             projectOpen(projectDirectory, false);
@@ -306,6 +309,7 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -320,6 +324,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -332,7 +337,7 @@ public final class ProjectUICommands {
         }.execute();
     }
 
-    private static File selectProjectRootFolder(File projectDirectory) {
+    private static @Nullable File selectProjectRootFolder(File projectDirectory) {
         File projectRootFolder;
         if (projectDirectory == null) {
             // select existing project file - open it
@@ -360,7 +365,7 @@ public final class ProjectUICommands {
         return true;
     }
 
-    static ProjectProperties checkProjectProperties(File projectRootFolder) {
+    static @Nullable ProjectProperties checkProjectProperties(File projectRootFolder) {
         // check if project okay
         ProjectProperties props;
         try {
@@ -685,6 +690,7 @@ public final class ProjectUICommands {
         ProjectProperties props = Core.getProject().getProjectProperties();
         final File projectDirectory = props.getProjectRootDir();
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
                     projectOpen(projectDirectory, false);
@@ -708,6 +714,7 @@ public final class ProjectUICommands {
         new SwingWorker<Void, Void>() {
             final int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
+            @Override
             protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -724,6 +731,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -756,6 +764,7 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -771,6 +780,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -797,6 +807,7 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
@@ -826,6 +837,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -869,6 +881,7 @@ public final class ProjectUICommands {
         new SwingWorker<Void, Void>() {
             final int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
+            @Override
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
@@ -879,6 +892,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -906,6 +920,7 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
@@ -918,6 +933,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -974,6 +990,7 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         new SwingWorker<Void, Void>() {
+            @Override
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
@@ -986,6 +1003,7 @@ public final class ProjectUICommands {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -1165,14 +1183,25 @@ public final class ProjectUICommands {
     }
 
     public static void projectExit() {
-        prepareForExit(() -> System.exit(-1));
+        prepareForExit(false, () -> System.exit(-1));
     }
 
     public static void projectRestart(String projectDir) {
-        prepareForExit(() -> Main.restartGUI(projectDir));
+        prepareForExit(false, () -> Main.restartGUI(projectDir));
     }
 
-    private static void prepareForExit(Runnable onCompletion) {
+    /**
+     * Restart the application, optionally skipping any confirmation dialogs.
+     *
+     * @param projectDir project to open after restart, or null
+     * @param skipConfirm if true, do not show any confirmation dialog even if preferences would
+     *                    normally require it and even if a project is open but unmodified
+     */
+    public static void projectRestart(String projectDir, boolean skipConfirm) {
+        prepareForExit(skipConfirm, () -> Main.restartGUI(projectDir));
+    }
+
+    private static void prepareForExit(boolean skipConfirm, Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually
         // change it
@@ -1186,7 +1215,7 @@ public final class ProjectUICommands {
         }
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+        if (!skipConfirm && (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT))) {
             if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {

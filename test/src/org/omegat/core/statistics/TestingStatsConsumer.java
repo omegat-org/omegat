@@ -48,7 +48,7 @@ import java.util.concurrent.CompletableFuture;
  * - Other methods from {@code IStatsConsumer} do not perform any actions.
  */
 public class TestingStatsConsumer implements IStatsConsumer {
-    private String[][] result;
+    private volatile String[][] result;
     private final CompletableFuture<Void> future;
 
     public TestingStatsConsumer(CompletableFuture<Void> future) {

@@ -16,6 +16,7 @@ dependencies {
         }
         compileOnly(libs.morfologik.stemming)
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

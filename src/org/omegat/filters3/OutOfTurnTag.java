@@ -25,6 +25,7 @@
 
 package org.omegat.filters3;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.StringUtil;
@@ -36,10 +37,10 @@ import org.omegat.util.StringUtil;
  */
 public abstract class OutOfTurnTag extends Tag {
     /** Entry that contains this out of turn tag's content. */
-    private Entry entry;
+    private final @Nullable Entry entry;
 
     /** Returns the entry that embodies this out of turn tag. */
-    public Entry getEntry() {
+    public @Nullable Entry getEntry() {
         return entry;
     }
 
@@ -69,6 +70,7 @@ public abstract class OutOfTurnTag extends Tag {
      * the segment in OmegaT.&lt;/text:p&gt;&lt;/text:note-body&gt;
      * </code>.
      */
+    @Override
     public abstract String toOriginal();
 
     /**
@@ -87,21 +89,10 @@ public abstract class OutOfTurnTag extends Tag {
      * OmegaT.&amp;lt;/text:p&amp;gt;&amp;lt;/text:note-body&amp;gt;
      * </code>.
      */
+    @Override
     protected String toPartialTMX() {
-        StringBuilder buf = new StringBuilder();
-
-        buf.append("&amp;lt;");
-        buf.append(getTag());
-        buf.append(getAttributes().toString());
-        buf.append("&amp;gt;");
-
-        buf.append(StringUtil.makeValidXML(getEntry().translationToOriginal()));
-
-        buf.append("&amp;lt;/");
-        buf.append(getTag());
-        buf.append("&amp;gt;");
-
-        return buf.toString();
+        String att = getAttributes() != null ? getAttributes().toString() : "";
+        String trans = getEntry() != null ? StringUtil.makeValidXML(getEntry().translationToOriginal()) : "";
+        return "&amp;lt;" + getTag() + att + "&amp;gt;" + trans + "&amp;lt;/" + getTag() + "&amp;gt;";
     }
-
 }

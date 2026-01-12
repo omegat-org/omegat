@@ -246,11 +246,11 @@
 		
 		<itemizedlist>
 		  <listitem>
-			<para><guimenuitem>Selecciona la coincidència anterior</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+			<para><guimenuitem>Selecciona la coincidència anterior</guimenuitem> <keycombo><keycap>C</keycap><keycap>↑</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo> en el macOS)</para>
 		  </listitem>
 
 		  <listitem>
-			<para><guimenuitem>Selecciona la coincidència següent</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+			<para><guimenuitem>Selecciona la coincidència següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>↓</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo> en el macOS)</para>
 		  </listitem>
 
 		  <listitem>

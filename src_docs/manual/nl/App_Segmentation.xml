@@ -66,7 +66,7 @@
 
 	<para>Gebruik de projecteigenschap <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> om het bereik van de segmentatieregels te beperken tot het huidige project.</para>
 
-	<para>U kunt een soortgelijk resultaat bereiken door OmegaT te starten vanaf de opdrachtregel. Bekijk de <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> how-to voor details.</para>
+	<para>U kunt een soortgelijk resultaat bereiken door OmegaT te starten vanaf de opdrachtregel. Bekijk de how-to <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> voor details.</para>
 	
 	<para>Als u lokale regels gebruikt, heeft u nog steeds toegang tot de globale regels, maar het aanpassen daarvan zal geen effect hebben op uw project.</para>
   </section>

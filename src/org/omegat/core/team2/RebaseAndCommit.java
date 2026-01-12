@@ -26,9 +26,9 @@
 package org.omegat.core.team2;
 
 import java.io.File;
+import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -55,6 +55,7 @@ public final class RebaseAndCommit {
      * Load BASE and HEAD from remote repository into temp storage for future
      * rebase.
      */
+    @SuppressWarnings("unused")
     public static Prepared prepare(RemoteRepositoryProvider provider, File projectDir, String path)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
@@ -152,7 +153,7 @@ public final class RebaseAndCommit {
                 // there is no remote file also
                 fileChangedRemotely = false;
             }
-        } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
+        } else if (Objects.equals(currentBaseVersion, headVersion)) {
             LOGGER.atDebug().setMessage("remote file '{0}' wasn't changed").addArgument(path).log();
             fileChangedRemotely = false;
         } else {
@@ -173,10 +174,10 @@ public final class RebaseAndCommit {
             LOGGER.atDebug().setMessage("rebase and save '{0}'").addArgument(path).log();
             needBackup = true;
             rebaser.rebaseAndSave(tempOut);
-        } else if (fileChangedLocally && !fileChangedRemotely) {
+        } else if (fileChangedLocally /* && !fileChangedRemotely = true */) {
             // only local changes - just use local file
             LOGGER.atDebug().setMessage("only local changes - just use local file '{0}'").addArgument(path).log();
-        } else if (!fileChangedLocally && fileChangedRemotely) {
+        } else if (fileChangedRemotely /* && !fileChangedLocally = true */) {
             // only remote changes - get remote
             LOGGER.atDebug().setMessage("only remote changes - get remote '{0}'").addArgument(path).log();
             needBackup = true;
@@ -212,7 +213,6 @@ public final class RebaseAndCommit {
                 prep.charset = rebaser.getFileCharset(localFile);
             }
             // no need to commit yet - it will make other thread after
-            return;
         } else if (fileChangedLocally) {
             // new file already saved - need to commit
             String comment = rebaser.getCommentForCommit();

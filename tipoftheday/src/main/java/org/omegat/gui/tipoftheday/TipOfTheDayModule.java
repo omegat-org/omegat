@@ -24,22 +24,25 @@
  */
 package org.omegat.gui.tipoftheday;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.MenuExtender;
 
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+@NullMarked
 public final class TipOfTheDayModule {
 
-    // FIXME: disabled for 6.1 release
-    static final boolean ENABLED = false;
+    static final boolean ENABLED = true;
 
     private static @Nullable TipOfTheDayModuleListener listener;
 
@@ -69,16 +72,22 @@ public final class TipOfTheDayModule {
             if (ENABLED && TipOfTheDayUtils.hasIndex()) {
                 initUI();
                 initMenu();
-                SwingUtilities.invokeLater(() -> controller.start(false));
+                if (!Preferences.isFirstRun()) {
+                    SwingUtilities.invokeLater(() -> controller.start(false));
+                }
             }
         }
 
         private void initUI() {
             ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.tipoftheday.Bundle");
+            UIDefaults defaults = UIManager.getDefaults();
             for (Enumeration<String> keys = bundle.getKeys(); keys.hasMoreElements();) {
                 String key = keys.nextElement();
-                UIManager.getDefaults().put(key, bundle.getObject(key));
+                defaults.put(key, bundle.getObject(key));
             }
+            defaults.put("TipOfTheDay.background", defaults.getColor("TextPane.background"));
+            defaults.put("TipOfTheDay.foreground", defaults.getColor("TextPane.foreground"));
+            defaults.put("TipOfTheDay.borderColor", defaults.getColor("TextPane.borderColor"));
         }
 
         private void initMenu() {

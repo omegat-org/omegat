@@ -40,17 +40,25 @@ import org.omegat.util.OStrings;
 public class DictionaryPopup implements IPopupMenuConstructor {
 
     @Override
-    public void addItems(JPopupMenu menu, JTextComponent comp, int mousepos, boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+    public void addItems(JPopupMenu menu, JTextComponent comp, int mousepos, boolean isInActiveEntry,
+                         boolean isInActiveTranslation, SegmentBuilder sb) {
 
         String selection = Core.getEditor().getSelectedText();
         final String searchedText;
-        if (selection == null) {
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            searchedText = ste.getSrcText();
-        } else {
+        if (selection != null) {
             searchedText = selection;
+            updateMenu(menu, searchedText);
+            return;
         }
 
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste != null) {
+            searchedText = ste.getSrcText();
+            updateMenu(menu, searchedText);
+        }
+    }
+
+    private static void updateMenu(JPopupMenu menu, String searchedText) {
         JMenuItem searchMenuItem = new JMenuItem();
         searchMenuItem.setText(Mnemonics.removeMnemonics(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY")));
         searchMenuItem.addActionListener(e -> Core.getDictionaries().searchText(searchedText));

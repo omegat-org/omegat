@@ -13,7 +13,7 @@
 
   <para>Voer de tekenreeks die u wilt invoegen om uw zoekterm te vervangen in in het veld <guilabel>Vervangen door:</guilabel> en klik op <guibutton>Zoeken</guibutton>, of druk op <keycap>Enter</keycap> als de cursor nog steeds in het veld staat.</para>
 
-  <para>Overeenkomsten  voor het zoeken worden weergegeven in vette blauwe tekens, en de aangepaste tekenreeksen worden weergegeven in oranje om het resultaat van het vervangen weer te geven.</para>
+  <para>Overeenkomsten voor het zoeken worden weergegeven in vette blauwe tekens, en de aangepaste tekenreeksen worden weergegeven in oranje om het resultaat van het vervangen weer te geven.</para>
 
 
   <example id="replace.with.allemand">

@@ -32,7 +32,7 @@
           </listitem>
 
           <listitem>
-            <para><guilabel>Errors ortogràfics</guilabel> (opcional): detecta els errors ortogràfics. Només funciona si s'ha instal·lat un diccionari ortogràfic. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+            <para><guilabel>Errors ortogràfics</guilabel> (opcional): detecta els errors ortogràfics. Funciona quan hi ha un mòdul de llengua compatible o un diccionari personalitzat local de l'usuari per a la llengua de destinació. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
           </listitem>
 
           <listitem>

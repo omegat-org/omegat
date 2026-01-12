@@ -497,7 +497,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 				  </itemizedlist>
 
 				  <note>
-					<para>Rapporten over problemen met problemen met tags  worden uitgevoerd naar het venster van de terminal.</para>
+					<para>Rapporten over problemen met problemen met tags worden uitgevoerd naar het venster van de terminal.</para>
 				  </note>
 				</listitem>
 			  </varlistentry>

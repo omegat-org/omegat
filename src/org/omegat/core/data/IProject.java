@@ -31,6 +31,7 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -89,7 +90,7 @@ public interface IProject {
      *            Whether or not we should perform external post-processing.
      * @param commitTargetFiles
      *            Whether or not we should commit target files
-     * @throws Exception
+     * @throws Exception If any error occurs during the compilation process.
      */
     void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
@@ -102,7 +103,7 @@ public interface IProject {
 
     /**
      * Commit source files in a team project.
-     * @throws java.lang.Exception
+     * @throws Exception if any error occurs during the commit process
      */
     void commitSourceFiles() throws Exception;
 
@@ -142,7 +143,7 @@ public interface IProject {
 
     /**
      * Set translation for entry.
-     *
+     * <p>
      * Optimistic locking will not be checked.
      *
      * @param entry
@@ -180,9 +181,7 @@ public interface IProject {
     void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note);
 
     /**
-     * Get statistics for project.
-     *
-     * @return
+     * Get statistics info.
      */
     StatisticsInfo getStatistics();
 
@@ -269,26 +268,41 @@ public interface IProject {
 
     class FileInfo {
         public String filePath;
+
         /**
          * IFilter implementing Class that was used to parse the file
          */
         public Class<?> filterClass;
+
         /**
          * Human readable name of the file format as defined by the filter.
          */
         public String filterFileFormatName;
+
         /**
          * Characterset name used for parsing the source file.
          */
         public String fileEncoding;
-        public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+
+        public final List<SourceTextEntry> entries = new ArrayList<>();
+
+        public FileInfo(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public FileInfo(String filePath, Class<?> filterClass, String filterName, String fileEncoding) {
+            this.filePath = filePath;
+            this.filterClass = filterClass;
+            this.filterFileFormatName = filterName;
+            this.fileEncoding = fileEncoding;
+        }
     }
 
-    public interface DefaultTranslationsIterator {
+    interface DefaultTranslationsIterator {
         void iterate(String source, TMXEntry trans);
     }
 
-    public interface MultipleTranslationsIterator {
+    interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
 
@@ -300,6 +314,40 @@ public interface IProject {
         protected TMXEntry alternativeTranslation;
         protected TMXEntry currentTranslation;
 
+        public static final TMXEntry EMPTY_TRANSLATION = new TMXEntry(new PrepareTMXEntry("", null), true, null);
+
+        /**
+         * Creates empty AllTranslations.
+         */
+        @SuppressWarnings("unused")
+        public AllTranslations() {
+            this(null, null);
+        }
+
+        /**
+         * Creates AllTranslations with default and alternative translations.
+         * @param defaultTranslation default translation
+         * @param alternativeTranslation alternative translation
+         */
+        public AllTranslations(TMXEntry defaultTranslation, TMXEntry alternativeTranslation) {
+            TMXEntry current = null;
+            if (alternativeTranslation != null) {
+                this.alternativeTranslation = alternativeTranslation;
+                current = alternativeTranslation;
+            } else {
+                this.alternativeTranslation = EMPTY_TRANSLATION;
+            }
+            if (defaultTranslation != null) {
+                this.defaultTranslation = defaultTranslation;
+                if (current == null) {
+                    current = defaultTranslation;
+                }
+            } else {
+                this.defaultTranslation = EMPTY_TRANSLATION;
+            }
+            currentTranslation = Objects.requireNonNullElse(current, EMPTY_TRANSLATION);
+        }
+
         public TMXEntry getDefaultTranslation() {
             return defaultTranslation;
         }
@@ -310,6 +358,18 @@ public interface IProject {
 
         public TMXEntry getCurrentTranslation() {
             return currentTranslation;
+        }
+
+        public void setAlternativeTranslation(TMXEntry entry) {
+            alternativeTranslation = entry;
+        }
+
+        public void setDefaultTranslation(TMXEntry entry) {
+            defaultTranslation = entry;
+        }
+
+        public void setCurrentTranslation(TMXEntry entry) {
+            currentTranslation = entry;
         }
     }
 

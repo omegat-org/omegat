@@ -26,7 +26,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren of te deactiveren.</para>
+        <para>Stelt u in staat om ingeschakelde en correct geconfigureerde programma's voor machinevertaling te activeren of te deactiveren.</para>
 
         <para>Als verscheidene programma's voor vertaling zijn geselecteerd, kunt u ook <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> gebruiken om tussen hen te schakelen en de laatst geselecteerde in te voegen. Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
       </listitem>

@@ -215,7 +215,7 @@ public class RcFilter extends AbstractFilter {
         return PART.OTHER;
     }
 
-    private String parseId(PART cPart, String line, int b, int e) {
+    private @Nullable String parseId(PART cPart, String line, int b, int e) {
         String[] w;
         switch (cPart) {
         case DIALOG:

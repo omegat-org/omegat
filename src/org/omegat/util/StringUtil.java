@@ -686,7 +686,7 @@ public final class StringUtil {
      * Compares two strings for equality. Handles nulls: if both strings are
      * nulls they are considered equal.
      */
-    public static boolean equal(String one, String two) {
+    public static boolean equal(@Nullable String one, @Nullable String two) {
         return (one == null && two == null) || (one != null && one.equals(two));
     }
 

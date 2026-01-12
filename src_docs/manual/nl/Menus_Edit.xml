@@ -247,11 +247,11 @@
 		
 		<itemizedlist>
 		  <listitem>
-			<para><guimenuitem>Vorige overeenkomst selecteren</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+			<para><guimenuitem>Vorige overeenkomst selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>↑</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo> op macOS)</para>
 		  </listitem>
 
 		  <listitem>
-			<para><guimenuitem>Volgende overeenkomst selecteren</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+			<para><guimenuitem>Volgende overeenkomst selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>↓</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo> op macOS)</para>
 		  </listitem>
 
 		  <listitem>
@@ -319,7 +319,7 @@
       <listitem>
 		<para>Segmenten die één en hetzelfde segment zijn, kunnen, afhankelijk van de context, verschillende vertalingen vereisen. Als de huidige vertaling van het segment niet van toepassing is, selecteer dit menu en voer de alternatieve vertaling in.</para>
 		<warning>
-		<para>OmegaT maakt verschil tussen identieke segmenten met ofwel een interne identificatie voor het type bestand verschaffen of door te verwijzen naar hun voorafgaande en volgende segmenten. In dergelijke gevallen vertrouwen alternatieve vertalingen erop dat de identieke segmenten verschillende voorafgaande of volgende segmenten hebben. Als de identieke segmenten ook identieke voorafgaande en volgende segmenten hebben, zult u ze niet verschillend kunnen vertalen en één ervan een alternatieve vertaling in OmegaT maken.</para>
+		<para>OmegaT maakt verschil tussen identieke segmenten door ofwel een interne identificatie, die is verschaft door het type bestand, te gebruiken, of door te verwijzen naar hun voorafgaande en volgende segmenten. In dergelijke gevallen vertrouwen alternatieve vertalingen erop dat de identieke segmenten verschillende voorafgaande of volgende segmenten hebben. Als de identieke segmenten ook identieke voorafgaande en volgende segmenten hebben, zult u ze niet verschillend kunnen vertalen en één ervan een alternatieve vertaling in OmegaT maken.</para>
 		<para>U kunt om dit probleem heen werken door een kleine wijziging te maken in één van de voorafgaande of volgende segmenten in het bronbestand om onderscheid te maken tussen de verscheidene instanties van hetzelfde voorafgaande of volgende segment.</para>
 		</warning>
       </listitem>

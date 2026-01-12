@@ -32,6 +32,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
+import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -39,7 +40,7 @@ import org.omegat.util.Language;
 /**
  * An abstract auto-completer view.
  * 
- * @author bartkoz
+ * @author Zoltan Bartko
  * @author Aaron Madlon-Kay
  */
 public abstract class AbstractAutoCompleterView {
@@ -47,10 +48,10 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the name appearing in the auto-completer.
      */
-    private String name;
+    private final String name;
 
     /**
-     * the completer
+     * the completer.
      */
     protected AutoCompleter completer;
 
@@ -60,11 +61,23 @@ public abstract class AbstractAutoCompleterView {
      * @param name
      *            the name of this view
      */
+    @Deprecated
     public AbstractAutoCompleterView(String name) {
         this.name = name;
     }
 
     /**
+     * Creates a new auto-completer view.
+      * @param name the name of this view
+     * @param completer the completer
+     */
+    public AbstractAutoCompleterView(String name, AutoCompleter completer) {
+        this.name = name;
+        this.completer = completer;
+    }
+
+    /**
+     * Return the name of this view.
      * @return the name
      */
     public String getName() {
@@ -74,8 +87,9 @@ public abstract class AbstractAutoCompleterView {
     /**
      * Set the AutoCompleter that this view belongs to.
      * 
-     * @param completer
+     * @param completer the completer
      */
+    @Deprecated
     public void setParent(AutoCompleter completer) {
         this.completer = completer;
     }
@@ -107,33 +121,33 @@ public abstract class AbstractAutoCompleterView {
     /**
      * return the size of the data list / array.
      * 
-     * @return
+     * @return the size of the data list / array.
      */
     public abstract int getRowCount();
 
     /**
      * get the preferred height of the component
      * 
-     * @return
+     * @return the preferred height of the component
      */
     public abstract int getPreferredHeight();
 
     /**
      * get the preferred width of the component
      * 
-     * @return
+     * @return the preferred width of the component
      */
     public abstract int getPreferredWidth();
 
     /**
      * get the selected value
      * 
-     * @return
+     * @return the selected value
      */
     public abstract AutoCompleterItem getSelectedValue();
 
     /**
-     * Update the view data
+     * Update the view data.
      */
     public abstract void updateViewData();
 
@@ -179,11 +193,14 @@ public abstract class AbstractAutoCompleterView {
         try {
             EditorTextArea3 editor = completer.getEditor();
             int offset = editor.getCaretPosition();
-            int translationStart = editor.getOmDocument().getTranslationStart();
-            return editor.getDocument().getText(translationStart, offset - translationStart);
-        } catch (BadLocationException e) {
-            return "";
+            Document3 editorDoc = editor.getOmDocument();
+            if (editorDoc != null) {
+                int translationStart = editorDoc.getTranslationStart();
+                return editor.getDocument().getText(translationStart, offset - translationStart);
+            }
+        } catch (BadLocationException ignored) {
         }
+        return "";
     }
 
     /**
@@ -191,7 +208,7 @@ public abstract class AbstractAutoCompleterView {
      * the view will not be shown in any circumstances (whether automatically or
      * manually).
      *
-     * @return
+     * @return Whether or not the view should be considered "on"
      */
     protected boolean isEnabled() {
         return true;

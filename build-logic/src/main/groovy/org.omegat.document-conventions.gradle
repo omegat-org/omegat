@@ -53,6 +53,13 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
+tasks.register('tipsHtmls', Sync) {
+    description = 'Copy tips html/css contents into build folder'
+    group = 'documentation'
+    from project.layout.projectDirectory.dir('src_docs/tips')
+    into layout.buildDirectory.dir('docs/tips')
+}
+
 def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
         .map { it.split(',') }
 manualLangsProvider.get().each { lang ->
@@ -93,6 +100,7 @@ manualLangsProvider.get().each { lang ->
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
+        css.set("omegat.css")
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 
@@ -150,7 +158,7 @@ manualLangsProvider.get().each { lang ->
     assemble.dependsOn(zipTask)
     manualZips.dependsOn(zipTask)
 
-    def languageName = new Locale(lang).displayName
+    def languageName = Locale.forLanguageTag(lang.replace('_', '-')).displayName
 
     // Create a new publication for this language
     def publication = publishing.publications.create("manual${lang.capitalize()}", MavenPublication) {
@@ -204,14 +212,16 @@ def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs
         .map { it.split(',') }
 firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
-        from layout.projectDirectory.file("src_docs/style/omegat.css")
+        from layout.projectDirectory.file("src_docs/style/greeting.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
+
     def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
         description = 'Generates a chunked HTML documentation.'
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        css.set("greeting.css")
         finalizedBy(firstStepsHtmlFinally)
     }
     firstSteps.dependsOn(firstStepsHtml)

@@ -165,12 +165,12 @@ dependencies {
         runtimeOnly(libs.nashorn.core)
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)
 
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
 
         implementation(libs.bundles.caffeine) {
             attributes {
@@ -210,6 +210,7 @@ dependencies {
         exclude module: 'protobuf-java'
     }
     testFixturesImplementation(libs.jetbrains.annotations)
+    testFixturesImplementation(libs.jspecify)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)
@@ -335,6 +336,9 @@ distributions {
                 from(tasks.manualZips)
                 from(layout.buildDirectory.dir('docs/manuals'))
             }
+            into('docs/tips') {
+                from('src_docs/tips')
+            }
             from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
             }
@@ -420,8 +424,8 @@ makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskNam
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
-    dependsOn linuxDebDist
-    dependsOn linuxRpmDist
+    dependsOn linuxDistDeb
+    dependsOn linuxDistRpm
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')

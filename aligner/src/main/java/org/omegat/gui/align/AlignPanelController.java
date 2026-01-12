@@ -91,9 +91,11 @@ import javax.swing.text.StyledDocument;
 import org.apache.commons.io.FilenameUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
@@ -119,14 +121,15 @@ import gen.core.filters.Filters;
  *
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class AlignPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private final String defaultSaveDir;
+    private final @Nullable String defaultSaveDir;
     private boolean modified = false;
-    private SRX customizedSRX;
-    private Filters customizedFilters;
+    private @Nullable SRX customizedSRX;
+    private @Nullable Filters customizedFilters;
 
-    private SwingWorker<?, ?> loader;
+    private @Nullable SwingWorker<?, ?> loader;
 
     private boolean doHighlight = true;
     private Pattern highlightPattern = Pattern.compile(Preferences.getPreferenceDefault(
@@ -135,8 +138,8 @@ public class AlignPanelController {
     private int ppRow = -1;
     private int ppCol = -1;
 
-    private AlignPanel alignPanel;
-    private AlignMenuFrame alignMenuFrame;
+    private final AlignPanel alignPanel;
+    private final AlignMenuFrame alignMenuFrame;
 
     /**
      * The alignment workflow is separated into two phases:
@@ -158,8 +161,10 @@ public class AlignPanelController {
 
     private Phase phase = Phase.ALIGN;
 
-    public AlignPanelController(String defaultSaveDir) {
+    public AlignPanelController(@Nullable String defaultSaveDir) {
         this.defaultSaveDir = defaultSaveDir;
+        alignPanel = new AlignPanel();
+        alignMenuFrame = new AlignMenuFrame();
     }
 
     /**
@@ -169,8 +174,7 @@ public class AlignPanelController {
      * @param parent
      *            Parent window of the align tool
      */
-    public void show(Component parent, Aligner aligner) {
-        alignMenuFrame = new AlignMenuFrame();
+    public void show(@Nullable Component parent, Aligner aligner) {
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -181,7 +185,6 @@ public class AlignPanelController {
             }
         });
 
-        alignPanel = new AlignPanel();
         // set names
         alignPanel.setName("align_panel");
         alignPanel.controlsPanel.setName("align_controls_panel");
@@ -253,7 +256,7 @@ public class AlignPanelController {
             }
         };
         alignPanel.counterComboBox.addActionListener(counterListener);
-        alignPanel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
+        alignPanel.counterComboBox.setRenderer(new EnumRenderer<>("ALIGNER_ENUM_COUNTER_TYPE_"));
 
         ActionListener segmentingListener = e -> {
             boolean newValue = ((AbstractButton) e.getSource()).isSelected();
@@ -270,8 +273,9 @@ public class AlignPanelController {
 
         ActionListener segmentingRulesListener = e -> {
             if (confirmReset(alignMenuFrame)) {
+                Segmenter segmenter = aligner.getSegmenter();
                 SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
-                        aligner.getSegmenter().getSRX(), null);
+                        segmenter != null ? segmenter.getSRX() : null, null);
                 if (customizer.show(alignMenuFrame)) {
                     customizedSRX = customizer.getResult();
                     aligner.updateSegmenter(customizedSRX);
@@ -395,9 +399,13 @@ public class AlignPanelController {
                     }
                     List<MutableBead> beads = ((BeadTableModel) alignPanel.table.getModel()).getData();
                     try {
-                        aligner.writePairsToTMX(file,
-                                MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
-                        modified = false;
+                        if (aligner.srcLang != null && aligner.trgLang != null) {
+                            aligner.writePairsToTMX(file,
+                                    MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
+                            modified = false;
+                        } else {
+                            throw new IllegalArgumentException("srcLang and trgLang must not be null");
+                        }
                     } catch (Exception ex) {
                         Log.log(ex);
                         JOptionPane.showMessageDialog(alignMenuFrame,
@@ -483,9 +491,7 @@ public class AlignPanelController {
 
         alignMenuFrame.keepNoneItem.addActionListener(e -> toggleAllEnabled(false));
 
-        alignMenuFrame.realignPendingItem.addActionListener(e -> {
-            realignPending(aligner);
-        });
+        alignMenuFrame.realignPendingItem.addActionListener(e -> realignPending(aligner));
 
         alignMenuFrame.pinpointAlignStartItem.addActionListener(e -> {
             phase = Phase.PINPOINT;
@@ -495,9 +501,8 @@ public class AlignPanelController {
             updatePanel(aligner);
         });
 
-        alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> {
-            pinpointAlign(aligner, alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn());
-        });
+        alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> pinpointAlign(aligner,
+                alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn()));
 
         alignMenuFrame.pinpointAlignCancelItem.addActionListener(e -> {
             phase = Phase.EDIT;
@@ -713,9 +718,7 @@ public class AlignPanelController {
         List<String> toRelocate = new ArrayList<>();
         for (int i = Math.min(ppRow, row); i <= Math.max(ppRow, row); i++) {
             String line = model.removeLine(i, relocateCol);
-            if (line != null) {
-                toRelocate.add(line);
-            }
+            toRelocate.add(line);
         }
         int resultRow = model.insertLines(toRelocate, Math.max(ppRow, row), relocateCol);
         model.setStatusAtRow(resultRow, Status.ACCEPTED);
@@ -816,8 +819,9 @@ public class AlignPanelController {
                 }
                 alignPanel.continueButton.setEnabled(true);
                 alignPanel.progressBar.setVisible(false);
-                alignPanel.comparisonComboBox.setModel(
-                        new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
+                List<ComparisonMode> modes = aligner.allowedModes;
+                alignPanel.comparisonComboBox.setModel(new DefaultComboBoxModel<>(
+                        modes != null ? modes.toArray(new ComparisonMode[0]) : new ComparisonMode[0]));
 
                 String distanceValue;
                 if (beads != null) {
@@ -891,12 +895,7 @@ public class AlignPanelController {
 
         updateCommandAvailability(alignPanel, alignMenuFrame);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                resizeRows(alignPanel.table);
-            }
-        });
+        SwingUtilities.invokeLater(() -> resizeRows(alignPanel.table));
     }
 
     private void updateHighlight() {
@@ -944,7 +943,7 @@ public class AlignPanelController {
     private String getOutFileName(Aligner aligner) {
         String src = FilenameUtils.getBaseName(aligner.srcFile);
         String trg = FilenameUtils.getBaseName(aligner.trgFile);
-        if (src.equals(trg)) {
+        if (src.equals(trg) && aligner.srcLang != null && aligner.trgLang != null) {
             return src + "_" + aligner.srcLang.getLanguage() + "_" + aligner.trgLang.getLanguage() + ".tmx";
         } else {
             return src + "_" + trg + ".tmx";
@@ -970,7 +969,8 @@ public class AlignPanelController {
      *            Parent component for dialog boxes
      */
     private void confirmSaveSRX(Component comp) {
-        if (Core.getMainWindow() == null || customizedSRX == null) {
+        Core.getMainWindow();
+        if (customizedSRX == null) {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
@@ -1003,7 +1003,8 @@ public class AlignPanelController {
      *            Parent component for dialog boxes
      */
     private void confirmSaveFilters(Component comp) {
-        if (Core.getMainWindow() == null || customizedFilters == null) {
+        Core.getMainWindow();
+        if (customizedFilters == null) {
             return;
         }
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(comp,
@@ -1074,11 +1075,9 @@ public class AlignPanelController {
             } else {
                 doStyling(textArea, table, isSelected, hasFocus, row, column);
                 textArea.setText(null);
-                if (value != null) {
-                    String text = value.toString();
-                    textArea.setText(text);
-                    doHighlighting(text);
-                }
+                String text = value.toString();
+                textArea.setText(text);
+                doHighlighting(text);
                 return textArea;
             }
         }
@@ -1098,7 +1097,6 @@ public class AlignPanelController {
                     case NEEDS_REVIEW:
                         comp.setBackground(Styles.EditorColor.COLOR_ALIGNER_NEEDSREVIEW.getColor());
                         break;
-                    case DEFAULT:
                     default:
                         // Leave color as-is
                     }
@@ -1127,7 +1125,7 @@ public class AlignPanelController {
         void doHighlighting(String text) {
             StyledDocument doc = textArea.getStyledDocument();
             doc.setCharacterAttributes(0, text.length(), new SimpleAttributeSet(), true);
-            if (!doHighlight || highlightPattern == null) {
+            if (!doHighlight) {
                 return;
             }
             Matcher m = highlightPattern.matcher(text);
@@ -1334,18 +1332,15 @@ public class AlignPanelController {
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             for (int row : rows) {
                 String line = lines.get(row);
-                if (line == null) {
-                    throw new IllegalArgumentException();
-                }
                 selected.add(line);
                 MutableBead bead = rowToBead.get(row);
                 if (bead == trgBead) {
                     continue;
                 }
-                Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
-                int insertIndex = trgRow > row ? 0 : trgLines.size();
-                // XXX: Bead modified here
-                trgLines.add(insertIndex, line);
+                if (Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line)) {
+                    int insertIndex = trgRow > row ? 0 : trgLines.size();
+                    trgLines.add(insertIndex, line);
+                }
             }
             trgBead.status = Status.DEFAULT;
             makeCache();
@@ -1358,35 +1353,20 @@ public class AlignPanelController {
         }
 
         /**
-         * Split the specified bead into two: one with an equal number of source
-         * and target lines (e.g. 1-1) and one with the remainder (e.g. 0-1).
-         * The new bead is inserted into the underlying data store.
-         *
-         * @param bead
-         *            to split.
-         * @return The remainder bead
-         */
-        private MutableBead splitBead(MutableBead bead) {
-            if (bead.isBalanced()) {
-                return bead;
-            }
-            int index = data.indexOf(bead);
-            bead = splitBeadByCount(bead, Math.min(bead.sourceLines.size(), bead.targetLines.size()));
-            data.add(index + 1, bead);
-            return bead;
-        }
-
-        /**
          * Split the specified bead into two: the first with the specified count
          * of lines, and the second with the remainder.
          *
          * @param bead
+         *            the bead to be split. It is modified in place to contain
+         *            only the first 'count' lines of its source and target.
          * @param count
-         * @return The remainder bead
+         *            the number of lines to retain in the original bead's
+         *            source and target lines.
+         * @return a new MutableBead object containing the remaining source and
+         *         target lines after the split.
          */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
             List<String> splitSrc = new ArrayList<>(bead.sourceLines);
-            // XXX: Bead modified here
             bead.sourceLines.clear();
             List<String> splitTrg = new ArrayList<>(bead.targetLines);
             bead.targetLines.clear();
@@ -1416,11 +1396,8 @@ public class AlignPanelController {
          * <code>col</code> can be moved in the indicated direction. A line is
          * movable if it is not blocked by another line in the same bead.
          *
-         * @param row
-         * @param col
          * @param up
          *            Up (toward index=0) when true, down when false
-         * @return
          */
         boolean canMove(int row, int col, boolean up) {
             if (!isEditableColumn(col)) {
@@ -1466,14 +1443,6 @@ public class AlignPanelController {
                     return false;
                 }
             }
-            // Check no non-empty cells in path
-            int inc = up ? -1 : 1;
-            for (int r = row + inc; r != trgRow && r >= 0 && r < rowToSourceLine.size(); r += inc) {
-                String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(r);
-                if (line != null) {
-                    return false;
-                }
-            }
             return true;
         }
 
@@ -1483,9 +1452,6 @@ public class AlignPanelController {
 
         /**
          * Get a list of rows covered by the bead at <code>row</code>.
-         *
-         * @param row
-         * @return
          */
         List<Integer> getRowExtentsForBeadAtRow(int row) {
             MutableBead bead = rowToBead.get(row);
@@ -1518,7 +1484,7 @@ public class AlignPanelController {
          * @return list of row numbers cell in.
          */
         List<Integer> realCellsInRowSpan(int col, int... rows) {
-            List<Integer> result = new ArrayList<Integer>();
+            List<Integer> result = new ArrayList<>();
             for (int row : rows) {
                 if (getValueAt(row, col) != null) {
                     result.add(row);
@@ -1585,7 +1551,6 @@ public class AlignPanelController {
                 int row = rows.get(i);
                 String line = lines.get(row);
                 toCombine.add(line);
-                // XXX: Bead modified
                 MutableBead bead = rowToBead.get(row);
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 bead.status = Status.DEFAULT;
@@ -1593,8 +1558,7 @@ public class AlignPanelController {
             MutableBead trgBead = rowToBead.get(rows.get(0));
             List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
-            String combined = Util.join(lang, toCombine);
-            // XXX: Bead modified
+            String combined = lang != null ? Util.join(lang, toCombine) : null;
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
             trgBead.status = Status.DEFAULT;
             makeCache();
@@ -1628,10 +1592,8 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
-            // XXX: Bead modified
             trgLines.set(insertAt++, split[0]);
             for (int i = 1; i < split.length; i++) {
-                // XXX: Bead modified
                 trgLines.add(insertAt++, split[i]);
             }
             trgBead.status = Status.DEFAULT;
@@ -1650,8 +1612,11 @@ public class AlignPanelController {
          * the original line entirely.
          *
          * @param row
+         *            Row index of the cell to edit
          * @param col
+         *            Column index of the cell to edit
          * @param newVal
+         *            New text value to replace the existing content
          */
         void editRow(int row, int col, String newVal) {
             if (!isEditableColumn(col)) {
@@ -1661,7 +1626,6 @@ public class AlignPanelController {
             List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
-            // XXX: Bead modified
             trgLines.set(insertAt, newVal);
             makeCache();
         }
@@ -1704,9 +1668,6 @@ public class AlignPanelController {
             for (int row : rows) {
                 List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
                 String line = lines.get(row);
-                if (line == null) {
-                    throw new IllegalArgumentException();
-                }
                 selected.add(line);
                 MutableBead bead = rowToBead.get(row);
                 int trgRow = row + offset;
@@ -1723,15 +1684,8 @@ public class AlignPanelController {
                     trgBead = rowToBead.get(trgRow);
                 }
                 if (trgBead == bead) {
-                    if (lines.get(trgRow) != null) {
-                        // Already in target bead
-                        continue;
-                    } else {
-                        // Moving down in unbalanced bead where target is blank
-                        // cell -> split bead and place
-                        // into resulting remainder bead
-                        trgBead = splitBead(trgBead);
-                    }
+                    // Already in target bead
+                    continue;
                 }
                 // XXX: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
@@ -1755,12 +1709,9 @@ public class AlignPanelController {
 
         /**
          * Get the number of beads contained within the specified rows.
-         *
-         * @param rows
-         * @return
          */
         int beadsInRowSpan(int... rows) {
-            List<MutableBead> beads = new ArrayList<MutableBead>();
+            List<MutableBead> beads = new ArrayList<>();
             for (int row : rows) {
                 MutableBead bead = rowToBead.get(row);
                 if (!beads.contains(bead)) {
@@ -1775,8 +1726,7 @@ public class AlignPanelController {
          * into multiple beads.
          *
          * @param rows
-         * @return A two-member array indicating the first and last resulting
-         *         rows
+         *            rows
          */
         void splitBead(int[] rows) {
             int origRowCount = getRowCount();
@@ -1785,10 +1735,6 @@ public class AlignPanelController {
             for (int row : rows) {
                 String line = rowToSourceLine.get(row);
                 List<String> indexFrom = bead.sourceLines;
-                if (line == null) {
-                    line = rowToTargetLine.get(row);
-                    indexFrom = bead.targetLines;
-                }
                 int index = Util.indexByIdentity(indexFrom, line);
                 if (index == -1) {
                     throw new IllegalArgumentException();
@@ -1805,7 +1751,7 @@ public class AlignPanelController {
         }
 
         void toggleBeadsAtRows(int... rows) {
-            List<MutableBead> beads = new ArrayList<MutableBead>(rows.length);
+            List<MutableBead> beads = new ArrayList<>(rows.length);
             for (int row : rows) {
                 MutableBead bead = rowToBead.get(row);
                 if (!beads.contains(bead)) {
@@ -1830,11 +1776,11 @@ public class AlignPanelController {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
             }
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            for (int i = row + 1; i < lines.size(); i++) {
-                if (lines.get(i) != null) {
-                    return i;
-                }
+            // Clarify which list we operate on
+            List<String> selectedColumnLines = (col == COL_SRC) ? rowToSourceLine : rowToTargetLine;
+            int nextIndex = row + 1;
+            if (nextIndex < selectedColumnLines.size()) {
+                return nextIndex;
             }
             return -1;
         }
@@ -1894,7 +1840,7 @@ public class AlignPanelController {
         }
 
         @Override
-        protected Transferable createTransferable(JComponent c) {
+        protected @Nullable Transferable createTransferable(JComponent c) {
             if (!(c instanceof JTable)) {
                 return null;
             }
@@ -2067,9 +2013,9 @@ public class AlignPanelController {
         }
 
         @Override
-        protected String getDisplayText(T value) {
+        protected String getDisplayText(@Nullable T value) {
             if (value == null) {
-                return null;
+                return "";
             }
             try {
                 return BUNDLE.getString(keyPrefix + value.name());

@@ -1,0 +1,51 @@
+import org.omegat.documentation.DocbookHtmlTask
+
+plugins {
+    id 'org.omegat.documentation'
+    id 'org.omegat.module'
+}
+
+def documentRootDir = 'src_docs'
+def styleRootDir = 'src_docs/xsl'
+docConfig {
+    styleDir.set(rootProject.layout.settingsDirectory.dir(styleRootDir))
+    docRoot.set(rootProject.layout.settingsDirectory.dir(documentRootDir))
+    outputRoot.set(layout.buildDirectory.dir('docs'))
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+    } else {
+        implementation(libs.jetbrains.annotations)
+        compileOnly(libs.omegat.mnemonics)
+    }
+}
+
+def copyCss = tasks.register("copyPhilosophyCss", Copy) {
+    description = 'Copies CSS file.'
+    from rootProject.layout.settingsDirectory.file("${documentRootDir}/style/philosophy.css")
+    into layout.buildDirectory.dir("docs/greetings")
+}
+jar.dependsOn(copyCss)
+
+def langs = project.findProperty('org.omegat.philosophyLanguages')?.split(',') ?: ['en']
+langs.each { lang ->
+
+    def philosophyHtml = tasks.register("philosophy${lang.capitalize()}", DocbookHtmlTask) {
+        description = 'Generates a philosophy HTML'
+        inputFile.set(rootProject.layout.settingsDirectory.file("${documentRootDir}/greeting/${lang}/Philosophy.xml"))
+        outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/philosophy.html"))
+        styleSheetFile.set(rootProject.layout.settingsDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        css.set("../philosophy.css")
+        dependsOn copyCss
+    }
+    jar.dependsOn(philosophyHtml)
+}
+
+jar {
+    from(layout.buildDirectory.dir("docs")) {
+        into "docs"
+    }
+}

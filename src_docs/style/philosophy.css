@@ -1,0 +1,40 @@
+body {
+	font-family:sans-serif;
+}
+
+p,
+pre,
+ol,
+dl,
+ul,
+li,
+table,
+hr {
+    margin: 1em 0;
+}
+
+hr {
+    display: none;
+}
+
+div.itemizedlist {
+    margin: 2em 4em;
+}
+
+span.guimenu, span.guisubmenu, span.guimenuitem, span.guilabel {
+	font-style: italic;
+	font-family: monospace;
+    font-size: 1.1em;
+}
+
+span.emphasis {
+    font-style: italic;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ul ul {
+    list-style-type: square;
+}

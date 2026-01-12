@@ -35,6 +35,13 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * The SearchWindowForm is a GUI component that provides comprehensive search
+ * functionality within OmegaT.
+ * <p>
+ * It allows users to search through source and target text, comments, and notes
+ * using different search methods (exact match, keyword, regular expression).
+ * The form also supports advanced features like case sensitivity,
+ * search filtering by translation status, and replacement operations.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
@@ -45,7 +52,7 @@ import org.omegat.util.gui.StaticUIUtils;
 public class SearchWindowForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form SearchWindowForm
+     * Creates a new form SearchWindowForm
      */
     public SearchWindowForm() {
         StaticUIUtils.setWindowIcon(this);

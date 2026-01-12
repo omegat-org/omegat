@@ -38,7 +38,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 
@@ -62,18 +62,18 @@ public class XMLReader extends Reader {
     private final BufferedReader reader;
 
     /** Inner encoding. */
-    private String encoding;
+    private @Nullable String encoding;
 
     /** EOL chars used in source file. */
-    private String eol;
+    private @Nullable String eol;
 
     /** Returns detected encoding. */
-    public String getEncoding() {
+    public @Nullable String getEncoding() {
         return encoding;
     }
 
     /** Returns detected EOL chars. */
-    public String getEol() {
+    public @Nullable String getEol() {
         return eol;
     }
 
@@ -109,7 +109,7 @@ public class XMLReader extends Reader {
      * @param defaultEncoding
      *            The encoding to use if we can't autodetect.
      */
-    public XMLReader(File file, String defaultEncoding) throws IOException {
+    public XMLReader(File file, @Nullable String defaultEncoding) throws IOException {
         reader = createReader(new FileInputStream(file), defaultEncoding);
     }
 
@@ -128,7 +128,7 @@ public class XMLReader extends Reader {
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
-    private BufferedReader createReader(InputStream in, String defaultEncoding) throws IOException {
+    private BufferedReader createReader(InputStream in, @Nullable String defaultEncoding) throws IOException {
         // BOM detection
         BufferedInputStream is = new BufferedInputStream(in);
 
@@ -178,7 +178,7 @@ public class XMLReader extends Reader {
         }
     }
 
-    private BufferedReader createReaderAndDetectEOL(@NotNull InputStream is, @NotNull Charset charset)
+    private BufferedReader createReaderAndDetectEOL(InputStream is, Charset charset)
             throws IOException {
         InputStreamReader isr = new InputStreamReader(is, charset);
         BufferedReader bufferedReader = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);

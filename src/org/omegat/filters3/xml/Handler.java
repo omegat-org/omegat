@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -119,7 +119,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /** Current entry that collects the text surrounded by intact tag. */
     @Nullable Entry intacttagEntry = null;
     /** Keep the attributes of an intact tag. */
-    @Nullable org.omegat.filters3.Attributes intacttagAttributes = null;
+    org.omegat.filters3.@Nullable Attributes intacttagAttributes = null;
     /** Keep the attributes of paragraph tags. */
     private final Deque<org.omegat.filters3.Attributes> paragraphTagAttributes = new ArrayDeque<>();
     /** Keep the attributes of preformat tags. */
@@ -172,7 +172,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * If we collect normal text, returns {@link #entry}, else returns the last
      * of {@link #outofturnEntries}.
      */
-    private Entry currEntry() {
+    private @Nullable Entry currEntry() {
         if (collectingIntactText()) {
             return intacttagEntry;
         } else if (collectingOutOfTurnText()) {
@@ -389,7 +389,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     public InputSource doResolve(String publicId, String systemId) throws SAXException {
         inDTD = isDTDMatch(publicId, systemId);
-        if (systemId != null && (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA))) {
+        if (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA)) {
             return resolveLocalEntity(publicId, systemId);
         } else {
             return resolveDialectEntity(publicId, systemId);
@@ -427,7 +427,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     private InputSource resolveLocalEntity(String publicId, String systemId) throws SAXException {
         try {
-            if (!isValidLocalEntty(systemId)) {
+            if (!isValidLocalEntity(systemId)) {
                 return new InputSource(new StringReader(""));
             }
 
@@ -454,7 +454,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private boolean isValidLocalEntty(String systemId) throws URISyntaxException {
+    private boolean isValidLocalEntity(String systemId) throws URISyntaxException {
         // checking if the systemID is a file schema, and if so, we need to
         // resolve it from the source folder
         if (systemId.startsWith(START_FILESCHEMA)) {
@@ -529,15 +529,17 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     private void processTranslatableAttributes(Tag xmltag, String tag) {
-        if (xmltag.getAttributes() != null) { // always expect notNull
-            org.omegat.filters3.Attributes attributes = xmltag.getAttributes();
-            for (int i = 0; i < attributes.size(); i++) {
-                Attribute attr = attributes.get(i);
-                if (isTranslatableAttribute(tag, attr.getName())
-                        && dialect.validateTranslatableTagAttribute(tag, attr.getName(), attributes)) {
-                    String translatedAttributeValue = translateAttributeValue(attr.getValue());
-                    attr.setValue(translatedAttributeValue);
-                }
+        if (xmltag.getAttributes() == null) {
+            // always expect notNull but enforce
+            return;
+        }
+        org.omegat.filters3.Attributes attributes = xmltag.getAttributes();
+        for (int i = 0; i < attributes.size(); i++) {
+            Attribute attr = attributes.get(i);
+            if (isTranslatableAttribute(tag, attr.getName())
+                    && dialect.validateTranslatableTagAttribute(tag, attr.getName(), attributes)) {
+                String translatedAttributeValue = translateAttributeValue(attr.getValue());
+                attr.setValue(translatedAttributeValue);
             }
         }
     }
@@ -859,7 +861,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns whether the tag surrounds intact block of text which we shouldn't
      * translate.
      */
-    private boolean isIntactTag(String tag, @Nullable org.omegat.filters3.Attributes atts) {
+    private boolean isIntactTag(String tag, org.omegat.filters3.@Nullable Attributes atts) {
         if (dialect.getIntactTags() != null && dialect.getIntactTags().contains(tag)) {
             return true;
         } else {

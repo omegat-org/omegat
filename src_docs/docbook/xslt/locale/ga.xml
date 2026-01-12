@@ -1,0 +1,2463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l:l10n xmlns="http://docbook.org/ns/docbook"
+        xmlns:db="http://docbook.org/ns/docbook"
+        xmlns:l="http://docbook.org/ns/docbook/l10n"
+        xmlns:lt="http://docbook.org/ns/docbook/l10n/templates"
+        language="ga"
+        english-language-name="Irish">
+   <l:gentext>
+      <l:token key="above">thuas</l:token>
+      <l:token key="Abstract">Achoimre</l:token>
+      <l:token key="abstract">Achoimre</l:token>
+      <l:token key="and">agus</l:token>
+      <l:token key="Answer">F:</l:token>
+      <l:token key="answer">F:</l:token>
+      <l:token key="Appendix">Aguisín</l:token>
+      <l:token key="appendix">Aguisín</l:token>
+      <l:token key="Article">Alt</l:token>
+      <l:token key="article">Alt</l:token>
+      <l:token key="Author">Údar</l:token>
+      <l:token key="below">thíos</l:token>
+      <l:token key="Bibliography">Leabharliosta</l:token>
+      <l:token key="bibliography">Leabharliosta</l:token>
+      <l:token key="Book">Leabhar</l:token>
+      <l:token key="book">Leabhar</l:token>
+      <l:token key="bullet">•</l:token>
+      <l:token key="by">le</l:token>
+      <l:token key="called">dar teideal</l:token>
+      <l:token key="CAUTION">FAINIC</l:token>
+      <l:token key="Caution">Fainic</l:token>
+      <l:token key="caution">Fainic</l:token>
+      <l:token key="Chapter">Caibidil</l:token>
+      <l:token key="chapter">Caibidil</l:token>
+      <l:token key="Colophon">Colafan</l:token>
+      <l:token key="colophon">Colafan</l:token>
+      <l:token key="Copyright">Cóipcheart</l:token>
+      <l:token key="copyright">Cóipcheart</l:token>
+      <l:token key="Dedication">Tíolacadh</l:token>
+      <l:token key="dedication">Tíolacadh</l:token>
+      <l:token key="Draft">Dréacht</l:token>
+      <l:token key="Edited">Curtha in eagar</l:token>
+      <l:token key="edited">Curtha in eagar</l:token>
+      <l:token key="Editedby">Curtha in eagar ag</l:token>
+      <l:token key="editedby">Curtha in eagar ag</l:token>
+      <l:token key="Edition">Eagrán</l:token>
+      <l:token key="edition">Eagrán</l:token>
+      <l:token key="endquote">”</l:token>
+      <l:token key="Equation">Cothromóid</l:token>
+      <l:token key="equation">Cothromóid</l:token>
+      <l:token key="Example">Sampla</l:token>
+      <l:token key="example">Sampla</l:token>
+      <l:token key="Figure">Léaráid</l:token>
+      <l:token key="figure">Léaráid</l:token>
+      <l:token key="Glossary">Gluais</l:token>
+      <l:token key="glossary">Gluais</l:token>
+      <l:token key="GlossSee">Féach</l:token>
+      <l:token key="glosssee">Féach</l:token>
+      <l:token key="GlossSeeAlso">Féach Freisin</l:token>
+      <l:token key="glossseealso">Féach Freisin</l:token>
+      <l:token key="hyphenation-character">-</l:token>
+      <l:token key="hyphenation-push-character-count">2</l:token>
+      <l:token key="hyphenation-remain-character-count">2</l:token>
+      <l:token key="IMPORTANT">TÁBHACHTACH</l:token>
+      <l:token key="important">Tábhachtach</l:token>
+      <l:token key="Important">Tábhachtach</l:token>
+      <l:token key="in">i</l:token>
+      <l:token key="Index">Innéacs</l:token>
+      <l:token key="index">Innéacs</l:token>
+      <l:token key="index symbols">Siombailí</l:token>
+      <l:token key="ISBN">ISBN</l:token>
+      <l:token key="isbn">ISBN</l:token>
+      <l:token key="lastlistcomma">,</l:token>
+      <l:token key="LegalNotice">Fógra Dlí</l:token>
+      <l:token key="legalnotice">Fógra Dlí</l:token>
+      <l:token key="listcomma">,</l:token>
+      <l:token key="listofequations">Liosta Cothromóidí</l:token>
+      <l:token key="ListofEquations">Liosta Cothromóidí</l:token>
+      <l:token key="ListofExamples">Liosta Samplaí</l:token>
+      <l:token key="listofexamples">Liosta Samplaí</l:token>
+      <l:token key="ListofFigures">Liosta Léaráidí</l:token>
+      <l:token key="listoffigures">Liosta Léaráidí</l:token>
+      <l:token key="ListofProcedures">Liosta Gnás</l:token>
+      <l:token key="listofprocedures">Liosta Gnás</l:token>
+      <l:token key="listoftables">Liosta Táblaí</l:token>
+      <l:token key="ListofTables">Liosta Táblaí</l:token>
+      <l:token key="ListofUnknown">Liosta Rudaí Anaithnide</l:token>
+      <l:token key="listofunknown">Liosta Rudaí Anaithnide</l:token>
+      <l:token key="MsgAud">Sprioclucht</l:token>
+      <l:token key="msgaud">Sprioclucht</l:token>
+      <l:token key="MsgLevel">Leibhéal</l:token>
+      <l:token key="msglevel">Leibhéal</l:token>
+      <l:token key="MsgOrig">Foinse</l:token>
+      <l:token key="msgorig">Foinse</l:token>
+      <l:token key="nav-home">Baile</l:token>
+      <l:token key="nav-next">Ar Aghaidh</l:token>
+      <l:token key="nav-next-sibling">Ar Aghaidh Go Tapa</l:token>
+      <l:token key="nav-prev">Ar Ais</l:token>
+      <l:token key="nav-prev-sibling">Ar Ais Go Tapa</l:token>
+      <l:token key="nav-toc">CÁ</l:token>
+      <l:token key="nav-up">Suas</l:token>
+      <l:token key="nestedendquote">’</l:token>
+      <l:token key="nestedstartquote">‘</l:token>
+      <l:token key="NOTE">NÓTA</l:token>
+      <l:token key="Note">Nóta</l:token>
+      <l:token key="note">Nóta</l:token>
+      <l:token key="notes">Nótaí</l:token>
+      <l:token key="Notes">Nótaí</l:token>
+      <l:token key="or">nó</l:token>
+      <l:token key="Part">Cuid</l:token>
+      <l:token key="part">Cuid</l:token>
+      <l:token key="Pgs">Lgh.</l:token>
+      <l:token key="pgs">Lgh.</l:token>
+      <l:token key="Preface">Réamhrá</l:token>
+      <l:token key="preface">Réamhrá</l:token>
+      <l:token key="Procedure">Gnás</l:token>
+      <l:token key="procedure">Gnás</l:token>
+      <l:token key="ProductionSet">Rialacha Táirgthe</l:token>
+      <l:token key="PubDate">Dáta Foilsithe</l:token>
+      <l:token key="pubdate">Dáta foilsithe</l:token>
+      <l:token key="Published">Foilsithe</l:token>
+      <l:token key="published">Foilsithe</l:token>
+      <l:token key="Qandadiv">C &amp; F</l:token>
+      <l:token key="qandadiv">C &amp; F</l:token>
+      <l:token key="Question">C:</l:token>
+      <l:token key="question">C:</l:token>
+      <l:token key="RefEntry"/>
+      <l:token key="refentry"/>
+      <l:token key="Reference">Tagairt</l:token>
+      <l:token key="reference">Tagairt</l:token>
+      <l:token key="RefName">Ainm</l:token>
+      <l:token key="refname">Ainm</l:token>
+      <l:token key="RefSection"/>
+      <l:token key="refsection"/>
+      <l:token key="RefSynopsisDiv">Achoimre</l:token>
+      <l:token key="refsynopsisdiv">Achoimre</l:token>
+      <l:token key="RevHistory">Stair Leasaithe</l:token>
+      <l:token key="revhistory">Stair Leasaithe</l:token>
+      <l:token key="Revisedby">Leasaithe ag: </l:token>
+      <l:token key="revisedby">Leasaithe ag: </l:token>
+      <l:token key="revision">Leasú</l:token>
+      <l:token key="Revision">Leasú</l:token>
+      <l:token key="sect1">Rannán</l:token>
+      <l:token key="sect2">Rannán</l:token>
+      <l:token key="sect3">Rannán</l:token>
+      <l:token key="sect4">Rannán</l:token>
+      <l:token key="sect5">Rannán</l:token>
+      <l:token key="section">Rannán</l:token>
+      <l:token key="Section">Rannán</l:token>
+      <l:token key="sectioncalled">an rannán dar teideal</l:token>
+      <l:token key="see">féach</l:token>
+      <l:token key="See">Féach</l:token>
+      <l:token key="seealso">féach freisin</l:token>
+      <l:token key="Seealso">Féach freisin</l:token>
+      <l:token key="SeeAlso">Féach Freisin</l:token>
+      <l:token key="set">Tacar</l:token>
+      <l:token key="Set">Tacar</l:token>
+      <l:token key="setindex">Innéacs</l:token>
+      <l:token key="SetIndex">Innéacs</l:token>
+      <l:token key="Sidebar"/>
+      <l:token key="sidebar">taobhbharra</l:token>
+      <l:token key="singleendquote">’</l:token>
+      <l:token key="singlestartquote">‘</l:token>
+      <l:token key="startquote">“</l:token>
+      <l:token key="step">céim</l:token>
+      <l:token key="Step">Céim</l:token>
+      <l:token key="Table">Tábla</l:token>
+      <l:token key="table">Tábla</l:token>
+      <l:token key="TableNotes">Nótaí</l:token>
+      <l:token key="tablenotes">Nótaí</l:token>
+      <l:token key="TableofContents">Clár Ábhair</l:token>
+      <l:token key="tableofcontents">Clár Ábhair</l:token>
+      <l:token key="the"/>
+      <l:token key="tip">Leid</l:token>
+      <l:token key="TIP">LEID</l:token>
+      <l:token key="Tip">Leid</l:token>
+      <l:token key="unexpectedelementname">Ainm eiliminte gan choinne</l:token>
+      <l:token key="unsupported">gan tacaíocht</l:token>
+      <l:token key="Warning">Rabhadh</l:token>
+      <l:token key="warning">Rabhadh</l:token>
+      <l:token key="WARNING">RABHADH</l:token>
+      <l:token key="writing-mode">lr-tb</l:token>
+      <l:token key="xrefto">xref go</l:token>
+   </l:gentext>
+   <l:group name="number-format">
+      <l:template match="self::db:part">
+         <lt:text>I</lt:text>
+      </l:template>
+      <l:template match="self::db:reference">
+         <lt:text>I</lt:text>
+      </l:template>
+      <l:template match="self::db:appendix">
+         <lt:text>A</lt:text>
+      </l:template>
+      <l:template match="true()">
+         <lt:text>1</lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="date-format">
+      <l:template match="true()">
+         <lt:text>[M01]/[D01]/[Y0001]</lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="datetime-format">
+      <l:template match="true()">
+         <lt:text>[M01]/[D01]/[Y0001]</lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="number-separator">
+      <l:template match="true()">
+         <lt:text>.</lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="keycap"/>
+   <l:group name="name-style">
+      <l:template match="self::db:personname">
+         <lt:text>first-last</lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="label">
+      <l:template match="self::db:refnamediv">
+         <lt:token key="RefName"/>
+      </l:template>
+      <l:template match="self::db:refname">
+         <lt:token key="RefName"/>
+      </l:template>
+      <l:template match="self::db:see">
+         <lt:token key="See"/>
+      </l:template>
+      <l:template match="self::db:seealso">
+         <lt:token key="Seealso"/>
+      </l:template>
+      <l:template match="self::db:editor">
+         <lt:token key="Editedby"/>
+      </l:template>
+      <l:template match="self::db:msgaud">
+         <lt:token key="msgaud"/>
+      </l:template>
+      <l:template match="self::db:msglevel">
+         <lt:token key="msglevel"/>
+      </l:template>
+      <l:template match="self::db:msgorig">
+         <lt:token key="msgorig"/>
+      </l:template>
+   </l:group>
+   <l:group name="label-separator">
+      <l:template match="self::db:msgaud">
+         <lt:text>: </lt:text>
+      </l:template>
+      <l:template match="self::db:msglevel">
+         <lt:text>: </lt:text>
+      </l:template>
+      <l:template match="self::db:msgorig">
+         <lt:text>: </lt:text>
+      </l:template>
+      <l:template match="self::db:editor">
+         <lt:text> </lt:text>
+      </l:template>
+      <l:template match="self::db:see">
+         <lt:text> </lt:text>
+      </l:template>
+      <l:template match="self::db:seealso">
+         <lt:text> </lt:text>
+      </l:template>
+      <l:template match="true()">
+         <lt:text>. </lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="separator">
+      <l:template match="true()">
+         <lt:text>, </lt:text>
+      </l:template>
+   </l:group>
+   <l:group name="table-of-contents">
+      <l:template match="true()">
+         <lt:token key="TableofContents"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-figures">
+      <l:template match="true()">
+         <lt:token key="ListofFigures"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-tables">
+      <l:template match="true()">
+         <lt:token key="ListofTables"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-equations">
+      <l:template match="true()">
+         <lt:token key="ListofEquations"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-procedures">
+      <l:template match="true()">
+         <lt:token key="ListofProcedures"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-examples">
+      <l:template match="true()">
+         <lt:token key="ListofExamples"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-unknown">
+      <l:template match="true()">
+         <lt:token key="ListofUnknown"/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-titles-unnumbered">
+      <l:template match="true()">
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="list-of-titles">
+      <l:template match="self::db:part[parent::db:book]">
+         <lt:token key="Part"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:reference[parent::db:book]">
+         <lt:token key="Reference"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:section[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect1[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect2[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect3[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect4[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect5[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:acknowledgements">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:article">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliography">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:book">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:set">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:colophon">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:dedication">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalgroup">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:forward">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossary">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:index">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:preface">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:setindex">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:topic">
+         <lt:content/>
+      </l:template>
+      <l:template match="true()">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="title-unnumbered">
+      <l:template match="self::db:abstract">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:answer">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:article">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:authorblurb">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliodiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:biblioentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliography">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliolist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliomixed">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliomset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:biblioset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:blockquote">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:book">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:calloutlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:caution">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:colophon">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:dedication">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:token key="Equation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:token key="Example"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:figure">
+         <lt:token key="Figure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foil">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foilgroup">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalpara">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossary">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glosslist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:important">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:index">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:indexdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:itemizedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:legalnotice">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:listitem"/>
+      <l:template match="self::db:lot">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msg">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgexplan">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgmain">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgrel">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgsub">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:note">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:orderedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:part">
+         <lt:token key="Part"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:partintro">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:preface">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:procedure">
+         <lt:token key="Procedure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:productionset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:productionset.formal">
+         <lt:token key="ProductionSet"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:qandadiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandaentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandaset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:question">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:reference">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsection">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect1">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect2">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect3">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsynopsisdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsynopsisdivinfo">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:segmentedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:set">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:setindex">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sidebar">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:step">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:token key="Table"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:task">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:tip">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:toc">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:variablelist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:varlistentry"/>
+      <l:template match="self::db:warning">
+         <lt:content/>
+      </l:template>
+      <l:template match="true()">
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="title-numbered">
+      <l:template match="self::db:section[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect1[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect2[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect3[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect4[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect5[ancestor::db:preface]">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:appendix[parent::db:article]">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:appendix">
+         <lt:token key="Appendix"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bridgehead">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:chapter">
+         <lt:token key="Chapter"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:part">
+         <lt:token key="Part"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect1">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect2">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect3">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect4">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect5">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:section">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:simplesect">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsection">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect1">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect2">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsect3">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:abstract">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:answer">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:article">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:authorblurb">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliodiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:biblioentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliography">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliolist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliomixed">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliomset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:biblioset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:blockquote">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:book">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:calloutlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:caution">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:colophon">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:dedication">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:token key="Equation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:token key="Example"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:figure">
+         <lt:token key="Figure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foil">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foilgroup">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalpara">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossary">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glosslist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:important">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:index">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:indexdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:itemizedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:legalnotice">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:listitem"/>
+      <l:template match="self::db:lot">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msg">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgexplan">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgmain">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgrel">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgsub">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:note">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:orderedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:partintro">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:preface">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:procedure">
+         <lt:token key="Procedure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:productionset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:productionset.formal">
+         <lt:token key="ProductionSet"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:qandadiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandaentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandaset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:question">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refentry">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:reference">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsynopsisdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsynopsisdivinfo">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:segmentedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:set">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:setindex">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sidebar">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:step">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:token key="Table"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:task">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:tip">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:toc">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:variablelist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:varlistentry"/>
+      <l:template match="self::db:warning">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalgroup[db:equation]">
+         <lt:token key="Equation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalgroup[db:example]">
+         <lt:token key="Example"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalgroup[db:figure]">
+         <lt:token key="Figure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalgroup[db:table]">
+         <lt:token key="Table"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="true()">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="subfigure-title">
+      <l:template match="self::db:figure">
+         <lt:token key="subfigure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:token key="subtable"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:token key="subequation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:token key="subexample"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="title-generated">
+      <l:template match="self::db:abstract">
+         <lt:token key="Abstract"/>
+      </l:template>
+      <l:template match="self::db:acknowledgements">
+         <lt:token key="Acknowledgements"/>
+      </l:template>
+      <l:template match="self::db:bibliography">
+         <lt:token key="Bibliography"/>
+      </l:template>
+      <l:template match="self::db:caution">
+         <lt:token key="Caution"/>
+      </l:template>
+      <l:template match="self::db:danger">
+         <lt:token key="Danger"/>
+      </l:template>
+      <l:template match="self::db:dedication">
+         <lt:token key="Dedication"/>
+      </l:template>
+      <l:template match="self::db:glossary">
+         <lt:token key="Glossary"/>
+      </l:template>
+      <l:template match="self::db:important">
+         <lt:token key="Important"/>
+      </l:template>
+      <l:template match="self::db:index">
+         <lt:token key="Index"/>
+      </l:template>
+      <l:template match="self::db:legalnotice">
+         <lt:token key="LegalNotice"/>
+      </l:template>
+      <l:template match="self::db:note">
+         <lt:token key="Note"/>
+      </l:template>
+      <l:template match="self::db:revhistory">
+         <lt:token key="RevHistory"/>
+      </l:template>
+      <l:template match="self::db:setindex">
+         <lt:token key="SetIndex"/>
+      </l:template>
+      <l:template match="self::db:tip">
+         <lt:token key="Tip"/>
+      </l:template>
+      <l:template match="self::db:warning">
+         <lt:token key="Warning"/>
+      </l:template>
+   </l:group>
+   <l:group name="xref">
+      <l:template match="self::db:section[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect1[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect2[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect3[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect4[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sect5[ancestor::db:preface]">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:danger">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:production">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliolist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glosslist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:abstract">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:answer">
+         <lt:token key="Answer"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:appendix">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:article">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:authorblurb">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliodiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliography">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bibliomset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:biblioset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:blockquote">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:book">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:calloutlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:caution">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:chapter">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:colophon">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:constraintdef">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:dedication">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:figure">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foil">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:foilgroup">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:formalpara">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossary">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:glossdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:important">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:index">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:indexdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:itemizedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:legalnotice">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:lot">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msg">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgexplan">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgmain">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgrel">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:msgsub">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:note">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:orderedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:part">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:partintro">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:preface">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:procedure">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:productionset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandadiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:qandaentry">
+         <lt:token key="Question"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:qandaset">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:question">
+         <lt:token key="Question"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:reference">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:refsynopsisdiv">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:segmentedlist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:set">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:setindex">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:sidebar">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:tip">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:toc">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:variablelist">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:warning">
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:olink.document.citation">
+         <lt:text> i </lt:text>
+         <lt:olink-title/>
+      </l:template>
+      <l:template match="self::db:olink.page.citation">
+         <lt:text> (leathanach </lt:text>
+         <lt:page/>
+         <lt:text>)</lt:text>
+      </l:template>
+      <l:template match="self::db:page.citation">
+         <lt:text> [</lt:text>
+         <lt:page/>
+         <lt:text>]</lt:text>
+      </l:template>
+      <l:template match="self::db:page">
+         <lt:text>(leathanach </lt:text>
+         <lt:page/>
+         <lt:text>)</lt:text>
+      </l:template>
+      <l:template match="self::db:docname">
+         <lt:text> i </lt:text>
+         <lt:olink-title/>
+      </l:template>
+      <l:template match="self::db:docnamelong">
+         <lt:text> in the document titled </lt:text>
+         <lt:olink-title/>
+      </l:template>
+      <l:template match="self::db:pageabbrev">
+         <lt:text>(lch</lt:text>
+         <lt:separator/>
+         <lt:page/>
+         <lt:text>)</lt:text>
+      </l:template>
+      <l:template match="self::db:Page">
+         <lt:text>Leathanach </lt:text>
+         <lt:page/>
+      </l:template>
+      <l:template match="self::db:bridgehead">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsection">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect1">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect2">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect3">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect1">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect2">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect3">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect4">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect5">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:section">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:simplesect">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:step">
+         <lt:token key="step"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:refnamediv">
+         <lt:content/>
+      </l:template>
+      <l:template match="true()">
+         <lt:label/>
+      </l:template>
+   </l:group>
+   <l:group name="xref-number">
+      <l:template match="self::db:answer">
+         <lt:token key="Answer"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:appendix">
+         <lt:token key="Appendix"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:bridgehead">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:chapter">
+         <lt:token key="Chapter"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:token key="Equation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:token key="Example"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:figure">
+         <lt:token key="Figure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:part">
+         <lt:token key="Part"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:procedure">
+         <lt:token key="Procedure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:productionset">
+         <lt:token key="ProductionSet"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:qandadiv">
+         <lt:token key="Qandadiv"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:qandaentry">
+         <lt:token key="Question"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:question">
+         <lt:token key="Question"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:sect1">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:sect2">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:sect3">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:sect4">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:sect5">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:section">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:token key="Table"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+      </l:template>
+   </l:group>
+   <l:group name="xref-number-and-title">
+      <l:template match="self::db:appendix">
+         <lt:token key="Appendix"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:bridgehead">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:chapter">
+         <lt:token key="Chapter"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:content/>
+      </l:template>
+      <l:template match="self::db:equation">
+         <lt:token key="Equation"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:example">
+         <lt:token key="Example"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:figure">
+         <lt:token key="Figure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:part">
+         <lt:token key="Part"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:procedure">
+         <lt:token key="Procedure"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:productionset">
+         <lt:token key="ProductionSet"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:qandadiv">
+         <lt:token key="Qandadiv"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect1">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect2">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsect3">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:refsection">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect1">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect2">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect3">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect4">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:sect5">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:section">
+         <lt:token key="Section"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:simplesect">
+         <lt:token key="sectioncalled"/>
+         <lt:text> </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="self::db:table">
+         <lt:token key="Table"/>
+         <lt:text> </lt:text>
+         <lt:label/>
+         <lt:text>, </lt:text>
+         <lt:token key="startquote"/>
+         <lt:content/>
+         <lt:token key="endquote"/>
+      </l:template>
+      <l:template match="true()">
+         <lt:label/>
+         <lt:separator/>
+         <lt:content/>
+      </l:template>
+   </l:group>
+   <l:group name="see">
+      <l:template match="self::db:glosssee">
+         <lt:token key="GlossSee"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <lt:text>.</lt:text>
+      </l:template>
+   </l:group>
+   <l:list name="index-seealso">
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <lt:text>)</lt:text>
+      </l:items>
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>)</lt:text>
+      </l:items>
+   </l:list>
+   <l:list name="index-seeie">
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="see"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <lt:text>)</lt:text>
+      </l:items>
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="see"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>)</lt:text>
+      </l:items>
+   </l:list>
+   <l:list name="index-seealsoie">
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <lt:text>)</lt:text>
+      </l:items>
+      <l:items>
+         <lt:text>(</lt:text>
+         <lt:token key="seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>)</lt:text>
+      </l:items>
+   </l:list>
+   <l:list name="glossary-seealso">
+      <l:items>
+         <lt:token key="Seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <lt:text>.</lt:text>
+      </l:items>
+      <l:items>
+         <lt:token key="Seealso"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>.</lt:text>
+      </l:items>
+   </l:list>
+   <l:list name="varlistentry">
+      <l:items>
+         <lt:content/>
+      </l:items>
+      <l:items>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>
+      </lt:text>
+      </l:items>
+   </l:list>
+   <l:list name="_default">
+      <l:items>
+         <lt:content/>
+      </l:items>
+      <l:items>
+         <lt:content/>
+         <lt:text> </lt:text>
+         <lt:token key="and"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:items>
+      <l:items>
+         <lt:content/>
+         <l:repeat>
+            <lt:text>, </lt:text>
+            <lt:content/>
+         </l:repeat>
+         <lt:text>, </lt:text>
+         <lt:token key="and"/>
+         <lt:text> </lt:text>
+         <lt:content/>
+      </l:items>
+   </l:list>
+   <l:letters>
+      <l:l i="-1"/>
+      <l:l i="0">Siombailí</l:l>
+      <l:l i="10">A</l:l>
+      <l:l i="10">a</l:l>
+      <l:l i="10">À</l:l>
+      <l:l i="10">à</l:l>
+      <l:l i="10">Á</l:l>
+      <l:l i="10">á</l:l>
+      <l:l i="10">Â</l:l>
+      <l:l i="10">â</l:l>
+      <l:l i="10">Ã</l:l>
+      <l:l i="10">ã</l:l>
+      <l:l i="10">Ä</l:l>
+      <l:l i="10">ä</l:l>
+      <l:l i="10">Å</l:l>
+      <l:l i="10">å</l:l>
+      <l:l i="10">Ā</l:l>
+      <l:l i="10">ā</l:l>
+      <l:l i="10">Ă</l:l>
+      <l:l i="10">ă</l:l>
+      <l:l i="10">Ą</l:l>
+      <l:l i="10">ą</l:l>
+      <l:l i="10">Ǎ</l:l>
+      <l:l i="10">ǎ</l:l>
+      <l:l i="10">Ǟ</l:l>
+      <l:l i="10">ǟ</l:l>
+      <l:l i="10">Ǡ</l:l>
+      <l:l i="10">ǡ</l:l>
+      <l:l i="10">Ǻ</l:l>
+      <l:l i="10">ǻ</l:l>
+      <l:l i="10">Ȁ</l:l>
+      <l:l i="10">ȁ</l:l>
+      <l:l i="10">Ȃ</l:l>
+      <l:l i="10">ȃ</l:l>
+      <l:l i="10">Ȧ</l:l>
+      <l:l i="10">ȧ</l:l>
+      <l:l i="10">Ḁ</l:l>
+      <l:l i="10">ḁ</l:l>
+      <l:l i="10">ẚ</l:l>
+      <l:l i="10">Ạ</l:l>
+      <l:l i="10">ạ</l:l>
+      <l:l i="10">Ả</l:l>
+      <l:l i="10">ả</l:l>
+      <l:l i="10">Ấ</l:l>
+      <l:l i="10">ấ</l:l>
+      <l:l i="10">Ầ</l:l>
+      <l:l i="10">ầ</l:l>
+      <l:l i="10">Ẩ</l:l>
+      <l:l i="10">ẩ</l:l>
+      <l:l i="10">Ẫ</l:l>
+      <l:l i="10">ẫ</l:l>
+      <l:l i="10">Ậ</l:l>
+      <l:l i="10">ậ</l:l>
+      <l:l i="10">Ắ</l:l>
+      <l:l i="10">ắ</l:l>
+      <l:l i="10">Ằ</l:l>
+      <l:l i="10">ằ</l:l>
+      <l:l i="10">Ẳ</l:l>
+      <l:l i="10">ẳ</l:l>
+      <l:l i="10">Ẵ</l:l>
+      <l:l i="10">ẵ</l:l>
+      <l:l i="10">Ặ</l:l>
+      <l:l i="10">ặ</l:l>
+      <l:l i="20">B</l:l>
+      <l:l i="20">b</l:l>
+      <l:l i="20">ƀ</l:l>
+      <l:l i="20">Ɓ</l:l>
+      <l:l i="20">ɓ</l:l>
+      <l:l i="20">Ƃ</l:l>
+      <l:l i="20">ƃ</l:l>
+      <l:l i="20">Ḃ</l:l>
+      <l:l i="20">ḃ</l:l>
+      <l:l i="20">Ḅ</l:l>
+      <l:l i="20">ḅ</l:l>
+      <l:l i="20">Ḇ</l:l>
+      <l:l i="20">ḇ</l:l>
+      <l:l i="30">C</l:l>
+      <l:l i="30">c</l:l>
+      <l:l i="30">Ç</l:l>
+      <l:l i="30">ç</l:l>
+      <l:l i="30">Ć</l:l>
+      <l:l i="30">ć</l:l>
+      <l:l i="30">Ĉ</l:l>
+      <l:l i="30">ĉ</l:l>
+      <l:l i="30">Ċ</l:l>
+      <l:l i="30">ċ</l:l>
+      <l:l i="30">Č</l:l>
+      <l:l i="30">č</l:l>
+      <l:l i="30">Ƈ</l:l>
+      <l:l i="30">ƈ</l:l>
+      <l:l i="30">ɕ</l:l>
+      <l:l i="30">Ḉ</l:l>
+      <l:l i="30">ḉ</l:l>
+      <l:l i="40">D</l:l>
+      <l:l i="40">d</l:l>
+      <l:l i="40">Ď</l:l>
+      <l:l i="40">ď</l:l>
+      <l:l i="40">Đ</l:l>
+      <l:l i="40">đ</l:l>
+      <l:l i="40">Ɗ</l:l>
+      <l:l i="40">ɗ</l:l>
+      <l:l i="40">Ƌ</l:l>
+      <l:l i="40">ƌ</l:l>
+      <l:l i="40">ǅ</l:l>
+      <l:l i="40">ǲ</l:l>
+      <l:l i="40">ȡ</l:l>
+      <l:l i="40">ɖ</l:l>
+      <l:l i="40">Ḋ</l:l>
+      <l:l i="40">ḋ</l:l>
+      <l:l i="40">Ḍ</l:l>
+      <l:l i="40">ḍ</l:l>
+      <l:l i="40">Ḏ</l:l>
+      <l:l i="40">ḏ</l:l>
+      <l:l i="40">Ḑ</l:l>
+      <l:l i="40">ḑ</l:l>
+      <l:l i="40">Ḓ</l:l>
+      <l:l i="40">ḓ</l:l>
+      <l:l i="50">E</l:l>
+      <l:l i="50">e</l:l>
+      <l:l i="50">È</l:l>
+      <l:l i="50">è</l:l>
+      <l:l i="50">É</l:l>
+      <l:l i="50">é</l:l>
+      <l:l i="50">Ê</l:l>
+      <l:l i="50">ê</l:l>
+      <l:l i="50">Ë</l:l>
+      <l:l i="50">ë</l:l>
+      <l:l i="50">Ē</l:l>
+      <l:l i="50">ē</l:l>
+      <l:l i="50">Ĕ</l:l>
+      <l:l i="50">ĕ</l:l>
+      <l:l i="50">Ė</l:l>
+      <l:l i="50">ė</l:l>
+      <l:l i="50">Ę</l:l>
+      <l:l i="50">ę</l:l>
+      <l:l i="50">Ě</l:l>
+      <l:l i="50">ě</l:l>
+      <l:l i="50">Ȅ</l:l>
+      <l:l i="50">ȅ</l:l>
+      <l:l i="50">Ȇ</l:l>
+      <l:l i="50">ȇ</l:l>
+      <l:l i="50">Ȩ</l:l>
+      <l:l i="50">ȩ</l:l>
+      <l:l i="50">Ḕ</l:l>
+      <l:l i="50">ḕ</l:l>
+      <l:l i="50">Ḗ</l:l>
+      <l:l i="50">ḗ</l:l>
+      <l:l i="50">Ḙ</l:l>
+      <l:l i="50">ḙ</l:l>
+      <l:l i="50">Ḛ</l:l>
+      <l:l i="50">ḛ</l:l>
+      <l:l i="50">Ḝ</l:l>
+      <l:l i="50">ḝ</l:l>
+      <l:l i="50">Ẹ</l:l>
+      <l:l i="50">ẹ</l:l>
+      <l:l i="50">Ẻ</l:l>
+      <l:l i="50">ẻ</l:l>
+      <l:l i="50">Ẽ</l:l>
+      <l:l i="50">ẽ</l:l>
+      <l:l i="50">Ế</l:l>
+      <l:l i="50">ế</l:l>
+      <l:l i="50">Ề</l:l>
+      <l:l i="50">ề</l:l>
+      <l:l i="50">Ể</l:l>
+      <l:l i="50">ể</l:l>
+      <l:l i="50">Ễ</l:l>
+      <l:l i="50">ễ</l:l>
+      <l:l i="50">Ệ</l:l>
+      <l:l i="50">ệ</l:l>
+      <l:l i="60">F</l:l>
+      <l:l i="60">f</l:l>
+      <l:l i="60">Ƒ</l:l>
+      <l:l i="60">ƒ</l:l>
+      <l:l i="60">Ḟ</l:l>
+      <l:l i="60">ḟ</l:l>
+      <l:l i="70">G</l:l>
+      <l:l i="70">g</l:l>
+      <l:l i="70">Ĝ</l:l>
+      <l:l i="70">ĝ</l:l>
+      <l:l i="70">Ğ</l:l>
+      <l:l i="70">ğ</l:l>
+      <l:l i="70">Ġ</l:l>
+      <l:l i="70">ġ</l:l>
+      <l:l i="70">Ģ</l:l>
+      <l:l i="70">ģ</l:l>
+      <l:l i="70">Ɠ</l:l>
+      <l:l i="70">ɠ</l:l>
+      <l:l i="70">Ǥ</l:l>
+      <l:l i="70">ǥ</l:l>
+      <l:l i="70">Ǧ</l:l>
+      <l:l i="70">ǧ</l:l>
+      <l:l i="70">Ǵ</l:l>
+      <l:l i="70">ǵ</l:l>
+      <l:l i="70">Ḡ</l:l>
+      <l:l i="70">ḡ</l:l>
+      <l:l i="80">H</l:l>
+      <l:l i="80">h</l:l>
+      <l:l i="80">Ĥ</l:l>
+      <l:l i="80">ĥ</l:l>
+      <l:l i="80">Ħ</l:l>
+      <l:l i="80">ħ</l:l>
+      <l:l i="80">Ȟ</l:l>
+      <l:l i="80">ȟ</l:l>
+      <l:l i="80">ɦ</l:l>
+      <l:l i="80">Ḣ</l:l>
+      <l:l i="80">ḣ</l:l>
+      <l:l i="80">Ḥ</l:l>
+      <l:l i="80">ḥ</l:l>
+      <l:l i="80">Ḧ</l:l>
+      <l:l i="80">ḧ</l:l>
+      <l:l i="80">Ḩ</l:l>
+      <l:l i="80">ḩ</l:l>
+      <l:l i="80">Ḫ</l:l>
+      <l:l i="80">ḫ</l:l>
+      <l:l i="80">ẖ</l:l>
+      <l:l i="90">I</l:l>
+      <l:l i="90">i</l:l>
+      <l:l i="90">Ì</l:l>
+      <l:l i="90">ì</l:l>
+      <l:l i="90">Í</l:l>
+      <l:l i="90">í</l:l>
+      <l:l i="90">Î</l:l>
+      <l:l i="90">î</l:l>
+      <l:l i="90">Ï</l:l>
+      <l:l i="90">ï</l:l>
+      <l:l i="90">Ĩ</l:l>
+      <l:l i="90">ĩ</l:l>
+      <l:l i="90">Ī</l:l>
+      <l:l i="90">ī</l:l>
+      <l:l i="90">Ĭ</l:l>
+      <l:l i="90">ĭ</l:l>
+      <l:l i="90">Į</l:l>
+      <l:l i="90">į</l:l>
+      <l:l i="90">İ</l:l>
+      <l:l i="90">Ɨ</l:l>
+      <l:l i="90">ɨ</l:l>
+      <l:l i="90">Ǐ</l:l>
+      <l:l i="90">ǐ</l:l>
+      <l:l i="90">Ȉ</l:l>
+      <l:l i="90">ȉ</l:l>
+      <l:l i="90">Ȋ</l:l>
+      <l:l i="90">ȋ</l:l>
+      <l:l i="90">Ḭ</l:l>
+      <l:l i="90">ḭ</l:l>
+      <l:l i="90">Ḯ</l:l>
+      <l:l i="90">ḯ</l:l>
+      <l:l i="90">Ỉ</l:l>
+      <l:l i="90">ỉ</l:l>
+      <l:l i="90">Ị</l:l>
+      <l:l i="90">ị</l:l>
+      <l:l i="100">J</l:l>
+      <l:l i="100">j</l:l>
+      <l:l i="100">Ĵ</l:l>
+      <l:l i="100">ĵ</l:l>
+      <l:l i="100">ǰ</l:l>
+      <l:l i="100">ʝ</l:l>
+      <l:l i="110">K</l:l>
+      <l:l i="110">k</l:l>
+      <l:l i="110">Ķ</l:l>
+      <l:l i="110">ķ</l:l>
+      <l:l i="110">Ƙ</l:l>
+      <l:l i="110">ƙ</l:l>
+      <l:l i="110">Ǩ</l:l>
+      <l:l i="110">ǩ</l:l>
+      <l:l i="110">Ḱ</l:l>
+      <l:l i="110">ḱ</l:l>
+      <l:l i="110">Ḳ</l:l>
+      <l:l i="110">ḳ</l:l>
+      <l:l i="110">Ḵ</l:l>
+      <l:l i="110">ḵ</l:l>
+      <l:l i="120">L</l:l>
+      <l:l i="120">l</l:l>
+      <l:l i="120">Ĺ</l:l>
+      <l:l i="120">ĺ</l:l>
+      <l:l i="120">Ļ</l:l>
+      <l:l i="120">ļ</l:l>
+      <l:l i="120">Ľ</l:l>
+      <l:l i="120">ľ</l:l>
+      <l:l i="120">Ŀ</l:l>
+      <l:l i="120">ŀ</l:l>
+      <l:l i="120">Ł</l:l>
+      <l:l i="120">ł</l:l>
+      <l:l i="120">ƚ</l:l>
+      <l:l i="120">ǈ</l:l>
+      <l:l i="120">ȴ</l:l>
+      <l:l i="120">ɫ</l:l>
+      <l:l i="120">ɬ</l:l>
+      <l:l i="120">ɭ</l:l>
+      <l:l i="120">Ḷ</l:l>
+      <l:l i="120">ḷ</l:l>
+      <l:l i="120">Ḹ</l:l>
+      <l:l i="120">ḹ</l:l>
+      <l:l i="120">Ḻ</l:l>
+      <l:l i="120">ḻ</l:l>
+      <l:l i="120">Ḽ</l:l>
+      <l:l i="120">ḽ</l:l>
+      <l:l i="130">M</l:l>
+      <l:l i="130">m</l:l>
+      <l:l i="130">ɱ</l:l>
+      <l:l i="130">Ḿ</l:l>
+      <l:l i="130">ḿ</l:l>
+      <l:l i="130">Ṁ</l:l>
+      <l:l i="130">ṁ</l:l>
+      <l:l i="130">Ṃ</l:l>
+      <l:l i="130">ṃ</l:l>
+      <l:l i="140">N</l:l>
+      <l:l i="140">n</l:l>
+      <l:l i="140">Ñ</l:l>
+      <l:l i="140">ñ</l:l>
+      <l:l i="140">Ń</l:l>
+      <l:l i="140">ń</l:l>
+      <l:l i="140">Ņ</l:l>
+      <l:l i="140">ņ</l:l>
+      <l:l i="140">Ň</l:l>
+      <l:l i="140">ň</l:l>
+      <l:l i="140">Ɲ</l:l>
+      <l:l i="140">ɲ</l:l>
+      <l:l i="140">ƞ</l:l>
+      <l:l i="140">Ƞ</l:l>
+      <l:l i="140">ǋ</l:l>
+      <l:l i="140">Ǹ</l:l>
+      <l:l i="140">ǹ</l:l>
+      <l:l i="140">ȵ</l:l>
+      <l:l i="140">ɳ</l:l>
+      <l:l i="140">Ṅ</l:l>
+      <l:l i="140">ṅ</l:l>
+      <l:l i="140">Ṇ</l:l>
+      <l:l i="140">ṇ</l:l>
+      <l:l i="140">Ṉ</l:l>
+      <l:l i="140">ṉ</l:l>
+      <l:l i="140">Ṋ</l:l>
+      <l:l i="140">ṋ</l:l>
+      <l:l i="150">O</l:l>
+      <l:l i="150">o</l:l>
+      <l:l i="150">Ò</l:l>
+      <l:l i="150">ò</l:l>
+      <l:l i="150">Ó</l:l>
+      <l:l i="150">ó</l:l>
+      <l:l i="150">Ô</l:l>
+      <l:l i="150">ô</l:l>
+      <l:l i="150">Õ</l:l>
+      <l:l i="150">õ</l:l>
+      <l:l i="150">Ö</l:l>
+      <l:l i="150">ö</l:l>
+      <l:l i="150">Ø</l:l>
+      <l:l i="150">ø</l:l>
+      <l:l i="150">Ō</l:l>
+      <l:l i="150">ō</l:l>
+      <l:l i="150">Ŏ</l:l>
+      <l:l i="150">ŏ</l:l>
+      <l:l i="150">Ő</l:l>
+      <l:l i="150">ő</l:l>
+      <l:l i="150">Ɵ</l:l>
+      <l:l i="150">Ơ</l:l>
+      <l:l i="150">ơ</l:l>
+      <l:l i="150">Ǒ</l:l>
+      <l:l i="150">ǒ</l:l>
+      <l:l i="150">Ǫ</l:l>
+      <l:l i="150">ǫ</l:l>
+      <l:l i="150">Ǭ</l:l>
+      <l:l i="150">ǭ</l:l>
+      <l:l i="150">Ǿ</l:l>
+      <l:l i="150">ǿ</l:l>
+      <l:l i="150">Ȍ</l:l>
+      <l:l i="150">ȍ</l:l>
+      <l:l i="150">Ȏ</l:l>
+      <l:l i="150">ȏ</l:l>
+      <l:l i="150">Ȫ</l:l>
+      <l:l i="150">ȫ</l:l>
+      <l:l i="150">Ȭ</l:l>
+      <l:l i="150">ȭ</l:l>
+      <l:l i="150">Ȯ</l:l>
+      <l:l i="150">ȯ</l:l>
+      <l:l i="150">Ȱ</l:l>
+      <l:l i="150">ȱ</l:l>
+      <l:l i="150">Ṍ</l:l>
+      <l:l i="150">ṍ</l:l>
+      <l:l i="150">Ṏ</l:l>
+      <l:l i="150">ṏ</l:l>
+      <l:l i="150">Ṑ</l:l>
+      <l:l i="150">ṑ</l:l>
+      <l:l i="150">Ṓ</l:l>
+      <l:l i="150">ṓ</l:l>
+      <l:l i="150">Ọ</l:l>
+      <l:l i="150">ọ</l:l>
+      <l:l i="150">Ỏ</l:l>
+      <l:l i="150">ỏ</l:l>
+      <l:l i="150">Ố</l:l>
+      <l:l i="150">ố</l:l>
+      <l:l i="150">Ồ</l:l>
+      <l:l i="150">ồ</l:l>
+      <l:l i="150">Ổ</l:l>
+      <l:l i="150">ổ</l:l>
+      <l:l i="150">Ỗ</l:l>
+      <l:l i="150">ỗ</l:l>
+      <l:l i="150">Ộ</l:l>
+      <l:l i="150">ộ</l:l>
+      <l:l i="150">Ớ</l:l>
+      <l:l i="150">ớ</l:l>
+      <l:l i="150">Ờ</l:l>
+      <l:l i="150">ờ</l:l>
+      <l:l i="150">Ở</l:l>
+      <l:l i="150">ở</l:l>
+      <l:l i="150">Ỡ</l:l>
+      <l:l i="150">ỡ</l:l>
+      <l:l i="150">Ợ</l:l>
+      <l:l i="150">ợ</l:l>
+      <l:l i="160">P</l:l>
+      <l:l i="160">p</l:l>
+      <l:l i="160">Ƥ</l:l>
+      <l:l i="160">ƥ</l:l>
+      <l:l i="160">Ṕ</l:l>
+      <l:l i="160">ṕ</l:l>
+      <l:l i="160">Ṗ</l:l>
+      <l:l i="160">ṗ</l:l>
+      <l:l i="170">Q</l:l>
+      <l:l i="170">q</l:l>
+      <l:l i="170">ʠ</l:l>
+      <l:l i="180">R</l:l>
+      <l:l i="180">r</l:l>
+      <l:l i="180">Ŕ</l:l>
+      <l:l i="180">ŕ</l:l>
+      <l:l i="180">Ŗ</l:l>
+      <l:l i="180">ŗ</l:l>
+      <l:l i="180">Ř</l:l>
+      <l:l i="180">ř</l:l>
+      <l:l i="180">Ȑ</l:l>
+      <l:l i="180">ȑ</l:l>
+      <l:l i="180">Ȓ</l:l>
+      <l:l i="180">ȓ</l:l>
+      <l:l i="180">ɼ</l:l>
+      <l:l i="180">ɽ</l:l>
+      <l:l i="180">ɾ</l:l>
+      <l:l i="180">Ṙ</l:l>
+      <l:l i="180">ṙ</l:l>
+      <l:l i="180">Ṛ</l:l>
+      <l:l i="180">ṛ</l:l>
+      <l:l i="180">Ṝ</l:l>
+      <l:l i="180">ṝ</l:l>
+      <l:l i="180">Ṟ</l:l>
+      <l:l i="180">ṟ</l:l>
+      <l:l i="190">S</l:l>
+      <l:l i="190">s</l:l>
+      <l:l i="190">Ś</l:l>
+      <l:l i="190">ś</l:l>
+      <l:l i="190">Ŝ</l:l>
+      <l:l i="190">ŝ</l:l>
+      <l:l i="190">Ş</l:l>
+      <l:l i="190">ş</l:l>
+      <l:l i="190">Š</l:l>
+      <l:l i="190">š</l:l>
+      <l:l i="190">Ș</l:l>
+      <l:l i="190">ș</l:l>
+      <l:l i="190">ʂ</l:l>
+      <l:l i="190">Ṡ</l:l>
+      <l:l i="190">ṡ</l:l>
+      <l:l i="190">Ṣ</l:l>
+      <l:l i="190">ṣ</l:l>
+      <l:l i="190">Ṥ</l:l>
+      <l:l i="190">ṥ</l:l>
+      <l:l i="190">Ṧ</l:l>
+      <l:l i="190">ṧ</l:l>
+      <l:l i="190">Ṩ</l:l>
+      <l:l i="190">ṩ</l:l>
+      <l:l i="200">T</l:l>
+      <l:l i="200">t</l:l>
+      <l:l i="200">Ţ</l:l>
+      <l:l i="200">ţ</l:l>
+      <l:l i="200">Ť</l:l>
+      <l:l i="200">ť</l:l>
+      <l:l i="200">Ŧ</l:l>
+      <l:l i="200">ŧ</l:l>
+      <l:l i="200">ƫ</l:l>
+      <l:l i="200">Ƭ</l:l>
+      <l:l i="200">ƭ</l:l>
+      <l:l i="200">Ʈ</l:l>
+      <l:l i="200">ʈ</l:l>
+      <l:l i="200">Ț</l:l>
+      <l:l i="200">ț</l:l>
+      <l:l i="200">ȶ</l:l>
+      <l:l i="200">Ṫ</l:l>
+      <l:l i="200">ṫ</l:l>
+      <l:l i="200">Ṭ</l:l>
+      <l:l i="200">ṭ</l:l>
+      <l:l i="200">Ṯ</l:l>
+      <l:l i="200">ṯ</l:l>
+      <l:l i="200">Ṱ</l:l>
+      <l:l i="200">ṱ</l:l>
+      <l:l i="200">ẗ</l:l>
+      <l:l i="210">U</l:l>
+      <l:l i="210">u</l:l>
+      <l:l i="210">Ù</l:l>
+      <l:l i="210">ù</l:l>
+      <l:l i="210">Ú</l:l>
+      <l:l i="210">ú</l:l>
+      <l:l i="210">Û</l:l>
+      <l:l i="210">û</l:l>
+      <l:l i="210">Ü</l:l>
+      <l:l i="210">ü</l:l>
+      <l:l i="210">Ũ</l:l>
+      <l:l i="210">ũ</l:l>
+      <l:l i="210">Ū</l:l>
+      <l:l i="210">ū</l:l>
+      <l:l i="210">Ŭ</l:l>
+      <l:l i="210">ŭ</l:l>
+      <l:l i="210">Ů</l:l>
+      <l:l i="210">ů</l:l>
+      <l:l i="210">Ű</l:l>
+      <l:l i="210">ű</l:l>
+      <l:l i="210">Ų</l:l>
+      <l:l i="210">ų</l:l>
+      <l:l i="210">Ư</l:l>
+      <l:l i="210">ư</l:l>
+      <l:l i="210">Ǔ</l:l>
+      <l:l i="210">ǔ</l:l>
+      <l:l i="210">Ǖ</l:l>
+      <l:l i="210">ǖ</l:l>
+      <l:l i="210">Ǘ</l:l>
+      <l:l i="210">ǘ</l:l>
+      <l:l i="210">Ǚ</l:l>
+      <l:l i="210">ǚ</l:l>
+      <l:l i="210">Ǜ</l:l>
+      <l:l i="210">ǜ</l:l>
+      <l:l i="210">Ȕ</l:l>
+      <l:l i="210">ȕ</l:l>
+      <l:l i="210">Ȗ</l:l>
+      <l:l i="210">ȗ</l:l>
+      <l:l i="210">Ṳ</l:l>
+      <l:l i="210">ṳ</l:l>
+      <l:l i="210">Ṵ</l:l>
+      <l:l i="210">ṵ</l:l>
+      <l:l i="210">Ṷ</l:l>
+      <l:l i="210">ṷ</l:l>
+      <l:l i="210">Ṹ</l:l>
+      <l:l i="210">ṹ</l:l>
+      <l:l i="210">Ṻ</l:l>
+      <l:l i="210">ṻ</l:l>
+      <l:l i="210">Ụ</l:l>
+      <l:l i="210">ụ</l:l>
+      <l:l i="210">Ủ</l:l>
+      <l:l i="210">ủ</l:l>
+      <l:l i="210">Ứ</l:l>
+      <l:l i="210">ứ</l:l>
+      <l:l i="210">Ừ</l:l>
+      <l:l i="210">ừ</l:l>
+      <l:l i="210">Ử</l:l>
+      <l:l i="210">ử</l:l>
+      <l:l i="210">Ữ</l:l>
+      <l:l i="210">ữ</l:l>
+      <l:l i="210">Ự</l:l>
+      <l:l i="210">ự</l:l>
+      <l:l i="220">V</l:l>
+      <l:l i="220">v</l:l>
+      <l:l i="220">Ʋ</l:l>
+      <l:l i="220">ʋ</l:l>
+      <l:l i="220">Ṽ</l:l>
+      <l:l i="220">ṽ</l:l>
+      <l:l i="220">Ṿ</l:l>
+      <l:l i="220">ṿ</l:l>
+      <l:l i="230">W</l:l>
+      <l:l i="230">w</l:l>
+      <l:l i="230">Ŵ</l:l>
+      <l:l i="230">ŵ</l:l>
+      <l:l i="230">Ẁ</l:l>
+      <l:l i="230">ẁ</l:l>
+      <l:l i="230">Ẃ</l:l>
+      <l:l i="230">ẃ</l:l>
+      <l:l i="230">Ẅ</l:l>
+      <l:l i="230">ẅ</l:l>
+      <l:l i="230">Ẇ</l:l>
+      <l:l i="230">ẇ</l:l>
+      <l:l i="230">Ẉ</l:l>
+      <l:l i="230">ẉ</l:l>
+      <l:l i="230">ẘ</l:l>
+      <l:l i="240">X</l:l>
+      <l:l i="240">x</l:l>
+      <l:l i="240">Ẋ</l:l>
+      <l:l i="240">ẋ</l:l>
+      <l:l i="240">Ẍ</l:l>
+      <l:l i="240">ẍ</l:l>
+      <l:l i="250">Y</l:l>
+      <l:l i="250">y</l:l>
+      <l:l i="250">Ý</l:l>
+      <l:l i="250">ý</l:l>
+      <l:l i="250">ÿ</l:l>
+      <l:l i="250">Ÿ</l:l>
+      <l:l i="250">Ŷ</l:l>
+      <l:l i="250">ŷ</l:l>
+      <l:l i="250">Ƴ</l:l>
+      <l:l i="250">ƴ</l:l>
+      <l:l i="250">Ȳ</l:l>
+      <l:l i="250">ȳ</l:l>
+      <l:l i="250">Ẏ</l:l>
+      <l:l i="250">ẏ</l:l>
+      <l:l i="250">ẙ</l:l>
+      <l:l i="250">Ỳ</l:l>
+      <l:l i="250">ỳ</l:l>
+      <l:l i="250">Ỵ</l:l>
+      <l:l i="250">ỵ</l:l>
+      <l:l i="250">Ỷ</l:l>
+      <l:l i="250">ỷ</l:l>
+      <l:l i="250">Ỹ</l:l>
+      <l:l i="250">ỹ</l:l>
+      <l:l i="260">Z</l:l>
+      <l:l i="260">z</l:l>
+      <l:l i="260">Ź</l:l>
+      <l:l i="260">ź</l:l>
+      <l:l i="260">Ż</l:l>
+      <l:l i="260">ż</l:l>
+      <l:l i="260">Ž</l:l>
+      <l:l i="260">ž</l:l>
+      <l:l i="260">Ƶ</l:l>
+      <l:l i="260">ƶ</l:l>
+      <l:l i="260">Ȥ</l:l>
+      <l:l i="260">ȥ</l:l>
+      <l:l i="260">ʐ</l:l>
+      <l:l i="260">ʑ</l:l>
+      <l:l i="260">Ẑ</l:l>
+      <l:l i="260">ẑ</l:l>
+      <l:l i="260">Ẓ</l:l>
+      <l:l i="260">ẓ</l:l>
+      <l:l i="260">Ẕ</l:l>
+      <l:l i="260">ẕ</l:l>
+   </l:letters>
+</l:l10n>

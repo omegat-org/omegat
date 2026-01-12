@@ -11,7 +11,7 @@ plugins {
     id 'jacoco'
     id 'com.github.spotbugs' version '4.7.10'
     id 'org.hidetake.ssh' version '2.10.1'
-    id 'com.diffplug.spotless' version '8.0.0'
+    id 'com.diffplug.spotless' version '7.2.1'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
     id 'edu.sc.seis.launch4j' version '3.0.5'

@@ -35,7 +35,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -55,11 +54,11 @@ import org.omegat.util.StaticUtils;
 public class ScriptingTest extends TestCore {
 
     /**
-     * Test for bug #775: Unresolvable scripting folder setting can cause an empty
-     * Scripting window
+     * Test for bug #775: Unresolvable scripting folder setting can cause an
+     * empty Scripting window
      * <p>
-     * NPE while initializing quick script menu entries when the script folder path
-     * member is null (failed to be set because it was invalid).
+     * NPE while initializing quick script menu entries when the script folder
+     * path member is null (failed to be set because it was invalid).
      *
      * @see <a href="https://sourceforge.net/p/omegat/bugs/775/">Bug #775</a>
      */
@@ -118,7 +117,8 @@ public class ScriptingTest extends TestCore {
         List<String> scripts;
         try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
             scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
-                    .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty()).collect(Collectors.toList());
+                    .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty())
+                    .collect(Collectors.toList());
         }
         assertFalse(scripts.isEmpty());
 

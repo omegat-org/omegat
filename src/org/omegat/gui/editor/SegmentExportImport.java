@@ -77,7 +77,7 @@ public class SegmentExportImport {
                             Thread.sleep(WAIT_TIME);
                         }
                     }
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException ignored) {
                 }
             }
         }.start();
@@ -136,13 +136,8 @@ public class SegmentExportImport {
         }
         exportLastModified = importFile.lastModified() + 1;
         try (FileInputStream fis = new FileInputStream(importFile)) {
-            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(),
-                    "\n");
-            UIThreadsUtil.executeInSwingThread(new Runnable() {
-                public void run() {
-                    controller.replaceEditText(text);
-                }
-            });
+            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(), "\n");
+            UIThreadsUtil.executeInSwingThread(() -> controller.replaceEditText(text));
         } catch (IOException ex) {
             Log.log(ex);
         }

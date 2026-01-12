@@ -43,7 +43,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -100,7 +99,7 @@ public final class StaticUtils {
     /**
      * Application data directory on macOS.
      */
-    private static final  String OSX_DATA_DIR = "/Library/Application Support/OmegaT/";
+    private static final String OSX_DATA_DIR = "/Library/Application Support/OmegaT/";
 
     /**
      * Script directory under config dir (e.g., $HOME/.omegat).
@@ -113,11 +112,10 @@ public final class StaticUtils {
     private static final String SCRIPTS_DIR = "scripts";
 
     /**
-     * Char which should be used instead protected parts. It should be non-letter char, to be able to have
-     * correct words counter.
-     *
-     * This char can be placed around protected text for separate words inside protected text and words
-     * outside if there are no spaces between they.
+     * Char which should be used instead protected parts. It should be
+     * non-letter char, to be able to have correct words counter.
+     * This char can be placed around protected text for separate words inside
+     * protected text and words outside if there are no spaces between they.
      */
     public static final char TAG_REPLACEMENT_CHAR = '\b';
     public static final String TAG_REPLACEMENT = "\b";
@@ -199,7 +197,9 @@ public final class StaticUtils {
      * is being determined, an empty string will be returned, resulting in the
      * current working directory being used.
      *
-     * <ul><li>Windows XP: &lt;Documents and Settings>\&lt;User name>\Application Data\OmegaT
+     * <ul>
+     * <li>Windows XP: &lt;Documents and Settings>\&lt;User name>\Application
+     * Data\OmegaT
      * <li>Windows Vista: User\&lt;User name>\AppData\Roaming
      * <li>Linux: ~/.omegat
      * <li>Solaris/SunOS: ~/.omegat
@@ -259,7 +259,8 @@ public final class StaticUtils {
             String appData = null;
 
             // We do not use %APPDATA%
-            // Trying first Vista/7, because "Application Data" exists also as virtual folder,
+            // Trying first Vista/7, because "Application Data" exists also as
+            // virtual folder,
             // so we would not be able to differentiate with 2000/XP otherwise
             File appDataFile = new File(home, "AppData\\Roaming");
             if (appDataFile.exists()) {
@@ -283,18 +284,18 @@ public final class StaticUtils {
                 // C:\Documents and Settings\<User>\OmegaT
                 configDir = home + WINDOWS_CONFIG_DIR;
             }
-        // Check for UNIX varieties
-        // Solaris is generally detected as SunOS
+            // Check for UNIX varieties
+            // Solaris is generally detected as SunOS
         } else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             configDir = home + UNIX_CONFIG_DIR;
-        // check for Mac OS X
+            // check for Mac OS X
         } else if (Platform.isMacOSX()) {
             // set the config dir to the user's home dir +
             // "/Library/Preferences/OmegaT/"
             configDir = home + OSX_CONFIG_DIR;
-        // other OSes / default
+            // other OSes / default
         } else {
             // use the user's home directory by default
             configDir = home + File.separator;
@@ -334,9 +335,11 @@ public final class StaticUtils {
 
     /**
      * Get application data directory.
-     * macOS:   ~/Library/Application Support/OmegaT
-     * Windows: %APPDATA%/OmegaT
-     * Linux:   ~/.local/share/OmegaT
+     * <dl>
+     * <dt>macOS:</dt><dd>~/Library/Application Support/OmegaT</dd>
+     * <dt>Windows:</dt><dd>%APPDATA%/OmegaT</dd>
+     * <dt>Linux:</dt><dd>~/.local/share/OmegaT</dd>
+     * </dl>
      * @return directory path to store application data.
      */
     public static String getApplicationDataDir() {
@@ -403,11 +406,10 @@ public final class StaticUtils {
     }
 
     /**
-     * Returns the user scripts directory for each OS.
-     * It respects user configuration, then the default.
-     * macOS:   ~/Library/Application Support/OmegaT/scripts
-     * Windows: %APPDATA%/OmegaT/scripts
-     * Linux:   ~/.local/share/OmegaT/scripts
+     * Returns the user scripts directory for each OS. It respects user
+     * configuration, then the default. macOS: ~/Library/Application
+     * Support/OmegaT/scripts Windows: %APPDATA%/OmegaT/scripts Linux:
+     * ~/.local/share/OmegaT/scripts
      */
     public static String getUserScriptsDir() {
         return getUserScriptsPath().toString();
@@ -460,10 +462,10 @@ public final class StaticUtils {
     /**
      * Determines and returns the path to the 'script' directory.
      * <p>
-     * This directory is used to communicate user script and OmegaT core.
-     * If the directory does not exist, it attempts to create it. In case of
-     * failure to create or access the script directory, it defaults to the
-     * configuration directory path.
+     * This directory is used to communicate user script and OmegaT core. If the
+     * directory does not exist, it attempts to create it. In case of failure to
+     * create or access the script directory, it defaults to the configuration
+     * directory path.
      *
      * @return The absolute path to the script directory, including a trailing
      *         path separator.
@@ -602,8 +604,8 @@ public final class StaticUtils {
     }
 
     /**
-     * Download a file to memory.
-     * This method is replaced to HttpConnectionUtils.getURL(url, timeout)
+     * Download a file to memory. This method is replaced to
+     * HttpConnectionUtils.getURL(url, timeout)
      */
     @Deprecated
     public static String downloadFileToString(URL url, int timeout) throws IOException {
@@ -611,14 +613,16 @@ public final class StaticUtils {
     }
 
     /**
-     * Extracts files from an InputStream representing a zip archive to the specified destination path.
+     * Extracts files from an InputStream representing a zip archive to the
+     * specified destination path.
      *
      * @param in
      *            InputStream representing a zip archive
      * @param destination
      *            Path where archive entries will be saved
      * @param filenameFilter
-     *            Filter for entry names. Return false to skip extracting an entry
+     *            Filter for entry names. Return false to skip extracting an
+     *            entry
      * @return List of extracted entry names
      * @throws IOException
      */
@@ -649,9 +653,11 @@ public final class StaticUtils {
     }
 
     /**
-     * Parse a command line string into arguments, interpreting
-     * double and single quotes as Bash does.
-     * @param cmd Command string
+     * Parse a command line string into arguments, interpreting double and
+     * single quotes as Bash does.
+     * 
+     * @param cmd
+     *            Command string
      * @return Array of arguments
      */
     public static String[] parseCLICommand(String cmd) {
@@ -719,7 +725,8 @@ public final class StaticUtils {
      *            The containing array
      * @param offset
      *            The offset of {@code haystack} at which to start checking
-     * @return Whether or not {@code haystack} contains {@code needles} at {@code offset}
+     * @return Whether or not {@code haystack} contains {@code needles} at
+     *         {@code offset}
      * @throws ArrayIndexOutOfBoundsException
      *             If {@code offset} is not a valid index in {@code haystack}
      */
@@ -740,8 +747,8 @@ public final class StaticUtils {
 
     public static String getSupportInfo() {
         Runtime runtime = Runtime.getRuntime();
-        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
-                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max", getMB(runtime.totalMemory()),
+                getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
         return String.format("Version: %s%nPlatform: %s %s%nJava: %s %s%nMemory: %s",
                 OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
                 System.getProperty("java.version"), System.getProperty("os.arch"), memory);
@@ -749,7 +756,7 @@ public final class StaticUtils {
 
     /** Convert bytes into Megabytes */
     public static int getMB(long bytes) {
-        return (int)(bytes >> 20);
+        return (int) (bytes >> 20);
     }
 
 } // StaticUtils

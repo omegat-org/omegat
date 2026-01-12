@@ -45,9 +45,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Tests for the exportCurrentSegment method of SegmentExportImport.
- * This method exports the source text and its corresponding translation (if available)
- * into respective files and tracks the last modified time of these files.
+ * Tests for the exportCurrentSegment method of SegmentExportImport. This method
+ * exports the source text and its corresponding translation (if available) into
+ * respective files and tracks the last modified time of these files.
  */
 public class SegmentExportImportTest extends TestCore {
 

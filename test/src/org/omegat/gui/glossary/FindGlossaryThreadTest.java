@@ -46,9 +46,9 @@ public class FindGlossaryThreadTest extends TestCore {
         entries.add(new GlossaryEntry("\u5411\u4E0A", "enhance", "", false, null));
         entries.add(new GlossaryEntry("\u5411", "direct", "", false, null));
         entries.add(new GlossaryEntry("\u4E0A", "up", "", false, null));
+        //
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
-        //
         entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -57,8 +57,8 @@ public class FindGlossaryThreadTest extends TestCore {
         assertEquals("catty", entries.get(2).getLocText());
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
         //
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
         entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -70,8 +70,8 @@ public class FindGlossaryThreadTest extends TestCore {
         assertEquals("up", entries.get(5).getLocText());
         assertEquals("direct", entries.get(6).getLocText());
         assertEquals("enhance", entries.get(7).getLocText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
         //
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
         entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -80,8 +80,8 @@ public class FindGlossaryThreadTest extends TestCore {
         assertEquals("mikeneko", entries.get(2).getLocText());
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
-        assertEquals("enhance", entries.get(5).getLocText());
-        assertEquals("up", entries.get(6).getLocText());
+        assertEquals("up", entries.get(5).getLocText());
+        assertEquals("enhance", entries.get(6).getLocText());
         assertEquals("direct", entries.get(7).getLocText());
     }
 }

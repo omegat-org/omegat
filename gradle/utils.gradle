@@ -75,7 +75,7 @@ ext {
     gitBranchSplitPoint = {
         def remote = gitRemote()
         if (!remote.empty) {
-            execGetOutput("git merge-base HEAD $remote/master")
+            execGetOutput("git merge-base HEAD $remote/releases/6.0")
         } else {
             ''
         }

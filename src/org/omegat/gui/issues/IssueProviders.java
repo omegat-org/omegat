@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.omegat.core.Core;
 import org.omegat.util.Preferences;
 
 /**
@@ -48,19 +49,17 @@ public final class IssueProviders {
     static final String ISSUE_IDS_DELIMITER = ",";
 
     private static final List<IIssueProvider> ISSUE_PROVIDERS = new ArrayList<>();
-    static {
-        addIssueProvider(new SpellingIssueProvider());
-        addIssueProvider(new TerminologyIssueProvider());
-    }
 
     private IssueProviders() {
     }
 
     public static List<IIssueProvider> getIssueProviders() {
+        ensureDefaultsInstalled();
         return Collections.unmodifiableList(ISSUE_PROVIDERS);
     }
 
     public static void addIssueProvider(IIssueProvider provider) {
+        ensureDefaultsInstalled();
         ISSUE_PROVIDERS.add(provider);
     }
 
@@ -70,6 +69,7 @@ public final class IssueProviders {
     }
 
     static List<IIssueProvider> getEnabledProviders() {
+        ensureDefaultsInstalled();
         Set<String> disabled = getDisabledProviderIds();
         return ISSUE_PROVIDERS.stream().filter(p -> !disabled.contains(p.getId())).collect(Collectors.toList());
     }
@@ -88,5 +88,17 @@ public final class IssueProviders {
         toDisable.addAll(disabled);
         Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DISABLED,
                 String.join(ISSUE_IDS_DELIMITER, toDisable));
+    }
+
+    private static void ensureDefaultsInstalled() {
+        List<IIssueProvider> reg = ISSUE_PROVIDERS;
+
+        // Remove existing occurrences to avoid duplicates and to ensure ordering
+        reg.removeIf(p -> SpellingIssueProvider.class.getCanonicalName().equals(p.getId())
+                || TerminologyIssueProvider.class.getCanonicalName().equals(p.getId()));
+
+        // Add defaults at the front in a stable order: Spelling, then Terminology
+        reg.add(0, new TerminologyIssueProvider());
+        reg.add(0, new SpellingIssueProvider());
     }
 }

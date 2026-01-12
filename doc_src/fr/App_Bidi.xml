@@ -3,7 +3,7 @@
 <section id="app.bidi">
   <title id="app.bidi.title">Caractères de formatage directionnel</title>
 
-  <para>Les caractères de contrôle Bidi sont disponibles à partir de <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Ils peuvent être utilisés pour :</para>
+  <para>Les caractères de contrôle Bidi sont disponibles à partir de <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Ils peuvent être utilisés pour :</para>
 
   <itemizedlist>
 	<listitem>
@@ -19,7 +19,7 @@
   <section id="app.bidi.marks">
 	<title id="app.bidi.marks.title">Marques</title>
 
-	<para>Pour modifier la position d’un caractère à directionnalité faible ou neutre (comme les symboles de ponctuation), insérez un caractère LRM ou RLM après le caractère, en fonction de la directionnalité du segment :</para>
+	<para>Pour modifier la position d’un caractère à directionnalité faible ou neutre (comme les symboles de ponctuation), insérez un caractère LRM ou RLM après le caractère, en fonction de la directionnalité du segment :</para>
 
 	<itemizedlist>
 	  <listitem>
@@ -34,7 +34,7 @@
   <section id="app.bidi.embeddings">
 	<title id="app.bidi.embeddings.title">Les intégrations</title>
 
-	<para>Les intégrations peuvent être utilisées pour créer une section de texte plus longue (contenant plusieurs mots et espaces) qui doit s’écouler dans la direction opposée à celle du segment. Vous pouvez créer deux types d’intégrations en fonction de la direction du segment :</para>
+	<para>Les intégrations peuvent être utilisées pour créer une section de texte plus longue (contenant plusieurs mots et espaces) qui doit s’écouler dans la direction opposée à celle du segment. Vous pouvez créer deux types d’intégrations en fonction de la direction du segment :</para>
 
 	<itemizedlist>
 	  <listitem>

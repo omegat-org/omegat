@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manuel d'utilisation</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Manuel d’utilisation</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -255,7 +255,7 @@
             <div class="warning">
                <h3 class="title">Avertissement</h3>
                <p>Les filtres de fichiers sont soit locaux et spécifiques à un projet donné, soit globaux et disponibles pour tous les projets qui partagent un dossier de configuration.</p>
-               <p>Pour en savoir plus, voir :</p>
+               <p>Pour en savoir plus, voir :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -355,9 +355,9 @@
                   <p>Vous pouvez changer ou ajouter des masques de nom de fichier pour associer différents fichiers à un filtre.</p>
                   <div class="warning">
                      <h3 class="title">Avertissement</h3>
-                     <p>Associer une extension de fichier à un filtre n’est pas suffisant pour que ce dernier puisse traiter le fichier. La structure du fichier doit être compatible avec le filtre : même si vous associez <code class="literal">.odt</code> au filtre XHTML, le filtre ne sera pas capable de comprendre le contenu d’un fichier LibreOffice Writer.</p>
+                     <p>Associer une extension de fichier à un filtre n’est pas suffisant pour que ce dernier puisse traiter le fichier. La structure du fichier doit être compatible avec le filtre : même si vous associez <code class="literal">.odt</code> au filtre XHTML, le filtre ne sera pas capable de comprendre le contenu d’un fichier LibreOffice Writer.</p>
                   </div>
-                  <p>Les masques de nom de fichier source utilisent des caractères génériques : le caractère <code class="literal">*</code> correspond à zéro ou plus de caractères, alors que le caractère <code class="literal">?</code> correspond à exactement un caractère.</p>
+                  <p>Les masques de nom de fichier source utilisent des caractères génériques : le caractère <code class="literal">*</code> correspond à zéro ou plus de caractères, alors que le caractère <code class="literal">?</code> correspond à exactement un caractère.</p>
                   <p>Par exemple, utilisez le masque <code class="literal">read*</code> si vous souhaitez que le filtre texte traite les fichiers lisez-moi (<code class="literal">readme, read.me</code>, ou <code class="literal">readme.txt</code>).</p>
                </section>
                <section class="section" id="source.and.target.files.encoding">
@@ -369,7 +369,7 @@
                      </div>
                   </div>
                   <p>La plupart des formats de fichiers permettent plusieurs encodages. Par défaut, l’encodage du fichier traduit est le même que celui du fichier source.</p>
-                  <p>Les champs d’encodage cible et source utilisent des listes déroulantes incluant tous les encodages supportés. Sélectionner l’option <span class="guilabel">&lt;auto&gt;</span> laisse le choix de l’encodage à OmegaT, selon les critères suivants  :</p>
+                  <p>Les champs d’encodage cible et source utilisent des listes déroulantes incluant tous les encodages supportés. Sélectionner l’option <span class="guilabel">&lt;auto&gt;</span> laisse le choix de l’encodage à OmegaT, selon les critères suivants  :</p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
@@ -402,7 +402,7 @@
                   </div>
                   <p>Les fichiers dans le dossier <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> sont remplacés à chaque fois que vous les créez, s’ils sont créés avec le même nom.</p>
                   <p>OmegaT peut automatiquement créer de nouveaux noms pour les fichiers que vous créez, en y ajoutant un code de langue ou une date, par exemple.</p>
-                  <p>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boite de dialogue <span class="guilabel">Modifier le Masque</span>. La boite de dialogue propose plusieurs options :</p>
+                  <p>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boite de dialogue <span class="guilabel">Modifier le Masque</span>. La boite de dialogue propose plusieurs options :</p>
                   <div class="variablelist">
                      <dl class="variablelist">
                         <dt>
@@ -503,37 +503,37 @@
                   <div class="example" id="target.name.example">
                      <div class="example-title">Exemple 26. Noms de fichier cible</div>
                      <div class="example-contents">
-                        <p>Pour un fichier source nommé Document.xx.docx, utiliser les variantes de variables ci-dessous produira les résultats suivants :</p>
+                        <p>Pour un fichier source nommé Document.xx.docx, utiliser les variantes de variables ci-dessous produira les résultats suivants :</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${nameOnly-0}</code> : <code class="filename">Document</code>
+                                    <code class="literal">${nameOnly-0}</code> : <code class="filename">Document</code>
                                  </p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${nameOnly-1}</code> : <code class="filename">Document.xx</code>
+                                    <code class="literal">${nameOnly-1}</code> : <code class="filename">Document.xx</code>
                                  </p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${nameOnly-2}</code> : <code class="filename">Document.xx.docx</code>
+                                    <code class="literal">${nameOnly-2}</code> : <code class="filename">Document.xx.docx</code>
                                  </p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${extension-0}</code> : <code class="filename">docx</code>
+                                    <code class="literal">${extension-0}</code> : <code class="filename">docx</code>
                                  </p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${extension-1}</code> : <code class="filename">xx.docx</code>
+                                    <code class="literal">${extension-1}</code> : <code class="filename">xx.docx</code>
                                  </p>
                               </li>
                               <li class="listitem">
                                  <p>
-                                    <code class="literal">${extension-2}</code> : <code class="filename">Document.xx.docx</code>
+                                    <code class="literal">${extension-2}</code> : <code class="filename">Document.xx.docx</code>
                                  </p>
                               </li>
                            </ul>
@@ -552,7 +552,7 @@
                   </div>
                </div>
                <p>Plusieurs filtres proposent des options. Sélectionnez le filtre dans la liste et cliquez sur <span class="guibutton">Options…</span> pour le modifier.</p>
-               <p>Les options disponibles sont :</p>
+               <p>Les options disponibles sont :</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt id="file.filters.text">
@@ -565,7 +565,7 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Nouveaux paragraphes à chaque :</span>
+                                 <span class="term">Nouveaux paragraphes à chaque :</span>
                               </dt>
                               <dd>
                                  <p>Les fichiers texte n’ont pas de marqueurs de paragraphe génériques. Choisissez ici la manière dont OmegaT créer les paragraphes dans vos fichiers texte.</p>
@@ -615,7 +615,7 @@
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Word</span>
+                                 <span class="term">Mot</span>
                               </dt>
                               <dd>
                                  <p>Textes d’instruction non visibles, commentaires, notes de bas de pages, notes de fin de document, pieds de page, texte de remplacement en double et propriétés du document.</p>
@@ -630,7 +630,7 @@
                                  <span class="term">Power Point</span>
                               </dt>
                               <dd>
-                                 <p>Commentaires des diapositives, masques des diapositives, et mise en page des diapositives.</p>
+                                 <p>Commentaires des diapositives, masques des diapositives et disposition des diapositives.</p>
                               </dd>
                               <dt>
                                  <span class="term">Globales</span>
@@ -639,7 +639,7 @@
                                  <p>Liens externes, graphiques, diagrammes, dessins, et WordArt.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Autres options :</span>
+                                 <span class="term">Autres options :</span>
                               </dt>
                               <dd>
                                  <div class="variablelist">
@@ -702,12 +702,12 @@
                                  <div class="example" id="file.filters.xhtml.example">
                                     <div class="example-title">Exemple 27. Ignorer la partie &quot;content&quot; de &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</div>
                                     <div class="example-contents">
-                                       <p>Pour ignorer ce contenu :</p>
+                                       <p>Pour ignorer ce contenu :</p>
                                        <p>
                                           <code class="code">&lt;meta name=&quot;robots&quot; content=&quot;index,
 				  follow&quot;&gt;</code>
                                        </p>
-                                       <p>utilisez :</p>
+                                       <p>utilisez :</p>
                                        <p>
                                           <code class="literal">name=robots</code>
                                        </p>
@@ -724,12 +724,12 @@
                                  <div class="example" id="file.filters.xhtml.ignore.translate.no">
                                     <div class="example-title">Exemple 28. Ignorer les balises qui contiennent translate=&quot;no&quot;</div>
                                     <div class="example-contents">
-                                       <p>Pour ignorer ce contenu :</p>
+                                       <p>Pour ignorer ce contenu :</p>
                                        <p>
                                           <code class="code">&lt;span translate=&quot;no&quot;&gt;This content
 				  is not translatable&lt;/span&gt;</code>
                                        </p>
-                                       <p>utilisez : <code class="literal">translate=no</code>.</p>
+                                       <p>utilisez : <code class="literal">translate=no</code>.</p>
                                        <p>Tous les tags marqués avec un <code class="code"> translate=&quot;no&quot;</code> seront ignorés.</p>
                                     </div>
                                  </div>
@@ -850,7 +850,7 @@
                                  <p>Remplace la spécification du pluriel dans l’entête et utilise la langue cible par défaut.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Format :</span>
+                                 <span class="term">Format :</span>
                               </dt>
                               <dd>
                                  <div class="variablelist">
@@ -892,7 +892,7 @@
                         <span class="term" id="file.filter.java.bundle.title">Paquets de ressources Java</span>
                      </dt>
                      <dd>
-                        <p>Le filtre vérifie les masques Java MessageFormat (ex. : \{0\}) par défaut. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
+                        <p>Le filtre vérifie les masques Java MessageFormat (ex. : \{0\}) par défaut. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
                               <code class="option">Vérifier les variables de la fonction printf</code>
                            </a> pour en savoir plus.</p>
                         <div class="variablelist">
@@ -956,7 +956,7 @@
                                  <span class="term">Identifiant utilisé pour les traductions alternatives</span>
                               </dt>
                               <dd>
-                                 <p>Vous pouvez faire le choix parmi trois options : les paragraphes suivants et précédents, l’ID &lt;trans unit&gt;, ou l’attribut resname de &lt;trans-unit&gt; lorsqu’il est disponible. S’il ne l’est pas, l’ID sera utilisé à la place.</p>
+                                 <p>Vous pouvez faire le choix parmi trois options : les paragraphes suivants et précédents, l’ID &lt;trans unit&gt;, ou l’attribut resname de &lt;trans-unit&gt; lorsqu’il est disponible. S’il ne l’est pas, l’ID sera utilisé à la place.</p>
                               </dd>
                               <dt>
                                  <span class="term">Balises abrégées</span>
@@ -1031,7 +1031,7 @@
                      <dd>
                         <p>Après avoir segmenté le fichier source en unités structurelles, OmegaT divise davantage ces unités en segments.</p>
                         <p>Vous pouvez visualiser la segmentation comme le processus qui consiste à bouger le curseur le long du texte, un caractère à la fois, en recherchant la position où une rupture se produira, ou la position où une rupture n’est pas autorisée.</p>
-                        <p>Chaque fois que le curseur passe au caractère suivant, OmegaT vérifie :</p>
+                        <p>Chaque fois que le curseur passe au caractère suivant, OmegaT vérifie :</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
@@ -1079,7 +1079,7 @@
                   </div>
                </div>
                <p>OmegaT fournit des règles prédéfinies de segmentation, et vous pouvez utiliser des expressions régulières pour les modifier. Voir l’annexe <a class="link" href="chapter.appendices.html#app.regex" title="Expressions régulières">Expressions régulières</a> pour en savoir plus.</p>
-               <p>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</p>
+               <p>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</p>
                <div class="warning">
                   <h3 class="title">Avertissement</h3>
                   <p>Si vous changez la segmentation pendant la traduction, vous devrez recharger le projet afin que celle-ci soit prise en compte. Ce procédé va diviser ou fusionner certains segments précédemment traduits, qui ne seront donc plus considérés comme traduits. Néanmoins, leur traduction originale sera toujours dans la mémoire du projet.</p>
@@ -1106,28 +1106,28 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle d’exception, case non cochée, plus haut dans la liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle d’exception, case <span class="guilabel">Segmentation</span> non cochée, plus haute dans la liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ne pas segmenter après Ms.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">M\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Ms, suivi d’un point, suivi d’un caractère d’espacement.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle d’exception, case non cochée, plus haut dans la liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle d’exception, case <span class="guilabel">Segmentation</span> non cochée, plus haute dans la liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Cellules Excel avec des sauts de ligne qui ne représentent pas des segments.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">.</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Saut de ligne, suivi de n’importe quoi.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle de segmentation, case cochée, plus bas sur la liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Règle de segmentation, case <span class="guilabel">Segmentation</span> cochée, plus basse dans la liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Commencer un nouveau segment après un point suivi d’une espace, une tabulation, ou autre caractère d’espacement.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Un point, suivi d’un caractère d’espacement.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; ">Règle de segmentation, case cochée, plus bas sur la liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">Règle de segmentation, case <span class="guilabel">Segmentation</span> cochée, plus basse dans la liste</td>
                               <td style="text-align: left; border-right: 1px solid ; ">Commencer un nouveau segment après « 。» (point japonais).</td>
                               <td style="text-align: center; border-right: 1px solid ; ">。</td>
                               <td style="text-align: center; border-right: 1px solid ; "> </td>
@@ -1178,11 +1178,11 @@
                      <span class="term">\h?</span>
                   </dt>
                   <dd>
-                     <p>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie « caractère d’espacement vertical  » : \v.)</p>
+                     <p>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie « caractère d’espacement vertical  » : \v.)</p>
                   </dd>
                </dl>
             </div>
-            <p>De nombreuses fonctions d’OmegaT dépendent des expressions régulières ou les proposent en option :</p>
+            <p>De nombreuses fonctions d’OmegaT dépendent des expressions régulières ou les proposent en option :</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
@@ -1216,7 +1216,7 @@
                      <span class="term">Surlignage du texte dans les alignements</span>
                   </dt>
                   <dd>
-                     <p>Des repères visuels peuvent aider à vérifier que votre alignement est correct. Le paramètre <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner.adjust.highlight">Mettre en évidence</a> permet de définir les chaines de caractères qu’OmegaT surlignera dans les documents alignés.</p>
+                     <p>Des repères visuels peuvent aider à vérifier que votre alignement est correct. Le paramètre <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner.adjust.highlight">Surligner</a> permet de définir les chaines de caractères qu’OmegaT surlignera dans les documents alignés.</p>
                      <p>Utilisez le caractère <code class="code">|</code> (OU) pour séparer les expressions individuelles.</p>
                   </dd>
                   <dt>
@@ -1224,7 +1224,7 @@
                   </dt>
                   <dd>
                      <p>Les règles de segmentation et les masques de langage sont définis à l’aide d’expressions régulières. Vous pouvez les modifier librement pour améliorer la segmentation d’un document ou ajouter des règles générales supplémentaires. Voir l’annexe <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentation">Segmentation</a> pour en savoir plus.</p>
-                     <p>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</p>
+                     <p>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</p>
                      <p>Un masque de langue qui correspond à la langue source du projet s’appliquera à ce projet.</p>
                   </dd>
                </dl>
@@ -1299,7 +1299,7 @@
                      </dt>
                      <dd>
                         <p>Cette signification doit être annulée par un autre caractère pour correspondre au caractère lui-même.</p>
-                        <p>La liste complète de ces caractères est <a class="link" href="chapter.appendices.html#app.regex.twelve.characters" title="Les 12 caractères">ci-dessous</a>. Par exemple, <code class="literal">.</code> : lorsqu’il est utilisé seul, il a une signification particulière qui permet de correspondre à<span class="emphasis">
+                        <p>La liste complète de ces caractères est <a class="link" href="chapter.appendices.html#app.regex.twelve.characters" title="Les 12 caractères">ci-dessous</a>. Par exemple, <code class="literal">.</code> : lorsqu’il est utilisé seul, il a une signification particulière qui permet de correspondre à<span class="emphasis">
                               <em>tout caractère unique</em>
                            </span>.</p>
                         <p>Pour trouver un point normal, il faut annuler ce sens en utilisant le <code class="literal">\</code>, pour faire l’expression <code class="literal">\.</code>, qui correspond juste à un point.</p>
@@ -1364,7 +1364,7 @@
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>
-                        <span class="term">La BARRE OBLIQUE INVERSÉE : <code class="literal">\</code>
+                        <span class="term">La BARRE OBLIQUE INVERSÉE : <code class="literal">\</code>
                         </span>
                      </dt>
                      <dd>
@@ -1453,7 +1453,7 @@
                                        <div class="orderedlist">
                                           <ol class="orderedlist" type="1">
                                              <li class="listitem">
-                                                <p>Le « A » majuscule dans la phrase suivante : « Au-dessus des étangs, au-dessus des vallées ».</p>
+                                                <p>Le « A » majuscule dans la phrase suivante : « Au-dessus des étangs, au-dessus des vallées ».</p>
                                              </li>
                                              <li class="listitem">
                                                 <p>Tout caractère qui n’est <span class="emphasis">
@@ -1472,7 +1472,7 @@
                                        <div class="orderedlist">
                                           <ol class="orderedlist" type="1">
                                              <li class="listitem">
-                                                <p>Le « A » majuscule dans la phrase suivante : « Baudelaire a écrit : <span class="emphasis">
+                                                <p>Le « A » majuscule dans la phrase suivante : « Baudelaire a écrit : <span class="emphasis">
                                                       <em>« Au-dessus des étangs, au-dessus des vallées »</em>
                                                    </span> ».</p>
                                              </li>
@@ -1489,7 +1489,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Le SYMBOLE DOLLAR : <code class="literal">$</code>
+                        <span class="term">Le SYMBOLE DOLLAR : <code class="literal">$</code>
                         </span>
                      </dt>
                      <dd>
@@ -1513,11 +1513,11 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Une ligne qui se compose d’un seul mot et se termine par deux-points :</p>
+                                       <p>Une ligne qui se compose d’un seul mot et se termine par deux-points :</p>
                       
                                        <p>
                                           <span class="emphasis">
-                                             <em>Questions :</em>
+                                             <em>Questions :</em>
                                           </span>
                                        </p>
                     
@@ -1527,11 +1527,11 @@
                                     <td style="border-right: 1px solid ; ">Ne correspond pas à</td>
                                     <td>
                       
-                                       <p>Une ligne qui se compose d’un seul mot, mais qui ne se termine pas par deux-points :</p>
+                                       <p>Une ligne qui se compose d’un seul mot, mais qui ne se termine pas par deux-points :</p>
                       
                                        <p>
                                           <span class="emphasis">
-                                             <em>Questions ?</em>
+                                             <em>Questions ?</em>
                                           </span>
                                        </p>
                     
@@ -1542,7 +1542,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Le POINT : <code class="literal">.</code>
+                        <span class="term">Le POINT : <code class="literal">.</code>
                         </span>
                      </dt>
                      <dd>
@@ -1564,7 +1564,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <span class="emphasis">
+                                       <p>Toute combinaison de trois lettres commençant par « d » et finissant par « s » : « <span class="emphasis">
                                              <em>des</em>
                                           </span> », « <span class="emphasis">
                                              <em>dis</em>
@@ -1584,7 +1584,7 @@
                       
                                        <p>Des combinaisons contenant trois lettres qui commencent par « d » et se terminent par « s », mais qui sont réparties sur plus d’une ligne.</p>
                       
-                                       <p>Quelle est la lettre manquante ?</p>
+                                       <p>Quelle est la lettre manquante ?</p>
                         
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
@@ -1611,7 +1611,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">La BARRE VERTICALE : <code class="literal">|</code>
+                        <span class="term">La BARRE VERTICALE : <code class="literal">|</code>
                         </span>
                      </dt>
                      <dd>
@@ -1633,7 +1633,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Le premier mot « Une » ou « La » dans des phrases telles que : </p>
+                                       <p>Le premier mot « Une » ou « La » dans des phrases telles que : </p>
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
                                              <td>« Une pomme par jour… »</td>
@@ -1652,7 +1652,7 @@
                                     <td style="border-right: 1px solid ; ">Ne correspond pas à</td>
                                     <td>
                       
-                                       <p>Le premier mot « Une » ou « La » dans des phrases telles que : </p>
+                                       <p>Le premier mot « Une » ou « La » dans des phrases telles que : </p>
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
                                              <td>« Un récit intitulé <span class="emphasis">
@@ -1676,7 +1676,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Le POINT D’INTERROGATION : <code class="literal">?</code>
+                        <span class="term">Le POINT D’INTERROGATION : <code class="literal">?</code>
                         </span>
                      </dt>
                      <dd>
@@ -1698,7 +1698,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Soit le « est » ou le « es » dans : </p>
+                                       <p>Soit le « est » ou le « es » dans : </p>
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
                                              <td>« C’est une bonne question. »</td>
@@ -1720,10 +1720,10 @@
                                     <td style="border-right: 1px solid ; ">Ne correspond pas à</td>
                                     <td>
                       
-                                       <p>Ni le « est » ni le « es » dans : </p>
+                                       <p>Ni le « est » ni le « es » dans : </p>
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
-                                             <td>Le verbe être : « est » (ou « es »).</td>
+                                             <td>Le verbe être : « est » (ou « es »).</td>
                                           </tr>
                                        </table>
                                        <p>
@@ -1739,7 +1739,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">L’ASTÉRISQUE : <code class="literal">*</code>
+                        <span class="term">L’ASTÉRISQUE : <code class="literal">*</code>
                         </span>
                      </dt>
                      <dd>
@@ -1780,7 +1780,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Le signe PLUS : <code class="literal">+</code>
+                        <span class="term">Le signe PLUS : <code class="literal">+</code>
                         </span>
                      </dt>
                      <dd>
@@ -1819,7 +1819,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">La PARENTHÈSE OUVRANTE : <code class="literal">(</code>
+                        <span class="term">La PARENTHÈSE OUVRANTE : <code class="literal">(</code>
                         </span>
                      </dt>
                      <dd>
@@ -1850,7 +1850,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Des mots doublés séparés par une espace, comme le terme « une » consécutif dans la phrase suivante :</p>
+                                       <p>Des mots doublés séparés par une espace, comme le terme « une » consécutif dans la phrase suivante :</p>
 
 					  
                                        <p>« J’ai acheté une une pomme. »</p>
@@ -1861,7 +1861,7 @@
                                     <td style="border-right: 1px solid ; ">Ne correspond pas à</td>
                                     <td>
                       
-                                       <p>Le « ça, ça » dans la phrase suivante :</p>
+                                       <p>Le « ça, ça » dans la phrase suivante :</p>
 
 					  
                                        <p>« Mais ça, ça dépasse les limites », car le premier « ça » est suivi à la fois d’une virgule et d’une espace et non d’une simple espace.</p>
@@ -1873,7 +1873,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">La PARENTHÈSE FERMANTE : <code class="literal">)</code>
+                        <span class="term">La PARENTHÈSE FERMANTE : <code class="literal">)</code>
                         </span>
                      </dt>
                      <dd>
@@ -1895,7 +1895,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Correspond à</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</p>
+                                       <p>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</p>
 
                       
                                        <table class="simplelist" style="border: 0; ">
@@ -1919,7 +1919,7 @@
                                        <p>Les nombres séquentiels qui ne sont pas au début d’une ligne.</p>
 
                       
-                                       <p>Procédez comme suit :</p>
+                                       <p>Procédez comme suit :</p>
                       
                                        <table class="simplelist" style="border: 0; ">
                                           <tr>
@@ -1937,7 +1937,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Le CROCHET OUVRANT : <code class="literal">[</code>
+                        <span class="term">Le CROCHET OUVRANT : <code class="literal">[</code>
                         </span>
                      </dt>
                      <dd>
@@ -1977,7 +1977,7 @@
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">L’ACCOLADE OUVRANTE : <code class="literal">{</code>
+                        <span class="term">L’ACCOLADE OUVRANTE : <code class="literal">{</code>
                         </span>
                      </dt>
                      <dd>
@@ -2020,7 +2020,7 @@
                       
                                        <p>
                                           <span class="bold">
-                                             <strong>Attention :</strong>
+                                             <strong>Attention :</strong>
                                           </span> Bien que les deux derniers codes ci-dessus ne soient pas complètement correspondants, l’expression donnera la partie « <span class="emphasis">
                                              <em>1472/698</em>
                                           </span> » de « 1472/6985 », ainsi que la partie « <span class="emphasis">
@@ -2131,8 +2131,8 @@
                         </div>
                      </div>
                   </div>
-                  <p>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.options" title="Options">Options</a>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</p>
-                  <p>En revanche, les Expressions régulières sont sensibles à la casse par défaut. Cela signifie qu’une expression régulière recherchant « OmegaT », par exemple, ne correspondra pas à « omegat ». Cependant, il est possible de définir la sensibilité à la casse au sein de l’expression régulière en utilisant des modificateurs spéciaux :</p>
+                  <p>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.options" title="Options">Options</a>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</p>
+                  <p>En revanche, les Expressions régulières sont sensibles à la casse par défaut. Cela signifie qu’une expression régulière recherchant « OmegaT », par exemple, ne correspondra pas à « omegat ». Cependant, il est possible de définir la sensibilité à la casse au sein de l’expression régulière en utilisant des modificateurs spéciaux :</p>
                   <div class="variablelist">
                      <dl class="variablelist">
                         <dt>
@@ -2153,7 +2153,7 @@
                         </dd>
                      </dl>
                   </div>
-                  <p>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <code class="literal">(?i)o</code>
+                  <p>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <code class="literal">(?i)o</code>
                      <code class="literal">(?-i)mega</code> 
                      <code class="literal">(?i)t</code>, qui correspond à un « o » insensible à la casse, suivi d’un « mega » sensible à la casse, suivi d’un « t » insensible à la casse.</p>
                </section>
@@ -2174,7 +2174,7 @@
                      <p>À l’intérieur d’une classe, seuls la barre oblique inverse (<code class="literal">\</code>), le caret (<code class="literal">^</code>), le crochet fermant (<code class="literal">]</code>) et le trait d’union (<code class="literal">-</code>) sont spéciaux. Les douze autres caractères sont normaux et ne nécessitent pas de barre oblique inverse pour être recherchés comme tels.</p>
                      <p>Vous pouvez rechercher n’importe lequel des quatre caractères spéciaux de la classe comme des caractères normaux en les faisant précéder d’une barre oblique inverse. Il est possible de rechercher le caret, le crochet fermant et le trait d’union en les positionnant à un endroit qui n’active pas leur signification particulière. Pour cela, il faut les placer n’importe où sauf juste après le crochet ouvrant pour le caret, immédiatement après le crochet ouvrant ou le caret qui le suit pour le crochet fermant, et juste après le crochet ouvrant ou juste avant le crochet fermant pour le trait d’union.</p>
                   </div>
-                  <p>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <code class="literal">\d</code> est une abréviation de <code class="literal">[0-9]</code>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <code class="literal">\D</code> correspond à tout caractère qui n’est <span class="bold">
+                  <p>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <code class="literal">\d</code> est une abréviation de <code class="literal">[0-9]</code>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <code class="literal">\D</code> correspond à tout caractère qui n’est <span class="bold">
                         <strong>pas</strong>
                      </span> un chiffre.</p>
                   <p>Le tableau ci-dessous fournit plusieurs exemples supplémentaires. Ces classes ne représentent pas uniquement la lettre utilisée pour former l’abréviation.</p>
@@ -2215,7 +2215,7 @@
                                     <p>Un caractère dans la gamme de lettres allant de « C » à « X ».</p>
 
 				
-                                    <p>Une gamme est définie par le premier caractère d’une série, suivi d’un trait d’union, suivi du dernier caractère de la série. Il est possible de définir un nombre quelconque de gammes : <code class="literal">[a-zA-Z0-9]</code> désigne tout caractère minuscule de « a » à « z », ou tout caractère majuscule de « A » à « Z », ou tout chiffre de « 0 » à « 9 ». Un trait d’union placé en dehors de la série ne représente qu’un trait d’union : <code class="literal">[a-z-]</code> signifie tout caractère minuscule de « a » à « z », ou le caractère trait d’union lui-même.</p>
+                                    <p>Une gamme est définie par le premier caractère d’une série, suivi d’un trait d’union, suivi du dernier caractère de la série. Il est possible de définir un nombre quelconque de gammes : <code class="literal">[a-zA-Z0-9]</code> désigne tout caractère minuscule de « a » à « z », ou tout caractère majuscule de « A » à « Z », ou tout chiffre de « 0 » à « 9 ». Un trait d’union placé en dehors de la série ne représente qu’un trait d’union : <code class="literal">[a-z-]</code> signifie tout caractère minuscule de « a » à « z », ou le caractère trait d’union lui-même.</p>
               
                                  </td>
                               </tr>
@@ -2586,7 +2586,7 @@
                               </td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">
               
-                                 <p>Trouver des dates en chaine numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</p>
+                                 <p>Trouver des dates en chaine numérique dans un format année, mois et jour. Le mois et le jour sont séparés par une barre oblique, un point ou un trait d’union, par exemple :</p>
 			  
                 
                                  <div class="itemizedlist">
@@ -2721,7 +2721,7 @@
                   <span class="guilabel">Glossaires</span>
                </a>.</p>
             <p>Les termes source peuvent être des expressions multimots.</p>
-            <p>Il y a 2 types de fichiers de glossaires :</p>
+            <p>Il y a 2 types de fichiers de glossaires :</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
@@ -2755,7 +2755,7 @@
                      <div class="note">
                         <h3 class="title">Note</h3>
                         <p>Si vous utilisez un fichier existant comme glossaire par défaut, toutes les nouvelles entrées seront enregistrées dans un format séparé par des tabulations et sauvegardées en UTF-8 par défaut.</p>
-                        <p>Pour indiquer un encodage différent, vous pouvez ajouter un commentaire «  magique » sous la forme suivante :</p>
+                        <p>Pour indiquer un encodage différent, vous pouvez ajouter un commentaire «  magique » sous la forme suivante :</p>
                         <table class="simplelist" style="border: 0; ">
                            <tr>
                               <td>
@@ -2824,7 +2824,7 @@
                <p>Les fichiers glossaires d’OmegaT sont des fichiers simples en texte brut qui contiennent des listes de termes sur trois colonnes. Le terme source est en première colonne, un terme cible optionnel est en seconde colonne et un commentaire optionnel est en troisième colonne.</p>
                <p>Les glossaires peuvent être des fichiers de « tabulation-separated values   » (TSV) ou de « comma-separated values  » (CSV) ou peuvent également utiliser le format TermBase eXchange (TBX 2).</p>
                <p>Un glossaire modifiable créé par OmegaT pour le projet, sera un fichier TSV enregistré en UTF-8. Les fichiers qui n’utilisent que des caractères latins peuvent être reconnus et traités comme s’ils étaient encodés en ISO-8859-1 s’ils ne contiennent pas de caractères non ASCII ou d’autres caractères interprétables en UTF-8.</p>
-               <p>L’encodage utilisé pour lire les glossaires de référence dépend de leur extension de fichier :</p>
+               <p>L’encodage utilisé pour lire les glossaires de référence dépend de leur extension de fichier :</p>
                <div class="table" id="glossary.extensions">
                   <div class="table-title">Tableau 11. Format, extension et encodage attendu</div>
                   <div class="table-contents">
@@ -2916,7 +2916,7 @@
                </a>
                <a class="link" href="chapter.menus.html#menus.edit.insert.unicode.control.character">
                   <span class="guisubmenu">Insérer un caractère de contrôle Unicode</span>
-               </a>. Ils peuvent être utilisés pour :</p>
+               </a>. Ils peuvent être utilisés pour :</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -2941,7 +2941,7 @@
                      </div>
                   </div>
                </div>
-               <p>Pour modifier la position d’un caractère à directionnalité faible ou neutre (comme les symboles de ponctuation), insérez un caractère LRM ou RLM après le caractère, en fonction de la directionnalité du segment :</p>
+               <p>Pour modifier la position d’un caractère à directionnalité faible ou neutre (comme les symboles de ponctuation), insérez un caractère LRM ou RLM après le caractère, en fonction de la directionnalité du segment :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -2961,7 +2961,7 @@
                      </div>
                   </div>
                </div>
-               <p>Les intégrations peuvent être utilisées pour créer une section de texte plus longue (contenant plusieurs mots et espaces) qui doit s’écouler dans la direction opposée à celle du segment. Vous pouvez créer deux types d’intégrations en fonction de la direction du segment :</p>
+               <p>Les intégrations peuvent être utilisées pour créer une section de texte plus longue (contenant plusieurs mots et espaces) qui doit s’écouler dans la direction opposée à celle du segment. Vous pouvez créer deux types d’intégrations en fonction de la direction du segment :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -3031,7 +3031,7 @@
                            </tr>
                            <tr>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">${glossaryRoot}</td>
-                              <td style="text-align: left; border-bottom: 1px solid ; ">Chemin complet vers le dossier du glossaire</td>
+                              <td style="text-align: left; border-bottom: 1px solid ; ">Chemin complet vers le dossier des glossaires</td>
                            </tr>
                            <tr>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">${tmRoot}</td>
@@ -3106,7 +3106,7 @@
                <p>Vous devez utiliser l’en-tête <code class="literal"># ! /bin/bash</code> ou <code class="literal">#! /usr/bin/env python3</code>. Le script doit être exécutable. Enchainer des commandes avec <code class="literal">&amp;&amp;</code> ou <code class="literal">||</code> ou des barres verticales <code class="literal">|</code> ne fonctionnera pas ici.</p>
             </section>
             <div class="example" id="post.processing.commands.example">
-               <div class="example-title">Exemple 29. Exemple simple de commande de posttraitement :</div>
+               <div class="example-title">Exemple 29. Exemple simple de commande de posttraitement :</div>
                <div class="example-contents">
                   <div class="variablelist">
                      <dl class="variablelist">
@@ -3153,7 +3153,7 @@
                <p>L’interface d’OmegaT ne s’appuie généralement pas sur des boutons pour donner accès à ces fonctions. Au lieu de cela, elles sont appelées à partir des menus, ou pour la majorité des fonctions, à partir du raccourcis qui leur est associé.</p>
                <p>Apprendre les raccourcis les plus fréquents ne vous prendra pas longtemps une fois que vous commencerez à travailler avec OmegaT. Les raccourcis sont indiqués à côté de chaque élément du menu, ce qui leur permet d’apprendre de nouveaux raccourcis au fur et à mesure de l’utilisation du logiciel.</p>
                <p>Vous pouvez personnaliser la plupart des raccourcis sur OmegaT. Voir la section <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Personnalisation">Personnalisation</a> pour en savoir plus.</p>
-               <p>OmegaT fonctionne sur toutes les plateformes qui utilisent un système d’exploitation Java ( Windows, macOS et Linux étant les plus courants). Les touches de modification qui forment les raccourcis varient légèrement selon les plateformes. Pour faciliter la lecture, nous avons adopté la convention suivante pour les touches de modification :</p>
+               <p>OmegaT fonctionne sur toutes les plateformes qui utilisent un système d’exploitation Java ( Windows, macOS et Linux étant les plus courants). Les touches de modification qui forment les raccourcis varient légèrement selon les plateformes. Pour faciliter la lecture, nous avons adopté la convention suivante pour les touches de modification :</p>
                <div class="table" id="app.shortcut.description">
                   <div class="table-title">Tableau 13. Identifiants des touches de modification</div>
                   <div class="table-contents">
@@ -3254,9 +3254,9 @@
                      <strong>identifiants de clés</strong>
                   </span> ci-dessus nous permettent d’éviter d’énumérer de multiples notations pour chaque raccourci.</p>
                <div class="example" id="example.avoid.listing.multiple.notations">
-                  <div class="example-title">Exemple 30. Comment évitons-nous d’énumérer de multiples notations :</div>
+                  <div class="example-title">Exemple 30. Comment évitons-nous d’énumérer de multiples notations :</div>
                   <div class="example-contents">
-                     <p>Sous Windows et Linux : <span class="keycap">
+                     <p>Sous Windows et Linux : <span class="keycap">
                            <strong>Ctrl</strong>
                         </span>+<span class="keycap">
                            <strong>Maj</strong>
@@ -3264,7 +3264,7 @@
                            <strong>N</strong>
                         </span>
                      </p>
-                     <p>Sous macOS : <span class="keycap">
+                     <p>Sous macOS : <span class="keycap">
                            <strong>Maj</strong>
                         </span>+<span class="keycap">
                            <strong>commande</strong>
@@ -3272,7 +3272,7 @@
                            <strong>N</strong>
                         </span>
                      </p>
-                     <p>Dans ce manuel : <span class="keycap">
+                     <p>Dans ce manuel : <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
                            <strong>S</strong>
@@ -3322,7 +3322,7 @@
                <p>OmegaT doit être redémarré après la modification d’un fichier de définition de raccourci pour que les nouveaux raccourcis soient pris en compte.</p>
                <div class="note">
                   <h3 class="title">Note</h3>
-                  <p>Vous pouvez copier les fichiers de raccourcis OmegaT par défaut du site de développement d’OmegaT sur Sourceforge vers <a class="link" href="chapter.appendices.html#configuration.folder" title="Dossier de configuration"> votre dossier de configuration </a> et les modifier selon vos besoins :</p>
+                  <p>Vous pouvez copier les fichiers de raccourcis OmegaT par défaut du site de développement d’OmegaT sur Sourceforge vers <a class="link" href="chapter.appendices.html#configuration.folder" title="Dossier de configuration"> votre dossier de configuration </a> et les modifier selon vos besoins :</p>
                   <div class="variablelist">
                      <dl class="variablelist">
                         <dt>
@@ -3377,12 +3377,12 @@
                      </div>
                   </div>
                </div>
-               <p>La syntaxe de base des fichiers de définition des raccourcis est simple :</p>
+               <p>La syntaxe de base des fichiers de définition des raccourcis est simple :</p>
                <p>
                   <code class="code">code de fonction = raccourci</code>
                </p>
                <p>Utilisez les tableaux dans la section ci-dessous<a class="link" href="chapter.appendices.html#app.shortcuts.lists" title="Listes des fonctions et des codes">Listes des fonctions et des codes</a> afin de trouver les valeurs pour <code class="code">le code de la fonction</code>.</p>
-               <p>Le <code class="code">raccourci</code> représente la combinaison de touches que vous saisissez. Cela prend la forme suivante :</p>
+               <p>Le <code class="code">raccourci</code> représente la combinaison de touches que vous saisissez. Cela prend la forme suivante :</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -3402,7 +3402,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>où la <code class="code">touche modificatrice</code> peut être : <code class="literal">shift</code>, <code class="literal">ctrl</code>, <code class="literal">meta</code>, <code class="literal">alt</code>, ou <code class="literal">altGraph</code>
+                        <p>où la <code class="code">touche modificatrice</code> peut être : <code class="literal">shift</code>, <code class="literal">ctrl</code>, <code class="literal">meta</code>, <code class="literal">alt</code>, ou <code class="literal">altGraph</code>
                         </p>
                         <div class="note">
                            <h3 class="title">Note</h3>
@@ -3418,7 +3418,7 @@
                         </div>
                      </li>
                      <li class="listitem">
-                        <p>L’<code class="code">évènement</code> peut être :<code class="option">typed</code>, <code class="option">pressed</code>, <code class="option">released</code>
+                        <p>L’<code class="code">évènement</code> peut être :<code class="option">typed</code>, <code class="option">pressed</code>, <code class="option">released</code>
                         </p>
                      </li>
                      <li class="listitem">
@@ -3431,11 +3431,11 @@
                <div class="example" id="example.shortcut.modification">
                   <div class="example-title">Exemple 31. Modification d’un raccourci</div>
                   <div class="example-contents">
-                     <p>Le raccourci par défaut pour <a class="link" href="chapter.menus.html#menus.project.close">fermer un projet</a> est défini sous Windows et Linus comme :</p>
+                     <p>Le raccourci par défaut pour <a class="link" href="chapter.menus.html#menus.project.close">fermer un projet</a> est défini sous Windows et Linus comme :</p>
                      <p>
                         <code class="code">projectCloseMenuItem=ctrl shift W</code>
                      </p>
-                     <p>et sous macOS comme :</p>
+                     <p>et sous macOS comme :</p>
                      <p>
                         <code class="code">projectCloseMenuItem=meta shift W</code>
                      </p>
@@ -3450,11 +3450,11 @@
                         </span>+<span class="keycap">
                            <strong>W</strong>
                         </span> sous macOS) pour qu’il corresponde au raccourci que vous utilisez dans d’autres applications.</p>
-                     <p>Pour ce faire, modifier le <code class="filename">MainMenuShortcuts.properties</code> de la manière suivante pour Windows ou Linux :</p>
+                     <p>Pour ce faire, modifier le <code class="filename">MainMenuShortcuts.properties</code> de la manière suivante pour Windows ou Linux :</p>
                      <p>
                         <code class="code">projectCloseMenuItem=ctrl W</code>
                      </p>
-                     <p>ou de la manière suivante pour macOS :</p>
+                     <p>ou de la manière suivante pour macOS :</p>
                      <p>
                         <code class="code">projectCloseMenuItem=meta W</code>
                      </p>
@@ -3482,13 +3482,13 @@
                            </li>
                            <li class="listitem">
                               <p>Comme le montre le <a class="link" href="chapter.appendices.html#app.shortcuts.lists.function.codes.edit.menu.table" title="Tableau 15. Menu Édition">tableau du menu édition</a> ci-dessous, le code de la fonction <span class="guimenuitem">Créer une traduction alternative</span> est <code class="code">editMultipleAlternate</code>.</p>
-                              <p>En recherchant ce code dans le fichier, vous arriverez à la ligne suivante :</p>
+                              <p>En recherchant ce code dans le fichier, vous arriverez à la ligne suivante :</p>
                               <p>
                                  <code class="code">#	editMultipleAlternate=</code>
                               </p>
                            </li>
                            <li class="listitem">
-                              <p>La ligne est actuellement un commentaire. Supprimez le caractère <code class="code">#</code> en début de ligne pour qu’OmegaT reconnaisse le raccourci, et ajoutez <code class="option">alt X</code> après le signe <code class="code">=</code> en fin de ligne :</p>
+                              <p>La ligne est actuellement un commentaire. Supprimez le caractère <code class="code">#</code> en début de ligne pour qu’OmegaT reconnaisse le raccourci, et ajoutez <code class="option">alt X</code> après le signe <code class="code">=</code> en fin de ligne :</p>
                               <p>
                                  <code class="code">editMultipleAlternate=alt X</code>
                               </p>
@@ -3548,7 +3548,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift N</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Télécharger projet en équipe…</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Télécharger un projet en équipe…</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">projectTeamNewMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -3763,7 +3763,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta I</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Remplacer par la source</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Remplacer par le texte source</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteSourceMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift R</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift R</td>
@@ -4175,7 +4175,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Souligner les correspondances de glossaire</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Souligner les correspondances des glossaire</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkGlossaryMatchesCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4493,7 +4493,7 @@
                            </thead>
                            <tbody>
                               <tr id="shortcuts.open.contextual.menu">
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">ouvrir le menu contextuel</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ouvrir le menu contextuel</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editorContextMenu</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">CONTEXT_MENU</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">shift ESCAPE</td>
@@ -4751,7 +4751,7 @@
                </div>
                <p>L’emplacement du dossier de configuration par défaut varie selon le système (le caractère <span class="emphasis">
                      <em>~</em>
-                  </span> représente votre dossier local)  : </p>
+                  </span> représente votre dossier local)  : </p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>
@@ -4805,7 +4805,7 @@
                         <div class="example" id="no.source.file.display">
                            <div class="example-title">Exemple 33. Ne pas afficher automatiquement la liste des Fichiers source</div>
                            <div class="example-contents">
-                              <p>Pour éviter l’affichage de la liste des fichiers du projet à chaque rechargement, cherchez <span class="token">&lt;project_files_show_on_load&gt;</span> et remplacez <span class="token">true</span> par <span class="token">false</span> :</p>
+                              <p>Pour éviter l’affichage de la liste des fichiers du projet à chaque rechargement, cherchez <span class="token">&lt;project_files_show_on_load&gt;</span> et remplacez <span class="token">true</span> par <span class="token">false</span> :</p>
                               <pre class="programlisting">&lt;project_files_show_on_load&gt;<span class="token">false</span>&lt;/project_files_show_on_load&gt;</pre>
                            </div>
                         </div>
@@ -4819,7 +4819,7 @@
                         <span class="term" id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</span>
                      </dt>
                      <dd>
-                        <p>Ce fichier décrit la présentation générale d’OmegaT.</p>
+                        <p>Ce fichier décrit la disposition générale d’OmegaT.</p>
                      </dd>
                      <dt id="configuration.folder.default.contents.logs">
                         <span class="term" id="configuration.folder.default.contents.logs.title">logs/</span>
@@ -4838,7 +4838,7 @@
                         <span class="term" id="configuration.folder.default.contents.script.title">Le dossier script/</span>
                      </dt>
                      <dd>
-                        <p>Ce dossier peut contenir jusqu’à trois fichiers texte si les fonctions applicables sont utilisées :</p>
+                        <p>Ce dossier peut contenir jusqu’à trois fichiers texte si les fonctions applicables sont utilisées :</p>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt id="configuration.folder.default.contents.script.selection">
@@ -4945,12 +4945,19 @@
                         <p>Voir le guide pratique <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Préparation d’un projet en équipe">Préparation d’un projet en équipe</a> pour en savoir plus.</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.segmentation">
-                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</span>
+                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</span>
                      </dt>
                      <dd>
-                        <p>Ce fichier de paramètres contient des paramètres de segmentation personnalisés. Voir le paramètre <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Règles globales de segmentation">
+                        <p>Ce fichier de paramètres contient des paramètres de segmentation personnalisés dans le format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>. Voir les préférences <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Règles globales de segmentation">
                               <span class="guilabel">Règles globales de segmentation</span>
-                           </a> pour en savoir plus.</p>
+                           </a> pour en savoir plus. </p>
+                        <div class="note">
+                           <h3 class="title">Note</h3>
+                           <p>Si un fichier <code class="filename">segmentation.conf</code> d’une version plus ancienne est présent, OmegaT le convertira automatiquement.</p>
+                        </div>
+                        <p>
+		
+                        </p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.plugin">
                         <span class="term" id="configuration.folder.extra.contents.plugin.title">plugins/</span>
@@ -4984,7 +4991,7 @@
             <p>Le dossier application contient l’application <code class="filename">OmegaT.jar</code> ainsi qu’un certain nombre de fichiers importants.</p>
             <div class="note">
                <h3 class="title">Note</h3>
-               <p>L’emplacement du dossier application dépend de votre plateforme et de la manière dont vous avez installé OmegaT. L’emplacement recommandé ou par défaut est le suivant :</p>
+               <p>L’emplacement du dossier application dépend de votre plateforme et de la manière dont vous avez installé OmegaT. L’emplacement recommandé ou par défaut est le suivant :</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>

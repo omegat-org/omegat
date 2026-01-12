@@ -28,10 +28,10 @@ import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.io.IOException;
-import java.net.URI;
+import java.net.URL;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.gui.preferences.IPreferencesController;
-import org.omegat.help.Help;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -57,16 +57,23 @@ final class GreetingStepController implements IPreferencesController {
     private void initGreetingPane() {
         greetingPane.setEditable(false);
         greetingPane.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        try {
-            String language = detectFirstStepsLanguage();
-            greetingPane.setName("GreetingPane");
-            greetingPane.setComponentOrientation(
-                    BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT : ComponentOrientation.LEFT_TO_RIGHT);
-            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, PHILOSOPHY);
-            if (uri != null) {
-                greetingPane.setPage(uri.toURL());
+        greetingPane.setName("GreetingPane");
+        greetingPane.setComponentOrientation(getComponentOrientation());
+        String language = Language.getLowerCaseLanguageFromLocale();
+        String country = Language.getUpperCaseCountryFromLocale();
+        String fullLocale = language + "_" + country;
+        URL url = getPhilosophyResource(fullLocale);
+        if (url == null) {
+            url = getPhilosophyResource(language);
+        }
+        if (url == null) {
+            url = getPhilosophyResource("en");
+        }
+        if (url != null) {
+            try {
+                greetingPane.setPage(url);
+            } catch (IOException ignored) {
             }
-        } catch (IOException ignored) {
         }
         JScrollPane greetScroll = new JScrollPane(greetingPane);
         greetScroll.setPreferredSize(new Dimension(280, 100));
@@ -74,17 +81,14 @@ final class GreetingStepController implements IPreferencesController {
                 "explain.title", "Explanation")));
     }
 
-    private String detectFirstStepsLanguage() {
-        String language = Language.getLowerCaseLanguageFromLocale();
-        String country = Language.getUpperCaseCountryFromLocale();
-        String fullLocale = language + "_" + country;
-        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, fullLocale, OConsts.HELP_FIRST_STEPS) != null) {
-            return fullLocale;
-        }
-        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS) != null) {
-            return language;
-        }
-        return "en";
+    private ComponentOrientation getComponentOrientation() {
+        return BiDiUtils.isRtl(Language.getLowerCaseLanguageFromLocale()) ? ComponentOrientation.RIGHT_TO_LEFT
+                : ComponentOrientation.LEFT_TO_RIGHT;
+    }
+
+    private @Nullable URL getPhilosophyResource(String lang) {
+        return GreetingStepController.class.getResource(
+                "/" + OConsts.HELP_DIR + "/" + OConsts.HELP_FIRST_STEPS_PREFIX + "/" + lang + "/" + PHILOSOPHY);
     }
 
     @Override

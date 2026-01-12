@@ -27,7 +27,7 @@ repositories {
     mavenCentral()
     // 'repository' for getting docbook xsd
     ivy {
-        url = 'https://docbook.org/xml'
+        url = 'https://archive.docbook.org/xml'
         patternLayout {
             artifact '[revision]/[module]-[revision].[ext]'
         }

@@ -1,6 +1,5 @@
-/* :name=Open Current File		:description=Open the current source file
- * 
- * Open current file
+/**
+ * Open current file by associated application.
  *
  * @author  Yu Tang
  * @date    2014-05-14

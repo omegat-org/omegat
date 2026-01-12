@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.bidi">
-  <title id="app.bidi.title">Caractères de formatage directionnel</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.bidi">
+  <title xml:id="app.bidi.title">Caractères de formatage directionnel</title>
 
   <para>Les caractères de contrôle Bidi sont disponibles à partir de <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Ils peuvent être utilisés pour :</para>
 
@@ -16,8 +15,8 @@
   
   <para>Ces caractères de contrôle changent la directionnalité mais sont invisibles. Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> pour donner une indication visuelle de leur position.</para>
 
-  <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">Marques</title>
+  <section xml:id="app.bidi.marks">
+	<title xml:id="app.bidi.marks.title">Marques</title>
 
 	<para>Pour modifier la position d’un caractère à directionnalité faible ou neutre (comme les symboles de ponctuation), insérez un caractère LRM ou RLM après le caractère, en fonction de la directionnalité du segment :</para>
 
@@ -31,8 +30,8 @@
 	</itemizedlist>
   </section>
 
-  <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">Les intégrations</title>
+  <section xml:id="app.bidi.embeddings">
+	<title xml:id="app.bidi.embeddings.title">Les intégrations</title>
 
 	<para>Les intégrations peuvent être utilisées pour créer une section de texte plus longue (contenant plusieurs mots et espaces) qui doit s’écouler dans la direction opposée à celle du segment. Vous pouvez créer deux types d’intégrations en fonction de la direction du segment :</para>
 

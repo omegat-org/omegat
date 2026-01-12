@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.menus">
-  <title id="chapter.menus.title">メニュー</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.menus">
+  <title xml:id="chapter.menus.title">メニュー</title>
 
   	<para>OmegaTは、ボタンベースのインターフェースに慣れている人には、完全に駄目とは言わないまでも、少し難しくに見えるかもしれません。ほとんどのアクションは、メニュー項目に関連付けられたショートカットを使用して実行されます。</para>
 
@@ -11,8 +10,8 @@
 
 	<para>デフォルトで割り当てのないメインメニューのほとんどの項目に、新しいショートカットを割り当てることができます。ショートカットを変更または追加する場合は、付録<link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/>を参照してください。</para>
 
-  <note><para>キーボードショートカットの説明上の注意：<table id="menus.shortcut.description">
-      <title id="menus.shortcut.description.title">修飾キー識別子</title>
+  <note><para>キーボードショートカットの説明上の注意：<table xml:id="menus.shortcut.description">
+      <title xml:id="menus.shortcut.description.title">修飾キー識別子</title>
 
       <tgroup cols="3">
         <thead>
@@ -52,18 +51,18 @@
     </table></para>
   </note>
 
-  <xi:include href="Menus_Project.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Project.xml"/>
   
-  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Edit.xml"/>
 
-  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_GoTo.xml"/>
 
-  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_View.xml"/>
 
-  <xi:include href="Menus_Tools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Tools.xml"/>
 
-  <xi:include href="Menus_Options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Options.xml"/>
 
-  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Help.xml"/>
 
 </chapter>

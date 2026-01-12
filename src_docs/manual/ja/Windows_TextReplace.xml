@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.replace">
-  <title id="windows.text.replace.title"><guilabel>テキストの置換</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.replace">
+  <title xml:id="windows.text.replace.title"><guilabel>テキストの置換</guilabel></title>
 
   <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>を使用して新しい検索ウィンドウを開き、検索する単語またはフレーズを検索領域に入力します。</para>
   
@@ -16,8 +15,8 @@
   <para>検索の一致は青い太字で表示され、変更された文字列はオレンジ色で表示され、置換の結果を示します。</para>
 
 
-  <example id="replace.with.allemand">
-	<title id="replace.with.allemand.title">用語を置き換える</title>
+  <example xml:id="replace.with.allemand">
+	<title xml:id="replace.with.allemand.title">用語を置き換える</title>
 	<para>
 	  <programlisting>多和田葉子.UTF8
 -- 148&gt; | language = [[日本語]]・[[ドイツ語]]
@@ -80,16 +79,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">検索の種類</title>
+  <section xml:id="windows.text.replace.methods">
+    <title xml:id="windows.text.replace.methods.title">検索の種類</title>
 
     <para>ラジオボタンを使用して、検索方法を選択します。</para>
 
 	<para>以下の検索方法を利用できます：</para>
 
     <variablelist>
-      <varlistentry id="windows.text.replace.methods.exact">
-        <term id="windows.text.replace.methods.exact.title">完全一致検索</term>
+      <varlistentry xml:id="windows.text.replace.methods.exact">
+        <term xml:id="windows.text.replace.methods.exact.title">完全一致検索</term>
         <listitem>
           <para>検索欄に指定した文字列そのまま含む分節を検索します。</para>
 
@@ -111,8 +110,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.replace.methods.regex">
-        <term id="windows.text.replace.methods.regex.title">正規表現</term>
+      <varlistentry xml:id="windows.text.replace.methods.regex">
+        <term xml:id="windows.text.replace.methods.regex.title">正規表現</term>
         <listitem>
           <para>検索文字列が正規表現として扱われます。</para>
 
@@ -126,8 +125,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.replace.options">
-	<title id="windows.text.replace.options.title">設定</title>
+  <section xml:id="windows.text.replace.options">
+	<title xml:id="windows.text.replace.options.title">設定</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -170,8 +169,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">検索結果表示画面</title>
+  <section xml:id="windows.text.replace.result.display">
+    <title xml:id="windows.text.replace.result.display.title">検索結果表示画面</title>
 
     <para>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節の場合、原文は訳文の上に表示されます。未翻訳分節の場合には、原文のみが表示されます。</para>
 

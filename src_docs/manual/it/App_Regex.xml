@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="app.regex">
-  <title id="app.regex.title">Espressioni regolari</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.regex">
+  <title xml:id="app.regex.title">Espressioni regolari</title>
 
   <para>Questa appendice è pensata per gli utenti interessati a esplorare un metodo avanzato per aumentare la propria produttività. Sebbene viste come complesse e scoraggianti, anche le espressioni regolari, spesso abbreviate in <emphasis>regex</emphasis> o <emphasis>regexp</emphasis>, più semplici sono estremamente utili non solo in OmegaT, ma in molte altre applicazioni di uso quotidiano, con alcune differenze.</para>
 
@@ -86,8 +81,8 @@
     </varlistentry>
   </variablelist>
 
-  <section id="app.regex.four.rules">
-    <title id="app.regex.four.rules.title">Le quattro regole</title>
+  <section xml:id="app.regex.four.rules">
+    <title xml:id="app.regex.four.rules.title">Le quattro regole</title>
 
     <para>Le espressioni regolari vengono utilizzate per trovare testo, inclusi i caratteri non visibili sullo schermo o sulla stampa, quali spazi, tabulazioni o interruzioni di riga. Qualsiasi espressione regolare specificata o <emphasis>corrisponde</emphasis> o <emphasis><emphasis role="bold">non</emphasis> corrisponde</emphasis> a una parola, una frase o un'altra sequenza di testo.</para>
     
@@ -147,8 +142,8 @@
     </variablelist>
   </section>
 
-  <section id="app.regex.twelve.characters">
-    <title id="app.regex.twelve.characters.title">I dodici caratteri</title>
+  <section xml:id="app.regex.twelve.characters">
+    <title xml:id="app.regex.twelve.characters.title">I dodici caratteri</title>
   
     <para>I dodici caratteri speciali sono: <emphasis>barra rovesciata</emphasis> <literal>\</literal>, <emphasis>accento circonflesso</emphasis> <literal>^</literal>, <emphasis>segno del dollaro</emphasis> <literal>$</literal>, <emphasis>punto</emphasis> <literal>.</literal>, <emphasis>barra verticale</emphasis> (o <emphasis>pipe</emphasis>) <literal>|</literal>, <emphasis>punto interrogativo</emphasis> <literal>?</literal>, <emphasis>asterisco</emphasis> (o <emphasis>stella</emphasis>) <literal>*</literal>, <emphasis>segno più</emphasis> <literal>+</literal>, <emphasis>parentesi</emphasis> di apertura <literal>(</literal>, <emphasis>parentesi</emphasis> di chiusura <literal>)</literal>, <emphasis>parentesi quadra</emphasis> di apertura <literal>[</literal>, e <emphasis>parentesi graffa</emphasis> di apertura <literal>{</literal>.</para>
 
@@ -319,7 +314,7 @@
                     <entry>
                       <para>Combinazioni contenenti tre lettere che iniziano per “c” e terminano per “t” ma sono divise in più di una riga.</para>
                       <para>Qual è la lettera mancante?</para>
-                        <simplelist>
+                        <simplelist type="vert">
                           <member><literal>c</literal></member>
                           <member><literal/></member>
                           <member><literal>t</literal></member>
@@ -351,7 +346,7 @@
                   <row>
                     <entry>Individua</entry>
                     <entry>
-                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist>
+                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist type="vert">
                           <member>“An apple a day…”</member>
                           <member>“The apple of my eye…”</member>
                         </simplelist>
@@ -362,7 +357,7 @@
                   <row>
                     <entry>Non individua</entry>
                     <entry>
-                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist>
+                      <para>“An” o “The” iniziali nelle frasi tipo:<simplelist type="vert">
                           <member>“A story called <emphasis>An Unsung
                           Hero</emphasis>.”</member>
                           <member>“They work for <emphasis>The Daily
@@ -397,7 +392,7 @@
                   <row>
                     <entry>Individua</entry>
                     <entry>
-                      <para>O “a ” o “an ” in:<simplelist>
+                      <para>O “a ” o “an ” in:<simplelist type="vert">
                           <member>“I have a question.”</member>
                           <member>“I know an excellent doctor.”</member>
                         </simplelist>
@@ -410,7 +405,7 @@
                   <row>
                     <entry>Non individua</entry>
                     <entry>
-                      <para>Né “a” né “an” in:<simplelist>
+                      <para>Né “a” né “an” in:<simplelist type="vert">
                           <member>L'articolo indefinito: “a” (o “an”).</member>
                         </simplelist>
                       </para>
@@ -561,7 +556,7 @@
                     <entry>
                       <para>Il numero in sequenza (inclusa la parentesi) all'inizio di ciascuna riga in un elenco tipo:</para>
 
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>1) Mele</member>
                         <member>2) Arance</member>
                         <member>3) Pere</member>
@@ -575,7 +570,7 @@
                       <para>Numeri in sequenza che non si trovano all'inizio di una riga.</para>
 
                       <para>Seguire questi passaggi:</para>
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>Passaggio 1) preparazione</member>
                         <member>Passaggio 2) …</member>
                       </simplelist>
@@ -666,8 +661,8 @@
       </variablelist>
   </section>
 
-  <section id="app.regex.types.of.expressions">
-    <title id="app.regex.types.of.expressions.title">Un sacco di espressioni</title>
+  <section xml:id="app.regex.types.of.expressions">
+    <title xml:id="app.regex.types.of.expressions.title">Un sacco di espressioni</title>
 
     <para>Questa sezione riporta vari tipi di espressione regolare, sia semplici, sia complessi.</para>
       
@@ -675,12 +670,12 @@
       <para>È bene tenere a mente che la maggior parte dei caratteri <emphasis>alfabetici</emphasis> preceduti da una <literal>\</literal> si trasformano in un'espressione che rappresenta <emphasis>non il carattere in sé ma il suo speciale significato associato</emphasis>.</para>
     </note>
 
-    <section id="app.regex.types.of.expressions.simple.expressions">
-      <title id="app.regex.types.of.expressions.simple.expressions.title">Espressioni semplici</title>
+    <section xml:id="app.regex.types.of.expressions.simple.expressions">
+      <title xml:id="app.regex.types.of.expressions.simple.expressions.title">Espressioni semplici</title>
       <para>L'espressione regolare più semplice consiste di un singolo carattere, oppure di una combinazione di una barra rovesciata (<literal>\</literal>) e un carattere che costituisce un'unità con un unico significato.</para>
       
-      <table id="app.regex.characters">
-        <title id="app.regex.characters.title">Caratteri</title>
+      <table xml:id="app.regex.characters">
+        <title xml:id="app.regex.characters.title">Caratteri</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -725,8 +720,8 @@
       </table>
     </section>
 
-    <section id="app.regex.types.of.expressions.case">
-      <title id="app.regex.types.of.expressions.case.title">Maiuscole/minuscole</title>
+    <section xml:id="app.regex.types.of.expressions.case">
+      <title xml:id="app.regex.types.of.expressions.case.title">Maiuscole/minuscole</title>
 
       
       <para>Le normali ricerche di OmegaT non distinguono tra maiuscole e minuscole: esse individuano sia i caratteri maiuscoli, sia quelli minuscoli, a meno che non si abiliti l'opzione <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Questa opzione farà sì che l'intera espressione di ricerca distingua tra maiuscole e minuscole.</para>
@@ -751,8 +746,8 @@
       <para>È possibile applicare questa opzione per regolare finemente le ricerche in base alla distinzione tra maiuscole e minuscole. Si ipotizzi, per esempio, di voler trovare istanze di “OmegaT” e “omegat” ma non di “OMEGAT”. Per farlo, si utilizzi l'espressione seguente: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, la quale rappresenta una “o” non sensibile a maiuscole/minuscole seguita da “mega”, sensibile a maiuscole/minuscole, seguita da una “t” non sensibile.</para>
     </section>
 
-    <section id="app.regex.types.of.expressions.classes">
-      <title id="app.regex.types.of.expressions.classes.title">Classi</title>
+    <section xml:id="app.regex.types.of.expressions.classes">
+      <title xml:id="app.regex.types.of.expressions.classes.title">Classi</title>
 
       <para>Le espressioni regolari consentono di creare gruppi di caratteri conosciuti come <emphasis>classi</emphasis>. Le ricerche individueranno qualsiasi carattere facente parte del gruppo.</para>
 
@@ -767,8 +762,8 @@
 	  <para>I gruppi frequentemente utilizzati possiedono una forma abbreviata che consiste di una barra rovesciata seguita da una lettera dell'alfabeto. Per esempio, <literal>\d</literal> è un'abbreviazione per <literal>[0-9]</literal>, che individua qualsiasi cifra compresa tra 0 e 9. In molti casi, la maiuscola successiva corrispondente viene utilizzata per negare la classe: <literal>\D</literal> individua qualsiasi carattere che <emphasis role="bold">non</emphasis> sia una cifra.</para>
       <para>La tabella riportata sotto fornisce alcuni esempi aggiuntivi. Queste classi non rappresentano mai solo la lettera reale utilizzata per formare l'abbreviazione.</para>
       
-      <table id="app.regex.classes">
-        <title id="app.regex.classes.title">Esempi di classi</title>
+      <table xml:id="app.regex.classes">
+        <title xml:id="app.regex.classes.title">Esempi di classi</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -844,10 +839,10 @@
       
       <para>Le espressioni regolari non sono limitate ai caratteri alfanumerici. Esse coprono l'intero set di caratteri Unicode. Usare i blocchi, gli script e le categorie Unicode per specificare le classi di caratteri al di fuori dell'intervallo di caratteri alfanumerici. Alcuni esempi vengono riportati nella tabella sottostante.</para>
 
-      <para>Per un'analisi più dettagliata delle espressioni regolari Unicode, si veda anche <ulink url="https://www.regular-expressions.info/unicode.html">Espressioni regolari Unicode</ulink>.</para>
+      <para>Per un'analisi più dettagliata delle espressioni regolari Unicode, si veda anche <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info/unicode.html">Espressioni regolari Unicode</link>.</para>
 
-      <table id="app.regex.unicode.blocks">
-        <title id="app.regex.unicode.blocks.title">Categorie, script e blocchi Unicode</title>
+      <table xml:id="app.regex.unicode.blocks">
+        <title xml:id="app.regex.unicode.blocks.title">Categorie, script e blocchi Unicode</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -862,7 +857,7 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>Un carattere nel blocco greco (<ulink url="https://unicode.org/reports/tr18/#Blocks">blocco Unicode</ulink>)</para>
+                <para>Un carattere nel blocco greco (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Blocks">blocco Unicode</link>)</para>
 				
                 <para><literal>\P{InGreek}</literal> è qualsiasi carattere che <emphasis role="bold">non</emphasis> sia nel blocco Greek.</para>
               </entry>
@@ -871,21 +866,21 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>Un logogramma (carattere <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) trovato nelle lingue CJK (<ulink url="https://unicode.org/reports/tr18/#Script_Property">script Unicode</ulink>)</para>
+                <para>Un logogramma (carattere <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) trovato nelle lingue CJK (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Script_Property">script Unicode</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Lu}</literal></entry>
               <entry>
-                <para>Una lettera maiuscola (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</ulink>)</para>
+                <para>Una lettera maiuscola (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Sc}</literal></entry>
               <entry>
-                <para>Un simbolo di valuta, che è anche una <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</ulink>.</para>
+                <para>Un simbolo di valuta, che è anche una <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">categoria Unicode</link>.</para>
               </entry>
             </row>
           </tbody>
@@ -893,13 +888,13 @@
       </table>
     </section>
 
-    <section id="app.regex.more.advanced.expressions">
-      <title id="app.regex.more.advanced.expressions.title">Espressioni più avanzate</title>
+    <section xml:id="app.regex.more.advanced.expressions">
+      <title xml:id="app.regex.more.advanced.expressions.title">Espressioni più avanzate</title>
       
       <para>Alcune espressioni specificano una posizione piuttosto che un carattere. Esse indicano dove guardare nel testo per la corrispondenza, ma non includono alcun carattere in quella corrispondenza. La tabella sotto riportata elenca alcuni tra gli esempi più comuni. Per ulteriori informazioni, si consultino i siti riportati nella sezione <link linkend="app.regex.tools" endterm="app.regex.tools.title"/>.</para>
 
-      <table id="app.regex.boundary.matchers">
-        <title id="app.regex.boundary.matchers.title">Espressioni che contrassegnano una posizione</title>
+      <table xml:id="app.regex.boundary.matchers">
+        <title xml:id="app.regex.boundary.matchers.title">Espressioni che contrassegnano una posizione</title>
       
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -981,13 +976,13 @@
     </section>  
   </section>
 
-  <section id="app.regex.more.examples">
-    <title id="app.regex.more.examples.title">Altri esempi</title>
+  <section xml:id="app.regex.more.examples">
+    <title xml:id="app.regex.more.examples.title">Altri esempi</title>
 
     <para>Questa sezione riporta alcuni esempi che dimostrano come le varie espressioni descritte sopra possono essere combinate per eseguire ricerche avanzate in OmegaT.</para>
     
-    <table id="regex.examples">
-      <title id="regex.examples.title">Esempi di espressioni regolari che utilizzano le espressioni riportate descritte sopra</title>
+    <table xml:id="regex.examples">
+      <title xml:id="regex.examples.title">Esempi di espressioni regolari che utilizzano le espressioni riportate descritte sopra</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1008,7 +1003,7 @@
           </row>
 
           <row>
-            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>Trova le frasi che iniziano per virgola seguite da un carattere di spazio bianco, contiene una o più parole (incluse quelle racchiuse tra virgolette doppie, contrazioni, e i nomi file con estensione), e termina con una virgola o un punto.</para>
             </entry>
@@ -1083,30 +1078,30 @@
     </table>
   </section>
 
-  <section id="app.regex.tools">
-    <title id="app.regex.tools.title">Riferimenti</title>
+  <section xml:id="app.regex.tools">
+    <title xml:id="app.regex.tools.title">Riferimenti</title>
 
     <para>Sebbene OmegaT non offra colorazioni elaborate per le espressioni regolari, è possibile sfruttare questa funzionalità utilizzando la finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/> in quanto OmegaT colora i risultati delle corrispondenze.</para>
     
     <para>Di seguito sono riportate alcune risorse aggiuntive.</para>
 
     <para>Il riferimento tecnico di Java è utile come riferimento standard.<variablelist>
-        <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentazione Java Regex</ulink></term>
+        <varlistentry xml:id="app.regex.java">
+          <term xml:id="app.regex.java.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentazione Java Regex</link></term>
           <listitem>
             <para>Il riferimento ufficiale per le espressioni regolari utilizzate in Java.</para>
           </listitem>
         </varlistentry>
       </variablelist>Per approfondire l'uso delle espressioni regolari, sono risultati molto utili i due siti di seguito riportati:<variablelist>
-        <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regex101">
+          <term xml:id="app.regex.tools.regex101.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://regex101.com">https://regex101.com</link></term>
           <listitem>
-            <para>Un &quot;verificatore&quot; di espressioni regolari in linea che permette di inserire il testo da ricercare e le espressioni regolari da provare.</para>
+            <para>Un "verificatore" di espressioni regolari in linea che permette di inserire il testo da ricercare e le espressioni regolari da provare.</para>
           </listitem>
         </varlistentry>
 
-        <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regular.expression.info">
+          <term xml:id="app.regex.tools.regular.expression.info.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info">https://www.regular-expressions.info</link></term>
           <listitem>
             <para>Punto di riferimento nel web, tra le più complete esercitazioni sulle espressioni regolari.</para>
           </listitem>

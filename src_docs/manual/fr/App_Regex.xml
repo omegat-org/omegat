@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="app.regex">
-  <title id="app.regex.title">Expressions régulières</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.regex">
+  <title xml:id="app.regex.title">Expressions régulières</title>
 
   <para>Cette annexe s’adresse aux utilisatrices qui souhaitent explorer une technique puissante pour améliorer leur productivité. Souvent perçues comme étant intimidantes et complexes, même les expressions régulières les plus simples (souvent abrégées <emphasis>regex</emphasis> ou <emphasis>regexp</emphasis>) sont extrêmement utiles, non seulement dans OmegaT mais également dans beaucoup d’autres applications utilisées au quotidien, avec quelques variations.</para>
 
@@ -79,15 +74,15 @@
       <listitem>
         <para>Les règles de segmentation et les masques de langage sont définis à l’aide d’expressions régulières. Vous pouvez les modifier librement pour améliorer la segmentation d’un document ou ajouter des règles générales supplémentaires. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
 
-        <para>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression &quot;avant&quot; pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression &quot;après&quot; pour définir le modèle de texte situé après cette position.</para>
+        <para>Les règles de segmentation ou d’exception définissent la position dans un segment dans lequel un fractionnement sera effectué ou non. Deux expressions régulières sont nécessaires pour définir cette position : une expression "avant" pour définir le masque de texte situé avant l’endroit où la règle doit s’appliquer, et une expression "après" pour définir le modèle de texte situé après cette position.</para>
 
 		<para>Un masque de langue qui correspond à la langue source du projet s’appliquera à ce projet.</para>
 	  </listitem>
     </varlistentry>
   </variablelist>
 
-  <section id="app.regex.four.rules">
-    <title id="app.regex.four.rules.title">Les 4 règles</title>
+  <section xml:id="app.regex.four.rules">
+    <title xml:id="app.regex.four.rules.title">Les 4 règles</title>
 
     <para>Les expressions régulières sont utilisées pour rechercher du texte, y compris des caractères qui ne sont pas visibles à l’écran ou à l’impression, comme les espaces, les tabulations ou les sauts de ligne. Toute expression donnée soit <emphasis>correspond</emphasis>, soit <emphasis>ne <emphasis role="bold">correspond</emphasis> pas</emphasis> à un mot, une phrase ou une autre séquence textuelle.</para>
     
@@ -147,8 +142,8 @@
     </variablelist>
   </section>
 
-  <section id="app.regex.twelve.characters">
-    <title id="app.regex.twelve.characters.title">Les 12 caractères</title>
+  <section xml:id="app.regex.twelve.characters">
+    <title xml:id="app.regex.twelve.characters.title">Les 12 caractères</title>
   
     <para>Les douze caractères particuliers sont la <emphasis>barre oblique inversée</emphasis> <literal>\</literal>, le <emphasis>caret</emphasis> <literal>^</literal>, le <emphasis>symbole dollar</emphasis> <literal>$</literal>, le <emphasis>point</emphasis> <literal>.</literal>, la <emphasis>barre verticale</emphasis> (ou <emphasis>symbole de « pipe  »</emphasis>) <literal>|</literal>, le <emphasis>point d’interrogation</emphasis> <literal> ? </literal>, l’<emphasis>astérisque</emphasis> (ou <emphasis>étoile</emphasis>) <literal>*</literal>, le <emphasis>signe plus</emphasis> <literal>+</literal>, la <emphasis>parenthèse</emphasis> ouvrante <literal>(</literal>, la <emphasis>parenthèse</emphasis> fermante, <literal>)</literal>, le <emphasis>crochet</emphasis> ouvrant <literal>[</literal>, et l’<emphasis>accolade</emphasis> <literal>{</literal> ouvrante.</para>
 
@@ -319,7 +314,7 @@
                     <entry>
                       <para>Des combinaisons contenant trois lettres qui commencent par « d » et se terminent par « s », mais qui sont réparties sur plus d’une ligne.</para>
                       <para>Quelle est la lettre manquante ?</para>
-                        <simplelist>
+                        <simplelist type="vert">
                           <member><literal>d</literal></member>
                           <member><literal/></member>
                           <member><literal>s</literal></member>
@@ -335,7 +330,7 @@
         <varlistentry>
           <term>La BARRE VERTICALE : <literal>|</literal></term>
           <listitem>
-            <para>Ce caractère fonctionne comme un &quot;OU&quot;, permettant de choisir une des expressions qui le précèdent ou le suivent.</para>
+            <para>Ce caractère fonctionne comme un "OU", permettant de choisir une des expressions qui le précèdent ou le suivent.</para>
 
             <informaltable>
               <tgroup cols="2">
@@ -351,7 +346,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist type="vert">
                           <member>« Une pomme par jour… »</member>
                           <member>« La prunelle de mes yeux… »</member>
                         </simplelist>
@@ -362,7 +357,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist>
+                      <para>Le premier mot « Une » ou « La » dans des phrases telles que : <simplelist type="vert">
                           <member>« Un récit intitulé <emphasis>Une Héroïne Inconnue</emphasis>. »</member>
                           <member>« Il travaille pour le journal <emphasis>La Provence</emphasis>. »</member>
                         </simplelist>
@@ -389,13 +384,13 @@
                   <row>
                     <entry/>
                     <entry>
-                      <literal>est?␣</literal> ( sachant que &quot;␣&quot; représente une espace unique).</entry>
+                      <literal>est?␣</literal> ( sachant que "␣" représente une espace unique).</entry>
                   </row>
 
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Soit le « est » ou le « es » dans : <simplelist>
+                      <para>Soit le « est » ou le « es » dans : <simplelist type="vert">
                           <member>« C’est une bonne question. »</member>
                           <member>« Tu es un excellent médecin. »</member>
                         </simplelist>
@@ -408,7 +403,7 @@
                   <row>
                     <entry>Ne correspond pas à</entry>
                     <entry>
-                      <para>Ni le « est » ni le « es » dans : <simplelist>
+                      <para>Ni le « est » ni le « es » dans : <simplelist type="vert">
                           <member>Le verbe être : « est » (ou « es »).</member>
                         </simplelist>
                       </para>
@@ -559,7 +554,7 @@
                     <entry>
                       <para>Le nombre séquentiel (y compris les parenthèses) au début de chaque ligne dans une liste comme :</para>
 
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>1) Pommes</member>
                         <member>2) Oranges</member>
                         <member>3) Poires</member>
@@ -573,7 +568,7 @@
                       <para>Les nombres séquentiels qui ne sont pas au début d’une ligne.</para>
 
                       <para>Procédez comme suit :</para>
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>Étape 1) Préparation</member>
                         <member>Étape 2) …</member>
                       </simplelist>
@@ -664,8 +659,8 @@
       </variablelist>
   </section>
 
-  <section id="app.regex.types.of.expressions">
-    <title id="app.regex.types.of.expressions.title">De nombreuses expressions</title>
+  <section xml:id="app.regex.types.of.expressions">
+    <title xml:id="app.regex.types.of.expressions.title">De nombreuses expressions</title>
 
     <para>Cette partie présente différents types d’expressions régulières, allant des plus simples aux plus complexes.</para>
       
@@ -673,12 +668,12 @@
       <para>Rappelez-vous que la plupart des <emphasis>caractères alphabétiques</emphasis> précédés d’un <literal>\</literal> se transforment en une expression qui représente <emphasis>non pas le caractère lui-même, mais la signification particulière qui lui est associée</emphasis>.</para>
     </note>
 
-    <section id="app.regex.types.of.expressions.simple.expressions">
-      <title id="app.regex.types.of.expressions.simple.expressions.title">Les expressions simples</title>
+    <section xml:id="app.regex.types.of.expressions.simple.expressions">
+      <title xml:id="app.regex.types.of.expressions.simple.expressions.title">Les expressions simples</title>
       <para>L’expression régulière la plus simple consiste en un seul caractère, ou en la combinaison d’une <literal>\</literal> et d’un caractère constituant une unité avec une seule signification.</para>
       
-      <table id="app.regex.characters">
-        <title id="app.regex.characters.title">Caractères</title>
+      <table xml:id="app.regex.characters">
+        <title xml:id="app.regex.characters.title">Caractères</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -723,8 +718,8 @@
       </table>
     </section>
 
-    <section id="app.regex.types.of.expressions.case">
-      <title id="app.regex.types.of.expressions.case.title">Casse</title>
+    <section xml:id="app.regex.types.of.expressions.case">
+      <title xml:id="app.regex.types.of.expressions.case.title">Casse</title>
 
       
       <para>Les recherches ordinaires d’OmegaT sont insensibles à la casse par défaut : elles correspondent à la fois aux caractères en majuscules et en minuscules, sauf si vous choisissez d’activer l’option <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Dans ce cas, l’ensemble de l’expression de recherche sera sensible la casse.</para>
@@ -749,8 +744,8 @@
       <para>Vous pouvez en profiter pour contrôler avec précision la sensibilité à la casse dans les recherches. Par exemple, supposons que vous souhaitiez trouver des exemples de « OmegaT » et de « omegat », mais pas de « OMEGAT ». Vous pouvez utiliser l’expression suivante : <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, qui correspond à un « o » insensible à la casse, suivi d’un « mega » sensible à la casse, suivi d’un « t » insensible à la casse.</para>
     </section>
 
-    <section id="app.regex.types.of.expressions.classes">
-      <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+    <section xml:id="app.regex.types.of.expressions.classes">
+      <title xml:id="app.regex.types.of.expressions.classes.title">Classes</title>
 
       <para>Les expressions régulières permettent de créer des ensembles de caractères, appelés <emphasis>classes</emphasis>. Les recherches correspondront à n’importe quel caractère de l’ensemble.</para>
 
@@ -765,8 +760,8 @@
 	  <para>De nombreux ensembles fréquemment utilisés ont une forme abrégée consistant en une barre oblique inverse suivie d’une lettre de l’alphabet. Par exemple, <literal>\d</literal> est une abréviation de <literal>[0-9]</literal>, qui correspond à n’importe quel chiffre entre 0 et 9. Dans de nombreux cas, la majuscule correspondante est utilisée pour annuler la classe : <literal>\D</literal> correspond à tout caractère qui n’est <emphasis role="bold">pas</emphasis> un chiffre.</para>
       <para>Le tableau ci-dessous fournit plusieurs exemples supplémentaires. Ces classes ne représentent pas uniquement la lettre utilisée pour former l’abréviation.</para>
       
-      <table id="app.regex.classes">
-        <title id="app.regex.classes.title">Exemples de classes</title>
+      <table xml:id="app.regex.classes">
+        <title xml:id="app.regex.classes.title">Exemples de classes</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -842,10 +837,10 @@
       
       <para>Les expressions régulières ne sont pas limitées aux caractères alphanumériques. Elles comprennent l’ensemble des caractères Unicode. Utilisez les blocs, les scripts et les catégories Unicode pour spécifier des classes de caractères en dehors de la gamme des caractères alphanumériques. Quelques exemples sont présentés dans le tableau ci-dessous.</para>
 
-      <para>Consultez également le document <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> pour vous familiariser avec les expressions régulières Unicode.</para>
+      <para>Consultez également le document <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</link> pour vous familiariser avec les expressions régulières Unicode.</para>
 
-      <table id="app.regex.unicode.blocks">
-        <title id="app.regex.unicode.blocks.title">Blocs, scripts et catégories Unicode</title>
+      <table xml:id="app.regex.unicode.blocks">
+        <title xml:id="app.regex.unicode.blocks.title">Blocs, scripts et catégories Unicode</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -860,7 +855,7 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>Un caractère du bloc grec (<ulink url="https://unicode.org/reports/tr18/#Blocks">bloc Unicode</ulink>)</para>
+                <para>Un caractère du bloc grec (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Blocks">bloc Unicode</link>)</para>
 				
                 <para><literal>\P{InGreek}</literal> est tout caractère qui n’est <emphasis role="bold">pas</emphasis> dans le bloc grec.</para>
               </entry>
@@ -869,21 +864,21 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>Un logogramme (caractère <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) présent dans les langues CJC (<ulink url="https://unicode.org/reports/tr18/#Script_Property">script Unicode</ulink>).</para>
+                <para>Un logogramme (caractère <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) présent dans les langues CJC (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Script_Property">script Unicode</link>).</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Lu}</literal></entry>
               <entry>
-                <para>Une lettre majuscule (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</ulink>)</para>
+                <para>Une lettre majuscule (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Sc}</literal></entry>
               <entry>
-                <para>Un symbole monétaire, qui est également une <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</ulink>.</para>
+                <para>Un symbole monétaire, qui est également une <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">catégorie Unicode</link>.</para>
               </entry>
             </row>
           </tbody>
@@ -891,13 +886,13 @@
       </table>
     </section>
 
-    <section id="app.regex.more.advanced.expressions">
-      <title id="app.regex.more.advanced.expressions.title">Expressions plus avancées</title>
+    <section xml:id="app.regex.more.advanced.expressions">
+      <title xml:id="app.regex.more.advanced.expressions.title">Expressions plus avancées</title>
       
       <para>Certaines expressions précisent un emplacement plutôt qu’un caractère. Elles indiquent où la correspondance doit être recherchée dans le texte, mais n’incluent aucun caractère dans cette correspondance. Le tableau ci-dessous énumère les exemples les plus communs. Consultez les sites de la section <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> pour plus d’informations.</para>
 
-      <table id="app.regex.boundary.matchers">
-        <title id="app.regex.boundary.matchers.title">Expressions qui indiquent un emplacement</title>
+      <table xml:id="app.regex.boundary.matchers">
+        <title xml:id="app.regex.boundary.matchers.title">Expressions qui indiquent un emplacement</title>
       
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -979,13 +974,13 @@
     </section>  
   </section>
 
-  <section id="app.regex.more.examples">
-    <title id="app.regex.more.examples.title">Plus d’exemples</title>
+  <section xml:id="app.regex.more.examples">
+    <title xml:id="app.regex.more.examples.title">Plus d’exemples</title>
 
     <para>Cette section présente quelques exemples démontrant comment les différentes expressions décrites ci-dessus peuvent être combinées pour effectuer des recherches efficaces dans OmegaT.</para>
     
-    <table id="regex.examples">
-      <title id="regex.examples.title">Exemples d’expressions régulières utilisant les expressions présentées ci-dessus</title>
+    <table xml:id="regex.examples">
+      <title xml:id="regex.examples.title">Exemples d’expressions régulières utilisant les expressions présentées ci-dessus</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1006,7 +1001,7 @@
           </row>
 
           <row>
-            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>Trouver les parties commençant par une virgule suivie d’un caractère d’espacement, contenant un ou plusieurs mots (y compris les mots entre guillemets, les contractions et les noms de fichiers avec une extension) et se terminant par une virgule ou un point.</para>
             </entry>
@@ -1081,27 +1076,27 @@
     </table>
   </section>
 
-  <section id="app.regex.tools">
-    <title id="app.regex.tools.title">Références</title>
+  <section xml:id="app.regex.tools">
+    <title xml:id="app.regex.tools.title">Références</title>
 
     <para>Bien qu’OmegaT n’offre pas de couleurs extravagantes pour vos expressions régulières, vous pouvez vous exercer en utilisant la fenêtre <link linkend="windows.text.search" endterm="windows.text.search.title"/>, car OmegaT colore les résultats de la recherche.</para>
     
     <para>Quelques ressources supplémentaires sont présentées ci-dessous.</para>
 
-    <para>La référence technique Java est utile en tant que référence de base. <variablelist> <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</ulink></term>
+    <para>La référence technique Java est utile en tant que référence de base. <variablelist> <varlistentry xml:id="app.regex.java">
+          <term xml:id="app.regex.java.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</link></term>
           <listitem>
             <para>La référence officielle pour les expressions régulières utilisées en Java.</para>
           </listitem>
-        </varlistentry> </variablelist> Si vous souhaitez en savoir plus sur l’utilisation des expressions régulières, nous vous recommandons les deux sites ci-dessous. <variablelist> <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+        </varlistentry> </variablelist> Si vous souhaitez en savoir plus sur l’utilisation des expressions régulières, nous vous recommandons les deux sites ci-dessous. <variablelist> <varlistentry xml:id="app.regex.tools.regex101">
+          <term xml:id="app.regex.tools.regex101.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://regex101.com">https://regex101.com</link></term>
           <listitem>
             <para>Un outil de correspondance d’expressions régulières en ligne qui vous permet de saisir le texte que vous recherchez et les expressions régulières que vous voulez tester.</para>
           </listitem>
         </varlistentry>
 
-        <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regular.expression.info">
+          <term xml:id="app.regex.tools.regular.expression.info.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info">https://www.regular-expressions.info</link></term>
           <listitem>
             <para>L’un des tutoriels et références les plus complets sur le web en ce qui concerne les expressions régulières.</para>
           </listitem>

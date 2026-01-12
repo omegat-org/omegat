@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.segmentation">
-  <title id="app.segmentation.title">Segmentation</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.segmentation">
+  <title xml:id="app.segmentation.title">Segmentation</title>
 
-  <section id="dialog.preferences.segmentation.setup.type">
-	<title id="dialog.preferences.segmentation.setup.type.title">Paragraphe ou phrase ?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.type">
+	<title xml:id="dialog.preferences.segmentation.setup.type.title">Paragraphe ou phrase ?</title>
 	
 	<para>Les outils à mémoire de traduction travaillent avec des unités textuelles appelées segments. Lorsqu’une traduction est saisie, le segment contenant le texte source est conservé avec sa traduction dans la mémoire du projet, et est subséquemment utilisé pour correspondre avec d’autres segments source dans le projet.</para>
 
@@ -19,8 +18,8 @@
 	<para>La <emphasis>segmentation par phrases</emphasis> repose sur certaines règles (appelées <emphasis>règles de segmentation</emphasis>) qui définissent ce qui constitue une phrase dans la langue source. Ce paramètre est plus efficace avec les documents contenant des répétitions ou des phrases similaires, tels que des documents techniques ou juridiques.</para>
 
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentation au niveau des paragraphes</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentation au niveau des paragraphes</term>
 
 		<listitem>
 		  <para>OmegaT effectue d’abord une analyse du texte pour procéder à une segmentation au niveau des paragraphes. Ce processus repose uniquement sur la structure du fichier source pour produire les segments.</para>
@@ -29,8 +28,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
-        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentation au niveau des phrases</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentation au niveau des phrases</term>
 
         <listitem>
 		  <para>Après avoir segmenté le fichier source en unités structurelles, OmegaT divise davantage ces unités en segments.</para>
@@ -55,8 +54,8 @@
     </variablelist>
   </section>
   
-  <section id="dialog.preferences.segmentation.setup.scope">
-	<title id="dialog.preferences.segmentation.setup.scope.title">Globales ou locales ?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.scope">
+	<title xml:id="dialog.preferences.segmentation.setup.scope.title">Globales ou locales ?</title>
 
 	<note>
 	  <para>Les mêmes mécanismes et boites de dialogue sont utilisés pour définir les règles globales et locales de segmentation.</para>
@@ -72,8 +71,8 @@
   </section>
 
 
-  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Règles</title>
+  <section xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Règles</title>
 	<para>OmegaT fournit des règles prédéfinies de segmentation, et vous pouvez utiliser des expressions régulières pour les modifier. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
 
 	<para>Pour rappel, les règles fonctionnent de la manière suivante : lorsqu’une règle correspond, OmegaT place un marqueur à l’emplacement de la correspondance afin que les règles suivantes ignorent cet emplacement. C’est la raison pour laquelle les règles d’exception doivent être appliquées avant les règles de segmentation.</para>
@@ -82,8 +81,8 @@
 	  <para>Si vous changez la segmentation pendant la traduction, vous devrez recharger le projet afin que celle-ci soit prise en compte. Ce procédé va diviser ou fusionner certains segments précédemment traduits, qui ne seront donc plus considérés comme traduits. Néanmoins, leur traduction originale sera toujours dans la mémoire du projet.</para>
 	</warning>
 
-	<table id="segmentation.simple.examples">
-	  <title id="segmentation.simple.examples.title">Quelques exemples simples</title>
+	<table xml:id="segmentation.simple.examples">
+	  <title xml:id="segmentation.simple.examples.title">Quelques exemples simples</title>
       <tgroup cols="5">
 		<colspec align="left" colnum="1"/>
 		<colspec align="left" colnum="2"/>

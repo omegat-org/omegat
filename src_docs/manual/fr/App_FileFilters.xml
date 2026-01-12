@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="file.filters">
-  <title id="file.filters.title">Filtres de fichiers</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="file.filters">
+  <title xml:id="file.filters.title">Filtres de fichiers</title>
 
   <warning>
 	<para>Les filtres de fichiers sont soit locaux et spécifiques à un projet donné, soit globaux et disponibles pour tous les projets qui partagent un dossier de configuration.</para>
@@ -42,8 +37,8 @@
 
   <para>Les modifications des filtres de fichiers locaux sont enregistrées dans le fichier <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, situé dans le dossier du projet. Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus. La suppression de ce fichier réinitialise aussi les préférences de filtre et ramène le projet aux filtres de fichiers globaux.</para>
 
-  <section id="file.filters.general">
-	<title id="file.filters.general.title">Préférences communes</title>
+  <section xml:id="file.filters.general">
+	<title xml:id="file.filters.general.title">Préférences communes</title>
 	  
 	<variablelist>
 	  <varlistentry>
@@ -79,8 +74,8 @@
 	</variablelist>
   </section>
 	
-  <section id="edit.filter.dialog">
-    <title id="edit.filter.dialog.title">Édition</title>
+  <section xml:id="edit.filter.dialog">
+    <title xml:id="edit.filter.dialog.title">Édition</title>
 	
     <para>Double-cliquez sur les champs modifiables afin d’effectuer des modifications simples ou cliquez sur le bouton <guibutton>Modifier…</guibutton> afin d’accéder à la boite de dialogue de modification.</para>
 
@@ -90,8 +85,8 @@
 
 	<para>Utilisez le menu déroulant <guilabel>Variables du nom de fichier</guilabel> afin de personnaliser le nom du fichier cible.</para>
 
-    <section id="source.filetype.and.filename.pattern">
-	  <title id="source.filetype.and.filename.pattern.title">Masque de nom de fichier source</title>
+    <section xml:id="source.filetype.and.filename.pattern">
+	  <title xml:id="source.filetype.and.filename.pattern.title">Masque de nom de fichier source</title>
 
 	  <para>Afin d’associer un filtre à un fichier, OmegaT vérifie son extension et essaie de le faire correspondre à un modèle de nom de fichier source dans un filtre.</para>
 
@@ -109,8 +104,8 @@
 	  <para>Par exemple, utilisez le masque <literal>read*</literal> si vous souhaitez que le filtre texte traite les fichiers lisez-moi (<literal>readme, read.me</literal>, ou <literal>readme.txt</literal>).</para>
     </section>
 
-    <section id="source.and.target.files.encoding">
-	  <title id="source.and.target.files.encoding.title">Encodage des fichiers source et traduits</title>
+    <section xml:id="source.and.target.files.encoding">
+	  <title xml:id="source.and.target.files.encoding.title">Encodage des fichiers source et traduits</title>
 
 	  <para>La plupart des formats de fichiers permettent plusieurs encodages. Par défaut, l’encodage du fichier traduit est le même que celui du fichier source.</para>
 
@@ -135,8 +130,8 @@
 	  </itemizedlist>
     </section>
 
-    <section id="target.name">
-	  <title id="target.name.title">Noms des fichiers traduits</title>
+    <section xml:id="target.name">
+	  <title xml:id="target.name.title">Noms des fichiers traduits</title>
 	  
 	  <para>Les fichiers dans le dossier <link linkend="project.folder.target" endterm="project.folder.target.title"/> sont remplacés à chaque fois que vous les créez, s’ils sont créés avec le même nom.</para>
 
@@ -199,7 +194,7 @@
           <listitem>
 			<para>heure du système lors de la création du fichier</para>
 
-			<para>Voir la <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">documentation Oracle</ulink> pour des exemples.</para>
+			<para>Voir la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">documentation Oracle</link> pour des exemples.</para>
           </listitem>
 		</varlistentry>
 
@@ -250,8 +245,8 @@
 		
 	  <para>Si l’utilisation de plusieurs points rend difficile l’identification du nom du fichier et de son extension, il est possible d’utiliser les variables de la forme <literal>${nameOnly-</literal><emphasis>nombre</emphasis>} ou <literal>${extension-</literal><emphasis>nombre}</emphasis> pour préciser quels sont les éléments qui font partie du nom et ceux qui font partie de l’extension, comme on peut le voir dans l’exemple ci-dessous.</para>
 
-	  <example id="target.name.example">
-		<title id="target.name.example.title">Noms de fichier cible</title>
+	  <example xml:id="target.name.example">
+		<title xml:id="target.name.example.title">Noms de fichier cible</title>
 		<para>Pour un fichier source nommé Document.xx.docx, utiliser les variantes de variables ci-dessous produira les résultats suivants :</para>
 
 		<itemizedlist>
@@ -283,16 +278,16 @@
     </section>
   </section>
 	
-  <section id="filters.options">
-    <title id="filters.options.title">Options</title>
+  <section xml:id="filters.options">
+    <title xml:id="filters.options.title">Options</title>
 
     <para>Plusieurs filtres proposent des options. Sélectionnez le filtre dans la liste et cliquez sur <guibutton>Options…</guibutton> pour le modifier.</para>
 
 	<para>Les options disponibles sont :</para>
 
 	<variablelist>
-	  <varlistentry id="file.filters.text">
-		<term id="file.filters.text.title">Fichiers texte</term>
+	  <varlistentry xml:id="file.filters.text">
+		<term xml:id="file.filters.text.title">Fichiers texte</term>
 		<listitem>
 		  <para>
 			<variablelist>
@@ -330,8 +325,8 @@
 		</listitem>
 	  </varlistentry>
 		
-	  <varlistentry id="file.filter.microsoft">
-		<term id="file.filter.microsoft.title">Fichiers Microsoft Office Open XML</term>
+	  <varlistentry xml:id="file.filter.microsoft">
+		<term xml:id="file.filter.microsoft.title">Fichiers Microsoft Office Open XML</term>
 		<listitem>
 		  <warning>
 			<para>Le <code>Microsoft Office Open XML (filtre obsolète)</code> est le filtre OmegaT originel. Ne l’utilisez que pour éviter les problèmes de compatibilité avec les projets précédents contenant les fichiers que vous avez traités avec ce filtre.</para>
@@ -398,8 +393,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xhtml">
-		<term id="file.filters.xhtml.title">Fichiers XHTML</term>
+	  <varlistentry xml:id="file.filters.xhtml">
+		<term xml:id="file.filters.xhtml.title">Fichiers XHTML</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -423,18 +418,18 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>L’attribut &quot;content&quot; ignoré des balises &lt;meta&gt;</term>
+			  <term>L’attribut "content" ignoré des balises &lt;meta&gt;</term>
 			  <listitem>
-				<para>Définissez les valeurs des attributs de la balise &lt;meta&gt; pour lesquelles l’attribut &quot;content&quot; associé ne sera pas traduit.</para>
+				<para>Définissez les valeurs des attributs de la balise &lt;meta&gt; pour lesquelles l’attribut "content" associé ne sera pas traduit.</para>
 
 				<para>N’ajoutez pas de guillemets et séparez les valeurs avec une virgule.</para>
 				
-				<example id="file.filters.xhtml.example">
-				  <title id="file.filters.xhtml.example.title">Ignorer la partie &quot;content&quot; de &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
+				<example xml:id="file.filters.xhtml.example">
+				  <title xml:id="file.filters.xhtml.example.title">Ignorer la partie "content" de &lt;meta name="robots" content="index, follow"&gt;</title>
 				  <para>Pour ignorer ce contenu :</para>
 
-				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
-				  follow&quot;&gt;</code></para>
+				  <para><code>&lt;meta name="robots" content="index,
+				  follow"&gt;</code></para>
 
 				  <para>utilisez :</para>
 
@@ -450,16 +445,16 @@
 
 				<para>N’ajoutez pas de guillemets et séparez les valeurs avec une virgule.</para>
 
-				<example id="file.filters.xhtml.ignore.translate.no">
-				  <title id="file.filters.xhtml.ignore.translate.no.title">Ignorer les balises qui contiennent translate=&quot;no&quot;</title>
+				<example xml:id="file.filters.xhtml.ignore.translate.no">
+				  <title xml:id="file.filters.xhtml.ignore.translate.no.title">Ignorer les balises qui contiennent translate="no"</title>
 				  <para>Pour ignorer ce contenu :</para>
 
-				  <para><code>&lt;span translate=&quot;no&quot;&gt;This content
+				  <para><code>&lt;span translate="no"&gt;This content
 				  is not translatable&lt;/span&gt;</code></para>
 
 				  <para>utilisez : <literal>translate=no</literal>.</para>
 
-				  <para>Tous les tags marqués avec un <code> translate=&quot;no&quot;</code> seront ignorés.</para>
+				  <para>Tous les tags marqués avec un <code> translate="no"</code> seront ignorés.</para>
 				</example>
 			  </listitem>
 			</varlistentry>
@@ -522,8 +517,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.ftl">
-		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+	  <varlistentry xml:id="file.filters.mozilla.ftl">
+		<term xml:id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -536,8 +531,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.dtd">
-		<term id="file.filters.mozilla.dtd.title">DTD Mozilla</term>
+	  <varlistentry xml:id="file.filters.mozilla.dtd">
+		<term xml:id="file.filters.mozilla.dtd.title">DTD Mozilla</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -550,8 +545,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.po">
-		<term id="file.filters.po.title">Fichiers PO</term>
+	  <varlistentry xml:id="file.filters.po">
+		<term xml:id="file.filters.po.title">Fichiers PO</term>
 		<listitem>
 			<para>Le filtre vérifie les variables printf ('%s, etc.) par défaut. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> pour en savoir plus.</para>
 
@@ -608,8 +603,8 @@
 		  </listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.moodle.php">
-		<term id="file.filters.moodle.php.title">PHP Moodle</term>
+	  <varlistentry xml:id="file.filters.moodle.php">
+		<term xml:id="file.filters.moodle.php.title">PHP Moodle</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -622,8 +617,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filter.java.bundle">
-		<term id="file.filter.java.bundle.title">Paquets de ressources Java</term>
+	  <varlistentry xml:id="file.filter.java.bundle">
+		<term xml:id="file.filter.java.bundle.title">Paquets de ressources Java</term>
 		<listitem>
 			<para>Le filtre vérifie les masques Java MessageFormat (ex. : \{0\}) par défaut. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> pour en savoir plus.</para>
 
@@ -652,8 +647,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.odf">
-		<term id="file.filters.odf.title">Fichiers Open Document Format (ODF)</term>
+	  <varlistentry xml:id="file.filters.odf">
+		<term xml:id="file.filters.odf.title">Fichiers Open Document Format (ODF)</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -666,8 +661,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xliff">
-		<term id="file.filters.xliff.title">XLIFF (filtre obsolète)</term>
+	  <varlistentry xml:id="file.filters.xliff">
+		<term xml:id="file.filters.xliff.title">XLIFF (filtre obsolète)</term>
 		<listitem>
 		  <warning>
 			<para>Ce filtre est le filtre XLIFF originel d’OmegaT. Ne l’utilisez que pour éviter les problèmes de compatibilité avec les projets précédents contenant des fichiers que vous avez traités avec ce filtre.</para>
@@ -699,7 +694,7 @@
 			  <varlistentry>
 				<term>Statut du segment cible</term>
 				<listitem>
-				  <para>si cette option est cochée, OmegaT passe l’état de la cible XLIFF en &quot;needs-review-translation&quot; au lieu de &quot;translated&quot;.</para>
+				  <para>si cette option est cochée, OmegaT passe l’état de la cible XLIFF en "needs-review-translation" au lieu de "translated".</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>

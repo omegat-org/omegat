@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Resolució de problemes</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.restore.your.data">
+  <title xml:id="how.to.restore.your.data.title">Resolució de problemes</title>
 
   <warning>
 	<para>L'OmegaT és una aplicació robusta i fiable; així i tot, és bona idea prendre precaucions per a protegir-se contra la pèrdua de dades durant l'ús, igual que amb qualsevol altra aplicació.</para>
   </warning>
 
-  <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">Còpies de seguretat automàtiques</title>
+  <section xml:id="how.to.restore.your.data.automatic.backup">
+	<title xml:id="how.to.restore.your.data.automatic.backup.title">Còpies de seguretat automàtiques</title>
 
 	<para>L'OmegaT crea còpies de seguretat dels paràmetres del projecte per a assegurar que pot recuperar-los en cas que hi hagi un problema. Consulteu la secció <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> per a conèixer més detalls.</para>
 	  
@@ -56,8 +55,8 @@
 
   </section>
 
-  <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">Heu perdut la traducció?</title>
+  <section xml:id="how.to.restore.your.data.lost.in.translation">
+	<title xml:id="how.to.restore.your.data.lost.in.translation.title">Heu perdut la traducció?</title>
 
 	<para>Fins i tot si temeu haver perdut les dades de la traducció, és probable que estiguin emmagatzemades de forma segura en la còpia de seguretat més recent de la memòria, que normalment té menys d'uns minuts d'antiguitat.</para>
 
@@ -92,8 +91,8 @@
 	</note>
   </section>
 
-  <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">El projecte està blocat?</title>
+  <section xml:id="how.to.restore.your.data.project.locked">
+	<title xml:id="how.to.restore.your.data.project.locked.title">El projecte està blocat?</title>
 
 	<para>En casos poc habituals en què l'ordinador es bloqui i l'OmegaT no tingui temps de tancar-se correctament, el sistema operatiu pot blocar el fitxer <filename>omegat.project</filename> i impedir que es pugui tornar a obrir després de reiniciar l'ordinador.</para>
 
@@ -124,8 +123,8 @@
 	<para>Aquesta acció obrirà el projecte amb el fitxer de còpia de seguretat <filename>omegat.project</filename> creat automàticament.</para>
   </section>
   
-  <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">El projecte no s'obre?</title>
+  <section xml:id="how.to.restore.your.data.project.wont.open">
+	<title xml:id="how.to.restore.your.data.project.wont.open.title">El projecte no s'obre?</title>
 
 	<para>En casos poc habituals en què l'ordinador es bloqui i l'OmegaT no tingui temps de tancar-se correctament, alguns fitxers importants poden quedar trencats i impedir que es pugui tornar a obrir el projecte després de reiniciar l'ordinador.</para>
 
@@ -160,8 +159,8 @@
 	<para>Aquesta acció restaurarà l'estat de la traducció en el projecte nou al moment en què es va crear la memòria de traducció del projecte seleccionada en el projecte original.</para>
   </section>
 
-  <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">El fitxer traduït no s'obre?</title>
+  <section xml:id="how.to.restore.your.data.translated.file.broken">
+	<title xml:id="how.to.restore.your.data.translated.file.broken.title">El fitxer traduït no s'obre?</title>
 
 	<para>Molt sovint, els fitxers d'ofimàtica contenen etiquetes que s'han de copiar a la traducció per a assegurar que el fitxer traduït es pugui obrir amb l'aplicació original. En alguns casos, si falten etiquetes, el fitxer no es pot obrir.</para>
 	
@@ -192,8 +191,8 @@
 	<para>Aquesta acció corregirà qualsevol error intern de coherència de les etiquetes per no inserir correctament les etiquetes en la traducció amb l'OmegaT.</para>
   </section>
 
-  <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">L'OmegaT no té el funcionament esperat?</title>
+  <section xml:id="how.to.restore.your.data.omegat.wont.behave">
+	<title xml:id="how.to.restore.your.data.omegat.wont.behave.title">L'OmegaT no té el funcionament esperat?</title>
 
 	<para>Ha passat alguna cosa i l'OmegaT ha deixat de funcionar com esperàveu. Independentment del que proveu, no trobeu la manera de solucionar-ho. Voleu intentar una darrera possibilitat abans de demanar ajuda: reiniciar l'OmegaT amb els paràmetres per defecte.</para>
 
@@ -246,8 +245,8 @@
 	</orderedlist>
   </section>
 
-  <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">Resum</title>
+  <section xml:id="how.to.restore.your.data.summary">
+	<title xml:id="how.to.restore.your.data.summary.title">Resum</title>
 
 	<itemizedlist>
       <listitem>

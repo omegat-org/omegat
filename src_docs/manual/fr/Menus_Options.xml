@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.options">
-  <title id="menus.options.title"><guimenu>Options</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.options">
+  <title xml:id="menus.options.title"><guimenu>Options</guimenu></title>
 
   <para>Ce menu vous permet d’accéder rapidement à quelques paramètres fréquemment utilisés.</para>
   
   <variablelist>
-    <varlistentry id="menus.options.preferences">
-      <term id="menus.options.preferences.title"><guimenuitem>Préférences…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.preferences">
+      <term xml:id="menus.options.preferences.title"><guimenuitem>Préférences…</guimenuitem></term>
       <listitem>
         <para>Ouvre la boite de dialogue <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
 
@@ -17,8 +16,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.mt">
-      <term id="menus.options.mt.title"><guisubmenu>Traduction automatique</guisubmenu></term>
+    <varlistentry xml:id="menus.options.mt">
+      <term xml:id="menus.options.mt.title"><guisubmenu>Traduction automatique</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -32,8 +31,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.glossary">
-      <term id="menus.options.glossary.title"><guisubmenu>Glossaires</guisubmenu></term>
+    <varlistentry xml:id="menus.options.glossary">
+      <term xml:id="menus.options.glossary.title"><guisubmenu>Glossaires</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -47,8 +46,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.dictionary">
-      <term id="menus.options.dictionary.title"><guisubmenu>Dictionnaires</guisubmenu></term>
+    <varlistentry xml:id="menus.options.dictionary">
+      <term xml:id="menus.options.dictionary.title"><guisubmenu>Dictionnaires</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -62,15 +61,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.autocompletion">
-      <term id="menus.options.autocompletion.title"><guisubmenu>Saisie automatique</guisubmenu></term>
+    <varlistentry xml:id="menus.options.autocompletion">
+      <term xml:id="menus.options.autocompletion.title"><guisubmenu>Saisie automatique</guisubmenu></term>
       <listitem>
 		<para>Sélectionner les différentes options pour les activer ou les désactiver Voir le paramètre <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> pour en savoir plus.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.file.filters">
-      <term id="menus.options.file.filters.title"><guimenuitem>Filtres de fichiers généraux…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.file.filters">
+      <term xml:id="menus.options.file.filters.title"><guimenuitem>Filtres de fichiers généraux…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
@@ -78,8 +77,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.segmentation">
-      <term id="menus.options.segmentation.title"><guimenuitem>Règles de segmentation générales…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.segmentation">
+      <term xml:id="menus.options.segmentation.title"><guimenuitem>Règles de segmentation générales…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
@@ -87,15 +86,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.editor">
-      <term id="menus.options.editor.title"><guimenuitem>Éditeur…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.editor">
+      <term xml:id="menus.options.editor.title"><guimenuitem>Éditeur…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.access.configuration.folder">
-      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Accéder au dossier de configuration</guimenuitem></term>
+    <varlistentry xml:id="menus.options.access.configuration.folder">
+      <term xml:id="menus.options.access.configuration.folder.title"><guimenuitem>Accéder au dossier de configuration</guimenuitem></term>
       <listitem>
         <para>Ouvrir le dossier local où sont stockés les fichiers de configuration d’OmegaT.</para>
 

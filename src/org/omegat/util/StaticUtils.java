@@ -446,7 +446,9 @@ public final class StaticUtils {
      */
     public static void ensureUserScriptsDir() {
         Path userScriptsPath = getUserScriptsPath();
-        if (!Files.exists(userScriptsPath.resolve("application_startup"))) {
+        // check if the user scripts directory exists.
+        // if exists, we do not modify the contents in the folder.
+        if (!Files.exists(userScriptsPath)) {
             try {
                 // ensure default script files installed
                 File defaultScripts = Paths.get(installDir(), SCRIPTS_DIR).toFile();

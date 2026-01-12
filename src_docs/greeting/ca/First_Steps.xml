@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="ca" id="first.steps">
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="ca">
   <title>OmegaT</title>
   <section>
-	<title id="first-steps">Primers passos</title>
-	<para>Premeu <keycap>F1</keycap> o accediu al menú <guimenu> Ajuda</guimenu> per a obrir el manual d'usuari. Inclou una introducció detallada a l'OmegaT. Per a començar a utilitzar l'OmegaT amb una configuració mínima, feu el següent:<orderedlist id="first-step-list">
+	<title>Primers passos</title>
+	<para>Premeu <keycap>F1</keycap> o accediu al menú <guimenu>&gt; Ajuda</guimenu> per a obrir el manual d'usuari. Inclou una introducció detallada a l'OmegaT. Per a començar a utilitzar l'OmegaT amb una configuració mínima, feu el següent:<orderedlist id="first-step-list">
 	  <listitem>
 		<para>Utilitzeu <guimenu>&gt; Projecte</guimenu> <guimenuitem>&gt; Crea...</guimenuitem> per a crear un projecte nou.</para>
 	  </listitem>
@@ -38,7 +37,7 @@
   </section>
 
   <section>
-	<title id="freedoms">Llibertats</title>
+	<title>Llibertats</title>
 	<para>L'OmegaT és solució lliure de traducció assistida per ordinador (TAO) per a traductors professionals. Es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. Consulteu <guimenu>&gt; Ajuda</guimenu> <guimenu>&gt; Quant a</guimenu>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
 	  <listitem>
 		<para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>

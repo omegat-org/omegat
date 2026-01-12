@@ -51,7 +51,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentExportImport {
     static final int WAIT_TIME = 100;
 
-    private final EditorController controller;
+    private final IEditor controller;
     private volatile long exportLastModified = Long.MAX_VALUE;
     private final File importFile;
 
@@ -64,9 +64,9 @@ public class SegmentExportImport {
     /** The name of the file with the source exported segment */
     public static final String SOURCE_EXPORT = "source.txt";
 
-    public SegmentExportImport(EditorController controller) {
+    public SegmentExportImport(IEditor controller) {
         this.controller = controller;
-        importFile = new File(StaticUtils.getScriptDir(), "import.txt");
+        importFile = getFile("import.txt");
         new Thread() {
             public void run() {
                 try {
@@ -77,7 +77,7 @@ public class SegmentExportImport {
                             Thread.sleep(WAIT_TIME);
                         }
                     }
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException ignored) {
                 }
             }
         }.start();
@@ -136,13 +136,8 @@ public class SegmentExportImport {
         }
         exportLastModified = importFile.lastModified() + 1;
         try (FileInputStream fis = new FileInputStream(importFile)) {
-            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(),
-                    "\n");
-            UIThreadsUtil.executeInSwingThread(new Runnable() {
-                public void run() {
-                    controller.replaceEditText(text);
-                }
-            });
+            String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(), "\n");
+            UIThreadsUtil.executeInSwingThread(() -> controller.replaceEditText(text));
         } catch (IOException ex) {
             Log.log(ex);
         }

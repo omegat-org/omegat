@@ -92,6 +92,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
@@ -187,6 +188,7 @@ public final class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
+        StaticUtils.ensureUserScriptsDir();
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
@@ -626,7 +628,7 @@ public final class Main {
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script").toString());
+            File script = new File(PARAMS.get("script"));
             Log.log(OStrings.getString("CONSOLE_EXECUTE_SCRIPT", script, eventType));
             if (script.isFile()) {
                 HashMap<String, Object> binding = new HashMap<>();

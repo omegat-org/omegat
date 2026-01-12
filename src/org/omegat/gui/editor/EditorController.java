@@ -104,6 +104,8 @@ import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.issues.IIssue;
+import org.omegat.gui.issues.IssueChecker;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
@@ -1265,37 +1267,48 @@ public class EditorController implements IEditor {
 
         editor.undoManager.reset();
 
-        // validate tags if required
-        if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
-            String file = getCurrentFile();
-            new SwingWorker<Boolean, Void>() {
-                protected Boolean doInBackground() throws Exception {
-                    return Core.getTagValidation().checkInvalidTags(entry);
-                }
-
-                @Override
-                protected void done() {
-                    try {
-                        if (!get()) {
-                            Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
-                        }
-                    } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.log(Level.SEVERE, "Exception when validating tags on leave", e);
-                    }
-                }
-            }.execute();
-        }
+        checkIssuesOnLeave(entry);
 
         // team sync for save thread
         if (Core.getProject().isTeamSyncPrepared()) {
             try {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
-            } catch (InterruptedException ex) {
-            } catch (TimeoutException ex) {
+            } catch (InterruptedException | TimeoutException ignored) {
+                // Force ignore.
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                Log.log(ex);
             }
         }
+    }
+
+    // validate tags and issues if required; BUGS#1158
+    private void checkIssuesOnLeave(SourceTextEntry entry) {
+        if (!Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
+            return;
+        }
+        final String file = getCurrentFile();
+        if (file == null) {
+            return;
+        }
+
+        new SwingWorker<List<IIssue>, Void>() {
+            @Override
+            protected List<IIssue> doInBackground() throws Exception {
+                return IssueChecker.collectIssues(Pattern.quote(file), false);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    List<IIssue> issues = get();
+                    if (!issues.isEmpty()) {
+                        Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
+                    }
+                } catch (InterruptedException | ExecutionException e) {
+                    Log.logErrorRB(e, "LOG_ERROR_TAG_VALIDATION_FAILED");
+                }
+            }
+        }.execute();
     }
 
     /**

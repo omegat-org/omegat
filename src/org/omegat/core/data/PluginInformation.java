@@ -174,9 +174,8 @@ public final class PluginInformation {
      */
     @Override
     public String toString() {
-        return "PluginInformation [className=" + className + ", name=" + name +
-                ", version=" + version + ", author=" + author +
-                ", description=" + description + "]";
+        return "PluginInformation [className=" + className + ", name=" + name + ", version=" + version
+                + ", author=" + author + ", description=" + description + "]";
     }
 
     /**
@@ -254,7 +253,7 @@ public final class PluginInformation {
 
         public static PluginInformation copy(final PluginInformation info, final Status status) {
             return new PluginInformation(info, status);
-       }
+        }
 
         /**
          * Build PluginInformation from Manifest attributes.
@@ -270,7 +269,7 @@ public final class PluginInformation {
          * @return PluginInformation object.
          */
         public static PluginInformation fromManifest(final String className, final Manifest manifest,
-                                                     @Nullable URL mu, final Status defaultStatus) {
+                @Nullable URL mu, final Status defaultStatus) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
             String packageName = className == null ? ""
                     : className.substring(0, className.lastIndexOf(".") + 1).replace(".", "/");

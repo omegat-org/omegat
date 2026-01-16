@@ -50,7 +50,8 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
     protected abstract String[] getDictionaries();
 
     protected String getDictionary(String language) {
-        return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(language)).findFirst().orElse(null);
+        return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(language)).findFirst()
+                .orElse(null);
     }
 
     protected abstract InputStream getResourceAsStream(String resource);
@@ -64,7 +65,8 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
             try {
                 String prefix = "hunspell-dictionary";
                 Directory tmpDir = new NIOFSDirectory(Files.createTempDirectory(prefix));
-                return new Dictionary(tmpDir, prefix, affixInputStream, Collections.singletonList(dicInputStream), true);
+                return new Dictionary(tmpDir, prefix, affixInputStream,
+                        Collections.singletonList(dicInputStream), true);
             } catch (IOException | ParseException ex) {
                 Log.log(ex);
             }
@@ -79,12 +81,12 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
             try {
                 Path dictionaryPath = dictionaryDir.resolve(target + DICT_EXT);
                 try (InputStream dicStream = getResourceAsStream(target + DICT_EXT);
-                     FileOutputStream fos = new FileOutputStream(dictionaryPath.toFile())) {
+                        FileOutputStream fos = new FileOutputStream(dictionaryPath.toFile())) {
                     IOUtils.copy(dicStream, fos);
                 }
                 File affixFile = dictionaryDir.resolve(target + AFFIX_EXT).toFile();
                 try (InputStream affStream = getResourceAsStream(target + AFFIX_EXT);
-                     FileOutputStream fos = new FileOutputStream(affixFile)) {
+                        FileOutputStream fos = new FileOutputStream(affixFile)) {
                     IOUtils.copy(affStream, fos);
                 }
                 return dictionaryPath;

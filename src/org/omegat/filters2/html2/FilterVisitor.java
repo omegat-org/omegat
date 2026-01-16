@@ -465,7 +465,8 @@ public class FilterVisitor extends NodeVisitor {
 
         // DETERMINE FIRST TAG IN PRECEDING TO INCLUDE
         int firstTagToIncludeFromPreceding;
-        for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition; firstTagToIncludeFromPreceding++) {
+        for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition;
+             firstTagToIncludeFromPreceding++) {
             Node startNode = allNodesInParagraph.get(firstTagToIncludeFromPreceding);
             if (startNode instanceof Tag) {
                 Tag openingTag = (Tag) startNode;

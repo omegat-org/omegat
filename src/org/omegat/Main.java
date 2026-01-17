@@ -225,6 +225,7 @@ public final class Main {
 
         // Do migration and load various settings. The order is important!
         Preferences.init();
+        StaticUtils.ensureUserScriptsDir();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());

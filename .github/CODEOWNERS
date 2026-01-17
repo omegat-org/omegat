@@ -3,22 +3,50 @@
 # Message catalogs
 Bundle*.properties    @kazephil @brandelune @kosivantsov
 
-# Documents
+# User Documents and UI contents
 /src_docs/manual/    @kazephil @brandelune @kosivantsov
-/src_docs/developer/   @brandelune @miurahr
+/src_docs/greeting/  @kazephil @brandelune @kosivantsov
+/src_docs/tips/      @kazephil @brandelune @kosivantsov @miurahr
+readme*.txt          @kazephil @brandelune @kosivantsov
 
-# UI contents
-/src_docs/greeting/     @kazephil @brandelune @kosivantsov
-/tipoftheday/src/main/resources/     @kazephil @brandelune @kosivantsov @miurahr
+# Document styles
+/src_docs/xsl/       @kazephil @brandelune @kosivantsov
+/src_docs/style/     @kazephil @brandelune @kosivantsov
+/src_docs/template/  @kazephil @brandelune @kosivantsov
+
+# Developer documentation
+/src_docs/developer/ @miurahr
+OmegaT-license.txt   @kazephil @brandelune @kosivantsov @miurahr
 
 # Build system and CI/CD
 build.gradle @miurahr
+settings.gradle @miurahr
 /build-logic/ @miurahr
 /gradle/ @miurahr
 /config/ @miurahr
+/.github @miurahr
 /ci/ @miurahr
+/release/ @miurahr
+.readthedocs.yaml @miurahr
+azure-pipelines.yml @miurahr
+compose.yml @miurahr
+Plugins.properties @miurahr
 
-# Document styles
-/src_docs/xsl/     @kazephil @brandelune @kosivantsov
-/src_docs/style/     @kazephil @brandelune @kosivantsov
-/src_docs/template/     @kazephil @brandelune @kosivantsov
+# Modules
+/aligner @miurahr
+/firssttime-wizard @miurahr
+/language-modules @miurahr
+/machinetranslators @miurahr
+/spellchecker @miurahr
+/connectors @miurahr
+/scripting @miurahr
+/theme @miurahr
+/tipoftheday @miurahr
+
+# Tests
+/test @miurahr
+/test-acceptance @miurahr
+/test-integration @miurahr
+
+# Scripts
+/scripts @kosivantsov

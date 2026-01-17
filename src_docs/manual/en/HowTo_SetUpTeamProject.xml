@@ -271,7 +271,7 @@
           </note>
           <para>When OmegaT commits the target files, it also commits
           the project statistics in <filename>.txt</filename> and
-          <filename>.json</filename> format. This enable the project
+          <filename>.json</filename> format. This enables the project
           manager to consult the statistics, and possibly automate
           their processing, without the need to open OmegaT.</para>
         </listitem>

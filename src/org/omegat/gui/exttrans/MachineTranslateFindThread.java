@@ -85,7 +85,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      */
     @VisibleForTesting
     static @Nullable MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
-                                                             SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
+            SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
 
         if (isStopped.isStopped()) {
             throw new StoppedException();
@@ -139,6 +139,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      */
     static class StoppedException extends Exception {
         private static final long serialVersionUID = 1L;
+
         StoppedException() {
             super("MT processing stopped");
         }

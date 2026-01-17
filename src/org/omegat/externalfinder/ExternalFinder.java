@@ -286,9 +286,9 @@ public final class ExternalFinder {
     public static List<ExternalFinderItem> getItems() {
         // replace duplicated items based on name
         List<ExternalFinderItem> result = new ArrayList<>(getGlobalConfig().getItems());
-        ExternalFinderConfiguration projectConfig = getProjectConfig();
-        if (projectConfig != null) {
-            projectConfig.getItems().forEach(item -> addOrReplaceByName(result, item));
+        ExternalFinderConfiguration config = getProjectConfig();
+        if (config != null) {
+            config.getItems().forEach(item -> addOrReplaceByName(result, item));
         }
         return Collections.unmodifiableList(result);
     }

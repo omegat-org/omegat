@@ -653,8 +653,8 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return remoteRepositoryProvider.isManaged() && config.getTargetDir().isUnderRoot() && commitTargetFiles
-                && isOnlineMode;
+        return remoteRepositoryProvider.isManaged() && config.getTargetDir().isUnderRoot()
+                && commitTargetFiles && isOnlineMode;
     }
 
     private void exportTMXs() throws IOException {
@@ -791,8 +791,8 @@ public class RealProject implements IProject {
             stdout.start();
             stderr.start();
         } catch (IOException e) {
-            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD", e.getCause() == null ?
-                    e.getLocalizedMessage() : e.getCause());
+            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD",
+                    e.getCause() == null ? e.getLocalizedMessage() : e.getCause());
         }
     }
 
@@ -852,8 +852,8 @@ public class RealProject implements IProject {
                     throw ex;
                 } catch (IRemoteRepository2.NetworkException e) {
                     if (isOnlineMode) {
-                        Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getLocalizedMessage()
-                                : e.getCause());
+                        Log.logErrorRB("TEAM_NETWORK_ERROR",
+                                e.getCause() == null ? e.getLocalizedMessage() : e.getCause());
                         setOfflineMode();
                     }
                 } catch (Exception e) {
@@ -952,7 +952,8 @@ public class RealProject implements IProject {
                             if (tmxPrepared != null && glossaryPrepared != null) {
                                 String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                         remoteRepositoryProvider, null);
-                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider, newVersion);
+                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider,
+                                        newVersion);
                             }
 
                             tmxPrepared = null;
@@ -1090,7 +1091,8 @@ public class RealProject implements IProject {
                             public void parseBaseFile(File file) throws Exception {
                                 if (file.exists()) {
                                     baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                                    Log.logDebug("read {0} entries from local glossary.txt", baseGlossaryEntries.size());
+                                    Log.logDebug("read {0} entries from local glossary.txt",
+                                            baseGlossaryEntries.size());
                                 } else {
                                     baseGlossaryEntries = new ArrayList<>();
                                 }
@@ -1100,7 +1102,8 @@ public class RealProject implements IProject {
                             public void parseHeadFile(File file) throws Exception {
                                 if (file.exists()) {
                                     headGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                                    Log.logDebug("read {0} entries from remote glossaries", headGlossaryEntries.size());
+                                    Log.logDebug("read {0} entries from remote glossaries",
+                                            headGlossaryEntries.size());
                                 } else {
                                     headGlossaryEntries = new ArrayList<>();
                                 }
@@ -1117,7 +1120,8 @@ public class RealProject implements IProject {
                                 headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
                                 headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
 
-                                Log.logDebug("Update and write glossary.txt with {0} entries.", headGlossaryEntries.size());
+                                Log.logDebug("Update and write glossary.txt with {0} entries.",
+                                        headGlossaryEntries.size());
                                 for (GlossaryEntry ge : headGlossaryEntries) {
                                     GlossaryReaderTSV.append(out, ge);
                                 }

@@ -71,8 +71,8 @@ import gen.core.segmentation.Srx;
  * It loads and saves its data from/to the SRX file.
  * <p>
  * When creating an SRX object with the default constructor, you get an empty
- * SRX without any rules. Please do not use default constructor, unless you
- * know what you are doing.
+ * SRX without any rules. Please do not use default constructor, unless you know
+ * what you are doing.
  *
  * @author Maxym Mykhalchuk
  * @author Thomas Cordonnier
@@ -83,7 +83,7 @@ public class SRX implements Serializable {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
     public static final String SRX_SENTSEG = "segmentation.srx";
-    private static final XmlMapper mapper;
+    private static final XmlMapper MAPPER;
 
     static {
         final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
@@ -96,14 +96,13 @@ public class SRX implements Serializable {
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
         xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
-        mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
+        MAPPER = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
-        mapper.registerModule(new JakartaXmlBindAnnotationModule());
-        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        MAPPER.registerModule(new JakartaXmlBindAnnotationModule());
+        MAPPER.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
     }
-
 
     public SRX copy() {
         SRX result = new SRX();
@@ -181,7 +180,7 @@ public class SRX implements Serializable {
         }
 
         try (FileOutputStream fos = new FileOutputStream(outFile)) {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
         } catch (DatabindException e) {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             throw new IOException(e);
@@ -231,12 +230,13 @@ public class SRX implements Serializable {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             transformerFactory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
             transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", "");
-            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet", "");
+            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet",
+                    "");
             // add XSLT in Transformer
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(
-                SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
+            Transformer transformer = transformerFactory.newTransformer(new StreamSource(SRX.class
+                    .getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
             File dest = new File(configDir, SRX_SENTSEG);
-            try (FileOutputStream fos = new FileOutputStream(dest)) { 
+            try (FileOutputStream fos = new FileOutputStream(dest)) {
                 transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             }
             Files.deleteIfExists(Paths.get(configFile.toURI()));
@@ -251,7 +251,7 @@ public class SRX implements Serializable {
             } else {
                 throw e;
             }
-        }        
+        }
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -264,7 +264,7 @@ public class SRX implements Serializable {
     }
 
     private static SRX loadSrxInputStream(InputStream io) throws IOException {
-        Srx srx = mapper.readValue(io, Srx.class);
+        Srx srx = MAPPER.readValue(io, Srx.class);
         HashMap<String, List<Rule>> mapping = new HashMap<>();
         List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();
         for (Languagerule languagerule : languageRuleList) {

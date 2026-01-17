@@ -109,11 +109,11 @@ public class AutoCompleter implements IAutoCompleter {
 
         for (Class<?> viewClass : PluginUtils.getAutoCompleterViewsClasses()) {
             try {
-               AbstractAutoCompleterView view = (AbstractAutoCompleterView) viewClass.getDeclaredConstructor(
-                       AutoCompleter.class).newInstance(this);
-               views.add(view);
-            } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
-                     NoSuchMethodException e) {
+                AbstractAutoCompleterView view = (AbstractAutoCompleterView) viewClass
+                        .getDeclaredConstructor(AutoCompleter.class).newInstance(this);
+                views.add(view);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException
+                    | NoSuchMethodException e) {
                 Log.log(e);
             }
         }
@@ -144,7 +144,9 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Process the autocompletion keys
-     * @param e the key event to process
+     * 
+     * @param e
+     *            the key event to process
      * @return true if a key has been processed, false if otherwise.
      */
     @Override
@@ -252,8 +254,8 @@ public class AutoCompleter implements IAutoCompleter {
         try {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
             x = editor.getUI().modelToView2D(editor, pos, Position.Bias.Forward).getBounds().x;
-            y = editor.getUI().modelToView2D(editor, editor.getCaret().getDot(),
-                    Position.Bias.Forward).getBounds().y + fontSize;
+            y = editor.getUI().modelToView2D(editor, editor.getCaret().getDot(), Position.Bias.Forward)
+                    .getBounds().y + fontSize;
         } catch (BadLocationException e) {
             // this should never happen!!!
             Log.log(e);
@@ -263,7 +265,9 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * Replace the text in the editor with the accepted item.
-     * @param selected the selected item
+     * 
+     * @param selected
+     *            the selected item
      */
     protected void acceptedListItem(AutoCompleterItem selected) {
         if (selected == null) {
@@ -291,6 +295,7 @@ public class AutoCompleter implements IAutoCompleter {
 
     /**
      * get the view number of the next view
+     * 
      * @return the number
      */
     private int nextViewNumber(int start) {
@@ -329,16 +334,14 @@ public class AutoCompleter implements IAutoCompleter {
             int nextViewN = nextViewNumber(currentView);
             if (views.size() >= 2 && nextViewN != -1) {
                 sb.append("<br>");
-                sb.append(OStrings.getString("AC_NEXT_VIEW",
-                        StaticUIUtils.getKeyStrokeText(keys.nextView),
+                sb.append(OStrings.getString("AC_NEXT_VIEW", StaticUIUtils.getKeyStrokeText(keys.nextView),
                         views.get(nextViewN).getName()));
             }
 
             int prevViewN = prevViewNumber();
             if (views.size() > 2 && prevViewN != -1) {
                 sb.append("<br>");
-                sb.append(OStrings.getString("AC_PREV_VIEW",
-                        StaticUIUtils.getKeyStrokeText(keys.prevView),
+                sb.append(OStrings.getString("AC_PREV_VIEW", StaticUIUtils.getKeyStrokeText(keys.prevView),
                         views.get(prevViewN).getName()));
             }
         }
@@ -422,7 +425,8 @@ public class AutoCompleter implements IAutoCompleter {
             return;
         }
 
-        // Cycle through each view, stopping and showing it if it has some relevant content.
+        // Cycle through each view, stopping and showing it if it has some
+        // relevant content.
         int i = currentView;
         while (true) {
             if (views.get(i).shouldPopUp()) {

@@ -204,15 +204,15 @@ public class TMXWriter2 implements AutoCloseable {
      * @param propValues
      *            pairs with property name and values
      */
-    public void writeEntry(final @Nullable String source, final @Nullable String translation, final ITMXEntry entry,
-            final @Nullable List<String> propValues) throws Exception {
+    public void writeEntry(final @Nullable String source, final @Nullable String translation,
+            final ITMXEntry entry, final @Nullable List<String> propValues) throws Exception {
         writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.getCreationDate(),
                 entry.getChanger(), entry.getChangeDate(), propValues);
     }
 
-    public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note, String creator,
-                           long creationDate, @Nullable String changer, long changeDate, @Nullable List<String> propValues)
-            throws Exception {
+    public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note,
+            String creator, long creationDate, @Nullable String changer, long changeDate,
+            @Nullable List<String> propValues) throws Exception {
         if (source == null && translation == null) {
             throw new NullPointerException(
                     "The TMX spec requires at least one <tuv> per <tu>. Source and translation can't both be null.");

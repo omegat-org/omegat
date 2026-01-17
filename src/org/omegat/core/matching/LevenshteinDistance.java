@@ -44,7 +44,7 @@ import org.omegat.util.Token;
  * <li>If s is "test" and t is "test", then LD(s,t) = 0, because no
  * transformations are needed. The strings are already identical.
  * <li>If s is "test" and t is "tent", then LD(s,t) = 1, because one
- * substitution (change "s" to "n") is sufficient to transform s into t.
+ * substitution (change "s" to "n") is enough to transform s into t.
  * </ul>
  *
  * <p>
@@ -53,7 +53,7 @@ import org.omegat.util.Token;
  * Levenshtein distance is named after the Russian scientist Vladimir
  * Levenshtein, who devised the algorithm in 1965. If you can't spell or
  * pronounce Levenshtein, the metric is also sometimes called edit distance.
- *
+ * <p>
  * alex73's comment: We can't make 'compute' mathod static, because in this case
  * LevenshteinDistance will not be thread-safe(see 'd' and 'p' arrays). We can't
  * create these arrays inside 'compute' method, because it's enough slow
@@ -94,31 +94,32 @@ public class LevenshteinDistance implements ISimilarityCalculator {
     private short[] previousCosts = new short[MAX_N + 1];
 
     /**
-     * Compute Levenshtein distance between two lists.
+     * Compute Levenshtein distance between two lists of tokens.
      *
      * <p>
-     * The difference between this impl. and the canonical one is that, rather
-     * than creating and retaining a matrix of size sourceTokens.length()+1 by
-     * taretTokens.length()+1, we maintain two single-dimensional arrays of
-     * length sourceTokens.length()+1.
+     * The difference between this implementation and the canonical one is that,
+     * rather than creating and retaining a matrix of size sourceTokens.length()
+     * + 1 by taretTokens.length() + 1, we maintain two single-dimensional
+     * arrays of length sourceTokens.length() + 1.
      *
      * <p>
-     * The first, d, is the 'current working' distance array that maintains the
-     * newest distance cost counts as we iterate through the characters of
-     * String s. Each time we increment the index of String t we are comparing,
-     * d is copied to p, the second int[]. Doing so allows us to retain the
-     * previous cost counts as required by the algorithm (taking the minimum of
+     * The first, `distanceArray`, is the 'current working' distance array that
+     * maintains the newest distance cost counts as we iterate through the
+     * characters of String sourceTokens. Each time we increment the index of
+     * String targetTokens we are comparing, distanceArray is copied to
+     * previousCosts, the second int[]. Doing so allows us to retain the
+     * previous cost counts as required by the algorithm, taking the minimum of
      * the cost count to the left, up one, and diagonally up and to the left of
-     * the current cost count being calculated).
+     * the current cost count being calculated.
      * <p>
-     * (Note that the arrays aren't really copied anymore, just switched... this
-     * is clearly much better than cloning an array or doing a
-     * System.arraycopy() each time through the outer loop.)
+     * Note that the arrays aren't really copied anymore, just switched... this
+     * is much better than cloning an array or doing a System.arraycopy() each
+     * time through the outer loop.
      *
      * <p>
      * Effectively, the difference between the two implementations is this one
-     * does not cause an out of memory condition when calculating the LD over
-     * two very large strings.
+     * does not cause an out-of-memory condition when calculating the
+     * LevenshteinDistance over two very large strings.
      *
      * <p>
      * For perfomance reasons the maximal number of compared items is
@@ -168,8 +169,9 @@ public class LevenshteinDistance implements ISimilarityCalculator {
             distanceArray = swap;
         }
 
-        // our last action in the above loop was to switch d and p, so p now
-        // actually has the most recent cost counts
+        // our last action in the above loop was to switch distanceArray and
+        // previousCosts, so previousCosts now actually has the most recent cost
+        // counts
         return previousCosts[sourceLength];
     }
 }

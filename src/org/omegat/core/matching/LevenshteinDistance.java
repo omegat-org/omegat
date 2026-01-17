@@ -60,7 +60,9 @@ import org.omegat.util.Token;
  * operation. We have to create LevenshteinDistance instance one for each thread
  * where we will call it. It's best way for best performance.
  *
- * @see <a href="http://people.cs.pitt.edu/~kirk/cs1501/Pruhs/Fall2006/Assignments/editdistance/Levenshtein%20Distance.htm">Levenshtein Distance, in Three Flavors</a>
+ * @see <a href=
+ *      "http://people.cs.pitt.edu/~kirk/cs1501/Pruhs/Fall2006/Assignments/editdistance/Levenshtein%20Distance.htm">
+ *      Levenshtein Distance, in Three Flavors</a>
  *
  * @author Vladimir Levenshtein
  * @author Michael Gilleland, Merriam Park Software
@@ -84,95 +86,90 @@ public class LevenshteinDistance implements ISimilarityCalculator {
      * Cost array, horizontally. Here to avoid excessive allocation and garbage
      * collection.
      */
-    private short[] d = new short[MAX_N + 1];
+    private short[] distanceArray = new short[MAX_N + 1];
     /**
      * "Previous" cost array, horizontally. Here to avoid excessive allocation
      * and garbage collection.
      */
-    private short[] p = new short[MAX_N + 1];
+    private short[] previousCosts = new short[MAX_N + 1];
 
     /**
      * Compute Levenshtein distance between two lists.
      *
-     * <p> The difference between this impl. and the canonical one is that,
-     * rather than creating and retaining a matrix of size s.length()+1 by
-     * t.length()+1, we maintain two single-dimensional arrays of length
-     * s.length()+1.
+     * <p>
+     * The difference between this impl. and the canonical one is that, rather
+     * than creating and retaining a matrix of size sourceTokens.length()+1 by
+     * taretTokens.length()+1, we maintain two single-dimensional arrays of
+     * length sourceTokens.length()+1.
      *
-     * <p> The first, d, is the 'current working' distance array that maintains
-     * the newest distance cost counts as we iterate through the characters of
+     * <p>
+     * The first, d, is the 'current working' distance array that maintains the
+     * newest distance cost counts as we iterate through the characters of
      * String s. Each time we increment the index of String t we are comparing,
      * d is copied to p, the second int[]. Doing so allows us to retain the
      * previous cost counts as required by the algorithm (taking the minimum of
      * the cost count to the left, up one, and diagonally up and to the left of
-     * the current cost count being calculated). <p> (Note that the arrays
-     * aren't really copied anymore, just switched... this is clearly much
-     * better than cloning an array or doing a System.arraycopy() each time
-     * through the outer loop.)
+     * the current cost count being calculated).
+     * <p>
+     * (Note that the arrays aren't really copied anymore, just switched... this
+     * is clearly much better than cloning an array or doing a
+     * System.arraycopy() each time through the outer loop.)
      *
-     * <p> Effectively, the difference between the two implementations is this
-     * one does not cause an out of memory condition when calculating the LD
-     * over two very large strings.
+     * <p>
+     * Effectively, the difference between the two implementations is this one
+     * does not cause an out of memory condition when calculating the LD over
+     * two very large strings.
      *
-     * <p> For perfomance reasons the maximal number of compared items is {@link
-     * #MAX_N}.
+     * <p>
+     * For perfomance reasons the maximal number of compared items is
+     * {@link #MAX_N}.
      */
-    public int compute(Token[] s, Token[] t) {
-        if (s == null || t == null) {
+    public int compute(Token[] sourceTokens, Token[] targetTokens) {
+        if (sourceTokens == null || targetTokens == null) {
             throw new IllegalArgumentException(OStrings.getString("LD_NULL_ARRAYS_ERROR"));
         }
 
-        int n = s.length; // length of s
-        int m = t.length; // length of t
+        int sourceLength = sourceTokens.length;
+        int targetLength = targetTokens.length;
 
-        if (n == 0) {
-            return m;
-        } else if (m == 0) {
-            return n;
+        if (sourceLength == 0) {
+            return targetLength;
+        } else if (targetLength == 0) {
+            return sourceLength;
         }
 
-        if (n > MAX_N) {
-            n = MAX_N;
+        if (sourceLength > MAX_N) {
+            sourceLength = MAX_N;
         }
-        if (m > MAX_N) {
-            m = MAX_N;
-        }
-
-        short[] swap; // placeholder to assist in swapping p and d
-
-        // indexes into strings s and t
-        short i; // iterates through s
-        short j; // iterates through t
-
-        Token t_j = null; // jth object of t
-
-        short cost; // cost
-
-        for (i = 0; i <= n; i++) {
-            p[i] = i;
+        if (targetLength > MAX_N) {
+            targetLength = MAX_N;
         }
 
-        for (j = 1; j <= m; j++) {
-            t_j = t[j - 1];
-            d[0] = j;
+        for (short i = 0; i <= sourceLength; i++) {
+            previousCosts[i] = i;
+        }
 
-            Token s_i = null; // ith object of s
-            for (i = 1; i <= n; i++) {
-                s_i = s[i - 1];
-                cost = s_i.equals(t_j) ? (short) 0 : (short) 1;
+        for (short j = 1; j <= targetLength; j++) {
+            Token targetToken = targetTokens[j - 1];
+            distanceArray[0] = j;
+
+            for (short i = 1; i <= sourceLength; i++) {
+                Token sourceToken = sourceTokens[i - 1];
+                int cost = sourceToken.equals(targetToken) ? 0 : 1;
                 // minimum of cell to the left+1, to the top+1, diagonally left
                 // and up +cost
-                d[i] = minimum(d[i - 1] + 1, p[i] + 1, p[i - 1] + cost);
+                distanceArray[i] = minimum(distanceArray[i - 1] + 1, previousCosts[i] + 1,
+                        previousCosts[i - 1] + cost);
             }
 
             // copy current distance counts to 'previous row' distance counts
-            swap = p;
-            p = d;
-            d = swap;
+            short[] swap = previousCosts;
+            previousCosts = distanceArray;
+            distanceArray = swap;
         }
 
         // our last action in the above loop was to switch d and p, so p now
         // actually has the most recent cost counts
-        return p[n];
+        return previousCosts[sourceLength];
     }
 }

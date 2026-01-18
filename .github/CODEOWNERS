@@ -15,7 +15,7 @@ readme*.txt          @kazephil @brandelune @kosivantsov
 /src_docs/template/  @kazephil @brandelune @kosivantsov
 
 # Developer documentation
-/src_docs/developer/ @miurahr
+/src_docs/developer/ @miurahr @brandelune 
 OmegaT-license.txt   @kazephil @brandelune @kosivantsov @miurahr
 
 # Build system and CI/CD

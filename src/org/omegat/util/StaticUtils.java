@@ -129,8 +129,8 @@ public final class StaticUtils {
      * Contains the location of the script dir containing the exported text
      * files.
      */
-    private static String scriptDir = null;
-    private static Path userScriptsDir = null;
+    private static volatile String scriptDir = null;
+    private static volatile Path userScriptsDir = null;
 
     /**
      * Check if specified key pressed.
@@ -450,32 +450,38 @@ public final class StaticUtils {
      * </dl>
      */
     public static Path getUserScriptsPath() {
-        // If the script directory has already been determined, return it
-        if (userScriptsDir != null) {
-            return userScriptsDir;
-        }
-        userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
-        // ensure directory exists
-        if (Files.exists(userScriptsDir)) {
-            return userScriptsDir;
-        }
-        // it seems first run.
-        try {
-            Files.createDirectories(userScriptsDir);
-        } catch (IOException e) {
-            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
-            userScriptsDir = Paths.get(getConfigDir() + SCRIPT_DIR);
-        }
-        try {
-            // ensure default script files installed
-            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
-            Files.copy(defaultScripts, userScriptsDir, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+        if (userScriptsDir == null) {
+            synchronized (StaticUtils.class) {
+                if (userScriptsDir == null) {
+                    userScriptsDir = determineUserScriptsPath();
+                }
+            }
         }
         return userScriptsDir;
     }
 
+    private static Path determineUserScriptsPath() {
+        Path scriptsPath = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
+        // ensure directory exists
+        if (Files.exists(scriptsPath)) {
+            return scriptsPath;
+        }
+        // it seems first run.
+        try {
+            Files.createDirectories(scriptsPath);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+            scriptsPath = Paths.get(getConfigDir() + SCRIPT_DIR);
+        }
+        try {
+            // ensure default script files installed
+            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
+            Files.copy(defaultScripts, scriptsPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+        }
+        return scriptsPath;
+    }
 
     /**
      * Ensure user scripts directory exists and contains scripts.
@@ -507,15 +513,21 @@ public final class StaticUtils {
      *         path separator.
      */
     public static String getScriptDir() {
-        // If the script directory has already been determined, return it
-        if (scriptDir != null) {
-            return scriptDir;
+        if (scriptDir == null) {
+            synchronized (StaticUtils.class) {
+                if (scriptDir == null) {
+                    scriptDir = determinScriptDir();
+                }
+            }
         }
-        scriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
+        return scriptDir;
+    }
 
+    private static String determinScriptDir() {
+        String localScriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
         try {
             // Check if the directory exists
-            File dir = new File(scriptDir);
+            File dir = new File(localScriptDir);
             if (!dir.exists()) {
                 // Create the directory
                 boolean created = dir.mkdirs();
@@ -524,19 +536,19 @@ public final class StaticUtils {
                 // set the script directory to config directory
                 if (!created) {
                     Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
-                    scriptDir = getConfigDir();
+                    localScriptDir = getConfigDir();
                 }
             }
         } catch (SecurityException e) {
             // The system doesn't want us to write where we want to write
             // reset the script dir to the current config dir
-            scriptDir = getConfigDir();
+            localScriptDir = getConfigDir();
 
             // log the exception, but only after the script dir has been reset
             Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
             Log.log(e.toString());
         }
-        return scriptDir;
+        return localScriptDir;
     }
 
     /**

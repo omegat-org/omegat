@@ -100,43 +100,43 @@ public final class LanguageCodes {
     private static final String CHINESE_PATTERN = "ZH.*";
 
     /** A Map from language codes to language keys. */
-    private static final Map<String, String> codeKeyHash = new HashMap<>();
-    private static final Map<String, String> patternHash = new HashMap<>();
+    private static final Map<String, String> CODE_KEY_HASH = new HashMap<>();
+    private static final Map<String, String> PATTERN_HASH = new HashMap<>();
 
     static {
-        codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
-        codeKeyHash.put(CZECH_CODE, CZECH_KEY);
-        codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
-        codeKeyHash.put(ENGLISH_CODE, ENGLISH_KEY);
-        codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);
-        codeKeyHash.put(FINNISH_CODE, FINNISH_KEY);
-        codeKeyHash.put(FRENCH_CODE, FRENCH_KEY);
-        codeKeyHash.put(ITALIAN_CODE, ITALIAN_KEY);
-        codeKeyHash.put(JAPANESE_CODE, JAPANESE_KEY);
-        codeKeyHash.put(DUTCH_CODE, DUTCH_KEY);
-        codeKeyHash.put(POLISH_CODE, POLISH_KEY);
-        codeKeyHash.put(RUSSIAN_CODE, RUSSIAN_KEY);
-        codeKeyHash.put(SWEDISH_CODE, SWEDISH_KEY);
-        codeKeyHash.put(SLOVAK_CODE, SLOVAK_KEY);
-        codeKeyHash.put(CHINESE_CODE, CHINESE_KEY);
-        codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
-        codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);
-        codeKeyHash.put(F_HTML_CODE, F_HTML_KEY);
-        patternHash.put(CATALAN_PATTERN, CATALAN_CODE);
-        patternHash.put(CZECH_PATTERN, CZECH_CODE);
-        patternHash.put(GERMAN_PATTERN, GERMAN_CODE);
-        patternHash.put(ENGLISH_PATTERN, ENGLISH_CODE);
-        patternHash.put(SPANISH_PATTERN, SPANISH_CODE);
-        patternHash.put(FINNISH_PATTERN, FINNISH_CODE);
-        patternHash.put(FRENCH_PATTERN, FRENCH_CODE);
-        patternHash.put(ITALIAN_PATTERN, ITALIAN_CODE);
-        patternHash.put(JAPANESE_PATTERN, JAPANESE_CODE);
-        patternHash.put(DUTCH_PATTERN, DUTCH_CODE);
-        patternHash.put(POLISH_PATTERN, POLISH_CODE);
-        patternHash.put(RUSSIAN_PATTERN, RUSSIAN_CODE);
-        patternHash.put(SWEDISH_PATTERN, SWEDISH_CODE);
-        patternHash.put(SLOVAK_PATTERN, SLOVAK_CODE);
-        patternHash.put(CHINESE_PATTERN, CHINESE_CODE);
+        CODE_KEY_HASH.put(CATALAN_CODE, CATALAN_KEY);
+        CODE_KEY_HASH.put(CZECH_CODE, CZECH_KEY);
+        CODE_KEY_HASH.put(GERMAN_CODE, GERMAN_KEY);
+        CODE_KEY_HASH.put(ENGLISH_CODE, ENGLISH_KEY);
+        CODE_KEY_HASH.put(SPANISH_CODE, SPANISH_KEY);
+        CODE_KEY_HASH.put(FINNISH_CODE, FINNISH_KEY);
+        CODE_KEY_HASH.put(FRENCH_CODE, FRENCH_KEY);
+        CODE_KEY_HASH.put(ITALIAN_CODE, ITALIAN_KEY);
+        CODE_KEY_HASH.put(JAPANESE_CODE, JAPANESE_KEY);
+        CODE_KEY_HASH.put(DUTCH_CODE, DUTCH_KEY);
+        CODE_KEY_HASH.put(POLISH_CODE, POLISH_KEY);
+        CODE_KEY_HASH.put(RUSSIAN_CODE, RUSSIAN_KEY);
+        CODE_KEY_HASH.put(SWEDISH_CODE, SWEDISH_KEY);
+        CODE_KEY_HASH.put(SLOVAK_CODE, SLOVAK_KEY);
+        CODE_KEY_HASH.put(CHINESE_CODE, CHINESE_KEY);
+        CODE_KEY_HASH.put(DEFAULT_CODE, DEFAULT_KEY);
+        CODE_KEY_HASH.put(F_TEXT_CODE, F_TEXT_KEY);
+        CODE_KEY_HASH.put(F_HTML_CODE, F_HTML_KEY);
+        PATTERN_HASH.put(CATALAN_PATTERN, CATALAN_CODE);
+        PATTERN_HASH.put(CZECH_PATTERN, CZECH_CODE);
+        PATTERN_HASH.put(GERMAN_PATTERN, GERMAN_CODE);
+        PATTERN_HASH.put(ENGLISH_PATTERN, ENGLISH_CODE);
+        PATTERN_HASH.put(SPANISH_PATTERN, SPANISH_CODE);
+        PATTERN_HASH.put(FINNISH_PATTERN, FINNISH_CODE);
+        PATTERN_HASH.put(FRENCH_PATTERN, FRENCH_CODE);
+        PATTERN_HASH.put(ITALIAN_PATTERN, ITALIAN_CODE);
+        PATTERN_HASH.put(JAPANESE_PATTERN, JAPANESE_CODE);
+        PATTERN_HASH.put(DUTCH_PATTERN, DUTCH_CODE);
+        PATTERN_HASH.put(POLISH_PATTERN, POLISH_CODE);
+        PATTERN_HASH.put(RUSSIAN_PATTERN, RUSSIAN_CODE);
+        PATTERN_HASH.put(SWEDISH_PATTERN, SWEDISH_CODE);
+        PATTERN_HASH.put(SLOVAK_PATTERN, SLOVAK_CODE);
+        PATTERN_HASH.put(CHINESE_PATTERN, CHINESE_CODE);
     }
 
     /**
@@ -146,22 +146,22 @@ public final class LanguageCodes {
      *            language code
      */
     public static String getLanguageName(String code) {
-        if (!codeKeyHash.containsKey(code)) {
+        if (!CODE_KEY_HASH.containsKey(code)) {
             return code;
         }
-        String key = codeKeyHash.get(code);
+        String key = CODE_KEY_HASH.get(code);
         return OStrings.getString(key);
     }
 
     public static boolean isLanguageCodeKnown(String code) {
-        return codeKeyHash.containsKey(code);
+        return CODE_KEY_HASH.containsKey(code);
     }
 
     public static String getLanguageCodeByName(String name) {
         if (name == null) {
             return null;
         }
-        for (Map.Entry<String, String> entry : codeKeyHash.entrySet()) {
+        for (Map.Entry<String, String> entry : CODE_KEY_HASH.entrySet()) {
             if (OStrings.getString(entry.getValue()).equals(name)) {
                 return entry.getKey();
             }
@@ -176,6 +176,6 @@ public final class LanguageCodes {
     }
 
     public static String getLanguageCodeByPattern(String pattern) {
-        return patternHash.get(pattern);
+        return PATTERN_HASH.get(pattern);
     }
 }

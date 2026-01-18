@@ -253,8 +253,8 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     }
 
     /**
-     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.  It won't change the selection if the
-     * currently selected item is already the first item.
+     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.
+     * It won't change the selection if the currently selected item is already the first item.
      */
     protected void selectPreviousPossibleValueByPage() {
         Point p = getSelectionPoint();

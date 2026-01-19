@@ -131,7 +131,7 @@ public final class StaticUtils {
      * files.
      */
     private static String scriptDir = null;
-    private static Path userScriptsDir = null;
+    private static volatile Path userScriptsDir = null;
 
     /**
      * Check if specified key pressed.
@@ -416,29 +416,36 @@ public final class StaticUtils {
     }
 
     private static Path getUserScriptsPath() {
-        // If the script directory has already been determined, return it
-        if (userScriptsDir != null) {
-            return userScriptsDir;
+        if (userScriptsDir == null) {
+            synchronized (StaticUtils.class) {
+                if (userScriptsDir == null) {
+                    userScriptsDir = determineUserScriptsPath();
+                }
+            }
         }
+        return userScriptsDir;
+    }
 
+    private static Path determineUserScriptsPath() {
+        Path userScriptsPath;
         String configured = Preferences.getPreference(Preferences.SCRIPTS_DIRECTORY);
         if (!StringUtil.isEmpty(configured) && new File(configured).exists()) {
-            userScriptsDir = Paths.get(configured);
-            return userScriptsDir;
+            userScriptsPath = Paths.get(configured);
+            return userScriptsPath;
         }
 
-        userScriptsDir = Paths.get(getApplicationDataDir(), SCRIPTS_DIR);
-        if (!Files.exists(userScriptsDir)) {
+        userScriptsPath = Paths.get(getApplicationDataDir(), SCRIPTS_DIR);
+        if (!Files.exists(userScriptsPath)) {
             try {
-                Files.createDirectories(userScriptsDir);
+                Files.createDirectories(userScriptsPath);
             } catch (IOException e) {
                 // fallback
                 Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
-                userScriptsDir = Paths.get(getConfigDir() + SCRIPTS_DIR);
+                userScriptsPath = Paths.get(getConfigDir() + SCRIPTS_DIR);
             }
         }
-        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
-        return userScriptsDir;
+        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsPath.toString());
+        return userScriptsPath;
     }
 
     /**

@@ -628,7 +628,6 @@ public final class Main {
 
     public static int runConsoleAlign() throws Exception {
         Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
-
         if (!SubCommands.containsCommand("Align")) {
             return 1;
         }
@@ -638,29 +637,21 @@ public final class Main {
             return 1;
         }
 
-        String dir = PARAMS.get(CLIParameters.ALIGNDIR);
-        if (dir == null) {
-            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
-            return 1;
-        }
-
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
-        selectProjectConsoleMode(true);
-
-        validateTagsConsoleMode();
-
-        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
-
         BaseSubCommand command = SubCommands.getCommand("Align").getDeclaredConstructor().newInstance();
         command.setParameters(PARAMS);
-        return command.call();
+        selectProjectConsoleMode(command.isProjectRequired());
+        validateTagsConsoleMode();
+        int status = command.call();
+        Log.logInfoRB("CONSOLE_FINISHED");
+        return status;
     }
 
     /**
      * creates the project class and adds it to the Core. Loads the project if
      * specified. An exit occurs on error loading the project. This method is
-     * for the different console modes, to prevent code duplication.
+     * for the different console modes to prevent code duplication.
      *
      * @param loadProject
      *            load the project or not

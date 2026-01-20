@@ -36,8 +36,8 @@ import java.util.concurrent.Callable;
  */
 public abstract class BaseSubCommand implements Callable<Integer> {
 
-    protected @Nullable Map<String, String> params;
-    protected @Nullable List<String> args;
+    private @Nullable Map<String, String> params;
+    private @Nullable List<String> args;
 
     public void setParameters(Map<String, String> params) {
         this.params = params;
@@ -47,11 +47,29 @@ public abstract class BaseSubCommand implements Callable<Integer> {
         this.args = args;
     }
 
+    @SuppressWarnings("unused")
+    protected @Nullable String getArg(int index) {
+        return args != null && index < args.size() ? args.get(index) : null;
+    }
+
+    @SuppressWarnings("unused")
+    protected boolean hasParam(String key) {
+        return params != null && params.containsKey(key);
+    }
+
+    protected @Nullable String getParam(String key) {
+        if (params == null) {
+            return null;
+        }
+        return params.get(key);
+    }
+
     /**
      * Returns true if the subcommand requires a project to be loaded.
      *
      * @return true if project is required, false otherwise.
      */
+    @SuppressWarnings("unused")
     public boolean isProjectRequired() {
         return false;
     }

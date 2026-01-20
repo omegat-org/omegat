@@ -30,7 +30,8 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.util.FileUtil;
-import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 
 import java.io.File;
@@ -47,19 +48,17 @@ public class AlignCommand extends BaseSubCommand {
 
     @Override
     public Integer call() throws Exception {
-        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
         RealProject p = (RealProject) Core.getProject();
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
 
-        String alignDir = null;
-        if (params != null) {
-            alignDir = params.get(CLIParameters.ALIGNDIR);
-        }
+        String alignDir = getParam(CLIParameters.ALIGNDIR);
         if (alignDir == null) {
-            alignDir = config.getProjectRoot();
+            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
+            return 1;
         }
+        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), alignDir));
 
         boolean alt = !config.isSupportDefaultTranslations();
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
@@ -67,7 +66,6 @@ public class AlignCommand extends BaseSubCommand {
             wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(alignDir))), alt);
         }
         p.closeProject();
-        Log.logInfoRB("CONSOLE_FINISHED");
         return 0;
     }
 }

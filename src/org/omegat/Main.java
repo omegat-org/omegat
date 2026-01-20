@@ -64,6 +64,7 @@ import java.util.Objects;
 import java.util.PropertyResourceBundle;
 import java.util.TimeZone;
 import java.util.TreeMap;
+import java.util.concurrent.Callable;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -72,6 +73,8 @@ import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.RuntimePreferenceStore;
 import tokyo.northside.logging.ILogger;
 
@@ -624,6 +627,10 @@ public final class Main {
     public static int runConsoleAlign() throws Exception {
         Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
 
+        if (!SubCommands.containsCommand("Align")) {
+            return 1;
+        }
+
         if (projectLocation == null) {
             System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
             return 1;
@@ -637,22 +644,15 @@ public final class Main {
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
-        RealProject p = selectProjectConsoleMode(true);
+        selectProjectConsoleMode(true);
 
         validateTagsConsoleMode();
 
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
-        String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-        ProjectProperties config = p.getProjectProperties();
-        boolean alt = !config.isSupportDefaultTranslations();
-        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
-                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
-        }
-        p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        return 0;
+        BaseSubCommand command = SubCommands.getCommand("Align").getDeclaredConstructor().newInstance();
+        command.setParameters(PARAMS);
+        return command.call();
     }
 
     /**

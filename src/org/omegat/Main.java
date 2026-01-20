@@ -143,22 +143,22 @@ public final class Main {
     private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
-        if (args.length > 0
-                && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        CLIParameters cliParams = CLIParameters.parseArgs(args);
+        PARAMS.putAll(cliParams.getParams());
+
+        if (PARAMS.containsKey("help") || (args.length > 0 && CLIParameters.HELP_SHORT.equals(args[0]))) {
             System.out.println(
                     StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
 
-        if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
-            TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
+        if (CLIParameters.TEAM_TOOL.equals(cliParams.getSubcommand())) {
+            TeamTool.main(cliParams.getArgs().toArray(new String[0]));
         }
-
-        // Workaround for Java 17 or later support of JAXB.
-        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
-        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        PARAMS.putAll(CLIParameters.parseArgs(args));
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
         if (projectDir != null) {
@@ -168,7 +168,11 @@ public final class Main {
 
         applyConfigFile(PARAMS.get(CLIParameters.CONFIG_FILE));
 
-        runMode = CLIParameters.RUN_MODE.parse(PARAMS.get(CLIParameters.MODE));
+        String modeArg = PARAMS.get(CLIParameters.MODE);
+        if (modeArg == null) {
+            modeArg = cliParams.getSubcommand();
+        }
+        runMode = CLIParameters.RUN_MODE.parse(modeArg);
 
         String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {

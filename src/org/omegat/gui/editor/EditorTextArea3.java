@@ -265,9 +265,6 @@ public class EditorTextArea3 extends JEditorPane {
 
             boolean singleClickSegmentActivation = Preferences
                     .isPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION);
-            System.out.println("Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION: "
-                    + (singleClickSegmentActivation ? "ENABLED" : "DISABLED"));
-
             if (singleClickSegmentActivation && e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1
                     && lockCursorToInputArea) {
                 int location = getCaretPosition();

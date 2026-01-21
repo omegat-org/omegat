@@ -87,21 +87,23 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.getDefaultDictionaryDir().getPath());
 
-        File affixName = Path.of(dictionaryDir).resolve(Path.of(language)).resolve(SC_AFFIX_FILENAME).toFile();
-        File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
-
-        if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-            // try to load <language>.dic/aff
-            affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
-            dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
-            if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-                return Optional.empty();
-            }
-        }
-
         try {
-            ISpellCheckerProvider result = new LuceneProvider(dictionaryName, affixName);
-            return Optional.of(result);
+            File affixName = Path.of(dictionaryDir).resolve(Path.of(language)).resolve(SC_AFFIX_FILENAME).toFile();
+            File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
+            if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
+                // try to load ~/.omegat/spelling/<language>.dic/aff
+                affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
+                dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
+                if (!isInvalidFile(affixName) && !isInvalidFile(dictionaryName)) {
+                    return Optional.of(new LuceneProvider(dictionaryName, affixName));
+                }
+            }
+
+            // try bundled dictionary
+            Dictionary dictionary = SpellCheckerManager.getHunspellDictionary(language);
+            if (dictionary != null) {
+                return Optional.of(new LuceneProvider(dictionary));
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -122,6 +124,12 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
             hunspell = new Hunspell(dict);
         }
 
+        private LuceneProvider(Dictionary dictionary) {
+            hunspell = new Hunspell(dictionary);
+            dictInputStream = null;
+            affixInputStream = null;
+        }
+
         @Override
         public boolean isCorrect(final String word) {
             return hunspell.spell(word);
@@ -139,9 +147,18 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         @Override
         public void destroy() {
             try {
-                dictInputStream.close();
-                affixInputStream.close();
+                if (dictInputStream != null) {
+                    dictInputStream.close();
+                }
             } catch (Exception ignored) {
+                // ignore close error
+            }
+            try {
+                if (affixInputStream != null) {
+                    affixInputStream.close();
+                }
+            } catch (Exception ignored) {
+                // ignore close error
             }
         }
     }

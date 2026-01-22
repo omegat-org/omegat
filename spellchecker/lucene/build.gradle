@@ -10,6 +10,7 @@ dependencies {
         compileOnly(libs.commons.io)
         compileOnly(libs.bundles.lucene)
     }
+    compileOnly(libs.jspecify)
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))

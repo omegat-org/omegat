@@ -39,6 +39,7 @@ import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.Hunspell;
 import org.apache.lucene.store.NIOFSDirectory;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.AbstractSpellChecker;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -111,8 +112,8 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
     }
 
     private static final class LuceneProvider implements ISpellCheckerProvider {
-        private final InputStream dictInputStream;
-        private final InputStream affixInputStream;
+        private final @Nullable InputStream dictInputStream;
+        private final @Nullable InputStream affixInputStream;
         private final Hunspell hunspell;
 
         private LuceneProvider(File dictName, File affixName) throws IOException, ParseException {

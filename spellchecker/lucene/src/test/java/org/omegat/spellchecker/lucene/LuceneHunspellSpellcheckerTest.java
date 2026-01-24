@@ -60,9 +60,8 @@ public class LuceneHunspellSpellcheckerTest {
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
         TestPreferencesInitializer.init(configDir.toString());
         Files.createDirectory(configDir.resolve("spelling"));
-        Files.createDirectory(configDir.resolve("spelling/en"));
-        copyFile("en/index.aff");
-        copyFile("en/index.dic");
+        copyFile("en.aff");
+        copyFile("en.dic");
     }
 
     @After

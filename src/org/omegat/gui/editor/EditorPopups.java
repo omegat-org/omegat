@@ -84,9 +84,6 @@ public final class EditorPopups {
     /**
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
-     *
-     * @param point
-     *            : where should the popup be shown
      */
     public static class SpellCheckerPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
@@ -316,6 +313,8 @@ public final class EditorPopups {
         }
     }
 
+    private static final String DUPLICATE_ITEM_FORMAT_STRING = " {0,number,#}";
+
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
 
@@ -335,15 +334,13 @@ public final class EditorPopups {
             if (dups.isEmpty()) {
                 return;
             }
-            JMenuItem header = menu
-                    .add(StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER")), 
-                    dups.size()));
+            JMenuItem header = menu.add(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER", dups.size()));
             header.setEnabled(false);
             MenuItemPager pager = new MenuItemPager(menu);
             for (SourceTextEntry entry : dups) {
                 int entryNum = entry.entryNum();
-                String label = StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM")), 
-                    entryNum);
+                String numStr = StringUtil.format(DUPLICATE_ITEM_FORMAT_STRING, entryNum);
+                String label = OStrings.getString("MW_GO_TO_DUPLICATE_ITEM", numStr);
                 JMenuItem item = pager.add(new JMenuItem(label));
                 item.addActionListener(e -> ec.gotoEntry(entryNum));
             }

@@ -400,6 +400,7 @@ public final class EditorPopups {
         }
     }
 
+    private static final String DUPLICATE_ITEM_FORMAT_STRING = " {0,number,#}";
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
 
@@ -427,8 +428,7 @@ public final class EditorPopups {
             MenuItemPager pager = new MenuItemPager(menu);
             for (SourceTextEntry entry : dups) {
                 int entryNum = entry.entryNum();
-                String label = StringUtil.format(
-                        Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM")), entryNum);
+                String label = Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM", StringUtil.format(DUPLICATE_ITEM_FORMAT_STRING, entryNum)));
                 JMenuItem item = pager.add(new JMenuItem(label));
                 item.addActionListener(e -> ec.gotoEntry(entryNum));
             }

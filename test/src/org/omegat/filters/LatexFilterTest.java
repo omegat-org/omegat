@@ -29,6 +29,11 @@ import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.latex.LatexFilter;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class LatexFilterTest extends TestFilterBase {
 
     @Test
@@ -40,5 +45,15 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("[11pt]{article}", null, null, "", "LaTeX Typesetting By Example", null);
         checkMulti("LaTeX Typesetting By Example", null, null, "[11pt]{article}",
                 "Phil Farrell<br0> Stanford University School of Earth Sciences", null);
+    }
+
+    @Test
+    public void testBugOverlap() throws Exception {
+        String f = "test/data/filters/Latex/bug_overlap.tex";
+        List<String> entries = parse(new LatexFilter(), f);
+        assertEquals(1, entries.size());
+        String target = entries.get(0);
+        assertTrue("ends with unwanted string: " + target.substring(target.length() - 10),
+                target.matches("We <u\\d> it, and <u\\d> is compressed. Then we <u\\d>. "));
     }
 }

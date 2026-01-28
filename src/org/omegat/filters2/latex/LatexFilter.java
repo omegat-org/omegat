@@ -10,6 +10,7 @@
                2011 Didier Briel
                2014 Adiel Mittmann
                2017 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,10 +37,13 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -405,7 +409,8 @@ public class LatexFilter extends AbstractFilter {
                     if (m.group(2) != null) {
                         content = processParagraph(commands, m.group(2));
                     }
-                    String[] subst = { reHarden(m.group(1) + "{" + content + "}"), reHarden(replace) };
+                    String[] subst = { reHarden(m.group(1) + "{" + content + "}"),
+                            reHarden(replace) };
 
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
@@ -421,12 +426,13 @@ public class LatexFilter extends AbstractFilter {
 
     private String replaceUnknownCommand(LinkedList<String[]> substituted, LinkedList<String> commands,
             String par) {
-        int counter = 0;
+        int placeholderIndex = 0;
+        List<String> sortedCommands = commands.stream()
+                .sorted(Comparator.comparingInt(String::length).reversed()).collect(Collectors.toList());
 
-        for (Iterator<String> it = commands.iterator(); it.hasNext();) {
-            String command = it.next();
-
-            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {
+        for (String command : sortedCommands) {
+            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")
+                    || command.equals("\\|")) {
                 // continue;
                 command = "\\" + command;
             }
@@ -438,17 +444,16 @@ public class LatexFilter extends AbstractFilter {
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
                 while (m.find()) {
-                    String replace = "<u" + String.valueOf(counter) + ">";
+                    String replace = "<u" + placeholderIndex + ">";
                     String[] subst = { reHarden(m.group(0)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
-                    counter++;
+                    placeholderIndex++;
                 }
                 m.appendTail(sb);
 
                 par = sb.toString();
              } catch (java.util.regex.PatternSyntaxException e) {
-               //TODO: understand the exceptions
                Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
                Log.log(command);
             }

@@ -32,7 +32,6 @@ import org.omegat.filters2.latex.LatexFilter;
 
 import java.io.File;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -58,8 +57,8 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("LaTeX Itemize example", null, null, "", "Itemize", null);
         checkMulti("Itemize", null, null, "LaTeX Itemize example", "<r0> INTERRUTTORE GENERALE ON/OFF (I/0)",
                 null);
-        checkMulti("<r0> INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize", "<r0> SPIA PRESENZA TENSIONE",
-                null);
+        checkMulti("<r0> INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize",
+                "<r0> SPIA PRESENZA TENSIONE", null);
         checkMulti("<r0> SPIA PRESENZA TENSIONE", null, null, "<r0> INTERRUTTORE GENERALE ON/OFF (I/0)",
                 "<r0> SPIA PREALLARME", null);
         checkMulti("<r0> SPIA PREALLARME", null, null, "<r0> SPIA PRESENZA TENSIONE",

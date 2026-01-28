@@ -426,7 +426,8 @@ public class LatexFilter extends AbstractFilter {
                     if (m.group(2) != null) {
                         content = processParagraph(commands, m.group(2));
                     }
-                    String[] subst = { reHarden(lineBreak + m.group(1) + "{" + content + "}"), reHarden(replace) };
+                    String[] subst = { reHarden(lineBreak + m.group(1) + "{" + content + "}"),
+                            reHarden(replace) };
 
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
@@ -444,8 +445,7 @@ public class LatexFilter extends AbstractFilter {
             String par) {
         int placeholderIndex = 0;
         List<String> sortedCommands = commands.stream()
-                .sorted(Comparator.comparingInt(String::length).reversed())
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparingInt(String::length).reversed()).collect(Collectors.toList());
 
         for (String command : sortedCommands) {
             if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")

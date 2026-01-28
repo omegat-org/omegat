@@ -274,11 +274,11 @@ public class LatexFilter extends AbstractFilter {
 
     private String substituteUnicode(String par) {
         par = par.replaceAll("\\\\\\\\", "<br0>");
-        par = par.replaceAll("\\{?\\\\ss\\}?", "\u00df");
-        par = par.replaceAll("\\{?\\\\glqq\\}?(\\{\\})?", "\u301f");
-        par = par.replaceAll("\\{?\\\\grqq\\}?(\\{\\})?", "\u301d");
-        par = par.replaceAll("\\{?\\\\glq\\}?(\\{\\})?", "\u201a");
-        par = par.replaceAll("\\{?\\\\grq\\}?(\\{\\})?", "\u2018");
+        par = par.replaceAll("\\{?\\\\ss}?", "ß");
+        par = par.replaceAll("\\{?\\\\glqq}?(\\{})?", "〟");
+        par = par.replaceAll("\\{?\\\\grqq}?(\\{})?", "〝");
+        par = par.replaceAll("\\{?\\\\glq}?(\\{})?", "‚");
+        par = par.replaceAll("\\{?\\\\grq}?(\\{})?", "‘");
         par = par.replaceAll("\\\\%", "%");
         par = par.replaceAll("\\\\-", "\u00ad");
         par = par.replaceAll("\\\\,", "\u2009");
@@ -537,7 +537,6 @@ public class LatexFilter extends AbstractFilter {
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(tmp);
-                int lastStart = 0;
                 while (m.find()) {
                     String replace = "<r" + counter + ">";
                     String content = processParagraph(commands, tmp.substring(0, m.start(1)));

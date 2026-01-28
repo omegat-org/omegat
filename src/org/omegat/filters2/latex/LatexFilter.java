@@ -36,10 +36,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -440,9 +442,12 @@ public class LatexFilter extends AbstractFilter {
 
     private String replaceUnknownCommand(LinkedList<String[]> substituted, List<String> commands,
             String par) {
-        int counter = 0;
+        int placeholderIndex = 0;
+        List<String> sortedCommands = commands.stream()
+                .sorted(Comparator.comparingInt(String::length).reversed())
+                .collect(Collectors.toList());
 
-        for (String command : commands) {
+        for (String command : sortedCommands) {
             if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")
                     || command.equals("\\|")) {
                 // continue;
@@ -456,11 +461,11 @@ public class LatexFilter extends AbstractFilter {
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
                 while (m.find()) {
-                    String replace = "<u" + counter + ">";
+                    String replace = "<u" + placeholderIndex + ">";
                     String[] subst = { reHarden(m.group(0)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
-                    counter++;
+                    placeholderIndex++;
                 }
                 m.appendTail(sb);
 
@@ -528,7 +533,7 @@ public class LatexFilter extends AbstractFilter {
             StringBuilder sb = new StringBuilder();
 
             if (parBreakCommand.contains(command)) {
-                String find = String.format(".*(\\%s)", command, command);
+                String find = String.format(".*(\\%s)", command);
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(tmp);

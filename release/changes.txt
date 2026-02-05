@@ -1,12 +1,19 @@
 ----------------------------------------------------------------------
- OmegaT 6.0.2 (2025-12-25)
+ OmegaT 6.0.2 (2026-00-00)
 ----------------------------------------------------------------------
-  1 Removed features
-  4 Enhancement
- 12 Bug fixes
-  0 Localisation updates
+  1 Security fix
+  1 Removed feature
+  5 Enhancements
+ 16 Bug fixes
+  4 Localisation updates
 ----------------------------------------------------------------------
 6.0.2 vs 6.0.1
+
+  Security fix:
+
+  - CVE-2024-51366: OmegaT .conf File Upload RCE Vulnerability
+  - Remove vulnerable segmentation.conf support
+  https://cvefeed.io/vuln/detail/CVE-2024-51366
 
   Removed features:
 
@@ -14,6 +21,9 @@
   https://github.com/omegat-org/omegat/pull/1291
 
   Implemented requests:
+
+  - Externalize the script folder so that macOS users can access it
+  https://sourceforge.net/p/omegat/feature-requests/1781/
 
   - Various small documentation updates
   https://sourceforge.net/p/omegat/documentation/443/
@@ -29,6 +39,12 @@
 
   Bug fixes:
 
+  - Right-click error when duplicate element-
+  https://sourceforge.net/p/omegat/bugs/1314/
+
+  - LaTeX variable displayed erroneously, but is correct in target file
+  https://sourceforge.net/p/omegat/bugs/1313/
+
   - Make OpenXmlFilter disabled by default
   https://github.com/omegat-org/omegat/pull/1611
 
@@ -40,6 +56,9 @@
 
   - [Security] vulnerability on dependencies
   https://sourceforge.net/p/omegat/bugs/1293/
+
+  - Sometimes called SegmentProperties.onEntryActivated after closed a project
+  https://sourceforge.net/p/omegat/bugs/1291/
 
   - Checking for problems throws error: "Comparison method violates its general contract"
   https://sourceforge.net/p/omegat/bugs/1279/
@@ -58,14 +77,24 @@
   - Unit tests failed on Windows
   https://sourceforge.net/p/omegat/bugs/1223/
 
-  - Translation memories are not correctly reloaded after team synchronization
-  https://sourceforge.net/p/omegat/bugs/1164/
-
   - pt-BR bundle typos
   https://sourceforge.net/p/omegat/bugs/1282/
 
   - macOS notarization fails with junixsocket libraries
   https://sourceforge.net/p/omegat/bugs/1283/
+
+  - Translation memories are not correctly reloaded after team synchronization
+  https://sourceforge.net/p/omegat/bugs/1164/
+
+  - OmegaT does not check errors when tag errors are not present
+  https://sourceforge.net/p/omegat/bugs/1158/
+
+  Localization Updates:
+
+  - Catalan localization updated (documentation)
+  - Dutch localization updated (documentation)
+  - French localization updated (UI, documentation)
+  - Italian localization updated (documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)

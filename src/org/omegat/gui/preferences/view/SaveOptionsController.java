@@ -34,7 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
 import org.omegat.core.data.CommandVarExpansion;
-import org.omegat.core.statistics.StatOutputFormat;
+import org.omegat.core.statistics.spi.StatOutputFormat;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;

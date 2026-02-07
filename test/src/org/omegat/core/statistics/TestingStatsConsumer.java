@@ -24,6 +24,8 @@
  ******************************************************************************/
 package org.omegat.core.statistics;
 
+import org.omegat.core.statistics.spi.IStatsConsumer;
+
 import java.util.concurrent.CompletableFuture;
 
 /**

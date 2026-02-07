@@ -47,6 +47,9 @@ import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
+import org.omegat.core.statistics.dso.MatchStatCounts;
+import org.omegat.core.statistics.dso.StatCount;
+import org.omegat.core.statistics.spi.IStatsConsumer;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OConsts;
@@ -74,6 +77,7 @@ import org.omegat.util.gui.TextUtil;
  * @author Aaron Madlon-Kay
  */
 public class CalcMatchStatistics extends LongProcessThread {
+
     private final String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
@@ -83,6 +87,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowMatch85"), OStrings.getString("CT_STATSMATCH_RowMatch75"),
             OStrings.getString("CT_STATSMATCH_RowMatch50"), OStrings.getString("CT_STATSMATCH_RowNoMatch"),
             OStrings.getString("CT_STATSMATCH_Total") };
+
     private final String[] rowsPerFile = new String[] {
             OStrings.getString("CT_STATSMATCH_RowRepetitionsWithinThisFile"),
             OStrings.getString("CT_STATSMATCH_RowRepetitionsFromOtherFiles"),
@@ -90,6 +95,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowMatch85"), OStrings.getString("CT_STATSMATCH_RowMatch75"),
             OStrings.getString("CT_STATSMATCH_RowMatch50"), OStrings.getString("CT_STATSMATCH_RowNoMatch"),
             OStrings.getString("CT_STATSMATCH_Total") };
+
     private final boolean[] align = new boolean[] { false, true, true, true, true };
 
     private final IStatsConsumer callback;
@@ -141,14 +147,6 @@ public class CalcMatchStatistics extends LongProcessThread {
         callback.setTextData(text);
     }
 
-    void appendTable(String title, String[][] table) {
-        callback.appendTable(title, header, table);
-    }
-
-    void showTable(String[][] table) {
-        callback.setTable(header, table);
-    }
-
     void calcPerFile() {
         int fileNumber = 0;
         for (IProject.FileInfo fi : project.getProjectFiles()) {
@@ -163,7 +161,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                     fi.filePath);
             appendText(title + "\n");
             appendText(outText + "\n");
-            appendTable(title, table);
+            callback.appendTable(title, header, table);
         }
 
         MatchStatCounts total = calcTotal(false);
@@ -173,7 +171,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         String[][] table = total.calcTable(rowsTotal, i -> i != 1);
         String outText = TextUtil.showTextTable(header, table, align);
         appendText(outText + "\n");
-        appendTable(title, table);
+        callback.appendTable(title, header, table);
 
         String fn = project.getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
@@ -211,7 +209,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String[][] table = result.calcTableWithoutPercentage(rowsTotal);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
-            showTable(table);
+            callback.setTable(header, table);
         }
 
         calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
@@ -220,7 +218,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
-            showTable(table);
+            callback.setTable(header, table);
             String fn = project.getProjectProperties().getProjectInternal()
                     + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);

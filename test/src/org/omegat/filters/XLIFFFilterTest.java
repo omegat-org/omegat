@@ -50,7 +50,7 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.statistics.StatCount;
+import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;

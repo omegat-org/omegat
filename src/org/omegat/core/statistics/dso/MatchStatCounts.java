@@ -23,7 +23,9 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics;
+package org.omegat.core.statistics.dso;
+
+import org.omegat.core.statistics.Statistics;
 
 import java.util.function.IntPredicate;
 import java.util.stream.Collector;

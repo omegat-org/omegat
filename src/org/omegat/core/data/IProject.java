@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
-import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.statistics.dso.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 

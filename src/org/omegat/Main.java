@@ -73,6 +73,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.core.statistics.Statistics;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -85,8 +86,8 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
-import org.omegat.core.statistics.StatOutputFormat;
-import org.omegat.core.statistics.StatsResult;
+import org.omegat.core.statistics.spi.StatOutputFormat;
+import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -478,7 +479,7 @@ public final class Main {
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.
-            System.out.println(projectStats.getTextData());
+            System.out.println(Statistics.getTextData(projectStats));
             p.closeProject();
             return 0;
         }
@@ -506,7 +507,7 @@ public final class Main {
                 StandardCharsets.UTF_8)) {
             switch (statsMode) {
             case TEXT:
-                writer.write(projectStats.getTextData());
+                writer.write(Statistics.getTextData(projectStats));
                 break;
             case JSON:
                 writer.write(projectStats.getJsonData());

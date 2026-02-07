@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics;
+package org.omegat.core.statistics.spi;
 
 import org.omegat.util.OStrings;
 

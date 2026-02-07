@@ -98,7 +98,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.statistics.dso.StatisticsInfo;
 import org.omegat.gui.dialogs.ConflictDialogController;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.CalcMarkersThread;

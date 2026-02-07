@@ -25,7 +25,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics;
+package org.omegat.core.statistics.dso;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

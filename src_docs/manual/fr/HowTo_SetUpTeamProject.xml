@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.setup.team.project">
+  <title xml:id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
   <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
 
@@ -11,20 +10,20 @@
 	<para>Un projet en équipe OmegaT synchronise la mémoire de traduction du projet <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et le glossaire modifiable du projet <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> entre le serveur d’hébergement et tous les membres de l’équipe. Le projet en équipe gère aussi tous les conflits possibles entre eux.</para>
   </note>
 
-  <section id="how.to.setup.team.project.prepare.the.repository">
-    <title id="how.to.setup.team.project.prepare.the.repository.title">Préparations</title>
+  <section xml:id="how.to.setup.team.project.prepare.the.repository">
+    <title xml:id="how.to.setup.team.project.prepare.the.repository.title">Préparations</title>
 
 	<para>Voici les étapes à suivre afin de mettre en place un projet en équipe :</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</para>
+      <listitem xml:id="how.to.setup.team.project.create.empty.repository">
+		<para xml:id="how.to.setup.team.project.create.empty.repository.title">Créez un dépôt vide sur votre serveur d’hébergement du logiciel de gestion de version</para>
 
 		<para>Cela peut normalement se faire par l’intermédiaire d’une interface web, d’une application graphique, ou en ligne de commande. Consultez la documentation de votre serveur ou de votre service d’hébergement pour en savoir plus.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
+	  <listitem xml:id="how.to.setup.team.project.clone.locally">
+		<para xml:id="how.to.setup.team.project.clone.locally.title">Utilisez le logiciel de gestion de version local pour créer une copie locale (clone).</para>
 
 		<note>
 		  <para>Cette version locale contient votre copie du projet OmegaT qui servira de <emphasis>gestionnaire de projet</emphasis>. Utilisez-la pour effectuer des modifications qui se répercutent sur l’ensemble de l’équipe.</para>
@@ -34,8 +33,8 @@
 		<para>Nous vous recommandons d’éviter d’utiliser ce dossier pour des tâches de traduction. Si vous avez besoin d’effectuer des traductions ou des tâches de révisions sur ce projet, utilisez OmegaT pour télécharger une copie séparée du projet en équipe et travaillez à partir de celle-ci. Voir le guide pratique <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> pour en savoir plus.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">Remplissez la copie locale vide avec un vrai projet OmegaT.</para>
+	  <listitem xml:id="how.to.setup.team.project.fill.local.clone">
+		<para xml:id="how.to.setup.team.project.fill.local.clone.title">Remplissez la copie locale vide avec un vrai projet OmegaT.</para>
 		<itemizedlist>
 		  <listitem>
 			<para>Créez la structure du projet</para>
@@ -72,20 +71,20 @@
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">Enregistrez les fichiers du projet dans le logiciel de gestion de version local</para>
+	  <listitem xml:id="how.to.setup.team.project.register">
+		<para xml:id="how.to.setup.team.project.register.title">Enregistrez les fichiers du projet dans le logiciel de gestion de version local</para>
 
 		<para>Si vous avez créé le projet à partir de l’interface graphique, vous devrez alors explicitement l’ajouter au logiciel de gestion de version (<command>add</command> dans SVN et Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">Placez les fichiers enregistrés dans le serveur d’hébergement</para>
+	  <listitem xml:id="how.to.setup.team.project.push">
+		<para xml:id="how.to.setup.team.project.push.title">Placez les fichiers enregistrés dans le serveur d’hébergement</para>
 
 		<para>Enfin, publiez votre projet sur le serveur distant (<command>commit</command> sur SVN, <command>commit</command> et <command>push</command> sur Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">Donnez les droits d’accès à votre équipe.</para>
+	  <listitem xml:id="how.to.setup.team.project.give.access.rights">
+		<para xml:id="how.to.setup.team.project.give.access.rights.title">Donnez les droits d’accès à votre équipe.</para>
 
 		<note>
 		  <para>Si vous utilisez plusieurs projets sur un même serveur, les informations d’identification ne seront demandées qu’une fois pour ce serveur.</para>
@@ -112,8 +111,8 @@
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">Demandez à tout le monde de télécharger le projet à partir d’OmegaT</para>
+	  <listitem xml:id="how.to.setup.team.project.have.members.download">
+		<para xml:id="how.to.setup.team.project.have.members.download.title">Demandez à tout le monde de télécharger le projet à partir d’OmegaT</para>
 
 		<para>Les administrateurs ont deux options pour envoyer l’emplacement du projet aux membres :</para>
 
@@ -132,18 +131,18 @@
 		<para>Si elles ne correspondent pas, vérifiez que les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont partagés correctement.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</para>
+	  <listitem xml:id="how.to.setup.team.project.download.if.needed">
+		<para xml:id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">Vous pouvez maintenant travailler sur le projet avec votre équipe.</para>
+	  <listitem xml:id="how.to.setup.team.project.translate">
+		<para xml:id="how.to.setup.team.project.translate.title">Vous pouvez maintenant travailler sur le projet avec votre équipe.</para>
 	  </listitem>
 	</orderedlist>
   </section>
 
-  <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">Mise en correspondance des dépôts</title>
+  <section xml:id="how.to.setup.team.project.mapping.parameters">
+	<title xml:id="how.to.setup.team.project.mapping.parameters.title">Mise en correspondance des dépôts</title>
 
 	<para>Il est possible de mettre en correspondance différents emplacements distants avec des fichiers locaux via l’interface d’OmegaT en utilisant l’élément <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, ou en modifiant le fichier <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>. Bien que la fonctionnalité de mise en correspondance soit d’abord conçue pour rassembler les fichiers source provenant de différents emplacements, elle peut aussi être utilisée pour d’autres types de fichiers.</para>
 
@@ -196,23 +195,23 @@
 	</variablelist>
   </section>
 
-  <section id="how.to.setup.team.project.example.mappings">
-	<title id="how.to.setup.team.project.example.mappings.title">Exemples de mises en correspondance</title>
+  <section xml:id="how.to.setup.team.project.example.mappings">
+	<title xml:id="how.to.setup.team.project.example.mappings.title">Exemples de mises en correspondance</title>
 
-	<para>Mise en correspondance par défaut du projet :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_du_projet_OmegaT_en_équipe&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+	<para>Mise en correspondance par défaut du projet :<programlisting>&lt;repository type="svn" url="https://dépôt_du_projet_OmegaT_en_équipe"&gt;
+	&lt;mapping local="" repository=""/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>La totalité du contenu du <filename>https://dépôt_du_projet_OmegaT_en_équipe</filename> est mise en correspondance avec le projet OmegaT local.</para>
 
-	<para>Mise en correspondance pour des projets dans le sous-dossier d’un dépôt :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_tous_les_projets_OmegaT_en_équipe&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;EN-US_FR_project&quot;/&gt;
+	<para>Mise en correspondance pour des projets dans le sous-dossier d’un dépôt :<programlisting>&lt;repository type="svn" url="https://dépôt_de_tous_les_projets_OmegaT_en_équipe"&gt;
+	&lt;mapping local="" repository="EN-US_FR_project"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>La totalité du contenu du <filename>https://dépôt_de_tous_les_projets_OmegaT_en_équipe/Projet_En-US_FR</filename> est mise en correspondance avec le projet OmegaT local.</para>
 
-	<para>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe&quot;&gt;
-	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	<para>Mise en correspondance de sources supplémentaires en provenance de dépôts distants, avec des filtres :<programlisting>&lt;repository type="svn" url="https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe"&gt;
+	&lt;mapping local="source/subdir" repository=""&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
     	&lt;includes&gt;readme.bak&lt;/includes&gt;
 	&lt;/mapping&gt;
@@ -220,23 +219,23 @@
 
 	<para>La totalité du contenu du <filename>https://dépôt_de_toutes_les_sources_des_projets_OmegaT_en_équipe</filename> est mise en correspondance avec le dossier source du projet OmegaT, à l’exception des fichiers portant l’extension <filename>.bak</filename>. Cependant, le fichier <filename>readme.bak</filename> est aussi inclus.</para>
 
-	<para>Mise en correspondance de sources supplémentaires provenant du web :<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>Mise en correspondance de sources supplémentaires provenant du web :<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> est mis en correspondance avec le fichier local <filename>source/Bundle.properties</filename>.</para>
 
-	<para>Mise en correspondance avec renommage :<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/readme_fr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>Mise en correspondance avec renommage :<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/readme_fr.txt" repository="release/readme.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Le fichier distant <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> est mis en correspondance avec le fichier local <filename>source/readme_tr.txt</filename>.</para>
 
 	<para>Ceci permet de renommer le fichier à traduire.</para>
 
-	<para>Mise en correspondance d’un fichier local :<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/dossier/de/mes/fichiers&quot;&gt;
-	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;mon/fichier.txt&quot;/&gt;
-	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;un/autre/fichier.txt&quot;/&gt;
+	<para>Mise en correspondance d’un fichier local :<programlisting>&lt;repository type="file" url="/dossier/de/mes/fichiers"&gt;
+	&lt;mapping local="source/file.txt" repository="mon/fichier.txt"/&gt;
+	&lt;mapping local="source/file2.txt" repository="un/autre/fichier.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Le fichier local <filename>/dossiers/de/mes/fichiers/mon/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier.txt</filename> et <filename>/dossiers/de/mes/fichiers/un/autre/fichier.txt</filename> est mis en correspondance avec le fichier local <filename>source/fichier2.txt</filename>.</para>
@@ -248,8 +247,8 @@
 	<para>Vous pouvez ajouter autant de mises en correspondance que vous le souhaitez, mais l’une d’elles doit contenir le fichier <filename>omegat.project</filename>.</para>
 
   </section>
-  <section id="how.to.setup.team.project.selective.sharing">
-	<title id="how.to.setup.team.project.selective.sharing.title">Partage sélectif</title>
+  <section xml:id="how.to.setup.team.project.selective.sharing">
+	<title xml:id="how.to.setup.team.project.selective.sharing.title">Partage sélectif</title>
 
 	<para>Le processus ci-dessus décrit le scénario le plus courant, dans lequel l’administrateur du projet en équipe a le contrôle total sur le projet et où tous les fichiers (et statistiques) sont identiques sur toutes les instances du projet, aussi bien sur le serveur que sur les systèmes locaux des membres de l’équipe.</para>
 

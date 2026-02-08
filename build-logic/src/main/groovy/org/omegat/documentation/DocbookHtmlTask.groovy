@@ -1,12 +1,19 @@
 package org.omegat.documentation
 
 import groovy.transform.CompileStatic
+import net.sf.saxon.s9api.Processor
+import net.sf.saxon.s9api.QName
+import net.sf.saxon.s9api.XdmAtomicValue
+import net.sf.saxon.s9api.XsltTransformer
+import org.docbook.xsltng.extensions.Register
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 
-import javax.xml.transform.Transformer
+import java.nio.file.Paths
 
 @CompileStatic
+@CacheableTask
 class DocbookHtmlTask extends TransformationTask {
 
     private final Provider<String> css = project.objects.property(String)
@@ -16,35 +23,35 @@ class DocbookHtmlTask extends TransformationTask {
         return css
     }
 
-    private static String extractRootName(File file) {
-        def fileName = file.getName()
-        int extensionIndex = fileName.lastIndexOf('.')
-        if (extensionIndex <= 0) {
-            return fileName
-        }
-        return fileName.substring(0, extensionIndex)
+    @Override
+    protected void configProcessor(Processor processor) {
+        Register register = new Register()
+        register.initialize(processor.getUnderlyingConfiguration())
     }
 
     @Override
-    protected void preTransform(Transformer transformer, File source, File target) {
-        String baseDir = outputFile.get().asFile.parent + File.separator
-        transformer.setParameter("root.filename", extractRootName(target))
-        transformer.setParameter("base.dir", baseDir)
-        transformer.setParameter("use.id.as.filename", 1)
-        transformer.setParameter("html.ext", ".html")
-        transformer.setParameter("chunk.section.depth", 0)
-        transformer.setParameter("chunk.first.sections", 0)
-        transformer.setParameter("chunker.output.encoding", "UTF-8")
-        transformer.setParameter("chunker.output.indent", "yes")
-        transformer.setParameter("use.extensions", 1)
-        transformer.setParameter("chapter.autolabel", 0)
-        transformer.setParameter("section.autolabel", 0)
-        transformer.setParameter("tablecolumns.extension", 0)
-        transformer.setParameter("toc.max.depth", 2)
-        transformer.setParameter("generate.toc", "book toc,title,figure,table chapter toc appendix toc")
-        transformer.setParameter("generate.index", 1)
-        transformer.setParameter("html.stylesheet", css.get())
-        transformer.setParameter("docbook.css.link", 0)
-        transformer.setParameter("saxon.character.representation", "native;decimal")
+    protected void preTransform(XsltTransformer transformer, File source, File target) {
+        def outputBaseDir = Paths.get(outputFile.get().asFile.parent).toUri()
+        def outputChunkName = outputFile.get().asFile.name
+        def inputBaseDir = Paths.get(inputFile.get().asFile.parent).toAbsolutePath().toUri()
+        transformer.setParameter(new QName("chunk"), new XdmAtomicValue(outputChunkName))
+        transformer.setParameter(new QName("chunk-output-base-uri"), new XdmAtomicValue(outputBaseDir))
+        transformer.setParameter(new QName("mediaobject-input-base-uri"), new XdmAtomicValue(inputBaseDir))
+        transformer.setParameter(new QName("resource-base-uri"), new XdmAtomicValue(""))
+        transformer.setParameter(new QName("persistent-toc"), new XdmAtomicValue(false))
+        transformer.setParameter(new QName("persistent-toc-search"), new XdmAtomicValue(false))
+        transformer.setParameter(new QName("chunk-section-depth"), new XdmAtomicValue(0))
+        transformer.setParameter(new QName("section-toc-depth"), new XdmAtomicValue(1))
+        transformer.setParameter(new QName("html-extension"), new XdmAtomicValue(".html"))
+        transformer.setParameter(new QName("output-media"), new XdmAtomicValue("screen"))
+        transformer.setParameter(new QName("page-style"), new XdmAtomicValue("book"))
+        transformer.setParameter(new QName("pagetoc-dynamic"), new XdmAtomicValue(false))
+        transformer.setParameter(new QName("persistent-toc"), new XdmAtomicValue(false))
+        transformer.setParameter(new QName("use-id-as-filename"), new XdmAtomicValue("true"))
+        transformer.setParameter(new QName("use-docbook-css"), new XdmAtomicValue("false"))
+        transformer.setParameter(new QName("user-css-links"), new XdmAtomicValue(css.get()))
+        transformer.setParameter(new QName("lists-of-examples"), new XdmAtomicValue("false"))
+        transformer.setParameter(new QName("lists-of-figures"), new XdmAtomicValue("false"))
+        transformer.setParameter(new QName("lists-of-tables"), new XdmAtomicValue("false"))
     }
 }

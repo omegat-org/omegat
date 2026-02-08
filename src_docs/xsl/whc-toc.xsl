@@ -2,7 +2,7 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:whc="http://www.xmlmind.com/whc/schema/whc"
                 xmlns:htm="http://www.w3.org/1999/xhtml"
-		        version="1.1">
+		        version="1.0">
 
     <xsl:template match="/">
         <whc:toc>

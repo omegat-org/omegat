@@ -57,12 +57,11 @@ dependencies {
     // dependencies on Maven
     implementation 'xerces:xercesImpl:2.12.2'
     implementation 'xml-resolver:xml-resolver:1.2'
-    implementation 'net.sf.docbook:docbook-xsl:1.79.1:resources@zip'
+    implementation 'org.xmlresolver:xmlresolver:5.2.2'
+    implementation 'net.sf.saxon:Saxon-HE:12.5'
+    implementation 'org.docbook:docbook-xslTNG:2.5.0'
+    implementation 'com.nwalsh:sinclude:5.2.4'
     implementation 'tokyo.northside:whc:3.6.0'
     implementation 'xalan:xalan:2.7.3'
     implementation 'xalan:serializer:2.7.3'
-
-    // dependencies not on Maven
-    // https://docbook.org/xml/4.5/docbook-xml-4.5.zip
-    implementation 'docbook:docbook-xml:4.5:resources@zip'
 }

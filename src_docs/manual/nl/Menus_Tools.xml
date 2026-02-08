@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Extra</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.tools">
+  <title xml:id="menus.tools.title"><guimenu>Extra</guimenu></title>
 
   <para>Dit menu geeft u toegang tot een aantal gereedschappen, inclusief validatie voor QA, rapporten voor overeenkomsten, een uitlijner en scripten.</para>
 
-  <example id="example.check.issues">
-	<title id="example.check.issues.title">Voorbeeld omschrijving sneltoets</title>
+  <example xml:id="example.check.issues">
+	<title xml:id="example.check.issues.title">Voorbeeld omschrijving sneltoets</title>
 	<para>Op Windows en Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
 
 	<para>Op macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo></para>
@@ -15,8 +14,8 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Controleren op problemen…</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+    <varlistentry xml:id="menus.tools.check.issues">
+      <term xml:id="menus.tools.check.issues.title"><guimenuitem>Controleren op problemen…</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>Dit gereedschap voor kwaliteitsbeheer voert alle automatische controles in één gang uit en geeft de resultaten weer in een venster.</para>
 
@@ -24,7 +23,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><guilabel>Problemen met tags</guilabel> (altijd geselecteerd): detecteert ontbrekende of misplaatste tags, inclusief aangepaste tags en gevlagde tekst. Bekijk de voorkeuren <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> voor details.</para>
+            <para><guilabel>Problemen met tags</guilabel> (altijd geselecteerd): detecteert ontbrekend of misplaatste tags, inclusief aangepaste tags en gevlagde tekst. Bekijk de <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> voorkeuren voor details.</para>
 
 			<note>
 			  <para>Deze optie is altijd geselecteerd.</para>
@@ -32,15 +31,15 @@
           </listitem>
 
           <listitem>
-            <para><guilabel>Spellingproblemen</guilabel> (optioneel): detecteert spelfouten. Het werkt als er een ondersteunde taalmodule is, of een door de gebruiker aangepast lokaal woordenboek voor de doeltaal. Bekijk de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voor details.</para>
+            <para><guilabel>Spellingproblemen</guilabel> (optioneel): detecteert spelfouten. Werkt alleen als een woordenboek voor spelling is geïnstalleerd. Bekijk de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voorkeuren voor details.</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>Problemen met terminologie</guilabel> (optioneel): detecteert alle items uit de woordenlijsten die niet juist zijn vertaald. Bekijk de voorkeuren <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voor details.</para>
+            <para><guilabel>Problemen met terminologie</guilabel> (optioneel): detecteert alle items uit de woordenlijsten die niet juist zijn vertaald. Bekijk de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voorkeuren voor details.</para>
           </listitem>
 
 		  <listitem>
-            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel): detecteert grammaticale of typografische problemen. Bekijk de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voor details.</para>
+            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel): detecteert grammaticale of typografische problemen. Bekijk de <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voorkeuren voor details.</para>
           </listitem>
         </itemizedlist>
 
@@ -67,15 +66,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Huidige document controleren op problemen</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.check.issues.for.current.document">
+      <term xml:id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Huidige document controleren op problemen</guimenuitem></term>
       <listitem>
         <para>Als boven, maar alleen voor het document dat momenteel wordt weergegeven in het venster Bewerken.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.statistics">
-      <term id="menus.tools.statistics.title"><guimenuitem>Statistieken</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.statistics">
+      <term xml:id="menus.tools.statistics.title"><guimenuitem>Statistieken</guimenuitem></term>
       <listitem>
         <para>Opent een nieuw venster en geeft de statistieken voor het project weer, zoals de totalen van het aantal woorden voor het project of segmenten en de totalen voor elk bestand in het project.</para>
 
@@ -94,19 +93,19 @@
 			</listitem>
 
 			<listitem>
-			  <para>Tags: Tags van OmegaT worden nooit meegeteld in de statistieken, maar in sommige gevallen kunnen termen splitsen en afwijkingen veroorzaken in de manier waarop OmegaT ze telt. Bekijk de voorkeur <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> voor details.</para>
+			  <para>Tags: Tags van OmegaT worden nooit meegeteld in de statistieken, maar in sommige gevallen kunnen termen splitsen en afwijkingen maken op de manier waarop OmegaT ze telt. Bekijk de voorkeur <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> voor details.</para>
 			</listitem>
 
 			<listitem>
-			  <para>Aangepaste tags en gevlagde tekst: net als met tags van OmegaT, zij worden niet standaard geteld in de statistieken, maar u kunt OmegaT ze laten tellen als woorden. Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> voor details.</para>
+			  <para>Aangepaste tags en gevlagde tekst: net als met tags van OmegaT, zij worden niet standaard geteld in de statistieken, maar u kunt OmegaT ze laten tellen als woorden. Bekijk de <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> voorkeur voor details.</para>
 			</listitem>
 		  </itemizedlist>
 		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Statistieken voor overeenkomsten</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics">
+      <term xml:id="menus.tools.match.statistics.title"><guimenuitem>Statistieken voor overeenkomsten</guimenuitem></term>
       <listitem>
         <para>Geeft de Statistieken voor overeenkomsten weer voor het project die bestaan uit het aantal herhalingen, exacte overeenkomsten, fuzzy overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
 
@@ -114,8 +113,8 @@
       </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistieken voor overeenkomsten per bestand</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics.per.file">
+      <term xml:id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistieken voor overeenkomsten per bestand</guimenuitem></term>
       <listitem>
         <para>Geeft de Statistieken voor overeenkomsten weer voor het project die bestaan uit het aantal herhalingen, exacte overeenkomsten, fuzzy overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens, voor elk bestand in het project.</para>
 
@@ -123,8 +122,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Bestanden uitlijnen…</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.align.files">
+      <term xml:id="menus.tools.align.files.title"><guimenuitem>Bestanden uitlijnen…</guimenuitem></term>
       <listitem>
         <para>Selecteer de twee bestanden die moeten worden uitgelijnd (het bronbestand en de vertaling ervan) en klik op <guibutton>OK</guibutton> om het venster <link linkend="windows.aligner" endterm="windows.aligner.title"/> te openen.</para>
 
@@ -133,8 +132,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>Scripten…</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.scripting">
+      <term xml:id="menus.tools.scripting.title"><guimenuitem>Scripten…</guimenuitem></term>
       <listitem>
         <para>Opent het venster <link linkend="windows.scripts" endterm="windows.scripts.title"/> dat u in staat stelt de locatie in te stellen waar scripts zijn opgeslagen, als ook om scripts te schrijven en uit te voeren, en ze toe te wijzen aan een sneltoets.</para>
 		<para>De lijst onder dit item geeft 12 potentiële plaatsen voor scripts weer. Klikken op een toegewezen plaats start het script dat is toegewezen aan die plaats.</para>
@@ -159,10 +158,10 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">Externe opdrachten voor zoeken</term>
+    <varlistentry xml:id="menus.tools.external.search.commands">
+      <term xml:id="menus.tools.external.search.commands.title">Externe opdrachten voor zoeken</term>
       <listitem>
-        <para>Als u in de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> externe zoekacties hebt gedefinieerd om uit te voeren, dan worden zij hier vermeld en van hieruit toegankelijk.</para>
+        <para>Als u in de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> opdrachten zijn gedefinieerd om externe zoekacties uit te voeren, dan zijn zij hier vermeld en toegankelijk.</para>
       </listitem>
     </varlistentry>
   </variablelist>

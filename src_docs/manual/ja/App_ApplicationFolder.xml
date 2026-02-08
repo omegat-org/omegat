@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="application.folder">
-  <title id="application.folder.title">プログラムフォルダー</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="application.folder">
+  <title xml:id="application.folder.title">プログラムフォルダー</title>
 
   <para>プログラムフォルダーには、 アプリ本体の<filename>OmegaT.jar</filename>などの重要なファイルが多数あります。</para>
 
@@ -40,83 +39,83 @@
   </note>
   
   <variablelist>
-	<varlistentry id="application.folder.omegat.license">
-	  <term id="application.folder.omegat.license.title">OmegaT-license.txt</term>
+	<varlistentry xml:id="application.folder.omegat.license">
+	  <term xml:id="application.folder.omegat.license.title">OmegaT-license.txt</term>
 	  <listitem>
 		<para>OmegaT ライセンスGPLバージョン3</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.omegat.jar">
-	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
+	<varlistentry xml:id="application.folder.omegat.jar">
+	  <term xml:id="application.folder.omegat.jar.title">OmegaT.jar</term>
 	  <listitem>
 		<para>OmegaTの実行ファイル。コマンドラインからOmegaTを起動するときに使用します。詳細については-<link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>を参照してください。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.changes">
-	  <term id="application.folder.changes.title">changes.txt</term>
+	<varlistentry xml:id="application.folder.changes">
+	  <term xml:id="application.folder.changes.title">changes.txt</term>
 	  <listitem>
 		<para>改善とバグ修正のリスト。OmegaTの進化に関する情報が必要な場合は、ここをチェックしてください。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.doc.license">
-	  <term id="application.folder.doc.license.title">doc-license.txt</term>
+	<varlistentry xml:id="application.folder.doc.license">
+	  <term xml:id="application.folder.doc.license.title">doc-license.txt</term>
 	  <listitem>
 		<para>文書のライセンス。GPLバージョン3</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.index.html">
-	  <term id="application.folder.index.html.title">index.html</term>
+	<varlistentry xml:id="application.folder.index.html">
+	  <term xml:id="application.folder.index.html.title">index.html</term>
 	  <listitem>
 		<para>多言語の取扱説明書の索引を指定します。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.join.html">
-	  <term id="application.folder.join.html.title">join.html</term>
+	<varlistentry xml:id="application.folder.join.html">
+	  <term xml:id="application.folder.join.html.title">join.html</term>
 	  <listitem>
 		<para>サポートページへのリンク。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.readme.txt">
-	  <term id="application.folder.readme.txt.title">readme.txt</term>
+	<varlistentry xml:id="application.folder.readme.txt">
+	  <term xml:id="application.folder.readme.txt.title">readme.txt</term>
 	  <listitem>
 		<para>簡単なインストールと実行手順。</para>
 	  </listitem>
 	</varlistentry>
 
 
-	<varlistentry id="application.folder.docs">
-	  <term id="application.folder.docs.title">docs/</term>
+	<varlistentry xml:id="application.folder.docs">
+	  <term xml:id="application.folder.docs.title">docs/</term>
 	  <listitem>
 		<para>文書フォルダです。<variablelist>
-		  <varlistentry id="application.folder.docs.contributors">
-			<term id="application.folder.docs.contributors.title">contributors.txt</term>
+		  <varlistentry xml:id="application.folder.docs.contributors">
+			<term xml:id="application.folder.docs.contributors.title">contributors.txt</term>
 			<listitem>
 			  <para>個々の貢献者のリスト。</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.en">
-			<term id="application.folder.docs.en.title">en/</term>
+		  <varlistentry xml:id="application.folder.docs.en">
+			<term xml:id="application.folder.docs.en.title">en/</term>
 			<listitem>
 			  <para>翻訳された各取扱説明書は、それぞれの言語フォルダに格納されます。</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.index.html">
-			<term id="application.folder.docs.index.html.title">index.html</term>
+		  <varlistentry xml:id="application.folder.docs.index.html">
+			<term xml:id="application.folder.docs.index.html.title">index.html</term>
 			<listitem>
 			  <para>多言語の取扱説明書の索引を指定します。</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.librairies.txt">
-			<term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
+		  <varlistentry xml:id="application.folder.docs.librairies.txt">
+			<term xml:id="application.folder.docs.librairies.txt.title">libraries.txt</term>
 			<listitem>
 			  <para>OmegaTが使用するライブラリーのリスト。</para>
 			</listitem>
@@ -126,29 +125,29 @@
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.images">
-	  <term id="application.folder.images.title">images/</term>
+	<varlistentry xml:id="application.folder.images">
+	  <term xml:id="application.folder.images.title">images/</term>
 	  <listitem>
 		<para>OmegaTで使用する画像が保存されるフォルダです。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.lib">
-	  <term id="application.folder.lib.title">lib/</term>
+	<varlistentry xml:id="application.folder.lib">
+	  <term xml:id="application.folder.lib.title">lib/</term>
 	  <listitem>
 		<para>OmegaTが使用するライブラリーが保管されているフォルダー。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.plugins">
-	  <term id="application.folder.plugins.title">plugins/</term>
+	<varlistentry xml:id="application.folder.plugins">
+	  <term xml:id="application.folder.plugins.title">plugins/</term>
 	  <listitem>
 		<para>外部プラグインをインストールできるフォルダー。プラグインの手動インストールの推奨場所は、<link linkend="configuration.folder">構成</link>フォルダーの中にある<link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>フォルダーです。詳細の<link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>環境設定を参照してください。</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.scripts">
-	  <term id="application.folder.scripts.title">scripts/</term>
+	<varlistentry xml:id="application.folder.scripts">
+	  <term xml:id="application.folder.scripts.title">scripts/</term>
 	  <listitem>
 		<para>配布されたスクリプトが格納されているフォルダ。詳細については、<link linkend="windows.scripts" endterm="windows.scripts.title"/>ウインドウを参照してください。</para>
 	  </listitem>

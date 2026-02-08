@@ -1,54 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.project">
-  <title id="menus.project.title"><guimenu>Progetto</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.project">
+  <title xml:id="menus.project.title"><guimenu>Progetto</guimenu></title>
   <para>Questo menu permette l'accesso ai comandi di gestione del progetto.</para>
 
-  <example id="example.new.project.shortcut">
-	<title id="example.new.project.shortcut.title">Esempio di descrizione delle scorciatoie</title>
+  <example xml:id="example.new.project.shortcut">
+	<title xml:id="example.new.project.shortcut.title">Esempio di descrizione delle scorciatoie</title>
 	<para>In Windows e Linux: <keycombo><keycap>Ctrl</keycap><keycap>Maiusc (Shift)</keycap><keycap>N</keycap></keycombo>
 	</para>
 
 	<para>In macOS: <keycombo><keycap>Maiusc (Shift)</keycap><keycap>Cmd</keycap><keycap>N</keycap></keycombo>
 	</para>
 
-	<para><emphasis role="bold">In questo manuale:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo> (NdT: per questioni di coerenza e per evitare confusione si è lasciato &quot;S&quot; di &quot;Shift&quot; al posto di &quot;M&quot;)
+	<para><emphasis role="bold">In questo manuale:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo> (NdT: per questioni di coerenza e per evitare confusione si è lasciato "S" di "Shift" al posto di "M")
 	</para>
   </example>
   
   <variablelist>
-    <varlistentry id="menus.project.new">
-      <term id="menus.project.new.title"><guimenuitem>Nuovo...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+    <varlistentry xml:id="menus.project.new">
+      <term xml:id="menus.project.new.title"><guimenuitem>Nuovo...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Crea e apre un nuovo progetto. Vedere la sezione <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title"><guimenuitem>Scarica il progetto in collaborazione...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.download.team.project">
+      <term xml:id="menus.project.download.team.project.title"><guimenuitem>Scarica il progetto in collaborazione...</guimenuitem></term>
       <listitem>
         <para>Crea una copia locale di un progetto OmegaT remoto. Vedere la guida all'uso <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title"><guimenuitem>Apri...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.open">
+      <term xml:id="menus.project.open.title"><guimenuitem>Apri...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>Apre un progetto esistente.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title"><guimenuitem>Apri recente...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.open.recent">
+      <term xml:id="menus.project.open.recent.title"><guimenuitem>Apri recente...</guimenuitem></term>
       <listitem>
         <para>Dà accesso agli ultimi dieci progetti modificati di recente. Facendo clic su uno qualsiasi, verrà salvato e chiuso il progetto attivo e aperto l'altro selezionato.</para>
         <para>Usare la funzione <guimenuitem>Pulisci il menu</guimenuitem> per ripulire l'elenco dei progetti recenti.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.reload">
-      <term id="menus.project.reload.title"><guimenuitem>Ricarica</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.reload">
+      <term xml:id="menus.project.reload.title"><guimenuitem>Ricarica</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
       <listitem>
         <para>Ricarica il progetto per riflettere le modifiche esterne nei file di partenza e nelle impostazioni del progetto.</para>
         <note>
@@ -58,53 +57,53 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.close">
-      <term id="menus.project.close.title"><guimenuitem>Chiudi</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.close">
+      <term xml:id="menus.project.close.title"><guimenuitem>Chiudi</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
       <listitem>
         <para>Salva la memoria di traduzione del progetto (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) e chiude il progetto.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.save">
-      <term id="menus.project.save.title"><guimenuitem>Salva</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.save">
+      <term xml:id="menus.project.save.title"><guimenuitem>Salva</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
         <para>Salva la memoria di traduzione del progetto (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) e sincronizza i progetti in collaborazione.</para>
 		<para>OmegaT salva automaticamente le traduzioni ogni tre minuti, oppure tutte le volte che si chiude un progetto o che si esce da OmegaT. Vedere la preferenza <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Aggiungi file...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.copy.files.to.source.folder">
+      <term xml:id="menus.project.copy.files.to.source.folder.title"><guimenuitem>Aggiungi file...</guimenuitem></term>
       <listitem>
         <para>Copia i file selezionati nella cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/> e ricarica il progetto per prendere in considerazione i nuovi file.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Aggiungi pagina MediaWiki...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.download.mediawiki.page">
+      <term xml:id="menus.project.download.mediawiki.page.title"><guimenuitem>Aggiungi pagina MediaWiki...</guimenuitem></term>
       <listitem>
 		<para>Apre una finestra di dialogo in cui è possibile incollare l'URL della pagina MediaWiki da tradurre. I dati originali della pagina verranno copiati all'interno della cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/> come file di testo, con estensione <filename>.utf8</filename>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.source.files">
-      <term id="menus.project.commit.source.files.title"><guimenuitem>Invia i file di partenza</guimenuitem></term>
+    <varlistentry xml:id="menus.project.commit.source.files">
+      <term xml:id="menus.project.commit.source.files.title"><guimenuitem>Invia i file di partenza</guimenuitem></term>
       <listitem>
         <warning><para>Questa funzione è specifica dei progetti in collaborazione. <emphasis>Soltanto il responsabile del progetto in collaborazione dovrebbe utilizzare questa funzione</emphasis>. Vedere la guida all'uso <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per i dettagli.</para></warning>
         <para>Carica i file aggiunti o modificati localmente dalla cartella <filename class="directory">source</filename> al deposito del progetto in collaborazione.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.target.files">
-      <term id="menus.project.commit.target.files.title"><guimenuitem>Invia i file di arrivo</guimenuitem></term>
+    <varlistentry xml:id="menus.project.commit.target.files">
+      <term xml:id="menus.project.commit.target.files.title"><guimenuitem>Invia i file di arrivo</guimenuitem></term>
       <listitem>
         <warning><para>Questa funzione è specifica dei progetti in collaborazione. <emphasis>Usare questa funzione soltanto se il responsabile del progetto in collaborazione chiede di farlo</emphasis>. Vedere la guida all'uso <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> per i dettagli.</para></warning>
         <para>Carica i file tradotti creati localmente dalla cartella <link linkend="project.folder.target" endterm="project.folder.target.title"/> al deposito del progetto in collaborazione.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title"><guimenuitem>Crea i file tradotti</guimenuitem> <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.create.translated.documents">
+      <term xml:id="menus.project.create.translated.documents.title"><guimenuitem>Crea i file tradotti</guimenuitem> <keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>Crea i file finali inserendo negli stessi la traduzione. I file finali saranno creati nella cartella <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
 		<note><para>Se si individuano errori di tag, è possibile impedire la creazione dei file di arrivo. Vedere la preferenza <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> per i dettagli.</para></note>
@@ -112,32 +111,32 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title"><guimenuitem>Crea i file tradotti correnti</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.create.current.translated.document">
+      <term xml:id="menus.project.create.current.translated.document.title"><guimenuitem>Crea i file tradotti correnti</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>Crea il file di arrivo che corrisponde al file di partenza attualmente in traduzione. Il file risultante viene memorizzato nella cartella <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
 		<para>Ogni volta che si creano il file di arrivo corrente, OmegaT salva il progetto (vedere la voce di menu <link linkend="menus.project.save" endterm="menus.project.save.title"/> sopra) e crea le memorie di riferimento che includono i segmenti tradotti del gruppo di file di partenza attuali.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open.med.project">
-      <term id="menus.project.open.med.project.title"><guimenuitem>Apri progetto MED...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.open.med.project">
+      <term xml:id="menus.project.open.med.project.title"><guimenuitem>Apri progetto MED...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Apre un pacchetto di progetto nel formato MED definito dalla EU Directorate-General for Translation (EU-Direzione generale della Traduzione).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.med.project">
-      <term id="menus.project.create.med.project.title"><guimenuitem>Crea progetto MED...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.create.med.project">
+      <term xml:id="menus.project.create.med.project.title"><guimenuitem>Crea progetto MED...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>Converte il progetto attivo in un pacchetto MED.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title"><guimenuitem>Proprietà...</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.properties">
+      <term xml:id="menus.project.properties.title"><guimenuitem>Proprietà...</guimenuitem> <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
         <para>Visualizza la finestra di dialogo <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> nella quale si potranno modificare le lingue del progetto e il percorso di memorizzazione delle cartelle.</para>
 		<para>
@@ -145,8 +144,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.source.files.list">
-      <term id="menus.project.source.files.list.title"><guimenuitem>File di partenza...</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.source.files.list">
+      <term xml:id="menus.project.source.files.list.title"><guimenuitem>File di partenza...</guimenuitem> <keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
         <para>Apre la finestra <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
 		<para>
@@ -154,8 +153,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.access.project.contents">
-      <term id="menus.project.access.project.contents.title"><guisubmenu>Accedi al contenuto del progetto</guisubmenu></term>
+    <varlistentry xml:id="menus.project.access.project.contents">
+      <term xml:id="menus.project.access.project.contents.title"><guisubmenu>Accedi al contenuto del progetto</guisubmenu></term>
       <listitem>
         <para>Permette l'accesso alle varie cartelle del progetto. Vedere il capitolo <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per ulteriori dettagli.</para>
         <para>In aggiunta, ci sono tre voci di menu che aprono direttamente i file di partenza attuali o i file di arrivo, oppure il glossario scrivibile. I file sono aperti dall'applicazione predefinita impostata dal sistema operativo. Se i file non esistono, tali opzioni sono disattivate.</para>
@@ -240,15 +239,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.restart">
-      <term id="menus.project.restart.title"><guimenuitem>Riavvia</guimenuitem></term>
+    <varlistentry xml:id="menus.project.restart">
+      <term xml:id="menus.project.restart.title"><guimenuitem>Riavvia</guimenuitem></term>
       <listitem>
         <para>Salva il progetto e riavvia OmegaT. Viene chiesto di confermare l'uscita nel caso in cui il progetto non è stato ancora salvato.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.quit">
-      <term id="menus.project.quit.title"><guimenuitem>Esci</guimenuitem> <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.quit">
+      <term xml:id="menus.project.quit.title"><guimenuitem>Esci</guimenuitem> <keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
       <listitem>
         <para>Salva il progetto ed esce da OmegaT. Viene chiesto di confermare l'uscita nel caso in cui il progetto non è stato ancora salvato.</para>
 

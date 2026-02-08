@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.edit">
-  <title id="menus.edit.title"><guimenu>Modifica</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.edit">
+  <title xml:id="menus.edit.title"><guimenu>Modifica</guimenu></title>
 
   <para>Questo menu permette l'accesso ai comandi di modifica dei segmenti.</para>
 
-  <example id="example.undo.last.action">
-	<title id="example.undo.last.action.title">Esempio di descrizione delle scorciatoie</title>
+  <example xml:id="example.undo.last.action">
+	<title xml:id="example.undo.last.action.title">Esempio di descrizione delle scorciatoie</title>
 	<para>In Windows e Linux: <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo></para>
 
 	<para>In macOS: <keycombo><keycap>Cmd</keycap><keycap>Z</keycap></keycombo></para>
@@ -15,23 +14,23 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Annulla</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+    <varlistentry xml:id="menus.edit.undo.last.action">
+      <term xml:id="menus.edit.undo.last.action.title"><guimenuitem>Annulla</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>Annulla le modifiche apportate al segmento attivo. La cronologia delle modifiche viene persa una volta confermato il segmento.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Ripristina</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.redo.last.action">
+      <term xml:id="menus.edit.redo.last.action.title"><guimenuitem>Ripristina</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Applica di nuovo le modifiche che erano state annullate nel segmento attivo. La cronologia delle modifiche viene persa una volta confermato il segmento.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.match.or.selection">
-      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Sostituisci con concordanza o selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.match.or.selection">
+      <term xml:id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Sostituisci con concordanza o selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Sostituisce il segmento di destinazione con la concordanza parziale attualmente selezionata (per impostazione predefinita, la prima dell'elenco) o col testo selezionato nel pannello <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
@@ -42,8 +41,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.match.or.selection">
-      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Inserisci concordanza o selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
+    <varlistentry xml:id="menus.edit.insert.match.or.selection">
+      <term xml:id="menus.edit.insert.match.or.selection.title"><guimenuitem>Inserisci concordanza o selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
         <para>Inserisce la concordanza parziale attualmente selezionata o il testo selezionato nel pannello <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> alla posizione del cursore. Se è stata selezionata una parte del segmento da tradurre, questa parte verrà sovrascritta.</para>
 
@@ -53,24 +52,24 @@
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title"><guimenuitem>Sostituisci con testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.source">
+      <term xml:id="menus.edit.replace.with.source.title"><guimenuitem>Sostituisci con testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Sostituisce l'intero segmento di destinazione con quello originale.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.source">
-      <term id="menus.edit.insert.source.title"><guimenuitem>Inserisci il testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.source">
+      <term xml:id="menus.edit.insert.source.title"><guimenuitem>Inserisci il testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserisce il segmento originale alla posizione del cursore. Se è stata selezionata una parte del segmento da tradurre, questa parte verrà sovrascritta.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.select.source.text">
-      <term id="menus.edit.select.source.text.title"><guimenuitem>Seleziona testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.select.source.text">
+      <term xml:id="menus.edit.select.source.text.title"><guimenuitem>Seleziona testo di partenza</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Seleziona il testo originale.</para>
@@ -79,8 +78,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Sostituisci con la Traduzione automatica</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.mt">
+      <term xml:id="menus.edit.replace.with.mt.title"><guimenuitem>Sostituisci con la Traduzione automatica</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Sostituisce il segmento da tradurre con la traduzione suggerita dal servizio di traduzione automatica selezionato.</para>
@@ -90,32 +89,32 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Inserisci i tag mancanti</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.missing.source.tag">
+      <term xml:id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Inserisci i tag mancanti</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserisce i restanti tag originali mancanti alla posizione del cursore.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.next.missing.tag">
-      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Inserisci il tag mancante successivo</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.next.missing.tag">
+      <term xml:id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Inserisci il tag mancante successivo</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserisce il tag mancante successivo alla posizione del cursore.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>Esporta la selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.export.selection">
+      <term xml:id="menus.edit.export.selection.title"><guimenuitem>Esporta la selezione</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Esporta la selezione attiva in un file di testo per successiva elaborazione. Se non è stato selezionato alcun testo, nel file viene copiato il segmento originale attivo. Per mantenere coerenza col normale comportamento degli appunti, questo file non viene cancellato quando l'utente esce da OmegaT. Il contenuto esportato viene copiato nel file <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> memorizzato nella cartella di <link linkend="configuration.folder">configurazione</link>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Crea voce di glossario...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.create.glossary.entry">
+      <term xml:id="menus.edit.create.glossary.entry.title"><guimenuitem>Crea voce di glossario...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Permette all'utente di creare una voce nel glossario scrivibile del progetto (il file <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>).</para>
@@ -170,8 +169,8 @@
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title"><guimenuitem>Cerca nel progetto...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.project">
+      <term xml:id="menus.edit.search.project.title"><guimenuitem>Cerca nel progetto...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Apre una nuova finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
@@ -182,8 +181,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title"><guimenuitem>Sostituisci...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.and.replace">
+      <term xml:id="menus.edit.search.and.replace.title"><guimenuitem>Sostituisci...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Apre una nuova finestra <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
@@ -192,16 +191,16 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.dictionaries">
-      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Cerca dizionari</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.dictionaries">
+      <term xml:id="menus.edit.search.dictionaries.title"><guimenuitem>Cerca dizionari</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Se la preferenza <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/> è disattivata, questa funzione permette di ricercare la parola selezionata o i termini dell'intero segmento all'interno dei dizionari.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.switch.case">
-      <term id="menus.edit.switch.case.title"><guisubmenu>Commuta carattere in</guisubmenu></term>
+    <varlistentry xml:id="menus.edit.switch.case">
+      <term xml:id="menus.edit.switch.case.title"><guisubmenu>Commuta carattere in</guisubmenu></term>
       <listitem>
         <para>Commuta il carattere del testo selezionato nel segmento di destinazione in base all'opzione scelta o alle alternanze tra le opzioni. Se non è selezionato alcun testo, OmegaT sceglie la parola che inizia col carattere immediatamente alla destra del cursore.</para>
 
@@ -239,8 +238,8 @@
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.select.match">
-      <term id="menus.edit.select.match.title"><guisubmenu>Seleziona la concordanza</guisubmenu></term>
+	<varlistentry xml:id="menus.edit.select.match">
+      <term xml:id="menus.edit.select.match.title"><guisubmenu>Seleziona la concordanza</guisubmenu></term>
       <listitem>
 		<para>Seleziona la concordanza parziale precedente, successiva o <varname>n</varname>volte visualizzata nel pannello delle concordanze parziali e la inserisce, o sostituisce il testo, all'interno del segmento.</para>
 		
@@ -275,10 +274,10 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.insert.unicode.control.character">
-      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Inserisci carattere di controllo Bidi</guisubmenu></term>
+	<varlistentry xml:id="menus.edit.insert.unicode.control.character">
+      <term xml:id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Inserisci carattere di controllo Bidi</guisubmenu></term>
 	  <listitem>
-		<para>Inserisce il carattere di formattazione direzionale Unicode selezionato. Vedere <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode Bidirectional Algorithm</ulink> per i dettagli.</para>
+		<para>Inserisce il carattere di formattazione direzionale Unicode selezionato. Vedere <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode Bidirectional Algorithm</link> per i dettagli.</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -306,15 +305,15 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.use.as.default.translation">
-      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Usa come traduzione predefinita</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.use.as.default.translation">
+      <term xml:id="menus.edit.use.as.default.translation.title"><guimenuitem>Usa come traduzione predefinita</guimenuitem></term>
       <listitem>
 		<para>Se sono disponibili alternative per il segmento attivo, è possibile contrassegnare l'alternativa selezionata come traduzione predefinita. L'elemento sarà visualizzato in grigio, se è disponibile solo una traduzione.</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.create.alternative.translation">
-      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Crea traduzione alternativa</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.create.alternative.translation">
+      <term xml:id="menus.edit.create.alternative.translation.title"><guimenuitem>Crea traduzione alternativa</guimenuitem></term>
       <listitem>
 		<para>Segmenti uguali possono, a seconda del contesto, richiedere traduzioni differenti. Se l'attuale traduzione non è adatta, selezionare questa voce del menu e inserire la traduzione alternativa.</para>
 		<warning>
@@ -324,22 +323,22 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.remove.translation">
-      <term id="menus.edit.remove.translation.title"><guimenuitem>Rimuovi traduzione</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
+	<varlistentry xml:id="menus.edit.remove.translation">
+      <term xml:id="menus.edit.remove.translation.title"><guimenuitem>Rimuovi traduzione</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
 		<para>Elimina la traduzione attuale e imposta il segmento come non tradotto.</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.set.empty.translation">
-      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Imposta traduzione vuota</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.set.empty.translation">
+      <term xml:id="menus.edit.set.empty.translation.title"><guimenuitem>Imposta traduzione vuota</guimenuitem></term>
       <listitem>
 		<para>Definisce la traduzione come vuota. Nel documento di destinazione per questo segmento non apparirà nulla, mentre l'editor lo contrassegnerà con l'identificatore <literal>&lt;EMPTY&gt;</literal> (vuoto).</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.register.identical.translation">
-      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Registra traduzione uguale</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	<varlistentry xml:id="menus.edit.register.identical.translation">
+      <term xml:id="menus.edit.register.identical.translation.title"><guimenuitem>Registra traduzione uguale</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
 		<para>Usare questo comando affinché la traduzione sia registrata uguale al segmento di partenza, anche se non è attivata la preferenza <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/>.</para>

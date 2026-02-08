@@ -11,12 +11,6 @@ plugins {
 def documentRootDir = file('src_docs')
 def styleRootDir = file('src_docs/xsl')
 
-docConfig {
-    styleDir.set(styleRootDir)
-    docRoot.set(documentRootDir)
-    outputRoot.set(layout.buildDirectory.dir('docs'))
-}
-
 tasks.register('genDocIndex', Copy) {
     def inputTemplate = layout.projectDirectory.file('src_docs/template/index.html')
     def docPropsFiles = fileTree(dir: 'src_docs/manual', include: '**/version*.properties')
@@ -64,75 +58,92 @@ def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
         .map { it.split(',') }
 manualLangsProvider.get().each { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
-        inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/passthrough.xsl"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/db5-all-included.xml"))
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
+    }
+
+    def copyJs = tasks.register("copyJs${lang.capitalize()}", Copy) {
+        description = 'Copy CSS and JS files to tmp'
+        into(layout.buildDirectory.dir("tmp/manual/${lang}/js/"))
+        from fileTree(dir: "${documentRootDir}/docbook/js")
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
-        description = 'Copies images and CSS files to tmp.'
-        into layout.buildDirectory.dir("tmp/manual/${lang}")
-        from new File(documentRootDir, 'style/omegat.css')
+        description = 'Copy CSS and JS files to tmp'
+        into(layout.buildDirectory.dir("tmp/manual/${lang}/css/"))
+        from file("${documentRootDir}/style/omegat.css")
     }
 
     def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
-        description 'Copies images and CSS files to tmp.'
+        description = 'Copy Images to tmp'
         into layout.buildDirectory.dir("tmp/manual/${lang}/images/")
-        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}/images/"), include: "*.png")
         from layout.projectDirectory.file("images/OmegaT.svg")
     }
 
     def copyCssTarget = tasks.register("copyCssTarget${lang.capitalize()}", Copy) {
-        description = 'Copies images and CSS files to target.'
-        into layout.buildDirectory.dir("docs/manual/${lang}")
-        from new File(documentRootDir, 'style/omegat.css')
+        description = 'Copy CSS to target'
+        from layout.projectDirectory.file("${documentRootDir}/style/omegat.css")
+        into(layout.buildDirectory.dir("docs/manual/${lang}/css/"))
+    }
+
+    def copyJsTarget = tasks.register("copyJsTarget${lang.capitalize()}", Copy) {
+        description = 'Copy JS files to target'
+        from fileTree(dir: "${documentRootDir}/docbook/js", includes: ['*.js'])
+        into(layout.buildDirectory.dir("docs/manual/${lang}/js/"))
     }
 
     def copyImagesTarget = tasks.register("copyImagesTarget${lang.capitalize()}", Copy) {
-        description 'Copies images and CSS files to target.'
+        description = 'Copy Images to target'
         into layout.buildDirectory.dir("docs/manual/${lang}/images/")
-        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}/images/"), include: "*.png")
         from layout.projectDirectory.file("images/OmegaT.svg")
     }
 
     def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtmlTask) {
-        description = 'Generates a chunked HTML documentation.'
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
+        description = 'Generate chunked HTML documentation'
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-xhtml.xsl"))
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
-        css.set("omegat.css")
-        dependsOn(docbookInclude, copyImages, copyCss)
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
+        contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
+        css.set("css/omegat.css")
+        outputs.cacheIf { false }
+        // debug.set("chunk-cleanup")
+        dependsOn(copyImages, copyCss, copyJs)
     }
 
     def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-toc.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/toc.xml"))
-        dependsOn(docbookHtml)
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-whc-toc.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/db5-all-included.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-toc.xml"))
+        dependsOn(docbookHtml, docbookInclude)
     }
 
     def whcIndex = tasks.register("whcIndex${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-index.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-whc-index.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/db5-all-included.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-index.xml"))
         dependsOn(docbookHtml, whcToc)
     }
 
     def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-header.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_header.xhtml"))
-        dependsOn(copyCss, docbookInclude)
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/whc-header.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/db5-all-included.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-header.xml"))
+        dependsOn(docbookHtml, docbookInclude)
     }
-
     def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
         description = 'Builds the whc contents.'
-        tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/toc.xml"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
-        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_header.xhtml"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-index.xml"))
+        contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}"), include: '*.html', exclude: '_*'))
+        tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-toc.xml"))
+        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-header.xml"))
+        outputDirectory.set(layout.buildDirectory.dir("docs/manual/${lang}"))
         documentLayout.set('simple')
         localJQuery.set(true)
         parameterList.set([
@@ -140,23 +151,22 @@ manualLangsProvider.get().each { lang ->
                 '--field-background-color', '#FDFDFD',
                 '--panel-background-color', '#FDFDFD',
         ])
-        contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}"), include: '*.html', exclude: '_*'))
-        outputDirectory.set(layout.buildDirectory.dir("docs/manual/${lang}"))
-        dependsOn(whcHeader, whcToc, whcIndex, copyImagesTarget, copyCssTarget)
+        outputs.cacheIf { false }
+        dependsOn(whcHeader, whcToc, whcIndex, copyImagesTarget, copyCssTarget, copyJsTarget)
         group = 'documentation'
     }
     assemble.dependsOn buildDocumentTask
     manualHtmls.dependsOn buildDocumentTask
 
-    def zipTask= tasks.register("manualZip${lang.capitalize()}", Zip) {
+    def zipTask = tasks.register("manualZip${lang.capitalize()}", Zip) {
         from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-        from fileTree(dir: "src_docs/${lang}", include: '**/version*.properties')
+        from fileTree(dir: "${documentRootDir}/manual/${lang}", include: '**/version*.properties')
         archiveFileName = "${lang}.zip"
         destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))
-        dependsOn buildDocumentTask
+        dependsOn docbookHtml
     }
-    assemble.dependsOn(zipTask)
-    manualZips.dependsOn(zipTask)
+    assemble.dependsOn zipTask
+    manualZips.dependsOn zipTask
 
     def languageName = Locale.forLanguageTag(lang.replace('_', '-')).displayName
 
@@ -212,6 +222,7 @@ def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs
         .map { it.split(',') }
 firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
+        description = 'Copy CSS files to target'
         from layout.projectDirectory.file("src_docs/style/greeting.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }

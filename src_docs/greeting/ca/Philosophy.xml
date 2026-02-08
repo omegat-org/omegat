@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="ca" id="freedoms.article">
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="ca">
     <section>
-        <title id="freedoms">Llibertats</title>
-        <para>L'OmegaT és solució lliure de traducció assistida per ordinador (TAO) per a traductors professionals. Es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. Consulteu <guimenu>&gt; Ajuda</guimenu> <guimenu>&gt; Quant a</guimenu>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
+        <title>Llibertats</title>
+        <para>L'OmegaT és solució lliure de traducció assistida per ordinador (TAO) per a traductors professionals. Es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. Consulteu <guimenu>&gt; Ajuda</guimenu> <guimenu>&gt; Quant a</guimenu>. La llicència us concedeix les llibertats següents:<itemizedlist>
             <listitem>
                 <para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
             </listitem>

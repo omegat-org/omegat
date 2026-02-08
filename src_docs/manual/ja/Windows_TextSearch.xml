@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.search">
-  <title id="windows.text.search.title"><guilabel>プロジェクトの検索</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
+  <title xml:id="windows.text.search.title"><guilabel>プロジェクトの検索</guilabel></title>
 
   <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>を使用して新しい検索ウィンドウを開き、検索する単語またはフレーズを検索領域に入力します。</para>
   
@@ -16,8 +15,8 @@
   
   <para>一致した文字列は、青い太字で表示されます。</para>
 
-  <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">ドイツの検索</title>
+  <example xml:id="search.for.doitsu">
+	<title xml:id="search.for.doitsu.title">ドイツの検索</title>
 	<para>
 	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -57,16 +56,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">検索の種類</title>
+  <section xml:id="windows.text.search.methods">
+    <title xml:id="windows.text.search.methods.title">検索の種類</title>
 
     <para>ラジオボタンを使用して、検索方法を選択します。</para>
 
 	<para>以下の検索方法を利用できます：</para>
 
     <variablelist>
-      <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">完全一致検索</term>
+      <varlistentry xml:id="windows.text.search.methods.exact">
+        <term xml:id="windows.text.search.methods.exact.title">完全一致検索</term>
         <listitem>
           <para>検索欄に指定した文字列そのまま含む分節を検索します。</para>
 
@@ -74,8 +73,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">キーワード検索</term>
+      <varlistentry xml:id="windows.text.search.methods.keyword">
+        <term xml:id="windows.text.search.methods.keyword.title">キーワード検索</term>
         <listitem>
           <para>空白で区切って指定したすべてのキーワードを含む分節を検索します。</para>
 
@@ -105,8 +104,8 @@
 	</variablelist>
 
 	<variablelist>
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">正規表現</term>
+      <varlistentry xml:id="windows.text.search.methods.regex">
+        <term xml:id="windows.text.search.methods.regex.title">正規表現</term>
         <listitem>
           <para>検索文字列が正規表現として扱われます。</para>
 		  <para>正規表現は、完全一致の文字列ではなく、全般的な検索や複雑なパターンの検索を行なうときに、とても効果的な方法です。詳細は、付録の <link linkend="app.regex" endterm="app.regex.title"/> をご覧ください。</para>
@@ -119,8 +118,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">設定</title>
+  <section xml:id="windows.text.search.options">
+	<title xml:id="windows.text.search.options.title">設定</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -274,8 +273,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">検索結果表示画面</title>
+  <section xml:id="windows.text.search.result.display">
+    <title xml:id="windows.text.search.result.display.title">検索結果表示画面</title>
 
     <para>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節の場合、原文は訳文の上に表示されます。未翻訳分節の場合には、原文のみが表示されます。</para>
 
@@ -307,12 +306,12 @@
 	
 	<para>選択した分節が緑色でハイライト表示されます。</para>
 
-  	<example id="select.second.match">
-	  <title id="select.second.match.title">二番目の検索結果を選択</title>
+  	<example xml:id="select.second.match">
+	  <title xml:id="select.second.match.title">二番目の検索結果を選択</title>
 	  <para>
 		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
-<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
 	  </para>
 	</example>
@@ -333,8 +332,8 @@
 	</variablelist>
   </section>
   
-  <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">フィルター</title>
+  <section xml:id="windows.text.search.filter">
+    <title xml:id="windows.text.search.filter.title">フィルター</title>
 
 	<para><guibutton>フィルター</guibutton>ボタンをクリックすると、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウ内の一致する検索結果分節のみが表示されます。フィルターを解除するには、<link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウの上部にある<guibutton>フィルターを解除</guibutton>ボタンをクリックするか、またはプロジェクトを再読み込みしてください。</para>
   </section>

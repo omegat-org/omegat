@@ -89,8 +89,7 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
 
         @Override
         public int getColumnCount() {
-            return data == null || data.length == 0 ? 0
-                    : data[0] == null ? 0 : data[0].length;
+            return data == null || data.length == 0 ? 0 : data[0] == null ? 0 : data[0].length;
         }
 
         @Override
@@ -113,8 +112,8 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
         panel.title.setText(title);
         panel.table.setModel(new StringArrayTableModel(data));
         setTableHeaders(panel.table, headers);
-        panel.table.getColumnModel().getColumn(0).setCellRenderer(
-                DataTableStyling.getHeaderTextCellRenderer());
+        panel.table.getColumnModel().getColumn(0)
+                .setCellRenderer(DataTableStyling.getHeaderTextCellRenderer());
         TableColumnSizer.autoSize(panel.table, 0, false);
         panel.table.setPreferredScrollableViewportSize(panel.table.getPreferredSize());
         return panel;

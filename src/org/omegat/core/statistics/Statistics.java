@@ -166,12 +166,15 @@ public final class Statistics {
     }
 
     /**
-     * Writes the specified text to a file, along with the current date and time.
-     * If the target file's parent directories do not exist, they will be created.
-     * Any existing content in the file will be overwritten.
+     * Writes the specified text to a file, along with the current date and
+     * time. If the target file's parent directories do not exist, they will be
+     * created. Any existing content in the file will be overwritten.
      *
-     * @param filename the name and path of the file to which the text will be written
-     * @param text the text content to write to the file
+     * @param filename
+     *            the name and path of the file to which the text will be
+     *            written
+     * @param text
+     *            the text content to write to the file
      */
     public static void writeStat(String filename, String text) {
         Path path = Paths.get(filename);
@@ -195,10 +198,13 @@ public final class Statistics {
     }
 
     /**
-     * Writes the statistics result to the specified directory in all selected output formats.
+     * Writes the statistics result to the specified directory in all selected
+     * output formats.
      *
-     * @param dir the directory where the statistics should be written
-     * @param result the statistics result object containing the data to be written
+     * @param dir
+     *            the directory where the statistics should be written
+     * @param result
+     *            the statistics result object containing the data to be written
      */
     public static void writeStat(String dir, StatsResult result) {
         int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
@@ -211,13 +217,18 @@ public final class Statistics {
     }
 
     /**
-     * Writes the statistics result to the specified directory in the given output format.
-     * Depending on the format, the data is written as text, XML, or JSON. The file is encoded
-     * in UTF-8. If any errors occur during file writing, they are logged.
+     * Writes the statistics result to the specified directory in the given
+     * output format. Depending on the format, the data is written as text, XML,
+     * or JSON. The file is encoded in UTF-8. If any errors occur during file
+     * writing, they are logged.
      *
-     * @param dir the directory where the statistics file should be written
-     * @param result the statistics result object containing the data to be written
-     * @param format the format in which the statistics should be written (TEXT, XML, or JSON)
+     * @param dir
+     *            the directory where the statistics file should be written
+     * @param result
+     *            the statistics result object containing the data to be written
+     * @param format
+     *            the format in which the statistics should be written (TEXT,
+     *            XML, or JSON)
      */
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
@@ -284,7 +295,8 @@ public final class Statistics {
 
         int r = 0;
         for (FileData numbers : statsResult.getCounts()) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, statsResult.getProps().getSourceRoot());
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename,
+                    statsResult.getProps().getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);

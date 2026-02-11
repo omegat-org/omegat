@@ -103,8 +103,8 @@ public class CalcMatchStatistics extends LongProcessThread {
     protected int entriesToProcess;
 
     /** Already processed segments. Used for repetitions detect. */
-    private final Set<String> alreadyProcessedInFile = new HashSet<String>();
-    private final Set<String> alreadyProcessedInProject = new HashSet<String>();
+    private final Set<String> alreadyProcessedInFile = new HashSet<>();
+    private final Set<String> alreadyProcessedInProject = new HashSet<>();
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
@@ -116,12 +116,13 @@ public class CalcMatchStatistics extends LongProcessThread {
         this(Core.getProject(), Core.getSegmenter(), callback, perFile);
     }
 
-    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback, boolean perFile) {
+    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback,
+            boolean perFile) {
         this.project = project;
         this.callback = callback;
         this.perFile = perFile;
-        finder = ThreadLocal.withInitial(
-                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
+        finder = ThreadLocal
+                .withInitial(() -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
     }
 
     @Override
@@ -183,7 +184,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInProject.clear();
 
-        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<>();
 
         // We should iterate all segments from all files in project.
         for (SourceTextEntry ste : project.getAllEntries()) {
@@ -219,8 +220,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
             callback.setTable(header, table);
-            String fn = project.getProjectProperties().getProjectInternal()
-                    + OConsts.STATS_MATCH_FILENAME;
+            String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);
             callback.setDataFile(fn);
         }
@@ -232,7 +232,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInFile.clear();
 
-        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<>();
 
         // We should iterate all segments from file.
         for (SourceTextEntry ste : fi.entries) {
@@ -283,7 +283,8 @@ public class CalcMatchStatistics extends LongProcessThread {
      */
     Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
         // If we have more than one available processor then we do the
-        // calculation in parallel unless explicitly disabled via system property.
+        // calculation in parallel unless explicitly disabled via system
+        // property.
         // Property: omegat.stats.parallel = true|false (default: true)
         boolean parallelAllowed = Boolean.parseBoolean(System.getProperty("omegat.stats.parallel", "true"));
         boolean doParallel = parallelAllowed && Runtime.getRuntime().availableProcessors() > 1;
@@ -298,6 +299,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 entryProcessed();
             }, MatchStatCounts::addCounts);
         } catch (StoppedException | LongProcessInterruptedException ex) {
+            // gracefully exit
         }
         long endTime = System.currentTimeMillis();
         Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %.3f s (%s)",
@@ -321,7 +323,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;
                 if (newSimilarity >= 95) { // enough to say that we are in row 2
-                    break CACHE;
+                    break;
                 }
             }
         }

@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.segmentation.util.SRXUtils;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
@@ -80,7 +81,7 @@ public final class Segmenter {
             return null;
         }
         List<String> segments = breakParagraph(lang, paragraph, brules);
-        List<String> sentences = new ArrayList<String>(segments.size());
+        List<String> sentences = new ArrayList<>(segments.size());
         if (spaces != null) {
             spaces.clear();
         }
@@ -130,26 +131,26 @@ public final class Segmenter {
      *            list to store rules that account to breaks (can be null)
      */
     private List<String> breakParagraph(Language lang, String paragraph, @Nullable List<Rule> brules) {
-        List<Rule> rules = srx.lookupRulesForLanguage(lang);
+        List<Rule> rules = SRXUtils.lookupRulesForLanguage(srx, lang);
 
         // determining the applicable break positions
-        Set<BreakPosition> dontbreakpositions = new TreeSet<BreakPosition>();
-        Set<BreakPosition> breakpositions = new TreeSet<BreakPosition>();
+        Set<BreakPosition> dontbreakpositions = new TreeSet<>();
+        Set<BreakPosition> breakpositions = new TreeSet<>();
         for (int i = rules.size() - 1; i >= 0; i--) {
             Rule rule = rules.get(i);
             List<BreakPosition> rulebreaks = getBreaks(paragraph, rule);
             if (rule.isBreakRule()) {
                 breakpositions.addAll(rulebreaks);
-                dontbreakpositions.removeAll(rulebreaks);
+                rulebreaks.forEach(dontbreakpositions::remove);
             } else {
                 dontbreakpositions.addAll(rulebreaks);
-                breakpositions.removeAll(rulebreaks);
+                rulebreaks.forEach(breakpositions::remove);
             }
         }
         breakpositions.removeAll(dontbreakpositions);
 
         // and now breaking the string according to the positions
-        List<String> segments = new ArrayList<String>();
+        List<String> segments = new ArrayList<>();
         if (brules != null) {
             brules.clear();
         }
@@ -175,7 +176,8 @@ public final class Segmenter {
             } else {
                 segments.add(oneseg);
             }
-        } catch (IndexOutOfBoundsException iobe) {
+        } catch (IndexOutOfBoundsException ignored) {
+            // FIXME: Ignore a case when segments are empty
         }
 
         return segments;
@@ -187,7 +189,7 @@ public final class Segmenter {
      * Returns the places of possible breaks between sentences.
      */
     private static List<BreakPosition> getBreaks(String paragraph, Rule rule) {
-        List<BreakPosition> res = new ArrayList<BreakPosition>();
+        List<BreakPosition> res = new ArrayList<>();
 
         Matcher bbm = null;
         if (rule.getBeforebreak() != null) {

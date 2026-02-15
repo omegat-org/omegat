@@ -42,6 +42,7 @@ import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.util.SRXUtils;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
 
@@ -719,7 +720,7 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
+            SRXUtils.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
                                         // directory
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -826,7 +827,7 @@ public final class Preferences {
         didInitSegmentation = true;
 
         File srxDir = new File(StaticUtils.getConfigDir());
-        SRX s = SRX.loadFromDir(srxDir); // may read SRX or CONF
+        SRX s = SRXUtils.loadFromDir(srxDir); // may read SRX or CONF
         if (s == null) {
             s = SRX.getDefault();
         }

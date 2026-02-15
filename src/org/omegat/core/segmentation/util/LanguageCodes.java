@@ -1,10 +1,11 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
+               2024-2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,14 +23,17 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
 
-package org.omegat.core.segmentation;
+package org.omegat.core.segmentation.util;
+
+import org.jspecify.annotations.Nullable;
+import org.omegat.core.segmentation.MapRule;
+import org.omegat.util.OStrings;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.omegat.util.OStrings;
+import java.util.Objects;
 
 /**
  * Code-Key mappings for segmentation code.
@@ -40,7 +44,28 @@ import org.omegat.util.OStrings;
  */
 public final class LanguageCodes {
 
-    private LanguageCodes() {
+    private static volatile @Nullable LanguageCodes instance;
+
+    public static LanguageCodes getInstance() {
+        if (instance == null) {
+            synchronized (LanguageCodes.class) {
+                if (instance == null) {
+                    instance = new LanguageCodes();
+                }
+            }
+        }
+        return Objects.requireNonNull(instance);
+    }
+
+    public String getStandardNameFromMapRule(MapRule mr) {
+        String language = getLanguageCodeByPattern(mr.getPattern());
+        if (language == null) {
+            language = getLanguageCodeByName(mr.getLanguage());
+        }
+        if (language == null) {
+            language = mr.getLanguage();
+        }
+        return language;
     }
 
     // Codes of "languagerulename".
@@ -99,7 +124,9 @@ public final class LanguageCodes {
     private static final String SLOVAK_PATTERN = "SK.*";
     private static final String CHINESE_PATTERN = "ZH.*";
 
-    /** A Map from language codes to language keys. */
+    /**
+     * A Map from language codes to language keys.
+     */
     private static final Map<String, String> CODE_KEY_HASH = new HashMap<>();
     private static final Map<String, String> PATTERN_HASH = new HashMap<>();
 
@@ -139,13 +166,17 @@ public final class LanguageCodes {
         PATTERN_HASH.put(CHINESE_PATTERN, CHINESE_CODE);
     }
 
+    public boolean isLanguageCodeKnown(String code) {
+        return CODE_KEY_HASH.containsKey(code);
+    }
+
     /**
      * Returns localized language name for a given language code.
      *
      * @param code
      *            language code
      */
-    public static String getLanguageName(String code) {
+    public String getLanguageName(String code) {
         if (!CODE_KEY_HASH.containsKey(code)) {
             return code;
         }
@@ -153,11 +184,7 @@ public final class LanguageCodes {
         return OStrings.getString(key);
     }
 
-    public static boolean isLanguageCodeKnown(String code) {
-        return CODE_KEY_HASH.containsKey(code);
-    }
-
-    public static String getLanguageCodeByName(String name) {
+    public @Nullable String getLanguageCodeByName(@Nullable String name) {
         if (name == null) {
             return null;
         }
@@ -175,7 +202,7 @@ public final class LanguageCodes {
         return null;
     }
 
-    public static String getLanguageCodeByPattern(String pattern) {
+    public @Nullable String getLanguageCodeByPattern(String pattern) {
         return PATTERN_HASH.get(pattern);
     }
 }

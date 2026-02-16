@@ -126,7 +126,7 @@ public final class SRXTest {
         public void testSrxMigrationBasic() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir,  "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
 
@@ -142,7 +142,7 @@ public final class SRXTest {
         public void testSrxMigrationJa() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "PL", LanguageCodes.POLISH_CODE);
         }
     }
 
@@ -158,7 +158,7 @@ public final class SRXTest {
         public void testSrxMigrationOldDe() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_de_54", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
     
@@ -175,7 +175,7 @@ public final class SRXTest {
         public void testSrxMigrationExtDe() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "ext", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "NB", "NB");
         }
     }
 
@@ -189,7 +189,7 @@ public final class SRXTest {
      * a segmentation.conf file that is produced by OmegaT in English
      * environment and Japanese environment.
      */
-    public static void testSrxMigration(File segmentConf, File configDir) throws Exception {
+    public static void testSrxMigration(File segmentConf, File configDir, String pattern, String lang) throws Exception {
         // ensures the full test runs in temp directory
         Files.copy(segmentConf.toPath(), Paths.get(configDir.getAbsolutePath(), segmentConf.getName()));
         segmentConf = new File(configDir, segmentConf.getName());
@@ -199,7 +199,7 @@ public final class SRXTest {
         List<MapRule> mapRuleList = srxOrig.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(17, mapRuleList.size()); // samples have 17 rules, while default had 18
-        assertTrue(checkRules(mapRuleList, "PL", LanguageCodes.POLISH_CODE));
+        assertTrue(checkRules(mapRuleList, pattern, lang));
         // load from srx file
         File segmentSrx = new File(configDir, "segmentation.srx");
         assertTrue(segmentSrx.exists());
@@ -208,7 +208,7 @@ public final class SRXTest {
         mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(17, mapRuleList.size());
-        assertTrue(checkRules(mapRuleList, "PL", LanguageCodes.POLISH_CODE));
+        assertTrue(checkRules(mapRuleList, pattern, lang));
         assertEquals("2.0", srx1.getVersion());
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());

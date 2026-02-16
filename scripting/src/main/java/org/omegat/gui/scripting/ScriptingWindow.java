@@ -79,22 +79,23 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
-import org.omegat.gui.scripting.ui.AbstractScriptEditor;
-import org.omegat.gui.scripting.ui.StandardScriptEditor;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
+import org.omegat.gui.scripting.ui.AbstractScriptEditor;
+import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OSXIntegration;
@@ -127,29 +128,26 @@ public class ScriptingWindow {
     }
 
     public ScriptingWindow() {
+        this(new JFrame(ScriptingUtils.getBundleString("SCW_TITLE")));
+    }
 
-        frame = new JFrame(ScriptingUtils.getBundleString("SCW_TITLE"));
+    public ScriptingWindow(JFrame frame) {
+        this.frame = frame;
+        setScriptsDirectory(StaticUtils.getUserScriptsDir());
 
-        StaticUIUtils.setWindowIcon(frame);
-
-        StaticUIUtils.setEscapeClosable(frame);
-
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (monitor != null) {
+        if (frame != null) {
+            StaticUIUtils.setWindowIcon(frame);
+            StaticUIUtils.setEscapeClosable(frame);
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
                     monitor.stop();
                 }
-            }
-        });
-
-        setScriptsDirectory(
-                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, ScriptingModule.DEFAULT_SCRIPTS_DIR));
-
-        initWindowLayout();
-
-        addScriptCommandToOmegaT();
-        addRunShortcutToOmegaT();
+            });
+            initWindowLayout();
+            addScriptCommandToOmegaT();
+            addRunShortcutToOmegaT();
+        }
 
         updateQuickScripts();
 
@@ -160,6 +158,11 @@ public class ScriptingWindow {
 
         logResult(listScriptEngines());
 
+    }
+
+    @VisibleForTesting
+    public File getScriptsFolder() {
+        return scriptsDirectory;
     }
 
     private String listScriptEngines() {
@@ -204,8 +207,8 @@ public class ScriptingWindow {
             unsetQuickScriptMenu(i);
 
             // Since the script is run while editing a segment, the shortcut
-            // should not interfere
-            // with the segment content, so we set it to a Function key.
+            // should not interfere with the segment content, so we set it
+            // to a Function key.
             quickMenus[i].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (i + 1)));
 
             toolsMenu.add(menuItem);
@@ -236,8 +239,7 @@ public class ScriptingWindow {
         quickMenus[index].addActionListener(new QuickScriptActionListener(index));
 
         // Since the script is run while editing a segment, the shortcut should
-        // not interfere
-        // with the segment content, so we set it to a Function key.
+        // not interfere with the segment content, so we set it to a Function key.
         quickMenus[index].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (index + 1)));
         quickMenus[index].setEnabled(true);
         if ("".equals(scriptItem.getDescription())) {
@@ -315,12 +317,9 @@ public class ScriptingWindow {
         scriptList = new JList<>();
         JScrollPane scrollPaneList = new JScrollPane(scriptList);
 
-        scriptList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent evt) {
-                if (!evt.getValueIsAdjusting()) {
-                    onListSelectionChanged();
-                }
+        scriptList.addListSelectionListener(evt -> {
+            if (!evt.getValueIsAdjusting()) {
+                onListSelectionChanged();
             }
         });
 
@@ -680,8 +679,10 @@ public class ScriptingWindow {
         logResult(s, true);
     }
 
-    void logResult(String s, boolean newLine) {
-        logResultToWindow(s, newLine);
+    private void logResult(String s, boolean newLine) {
+        if (frame != null) {
+            logResultToWindow(s, newLine);
+        }
         ScriptingUtils.getLogger().atInfo().setMessage(s).log();
     }
 
@@ -712,7 +713,9 @@ public class ScriptingWindow {
         }
         scriptsDirectory = dir;
         Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir);
-        OSXIntegration.setProxyIcon(frame.getRootPane(), scriptsDirectory);
+        if (frame != null) {
+            OSXIntegration.setProxyIcon(frame.getRootPane(), scriptsDirectory);
+        }
 
         if (monitor != null) {
             monitor.stop();

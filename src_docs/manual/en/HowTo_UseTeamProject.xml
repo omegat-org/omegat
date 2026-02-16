@@ -215,8 +215,8 @@
       <listitem>
         <para>Unless special mappings or <link
         endterm="how.to.setup.team.project.selective.sharing.title"
-        linkend="how.to.setup.team.project.selective.sharing"></link>,
-        have been set up all source files are shared by all team members,
+        linkend="how.to.setup.team.project.selective.sharing"></link>
+        have been set up, all source files are shared by all team members,
         and any changes made to the local source files are overwritten the
         next time the project is synchronized, unless they are committed
         to the server using the <link endterm="menus.project.title"

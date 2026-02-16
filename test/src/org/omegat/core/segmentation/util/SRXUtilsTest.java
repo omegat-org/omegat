@@ -64,7 +64,8 @@ public class SRXUtilsTest {
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object with a non-null and non-empty version string.
+     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object
+     * with a non-null and non-empty version string.
      */
     @Test
     public void testGetDefaultVersion() throws IOException {
@@ -82,7 +83,8 @@ public class SRXUtilsTest {
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object with mapping rules containing at least one rule.
+     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object
+     * with mapping rules containing at least one rule.
      */
     @Test
     public void testGetDefaultMappingRulesHas18() throws IOException {

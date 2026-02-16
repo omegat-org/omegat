@@ -75,11 +75,11 @@ import java.util.stream.Collectors;
  * @author Thomas Cordonnier
  * @author Hiroshi Miura
  */
-public class SRXUtils {
+public final class SRXUtils {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
     public static final String SRX_SENTSEG = "segmentation.srx";
-    private static final XmlMapper mapper;
+    private static final XmlMapper MAPPER;
 
     static {
         final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
@@ -87,7 +87,7 @@ public class SRXUtils {
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
         xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
-        mapper = XmlMapper.builder(xmlFactory)
+        MAPPER = XmlMapper.builder(xmlFactory)
                 .defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
                 .enable(SerializationFeature.INDENT_OUTPUT)
@@ -96,6 +96,10 @@ public class SRXUtils {
                         JsonInclude.Include.NON_EMPTY))
                 .addModule(new JakartaXmlBindAnnotationModule())
                 .build();
+    }
+
+    private SRXUtils() {
+        // Utility class don't have public ctor
     }
 
     public static SRX getDefault() throws IOException {
@@ -155,7 +159,7 @@ public class SRXUtils {
         }
 
         try (FileOutputStream fos = new FileOutputStream(outFile)) {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
         } catch (DatabindException e) {
             throw new IOException(e);
         }
@@ -238,7 +242,7 @@ public class SRXUtils {
     }
 
     public static SRX loadSrxInputStream(InputStream io) throws IOException {
-        Srx srx = mapper.readValue(io, Srx.class);
+        Srx srx = MAPPER.readValue(io, Srx.class);
         final Map<String, List<Rule>> mapping = new HashMap<>();
         List<Languagerule> languageRuleList = srx.getBody().getLanguagerules().getLanguagerule();
         for (Languagerule languagerule : languageRuleList) {

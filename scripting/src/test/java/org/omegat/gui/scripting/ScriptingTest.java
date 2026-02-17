@@ -78,7 +78,9 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testDefaultScriptFolderOnScriptWindow() {
-        ScriptingWindow scriptingWindow = new ScriptingWindow(new JFrame());
+        Assume.assumeFalse(GraphicsEnvironment.isHeadless());
+
+        ScriptingWindow scriptingWindow = new ScriptingWindow();
         assertNotNull(scriptingWindow.getScriptsFolder());
         assertEquals(new File(StaticUtils.getUserScriptsDir()), scriptingWindow.getScriptsFolder());
     }

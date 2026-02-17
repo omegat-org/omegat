@@ -26,6 +26,7 @@
 
 package org.omegat.gui.scripting;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -47,10 +48,9 @@ public final class ScriptingModule {
     private ScriptingModule() {
     }
 
-    private static ScriptingStartupEventListener listener;
+    private static final ScriptingStartupEventListener listener = new ScriptingStartupEventListener();
 
     public static void loadPlugins() {
-        listener = new ScriptingStartupEventListener();
         CoreEvents.registerApplicationEventListener(listener);
     }
 
@@ -85,8 +85,8 @@ public final class ScriptingModule {
         }
     }
 
-    private static class ScriptingStartupEventListener implements IApplicationEventListener {
-        private ScriptingWindow window;
+    private static final class ScriptingStartupEventListener implements IApplicationEventListener {
+        private @Nullable ScriptingWindow window;
 
         @Override
         public void onApplicationStartup() {
@@ -95,7 +95,9 @@ public final class ScriptingModule {
 
         @Override
         public void onApplicationShutdown() {
-            window.dispose();
+            if (window != null) {
+                window.dispose();
+            }
         }
     }
 }

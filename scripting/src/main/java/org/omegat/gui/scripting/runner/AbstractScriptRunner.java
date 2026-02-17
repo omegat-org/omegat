@@ -28,6 +28,7 @@ package org.omegat.gui.scripting.runner;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
@@ -46,6 +47,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -55,7 +57,7 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractScriptRunner {
 
-    private ScriptEngineManager manager;
+    private volatile @Nullable ScriptEngineManager manager;
 
     /**
      * Execute a script either in string form or, if <code>script</code> is
@@ -82,8 +84,8 @@ public abstract class AbstractScriptRunner {
      * @throws IOException when I/O error occurred.
      * @throws ScriptException when script engine raises error.
      */
-    public String executeScript(String script, ScriptItem item,
-                                       Map<String, Object> additionalBindings) throws IOException, ScriptException {
+    public String executeScript(@Nullable String script, ScriptItem item,
+                                @Nullable Map<String, Object> additionalBindings) throws IOException, ScriptException {
 
         Map<String, Object> bindings = new HashMap<>();
         if (additionalBindings != null) {
@@ -131,9 +133,13 @@ public abstract class AbstractScriptRunner {
 
     public ScriptEngineManager getManager() {
         if (manager == null) {
-            manager = new ScriptEngineManager(AbstractScriptRunner.class.getClassLoader());
+            synchronized (AbstractScriptRunner.class) {
+                if (manager == null) {
+                    manager = new ScriptEngineManager(AbstractScriptRunner.class.getClassLoader());
+                }
+            }
         }
-        return manager;
+        return Objects.requireNonNull(manager);
     }
 
     /**
@@ -149,7 +155,7 @@ public abstract class AbstractScriptRunner {
      * @return The evaluation result
      * @throws ScriptException when script engine raises error.
      */
-    public Object executeScript(String script, ScriptEngine engine,
+    public @Nullable Object executeScript(String script, ScriptEngine engine,
                                        Map<String, Object> additionalBindings) throws ScriptException {
         AbstractScriptRunner runner = getActiveRunner();
         return runner.doExecuteScript(script, engine, additionalBindings);
@@ -165,7 +171,7 @@ public abstract class AbstractScriptRunner {
     /**
      * Common binding setup - used by both normal and debug runners.
      */
-    protected Bindings setupBindings(ScriptEngine engine, Map<String, Object> additionalBindings) {
+    protected Bindings setupBindings(ScriptEngine engine, @Nullable Map<String, Object> additionalBindings) {
         Bindings bindings = engine.createBindings();
         bindings.put(ScriptRunner.VAR_PROJECT, Core.getProject());
         bindings.put(ScriptRunner.VAR_EDITOR, Core.getEditor());
@@ -226,7 +232,7 @@ public abstract class AbstractScriptRunner {
     }
 
     // Runner selection logic
-    private static volatile AbstractScriptRunner activeRunner;
+    private static volatile @Nullable AbstractScriptRunner activeRunner;
 
     /**
      * Retrieves the active instance of {@link AbstractScriptRunner}. If no active

@@ -10,6 +10,7 @@ dependencies {
         implementation fileTree(dir: providedModuleLibsDir,
                 includes: ['**/groovy*.jar', '**/nashorn*.jar', '**/fife*.jar'])
     } else {
+        implementation(libs.jspecify)
         implementation(libs.jetbrains.annotations)
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies

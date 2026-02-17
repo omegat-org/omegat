@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 
 import java.io.File;
@@ -49,7 +50,7 @@ public class ScriptSet {
         }
     }
 
-    public static void saveSet(final File setFile, final String title, final String[] quickScripts) throws IOException {
+    public static void saveSet(File setFile, String title, @Nullable String[] quickScripts) throws IOException {
         Properties p = new Properties();
 
         p.setProperty("title", title);
@@ -71,7 +72,7 @@ public class ScriptSet {
         }
     }
 
-    public ScriptItem getScriptItem(int key) {
+    public @Nullable ScriptItem getScriptItem(int key) {
         if (key > ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS) {
             key = ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS;
         }

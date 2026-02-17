@@ -44,9 +44,8 @@ import java.util.regex.MatchResult;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.LinebreakPreservingReader;
 
 /**
@@ -83,7 +82,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
      *
      * @param scriptSource the source code of the script. This must not be null.
      */
-    public ScriptItem(@NotNull String scriptSource) {
+    public ScriptItem(String scriptSource) {
         sourceCode = scriptSource;
         sourceFile = null;
     }
@@ -96,7 +95,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
      * @param scriptFile the script file to be associated with this ScriptItem.
      *                    This file must not be null and should represent the source of the script.
      */
-    public ScriptItem(@NotNull File scriptFile) {
+    public ScriptItem(File scriptFile) {
         sourceFile = scriptFile;
         sourceCode = null;
         initResourceBundle(scriptFile);
@@ -159,7 +158,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
      *
      * @return the resource bundle for this script item
      */
-    public @NotNull ResourceBundle getResourceBundle() {
+    public ResourceBundle getResourceBundle() {
         if (bundle != null) {
             return bundle;
         }
@@ -170,12 +169,12 @@ public class ScriptItem implements Comparable<ScriptItem> {
                     "ResourceBundle (.properties file for localization) is missing.";
 
             @Override
-            protected Object handleGetObject(@NotNull String key) {
+            protected Object handleGetObject(String key) {
                 throw new MissingResourceException(MISSING_BUNDLE_MESSAGE, null, key);
             }
 
             @Override
-            public @NotNull Enumeration<String> getKeys() {
+            public Enumeration<String> getKeys() {
                 throw new MissingResourceException(MISSING_BUNDLE_MESSAGE, null, null);
             }
         };
@@ -210,7 +209,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
      *
      * @return the name of the file containing the script
      */
-    public @NotNull String getFileName() {
+    public String getFileName() {
         if (sourceFile != null) {
             return sourceFile.getName();
         }
@@ -302,7 +301,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
      * @throws IOException if the source file does not exist or an error occurs
      *                     while writing to the file.
      */
-    public void setText(@NotNull String text) throws IOException {
+    public void setText(String text) throws IOException {
         if (sourceFile != null) {
             FileUtils.writeStringToFile(sourceFile, applyLineBreaksToText(text), StandardCharsets.UTF_8);
         } else {
@@ -310,7 +309,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
         }
     }
 
-    private @NotNull String applyLineBreaksToText(String text) {
+    private String applyLineBreaksToText(String text) {
         text = text.replaceAll("\n", lineBreak);
         if (startsWithBOM) {
             text = BOM + text;

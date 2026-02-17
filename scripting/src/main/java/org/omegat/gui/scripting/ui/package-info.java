@@ -1,12 +1,9 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -24,19 +21,8 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
+@NullMarked
 package org.omegat.gui.scripting.ui;
 
-import java.awt.Component;
-
-import javax.swing.JMenuBar;
-import javax.swing.JTextArea;
-
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout();
-    public abstract Component getPanel();
-    public abstract JTextArea getTextArea();
-}
+import org.jspecify.annotations.NullMarked;

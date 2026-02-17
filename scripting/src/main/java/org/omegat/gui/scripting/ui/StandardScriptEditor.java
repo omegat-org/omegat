@@ -38,8 +38,13 @@ import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class StandardScriptEditor extends AbstractScriptEditor {
-    private JTextArea m_scriptEditor;
-    private JScrollPane m_scrollPaneEditor;
+    private final JTextArea scriptEditorArea;
+    private final JScrollPane editorScrollPane;
+
+    public StandardScriptEditor(ScriptingWindow scriptingWindow) {
+        scriptEditorArea = new JTextArea();
+        editorScrollPane = new JScrollPane(scriptEditorArea);
+    }
 
     @Override
     public void setHighlighting(String extension) {
@@ -52,23 +57,19 @@ public class StandardScriptEditor extends AbstractScriptEditor {
     }
 
     @Override
-    public void initLayout(ScriptingWindow scriptingWindow) {
-        m_scriptEditor = new JTextArea();
-
-        m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
-                m_scriptEditor.getFont().getSize()));
-        m_scrollPaneEditor = new JScrollPane(m_scriptEditor);
-
+    public void initLayout() {
+        scriptEditorArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
+                scriptEditorArea.getFont().getSize()));
     }
 
     @Override
     public Component getPanel() {
-        return m_scrollPaneEditor;
+        return editorScrollPane;
     }
 
     @Override
     public JTextArea getTextArea() {
-        return m_scriptEditor;
+        return scriptEditorArea;
     }
 
 }

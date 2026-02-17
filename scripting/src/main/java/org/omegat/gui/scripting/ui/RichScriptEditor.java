@@ -63,6 +63,7 @@ import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.scripting.ScriptingUtils;
 import org.omegat.gui.scripting.ScriptingWindow;
 
@@ -71,13 +72,20 @@ import org.openide.awt.Mnemonics;
 @SuppressWarnings("serial")
 public class RichScriptEditor extends AbstractScriptEditor implements SearchListener {
 
-    private RSyntaxTextArea scriptEditor;
-    private CollapsibleSectionPanel csp;
-    private FindDialog findDialog;
-    private ReplaceDialog replaceDialog;
-    private FindToolBar findToolBar;
-    private ReplaceToolBar replaceToolBar;
-    private ScriptingWindow scriptingWindow;
+    private final CollapsibleSectionPanel csp;
+    private final RSyntaxTextArea scriptEditor;
+    private final ScriptingWindow scriptingWindow;
+
+    private @Nullable FindDialog findDialog;
+    private @Nullable ReplaceDialog replaceDialog;
+    private @Nullable FindToolBar findToolBar;
+    private @Nullable ReplaceToolBar replaceToolBar;
+
+    public RichScriptEditor(ScriptingWindow scriptingWindow) {
+        this.scriptingWindow = scriptingWindow;
+        scriptEditor = new RSyntaxTextArea();
+        csp = new CollapsibleSectionPanel();
+    }
 
     @Override
     public JTextArea getTextArea() {
@@ -99,7 +107,6 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         default:
             scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
         }
-
     }
 
     public void initSearchDialogs() {
@@ -149,21 +156,23 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         }
     }
 
-    private class ShowReplaceDialogAction implements ActionListener {
+    private final class ShowReplaceDialogAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (findDialog.isVisible()) {
+            if (findDialog != null && findDialog.isVisible()) {
                 findDialog.setVisible(false);
             }
-            replaceDialog.setVisible(true);
+            if (replaceDialog != null) {
+                replaceDialog.setVisible(true);
+            }
         }
     }
 
-    private class GoToLineAction implements ActionListener {
+    private final class GoToLineAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (findDialog.isVisible()) {
+            if (findDialog != null && findDialog.isVisible()) {
                 findDialog.setVisible(false);
             }
-            if (replaceDialog.isVisible()) {
+            if (replaceDialog != null && replaceDialog.isVisible()) {
                 replaceDialog.setVisible(false);
             }
             GoToDialog dialog = new GoToDialog(scriptingWindow.getParent());
@@ -182,9 +191,9 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     }
 
-    private class ShowFindDialogAction implements ActionListener {
+    private final class ShowFindDialogAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (replaceDialog.isVisible()) {
+            if (replaceDialog != null && replaceDialog.isVisible()) {
                 replaceDialog.setVisible(false);
             }
             findDialog.setVisible(true);
@@ -234,9 +243,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
     }
 
     @Override
-    public void initLayout(ScriptingWindow scriptingWindow) {
-        this.scriptingWindow = scriptingWindow;
-        scriptEditor = new RSyntaxTextArea();
+    public void initLayout() {
         scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, scriptEditor.getFont().getSize()));
 
         CompletionProvider provider = new DefaultCompletionProvider();
@@ -246,12 +253,10 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
         scriptEditor.setCodeFoldingEnabled(true);
         RTextScrollPane scrollPaneEditor = new RTextScrollPane(scriptEditor);
-        csp = new CollapsibleSectionPanel();
         this.scriptingWindow.addContent(csp);
         csp.add(scrollPaneEditor);
 
         initSearchDialogs();
-
     }
 
     @Override

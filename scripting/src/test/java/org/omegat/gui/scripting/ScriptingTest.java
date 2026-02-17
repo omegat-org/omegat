@@ -46,6 +46,8 @@ import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
+import javax.swing.JFrame;
+
 public class ScriptingTest extends TestCore {
 
     /**
@@ -76,7 +78,7 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testDefaultScriptFolderOnScriptWindow() {
-        ScriptingWindow scriptingWindow = new ScriptingWindow(null);
+        ScriptingWindow scriptingWindow = new ScriptingWindow(new JFrame());
         assertNotNull(scriptingWindow.getScriptsFolder());
         assertEquals(new File(StaticUtils.getUserScriptsDir()), scriptingWindow.getScriptsFolder());
     }

@@ -37,6 +37,7 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FilenameUtils;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
@@ -62,35 +63,35 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     }
 
     public ScriptsMonitor(final ScriptingWindow scriptingWindow) {
-        this.m_scriptingWindow = scriptingWindow;
+        this.scriptingWindow = scriptingWindow;
 
         if (SCRIPTING_EVENTS) {
             // Initialize the events script list for all the events
             for (EventType t : EventType.values()) {
-                m_eventsScript.put(t, new ArrayList<>());
+                eventScriptsMap.put(t, new ArrayList<>());
             }
         }
 
     }
 
     public void start(final File scriptDir) {
-        this.m_scriptDir = scriptDir;
-        m_monitor = new DirectoryMonitor(scriptDir, this, this);
-        m_monitor.start();
+        this.scriptDirectory = scriptDir;
+        monitor = new DirectoryMonitor(scriptDir, this, this);
+        monitor.start();
 
         // Immediately execute APPLICATION_STARTUP event scripts
         if (!applicationStartupEventScriptsExecuted) { // first-time only
             applicationStartupEventScriptsExecuted = true;
             addEventScripts(EventType.APPLICATION_STARTUP);
-            ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
-            m_scriptingWindow.executeScripts(scripts, Collections.emptyMap());
+            ArrayList<ScriptItem> scripts = eventScriptsMap.get(EventType.APPLICATION_STARTUP);
+            scriptingWindow.executeScripts(scripts, Collections.emptyMap());
             scripts.clear();
         }
     }
 
     public void stop() {
-        if (m_monitor != null) {
-            m_monitor.fin();
+        if (monitor != null) {
+            monitor.fin();
         }
     }
 
@@ -104,7 +105,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
     @Override
     public void directoryChanged(File file) {
-        if (!m_scriptDir.isDirectory()) {
+        if (!scriptDirectory.isDirectory()) {
             // No script directory.
             return;
         }
@@ -114,7 +115,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         // currently installed.
         ArrayList<ScriptItem> scriptsList = new ArrayList<>();
         // Replace the script filename by its description, if available
-        File[] aFile = m_scriptDir.listFiles(FILTER);
+        File[] aFile = scriptDirectory.listFiles(FILTER);
         if (aFile != null) {
             for (File script : aFile) {
                 scriptsList.add(new ScriptItem(script));
@@ -123,7 +124,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
         Collections.sort(scriptsList);
         SwingUtilities.invokeLater(() -> {
-            m_scriptingWindow.setScriptItems(scriptsList);
+            scriptingWindow.setScriptItems(scriptsList);
         });
 
         if (SCRIPTING_EVENTS) {
@@ -135,20 +136,20 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     }
 
     private void hookEntryEvent() {
-        if (m_entryEventListener != null) {
-            CoreEvents.unregisterEntryEventListener(m_entryEventListener);
+        if (fileEventListener != null) {
+            CoreEvents.unregisterEntryEventListener(fileEventListener);
         }
 
         addEventScripts(EventType.ENTRY_ACTIVATED);
         addEventScripts(EventType.NEW_FILE);
 
-        m_entryEventListener = new IEntryEventListener() {
+        fileEventListener = new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("activeFileName", activeFileName);
 
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
+                scriptingWindow.executeScripts(eventScriptsMap.get(EventType.NEW_FILE), binding);
             }
 
             @Override
@@ -156,41 +157,41 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newEntry", newEntry);
 
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
+                scriptingWindow.executeScripts(eventScriptsMap.get(EventType.ENTRY_ACTIVATED), binding);
             }
         };
 
-        CoreEvents.registerEntryEventListener(m_entryEventListener);
+        CoreEvents.registerEntryEventListener(fileEventListener);
     }
 
     private void hookProjectEvent() {
-        if (m_projectEventListener != null) {
-            CoreEvents.unregisterProjectChangeListener(m_projectEventListener);
+        if (projectChangeListener != null) {
+            CoreEvents.unregisterProjectChangeListener(projectChangeListener);
         }
 
         addEventScripts(EventType.PROJECT_CHANGED);
 
-        m_projectEventListener = new IProjectEventListener() {
+        projectChangeListener = new IProjectEventListener() {
 
             @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("eventType", eventType);
-                ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
-                m_scriptingWindow.executeScripts(scripts, binding);
+                ArrayList<ScriptItem> scripts = eventScriptsMap.get(EventType.PROJECT_CHANGED);
+                scriptingWindow.executeScripts(scripts, binding);
             }
         };
-        CoreEvents.registerProjectChangeListener(m_projectEventListener);
+        CoreEvents.registerProjectChangeListener(projectChangeListener);
     }
 
     private void hookApplicationEvent() {
-        if (m_applicationEventListener != null) {
-            CoreEvents.unregisterApplicationEventListener(m_applicationEventListener);
+        if (applicationEventListener != null) {
+            CoreEvents.unregisterApplicationEventListener(applicationEventListener);
         }
 
         addEventScripts(EventType.APPLICATION_SHUTDOWN);
 
-        m_applicationEventListener = new IApplicationEventListener() {
+        applicationEventListener = new IApplicationEventListener() {
             @Override
             public void onApplicationStartup() {
                 // APPLICATION_STARTUP is not working because it is registered too late.
@@ -203,42 +204,42 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 // FIXME APPLICATION_SHUTDOWN scripts are not reliably
                 // executed, as the application may exit before they are
                 // finished executing.
-                ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
-                m_scriptingWindow.executeScripts(scriptItems, new HashMap<>());
+                ArrayList<ScriptItem> scriptItems = eventScriptsMap.get(EventType.APPLICATION_SHUTDOWN);
+                scriptingWindow.executeScripts(scriptItems, new HashMap<>());
             }
         };
 
-        CoreEvents.registerApplicationEventListener(m_applicationEventListener);
+        CoreEvents.registerApplicationEventListener(applicationEventListener);
     }
 
     private void hookEditorEvent() {
-        if (m_editorEventListener != null) {
-            CoreEvents.unregisterEditorEventListener(m_editorEventListener);
+        if (editorEventListener != null) {
+            CoreEvents.unregisterEditorEventListener(editorEventListener);
         }
 
         addEventScripts(EventType.NEW_WORD);
 
-        m_editorEventListener = new IEditorEventListener() {
+        editorEventListener = new IEditorEventListener() {
             @Override
             public void onNewWord(String newWord) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newWord", newWord);
 
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
+                scriptingWindow.executeScripts(eventScriptsMap.get(EventType.NEW_WORD), binding);
             }
         };
 
-        CoreEvents.registerEditorEventListener(m_editorEventListener);
+        CoreEvents.registerEditorEventListener(editorEventListener);
     }
 
     private void addEventScripts(EventType eventType) {
         String entryDirName = eventType.name().toLowerCase(Locale.ENGLISH);
 
-        File entryActivatedDir = new File(m_scriptDir, entryDirName);
+        File entryActivatedDir = new File(scriptDirectory, entryDirName);
         if (!entryActivatedDir.isDirectory()) {
             return;
         }
-        ArrayList<ScriptItem> eventScripts = m_eventsScript.get(eventType);
+        ArrayList<ScriptItem> eventScripts = eventScriptsMap.get(eventType);
         // Avoid executing scripts that may be deleted during the directory change.
         eventScripts.clear();
 
@@ -272,16 +273,16 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         NEW_FILE
     }
 
-    private File m_scriptDir;
-    protected DirectoryMonitor m_monitor;
-    private ScriptingWindow m_scriptingWindow;
+    private @Nullable File scriptDirectory;
+    protected @Nullable DirectoryMonitor monitor;
+    private final ScriptingWindow scriptingWindow;
 
     // Event listeners.
-    private IEntryEventListener m_entryEventListener;
-    private IProjectEventListener m_projectEventListener;
-    private IApplicationEventListener m_applicationEventListener;
-    private IEditorEventListener m_editorEventListener;
+    private @Nullable IEntryEventListener fileEventListener;
+    private @Nullable IProjectEventListener projectChangeListener;
+    private @Nullable IApplicationEventListener applicationEventListener;
+    private @Nullable IEditorEventListener editorEventListener;
 
     // Map holding the script fired for the different event listeners.
-    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<>();
+    private final HashMap<EventType, ArrayList<ScriptItem>> eventScriptsMap = new HashMap<>();
 }

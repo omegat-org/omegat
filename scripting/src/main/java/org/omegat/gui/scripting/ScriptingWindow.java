@@ -86,10 +86,10 @@ import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.gui.scripting.runner.AbstractScriptRunner;
 import org.omegat.gui.scripting.ui.AbstractScriptEditor;
 import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -122,9 +122,7 @@ public class ScriptingWindow {
     }
 
     public void dispose() {
-        if (frame != null) {
-            frame.dispose();
-        }
+        frame.dispose();
     }
 
     public ScriptingWindow() {
@@ -135,19 +133,17 @@ public class ScriptingWindow {
         this.frame = frame;
         setScriptsDirectory(StaticUtils.getUserScriptsDir());
 
-        if (frame != null) {
-            StaticUIUtils.setWindowIcon(frame);
-            StaticUIUtils.setEscapeClosable(frame);
-            frame.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    monitor.stop();
-                }
-            });
-            initWindowLayout();
-            addScriptCommandToOmegaT();
-            addRunShortcutToOmegaT();
-        }
+        StaticUIUtils.setWindowIcon(frame);
+        StaticUIUtils.setEscapeClosable(frame);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                monitor.stop();
+            }
+        });
+        initWindowLayout();
+        addScriptCommandToOmegaT();
+        addRunShortcutToOmegaT();
 
         updateQuickScripts();
 
@@ -339,17 +335,14 @@ public class ScriptingWindow {
         txtResult = new JEditorPane();
         JScrollPane scrollPaneResults = new JScrollPane(txtResult);
 
-        // m_txtScriptEditor = new StandardScriptEditor();
-        txtScriptEditor = getScriptEditor();
-
-        txtScriptEditor.initLayout(this);
+        txtScriptEditor = getScriptEditor(this);
+        txtScriptEditor.initLayout();
 
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, txtScriptEditor.getPanel(),
                 scrollPaneResults);
         splitPane1.setOneTouchExpandable(true);
         splitPane1.setDividerLocation(430);
         Dimension minimumSize1 = new Dimension(100, 50);
-        // scrollPaneEditor.setMinimumSize(minimumSize1);
         scrollPaneResults.setMinimumSize(minimumSize1);
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPaneList, splitPane1);
@@ -374,12 +367,12 @@ public class ScriptingWindow {
     }
     // CHECKSTYLE:ON
 
-    private AbstractScriptEditor getScriptEditor() {
+    private AbstractScriptEditor getScriptEditor(ScriptingWindow scriptingWindow) {
         try {
-            return new org.omegat.gui.scripting.ui.RichScriptEditor();
+            return new org.omegat.gui.scripting.ui.RichScriptEditor(scriptingWindow);
         } catch (Exception e) {
             logResult("Error loading RichScriptEditor, fallback to the standard editor: ", e);
-            return new StandardScriptEditor();
+            return new StandardScriptEditor(scriptingWindow);
         }
     }
 
@@ -399,7 +392,8 @@ public class ScriptingWindow {
 
             setQuickScriptMenu(scriptItem, index);
 
-            logResult(StringUtil.format(ScriptingUtils.getBundleString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
+            logResult(StringUtil.format(ScriptingUtils.getBundleString("SCW_SAVE_QUICK_SCRIPT"), scriptItem,
+                    scriptKey));
         }
 
         public void updateQuickScript() {
@@ -661,7 +655,8 @@ public class ScriptingWindow {
     }
 
     void logResultRB(Throwable t, String key, Object... args) {
-        logResultToWindow(MessageFormat.format(ScriptingUtils.getBundleString(key), args) + "\n" + t.getMessage(), true);
+        logResultToWindow(MessageFormat.format(ScriptingUtils.getBundleString(key), args) + "\n" + t.getMessage(),
+                true);
         ScriptingUtils.getLogger().atError().setCause(t).setMessageRB(key).addArgument(args).log();
     }
 
@@ -775,7 +770,8 @@ public class ScriptingWindow {
     }
 
     // Menu Actions
-    private class OpenScriptAction implements ActionListener {
+    private final class OpenScriptAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
 
             // If a project is opened, set the file chooser to the project root
@@ -799,7 +795,8 @@ public class ScriptingWindow {
         }
     }
 
-    private class NewScriptAction implements ActionListener {
+    private final class NewScriptAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             currentScriptItem = null;
             scriptList.clearSelection();
@@ -812,13 +809,15 @@ public class ScriptingWindow {
         }
     }
 
-    private class RunScriptAction implements ActionListener {
+    private final class RunScriptAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             runScript();
         }
     }
 
-    private class SaveScriptAction implements ActionListener {
+    private final class SaveScriptAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
 
             if (currentScriptItem == null || currentScriptItem.getFile() == null) {
@@ -843,7 +842,8 @@ public class ScriptingWindow {
 
     }
 
-    private class SelectScriptFolderAction implements ActionListener {
+    private final class SelectScriptFolderAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = new JFileChooser(scriptsDirectory);
             chooser.setDialogTitle(ScriptingUtils.getBundleString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
@@ -857,7 +857,8 @@ public class ScriptingWindow {
         }
     }
 
-    private class ExploreScriptFolderAction implements ActionListener {
+    private final class ExploreScriptFolderAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 // Normalize file name in case it is displayed
@@ -967,7 +968,8 @@ public class ScriptingWindow {
         return menuBar;
     }
 
-    private class SaveSetAction implements ActionListener {
+    private final class SaveSetAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
 
             String setName = JOptionPane.showInputDialog(frame, ScriptingUtils.getBundleString("SCW_SAVE_SET_MSG"),
@@ -986,7 +988,8 @@ public class ScriptingWindow {
         }
     }
 
-    private class LoadSetAction implements ActionListener {
+    private final class LoadSetAction implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
 
             JMenuItem source = (JMenuItem) e.getSource();
@@ -1049,19 +1052,19 @@ public class ScriptingWindow {
     private JList<ScriptItem> scriptList;
     private JEditorPane txtResult;
     private AbstractScriptEditor txtScriptEditor;
-    private JMenuBar menuBar;
+    private @Nullable JMenuBar menuBar;
 
-    private ScriptWorker currentScriptWorker;
+    private @Nullable ScriptWorker currentScriptWorker;
     private final Queue<ScriptWorker> queuedWorkers = new LinkedList<>();
 
     protected ScriptsMonitor monitor;
 
-    private File scriptsDirectory;
-    private ScriptItem currentScriptItem;
+    private @Nullable File scriptsDirectory;
+    private @Nullable ScriptItem currentScriptItem;
 
     private final JMenu setsMenu = new JMenu();
 
     private final String[] quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
-    private final JMenuItem[] quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
+    private final JMenuItem@Nullable [] quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
     private final JButton[] quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
 }

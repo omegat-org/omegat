@@ -27,6 +27,8 @@
 
 package org.omegat.gui.scripting.runner;
 
+import org.jspecify.annotations.Nullable;
+
 import javax.script.Bindings;
 import javax.script.Invocable;
 import javax.script.ScriptContext;
@@ -37,7 +39,7 @@ import java.util.Map;
 public class StandardScriptRunner extends AbstractScriptRunner {
 
     @Override
-    protected Object doExecuteScript(String script, ScriptEngine engine,
+    protected Object doExecuteScript(@Nullable String script, ScriptEngine engine,
                                      Map<String, Object> additionalBindings) throws ScriptException {
 
         Bindings bindings = setupBindings(engine, additionalBindings);

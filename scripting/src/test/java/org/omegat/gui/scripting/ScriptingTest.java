@@ -46,8 +46,6 @@ import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
-import javax.swing.JFrame;
-
 public class ScriptingTest extends TestCore {
 
     /**

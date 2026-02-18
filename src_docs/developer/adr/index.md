@@ -10,6 +10,16 @@
 - 2025007 [CLI Plugin API Implementation](2025007.CLIPluginAPI.md)
 - 2025008 [Adoption of JSpecify for Null-Safety](2025008.AdoptionJSpecifyForNullSafety.md)
 
+## Core features
+
+### Search and Sorting
+
+- 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)
+
+### Filters
+
+- 2025009 [Yaml Filter Specification](2025009.YamlFilterSpecification.md) 
+
 ## OmegaT build system
 
 - 2025001 [OmegaT Build System Improvement Using Modular Conventions](2025001.BuildSystem.md)
@@ -27,4 +37,4 @@
 
 - 2025006 [User Script Debugging Support Architecture](2025006.UserScriptDebugging.md)
 - 2025010 [First Time Configuration Wizard](2025010.FirstTimeWizard.md)
- 
+- 2025011 [User Script Specification](2025011.UserScriptSpecification.md)

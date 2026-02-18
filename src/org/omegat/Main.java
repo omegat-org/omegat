@@ -86,7 +86,7 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
-import org.omegat.core.statistics.spi.StatOutputFormat;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;

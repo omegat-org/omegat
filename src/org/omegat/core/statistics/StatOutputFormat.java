@@ -23,15 +23,15 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics.spi;
+package org.omegat.core.statistics;
 
 import org.omegat.util.OStrings;
 
 public enum StatOutputFormat {
     TEXT(1, ".txt"), XML(2, ".xml"), JSON(4, ".json");
 
-    private String fileExtension;
-    private int id;
+    private final String fileExtension;
+    private final int id;
 
     StatOutputFormat(int id, String fileExtension) {
         this.id = id;

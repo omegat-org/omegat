@@ -45,7 +45,6 @@ import java.util.Date;
 import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
-import org.omegat.core.statistics.spi.StatOutputFormat;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
@@ -145,7 +144,7 @@ public final class Statistics {
         BreakIterator breaker = DefaultTokenizer.getWordBreaker();
         breaker.setText(str);
 
-        String tokenStr = "";
+        String tokenStr;
 
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {

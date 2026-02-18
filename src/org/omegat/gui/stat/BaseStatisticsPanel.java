@@ -34,7 +34,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
 import org.omegat.core.Core;
-import org.omegat.core.statistics.spi.IStatsConsumer;
+import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;

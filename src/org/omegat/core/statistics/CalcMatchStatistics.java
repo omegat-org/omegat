@@ -49,7 +49,6 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.statistics.dso.MatchStatCounts;
 import org.omegat.core.statistics.dso.StatCount;
-import org.omegat.core.statistics.spi.IStatsConsumer;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OConsts;
@@ -313,7 +312,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         List<NearString> nears = localFinder.search(srcNoXmlTags, false, this::isInterrupted);
         final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
         int maxSimilarity = 0;
-        CACHE: for (NearString near : nears) {
+        for (NearString near : nears) {
             final Token[] candTokens = localFinder.tokenizeAll(near.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator.get(), strTokensStem,
                     candTokens);

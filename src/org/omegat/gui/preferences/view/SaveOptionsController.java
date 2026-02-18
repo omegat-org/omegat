@@ -34,7 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
 import org.omegat.core.data.CommandVarExpansion;
-import org.omegat.core.statistics.spi.StatOutputFormat;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -65,8 +65,11 @@ public class SaveOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new SaveOptionsPanel();
 
-        panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
-                .replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        Object item = panel.variablesList.getSelectedItem();
+        if (item != null) {
+            panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
+                    .replaceSelection(item.toString()));
+        }
     }
 
     @Override

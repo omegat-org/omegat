@@ -18,7 +18,7 @@
 
 ### Filters
 
-- 2025009 [Yaml Filter Specification](2025009.YamlFilterSpecification.md) 
+- 2025009 [Yaml Filter Specification](2025009.YAMLFilterSpecification.md) 
 
 ## OmegaT build system
 

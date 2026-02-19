@@ -27,13 +27,17 @@
 package org.omegat.core.segmentation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
@@ -43,6 +47,7 @@ import org.omegat.util.PatternConsts;
  *
  * @author Maxym Mykhalchuk
  */
+@NullMarked
 public final class Segmenter {
 
     private final SRX srx;
@@ -69,15 +74,16 @@ public final class Segmenter {
      * @param paragraph
      *            the paragraph text
      * @param spaces
-     *            list to store information about spaces between sentences (can be null)
+     *            list to store information about spaces between sentences (can
+     *            be null)
      * @param brules
      *            list to store rules that account to breaks (can be null)
      * @return list of sentences (String objects)
      */
-    public List<String> segment(Language lang, @Nullable String paragraph, @Nullable List<StringBuilder> spaces,
-                                @Nullable List<Rule> brules) {
+    public List<String> segment(Language lang, String paragraph,
+                                @Nullable List<StringBuilder> spaces, @Nullable List<Rule> brules) {
         if (paragraph == null) {
-            return null;
+            return Collections.emptyList();
         }
         List<String> segments = breakParagraph(lang, paragraph, brules);
         List<String> sentences = new ArrayList<>(segments.size());
@@ -118,11 +124,13 @@ public final class Segmenter {
     }
 
     /**
-     * Returns pre-sentences (sentences with spaces between), computed by breaking paragraph into chunks of
-     * text. Also returns the list with "the reasons" why the breaks were made, i.e. the list of break rules
-     * that contributed to each of the breaks made.
+     * Returns pre-sentences (sentences with spaces between), computed by
+     * breaking paragraph into chunks of text. Also returns the list with "the
+     * reasons" why the breaks were made, i.e. the list of break rules that
+     * contributed to each of the breaks made.
      * <p>
-     * If glued back together, these strings form the same paragraph text as this function was fed.
+     * If glued back together, these strings form the same paragraph text as
+     * this function was fed.
      *
      * @param paragraph
      *            the paragraph text
@@ -246,7 +254,8 @@ public final class Segmenter {
         }
 
         /**
-         * Other BreakPosition is "equal to" this one iff it has the same position.
+         * Other BreakPosition is "equal to" this one iff it has the same
+         * position.
          */
         public boolean equals(Object obj) {
             if (obj == null) {
@@ -268,10 +277,12 @@ public final class Segmenter {
         /**
          * Compares this break position with another.
          *
-         * @return a negative integer if its position is less than the another's, zero if they are equal, or a
-         *         positive integer as its position is greater than the another's.
+         * @return a negative integer if its position is less than the
+         *         another's, zero if they are equal, or a positive integer as
+         *         its position is greater than the another's.
          * @throws ClassCastException
-         *             if the specified object's type prevents it from being compared to this Object.
+         *             if the specified object's type prevents it from being
+         *             compared to this Object.
          */
         public int compareTo(BreakPosition that) {
             return this.position - that.position;
@@ -325,14 +336,15 @@ public final class Segmenter {
                     Matcher matcher = LINE_BREAK_OR_TAB_PATTERN.matcher(sp.toString());
                     if (matcher.find()) {
                         // If we found line break or tab, trim left spaces.
-                        // Right spaces are left for indentation of the next line.
+                        // Right spaces are left for indentation of the next
+                        // line.
                         String leftSpaces = matcher.group(1);
                         if (!leftSpaces.isEmpty()) {
                             sp.replace(0, leftSpaces.length(), "");
                         }
                     } else if ((lastChar != '.')
                             && (!PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches()
-                            || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches())) {
+                                    || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches())) {
                         sp.setLength(0);
                     }
                 }
@@ -349,11 +361,13 @@ public final class Segmenter {
      * Segment source and target entries from TMX when counts are equals.
      */
     public void segmentEntries(boolean needResegment, Language sourceLang, String sourceEntry,
-            Language targetLang, String targetEntry, List<String> sourceSegments, List<String> targetSegments) {
+            Language targetLang, @Nullable String targetEntry, List<String> sourceSegments,
+            List<@Nullable String> targetSegments) {
         if (needResegment) {
-            List<String> srcSegments = segment(sourceLang, sourceEntry, null, null);
-            if (targetEntry != null) { // There is no translation for this entry, because for instance it's a note
-                                       // on an untranslated entry
+            if (targetEntry != null) {
+                // There is no translation for this entry, because for
+                // instance it's a note on an untranslated entry
+                List<String> srcSegments = segment(sourceLang, sourceEntry, null, null);
                 List<String> tarSegments = segment(targetLang, targetEntry, null, null);
 
                 if (srcSegments.size() == tarSegments.size()) {
@@ -363,7 +377,8 @@ public final class Segmenter {
                 }
             }
         }
-        // No need to resegment, or segments counts not equals, or no translation
+        // No need to resegment, or segments counts not equals, or no
+        // translation
         sourceSegments.add(sourceEntry);
         targetSegments.add(targetEntry);
 

@@ -27,12 +27,13 @@
 
 package org.omegat.core.segmentation;
 
-import org.jspecify.annotations.Nullable;
-import org.omegat.util.OStrings;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.omegat.util.OStrings;
 
 /**
  * Code-Key mappings for segmentation code.
@@ -41,6 +42,7 @@ import java.util.Objects;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
+@NullMarked
 public final class LanguageCodes {
 
     private static volatile @Nullable LanguageCodes instance;

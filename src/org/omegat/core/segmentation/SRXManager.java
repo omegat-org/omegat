@@ -28,22 +28,6 @@
 
 package org.omegat.core.segmentation;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DatabindException;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlFactory;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
-import gen.core.segmentation.Languagemap;
-import gen.core.segmentation.Languagerule;
-import gen.core.segmentation.ObjectFactory;
-import gen.core.segmentation.Srx;
-import org.jspecify.annotations.Nullable;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -65,6 +49,24 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+import gen.core.segmentation.Languagemap;
+import gen.core.segmentation.Languagerule;
+import gen.core.segmentation.ObjectFactory;
+import gen.core.segmentation.Srx;
+import org.omegat.util.Language;
+import org.omegat.util.Log;
+
 /**
  * Utility class for SRX segmentation rules.
  *
@@ -72,6 +74,7 @@ import java.util.stream.Collectors;
  * @author Thomas Cordonnier
  * @author Hiroshi Miura
  */
+@NullMarked
 public final class SRXManager {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
@@ -84,15 +87,13 @@ public final class SRXManager {
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
         xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
-        MAPPER = XmlMapper.builder(xmlFactory)
-                .defaultUseWrapper(false)
+        MAPPER = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .enable(ToXmlGenerator.Feature.WRITE_XML_DECLARATION)
                 .defaultPropertyInclusion(JsonInclude.Value.construct(JsonInclude.Include.NON_EMPTY,
                         JsonInclude.Include.NON_EMPTY))
-                .addModule(new JakartaXmlBindAnnotationModule())
-                .build();
+                .addModule(new JakartaXmlBindAnnotationModule()).build();
     }
 
     private SRXManager() {

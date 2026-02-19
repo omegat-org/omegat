@@ -67,7 +67,8 @@ public class SRX implements Serializable {
 
     public static SRX getDefault() {
         try {
-            SRX srx = SRXManager.loadSrxInputStream(Objects.requireNonNull(SRX.class.getResourceAsStream("defaultRules.srx")));
+            SRX srx = SRXManager.loadSrxInputStream(
+                    Objects.requireNonNull(SRX.class.getResourceAsStream("defaultRules.srx")));
             srx.includeEndingTags = true;
             srx.segmentSubflows = true;
             return srx;

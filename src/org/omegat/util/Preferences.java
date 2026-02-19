@@ -720,10 +720,10 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRXManager.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
-                                        // directory
+            // save to segmentation.srx in the given directory
+            SRXManager.saveToSrx(srx, srxDir);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
         PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
     }

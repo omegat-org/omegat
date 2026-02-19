@@ -34,6 +34,7 @@ import java.util.regex.PatternSyntaxException;
 
 import gen.core.segmentation.Languagemap;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
@@ -77,7 +78,6 @@ public class MapRule implements Serializable {
         this.setPattern(pattern);
         this.setRules(rules);
     }
-
 
     /**
      * Create initialized MapRule object from segmentation.srx.
@@ -155,7 +155,7 @@ public class MapRule implements Serializable {
     /**
      * Returns Pattern for the language/country ISO code (of a form LL-CC).
      */
-    public String getPattern() {
+    public @Nullable String getPattern() {
         if (pattern != null) {
             return pattern.pattern();
         } else {

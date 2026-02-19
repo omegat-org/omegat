@@ -61,10 +61,8 @@ public final class SRXTest {
     private static final String SEGMENT_CONF_BASE = "test/data/segmentation/migrate/";
 
     public static boolean checkRules(List<MapRule> mapRuleList, String pattern, String language) {
-        return mapRuleList.stream()
-                .filter(mapRule -> Objects.equals(language, mapRule.getLanguage()))
-                .map(mapRule -> mapRule.getCompiledPattern().matcher(pattern).matches())
-                .findFirst()
+        return mapRuleList.stream().filter(mapRule -> Objects.equals(language, mapRule.getLanguage()))
+                .map(mapRule -> mapRule.getCompiledPattern().matcher(pattern).matches()).findFirst()
                 .orElse(false);
     }
 
@@ -124,7 +122,7 @@ public final class SRXTest {
         public void testSrxMigrationBasic() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir,  "JA", LanguageCodes.JAPANESE_CODE);
+            SRXTest.testSrxMigration(segmentConf, configDir, "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
 
@@ -159,8 +157,11 @@ public final class SRXTest {
             SRXTest.testSrxMigration(segmentConf, configDir, "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
-    
-    /** Check compatibilty with a conf file which is not at all based on standard OmegaT rules **/
+
+    /**
+     * Check compatibilty with a conf file which is not at all based on standard
+     * OmegaT rules
+     **/
     public static class SRXMigrateExtDeTest {
 
         @org.junit.Rule
@@ -187,7 +188,8 @@ public final class SRXTest {
      * a segmentation.conf file that is produced by OmegaT in English
      * environment and Japanese environment.
      */
-    public static void testSrxMigration(File segmentConf, File configDir, String pattern, String lang) throws Exception {
+    public static void testSrxMigration(File segmentConf, File configDir, String pattern, String lang)
+            throws Exception {
         // ensures the full test runs in temp directory
         Files.copy(segmentConf.toPath(), Paths.get(configDir.getAbsolutePath(), segmentConf.getName()));
         segmentConf = new File(configDir, segmentConf.getName());
@@ -196,7 +198,8 @@ public final class SRXTest {
         assertNotNull(srxOrig);
         List<MapRule> mapRuleList = srxOrig.getMappingRules();
         assertNotNull(mapRuleList);
-        assertEquals(17, mapRuleList.size()); // samples have 17 rules, while default had 18
+        assertEquals(17, mapRuleList.size()); // samples have 17 rules, while
+                                              // default had 18
         assertTrue(checkRules(mapRuleList, pattern, lang));
         // load from srx file
         File segmentSrx = new File(configDir, "segmentation.srx");
@@ -221,32 +224,30 @@ public final class SRXTest {
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
-
         @Test
         public void testSRXLoaderSecureCVE_2024_51366() throws IOException {
             File tmpDir = folder.newFolder();
             Path segmentConf = tmpDir.toPath().resolve("segmentation.conf");
             // prepare CVE-2024-51366 exploit code
-            String xmlContent = "<java>\n" +
-                    "    <object\nclass=\"java.lang.ProcessBuilder\">\n" +
-                    "        <array class=\n\"java.lang.String\" length=\"2\" >\n" +
-                    "            <void index=\"0\">\n" +
-                    "                <string>touch</string>\n" +
-                    "            </void>\n" +
-                    "            <void index=\"1\">\n" +
-                    "                <string>" + tmpDir + "/test-file</string>\n" +
-                    "            </void>\n" +
-                    "        </array>\n" +
-                    "        <void method=\"start\"/>\n" +
-                    "    </object>\n" +
-                    "</java>";
+            String xmlContent = "<java>\n" + "    <object\nclass=\"java.lang.ProcessBuilder\">\n"
+                    + "        <array class=\n\"java.lang.String\" length=\"2\" >\n"
+                    + "            <void index=\"0\">\n" + "                <string>touch</string>\n"
+                    + "            </void>\n" + "            <void index=\"1\">\n"
+                    + "                <string>" + tmpDir + "/test-file</string>\n" + "            </void>\n"
+                    + "        </array>\n" + "        <void method=\"start\"/>\n" + "    </object>\n"
+                    + "</java>";
             Files.writeString(segmentConf, xmlContent);
             SRX srx = SRXManager.loadFromDir(segmentConf.getParent().toFile());
             assertNotNull(srx);
-            assertFalse(new File(tmpDir, "test-file").exists()); // true would mean that the vulnerability is still here!
+            assertFalse(new File(tmpDir, "test-file").exists()); // true would
+                                                                 // mean that
+                                                                 // the
+                                                                 // vulnerability
+                                                                 // is still
+                                                                 // here!
         }
     }
-    
+
     private SRXTest() {
     }
 }

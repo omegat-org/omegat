@@ -30,13 +30,14 @@ import org.junit.Test;
 import java.io.IOException;
 
 /**
- * Unit tests for the {@link SRXManager#getDefault()} method.
- * This method loads the default segmentation rules and configures the SRX object accordingly.
+ * Unit tests for the {@link SRXManager#getDefault()} method. This method loads
+ * the default segmentation rules and configures the SRX object accordingly.
  */
 public class SRXManagerTest {
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method successfully loads the default SRX object.
+     * Test that the {@link SRXManager#getDefault()} method successfully loads
+     * the default SRX object.
      */
     @Test
     public void testGetDefaultLoadsSRXSuccessfully() throws IOException {
@@ -45,7 +46,8 @@ public class SRXManagerTest {
     }
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method sets includeEndingTags to true.
+     * Test that the {@link SRXManager#getDefault()} method sets
+     * includeEndingTags to true.
      */
     @Test
     public void testGetDefaultIncludeEndingTagsIsTrue() throws IOException {
@@ -54,7 +56,8 @@ public class SRXManagerTest {
     }
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method sets segmentSubflows to true.
+     * Test that the {@link SRXManager#getDefault()} method sets segmentSubflows
+     * to true.
      */
     @Test
     public void testGetDefaultSegmentSubflowsIsTrue() throws IOException {
@@ -63,8 +66,8 @@ public class SRXManagerTest {
     }
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method returns an SRX object
-     * with a non-null and non-empty version string.
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with a non-null and non-empty version string.
      */
     @Test
     public void testGetDefaultVersion() throws IOException {
@@ -73,7 +76,8 @@ public class SRXManagerTest {
     }
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method returns an SRX object with non-null mapping rules.
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with non-null mapping rules.
      */
     @Test
     public void testGetDefaultMappingRulesIsNotNull() throws IOException {
@@ -82,12 +86,13 @@ public class SRXManagerTest {
     }
 
     /**
-     * Test that the {@link SRXManager#getDefault()} method returns an SRX object
-     * with mapping rules containing at least one rule.
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with mapping rules containing at least one rule.
      */
     @Test
     public void testGetDefaultMappingRulesHas18() throws IOException {
         SRX srx = SRXManager.getDefault();
-        Assert.assertEquals("The mapping rules should contain at least one rule.", 18, srx.getMappingRules().size());
+        Assert.assertEquals("The mapping rules should contain at least one rule.", 18,
+                srx.getMappingRules().size());
     }
 }

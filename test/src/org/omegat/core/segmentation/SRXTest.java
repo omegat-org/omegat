@@ -25,7 +25,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.segmentation.util;
+package org.omegat.core.segmentation;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -48,8 +48,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
-import org.omegat.core.segmentation.MapRule;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.util.LocaleRule;
 
 /**
@@ -102,7 +100,7 @@ public final class SRXTest {
         @Test
         public void testSrxReaderDefault() {
             assertTrue(SEGMENT_DEFAULT.exists());
-            SRX srx = SRXUtils.loadFromDir(SEGMENT_DEFAULT);
+            SRX srx = SRXManager.loadFromDir(SEGMENT_DEFAULT);
             assertNotNull(srx);
             assertTrue(srx.isCascade());
             List<MapRule> mapRuleList = srx.getMappingRules();
@@ -194,7 +192,7 @@ public final class SRXTest {
         Files.copy(segmentConf.toPath(), Paths.get(configDir.getAbsolutePath(), segmentConf.getName()));
         segmentConf = new File(configDir, segmentConf.getName());
         // load from conf file
-        SRX srxOrig = SRXUtils.loadConfFile(segmentConf, configDir);
+        SRX srxOrig = SRXManager.loadConfFile(segmentConf, configDir);
         assertNotNull(srxOrig);
         List<MapRule> mapRuleList = srxOrig.getMappingRules();
         assertNotNull(mapRuleList);
@@ -203,7 +201,7 @@ public final class SRXTest {
         // load from srx file
         File segmentSrx = new File(configDir, "segmentation.srx");
         assertTrue(segmentSrx.exists());
-        SRX srx1 = SRXUtils.loadFromDir(configDir);
+        SRX srx1 = SRXManager.loadFromDir(configDir);
         assertNotNull(srx1);
         mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
@@ -243,7 +241,7 @@ public final class SRXTest {
                     "    </object>\n" +
                     "</java>";
             Files.writeString(segmentConf, xmlContent);
-            SRX srx = SRXUtils.loadFromDir(segmentConf.getParent().toFile());
+            SRX srx = SRXManager.loadFromDir(segmentConf.getParent().toFile());
             assertNotNull(srx);
             assertFalse(new File(tmpDir, "test-file").exists()); // true would mean that the vulnerability is still here!
         }

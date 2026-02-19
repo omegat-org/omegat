@@ -22,73 +22,72 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package org.omegat.core.segmentation.util;
+package org.omegat.core.segmentation;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.omegat.core.segmentation.SRX;
 
 import java.io.IOException;
 
 /**
- * Unit tests for the {@link SRXUtils#getDefault()} method.
+ * Unit tests for the {@link SRXManager#getDefault()} method.
  * This method loads the default segmentation rules and configures the SRX object accordingly.
  */
-public class SRXUtilsTest {
+public class SRXManagerTest {
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method successfully loads the default SRX object.
+     * Test that the {@link SRXManager#getDefault()} method successfully loads the default SRX object.
      */
     @Test
     public void testGetDefaultLoadsSRXSuccessfully() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertNotNull("The SRX object should not be null.", srx);
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method sets includeEndingTags to true.
+     * Test that the {@link SRXManager#getDefault()} method sets includeEndingTags to true.
      */
     @Test
     public void testGetDefaultIncludeEndingTagsIsTrue() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertTrue("The includeEndingTags property should be true.", srx.isIncludeEndingTags());
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method sets segmentSubflows to true.
+     * Test that the {@link SRXManager#getDefault()} method sets segmentSubflows to true.
      */
     @Test
     public void testGetDefaultSegmentSubflowsIsTrue() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertTrue("The segmentSubflows property should be true.", srx.isSegmentSubflows());
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX object
      * with a non-null and non-empty version string.
      */
     @Test
     public void testGetDefaultVersion() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertEquals("The SRX version should be 2.0.", "2.0", srx.getVersion());
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object with non-null mapping rules.
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX object with non-null mapping rules.
      */
     @Test
     public void testGetDefaultMappingRulesIsNotNull() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertNotNull("The mapping rules should not be null.", srx.getMappingRules());
     }
 
     /**
-     * Test that the {@link SRXUtils#getDefault()} method returns an SRX object
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX object
      * with mapping rules containing at least one rule.
      */
     @Test
     public void testGetDefaultMappingRulesHas18() throws IOException {
-        SRX srx = SRXUtils.getDefault();
+        SRX srx = SRXManager.getDefault();
         Assert.assertEquals("The mapping rules should contain at least one rule.", 18, srx.getMappingRules().size());
     }
 }

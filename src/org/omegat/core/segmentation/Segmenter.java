@@ -34,7 +34,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.Nullable;
-import org.omegat.core.segmentation.util.SRXUtils;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
@@ -131,7 +130,7 @@ public final class Segmenter {
      *            list to store rules that account to breaks (can be null)
      */
     private List<String> breakParagraph(Language lang, String paragraph, @Nullable List<Rule> brules) {
-        List<Rule> rules = SRXUtils.lookupRulesForLanguage(srx, lang);
+        List<Rule> rules = SRXManager.lookupRulesForLanguage(srx, lang);
 
         // determining the applicable break positions
         Set<BreakPosition> dontbreakpositions = new TreeSet<>();

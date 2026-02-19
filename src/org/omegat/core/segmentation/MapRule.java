@@ -33,7 +33,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import gen.core.segmentation.Languagemap;
-import org.omegat.core.segmentation.util.LanguageCodes;
 
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;

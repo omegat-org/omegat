@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.omegat.core.segmentation.util.SRXUtils;
 import org.omegat.util.Log;
 
 /**
@@ -68,7 +67,7 @@ public class SRX implements Serializable {
 
     public static SRX getDefault() {
         try {
-            SRX srx = SRXUtils.loadSrxInputStream(Objects.requireNonNull(SRX.class.getResourceAsStream("defaultRules.srx")));
+            SRX srx = SRXManager.loadSrxInputStream(Objects.requireNonNull(SRX.class.getResourceAsStream("defaultRules.srx")));
             srx.includeEndingTags = true;
             srx.segmentSubflows = true;
             return srx;

@@ -25,10 +25,9 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.segmentation.util;
+package org.omegat.core.segmentation;
 
 import org.jspecify.annotations.Nullable;
-import org.omegat.core.segmentation.MapRule;
 import org.omegat.util.OStrings;
 
 import java.util.HashMap;

@@ -32,7 +32,7 @@ import java.util.regex.PatternSyntaxException;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.core.segmentation.util.LanguageCodes;
+import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.SRX;

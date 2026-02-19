@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
-import org.omegat.core.segmentation.util.LanguageCodes;
+import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;

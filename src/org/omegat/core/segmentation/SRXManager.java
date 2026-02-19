@@ -26,7 +26,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.core.segmentation.util;
+package org.omegat.core.segmentation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -41,9 +41,6 @@ import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
 import org.jspecify.annotations.Nullable;
-import org.omegat.core.segmentation.MapRule;
-import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 
@@ -75,7 +72,7 @@ import java.util.stream.Collectors;
  * @author Thomas Cordonnier
  * @author Hiroshi Miura
  */
-public final class SRXUtils {
+public final class SRXManager {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
     public static final String SRX_SENTSEG = "segmentation.srx";
@@ -98,13 +95,13 @@ public final class SRXUtils {
                 .build();
     }
 
-    private SRXUtils() {
+    private SRXManager() {
         // Utility class don't have public ctor
     }
 
     public static SRX getDefault() throws IOException {
         SRX srx = loadSrxInputStream(Objects.requireNonNull(
-                SRXUtils.class.getResourceAsStream("/org/omegat/core/segmentation/defaultRules.srx")));
+                SRXManager.class.getResourceAsStream("/org/omegat/core/segmentation/defaultRules.srx")));
         srx.setIncludeEndingTags(true);
         srx.setSegmentSubflows(true);
         return srx;

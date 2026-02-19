@@ -31,22 +31,14 @@
 
 package org.omegat;
 
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-import static java.nio.file.StandardOpenOption.WRITE;
-
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
@@ -73,9 +65,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
-import org.omegat.core.statistics.writer.StatisticsJsonWriter;
+import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.writer.StatisticsTextWriter;
-import org.omegat.core.statistics.writer.StatisticsXmlWriter;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -503,30 +494,8 @@ public final class Main {
                 statsMode = StatOutputFormat.XML;
             }
         }
-        try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), CREATE,
-                        TRUNCATE_EXISTING, WRITE),
-                StandardCharsets.UTF_8)) {
-            switch (statsMode) {
-            case TEXT:
-                writer.write(new StatisticsTextWriter().getTextData(projectStats));
-                break;
-            case JSON:
-                writer.write(new StatisticsJsonWriter().getJsonData(projectStats));
-                break;
-            case XML:
-                writer.write(new StatisticsXmlWriter().getXmlData(projectStats));
-                break;
-            default:
-                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
-                break;
-            }
-        } catch (NoSuchFileException nsfe) {
-            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
-            return 1;
-        } finally {
-            p.closeProject();
-        }
+        Statistics.writeStat(new File(outputFilename), projectStats, statsMode);
+        p.closeProject();
         return 0;
     }
 

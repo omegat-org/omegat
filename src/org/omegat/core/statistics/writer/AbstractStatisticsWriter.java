@@ -41,7 +41,18 @@ import java.util.TimeZone;
 
 public abstract class AbstractStatisticsWriter {
 
+    /**
+     * Writes the statistics result to the specified writer.
+     *
+     * @param result
+     *            the statistics result object containing the data to be written
+     * @param out
+     *            the writer to which the data should be written
+     * @throws IOException
+     *             if an I/O error occurs during the writing process
+     */
     abstract void write(StatsResult result, Writer out) throws IOException;
+
     /**
      * Writes the statistics result to the specified file.
      *
@@ -54,10 +65,18 @@ public abstract class AbstractStatisticsWriter {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile), StandardCharsets.UTF_8)) {
             write(result, out);
         } catch (Exception ex) {
-            Log.log(ex);
+            Log.logErrorRB(ex, "CONSOLE_STATS_FILE_OPEN_ERROR");
         }
     }
 
+    /**
+     * Updates the date field of the provided {@link StatsResult} object
+     * with the current date and time, formatted in UTC and using the
+     * pattern "yyyyMMdd'T'HHmmss'Z'".
+     *
+     * @param result
+     *        the {@link StatsResult} object whose date field is to be updated
+     */
     protected void setDate(StatsResult result) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));

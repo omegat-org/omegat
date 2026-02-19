@@ -30,12 +30,11 @@ import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.threads.Completion;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
@@ -71,9 +70,7 @@ import static org.junit.Assert.assertTrue;
 public class CalcMatchStatisticsTest extends TestCore {
 
     // On some CI environments, calculating statistics can occasionally be slow
-    // due to limited CPU resources and I/O. Increase timeout to reduce flakiness.
-    private static final int TIMEOUT = 60;
-
+    // due to limited CPU resources and I/O.
     private static Path tmpDir;
 
     @BeforeClass
@@ -83,14 +80,17 @@ public class CalcMatchStatisticsTest extends TestCore {
     }
 
     @Test
-    public void testCalcMatchStatics() throws ExecutionException, InterruptedException, TimeoutException {
+    public void testCalcMatchStatics() {
         TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
+
+        // execute and complete the task
         calcMatchStatistics.start();
-        future.get(TIMEOUT, TimeUnit.SECONDS);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
         String[][] result = testingStatsConsumer.getTable();
         assertNotNull(result);
 

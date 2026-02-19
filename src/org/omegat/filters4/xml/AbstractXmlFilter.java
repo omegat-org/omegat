@@ -59,6 +59,7 @@ import javax.xml.stream.events.EntityReference;
 import javax.xml.stream.events.Namespace;
 
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
@@ -530,7 +531,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                 ProtectedPart pp = new ProtectedPart();
                 pp.setTextInSourceSegment(m.group());
                 pp.setDetailsFromSourceFile(buildProtectedPartDetails(saved));
-                if (org.omegat.core.statistics.StatisticsSettings.isCountingStandardTags()) {
+                if (StatisticsSettings.isCountingStandardTags()) {
                     pp.setReplacementWordsCountCalculation(
                             StaticUtils.TAG_REPLACEMENT_CHAR + m.group().replace('<', '_').replace('>', '_')
                                     + StaticUtils.TAG_REPLACEMENT_CHAR);

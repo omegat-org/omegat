@@ -43,6 +43,10 @@ import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.statistics.dso.FileData;
+import org.omegat.core.statistics.dso.StatCount;
+import org.omegat.core.statistics.dso.StatsResult;
+import org.omegat.core.statistics.writer.StatisticsTextWriter;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
@@ -75,10 +79,8 @@ public class CalcStandardStatistics extends LongProcessThread {
     public void run() {
         IProject p = Core.getProject();
         StatsResult result = buildProjectStats(p);
-        callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
-        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
-        callback.setTextData(result.getTextData());
-        callback.finishData();
+        StatisticsTextWriter writer = new StatisticsTextWriter();
+        writer.write(result, callback);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
         // removing old stats
@@ -87,7 +89,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             if (oldstats.exists()) {
                 oldstats.delete();
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         // now dump file based word counts to disk

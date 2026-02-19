@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics;
+package org.omegat.core.statistics.dso;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -32,6 +32,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.statistics.Statistics;
+import org.omegat.core.statistics.StatisticsSettings;
 
 /**
  * Bean for store counts in statistics.

@@ -31,22 +31,14 @@
 
 package org.omegat;
 
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-import static java.nio.file.StandardOpenOption.WRITE;
-
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
@@ -74,6 +66,8 @@ import org.languagetool.JLanguageTool;
 import org.omegat.cli.BaseSubCommand;
 import org.omegat.cli.SubCommands;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.core.statistics.Statistics;
+import org.omegat.core.statistics.writer.StatisticsTextWriter;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -87,7 +81,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
-import org.omegat.core.statistics.StatsResult;
+import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -483,7 +477,7 @@ public final class Main {
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.
-            System.out.println(projectStats.getTextData());
+            System.out.println(new StatisticsTextWriter().getTextData(projectStats));
             p.closeProject();
             return 0;
         }
@@ -505,30 +499,8 @@ public final class Main {
                 statsMode = StatOutputFormat.XML;
             }
         }
-        try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), CREATE,
-                        TRUNCATE_EXISTING, WRITE),
-                StandardCharsets.UTF_8)) {
-            switch (statsMode) {
-            case TEXT:
-                writer.write(projectStats.getTextData());
-                break;
-            case JSON:
-                writer.write(projectStats.getJsonData());
-                break;
-            case XML:
-                writer.write(projectStats.getXmlData());
-                break;
-            default:
-                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
-                break;
-            }
-        } catch (NoSuchFileException nsfe) {
-            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
-            return 1;
-        } finally {
-            p.closeProject();
-        }
+        Statistics.writeStat(new File(outputFilename), projectStats, statsMode);
+        p.closeProject();
         return 0;
     }
 

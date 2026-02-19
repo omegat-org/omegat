@@ -28,29 +28,21 @@
 
 package org.omegat.core.statistics;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.BreakIterator;
-import java.text.DateFormat;
-import java.util.Date;
 
+import org.omegat.core.statistics.dso.StatsResult;
+import org.omegat.core.statistics.writer.StatisticsJsonWriter;
+import org.omegat.core.statistics.writer.StatisticsTextWriter;
+import org.omegat.core.statistics.writer.StatisticsXmlWriter;
 import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
- * Save project statistic into text file.
+ * Save project statistic into files.
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -61,12 +53,11 @@ import org.omegat.util.StaticUtils;
  * @author Thomas Cordonnier
  */
 public final class Statistics {
-
     private Statistics() {
     }
 
-    protected static final int PERCENT_EXACT_MATCH = 101;
-    protected static final int PERCENT_REPETITIONS = 102;
+    public static final int PERCENT_EXACT_MATCH = 101;
+    public static final int PERCENT_REPETITIONS = 102;
 
     /**
      * Computes the number of characters excluding spaces in a string. Special
@@ -108,7 +99,7 @@ public final class Statistics {
         BreakIterator breaker = DefaultTokenizer.getWordBreaker();
         breaker.setText(str);
 
-        String tokenStr = "";
+        String tokenStr;
 
         int start = breaker.first();
         for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
@@ -129,39 +120,13 @@ public final class Statistics {
     }
 
     /**
-     * Writes the specified text to a file, along with the current date and time.
-     * If the target file's parent directories do not exist, they will be created.
-     * Any existing content in the file will be overwritten.
+     * Writes the statistics result to the specified directory in all selected
+     * output formats.
      *
-     * @param filename the name and path of the file to which the text will be written
-     * @param text the text content to write to the file
-     */
-    public static void writeStat(String filename, String text) {
-        Path path = Paths.get(filename);
-        // Create parent directories if they don't exist
-        if (path.getParent() != null) {
-            try {
-                Files.createDirectories(path.getParent());
-            } catch (IOException e) {
-                Log.log(e);
-                return;
-            }
-        }
-
-        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
-                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
-            writer.write(text);
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-    }
-
-    /**
-     * Writes the statistics result to the specified directory in all selected output formats.
-     *
-     * @param dir the directory where the statistics should be written
-     * @param result the statistics result object containing the data to be written
+     * @param dir
+     *            the directory where the statistics should be written
+     * @param result
+     *            the statistics result object containing the data to be written
      */
     public static void writeStat(String dir, StatsResult result) {
         int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
@@ -174,33 +139,49 @@ public final class Statistics {
     }
 
     /**
-     * Writes the statistics result to the specified directory in the given output format.
-     * Depending on the format, the data is written as text, XML, or JSON. The file is encoded
-     * in UTF-8. If any errors occur during file writing, they are logged.
+     * Writes the statistics result to the specified directory in the given
+     * output format. Depending on the format, the data is written as text, XML,
+     * or JSON. The file is encoded in UTF-8. If any errors occur during file
+     * writing, they are logged.
      *
-     * @param dir the directory where the statistics file should be written
-     * @param result the statistics result object containing the data to be written
-     * @param format the format in which the statistics should be written (TEXT, XML, or JSON)
+     * @param dir
+     *            the directory where the statistics file should be written
+     * @param result
+     *            the statistics result object containing the data to be written
+     * @param format
+     *            the format in which the statistics should be written (TEXT,
+     *            XML, or JSON)
      */
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
-        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
-                StandardCharsets.UTF_8)) {
-            switch (format) {
-            case TEXT:
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                out.write(result.getTextData());
-                break;
-            case XML:
-                out.write(result.getXmlData());
-                break;
-            case JSON:
-            default:
-                out.write(result.getJsonData());
-                break;
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
+        writeStat(statFile, result, format);
+    }
+
+    /**
+     * Writes the provided statistics result to the specified file in the given output format.
+     * Depending on the format, the data is written as plain text, XML, or JSON. The file is
+     * encoded in UTF-8. If any errors occur during file writing, they are logged.
+     *
+     * @param statFile
+     *          the file where the statistics should be written
+     * @param result
+     *          the statistics result object containing the data to be written
+     * @param format
+     *          the format in which the statistics should be written (TEXT,
+     *          XML, or JSON)
+     */
+    public static void writeStat(File statFile, StatsResult result, StatOutputFormat format) {
+        switch (format) {
+        case TEXT:
+            new StatisticsTextWriter().writeStat(statFile, result);
+            break;
+        case XML:
+            new StatisticsXmlWriter().writeStat(statFile, result);
+            break;
+        case JSON:
+        default:
+            new StatisticsJsonWriter().writeStat(statFile, result);
+            break;
         }
     }
 }

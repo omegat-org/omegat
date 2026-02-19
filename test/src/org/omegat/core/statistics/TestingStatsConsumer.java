@@ -26,6 +26,8 @@ package org.omegat.core.statistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.omegat.core.threads.Completion;
+
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -52,11 +54,8 @@ import java.util.concurrent.CompletableFuture;
 public class TestingStatsConsumer implements IStatsConsumer {
     private final List<String[][]> result = new ArrayList<>();
     private final StringBuilder buffer = new StringBuilder();
-    private final CompletableFuture<Void> future;
 
-    public TestingStatsConsumer(CompletableFuture<Void> future) {
-        this.future = future;
-    }
+    private final CompletableFuture<Completion> completion = new CompletableFuture<>();
 
     public List<String[][]> getTable() {
         return result;
@@ -93,12 +92,16 @@ public class TestingStatsConsumer implements IStatsConsumer {
     }
 
     @Override
-    public void finishData() {
-        future.complete(null);
+    public void showProgress(final int percent) {
+        // do nothing
+    }
+
+    public CompletableFuture<Completion> completion() {
+        return completion;
     }
 
     @Override
-    public void showProgress(final int percent) {
-        // do nothing
+    public void onComplete(Completion completion) {
+        this.completion.complete(completion);
     }
 }

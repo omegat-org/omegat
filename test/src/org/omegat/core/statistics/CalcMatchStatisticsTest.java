@@ -33,11 +33,11 @@ import org.omegat.core.data.TestCoreState;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.Completion;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -90,24 +90,24 @@ public class CalcMatchStatisticsTest extends TestCore {
 
     @Test
     public void testStatistics() {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         ICalcStatistics calc = new CalcStandardStatistics(project, testingStatsConsumer);
         calc.run(new CancellationToken());
-        future.join();
-        assertTrue(future.isDone());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());
     }
 
     @Test
     public void testPerFileCalcMatchStatistics() {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         ICalcStatistics calc = new CalcPerFileMatchStatistics(project, segmenter, testingStatsConsumer);
         calc.run(new CancellationToken());
-        future.join();
-        assertTrue(future.isDone());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());
         String[][] result = allResult.get(0);
@@ -121,12 +121,11 @@ public class CalcMatchStatisticsTest extends TestCore {
 
     @Test
     public void testCalcMatchStatistics() {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         ICalcStatistics calc = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
         calc.run(new CancellationToken());
-        future.join();
-        assertTrue(future.isDone());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());

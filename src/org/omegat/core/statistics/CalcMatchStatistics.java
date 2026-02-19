@@ -294,10 +294,6 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         }
     }
 
-    void finishData() {
-        callback.finishData();
-    }
-
     int getEntrySize() {
         return project.getAllEntries().size();
     }

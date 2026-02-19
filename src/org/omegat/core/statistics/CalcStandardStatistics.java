@@ -34,6 +34,7 @@ import java.io.File;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.Completion;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
@@ -76,7 +77,7 @@ public class CalcStandardStatistics implements ICalcStatistics {
         String title = OStrings.getString("CT_STATS_FILE_Statistics");
         callback.appendTable(title, StatsResult.FT_HEADERS, result.getFilesTable());
         callback.setTextData(result.getTextData());
-        callback.finishData();
+        finishData();
 
         String internalDir = project.getProjectProperties().getProjectInternal();
         // removing old stats
@@ -94,5 +95,13 @@ public class CalcStandardStatistics implements ICalcStatistics {
             // ignore
         }
         return null;
+    }
+
+    void finishData() {
+        if (cancellationToken.isCancelled()) {
+            callback.onComplete(Completion.cancelled());
+        } else {
+            callback.onComplete(Completion.success());
+        }
     }
 }

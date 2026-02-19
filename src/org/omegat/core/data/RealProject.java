@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.segmentation.SRXManager;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -247,7 +248,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
+            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);

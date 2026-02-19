@@ -29,26 +29,12 @@
 
 package org.omegat.core.statistics.dso;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SequenceWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -179,43 +165,7 @@ public class StatsResult {
         return counts;
     }
 
-    /**
-     * Return JSON expression of stats data.
-     * 
-     * @return JSON string data.
-     * @throws IOException
-     *             when export failed.
-     */
-    @JsonIgnore
-    public String getJsonData() throws IOException {
-        setDate();
-        StringWriter result = new StringWriter();
-        ObjectMapper mapper = new ObjectMapper();
-        SequenceWriter writer = mapper.writer().writeValues(result);
-        writer.write(this);
-        writer.close();
-        return result.toString();
+    public void setDate(String date) {
+        this.date = date;
     }
-
-    /**
-     * Return XML expression of Stats data.
-     * 
-     * @return XML expression of stats data as String.
-     */
-    @JsonIgnore
-    public String getXmlData() throws JsonProcessingException {
-        setDate();
-        XmlMapper xmlMapper = XmlMapper.builder().addModule(new JakartaXmlBindAnnotationModule())
-                .configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
-                .enable(SerializationFeature.INDENT_OUTPUT).defaultUseWrapper(false).build();
-        return xmlMapper.writeValueAsString(this);
-
-    }
-
-    private void setDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        date = dateFormat.format(new Date());
-    }
-
 }

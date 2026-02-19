@@ -31,6 +31,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
+import org.omegat.core.statistics.writer.StatisticsXmlWriter;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xmlunit.diff.DefaultNodeMatcher;
@@ -74,7 +75,7 @@ public class StatsResultTest {
         fileNumber.total.add(new StatCount(ste));
         result.getCounts().add(0, fileNumber);
         //
-        String actual = result.getXmlData();
+        String actual = new StatisticsXmlWriter().getXmlData(result);
         //
         URL f1 = Paths.get("test/data/statistics/stats-result-1.xml").toUri().toURL();
         Document expected = builder.parse(f1.toExternalForm());

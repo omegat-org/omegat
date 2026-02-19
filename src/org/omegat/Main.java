@@ -73,7 +73,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
-import org.omegat.core.statistics.Statistics;
+import org.omegat.core.statistics.writer.StatisticsJsonWriter;
+import org.omegat.core.statistics.writer.StatisticsTextWriter;
+import org.omegat.core.statistics.writer.StatisticsXmlWriter;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -479,7 +481,7 @@ public final class Main {
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.
-            System.out.println(Statistics.getTextData(projectStats));
+            System.out.println(new StatisticsTextWriter().getTextData(projectStats));
             p.closeProject();
             return 0;
         }
@@ -507,13 +509,13 @@ public final class Main {
                 StandardCharsets.UTF_8)) {
             switch (statsMode) {
             case TEXT:
-                writer.write(Statistics.getTextData(projectStats));
+                writer.write(new StatisticsTextWriter().getTextData(projectStats));
                 break;
             case JSON:
-                writer.write(projectStats.getJsonData());
+                writer.write(new StatisticsJsonWriter().getJsonData(projectStats));
                 break;
             case XML:
-                writer.write(projectStats.getXmlData());
+                writer.write(new StatisticsXmlWriter().getXmlData(projectStats));
                 break;
             default:
                 Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");

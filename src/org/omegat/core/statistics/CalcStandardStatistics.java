@@ -46,6 +46,7 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
+import org.omegat.core.statistics.writer.StatisticsTextWriter;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
@@ -78,7 +79,8 @@ public class CalcStandardStatistics extends LongProcessThread {
     public void run() {
         IProject p = Core.getProject();
         StatsResult result = buildProjectStats(p);
-        Statistics.writeToPanel(result, callback);
+        StatisticsTextWriter writer = new StatisticsTextWriter();
+        writer.write(result, callback);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
         // removing old stats

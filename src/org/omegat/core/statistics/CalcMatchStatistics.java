@@ -29,7 +29,16 @@
 
 package org.omegat.core.statistics;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +60,7 @@ import org.omegat.core.statistics.dso.MatchStatCounts;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -175,7 +185,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
         String fn = project.getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
-        Statistics.writeStat(fn, textForLog.toString());
+        writeStat(fn, textForLog.toString());
         callback.setDataFile(fn);
     }
 
@@ -220,11 +230,43 @@ public class CalcMatchStatistics extends LongProcessThread {
             showText(outText);
             callback.setTable(header, table);
             String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
-            Statistics.writeStat(fn, outText);
+            writeStat(fn, outText);
             callback.setDataFile(fn);
         }
 
         return result;
+    }
+
+    /**
+     * Writes the specified text to a file, along with the current date and
+     * time. If the target file's parent directories do not exist, they will be
+     * created. Any existing content in the file will be overwritten.
+     *
+     * @param filename
+     *            the name and path of the file to which the text will be
+     *            written
+     * @param text
+     *            the text content to write to the file
+     */
+    private void writeStat(String filename, String text) {
+        Path path = Paths.get(filename);
+        // Create parent directories if they don't exist
+        if (path.getParent() != null) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch (IOException e) {
+                Log.log(e);
+                return;
+            }
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
+            writer.write(text);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
 
     MatchStatCounts forFile(IProject.FileInfo fi) {

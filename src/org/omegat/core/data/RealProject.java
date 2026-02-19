@@ -78,7 +78,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
-import org.omegat.core.statistics.dso.StatisticsInfo;
+import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RebaseAndCommit;

@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.statistics.dso;
+package org.omegat.core.statistics;
 
 import java.util.HashMap;
 import java.util.Map;

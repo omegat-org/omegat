@@ -3,9 +3,7 @@
  *          with fuzzy matching, translation memory, keyword search,
  *          glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2011 Alex Buloichik
- *                2021-2026 OmegaT development team
- *                2026 Hiroshi Miura
+ *  Copyright (C) 2024-2026 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -22,7 +20,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with OmegaT.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with OmegaT.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package org.omegat.core.statistics.writer;

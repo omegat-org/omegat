@@ -34,8 +34,6 @@ import org.omegat.core.threads.Completion;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

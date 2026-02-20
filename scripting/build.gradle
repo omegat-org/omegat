@@ -1,0 +1,34 @@
+plugins {
+    id 'org.omegat.module'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir,
+                includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar', '**/slf4j*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir,
+                includes: ['**/groovy*.jar', '**/nashorn*.jar', '**/fife*.jar'])
+    } else {
+        implementation(libs.jspecify)
+        implementation(libs.jetbrains.annotations)
+        // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
+        // Ivy is needed to handle Grape/@Grab dependencies
+        implementation(libs.bundles.groovy)
+        // Javascript used for scripts
+        implementation(libs.nashorn.core)
+
+        // Script editor
+        implementation(libs.bundles.fifesoft) {
+            exclude module: 'rhino'
+        }
+        compileOnly(libs.omegat.mnemonics)
+        compileOnly(libs.commons.io)
+        compileOnly(libs.slf4j.format.jdk14)
+    }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+    testImplementation(libs.mockito.core)
+    testRuntimeOnly(libs.bundles.groovy)
+    testRuntimeOnly(libs.nashorn.core)
+}

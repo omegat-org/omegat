@@ -24,6 +24,8 @@
  ******************************************************************************/
 package org.omegat.core.statistics;
 
+import org.omegat.core.threads.Completion;
+
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -49,11 +51,8 @@ import java.util.concurrent.CompletableFuture;
  */
 public class TestingStatsConsumer implements IStatsConsumer {
     private volatile String[][] result;
-    private final CompletableFuture<Void> future;
 
-    public TestingStatsConsumer(CompletableFuture<Void> future) {
-        this.future = future;
-    }
+    private final CompletableFuture<Completion> completion = new CompletableFuture<>();
 
     public String[][] getTable() {
         return result;
@@ -85,12 +84,16 @@ public class TestingStatsConsumer implements IStatsConsumer {
     }
 
     @Override
-    public void finishData() {
-        future.complete(null);
+    public void showProgress(final int percent) {
+        // do nothing
+    }
+
+    public CompletableFuture<Completion> completion() {
+        return completion;
     }
 
     @Override
-    public void showProgress(final int percent) {
-        // do nothing
+    public void onComplete(Completion completion) {
+        this.completion.complete(completion);
     }
 }

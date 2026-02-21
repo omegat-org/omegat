@@ -64,7 +64,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     @Override
     public void run() {
         IProject p = Core.getProject();
-        StatsResult result = buildProjectStats(p);
+        StatsResult result = Statistics.buildProjectStats(p);
         callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
         callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
         callback.setTextData(result.getTextData());

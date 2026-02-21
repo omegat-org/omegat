@@ -52,7 +52,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.threads.LongProcessThread;
+import org.omegat.core.threads.CancellationToken;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
@@ -90,7 +90,8 @@ public class SearcherTest {
     @Test
     public void testSearchCheckEntrySrcText() {
         addSTE(fi, "id1", "OmegaT is great", null);
-        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                true, false);
         Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
         searcher.checkEntry("OmegaT is great", null, null, null, null, 0, "");
@@ -100,7 +101,8 @@ public class SearcherTest {
     @Test
     public void testSearchCheckEntryLocalizedText() {
         addSTE(fi, "id1", "OmegaT is great", null);
-        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                true, false);
         Searcher searcher = new Searcher(proj, s);
         searcher.addToMatcher("OmegaT is great");
         searcher.checkEntry("", "OmegaT is great", null, null, null, 0, "");
@@ -175,7 +177,8 @@ public class SearcherTest {
     @Test
     public void testSearchStringKeywordMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT is great software", null);
-        SearchExpression s = createSearchExpression("great software", SearchExpressionType.KEYWORD, false, false);
+        SearchExpression s = createSearchExpression("great software", SearchExpressionType.KEYWORD,
+                false, false);
         Searcher searcher = startSearcher(s);
         assertTrue(searcher.searchString("great software"));
         assertTrue(searcher.searchString("OmegaT is great software"));
@@ -216,7 +219,7 @@ public class SearcherTest {
 
     private List<SearchMatch> executeSearchReplace(String inputText, SearchExpression s) throws Exception {
         Searcher searcher = new Searcher(proj, s);
-        searcher.setThread(new SearchTestThread());
+        searcher.setCancellationToken(new CancellationToken());
         searcher.search();
         searcher.searchString(inputText);
         return searcher.getFoundMatches();
@@ -225,7 +228,8 @@ public class SearcherTest {
     @Test
     public void testSearchStringRegexMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT version 4.3.2", null);
-        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP, false, false);
+        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP,
+                false, false);
         Searcher searcher = startSearcher(s);
         assertTrue(searcher.searchString("OmegaT version 4.3.2"));
         assertFalse(searcher.searchString("OmegaT version 4.3")); // incomplete match
@@ -234,7 +238,8 @@ public class SearcherTest {
     @Test
     public void testSearchStringWidthInsensitive() throws Exception {
         addSTE(fi, "id1", "OmegaT\u2009is\u2009great", null); // Using narrow no-break spaces
-        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, false, true); // width-insensitive
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                false, true); // width-insensitive
         Searcher searcher = startSearcher(s);
         assertTrue(searcher.searchString("OmegaT is great")); // width-insensitive match
     }
@@ -242,7 +247,8 @@ public class SearcherTest {
     @Test
     public void testSearch() throws Exception {
         addSTE(fi, "id1", "List of sections in %s", "Liste des sections de %s");
-        SearchExpression s = createSearchExpression("list", SearchExpressionType.KEYWORD, false, true);
+        SearchExpression s = createSearchExpression("list", SearchExpressionType.KEYWORD,
+                false, true);
         Searcher searcher = startSearcher(s);
         List<SearchResultEntry> result = searcher.getSearchResults();
         assertEquals(1, result.size());
@@ -250,35 +256,40 @@ public class SearcherTest {
 
     @Test
     public void testGetExpressionExactMatch() throws Exception {
-        SearchExpression expression = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        SearchExpression expression = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                true, false);
         Searcher searcher = startSearcher(expression);
         assertSame(expression, searcher.getExpression());
     }
 
     @Test
     public void testGetExpressionKeywordMatch() throws Exception {
-        SearchExpression expression = createSearchExpression("great software", SearchExpressionType.KEYWORD, false, false);
+        SearchExpression expression = createSearchExpression("great software", SearchExpressionType.KEYWORD,
+                false, false);
         Searcher searcher = startSearcher(expression);
         assertSame(expression, searcher.getExpression());
     }
 
     @Test
     public void testGetExpressionRegexMatch() throws Exception {
-        SearchExpression expression = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP, false, true);
+        SearchExpression expression = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP,
+                false, true);
         Searcher searcher = startSearcher(expression);
         assertSame(expression, searcher.getExpression());
     }
 
     @Test
     public void testSearchStringEmptyInput() throws Exception {
-        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                true, false);
         Searcher searcher = startSearcher(s);
         assertFalse(searcher.searchString("")); // Should return false for empty input
     }
 
     @Test
     public void testSearchStringNullInput() throws Exception {
-        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT,
+                true, false);
         Searcher searcher = startSearcher(s);
         assertFalse(searcher.searchString(null)); // Should return false for null input
     }
@@ -294,7 +305,8 @@ public class SearcherTest {
     @Test
     public void testSearchStringPartialRegexMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT version 4.3.2-beta", null);
-        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP, false, false);
+        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpressionType.REGEXP,
+                false, false);
         Searcher searcher = startSearcher(s);
         assertTrue(searcher.searchString("OmegaT version 4.3.2-beta")); // Partial version match is valid
     }
@@ -425,7 +437,7 @@ public class SearcherTest {
 
     private @NotNull Searcher startSearcher(SearchExpression s) throws Exception {
         Searcher searcher = new Searcher(proj, s);
-        searcher.setThread(new SearchTestThread());
+        searcher.setCancellationToken(new CancellationToken());
         searcher.search();
         return searcher;
     }
@@ -463,17 +475,6 @@ public class SearcherTest {
 
         public List<FileInfo> getProjectFilesList() {
             return projectFilesList;
-        }
-    }
-
-    static class SearchTestThread extends LongProcessThread {
-        @Override
-        public void run() {
-            try {
-                checkInterrupted();
-            } catch (Exception ignored) {
-                // do not raise exception for the test
-            }
         }
     }
 }

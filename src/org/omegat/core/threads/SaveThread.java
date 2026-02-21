@@ -7,6 +7,7 @@
                2008 Alex Buloichik
                2012 Didier Briel
                2015 Aaron Madlon-Kay
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,6 +31,7 @@ package org.omegat.core.threads;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.omegat.core.Core;
@@ -47,8 +49,9 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
-public class SaveThread extends Thread implements IAutoSave {
+public class SaveThread implements IAutoSave {
     private final Object lock = new Object();
 
     private volatile boolean running;
@@ -58,12 +61,18 @@ public class SaveThread extends Thread implements IAutoSave {
     private boolean needToSaveNow;
     private boolean enabled;
 
+    private final LongProcessHandle<Void> handle;
+
     public SaveThread() {
-        setName("Save thread");
         setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
                 Preferences.AUTO_SAVE_DEFAULT));
         running = true;
+
+        LongProcessExecutor executor = Core.getLongProcessExecutor();
+        handle = executor.submit(this::run);
+
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
+
             synchronized (lock) {
                 setWaitDuration((Integer) evt.getNewValue());
                 lock.notifyAll();
@@ -91,24 +100,11 @@ public class SaveThread extends Thread implements IAutoSave {
         }
     }
 
-    @Override
-    public void run() {
+    private Void run(CancellationToken token) throws LongProcessInterruptedException {
         try {
-            while (running) {
-                synchronized (lock) {
-                    // Set the flag for saving. Clear the flag if the timer is
-                    // reset.
-                    needToSaveNow = true;
-                    // sleep
-                    lock.wait(waitDuration);
-                }
-
-                boolean execute;
-                synchronized (lock) {
-                    // Wait finished by time and autosaving enabled.
-                    execute = needToSaveNow && enabled;
-                }
-
+            while (running && !token.isCancelled()) {
+                boolean execute = awaitSaveTrigger(token);
+                token.throwIfCancelled();
                 if (execute) {
                     Log.logDebug("Start project save from SaveThread");
                     executeSave();
@@ -118,6 +114,32 @@ public class SaveThread extends Thread implements IAutoSave {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
             Log.logDebug("Save thread interrupted:", ex);
+        }
+        return null;
+    }
+
+    private boolean awaitSaveTrigger(CancellationToken token) throws InterruptedException {
+        synchronized (lock) {
+            while (running && !enabled && !token.isCancelled()) {
+                lock.wait();
+            }
+            if (!running || token.isCancelled()) {
+                return false;
+            }
+            long deadline = System.currentTimeMillis() + waitDuration;
+            needToSaveNow = true;
+            while (running && enabled && needToSaveNow && !token.isCancelled()) {
+                long remaining = deadline - System.currentTimeMillis();
+                if (remaining <= 0) {
+                    break;
+                }
+                lock.wait(remaining);
+            }
+            boolean execute = running && enabled && needToSaveNow && !token.isCancelled();
+            if (execute) {
+                needToSaveNow = false;
+            }
+            return execute;
         }
     }
 
@@ -154,10 +176,13 @@ public class SaveThread extends Thread implements IAutoSave {
             running = false;
             lock.notifyAll();
         }
+        handle.cancel();
         try {
-            join((long) waitDuration * 2);
+            handle.completion().get((long) waitDuration * 2, TimeUnit.MILLISECONDS);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
+        } catch (Exception ex) {
+            Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
         }
     }
 }

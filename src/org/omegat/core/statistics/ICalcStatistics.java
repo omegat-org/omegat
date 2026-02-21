@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Aaron Madlon-Kay
+ Copyright (C) 2024-2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,26 +22,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-
 package org.omegat.core.statistics;
 
-/**
- * An interface for consumers of statistical information.
- *
- * @author Aaron Madlon-Kay
- */
-public interface IStatsConsumer {
-    void appendTextData(String result);
+import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.LongProcessInterruptedException;
 
-    void appendTable(String title, String[] headers, String[][] data);
-
-    void setTextData(String data);
-
-    void setTable(String[] headers, String[][] data);
-
-    void setDataFile(String path);
-
-    void finishData();
-
-    void showProgress(int percent);
+public interface ICalcStatistics {
+    Void run(CancellationToken token) throws FindMatches.StoppedException, LongProcessInterruptedException;
 }

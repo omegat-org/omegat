@@ -48,6 +48,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -64,6 +65,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -795,7 +797,7 @@ public class SearchWindowController {
 
     private void doSearch() {
         UIThreadsUtil.mustBeSwingThread();
-        if (handle != null) {
+        if (handle != null && !handle.completion().isDone()) {
             // stop old search task
             handle.cancel();
         }
@@ -924,21 +926,27 @@ public class SearchWindowController {
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        handle.cancel();
-        form.dispose();
+        dispose();
     }
 
-    void complete() {
+    /**
+     * Completes the asynchronous operation associated with the search process.
+     */
+    @VisibleForTesting
+    boolean complete() {
+        final AtomicBoolean success = new AtomicBoolean(true);
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
-                Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
-                Core.getMainWindow().displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+                success.set(false);
             }
-            form.dispose();
         });
+        return success.get();
     }
 
     public void dispose() {
+        if (handle != null && !handle.completion().isDone()) {
+            handle.cancel();
+        }
         form.dispose();
     }
 

@@ -693,6 +693,15 @@ code.filename {
     font-weight: bold;
 }
 
+/* Workaround for below specified 1.3em accumulating when code is nested.
+ * Proper fix would be to rather use rem units (relative to body font size)
+ * instead of em (which is relative to parent). Since docbook can validly
+ * nest code (or other) tags.
+ */
+code code {
+    font-size: 1.0em;
+}
+
 code,
 tt,
 kbd,

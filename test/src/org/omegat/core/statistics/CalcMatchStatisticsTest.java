@@ -25,18 +25,19 @@
 
 package org.omegat.core.statistics;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.Completion;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -70,10 +71,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalcMatchStatisticsTest extends TestCore {
 
-    // On some CI environments, calculating statistics can occasionally be slow
-    // due to limited CPU resources and I/O. Increase timeout to reduce flakiness.
-    private static final int TIMEOUT = 60;
-
     private static Path tmpDir;
 
     @BeforeClass
@@ -82,59 +79,119 @@ public class CalcMatchStatisticsTest extends TestCore {
         assertTrue(tmpDir.toFile().isDirectory());
     }
 
-    @Test
-    public void testCalcMatchStatics() throws ExecutionException, InterruptedException, TimeoutException {
-        TestingProject project = new TestingProject(tmpDir);
-        Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
-        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
-        calcMatchStatistics.start();
-        future.get(TIMEOUT, TimeUnit.SECONDS);
-        String[][] result = testingStatsConsumer.getTable();
-        assertNotNull(result);
+    private TestingProject project;
+    private final Segmenter segmenter = new Segmenter(SRX.getDefault());
 
-        // assertions
-        // RowRepetitions 11 90 509 583
-        assertEquals("11", result[0][1]);
-        assertEquals("90", result[0][2]);
-        assertEquals("509", result[0][3]);
-        assertEquals("583", result[0][4]);
-        // RowExactMatch 0 0 0 0
-        assertEquals("0", result[1][1]);
-        assertEquals("0", result[1][2]);
-        assertEquals("0", result[1][3]);
-        assertEquals("0", result[1][4]);
-        // RowMatch95 84 712 3606 4225
-        assertEquals("84", result[2][1]);
-        assertEquals("712", result[2][2]);
-        assertEquals("3606", result[2][3]);
-        assertEquals("4225", result[2][4]);
-        // RowMatch85 0 0 0 0
-        assertEquals("0", result[3][1]);
-        assertEquals("0", result[3][2]);
-        assertEquals("0", result[3][3]);
-        assertEquals("0", result[3][4]);
-        // RowMatch75 3 32 234 256
-        assertEquals("3", result[4][1]);
-        assertEquals("32", result[4][2]);
-        assertEquals("234", result[4][3]);
-        assertEquals("256", result[4][4]);
-        // RowMatch50 4 61 304 361
-        assertEquals("4", result[5][1]);
-        assertEquals("61", result[5][2]);
-        assertEquals("304", result[5][3]);
-        assertEquals("361", result[5][4]);
-        // RowNoMatch 6 43 241 274
-        assertEquals("6", result[6][1]);
-        assertEquals("43", result[6][2]);
-        assertEquals("241", result[6][3]);
-        assertEquals("274", result[6][4]);
-        // Total 108 938 4894 5699
-        assertEquals("108", result[7][1]);
-        assertEquals("938", result[7][2]);
-        assertEquals("4894", result[7][3]);
-        assertEquals("5699", result[7][4]);
+    @Before
+    public void setUp() throws Exception {
+        project = new TestingProject(tmpDir);
+        TestCoreState.getInstance().setProject(project);
+    }
+
+    @Test
+    public void testStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcStandardStatistics(project, testingStatsConsumer);
+        calc.run(new CancellationToken());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+    }
+
+    @Test
+    public void testPerFileCalcMatchStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcPerFileMatchStatistics(project, segmenter, testingStatsConsumer);
+        calc.run(new CancellationToken());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        assertStatistics(result, true);
+
+        result = allResult.get(1);
+        assertNotNull(result);
+        assertStatistics(result, false);
+    }
+
+    @Test
+    public void testCalcMatchStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
+        calc.run(new CancellationToken());
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(1);
+        assertNotNull(result);
+        assertStatistics(result, false);
+    }
+
+    private void assertStatistics(String[][] result, boolean perFile) {
+        // assertion
+        int n = 0;
+        // Repetitions: 11 90 509 583
+        assertEquals("11", result[n][1]);
+        assertEquals("90", result[n][2]);
+        assertEquals("509", result[n][3]);
+        assertEquals("583", result[n][4]);
+        if (perFile) {
+            n++;
+            // Repetition from other files: 0 0 0 0
+            assertEquals("0", result[n][1]);
+            assertEquals("0", result[n][2]);
+            assertEquals("0", result[n][3]);
+            assertEquals("0", result[n][4]);
+        }
+        n++;
+        // Exact match: 0 0 0 0
+        assertEquals("0", result[n][1]);
+        assertEquals("0", result[n][2]);
+        assertEquals("0", result[n][3]);
+        assertEquals("0", result[n][4]);
+        n++;
+        // 95%-100%: 84 712 3606 4225
+        assertEquals("84", result[n][1]);
+        assertEquals("712", result[n][2]);
+        assertEquals("3606", result[n][3]);
+        assertEquals("4225", result[n][4]);
+        n++;
+        // 85%-94%: 0 0 0 0
+        assertEquals("0", result[n][1]);
+        assertEquals("0", result[n][2]);
+        assertEquals("0", result[n][3]);
+        assertEquals("0", result[n][4]);
+        n++;
+        // 75%-84%: 3 32 234 256
+        assertEquals("3", result[n][1]);
+        assertEquals("32", result[n][2]);
+        assertEquals("234", result[n][3]);
+        assertEquals("256", result[n][4]);
+        // 50%-74%: 4 61 304 361
+        n++;
+        assertEquals("4", result[n][1]);
+        assertEquals("61", result[n][2]);
+        assertEquals("304", result[n][3]);
+        assertEquals("361", result[n][4]);
+        n++;
+        // No match: 6 43 241 274
+        assertEquals("6", result[n][1]);
+        assertEquals("43", result[n][2]);
+        assertEquals("241", result[n][3]);
+        assertEquals("274", result[n][4]);
+        n++;
+        // Total: 108 938 4894 5699
+        assertEquals("108", result[n][1]);
+        assertEquals("938", result[n][2]);
+        assertEquals("4894", result[n][3]);
+        assertEquals("5699", result[n][4]);
     }
 
 }

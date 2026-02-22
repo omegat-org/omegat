@@ -37,6 +37,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.util.gui.ReasonablySizedPanel;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -45,7 +46,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
+public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel implements IStatsConsumer {
 
     private final JPanel tablesPanel;
     private final JScrollPane scrollPane;
@@ -69,13 +70,10 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel {
         if (data == null || data.length == 0) {
             return;
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                TitledTablePanel panel = generateTableDisplay(title, headers, data);
-                panel.scrollPane.addMouseWheelListener(mouseWheelListener);
-                tablesPanel.add(panel);
-            }
+        SwingUtilities.invokeLater(() -> {
+            TitledTablePanel panel = generateTableDisplay(title, headers, data);
+            panel.scrollPane.addMouseWheelListener(mouseWheelListener);
+            tablesPanel.add(panel);
         });
     }
 

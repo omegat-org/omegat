@@ -1,9 +1,9 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Aaron Madlon-Kay
+ Copyright (C) 2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -21,34 +21,38 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
+package org.omegat.core.threads;
 
-package org.omegat.gui.stat;
-
-import org.omegat.core.threads.Completion;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- *
- * @author Aaron Madlon-Kay
+ * Cooperative cancellation token for long-running tasks.
+ * Task code should call {@link #throwIfCancelled()} at safe points.
  */
-@SuppressWarnings("serial")
-public abstract class BaseMatchStatisticsPanel extends BaseStatisticsPanel {
+public class CancellationToken {
+    private final AtomicBoolean cancelled = new AtomicBoolean(false);
 
-    private final StringBuilder buffer = new StringBuilder();
+    void cancel() {
+        cancelled.set(true);
+    }
 
-    public BaseMatchStatisticsPanel(StatisticsWindow window) {
-        super(window);
+    public boolean isCancelled() {
+        return cancelled.get();
+    }
+
+    public void throwIfCancelled() throws LongProcessInterruptedException {
+        if (isCancelled() || Thread.currentThread().isInterrupted()) {
+            throw new LongProcessInterruptedException();
+        }
+    }
+
+    public static CancellationToken none() {
+        return new CancellationToken();
     }
 
     @Override
-    public void appendTextData(final String result) {
-        buffer.append(result);
-        setTextData(buffer.toString());
-    }
-
-    @Override
-    public void onComplete(Completion completion) {
-        super.onComplete(completion);
-        buffer.setLength(0);
+    public String toString() {
+        return "CancellationToken(cancelled=" + cancelled.get() + ")";
     }
 }

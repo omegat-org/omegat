@@ -33,6 +33,7 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.master.FilterMaster;
@@ -59,6 +60,8 @@ public class CoreState {
 
     protected static volatile CoreState instance = new CoreState();
 
+    private final LongProcessExecutor executor = new LongProcessExecutor("omegat-longprocess");
+
     private IAutoSave saveThread;
 
     protected CoreState() {
@@ -66,14 +69,16 @@ public class CoreState {
     }
 
     public void initializeSaveThread() {
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
+        saveThread = new SaveThread();
     }
 
     public void initializeVersionCheckThread() {
         VersionCheckThread th = new VersionCheckThread(10);
         th.start();
+    }
+
+    public LongProcessExecutor getExecutor() {
+        return executor;
     }
 
     public IAutoSave getAutoSave() {

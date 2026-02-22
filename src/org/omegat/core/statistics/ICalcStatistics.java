@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Aaron Madlon-Kay
+ Copyright (C) 2024-2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,44 +22,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-
 package org.omegat.core.statistics;
 
-import org.omegat.core.threads.Completion;
+import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.LongProcessInterruptedException;
 
-/**
- * An interface for consumers of statistical information.
- *
- * @author Aaron Madlon-Kay
- */
-public interface IStatsConsumer {
-    void appendTextData(String result);
-
-    void appendTable(String title, String[] headers, String[][] data);
-
-    void setTextData(String data);
-
-    void setTable(String[] headers, String[][] data);
-
-    void setDataFile(String path);
-
-    /**
-     * Legacy completion signal (no status / no error detail).
-     * Prefer {@link #onComplete(Completion)}.
-     */
-    @Deprecated
-    default void finishData() {
-        onComplete(Completion.success());
-    }
-
-    /**
-     * Modern completion signal with status and optional error.
-     * Default bridges to the legacy {@link #finishData()} for older consumers.
-     */
-    default void onComplete(Completion completion) {
-        // Backward compatible fallback:
-        finishData();
-    }
-
-    void showProgress(int percent);
+public interface ICalcStatistics {
+    Void run(CancellationToken token) throws FindMatches.StoppedException, LongProcessInterruptedException;
 }

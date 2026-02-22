@@ -74,6 +74,7 @@ import org.languagetool.JLanguageTool;
 import org.omegat.cli.BaseSubCommand;
 import org.omegat.cli.SubCommands;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.core.statistics.Statistics;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -85,7 +86,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -479,7 +479,7 @@ public final class Main {
         Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
-        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+        StatsResult projectStats = Statistics.buildProjectStats(p);
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.

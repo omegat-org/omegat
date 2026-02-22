@@ -48,6 +48,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -64,6 +65,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.gui.editor.IEditor;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -72,7 +75,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
 import org.omegat.core.search.Searcher;
-import org.omegat.core.threads.SearchThread;
+import org.omegat.core.threads.LongProcessHandle;
+import org.omegat.core.threads.SearchTask;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
@@ -113,6 +117,8 @@ public class SearchWindowController {
     private final SearchMode mode;
     private final int initialEntry;
     private final CaretPosition initialCaret;
+
+    private LongProcessHandle<Void> handle;
 
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
@@ -194,7 +200,24 @@ public class SearchWindowController {
             form.m_excludeOrphans.setVisible(false);
             break;
         }
+        setComponentNames();
         CoreEvents.registerFontChangedEventListener(this::setFont);
+    }
+
+    private void setComponentNames() {
+        form.m_searchLabel.setName("SearchWindowForm.m_searchLabel");
+        form.m_searchField.setName("SearchWindowForm.m_searchField");
+        form.m_searchExactSearchRB.setName("SearchWindowForm.m_searchExactSearchRB");
+        form.m_searchKeywordSearchRB.setName("SearchWindowForm.m_searchKeywordSearchRB");
+        form.m_searchRegexpSearchRB.setName("SearchWindowForm.m_searchRegexpSearchRB");
+        form.m_searchCase.setName("SearchWindowForm.m_searchCase");
+        form.m_searchSpaceMatchNbsp.setName("SearchWindowForm.m_searchSpaceMatchNbsp");
+        form.m_searchSource.setName("SearchWindowForm.m_searchSource");
+        form.m_searchTranslation.setName("SearchWindowForm.m_searchTranslation");
+        form.m_searchTranslatedUntranslated.setName("SearchWindowForm.m_searchTranslatedUntranslated");
+        form.m_searchTranslated.setName("SearchWindowForm.m_searchTranslated");
+        form.m_searchButton.setName("SearchWindowForm.m_searchButton");
+        form.m_viewer.setName("SearchWindowForm.m_viewer");
     }
 
     public SearchMode getMode() {
@@ -308,22 +331,25 @@ public class SearchWindowController {
                 // save user preferences
                 savePreferences();
 
-                if (thread != null) {
-                    thread.fin();
+                if (handle != null) {
+                    handle.cancel();
                 }
 
                 // back to the initial segment
-                int currentEntry = Core.getEditor().getCurrentEntryNumber();
-                if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
-                        && initialEntry != currentEntry) {
-                    boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
-                    if (isSegDisplayed) {
-                        // Restore caretPosition too
-                        ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
-                    } else {
-                        // The segment is not displayed (maybe filter on).
-                        // Ignore caretPosition.
-                        Core.getEditor().gotoEntry(initialEntry);
+                IEditor editor = Core.getEditor();
+                if (editor instanceof EditorController) {
+                    int currentEntry = editor.getCurrentEntryNumber();
+                    if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
+                            && initialEntry != currentEntry) {
+                        boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
+                        if (isSegDisplayed) {
+                            // Restore caretPosition too
+                            editor.gotoEntry(initialEntry, initialCaret);
+                        } else {
+                            // The segment is not displayed (maybe filter on).
+                            // Ignore caretPosition.
+                            editor.gotoEntry(initialEntry);
+                        }
                     }
                 }
             }
@@ -792,9 +818,9 @@ public class SearchWindowController {
 
     private void doSearch() {
         UIThreadsUtil.mustBeSwingThread();
-        if (thread != null) {
-            // stop old search thread
-            thread.fin();
+        if (handle != null && !handle.completion().isDone()) {
+            // stop old search task
+            handle.cancel();
         }
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
@@ -915,19 +941,33 @@ public class SearchWindowController {
 
         Searcher searcher = new Searcher(Core.getProject(), s);
         // start the search in a separate thread
-        thread = new SearchThread(this, searcher);
-        thread.start();
+        SearchTask task = new SearchTask(this, searcher);
+        handle = Core.getLongProcessExecutor().submit(task::run);
     }
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        if (thread != null) {
-            thread.fin();
-        }
-        form.dispose();
+        dispose();
+    }
+
+    /**
+     * Completes the asynchronous operation associated with the search process.
+     */
+    @VisibleForTesting
+    boolean complete() {
+        final AtomicBoolean success = new AtomicBoolean(true);
+        handle.completion().whenComplete((result, error) -> {
+            if (error != null) {
+                success.set(false);
+            }
+        });
+        return success.get();
     }
 
     public void dispose() {
+        if (handle != null && !handle.completion().isDone()) {
+            handle.cancel();
+        }
         form.dispose();
     }
 
@@ -1196,10 +1236,9 @@ public class SearchWindowController {
         });
     }
 
-    private SimpleDateFormat dateFormat;
-    private SpinnerDateModel dateFromModel, dateToModel;
-
-    private SearchThread thread;
+    private final SimpleDateFormat dateFormat;
+    private final SpinnerDateModel dateFromModel;
+    private final SpinnerDateModel dateToModel;
 
     private static final String SAVED_DATE_FORMAT = "yyyy/MM/dd HH:mm";
 

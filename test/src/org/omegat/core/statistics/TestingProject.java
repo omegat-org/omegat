@@ -68,6 +68,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
         segmenter = new Segmenter(SRX.getDefault());
         projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
                 Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
+        loadSource();
     }
 
     @Override
@@ -90,9 +91,9 @@ public class TestingProject extends NotLoadedProject implements IProject {
         return r;
     }
 
-    @Override
-    public List<SourceTextEntry> getAllEntries() {
-        List<SourceTextEntry> ste = new ArrayList<>();
+    private List<SourceTextEntry> ste = new ArrayList<>();
+
+    private void loadSource() {
         IFilter filter = new PoFilter();
         Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
         IParseCallback testCallback = new TestingParseCallback(ste);
@@ -102,6 +103,10 @@ public class TestingProject extends NotLoadedProject implements IProject {
         } catch (Exception e) {
             Log.log(e);
         }
+    }
+
+    @Override
+    public List<SourceTextEntry> getAllEntries() {
         return ste;
     }
 
@@ -125,6 +130,13 @@ public class TestingProject extends NotLoadedProject implements IProject {
         synchronized (projectTMX) {
             return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()), projectTMX.getMultipleTranslation(ste.getKey()));
         }
+    }
+
+    @Override
+    public List<IProject.FileInfo> getProjectFiles() {
+        FileInfo fi = new FileInfo("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+        fi.entries.addAll(ste);
+        return Collections.singletonList(fi);
     }
 
     @Override
@@ -154,6 +166,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
             setTargetLanguage(new Language("ca"));
             setTargetTokenizer(DefaultTokenizer.class);
             setProjectRoot(tmpDir.toString());
+            setSourceRoot("test/data/filters/po/");
         }
     }
 }

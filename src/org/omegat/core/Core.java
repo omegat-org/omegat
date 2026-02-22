@@ -49,6 +49,7 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -250,6 +251,10 @@ public final class Core {
 
         coreState.initializeSaveThread();
         coreState.initializeVersionCheckThread();
+    }
+
+    public static LongProcessExecutor getLongProcessExecutor() {
+        return CoreState.getInstance().getExecutor();
     }
 
     /**

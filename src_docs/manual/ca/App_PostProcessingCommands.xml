@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="post.processing.commands">
-  <title id="post.processing.commands.title">Ordres de postprocessament</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="post.processing.commands">
+  <title xml:id="post.processing.commands.title">Ordres de postprocessament</title>
 
   <para>Consulteu la propietat del projecte <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> per a les ordres específiques del projecte.</para>
 
   <para>Consulteu la preferència <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> per a les ordres globals.</para>
 	
 
-  <section id="post.processing.commands.template.variables">
-    <title id="post.processing.commands.template.variables.title">Variables de plantilla</title>
-    <para>L'ordre s'envia a l'executable de l'entorn d'execució del Java com a cadena, amb els valors de plantilla ampliats. Tots els arguments s'han d'indicar entre cometes; per exemple, <literal>&quot;${fileName}&quot;</literal>.</para>
+  <section xml:id="post.processing.commands.template.variables">
+    <title xml:id="post.processing.commands.template.variables.title">Variables de plantilla</title>
+    <para>L'ordre s'envia a l'executable de l'entorn d'execució del Java com a cadena, amb els valors de plantilla ampliats. Tots els arguments s'han d'indicar entre cometes; per exemple, <literal>"${fileName}"</literal>.</para>
 
     <para>Les variables de plantilla següents sempre estan disponibles. La resta d'elements de la llista de plantilles són variables d'entorn del sistema.</para>
 	
-    <table id="post.processing.commands.template.variables.table">
-      <title id="post.processing.commands.template.variables.table.title">Variables de plantilla</title>
+    <table xml:id="post.processing.commands.template.variables.table">
+      <title xml:id="post.processing.commands.template.variables.table.title">Variables de plantilla</title>
       <tgroup cols="2" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
         <colspec align="left" colname="2" colnum="2"/>
@@ -96,20 +95,20 @@
     </table>
   </section>
   
-  <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">Scripts locals</title>
+  <section xml:id="post.processing.commands.user.defined.scripts">
+    <title xml:id="post.processing.commands.user.defined.scripts.title">Scripts locals</title>
     <para>A més d'una ordre normal, es pot executar un script. No executeu mai scripts de postprocessament de fonts no fiables. Per raons de seguretat, les ordres de postprocessament locals estan inhabilitades per defecte.</para>
     <para>Les variables de plantilla es poden utilitzar amb ordres normals i scripts personalitzats. És possible que hàgiu d'utilitzar un camí absolut per a l'script. És possible que el valor PATH que utilitza l'OmegaT no sigui el mateix que el de l'usuari actual.</para>
     <para>STDOUT i STDERR s'escriuen en el fitxer <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. El codi de sortida i STDERR o el darrer STDOUT apareixeran en la barra d'estat.</para>
   </section>
 
-  <section id="post.processing.commands.linux.and.macos">
-    <title id="post.processing.commands.linux.and.macos.title">Linux i macOS</title>
+  <section xml:id="post.processing.commands.linux.and.macos">
+    <title xml:id="post.processing.commands.linux.and.macos.title">Linux i macOS</title>
     <para>Heu d'utilitzar un shebang; per exemple, <literal>#! /bin/bash</literal> o <literal>#! /usr/bin/env python3</literal>. Finalment, l'script ha de ser executable. No es poden encadenar ordres amb <literal>&amp;&amp;</literal> o <literal>||</literal> ni utilitzar canonades (<literal>|</literal>).</para>
   </section>
   
-  <example id="post.processing.commands.example">
-	  <title id="post.processing.commands.example.title">Exemple senzill d'ordres de postprocessament:</title>
+  <example xml:id="post.processing.commands.example">
+	  <title xml:id="post.processing.commands.example.title">Exemple senzill d'ordres de postprocessament:</title>
 	  <variablelist>
 		<varlistentry>
 		  <term>Obre la carpeta de destinació en el Linux</term>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.replace">
-  <title id="windows.text.replace.title"><guilabel>Sostituzione testo</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.replace">
+  <title xml:id="windows.text.replace.title"><guilabel>Sostituzione testo</guilabel></title>
 
   <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> to open a new replace window
   and enter the word or phrase you wish to search for in the search
@@ -24,8 +23,8 @@
   strings are displayed in orange to show the result of the replacement.</para>
 
 
-  <example id="replace.with.allemand">
-	<title id="replace.with.allemand.title">Replace a term</title>
+  <example xml:id="replace.with.allemand">
+	<title xml:id="replace.with.allemand.title">Replace a term</title>
 	<para>
 	  <programlisting>多和田葉子.UTF8
 -- 148&gt; | language = [[日本語]]・[[ドイツ語]]
@@ -108,16 +107,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">Search type</title>
+  <section xml:id="windows.text.replace.methods">
+    <title xml:id="windows.text.replace.methods.title">Search type</title>
 
     <para>Use the radio buttons to select the type of search.</para>
 
 	<para>The following search types are available:</para>
 
     <variablelist>
-      <varlistentry id="windows.text.replace.methods.exact">
-        <term id="windows.text.replace.methods.exact.title">Exact search</term>
+      <varlistentry xml:id="windows.text.replace.methods.exact">
+        <term xml:id="windows.text.replace.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as entered in the search
           field.</para>
@@ -145,8 +144,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.replace.methods.regex">
-        <term id="windows.text.replace.methods.regex.title">Espressioni regolari</term>
+      <varlistentry xml:id="windows.text.replace.methods.regex">
+        <term xml:id="windows.text.replace.methods.regex.title">Espressioni regolari</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 
@@ -163,8 +162,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.replace.options">
-	<title id="windows.text.replace.options.title">Opzioni</title>
+  <section xml:id="windows.text.replace.options">
+	<title xml:id="windows.text.replace.options.title">Opzioni</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -214,8 +213,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">Results display</title>
+  <section xml:id="windows.text.replace.result.display">
+    <title xml:id="windows.text.replace.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.segmentation">
-  <title id="app.segmentation.title">Segmentació</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.segmentation">
+  <title xml:id="app.segmentation.title">Segmentació</title>
 
-  <section id="dialog.preferences.segmentation.setup.type">
-	<title id="dialog.preferences.segmentation.setup.type.title">Paràgrafs o frases?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.type">
+	<title xml:id="dialog.preferences.segmentation.setup.type.title">Paràgrafs o frases?</title>
 	
 	<para>Les eines de traducció assistida per ordinador funcionen amb unitats textuals anomenades segments. Quan s'introdueix una traducció, el segment que conté el text d'origen s'emmagatzema en la memòria del projecte, juntament amb la traducció i, posteriorment, s'utilitza per a les coincidències amb altres segments d'origen del projecte.</para>
 
@@ -19,8 +18,8 @@
 	<para>La <emphasis>segmentació per frases</emphasis> es basa en una sèrie de regles (anomenades <emphasis>regles de segmentació</emphasis>) que defineixen què constitueix una frase en la llengua d'origen. Aquest paràmetre funciona bé amb documents en què són habituals les repeticions o les frases similars, com ara documents tècnics o legals.</para>
 
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentació per paràgrafs</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentació per paràgrafs</term>
 
 		<listitem>
 		  <para>En primer lloc, l'OmegaT analitza el text per a segmentar-lo per paràgrafs. Aquest procés només es basa en l'estructura del fitxer d'origen per a produir segments.</para>
@@ -29,8 +28,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
-        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentació per frases</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentació per frases</term>
 
         <listitem>
 		  <para>Després de dividir el fitxer d'origen en unitats estructurals, l'OmegaT divideix aquestes unitats en segments.</para>
@@ -55,8 +54,8 @@
     </variablelist>
   </section>
   
-  <section id="dialog.preferences.segmentation.setup.scope">
-	<title id="dialog.preferences.segmentation.setup.scope.title">Globals o locals?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.scope">
+	<title xml:id="dialog.preferences.segmentation.setup.scope.title">Globals o locals?</title>
 
 	<note>
 	  <para>S'utilitzen els mateixos mecanismes i quadres de diàleg per a definir les regles de segmentació globals i locals.</para>
@@ -72,8 +71,8 @@
   </section>
 
 
-  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regles</title>
+  <section xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regles</title>
 	<para>L'OmegaT proporciona regles de segmentació predefinides i el traductor pot utilitzar expressions regulars per a modificar-les. Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
 
 	<para>Com a recordatori, les regles funcionen de la manera següent: quan una regla coincideix, l'OmegaT col·loca un marcador en la ubicació de la coincidència perquè les regles posteriors ignorin aquesta ubicació. Aquesta és la raó per la qual les regles d'excepció han d'estar abans de les regles de segmentació.</para>
@@ -82,8 +81,8 @@
 	  <para>Si canvieu la segmentació durant la traducció, haureu de tornar a carregar el projecte perquè la nova segmentació tingui efecte. Això dividirà o fusionarà alguns segments que ja s'havien traduït, que deixaran de considerar-se traduïts. Malgrat tot, la traducció original es conservarà en la memòria del projecte.</para>
 	</warning>
 
-	<table id="segmentation.simple.examples">
-	  <title id="segmentation.simple.examples.title">Alguns exemples senzills</title>
+	<table xml:id="segmentation.simple.examples">
+	  <title xml:id="segmentation.simple.examples.title">Alguns exemples senzills</title>
       <tgroup cols="5">
 		<colspec align="left" colnum="1"/>
 		<colspec align="left" colnum="2"/>

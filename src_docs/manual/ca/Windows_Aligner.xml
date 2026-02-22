@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Alineació de fitxers</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.aligner">
+  <title xml:id="windows.aligner.title"><guilabel>Alineació de fitxers</guilabel></title>
 
   <para>Utilitzeu <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> per a accedir a aquesta eina.</para>
 
@@ -56,8 +55,8 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Paràmetres</title>
+  <section xml:id="windows.aligner.adjust">
+    <title xml:id="windows.aligner.adjust.title">Paràmetres</title>
 
     <para>En aquest pas, la part inferior de la finestra presenta diversos paràmetres i opcions que podeu canviar si creieu que es pot millorar l'alineació inicial. També mostra una <guilabel>puntuació mitjana</guilabel> per al resultat. En general, com més baixa sigui la puntuació, més precisa serà l'alineació. En modificar un paràmetre, es torna a calcular l'alineació immediatament, la qual cosa us permet provar ràpidament diferents combinacions per a obtenir els millors resultats.</para>
 
@@ -152,8 +151,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">Ressalta</term>
+      <varlistentry xml:id="windows.aligner.adjust.highlight">
+        <term xml:id="windows.aligner.adjust.highlight.title">Ressalta</term>
         <listitem>
 		  <para>Desmarqueu la casella per a desactivar el ressaltat.</para>
 
@@ -219,8 +218,8 @@
     <para>Quan estigueu satisfet amb els resultats d'aquest pas, feu clic en el botó <guibutton>Continua</guibutton> per a passar al següent.</para>
   </section>
 
-  <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">Correccions</title>
+  <section xml:id="windows.aligner.manual.corrections">
+    <title xml:id="windows.aligner.manual.corrections.title">Correccions</title>
 
     <para>Normalment, cal aplicar ajustaments manuals després del procés d'alineació automàtica inicial. Això generalment implica moure segments amunt o avall per a alinear-los amb els segments correctes en l'altra llengua, i també dividir o unir segments. L'alineador també us permet editar el contingut d'un segment, la qual cosa pot ser útil si detecteu errors en un segment, com ara un error ortogràfic.</para>
 

@@ -1,19 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<chapter id="chapter.instant.start.guide">
-  <title id="chapter.instant.start.guide.title">Introduction à OmegaT</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.instant.start.guide">
+  <title xml:id="chapter.instant.start.guide.title">Introduction à OmegaT</title>
   
-  <section id="introduction.omegat.principles">
-	<title id="introduction.omegat.principles.title">Les principes</title>
+  <section xml:id="introduction.omegat.principles">
+	<title xml:id="introduction.omegat.principles.title">Les principes</title>
 
     <para>Bienvenue sur OmegaT, un outil de traduction assistée par ordinateur (TAO) offrant une grande flexibilité, des performances et une robustesse exceptionnelles, ainsi que des fonctionnalités dépassant celles proposées par les offres commerciales, même pour les traductaires débutants.</para>
 
-	<section id="introduction.omegat.principles.translation.project">
-      <title id="introduction.omegat.principles.translation.project.title">Projet de traduction</title>
+	<section xml:id="introduction.omegat.principles.translation.project">
+      <title xml:id="introduction.omegat.principles.translation.project.title">Projet de traduction</title>
 
       <para>Un projet de traduction OmegaT est constitué de plusieurs ressources stockées dans différents dossiers, ainsi que de deux fichiers : un fichier <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link> qui indique où se trouvent toutes les ressources, et un fichier de mémoire de traduction <link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link> qui contient toutes les traductions effectuées pendant le travail sur ce projet.</para>
 
@@ -24,8 +19,8 @@
       <para>Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus.</para>
     </section>
 
-	<section id="introduction.omegat.principles.translation.memories">
-      <title id="introduction.omegat.principles.translation.memories.title">Mémoires de traduction</title>
+	<section xml:id="introduction.omegat.principles.translation.memories">
+      <title xml:id="introduction.omegat.principles.translation.memories.title">Mémoires de traduction</title>
 
       <para>Il n’est pas nécessaire pour les traductaires de <emphasis>créer</emphasis> une mémoire de traduction ou d’en <emphasis>associer</emphasis> une à un nouveau projet. OmegaT le fait <emphasis>automatiquement</emphasis>.</para>
 
@@ -36,8 +31,8 @@
       <para>Voir le guide pratique <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> pour en savoir plus.</para>
 	</section>
 
-	<section id="introduction.omegat.principles.collaboration">
-      <title id="introduction.omegat.principles.collaboration.title">Collaboration</title>
+	<section xml:id="introduction.omegat.principles.collaboration">
+      <title xml:id="introduction.omegat.principles.collaboration.title">Collaboration</title>
 
       <para>Les traductaires peuvent facilement partager des ressources et travailler à plusieurs sur un projet en utilisant des paramètres simples.</para>
 
@@ -46,8 +41,8 @@
       <para>Voir le guide pratique <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> pour en savoir plus.</para>
 	</section>
 
-	<section id="introduction.omegat.principles.made.for.translators">
-      <title id="introduction.omegat.principles.made.for.translators.title">Conçu pour les traductaires</title>
+	<section xml:id="introduction.omegat.principles.made.for.translators">
+      <title xml:id="introduction.omegat.principles.made.for.translators.title">Conçu pour les traductaires</title>
 
 	  <para>OmegaT est conçu non seulement pour faciliter le processus de traduction, mais aussi pour que les traductaires n’aient pas à s’inquiéter de la perte de données.</para>
 
@@ -65,13 +60,13 @@
 
 	  <para>Avant de suivre ces étapes, OmegaT vous permettra de vous concentrer sur votre travail de traduction et vous aidera, autant que possible, à améliorer vos compétences en traduction.</para>
 
-	  <para>Si vous avez besoin d’aide concernant tout élément d’OmegaT, n’hésitez pas à rejoindre les <ulink url="https://omegat.org/support">groupes de soutien d’OmegaT.</ulink></para>
+	  <para>Si vous avez besoin d’aide concernant tout élément d’OmegaT, n’hésitez pas à rejoindre les <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.org/support">groupes de soutien d’OmegaT.</link></para>
 
 	</section>
   </section>
 
-  <section id="introduction.how.to.use.the.manual">
-	<title id="introduction.how.to.use.the.manual.title">Conventions utilisées dans ce manuel</title>
+  <section xml:id="introduction.how.to.use.the.manual">
+	<title xml:id="introduction.how.to.use.the.manual.title">Conventions utilisées dans ce manuel</title>
 	<para>Cette section présente les conventions utilisées pour identifier les éléments de l’interface graphique d’OmegaT dans ce manuel. Ils sont présentés de manière à faciliter l’identification de leur fonction. L’action associée à un élément indique également sa fonction au cas où l’affichage ne permettrait pas de mettre en évidence les différences visuelles : <emphasis>utiliser</emphasis> un élément de menu, ou <emphasis>cliquer</emphasis> sur un bouton.</para>
 
 	<para>De même, les liens vers les différentes parties du manuel sont présentés de manière à identifier plus facilement la fonction de l’élément lié.</para>
@@ -129,7 +124,7 @@
 	  <varlistentry>
 		<term>Liens vers les ressources externes</term>
 		<listitem>
-		  <para>La <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</ulink>.</para>
+		  <para>La <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentation Regex Java</link>.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -138,8 +133,8 @@
 		<listitem>
 		  <para>Pour éviter de répéter les descriptions des raccourcis, nous utilisons des lettres simples comme identifiant commun pour les modificateurs. Voir le chapitre <link linkend="chapter.menus" endterm="chapter.menus.title"/> pour en savoir plus.</para>
 
-		  <example id="example.introduction.note.on.shortcuts">
-			<title id="example.introduction.note.on.shortcuts.title">Les modificateurs de touches sont identifiés par une seule lettre.</title>
+		  <example xml:id="example.introduction.note.on.shortcuts">
+			<title xml:id="example.introduction.note.on.shortcuts.title">Les modificateurs de touches sont identifiés par une seule lettre.</title>
 
 			<para>Sous Windows et Linux : <keycombo><keycap>Contrôle</keycap><keycap>E</keycap></keycombo></para>
 
@@ -152,8 +147,8 @@
 	</variablelist>
   </section>
 
-  <section id="introduction.create.and.open.new.project">
-    <title id="introduction.create.and.open.new.project.title">Créer un nouveau projet</title>
+  <section xml:id="introduction.create.and.open.new.project">
+    <title xml:id="introduction.create.and.open.new.project.title">Créer un nouveau projet</title>
 
 	<warning>
 	  <para>Si vous n’avez pas encore installé OmegaT, consultez le guide pratique <link linkend="how.to.installing.omegat" endterm="how.to.installing.omegat.title"/>.</para>
@@ -172,7 +167,7 @@
 
 	<para>Dans cette boite de dialogue, sélectionnez ou saisissez les langues de vos fichiers source et à traduire, définissez les différentes options et cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
 
-	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</link> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
 
 	<warning>
 	  <para>Assurez-vous que les bonnes langues sont saisies et que tous les autres emplacements nécessitant un code de langue correspondent au code que vous indiquez ici. Voir la section <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/> pour en savoir plus.</para>
@@ -193,8 +188,8 @@
 	<para>Si vous ne voyez pas le contenu d’un fichier dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>, le fichier est peut-être vide ou dans un format qui n’est pas pris en charge par OmegaT. Utilisez <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/> pour afficher la liste des formats de fichiers pris en charge. Si le format de votre fichier n’est pas répertorié, utilisez des extensions tierces ou convertissez le fichier dans un format pris en charge. Voir le guide pratique <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> pour en savoir plus.</para>
   </section>
 
-  <section id="introduction.install.spellchecker.dictionary">
-	<title id="introduction.install.spellchecker.dictionary.title">Dictionnaires de vérification orthographique</title>
+  <section xml:id="introduction.install.spellchecker.dictionary">
+	<title xml:id="introduction.install.spellchecker.dictionary.title">Dictionnaires de vérification orthographique</title>
 
 	<para>Omegat fournit un système de vérification orthographique, mais il n’inclut pas les dictionnaires nécessaires pour vérifier l’orthographe de vos traductions. Vous devez installer les dictionnaires dont vous avez besoin vous-même.</para>
 
@@ -231,8 +226,8 @@
 	</warning>
   </section>
 
-  <section id="introduction.manage.your.segments">
-    <title id="introduction.manage.your.segments.title">Gérer vos segments</title>
+  <section xml:id="introduction.manage.your.segments">
+    <title xml:id="introduction.manage.your.segments.title">Gérer vos segments</title>
 
 	<para>Le paramètre par défaut d’un projet de traduction consiste à créer des <emphasis>phrases</emphasis> en divisant les <emphasis>blocs de paragraphes</emphasis> trouvés dans le document. Voir la propriété du projet <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> pour en savoir plus.</para>
 	
@@ -265,12 +260,12 @@
 	</note>
   </section>
 
-  <section id="introduction.make.it.look.good">
-	<title id="introduction.make.it.look.good.title">Pour le plaisir des yeux !</title>
+  <section xml:id="introduction.make.it.look.good">
+	<title xml:id="introduction.make.it.look.good.title">Pour le plaisir des yeux !</title>
 	<para>Une fois que tout cela est fait, les fichiers sources apparaissent dans OmegaT comme ceci :</para>
 
-	<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
+	<figure xml:id="default.omegat.layout">
+      <title xml:id="default.omegat.layout.title">Présentation par défaut d’OmegaT sur macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -315,8 +310,8 @@
 	
   </section>
 
-  <section id="introduction.translate.the.segments.one.by.one">
-    <title id="introduction.translate.the.segments.one.by.one.title">Traduire vos fichiers</title>
+  <section xml:id="introduction.translate.the.segments.one.by.one">
+    <title xml:id="introduction.translate.the.segments.one.by.one.title">Traduire vos fichiers</title>
 
     <para>Saisissez votre traduction dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
@@ -371,22 +366,22 @@
 	<para>La touche <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/> permet d’accéder facilement à diverses fonctions fréquemment utilisées. Le <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> est également disponible dans le volet de l’Éditeur.</para>
   </section>
   
-  <section id="introduction.manage.your.tags">
-    <title id="introduction.manage.your.tags.title">Gérer vos balises</title>
+  <section xml:id="introduction.manage.your.tags">
+    <title xml:id="introduction.manage.your.tags.title">Gérer vos balises</title>
 
     <para>Si les documents que vous traduisez utilisent du gras, de l’italique ou d’autres éléments décoratifs, OmegaT convertit ces éléments en balises qui entourent le texte décoré. Ces fichiers comprennent par exemple les fichiers LibreOffice, les fichiers HTML et les fichiers Microsoft Office. Les documents contiennent souvent aussi des balises qui n’ont rien à voir avec les décorations, mais qui sont néanmoins importantes dans les fichiers sources (et, par conséquent, dans les fichiers traduits).</para>
 
 	<para>Voici à quoi peut ressembler une phrase dans son format d’origine :</para>
     
-	<example id="example.source.segment.with.decorations">
-	  <title id="example.source.segment.with.decorations.title">Phrase avec une mise en forme décorative</title>
+	<example xml:id="example.source.segment.with.decorations">
+	  <title xml:id="example.source.segment.with.decorations.title">Phrase avec une mise en forme décorative</title>
 	  <para>OmegaT est un programme <emphasis role="bold">facile à utiliser</emphasis> pour les traductaires <emphasis>sagaces</emphasis>.</para>
 	</example>
 
     <para>Cependant, selon le format d’origine, OmegaT présentera cette phrase de manière similaire à ceci :</para>
 
-	<example id="example.how.decorations.are.displayed">
-	  <title id="example.how.decorations.are.displayed.title">Affichage des décorations dans OmegaT</title>
+	<example xml:id="example.how.decorations.are.displayed">
+	  <title xml:id="example.how.decorations.are.displayed.title">Affichage des décorations dans OmegaT</title>
 	  <para>OmegaT est un programme <code role="tag">&lt;t0/&gt;</code>facile à utiliser<code role="tag">&lt;t1/&gt;</code> pour les traductaires <code role="tag">&lt;t2/&gt;</code>sagaces<code role="tag">&lt;t3/&gt;</code>.</para>
     </example>
 
@@ -428,16 +423,16 @@
 	</warning>
   </section>
 
-  <section id="introduction.review.the.translation">
-    <title id="introduction.review.the.translation.title">Réviser votre traduction</title>
+  <section xml:id="introduction.review.the.translation">
+    <title xml:id="introduction.review.the.translation.title">Réviser votre traduction</title>
 
 	<para>N’hésitez pas à modifier la présentation des <link linkend="chapter.panes" endterm="chapter.panes.title"/> et les options <link linkend="menus.view" endterm="menus.view.title"/> lors de la révision de la traduction.</para>
 
 	<para>Utilisez l’option <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour effectuer divers contrôles sur le contenu de votre traduction.</para>
   </section>
   
-  <section id="introduction.generate.the.translated.file">
-    <title id="introduction.generate.the.translated.file.title">Créer les fichiers traduits</title>
+  <section xml:id="introduction.generate.the.translated.file">
+    <title xml:id="introduction.generate.the.translated.file.title">Créer les fichiers traduits</title>
 
 	<para>Pour voir à quoi ressemblera votre traduction dans son format final, utilisez <link linkend="menus.project" endterm="menus.project.title"/> <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>.</para>
 
@@ -456,8 +451,8 @@
 	<para>Les modifications effectuées en dehors d’OmegaT peuvent être réinsérées dans OmegaT (et donc dans la mémoire de traduction du projet, pour la maintenir à jour). Soit en les introduisant manuellement dans les segments concernés, soit en alignant le fichier original et le fichier final traduit pour créer un nouveau fichier de mémoire de traduction (TMX) qui sera placé dans le dossier <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> du dossier de votre projet. Voir la section <link linkend="windows.aligner" endterm="windows.aligner.title"/> pour en savoir plus.</para>
   </section>
 
-  <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">Gérer vos projets</title>
+  <section xml:id="introduction.one.more.thing">
+    <title xml:id="introduction.one.more.thing.title">Gérer vos projets</title>
 
     <itemizedlist>
       <listitem>
@@ -474,14 +469,14 @@
     </itemizedlist>
   </section>
 
-  <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">Fluidifier le travail grâce aux raccourcis</title>
+  <section xml:id="app.shortcuts.streamline.workflow">
+    <title xml:id="app.shortcuts.streamline.workflow.title">Fluidifier le travail grâce aux raccourcis</title>
 
     <para>Vous pouvez fluidifier votre travail en gardant à l’esprit les principaux raccourcis d’édition et de navigation (ou en les <link linkend="app.shortcuts.customization">modifiant en fonction de vos besoins</link>).</para>
     <para>Un exemple illustre mieux ce point :</para>
 
-    <example id="example.shortcuts.streamline.workflow">
-      <title id="example.shortcuts.streamline.workflow.title">Utiliser des raccourcis pour fluidifier le processus de traduction</title>
+    <example xml:id="example.shortcuts.streamline.workflow">
+      <title xml:id="example.shortcuts.streamline.workflow.title">Utiliser des raccourcis pour fluidifier le processus de traduction</title>
 
       <para>Imaginez que vous soyez chargé de traduire une version actualisée d’un manuel rédigé dans le cadre d’un précédent emploi. Voir le guide pratique <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> pour en savoir plus.</para>
         

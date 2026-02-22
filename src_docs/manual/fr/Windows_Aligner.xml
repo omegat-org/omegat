@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Aligner des fichiers</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.aligner">
+  <title xml:id="windows.aligner.title"><guilabel>Aligner des fichiers</guilabel></title>
 
   <para>Utilisez <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> pour accéder à cet outil.</para>
 
@@ -56,8 +55,8 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Paramètres</title>
+  <section xml:id="windows.aligner.adjust">
+    <title xml:id="windows.aligner.adjust.title">Paramètres</title>
 
     <para>Dans cette étape, la partie inférieure de la fenêtre présente divers paramètres et options que vous pouvez modifier si l’alignement initial peut être amélioré. Elle affiche également un résultat <guilabel>Score moyen</guilabel> pour l’alignement. En règle générale, plus le score est bas, plus l’alignement est précis. La modification d’un paramètre recalcule immédiatement l’alignement, ce qui vous permet d’essayer rapidement différentes combinaisons pour obtenir les meilleurs résultats.</para>
 
@@ -152,8 +151,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">Mettre en évidence</term>
+      <varlistentry xml:id="windows.aligner.adjust.highlight">
+        <term xml:id="windows.aligner.adjust.highlight.title">Mettre en évidence</term>
         <listitem>
 		  <para>Décochez la case pour désactiver la mise en évidence.</para>
 
@@ -219,8 +218,8 @@
     <para>Lorsque vous êtes satisfait des résultats à cette étape, cliquez sur le bouton <guibutton>Continuer</guibutton> pour passer à l’étape suivante.</para>
   </section>
 
-  <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">Corrections</title>
+  <section xml:id="windows.aligner.manual.corrections">
+    <title xml:id="windows.aligner.manual.corrections.title">Corrections</title>
 
     <para>Des ajustements manuels sont généralement nécessaires après la phase initiale d’alignement automatique. Il s’agit généralement de déplacer des segments vers le haut ou vers le bas pour les aligner sur les segments corrects dans l’autre langue, ainsi que de diviser ou de fusionner des segments. L’aligneur vous permet également d’éditer le contenu d’un segment, ce qui peut être utile si vous remarquez des erreurs dans un segment, par exemple une faute d’orthographe.</para>
 

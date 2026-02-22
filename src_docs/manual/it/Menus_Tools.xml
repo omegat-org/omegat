@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Strumenti</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.tools">
+  <title xml:id="menus.tools.title"><guimenu>Strumenti</guimenu></title>
 
   <para>Questo menu permette l'accesso a vari strumenti, tra cui la convalida di qualità, le statistiche delle concordanze, un allineatore di segmenti e le azioni di script.</para>
 
-  <example id="example.check.issues">
-	<title id="example.check.issues.title">Esempio di descrizione delle scorciatoie</title>
+  <example xml:id="example.check.issues">
+	<title xml:id="example.check.issues.title">Esempio di descrizione delle scorciatoie</title>
 	<para>In Windows e Linux: <keycombo><keycap>Ctrl</keycap><keycap>Maiusc (Shift)</keycap><keycap>V</keycap></keycombo></para>
 
 	<para>In macOS: <keycombo><keycap>Maiusc (Shift)</keycap><keycap>Cmd</keycap><keycap>V</keycap></keycombo></para>
 
-	<para><emphasis role="bold">In questo manuale:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo> (NdT: per questioni di coerenza e per evitare confusione si è lasciato &quot;S&quot; di &quot;Shift&quot; al posto di &quot;M&quot;)</para>
+	<para><emphasis role="bold">In questo manuale:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo> (NdT: per questioni di coerenza e per evitare confusione si è lasciato "S" di "Shift" al posto di "M")</para>
   </example>
 
   <variablelist>
-    <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Verifica problemi...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+    <varlistentry xml:id="menus.tools.check.issues">
+      <term xml:id="menus.tools.check.issues.title"><guimenuitem>Verifica problemi...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>Lo strumento di verifica della qualità (QA, quality assurance) esegue tutti i controlli automatici in un colpo solo e visualizza i risultati in una finestra separata.</para>
 
@@ -67,15 +66,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Verifica problemi per il file attivo</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.check.issues.for.current.document">
+      <term xml:id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Verifica problemi per il file attivo</guimenuitem></term>
       <listitem>
         <para>Come sopra, ma solo per il documento correntemente aperto nel pannello dell'Editor.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.statistics">
-      <term id="menus.tools.statistics.title"><guimenuitem>Statistiche</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.statistics">
+      <term xml:id="menus.tools.statistics.title"><guimenuitem>Statistiche</guimenuitem></term>
       <listitem>
         <para>Apre una nuova finestra e mostra le statistiche del progetto quali il conteggio delle parole totali del progetto, i totali dei segmenti e i totali per ciascun file del progetto.</para>
 
@@ -105,8 +104,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Statistiche delle concordanze</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics">
+      <term xml:id="menus.tools.match.statistics.title"><guimenuitem>Statistiche delle concordanze</guimenuitem></term>
       <listitem>
         <para>Mostra le statistiche di concordanza per il progetto, che consistono nel numero di ripetizioni, concordanze esatte, parziali e nessuna, sia per i segmenti, sia per le parole e i caratteri.</para>
 
@@ -114,8 +113,8 @@
       </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistiche delle concordanze per file</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics.per.file">
+      <term xml:id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistiche delle concordanze per file</guimenuitem></term>
       <listitem>
         <para>Mostra le statistiche di concordanza per ciascun file del progetto, che consistono nel numero di ripetizioni, concordanze esatte, parziali e nessuna, sia per i segmenti, sia per le parole e i caratteri.</para>
 
@@ -123,8 +122,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Allinea file...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.align.files">
+      <term xml:id="menus.tools.align.files.title"><guimenuitem>Allinea file...</guimenuitem></term>
       <listitem>
         <para>Selezionare i due file da allineare (il file di partenza e la sua traduzione) e fare clic su <guibutton>OK</guibutton> per aprire la finestra <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
 
@@ -133,8 +132,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>Azioni di script...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.scripting">
+      <term xml:id="menus.tools.scripting.title"><guimenuitem>Azioni di script...</guimenuitem></term>
       <listitem>
         <para>Apre la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/>, che consente di impostare la posizione di salvataggio degli script, di scrivere ed eseguire script e assegnar loro una scorciatoia.</para>
 		<para>L'elenco sotto questo elemento mostra dodici spazi potenziali per gli script. Facendo clic su uno spazio assegnato si avvierà lo script ad esso collegato.</para>
@@ -159,8 +158,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">Comandi per la ricerca esterna</term>
+    <varlistentry xml:id="menus.tools.external.search.commands">
+      <term xml:id="menus.tools.external.search.commands.title">Comandi per la ricerca esterna</term>
       <listitem>
         <para>Se sono state definite ricerche esterne nelle preferenze <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, è possibile accedervi con questo comando.</para>
       </listitem>

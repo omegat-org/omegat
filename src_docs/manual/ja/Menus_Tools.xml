@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>ツール</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.tools">
+  <title xml:id="menus.tools.title"><guimenu>ツール</guimenu></title>
 
   <para>このメニューからは、品質保証チェック、照合レポート、整合ツール、スクリプト編集・実行など、さまざまなツールにアクセスできます。</para>
 
-  <example id="example.check.issues">
-	<title id="example.check.issues.title">ショートカットの説明の例</title>
+  <example xml:id="example.check.issues">
+	<title xml:id="example.check.issues.title">ショートカットの説明の例</title>
 	<para>Windows と Linux: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
 
 	<para>macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap></keycombo></para>
@@ -15,8 +14,8 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>品質チェック...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+    <varlistentry xml:id="menus.tools.check.issues">
+      <term xml:id="menus.tools.check.issues.title"><guimenuitem>品質チェック...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>すべての自動チェックを一度に実行し、結果をウィンドウに表示する品質保証ツール。</para>
 
@@ -67,15 +66,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>現在の文書の品質チェック</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.check.issues.for.current.document">
+      <term xml:id="menus.tools.check.issues.for.current.document.title"><guimenuitem>現在の文書の品質チェック</guimenuitem></term>
       <listitem>
         <para>上記と同様。ただし、エディタペインに現在表示されているドキュメントのみ。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.statistics">
-      <term id="menus.tools.statistics.title"><guimenuitem>翻訳状況</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.statistics">
+      <term xml:id="menus.tools.statistics.title"><guimenuitem>翻訳状況</guimenuitem></term>
       <listitem>
         <para>新しいウィンドウに、プロジェクト全体の翻訳状況とファイルごとの翻訳状況などのプロジェクトの翻訳状況を表示します。</para>
 
@@ -105,8 +104,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>参考訳文の一致率</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics">
+      <term xml:id="menus.tools.match.statistics.title"><guimenuitem>参考訳文の一致率</guimenuitem></term>
       <listitem>
         <para>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
 
@@ -114,8 +113,8 @@
       </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>参考訳文の一致率（ファイル別）</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics.per.file">
+      <term xml:id="menus.tools.match.statistics.per.file.title"><guimenuitem>参考訳文の一致率（ファイル別）</guimenuitem></term>
       <listitem>
         <para>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
 
@@ -123,8 +122,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>整合ツール...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.align.files">
+      <term xml:id="menus.tools.align.files.title"><guimenuitem>整合ツール...</guimenuitem></term>
       <listitem>
         <para>整列する2つのファイル(原文ファイルとその訳文ファイル)を選択し、<guibutton>確定</guibutton>をクリックして<link linkend="windows.aligner" endterm="windows.aligner.title"/>ウィンドウを開きます。</para>
 
@@ -133,8 +132,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>スクリプト...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.scripting">
+      <term xml:id="menus.tools.scripting.title"><guimenuitem>スクリプト...</guimenuitem></term>
       <listitem>
         <para><link linkend="windows.scripts" endterm="windows.scripts.title"/>ウィンドウを表示します。このウィンドウ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。</para>
 		<para>この項目の下のメニュー項目に、スクリプト用の12個のスロットが表示されます。割り当てられたスロットをクリックすると、そのスロットに割り当てられたスクリプトが起動します。</para>
@@ -159,8 +158,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">外部検索コマンド</term>
+    <varlistentry xml:id="menus.tools.external.search.commands">
+      <term xml:id="menus.tools.external.search.commands.title">外部検索コマンド</term>
       <listitem>
         <para><link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>設定で外部検索を定義した場合に表示され、アクセスできます。</para>
       </listitem>

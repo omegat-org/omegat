@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="file.filters">
-  <title id="file.filters.title">Filtres de fitxers</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="file.filters">
+  <title xml:id="file.filters.title">Filtres de fitxers</title>
 
   <warning>
 	<para>Els filtres de fitxers són locals i específics d'un projecte determinat, o bé globals i disponibles per a tots els projectes que comparteixen una carpeta de configuració.</para>
@@ -36,14 +31,14 @@
 
   <para>Alguns filtres proporcionen un botó <guibutton>Opcions...</guibutton> per a personalitzar encara més els paràmetres.</para>
 	
-  <para>Feu clic en el botó <guibutton>Reinicialitza els valors</guibutton> per a reinicialitzar els filtres de fitxers.</para>
+  <para>Feu clic en el botó <guibutton>Reinicialitza els valors per defecte</guibutton> per a reinicialitzar els filtres de fitxer als paràmetres per defecte.</para>
 
   <para>Les preferències dels filtres de fitxers globals modificades es desen en <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, en la carpeta de configuració. Consulteu <link linkend="configuration.folder" endterm="configuration.folder.title"/> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres.</para>
 
   <para>Els filtres de fitxers locals modificats es desen en el fitxer <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, dins de la carpeta del projecte. Consulteu el capítol <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per a conèixer més detalls. Si suprimiu aquest fitxer, també es reinicialitzen les preferències dels filtres i el projecte torna a utilitzar els filtres de fitxers globals.</para>
 
-  <section id="file.filters.general">
-	<title id="file.filters.general.title">Preferències comunes</title>
+  <section xml:id="file.filters.general">
+	<title xml:id="file.filters.general.title">Preferències comunes</title>
 	  
 	<variablelist>
 	  <varlistentry>
@@ -79,8 +74,8 @@
 	</variablelist>
   </section>
 	
-  <section id="edit.filter.dialog">
-    <title id="edit.filter.dialog.title">Edita</title>
+  <section xml:id="edit.filter.dialog">
+    <title xml:id="edit.filter.dialog.title">Edita</title>
 	
     <para>Feu doble clic en els camps editables per a aplicar modificacions senzilles o feu clic en el botó <guibutton>Edita...</guibutton> per a accedir al quadre de diàleg de modificació.</para>
 
@@ -90,8 +85,8 @@
 
 	<para>Utilitzeu el menú desplegable <guilabel>Variables de nom del fitxer</guilabel> per a personalitzar el nom del fitxer de destinació.</para>
 
-    <section id="source.filetype.and.filename.pattern">
-	  <title id="source.filetype.and.filename.pattern.title">Patró de nom del fitxer d'origen</title>
+    <section xml:id="source.filetype.and.filename.pattern">
+	  <title xml:id="source.filetype.and.filename.pattern.title">Patró de nom del fitxer d'origen</title>
 
 	  <para>Per a associar un filtre a un fitxer, OmegaT comprova la seva extensió de fitxer i intenta fer-lo coincidir amb els patrons del nom de fitxer d'origen en un filtre.</para>
 
@@ -109,8 +104,8 @@
 	  <para>Per exemple, utilitzeu el patró <literal>read*</literal> si voleu que el filtre de text tracti fitxers Llegeix-me (<literal>readme, read.me</literal> o <literal>readme.txt</literal>).</para>
     </section>
 
-    <section id="source.and.target.files.encoding">
-	  <title id="source.and.target.files.encoding.title">Codificació dels fitxers d'origen i destinació</title>
+    <section xml:id="source.and.target.files.encoding">
+	  <title xml:id="source.and.target.files.encoding.title">Codificació dels fitxers d'origen i destinació</title>
 
 	  <para>La majoria dels formats de fitxers permeten diverses codificacions. Per defecte, la codificació del fitxer traduït és la mateixa que la del fitxer d'origen.</para>
 
@@ -135,8 +130,8 @@
 	  </itemizedlist>
     </section>
 
-    <section id="target.name">
-	  <title id="target.name.title">Nom del fitxer traduït</title>
+    <section xml:id="target.name">
+	  <title xml:id="target.name.title">Nom del fitxer traduït</title>
 	  
 	  <para>Els fitxers de la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/> se sobreescriuen cada vegada que els creeu si es creen amb el mateix nom.</para>
 
@@ -199,7 +194,7 @@
           <listitem>
 			<para>Hora del sistema en crear el fitxer</para>
 
-			<para>Consulteu la <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Documentació d'Oracle</ulink> per a veure exemples.</para>
+			<para>Consulteu la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Documentació d'Oracle</link> per a veure exemples.</para>
           </listitem>
 		</varlistentry>
 
@@ -250,8 +245,8 @@
 		
 	  <para>Si l'ús de diversos punts fa que la identificació del nom del fitxer i de l'extensió sigui ambigua, podeu utilitzar variables com ara <literal>${nameOnly-</literal><emphasis>número</emphasis>} o <literal>${extension-</literal><emphasis>número} </emphasis> per a especificar quins fragments formen part del nom o de l'extensió, com es mostra en l'exemple següent.</para>
 
-	  <example id="target.name.example">
-		<title id="target.name.example.title">Noms dels fitxers de destinació</title>
+	  <example xml:id="target.name.example">
+		<title xml:id="target.name.example.title">Noms dels fitxers de destinació</title>
 		<para>Per a un fitxer d'origen anomenat Document.xx.docx, l'ús d'aquestes variants produirà els resultats següents:</para>
 
 		<itemizedlist>
@@ -283,16 +278,16 @@
     </section>
   </section>
 	
-  <section id="filters.options">
-    <title id="filters.options.title">Opcions</title>
+  <section xml:id="filters.options">
+    <title xml:id="filters.options.title">Opcions</title>
 
     <para>Hi ha diversos filtres que ofereixen opcions. Seleccioneu el filtre de la llista i feu clic en <guibutton>Opcions...</guibutton> per a modificar-les.</para>
 
 	<para>Les opcions disponibles són:</para>
 
 	<variablelist>
-	  <varlistentry id="file.filters.text">
-		<term id="file.filters.text.title">Fitxers de text</term>
+	  <varlistentry xml:id="file.filters.text">
+		<term xml:id="file.filters.text.title">Fitxers de text</term>
 		<listitem>
 		  <para>
 			<variablelist>
@@ -330,8 +325,8 @@
 		</listitem>
 	  </varlistentry>
 		
-	  <varlistentry id="file.filter.microsoft">
-		<term id="file.filter.microsoft.title">Fitxers Microsoft Office Open XML</term>
+	  <varlistentry xml:id="file.filter.microsoft">
+		<term xml:id="file.filter.microsoft.title">Fitxers Microsoft Office Open XML</term>
 		<listitem>
 		  <warning>
 			<para>El filtre <code>Microsoft Office Open XML (filtre antic)</code> és el filtre original de l'OmegaT. Només l'hauríeu d'utilitzar per a evitar problemes de compatibilitat amb projectes anteriors que continguin fitxers tractats amb aquest filtre.</para>
@@ -398,8 +393,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xhtml">
-		<term id="file.filters.xhtml.title">Fitxers XHTML</term>
+	  <varlistentry xml:id="file.filters.xhtml">
+		<term xml:id="file.filters.xhtml.title">Fitxers XHTML</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -429,12 +424,12 @@
 
 				<para>No afegiu cometes i separeu els valors per comes.</para>
 				
-				<example id="file.filters.xhtml.example">
-				  <title id="file.filters.xhtml.example.title">Ignorar la part «content» de &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
+				<example xml:id="file.filters.xhtml.example">
+				  <title xml:id="file.filters.xhtml.example.title">Ignorar la part «content» de &lt;meta name="robots" content="index, follow"&gt;</title>
 				  <para>Per a ignorar aquest contingut:</para>
 
-				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
-				  follow&quot;&gt;</code></para>
+				  <para><code>&lt;meta name="robots" content="index,
+				  follow"&gt;</code></para>
 
 				  <para>Utilitzeu:</para>
 
@@ -450,15 +445,15 @@
 
 				<para>No afegiu cometes i separeu els valors per comes.</para>
 
-				<example id="file.filters.xhtml.ignore.translate.no">
-				  <title id="file.filters.xhtml.ignore.translate.no.title">Ignora les etiquetes que contenen «translate=&quot;no&quot;»</title>
+				<example xml:id="file.filters.xhtml.ignore.translate.no">
+				  <title xml:id="file.filters.xhtml.ignore.translate.no.title">Ignora les etiquetes que contenen «translate="no"»</title>
 				  <para>Per a ignorar aquest contingut:</para>
 
-				  <para><code>&lt;span translate=&quot;no&quot;&gt;Aquest contingut no és traduïble&lt;/span&gt;</code></para>
+				  <para><code>&lt;span translate="no"&gt;Aquest contingut no és traduïble&lt;/span&gt;</code></para>
 
 				  <para>Utilitzeu: <literal>translate=no</literal>.</para>
 
-				  <para>S'ignoraran totes les etiquetes marcades amb <code>translate=&quot;no&quot;</code>.</para>
+				  <para>S'ignoraran totes les etiquetes marcades amb <code>translate="no"</code>.</para>
 				</example>
 			  </listitem>
 			</varlistentry>
@@ -521,8 +516,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.ftl">
-		<term id="file.filters.mozilla.ftl.title">FTL de Mozilla</term>
+	  <varlistentry xml:id="file.filters.mozilla.ftl">
+		<term xml:id="file.filters.mozilla.ftl.title">FTL de Mozilla</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -535,8 +530,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.dtd">
-		<term id="file.filters.mozilla.dtd.title">DTD de Mozilla</term>
+	  <varlistentry xml:id="file.filters.mozilla.dtd">
+		<term xml:id="file.filters.mozilla.dtd.title">DTD de Mozilla</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -549,8 +544,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.po">
-		<term id="file.filters.po.title">Fitxers PO</term>
+	  <varlistentry xml:id="file.filters.po">
+		<term xml:id="file.filters.po.title">Fitxers PO</term>
 		<listitem>
 			<para>El filtre comprova les variables del printf («%s», etc.) per defecte. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per a conèixer més detalls.</para>
 
@@ -607,8 +602,8 @@
 		  </listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.moodle.php">
-		<term id="file.filters.moodle.php.title">PHP del Moodle</term>
+	  <varlistentry xml:id="file.filters.moodle.php">
+		<term xml:id="file.filters.moodle.php.title">PHP del Moodle</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -621,8 +616,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filter.java.bundle">
-		<term id="file.filter.java.bundle.title">Paquet de recursos del Java</term>
+	  <varlistentry xml:id="file.filter.java.bundle">
+		<term xml:id="file.filter.java.bundle.title">Paquet de recursos del Java</term>
 		<listitem>
 			<para>El filtre comprova els patrons de MessageFormat del Java (p. ex. m \{0\}) per defecte. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per a conèixer més detalls.</para>
 
@@ -651,8 +646,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.odf">
-		<term id="file.filters.odf.title">Fitxers en format OpenDocument (ODF)</term>
+	  <varlistentry xml:id="file.filters.odf">
+		<term xml:id="file.filters.odf.title">Fitxers en format OpenDocument (ODF)</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -665,8 +660,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xliff">
-		<term id="file.filters.xliff.title">XLIFF (filtre antic)</term>
+	  <varlistentry xml:id="file.filters.xliff">
+		<term xml:id="file.filters.xliff.title">XLIFF (filtre antic)</term>
 		<listitem>
 		  <warning>
 			<para>Aquest filtre és el filtre XLIFF original de l'OmegaT. Només l'hauríeu d'utilitzar per a evitar problemes de compatibilitat amb projectes anteriors que continguin fitxers tractats amb aquest filtre.</para>
@@ -698,7 +693,7 @@
 			  <varlistentry>
 				<term>Estat del segment de destinació</term>
 				<listitem>
-				  <para>Si es marca, l'OmegaT canvia l'estat de destinació del fitxer XLIFF a &quot;needs-review-translation&quot; en comptes de &quot;translated&quot;.</para>
+				  <para>Si es marca, l'OmegaT canvia l'estat de destinació del fitxer XLIFF a "needs-review-translation" en comptes de "translated".</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>

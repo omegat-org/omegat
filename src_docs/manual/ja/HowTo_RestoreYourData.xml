@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">問題のトラブルシューティング</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.restore.your.data">
+  <title xml:id="how.to.restore.your.data.title">問題のトラブルシューティング</title>
 
   <warning>
 	<para>OmegaTは堅牢で信頼できるプログラムですが、それでも、他のプログラムと同様に、使用時にデータ損失を防ぐための予防措置を講じることは賢明です。</para>
   </warning>
 
-  <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">自動バックアップ</title>
+  <section xml:id="how.to.restore.your.data.automatic.backup">
+	<title xml:id="how.to.restore.your.data.automatic.backup.title">自動バックアップ</title>
 
 	<para>OmegaTは、問題が発生した場合にプロジェクト設定を取得できるように、プロジェクト設定のバックアップを作成します。詳細は<link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>項をご覧ください。</para>
 	  
@@ -56,8 +55,8 @@
 
   </section>
 
-  <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">翻訳を失くしたの?</title>
+  <section xml:id="how.to.restore.your.data.lost.in.translation">
+	<title xml:id="how.to.restore.your.data.lost.in.translation.title">翻訳を失くしたの?</title>
 
 	<para>翻訳データを紛失したのではないかと心配していても、おそらく最新のバックアップの翻訳メモリに安全に保存されています。通常、バックアップは数分前のものです。</para>
 
@@ -92,8 +91,8 @@
 	</note>
   </section>
 
-  <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">プロジェクトはロックされていますか?</title>
+  <section xml:id="how.to.restore.your.data.project.locked">
+	<title xml:id="how.to.restore.your.data.project.locked.title">プロジェクトはロックされていますか?</title>
 
 	<para>まれに、コンピュータがフリーズし、OmegaTを適切に閉じる時間がない場合は、<filename>OmegaT.project</filename>ファイルがオペレーティングシステムによってロックされ、システムを再起動した後に再び開くことができなくなることがあります。</para>
 
@@ -124,8 +123,8 @@
 	<para>このアクションは、自動的に作成されたバックアップ<filename>OmegaT.project</filename>ファイルでプロジェクトを開きます。</para>
   </section>
   
-  <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">プロジェクトが開かない?</title>
+  <section xml:id="how.to.restore.your.data.project.wont.open">
+	<title xml:id="how.to.restore.your.data.project.wont.open.title">プロジェクトが開かない?</title>
 
 	<para>コンピュータがフリーズし、OmegaTが適切に閉じる時間がないというまれなケースでは、いくつかの重要なファイルが壊れて、マシンを再起動した後にプロジェクトが再び開かないことがあります。</para>
 
@@ -160,8 +159,8 @@
 	<para>これで新しいプロジェクトは、古いプロジェクトが選択したプロジェクト翻訳メモリを作成した時点での、翻訳状態になります。</para>
   </section>
 
-  <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">訳文ファイルが開かないんですか?</title>
+  <section xml:id="how.to.restore.your.data.translated.file.broken">
+	<title xml:id="how.to.restore.your.data.translated.file.broken.title">訳文ファイルが開かないんですか?</title>
 
 	<para>多くの場合、オフィススイートファイルには、元のアプリケーションで訳文ファイルを開くことができるように、翻訳にコピーする必要のあるタグが含まれています。タグがないと、ファイルが開かない場合があります。</para>
 	
@@ -192,8 +191,8 @@
 	<para>これにより、OmegaTに翻訳を入力する際にタグを正しく挿入しなかったことで発生した、タグ一貫性問題が修正されます。</para>
   </section>
 
-  <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaTが動作しない?</title>
+  <section xml:id="how.to.restore.your.data.omegat.wont.behave">
+	<title xml:id="how.to.restore.your.data.omegat.wont.behave.title">OmegaTが動作しない?</title>
 
 	<para>何かが起こり、OmegaTは動作しなくなりました。あなたが何をしようと、あなたはそれを修正できないようです。ヘルプを呼び出す前に、最後にもう1つ試したいことがあります。それは、デフォルト設定でOmegaTを再起動することです。</para>
 
@@ -246,8 +245,8 @@
 	</orderedlist>
   </section>
 
-  <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">まとめ</title>
+  <section xml:id="how.to.restore.your.data.summary">
+	<title xml:id="how.to.restore.your.data.summary.title">まとめ</title>
 
 	<itemizedlist>
       <listitem>

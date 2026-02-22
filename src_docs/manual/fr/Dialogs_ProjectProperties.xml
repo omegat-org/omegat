@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="dialogs.project.properties">
-  <title id="dialogs.project.properties.title"><guilabel>Propriétés du projet</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="dialogs.project.properties">
+  <title xml:id="dialogs.project.properties.title"><guilabel>Propriétés du projet</guilabel></title>
 
   <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour ouvrir la boite de dialogue.</para>
   
@@ -10,12 +9,12 @@
   <para>Voir le chapitre <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> pour en savoir plus.</para>
   
 
-  <section id="dialogs.project.properties.languages">
-    <title id="dialogs.project.properties.languages.title"><guilabel>Langues</guilabel></title>
+  <section xml:id="dialogs.project.properties.languages">
+    <title xml:id="dialogs.project.properties.languages.title"><guilabel>Langues</guilabel></title>
 
     <para>Sélectionnez les langues source et cible dans la liste déroulante ou saisissez-les manuellement.</para>
 
-	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
+	<para>OmegaT fournit une liste brève et pratique de codes de langue à deux lettres, mais vous pouvez saisir n’importe quel code conforme au <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</link> (y compris les codes de langue à trois lettres) dans le champ de saisie.</para>
 	
 	<para>Les codes de langue sont utilisés à différents endroits dans OmegaT pour :</para>
 	
@@ -47,12 +46,12 @@
       <para>OmegaT sélectionne automatiquement les lemmatiseurs qui correspondent à la langue source et à la langue cible, mais vous pouvez modifier manuellement ces paramètres. Les lemmatiseurs permettent à OmegaT de fournir de meilleures correspondances.</para>
   </section>
 
-  <section id="dialogs.project.properties.options">
-    <title id="dialogs.project.properties.options.title"><guilabel>Options</guilabel></title>
+  <section xml:id="dialogs.project.properties.options">
+    <title xml:id="dialogs.project.properties.options.title"><guilabel>Options</guilabel></title>
 
     <variablelist>
-      <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title"><option>Segmentation au niveau des phrases</option></term>
+      <varlistentry xml:id="dialogs.project.properties.options.segmentation">
+        <term xml:id="dialogs.project.properties.options.segmentation.title"><option>Segmentation au niveau des phrases</option></term>
 
 		<listitem>		  
           <para>La segmentation au niveau des phrases divise les paragraphes ou autres blocs de texte du fichier source en segments selon des règles de segmentation.</para>
@@ -81,8 +80,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.local.segmentation">
-        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Règles locales de segmentation…</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.local.segmentation">
+        <term xml:id="dialogs.project.properties.local.segmentation.title"><guibutton>Règles locales de segmentation…</guibutton></term>
 
 		<listitem>
 		  <para>Par défaut, les règles de segmentation sont globales et s’appliquent à tous les projets.</para>
@@ -104,8 +103,8 @@
       </varlistentry>
 	  
 	  
-      <varlistentry id="dialogs.project.properties.auto.propagation">
-        <term id="dialogs.project.properties.auto.propagation.title"><option>Propagation automatique des traductions</option></term>
+      <varlistentry xml:id="dialogs.project.properties.auto.propagation">
+        <term xml:id="dialogs.project.properties.auto.propagation.title"><option>Propagation automatique des traductions</option></term>
 
 		<listitem>
           <para>S’il y a des segments répétés dans les documents sources, le fait de cocher cette option définira le premier segment traduit comme la traduction par défaut et utilisera automatiquement le même texte cible dans les segments répétés restants.</para>
@@ -116,8 +115,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.hide.tags">
-        <term id="dialogs.project.properties.hide.tags.title"><option>Dissimuler les balises</option></term>
+      <varlistentry xml:id="dialogs.project.properties.hide.tags">
+        <term xml:id="dialogs.project.properties.hide.tags.title"><option>Dissimuler les balises</option></term>
 
 		<listitem>
           <para>Les balises sont généralement utiles pour reproduire dans le texte traduit des mises en page ou des caractéristiques spécifiques du texte source.</para>
@@ -141,8 +140,8 @@
       </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.external.processing.command">
-        <term id="dialogs.project.properties.external.processing.command.title"><option>Commandes locales de post-traitement</option></term>
+      <varlistentry xml:id="dialogs.project.properties.external.processing.command">
+        <term xml:id="dialogs.project.properties.external.processing.command.title"><option>Commandes locales de post-traitement</option></term>
 
 		<listitem>
 		  <warning>
@@ -171,8 +170,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>Filtres de fichiers locaux…</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.filters">
+        <term xml:id="dialogs.project.properties.filters.title"><guibutton>Filtres de fichiers locaux…</guibutton></term>
 
         <listitem>
           <para>Par défaut, les paramètres de filtrage des fichiers sont globaux et partagés par tous les projets. Ils sont dans les préférences <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
@@ -189,8 +188,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.repository.mapping">
-        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Mise en correspondance des dépôts…</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.repository.mapping">
+        <term xml:id="dialogs.project.properties.repository.mapping.title"><guibutton>Mise en correspondance des dépôts…</guibutton></term>
 
         <listitem>
           <para>Lorsque vous travaillez sur un projet en équipe, cette fenêtre vous permet de définir la correspondance entre les dossiers distants et les dossiers locaux.</para>
@@ -199,8 +198,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.external.searches">
-        <term id="dialogs.project.properties.external.searches.title"><guibutton>Recherches externes locales</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.external.searches">
+        <term xml:id="dialogs.project.properties.external.searches.title"><guibutton>Recherches externes locales</guibutton></term>
 
         <listitem>
           <para>Par défaut, les recherches externes sont globales et partagées par tous les projets. Elles sont définies dans les préférences <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
@@ -221,8 +220,8 @@
 	</variablelist>
   </section>
 
-  <section id="dialogs.project.properties.file.locations">
-    <title id="dialogs.project.properties.file.locations.title"><guilabel>Emplacement des fichiers</guilabel></title>
+  <section xml:id="dialogs.project.properties.file.locations">
+    <title xml:id="dialogs.project.properties.file.locations.title"><guilabel>Emplacement des fichiers</guilabel></title>
 
 	<para>Un projet de traduction OmegaT se compose d’un certain nombre de ressources réparties dans des dossiers distincts.</para>
 
@@ -237,8 +236,8 @@
 	<para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> et ses sous-menus pour accéder aux emplacements des ressources du projet.</para>
 
 	<variablelist>
-	  <varlistentry id="dialogs.project.properties.file.locations.browse">
-		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Sélectionner</guibutton></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.browse">
+		<term xml:id="dialogs.project.properties.file.locations.browse.title"><guibutton>Sélectionner</guibutton></term>
 
 		<listitem>
 		  <para>Le bouton <guibutton>Sélectionner</guibutton> est disponible pour toutes les ressources du projet définies par l’utilisatrice.</para>
@@ -251,8 +250,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
-		<term id="dialogs.project.properties.file.locations.source.files.title"><option>Dossier des fichiers à traduire </option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.source.files">
+		<term xml:id="dialogs.project.properties.file.locations.source.files.title"><option>Dossier des fichiers à traduire </option></term>
 
 		<listitem>
 		  <para>Ce dossier contient les fichiers à traduire. OmegaT tente de lire tous les fichiers à la fois et affiche dans l’éditeur les contenus traduisibles qu’il trouve.</para>
@@ -262,8 +261,8 @@
 		  <para>Si le dossier est vide, qu’aucun fichier ne contient de contenu traduisible ou qu’aucun fichier n’est pris en charge par les filtres disponibles, OmegaT vous indique que le dossier est vide.</para>
 
 		  <variablelist>
-			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
-			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions…</guibutton></term>
+			<varlistentry xml:id="dialogs.project.properties.file.locations.exclusions">
+			  <term xml:id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions…</guibutton></term>
 
 			  <listitem>
 				<para>Cliquez sur le bouton <guibutton>Exclusions…</guibutton> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</para>
@@ -282,15 +281,15 @@
 				  </listitem>
 				</itemizedlist>
 
-				<para>La boite de dialogue des motifs d’exclusion vous permet d’ajouter ou de supprimer un motif, ou d’en modifier un en double-cliquant dessus ou en le sélectionnant et en appuyant sur <keycap>F2</keycap>. Utilisez la syntaxe <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant</ulink> pour définir les exclusions.</para>
+				<para>La boite de dialogue des motifs d’exclusion vous permet d’ajouter ou de supprimer un motif, ou d’en modifier un en double-cliquant dessus ou en le sélectionnant et en appuyant sur <keycap>F2</keycap>. Utilisez la syntaxe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant</link> pour définir les exclusions.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
-		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>Dossier des mémoires de traduction</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.translation.memories">
+		<term xml:id="dialogs.project.properties.file.locations.translation.memories.title"><option>Dossier des mémoires de traduction</option></term>
 		<listitem>
 		  <para>Ce dossier contient les fichiers que vous souhaitez utiliser comme mémoires de traduction de référence. OmegaT tente de lire tous les fichiers en même temps et compare leur contenu au segment que vous êtes en train de traduire.</para>
 
@@ -300,8 +299,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
-		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>Dossier des fichiers glossaire</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.glossaries">
+		<term xml:id="dialogs.project.properties.file.locations.glossaries.title"><option>Dossier des fichiers glossaire</option></term>
 
 		<listitem>
 		  <para>Ce dossier contient les fichiers que vous souhaitez utiliser comme glossaires de référence. OmegaT tente de lire tous les fichiers en même temps et compare leur contenu au segment que vous êtes en train de traduire.</para>
@@ -314,8 +313,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
-		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Glossaire modifiable </option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.writable.glossary">
+		<term xml:id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Glossaire modifiable </option></term>
 
 		<listitem>
 		  <para>Le glossaire modifiable est le fichier qu’OmegaT utilise lorsque vous ajoutez des termes traduits dans votre projet à l’aide de la commande <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
@@ -328,8 +327,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
-		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>Dossier des dictionnaires</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.dictionaries">
+		<term xml:id="dialogs.project.properties.file.locations.dictionaries.title"><option>Dossier des dictionnaires</option></term>
 
 		<listitem>
 		  <para>Ce dossier contient les fichiers que vous souhaitez utiliser comme glossaires de référence. OmegaT essaie de lire tous les fichiers à la fois et de faire correspondre leur contenu au segment en cours de traduction.</para>
@@ -340,8 +339,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
-		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>Dossier des fichiers traduits</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.translated.files">
+		<term xml:id="dialogs.project.properties.file.locations.translated.files.title"><option>Dossier des fichiers traduits</option></term>
 
 		<listitem>
 		  <para>Il s’agit du dossier dans lequel OmegaT crée les fichiers traduits.</para>
@@ -357,8 +356,8 @@
 		  <para>Voir la section <link linkend="project.folder.target" endterm="project.folder.target.title"/> pour en savoir plus.</para></listitem>
 	  </varlistentry>
 
-	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
-		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>Dossier des mémoires de traduction exportées</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.exported.tms">
+		<term xml:id="dialogs.project.properties.file.locations.exported.tms.title"><option>Dossier des mémoires de traduction exportées</option></term>
 
 		<listitem>
 		  <para>Il s’agit du dossier dans lequel OmegaT copie l’état actuel de la traduction sous forme de fichiers TMX lors de la création des fichiers traduits.</para>
@@ -374,8 +373,8 @@
 		  <para>Utilisez <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> ou <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> pour créer les fichiers traduits et les fichiers TMX exportés.</para>
 
 		  <variablelist>
-			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
-			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Mémoires de traduction à exporter </option></term>
+			<varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export">
+			  <term xml:id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Mémoires de traduction à exporter </option></term>
 			  <listitem>
 				<para>Cette case à cocher vous permet de choisir les formats dans lesquels OmegaT doit créer les fichiers TMX ci-dessus.</para>
 
@@ -385,21 +384,21 @@
 				  <varlistentry>
 					<term><option>OmegaT</option></term>
 					<listitem>
-					  <para>Un TMX &quot;OmegaT&quot; contient les balises créées par OmegaT sous une forme qui ne peut être utilisée que dans le cadre d’un projet OmegaT.</para>
+					  <para>Un TMX "OmegaT" contient les balises créées par OmegaT sous une forme qui ne peut être utilisée que dans le cadre d’un projet OmegaT.</para>
 					</listitem>
 				  </varlistentry>
 		  
 				  <varlistentry>
 					<term><option>TMX niveau 1</option></term>
 					<listitem>
-					  <para>Un TMX de &quot;niveau 1&quot; supprime toutes les informations relatives aux balises et ne contient que des données textuelles.</para>
+					  <para>Un TMX de "niveau 1" supprime toutes les informations relatives aux balises et ne contient que des données textuelles.</para>
 					</listitem>
 				  </varlistentry>
 				
 				  <varlistentry>
 					<term><option>TMX niveau 2</option></term>
 					<listitem>
-					  <para>Un TMX de &quot;niveau 2&quot; contient des données textuelles ainsi que des balises encapsulées sous une forme compatible avec d’autres outils de TAO.</para>
+					  <para>Un TMX de "niveau 2" contient des données textuelles ainsi que des balises encapsulées sous une forme compatible avec d’autres outils de TAO.</para>
 					</listitem>
 				  </varlistentry>
 				</variablelist>
@@ -407,7 +406,7 @@
 			</varlistentry>
 		  </variablelist>
 		  
-		  <para>Voir la <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">Spécification TMX 1.4b</ulink> pour plus de détails.</para>
+		  <para>Voir la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.gala-global.org/tmx-14b#SectionIntroduction">Spécification TMX 1.4b</link> pour plus de détails.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

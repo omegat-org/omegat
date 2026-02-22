@@ -62,7 +62,7 @@ public final class EditorUtilsGUITest {
             //    background, one segment at as time as you type your translation. Matches
             // We test the last word in the first segment in the paragraph.
             String target = "translation";
-            int begin = 500;
+            int begin = 469;
             int offs = begin + target.length() / 2;
             int end = begin + target.length();
             assertNotNull(window);
@@ -70,7 +70,12 @@ public final class EditorUtilsGUITest {
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
             String word = editPane.getText(posStart, posEnd - posStart);
-            assertEquals(target, word);
+
+            // grab before and after words
+            String before = editPane.getText(posStart - 10, 10);
+            String after = editPane.getText(posEnd, 10);
+
+            assertEquals("We found \"" + before + "[" + word + "]" + after + "\"", target, word);
             assertEquals(begin, posStart);
             assertEquals(end, posEnd);
         }

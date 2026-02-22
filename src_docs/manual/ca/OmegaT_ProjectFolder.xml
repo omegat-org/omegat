@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.project.folder">
-  <title id="chapter.project.folder.title">Carpeta del projecte</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.project.folder">
+  <title xml:id="chapter.project.folder.title">Carpeta del projecte</title>
 
   <section>
 	<title>Estructura per defecte</title>
@@ -66,13 +65,13 @@
 		</listitem>
 
 		<listitem>
-		  <para>Si la carpeta és un repositori buit i el fitxer <filename>omegat.project</filename> conté informació d'un repositori remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
+		  <para>Si la carpeta és un dipòsit buit i el fitxer <filename>omegat.project</filename> conté informació d'un dipòsit remot, l'OmegaT reconeixerà el projecte com a projecte en equip:</para>
 		  
 		  <programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/DEL/REPOSITORI/DEL/PROJECTE/REMOT&quot;&gt;
-            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;repository type="git" url="https://URL/DEL/DIPÒSIT/DEL/PROJECTE/REMOT"&gt;
+            &lt;mapping local="/" repository="/"/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
 &lt;/project&gt;
@@ -90,8 +89,8 @@
 	<para>Un projecte és una carpeta que conté, com a mínim, el següent:</para>
 	
 	<variablelist>
-	  <varlistentry id="project.folder.omegat">
-		<term id="project.folder.omegat.title">omegat</term>
+	  <varlistentry xml:id="project.folder.omegat">
+		<term xml:id="project.folder.omegat.title">omegat</term>
 		<listitem>
 		  <para>Aquesta és la carpeta del projecte que sempre conté el fitxer <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, la memòria de traducció del projecte, i <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, el fitxer d'estadístiques del projecte.</para>
 
@@ -101,8 +100,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="project.folder.omegat.project.file">
-		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+	  <varlistentry xml:id="project.folder.omegat.project.file">
+		<term xml:id="project.folder.omegat.project.file.title">omegat.project</term>
 		<listitem>
 		  <para>Aquest fitxer conté els paràmetres del projecte definits en les <link linkend="dialogs.project.properties">propietats del projecte</link>, com ara les llengües d'origen i de destinació, els lematitzadors corresponents i el tipus de segmentació.</para>
 		  
@@ -114,8 +113,8 @@
 	</variablelist>
   </section>
   
-  <section id="project.folder.source">
-    <title id="project.folder.source.title">source</title>
+  <section xml:id="project.folder.source">
+    <title xml:id="project.folder.source.title">source</title>
     <para>La carpeta «source» conté els fitxers per a traduir.</para>
 
 	<para>Utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> o deixeu anar fitxers en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> per a afegir-los sempre que vulgueu.</para>
@@ -127,8 +126,8 @@
 	<para>Si el vostre projecte de traducció comprèn diverses carpetes i voleu treballar en una carpeta alhora, utilitzeu <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per a accedir a les propietats del projecte i canviar la <link linkend="dialogs.project.properties.file.locations.source.files">carpeta de fitxers d'origen</link> assignada com vulgueu.</para>
   </section>
 
-  <section id="project.folder.target">
-    <title id="project.folder.target.title">target</title>
+  <section xml:id="project.folder.target">
+    <title xml:id="project.folder.target.title">target</title>
     <para>Inicialment, aquesta carpeta està buida.</para>
 
 	<para>S'emplenarà amb els fitxers traduïts cada vegada que utilitzeu <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
@@ -138,8 +137,8 @@
 	<para>Els fitxers creats aquí reflectiran l'estat actual de la traducció. Els segments sense traduir romandran en la llengua d'origen.</para>
   </section>
 
-  <section id="project.folder.tm">
-    <title id="project.folder.tm.title">tm</title>
+  <section xml:id="project.folder.tm">
+    <title xml:id="project.folder.tm.title">tm</title>
     <para>Aquesta carpeta pot contenir qualsevol nombre de fitxers de referència bilingües (fitxers TMX, però també qualsevol fitxer en un format bilingüe compatible amb l'OmegaT, com ara fitxers PO) i els fitxers TMX també es poden comprimir en format GZIP.</para>
 	
 	<para>Es pot configurar l'OmegaT perquè insereixi les coincidències automàticament. Per a recordar-vos que l'OmegaT ha inserit una coincidència i no ho heu fet vós, l'OmegaT afegeix el prefix definit en la preferència <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>.</para>
@@ -151,8 +150,8 @@
 	<para>La carpeta pot contenir qualsevol nombre de subcarpetes, incloent-hi algunes amb funcions especials:</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.tm.auto">
-		<term id="project.folder.tm.auto.title">tm/auto</term>
+      <varlistentry xml:id="project.folder.tm.auto">
+		<term xml:id="project.folder.tm.auto.title">tm/auto</term>
 		<listitem>
 		  <para>Aquesta carpeta està pensada per a fitxers de referència fiables que poden emplenar automàticament exactament els segments que són coincidències exactes i que encara no s'han traduït.</para>
 
@@ -186,8 +185,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.enforce">
-		<term id="project.folder.tm.enforce.title">tm/enforce</term>
+      <varlistentry xml:id="project.folder.tm.enforce">
+		<term xml:id="project.folder.tm.enforce.title">tm/enforce</term>
 		<listitem>
 		  <para>Aquesta carpeta està destinada a fitxers de referència fiables que també es vol que sobreescriguin automàticament els continguts traduïts prèviament.</para>
 
@@ -237,8 +236,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.mt">
-		<term id="project.folder.tm.mt.title">tm/mt</term>
+      <varlistentry xml:id="project.folder.tm.mt">
+		<term xml:id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
 		  <para>Quan s'insereix una coincidència d'un fitxer TMX d'aquesta carpeta, el color de fons del segment actiu canvia a vermell.</para>
 
@@ -246,8 +245,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-      <varlistentry id="project.folder.tm.penalty">
-		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+      <varlistentry xml:id="project.folder.tm.penalty">
+		<term xml:id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
 		<listitem>
 		  <para><literal>xxx</literal> és un nombre del 0 al 100 que actuarà com una penalització restada del percentatge de coincidència dels segments d'aquesta carpeta.</para>
 
@@ -255,8 +254,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.tmx2source">
-		<term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+      <varlistentry xml:id="project.folder.tm.tmx2source">
+		<term xml:id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
 		<listitem>
 		  <para>Podeu mostrar una tercera llengua <emphasis>directament sota</emphasis> el segment d'origen com a referència en una tercera llengua. Consulteu la guia <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> per a conèixer més detalls.</para>
 		</listitem>
@@ -268,18 +267,18 @@
 	</note>
   </section>
 
-  <section id="project.folder.exported.tm">
-	<title id="project.folder.exported.tm.title">carpeta de memòries de traducció exportades</title>
+  <section xml:id="project.folder.exported.tm">
+	<title xml:id="project.folder.exported.tm.title">carpeta de memòries de traducció exportades</title>
 	<para>Per defecte, és la carpeta del projecte en si, però podeu canviar-ne la ubicació perquè sigui més pràctic compartir els fitxers de memòries de traducció exportats. Consulteu la guia <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> per a conèixer més detalls.</para>
   </section>
 
-  <section id="project.folder.dictionary">
-    <title id="project.folder.dictionary.title">dictionary</title>
+  <section xml:id="project.folder.dictionary">
+    <title xml:id="project.folder.dictionary.title">dictionary</title>
     <para>Aquesta carpeta està inicialment buida i s'utilitza per a emmagatzemar qualsevol diccionari que afegiu al projecte.</para>
 
 	<para>Els termes del diccionari que coincideixen amb parts del segment es mostren en la subfinestra <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Consulteu les preferències de <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> per a conèixer més detalls.</para>
 
-    <para>L'OmegaT admet diccionaris en el format StarDict o Lingvo DSL. Podeu trobar alguns diccionaris en la <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki de l'OmegaT</ulink>.</para>
+    <para>L'OmegaT admet diccionaris en el format StarDict o Lingvo DSL. Podeu trobar alguns diccionaris en la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki de l'OmegaT</link>.</para>
 
 	<para>Per a instal·lar diccionaris:</para>
 
@@ -289,22 +288,22 @@
       </listitem>
 	  
       <listitem>
-        <para>Extraieu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
+        <para>Extreu-ne el contingut en aquesta carpeta. Hi hauria d'haver tres fitxers per diccionari, amb les extensions <filename>dz</filename>, <filename>idx</filename> i <filename>ifo</filename>.</para>
       </listitem>
     </orderedlist>
 
 	<para>Si voleu suprimir paraules de les coincidències potencials del diccionari, afegiu un fitxer <filename>ignore.txt</filename> codificat en UTF-8 a la carpeta. El fitxer ha de tenir una paraula per línia. L'OmegaT ignorarà totes les paraules d'aquesta llista.</para>
   </section>
 
-  <section id="project.folder.glossary">
-    <title id="project.folder.glossary.title">glossary</title>
+  <section xml:id="project.folder.glossary">
+    <title xml:id="project.folder.glossary.title">glossary</title>
     <para>Inicialment, aquesta carpeta està buida. S'utilitza per a emmagatzemar el glossari modificable per defecte i qualsevol altre glossari que utilitzeu en el projecte.</para>
 
 	<para>Els termes dels glossaris que coincideixen amb parts del segment es mostren en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.glossary.txt">
-        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+      <varlistentry xml:id="project.folder.glossary.txt">
+        <term xml:id="project.folder.glossary.txt.title">glossary.txt</term>
         <listitem>
           <para>Aquest és el glossari modificable del projecte. Es crea la primera vegada que utilitzeu <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
 
@@ -314,13 +313,13 @@
 	</variablelist>
   </section>
 
-  <section id="project.folder.omegat.folder">
-    <title id="project.folder.omegat.folder.title">omegat</title>
+  <section xml:id="project.folder.omegat.folder">
+    <title xml:id="project.folder.omegat.folder.title">omegat</title>
     <para>La carpeta <filename class="directory">omegat</filename> conté, com a mínim, els fitxers <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> i <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. També pot incloure altres fitxers.</para>
 
     <variablelist>
-      <varlistentry id="project.folder.project.save.tmx">
-        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
+      <varlistentry xml:id="project.folder.project.save.tmx">
+        <term xml:id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
           <para>Aquest és el fitxer més important del projecte. Quan creeu un projecte nou, el fitxer està buit i s'emplena gradualment amb les traduccions del text dels fitxers de la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
@@ -330,22 +329,22 @@
 		</listitem>
       </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.bak">
-		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.bak">
+		<term xml:id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
 		  <para>Aquest fitxer és una còpia de seguretat de <filename>project_save.tmx</filename> i es recrea automàticament cada vegada que es modifica <filename>project_save.tmx</filename>, ja sigui després d'utilitzar <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/> o com a còpia de seguretat periòdica cada 3 minuts per defecte. Consulteu la preferència <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> per a conèixer més detalls.</para>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
-		<term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.marcatemporal.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.timestamp.bak">
+		<term xml:id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.marcatemporal.bak</term>
 		<listitem>
 		  <para>Cada vegada que es carrega un projecte, l'OmegaT crea una còpia de seguretat del fitxer <filename>project_save.tmx</filename> amb el nom <filename>project_save.tmx.[marca de temps].bak</filename>. L'OmegaT conserva un màxim de10 d'aquests fitxers.</para>
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.project.stats">
-        <term id="project.folder.project.stats.title">project_stats.txt</term>
+      <varlistentry xml:id="project.folder.project.stats">
+        <term xml:id="project.folder.project.stats.title">project_stats.txt</term>
         <listitem>
           <para>Aquest és el fitxer d'estadístiques per a tot el projecte. S'actualitza cada vegada que es torna a carregar el projecte.</para>
 
@@ -353,23 +352,23 @@
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.project.stats.match">
-        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match">
+        <term xml:id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
         <listitem>
           <para>Aquest fitxer conté les estadístiques de coincidències del projecte més recents. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> per a generar-lo.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.project.stats.match.per.file">
-        <term id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match.per.file">
+        <term xml:id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
         <listitem>
           <para>Aquest fitxer conté les estadístiques de coincidències del projecte per fitxer més recents. Utilitzeu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics.per.file" endterm="menus.tools.match.statistics.per.file.title"/> per a generar-lo.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="       project.folder.omegat.spellcheck">
-        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
-        <term id="project.folder.omegat.learned.words">learned_words.txt</term>
+      <varlistentry xml:id="project.folder.omegat.spellcheck">
+        <term xml:id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
+        <term xml:id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
           <para>Aquests fitxers els crea i utilitza el corrector ortogràfic. Podeu afegir termes a la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> fent clic dret sobre una paraula marcada com a incorrecta i seleccionant <guimenuitem>Ignora-ho tot</guimenuitem> (per a les paraules que vulgueu ometre durant la correcció ortogràfica) o <guimenuitem>Afegeix al diccionari</guimenuitem> (per a les paraules que vulgueu acceptar com a correctes), respectivament, en el <link linkend="panes.editor.context.menu">menú contextual</link>. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
 
@@ -377,43 +376,43 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+      <varlistentry xml:id="project.folder.omegat.segmentation">
+        <term xml:id="project.folder.omegat.segmentation.title">segmentation.conf</term>
         <listitem>
           <para>Aquest fitxer conté les regles de segmentació específiques del projecte.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.filters">
-        <term id="project.folder.omegat.filters.title">filters.xml</term>
+      <varlistentry xml:id="project.folder.omegat.filters">
+        <term xml:id="project.folder.omegat.filters.title">filters.xml</term>
         <listitem>
           <para>Aquest fitxer conté els filtres de fitxers específics del projecte.</para>
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.uiLayout">
-        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
+      <varlistentry xml:id="project.folder.omegat.uiLayout">
+        <term xml:id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
         <listitem>
           <para>Aquest fitxer conté la configuració de la GUI específica del projecte.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.finder">
-        <term id="project.folder.omegat.finder.title">finder.xml</term>
+      <varlistentry xml:id="project.folder.omegat.finder">
+        <term xml:id="project.folder.omegat.finder.title">finder.xml</term>
         <listitem>
           <para>Aquest fitxer conté les cerques externes específiques del projecte.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.file.order">
-        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
+      <varlistentry xml:id="project.folder.omegat.file.order">
+        <term xml:id="project.folder.omegat.file.order.title">files_order.txt</term>
         <listitem>
           <para>Aquest fitxer es crea si canvieu manualment l'ordre dels fitxers de la finestra <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.last.entry">
-        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+      <varlistentry xml:id="project.folder.omegat.last.entry">
+        <term xml:id="project.folder.omegat.last.entry.title">last_entry.properties</term>
         <listitem>
           <para>Aquest fitxer conserva un registre del darrer segment visitat, incloent-hi el número, el contingut del text d'origen, el nom del fitxer i la data, de manera que podeu tornar-hi quan torneu a carregar el projecte.</para>
         </listitem>
@@ -421,8 +420,8 @@
     </variablelist>
   </section>
 
-  <section id="project.folder.repositories">
-    <title id="project.folder.repositories.title">.repositories</title>
+  <section xml:id="project.folder.repositories">
+    <title xml:id="project.folder.repositories.title">.repositories</title>
     <para>En un projecte en equip, aquesta carpeta conté una còpia amb versions de l'estructura de carpetes del projecte enllaçada directament amb el servidor remot.</para>
 
     <para>Podeu fer canvis en els fitxers remots (com ara suprimir-los o substituir-los) fent canvis en aquesta carpeta i utilitzant un client del Git o SVN per a sincronitzar-los amb el servidor remot. Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="de" id="freedoms.article">
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="de">
     <section>
-        <title id="freedoms">Freiheiten</title>
-        <para>OmegaT ist ein kostenloses CAT-Tool für professionelle Übersetzer (CAT steht für Computer-Assisted Translation). Es wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Siehe <guimenu>&gt; Hilfe</guimenu> <guimenu>&gt; Über...</guimenu>. Die Lizenz gewährt Ihnen die folgenden Freiheiten:<itemizedlist id="freedoms.list">
+        <title>Freiheiten</title>
+        <para>OmegaT ist ein kostenloses CAT-Tool für professionelle Übersetzer (CAT steht für Computer-Assisted Translation). Es wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Siehe <guimenu>&gt; Hilfe</guimenu> <guimenu>&gt; Über...</guimenu>. Die Lizenz gewährt Ihnen die folgenden Freiheiten:<itemizedlist>
             <listitem>
                 <para>Die Freiheit, die Software für beliebige Zwecke zu nutzen.</para>
             </listitem>

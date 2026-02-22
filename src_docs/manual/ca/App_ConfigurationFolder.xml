@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="configuration.folder">
-  <title id="configuration.folder.title">Carpeta de configuració</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="configuration.folder">
+  <title xml:id="configuration.folder.title">Carpeta de configuració</title>
   <para>La carpeta de configuració emmagatzema la majoria de les opcions i preferències de l'OmegaT per a l'usuari.</para>
   
   <para>Utilitzeu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> per a accedir-hi directament.</para>
 
-  <section id="configuration.folder.location">
-    <title id="configuration.folder.location.title">Ubicació</title>	
+  <section xml:id="configuration.folder.location">
+    <title xml:id="configuration.folder.location.title">Ubicació</title>	
 	<para>La ubicació de la carpeta de configuració per defecte varia segons el sistema (el caràcter <emphasis>~</emphasis> representa la carpeta d'inici):<variablelist>
 	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
 	  <varlistentry><term>macOS</term><listitem><para><filename>~/Biblioteca/Preferències/OmegaT</filename></para></listitem></varlistentry>
@@ -21,18 +20,18 @@
 	</note>
   </section>
   
-  <section id="configuration.folder.default.contents">
-    <title id="configuration.folder.default.contents.title">Contingut per defecte</title>
+  <section xml:id="configuration.folder.default.contents">
+    <title xml:id="configuration.folder.default.contents.title">Contingut per defecte</title>
 	<variablelist>
-	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
-		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
+	  <varlistentry xml:id="configuration.folder.default.contents.omegat.prefs">
+		<term xml:id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
 		<listitem>
 		  <para>Aquest fitxer inclou diverses preferències d'usuari importants.</para>
 
 		  <para>Algunes preferències no tenen un equivalent en la interfície d'usuari. S'han de modificar manualment.</para>
 		  
-		  <example id="no.source.file.display">
-			<title id="no.source.file.display.title">No mostris automàticament la llista de fitxers d'origen</title>
+		  <example xml:id="no.source.file.display">
+			<title xml:id="no.source.file.display.title">No mostris automàticament la llista de fitxers d'origen</title>
 			<para>Per a impedir que la finestra amb llista de fitxers d'origen s'obri automàticament en carregar un projecte, cerqueu <token>&lt;project_files_show_on_load&gt;</token> i substituïu <token>true</token> per <token>false</token>:</para>
 
 			<para><programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting></para>
@@ -44,50 +43,46 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="configuration.folder.default.contents.uilayout">
-		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
+	  <varlistentry xml:id="configuration.folder.default.contents.uilayout">
+		<term xml:id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
 		<listitem>
 		  <para>Aquest fitxer descriu la disposició general de l'OmegaT.</para>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="configuration.folder.default.contents.logs">
-		<term id="configuration.folder.default.contents.logs.title">logs/</term>
+	  <varlistentry xml:id="configuration.folder.default.contents.logs">
+		<term xml:id="configuration.folder.default.contents.logs.title">logs/</term>
 		<listitem>
-		  <para>Aquesta carpeta conté diversos fitxers de registre. El format del nom del fitxer és <filename>OmegaT_99999_aaaaMMdd-hhmmss.log</filename>.</para>
-
-		  <para>La part «99999» és un ID de sessió de 5 dígits entre 00000 i 99999. Serà un nombre aleatori.</para>
-
-		  <para>La part «aaaaMMdd-hhmmss» és una marca de data i hora; per exemple, «20240704-201200» és el 4 de juliol de 2024 a les 20:12:00 hora local.</para>
+		  <para>Aquesta carpeta conté diversos fitxers de registre. El més recent és <filename>OmegaT.log</filename>.</para>
 
 		  <para>Aquests fitxers registren diversos missatges de l'estat intern i els esdeveniments del programa generats durant l'execució de l'OmegaT. Si l'OmegaT té cap comportament estrany, incloeu aquest fitxer o la part rellevant en l'informe.</para>
 
-		  <para>Utilitzeu <link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/> per a visualitzar el contingut del fitxer de registre de la sessió actual.</para>
+		  <para>Utilitzeu <link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/> per a visualitzar el contingut del fitxer.</para>
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="configuration.folder.default.contents.script">
-		<term id="configuration.folder.default.contents.script.title">script/</term>
+	  <varlistentry xml:id="configuration.folder.default.contents.script">
+		<term xml:id="configuration.folder.default.contents.script.title">script/</term>
 		<listitem>
 		  <para>Si s'utilitzen les funcions aplicables, aquesta carpeta pot contenir fins a tres fitxers de text:</para>
 
 		  <variablelist>
-			<varlistentry id="configuration.folder.default.contents.script.selection">
-			  <term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
+			<varlistentry xml:id="configuration.folder.default.contents.script.selection">
+			  <term xml:id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
 			  <listitem>
 				<para>Aquest fitxer emmagatzema el text seleccionat actualment quan s'utilitza <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/>. El text del fitxer se substitueix cada vegada que es crida aquesta funció.</para>
 			  </listitem>
 			</varlistentry>
 		  
-			<varlistentry id="configuration.folder.default.contents.script.source">
-			  <term id="configuration.folder.default.contents.script.source.title">source.txt</term>
+			<varlistentry xml:id="configuration.folder.default.contents.script.source">
+			  <term xml:id="configuration.folder.default.contents.script.source.title">source.txt</term>
 			  <listitem>
 				<para>Aquest fitxer conté el <emphasis>text original</emphasis> del segment actual quan la preferència <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> està habilitada. El text del fitxer se substitueix cada vegada que s'accedeix a un segment nou.</para>
 			  </listitem>
 			</varlistentry>
 
-			<varlistentry id="configuration.folder.default.contents.script.target">
-			  <term id="configuration.folder.default.contents.script.target.title">target.txt</term>
+			<varlistentry xml:id="configuration.folder.default.contents.script.target">
+			  <term xml:id="configuration.folder.default.contents.script.target.title">target.txt</term>
 			  <listitem>
 				<para>Aquest fitxer conté el <emphasis>text traduït</emphasis> del segment actual quan la preferència <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> està habilitada. El text del fitxer se substitueix cada vegada que s'accedeix a un segment nou.</para>
 			  </listitem>
@@ -100,71 +95,71 @@
 	</variablelist>
   </section>
   
-  <section id="configuration.folder.extra.contents">
-    <title id="configuration.folder.extra.contents.title">Contingut addicional</title>
+  <section xml:id="configuration.folder.extra.contents">
+    <title xml:id="configuration.folder.extra.contents.title">Contingut addicional</title>
 
 	<variablelist>
-	  <varlistentry id="configuration.folder.extra.contents.editorshortcuts">
-		<term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
+	  <varlistentry xml:id="configuration.folder.extra.contents.editorshortcuts">
+		<term xml:id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
 		<listitem>
 		  <para>Aquest fitxer de paràmetres conté les dreceres personalitzades de l'editor. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> per a conèixer més detalls.</para>
 		</listitem>
 	  </varlistentry>
 	
-	  <varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
-		<term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
+	  <varlistentry xml:id="configuration.folder.extra.contents.maninmenushortcut">
+		<term xml:id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
 		<listitem>
 		  <para>Aquest fitxer de paràmetres conté les dreceres personalitzades de la interfície d'usuari. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> per a conèixer més detalls.</para>
 		</listitem>
 	  </varlistentry>
 	
-	  <varlistentry id="configuration.folder.extra.contents.filters">
-		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
+	  <varlistentry xml:id="configuration.folder.extra.contents.filters">
+		<term xml:id="configuration.folder.extra.contents.filters.title">filters.xml</term>
 		<listitem>
 		  <para>Aquest fitxer de paràmetres conté els filtres de fitxers personalitzats. Consulteu les preferències de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> per a conèixer més detalls.</para>
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="configuration.folder.extra.contents.finder">
-		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
+	  <varlistentry xml:id="configuration.folder.extra.contents.finder">
+		<term xml:id="configuration.folder.extra.contents.finder.title">finder.xml</term>
 		<listitem>
 		  <para>Aquest fitxer de paràmetres conté els paràmetres de la cerca externa personalitzats. Consulteu les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> per a conèixer més detalls.</para>
 		</listitem>
 	</varlistentry>
 	
-	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
-	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
+	<varlistentry xml:id="configuration.folder.extra.contents.omegat.autotext">
+	  <term xml:id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
 	  <listitem>
 		<para>Aquest fitxer de paràmetres conté els paràmetres personalitzats del text automàtic. Consulteu les preferències de <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> per a conèixer més detalls.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="configuration.folder.extra.contents.repositories">
-	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
+	<varlistentry xml:id="configuration.folder.extra.contents.repositories">
+	  <term xml:id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
 	  <listitem>
-		<para>Aquest fitxer conté la informació d'inici de sessió per als repositoris dels projectes en equip.<warning><para>El contingut del fitxer no està xifrat.</para></warning>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
+		<para>Aquest fitxer conté la informació d'inici de sessió per als dipòsits dels projectes en equip.<warning><para>El contingut del fitxer no està xifrat.</para></warning>Consulteu la guia <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per a conèixer més detalls.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	<varlistentry xml:id="configuration.folder.extra.contents.segmentation">
+	  <term xml:id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
 	  <listitem>
 		<para>Aquest fitxer de paràmetres conté els paràmetres personalitzats de segmentació. Consulteu les preferències de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> per a conèixer més detalls.</para>
 	  </listitem>
 	</varlistentry>
 	
-	<varlistentry id="configuration.folder.extra.contents.plugin">
-	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
+	<varlistentry xml:id="configuration.folder.extra.contents.plugin">
+	  <term xml:id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
 		<para>Aquesta carpeta proporciona una ubicació estàndard per als connectors d'extensió de l'OmegaT instal·lats manualment. Consulteu les preferències de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> per a conèixer més detalls.</para>
 		<para>També és possible instal·lar connectors en la carpeta <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> de l'aplicació.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="configuration.folder.extra.contents.spelling">
-	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
+	<varlistentry xml:id="configuration.folder.extra.contents.spelling">
+	  <term xml:id="configuration.folder.extra.contents.spelling.title">spelling/</term>
 	  <listitem>
-		<para>Aquesta carpeta conté els diccionaris ortogràfics personalitzats. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+		<para>Aquesta carpeta conté els diccionaris ortogràfics. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
 	  </listitem>
 	</varlistentry>
 	</variablelist>

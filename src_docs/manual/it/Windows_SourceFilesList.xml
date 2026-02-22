@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.source.files.list">
-  <title id="windows.source.files.list.title"><guilabel>File di partenza</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.source.files.list">
+  <title xml:id="windows.source.files.list.title"><guilabel>File di partenza</guilabel></title>
 
   <para>This window is displayed automatically when OmegaT loads a project, and
   can be called at any time using <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
@@ -62,15 +61,15 @@
   <para>The buttons at the bottom of the window can be used to add files to your project:</para>
   
   <variablelist>
-	<varlistentry id="windows.source.files.list.copy.files">
-	  <term id="windows.source.files.list.copy.files.title"><guibutton>Aggiungi file...</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.copy.files">
+	  <term xml:id="windows.source.files.list.copy.files.title"><guibutton>Aggiungi file...</guibutton></term>
 	<listitem>
 	  <para>Copia i file selezionati nella cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/> e ricarica il progetto per prendere in considerazione i nuovi file.</para>
 	</listitem>
 	</varlistentry>
 	
-	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Aggiungi pagina MediaWiki...</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.download.page">
+	  <term xml:id="windows.source.files.list.download.page.title"><guibutton>Aggiungi pagina MediaWiki...</guibutton></term>
 	  <listitem>
 		<para>Asks for the URL of the page and downloads it into the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
 		folder.</para>

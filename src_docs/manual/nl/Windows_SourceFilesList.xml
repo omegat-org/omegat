@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.source.files.list">
-  <title id="windows.source.files.list.title"><guilabel>Bronbestanden</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.source.files.list">
+  <title xml:id="windows.source.files.list.title"><guilabel>Bronbestanden</guilabel></title>
 
   <para>Dit venster wordt automatisch weergegeven als OmegaT een project laadt en kan op elk moment worden opgeroepen met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
 
@@ -39,22 +38,22 @@
 
   <para>Het aantal <emphasis role="bold">Unieke</emphasis> segmenten wordt berekend door het aantal herhaalde segmenten te verwijderen uit het totale aantal segmenten.</para>
 
-  <para>Het verschil tussen &quot;Aantal segmenten&quot; en &quot;Aantal unieke segmenten&quot; geeft een ruwe benadering van het aantal herhalingen in een tekst. Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> om meer informatie te krijgen.</para>
+  <para>Het verschil tussen "Aantal segmenten" en "Aantal unieke segmenten" geeft een ruwe benadering van het aantal herhalingen in een tekst. Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> om meer informatie te krijgen.</para>
 
   <para>Aanpassen van de segmentatieregels kan het aantal segmenten/unieke segmenten wijzigen. Zoiets zou echter in het algemeen moeten worden vermeden nadat u met de vertaling van het project bent begonnen. Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor details.</para>
 
   <para>De knoppen aan de onderzijde van het venster kunnen worden gebruikt om bestanden aan uw project toe te voegen:</para>
   
   <variablelist>
-	<varlistentry id="windows.source.files.list.copy.files">
-	  <term id="windows.source.files.list.copy.files.title"><guibutton>Bestanden toevoegen…</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.copy.files">
+	  <term xml:id="windows.source.files.list.copy.files.title"><guibutton>Bestanden toevoegen…</guibutton></term>
 	<listitem>
 	  <para>Kopieert de geselecteerde bestanden naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/> en herlaadt het project om rekening te houden met de nieuwe bestanden.</para>
 	</listitem>
 	</varlistentry>
 	
-	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Pagina van MediaWiki downloaden…</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.download.page">
+	  <term xml:id="windows.source.files.list.download.page.title"><guibutton>Pagina van MediaWiki downloaden…</guibutton></term>
 	  <listitem>
 		<para>Vraagt naar de URL van de pagina en download die naar de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 	  </listitem>

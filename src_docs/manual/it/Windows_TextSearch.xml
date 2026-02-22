@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.search">
-  <title id="windows.text.search.title"><guilabel>Ricerca testo</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
+  <title xml:id="windows.text.search.title"><guilabel>Ricerca testo</guilabel></title>
 
   <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> to open a new search window and
   enter the word or phrase you wish to search for in the search field.</para>
@@ -22,8 +21,8 @@
   
   <para>Matches will be displayed in bold blue characters.</para>
 
-  <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">Search for ドイツ</title>
+  <example xml:id="search.for.doitsu">
+	<title xml:id="search.for.doitsu.title">Search for ドイツ</title>
 	<para>
 	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -76,16 +75,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Search type</title>
+  <section xml:id="windows.text.search.methods">
+    <title xml:id="windows.text.search.methods.title">Search type</title>
 
     <para>Use the radio buttons to select the type of search.</para>
 
 	<para>The following search types are available:</para>
 
     <variablelist>
-      <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">Exact search</term>
+      <varlistentry xml:id="windows.text.search.methods.exact">
+        <term xml:id="windows.text.search.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as entered in the search
           field.</para>
@@ -94,8 +93,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">Keyword
+      <varlistentry xml:id="windows.text.search.methods.keyword">
+        <term xml:id="windows.text.search.methods.keyword.title">Keyword
         search</term>
         <listitem>
           <para>Search for segments containing each of the search terms
@@ -134,8 +133,8 @@
 	</variablelist>
 
 	<variablelist>
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">Espressioni regolari</term>
+      <varlistentry xml:id="windows.text.search.methods.regex">
+        <term xml:id="windows.text.search.methods.regex.title">Espressioni regolari</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 		  <para>Regular expressions are a very powerful way to search for general or complex patterns rather than exact strings. Vedere l'appendice <link linkend="app.regex" endterm="app.regex.title"/>per i dettagli.</para>
@@ -150,8 +149,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">Opzioni</title>
+  <section xml:id="windows.text.search.options">
+	<title xml:id="windows.text.search.options.title">Opzioni</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -322,8 +321,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Results display</title>
+  <section xml:id="windows.text.search.result.display">
+    <title xml:id="windows.text.search.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated
@@ -357,12 +356,12 @@
 	
 	<para>The selected segment is highlighted in green:</para>
 
-  	<example id="select.second.match">
-	  <title id="select.second.match.title">Select the second match</title>
+  	<example xml:id="select.second.match">
+	  <title xml:id="select.second.match.title">Select the second match</title>
 	  <para>
 		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
-<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
 	  </para>
 	</example>
@@ -387,8 +386,8 @@
 	</variablelist>
   </section>
   
-  <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">Filtro</title>
+  <section xml:id="windows.text.search.filter">
+    <title xml:id="windows.text.search.filter.title">Filtro</title>
 
 	<para>Click on the <guibutton>Filter</guibutton> button to show only the 
 	matching search result segments in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane. To remove the filter, click on the

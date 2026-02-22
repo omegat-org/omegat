@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.project.folder">
-  <title id="chapter.project.folder.title">Cartella del progetto</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.project.folder">
+  <title xml:id="chapter.project.folder.title">Cartella del progetto</title>
 
   <section>
 	<title>Struttura predefinita</title>
@@ -71,8 +70,8 @@
 		  <programlisting>...
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY&quot;&gt;
-            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;repository type="git" url="https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY"&gt;
+            &lt;mapping local="/" repository="/"/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
 &lt;/project&gt;
@@ -90,8 +89,8 @@
 	<para>Un progetto è una cartella che contiene, come minimo, i seguenti elementi:</para>
 	
 	<variablelist>
-	  <varlistentry id="project.folder.omegat">
-		<term id="project.folder.omegat.title">omegat</term>
+	  <varlistentry xml:id="project.folder.omegat">
+		<term xml:id="project.folder.omegat.title">omegat</term>
 		<listitem>
 		  <para>Questa è la cartella del progetto che contiene sempre <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, la memoria di traduzione del progetto, e <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, il file dei dati statistici del progetto.</para>
 
@@ -101,8 +100,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="project.folder.omegat.project.file">
-		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+	  <varlistentry xml:id="project.folder.omegat.project.file">
+		<term xml:id="project.folder.omegat.project.file.title">omegat.project</term>
 		<listitem>
 		  <para>Questo file contiene i parametri del progetto definiti nelle <link linkend="dialogs.project.properties">proprietà del progetto</link>, quali la lingua di partenza e di arrivo, i relativi tokenizer e il tipo di segmentazione.</para>
 		  
@@ -114,8 +113,8 @@
 	</variablelist>
   </section>
   
-  <section id="project.folder.source">
-    <title id="project.folder.source.title">source</title>
+  <section xml:id="project.folder.source">
+    <title xml:id="project.folder.source.title">source</title>
     <para>Questa cartella contiene i file da tradurre.</para>
 
 	<para>Usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> o trascinare e rilasciare i file sul pannello <link linkend="panes.editor" endterm="panes.editor.title"/> per aggiungerli in qualsiasi momento.</para>
@@ -127,8 +126,8 @@
 	<para>Se il progetto di traduzione implica svariate cartelle e si preferisce lavorare una cartella alla volta, usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per accedere alle proprietà del progetto e cambiare a proprio piacimento la <link linkend="dialogs.project.properties.file.locations.source.files">cartella source</link> assegnata.</para>
   </section>
 
-  <section id="project.folder.target">
-    <title id="project.folder.target.title">target</title>
+  <section xml:id="project.folder.target">
+    <title xml:id="project.folder.target.title">target</title>
     <para>Al principio questa cartella è vuota.</para>
 
 	<para>Verrà popolata con i file tradotti ogni volta che si usa <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
@@ -138,8 +137,8 @@
 	<para>I file creati qui rispecchiano lo stato attuale della traduzione. I segmenti non tradotti resteranno nella lingua di partenza.</para>
   </section>
 
-  <section id="project.folder.tm">
-    <title id="project.folder.tm.title">tm</title>
+  <section xml:id="project.folder.tm">
+    <title xml:id="project.folder.tm.title">tm</title>
     <para>Questa cartella è in grado di contenere un numero qualsiasi di documenti di riferimento bilingui (file TMX ma anche qualsiasi file in formato bilingue supportato da OmegaT, inclusi i file PO, ecc.) e i file TMX che possono essere pure compressi nel formato gzip.</para>
 	
 	<para>OmegaT può essere istruito a inserire automaticamente le concordanze. Per evidenziare che una concordanza è stata aggiunta dal programma e non dal traduttore, OmegaT aggiunge il prefisso impostato nelle preferenze <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/>.</para>
@@ -151,8 +150,8 @@
 	<para>La cartella può contenere qualsiasi numero di sottocartelle, incluso quelle contenenti funzioni speciali:</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.tm.auto">
-		<term id="project.folder.tm.auto.title">tm/auto</term>
+      <varlistentry xml:id="project.folder.tm.auto">
+		<term xml:id="project.folder.tm.auto.title">tm/auto</term>
 		<listitem>
 		  <para>Questa cartella è concepita per contenere file di riferimento affidabili che possono popolare automaticamente le corrispondenze esatte e i segmenti non ancora tradotti.</para>
 
@@ -186,8 +185,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.enforce">
-		<term id="project.folder.tm.enforce.title">tm/enforce</term>
+      <varlistentry xml:id="project.folder.tm.enforce">
+		<term xml:id="project.folder.tm.enforce.title">tm/enforce</term>
 		<listitem>
 		  <para>Questa cartella è fatta per i file di riferimento affidabili che sono anche concepiti per sovrascrivere il contenuto tradotto in precedenza.</para>
 
@@ -237,8 +236,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.mt">
-		<term id="project.folder.tm.mt.title">tm/mt</term>
+      <varlistentry xml:id="project.folder.tm.mt">
+		<term xml:id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
 		  <para>Quando viene inserita una concordanza proveniente da una TMX contenuta in questa cartella, il colore dello sfondo del segmento attivo diventa rosso.</para>
 
@@ -246,8 +245,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-      <varlistentry id="project.folder.tm.penalty">
-		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+      <varlistentry xml:id="project.folder.tm.penalty">
+		<term xml:id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
 		<listitem>
 		  <para><literal>xxx</literal> è un numero da 0 a 100 che funziona come penalità sottratta dalla percentuale corrispondente di segmenti provenienti da questa cartella.</para>
 
@@ -255,8 +254,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.tmx2source">
-		<term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+      <varlistentry xml:id="project.folder.tm.tmx2source">
+		<term xml:id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
 		<listitem>
 		  <para>È possibile visualizzare una terza lingua, da utilizzare come ulteriore riferimento linguistico, <emphasis>subito sotto</emphasis> il segmento. Vedere la guida all'uso <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> per i dettagli.</para>
 		</listitem>
@@ -268,18 +267,18 @@
 	</note>
   </section>
 
-  <section id="project.folder.exported.tm">
-	<title id="project.folder.exported.tm.title">exported tms folder</title>
+  <section xml:id="project.folder.exported.tm">
+	<title xml:id="project.folder.exported.tm.title">exported tms folder</title>
 	<para>Per impostazione predefinita, tale cartella è quella del progetto in sé, ma è possibile cambiare la sua posizione al fine di facilitare la condivisione dei file delle memorie di traduzione esportati. Vedere la guida all'uso <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> per i dettagli.</para>
   </section>
 
-  <section id="project.folder.dictionary">
-    <title id="project.folder.dictionary.title">dictionary</title>
+  <section xml:id="project.folder.dictionary">
+    <title xml:id="project.folder.dictionary.title">dictionary</title>
     <para>Al principio vuota, questa cartella viene utilizzata per memorizzare tutti i dizionari che sono aggiunti al progetto.</para>
 
 	<para>I termini del dizionario che coincidono con parti del segmento sono mostrati nel pannello <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Vedere le preferenze <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> per i dettagli.</para>
 
-    <para>OmegaT supporta i dizionari nel formato StarDict e Lingvo DSL. Alcuni dizionari sono disponibili nel <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">wiki di OmegaT</ulink>.</para>
+    <para>OmegaT supporta i dizionari nel formato StarDict e Lingvo DSL. Alcuni dizionari sono disponibili nel <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">wiki di OmegaT</link>.</para>
 
 	<para>Per installare i dizionari:</para>
 
@@ -296,15 +295,15 @@
 	<para>Nel caso si volessero rimuovere parole da potenziali corrispondenze del dizionario, aggiungere nella cartella un file <filename>ignore.txt</filename> codificato in UTF-8. Il file deve contenere una parola per riga. OmegaT ignorerà tutte le parole contenute in questo elenco.</para>
   </section>
 
-  <section id="project.folder.glossary">
-    <title id="project.folder.glossary.title">glossary</title>
+  <section xml:id="project.folder.glossary">
+    <title xml:id="project.folder.glossary.title">glossary</title>
     <para>Al principio questa cartella è vuota. Viene utilizzata per memorizzare il glossario scrivibile predefinito e qualsiasi altro glossario che si utilizza nel progetto.</para>
 
 	<para>I termini del glossario che coincidono con parti del segmento sono mostrati nel pannello <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Vedere l'appendice <link linkend="app.glossaries" endterm="app.glossaries.title"/> per i dettagli.</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.glossary.txt">
-        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+      <varlistentry xml:id="project.folder.glossary.txt">
+        <term xml:id="project.folder.glossary.txt.title">glossary.txt</term>
         <listitem>
           <para>Questo è il glossario scrivibile del progetto. Viene creato la prima volta che si utilizza <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
 
@@ -314,13 +313,13 @@
 	</variablelist>
   </section>
 
-  <section id="project.folder.omegat.folder">
-    <title id="project.folder.omegat.folder.title">omegat</title>
+  <section xml:id="project.folder.omegat.folder">
+    <title xml:id="project.folder.omegat.folder.title">omegat</title>
     <para>La cartella <filename class="directory">omegat</filename> contiene, come minimo, i file <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> e <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. Può contenere anche diversi altri file.</para>
 
     <variablelist>
-      <varlistentry id="project.folder.project.save.tmx">
-        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
+      <varlistentry xml:id="project.folder.project.save.tmx">
+        <term xml:id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
           <para>È il file più importante del progetto. Quando si crea un nuovo progetto il file è vuoto e viene gradualmente riempito con le traduzioni del testo nei file che si trovano nella cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
@@ -330,22 +329,22 @@
 		</listitem>
       </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.bak">
-		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.bak">
+		<term xml:id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
 		  <para>È una copia di sicurezza del file <filename>project_save.tmx</filename> ed è ricreato automaticamente ogni volta che il file <filename>project_save.tmx</filename> viene modificato, sia usando <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, sia tramite creazione della copia di sicurezza regolare impostata in modo predefinito ogni tre minuti. Vedere la preferenza <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> per i dettagli.</para>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
-		<term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.timestamp.bak">
+		<term xml:id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</term>
 		<listitem>
 		  <para>OmegaT crea una copia di sicurezza del file <filename>project_save.tmx</filename>, chiamata <filename>project_save.tmx.[time stamp].bak</filename>, ogni volta che un progetto viene caricato. OmegaT conserva fino a dieci di tali file.</para>
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.project.stats">
-        <term id="project.folder.project.stats.title">project_stats.txt</term>
+      <varlistentry xml:id="project.folder.project.stats">
+        <term xml:id="project.folder.project.stats.title">project_stats.txt</term>
         <listitem>
           <para>È il file delle statistiche dell'intero progetto. Viene aggiornato ogni volta che si ricarica il progetto.</para>
 
@@ -353,23 +352,23 @@
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.project.stats.match">
-        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match">
+        <term xml:id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
         <listitem>
           <para>Questo file contiene le ultime statistiche di concordanza del progetto. Usare <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> per generarlo.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.project.stats.match.per.file">
-        <term id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match.per.file">
+        <term xml:id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
         <listitem>
           <para>Questo file contiene le ultime statistiche di concordanza del progetto per file. Usare <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics.per.file" endterm="menus.tools.match.statistics.per.file.title"/> per generarlo.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="       project.folder.omegat.spellcheck">
-        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
-        <term id="project.folder.omegat.learned.words">learned_words.txt</term>
+      <varlistentry xml:id="project.folder.omegat.spellcheck">
+        <term xml:id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
+        <term xml:id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
           <para>Questi file sono creati e utilizzati dal correttore ortografico. È possibile aggiungere termini nel pannello <link linkend="panes.editor" endterm="panes.editor.title"/> facendo clic col pulsante destro del mouse su una parola scorretta e selezionando rispettivamente l'opzione <guimenuitem>Ignora tutto</guimenuitem> (per le parole da saltare durante la correzione ortografica) o <guimenuitem>Aggiungi al dizionario</guimenuitem> (per le parole da accettare come corrette) dal <link linkend="panes.editor.context.menu">menu contestuale</link>. Vedere le preferenze <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per i dettagli.</para>
 
@@ -377,43 +376,43 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+      <varlistentry xml:id="project.folder.omegat.segmentation">
+        <term xml:id="project.folder.omegat.segmentation.title">segmentation.conf</term>
         <listitem>
           <para>Contiene le regole di segmentazione specifiche del progetto.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.filters">
-        <term id="project.folder.omegat.filters.title">filters.xml</term>
+      <varlistentry xml:id="project.folder.omegat.filters">
+        <term xml:id="project.folder.omegat.filters.title">filters.xml</term>
         <listitem>
           <para>Contiene i filtri dei file specifici del progetto.</para>
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.uiLayout">
-        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
+      <varlistentry xml:id="project.folder.omegat.uiLayout">
+        <term xml:id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
         <listitem>
           <para>Contiene le impostazioni specifiche del progetto relative all'interfaccia.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.finder">
-        <term id="project.folder.omegat.finder.title">finder.xml</term>
+      <varlistentry xml:id="project.folder.omegat.finder">
+        <term xml:id="project.folder.omegat.finder.title">finder.xml</term>
         <listitem>
           <para>Contiene le ricerche esterne specifiche del progetto.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.file.order">
-        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
+      <varlistentry xml:id="project.folder.omegat.file.order">
+        <term xml:id="project.folder.omegat.file.order.title">files_order.txt</term>
         <listitem>
           <para>Questo file è creato se si cambia a mano l'ordine dei file nella finestra <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.last.entry">
-        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+      <varlistentry xml:id="project.folder.omegat.last.entry">
+        <term xml:id="project.folder.omegat.last.entry.title">last_entry.properties</term>
         <listitem>
           <para>Questo file mantiene un registro dell'ultimo segmento visitato, incluso il suo numero, il contenuto originale, il nome del file e la data, in modo da poter riprendere da esso quando si ricarica/riavvia il progetto.</para>
         </listitem>
@@ -421,8 +420,8 @@
     </variablelist>
   </section>
 
-  <section id="project.folder.repositories">
-    <title id="project.folder.repositories.title">.repositories</title>
+  <section xml:id="project.folder.repositories">
+    <title xml:id="project.folder.repositories.title">.repositories</title>
     <para>In un progetto in collaborazione, questa cartella contiene una copia di versione della struttura ad albero del progetto collegata direttamente al server remoto.</para>
 
     <para>È possibile apportare modifiche ai file remoti (come eliminarli o sostituirli) eseguendo le modifiche in questa cartella e utilizzando un client Git o SVN per sincronizzarli col server remoto. Vedere la guida all'uso <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> per i dettagli.</para>

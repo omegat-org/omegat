@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.panes">
-  <title id="chapter.panes.title">Subfinestres</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.panes">
+  <title xml:id="chapter.panes.title">Subfinestres</title>
 
-  <section id="panes.default.layout">
-	<title id="panes.default.layout.title">Disposició per defecte</title>
+  <section xml:id="panes.default.layout">
+	<title xml:id="panes.default.layout.title">Disposició per defecte</title>
 
 	<para>La primera vegada que inicieu l'OmegaT, la finestra principal mostra la disposició per defecte següent:</para>
 
-		<figure id="default.omegat.layout.macos">
-      <title id="default.omegat.layout.macos.title">Disposició per defecte de l'OmegaT en el macOS</title>
+		<figure xml:id="default.omegat.layout">
+      <title xml:id="default.omegat.layout.title">Disposició per defecte de l'OmegaT en el macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -57,20 +56,20 @@
 	</warning>
   </section>
 
-  <section id="panes.principles">
-    <title id="panes.principles.title">Principis</title>
+  <section xml:id="panes.principles">
+    <title xml:id="panes.principles.title">Principis</title>
 
     <variablelist>
-      <varlistentry id="panes.manipulation">
-        <term id="panes.manipulation.title">Manipulació</term>
+      <varlistentry xml:id="panes.manipulation">
+        <term xml:id="panes.manipulation.title">Manipulació</term>
 
         <listitem>
           <para>La finestra principal està formada per diverses subfinestres, que es descriuen aquí, diferents menús descrits en el capítol <link linkend="chapter.menus" endterm="chapter.menus.title"/> i una barra d'estat descrita <link linkend="panes.statusbar">a continuació</link>. Podeu fer clic i mantenir premut el nom d'una subfinestra per a arrossegar-la a una posició nova o, fins i tot, desacoblar-la i que sigui una finestra independent.</para>
 
           <para>La cantonada superior dreta de cada subfinestra mostra icones diferents en funció del tipus de subfinestra i de l'estat actual:</para>
 
-          <table id="table.pane.widgets">
-            <title id="table.pane.widgets.title">Ginys de les subfinestres</title>
+          <table xml:id="table.pane.widgets">
+            <title xml:id="table.pane.widgets.title">Ginys de les subfinestres</title>
 
             <tgroup cols="2">
               <tbody>
@@ -169,8 +168,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.context.menus">
-        <term id="panes.context.menus.title">Menús contextuals</term>
+      <varlistentry xml:id="panes.context.menus">
+        <term xml:id="panes.context.menus.title">Menús contextuals</term>
 
         <listitem>
           <para>Algunes subfinestres tenen un menú contextual. Podeu obrir aquest menú mitjançant el mètode estàndard del sistema operatiu o amb les dreceres definides per a l'OmegaT:<itemizedlist>
@@ -185,8 +184,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.drag.and.drop">
-        <term id="panes.drag.and.drop.title">Arrossegar i deixar anar</term>
+      <varlistentry xml:id="panes.drag.and.drop">
+        <term xml:id="panes.drag.and.drop.title">Arrossegar i deixar anar</term>
 
         <listitem>
           <para>Podeu arrossegar i deixar anar fitxers en determinades subfinestres, amb els resultats següents:</para>
@@ -221,8 +220,8 @@
         </listitem>
       </varlistentry>
 
-	  <varlistentry id="panes.notifications">
-        <term id="panes.notifications.title">Notificacions</term>
+	  <varlistentry xml:id="panes.notifications">
+        <term xml:id="panes.notifications.title">Notificacions</term>
 		
         <listitem>
           <para>Si una subfinestra està tancada però té contingut per a mostrar, l'OmegaT pot ressaltar temporalment la pestanya de la subfinestra en color carabassa quan accediu al segment.</para>
@@ -287,15 +286,15 @@
     </variablelist>
   </section>
 
-  <section id="panes.editor">
-    <title id="panes.editor.title"><guilabel>Editor</guilabel></title>
+  <section xml:id="panes.editor">
+    <title xml:id="panes.editor.title"><guilabel>Editor</guilabel></title>
 
     <para>Aquí és on escriviu i editeu les vostres traduccions.</para>
 
     <para>El text es divideix en segments numerats. Podeu desplaçar-vos pel document i fer doble clic en qualsevol segment per a obrir-lo i editar-lo.</para>
 
-	<example id="panes.editor.default.editor.writing.space">
-	  <title id="panes.editor.default.editor.writing.space.title">Espai d'escriptura de l'editor per defecte</title>
+	<example xml:id="panes.editor.default.editor.writing.space">
+	  <title xml:id="panes.editor.default.editor.writing.space.title">Espai d'escriptura de l'editor per defecte</title>
 	  <para>
 		<programlisting>— ¶ —————————————————————
 
@@ -438,8 +437,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.editor.overwriting">
-        <term id="panes.editor.overwriting.title">Sobreescriptura</term>
+      <varlistentry xml:id="panes.editor.overwriting">
+        <term xml:id="panes.editor.overwriting.title">Sobreescriptura</term>
 
         <listitem>
           <para>Per defecte, en escriure text s'insereix el text nou després del cursor en la direcció d'escriptura. Per a sobreescriure el text existent, utilitzeu les tecles següents:</para>
@@ -458,8 +457,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.editor.cursor.lock">
-        <term id="panes.editor.cursor.lock.title">Blocatge del cursor</term>
+      <varlistentry xml:id="panes.editor.cursor.lock">
+        <term xml:id="panes.editor.cursor.lock.title">Blocatge del cursor</term>
 
         <listitem>
           <para>Per defecte, el cursor està blocat en el camp de traducció i les tecles de direcció no es poden utilitzar per a desplaçar-se pel text d'origen.</para>
@@ -470,8 +469,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.editor.context.menu">
-        <term id="panes.editor.context.menu.title">Menú contextual</term>
+      <varlistentry xml:id="panes.editor.context.menu">
+        <term xml:id="panes.editor.context.menu.title">Menú contextual</term>
 
         <listitem>
           <para>Drecera per defecte:</para>
@@ -517,8 +516,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.editor.auto.completion.menu">
-        <term id="panes.editor.auto.completion.menu.title">Menú d'emplenament automàtic</term>
+      <varlistentry xml:id="panes.editor.auto.completion.menu">
+        <term xml:id="panes.editor.auto.completion.menu.title">Menú d'emplenament automàtic</term>
 
         <listitem>
           <para>Drecera per defecte:</para>
@@ -537,8 +536,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="panes.editor.navigation">
-        <term id="panes.editor.navigation.title">Navegació</term>
+      <varlistentry xml:id="panes.editor.navigation">
+        <term xml:id="panes.editor.navigation.title">Navegació</term>
         <listitem>
 		  <para>Utilitzeu <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> per a accedir a la subfinestra i afegir o modificar una nota.</para>
 
@@ -548,19 +547,19 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     </variablelist>
   </section>
 
-  <section id="panes.fuzzy.matches">
-    <title id="panes.fuzzy.matches.title"><guilabel>Coincidències parcials</guilabel></title>
+  <section xml:id="panes.fuzzy.matches">
+    <title xml:id="panes.fuzzy.matches.title"><guilabel>Coincidències parcials</guilabel></title>
 
     <para>El visualitzador de coincidències mostra segments de les memòries de traducció que són similars al segment que esteu traduint.</para>
 
     <para>Les coincidències provenen tant de la memòria de traducció del projecte interna creada en temps real mentre traduïu el projecte com de les memòries externes que heu importat de projectes anteriors o que heu rebut de tercers. Consulteu la guia <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/> per a conèixer més detalls.</para>
 
-    <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap></keycombo> per a seleccionar una coincidència específica o desplaçar-vos cíclicament per les coincidències disponibles amb <keycombo><keycap>C</keycap><keycap>↑ o ↓</keycap></keycombo> (<keycombo><keycap>A</keycap><keycap>↑ o ↓</keycap></keycombo> en el macOS). Com a alternativa, podeu utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
+    <para>Quan accediu a un segment, se selecciona automàticament la primera coincidència parcial (la que té el percentatge de coincidència més alt). Podeu prémer <keycombo><keycap>C</keycap><keycap>2, 3, 4 o 5</keycap> </keycombo> o utilitzar <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> per a seleccionar una coincidència diferent.</para>
 
-	<example id="the.first.match">
-	  <title id="the.first.match.title">Segment buit i les dues primeres coincidències</title>
+	<example xml:id="the.first.match">
+	  <title xml:id="the.first.match.title">Segment buit i les dues primeres coincidències</title>
       <para>
-		<informaltable id="table.pane.matches">
+		<informaltable xml:id="table.pane.matches">
           <tgroup cols="2">
             <tbody>
               <row>
@@ -636,15 +635,15 @@ Dossier de configuration
     <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/> per a substituir el text del camp de traducció per la coincidència, o <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/> per a inserir-lo en la posició del cursor.</para>
   </section>
 
-  <section id="panes.glossary">
-    <title id="panes.glossary.title"><guilabel>Glossaris</guilabel></title>
+  <section xml:id="panes.glossary">
+    <title xml:id="panes.glossary.title"><guilabel>Glossaris</guilabel></title>
 
     <para>Aquesta subfinestra mostra els termes dels fitxers de glossari que corresponen als termes del segment actual. Els fitxers de glossari són en la carpeta <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> del projecte.</para>
 
     <para>El terme d'origen es mostra abans del signe «=» i els termes de destinació apareixen després. Si l'entrada conté comentaris, es numeren i es mostren en línies independents sota els termes. Els termes del glossari modificable es mostren en negreta, mentre que els d'altres glossaris es presenten en rodona.</para>
 
-	<example id="glossary.matches">
-	  <title id="glossary.matches.title">Coincidències dels glossaris</title>
+	<example xml:id="glossary.matches">
+	  <title xml:id="glossary.matches.title">Coincidències dels glossaris</title>
 	  <para>
 		<programlisting>Project = <token>Projet</token>
 1. Projet de traduction
@@ -674,16 +673,16 @@ Folder = <token>Dossier</token></programlisting>
 	<para>Consulteu l'annex <link linkend="app.glossaries" endterm="app.glossaries.title"/> per a conèixer més detalls.</para>
   </section>
 
-  <section id="panes.dictionary">
-    <title id="panes.dictionary.title"><guilabel>Diccionaris</guilabel></title>
+  <section xml:id="panes.dictionary">
+    <title xml:id="panes.dictionary.title"><guilabel>Diccionaris</guilabel></title>
 
 	<para>Aquesta subfinestra mostra els termes dels fitxers de diccionari que corresponen als termes del segment actual. Els fitxers de diccionari són en la carpeta <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> del projecte. Consulteu les preferències de <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> per a conèixer més detalls.</para>
   </section>
   
-  <section id="panes.machinetranslation">
-    <title id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
+  <section xml:id="panes.machinetranslation">
+    <title xml:id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
 
-    <para>Si heu habilitat i configurat com a mínim un motor de traducció automàtica, aquesta subfinestra mostra els suggeriments del segment actual generats pels motors disponibles. Quan hi ha suggeriments disponibles de més d'un motor de traducció automàtica:</para>
+    <para>Aquesta finestra, quan s'obre, conté els suggeriments per al segment actual produïts per un o més motors de traducció automàtica habilitats. Quan hi ha suggeriments disponibles de més d'un motor:</para>
 	
     <itemizedlist>
       <listitem>
@@ -710,8 +709,8 @@ Folder = <token>Dossier</token></programlisting>
 	<para>Consulteu les preferències de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per a conèixer més detalls.</para>
   </section>
 
-  <section id="panes.multipletranslations">
-    <title id="panes.multipletranslations.title"><guilabel>Diverses traduccions</guilabel></title>
+  <section xml:id="panes.multipletranslations">
+    <title xml:id="panes.multipletranslations.title"><guilabel>Diverses traduccions</guilabel></title>
 
     <para>Un segment d'origen que apareix en diverses ubicacions del projecte pot requerir diverses traduccions diferents en funció del context.</para>
 
@@ -720,8 +719,8 @@ Folder = <token>Dossier</token></programlisting>
     <para>Utilitzeu <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/> per a definir una de les alternatives, la més habitual o probable, per exemple, com a traducció per defecte.</para>
   </section>
 
-  <section id="panes.notes">
-    <title id="panes.notes.title"><guilabel>Bloc de notes</guilabel></title>
+  <section xml:id="panes.notes">
+    <title xml:id="panes.notes.title"><guilabel>Bloc de notes</guilabel></title>
 
     <para>Aquesta subfinestra és un espai <emphasis>editable</emphasis> on podeu afegir notes al segment actiu.</para>
 
@@ -737,8 +736,8 @@ Folder = <token>Dossier</token></programlisting>
 	</note>
   </section>
 
-  <section id="panes.comments">
-    <title id="panes.comments.title"><guilabel>Comentaris</guilabel></title>
+  <section xml:id="panes.comments">
+    <title xml:id="panes.comments.title"><guilabel>Comentaris</guilabel></title>
 
     <para>Alguns formats de fitxer, com el format PO, poden contenir comentaris per al traductor per a donar context a la traducció. Aquests comentaris es mostren aquí.</para>
 
@@ -749,8 +748,8 @@ Folder = <token>Dossier</token></programlisting>
     </note>
   </section>
 
-  <section id="panes.segment.properties">
-    <title id="panes.segment.properties.title"><guilabel>Propietats del segment</guilabel></title>
+  <section xml:id="panes.segment.properties">
+    <title xml:id="panes.segment.properties.title"><guilabel>Propietats del segment</guilabel></title>
 
     <para>Tots els segments tenen propietats. Les propietats es mostren en aquesta subfinestra.</para>
 	<para>Algunes propietats habituals són:</para>
@@ -775,18 +774,18 @@ Folder = <token>Dossier</token></programlisting>
     </note>
   </section>
 
-  <section id="panes.statusbar">
-    <title id="panes.statusbar.title"><guilabel>Barra d'estat</guilabel></title>
+  <section xml:id="panes.statusbar">
+    <title xml:id="panes.statusbar.title"><guilabel>Barra d'estat</guilabel></title>
 
     <para>La part inferior de la finestra principal és la barra d'estat.</para>
 
 	<para>La part esquerra de la barra d'estat mostra informació sobre les accions del projecte o els missatges d'error.</para>
 
-	<example id="panes.statusbar.messages">
-      <title id="panes.statusbar.messages.title">Exemples de missatges de la barra d'estat</title>
-	  <para><literal>Sincronització de repositoris</literal></para>
+	<example xml:id="panes.statusbar.messages">
+      <title xml:id="panes.statusbar.messages.title">Exemples de missatges de la barra d'estat</title>
+	  <para><literal>Sincronització de dipòsits</literal></para>
 
-	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el repositori remot.</para>
+	  <para>→ L'OmegaT està obrint un projecte en equip i se sincronitza amb el dipòsit remot.</para>
 
 	  <para><literal>S'està saltant al darrer segment editat...</literal></para>
 
@@ -805,8 +804,8 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>Feu clic en les figures per a canviar entre la visualització del progrés en xifres o percentatges.</para>
 
-	<example id="panes.statusbar.widgets">
-      <title id="panes.statusbar.widgets.title">Informació de la barra d'estat</title>
+	<example xml:id="panes.statusbar.widgets">
+      <title xml:id="panes.statusbar.widgets.title">Informació de la barra d'estat</title>
 	  <para><literal>BLOC | SBR <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
 
 	  <variablelist>
@@ -842,8 +841,8 @@ Folder = <token>Dossier</token></programlisting>
 	  </variablelist>
 	</example>
 	
-	<example id="panes.statusbar.widgets.percentage">
-      <title id="panes.statusbar.widgets.percentage.title">Informació de la barra d'estat, mode percentatge</title>
+	<example xml:id="panes.statusbar.widgets.percentage">
+      <title xml:id="panes.statusbar.widgets.percentage.title">Informació de la barra d'estat, mode percentatge</title>
 	  <para><literal>DESBLOC | INS <token>94,8% (14 restants) / 7.9% (142.604 restants), 177.692</token> <token>35/0</token></literal></para>
 	  <variablelist>
 		<varlistentry>

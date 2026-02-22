@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">チームプロジェクトを設定する</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.setup.team.project">
+  <title xml:id="how.to.setup.team.project.title">チームプロジェクトを設定する</title>
 
   <para>チームプロジェクトを管理するには、<emphasis>SVN</emphasis>または<emphasis>Git</emphasis>バージョン管理システム(Virsion Control System、 以降<emphasis>VCS</emphasis>と呼ぶ)の知識が必要です。</para>
 
@@ -11,20 +10,20 @@
 	<para>OmegaTチームプロジェクトは、プロジェクト翻訳メモリ<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>とプロジェクト書き込み可能用語集<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>を、ホストサーバとすべての参加チームメンバー間で同期し、それらの間で発生する可能性のあるすべての競合を管理します。</para>
   </note>
 
-  <section id="how.to.setup.team.project.prepare.the.repository">
-    <title id="how.to.setup.team.project.prepare.the.repository.title">準備作業</title>
+  <section xml:id="how.to.setup.team.project.prepare.the.repository">
+    <title xml:id="how.to.setup.team.project.prepare.the.repository.title">準備作業</title>
 
 	<para>チームプロジェクトを設定する手順を示します。</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">VCSサーバ上に空のプロジェクトを作成します</para>
+      <listitem xml:id="how.to.setup.team.project.create.empty.repository">
+		<para xml:id="how.to.setup.team.project.create.empty.repository.title">VCSサーバ上に空のプロジェクトを作成します</para>
 
 		<para>これは通常、Webインターフェース、グラフィカルプログラム、またはコマンドラインを使用して実行できます。詳細については、サーバまたはホスティングサービスのマニュアルを参照してください。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">ローカルのVCSを使用してワーキングディレクトリ(クローン)を作成します。</para>
+	  <listitem xml:id="how.to.setup.team.project.clone.locally">
+		<para xml:id="how.to.setup.team.project.clone.locally.title">ローカルのVCSを使用してワーキングディレクトリ(クローン)を作成します。</para>
 
 		<note>
 		  <para><emphasis>プロジェクトマネージャ</emphasis>用のOmegaTプロジェクトのコピーがこのローカルのディレクトリにあります。チーム全体に影響する変更を行う場合に使用します。</para>
@@ -34,8 +33,8 @@
 		<para>このフォルダーを翻訳作業に使用しないことをお勧めします。そのプロジェクトで翻訳やレビュー作業も行う必要がある場合は、チームプロジェクト管理用と別に、OmegaTを使用して翻訳作業用のプロジェクトをダウンロードします。詳細については、 <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/>を参照してください。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">空のローカルコピーを実際のOmegaTプロジェクトで埋める</para>
+	  <listitem xml:id="how.to.setup.team.project.fill.local.clone">
+		<para xml:id="how.to.setup.team.project.fill.local.clone.title">空のローカルコピーを実際のOmegaTプロジェクトで埋める</para>
 		<itemizedlist>
 		  <listitem>
 			<para>プロジェクト構造を作成する</para>
@@ -72,20 +71,20 @@
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">プロジェクトファイルをローカルVCSに登録します。</para>
+	  <listitem xml:id="how.to.setup.team.project.register">
+		<para xml:id="how.to.setup.team.project.register.title">プロジェクトファイルをローカルVCSに登録します。</para>
 
 		<para>GUIからプロジェクトを作成した場合は、バージョン管理システムに明示的に追加する必要があります(SVNとGitの両方で<command>add</command>)。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">登録したファイルをホストサーバに配置する</para>
+	  <listitem xml:id="how.to.setup.team.project.push">
+		<para xml:id="how.to.setup.team.project.push.title">登録したファイルをホストサーバに配置する</para>
 
 		<para>最後に、プロジェクトをリモートサーバに送信します(SVNでは<command>commit</command>、Gitでは<command>commit</command>と<command>push</command>)。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">チームにアクセス権を付与する</para>
+	  <listitem xml:id="how.to.setup.team.project.give.access.rights">
+		<para xml:id="how.to.setup.team.project.give.access.rights.title">チームにアクセス権を付与する</para>
 
 		<note>
 		  <para>同じサーバで複数のプロジェクトを使用する場合、資格情報はそのサーバに対して1回だけ要求されます。</para>
@@ -112,8 +111,8 @@
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">OmegaTからプロジェクトをダウンロードしてもらう</para>
+	  <listitem xml:id="how.to.setup.team.project.have.members.download">
+		<para xml:id="how.to.setup.team.project.have.members.download.title">OmegaTからプロジェクトをダウンロードしてもらう</para>
 
 		<para>管理者が、プロジェクトの場所を翻訳者に共有するには、おおきく2つの方法があります。</para>
 
@@ -132,18 +131,18 @@
 		<para>これらが一致しない場合は、<filename>filters.xml</filename>ファイルと<filename>segmentation.conf</filename>ファイルが正しく共有されていることを確認してください。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">プロジェクトで作業する必要がある場合は、ローカルチームプロジェクトの場所とは異なるローカルの場所にプロジェクトを自分でダウンロードします。</para>
+	  <listitem xml:id="how.to.setup.team.project.download.if.needed">
+		<para xml:id="how.to.setup.team.project.download.if.needed.title">プロジェクトで作業する必要がある場合は、ローカルチームプロジェクトの場所とは異なるローカルの場所にプロジェクトを自分でダウンロードします。</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">これで、チームと一緒にプロジェクトで作業することもできます。</para>
+	  <listitem xml:id="how.to.setup.team.project.translate">
+		<para xml:id="how.to.setup.team.project.translate.title">これで、チームと一緒にプロジェクトで作業することもできます。</para>
 	  </listitem>
 	</orderedlist>
   </section>
 
-  <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">リポジトリマッピング</title>
+  <section xml:id="how.to.setup.team.project.mapping.parameters">
+	<title xml:id="how.to.setup.team.project.mapping.parameters.title">リポジトリマッピング</title>
 
 	<para><link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログの<link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/>を使用して、または<link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>ファイルを編集することによって、OmegaTユーザーインターフェースを介してさまざまなリモートロケーションをローカルファイルにマッピングすることができます。マッピング機能は、主に異なる場所から原文ファイルを収集することを目的としていますが、他のタイプのファイルにも使用できます。</para>
 
@@ -196,23 +195,23 @@
 	</variablelist>
   </section>
 
-  <section id="how.to.setup.team.project.example.mappings">
-	<title id="how.to.setup.team.project.example.mappings.title">マッピングの例</title>
+  <section xml:id="how.to.setup.team.project.example.mappings">
+	<title xml:id="how.to.setup.team.project.example.mappings.title">マッピングの例</title>
 
-	<para>既定のプロジェクトマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+	<para>既定のプロジェクトマッピング:<programlisting>&lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
+	&lt;mapping local="" repository=""/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para><filename>https://repo_for_OmegaT_team_project</filename>のすべての内容がローカルのOmegaTプロジェクトにマップされます。</para>
 
-	<para>リポジトリのサブフォルダーにあるプロジェクトのマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+	<para>リポジトリのサブフォルダーにあるプロジェクトのマッピング:<programlisting>&lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
+	&lt;mapping local="" repository="En-US_DE_project"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename>のすべての内容は、ローカルのOmegaTプロジェクトにマップされます。</para>
 
-	<para>フィルタを使用した、リモートリポジトリからの追加原文のマッピング:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
-	&lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+	<para>フィルタを使用した、リモートリポジトリからの追加原文のマッピング:<programlisting>&lt;repository type="svn" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
+	&lt;mapping local="source/subdir" repository=""&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
     	&lt;includes&gt;readme.bak&lt;/includes&gt;
 	&lt;/mapping&gt;
@@ -220,23 +219,23 @@
 
 	<para><filename>https://repo_for_All_OmegaT_team_project_sources</filename>のすべては、<filename>.bak</filename>拡張子のファイルを除いて、ローカルOmegaTプロジェクトの原文フォルダーにマップされます。However, the <filename>readme.bak</filename> is also included.</para>
 
-	<para>Webからの追加ソース・ファイルのマッピング:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>Webからの追加ソース・ファイルのマッピング:<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>リモート・ファイル<filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename>は、ローカル・ファイル<filename>source/Bundle.properties</filename>にマップされます。</para>
 
-	<para>名前変更つきのマッピング:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>名前変更つきのマッピング:<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>リモートファイル<filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename>は、ローカルファイル<filename>source/readme_tr.txt</filename>にマップされます。</para>
 
 	<para>This makes it possible to rename the file to translate.</para>
 
-	<para>ローカルファイルマッピング:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
-	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
-	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+	<para>ローカルファイルマッピング:<programlisting>&lt;repository type="file" url="/home/me/myfiles"&gt;
+	&lt;mapping local="source/file.txt" repository="my/file.txt"/&gt;
+	&lt;mapping local="source/file2.txt" repository="some/file.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>ローカルファイル<filename>/home/me/myfiles/my/file.txt</filename>はローカルファイル<filename>source/file.txt</filename>にマップされ、<filename>/home/me/myfiles/some/file.txt</filename>はローカルファイル<filename>source/file2.txt</filename>にマップされます。</para>
@@ -248,8 +247,8 @@
 	<para>マッピングは必要な数だけ追加できますが、マッピングの1つには<filename>omegat.project</filename>ファイルが含まれている必要があります。</para>
 
   </section>
-  <section id="how.to.setup.team.project.selective.sharing">
-	<title id="how.to.setup.team.project.selective.sharing.title">選択的な共有</title>
+  <section xml:id="how.to.setup.team.project.selective.sharing">
+	<title xml:id="how.to.setup.team.project.selective.sharing.title">選択的な共有</title>
 
 	<para>上記のプロセスでは、プロジェクトマネージャがプロジェクトを完全に制御し、ファイル(および翻訳状況)が両方の側(サーバ側と通訳者側)で同一である通常のケースについて説明しています。</para>
 

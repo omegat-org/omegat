@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Risoluzione dei problemi</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.restore.your.data">
+  <title xml:id="how.to.restore.your.data.title">Risoluzione dei problemi</title>
 
   <warning>
 	<para>OmegaT è un'applicazione affidabile e robusta. Detto questo, è bene prendere delle precauzioni al fine di prevenire la perdita di dati durante il suo utilizzo, proprio come si farebbe con qualsiasi altra applicazione.</para>
   </warning>
 
-  <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">Copie di sicurezza automatiche</title>
+  <section xml:id="how.to.restore.your.data.automatic.backup">
+	<title xml:id="how.to.restore.your.data.automatic.backup.title">Copie di sicurezza automatiche</title>
 
 	<para>OmegaT crea copie di sicurezza delle impostazioni del progetto in modo da garantire il loro recupero in caso di problemi. Vedere la sezione <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> per i dettagli.</para>
 	  
@@ -56,8 +55,8 @@
 
   </section>
 
-  <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">La propria traduzione è andata perduta?</title>
+  <section xml:id="how.to.restore.your.data.lost.in.translation">
+	<title xml:id="how.to.restore.your.data.lost.in.translation.title">La propria traduzione è andata perduta?</title>
 
 	<para>Anche se si teme di aver perso i propri dati di traduzione, questi sono probabilmente conservati al sicuro nella copia di memoria più recente, che in genere non è più vecchia di qualche minuto.</para>
 
@@ -92,8 +91,8 @@
 	</note>
   </section>
 
-  <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">Il progetto è bloccato?</title>
+  <section xml:id="how.to.restore.your.data.project.locked">
+	<title xml:id="how.to.restore.your.data.project.locked.title">Il progetto è bloccato?</title>
 
 	<para>Nel raro caso in cui il computer si blocca e a OmegaT non è concesso il tempo di chiudersi correttamente, il file <filename>omegat.project</filename> potrebbe venir bloccato dal sistema operativo e non venire riaperto dopo aver riavviato il sistema.</para>
 
@@ -124,8 +123,8 @@
 	<para>Questa operazione aprirà il progetto con la copia di sicurezza <filename>omegat.project</filename> creata in automatico.</para>
   </section>
   
-  <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Il progetto non vuole aprirsi?</title>
+  <section xml:id="how.to.restore.your.data.project.wont.open">
+	<title xml:id="how.to.restore.your.data.project.wont.open.title">Il progetto non vuole aprirsi?</title>
 
 	<para>Nel raro caso in cui il computer si blocca e a OmegaT non è concesso il tempo di chiudersi correttamente, alcuni file importanti potrebbero essersi danneggiati e impedire la riapertura del progetto dopo aver riavviato il sistema.</para>
 
@@ -160,8 +159,8 @@
 	<para>Questa azione imposterà il nuovo progetto allo stato della traduzione nel punto in cui la memoria di traduzione del progetto selezionata è stata creata in quello vecchio.</para>
   </section>
 
-  <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Il file tradotto non vuole aprirsi?</title>
+  <section xml:id="how.to.restore.your.data.translated.file.broken">
+	<title xml:id="how.to.restore.your.data.translated.file.broken.title">Il file tradotto non vuole aprirsi?</title>
 
 	<para>Molto spesso, i file delle suite per ufficio contengono tag che devono essere copiati all'interno della traduzione, in modo da garantire che il file tradotto possa essere aperto nell'applicazione originale. In alcuni casi, i tag mancanti impediranno l'apertura del file.</para>
 	
@@ -192,8 +191,8 @@
 	<para>Questa operazione correggerà qualsiasi problema di coerenza dei tag interni dovuto allo scorretto inserimento dei tag durante il processo di traduzione in OmegaT.</para>
   </section>
 
-  <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT non si comporta correttamente?</title>
+  <section xml:id="how.to.restore.your.data.omegat.wont.behave">
+	<title xml:id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT non si comporta correttamente?</title>
 
 	<para>È successo qualcosa è OmegaT non si comporta più correttamente. Qualsiasi cosa si provi, sembra che non sia possibile correggerla. Si può fare un ultimo tentativo prima di chiedere aiuto: riavviare OmegaT con le sue impostazioni predefinite.</para>
 
@@ -246,8 +245,8 @@
 	</orderedlist>
   </section>
 
-  <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">Riepilogo</title>
+  <section xml:id="how.to.restore.your.data.summary">
+	<title xml:id="how.to.restore.your.data.summary.title">Riepilogo</title>
 
 	<itemizedlist>
       <listitem>

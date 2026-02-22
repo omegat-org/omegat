@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="file.filters">
-  <title id="file.filters.title">ファイルフィルター</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="file.filters">
+  <title xml:id="file.filters.title">ファイルフィルター</title>
 
   <warning>
 	<para>ファイルフィルタは、ローカルで特定のプロジェクトに固有のものか、ユーザーレベルで構成フォルダーを共有するすべてのプロジェクトで使用できるものの二種類あります。</para>
@@ -42,8 +37,8 @@
 
   <para>変更されたプロジェクト専用のファイルフィルタ設定は、プロジェクトフォルダーにある<link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>ファイルに保存されます。詳細については-<link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>を参照してください。このファイルを削除すると、フィルターの環境設定もリセットされ、ユーザレベルのファイルフィルター設定が使用されるようになります。</para>
 
-  <section id="file.filters.general">
-	<title id="file.filters.general.title">共通設定</title>
+  <section xml:id="file.filters.general">
+	<title xml:id="file.filters.general.title">共通設定</title>
 	  
 	<variablelist>
 	  <varlistentry>
@@ -79,8 +74,8 @@
 	</variablelist>
   </section>
 	
-  <section id="edit.filter.dialog">
-    <title id="edit.filter.dialog.title">編集</title>
+  <section xml:id="edit.filter.dialog">
+    <title xml:id="edit.filter.dialog.title">編集</title>
 	
     <para>編集可能なフィールドをダブルクリックして変更を行うか、<guibutton>編集.</guibutton>ボタンをクリックして変更ダイアログにアクセスします。</para>
 
@@ -90,8 +85,8 @@
 
 	<para>ターゲットのファイル名をカスタマイズするには、<guilabel>ファイル名変数</guilabel>ドロップダウンメニューを使用します。</para>
 
-    <section id="source.filetype.and.filename.pattern">
-	  <title id="source.filetype.and.filename.pattern.title">原文ファイル名の構成例</title>
+    <section xml:id="source.filetype.and.filename.pattern">
+	  <title xml:id="source.filetype.and.filename.pattern.title">原文ファイル名の構成例</title>
 
 	  <para>OmegaTはファイル拡張子をチェックし、フィルター内の原文ファイル名パターンと照合します。適合したときに、ファイルにフィルターに関連付けます。</para>
 
@@ -109,8 +104,8 @@
 	  <para>たとえばテキストフィルターを readme ファイル（<literal>readme, read.me</literal> や <literal>readme.txt</literal>）にも対応させたい場合は、ファイル名構成例に <literal>read*</literal> を指定してください。</para>
     </section>
 
-    <section id="source.and.target.files.encoding">
-	  <title id="source.and.target.files.encoding.title">原文ファイルと訳文ファイルのエンコーディング</title>
+    <section xml:id="source.and.target.files.encoding">
+	  <title xml:id="source.and.target.files.encoding.title">原文ファイルと訳文ファイルのエンコーディング</title>
 
 	  <para>ほとんどのファイル形式では、さまざまな文字コードのエンコーディングが利用可能です。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。</para>
 
@@ -135,8 +130,8 @@
 	  </itemizedlist>
     </section>
 
-    <section id="target.name">
-	  <title id="target.name.title">訳文ファイル名</title>
+    <section xml:id="target.name">
+	  <title xml:id="target.name.title">訳文ファイル名</title>
 	  
 	  <para><link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーのファイルは、同じ名前で作成された場合、作成するたびに上書きされます。</para>
 
@@ -199,7 +194,7 @@
           <listitem>
 			<para>ファイルが作成されたシステム時間</para>
 
-			<para>例については、<ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Oracleのドキュメント</ulink>を参照してください。</para>
+			<para>例については、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">Oracleのドキュメント</link>を参照してください。</para>
           </listitem>
 		</varlistentry>
 
@@ -250,8 +245,8 @@
 		
 	  <para>ファイル名に複数のピリオドを利用するなどでファイル名と拡張子があいまいな場合、使用する構成要素を <literal>${nameOnly-</literal><emphasis>番号</emphasis>} と <literal>${extension-</literal>-<emphasis>番号}</emphasis> の形式で、次に示す例のように指定することができます。</para>
 
-	  <example id="target.name.example">
-		<title id="target.name.example.title">訳文ファイル名</title>
+	  <example xml:id="target.name.example">
+		<title xml:id="target.name.example.title">訳文ファイル名</title>
 		<para>文書.xx.docxという名前のソースファイルに対して、以下の変数定義を使用すると、次のような結果になります。</para>
 
 		<itemizedlist>
@@ -283,16 +278,16 @@
     </section>
   </section>
 	
-  <section id="filters.options">
-    <title id="filters.options.title">設定</title>
+  <section xml:id="filters.options">
+    <title xml:id="filters.options.title">設定</title>
 
     <para>ファイルフィルターは設定を提供しています。設定を変更する場合は、フィルターを選択して<guibutton>設定...</guibutton> を押してください。</para>
 
 	<para>可能な設定は以下の通りです：</para>
 
 	<variablelist>
-	  <varlistentry id="file.filters.text">
-		<term id="file.filters.text.title">テキストファイル</term>
+	  <varlistentry xml:id="file.filters.text">
+		<term xml:id="file.filters.text.title">テキストファイル</term>
 		<listitem>
 		  <para>
 			<variablelist>
@@ -330,8 +325,8 @@
 		</listitem>
 	  </varlistentry>
 		
-	  <varlistentry id="file.filter.microsoft">
-		<term id="file.filter.microsoft.title">Microsoft Office Open XML ファイル</term>
+	  <varlistentry xml:id="file.filter.microsoft">
+		<term xml:id="file.filter.microsoft.title">Microsoft Office Open XML ファイル</term>
 		<listitem>
 		  <warning>
 			<para><code>Microsoft Office Open XML(旧フィルター)</code>は、従前からのOmegaTのフィルターです。以前に、このフィルターで処理したファイルを含むプロジェクトとの互換性の問題を回避するときのみ、利用してください。</para>
@@ -398,8 +393,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xhtml">
-		<term id="file.filters.xhtml.title">XHTML ファイル</term>
+	  <varlistentry xml:id="file.filters.xhtml">
+		<term xml:id="file.filters.xhtml.title">XHTML ファイル</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -423,18 +418,18 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>無視された&lt;meta&gt;タグの&quot;content&quot;属性</term>
+			  <term>無視された&lt;meta&gt;タグの"content"属性</term>
 			  <listitem>
 				<para>関連する「コンテンツ」属性が変換されない&lt;meta&gt;タグ属性値を定義します。</para>
 
 				<para>引用文記号を追加したり、値をカンマで区切ったりしないでください。</para>
 				
-				<example id="file.filters.xhtml.example">
-				  <title id="file.filters.xhtml.example.title">&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;の内容部分を無視する</title>
+				<example xml:id="file.filters.xhtml.example">
+				  <title xml:id="file.filters.xhtml.example.title">&lt;meta name="robots" content="index, follow"&gt;の内容部分を無視する</title>
 				  <para>このコンテンツを無視するには:</para>
 
-				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
-				  follow&quot;&gt;</code></para>
+				  <para><code>&lt;meta name="robots" content="index,
+				  follow"&gt;</code></para>
 
 				  <para>使う:</para>
 
@@ -450,16 +445,16 @@
 
 				<para>引用文記号を追加したり、値をカンマで区切ったりしないでください。</para>
 
-				<example id="file.filters.xhtml.ignore.translate.no">
-				  <title id="file.filters.xhtml.ignore.translate.no.title">translate=&quot;no&quot;属性があるタグを無視</title>
+				<example xml:id="file.filters.xhtml.ignore.translate.no">
+				  <title xml:id="file.filters.xhtml.ignore.translate.no.title">translate="no"属性があるタグを無視</title>
 				  <para>このコンテンツを無視するには:</para>
 
-				  <para><code>&lt;span translate=&quot;no&quot;&gt;This content
+				  <para><code>&lt;span translate="no"&gt;This content
 				  is not translatable&lt;/span&gt;</code></para>
 
 				  <para> <literal>translate=no</literal>を使用する。</para>
 
-				  <para><code>translate=&quot;no&quot;</code>でマークされたすべてのタグは無視されます。</para>
+				  <para><code>translate="no"</code>でマークされたすべてのタグは無視されます。</para>
 				</example>
 			  </listitem>
 			</varlistentry>
@@ -522,8 +517,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.ftl">
-		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+	  <varlistentry xml:id="file.filters.mozilla.ftl">
+		<term xml:id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -536,8 +531,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.dtd">
-		<term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
+	  <varlistentry xml:id="file.filters.mozilla.dtd">
+		<term xml:id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -550,8 +545,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.po">
-		<term id="file.filters.po.title">PO ファイル</term>
+	  <varlistentry xml:id="file.filters.po">
+		<term xml:id="file.filters.po.title">PO ファイル</term>
 		<listitem>
 			<para>フィルターはデフォルトで、printf変数('%s'など)をチェックします。詳細は<link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>の設定を参照してください。</para>
 
@@ -608,8 +603,8 @@
 		  </listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.moodle.php">
-		<term id="file.filters.moodle.php.title">Moodle PHP</term>
+	  <varlistentry xml:id="file.filters.moodle.php">
+		<term xml:id="file.filters.moodle.php.title">Moodle PHP</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -622,8 +617,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filter.java.bundle">
-		<term id="file.filter.java.bundle.title">Java リソースバンドル</term>
+	  <varlistentry xml:id="file.filter.java.bundle">
+		<term xml:id="file.filter.java.bundle.title">Java リソースバンドル</term>
 		<listitem>
 			<para>デフォルトで、Java の MessageFormat パターン（{0} など）をチェックする。詳細は<link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>の設定を参照してください。</para>
 
@@ -652,8 +647,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.odf">
-		<term id="file.filters.odf.title">OpenDocument Format (ODF) ファイル</term>
+	  <varlistentry xml:id="file.filters.odf">
+		<term xml:id="file.filters.odf.title">OpenDocument Format (ODF) ファイル</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -666,8 +661,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xliff">
-		<term id="file.filters.xliff.title">XLIFF(従来フィルター)</term>
+	  <varlistentry xml:id="file.filters.xliff">
+		<term xml:id="file.filters.xliff.title">XLIFF(従来フィルター)</term>
 		<listitem>
 		  <warning>
 			<para>このフィルターは、従来のOmegaT XLIFFフィルターです。以前に、このフィルターで処理したファイルを含むプロジェクトとの互換性の問題を回避するときのみ、利用してください。</para>
@@ -699,7 +694,7 @@
 			  <varlistentry>
 				<term>訳文分節のstatus属性設定</term>
 				<listitem>
-				  <para>チェックすると、XLIFFの&quot;target&quot;要素の&quot;status&quot;属性を「translated」ではなく「needs-review-translation」に変更します。</para>
+				  <para>チェックすると、XLIFFの"target"要素の"status"属性を「translated」ではなく「needs-review-translation」に変更します。</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>

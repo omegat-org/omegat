@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">Utiliser les mémoires de traduction</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.use.tm">
+  <title xml:id="how.to.use.tm.title">Utiliser les mémoires de traduction</title>
 
   <para>Lorsqu’un projet est créé, il comporte une mémoire de traduction vide, le fichier <link linkend="project.folder.project.save.tmx.title" endterm="project.folder.project.save.tmx.title"/>, située dans le dossier <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>. Cette mémoire se remplit progressivement au fur et à mesure de l’avancement de la traduction.</para>
 
@@ -21,8 +20,8 @@
 	  </listitem>
 	</itemizedlist>
 
-  <section id="how.to.use.tm.create.your.tm">
-	<title id="how.to.use.tm.create.your.tm.title">Créer vos propres MT</title>
+  <section xml:id="how.to.use.tm.create.your.tm">
+	<title xml:id="how.to.use.tm.create.your.tm.title">Créer vos propres MT</title>
 	
 	<para>Lorsque vous utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> pour créer les documents cible d’un projet, OmegaT génère également trois mémoires de traduction qui reflètent l’état actuel de la traduction des fichiers du dossier source. Voir la propriété du projet <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> pour en savoir plus.</para>
 
@@ -31,8 +30,8 @@
 	<para>Vous pouvez également utiliser l’outil <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.align.files" endterm="menus.tools.align.files.title"/> pour créer une TMX à partir de deux fichiers au format pris en charge par OmegaT.</para>
   </section>
 
-  <section id="how.to.use.tm.reuse.tm">
-	<title id="how.to.use.tm.reuse.tm.title">Réutiliser les MT</title>
+  <section xml:id="how.to.use.tm.reuse.tm">
+	<title xml:id="how.to.use.tm.reuse.tm.title">Réutiliser les MT</title>
 	
 	<para>Pour réutiliser les mémoires de traduction d’un projet précédent, il y a deux options :</para>
 
@@ -98,22 +97,22 @@
 	  </listitem>
 	</itemizedlist>
 	
-    <section id="how.to.tm.read.and.write">
-      <title id="how.to.tm.read.and.write.title">Lire les MT d’autres outils</title>
+    <section xml:id="how.to.tm.read.and.write">
+      <title xml:id="how.to.tm.read.and.write.title">Lire les MT d’autres outils</title>
 
       <para>OmegaT peut lire des mémoires conformes à la norme TMX créées par d’autres outils.</para>
 
       <para>Certains outils produisent des fichiers TMX non valides sous certaines conditions. Vous devez les corriger si vous souhaitez les utiliser comme mémoires de référence, sinon OmegaT signalera une erreur et ne pourra pas les ouvrir. En général, ces corrections sont simples, et le message d’erreur d’OmegaT vous aidera à identifier l’erreur. En cas de problème, vous pouvez également demander conseil au groupe de soutien.</para>
 	</section>
 
-	<section id="how.to.use.tm.store.your.tm">
-	  <title id="how.to.use.tm.store.your.tm.title">Gérer vos MT</title>
+	<section xml:id="how.to.use.tm.store.your.tm">
+	  <title xml:id="how.to.use.tm.store.your.tm.title">Gérer vos MT</title>
 
 	  <para>Vous pouvez conserver les mémoires de traduction dans des dossiers distincts, par client ou par domaine de spécialisation, afin de pouvoir les réutiliser rapidement si nécessaire. Tout dossier modifiable peut être utilisé à la place du dossier <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> du projet. Voir la section <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> de la boite de dialogue des propriétés du projet.</para>
 	</section>
   
-	<section id="how.to.tm.creating.a.tm.for.selected.documents">
-      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">Créer une MT propre aux documents sélectionnés</title>
+	<section xml:id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title xml:id="how.to.tm.creating.a.tm.for.selected.documents.title">Créer une MT propre aux documents sélectionnés</title>
 
       <para>Dans les cas où vous devez partager une TMX contenant uniquement le texte de certains fichiers et excluant tout autre contenu, suivez la procédure ci-dessous :</para>
 
@@ -143,8 +142,8 @@
   </section>
 </section>
 
-<section id="how.to.tm.share.translation.memories">
-  <title id="how.to.tm.share.translation.memories.title">Partager les MT</title>
+<section xml:id="how.to.tm.share.translation.memories">
+  <title xml:id="how.to.tm.share.translation.memories.title">Partager les MT</title>
 
   <para>Pour les travaux conséquents impliquant une équipe de traductaires, il est plus facile pour les personnes impliquées de partager des mémoires de traduction communes plutôt que de s’échanger leurs versions locales.</para>
 
@@ -190,8 +189,8 @@
   </warning>
 </section>
 
-<section id="how.to.tm.bridge.two.languages">
-  <title id="how.to.tm.bridge.two.languages.title">Faire le lien entre deux langues</title>
+<section xml:id="how.to.tm.bridge.two.languages">
+  <title xml:id="how.to.tm.bridge.two.languages.title">Faire le lien entre deux langues</title>
 
   <para>OmegaT affiche les correspondances partielles dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Par défaut, ces correspondances sont limitées aux langues source et cible définies dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
 
@@ -235,8 +234,8 @@
 	  </listitem>
 	</orderedlist>
 
-  <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">Utilisation d’une référence japonaise sous une source anglaise</title>
+  <example xml:id="bridge.english.and.french.with.japanese">
+	<title xml:id="replace.with.allemand.title">Utilisation d’une référence japonaise sous une source anglaise</title>
 	<para>Si vous avez une TMX qui contient la traduction japonaise d’un document anglais que vous traduisez vers le français, par exemple, vous pouvez utiliser la traduction japonaise en tant que référence alternative exacte en l’affichant sous le texte anglais à traduire.</para>
 	<para>Il vous suffit de mettre le fichier TMX anglais-japonais dans <filename class="directory">tm/tmx2source</filename> sous le nom <filename>JA-JP.tmx</filename>. OmegaT va maintenant afficher le texte japonais correspondant au segment source anglais :</para>
 	<para>

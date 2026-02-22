@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.search">
-  <title id="windows.text.search.title"><guilabel>Cerca de text</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
+  <title xml:id="windows.text.search.title"><guilabel>Cerca de text</guilabel></title>
 
   <para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> per a obrir una finestra de cerca nova i indiqueu la paraula o frase que voleu cercar en el camp de cerca.</para>
   
@@ -16,8 +15,8 @@
   
   <para>Les coincidències es mostraran en negreta, de color blau.</para>
 
-  <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">Cerca de ドイツ</title>
+  <example xml:id="search.for.doitsu">
+	<title xml:id="search.for.doitsu.title">Cerca de ドイツ</title>
 	<para>
 	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -54,16 +53,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Tipus de cerca</title>
+  <section xml:id="windows.text.search.methods">
+    <title xml:id="windows.text.search.methods.title">Tipus de cerca</title>
 
     <para>Utilitzeu els botons d'opció per a seleccionar el tipus de cerca.</para>
 
 	<para>Estan disponibles els tipus de cerca següents:</para>
 
     <variablelist>
-      <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">Cerca exacta</term>
+      <varlistentry xml:id="windows.text.search.methods.exact">
+        <term xml:id="windows.text.search.methods.exact.title">Cerca exacta</term>
         <listitem>
           <para>Cerca la cadena exactament tal com s'ha introduït en el camp de cerca.</para>
 
@@ -71,8 +70,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">Cerca per paraules clau</term>
+      <varlistentry xml:id="windows.text.search.methods.keyword">
+        <term xml:id="windows.text.search.methods.keyword.title">Cerca per paraules clau</term>
         <listitem>
           <para>Cerca els segments que contenen cadascun dels termes de cerca separats per un espai.</para>
 
@@ -102,8 +101,8 @@
 	</variablelist>
 
 	<variablelist>
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">Expressions regulars</term>
+      <varlistentry xml:id="windows.text.search.methods.regex">
+        <term xml:id="windows.text.search.methods.regex.title">Expressions regulars</term>
         <listitem>
           <para>Tracta la cadena de cerca com a expressió regular.</para>
 		  <para>Les expressions regulars són una manera molt potent de cercar patrons generals o complexos en comptes de cadenes exactes. Consulteu l'annex <link linkend="app.regex" endterm="app.regex.title"/> per a conèixer més detalls.</para>
@@ -116,8 +115,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">Opcions</title>
+  <section xml:id="windows.text.search.options">
+	<title xml:id="windows.text.search.options.title">Opcions</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -271,8 +270,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Visualització dels resultats</title>
+  <section xml:id="windows.text.search.result.display">
+    <title xml:id="windows.text.search.result.display.title">Visualització dels resultats</title>
 
     <para>Les coincidències es mostren en ordre d'aparició en el projecte. Per als segments traduïts, es mostra el text original sobre el text traduït. Només es mostra el text d'origen per als segments sense traduir.</para>
 
@@ -304,12 +303,12 @@
 	
 	<para>El segment seleccionat es ressalta en verd:</para>
 
-  	<example id="select.second.match">
-	  <title id="select.second.match.title">Selecció de la segona coincidència</title>
+  	<example xml:id="select.second.match">
+	  <title xml:id="select.second.match.title">Selecció de la segona coincidència</title>
 	  <para>
 		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
-<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
 	  </para>
 	</example>
@@ -330,8 +329,8 @@
 	</variablelist>
   </section>
   
-  <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">Filtre</title>
+  <section xml:id="windows.text.search.filter">
+    <title xml:id="windows.text.search.filter.title">Filtre</title>
 
 	<para>Feu clic en el botó <guibutton>Filtra</guibutton> per a mostrar només els segments que coincideixen amb els resultats de la cerca en la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/>. Per a suprimir el filtre, feu clic en el botó <guibutton>Suprimeix el filtre</guibutton> de la part superior de la subfinestra <link linkend="panes.editor" endterm="panes.editor.title"/> o torneu a carregar el projecte.</para>
   </section>

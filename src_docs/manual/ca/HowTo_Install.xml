@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="how.to.installing.omegat">
-  <title id="how.to.installing.omegat.title">Instal·lació de l'OmegaT</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.installing.omegat">
+  <title xml:id="how.to.installing.omegat.title">Instal·lació de l'OmegaT</title>
 
   <para>OmegaT té dues versions:</para>
 
@@ -17,39 +12,39 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Desenvolupament: OmegaT setmanal</term>
+	  <term>Desenvolupament: OmegaT (compilació nocturna)</term>
 	  <listitem>
-		<para>Aquesta és l'edició de l'OmegaT en desenvolupament actiu. Es genera automàticament cada setmana i serveix de versió beta per a proves.</para>
+		<para>Aquesta versió es genera automàticament cada vegada que s'afegeix codi a l'OmegaT. S'utilitza amb finalitats de proves.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
 
-  <para>Els fitxers es poden baixar directament des del lloc web <ulink url="https://omegat.org/download">https://omegat.org</ulink>.</para>
+  <para>Els fitxers es poden baixar directament des del lloc web <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.org/download">https://omegat.org</link>.</para>
 
   <note>
 	<para>L'OmegaT 6.1.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</para>
 
 	<para>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</para>
 
-	<para>L'OmegaT 6.1.0 i les versions posteriors també es poden executar amb el Java 17 Runtime Environment en qualsevol plataforma.</para>
+	<para>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</para>
 
-	<para>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 11 hauria de funcionar. Consulteu <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">Projecte Eclipse Temurin™</ulink>.</para>
+	<para>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 8 hauria de funcionar. Consulteu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://projects.eclipse.org/projects/adoptium.temurin">Projecte Eclipse Temurin™</link>.</para>
 
-	<para>IBM proporciona JRE per a PowerPC amb Linux en la pàgina <ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>.</para>
+	<para>IBM proporciona JRE per a PowerPC amb Linux en la pàgina <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/">https://developer.ibm.com/languages/java/semeru-runtimes/downloads/</uri>.</para>
   </note>
 
-  <section id="installing.omegat.windows">
-    <title id="installing.omegat.windows.title">Windows</title>
+  <section xml:id="installing.omegat.windows">
+    <title xml:id="installing.omegat.windows.title">Windows</title>
 
     <para>Feu doble clic en el paquet que heu baixat.</para>
 
     <para>Podeu triar la llengua durant la instal·lació i la llengua de l'OmegaT. També podeu canviar-la més endavant editant el fitxer <filename>OmegaT.l4J.ini</filename>.</para>
   </section>
 
-  <section id="installing.omegat.linux.intel">
-    <title id="installing.omegat.linux.intel.title">Linux</title>
+  <section xml:id="installing.omegat.linux.intel">
+    <title xml:id="installing.omegat.linux.intel.title">Linux</title>
 
-	<para>Algunes distribucions del Linux ofereixen l'OmegaT en el gestor de paquets. Les instruccions indicades aquí s'apliquen a la baixada del paquet des del lloc <ulink url="https://omegat.org/download">https://omegat.org</ulink> i la instal·lació manual.</para>
+	<para>Algunes distribucions del Linux ofereixen l'OmegaT en el gestor de paquets. Les instruccions indicades aquí s'apliquen a la baixada del paquet des del lloc <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.org/download">https://omegat.org</link> i la instal·lació manual.</para>
 
 
     <para>Descomprimiu o desempaqueteu el fitxer que heu baixat. Això crea una carpeta nova amb el nom del paquet que heu baixat. Aquesta carpeta conté tots els fitxers necessaris per a executar l'OmegaT.</para>
@@ -65,8 +60,8 @@
     <para>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</para>
   </section>
 
-  <section id="Installing.omegat.macos">
-    <title id="Installing.omegat.macos.title">macOS</title>
+  <section xml:id="Installing.omegat.macos">
+    <title xml:id="Installing.omegat.macos.title">macOS</title>
 
     <para>Feu doble clic en el paquet que heu baixat per a desempaquetar-lo. Això crea una carpeta anomenada <filename>OmegaT</filename>. La carpeta conté dos fitxers: <filename>index.html</filename> (fitxer d'entrades del manual d'usuari) i <filename>OmegaT.app</filename> (aplicació). Copieu la carpeta a una ubicació adequada (p. ex., <filename>Aplicacions</filename>).</para>
 
@@ -75,8 +70,8 @@
 	<para>Quan hàgiu fet això, podeu suprimir el paquet baixat, que ja no és necessari.</para>
   </section>
 
-  <section id="installing.omegat.other.systems">
-    <title id="installing.omegat.other.systems.title">Altres plataformes</title>
+  <section xml:id="installing.omegat.other.systems">
+    <title xml:id="installing.omegat.other.systems.title">Altres plataformes</title>
 
     <para>Aquesta informació s'aplica a qualsevol sistema amb una versió del Java compatible amb el Java 11 Runtime Environment. Això inclou les plataformes descrites anteriorment i també les plataformes per a les quals no es proporcionen paquets de l'OmegaT específics.</para>
 
@@ -87,12 +82,12 @@
     <para>Seguiu les instruccions del sistema per a instal·lar les dreceres de l'OmegaT en els llocs adequats que vulgueu.</para>
   </section>
 
-  <section id="update.and.delete.omegat">
-	<title id="update.and.delete.omegat.title">Actualització</title>
+  <section xml:id="update.and.delete.omegat">
+	<title xml:id="update.and.delete.omegat.title">Actualització</title>
 
 	<para>L'OmegaT us pot avisar quan hi hagi una versió nova disponible. Consulteu les preferències de <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> per a conèixer més detalls.</para>
 
-	<para>Els canvis entre la vostra versió i la versió actual estan documentats en el fitxer <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> del lloc de desenvolupament.</para>
+	<para>Els canvis entre la vostra versió i la versió actual estan documentats en el fitxer <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</link> del lloc de desenvolupament.</para>
 
 	<note>
 	  <para>Si decidiu instal·lar una versió nova, tingueu en compte el següent:</para>
@@ -117,16 +112,16 @@
 	</note>
 
 	<variablelist>
-	  <varlistentry id="update.and.delete.omegat.over.existing.package">
-		<term id="update.and.delete.omegat.over.existing.package.title">Sobre una versió existent</term>
+	  <varlistentry xml:id="update.and.delete.omegat.over.existing.package">
+		<term xml:id="update.and.delete.omegat.over.existing.package.title">Sobre una versió existent</term>
 
 		<listitem>
 		  <para>Per a fer-ho, només cal que seleccioneu la mateixa carpeta d'instal·lació de la instal·lació existent en instal·lar la versió nova. Se sobreescriurà la versió «antiga» de l'OmegaT, però es conservaran els paràmetres aplicats des de la interfície de l'OmegaT en les diferents carpetes de configuració (consulteu els apartats anteriors).</para>
 		</listitem>
 	  </varlistentry>
 	  
-	<varlistentry id="update.and.delete.omegat.along.existing.package">
-	  <term id="update.and.delete.omegat.along.existing.package.title">Juntament amb una versió existent</term>
+	<varlistentry xml:id="update.and.delete.omegat.along.existing.package">
+	  <term xml:id="update.and.delete.omegat.along.existing.package.title">Juntament amb una versió existent</term>
 
 	  <listitem>
 		<para>Això us permetrà conservar qualsevol nombre de versions alhora, que pot ser que us interessi fins que us acostumeu a la versió nova.</para>
@@ -139,18 +134,18 @@
 	</variablelist>
   </section>
   
-	<section id="update.and.delete.omegat.delete">
-	  <title id="update.and.delete.omegat.delete.title">Desinstal·lació de l'OmegaT</title>
+	<section xml:id="update.and.delete.omegat.delete">
+	  <title xml:id="update.and.delete.omegat.delete.title">Desinstal·lació de l'OmegaT</title>
 
 	  <para>Seguiu el procediment estàndard del vostre sistema operatiu per a desinstal·lar l'OmegaT. Si voleu desinstal·lar completament l'OmegaT, també haureu de suprimir la carpeta de configuració.</para>
 
 	  <para>Si heu instal·lat el programa manualment en el Linux, haureu de suprimir manualment les carpetes de l'OmegaT de la carpeta <filename>opt/</filename>, així com els enllaços simbòlics creats en la carpeta <filename>/usr/local/bin/</filename> per l'script d'instal·lació.</para>
 	</section>
 
-  <section id="build.omegat.from.source">
-	<title id="build.omegat.from.source.title">Compilació de l'OmegaT</title>
+  <section xml:id="build.omegat.from.source">
+	<title xml:id="build.omegat.from.source.title">Compilació de l'OmegaT</title>
 
-	<para>Podeu baixar el codi font de la versió actual directament des de la <ulink url="https://omegat.org/download">pàgina de baixada</ulink> de l'OmegaT, o bé clonar-lo des dels repositoris de <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> o <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
+	<para>Podeu baixar el codi font de la versió actual directament des de la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.org/download">pàgina de baixada</link> de l'OmegaT, o bé clonar-lo des dels dipòsits de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://git.code.sf.net/p/omegat/code">Sourceforge</link> o <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/omegat-org/omegat.git">GitHub</link>.</para>
 	<para>Una vegada baixat el codi, obriu un terminal en la carpeta amb el codi font (<filename>omegat-code/</filename> si l'heu clonat des de Sourceforge, o <filename>/omegat</filename> si l'heu clonat des de GitHub) i escriviu l'ordre següent:</para>
 
 	<programlisting>./gradlew installDist</programlisting>
@@ -165,6 +160,6 @@
 
 	<programlisting>./gradlew tasks</programlisting>
 
-	<para>Podeu trobar instruccions detallades sobre la compilació de l'OmegaT en el fitxer <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink> de la subcarpeta <filename class="directory">docs_devel</filename>.</para>
+	<para>Podeu trobar instruccions detallades sobre la compilació de l'OmegaT en el fitxer <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</link> de la subcarpeta <filename class="directory">docs_devel</filename>.</para>
   </section>
 </section>

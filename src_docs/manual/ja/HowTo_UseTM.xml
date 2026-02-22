@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">翻訳メモリを使用する</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.use.tm">
+  <title xml:id="how.to.use.tm.title">翻訳メモリを使用する</title>
 
   <para>プロジェクトを最初に作成すると、<link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>フォルダーに空のプロジェクトの翻訳メモリ(<link linkend="project.folder.project.save.tmx.title" endterm="project.folder.project.save.tmx.title"/>ファイル)が作成されます。翻訳が進むにつれて、このメモリは徐々にいっぱいになります。</para>
 
@@ -21,8 +20,8 @@
 	  </listitem>
 	</itemizedlist>
 
-  <section id="how.to.use.tm.create.your.tm">
-	<title id="how.to.use.tm.create.your.tm.title">独自の翻訳メモリを作成する</title>
+  <section xml:id="how.to.use.tm.create.your.tm">
+	<title xml:id="how.to.use.tm.create.your.tm.title">独自の翻訳メモリを作成する</title>
 	
 	<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>を使用してプロジェクトの訳文文書を作成すると、OmegaTは原文フォルダーのファイルの現在の翻訳状態を反映した3つの翻訳メモリを出力します。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> を確認してください。</para>
 
@@ -31,8 +30,8 @@
 	<para><link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.align.files" endterm="menus.tools.align.files.title"/>ツールを使用して、OmegaTがサポートする2つのTMXファイル形式で作成することができます。</para>
   </section>
 
-  <section id="how.to.use.tm.reuse.tm">
-	<title id="how.to.use.tm.reuse.tm.title">翻訳メモリの再利用</title>
+  <section xml:id="how.to.use.tm.reuse.tm">
+	<title xml:id="how.to.use.tm.reuse.tm.title">翻訳メモリの再利用</title>
 	
 	<para>以前のプロジェクトの翻訳メモリを再利用するには、次の2つの方法があります。</para>
 
@@ -98,22 +97,22 @@
 	  </listitem>
 	</itemizedlist>
 	
-    <section id="how.to.tm.read.and.write">
-      <title id="how.to.tm.read.and.write.title">他のツールからの翻訳メモリの読み取り</title>
+    <section xml:id="how.to.tm.read.and.write">
+      <title xml:id="how.to.tm.read.and.write.title">他のツールからの翻訳メモリの読み取り</title>
 
       <para>OmegaTは、他のツールで作成されたTMX標準に準拠した翻訳メモリを読み取ることができます。</para>
 
       <para>一部のツールは、特定の条件下で無効なTMXファイルを生成します。そのような翻訳メモリを OmegaT に参照させるには、事前にファイルを修正しておく必要があります。でなければ、OmegaT はエラーでそのファイルを読み込めないでしょう。一般に修正は簡単なもので、OmegaTが表示するエラーメッセージを参照すれば、エラーを特定できます。不明な点があればユーザーグループに相談することもできます。</para>
 	</section>
 
-	<section id="how.to.use.tm.store.your.tm">
-	  <title id="how.to.use.tm.store.your.tm.title">翻訳メモリを管理する</title>
+	<section xml:id="how.to.use.tm.store.your.tm">
+	  <title xml:id="how.to.use.tm.store.your.tm.title">翻訳メモリを管理する</title>
 
 	  <para>翻訳メモリは、クライアントまたは専門領域ごとに別々のフォルダに保存して、必要に応じてすばやく再利用すると良いでしょう。プロジェクトの<link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーの代わりに、任意の書き込み可能なフォルダーを使用できます。プロジェクト設定ダイアログの<link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/>章を参照してください。</para>
 	</section>
   
-	<section id="how.to.tm.creating.a.tm.for.selected.documents">
-      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">選択したドキュメントに固有の翻訳メモリを作成する</title>
+	<section xml:id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title xml:id="how.to.tm.creating.a.tm.for.selected.documents.title">選択したドキュメントに固有の翻訳メモリを作成する</title>
 
       <para>特定のファイルの文章のみを含み、その他のコンテンツは除外されているようなTMXを作成して共有する必要がある場合は、次の手順に従います。</para>
 
@@ -143,8 +142,8 @@
   </section>
 </section>
 
-<section id="how.to.tm.share.translation.memories">
-  <title id="how.to.tm.share.translation.memories.title">翻訳メモリの共有</title>
+<section xml:id="how.to.tm.share.translation.memories">
+  <title xml:id="how.to.tm.share.translation.memories.title">翻訳メモリの共有</title>
 
   <para>翻訳者のチームが関与する大規模な作業では、各自のファイルをやり取りするよりも、関係者全員が共通の翻訳メモリを共有する方が簡単です。</para>
 
@@ -190,8 +189,8 @@
   </warning>
 </section>
 
-<section id="how.to.tm.bridge.two.languages">
-  <title id="how.to.tm.bridge.two.languages.title">2つの言語の橋渡し</title>
+<section xml:id="how.to.tm.bridge.two.languages">
+  <title xml:id="how.to.tm.bridge.two.languages.title">2つの言語の橋渡し</title>
 
   <para>OmegaTは、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウに参考訳文を表示します。By default, those matches are limited to the source and target languages defined in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog.</para>
 
@@ -237,8 +236,8 @@
 	  </listitem>
 	</orderedlist>
 
-  <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">英語原文の下での日本語の参照訳の使用</title>
+  <example xml:id="bridge.english.and.french.with.japanese">
+	<title xml:id="replace.with.allemand.title">英語原文の下での日本語の参照訳の使用</title>
 	<para>フランス語に翻訳するときに、英語文書の日本語訳を含むTMXをお持ちの場合は、対象の英語文の下に表示することで、日本語訳を代替の正確な参照として使用できます。</para>
 	<para>英語から日本語のファイルを<filename class="directory">tm/tmx2source</filename>に<filename>JA-JP.tmx</filename>という名前で置いてください。OmegaTは、英語の原文に対応する日本語の分節を表示します。</para>
 	<para>

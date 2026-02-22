@@ -1,79 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.view">
-  <title id="menus.view.title"><guimenu>Visualització</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.view">
+  <title xml:id="menus.view.title"><guimenu>Visualització</guimenu></title>
 
   <para>Aquest menú us permet seleccionar la informació que voleu que mostri l'OmegaT.</para>
 
   <para>Tots els colors indicats en les descripcions es poden modificar amb la preferència <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
-    <varlistentry id="menus.view.mark.translated.segments">
-      <term id="menus.view.mark.translated.segments.title"><guimenuitem>Ressalta els segments traduïts</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.translated.segments">
+      <term xml:id="menus.view.mark.translated.segments.title"><guimenuitem>Ressalta els segments traduïts</guimenuitem></term>
       <listitem>
         <para>Si es marca, els segments traduïts es ressalten en color groc.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.untranslated.segments">
-      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Ressalta els segments sense traduir</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.untranslated.segments">
+      <term xml:id="menus.view.mark.untranslated.segments.title"><guimenuitem>Ressalta els segments sense traduir</guimenuitem></term>
       <listitem>
         <para>Si es marca, els segments sense traduir es ressalten en color porpra.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.paragraph.delimitations">
-      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Mostra els límits dels paràgrafs</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.paragraph.delimitations">
+      <term xml:id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Mostra els límits dels paràgrafs</guimenuitem></term>
       <listitem>
         <para>Si es marca, les separacions entre els paràgrafs del document d'origen s'indiquen visualment. Podeu canviar la cadena de límit dels paràgrafs amb la preferència <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.display.source.segments">
-      <term id="menus.view.display.source.segments.title"><guimenuitem>Mostra els segments d'origen</guimenuitem></term>
+    <varlistentry xml:id="menus.view.display.source.segments">
+      <term xml:id="menus.view.display.source.segments.title"><guimenuitem>Mostra els segments d'origen</guimenuitem></term>
       <listitem>
         <para>Si es marca, tots els segments d'origen es mostren i es ressalten en color verd. Si no es marca, només es mostra el segment d'origen actual.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.non.unique.segments">
-      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Ressalta els segments repetits</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.non.unique.segments">
+      <term xml:id="menus.view.mark.non.unique.segments.title"><guimenuitem>Ressalta els segments repetits</guimenuitem></term>
       <listitem>
         <para>Si es marca, els segments repetits es ressalten en color gris pàl·lid.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.segments.with.notes">
-      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Ressalta els segments amb notes</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.segments.with.notes">
+      <term xml:id="menus.view.mark.segments.with.notes.title"><guimenuitem>Ressalta els segments amb notes</guimenuitem></term>
       <listitem>
         <para>Si es marca, els segments amb notes es ressalten en color cian. Aquesta marca té prioritat sobre <guimenuitem>Ressalta els segments traduïts</guimenuitem> i <guimenuitem>Ressalta els segments sense traduir</guimenuitem>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.non.breakable.space">
-      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Mostra els espais no separables</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.non.breakable.space">
+      <term xml:id="menus.view.mark.non.breakable.space.title"><guimenuitem>Mostra els espais no separables</guimenuitem></term>
       <listitem>
         <para>Si es marca, els espais no separables es mostren amb un fons de color gris.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.white.space">
-      <term id="menus.view.mark.white.space.title"><guimenuitem>Mostra els espais en blanc</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.white.space">
+      <term xml:id="menus.view.mark.white.space.title"><guimenuitem>Mostra els espais en blanc</guimenuitem></term>
       <listitem>
         <para>Si es marca, els espais blancs es mostren com un punt volat.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
-      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Mostra els caràcters de control bidireccional</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term xml:id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Mostra els caràcters de control bidireccional</guimenuitem></term>
       <listitem>
-        <para>Aquesta opció mostra els caràcters de format direccional d'Unicode. Consulteu <ulink url="https://www.unicode.org/reports/tr9/">Algorisme bidireccional d'Unicode</ulink> per a conèixer més detalls.</para>
+        <para>Aquesta opció mostra els caràcters de format direccional d'Unicode. Consulteu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.unicode.org/reports/tr9/">Algorisme bidireccional d'Unicode</link> per a conèixer més detalls.</para>
 		<para>Utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> per a inserir una selecció de caràcters directament des de la interfície de l'OmegaT. Consulteu <link linkend="app.bidi" endterm="app.bidi.title"/> per a conèixer més detalls.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Ressalta els segments propagats automàticament</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.auto.populated.segments">
+      <term xml:id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Ressalta els segments propagats automàticament</guimenuitem></term>
       <listitem>
         <para>Si es marca, els segments propagats automàticament es ressalten amb diversos colors.</para>
 
@@ -81,22 +80,22 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.glossary.matches">
-      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Marca les coincidències del glossari</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.glossary.matches">
+      <term xml:id="menus.view.mark.glossary.matches.title"><guimenuitem>Marca les coincidències del glossari</guimenuitem></term>
       <listitem>
         <para>Subratlla els termes del text d'origen amb una coincidència en els glossaris. En passar el cursor sobre un terme subratllat, es mostra el terme de destinació corresponent. En fer clic amb el botó dret sobre un terme subratllat, es mostra el terme de destinació corresponent, que es pot seleccionar i inserir en la posició del cursor en el text de destinació.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.language.checker">
-      <term id="menus.view.mark.language.checker.title"><guimenuitem>Marca els errors del corrector lingüístic</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.language.checker">
+      <term xml:id="menus.view.mark.language.checker.title"><guimenuitem>Marca els errors del corrector lingüístic</guimenuitem></term>
       <listitem>
         <para>Subratlla les parts del text de destinació on el LanguageTool ha trobat errors. Consulteu les preferències de <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> per a conèixer més detalls.</para>
 	  </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.view.aggressive.font.fallback">
-      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Utilitza la substitució de font forçada</guimenuitem></term>
+    <varlistentry xml:id="menus.view.aggressive.font.fallback">
+      <term xml:id="menus.view.aggressive.font.fallback.title"><guimenuitem>Utilitza la substitució de font forçada</guimenuitem></term>
       <listitem>
         <para>Marqueu aquesta opció si l'OmegaT no mostra correctament determinats caràcters (fins i tot si teniu instal·lats en l'ordinador les lletres amb els caràcters en qüestió).</para>
 
@@ -106,8 +105,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.modification.info">
-      <term id="menus.view.modification.info.title"><guisubmenu>Mostra la informació de modificació</guisubmenu></term>
+    <varlistentry xml:id="menus.view.modification.info">
+      <term xml:id="menus.view.modification.info.title"><guisubmenu>Mostra la informació de modificació</guisubmenu></term>
       <listitem>
         <para>Mostra l'hora i l'autoria de la darrera modificació d'un segment.</para>
 		
@@ -117,10 +116,10 @@
       </listitem>
     </varlistentry>
 	
-	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Reinicialitza la finestra de l'OmegaT</guimenuitem></term>
+	<varlistentry xml:id="menus.view.restore.main.window">
+      <term xml:id="menus.view.restore.main.window.title"><guimenuitem>Reinicialitza la finestra de l'OmegaT</guimenuitem></term>
       <listitem>
-        <para>Reinicialitza la disposició de la finestra de l'OmegaT.</para>
+        <para>Reinicialitza la disposició de la finestra de l'OmegaT als valors per defecte.</para>
 
 		<note>
 		  <para>Utilitzeu aquesta funció quan tingueu problemes en reordenar la disposició de la finestra.</para>

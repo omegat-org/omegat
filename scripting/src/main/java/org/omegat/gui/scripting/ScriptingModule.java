@@ -111,7 +111,7 @@ public final class ScriptingModule {
         binding.put(ScriptRunner.VAR_EDITOR, consoleBindings);
 
         try {
-            String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
+            String result = ScriptRunner.executeScript(new ScriptItem(scriptFile), binding);
             Log.log(result);
         } catch (Exception ex) {
             Log.log(ex);

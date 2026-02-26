@@ -451,12 +451,24 @@ public final class Main {
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
         p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
 
-        // Called *after* executing post processing command (unlike the
-        // regular PROJECT_CHANGE_TYPE.COMPILE)
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForCompile")) {
+            BaseSubCommand command = SubCommands.getCommand("ExecScriptForCompile").getDeclaredConstructor().newInstance();
+            command.setParameters(PARAMS);
+            int status = command.call();
+            if (status != 0) {
+                return status;
+            }
+        }
 
         p.closeProject();
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
+        if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForClose")) {
+            BaseSubCommand command = SubCommands.getCommand("ExecScriptForClose").getDeclaredConstructor().newInstance();
+            command.setParameters(PARAMS);
+            int status = command.call();
+            if (status != 0) {
+                return status;
+            }
+        }
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
 
         return 0;
@@ -656,7 +668,7 @@ public final class Main {
      *            load the project or not
      * @return the project.
      */
-    private static RealProject selectProjectConsoleMode(boolean loadProject) {
+    private static RealProject selectProjectConsoleMode(boolean loadProject) throws Exception {
         System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
 
         // check if project okay
@@ -677,41 +689,17 @@ public final class Main {
             if (!p.isProjectLoaded()) {
                 Core.setProject(new NotLoadedProject());
             } else {
-                executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+                if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForLoad")) {
+                    BaseSubCommand command = SubCommands.getCommand("ExecScriptForLoad").getDeclaredConstructor().newInstance();
+                    command.setParameters(PARAMS);
+                    int status = command.call();
+                    if (status != 0) {
+                        System.exit(status);
+                    }
+                }
             }
-
         }
         return p;
-    }
-
-    /**
-     * Execute a script as PROJECT_CHANGE events. We can't use the regular
-     * project listener because the SwingUtilities.invokeLater method used in
-     * CoreEvents doesn't stop the project processing in console mode.
-     */
-    private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script"));
-            Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
-            if (script.isFile()) {
-                try {
-                    ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.MISCELLANEOUS);
-                    if (cl == null) {
-                        Log.logErrorRB("SCW_SCRIPT_LOAD_ERROR", "the plugin classloader is null");
-                        return;
-                    }
-                    Class<?> scriptingClass = cl.loadClass("org.omegat.gui.scripting.ScriptingModule");
-                    Method method = scriptingClass.getMethod("executeConsoleScript",
-                            IProjectEventListener.PROJECT_CHANGE_TYPE.class, File.class);
-                    method.invoke(null, eventType, script);
-                } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
-                         | InvocationTargetException e) {
-                    Log.log(e);
-                }
-            } else {
-                Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
-            }
-        }
     }
 
     public static void showError(Throwable ex) {

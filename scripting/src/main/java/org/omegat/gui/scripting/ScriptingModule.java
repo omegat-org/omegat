@@ -27,12 +27,15 @@
 package org.omegat.gui.scripting;
 
 import org.jspecify.annotations.Nullable;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 /**
@@ -51,6 +54,9 @@ public final class ScriptingModule {
     private static final ScriptingStartupEventListener listener = new ScriptingStartupEventListener();
 
     public static void loadPlugins() {
+        Core.registerConsoleCommand("ExecScriptForLoad", LoadScriptCommand.class);
+        Core.registerConsoleCommand("ExecScriptForCompile", CompileScriptCommand.class);
+        Core.registerConsoleCommand("ExecScriptForClose", CloseScriptCommand.class);
         CoreEvents.registerApplicationEventListener(listener);
     }
 
@@ -58,31 +64,60 @@ public final class ScriptingModule {
         CoreEvents.unregisterApplicationEventListener(listener);
     }
 
+    public static class LoadScriptCommand extends BaseSubCommand {
+        @Override
+        public Integer call() {
+            return executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD, getParam("script"));
+        }
+    }
+
+    public static class CompileScriptCommand extends BaseSubCommand {
+        @Override
+        public Integer call() {
+            return executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE, getParam("script"));
+        }
+    }
+
+    public static class CloseScriptCommand extends BaseSubCommand {
+        @Override
+        public Integer call() {
+            return executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE, getParam("script"));
+        }
+    }
+
     /**
      * Execute a script as PROJECT_CHANGE events.
      */
     @SuppressWarnings("unused")
-    public static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType,
-            File script) {
+    public static int executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType,
+                                           @Nullable String script) {
         Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
-        if (script.isFile()) {
-            HashMap<String, Object> binding = new HashMap<>();
-            binding.put("eventType", eventType);
-
-            ConsoleBindings consoleBindings = new ConsoleBindings();
-            binding.put(ScriptRunner.VAR_CONSOLE, consoleBindings);
-            binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindings);
-            binding.put(ScriptRunner.VAR_EDITOR, consoleBindings);
-
-            try {
-                String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
-                Log.log(result);
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
-        } else {
+        if (script == null) {
             Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
+            return 1;
         }
+        File scriptFile = Paths.get(script).toFile();
+        if (!scriptFile.isFile()) {
+            Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
+            return 1;
+        }
+
+        HashMap<String, Object> binding = new HashMap<>();
+        binding.put("eventType", eventType);
+
+        ConsoleBindings consoleBindings = new ConsoleBindings();
+        binding.put(ScriptRunner.VAR_CONSOLE, consoleBindings);
+        binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindings);
+        binding.put(ScriptRunner.VAR_EDITOR, consoleBindings);
+
+        try {
+            String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
+            Log.log(result);
+        } catch (Exception ex) {
+            Log.log(ex);
+            return 1;
+        }
+        return 0;
     }
 
     private static final class ScriptingStartupEventListener implements IApplicationEventListener {

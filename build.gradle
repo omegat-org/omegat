@@ -233,7 +233,9 @@ dependencies {
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
     testAcceptanceImplementation(libs.bundles.lucene)
+    testAcceptanceImplementation(libs.bundles.groovy)
     testAcceptanceImplementation(project(':aligner'))
+    testAcceptanceImplementation(project(':scripting'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))

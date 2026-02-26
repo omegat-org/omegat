@@ -451,7 +451,6 @@ public final class Preferences {
     public static final boolean AC_GLOSSARY_ENABLED_DEFAULT = true;
     public static final String AC_GLOSSARY_SHOW_SOURCE = "ac_glossary_show_source";
     public static final String AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE = "ac_glossary_show_target_before_source";
-    public static final String AC_GLOSSARY_SORT_BY_SOURCE = "ac_glossary_sort_by_source";
     public static final String AC_GLOSSARY_SORT_BY_LENGTH = "ac_glossary_sort_by_length";
     public static final String AC_GLOSSARY_SORT_ALPHABETICALLY = "ac_glossary_sort_alphabetically";
     public static final String AC_GLOSSARY_CAPITALIZE = "ac_glossary_capitalize";

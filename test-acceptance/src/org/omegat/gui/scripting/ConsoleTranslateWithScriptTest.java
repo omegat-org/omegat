@@ -104,6 +104,44 @@ public class ConsoleTranslateWithScriptTest extends TestCore {
 
         String[] args = {
                 tmpDir.toString(),
+                "--mode=console-translate",
+                "--script=" + scriptPath
+        };
+
+        try {
+            Main.main(args);
+        } catch (Throwable t) {
+            System.err.println("Main.main threw an exception:");
+            t.printStackTrace(System.err);
+        }
+
+        String output = outContent.toString();
+        String error = errContent.toString();
+
+        // Print to original stdout for debugging if test fails in Gradle
+        originalOut.println("STDOUT:\n" + output);
+        originalOut.println("STDERR:\n" + error);
+
+        assertTrue("Output should contain script greeting. Actual output:\n" + output + "\nError output:\n" + error,
+                output.contains("Hello from script! Running acceptance test…"));
+        assertTrue("Output should contain project info from script. Actual output:\n" + output + "\nError output:\n" + error,
+                output.contains("Project name:"));
+        assertTrue("Output should contain script compile run when compiling:\n" + output + "\nError output:\n" + error,
+                output.contains("Compile project"));
+        assertTrue("Output should contain script close run when closing:\n" + output + "\nError output:\n" + error,
+                output.contains("Bye from script: closing project"));
+    }
+
+    @Test
+    public void testConsoleStatWithScript() {
+        // Use the script path from the issue description if it exists, otherwise use the one from VCS status
+        String scriptPath = "test-acceptance/data/scripting/greeting.groovy";
+        if (!Files.exists(Paths.get(scriptPath))) {
+            scriptPath = "test-acceptance/data/scripts/greeting.groovy";
+        }
+
+        String[] args = {
+                tmpDir.toString(),
                 "--mode=console-stats",
                 "--script=" + scriptPath
         };

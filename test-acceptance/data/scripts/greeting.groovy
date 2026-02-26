@@ -13,6 +13,6 @@ case IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE:
     console.println("Compile project")
     break
 case IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE:
-    console.println("By from script: closing project")
+    console.println("Bye from script: closing project")
     break
 }

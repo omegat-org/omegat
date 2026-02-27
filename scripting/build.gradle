@@ -15,8 +15,6 @@ dependencies {
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
         implementation(libs.bundles.groovy)
-        // Javascript used for scripts
-        implementation(libs.nashorn.core)
 
         // Script editor
         implementation(libs.bundles.fifesoft) {
@@ -30,5 +28,6 @@ dependencies {
     testImplementation(libs.commons.io)
     testImplementation(libs.mockito.core)
     testRuntimeOnly(libs.bundles.groovy)
+    // Javascript used for scripts, which is in core dependency
     testRuntimeOnly(libs.nashorn.core)
 }

@@ -332,11 +332,18 @@ public final class StaticUIUtils {
     }
 
     private static Optional<Rectangle> getStoredRectangle(String key) {
+        String xStr = Preferences.getPreference(key + "_x");
+        String yStr = Preferences.getPreference(key + "_y");
+        String widthStr = Preferences.getPreference(key + "_width");
+        String heightStr = Preferences.getPreference(key + "_height");
+        if (xStr == null || yStr == null || widthStr == null || heightStr == null) {
+            return Optional.empty();
+        }
         try {
-            int x = Integer.parseInt(Preferences.getPreference(key + "_x"));
-            int y = Integer.parseInt(Preferences.getPreference(key + "_y"));
-            int w = correctFrameWidth(Integer.parseInt(Preferences.getPreference(key + "_width")));
-            int h = Integer.parseInt(Preferences.getPreference(key + "_height"));
+            int x = Integer.parseInt(xStr);
+            int y = Integer.parseInt(yStr);
+            int w = correctFrameWidth(Integer.parseInt(widthStr));
+            int h = Integer.parseInt(heightStr);
             return Optional.of(new Rectangle(x, y, w, h));
         } catch (NumberFormatException e) {
             return Optional.empty();

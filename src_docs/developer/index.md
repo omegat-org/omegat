@@ -36,6 +36,7 @@
 * [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)
+* [Logging and debugging](28.LoggingAndDebugging.md)
 
 ## Quality Assurance and tests
 

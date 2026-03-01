@@ -31,11 +31,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UncheckedIOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
@@ -94,7 +92,7 @@ public class FileUtilTest {
 
         // Make structure to copy into targetDir
         File sourceDir = makeDir(base, "source");
-        File file1 =  writeFile(new File(sourceDir, "file1"), "file1-first");
+        File file1 = writeFile(new File(sourceDir, "file1"), "file1-first");
         File file2 = writeFile(new File(sourceDir, "sub1/file2"), "file2-first");
 
         // Copy all files. Make sure they are identical.
@@ -199,14 +197,14 @@ public class FileUtilTest {
         return dir;
     }
 
-    private File writeFile(File file, String content) throws FileNotFoundException, UnsupportedEncodingException {
+    private File writeFile(File file, String content) throws IOException {
         File dir = file.getParentFile();
         if (!dir.isDirectory()) {
             assertTrue(dir.mkdirs());
         }
-        PrintStream stream = new PrintStream(file, StandardCharsets.US_ASCII.name());
-        stream.println(content);
-        stream.close();
+        try (PrintStream stream = new PrintStream(file, StandardCharsets.US_ASCII)) {
+            stream.println(content);
+        }
         return file;
     }
 

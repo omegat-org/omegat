@@ -90,7 +90,6 @@ public final class ExternalFinder {
      */
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(generateIApplicationEventListener());
-        CoreEvents.registerProjectChangeListener(generateIProjectEventListener());
     }
 
     private static IProjectEventListener generateIProjectEventListener() {
@@ -144,6 +143,7 @@ public final class ExternalFinder {
 
             @Override
             public void onApplicationStartup() {
+                CoreEvents.registerProjectChangeListener(generateIProjectEventListener());
                 Core.getEditor().registerPopupMenuConstructors(getGlobalConfig().getPriority(),
                         new ExternalFinderItemPopupMenuConstructor());
             }

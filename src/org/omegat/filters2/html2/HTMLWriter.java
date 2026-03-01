@@ -36,7 +36,8 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -55,12 +56,13 @@ import org.omegat.util.PatternConsts;
  *
  * @author Maxym Mykhalchuk
  */
+@NullMarked
 public class HTMLWriter extends Writer {
     /** Internal Buffer to collect the output */
-    private StringWriter writer;
+    private final StringWriter writer;
 
     /** real writer to a file */
-    private BufferedWriter realWriter;
+    private final BufferedWriter realWriter;
 
     /** Replacement string for HTML content-type META */
     private String htmlMeta;
@@ -70,10 +72,10 @@ public class HTMLWriter extends Writer {
     /**
      * Encoding to write this file in. null value means no encoding declaration.
      */
-    private String encoding;
+    private final @Nullable String encoding;
 
     /** HTML filter options. */
-    private HTMLOptions options;
+    private final HTMLOptions options;
 
     /**
      * Creates new HTMLWriter.
@@ -84,7 +86,8 @@ public class HTMLWriter extends Writer {
      *            - the encoding to write HTML file in (null means OS-default
      *            encoding)
      */
-    public HTMLWriter(String fileName, String encoding, HTMLOptions options)
+    @SuppressWarnings("PMD.CloseResource")
+    public HTMLWriter(String fileName, @Nullable String encoding, HTMLOptions options)
             throws FileNotFoundException, UnsupportedEncodingException {
         this.encoding = encoding;
 
@@ -219,7 +222,7 @@ public class HTMLWriter extends Writer {
      *             - If an I/O error occurs
      */
     @Override
-    public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
+    public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();

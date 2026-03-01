@@ -62,74 +62,78 @@ public class StarDictTest {
 
     @Test
     public void testStardict4j() throws Exception {
-        StarDictDictionary dict = StarDictDictionary.loadDictionary(
-                new File("test/data/dicts/latin-francais.ifo"));
-        assertEquals(10451, dict.getInformation().getWordCount());
+        try (StarDictDictionary dict = StarDictDictionary.loadDictionary(
+                new File("test/data/dicts/latin-francais.ifo"))) {
+            assertEquals(10451, dict.getInformation().getWordCount());
 
-        String word = "testudo";
-        List<StarDictDictionary.Entry> result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+            String word = "testudo";
+            List<StarDictDictionary.Entry> result = dict.readArticles(word);
+            assertEquals(1, result.size());
+            assertEquals(word, result.get(0).getWord());
+            assertEquals("dinis, f. : tortue", result.get(0).getArticle());
 
-        // Test prediction
-        word = "testu";
-        result = dict.readArticles(word);
-        assertTrue(result.isEmpty());
-        result = dict.readArticlesPredictive(word);
-        assertEquals(1, result.size());
-        assertEquals("testudo", result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+            // Test prediction
+            word = "testu";
+            result = dict.readArticles(word);
+            assertTrue(result.isEmpty());
+            result = dict.readArticlesPredictive(word);
+            assertEquals(1, result.size());
+            assertEquals("testudo", result.get(0).getWord());
+            assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        }
     }
 
     @Test
     public void testReadFileDict() throws Exception {
-        StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts/latin-francais.ifo"), FRENCH);
+        try (StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts/latin-francais.ifo"), FRENCH)) {
 
-        String word = "testudo";
-        List<DictionaryEntry> result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertEquals(word, result.get(0).getWord());
-        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+            String word = "testudo";
+            List<DictionaryEntry> result = dict.readArticles(word);
+            assertEquals(1, result.size());
+            assertEquals(word, result.get(0).getWord());
+            assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
-        // Test case normalization
-        word = word.toUpperCase(FRENCH.getLocale());
-        result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertEquals("testudo", result.get(0).getWord());
-        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+            // Test case normalization
+            word = word.toUpperCase(FRENCH.getLocale());
+            result = dict.readArticles(word);
+            assertEquals(1, result.size());
+            assertEquals("testudo", result.get(0).getWord());
+            assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
-        // Test prediction
-        word = "testu";
-        result = dict.readArticles(word);
-        assertTrue(result.isEmpty());
-        result = dict.readArticlesPredictive(word);
-        assertEquals(1, result.size());
-        assertEquals("testudo", result.get(0).getWord());
-        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+            // Test prediction
+            word = "testu";
+            result = dict.readArticles(word);
+            assertTrue(result.isEmpty());
+            result = dict.readArticlesPredictive(word);
+            assertEquals(1, result.size());
+            assertEquals("testudo", result.get(0).getWord());
+            assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+        }
     }
 
     @Test
     public void testReadZipDict() throws Exception {
-        StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
-        String word = "testudo";
-        List<DictionaryEntry> result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertFalse(result.isEmpty());
-        assertEquals(word, result.get(0).getWord());
-        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+        try (StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH)) {
+            String word = "testudo";
+            List<DictionaryEntry> result = dict.readArticles(word);
+            assertEquals(1, result.size());
+            assertFalse(result.isEmpty());
+            assertEquals(word, result.get(0).getWord());
+            assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+        }
     }
 
     @Test
     public void testReadDictPangoMarkup() throws Exception {
-        StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts-pango/english-czech.ifo"), SLOVNIK);
-        String word = "lookup";
-        List<DictionaryEntry> result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertEquals("lookup", result.get(0).getWord());
-        assertEquals("<b>vyhledat</b> <small>[Zdeněk Brož]</small>", result.get(0).getArticle());
+        try (StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts-pango/english-czech.ifo"), SLOVNIK)) {
+            String word = "lookup";
+            List<DictionaryEntry> result = dict.readArticles(word);
+            assertEquals(1, result.size());
+            assertEquals("lookup", result.get(0).getWord());
+            assertEquals("<b>vyhledat</b> <small>[Zdeněk Brož]</small>", result.get(0).getArticle());
+        }
     }
 }

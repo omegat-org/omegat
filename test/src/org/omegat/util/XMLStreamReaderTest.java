@@ -47,7 +47,7 @@ import org.omegat.util.xml.*;
  */
 @Deprecated
 @Ignore
-@SuppressWarnings("removal")
+@SuppressWarnings({"removal", "PMD.CloseResource"})
 public class XMLStreamReaderTest {
 
     @Test

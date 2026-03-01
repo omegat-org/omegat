@@ -69,7 +69,7 @@ public class LuceneSmartChineseTokenizer extends BaseTokenizer {
         return tokenizeByCodePointToStrings(strOrig);
     }
 
-    @SuppressWarnings("resource,PMD.CloseResource")
+    @SuppressWarnings({"resource", "PMD.CloseResource"})
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {

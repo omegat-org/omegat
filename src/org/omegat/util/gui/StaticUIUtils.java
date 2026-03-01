@@ -474,9 +474,12 @@ public final class StaticUIUtils {
      */
     public static void requestVisible(DockableScrollPane scrollPane) {
         if (scrollPane.getDockKey().getLocation().equals(DockableState.Location.HIDDEN)) {
-            DockingDesktop desktop = Core.getMainWindow().getDesktop();
-            Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
-            desktop.setAutoHide(dockable, false);
+            IMainWindow mainWindow = Core.getMainWindow();
+            if (mainWindow != null) {
+                DockingDesktop desktop = mainWindow.getDesktop();
+                Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
+                desktop.setAutoHide(dockable, false);
+            }
         }
     }
 
@@ -488,6 +491,6 @@ public final class StaticUIUtils {
             return false;
         }
         IMainWindow mainWindow = Core.getMainWindow();
-        return mainWindow.getApplicationFrame() != null;
+        return mainWindow != null && mainWindow.getApplicationFrame() != null;
     }
 }

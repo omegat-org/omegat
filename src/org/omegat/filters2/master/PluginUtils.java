@@ -282,6 +282,7 @@ public final class PluginUtils {
      * @throws IOException
      *             if an I/O error occurs during manifest processing.
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static boolean processPluginManifests(List<URL> pluginUrls) throws IOException {
         MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         boolean isMainManifestFound = false;
@@ -317,6 +318,7 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             if a plugin class specified in the manifest cannot be found
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static boolean processManifestUrl(URL manifestUrl, List<URL> pluginUrls)
             throws IOException, ClassNotFoundException {
         boolean isMainManifestFound = false;
@@ -370,6 +372,7 @@ public final class PluginUtils {
      *            manifests either from CLI arguments (in development mode) or
      *            from a properties file.
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static void processManifest(Map<String, String> params, boolean foundMain) {
         MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         try {

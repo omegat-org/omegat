@@ -25,64 +25,26 @@
 
 package org.omegat.languages.tl;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-import morfologik.stemming.Dictionary;
-import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
 import org.languagetool.JLanguageTool;
 
-import org.omegat.core.spellchecker.ISpellCheckerDictionary;
-import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
 
 @NullMarked
-public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public class TagalogMorfologikDictionary extends AbstractMorfologikDictionary {
 
     private static final String DICTIONARY_BASE = "/org/languagetool/resource/tl/hunspell/";
-    private static final String DICT_EXT = ".dict";
-    private static final String META_EXT = ".info";
-    private static final String DICT = "tl_PH";
-
-    private @Nullable InputStream infoInputStream;
-    private @Nullable InputStream dictInputStream;
+    private static final String[] DICTIONARIES = { "tl_PH" };
 
     @Override
-    public @Nullable Dictionary getMorfologikDictionary(String language) {
-        if (DICT.startsWith(language)) {
-            infoInputStream = JLanguageTool.getDataBroker()
-                    .getAsStream(DICTIONARY_BASE + DICT + META_EXT);
-            dictInputStream = JLanguageTool.getDataBroker()
-                    .getAsStream(DICTIONARY_BASE + DICT + DICT_EXT);
-            if (infoInputStream != null && dictInputStream != null) {
-                try {
-                    return Dictionary.read(dictInputStream, infoInputStream);
-                } catch (IOException ignored) {
-                }
-            }
-
-        }
-        return null;
+    protected String[] getDictionaries() {
+        return DICTIONARIES;
     }
 
     @Override
-    public SpellCheckDictionaryType getDictionaryType() {
-        return SpellCheckDictionaryType.MORFOLOGIK;
-    }
-
-    @Override
-    public void close() {
-        if (infoInputStream != null) {
-            try {
-                infoInputStream.close();
-            } catch (IOException ignored) {
-            }
-        }
-        if (dictInputStream != null) {
-            try {
-                dictInputStream.close();
-            } catch (IOException ignored) {
-            }
-        }
+    protected InputStream getResourceAsStream(String resource) {
+        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_BASE + resource);
     }
 }

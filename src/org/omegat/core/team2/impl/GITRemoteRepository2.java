@@ -40,7 +40,6 @@ import java.util.stream.StreamSupport;
 import javax.xml.namespace.QName;
 
 import org.apache.sshd.client.SshClient;
-import org.apache.sshd.client.simple.SimpleClient;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
@@ -185,11 +184,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             File gitDir = new File(localDirectory, ".git");
             if (gitDir.exists() && gitDir.isDirectory()) {
                 // already cloned
-                repository = Git.open(localDirectory).getRepository();
-                configRepo();
-                try (Git git = new Git(repository)) {
+                try (Git git =  Git.open(localDirectory)) {
+                    repository = git.getRepository();
+                    configRepo();
                     git.submoduleInit().call();
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                    git.reset().setMode(ResetType.HARD).call();
                 }
             } else {
                 logger.atDebug().setMessage(GIT_START_MSG).addArgument("clone").log();
@@ -198,8 +198,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 c.setDirectory(localDirectory);
                 c.setTimeout(TIMEOUT);
                 c.setDepth(CLONE_DEPTH);
-                try {
-                    c.call();
+                try (Git git = c.call()) {
+                    repository = git.getRepository();
+                    configRepo();
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                    git.reset().setMode(ResetType.HARD).call();
                 } catch (InvalidRemoteException e) {
                     if (localDirectory.exists()) {
                         deleteDirectory(localDirectory);
@@ -212,19 +216,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     }
                     throw e;
                 }
-                repository = Git.open(localDirectory).getRepository();
-                try (Git git = new Git(repository)) {
-                    git.submoduleInit().call();
-                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
-                }
-                configRepo();
-                logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone")
-                        .log();
-            }
-
-            // cleanup repository
-            try (Git git = new Git(repository)) {
-                git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
             logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();

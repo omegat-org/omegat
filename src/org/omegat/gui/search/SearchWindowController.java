@@ -64,6 +64,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.omegat.gui.editor.IEditor;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -194,7 +195,24 @@ public class SearchWindowController {
             form.m_excludeOrphans.setVisible(false);
             break;
         }
+        setComponentNames();
         CoreEvents.registerFontChangedEventListener(this::setFont);
+    }
+
+    private void setComponentNames() {
+        form.m_searchLabel.setName("SearchWindowForm.m_searchLabel");
+        form.m_searchField.setName("SearchWindowForm.m_searchField");
+        form.m_searchExactSearchRB.setName("SearchWindowForm.m_searchExactSearchRB");
+        form.m_searchKeywordSearchRB.setName("SearchWindowForm.m_searchKeywordSearchRB");
+        form.m_searchRegexpSearchRB.setName("SearchWindowForm.m_searchRegexpSearchRB");
+        form.m_searchCase.setName("SearchWindowForm.m_searchCase");
+        form.m_searchSpaceMatchNbsp.setName("SearchWindowForm.m_searchSpaceMatchNbsp");
+        form.m_searchSource.setName("SearchWindowForm.m_searchSource");
+        form.m_searchTranslation.setName("SearchWindowForm.m_searchTranslation");
+        form.m_searchTranslatedUntranslated.setName("SearchWindowForm.m_searchTranslatedUntranslated");
+        form.m_searchTranslated.setName("SearchWindowForm.m_searchTranslated");
+        form.m_searchButton.setName("SearchWindowForm.m_searchButton");
+        form.m_viewer.setName("SearchWindowForm.m_viewer");
     }
 
     public SearchMode getMode() {
@@ -312,18 +330,22 @@ public class SearchWindowController {
                     thread.fin();
                 }
 
-                // back to the initial segment
-                int currentEntry = Core.getEditor().getCurrentEntryNumber();
-                if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
-                        && initialEntry != currentEntry) {
-                    boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
-                    if (isSegDisplayed) {
-                        // Restore caretPosition too
-                        ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
-                    } else {
-                        // The segment is not displayed (maybe filter on).
-                        // Ignore caretPosition.
-                        Core.getEditor().gotoEntry(initialEntry);
+                IEditor editor = Core.getEditor();
+                // Skip when test
+                if (editor instanceof EditorController) {
+                    // back to the initial segment
+                    int currentEntry = editor.getCurrentEntryNumber();
+                    if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
+                            && initialEntry != currentEntry) {
+                        boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
+                        if (isSegDisplayed) {
+                            // Restore caretPosition too
+                            editor.gotoEntry(initialEntry, initialCaret);
+                        } else {
+                            // The segment is not displayed (maybe filter on).
+                            // Ignore caretPosition.
+                            editor.gotoEntry(initialEntry);
+                        }
                     }
                 }
             }

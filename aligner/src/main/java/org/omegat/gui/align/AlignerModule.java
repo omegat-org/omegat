@@ -57,6 +57,7 @@ public final class AlignerModule implements IApplicationEventListener {
      */
     @SuppressWarnings("unused")
     public static void loadPlugins() {
+        Core.registerConsoleCommand("Align", AlignCommand.class);
         alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
     }

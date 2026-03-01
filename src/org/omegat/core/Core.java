@@ -36,6 +36,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -342,6 +344,18 @@ public final class Core {
      */
     public static void registerAutoCompleterClass(Class<? extends AbstractAutoCompleterView> clazz) {
         PluginUtils.getAutoCompleterViewsClasses().add(clazz);
+    }
+
+    /**
+     * Registers a console command by associating a command name with its corresponding subcommand class.
+     * This method adds the specified command to a collection of subcommands, enabling it to be later
+     * utilized or executed through the command-line interface.
+     *
+     * @param name       the subcommand name of the console command to be registered.
+     * @param subcommand the class representing the subcommand implementation associated with the given name.
+     */
+    public static void registerConsoleCommand(String name, Class<? extends BaseSubCommand> subcommand) {
+        SubCommands.registerConsoleCommand(name, subcommand);
     }
 
     /**

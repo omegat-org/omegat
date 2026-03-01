@@ -26,6 +26,7 @@
 package org.omegat;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -48,13 +49,29 @@ import org.omegat.util.StringUtil;
  */
 public final class CLIParameters {
 
+    private @Nullable String subcommand;
+    private final List<String> args = new ArrayList<>();
+    private final Map<String, String> params = new TreeMap<>();
+
     private CLIParameters() {
+    }
+
+    public @Nullable String getSubcommand() {
+        return subcommand;
+    }
+
+    public List<String> getArgs() {
+        return args;
+    }
+
+    public Map<String, String> getParams() {
+        return params;
     }
 
     /**
      * Regexp for parse parameters.
      */
-    protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+    static final Pattern PARAM = Pattern.compile("--([A-Za-z\\-]+)(=(.+))?");
 
     // Help
     public static final String HELP_SHORT = "-h";
@@ -124,8 +141,18 @@ public final class CLIParameters {
             if (s == null) {
                 return GUI;
             }
+            String normalized = normalize(s);
+            if ("ALIGN".equals(normalized)) {
+                return CONSOLE_ALIGN;
+            }
+            if ("TRANSLATE".equals(normalized)) {
+                return CONSOLE_TRANSLATE;
+            }
+            if ("STATS".equals(normalized)) {
+                return CONSOLE_STATS;
+            }
             try {
-                return valueOf(normalize(s));
+                return valueOf(normalized);
             } catch (Exception ex) {
                 // default mode
                 return GUI;
@@ -171,8 +198,8 @@ public final class CLIParameters {
         return s.toUpperCase(Locale.ENGLISH).replace('-', '_');
     }
 
-    static Map<String, String> parseArgs(String... args) {
-        TreeMap<String, String> params = new TreeMap<>();
+    static CLIParameters parseArgs(String... args) {
+        CLIParameters result = new CLIParameters();
 
         /*
          * Parse command line arguments info map.
@@ -186,22 +213,25 @@ public final class CLIParameters {
             arg = StringUtil.normalizeUnicode(arg);
             Matcher m = PARAM.matcher(arg);
             if (m.matches()) {
-                params.put(m.group(1), m.group(3));
-            } else if (arg.startsWith(RESOURCE_BUNDLE + "=")) {
-                // backward compatibility
-                params.put(RESOURCE_BUNDLE, arg.substring(RESOURCE_BUNDLE.length() + 1));
+                result.params.put(m.group(1), m.group(3));
             } else {
                 File f = new File(arg).getAbsoluteFile();
                 if (f.getName().equals(OConsts.FILE_PROJECT)) {
                     f = f.getParentFile();
                 }
                 if (StaticUtils.isProjectDir(f)) {
-                    params.put(PROJECT_DIR, f.getPath());
+                    result.params.put(PROJECT_DIR, f.getPath());
+                } else {
+                    if (result.subcommand == null) {
+                        result.subcommand = arg;
+                    } else {
+                        result.args.add(arg);
+                    }
                 }
             }
         }
 
-        return params;
+        return result;
     }
 
     /**

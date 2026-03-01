@@ -76,7 +76,6 @@ import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.statistics.dso.StatsResult;
@@ -398,7 +397,7 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             // build word count
-            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            StatsResult stat = Statistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             Statistics.writeStat(config.getProjectInternal(), stat);
 
@@ -734,7 +733,7 @@ public class RealProject implements IProject {
         // Ticket 1690 - build project statistics files
         // so that contents of these files is up to date with target files
         // sent at same moment
-        StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+        StatsResult stat = Statistics.buildProjectStats(this);
         stat.updateStatisticsInfo(hotStat);
         Statistics.writeStat(config.getProjectInternal(), stat, StatOutputFormat.TEXT);
         Statistics.writeStat(config.getProjectInternal(), stat, StatOutputFormat.JSON);
@@ -865,7 +864,7 @@ public class RealProject implements IProject {
                 LastSegmentManager.saveLastSegment();
 
                 // update statistics
-                StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+                StatsResult stat = Statistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
                 Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {

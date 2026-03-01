@@ -31,8 +31,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -61,8 +64,9 @@ public class CLIParametersTest {
     @Test
     public void testCLIParameters() throws Exception {
         {
-            Map<String, String> params = CLIParameters.parseArgs("--foo=bar", "--baz",
+            CLIParameters cliParams = CLIParameters.parseArgs("--foo=bar", "--baz",
                     "--" + CLIParameters.CONFIG_FILE + "=bazinga", tmpDir.toString());
+            Map<String, String> params = cliParams.getParams();
             // Key, value present.
             assertEquals("bar", params.get("foo"));
             assertEquals("bazinga", params.get(CLIParameters.CONFIG_FILE));
@@ -80,14 +84,55 @@ public class CLIParametersTest {
             // Create minimum project to fool check into accepting project dir.
             assertTrue(new File(tmpDir.toFile(), OConsts.FILE_PROJECT).createNewFile());
             assertTrue(StaticUtils.isProjectDir(tmpDir.toFile()));
-            Map<String, String> params = CLIParameters.parseArgs(tmpDir.toString());
+            CLIParameters cliParams = CLIParameters.parseArgs(tmpDir.toString());
+            Map<String, String> params = cliParams.getParams();
             // This time the project dir is valid, so it is accepted.
             assertEquals(tmpDir.toString(), params.get(CLIParameters.PROJECT_DIR));
         }
-        {
-            // Test old way of specifying resource-bundle (no leading "--")
-            Map<String, String> params = CLIParameters.parseArgs(CLIParameters.RESOURCE_BUNDLE + "=blah");
-            assertEquals("blah", params.get(CLIParameters.RESOURCE_BUNDLE));
-        }
+    }
+
+    @Test
+    public void testSubcommandParsing() {
+        // "OmegaT team init en ja"
+        String[] args = {"team", "init", "en", "ja"};
+        CLIParameters params = CLIParameters.parseArgs(args);
+
+        assertEquals("team", params.getSubcommand());
+        assertEquals(Arrays.asList("init", "en", "ja"), params.getArgs());
+    }
+
+    @Test
+    public void testSubcommandWithParams() throws IOException {
+        // Create minimum project to fool check into accepting project dir.
+        assertTrue(new File(tmpDir.toFile(), OConsts.FILE_PROJECT).createNewFile());
+        assertTrue(StaticUtils.isProjectDir(tmpDir.toFile()));
+        String myProject = tmpDir.toString();
+        // "OmegaT align --alignDir=hoge ~/OmegaTProject/translateProject"
+        // Note: ~/OmegaTProject/translateProject will be treated as project dir if it exists,
+        // but here we just check if it's preserved if not recognized as project dir.
+        String[] args = {"align", "--alignDir=hoge", myProject};
+        CLIParameters params = CLIParameters.parseArgs(args);
+
+        assertEquals("align", params.getSubcommand());
+        assertEquals("hoge", params.getParams().get(CLIParameters.ALIGNDIR));
+        assertEquals(myProject, params.getParams().get(CLIParameters.PROJECT_DIR));
+    }
+
+    @Test
+    public void testSubcommandWithOptionBefore() {
+        // "OmegaT --quiet team init"
+        String[] args = {"--quiet", "team", "init"};
+        CLIParameters params = CLIParameters.parseArgs(args);
+
+        assertEquals("team", params.getSubcommand());
+        assertTrue(params.getParams().containsKey("quiet"));
+        assertEquals(List.of("init"), params.getArgs());
+    }
+
+    @Test
+    public void testSubcommandModeMapping() {
+        assertEquals(CLIParameters.RUN_MODE.CONSOLE_ALIGN, CLIParameters.RUN_MODE.parse("align"));
+        assertEquals(CLIParameters.RUN_MODE.CONSOLE_TRANSLATE, CLIParameters.RUN_MODE.parse("translate"));
+        assertEquals(CLIParameters.RUN_MODE.CONSOLE_STATS, CLIParameters.RUN_MODE.parse("stats"));
     }
 }

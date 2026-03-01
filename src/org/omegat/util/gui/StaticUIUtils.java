@@ -477,7 +477,10 @@ public final class StaticUIUtils {
      * Whether run on GUI or not.
      */
     public static boolean isGUI() {
+        if (GraphicsEnvironment.isHeadless()) {
+            return false;
+        }
         IMainWindow mainWindow = Core.getMainWindow();
-        return mainWindow != null && mainWindow.getApplicationFrame() != null;
+        return mainWindow.getApplicationFrame() != null;
     }
 }

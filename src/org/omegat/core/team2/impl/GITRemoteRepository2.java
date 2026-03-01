@@ -40,6 +40,7 @@ import java.util.stream.StreamSupport;
 import javax.xml.namespace.QName;
 
 import org.apache.sshd.client.SshClient;
+import org.apache.sshd.client.simple.SimpleClient;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
@@ -137,6 +138,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         logger = LoggerFactory.getLogger(GITRemoteRepository2.class, OStrings.getResourceBundle());
     }
 
+    @SuppressWarnings("PMD.CloseResource")
     private static void installSshSessionFactory() {
         // SSH directories
         // Linux/macOS: ~/.ssh
@@ -227,6 +229,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             configRepo();
             logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();
         } finally {
+            try {
+                client.close();
+            } catch (IOException ignored) {
+                // ignore error
+            }
             client.stop();
         }
 
@@ -521,6 +528,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    @SuppressWarnings("PMD.CloseResource")
     private static AbstractTreeIterator prepareTreeParser(Repository repository, ObjectId objId)
             throws Exception {
         // from the commit we can build the tree which allows us to construct
@@ -623,6 +631,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             // svn://...
             return false;
         } finally {
+            try {
+                client.close();
+            } catch (IOException ignored) {
+                // ignore error
+            }
             client.stop();
         }
     }

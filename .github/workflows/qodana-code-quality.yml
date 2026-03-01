@@ -1,0 +1,29 @@
+name: Qodana
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '3 21 * * *'
+
+concurrency:
+  group: qodana-nightly
+  cancel-in-progress: true
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2025.3
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        with:
+          pr-mode: false
+          use-caches: true
+          use-annotations: true
+          upload-result: true
+          args: --baseline,qodana.sarif.json

@@ -238,9 +238,9 @@ public class StatsResult {
         setDate();
         StringWriter result = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        SequenceWriter writer = mapper.writer().writeValues(result);
-        writer.write(this);
-        writer.close();
+        try (SequenceWriter writer = mapper.writer().writeValues(result)) {
+            writer.write(this);
+        }
         return result.toString();
     }
 

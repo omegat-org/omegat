@@ -153,7 +153,6 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
     static class GlossaryComparator implements Comparator<AutoCompleterItem> {
 
-        private final boolean bySource = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE);
         private final boolean byLength = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH);
         private final boolean alphabetically = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY);
 
@@ -184,14 +183,6 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     return -1;
                 } else if (!o1IsOriginal && o2IsOriginal) {
                     return 1;
-                }
-            }
-
-            // Sort alphabetically by source term
-            if (bySource) {
-                int result = o1.extras[0].compareTo(o2.extras[0]);
-                if (result != 0) {
-                    return result;
                 }
             }
 

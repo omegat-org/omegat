@@ -41,6 +41,7 @@ import javax.xml.transform.sax.SAXSource;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import org.omegat.util.Log;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
@@ -77,6 +78,11 @@ public final class GlossaryReaderTBX {
     static {
         SAX_FACTORY.setNamespaceAware(true);
         SAX_FACTORY.setValidating(false);
+        try {
+            SAX_FACTORY.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "GLOSSARYREADER_PARSER_ERROR", ex.getMessage());
+        }
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {

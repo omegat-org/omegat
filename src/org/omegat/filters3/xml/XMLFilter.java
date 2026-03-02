@@ -96,6 +96,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             // as parsers,
             // validators, and transformers, to try and process XML securely.
             parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            // disable doctype validation
+            parserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             // Avoid internet connection to validate with external DTD.
             parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
             // Disable external general entities

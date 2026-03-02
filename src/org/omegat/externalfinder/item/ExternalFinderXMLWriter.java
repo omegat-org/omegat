@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -55,6 +56,8 @@ public class ExternalFinderXMLWriter {
         Document doc = createDocument(config);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         transformerFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");

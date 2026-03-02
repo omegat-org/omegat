@@ -65,8 +65,11 @@ public class SaveOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new SaveOptionsPanel();
 
-        panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
-                .replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        Object item = panel.variablesList.getSelectedItem();
+        if (item != null) {
+            panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
+                    .replaceSelection(item.toString()));
+        }
     }
 
     @Override

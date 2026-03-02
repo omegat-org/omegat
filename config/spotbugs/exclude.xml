@@ -270,7 +270,6 @@
     </Match>
     <Match>
         <Or>
-            <Class name="org.omegat.core.statistics.StatsResult"/>
             <Class name="org.omegat.filters2.master.FilterMaster"/>
             <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
             <Class name="org.omegat.gui.dialogs.FilenamePatternsEditorController"/>

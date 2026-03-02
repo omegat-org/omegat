@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -77,7 +78,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.core.statistics.StatsResult;
+import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
@@ -734,9 +735,8 @@ public class RealProject implements IProject {
         // sent at same moment
         StatsResult stat = Statistics.buildProjectStats(this);
         stat.updateStatisticsInfo(hotStat);
-        String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-        Statistics.writeStat(fn, stat.getTextData());
-        Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
+        Statistics.writeStat(config.getProjectInternal(), stat, StatOutputFormat.TEXT);
+        Statistics.writeStat(config.getProjectInternal(), stat, StatOutputFormat.JSON);
         // commit translations and statistics
         try {
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
@@ -745,6 +745,7 @@ public class RealProject implements IProject {
             remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
             // Convert stats file name to relative
             ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
             path.setRelativeOrAbsolute(fn);
             fn = path.getUnderRoot();
             remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);

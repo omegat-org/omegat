@@ -29,7 +29,16 @@
 
 package org.omegat.core.statistics;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +56,11 @@ import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
+import org.omegat.core.statistics.dso.MatchStatCounts;
+import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -74,6 +86,7 @@ import org.omegat.util.gui.TextUtil;
  * @author Aaron Madlon-Kay
  */
 public class CalcMatchStatistics extends LongProcessThread {
+
     private final String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
@@ -83,6 +96,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowMatch85"), OStrings.getString("CT_STATSMATCH_RowMatch75"),
             OStrings.getString("CT_STATSMATCH_RowMatch50"), OStrings.getString("CT_STATSMATCH_RowNoMatch"),
             OStrings.getString("CT_STATSMATCH_Total") };
+
     private final String[] rowsPerFile = new String[] {
             OStrings.getString("CT_STATSMATCH_RowRepetitionsWithinThisFile"),
             OStrings.getString("CT_STATSMATCH_RowRepetitionsFromOtherFiles"),
@@ -90,6 +104,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowMatch85"), OStrings.getString("CT_STATSMATCH_RowMatch75"),
             OStrings.getString("CT_STATSMATCH_RowMatch50"), OStrings.getString("CT_STATSMATCH_RowNoMatch"),
             OStrings.getString("CT_STATSMATCH_Total") };
+
     private final boolean[] align = new boolean[] { false, true, true, true, true };
 
     private final IStatsConsumer callback;
@@ -97,8 +112,8 @@ public class CalcMatchStatistics extends LongProcessThread {
     protected int entriesToProcess;
 
     /** Already processed segments. Used for repetitions detect. */
-    private final Set<String> alreadyProcessedInFile = new HashSet<String>();
-    private final Set<String> alreadyProcessedInProject = new HashSet<String>();
+    private final Set<String> alreadyProcessedInFile = new HashSet<>();
+    private final Set<String> alreadyProcessedInProject = new HashSet<>();
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
@@ -110,12 +125,13 @@ public class CalcMatchStatistics extends LongProcessThread {
         this(Core.getProject(), Core.getSegmenter(), callback, perFile);
     }
 
-    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback, boolean perFile) {
+    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback,
+            boolean perFile) {
         this.project = project;
         this.callback = callback;
         this.perFile = perFile;
-        finder = ThreadLocal.withInitial(
-                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
+        finder = ThreadLocal
+                .withInitial(() -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
     }
 
     @Override
@@ -141,14 +157,6 @@ public class CalcMatchStatistics extends LongProcessThread {
         callback.setTextData(text);
     }
 
-    void appendTable(String title, String[][] table) {
-        callback.appendTable(title, header, table);
-    }
-
-    void showTable(String[][] table) {
-        callback.setTable(header, table);
-    }
-
     void calcPerFile() {
         int fileNumber = 0;
         for (IProject.FileInfo fi : project.getProjectFiles()) {
@@ -163,7 +171,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                     fi.filePath);
             appendText(title + "\n");
             appendText(outText + "\n");
-            appendTable(title, table);
+            callback.appendTable(title, header, table);
         }
 
         MatchStatCounts total = calcTotal(false);
@@ -173,11 +181,11 @@ public class CalcMatchStatistics extends LongProcessThread {
         String[][] table = total.calcTable(rowsTotal, i -> i != 1);
         String outText = TextUtil.showTextTable(header, table, align);
         appendText(outText + "\n");
-        appendTable(title, table);
+        callback.appendTable(title, header, table);
 
         String fn = project.getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
-        Statistics.writeStat(fn, textForLog.toString());
+        writeStat(fn, textForLog.toString());
         callback.setDataFile(fn);
     }
 
@@ -185,7 +193,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInProject.clear();
 
-        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<>();
 
         // We should iterate all segments from all files in project.
         for (SourceTextEntry ste : project.getAllEntries()) {
@@ -211,7 +219,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String[][] table = result.calcTableWithoutPercentage(rowsTotal);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
-            showTable(table);
+            callback.setTable(header, table);
         }
 
         calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
@@ -220,21 +228,52 @@ public class CalcMatchStatistics extends LongProcessThread {
             String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
-            showTable(table);
-            String fn = project.getProjectProperties().getProjectInternal()
-                    + OConsts.STATS_MATCH_FILENAME;
-            Statistics.writeStat(fn, outText);
+            callback.setTable(header, table);
+            String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
+            writeStat(fn, outText);
             callback.setDataFile(fn);
         }
 
         return result;
     }
 
+    /**
+     * Writes the specified text to a file, along with the current date and
+     * time. If the target file's parent directories do not exist, they will be
+     * created. Any existing content in the file will be overwritten.
+     *
+     * @param filename
+     *            the name and path of the file to which the text will be
+     *            written
+     * @param text
+     *            the text content to write to the file
+     */
+    private void writeStat(String filename, String text) {
+        Path path = Paths.get(filename);
+        // Create parent directories if they don't exist
+        if (path.getParent() != null) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch (IOException e) {
+                Log.log(e);
+                return;
+            }
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
+            writer.write(text);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+
     MatchStatCounts forFile(IProject.FileInfo fi) {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInFile.clear();
 
-        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<>();
 
         // We should iterate all segments from file.
         for (SourceTextEntry ste : fi.entries) {
@@ -285,7 +324,8 @@ public class CalcMatchStatistics extends LongProcessThread {
      */
     Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
         // If we have more than one available processor then we do the
-        // calculation in parallel unless explicitly disabled via system property.
+        // calculation in parallel unless explicitly disabled via system
+        // property.
         // Property: omegat.stats.parallel = true|false (default: true)
         boolean parallelAllowed = Boolean.parseBoolean(System.getProperty("omegat.stats.parallel", "true"));
         boolean doParallel = parallelAllowed && Runtime.getRuntime().availableProcessors() > 1;
@@ -300,6 +340,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 entryProcessed();
             }, MatchStatCounts::addCounts);
         } catch (StoppedException | LongProcessInterruptedException ex) {
+            // gracefully exit
         }
         long endTime = System.currentTimeMillis();
         Logger.getLogger(getClass().getName()).fine(String.format("Calc similarity took %.3f s (%s)",
@@ -313,7 +354,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         List<NearString> nears = localFinder.search(srcNoXmlTags, false, this::isInterrupted);
         final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
         int maxSimilarity = 0;
-        CACHE: for (NearString near : nears) {
+        for (NearString near : nears) {
             final Token[] candTokens = localFinder.tokenizeAll(near.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator.get(), strTokensStem,
                     candTokens);
@@ -323,7 +364,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             if (newSimilarity > maxSimilarity) {
                 maxSimilarity = newSimilarity;
                 if (newSimilarity >= 95) { // enough to say that we are in row 2
-                    break CACHE;
+                    break;
                 }
             }
         }

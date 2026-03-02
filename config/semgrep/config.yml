@@ -1,0 +1,13 @@
+rules:
+  - id: java.lang.singular-field
+    languages: [java]
+    message: Skip singular-field in auto-generated GUI classes
+    severity: WARNING
+    paths:
+      exclude:
+        - "**/*Dialog.java"
+        - "**/*Panel.java"
+    pattern: $ANYTHING
+    metadata:
+      references:
+        - https://semgrep.dev/r/java.lang.singular-field

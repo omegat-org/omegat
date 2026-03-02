@@ -40,7 +40,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.omegat.util.Log;
 
-public abstract class AbstractHunspellDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public abstract class AbstractHunspellDictionary implements ISpellCheckerDictionary {
 
     private static final String DICT_EXT = ".dic";
     private static final String AFFIX_EXT = ".aff";

@@ -123,7 +123,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static IMainWindow getMainWindow() {
+    public static @Nullable IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 

@@ -174,7 +174,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         if (outFile == null) {
             return new BufferedWriter(new StringWriter());
         } else {
-            return new BufferedWriter(new XMLWriter(outFile, outEncoding == null ? this.encoding : outEncoding, eol));
+            return new BufferedWriter(
+                    new XMLWriter(outFile, outEncoding == null ? this.encoding : outEncoding, eol));
         }
     }
 

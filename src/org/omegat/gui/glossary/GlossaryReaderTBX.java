@@ -75,7 +75,6 @@ public final class GlossaryReaderTBX {
     private GlossaryReaderTBX() {
     }
 
-
     static final SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
     static {
         SAX_FACTORY.setNamespaceAware(true);
@@ -163,7 +162,8 @@ public final class GlossaryReaderTBX {
                     result.add(new GlossaryEntry(s, t, comment.toString(), priorityGlossary, origin));
                     addedForLang = true;
                 }
-                if (!addedForLang) { // An entry is created just to get the definition
+                if (!addedForLang) { // An entry is created just to get the
+                                     // definition
                     result.add(new GlossaryEntry(s, "", comment.toString(), priorityGlossary, origin));
                 }
             }
@@ -196,7 +196,8 @@ public final class GlossaryReaderTBX {
                     if ("context".equalsIgnoreCase(dg.getDescrip().getType())) {
                         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
                                 Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT)) {
-                            line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                            line = dg.getDescrip().getType() + ": "
+                                    + readContent(dg.getDescrip().getContent());
                         }
                     } else {
                         line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
@@ -251,7 +252,8 @@ public final class GlossaryReaderTBX {
     private static XMLReader createXMLReader() throws ParserConfigurationException, SAXException {
         SAXParser parser = SAX_FACTORY.newSAXParser();
         XMLReader reader = parser.getXMLReader();
-        reader.setEntityResolver((publicId, systemId) -> new InputSource(new ByteArrayInputStream(new byte[0])) );
+        reader.setEntityResolver(
+                (publicId, systemId) -> new InputSource(new ByteArrayInputStream(new byte[0])));
         return reader;
     }
 
@@ -281,7 +283,8 @@ public final class GlossaryReaderTBX {
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {
-        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(new ByteArrayInputStream(new byte[0]));
+        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(
+                new ByteArrayInputStream(new byte[0]));
 
         public NamespaceFilter(XMLReader xmlReader) {
             super(xmlReader);

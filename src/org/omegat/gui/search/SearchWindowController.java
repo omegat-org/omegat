@@ -73,7 +73,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
 import org.omegat.core.search.Searcher;
-import org.omegat.core.threads.SearchThread;
+import org.omegat.core.threads.LongProcessHandle;
+import org.omegat.core.threads.SearchTask;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
@@ -114,6 +115,8 @@ public class SearchWindowController {
     private final SearchMode mode;
     private final int initialEntry;
     private final CaretPosition initialCaret;
+
+    private LongProcessHandle<Void> handle;
 
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
@@ -326,8 +329,8 @@ public class SearchWindowController {
                 // save user preferences
                 savePreferences();
 
-                if (thread != null) {
-                    thread.fin();
+                if (handle != null) {
+                    handle.cancel();
                 }
 
                 IEditor editor = Core.getEditor();
@@ -814,9 +817,9 @@ public class SearchWindowController {
 
     private void doSearch() {
         UIThreadsUtil.mustBeSwingThread();
-        if (thread != null) {
-            // stop old search thread
-            thread.fin();
+        if (handle != null) {
+            // stop old search task
+            handle.cancel();
         }
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
@@ -937,16 +940,24 @@ public class SearchWindowController {
 
         Searcher searcher = new Searcher(Core.getProject(), s);
         // start the search in a separate thread
-        thread = new SearchThread(this, searcher);
-        thread.start();
+        SearchTask task = new SearchTask(this, searcher);
+        handle = Core.getLongProcessExecutor().submit(task::run);
     }
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        if (thread != null) {
-            thread.fin();
-        }
+        handle.cancel();
         form.dispose();
+    }
+
+    void complete() {
+        handle.completion().whenComplete((result, error) -> {
+            if (error != null) {
+                Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+                Core.getMainWindow().displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+            }
+            form.dispose();
+        });
     }
 
     public void dispose() {
@@ -1218,10 +1229,9 @@ public class SearchWindowController {
         });
     }
 
-    private SimpleDateFormat dateFormat;
-    private SpinnerDateModel dateFromModel, dateToModel;
-
-    private SearchThread thread;
+    private final SimpleDateFormat dateFormat;
+    private final SpinnerDateModel dateFromModel;
+    private final SpinnerDateModel dateToModel;
 
     private static final String SAVED_DATE_FORMAT = "yyyy/MM/dd HH:mm";
 

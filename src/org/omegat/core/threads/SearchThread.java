@@ -49,6 +49,7 @@ import org.omegat.util.Log;
  * @author Antonio Vilei
  * @author Thomas Cordonnier
  */
+@Deprecated(since = "6.1.0")
 public class SearchThread extends LongProcessThread {
     /**
      * Starts a new search. To search a current project only, set rootDir to
@@ -101,6 +102,6 @@ public class SearchThread extends LongProcessThread {
         }
     }
 
-    private SearchWindowController window;
-    private Searcher searcher;
+    private final SearchWindowController window;
+    private final Searcher searcher;
 }

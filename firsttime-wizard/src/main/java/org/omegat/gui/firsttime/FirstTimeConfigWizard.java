@@ -26,6 +26,7 @@ package org.omegat.gui.firsttime;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.Objects;
 
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
@@ -75,7 +76,7 @@ public final class FirstTimeConfigWizard {
             if (isFirstRun) {
                 SwingUtilities.invokeLater(() -> {
                     FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
-                            Core.getMainWindow().getApplicationFrame());
+                            Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame());
                     dlg.setVisible(true);
                     // Restart OmegaT only when required by changes made in the
                     // wizard.
@@ -95,7 +96,7 @@ public final class FirstTimeConfigWizard {
                     .getString("menu.firsttimewizard", "First Time Configuration..."));
             menuItem.addActionListener(e -> {
                 FirstTimeConfigWizardDialog dlg = new FirstTimeConfigWizardDialog(
-                        Core.getMainWindow().getApplicationFrame());
+                        Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame());
                 dlg.setVisible(true);
                 if (dlg.isFinished()) {
                     if (dlg.isRestartRequired()) {

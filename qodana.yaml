@@ -30,7 +30,7 @@ projectJDK: "11"
 #  testCoverageThresholds:
 #    fresh: 70
 #    total: 50
-linter: jetbrains/qodana-jvm:2025.3
+linter: jetbrains/qodana-jvm-community:2025.3
 exclude:
   - name: All
     paths:

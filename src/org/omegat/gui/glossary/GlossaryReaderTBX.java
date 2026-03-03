@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -43,6 +44,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.omegat.util.Log;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
@@ -246,15 +248,19 @@ public final class GlossaryReaderTBX {
         return tbxContext.createUnmarshaller();
     }
 
+    private static XMLReader createXMLReader() throws ParserConfigurationException, SAXException {
+        SAXParser parser = SAX_FACTORY.newSAXParser();
+        XMLReader reader = parser.getXMLReader();
+        reader.setEntityResolver((publicId, systemId) -> new InputSource(new ByteArrayInputStream(new byte[0])) );
+        return reader;
+    }
+
     /**
      * Load tbx file, but skip DTD resolving.
      */
     static Martif load(File f) throws Exception {
         Unmarshaller unm = createUnmarshaller();
-
-        SAXParser parser = SAX_FACTORY.newSAXParser();
-
-        NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
+        NamespaceFilter xmlFilter = new NamespaceFilter(createXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
         try (FileInputStream in = new FileInputStream(f)) {
@@ -265,10 +271,7 @@ public final class GlossaryReaderTBX {
 
     static Martif loadFromString(String data) throws Exception {
         Unmarshaller unm = createUnmarshaller();
-
-        SAXParser parser = SAX_FACTORY.newSAXParser();
-
-        NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
+        NamespaceFilter xmlFilter = new NamespaceFilter(createXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
         try (StringReader in = new StringReader(data)) {

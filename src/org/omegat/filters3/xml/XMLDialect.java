@@ -55,6 +55,7 @@ public interface XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Nullable
     Set<String> getParagraphTags();
 
     /**
@@ -62,10 +63,12 @@ public interface XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Nullable
     Set<String> getPreformatTags();
 
     /**
-     * Returns the map of content based tags where key is tag name, value is tag type.
+     * Returns the map of content based tags where key is tag name, value is tag
+     * type.
      */
     Map<String, Tag.Type> getContentBasedTags();
 
@@ -75,6 +78,7 @@ public interface XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Nullable
     Set<String> getIntactTags();
 
     /**
@@ -84,6 +88,7 @@ public interface XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Nullable
     Set<String> getOutOfTurnTags();
 
     /**
@@ -198,6 +203,7 @@ public interface XMLDialect {
      * Each entry should map a {@link String} to a {@link String} -- a tag to
      * its shortcut.
      */
+    @Nullable
     Map<String, String> getShortcuts();
 
     /**
@@ -250,7 +256,8 @@ public interface XMLDialect {
      * Resolves external entites if child filter needs it. Should return
      * <code>null</code> if it doesn't or cannot.
      */
-    @Nullable InputSource resolveEntity(String publicId, String systemId);
+    @Nullable
+    InputSource resolveEntity(String publicId, String systemId);
 
     /**
      * Sets closingTag to <code>true</code> or <code>false</code>
@@ -282,6 +289,7 @@ public interface XMLDialect {
 
     /**
      * Gives the value of forceSpacePreserving;
+     * 
      * @return whether forceSpacePreserving is set.
      */
     Boolean getForceSpacePreserving();
@@ -292,8 +300,11 @@ public interface XMLDialect {
     void setForceSpacePreserving(boolean onOff);
 
     /**
-     * Implement general purpose function to handle XML tag/attributes when necessary.
-     * @param tag XML tag to handle.
+     * Implement general purpose function to handle XML tag/attributes when
+     * necessary.
+     * 
+     * @param tag
+     *            XML tag to handle.
      */
     void handleXMLTag(XMLTag tag, boolean translated);
 }

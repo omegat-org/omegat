@@ -32,9 +32,9 @@ jobs:
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
-          linter: jetbrains/qodana-jvm-community:2025.3
           pr-mode: false
           use-caches: true
+          cache-default-branch-only: true
           use-annotations: true
           upload-result: true
           args: --baseline,qodana.sarif.json

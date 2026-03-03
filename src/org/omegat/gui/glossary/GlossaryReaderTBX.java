@@ -79,10 +79,19 @@ public final class GlossaryReaderTBX {
         SAX_FACTORY.setNamespaceAware(true);
         SAX_FACTORY.setValidating(false);
         try {
-            SAX_FACTORY.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            SAX_FACTORY.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+            // Avoid internet connection to validate with external DTD.
+            SAX_FACTORY.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            // Disable external general entities
+            SAX_FACTORY.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            // Disable external parameter entities
+            SAX_FACTORY.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "GLOSSARYREADER_PARSER_ERROR", ex.getMessage());
         }
+        // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
+        // Entity Attacks"
+        SAX_FACTORY.setXIncludeAware(false);
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {

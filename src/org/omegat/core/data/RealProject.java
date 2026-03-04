@@ -1941,8 +1941,8 @@ public class RealProject implements IProject {
         List<String> sources = new ArrayList<>();
 
         @Override
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String sourcePath, IFilter filter) {
+        public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
+                                   boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

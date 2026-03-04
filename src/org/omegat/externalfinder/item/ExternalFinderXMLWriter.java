@@ -42,6 +42,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
+ * A writer class for serializing ExternalFinderConfiguration objects to XML format.
+ * This class handles the creation and writing of external finder configuration data
+ * to XML files with secure XML processing features enabled.
+ * 
  * @author Aaron Madlon-Kay
  */
 public class ExternalFinderXMLWriter {
@@ -54,16 +58,21 @@ public class ExternalFinderXMLWriter {
 
     public void write(ExternalFinderConfiguration config) throws Exception {
         Document doc = createDocument(config);
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        transformerFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        Transformer transformer = transformerFactory.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+        Transformer transformer = getSecureTransformer();
         DOMSource source = new DOMSource(doc);
         StreamResult result = new StreamResult(file);
         transformer.transform(source, result);
+    }
+
+    private Transformer getSecureTransformer() throws Exception {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        Transformer transformer = factory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+        return transformer;
     }
 
     private Document createDocument(ExternalFinderConfiguration config) throws Exception {

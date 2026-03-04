@@ -56,6 +56,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
@@ -68,6 +69,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -283,7 +285,10 @@ public class FilterMaster {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
         } catch (UnsupportedEncodingException | CharacterCodingException ex) {
             Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
-            Core.getMainWindow().displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            IMainWindow mw = Core.getMainWindow();
+            if (mw != null) {
+                mw.displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -508,7 +513,7 @@ public class FilterMaster {
      *             If an error occurs while saving the configuration or deleting
      *             the file.
      */
-    public static void saveConfig(Filters config, File configFile) throws IOException {
+    public static void saveConfig(@Nullable Filters config, File configFile) throws IOException {
         if (config == null) {
             FileUtils.deleteQuietly(configFile);
             return;
@@ -653,9 +658,10 @@ public class FilterMaster {
      * @return The changed filename
      */
     private static String constructTargetFilename(String sourceMask, String filename, String pattern,
-            @Nullable Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
+                                                  @Nullable Language targetLang, @Nullable String sourceEncoding,
+                                                  @Nullable String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
-        int dot = 0;
+        int dot;
         if (lastStarPos >= 0) {
             // bugfix #1204740
             // so where's the dot next to the star
@@ -754,7 +760,7 @@ public class FilterMaster {
             }
         }
 
-        String[] splitName = filename.split("\\.");
+        String[] splitName = StringUtils.split(filename, "\\.");
         StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
         StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {

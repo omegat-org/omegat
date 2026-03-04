@@ -324,7 +324,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * @return <code>true</code> or <code>false</code>
      */
     @Override
-    public Boolean validateTranslatableTag(String tag, Attributes atts) {
+    public Boolean validateTranslatableTag(String tag, @Nullable Attributes atts) {
         return true;
     }
 

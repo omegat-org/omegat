@@ -25,7 +25,7 @@
 
 package org.omegat.filters3;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.StaticUtils;
 
 import java.util.Objects;
@@ -197,7 +197,7 @@ public abstract class Tag implements Element {
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
     @Override
-    public String toShortcut() {
+    public @Nullable String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
         buf.append('<');

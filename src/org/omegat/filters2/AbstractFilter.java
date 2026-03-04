@@ -311,6 +311,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Deprecated
     @Override
+    @Nullable
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         return Collections.emptyMap();
     }
@@ -658,7 +659,7 @@ public abstract class AbstractFilter implements IFilter {
      * @return Translation of the source string. If there's no translation,
      *         returns the source string itself.
      */
-    protected final String processEntry(String entry, String comment) {
+    protected final String processEntry(String entry, @Nullable String comment) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, comment, null, this, null);
             return entry;

@@ -31,6 +31,8 @@
  **************************************************************************/
 package org.omegat.util.html;
 
+import org.jspecify.annotations.Nullable;
+
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.Collection;
@@ -212,7 +214,7 @@ public class EntityUtil {
         return result.toString();
     }
 
-    public String charsToEntities(String input, String encoding, Collection<String> shortcuts) {
+    public String charsToEntities(String input, @Nullable String encoding, Collection<String> shortcuts) {
         int inputLength = input.length();
         StringBuilder res = new StringBuilder(inputLength * 5);
         int i = 0;

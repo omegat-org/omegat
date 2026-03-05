@@ -27,7 +27,6 @@ package org.omegat.gui.align;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -60,8 +59,8 @@ class MutableBead {
 
     private MutableBead(float score, List<String> sourceLines, List<String> targetLines) {
         this.score = score;
-        this.sourceLines = new ArrayList<String>(sourceLines);
-        this.targetLines = new ArrayList<String>(targetLines);
+        this.sourceLines = new ArrayList<>(sourceLines);
+        this.targetLines = new ArrayList<>(targetLines);
         boolean srcEqualsTrg = sourceLines.equals(targetLines);
         this.enabled = !srcEqualsTrg;
         this.status = srcEqualsTrg ? MutableBead.Status.ACCEPTED : MutableBead.Status.DEFAULT;
@@ -76,7 +75,7 @@ class MutableBead {
     }
 
     MutableBead(String source, String target) {
-        this(Arrays.asList(source), Arrays.asList(target));
+        this(List.of(source), List.of(target));
     }
 
     /**
@@ -93,8 +92,9 @@ class MutableBead {
     /**
      * Get whether or not the bead contains the same number of source and target lines.
      *
-     * @return
+     * @return true if the size is the same, otherwise false
      */
+    @SuppressWarnings("unused")
     public boolean isBalanced() {
         return sourceLines.size() == targetLines.size();
     }
@@ -102,14 +102,14 @@ class MutableBead {
     /**
      * Get whether or not the bead is entirely empty (has 0 source lines and 0 target lines).
      *
-     * @return
+     * @return true if the source and target lines are empty, otherwise false
      */
     public boolean isEmpty() {
         return sourceLines.isEmpty() && targetLines.isEmpty();
     }
 
     /**
-     * Convert a list of beads to a list of flattened (see {@link #join(Language, List)}) pairs where
+     * Convert a list of beads to a list of flattened (see {@link Util#join(Language, List)}) pairs where
      * <ol>
      * <li>key = source text
      * <li>value = target text
@@ -124,7 +124,7 @@ class MutableBead {
         return beads.stream().filter(bead -> bead.enabled).map(bead -> {
             String srcOut = bead.sourceLines.isEmpty() ? null : Util.join(srcLang, bead.sourceLines);
             String trgOut = bead.targetLines.isEmpty() ? null : Util.join(trgLang, bead.targetLines);
-            return new AbstractMap.SimpleImmutableEntry<String, String>(srcOut, trgOut);
+            return new AbstractMap.SimpleImmutableEntry<>(srcOut, trgOut);
         }).collect(Collectors.toList());
     }
 
@@ -133,7 +133,7 @@ class MutableBead {
      * the alignment, so lower scores are better. We use {@link Double#MAX_VALUE} as a sentinel for failure to
      * calculate (empty list, etc.).
      *
-     * @param beads
+     * @param beads List of beads
      * @return Average score, or {@link Double#MAX_VALUE} if incalculable
      */
     static double calculateAvgDist(List<MutableBead> beads) {

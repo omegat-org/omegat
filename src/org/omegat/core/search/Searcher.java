@@ -63,6 +63,8 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
@@ -129,7 +131,6 @@ public class Searcher {
     private int numFinds;
 
     private final SearchExpression searchExpression;
-    private @Nullable LongProcessThread checkStop;
     private final List<SearchMatch> foundMatches = new ArrayList<>();
 
     /**
@@ -160,10 +161,49 @@ public class Searcher {
     }
 
     /**
+     * Used to cooperatively stop long searches.
+     * If null, the search is not cancellable (legacy behavior).
+     */
+    private volatile CancellationToken cancellationToken;
+
+    /**
+     * Set cancellation token for checking stop requests.
+     * Preferred over {@link #setThread(LongProcessThread)}.
+     */
+    public void setCancellationToken(CancellationToken token) {
+        this.cancellationToken = token;
+    }
+
+    /**
      * Set thread for checking interruption.
      */
+    @Deprecated(since = "6.1.0")
     public void setThread(LongProcessThread thread) {
-        checkStop = thread;
+        this.cancellationToken = new CancellationToken() {
+            @Override
+            public boolean isCancelled() {
+                return thread.isInterrupted();
+            }
+
+            @Override
+            public void throwIfCancelled() {
+                if (isCancelled()) {
+                    throw new RuntimeException(new LongProcessInterruptedException());
+                }
+            }
+        };
+    }
+
+    /**
+     * Helper for internal loops: call this at safe points.
+     */
+    private void checkInterrupted() {
+        CancellationToken token = this.cancellationToken;
+        if (token.isCancelled() || Thread.currentThread().isInterrupted()) {
+            // Use whatever your Searcher currently uses to abort (exception, return, etc.).
+            // If Searcher already throws a specific stop exception, throw that instead.
+            throw new RuntimeException(new LongProcessInterruptedException());
+        }
     }
 
     public SearchExpression getExpression() {
@@ -504,12 +544,6 @@ public class Searcher {
                     }
                 });
             }
-        }
-    }
-
-    private void checkInterrupted() {
-        if (checkStop != null) {
-            checkStop.checkInterrupted();
         }
     }
 

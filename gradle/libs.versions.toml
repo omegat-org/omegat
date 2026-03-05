@@ -18,7 +18,7 @@ lucene = "8.11.3"
 lucene_gosen = "8.11.1"
 checkstyle = "8.45.1"
 guava = "33.4.8-jre"
-annotations = "23.0.0"
+annotations = "26.1.0"
 jspecify = "1.0.0"
 jgit = "6.10.1.202505221210-r"
 svnkit = "1.10.11"
@@ -57,9 +57,9 @@ flatlaf="3.7"
 assertj_swing_junit = "4.0.0-beta-3"
 morfologik = "2.1.9"
 swing_extra_locales = "0.3.3"
-mockito = "5.21.0"
+mockito = "5.22.0"
 json_java = "20251224"
-protobuf_java = "4.33.4"
+protobuf_java = "4.33.5"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -142,7 +142,7 @@ bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "b
 bc-util-jdk18on = {group = "org.bouncycastle", name = "bcutil-jdk18on", version.ref = "bc" }
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.1"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.2"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.2"}
 fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.4.1"}
 fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.3"}

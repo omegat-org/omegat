@@ -41,7 +41,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.MixedEolHandlingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * Filter for subtitles files.
@@ -56,7 +55,7 @@ public class SrtFilter extends AbstractFilter {
 
     enum ReadState {
         WAIT_TIME, WAIT_TEXT
-    };
+    }
 
     protected @Nullable Map<String, String> align;
 
@@ -178,7 +177,7 @@ public class SrtFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
+            if (tr != null && !tr.isEmpty() && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

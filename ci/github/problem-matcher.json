@@ -96,7 +96,7 @@
       "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*([A-Za-z0-9_]+\\\\.java):(\\\\d+):\\s+(\\w+):\\s+(.+)$",
+          "regexp": "^(.*\\.java):(\\d+):\\t([^:]+):\\t(.+)$",
           "file": 1,
           "line": 2,
           "code": 3,

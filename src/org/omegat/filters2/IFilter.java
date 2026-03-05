@@ -185,6 +185,7 @@ public interface IFilter {
      * @return new options or null if options not changed
      */
     @Deprecated
+    @Nullable
     Map<String, String> changeOptions(@Nullable Dialog parent, Map<String, String> config);
 
     /**
@@ -196,6 +197,7 @@ public interface IFilter {
      *            old options
      * @return new options or null if options not changed
      */
+    @Nullable
     default Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         if (parent instanceof Dialog) {
             return changeOptions((Dialog) parent, config);

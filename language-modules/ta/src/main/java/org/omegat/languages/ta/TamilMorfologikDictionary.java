@@ -36,7 +36,7 @@ import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
 @NullMarked
-public class TamilMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public class TamilMorfologikDictionary implements ISpellCheckerDictionary {
 
     private static final String DICTIONARY_BASE = "/org/languagetool/resource/ta/";
     private static final String DICT_EXT = ".dict";

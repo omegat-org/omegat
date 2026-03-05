@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.jar.Attributes;
@@ -283,7 +284,7 @@ public final class PluginUtils {
      *             if an I/O error occurs during manifest processing.
      */
     private static boolean processPluginManifests(List<URL> pluginUrls) throws IOException {
-        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        MainClassLoader pluginsClassLoader = Objects.requireNonNull(MAINCLASSLOADERS.get(PluginType.UNKNOWN));
         boolean isMainManifestFound = false;
         Enumeration<URL> manifestUrls = pluginsClassLoader.getResources(MANIFEST_MF);
 
@@ -327,7 +328,7 @@ public final class PluginUtils {
             // Check for main manifest
             if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
                 isMainManifestFound = true;
-                MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+                MainClassLoader pluginsClassLoader = Objects.requireNonNull(MAINCLASSLOADERS.get(PluginType.UNKNOWN));
                 loadFromManifest(manifest, pluginsClassLoader, manifestUrl, true);
             }
 

@@ -49,6 +49,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.core.threads.Completion;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -120,14 +121,22 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     @Override
     public void run() {
-        if (perFile) {
-            entriesToProcess = project.getAllEntries().size() * 2;
-            calcPerFile();
-        } else {
-            entriesToProcess = project.getAllEntries().size();
-            calcTotal(true);
+        Completion completion = Completion.success();
+        try {
+            if (perFile) {
+                entriesToProcess = project.getAllEntries().size() * 2;
+                calcPerFile();
+            } else {
+                entriesToProcess = project.getAllEntries().size();
+                calcTotal(true);
+            }
+        } catch (LongProcessInterruptedException | FindMatches.StoppedException ex) {
+            completion = Completion.cancelled();
+        } catch (Throwable t) {
+            completion = Completion.failed(t);
+        } finally {
+            callback.onComplete(completion);
         }
-        callback.finishData();
     }
 
     void appendText(String text) {

@@ -27,6 +27,7 @@ package org.omegat.gui.stat;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -35,6 +36,7 @@ import javax.swing.table.TableColumn;
 
 import org.omegat.core.Core;
 import org.omegat.core.statistics.IStatsConsumer;
+import org.omegat.core.threads.Completion;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;
@@ -49,6 +51,8 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
 
     private final StatisticsWindow window;
 
+    private final CompletableFuture<Completion> completion = new CompletableFuture<>();
+
     public BaseStatisticsPanel(StatisticsWindow window) {
         this.window = window;
     }
@@ -59,8 +63,9 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
     }
 
     @Override
-    public void finishData() {
+    public void onComplete(Completion completion) {
         window.finishData();
+        this.completion.complete(completion);
     }
 
     @Override

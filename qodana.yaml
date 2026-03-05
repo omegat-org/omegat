@@ -36,3 +36,4 @@ exclude:
     paths:
       - test-integration
       - test-acceptance
+      - scripts

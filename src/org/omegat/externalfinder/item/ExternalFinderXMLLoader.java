@@ -32,8 +32,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 import javax.swing.KeyStroke;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.util.Log;
@@ -60,13 +62,9 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
     @Override
     public ExternalFinderConfiguration load() throws Exception {
 
-        List<ExternalFinderItem> finderItems = new ArrayList<ExternalFinderItem>();
+        List<ExternalFinderItem> finderItems = new ArrayList<>();
         int priority = -1;
-
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
-
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        DocumentBuilder documentBuilder = createDocumentBuilder();
         Document document = documentBuilder.parse(file);
         NodeList nodeList = document.getElementsByTagName("item");
         if (nodeList == null) {
@@ -84,6 +82,19 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
         priority = retrivePriority(document, priority);
 
         return new ExternalFinderConfiguration(priority, finderItems);
+    }
+
+    private DocumentBuilder createDocumentBuilder() throws ParserConfigurationException {
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        documentBuilderFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
+        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        documentBuilderFactory.setNamespaceAware(false);
+        documentBuilderFactory.setXIncludeAware(false);
+        documentBuilderFactory.setExpandEntityReferences(false);
+        return documentBuilderFactory.newDocumentBuilder();
     }
 
     private static int retrivePriority(final Document document, final int defaultPriority) {

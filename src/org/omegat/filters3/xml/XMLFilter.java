@@ -96,6 +96,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             // as parsers,
             // validators, and transformers, to try and process XML securely.
             parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            // Disable doctype validation in default
+            parserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             // Avoid internet connection to validate with external DTD.
             parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
             // Disable external general entities
@@ -172,7 +174,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         if (outFile == null) {
             return new BufferedWriter(new StringWriter());
         } else {
-            return new BufferedWriter(new XMLWriter(outFile, outEncoding == null ? this.encoding : outEncoding, eol));
+            return new BufferedWriter(
+                    new XMLWriter(outFile, outEncoding == null ? this.encoding : outEncoding, eol));
         }
     }
 

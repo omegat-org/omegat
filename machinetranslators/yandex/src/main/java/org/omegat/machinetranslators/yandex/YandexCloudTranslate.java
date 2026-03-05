@@ -48,7 +48,8 @@ import javax.swing.JPanel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -73,6 +74,8 @@ import org.omegat.util.Preferences;
  *      "https://cloud.yandex.com/docs/translate/api-ref/Translation/">Translation
  *      API</a>
  */
+@NullMarked
+@SuppressWarnings("unused")
 public class YandexCloudTranslate extends BaseCachedTranslate {
 
     public static final String ALLOW_YANDEX_CLOUD_TRANSLATE = "allow_yandex_cloud_translate";
@@ -129,12 +132,12 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     protected @Nullable String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
-        if (oAuthToken == null || oAuthToken.isEmpty()) {
+        if (oAuthToken.isEmpty()) {
             throw new Exception(BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND"));
         }
 
         String folderId = getCredential(PROPERTY_FOLDER_ID);
-        if (folderId == null || folderId.isEmpty()) {
+        if (folderId.isEmpty()) {
             throw new Exception(BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
@@ -153,19 +156,12 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             response = HttpConnectionUtils.postJSON(TRANSLATE_URL, request, headers);
         } catch (HttpConnectionUtils.ResponseError e) {
             String errorMessage = extractErrorMessage(e.body);
-            if (errorMessage == null) {
-                errorMessage = BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
-                throw new MachineTranslateError(errorMessage);
-            }
             throw new MachineTranslateError(Objects.requireNonNullElse(e.getMessage(), "HTTP error: " + e.code));
         }
         if (response == null) {
             return null;
         }
         String tr = extractTranslation(response);
-        if (tr == null) {
-            return null;
-        }
         return cleanSpacesAroundTags(tr, text);
     }
 
@@ -280,9 +276,6 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             } catch (HttpConnectionUtils.ResponseError e) {
                 // Try to extract error message from the error body
                 IAMErrorMessage = extractErrorMessage(e.body);
-                if (IAMErrorMessage == null) {
-                    IAMErrorMessage = BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_BAD_IAM_RESPONSE");
-                }
                 return null;
             } catch (IOException e) {
                 IAMErrorMessage = e.getLocalizedMessage();
@@ -309,7 +302,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
      * @param glossaryTerms
      *            glossary map.
      */
-    protected GlossaryConfig createGlossaryConfigPart(Map<String, String> glossaryTerms) {
+    GlossaryConfig createGlossaryConfigPart(Map<String, String> glossaryTerms) {
         List<GlossaryPair> pairs = new ArrayList<>();
         for (Map.Entry<String, String> e : glossaryTerms.entrySet()) {
             pairs.add(new GlossaryPair(e.getKey(), e.getValue()));

@@ -27,12 +27,15 @@
 
 package org.omegat.core.segmentation;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 
 /**
@@ -65,6 +68,16 @@ public class SRX implements Serializable {
         return result;
     }
 
+    @Deprecated(forRemoval = true, since = "6.1.0")
+    public static void saveToSrx(SRX srx, File outDir) throws IOException {
+        SRXManager.saveToSrx(srx, outDir);
+    }
+
+    @Deprecated(forRemoval = true, since = "6.1.0")
+    public static @Nullable SRX loadFromDir(File configDir) {
+        return SRXManager.loadFromDir(configDir);
+    }
+
     public static SRX getDefault() {
         try {
             SRX srx = SRXManager.loadSrxInputStream(
@@ -76,6 +89,11 @@ public class SRX implements Serializable {
             Log.log(e);
             throw new RuntimeException("Unrecoverable error occurred!");
         }
+    }
+
+    @Deprecated(forRemoval = true, since = "6.1.0")
+    public List<Rule> lookupRulesForLanguage(Language srclang) {
+        return SRXManager.lookupRulesForLanguage(this, srclang);
     }
 
     /**

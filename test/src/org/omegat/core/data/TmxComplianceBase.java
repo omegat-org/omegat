@@ -100,26 +100,23 @@ public abstract class TmxComplianceBase {
     }
 
     protected List<String> readTextFile(File f, String charset) throws Exception {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(f), charset));
+        try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(f), charset))) {
+            int ch;
 
-        int ch;
+            // BOM (byte order mark) bugfix
+            rd.mark(1);
+            ch = rd.read();
+            if (ch != 0xFEFF) {
+                rd.reset();
+            }
 
-        // BOM (byte order mark) bugfix
-        rd.mark(1);
-        ch = rd.read();
-        if (ch != 0xFEFF) {
-            rd.reset();
+            List<String> result = new ArrayList<>();
+            String s;
+            while ((s = rd.readLine()) != null) {
+                result.add(s);
+            }
+            return result;
         }
-
-        List<String> result = new ArrayList<>();
-        String s;
-        while ((s = rd.readLine()) != null) {
-            result.add(s);
-        }
-
-        rd.close();
-
-        return result;
     }
 
     protected void translateAndCheckTextUsingTmx(String fileTextIn, String inCharset, String fileTMX,

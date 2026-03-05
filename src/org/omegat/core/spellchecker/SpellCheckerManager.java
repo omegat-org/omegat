@@ -115,6 +115,7 @@ public class SpellCheckerManager {
      *            target dictionary language.
      * @return Path of the dictionary installed.
      */
+    @SuppressWarnings("PMD.CloseResource")
     public static Path installHunspellDictionary(String dictionaryDir, String language) {
         String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
@@ -131,6 +132,7 @@ public class SpellCheckerManager {
      *            target language e.g, en, en_US
      * @return Lucene hunspell Dictionary object.
      */
+    @SuppressWarnings("PMD.CloseResource")
     public static org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
         String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
@@ -147,6 +149,7 @@ public class SpellCheckerManager {
      *            target language, e.g., en, en_US
      * @return Morfologik Dictionary object.
      */
+    @SuppressWarnings("PMD.CloseResource")
     public static morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
         String className = MORFOLOGIK_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {

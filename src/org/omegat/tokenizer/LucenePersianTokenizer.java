@@ -47,7 +47,7 @@ import org.apache.lucene.analysis.fa.PersianAnalyzer;
 @Tokenizer(languages = { "fa" })
 public class LucenePersianTokenizer extends BaseTokenizer {
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings({"resource", "PMD.CloseResource"})
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {

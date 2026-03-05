@@ -28,5 +28,5 @@ jobs:
       run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
     - name: setup gradle
       uses: gradle/actions/setup-gradle@v5
-    - name: run checkstyle
+    - name: run PMD
       run: ./gradlew -PenvIsCi pmdMain pmdTest

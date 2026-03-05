@@ -281,6 +281,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     @VisibleForTesting
+    @SuppressWarnings("PMD.CloseResource")
     LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws IOException {
         if (!file.exists()) {
             throw new FileNotFoundException("File not found: " + file.getAbsolutePath());

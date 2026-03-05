@@ -74,6 +74,7 @@ public class XMLWriter extends Writer {
      * @param eol
      *            End-Of-Line character
      */
+    @SuppressWarnings("PMD.CloseResource")
     public XMLWriter(File file, @Nullable String encoding, String eol)
             throws FileNotFoundException, UnsupportedEncodingException {
         if (encoding == null) {

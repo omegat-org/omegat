@@ -89,32 +89,31 @@ public class TMXWriterTest extends TestFilterBase {
         in += (char) 0xFFFE;
         in += (char) 0x12FFFF;
 
-        TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
-                false);
-        wr.writeEntry(in, "test", RealProjectTest.createEmptyTMXEntry(), null);
-        wr.close();
+        try (TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
+                false)) {
+            wr.writeEntry(in, "test", RealProjectTest.createEmptyTMXEntry(), null);
+        }
 
-        load(new ArrayList<String>(), null, false, false);
+        load(new ArrayList<>(), null, false, false);
     }
 
     @Test
     public void testLevel2write() throws Exception {
-        TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
-                false);
+        try (TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
+                false)) {
 
-        wr.writeEntry("source", "target", RealProjectTest.createEmptyTMXEntry(), null);
-        wr.writeEntry("1<a1/>2", "zz", RealProjectTest.createEmptyTMXEntry(), null);
-        wr.writeEntry("3<a1>4</a1>5", "zz", RealProjectTest.createEmptyTMXEntry(), null);
-        wr.writeEntry("6<a1>7", "zz", RealProjectTest.createEmptyTMXEntry(), null);
+            wr.writeEntry("source", "target", RealProjectTest.createEmptyTMXEntry(), null);
+            wr.writeEntry("1<a1/>2", "zz", RealProjectTest.createEmptyTMXEntry(), null);
+            wr.writeEntry("3<a1>4</a1>5", "zz", RealProjectTest.createEmptyTMXEntry(), null);
+            wr.writeEntry("6<a1>7", "zz", RealProjectTest.createEmptyTMXEntry(), null);
 
-        wr.close();
-
+        }
         compareTMX(outFile, new File("test/data/tmx/test-save-tmx14.tmx"));
     }
 
     @Test
     public void testLevel2reads() throws Exception {
-        final List<String> sources = new ArrayList<String>();
+        final List<String> sources = new ArrayList<>();
 
         // patch for 'OmegaT' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
@@ -162,10 +161,10 @@ public class TMXWriterTest extends TestFilterBase {
     @Test
     public void testEOLwrite() throws Exception {
         String eol = TMXWriter2.lineSeparator;
-        TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
-                false);
-        wr.writeEntry("source", "tar\nget", RealProjectTest.createEmptyTMXEntry(), null);
-        wr.close();
+        try (TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
+                false)) {
+            wr.writeEntry("source", "tar\nget", RealProjectTest.createEmptyTMXEntry(), null);
+        }
 
         StringBuilder text = new StringBuilder();
         try (Reader rd = new InputStreamReader(Files.newInputStream(outFile.toPath()),

@@ -137,6 +137,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         logger = LoggerFactory.getLogger(GITRemoteRepository2.class, OStrings.getResourceBundle());
     }
 
+    @SuppressWarnings("PMD.CloseResource")
     private static void installSshSessionFactory() {
         // SSH directories
         // Linux/macOS: ~/.ssh
@@ -183,11 +184,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             File gitDir = new File(localDirectory, ".git");
             if (gitDir.exists() && gitDir.isDirectory()) {
                 // already cloned
-                repository = Git.open(localDirectory).getRepository();
-                configRepo();
-                try (Git git = new Git(repository)) {
+                try (Git git =  Git.open(localDirectory)) {
+                    repository = git.getRepository();
+                    configRepo();
                     git.submoduleInit().call();
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                    git.reset().setMode(ResetType.HARD).call();
                 }
             } else {
                 logger.atDebug().setMessage(GIT_START_MSG).addArgument("clone").log();
@@ -196,8 +198,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 c.setDirectory(localDirectory);
                 c.setTimeout(TIMEOUT);
                 c.setDepth(CLONE_DEPTH);
-                try {
-                    c.call();
+                try (Git git = c.call()) {
+                    repository = git.getRepository();
+                    configRepo();
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                    git.reset().setMode(ResetType.HARD).call();
                 } catch (InvalidRemoteException e) {
                     if (localDirectory.exists()) {
                         deleteDirectory(localDirectory);
@@ -210,23 +216,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     }
                     throw e;
                 }
-                repository = Git.open(localDirectory).getRepository();
-                try (Git git = new Git(repository)) {
-                    git.submoduleInit().call();
-                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
-                }
-                configRepo();
-                logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone")
-                        .log();
-            }
-
-            // cleanup repository
-            try (Git git = new Git(repository)) {
-                git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
             logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();
         } finally {
+            try {
+                client.close();
+            } catch (IOException ignored) {
+                // ignore error
+            }
             client.stop();
         }
 
@@ -521,6 +519,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    @SuppressWarnings("PMD.CloseResource")
     private static AbstractTreeIterator prepareTreeParser(Repository repository, ObjectId objId)
             throws Exception {
         // from the commit we can build the tree which allows us to construct
@@ -623,6 +622,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             // svn://...
             return false;
         } finally {
+            try {
+                client.close();
+            } catch (IOException ignored) {
+                // ignore error
+            }
             client.stop();
         }
     }

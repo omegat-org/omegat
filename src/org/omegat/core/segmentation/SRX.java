@@ -68,16 +68,40 @@ public class SRX implements Serializable {
         return result;
     }
 
+    /**
+     * Saves the given SRX object to the specified directory. Please use
+     * {@link SRXManager#saveToSrx(SRX, File)} instead.
+     *
+     * @param srx
+     *            the SRX object to be saved
+     * @param outDir
+     *            the directory where the SRX file will be written
+     * @throws IOException
+     *             if an I/O error occurs during saving
+     */
     @Deprecated(forRemoval = true, since = "6.1.0")
     public static void saveToSrx(SRX srx, File outDir) throws IOException {
         SRXManager.saveToSrx(srx, outDir);
     }
 
+    /**
+     * Loads SRX rules from the specified directory. Please use
+     * {@link SRXManager#loadFromDir(File)} instead.
+     *
+     * @param configDir
+     *            the directory containing SRX files
+     * @return the loaded SRX object or null if loading fails
+     */
     @Deprecated(forRemoval = true, since = "6.1.0")
     public static @Nullable SRX loadFromDir(File configDir) {
         return SRXManager.loadFromDir(configDir);
     }
 
+    /**
+     * Returns the default SRX object with predefined settings.
+     *
+     * @return the default SRX object
+     */
     public static SRX getDefault() {
         try {
             SRX srx = SRXManager.loadSrxInputStream(
@@ -91,6 +115,14 @@ public class SRX implements Serializable {
         }
     }
 
+    /**
+     * Returns all segmentation rules for the given source language. Please use
+     * {@link SRXManager#lookupRulesForLanguage(SRX, Language)} instead.
+     *
+     * @param srclang
+     *            the source language
+     * @return list of segmentation rules for the specified language
+     */
     @Deprecated(forRemoval = true, since = "6.1.0")
     public List<Rule> lookupRulesForLanguage(Language srclang) {
         return SRXManager.lookupRulesForLanguage(this, srclang);

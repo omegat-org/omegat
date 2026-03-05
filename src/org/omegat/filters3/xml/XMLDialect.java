@@ -114,7 +114,7 @@ public interface XMLDialect {
      * the XHTML filter to not translate the value attribute of an
      * input-element, except when it is a button or submit or reset.
      */
-    Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts);
+    Boolean validateTranslatableTagAttribute(String tag, String attribute, @Nullable Attributes atts);
 
     /**
      * For a given tag, return wether the content of this tag should be
@@ -129,7 +129,7 @@ public interface XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validateIntactTag(String tag, Attributes atts);
+    Boolean validateIntactTag(String tag, @Nullable Attributes atts);
 
     /**
      * For a given tag, return wether the content of this tag should be
@@ -142,7 +142,7 @@ public interface XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validateContentBasedTag(String tag, Attributes atts);
+    Boolean validateContentBasedTag(String tag, @Nullable Attributes atts);
 
     /**
      * For a given tag, return wether the content of this tag should be
@@ -156,7 +156,7 @@ public interface XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validateTranslatableTag(String tag, Attributes atts);
+    Boolean validateTranslatableTag(String tag, @Nullable Attributes atts);
 
     /**
      * For a given tag, return wether the content of this tag is a paragraph
@@ -186,7 +186,7 @@ public interface XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
-    Boolean validatePreformatTag(String tag, Attributes atts);
+    Boolean validatePreformatTag(String tag, @Nullable Attributes atts);
 
     /**
      * Returns the set of translatable attributes (no matter what tag they

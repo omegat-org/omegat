@@ -839,7 +839,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      *            A tag
      * @return <code>true</code> or <code>false</false>
      */
-    private boolean isPreformattingTag(String tag, org.omegat.filters3.Attributes atts) {
+    private boolean isPreformattingTag(String tag, org.omegat.filters3.@Nullable Attributes atts) {
         if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag)) {
             return true;
         } else {

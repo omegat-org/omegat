@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -155,8 +154,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         try {
             response = HttpConnectionUtils.postJSON(TRANSLATE_URL, request, headers);
         } catch (HttpConnectionUtils.ResponseError e) {
-            String errorMessage = extractErrorMessage(e.body);
-            throw new MachineTranslateError(Objects.requireNonNullElse(e.getMessage(), "HTTP error: " + e.code));
+            throw new MachineTranslateError(extractErrorMessage(e.body));
         }
         if (response == null) {
             return null;

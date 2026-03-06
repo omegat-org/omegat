@@ -39,6 +39,7 @@ import javax.swing.JCheckBox;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -64,6 +65,8 @@ import org.omegat.util.Preferences;
  *      "https://cloud.google.com/translate/docs/basic/setup-basic">Translation
  *      API</a>
  */
+@NullMarked
+@SuppressWarnings("unused")
 public class Google2Translate extends BaseCachedTranslate {
 
     public static final String ALLOW_GOOGLE2_TRANSLATE = "allow_google2_translate";
@@ -162,14 +165,14 @@ public class Google2Translate extends BaseCachedTranslate {
         }
 
         String googleKey = getCredential(PROPERTY_API_KEY);
-        if (googleKey == null || googleKey.isEmpty()) {
+        if (googleKey.isEmpty()) {
             if (temporaryKey == null) {
                 throw new MachineTranslateError(BUNDLE.getString("GOOGLE_API_KEY_NOTFOUND"));
             }
             googleKey = temporaryKey;
         }
 
-        Map<String, String> params = new TreeMap<String, String>();
+        Map<String, String> params = new TreeMap<>();
 
         if (isPremium()) {
             params.put("model", "nmt");
@@ -180,20 +183,16 @@ public class Google2Translate extends BaseCachedTranslate {
         params.put("target", targetLang);
         params.put("q", text);
         // The 'text' format mangles the tags, whereas the 'html' encodes some
-        // characters
-        // as entities. Since it's more reliable to convert the entities back,
-        // we are
-        // using 'html' and convert the text with the unescapeHTML() method.
+        // characters as entities. Since it's more reliable to convert the
+        // entities back, we are using 'html' and convert the text with the
+        // unescapeHTML() method.
         params.put("format", "html");
 
-        Map<String, String> headers = new TreeMap<String, String>();
+        Map<String, String> headers = new TreeMap<>();
         headers.put("X-HTTP-Method-Override", "GET");
 
         String v = HttpConnectionUtils.post(googleTranslateUrl, params, headers);
         String tr = getJsonResults(v);
-        if (tr == null) {
-            return null;
-        }
         tr = BaseTranslate.unescapeHTML(tr);
         return cleanSpacesAroundTags(tr, text);
     }

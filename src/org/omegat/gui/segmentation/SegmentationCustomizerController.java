@@ -221,7 +221,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             commitTableEdits();
             MappingRulesModel model = (MappingRulesModel) panel.mapTable.getModel();
             String set = model.getValueAt(panel.mapTable.getSelectedRow(), 0).toString();
-            String setName = LanguageCodes.getLanguageName(set);
+            String setName = LanguageCodes.getInstance().getLanguageName(set);
             String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
             String message = StringUtil.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"), setName);
             if (JOptionPane.showConfirmDialog(panel, message, title,
@@ -235,8 +235,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             model.addRow();
             panel.ruleTable.changeSelection(panel.ruleTable.getRowCount() - 1, 0, false, false);
             panel.ruleTable.changeSelection(panel.ruleTable.getRowCount() - 1,
-                    panel.ruleTable.getColumnCount() - 1, false,
-                    true);
+                    panel.ruleTable.getColumnCount() - 1, false, true);
         });
         panel.mapInsertButton.addActionListener(e -> {
             commitTableEdits();
@@ -312,8 +311,9 @@ public class SegmentationCustomizerController extends BasePreferencesController 
     }
 
     /**
-     * Returns the SRX that was edited, so it can be used. If project-specific segmentation rules are
-     * requested, and user has not checked 'enable project specific segmentation', then null is returned.
+     * Returns the SRX that was edited, so it can be used. If project-specific
+     * segmentation rules are requested, and user has not checked 'enable
+     * project specific segmentation', then null is returned.
      */
     public SRX getResult() {
         if (isEditable()) {

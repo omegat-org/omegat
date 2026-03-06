@@ -25,6 +25,8 @@
 
 package org.omegat.core.segmentation;
 
+import org.jspecify.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -106,7 +108,7 @@ public class Rule implements Serializable {
      *
      * @return regular expression of a text before break.
      */
-    public String getBeforebreak() {
+    public @Nullable String getBeforebreak() {
         if (beforebreak != null) {
             return beforebreak.pattern();
         } else {
@@ -147,7 +149,7 @@ public class Rule implements Serializable {
      *
      * @return regular expression of a text after break.
      */
-    public String getAfterbreak() {
+    public @Nullable String getAfterbreak() {
         if (afterbreak != null) {
             return afterbreak.pattern();
         } else {

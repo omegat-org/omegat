@@ -32,8 +32,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import tokyo.northside.logging.ILogger;
+import gen.core.segmentation.Languagemap;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
@@ -46,7 +47,6 @@ import org.omegat.util.StringUtil;
 public class MapRule implements Serializable {
 
     private static final long serialVersionUID = -5868132953113679291L;
-    private static final ILogger LOGGER = Log.getLogger(MapRule.class);
 
     /** Language Name */
     private String languageCode;
@@ -73,9 +73,23 @@ public class MapRule implements Serializable {
      *            segmentation rules.
      */
     public MapRule(String language, String pattern, List<Rule> rules) {
-        String code = LanguageCodes.getLanguageCodeByPattern(pattern);
+        String code = LanguageCodes.getInstance().getLanguageCodeByPattern(pattern);
         this.setLanguage(code != null ? code : language);
         this.setPattern(pattern);
+        this.setRules(rules);
+    }
+
+    /**
+     * Create initialized MapRule object from segmentation.srx.
+     *
+     * @param languagemap
+     *            language map from segmentation.srx.
+     * @param rules
+     *            segmentation rules.
+     */
+    public MapRule(Languagemap languagemap, List<Rule> rules) {
+        this.setLanguage(languagemap.getLanguagerulename());
+        this.setPattern(languagemap.getLanguagepattern());
         this.setRules(rules);
     }
 
@@ -89,7 +103,7 @@ public class MapRule implements Serializable {
          * empty, the object is created from a SRX file, then return
          * languageCode itself.
          */
-        String res = LanguageCodes.getLanguageName(languageCode);
+        String res = LanguageCodes.getInstance().getLanguageName(getLanguage());
         return StringUtil.isEmpty(res) ? languageCode : res;
     }
 
@@ -107,13 +121,13 @@ public class MapRule implements Serializable {
          * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
          * to remove the workaround here.
          */
-        if (!LanguageCodes.isLanguageCodeKnown(code)) {
-            String alt = LanguageCodes.getLanguageCodeByName(code);
+        if (!LanguageCodes.getInstance().isLanguageCodeKnown(code)) {
+            String alt = LanguageCodes.getInstance().getLanguageCodeByName(code);
             if (alt != null) {
                 languageCode = alt;
                 return;
             } else {
-                LOGGER.atDebug().setMessage("Unknown languagerulename '{}'").addArgument(code).log();
+                Log.logDebug("Unknown languagerulename '{0}'", code);
             }
         }
         languageCode = code;
@@ -123,6 +137,12 @@ public class MapRule implements Serializable {
      * Returns Language Code for programmatic usage.
      */
     public String getLanguage() {
+        if (pattern != null) {
+            String code = LanguageCodes.getInstance().getLanguageCodeByPattern(pattern.pattern());
+            if (code != null) {
+                return code;
+            }
+        }
         return languageCode;
     }
 
@@ -135,7 +155,7 @@ public class MapRule implements Serializable {
     /**
      * Returns Pattern for the language/country ISO code (of a form LL-CC).
      */
-    public String getPattern() {
+    public @Nullable String getPattern() {
         if (pattern != null) {
             return pattern.pattern();
         } else {
@@ -173,7 +193,7 @@ public class MapRule implements Serializable {
         MapRule result = new MapRule();
         result.languageCode = languageCode;
         result.pattern = pattern;
-        result.rules = new ArrayList<Rule>(rules.size());
+        result.rules = new ArrayList<>(rules.size());
         for (Rule rule : rules) {
             result.rules.add(rule.copy());
         }

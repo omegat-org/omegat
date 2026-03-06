@@ -45,7 +45,7 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class MappingRulesModel extends AbstractTableModel {
-    private SRX srx;
+    private final SRX srx;
 
     /**
      * Creates a new instance of MappingRulesModel
@@ -92,7 +92,7 @@ public class MappingRulesModel extends AbstractTableModel {
         switch (columnIndex) {
         case 0:
             String target = (String) aValue;
-            String code = LanguageCodes.getLanguageCodeByName(target);
+            String code = LanguageCodes.getInstance().getLanguageCodeByName(target);
             if (code != null) {
                 maprule.setLanguage(code);
             } else {
@@ -149,7 +149,7 @@ public class MappingRulesModel extends AbstractTableModel {
     //
 
     /** List of listeners */
-    protected List<ExceptionListener> listeners = new ArrayList<ExceptionListener>();
+    protected List<ExceptionListener> listeners = new ArrayList<>();
 
     public void addExceptionListener(ExceptionListener l) {
         listeners.add(l);

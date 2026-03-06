@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="app.regex">
-  <title id="app.regex.title">Expressions regulars</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.regex">
+  <title xml:id="app.regex.title">Expressions regulars</title>
 
   <para>Aquest annex va destinat als usuaris interessats a explorar una manera potent de millorar la productivitat. Tot i que tenen un aspecte complex i intimiden, fins i tot les expressions regulars més senzilles (sovint abreujades com a <emphasis>regex</emphasis> o <emphasis>regexp</emphasis>) són extremadament útils, no només en l'OmegaT, sinó en moltes altres aplicacions que potser utilitzeu cada dia, amb algunes variacions.</para>
 
@@ -24,7 +19,7 @@
 
 	<varlistentry>
       <term>\w+</term>
-      <listitem><para>Representa un o més &quot;caràcters de paraules&quot;, és a dir, lletres de l'alfabet, dígits i símbols de subratllat.</para>
+      <listitem><para>Representa un o més "caràcters de paraules", és a dir, lletres de l'alfabet, dígits i símbols de subratllat.</para>
       </listitem>
     </varlistentry>
 
@@ -86,8 +81,8 @@
     </varlistentry>
   </variablelist>
 
-  <section id="app.regex.four.rules">
-    <title id="app.regex.four.rules.title">Les 4 normes</title>
+  <section xml:id="app.regex.four.rules">
+    <title xml:id="app.regex.four.rules.title">Les 4 normes</title>
 
     <para>Les expressions regulars s'utilitzen per a cercar text, incloent-hi caràcters que no són visibles en la pantalla o quan s'imprimeixen, com ara espais, tabulacions o salts de línia. Qualsevol expressió <emphasis>coincideix</emphasis> o <emphasis><emphasis role="bold">no</emphasis> coincideix</emphasis> amb una paraula, una frase o una altra seqüència de text.</para>
     
@@ -147,10 +142,10 @@
     </variablelist>
   </section>
 
-  <section id="app.regex.twelve.characters">
-    <title id="app.regex.twelve.characters.title">Els 12 caràcters</title>
+  <section xml:id="app.regex.twelve.characters">
+    <title xml:id="app.regex.twelve.characters.title">Els 12 caràcters</title>
   
-    <para>Els dotze caràcters especials són la <emphasis>barra inclinada inversa</emphasis> <literal>\</literal>, el <emphasis>circumflex</emphasis> <literal>^</literal>, el <emphasis>signe del dòlar</emphasis> <literal>$</literal>, el <emphasis>punt</emphasis><emphasis></emphasis> <literal>.</literal>, la <emphasis>pleca</emphasis> (o <emphasis>barra vertical</emphasis>) <literal>|</literal>, el <emphasis>signe d'interrogació</emphasis> <literal>?</literal>, l'<emphasis>asterisc</emphasis> (o <emphasis>estrella</emphasis>) <literal>*</literal>, el <emphasis>signe de suma</emphasis> <literal>+</literal>, el <emphasis>parèntesi d'obertura</emphasis> <literal>(</literal>, el <emphasis>parèntesi de tancament</emphasis> <literal>)</literal>, el <emphasis>claudàtor d'obertura</emphasis> <literal>[</literal> i la <emphasis>clau d'obertura</emphasis> <literal>{</literal>.</para>
+    <para>Els dotze caràcters especials són la <emphasis>barra inclinada inversa</emphasis> <literal>\</literal>, el <emphasis>circumflex</emphasis> <literal>^</literal>, el <emphasis>signe del dòlar</emphasis> <literal>$</literal>, el <emphasis>punt</emphasis><emphasis/> <literal>.</literal>, la <emphasis>pleca</emphasis> (o <emphasis>barra vertical</emphasis>) <literal>|</literal>, el <emphasis>signe d'interrogació</emphasis> <literal>?</literal>, l'<emphasis>asterisc</emphasis> (o <emphasis>estrella</emphasis>) <literal>*</literal>, el <emphasis>signe de suma</emphasis> <literal>+</literal>, el <emphasis>parèntesi d'obertura</emphasis> <literal>(</literal>, el <emphasis>parèntesi de tancament</emphasis> <literal>)</literal>, el <emphasis>claudàtor d'obertura</emphasis> <literal>[</literal> i la <emphasis>clau d'obertura</emphasis> <literal>{</literal>.</para>
 
     <para>A continuació es descriu breument cada caràcter amb exemples d'expressions regulars que en depenen, i també amb exemples de text amb què coincideixen o no.</para>
     
@@ -176,7 +171,7 @@
                     <entry>
                       <para>Un nombre entre <emphasis>0.0</emphasis> i <emphasis>0.9</emphasis>, o només la part <emphasis>0.5</emphasis> final en nombres com 10.5 o 560.5.</para>
 
-                      <para><literal>\.</literal> anul·la el significat de &quot;qualsevol caràcter&quot; del punt per a coincidir amb el punt decimal, mentre que <literal>\d</literal> converteix la lletra «d» minúscula en una expressió que coincideix amb qualsevol dígit entre 0 i 9.</para>
+                      <para><literal>\.</literal> anul·la el significat de "qualsevol caràcter" del punt per a coincidir amb el punt decimal, mentre que <literal>\d</literal> converteix la lletra «d» minúscula en una expressió que coincideix amb qualsevol dígit entre 0 i 9.</para>
                     </entry>
                   </row>
 
@@ -193,7 +188,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>CIRCUMFLEX: <literal></literal>^</term>
+          <term>CIRCUMFLEX: <literal/>^</term>
           <listitem>
             <para>Quan és el primer caràcter de l'expressió, el caràcter <emphasis>circumflex</emphasis> coincideix amb el començament d'una línia.</para>
 
@@ -229,7 +224,7 @@
                         </listitem>
 
                         <listitem>
-                          <para>Qualsevol caràcter que <emphasis>no</emphasis> sigui «a», «b» ni «c». En la paraula &quot;caoba&quot;, per exemple, només coincideix la «o».</para>
+                          <para>Qualsevol caràcter que <emphasis>no</emphasis> sigui «a», «b» ni «c». En la paraula "caoba", per exemple, només coincideix la «o».</para>
                         </listitem>
                       </orderedlist>
                     </entry>
@@ -319,7 +314,7 @@
                     <entry>
                       <para>Combinacions que contenen tres lletres que comencen per «s» i acaben amb «l», però dividides en més d'una línia.</para>
                       <para>Quina és la lletra que falta?</para>
-                        <simplelist>
+                        <simplelist type="vert">
                           <member><literal>s</literal></member>
                           <member><literal/></member>
                           <member><literal>l</literal></member>
@@ -351,7 +346,7 @@
                   <row>
                     <entry>Coincideix</entry>
                     <entry>
-                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist>
+                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist type="vert">
                           <member>«Un segle de vida...»</member>
                           <member>«El concert dels meus somnis...»</member>
                         </simplelist>
@@ -362,7 +357,7 @@
                   <row>
                     <entry>No coincideix</entry>
                     <entry>
-                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist>
+                      <para>Les paraules «Un» o «El» inicials en frases com ara:<simplelist type="vert">
                           <member>«Un llibre titulat <emphasis>Un heroi oblidat</emphasis>.»</member>
                           <member>«Treballa en el restaurant <emphasis>El panxacontent</emphasis>.»</member>
                         </simplelist>
@@ -395,7 +390,7 @@
                   <row>
                     <entry>Coincideix</entry>
                     <entry>
-                      <para>Les paraules «un» o «una» de les frases següents:<simplelist>
+                      <para>Les paraules «un» o «una» de les frases següents:<simplelist type="vert">
                           <member>«Tinc una pregunta».</member>
                           <member>«Conec un doctor excel·lent».</member>
                         </simplelist>
@@ -408,7 +403,7 @@
                   <row>
                     <entry>No coincideix</entry>
                     <entry>
-                      <para>Ni «un» ni «una» en la frase següent:<simplelist>
+                      <para>Ni «un» ni «una» en la frase següent:<simplelist type="vert">
                           <member>L'article indefinit: «un» (o «una»).</member>
                         </simplelist>
                       </para>
@@ -559,7 +554,7 @@
                     <entry>
                       <para>El número de seqüència (incloent-hi el parèntesi) del començament de cada línia en una llista com la següent:</para>
 
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>1) Pomes</member>
                         <member>2) Taronges</member>
                         <member>3) Peres</member>
@@ -573,7 +568,7 @@
                       <para>Números de seqüència que no són al principi d'una línia.</para>
 
                       <para>Seguiu aquests passos:</para>
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>Pas 1) Preparació</member>
                         <member>Pas 2) ...</member>
                       </simplelist>
@@ -664,8 +659,8 @@
       </variablelist>
   </section>
 
-  <section id="app.regex.types.of.expressions">
-    <title id="app.regex.types.of.expressions.title">Moltes expressions</title>
+  <section xml:id="app.regex.types.of.expressions">
+    <title xml:id="app.regex.types.of.expressions.title">Moltes expressions</title>
 
     <para>Aquesta secció presenta diversos tipus d'expressions regulars, de més senzilles a més complexes.</para>
       
@@ -673,12 +668,12 @@
       <para>Recordeu que la majoria dels caràcters <emphasis>alfabètics</emphasis> precedits per <literal>\</literal> es converteixen en una expressió que representa <emphasis>no el caràcter en si, sinó el seu significat especial associat</emphasis>.</para>
     </note>
 
-    <section id="app.regex.types.of.expressions.simple.expressions">
-      <title id="app.regex.types.of.expressions.simple.expressions.title">Expressions senzilles</title>
+    <section xml:id="app.regex.types.of.expressions.simple.expressions">
+      <title xml:id="app.regex.types.of.expressions.simple.expressions.title">Expressions senzilles</title>
       <para>L'expressió regular més senzilla està formada per un sol caràcter o una combinació de <literal>\</literal> i un caràcter que constitueixi una unitat amb un sol significat.</para>
       
-      <table id="app.regex.characters">
-        <title id="app.regex.characters.title">Caràcters</title>
+      <table xml:id="app.regex.characters">
+        <title xml:id="app.regex.characters.title">Caràcters</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -723,8 +718,8 @@
       </table>
     </section>
 
-    <section id="app.regex.types.of.expressions.case">
-      <title id="app.regex.types.of.expressions.case.title">Majúscules</title>
+    <section xml:id="app.regex.types.of.expressions.case">
+      <title xml:id="app.regex.types.of.expressions.case.title">Majúscules</title>
 
       
       <para>Les cerques normals de l'OmegaT no distingeixen entre majúscules i minúscules per defecte: coincideixen tant amb majúscules com amb minúscules, excepte si habiliteu l'opció <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>. Si l'habiliteu, tota l'expressió de cerca distingeix entre majúscules i minúscules.</para>
@@ -749,15 +744,15 @@
       <para>Podeu aprofitar-ho per a controlar amb precisió la distinció entre majúscules i minúscules en les cerques. Suposem, per exemple, que voleu trobar exemples d'«OmegaT» i «omegat», però no «OMEGAT». Podeu fer-ho amb l'expressió següent: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, que representa una «o» sense distinció entre majúscules i minúscules, seguida de «mega» amb distinció i «t» sense distinció.</para>
     </section>
 
-    <section id="app.regex.types.of.expressions.classes">
-      <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+    <section xml:id="app.regex.types.of.expressions.classes">
+      <title xml:id="app.regex.types.of.expressions.classes.title">Classes</title>
 
       <para>Les expressions regulars us permeten crear conjunts de caràcters coneguts com a <emphasis>classes</emphasis>. Les cerques coincidiran amb qualsevol dels caràcters del conjunt.</para>
 
 	  <para>Les classes es defineixen indicant ells caràcters desitjats entre claudàtors i es poden especificar indicant cada caràcter individual que voleu incloure o un interval de caràcters. Per exemple, podeu crear la classe <literal>[£€$]</literal> per a trobar qualsevol d'aquests tres símbols de moneda en el text, o [1-3] per a trobar el número 1, 2 o 3.</para>
 
       <note>
-        <para>Dins d'una classe, només són especials la barra inclinada inversa (<literal>\</literal>), el circumflex (<literal></literal>), el claudàtor de tancament (<literal>]</literal>) i el guionet (<literal>-</literal>). La resta dels dotze caràcters són normals i no han d'anar precedits per una barra inclinada inversa si voleu cercar-los.</para>
+        <para>Dins d'una classe, només són especials la barra inclinada inversa (<literal>\</literal>), el circumflex (<literal/>), el claudàtor de tancament (<literal>]</literal>) i el guionet (<literal>-</literal>). La resta dels dotze caràcters són normals i no han d'anar precedits per una barra inclinada inversa si voleu cercar-los.</para>
 
 		<para>Podeu cercar qualsevol dels quatre caràcters especials de les classes com a caràcters normals indicant una barra inclinada inversa davant. També podeu cercar el circumflex, el claudàtor de tancament i el guionet col·locant-los en una posició que no activi el seu significat especial: en qualsevol posició excepte just després del claudàtor d'obertura per al circumflex, immediatament després del claudàtor d'obertura o del circumflex que el segueix per al claudàtor de tancament, i just després del claudàtor d'obertura o just abans del claudàtor de tancament per al guionet.</para>
       </note>
@@ -765,8 +760,8 @@
 	  <para>Molts conjunts utilitzats amb freqüència tenen una forma abreujada formada per una barra inclinada inversa seguida d'una lletra de l'alfabet. Per exemple, <literal>\d</literal> és una abreviatura de <literal>[0-9]</literal>, que coincideix amb qualsevol dígit entre 0 i 9. En molts casos, la lletra majúscula corresponent s'utilitza per a negar la classe: <literal>\D</literal> coincideix amb qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui un dígit.</para>
       <para>La taula següent proporciona alguns exemples addicionals. Aquestes classes no representen mai només la lletra real utilitzada per a formar l'abreviatura.</para>
       
-      <table id="app.regex.classes">
-        <title id="app.regex.classes.title">Exemples de classes</title>
+      <table xml:id="app.regex.classes">
+        <title xml:id="app.regex.classes.title">Exemples de classes</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -842,10 +837,10 @@
       
       <para>Les expressions regulars no es limiten als caràcters alfanumèrics. Inclouen tot el joc de caràcters d'Unicode. Utilitzeu blocs, sistemes d'escriptura i categories d'Unicode per a especificar classes de caràcters fora de l'interval de caràcters alfanumèrics. En la taula següent es presenten alguns exemples.</para>
 
-      <para>Consulteu també <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> per a veure una explicació exhaustiva d'expressions regulars amb Unicode.</para>
+      <para>Consulteu també <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</link> per a veure una explicació exhaustiva d'expressions regulars amb Unicode.</para>
 
-      <table id="app.regex.unicode.blocks">
-        <title id="app.regex.unicode.blocks.title">Blocs, sistemes d'escriptura i categories d'Unicode</title>
+      <table xml:id="app.regex.unicode.blocks">
+        <title xml:id="app.regex.unicode.blocks.title">Blocs, sistemes d'escriptura i categories d'Unicode</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -860,7 +855,7 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>Caràcter en el bloc Greek (<ulink url="https://unicode.org/reports/tr18/#Blocks">bloc d'Unicode</ulink>)</para>
+                <para>Caràcter en el bloc Greek (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Blocks">bloc d'Unicode</link>)</para>
 				
                 <para><literal>\P{InGreek}</literal> és qualsevol caràcter que <emphasis role="bold">no</emphasis> sigui en el bloc Greek.</para>
               </entry>
@@ -869,21 +864,21 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>Logograma (caràcter <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) de les llengües CJK (<ulink url="https://unicode.org/reports/tr18/#Script_Property">sistema d'escriptura d'Unicode</ulink>)</para>
+                <para>Logograma (caràcter <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) de les llengües CJK (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Script_Property">sistema d'escriptura d'Unicode</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Lu}</literal></entry>
               <entry>
-                <para>Lletra en majúscula (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</ulink>)</para>
+                <para>Lletra en majúscula (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Sc}</literal></entry>
               <entry>
-                <para>Símbol de moneda, que també és una <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</ulink>.</para>
+                <para>Símbol de moneda, que també és una <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">categoria d'Unicode</link>.</para>
               </entry>
             </row>
           </tbody>
@@ -891,13 +886,13 @@
       </table>
     </section>
 
-    <section id="app.regex.more.advanced.expressions">
-      <title id="app.regex.more.advanced.expressions.title">Expressions més avançades</title>
+    <section xml:id="app.regex.more.advanced.expressions">
+      <title xml:id="app.regex.more.advanced.expressions.title">Expressions més avançades</title>
       
       <para>Algunes expressions especifiquen una posició en comptes d'un caràcter. Indiquen en quina posició del text cal cercar la coincidència, però no inclouen cap caràcter en la coincidència. La taula següent indica alguns dels exemples més habituals. Consulteu els llocs de la secció <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> per a conèixer més informació.</para>
 
-      <table id="app.regex.boundary.matchers">
-        <title id="app.regex.boundary.matchers.title">Expressions que marquen una posició</title>
+      <table xml:id="app.regex.boundary.matchers">
+        <title xml:id="app.regex.boundary.matchers.title">Expressions que marquen una posició</title>
       
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -979,13 +974,13 @@
     </section>  
   </section>
 
-  <section id="app.regex.more.examples">
-    <title id="app.regex.more.examples.title">Més exemples</title>
+  <section xml:id="app.regex.more.examples">
+    <title xml:id="app.regex.more.examples.title">Més exemples</title>
 
     <para>Aquesta secció presenta alguns exemples que demostren com es poden combinar les diferents expressions descrites anteriorment per a fer cerques potents en l'OmegaT.</para>
     
-    <table id="regex.examples">
-      <title id="regex.examples.title">Exemples d'expressions regulars que utilitzen les expressions anteriors</title>
+    <table xml:id="regex.examples">
+      <title xml:id="regex.examples.title">Exemples d'expressions regulars que utilitzen les expressions anteriors</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1006,7 +1001,7 @@
           </row>
 
           <row>
-            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>Cercar frases que comencen per una coma seguida d'un caràcter d'espai en blanc, contenen una o més paraules (incloent-hi paraules en cometes, contraccions i noms de fitxer amb una extensió) i acaben amb una coma o un punt.</para>
             </entry>
@@ -1081,30 +1076,30 @@
     </table>
   </section>
 
-  <section id="app.regex.tools">
-    <title id="app.regex.tools.title">Referències</title>
+  <section xml:id="app.regex.tools">
+    <title xml:id="app.regex.tools.title">Referències</title>
 
     <para>Tot i que l'OmegaT no presenta colors atractius per a les expressions regulars, podeu practicar molt amb la finestra <link linkend="windows.text.search" endterm="windows.text.search.title"/>, ja que l'OmegaT sí que n'acoloreix els resultats.</para>
     
     <para>A continuació es presenten alguns recursos addicionals.</para>
 
     <para>La referència tècnica del Java és útil com a referència canònica.<variablelist>
-        <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</ulink></term>
+        <varlistentry xml:id="app.regex.java">
+          <term xml:id="app.regex.java.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentació d'expressions regulars del Java</link></term>
           <listitem>
             <para>Referència oficial per a les expressions regulars utilitzades en el Java.</para>
           </listitem>
         </varlistentry>
       </variablelist>Si voleu aprendre més sobre l'ús d'expressions regulars, els dos llocs següents han demostrat ser molt útils.<variablelist>
-        <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regex101">
+          <term xml:id="app.regex.tools.regex101.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://regex101.com">https://regex101.com</link></term>
           <listitem>
             <para>Eina de coincidència d'expressions regulars que us permet indicar el text que voleu cercar i les expressions regulars que voleu provar.</para>
           </listitem>
         </varlistentry>
 
-        <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regular.expression.info">
+          <term xml:id="app.regex.tools.regular.expression.info.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info">https://www.regular-expressions.info</link></term>
           <listitem>
             <para>Un dels tutorials d'expressions regulars més complets, de referència a Internet.</para>
           </listitem>

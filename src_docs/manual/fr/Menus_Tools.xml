@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Outils</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.tools">
+  <title xml:id="menus.tools.title"><guimenu>Outils</guimenu></title>
 
   <para>Ce menu vous permet d’accéder à certains outils comme la validation d’assurance qualité, les statistiques de correspondances, l’aligneur, et les scripts.</para>
 
-  <example id="example.check.issues">
-	<title id="example.check.issues.title">Exemple de description de raccourci</title>
+  <example xml:id="example.check.issues">
+	<title xml:id="example.check.issues.title">Exemple de description de raccourci</title>
 	<para>Sur Windows et Linux : <keycombo><keycap>Ctrl</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></para>
 
 	<para>Sur macOS : <keycombo><keycap>Maj</keycap><keycap>commande</keycap><keycap>V</keycap></keycombo></para>
@@ -15,8 +14,8 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Afficher les erreurs…</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></term>
+    <varlistentry xml:id="menus.tools.check.issues">
+      <term xml:id="menus.tools.check.issues.title"><guimenuitem>Afficher les erreurs…</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>L’outil d’assurance de qualité effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</para>
 
@@ -67,15 +66,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Afficher les erreurs pour le document actuel</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.check.issues.for.current.document">
+      <term xml:id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Afficher les erreurs pour le document actuel</guimenuitem></term>
       <listitem>
         <para>Comme ci-dessus, mais seulement pour le document actif dans le volet Éditeur.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.statistics">
-      <term id="menus.tools.statistics.title"><guimenuitem>Statistiques</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.statistics">
+      <term xml:id="menus.tools.statistics.title"><guimenuitem>Statistiques</guimenuitem></term>
       <listitem>
         <para>Ouvre une nouvelle fenêtre et affiche les statistiques du projet telles que le nombre de mots ou les totaux des segments, ainsi que les totaux de chaque fichier du projet.</para>
 
@@ -105,8 +104,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Statistiques des correspondances</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics">
+      <term xml:id="menus.tools.match.statistics.title"><guimenuitem>Statistiques des correspondances</guimenuitem></term>
       <listitem>
         <para>Montre les statistiques des correspondances du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</para>
 
@@ -114,8 +113,8 @@
       </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistiques des correspondances par fichier</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics.per.file">
+      <term xml:id="menus.tools.match.statistics.per.file.title"><guimenuitem>Statistiques des correspondances par fichier</guimenuitem></term>
       <listitem>
         <para>Montre les statistiques des correspondances du projet individuelles pour chaque fichier du projet, c’est-à-dire le nombre de répétitions, de correspondances exactes, de correspondances partielles, et d’absences de correspondances pour les segments, les mots, et les caractères.</para>
 
@@ -123,8 +122,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Aligner les fichiers…</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.align.files">
+      <term xml:id="menus.tools.align.files.title"><guimenuitem>Aligner les fichiers…</guimenuitem></term>
       <listitem>
         <para>Sélectionner les deux fichiers à aligner (le fichier source et sa traduction) et cliquer sur <guibutton>OK</guibutton> pour ouvrir la fenêtre <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
 
@@ -133,8 +132,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>Scripts…</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.scripting">
+      <term xml:id="menus.tools.scripting.title"><guimenuitem>Scripts…</guimenuitem></term>
       <listitem>
         <para>Ouvre la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/>, qui vous permet de définir l’emplacement où les scripts se trouvent, ainsi que d’écrire et d’exécuter des scripts, et leur assigner un raccourci.</para>
 		<para>La liste sous cet élément affiche 12 emplacements potentiels pour des scripts. Cliquer sur un emplacement assigné permet de lancer le script assigné à cet emplacement.</para>
@@ -159,8 +158,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">Commandes de recherches externes</term>
+    <varlistentry xml:id="menus.tools.external.search.commands">
+      <term xml:id="menus.tools.external.search.commands.title">Commandes de recherches externes</term>
       <listitem>
         <para>Si vous avez défini des recherches externes dans les paramètres <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, ils sont listés et accessibles ici.</para>
       </listitem>

@@ -6,12 +6,6 @@ plugins {
 }
 
 def documentRootDir = 'src_docs'
-def styleRootDir = 'src_docs/xsl'
-docConfig {
-    styleDir.set(rootProject.layout.settingsDirectory.dir(styleRootDir))
-    docRoot.set(rootProject.layout.settingsDirectory.dir(documentRootDir))
-    outputRoot.set(layout.buildDirectory.dir('docs'))
-}
 
 dependencies {
     compileOnly(project.rootProject)

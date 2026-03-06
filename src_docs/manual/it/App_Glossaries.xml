@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.glossaries">
-  <title id="app.glossaries.title">Glossari</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
+  <title xml:id="app.glossaries.title">Glossari</title>
 
   <para>I glossari sono file terminologici memorizzati nella cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
@@ -28,13 +27,13 @@
 
 		  <para>È possibile specificare una codifica diversa, se si desidera, aggiungendo un commento “magico” dalla forma seguente:</para>
 
-		  <simplelist>
+		  <simplelist type="vert">
             <member>
               <code># -*- coding: &lt;charset&gt; -*-</code>,
             </member>
           </simplelist>
 		  
-          <para>dove <parameter>&lt;charset&gt;</parameter> è tipicamente uno dei set elencati nello <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>.</para>
+          <para>dove <parameter>&lt;charset&gt;</parameter> è tipicamente uno dei set elencati nello <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</link>.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -51,8 +50,8 @@
 	<para>Le modifiche apportate a qualsiasi glossario sono immediatamente riconosciute da OmegaT e visualizzate nel pannello <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
   </note>
 
-  <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">La cartella dei glossari</title>
+  <section xml:id="glossaries.glossary.folder">
+    <title xml:id="glossaries.glossary.folder.title">La cartella dei glossari</title>
 
     <para>Per impostazione predefinita, ogni progetto contiene una cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> in cui memorizzare il glossario modificabile e qualsiasi glossario di riferimento che si desidera aggiungere al progetto. Vedere le proprietà del progetto <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per i dettagli.</para>
 
@@ -62,26 +61,26 @@
     <para>Usare le proprietà del progetto <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per impostare la posizione della cartella dei glossari di riferimento. Questa cartella può essere configurata al di fuori del progetto, ed essa, o una delle sue particolari sottocartelle può essere usata anche in altri progetti.</para>
   </section>
 
-  <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">Glossario del progetto</title>
+  <section xml:id="glossaries.default.glossary">
+    <title xml:id="glossaries.default.glossary.title">Glossario del progetto</title>
 
     <para>Il glossario modificabile del progetto si trova, per impostazione predefinita, nella cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> ed è chiamato <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>Nella finestra di dialogo <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/> è possibile cambiarne il nome e la posizione, ma è necessario attribuirgli un'estensione <filename>.txt</filename> o <filename>.utf8</filename> e memorizzarlo all'interno della cartella <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> o in una delle sue cartelle secondarie.</para>
   </section>
 
-  <section id="glossaries.fileformat">
-    <title id="glossaries.fileformat.title">Formato dei file</title>
+  <section xml:id="glossaries.fileformat">
+    <title xml:id="glossaries.fileformat.title">Formato dei file</title>
 
     <para>I file di glossario OmegaT sono dei semplici file di solo testo composti da elenchi su tre colonne, col termine di partenza nella prima colonna, un termine di arrivo opzionale nella seconda colonna e un commento, sempre opzionale, nella terza.</para>
 
-    <para>I glossari possono essere file con “valori separati da tabulazioni&quot; (TSV, tab-separated values) o “valori separati da virgole” (CSV, comma-separated values) oppure possono anche utilizzare il formato TermBase eXchange (TBX 2).</para>
+    <para>I glossari possono essere file con “valori separati da tabulazioni" (TSV, tab-separated values) o “valori separati da virgole” (CSV, comma-separated values) oppure possono anche utilizzare il formato TermBase eXchange (TBX 2).</para>
 
     <para>Un glossario modificabile creato per il progetto da OmegaT risulterà un file TSV salvato in formato UTF-8. I file creati dall'utente che utilizzano solo i caratteri latini potrebbero essere riconosciuti e trattati come ISO-8859-1, se non contengono caratteri non-ASCII o altri caratteri interpretati come UTF-8.</para>
 
     <para>La codifica utilizzata per leggere i glossari di riferimento dipende dalla loro estensione del file:</para>
 
-    <table id="glossary.extensions">
+    <table xml:id="glossary.extensions">
       <title>Formato, estensioni e codifica attesa</title>
 	  <tgroup cols="3">
       <thead>

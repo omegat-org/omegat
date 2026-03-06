@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.menus">
-  <title id="chapter.menus.title">Menús</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.menus">
+  <title xml:id="chapter.menus.title">Menús</title>
 
   	<para>L'OmegaT té molt pocs botons i sembla una mica confús, o directament poc amigable, per a les persones acostumades a les interfícies basades en botons. La majoria de les accions es duen a terme amb l'ajuda de dreceres associades a elements del menú.</para>
 
@@ -11,8 +10,8 @@
 
 	<para>Els elements dels menús que no indiquen una drecera no en tenen cap d'assignada per defecte. Consulteu l'annex <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> si voleu modificar o afegir dreceres.</para>
 
-  <note><para>Recordatori sobre la descripció de les dreceres de teclat:<table id="menus.shortcut.description">
-      <title id="menus.shortcut.description.title">Identificadors de les tecles modificadores</title>
+  <note><para>Recordatori sobre la descripció de les dreceres de teclat:<table xml:id="menus.shortcut.description">
+      <title xml:id="menus.shortcut.description.title">Identificadors de les tecles modificadores</title>
 
       <tgroup cols="3">
         <thead>
@@ -52,18 +51,18 @@
     </table></para>
   </note>
 
-  <xi:include href="Menus_Project.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Project.xml"/>
   
-  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Edit.xml"/>
 
-  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_GoTo.xml"/>
 
-  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_View.xml"/>
 
-  <xi:include href="Menus_Tools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Tools.xml"/>
 
-  <xi:include href="Menus_Options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Options.xml"/>
 
-  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Help.xml"/>
 
 </chapter>

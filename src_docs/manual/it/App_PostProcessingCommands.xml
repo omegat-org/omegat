@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="post.processing.commands">
-  <title id="post.processing.commands.title">Comandi di post-elaborazione</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="post.processing.commands">
+  <title xml:id="post.processing.commands.title">Comandi di post-elaborazione</title>
 
   <para>Vedere le proprietà del progetto <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> per i comandi specifici del progetto.</para>
 
   <para>Vedere le preferenze <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> per i comandi globali.</para>
 	
 
-  <section id="post.processing.commands.template.variables">
-    <title id="post.processing.commands.template.variables.title">Variabili del modello</title>
-    <para>Il comando viene passato al &quot;Java runtime exec&quot; come stringa con i valori del modello estesi. Tutti gli argomenti devono essere racchiusi tra virgolette, per es. <literal>&quot;${fileName}&quot;</literal>.</para>
+  <section xml:id="post.processing.commands.template.variables">
+    <title xml:id="post.processing.commands.template.variables.title">Variabili del modello</title>
+    <para>Il comando viene passato al "Java runtime exec" come stringa con i valori del modello estesi. Tutti gli argomenti devono essere racchiusi tra virgolette, per es. <literal>"${fileName}"</literal>.</para>
 
     <para>Le variabili del modello seguenti sono sempre disponibili. Le altre voci nell'elenco dei modelli sono variabili d'ambiente per il proprio sistema.</para>
 	
-    <table id="post.processing.commands.template.variables.table">
-      <title id="post.processing.commands.template.variables.table.title">Variabili del modello</title>
+    <table xml:id="post.processing.commands.template.variables.table">
+      <title xml:id="post.processing.commands.template.variables.table.title">Variabili del modello</title>
       <tgroup cols="2" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
         <colspec align="left" colname="2" colnum="2"/>
@@ -96,20 +95,20 @@
     </table>
   </section>
   
-  <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">Script locali</title>
+  <section xml:id="post.processing.commands.user.defined.scripts">
+    <title xml:id="post.processing.commands.user.defined.scripts.title">Script locali</title>
     <para>In aggiunta ai normali comandi, è possibile richiamare uno script. Non avviare mai script di post-elaborazione da fonti non verificate. Per ragioni di sicurezza i comandi di post-elaborazione locali sono disabilitati per impostazione predefinita.</para>
     <para>Le variabili del modello sono utilizzabili sia con i comandi normali sia con gli script personalizzati. Per lo script potrebbe essere necessario dover utilizzare un percorso assoluto. Il PATH che OmegaT usa potrebbe non essere lo stesso del PATH dell'utente attivo.</para>
     <para>STDOUT e STDERR sono scritti nel file <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. Il codice di uscita e STDERR o l'ultimo STDOUT comparirà nella barra di stato.</para>
   </section>
 
-  <section id="post.processing.commands.linux.and.macos">
-    <title id="post.processing.commands.linux.and.macos.title">Linux e macOS</title>
+  <section xml:id="post.processing.commands.linux.and.macos">
+    <title xml:id="post.processing.commands.linux.and.macos.title">Linux e macOS</title>
     <para>Si deve usare uno shebang, per es. <literal>#! /bin/bash</literal> o <literal>#! /usr/bin/env python3</literal>. E lo script deve essere eseguibile. I comandi di concatenazione con <literal>&amp;&amp;</literal> o <literal>||</literal> o i pipe <literal>|</literal> qui non funzionano.</para>
   </section>
   
-  <example id="post.processing.commands.example">
-	  <title id="post.processing.commands.example.title">Semplice esempio di comandi di post-elaborazione:</title>
+  <example xml:id="post.processing.commands.example">
+	  <title xml:id="post.processing.commands.example.title">Semplice esempio di comandi di post-elaborazione:</title>
 	  <variablelist>
 		<varlistentry>
 		  <term>Aprire la cartella di destinazione in Linux</term>

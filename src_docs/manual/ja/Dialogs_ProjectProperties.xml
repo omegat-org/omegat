@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="dialogs.project.properties">
-  <title id="dialogs.project.properties.title"><guilabel>プロジェクト設定</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="dialogs.project.properties">
+  <title xml:id="dialogs.project.properties.title"><guilabel>プロジェクト設定</guilabel></title>
 
   <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> からダイアログを開きます。</para>
   
@@ -10,12 +9,12 @@
   <para>詳細については-<link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/>を参照してください。</para>
   
 
-  <section id="dialogs.project.properties.languages">
-    <title id="dialogs.project.properties.languages.title"><guilabel>言語設定</guilabel></title>
+  <section xml:id="dialogs.project.properties.languages">
+    <title xml:id="dialogs.project.properties.languages.title"><guilabel>言語設定</guilabel></title>
 
     <para>ドロップダウンの一覧から原文言語と訳文言語を選択するか、手動で入力します。</para>
 
-	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
+	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</link>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
 	
 	<para>言語コードは、 OmegaTの様々な箇所で使用されています：</para>
 	
@@ -47,12 +46,12 @@
       <para>OmegaTは原文言語と訳文言語に対応するトークナイザーを自動的に選択しますが、設定を手動で変更することもできます。トークナイザーは、OmegaTが検索結果を良くするのに重要な働きをしています。</para>
   </section>
 
-  <section id="dialogs.project.properties.options">
-    <title id="dialogs.project.properties.options.title"><guilabel>設定</guilabel></title>
+  <section xml:id="dialogs.project.properties.options">
+    <title xml:id="dialogs.project.properties.options.title"><guilabel>設定</guilabel></title>
 
     <variablelist>
-      <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title"><option>文単位の分節化</option></term>
+      <varlistentry xml:id="dialogs.project.properties.options.segmentation">
+        <term xml:id="dialogs.project.properties.options.segmentation.title"><option>文単位の分節化</option></term>
 
 		<listitem>		  
           <para>文単位の分節化では、原文ファイルが、分節化規則に基づいて分節に分割されます。</para>
@@ -81,8 +80,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.local.segmentation">
-        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>プロジェクト専用の分節化規則...</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.local.segmentation">
+        <term xml:id="dialogs.project.properties.local.segmentation.title"><guibutton>プロジェクト専用の分節化規則...</guibutton></term>
 
 		<listitem>
 		  <para>デフォルトでは、分節化の設定はユーザーレベルであり、すべてのプロジェクトで共有されます。</para>
@@ -104,8 +103,8 @@
       </varlistentry>
 	  
 	  
-      <varlistentry id="dialogs.project.properties.auto.propagation">
-        <term id="dialogs.project.properties.auto.propagation.title"><option>翻訳自動反映</option></term>
+      <varlistentry xml:id="dialogs.project.properties.auto.propagation">
+        <term xml:id="dialogs.project.properties.auto.propagation.title"><option>翻訳自動反映</option></term>
 
 		<listitem>
           <para>同じ内容の分節が何箇所か原文に存在する場合、［翻訳自動反映］チェックボックスにチェックを入れると、最初にその内容を一箇所翻訳した時点で、それが基本訳文に設定され、他の訳文分節にも同じ内容が設定されます。</para>
@@ -116,8 +115,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.hide.tags">
-        <term id="dialogs.project.properties.hide.tags.title"><option>タグを隠す</option></term>
+      <varlistentry xml:id="dialogs.project.properties.hide.tags">
+        <term xml:id="dialogs.project.properties.hide.tags.title"><option>タグを隠す</option></term>
 
 		<listitem>
           <para>タグは一般に、原文の特定のレイアウトまたは修飾属性などを訳文に再現するのに役立ちます。</para>
@@ -141,8 +140,8 @@
       </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.external.processing.command">
-        <term id="dialogs.project.properties.external.processing.command.title"><option>プロジェクト専用の後処理用コマンド：</option></term>
+      <varlistentry xml:id="dialogs.project.properties.external.processing.command">
+        <term xml:id="dialogs.project.properties.external.processing.command.title"><option>プロジェクト専用の後処理用コマンド：</option></term>
 
 		<listitem>
 		  <warning>
@@ -171,8 +170,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>プロジェクト専用ファイルフィルター</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.filters">
+        <term xml:id="dialogs.project.properties.filters.title"><guibutton>プロジェクト専用ファイルフィルター</guibutton></term>
 
         <listitem>
           <para>デフォルトでは、フィルターの設定はユーザーレベルであり、すべてのプロジェクトで共有されます。これらの設定は、 <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>設定で定義できます。</para>
@@ -189,8 +188,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.repository.mapping">
-        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>リポジトリマッピング...</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.repository.mapping">
+        <term xml:id="dialogs.project.properties.repository.mapping.title"><guibutton>リポジトリマッピング...</guibutton></term>
 
         <listitem>
           <para>チームプロジェクトで作業する場合、このウィンドウでリモートフォルダとローカルフォルダ間のマッピングを定義できます。</para>
@@ -199,8 +198,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="dialogs.project.properties.external.searches">
-        <term id="dialogs.project.properties.external.searches.title"><guibutton>プロジェクト専用の外部検索</guibutton></term>
+      <varlistentry xml:id="dialogs.project.properties.external.searches">
+        <term xml:id="dialogs.project.properties.external.searches.title"><guibutton>プロジェクト専用の外部検索</guibutton></term>
 
         <listitem>
           <para>デフォルトでは、外部検索はユーザーレベルであり、すべてのプロジェクトで使用できます。これらの設定は、 <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>設定で定義できます。</para>
@@ -221,8 +220,8 @@
 	</variablelist>
   </section>
 
-  <section id="dialogs.project.properties.file.locations">
-    <title id="dialogs.project.properties.file.locations.title"><guilabel>ファイル場所設定</guilabel></title>
+  <section xml:id="dialogs.project.properties.file.locations">
+    <title xml:id="dialogs.project.properties.file.locations.title"><guilabel>ファイル場所設定</guilabel></title>
 
 	<para>OmegaT の翻訳プロジェクトは、複数のフォルダーの様々な資材から構成されています。</para>
 
@@ -237,8 +236,8 @@
 	<para>プロジェクト資材の場所にアクセスするには、 <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/>を使用しサブメニューを選択します。</para>
 
 	<variablelist>
-	  <varlistentry id="dialogs.project.properties.file.locations.browse">
-		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>参照</guibutton></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.browse">
+		<term xml:id="dialogs.project.properties.file.locations.browse.title"><guibutton>参照</guibutton></term>
 
 		<listitem>
 		  <para><guibutton>[参照]</guibutton>ボタンは、すべてのユーザー定義プロジェクト資源で使用できます。</para>
@@ -251,8 +250,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
-		<term id="dialogs.project.properties.file.locations.source.files.title"><option>原文ファイルフォルダー</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.source.files">
+		<term xml:id="dialogs.project.properties.file.locations.source.files.title"><option>原文ファイルフォルダー</option></term>
 
 		<listitem>
 		  <para>翻訳対象の原文ファイルがこのフォルダにあるとみなします。OmegaTは、すべてのファイルを一度に読み取ろうとし、翻訳可能な内容をエディタに表示します。</para>
@@ -262,8 +261,8 @@
 		  <para>フォルダーが空の場合、翻訳可能なコンテンツを含むファイルがない場合、またはOmegaTのファイルフィルターでサポートされているファイルがない場合、OmegaTはフォルダーが空であると通知します。</para>
 
 		  <variablelist>
-			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
-			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>除外...</guibutton></term>
+			<varlistentry xml:id="dialogs.project.properties.file.locations.exclusions">
+			  <term xml:id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>除外...</guibutton></term>
 
 			  <listitem>
 				<para><guibutton>[除外]</guibutton>をクリックして、OmegaTによって無視されるファイルまたはフォルダを定義します。無視されたファイルまたはフォルダー:</para>
@@ -282,15 +281,15 @@
 				  </listitem>
 				</itemizedlist>
 
-				<para>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<keycap>F2</keycap> キーを押すと編集もできます。除外定義には <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</ulink>が使えます。</para>
+				<para>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<keycap>F2</keycap> キーを押すと編集もできます。除外定義には <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</link>が使えます。</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
-		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>翻訳メモリフォルダー</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.translation.memories">
+		<term xml:id="dialogs.project.properties.file.locations.translation.memories.title"><option>翻訳メモリフォルダー</option></term>
 		<listitem>
 		  <para>このフォルダに、翻訳メモリとして利用するファイルが保存されます。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</para>
 
@@ -300,8 +299,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
-		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>用語集フォルダー</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.glossaries">
+		<term xml:id="dialogs.project.properties.file.locations.glossaries.title"><option>用語集フォルダー</option></term>
 
 		<listitem>
 		  <para>このフォルダに用語集として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対して比較を行ないます。</para>
@@ -314,8 +313,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
-		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>書き込み可能な用語集ファイルを開く</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.writable.glossary">
+		<term xml:id="dialogs.project.properties.file.locations.writable.glossary.title"><option>書き込み可能な用語集ファイルを開く</option></term>
 
 		<listitem>
 		  <para>書き込み可能な用語集は、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>コマンドを使用して翻訳されたOmegaT用語をプロジェクトに追加するときに用語集機能が使用するファイルです。</para>
@@ -328,8 +327,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
-		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>辞書フォルダー</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.dictionaries">
+		<term xml:id="dialogs.project.properties.file.locations.dictionaries.title"><option>辞書フォルダー</option></term>
 
 		<listitem>
 		  <para>このフォルダに辞書として利用するファイルを保存します。すべての辞書ファイルの索引を一度に読み取り、翻訳したい分節に対する検索を行ないます。</para>
@@ -340,8 +339,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
-		<term id="dialogs.project.properties.file.locations.translated.files.title"><option>訳文ファイルフォルダー</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.translated.files">
+		<term xml:id="dialogs.project.properties.file.locations.translated.files.title"><option>訳文ファイルフォルダー</option></term>
 
 		<listitem>
 		  <para>ここはOmegaTが訳文ファイルを作成するフォルダーです。</para>
@@ -357,8 +356,8 @@
 		  <para>詳細は<link linkend="project.folder.target" endterm="project.folder.target.title"/>項をご覧ください。</para></listitem>
 	  </varlistentry>
 
-	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
-		<term id="dialogs.project.properties.file.locations.exported.tms.title"><option>翻訳メモリ出力フォルダー：</option></term>
+	  <varlistentry xml:id="dialogs.project.properties.file.locations.exported.tms">
+		<term xml:id="dialogs.project.properties.file.locations.exported.tms.title"><option>翻訳メモリ出力フォルダー：</option></term>
 
 		<listitem>
 		  <para>このフォルダーは、OmegaTが訳文生成の際に、翻訳の現在の状態をTMXファイル形式で出力する場所です。</para>
@@ -374,8 +373,8 @@
 		  <para><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>または<link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>を使用して、訳文ファイルとTMXファイル出力を作成します。</para>
 
 		  <variablelist>
-			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
-			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>エクスポートする翻訳メモリ</option></term>
+			<varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export">
+			  <term xml:id="dialogs.project.properties.file.locations.tms.to.export.title"><option>エクスポートする翻訳メモリ</option></term>
 			  <listitem>
 				<para>このチェックボックスでは、OmegaTで上記のTMXファイルを作成するときのフォーマットを選択できます。</para>
 
@@ -385,7 +384,7 @@
 				  <varlistentry>
 					<term><option>OmegaT</option></term>
 					<listitem>
-					  <para>&quot;OmegaT&quot;のTMXには、OmegaTが作成したタグが、OmegaTプロジェクトでしか適切に使用できない形式で含まれています。</para>
+					  <para>"OmegaT"のTMXには、OmegaTが作成したタグが、OmegaTプロジェクトでしか適切に使用できない形式で含まれています。</para>
 					</listitem>
 				  </varlistentry>
 		  
@@ -407,7 +406,7 @@
 			</varlistentry>
 		  </variablelist>
 		  
-		  <para>詳細については、<ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b仕様</ulink>を参照してください。</para>
+		  <para>詳細については、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b仕様</link>を参照してください。</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

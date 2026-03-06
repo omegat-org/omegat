@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="how.to.running.omegat">
-  <title id="how.to.running.omegat.title">OmegaTの実行</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.running.omegat">
+  <title xml:id="how.to.running.omegat.title">OmegaTの実行</title>
 
-  <section id="running.omegat.on.windows">
-	<title id="running.omegat.on.windows.title">Windows の場合</title>
+  <section xml:id="running.omegat.on.windows">
+	<title xml:id="running.omegat.on.windows.title">Windows の場合</title>
 	
 	<para>一番簡単な方法はプログラム <filename>OmegaT.exe</filename> を実行することです。起動時の引数は、OmegaT.exe ファイルと同じ場所にある <filename>OmegaT.l4J.ini</filename> ファイルから読み込まれます。このファイルを編集することで起動引数を変更できます。以下に示した INI ファイルは、最大で 1GB のメモリを確保し、ユーザー言語として日本語を、国に日本を指定した例です：</para>
 
@@ -27,8 +22,8 @@
 	<programlisting>-Dsun.java2d.noddraw=false</programlisting>
   </section>
 
-  <section id="running.omegat.on.linux">
-	<title id="running.omegat.on.linux.title">Linux の場合</title>
+  <section xml:id="running.omegat.on.linux">
+	<title xml:id="running.omegat.on.linux.title">Linux の場合</title>
 
 	<para>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。</para>
 
@@ -37,8 +32,8 @@
 	<para>このパッケージには、KDEユーザーに役立つ<filename>OmegaT.kaptn</filename>Kaptainスクリプトと、OmegaTを実行するために適切な<application>java</application>コマンドを自動的に起動する<filename>OmegaT</filename>bashスクリプトも用意されています。</para>
   </section>
 
-  <section id="running.omegat.on.macos">
-	<title id="running.omegat.on.macos.title">macOSの場合</title>
+  <section xml:id="running.omegat.on.macos">
+	<title xml:id="running.omegat.on.macos.title">macOSの場合</title>
 
 	<para><filename>OmegaT.app</filename> をダブルクリックするか、ドックのアイコンをクリックします。</para>
 
@@ -86,8 +81,8 @@
 	</note>
   </section>
 
-  <section id="running.omegat.on.other.systems">
-	<title id="running.omegat.on.other.systems.title">その他のシステム</title>
+  <section xml:id="running.omegat.on.other.systems">
+	<title xml:id="running.omegat.on.other.systems.title">その他のシステム</title>
 
 	<para>方法はシステムによって異なりますが、一般的に、OmegaTをインストールすると、コマンドラインから直接起動できます。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。</para>
 
@@ -96,15 +91,15 @@
 	<para>詳細については、システムのマニュアル文書を参照してください。</para>
   </section>
   
-  <section id="launch.with.command.line">
-	<title id="launch.with.command.line.title">コマンドライン起動</title>
+  <section xml:id="launch.with.command.line">
+	<title xml:id="launch.with.command.line.title">コマンドライン起動</title>
 
 	<para>コマンドラインを使用すると、オプションの動作をコントロールまたは修正するさまざまなプログラムを設定できます。また、特別な目的のためにOmegaTを使う場合に、起動スクリプトに一連の設定を定義して保存することもできます。</para>
 
 	<para>また、コマンドラインからOmegaTを起動すると、起動のたびに新しいOmegaTの実行画面が作成されます。したがって、それぞれが独自のパラメータを持つ複数のプロジェクトを同時に使用できます。</para>
 
-	<section id="launch.with.command.line.tutorial">
-	  <title id="launch.with.command.line.tutorial.title">簡素化された概要</title>
+	<section xml:id="launch.with.command.line.tutorial">
+	  <title xml:id="launch.with.command.line.tutorial.title">簡素化された概要</title>
 
 	  <para>グラフィカルインターフェイスが一般的になる前は、ユーザはコマンドラインインターフェース(CLI)を介してコンピュータと対話していました。CLIでは、コマンドを入力してコンピュータに指示を与える必要があります。最近のシステムでは、CLIは一般に「端末」または「コンソール」と呼ばれるプログラムを介してアクセスされます。簡単にするために、このマニュアルでは端末と呼びます。</para>
 	  
@@ -122,20 +117,20 @@
 		<para>各主要プラットフォームのデフォルトのOmegaT.jarの場所は次のとおりです。</para>
 		
 		<variablelist>
-		  <varlistentry id="launch.with.command.line.windows">
-			<term id="launch.with.command.line.windows.title">Windows</term>
+		  <varlistentry xml:id="launch.with.command.line.windows">
+			<term xml:id="launch.with.command.line.windows.title">Windows</term>
 			<listitem>
 			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
-		  <varlistentry id="launch.with.command.line.macos">
-			<term id="launch.with.command.line.macos.title">Macos</term>
+		  <varlistentry xml:id="launch.with.command.line.macos">
+			<term xml:id="launch.with.command.line.macos.title">Macos</term>
 			<listitem>
 			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
-		  <varlistentry id="launch.with.command.line.linux">
-			<term id="launch.with.command.line.linux.title">Linux</term>
+		  <varlistentry xml:id="launch.with.command.line.linux">
+			<term xml:id="launch.with.command.line.linux.title">Linux</term>
 			<listitem>
 			  <para><filename>/opt/omegat/OmegaT-default/OmegaT.jar</filename></para>
 
@@ -148,8 +143,8 @@
 	  </note>	
 	</section>
 
-	<section id="launch.with.command.line.omegat.terminal.command.syntax">
-	  <title id="launch.with.command.line.omegat.terminal.command.syntax.title">コマンド構文</title>
+	<section xml:id="launch.with.command.line.omegat.terminal.command.syntax">
+	  <title xml:id="launch.with.command.line.omegat.terminal.command.syntax.title">コマンド構文</title>
 
 	  <para>ターミナルからOmegaTを起動するための構文は次のとおりです。<programlisting>java -jar &lt;java parameters&gt; path/to/OmegaT.jar &lt;OmegaT options&gt; </programlisting></para>
 
@@ -159,30 +154,30 @@
 	  </note>
 
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.java.jar">
-		  <term id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
+		<varlistentry xml:id="launch.with.command.line.java.jar">
+		  <term xml:id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
 		  <listitem>
 			<para>このコマンドは、Java仮想マシンにJarパッケージを実行するように指示します。</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.java.parameters">
-		  <term id="launch.with.command.line.intro.java.parameters.title"><option>&lt;java
+		<varlistentry xml:id="launch.with.command.line.intro.java.parameters">
+		  <term xml:id="launch.with.command.line.intro.java.parameters.title"><option>&lt;java
 		  parameters&gt;</option></term>
 		  <listitem>
 			<para><command>java</command>コマンドで受け入れられるオプションのパラメータ。OmegaTの実行に関連するパラメータは、 <link linkend="launch.with.command.line.java.parameters">以下</link>に説明されています</para>
 		  </listitem>					
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.omegat.jar">
-		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>path/to/OmegaT.jar</option></term>
+		<varlistentry xml:id="launch.with.command.line.intro.omegat.jar">
+		  <term xml:id="launch.with.command.line.intro.omegat.jar.title"><option>path/to/OmegaT.jar</option></term>
 		  <listitem>
 			<para>OmegaT java実行可能ファイルの場所。</para>	  
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.omegat.options">
-		  <term id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;OmegaT
+		<varlistentry xml:id="launch.with.command.line.intro.omegat.options">
+		  <term xml:id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;OmegaT
 		  options&gt;</option></emphasis></term>
 		  <listitem>
 			<para>OmegaT特有のオプションは、<link linkend="launch.with.command.line.omegat.options">この項の後の方</link>で説明されています。</para>
@@ -191,37 +186,37 @@
 	  </variablelist>
 	</section>
 
-	<section id="launch.with.command.line.java.parameters">
-	  <title id="launch.with.command.line.java.parameters.title">Javaパラメータ</title>
+	<section xml:id="launch.with.command.line.java.parameters">
+	  <title xml:id="launch.with.command.line.java.parameters.title">Javaパラメータ</title>
 
 	  <para>以下のリストは、OmegaTで作業するときに役立つ<command>java</command>のパラメータを示しています。</para>
 	  
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.user.interface.language">
-		  <term id="launch.with.command.line.user.interface.language.title">ユーザーインターフェースの表示言語</term>
+		<varlistentry xml:id="launch.with.command.line.user.interface.language">
+		  <term xml:id="launch.with.command.line.user.interface.language.title">ユーザーインターフェースの表示言語</term>
 
 		  <listitem>
 			<para><option>-Duser.language=LL</option></para>
 
-			<para><code>LL</code>を<ulink url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</ulink>リストから希望する2文字の言語コードに置き換えます。</para>
+			<para><code>LL</code>を<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</link>リストから希望する2文字の言語コードに置き換えます。</para>
 
 			<para>OmegaTは、指定された言語コードに対応していれば、指定言語のユーザインターフェースで起動されてきます。もし OS の言語に対応していない場合、OmegaT はデフォルトの英語で表示されます。</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.user.country">
-		  <term id="launch.with.command.line.user.country.title">ユーザーの地域設定</term>
+		<varlistentry xml:id="launch.with.command.line.user.country">
+		  <term xml:id="launch.with.command.line.user.country.title">ユーザーの地域設定</term>
 		  <listitem>
 			<para><option>-Duser.country=CC</option></para>
 
-			<para><code>CC</code>を<ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>リストから希望する2文字の国コードに置き換えます。</para>
+			<para><code>CC</code>を<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</link>リストから希望する2文字の国コードに置き換えます。</para>
 
 			<para>この設定は、ひとつ前のユーザーインターフェース言語の引数と結合して、地域のバリエーションを指定します。それが利用できない場合は、ユーザーインターフェースは上記と同じ優先順位になります。</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.maximum.memory.assignment">
-		  <term id="launch.with.command.line.maximum.memory.assignment.title">最大メモリの割り当て</term>
+		<varlistentry xml:id="launch.with.command.line.maximum.memory.assignment">
+		  <term xml:id="launch.with.command.line.maximum.memory.assignment.title">最大メモリの割り当て</term>
 		  <listitem>
 			<para><option>-XmxSIZE</option></para>
 
@@ -229,8 +224,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.proxy.host.ip.address">
-		  <term id="launch.with.command.line.proxy.host.ip.address.title">プロキシサーバーのホスト名と IP アドレス</term>
+		<varlistentry xml:id="launch.with.command.line.proxy.host.ip.address">
+		  <term xml:id="launch.with.command.line.proxy.host.ip.address.title">プロキシサーバーのホスト名と IP アドレス</term>
 		  <listitem>
 			<para><option>-Dhttp.proxyHost=&lt;proxy IP&gt;</option></para>
 
@@ -238,8 +233,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.proxy.host.port.number">
-		  <term id="launch.with.command.line.proxy.host.port.number.title">プロキシサーバーのポート番号</term>
+		<varlistentry xml:id="launch.with.command.line.proxy.host.port.number">
+		  <term xml:id="launch.with.command.line.proxy.host.port.number.title">プロキシサーバーのポート番号</term>
 		  <listitem>
 			<para><option>-Dhttp.proxyPort=&lt;port number&gt;</option></para>
 
@@ -249,80 +244,80 @@
 	  </variablelist>
 	</section>
 
-	<section id="launch.with.command.line.omegat.options">
-	  <title id="launch.with.command.line.omegat.options.title">OmegaT オプション:</title>
+	<section xml:id="launch.with.command.line.omegat.options">
+	  <title xml:id="launch.with.command.line.omegat.options.title">OmegaT オプション:</title>
 
 	  <para><command>java -jar OmegaT.jar --help</command>コマンドを使用して、ターミナルでこれらのOmegaTのリストを取得することもできます。The OmegaT GUI is launched if no option is specified.</para>
 
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.general.options.">
-		  <term id="launch.with.command.line.general.options.title">全般オプション:</term>
+		<varlistentry xml:id="launch.with.command.line.general.options.">
+		  <term xml:id="launch.with.command.line.general.options.title">全般オプション:</term>
 		  <listitem>
 			<variablelist>
-			  <varlistentry id="launch.with.command.line.h.help">
-				<term id="launch.with.command.line.h.help.title"><option>-h</option>,
+			  <varlistentry xml:id="launch.with.command.line.h.help">
+				<term xml:id="launch.with.command.line.h.help.title"><option>-h</option>,
 				<option>--help</option></term>
 				<listitem>
 				  <para>使い方に関する情報を表示します。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.path.to.an.omegat.project">
-				<term id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>OmegaTプロジェクトへの道</emphasis></term>
+			  <varlistentry xml:id="launch.with.command.line.path.to.an.omegat.project">
+				<term xml:id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>OmegaTプロジェクトへの道</emphasis></term>
 				<listitem>
 				  <para>GUIを起動して指定されたプロジェクトを開きます</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.remote.project.">
-				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option>
+			  <varlistentry xml:id="launch.with.command.line.remote.project.">
+				<term xml:id="launch.with.command.line.remote.project.title"><option>--remote-project</option>
 				<userinput>&lt;path-to-omegat-project-file&gt;</userinput></term>
 				<listitem>
 				  <para><emphasis>&lt;path-to-OmegaT-project-file&gt;</emphasis>で指定したURLからOmegaTプロジェクトをダウンロードし、読み込みします。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.no.team">
-				<term id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
+			  <varlistentry xml:id="launch.with.command.line.no.team">
+				<term xml:id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
 				<listitem>
 				  <para>チームプロジェクト機能を無効にします。この引数を指定すると、チームプロジェクトを開いても同期しません。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.team.init">
-				<term id="launch.with.command.line.team.init.title"><option>team
+			  <varlistentry xml:id="launch.with.command.line.team.init">
+				<term xml:id="launch.with.command.line.team.init.title"><option>team
 				init</option> <userinput>SL</userinput>
 				<userinput>TL</userinput></term>
 				<listitem>
 				  <para>原文と訳文言語の2文字の言語コードとして、それぞれ<emphasis>SL</emphasis>と<emphasis>TL</emphasis>を使用してチームプロジェクトを初期化します。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.disable.project.locking">
-				<term id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
+			  <varlistentry xml:id="launch.with.command.line.disable.project.locking">
+				<term xml:id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
 				<listitem>
 				  <para>プロジェクトの omegat.project ファイルをロックしません。</para>
 
 				  <para>一部のプラットフォームでは、OmegaT.projectファイルがデフォルトではロックされているため、既に開いているプロジェクトをOmegaTの別のインスタンスで開こうとするとエラーが発生します。この設定はそのエラーを防止します。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.disable.location.save">
-				<term id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
+			  <varlistentry xml:id="launch.with.command.line.disable.location.save">
+				<term xml:id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
 				<listitem>
 				  <para>開いたプロジェクトのフォルダーの場所を記憶しません。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
-				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;classname&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.itokenizer.lt.classname.gt.">
+				<term xml:id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;classname&gt;</userinput></term>
 				<term><option>--ITokenizerTarget=</option><userinput>&lt;classname&gt;</userinput></term>
 				<listitem>
 				  <para>原文言語または訳文言語のトークナイザーを指定します(この設定を使用すると、プロジェクトの設定が上書きされます)。有効な値の一覧は OmegaT.jar/META-INF/
 		MANIFEST.MF を参照してください。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.config.dir.">
-				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;path&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.config.dir.">
+				<term xml:id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>OmegaT の各種設定ファイルを入出力するフォルダーです。詳細については-<link endterm="configuration.folder.title" linkend="configuration.folder"/>を参照してください。</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.config.file.">
-				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;path&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.config.file.">
+				<term xml:id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>一連のコマンドライン引数が Java:properties 書式で指定されたファイル。</para>
 
@@ -331,7 +326,7 @@
 					<para>Javaパラメータの最初の <code>-D</code>や <code>-X</code> は削除してください。</para>
 
 					<programlisting>user.language=fr
-config-dir=&quot;path/to/new/configdir&quot;</programlisting>
+config-dir="path/to/new/configdir"</programlisting>
 				  </note>
 
 				  <para>この項で紹介したほぼ全てのパラメータを、設定ファイルで使用できます。特に気をつける必要があるのは、 <code>remote-project</code>です。</para>
@@ -340,51 +335,51 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.resource.bundle.">
-				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;path&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.resource.bundle.">
+				<term xml:id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>UIの地域化に使用されるJava .propertiesファイルです。</para>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
-				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console
+			  <varlistentry xml:id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
+				<term xml:id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console
 				mode name]</option> <userinput>&lt;project path&gt;</userinput> <userinput>&lt;mode option&gt;</userinput></term>
 				<listitem>
 				  <para>GUI標準以外のモードを指定してください。以下のオプションを利用できます：</para>
 
 				  <variablelist>
-					<varlistentry id="launch.with.command.line.mode.console.translate">
-					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;project path&gt;</userinput></term>
+					<varlistentry xml:id="launch.with.command.line.mode.console.translate">
+					  <term xml:id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>このモードでは、原文フォルダーのファイルを、既にある翻訳メモリを使って翻訳しようとします。</para>
 
 						<para>これは、TMXファイルが自動的にプロジェクトに供給されるサーバでOmegaTを実行する場合に便利です。</para>
 						  
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.source.pattern.lt.pattern.gt.">
+							<term xml:id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
 							  <para>処理する原文ファイルを定義する正規表現の許可リスト。正規表現では、ピリオドとバックスラッシュ文字(<code>\.</code>と<code>\\</code>)をエスケープする必要があります。</para>
 
 							  <para>次に、典型的な例をいくつか示します。</para>
 							  
 							  <variablelist>
-								<varlistentry id="launch.with.command.line.html">
-								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.html">
+								  <term xml:id="launch.with.command.line.html.title"><option>.*\.html</option></term>
 								  <listitem>
 									<para>すべてのHTMLファイルを翻訳する。</para>
 								  </listitem>
 								</varlistentry>
-								<varlistentry id="launch.with.command.line.test.html">
-								  <term id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.test.html">
+								  <term xml:id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
 								  <listitem>
 									<para>原文フォルダーにある<filename>test.html</filename>ファイルのみを翻訳。他のフォルダーにあるtest.htmlという名前のファイルはすべて無視されます。</para>
 								  </listitem>
 								</varlistentry>
 
-								<varlistentry id="launch.with.command.line.dir.test.html">
-								  <term id="launch.with.command.line.dir.test.html.title"><option>dir-10\\test\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.dir.test.html">
+								  <term xml:id="launch.with.command.line.dir.test.html.title"><option>dir-10\\test\.html</option></term>
 								  <listitem>
 									<para><filename class="directory">dir-10</filename>フォルダーの<filename>test.html</filename>ファイルのみ翻訳します。</para>
 								  </listitem>
@@ -398,8 +393,8 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 
-					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
-					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option>
+					<varlistentry xml:id="launch.with.command.line.mode.console.pseudotranslatetmx">
+					  <term xml:id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option>
 							<userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>このモードでは、原文ファイルのみを元にして、プロジェクト全体を対象にした翻訳メモリを生成します。</para>
@@ -407,15 +402,15 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 						<para>TMX ファイルに関する設定は、次の引数で指定します：</para>
 						
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
-							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;path&gt;</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.pseudotranslatetmx.">
+							<term xml:id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;path&gt;</userinput></term>
 							<listitem>
 							  <para>疑似翻訳した TMX ファイルを出力します。</para>
 							</listitem>
 						  </varlistentry>
 
-						  <varlistentry id="launch.with.command.line.pseudotranslatetype.equal.empty.">
-							<term id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
+						  <varlistentry xml:id="launch.with.command.line.pseudotranslatetype.equal.empty.">
+							<term xml:id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
 							<listitem>
 							  <para>疑似翻訳 TMX の訳文に何を設定するか指定します。</para>
 							</listitem>
@@ -424,8 +419,8 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 					
-					<varlistentry id="launch.with.command.line.mode.console.align">
-					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> 
+					<varlistentry xml:id="launch.with.command.line.mode.console.align">
+					  <term xml:id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> 
 					  <userinput>&lt;project path&gt;</userinput></term>
 						<listitem>
 						<para>このモードでは、OmegTは、プロジェクトの /source フォルダにあるファイルを、<emphasis>--alignDir</emphasis>引数で指定された場所にあるコンテンツで対訳集の整合をします。</para>
@@ -445,20 +440,20 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 
-					<varlistentry id="launch.with.command.line.mode.console.stats">
-					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> 
+					<varlistentry xml:id="launch.with.command.line.mode.console.stats">
+					  <term xml:id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> 
 					  <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.console.stats.output.file">
-							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.console.stats.output.file">
+							<term xml:id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
 							<listitem>
 							  <para>そのファイルに出力するか、存在しない場合は標準出力に出力します。<emphasis>--stats-type</emphasis>がないと、ファイル拡張子から形式を検出します。出力のデフォルトはxmlです。</para>
 							</listitem>
 						  </varlistentry>
 							
-						  <varlistentry id="launch.with.command.line.console.stats.output.format">
-							<term id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
+						  <varlistentry xml:id="launch.with.command.line.console.stats.output.format">
+							<term xml:id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
 							<listitem>
 							  <para><emphasis>--output-file</emphasis>が必要です。出力形式を指定します。</para>
 							</listitem>
@@ -475,26 +470,26 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 		  </listitem>
 		</varlistentry>
 		  
-		<varlistentry id="launch.with.command.line.non.gui.mode.options.">
-		  <term id="launch.with.command.line.non.gui.mode.options.title">非GUIモードのオプション:</term>
+		<varlistentry xml:id="launch.with.command.line.non.gui.mode.options.">
+		  <term xml:id="launch.with.command.line.non.gui.mode.options.title">非GUIモードのオプション:</term>
 		  <listitem>
 			<variablelist>
-			  <varlistentry id="launch.with.command.line.quiet">
-				<term id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
+			  <varlistentry xml:id="launch.with.command.line.quiet">
+				<term xml:id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
 				<listitem>
 				  <para>コマンドラインに表示される出力を最小化します。</para>
 				</listitem>
 			  </varlistentry>
 				
-			  <varlistentry id="launch.with.command.line.script.">
-				<term id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;path&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.script.">
+				<term xml:id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>プロジェクトイベントがトリガーされたときに実行するスクリプトファイル。</para>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
-				<term id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[abort|warn]</option></term>
+			  <varlistentry xml:id="launch.with.command.line.tag.validation.abort.warn.">
+				<term xml:id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[abort|warn]</option></term>
 				<listitem>
 				  <para>タグの問題を確認します。</para>
 				  

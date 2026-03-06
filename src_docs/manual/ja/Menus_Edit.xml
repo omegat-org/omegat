@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.edit">
-  <title id="menus.edit.title"><guimenu>編集</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.edit">
+  <title xml:id="menus.edit.title"><guimenu>編集</guimenu></title>
 
   <para>このメニューでは、分節編集コマンドにアクセスできます。</para>
 
-  <example id="example.undo.last.action">
-	<title id="example.undo.last.action.title">ショートカットの説明の例</title>
+  <example xml:id="example.undo.last.action">
+	<title xml:id="example.undo.last.action.title">ショートカットの説明の例</title>
 	<para>WindowsおよびLinux:<keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
 
 	<para>Mac OS:<keycombo><keycap>Command</keycap><keycap>Z</keycap></keycombo></para>
@@ -15,23 +14,23 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>最後の操作を元に戻す</guimenuitem><keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
+    <varlistentry xml:id="menus.edit.undo.last.action">
+      <term xml:id="menus.edit.undo.last.action.title"><guimenuitem>最後の操作を元に戻す</guimenuitem><keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>現在の分節に対して行った変更をキャンセルします。修正履歴は、分節を出ると失われます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>最後のアクションをやり直す</guimenuitem><keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.redo.last.action">
+      <term xml:id="menus.edit.redo.last.action.title"><guimenuitem>最後のアクションをやり直す</guimenuitem><keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の分節でキャンセルされた変更を再適用します。修正履歴は、分節を出ると失われます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.match.or.selection">
-      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>参考訳文または選択範囲に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.match.or.selection">
+      <term xml:id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>参考訳文または選択範囲に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節を、選択されている参考訳文で置き換えます（デフォルトでは<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウで最初の参考訳文が選択されています）。</para>
@@ -42,8 +41,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.match.or.selection">
-      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>参考訳文または選択範囲を挿入</guimenuitem><keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
+    <varlistentry xml:id="menus.edit.insert.match.or.selection">
+      <term xml:id="menus.edit.insert.match.or.selection.title"><guimenuitem>参考訳文または選択範囲を挿入</guimenuitem><keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
         <para>現在のカーソル位置に、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウで選択されている参考訳文を挿入します。もし訳文の一部を選択した状態であれば、その部分を上書きします。</para>
 
@@ -53,24 +52,24 @@
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title"><guimenuitem>原文に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.source">
+      <term xml:id="menus.edit.replace.with.source.title"><guimenuitem>原文に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節を、原文の内容に置換します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.source">
-      <term id="menus.edit.insert.source.title"><guimenuitem>原文に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.source">
+      <term xml:id="menus.edit.insert.source.title"><guimenuitem>原文に置換</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節のカーソル位置に、原文を挿入します。もし訳文の一部を選択した状態であれば、その部分を上書きします。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.select.source.text">
-      <term id="menus.edit.select.source.text.title"><guimenuitem>原文テキストを選択</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.select.source.text">
+      <term xml:id="menus.edit.select.source.text.title"><guimenuitem>原文テキストを選択</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
 	  </term>
       <listitem>
         <para>原文テキストを選択します。</para>
@@ -79,8 +78,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title"><guimenuitem>機械翻訳に置換</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.replace.with.mt">
+      <term xml:id="menus.edit.replace.with.mt.title"><guimenuitem>機械翻訳に置換</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
 	  </term>
       <listitem>
         <para>訳文分節を選択した機械翻訳サービスによる翻訳内容に置換します。</para>
@@ -90,32 +89,32 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>未使用のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.missing.source.tag">
+      <term xml:id="menus.edit.insert.missing.source.tag.title"><guimenuitem>未使用のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節のカーソル位置に、まだ使用していない原文のタグを挿入します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.insert.next.missing.tag">
-      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>次の未使用のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.insert.next.missing.tag">
+      <term xml:id="menus.edit.insert.next.missing.tag.title"><guimenuitem>次の未使用のタグを挿入</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>現在の訳文分節のカーソル位置に、次の未使用タグを挿入します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>選択領域を出力</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.export.selection">
+      <term xml:id="menus.edit.export.selection.title"><guimenuitem>選択領域を出力</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。OSの通常のクリップボードの動作との一貫性を保つために、ユーザーがOmegaTを出るときにこのファイルは空にされません。エクスポートされた内容は、<link linkend="configuration.folder">構成</link>フォルダーにある<link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/>ファイルにコピーされます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>用語の追加...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.create.glossary.entry">
+      <term xml:id="menus.edit.create.glossary.entry.title"><guimenuitem>用語の追加...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>プロジェクトの書き込み可能な用語集ファイル(<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>ファイル)に項目を追加します。</para>
@@ -170,8 +169,8 @@
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title"><guimenuitem>検索...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.project">
+      <term xml:id="menus.edit.search.project.title"><guimenuitem>検索...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>新しい<link linkend="windows.text.search" endterm="windows.text.search.title"/>ウィンドウを開きます。</para>
@@ -182,8 +181,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title"><guimenuitem>置換...</guimenuitem><keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.and.replace">
+      <term xml:id="menus.edit.search.and.replace.title"><guimenuitem>置換...</guimenuitem><keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>新しい<link linkend="windows.text.replace" endterm="windows.text.replace.title"/>ウィンドウを開きます。</para>
@@ -192,16 +191,16 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.search.dictionaries">
-      <term id="menus.edit.search.dictionaries.title"><guimenuitem>辞書を検索</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+    <varlistentry xml:id="menus.edit.search.dictionaries">
+      <term xml:id="menus.edit.search.dictionaries.title"><guimenuitem>辞書を検索</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 	  </term>
       <listitem>
         <para><link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/>設定が無効になっている場合に、選択した単語を辞書内で検索できます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.edit.switch.case">
-      <term id="menus.edit.switch.case.title"><guisubmenu>大/小文字設定</guisubmenu></term>
+    <varlistentry xml:id="menus.edit.switch.case">
+      <term xml:id="menus.edit.switch.case.title"><guisubmenu>大/小文字設定</guisubmenu></term>
       <listitem>
         <para>訳文分節で選択したテキストの大文字と小文字を選択した設定に変更するか、順に変換の候補を切り替えます。テキストを何も選択していない場合、OmegaT はカーソルの右にある単語を選択して実行します。</para>
 
@@ -239,8 +238,8 @@
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.select.match">
-      <term id="menus.edit.select.match.title"><guisubmenu>参考訳文を選択</guisubmenu></term>
+	<varlistentry xml:id="menus.edit.select.match">
+      <term xml:id="menus.edit.select.match.title"><guisubmenu>参考訳文を選択</guisubmenu></term>
       <listitem>
 		<para>参考訳文ウィンドウに表示された <varname>n</varname> 番目の参考訳文を選択します。選択された参考訳文は、現在の分節に対して置換または挿入できます。</para>
 		
@@ -275,10 +274,10 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.insert.unicode.control.character">
-      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>BiDi 制御文字を挿入</guisubmenu></term>
+	<varlistentry xml:id="menus.edit.insert.unicode.control.character">
+      <term xml:id="menus.edit.insert.unicode.control.character.title"><guisubmenu>BiDi 制御文字を挿入</guisubmenu></term>
 	  <listitem>
-		<para>Unicodeの綴り方向の 制御文字を挿入します。詳細については、<ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicodeの双方向アルゴリズム</ulink>を参照してください。</para>
+		<para>Unicodeの綴り方向の 制御文字を挿入します。詳細については、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicodeの双方向アルゴリズム</link>を参照してください。</para>
 
 		<itemizedlist>
 		  <listitem>
@@ -306,15 +305,15 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.use.as.default.translation">
-      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>基本訳文として使用</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.use.as.default.translation">
+      <term xml:id="menus.edit.use.as.default.translation.title"><guimenuitem>基本訳文として使用</guimenuitem></term>
       <listitem>
 		<para>現在の原文分節に対して複数の対訳が存在し、かつ現在の訳文分節が既定値ではない場合に、現在の訳文分節を既定値に設定します。１つの対訳しか存在しない場合は、この項目はグレーアウトして選択できません。</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.create.alternative.translation">
-      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>例外訳文を登録</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.create.alternative.translation">
+      <term xml:id="menus.edit.create.alternative.translation.title"><guimenuitem>例外訳文を登録</guimenuitem></term>
       <listitem>
 		<para>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。現在の翻訳が適用されない場合は、このメニュー項目を選択して例外訳文を入力します。</para>
 		<warning>
@@ -326,22 +325,22 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.remove.translation">
-      <term id="menus.edit.remove.translation.title"><guimenuitem>訳文を削除</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
+	<varlistentry xml:id="menus.edit.remove.translation">
+      <term xml:id="menus.edit.remove.translation.title"><guimenuitem>訳文を削除</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
 		<para>訳文を削除し、分節を未翻訳の状態にします。</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.set.empty.translation">
-      <term id="menus.edit.set.empty.translation.title"><guimenuitem>訳文を&lt;空訳文&gt;にする</guimenuitem></term>
+	<varlistentry xml:id="menus.edit.set.empty.translation">
+      <term xml:id="menus.edit.set.empty.translation.title"><guimenuitem>訳文を&lt;空訳文&gt;にする</guimenuitem></term>
       <listitem>
 		<para>訳文を空の状態と定義します。ターゲット文書にはこの分節の何も含まれていませんが、編集は<literal>&lt;EMPTY&gt;</literal>識別子でマークします。</para>
       </listitem>
 	</varlistentry>
 
-	<varlistentry id="menus.edit.register.identical.translation">
-      <term id="menus.edit.register.identical.translation.title"><guimenuitem>原文と同一訳文を登録</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	<varlistentry xml:id="menus.edit.register.identical.translation">
+      <term xml:id="menus.edit.register.identical.translation.title"><guimenuitem>原文と同一訳文を登録</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
 		<para><link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/>設定が有効になっていない場合でも、このコマンドを使用して原文と同一の訳文を登録できます。</para>

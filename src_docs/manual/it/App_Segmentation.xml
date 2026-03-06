@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.segmentation">
-  <title id="app.segmentation.title">Segmentazione</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.segmentation">
+  <title xml:id="app.segmentation.title">Segmentazione</title>
 
-  <section id="dialog.preferences.segmentation.setup.type">
-	<title id="dialog.preferences.segmentation.setup.type.title">Paragrafo o frase?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.type">
+	<title xml:id="dialog.preferences.segmentation.setup.type.title">Paragrafo o frase?</title>
 	
 	<para>Gli strumenti della memoria di traduzione operano su unità di testo definite “segmenti”. Quando viene inserita una traduzione, il segmento che contiene il testo di partenza è memorizzato, insieme con la sua traduzione, all'interno della memoria del progetto e, conseguentemente, utilizzato per individuare altri segmenti da tradurre nel progetto.</para>
 
@@ -19,18 +18,18 @@
 	<para>La <emphasis>segmentazione a livello di frase</emphasis> si basa su determinate regole (chiamate <emphasis>regole di segmentazione</emphasis>) che definiscono la struttura di una frase nella lingua di partenza. Questa impostazione funziona bene con documenti che presentano ripetizioni o frasi somiglianti, tipo i documenti tecnici o legali.</para>
 
 	<variablelist>
-	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentazione a livello di paragrafo</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term xml:id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentazione a livello di paragrafo</term>
 
 		<listitem>
 		  <para>OmegaT prima analizza il testo alla ricerca di una segmentazione a livello di paragrafo. Questo processo si basa, per la generazione di segmenti, solo sulla struttura del testo di partenza.</para>
 
-		  <para>Per esempio, i file di testo possono essere segmentati in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure potrebbero non venire affatto segmentati. I file contenenti formattazione (documenti ODF, HTML o di altro tipo) sono divisi in base ai tag a livello di blocco (paragrafo). Gli attributi dell'oggetto traducibile nei file XHTML o HTML possono essere estratti come &quot;paragrafi&quot; separati.</para>
+		  <para>Per esempio, i file di testo possono essere segmentati in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure potrebbero non venire affatto segmentati. I file contenenti formattazione (documenti ODF, HTML o di altro tipo) sono divisi in base ai tag a livello di blocco (paragrafo). Gli attributi dell'oggetto traducibile nei file XHTML o HTML possono essere estratti come "paragrafi" separati.</para>
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
-        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentazione a livello di frase</term>
+	  <varlistentry xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term xml:id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentazione a livello di frase</term>
 
         <listitem>
 		  <para>Dopo aver ultimato la divisione del file di partenza in unità strutturate, OmegaT avvierà un'ulteriore divisione di tali unità in segmenti.</para>
@@ -49,14 +48,14 @@
 			</listitem>
 		  </itemizedlist>
 
-		  <para>Se la posizione concorda con entrambe le regole, essa è considerata o &quot;interruzione&quot; o &quot;non interruzione&quot;, in base ai parametri definiti dalla regola.</para>
+		  <para>Se la posizione concorda con entrambe le regole, essa è considerata o "interruzione" o "non interruzione", in base ai parametri definiti dalla regola.</para>
         </listitem>
 	  </varlistentry>
     </variablelist>
   </section>
   
-  <section id="dialog.preferences.segmentation.setup.scope">
-	<title id="dialog.preferences.segmentation.setup.scope.title">Globale o locale?</title>
+  <section xml:id="dialog.preferences.segmentation.setup.scope">
+	<title xml:id="dialog.preferences.segmentation.setup.scope.title">Globale o locale?</title>
 
 	<note>
 	  <para>Le stesse tipologie di meccanismi e di finestre di dialogo vengono utilizzate per definire le regole di segmentazioni globali e locali.</para>
@@ -72,8 +71,8 @@
   </section>
 
 
-  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regole</title>
+  <section xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title xml:id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regole</title>
 	<para>OmegaT viene distribuito con regole di segmentazione predefinite, che possono essere modificate dal traduttore mediante espressioni regolari. Vedere l'appendice <link linkend="app.regex" endterm="app.regex.title"/>per i dettagli.</para>
 
 	<para>A titolo di promemoria, le regole funzionano nel modo seguente: quando una regola corrisponde, OmegaT inserisce un contrassegno nella posizione della corrispondenza, in modo che le regole che vengono verificate dopo ignorino tale posizione. Questo è il motivo per il quale le regole di eccezione devono eseguirsi prima delle regole di segmentazione.</para>
@@ -82,8 +81,8 @@
 	  <para>Se si modifica la segmentazione durante il processo di traduzione, affinché la nuova segmentazione abbia effetto sarà necessario ricaricare il progetto. Questa azione dividerà o unirà i vari segmenti tradotti in precedenza, i quali non continueranno dunque a essere considerati tradotti. La loro traduzione originale sarà comunque presente nella memoria del progetto.</para>
 	</warning>
 
-	<table id="segmentation.simple.examples">
-	  <title id="segmentation.simple.examples.title">Alcuni semplici esempi</title>
+	<table xml:id="segmentation.simple.examples">
+	  <title xml:id="segmentation.simple.examples.title">Alcuni semplici esempi</title>
       <tgroup cols="5">
 		<colspec align="left" colnum="1"/>
 		<colspec align="left" colnum="2"/>

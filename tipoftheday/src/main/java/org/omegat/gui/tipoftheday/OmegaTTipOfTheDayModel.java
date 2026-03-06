@@ -82,10 +82,8 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
         String title = tip.get("name").asText();
         String filename = tip.get("file").asText();
         URI uri = Help.getHelpFileURI(TIPS_DIR, getLocale(), filename);
-        try (InputStream is = uri.toURL().openStream()) { // validate exists
+        if (uri != null) {
             tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
-        } catch (IOException e) {
-            Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
         }
     }
 }

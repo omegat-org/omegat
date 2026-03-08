@@ -48,6 +48,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.machinetranslators.BaseCachedTranslate;
 import org.omegat.core.machinetranslators.BaseTranslate;
@@ -70,6 +71,8 @@ import org.omegat.util.Preferences;
  *      "https://www.ibm.com/watson/developercloud/language-translator/api/v3/">Translation
  *      API</a>
  */
+@NullMarked
+@SuppressWarnings("unused")
 public class IBMWatsonTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";
     protected static final String PROPERTY_PASSWORD = "ibmwatson.api.password";
@@ -117,7 +120,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         String apiLogin = getCredential(PROPERTY_LOGIN);
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
-        if (apiLogin == null || apiLogin.isEmpty()) {
+        if (apiLogin.isEmpty()) {
             throw new MachineTranslateError(BUNDLE.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
@@ -127,7 +130,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         // is "apikey:apikey"
         // see
         // https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
-        if (apiPassword == null || apiPassword.isEmpty()) {
+        if (apiPassword.isEmpty()) {
             apiPassword = apiLogin;
             apiLogin = "apikey";
         }
@@ -152,9 +155,6 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         String v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION,
                 json, headers);
         String tr = getJsonResults(v);
-        if (tr == null) {
-            return null;
-        }
         tr = BaseTranslate.unescapeHTML(tr);
         return cleanSpacesAroundTags(tr, text);
     }
@@ -179,7 +179,7 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         Map<String, Object> params = new TreeMap<>();
         params.put("text", Collections.singletonList(trText));
         String modelId = getModelId();
-        if (modelId != null && !modelId.isEmpty()) {
+        if (!modelId.isEmpty()) {
             params.put("model_id", modelId);
         }
         params.put("source", sLang.getLanguageCode().toUpperCase(Locale.ENGLISH));

@@ -29,6 +29,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.JDialog;
@@ -89,7 +90,7 @@ public final class TipOfTheDayController {
         }
         totd.setCurrentTip(currentTip);
 
-        JFrame mainFrame = Core.getMainWindow().getApplicationFrame();
+        JFrame mainFrame = Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame();
         TipOfTheDayDialog dialog = new TipOfTheDayDialog(mainFrame,
                 UIManager.getString("TipOfTheDay.dialogTitle"), totd);
 

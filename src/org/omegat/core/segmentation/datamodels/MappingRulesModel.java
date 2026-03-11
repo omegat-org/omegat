@@ -34,7 +34,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
-import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.util.OStrings;
 

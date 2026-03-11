@@ -221,7 +221,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             commitTableEdits();
             MappingRulesModel model = (MappingRulesModel) panel.mapTable.getModel();
             String set = model.getValueAt(panel.mapTable.getSelectedRow(), 0).toString();
-            String setName = LanguageCodes.getInstance().getLanguageName(set);
+            String setName = LanguageCodes.getLanguageName(set);
             String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
             String message = StringUtil.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"), setName);
             if (JOptionPane.showConfirmDialog(panel, message, title,

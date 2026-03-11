@@ -46,9 +46,9 @@ public class Rule implements Serializable {
 
     /** Creates an initialized instance of segmentation rule */
     public Rule(boolean breakRule, String beforebreak, String afterbreak) {
-        setBreakRule(breakRule);
-        setBeforebreak(beforebreak);
-        setAfterbreak(afterbreak);
+        this.breakRule = breakRule;
+        this.beforebreak = compilePattern(beforebreak);
+        this.afterbreak = compilePattern(afterbreak);
     }
 
     public Rule(gen.core.segmentation.Rule s) {
@@ -108,12 +108,8 @@ public class Rule implements Serializable {
      *
      * @return regular expression of a text before break.
      */
-    public @Nullable String getBeforebreak() {
-        if (beforebreak != null) {
-            return beforebreak.pattern();
-        } else {
-            return null;
-        }
+    public String getBeforebreak() {
+        return beforebreak.pattern();
     }
 
     /**
@@ -149,12 +145,8 @@ public class Rule implements Serializable {
      *
      * @return regular expression of a text after break.
      */
-    public @Nullable String getAfterbreak() {
-        if (afterbreak != null) {
-            return afterbreak.pattern();
-        } else {
-            return null;
-        }
+    public String getAfterbreak() {
+        return afterbreak.pattern();
     }
 
     /**
@@ -200,8 +192,8 @@ public class Rule implements Serializable {
 
     /** Indicates whether some other Rule is "equal to" this one. */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Rule)) {
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Rule)) {
             return false;
         }
         Rule that = (Rule) obj;

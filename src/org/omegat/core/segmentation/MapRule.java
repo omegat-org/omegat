@@ -103,7 +103,7 @@ public class MapRule implements Serializable {
          * empty, the object is created from a SRX file, then return
          * languageCode itself.
          */
-        String res = LanguageCodes.getInstance().getLanguageName(getLanguage());
+        String res = LanguageCodes.getLanguageName(getLanguage());
         return StringUtil.isEmpty(res) ? languageCode : res;
     }
 
@@ -121,8 +121,8 @@ public class MapRule implements Serializable {
          * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
          * to remove the workaround here.
          */
-        if (!LanguageCodes.getInstance().isLanguageCodeKnown(code)) {
-            String alt = LanguageCodes.getInstance().getLanguageCodeByName(code);
+        if (!LanguageCodes.isLanguageCodeKnown(code)) {
+            String alt = LanguageCodes.getLanguageCodeByName(code);
             if (alt != null) {
                 languageCode = alt;
                 return;
@@ -138,7 +138,7 @@ public class MapRule implements Serializable {
      */
     public String getLanguage() {
         if (pattern != null) {
-            String code = LanguageCodes.getInstance().getLanguageCodeByPattern(pattern.pattern());
+            String code = LanguageCodes.getLanguageCodeByPattern(pattern.pattern());
             if (code != null) {
                 return code;
             }

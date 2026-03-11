@@ -92,7 +92,7 @@ public class MappingRulesModel extends AbstractTableModel {
         switch (columnIndex) {
         case 0:
             String target = (String) aValue;
-            String code = LanguageCodes.getInstance().getLanguageCodeByName(target);
+            String code = LanguageCodes.getLanguageCodeByName(target);
             if (code != null) {
                 maprule.setLanguage(code);
             } else {

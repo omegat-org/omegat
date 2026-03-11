@@ -134,7 +134,7 @@ public final class SRXManager {
             Languagemap map = new Languagemap();
             String pattern = mr.getPattern();
             // we use standard name
-            String language = LanguageCodes.getInstance().getStandardNameFromMapRule(mr);
+            String language = LanguageCodes.getStandardNameFromMapRule(mr);
             map.setLanguagerulename(language);
             map.setLanguagepattern(pattern);
             jaxbObject.getBody().getMaprules().getLanguagemap().add(map);

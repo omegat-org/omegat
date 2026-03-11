@@ -45,20 +45,11 @@ import org.omegat.util.OStrings;
 @NullMarked
 public final class LanguageCodes {
 
-    private static volatile @Nullable LanguageCodes instance;
-
-    public static LanguageCodes getInstance() {
-        if (instance == null) {
-            synchronized (LanguageCodes.class) {
-                if (instance == null) {
-                    instance = new LanguageCodes();
-                }
-            }
-        }
-        return Objects.requireNonNull(instance);
+    private LanguageCodes() {
+        // utility class
     }
 
-    public String getStandardNameFromMapRule(MapRule mr) {
+    public static String getStandardNameFromMapRule(MapRule mr) {
         String language = getLanguageCodeByPattern(mr.getPattern());
         if (language == null) {
             language = getLanguageCodeByName(mr.getLanguage());
@@ -167,17 +158,13 @@ public final class LanguageCodes {
         PATTERN_HASH.put(CHINESE_PATTERN, CHINESE_CODE);
     }
 
-    public boolean isLanguageCodeKnown(String code) {
-        return CODE_KEY_HASH.containsKey(code);
-    }
-
     /**
      * Returns localized language name for a given language code.
      *
      * @param code
      *            language code
      */
-    public String getLanguageName(String code) {
+    public static String getLanguageName(String code) {
         if (!CODE_KEY_HASH.containsKey(code)) {
             return code;
         }
@@ -185,7 +172,11 @@ public final class LanguageCodes {
         return OStrings.getString(key);
     }
 
-    public @Nullable String getLanguageCodeByName(@Nullable String name) {
+    public static boolean isLanguageCodeKnown(String code) {
+        return CODE_KEY_HASH.containsKey(code);
+    }
+
+    public static @Nullable String getLanguageCodeByName(@Nullable String name) {
         if (name == null) {
             return null;
         }
@@ -203,7 +194,7 @@ public final class LanguageCodes {
         return null;
     }
 
-    public @Nullable String getLanguageCodeByPattern(String pattern) {
+    public static @Nullable String getLanguageCodeByPattern(String pattern) {
         return PATTERN_HASH.get(pattern);
     }
 }

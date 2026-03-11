@@ -92,7 +92,7 @@ public class WiXFilter extends XMLFilter {
     }
 
     @Override
-    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
+    public void tagStart(String path, @Nullable Attributes atts) {
         if (atts == null) {
             return;
         }

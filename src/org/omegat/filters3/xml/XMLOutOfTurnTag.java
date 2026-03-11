@@ -25,6 +25,7 @@
 
 package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Entry;
 import org.omegat.filters3.OutOfTurnTag;
 
@@ -36,7 +37,7 @@ import org.omegat.filters3.OutOfTurnTag;
 public class XMLOutOfTurnTag extends OutOfTurnTag {
     /** Creates a new instance of XML Tag */
     public XMLOutOfTurnTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut,
-            org.xml.sax.Attributes attributes) {
+            org.xml.sax.@Nullable Attributes attributes) {
         super(xmlDialect, handler, tag, shortcut, XMLUtils.convertAttributes(attributes));
     }
 
@@ -56,7 +57,7 @@ public class XMLOutOfTurnTag extends OutOfTurnTag {
      */
     public String toOriginal() {
         Entry entry = getEntry();
-        String originalEntry = entry != null ? entry.translationToOriginal() : "";
+        String originalEntry = entry.translationToOriginal();
         String atts = getAttributes() != null ? getAttributes().toString() : "";
         return "<" + getTag() + atts + ">" + originalEntry + "</" + getTag() + ">";
     }

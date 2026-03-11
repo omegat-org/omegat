@@ -282,7 +282,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * input-element, except when it is a button or submit or reset.
      */
     @Override
-    public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
+    public Boolean validateTranslatableTagAttribute(String tag, String attribute, @Nullable Attributes atts) {
         return true;
     }
 
@@ -300,12 +300,12 @@ public class DefaultXMLDialect implements XMLDialect {
      * @return <code>true</code> or <code>false</code>
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         return false;
     }
 
     @Override
-    public Boolean validateContentBasedTag(String tag, Attributes atts) {
+    public Boolean validateContentBasedTag(String tag, @Nullable Attributes atts) {
         return false;
     }
 
@@ -342,7 +342,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * @return <code>true</code> or <code>false</code>
      */
     @Override
-    public Boolean validateParagraphTag(String tag, Attributes atts) {
+    public Boolean validateParagraphTag(String tag, @Nullable Attributes atts) {
         return false;
     }
 
@@ -360,7 +360,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * @return <code>true</code> or <code>false</code>
      */
     @Override
-    public Boolean validatePreformatTag(String tag, Attributes atts) {
+    public Boolean validatePreformatTag(String tag, @Nullable Attributes atts) {
         return false;
     }
 

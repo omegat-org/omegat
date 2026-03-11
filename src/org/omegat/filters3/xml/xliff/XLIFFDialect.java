@@ -8,6 +8,7 @@
                2013 Alex Buloichik, Didier Briel, Piotr Kulik
                2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
                2018 Didier Briel
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,7 +32,6 @@ package org.omegat.filters3.xml.xliff;
 
 import java.util.List;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -50,16 +50,15 @@ import org.omegat.util.StringUtil;
 
 /**
  * This class specifies XLIFF XML Dialect.
- *
- * XLIFF 1.2 specification:
- * http://docs.oasis-open.org/xliff/xliff-core/xliff-core.html
+ * <p>
+ * <a href="http://docs.oasis-open.org/xliff/xliff-core/xliff-core.html">XLIFF 1.2 specification</a>
  *
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
-@NullMarked
 public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
@@ -69,7 +68,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * Sets whether alternative translations are identified by previous and next
      * paragraphs or by &lt;trans-unit&gt; ID
      */
-    protected ID_TYPE altTransIDType;
+    protected ID_TYPE altTransIDType = ID_TYPE.CONTEXT;
 
     /**
      * Actually defines the dialect. It cannot be done during creation, because
@@ -123,17 +122,15 @@ public class XLIFFDialect extends DefaultXMLDialect {
             return false;
         }
         if (atts != null) {
-            if ("seg".equalsIgnoreCase(atts.getValueByName("mtype"))) {
-                return true;
-            }
+            return "seg".equalsIgnoreCase(atts.getValueByName("mtype"));
         }
         return false;
     }
 
     /**
      * In the XLKIFF filter, content shouldn't be translated if translate="no"
-     * http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html#translate
-     * 
+     * <a href="http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html#translate">translate attribute</a>
+     *
      * @param tag
      *            An XML tag
      * @param atts
@@ -154,15 +151,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
         }
 
         if (atts != null) {
-            if ("no".equalsIgnoreCase(atts.getValueByName("translate"))) {
-                return true;
-            }
+            return "no".equalsIgnoreCase(atts.getValueByName("translate"));
         }
         return false;
     }
 
     @Override
-    public Boolean validateContentBasedTag(String tag, Attributes atts) {
+    public Boolean validateContentBasedTag(String tag, @Nullable Attributes atts) {
         return "mrk".equals(tag) && atts != null && "protected".equals(atts.getValueByName("mtype"));
     }
 
@@ -207,76 +202,84 @@ public class XLIFFDialect extends DefaultXMLDialect {
         for (Element el : elements) {
             if (el instanceof XMLContentBasedTag) {
                 XMLContentBasedTag tag = (XMLContentBasedTag) el;
-                String shortcut = null;
+                String shortcut;
                 int shortcutLetter;
                 int tagIndex;
                 boolean tagProtected;
-                if ("bpt".equals(tag.getTag())) {
-                    // XLIFF specification requires 'rid' and 'id' attributes,
-                    // but some tools uses 'i' attribute like for TMX
-                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"),
-                            tag.getAttribute("i"));
-                    shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForBptTags);
-                    tagHandler.setTagShortcutLetter(shortcutLetter);
-                    tagIndex = tagHandler.endBPT();
-                    shortcut = "<"
-                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
-                            + tagIndex + '>';
-                    tagProtected = false;
-                } else if ("ept".equals(tag.getTag())) {
-                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"),
-                            tag.getAttribute("i"));
-                    tagIndex = tagHandler.endEPT();
-                    shortcutLetter = tagHandler.getTagShortcutLetter();
-                    shortcut = "</"
-                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
-                            + tagIndex + '>';
-                    tagProtected = false;
-                } else if ("it".equals(tag.getTag())) {
-                    tagHandler.startOTHER();
-                    tagHandler.setCurrentPos(tag.getAttribute("pos"));
-                    tagIndex = tagHandler.endOTHER();
-                    // XLIFF specification requires 'open/close' values,
-                    // but some tools may use 'begin/end' values like for TMX
-                    shortcutLetter = calcTagShortcutLetter(tag);
-                    if ("close".equals(tagHandler.getCurrentPos())
-                            || "end".equals(tagHandler.getCurrentPos())) {
-                        // In some cases, even if we're able to compute a
-                        // shortcut, it's better to force to "f"
-                        // for better compatibility with corresponding TMX files
-                        if (forceShortCutToF) {
-                            shortcutLetter = 'f';
-                        }
-                        shortcut = "</"
-                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
-                                        : 'f')
-                                + tagIndex + '>';
-                    } else {
+                switch (tag.getTag()) {
+                    case "bpt":
+                        // XLIFF specification requires 'rid' and 'id' attributes,
+                        // but some tools uses 'i' attribute like for TMX
+                        tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"),
+                                tag.getAttribute("i"));
+                        shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForBptTags);
+                        tagHandler.setTagShortcutLetter(shortcutLetter);
+                        tagIndex = tagHandler.endBPT();
                         shortcut = "<"
-                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
-                                        : 'f')
+                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
                                 + tagIndex + '>';
-                    }
-                    tagProtected = false;
-                } else if ("ph".equals(tag.getTag())) {
-                    tagHandler.startOTHER();
-                    tagIndex = tagHandler.endOTHER();
-                    shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForPhTags);
-                    shortcut = "<"
-                            + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
-                            + tagIndex + "/>";
-                    tagProtected = false;
-                } else if ("mrk".equals(tag.getTag())) {
-                    tagHandler.startOTHER();
-                    tagIndex = tagHandler.endOTHER();
-                    shortcutLetter = 'm';
-                    shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m"
-                            + tagIndex + ">";
-                    tagProtected = true;
-                } else {
-                    shortcutLetter = 'f';
-                    tagIndex = -1;
-                    tagProtected = false;
+                        tagProtected = false;
+                        break;
+                    case "ept":
+                        tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"),
+                                tag.getAttribute("i"));
+                        tagIndex = tagHandler.endEPT();
+                        shortcutLetter = tagHandler.getTagShortcutLetter();
+                        shortcut = "</"
+                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                                + tagIndex + '>';
+                        tagProtected = false;
+                        break;
+                    case "it":
+                        tagHandler.startOTHER();
+                        tagHandler.setCurrentPos(tag.getAttribute("pos"));
+                        tagIndex = tagHandler.endOTHER();
+                        // XLIFF specification requires 'open/close' values,
+                        // but some tools may use 'begin/end' values like for TMX
+                        shortcutLetter = calcTagShortcutLetter(tag);
+                        if ("close".equals(tagHandler.getCurrentPos())
+                                || "end".equals(tagHandler.getCurrentPos())) {
+                            // In some cases, even if we're able to compute a
+                            // shortcut, it's better to force to "f"
+                            // for better compatibility with corresponding TMX files
+                            if (forceShortCutToF) {
+                                shortcutLetter = 'f';
+                            }
+                            shortcut = "</"
+                                    + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
+                                    : 'f')
+                                    + tagIndex + '>';
+                        } else {
+                            shortcut = "<"
+                                    + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter))
+                                    : 'f')
+                                    + tagIndex + '>';
+                        }
+                        tagProtected = false;
+                        break;
+                    case "ph":
+                        tagHandler.startOTHER();
+                        tagIndex = tagHandler.endOTHER();
+                        shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForPhTags);
+                        shortcut = "<"
+                                + (shortcutLetter != 0 ? String.valueOf(Character.toChars(shortcutLetter)) : 'f')
+                                + tagIndex + "/>";
+                        tagProtected = false;
+                        break;
+                    case "mrk":
+                        tagHandler.startOTHER();
+                        tagIndex = tagHandler.endOTHER();
+                        shortcutLetter = 'm';
+                        shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m"
+                                + tagIndex + ">";
+                        tagProtected = true;
+                        break;
+                    default:
+                        shortcut = "<f>";  // FIXME: what is default tag?
+                        shortcutLetter = 'f';
+                        tagIndex = -1;
+                        tagProtected = false;
+                        break;
                 }
                 tag.setShortcutLetter(shortcutLetter);
                 tag.setShortcutIndex(tagIndex);

@@ -103,11 +103,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * returns {@link #extWriter}.
      */
     private BufferedWriter currWriter() {
-        if (extWriter != null) {
-            return extWriter;
-        } else {
-            return mainWriter;
-        }
+        return Objects.requireNonNullElse(extWriter, mainWriter);
     }
 
     /** Currently parsed external entity that has its own writer. */
@@ -176,14 +172,16 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * text, returns {@link #entry}, else returns the last of
      * {@link #outofturnEntries}.
      */
-    private @Nullable Entry currEntry() {
+    private Entry currEntry() {
         if (collectingIntactText()) {
             return intacttagEntry;
         } else if (collectingOutOfTurnText()) {
-            return outofturnEntries.peek();
-        } else {
-            return entry;
+            Entry nowEntry = outofturnEntries.peek();
+            if (nowEntry != null) {
+                return nowEntry;
+            }
         }
+        return Objects.requireNonNull(entry);
     }
 
     /**
@@ -500,7 +498,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private void queueTag(String tag, Attributes attributes) {
+    private void queueTag(String tag, @Nullable Attributes attributes) {
         Tag xmltag = null;
         XMLIntactTag intacttag = null;
         setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
@@ -520,9 +518,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
         }
         if (xmltag == null) {
+            xmlTagName.push(tag);
+            xmlTagAttributes.push(XMLUtils.convertAttributes(attributes));
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
-            xmlTagName.push(xmltag.getTag());
-            xmlTagAttributes.push(xmltag.getAttributes());
         }
         currEntry().add(xmltag);
 
@@ -566,12 +564,12 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Queue tag that should be ignored by editor, including content and all
      * subtags.
      */
-    private void queueIgnoredTag(String tag, Attributes attributes) {
-        Tag xmltag;
-        setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
-        xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
-        xmlTagName.push(xmltag.getTag());
-        xmlTagAttributes.push(xmltag.getAttributes());
+    private void queueIgnoredTag(String tag, @Nullable Attributes attributes) {
+        org.omegat.filters3.Attributes atts = XMLUtils.convertAttributes(attributes);
+        setSpacePreservingTag(atts);
+        xmlTagName.push(tag);
+        xmlTagAttributes.push(atts);
+        Tag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
         currEntry().add(xmltag);
     }
 
@@ -613,7 +611,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /** Is called when the tag is started. */
-    private void start(String tag, Attributes attributes) throws SAXException, TranslationException {
+    private void start(String tag, @Nullable Attributes attributes) throws SAXException, TranslationException {
         boolean prevIgnored = translator.isInIgnored();
         translatorTagStart(tag, attributes);
 
@@ -919,7 +917,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private void translatorTagStart(String tag, Attributes atts) {
+    private void translatorTagStart(String tag, @Nullable Attributes atts) {
         currentTagPath.push(tag);
         translator.tagStart(constructCurrentPath(), atts);
     }
@@ -1135,7 +1133,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     @Override
     public void endDTD() {
-        queueDTD(dtd);
+        queueDTD(Objects.requireNonNull(dtd));
         inDTD = false;
         dtd = null;
     }

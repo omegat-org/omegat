@@ -35,7 +35,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 
@@ -57,7 +56,6 @@ import org.omegat.util.StringUtil;
  * @author Piotr Kulik
  * @author Alex Buloichik
  */
-@NullMarked
 public class XLIFFFilter extends XMLFilter {
 
     private @Nullable String resname;
@@ -207,8 +205,8 @@ public class XLIFFFilter extends XMLFilter {
      * as comment, based on ResXFilter code
      */
     @Override
-    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
-        if (path != null && atts != null) {
+    public void tagStart(String path, @Nullable Attributes atts) {
+        if (atts != null) {
             if (path.endsWith("trans-unit")) {
                 // resname may or may not be present.
                 resname = atts.getValue("resname");
@@ -228,10 +226,7 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     @Override
-    public void tagEnd(@Nullable String path) {
-        if (path == null) {
-            return;
-        }
+    public void tagEnd(String path) {
         if (path.endsWith("trans-unit/note")) {
             // <trans-unit> <note>'s only
             addProperty("note", text.toString());
@@ -239,7 +234,7 @@ public class XLIFFFilter extends XMLFilter {
             StringBuilder buf = new StringBuilder();
             for (int i = 0; i < groupLevel; i++) {
                 String temp = groupResname.get(i);
-                if (temp != null) {
+                if (!temp.isEmpty()) {
                     buf.append(temp);
                     // group1/group2/..
                     buf.append(i == (groupLevel - 1) ? "" : "/");

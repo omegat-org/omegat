@@ -27,7 +27,6 @@ package org.omegat.core.segmentation;
 
 import org.jspecify.annotations.Nullable;
 
-import java.io.Serializable;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -36,9 +35,7 @@ import java.util.regex.PatternSyntaxException;
  *
  * @author Maxym Mykhalchuk
  */
-public class Rule implements Serializable {
-
-    private static final long serialVersionUID = 7645267236376489908L;
+public class Rule {
 
     /** Creates a new empty instance of segmentation rule */
     public Rule() {

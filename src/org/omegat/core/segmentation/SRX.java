@@ -29,7 +29,6 @@ package org.omegat.core.segmentation;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,9 +48,7 @@ import org.omegat.util.Log;
  * @author Maxym Mykhalchuk
  * @author Thomas Cordonnier
  */
-public class SRX implements Serializable {
-
-    private static final long serialVersionUID = 2182125877925944613L;
+public class SRX {
 
     public SRX copy() {
         SRX result = new SRX();

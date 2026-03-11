@@ -197,4 +197,17 @@ public final class LanguageCodes {
     public static @Nullable String getLanguageCodeByPattern(String pattern) {
         return PATTERN_HASH.get(pattern);
     }
+
+    public static String getLanguageCode(String code) {
+        /*
+         * If the code is not a standard code, then try to find a
+         * localized name of the language name. When you believe all the OmegaT
+         * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
+         * to remove the workaround here.
+         */
+        if (LanguageCodes.isLanguageCodeKnown(code)) {
+            return code;
+        }
+        return Objects.requireNonNullElse(LanguageCodes.getLanguageCodeByName(code), code);
+    }
 }

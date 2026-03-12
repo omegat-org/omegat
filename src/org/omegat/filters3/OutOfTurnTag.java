@@ -25,6 +25,7 @@
 
 package org.omegat.filters3;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.StringUtil;
@@ -48,8 +49,8 @@ public abstract class OutOfTurnTag extends Tag {
      * of text that should be translated separately, not breaking currently
      * collected text.
      */
-    public OutOfTurnTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut,
-            Attributes attributes) {
+    public OutOfTurnTag(XMLDialect xmlDialect, Handler handler, String tag, @Nullable String shortcut,
+            @Nullable Attributes attributes) {
         super(tag, shortcut, Tag.Type.ALONE, attributes);
         entry = new Entry(xmlDialect, handler);
     }

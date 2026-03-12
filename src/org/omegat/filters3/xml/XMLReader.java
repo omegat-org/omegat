@@ -66,13 +66,13 @@ public class XMLReader extends Reader {
     private final BufferedReader reader;
 
     /** Inner encoding. */
-    private String encoding = StandardCharsets.UTF_8.name();
+    private @Nullable String encoding = null;  // null means unknown.
 
     /** EOL chars used in source file. */
     private String eol = LINE_FEED + "";
 
     /** Returns detected encoding. */
-    public String getEncoding() {
+    public @Nullable String getEncoding() {
         return encoding;
     }
 
@@ -177,7 +177,11 @@ public class XMLReader extends Reader {
             return createReaderAndDetectEOL(is, Charset.forName(encoding));
         }
 
-        // UTF-8 if we couldn't detect it ourselves
+        /* Note: if we couldn't detect it by ourselves,
+         * we currently keep `encoding=null` as unknown.
+         * It will cause output has XML declaration without encoding.
+         * See ctor of org.omegat.filters3.xml.XMLWriter
+         */
         try {
             return createReaderAndDetectEOL(is, StandardCharsets.UTF_8);
         } catch (Exception e) {

@@ -176,10 +176,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (collectingIntactText()) {
             return intacttagEntry;
         } else if (collectingOutOfTurnText()) {
-            Entry nowEntry = outofturnEntries.peek();
-            if (nowEntry != null) {
-                return nowEntry;
-            }
+            return Objects.requireNonNull(outofturnEntries.peek());
         }
         return Objects.requireNonNull(entry);
     }

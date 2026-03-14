@@ -29,23 +29,26 @@
 
 package org.omegat.core.statistics;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
+import org.omegat.core.threads.Completion;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
 
 /**
  * Thread for calculate standard statistics.
- *
+ * <p>
  * Calculation requires two different tags stripping: one for calculate unique
  * and remaining, and second for calculate number of words and chars.
- *
+ * <p>
  * Number of words/chars calculation requires to just strip all tags, protected
  * parts, placeholders(see StatCount.java).
- *
+ * <p>
  * Calculation of unique and remaining also requires to just strip all tags,
  * protected parts, placeholders for standard calculation.
  *
@@ -68,16 +71,13 @@ public class CalcStandardStatistics extends LongProcessThread {
         callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
         callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
         callback.setTextData(result.getTextData());
-        callback.finishData();
+        callback.onComplete(Completion.success());
 
         String internalDir = p.getProjectProperties().getProjectInternal();
-        // removing old stats
         try {
-            File oldstats = new File(internalDir + "word_counts");
-            if (oldstats.exists()) {
-                oldstats.delete();
-            }
-        } catch (Exception e) {
+            // removing old stats
+            Files.deleteIfExists(Paths.get(internalDir + "word_counts"));
+        } catch (IOException ignored) {
         }
 
         // now dump file based word counts to disk

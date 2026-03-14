@@ -120,7 +120,7 @@ public final class UIScale {
 
     // ---- user scaling (linux)
 
-    private static float scaleFactor = 1f;
+    private static float scaleFactor = 1;
     private static boolean initialized;
 
     private static void initialize() {
@@ -181,31 +181,55 @@ public final class UIScale {
             return computeScaleFactorForMac(font);
         }
         if (Platform.isWindows) {
-            // Special handling for Windows to be compatible with OS scaling,
-            // which distinguish between "screen scaling" and "text scaling".
-            // - Windows "screen scaling" scales everything (text, icon, gaps,
-            // etc)
-            // and may have different scaling factors for each screen.
-            // - Windows "text scaling" increases only the font size, but on all
-            // screens.
-            //
-            // Both can be changed by the user in the Windows 10 Settings:
-            // - Settings > Display > Scale and layout
-            // - Settings > Ease of Access > Display > Make text bigger (100% -
-            // 225%)
-            if (font instanceof UIResource) {
-                Font uiFont = (Font) Toolkit.getDefaultToolkit().getDesktopProperty("win.messagebox.font");
-                if (uiFont == null || uiFont.getSize() == font.getSize()) {
-                    // Do not apply own scaling if the JRE scales using a
-                    // Windows screen scale factor.
-                    // If a user increases font size in Windows 10 settings,
-                    // desktop property "win.messagebox.font" is changed,
-                    // and we use the larger font.
-                    return 1;
-                }
+            return computeScaleFactorForWindows(font);
+        }
+        if ((Platform.isUnixLike())) {
+            return computeScaleFactorForLinux(font);
+        }
+        float defaultFontSizeDivider = 12f;
+        return font.getSize() / defaultFontSizeDivider;
+    }
+
+    private static float computeScaleFactorForMac(Font font) {
+        // the default font size on macOS is 13
+        float fontSizeDivider = 13f;
+        return font.getSize() / fontSizeDivider;
+    }
+
+    private static float computeScaleFactorForWindows(Font font) {
+        // Special handling for Windows to be compatible with OS scaling,
+        // which distinguish between "screen scaling" and "text scaling".
+        // - Windows "screen scaling" scales everything (text, icon, gaps,
+        // etc)
+        // and may have different scaling factors for each screen.
+        // - Windows "text scaling" increases only the font size, but on all
+        // screens.
+        //
+        // Both can be changed by the user in the Windows 10 Settings:
+        // - Settings > Display > Scale and layout
+        // - Settings > Ease of Access > Display > Make text bigger (100% -
+        // 225%)
+        if (font instanceof UIResource) {
+            Font uiFont = (Font) Toolkit.getDefaultToolkit().getDesktopProperty("win.messagebox.font");
+            if (uiFont == null || uiFont.getSize() == font.getSize()) {
+                // Do not apply own scaling if the JRE scales using a
+                // Windows screen scale factor.
+                // If a user increases font size in Windows 10 settings,
+                // desktop property "win.messagebox.font" is changed,
+                // and we use the larger font.
+                return 1;
             }
         }
-        if ((Platform.isUnixLike()) && !isSystemScaling()) {
+        // Windows LaF uses Tahoma font rather than the actual Windows
+        // system font (Segoe UI), and its size is always 10% smaller
+        // than the actual system font size.
+        // Tahoma 11 is used at 100%
+        float fontSizeDivider = "Tahoma".equals(font.getFamily())? 11f : 12f;
+        return font.getSize() / fontSizeDivider;
+    }
+
+    private static float computeScaleFactorForLinux(Font font) {
+        if (!isSystemScaling()) {
             // see class com.sun.java.swing.plaf.gtk.PangoFonts background
             // information
             Object value = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Xft/DPI");
@@ -217,33 +241,9 @@ public final class UIScale {
                 return (float) (dpi / 96.0);
             }
         }
-        return computeScaleFactor(font);
-    }
-
-    private static float computeScaleFactorForMac(Font font) {
-        // the default font size on macOS is 13
-        float fontSizeDivider = 13f;
-        return font.getSize() / fontSizeDivider;
-    }
-
-    private static float computeScaleFactor(Font font) {
-        // default font size
-        float fontSizeDivider = 12f;
-
-        if (Platform.isWindows) {
-            // Windows LaF uses Tahoma font rather than the actual Windows
-            // system font (Segoe UI),
-            // and its size is always ca. 10% smaller than the actual system
-            // font size.
-            // Tahoma 11 is used at 100%
-            if ("Tahoma".equals(font.getFamily())) {
-                fontSizeDivider = 11f;
-            }
-            return font.getSize() / fontSizeDivider;
-        }
-        // the default font size for Unity and Gnome is 15 and for KDE it is
-        // 13
-        fontSizeDivider = Platform.isKDE ? 13f : 15f;
+        // the default font size for Unity and Gnome is 15
+        // and for KDE it is 13.
+        float fontSizeDivider = Platform.isKDE ? 13f : 15f;
         return font.getSize() / fontSizeDivider;
     }
 
@@ -281,7 +281,7 @@ public final class UIScale {
      */
     public static float scale(float value) {
         initialize();
-        if (scaleFactor == 1f) {
+        if (scaleFactor == 1) {
             return value;
         }
         return value * scaleFactor;

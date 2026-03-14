@@ -274,12 +274,14 @@ public class XLIFFDialect extends DefaultXMLDialect {
                                 + tagIndex + ">";
                         tagProtected = true;
                         break;
-                    default:
-                        shortcut = "<f>";  // FIXME: what is default tag?
-                        shortcutLetter = 'f';
-                        tagIndex = -1;
-                        tagProtected = false;
-                        break;
+                default:
+                    /* This should never occur during normal program execution.
+                     * If this is thrown, it indicates a programming error:
+                     * a tag was registered via `defineContentBasedTag`
+                     * but is missing its corresponding case handler in this
+                     * switch statement.
+                     */
+                    throw new IllegalStateException("Unexpected tag: " + tag.getTag());
                 }
                 tag.setShortcutLetter(shortcutLetter);
                 tag.setShortcutIndex(tagIndex);

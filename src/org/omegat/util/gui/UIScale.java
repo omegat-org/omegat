@@ -224,7 +224,7 @@ public final class UIScale {
         // system font (Segoe UI), and its size is always 10% smaller
         // than the actual system font size.
         // Tahoma 11 is used at 100%
-        float fontSizeDivider = "Tahoma".equals(font.getFamily())? 11f : 12f;
+        float fontSizeDivider = "Tahoma".equals(font.getFamily()) ? 11f : 12f;
         return font.getSize() / fontSizeDivider;
     }
 
@@ -293,7 +293,7 @@ public final class UIScale {
      */
     public static int scale(int value) {
         initialize();
-        if (scaleFactor == 1f) {
+        if (scaleFactor == 1) {
             return value;
         }
         return Math.round(value * scaleFactor);

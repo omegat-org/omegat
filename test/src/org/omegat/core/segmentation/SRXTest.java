@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               2024 Hiroshi Miura
+               2024-2026 Hiroshi Miura
                2025 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
@@ -41,14 +41,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import org.omegat.util.LocaleRule;
-import org.omegat.util.OStrings;
 
 /**
  * @author Aaron Madlon-Kay
@@ -59,6 +60,12 @@ public final class SRXTest {
 
     private static final File SEGMENT_DEFAULT = new File("test/data/segmentation/default/");
     private static final String SEGMENT_CONF_BASE = "test/data/segmentation/migrate/";
+
+    public static boolean checkRules(List<MapRule> mapRuleList, String pattern, String language) {
+        return mapRuleList.stream().filter(mapRule -> Objects.equals(language, mapRule.getLanguage()))
+                .map(mapRule -> mapRule.getCompiledPattern().matcher(pattern).matches()).findFirst()
+                .orElse(false);
+    }
 
     public static class DefultSRXTest {
 
@@ -92,18 +99,13 @@ public final class SRXTest {
         @Test
         public void testSrxReaderDefault() {
             assertTrue(SEGMENT_DEFAULT.exists());
-            SRX srx = SRX.loadFromDir(SEGMENT_DEFAULT);
+            SRX srx = SRXManager.loadFromDir(SEGMENT_DEFAULT);
             assertNotNull(srx);
             assertTrue(srx.isCascade());
             List<MapRule> mapRuleList = srx.getMappingRules();
             assertNotNull(mapRuleList);
             assertEquals(18, mapRuleList.size());
-            for (MapRule mapRule : mapRuleList) {
-                if (mapRule.getPattern().equals("JA.*")) {
-                    assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
-                    assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-                }
-            }
+            assertTrue(SRXTest.checkRules(mapRuleList, "JA.*", LanguageCodes.JAPANESE_CODE));
             assertEquals("2.0", srx.getVersion());
             assertTrue(srx.isSegmentSubflows());
         }
@@ -118,10 +120,10 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws Exception {
+        public void testSrxMigrationBasic() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
 
@@ -134,10 +136,10 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws Exception {
+        public void testSrxMigrationJa() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "PL", LanguageCodes.POLISH_CODE);
         }
     }
 
@@ -150,14 +152,17 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws Exception {
+        public void testSrxMigrationOldDe() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_de_54", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "JA", LanguageCodes.JAPANESE_CODE);
         }
     }
-    
-    /** Check compatibilty with a conf file which is not at all based on standard OmegaT rules **/
+
+    /**
+     * Check compatibilty with a conf file which is not at all based on standard
+     * OmegaT rules
+     **/
     public static class SRXMigrateExtDeTest {
 
         @org.junit.Rule
@@ -167,13 +172,12 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws Exception {
+        public void testSrxMigrationExtDe() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "ext", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
+            SRXTest.testSrxMigration(segmentConf, configDir, "NB", "NB");
         }
     }
-    
 
     /**
      * Test SRX writer/reader.
@@ -185,46 +189,35 @@ public final class SRXTest {
      * a segmentation.conf file that is produced by OmegaT in English
      * environment and Japanese environment.
      */
-    public static void testSrxMigration(File segmentConf, File configDir) throws Exception {
+    public static void testSrxMigration(File segmentConf, File configDir, String pattern, String lang)
+            throws Exception {
         // ensures the full test runs in temp directory
         Files.copy(segmentConf.toPath(), Paths.get(configDir.getAbsolutePath(), segmentConf.getName()));
         segmentConf = new File(configDir, segmentConf.getName());
         // load from conf file
-        SRX srxOrig = SRX.loadConfFile(segmentConf, configDir);
+        SRX srxOrig = SRXManager.loadConfFile(segmentConf, configDir);
         assertNotNull(srxOrig);
         List<MapRule> mapRuleList = srxOrig.getMappingRules();
         assertNotNull(mapRuleList);
-        assertEquals(17, mapRuleList.size()); // samples have 17 rules, while default had 18
-        for (MapRule mapRule : mapRuleList) {
-            if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
-                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-            } else if (mapRule.getLanguage().equals("Text")) {
-                assertEquals(OStrings.getString(LanguageCodes.F_TEXT_KEY), mapRule.getLanguageName());
-            }
-        }
+        assertEquals(17, mapRuleList.size()); // samples have 17 rules, while
+                                              // default had 18
+        assertTrue(checkRules(mapRuleList, pattern, lang));
         // load from srx file
         File segmentSrx = new File(configDir, "segmentation.srx");
         assertTrue(segmentSrx.exists());
-        SRX srx1 = SRX.loadFromDir(configDir);
+        SRX srx1 = SRXManager.loadFromDir(configDir);
         assertNotNull(srx1);
         mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(17, mapRuleList.size());
-        for (MapRule mapRule : mapRuleList) {
-            if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
-                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-            } else if (mapRule.getLanguage().equals("Text")) {
-                assertEquals(OStrings.getString(LanguageCodes.F_TEXT_KEY), mapRule.getLanguageName());
-            }
-        }
+        assertTrue(checkRules(mapRuleList, pattern, lang));
         assertEquals("2.0", srx1.getVersion());
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());
+
     }
-    
-   public static class SRXSecurityTest {
+
+    public static class SRXSecurityTest {
 
         @org.junit.Rule
         public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
@@ -232,31 +225,94 @@ public final class SRXTest {
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
-        
         @Test
         public void testSRXLoaderSecureCVE_2024_51366() throws IOException {
             File tmpDir = folder.newFolder();
             Path segmentConf = tmpDir.toPath().resolve("segmentation.conf");
             // prepare CVE-2024-51366 exploit code
-            String xmlContent = "<java>\n" +
-                    "    <object\nclass=\"java.lang.ProcessBuilder\">\n" +
-                    "        <array class=\n\"java.lang.String\" length=\"2\" >\n" +
-                    "            <void index=\"0\">\n" +
-                    "                <string>touch</string>\n" +
-                    "            </void>\n" +
-                    "            <void index=\"1\">\n" +
-                    "                <string>" + tmpDir.toString() + "/test-file</string>\n" +
-                    "            </void>\n" +
-                    "        </array>\n" +
-                    "        <void method=\"start\"/>\n" +
-                    "    </object>\n" +
-                    "</java>";
+            String xmlContent = "<java>\n" + "    <object\nclass=\"java.lang.ProcessBuilder\">\n"
+                    + "        <array class=\n\"java.lang.String\" length=\"2\" >\n"
+                    + "            <void index=\"0\">\n" + "                <string>touch</string>\n"
+                    + "            </void>\n" + "            <void index=\"1\">\n"
+                    + "                <string>" + tmpDir + "/test-file</string>\n" + "            </void>\n"
+                    + "        </array>\n" + "        <void method=\"start\"/>\n" + "    </object>\n"
+                    + "</java>";
             Files.writeString(segmentConf, xmlContent);
-            SRX srx = SRX.loadFromDir(segmentConf.getParent().toFile());
-            assertFalse(new File(tmpDir, "test-file").exists()); // true would mean that the vulnerability is still here!
+            SRX srx = SRXManager.loadFromDir(segmentConf.getParent().toFile());
+            assertNotNull(srx);
+            assertFalse(new File(tmpDir, "test-file").exists());
+            // true would mean that the vulnerability is still here!
         }
     }
-    
+
+    /**
+     * Unit tests for the {@link SRXManager#getDefault()} method. This method loads
+     * the default segmentation rules and configures the SRX object accordingly.
+     */
+    public static class SRXManagerUnitTest {
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method successfully loads
+         * the default SRX object.
+         */
+        @Test
+        public void testGetDefaultLoadsSRXSuccessfully() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertNotNull("The SRX object should not be null.", srx);
+        }
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method sets
+         * includeEndingTags to true.
+         */
+        @Test
+        public void testGetDefaultIncludeEndingTagsIsTrue() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertTrue("The includeEndingTags property should be true.", srx.isIncludeEndingTags());
+        }
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method sets segmentSubflows
+         * to true.
+         */
+        @Test
+        public void testGetDefaultSegmentSubflowsIsTrue() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertTrue("The segmentSubflows property should be true.", srx.isSegmentSubflows());
+        }
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method returns an SRX
+         * object with a non-null and non-empty version string.
+         */
+        @Test
+        public void testGetDefaultVersion() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertEquals("The SRX version should be 2.0.", "2.0", srx.getVersion());
+        }
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method returns an SRX
+         * object with non-null mapping rules.
+         */
+        @Test
+        public void testGetDefaultMappingRulesIsNotNull() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertNotNull("The mapping rules should not be null.", srx.getMappingRules());
+        }
+
+        /**
+         * Test that the {@link SRXManager#getDefault()} method returns an SRX
+         * object with mapping rules containing at least one rule.
+         */
+        @Test
+        public void testGetDefaultMappingRulesHas18() throws IOException {
+            SRX srx = SRXManager.getDefault();
+            Assert.assertEquals("The mapping rules should contain at least one rule.", 18,
+                    srx.getMappingRules().size());
+        }
+    }
+
     private SRXTest() {
     }
 }

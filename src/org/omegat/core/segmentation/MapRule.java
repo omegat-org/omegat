@@ -26,15 +26,12 @@
 
 package org.omegat.core.segmentation;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
-import tokyo.northside.logging.ILogger;
+import gen.core.segmentation.Languagemap;
 
-import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 /**
@@ -43,23 +40,10 @@ import org.omegat.util.StringUtil;
  *
  * @author Maxym Mykhalchuk
  */
-public class MapRule implements Serializable {
-
-    private static final long serialVersionUID = -5868132953113679291L;
-    private static final ILogger LOGGER = Log.getLogger(MapRule.class);
+public class MapRule {
 
     /** Language Name */
-    private String languageCode;
-
-    /**
-     * Creates a new empty MapRule.
-     * <p>
-     * When SRX.loadSrxFile loads segmentation.conf, java.beans.XMLDecoder
-     * create an empty object, then calls setLanguage and setPattern methods.
-     * </p>
-     */
-    public MapRule() {
-    }
+    private final String languageCode;
 
     /**
      * Create initialized MapRule object.
@@ -74,9 +58,21 @@ public class MapRule implements Serializable {
      */
     public MapRule(String language, String pattern, List<Rule> rules) {
         String code = LanguageCodes.getLanguageCodeByPattern(pattern);
-        this.setLanguage(code != null ? code : language);
-        this.setPattern(pattern);
-        this.setRules(rules);
+        this.languageCode = LanguageCodes.getLanguageCode(code != null ? code : language);
+        this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        this.rules = rules;
+    }
+
+    /**
+     * Create initialized MapRule object from segmentation.srx.
+     *
+     * @param languagemap
+     *            language map from segmentation.srx.
+     * @param rules
+     *            segmentation rules.
+     */
+    public MapRule(Languagemap languagemap, List<Rule> rules) {
+        this(languagemap.getLanguagerulename(), languagemap.getLanguagepattern(), rules);
     }
 
     /** Returns Language Name (to display it in a dialog). */
@@ -89,40 +85,20 @@ public class MapRule implements Serializable {
          * empty, the object is created from a SRX file, then return
          * languageCode itself.
          */
-        String res = LanguageCodes.getLanguageName(languageCode);
+        String res = LanguageCodes.getLanguageName(getLanguage());
         return StringUtil.isEmpty(res) ? languageCode : res;
-    }
-
-    /** Sets Language Code */
-    public void setLanguage(String code) {
-        /*
-         * setLanguage method is called from XmlDecoder of a Java beans library
-         * when migrating from "segmentation.conf" beans file. An argument will
-         * be localized name of language. When the object is created from a
-         * standard SRX file, the argument will be standard language name,
-         * defined as "LanguageCodes.*_CODE". The behavior was changed in OmegaT
-         * 6.0.0 release in 2023. We first detect whether the argument is
-         * standard code. If the code is not a standard code, then try to find a
-         * localized name of the language name. When you believe all the OmegaT
-         * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
-         * to remove the workaround here.
-         */
-        if (!LanguageCodes.isLanguageCodeKnown(code)) {
-            String alt = LanguageCodes.getLanguageCodeByName(code);
-            if (alt != null) {
-                languageCode = alt;
-                return;
-            } else {
-                LOGGER.atDebug().setMessage("Unknown languagerulename '{}'").addArgument(code).log();
-            }
-        }
-        languageCode = code;
     }
 
     /**
      * Returns Language Code for programmatic usage.
      */
     public String getLanguage() {
+        if (pattern != null) {
+            String code = LanguageCodes.getLanguageCodeByPattern(pattern.pattern());
+            if (code != null) {
+                return code;
+            }
+        }
         return languageCode;
     }
 
@@ -130,17 +106,13 @@ public class MapRule implements Serializable {
      * Pattern for the language/country ISO code (of a form LL-CC). It is like
      * "EN.*".
      */
-    private Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Returns Pattern for the language/country ISO code (of a form LL-CC).
      */
     public String getPattern() {
-        if (pattern != null) {
-            return pattern.pattern();
-        } else {
-            return null;
-        }
+        return pattern.pattern();
     }
 
     /**
@@ -152,45 +124,20 @@ public class MapRule implements Serializable {
     }
 
     /**
-     * Sets Pattern for the language/country ISO code (of a form LL-CC).
-     * 
-     * @param pattern
-     *            pattern string such as "EN.*"
-     */
-    public void setPattern(String pattern) throws PatternSyntaxException {
-        // Fix for bug [1643500]
-        // language code in segmentation rule is a case-sensitive
-        // Correction contributed by Tiago Saboga.
-        this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-    }
-
-    /**
-     * Deep copy of the object, mandatory for java beans.
+     * Copy of the object.
      * 
      * @return new MapRule object
      */
     public MapRule copy() {
-        MapRule result = new MapRule();
-        result.languageCode = languageCode;
-        result.pattern = pattern;
-        result.rules = new ArrayList<Rule>(rules.size());
-        for (Rule rule : rules) {
-            result.rules.add(rule.copy());
-        }
-        return result;
+        return new MapRule(languageCode, pattern.pattern(), new ArrayList<>(rules));
     }
 
     /** List of rules (of class {@link Rule}) for the language */
-    private List<Rule> rules;
+    private final List<Rule> rules;
 
     /** Returns List of rules (of class {@link Rule}) for the language */
     public List<Rule> getRules() {
         return rules;
-    }
-
-    /** Sets List of rules (of class {@link Rule}) for the language */
-    public void setRules(List<Rule> rules) {
-        this.rules = rules;
     }
 
     /**

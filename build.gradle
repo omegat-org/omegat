@@ -429,9 +429,13 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
-                    'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
+                    'src/**/*.java', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
+                    'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties',
+                    'test-integration/**', 'LICENSE', 'compose.yml'
+                exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
+            }
+            from(processResources) {
+                into('src')
             }
             into('lib/provided') {
                 from configurations.runtimeClasspath

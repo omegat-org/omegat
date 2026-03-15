@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.scripts">
-  <title id="windows.scripts.title"><guilabel>Scripts</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.scripts">
+  <title xml:id="windows.scripts.title"><guilabel>Scripts</guilabel></title>
 
   <para>Els scripts són petits programes (similars a les macros de les aplicacions d'ofimàtica) que es poden utilitzar per a automatitzar tasques, així com ampliar o personalitzar la funcionalitat de l'OmegaT. Els poden escriure els usuaris en qualsevol llenguatge que pugui processar la màquina virtual del Java subjacent.</para>
 
@@ -10,8 +9,8 @@
 
   <para>Utilitzeu <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/> per a accedir a la finestra.</para>
 
-  <section id="windows.scripts.folder">
-  <title id="windows.scripts.folder.title">Carpeta de scripts</title>
+  <section xml:id="windows.scripts.folder">
+  <title xml:id="windows.scripts.folder.title">Carpeta de scripts</title>
 
   <para>Per defecte, els scripts s'emmagatzemen en la carpeta <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/> de la carpeta de l'aplicació OmegaT.</para>
 
@@ -21,33 +20,33 @@
     <para>Si no es mostra una llista de scripts en el costat esquerre de la finestra de l'editor de scripts, utilitzeu el menú <guimenu>Fitxer</guimenu> &gt; <guimenuitem>Defineix la carpeta de scripts</guimenuitem> de la finestra «Scripts» per a definir la ubicació dels scripts.</para>
   </warning>
 
-  <para>Aquí podeu trobar scripts addicionals: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>. Només cal que copieu el fitxer a la carpeta <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>.</para>
+  <para>Aquí podeu trobar scripts addicionals: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</link>. Només cal que copieu el fitxer a la carpeta <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>.</para>
 
   <para>Alguns scripts es basen en <emphasis>esdeveniments</emphasis>. La carpeta que conté els scripts inclou subcarpetes que corresponen als esdeveniments disponibles. Podeu activar scripts automàticament copiant-los a la subcarpeta corresponent:</para>
 
   <variablelist>
-	<varlistentry id="application.folder.scripts.application.shutdown">
-	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+	<varlistentry xml:id="application.folder.scripts.application.shutdown">
+	  <term xml:id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
 	  <listitem><para>Els scripts d'aquesta carpeta s'executen abans de sortir de l'OmegaT.</para></listitem>
 	</varlistentry>
-	<varlistentry id="application.folder.scripts.application.startup">
-	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
+	<varlistentry xml:id="application.folder.scripts.application.startup">
+	  <term xml:id="application.folder.scripts.application.startup.title">application_startup</term>
 	  <listitem><para>Els scripts d'aquesta carpeta s'executen quan el motor de scripts està disponible, poc després d'iniciar l'OmegaT.</para></listitem>
 	</varlistentry>
-	<varlistentry id="application.folder.scripts.entry.activated">
-	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
+	<varlistentry xml:id="application.folder.scripts.entry.activated">
+	  <term xml:id="application.folder.scripts.entry.activated.title">entry_activated</term>
 	  <listitem><para>Els scripts d'aquesta carpeta s'executen en editar un segment nou. El segment està vinculat a <code>newEntry</code>.</para></listitem>
 	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.file">
-	  <term id="application.folder.scripts.new.file.title">new_file</term>
+	<varlistentry xml:id="application.folder.scripts.new.file">
+	  <term xml:id="application.folder.scripts.new.file.title">new_file</term>
 	  <listitem><para>Els scripts de la carpeta s'executen quan l'editor canvia al fitxer següent del projecte. El nom del fitxer nou està vinculat a <code>activeFileName</code>.</para></listitem>
 	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.word">
-	  <term id="application.folder.scripts.new.word.title">new_word</term>
+	<varlistentry xml:id="application.folder.scripts.new.word">
+	  <term xml:id="application.folder.scripts.new.word.title">new_word</term>
 	  <listitem><para>Els scripts de la carpeta s'executen quan s'edita una paraula nova en la subfinestra «Editor». La paraula nova està vinculada a <code>newWord</code>.</para></listitem>
 	</varlistentry>
-	<varlistentry id="application.folder.scripts.project.changed">
-	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
+	<varlistentry xml:id="application.folder.scripts.project.changed">
+	  <term xml:id="application.folder.scripts.project.changed.title">project_changed</term>
 	  <listitem><para>Els scripts de la carpeta s'executen quan canvia l'estat del projecte. Hi ha un objecte <code>eventType</code> vinculat que admet els valors següents: CLOSE, COMPILE, CREATE, LOAD i SAVE.</para></listitem>
 	</varlistentry>
   </variablelist>
@@ -59,8 +58,8 @@
   </warning>
   </section>
   
-  <section id="windows.scripts.usage">
-	<title id="windows.scripts.usage.title">Ús</title>
+  <section xml:id="windows.scripts.usage">
+	<title xml:id="windows.scripts.usage.title">Ús</title>
 
 	<itemizedlist>
     <listitem>
@@ -91,8 +90,8 @@
 	</warning>
   </section>
 
-  <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Scripts distribuïts</title>
+  <section xml:id="windows.scripts.distribution">
+    <title xml:id="windows.scripts.distribution.title">Scripts distribuïts</title>
 
     <para>L'OmegaT incorpora una sèrie de scripts desenvolupats pels col·laboradors de l'OmegaT. Utilitzeu l'editor de scripts per a obrir, executar o modificar els scripts directament, o per a escriure scripts nous per al vostre propi ús.</para>
 
@@ -103,226 +102,226 @@
 	<para>Seguiu les instruccions indicades en l'script en si.</para>
 
     <variablelist>
-      <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
-        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapta les etiquetes estàndard</term>
+      <varlistentry xml:id="windows.scripts.distribution.adapt.standard.tags">
+        <term xml:id="windows.scripts.distribution.adapt.standard.tags.title">Adapta les etiquetes estàndard</term>
 
         <listitem>
           <para>Adapta les etiquetes estàndard quan s'invoca l'ordre Substitueix per la coincidència.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.auto.open.last.project">
-        <term id="windows.scripts.distribution.auto.open.last.project.title">Obre automàticament el darrer projecte</term>
+      <varlistentry xml:id="windows.scripts.distribution.auto.open.last.project">
+        <term xml:id="windows.scripts.distribution.auto.open.last.project.title">Obre automàticament el darrer projecte</term>
 
         <listitem>
           <para>Obre automàticament el darrer projecte de l'OmegaT utilitzat.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.check.same.segment">
-        <term id="windows.scripts.distribution.check.same.segment.title">Comprova si hi ha segments idèntics</term>
+      <varlistentry xml:id="windows.scripts.distribution.check.same.segment">
+        <term xml:id="windows.scripts.distribution.check.same.segment.title">Comprova si hi ha segments idèntics</term>
 
         <listitem>
           <para>Comprova si hi ha segments idèntics (distinció entre majúscules i minúscules).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.currency.translator">
-        <term id="windows.scripts.distribution.currency.translator.title">Traductor de divises</term>
+      <varlistentry xml:id="windows.scripts.distribution.currency.translator">
+        <term xml:id="windows.scripts.distribution.currency.translator.title">Traductor de divises</term>
 
         <listitem>
           <para>Tradueix la representació de les divises d'acord amb les configuracions regionals d'origen i destinació.</para>
 
-          <para>Això traduirà una cadena com ara &quot;$123,399.99&quot; a &quot;123 399,99 USD&quot;, per exemple.</para>
+          <para>Això traduirà una cadena com ara "$123,399.99" a "123 399,99 USD", per exemple.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.example.gui.scripting">
-        <term id="windows.scripts.distribution.example.gui.scripting.title">Exemple: scripts amb GUI</term>
+      <varlistentry xml:id="windows.scripts.distribution.example.gui.scripting">
+        <term xml:id="windows.scripts.distribution.example.gui.scripting.title">Exemple: scripts amb GUI</term>
 
         <listitem>
           <para>Exemple de script amb GUI.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.example.key.binding">
-        <term id="windows.scripts.distribution.example.key.binding.title">Exemple: assignació de tecles</term>
+      <varlistentry xml:id="windows.scripts.distribution.example.key.binding">
+        <term xml:id="windows.scripts.distribution.example.key.binding.title">Exemple: assignació de tecles</term>
 
         <listitem>
           <para>Exemple d'ús d'un esdeveniment d'assignació de tecles.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.example.modify.segment">
-        <term id="windows.scripts.distribution.example.modify.segment.title">Exemple: modificació d'un segment</term>
+      <varlistentry xml:id="windows.scripts.distribution.example.modify.segment">
+        <term xml:id="windows.scripts.distribution.example.modify.segment.title">Exemple: modificació d'un segment</term>
 
         <listitem>
           <para>Exemple que mostra com modificar un segment.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.example.search.and.replace">
-        <term id="windows.scripts.distribution.example.search.and.replace.title">Exemple: cerca i substitució</term>
+      <varlistentry xml:id="windows.scripts.distribution.example.search.and.replace">
+        <term xml:id="windows.scripts.distribution.example.search.and.replace.title">Exemple: cerca i substitució</term>
 
         <listitem>
           <para>Script senzill de cerca i substitució.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.external.spellcheck">
-        <term id="windows.scripts.distribution.external.spellcheck.title">Corrector ortogràfic extern</term>
+      <varlistentry xml:id="windows.scripts.distribution.external.spellcheck">
+        <term xml:id="windows.scripts.distribution.external.spellcheck.title">Corrector ortogràfic extern</term>
 
         <listitem>
           <para>Escriu tots els segments en un fitxer anomenat <filename>[nom_del_projecte].doc</filename> i l'obre en el processador de textos per defecte del sistema. Tingueu en compte que el fitxer és un fitxer de text sense format. L'extensió <filename>.doc</filename> simplement assegura que s'obre en el processador de textos.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.extract.text.content">
-        <term id="windows.scripts.distribution.extract.text.content.title">Extreu el contingut de text</term>
+      <varlistentry xml:id="windows.scripts.distribution.extract.text.content">
+        <term xml:id="windows.scripts.distribution.extract.text.content.title">Extreu el contingut de text</term>
 
         <listitem>
-          <para>Extreu el contingut del projecte a un únic fitxer de text (una línia per segment). Consulteu <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink>.</para>
+          <para>Extreu el contingut del projecte a un únic fitxer de text (una línia per segment). Consulteu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</link>.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.non.breaking.space">
-        <term id="windows.scripts.distribution.non.breaking.space.title">Espai no separable</term>
+      <varlistentry xml:id="windows.scripts.distribution.non.breaking.space">
+        <term xml:id="windows.scripts.distribution.non.breaking.space.title">Espai no separable</term>
 
         <listitem>
           <para>Substitueix els espais per espais no separables on calgui en francès.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.open.current.file">
-        <term id="windows.scripts.distribution.open.current.file.title">Obre el fitxer actual</term>
+      <varlistentry xml:id="windows.scripts.distribution.open.current.file">
+        <term xml:id="windows.scripts.distribution.open.current.file.title">Obre el fitxer actual</term>
 
         <listitem>
           <para>Obre el fitxer d'origen actual.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.open.glossary">
-        <term id="windows.scripts.distribution.open.glossary.title">Obre el glossari</term>
+      <varlistentry xml:id="windows.scripts.distribution.open.glossary">
+        <term xml:id="windows.scripts.distribution.open.glossary.title">Obre el glossari</term>
 
         <listitem>
           <para>Obre el glossari modificable en un editor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.open.project.folder">
-        <term id="windows.scripts.distribution.open.project.folder.title">Obre la carpeta del projecte</term>
+      <varlistentry xml:id="windows.scripts.distribution.open.project.folder">
+        <term xml:id="windows.scripts.distribution.open.project.folder.title">Obre la carpeta del projecte</term>
 
         <listitem>
           <para>Obre la carpeta del projecte amb el gestor de fitxers per defecte.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.open.tm.folder">
-        <term id="windows.scripts.distribution.open.tm.folder.title">Obre la carpeta de memòries de traducció</term>
+      <varlistentry xml:id="windows.scripts.distribution.open.tm.folder">
+        <term xml:id="windows.scripts.distribution.open.tm.folder.title">Obre la carpeta de memòries de traducció</term>
 
         <listitem>
           <para>Obre la carpeta <filename class="directory">/tm</filename>.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
-        <term id="windows.scripts.distribution.open.project.save.tmx.title">Obre el fitxer project.save.tmx</term>
+      <varlistentry xml:id="windows.scripts.distribution.open.project.save.tmx">
+        <term xml:id="windows.scripts.distribution.open.project.save.tmx.title">Obre el fitxer project.save.tmx</term>
 
         <listitem>
           <para>Obre el fitxer project.save.tmx en un editor de text.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.qa.check.rules">
-        <term id="windows.scripts.distribution.qa.check.rules.title">Control de qualitat: comprovació de regles</term>
+      <varlistentry xml:id="windows.scripts.distribution.qa.check.rules">
+        <term xml:id="windows.scripts.distribution.qa.check.rules.title">Control de qualitat: comprovació de regles</term>
 
         <listitem>
           <para>Script de control de qualitat.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.qa.identical.segments">
-        <term id="windows.scripts.distribution.qa.identical.segments.title">Control de qualitat: segments idèntics</term>
+      <varlistentry xml:id="windows.scripts.distribution.qa.identical.segments">
+        <term xml:id="windows.scripts.distribution.qa.identical.segments.title">Control de qualitat: segments idèntics</term>
 
         <listitem>
           <para>Comprova si hi ha segments idèntics (distinció entre majúscules i minúscules).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
-        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN: neteja (recursiva)</term>
+      <varlistentry xml:id="windows.scripts.distribution.svn.cleanup.recursive">
+        <term xml:id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN: neteja (recursiva)</term>
 
         <listitem>
           <para>Executa una neteja de l'SVN en el projecte actual o en qualsevol carpeta (recursivament).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.show.same.segments">
-        <term id="windows.scripts.distribution.show.same.segments.title">Mostra els segments idèntics</term>
+      <varlistentry xml:id="windows.scripts.distribution.show.same.segments">
+        <term xml:id="windows.scripts.distribution.show.same.segments.title">Mostra els segments idèntics</term>
 
         <listitem>
           <para>Mostra una llista de segments en què l'origen i la destinació tenen un contingut idèntic.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.spellcheck">
-        <term id="windows.scripts.distribution.spellcheck.title">Corrector ortogràfic</term>
+      <varlistentry xml:id="windows.scripts.distribution.spellcheck">
+        <term xml:id="windows.scripts.distribution.spellcheck.title">Corrector ortogràfic</term>
 
         <listitem>
           <para>Comprovació ortogràfica global.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
-        <term id="windows.scripts.distribution.strip.bidi.marks.title">Suprimeix les marques bidireccionals</term>
+      <varlistentry xml:id="windows.scripts.distribution.strip.bidi.marks">
+        <term xml:id="windows.scripts.distribution.strip.bidi.marks.title">Suprimeix les marques bidireccionals</term>
 
         <listitem>
           <para>Suprimeix les marques bidireccionals en el text de destinació actual o en la selecció.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.strip.tags">
-        <term id="windows.scripts.distribution.strip.tags.title">Suprimeix les etiquetes</term>
+      <varlistentry xml:id="windows.scripts.distribution.strip.tags">
+        <term xml:id="windows.scripts.distribution.strip.tags.title">Suprimeix les etiquetes</term>
 
         <listitem>
           <para>Suprimeix les etiquetes en el text de destinació actual o en la selecció.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.switch.colour.theme">
-        <term id="windows.scripts.distribution.switch.colour.theme.title">Canvia el tema de color</term>
+      <varlistentry xml:id="windows.scripts.distribution.switch.colour.theme">
+        <term xml:id="windows.scripts.distribution.switch.colour.theme.title">Canvia el tema de color</term>
 
         <listitem>
           <para>Canvia el tema de colors utilitzat en l'editor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.tag.free.match">
-        <term id="windows.scripts.distribution.tag.free.match.title">Coincidència sense etiquetes</term>
+      <varlistentry xml:id="windows.scripts.distribution.tag.free.match">
+        <term xml:id="windows.scripts.distribution.tag.free.match.title">Coincidència sense etiquetes</term>
 
         <listitem>
           <para>Substitueix el text de destinació actual per una coincidència sense etiquetes.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.tagwipe">
-        <term id="windows.scripts.distribution.tagwipe.title">Neteja d'etiquetes</term>
+      <varlistentry xml:id="windows.scripts.distribution.tagwipe">
+        <term xml:id="windows.scripts.distribution.tagwipe.title">Neteja les etiquetes</term>
 
         <listitem>
           <para>Suprimeix les etiquetes supèrflues dels documents DOCX.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
-        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+      <varlistentry xml:id="windows.scripts.distribution.issue.provider.sample.groovy">
+        <term xml:id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
 
         <listitem>
           <para>(sense descripció)</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+      <varlistentry xml:id="windows.scripts.distribution.toolbar.groovy">
+        <term xml:id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
         <listitem>
           <para>(sense descripció)</para>
         </listitem>
@@ -330,15 +329,15 @@
     </variablelist>
   </section>
 
-  <section id="windows.scripts.references">
-    <title id="windows.scripts.references.title">Referències</title>
+  <section xml:id="windows.scripts.references">
+    <title xml:id="windows.scripts.references.title">Referències</title>
 
     <variablelist>
       <varlistentry>
         <term>Javadoc de l'OmegaT</term>
 
         <listitem>
-          <para>Documentació de l'<ulink url="https://omegat.sourceforge.io/javadoc-latest/">API de l'OmegaT</ulink>.</para>
+          <para>Documentació de l'<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.sourceforge.io/javadoc-latest/">API de l'OmegaT</link>.</para>
         </listitem>
       </varlistentry>
 
@@ -346,7 +345,7 @@
         <term>Groovy</term>
 
         <listitem>
-          <para>Llenguatge dinàmic per a la màquina virtual del Java. Es basa en els punts forts de Java i afegeix característiques potents inspirades en llenguatges com Python, Ruby i Smalltalk. Consulteu <ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink> per a conèixer més detalls.</para>
+          <para>Llenguatge dinàmic per a la màquina virtual del Java. Es basa en els punts forts de Java i afegeix característiques potents inspirades en llenguatges com Python, Ruby i Smalltalk. Consulteu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://groovy-lang.org/documentation.html">Apache Groovy</link> per a conèixer més detalls.</para>
         </listitem>
       </varlistentry>
 
@@ -354,7 +353,7 @@
         <term>JavaScript</term>
 
         <listitem>
-          <para>Llenguatge de scripts basat en prototips que és dinàmic, amb tipus permissius i ofereix funcions de primera classe. És un llenguatge multiparadigma, compatible amb els estils de programació orientada a objectes, imperativa i funcional. Consulteu <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink> i <ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</ulink>.</para>
+          <para>Llenguatge de scripts basat en prototips que és dinàmic, amb tipus permissius i ofereix funcions de primera classe. És un llenguatge multiparadigma, compatible amb els estils de programació orientada a objectes, imperativa i funcional. Consulteu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</link> i <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</link>.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -371,7 +370,7 @@ for (i in 0 ..&lt; files.size())
 		{
 			source = currSegment.getSrcText();
 			target = project.getTranslationInfo(currSegment).translation;
-			console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+			console.println(source + " &gt;&gt;&gt;&gt; " + target);
 		}     
 	}
 }</programlisting>

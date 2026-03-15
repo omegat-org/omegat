@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.replace">
-  <title id="windows.text.replace.title"><guilabel>Remplacement de texte</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.replace">
+  <title xml:id="windows.text.replace.title"><guilabel>Remplacement de texte</guilabel></title>
 
   <para>Utilisez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> pour ouvrir une nouvelle fenêtre de remplacement de texte et saisissez le mot ou la phrase que vous souhaitez consulter dans le champ de recherche.</para>
   
@@ -16,8 +15,8 @@
   <para>Les résultats de la recherche sont affichés en caractères bleus gras et les chaines modifiées sont affichées en orange pour indiquer le résultat du remplacement.</para>
 
 
-  <example id="replace.with.allemand">
-	<title id="replace.with.allemand.title">Remplacer un terme</title>
+  <example xml:id="replace.with.allemand">
+	<title xml:id="replace.with.allemand.title">Remplacer un terme</title>
 	<para>
 	  <programlisting>多和田葉子.UTF8
 -- 148&gt; | language = [[日本語]]・[[ドイツ語]]
@@ -77,16 +76,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">Type de recherche</title>
+  <section xml:id="windows.text.replace.methods">
+    <title xml:id="windows.text.replace.methods.title">Type de recherche</title>
 
     <para>Utiliser les boutons radio pour sélectionner le type de recherche.</para>
 
 	<para>Les types de recherches suivants sont disponibles :</para>
 
     <variablelist>
-      <varlistentry id="windows.text.replace.methods.exact">
-        <term id="windows.text.replace.methods.exact.title">Recherche exacte</term>
+      <varlistentry xml:id="windows.text.replace.methods.exact">
+        <term xml:id="windows.text.replace.methods.exact.title">Recherche exacte</term>
         <listitem>
           <para>Recherche la chaine de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
 
@@ -108,8 +107,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.replace.methods.regex">
-        <term id="windows.text.replace.methods.regex.title">Expressions régulières</term>
+      <varlistentry xml:id="windows.text.replace.methods.regex">
+        <term xml:id="windows.text.replace.methods.regex.title">Expressions régulières</term>
         <listitem>
           <para>Considérez la chaine de caractères recherchée comme une expression régulière.</para>
 
@@ -123,8 +122,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.replace.options">
-	<title id="windows.text.replace.options.title">Options</title>
+  <section xml:id="windows.text.replace.options">
+	<title xml:id="windows.text.replace.options.title">Options</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -167,8 +166,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">Affichage des résultats</title>
+  <section xml:id="windows.text.replace.result.display">
+    <title xml:id="windows.text.replace.result.display.title">Affichage des résultats</title>
 
     <para>Les correspondances sont affichées dans l’ordre de leur apparition dans le projet. Pour les segments traduits, le texte original est affiché au-dessus du texte traduit. Seul le texte source est affiché pour les segments non traduits.</para>
 

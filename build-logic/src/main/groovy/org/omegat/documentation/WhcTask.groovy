@@ -15,57 +15,30 @@ import org.gradle.api.tasks.options.Option
 @CompileStatic
 class WhcTask extends AbstractDocumentTask {
 
-    private final Provider<RegularFile> inputFile = project.objects.fileProperty()
-    private final Provider<FileTree> contentFiles = project.objects.property(FileTree)
-    private final Provider<RegularFile> tocFile = project.objects.fileProperty()
-    private final Provider<RegularFile> headerFile = project.objects.fileProperty()
-    private final Provider<Directory> outputDirectory = project.objects.directoryProperty()
-    private final ListProperty<String> parameterList = project.objects.listProperty(String)
-    private final Property<String> documentLayout = project.objects.property(String)
-    private final Property<Boolean> localJQuery = project.objects.property(Boolean)
-
-    @InputFile
-    Provider<RegularFile> getInputFile() {
-        return inputFile
-    }
-
     @InputFiles
-    Provider<FileTree> getContentFiles() {
-        return contentFiles
-    }
+    final Provider<FileTree> contentFiles = project.objects.property(FileTree)
 
     @InputFile
-    Provider<RegularFile> getTocFile() {
-        return tocFile
-    }
+    final Provider<RegularFile> tocFile = project.objects.fileProperty()
 
     @InputFile
-    Provider<RegularFile> getHeaderFile() {
-        return headerFile
-    }
+    final Provider<RegularFile> headerFile = project.objects.fileProperty()
 
     @OutputDirectory
-    Provider<Directory> getOutputDirectory() {
-        return outputDirectory
-    }
+    final Provider<Directory> outputDirectory = project.objects.directoryProperty()
 
     @Input
     @Option
-    ListProperty<String> getParameterList() {
-        return parameterList
-    }
+    final ListProperty<String> parameterList = project.objects.listProperty(String)
 
     @Input
     @Option
-    Property<String> getDocumentLayout() {
-        return documentLayout
-    }
+    final Property<String> documentLayout = project.objects.property(String)
 
     @Input
     @Option
-    Property<Boolean> getLocalJQuery() {
-        return localJQuery
-    }
+    final Property<Boolean> localJQuery = project.objects.property(Boolean)
+
 
     @TaskAction
     void transform() {
@@ -74,9 +47,9 @@ class WhcTask extends AbstractDocumentTask {
         // get task options
         def hasParameter = parameterList.get().size() > 1
         def toc = tocFile.get().asFile
-        def input = inputFile.get().asFile
         def output = outputDirectory.get().asFile
         File[] contents = contentFiles.get().getFiles().toArray(new File[0])
+        def input = inputFile.get().asFile
 
         // configure WHC compiler
         Compiler compiler = new Compiler(null)

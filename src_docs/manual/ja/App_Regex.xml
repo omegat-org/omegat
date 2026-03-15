@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="app.regex">
-  <title id="app.regex.title">正規表現</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.regex">
+  <title xml:id="app.regex.title">正規表現</title>
 
   <para>この付録は、生産性を向上させる強力な方法に関心のあるユーザーを対象としています。最も単純な正規表現(<emphasis>regex</emphasis>または<emphasis>regexp</emphasis>と略されることが多い)でさえ、気が遠く複雑に見えますが、OmegaTだけでなく、日常的に使用する他の多くのアプリケーションでも非常に役立ちます。</para>
 
@@ -86,10 +81,10 @@
     </varlistentry>
   </variablelist>
 
-  <section id="app.regex.four.rules">
-    <title id="app.regex.four.rules.title">4つのルール</title>
+  <section xml:id="app.regex.four.rules">
+    <title xml:id="app.regex.four.rules.title">4つのルール</title>
 
-    <para>正規表現は、スペース、タブ、改行など、画面に表示されない文字や印刷されない文字を含む文字列を検索するために使用できます。指定された式は、単語、フレーズ、またはその他の文字列に<emphasis>一致する</emphasis>か、<emphasis>一致しない<emphasis role="bold"></emphasis></emphasis>かのいずれかです。</para>
+    <para>正規表現は、スペース、タブ、改行など、画面に表示されない文字や印刷されない文字を含む文字列を検索するために使用できます。指定された式は、単語、フレーズ、またはその他の文字列に<emphasis>一致する</emphasis>か、<emphasis>一致しない<emphasis role="bold"/></emphasis>かのいずれかです。</para>
     
     <para>式のすべての文字は、一致を判断するときに関連します。</para>
     <para>正規表現では、多数の文字または文字の組み合わせに特別な意味があります。</para>
@@ -147,8 +142,8 @@
     </variablelist>
   </section>
 
-  <section id="app.regex.twelve.characters">
-    <title id="app.regex.twelve.characters.title">特別な12文字</title>
+  <section xml:id="app.regex.twelve.characters">
+    <title xml:id="app.regex.twelve.characters.title">特別な12文字</title>
   
     <para>The twelve special characters are the <emphasis>backslash</emphasis>
     <literal>\</literal>, the <emphasis>caret</emphasis> <literal>^</literal>,
@@ -332,7 +327,7 @@
                     <entry>
                       <para>「c」で始まり「t」で終わる4文字を含む組み合わせだが、複数の行になっている場合は一致しません。</para>
                       <para>What is the missing letter?</para>
-                        <simplelist>
+                        <simplelist type="vert">
                           <member><literal>c</literal></member>
                           <member><literal/></member>
                           <member><literal>t</literal></member>
@@ -364,7 +359,7 @@
                   <row>
                     <entry>一致</entry>
                     <entry>
-                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist>
+                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist type="vert">
                           <member>“An apple a day…”</member>
                           <member>“The apple of my eye…”</member>
                         </simplelist>
@@ -375,7 +370,7 @@
                   <row>
                     <entry>一致しない</entry>
                     <entry>
-                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist>
+                      <para>次のようなフレーズの最初の「An」または「The」：<simplelist type="vert">
                           <member>“A story called <emphasis>An Unsung
                           Hero</emphasis>.”</member>
                           <member>“They work for <emphasis>The Daily
@@ -410,7 +405,7 @@
                   <row>
                     <entry>一致</entry>
                     <entry>
-                      <para>次の「a」または「an」のいずれか:<simplelist>
+                      <para>次の「a」または「an」のいずれか:<simplelist type="vert">
                           <member>“I have a question.”</member>
                           <member>“I know an excellent doctor.”</member>
                         </simplelist>
@@ -423,7 +418,7 @@
                   <row>
                     <entry>一致しない</entry>
                     <entry>
-                      <para>&quot;a&quot;も&quot;an&quot;もありません:<simplelist>
+                      <para>"a"も"an"もありません:<simplelist type="vert">
                           <member>The indefinite article: “a” (or
                           “an”).</member>
                         </simplelist>
@@ -575,7 +570,7 @@
                     <entry>
                       <para>次のようなリストの各行の先頭にあるシーケンス番号(括弧を含む):</para>
 
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>1)Apples</member>
                         <member>2)Oranges</member>
                         <member>3)Pears</member>
@@ -589,7 +584,7 @@
                       <para>行の先頭以外にあるシーケンス番号。</para>
 
                       <para>Follow these steps:</para>
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>Step 1) Preparation</member>
                         <member>Step 2) …</member>
                       </simplelist>
@@ -680,8 +675,8 @@
       </variablelist>
   </section>
 
-  <section id="app.regex.types.of.expressions">
-    <title id="app.regex.types.of.expressions.title">たくさんの表現</title>
+  <section xml:id="app.regex.types.of.expressions">
+    <title xml:id="app.regex.types.of.expressions.title">たくさんの表現</title>
 
     <para>この項では、単純なものから複雑なものまで、さまざまなタイプの正規表現について説明します。</para>
       
@@ -689,12 +684,12 @@
       <para><literal>\</literal>で始まるすべての<emphasis>アルファベット</emphasis>文字は、<emphasis>文字自体ではなく、関連する特別な意味</emphasis>を表す式になることに注意してください。</para>
     </note>
 
-    <section id="app.regex.types.of.expressions.simple.expressions">
-      <title id="app.regex.types.of.expressions.simple.expressions.title">単純な式</title>
+    <section xml:id="app.regex.types.of.expressions.simple.expressions">
+      <title xml:id="app.regex.types.of.expressions.simple.expressions.title">単純な式</title>
       <para>最も単純な正規表現は、単に1つの文字、または<literal>\</literal>と1つの意味を持つ単位を構成する文字の組み合わせで構成されます。</para>
       
-      <table id="app.regex.characters">
-        <title id="app.regex.characters.title">文字</title>
+      <table xml:id="app.regex.characters">
+        <title xml:id="app.regex.characters.title">文字</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -739,13 +734,13 @@
       </table>
     </section>
 
-    <section id="app.regex.types.of.expressions.case">
-      <title id="app.regex.types.of.expressions.case.title">大文字/小文字</title>
+    <section xml:id="app.regex.types.of.expressions.case">
+      <title xml:id="app.regex.types.of.expressions.case.title">大文字/小文字</title>
 
       
       <para>通常のOmegaT検索は、デフォルトでは大文字と小文字が区別されません。オプション<link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/>を有効にしない限り、大文字と小文字の両方が一致します。これにより、検索式全体で大文字と小文字が区別されます。</para>
 
-      <para>これに対して、正規表現ではデフォルトで大文字と小文字が区別されます。&quot;omegat&quot;を正規表現で検索しても、&quot;OmegaT&quot;とは一致しません。ただし、正規表現には、式の中で大文字/小文字指定を制御するための特別な修飾子もあります。</para>
+      <para>これに対して、正規表現ではデフォルトで大文字と小文字が区別されます。"omegat"を正規表現で検索しても、"OmegaT"とは一致しません。ただし、正規表現には、式の中で大文字/小文字指定を制御するための特別な修飾子もあります。</para>
 
       <variablelist>
         <varlistentry>
@@ -762,11 +757,11 @@
         </varlistentry>
       </variablelist>
 	  
-      <para>これを利用して、検索時の大文字と小文字の区別を細かく制御できます。たとえば、&quot;omegat&quot;と&quot;OmegaT&quot;の出現箇所を検索し、&quot;OMEGAT&quot;の出現箇所は検索しないようにします。これを行うには、次の式を使用します:<literal>(?i)o</literal><literal>(?-i)mega</literal><literal>(?i)t</literal>。これは、大文字と小文字を区別しない「o」の後に大文字と小文字を区別する「mega」が続き、その後に大文字と小文字を区別しない「t」が続くことを表します。</para>
+      <para>これを利用して、検索時の大文字と小文字の区別を細かく制御できます。たとえば、"omegat"と"OmegaT"の出現箇所を検索し、"OMEGAT"の出現箇所は検索しないようにします。これを行うには、次の式を使用します:<literal>(?i)o</literal><literal>(?-i)mega</literal><literal>(?i)t</literal>。これは、大文字と小文字を区別しない「o」の後に大文字と小文字を区別する「mega」が続き、その後に大文字と小文字を区別しない「t」が続くことを表します。</para>
     </section>
 
-    <section id="app.regex.types.of.expressions.classes">
-      <title id="app.regex.types.of.expressions.classes.title">文字クラス</title>
+    <section xml:id="app.regex.types.of.expressions.classes">
+      <title xml:id="app.regex.types.of.expressions.classes.title">文字クラス</title>
 
       <para>正規表現を使用すると、<emphasis>文字クラス</emphasis>と呼ばれる文字集合を作成できます。検索をすると、文字集合内の任意の文字が一致します。</para>
 
@@ -778,11 +773,11 @@
 		<para>4つの文字クラスの特殊文字の前にバックスラッシュを付けると、通常の文字として検索できます。また、キャレット、閉じ括弧、およびハイフンを特別な意味を持たない位置に置くことで、キャレット、閉じ括弧、およびハイフン自体を検索することもできます。ただし、キャレットの場合は開き括弧の直後、閉じ括弧の場合はいずれかの開き括弧またはそれに続くキャレットの直後、ハイフンの場合は開き括弧の直後または閉じ括弧の直前を除きます。</para>
       </note>
 
-	  <para>頻繁に使用される多くのセットには、バックスラッシュとそれに続くアルファベットの文字で構成される省略形があります。たとえば、<literal>\d</literal>は<literal>[0-9]</literal>の省略形であり、0～9の任意の数字に一致します。多くの場合、対応する大文字の後がクラスを否定するために使用されます:<literal>\D</literal>は、数字ではない<emphasis role="bold"></emphasis>任意の文字に一致します。</para>
+	  <para>頻繁に使用される多くのセットには、バックスラッシュとそれに続くアルファベットの文字で構成される省略形があります。たとえば、<literal>\d</literal>は<literal>[0-9]</literal>の省略形であり、0～9の任意の数字に一致します。多くの場合、対応する大文字の後がクラスを否定するために使用されます:<literal>\D</literal>は、数字ではない<emphasis role="bold"/>任意の文字に一致します。</para>
       <para>次の表に、その他のさまざまな例を示します。これらの文字クラスは、省略形を形成するために使用される実際の文字だけを表すことはありません。</para>
       
-      <table id="app.regex.classes">
-        <title id="app.regex.classes.title">文字クラスの例</title>
+      <table xml:id="app.regex.classes">
+        <title xml:id="app.regex.classes.title">文字クラスの例</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -858,10 +853,10 @@
       
       <para>正規表現は英数字に限定されません。これらはUnicode文字セット全体を対象としています。Unicodeブロック、スクリプトおよびカテゴリを使用して、英数字の範囲外の文字クラスを指定します。いくつかの例を次の表に示します。</para>
 
-      <para>Unicode正規表現の詳細については、<ulink url="https://www.regular-expressions.info/unicode.html">Unicode正規表現</ulink>も参照してください。</para>
+      <para>Unicode正規表現の詳細については、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info/unicode.html">Unicode正規表現</link>も参照してください。</para>
 
-      <table id="app.regex.unicode.blocks">
-        <title id="app.regex.unicode.blocks.title">Unicodeブロック、スクリプト、およびカテゴリ</title>
+      <table xml:id="app.regex.unicode.blocks">
+        <title xml:id="app.regex.unicode.blocks.title">Unicodeブロック、スクリプト、およびカテゴリ</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -876,7 +871,7 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>ギリシャ語ブロック(<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicodeブロック</ulink>)の文字</para>
+                <para>ギリシャ語ブロック(<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Blocks">Unicodeブロック</link>)の文字</para>
 				
                 <para><literal>\P{InGreek}</literal>は、ギリシャ語ブロックに<emphasis role="bold">含まれない</emphasis>任意の文字です。</para>
               </entry>
@@ -885,21 +880,21 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>CJK言語(<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicodeスクリプト</ulink>)の表意文字(<emphasis>Han</emphasis>/<emphasis>漢字</emphasis>/<emphasis>hanja</emphasis>)</para>
+                <para>CJK言語(<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Script_Property">Unicodeスクリプト</link>)の表意文字(<emphasis>Han</emphasis>/<emphasis>漢字</emphasis>/<emphasis>hanja</emphasis>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Lu}</literal></entry>
               <entry>
-                <para>大文字(<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリ</ulink>)</para>
+                <para>大文字(<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリ</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Sc}</literal></entry>
               <entry>
-                <para>通貨記号、<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリでもあります</ulink>。</para>
+                <para>通貨記号、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">Unicodeカテゴリでもあります</link>。</para>
               </entry>
             </row>
           </tbody>
@@ -907,13 +902,13 @@
       </table>
     </section>
 
-    <section id="app.regex.more.advanced.expressions">
-      <title id="app.regex.more.advanced.expressions.title">高度な式</title>
+    <section xml:id="app.regex.more.advanced.expressions">
+      <title xml:id="app.regex.more.advanced.expressions.title">高度な式</title>
       
       <para>式の中には、文字ではなく位置を指定するものもあります。これらは、テキスト内で一致を検索する場所を示しますが、その一致には文字は含まれません。次の表に、一般的な例をいくつか示します。詳細については、<link linkend="app.regex.tools" endterm="app.regex.tools.title"/>項のWebページを参照してください。</para>
 
-      <table id="app.regex.boundary.matchers">
-        <title id="app.regex.boundary.matchers.title">位置を示す式</title>
+      <table xml:id="app.regex.boundary.matchers">
+        <title xml:id="app.regex.boundary.matchers.title">位置を示す式</title>
       
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -995,13 +990,13 @@
     </section>  
   </section>
 
-  <section id="app.regex.more.examples">
-    <title id="app.regex.more.examples.title">その他の例</title>
+  <section xml:id="app.regex.more.examples">
+    <title xml:id="app.regex.more.examples.title">その他の例</title>
 
     <para>このセクションでは、上記のさまざまな式を組み合わせて、OmegaTで強力な検索を実行する方法を示す例をいくつか示します。</para>
     
-    <table id="regex.examples">
-      <title id="regex.examples.title">上記の式を使用する正規表現の例</title>
+    <table xml:id="regex.examples">
+      <title xml:id="regex.examples.title">上記の式を使用する正規表現の例</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1022,7 +1017,7 @@
           </row>
 
           <row>
-            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>コンマで始まり、その後に空白文字が続き、1つ以上の単語(引用符で囲まれた単語、短縮形、およびファイル拡張子の付いたファイル名を含む)を含み、コンマまたはピリオドで終わる句を検索します。</para>
             </entry>
@@ -1097,30 +1092,30 @@
     </table>
   </section>
 
-  <section id="app.regex.tools">
-    <title id="app.regex.tools.title">参考資料</title>
+  <section xml:id="app.regex.tools">
+    <title xml:id="app.regex.tools.title">参考資料</title>
 
     <para>OmegaTは正規表現に派手な色付けをしませんが、OmegaTは一致結果に色を付けるので、<link linkend="windows.text.search" endterm="windows.text.search.title"/>ウィンドウを使って多くの練習をすることができます。</para>
     
     <para>いくつかの追加リソースを以下に示します。</para>
 
     <para>Javaテクニカル・リファレンスは、標準的なリファレンスとして役立ちます。<variablelist>
-        <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java Regexのドキュメント</ulink></term>
+        <varlistentry xml:id="app.regex.java">
+          <term xml:id="app.regex.java.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java Regexのドキュメント</link></term>
           <listitem>
             <para>Javaで使用される正規表現の公式リファレンスです。</para>
           </listitem>
         </varlistentry>
       </variablelist>正規表現の使用についてさらに詳しく知りたい場合は、次の2つのWebサイトが非常に便利です。<variablelist>
-        <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regex101">
+          <term xml:id="app.regex.tools.regex101.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://regex101.com">https://regex101.com</link></term>
           <listitem>
             <para>検索したいテキストとテストしたい正規表現を入力できるオンライン正規表現マッチングツール。</para>
           </listitem>
         </varlistentry>
 
-        <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regular.expression.info">
+          <term xml:id="app.regex.tools.regular.expression.info.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info">https://www.regular-expressions.info</link></term>
           <listitem>
             <para>Web上で最も徹底した正規表現のチュートリアルおよびリファレンスの1つ。</para>
           </listitem>

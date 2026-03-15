@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Eines</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.tools">
+  <title xml:id="menus.tools.title"><guimenu>Eines</guimenu></title>
 
   <para>Aquest menú us dona accés a una sèrie d'eines, incloent-hi un control de qualitat, informes de coincidències, un alineador i scripts.</para>
 
-  <example id="example.check.issues">
-	<title id="example.check.issues.title">Exemple de descripció d'una drecera</title>
+  <example xml:id="example.check.issues">
+	<title xml:id="example.check.issues.title">Exemple de descripció d'una drecera</title>
 	<para>Windows i Linux: <keycombo><keycap>Control</keycap><keycap>Maj</keycap><keycap>V</keycap></keycombo></para>
 
 	<para>macOS: <keycombo><keycap>Maj</keycap><keycap>Ordre</keycap><keycap>V</keycap></keycombo></para>
@@ -15,8 +14,8 @@
   </example>
 
   <variablelist>
-    <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Comprova si hi ha errors...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+    <varlistentry xml:id="menus.tools.check.issues">
+      <term xml:id="menus.tools.check.issues.title"><guimenuitem>Comprova si hi ha errors...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>Aquesta eina de control de qualitat duu a terme totes les comprovacions automàtiques alhora i mostra els resultats en una finestra.</para>
 
@@ -32,7 +31,7 @@
           </listitem>
 
           <listitem>
-            <para><guilabel>Errors ortogràfics</guilabel> (opcional): detecta els errors ortogràfics. Funciona quan hi ha un mòdul de llengua compatible o un diccionari personalitzat local de l'usuari per a la llengua de destinació. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+            <para><guilabel>Errors ortogràfics</guilabel> (opcional): detecta els errors ortogràfics. Només funciona si s'ha instal·lat un diccionari ortogràfic. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
           </listitem>
 
           <listitem>
@@ -67,15 +66,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Comprova si hi ha errors en el fitxer actual</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.check.issues.for.current.document">
+      <term xml:id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Comprova si hi ha errors en el fitxer actual</guimenuitem></term>
       <listitem>
         <para>Igual que l'opció anterior, però només per al fitxer que es mostra actualment en la subfinestra «Editor».</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.statistics">
-      <term id="menus.tools.statistics.title"><guimenuitem>Estadístiques</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.statistics">
+      <term xml:id="menus.tools.statistics.title"><guimenuitem>Estadístiques</guimenuitem></term>
       <listitem>
         <para>Obre una finestra nova i mostra les estadístiques del projecte, com el recompte total de paraules o de segments del projecte, i els totals per a cada fitxer del projecte.</para>
 
@@ -105,8 +104,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Estadístiques de coincidències</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics">
+      <term xml:id="menus.tools.match.statistics.title"><guimenuitem>Estadístiques de coincidències</guimenuitem></term>
       <listitem>
         <para>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters.</para>
 
@@ -114,8 +113,8 @@
       </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Estadístiques de coincidències per fitxer</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.match.statistics.per.file">
+      <term xml:id="menus.tools.match.statistics.per.file.title"><guimenuitem>Estadístiques de coincidències per fitxer</guimenuitem></term>
       <listitem>
         <para>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters, per a cada fitxer del projecte.</para>
 
@@ -123,8 +122,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Alinea fitxers...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.align.files">
+      <term xml:id="menus.tools.align.files.title"><guimenuitem>Alinea fitxers...</guimenuitem></term>
       <listitem>
         <para>Seleccioneu els dos fitxers que vulgueu alinear (el fitxer d'origen i la traducció) i feu clic en <guibutton>D'acord</guibutton> per a obrir la finestra <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
 
@@ -133,8 +132,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.scripting">
-      <term id="menus.tools.scripting.title"><guimenuitem>Scripts...</guimenuitem></term>
+    <varlistentry xml:id="menus.tools.scripting">
+      <term xml:id="menus.tools.scripting.title"><guimenuitem>Scripts...</guimenuitem></term>
       <listitem>
         <para>Obre la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/>, que us permet definir la ubicació on s'emmagatzemen els scripts, escriure i executar scripts i assignar-los una drecera.</para>
 		<para>La llista sota aquest element mostra 12 ranures possibles per a scripts. En fer clic en una ranura assignada, s'inicia l'script assignat a la ranura.</para>
@@ -159,8 +158,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">Ordres de cerca externa</term>
+    <varlistentry xml:id="menus.tools.external.search.commands">
+      <term xml:id="menus.tools.external.search.commands.title">Ordres de cerca externa</term>
       <listitem>
         <para>Si heu definit cerques externes en les preferències de <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, s'indiquen i hi podeu accedir aquí.</para>
       </listitem>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.glossaries">
-  <title id="app.glossaries.title">用語集</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
+  <title xml:id="app.glossaries.title">用語集</title>
 
   <para>用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存されている用語を集めたファイルです。</para>
 
@@ -28,13 +27,13 @@
 
 		  <para>別のエンコーディングを指定する場合は、次の形式の「magic」コメントを追加します。</para>
 
-		  <simplelist>
+		  <simplelist type="vert">
             <member>
               <code># -*- coding: &lt;charset&gt; -*-</code>,
             </member>
           </simplelist>
 		  
-          <para>ここで、<parameter>&lt;charset&gt;</parameter>は通常、<ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>にリストされている文字エンコーディングの1つになります。</para>
+          <para>ここで、<parameter>&lt;charset&gt;</parameter>は通常、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</link>にリストされている文字エンコーディングの1つになります。</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -51,8 +50,8 @@
 	<para>用語集に変更を加えるとOmegaTは変更を自動的に考慮して、一致する用語を<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示します。</para>
   </note>
 
-  <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">用語集フォルダー</title>
+  <section xml:id="glossaries.glossary.folder">
+    <title xml:id="glossaries.glossary.folder.title">用語集フォルダー</title>
 
     <para>デフォルトでは、各々のプロジェクトフォルダーには、追加書き込み可能な用語集と参照用語集を保存するための<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダがあります。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> を確認してください。</para>
 
@@ -62,16 +61,16 @@
     <para><link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>プロジェクト設定で、参照用語集フォルダーの場所を設定できます。プロジェクトのフォルダーの外部に設定して、他のプロジェクトで使用したり、特定のサブフォルダで使用することもできます。</para>
   </section>
 
-  <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">プロジェクトの用語集</title>
+  <section xml:id="glossaries.default.glossary">
+    <title xml:id="glossaries.default.glossary.title">プロジェクトの用語集</title>
 
     <para>デフォルトで、書き込み可能なプロジェクト用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあり、<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>と呼ばれています。</para>
 
     <para><link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>ダイアログで名前と場所を変更できますが、<filename>.txt</filename>または<filename>.utf8</filename>拡張子を付けて、<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーまたはそのサブフォルダーに保存する必要があります。</para>
   </section>
 
-  <section id="glossaries.fileformat">
-    <title id="glossaries.fileformat.title">ファイル形式</title>
+  <section xml:id="glossaries.fileformat">
+    <title xml:id="glossaries.fileformat.title">ファイル形式</title>
 
     <para>用語集ファイルは単純なテキストファイルで、３つの列（カラム）からなるリストの形をしています。最初の列は原文で、それ以降はオプションで、２番目の列は訳文の用語、3番目はコメントが入ります。</para>
 
@@ -81,7 +80,7 @@
 
     <para>参照用用語集の読み取りに使用されるエンコーディングは、ファイル拡張子によって異なります。</para>
 
-    <table id="glossary.extensions">
+    <table xml:id="glossary.extensions">
       <title>フォーマット、拡張、および予想されるエンコーディング</title>
 	  <tgroup cols="3">
       <thead>

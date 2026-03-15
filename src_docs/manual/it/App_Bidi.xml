@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.bidi">
-  <title id="app.bidi.title">Caratteri di formattazione direzionale</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.bidi">
+  <title xml:id="app.bidi.title">Caratteri di formattazione direzionale</title>
 
   <para>I caratteri di controllo Bidi (bidirezionali) sono disponibili da <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Possono essere utilizzati per:</para>
 
@@ -16,8 +15,8 @@
   
   <para>Questi caratteri di controllo cambiano la direzionalità ma sono invisibili. Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> per attivare un'indicazione visiva della loro posizione.</para>
 
-  <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">Marcatori</title>
+  <section xml:id="app.bidi.marks">
+	<title xml:id="app.bidi.marks.title">Marcatori</title>
 
 	<para>Per cambiare la posizione di un carattere avente direzionalità debole o neutrale (come i simboli di punteggiatura), inserire un carattere LRM (da sinistra a destra) o RLM (da destra a sinistra) dopo il carattere, in base alla direzionalità del segmento:</para>
 
@@ -31,8 +30,8 @@
 	</itemizedlist>
   </section>
 
-  <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">Inclusioni</title>
+  <section xml:id="app.bidi.embeddings">
+	<title xml:id="app.bidi.embeddings.title">Inclusioni</title>
 
 	<para>Le inclusioni possono essere utilizzate per creare una sezione di testo più lunga (contenente diverse parole e spazi) che deve scorrere nella direzione opposta a quella del segmento. Sono possibili due tipi di inclusioni, a seconda della direzionalità del segmento:</para>
 

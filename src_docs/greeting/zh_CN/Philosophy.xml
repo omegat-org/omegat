@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="zh_CN" id="first.steps">
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="zh_CN">
   <section>
-	<title id="freedoms">自由</title>
-	<para>OmegaT 是针对专业译者的自由计算机辅助翻译（CAT）解决方案。它是根据 <emphasis>GNU 通用公共许可证 3.0 版</emphasis>的条款分发的。参见 <guimenu>&gt; 帮助</guimenu> <guimenu>&gt; 关于</guimenu>。此许可证给予你以下自由：<itemizedlist id="freedoms.list">
+	<title>自由</title>
+	<para>OmegaT 是针对专业译者的自由计算机辅助翻译（CAT）解决方案。它是根据 <emphasis>GNU 通用公共许可证 3.0 版</emphasis>的条款分发的。参见 <guimenu>&gt; 帮助</guimenu> <guimenu>&gt; 关于</guimenu>。此许可证给予你以下自由：<itemizedlist>
 	  <listitem>
 		<para>出于任何目的，随心所欲地运行 OmegaT 的自由。</para>
 	  </listitem>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>整合ツール</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.aligner">
+  <title xml:id="windows.aligner.title"><guilabel>整合ツール</guilabel></title>
 
   <para><link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/>を使用してこのツールにアクセスします。</para>
 
@@ -56,8 +55,8 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">設定</title>
+  <section xml:id="windows.aligner.adjust">
+    <title xml:id="windows.aligner.adjust.title">設定</title>
 
     <para>このステップでは、ウィンドウの最下部に、さまざまなパラメータや設定オプションがあり、初期の整合がより良くなるように変更することができます。また、整合の<guilabel>平均スコア</guilabel>の結果も表示されます。経験則として、スコアが低いほど、整合はより正確になります。調整値を変更すると、すぐに整合方法が再計算されるため、さまざまな組み合わせをすばやく試して最適な結果を得ることができます。</para>
 
@@ -152,8 +151,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">ハイライト</term>
+      <varlistentry xml:id="windows.aligner.adjust.highlight">
+        <term xml:id="windows.aligner.adjust.highlight.title">ハイライト</term>
         <listitem>
 		  <para>ハイライトを使用しないときは、チェックボックスをオフにします。</para>
 
@@ -187,7 +186,7 @@
       <varlistentry>
         <term>パターン...</term>
         <listitem>
-          <para>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<literal>\d+</literal>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<literal></literal>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</para>
+          <para>この設定では、原文分節と訳文分節の文章を色付け表示する正規表現のパターンを定義できます。整合ツールは、デフォルトでは<literal>\d+</literal>を使用して数値を色付け表示します。強調表示すると便利な他の要素がテキストに含まれている場合は、<literal/>記号を使用して各要素を区切り、それらの要素を含むように正規表現を修正します。</para>
         </listitem>
       </varlistentry>      
     </variablelist>
@@ -219,8 +218,8 @@
     <para>この手順の結果に問題がなければ、<guibutton>続行</guibutton>ボタンをクリックして次の手順に進みます。</para>
   </section>
 
-  <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">訂正</title>
+  <section xml:id="windows.aligner.manual.corrections">
+    <title xml:id="windows.aligner.manual.corrections.title">訂正</title>
 
     <para>通常の場合、最初の自動整合プロセスの後に手動調整が必要です。分節を上下に移動して他方の言語の正しい分節と対応関係を整合する作業と、分節を分割または結合する作業を行なっていきます。整合ツールでは、分節の内容を編集することもできます。これは、分節のスペルミスなどのエラーに気付いた場合に便利です。</para>
 

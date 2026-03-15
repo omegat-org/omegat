@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.bidi">
-  <title id="app.bidi.title">方向制御用の書式設定文字</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.bidi">
+  <title xml:id="app.bidi.title">方向制御用の書式設定文字</title>
 
   <para>Bidi制御文字は<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>から使用できます。これらは次の目的で使用できます。</para>
 
@@ -16,8 +15,8 @@
   
   <para>これらの制御文字は綴り方向を変えますが、見えません。<link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/>を使用すると、その位置を視覚的に表示します。</para>
 
-  <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">マーク</title>
+  <section xml:id="app.bidi.marks">
+	<title xml:id="app.bidi.marks.title">マーク</title>
 
 	<para>(句読点記号のような)弱いまたは中立的な方向性を持つ文字の位置を変更するには、その分節の方向に応じて、文字の後にLRMまたはRLM文字を挿入します。</para>
 
@@ -31,8 +30,8 @@
 	</itemizedlist>
   </section>
 
-  <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">埋め込み</title>
+  <section xml:id="app.bidi.embeddings">
+	<title xml:id="app.bidi.embeddings.title">埋め込み</title>
 
 	<para>埋め込みを使用して、分節の綴り方向と反対に綴る必要がある(いくつかの単語とスペースを含むような)長い文章を作成することができます。分節の綴り方向に応じて、次の2種類の埋め込みを作成できます。</para>
 

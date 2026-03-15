@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.project">
-  <title id="menus.project.title"><guimenu>プロジェクト</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.project">
+  <title xml:id="menus.project.title"><guimenu>プロジェクト</guimenu></title>
   <para>このメニューでは、プロジェクト管理コマンドにアクセスできます。</para>
 
-  <example id="example.new.project.shortcut">
-	<title id="example.new.project.shortcut.title">ショートカットの説明の例</title>
+  <example xml:id="example.new.project.shortcut">
+	<title xml:id="example.new.project.shortcut.title">ショートカットの説明の例</title>
 	<para>Windows と Linuxでは: <keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo>
 	</para>
 
@@ -17,38 +16,38 @@
   </example>
   
   <variablelist>
-    <varlistentry id="menus.project.new">
-      <term id="menus.project.new.title"><guimenuitem>新規作成...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
+    <varlistentry xml:id="menus.project.new">
+      <term xml:id="menus.project.new.title"><guimenuitem>新規作成...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo>
 	  </term>
       <listitem>
         <para>新しいプロジェクトを作成し、開きます。詳細は<link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/>項をご覧ください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.team.project">
-      <term id="menus.project.download.team.project.title"><guimenuitem>チームプロジェクトをダウンロード...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.download.team.project">
+      <term xml:id="menus.project.download.team.project.title"><guimenuitem>チームプロジェクトをダウンロード...</guimenuitem></term>
       <listitem>
         <para>リモートの OmegaT プロジェクトのローカルコピーを作成します。詳細については、 <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/>を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open">
-      <term id="menus.project.open.title"><guimenuitem>開く...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.open">
+      <term xml:id="menus.project.open.title"><guimenuitem>開く...</guimenuitem> <keycombo><keycap>C</keycap><keycap>O</keycap></keycombo></term>
       <listitem>
         <para>すでに作成したプロジェクトを開きます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open.recent">
-      <term id="menus.project.open.recent.title"><guimenuitem>最近使用したプロジェクト</guimenuitem></term>
+    <varlistentry xml:id="menus.project.open.recent">
+      <term xml:id="menus.project.open.recent.title"><guimenuitem>最近使用したプロジェクト</guimenuitem></term>
       <listitem>
         <para>最近使用したプロジェクト（デフォルト設定では10こ まで）にアクセスできます。選択肢のいずれかをクリックすると、現在のプロジェクトを保存して閉じ、選択したプロジェクトを開きます。</para>
         <para><guimenuitem>メニューのクリア</guimenuitem>を使用すると、最近のプロジェクトの一覧を削除します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.reload">
-      <term id="menus.project.reload.title"><guimenuitem>再読み込み</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.reload">
+      <term xml:id="menus.project.reload.title"><guimenuitem>再読み込み</guimenuitem> <keycombo><keycap>F5</keycap></keycombo></term>
       <listitem>
         <para>プロジェクトを再ロードして、ソースファイルとプロジェクト設定の外部変更を反映します。</para>
         <note>
@@ -58,53 +57,53 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.close">
-      <term id="menus.project.close.title"><guimenuitem>閉じる</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.close">
+      <term xml:id="menus.project.close.title"><guimenuitem>閉じる</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>W</keycap></keycombo></term>
       <listitem>
         <para>それまでの翻訳内容の翻訳メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を保存し、プロジェクトを閉じます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.save">
-      <term id="menus.project.save.title"><guimenuitem>保存</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.save">
+      <term xml:id="menus.project.save.title"><guimenuitem>保存</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
         <para>プロジェクトの翻訳メモリ(<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)を保存し、チームプロジェクトを同期します。</para>
 		<para>OmegaT はデフォルトで 10 分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。詳細は<link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/>の設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.copy.files.to.source.folder">
-      <term id="menus.project.copy.files.to.source.folder.title"><guimenuitem>ファイルを追加...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.copy.files.to.source.folder">
+      <term xml:id="menus.project.copy.files.to.source.folder.title"><guimenuitem>ファイルを追加...</guimenuitem></term>
       <listitem>
         <para>選択したファイルをプロジェクトの <link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>MediaWiki からの原文ファイル追加</guimenuitem></term>
+    <varlistentry xml:id="menus.project.download.mediawiki.page">
+      <term xml:id="menus.project.download.mediawiki.page.title"><guimenuitem>MediaWiki からの原文ファイル追加</guimenuitem></term>
       <listitem>
 		<para>貼り付けしたいMediawikiページのURLを翻訳できるダイアログを開きます。Wikiページのソースデータは、<filename>.utf8</filename>拡張子を持つテキストファイルとして、<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにコピーされます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.source.files">
-      <term id="menus.project.commit.source.files.title"><guimenuitem> 原文ファイルをコミット</guimenuitem></term>
+    <varlistentry xml:id="menus.project.commit.source.files">
+      <term xml:id="menus.project.commit.source.files.title"><guimenuitem> 原文ファイルをコミット</guimenuitem></term>
       <listitem>
         <warning><para>この機能は、チームプロジェクトに固有です。<emphasis>チームのプロジェクト管理者のみが使用できます</emphasis>。詳細は、 <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> のハウツー項を参照してください。</para></warning>
         <para>ローカルで追加または変更されたファイルを<filename class="directory">ソース</filename>フォルダーからチームプロジェクトリポジトリにアップロードします。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.commit.target.files">
-      <term id="menus.project.commit.target.files.title"><guimenuitem>訳文ファイルをコミット</guimenuitem></term>
+    <varlistentry xml:id="menus.project.commit.target.files">
+      <term xml:id="menus.project.commit.target.files.title"><guimenuitem>訳文ファイルをコミット</guimenuitem></term>
       <listitem>
         <warning><para>この機能は、チームプロジェクトに固有です。<emphasis>チームのプロジェクト管理者にそのように指示されたときのみ使用できます</emphasis>。詳細は、 <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> のハウツー項を参照してください。</para></warning>
         <para>ローカルに作成された翻訳済みファイルを<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーからチームプロジェクトリポジトリにアップロードします。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.translated.documents">
-      <term id="menus.project.create.translated.documents.title"><guimenuitem>訳文ファイルの生成</guimenuitem><keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.create.translated.documents">
+      <term xml:id="menus.project.create.translated.documents.title"><guimenuitem>訳文ファイルの生成</guimenuitem><keycombo><keycap>C</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>翻訳結果に基づいて訳文ファイルを作成します。訳文ファイルは、<link linkend="project.folder.target" endterm="project.folder.target.title"/> フォルダーに保存されます。</para>
 		<note><para>タグに問題がある訳文ファイルの作成をブロックすることも可能です。詳細は<link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>の設定を参照してください。</para></note>
@@ -112,32 +111,32 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.current.translated.document">
-      <term id="menus.project.create.current.translated.document.title"><guimenuitem>現在の訳文ファイルを作成</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.create.current.translated.document">
+      <term xml:id="menus.project.create.current.translated.document.title"><guimenuitem>現在の訳文ファイルを作成</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>翻訳中の現在の文書に対応する訳文ファイルを生成します。結果のファイルは<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーに配置されます。</para>
 		<para>現在の訳文ファイルを作成するたびに、OmegaTはプロジェクトを保存し(上記の<link linkend="menus.project.save" endterm="menus.project.save.title"/>メニュー項目を参照)、現在の原文ファイルセットの翻訳済の分節を含む翻訳メモリを作成します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.open.med.project">
-      <term id="menus.project.open.med.project.title"><guimenuitem>MED プロジェクトを開く...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.open.med.project">
+      <term xml:id="menus.project.open.med.project.title"><guimenuitem>MED プロジェクトを開く...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>EU翻訳総局によって定義されたMED形式のプロジェクトパッケージを開きます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.create.med.project">
-      <term id="menus.project.create.med.project.title"><guimenuitem>MEDプロジェクトを作成...</guimenuitem></term>
+    <varlistentry xml:id="menus.project.create.med.project">
+      <term xml:id="menus.project.create.med.project.title"><guimenuitem>MEDプロジェクトを作成...</guimenuitem></term>
 	  <!-- TODO add link to a format description -->
       <listitem>
         <para>現在のプロジェクトをMEDパッケージに変換します。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.properties">
-      <term id="menus.project.properties.title"><guimenuitem>プロジェクト設定...</guimenuitem><keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.properties">
+      <term xml:id="menus.project.properties.title"><guimenuitem>プロジェクト設定...</guimenuitem><keycombo><keycap>C</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
         <para>プロジェクトの言語や使用フォルダーを変更するため<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>ダイアログを表示します。</para>
 		<para>
@@ -145,8 +144,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.source.files.list">
-      <term id="menus.project.source.files.list.title"><guimenuitem>原文ファイル...</guimenuitem><keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.source.files.list">
+      <term xml:id="menus.project.source.files.list.title"><guimenuitem>原文ファイル...</guimenuitem><keycombo><keycap>C</keycap><keycap>L</keycap></keycombo></term>
       <listitem>
         <para>新しい<link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>ウィンドウを開きます。</para>
 		<para>
@@ -154,8 +153,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.access.project.contents">
-      <term id="menus.project.access.project.contents.title"><guisubmenu>プロジェクト構成物へのアクセス</guisubmenu></term>
+    <varlistentry xml:id="menus.project.access.project.contents">
+      <term xml:id="menus.project.access.project.contents.title"><guisubmenu>プロジェクト構成物へのアクセス</guisubmenu></term>
       <listitem>
         <para>プロジェクトフォルダーにアクセスできます。詳細については-<link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>を参照してください。</para>
         <para>また、メニュー項目から、作業中の原文ファイル、訳文ファイル、および書き込み可能な用語集を直接開くことができるメニュー項目も用意されています。これらのファイルは、OS において選択されたプログラムによって開かれます。ファイルが存在しない場合、オプションはグレー表示されます。</para>
@@ -240,15 +239,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.restart">
-      <term id="menus.project.restart.title"><guimenuitem>再起動</guimenuitem></term>
+    <varlistentry xml:id="menus.project.restart">
+      <term xml:id="menus.project.restart.title"><guimenuitem>再起動</guimenuitem></term>
       <listitem>
         <para>プロジェクトを保存し OmegaT を終了します。プロジェクトをまだ保存していない場合は、本当に終了するかどうかを確認するメッセージが表示されます。</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.project.quit">
-      <term id="menus.project.quit.title"><guimenuitem>終了</guimenuitem><keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
+    <varlistentry xml:id="menus.project.quit">
+      <term xml:id="menus.project.quit.title"><guimenuitem>終了</guimenuitem><keycombo><keycap>C</keycap><keycap>Q</keycap></keycombo></term>
       <listitem>
         <para>プロジェクトを保存し OmegaT を終了します。プロジェクトをまだ保存していない場合は、本当に終了するかどうかを確認するメッセージが表示されます。</para>
 

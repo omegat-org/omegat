@@ -1,79 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.view">
-  <title id="menus.view.title"><guimenu>Affichage</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.view">
+  <title xml:id="menus.view.title"><guimenu>Affichage</guimenu></title>
 
   <para>Ce menu vous permet de sélectionner les informations affichées par OmegaT.</para>
 
   <para>Toutes les couleurs indiquées dans les descriptions peuvent être modifiées dans les préférences de <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
-    <varlistentry id="menus.view.mark.translated.segments">
-      <term id="menus.view.mark.translated.segments.title"><guimenuitem>Surligner les segments traduits</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.translated.segments">
+      <term xml:id="menus.view.mark.translated.segments.title"><guimenuitem>Surligner les segments traduits</guimenuitem></term>
       <listitem>
         <para>Surligne les segments déjà traduits en jaune.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.untranslated.segments">
-      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Surligner les segments non traduits</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.untranslated.segments">
+      <term xml:id="menus.view.mark.untranslated.segments.title"><guimenuitem>Surligner les segments non traduits</guimenuitem></term>
       <listitem>
         <para>Surligne les segments non traduits en violet.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.paragraph.delimitations">
-      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Afficher les délimitations de paragraphes</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.paragraph.delimitations">
+      <term xml:id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Afficher les délimitations de paragraphes</guimenuitem></term>
       <listitem>
         <para>Les différents paragraphes du document source sont séparés visuellement. Vous pouvez modifier la forme de la délimitation de paragraphe dans le paramètre <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.display.source.segments">
-      <term id="menus.view.display.source.segments.title"><guimenuitem>Afficher les segments sources</guimenuitem></term>
+    <varlistentry xml:id="menus.view.display.source.segments">
+      <term xml:id="menus.view.display.source.segments.title"><guimenuitem>Afficher les segments sources</guimenuitem></term>
       <listitem>
         <para>Affiche tous les segments source et les surligne en vert. Par défaut, seul le segment source du segment actuel est affiché.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.non.unique.segments">
-      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Colorer les segments répétés</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.non.unique.segments">
+      <term xml:id="menus.view.mark.non.unique.segments.title"><guimenuitem>Colorer les segments répétés</guimenuitem></term>
       <listitem>
         <para>Colore les segments répétés en gris pâle.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.segments.with.notes">
-      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Surligner les segments avec notes</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.segments.with.notes">
+      <term xml:id="menus.view.mark.segments.with.notes.title"><guimenuitem>Surligner les segments avec notes</guimenuitem></term>
       <listitem>
         <para>Surligne les segments qui contiennent une note en cyan. Cette fonction à la priorité sur les fonctions <guimenuitem>Surligner les segments traduits</guimenuitem> et <guimenuitem>Surligner les segments non traduits</guimenuitem>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.non.breakable.space">
-      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Afficher les espaces insécables</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.non.breakable.space">
+      <term xml:id="menus.view.mark.non.breakable.space.title"><guimenuitem>Afficher les espaces insécables</guimenuitem></term>
       <listitem>
         <para>Affiche les espaces insécables avec un fond gris.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.white.space">
-      <term id="menus.view.mark.white.space.title"><guimenuitem>Afficher les caractères d’espacement</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.white.space">
+      <term xml:id="menus.view.mark.white.space.title"><guimenuitem>Afficher les caractères d’espacement</guimenuitem></term>
       <listitem>
         <para>Affiche les caractères d’espacement avec un petit point.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
-      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Afficher les caractères de contrôle Bidi</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term xml:id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Afficher les caractères de contrôle Bidi</guimenuitem></term>
       <listitem>
-        <para>Affiche les caractères de formatage directionnel Unicode. Voir <ulink url="https://www.unicode.org/reports/tr9/">Algorithme bidirectionnel Unicode</ulink> pour en savoir plus.</para>
+        <para>Affiche les caractères de formatage directionnel Unicode. Voir <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.unicode.org/reports/tr9/">Algorithme bidirectionnel Unicode</link> pour en savoir plus.</para>
 		<para>Utilisez la fonction <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> pour insérer une sélection de caractères directement depuis l’interface d’OmegaT. Voir <link linkend="app.bidi" endterm="app.bidi.title"/> pour en savoir plus.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Surligner les segments autotraduits</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.auto.populated.segments">
+      <term xml:id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Surligner les segments autotraduits</guimenuitem></term>
       <listitem>
         <para>Surligne les segments traduits automatiquement en différentes couleurs.</para>
 
@@ -81,22 +80,22 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.glossary.matches">
-      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances de glossaire</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.glossary.matches">
+      <term xml:id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances de glossaire</guimenuitem></term>
       <listitem>
         <para>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré à la position du curseur dans le texte cible.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.mark.language.checker">
-      <term id="menus.view.mark.language.checker.title"><guimenuitem>Souligner les problèmes du vérificateur linguistique</guimenuitem></term>
+    <varlistentry xml:id="menus.view.mark.language.checker">
+      <term xml:id="menus.view.mark.language.checker.title"><guimenuitem>Souligner les problèmes du vérificateur linguistique</guimenuitem></term>
       <listitem>
         <para>Souligne les erreurs trouvées par LanguageTool dans les segments cibles. Voir le paramètre <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> pour en savoir plus.</para>
 	  </listitem>
     </varlistentry>
 	
-    <varlistentry id="menus.view.aggressive.font.fallback">
-      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Utilisation intensive des polices de repli</guimenuitem></term>
+    <varlistentry xml:id="menus.view.aggressive.font.fallback">
+      <term xml:id="menus.view.aggressive.font.fallback.title"><guimenuitem>Utilisation intensive des polices de repli</guimenuitem></term>
       <listitem>
         <para>Utilisez cette fonction si OmegaT n’affiche pas correctement certains glyphes (même si les polices contenant les glyphes en question sont installées dans votre machine).</para>
 
@@ -106,8 +105,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.view.modification.info">
-      <term id="menus.view.modification.info.title"><guisubmenu>Afficher les informations de modification</guisubmenu></term>
+    <varlistentry xml:id="menus.view.modification.info">
+      <term xml:id="menus.view.modification.info.title"><guisubmenu>Afficher les informations de modification</guisubmenu></term>
       <listitem>
         <para>Affiche l’heure et l’auteur de la dernière modification apportée à un segment.</para>
 		
@@ -117,8 +116,8 @@
       </listitem>
     </varlistentry>
 	
-	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Réinitialiser la fenêtre d’OmegaT</guimenuitem></term>
+	<varlistentry xml:id="menus.view.restore.main.window">
+      <term xml:id="menus.view.restore.main.window.title"><guimenuitem>Réinitialiser la fenêtre d’OmegaT</guimenuitem></term>
       <listitem>
         <para>Rétablit la disposition par défaut des fenêtres d’OmegaT.</para>
 

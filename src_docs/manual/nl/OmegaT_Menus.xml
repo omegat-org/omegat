@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.menus">
-  <title id="chapter.menus.title">Menu's</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.menus">
+  <title xml:id="chapter.menus.title">Menu's</title>
 
-  	<para>OmegaT heeft heel weinig knoppen en lijkt een beetje streng, zo niet gewoon onvriendelijk, voor mensen die gewend zijn aan interfaces die op knoppen zijn gebaseerd. De meeste acties vinden plaats met behulp van sneltoetsen, die zijn geassocieerd aan menu-items.</para>
+  	<para>OmegaT heeft heel weinig knoppen en lijkt een beetje streng, zo niet gewoon onvriendelijk, voor mensen die gewend zijn aan interfaces die op knoppen zijn gebaseerd. De meeste acties vinden plaats met behulp van sneltoetsen die zijn geassocieerd aan men-items.</para>
 
 	<para>Sneltoetsen zijn in deze gebruikershandleiding overal aanwezig en u zou op korte termijn in staat moeten zijn om de paar te onthouden die nuttig zijn in het kader van een standaard dag voor vertalingen.</para>
 
@@ -11,8 +10,8 @@
 
 	<para>Menu-items die geen sneltoets aangeven hebben er standaard niet een toegewezen gekregen. Bekijk de appendix <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> wanneer u sneltoetsen wilt aanpassen of toevoegen.</para>
 
-  <note><para>Hint voor beschrijving toets sneltoets:<table id="menus.shortcut.description">
-      <title id="menus.shortcut.description.title">Identificatie voor toetsen voor aanpassen</title>
+  <note><para>Hint voor beschrijving toets sneltoets:<table xml:id="menus.shortcut.description">
+      <title xml:id="menus.shortcut.description.title">Identificatie voor toetsen voor aanpassen</title>
 
       <tgroup cols="3">
         <thead>
@@ -52,18 +51,18 @@
     </table></para>
   </note>
 
-  <xi:include href="Menus_Project.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Project.xml"/>
   
-  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Edit.xml"/>
 
-  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_GoTo.xml"/>
 
-  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_View.xml"/>
 
-  <xi:include href="Menus_Tools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Tools.xml"/>
 
-  <xi:include href="Menus_Options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Options.xml"/>
 
-  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Menus_Help.xml"/>
 
 </chapter>

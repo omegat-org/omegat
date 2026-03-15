@@ -51,8 +51,7 @@ import java.util.Objects;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.input.BOMInputStream;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
@@ -265,9 +264,6 @@ public abstract class AbstractFilter implements IFilter {
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try (BufferedReader reader = createReader(inFile, fc.getInEncoding())) {
-            if (reader == null) {
-                return false;
-            }
             return isFileSupported(reader);
         } catch (IOException | TranslationException e) {
             return false;
@@ -312,7 +308,7 @@ public abstract class AbstractFilter implements IFilter {
     @Deprecated
     @Override
     @Nullable
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(@Nullable Dialog parent, Map<String, String> config) {
         return Collections.emptyMap();
     }
 
@@ -514,7 +510,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Override
     public final void parseFile(File inFile, @Nullable Map<String, String> config, FilterContext fc,
-            @NotNull IParseCallback callback) throws Exception {
+            IParseCallback callback) throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         entryAlignCallback = null;
@@ -537,7 +533,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Override
     public final void alignFile(File inFile, File outFile, @Nullable Map<String, String> config, FilterContext fc,
-            @NotNull IAlignCallback callback) throws Exception {
+            IAlignCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = null;
         entryAlignCallback = callback;
@@ -604,7 +600,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Override
     public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
-            @NotNull ITranslateCallback callback) throws Exception {
+            ITranslateCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         entryAlignCallback = null;

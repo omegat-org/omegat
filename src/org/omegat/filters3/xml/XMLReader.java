@@ -58,14 +58,18 @@ import org.omegat.util.PatternConsts;
  * @author Didier Briel
  */
 public class XMLReader extends Reader {
+
+    private static final char CARRIAGE_RETURN = '\r';
+    private static final char LINE_FEED = '\n';
+
     /** Inner reader */
     private final BufferedReader reader;
 
     /** Inner encoding. */
-    private @Nullable String encoding;
+    private @Nullable String encoding = null;  // null means unknown.
 
     /** EOL chars used in source file. */
-    private @Nullable String eol;
+    private String eol = LINE_FEED + "";
 
     /** Returns detected encoding. */
     public @Nullable String getEncoding() {
@@ -73,7 +77,7 @@ public class XMLReader extends Reader {
     }
 
     /** Returns detected EOL chars. */
-    public @Nullable String getEol() {
+    public String getEol() {
         return eol;
     }
 
@@ -95,6 +99,7 @@ public class XMLReader extends Reader {
      * @param file
      *            - the file to read
      */
+    @SuppressWarnings("unused")
     public XMLReader(File file) throws IOException {
         this(file, null);
     }
@@ -137,18 +142,19 @@ public class XMLReader extends Reader {
         int char1 = is.read();
         int char2 = is.read();
         int char3 = is.read();
-        encoding = null;
+        String detectedEncoding = null;
         if (char1 == 0xFE && char2 == 0xFF) {
-            encoding = "UTF-16BE";
+            detectedEncoding = "UTF-16BE";
         }
         if (char1 == 0xFF && char2 == 0xFE) {
-            encoding = "UTF-16LE";
+            detectedEncoding = "UTF-16LE";
         }
         if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
-            encoding = "UTF-8";
+            detectedEncoding = "UTF-8";
         }
         is.reset();
-        if (encoding != null) {
+        if (detectedEncoding != null) {
+            encoding = detectedEncoding;
             return createReaderAndDetectEOL(is, Charset.forName(encoding));
         }
 
@@ -161,16 +167,21 @@ public class XMLReader extends Reader {
 
             Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
             if (matcherXml.find()) {
-                encoding = matcherXml.group(1);
+                detectedEncoding = matcherXml.group(1);
             }
         }
 
         is.reset();
-        if (encoding != null) {
+        if (detectedEncoding != null) {
+            encoding = detectedEncoding;
             return createReaderAndDetectEOL(is, Charset.forName(encoding));
         }
 
-        // UTF-8 if we couldn't detect it ourselves
+        /* Note: if we couldn't detect it by ourselves,
+         * we currently keep `encoding=null` as unknown.
+         * It will cause output has XML declaration without encoding.
+         * See ctor of org.omegat.filters3.xml.XMLWriter
+         */
         try {
             return createReaderAndDetectEOL(is, StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -187,9 +198,6 @@ public class XMLReader extends Reader {
         bufferedReader.reset();
         return bufferedReader;
     }
-
-    private static final char CARRIAGE_RETURN = '\r';
-    private static final char LINE_FEED = '\n';
 
     private String detectEndOfLine(BufferedReader bufferedReader) throws IOException {
         StringBuilder endOfLineBuilder = new StringBuilder();

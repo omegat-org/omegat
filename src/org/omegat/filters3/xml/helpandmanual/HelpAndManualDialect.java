@@ -28,10 +28,9 @@
 package org.omegat.filters3.xml.helpandmanual;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.jspecify.annotations.NullMarked;
@@ -58,7 +57,7 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
      * stored in upper-case using the ROOT locale to avoid locale-specific
      * case-folding issues.
      */
-    private final Map<String, Set<String>> ignoreTagsAttributes;
+    private final Map<String, List<String>> ignoreTagsAttributes;
 
     public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
@@ -71,30 +70,18 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
         ignoreTagsAttributes = new HashMap<>();
 
         // Default rules for Help & Manual: translate="false|no|0" means do not translate
-        addIgnoreAttributeValues("translate", "false", "no", "0");
+        List<String> values = List.of("false", "no", "0");
+        ignoreTagsAttributes.put("translate", values);
     }
 
     private boolean checkIgnoreTags(@Nullable String key, @Nullable String value) {
         if (key == null || value == null) {
             return false;
         }
-        String k = key.trim().toUpperCase(Locale.ENGLISH);
-        String v = value.trim().toUpperCase(Locale.ENGLISH);
-        Set<String> values = ignoreTagsAttributes.get(k);
+        String k = key.trim().toLowerCase(Locale.ENGLISH);
+        String v = value.trim().toLowerCase(Locale.ENGLISH);
+        List<String> values = ignoreTagsAttributes.get(k);
         return values != null && values.contains(v);
-    }
-
-    private void addIgnoreAttributeValues(@Nullable String attributeName, @Nullable String... values) {
-        if (attributeName == null || values == null) {
-            return;
-        }
-        String key = attributeName.trim().toUpperCase(Locale.ENGLISH);
-        Set<String> set = ignoreTagsAttributes.computeIfAbsent(key, k -> new HashSet<>());
-        for (String v : values) {
-            if (v != null) {
-                set.add(v.trim().toUpperCase(Locale.ENGLISH));
-            }
-        }
     }
 
     /**

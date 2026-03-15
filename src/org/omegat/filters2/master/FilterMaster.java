@@ -756,7 +756,7 @@ public class FilterMaster {
         java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
         if (sourceMatcher.find()) {
             for (int i = 1; i <= sourceMatcher.groupCount(); i++) {
-                res = res.replaceAll("\\$\\{" + i + "\\}", sourceMatcher.group(i));
+                res = res.replaceAll("\\$\\{" + i + "}", sourceMatcher.group(i));
             }
         }
 
@@ -764,8 +764,8 @@ public class FilterMaster {
         StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
         StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {
-            res = res.replaceAll("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
-            res = res.replaceAll("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
+            res = res.replaceAll("\\$\\{nameOnly-" + i + "}", nameOnlyBuf.toString());
+            res = res.replaceAll("\\$\\{extension-" + i + "}", extensionBuf.toString());
             if (i + 1 < splitName.length) {
                 nameOnlyBuf.append(".").append(splitName[i + 1]);
                 extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
@@ -886,9 +886,6 @@ public class FilterMaster {
     public static void setOptions(Filter f, Map<String, String> newOptions) {
         f.getOption().clear();
         for (Map.Entry<String, String> en : newOptions.entrySet()) {
-            if (en.getKey() == null) {
-                continue;
-            }
             Filter.Option opt = new Filter.Option();
             opt.setName(en.getKey());
             opt.setValue(en.getValue());

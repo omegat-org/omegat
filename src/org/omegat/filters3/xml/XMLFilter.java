@@ -43,7 +43,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -70,7 +69,6 @@ import org.omegat.util.PatternConsts;
  * @author Alex Buloichik
  * @author Aaron Madlon-Kay
  */
-@NullMarked
 public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Factory for SAX parsers. */
     private final SAXParserFactory parserFactory;
@@ -130,7 +128,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     private @Nullable String encoding;
 
     /** Detected EOL chars. */
-    private @Nullable String eol;
+    private String eol = "\n";
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
@@ -339,11 +337,11 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     @Override
-    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
+    public void tagStart(String path, @Nullable Attributes atts) {
     }
 
     @Override
-    public void tagEnd(@Nullable String path) {
+    public void tagEnd(String path) {
     }
 
     @Override

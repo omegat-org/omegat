@@ -97,7 +97,7 @@ public interface Translator {
      * @param atts
      *            attributes
      */
-    void tagStart(String path, Attributes atts);
+    void tagStart(String path, @Nullable Attributes atts);
 
     /**
      * Finish tag translation.

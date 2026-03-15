@@ -28,7 +28,7 @@ package org.omegat.filters2;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 
 /**

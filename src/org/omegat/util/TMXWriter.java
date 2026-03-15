@@ -45,6 +45,7 @@ import org.omegat.core.data.ProjectProperties;
  * @author Maxym Mykhalchuk
  *
  */
+@SuppressWarnings("PMD")
 @Deprecated(forRemoval = true, since = "5.8")
 public final class TMXWriter {
 

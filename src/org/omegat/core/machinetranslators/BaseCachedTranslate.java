@@ -55,6 +55,8 @@ import org.omegat.util.Language;
 public abstract class BaseCachedTranslate extends BaseTranslate implements IMachineTranslation {
 
     private static final int SIZE_OF_CACHE = 1_000;
+    private static final CachingProvider CACHING_PROVIDER = Caching.getCachingProvider();
+    private static final CacheManager CACHE_MANAGER = CACHING_PROVIDER.getCacheManager();
 
     /**
      * Machine translation implementation can use this cache for skip requests
@@ -98,20 +100,19 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
      * @return Cache object.
      */
     protected Cache<String, String> getCaffeineCache(String name, int sizeOfCache, Duration duration) {
-        CachingProvider provider = Caching.getCachingProvider();
-        CacheManager manager = provider.getCacheManager();
-        Cache<String, String> cache1 = manager.getCache(name);
+        Cache<String, String> cache1 = CACHE_MANAGER.getCache(name);
         if (cache1 != null) {
             return cache1;
         }
         CaffeineConfiguration<String, String> config = new CaffeineConfiguration<>();
         config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(duration));
         config.setMaximumSize(OptionalLong.of(sizeOfCache));
-        return manager.createCache(name, config);
+        return CACHE_MANAGER.createCache(name, config);
     }
 
     @Override
-    public final @Nullable String getTranslation(Language sLang, Language tLang, String text) throws Exception {
+    public final @Nullable String getTranslation(Language sLang, Language tLang, String text)
+            throws Exception {
         if (enabled) {
             String trText = getTruncateText(text);
             return putCache(sLang, tLang, trText, translate(sLang, tLang, trText));
@@ -131,7 +132,8 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
 
     protected abstract String getPreferenceName();
 
-    protected abstract @Nullable String translate(Language sLang, Language tLang, String text) throws Exception;
+    protected abstract @Nullable String translate(Language sLang, Language tLang, String text)
+            throws Exception;
 
     private String getCache(Language sLang, Language tLang, String text) {
         return cache.get(sLang + "/" + tLang + "/" + text);

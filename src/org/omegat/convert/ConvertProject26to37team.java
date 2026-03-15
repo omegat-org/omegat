@@ -190,8 +190,7 @@ public final class ConvertProject26to37team {
      * Get repository URL for SVN.
      */
     private static String getGITUrl(File wc) throws Exception {
-        try (Git git = Git.open(wc)) {
-            Repository repository = git.getRepository();
+        try (Repository repository = Git.open(wc).getRepository()) {
             StoredConfig config = repository.getConfig();
             return config.getString("remote", "origin", "url");
         }

@@ -140,16 +140,18 @@ public class TextFilter extends AbstractFilter {
         } else {
             output = out;
         }
-
-        String segmentOn = processOptions.get(TextFilter.OPTION_SEGMENT_ON);
-        if (SEGMENT_BREAKS.equals(segmentOn)) {
-            processSegLineBreaks(in, output);
-        } else if (SEGMENT_NEVER.equals(segmentOn)) {
-            processNonSeg(in, output);
-        } else {
-            processSegEmptyLines(in, output);
+        try {
+            String segmentOn = processOptions.get(TextFilter.OPTION_SEGMENT_ON);
+            if (SEGMENT_BREAKS.equals(segmentOn)) {
+                processSegLineBreaks(in, output);
+            } else if (SEGMENT_NEVER.equals(segmentOn)) {
+                processNonSeg(in, output);
+            } else {
+                processSegEmptyLines(in, output);
+            }
+        } finally {
+            output.close();
         }
-        output.close();
     }
 
     /** Process the file without segmenting it. */

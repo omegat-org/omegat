@@ -9,6 +9,7 @@
 
     <rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
     <rule ref="category/java/errorprone.xml/ReturnFromFinallyBlock"/>
+    <rule ref="category/java/errorprone.xml/CloseResource"/>
     <rule ref="category/java/codestyle.xml/UnnecessaryConstructor"/>
 
 </ruleset>

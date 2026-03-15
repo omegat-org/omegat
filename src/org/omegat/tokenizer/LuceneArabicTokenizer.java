@@ -46,7 +46,7 @@ import org.apache.lucene.analysis.ar.ArabicAnalyzer;
 @Tokenizer(languages = { "ar" })
 public class LuceneArabicTokenizer extends BaseTokenizer {
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings({"resource", "PMD.CloseResource"})
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {

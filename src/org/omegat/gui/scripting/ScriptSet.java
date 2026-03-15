@@ -24,29 +24,26 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
+import org.omegat.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class ScriptSet {
-    private Properties m_props;
-    private File m_setFile;
+    private final Properties m_props;
+    private final File m_setFile;
 
     public ScriptSet(File setFile) {
         m_setFile = setFile;
         m_props = new Properties();
 
-        try {
-            FileInputStream is = new FileInputStream(setFile);
+        try (FileInputStream is = new FileInputStream(setFile)) {
             m_props.load(is);
-            is.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 

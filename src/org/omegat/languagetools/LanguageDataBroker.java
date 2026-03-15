@@ -125,6 +125,7 @@ public class LanguageDataBroker implements ResourceDataBroker {
     }
 
     @Override
+    @SuppressWarnings("PMD.CloseResource")
     public InputStream getAsStream(String path) {
         InputStream inputStream = ResourceDataBroker.class.getResourceAsStream(path);
         if (inputStream == null) {

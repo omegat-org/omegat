@@ -45,7 +45,7 @@ import org.apache.lucene.analysis.pl.PolishAnalyzer;
 @Tokenizer(languages = { "pl" })
 public class LucenePolishTokenizer extends BaseTokenizer {
 
-    @SuppressWarnings("resource")
+    @SuppressWarnings({"resource", "PMD.CloseResource"})
     @Override
     protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
             final boolean stopWordsAllowed) throws IOException {

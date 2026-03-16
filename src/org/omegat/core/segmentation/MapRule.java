@@ -26,9 +26,9 @@
 
 package org.omegat.core.segmentation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import gen.core.segmentation.Languagemap;
 
@@ -129,7 +129,8 @@ public class MapRule {
      * @return new MapRule object
      */
     public MapRule copy() {
-        return new MapRule(languageCode, pattern.pattern(), new ArrayList<>(rules));
+        return new MapRule(languageCode, pattern.pattern(),
+                rules.stream().map(Rule::copy).collect(Collectors.toList()));
     }
 
     /** List of rules (of class {@link Rule}) for the language */

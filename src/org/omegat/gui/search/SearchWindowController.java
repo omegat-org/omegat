@@ -64,7 +64,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
-import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.gui.editor.IEditor;
 import org.openide.awt.Mnemonics;
 
@@ -951,10 +950,6 @@ public class SearchWindowController {
         form.dispose();
     }
 
-    /**
-     * Completes the asynchronous operation associated with the search process.
-     */
-    @VisibleForTesting
     void complete() {
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
@@ -966,9 +961,6 @@ public class SearchWindowController {
     }
 
     public void dispose() {
-        if (handle != null && !handle.completion().isDone()) {
-            handle.cancel();
-        }
         form.dispose();
     }
 

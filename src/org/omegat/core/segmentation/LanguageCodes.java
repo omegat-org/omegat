@@ -1,10 +1,11 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
+               2024-2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,13 +23,16 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
 
 package org.omegat.core.segmentation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OStrings;
 
 /**
@@ -38,9 +42,22 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
+@NullMarked
 public final class LanguageCodes {
 
     private LanguageCodes() {
+        // utility class
+    }
+
+    public static String getStandardNameFromMapRule(MapRule mr) {
+        String language = getLanguageCodeByPattern(mr.getPattern());
+        if (language == null) {
+            language = getLanguageCodeByName(mr.getLanguage());
+        }
+        if (language == null) {
+            language = mr.getLanguage();
+        }
+        return language;
     }
 
     // Codes of "languagerulename".
@@ -99,7 +116,9 @@ public final class LanguageCodes {
     private static final String SLOVAK_PATTERN = "SK.*";
     private static final String CHINESE_PATTERN = "ZH.*";
 
-    /** A Map from language codes to language keys. */
+    /**
+     * A Map from language codes to language keys.
+     */
     private static final Map<String, String> CODE_KEY_HASH = new HashMap<>();
     private static final Map<String, String> PATTERN_HASH = new HashMap<>();
 
@@ -157,7 +176,7 @@ public final class LanguageCodes {
         return CODE_KEY_HASH.containsKey(code);
     }
 
-    public static String getLanguageCodeByName(String name) {
+    public static @Nullable String getLanguageCodeByName(@Nullable String name) {
         if (name == null) {
             return null;
         }
@@ -175,7 +194,20 @@ public final class LanguageCodes {
         return null;
     }
 
-    public static String getLanguageCodeByPattern(String pattern) {
+    public static @Nullable String getLanguageCodeByPattern(String pattern) {
         return PATTERN_HASH.get(pattern);
+    }
+
+    public static String getLanguageCode(String code) {
+        /*
+         * If the code is not a standard code, then try to find a
+         * localized name of the language name. When you believe all the OmegaT
+         * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
+         * to remove the workaround here.
+         */
+        if (LanguageCodes.isLanguageCodeKnown(code)) {
+            return code;
+        }
+        return Objects.requireNonNullElse(LanguageCodes.getLanguageCodeByName(code), code);
     }
 }

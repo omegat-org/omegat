@@ -31,6 +31,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,6 +45,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.omegat.core.Core;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
 
@@ -139,8 +141,8 @@ public class RealProjectTest {
         addSTE(fi, "id2", "List of sections in %s", "Ceci est la liste des sections de %s", false);
 
         project.importTranslationsFromSources();
-        assertEquals("Translation imported, but shouldn't",
-                tmx.getDefaultTranslation("List of sections in %s").translation, "exist");
+        assertEquals("Translation imported, but shouldn't", "exist",
+                tmx.getDefaultTranslation("List of sections in %s").translation);
         checkNoAlternative("id1", "List of sections in %s");
         checkNoAlternative("id2", "List of sections in %s");
 
@@ -153,14 +155,18 @@ public class RealProjectTest {
         project.importTranslationsFromSources();
         checkNoDefault("List of sections in %s");
         EntryKey entryKey = new EntryKey("test", "List of sections in %s", "id1", null, null, null);
-        assertEquals("Translation imported, but shouldn't", tmx.getMultipleTranslation(entryKey).translation,
-                "exist");
+        assertEquals("Translation imported, but shouldn't", "exist", tmx.getMultipleTranslation(entryKey).translation);
     }
 
-    private void createProject(boolean supportDefaultTranslations) throws Exception {
+    private void createProject(boolean supportDefaultTranslations) {
         ProjectProperties props = new ProjectProperties(tempDir.toFile());
         props.setSupportDefaultTranslations(supportDefaultTranslations);
         props.setTargetTokenizer(DefaultTokenizer.class);
+        props.setProjectSRX(SRX.getDefault());
+        File projectDir = props.getProjectInternalDir();
+        if (!projectDir.exists()) {
+            projectDir.mkdirs();
+        }
         project = new RealProjectWithTMXAccess(props);
 
         fi = new IProject.FileInfo("source.txt");
@@ -180,7 +186,7 @@ public class RealProjectTest {
 
     private void setDefault(String source, String translation) {
         EntryKey key = new EntryKey(null, source, null, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
+        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<>());
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
@@ -189,7 +195,7 @@ public class RealProjectTest {
 
     private void setAlternative(String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
+        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<>());
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;

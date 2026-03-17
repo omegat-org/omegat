@@ -36,6 +36,7 @@ package org.omegat.gui.search;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -48,6 +49,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -64,6 +66,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.gui.editor.IEditor;
 import org.openide.awt.Mnemonics;
 
@@ -80,7 +83,6 @@ import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -93,8 +95,8 @@ import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * This is a window that appears when user'd like to search for something. For
- * each new user's request new window is created. Actual search is done by
+ * This is a window that appears when a user wants to search for something.
+ * For each new user's request a new window is created. Actual search is done by
  * SearchThread.
  *
  * @author Keith Godfrey
@@ -121,7 +123,7 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
-        Font f = Core.getMainWindow().getApplicationFont();
+        Font f = Objects.requireNonNull(Core.getMainWindow()).getApplicationFont();
         setFont(f);
 
         this.mode = mode;
@@ -400,8 +402,8 @@ public class SearchWindowController {
         });
 
         // Set up undo/redo handling
-        KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
-                false);
+        KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(), false);
         map.put(undoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -410,8 +412,8 @@ public class SearchWindowController {
                 }
             }
         });
-        KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
-                false);
+        KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(), false);
         map.put(redoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -467,15 +469,15 @@ public class SearchWindowController {
         SearchExpression.SearchExpressionType searchType = Preferences.getPreferenceEnumDefault(
                 Preferences.SEARCHWINDOW_SEARCH_TYPE, SearchExpression.SearchExpressionType.EXACT);
         switch (searchType) {
-        case EXACT:
-        default:
-            form.m_searchExactSearchRB.setSelected(true);
-            break;
         case KEYWORD:
             form.m_searchKeywordSearchRB.setSelected(true);
             break;
         case REGEXP:
             form.m_searchRegexpSearchRB.setSelected(true);
+            break;
+        case EXACT:
+        default:
+            form.m_searchExactSearchRB.setSelected(true);
             break;
         }
 
@@ -496,15 +498,15 @@ public class SearchWindowController {
         SearchExpression.SearchState searchState = Preferences.getPreferenceEnumDefault(
                 Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.TRANSLATED_UNTRANSLATED);
         switch (searchState) {
-        case TRANSLATED_UNTRANSLATED:
-        default:
-            form.m_searchTranslatedUntranslated.setSelected(true);
-            break;
         case TRANSLATED:
             form.m_searchTranslated.setSelected(true);
             break;
         case UNTRANSLATED:
             form.m_searchUntranslated.setSelected(true);
+            break;
+        case TRANSLATED_UNTRANSLATED:
+        default:
+            form.m_searchTranslatedUntranslated.setSelected(true);
             break;
         }
 
@@ -520,12 +522,12 @@ public class SearchWindowController {
         SearchExpression.SearchExpressionType replaceType = Preferences.getPreferenceEnumDefault(
                 Preferences.SEARCHWINDOW_REPLACE_TYPE, SearchExpression.SearchExpressionType.EXACT);
         switch (replaceType) {
+        case REGEXP:
+            form.m_replaceRegexpSearchRB.setSelected(true);
+            break;
         case EXACT:
         default:
             form.m_replaceExactSearchRB.setSelected(true);
-            break;
-        case REGEXP:
-            form.m_replaceRegexpSearchRB.setSelected(true);
             break;
         }
 
@@ -759,7 +761,7 @@ public class SearchWindowController {
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = form.m_dirField.getText();
 
-        if (!curDir.equals("")) {
+        if (!curDir.isEmpty()) {
             File dir = new File(curDir);
             if (dir.exists() && dir.isDirectory()) {
                 browser.setCurrentDirectory(dir);
@@ -881,11 +883,11 @@ public class SearchWindowController {
             }
             s.caseSensitive = form.m_searchCase.isSelected();
             s.spaceMatchNbsp = form.m_searchSpaceMatchNbsp.isSelected();
-            s.glossary = mode == SearchMode.SEARCH ? form.m_cbSearchInGlossaries.isSelected() : false;
-            s.memory = mode == SearchMode.SEARCH ? form.m_cbSearchInMemory.isSelected() : true;
-            s.tm = mode == SearchMode.SEARCH ? form.m_cbSearchInTMs.isSelected() : false;
-            s.allResults = mode == SearchMode.SEARCH ? form.m_allResultsCB.isSelected() : true;
-            s.fileNames = mode == SearchMode.SEARCH ? form.m_fileNamesCB.isSelected() : true;
+            s.glossary = form.m_cbSearchInGlossaries.isSelected();
+            s.memory = form.m_cbSearchInMemory.isSelected();
+            s.tm = form.m_cbSearchInTMs.isSelected();
+            s.allResults = form.m_allResultsCB.isSelected();
+            s.fileNames = form.m_fileNamesCB.isSelected();
             s.searchSource = form.m_searchSource.isSelected();
             s.searchTarget = form.m_searchTranslation.isSelected();
             if (form.m_searchTranslatedUntranslated.isSelected()) {
@@ -950,17 +952,24 @@ public class SearchWindowController {
         form.dispose();
     }
 
+    /**
+     * Completes the asynchronous operation associated with the search process.
+     */
+    @VisibleForTesting
     void complete() {
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
                 Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
-                Core.getMainWindow().displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+                Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
             }
             form.dispose();
         });
     }
 
     public void dispose() {
+        if (handle != null && !handle.completion().isDone()) {
+            handle.cancel();
+        }
         form.dispose();
     }
 
@@ -1133,7 +1142,7 @@ public class SearchWindowController {
 
         // author options
         form.m_authorCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR));
-        form.m_authorField.setText(Preferences.getPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME));
+        form.m_authorField.setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_AUTHOR_NAME, ""));
 
         // date options
         try {
@@ -1180,11 +1189,15 @@ public class SearchWindowController {
         form.m_dateToButton.setEnabled(form.m_dateToCB.isSelected());
     }
 
+
     /**
-     * Set enabled/disabled component and all his children.
+     * Recursively sets the enabled state of a container and all its child components.
      *
      * @param component
+     *        The container whose enabled state is to be updated.
      * @param enabled
+     *        The desired enabled state. If true, the container and its components
+     *        will be enabled; if false, they will be disabled.
      */
     private void setEnabled(Container component, boolean enabled) {
         component.setEnabled(enabled);

@@ -103,6 +103,20 @@ public class CalcMatchStatisticsTest extends TestCore {
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        // Total: 108 938 4894 5699
+        assertRowValues(result[0], "108", "938", "4894", "5699");
+        // Remaining: 108 938 4894 5699
+        assertRowValues(result[1], "108", "938", "4894", "5699");
+        // Unique: 97 848 4385 5116
+        assertRowValues(result[2], "97", "848", "4385", "5116");
+        // Unique Remaining: 97 848 4385 5116
+        assertRowValues(result[3], "97", "848", "4385", "5116");
+        result = allResult.get(1);
+        assertNotNull(result);
+        // test/data/filters/po/file-POFilter-match-stat-en-ca.po: 108 108 97 97 ....
+        assertRowValues(result[0], "108", "108", "97", "97");
     }
 
     @Test
@@ -140,68 +154,46 @@ public class CalcMatchStatisticsTest extends TestCore {
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());
-        String[][] result = allResult.get(1);
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        assertEquals(3, result.length);
+        // Repetitions: 11 90 509 583
+        assertRowValues(result[0], "11", "90", "509", "583");
+        assertRowValues(result[1], "0", "0", "0", "0");
+        assertRowValues(result[2], "0", "0", "0", "0");
+        result = allResult.get(1);
+        assertNotNull(result);
         assertStatistics(result, false);
     }
 
     private void assertStatistics(String[][] result, boolean perFile) {
-        // assertion
-        int n = 0;
+        int rowIndex = 0;
         // Repetitions: 11 90 509 583
-        assertEquals("11", result[n][1]);
-        assertEquals("90", result[n][2]);
-        assertEquals("509", result[n][3]);
-        assertEquals("583", result[n][4]);
+        assertRowValues(result[rowIndex++], "11", "90", "509", "583");
         if (perFile) {
-            n++;
             // Repetition from other files: 0 0 0 0
-            assertEquals("0", result[n][1]);
-            assertEquals("0", result[n][2]);
-            assertEquals("0", result[n][3]);
-            assertEquals("0", result[n][4]);
+            assertRowValues(result[rowIndex++], "0", "0", "0", "0");
         }
-        n++;
         // Exact match: 0 0 0 0
-        assertEquals("0", result[n][1]);
-        assertEquals("0", result[n][2]);
-        assertEquals("0", result[n][3]);
-        assertEquals("0", result[n][4]);
-        n++;
+        assertRowValues(result[rowIndex++], "0", "0", "0", "0");
         // 95%-100%: 84 712 3606 4225
-        assertEquals("84", result[n][1]);
-        assertEquals("712", result[n][2]);
-        assertEquals("3606", result[n][3]);
-        assertEquals("4225", result[n][4]);
-        n++;
+        assertRowValues(result[rowIndex++], "84", "712", "3606", "4225");
         // 85%-94%: 0 0 0 0
-        assertEquals("0", result[n][1]);
-        assertEquals("0", result[n][2]);
-        assertEquals("0", result[n][3]);
-        assertEquals("0", result[n][4]);
-        n++;
+        assertRowValues(result[rowIndex++], "0", "0", "0", "0");
         // 75%-84%: 3 32 234 256
-        assertEquals("3", result[n][1]);
-        assertEquals("32", result[n][2]);
-        assertEquals("234", result[n][3]);
-        assertEquals("256", result[n][4]);
+        assertRowValues(result[rowIndex++], "3", "32", "234", "256");
         // 50%-74%: 4 61 304 361
-        n++;
-        assertEquals("4", result[n][1]);
-        assertEquals("61", result[n][2]);
-        assertEquals("304", result[n][3]);
-        assertEquals("361", result[n][4]);
-        n++;
+        assertRowValues(result[rowIndex++], "4", "61", "304", "361");
         // No match: 6 43 241 274
-        assertEquals("6", result[n][1]);
-        assertEquals("43", result[n][2]);
-        assertEquals("241", result[n][3]);
-        assertEquals("274", result[n][4]);
-        n++;
+        assertRowValues(result[rowIndex++], "6", "43", "241", "274");
         // Total: 108 938 4894 5699
-        assertEquals("108", result[n][1]);
-        assertEquals("938", result[n][2]);
-        assertEquals("4894", result[n][3]);
-        assertEquals("5699", result[n][4]);
+        assertRowValues(result[rowIndex], "108", "938", "4894", "5699");
     }
 
+    private void assertRowValues(String[] row, String v1, String v2, String v3, String v4) {
+        assertEquals(v1, row[1]);
+        assertEquals(v2, row[2]);
+        assertEquals(v3, row[3]);
+        assertEquals(v4, row[4]);
+    }
 }

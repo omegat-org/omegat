@@ -40,6 +40,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -71,6 +72,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalcMatchStatisticsTest extends TestCore {
 
+    // On some CI environments, calculating statistics can occasionally be slow
+    // due to limited CPU resources and I/O.
     private static Path tmpDir;
 
     @BeforeClass
@@ -92,8 +95,10 @@ public class CalcMatchStatisticsTest extends TestCore {
     public void testStatistics() {
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         ICalcStatistics calc = new CalcStandardStatistics(project, testingStatsConsumer);
-        calc.run(new CancellationToken());
+        CancellationToken ctoken = new CancellationToken();
+        calc.run(ctoken);
         Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
         assertTrue(completion.isSuccess());
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
@@ -104,8 +109,10 @@ public class CalcMatchStatisticsTest extends TestCore {
     public void testPerFileCalcMatchStatistics() {
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         ICalcStatistics calc = new CalcPerFileMatchStatistics(project, segmenter, testingStatsConsumer);
-        calc.run(new CancellationToken());
+        CancellationToken ctoken = new CancellationToken();
+        calc.run(ctoken);
         Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
         assertTrue(completion.isSuccess());
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
@@ -120,17 +127,20 @@ public class CalcMatchStatisticsTest extends TestCore {
     }
 
     @Test
-    public void testCalcMatchStatistics() {
+    public void testCalcMatchStatics() {
+        TestingProject project = new TestingProject(tmpDir);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
-        ICalcStatistics calc = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
-        calc.run(new CancellationToken());
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calcMatchStatistics.run(ctoken);
         Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
         assertTrue(completion.isSuccess());
 
         List<String[][]> allResult = testingStatsConsumer.getTable();
         assertEquals(2, allResult.size());
         String[][] result = allResult.get(1);
-        assertNotNull(result);
         assertStatistics(result, false);
     }
 

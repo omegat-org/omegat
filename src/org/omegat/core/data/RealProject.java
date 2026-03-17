@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.segmentation.SRXManager;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -246,7 +247,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
+            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
@@ -1941,8 +1942,8 @@ public class RealProject implements IProject {
         List<String> sources = new ArrayList<>();
 
         @Override
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String sourcePath, IFilter filter) {
+        public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
+                                   boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

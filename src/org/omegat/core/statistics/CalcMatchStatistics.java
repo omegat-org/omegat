@@ -52,6 +52,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.LongProcessInterruptedException;
+import org.omegat.core.threads.Completion;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
@@ -114,11 +115,19 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
     }
 
     @Override
-    public Void run(CancellationToken token) throws StoppedException, LongProcessInterruptedException {
+    public Void run(CancellationToken token) {
         cancellationToken = token;
-        entriesToProcess = getEntrySize();
-        calcTotal(true);
-        finishData();
+        Completion completion = Completion.success();
+        try {
+            entriesToProcess = project.getAllEntries().size();
+            calcTotal(true);
+        } catch (LongProcessInterruptedException | FindMatches.StoppedException ex) {
+            completion = Completion.cancelled();
+        } catch (Throwable t) {
+            completion = Completion.failed(t);
+        } finally {
+            callback.onComplete(completion);
+        }
         return null;
     }
 
@@ -189,8 +198,7 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
             showTable(table);
-            String fn = project.getProjectProperties().getProjectInternal()
-                    + OConsts.STATS_MATCH_FILENAME;
+            String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);
             callback.setDataFile(fn);
         }

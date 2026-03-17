@@ -29,24 +29,26 @@
 
 package org.omegat.core.statistics;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.Completion;
+import org.omegat.core.threads.CancellationToken;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
  * Thread for calculate standard statistics.
- *
+ * <p>
  * Calculation requires two different tags stripping: one for calculate unique
  * and remaining, and second for calculate number of words and chars.
- *
+ * <p>
  * Number of words/chars calculation requires to just strip all tags, protected
  * parts, placeholders(see StatCount.java).
- *
+ * <p>
  * Calculation of unique and remaining also requires to just strip all tags,
  * protected parts, placeholders for standard calculation.
  *
@@ -69,39 +71,29 @@ public class CalcStandardStatistics implements ICalcStatistics {
         this(Core.getProject(), callback);
     }
 
+    @Override
     public Void run(CancellationToken token) {
         cancellationToken = token;
+
         token.throwIfCancelled();
+
         StatsResult result = Statistics.buildProjectStats(project);
         callback.setTable(StatsResult.HT_HEADERS, result.getHeaderTable());
         String title = OStrings.getString("CT_STATS_FILE_Statistics");
         callback.appendTable(title, StatsResult.FT_HEADERS, result.getFilesTable());
         callback.setTextData(result.getTextData());
-        finishData();
+        callback.onComplete(Completion.success());
 
         String internalDir = project.getProjectProperties().getProjectInternal();
-        // removing old stats
         try {
-            File oldStats = new File(internalDir + "word_counts");
-            if (oldStats.exists()) {
-                boolean ignore = oldStats.delete();
-            }
+            // removing old stats
+            Files.deleteIfExists(Paths.get(internalDir + "word_counts"));
             // now dump file based word counts to disk
             String fn = internalDir + OConsts.STATS_FILENAME;
             Statistics.writeStat(internalDir, result);
             callback.setDataFile(fn);
-
-        } catch (Exception ignored) {
-            // ignore
+        } catch (IOException ignored) {
         }
         return null;
-    }
-
-    void finishData() {
-        if (cancellationToken.isCancelled()) {
-            callback.onComplete(Completion.cancelled());
-        } else {
-            callback.onComplete(Completion.success());
-        }
     }
 }

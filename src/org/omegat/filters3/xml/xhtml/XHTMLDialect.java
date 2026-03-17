@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.xml.sax.InputSource;
 
@@ -52,6 +53,7 @@ import org.omegat.util.StringUtil;
  * @author Martin Fleurke
  * @author Hiroshi Miura
  */
+@NullMarked
 public class XHTMLDialect extends DefaultXMLDialect {
     private static final Pattern XHTML_PUBLIC_DTD = Pattern.compile("-//W3C//DTD XHTML.*");
     private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";
@@ -175,7 +177,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
      * input-element, except when it is a button or submit or reset.
      */
     @Override
-    public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
+    public Boolean validateTranslatableTagAttribute(String tag, String attribute, @Nullable Attributes atts) {
         // special case:
         if ("INPUT".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("value")) {
             // special handling of input tags value attribute.
@@ -183,13 +185,15 @@ public class XHTMLDialect extends DefaultXMLDialect {
                 return true;
             } else if (this.translateButtonValue) {
                 // translate the value only for buttons
-                for (int i = 0; i < atts.size(); i++) {
-                    Attribute otherAttribute = atts.get(i);
-                    if ("type".equalsIgnoreCase(otherAttribute.getName())
-                            && ("button".equalsIgnoreCase(otherAttribute.getValue())
-                                    || "submit".equalsIgnoreCase(otherAttribute.getValue()) || "reset"
-                                    .equalsIgnoreCase(otherAttribute.getValue()))) {
-                        return super.validateTranslatableTagAttribute(tag, attribute, atts);
+                if (atts != null) {
+                    for (int i = 0; i < atts.size(); i++) {
+                        Attribute otherAttribute = atts.get(i);
+                        if ("type".equalsIgnoreCase(otherAttribute.getName())
+                                && ("button".equalsIgnoreCase(otherAttribute.getValue())
+                                || "submit".equalsIgnoreCase(otherAttribute.getValue()) || "reset"
+                                .equalsIgnoreCase(otherAttribute.getValue()))) {
+                            return super.validateTranslatableTagAttribute(tag, attribute, atts);
+                        }
                     }
                 }
                 // don't translate for other input elements
@@ -207,16 +211,15 @@ public class XHTMLDialect extends DefaultXMLDialect {
             // The group of attribute-value pairs indicating non-translation
             // are stored in the configuration
             boolean doSkipMetaTag = false;
-            for (int i = 0; i < atts.size(); i++) {
-                Attribute otherAttribute = atts.get(i);
-                String name = otherAttribute.getName();
-                String value = otherAttribute.getValue();
-                if (name == null || value == null) {
-                    continue;
-                }
-                doSkipMetaTag = checkDoSkipMetaTag(name, value);
-                if (doSkipMetaTag) {
-                    break;
+            if (atts != null) {
+                for (int i = 0; i < atts.size(); i++) {
+                    Attribute otherAttribute = atts.get(i);
+                    String name = otherAttribute.getName();
+                    String value = otherAttribute.getValue();
+                    doSkipMetaTag = checkDoSkipMetaTag(name, value);
+                    if (doSkipMetaTag) {
+                        break;
+                    }
                 }
             }
             if (doSkipMetaTag) {

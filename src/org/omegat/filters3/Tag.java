@@ -25,7 +25,7 @@
 
 package org.omegat.filters3;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.StaticUtils;
 
 import java.util.Objects;
@@ -52,12 +52,12 @@ public abstract class Tag implements Element {
         return tag;
     }
 
-    private final String shortcut;
+    private final @Nullable String shortcut;
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        return Objects.requireNonNullElseGet(shortcut, () ->
-                String.valueOf(Character.toChars(getTag().codePointAt(0))));
+        return Objects.requireNonNullElseGet(shortcut,
+                () -> String.valueOf(Character.toChars(getTag().codePointAt(0))));
     }
 
     private Type type;
@@ -132,7 +132,7 @@ public abstract class Tag implements Element {
     }
 
     /** Creates a new instance of Tag */
-    public Tag(String tag, String shortcut, Type type, @Nullable Attributes attributes) {
+    public Tag(String tag, @Nullable String shortcut, Type type, @Nullable Attributes attributes) {
         this.tag = tag;
         this.shortcut = shortcut;
         this.type = type;
@@ -197,7 +197,7 @@ public abstract class Tag implements Element {
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
     @Override
-    public String toShortcut() {
+    public @Nullable String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
         buf.append('<');

@@ -68,6 +68,7 @@ public class DocBookFilter extends XMLFilter {
         super(new DocBookDialect());
         try {
             // DocBook filter requires to validate docbook external DTD.
+            setSAXFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
             // The filter requires internet access.
             // XXX: this is vulnerable for XXE attack.
             setSAXFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", true);

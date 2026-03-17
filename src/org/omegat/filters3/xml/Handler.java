@@ -72,9 +72,10 @@ import org.omegat.util.StringUtil;
  * by SAXParser.
  * <p>
  * Entities described on
- * <a href="http://www.ibm.com/developerworks/xml/library/x-entities/">Add entities in XML</a>
- * <a href="https://web.archive.org/web/20180326105358/http://xmlwriter.net/xml_guide/entity_declaration.shtml">
- *     ENTITY Declaration</a>
+ * <a href="http://www.ibm.com/developerworks/xml/library/x-entities/">Add
+ * entities in XML</a> <a href=
+ * "https://web.archive.org/web/20180326105358/http://xmlwriter.net/xml_guide/entity_declaration.shtml">
+ * ENTITY Declaration</a>
  *
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
@@ -85,7 +86,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private final Translator translator;
     private final XMLDialect dialect;
     private final File inFile;
-    private final File outFile;
+    private final @Nullable File outFile;
     private final FilterContext context;
 
     /** Main file writer to write translated text to. */
@@ -102,22 +103,20 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * returns {@link #extWriter}.
      */
     private BufferedWriter currWriter() {
-        if (extWriter != null) {
-            return extWriter;
-        } else {
-            return mainWriter;
-        }
+        return Objects.requireNonNullElse(extWriter, mainWriter);
     }
 
     /** Currently parsed external entity that has its own writer. */
     private @Nullable Entity extEntity = null;
 
     /** Current entry that collects normal text. */
-    @Nullable Entry entry;
+    @Nullable
+    Entry entry;
     /** Stack of entries that collect out-of-turn text. */
     private final Deque<Entry> outofturnEntries = new ArrayDeque<>();
     /** Current entry that collects the text surrounded by intact tag. */
-    @Nullable Entry intacttagEntry = null;
+    @Nullable
+    Entry intacttagEntry = null;
     /** Keep the attributes of an intact tag. */
     org.omegat.filters3.@Nullable Attributes intacttagAttributes = null;
     /** Keep the attributes of paragraph tags. */
@@ -128,7 +127,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private final Deque<org.omegat.filters3.Attributes> xmlTagAttributes = new ArrayDeque<>();
 
     /** Current entry that collects the text surrounded by intact tag. */
-    @Nullable String intacttagName = null;
+    @Nullable
+    String intacttagName = null;
     /** Names of possible paragraph tags. */
     private final Deque<String> paragraphTagName = new ArrayDeque<>();
     /** Names of possible preformat tags. */
@@ -168,18 +168,17 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /**
-     * Returns the current entry we collect text into.
-     * If we collect normal text, returns {@link #entry}, else returns the last
-     * of {@link #outofturnEntries}.
+     * Returns the current entry we collect text into. If we collect normal
+     * text, returns {@link #entry}, else returns the last of
+     * {@link #outofturnEntries}.
      */
-    private @Nullable Entry currEntry() {
+    private Entry currEntry() {
         if (collectingIntactText()) {
             return intacttagEntry;
         } else if (collectingOutOfTurnText()) {
-            return outofturnEntries.peek();
-        } else {
-            return entry;
+            return Objects.requireNonNull(outofturnEntries.peek());
         }
+        return Objects.requireNonNull(entry);
     }
 
     /**
@@ -210,9 +209,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private boolean inDTD = false;
 
     /**
-     * The list of external files that handler has processed,
-     * because they were included into main file.
-     * Each entry is of type {@link File}.
+     * The list of external files that handler has processed, because they were
+     * included into main file. Each entry is of type {@link File}.
      */
     private final List<File> processedFiles = new ArrayList<>();
 
@@ -247,8 +245,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * Creates a new instance of Handler
      */
-    public Handler(Translator translator, XMLDialect dialect, File inFile, File outFile, FilterContext fc)
-            throws IOException {
+    public Handler(Translator translator, XMLDialect dialect, File inFile, @Nullable File outFile,
+            FilterContext fc) throws IOException {
         this.translator = translator;
         this.dialect = dialect;
         this.inFile = inFile;
@@ -314,7 +312,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /** Finds external entity by publicId and systemId. */
-    private @Nullable Entity findExternalEntity(String publicId, String systemId) {
+    private @Nullable Entity findExternalEntity(@Nullable String publicId, @Nullable String systemId) {
         if (publicId == null && systemId == null) {
             return null;
         }
@@ -375,17 +373,19 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * Resolves an external entity and provides an InputSource for the entity.
      * The method handles resolving based on the public ID and system ID
-     * provided, and checks for specific URI schemas to determine the type
-     * of resolution required. Additionally, it performs translation and
-     * writing if necessary and resolves external entities from the project's
-     * source folder.
+     * provided, and checks for specific URI schemas to determine the type of
+     * resolution required. Additionally, it performs translation and writing if
+     * necessary and resolves external entities from the project's source
+     * folder.
      *
-     * @param publicId The public identifier of the entity being resolved.
-     * @param systemId The system identifier of the entity being resolved.
-     * @return An InputSource object representing the resolved entity.
-     *         If the entity cannot be resolved, it returns an empty
-     *         InputSource.
-     * @throws SAXException If there is an error during XML parsing.
+     * @param publicId
+     *            The public identifier of the entity being resolved.
+     * @param systemId
+     *            The system identifier of the entity being resolved.
+     * @return An InputSource object representing the resolved entity. If the
+     *         entity cannot be resolved, it returns an empty InputSource.
+     * @throws SAXException
+     *             If there is an error during XML parsing.
      */
     public InputSource doResolve(String publicId, String systemId) throws SAXException {
         inDTD = isDTDMatch(publicId, systemId);
@@ -401,8 +401,10 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns false if no DTD is set, true if both public and system IDs match
      * (including localized system ID matching).
      *
-     * @param publicId The public identifier to match against the DTD
-     * @param systemId The system identifier to match against the DTD
+     * @param publicId
+     *            The public identifier to match against the DTD
+     * @param systemId
+     *            The system identifier to match against the DTD
      * @return true if the IDs match the current DTD, false otherwise
      */
     private boolean isDTDMatch(String publicId, String systemId) throws SAXException {
@@ -493,7 +495,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private void queueTag(String tag, Attributes attributes) {
+    private void queueTag(String tag, @Nullable Attributes attributes) {
         Tag xmltag = null;
         XMLIntactTag intacttag = null;
         setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
@@ -513,9 +515,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
         }
         if (xmltag == null) {
+            xmlTagName.push(tag);
+            xmlTagAttributes.push(XMLUtils.convertAttributes(attributes));
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
-            xmlTagName.push(xmltag.getTag());
-            xmlTagAttributes.push(xmltag.getAttributes());
         }
         currEntry().add(xmltag);
 
@@ -559,12 +561,12 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Queue tag that should be ignored by editor, including content and all
      * subtags.
      */
-    private void queueIgnoredTag(String tag, Attributes attributes) {
-        Tag xmltag;
-        setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
-        xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
-        xmlTagName.push(xmltag.getTag());
-        xmlTagAttributes.push(xmltag.getAttributes());
+    private void queueIgnoredTag(String tag, @Nullable Attributes attributes) {
+        org.omegat.filters3.Attributes atts = XMLUtils.convertAttributes(attributes);
+        setSpacePreservingTag(atts);
+        xmlTagName.push(tag);
+        xmlTagAttributes.push(atts);
+        Tag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
         currEntry().add(xmltag);
     }
 
@@ -606,7 +608,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /** Is called when the tag is started. */
-    private void start(String tag, Attributes attributes) throws SAXException, TranslationException {
+    private void start(String tag, @Nullable Attributes attributes) throws SAXException, TranslationException {
         boolean prevIgnored = translator.isInIgnored();
         translatorTagStart(tag, attributes);
 
@@ -714,6 +716,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      *
      * @see #translateButDontFlash()
      */
+    @SuppressWarnings("resource")
     private void translateAndFlush() throws SAXException, TranslationException {
         translateButDontFlash();
         try {
@@ -727,6 +730,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * Write tag's content without translation. Used for ignored tags.
      */
+    @SuppressWarnings("resource")
     private void flushButDontTranslate() throws SAXException {
         try {
             currWriter().write(currEntry().translationToOriginal());
@@ -801,13 +805,16 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /**
      * Determines whether a tag should be treated as content-based.
      *
-     * @param tag The XML tag name to evaluate
-     * @param atts The tag's attributes, or null if not available
-     * @return {@code true} if the tag should be treated as content-based, {@code false} otherwise
+     * @param tag
+     *            The XML tag name to evaluate
+     * @param atts
+     *            The tag's attributes, or null if not available
+     * @return {@code true} if the tag should be treated as content-based,
+     *         {@code false} otherwise
      */
-    private boolean isContentBasedTag(String tag, org.omegat.filters3.Attributes atts) {
+    private boolean isContentBasedTag(String tag, org.omegat.filters3.@Nullable Attributes atts) {
         // Check if tag is directly defined as content-based in the dialect
-        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag)) {
+        if (dialect.getContentBasedTags().containsKey(tag)) {
             return true;
         }
         // Handle special case for intact tag with null attributes
@@ -827,7 +834,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      *            A tag
      * @return <code>true</code> or <code>false</false>
      */
-    private boolean isPreformattingTag(String tag, org.omegat.filters3.Attributes atts) {
+    private boolean isPreformattingTag(String tag, org.omegat.filters3.@Nullable Attributes atts) {
         if (dialect.getPreformatTags() != null && dialect.getPreformatTags().contains(tag)) {
             return true;
         } else {
@@ -907,7 +914,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
     }
 
-    private void translatorTagStart(String tag, Attributes atts) {
+    private void translatorTagStart(String tag, @Nullable Attributes atts) {
         currentTagPath.push(tag);
         translator.tagStart(constructCurrentPath(), atts);
     }
@@ -1123,7 +1130,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     @Override
     public void endDTD() {
-        queueDTD(dtd);
+        queueDTD(Objects.requireNonNull(dtd));
         inDTD = false;
         dtd = null;
     }

@@ -33,6 +33,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.Completion;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.OConsts;
@@ -70,7 +71,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         cancellationToken = token;
         entriesToProcess = getEntrySize() * 2;
         calcPerFile();
-        finishData();
+        callback.onComplete(Completion.success());
         return null;
     }
 

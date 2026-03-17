@@ -48,7 +48,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -335,9 +334,10 @@ public class SearchWindowController {
                     handle.cancel();
                 }
 
-                // back to the initial segment
                 IEditor editor = Core.getEditor();
+                // Skip when test
                 if (editor instanceof EditorController) {
+                    // back to the initial segment
                     int currentEntry = editor.getCurrentEntryNumber();
                     if (initialEntry > 0 && form.m_backToInitialSegment.isSelected()
                             && initialEntry != currentEntry) {
@@ -818,7 +818,7 @@ public class SearchWindowController {
 
     private void doSearch() {
         UIThreadsUtil.mustBeSwingThread();
-        if (handle != null && !handle.completion().isDone()) {
+        if (handle != null) {
             // stop old search task
             handle.cancel();
         }
@@ -947,21 +947,22 @@ public class SearchWindowController {
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        dispose();
+        handle.cancel();
+        form.dispose();
     }
 
     /**
      * Completes the asynchronous operation associated with the search process.
      */
     @VisibleForTesting
-    boolean complete() {
-        final AtomicBoolean success = new AtomicBoolean(true);
+    void complete() {
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
-                success.set(false);
+                Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+                Core.getMainWindow().displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
             }
+            form.dispose();
         });
-        return success.get();
     }
 
     public void dispose() {

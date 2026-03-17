@@ -380,6 +380,11 @@ public final class Main {
     private static int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
+        // set HiDPI configurations
+        System.setProperty("sun.java2d.uiScale.enabled", "true");
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
@@ -389,7 +394,6 @@ public final class Main {
         if (Platform.isUnixLike()) {
             tweakX11AppName();
         }
-        System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {

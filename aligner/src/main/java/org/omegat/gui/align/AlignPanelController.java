@@ -44,12 +44,12 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.MissingResourceException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
@@ -546,7 +546,7 @@ public class AlignPanelController {
 
         alignPanel.table.setTransferHandler(new AlignTransferHandler());
         alignPanel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        alignPanel.table.setFont(Core.getMainWindow().getApplicationFont());
+        alignPanel.table.setFont(Objects.requireNonNull(Core.getMainWindow()).getApplicationFont());
         CoreEvents.registerFontChangedEventListener(alignPanel.table::setFont);
 
         // Set initial state
@@ -1439,9 +1439,7 @@ public class AlignPanelController {
             if (trgRow >= 0 && trgRow < rowToBead.size()) {
                 MutableBead srcBead = rowToBead.get(row);
                 MutableBead trgBead = rowToBead.get(trgRow);
-                if (srcBead == trgBead) {
-                    return false;
-                }
+                return srcBead != trgBead;
             }
             return true;
         }
@@ -1947,7 +1945,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
             if (ARRAY2DFLAVOR.equals(flavor)) {
                 return new int[][] { rows, cols };
             }
@@ -1977,17 +1975,12 @@ public class AlignPanelController {
             if (newVal != null) {
                 final Rectangle rect = rectForTarget(table, newVal);
                 rect.grow(INSET_MARGIN, INSET_MARGIN);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y, rect.width,
-                                rect.height);
-                    }
-                });
+                SwingUtilities.invokeLater(() -> BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y,
+                        rect.width, rect.height));
             }
         }
 
-        private boolean equals(DropLocation oldVal, DropLocation newVal) {
+        private boolean equals(@Nullable DropLocation oldVal, @Nullable DropLocation newVal) {
             if (oldVal == newVal) {
                 return true;
             }

@@ -375,9 +375,9 @@ public class SearchWindowController {
         field.getDocument().addUndoableEditListener(undoManager);
 
         // Invalidate replacement if search or replace strings change.
-        // Otherwise you can accidentally do the wrong thing like:
+        // Otherwise, you can accidentally do the wrong thing like:
         // 1. Search for "foo"
-        // 2. Enter "bar" in replacement field
+        // 2. Enter "bar" in the replacement field
         // 3. Hit "Replace all"
         // => You replaced "foo" with "" because you didn't re-search after
         // entering "bar"
@@ -478,9 +478,10 @@ public class SearchWindowController {
             form.m_searchRegexpSearchRB.setSelected(true);
             break;
         case EXACT:
-        default:
             form.m_searchExactSearchRB.setSelected(true);
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + searchType);
         }
 
         // case sensitivity

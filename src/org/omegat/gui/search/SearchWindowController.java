@@ -228,6 +228,11 @@ public class SearchWindowController {
         form.m_recursiveCB.setName("SearchWindowForm.m_recursiveCB");
         form.m_autoSyncWithEditor.setName("SearchWindowForm.m_autoSyncWithEditor");
         form.m_backToInitialSegment.setName("SearchWindowForm.m_backToInitialSegment");
+        form.m_replaceCase.setName("SearchWindowForm.m_replaceCase");
+        form.m_replaceButton.setName("SearchWindowForm.m_replaceButton");
+        form.m_allResultsCB.setName("SearchWindowForm.m_allResultsCB");
+        form.m_replaceLabel.setName("SearchWindowForm.m_replaceLabel");
+        form.m_replaceField.setName("SearchWindowForm.m_replaceField");
     }
 
     public SearchMode getMode() {

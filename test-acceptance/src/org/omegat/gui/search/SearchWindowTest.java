@@ -64,7 +64,7 @@ public class SearchWindowTest extends TestCoreGUI {
             searchWindowController.displaySearchResult(new Searcher(TestCoreState.getInstance().getProject(), s) {
                 @Override
                 public @NonNull List<SearchResultEntry> getSearchResults() {
-                    SearchResultEntry entry = new SearchResultEntry(0, null, null, "Error", null,  null, null, null, null, null, null);
+                    SearchResultEntry entry = new SearchResultEntry(0, null, null, "Error", null, null, null, null, null, null, null);
                     return List.of(entry);
                 }
             });
@@ -73,13 +73,12 @@ public class SearchWindowTest extends TestCoreGUI {
             frame.setVisible(true);
             frameFixture = new FrameFixture(robot(), frame);
             searchWindowController.setSearchText("Error");
-            searchWindowController.complete();
         });
         robot().waitForIdle();
         //
         frameFixture.requireVisible();
         frameFixture.label("SearchWindowForm.m_searchLabel").requireText("Search for:");
-        frameFixture.comboBox("SearchWindowForm.m_searchField").requireNoSelection();
+        frameFixture.comboBox("SearchWindowForm.m_searchField").requireVisible();
         frameFixture.radioButton("SearchWindowForm.m_searchExactSearchRB").requireSelected();
         frameFixture.checkBox("SearchWindowForm.m_searchSource").requireSelected();
         frameFixture.checkBox("SearchWindowForm.m_searchTranslation").requireSelected();
@@ -102,4 +101,37 @@ public class SearchWindowTest extends TestCoreGUI {
         closeProject();
     }
 
+    @Test
+    public void testReplaceWindowShow() throws Exception {
+        // load project
+        openSampleProject(PROJECT_PATH);
+        robot().waitForIdle();
+        //
+        assertNotNull(window);
+        SwingUtilities.invokeLater(() -> {
+            searchWindowController = new SearchWindowController(SearchMode.REPLACE);
+            SearchExpression s = new SearchExpression();
+            searchWindowController.displaySearchResult(new Searcher(TestCoreState.getInstance().getProject(), s) {
+                @Override
+                public @NonNull List<SearchResultEntry> getSearchResults() {
+                    SearchResultEntry entry = new SearchResultEntry(0, null, null, "Error", null, null, null, null, null, null, null);
+                    return List.of(entry);
+                }
+            });
+            assertEquals(SearchMode.REPLACE, searchWindowController.getMode());
+            JFrame frame = searchWindowController.getWindow();
+            frame.setVisible(true);
+            frameFixture = new FrameFixture(robot(), frame);
+            searchWindowController.setSearchText("Error");
+        });
+        robot().waitForIdle();
+        //
+        frameFixture.requireVisible();
+        frameFixture.checkBox("SearchWindowForm.m_replaceCase").requireNotSelected();
+        frameFixture.label("SearchWindowForm.m_searchLabel").requireText("Search for:");
+        frameFixture.label("SearchWindowForm.m_replaceLabel").requireText("Replace with:");
+        frameFixture.comboBox("SearchWindowForm.m_replaceField").requireEnabled();
+        frameFixture.button("SearchWindowForm.m_replaceButton").requireVisible();
+    }
 }
+

@@ -73,6 +73,7 @@ public class SearchWindowTest extends TestCoreGUI {
             frame.setVisible(true);
             frameFixture = new FrameFixture(robot(), frame);
             searchWindowController.setSearchText("Error");
+            searchWindowController.complete();
         });
         robot().waitForIdle();
         //

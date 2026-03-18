@@ -1,4 +1,4 @@
-site_name: OmegaT developer Documentaion
+site_name: OmegaT developer Documentation
 docs_dir: developer
 markdown_extensions:
   - tables
@@ -68,7 +68,7 @@ nav:
   - Quality Assurance and tests:
      Test and coverage: 33.TestAndCoverage.md
      Integration test: 34.IntegrationTest.md
-     Test a spcific features: 35.SpecificFeatureTests.md
+     Test a specific features: 35.SpecificFeatureTests.md
   - Documentation:
      Contributing to Documentation: 40.ContributingDocument.md
   - Localization:
@@ -84,7 +84,8 @@ nav:
      External Finder: 81.ExternalFinder.md
      How OmegaT create Backup files: 82.BackupFiles.md
      Team project: 83.TeamProject.md
-  - Architecture Design: adr/index.md
+  - Architecture Design:
+     Architecture Decisional Records: adr/index.md
   - Other information:
      Release procedure: 90.ReleaseProcedure.md
      Code Signing How-to: 92.CodeSigning.md

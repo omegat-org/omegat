@@ -80,6 +80,17 @@ public class SearchWindowTest extends TestCoreGUI {
         frameFixture.requireVisible();
         frameFixture.label("SearchWindowForm.m_searchLabel").requireText("Search for:");
         frameFixture.comboBox("SearchWindowForm.m_searchField").requireNoSelection();
+        frameFixture.radioButton("SearchWindowForm.m_searchExactSearchRB").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_searchSource").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_searchTranslation").requireSelected();
+        frameFixture.radioButton("SearchWindowForm.m_searchTranslatedUntranslated").requireSelected();
+        frameFixture.radioButton("SearchWindowForm.m_rbProject").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_cbSearchInMemory").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_cbSearchInTMs").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_cbSearchInGlossaries").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_recursiveCB").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_autoSyncWithEditor").requireSelected();
+        frameFixture.checkBox("SearchWindowForm.m_backToInitialSegment").requireSelected();
         //
         frameFixture.button("SearchWindowForm.m_searchButton").click();
         robot().waitForIdle();

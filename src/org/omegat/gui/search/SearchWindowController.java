@@ -220,6 +220,14 @@ public class SearchWindowController {
         form.m_searchTranslated.setName("SearchWindowForm.m_searchTranslated");
         form.m_searchButton.setName("SearchWindowForm.m_searchButton");
         form.m_viewer.setName("SearchWindowForm.m_viewer");
+        form.m_rbDir.setName("SearchWindowForm.m_rbDir");
+        form.m_rbProject.setName("SearchWindowForm.m_rbProject");
+        form.m_cbSearchInMemory.setName("SearchWindowForm.m_cbSearchInMemory");
+        form.m_cbSearchInTMs.setName("SearchWindowForm.m_cbSearchInTMs");
+        form.m_cbSearchInGlossaries.setName("SearchWindowForm.m_cbSearchInGlossaries");
+        form.m_recursiveCB.setName("SearchWindowForm.m_recursiveCB");
+        form.m_autoSyncWithEditor.setName("SearchWindowForm.m_autoSyncWithEditor");
+        form.m_backToInitialSegment.setName("SearchWindowForm.m_backToInitialSegment");
     }
 
     public SearchMode getMode() {

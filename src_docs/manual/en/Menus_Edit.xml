@@ -141,11 +141,11 @@
          <listitem>
             <para>Selects the source text.</para>
             <para>The selection can be used directly in OmegaT for 
-               <link linkend="windows.text.search">internal searches</link>, 
-               <link linkend="windows.text.replace">replacements</link>, 
-               <link linkend="menus.edit.create.glossary.entry">entering glossary terms</link>,
+               <link linkend="windows.text.search" role="xref">internal searches</link>,
+               <link linkend="windows.text.replace" role="xref">replacements</link>,
+               <link linkend="menus.edit.create.glossary.entry" role="xref">entering glossary terms</link>,
                		
-               <link linkend="dialogs.preferences.external.searches">external
+               <link linkend="dialogs.preferences.external.searches" role="xref">external
                   		searches</link>, and so on. Once copied to the OS clipboard, it can also be
                		used in web searches and elsewhere.</para>
          </listitem>
@@ -219,7 +219,7 @@
                to the 
                <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"></link>
                file located in the 
-               <link linkend="configuration.folder">configuration</link> folder.</para>
+               <link linkend="configuration.folder" role="xref">configuration</link> folder.</para>
          </listitem>
       </varlistentry>
       <varlistentry xml:id="menus.edit.create.glossary.entry">

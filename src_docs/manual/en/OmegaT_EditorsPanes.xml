@@ -61,7 +61,7 @@
       </orderedlist>
       <para>Use the various options in the 
          <link linkend="menus.view" endterm="menus.view.title"></link> menu and move the various 
-         <link linkend="chapter.panes">panes</link> around to obtain the layout that fits
+         <link linkend="chapter.panes" role="xref">panes</link> around to obtain the layout that fits
          	your workflow best.</para>
       <warning>
          <para>Use 
@@ -80,7 +80,7 @@
                   described in the 
                   <link linkend="chapter.menus" endterm="chapter.menus.title"></link> chapter, and a status bar, described
                   
-                  <link linkend="panes.statusbar">below</link>. You can click and 
+                  <link linkend="panes.statusbar" role="xref">below</link>. You can click and
                   hold the name of a pane to drag it to a new position or even undock it
                   as a separate window.</para>
                <para>The top right corner of each pane shows different icons
@@ -340,17 +340,15 @@
 	  writing space</title>
          <para>
             		
-            <programlisting>— ¶ —————————————————————
-               
-               
-               <token>Hide Tags</token>
-               |Dissimuler les balises
-               <token>&lt;segment 2148 ¶&gt;</token>
-               
-               — ¶ —————————————————————
-               
-               When enabled, all formatting in the source segments are hidden.</programlisting>
-         </para>
+   <programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+When enabled, all formatting in the source segments are hidden.</programlisting>
+</para>
       </example>
       <itemizedlist>
          <listitem>
@@ -515,7 +513,7 @@
                   <guilabel>OVR</guilabel> or insert
                   - 
                   <guilabel>INS</guilabel>) is shown at the right of the 
-                  <link linkend="panes.statusbar">status bar</link>. The same key toggles between each mode.</para>
+                  <link linkend="panes.statusbar" role="xref">status bar</link>. The same key toggles between each mode.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="panes.editor.cursor.lock">
@@ -532,7 +530,7 @@
                   <guilabel>LCK</guilabel> or unlocked
                   - 
                   <guilabel>UNL</guilabel>) is shown at the right of the 
-                  <link linkend="panes.statusbar">status bar</link>. The same key toggles
+                  <link linkend="panes.statusbar" role="xref">status bar</link>. The same key toggles
                   between locking and unlocking the cursor.</para>
             </listitem>
          </varlistentry>
@@ -688,17 +686,15 @@
                                     <tbody>
                                        <row>
                                           <entry>
-                                             							
-                                             <programlisting>— ¶ —————————————————————
-                                                
-                                                
-                                                <token>Application Folder</token>
-                                                |
-                                                <token>&lt;segment 1879 ¶&gt;</token>
-                                                
-                                                — ¶ —————————————————————
-                                                </programlisting>
-                                          </entry>
+
+<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+ | <token>&lt;segment 1879 ¶&gt;</token>
+
+ — ¶ —————————————————————
+</programlisting>
+                                    </entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -714,15 +710,14 @@
                                        <row>
                                           <entry>
                                              							
-                                             <programlisting>1. 
-                                                <token>Top</token> Folder
-                                                Dossier racine
-                                                &lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
-                                             
-                                             <programlisting>2. Configuration Folder
-                                                Dossier de configuration
-                                                &lt;50/50/66% &gt;</programlisting>
-                                          </entry>
+<programlisting>1. <token>Top</token> Folder
+ Dossier racine
+ &lt;50/50/66% Orphan segments (+1 more)&gt;
+
+2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting>
+                                         </entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -794,14 +789,11 @@
       <example xml:id="glossary.matches">
          <title xml:id="glossary.matches.title">Glossary matches</title>
          <para>
-            		
-            <programlisting>Project = 
-               <token>Projet</token>
-               1. Projet de traduction
-               
-               Folder = 
-               <token>Dossier</token>
-            </programlisting>
+<programlisting>Project = <token>Projet</token>
+1. Projet de traduction
+
+Folder = <token>Dossier</token>
+</programlisting>
             	  </para>
       </example>
       <para>The glossary file name is shown as a tooltip when hovering over the

@@ -141,7 +141,7 @@
                   <listitem>
                      <para>File filter settings: some filters allow for extra parts to
                         			  be considered for translation. See the file filter 
-                        <link linkend="filters.options">options</link> for details.</para>
+                        <link linkend="filters.options" role="xref">options</link> for details.</para>
                   </listitem>
                   <listitem>
                      <para>Segmentation rules: different rules will generate a

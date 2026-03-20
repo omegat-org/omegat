@@ -197,7 +197,7 @@
                <para>That special meaning has to be cancelled by another character to
                   match the character itself.</para>
                <para>The full list of characters is presented 
-                  <link linkend="app.regex.twelve.characters">below</link>. One example is
+                  <link linkend="app.regex.twelve.characters" role="xref">below</link>. One example is
                   
                   <literal>.</literal>: on its own, it has the special meaning of
                   matching 
@@ -341,8 +341,8 @@
                   
                   <emphasis>caret</emphasis> character matches the beginning of a
                   line.</para>
-               <para>When it is the first character in 
-                  <link linkend="app.regex.types.of.expressions.classes">a character class
+               <para>When it is the first character in
+                  <link linkend="app.regex.types.of.expressions.classes" role="xref">a character class
                      enclosed in brackets</link>, it matches all the characters that are
                   not part of that class.</para>
                <informaltable>
@@ -738,11 +738,8 @@
                   the number of the group.</para>
                <note>
                   <para>The content of the group can also be used in the 
-                     <link linkend="windows.text.replace">replacement text</link>. Use
-                     
-                     <literal>$
-                        <option>n</option>
-                     </literal>, where 
+                     <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>. Use
+                     <literal>$<option>n</option></literal>, where
                      <option>n</option>
                      is the number of the group defined in the search.</para>
                </note>

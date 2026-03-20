@@ -44,8 +44,8 @@
             <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"></link> how-to for details.</para>
          <para>Modified preferences are stored in the configuration folder used by
             	  the project. If you do not use the default configuration folder, all
-            	  modifications made in the 
-            <link linkend="chapter.dialogs.preferences">preferences</link> will be stored in
+            	  modifications made in the
+            <link linkend="chapter.dialogs.preferences" role="xref">preferences</link> will be stored in
             	  the specified configuration folder and will not appear when you resume
             	  work with the default configuration folder.</para>
       </note>

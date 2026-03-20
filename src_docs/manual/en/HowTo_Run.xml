@@ -258,7 +258,7 @@
                      <command>java</command>
                      			command. The parameters relevant to running OmegaT are described
                      			
-                     <link linkend="launch.with.command.line.java.parameters">below</link>.</para>
+                      <link linkend="launch.with.command.line.java.parameters" role="xref">below</link>.</para>
                </listitem>
             </varlistentry>
             <varlistentry xml:id="launch.with.command.line.intro.omegat.jar">
@@ -278,8 +278,8 @@
                </term>
                <listitem>
                   <para>The options specific to OmegaT are described 
-                     <link linkend="launch.with.command.line.omegat.options">later in this
-                        			section</link>
+                     <link linkend="launch.with.command.line.omegat.options" role="xref"> later in this
+                         section</link>
                   </para>
                </listitem>
             </varlistentry>

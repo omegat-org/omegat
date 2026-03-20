@@ -31,13 +31,10 @@
    <example xml:id="search.for.doitsu">
       <title xml:id="search.for.doitsu.title">Search for ドイツ</title>
       <para>
-         	  
-         <programlisting>-- 148&gt; | language = [[日本語]]・[[
-            <token>ドイツ</token>語]]
-            ---------
-            -- 177&gt; [[2001年]]、
-            <token>ドイツ</token>の永住権を取得。
-            ---------</programlisting>
+<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+-- 177&gt; [[2001年]]、 <token>ドイツ</token>の永住権を取得。
+---------</programlisting>
          	</para>
    </example>
    <para>The search window has its own menus:</para>
@@ -389,15 +386,11 @@
       <example xml:id="select.second.match">
          <title xml:id="select.second.match.title">Select the second match</title>
          <para>
-            		
-            <programlisting>-- 148&gt; | language = [[日本語]]・[[
-               <token>ドイツ</token>語]]
-               ---------
-               
-               <phrase remap="action">-- 177&gt; [[2001年]]、
-                  <token>ドイツ</token>の永住権を取得。</phrase>
-               ---------</programlisting>
-            	  </para>
+<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+---------
+<phrase remap="action">-- 177&gt; [[2001年]]、 <token>ドイツ</token>の永住権を取得。</phrase>
+---------</programlisting>
+      </para>
       </example>
       <variablelist>
          <varlistentry>

@@ -7,19 +7,19 @@
    <itemizedlist>
       <listitem>
          <para>
-            <link linkend="how.to.translate.other.files.associate">Associate</link> the format to an already supported format.</para>
+            <link linkend="how.to.translate.other.files.associate" role="xref">Associate</link> the format to an already supported format.</para>
       </listitem>
       <listitem>
          <para>
-            <link linkend="how.to.translate.other.files.convert">Convert</link> the format to an already supported format.</para>
+            <link linkend="how.to.translate.other.files.convert" role="xref">Convert</link> the format to an already supported format.</para>
       </listitem>
       <listitem>
          <para>
-            <link linkend="how.to.translate.other.files.third.party.plugins">Extend</link> OmegaT with third-party plugins that support the format.</para>
+            <link linkend="how.to.translate.other.files.third.party.plugins" role="xref">Extend</link> OmegaT with third-party plugins that support the format.</para>
       </listitem>
       <listitem>
          <para>
-            <link linkend="how.to.translate.other.files.develop">Develop</link> a filter for the format.</para>
+            <link linkend="how.to.translate.other.files.develop" role="xref">Develop</link> a filter for the format.</para>
       </listitem>
    </itemizedlist>
    <section xml:id="how.to.translate.other.files.associate">
@@ -125,7 +125,7 @@
             <para>When installed, the plugin offers direct access to the added
                			formats and also allows you to associate a custom filter parameters
                			file created in Rainbow. See 
-               <link linkend="how.to.translate.other.files.third.party.utilities.rainbow">above</link>.</para>
+                <link linkend="how.to.translate.other.files.third.party.utilities.rainbow" role="xref">above</link>.</para>
          </listitem>
       </itemizedlist>
       <para>Other plugins for less common formats are listed on the OmegaT

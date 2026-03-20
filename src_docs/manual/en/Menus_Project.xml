@@ -326,7 +326,7 @@
             <variablelist>
                <varlistentry>
                   <term>
-                     <link linkend="chapter.project.folder">
+                     <link linkend="chapter.project.folder" role="xref">
                         <guimenuitem>Project
                            			Folder</guimenuitem>
                      </link>
@@ -337,7 +337,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.dictionary">
+                     <link linkend="project.folder.dictionary" role="xref">
                         <guimenuitem>Dictionaries</guimenuitem>
                      </link>
                   </term>
@@ -347,7 +347,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.glossary">
+                     <link linkend="project.folder.glossary" role="xref">
                         <guimenuitem>Glossaries</guimenuitem>
                      </link>
                   </term>
@@ -357,7 +357,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.source">
+                     <link linkend="project.folder.source" role="xref">
                         <guimenuitem>Source
                            			Files</guimenuitem>
                      </link>
@@ -368,7 +368,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.target">
+                     <link linkend="project.folder.target" role="xref">
                         <guimenuitem>Target
                            			Files</guimenuitem>
                      </link>
@@ -379,7 +379,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.tm">
+                     <link linkend="project.folder.tm" role="xref">
                         <guimenuitem>TMs</guimenuitem>
                      </link>
                   </term>
@@ -389,7 +389,7 @@
                </varlistentry>
                <varlistentry>
                   <term>
-                     <link linkend="project.folder.exported.tm">
+                     <link linkend="project.folder.exported.tm" role="xref">
                         <guimenuitem>Exported
                            			TMs</guimenuitem>
                      </link>

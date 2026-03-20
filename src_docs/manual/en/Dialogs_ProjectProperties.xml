@@ -1,6 +1,6 @@
 <!-- Converted by db4-upgrade version 1.1 -->
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="dialogs.project.properties">
-   <title xml:id="dialogs.project.properties.title"><link linkend="dialogs.project.properties"> </link><guilabel>Project Properties</guilabel></title>
+   <title xml:id="dialogs.project.properties.title"><guilabel>Project Properties</guilabel></title>
    <para>Use 
       <link linkend="menus.project" endterm="menus.project.title"></link>
       <link linkend="menus.project.properties" endterm="menus.project.properties.title"></link>
@@ -12,7 +12,7 @@
       <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"></link> chapter for
       details.</para>
    <section xml:id="dialogs.project.properties.languages">
-      <title xml:id="dialogs.project.properties.languages.title"><link linkend="dialogs.project.properties.languages"> </link><guilabel>Languages</guilabel></title>
+      <title xml:id="dialogs.project.properties.languages.title"><guilabel>Languages</guilabel></title>
       <para>Select the source and target languages from the drop-down list,
          or enter them manually.</para>
       <para>OmegaT provides a convenient short list of two-letter language
@@ -56,11 +56,11 @@
          settings. Tokenizers allow OmegaT to provide better matches.</para>
    </section>
    <section xml:id="dialogs.project.properties.options">
-      <title xml:id="dialogs.project.properties.options.title"><link linkend="dialogs.project.properties.options"> </link><guilabel>Options</guilabel></title>
+      <title xml:id="dialogs.project.properties.options.title">
+         <guilabel>Options</guilabel></title>
       <variablelist>
          <varlistentry xml:id="dialogs.project.properties.options.segmentation">
             <term xml:id="dialogs.project.properties.options.segmentation.title">
-               <link linkend="dialogs.project.properties.options.segmentation"> </link>
                <option>Sentence-level segmenting</option>
             </term>
             <listitem>
@@ -113,8 +113,7 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.local.segmentation">
             <term xml:id="dialogs.project.properties.local.segmentation.title">
-               <link linkend="dialogs.project.properties.local.segmentation"> </link>
-               <guibutton>Local Segmentation Rules...</guibutton>
+              <guibutton>Local Segmentation Rules...</guibutton>
             </term>
             <listitem>
                <para>By default, segmentation rules are global and apply to all
@@ -148,7 +147,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.auto.propagation">
             <term xml:id="dialogs.project.properties.auto.propagation.title">
-               <link linkend="dialogs.project.properties.auto.propagation"> </link>
                <option>Auto-propagation of translations</option>
             </term>
             <listitem>
@@ -168,7 +166,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.hide.tags">
             <term xml:id="dialogs.project.properties.hide.tags.title">
-               <link linkend="dialogs.project.properties.hide.tags"> </link>
                <option>Hide tags</option>
             </term>
             <listitem>
@@ -203,7 +200,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.external.processing.command">
             <term xml:id="dialogs.project.properties.external.processing.command.title">
-               <link linkend="dialogs.project.properties.external.processing.command"> </link>
                <option>Local post-processing commands</option>
             </term>
             <listitem>
@@ -245,7 +241,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.filters">
             <term xml:id="dialogs.project.properties.filters.title">
-               <link linkend="dialogs.project.properties.filters"> </link>
                <guibutton>Local File Filters...</guibutton>
             </term>
             <listitem>
@@ -271,7 +266,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.repository.mapping">
             <term xml:id="dialogs.project.properties.repository.mapping.title">
-               <link linkend="dialogs.project.properties.repository.mapping"> </link>
                <guibutton>Repository Mapping...</guibutton>
             </term>
             <listitem>
@@ -285,7 +279,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.external.searches">
             <term xml:id="dialogs.project.properties.external.searches.title">
-               <link linkend="dialogs.project.properties.external.searches"> </link>
                <guibutton>Local External Searches</guibutton>
             </term>
             <listitem>
@@ -320,7 +313,8 @@
       </variablelist>
    </section>
    <section xml:id="dialogs.project.properties.file.locations">
-      <title xml:id="dialogs.project.properties.file.locations.title"><link linkend="dialogs.project.properties.file.locations"> </link><guilabel>File locations</guilabel></title>
+      <title xml:id="dialogs.project.properties.file.locations.title">
+          <guilabel>File locations</guilabel></title>
       <para>An OmegaT translation project consists of a number of resources in
          	separate folders.</para>
       <para>When a new project is created, OmegaT proposes a default project folder
@@ -340,7 +334,6 @@
       <variablelist>
          <varlistentry xml:id="dialogs.project.properties.file.locations.browse">
             <term xml:id="dialogs.project.properties.file.locations.browse.title">
-               <link linkend="dialogs.project.properties.file.locations.browse"> </link>
                <guibutton>Browse</guibutton>
             </term>
             <listitem>
@@ -358,7 +351,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.source.files">
             <term xml:id="dialogs.project.properties.file.locations.source.files.title">
-               <link linkend="dialogs.project.properties.file.locations.source.files"> </link>
                <option>Source files folder</option>
             </term>
             <listitem>
@@ -373,7 +365,6 @@
                <variablelist>
                   <varlistentry xml:id="dialogs.project.properties.file.locations.exclusions">
                      <term xml:id="dialogs.project.properties.file.locations.exclusions.title">
-                        <link linkend="dialogs.project.properties.file.locations.exclusions"> </link>
                         <guibutton>Exclusions...</guibutton>
                      </term>
                      <listitem>
@@ -412,7 +403,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.translation.memories">
             <term xml:id="dialogs.project.properties.file.locations.translation.memories.title">
-               <link linkend="dialogs.project.properties.file.locations.translation.memories"> </link>
                <option>Translation memories folder</option>
             </term>
             <listitem>
@@ -428,7 +418,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.glossaries">
             <term xml:id="dialogs.project.properties.file.locations.glossaries.title">
-               <link linkend="dialogs.project.properties.file.locations.glossaries"> </link>
                <option>Glossary files folder</option>
             </term>
             <listitem>
@@ -445,7 +434,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.writable.glossary">
             <term xml:id="dialogs.project.properties.file.locations.writable.glossary.title">
-               <link linkend="dialogs.project.properties.file.locations.writable.glossary"> </link>
                <option>Writable Glossary File</option>
             </term>
             <listitem>
@@ -464,7 +452,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.dictionaries">
             <term xml:id="dialogs.project.properties.file.locations.dictionaries.title">
-               <link linkend="dialogs.project.properties.file.locations.dictionaries"> </link>
                <option>Dictionaries folder</option>
             </term>
             <listitem>
@@ -481,7 +468,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.translated.files">
             <term xml:id="dialogs.project.properties.file.locations.translated.files.title">
-               <link linkend="dialogs.project.properties.file.locations.translated.files"> </link>
                <option>Translated files folder</option>
             </term>
             <listitem>
@@ -509,7 +495,6 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.exported.tms">
             <term xml:id="dialogs.project.properties.file.locations.exported.tms.title">
-               <link linkend="dialogs.project.properties.file.locations.exported.tms"> </link>
                <option>Exported translation memories folder</option>
             </term>
             <listitem>
@@ -534,7 +519,6 @@
                <variablelist>
                   <varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export">
                      <term xml:id="dialogs.project.properties.file.locations.tms.to.export.title">
-                        <link linkend="dialogs.project.properties.file.locations.tms.to.export"> </link>
                         <option>Translation memories to export</option>
                      </term>
                      <listitem>
@@ -545,7 +529,6 @@
                         <variablelist>
                            <varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export.omegat">
                               <term xml:id="dialogs.project.properties.file.locations.tms.to.export.omegat.title">
-                                 <link linkend="dialogs.project.properties.file.locations.tms.to.export.omegat"> </link>
                                  <option>OmegaT</option>
                               </term>
                               <listitem>
@@ -556,7 +539,6 @@
                            </varlistentry>
                            <varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export.level1">
                               <term xml:id="dialogs.project.properties.file.locations.tms.to.export.level1.title">
-                                 <link linkend="dialogs.project.properties.file.locations.tms.to.export.level1"> </link>
                                  <option>TMX Level 1</option>
                               </term>
                               <listitem>
@@ -566,7 +548,6 @@
                            </varlistentry>
                            <varlistentry xml:id="dialogs.project.properties.file.locations.tms.to.export.level2">
                               <term xml:id="dialogs.project.properties.file.locations.tms.to.export.level2.title">
-                                 <link linkend="dialogs.project.properties.file.locations.tms.to.export.level2"> </link>
                                  <option>TMX Level 2</option>
                               </term>
                               <listitem>

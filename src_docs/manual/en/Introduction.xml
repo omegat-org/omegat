@@ -11,11 +11,11 @@
       project</title>
          <para>An OmegaT translation project consists of a number of resources
             stored in separate folders, of an 
-            <link linkend="project.folder.omegat.project.file">
+            <link linkend="project.folder.omegat.project.file" role="xref">
                <filename>omegat.project</filename>
             </link>
             file that stores the location of all the resources and of a 
-            <link linkend="project.folder.project.save.tmx">
+            <link linkend="project.folder.project.save.tmx" role="xref">
                <filename>project_save.tmx</filename>
             </link>
             translation memory file that stores all the translations made while
@@ -140,7 +140,7 @@
             <term>Files and folders</term>
             <listitem>
                <para>The 
-                  <link linkend="project.folder.omegat.project.file">
+                  <link linkend="project.folder.omegat.project.file" role="xref">
                      		  
                      <filename>omegat.project</filename> </link> file.</para>
             </listitem>
@@ -297,7 +297,7 @@
                		and copy them to the spellchecking dictionaries location specified
                		at the top of the dialog (the
                		
-               <link linkend="configuration.folder">configuration</link>
+               <link linkend="configuration.folder" role="xref">configuration</link>
                		folder by default). This operation may take some time.</para>
          </listitem>
          <listitem>
@@ -330,7 +330,7 @@
                      <link linkend="menus.options" endterm="menus.options.title"></link>
                      <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"></link> to access
                      			the 
-                     <link linkend="configuration.folder">configuration</link> folder
+                     <link linkend="configuration.folder" role="xref">configuration</link> folder
                      			and change the dictionary file names to 
                      <emphasis role="bold">fr</emphasis>.</para>
                </listitem>
@@ -441,7 +441,7 @@
       </orderedlist>
       <para>Use the various options in the 
          <link linkend="menus.view" endterm="menus.view.title"></link> menu and move the various 
-         <link linkend="chapter.panes">panes</link> around to obtain the layout that fits
+         <link linkend="chapter.panes" endterm="">panes</link> around to obtain the layout that fits
          	your workflow best.</para>
    </section>
    <section xml:id="introduction.translate.the.segments.one.by.one">
@@ -718,7 +718,7 @@
       <title xml:id="app.shortcuts.streamline.workflow.title">A shortcut based
     workflow</title>
       <para>Remembering the main editing and navigation shortcuts (or 
-         <link linkend="app.shortcuts.customization">modifying them to suit your
+         <link linkend="app.shortcuts.customization" endterm="">modifying them to suit your
             needs</link>) can help you streamline your work.</para>
       <para>This is best illustrated with an example:</para>
       <example xml:id="example.shortcuts.streamline.workflow">
@@ -737,13 +737,13 @@
                <keycap>C</keycap>
                <keycap>U</keycap>
             </keycombo> to 
-            <link linkend="menus.goto.next.untranslated.segment">jump straight into the
+            <link linkend="menus.goto.next.untranslated.segment" role="xref">jump straight into the
                	  action</link> and start translating. (And do so again each time you
             	  reach a large unchanged section.)</para>
          <para>A few segments later, you come across a term you should add to the
             glossary. Instead of reaching for the mouse, you unlock the cursor with
             
-            <link linkend="panes.editor.cursor.lock">
+            <link linkend="panes.editor.cursor.lock" role="xref">
                <keycap>F2</keycap>
             </link>, use
             the cursor keys and standard system shortcuts to navigate to the term and
@@ -755,15 +755,15 @@
                <keycap>G</keycap>
             </keycombo>
             to 
-            <link linkend="menus.edit.create.glossary.entry">call up the glossary
+            <link linkend="menus.edit.create.glossary.entry" endterm="">call up the glossary
                entry dialog</link> to enter the source term. You then switch back to the
             editor, lock the cursor again with 
-            <link linkend="panes.editor.cursor.lock">
+            <link linkend="panes.editor.cursor.lock" endterm="">
                <keycap>F2</keycap>
             </link> and repeat
             the process to enter the target term.</para>
          <para>You have enabled the 
-            <link linkend="dialog.preferences.auto.completion">auto-completion</link> to
+            <link linkend="dialog.preferences.auto.completion" endterm="">auto-completion</link> to
             	  automatically display not only history predictions, but also glossary
             	  terms, and pre-defined short strings, which can be entered with simple
             	  arrow navigation.</para>
@@ -822,7 +822,7 @@
                <keycap>C</keycap>
                <keycap>F</keycap>
             </keycombo> 
-            <link linkend="windows.text.search">to find</link> it, and then use
+            <link linkend="windows.text.search" endterm="">to find</link> it, and then use
             
             <keycombo>
                <keycap>C</keycap>
@@ -868,7 +868,7 @@
             <link linkend="menus.edit" endterm="menus.edit.title"></link>
             <link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"></link> menu and the
             cursor keys several times, and decide to 
-            <link linkend="example.shortcut.addition">add a new shortcut</link> to
+            <link linkend="example.shortcut.addition" endterm="">add a new shortcut</link> to
             streamline that part of the process as well.</para>
       </example>
       <para>Taking the time to learn the shortcuts for the functions you use often

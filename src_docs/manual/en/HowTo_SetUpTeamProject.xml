@@ -55,8 +55,8 @@
                <listitem>
                   <para>Create the project structure</para>
                   <para>If you are creating a new empty project, you can follow the
-                     
-                     <link linkend="introduction.create.and.open.new.project">GUI
+
+                     <link linkend="introduction.create.and.open.new.project" role="xref">GUI
                         procedure</link>, or create it directly from the command line:
                      <!-- TODO we’ll need to update the CL when we have integrated the
                  new CL framework -->
@@ -78,8 +78,8 @@
                <listitem>
                   <para>Add the necessary files</para>
                   <para>Similarly add any relevant lists of spellchecker files you
-                     want to make available to everyone working on the project. See 
-                     <link linkend="project.folder.omegat.spellcheck">spellchecker files</link>
+                     want to make available to everyone working on the project. See
+                     <link linkend="project.folder.omegat.spellcheck" role="xref">spellchecker files</link>
                      for details.</para>
                   <para>If you are converting an existing project, make sure you
                      delete any files in the project that you do not need or want to
@@ -179,14 +179,14 @@
                      the project URL, and then have the translators copy it to an empty
                      folder and open it in OmegaT. This can be useful if the project is
                      set up to use different 
-                     <link linkend="how.to.setup.team.project.mapping.parameters">mappings</link>
+                     <link linkend="how.to.setup.team.project.mapping.parameters" role="xref">mappings</link>
                      for each translator.</para>
                </listitem>
             </orderedlist>
             <para>After the project manager confirms that a translator has
                been able to open the team project, it is a good idea to make
-               sure that the 
-               <link linkend="menus.tools.statistics">project
+               sure that the project
+               <link linkend="menus.tools.statistics" role="xref">project
                   statistics</link> are the same for both the project manager
                (on the server) and the translator (locally).</para>
             <para>If they do not match, make sure the two projects use the
@@ -243,7 +243,7 @@
                   the project statistics in 
                   <filename>.txt</filename> and
                   
-                  <filename>.json</filename> format. This enable the project
+                  <filename>.json</filename> format. This enables the project
                   manager to consult the statistics, and possibly automate
                   their processing, without the need to open OmegaT.</para>
             </listitem>
@@ -328,9 +328,9 @@
     mappings</title>
       <para>Default project mapping:
          
-         <programlisting>&lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
-            &lt;mapping local="" repository=""/&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
+    &lt;mapping local="" repository=""/&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>All the contents of
          
@@ -338,9 +338,9 @@
          local OmegaT project</para>
       <para>Mapping for projects in a subfolder of the repository:
          
-         <programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_projects"&gt;
-            &lt;mapping local="" repository="En-US_DE_project"/&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_projects"&gt;
+   &lt;mapping local="" repository="En-US_DE_project"/&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>All the contents of
          
@@ -349,12 +349,12 @@
       <para>Mapping for additional sources from a remote repository, with
          filters:
          
-         <programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
-            &lt;mapping local="source/subdir" repository=""&gt;
-            &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-            &lt;includes&gt;readme.bak&lt;/includes&gt;
-            &lt;/mapping&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
+   &lt;mapping local="source/subdir" repository=""&gt;
+      &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+      &lt;includes&gt;readme.bak&lt;/includes&gt;
+   &lt;/mapping&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>Everything in
          
@@ -366,9 +366,9 @@
          <filename>readme.bak</filename> is also included.</para>
       <para>Mapping for extra source files from the web:
          
-         <programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
-            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+   &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>The remote file
          
@@ -378,9 +378,9 @@
          <filename>source/Bundle.properties</filename>.</para>
       <para>Mapping with renaming:
          
-         <programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
-            &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+   &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>The remote file
          
@@ -391,10 +391,10 @@
       <para>This makes it possible to rename the file to translate.</para>
       <para>Local file mapping:
          
-         <programlisting>&lt;repository type="file" url="/home/me/myfiles"&gt;
-            &lt;mapping local="source/file.txt" repository="my/file.txt"/&gt;
-            &lt;mapping local="source/file2.txt" repository="some/file.txt"/&gt;
-            &lt;/repository&gt;</programlisting>
+<programlisting>&lt;repository type="file" url="/home/me/myfiles"&gt;
+   &lt;mapping local="source/file.txt" repository="my/file.txt"/&gt;
+   &lt;mapping local="source/file2.txt" repository="some/file.txt"/&gt;
+&lt;/repository&gt;</programlisting>
       </para>
       <para>The local file 
          <filename>/home/me/myfiles/my/file.txt</filename> is

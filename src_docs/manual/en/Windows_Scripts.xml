@@ -139,7 +139,7 @@
             location.</para>
          <para>In such cases, you will have to copy or move the script folder to a
             location for which you have write permissions, such as the 
-            <link linkend="configuration.folder.location">configuration folder</link>, if
+            <link linkend="configuration.folder.location" role="xref">configuration folder</link>, if
             you want to write your own scripts, add new ones, or modify existing
             ones.</para>
          <para>If you do have permission to write to the default folder, make sure
@@ -408,19 +408,19 @@
          as the top object. For example, the following Groovy code snippet scans
          through all segments in every file in the current project and prints out the
          source and the target text of segments that contain a translation.</para>
-      <programlisting>files = project.projectFiles;
-         for (i in 0 ..&lt; files.size())
-         {
-         	for (j in 0 ..&lt; files[i].entries.size())
-         	{
-         		currSegment = files[i].entries[j];
-         		if (project.getTranslationInfo(currSegment))
-         		{
-         			source = currSegment.getSrcText();
-         			target = project.getTranslationInfo(currSegment).translation;
-         			console.println(source + " &gt;&gt;&gt;&gt; " + target);
-         		}     
-         	}
-         }</programlisting>
+<programlisting>   files = project.projectFiles;
+   for (i in 0 ..&lt; files.size())
+   {
+      for (j in 0 ..&lt; files[i].entries.size())
+      {
+          currSegment = files[i].entries[j];
+          if (project.getTranslationInfo(currSegment))
+          {
+              source = currSegment.getSrcText();
+              target = project.getTranslationInfo(currSegment).translation;
+              console.println(source + " &gt;&gt;&gt;&gt; " + target);
+          }
+      }
+   }</programlisting>
    </section>
 </section>

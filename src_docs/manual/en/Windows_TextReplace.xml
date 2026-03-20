@@ -32,13 +32,11 @@
       <title xml:id="replace.with.allemand.title">Replace a term</title>
       <para>
          	  
-         <programlisting>多和田葉子.UTF8
-            -- 148&gt; | language = [[日本語]]・[[ドイツ語]]
-            &lt;- | language = [[Japonais]]・[[
-            <token>Alllemand</token>]]
-            -&gt; | language = [[Japonais]]・[[
-            <token>Allemand</token>]]
-            ---------</programlisting>
+<programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting>
       </para>
    </example>
    <note>

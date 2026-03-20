@@ -139,12 +139,12 @@
                   		  package (especially the 
                   <filename>OmegaT.l4J.ini</filename> for
                   		  
-                  <link linkend="running.omegat.on.windows">Windows</link> and the
+                  <link linkend="running.omegat.on.windows" role="xref">Windows</link> and the
                   		  
                   <filename>Configuration.properties</filename> and
                   		  
                   <filename>Info.plist</filename> files for 
-                  <link linkend="running.omegat.on.macos">macOS</link> packages) might be
+                  <link linkend="running.omegat.on.macos" role="xref">macOS</link> packages) might be
                   			overwritten or deleted, so you may want to create a backup before
                   			upgrading, if you have been using these files to modify OmegaT’s
                   			launch parameters.</para>
@@ -182,7 +182,7 @@
                   	  line. See the 
                   <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"></link> section.</para>
                <para>All the parameters located in a 
-                  <link linkend="chapter.project.folder">project folder</link> will apply to that
+                  <link linkend="chapter.project.folder" role="xref">project folder</link> will apply to that
                   	  project regardless of which version of OmegaT opens it.</para>
             </listitem>
          </varlistentry>

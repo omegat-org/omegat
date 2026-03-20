@@ -144,7 +144,7 @@
                		location for plugin manual installs is the 
                <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"></link> folder
                		located in the 
-               <link linkend="configuration.folder">configuration</link>
+               <link linkend="configuration.folder" role="xref">configuration</link>
                		folder. See the 
                <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"></link> preferences for
                		details.</para>

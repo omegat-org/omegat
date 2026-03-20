@@ -132,8 +132,8 @@
             <para>Identify the project folder that OmegaT refuses to open and open
                		it in your file manager. The folder contents should be similar to a
                		standard 
-               <link linkend="chapter.project.folder">project</link>
-               		folder.</para>
+               <link linkend="chapter.project.folder" role="xref">project</link>
+                    folder.</para>
          </listitem>
          <listitem>
             <para>In the folder, you should find a

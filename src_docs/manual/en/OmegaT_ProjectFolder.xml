@@ -110,15 +110,15 @@
                   		  for the project.</para>
                <para>Other files will be added over the course of the translation.</para>
                <para>See 
-                  <link linkend="project.folder.omegat.folder">below</link> for
-                  		  details.</para>
+                  <link linkend="project.folder.omegat.folder" role="xref">below</link> for
+                           details.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="project.folder.omegat.project.file">
             <term xml:id="project.folder.omegat.project.file.title">omegat.project</term>
             <listitem>
                <para>This file contains the project parameters defined in the 
-                  <link linkend="dialogs.project.properties">project properties</link>, such as
+                  <link linkend="dialogs.project.properties" role="xref">project properties</link>, such as
                   		  the source and target languages, their respective tokenizers and the type of
                   		  segmentation.</para>
                <para>It also acts as an 
@@ -151,7 +151,7 @@
          <link linkend="menus.project" endterm="menus.project.title"></link>
          <link linkend="menus.project.properties" endterm="menus.project.properties.title"></link> to access the project properties
          	and change the assigned 
-         <link linkend="dialogs.project.properties.file.locations.source.files">source
+         <link linkend="dialogs.project.properties.file.locations.source.files" role="xref">source
             	folder</link> as you wish.</para>
    </section>
    <section xml:id="project.folder.target">
@@ -515,8 +515,8 @@
                   words to skip during spellchecking), or 
                   <guimenuitem>Add to
                      Dictionary</guimenuitem> (for words to accept as correct),
-                  respectively, from the 
-                  <link linkend="panes.editor.context.menu">context menu</link>. See the 
+                  respectively, from the
+                   <link linkend="panes.editor.context.menu" role="xref">context menu</link>. See the
                   <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"></link> preferences for
                   details.</para>
                <para>If you already have a collection of words you want the

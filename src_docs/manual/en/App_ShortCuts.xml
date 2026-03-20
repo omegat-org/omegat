@@ -148,7 +148,7 @@
       <note>
          <para>You can copy the default OmegaT shortcut files from the OmegaT
             development site on Sourceforge to 
-            <link linkend="configuration.folder">your configuration folder</link> and modify
+            <link linkend="configuration.folder" role="xref">your configuration folder</link> and modify
             them to suit your needs:</para>
          <variablelist>
             <varlistentry>
@@ -250,7 +250,7 @@
          <listitem>
             <para>and <code>key</code> can be any key available on your
                keyboard. You can refer to the 
-               <link linkend="app.shortcuts.lists.function.codes.editor.table">table
+               <link linkend="app.shortcuts.lists.function.codes.editor.table" role="xref">table
                   presenting the different editor shortcuts</link> to find the values for
                keys such as 
                <literal>Home</literal>, 
@@ -262,14 +262,14 @@
          easier to read. A comment line starts with a <code>#</code>, and everything
          after that is ignored by the application.</para>
       <para>The easiest way to modify the shortcuts is to download copies of the
-         default files to 
-         <link linkend="configuration.folder">your configuration
+         default files to your
+         <link linkend="configuration.folder" role="xref">your configuration
             folder</link>, as noted above, and make the changes you want there.</para>
       <example xml:id="example.shortcut.modification">
          <title xml:id="example.shortcut.modification.title">Modifying a
       shortcut</title>
          <para>The default shortcut for 
-            <link linkend="menus.project.close">closing
+            <link linkend="menus.project.close" role="xref">closing
                a project</link> is defined on Windows and Linux as:</para>
          <para><code>projectCloseMenuItem=ctrl shift W</code></para>
          <para>and on macOS as:</para>
@@ -299,7 +299,7 @@
       <example xml:id="example.shortcut.addition">
          <title xml:id="example.shortcut.addition.title">Adding a shortcut</title>
          <para>If your language pair calls for the frequent use of 
-            <link linkend="menus.edit.create.alternative.translation">alternative
+            <link linkend="menus.edit.create.alternative.translation" role="xref">alternative
                translations</link>, you may want to assign a shortcut to that function
             since it does not have one by default.</para>
          <para>The steps below demonstrate how to assign the
@@ -315,14 +315,12 @@
             <listitem>
                <para>Open the 
                   <filename>MainMenuShortcuts.properties</filename> you
-                  have copied to 
-                  <link linkend="configuration.folder">your configuration
-                     folder</link> in a text editor.</para>
+                  have copied to your
+                  <link linkend="configuration.folder" endterm="configuration.folder.title"/> in a text editor.</para>
             </listitem>
             <listitem>
                <para>As shown in the 
-                  <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">Edit menu
-                     table</link> below, the function code for the 
+                  <xref linkend="app.shortcuts.lists.function.codes.edit.menu.table"/> below, the function code for the
                   <guimenuitem>Create
                      Alternative Translation</guimenuitem> function is
                   <code>editMultipleAlternate</code>.</para>

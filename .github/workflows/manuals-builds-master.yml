@@ -28,3 +28,8 @@ jobs:
     - name: Run gradle manualsHtmls
       run: ./gradlew -PenvIsCi=true manualHtmls
       id: gradle
+    - name: upload artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        name: manual
+        path: build/docs/manual

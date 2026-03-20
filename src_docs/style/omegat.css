@@ -1,13 +1,3 @@
-/**********************************/
-/* Reset some of the WH styesheet */
-/**********************************/
-
-* {
-}
-
-body {
-	font-family:sans-serif;
-}
 
 /***************************/
 /* Device based page width */
@@ -76,26 +66,26 @@ body {
 /*************************/
 
 /* WH ToC */
-
-#wh-navigation {
-	margin-right:3em;
+#wh-body #wh-navigation {
+    width: 25%;
+    margin-right:3em;
 }
+
 #wh-toc a.wh-toc-selected {
-	color:var(--normal-font) !important;
-	border-bottom-width:0px !important;
-	font-weight:bold;
-	font-size: 1.1em;
+    color:var(--normal-font) !important;
+    border-bottom-width:0px !important;
+    font-weight:bold;
+    font-size: 1.1em;
 }
 
 #wh-toc a {
-	font-style: normal;
+    font-style: normal;
 }
 
 /* WH content */
 
 #wh-content {
-    font-family: sans-serif;
-	/*    font-size: 10pt; */
+	font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--normal-background);
     line-height: 1.5;
     color:var(--normal-font);
@@ -103,77 +93,76 @@ body {
     clip-path: padding-box;
 }
 
-#wh-content div.toc,
-#wh-content header,
-#wh-content footer
-{
-    display:none;
+#wh-content article:lang(ja) {
+	font-family: "Noto Sans CJK JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-#wh-content .book  div.toc {
+#wh-content article:lang(zh) {
+	font-family: "Noto Sans CJK SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#wh-content article:lang(ko) {
+	font-family: "Noto Sans CJK KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#wh-content nav.top {
+  display: none !important;
+}
+
+#wh-content nav.bottom {
+  display: none !important;
+}
+
+#wh-content article.book div.list-of-titles div.lot {
     display: block;
 }
 
-#wh-content .book .abstract-title,
-#wh-content .book .list-of-figures,
-#wh-content .book .list-of-tables,
-#wh-content .book .toc-title {
+#wh-content article.book div.list-of-titles div.lot div.title {
     display:none;
 }
 
-#wh-content .book  h3.author {
-    font-style:italic;
+#wh-content article.book div.list-of-titles div.lot > ul.toc {
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    gap: 1rem 3%;
+    align-items: start;
 }
-#wh-content .book  div.toc .toc-chapters,
-#wh-content .book  div.toc .toc-appendices {
-    display:flex;
-    flex-wrap: wrap;
-    padding:0;
-    margin-bottom:20px;
-}
-
-#wh-content .book  div.toc .toc-panel {
-    display:block;
-    /*    height: 120px;*/
-
-    position: relative;
-    flex: 0 1 auto;
-
-    width: 45%;
-
-    border: 1px solid var(--accent-line);
-    border-radius:3px;
-    background:var(--normal-background);
-    margin-right:3%;
-    margin-top:30px;
-    padding-bottom:20px;
+#wh-content article.book div.list-of-titles div.lot > ul.toc > li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 2px solid var(--accent-line);
+    border-radius: 3px;
+    padding-bottom: 20px;
 }
 
-#wh-content .book  div.toc h2 {
+#wh-content article.book div.list-of-titles div.lot > ul.toc > li > a {
+    display: block;
     font-size: 1.2em;
-    color:var(--main-color);
-    font-weight:bold;
-    margin:.8rem 1rem 0 1rem;
+    font-weight: bold;
+    border-bottom: 1px solid var(--accent-line);:
 }
 
-#wh-content .book  div.toc .toc-panel ul {
-    display:block;
-    margin-top: 1rem;
-    margin-right: 1em;
-    padding-left: 1rem;
-    text-align:left;
+/* subsection titles stay inside the section block */
+#wh-content article.book div.list-of-titles div.lot > ul.toc > li > ul.toc {
+    display: block;
+    margin-top: 0.75rem;
 }
 
-#wh-content .book  div.toc .toc-panel ul>li {
+#wh-content article.book div.list-of-titles div.lot > ul.toc > li > ul > li {
     display:inline;
 }
 
-#wh-content .book  div.toc .toc-panel li>span>a:after {
-    content:", ";
+#wh-content article.book div.list-of-titles div.lot>ul.toc>li span.label,
+#wh-content article.book div.list-of-titles div.lot>ul.toc>li span.sep {
+    display:none;
 }
 
-#wh-content .book  div.toc .toc-panel li:last-of-type>span>a:after {
-    content:".";
+#wh-content article.book div.list-of-titles div.lot ul.toc li ul li>a:after {
+    content:", ";
 }
 
 /* WH Header */
@@ -193,22 +182,28 @@ body {
 
 #wh-header .title {
     display:inline;
-	/*    font-size:18pt; */
-	font-size:1.8em;
-    font-family: sans-serif;
+    font-size:1.8em;
+	font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight:bold;
     vertical-align: middle;
+}
+
+body:has(article:lang(ja)) #wh-header .title {
+  font-family: "Noto Sans CJK JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body:has(article:lang(zh)) #wh-header .title {
+	font-family: "Noto Sans CJK SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body:has(article:lang(ko)) #wh-header .title {
+	font-family: "Noto Sans CJK KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 #wh-header .title a {
     color:var(--normal-background);
     text-decoration:none;
 }
-
-
-/*************************************/
-/* CSS for web manual visual effects */
-/*************************************/
 
 /*****************/
 /* Global layout */
@@ -300,27 +295,9 @@ a {
 	text-decoration-color: var(--panes-color);
 }
 
-a.ulink::after {
-	content: " ↗️";
+a.link:not(.xref)::after {
+	content: "↗️";
 }
-
-/* 
-.toc a:link {
-	text-decoration:none;
-}
-
-
-a.ulink:link {
-    color:var(--caps-border);
-	text-decoration-color: var(--caps-border);	
-}
-
-a.ulink:visited {
-    color:var(--caps-border);
-	text-decoration-color: var(--caps-border);	
-}
- */
-
 
 /*****************************************/
 /* Visual differentiation of link target */
@@ -350,16 +327,56 @@ section.chapter p a[href^="chapter.windows.and.dialogs.html#windows"] > span.gui
 /* Tables */
 /**********/
 
-.table-title {
+.table .title {
     font-style:italic;
     color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
 
+table {
+    border-collapse: collapse;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
 
-td,th {
+table th {
     padding: .5em 1em;
+    text-align: left;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+table td {
+    padding: .5em 1em;
+    text-align: left;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+div.table[id="menus.shortcut.description"] table {
+  border-collapse: collapse;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+}
+
+div.table[id="menus.shortcut.description"] table th {
+  border: 1px solid;
+}
+
+div.table[id="menus.shortcut.description"] table td {
+  border: 1px solid;
+}
+
+div.table[id="menus.shortcut.description"] header .title {
+  font-style: italic;
+  color: var(--main-color);
+  font-size: .9em;
+  margin-bottom: .75em;
 }
 
 .table[id*="app.shortcuts.lists.function.codes"] .table-contents {
@@ -382,7 +399,6 @@ pre.programlisting em.parameter {
 pre.programlisting {
     overflow-x : auto;
     text-align:left;
-	/*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
 /*************/
@@ -432,7 +448,6 @@ span.guibutton {
 /********************************/
 
 .note {
-	/*    font-size: small; */
 	font-size: 0.9em;
     color: var(--normal-font);
     background-color:var(--insert-background);
@@ -442,19 +457,27 @@ span.guibutton {
     padding:0 1em;
 }
 
-.note h3 {
-    display:inline-block;
-    margin:.5em 0 0 0;
+.note .icon {
+    display: none
 }
 
-.example-title {
+.note .body .title {
+    display:inline-block;
+    font-size: 1.17em;
+    font-weight: bold;
+    line-height: 1.28;
+    margin:.5em 0 0 0;
+    color: #77A43B;
+}
+
+div.example header div.title {
     font-style:italic;
     color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
 
-.example-contents {
+.example {
     border-style: solid;
     border-width: 1px;
     border-radius:3px;
@@ -464,7 +487,6 @@ span.guibutton {
 }
 
 .warning {
-	/*    font-size: small; */
 	font-size: 0.9em;
     color: var(--normal-font);
     background: var(--insert-background);
@@ -475,30 +497,33 @@ span.guibutton {
 
 }
 
-.warning h3 {
+.warning .icon {
+    display: none
+}
+
+.warning .body .title {
     display:inline-block;
+    font-weight: bold;
     margin:.5em 0 0 0;
     color:var(--warning-header);
 }
-
 
 /***********/
 /* Figures */
 /***********/
 
-.figure-title {
+div.figure div.title {
     font-style:italic;
     color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
 
-.figure-contents img {
+picture.imageobject img {
     max-width: 100%;
     height: auto;
 
 }
-
 
 /***********/
 /* Keycaps */
@@ -523,35 +548,67 @@ p span.keycap:last-of-type,
 dd span.keycap:last-of-type, 
 li.listitem span.keycap:last-of-type, 
 span.term>span.keycap:last-of-type, 
-div.example-contents span.keycap:last-of-type, 
-div.example-contents > p:nth-child(8) > span:nth-child(2),
-div.example-contents > p:nth-child(9) > span:nth-child(3),
-div.example-contents > p:nth-child(11) > span:nth-child(2),
-div.example-contents > p:nth-child(13) > span:nth-child(2),
-div.example-contents > p:nth-child(13) > span:nth-child(4),
-div.example-contents > p:nth-child(5) > span:nth-child(3),
+div.example span.keycap:last-of-type,
+div.example > p:nth-child(8) > span:nth-child(2),
+div.example > p:nth-child(9) > span:nth-child(3),
+div.example > p:nth-child(11) > span:nth-child(2),
+div.example > p:nth-child(13) > span:nth-child(2),
+div.example > p:nth-child(13) > span:nth-child(4),
+div.example > p:nth-child(5) > span:nth-child(3),
+span.keycombo > span.keycap:last-of-type,
 p > span.keycap:last-child  {
     background: var(--main-color);
     color: var(--normal-background);
     border-color: var(--caps-border);
     padding: 0 .3rem;
-} 
+}
+
+/********/
+/* code */
+/********/
+code {
+   font-family: monospace;
+    font-size: 1.0em;
+}
+
+code.filename {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+code.option {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+code.userinput {
+    font-style: italic;
+}
+
+code.command {
+    font-weight: bold;
+}
+
+code.literal {
+    font-family: monospace;
+    font-size: 1.3em;
+    font-weight: bold;
+}
 
 /*******************/
 /* ToC side colors */
 /*******************/
 
 /* Introduction */
-a[href="chapter.instant.start.guide.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.instant.start.guide.html"]) > ul {
 	border-left: var(--support-border) var(--intro-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
-	border-right: var(--support-border) var(--intro-color);
-	padding-right: 1em;
+div.lot > ul.toc > li:has(a[href="chapter.instant.start.guide.html"]) > ul.toc {
+    border-right: var(--support-border) var(--intro-color);
+    padding-right: 1em;
 }
-
 
 #chapter\.instant\.start\.guide {
 	padding-right: 2em;
@@ -560,16 +617,16 @@ h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
 }
 
 /* How to */
-
-a[href="chapter.how.to.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.how.to.html"]) > ul {
 	border-left: var(--support-border) var(--howto-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.how.to.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.how.to.html"]) > ul.toc {
 	border-right: var(--support-border) var(--howto-color);
 	padding-right: 1em;
 }
+
 #chapter\.how\.to {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--howto-color);
@@ -577,12 +634,12 @@ h2:has(a[href="chapter.how.to.html"]) ~ ul {
 }
 
 /* Panes */
-a[href="chapter.panes.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.panes.html"]) > ul {
 	border-left: var(--support-border) var(--panes-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.panes.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.panes.html"]) > ul.toc {
 	border-right: var(--support-border) var(--panes-color);
 	padding-right: 1em;
 }
@@ -594,12 +651,12 @@ h2:has(a[href="chapter.panes.html"]) ~ ul {
 }
 
 /* Menus */
-a[href="chapter.menus.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.menus.html"]) > ul {
 	border-left: var(--support-border) var(--menus-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.menus.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.menus.html"]) > ul.toc {
 	border-right: var(--support-border) var(--menus-color);
 	padding-right: 1em;
 }
@@ -610,13 +667,12 @@ h2:has(a[href="chapter.menus.html"]) ~ ul {
 }
 
 /* Windows and dialogs */
-
-a[href="chapter.windows.and.dialogs.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.windows.and.dialogs.html"]) > ul {
 	border-left: var(--support-border) var(--windows-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.windows.and.dialogs.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.windows.and.dialogs.html"]) > ul.toc {
 	border-right: var(--support-border) var(--windows-color);
 	padding-right: 1em;
 }
@@ -627,13 +683,12 @@ h2:has(a[href="chapter.windows.and.dialogs.html"]) ~ ul {
 }
 
 /* Project folder */
-
-a[href="chapter.project.folder.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.project.folder.html"]) > ul {
 	border-left: var(--support-border) var(--project-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.project.folder.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.project.folder.html"]) > ul.toc {
 	border-right: var(--support-border) var(--project-color);
 	padding-right: 1em;
 }
@@ -644,13 +699,12 @@ h2:has(a[href="chapter.project.folder.html"]) ~ ul {
 }
 
 /* Preferences */
-
-a[href="chapter.dialogs.preferences.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.dialogs.preferences.html"]) > ul {
 	border-left: var(--support-border) var(--prefs-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.dialogs.preferences.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.dialogs.preferences.html"]) > ul.toc {
 	border-right: var(--support-border) var(--prefs-color);
 	padding-right: 1em;
 }
@@ -661,13 +715,12 @@ h2:has(a[href="chapter.dialogs.preferences.html"]) ~ ul {
 }
 
 /* Appendices */
-
-a[href="chapter.appendices.html"] ~ ul {
+ul.toc-toc > li.toc-expanded:has(> a[href="chapter.appendices.html"]) > ul {
 	border-left: var(--support-border) var(--appendices-color);
 	border-radius: 3px;
 }
 
-h2:has(a[href="chapter.appendices.html"]) ~ ul {
+div.lot > ul.toc > li:has(a[href="chapter.appendices.html"]) > ul.toc {
 	border-right: var(--support-border) var(--appendices-color);
 	padding-right: 1em;
 }
@@ -675,74 +728,6 @@ h2:has(a[href="chapter.appendices.html"]) ~ ul {
 	padding-right: 2em;
 	border-right: var(--support-border) var(--appendices-color);
 	border-bottom: var(--support-border) var(--appendices-color);
-}
-
-
-/*****************************************/
-/* Various font, colors and box settings */
-/*****************************************/
-
-
-/* 
-code.filename {
-	color:var(--main-color);
-}
- */
-
-.literal {
-    font-weight: bold;
-}
-
-code,
-tt,
-kbd,
-samp,
-var,
-pre {
-    font-family: monospace;
-    font-size: 1.3em;
-}
-
-kbd {
-    font-weight: bold;
-    border: 1px solid var(--main-color);
-    border-radius: 3px;
-    padding: 0.125em 0.25em;
-}
-
-samp {
-    background-color: var(--insert-background);
-    padding: 0.125em 0.25em;
-}
-
-var {
-    font-style: italic;
-}
-
-abbr {
-    font-weight: bold;
-    text-decoration: none;
-}
-
-cite {
-    font-style: italic;
-}
-
-dfn {
-    font-style: italic;
-    border-bottom: 1px dotted var(--main-color);
-}
-
-pre {
-    white-space: pre;
-    background-color: var(--insert-background);
-    border: 1px dotted var(--main-color);
-    padding: 0.5em;
-    margin: 1.1em 0;
-}
-
-strong.userinput {    
-    font-style: italic;    
 }
 
 /**********************/
@@ -820,24 +805,56 @@ dd {
 /* CSS for "docbook" coded screenshots */
 /***************************************/
 
+/******************/
+/* Panes examples */
+/******************/
+
+/* General layout */
+
+pre {
+    white-space: pre;
+    background-color: var(--insert-background);
+    border: 1px dotted var(--main-color);
+    padding: 0.5em;
+    margin: 1.1em 0;
+}
+
+pre.programlisting {
+	background-color: var(--normal-background);
+	font-weight: 100;
+	font-size: 1em;
+	text-align:left;
+    border: 1px solid var(--accent-line) ;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+pre.programlisting .ln {
+    display: none;
+}
+
+pre.programlisting .token {
+    font-weight: bold;
+}
+
 /**************/
 /* Status bar */
 /**************/
 
 /* Messages */
 
-#panes\.statusbar\.messages > div.example-contents {
-	background-color:var(--normal-background);	
+#panes\.statusbar\.messages {
+	background-color:var(--normal-background);
 }
-																
-#panes\.statusbar\.widgets > div.example-contents > p {
+
+#panes\.statusbar\.widgets > p {
 	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
 	border-radius: 0px;
 	text-align: left;
 }
 
-#panes\.statusbar\.messages > div.example-contents > p > .literal {
+#panes\.statusbar\.messages > p > .literal {
 	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
     padding: 0.5em 5em 0.5em 1em;
@@ -847,11 +864,11 @@ dd {
 
 /* Widget */
 
-#panes\.statusbar\.widgets > div.example-contents {
+#panes\.statusbar\.widgets {
 	background-color:var(--normal-background);
 }
 
-#panes\.statusbar\.widgets > div.example-contents > p  {
+#panes\.statusbar\.widgets > p  {
 	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
     padding: 0.5em 5em 0.5em 1em;
@@ -859,21 +876,21 @@ dd {
 	text-align: left;
 }
 
-#panes\.statusbar\.widgets > div.example-contents > p > .literal {
-	font-size:1em;	
+#panes\.statusbar\.widgets > p > .literal {
+	font-size:1em;
 }
 
-#panes\.statusbar\.widgets > div.example-contents > p > .literal > .token {
+#panes\.statusbar\.widgets > p > .literal > .token {
     border: 0.1px solid var(--normal-font) ;
-    padding: 3px;	
+    padding: 3px;
 }
 
 /* widget with % */
-#panes\.statusbar\.widgets\.percentage > div.example-contents {
-	background-color:var(--normal-background);	
+#panes\.statusbar\.widgets\.percentage {
+	background-color:var(--normal-background);
 }
 
-#panes\.statusbar\.widgets\.percentage > div.example-contents > p {
+#panes\.statusbar\.widgets\.percentage > p {
 	background-color:var(--insert-background);
     border: 0.1px solid var(--normal-font) ;
     padding: 0.5em 5em 0.5em 1em;
@@ -882,64 +899,29 @@ dd {
 	font-size:1em;
 }
 
-#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal {
+#panes\.statusbar\.widgets\.percentage > p > .literal {
 		font-size:1em;
 }
 
-#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal > .token {
+#panes\.statusbar\.widgets\.percentage > p > .literal > .token {
     border: 0.1px solid var(--normal-font) ;
-    padding: 3px;	
-}
-
-
-/******************/
-/* Panes examples */
-/******************/
-
-/* General layout */
-
-.programlisting,
-.literallayout {
-	background-color:var(--normal-background);
-	font-weight: 100;
-	font-size: 1em;	
-	text-align:left;		
-
-    border: 1px solid var(--accent-line) ;
-    padding: 1em;
-    border-radius: 5px;
+    padding: 3px;
 }
 
 /* Editor pane */
 
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre {
+#panes\.editor\.default\.editor\.writing\.space > div.pre-wrap > pre {
 	border-left: 10px solid lightgrey;
 }
 
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(1) {
+#panes\.editor\.default\.editor\.writing\.space span[db-line="3"] .token {
 	background-color:var(--match-background);
-	font-weight:bold;	
 }
-
-#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(2) {
-	font-weight:bold;	
-}
-
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre  {
-}
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(2) {
-	float:left;
-}
-
-#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(4) {
-	float:left;	
-}
-
 
 /* Fuzzy match pane */
 
 #table\.pane\.matches > table,
-#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table{
+#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table {
 	width: 100%;
 	border-collapse:separate !important;
 	border: 0px !important;
@@ -958,101 +940,77 @@ dd {
 }
 
 /** Editor side **/
+/** fuzzy pane side **/
 
-#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td,
-#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td {
+#table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap,
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap {
 	border: 1px solid lightgrey;
 	border-left: 10px solid lightgrey;
 	border-radius: 5px;
 }
 
-#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td > pre > span:nth-child(1),
-#table\.pane\.matches > table > tbody > tr > td:nth-child(1) > div > table > tbody > tr > td > pre > span:nth-child(2) {
+#table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap pre.programlisting,
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting,
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 table {
+    border:0px;
+}
+
+#table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="3"],
+#table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="4"] {
 	font-weight:bold;	
 }
 
-/** fuzzy pane side **/
-
-#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table {
-	width: 100%;
-	border-collapse:separate !important;
-	border: 0px !important;
-}
-
-#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre {
-	border:0px;
-}
-
-#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre:nth-child(1) {
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="1"],
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="2"],
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="3"] {
 	font-weight:bold;
 }
 
-#table\.pane\.matches > table > tbody > tr > td:nth-child(2) > div > table > tbody > tr > td > pre:nth-child(1) > span {
+#table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .token {
 	color:blue;
 }
 
 /** Explanations **/
 
-#panes\.fuzzy\.matches > p:nth-child(7) > span:nth-child(2) > strong {
+#panes\.fuzzy\.matches > p:nth-child(6) > strong.bold:nth-child(2) {
 	color: blue;
 }
 
-#panes\.fuzzy\.matches > p:nth-child(7) > span:nth-child(3) > strong {
+#panes\.fuzzy\.matches > p:nth-child(6) > strong.bold:nth-child(3) {
 	color: green;
 }
 
 /* Glossary match */
 
-#glossary\.matches > div.example-contents > pre {
+#glossary\.matches > div.pre-wrap > pre.programlisting {
 	border-left: 10px solid lightgrey;
 	border-radius: 5px;
 }
 
-#glossary\.matches .token {
-	font-weight:bold;
-}
-
-#glossary\.matches > div.example-contents > pre > span:nth-child(2) {
-	font-weight:100;	
-}
-
-#no\.source\.file\.display > div.example-contents > pre > span {
-	font-weight:bold;
-}
-
 /* Search */
-#search\.for\.doitsu > div.example-contents > pre > .token {
+#search\.for\.doitsu > div.pre-wrap > pre.programlisting .token {
 	color:var(--term-match);
-	font-weight:bold;
 }
 
-#select\.second\.match > div.example-contents > pre > span.action {
+#select\.second\.match > div.pre-wrap > pre.programlisting span.line[db-line="3"] {
 	background-color:var(--match-background);
 }
 
 /* Replace */
 
-#replace\.with\.allemand > div.example-contents > pre > span:nth-child(1) {
+#replace\.with\.allemand > div.pre-wrap > pre.programlisting span.line[db-line="3"] .token {
 	color:var(--term-match);	
 }
 
-#replace\.with\.allemand > div.example-contents > pre > span:nth-child(2) {
+#replace\.with\.allemand > div.pre-wrap > pre.programlisting span.line[db-line="4"] .token {
 	color:var(--replace-color);
 }
 
 /* Convert match numbers */
 
-#convert\.match\.numbers > div.example-contents .token {
-	font-weight:bold;	
-}
-
 /* Bridge two languages */
 
-#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(1) {
+#bridge\.english\.and\.french\.with\.japanese .ln:nth-child(3) .token,
+#bridge\.english\.and\.french\.with\.japanese .ln:nth-child(4) .token {
 	background-color:var(--match-background);
-	font-weight:bold;
-}
-
-#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(2) {
-	font-weight:bold;
 }

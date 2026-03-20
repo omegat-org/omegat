@@ -11,7 +11,7 @@
                 version="3.0">
 
 
-    <xsl:import href="../docbook/xslt/docbook.xsl"/>
+    <xsl:import href="https://cdn.docbook.org/release/xsltng/current/xslt/docbook.xsl"/>
     <xsl:param name="chunk" select="__index.html"/>
     <xsl:output method="xhtml"/>
 

@@ -10,7 +10,7 @@
                 exclude-result-prefixes="db f m t xs"
                 version="3.0">
 
-    <xsl:import href="https://cdn.docbook.org/release/xsltng/2.5.0/xslt/docbook.xsl"/>
+    <xsl:import href="https://cdn.docbook.org/release/xsltng/current/xslt/docbook.xsl"/>
     <xsl:param name="chunk" select="__index.xml"/>
     <xsl:output method="xml" indent="yes"/>
 

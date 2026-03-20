@@ -5,15 +5,22 @@ plugins {
     id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
-    id 'org.hidetake.ssh'
 }
 
-def documentRootDir = file('src_docs')
-def styleRootDir = file('src_docs/xsl')
+configurations {
+    docbookXsl
+}
+
+dependencies {
+    docbookXsl 'org.docbook:docbook-xslTNG:2.5.0'
+}
+
+def documentRootDir = 'src_docs'
+def styleRootDir = 'src_docs/xsl'
 
 tasks.register('genDocIndex', Copy) {
-    def inputTemplate = layout.projectDirectory.file('src_docs/template/index.html')
-    def docPropsFiles = fileTree(dir: 'src_docs/manual', include: '**/version*.properties')
+    def inputTemplate = layout.projectDirectory.file("${documentRootDir}/template/index.html")
+    def docPropsFiles = fileTree(dir: "${documentRootDir}/manual", include: '**/version*.properties')
     def langInformation = docPropsFiles.collect { props ->
         def docVersion = loadProperties(props).version
         ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
@@ -64,12 +71,6 @@ manualLangsProvider.get().each { lang ->
         contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
     }
 
-    def copyJs = tasks.register("copyJs${lang.capitalize()}", Copy) {
-        description = 'Copy CSS and JS files to tmp'
-        into(layout.buildDirectory.dir("tmp/manual/${lang}/js/"))
-        from fileTree(dir: "${documentRootDir}/docbook/js")
-    }
-
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
         description = 'Copy CSS and JS files to tmp'
         into(layout.buildDirectory.dir("tmp/manual/${lang}/css/"))
@@ -91,7 +92,12 @@ manualLangsProvider.get().each { lang ->
 
     def copyJsTarget = tasks.register("copyJsTarget${lang.capitalize()}", Copy) {
         description = 'Copy JS files to target'
-        from fileTree(dir: "${documentRootDir}/docbook/js", includes: ['*.js'])
+        from(zipTree(configurations.docbookXsl.find { it.name.startsWith('docbook-xslTNG') })) {
+            include 'org/docbook/xsltng/resources/js/chunk-nav.js'
+            include 'org/docbook/xsltng/resources/js/copy-verbatim.js'
+            eachFile { fcd -> fcd.path = fcd.name }
+            includeEmptyDirs = false
+        }
         into(layout.buildDirectory.dir("docs/manual/${lang}/js/"))
     }
 
@@ -111,7 +117,7 @@ manualLangsProvider.get().each { lang ->
         css.set("css/omegat.css")
         outputs.cacheIf { false }
         // debug.set("chunk-cleanup")
-        dependsOn(copyImages, copyCss, copyJs)
+        dependsOn(copyImages, copyCss)
     }
 
     def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
@@ -132,11 +138,12 @@ manualLangsProvider.get().each { lang ->
 
     def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
-        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/whc-header.xsl"))
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-whc-header.xsl"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/db5-all-included.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-header.xml"))
         dependsOn(docbookHtml, docbookInclude)
     }
+
     def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
         description = 'Builds the whc contents.'
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_whc/_whc-index.xml"))
@@ -231,7 +238,7 @@ firstStepLangsProvider.get().each { lang ->
         description = 'Generates a chunked HTML documentation.'
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
-        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-html.xsl"))
         css.set("greeting.css")
         finalizedBy(firstStepsHtmlFinally)
     }

@@ -1,5 +1,5 @@
 <!-- Converted by db4-upgrade version 1.1 -->
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xhtml" version="5.0"
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
          xml:id="app.regex">
    <title xml:id="app.regex.title">Regular expressions</title>
    <para>This appendix is intended for users interested in exploring a powerful

@@ -328,16 +328,14 @@
          consecutive segments. Individual segments can be selected with the mouse or
          the arrow keys. Segment blocks can be selected with the mouse by clicking
          the first segment, and holding the 
-         <keycap>Shift</keycap> key while clicking
+         <keycombo><keycap>Shift</keycap></keycombo> key while clicking
          the last segment.</para>
       <para>Alternatively, you can press the arrow keys while holding
-         	
-         <keycap>Shift</keycap> to select consecutive segments. The available actions
-         	are presented below.</para>
+         <keycombo><keycap>Shift</keycap></keycombo>
+         to select consecutive segments. The available actions are presented below.</para>
       <variablelist>
          <varlistentry>
-            <term>Move Up (
-               <keycap>U</keycap>)</term>
+            <term>Move Up (<keycombo><keycap>U</keycap></keycombo>)</term>
             <listitem>
                <para>Moves the selected segment, or block of consecutive segments, up
                   one row.</para>
@@ -346,8 +344,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Move Down (
-               <keycap>D</keycap>)</term>
+            <term>Move Down (<keycombo><keycap>D</keycap></keycombo>)</term>
             <listitem>
                <para>Moves the selected segment, or block of consecutive segments,
                   down one row.</para>
@@ -356,8 +353,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Split (
-               <keycap>S</keycap>)</term>
+            <term>Split (<keycombo><keycap>S</keycap></keycombo>)</term>
             <listitem>
                <para>If a single segment is selected, this command opens the
                   
@@ -365,8 +361,7 @@
                   place the cursor at the location where you want to split the text, and
                   click the 
                   <guibutton>OK</guibutton> button or press
-                  
-                  <keycap>Enter</keycap>.</para>
+                  <keycombo><keycap>Enter</keycap></keycombo>.</para>
                <para>If two or more segments occupying separate cells in the same row
                   (multi-cell segments containing lines without a 
                   <guilabel>Keep</guilabel> check box) are selected, this command will 
@@ -378,8 +373,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Merge (
-               <keycap>M</keycap>)</term>
+            <term>Merge (<keycombo><keycap>M</keycap></keycombo>)</term>
             <listitem>
                <para>If only one segment is selected, the aligner will merge it with
                   the following segment. If two or more segments are selected, they will
@@ -391,8 +385,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Edit (
-               <keycap>E</keycap>)</term>
+            <term>Edit (<keycombo><keycap>E</keycap></keycombo>)</term>
             <listitem>
                <para>This command can only be performed on a single segment. Calling
                   this command opens the 
@@ -401,7 +394,7 @@
                   
                   <guibutton>OK</guibutton> button to close the dialog when
                   finished. In this dialog, the 
-                  <keycap>Enter</keycap> enters a line
+                  <keycombo><keycap>Enter</keycap></keycombo> enters a line
                   break in the text.</para>
                <para>Use
                   		  
@@ -415,8 +408,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Mark Accepted (
-               <keycap>A</keycap>)</term>
+            <term>Mark Accepted (<keycombo><keycap>A</keycap></keycombo>)</term>
             <listitem>
                <para>Use this command to confirm that the alignment of the segments
                   in the selected row or block of rows is correct. This highlights the
@@ -425,8 +417,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Mark Needs Review (
-               <keycap>R</keycap>)</term>
+            <term>Mark Needs Review (<keycombo><keycap>R</keycap></keycombo>)</term>
             <listitem>
                <para>Use this command to identify a row or block of rows for which
                   the alignment of the segments is in doubt. This highlights the
@@ -435,8 +426,7 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>Clear Mark (
-               <keycap>C</keycap>)</term>
+            <term>Clear Mark (<keycombo><keycap>C</keycap></keycombo>)</term>
             <listitem>
                <para>Use this command to remove one or more marks set by the
                   

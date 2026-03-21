@@ -686,15 +686,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                     <tbody>
                                        <row>
                                           <entry>
-
-<programlisting>— ¶ —————————————————————
-
-<token>Application Folder</token>
- | <token>&lt;segment 1879 ¶&gt;</token>
-
- — ¶ —————————————————————
-</programlisting>
-                                    </entry>
+                                             <programlisting>— ¶ —————————————————————&#10;&#10;<token>Application Folder</token>&#10;| <token>&lt;segment 1879 ¶&gt;</token>&#10;— ¶ —————————————————————</programlisting>
+                                          </entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -709,14 +702,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                     <tbody>
                                        <row>
                                           <entry>
-                                             							
-<programlisting>1. <token>Top</token> Folder
- Dossier racine
- &lt;50/50/66% Orphan segments (+1 more)&gt;
-
-2. Configuration Folder
-Dossier de configuration
-&lt;50/50/66% &gt;</programlisting>
+                                             <programlisting>1. <token>Top</token> Folder&#10;Dossier racine&#10;&lt;50/50/66% Orphan segments (+1 more)&gt;&#10;2. Configuration Folder&#10;Dossier de configuration&#10;&lt;50/50/66% &gt;</programlisting>
                                          </entry>
                                        </row>
                                     </tbody>

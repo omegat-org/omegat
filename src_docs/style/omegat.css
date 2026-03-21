@@ -405,19 +405,6 @@ pre.programlisting {
 /* Gui items */
 /*************/
 
-/* 
-span.guimenu, span.guisubmenu, span.guimenuitem, span.guilabel {
-	font-style: italic;
-	font-family: monospace;
-    font-size: 1.1em;
-/* 
-    padding: 0 .3rem;
-    margin: 0 .2rem;
-    color: var(--normal-font);
-}
- */
-
-
 span.guibutton {
     font-family:monospace;
 	font-size: 1.2em;
@@ -426,7 +413,6 @@ span.guibutton {
     padding: 0 .3rem;
     margin: 0 .2rem;
     background: var(--insert-background);
-/*     color: var(--normal-font); */
 }
 
 
@@ -543,20 +529,9 @@ span.term>span.keycap {
 	padding-right:1.2rem; 
 }
 
-section.section>p>span.keycap:last-of-type, 
-p span.keycap:last-of-type, 
-dd span.keycap:last-of-type, 
-li.listitem span.keycap:last-of-type, 
-span.term>span.keycap:last-of-type, 
-div.example span.keycap:last-of-type,
-div.example > p:nth-child(8) > span:nth-child(2),
-div.example > p:nth-child(9) > span:nth-child(3),
-div.example > p:nth-child(11) > span:nth-child(2),
-div.example > p:nth-child(13) > span:nth-child(2),
-div.example > p:nth-child(13) > span:nth-child(4),
-div.example > p:nth-child(5) > span:nth-child(3),
 span.keycombo > span.keycap:last-of-type,
-p > span.keycap:last-child  {
+#windows\.aligner\.manual\.corrections p span.keycap:last-of-type,
+#windows\.aligner\.manual\.corrections span.term > span.keycap:last-of-type {
     background: var(--main-color);
     color: var(--normal-background);
     border-color: var(--caps-border);
@@ -957,17 +932,17 @@ pre.programlisting .token {
 
 #table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="3"],
 #table\.pane\.matches_tgroup1_tbody1_row1_entry1_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="4"] {
-	font-weight:bold;	
+	font-weight: bold;
 }
 
 #table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="1"],
 #table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="2"],
 #table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .line[db-line="3"] {
-	font-weight:bold;
+	font-weight: bold;
 }
 
 #table\.pane\.matches_tgroup1_tbody1_row1_entry2_para1_informaltable1 div.pre-wrap pre.programlisting .token {
-	color:blue;
+	color: blue;
 }
 
 /** Explanations **/
@@ -988,29 +963,49 @@ pre.programlisting .token {
 }
 
 /* Search */
+
+#search\.for\.doitsu > div.pre-wrap > pre.programlisting {
+	border-left: 10px solid lightgrey;
+	border-radius: 5px;
+}
+
 #search\.for\.doitsu > div.pre-wrap > pre.programlisting .token {
-	color:var(--term-match);
+	color: var(--term-match);
+}
+
+#select\.second\.match > div.pre-wrap > pre.programlisting {
+	border-left: 10px solid lightgrey;
+	border-radius: 5px;
 }
 
 #select\.second\.match > div.pre-wrap > pre.programlisting span.line[db-line="3"] {
-	background-color:var(--match-background);
+	background-color: var(--match-background);
 }
 
 /* Replace */
 
+#replace\.with\.allemand > div.pre-wrap > pre.programlisting {
+	border-left: 10px solid lightgrey;
+	border-radius: 5px;
+}
+
 #replace\.with\.allemand > div.pre-wrap > pre.programlisting span.line[db-line="3"] .token {
-	color:var(--term-match);	
+	color: var(--term-match);
 }
 
 #replace\.with\.allemand > div.pre-wrap > pre.programlisting span.line[db-line="4"] .token {
-	color:var(--replace-color);
+	color: var(--replace-color);
 }
 
 /* Convert match numbers */
+#dialogs\.preferences\.editor\.attempt\.to\.replace\.numbers\.when\.inserting\.a\.fuzzy\.match\.convert\.match\.numbers .token {
+    font-size: 1.2em;
+	font-weight: bold;
+}
 
 /* Bridge two languages */
 
 #bridge\.english\.and\.french\.with\.japanese .ln:nth-child(3) .token,
 #bridge\.english\.and\.french\.with\.japanese .ln:nth-child(4) .token {
-	background-color:var(--match-background);
+	background-color: var(--match-background);
 }

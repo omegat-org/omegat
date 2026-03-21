@@ -25,7 +25,7 @@
       to access the last ten searches.</para>
    <para>Click on 
       <guibutton>Search</guibutton> or hit 
-      <keycap>Enter</keycap>
+      <keycombo><keycap>Enter</keycap></keycombo>
       when the search field is selected to start the search.</para>
    <para>Matches will be displayed in bold blue characters.</para>
    <example xml:id="search.for.doitsu">

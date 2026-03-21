@@ -82,14 +82,14 @@
                   		  information, the project will be recognized as a team project by
                   		  OmegaT:</para>
                <programlisting>...
-                  &lt;external_command&gt;&lt;/external_command&gt;
-                  &lt;repositories&gt;
-                  &lt;repository type="git" url="https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY"&gt;
-                  &lt;mapping local="/" repository="/"/&gt;
-                  &lt;/repository&gt;
-                  &lt;/repositories&gt;
-                  &lt;/project&gt;
-                  		  </programlisting>
+    &lt;external_command&gt;&lt;/external_command&gt;
+    &lt;repositories&gt;
+        &lt;repository type="git" url="https://URL/OF/THE/REMOTE/PROJECT/REPOSITORY"&gt;
+            &lt;mapping local="/" repository="/"/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+</programlisting>
                <para>See the 
                   <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"></link> how-to for details.</para>
             </listitem>

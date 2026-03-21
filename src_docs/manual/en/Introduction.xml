@@ -744,7 +744,7 @@
             glossary. Instead of reaching for the mouse, you unlock the cursor with
             
             <link linkend="panes.editor.cursor.lock" role="xref">
-               <keycap>F2</keycap>
+               <keycombo><keycap>F2</keycap></keycombo>
             </link>, use
             the cursor keys and standard system shortcuts to navigate to the term and
             select it, and then press
@@ -759,7 +759,7 @@
                entry dialog</link> to enter the source term. You then switch back to the
             editor, lock the cursor again with 
             <link linkend="panes.editor.cursor.lock" endterm="">
-               <keycap>F2</keycap>
+               <keycombo><keycap>F2</keycap></keycombo>
             </link> and repeat
             the process to enter the target term.</para>
          <para>You have enabled the 

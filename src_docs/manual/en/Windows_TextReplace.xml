@@ -23,8 +23,8 @@
       
       <guilabel>Replace with:</guilabel> field and click on
       
-      <guibutton>Search</guibutton>, or hit 
-      <keycap>Enter</keycap> if the cursor is
+      <guibutton>Search</guibutton>, or hit
+      <keycombo><keycap>Enter</keycap></keycombo> if the cursor is
       still in the field.</para>
    <para>Search matches are displayed in bold blue characters, and the modified
       strings are displayed in orange to show the result of the replacement.</para>

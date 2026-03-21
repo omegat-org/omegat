@@ -124,14 +124,6 @@
                            <entry></entry>
                         </row>
                         <row>
-                           <entry>DeepL</entry>
-                           <entry>Requires a Deepl Pro Advanced plan available only in
-                              				  some countries</entry>
-                           <entry>
-                              <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.deepl.com/en/pro">https://www.deepl.com/en/pro</link>
-                           </entry>
-                        </row>
-                        <row>
                            <entry>MyMemory (machine translation)</entry>
                            <entry></entry>
                            <entry>
@@ -1198,18 +1190,12 @@
                   		  pre-configured variables:</para>
                <para>The default is:</para>
                <para>
-                  <programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}
-                     &lt;${score}/${noStemScore}/${adjustedScore}%
-                     ${filePath}&gt;</programlisting>
+                  <programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}&#10;&lt;${score}/${noStemScore}/${adjustedScore}%${filePath}&gt;</programlisting>
                </para>
                <para>Here is a possible alternative:</para>
                <para>
                   			
-                  <programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
-                     [NEW]▷ ${diff}
-                     			
-                     [OLD]◀ ${diffReversed}
-                     ◀ ${targetText}</programlisting>
+                  <programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}&#10;[NEW]▷ ${diff}&#10;&#10;[OLD]◀ ${diffReversed}&#10;     ◀ ${targetText}</programlisting>
                </para>
                <para>The template variables are also available from a drop-down menu
                   		  and can be inserted with a button.</para>
@@ -1430,11 +1416,8 @@
               Default
 			display</title>
                   <para>
-                     			  
-                     <programlisting>Translation last modified by suzume on Oct 6, 2022 at 2:18:27 PM
-                        [[チューリッヒ大学]]大学院博士課程修了。
-                        [[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</programlisting>
-                     			</para>
+                     <programlisting>Translation last modified by suzume on Oct 6, 2022 at 2:18:27 PM&#10;[[チューリッヒ大学]]大学院博士課程修了。&#10;[[Université de Zurich]] Elle finit sa thèse de doctorat.&lt;segment 0178&gt;</programlisting>
+                 </para>
                </example>
                <para>Use 
                   <link linkend="menus.view" endterm="menus.view.title"></link>

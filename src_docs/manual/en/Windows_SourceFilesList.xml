@@ -34,8 +34,8 @@
    <para>Typing any text opens a 
       <guilabel>Filter</guilabel> field at the
       bottom of the window where parts of filenames can be entered. You can use
-      arrows to select a file, and press 
-      <keycap>Enter</keycap> to open it for 
+      arrows to select a file, and press
+      <keycombo><keycap>Enter</keycap></keycombo> to open it for
       translation.</para>
    <note>
       <para>Filenames (the first column) can be sorted alphabetically by

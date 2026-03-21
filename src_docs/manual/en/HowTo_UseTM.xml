@@ -358,15 +358,7 @@
             	  
             <filename>JA-JP.tmx</filename>. OmegaT will now show you the Japanese text
             	  corresponding to the English source segment:</para>
-         <para>
-            		
-    <programlisting>— ¶ —————————————————————
-
-    <token>A whitespace character: [ \t\n\x0B\f\r]
-    ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>
-    Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
-    — ¶ —————————————————————</programlisting>
-</para>
+         <para><programlisting>— ¶ —————————————————————&#10;&#10;<token>A whitespace character: [ \t\n\x0B\f\r]&#10;ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>&#10;Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>&#10;— ¶ —————————————————————</programlisting></para>
          <para>The first line is the original English, the second line is the bridge
             	  language you expect to find useful when you create your translation, and the
             	  third line is the current translation to French.</para>

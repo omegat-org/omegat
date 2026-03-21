@@ -391,8 +391,7 @@
                         </itemizedlist>
                         <para>The Exclusion patterns dialog allows you to add or remove
                            				a pattern, or edit one either by double-clicking it or selecting it
-                           				and pressing 
-                           <keycap>F2</keycap>. Use the
+                           				and pressing <keycombo><keycap>F2</keycap></keycombo>. Use the
                            				
                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://ant.apache.org/manual/dirtasks.html#patterns">Apache
                               				ant syntax</link> to define exclusions.</para>

@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="application.folder">
-  <title id="application.folder.title">Toepassingsmap</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="application.folder">
+  <title xml:id="application.folder.title">Toepassingsmap</title>
 
   <para>De toepassingsmap bevat de toepassing <filename>OmegaT.jar</filename> en een aantal andere belangrijke bestanden.</para>
 
   <note>
-	<para>De locatie van de toepassingsmap is afhankelijk van uw platform en de manier waarop OmegaT hebt geïnstalleerd. De aanbevolen of standaard locaties zijn de volgende:</para>
+	<para>De locatie van de toepassingsmap is afhankelijk van uw  platform en de manier waarop OmegaT hebt geïnstalleerd. De aanbevolen of standaard locaties zijn de volgende:</para>
 
 	<variablelist>
 	  <varlistentry>
@@ -40,83 +39,83 @@
   </note>
   
   <variablelist>
-	<varlistentry id="application.folder.omegat.license">
-	  <term id="application.folder.omegat.license.title">OmegaT-license.txt</term>
+	<varlistentry xml:id="application.folder.omegat.license">
+	  <term xml:id="application.folder.omegat.license.title">OmegaT-license.txt</term>
 	  <listitem>
 		<para>OmegaT's distributielicentie. De GPL versie 3.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.omegat.jar">
-	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
+	<varlistentry xml:id="application.folder.omegat.jar">
+	  <term xml:id="application.folder.omegat.jar.title">OmegaT.jar</term>
 	  <listitem>
 		<para>OmegaT's uitvoerbare bestand. Gebruikt bij het opstarten van OmegaT vanaf de opdrachtregel. Bekijk het hoofdstuk <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> voor details.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.changes">
-	  <term id="application.folder.changes.title">changes.txt</term>
+	<varlistentry xml:id="application.folder.changes">
+	  <term xml:id="application.folder.changes.title">changes.txt</term>
 	  <listitem>
 		<para>De lijst met verbeteringen en opgeloste problemen. Controleer het om te zien of u informatie nodig hebt over de evolutie van OmegaT.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.doc.license">
-	  <term id="application.folder.doc.license.title">doc-license.txt</term>
+	<varlistentry xml:id="application.folder.doc.license">
+	  <term xml:id="application.folder.doc.license.title">doc-license.txt</term>
 	  <listitem>
 		<para>De documentatie distributielicentie. De GPL versie 3.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.index.html">
-	  <term id="application.folder.index.html.title">index.html</term>
+	<varlistentry xml:id="application.folder.index.html">
+	  <term xml:id="application.folder.index.html.title">index.html</term>
 	  <listitem>
 		<para>De index voor de meertalige gebruikershandleiding.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.join.html">
-	  <term id="application.folder.join.html.title">join.html</term>
+	<varlistentry xml:id="application.folder.join.html">
+	  <term xml:id="application.folder.join.html.title">join.html</term>
 	  <listitem>
 		<para>Een koppeling naar de pagina voor ondersteuning.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.readme.txt">
-	  <term id="application.folder.readme.txt.title">readme.txt</term>
+	<varlistentry xml:id="application.folder.readme.txt">
+	  <term xml:id="application.folder.readme.txt.title">readme.txt</term>
 	  <listitem>
 		<para>Simpele instructies voor installatie en het uitvoeren.</para>
 	  </listitem>
 	</varlistentry>
 
 
-	<varlistentry id="application.folder.docs">
-	  <term id="application.folder.docs.title">/docs/</term>
+	<varlistentry xml:id="application.folder.docs">
+	  <term xml:id="application.folder.docs.title">/docs/</term>
 	  <listitem>
 		<para>De map voor de documentatie.<variablelist>
-		  <varlistentry id="application.folder.docs.contributors">
-			<term id="application.folder.docs.contributors.title">contributors.txt</term>
+		  <varlistentry xml:id="application.folder.docs.contributors">
+			<term xml:id="application.folder.docs.contributors.title">contributors.txt</term>
 			<listitem>
 			  <para>De lijst met individuele deelnemers.</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.en">
-			<term id="application.folder.docs.en.title">nl/</term>
+		  <varlistentry xml:id="application.folder.docs.en">
+			<term xml:id="application.folder.docs.en.title">nl/</term>
 			<listitem>
 			  <para>Elke vertaalde gebruikershandleiding staat in een afzonderlijk map voor de taal.</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.index.html">
-			<term id="application.folder.docs.index.html.title">index.html</term>
+		  <varlistentry xml:id="application.folder.docs.index.html">
+			<term xml:id="application.folder.docs.index.html.title">index.html</term>
 			<listitem>
 			  <para>De index voor de meertalige gebruikershandleiding.</para>
 			</listitem>
 		  </varlistentry>
 
-		  <varlistentry id="application.folder.docs.librairies.txt">
-			<term id="application.folder.docs.librairies.txt.title">libraries.txt</term>
+		  <varlistentry xml:id="application.folder.docs.librairies.txt">
+			<term xml:id="application.folder.docs.librairies.txt.title">libraries.txt</term>
 			<listitem>
 			  <para>De lijst van door OmegaT gebruikte bibliotheken.</para>
 			</listitem>
@@ -126,29 +125,29 @@
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.images">
-	  <term id="application.folder.images.title">/images/</term>
+	<varlistentry xml:id="application.folder.images">
+	  <term xml:id="application.folder.images.title">/images/</term>
 	  <listitem>
 		<para>De map waarin afbeeldingen, die worden gebruikt voor OmegaT, zijn opgeslagen.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.lib">
-	  <term id="application.folder.lib.title">/lib/</term>
+	<varlistentry xml:id="application.folder.lib">
+	  <term xml:id="application.folder.lib.title">/lib/</term>
 	  <listitem>
 		<para>De map waar de bibliotheken die worden gebruikt door OmegaT zijn opgeslagen.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.plugins">
-	  <term id="application.folder.plugins.title">plug-ins/</term>
+	<varlistentry xml:id="application.folder.plugins">
+	  <term xml:id="application.folder.plugins.title">plug-ins/</term>
 	  <listitem>
-		<para>De map waar u externe plug-ins kunt installeren. De voorkeurslocatie voor het handmatig installeren van plug-ins is de map <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>, geplaatst in de <link linkend="configuration.folder">configuratie</link>map. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeuren voor details.</para>
+		<para>De map waar u externe plug-ins kunt installeren. De voorkeurslocatie voor plug-in handmatige installatie is de map <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>, geplaatst in de map <link linkend="configuration.folder">configuration</link>. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeuren voor details.</para>
 	  </listitem>
 	</varlistentry>
 
-	<varlistentry id="application.folder.scripts">
-	  <term id="application.folder.scripts.title">scripts</term>
+	<varlistentry xml:id="application.folder.scripts">
+	  <term xml:id="application.folder.scripts.title">scripts</term>
 	  <listitem>
 		<para>De map waar gedistribueerde scripts zijn geplaatst. Bekijk het venster <link linkend="windows.scripts" endterm="windows.scripts.title"/> voor details.</para>
 	  </listitem>

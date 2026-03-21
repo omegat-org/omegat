@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="file.filters">
-  <title id="file.filters.title">Bestandsfilters</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="file.filters">
+  <title xml:id="file.filters.title">Bestandsfilters</title>
 
   <warning>
 	<para>Bestandsfilters zijn ofwel lokaal en specifiek voor een bepaald project, of globaal en beschikbaar voor alle projecten die een configuratiemap delen.</para>
@@ -26,7 +21,7 @@
   
   <para>Filters in vet worden gebruikt door het huidige project.</para>
 
-  <para>Schakel een filter uit door zijn vak te deselecteren als u wilt dat de bestanden, die ermee zijn geassocieerd, niet moeten worden vertaald. Hun inhoud zal niet worden weergegeven voor vertaling.</para>
+  <para>Schakel een filter uit door zijn vak te deselecteren als u wilt dat de bestanden die ermee zijn geassocieerd, niet moeten worden vertaald. Hun inhoud zal niet worden weergegeven voor vertaling.</para>
 
   <note>
 	<para>U kunt de filters sorteren op naam óf of zij zijn ingeschakeld. Klik op de relevante kop om ze in op- of aflopende volgorde te sorteren.</para>
@@ -40,16 +35,16 @@
 
   <para>Aangepaste globale voorkeuren voor bestandsfilters worden opgeslagen in de <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, in de map voor de configuratie. Bekijk <link linkend="configuration.folder" endterm="configuration.folder.title"/> voor de details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter.</para>
 
-  <para>Aangepaste lokale bestandsfilters worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, geplaatst in de map voor het project. Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter en zet het project terug naar globale bestandsfilters.</para>
+  <para>Aangepaste lokale bestandsfilters worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, geplaats in de map voor het project. Bekijk het hoofdstuk <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> voor details. Verwijderen van dat bestand herstelt ook de voorkeuren voor het filter en zet het project terug naar globale bestandsfilters.</para>
 
-  <section id="file.filters.general">
-	<title id="file.filters.general.title">Algemene voorkeuren</title>
+  <section xml:id="file.filters.general">
+	<title xml:id="file.filters.general.title">Algemene voorkeuren</title>
 	  
 	<variablelist>
 	  <varlistentry>
-		<term>Voorafgaande en achterliggende tags verbergen</term>
+		<term>Voorafgaande en achterliggende  tags verbergen</term>
 		<listitem>
-		  <para>Voorafgaande en achterliggende tags worden over het algemeen vereist door OmegaT, om het vertaalde segment op de juiste manier te kunnen maken. Ze verbergen in de te vertalen inhoud zorgt ervoor dat u ze niet zult wissen of per ongeluk zal aanpassen.</para>
+		  <para>Voorafgaan de en achterliggende tags worden over het algemeen vereist door OmegaT om op de juiste manier het vertaalde segment te kunnen maken. Ze verbergen in de te vertalen inhoud zorgt ervoor dat u ze niet zult wissen of per ongeluk zal aanpassen.</para>
 
 		  <para>Als u de voorafgaande en achterliggende tags behoud, zorg er dan voor dat u ze ook opneemt in de vertaalde tekst.</para>
 		</listitem>
@@ -79,19 +74,19 @@
 	</variablelist>
   </section>
 	
-  <section id="edit.filter.dialog">
-    <title id="edit.filter.dialog.title">Bewerken</title>
+  <section xml:id="edit.filter.dialog">
+    <title xml:id="edit.filter.dialog.title">Bewerken</title>
 	
     <para>Dubbelklik op de bewerkbare velden om eenvoudige aanpassingen te maken of klik op de knop <guibutton>Bewerken…</guibutton> voor toegang tot het dialoogvenster voor bewerken.</para>
 
 	<para>Klik op <guibutton>Toevoegen…</guibutton> om een nieuw patroon voor een bestandsfilter toe te voegen, om een soortgelijk dialoogvenster te openen.</para>
 
-	<para>Beide dialoogvensters stellen u in staat de patronen voor de bestandsnamen aan te passen voor de bron- en doelbestanden die zijn geassocieerd aan dit filter, en hun respectievelijke codering te selecteren.</para>
+	<para>Beide dialoogvensters stellen u in staat de patronen voor de bestandsnamen aan  te passen voor de bron- en doelbestanden die zijn geassocieerd aan dit filter, en hun respectievelijke codering te selecteren.</para>
 
 	<para>Gebruik het keuzemenu <guilabel>Bestandsnaam variabelen</guilabel> om de doel-bestandsnaam aan te passen.</para>
 
-    <section id="source.filetype.and.filename.pattern">
-	  <title id="source.filetype.and.filename.pattern.title">Patroon voor bronbestandsnaam</title>
+    <section xml:id="source.filetype.and.filename.pattern">
+	  <title xml:id="source.filetype.and.filename.pattern.title">Patroon voor bronbestandsnaam</title>
 
 	  <para>OmegaT controleert, om een filter met een bestand te associëren, de bestandsextensie en probeert het overeen te laten komen met een patroon voor een bron-bestandsnaam in een filter.</para>
 
@@ -109,8 +104,8 @@
 	  <para>U zou u het patroon <literal>read*</literal> moeten gebruiken als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<literal>readme, read.me</literal> of <literal>readme.txt</literal>) afhandelt.</para>
     </section>
 
-    <section id="source.and.target.files.encoding">
-	  <title id="source.and.target.files.encoding.title">Coderen van bron- en doelbestanden</title>
+    <section xml:id="source.and.target.files.encoding">
+	  <title xml:id="source.and.target.files.encoding.title">Coderen van bron- en doelbestanden</title>
 
 	  <para>De meeste bestandsindelingen staan verschillen mogelijke coderingen toe. Standaard is de codering van het vertaalde bestand hetzelfde als die van het bronbestand.</para>
 
@@ -118,13 +113,13 @@
 
 	  <itemizedlist>
         <listitem>
-		  <para>OmegaT gebruikt de codering van de declaratie van het bronbestand, indien aanwezig, om de codering te identificeren (HTML- of op XML-gebaseerde bestanden).</para>
+		  <para>OmegaT gebruikt de codering van de declaratie van het bronbestand, indien aanwezig, om  de codering te identificeren (HTML- of op XML- gebaseerde bestanden).</para>
         </listitem>
 	  </itemizedlist>
 
 	  <itemizedlist>
         <listitem>
-		  <para>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsindelingen (Java-properties bijvoorbeeld)</para>
+		  <para>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsformaten ( Java-properties bijvoorbeeld)</para>
         </listitem>
 	  </itemizedlist>
 
@@ -135,10 +130,10 @@
 	  </itemizedlist>
     </section>
 
-    <section id="target.name">
-	  <title id="target.name.title">Vertaalde bestandsnaam</title>
+    <section xml:id="target.name">
+	  <title xml:id="target.name.title">Vertaalde bestandsnaam</title>
 	  
-	  <para>Bestanden in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> worden, elke keer als u ze opnieuw maakt, overschreven, zelfs als zij worden gemaakt met dezelfde naam.</para>
+	  <para>Bestanden in de map <link linkend="project.folder.target" endterm="project.folder.target.title"/> worden, elke keer als u ze opnieuw maakt, overschreven, zelfs als zij worden gemaakt dezelfde naam.</para>
 
 	  <para>OmegaT kan automatisch nieuwe bestandsnamen maken voor de bestanden die u maakt, door bijvoorbeeld een taalcode of tijdstempel toe te voegen.</para>
 
@@ -199,7 +194,7 @@
           <listitem>
 			<para>tijdstempel van toen het bestand werd gemaakt</para>
 
-			<para>Bekijk de <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">documentatie van Oracle</ulink> voor voorbeelden.</para>
+			<para>Bekijk de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">documentatie van Oracle</link> voor voorbeelden.</para>
           </listitem>
 		</varlistentry>
 
@@ -250,8 +245,8 @@
 		
 	  <para>Als het gebruiken van meerdere perioden het identificeren van de bestandsnaam en extensie moeilijk maken, kunt u variabelen in de vorm van <literal>${nameOnly-</literal><emphasis>nummer</emphasis>} of <literal>${extension-</literal><emphasis>nummer} </emphasis>gebruiken om te specificeren welke delen deel uitmaken van de naam of de extensie, zoals weergegeven in het voorbeeld hieronder.</para>
 
-	  <example id="target.name.example">
-		<title id="target.name.example.title">Namen doelbestanden</title>
+	  <example xml:id="target.name.example">
+		<title xml:id="target.name.example.title">Namen doelbestanden</title>
 		<para>Voor een bronbestand dat is genaamd Document.xx.docx, zullen de volgende variabelen de volgende resultaten geven:</para>
 
 		<itemizedlist>
@@ -283,16 +278,16 @@
     </section>
   </section>
 	
-  <section id="filters.options">
-    <title id="filters.options.title">Opties</title>
+  <section xml:id="filters.options">
+    <title xml:id="filters.options.title">Opties</title>
 
     <para>Verscheidene filters bieden opties aan. Selecteer het filter in de lijst en klik op <guibutton>Opties…</guibutton> om ze aan te passen.</para>
 
 	<para>De beschikbare opties zijn:</para>
 
 	<variablelist>
-	  <varlistentry id="file.filters.text">
-		<term id="file.filters.text.title">Tekstbestanden</term>
+	  <varlistentry xml:id="file.filters.text">
+		<term xml:id="file.filters.text.title">Tekstbestanden</term>
 		<listitem>
 		  <para>
 			<variablelist>
@@ -330,8 +325,8 @@
 		</listitem>
 	  </varlistentry>
 		
-	  <varlistentry id="file.filter.microsoft">
-		<term id="file.filter.microsoft.title">Microsoft Office Open XML-bestanden</term>
+	  <varlistentry xml:id="file.filter.microsoft">
+		<term xml:id="file.filter.microsoft.title">Microsoft Office Open XML-bestanden</term>
 		<listitem>
 		  <warning>
 			<para>Het filter <code>Microsoft Office Open XML (oud filter)</code> is het originele OmegaT-filter. U zou het alleen moeten gebruiken om problemen met compatibiliteit met eerdere projecten, die bestanden bevatten die zijn afgehandeld met dat filter, te vermijden.</para>
@@ -398,8 +393,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xhtml">
-		<term id="file.filters.xhtml.title">XHTML-bestanden</term>
+	  <varlistentry xml:id="file.filters.xhtml">
+		<term xml:id="file.filters.xhtml.title">XHTML-bestanden</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -423,18 +418,18 @@
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
-			  <term>Genegeerde &lt;meta&gt;-tags attribuut &quot;content&quot;</term>
+			  <term>Genegeerde &lt;meta&gt;-tags attribuut "content"</term>
 			  <listitem>
-				<para>Definieer de attribuutwaarden voor de tag &lt;meta&gt; waarvoor het geassocieerde attribuut &quot;content&quot; niet moet worden vertaald.</para>
+				<para>Definieer de attribuutwaarden voor de tag &lt;meta&gt; waarvoor het geassocieerde attribuut "content" niet moet worden vertaald.</para>
 
 				<para>Voeg geen aanhalingstekens toe en scheidt de waarden door een komma.</para>
 				
-				<example id="file.filters.xhtml.example">
-				  <title id="file.filters.xhtml.example.title">Negeer het gedeelte inhoud van &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
+				<example xml:id="file.filters.xhtml.example">
+				  <title xml:id="file.filters.xhtml.example.title">Negeer het gedeelte inhoud van &lt;meta name="robots" content="index, follow"&gt;</title>
 				  <para>Deze inhoud negeren:</para>
 
-				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
-				  follow&quot;&gt;</code></para>
+				  <para><code>&lt;meta name="robots" content="index,
+				  follow"&gt;</code></para>
 
 				  <para>gebruik:</para>
 
@@ -450,15 +445,15 @@
 
 				<para>Voeg geen aanhalingstekens toe en scheidt de waarden door een komma.</para>
 
-				<example id="file.filters.xhtml.ignore.translate.no">
-				  <title id="file.filters.xhtml.ignore.translate.no.title">Negeer tags die translate=&quot;no&quot; bevatten</title>
+				<example xml:id="file.filters.xhtml.ignore.translate.no">
+				  <title xml:id="file.filters.xhtml.ignore.translate.no.title">Negeer tags die translate="no" bevatten</title>
 				  <para>Deze inhoud negeren:</para>
 
-				  <para><code>&lt;span translate=&quot;no&quot;&gt;Deze inhoud is niet te vertalen&lt;/span&gt;</code></para>
+				  <para><code>&lt;span translate="no"&gt;Deze inhoud is niet te vertalen&lt;/span&gt;</code></para>
 
 				  <para>gebruik: <literal>translate=no</literal>.</para>
 
-				  <para>Alle tags die zijn gemarkeerd met <code>translate=&quot;no&quot;</code> zullen worden genegeerd.</para>
+				  <para>Alle tags die zijn gemarkeerd met <code>translate="no"</code> zullen worden genegeerd.</para>
 				</example>
 			  </listitem>
 			</varlistentry>
@@ -506,7 +501,7 @@
 			  <listitem>
 				<para>Witruimte buiten de tags wordt als niet significant beschouwd in HTML/XHTML.</para>
 
-				<para>Deze optie converteert meerdere van dergelijke doorlopende witruimten naar één enkele spatie in het vertaalde document.</para>
+				<para>Deze optie converteert meerdere van dergelijke  doorlopende witruimten naar één enkele spatie in het vertaalde document.</para>
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
@@ -521,8 +516,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.ftl">
-		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+	  <varlistentry xml:id="file.filters.mozilla.ftl">
+		<term xml:id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -535,8 +530,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.mozilla.dtd">
-		<term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
+	  <varlistentry xml:id="file.filters.mozilla.dtd">
+		<term xml:id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -549,10 +544,10 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.po">
-		<term id="file.filters.po.title">PO-bestanden</term>
+	  <varlistentry xml:id="file.filters.po">
+		<term xml:id="file.filters.po.title">PO-bestanden</term>
 		<listitem>
-			<para>Het filter controleert standaard printf-variabelen ('%s', etc.). Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voor details.</para>
+			<para>Het filter controleert standaard printf-variabelen ('%s', etc.). Bekijk de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voorkeur voor details.</para>
 
 			<variablelist>
 			  <varlistentry>
@@ -565,7 +560,7 @@
 			  <varlistentry>
 				<term>Blanco bronsegmenten vertalen</term>
 				<listitem>
-				  <para>Blanco bronsegmenten acteren soms als plaatsvervangers voor delen die niet bestaan in de brontaal, maar nodig zijn in de doeltaal. Gebruik deze optie om een vertaling te maken die is gebaseerd op de geassocieerde opmerkingen.</para>
+				  <para>Blanco  bronsegmenten acteren soms als plaatsvervangers voor delen die niet bestaan in de brontaal, maar nodig zijn in de doeltaal. Gebruik deze optie om een vertaling te maken die is gebaseerd op de geassocieerde opmerkingen.</para>
 				</listitem>
 			  </varlistentry>
 			  
@@ -597,7 +592,7 @@
 					<varlistentry>
 					  <term>Eéntalig</term>
 					  <listitem>
-						<para>PO-bestanden, die <literal>msgid</literal> gebruiken als een ID-code, <literal>msgstr</literal> gebruiken als de broncontainer en verwachten dat de vertaling <literal>msgstr</literal> overschrijft</para>
+						<para>PO-bestanden die <literal>msgid</literal> gebruiken als een ID-code, <literal>msgstr</literal> gebruiken als de broncontainer en verwachten dat de vertaling overschrijft <literal>msgstr</literal></para>
 					  </listitem>
 					</varlistentry>
 				  </variablelist>
@@ -607,8 +602,8 @@
 		  </listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.moodle.php">
-		<term id="file.filters.moodle.php.title">Moodle PHP</term>
+	  <varlistentry xml:id="file.filters.moodle.php">
+		<term xml:id="file.filters.moodle.php.title">Moodle PHP</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -621,10 +616,10 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filter.java.bundle">
-		<term id="file.filter.java.bundle.title">Java Resource Bundles</term>
+	  <varlistentry xml:id="file.filter.java.bundle">
+		<term xml:id="file.filter.java.bundle.title">Java Resource Bundles</term>
 		<listitem>
-			<para>Het filter controleert standaard patronen van Java MessageFormat (bijv. \{0\}). Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voor details.</para>
+			<para>Het filter controleert standaard patronen van Java MessageFormat (bijv. \{0\}). Bekijk de <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> voorkeur voor details.</para>
 
 			<variablelist>
 			  <varlistentry>
@@ -651,8 +646,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.odf">
-		<term id="file.filters.odf.title">Open Document Format (ODF) bestanden</term>
+	  <varlistentry xml:id="file.filters.odf">
+		<term xml:id="file.filters.odf.title">Open Document Format (ODF) bestanden</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -665,8 +660,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="file.filters.xliff">
-		<term id="file.filters.xliff.title">XLIFF (oud filter)</term>
+	  <varlistentry xml:id="file.filters.xliff">
+		<term xml:id="file.filters.xliff.title">XLIFF (oud filter)</term>
 		<listitem>
 		  <warning>
 			<para>Dit filter is het originele XLIFF-filter van OmegaT. U zou het alleen moeten gebruiken om problemen met compatibiliteit met eerdere projecten, die bestanden bevatten die zijn afgehandeld met dat filter, te vermijden.</para>

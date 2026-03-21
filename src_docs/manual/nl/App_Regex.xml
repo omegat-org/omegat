@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="app.regex">
-  <title id="app.regex.title">Reguliere uitdrukkingen</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.regex">
+  <title xml:id="app.regex.title">Reguliere uitdrukkingen</title>
 
   <para>Deze appendix is bedoeld voor gebruikers die zijn geïnteresseerd in het verkennen van een krachtige manier om hun productiviteit op te voeren. Hoewel gezien als uitdagend en complex, zijn zelfs de meest eenvoudige reguliere uitdrukkingen (vaak afgekort tot <emphasis>regex</emphasis> of <emphasis>regexp</emphasis>) bijzonder nuttig, niet alleen in OmegaT, maar in vele andere toepassingen zou u er een op een dag-tot-dag-basis kunnen gebruiken, met enige variaties.</para>
 
@@ -43,14 +38,14 @@
       <listitem>
         <para>Zoeken bevat een functie <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> die u in staat stelt bijzonder krachtige zoekacties in uw bestanden uit te voeren.</para>
 
-        <para>Dezelfde optie in het dialoogvenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> stelt u in staat reguliere expressies toe te passen op zowel gezochte en te vervangen tekst.</para>
+        <para>Dezelfde optie in het dialoogvenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> stelt u in staat reguliere expressies toe te passen op zowel gezochte en vervangen tekst.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
       <term>Aangepaste tags</term>
       <listitem>
-        <para>Aangepaste tags zijn tags die zijn gedefinieerd met reguliere expressies die exact hetzelfde worden afgehandeld als de eigen tags van OmegaT. Bekijk de voorkeur <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> voor details.</para>
+        <para>Aangepaste tags zijn tags die zijn gedefinieerd met reguliere expressies die exact hetzelfde worden afgehandeld als de eigen tags van OmegaT. Bekijk de <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> voorkeur voor details.</para>
 
 		<para>Gebruik het teken <code>|</code> (OR) om individuele definities voor tags te scheiden.</para>
       </listitem>
@@ -86,8 +81,8 @@
     </varlistentry>
   </variablelist>
 
-  <section id="app.regex.four.rules">
-    <title id="app.regex.four.rules.title">De 4 regels</title>
+  <section xml:id="app.regex.four.rules">
+    <title xml:id="app.regex.four.rules.title">De 4 regels</title>
 
     <para>Reguliere expressies worden gebruikt om tekst te zoeken, inclusief tekens die niet zichtbaar zijn op het scherm of bij afdrukken, zoals spaties, tabs, of regeleinden. Elke opgegeven expressie ofwel <emphasis>komt overeen</emphasis>, of <emphasis>komt <emphasis role="bold">niet</emphasis> overeen</emphasis> met een woord, frase, of andere tekstreeks.</para>
     
@@ -98,7 +93,7 @@
       <para>Reguliere expressies komen alleen overeen met tekst. Zij kunnen niet overeenkomen met decoraties, zoals <emphasis>vet</emphasis>, <emphasis>cursief</emphasis>, of andere <emphasis>stijleffecten</emphasis>.</para>
     </warning>
 
-    <para>Er zijn vier regels om te onthouden.</para>
+    <para>Er  zijn vier regels om te onthouden.</para>
 
     <variablelist>
       <varlistentry>
@@ -115,7 +110,7 @@
         <listitem>
           <para>Anders dan een letter op zichzelf, die eenvoudigweg zichzelf weergeeft, zoals hierboven vermeld, heeft een letter die wordt voorafgegaan door een <literal>\</literal> een speciale functie in een reguliere expressie.</para>
 
-		  <para>Bijvoorbeeld: <emphasis>r</emphasis> is slechts een normaal teken, maar door het te laten voorafgaan door een <literal>\</literal> maakt het dat <literal>\r</literal> in een speciale combinatie verandert, die overeenkomt met een <emphasis>teken voor een hard-regeleinde</emphasis>. Soortgelijk komt <literal>\R</literal> overeen met <emphasis>elk teken voor een regeleinde</emphasis>.</para>
+		  <para>Bijvoorbeeld: <emphasis>r</emphasis> is slechts een normaal teken, maar door het te laten voorafgaan door een <literal>\</literal> maakt dat <literal>\r</literal> het in een speciale combinatie verandert die overeenkomt met een <emphasis>teken voor een hard-regeleinde</emphasis>. Soortgelijk komt <literal>\R</literal> overeen met <emphasis>elk teken voor een regeleinde</emphasis>.</para>
 		  
           <note>
             <para>Alleen de letters <emphasis>i j l m o</emphasis> en <emphasis>y</emphasis>, in zowel hoofd- als kleine letters, hebben geen speciale betekenis indien voorafgegaan door een backslash. Deze handleiding beschrijft slechts een kleine subset van letters die een speciale betekenis kunnen krijgen.</para>
@@ -147,10 +142,10 @@
     </variablelist>
   </section>
 
-  <section id="app.regex.twelve.characters">
-    <title id="app.regex.twelve.characters.title">De 12 tekens</title>
+  <section xml:id="app.regex.twelve.characters">
+    <title xml:id="app.regex.twelve.characters.title">De 12 tekens</title>
   
-    <para>De twaalf speciale tekens zijn de <emphasis>backslash</emphasis> <literal>\</literal>, de <emphasis>caret</emphasis> <literal>^</literal>, het <emphasis>dollar-teken</emphasis> <literal>$</literal>, de <emphasis>punt</emphasis> (of <emphasis>dot</emphasis>) <literal>.</literal>, de <emphasis>verticale streep</emphasis> (of <emphasis>symbool pipe</emphasis>) <literal>|</literal>, het <emphasis>vraagteken</emphasis> <literal>?</literal>, de <emphasis>asterisk</emphasis> (of <emphasis>sterretje</emphasis>) <literal>*</literal>, het <emphasis>plus-teken</emphasis> <literal>+</literal>, het <emphasis>haakje</emphasis> voor openen <literal>(</literal>, het <emphasis>haakje</emphasis> voor sluiten, <literal>)</literal>, het <emphasis>vierkante haakje</emphasis> voor openen <literal>[</literal>, en de <emphasis>accolade</emphasis> voor openen <literal>{</literal>.</para>
+    <para>De twaalf speciale tekens zijn de <emphasis>backslash</emphasis> <literal>\</literal>, de <emphasis>caret</emphasis> <literal>^</literal>, het <emphasis>dollar-teken</emphasis> <literal>$</literal>, de <emphasis>punt</emphasis> (or <emphasis>dot</emphasis>) <literal>.</literal>, de <emphasis>verticale streep</emphasis> (of <emphasis>symbool pipe</emphasis>) <literal>|</literal>, het <emphasis>vraagteken</emphasis> <literal>?</literal>, de <emphasis>asterisk</emphasis> (of <emphasis>sterretje</emphasis>) <literal>*</literal>, het <emphasis>plus-teken</emphasis> <literal>+</literal>, het  <emphasis>haakje</emphasis> voor openen <literal>(</literal>, het <emphasis>haakje</emphasis> voor sluiten, <literal>)</literal>, het <emphasis>vierkante haakje</emphasis> voor openen <literal>[</literal>, en de <emphasis>accolade</emphasis> voor openen <literal>{</literal>.</para>
 
     <para>Elk teken wordt hieronder kort beschreven met voorbeelden van reguliere expressies die vertrouwen op het teken zelf of tekst waarmee zij wel, of niet, overeenkomen.</para>
     
@@ -176,7 +171,7 @@
                     <entry>
                       <para>Een getal tussen <emphasis>0.0</emphasis> en <emphasis>0.9</emphasis>, of slechts het uiteindelijke <emphasis>0.5</emphasis> in cijfers, zoals 10.5 of 560.5.</para>
 
-                      <para>De <literal>\.</literal> annuleert de betekenis “elk teken” van de punt om overeen te komen met de decimale punt, terwijl de <literal>\d</literal> de normale kleine letter “d” wijzigt naar een expressie die overeenkomt met elk cijfer tussen 0 en 9.</para>
+                      <para>De <literal>\.</literal> annuleert de betekenis “elk teken” van de punt om overeen te komen met de decimale punt, terwijl de <literal>\d</literal> de normale kleine  letter “d” wijzigt naar een expressie die overeenkomt met elk cijfer tussen 0 en 9.</para>
                     </entry>
                   </row>
 
@@ -319,7 +314,7 @@
                     <entry>
                       <para>Combinaties die drie letter bevatten, beginnend met “c” en eindigend met “t”, maar over meer dan één regel zijn gesplitst.</para>
                       <para>Wat is de ontbrekende letter?</para>
-                        <simplelist>
+                        <simplelist type="vert">
                           <member><literal>c</literal></member>
                           <member><literal/></member>
                           <member><literal>t</literal></member>
@@ -351,7 +346,7 @@
                   <row>
                     <entry>Overeenkomsten</entry>
                     <entry>
-                      <para>De initiële “An” of “The” in frases zoals:<simplelist>
+                      <para>De initiële “An” of “The” in frases zoals:<simplelist type="vert">
                           <member>“An apple a day…”</member>
                           <member>“The apple of my eye…”</member>
                         </simplelist>
@@ -362,7 +357,7 @@
                   <row>
                     <entry>Komt niet overeen</entry>
                     <entry>
-                      <para>De initiële “An” of “The” in frases zoals:<simplelist>
+                      <para>De initiële “An” of “The” in frases zoals:<simplelist type="vert">
                           <member>“A story called <emphasis>An Unsung
                           Hero</emphasis>.”</member>
                           <member>“They work for <emphasis>The Daily
@@ -397,7 +392,7 @@
                   <row>
                     <entry>Overeenkomsten</entry>
                     <entry>
-                      <para>Ofwel de “a ” of de “an ” in:<simplelist>
+                      <para>Ofwel de “a ” of de “an ” in:<simplelist type="vert">
                           <member>“I have a question.”</member>
                           <member>“I know an excellent doctor.”</member>
                         </simplelist>
@@ -410,7 +405,7 @@
                   <row>
                     <entry>Komt niet overeen</entry>
                     <entry>
-                      <para>Noch de “a” noch de “an” in:<simplelist>
+                      <para>Noch de “a” noch de “an” in:<simplelist type="vert">
                           <member>Het lidwoord: “a” (of “an”).</member>
                         </simplelist>
                       </para>
@@ -540,7 +535,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Het HAAKJE VOOR SLUITEN: <literal>)</literal></term>
+          <term>Het HAAKJE VOOR SLUITEN: <literal>(</literal></term>
 
           <listitem>
             <para>Dit teken sluit een groep. Het is speciaal omdat het nooit op zichzelf kan worden gebruikt. Het moet worden voorafgegaan door de <literal>\</literal> als u het haakje voor sluiten zelf overeen wil laten komen.</para>
@@ -561,7 +556,7 @@
                     <entry>
                       <para>Het nummer van de reeks (inclusief het haakje) aan het begin van elke regel in een lijst, zoals:</para>
 
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>1) Apples</member>
                         <member>2) Oranges</member>
                         <member>3) Pears</member>
@@ -575,7 +570,7 @@
                       <para>Nummers van reeksen die niet aan het begin van een regel staan.</para>
 
                       <para>Volg deze stappen:</para>
-                      <simplelist>
+                      <simplelist type="vert">
                         <member>Step 1) Preparation</member>
                         <member>Step 2) …</member>
                       </simplelist>
@@ -588,7 +583,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Het VIERKANTE HAAKJE VOOR OPENEN: <literal>[</literal></term>
+          <term>Het VIERKANTE HAAKJE VOOR OPENEN: <literal>(</literal></term>
 
           <listitem>
             <para>Dit teken moet zijn gepaard aan het vierkante haakje voor sluiten om een set individuele tekens te omsluiten die elk een geldige potentiële overeenkomst weergeven.</para>
@@ -626,7 +621,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Het ACCOLADE VOOR OPENEN: <literal>{</literal></term>
+          <term>Het ACCOLADE VOOR OPENEN: <literal>(</literal></term>
 
           <listitem>
             <para>Dit teken moet zijn gepaard aan de accolade voor sluiten om een <emphasis>exact aantal</emphasis>, <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>, of <emphasis>bereik</emphasis> te omsluiten, die specificeren hoeveel maal het voorkomen van het voorafgaande teken of groep overeen zou moeten komen.</para>
@@ -666,8 +661,8 @@
       </variablelist>
   </section>
 
-  <section id="app.regex.types.of.expressions">
-    <title id="app.regex.types.of.expressions.title">Heel veel expressies</title>
+  <section xml:id="app.regex.types.of.expressions">
+    <title xml:id="app.regex.types.of.expressions.title">Heel veel expressies</title>
 
     <para>Dit gedeelte presenteert verscheidene typen reguliere expressies, van eenvoudig tot complex.</para>
       
@@ -675,12 +670,12 @@
       <para>Onthoud dat de meest <emphasis>alfabetische</emphasis> tekens, die worden voorafgegaan door een <literal>\</literal>, veranderen in een expressie die <emphasis>niet het teken zelf, maar zijn geassocieerde speciale betekenis</emphasis> weergeeft.</para>
     </note>
 
-    <section id="app.regex.types.of.expressions.simple.expressions">
-      <title id="app.regex.types.of.expressions.simple.expressions.title">Eenvoudige expressies</title>
+    <section xml:id="app.regex.types.of.expressions.simple.expressions">
+      <title xml:id="app.regex.types.of.expressions.simple.expressions.title">Eenvoudige expressies</title>
       <para>De eenvoudigste reguliere expressie bestaat uit één enkel teken, of combinatie van een <literal>\</literal> en een teken dat een eenheid vormt met één enkele betekenis.</para>
       
-      <table id="app.regex.characters">
-        <title id="app.regex.characters.title">Tekens</title>
+      <table xml:id="app.regex.characters">
+        <title xml:id="app.regex.characters.title">Tekens</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -717,7 +712,7 @@
               <entry><literal>\r</literal></entry>
               <entry>
                 <para>Het teken voor een harde nieuwe regel (carriage-return), niet de letter “r”.</para>
-                <para>soortgelijk is <literal>\R</literal> elk teken voor het afbreken van een regel.</para>
+                <para>soortgelijk is <literal>\R</literal> elke teken voor het afbreken van een regel.</para>
 			  </entry>
             </row>
           </tbody>
@@ -725,8 +720,8 @@
       </table>
     </section>
 
-    <section id="app.regex.types.of.expressions.case">
-      <title id="app.regex.types.of.expressions.case.title">Hoofd-/Kleine letters</title>
+    <section xml:id="app.regex.types.of.expressions.case">
+      <title xml:id="app.regex.types.of.expressions.case.title">Hoofd-/Kleine letters</title>
 
       
       <para>Gewoonlijk zijn zoekacties van OmegaT standaard niet gevoelig voor het verschil in hoofd- en kleine letters: zij komen overeen met zowel tekens in hoofd- als kleine letters, tenzij u er voor kiest de optie <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/> in te schakelen. Door dat te doen maakt het de gehele zoek-expressie gevoelig voor hoofd- en kleine letters.</para>
@@ -751,8 +746,8 @@
       <para>U kunt hieruit uw voordeel door een fijnmazig beheer toe te passen voor gevoeligheid voor hoofd-kleine letters in zoekacties. Veronderstel, bijvoorbeeld, dat u wilt zoeken naar het voorkomen van “OmegaT” en “omegat”, maar niet “OMEGAT”. U kunt dat doen met de volgende expressie: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, wat een hoofd-/kleine letters ongevoelige “o” weergeeft, gevolgd door een hoofd-/kleine letters gevoelige “mega”, gevolgd door een hoofd-/kleine letters ongevoelige “t”.</para>
     </section>
 
-    <section id="app.regex.types.of.expressions.classes">
-      <title id="app.regex.types.of.expressions.classes.title">Klassen</title>
+    <section xml:id="app.regex.types.of.expressions.classes">
+      <title xml:id="app.regex.types.of.expressions.classes.title">Klassen</title>
 
       <para>Reguliere expressies stellen u in staat sets van tekens te maken—bekend als <emphasis>klassen</emphasis>. Zoekacties zullen overeenkomen met elk van de tekens in de set.</para>
 
@@ -764,11 +759,11 @@
 		<para>U kunt zoeken naar elk van de vier klassen voor speciale tekens als voor normale tekens door ze vooraf te laten gaan door een backslash. U kunt ook zoeken naar de caret, vierkante haakje voor sluiten en afbreekstreepje als zichzelf door ze te plaatsen op een positie die niet hun speciale betekenis activeert: overal, behalve direct achter het vierkante haakje voor openen voor de caret, direct achter ofwel het vierkante haakje voor openen of de caret gevolgd door het vierkante haakje voor sluiten, en ofwel net na het vierkante haakje voor openen of net voor het vierkante haakje voor sluiten voor het afbreekstreepje.</para>
       </note>
 
-	  <para>Veel frequent gebruikte sets hebben een vorm van een sneltoets, die bestaat uit een backslash, gevolgd door een letter van het alfabet. Bijvoorbeeld, <literal>\d</literal> is een sneltoets voor <literal>[0-9]</literal>, wat overeenkomt met elk cijfer tussen 0 tot en met 9. In veel gevallen wordt de overeenkomende hoofdletter gebruikt om de betekenis van de klasse teniet te doen: <literal>\D</literal> komt overeen met elk teken dat <emphasis role="bold">geen</emphasis> cijfer is.</para>
+	  <para>Veel frequent gebruikte hebben een vorm van een sneltoets de bestaat uit een backslash, gevolgd door een van het alfabet. Bijvoorbeeld <literal>\d</literal> is een sneltoets voor <literal>[0-9]</literal>, wat overeenkomt met elk cijfer tussen 0 tot en met 9. In veel gevallen wordt de overeenkomende hoofdletter gebruikt om de betekenis van de teniet te doen: <literal>\D</literal> komt overeen met elk dat <emphasis role="bold">geen</emphasis> cijfer is.</para>
       <para>De tabel hieronder verschaft verschillende aanvullende voorbeelden. Deze klassen geven nooit alleen de feitelijke letter weer die wordt gebruikt om de sneltoets te vormen.</para>
       
-      <table id="app.regex.classes">
-        <title id="app.regex.classes.title">Voorbeelden van klassen</title>
+      <table xml:id="app.regex.classes">
+        <title xml:id="app.regex.classes.title">Voorbeelden van klassen</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -844,10 +839,10 @@
       
       <para>Reguliere expressies zijn niet beperkt tot alfanumerieke tekens. Zij bedekken de gehele Unicode tekenset. Gebruik Unicode-blokken, scripts en categorieën om tekenklassen te specificeren buiten het bereik van alfanumerieke tekens. Een aantal voorbeelden worden in de tabel hieronder weergegeven.</para>
 
-      <para>Bekijk ook <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> voor een uitgebreide beschouwing van reguliere expressies voor Unicode.</para>
+      <para>Bekijk ook <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</link> voor een uitgebreide beschouwing van reguliere expressies voor Unicode.</para>
 
-      <table id="app.regex.unicode.blocks">
-        <title id="app.regex.unicode.blocks.title">Unicode-blokken, scripts en categorieën</title>
+      <table xml:id="app.regex.unicode.blocks">
+        <title xml:id="app.regex.unicode.blocks.title">Unicode-blokken, scripts en categorieën</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -862,7 +857,7 @@
             <row>
               <entry><literal>\p{InGreek}</literal></entry>
               <entry>
-                <para>Een teken in het Griekse blok (<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode-blok</ulink>)</para>
+                <para>Een teken in het Griekse blok (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Blocks">Unicode-blok</link>)</para>
 				
                 <para><literal>\P{InGreek}</literal> is elk teken dat <emphasis role="bold">niet</emphasis> in het Griekse blok staat.</para>
               </entry>
@@ -871,21 +866,21 @@
             <row>
               <entry><literal>\p{IsHan}</literal></entry>
               <entry>
-                <para>Een logogram (teken voor <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) te vinden in CJK-talen (<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicode script</ulink>)</para>
+                <para>Een logogram (teken voor <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) te vinden in CJK-talen (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#Script_Property">Unicode script</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Lu}</literal></entry>
               <entry>
-                <para>Een hoofdletter (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</ulink>)</para>
+                <para>Een hoofdletter (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</link>)</para>
               </entry>
             </row>
           
             <row>
               <entry><literal>\p{Sc}</literal></entry>
               <entry>
-                <para>Een valutasymbool, dat ook een <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</ulink> is.</para>
+                <para>Een valutasymbool, dat ook een <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</link> is.</para>
               </entry>
             </row>
           </tbody>
@@ -893,13 +888,13 @@
       </table>
     </section>
 
-    <section id="app.regex.more.advanced.expressions">
-      <title id="app.regex.more.advanced.expressions.title">Meer geavanceerde expressies</title>
+    <section xml:id="app.regex.more.advanced.expressions">
+      <title xml:id="app.regex.more.advanced.expressions.title">Meer geavanceerde expressies</title>
       
       <para>Sommige expressies specificeren een positie in plaats van een teken. Zij geven aan waar in de tekst moet worden gezocht voor de overeenkomst, maar bevatten geen tekens in die overeenkomst. De tabel hieronder vermeld een aantal meer algemene voorbeelden. Bekijk de pagina's in het gedeelte <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> voor informatie.</para>
 
-      <table id="app.regex.boundary.matchers">
-        <title id="app.regex.boundary.matchers.title">Expressies die een positie markeren</title>
+      <table xml:id="app.regex.boundary.matchers">
+        <title xml:id="app.regex.boundary.matchers.title">Expressies die een positie markeren</title>
       
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -936,7 +931,7 @@
             <row>
               <entry><literal>\B</literal></entry>
               <entry>
-                <para><emphasis>Geen</emphasis> woordgrens</para>
+                <para><emphasis>Geen</emphasis>  woordgrens</para>
               </entry>
             </row>
         
@@ -981,13 +976,13 @@
     </section>  
   </section>
 
-  <section id="app.regex.more.examples">
-    <title id="app.regex.more.examples.title">Meer voorbeelden</title>
+  <section xml:id="app.regex.more.examples">
+    <title xml:id="app.regex.more.examples.title">Meer voorbeelden</title>
 
-    <para>Dit gedeelte geeft een aantal voorbeelden weer, die demonstreren hoe de verschillende hierboven beschreven kunnen worden gecombineerd, om krachtige zoekacties in OmegaT uit te voeren.</para>
+    <para>Dit gedeelte geeft een aantal voorbeelden weer die demonstreren hoe de verschillende hierboven beschreven kunnen worden gecombineerd op krachtige zoekacties in OmegaT uit te voeren.</para>
     
-    <table id="regex.examples">
-      <title id="regex.examples.title">Voorbeelden van reguliere expressies die de hierboven vermelde uitdrukkingen gebruiken</title>
+    <table xml:id="regex.examples">
+      <title xml:id="regex.examples.title">Voorbeelden van reguliere expressies die de hierboven vermelde expressies gebruiken</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1008,7 +1003,7 @@
           </row>
 
           <row>
-            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ"“”-]+[\.,]</literal></entry>
             <entry>
               <para>Zoek naar clausules die beginnen met een komma, gevolgd door een teken voor witruimte, één of meer woorden bevatten (inclusief woorden tussen aanhalingstekens, samenvoegingen, en bestandsnamen met een bestandsextensie), en eindigen met ofwel een komma of een punt.</para>
             </entry>
@@ -1083,30 +1078,30 @@
     </table>
   </section>
 
-  <section id="app.regex.tools">
-    <title id="app.regex.tools.title">Verwijzingen</title>
+  <section xml:id="app.regex.tools">
+    <title xml:id="app.regex.tools.title">Verwijzingen</title>
 
     <para>Hoewel OmegaT geen mooie kleuren aanbiedt voor uw reguliere expressies, kunt u veel oefenen door het venster <link linkend="windows.text.search" endterm="windows.text.search.title"/> te gebruiken omdat OmegaT de overeenkomende resultaten wel een kleur geeft.</para>
     
     <para>Een aantal aanvullende bronnen worden hieronder weergegeven.</para>
 
     <para>De technische verwijzing voor Java is nuttig als een canonieke verwijzing.<variablelist>
-        <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentatie voor Java Regex </ulink></term>
+        <varlistentry xml:id="app.regex.java">
+          <term xml:id="app.regex.java.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentatie voor Java Regex </link></term>
           <listitem>
             <para>De officiële verwijzing voor reguliere expressies die worden gebruikt in Java.</para>
           </listitem>
         </varlistentry>
       </variablelist>Als u meer wilt leren over het gebruiken van reguliere expressies, hebben de volgende twee pagina's bewezen heel nuttig te zijn.<variablelist>
-        <varlistentry id="app.regex.tools.regex101">
-          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regex101">
+          <term xml:id="app.regex.tools.regex101.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://regex101.com">https://regex101.com</link></term>
           <listitem>
             <para>Een online programma voor overeenkomsten van reguliere expressies dat u de tekst in laat voeren die u wilt zoeken en de reguliere expressies die u wilt testen.</para>
           </listitem>
         </varlistentry>
 
-        <varlistentry id="app.regex.tools.regular.expression.info">
-          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+        <varlistentry xml:id="app.regex.tools.regular.expression.info">
+          <term xml:id="app.regex.tools.regular.expression.info.title"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.regular-expressions.info">https://www.regular-expressions.info</link></term>
           <listitem>
             <para>Een van de meest uitgebreide handleidingen voor reguliere expressies en verwijzingen op het web.</para>
           </listitem>

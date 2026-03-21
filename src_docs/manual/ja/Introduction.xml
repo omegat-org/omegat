@@ -1,19 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<chapter id="chapter.instant.start.guide">
-  <title id="chapter.instant.start.guide.title">Introduction to OmegaT</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.instant.start.guide">
+  <title xml:id="chapter.instant.start.guide.title">Introduction to OmegaT</title>
   
-  <section id="introduction.omegat.principles">
-	<title id="introduction.omegat.principles.title">原則</title>
+  <section xml:id="introduction.omegat.principles">
+	<title xml:id="introduction.omegat.principles.title">原則</title>
 
     <para>OmeaTは、コンピュータ支援翻訳(CAT)ツールであり、優れた柔軟性とパフォーマンスを提供するとともに、商用製品以上の機能を提供します。初心者の翻訳者も利用できます。</para>
 
-	<section id="introduction.omegat.principles.translation.project">
-      <title id="introduction.omegat.principles.translation.project.title">翻訳プロジェクト</title>
+	<section xml:id="introduction.omegat.principles.translation.project">
+      <title xml:id="introduction.omegat.principles.translation.project.title">翻訳プロジェクト</title>
 
       <para>OmegaT の翻訳プロジェクトは、複数のフォルダーの様々な資材から構成されています。<link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link>ファイルは、全ての資材の場所を格納しています。<link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link>翻訳メモリファイルには、プロジェクトで翻訳した翻訳文が格納されます。</para>
 
@@ -24,8 +19,8 @@
       <para>詳細については-<link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>を参照してください。</para>
     </section>
 
-	<section id="introduction.omegat.principles.translation.memories">
-      <title id="introduction.omegat.principles.translation.memories.title">翻訳メモリ</title>
+	<section xml:id="introduction.omegat.principles.translation.memories">
+      <title xml:id="introduction.omegat.principles.translation.memories.title">翻訳メモリ</title>
 
       <para>翻訳者が、翻訳メモリを<emphasis>作成</emphasis>したり、<emphasis>関連付け</emphasis>する必要はありません。OmeaTはそれを<emphasis>自動的に</emphasis>処理します。</para>
 
@@ -36,8 +31,8 @@
       <para>詳細については、 <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/>を参照してください。</para>
 	</section>
 
-	<section id="introduction.omegat.principles.collaboration">
-      <title id="introduction.omegat.principles.collaboration.title">共同作業</title>
+	<section xml:id="introduction.omegat.principles.collaboration">
+      <title xml:id="introduction.omegat.principles.collaboration.title">共同作業</title>
 
       <para>シンプルな設定で、翻訳者チームでプロジェクト資材を共有して、共同作業することができます。</para>
 
@@ -46,8 +41,8 @@
       <para>詳細については、 <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/>を参照してください。</para>
 	</section>
 
-	<section id="introduction.omegat.principles.made.for.translators">
-      <title id="introduction.omegat.principles.made.for.translators.title">翻訳者のために</title>
+	<section xml:id="introduction.omegat.principles.made.for.translators">
+      <title xml:id="introduction.omegat.principles.made.for.translators.title">翻訳者のために</title>
 
 	  <para>OmegaTは、翻訳プロセスを容易にするだけでなく、翻訳者がデータの損失を心配する必要がないように設計されています。</para>
 
@@ -65,13 +60,13 @@
 
 	  <para>トラブルからの回復手順を見る必要がでる(願わくば無いに越したとはないが)ときには、OmegaTのおかげで、あなたは翻訳作業に集中できるようになり、より良い翻訳者になっていることを実感できるでしょう。</para>
 
-	  <para>OmegaTのあらゆる面で支援が必要な場合は、<ulink url="https://omegat.org/support">OmegaTユーザーグループ</ulink>に気軽に参加してください。</para>
+	  <para>OmegaTのあらゆる面で支援が必要な場合は、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.org/support">OmegaTユーザーグループ</link>に気軽に参加してください。</para>
 
 	</section>
   </section>
 
-  <section id="introduction.how.to.use.the.manual">
-	<title id="introduction.how.to.use.the.manual.title">本書で使用されている表記規則</title>
+  <section xml:id="introduction.how.to.use.the.manual">
+	<title xml:id="introduction.how.to.use.the.manual.title">本書で使用されている表記規則</title>
 	<para>この項は、このマニュアルでOmegaTユーザーインターフェースの要素を区別するために使用される規則を示しています。これらは、機能を識別しやすいような方法で表示されます。項目に関連付けられたアクションは、内容表示が視覚的な違いを伝えることができない場合にも、その機能を示します:<emphasis>メニュー項目を使用</emphasis>するか、<emphasis>ボタンをクリック</emphasis>します。</para>
 
 	<para>同様に、マニュアルの各所へのリンクが示されるので、その項目の機能を簡単に識別できます。</para>
@@ -129,7 +124,7 @@
 	  <varlistentry>
 		<term>外部リソースへのWebリンク</term>
 		<listitem>
-		  <para> <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java 正規表現の解説文書</ulink></para>
+		  <para> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java 正規表現の解説文書</link></para>
 		</listitem>
 	  </varlistentry>
 
@@ -138,8 +133,8 @@
 		<listitem>
 		  <para>ショートカット表記が煩雑になるのを避けるため、同時におす修飾キー を共通の一文字で表記します。詳細については-<link linkend="chapter.menus" endterm="chapter.menus.title"/>を参照してください。</para>
 
-		  <example id="example.introduction.note.on.shortcuts">
-			<title id="example.introduction.note.on.shortcuts.title">修飾キーは一文字の英字で表示します。</title>
+		  <example xml:id="example.introduction.note.on.shortcuts">
+			<title xml:id="example.introduction.note.on.shortcuts.title">修飾キーは一文字の英字で表示します。</title>
 
 			<para>WindowsおよびLinuxの場合:<keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo></para>
 
@@ -152,8 +147,8 @@
 	</variablelist>
   </section>
 
-  <section id="introduction.create.and.open.new.project">
-    <title id="introduction.create.and.open.new.project.title">プロジェクトの新規作成</title>
+  <section xml:id="introduction.create.and.open.new.project">
+    <title xml:id="introduction.create.and.open.new.project.title">プロジェクトの新規作成</title>
 
 	<warning>
 	  <para>まだOmegaTをインストールしていない場合は、 <link linkend="how.to.installing.omegat" endterm="how.to.installing.omegat.title"/>のハウツーの項目を参照してください。</para>
@@ -172,7 +167,7 @@
 
 	<para>そのダイアログで原文ファイルと訳文ファイルの言語を選択し、オプション設定を調整して<guibutton>確定</guibutton>をクリックします。</para>
 
-	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
+	<para>OmegaTは、2文字の言語コードの便利な短い一覧を提供しますが、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</link>に準拠する任意のコード(3文字の言語コードを含む)を適切な領域に入力できます。</para>
 
 	<warning>
 	  <para>正しい言語コードを入力し、言語コードを必要とする他のすべての場所で、ここで割り当てたコードと一致していることを確認してください。詳細は<link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>項をご覧ください。</para>
@@ -193,8 +188,8 @@
 	<para> <link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウでファイルの内容が確認でない場合は、ファイルの中身が空ではないか、OmegaTがファイル形式をサポートしていないかもしれません。 <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.file.filters" endterm="menus.options.file.filters.title"/>をつかって、サポートしているファイル形式を確認できます。あいにくファイル形式がサポートされてない場合は、サードパーティのプラグインを使用するか、サポートされている形式にファイルを変換します。詳細は、 <link linkend="how.to.translate.other.files" endterm="how.to.translate.other.files.title"/> のハウツー項を参照してください。</para>
   </section>
 
-  <section id="introduction.install.spellchecker.dictionary">
-	<title id="introduction.install.spellchecker.dictionary.title">スペルチェック辞書</title>
+  <section xml:id="introduction.install.spellchecker.dictionary">
+	<title xml:id="introduction.install.spellchecker.dictionary.title">スペルチェック辞書</title>
 
 	<para>OmegaTはスペルチェックシステムを提供していますが、翻訳を実際にスペルチェックするために必要な辞書は付属していません。必要な辞書を自分でインストールする必要があります。</para>
 
@@ -231,8 +226,8 @@
 	</warning>
   </section>
 
-  <section id="introduction.manage.your.segments">
-    <title id="introduction.manage.your.segments.title">分節の管理</title>
+  <section xml:id="introduction.manage.your.segments">
+    <title xml:id="introduction.manage.your.segments.title">分節の管理</title>
 
 	<para>翻訳プロジェクトのデフォルト設定では、文書中の <emphasis>段落</emphasis>を分割して <emphasis>文</emphasis> を作成します。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> を確認してください。</para>
 	
@@ -265,12 +260,12 @@
 	</note>
   </section>
 
-  <section id="introduction.make.it.look.good">
-	<title id="introduction.make.it.look.good.title">どうでしょうか？</title>
+  <section xml:id="introduction.make.it.look.good">
+	<title xml:id="introduction.make.it.look.good.title">どうでしょうか？</title>
 	<para>変更作業がうまくいけば、原文ファイルは次のようなレイアウトでOmegaTに表示されます。</para>
 
-	<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Mac OSでのデフォルトOmeaTレイアウト</title>
+	<figure xml:id="default.omegat.layout">
+      <title xml:id="default.omegat.layout.title">Mac OSでのデフォルトOmeaTレイアウト</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -315,8 +310,8 @@
 	
   </section>
 
-  <section id="introduction.translate.the.segments.one.by.one">
-    <title id="introduction.translate.the.segments.one.by.one.title">ファイルを翻訳しましょう。</title>
+  <section xml:id="introduction.translate.the.segments.one.by.one">
+    <title xml:id="introduction.translate.the.segments.one.by.one.title">ファイルを翻訳しましょう。</title>
 
     <para><link linkend="panes.editor" endterm="panes.editor.title"/>ウィンドウで、翻訳を入力します。</para>
 
@@ -371,22 +366,22 @@
 	<para> <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/>を使うことで、頻繁に使う機能に簡単にアクセスできるようになります。編集ウィンドウには、 <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/>もあります。</para>
   </section>
   
-  <section id="introduction.manage.your.tags">
-    <title id="introduction.manage.your.tags.title">タグの管理</title>
+  <section xml:id="introduction.manage.your.tags">
+    <title xml:id="introduction.manage.your.tags.title">タグの管理</title>
 
     <para>翻訳対象の文書に、太字や強調文字などの修飾がついた文字がある場合、OmegaTはそれらの要素をタグに変換し、修飾つきの部分をタグで囲むようにします。これらの処理がされるファイルには、OneNoteファイル、HTMLファイル、Microsoft Officeファイルなどがあります。多くの場合、文書には装飾とは関係のないタグも含まれていますが、それでも原文ファイルでは(ひいては、訳文ファイルでも)重要です。</para>
 
 	<para>元のアプリケーション上では、次のように見えるはずです。</para>
     
-	<example id="example.source.segment.with.decorations">
-	  <title id="example.source.segment.with.decorations.title">装飾書式が設定された文</title>
+	<example xml:id="example.source.segment.with.decorations">
+	  <title xml:id="example.source.segment.with.decorations.title">装飾書式が設定された文</title>
 	  <para>OmegaTは、<emphasis>熱心な</emphasis>翻訳者向けの<emphasis role="bold">使いやすい</emphasis>プログラムです。</para>
 	</example>
 
     <para>ただし、元の書式によっては、OmegaTは次のような形式でこの文を表示します。</para>
 
-	<example id="example.how.decorations.are.displayed">
-	  <title id="example.how.decorations.are.displayed.title">OmegaTでの修飾の表示方法</title>
+	<example xml:id="example.how.decorations.are.displayed">
+	  <title xml:id="example.how.decorations.are.displayed.title">OmegaTでの修飾の表示方法</title>
 	  <para>OmegaTは、<code role="tag">&lt;t0/&gt;</code>使いやすい<code role="tag">&lt;t1/&gt;</code>プログラムで、<code role="tag">&lt;t2/&gt;</code>熱心な<code role="tag">&lt;t3/&gt;</code>翻訳者向けです。</para>
     </example>
 
@@ -428,16 +423,16 @@
 	</warning>
   </section>
 
-  <section id="introduction.review.the.translation">
-    <title id="introduction.review.the.translation.title">翻訳のレビュー</title>
+  <section xml:id="introduction.review.the.translation">
+    <title xml:id="introduction.review.the.translation.title">翻訳のレビュー</title>
 
 	<para>翻訳をレビューするときには、 <link linkend="chapter.panes" endterm="chapter.panes.title"/> レイアウトや <link linkend="menus.view" endterm="menus.view.title"/> 設定を好みに変更してください。</para>
 
 	<para><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>設定を使用して、翻訳の内容についてさまざまなチェックを行います。</para>
   </section>
   
-  <section id="introduction.generate.the.translated.file">
-    <title id="introduction.generate.the.translated.file.title">訳文ファイルの生成</title>
+  <section xml:id="introduction.generate.the.translated.file">
+    <title xml:id="introduction.generate.the.translated.file.title">訳文ファイルの生成</title>
 
 	<para>翻訳が最終的なファイル形式で、どう表示されるか確認するには、<link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>を使用します。</para>
 
@@ -456,8 +451,8 @@
 	<para>OmegaT外で行われた修正は、関連するセグメントに手動で入力するか、またはOmegaTと最終翻訳メモリを位置合わせして新しい原文ファイル(TMX)ファイルを作成し、プロジェクトフォルダーの<link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>フォルダーに配置することによって、翻訳メモリに再挿入できます(したがって、最新の状態を維持するために、プロジェクト訳文ファイルにも再挿入できます)。詳細は<link linkend="windows.aligner" endterm="windows.aligner.title"/>項をご覧ください。</para>
   </section>
 
-  <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">プロジェクトを管理する</title>
+  <section xml:id="introduction.one.more.thing">
+    <title xml:id="introduction.one.more.thing.title">プロジェクトを管理する</title>
 
     <itemizedlist>
       <listitem>
@@ -474,14 +469,14 @@
     </itemizedlist>
   </section>
 
-  <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">ショートカットベースのワークフロー</title>
+  <section xml:id="app.shortcuts.streamline.workflow">
+    <title xml:id="app.shortcuts.streamline.workflow.title">ショートカットベースのワークフロー</title>
 
     <para>主な編集およびナビゲーションのショートカットを覚えておくと(または<link linkend="app.shortcuts.customization">必要に応じて変更</link>すると)、作業を合理化するのに役立ちます。</para>
     <para>これは、次の例で最もよく説明されます。</para>
 
-    <example id="example.shortcuts.streamline.workflow">
-      <title id="example.shortcuts.streamline.workflow.title">ショートカットを使用した翻訳プロセスの効率化</title>
+    <example xml:id="example.shortcuts.streamline.workflow">
+      <title xml:id="example.shortcuts.streamline.workflow.title">ショートカットを使用した翻訳プロセスの効率化</title>
 
       <para>前の仕事で携わったマニュアルの更新版を翻訳するケースを想像してみてください。詳細については、 <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>を参照してください。</para>
         

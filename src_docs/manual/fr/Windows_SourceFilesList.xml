@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.source.files.list">
-  <title id="windows.source.files.list.title"><guilabel>Fichiers source</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.source.files.list">
+  <title xml:id="windows.source.files.list.title"><guilabel>Fichiers source</guilabel></title>
 
   <para>Cette fenêtre s’affiche automatiquement lors du chargement d’un projet par OmegaT et peut être consultée à tout moment via <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
 
@@ -46,15 +45,15 @@
   <para>Les boutons situés en bas de la fenêtre permettent d’ajouter des fichiers à votre projet  :</para>
   
   <variablelist>
-	<varlistentry id="windows.source.files.list.copy.files">
-	  <term id="windows.source.files.list.copy.files.title"><guibutton>Ajouter des fichiers…</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.copy.files">
+	  <term xml:id="windows.source.files.list.copy.files.title"><guibutton>Ajouter des fichiers…</guibutton></term>
 	<listitem>
 	  <para>Copie les fichiers sélectionnés au dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/> et recharge le projet pour prendre en compte les nouveaux fichiers.</para>
 	</listitem>
 	</varlistentry>
 	
-	<varlistentry id="windows.source.files.list.download.page">
-	  <term id="windows.source.files.list.download.page.title"><guibutton>Ajouter une page MediaWiki…</guibutton></term>
+	<varlistentry xml:id="windows.source.files.list.download.page">
+	  <term xml:id="windows.source.files.list.download.page.title"><guibutton>Ajouter une page MediaWiki…</guibutton></term>
 	  <listitem>
 		<para>Demande la saisie l’URL d’une page et la télécharge dans le dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 	  </listitem>

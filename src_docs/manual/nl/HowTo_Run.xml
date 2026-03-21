@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<section id="how.to.running.omegat">
-  <title id="how.to.running.omegat.title">OmegaT uitvoeren</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.running.omegat">
+  <title xml:id="how.to.running.omegat.title">OmegaT uitvoeren</title>
 
-  <section id="running.omegat.on.windows">
-	<title id="running.omegat.on.windows.title">Op Windows</title>
+  <section xml:id="running.omegat.on.windows">
+	<title xml:id="running.omegat.on.windows.title">Op Windows</title>
 	
 	<para>De eenvoudigste manier om OmegaT te starten is om het programma <filename>OmegaT.exe</filename> uit te voeren. De opties voor het opstarten van het programma zullen in worden gelezen uit het bestand <filename>OmegaT.l4J.ini</filename>, dat zich bevindt in dezelfde map als het exe-bestand en dat u kunt bewerken om uw instellingen weer te geven. Het volgende voorbeeld voor het INI-bestand reserveert 1 GB aan geheugen, zal Frans als taal van de gebruiker instellen en Canada als het land:</para>
 
@@ -20,8 +15,8 @@
 	<programlisting>-Dsun.java2d.noddraw=false</programlisting>
   </section>
 
-  <section id="running.omegat.on.linux">
-	<title id="running.omegat.on.linux.title">Op Linux</title>
+  <section xml:id="running.omegat.on.linux">
+	<title xml:id="running.omegat.on.linux.title">Op Linux</title>
 
 	<para>U kunt OmegaT opstarten vanaf de opdrachtregel met een script dat de opties voor opstarten bevat. Bekijk het gedeelte <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> voor details.</para>
 
@@ -30,8 +25,8 @@
 	<para>Het pakket verschaft ook het <filename>omegat.kaptn</filename> script voor Kaptain, dat gebruikers van KDE nuttig zouden kunnen vinden, als ook een <filename>OmegaT</filename> bash-script dat automatisch de toepasselijke opdracht voor <application>Java</application> start om OmegaT uit te voeren.</para>
   </section>
 
-  <section id="running.omegat.on.macos">
-	<title id="running.omegat.on.macos.title">Op macOS</title>
+  <section xml:id="running.omegat.on.macos">
+	<title xml:id="running.omegat.on.macos.title">Op macOS</title>
 
 	<para>Dubbelklik op <filename>OmegaT.app</filename> of klik op zijn locatie in het dock</para>
 
@@ -80,8 +75,8 @@
 	</note>
   </section>
 
-  <section id="running.omegat.on.other.systems">
-	<title id="running.omegat.on.other.systems.title">Op andere platforms</title>
+  <section xml:id="running.omegat.on.other.systems">
+	<title xml:id="running.omegat.on.other.systems.title">Op andere platforms</title>
 
 	<para>Methoden variëren van het ene systeem naar het andere, maar in het algemeen als OmegaT eenmaal is geïnstalleerd, kunt u het direct vanaf de opdrachtregel starten. Bekijk het gedeelte <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> voor details.</para>
 
@@ -90,17 +85,17 @@
 	<para>Bekijk de documentatie voor uw systeem voor meer informatie.</para>
   </section>
   
-  <section id="launch.with.command.line">
-	<title id="launch.with.command.line.title">Starten vanaf de opdrachtregel</title>
+  <section xml:id="launch.with.command.line">
+	<title xml:id="launch.with.command.line.title">Starten vanaf de opdrachtregel</title>
 
 	<para>Gebruiken van de opdrachtregel stelt u in staat verschillende opties in te stellen die het gedrag van de toepassing beheren of aanpassen. U kunt ook sets met opties definiëren en opslaan in scripts die u dan kunt gebruiken om OmegaT te starten voor een bepaald doel.</para>
 
 	<para>Starten van OmegaT vanaf de opdrachtregel maakt ook een nieuwe instantie voor elke start. U kunt dus meerdere projecten tegelijkertijd gebruiken, elk met zijn eigen parameters.</para>
 
-	<section id="launch.with.command.line.tutorial">
-	  <title id="launch.with.command.line.tutorial.title">Vereenvoudigd overzicht</title>
+	<section xml:id="launch.with.command.line.tutorial">
+	  <title xml:id="launch.with.command.line.tutorial.title">Vereenvoudigd overzicht</title>
 
-	  <para>Vóórdat grafische interfaces algemeen werden, interacteerden gebruikers met computers via een interface voor de opdrachtregel (CLI), wat vereist dat opdrachten worden getypt om instructies aan de computer te geven. Op moderne systemen wordt de toegang tot de CLI via een toepassing over het algemeen een &quot;terminal&quot; of &quot;console&quot; genoemd. Gemakshalve zal er in deze handleiding naar verwezen worden als de terminal.</para>
+	  <para>Vóórdat grafische interfaces algemeen werden, interacteerden gebruikers met computers via een interface voor de opdrachtregel (CLI), wat vereist dat opdrachten worden getypt om instructies aan de computer te geven. Op moderne systemen wordt de toegang tot de CLI via een toepassing over het algemeen een "terminal" of "console" genoemd. Gemakshalve zal er in deze handleiding naar verwezen worden als de terminal.</para>
 	  
 	  <para>Op Windows kunt u ofwel de <application>Opdrachtprompt</application> of <application>Powershell</application> gebruiken als een terminal. Beide zijn beschikbaar vanuit de map <guilabel>Windows Tools</guilabel> van het <guilabel>menu Start</guilabel>.</para>
 
@@ -116,20 +111,20 @@
 		<para>Hier zijn de standaard locaties voor OmegaT.jar voor elk belangrijk platform:</para>
 		
 		<variablelist>
-		  <varlistentry id="launch.with.command.line.windows">
-			<term id="launch.with.command.line.windows.title">Windows</term>
+		  <varlistentry xml:id="launch.with.command.line.windows">
+			<term xml:id="launch.with.command.line.windows.title">Windows</term>
 			<listitem>
 			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
-		  <varlistentry id="launch.with.command.line.macos">
-			<term id="launch.with.command.line.macos.title">macOS</term>
+		  <varlistentry xml:id="launch.with.command.line.macos">
+			<term xml:id="launch.with.command.line.macos.title">macOS</term>
 			<listitem>
 			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
-		  <varlistentry id="launch.with.command.line.linux">
-			<term id="launch.with.command.line.linux.title">Linux</term>
+		  <varlistentry xml:id="launch.with.command.line.linux">
+			<term xml:id="launch.with.command.line.linux.title">Linux</term>
 			<listitem>
 			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
 
@@ -142,8 +137,8 @@
 	  </note>	
 	</section>
 
-	<section id="launch.with.command.line.omegat.terminal.command.syntax">
-	  <title id="launch.with.command.line.omegat.terminal.command.syntax.title">Syntaxis voor opdrachten</title>
+	<section xml:id="launch.with.command.line.omegat.terminal.command.syntax">
+	  <title xml:id="launch.with.command.line.omegat.terminal.command.syntax.title">Syntaxis voor opdrachten</title>
 
 	  <para>De syntaxis om OmegaT vanuit de terminal te starten is:<programlisting>java -jar &lt;java parameters&gt; pad/naar/OmegaT.jar &lt;OmegaT opties&gt; </programlisting></para>
 
@@ -153,30 +148,30 @@
 	  </note>
 
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.java.jar">
-		  <term id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
+		<varlistentry xml:id="launch.with.command.line.java.jar">
+		  <term xml:id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
 		  <listitem>
 			<para>Deze opdracht vertelt de Java Virtual Machine om een Jar-pakket uit te voeren.</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.java.parameters">
-		  <term id="launch.with.command.line.intro.java.parameters.title"><option>&lt;java
+		<varlistentry xml:id="launch.with.command.line.intro.java.parameters">
+		  <term xml:id="launch.with.command.line.intro.java.parameters.title"><option>&lt;java
 		  parameters&gt;</option></term>
 		  <listitem>
 			<para>Optionele parameters die worden geaccepteerd door de opdracht <command>java</command>. De parameters die relevant zijn voor het uitvoeren van OmegaT worden <link linkend="launch.with.command.line.java.parameters">hieronder</link> beschreven.</para>
 		  </listitem>					
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.omegat.jar">
-		  <term id="launch.with.command.line.intro.omegat.jar.title"><option>pad/naar/OmegaT.jar</option></term>
+		<varlistentry xml:id="launch.with.command.line.intro.omegat.jar">
+		  <term xml:id="launch.with.command.line.intro.omegat.jar.title"><option>pad/naar/OmegaT.jar</option></term>
 		  <listitem>
 			<para>De locatie van het uitvoerbare Java-bestand van OmegaT.</para>	  
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.intro.omegat.options">
-		  <term id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;opties voor OmegaT&gt;</option></emphasis></term>
+		<varlistentry xml:id="launch.with.command.line.intro.omegat.options">
+		  <term xml:id="launch.with.command.line.intro.omegat.options.title"><emphasis><option>&lt;opties voor OmegaT&gt;</option></emphasis></term>
 		  <listitem>
 			<para>De specifieke opties voor OmegaT worden <link linkend="launch.with.command.line.omegat.options">later in dit gedeelte</link> beschreven</para>
 		  </listitem>					
@@ -184,38 +179,38 @@
 	  </variablelist>
 	</section>
 
-	<section id="launch.with.command.line.java.parameters">
-	  <title id="launch.with.command.line.java.parameters.title">Java
+	<section xml:id="launch.with.command.line.java.parameters">
+	  <title xml:id="launch.with.command.line.java.parameters.title">Java
 	  parameters</title>
 
 	  <para>De lijst hieronder geeft de parameters weer voor de opdracht <command>java</command> die nuttig kunnen zijn bij het gebruiken van OmegaT.</para>
 	  
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.user.interface.language">
-		  <term id="launch.with.command.line.user.interface.language.title">Taal van de gebruikersinterface</term>
+		<varlistentry xml:id="launch.with.command.line.user.interface.language">
+		  <term xml:id="launch.with.command.line.user.interface.language.title">Taal van de gebruikersinterface</term>
 
 		  <listitem>
 			<para><option>-Duser.language=LL</option></para>
 
-			<para>Vervang <code>LL</code> door de gewenste twee-letterige taalcode van de lijst <ulink url="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</ulink>.</para>
+			<para>Vervang <code>LL</code> door de gewenste twee-letterige taalcode van de lijst <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639.1</link>.</para>
 
 			<para>Gebruiken van deze parameter start OmegaT met de gebruikersinterface in de gespecificeerde taal, indien beschikbaar (zelfs gedeeltelijk). Als de taal niet beschikbaar is gebruikt OmegaT standaard Engels, zelfs als het systeem een andere standaardtaal gebruikt.</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.user.country">
-		  <term id="launch.with.command.line.user.country.title">Land gebruiker</term>
+		<varlistentry xml:id="launch.with.command.line.user.country">
+		  <term xml:id="launch.with.command.line.user.country.title">Land gebruiker</term>
 		  <listitem>
 			<para><option>-Duser.country=CC</option></para>
 
-			<para>Vervang <code>CC</code> door de gewenste twee-letterige taalcode van de lijst <ulink url="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>.</para>
+			<para>Vervang <code>CC</code> door de gewenste twee-letterige taalcode van de lijst <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</link>.</para>
 
 			<para>Deze parameter gecombineerd met de eerdere parameter voor de gebruikersinterface om een regionale variant te specificeren. Als die variant niet beschikbaar is, volgt de gebruikersinterface dezelfde prioriteit als hierboven.</para>
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.maximum.memory.assignment">
-		  <term id="launch.with.command.line.maximum.memory.assignment.title">Toewijzen maximum geheugen</term>
+		<varlistentry xml:id="launch.with.command.line.maximum.memory.assignment">
+		  <term xml:id="launch.with.command.line.maximum.memory.assignment.title">Toewijzen maximum geheugen</term>
 		  <listitem>
 			<para><option>-XmxSIZE</option></para>
 
@@ -223,8 +218,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.proxy.host.ip.address">
-		  <term id="launch.with.command.line.proxy.host.ip.address.title">Proxy host IP-adres</term>
+		<varlistentry xml:id="launch.with.command.line.proxy.host.ip.address">
+		  <term xml:id="launch.with.command.line.proxy.host.ip.address.title">Proxy host IP-adres</term>
 		  <listitem>
 			<para><option>-Dhttp.proxyHost=&lt;proxy IP&gt;</option></para>
 
@@ -232,8 +227,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="launch.with.command.line.proxy.host.port.number">
-		  <term id="launch.with.command.line.proxy.host.port.number.title">Proxyhost poortnummer</term>
+		<varlistentry xml:id="launch.with.command.line.proxy.host.port.number">
+		  <term xml:id="launch.with.command.line.proxy.host.port.number.title">Proxyhost poortnummer</term>
 		  <listitem>
 			<para><option>-Dhttp.proxyPort=&lt;port number&gt;</option></para>
 
@@ -243,78 +238,78 @@
 	  </variablelist>
 	</section>
 
-	<section id="launch.with.command.line.omegat.options">
-	  <title id="launch.with.command.line.omegat.options.title">Opties voor OmegaT</title>
+	<section xml:id="launch.with.command.line.omegat.options">
+	  <title xml:id="launch.with.command.line.omegat.options.title">Opties voor OmegaT</title>
 
 	  <para>U kunt ook een lijst met deze opties in de terminal verkrijgen met de opdracht <command>java -jar OmegaT.jar --help</command>. De OmegaT gebruikersinterface wordt gestart als geen optie is gespecificeerd.</para>
 
 	  <variablelist>
-		<varlistentry id="launch.with.command.line.general.options.">
-		  <term id="launch.with.command.line.general.options.title">Algemene opties:</term>
+		<varlistentry xml:id="launch.with.command.line.general.options.">
+		  <term xml:id="launch.with.command.line.general.options.title">Algemene opties:</term>
 		  <listitem>
 			<variablelist>
-			  <varlistentry id="launch.with.command.line.h.help">
-				<term id="launch.with.command.line.h.help.title"><option>-h</option>,
+			  <varlistentry xml:id="launch.with.command.line.h.help">
+				<term xml:id="launch.with.command.line.h.help.title"><option>-h</option>,
 				<option>--help</option></term>
 				<listitem>
 				  <para>Informatie over gebruik weergeven.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.path.to.an.omegat.project">
-				<term id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>pad naar een project van omegat</emphasis></term>
+			  <varlistentry xml:id="launch.with.command.line.path.to.an.omegat.project">
+				<term xml:id="launch.with.command.line.path.to.an.omegat.project.title"><emphasis>pad naar een project van omegat</emphasis></term>
 				<listitem>
 				  <para>Start de gebruikersinterface en laad het gespecificeerde project</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.remote.project.">
-				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <userinput>&lt;pad-naar-projectbestand-van-omegat&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.remote.project.">
+				<term xml:id="launch.with.command.line.remote.project.title"><option>--remote-project</option> <userinput>&lt;pad-naar-projectbestand-van-omegat&gt;</userinput></term>
 				<listitem>
 				  <para>Download het project van OmegaT vanaf de URL die is gespecificeerd in <emphasis>&lt;pad-naar-projectbestand-van-omegat&gt;</emphasis>, en laad het.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.no.team">
-				<term id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
+			  <varlistentry xml:id="launch.with.command.line.no.team">
+				<term xml:id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
 				<listitem>
 				  <para>Schakel de functionaliteit voor teamproject uit. Gebruik deze optie als u wilt voorkomen dat OmegaT de inhoud van het project synchroniseert.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.team.init">
-				<term id="launch.with.command.line.team.init.title"><option>team
+			  <varlistentry xml:id="launch.with.command.line.team.init">
+				<term xml:id="launch.with.command.line.team.init.title"><option>team
 				init</option> <userinput>SL</userinput>
 				<userinput>TL</userinput></term>
 				<listitem>
 				  <para>Initialiseer een teamproject met <emphasis>SL</emphasis> en <emphasis>TL</emphasis>, respectievelijk als de bron en doel twee-letterige taalcodes.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.disable.project.locking">
-				<term id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
+			  <varlistentry xml:id="launch.with.command.line.disable.project.locking">
+				<term xml:id="launch.with.command.line.disable.project.locking.title"><option>--disable-project-locking</option></term>
 				<listitem>
 				  <para>Het bestand omegat.project niet vergrendelen.</para>
 
 				  <para>Op sommige platforms wordt het bestand omegat.project standaard vergrendeld en het proberen te openen van een reeds geopend project in een andere instantie van OmegaT resulteert in een fout. Deze optie voorkomt die fout.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.disable.location.save">
-				<term id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
+			  <varlistentry xml:id="launch.with.command.line.disable.location.save">
+				<term xml:id="launch.with.command.line.disable.location.save.title"><option>--disable-location-save</option></term>
 				<listitem>
 				  <para>Laatst geopende map niet onthouden in de bestandskiezer.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
-				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;klassenaam&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.itokenizer.lt.classname.gt.">
+				<term xml:id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;klassenaam&gt;</userinput></term>
 				<term><option>--ITokenizerTarget=</option><userinput>&lt;klassenaam&gt;</userinput></term>
 				<listitem>
 				  <para>Specificeer een bron- of doeltaal tokenizer (gebruiken van deze optie overschrijft de instellingen voor het project). Bekijk OmegaT.jar/META-INF/MANIFEST.MF voor geldige waarden.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.config.dir.">
-				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;pad&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.config.dir.">
+				<term xml:id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;pad&gt;</userinput></term>
 				<listitem>
 				  <para>De map die wordt gebruikt voor het lezen of schrijven naar Omegat configuratie-bestanden. Bekijk het hoofdstuk <link endterm="configuration.folder.title" linkend="configuration.folder"/> voor details.</para>
 				</listitem>
 			  </varlistentry>
-			  <varlistentry id="launch.with.command.line.config.file.">
-				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;pad&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.config.file.">
+				<term xml:id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;pad&gt;</userinput></term>
 				<listitem>
 				  <para>Een bestand, dat is geschreven in de indeling voor Java .properties, gebruikt om een batch van opties voor de opdrachtregel te specificeren.</para>
 
@@ -323,7 +318,7 @@
 					<para>Verwijder de initiële <code>-D</code> of <code>-X</code> om parameters voor Java te gebruiken:</para>
 
 					<programlisting>user.language=fr
-config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
+config-dir="pad/naar/nieuwe/configdir"</programlisting>
 				  </note>
 
 				  <para>Nagenoeg alle parameters die in dit gedeelte zijn weergegeven mogen worden gebruikt in een bestand config. De vermeldenswaardige uitzondering is <code>remote-project</code>.</para>
@@ -332,50 +327,50 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.resource.bundle.">
-				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;pad&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.resource.bundle.">
+				<term xml:id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;pad&gt;</userinput></term>
 				<listitem>
 				  <para>Een bestand voor Java .properties om te gebruiken voor de tekst van de interface.</para>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
-				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console modusnaam]</option> <userinput>&lt;projectpad&gt;</userinput> <userinput>&lt;optie modus&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
+				<term xml:id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console modusnaam]</option> <userinput>&lt;projectpad&gt;</userinput> <userinput>&lt;optie modus&gt;</userinput></term>
 				<listitem>
 				  <para>Specificeer een andere modus dan de standaard voor de gebruikersinterface. De volgende opties zijn beschikbaar:</para>
 
 				  <variablelist>
-					<varlistentry id="launch.with.command.line.mode.console.translate">
-					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;projectpad&gt;</userinput></term>
+					<varlistentry xml:id="launch.with.command.line.mode.console.translate">
+					  <term xml:id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;projectpad&gt;</userinput></term>
 					  <listitem>
 						<para>In deze modus zal OmegaT proberen om de bestanden in de map source te vertalen met de beschikbare vertaalgeheugens.</para>
 
 						<para>Dit is handig als OmegaT wordt uitgevoerd op een server waarmee TMX-bestanden automatisch worden toegevoegd aan het project.</para>
 						  
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;patroon&gt;</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.source.pattern.lt.pattern.gt.">
+							<term xml:id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;patroon&gt;</userinput></term>
 							<listitem>
 							  <para>Een lijst van toegestane reguliere expressies die de te verwerken bronbestanden definieert. Onthoud dat in reguliere expressies de tekens punt en backslash moeten worden geëscaped: <code>\.</code> en <code>\\</code>.</para>
 
 							  <para>Hier zijn een aantal veel voorkomende voorbeelden:</para>
 							  
 							  <variablelist>
-								<varlistentry id="launch.with.command.line.html">
-								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.html">
+								  <term xml:id="launch.with.command.line.html.title"><option>.*\.html</option></term>
 								  <listitem>
 									<para>Vertaal alle HTML-bestanden.</para>
 								  </listitem>
 								</varlistentry>
-								<varlistentry id="launch.with.command.line.test.html">
-								  <term id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.test.html">
+								  <term xml:id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
 								  <listitem>
 									<para>Vertaal alleen het bestand <filename>test.html</filename> in de map source zelf. Andere bestanden in andere mappen, die ook zijn genaamd test.html, worden genegeerd.</para>
 								  </listitem>
 								</varlistentry>
 
-								<varlistentry id="launch.with.command.line.dir.test.html">
-								  <term id="launch.with.command.line.dir.test.html.title"><option>dir-10\\test\.html</option></term>
+								<varlistentry xml:id="launch.with.command.line.dir.test.html">
+								  <term xml:id="launch.with.command.line.dir.test.html.title"><option>dir-10\\test\.html</option></term>
 								  <listitem>
 									<para>Vertaal alleen het bestand <filename>test.html</filename> in de map <filename class="directory">dir-10</filename>.</para>
 								  </listitem>
@@ -389,23 +384,23 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 
-					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
-					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option> <userinput>&lt;projectpad&gt;</userinput></term>
+					<varlistentry xml:id="launch.with.command.line.mode.console.pseudotranslatetmx">
+					  <term xml:id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option> <userinput>&lt;projectpad&gt;</userinput></term>
 					  <listitem>
 						<para>In deze modus zal OmegaT een TMX voor het gehele project maken, alleen gebaseerd op de bronbestanden.</para>
 						
 						<para>Specificeer het TMX/bestand moet worden gemaakt met:</para>
 						
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
-							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;pad&gt;</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.pseudotranslatetmx.">
+							<term xml:id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;pad&gt;</userinput></term>
 							<listitem>
 							  <para>Het uitgevoerde pseudotranslated TMX-bestand.</para>
 							</listitem>
 						  </varlistentry>
 
-						  <varlistentry id="launch.with.command.line.pseudotranslatetype.equal.empty.">
-							<term id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
+						  <varlistentry xml:id="launch.with.command.line.pseudotranslatetype.equal.empty.">
+							<term xml:id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
 							<listitem>
 							  <para>Waarmee de pseudotranslated TMX moet worden gevuld.</para>
 							</listitem>
@@ -414,8 +409,8 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 					
-					<varlistentry id="launch.with.command.line.mode.console.align">
-					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> <userinput>&lt;projectpad&gt;</userinput></term>
+					<varlistentry xml:id="launch.with.command.line.mode.console.align">
+					  <term xml:id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> <userinput>&lt;projectpad&gt;</userinput></term>
 						<listitem>
 						<para>In deze modus zal OmegaT bestanden, gevonden in de map /source van het project, vergelijken met die op de met de parameter <emphasis>--alignDir</emphasis> hieronder gespecificeerde locatie.</para>
 						
@@ -434,19 +429,19 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 					  </listitem>
 					</varlistentry>
 
-					<varlistentry id="launch.with.command.line.mode.console.stats">
-					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> <userinput>&lt;projectpad&gt;</userinput></term>
+					<varlistentry xml:id="launch.with.command.line.mode.console.stats">
+					  <term xml:id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> <userinput>&lt;projectpad&gt;</userinput></term>
 					  <listitem>
 						<variablelist>
-						  <varlistentry id="launch.with.command.line.console.stats.output.file">
-							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-uitvoerbestand]</userinput></term>
+						  <varlistentry xml:id="launch.with.command.line.console.stats.output.file">
+							<term xml:id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-uitvoerbestand]</userinput></term>
 							<listitem>
 							  <para>Print naar dat bestand, of naar de standaard uitvoer indien afwezig. Zonder <emphasis>--stats-type</emphasis>, detecteert de indeling vanuit de bestandsextensie. De output gaat standaard naar xml.</para>
 							</listitem>
 						  </varlistentry>
 							
-						  <varlistentry id="launch.with.command.line.console.stats.output.format">
-							<term id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
+						  <varlistentry xml:id="launch.with.command.line.console.stats.output.format">
+							<term xml:id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
 							<listitem>
 							  <para>Vereist <emphasis>--output-file</emphasis>. Specificeert de indeling van de uitvoer.</para>
 							</listitem>
@@ -463,26 +458,26 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 		  </listitem>
 		</varlistentry>
 		  
-		<varlistentry id="launch.with.command.line.non.gui.mode.options.">
-		  <term id="launch.with.command.line.non.gui.mode.options.title">Niet-gebruikersinterface modus-opties:</term>
+		<varlistentry xml:id="launch.with.command.line.non.gui.mode.options.">
+		  <term xml:id="launch.with.command.line.non.gui.mode.options.title">Niet-gebruikersinterface modus-opties:</term>
 		  <listitem>
 			<variablelist>
-			  <varlistentry id="launch.with.command.line.quiet">
-				<term id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
+			  <varlistentry xml:id="launch.with.command.line.quiet">
+				<term xml:id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
 				<listitem>
 				  <para>Minimaliseer de uitvoer die wordt gegeven op de opdrachtregel.</para>
 				</listitem>
 			  </varlistentry>
 				
-			  <varlistentry id="launch.with.command.line.script.">
-				<term id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;pad&gt;</userinput></term>
+			  <varlistentry xml:id="launch.with.command.line.script.">
+				<term xml:id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;pad&gt;</userinput></term>
 				<listitem>
 				  <para>Een bestand met een script dat moet worden uitgevoerd als een gebeurtenis in het project wordt geactiveerd.</para>
 				</listitem>
 			  </varlistentry>
 
-			  <varlistentry id="launch.with.command.line.tag.validation.abort.warn.">
-				<term id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[afbreken|waarschuwen]</option></term>
+			  <varlistentry xml:id="launch.with.command.line.tag.validation.abort.warn.">
+				<term xml:id="launch.with.command.line.tag.validation.abort.warn.title"><option>--tag-validation=[afbreken|waarschuwen]</option></term>
 				<listitem>
 				  <para>Controleer problemen met tags.</para>
 				  
@@ -497,7 +492,7 @@ config-dir=&quot;pad/naar/nieuwe/configdir&quot;</programlisting>
 				  </itemizedlist>
 
 				  <note>
-					<para>Rapporten over problemen met problemen met tags worden uitgevoerd naar het venster van de terminal.</para>
+					<para>Rapporten over problemen met problemen met tags  worden uitgevoerd naar het venster van de terminal.</para>
 				  </note>
 				</listitem>
 			  </varlistentry>

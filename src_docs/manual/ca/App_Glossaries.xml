@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.glossaries">
-  <title id="app.glossaries.title">Glossaris</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
+  <title xml:id="app.glossaries.title">Glossaris</title>
 
   <para>Els glossaris són fitxers de terminologia emmagatzemats en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
@@ -28,12 +27,12 @@
 
 		  <para>Si voleu especificar una codificació diferent, podeu afegir un comentari «màgic» com el següent:</para>
 
-		  <simplelist>
+		  <simplelist type="vert">
             <member>
               <code># -*- coding: &lt;joc de caràcters&gt; -*-</code>,</member>
           </simplelist>
 		  
-          <para>on <parameter>&lt;joc de caràcters&gt;</parameter> és, normalment, un dels jocs de caràcters del <ulink url="http://www.iana.org/assignments/character-sets/character-sets.xhtml">Registre de jocs de caràcters de la IANA</ulink>.</para>
+          <para>on <parameter>&lt;joc de caràcters&gt;</parameter> és, normalment, un dels jocs de caràcters del <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">Registre de jocs de caràcters de la IANA</link>.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -50,8 +49,8 @@
 	<para>L'OmegaT reconeix immediatament les modificacions en qualsevol glossari i es mostren en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
   </note>
 
-  <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">Carpeta dels glossaris</title>
+  <section xml:id="glossaries.glossary.folder">
+    <title xml:id="glossaries.glossary.folder.title">Carpeta dels glossaris</title>
 
     <para>Per defecte, cada projecte conté una carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> per a emmagatzemar el glossari modificable i qualsevol glossari de referència que vulgueu afegir al projecte. Consulteu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per a conèixer més detalls.</para>
 
@@ -61,16 +60,16 @@
     <para>Utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> per a definir la ubicació de la carpeta de glossaris de referència. Aquesta carpeta pot ser externa al projecte, la qual cosa us permet utilitzar la carpeta o una de les subcarpetes específiques en altres projectes.</para>
   </section>
 
-  <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">Glossari del projecte</title>
+  <section xml:id="glossaries.default.glossary">
+    <title xml:id="glossaries.default.glossary.title">Glossari del projecte</title>
 
     <para>El glossari modificable del projecte es troba per defecte en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> i s'anomena <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>Podeu canviar-ne el nom i la ubicació en el quadre de diàleg <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>, però heu de donar-li l'extensió <filename>.txt</filename> o <filename>.utf8</filename>, i emmagatzemar-lo en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> o en una de les seves subcarpetes.</para>
   </section>
 
-  <section id="glossaries.fileformat">
-    <title id="glossaries.fileformat.title">Format dels fitxers</title>
+  <section xml:id="glossaries.fileformat">
+    <title xml:id="glossaries.fileformat.title">Format dels fitxers</title>
 
     <para>Els fitxers de glossari de l'OmegaT són fitxers de text sense format que contenen llistes de tres columnes; el terme d'origen en la primera columna, un terme de destinació opcional en la segona columna i un comentari opcional en la tercera columna.</para>
 
@@ -80,7 +79,7 @@
 
     <para>La codificació utilitzada per a llegir els glossaris de referència depèn de l'extensió del fitxer:</para>
 
-    <table id="glossary.extensions">
+    <table xml:id="glossary.extensions">
       <title>Format, extensions i codificació esperada</title>
 	  <tgroup cols="3">
       <thead>

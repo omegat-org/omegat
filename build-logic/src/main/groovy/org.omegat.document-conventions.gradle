@@ -87,7 +87,7 @@ manualLangsProvider.get().each { lang ->
     def copyCssTarget = tasks.register("copyCssTarget${lang.capitalize()}", Copy) {
         description = 'Copy CSS to target'
         from layout.projectDirectory.file("${documentRootDir}/style/omegat.css")
-        into(layout.buildDirectory.dir("docs/manual/${lang}/css/"))
+        into layout.buildDirectory.dir("docs/manual/${lang}/css/")
     }
 
     def copyJsTarget = tasks.register("copyJsTarget${lang.capitalize()}", Copy) {
@@ -98,7 +98,7 @@ manualLangsProvider.get().each { lang ->
             eachFile { fcd -> fcd.path = fcd.name }
             includeEmptyDirs = false
         }
-        into(layout.buildDirectory.dir("docs/manual/${lang}/js/"))
+        into layout.buildDirectory.dir("docs/manual/${lang}/js/")
     }
 
     def copyImagesTarget = tasks.register("copyImagesTarget${lang.capitalize()}", Copy) {
@@ -162,7 +162,6 @@ manualLangsProvider.get().each { lang ->
         dependsOn(whcHeader, whcToc, whcIndex, copyImagesTarget, copyCssTarget, copyJsTarget)
         group = 'documentation'
     }
-    assemble.dependsOn buildDocumentTask
     manualHtmls.dependsOn buildDocumentTask
 
     def zipTask = tasks.register("manualZip${lang.capitalize()}", Zip) {
@@ -170,9 +169,8 @@ manualLangsProvider.get().each { lang ->
         from fileTree(dir: "${documentRootDir}/manual/${lang}", include: '**/version*.properties')
         archiveFileName = "${lang}.zip"
         destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))
-        dependsOn docbookHtml
+        dependsOn buildDocumentTask
     }
-    assemble.dependsOn zipTask
     manualZips.dependsOn zipTask
 
     def languageName = Locale.forLanguageTag(lang.replace('_', '-')).displayName

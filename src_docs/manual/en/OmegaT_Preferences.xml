@@ -1127,7 +1127,7 @@
       </variablelist>
    </section>
    <section xml:id="dialog.preferences.tm.matches">
-      <title xml:id="dialog.preferences.tm.matches.title"><option>TM Matches</option></title>
+      <title xml:id="dialog.preferences.tm.matches.title"><guilabel>TM Matches</guilabel></title>
       <variablelist>
          <varlistentry xml:id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
             <term xml:id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title">

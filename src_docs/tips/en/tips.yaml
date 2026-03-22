@@ -1,5 +1,7 @@
 ---
 tips:
+- file: associate_file_formats.html
+  name: Associate file formats
 - file: shortcut_help.html
   name: Call user manual
 - file: automatic_backup.html

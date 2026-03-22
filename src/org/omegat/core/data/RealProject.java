@@ -233,9 +233,7 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
-        projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), config.getProjectRootDir(), checkOrphanedCallback,
-                Core.getSegmenter());
+        projectTMX = new ProjectTMX(checkOrphanedCallback);
         sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
@@ -1652,9 +1650,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());

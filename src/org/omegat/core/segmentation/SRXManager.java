@@ -118,8 +118,14 @@ public final class SRXManager {
      *            where to put the file. The file name is forced to
      *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveToSrx(SRX srx, File outDir) throws IOException {
+    public static void saveToSrx(@Nullable SRX srx, File outDir) throws IOException {
         File outFile = new File(outDir, SRX_SENTSEG);
+
+        if (srx == null) {
+            Files.deleteIfExists(Paths.get(outFile.toURI()));
+            Files.deleteIfExists(Paths.get(new File(outDir, CONF_SENTSEG).toURI()));
+            return;
+        }
 
         ObjectFactory factory = new ObjectFactory();
         Srx jaxbObject = factory.createSrx();

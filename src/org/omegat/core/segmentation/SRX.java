@@ -77,7 +77,7 @@ public class SRX {
      *             if an I/O error occurs during saving
      */
     @Deprecated(forRemoval = true, since = "6.1.0")
-    public static void saveToSrx(SRX srx, File outDir) throws IOException {
+    public static void saveToSrx(@Nullable SRX srx, File outDir) throws IOException {
         SRXManager.saveToSrx(srx, outDir);
     }
 

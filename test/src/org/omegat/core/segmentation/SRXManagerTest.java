@@ -28,6 +28,8 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import java.io.File;
 import java.io.IOException;
@@ -123,6 +125,15 @@ public class SRXManagerTest {
         File outputFile = new File(tempFolder.getRoot(), "segmentation.srx");
         SRXManager.saveToSrx(srx, tempFolder.getRoot());
         Assert.assertTrue("The output file should exist.", outputFile.exists());
+
+        // Compare original.srx and segmentation.srx with XMLUnit
+        Diff diff = DiffBuilder.compare(tempFile)
+                .withTest(outputFile)
+                .ignoreWhitespace()
+                .ignoreComments()
+                .build();
+        Assert.assertFalse("The original and saved SRX files should be identical: " + diff.toString(),
+                diff.hasDifferences());
     }
 
     @Test

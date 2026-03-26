@@ -33,6 +33,8 @@ langs.each { lang ->
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/philosophy.html"))
         styleSheetFile.set(rootProject.layout.settingsDirectory.file("${documentRootDir}/xsl/db5-html.xsl"))
         css.set("../philosophy.css")
+        pageStyle.set("article")
+        enableToc.set("false")
         dependsOn copyCss
     }
     jar.dependsOn(philosophyHtml)

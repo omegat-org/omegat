@@ -6,6 +6,7 @@ import net.sf.saxon.s9api.*
 import org.apache.xerces.jaxp.SAXParserFactoryImpl
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.RegularFile
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
@@ -36,10 +37,10 @@ class TransformationTask extends AbstractDocumentTask {
 
     @InputFile
     @PathSensitive(PathSensitivity.RELATIVE)
-    Provider<RegularFile> styleSheetFile = project.objects.fileProperty()
+    final RegularFileProperty styleSheetFile = project.objects.fileProperty()
 
     @OutputFile
-    Provider<RegularFile> outputFile = project.objects.fileProperty()
+    final RegularFileProperty outputFile = project.objects.fileProperty()
 
     @Input
     @Optional

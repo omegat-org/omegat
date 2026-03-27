@@ -25,8 +25,10 @@
 
 package org.omegat.filters2.text.yaml;
 
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -60,11 +62,13 @@ public class YamlFilter extends AbstractFilter {
 
     private final ObjectMapper mapper;
     private final Map<String, Integer> counters;
+    private YamlOptions options;
 
     public YamlFilter() {
         mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
         counters = new HashMap<>();
+        options = new YamlOptions(new HashMap<>());
     }
 
     /** Register plugin into OmegaT. */
@@ -99,6 +103,7 @@ public class YamlFilter extends AbstractFilter {
     @Override
     protected void processFile(BufferedReader inFile, @Nullable BufferedWriter outFile, FilterContext fc)
             throws TranslationException {
+        options = new YamlOptions(processOptions);
         JsonNode root;
         try {
             root = mapper.readTree(inFile);
@@ -115,6 +120,19 @@ public class YamlFilter extends AbstractFilter {
         }
     }
 
+    @Override
+    public boolean hasOptions() {
+        return true;
+    }
+
+    @Override
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+        YamlOptionsDialog dialog = new YamlOptionsDialog(parent, new YamlOptions(config));
+        dialog.setVisible(true);
+        YamlOptions newConfig = dialog.getOptions();
+        return newConfig.getOptionsMap();
+    }
+
     /**
      * Traverse the YAML tree depth-first. For every string scalar, ask OmegaT
      * for translation and replace the value with the translation (or same as
@@ -124,6 +142,11 @@ public class YamlFilter extends AbstractFilter {
         if (node.isTextual()) {
             String src = node.asText();
             String currentPath = path == null ? "" : path;
+
+            if (options.getIgnoreKeys().contains(currentPath)) {
+                return node;
+            }
+
             int index = counters.getOrDefault(currentPath, 0);
             counters.put(currentPath, index + 1);
 

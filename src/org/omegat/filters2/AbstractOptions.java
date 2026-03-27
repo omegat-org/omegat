@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.Map;
 
 /**
@@ -85,7 +87,7 @@ public abstract class AbstractOptions {
      *            default value, if value will be null
      * @return parsed value
      */
-    protected String getString(String key, String defaultValue) {
+    protected @Nullable String getString(String key, @Nullable String defaultValue) {
         String value = options.get(key);
         return value != null ? value : defaultValue;
     }

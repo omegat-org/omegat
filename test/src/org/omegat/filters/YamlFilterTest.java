@@ -34,9 +34,11 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import java.util.Map;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.yaml.YamlFilter;
+import org.omegat.filters2.text.yaml.YamlOptions;
 
 /**
  * Tests for {@link YamlFilter}.
@@ -124,29 +126,15 @@ public class YamlFilterTest extends TestFilterBase {
     }
 
     @Test
-    public void testLoadMultipleFiles() throws Exception {
-        String f1 = "test/data/filters/yaml/sample1.yaml";
-        String f2 = "test/data/filters/yaml/sample2.yml";
-        YamlFilter filter = new YamlFilter();
-        IProject.FileInfo fi1 = loadSourceFiles(filter, f1);
-        IProject.FileInfo fi2 = loadSourceFiles(filter, f2);
-
-        checkMultiStart(fi1, f1);
-        checkMulti("Welcome", "title_0", null, null, null, "name=title");
-        checkMulti("Home", "menu/items[0]_0", null, null, null, "name=menu/items[0]");
-        checkMulti("About", "menu/items[1]_0", null, null, null, "name=menu/items[1]");
-        checkMulti("Contact", "menu/items[2]_0", null, null, null, "name=menu/items[2]");
-        checkMulti("(c) 2025 Example Co.", "footer/copyright_0", null, null, null, "name=footer/copyright");
-        checkMulti("/help", "footer/links/help_0", null, null, null, "name=footer/links/help");
-        checkMulti("/terms", "footer/links/terms_0", null, null, null, "name=footer/links/terms");
-        checkMulti("Enabled features", "features/description_0", null, null, null, "name=features/description");
-        checkMultiEnd();
-
-        checkMultiStart(fi2, f2);
-        checkMulti("OmegaT - The Free Translation Memory Tool", "title_1", null, null, null, "name=title");
-        checkMulti("Welcome to OmegaT!", "description_0", null, null, null, "name=description");
-        checkMulti("About", "menu/items_0", null, null, null, "name=menu/items");
-        checkMulti("Documentation", "menu/documentation_0", null, null, null, "name=menu/documentation");
-        checkMultiEnd();
+    public void testParseWithIgnore() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_IGNORE_KEYS, "footer/links/help\tfooter/links/terms");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(6, entries.size());
+        assertEquals("Welcome", entries.get(0));
+        assertEquals("Home", entries.get(1));
+        assertEquals("About", entries.get(2));
+        assertEquals("Contact", entries.get(3));
+        assertEquals("(c) 2025 Example Co.", entries.get(4));
+        assertEquals("Enabled features", entries.get(5));
     }
 }

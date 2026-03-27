@@ -58,10 +58,16 @@ public class YamlOptionsDialog extends JDialog {
         Set<String> ignoreKeys = yamlOptions.getIgnoreKeys();
         ignoreKeysTextArea.setText(String.join("\n", new TreeSet<>(ignoreKeys)));
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout(0, 5));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        mainPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_IGNORE_KEYS")), BorderLayout.NORTH);
+
+        JPanel labelPanel = new JPanel(new BorderLayout(0, 2));
+        labelPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_DESCRIPTION")), BorderLayout.NORTH);
+        labelPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_IGNORE_KEYS")), BorderLayout.SOUTH);
+
+        mainPanel.add(labelPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(ignoreKeysTextArea), BorderLayout.CENTER);
+        mainPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_HINT")), BorderLayout.SOUTH);
         add(mainPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));

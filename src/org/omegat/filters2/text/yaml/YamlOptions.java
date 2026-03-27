@@ -48,7 +48,7 @@ public class YamlOptions extends AbstractOptions {
     }
 
     public void setIgnoreKeys(Set<String> ignoreKeys) {
-        if (ignoreKeys == null || ignoreKeys.isEmpty()) {
+        if (ignoreKeys.isEmpty()) {
             setString(OPTION_IGNORE_KEYS, "");
         } else {
             setString(OPTION_IGNORE_KEYS, String.join("\t", ignoreKeys));

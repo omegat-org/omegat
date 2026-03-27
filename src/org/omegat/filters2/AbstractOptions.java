@@ -113,7 +113,7 @@ public abstract class AbstractOptions {
      *            default value, if value will be null
      * @return parsed value
      */
-    protected <T extends Enum<T>> T getEnum(Class<T> enumType, String key, T defaultValue) {
+    protected @Nullable <T extends Enum<T>> T getEnum(Class<T> enumType, String key, @Nullable T defaultValue) {
         String value = options.get(key);
         try {
             return Enum.valueOf(enumType, value);

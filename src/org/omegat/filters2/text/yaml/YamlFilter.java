@@ -28,7 +28,6 @@ package org.omegat.filters2.text.yaml;
 import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -129,8 +128,7 @@ public class YamlFilter extends AbstractFilter {
     public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         YamlOptionsDialog dialog = new YamlOptionsDialog(parent, new YamlOptions(config));
         dialog.setVisible(true);
-        YamlOptions newConfig = dialog.getOptions();
-        return newConfig.getOptionsMap();
+        return dialog.getOptions().getOptionsMap();
     }
 
     /**

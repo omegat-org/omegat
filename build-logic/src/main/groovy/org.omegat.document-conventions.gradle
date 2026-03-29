@@ -115,6 +115,8 @@ manualLangsProvider.get().each { lang ->
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
         contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
         css.set("css/omegat.css")
+        pageStyle.set("book")
+        enableToc.set("true")
         outputs.cacheIf { false }
         // debug.set("chunk-cleanup")
         dependsOn(copyImages, copyCss)
@@ -238,6 +240,8 @@ firstStepLangsProvider.get().each { lang ->
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
         styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-html.xsl"))
         css.set("greeting.css")
+        pageStyle.set("article")
+        enableToc.set("false")
         finalizedBy(firstStepsHtmlFinally)
     }
     firstSteps.dependsOn(firstStepsHtml)

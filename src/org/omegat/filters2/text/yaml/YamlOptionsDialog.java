@@ -27,8 +27,8 @@ package org.omegat.filters2.text.yaml;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Window;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,42 +41,65 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 public class YamlOptionsDialog extends JDialog {
     private final YamlOptions yamlOptions;
-    private final JTextArea ignoreKeysTextArea;
+    private final JTextArea includeKeysTextArea;
+    private final JTextArea excludeKeysTextArea;
     private boolean confirmed = false;
 
-    public YamlOptionsDialog(Window parent, YamlOptions yamlOptions) {
+    public YamlOptionsDialog(Window parent, Map<String, String> options) {
         super(parent);
-        this.yamlOptions = yamlOptions;
+        this.yamlOptions = new YamlOptions(options);
         setTitle(OStrings.getString("YAML_FILTER_OPTIONS_TITLE"));
         setModal(true);
         setLayout(new BorderLayout());
 
-        ignoreKeysTextArea = new JTextArea(10, 40);
-        Set<String> ignoreKeys = yamlOptions.getIgnoreKeys();
-        ignoreKeysTextArea.setText(String.join("\n", new TreeSet<>(ignoreKeys)));
+        includeKeysTextArea = new JTextArea(5, 40);
+        List<String> includeKeys = yamlOptions.getIncludeKeys();
+        includeKeysTextArea.setText(String.join("\n", includeKeys));
+
+        excludeKeysTextArea = new JTextArea(5, 40);
+        List<String> excludeKeys = yamlOptions.getExcludeKeys();
+        excludeKeysTextArea.setText(String.join("\n", excludeKeys));
 
         JPanel mainPanel = new JPanel(new BorderLayout(0, 5));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JPanel labelPanel = new JPanel(new BorderLayout(0, 2));
         labelPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_DESCRIPTION")), BorderLayout.NORTH);
-        labelPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_IGNORE_KEYS")), BorderLayout.SOUTH);
-
         mainPanel.add(labelPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(ignoreKeysTextArea), BorderLayout.CENTER);
-        mainPanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_HINT")), BorderLayout.SOUTH);
+
+        JPanel areasPanel = new JPanel(new BorderLayout(0, 5));
+        
+        JPanel includePanel = new JPanel(new BorderLayout(0, 2));
+        includePanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_INCLUDE_KEYS")), BorderLayout.NORTH);
+        includePanel.add(new JScrollPane(includeKeysTextArea), BorderLayout.CENTER);
+        
+        JPanel excludePanel = new JPanel(new BorderLayout(0, 2));
+        excludePanel.add(new JLabel(OStrings.getString("YAML_FILTER_OPTIONS_EXCLUDE_KEYS")), BorderLayout.NORTH);
+        excludePanel.add(new JScrollPane(excludeKeysTextArea), BorderLayout.CENTER);
+        
+        areasPanel.add(includePanel, BorderLayout.NORTH);
+        areasPanel.add(excludePanel, BorderLayout.CENTER);
+        
+        mainPanel.add(areasPanel, BorderLayout.CENTER);
+
+        JLabel hint = new JLabel();
+        Mnemonics.setLocalizedText(hint, OStrings.getString("YAML_FILTER_OPTIONS_HINT"));
+        mainPanel.add(hint, BorderLayout.SOUTH);
         add(mainPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton okButton = new JButton(OStrings.getString("BUTTON_OK"));
+        JButton okButton = new JButton();
+        Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(e -> {
             confirmed = true;
             setVisible(false);
         });
-        JButton cancelButton = new JButton(OStrings.getString("BUTTON_CANCEL"));
+        JButton cancelButton = new JButton();
+        Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
         cancelButton.addActionListener(e -> setVisible(false));
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
@@ -86,14 +109,19 @@ public class YamlOptionsDialog extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    public YamlOptions getOptions() {
+    public Map<String, String> getOptions() {
         if (confirmed) {
-            Set<String> ignoreKeys = Stream.of(ignoreKeysTextArea.getText().split("\n"))
+            List<String> includeKeys = Stream.of(includeKeysTextArea.getText().split("\n"))
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
-                    .collect(Collectors.toSet());
-            yamlOptions.setIgnoreKeys(ignoreKeys);
+                    .collect(Collectors.toList());
+            yamlOptions.setIncludeKeys(includeKeys);
+            List<String> excludeKeys = Stream.of(excludeKeysTextArea.getText().split("\n"))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .collect(Collectors.toList());
+            yamlOptions.setExcludeKeys(excludeKeys);
         }
-        return yamlOptions;
+        return yamlOptions.getOptionsMap();
     }
 }

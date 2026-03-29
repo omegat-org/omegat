@@ -26,15 +26,17 @@
 package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import java.util.Map;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.yaml.YamlFilter;
@@ -126,8 +128,8 @@ public class YamlFilterTest extends TestFilterBase {
     }
 
     @Test
-    public void testParseWithIgnore() throws Exception {
-        Map<String, String> options = Map.of(YamlOptions.OPTION_IGNORE_KEYS, "footer/links/help\tfooter/links/terms");
+    public void testParseWithExclude() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/links/help;footer/links/terms");
         List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
         assertEquals(6, entries.size());
         assertEquals("Welcome", entries.get(0));
@@ -136,5 +138,67 @@ public class YamlFilterTest extends TestFilterBase {
         assertEquals("Contact", entries.get(3));
         assertEquals("(c) 2025 Example Co.", entries.get(4));
         assertEquals("Enabled features", entries.get(5));
+    }
+
+    @Test
+    public void testParseWithInclude() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_INCLUDE, "menu/**");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(3, entries.size());
+        assertEquals("Home", entries.get(0));
+        assertEquals("About", entries.get(1));
+        assertEquals("Contact", entries.get(2));
+    }
+
+    @Test
+    public void testParseWithWildcard() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/*/*");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(6, entries.size());
+        assertEquals("Welcome", entries.get(0));
+        assertEquals("Home", entries.get(1));
+        assertEquals("About", entries.get(2));
+        assertEquals("Contact", entries.get(3));
+        assertEquals("(c) 2025 Example Co.", entries.get(4));
+        assertEquals("Enabled features", entries.get(5));
+    }
+
+    @Test
+    public void testParseWithIncludeAndExclude() throws Exception {
+        Map<String, String> options = Map.of(
+            YamlOptions.OPTION_INCLUDE, "footer/copyright",
+            YamlOptions.OPTION_EXCLUDE, "**/links/**"
+        );
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(1, entries.size());
+        assertEquals("(c) 2025 Example Co.", entries.get(0));
+    }
+
+    @Test
+    public void testParseWithExcludeFileKey() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "**/file");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/tips.yaml", options);
+        // "file" keys should be excluded, "name" keys should be included.
+        // tips[0]/file: shortcut_help.html (excluded)
+        // tips[0]/name: Call user manual (included)
+        // tips[1]/file: automatic_backup.html (excluded)
+        // tips[1]/name: Automatic backup (included)
+        assertEquals(2, entries.size());
+        assertEquals("Call user manual", entries.get(0));
+        assertEquals("Automatic backup", entries.get(1));
+    }
+
+    @Test
+    public void testParseWithEscapedIgnore() {
+        // Test with semicolon in key (if such a thing is possible in YAML paths we generate)
+        // and test our escaping logic directly in YamlOptions
+        YamlOptions options = new YamlOptions(new HashMap<>());
+        options.setExcludeKeys(List.of("key;with;semicolons", "key\\with\\backslashes", "normal/key"));
+        
+        List<String> recovered = options.getExcludeKeys();
+        assertEquals(3, recovered.size());
+        assertTrue(recovered.contains("key;with;semicolons"));
+        assertTrue(recovered.contains("key\\with\\backslashes"));
+        assertTrue(recovered.contains("normal/key"));
     }
 }

@@ -31,6 +31,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -61,13 +62,11 @@ public class YamlFilter extends AbstractFilter {
 
     private final ObjectMapper mapper;
     private final Map<String, Integer> counters;
-    private YamlOptions options;
 
     public YamlFilter() {
         mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
         counters = new HashMap<>();
-        options = new YamlOptions(new HashMap<>());
     }
 
     /** Register plugin into OmegaT. */
@@ -102,7 +101,6 @@ public class YamlFilter extends AbstractFilter {
     @Override
     protected void processFile(BufferedReader inFile, @Nullable BufferedWriter outFile, FilterContext fc)
             throws TranslationException {
-        options = new YamlOptions(processOptions);
         JsonNode root;
         try {
             root = mapper.readTree(inFile);
@@ -126,9 +124,9 @@ public class YamlFilter extends AbstractFilter {
 
     @Override
     public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
-        YamlOptionsDialog dialog = new YamlOptionsDialog(parent, new YamlOptions(config));
+        YamlOptionsDialog dialog = new YamlOptionsDialog(parent, config);
         dialog.setVisible(true);
-        return dialog.getOptions().getOptionsMap();
+        return dialog.getOptions();
     }
 
     /**
@@ -137,11 +135,16 @@ public class YamlFilter extends AbstractFilter {
      * source when parsing).
      */
     private JsonNode translateNode(JsonNode node, @Nullable String path) {
+        YamlOptions options = new YamlOptions(processOptions);
         if (node.isTextual()) {
             String src = node.asText();
             String currentPath = path == null ? "" : path;
 
-            if (options.getIgnoreKeys().contains(currentPath)) {
+            List<String> include = options.getIncludeKeys();
+            List<String> exclude = options.getExcludeKeys();
+
+            if ((!include.isEmpty() && !options.match(currentPath, include))
+                    || (include.isEmpty() && options.match(currentPath, exclude))) {
                 return node;
             }
 

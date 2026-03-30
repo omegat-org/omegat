@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
         name: Setup Gradle
         id: setup-gradle
       - name: Run gradle to generate sources

@@ -55,7 +55,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -85,7 +84,6 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -93,9 +91,6 @@ import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.scripting.ConsoleBindings;
-import org.omegat.gui.scripting.ScriptItem;
-import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.FileUtil;
@@ -457,12 +452,24 @@ public final class Main {
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
         p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
 
-        // Called *after* executing post processing command (unlike the
-        // regular PROJECT_CHANGE_TYPE.COMPILE)
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForCompile")) {
+            BaseSubCommand command = SubCommands.getCommand("ExecScriptForCompile").getDeclaredConstructor().newInstance();
+            command.setParameters(PARAMS);
+            int status = command.call();
+            if (status != 0) {
+                return status;
+            }
+        }
 
         p.closeProject();
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
+        if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForClose")) {
+            BaseSubCommand command = SubCommands.getCommand("ExecScriptForClose").getDeclaredConstructor().newInstance();
+            command.setParameters(PARAMS);
+            int status = command.call();
+            if (status != 0) {
+                return status;
+            }
+        }
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
 
         return 0;
@@ -662,7 +669,7 @@ public final class Main {
      *            load the project or not
      * @return the project.
      */
-    private static RealProject selectProjectConsoleMode(boolean loadProject) {
+    private static RealProject selectProjectConsoleMode(boolean loadProject) throws Exception {
         System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
 
         // check if project okay
@@ -683,41 +690,17 @@ public final class Main {
             if (!p.isProjectLoaded()) {
                 Core.setProject(new NotLoadedProject());
             } else {
-                executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+                if (PARAMS.containsKey("script") && SubCommands.containsCommand("ExecScriptForLoad")) {
+                    BaseSubCommand command = SubCommands.getCommand("ExecScriptForLoad").getDeclaredConstructor().newInstance();
+                    command.setParameters(PARAMS);
+                    int status = command.call();
+                    if (status != 0) {
+                        System.exit(status);
+                    }
+                }
             }
-
         }
         return p;
-    }
-
-    /**
-     * Execute a script as PROJECT_CHANGE events. We can't use the regular
-     * project listener because the SwingUtilities.invokeLater method used in
-     * CoreEvents doesn't stop the project processing in console mode.
-     */
-    private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script"));
-            Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
-            if (script.isFile()) {
-                HashMap<String, Object> binding = new HashMap<>();
-                binding.put("eventType", eventType);
-
-                ConsoleBindings consoleBindigs = new ConsoleBindings();
-                binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
-                binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
-                binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
-
-                try {
-                    String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
-                    Log.log(result);
-                } catch (Exception ex) {
-                    Log.log(ex);
-                }
-            } else {
-                Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
-            }
-        }
     }
 
     public static void showError(Throwable ex) {

@@ -54,6 +54,11 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
+tasks.register('manualPdfs') {
+    description = 'Builds the PDF manuals for all languages.'
+    group = 'documentation'
+}
+
 tasks.register('tipsHtmls', Sync) {
     description = 'Copy tips html/css contents into build folder'
     group = 'documentation'
@@ -115,12 +120,51 @@ manualLangsProvider.get().each { lang ->
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
         contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
         css.set("css/omegat.css")
+        media.set("screen")
         pageStyle.set("book")
-        enableToc.set("true")
+        toc.set("true")
+        lists.set("false")
         outputs.cacheIf { false }
         // debug.set("chunk-cleanup")
         dependsOn(copyImages, copyCss)
     }
+
+    def copyCssPrint = tasks.register("copyCssPrint${lang.capitalize()}", Copy) {
+        description = 'Copy CSS to target'
+        from layout.projectDirectory.file("${documentRootDir}/style/paged.css")
+        into layout.buildDirectory.dir("docs/print/${lang}/css/")
+    }
+
+    def copyImagesPrint = tasks.register("copyImagesPrint${lang.capitalize()}", Copy) {
+        description = 'Copy Images for print'
+        into layout.buildDirectory.dir("docs/print/${lang}/images/")
+        from fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}/images/"), include: "*.png")
+    }
+
+    def manualPrintHtml = tasks.register("manualPrintHtml${lang.capitalize()}", DocbookHtmlTask) {
+        description = "Generate PDF documentation for ${lang}"
+        group = 'documentation'
+        styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-print.xsl"))
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        outputFile.set(layout.buildDirectory.file("docs/print/${lang}/index.html"))
+        contentFiles.set(fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}"), include: '*.xml'))
+        css.set("css/paged.css")
+        pageStyle.set("book")
+        toc.set("true")
+        lists.set("false")
+        media.set("print")
+        dependsOn(copyImagesPrint, copyCssPrint)
+    }
+
+    def manualPdf = tasks.register("manualPdf${lang.capitalize()}", Exec) {
+        description = "Generate PDF documentation for ${lang} using Vivliostyle"
+        group = 'documentation'
+        commandLine 'npx', '--yes', '@vivliostyle/cli', 'build', '-s', 'A4', '-m',
+                layout.buildDirectory.file("docs/print/${lang}/index.html").get().asFile.path,
+                '-o', layout.buildDirectory.file("docs/print/${lang}/OmegaT_Documentation.pdf").get().asFile.path
+        dependsOn(manualPrintHtml)
+    }
+    manualPdfs.dependsOn(manualPdf)
 
     def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
@@ -241,7 +285,9 @@ firstStepLangsProvider.get().each { lang ->
         styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/db5-html.xsl"))
         css.set("greeting.css")
         pageStyle.set("article")
-        enableToc.set("false")
+        media.set("screen")
+        toc.set("false")
+        lists.set("false")
         finalizedBy(firstStepsHtmlFinally)
     }
     firstSteps.dependsOn(firstStepsHtml)

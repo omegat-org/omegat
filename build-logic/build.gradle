@@ -57,10 +57,10 @@ dependencies {
     // dependencies on Maven
     implementation 'xerces:xercesImpl:2.12.2'
     implementation 'xml-resolver:xml-resolver:1.2'
-    implementation 'org.xmlresolver:xmlresolver:5.2.2'
+    implementation 'org.xmlresolver:xmlresolver:6.0.21'
     implementation 'net.sf.saxon:Saxon-HE:12.9'
     implementation 'org.docbook:docbook-xslTNG:2.7.6'
-    implementation 'com.nwalsh:sinclude:5.2.4'
+    implementation 'com.nwalsh:sinclude:5.6.0'
     implementation 'tokyo.northside:whc:3.6.0'
     implementation 'xalan:xalan:2.7.3'
     implementation 'xalan:serializer:2.7.3'

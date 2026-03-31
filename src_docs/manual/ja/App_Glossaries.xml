@@ -1,160 +1,119 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
-  <title xml:id="app.glossaries.title">用語集</title>
-
-  <para>用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存されている用語を集めたファイルです。</para>
-
-  <para><emphasis>どれか</emphasis>の用語集で一致する、セグメント内のすべての用語が<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。</para>
-
-  <para>用語集の原文は、複数単語からなる用語であっても大丈夫です。</para>
-
-  <para>次の2種類の用語集ファイルがあります。</para>
-
-  <variablelist>
-	<varlistentry>
-	  <term>プロジェクトの用語集</term>
-	  <listitem>
-		<para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>を使用して、この用語集に新しい用語を入力できます。この理由から、<emphasis>書き込み可能</emphasis>用語集と呼ばれています。</para>
-		
-		<para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>を使用してアクセスできます。テキストエディタで開いて変更することもできます。</para>
-
-		<para>事前にファイルを準備する必要はありません。</para>
-
-		<para>これは、最初に項目を用語集に追加するときに、自動的に作成されます。</para>
-
-		<note>
-          <para>既存のファイルを標準用語集として使用することを選択した場合、新しいエントリはすべてタブ区切りの書式で記録され、デフォルトでUTF-8の文字エンコーディングで保存されている必要があります。</para>
-
-		  <para>別のエンコーディングを指定する場合は、次の形式の「magic」コメントを追加します。</para>
-
-		  <simplelist type="vert">
-            <member>
-              <code># -*- coding: &lt;charset&gt; -*-</code>,
-            </member>
-          </simplelist>
-		  
-          <para>ここで、<parameter>&lt;charset&gt;</parameter>は通常、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</link>にリストされている文字エンコーディングの1つになります。</para>
-		</note>
-	  </listitem>
-	</varlistentry>
-	
-	<varlistentry>
-	  <term>参考用語集</term>
-	  <listitem>
-		<para>OmegaTが認識できるファイル形式の用語集です。プロジェクト用語集のようにOmegaTのGUIインターフェースから変更はできませんが、テキストエディタで編集できます。</para>
-	  </listitem>
-	</varlistentry>
-  </variablelist>
-
-  <note>
-	<para>用語集に変更を加えるとOmegaTは変更を自動的に考慮して、一致する用語を<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示します。</para>
-  </note>
-
-  <section xml:id="glossaries.glossary.folder">
-    <title xml:id="glossaries.glossary.folder.title">用語集フォルダー</title>
-
-    <para>デフォルトでは、各々のプロジェクトフォルダーには、追加書き込み可能な用語集と参照用語集を保存するための<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダがあります。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> を確認してください。</para>
-
-    <para>すべての用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存しなければなりません。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
-
-    <para>その参照用語集フォルダー内に、トピック、クライアント、またはワークフローに適したその他の分類別に整理された複数の用語集サブフォルダを作成できます。</para>
-    <para><link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>プロジェクト設定で、参照用語集フォルダーの場所を設定できます。プロジェクトのフォルダーの外部に設定して、他のプロジェクトで使用したり、特定のサブフォルダで使用することもできます。</para>
-  </section>
-
-  <section xml:id="glossaries.default.glossary">
-    <title xml:id="glossaries.default.glossary.title">プロジェクトの用語集</title>
-
-    <para>デフォルトで、書き込み可能なプロジェクト用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあり、<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>と呼ばれています。</para>
-
-    <para><link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>ダイアログで名前と場所を変更できますが、<filename>.txt</filename>または<filename>.utf8</filename>拡張子を付けて、<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーまたはそのサブフォルダーに保存する必要があります。</para>
-  </section>
-
-  <section xml:id="glossaries.fileformat">
-    <title xml:id="glossaries.fileformat.title">ファイル形式</title>
-
-    <para>用語集ファイルは単純なテキストファイルで、３つの列（カラム）からなるリストの形をしています。最初の列は原文で、それ以降はオプションで、２番目の列は訳文の用語、3番目はコメントが入ります。</para>
-
-    <para>用語集は、タブ区切り形式(TSV)とカンマ区切り形式(CSV)ファイルにすることも、TermBase eXchange(TBX)形式にすることもできます。</para>
-
-    <para>プロジェクトの書き込み可能な用語集は、UTF-8エンコーディングで保存されたTSVファイルです。ラテン文字のみを使用するユーザーで作成されたファイルは、非アスキー文字またはUTF-8として解釈されるその他の文字を含まない場合、ISO-8859-1として認識され、処理される場合があります。</para>
-
-    <para>参照用用語集の読み取りに使用されるエンコーディングは、ファイル拡張子によって異なります。</para>
-
-    <table xml:id="glossary.extensions">
-      <title>フォーマット、拡張、および予想されるエンコーディング</title>
-	  <tgroup cols="3">
-      <thead>
-        <row>
-          <entry>ファイル形式：</entry>
-
-          <entry>拡張子</entry>
-
-          <entry>エンコーディング</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>TSV</entry>
-
-          <entry>
-            <filename>.txt</filename>
-          </entry>
-
-          <entry>UTF-8</entry>
-        </row>
-
-        <row>
-          <entry>TSV</entry>
-
-          <entry>
-            <filename>.utf8</filename>
-          </entry>
-
-          <entry>UTF-8</entry>
-        </row>
-
-        <row>
-          <entry>TSV</entry>
-
-          <entry>
-            <filename>.tab</filename>
-          </entry>
-
-          <entry>OSのデフォルトエンコーディング</entry>
-        </row>
-
-        <row>
-          <entry>TSV</entry>
-
-          <entry>
-            <filename>.tsv</filename>
-          </entry>
-
-          <entry>OSのデフォルトエンコーディング</entry>
-        </row>
-
-        <row>
-          <entry>CSV</entry>
-
-          <entry>
-            <filename>.csv</filename>
-          </entry>
-
-          <entry>UTF-8</entry>
-        </row>
-
-        <row>
-          <entry>TBX</entry>
-
-          <entry>
-            <filename>.tbx</filename>
-          </entry>
-
-          <entry>UTF-8</entry>
-        </row>
-      </tbody>
-      </tgroup>
-    </table>
-  </section>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
+   <title xml:id="app.glossaries.title">用語集</title>
+   <para>用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存されている用語を集めたファイルです。</para>
+   <para><emphasis>どれか</emphasis>の用語集で一致する、セグメント内のすべての用語が<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。</para>
+   <para>用語集の原文は、複数単語からなる用語であっても大丈夫です。</para>
+   <para>次の2種類の用語集ファイルがあります。</para>
+   <variablelist>
+      <varlistentry>
+         <term>プロジェクトの用語集</term>
+         <listitem>
+            <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>を使用して、この用語集に新しい用語を入力できます。この理由から、<emphasis>書き込み可能</emphasis>用語集と呼ばれています。</para>
+            <para><link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/>を使用してアクセスできます。テキストエディタで開いて変更することもできます。</para>
+            <para>事前にファイルを準備する必要はありません。</para>
+            <para>これは、最初に項目を用語集に追加するときに、自動的に作成されます。</para>
+            <note>
+               <para>既存のファイルを標準用語集として使用することを選択した場合、新しいエントリはすべてタブ区切りの書式で記録され、デフォルトでUTF-8の文字エンコーディングで保存されている必要があります。</para>
+               <para>別のエンコーディングを指定する場合は、次の形式の「magic」コメントを追加します。</para>
+               <simplelist type="vert">
+                  <member>
+                     <code># -*- coding: &lt;charset&gt; -*-</code>,
+                     </member>
+               </simplelist>
+               <para>ここで、<parameter>&lt;charset&gt;</parameter>は通常、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</link>にリストされている文字エンコーディングの1つになります。</para>
+            </note>
+         </listitem>
+      </varlistentry>
+      <varlistentry>
+         <term>参考用語集</term>
+         <listitem>
+            <para>OmegaTが認識できるファイル形式の用語集です。プロジェクト用語集のようにOmegaTのGUIインターフェースから変更はできませんが、テキストエディタで編集できます。</para>
+         </listitem>
+      </varlistentry>
+   </variablelist>
+   <note>
+      <para>用語集に変更を加えるとOmegaTは変更を自動的に考慮して、一致する用語を<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示します。</para>
+   </note>
+   <section xml:id="glossaries.glossary.folder">
+      <title xml:id="glossaries.glossary.folder.title">用語集フォルダー</title>
+      <para>デフォルトでは、各々のプロジェクトフォルダーには、追加書き込み可能な用語集と参照用語集を保存するための<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダがあります。詳細は、プロジェクト設定の <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> を確認してください。</para>
+      <para>すべての用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存しなければなりません。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
+      <para>その参照用語集フォルダー内に、トピック、クライアント、またはワークフローに適したその他の分類別に整理された複数の用語集サブフォルダを作成できます。</para>
+      <para><link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/>プロジェクト設定で、参照用語集フォルダーの場所を設定できます。プロジェクトのフォルダーの外部に設定して、他のプロジェクトで使用したり、特定のサブフォルダで使用することもできます。</para>
+   </section>
+   <section xml:id="glossaries.default.glossary">
+      <title xml:id="glossaries.default.glossary.title">プロジェクトの用語集</title>
+      <para>デフォルトで、書き込み可能なプロジェクト用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあり、<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>と呼ばれています。</para>
+      <para><link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>ダイアログで名前と場所を変更できますが、<filename>.txt</filename>または<filename>.utf8</filename>拡張子を付けて、<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーまたはそのサブフォルダーに保存する必要があります。</para>
+   </section>
+   <section xml:id="glossaries.fileformat">
+      <title xml:id="glossaries.fileformat.title">ファイル形式</title>
+      <para>用語集ファイルは単純なテキストファイルで、３つの列（カラム）からなるリストの形をしています。最初の列は原文で、それ以降はオプションで、２番目の列は訳文の用語、3番目はコメントが入ります。</para>
+      <para>用語集は、タブ区切り形式(TSV)とカンマ区切り形式(CSV)ファイルにすることも、TermBase eXchange(TBX 2)形式にすることもできます。</para>
+      <para>プロジェクトの書き込み可能な用語集は、UTF-8エンコーディングで保存されたTSVファイルです。ラテン文字のみを使用するユーザーで作成されたファイルは、非アスキー文字またはUTF-8として解釈されるその他の文字を含まない場合、ISO-8859-1として認識され、処理される場合があります。</para>
+      <para>参照用用語集の読み取りに使用されるエンコーディングは、ファイル拡張子によって異なります。</para>
+      <table xml:id="glossary.extensions">
+         <title>フォーマット、拡張、および予想されるエンコーディング</title>
+         <tgroup cols="3">
+            <thead>
+               <row>
+                  <entry>ファイル形式：</entry>
+                  <entry>拡張子</entry>
+                  <entry>エンコーディング</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>TSV</entry>
+                  <entry>
+                     
+                     <filename>.txt</filename>
+                     </entry>
+                  <entry>UTF-8</entry>
+               </row>
+               <row>
+                  <entry>TSV</entry>
+                  <entry>
+                     
+                     <filename>.utf8</filename>
+                     </entry>
+                  <entry>UTF-8</entry>
+               </row>
+               <row>
+                  <entry>TSV</entry>
+                  <entry>
+                     
+                     <filename>.tab</filename>
+                     </entry>
+                  <entry>OSのデフォルトエンコーディング</entry>
+               </row>
+               <row>
+                  <entry>TSV</entry>
+                  <entry>
+                     
+                     <filename>.tsv</filename>
+                     </entry>
+                  <entry>OSのデフォルトエンコーディング</entry>
+               </row>
+               <row>
+                  <entry>CSV</entry>
+                  <entry>
+                     
+                     <filename>.csv</filename>
+                     </entry>
+                  <entry>UTF-8</entry>
+               </row>
+               <row>
+                  <entry>TBX</entry>
+                  <entry>
+                     
+                     <filename>.tbx</filename>
+                     </entry>
+                  <entry>UTF-8</entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+   </section>
 </section>

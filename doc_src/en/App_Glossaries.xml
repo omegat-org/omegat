@@ -11,6 +11,11 @@
   <para>All terms in a segment with a match in <emphasis>any</emphasis> of the
   glossaries will be displayed in the <link linkend="panes.glossary"
   endterm="panes.glossary.title"/> pane.</para>
+  
+  <para>You can use the glossary preferences to fine-tune how the glossaries
+  are displayed. See the <link endterm="dialogs.preferences.glossary.title"
+  linkend="dialogs.preferences.glossary"/> preferences for details.</para>
+
 
   <para>Source terms can be multi-word expressions.</para>
 

@@ -259,4 +259,13 @@ public class MozillaLangFilter extends AbstractFilter {
     public boolean isBilingual() {
         return true;
     }
+
+    /**
+     * Deprecated in 6.1.0 and will be removed in 6.2.0.
+     * @return false
+     */
+    @Override
+    public boolean isEnabledInDefault() {
+        return false;
+    }
 }

@@ -1556,7 +1556,7 @@ public class AlignPanelController {
             MutableBead trgBead = rowToBead.get(rows.get(0));
             List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
-            @Nullable String combined = lang != null ? Util.join(lang, toCombine) : null;
+            String combined = lang != null ? Util.join(lang, toCombine) : null;
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
             trgBead.status = Status.DEFAULT;
             makeCache();
@@ -1685,7 +1685,7 @@ public class AlignPanelController {
                     // Already in target bead
                     continue;
                 }
-                // XXX: Bead modified here
+                // Note: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 bead.status = Status.DEFAULT;
                 List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;

@@ -468,7 +468,7 @@
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">glossary</title>
     <para>This folder is initially empty. It is used to store the default
-    writable glossary and any other glossaries you use in the project.</para>
+    writable glossary and any other glossaries that you use in the project.</para>
 
 	<para>Glossary terms that match parts of the segment are displayed in the
 	<link linkend="panes.glossary" endterm="panes.glossary.title"/> pane. See

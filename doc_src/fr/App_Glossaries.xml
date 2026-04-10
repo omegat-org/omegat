@@ -6,6 +6,9 @@
   <para>Les glossaires sont des fichiers terminologiques situés dans le dossier <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
   <para>Tous les termes d’un segment qui trouvent une correspondance dans <emphasis>un</emphasis> des glossaires seront affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  
+  <para>Vous pouvez utiliser les préférences du glossaire pour affiner l’affichage des glossaires. Voir le paramètre <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> pour en savoir plus.</para>
+
 
   <para>Les termes source peuvent être des expressions multimots.</para>
 

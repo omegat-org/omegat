@@ -32,7 +32,7 @@
 
 	<para>Vous pouvez lancer OmegaT à partir de la ligne de commande avec un script qui comprend des options de démarrage. Voir la section <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> pour en savoir plus.</para>
 
-	<para>Vous pouvez aussi double-cliquer sur <filename>OmegaT.jar</filename> pour le lancer directement, si l’extension <filename>.jar</filename> est associée au programme de lancement Java du système.</para>
+	<para>Vous pouvez aussi doublecliquer sur <filename>OmegaT.jar</filename> pour le lancer directement, si l’extension <filename>.jar</filename> est associée au programme de lancement Java du système.</para>
 
 	<para>Le paquet vous fournit le script Kaptain <filename>omegat.kaptn</filename>, que vous trouverez surement utile si vous êtes sous KDE, ainsi qu’un script bash <filename>OmegaT</filename> qui lance automatiquement la commande <application>java</application> requise pour le fonctionnement d’OmegaT.</para>
   </section>
@@ -92,7 +92,7 @@
 
 	<para>Les méthodes varient d’un système à l’autre, mais en général, une fois qu’OmegaT est installé, vous pouvez le lancer directement en ligne de commande. Voir la section <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> pour en savoir plus.</para>
 
-	<para>Vous pouvez créer un script qui inclut les paramètres souhaités pour le lancement en ligne de commande. Si les fichiers <filename>.jar</filename> sont correctement associés avec l’environnement d’exécution Java 11 et que vos paramètres PATH sont corrects, vous pouvez également cliquer (ou double-cliquer) sur <filename>OmegaT.jar</filename> pour l’exécuter directement.</para>
+	<para>Vous pouvez créer un script qui inclut les paramètres souhaités pour le lancement en ligne de commande. Si les fichiers <filename>.jar</filename> sont correctement associés avec l’environnement d’exécution Java 11 et que vos paramètres PATH sont corrects, vous pouvez également cliquer (ou doublecliquer) sur <filename>OmegaT.jar</filename> pour l’exécuter directement.</para>
 
 	<para>Consultez la documentation de votre système pour plus d’information.</para>
   </section>
@@ -420,13 +420,13 @@ config-dir=&quot;chemin/vers/nouveau/configdir&quot;</programlisting>
 					<varlistentry id="launch.with.command.line.mode.console.align">
 					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align <emphasis>--alignDir=&lt;chemin&gt;</emphasis></option></term>
 					  <listitem>
-						<para>Dans ce mode, OmegaT va aligner les fichiers du dossier /source du projet avec ceux qui se trouvent à l'emplacement spécifié par le paramètre <emphasis>--alignDir</emphasis>.</para>
+						<para>Dans ce mode, OmegaT va aligner les fichiers du dossier /source du projet avec ceux qui se trouvent à l’emplacement spécifié par le paramètre <emphasis>--alignDir</emphasis>.</para>
 
-						<para>Le fichier TMX produit est enregistré dans le dossier /omegat sous le nom d'align.tmx. Les types de fichiers qui peuvent être alignés dépendent de si l'alignement est pris en charge par le filtre de fichier. Les filtres pris en charge incluent : le fichier de langue ILIAS, les paquets de ressources Java(TM), texte clé=valeur, localisation CSV Magento CE, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, les sous-titres SubRip et les ressources Windows.</para>
+						<para>Le fichier TMX produit est enregistré dans le dossier /omegat sous le nom d’align.tmx. Les types de fichiers qui peuvent être alignés dépendent de si l’alignement est pris en charge par le filtre de fichier. Les filtres pris en charge incluent : le fichier de langue ILIAS, les paquets de ressources Java(TM), texte clé=valeur, localisation CSV Magento CE, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, les sous-titres SubRip et les ressources Windows.</para>
 
-						<para>Le paramètre <emphasis>--alignDir</emphasis> est utilisé pour spécifier l'emplacement des données dans la langue cible, qui doit être un dossier contenant les fichiers traduits.</para>
+						<para>Le paramètre <emphasis>--alignDir</emphasis> est utilisé pour spécifier l’emplacement des données dans la langue cible, qui doit être un dossier contenant les fichiers traduits.</para>
 
-						<para>Ce dossier doit contenir une traduction dans la langue cible du projet. Par exemple, si la paire de langues du projet est EN-&gt;FR, le dossier doit contenir un paquet finissant par _fr. Le fichier TMX produit est enregistré dans le dossier /omegat sous le nom d'align.tmx.</para>
+						<para>Ce dossier doit contenir une traduction dans la langue cible du projet. Par exemple, si la paire de langues du projet est EN-&gt;FR, le dossier doit contenir un paquet finissant par _fr. Le fichier TMX produit est enregistré dans le dossier /omegat sous le nom d’align.tmx.</para>
 					  </listitem>
 					</varlistentry>
 

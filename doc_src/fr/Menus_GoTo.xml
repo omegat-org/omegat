@@ -149,7 +149,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.notes.pane">
-      <term id="menus.goto.notes.pane.title"><guimenuitem>Bloc-note</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Bloc-notes</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
         <para>Utilisez la fenêtre <link linkend="panes.notes" endterm="panes.notes.title"/> pour écrire ou modifier une note associée au segment actuel.</para>
       </listitem>

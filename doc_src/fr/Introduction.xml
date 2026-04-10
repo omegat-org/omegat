@@ -343,7 +343,7 @@
 		<listitem>
 		  <para>Ajouter des rappels dans le volet <link linkend="panes.notes" endterm="panes.notes.title"/> pour les segments problématiques</para>
 
-		  <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> pour entrer dans le Bloc-note et ajouter votre remarque.</para>
+		  <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> pour entrer dans le Bloc-notes et ajouter votre remarque.</para>
 
 		  <para>Utilisez <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> pour revenir à l’Éditeur et reprendre votre traduction.</para>
 		</listitem>
@@ -503,7 +503,7 @@
 
 	  <para>L’opération se poursuit avec parfois la combinaison <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo> (ou un autre chiffre) suivie de <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> lorsque l’une des correspondances de 2 à 5 est plus appropriée.</para>
 
-	  <para>Certains segments devront être modifiés ultérieurement, vous utilisez donc <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo> pour entrer dans le volet Bloc-note, vous laissez une note et revenez dans le volet Éditeur avec <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
+	  <para>Certains segments devront être modifiés ultérieurement, vous utilisez donc <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>9</keycap></keycombo> pour entrer dans le volet Bloc-notes, vous laissez une note et revenez dans le volet Éditeur avec <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>0</keycap></keycombo>.</para>
 	  
 	  <para>Lorsque vous arrivez à la fin de la partie, vous avez également utilisé <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> une ou deux fois pour remplacer des correspondances déjà saisies automatiquement dans la traduction précédente par de meilleures correspondances trouvées précédemment dans la partie traitée.</para>
 

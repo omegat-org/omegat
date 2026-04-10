@@ -215,17 +215,16 @@
       </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
-		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Trier par longueur de terme source</option></term>
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Afficher les termes (similaires) les plus longs en premier</option></term>
 		  <listitem>
-			  <para>If some glossary items are similar in a source term text,
-				  and one contains another term text, sort by a length of source text.</para>
+			  <para>Les termes similaires sont affichés en ordre de longueur décroissante.</para>
 		  </listitem>
 	  </varlistentry>
 
 		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
-			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Trier par longueur de terme source</option></term>
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Afficher les définitions les plus longues en premier</option></term>
 			<listitem>
-				<para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
+				<para>Les définitions d’un terme de glossaire qui en a plusieurs seront affichées en ordre de longueur décroissante. </para>
 			</listitem>
 		</varlistentry>
 	</variablelist>
@@ -1205,9 +1204,9 @@ ${filePath}&gt;</programlisting></para>
   <section id="dialogs.preferences.plugins">
 	<title id="dialogs.preferences.plugins.title"><guilabel>Modules d’extension</guilabel></title>
 
-	<para>Affiche la liste de tous les modules d'extension installés.</para>
+	<para>Affiche la liste de tous les modules d’extension installés.</para>
 
-	<para>Les modules d'extension sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
+	<para>Les modules d’extension sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
 
 	<para>Des modules d’extension supplémentaires sont disponibles sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">site de développement d’OmegaT</ulink>.</para>
   </section>

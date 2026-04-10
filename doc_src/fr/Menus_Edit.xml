@@ -318,8 +318,8 @@
       <listitem>
 		<para>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Si la traduction actuelle ne convient pas, sélectionnez cet élément de menu et entrez la traduction alternative.</para>
 		<warning>
-		<para>Pour faire la différence entre des segments identiques, OmegaT utilise soit un identificateur interne fourni par le type de fichier, soit les segments précédents et suivants. Dans ce cas, une traduction alternative nécessite que des segments identiques aient des segments précédents et suivants différents. Si des segments identiques ont également des segments précédents et suivants identiques, il ne vous sera pas possible de les traduire différemment et de faire de l'un d'entre eux une traduction alternative dans OmegaT.</para>
-		<para>Pour éviter ce problème, vous pouvez introduire une petite modification dans le segment qui précède ou dans celui qui suit, dans le fichier source, pour établir une distinction entre les différentes répétitions d'un ensemble de segments précédents et suivants.</para>
+		<para>Pour faire la différence entre des segments identiques, OmegaT utilise soit un identificateur interne fourni par le type de fichier, soit les segments précédents et suivants. Dans ce cas, une traduction alternative nécessite que des segments identiques aient des segments précédents et suivants différents. Si des segments identiques ont également des segments précédents et suivants identiques, il ne vous sera pas possible de les traduire différemment et de faire de l’un d’entre eux une traduction alternative dans OmegaT.</para>
+		<para>Pour éviter ce problème, vous pouvez introduire une petite modification dans le segment qui précède ou dans celui qui suit, dans le fichier source, pour établir une distinction entre les différentes répétitions d’un ensemble de segments précédents et suivants.</para>
 		</warning>
       </listitem>
 	</varlistentry>

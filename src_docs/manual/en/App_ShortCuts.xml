@@ -147,8 +147,8 @@
          modified for the new shortcuts to take effect.</para>
       <note>
          <para>You can copy the default OmegaT shortcut files from the OmegaT
-            development site on Sourceforge to 
-            <link linkend="configuration.folder" role="xref">your configuration folder</link> and modify
+            development site on Sourceforge to your
+            <link linkend="configuration.folder" role="xref">configuration folder</link> and modify
             them to suit your needs:</para>
          <variablelist>
             <varlistentry>
@@ -263,7 +263,7 @@
          after that is ignored by the application.</para>
       <para>The easiest way to modify the shortcuts is to download copies of the
          default files to your
-         <link linkend="configuration.folder" role="xref">your configuration
+         <link linkend="configuration.folder" role="xref">configuration
             folder</link>, as noted above, and make the changes you want there.</para>
       <example xml:id="example.shortcut.modification">
          <title xml:id="example.shortcut.modification.title">Modifying a
@@ -313,14 +313,18 @@
             <link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"></link> menu item.</para>
          <orderedlist>
             <listitem>
-               <para>Open the 
-                  <filename>MainMenuShortcuts.properties</filename> you
-                  have copied to your
-                  <link linkend="configuration.folder" endterm="configuration.folder.title"/> in a text editor.</para>
+               <para>Open the
+               <filename>MainMenuShortcuts.properties</filename> you
+               have copied to your <link
+               linkend="configuration.folder"
+               role="xref">configuration folder</link> in a text
+               editor.</para>
             </listitem>
             <listitem>
                <para>As shown in the 
-                  <xref linkend="app.shortcuts.lists.function.codes.edit.menu.table"/> below, the function code for the
+                  <link
+          linkend="app.shortcuts.lists.function.codes.edit.menu.table">Edit menu
+          table</link> below, the function code for the
                   <guimenuitem>Create
                      Alternative Translation</guimenuitem> function is
                   <code>editMultipleAlternate</code>.</para>

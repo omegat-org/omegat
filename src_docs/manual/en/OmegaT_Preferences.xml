@@ -861,8 +861,8 @@
                   Use this option if you prefer to enter segments with a single-click.</para>
                <note>
                   <para>If the cursor is unlocked, neither single-clicking nor double-clicking can be used
-                     to enter the segment. See the 
-                     <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"></link> setting.</para>
+                     to enter the segment. See 
+                     <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"></link> to lock or unlock the cursor.</para>
                </note>
             </listitem>
          </varlistentry>
@@ -943,7 +943,7 @@
                   		  time can be marked in the 
                   <guilabel>Editor</guilabel> pane by using
                   		  
-                  <link linkend="menus.view" endterm="menus.view.title"></link>.
+                  <link linkend="menus.view" endterm="menus.view.title"></link>
                   <link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"></link>.</para>
                <para>See the 
                   <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"></link> how-to for details.</para>

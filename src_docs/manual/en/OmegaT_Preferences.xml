@@ -1193,10 +1193,12 @@
                   <programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}&#10;&lt;${score}/${noStemScore}/${adjustedScore}%${filePath}&gt;</programlisting>
                </para>
                <para>Here is a possible alternative:</para>
-               <para>
-                  			
-                  <programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}&#10;[NEW]▷ ${diff}&#10;&#10;[OLD]◀ ${diffReversed}&#10;     ◀ ${targetText}</programlisting>
-               </para>
+		  <para>
+			<programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%> ${fuzzyFlag} ${fileNameOnly}
+[NEW]▷ ${diff}
+			
+[OLD]◀ ${diffReversed}
+◀ ${targetText}</programlisting></para>
                <para>The template variables are also available from a drop-down menu
                   		  and can be inserted with a button.</para>
                <table xml:id="table.match.pane.setup" colsep="0" rowsep="0">

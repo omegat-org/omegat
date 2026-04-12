@@ -685,9 +685,14 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>— ¶ —————————————————————&#10;&#10;<token>Application Folder</token>&#10;| <token>&lt;segment 1879 ¶&gt;</token>&#10;— ¶ —————————————————————</programlisting>
-                                          </entry>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶></token>
+
+— ¶ —————————————————————
+</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -701,9 +706,13 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>1. <token>Top</token> Folder&#10;Dossier racine&#10;&lt;50/50/66% Orphan segments (+1 more)&gt;&#10;2. Configuration Folder&#10;Dossier de configuration&#10;&lt;50/50/66% &gt;</programlisting>
-                                         </entry>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -981,14 +990,9 @@ Folder = <token>Dossier</token>
          percentages.</para>
       <example xml:id="panes.statusbar.widgets">
          <title xml:id="panes.statusbar.widgets.title">Status bar information</title>
-         <para>
-            <literal>LCK | OVR 
-               <token>257/271 (12292/154896,
-                  	  177692)</token>
-               <token> 35/0 </token>
-            </literal>
-         </para>
-         <variablelist>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
+          <variablelist>
             <varlistentry>
                <term>Cursor status</term>
                <listitem>
@@ -1037,13 +1041,8 @@ Folder = <token>Dossier</token>
       <example xml:id="panes.statusbar.widgets.percentage">
          <title xml:id="panes.statusbar.widgets.percentage.title">Status bar
       information, percentage mode</title>
-         <para>
-            <literal>UNL | INS 
-               <token>94.8% (14 left) / 7.9% (142,604 left),
-                  	  177,692</token> 
-               <token>35/0</token>
-            </literal>
-         </para>
+	  <para><literal>UNL | INS <token>94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</token> <token>35/0</token></literal></para>
          <variablelist>
             <varlistentry>
                <term>Cursor status</term>

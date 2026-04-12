@@ -119,8 +119,7 @@
             </keycombo>
          </term>
          <listitem>
-            <para>Saves the project translation memory (
-               <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and closes the
+            <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and closes the
                project.</para>
          </listitem>
       </varlistentry>
@@ -134,8 +133,7 @@
             </keycombo>
          </term>
          <listitem>
-            <para>Saves the project translation memory (
-               <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and synchronizes team
+            <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and synchronizes team
                projects.</para>
             <para>OmegaT automatically saves translations every three minutes as well as
                		when you close the project or quit the program. See the 

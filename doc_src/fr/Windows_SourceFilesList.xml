@@ -29,7 +29,7 @@
     </listitem>
   </itemizedlist>
 
-  <para>En tapant du texte, un champ <guilabel>Filtre</guilabel> s'ouvre en bas de la fenêtre dans lequel les noms de fichiers peuvent être saisis. Vous pouvez utiliser les flèches pour sélectionner un fichier et appuyer sur <keycap>Entrée</keycap> pour l’ouvrir afin de le traduire.</para>
+  <para>En tapant du texte, un champ <guilabel>Filtre</guilabel> s’ouvre en bas de la fenêtre dans lequel les noms de fichiers peuvent être saisis. Vous pouvez utiliser les flèches pour sélectionner un fichier et appuyer sur <keycap>Entrée</keycap> pour l’ouvrir afin de le traduire.</para>
 
   <note>
 	<para>Les noms de fichiers (première colonne) peuvent être triés par ordre alphabétique en cliquant sur l’entête. Vous pouvez modifier la position d’un fichier en le sélectionnant et en cliquant sur l’un des boutons <guibutton>Glisser…</guibutton> à droite.</para>

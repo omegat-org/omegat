@@ -154,7 +154,7 @@
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
 		<para>Ce dossier fournit l’emplacement standard pour les modules d’extension d’OmegaT installés manuellement. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
-		<para>Il est également possible d’installer des modules d'extension dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
+		<para>Il est également possible d’installer des modules d’extension dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 

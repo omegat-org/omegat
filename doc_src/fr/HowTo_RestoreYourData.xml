@@ -44,7 +44,7 @@
 	  </listitem>
 
 	  <listitem>
-		<para>Chaque fois que vous sauvegardez les données du projet (en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), ou lors d'une sauvegarde régulière, OmegaT enregistre l'état actuel de la traduction dans <filename>project_save.tmx</filename>.</para>
+		<para>Chaque fois que vous sauvegardez les données du projet (en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>), ou lors d’une sauvegarde régulière, OmegaT enregistre l’état actuel de la traduction dans <filename>project_save.tmx</filename>.</para>
 	  </listitem>
 	</orderedlist>
 
@@ -125,7 +125,7 @@
   </section>
   
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s'ouvre pas ?</title>
+	<title id="how.to.restore.your.data.project.wont.open.title">Votre projet ne s’ouvre pas ?</title>
 
 	<para>Dans le cas exceptionnel où votre ordinateur plante et où OmegaT n’a pas eu le temps de se fermer correctement, certains fichiers importants peuvent être corrompus et empêcher la réouverture du projet après le redémarrage de votre système.</para>
 
@@ -161,7 +161,7 @@
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s'ouvre pas ?</title>
+	<title id="how.to.restore.your.data.translated.file.broken.title">Votre fichier traduit ne s’ouvre pas ?</title>
 
 	<para>Très souvent, les fichiers de suites bureautiques contiennent des balises qui doivent être copiées dans la traduction pour que le fichier traduit puisse être ouvert dans l’application d’origine. Dans certains cas, les balises manquantes empêchent l’ouverture du fichier.</para>
 	

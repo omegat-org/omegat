@@ -172,7 +172,7 @@
 
     <para>Les correspondances sont affichées dans l’ordre de leur apparition dans le projet. Pour les segments traduits, le texte original est affiché au-dessus du texte traduit. Seul le texte source est affiché pour les segments non traduits.</para>
 
-	<para>Double-cliquer sur un segment pour l’ouvrir dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+	<para>Doublecliquer sur un segment pour l’ouvrir dans le volet <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
     <para>Vous pouvez utiliser les raccourcis suivants dans les résultats de la recherche :</para>
 	

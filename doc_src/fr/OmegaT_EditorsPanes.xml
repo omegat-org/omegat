@@ -227,7 +227,7 @@
         <listitem>
           <para>Si un volet est fermé, mais que son contenu doit être affiché, OmegaT peut temporairement surligner l’onglet du volet en orange lorsque vous entrez dans le segment.</para>
 		  
-		  <para>Les notifications sont activées par défaut dans les volets <guilabel>Commentaires</guilabel> et <guilabel>Bloc-note</guilabel>.</para>
+		  <para>Les notifications sont activées par défaut dans les volets <guilabel>Commentaires</guilabel> et <guilabel>Bloc-notes</guilabel>.</para>
 		  
 		  <para>Pour activer ou désactiver les notifications,</para>
 		  
@@ -269,7 +269,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Bloc-note</para>
+			  <para>Bloc-notes</para>
 			</listitem>
 
 			<listitem>
@@ -292,7 +292,7 @@
 
     <para>C’est ici que vous saisissez et éditez vos traductions.</para>
 
-    <para>Le texte est divisé en segments numérotés. Vous pouvez faire défiler le document et double-cliquer sur n’importe quel segment pour l’ouvrir et le modifier.</para>
+    <para>Le texte est divisé en segments numérotés. Vous pouvez faire défiler le document et doublecliquer sur n’importe quel segment pour l’ouvrir et le modifier.</para>
 
 	<example id="panes.editor.default.editor.writing.space">
 	  <title id="panes.editor.default.editor.writing.space.title">Espace d’écriture de l’éditeur par défaut</title>
@@ -721,7 +721,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.notes">
-    <title id="panes.notes.title"><guilabel>Bloc-note</guilabel></title>
+    <title id="panes.notes.title"><guilabel>Bloc-notes</guilabel></title>
 
     <para>Ce panneau est un espace <emphasis>éditable</emphasis> dans lequel vous pouvez ajouter des notes au segment actif.</para>
 

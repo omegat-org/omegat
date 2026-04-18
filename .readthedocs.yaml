@@ -11,8 +11,8 @@ build:
   tools:
     python: "3.14"
 
-mkdocs:
-  configuration: src_docs/mkdocs.yml
+sphinx:
+  configuration: src_docs/developer/conf.py
 
 # Optionally declare the Python requirements required to build your docs
 python:

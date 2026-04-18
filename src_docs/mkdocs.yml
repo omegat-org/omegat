@@ -1,5 +1,11 @@
 site_name: OmegaT developer Documentation
+site_url: https://omegat.readthedocs.io/
+repo_url: https://github.com/omegat-org/omegat
+repo_name: omegat-org/omegat
+edit_uri: edit/main/src_docs/developer/
+
 docs_dir: developer
+
 markdown_extensions:
   - tables
   - def_list
@@ -14,6 +20,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - pymdownx.details
+  - sane_lists
 
 theme:
   name: material
@@ -21,7 +28,9 @@ theme:
   - navigation.tracking
   - navigation.top
   - navigation.sections
+  - navigation.expand
   - content.code.copy
+  - content.code.annotate
 
 # Enable Mermaid diagrams
 extra_javascript:

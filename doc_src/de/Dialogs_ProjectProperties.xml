@@ -15,8 +15,12 @@
 
     <para>Wählen Sie die Quell- und Zielsprache in den Aufklapplisten aus oder tragen Sie sie manuell ein.</para>
 
-	<para>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> sein müssen.</para>
-	
+	<para>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können jeden beliebigen Code in das entsprechende Feld eintragen.</para>
+
+	<warning>
+	  <para>OmegaT prüft nicht, ob die von Ihnen eingetragenen Sprachcodes gültig sind. Stellen Sie sicher, dass die beiden Sprachcodes <emphasis>unterschiedlich</emphasis> sind und für Ihre Verwendung von OmegaT geeignet sind. Achten Sie außerdem darauf, dass die Codes an allen anderen Stellen, an denen ein Sprachcode erforderlich ist, mit den hier zugewiesenen übereinstimmen.</para>
+	</warning>
+
 	<para>Sprachcodes werden an verschiedenen Stellen in OmegaT verwendet, um:</para>
 	
 	<itemizedlist>
@@ -35,12 +39,17 @@
 	  <listitem>
 		<para>grammatikalische und typografische Fehler mittels Regeln gemäß den Einstellungen <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> zu finden,</para>
 	  </listitem>
+
+	  <listitem>
+		<para>die Sprachen anzugeben, die in den vom Projekt erstellten TMX-Dateien verwendet werden (eine TMX-Datei benötigt Sprachcodes gemäß <ulink url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink>),</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>und so weiter.</para>
 
 	<warning>
-	  <para>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</para>
+	  <para>Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</para>
 	</warning>
 
 	  

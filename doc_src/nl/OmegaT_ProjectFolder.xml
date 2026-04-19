@@ -298,7 +298,7 @@
 
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">glossary</title>
-    <para>Deze map is bij aanvang leeg. Het wordt gebruikt om de beschrijfbare woordenlijst en andere woordenlijsten, die u gebruikt in het project, op te slaan.</para>
+    <para>Deze map is bij aanvang leeg. It is used to store the default writable glossary and any other glossaries that you use in the project.</para>
 
 	<para>Termen van woordenlijsten die overeenkomen met delen van het segment worden weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
 

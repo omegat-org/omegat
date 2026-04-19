@@ -59,7 +59,7 @@
 
       <para>スクリプトを実行するには、<filename>sudo</filename>パスワードを入力する必要があります。</para>
 
-      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。If there isn’t one, it installs the program in <filename>/opt/omegat/OmegaT_6.0.1</filename> and sets it as the default version (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>このスクリプトは、<filename>/opt/OmegaT/</filename>にある同じバージョンのOmegaTの既存のインストールをチェックします。存在しない場合は、<filename>/opt/omegat/OmegaT_6.0.2</filename>にプログラムをインストールし、デフォルトバージョンとして設定します(<filename>/opt/omegat/OmegaT-default</filename>)。</para>
 	</note>
 
     <para>解凍またはインストールが完了したら、ダウンロードしたファイルは不要になったため削除できます。</para>

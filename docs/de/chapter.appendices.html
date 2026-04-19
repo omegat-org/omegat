@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1105,28 +1105,28 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ausnahmeregel, Häkchen nicht gesetzt, weiter oben in der Liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ausnahmeregel, <span class="guilabel">Umbruchregel?</span>-Häkchen nicht gesetzt, weiter oben in der Liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Nicht segmentieren nach Ms.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">Ms\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Ms, gefolgt von einem Punkt, gefolgt von einem Leerraum.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ausnahmeregel, Häkchen nicht gesetzt, weiter oben in der Liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ausnahmeregel, <span class="guilabel">Umbruchregel?</span>-Häkchen nicht gesetzt, weiter oben in der Liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Excel-Zellen mit Zeilenumbrüchen, die keine Segmente repräsentieren</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">.</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Zeilenumbruch, gefolgt von irgendetwas.</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Umbruchregel, <span class="guilabel">Umbruchregel?</span>-Häkchen gesetzt, weiter unten in der Liste</td>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Beginn eines neuen Segments nach einem Punkt, gefolgt von einem Leerraum wie z.B. Leer- oder Tabulatorzeichen.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Ein Punkt, gefolgt von einem Leerraum</td>
                            </tr>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; ">Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">Umbruchregel, <span class="guilabel">Umbruchregel?</span>-Häkchen gesetzt, weiter unten in der Liste</td>
                               <td style="text-align: left; border-right: 1px solid ; ">Beginn eines neuen Segments nach &quot;。&quot; (japanischer Punkt).</td>
                               <td style="text-align: center; border-right: 1px solid ; ">。</td>
                               <td style="text-align: center; border-right: 1px solid ; "> </td>
@@ -2732,6 +2732,9 @@
                </span> der Glossare übereinstimmen, werden im <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
                   <span class="guilabel">Glossare</span>
                </a>-Bereich angezeigt.</p>
+            <p>Sie können die Glossar-Einstellungen verwenden, um die Darstellung der Glossare zu optimieren. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossare">
+                  <span class="guilabel">Glossare</span>
+               </a> (Einstellungen).</p>
             <p>Quellbegriffe können aus mehreren Wörtern bestehen.</p>
             <p>Es gibt zwei Arten von Glossardateien:</p>
             <div class="variablelist">
@@ -4956,12 +4959,19 @@
                         <p>Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Ein Teamprojekt einrichten">Ein Teamprojekt einrichten</a>.</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.segmentation">
-                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</span>
+                        <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</span>
                      </dt>
                      <dd>
-                        <p>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Globale Segmentierungsregeln">
+                        <p>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter im Format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Globale Segmentierungsregeln">
                               <span class="guilabel">Globale Segmentierungsregeln</span>
                            </a> (Einstellungen).</p>
+                        <div class="note">
+                           <h3 class="title">Anmerkung</h3>
+                           <p>Wenn eine <code class="filename">segmentation.conf</code>-Datei aus früheren Versionen vorhanden ist, konvertiert OmegaT sie automatisch.</p>
+                        </div>
+                        <p>
+		
+                        </p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.plugin">
                         <span class="term" id="configuration.folder.extra.contents.plugin.title">plugins/</span>

@@ -111,7 +111,7 @@
 			<entry>改節を禁止するルールは、<guilabel>分割する/しない</guilabel>チェックボックスにチェックを入れずに、リストの上位におきます。</entry>
 			<entry>分節を表さない改行のあるExcelセル</entry>
 			<entry align="center">\n</entry>
-			<entry align="center">.</entry>
+			<entry align="center"></entry>
 			<entry>改行、その後に任意の文字。</entry>
 		  </row>
 		  <row>

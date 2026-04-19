@@ -8,8 +8,8 @@
 
 	<para>Wenn Sie OmegaT zum ersten Mal starten, hat das Hauptfenster das folgende Standardlayout:</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Standardlayout von OmegaT unter macOS</title>
+	<figure id="panes.default.omegat.layout">
+      <title id="panes.default.omegat.layout.title">Standardlayout von OmegaT unter macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -555,7 +555,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 
     <para>Matches stammen sowohl aus dem internen Translation Memory des Projekts, der während Ihrer Übersetzung in Echtzeit erstellt wird, als auch aus externen Translation Memories, die Sie aus früheren Projekten importiert oder von Dritten erhalten haben. Einzelheiten finden Sie unter <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>.</para>
 
-    <para>Wenn Sie ein Segment betreten, wird automatisch der erste Fuzzy Match (der mit dem höchsten Match-Prozentsatz) ausgewählt. Sie können <keycombo> <keycap>C</keycap> <keycap>2, 3, 4 oder 5</keycap> </keycombo> drücken oder <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> nutzen, um einen anderen Match auszuwählen.</para>
+    <para>Wenn Sie ein Segment betreten, wird automatisch der erste Fuzzy Match (der mit der höchsten Trefferquote) ausgewählt. Sie können <keycombo> <keycap>C</keycap> <keycap>2, 3, 4 oder 5</keycap> </keycombo> drücken oder <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> nutzen, um einen anderen Match auszuwählen.</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">Ein leeres Segment und seine ersten zwei Matches</title>

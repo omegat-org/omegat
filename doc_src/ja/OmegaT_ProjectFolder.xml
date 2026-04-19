@@ -298,7 +298,7 @@
 
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">用語集</title>
-    <para>このフォルダーは、最初は空の状態です。プロジェクトで利用する標準の追加書き込み可能な用語集と参照用語集を格納するために使用されます。</para>
+    <para>このフォルダーは、最初は空の状態です。It is used to store the default writable glossary and any other glossaries that you use in the project.</para>
 
 	<para>分節の用語の一部に一致する用語集の項目が、<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。詳細は、付録の <link linkend="app.glossaries" endterm="app.glossaries.title"/> をご覧ください。</para>
 

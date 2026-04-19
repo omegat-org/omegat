@@ -317,7 +317,7 @@
                   <row>
                     <entry>Komt niet overeen</entry>
                     <entry>
-                      <para>Combinaties die drie letter bevatten, beginnend met “c” en eindigend met “t”, maar over meer dan één regel zijn gesplitst.</para>
+                      <para>Combinaties die drie letters bevatten, beginnend met “c” en eindigend met “t”, maar over meer dan één regel zijn gesplitst.</para>
                       <para>Wat is de ontbrekende letter?</para>
                         <simplelist>
                           <member><literal>c</literal></member>

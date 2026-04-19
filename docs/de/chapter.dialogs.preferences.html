@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -530,6 +530,22 @@
                   </dt>
                   <dd>
                      <p>Wenn ein Glossareintrag mehrere Definitionen enthält, werden diese auf derselben Zeile angezeigt.</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.source.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.source.term.length.title">
+                        <code class="option">Display the longer (similar) terms first</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>Similar terms are displayed in descending order of length.</p>
+                  </dd>
+                  <dt id="dialogs.preferences.glossary.sort.by.target.term.length">
+                     <span class="term" id="dialogs.preference.glossary.sort.by.target.term.length.title">
+                        <code class="option">Display the longer definitions first</code>
+                     </span>
+                  </dt>
+                  <dd>
+                     <p>A glossary item with multiple definitions displays the definitions in descending order of length.</p>
                   </dd>
                </dl>
             </div>
@@ -1070,7 +1086,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>OmegaT fügt die Übersetzung mit dem höchsten Match-Prozentsatz ein, der größer gleich dem Wert ist, den Sie in diesem Dialogfenster festgelegt haben.</p>
+                     <p>OmegaT fügt die Übersetzung mit der höchsten Trefferquote größer gleich dem Wert, den Sie in diesem Dialogfenster festgelegt haben, ein.</p>
                      <p>Das Präfix kennzeichnet Übersetzungen, die als Fuzzy Matches eingefügt wurden. Sie können das Präfix auch in den Einstellungen unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
                            <code class="option">Geschützte Texte</code>
                         </a> hinzufügen, um es in den Prüfprozess für Tag-Probleme einzubeziehen und sicherzustellen, dass Sie es in Ihrer Übersetzung nicht vergessen.</p>
@@ -1280,7 +1296,7 @@
                            </dd>
                            <dt>
                               <span class="term">
-                                 <code class="option">&amp;Alle Variablen (z.B. %s, %-s)</code>
+                                 <code class="option">Alle Variablen (z.B. %s, %-s)</code>
                               </span>
                            </dt>
                            <dd>

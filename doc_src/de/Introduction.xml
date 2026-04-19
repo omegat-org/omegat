@@ -166,16 +166,20 @@
 
 	<para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.new" endterm="menus.project.new.title"/> und wählen Sie einen leeren Ordner aus oder erstellen Sie einen neuen Ordner mit dem Namen Ihres Projekts.</para>
 
+	<warning>
+	  <para>OmegaT benötigt Schreibrechte für den Projektordner. Wenn Sie Ihr Projekt auf einem freigegebenen Laufwerk installieren möchten, sollten Sie es nicht direkt im Stammverzeichnis installieren. Erstellen Sie stattdessen einen Ordner und verwenden Sie diesen für die Installation.</para>
+	</warning>
+
     <para>Ein OmegaT-Projekt ist lediglich eine Sammlung von Ordnern, die Ihre gesamten Standardressourcen enthalten.</para>
 
     <para>Nachdem Sie Ihr Projekt benannt haben, öffnet sich das Dialogfenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
 
 	<para>In diesem Dialogfenster können Sie die Sprache der Quelldateien und der übersetzten Dateien auswählen oder eintragen, verschiedene Einstellungen vornehmen und dann auf <guibutton>OK</guibutton> klicken, um fortzufahren.</para>
 
-	<para>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> sein müssen.</para>
+	<para>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können jeden beliebigen Code in das entsprechende Feld eintragen.</para>
 
 	<warning>
-	  <para>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Einzelheiten finden Sie im Abschnitt <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>.</para>
+	  <para>OmegaT prüft nicht, ob die von Ihnen eingetragenen Sprachcodes gültig sind. Stellen Sie sicher, dass die beiden Sprachcodes <emphasis>unterschiedlich</emphasis> sind und für Ihre Verwendung von OmegaT geeignet sind. Achten Sie außerdem darauf, dass die Codes an allen anderen Stellen, an denen ein Sprachcode erforderlich ist, mit den hier zugewiesenen übereinstimmen. Einzelheiten finden Sie im Abschnitt <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>.</para>
 	</warning>
 	
     <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, um zu diesem Dialogfenster zurückzukehren, nachdem Sie das Projekt erstellt haben.</para>

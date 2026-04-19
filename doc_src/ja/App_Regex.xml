@@ -89,7 +89,7 @@
   <section id="app.regex.four.rules">
     <title id="app.regex.four.rules.title">4つのルール</title>
 
-    <para>正規表現は、スペース、タブ、改行など、画面に表示されない文字や印刷されない文字を含む文字列を検索するために使用できます。指定された式は、単語、フレーズ、またはその他の文字列に<emphasis>一致する</emphasis>か、<emphasis>一致しない<emphasis role="bold"></emphasis></emphasis>かのいずれかです。</para>
+    <para>正規表現は、スペース、タブ、改行など、画面に表示されない文字や印刷されない文字を含む文字列を検索するために使用できます。指定された式は、単語、フレーズ、またはその他の文字列に<emphasis>一致する</emphasis>か、<emphasis>一致<emphasis role="bold">しない</emphasis></emphasis>かのいずれかです。</para>
     
     <para>式のすべての文字は、一致を判断するときに関連します。</para>
     <para>正規表現では、多数の文字または文字の組み合わせに特別な意味があります。</para>

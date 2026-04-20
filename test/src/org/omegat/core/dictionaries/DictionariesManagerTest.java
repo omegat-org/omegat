@@ -31,6 +31,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -94,10 +95,11 @@ public class DictionariesManagerTest {
         manager.setIndexLanguage(new Language(Locale.ENGLISH));
         manager.setTokenizer(new DefaultTokenizer());
 
-        PrintWriter fw = new PrintWriter(IGNORE_FILE, "UTF-8");
-        fw.println(IGNORE_WORD);
-        fw.close();
-        assertFalse(fw.checkError());
+        try (PrintWriter fw = new PrintWriter(IGNORE_FILE, StandardCharsets.UTF_8)) {
+            fw.println(IGNORE_WORD);
+            fw.close();
+            assertFalse(fw.checkError());
+        }
 
         manager.addDictionaryFactory(new IDictionaryFactory() {
             @Override
@@ -105,7 +107,7 @@ public class DictionariesManagerTest {
                 return true;
             }
             @Override
-            public IDictionary loadDict(final File file) throws Exception {
+            public IDictionary loadDict(final File file) {
                 return new DummyDictionaryDriver();
             }
         });

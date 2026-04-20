@@ -359,6 +359,7 @@ public final class TestTeamIntegration {
      * @throws Exception if there is an issue creating or deleting directories,
      *                   initializing repository configurations, or committing files
      */
+    @SuppressWarnings("PMD.CloseResource")
     static String prepareRepo(String repo, Path tempDir) throws Exception {
         Path origDir = tempDir.resolve("repo");
         if (!origDir.toFile().mkdir()) {

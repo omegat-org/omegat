@@ -83,11 +83,14 @@ dependencies {
     // Libs are provided in the "source" distribution only
     if (providedCoreLibsDir.directory) {
         api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
-            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
-                '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
-        runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
-            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar',
+                // exclude jars that are registered as api and runtimeOnly
+                excludes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar',
+                           '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
+                           '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+        runtimeOnly fileTree(dir: providedCoreLibsDir,
+                includes: ['**/slf4j-jdk14-*.jar', '**/language-detector-*.jar',
+                           '**/hunspell-*.jar', '**/groovy*.jar', '**/flatlaf-*', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -428,7 +431,6 @@ tasks.register('mac') {
     description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
-makeHunspellSignTask()
 makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 'mac')
 makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
 

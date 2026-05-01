@@ -158,14 +158,28 @@ boulet.offset({top: limite2});
 };
 })(jQuery);
 jQuery.extend({
-highlight: function (node, re, nodeName, className) {
+highlight: function (node, re, hwRE1, hwRE2, nodeName, className) {
 if (node.nodeType === 3) {
 var match = node.data.match(re);
 if (match) {
+var matchIndex = match.index;
+var matchLength = match[0].length;
+if (hwRE1 !== null) {
+var text = match.input;
+var matchHead = text.substring(0, matchIndex).match(hwRE1);
+if (matchHead !== null) {
+matchIndex -= matchHead[1].length;
+}
+var matchTail =
+text.substring(matchIndex + matchLength).match(hwRE2);
+if (matchTail !== null) {
+matchLength += matchTail[1].length;
+}
+}
 var highlight = document.createElement(nodeName || 'span');
 highlight.className = className || 'highlight';
-var wordNode = node.splitText(match.index);
-wordNode.splitText(match[0].length);
+var wordNode = node.splitText(matchIndex);
+wordNode.splitText(matchLength);
 var wordClone = wordNode.cloneNode(true);
 highlight.appendChild(wordClone);
 wordNode.parentNode.replaceChild(highlight, wordNode);
@@ -175,7 +189,7 @@ return 1;
 !/^(script|style|text|tspan|textpath)$|(^svg:)/i.test(node.tagName) && 
 !(node.tagName === nodeName.toUpperCase() && node.className === className)) { 
 for (var i = 0; i < node.childNodes.length; i++) {
-i += jQuery.highlight(node.childNodes[i], re, nodeName, className);
+i += jQuery.highlight(node.childNodes[i], re, hwRE1, hwRE2, nodeName, className);
 }
 }
 return 0;
@@ -191,7 +205,7 @@ parent.normalize();
 }).end();
 };
 jQuery.fn.highlight = function (words, options) {
-var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
+var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false, highlightWord: false };
 jQuery.extend(settings, options);
 if (words.constructor === String) {
 words = [words];
@@ -209,8 +223,16 @@ if (settings.wordsOnly) {
 pattern = "\\b" + pattern + "\\b";
 }
 var re = new RegExp(pattern, flag);
+var hwRE1 = null;
+var hwRE2 = null;
+if (settings.highlightWord) {
+try {
+hwRE1 = new RegExp("([\\p{L}\\p{N}_-]+)$", "u");
+hwRE2 = new RegExp("^([\\p{L}\\p{N}_-]+)", "u");
+} catch (ignored) {}
+}
 return this.each(function () {
-jQuery.highlight(this, re, settings.element, settings.className);
+jQuery.highlight(this, re, hwRE1, hwRE2, settings.element, settings.className);
 });
 };
 ;(function ($) {
@@ -277,13 +299,20 @@ return this;
 ;(function ($) {
 var methods = {
 init: function (options) { 
-var settings = $.extend({ selected: 0, onselect: null }, 
+var settings = $.extend({ selected: 0, onselect: null,
+position: "north" }, 
 options);
 var tabs = this.first();
 tabs.addClass("tabs-tabs");
+if (settings.position === "west") {
+tabs.addClass("tabs-west");
+}
 tabs.children("li").each(function (itemIndex) {
 $(this).addClass("tabs-tab");
 var links = $(this).children("a[href]");
+links.each(function (i) {
+$(this).attr("draggable", "false");
+});
 $(this).add(links).click(function (event) {
 event.preventDefault();
 event.stopImmediatePropagation();
@@ -595,8 +624,8 @@ var toc_entries = [
 ["\n                              更新\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["プロジェクトフォルダー","chapter.project.folder.html",[
-["デフォルトの構造","chapter.project.folder.html#d0e10356",null],
-["最小のコンテンツ","chapter.project.folder.html#d0e10432",null],
+["デフォルトの構造","chapter.project.folder.html#d5e6050",null],
+["最小のコンテンツ","chapter.project.folder.html#d5e6100",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +919,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-1ou7kfv8uux0q-1lnsz2avsx58z";
+var storageId = "-1ubbbe3d3m8x4-1ofvh4i6qywry";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }
@@ -1030,6 +1059,7 @@ list.append(item);
 if (href !== null) {
 var link = $("<a></a>");
 link.attr("href", href);
+link.attr("draggable", "false");
 link.html(text);
 item.append(link);
 } else {
@@ -1111,7 +1141,7 @@ clearSearchState();
 }
 function highlightSearchedWords(words) {
 $("#wh-content").highlight(words, 
-{ caseSensitive: false, 
+{ caseSensitive: false, highlightWord: true,
 className: "wh-highlighted" });
 }
 function unhighlightSearchedWords() {
@@ -1158,7 +1188,7 @@ var word = words[i];
 if (wh.search_stemmer !== null && 
 word.search(/^[-+]?\d/) < 0) { 
 var stem = wh.search_stemmer.stemWord(word);
-if (stem != word) {
+if (stem !== word) {
 indices = wh.search_wordMap[stem];
 if (indices !== undefined) {
 fallback = false;
@@ -1270,6 +1300,7 @@ item.addClass("wh-odd-item");
 list.append(item);
 var link = $("<a></a>");
 link.attr("href", wh.search_baseNameList[index]);
+link.attr("draggable", "false");
 link.html(wh.search_titleList[index]);
 item.append(link);
 }
@@ -1470,14 +1501,14 @@ var searchPane = $("#wh-search-pane");
 var cancelSearchButton = $("#wh-cancel-search");
 var searchForm = $("#wh-navigation-form");
 if (index === 0) {
-if (searchPane.is(":visible")) {
+if (searchPane.css("display") !== "none") {
 searchPane.hide();
 cancelSearchButton.css({ "visibility": "hidden", "opacity": "0" });
 tocPane.show(); 
 processPendingScroll(tocPane);
 }
 } else {
-if (tocPane.is(":visible")) {
+if (tocPane.css("display") !== "none") {
 tocPane.hide();
 cancelSearchButton.css({ "visibility": "visible", "opacity": "1" });
 $("#wh-search-field").focus();

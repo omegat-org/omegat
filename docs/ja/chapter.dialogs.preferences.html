@@ -3,7 +3,7 @@
    <head><meta charset="UTF-8" />
       <title>環境設定</title>
       <link href="OmegaT.css" rel="stylesheet" type="text/css" />
-      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <meta content="DocBook XSL Stylesheets V1.79.2" name="generator" />
       <link href="chapter.windows.and.dialogs.html" rel="prev" title="ウィンドウとダイアログ" />
       <link href="chapter.project.folder.html" rel="next" title="プロジェクトフォルダー" />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
@@ -15,7 +15,7 @@
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
       <div id="wh-navigation">
-        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search" role="button"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search" role="button"></span></span></div>
         <div id="wh-toc-pane">
         </div>
         <div id="wh-search-pane">
@@ -536,19 +536,23 @@
                   </dd>
                   <dt id="dialogs.preferences.glossary.sort.by.source.term.length">
                      <span class="term" id="dialogs.preference.glossary.sort.by.source.term.length.title">
-                        <code class="option">用語の原文の長さ順に並べ替える</code>
+                        <code class="option">用語が長い順に表示する</code>
                      </span>
                   </dt>
                   <dd>
-                     <p>一部の用語集項目がソース用語テキストで類似しており、そのうちの1つに別の用語テキストが含まれている場合は、ソーステキストの長さでソートします。</p>
+			  
+                     <p>同様の用語の表示順は、長い用語を先に表示します。</p>
+		  
                   </dd>
                   <dt id="dialogs.preferences.glossary.sort.by.target.term.length">
                      <span class="term" id="dialogs.preference.glossary.sort.by.target.term.length.title">
-                        <code class="option">用語の原文の長さ順に並べ替える</code>
+                        <code class="option">訳文が長い用語を先に表示する</code>
                      </span>
                   </dt>
                   <dd>
-                     <p>用語集の項目に複数の定義がある場合は、定義テキストの長さで並べ替えます。</p>
+				
+                     <p>複数の定義を持つ用語集の項目は、定義の長い順で表示します。</p>
+			
                   </dd>
                </dl>
             </div>
@@ -746,9 +750,13 @@
                <div class="example" id="dialogs.preferences.segmentation.setup.scope.example">
                   <div class="example-title">例20 日本語の規則</div>
                   <div class="example-contents">
-                     <p>日本語からの翻訳では、<code class="code">JA.*</code>パターンに関連付けられた規則集と<code class="code">.*</code>に関連付けられた汎用の規則<span class="emphasis">
-                           <em>のみ</em>
-                        </span>が考慮されます。</p>
+		
+		
+                     <p>日本語からの翻訳では、<span class="emphasis">
+                           <em></em>
+                        </span>
+                        <code class="code">JA.*</code>パターンに関連付けられた規則集と<code class="code">.*</code>に関連付けられた汎用の規則のみが考慮されます。</p>
+	  
                   </div>
                </div>
                <br class="example-break" />
@@ -1384,7 +1392,10 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<code class="literal">|</code>(正規表現&lt;の「OR」に相当)でグループを区切ります。</p>
+		  
+                     <p>正規表現&lt;を使用して、カスタムタグを定義します。一連のタグを定義するには、各タグを括弧で囲み、<code class="literal"></code>(正規表現&lt;の「OR」に相当)でグループを区切ります。</p>
+
+		  
                      <p>たとえば、<strong class="userinput">
                            <code>\d+</code>
                         </strong>を使用すると、すべての数値をタグとして扱うことができ、変換時に数値が誤って変更されていないことを確認できます。</p>

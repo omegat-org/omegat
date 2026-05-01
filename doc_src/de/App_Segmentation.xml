@@ -101,28 +101,28 @@
 		</thead>
 		<tbody>
 		  <row>
-			<entry>Ausnahmeregel, Häkchen nicht gesetzt, weiter oben in der Liste</entry>
+			<entry>Ausnahmeregel, <guilabel>Umbruchregel?</guilabel>-Häkchen nicht gesetzt, weiter oben in der Liste</entry>
 			<entry>Nicht segmentieren nach Ms.</entry>
 			<entry align="center">Ms\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Ms, gefolgt von einem Punkt, gefolgt von einem Leerraum.</entry>
 		  </row>
 		  <row>
-			<entry>Ausnahmeregel, Häkchen nicht gesetzt, weiter oben in der Liste</entry>
+			<entry>Ausnahmeregel, <guilabel>Umbruchregel?</guilabel>-Häkchen nicht gesetzt, weiter oben in der Liste</entry>
 			<entry>Excel-Zellen mit Zeilenumbrüchen, die keine Segmente repräsentieren</entry>
 			<entry align="center">\n</entry>
 			<entry align="center">.</entry>
 			<entry>Zeilenumbruch, gefolgt von irgendetwas.</entry>
 		  </row>
 		  <row>
-			<entry>Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</entry>
+			<entry>Umbruchregel, <guilabel>Umbruchregel?</guilabel>-Häkchen gesetzt, weiter unten in der Liste</entry>
 			<entry>Beginn eines neuen Segments nach einem Punkt, gefolgt von einem Leerraum wie z.B. Leer- oder Tabulatorzeichen.</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Ein Punkt, gefolgt von einem Leerraum</entry>
 		  </row>
 		  <row>
-			<entry>Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</entry>
+			<entry>Umbruchregel, <guilabel>Umbruchregel?</guilabel>-Häkchen gesetzt, weiter unten in der Liste</entry>
 			<entry>Beginn eines neuen Segments nach &quot;。&quot; (japanischer Punkt).</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>

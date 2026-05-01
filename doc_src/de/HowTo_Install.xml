@@ -27,7 +27,7 @@
   <para>Die Dateien können direkt von <ulink url="https://omegat.org/download">https://omegat.org</ulink> heruntergeladen werden.</para>
 
   <note>
-	<para>Für die Ausführung von OmegaT 6.0.0 ist eine Java 11 Runtime Environment (JRE) erforderlich.</para>
+	<para>Für die Ausführung von OmegaT 6.0.2 wird eine Java 11 Runtime Environment (JRE) benötigt.</para>
 
 	<para>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 11 Runtime Environment voraus.</para>
 
@@ -59,7 +59,7 @@
 
       <para>Um das Skript auszuführen, müssen Sie Ihr <filename>sudo</filename>-Passwort eingeben.</para>
 
-      <para>Das Skript sucht in <filename>/opt/omegat/</filename> nach einer vorhandenen Installation der gleichen OmegaT-Version. Wenn es keine gibt, wird das Programm in <filename>/opt/omegat/OmegaT_6.0.0</filename> installiert und als Standardversion (in <filename>/opt/omegat/OmegaT-default</filename>) festgelegt.</para>
+      <para>Das Skript sucht in <filename>/opt/omegat/</filename> nach einer vorhandenen Installation der gleichen OmegaT-Version. Falls keine vorhanden ist, wird das Programm nach <filename>/opt/omegat/OmegaT_6.0.2</filename> installiert und als Standardversion (in <filename>/opt/omegat/OmegaT-default</filename>) festgelegt.</para>
 	</note>
 
     <para>Nach dem Entpacken oder Installieren können Sie die heruntergeladene Datei löschen, da sie nicht mehr benötigt wird.</para>

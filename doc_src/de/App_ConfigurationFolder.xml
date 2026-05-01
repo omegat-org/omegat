@@ -143,9 +143,11 @@
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</term>
 	  <listitem>
-		<para>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> (Einstellungen).</para>
+		<para>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter im Format <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> (Einstellungen).<note><para>Wenn eine <filename>segmentation.conf</filename>-Datei aus früheren Versionen vorhanden ist, konvertiert OmegaT sie automatisch.</para>
+		  </note>
+		</para>
 	  </listitem>
 	</varlistentry>
 	

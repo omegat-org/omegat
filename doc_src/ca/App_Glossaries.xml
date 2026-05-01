@@ -6,6 +6,9 @@
   <para>Els glossaris són fitxers de terminologia emmagatzemats en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
   <para>Tots els termes d'un segment amb una coincidència en <emphasis>qualsevol</emphasis> dels glossaris es mostraran en la subfinestra <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  
+  <para>Podeu utilitzar les preferències del glossari per a ajustar com es mostren els glossaris. Consulteu les preferències de <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> per a conèixer més detalls.</para>
+
 
   <para>Els termes d'origen poden ser expressions de diverses paraules.</para>
 

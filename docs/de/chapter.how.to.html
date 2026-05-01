@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -157,6 +157,11 @@
                      <li>
                         <span class="section">
                            <a href="chapter.how.to.html#how.to.setup.team.project.prepare.the.repository">Vorbereitungen</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="chapter.how.to.html#how.to.manage.team.project">Ein Teamprojekt verwalten</a>
                         </span>
                      </li>
                      <li>
@@ -1072,16 +1077,16 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                </div>
             </div>
             <p>Die Verwaltung eines Teamprojekts erfordert einige Kenntnisse über das Versionskontrollsystem <span class="emphasis">
-                  <em>SVN</em>
-               </span> oder <span class="emphasis">
                   <em>Git</em>
+               </span> oder <span class="emphasis">
+                  <em>SVN</em>
                </span> (<span class="emphasis">
                   <em>VKS</em>
                </span> im weiteren Verlauf dieses Abschnitts).</p>
             <p>Da zu diesen Themen bereits ausreichend Informationen verfügbar sind, beschränkt sich diese Dokumentation auf die Verwendung innerhalb eines OmegaT-Team-Projekts.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Ein OmegaT-Teamprojekt synchronisiert den projektbezogenen Translation Memory <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> und das projektbezogene beschreibbare Glossar <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> zwischen dem Hosting-Server und allen beteiligten Teammitgliedern, und verwaltet alle möglichen Konflikte zwischen ihnen.</p>
+               <p>Ein OmegaT-Teamprojekt synchronisiert den projektbezogenen Translation Memory <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> und das projektbezogene beschreibbare Glossar <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a> zwischen dem VKS-Hosting-Server und allen beteiligten Teammitgliedern, und verwaltet alle möglichen Konflikte zwischen ihnen.</p>
             </div>
             <section class="section" id="how.to.setup.team.project.prepare.the.repository">
                <div class="titlepage">
@@ -1094,32 +1099,32 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                <p>Ein Teamprojekt kann wie folgt eingerichtet werden:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
-                     <li class="listitem" id="how.to.setup.team.project.create.empty.repository">
-                        <p id="how.to.setup.team.project.create.empty.repository.title">Ein leeres Repository auf Ihrem VKS-Hosting-Server erstellen</p>
+                     <li class="listitem">
+                        <p>Erstellen Sie ein leeres Repository auf Ihrem VKS-Hosting-Server.</p>
                         <p>Dies erfolgt in der Regel über ein Webinterface, eine GUI-Applikation oder die Befehlszeile. Weitere Informationen finden Sie in der Dokumentation zu Ihrem Server oder Hosting-Dienst.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.clone.locally">
-                        <p id="how.to.setup.team.project.clone.locally.title">Das lokale VKS verwenden, um eine lokale Kopie (Klon) zu erstellen</p>
+                     <li class="listitem">
+                        <p>Verwenden Sie das lokale VKS, um eine lokale Kopie (Klon) zu erstellen.</p>
                         <div class="note">
                            <h3 class="title">Anmerkung</h3>
                            <p>Diese lokale Version enthält Ihre <span class="emphasis">
                                  <em>Projektmanager</em>
-                              </span>-Kopie des OmegaT-Projekts. Verwenden Sie sie, um Änderungen vorzunehmen, die das gesamte Team betreffen.</p>
+                              </span>-Kopie des OmegaT-Projekts. Verwenden Sie diese Kopie, um Änderungen vorzunehmen, die das gesamte Team betreffen.</p>
                         </div>
-                        <p>Das lokale Repository wird verwendet, um das initiale Projekt zum Server hinzuzufügen. Es kann auch verwendet werden, um Wartungsarbeiten durchzuführen (z.B. Dateien löschen), die mit OmegaT selbst nicht möglich sind.</p>
+                        <p>Die lokale Version wird verwendet, um das initiale Projekt zum Server hinzuzufügen sowie Wartungsarbeiten durchzuführen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.how.to.html#how.to.manage.team.project" title="Ein Teamprojekt verwalten">Ein Teamprojekt verwalten</a>.</p>
                         <p>Wir empfehlen, diesen Ordner nicht für Übersetzungsarbeiten zu verwenden. Wenn Sie Übersetzungs- oder Korrekturarbeiten an diesem Projekt durchführen müssen, verwenden Sie OmegaT, um eine separate Kopie des Teamprojekts herunterzuladen und von dort aus zu arbeiten. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.use.team.project" title="Ein Teamprojekt verwenden">Ein Teamprojekt verwenden</a>.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.fill.local.clone">
-                        <p id="how.to.setup.team.project.fill.local.clone.title">Die leere lokale Kopie mit einem reellen OmegaT-Projekt füllen</p>
+                     <li class="listitem">
+                        <p>Füllen Sie die leere lokale Kopie mit einem reellen OmegaT-Projekt.</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>Projektstruktur erstellen</p>
-                                 <p>Wenn Sie ein neues, leeres Projekt erstellen, können Sie entweder der <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Ein neues Projekt erstellen">GUI-Prozedur</a> folgen oder das Projekt direkt über die Befehlszeile erstellen: <span class="command">
+                                 <p>Wenn Sie ein neues, leeres Projekt erstellen, können Sie entweder der <a class="link" href="chapter.instant.start.guide.html#introduction.create.and.open.new.project" title="Ein neues Projekt erstellen">GUI-Prozedur</a> folgen oder das Projekt direkt über die Befehlszeile erstellen:  <span class="command">
                                        <strong>java -jar OmegaT.jar team init &lt;Quellsprache&gt; &lt;Zielsprache&gt;</strong>
                                     </span>
                                  </p>
-                                 <p>Dieser Befehl bewirkt auch, dass das Projekt automatisch im Versionskontrollsystem registriert wird.</p>
+                                 <p>Dieser Befehl bewirkt auch, dass das Projekt automatisch im VKS registriert wird.</p>
                               </li>
                               <li class="listitem">
                                  <p>Einstellungen anpassen</p>
@@ -1131,14 +1136,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                                  <p>Erforderliche Dateien hinzufügen</p>
                                  <p>Fügen Sie auch alle relevanten Listen von Rechtschreibprüfungsdateien hinzu, die Sie allen Projektmitarbeitern zur Verfügung stellen möchten. Einzelheiten finden Sie unter <a class="link" href="chapter.project.folder.html#project.folder.omegat.spellcheck">Rechtschreibprüfungsdateien</a>.</p>
                                  <p>Wenn Sie ein bestehendes Projekt konvertieren, stellen Sie sicher, dass Sie alle Dateien, die Sie nicht benötigen oder die Sie nicht auf den Server hochladen möchten, aus dem Projekt löschen, bevor Sie mit dem nächsten Schritt fortfahren.</p>
-                                 <p>Kopieren Sie die zu übersetzenden Dateien in den Quellordner und verwenden Sie Ihren SVN- oder Git-Client oder die Befehlszeile, um sie zum Repository hinzuzufügen und zu veröffentlichen. Verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
+                                 <p>Kopieren Sie die zu übersetzenden Dateien in den Quellordner und verwenden Sie Ihren VKS-Client oder die Befehlszeile, um sie zum Repository hinzuzufügen und zu veröffentlichen. Verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                                        <span class="guimenu">Projekt</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
                                        <span class="guimenuitem">Quelldateien committen</span>
-                                    </a>, um Dateien über OmegaT hinzuzufügen.</p>
-                                 <p>Sie müssen Ihren SVN- oder Git-Client oder die Befehlszeile verwenden, um Wörterbücher, Glossare, Translation Memories oder andere Dateien, die in das Projekt aufgenommen werden sollen, hinzuzufügen und zu veröffentlichen.</p>
-                                 <p>Dieser Schritt kann durchgeführt werden, bevor das Projekt zum ersten Mal registriert und veröffentlicht wird. Dieser Schritt kann auch verwendet werden, um neue Dateien hinzuzufügen oder vorhandene Dateien zu aktualisieren, nachdem das Projekt erstellt wurde.</p>
+                                    </a>, um Quelldateien über OmegaT hinzuzufügen.</p>
+                                 <p>Sie müssen Ihren VKS-Client oder die Befehlszeile verwenden, um Wörterbücher, Glossare, Translation Memories oder andere Dateien, die in das Projekt aufgenommen werden sollen, hinzuzufügen und zu veröffentlichen.</p>
+                                 <p>Dieser Schritt kann sowohl vor als auch nach der Registrierung und Erstveröffentlichung des Projekts erfolgen.</p>
                               </li>
                            </ul>
                         </div>
@@ -1157,7 +1162,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                               </a> auf den Server hochgeladen werden, <span class="bold">
                                  <strong>was wohlgemerkt nur in solchen Projekten funktioniert</strong>
                               </span>.</p>
-                           <p>Der Administrator des Teamprojekts muss das lokale VKS verwenden, um diese Dateien <span class="bold">
+                           <p>Der Projektmanager muss das lokale VKS verwenden, um diese Dateien <span class="bold">
                                  <strong>zu ändern</strong>
                               </span> oder <span class="bold">
                                  <strong>zu löschen</strong>
@@ -1166,14 +1171,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                               </a> (Einstellungen).</p>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.register">
-                        <p id="how.to.setup.team.project.register.title">Die Projektdateien im lokalen VKS registrieren</p>
+                     <li class="listitem">
+                        <p>Registrieren Sie die Projektdateien im lokalen VKS.</p>
                         <p>Wenn Sie das Projekt über die GUI erstellt haben, müssen Sie es anschließend explizit zum Versionskontrollsystem hinzufügen (<span class="command">
                               <strong>add</strong>
                            </span> in SVN und Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.push">
-                        <p id="how.to.setup.team.project.push.title">Die registrierten Dateien auf den Hosting-Server hochladen</p>
+                     <li class="listitem">
+                        <p>Laden Sie die registrierten Dateien auf den Hosting-Server hoch.</p>
                         <p>Veröffentlichen Sie schließlich Ihr Projekt auf dem Remote-Server (<span class="command">
                               <strong>commit</strong>
                            </span> in SVN, <span class="command">
@@ -1182,31 +1187,31 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                               <strong>push</strong>
                            </span> in Git).</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.give.access.rights">
-                        <p id="how.to.setup.team.project.give.access.rights.title">Ihrem Team Zugriffsrechte erteilen</p>
+                     <li class="listitem">
+                        <p>Erteilen Sie Ihrem Team Zugriffsrechte.</p>
                         <div class="note">
                            <h3 class="title">Anmerkung</h3>
                            <p>Wenn Sie mehrere Projekte auf demselben Server verwenden, müssen Sie Ihre Zugangsdaten für diesen Server nur einmal eingeben.</p>
                         </div>
-                        <p>Nachdem das Projekt fertig eingerichtet und auf den Server hochgeladen wurde, muss der Administrator des Teamprojekts den Zugriff für die Übersetzer freigeben. Für den Zugriff auf ein Teamprojekt sind folgende Informationen erforderlich:</p>
+                        <p>Nachdem das Projekt fertig eingerichtet und auf den Server hochgeladen wurde, muss der Projektmanager den Zugriff für die Übersetzer freigeben. Für den Zugriff auf ein Teamprojekt sind folgende Informationen erforderlich:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
                                  <p>Projekte auf einem Hosting-Dienst</p>
-                                 <p>Die Übersetzer müssen ein Konto für den Dienst erstellen und ihren Benutzernamen an den Administrator des Teamprojekts senden.</p>
-                                 <p>Der Administrator gewährt diesen Konten dann Schreibzugriff auf das Repository.</p>
+                                 <p>Die Übersetzer müssen ein Konto für den Dienst erstellen und ihren Benutzernamen an den Projektmanager senden.</p>
+                                 <p>Der Projektmanager gewährt diesen Konten dann Schreibzugriff auf das Repository.</p>
                               </li>
                               <li class="listitem">
                                  <p>Projekte auf einem selbst gehosteten Server</p>
-                                 <p>Handelt es sich um einen selbst gehosteten Server, auf dem sich die Übersetzer nicht registrieren können, muss der Administrator des Teamprojekts für jeden Übersetzer ein Konto mit Schreibzugriff einrichten.</p>
-                                 <p>Nach der Einrichtung der Konten muss der Administrator den Übersetzern ihre individuellen Zugangsdaten mitteilen.</p>
+                                 <p>Handelt es sich um einen selbst gehosteten Server, auf dem sich die Übersetzer nicht registrieren können, muss der Projektmanager für jeden Übersetzer ein Konto mit Schreibzugriff einrichten.</p>
+                                 <p>Nach der Einrichtung der Konten muss der Projektmanager den Übersetzern ihre individuellen Zugangsdaten mitteilen.</p>
                               </li>
                            </ol>
                         </div>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.have.members.download">
-                        <p id="how.to.setup.team.project.have.members.download.title">Alle dazu bringen, das Projekt über OmegaT herunterzuladen</p>
-                        <p>Administratoren haben zwei Möglichkeiten, den Übersetzern den Standort des Projekts mitzuteilen:</p>
+                     <li class="listitem">
+                        <p>Bringen Sie alle dazu, das Projekt über OmegaT herunterzuladen.</p>
+                        <p>Der Projektmanager hat zwei Möglichkeiten, den Übersetzern den Standort des Projekts mitzuteilen:</p>
                         <div class="orderedlist">
                            <ol class="orderedlist" type="a">
                               <li class="listitem">
@@ -1222,16 +1227,51 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                               </li>
                            </ol>
                         </div>
-                        <p>Wenn ein Übersetzer das Teamprojekt öffnen konnte, sollten Sie prüfen, ob die <a class="link" href="chapter.menus.html#menus.tools.statistics">Projektstatistiken</a> für den Administrator (auf dem Server) und den Übersetzer (lokal) identisch sind.</p>
-                        <p>Wenn sie nicht identisch sind, stellen Sie sicher, dass die Dateien <code class="filename">filters.xml</code> und <code class="filename">segmentation.conf</code> korrekt freigegeben sind.</p>
+                        <p>Wenn ein Übersetzer das Teamprojekt öffnen konnte, sollten Sie prüfen, ob die <a class="link" href="chapter.menus.html#menus.tools.statistics">Projektstatistiken</a> für den Projektmanager (auf dem Server) und den Übersetzer (lokal) identisch sind.</p>
+                        <p>Wenn sie nicht identisch sind, stellen Sie sicher, dass die beiden Projekte dieselben Filter- und Segmentierungseinstellungen verwenden, indem Sie prüfen, ob die Dateien <code class="filename">filters.xml</code> und <code class="filename">segmentation.conf</code> ordnungsgemäß geteilt werden.</p>
                      </li>
-                     <li class="listitem" id="how.to.setup.team.project.download.if.needed">
-                        <p id="how.to.setup.team.project.download.if.needed.title">Wenn Sie ebenfalls an dem Projekt arbeiten müssen, laden Sie das Projekt herunter und speichern Sie es an einem anderen Ort als das lokale Teamprojekt</p>
-                     </li>
-                     <li class="listitem" id="how.to.setup.team.project.translate">
-                        <p id="how.to.setup.team.project.translate.title">Nun können Sie mit dem Team an dem Projekt arbeiten</p>
+                     <li class="listitem">
+                        <p>Wenn Sie ebenfalls an dem Projekt arbeiten müssen, laden Sie das Projekt herunter und speichern Sie es an einem anderen Ort als das originale Teamprojekt</p>
                      </li>
                   </ol>
+               </div>
+            </section>
+            <section class="section" id="how.to.manage.team.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title">Ein Teamprojekt verwalten</h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Teamprojekte erfordern eine Reihe von Verwaltungsaufgaben, die nicht direkt mit der Übersetzung zusammenhängen. Der Projektmanager kann es als vorteilhaft oder sogar notwendig erachten, solche Aufgaben direkt über das VKS-Repository abzuwickeln, insbesondere dann, wenn der Projektmanager nur als Koordinator fungiert und nicht in den eigentlichen Übersetzungsprozess eingebunden ist.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">Dateien hinzufügen</span>
+                     </dt>
+                     <dd>
+                        <p>Obwohl OmegaT einen Mechanismus bietet, übersetzungsrelevante Quell- und Zieldateien zum Repository hinzuzufügen, muss der Projektmanager alle anderen Dateien, wie z. B. Wörterbücher, Glossare oder Referenz-TMs, über das VKS-Repository hinzufügen.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Dateien löschen</span>
+                     </dt>
+                     <dd>
+                        <p>OmegaT bietet keinen Mechanismus, Dateien aus einem Teamprojekt zu löschen. Wenn geteilte Teamprojektdateien nicht mehr benötigt werden, <span class="emphasis">
+                              <em>muss</em>
+                           </span> der Projektmanager sie aus dem VKS-Repository entfernen.</p>
+                     </dd>
+                     <dt>
+                        <span class="term">Projektstatistiken konsultieren</span>
+                     </dt>
+                     <dd>
+                        <div class="note">
+                           <h3 class="title">Anmerkung</h3>
+                           <p>Dies gilt nur für Arbeitsabläufe, bei denen Übersetzer dazu aufgefordert werden, ihre übersetzten Dateien in das Repository zu committen.</p>
+                        </div>
+                        <p>Beim Committen der Zieldateien committet OmegaT auch die Projektstatistiken im <code class="filename">.txt</code>- und <code class="filename">.json</code>-Format. So kann der Projektmanager die Statistiken einsehen und ggf. deren Auswertung automatisieren, ohne dass er OmegaT öffnen muss.</p>
+                     </dd>
+                  </dl>
                </div>
             </section>
             <section class="section" id="how.to.setup.team.project.mapping.parameters">
@@ -1360,9 +1400,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                      </div>
                   </div>
                </div>
-               <p>Die obige Vorgehensweise beschreibt das häufigste Szenario, bei dem der Administrator des Teamprojekts die volle Kontrolle über das Projekt hat und bei dem alle Dateien (und Statistiken) in allen Projektinstanzen sowohl auf dem Server als auch auf den lokalen Systemen der Übersetzer identisch sind.</p>
+               <p>Die obige Vorgehensweise beschreibt das häufigste Szenario, bei dem der Projektmanager die volle Kontrolle über das Projekt hat und bei dem alle Dateien (und Statistiken) in allen Projektinstanzen sowohl auf dem Server als auch auf den lokalen Systemen der Übersetzer identisch sind.</p>
                <p>Es ist auch möglich, ein Teamprojekt einzurichten, bei dem mehrere Übersetzer die Datei <code class="filename">project_save.tmx</code> und nur einen Teil der anderen Dateien gemeinsam nutzen.</p>
-               <p>Die Prozedur ist grundsätzlich dieselbe, außer dass der Administrator des Teamprojekts nicht alle Dateien zum versionierten Projekt auf dem Server hinzufügt. Die restlichen Dateien werden entweder von den Übersetzern selbst kopiert oder es werden Zuordnungen definiert, um Dateien von anderen Orten zu synchronisieren.</p>
+               <p>Die Prozedur ist grundsätzlich dieselbe, außer dass der Projektmanager nicht alle Dateien zum versionierten Projekt auf dem Server hinzufügt. Die restlichen Dateien werden entweder von den Übersetzern selbst kopiert oder es werden Zuordnungen definiert, um Dateien von anderen Orten zu synchronisieren.</p>
             </section>
          </section>
          <section class="section" id="how.to.use.team.project">
@@ -1374,12 +1414,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                </div>
             </div>
             <p>Teamprojekte nutzen Mechanismen zur Synchronisation zwischen den Projektmitgliedern.</p>
-            <p>Sobald ein OmegaT-Teamprojekt auf einem Server installiert ist, sendet der Administrator den Mitgliedern die Informationen, die sie für den Zugriff benötigen: eine URL, die den Ort des Projekts angibt, oder eine <code class="filename">omegat.project</code>-Datei.</p>
+            <p>Sobald ein OmegaT-Teamprojekt auf einem Server installiert ist, sendet der Projektmanager den Mitgliedern die Informationen, die sie für den Zugriff benötigen: eine URL, die den Ort des Projekts angibt, oder eine <code class="filename">omegat.project</code>-Datei.</p>
             <p>Nach dem Herunterladen wird das Projekt lokal installiert. Es muss nur noch lokal geöffnet werden, um es mit dem Server zu synchronisieren.</p>
             <p>Repository-Zugangsdaten werden in die Datei <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.repositories">repositories.properties</a> gespeichert und können in den Einstellungen unter <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                   <code class="option">Repository-Zugangsdaten</code>
                </a> gelöscht werden.</p>
-            <p>Da die Synchronisierung standardmäßig alle drei Minuten erfolgt, kann es vorkommen, dass Projektmitglieder ein Segment übersetzen oder ändern, das bereits von einem anderen Mitglied übersetzt, aber noch nicht synchronisiert wurde. In diesem Fall müssen die Mitglieder die beste Übersetzung auswählen.</p>
             <p>Die Mitglieder können sich beim Übersetzen und Überprüfen der Dateien abwechseln. Sie können die Suchfunktion verwenden, um z.B. den Editorbereich nach Inhalten zu filtern, die von einer bestimmten Person übersetzt wurden, oder nach Inhalten, die nach oder vor einem bestimmten Datum übersetzt wurden.</p>
             <div class="variablelist">
                <dl class="variablelist">
@@ -1397,11 +1436,11 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                                  <a class="link" href="chapter.menus.html#menus.project.download.team.project">
                                     <span class="guimenuitem">Teamprojekt herunterladen...</span>
                                  </a>, um das Dialogfenster &quot;<span class="guilabel">Teamprojekt herunterladen</span>&quot; zu öffnen.</p>
-                              <p>Fügen Sie die URL, die vom Administrator des Teamprojekts bereitgestellt wird, in das Feld &quot;<span class="guilabel">Repository-URL:</span>&quot; am Anfang des Dialogfensters ein und geben Sie einen Ordner für das Projekt im Feld &quot;<span class="guilabel">Neuer lokaler Projektordner:</span>&quot; an. Lassen Sie die Option <span class="guilabel">Standard-Branch</span> aktiviert, es sei denn, der Projektadministrator hat Sie angewiesen, einen anderen Branch zu verwenden.</p>
+                              <p>Fügen Sie die vom Projektmanager bereitgestellte URL in das Feld <span class="guilabel">Repository-URL:</span> am Anfang des Dialogfensters ein, und geben Sie einen Ordner für das Projekt im Feld <span class="guilabel">Neuer lokaler Projektordner:</span> an. Lassen Sie die Option <span class="guilabel">Standard-Branch</span> aktiviert, es sei denn, der Projektmanager hat Sie angewiesen, einen anderen Branch zu verwenden.</p>
                            </li>
                            <li class="listitem">
                               <p>Über eine <code class="filename">omegat.project</code>-Datei</p>
-                              <p>Verschieben oder kopieren Sie die <code class="filename">omegat.project</code>-Datei in einen leeren Ordner und öffnen Sie sie mit OmegaT. Das Projekt wird automatisch heruntergeladen und in den Ordner gespeichert, der diese Datei enthält.</p>
+                              <p>Platzieren Sie die <code class="filename">omegat.project</code>-Datei in einen leeren Ordner und öffnen Sie sie mit OmegaT. Das Projekt wird automatisch heruntergeladen und in den Ordner gespeichert, der diese Datei enthält.</p>
                            </li>
                         </ol>
                      </div>
@@ -1415,6 +1454,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                         <p>Wenn die Authentifizierung über Benutzername und Passwort erfolgt, zeigt OmegaT Ihnen ein <span class="guilabel"></span>Dialogfenster zur Eingabe Ihres Benutzernamens und Passworts an, entweder nachdem Sie das Projekt zum ersten Mal heruntergeladen haben oder zu einem späteren Zeitpunkt. OmegaT merkt sich Ihre Zugangsdaten für dieses bestimmte Projekt, es sei denn, Sie löschen explizit die Daten. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.team.title.repository.credentials">
                               <code class="option">Repository-Zugangsdaten</code>
                            </a> (Einstellungen).</p>
+                        <p>Aus Sicherheitsgründen verlangen einige Server, dass externe Prozesse sich mit einem separaten Zugriffstoken statt mit einem Passwort verbinden. Prüfen Sie die Serverdokumentation, wenn Ihr Passwort nicht funktioniert.</p>
                         <p>Wenn der Server SSH-Authentifizierung verwendet, stellen Sie sicher, dass Ihre SSH-Konfiguration diesen Server berücksichtigt, bevor Sie versuchen, das Projekt herunterzuladen. Andernfalls erhalten Sie einen Authentifizierungsfehler und das Projekt kann nicht geladen werden.</p>
                         <p>Wenn Sie mehrere Projekte auf demselben Server verwenden, müssen Sie Ihre Zugangsdaten für diesen Server nur einmal eingeben.</p>
                      </div>
@@ -1442,6 +1482,56 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                      <p>OmegaT synchronisiert ein Teamprojekt, wenn es geöffnet, neu geladen, geschlossen oder gespeichert wird. Das bedeutet, dass auch die automatische Speicherfunktion die lokalen Versionen regelmäßig mit der Version auf dem Server synchronisiert, in einem Intervall, das in der Einstellung <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
                            <code class="option">Projektdaten-Speicherintervall</code>
                         </a> angegeben ist.</p>
+                     <div class="warning">
+                        <h3 class="title">Warnung</h3>
+                        <p>Da Mitglieder ihre Projekte nicht unbedingt zur gleichen Zeit synchronisieren, kann es vorkommen, dass für ein Segment mit lokaler Übersetzung noch eine weitere Übersetzung auf dem Server verfügbar ist, die von einem anderen Mitglied stammt. Wenn Sie das Projekt synchronisieren, wird OmegaT die lokale und die modifizierte Version miteinander abgleichen und Sie fragen, welche Version der Übersetzung Sie behalten möchten.</p>
+                     </div>
+                  </dd>
+                  <dt>
+                     <span class="term">Übersetzungskonflikte lösen</span>
+                  </dt>
+                  <dd>
+                     <p>Wenn OmegaT eine Differenz zwischen einer lokalen Übersetzung und dem Remote-TM nicht automatisch auflösen kann, wird ein <span class="guilabel">Zusammenführen</span>-Dialogfenster angezeigt.</p>
+                     <p>Im Dialogfenster können Sie eine von drei Versionen des übersetzten Segments auswählen:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Meins</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dies ist Ihre lokale Version, die noch nicht für andere Mitglieder auf den Server übertragen wurde.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (original)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dies ist die &quot;Basisversion&quot;, woraus verschiedene Versionen entstanden sind.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">
+                                 <span class="guilabel">Server (aktualisiert)</span>
+                              </span>
+                           </dt>
+                           <dd>
+                              <p>Dies ist die Version, die seit Ihrer letzten Arbeit an dem Projekt mit anderen Mitgliedern geteilt wurde.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                     <p>
+        
+                     </p>
+                     <p>Die entsprechenden Übersetzungen können einzeln ausgewählt werden, indem man sie nacheinander für jedes angezeigte Segment anklickt. Es ist auch möglich, &quot;alle&quot; Übersetzungen einer bestimmten Version auszuwählen.</p>
+                     <p>
+                        <span class="guibutton">Listenansicht</span> und <span class="guibutton">Detailansicht</span> bieten alternative Anzeigemöglichkeiten eines Segments, wobei verschiedene Eigenschaften entweder ausgeblendet oder angezeigt werden.</p>
+                     <p>Sobald Sie die Übersetzungen ausgewählt haben, klicken Sie auf <span class="guibutton">Fertig</span>, um sie auf dem Server zu speichern und mit anderen Teammitgliedern zu teilen.</p>
+                     <div class="note">
+                        <h3 class="title">Anmerkung</h3>
+                        <p>Wenn Teammitglieder an verschiedenen Teilen einer Übersetzung arbeiten, verringert sich die Chance, dass es zu Übersetzungskonflikten kommt.</p>
+                     </div>
                   </dd>
                   <dt>
                      <span class="term">Teamprojekt-Konfiguration</span>
@@ -1456,7 +1546,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                                  <span class="emphasis">
                                     <em>Grundlegende Projektkonfiguration:</em>
                                  </span> Quelle und Sprachen, Tokenizer und die Projektordnerhierarchie.</p>
-                              <p>In einem Teamprojekt werden die grundlegenden Konfigurationsparameter des lokalen Projekts immer von der Konfiguration auf dem Server überschrieben, die ursprünglich vom Projektadministrator festgelegt wurde.</p>
+                              <p>In einem Teamprojekt werden die grundlegenden Konfigurationsparameter des lokalen Projekts immer von der Konfiguration auf dem Server überschrieben, die ursprünglich vom Projektmanager festgelegt wurde.</p>
                            </li>
                            <li class="listitem">
                               <p>
@@ -1478,7 +1568,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                                        <p>Zum Beispiel unterstützen viele Hosting-Dienste den Zugriff auf dasselbe Repository via SSH +Git- oder https-Protokoll. OmegaT respektiert die lokale Protokollauswahl.</p>
                                     </li>
                                     <li class="listitem">
-                                       <p>Wenn Sie das Remote-Projekt zunächst mit einer vom Projektadministrator bereitgestellten <code class="filename">omegat.project</code>-Datei herunterladen, wird OmegaT die Zuordnungen in dieser Datei verwenden, sofern vorhanden.</p>
+                                       <p>Wenn Sie das Remote-Projekt zunächst mit einer vom Projektmanager bereitgestellten <code class="filename">omegat.project</code>-Datei herunterladen, wird OmegaT die Zuordnungen in dieser Datei verwenden, sofern vorhanden.</p>
                                     </li>
                                     <li class="listitem">
                                        <p>Wenn es einen Konflikt zwischen der lokalen und der Remote-Version der <code class="filename">omegat.project</code>-Datei gibt und die lokale Version überschrieben wird, erstellt OmegaT eine Sicherungskopie namens <code class="filename">omegat.project.YYYYMMDDhhmm.bak</code>. OmegaT erstellt bis zu zehn Sicherungskopien. Ältere Sicherungskopien werden automatisch gelöscht.</p>
@@ -1499,7 +1589,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                   <dd>
                      <div class="warning">
                         <h3 class="title">Warnung</h3>
-                        <p>Nur der Projektadministrator sollte <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
+                        <p>Nur der Projektmanager sollte <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                               <span class="guimenu">Projekt</span>
                            </a>
                            <a class="link" href="chapter.menus.html#menus.project.commit.source.files">
@@ -1511,18 +1601,18 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                      <span class="term">Zieldateien</span>
                   </dt>
                   <dd>
-                     <p>Nachdem Sie die Zieldateien erstellt haben, können Sie sie mit <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
+                     <p>Nachdem Sie die Zieldateien erstellt haben, verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                            <span class="guimenu">Projekt</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.project.commit.target.files">
                            <span class="guimenuitem">Zieldateien committen</span>
-                        </a> auf den Server hochladen, sofern der Projektadministrator Sie darum gebeten hat.</p>
+                        </a>, um sie auf den Server hochzuladen, sofern der Projektmanager Sie darum gebeten hat. Beim Committen der Zieldateien werden auch die Statistikdateien auf den Server hochgeladen.</p>
                   </dd>
                   <dt>
                      <span class="term">Dateien löschen</span>
                   </dt>
                   <dd>
-                     <p>Dateien in einem Teamprojekt können weder über OmegaT noch über das lokale Dateisystem gelöscht werden. Sie werden bei der nächsten Synchronisation des Projekts wiederhergestellt. Diese Aufgabe ist normalerweise dem Projektadministrator vorbehalten.</p>
+                     <p>Dateien in einem Teamprojekt können weder über OmegaT noch über das lokale Dateisystem gelöscht werden. Sie werden bei der nächsten Synchronisation des Projekts wiederhergestellt. Diese Aufgabe ist normalerweise dem Projektmanager vorbehalten.</p>
                   </dd>
                   <dt>
                      <span class="term">Offline arbeiten</span>
@@ -1558,7 +1648,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Standard: OmegaT 6.0.1</span>
+                     <span class="term">Standard: OmegaT 6.0.2</span>
                   </dt>
                   <dd>
                      <p>Diese Edition ist für den täglichen Gebrauch empfohlen.</p>
@@ -1574,7 +1664,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
             <p>Die Dateien können direkt von <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a> heruntergeladen werden.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Für die Ausführung von OmegaT 6.0.0 ist eine Java 11 Runtime Environment (JRE) erforderlich.</p>
+               <p>Für die Ausführung von OmegaT 6.0.2 wird eine Java 11 Runtime Environment (JRE) benötigt.</p>
                <p>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 11 Runtime Environment voraus.</p>
                <p>OmegaT 5.8.0 und höher können auch mit Java 11 Runtime Environment auf beliebigen Plattformen ausgeführt werden.</p>
                <p>Aus lizenzrechtlichen Gründen empfiehlt das OmegaT-Team die Java-Laufzeitumgebung Eclipse Temurin, die vom Adoptium-Projekt der Eclipse Foundation bereitgestellt wird, allerdings sollten auch andere Laufzeitumgebungen funktionieren, die mit Java 8 kompatibel sind. Siehe <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Eclipse Temurin™</a>.</p>
@@ -1605,7 +1695,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;Segment 30
                   <h3 class="title">Anmerkung</h3>
                   <p>Obwohl Sie OmegaT direkt mit den vorhandenen Dateien starten können, haben Sie auch die Möglichkeit, das beigefügte Skript <code class="filename">linux-install.sh</code> auszuführen, um einen geeigneteren Installationsort für OmegaT zu bestimmen.</p>
                   <p>Um das Skript auszuführen, müssen Sie Ihr <code class="filename">sudo</code>-Passwort eingeben.</p>
-                  <p>Das Skript sucht in <code class="filename">/opt/omegat/</code> nach einer vorhandenen Installation der gleichen OmegaT-Version. Wenn es keine gibt, wird das Programm in <code class="filename">/opt/omegat/OmegaT_6.0.0</code> installiert und als Standardversion (in <code class="filename">/opt/omegat/OmegaT-default</code>) festgelegt.</p>
+                  <p>Das Skript sucht in <code class="filename">/opt/omegat/</code> nach einer vorhandenen Installation der gleichen OmegaT-Version. Falls keine vorhanden ist, wird das Programm nach <code class="filename">/opt/omegat/OmegaT_6.0.2</code> installiert und als Standardversion (in <code class="filename">/opt/omegat/OmegaT-default</code>) festgelegt.</p>
                </div>
                <p>Nach dem Entpacken oder Installieren können Sie die heruntergeladene Datei löschen, da sie nicht mehr benötigt wird.</p>
             </section>

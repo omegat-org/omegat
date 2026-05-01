@@ -277,7 +277,7 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.insert.unicode.control.character">
-      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Unicode besturingsteken invoegen</guisubmenu></term>
+      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Bi-directioneel beheersteken invoegen</guisubmenu></term>
 	  <listitem>
 		<para>Voegt het geselecteerde Unicode directionele opmaakteken in. Bekijk <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode Bidirectional Algorithm</ulink> voor details.</para>
 

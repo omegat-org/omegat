@@ -6,6 +6,9 @@
   <para>Glossare sind Terminologiedateien, die im <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>-Ordner aufbewahrt werden.</para>
 
   <para>Alle Begriffe in einem Segment, die in <emphasis>irgendeinem</emphasis> der Glossare übereinstimmen, werden im <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich angezeigt.</para>
+  
+  <para>Sie können die Glossar-Einstellungen verwenden, um die Darstellung der Glossare zu optimieren. Einzelheiten finden Sie unter <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> (Einstellungen).</para>
+
 
   <para>Quellbegriffe können aus mehreren Wörtern bestehen.</para>
 

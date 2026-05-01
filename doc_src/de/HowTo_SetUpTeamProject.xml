@@ -3,12 +3,12 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Ein Teamprojekt einrichten</title>
 
-  <para>Die Verwaltung eines Teamprojekts erfordert einige Kenntnisse über das Versionskontrollsystem <emphasis>SVN</emphasis> oder <emphasis>Git</emphasis> (<emphasis>VKS</emphasis> im weiteren Verlauf dieses Abschnitts).</para>
+  <para>Die Verwaltung eines Teamprojekts erfordert einige Kenntnisse über das Versionskontrollsystem <emphasis>Git</emphasis> oder <emphasis>SVN</emphasis> (<emphasis>VKS</emphasis> im weiteren Verlauf dieses Abschnitts).</para>
 
   <para>Da zu diesen Themen bereits ausreichend Informationen verfügbar sind, beschränkt sich diese Dokumentation auf die Verwendung innerhalb eines OmegaT-Team-Projekts.</para>
 
   <note>
-	<para>Ein OmegaT-Teamprojekt synchronisiert den projektbezogenen Translation Memory <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> und das projektbezogene beschreibbare Glossar <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> zwischen dem Hosting-Server und allen beteiligten Teammitgliedern, und verwaltet alle möglichen Konflikte zwischen ihnen.</para>
+	<para>Ein OmegaT-Teamprojekt synchronisiert den projektbezogenen Translation Memory <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> und das projektbezogene beschreibbare Glossar <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> zwischen dem VKS-Hosting-Server und allen beteiligten Teammitgliedern, und verwaltet alle möglichen Konflikte zwischen ihnen.</para>
   </note>
 
   <section id="how.to.setup.team.project.prepare.the.repository">
@@ -17,32 +17,34 @@
 	<para>Ein Teamprojekt kann wie folgt eingerichtet werden:</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">Ein leeres Repository auf Ihrem VKS-Hosting-Server erstellen</para>
+      <listitem>
+		<para>Erstellen Sie ein leeres Repository auf Ihrem VKS-Hosting-Server.</para>
 
 		<para>Dies erfolgt in der Regel über ein Webinterface, eine GUI-Applikation oder die Befehlszeile. Weitere Informationen finden Sie in der Dokumentation zu Ihrem Server oder Hosting-Dienst.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">Das lokale VKS verwenden, um eine lokale Kopie (Klon) zu erstellen</para>
+	  <listitem>
+		<para>Verwenden Sie das lokale VKS, um eine lokale Kopie (Klon) zu erstellen.</para>
 
 		<note>
-		  <para>Diese lokale Version enthält Ihre <emphasis>Projektmanager</emphasis>-Kopie des OmegaT-Projekts. Verwenden Sie sie, um Änderungen vorzunehmen, die das gesamte Team betreffen.</para>
+		  <para>Diese lokale Version enthält Ihre <emphasis>Projektmanager</emphasis>-Kopie des OmegaT-Projekts. Verwenden Sie diese Kopie, um Änderungen vorzunehmen, die das gesamte Team betreffen.</para>
 		</note>
 
-		<para>Das lokale Repository wird verwendet, um das initiale Projekt zum Server hinzuzufügen. Es kann auch verwendet werden, um Wartungsarbeiten durchzuführen (z.B. Dateien löschen), die mit OmegaT selbst nicht möglich sind.</para>
+		<para>Die lokale Version wird verwendet, um das initiale Projekt zum Server hinzuzufügen sowie Wartungsarbeiten durchzuführen. Einzelheiten finden Sie im Abschnitt <link linkend="how.to.manage.team.project" endterm="how.to.manage.team.project.title"/>.</para>
+
 		<para>Wir empfehlen, diesen Ordner nicht für Übersetzungsarbeiten zu verwenden. Wenn Sie Übersetzungs- oder Korrekturarbeiten an diesem Projekt durchführen müssen, verwenden Sie OmegaT, um eine separate Kopie des Teamprojekts herunterzuladen und von dort aus zu arbeiten. Einzelheiten finden Sie unter <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/>.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">Die leere lokale Kopie mit einem reellen OmegaT-Projekt füllen</para>
+	  <listitem>
+		<para>Füllen Sie die leere lokale Kopie mit einem reellen OmegaT-Projekt.</para>
 		<itemizedlist>
 		  <listitem>
 			<para>Projektstruktur erstellen</para>
 
-			<para>Wenn Sie ein neues, leeres Projekt erstellen, können Sie entweder der <link linkend="introduction.create.and.open.new.project">GUI-Prozedur</link> folgen oder das Projekt direkt über die Befehlszeile erstellen: <command>java -jar OmegaT.jar team init &lt;Quellsprache&gt; &lt;Zielsprache&gt;</command></para>
+			<para>Wenn Sie ein neues, leeres Projekt erstellen, können Sie entweder der <link linkend="introduction.create.and.open.new.project">GUI-Prozedur</link> folgen oder das Projekt direkt über die Befehlszeile erstellen: <!-- TODO we’ll need to update the CL when we have integrated the
+				 new CL framework --> <command>java -jar OmegaT.jar team init &lt;Quellsprache&gt; &lt;Zielsprache&gt;</command></para>
 
-			<para>Dieser Befehl bewirkt auch, dass das Projekt automatisch im Versionskontrollsystem registriert wird.</para>
+			<para>Dieser Befehl bewirkt auch, dass das Projekt automatisch im VKS registriert wird.</para>
 		  </listitem>
 		  <listitem>
 			<para>Einstellungen anpassen</para>
@@ -57,65 +59,65 @@
 
 			<para>Wenn Sie ein bestehendes Projekt konvertieren, stellen Sie sicher, dass Sie alle Dateien, die Sie nicht benötigen oder die Sie nicht auf den Server hochladen möchten, aus dem Projekt löschen, bevor Sie mit dem nächsten Schritt fortfahren.</para>
 
-			<para>Kopieren Sie die zu übersetzenden Dateien in den Quellordner und verwenden Sie Ihren SVN- oder Git-Client oder die Befehlszeile, um sie zum Repository hinzuzufügen und zu veröffentlichen. Verwenden Sie <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/>, um Dateien über OmegaT hinzuzufügen.</para>
+			<para>Kopieren Sie die zu übersetzenden Dateien in den Quellordner und verwenden Sie Ihren VKS-Client oder die Befehlszeile, um sie zum Repository hinzuzufügen und zu veröffentlichen. Verwenden Sie <link endterm="menus.project.title" linkend="menus.project"/><link linkend="menus.project.commit.source.files" endterm="menus.project.commit.source.files.title"/>, um Quelldateien über OmegaT hinzuzufügen.</para>
 
-			<para>Sie müssen Ihren SVN- oder Git-Client oder die Befehlszeile verwenden, um Wörterbücher, Glossare, Translation Memories oder andere Dateien, die in das Projekt aufgenommen werden sollen, hinzuzufügen und zu veröffentlichen.</para>
+			<para>Sie müssen Ihren VKS-Client oder die Befehlszeile verwenden, um Wörterbücher, Glossare, Translation Memories oder andere Dateien, die in das Projekt aufgenommen werden sollen, hinzuzufügen und zu veröffentlichen.</para>
 
-			<para>Dieser Schritt kann durchgeführt werden, bevor das Projekt zum ersten Mal registriert und veröffentlicht wird. Dieser Schritt kann auch verwendet werden, um neue Dateien hinzuzufügen oder vorhandene Dateien zu aktualisieren, nachdem das Projekt erstellt wurde.</para>
+			<para>Dieser Schritt kann sowohl vor als auch nach der Registrierung und Erstveröffentlichung des Projekts erfolgen.</para>
 		  </listitem>
 		</itemizedlist>
 
 		<note>
           <para>In Teamprojekten, die eine einfache Zuordnung zwischen dem lokalen Repository und dem Remote-Repository verwenden (die Standardeinstellung), können die Quell- und Zieldateien lokal geändert und mit <link linkend="menus.project" endterm="menus.project.title"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> und <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.commit.target.files" endterm="menus.project.commit.target.files.title"/> auf den Server hochgeladen werden, <emphasis role="bold">was wohlgemerkt nur in solchen Projekten funktioniert</emphasis>.</para>
 
-          <para>Der Administrator des Teamprojekts muss das lokale VKS verwenden, um diese Dateien <emphasis role="bold">zu ändern</emphasis> oder <emphasis role="bold">zu löschen</emphasis>. Einige Plugins können diese Arbeit erleichtern. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> (Einstellungen).</para>
+          <para>Der Projektmanager muss das lokale VKS verwenden, um diese Dateien <emphasis role="bold">zu ändern</emphasis> oder <emphasis role="bold">zu löschen</emphasis>. Einige Plugins können diese Arbeit erleichtern. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> (Einstellungen).</para>
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">Die Projektdateien im lokalen VKS registrieren</para>
+	  <listitem>
+		<para>Registrieren Sie die Projektdateien im lokalen VKS.</para>
 
 		<para>Wenn Sie das Projekt über die GUI erstellt haben, müssen Sie es anschließend explizit zum Versionskontrollsystem hinzufügen (<command>add</command> in SVN und Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">Die registrierten Dateien auf den Hosting-Server hochladen</para>
+	  <listitem>
+		<para>Laden Sie die registrierten Dateien auf den Hosting-Server hoch.</para>
 
 		<para>Veröffentlichen Sie schließlich Ihr Projekt auf dem Remote-Server (<command>commit</command> in SVN, <command>commit</command> und <command>push</command> in Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">Ihrem Team Zugriffsrechte erteilen</para>
+	  <listitem>
+		<para>Erteilen Sie Ihrem Team Zugriffsrechte.</para>
 
 		<note>
 		  <para>Wenn Sie mehrere Projekte auf demselben Server verwenden, müssen Sie Ihre Zugangsdaten für diesen Server nur einmal eingeben.</para>
 		</note>
 
-		<para>Nachdem das Projekt fertig eingerichtet und auf den Server hochgeladen wurde, muss der Administrator des Teamprojekts den Zugriff für die Übersetzer freigeben. Für den Zugriff auf ein Teamprojekt sind folgende Informationen erforderlich:</para>
+		<para>Nachdem das Projekt fertig eingerichtet und auf den Server hochgeladen wurde, muss der Projektmanager den Zugriff für die Übersetzer freigeben. Für den Zugriff auf ein Teamprojekt sind folgende Informationen erforderlich:</para>
 
 		<orderedlist>
           <listitem>
 			<para>Projekte auf einem Hosting-Dienst</para>
 
-			<para>Die Übersetzer müssen ein Konto für den Dienst erstellen und ihren Benutzernamen an den Administrator des Teamprojekts senden.</para>
+			<para>Die Übersetzer müssen ein Konto für den Dienst erstellen und ihren Benutzernamen an den Projektmanager senden.</para>
 
-			<para>Der Administrator gewährt diesen Konten dann Schreibzugriff auf das Repository.</para>
+			<para>Der Projektmanager gewährt diesen Konten dann Schreibzugriff auf das Repository.</para>
           </listitem>
 
           <listitem>
 			<para>Projekte auf einem selbst gehosteten Server</para>
 
-			<para>Handelt es sich um einen selbst gehosteten Server, auf dem sich die Übersetzer nicht registrieren können, muss der Administrator des Teamprojekts für jeden Übersetzer ein Konto mit Schreibzugriff einrichten.</para>
+			<para>Handelt es sich um einen selbst gehosteten Server, auf dem sich die Übersetzer nicht registrieren können, muss der Projektmanager für jeden Übersetzer ein Konto mit Schreibzugriff einrichten.</para>
 
-			<para>Nach der Einrichtung der Konten muss der Administrator den Übersetzern ihre individuellen Zugangsdaten mitteilen.</para>
+			<para>Nach der Einrichtung der Konten muss der Projektmanager den Übersetzern ihre individuellen Zugangsdaten mitteilen.</para>
           </listitem>
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">Alle dazu bringen, das Projekt über OmegaT herunterzuladen</para>
+	  <listitem>
+		<para>Bringen Sie alle dazu, das Projekt über OmegaT herunterzuladen.</para>
 
-		<para>Administratoren haben zwei Möglichkeiten, den Übersetzern den Standort des Projekts mitzuteilen:</para>
+		<para>Der Projektmanager hat zwei Möglichkeiten, den Übersetzern den Standort des Projekts mitzuteilen:</para>
 
 		<orderedlist>
           <listitem>
@@ -127,19 +129,44 @@
           </listitem>
 		</orderedlist>
 
-		<para>Wenn ein Übersetzer das Teamprojekt öffnen konnte, sollten Sie prüfen, ob die <link linkend="menus.tools.statistics">Projektstatistiken</link> für den Administrator (auf dem Server) und den Übersetzer (lokal) identisch sind.</para>
+		<para>Wenn ein Übersetzer das Teamprojekt öffnen konnte, sollten Sie prüfen, ob die <link linkend="menus.tools.statistics">Projektstatistiken</link> für den Projektmanager (auf dem Server) und den Übersetzer (lokal) identisch sind.</para>
 
-		<para>Wenn sie nicht identisch sind, stellen Sie sicher, dass die Dateien <filename>filters.xml</filename> und <filename>segmentation.conf</filename> korrekt freigegeben sind.</para>
+		<para>Wenn sie nicht identisch sind, stellen Sie sicher, dass die beiden Projekte dieselben Filter- und Segmentierungseinstellungen verwenden, indem Sie prüfen, ob die Dateien <filename>filters.xml</filename> und <filename>segmentation.conf</filename> ordnungsgemäß geteilt werden.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Wenn Sie ebenfalls an dem Projekt arbeiten müssen, laden Sie das Projekt herunter und speichern Sie es an einem anderen Ort als das lokale Teamprojekt</para>
-	  </listitem>
-
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">Nun können Sie mit dem Team an dem Projekt arbeiten</para>
+	  <listitem>
+		<para>Wenn Sie ebenfalls an dem Projekt arbeiten müssen, laden Sie das Projekt herunter und speichern Sie es an einem anderen Ort als das originale Teamprojekt</para>
 	  </listitem>
 	</orderedlist>
+  </section>
+
+  <section id="how.to.manage.team.project">
+  <title id="how.to.manage.team.project.title">Ein Teamprojekt verwalten</title>
+
+  <para>Teamprojekte erfordern eine Reihe von Verwaltungsaufgaben, die nicht direkt mit der Übersetzung zusammenhängen. Der Projektmanager kann es als vorteilhaft oder sogar notwendig erachten, solche Aufgaben direkt über das VKS-Repository abzuwickeln, insbesondere dann, wenn der Projektmanager nur als Koordinator fungiert und nicht in den eigentlichen Übersetzungsprozess eingebunden ist.</para>
+    <variablelist>
+	  <varlistentry>
+		<term>Dateien hinzufügen</term>
+		<listitem>
+		  <para>Obwohl OmegaT einen Mechanismus bietet, übersetzungsrelevante Quell- und Zieldateien zum Repository hinzuzufügen, muss der Projektmanager alle anderen Dateien, wie z. B. Wörterbücher, Glossare oder Referenz-TMs, über das VKS-Repository hinzufügen.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>Dateien löschen</term>
+	    <listitem>
+		  <para>OmegaT bietet keinen Mechanismus, Dateien aus einem Teamprojekt zu löschen. Wenn geteilte Teamprojektdateien nicht mehr benötigt werden, <emphasis>muss</emphasis> der Projektmanager sie aus dem VKS-Repository entfernen.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Projektstatistiken konsultieren</term>
+		<listitem>
+		  <note>
+			<para>Dies gilt nur für Arbeitsabläufe, bei denen Übersetzer dazu aufgefordert werden, ihre übersetzten Dateien in das Repository zu committen.</para>
+		  </note>
+		  <para>Beim Committen der Zieldateien committet OmegaT auch die Projektstatistiken im <filename>.txt</filename>- und <filename>.json</filename>-Format. So kann der Projektmanager die Statistiken einsehen und ggf. deren Auswertung automatisieren, ohne dass er OmegaT öffnen muss.</para>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
@@ -251,10 +278,10 @@
   <section id="how.to.setup.team.project.selective.sharing">
 	<title id="how.to.setup.team.project.selective.sharing.title">Selektive Freigabe</title>
 
-	<para>Die obige Vorgehensweise beschreibt das häufigste Szenario, bei dem der Administrator des Teamprojekts die volle Kontrolle über das Projekt hat und bei dem alle Dateien (und Statistiken) in allen Projektinstanzen sowohl auf dem Server als auch auf den lokalen Systemen der Übersetzer identisch sind.</para>
+	<para>Die obige Vorgehensweise beschreibt das häufigste Szenario, bei dem der Projektmanager die volle Kontrolle über das Projekt hat und bei dem alle Dateien (und Statistiken) in allen Projektinstanzen sowohl auf dem Server als auch auf den lokalen Systemen der Übersetzer identisch sind.</para>
 
 	<para>Es ist auch möglich, ein Teamprojekt einzurichten, bei dem mehrere Übersetzer die Datei <filename>project_save.tmx</filename> und nur einen Teil der anderen Dateien gemeinsam nutzen.</para>
 
-	<para>Die Prozedur ist grundsätzlich dieselbe, außer dass der Administrator des Teamprojekts nicht alle Dateien zum versionierten Projekt auf dem Server hinzufügt. Die restlichen Dateien werden entweder von den Übersetzern selbst kopiert oder es werden Zuordnungen definiert, um Dateien von anderen Orten zu synchronisieren.</para>
+	<para>Die Prozedur ist grundsätzlich dieselbe, außer dass der Projektmanager nicht alle Dateien zum versionierten Projekt auf dem Server hinzufügt. Die restlichen Dateien werden entweder von den Übersetzern selbst kopiert oder es werden Zuordnungen definiert, um Dateien von anderen Orten zu synchronisieren.</para>
   </section>
 </section>

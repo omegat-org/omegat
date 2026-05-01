@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -55,12 +55,12 @@
             <ul class="toc">
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10450">Standardstruktur</a>
+                     <a href="chapter.project.folder.html#d0e10567">Standardstruktur</a>
                   </span>
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.project.folder.html#d0e10528">Mindestinhalt</a>
+                     <a href="chapter.project.folder.html#d0e10645">Mindestinhalt</a>
                   </span>
                </li>
                <li>
@@ -105,7 +105,7 @@
                </li>
             </ul>
          </div>
-         <section class="section" id="d0e10450">
+         <section class="section" id="d0e10567">
             <div class="titlepage">
                <div>
                   <div>
@@ -123,7 +123,7 @@
                   </li>
                   <li class="listitem">
                      <p>
-                        <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> ist der Speicherort für die Zieldaten</p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> ist der Speicherort für die Zieldateien</p>
                   </li>
                   <li class="listitem">
                      <p>
@@ -200,7 +200,7 @@
                </div>
             </div>
          </section>
-         <section class="section" id="d0e10528">
+         <section class="section" id="d0e10645">
             <div class="titlepage">
                <div>
                   <div>
@@ -322,7 +322,7 @@
                   </dt>
                   <dd>
                      <p>Dieser Ordner ist für zuverlässige Referenzdateien gedacht, die automatisch passende und unübersetzte Segmente füllen können.</p>
-                     <p>In diesem Ordner abgelegte TMX-Dateien bewirken, dass die Übersetzungen automatisch in passende Segmente ohne das automatische Präfix eingefügt werden, d.h. diese Segmente müssen nicht bestätigt werden.</p>
+                     <p>TMX-Dateien, die dort abgelegt werden, bewirken, dass die Übersetzungen automatisch in passende Segmente ohne das automatische Präfix eingefügt werden, d.h. diese Segmente müssen nicht bestätigt werden.</p>
                      <p>Übersetzungen aus diesem Ordner werden als <span class="emphasis">
                            <em>genauso zuverlässig</em>
                         </span> angesehen wie die Übersetzungen aus dem Translation Memory des Projekts.</p>
@@ -335,7 +335,7 @@
                      <div class="orderedlist">
                         <ol class="orderedlist" type="1">
                            <li class="listitem">
-                              <p>Kopieren oder verschieben Sie die entsprechenden TM-Dateien in den <code class="filename">tm/auto</code>-Ordner.</p>
+                              <p>Platzieren Sie die entsprechenden TM-Dateien in den <code class="filename">tm/auto</code>-Ordner.</p>
                            </li>
                            <li class="listitem">
                               <p>Öffnen Sie das Projekt. Sie werden sehen, dass Segmente, die mit den Quelltexten in diesen Translation Memories identisch sind, bereits gefüllt sind. Verwenden Sie <a class="link" href="chapter.menus.html#menus.view" title="Ansicht">
@@ -380,7 +380,7 @@
                      <div class="orderedlist">
                         <ol class="orderedlist" type="1">
                            <li class="listitem">
-                              <p>Kopieren oder verschieben Sie die entsprechenden TM-Dateien in den <code class="filename">tm/enforce</code>-Ordner.</p>
+                              <p>Platzieren Sie die entsprechenden TM-Dateien in den <code class="filename">tm/enforce</code>-Ordner.</p>
                            </li>
                            <li class="listitem">
                               <p>Öffnen Sie das Projekt. Sie werden sehen, dass Segmente, die mit den Quelltexten in diesen Translation Memories identisch sind, bereits gefüllt sind.</p>
@@ -432,8 +432,8 @@
                   </dt>
                   <dd>
                      <p>
-                        <code class="literal">xxx</code> ist eine Zahl zwischen 0 und 100, die als Sanktion behandelt wird; diese Zahl wird automatisch von den Match-Prozentsätzen der Segmente aus diesem Ordner abgezogen.</p>
-                     <p>Zum Beispiel wird ein 100%iger Match aus einer TMX-Datei, die in einem Ordner namens <code class="filename">penalty-30</code> enthalten ist, zu einem 70%igen Match. Die Sanktion wird auf alle drei Match-Prozentsätze angewendet. Match-Prozentsätze von 75, 80 und 90 werden auf 45, 50 und 60 herabgestuft.</p>
+                        <code class="literal">xxx</code> ist eine Zahl zwischen 0 und 100, die als Sanktion behandelt wird; diese Zahl wird automatisch von den Trefferquoten der Segmente aus diesem Ordner abgezogen.</p>
+                     <p>Zum Beispiel wird ein 100%iger Match aus einer TMX-Datei, die in einem Ordner namens <code class="filename">penalty-30</code> enthalten ist, zu einem 70%igen Match. Die Sanktion wird auf alle drei Trefferquoten angewendet. Trefferquoten von 75, 80 und 90 werden auf 45, 50 und 60 herabgestuft.</p>
                   </dd>
                   <dt id="project.folder.tm.tmx2source">
                      <span class="term" id="project.folder.tm.tmx2source.title">tm/tmx2source</span>
@@ -496,7 +496,7 @@
                   </div>
                </div>
             </div>
-            <p>Dieser Ordner ist anfangs leer. Er wird verwendet, um das beschreibbare Standardglossar und alle anderen Glossare, die Sie im Projekt verwenden, aufzubewahren.</p>
+            <p>Dieser Ordner ist anfangs leer. It is used to store the default writable glossary and any other glossaries that you use in the project.</p>
             <p>Glossarbegriffe, die mit Teilen des Segments übereinstimmen, werden im Fensterbereich <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
                   <span class="guilabel">Glossare</span>
                </a> angezeigt. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.glossaries" title="Glossare">Glossare</a>.</p>
@@ -614,10 +614,17 @@
                      <p>Wenn Sie bereits eine Sammlung von Wörtern haben, die von der Rechtschreibprüfung ignoriert oder akzeptiert werden sollen, speichern Sie diese einfach in Textdateien mit den entsprechenden Namen und kopieren Sie die Dateien in den Ordner <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> Ihres aktuellen Projekts.</p>
                   </dd>
                   <dt id="project.folder.omegat.segmentation">
-                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.srx</span>
                   </dt>
                   <dd>
-                     <p>Diese Datei enthält die projektspezifischen Segmentierungsregeln.</p>
+                     <p>Diese Datei enthält die projektspezifischen Segmentierungsregeln im Format <a class="ulink" href="https://www.gala-global.org/srx-20-april-7-2008" target="_top">SRX 2.0</a>.</p>
+                     <div class="note">
+                        <h3 class="title">Anmerkung</h3>
+                        <p>Wenn eine <code class="filename">segmentation.conf</code>-Datei aus früheren Versionen vorhanden ist, konvertiert OmegaT sie automatisch.</p>
+                     </div>
+                     <p>
+		  
+                     </p>
                   </dd>
                   <dt id="project.folder.omegat.filters">
                      <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>

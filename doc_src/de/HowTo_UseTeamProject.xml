@@ -5,13 +5,11 @@
 
   <para>Teamprojekte nutzen Mechanismen zur Synchronisation zwischen den Projektmitgliedern.</para>
 
-  <para>Sobald ein OmegaT-Teamprojekt auf einem Server installiert ist, sendet der Administrator den Mitgliedern die Informationen, die sie für den Zugriff benötigen: eine URL, die den Ort des Projekts angibt, oder eine <filename>omegat.project</filename>-Datei.</para>
+  <para>Sobald ein OmegaT-Teamprojekt auf einem Server installiert ist, sendet der Projektmanager den Mitgliedern die Informationen, die sie für den Zugriff benötigen: eine URL, die den Ort des Projekts angibt, oder eine <filename>omegat.project</filename>-Datei.</para>
 
   <para>Nach dem Herunterladen wird das Projekt lokal installiert. Es muss nur noch lokal geöffnet werden, um es mit dem Server zu synchronisieren.</para>
 
   <para>Repository-Zugangsdaten werden in die Datei <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> gespeichert und können in den Einstellungen unter <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> gelöscht werden.</para>
-
-  <para>Da die Synchronisierung standardmäßig alle drei Minuten erfolgt, kann es vorkommen, dass Projektmitglieder ein Segment übersetzen oder ändern, das bereits von einem anderen Mitglied übersetzt, aber noch nicht synchronisiert wurde. In diesem Fall müssen die Mitglieder die beste Übersetzung auswählen.</para>
 
   <para>Die Mitglieder können sich beim Übersetzen und Überprüfen der Dateien abwechseln. Sie können die Suchfunktion verwenden, um z.B. den Editorbereich nach Inhalten zu filtern, die von einer bestimmten Person übersetzt wurden, oder nach Inhalten, die nach oder vor einem bestimmten Datum übersetzt wurden.</para>
   
@@ -25,13 +23,13 @@
 
 			<para>Verwenden Sie <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/>, um das Dialogfenster &quot;<guilabel>Teamprojekt herunterladen</guilabel>&quot; zu öffnen.</para>
 
-			<para>Fügen Sie die URL, die vom Administrator des Teamprojekts bereitgestellt wird, in das Feld &quot;<guilabel>Repository-URL:</guilabel>&quot; am Anfang des Dialogfensters ein und geben Sie einen Ordner für das Projekt im Feld &quot;<guilabel>Neuer lokaler Projektordner:</guilabel>&quot; an. Lassen Sie die Option <guilabel>Standard-Branch</guilabel> aktiviert, es sei denn, der Projektadministrator hat Sie angewiesen, einen anderen Branch zu verwenden.</para>
+			<para>Fügen Sie die vom Projektmanager bereitgestellte URL in das Feld <guilabel>Repository-URL:</guilabel> am Anfang des Dialogfensters ein, und geben Sie einen Ordner für das Projekt im Feld <guilabel>Neuer lokaler Projektordner:</guilabel> an. Lassen Sie die Option <guilabel>Standard-Branch</guilabel> aktiviert, es sei denn, der Projektmanager hat Sie angewiesen, einen anderen Branch zu verwenden.</para>
 		  </listitem>
 
 		  <listitem>
 			<para>Über eine <filename>omegat.project</filename>-Datei</para>
 
-			<para>Verschieben oder kopieren Sie die <filename>omegat.project</filename>-Datei in einen leeren Ordner und öffnen Sie sie mit OmegaT. Das Projekt wird automatisch heruntergeladen und in den Ordner gespeichert, der diese Datei enthält.</para>
+			<para>Platzieren Sie die <filename>omegat.project</filename>-Datei in einen leeren Ordner und öffnen Sie sie mit OmegaT. Das Projekt wird automatisch heruntergeladen und in den Ordner gespeichert, der diese Datei enthält.</para>
 		  </listitem>
 		</orderedlist>
 
@@ -40,6 +38,7 @@
 
 		  <para>Wenn die Authentifizierung über Benutzername und Passwort erfolgt, zeigt OmegaT Ihnen ein <guilabel></guilabel>Dialogfenster zur Eingabe Ihres Benutzernamens und Passworts an, entweder nachdem Sie das Projekt zum ersten Mal heruntergeladen haben oder zu einem späteren Zeitpunkt. OmegaT merkt sich Ihre Zugangsdaten für dieses bestimmte Projekt, es sei denn, Sie löschen explizit die Daten. Einzelheiten finden Sie unter <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> (Einstellungen).</para>
 
+		  <para>Aus Sicherheitsgründen verlangen einige Server, dass externe Prozesse sich mit einem separaten Zugriffstoken statt mit einem Passwort verbinden. Prüfen Sie die Serverdokumentation, wenn Ihr Passwort nicht funktioniert.</para>
 		  <para>Wenn der Server SSH-Authentifizierung verwendet, stellen Sie sicher, dass Ihre SSH-Konfiguration diesen Server berücksichtigt, bevor Sie versuchen, das Projekt herunterzuladen. Andernfalls erhalten Sie einen Authentifizierungsfehler und das Projekt kann nicht geladen werden.</para>
 
 		  <para>Wenn Sie mehrere Projekte auf demselben Server verwenden, müssen Sie Ihre Zugangsdaten für diesen Server nur einmal eingeben.</para>
@@ -66,9 +65,47 @@
         <para>Während der Synchronisation werden alle anderen lokalen Dateien mit den Versionen auf dem Remote-Server überschrieben, mit Ausnahme von <filename>omegat.project</filename> (siehe unten).</para>
 
         <para>OmegaT synchronisiert ein Teamprojekt, wenn es geöffnet, neu geladen, geschlossen oder gespeichert wird. Das bedeutet, dass auch die automatische Speicherfunktion die lokalen Versionen regelmäßig mit der Version auf dem Server synchronisiert, in einem Intervall, das in der Einstellung <link endterm="dialog.preferences.saving.and.output.interval.title" linkend="dialog.preferences.saving.and.output.interval"/> angegeben ist.</para>
+
+        <warning>
+          <para>Da Mitglieder ihre Projekte nicht unbedingt zur gleichen Zeit synchronisieren, kann es vorkommen, dass für ein Segment mit lokaler Übersetzung noch eine weitere Übersetzung auf dem Server verfügbar ist, die von einem anderen Mitglied stammt. Wenn Sie das Projekt synchronisieren, wird OmegaT die lokale und die modifizierte Version miteinander abgleichen und Sie fragen, welche Version der Übersetzung Sie behalten möchten.</para>
+        </warning>
       </listitem>
     </varlistentry>
 
+    <varlistentry>
+      <term>Übersetzungskonflikte lösen</term>
+
+      <listitem>
+        <para>Wenn OmegaT eine Differenz zwischen einer lokalen Übersetzung und dem Remote-TM nicht automatisch auflösen kann, wird ein <guilabel>Zusammenführen</guilabel>-Dialogfenster angezeigt.</para>
+
+        <para>Im Dialogfenster können Sie eine von drei Versionen des übersetzten Segments auswählen:<variablelist>
+          <varlistentry>
+            <term><guilabel>Meins</guilabel></term>
+            <listitem><para>Dies ist Ihre lokale Version, die noch nicht für andere Mitglieder auf den Server übertragen wurde.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Server (original)</guilabel></term>
+            <listitem><para>Dies ist die &quot;Basisversion&quot;, woraus verschiedene Versionen entstanden sind.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Server (aktualisiert)</guilabel></term>
+            <listitem><para>Dies ist die Version, die seit Ihrer letzten Arbeit an dem Projekt mit anderen Mitgliedern geteilt wurde.</para></listitem>
+          </varlistentry>
+        </variablelist>
+        </para>
+
+        <para>Die entsprechenden Übersetzungen können einzeln ausgewählt werden, indem man sie nacheinander für jedes angezeigte Segment anklickt. Es ist auch möglich, &quot;alle&quot; Übersetzungen einer bestimmten Version auszuwählen.</para>
+
+        <para><guibutton>Listenansicht</guibutton> und <guibutton>Detailansicht</guibutton> bieten alternative Anzeigemöglichkeiten eines Segments, wobei verschiedene Eigenschaften entweder ausgeblendet oder angezeigt werden.</para>
+
+        <para>Sobald Sie die Übersetzungen ausgewählt haben, klicken Sie auf <guibutton>Fertig</guibutton>, um sie auf dem Server zu speichern und mit anderen Teammitgliedern zu teilen.</para>
+
+        <note>
+          <para>Wenn Teammitglieder an verschiedenen Teilen einer Übersetzung arbeiten, verringert sich die Chance, dass es zu Übersetzungskonflikten kommt.</para>
+        </note>
+      </listitem>
+    </varlistentry>
+    
     <varlistentry>
       <term>Teamprojekt-Konfiguration</term>
 
@@ -81,7 +118,7 @@
           <listitem>
             <para><emphasis>Grundlegende Projektkonfiguration:</emphasis> Quelle und Sprachen, Tokenizer und die Projektordnerhierarchie.</para>
 
-			<para>In einem Teamprojekt werden die grundlegenden Konfigurationsparameter des lokalen Projekts immer von der Konfiguration auf dem Server überschrieben, die ursprünglich vom Projektadministrator festgelegt wurde.</para>
+			<para>In einem Teamprojekt werden die grundlegenden Konfigurationsparameter des lokalen Projekts immer von der Konfiguration auf dem Server überschrieben, die ursprünglich vom Projektmanager festgelegt wurde.</para>
           </listitem>
 
           <listitem>
@@ -105,7 +142,7 @@
               </listitem>
 
               <listitem>
-                <para>Wenn Sie das Remote-Projekt zunächst mit einer vom Projektadministrator bereitgestellten <filename>omegat.project</filename>-Datei herunterladen, wird OmegaT die Zuordnungen in dieser Datei verwenden, sofern vorhanden.</para>
+                <para>Wenn Sie das Remote-Projekt zunächst mit einer vom Projektmanager bereitgestellten <filename>omegat.project</filename>-Datei herunterladen, wird OmegaT die Zuordnungen in dieser Datei verwenden, sofern vorhanden.</para>
               </listitem>
 
               <listitem>
@@ -126,7 +163,7 @@
 
       <listitem>
         <warning>
-		  <para>Nur der Projektadministrator sollte <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> verwenden.</para>
+		  <para>Nur der Projektmanager sollte <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> verwenden.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -135,7 +172,7 @@
       <term>Zieldateien</term>
 
       <listitem>
-        <para>Nachdem Sie die Zieldateien erstellt haben, können Sie sie mit <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> auf den Server hochladen, sofern der Projektadministrator Sie darum gebeten hat.</para>
+        <para>Nachdem Sie die Zieldateien erstellt haben, verwenden Sie <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/>, um sie auf den Server hochzuladen, sofern der Projektmanager Sie darum gebeten hat. Beim Committen der Zieldateien werden auch die Statistikdateien auf den Server hochgeladen.</para>
       </listitem>
     </varlistentry>
 
@@ -143,7 +180,7 @@
       <term>Dateien löschen</term>
 
       <listitem>
-        <para>Dateien in einem Teamprojekt können weder über OmegaT noch über das lokale Dateisystem gelöscht werden. Sie werden bei der nächsten Synchronisation des Projekts wiederhergestellt. Diese Aufgabe ist normalerweise dem Projektadministrator vorbehalten.</para>
+        <para>Dateien in einem Teamprojekt können weder über OmegaT noch über das lokale Dateisystem gelöscht werden. Sie werden bei der nächsten Synchronisation des Projekts wiederhergestellt. Diese Aufgabe ist normalerweise dem Projektmanager vorbehalten.</para>
       </listitem>
     </varlistentry>
 

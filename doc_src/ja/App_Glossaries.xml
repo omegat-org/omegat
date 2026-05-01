@@ -6,6 +6,9 @@
   <para>用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーに保存されている用語を集めたファイルです。</para>
 
   <para><emphasis>どれか</emphasis>の用語集で一致する、セグメント内のすべての用語が<link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウに表示されます。</para>
+  
+  <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>環境設定を参照してください。</para>
+
 
   <para>用語集の原文は、複数単語からなる用語であっても大丈夫です。</para>
 

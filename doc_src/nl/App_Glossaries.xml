@@ -6,6 +6,9 @@
   <para>Woordenlijsten zijn bestanden voor terminologie, opgeslagen in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
   <para>Elke term in een segment die een overeenkomst heeft in <emphasis>enige</emphasis> woordenlijst, wordt weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  
+  <para>U kunt de voorkeuren voor de woordenlijsten gebruiken om fijn af te stemmen hoe de woordenlijsten worden weergegeven. Bekijk de voorkeuren <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> voor details.</para>
+
 
   <para>Brontermen mogen uitdrukkingen met meerdere woorden zijn.</para>
 

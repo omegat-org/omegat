@@ -309,7 +309,7 @@
 				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=&lt;nom de la classe&gt;</option></term>
 				<term><option>--ITokenizerTarget=&lt;nom de la classe&gt;</option></term>
 				<listitem>
-				  <para>Especifica un lematitzador en la llengua d'origen o de destinació (l'ús d0aquesta opció substitueix els paràmetres del projecte). Consulteu OmegaT.jar/META-INF/MANIFEST.MF per a conèixer els valors vàlids.</para>
+				  <para>Especifica un lematitzador en la llengua d'origen o de destinació (l'ús d'aquesta opció substitueix els paràmetres del projecte). Consulteu OmegaT.jar/META-INF/MANIFEST.MF per a conèixer els valors vàlids.</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.dir.">

@@ -4,13 +4,13 @@
       <title>Einführung in OmegaT</title>
       <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
-      <link href="index_.html" rel="prev" title="OmegaT 6.0.0 - Bedienungsanleitung" />
+      <link href="index_.html" rel="prev" title="OmegaT 6.0.2 - Bedienungsanleitung" />
       <link href="chapter.how.to.html" rel="next" title="Anleitungen" />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -372,15 +372,21 @@
                   </span>
 	  
                </a> und wählen Sie einen leeren Ordner aus oder erstellen Sie einen neuen Ordner mit dem Namen Ihres Projekts.</p>
+            <div class="warning">
+               <h3 class="title">Warnung</h3>
+               <p>OmegaT benötigt Schreibrechte für den Projektordner. Wenn Sie Ihr Projekt auf einem freigegebenen Laufwerk installieren möchten, sollten Sie es nicht direkt im Stammverzeichnis installieren. Erstellen Sie stattdessen einen Ordner und verwenden Sie diesen für die Installation.</p>
+            </div>
             <p>Ein OmegaT-Projekt ist lediglich eine Sammlung von Ordnern, die Ihre gesamten Standardressourcen enthalten.</p>
             <p>Nachdem Sie Ihr Projekt benannt haben, öffnet sich das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projekteigenschaften">
                   <span class="guilabel">Projekteigenschaften</span>
                </a>.</p>
             <p>In diesem Dialogfenster können Sie die Sprache der Quelldateien und der übersetzten Dateien auswählen oder eintragen, verschiedene Einstellungen vornehmen und dann auf <span class="guibutton">OK</span> klicken, um fortzufahren.</p>
-            <p>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> sein müssen.</p>
+            <p>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können jeden beliebigen Code in das entsprechende Feld eintragen.</p>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Sprachen">
+               <p>OmegaT prüft nicht, ob die von Ihnen eingetragenen Sprachcodes gültig sind. Stellen Sie sicher, dass die beiden Sprachcodes <span class="emphasis">
+                     <em>unterschiedlich</em>
+                  </span> sind und für Ihre Verwendung von OmegaT geeignet sind. Achten Sie außerdem darauf, dass die Codes an allen anderen Stellen, an denen ein Sprachcode erforderlich ist, mit den hier zugewiesenen übereinstimmen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Sprachen">
                      <span class="guilabel">Sprachen</span>
                   </a>.</p>
             </div>
@@ -454,7 +460,7 @@
             <div class="warning">
                <h3 class="title">Warnung</h3>
                <p>OmegaT erkennt Sprachen nicht automatisch und verwendet ein Wörterbuch nur dann, wenn dessen Name mit dem Zielsprachcode übereinstimmt.</p>
-               <div class="example" id="d0e349">
+               <div class="example" id="d0e352">
                   <div class="example-title">Beispiel 2. Zielsprachcode des Projekts und Name des Rechtschreibwörterbuchs</div>
                   <div class="example-contents">
                      <p>Wenn die Sprache des Projekts <span class="bold">
@@ -1145,7 +1151,7 @@
                   </td>
                </tr>
                <tr>
-                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.0 - Bedienungsanleitung </td>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.2 - Bedienungsanleitung </td>
                   <td style="width: 20%; text-align: center; ">
                      <a accesskey="h" href="index_.html">Zum Anfang</a>
                   </td>

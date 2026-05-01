@@ -15,7 +15,7 @@
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/> ist der Speicherort für die Zieldaten</para>
+		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/> ist der Speicherort für die Zieldateien</para>
 	  </listitem>
 
 	  <listitem>
@@ -156,7 +156,7 @@
 		<listitem>
 		  <para>Dieser Ordner ist für zuverlässige Referenzdateien gedacht, die automatisch passende und unübersetzte Segmente füllen können.</para>
 
-		  <para>In diesem Ordner abgelegte TMX-Dateien bewirken, dass die Übersetzungen automatisch in passende Segmente ohne das automatische Präfix eingefügt werden, d.h. diese Segmente müssen nicht bestätigt werden.</para>
+		  <para>TMX-Dateien, die dort abgelegt werden, bewirken, dass die Übersetzungen automatisch in passende Segmente ohne das automatische Präfix eingefügt werden, d.h. diese Segmente müssen nicht bestätigt werden.</para>
 
 		  <para>Übersetzungen aus diesem Ordner werden als <emphasis>genauso zuverlässig</emphasis> angesehen wie die Übersetzungen aus dem Translation Memory des Projekts.</para>
 
@@ -166,7 +166,7 @@
 
 		<orderedlist>
 			<listitem>
-			  <para>Kopieren oder verschieben Sie die entsprechenden TM-Dateien in den <filename class="directory">tm/auto</filename>-Ordner.</para>
+			  <para>Platzieren Sie die entsprechenden TM-Dateien in den <filename class="directory">tm/auto</filename>-Ordner.</para>
 			</listitem>
 			
 			<listitem>
@@ -203,7 +203,7 @@
 
 		  <orderedlist>
 			<listitem>
-			  <para>Kopieren oder verschieben Sie die entsprechenden TM-Dateien in den <filename class="directory">tm/enforce</filename>-Ordner.</para>
+			  <para>Platzieren Sie die entsprechenden TM-Dateien in den <filename class="directory">tm/enforce</filename>-Ordner.</para>
 			</listitem>
 
 			<listitem>
@@ -249,9 +249,9 @@
       <varlistentry id="project.folder.tm.penalty">
 		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
 		<listitem>
-		  <para><literal>xxx</literal> ist eine Zahl zwischen 0 und 100, die als Sanktion behandelt wird; diese Zahl wird automatisch von den Match-Prozentsätzen der Segmente aus diesem Ordner abgezogen.</para>
+		  <para><literal>xxx</literal> ist eine Zahl zwischen 0 und 100, die als Sanktion behandelt wird; diese Zahl wird automatisch von den Trefferquoten der Segmente aus diesem Ordner abgezogen.</para>
 
-		  <para>Zum Beispiel wird ein 100%iger Match aus einer TMX-Datei, die in einem Ordner namens <filename class="directory">penalty-30</filename> enthalten ist, zu einem 70%igen Match. Die Sanktion wird auf alle drei Match-Prozentsätze angewendet. Match-Prozentsätze von 75, 80 und 90 werden auf 45, 50 und 60 herabgestuft.</para>
+		  <para>Zum Beispiel wird ein 100%iger Match aus einer TMX-Datei, die in einem Ordner namens <filename class="directory">penalty-30</filename> enthalten ist, zu einem 70%igen Match. Die Sanktion wird auf alle drei Trefferquoten angewendet. Trefferquoten von 75, 80 und 90 werden auf 45, 50 und 60 herabgestuft.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -298,7 +298,7 @@
 
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">glossary</title>
-    <para>Dieser Ordner ist anfangs leer. Er wird verwendet, um das beschreibbare Standardglossar und alle anderen Glossare, die Sie im Projekt verwenden, aufzubewahren.</para>
+    <para>Dieser Ordner ist anfangs leer. It is used to store the default writable glossary and any other glossaries that you use in the project.</para>
 
 	<para>Glossarbegriffe, die mit Teilen des Segments übereinstimmen, werden im Fensterbereich <link linkend="panes.glossary" endterm="panes.glossary.title"/> angezeigt. Einzelheiten finden Sie unter <link linkend="app.glossaries" endterm="app.glossaries.title"/>.</para>
 
@@ -378,9 +378,11 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
-          <para>Diese Datei enthält die projektspezifischen Segmentierungsregeln.</para>
+          <para>Diese Datei enthält die projektspezifischen Segmentierungsregeln im Format <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink>.<note><para>Wenn eine <filename>segmentation.conf</filename>-Datei aus früheren Versionen vorhanden ist, konvertiert OmegaT sie automatisch.</para>
+			</note>
+		  </para>
         </listitem>
       </varlistentry>
 

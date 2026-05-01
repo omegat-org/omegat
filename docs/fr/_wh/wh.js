@@ -549,7 +549,7 @@ var toc_entries = [
 ["\n                              Dictionnaires\n                           ","chapter.panes.html#panes.dictionary",null],
 ["\n                              Traductions automatiques\n                           ","chapter.panes.html#panes.machinetranslation",null],
 ["\n                              Traductions multiples\n                           ","chapter.panes.html#panes.multipletranslations",null],
-["\n                              Bloc-note\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              Bloc-notes\n                           ","chapter.panes.html#panes.notes",null],
 ["\n                              Commentaires\n                           ","chapter.panes.html#panes.comments",null],
 ["\n                              Propriétés du segment\n                           ","chapter.panes.html#panes.segment.properties",null],
 ["\n                              Barre d’état\n                           ","chapter.panes.html#panes.statusbar",null]
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "1pl24ils2shri-1xdfl8hwb3pdb";
+var storageId = "15eo8p9vu3uoa-10nnlagrwkq96";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

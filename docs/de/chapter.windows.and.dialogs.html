@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.2 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -233,7 +233,13 @@
                   </div>
                </div>
                <p>Wählen Sie die Quell- und Zielsprache in den Aufklapplisten aus oder tragen Sie sie manuell ein.</p>
-               <p>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> sein müssen.</p>
+               <p>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können jeden beliebigen Code in das entsprechende Feld eintragen.</p>
+               <div class="warning">
+                  <h3 class="title">Warnung</h3>
+                  <p>OmegaT prüft nicht, ob die von Ihnen eingetragenen Sprachcodes gültig sind. Stellen Sie sicher, dass die beiden Sprachcodes <span class="emphasis">
+                        <em>unterschiedlich</em>
+                     </span> sind und für Ihre Verwendung von OmegaT geeignet sind. Achten Sie außerdem darauf, dass die Codes an allen anderen Stellen, an denen ein Sprachcode erforderlich ist, mit den hier zugewiesenen übereinstimmen.</p>
+               </div>
                <p>Sprachcodes werden an verschiedenen Stellen in OmegaT verwendet, um:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -257,12 +263,15 @@
                               <span class="guilabel">LanguageTool</span>
                            </a> zu finden,</p>
                      </li>
+                     <li class="listitem">
+                        <p>die Sprachen anzugeben, die in den vom Projekt erstellten TMX-Dateien verwendet werden (eine TMX-Datei benötigt Sprachcodes gemäß <a class="ulink" href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>),</p>
+                     </li>
                   </ul>
                </div>
                <p>und so weiter.</p>
                <div class="warning">
                   <h3 class="title">Warnung</h3>
-                  <p>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</p>
+                  <p>Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</p>
                </div>
                <p>OmegaT wählt automatisch die Tokenizer aus, die der Quell- und Zielsprache entsprechen, aber Sie können diese auch manuell ändern. Die Tokenizer helfen OmegaT, bessere Treffer zu liefern.</p>
             </section>
@@ -326,7 +335,7 @@
                               <span class="guimenuitem">Globale Segmentierungsregeln...</span>
                            </a>) sind globale Regeln.</p>
                         <p>Verwenden Sie diese Schaltfläche, um lokale Regeln für Ihr Projekt festzulegen. Aktivieren Sie die Option <code class="option">Lokale Segmentierungsregeln verwenden</code> und passen Sie die Segmentierungsregeln nach Bedarf an.</p>
-                        <p>Das Projekt speichert den neuen Satz von Regeln in die Datei <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.conf</a> im Ordner <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Diese Regeln haben Vorrang vor den globalen Segmentierungsregeln.</p>
+                        <p>Das Projekt speichert den neuen Satz von Regeln in die Datei <a class="link" href="chapter.project.folder.html#project.folder.omegat.segmentation">segmentation.srx</a> im Ordner <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a>. Diese Regeln haben Vorrang vor den globalen Segmentierungsregeln.</p>
                         <p>Um lokale Segmentierungsregeln zu deaktivieren, deaktivieren Sie diese Option oder löschen Sie die Datei.</p>
                         <div class="warning">
                            <h3 class="title">Warnung</h3>

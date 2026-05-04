@@ -28,6 +28,7 @@ package org.omegat.spellchecker.hunspell;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +57,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
+import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -67,6 +69,10 @@ public class HunspellSpellcheckerTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        boolean isSupportedPlatform = Platform.isMacOSX()
+                || (Platform.isWindows && Platform.isX86_64)
+                || (Platform.isLinux() && Platform.isX86_64);
+        assumeTrue("Tests only run on supported platforms (Mac, Windows x64, or Linux x64)", isSupportedPlatform);
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));

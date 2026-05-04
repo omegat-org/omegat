@@ -9,10 +9,8 @@ plugins {
     id 'net.ltgt.nullaway'
 }
 
-// Definition of OmegaT versioning
-def localPropsFile = file('local.properties')
-
 ext {
+    localPropsFile = layout.settingsDirectory.file('local.properties').asFile
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
             if (!findProperty(k)) {
@@ -20,8 +18,8 @@ ext {
             }
         }
     }
-    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
-    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
+    providedCoreLibsDir = layout.settingsDirectory.dir('lib/provided/core').asFile
+    providedModuleLibsDir = layout.settingsDirectory.dir('lib/provided/module').asFile
 }
 
 repositories {

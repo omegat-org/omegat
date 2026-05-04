@@ -5,17 +5,18 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/hunspell-*.jar'])
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/languagetool-core-*.jar',
-                '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar',
-                '**/hunspell-*.jar'])
+                '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar'])
     } else {
+        implementation(libs.dumont.hunspell)
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.languagetool.core)
         compileOnly(libs.lucene.analyzers.common)
-        compileOnly(libs.dumont.hunspell)
     }
+    testImplementation(libs.dumont.hunspell)
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject)) {

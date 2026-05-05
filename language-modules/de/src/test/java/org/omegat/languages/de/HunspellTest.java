@@ -24,27 +24,27 @@
  ******************************************************************************/
 package org.omegat.languages.de;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
 
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.languages.LanguageModuleTestBase;
-import org.omegat.spellchecker.hunspell.HunSpellChecker;
+import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "de_CH";
-    private static final String GOOD = "Hallo";
-    private static final String BAD = "Hello";
+    private static final String GOOD = "hallo";
+    private static final String BAD = "hello";
 
     @Test
     public void testDictionary() throws Exception {
-        ISpellChecker checker = new HunSpellChecker();
+        ISpellChecker checker = new LuceneHunSpellChecker();
         testDictionaryHelper(checker, LANGUAGE, GOOD, BAD);
-        assertThat(checker.suggest(BAD)).as("Get suggestion").hasSize(8).contains("Holle", "Hella",
-                "Cello", "Hell", "Helle", "Hallo", "Hellt", "Helot");
+        assertThat(checker.suggest(BAD)).as("Get suggestion").hasSize(8)
+                .contains("holle", "hella", "cello", "hell", "helle", "hallo", "hellt", "helot");
     }
 
 }

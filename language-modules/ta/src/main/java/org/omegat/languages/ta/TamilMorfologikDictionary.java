@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
-import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;

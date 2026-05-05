@@ -10,9 +10,9 @@ def documentRootDir = 'src_docs'
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar', '**/jspecify-**.jar', '**/lib-mnemonics-*.jar'])
     } else {
-        implementation(libs.jetbrains.annotations)
+        compileOnly(libs.jspecify)
         compileOnly(libs.omegat.mnemonics)
     }
 }

@@ -7,7 +7,7 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/languagetool-core-*.jar',
                 '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar',
-                '**/hunspell-*.jar'])
+                '**/lucene-analyzers-common-*.jar', '**/hunspell-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)

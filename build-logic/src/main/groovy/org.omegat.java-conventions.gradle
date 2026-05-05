@@ -13,13 +13,15 @@ ext {
     localPropsFile = layout.settingsDirectory.file('local.properties').asFile
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
-            if (!findProperty(k)) {
+            if (findProperty(k) == null) {
                 set(k, v)
             }
         }
     }
-    providedCoreLibsDir = layout.settingsDirectory.dir('lib/provided/core').asFile
-    providedModuleLibsDir = layout.settingsDirectory.dir('lib/provided/module').asFile
+    providedCoreLibsPath = 'lib/provided/core'
+    providedModuleLibsPath = 'lib/provided/module'
+    providedCoreLibsDir = layout.settingsDirectory.dir(providedCoreLibsPath).asFile
+    providedModuleLibsDir = layout.settingsDirectory.dir(providedModuleLibsPath).asFile
 }
 
 repositories {

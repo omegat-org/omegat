@@ -484,7 +484,7 @@ processResources {
     }
 }
 
-// E.g. when doing `build`, run checks before making distfiles
+// E.g. when doing `build`, run checks before making distribution files
 assemble.mustRunAfter check
 
 allprojects {

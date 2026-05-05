@@ -1,0 +1,87 @@
+name: Publish Linux AARCH64
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      publish_type:
+        description: 'Publish type (release or weekly)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options:
+          - release
+          - weekly
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm lftp
+
+      - name: Download AARCH64 JRE
+        run: |
+          mkdir -p asset
+          cd asset
+          curl -L -O https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jre_aarch64_linux_hotspot_21.0.9_10.tar.gz
+
+      - name: Build distributions
+        run: |
+          ./gradlew linuxDistDeb linuxDistRpm linuxArm64DistTarBz -PassetDir=asset --build-cache -PenvIsCi
+
+      - name: Determine Version and Upload Path
+        id: info
+        run: |
+          VERSION=$(./gradlew properties -q | grep "^version:" | awk '{print $2}')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+            echo "lftp_dest=sftp://${{ secrets.SOURCEFORGE_CI_USER }}@frs.sourceforge.net" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.inputs.publish_type }}" == "release" ]]; then
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+            echo "lftp_dest=sftp://${{ secrets.SOURCEFORGE_CI_USER }}@frs.sourceforge.net" >> $GITHUB_OUTPUT
+          else
+            echo "dest_dir=/home/frs/project/omegat/Weekly" >> $GITHUB_OUTPUT
+            echo "lftp_dest=sftp://${{ secrets.SOURCEFORGE_CI_USER }}@frs.sourceforge.net" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup SSH for SourceForge
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.OMEGAT_CI_RSA }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+          echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+
+      - name: Upload to SourceForge
+        env:
+          LFTP_PASSWORD: ${{ secrets.SOURCEFORGE_KEY_PASS }}
+          SOURCEFORGE_CI_USER: ${{ secrets.SOURCEFORGE_CI_USER }}
+        run: |
+          srcdir="build/distributions/"
+          dest_dir="${{ steps.info.outputs.dest_dir }}"
+          lftp_dest="${{ steps.info.outputs.lftp_dest }}"
+          
+          echo "Uploading from $srcdir to $dest_dir"
+          ls -l $srcdir
+          
+          cmd="mkdir -p '$dest_dir' ; lcd $srcdir ; cd '$dest_dir' ; mirror -R -v ; bye"
+          ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; lftp --env-password -e \"$cmd\" $lftp_dest"

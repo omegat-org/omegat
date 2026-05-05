@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew genJAXB
         id: gradle
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2025.3
+        uses: JetBrains/qodana-action@v2026.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:

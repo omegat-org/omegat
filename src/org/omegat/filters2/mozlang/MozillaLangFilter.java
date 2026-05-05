@@ -259,4 +259,9 @@ public class MozillaLangFilter extends AbstractFilter {
     public boolean isBilingual() {
         return true;
     }
+
+    @Override
+    public boolean isEnabledInDefault() {
+        return false;
+    }
 }

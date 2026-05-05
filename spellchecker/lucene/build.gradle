@@ -15,4 +15,10 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.de)
+}
+
+test {
+    dependsOn project(':language-modules:de').tasks.withType(Jar)
+    dependsOn project(':language-modules:fr').tasks.withType(Jar)
 }

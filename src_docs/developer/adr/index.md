@@ -9,6 +9,7 @@
 - 2025004 [Format Compliance and Purpose of `project_save.tmx` and TMX Validation Strategy](2025004.TMXFormatAndValidation.md)
 - 2025007 [CLI Plugin API Implementation](2025007.CLIPluginAPI.md)
 - 2025008 [Adoption of JSpecify for Null-Safety](2025008.AdoptionJSpecifyForNullSafety.md)
+- 2025009 [Architecture Decision Record: Refactoring Entry Info Panes Threading Model](2025009.CoreSearchThreadServiceAndCompletableFuture.md)
 
 ## Core features
 

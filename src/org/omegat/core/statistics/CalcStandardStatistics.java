@@ -36,9 +36,9 @@ import java.nio.file.Paths;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.threads.Completion;
-import org.omegat.core.threads.LongProcessThread;
-import org.omegat.gui.stat.StatisticsPanel;
+import org.omegat.core.threads.CancellationToken;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 
 /**
  * Thread for calculate standard statistics.
@@ -56,33 +56,44 @@ import org.omegat.util.OConsts;
  * @author Arno Peters
  * @author Aaron Madlon-Kay
  */
-public class CalcStandardStatistics extends LongProcessThread {
+public class CalcStandardStatistics implements ICalcStatistics {
 
-    private final StatisticsPanel callback;
+    protected final IStatsConsumer callback;
+    protected CancellationToken cancellationToken;
+    final IProject project;
 
-    public CalcStandardStatistics(StatisticsPanel callback) {
+    public CalcStandardStatistics(IProject project, IStatsConsumer callback) {
         this.callback = callback;
+        this.project = project;
+    }
+
+    public CalcStandardStatistics(IStatsConsumer callback) {
+        this(Core.getProject(), callback);
     }
 
     @Override
-    public void run() {
-        IProject p = Core.getProject();
-        StatsResult result = Statistics.buildProjectStats(p);
-        callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
-        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
+    public Void run(CancellationToken token) {
+        cancellationToken = token;
+
+        token.throwIfCancelled();
+
+        StatsResult result = Statistics.buildProjectStats(project);
+        callback.setTable(StatsResult.HT_HEADERS, result.getHeaderTable());
+        String title = OStrings.getString("CT_STATS_FILE_Statistics");
+        callback.appendTable(title, StatsResult.FT_HEADERS, result.getFilesTable());
         callback.setTextData(result.getTextData());
         callback.onComplete(Completion.success());
 
-        String internalDir = p.getProjectProperties().getProjectInternal();
+        String internalDir = project.getProjectProperties().getProjectInternal();
         try {
             // removing old stats
             Files.deleteIfExists(Paths.get(internalDir + "word_counts"));
+            // now dump file based word counts to disk
+            String fn = internalDir + OConsts.STATS_FILENAME;
+            Statistics.writeStat(internalDir, result);
+            callback.setDataFile(fn);
         } catch (IOException ignored) {
         }
-
-        // now dump file based word counts to disk
-        String fn = internalDir + OConsts.STATS_FILENAME;
-        Statistics.writeStat(internalDir, result);
-        callback.setDataFile(fn);
+        return null;
     }
 }

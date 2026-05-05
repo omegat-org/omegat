@@ -59,7 +59,7 @@ dependencies {
     implementation 'xml-resolver:xml-resolver:1.2'
     implementation 'org.xmlresolver:xmlresolver:6.0.23'
     implementation 'net.sf.saxon:Saxon-HE:12.9'
-    implementation 'org.docbook:docbook-xslTNG:2.7.6'
+    implementation 'org.docbook:docbook-xslTNG:2.8.0'
     implementation 'com.nwalsh:sinclude:5.2.4'
     implementation 'tokyo.northside:whc:3.6.0'
     implementation 'xalan:xalan:2.7.3'

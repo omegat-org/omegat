@@ -2,7 +2,7 @@ steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
     inputs:
-      key: 'gradle | "$(Agent.OS)" | **/build.gradle'
+      key: 'gradle | "$(Agent.OS)" | gradle/wrapper/gradle-wrapper.properties | settings.gradle | **/build.gradle'
       restoreKeys: |
         gradle | "$(Agent.OS)"
         gradle
@@ -10,9 +10,5 @@ steps:
   - task: Gradle@3
     inputs:
       tasks: 'test'
-      options: '--build-cache -PenvIsCi -PtestMaxHeapSize=2048M'
+      options: '--build-cache --no-daemon -PenvIsCi -PtestMaxHeapSize=2048M'
       jdkVersionOption: '1.17'
-  - script: |
-      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-      ./gradlew --stop
-    displayName: Gradlew stop

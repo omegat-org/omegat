@@ -6,13 +6,13 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-api*.jar'])
+            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-api*.jar', '**/jspecify-*.jar', '**/annotations-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar'])
     } else {
         // Aligner
         implementation(libs.tokyo.northside.maligna)
-        implementation(libs.jetbrains.annotations)
-        implementation(libs.jspecify)
+        compileOnly(libs.jetbrains.annotations)
+        compileOnly(libs.jspecify)
         compileOnly(libs.jaxb4.api)
         compileOnly(libs.jaxb4.runtime)
         compileOnly(libs.madlonkay.supertmxmerge)

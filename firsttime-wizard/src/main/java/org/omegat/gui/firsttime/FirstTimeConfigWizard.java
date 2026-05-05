@@ -30,7 +30,7 @@ import java.util.Collections;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;

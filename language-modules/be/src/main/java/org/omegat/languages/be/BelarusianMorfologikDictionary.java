@@ -26,11 +26,13 @@ package org.omegat.languages.be;
 
 import java.io.InputStream;
 
+import org.jspecify.annotations.NullMarked;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 
+@NullMarked
 public class BelarusianMorfologikDictionary extends AbstractMorfologikDictionary implements ISpellCheckerDictionary,
         AutoCloseable {
 

@@ -7,7 +7,7 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar',
-                           '**/morfologik-stemming-*.jar'])
+                           '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir,
                 includes: ['**/language-br-*.jar'])
     } else {
@@ -17,8 +17,7 @@ dependencies {
             exclude module: 'languagetool-core'
         }
         compileOnly(libs.morfologik.stemming)
-        implementation(libs.jetbrains.annotations)
-        implementation(libs.jspecify)
+        compileOnly(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

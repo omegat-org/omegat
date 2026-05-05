@@ -17,7 +17,9 @@ class DocbookHtmlTask extends TransformationTask {
 
     private final Provider<String> css = project.objects.property(String)
     private final Provider<String> pageStyle = project.objects.property(String)
-    private final Provider<String> enableToc = project.objects.property(String)
+    private final Provider<String> toc = project.objects.property(String)
+    private final Provider<String> media = project.objects.property(String)
+    private final Provider<String> lists = project.objects.property(String)
 
     @Input
     Provider<String> getCss() {
@@ -30,8 +32,18 @@ class DocbookHtmlTask extends TransformationTask {
     }
 
     @Input
-    Provider<String> getEnableToc() {
-        return enableToc
+    Provider<String> getToc() {
+        return toc
+    }
+
+    @Input
+    Provider<String> getMedia() {
+        return media
+    }
+
+    @Input
+    Provider<String> getLists() {
+        return lists
     }
 
     @Override
@@ -42,35 +54,39 @@ class DocbookHtmlTask extends TransformationTask {
 
     @Override
     protected void preTransform(XsltTransformer transformer, File source, File target) {
-        def outputChunkName = outputFile.get().asFile.name
-        transformer.setParameter(new QName("chunk"), new XdmAtomicValue(outputChunkName))
+        // output file configurations
+        transformer.setParameter(new QName("html-extension"), new XdmAtomicValue(".html"))
+        transformer.setParameter(new QName("page-style"), new XdmAtomicValue(pageStyle.get()))
+        transformer.setParameter(new QName("output-media"), new XdmAtomicValue(media.get()))
+        if ("screen".equals(media.get())) {
+            def outputChunkName = outputFile.get().asFile.name
+            def outputBaseDir = outputFile.get().asFile.parentFile.toURI().toString()
+            transformer.setParameter(new QName("chunk"), new XdmAtomicValue(outputChunkName))
+            transformer.setParameter(new QName("chunk-output-base-uri"), new XdmAtomicValue(outputBaseDir))
+            transformer.setParameter(new QName("chunk-section-depth"), new XdmAtomicValue(0))
+            transformer.setParameter(new QName("section-numbers"), new XdmAtomicValue("false"))
+            transformer.setParameter(new QName("use-id-as-filename"), new XdmAtomicValue("true"))
+        } else {
+            transformer.setParameter(new QName("section-numbers"), new XdmAtomicValue("true"))
+        }
         // Both BaseDirs should be the same form of the URI expressions.
         // Otherwise, produced src URL of the img tags become weired.
         def inputBaseDir = inputFile.get().asFile.parentFile.toURI().toString()
-        def outputBaseDir = outputFile.get().asFile.parentFile.toURI().toString()
-        transformer.setParameter(new QName("chunk-output-base-uri"), new XdmAtomicValue(outputBaseDir))
         transformer.setParameter(new QName("mediaobject-input-base-uri"), new XdmAtomicValue(inputBaseDir))
-        transformer.setParameter(new QName("chunk-section-depth"), new XdmAtomicValue(0))
         // enable/disable table-of-contents--list of titles--and disable section numbering
-        transformer.setParameter(new QName("auto-toc"), new XdmAtomicValue(getEnableToc().get()))
+        transformer.setParameter(new QName("auto-toc"), new XdmAtomicValue(getToc().get()))
         transformer.setParameter(new QName("persistent-toc"), new XdmAtomicValue(false))
         transformer.setParameter(new QName("persistent-toc-search"), new XdmAtomicValue(false))
         transformer.setParameter(new QName("section-toc-depth"), new XdmAtomicValue(1))
-        transformer.setParameter(new QName("section-numbers"), new XdmAtomicValue("false"))
         transformer.setParameter(new QName("pagetoc-dynamic"), new XdmAtomicValue(false))
-        // output file configurations
-        transformer.setParameter(new QName("html-extension"), new XdmAtomicValue(".html"))
-        transformer.setParameter(new QName("output-media"), new XdmAtomicValue("screen"))
-        transformer.setParameter(new QName("page-style"), new XdmAtomicValue(pageStyle.get()))
-        transformer.setParameter(new QName("use-id-as-filename"), new XdmAtomicValue("true"))
         // html stylesheet link is constructed as "${resource-base-uri}${user-css-links}"
         // so "resource-base-uri" should be a plain file path that ends with "/"
         transformer.setParameter(new QName("resource-base-uri"), new XdmAtomicValue("./"))
         transformer.setParameter(new QName("user-css-links"), new XdmAtomicValue(css.get()))
         transformer.setParameter(new QName("use-docbook-css"), new XdmAtomicValue("false"))
         // suppress indexes
-        transformer.setParameter(new QName("lists-of-examples"), new XdmAtomicValue("false"))
-        transformer.setParameter(new QName("lists-of-figures"), new XdmAtomicValue("false"))
-        transformer.setParameter(new QName("lists-of-tables"), new XdmAtomicValue("false"))
+        transformer.setParameter(new QName("lists-of-examples"), new XdmAtomicValue(lists.get()))
+        transformer.setParameter(new QName("lists-of-figures"), new XdmAtomicValue(lists.get()))
+        transformer.setParameter(new QName("lists-of-tables"), new XdmAtomicValue(lists.get()))
     }
 }

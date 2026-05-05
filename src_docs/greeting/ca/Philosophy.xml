@@ -3,22 +3,22 @@
     <section>
         <title>Llibertats</title>
         <para>L'OmegaT és solució lliure de traducció assistida per ordinador (TAO) per a traductors professionals. Es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. Consulteu <guimenu>&gt; Ajuda</guimenu> <guimenu>&gt; Quant a</guimenu>. La llicència us concedeix les llibertats següents:<itemizedlist>
-            <listitem>
-                <para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
-            </listitem>
+                <listitem>
+                    <para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
+                </listitem>
 
-            <listitem>
-                <para>Llibertat d'estudiar el funcionament de l'OmegaT i modificar-lo perquè funcioni com vulgueu</para>
-            </listitem>
+                <listitem>
+                    <para>Llibertat d'estudiar el funcionament de l'OmegaT i modificar-lo perquè funcioni com vulgueu</para>
+                </listitem>
 
-            <listitem>
-                <para>Llibertat de distribuir còpies per a ajudar altres persones</para>
-            </listitem>
+                <listitem>
+                    <para>Llibertat de distribuir còpies per a ajudar altres persones</para>
+                </listitem>
 
-            <listitem>
-                <para>Llibertat de distribuir còpies de les versions modificades a altres persones</para>
-            </listitem>
-        </itemizedlist>
+                <listitem>
+                    <para>Llibertat de distribuir còpies de les versions modificades a altres persones</para>
+                </listitem>
+            </itemizedlist>
         </para>
     </section>
 </article>

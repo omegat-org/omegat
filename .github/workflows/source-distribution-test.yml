@@ -1,0 +1,36 @@
+name: Source Distribution Test
+
+on:
+  push:
+    branches:
+      - master
+      - releases/*
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
+
+jobs:
+  test-source-dist:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-java@v5
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - uses: gradle/actions/setup-gradle@v6
+      name: Setup Gradle
+    - name: Build source distribution
+      run: ./gradlew sourceDistZip
+    - name: Test source distribution compilation
+      run: |
+        cd build/distributions
+        unzip OmegaT_*_Source.zip
+        cd OmegaT_*_Source
+        ./gradlew -PenvIsCi=true -Pheadless=true distZip

@@ -31,6 +31,7 @@ jobs:
     - name: Test source distribution compilation
       run: |
         cd build/distributions
-        unzip OmegaT_*_Source.zip
+        unzip -q OmegaT_*_Source.zip
         cd OmegaT_*_Source
+        chmod +x ./gradlew
         ./gradlew -PenvIsCi=true -Pheadless=true distZip

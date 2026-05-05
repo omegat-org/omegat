@@ -474,8 +474,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.config.dir.">
                         <term xml:id="launch.with.command.line.config.dir.title">
-                           <option>--config-dir=</option>
-                           <userinput>&lt;path&gt;</userinput>
+                           <option>--config-dir=</option><userinput>&lt;path&gt;</userinput>
                         </term>
                         <listitem>
                            <para>The folder used to read and write OmegaT configuration
@@ -485,8 +484,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.config.file.">
                         <term xml:id="launch.with.command.line.config.file.title">
-                           <option>--config-file=</option>
-                           <userinput>&lt;path&gt;</userinput>
+                           <option>--config-file=</option><userinput>&lt;path&gt;</userinput>
                         </term>
                         <listitem>
                            <para>A file written in the Java .properties format used to
@@ -513,8 +511,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.resource.bundle.">
                         <term xml:id="launch.with.command.line.resource.bundle.title">
-                           <option>--resource-bundle=</option>
-                           <userinput>&lt;path&gt;</userinput>
+                           <option>--resource-bundle=</option><userinput>&lt;path&gt;</userinput>
                         </term>
                         <listitem>
                            <para>A Java .properties file to use for interface
@@ -613,8 +610,7 @@
                                     <variablelist>
                                        <varlistentry xml:id="launch.with.command.line.pseudotranslatetmx.">
                                           <term xml:id="launch.with.command.line.pseudotranslatetmx.title">
-                                             <option>--pseudotranslatetmx=</option>
-                                             <userinput>&lt;path&gt;</userinput>
+                                             <option>--pseudotranslatetmx=</option><userinput>&lt;path&gt;</userinput>
                                           </term>
                                           <listitem>
                                              <para>The output pseudotranslated TMX file.</para>
@@ -731,8 +727,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.script.">
                         <term xml:id="launch.with.command.line.script.title">
-                           <option>--script=</option>
-                           <userinput>&lt;path&gt;</userinput>
+                           <option>--script=</option><userinput>&lt;path&gt;</userinput>
                         </term>
                         <listitem>
                            <para>A script file to run when a project event is

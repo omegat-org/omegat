@@ -12,10 +12,8 @@
       project.</para>
    <note>
       <para>An OmegaT team project synchronizes the project translation memory
-         (
-         <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and the project writable
-         glossary (
-         <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"></link>) between the VCS hosting server and
+         (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and the project writable
+         glossary (<link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"></link>) between the VCS hosting server and
          all the participating team members. It also manages all possible conflicts
          between them.</para>
    </note>
@@ -129,7 +127,7 @@
             <para>Put the registered files on the hosting server</para>
             <para>Finally, publish your project to the remote server
                (
-               <command>commit</command> 
+               <command>commit</command> and
                <command>push</command> in Git, and 
                
                <command>commit</command> in SVN).</para>

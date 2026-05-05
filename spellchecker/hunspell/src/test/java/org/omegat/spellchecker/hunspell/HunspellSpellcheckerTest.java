@@ -94,7 +94,7 @@ public class HunspellSpellcheckerTest {
     }
 
     @Test
-    public void testReadHunspellDictionary() throws Exception {
+    public void testReadHunspellDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("es_MX"));
         setupProject(props, false);
@@ -106,7 +106,7 @@ public class HunspellSpellcheckerTest {
     }
 
     @Test
-    public void testReadHunspellLTDictionary() throws Exception {
+    public void testReadHunspellLTDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
         setupProject(props, false);
@@ -119,7 +119,7 @@ public class HunspellSpellcheckerTest {
     }
 
     @Test
-    public void testBundledDictionaryFR() throws Exception {
+    public void testBundledDictionaryFR() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
         setupProject(props, false);
@@ -151,7 +151,7 @@ public class HunspellSpellcheckerTest {
     @Test
     public void testSaveWordListsWhenProjectStatusChanged() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
-        tmpDir.resolve("omegat").toFile().mkdir();
+        Files.createDirectory(tmpDir.resolve("omegat"));
         props.setTargetLanguage(new Language("fr_FR"));
         verifyWordListsSave(props, false);
         verifyWordListsSave(props, true);

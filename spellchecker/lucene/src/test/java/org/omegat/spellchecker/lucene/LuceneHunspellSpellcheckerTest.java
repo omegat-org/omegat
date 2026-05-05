@@ -34,8 +34,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -57,7 +56,7 @@ public class LuceneHunspellSpellcheckerTest {
     private static Path configDir;
 
     @BeforeClass
-    public static final void setUpClass() throws Exception {
+    public static void setUpClass() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
@@ -68,16 +67,16 @@ public class LuceneHunspellSpellcheckerTest {
         copyFile("en.dic");
     }
 
-    @After
-    public final void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         FileUtils.forceDeleteOnExit(tmpDir.toFile());
     }
 
     @Test
-    public void testReadHunspellDictionary() throws Exception {
+    public void testReadHunspellDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("en"));
-        setupProject(props, false);
+        setupProject(props);
         ISpellChecker checker = new LuceneHunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hello")).isTrue();
@@ -86,10 +85,10 @@ public class LuceneHunspellSpellcheckerTest {
     }
 
     @Test
-    public void testReadHunspellLTDictionary() throws Exception {
+    public void testReadHunspellLTDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
-        setupProject(props, false);
+        setupProject(props);
         ISpellChecker checker = new LuceneHunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isTrue();
@@ -99,10 +98,10 @@ public class LuceneHunspellSpellcheckerTest {
     }
 
     @Test
-    public void testBundledDictionaryFR() throws Exception {
+    public void testBundledDictionaryFR() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
-        setupProject(props, false);
+        setupProject(props);
         ISpellChecker checker = new LuceneHunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Bonjour")).as("Spell check for correct word").isTrue();
@@ -110,16 +109,11 @@ public class LuceneHunspellSpellcheckerTest {
         assertThat(checker.suggest("Erruer")).as("Get suggestion").contains("erreur", "errer");
     }
 
-    private void setupProject(ProjectProperties props, boolean isProjectLoaded) {
+    private void setupProject(ProjectProperties props) {
         Core.setProject(new NotLoadedProject() {
             @Override
             public ProjectProperties getProjectProperties() {
                 return props;
-            }
-
-            @Override
-            public boolean isProjectLoaded() {
-                return isProjectLoaded;
             }
         });
     }

@@ -1,22 +1,13 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.appendices">
-  <title xml:id="chapter.appendices.title">Annexos</title>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_FileFilters.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Segmentation.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Regex.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Glossaries.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Bidi.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_PostProcessingCommands.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ShortCuts.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ConfigurationFolder.xml"/>
-  
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ApplicationFolder.xml"/>
-  </chapter>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.appendices">
+   <title xml:id="chapter.appendices.title">Annexos</title>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_FileFilters.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Segmentation.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Regex.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Glossaries.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Bidi.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_PostProcessingCommands.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ShortCuts.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ConfigurationFolder.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ApplicationFolder.xml"/>
+</chapter>

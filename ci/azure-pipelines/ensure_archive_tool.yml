@@ -1,5 +1,5 @@
 steps:
-  - ps: |
+  - pwsh: |
       if (-not (Get-Command 7z -ErrorAction SilentlyContinue)) {
         choco install 7zip -y
         Write-Host "##vso[task.prependpath]C:\Program Files\7-Zip"

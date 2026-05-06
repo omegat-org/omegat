@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    genMac(libs.omegat.appbundler)
+    genMac(libs.evolvedbinary.appbundler)
 }
 
 tasks.register('genMac') {

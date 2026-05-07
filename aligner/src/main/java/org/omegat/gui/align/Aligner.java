@@ -53,8 +53,8 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
-import org.jetbrains.annotations.Nullable;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
 import org.omegat.core.data.ProtectedPart;

@@ -34,7 +34,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.text.StringEscapeUtils;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 

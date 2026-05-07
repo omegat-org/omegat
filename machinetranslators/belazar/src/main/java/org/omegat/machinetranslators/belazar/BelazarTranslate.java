@@ -35,7 +35,8 @@ import java.net.URLEncoder;
 import java.util.ResourceBundle;
 
 import org.apache.commons.io.IOUtils;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -48,6 +49,7 @@ import org.omegat.util.Language;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public class BelazarTranslate extends BaseCachedTranslate {
     public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
     protected static final String CHARSET = "Cp1251";

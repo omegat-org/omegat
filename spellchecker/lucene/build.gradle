@@ -5,7 +5,7 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-analyzers-common-8*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.bundles.lucene)

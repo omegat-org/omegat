@@ -87,7 +87,7 @@ public class SourceTextEntry {
     @Nullable SourceTextEntry firstInstance;
 
     /** Holds the number of this entry in a project. */
-    private final int m_entryNum;
+    private final int entryNum;
 
     /**
      * Protected parts(shortcuts) and details of full content (for tooltips).
@@ -107,9 +107,10 @@ public class SourceTextEntry {
      * @param sourceTranslation
      *            translation from source file
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts, boolean paragraphStart) {
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
+                           List<ProtectedPart> protectedParts, boolean paragraphStart) {
         this.key = key;
-        m_entryNum = entryNum;
+        this.entryNum = entryNum;
         this.props = props;
         this.sourceTranslation = sourceTranslation;
         this.paragraphStart = paragraphStart;
@@ -162,7 +163,7 @@ public class SourceTextEntry {
 
     /** Returns the number of this entry in a project. */
     public int entryNum() {
-        return m_entryNum;
+        return entryNum;
     }
 
     /** If entry with the same source already exist in project. */

@@ -220,10 +220,9 @@ public class StatsResult {
     @JsonIgnore
     public String getTextData() {
         return OStrings.getString("CT_STATS_Project_Statistics") + "\n\n"
-                + TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN) + "\n\n" +
-
+                + TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN) + "\n\n"
                 // STATISTICS BY FILE
-                OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n"
+                + OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n"
                 + TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN);
     }
 
@@ -239,9 +238,9 @@ public class StatsResult {
         setDate();
         StringWriter result = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        SequenceWriter writer = mapper.writer().writeValues(result);
-        writer.write(this);
-        writer.close();
+        try (SequenceWriter writer = mapper.writer().writeValues(result)) {
+            writer.write(this);
+        }
         return result.toString();
     }
 
@@ -253,11 +252,9 @@ public class StatsResult {
     @JsonIgnore
     public String getXmlData() throws JsonProcessingException {
         setDate();
-        XmlMapper xmlMapper = XmlMapper.builder()
-                .addModule(new JakartaXmlBindAnnotationModule())
+        XmlMapper xmlMapper = XmlMapper.builder().addModule(new JakartaXmlBindAnnotationModule())
                 .configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
-                .enable(SerializationFeature.INDENT_OUTPUT)
-                .defaultUseWrapper(false).build();
+                .enable(SerializationFeature.INDENT_OUTPUT).defaultUseWrapper(false).build();
         return xmlMapper.writeValueAsString(this);
 
     }

@@ -72,6 +72,6 @@ public class ReplaceMarker implements IMarker {
             m.painter = highlightPainter;
             r.add(m);
         }
-        return r;
+        return Collections.unmodifiableList(r);
     }
 }

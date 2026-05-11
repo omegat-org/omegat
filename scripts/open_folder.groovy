@@ -1,6 +1,5 @@
-/* :name=Open Project Folder :description=Open the project folder in the operating system
- * 
- * Open project folder
+/**
+ * Open project folder with default file manager.
  *
  * @author  Yu Tang
  * @date    2013-06-05

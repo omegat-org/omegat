@@ -25,19 +25,15 @@
 
 package org.omegat.core.statistics;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.core.threads.Completion;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -69,19 +65,11 @@ import static org.junit.Assert.assertTrue;
  * - Confirms integration of dependent components like segmenters and testing
  *   consumers used for capturing results.
  */
-public class CalcMatchStatisticsTest {
+public class CalcMatchStatisticsTest extends TestCore {
 
-    private static final int TIMEOUT = 15;
-
+    // On some CI environments, calculating statistics can occasionally be slow
+    // due to limited CPU resources and I/O.
     private static Path tmpDir;
-
-    /*
-     * Setup test project.
-     */
-    @Before
-    public final void setUp() throws Exception {
-        TestPreferencesInitializer.init();
-    }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -90,14 +78,17 @@ public class CalcMatchStatisticsTest {
     }
 
     @Test
-    public void testCalcMatchStatics() throws ExecutionException, InterruptedException, TimeoutException {
+    public void testCalcMatchStatics() {
         TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
         CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
+
+        // execute and complete the task
         calcMatchStatistics.start();
-        future.get(TIMEOUT, TimeUnit.SECONDS);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
         String[][] result = testingStatsConsumer.getTable();
         assertNotNull(result);
 

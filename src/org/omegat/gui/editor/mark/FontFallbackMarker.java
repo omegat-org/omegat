@@ -52,15 +52,17 @@ public class FontFallbackMarker implements IMarker {
     }
 
     @Override
-    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
-            String translationText, boolean isActive) throws Exception {
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+            boolean isActive) throws Exception {
 
         if (!isEnabled()) {
             return null;
         }
 
-        int srcGlyphMissing = sourceText == null ? -1 : FontFallbackManager.canDisplayUpTo(editorFont, sourceText);
-        int trgGlyphMissing = translationText == null ? -1 : FontFallbackManager.canDisplayUpTo(editorFont, translationText);
+        int srcGlyphMissing = sourceText == null ? -1
+                : FontFallbackManager.canDisplayUpTo(editorFont, sourceText);
+        int trgGlyphMissing = translationText == null ? -1
+                : FontFallbackManager.canDisplayUpTo(editorFont, translationText);
 
         if (srcGlyphMissing == -1 && trgGlyphMissing == -1) {
             return null;
@@ -92,11 +94,13 @@ public class FontFallbackMarker implements IMarker {
             if (font == null) {
                 continue;
             }
-            // Look ahead to try to group as many characters as possible into this run.
+            // Look ahead to try to group as many characters as possible into
+            // this run.
             for (int cpn, ccn, j = i; j < chars.length; j += ccn) {
                 cpn = Character.codePointAt(chars, j);
                 ccn = Character.charCount(cpn);
-                if (!FontFallbackManager.canDisplay(editorFont, cpn) && FontFallbackManager.canDisplay(font, cpn)) {
+                if (!FontFallbackManager.canDisplay(editorFont, cpn)
+                        && FontFallbackManager.canDisplay(font, cpn)) {
                     i += ccn;
                 } else {
                     break;

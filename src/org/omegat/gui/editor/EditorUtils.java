@@ -65,11 +65,13 @@ public final class EditorUtils {
      * Determines the start of a word for the given model location. This method
      * skips direction char.
      *
-     * @param c TextComponent of the editor area.
-     * @param offs offset of the text.
+     * @param c
+     *            TextComponent of the editor area.
+     * @param offs
+     *            offset of the text.
      * @return position of word start on the text component.
      * @throws BadLocationException
-     *         when there is no line found in the text component.
+     *             when there is no line found in the text component.
      */
     @Deprecated
     public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
@@ -80,12 +82,15 @@ public final class EditorUtils {
      * Determines the start of a word for the given model location. This method
      * skips direction char.
      *
-     * @param c TextComponent of the editor area.
-     * @param offs offset of the text.
-     * @param locale locale of the text.
+     * @param c
+     *            TextComponent of the editor area.
+     * @param offs
+     *            offset of the text.
+     * @param locale
+     *            locale of the text.
      * @return position of word start on the text component.
      * @throws BadLocationException
-     *         when there is no line found in the text component.
+     *             when there is no line found in the text component.
      */
     public static int getWordStart(JTextComponent c, int offs, Locale locale) throws BadLocationException {
         int result = getWordBoundary(c, offs, locale, false);
@@ -100,11 +105,13 @@ public final class EditorUtils {
      * Determines the end of a word for the given model location. This method
      * skips direction char.
      *
-     * @param c TextComponent of the editor area.
-     * @param offs offset of the text.
+     * @param c
+     *            TextComponent of the editor area.
+     * @param offs
+     *            offset of the text.
      * @return position of the word end on the text component.
      * @throws BadLocationException
-     *         when there is no line found in the text component.
+     *             when there is no line found in the text component.
      */
     @Deprecated
     public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
@@ -115,12 +122,15 @@ public final class EditorUtils {
      * Determines the end of a word for the given model location. This method
      * skips direction char.
      *
-     * @param c TextComponent of the editor area.
-     * @param offs offset of the text.
-     * @param locale locale of the text.
+     * @param c
+     *            TextComponent of the editor area.
+     * @param offs
+     *            offset of the text.
+     * @param locale
+     *            locale of the text.
      * @return position of the word end on the text component.
      * @throws BadLocationException
-     *         when there is no line found in the text component.
+     *             when there is no line found in the text component.
      */
     public static int getWordEnd(JTextComponent c, int offs, Locale locale) throws BadLocationException {
         int result = getWordBoundary(c, offs, locale, true);
@@ -133,7 +143,8 @@ public final class EditorUtils {
         return result;
     }
 
-    private static int getWordBoundary(JTextComponent c, int offs, Locale locale, boolean end) throws BadLocationException {
+    private static int getWordBoundary(JTextComponent c, int offs, Locale locale, boolean end)
+            throws BadLocationException {
         int result = offs;
         Element line = Utilities.getParagraphElement(c, offs);
         if (line == null) {
@@ -142,7 +153,7 @@ public final class EditorUtils {
         int lineStart = line.getStartOffset();
         Document doc = c.getDocument();
         int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
-        if  (lineEnd - lineStart > 0) {
+        if (lineEnd - lineStart > 0) {
             String lineString = doc.getText(lineStart, lineEnd - lineStart);
             result = lineStart + getWordBoundary(locale, lineString, offs - lineStart, end);
         }
@@ -152,12 +163,17 @@ public final class EditorUtils {
     /**
      * Get word boundary.
      * <p>
-     * When the end argument is true, return a word end.
-     * Otherwise, return a start of word.
-     * @param locale locale of the line string.
-     * @param lineString a string of the line.
-     * @param wordPosition target position of the line.
-     * @param end return end of word, otherwise start of word.
+     * When the end argument is true, return a word end. Otherwise, return a
+     * start of word.
+     * 
+     * @param locale
+     *            locale of the line string.
+     * @param lineString
+     *            a string of the line.
+     * @param wordPosition
+     *            target position of the line.
+     * @param end
+     *            return end of word, otherwise start of word.
      * @return index of the word boundary.
      */
     static int getWordBoundary(Locale locale, String lineString, int wordPosition, boolean end) {
@@ -171,7 +187,7 @@ public final class EditorUtils {
         }
         words.following(wordPosition);
         return words.previous();
-}
+    }
 
     /**
      * Check if char is direction char(u202A,u202B,u202C).

@@ -28,11 +28,11 @@ dependencies {
     testRuntimeOnly(libs.json)
     testRuntimeOnly(libs.protobuf)
     testImplementation project(":spellchecker:morfologik")
-    testImplementation project(":spellchecker:hunspell")
+    testImplementation project(":spellchecker:lucene")
 }
 
 test {
     dependsOn tasks.withType(Jar)
     dependsOn project(":spellchecker:morfologik").tasks.withType(Jar)
-    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
+    dependsOn project(":spellchecker:lucene").tasks.withType(Jar)
 }

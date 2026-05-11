@@ -106,7 +106,7 @@ public class Entry {
     /**
      * Returns an instance of {@link Text} class used to populate this entry.
      */
-    private Text getTextInstance() {
+    private @Nullable Text getTextInstance() {
         detectAndEnumerateTags();
         return textInstance;
     }
@@ -569,7 +569,7 @@ public class Entry {
                 Element longElem = get(j);
                 if (longElem instanceof Tag) {
                     Tag longTag = (Tag) longElem;
-                    if (longTag.toShortcut().equals(shortTag.tag)) {
+                    if (shortTag.tag.equals(longTag.toShortcut())) {
                         newTranslatedEntry.add(longTag);
                         pos += shortTag.tag.length();
                         break;

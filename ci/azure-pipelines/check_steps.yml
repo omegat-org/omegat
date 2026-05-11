@@ -2,7 +2,7 @@ steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
     inputs:
-      key: 'gradle | "$(Agent.OS)" | **/build.gradle'
+      key: 'gradle | "$(Agent.OS)" | gradle/wrapper/gradle-wrapper.properties | settings.gradle | **/build.gradle'
       restoreKeys: |
         gradle | "$(Agent.OS)"
         gradle

@@ -43,6 +43,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -203,6 +204,7 @@ public final class CommandCommon {
 
         // Do migration and load various settings. The order is important!
         Preferences.init();
+        StaticUtils.ensureUserScriptsDir();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());

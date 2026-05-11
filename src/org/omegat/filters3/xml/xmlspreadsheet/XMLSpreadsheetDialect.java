@@ -29,6 +29,8 @@ package org.omegat.filters3.xml.xmlspreadsheet;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -38,6 +40,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class XMLSpreadsheetDialect extends DefaultXMLDialect {
     public static final Pattern ROOT_PATTERN = Pattern.compile("Workbook");
 
@@ -61,7 +64,7 @@ public class XMLSpreadsheetDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (!tag.equalsIgnoreCase("Data")) { // We test only "data"
             return false;
         }

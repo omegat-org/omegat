@@ -26,6 +26,7 @@ package org.omegat.gui.issues;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -46,6 +47,7 @@ public class IssueProvidersTest {
     @BeforeClass
     public static void setUpClass() throws IOException {
         TestPreferencesInitializer.init();
+        TestCoreState.resetState();
         // Add a new provider dynamically
         IIssueProvider testingIssueProvider = new TestingIssueProvider();
         testingProviderId = TestingIssueProvider.class.getCanonicalName();

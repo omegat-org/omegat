@@ -25,10 +25,12 @@
 
 package org.omegat.languages.br;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
+@NullMarked
 public final class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";

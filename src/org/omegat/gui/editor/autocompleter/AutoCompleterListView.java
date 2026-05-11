@@ -57,8 +57,13 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     private static final AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
             OStrings.getString("AC_NO_SUGGESTIONS"), null, 0);
 
+    @Deprecated
     public AutoCompleterListView(String name) {
-        super(name);
+        this(name, null);
+    }
+
+    public AutoCompleterListView(String name, AutoCompleter completer) {
+        super(name, completer);
         getList().setFocusable(false);
     }
 
@@ -182,7 +187,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             width += bar.getPreferredSize().width;
         }
         return width;
-    };
+    }
 
     protected void setData(AutoCompleterItem... entries) {
         getList().setListData(entries);
@@ -195,8 +200,8 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
 
     @Override
     public AutoCompleterItem getSelectedValue() {
-        Object item = getList().getSelectedValue();
-        return item == NO_SUGGESTIONS ? null : (AutoCompleterItem) item;
+        AutoCompleterItem item = getList().getSelectedValue();
+        return item == NO_SUGGESTIONS ? null : item;
     }
 
     @Override
@@ -211,7 +216,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
         if (entryList.isEmpty()) {
             setData(NO_SUGGESTIONS);
         } else {
-            setData(entryList.toArray(new AutoCompleterItem[entryList.size()]));
+            setData(entryList.toArray(new AutoCompleterItem[0]));
         }
     }
 

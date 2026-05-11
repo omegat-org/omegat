@@ -28,13 +28,15 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
 
+@NullMarked
 public class AsturianMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
     private static final String DICTIONARY_PATH = "/org/languagetool/resource/ast/hunspell/";

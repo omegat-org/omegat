@@ -52,8 +52,8 @@ public class SpellCheckerMarker implements IMarker {
     }
 
     @Override
-    public @Nullable List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
-            throws Exception {
+    public @Nullable List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
+            String translationText, boolean isActive) throws Exception {
         if (translationText == null) {
             // translation is not displayed
             return null;

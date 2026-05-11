@@ -3,8 +3,12 @@ steps:
     displayName: 'Cache Gradle'
     condition: ${{ parameters.condition }}
     inputs:
-      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
-      path: '$(GRADLE_USER_HOME)'
+      key: 'gradle-docs | "$(Agent.OS)" | gradle/wrapper/gradle-wrapper.properties | build-logic/build.gradle | build-logic/src/main/groovy/org.omegat.document-conventions.gradle | src_docs/manual | src_docs/xsl | src_docs/style'
+      restoreKeys: |
+        gradle-docs | "$(Agent.OS)"
+        gradle | "$(Agent.OS)"
+        gradle
+      path: '$(GRADLE_USER_HOME)/caches/modules-2'
   - task: Gradle@3
     condition: ${{ parameters.condition }}
     inputs:

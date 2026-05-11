@@ -42,6 +42,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +68,10 @@ public class PreferencesXML implements IPrefsPersistence {
     private final File loadFile;
     private final File saveFile;
     private final XmlMapper mapper;
+    // Metadata values retained between load and save (stored as attributes on <preference>)
+    private String prefCreatedAt;
+    private String prefUpdatedAt;
+    private final boolean firstRun;
 
     public PreferencesXML(File loadFile, File saveFile) {
         this.loadFile = loadFile;
@@ -74,6 +80,9 @@ public class PreferencesXML implements IPrefsPersistence {
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        this.firstRun = loadFile == null || !loadFile.exists();
+        this.prefCreatedAt = null;
+        this.prefUpdatedAt = null;
     }
 
     @Override
@@ -91,17 +100,31 @@ public class PreferencesXML implements IPrefsPersistence {
 
     private void loadXml(InputStream is, List<String> keys, List<String> values) throws IOException {
         OmegaT rootComponent = mapper.readValue(is, OmegaT.class);
-        rootComponent.preference.getRows().forEach((key, value) -> {
-            if (value != null) {
-                keys.add(key);
-                values.add(value);
-            }
-        });
+        if (rootComponent != null && rootComponent.preference != null) {
+            Preference pref = rootComponent.preference;
+            this.prefCreatedAt = pref.createdAt;
+            this.prefUpdatedAt = pref.updatedAt;
+            pref.getRows().forEach((key, value) -> {
+                if (value != null) {
+                    keys.add(key);
+                    values.add(value);
+                }
+            });
+        }
     }
 
     @Override
     public void save(final List<String> keys, final List<String> values) throws Exception {
         OmegaT rootComponent = new OmegaT();
+        // Update metadata values (serialized as attributes on <preference>)
+        String nowIso = DateTimeFormatter.ISO_INSTANT.format(Instant.now());
+        if (this.prefCreatedAt == null) {
+            this.prefCreatedAt = nowIso;
+        }
+        this.prefUpdatedAt = nowIso;
+        // Fill preference attributes
+        rootComponent.preference.createdAt = this.prefCreatedAt;
+        rootComponent.preference.updatedAt = this.prefUpdatedAt;
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i) != null) {
                 rootComponent.preference.put(keys.get(i), values.get(i));
@@ -139,7 +162,11 @@ public class PreferencesXML implements IPrefsPersistence {
     @JsonSerialize(using = Serializer.class)
     static class Preference {
         public String version;
-        private Map<String, String> rows = new TreeMap<>();
+        @JacksonXmlProperty(isAttribute = true, localName = "createdAt")
+        public String createdAt;
+        @JacksonXmlProperty(isAttribute = true, localName = "updatedAt")
+        public String updatedAt;
+        private final Map<String, String> rows = new TreeMap<>();
 
         @JsonAnySetter
         public void put(String key, String value) {
@@ -159,15 +186,16 @@ public class PreferencesXML implements IPrefsPersistence {
     /**
      * Custom serializer for Preference class.
      */
-    public static class Serializer extends StdSerializer<Preference> {
+    static class Serializer extends StdSerializer<Preference> {
 
         private static final long serialVersionUID = 1L;
 
-        public Serializer() {
+        @SuppressWarnings("unused")
+        Serializer() {
             this(null);
         }
 
-        public Serializer(Class<Preference> t) {
+        Serializer(Class<Preference> t) {
             super(t);
         }
 
@@ -195,6 +223,12 @@ public class PreferencesXML implements IPrefsPersistence {
                     version = "1.0";
                 }
                 gen.writeStringField("version", version);
+                if (preference.createdAt != null) {
+                    gen.writeStringField("createdAt", preference.createdAt);
+                }
+                if (preference.updatedAt != null) {
+                    gen.writeStringField("updatedAt", preference.updatedAt);
+                }
                 ((ToXmlGenerator) gen).setNextIsAttribute(false);
                 for (Map.Entry<String, String> item : preference.getRows().entrySet()) {
                     if (item.getValue() == null) {
@@ -206,5 +240,25 @@ public class PreferencesXML implements IPrefsPersistence {
                 gen.writeEndObject();
             }
         }
+    }
+
+    // -------- Public accessors for metadata --------
+
+    /** Returns true if there was no existing preferences file at init time. */
+    @Override
+    public boolean isFirstRun() {
+        return firstRun;
+    }
+
+    /** Returns ISO-8601 createdAt timestamp, or null if not available yet. */
+    @Override
+    public String getCreatedAt() {
+        return prefCreatedAt;
+    }
+
+    /** Returns ISO-8601 updatedAt timestamp, or null if not available yet. */
+    @Override
+    public String getUpdatedAt() {
+        return prefUpdatedAt;
     }
 }

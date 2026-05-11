@@ -26,12 +26,14 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.master.FilterMaster;
@@ -43,14 +45,20 @@ import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.issues.IIssues;
+import org.omegat.gui.issues.IIssueProvider;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CoreState {
 
     protected static volatile CoreState instance = new CoreState();
+
+    private final LongProcessExecutor executor = new LongProcessExecutor("omegat-longprocess");
 
     private IAutoSave saveThread;
 
@@ -59,14 +67,16 @@ public class CoreState {
     }
 
     public void initializeSaveThread() {
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
+        saveThread = new SaveThread();
     }
 
     public void initializeVersionCheckThread() {
         VersionCheckThread th = new VersionCheckThread(10);
         th.start();
+    }
+
+    public LongProcessExecutor getExecutor() {
+        return executor;
     }
 
     public IAutoSave getAutoSave() {
@@ -112,11 +122,27 @@ public class CoreState {
     private SegmentPropertiesArea segmentPropertiesArea;
     private SpellCheckerManager spellCheckerManager;
 
+    // Issues providers registry (per CoreState instance)
+    private List<IIssueProvider> issueProvidersRegistry;
+
     public boolean isProjectLoaded() {
         if (project == null) {
             return false;
         }
         return project.isProjectLoaded();
+    }
+
+    /**
+     * Returns the mutable registry list of issue providers bound to this CoreState instance.
+     * The list is lazily initialized but not pre-populated here to avoid cross-package
+     * visibility issues. Default providers are installed by the IssueProviders facade
+     * in the org.omegat.gui.issues package.
+     */
+    public synchronized List<IIssueProvider> getIssueProvidersRegistry() {
+        if (issueProvidersRegistry == null) {
+            issueProvidersRegistry = new ArrayList<>();
+        }
+        return issueProvidersRegistry;
     }
 
     public IProject getProject() {
@@ -127,11 +153,17 @@ public class CoreState {
         this.project = project;
     }
 
-    public IMainWindow getMainWindow() {
+    public @Nullable IMainWindow getMainWindow() {
         return mainWindow;
     }
 
-    public void setMainWindow(IMainWindow mainWindow) {
+    /**
+     * Sets the main window instance for the application.
+     *
+     * @param mainWindow the instance of IMainWindow to be set as the main window.
+     *                   Can be null when testing.
+     */
+    public void setMainWindow(@Nullable IMainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 

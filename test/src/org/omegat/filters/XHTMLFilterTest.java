@@ -29,6 +29,7 @@ package org.omegat.filters;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.TreeMap;
 
 import org.custommonkey.xmlunit.XMLUnit;
@@ -39,10 +40,12 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
+import org.omegat.filters3.xml.xhtml.XHTMLOptions;
 import org.omegat.util.Language;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+
+import static org.junit.Assert.assertTrue;
 
 public class XHTMLFilterTest extends TestFilterBase {
     @Before
@@ -55,8 +58,7 @@ public class XHTMLFilterTest extends TestFilterBase {
         EntityResolver er = new EntityResolver() {
             @SuppressWarnings("resource")
             @Override
-            public InputSource resolveEntity(String publicId, String systemId)
-                    throws SAXException, IOException {
+            public InputSource resolveEntity(String publicId, String systemId) throws IOException {
                 String filename = new File(systemId).getName();
                 File localFile = new File("test/data/dtd", filename);
                 if (localFile.exists()) {
@@ -79,7 +81,7 @@ public class XHTMLFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), new TreeMap<>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
 
         parse(filter, f);
@@ -89,7 +91,7 @@ public class XHTMLFilterTest extends TestFilterBase {
     public void testTranslate() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), new TreeMap<>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         translateXML(filter, f);
     }
@@ -98,7 +100,7 @@ public class XHTMLFilterTest extends TestFilterBase {
     public void testLoad() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), new TreeMap<>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -116,7 +118,7 @@ public class XHTMLFilterTest extends TestFilterBase {
         XHTMLFilter filter = new XHTMLFilter();
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), new TreeMap<>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -127,7 +129,7 @@ public class XHTMLFilterTest extends TestFilterBase {
         translateXML(filter, f);
 
         Core.getFilterMaster().getConfig().setRemoveTags(true);
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+        filter.isFileSupported(new File(f), new TreeMap<>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
         fi = loadSourceFiles(filter, f);
 
@@ -136,5 +138,25 @@ public class XHTMLFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("en", null, null, null);
         checkMultiNoPrevNext("<c0>This</c0> is <i1>first</i1> line.", null, null, null);
         translateXML(filter, f);
+    }
+
+    @Test
+    public void testBadDocTypeIgnore() throws Exception {
+        String f = "test/data/filters/xhtml/p-000-source.xhtml";
+        String expected = "test/data/filters/xhtml/p-000-source-compress-space.xhtml";
+        var filter = new XHTMLFilter();
+
+        Map<String, String> config = new TreeMap<>();
+        config.put(XHTMLOptions.OPTION_SKIP_META, "true");
+        config.put(XHTMLOptions.OPTION_TRANSLATE_SRC, "true");
+        config.put(XHTMLOptions.OPTION_IGNORE_TAGS, "");
+        config.put(XHTMLOptions.OPTION_IGNORE_DOCTYPE, "true");
+        Core.getFilterMaster().getConfig().setRemoveTags(true);
+
+        assertTrue(filter.isFileSupported(new File(f), config, new FilterContext(new Language("zh_TW"),
+                new Language("en"), false)));
+
+        translate(filter, f, config);
+        compareXML(new File(expected), outFile);
     }
 }

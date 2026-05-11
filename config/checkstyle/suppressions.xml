@@ -137,7 +137,6 @@
     <!-- matching -->
     <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>
     <suppress files="NearString\.java" checks="ParameterNumber"/>
-    <suppress files="LevenshteinDistance\.java" checks="LocalVariableName" lines="147,159"/>
 
     <!-- Aligner, AlignFilePickerController, AlignPanelController -->
     <suppress files="Aligner\.java" checks="ParameterNumber"/>
@@ -158,7 +157,6 @@
     <suppress checks="MethodLength" files="PoFilter\.java"/>
     <suppress checks="(TypeName|MissingSwitchDefault)" files="srtFilter\.java" lines="55,102"/>
     <suppress checks="TypeName" files="XLIFFOptions\.java" lines="67"/>
-    <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="44"/>
     <suppress files="Entry\.java" checks="MethodLength"/>
 

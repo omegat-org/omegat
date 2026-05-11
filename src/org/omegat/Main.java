@@ -44,13 +44,12 @@ import java.util.ResourceBundle;
 
 import org.omegat.cli.LegacyParameters;
 import org.omegat.cli.SubCommands;
+import org.omegat.core.Core;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.RuntimePreferences;
-import picocli.CommandLine;
-
-import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
+import picocli.CommandLine;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -72,7 +71,10 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        // Stage 2: Load plugins with configuration
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
         Map<String, String> pluginConfig = extractPluginConfiguration(args);
         PluginUtils.loadPlugins(pluginConfig);
 
@@ -88,6 +90,7 @@ public final class Main {
             commandLine.usage(System.out);
             return;
         }
+
         int status = commandLine.execute(args);
         if (status != 0) {
             // Should not call exit when starting GUI.

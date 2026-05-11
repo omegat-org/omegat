@@ -32,7 +32,7 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "9.3.1" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version
@@ -177,12 +177,12 @@ dependencies {
         }
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)
 
         implementation(libs.jetbrains.annotations)
+        implementation(libs.jspecify)
 
         implementation(libs.bundles.caffeine) {
             attributes {
@@ -222,6 +222,7 @@ dependencies {
         exclude module: 'protobuf-java'
     }
     testFixturesImplementation(libs.jetbrains.annotations)
+    testFixturesImplementation(libs.jspecify)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)
@@ -349,6 +350,9 @@ distributions {
                 from(tasks.manualZips)
                 from(layout.buildDirectory.dir('docs/manuals'))
             }
+            into('docs/tips') {
+                from('src_docs/tips')
+            }
             from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
             }
@@ -395,21 +399,24 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
-                        'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
-                        'docs_devel/**', 'scripts/**',
-                        'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                        'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                        'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', '.checkstyle'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
+                include 'README.md', 'LICENSE', // readme
+                  'build-logic/**', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
+                  'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', '*.properties',
+                  'ci/iscc', 'ci/osslsigncode', '.checkstyle', // ci related
+                  'src/**/*.java', // main source
+                  'test/**','test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
+                  'scripts/**', // sample scripts
+                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', // submodules
+                  'src_docs/**' // documents
+                exclude '**/.gradle/**', '**/build/**', 'local.properties', '**/out/**'
             }
             from(processResources) {
                 into('src')
             }
-            into('lib/provided/core') {
+            into(providedCoreLibsPath) {
                 from configurations.runtimeClasspath
             }
-            into('lib/provided/module') {
+            into(providedModuleLibsPath) {
                 // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
@@ -434,8 +441,8 @@ makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskNam
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
-    dependsOn linuxDebDist
-    dependsOn linuxRpmDist
+    dependsOn linuxDistDeb
+    dependsOn linuxDistRpm
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
@@ -483,7 +490,7 @@ processResources {
     }
 }
 
-// E.g. when doing `build`, run checks before making distfiles
+// E.g. when doing `build`, run checks before making distribution files
 assemble.mustRunAfter check
 
 allprojects {

@@ -29,6 +29,7 @@ package org.omegat.filters3.xml;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Tag;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
@@ -41,12 +42,12 @@ import org.omegat.util.Language;
  * @author Briac Pilpre
  */
 public class XMLTag extends Tag {
-    private final Language sourceLanguage;
-    private final Language targetLanguage;
+    private final @Nullable Language sourceLanguage;
+    private final @Nullable Language targetLanguage;
 
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, Type type, @Nullable org.xml.sax.Attributes attributes,
-                  Translator translator) {
+    public XMLTag(String tag, @Nullable String shortcut, Type type,
+            @Nullable org.xml.sax.Attributes attributes, Translator translator) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.sourceLanguage = translator.getSourceLanguage();
         this.targetLanguage = translator.getTargetLanguage();
@@ -54,19 +55,20 @@ public class XMLTag extends Tag {
 
     /**
      * Returns the tag in its original form as it was in original document. E.g.
-     * for &lt;strong&gt; tag should return &lt;strong&gt;.
-     * Do specific processing for Open XML documents
+     * for &lt;strong&gt; tag should return &lt;strong&gt;. Do specific
+     * processing for Open XML documents
      */
     @Override
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
-        boolean isRtl = BiDiUtils.isRtl(targetLanguage.getLanguageCode());
+        boolean isRtl = targetLanguage != null && BiDiUtils.isRtl(targetLanguage.getLanguageCode());
         boolean differentDir = isDifferentDirection(isRtl);
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);
 
-        // Skip special (i/b/sz) tags for target language to keep only those from the source language
+        // Skip special (i/b/sz) tags for target language to keep only those
+        // from the source language
         // (e.g don't include <w:bCs/> from the LTR source in the RTL target.)
         if (differentDir && ((isRtl && isSpecialDocxTagRTL) || (!isRtl && isSpecialDocxTagLTR))) {
             return "";
@@ -77,10 +79,12 @@ public class XMLTag extends Tag {
             buf.append("/");
         }
 
-        // In Docx, the bold, italic and fontSize are handled differently for complex
+        // In Docx, the bold, italic and fontSize are handled differently for
+        // complex
         // script
         if (differentDir && isRtl && isSpecialDocxTagLTR) {
-            // For LTR -> RTL, convert the i/b/sz to iCs/bCs/szCs if source and target
+            // For LTR -> RTL, convert the i/b/sz to iCs/bCs/szCs if source and
+            // target
             // languages directionality are different.
             buf.append(getTag()).append("Cs");
         } else if (differentDir && !isRtl && isSpecialDocxTagRTL) {
@@ -90,22 +94,24 @@ public class XMLTag extends Tag {
             buf.append(getTag());
         }
 
-        buf.append(getAttributes());
-
-        // If that's an Open XML document, we preserve spaces for all <w:t> tags
-        if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
-            boolean preserve = false;
-            if (getAttributes() != null) {
-                for (int i = 0; i < getAttributes().size(); i++) {
-                    Attribute oneAttribute = getAttributes().get(i);
-                    if (oneAttribute.getName().equalsIgnoreCase("xml:space")) { // If XML:space is already there
+        Attributes atts = getAttributes();
+        if (atts != null) {
+            buf.append(atts);
+            // If that's an Open XML document, we preserve spaces for all <w:t>
+            // tags
+            if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
+                boolean preserve = false;
+                for (int i = 0; i < atts.size(); i++) {
+                    Attribute oneAttribute = atts.get(i);
+                    // If XML:space is already there
+                    if (oneAttribute.getName().equalsIgnoreCase("xml:space")) {
                         preserve = true; // We do nothing
                         break;
                     }
                 }
-            }
-            if (!preserve) {
-                buf.append(" xml:space=\"preserve\"");
+                if (!preserve) {
+                    buf.append(" xml:space=\"preserve\"");
+                }
             }
         }
 

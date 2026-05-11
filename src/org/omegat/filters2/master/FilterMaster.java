@@ -56,7 +56,9 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -67,6 +69,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -91,6 +94,7 @@ import gen.core.filters.Filters;
  * @author Guido Leenders
  * @author Thomas Cordonnier
  */
+@NullMarked
 public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
@@ -281,7 +285,10 @@ public class FilterMaster {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
         } catch (UnsupportedEncodingException | CharacterCodingException ex) {
             Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
-            Core.getMainWindow().displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            IMainWindow mw = Core.getMainWindow();
+            if (mw != null) {
+                mw.displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -381,7 +388,7 @@ public class FilterMaster {
      *            The file to check
      * @param quick
      *            When true, check only the file name
-     * @return Whether or not the file is supported
+     * @return Whether the file is supported
      */
     public boolean isFileSupported(File file, boolean quick) {
         FilterContext fc = new FilterContext(null, null, true);
@@ -472,7 +479,7 @@ public class FilterMaster {
      * @throws IOException
      *             if an I/O error occurs while reading the configuration file
      */
-    public static Filters loadConfig(File configFile) throws IOException {
+    public static @Nullable Filters loadConfig(File configFile) throws IOException {
         if (!configFile.exists()) {
             return null;
         }
@@ -506,7 +513,7 @@ public class FilterMaster {
      *             If an error occurs while saving the configuration or deleting
      *             the file.
      */
-    public static void saveConfig(Filters config, File configFile) throws IOException {
+    public static void saveConfig(@Nullable Filters config, File configFile) throws IOException {
         if (config == null) {
             FileUtils.deleteQuietly(configFile);
             return;
@@ -589,7 +596,7 @@ public class FilterMaster {
     }
 
     private static String getTargetForSource(String srcRelPath, LookupInformation lookup,
-            Language targetLang) {
+            @Nullable Language targetLang) {
         File srcRelFile = new File(srcRelPath);
         return new File(srcRelFile.getParent(),
                 constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), srcRelFile.getName(),
@@ -651,9 +658,10 @@ public class FilterMaster {
      * @return The changed filename
      */
     private static String constructTargetFilename(String sourceMask, String filename, String pattern,
-            Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
+                                                  @Nullable Language targetLang, @Nullable String sourceEncoding,
+                                                  @Nullable String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
-        int dot = 0;
+        int dot;
         if (lastStarPos >= 0) {
             // bugfix #1204740
             // so where's the dot next to the star
@@ -679,13 +687,15 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_NAMEONLY, nameOnly);
         res = res.replace(AbstractFilter.TFP_EXTENSION, extension);
 
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
-        // Replace also old variable spelling
-        res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        if (targetLang != null) {
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
+            // Replace also old variable spelling
+            res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        }
         //
         // System generation time
         //
@@ -746,16 +756,16 @@ public class FilterMaster {
         java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
         if (sourceMatcher.find()) {
             for (int i = 1; i <= sourceMatcher.groupCount(); i++) {
-                res = res.replaceAll("\\$\\{" + i + "\\}", sourceMatcher.group(i));
+                res = res.replaceAll("\\$\\{" + i + "}", sourceMatcher.group(i));
             }
         }
 
-        String[] splitName = filename.split("\\.");
+        String[] splitName = StringUtils.split(filename, "\\.");
         StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
         StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {
-            res = res.replaceAll("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
-            res = res.replaceAll("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
+            res = res.replaceAll("\\$\\{nameOnly-" + i + "}", nameOnlyBuf.toString());
+            res = res.replaceAll("\\$\\{extension-" + i + "}", extensionBuf.toString());
             if (i + 1 < splitName.length) {
                 nameOnlyBuf.append(".").append(splitName[i + 1]);
                 extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
@@ -876,9 +886,6 @@ public class FilterMaster {
     public static void setOptions(Filter f, Map<String, String> newOptions) {
         f.getOption().clear();
         for (Map.Entry<String, String> en : newOptions.entrySet()) {
-            if (en.getKey() == null) {
-                continue;
-            }
             Filter.Option opt = new Filter.Option();
             opt.setName(en.getKey());
             opt.setValue(en.getValue());

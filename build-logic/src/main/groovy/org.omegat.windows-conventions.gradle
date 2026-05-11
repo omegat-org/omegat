@@ -162,7 +162,7 @@ ext.makeWinTask = { args ->
         into base.distsDirectory
         outputs.file installerWinExe
         dependsOn genDistsTaskName
-        group 'omegat distribution'
+        group = 'omegat distribution'
     }
     assemble.dependsOn distsTaskName
     tasks.win.dependsOn distsTaskName

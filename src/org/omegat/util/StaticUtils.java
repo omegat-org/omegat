@@ -42,7 +42,10 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -109,6 +112,11 @@ public final class StaticUtils {
     private static final String SCRIPT_DIR = "script";
 
     /**
+     * User Scripts directory in application data folder.
+     */
+    private static final String SCRIPTS_DIR = "scripts";
+
+    /**
      * Char which should be used instead protected parts. It should be
      * non-letter char, to be able to have correct words counter. This char can
      * be placed around protected text for separate words inside protected text
@@ -121,7 +129,8 @@ public final class StaticUtils {
      * Contains the location of the script dir containing the exported text
      * files.
      */
-    private static String scriptDir = null;
+    private static volatile String scriptDir = null;
+    private static volatile Path userScriptsDir = null;
 
     /**
      * Check if specified key pressed.
@@ -413,16 +422,112 @@ public final class StaticUtils {
         return home;
     }
 
-    public static String getScriptDir() {
-        // If the script directory has already been determined, return it
-        if (scriptDir != null) {
-            return scriptDir;
-        }
-        scriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
+    /**
+     * Returns the user scripts directory for each OS. It respects user
+     * configuration, then the default.
+     * <dl>
+     * <dt>macOS:</dt>
+     * <dd>~/Library/Application Support/OmegaT/scripts</dd>
+     * <dt>Windows:</dt>
+     * <dd>%APPDATA%/OmegaT/scripts</dd>
+     * <dt>Linux:</dt>
+     * <dd>~/.local/share/OmegaT/scripts</dd>
+     * </dl>
+     */
+    public static String getUserScriptsDir() {
+        return getUserScriptsPath().toString();
+    }
 
+    /**
+     * Returns the user scripts directory for each OS.
+     * <dl>
+     * <dt>macOS:</dt>
+     * <dd>~/Library/Application Support/OmegaT/scripts</dd>
+     * <dt>Windows:</dt>
+     * <dd>%APPDATA%/OmegaT/scripts</dd>
+     * <dt>Linux:</dt>
+     * <dd>~/.local/share/OmegaT/scripts</dd>
+     * </dl>
+     */
+    public static Path getUserScriptsPath() {
+        if (userScriptsDir == null) {
+            synchronized (StaticUtils.class) {
+                if (userScriptsDir == null) {
+                    userScriptsDir = determineUserScriptsPath();
+                }
+            }
+        }
+        return userScriptsDir;
+    }
+
+    private static Path determineUserScriptsPath() {
+        Path scriptsPath = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
+        // ensure directory exists
+        if (Files.exists(scriptsPath)) {
+            return scriptsPath;
+        }
+        // it seems first run.
+        try {
+            Files.createDirectories(scriptsPath);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+            scriptsPath = Paths.get(getConfigDir() + SCRIPT_DIR);
+        }
+        try {
+            // ensure default script files installed
+            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
+            Files.copy(defaultScripts, scriptsPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+        }
+        return scriptsPath;
+    }
+
+    /**
+     * Ensure user scripts directory exists and contains scripts.
+     */
+    public static void ensureUserScriptsDir() {
+        Path userScriptsPath = getUserScriptsPath();
+        if (!Files.exists(userScriptsPath.resolve("application_startup"))) {
+            try {
+                // ensure default script files installed
+                File defaultScripts = Paths.get(installDir(), SCRIPTS_DIR).toFile();
+                FileUtils.copyDirectory(defaultScripts, userScriptsPath.toFile());
+            } catch (IOException e) {
+                // fallback to app install dir which contains default scripts
+                userScriptsDir = Paths.get(installDir() + SCRIPTS_DIR);
+                Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
+            }
+        }
+    }
+
+    /**
+     * Determines and returns the path to the 'script' directory.
+     * <p>
+     * This directory is used to communicate user script and OmegaT core. If the
+     * directory does not exist, it attempts to create it. In case of failure to
+     * create or access the script directory, it defaults to the configuration
+     * directory path.
+     *
+     * @return The absolute path to the script directory, including a trailing
+     *         path separator.
+     */
+    public static String getScriptDir() {
+        if (scriptDir == null) {
+            synchronized (StaticUtils.class) {
+                if (scriptDir == null) {
+                    scriptDir = determinScriptDir();
+                }
+            }
+        }
+        return scriptDir;
+    }
+
+    private static String determinScriptDir() {
+        String localScriptDir = getConfigDir() + SCRIPT_DIR + File.separator;
         try {
             // Check if the directory exists
-            File dir = new File(scriptDir);
+            File dir = new File(localScriptDir);
             if (!dir.exists()) {
                 // Create the directory
                 boolean created = dir.mkdirs();
@@ -431,19 +536,19 @@ public final class StaticUtils {
                 // set the script directory to config directory
                 if (!created) {
                     Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
-                    scriptDir = getConfigDir();
+                    localScriptDir = getConfigDir();
                 }
             }
         } catch (SecurityException e) {
             // The system doesn't want us to write where we want to write
             // reset the script dir to the current config dir
-            scriptDir = getConfigDir();
+            localScriptDir = getConfigDir();
 
             // log the exception, but only after the script dir has been reset
             Log.logErrorRB("SU_SCRIPT_DIR_CREATE_ERROR");
             Log.log(e.toString());
         }
-        return scriptDir;
+        return localScriptDir;
     }
 
     /**
@@ -548,7 +653,7 @@ public final class StaticUtils {
     private static void replaceGlobs(StringBuilder haystack, String needle, String replacement) {
         replacement = "\\E" + replacement + "\\Q";
         int current = 0;
-        int globIndex = 0;
+        int globIndex;
         while ((globIndex = haystack.indexOf(needle, current)) != -1) {
             haystack.replace(globIndex, globIndex + 1, replacement);
             current = globIndex + replacement.length();

@@ -40,6 +40,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -65,6 +68,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Didier Briel
  */
+@NullMarked
 public class GlossaryManager implements DirectoryMonitor.Callback {
 
     /**
@@ -93,12 +97,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
     }
 
-    protected DirectoryMonitor monitor;
+    protected @Nullable DirectoryMonitor monitor;
 
     private final IGlossaries pane;
-    private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
+    private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<>();
 
-    protected File priorityGlossary;
+    protected @Nullable File priorityGlossary;
     protected IGlossary[] externalGlossaries;
 
     public GlossaryManager(final IGlossaries pane) {
@@ -143,7 +147,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void stop() {
-        monitor.fin();
+        if (monitor != null) {
+            monitor.fin();
+        }
         synchronized (this) {
             glossaries.clear();
         }
@@ -173,6 +179,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void forceReloadTBX() {
+        if (monitor == null) {
+            return;
+        }
         Set<File> files = monitor.getExistFiles();
         for (File f : files) {
             if (f.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.EXT_TBX)) {
@@ -188,7 +197,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     /**
      * Loads one glossary file. It chooses and calls the required reader.
      */
-    private List<GlossaryEntry> loadGlossaryFile(File file, boolean isPriority) throws Exception {
+    private @Nullable List<GlossaryEntry> loadGlossaryFile(File file, boolean isPriority) throws Exception {
         String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());

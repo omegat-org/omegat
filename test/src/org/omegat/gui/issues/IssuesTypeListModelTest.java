@@ -24,10 +24,13 @@
  **************************************************************************/
 package org.omegat.gui.issues;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.omegat.util.LocaleRule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -42,6 +45,9 @@ public class IssuesTypeListModelTest {
      * The method groups issues by their types and returns a list of map
      * entries including a summary for all types.
      */
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testCalculateData_NoIssues() {

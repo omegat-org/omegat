@@ -19,7 +19,8 @@ services:
         JDKVER: jdk_17.0.14.0.0+7-1
         GRADLE: 8.13
     depends_on:
-      - server
+      server:
+        condition: service_started
     volumes:
       - type: bind
         source: .
@@ -27,15 +28,17 @@ services:
       - type: volume
         source: keygen
         target: /keys
+        read_only: true
       - type: volume
         source: gradle-cache
         target: /gradle-cache
-    tmpfs:
-      - /tmp
       - /workdir
+    tmpfs:
+      - /tmp:mode=1777
     environment:
       DURATION: ${DURATION:-2400}
       TYPE: ${TYPE:-GIT}
+    user: "${UID:-1000}:${GID:-1000}"
 volumes:
   keygen:
   gradle-cache:

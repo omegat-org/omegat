@@ -1,4 +1,4 @@
-/** :name=Example - GUI Scripting   :description=Example of GUI scripting
+/**
  * 
  * Groovy example of a GUI script
  */

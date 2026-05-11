@@ -50,6 +50,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
@@ -68,9 +70,10 @@ import gen.core.filters.Filters;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class FiltersCustomizerController extends BasePreferencesController {
 
-    private FiltersCustomizerPanel panel;
+    private @Nullable FiltersCustomizerPanel panel;
 
     /**
      * Flag if this customizer shows project specific filters or not
@@ -82,12 +85,12 @@ public class FiltersCustomizerController extends BasePreferencesController {
     /** User-modified filters */
     private final Filters userFilters;
     /** Project-specific filters */
-    private final Filters projectFilters;
+    private final @Nullable Filters projectFilters;
 
-    private FiltersTableModel model;
+    private @Nullable FiltersTableModel model;
 
     /** Filters which editable now. */
-    private Filters editableFilters;
+    private @Nullable Filters editableFilters;
 
     /** Names of filters to mark as in-use in the list */
     private Collection<String> inUseFilters = Collections.emptySet();
@@ -96,8 +99,8 @@ public class FiltersCustomizerController extends BasePreferencesController {
         this(false, FilterMaster.createDefaultFiltersConfig(), Preferences.getFilters(), null);
     }
 
-    public FiltersCustomizerController(boolean projectSpecific, Filters defaultFilters, Filters userFilters,
-            Filters projectFilters) {
+    public FiltersCustomizerController(boolean projectSpecific, Filters defaultFilters, @Nullable Filters userFilters,
+                                       @Nullable Filters projectFilters) {
         this.isProjectSpecific = projectSpecific;
         this.defaultFilters = defaultFilters;
         this.userFilters = userFilters == null ? defaultFilters : userFilters;
@@ -258,7 +261,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
         return !isProjectSpecific || panel.projectSpecificCB.isSelected();
     }
 
-    public Filters getResult() {
+    public @Nullable Filters getResult() {
         if (isEditable()) {
             return editableFilters;
         } else {
@@ -269,7 +272,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
     @SuppressWarnings("serial")
     private class FilterFormatCellRenderer extends DefaultTableCellRenderer {
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+        public Component getTableCellRendererComponent(JTable table, @Nullable Object value, boolean isSelected,
                 boolean hasFocus, int row, int column) {
             Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
                     column);

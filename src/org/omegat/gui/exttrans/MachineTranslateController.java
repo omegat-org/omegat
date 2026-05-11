@@ -97,7 +97,8 @@ public class MachineTranslateController {
     /** Cycle getDisplayedTranslation **/
     private int selectedIndex;
 
-    @Nullable MachineTranslationInfo getDisplayedResult() {
+    @Nullable
+    MachineTranslationInfo getDisplayedResult() {
         if (displayed.isEmpty()) {
             return null;
         }

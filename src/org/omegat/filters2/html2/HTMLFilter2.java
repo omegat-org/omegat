@@ -39,10 +39,11 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -156,7 +157,7 @@ public class HTMLFilter2 extends AbstractFilter {
         try {
             all = new StringBuilder();
             char[] cbuf = new char[1000];
-            int len = -1;
+            int len;
             while ((len = infile.read(cbuf)) > 0) {
                 all.append(cbuf, 0, len);
             }
@@ -194,10 +195,10 @@ public class HTMLFilter2 extends AbstractFilter {
         // Prepare set of attributes that indicate not to translate a tag
         String ignoreTagString = options.getIgnoreTags();
         ignoreTagsAttributes.clear();
-        String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
-        for (String s : ignoreTagsAttributesStringarray) {
-            String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
-            ignoreTagsAttributes.put(keyvalue, "");
+        String[] ignoreTagsAttributesStringArray = StringUtils.split(ignoreTagString, ',');
+        for (String s : ignoreTagsAttributesStringArray) {
+            String keyValue = s.trim().toUpperCase(Locale.ENGLISH);
+            ignoreTagsAttributes.put(keyValue, "");
         }
 
         Parser parser = new Parser();
@@ -214,7 +215,7 @@ public class HTMLFilter2 extends AbstractFilter {
     // ////////////////////////////////////////////////////////////////////////
 
     /** Package-internal processEntry to give it to FilterVisitor */
-    public String privateProcessEntry(String entry, String comment) {
+    public String privateProcessEntry(String entry, @Nullable String comment) {
         if (skipRegExpPattern != null) {
             if (skipRegExpPattern.matcher(entry).matches()) {
                 return entry;

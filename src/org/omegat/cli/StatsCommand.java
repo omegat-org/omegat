@@ -28,7 +28,6 @@ package org.omegat.cli;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatsResult;
@@ -120,7 +119,7 @@ public class StatsCommand implements Callable<Integer> {
         }
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
-        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+        StatsResult projectStats = Statistics.buildProjectStats(p);
         StatOutputFormat statsMode;
 
         if (output == null) {

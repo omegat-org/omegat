@@ -46,6 +46,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Preferences;
@@ -69,7 +70,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     private final int boxSize = getBoxSize(titleFont);
     private final Polygon markerShape = createMarkerShape(boxSize);
     private final Rectangle guidingSquare = new Rectangle(boxSize, boxSize);
-    private List<Marker> markers = null;
+    private @Nullable List<Marker> markers = null;
     private final JLayeredPane parent;
     private final JScrollPane scrollPane;
     private final boolean sourceLangIsRTL;
@@ -119,10 +120,13 @@ public abstract class AlphabeticalMarkers extends JPanel {
             }
 
             // draw marker
-            for (Marker marker : markers) {
-                drawMarker(g2, marker.location, String.valueOf(Character.toChars(marker.title)));
+            if (markers != null) {
+                for (Marker marker : markers) {
+                    if (marker.location != null) {
+                        drawMarker(g2, marker.location, String.valueOf(Character.toChars(marker.title)));
+                    }
+                }
             }
-
             g2.dispose();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -241,7 +245,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private static List<Marker> createMarkers(Map<Integer, Point> map) {
-        List<Marker> list = new ArrayList<Marker>();
+        List<Marker> list = new ArrayList<>();
         int title = FIRST_TITLE_LETTER;
         for (Entry<Integer, Point> entry : map.entrySet()) {
             Marker marker = new Marker();
@@ -258,7 +262,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     /**
      * Translate a marker title letter to a segment number. If the letter
      * found, it will be converted to actual segment number string.
-     * @param inputValue
+     * @param inputValue as marker title letter
      * @return if the letter found translated string, otherwise inputValue.
      */
     public String translateSegmentNumber(String inputValue) {
@@ -294,9 +298,11 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private Marker findMarkerByTitle(int title) {
-        for (Marker marker : markers) {
-            if (title == marker.title) {
-                return marker;
+        if (markers != null) {
+            for (Marker marker : markers) {
+                if (title == marker.title) {
+                    return marker;
+                }
             }
         }
         throw new RuntimeException(
@@ -305,7 +311,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
 
     private static class Marker {
         int segmentNumber = 0;
-        Point location = null;
+        @Nullable Point location = null;
         int title = 0;
 
         @Override
@@ -313,7 +319,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
             return this.getClass().getSimpleName() + " {"
                     + this.segmentNumber + ", '"
                     + this.title + "', "
-                    + this.location.toString() + "}";
+                    + (this.location == null ? "" : this.location.toString()) + "}";
         }
     }
 

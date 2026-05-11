@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -41,7 +42,9 @@ import javax.xml.transform.sax.SAXSource;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import org.omegat.util.Log;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
@@ -72,11 +75,24 @@ public final class GlossaryReaderTBX {
     private GlossaryReaderTBX() {
     }
 
-
     static final SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
     static {
         SAX_FACTORY.setNamespaceAware(true);
         SAX_FACTORY.setValidating(false);
+        try {
+            SAX_FACTORY.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+            // Avoid internet connection to validate with external DTD.
+            SAX_FACTORY.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            // Disable external general entities
+            SAX_FACTORY.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            // Disable external parameter entities
+            SAX_FACTORY.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "GLOSSARYREADER_PARSER_ERROR", ex.getMessage());
+        }
+        // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
+        // Entity Attacks"
+        SAX_FACTORY.setXIncludeAware(false);
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {
@@ -146,7 +162,8 @@ public final class GlossaryReaderTBX {
                     result.add(new GlossaryEntry(s, t, comment.toString(), priorityGlossary, origin));
                     addedForLang = true;
                 }
-                if (!addedForLang) { // An entry is created just to get the definition
+                if (!addedForLang) { // An entry is created just to get the
+                                     // definition
                     result.add(new GlossaryEntry(s, "", comment.toString(), priorityGlossary, origin));
                 }
             }
@@ -179,7 +196,8 @@ public final class GlossaryReaderTBX {
                     if ("context".equalsIgnoreCase(dg.getDescrip().getType())) {
                         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
                                 Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT)) {
-                            line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                            line = dg.getDescrip().getType() + ": "
+                                    + readContent(dg.getDescrip().getContent());
                         }
                     } else {
                         line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
@@ -231,15 +249,20 @@ public final class GlossaryReaderTBX {
         return tbxContext.createUnmarshaller();
     }
 
+    private static XMLReader createXMLReader() throws ParserConfigurationException, SAXException {
+        SAXParser parser = SAX_FACTORY.newSAXParser();
+        XMLReader reader = parser.getXMLReader();
+        reader.setEntityResolver(
+                (publicId, systemId) -> new InputSource(new ByteArrayInputStream(new byte[0])));
+        return reader;
+    }
+
     /**
      * Load tbx file, but skip DTD resolving.
      */
     static Martif load(File f) throws Exception {
         Unmarshaller unm = createUnmarshaller();
-
-        SAXParser parser = SAX_FACTORY.newSAXParser();
-
-        NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
+        NamespaceFilter xmlFilter = new NamespaceFilter(createXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
         try (FileInputStream in = new FileInputStream(f)) {
@@ -250,10 +273,7 @@ public final class GlossaryReaderTBX {
 
     static Martif loadFromString(String data) throws Exception {
         Unmarshaller unm = createUnmarshaller();
-
-        SAXParser parser = SAX_FACTORY.newSAXParser();
-
-        NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
+        NamespaceFilter xmlFilter = new NamespaceFilter(createXMLReader());
         xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
 
         try (StringReader in = new StringReader(data)) {
@@ -263,7 +283,8 @@ public final class GlossaryReaderTBX {
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {
-        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(new ByteArrayInputStream(new byte[0]));
+        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(
+                new ByteArrayInputStream(new byte[0]));
 
         public NamespaceFilter(XMLReader xmlReader) {
             super(xmlReader);

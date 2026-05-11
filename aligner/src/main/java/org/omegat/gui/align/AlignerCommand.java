@@ -61,12 +61,11 @@ public class AlignerCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        Core.initializeConsole();
         int status;
         if (gui) {
            status = runGUIAligner();
-
         } else {
+            Core.initializeConsole();
             status = runConsoleAlign();
         }
         return status;

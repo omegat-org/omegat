@@ -25,15 +25,17 @@
 
 package org.omegat.gui.scripting;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,13 +75,20 @@ public class ScriptingTest extends TestCore {
     }
 
     @Test
+    public void testDefaultScriptFolderOnScriptWindow() {
+        ScriptingWindow scriptingWindow = new ScriptingWindow(null);
+        assertNotNull(scriptingWindow.getScriptsFolder());
+        assertEquals(new File(StaticUtils.getUserScriptsDir()), scriptingWindow.getScriptsFolder());
+    }
+
+    @Test
     public void testScriptProperties() throws Exception {
         File scriptDir = new File(StaticUtils.installDir(), ScriptingModule.DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
         File propsDir = new File(scriptDir, "properties");
         assertTrue("propsDir is " + propsDir.toPath(), propsDir.isDirectory());
 
-        List<String> scripts = Collections.emptyList();
+        List<String> scripts;
         try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
             scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
                     .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty())
@@ -87,7 +96,7 @@ public class ScriptingTest extends TestCore {
         }
         assertFalse("Not found any scripts in the folder", scripts.isEmpty());
 
-        for (File f : propsDir.listFiles()) {
+        for (File f : Objects.requireNonNull(propsDir.listFiles())) {
             if (!f.isFile() || f.getName().equals(".DS_Store")) {
                 continue;
             }

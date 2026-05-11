@@ -6,20 +6,20 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/icu4j-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir,
-                includes: ['**/language-ja-*.jar', '**/lucene-gosen-*.jar', '**/icu4j-*.jar'])
+                includes: ['**/language-ja-*.jar', '**/lucene-gosen-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.ja) {
             exclude module: 'languagetool-core'
         }
-        testImplementation(libs.languagetool.core)
-        testRuntimeOnly(libs.json)
-        testRuntimeOnly(libs.protobuf)
         compileOnly(libs.icu4j)
     }
+    testImplementation(libs.languagetool.core)
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
 
     testImplementation(libs.junit4)
     testRuntimeOnly(libs.slf4j.jdk14)

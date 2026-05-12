@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.gui.align;
 
+import org.jspecify.annotations.Nullable;
+import org.omegat.cli.BaseSubCommand;
 import org.omegat.cli.CommandCommon;
 import org.omegat.cli.CommonParameters;
 import org.omegat.core.Core;
@@ -42,17 +44,18 @@ import picocli.CommandLine.Option;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
 /**
  * CLI subcommand to trigger the Aligner feature provided by the aligner module.
  */
 @Command(name = "aligner", description = "Launch the Aligner")
-public class AlignerCommand implements Callable<Integer> {
+public class AlignerCommand extends BaseSubCommand {
 
+    @Nullable
     @CommandLine.Mixin
     CommonParameters params;
 
+    @Nullable
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", description = "The project folder to align.")
     String project;
 
@@ -72,6 +75,9 @@ public class AlignerCommand implements Callable<Integer> {
     }
 
     int runConsoleAlign() throws Exception {
+        if (params == null || project == null) {
+            return 1;
+        }
         CommandCommon.showStartUpLogInfo();
         CommandCommon.logLevelInitialize(params);
         Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
@@ -102,7 +108,6 @@ public class AlignerCommand implements Callable<Integer> {
         }
         CommandCommon.showStartUpLogInfo();
         CommandCommon.logLevelInitialize(params);
-        String dir = project;
         try {
             UIDesignManager.initialize();
         } catch (IOException e) {
@@ -111,7 +116,7 @@ public class AlignerCommand implements Callable<Integer> {
         }
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        AlignerModule.alignerShow(dir);
+        AlignerModule.alignerShow(project);
         return 0;
     }
 }

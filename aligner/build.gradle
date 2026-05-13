@@ -23,4 +23,5 @@ dependencies {
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.picocli)
 }

@@ -38,7 +38,6 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "stats", resourceBundle = "org.omegat.cli.Parameters")
@@ -130,23 +129,12 @@ public class StatsCommand implements Callable<Integer> {
         } else if (format == null) {
             // when no stats type specified, try to detect from file extension,
             // otherwise XML.
-            if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.JSON.getFileExtension())) {
-                statsMode = StatOutputFormat.JSON;
-            } else if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.XML.getFileExtension())) {
-                statsMode = StatOutputFormat.XML;
-            } else if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.TEXT.getFileExtension())) {
-                statsMode = StatOutputFormat.TEXT;
-            } else {
+            statsMode = StatOutputFormat.detect(output);
+            if (statsMode == null) {
                 statsMode = StatOutputFormat.XML;
             }
-        } else if (StatOutputFormat.JSON.toString().equalsIgnoreCase(format)) {
-            statsMode = StatOutputFormat.JSON;
-        } else if (StatOutputFormat.XML.toString().equalsIgnoreCase(format)) {
-            statsMode = StatOutputFormat.XML;
-        } else if (StatOutputFormat.TEXT.toString().equalsIgnoreCase(format)) {
-            statsMode = StatOutputFormat.TEXT;
         } else {
-            statsMode = StatOutputFormat.XML;
+            statsMode = StatOutputFormat.parse(format);
         }
         File statsFile = Paths.get(FileUtil.expandTildeHomeDir(output)).toFile();
         Statistics.writeStat(statsFile, projectStats, statsMode);

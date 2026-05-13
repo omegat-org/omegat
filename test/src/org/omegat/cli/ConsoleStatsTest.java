@@ -37,6 +37,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.omegat.util.OStrings;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,13 +48,14 @@ public class ConsoleStatsTest extends ConsoleTestsCommon {
 
     @Parameterized.Parameters(name = "{index}: statsType={0}")
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] { { "text", "Project Statistics", AssertionType.CONTAINS },
+        return Arrays.asList(new Object[][] { { "text", OStrings.getString("CT_STATS_Project_Statistics"),
+                AssertionType.CONTAINS },
                 { "json", "{\"total\":{\"segments\":0,", AssertionType.STARTS_WITH },
                 { "xml", "<omegat-stats>", AssertionType.LINE_2_STARTS_WITH } });
     }
 
-    private enum AssertionType {
-        CONTAINS, STARTS_WITH, LINE_2_STARTS_WITH;
+    public enum AssertionType {
+        CONTAINS, STARTS_WITH, LINE_2_STARTS_WITH
     }
 
     private final String statsType;

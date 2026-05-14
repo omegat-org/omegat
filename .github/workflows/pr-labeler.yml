@@ -1,0 +1,61 @@
+name: PR Labeler
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Parse PR body and apply labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.pull_request.body;
+            if (!body) return;
+
+            const mapping = {
+              "Bug fix": "bug",
+              "Feature enhancement": "enhancement",
+              "Documentation": "documentation",
+              "Build and release changes": "build/release",
+              "CI/CD changes": "github_actions",
+              "Dependency updates": "dependencies",
+              "Refactoring": "refactoring",
+              "Localization/Translation": "L10N/Translation",
+              "UI/UX changes": "UI"
+            };
+
+            const lines = body.split('\n');
+            let prType = '';
+            let foundTypeHeader = false;
+
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i].trim();
+              if (line.includes('### Pull request type')) {
+                foundTypeHeader = true;
+                continue;
+              }
+              if (foundTypeHeader && line !== '' && !line.startsWith('###')) {
+                prType = line;
+                break;
+              }
+            }
+
+            console.log(`Detected PR type: "${prType}"`);
+
+            const label = mapping[prType];
+            if (label) {
+              console.log(`Applying label: ${label}`);
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [label]
+              });
+            } else {
+              console.log("No matching label found for PR type.");
+            }

@@ -6,7 +6,8 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-api*.jar', '**/jspecify-*.jar', '**/annotations-*.jar'])
+                '**/picocli*.jar', '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-core*.jar',
+                '**/jakarta.xml.bind-api*.jar', '**/jspecify-*.jar', '**/annotations-26*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar'])
     } else {
         // Aligner
@@ -14,7 +15,6 @@ dependencies {
         compileOnly(libs.jetbrains.annotations)
         compileOnly(libs.jspecify)
         compileOnly(libs.jaxb4.api)
-        compileOnly(libs.jaxb4.runtime)
         compileOnly(libs.madlonkay.supertmxmerge)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.commons.io)
@@ -24,4 +24,5 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
     testImplementation(libs.picocli)
+    testRuntimeOnly(libs.jaxb4.runtime)
 }

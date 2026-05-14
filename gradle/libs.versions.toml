@@ -1,16 +1,16 @@
 [versions]
 slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "5.0.3"
+groovy = "5.0.6"
 junit = "4.13.2"
 commons_lang3 = "3.19.0"
 commons_io = "2.19.0"
 commons_codec = "1.17.1"
 commons_text = "1.14.0"
 commons_validator = "1.10.1"
-jsoup = "1.22.1"
+jsoup = "1.22.2"
 icu4j = "78.3"
-stax2api = "4.2.2"
+stax2api = "4.3.0"
 woodstox = "6.5.0"
 languagetool = "6.5-omt2.3"
 languagedetector = "0.6-3"
@@ -24,14 +24,14 @@ jgit = "6.10.1.202505221210-r"
 svnkit = "1.10.11"
 ivy = "2.5.3"
 jackson = "2.19.2"
-bc = "1.81"
+bc = "1.84"
 nashorn = "15.7"
-caffeine = "3.2.3"
+caffeine = "3.2.4"
 wiremock = "3.13.2"
 vldocking = "3.1.1"
 xmlunit = "2.11.0"
 assertj = "3.27.7"
-appbundler = "1.2.1"
+appbundler = "1.4.1"
 supertmxmerge = "2.0.3"
 jasypt = "1.9.3"
 crypto = "0.3.0"
@@ -47,9 +47,9 @@ stardict4j = "1.1.0"
 juniversalchardet = "2.5.0"
 mnemonics = "1.2"
 hunspell = "2.1.2"
-xjc = "4.0.7"
+xjc = "4.0.8"
 jaxb4_api = "4.0.5"
-jaxb = "4.0.7"
+jaxb = "4.0.8"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.6.0"
@@ -153,7 +153,7 @@ omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vld
 xmlunit-core = {group = "org.xmlunit", name = "xmlunit-core", version.ref = "xmlunit"}
 xmlunit-assertj = {group = "org.xmlunit", name = "xmlunit-assertj3", version.ref = "xmlunit"}
 assertj = {group = "org.assertj", name = "assertj-core", version.ref= "assertj"}
-omegat-appbundler = {group = "org.omegat", name = "appbundler", version.ref = "appbundler"}
+evolvedbinary-appbundler = {group = "com.evolvedbinary.appbundler", name = "appbundler", version.ref = "appbundler"}
 madlonkay-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
 jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
 eddsa = {group = "net.i2p.crypto", name = "eddsa", version.ref = "crypto"}

@@ -33,6 +33,10 @@
 
 - 2025003 [Comprehensive Static Code Analysis Strategy](2025003.StaticCodeAnalysis.md)
 
+## Debugging and Logging
+
+- 2024002 [Logging system and logging format](2024002.LoggingSystem.md)
+
 ## Bundled Plugins and Extensions
 
 - 2025006 [User Script Debugging Support Architecture](2025006.UserScriptDebugging.md)

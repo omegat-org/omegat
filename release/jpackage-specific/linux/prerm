@@ -49,7 +49,13 @@ case "$1" in
     if [ -e /usr/bin/omegat ]; then
       rm -f /usr/bin/omegat
     fi
+    set +e
 DESKTOP_COMMANDS_UNINSTALL
+    desktop_commands_status=$?
+    set -e
+    if [ "$desktop_commands_status" -ne 0 ]; then
+        echo "Warning: desktop menu unregistration failed with status $desktop_commands_status; continuing removal." >&2
+    fi
     ;;
 
     failed-upgrade)

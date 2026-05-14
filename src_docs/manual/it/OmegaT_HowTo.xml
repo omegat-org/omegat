@@ -1,19 +1,11 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.how.to">
-  <title xml:id="chapter.how.to.title">Guide all'uso...</title>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_RestoreYourData.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_UseTM.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_TranslateOtherFiles.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_SetUpTeamProject.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_UseTeamProject.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_Install.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_Run.xml"/>
-  
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.how.to">
+   <title xml:id="chapter.how.to.title">Guide all'uso...</title>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_RestoreYourData.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_UseTM.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_TranslateOtherFiles.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_SetUpTeamProject.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_UseTeamProject.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_Install.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="HowTo_Run.xml"/>
 </chapter>

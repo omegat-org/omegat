@@ -46,7 +46,13 @@ package_type=deb
 
 case "$1" in
     configure)
+    set +e
 DESKTOP_COMMANDS_INSTALL
+    desktop_commands_status=$?
+    set -e
+    if [ "$desktop_commands_status" -ne 0]; then
+      echo "Warning: desktop menu registration failed with status $desktop_commands_status; continuing installation." >&2
+    fi
     ln -s -b /opt/omegat-org/omegat/bin/OmegaT /usr/bin/omegat
     ;;
 

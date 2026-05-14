@@ -27,10 +27,10 @@
 package org.omegat.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -51,7 +51,7 @@ public final class TagUtil {
     private TagUtil() {
     }
 
-    private static final Comparator<Tag> TAG_COMPARATOR = (o1, o2) -> o1.pos - o2.pos;
+    private static final Comparator<Tag> TAG_COMPARATOR = Comparator.comparingInt(o -> o.pos);
 
     public static final class Tag {
         public final int pos;
@@ -135,13 +135,10 @@ public final class TagUtil {
                 return false;
             }
             if (tag == null) {
-                if (other.tag != null) {
-                    return false;
-                }
-            } else if (!tag.equals(other.tag)) {
-                return false;
+                return other.tag == null;
+            } else {
+                return tag.equals(other.tag);
             }
-            return true;
         }
 
         @Override
@@ -184,16 +181,19 @@ public final class TagUtil {
 
     public static List<Tag> getAllTagsInSource() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste == null) {
+            return Collections.emptyList();
+        }
         return buildTagList(ste.getSrcText(), ste.getProtectedParts());
     }
 
     public static List<Tag> getAllTagsMissingFromTarget() {
-        List<Tag> result = new ArrayList<Tag>();
+        List<Tag> result = new ArrayList<>();
 
         StringBuilder target = new StringBuilder(Core.getEditor().getCurrentTranslation());
 
         for (Tag tag : getAllTagsInSource()) {
-            int pos = -1;
+            int pos;
             if ((pos = target.indexOf(tag.tag)) != -1) {
                 replaceWith(target, pos, pos + tag.tag.length(), TEXT_REPLACEMENT);
             } else {
@@ -204,7 +204,7 @@ public final class TagUtil {
     }
 
     public static List<String> getGroupedMissingTagsFromTarget() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         List<Tag> tags = getAllTagsMissingFromTarget();
         for (int i = 0; i < tags.size(); i++) {
@@ -243,7 +243,7 @@ public final class TagUtil {
             Tag prev = tags.get(index - 1);
             if (prev.pos + prev.tag.length() == tag.pos) {
                 // This tag is in the middle of a group; return just this tag.
-                return Arrays.asList(tag);
+                return List.of(tag);
             }
         }
         List<Tag> group = new ArrayList<>();
@@ -278,10 +278,11 @@ public final class TagUtil {
         while (true) {
             boolean loopAgain = false;
             for (ProtectedPart pp : protectedParts) {
-                int pos = -1;
+                int pos;
                 if ((pos = sb.indexOf(pp.getTextInSourceSegment())) != -1) {
                     tags.add(new Tag(pos, pp.getTextInSourceSegment()));
-                    replaceWith(sb, pos, pos + pp.getTextInSourceSegment().length(), TEXT_REPLACEMENT);
+                    replaceWith(sb, pos, pos + Objects.requireNonNull(pp.getTextInSourceSegment()).length(),
+                            TEXT_REPLACEMENT);
                     loopAgain = true;
                 }
             }
@@ -315,7 +316,7 @@ public final class TagUtil {
             }
         }
 
-        Collections.sort(resultList, TAG_COMPARATOR);
+        resultList.sort(TAG_COMPARATOR);
     }
 
     /**
@@ -378,7 +379,7 @@ public final class TagUtil {
     /**
      * Find some protected parts according to the given regular expression. E.g.
      * printf variables, java MessageFormat patterns, user defined custom tags.
-     *
+     * <p>
      * These protected parts shouldn't affect statistic but just be displayed in
      * gray in editor and take part in tag validation.
      */
@@ -389,11 +390,12 @@ public final class TagUtil {
             // Remove already defined protected parts first to prevent
             // intersection
             for (ProtectedPart pp : protectedParts) {
-                source = source.replace(pp.getTextInSourceSegment(), StaticUtils.TAG_REPLACEMENT);
+                source = source.replace(Objects.requireNonNull(pp.getTextInSourceSegment()),
+                        StaticUtils.TAG_REPLACEMENT);
             }
             result = protectedParts;
         } else {
-            result = new ArrayList<ProtectedPart>();
+            result = new ArrayList<>();
         }
 
         Matcher placeholderMatcher = protectedPartsPatterns.matcher(source);

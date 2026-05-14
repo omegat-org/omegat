@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    genMac(libs.omegat.appbundler)
+    genMac(libs.evolvedbinary.appbundler)
 }
 
 tasks.register('genMac') {
@@ -44,6 +44,11 @@ tasks.register('genMac') {
                     name: 'All Files',
                     role: 'none')
             plistentry(key: 'JVMRuntime', value: 'jre.bundle')
+        }
+        copy {
+            from 'release/mac-specific/OmegaT.app/'
+            include '**/*.lproj/Localizable.strings'
+            into "${outDir}/${appName}.app/"
         }
     }
 }
@@ -133,7 +138,6 @@ ext.makeMacTask = { args ->
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
         group = 'distribution'
-        dependsOn tasks.named('hunspellSignedJar')
     }
 
     def signedInstallTask = tasks.register(signedInstallTaskName, Sync) {
@@ -164,7 +168,7 @@ ext.makeMacTask = { args ->
             }
         }
         group = 'distribution'
-        dependsOn hunspellSignedJar
+        dependsOn tasks.named('hunspellSignedJar')
     }
     parentTask.dependsOn installTask
 }

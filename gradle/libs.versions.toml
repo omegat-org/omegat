@@ -31,7 +31,7 @@ wiremock = "3.13.2"
 vldocking = "3.1.1"
 xmlunit = "2.11.0"
 assertj = "3.27.7"
-appbundler = "1.2.1"
+appbundler = "1.4.1"
 supertmxmerge = "2.0.3"
 jasypt = "1.9.3"
 crypto = "0.3.0"
@@ -153,7 +153,7 @@ omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vld
 xmlunit-core = {group = "org.xmlunit", name = "xmlunit-core", version.ref = "xmlunit"}
 xmlunit-assertj = {group = "org.xmlunit", name = "xmlunit-assertj3", version.ref = "xmlunit"}
 assertj = {group = "org.assertj", name = "assertj-core", version.ref= "assertj"}
-omegat-appbundler = {group = "org.omegat", name = "appbundler", version.ref = "appbundler"}
+evolvedbinary-appbundler = {group = "com.evolvedbinary.appbundler", name = "appbundler", version.ref = "appbundler"}
 madlonkay-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
 jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
 eddsa = {group = "net.i2p.crypto", name = "eddsa", version.ref = "crypto"}

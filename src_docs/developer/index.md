@@ -32,7 +32,6 @@
 * [OmegaT internals](21.OmegaTInternals.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
-* [Plugin Security Subsystem](24.PluginSecurity.md)
 * [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)

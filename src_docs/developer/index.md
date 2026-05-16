@@ -24,6 +24,7 @@
 * [How to make filter plugin](11.HowToCreateFilterPlugin.md)
 * [Setup your plugin project](15.SetupPluginProject.md)
 * [Loading Plugins](17.LoadingPlugins.md)
+* [Plugin security architecture](24.PluginSecurity.md)
 * [Plugin manifest](19.PluginManifest.md)
 * [How to make Machine Translation connector plugin](12.HowToMakeMTConnector.md)
 

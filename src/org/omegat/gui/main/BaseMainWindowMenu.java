@@ -116,7 +116,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
-                              final BaseMainWindowMenuHandler mainWindowMenuHandler) {
+            final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
@@ -247,6 +247,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE");
         projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT");
         projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT");
+        projectExportBilingualMenuItem = createMenuItem("TF_MENU_FILE_EXPORT_BILINGUAL");
+        projectImportBilingualMenuItem = createMenuItem("TF_MENU_FILE_IMPORT_BILINGUAL");
         projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT");
         projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
         projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
@@ -467,6 +469,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.addSeparator();
         projectMenu.add(projectImportMenuItem);
         projectMenu.add(projectWikiImportMenuItem);
+        projectMenu.addSeparator();
+        projectMenu.add(projectExportBilingualMenuItem);
+        projectMenu.add(projectImportBilingualMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectCommitSourceFiles);
         projectMenu.add(projectCommitTargetFiles);
@@ -728,9 +733,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Code for dispatching events from components to event handlers.
      *
      * @param action
-     *            ActionCommand of triggering menu item
+     *                  ActionCommand of triggering menu item
      * @param modifiers
-     *            Modifier key flags (can be zero)
+     *                  Modifier key flags (can be zero)
      */
     @Override
     public void invokeAction(String action, int modifiers) {
@@ -742,9 +747,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Create menu instance and set title.
      *
      * @param titleKey
-     *            title name key in the resource bundle
+     *                 title name key in the resource bundle
      * @param name
-     *            component name
+     *                 component name
      * @return menu instance
      */
     protected JMenu createMenu(String titleKey, String name) {
@@ -761,7 +766,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Create menu item instance and set title.
      *
      * @param titleKey
-     *            title name key in resource bundle
+     *                 title name key in resource bundle
      * @return menu item instance
      */
     protected JMenuItem createMenuItem(String titleKey) {
@@ -775,7 +780,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Create menu item instance and set title.
      *
      * @param titleKey
-     *            title name key in resource bundle
+     *                 title name key in resource bundle
      * @return menu item instance
      */
     protected JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
@@ -789,7 +794,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Create menu item instance and set title.
      *
      * @param titleKey
-     *            title name key in resource bundle
+     *                 title name key in resource bundle
      * @return menu item instance
      */
     protected JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
@@ -822,7 +827,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Enable or disable items depend of project open or close.
      *
      * @param isProjectOpened
-     *            project open status: true if opened, false if closed
+     *                        project open status: true if opened, false if closed
      */
     protected void onProjectStatusChanged(final boolean isProjectOpened) {
 
@@ -865,20 +870,20 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     protected JMenuItem getItemForPreference(String preference) {
         switch (preference) {
-        case Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY:
-            return optionsAutoCompleteShowAutomaticallyItem;
-        case Preferences.AC_HISTORY_COMPLETION_ENABLED:
-            return optionsAutoCompleteHistoryCompletionMenuItem;
-        case Preferences.AC_HISTORY_PREDICTION_ENABLED:
-            return optionsAutoCompleteHistoryPredictionMenuItem;
-        case Preferences.MT_AUTO_FETCH:
-            return optionsMTAutoFetchCheckboxMenuItem;
-        case Preferences.DICTIONARY_FUZZY_MATCHING:
-            return optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
-        case Preferences.GLOSSARY_STEMMING:
-            return optionsGlossaryFuzzyMatchingCheckBoxMenuItem;
-        default:
-            return null;
+            case Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY:
+                return optionsAutoCompleteShowAutomaticallyItem;
+            case Preferences.AC_HISTORY_COMPLETION_ENABLED:
+                return optionsAutoCompleteHistoryCompletionMenuItem;
+            case Preferences.AC_HISTORY_PREDICTION_ENABLED:
+                return optionsAutoCompleteHistoryPredictionMenuItem;
+            case Preferences.MT_AUTO_FETCH:
+                return optionsMTAutoFetchCheckboxMenuItem;
+            case Preferences.DICTIONARY_FUZZY_MATCHING:
+                return optionsDictionaryFuzzyMatchingCheckBoxMenuItem;
+            case Preferences.GLOSSARY_STEMMING:
+                return optionsGlossaryFuzzyMatchingCheckBoxMenuItem;
+            default:
+                return null;
         }
     }
 
@@ -994,22 +999,22 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     public JMenu getMenu(MenuExtender.MenuKey marker) {
         switch (marker) {
-        case PROJECT:
-            return projectMenu;
-        case EDIT:
-            return editMenu;
-        case VIEW:
-            return viewMenu;
-        case GOTO:
-            return gotoMenu;
-        case TOOLS:
-            return toolsMenu;
-        case OPTIONS:
-            return optionsMenu;
-        case HELP:
-            return helpMenu;
-        default:
-            return null;
+            case PROJECT:
+                return projectMenu;
+            case EDIT:
+                return editMenu;
+            case VIEW:
+                return viewMenu;
+            case GOTO:
+                return gotoMenu;
+            case TOOLS:
+                return toolsMenu;
+            case OPTIONS:
+                return optionsMenu;
+            case HELP:
+                return helpMenu;
+            default:
+                return null;
         }
     }
 
@@ -1110,6 +1115,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;
+    JMenuItem projectExportBilingualMenuItem;
+    JMenuItem projectImportBilingualMenuItem;
     JMenu projectAccessProjectFilesMenu;
     JMenuItem projectAccessRootMenuItem;
     JMenuItem projectAccessDictionaryMenuItem;

@@ -29,9 +29,6 @@ package org.omegat.gui.editor.chartable;
 import java.awt.Color;
 import java.awt.Point;
 
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import org.omegat.core.Core;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.editor.autocompleter.AutoCompleterTableView;
@@ -46,8 +43,6 @@ import org.omegat.util.Preferences;
 public class CharTableAutoCompleterView extends AutoCompleterTableView {
 
     private final CharTableModel model;
-
-    DefaultTableCellRenderer renderer;
 
     public static void loadPlugins() {
         Core.registerAutoCompleterClass(CharTableAutoCompleterView.class);
@@ -67,8 +62,7 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
         getTable().setModel(model);
         getTable().setShowGrid(true);
         getTable().setGridColor(Color.gray);
-        renderer = (DefaultTableCellRenderer) getTable().getDefaultRenderer(getTable().getColumnClass(0));
-        renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        getTable().setDefaultRenderer(Object.class, new CharTableRenderer());
         setSelection(new Point(0, 0));
     }
 

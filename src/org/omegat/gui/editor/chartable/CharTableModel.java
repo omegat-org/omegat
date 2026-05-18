@@ -37,11 +37,17 @@ import javax.swing.table.AbstractTableModel;
  */
 @SuppressWarnings("serial")
 public class CharTableModel extends AbstractTableModel {
+    public static final char ZERO_WIDTH_SPACE = '\u200B';
+    private static final int DEFAULT_GLYPH_START = 32;
+    private static final int DEFAULT_GLYPH_END = 0xFFF;
+    private static final int DEFAULT_GLYPH_COUNT = DEFAULT_GLYPH_END - DEFAULT_GLYPH_START;
+    private static final char[] EXTRA_DEFAULT_GLYPHS = { ZERO_WIDTH_SPACE };
+
     Font font;
 
     int columnCount = 16;
 
-    int glyphCount = 65535 - 32;
+    int glyphCount = DEFAULT_GLYPH_COUNT + EXTRA_DEFAULT_GLYPHS.length;
 
     StringBuilder data = null;
 
@@ -65,7 +71,7 @@ public class CharTableModel extends AbstractTableModel {
         }
 
         if (data == null) {
-            glyphCount = 0xFFF - 32;
+            glyphCount = DEFAULT_GLYPH_COUNT + EXTRA_DEFAULT_GLYPHS.length;
             this.data = null;
         } else {
             glyphCount = data.length();
@@ -155,8 +161,10 @@ public class CharTableModel extends AbstractTableModel {
         if (value < glyphCount) {
             if (data != null) {
                 return data.charAt(value);
+            } else if (value < DEFAULT_GLYPH_COUNT) {
+                return (char) (value + DEFAULT_GLYPH_START);
             } else {
-                return (char) (value + 32);
+                return EXTRA_DEFAULT_GLYPHS[value - DEFAULT_GLYPH_COUNT];
             }
         } else {
             return null;

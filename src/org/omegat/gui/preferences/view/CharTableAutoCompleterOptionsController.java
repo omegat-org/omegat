@@ -37,6 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 
 import org.omegat.gui.editor.chartable.CharTableModel;
+import org.omegat.gui.editor.chartable.CharTableRenderer;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -72,6 +73,7 @@ public class CharTableAutoCompleterOptionsController extends BasePreferencesCont
     private void initGui() {
         panel = new CharTableAutoCompleterOptionsPanel();
         panel.allCharTable.setModel(allCharModel);
+        panel.allCharTable.setDefaultRenderer(Object.class, new CharTableRenderer());
         panel.allCharTable.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent evt) {
@@ -96,6 +98,7 @@ public class CharTableAutoCompleterOptionsController extends BasePreferencesCont
             }
         });
         panel.selCharTable.setModel(selCharModel);
+        panel.selCharTable.setDefaultRenderer(Object.class, new CharTableRenderer());
         panel.selCharTable.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent evt) {

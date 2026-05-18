@@ -78,11 +78,21 @@ class TerminologyIssueProvider implements IIssueProvider {
         if (glossaryEntries.isEmpty()) {
             return Collections.emptyList();
         }
-        return glossaryEntries.stream().map(glossaryEntry -> {
-            List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
-                    sourceEntry.getProtectedParts(), glossaryEntry);
-            return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, glossaryEntry) : null;
-        }).filter(Objects::nonNull).collect(Collectors.toList());
+        return glossaryEntries.stream()
+                .filter(glossaryEntry -> {
+                    // Bug #1315: skip monolingual glossary entries where all target
+                    // terms are empty. An empty target term is not a real term to
+                    // check against, so raising a warning for it is a false positive.
+                    String[] locTerms = glossaryEntry.getLocTerms(false);
+                    return Arrays.stream(locTerms).anyMatch(t -> !t.isEmpty());
+                })
+                .map(glossaryEntry -> {
+                    List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
+                            sourceEntry.getProtectedParts(), glossaryEntry);
+                    return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, glossaryEntry) : null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     /**

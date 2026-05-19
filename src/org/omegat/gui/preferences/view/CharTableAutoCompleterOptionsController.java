@@ -121,8 +121,8 @@ public class CharTableAutoCompleterOptionsController extends BasePreferencesCont
                 selCharModel.allowOnlyUnique();
             }
         });
-        panel.selectedCharsCheckBox.addActionListener(
-                e -> StaticUIUtils.setHierarchyEnabled(panel.customPanel, panel.selectedCharsCheckBox.isSelected()));
+        panel.selectedCharsCheckBox.addActionListener(e -> StaticUIUtils
+                .setHierarchyEnabled(panel.customPanel, panel.selectedCharsCheckBox.isSelected()));
         panel.enabledCheckBox.addActionListener(e -> updateEnabledness());
         panel.allCharTable.setPreferredScrollableViewportSize(
                 new Dimension(panel.allCharTable.getColumnCount() * COL_WIDTH,
@@ -140,8 +140,10 @@ public class CharTableAutoCompleterOptionsController extends BasePreferencesCont
 
     @Override
     protected void initFromPrefs() {
-        panel.selectedCharsCheckBox.setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS));
-        panel.uniqueCheckBox.setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS));
+        panel.selectedCharsCheckBox
+                .setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS));
+        panel.uniqueCheckBox
+                .setSelected(Preferences.isPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS));
         selCharModel.setData(Preferences.getPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING));
         panel.enabledCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.AC_CHARTABLE_ENABLED,
                 Preferences.AC_CHARTABLE_ENABLED_DEFAULT));
@@ -161,13 +163,15 @@ public class CharTableAutoCompleterOptionsController extends BasePreferencesCont
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, panel.selectedCharsCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS,
+                panel.selectedCharsCheckBox.isSelected());
         String customCharString = selCharModel.getData();
         Preferences.setPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING, customCharString);
         if (customCharString.isEmpty()) {
             Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, false);
         }
-        Preferences.setPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS, panel.uniqueCheckBox.isSelected());
+        Preferences.setPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS,
+                panel.uniqueCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_CHARTABLE_ENABLED, panel.enabledCheckBox.isSelected());
     }
 }

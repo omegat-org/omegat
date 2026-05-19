@@ -32,6 +32,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  * Character table table model
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
@@ -57,7 +58,9 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * set the data to a selected string
-     * @param data the new string
+     *
+     * @param data
+     *            the new string
      * @return true if the data have been replaced.
      */
     public boolean setData(String data) {
@@ -106,8 +109,11 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * Append a new character to the data.
-     * @param c the character
-     * @param checkUnique check for being unique or not
+     *
+     * @param c
+     *            the character
+     * @param checkUnique
+     *            check for being unique or not
      */
     public void appendChar(Character c, boolean checkUnique) {
         char cv = c.charValue();
@@ -125,10 +131,15 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * Remove the selected characters from the model.
-     * @param row1 from row
-     * @param col1 from column
-     * @param row2 to row
-     * @param col2 to column
+     *
+     * @param row1
+     *            from row
+     * @param col1
+     *            from column
+     * @param row2
+     *            to row
+     * @param col2
+     *            to column
      */
     public void removeSelection(int row1, int col1, int row2, int col2) {
         if (data.length() == 0) {
@@ -177,8 +188,11 @@ public class CharTableModel extends AbstractTableModel {
     }
 
     /**
-     * Prevent the use of invalid points in the table (beyond data string length).
-     * @param p the point in question
+     * Prevent the use of invalid points in the table (beyond data string
+     * length).
+     *
+     * @param p
+     *            the point in question
      * @return the modified point.
      */
     public Point modifyPoint(Point p) {

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2026 OmegaT team
+Copyright (C) 2026 burgger
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -38,9 +38,11 @@ public class CharTableRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
             boolean hasFocus, int row, int column) {
-        Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+                column);
         setHorizontalAlignment(SwingConstants.CENTER);
-        if (value instanceof Character && ((Character) value).charValue() == CharTableModel.ZERO_WIDTH_SPACE) {
+        if (value instanceof Character
+                && ((Character) value).charValue() == CharTableModel.ZERO_WIDTH_SPACE) {
             setText(OStrings.getString("AC_CHARTABLE_ZWSP"));
             setToolTipText(OStrings.getString("AC_CHARTABLE_ZWSP_TOOLTIP"));
         } else {

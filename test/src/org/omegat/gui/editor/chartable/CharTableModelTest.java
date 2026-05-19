@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2026 OmegaT team
+Copyright (C) 2026 burgger
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -47,7 +47,8 @@ public class CharTableModelTest {
     @Test
     public void autoCompleterSelectionUsesZeroWidthSpacePayload() {
         CharTableAutoCompleterView view = new CharTableAutoCompleterView(null);
-        Point point = findCharacter((CharTableModel) view.getTable().getModel(), CharTableModel.ZERO_WIDTH_SPACE);
+        Point point = findCharacter((CharTableModel) view.getTable().getModel(),
+                CharTableModel.ZERO_WIDTH_SPACE);
 
         view.setSelection(point);
         AutoCompleterItem selected = view.getSelectedValue();

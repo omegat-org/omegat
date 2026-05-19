@@ -37,6 +37,7 @@ import org.omegat.util.Preferences;
 
 /**
  * Character table auto-completer view.
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */

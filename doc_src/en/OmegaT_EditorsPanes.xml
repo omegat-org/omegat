@@ -792,9 +792,25 @@ Dossier de configuration
     parts in <emphasis role="bold">green</emphasis> (when the adjacent part is a
     space, as above, the part is left uncolored).</para>
 
-    <para>The match also displays three matching percentages.</para>
+    <para>The match also displays three matching percentages, the origin of the
+    match and how many times is the match repeated in the matching data.</para>
+    
+    <para>When a match comes from the project memory, its origin is only specified in
+    two cases:</para>
+    
+    <itemizedlist>
+	    <listitem>
+            <para>If the matching segment is no longer present in the files located in the
+            source folder, it is labeled <emphasis role="bold">Orphan segment</emphasis>.</para>
+        </listitem>
+	    <listitem>
+            <para>If the matching segment exists in the files located in the source folder,
+            as well as in other reference memories, it is labeled <emphasis role="bold">This
+            project</emphasis>.</para>
+        </listitem>
+    </itemizedlist>
 
-    <para>These percentages have the following meaning, in order:</para>
+    <para>The matching percentages have the following meaning, in order:</para>
 
 	<itemizedlist>
       <listitem>

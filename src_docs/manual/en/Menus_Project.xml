@@ -119,8 +119,7 @@
             </keycombo>
          </term>
          <listitem>
-            <para>Saves the project translation memory (
-               <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and closes the
+            <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and closes the
                project.</para>
          </listitem>
       </varlistentry>
@@ -134,8 +133,7 @@
             </keycombo>
          </term>
          <listitem>
-            <para>Saves the project translation memory (
-               <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and synchronizes team
+            <para>Saves the project translation memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"></link>) and synchronizes team
                projects.</para>
             <para>OmegaT automatically saves translations every three minutes as well as
                		when you close the project or quit the program. See the 
@@ -405,11 +403,11 @@
                   <listitem>
                      <para>The current source file is located in the 
                         <link linkend="project.folder.source" endterm="project.folder.source.title"></link> folder.</para>
-                     <para>Opens the file in the associated application if the file exists.
-                        If you press down ALT key during selecting the menu item, opens a folder enclosing
-                        the file, by
-                        OS standard file manager such as finder or file explorer, instead of opening the file.
-                        </para>
+			<para>Opens the file in the associated application if the file exists.</para>
+			<para>To open the folder that encloses the
+			file in the OS file manager, press down the
+			<keycombo><keycap>ALT</keycap></keycombo> key
+			while selecting this menu item.</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -419,11 +417,11 @@
                   <listitem>
                      <para>The current target file is located in the 
                         <link linkend="project.folder.target" endterm="project.folder.target.title"></link> folder.</para>
-                     <para>Opens the file in the associated application if the file exists.
-                        If you press down ALT key during selecting the menu item, opens a folder enclosing
-                        the file, by
-                        OS standard file manager such as finder or file explorer, instead of opening the file.
-                        </para>
+			<para>Opens the file in the associated application if the file exists.</para>
+			<para>To open the folder that encloses the
+			file in the OS file manager, press down the
+			<keycombo><keycap>ALT</keycap></keycombo> key
+			while selecting this menu item.</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -433,11 +431,11 @@
                   <listitem>
                      <para>The writable glossary is located in the 
                         <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"></link> folder.</para>
-                     <para>Opens the file in the associated application if the file exists.
-                        If you press down ALT key during selecting the menu item, opens a folder enclosing
-                        the file, by
-                        OS standard file manager such as finder or file explorer, instead of opening the file.
-                        </para>
+			<para>Opens the file in the associated application if the file exists.</para>
+			<para>To open the folder that encloses the
+			file in the OS file manager, press down the
+			<keycombo><keycap>ALT</keycap></keycombo> key
+			while selecting this menu item.</para>
                   </listitem>
                </varlistentry>
             </variablelist>

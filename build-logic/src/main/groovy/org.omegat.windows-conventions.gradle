@@ -83,7 +83,7 @@ def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.
 def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 tasks.register('win') {
     description = 'Builds the Windows distributions.'
-    group = 'omegat distribution'
+    group = 'distribution'
 }
 ext.makeWinTask = { args ->
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
@@ -162,7 +162,7 @@ ext.makeWinTask = { args ->
         into base.distsDirectory
         outputs.file installerWinExe
         dependsOn genDistsTaskName
-        group = 'omegat distribution'
+        group = 'distribution'
     }
     assemble.dependsOn distsTaskName
     tasks.win.dependsOn distsTaskName

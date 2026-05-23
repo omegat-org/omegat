@@ -30,6 +30,8 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.languages.LanguageModuleTestBase;
 import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -43,7 +45,8 @@ public class HunspellTest extends LanguageModuleTestBase {
     public void testDictionary() throws Exception {
         ISpellChecker checker = new LuceneHunSpellChecker();
         testDictionaryHelper(checker, LANGUAGE, GOOD, BAD);
-        assertThat(checker.suggest(BAD)).as("Get suggestion")
+        List<String> suggestion = suggestWithRetry(checker, BAD, 7);
+        assertThat(suggestion).as("Get suggestion")
                 .contains("holle", "hella", "cello", "hell", "helle", "hallo", "hellt");
     }
 

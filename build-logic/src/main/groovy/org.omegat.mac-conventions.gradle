@@ -149,9 +149,6 @@ ext.makeMacTask = { args ->
                     [exePresent('codesign'), 'codesign command is not present in system.'])
         }
         from(installTask)
-        from(hunspellSignedJar) {
-            into 'OmegaT.app/Contents/Java/lib'
-        }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
         destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${versionPart}-${args.suffix}_Signed"))
         doFirst {

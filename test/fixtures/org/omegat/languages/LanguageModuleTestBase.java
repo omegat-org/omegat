@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -83,6 +84,28 @@ public class LanguageModuleTestBase {
         if (bad != null) {
             assertThat(checker.isCorrect(bad)).as("Spell check for bad word").isFalse();
         }
+    }
+
+    private static final int ATTEMPTS = 5;
+
+    /**
+     * Lucene 8.x {@code Hunspell.suggest()} is internally time-bounded: on cold
+     * JVMs with the dictionary, the first call(s) can exceed the budget on slow
+     * CI runners and return a short or an empty list.
+     * Retry a small number of times so warmed-up code paths and caches yield the
+     * expected suggestion.
+     * A real regression (no expected suggestion ever produced) still fails the
+     * test because the final call's result is returned and asserted on.
+     */
+    public List<String> suggestWithRetry(ISpellChecker checker, String word, int size) {
+        List<String> suggestions = Collections.emptyList();
+        for (int i = 0; i < ATTEMPTS; i++) {
+            suggestions = checker.suggest(word);
+            if (suggestions.size() >= size) {
+                return suggestions;
+            }
+        }
+        return suggestions;
     }
 
     @AfterClass

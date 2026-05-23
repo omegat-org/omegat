@@ -1,3 +1,4 @@
+import java.nio.file.Paths
 
 ext.makeLinuxTask = { args ->
     def distTaskName = "install${args.name.capitalize()}Dist"
@@ -48,4 +49,78 @@ ext.makeLinuxTask = { args ->
     }
     assemble.dependsOn tarTaskName
     parentTask.dependsOn tarTaskName
+}
+
+
+
+// generate DEB package
+tasks.register("linuxDistDeb", Exec) {
+    dependsOn tasks.named('jpackage')
+    dependsOn tasks.named('jpackageAppContent')
+    group = 'distribution'
+    def debVersion = '3'
+    def debArch = 'amd64'
+    if (System.getProperty('os.arch').toLowerCase().contains('aarch64')) {
+        debArch = 'arm64'
+    }
+    inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
+    outputs.files file(layout.buildDirectory
+            .file("distributions/${application.applicationName}_${version}-${debVersion}_${debArch}.deb"))
+    onlyIf { exePresent('dpkg-deb') }
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'deb',
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.png")),
+            '--name', project.property('org.omegat.appName'),
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--dest', file(layout.buildDirectory.file('distributions')),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--resource-dir', file("release/jpackage-specific/"),
+            '--about-url', project.property('org.omegat.url'),
+            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--install-dir', '/opt/omegat-org',
+            '--linux-app-category', 'editors',
+            '--linux-app-release', debVersion,
+            '--linux-deb-maintainer', project.property('org.omegat.developer.email'),
+            '--linux-menu-group', 'Office',
+            '--linux-package-name', 'omegat',
+            '--linux-shortcut')
+}
+
+// generate RPM package
+tasks.register("linuxDistRpm", Exec) {
+    dependsOn tasks.named('jpackage')
+    dependsOn tasks.named('jpackageAppContent')
+    group = 'distribution'
+    def rpmVersion = '3'
+    def rpmArch = 'x86_64'
+    if (System.getProperty('os.arch').toLowerCase().contains('aarch64')) {
+        rpmArch = 'aarch64'
+    }
+    inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
+    outputs.files file(layout.buildDirectory
+            .file("distributions/${application.applicationName}-${version}-${rpmVersion}.${rpmArch}.rpm"))
+    onlyIf { exePresent('rpm') }
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'rpm',
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.png")),
+            '--name', project.property('org.omegat.appName'),
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--dest', file(layout.buildDirectory.file('distributions')),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--about-url', project.property('org.omegat.url'),
+            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--resource-dir', file("release/jpackage-specific/"),
+            '--install-dir', '/opt/omegat-org',
+            '--linux-app-category', 'Application/Editors',
+            '--linux-app-release', rpmVersion,
+            '--linux-menu-group', 'Office',
+            '--linux-package-name', 'omegat',
+            '--linux-rpm-license-type', 'GPLv3+',
+            '--linux-shortcut')
 }

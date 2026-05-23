@@ -1,6 +1,8 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 
+import java.nio.file.Paths
+
 plugins {
     id 'edu.sc.seis.launch4j'
     id 'org.omegat.version'
@@ -170,3 +172,33 @@ ext.makeWinTask = { args ->
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE)
 makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)
+
+tasks.register("windowsDistEXE", Exec) {
+    dependsOn tasks.named('jpackage')
+    dependsOn tasks.named('jpackageAppContent')
+    group = 'distribution'
+    inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
+    outputs.files file(layout.buildDirectory.file("distributions/${application.applicationName}-${version}.exe"))
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'exe',
+            '--win-menu',
+            '--win-dir-chooser',
+            '--win-shortcut',
+            '--win-shortcut-prompt',
+            '--win-console',
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.ico")),
+            '--name', project.property('org.omegat.appName'),
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--dest', file(layout.buildDirectory.file('distributions')),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--about-url', project.property('org.omegat.url'),
+            '--resource-dir', file("release/jpackage-specific/"),
+            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--install-dir', 'C:\\Program Files\\OmegaT'
+    )
+}
+
+

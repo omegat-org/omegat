@@ -1,0 +1,119 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
+
+import java.nio.file.Paths
+
+def omegatJarFilename = jar.archiveFileName.get()
+
+// clean work folder for jpackage
+def jpackageWorkdir = layout.buildDirectory.file('jpackage')
+tasks.register('cleanJpkgWorkdir', Delete) {
+    delete jpackageWorkdir
+}
+
+tasks.register('jars', Sync) {
+    from configurations.runtimeClasspath
+    from(tasks.jar) { include omegatJarFilename }
+    into file(layout.buildDirectory.file('jars'))
+    dependsOn tasks.jar
+}
+
+// prepare jpackage contents
+tasks.register('jpackageAppContentGreetings', Sync) {
+    dependsOn tasks.named('firstSteps')
+
+    from layout.buildDirectory.file('docs/greetings')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
+}
+
+tasks.register('jpackageAppContentManuals', Sync) {
+    dependsOn tasks.named("manualZips")
+
+    from layout.buildDirectory.file('docs/manuals')
+    include '*.zip'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/manuals")
+}
+
+tasks.register('jpackageAppContentDocs', Copy) {
+
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    from("release") {
+        include 'doc-license.txt'
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from("release") {
+        exclude 'doc-license.txt'
+        include '*.txt', '*.html'
+        filter(ReplaceTokens, tokens: [
+                TRANSLATION_NOTICE: ''
+        ])
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+}
+
+tasks.register('jpackageAppContentScripts', Sync) {
+    from 'scripts'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/scripts")
+}
+
+tasks.register('jpackageAppContentImages', Sync) {
+    from 'images'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/images")
+}
+
+tasks.register('jpackageAppContentModules', Sync) {
+    from layout.buildDirectory.file('modules')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/modules")
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+}
+
+tasks.register('jpackageAppContentTips', Sync) {
+    from layout.buildDirectory.file('docs/tips')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/tips")
+    dependsOn tasks.named('tipsHtmls')
+}
+
+tasks.register('jpackageAppContent') {
+    dependsOn tasks.named('jpackageAppContentGreetings')
+    dependsOn tasks.named('jpackageAppContentManuals')
+    dependsOn tasks.named('jpackageAppContentDocs')
+    dependsOn tasks.named('jpackageAppContentImages')
+    dependsOn tasks.named('jpackageAppContentModules')
+    dependsOn tasks.named('jpackageAppContentScripts')
+    dependsOn tasks.named('jpackageAppContentTips')
+}
+
+// construct package contents in standard file tree
+tasks.register('jpackage', Exec) {
+    dependsOn tasks.named('cleanJpkgWorkdir')
+    dependsOn tasks.named('jars')
+
+    inputs.files rootProject.layout.buildDirectory.file('jars')
+    outputs.files rootProject.layout.buildDirectory.file("jpackage/app-image")
+
+    def osName = System.getProperty('os.name').toLowerCase()
+    def icon = 'images/OmegaT.png'
+    if (osName.contains('windows')) {
+        icon = "images/OmegaT.ico"
+    } else if (osName.contains('mac')) {
+        icon = "images/OmegaT.icns"
+    }
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'app-image',
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--icon', icon,
+            '--name', project.property('org.omegat.appName'),
+            '--dest', file(rootProject.layout.buildDirectory.file("jpackage/app-image")),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--input', file(rootProject.layout.buildDirectory.file('jars')),
+            '--main-class', project.property('org.omegat.mainClassName'),
+            '--main-jar', project.property('org.omegat.omegatJarFilename'),
+            '--java-options', "-Xmx1024M",
+            '--java-options', "--add-opens",
+            '--java-options', "java.desktop/sun.awt.X11=ALL-UNNAMED",
+            '--resource-dir', 'release/jpackage-specific/'
+    )
+    finalizedBy tasks.named('jpackageAppContent')
+}

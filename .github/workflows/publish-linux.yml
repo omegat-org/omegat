@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y rpm lftp sshpass
+          sudo apt-get install -y rpm
 
       - name: Download JRE (${{ matrix.arch }})
         run: |
@@ -129,6 +129,11 @@ jobs:
           fi
           # Don't ship VERSION.txt to SourceForge.
           rm -f dist/VERSION.txt
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp sshpass
 
       - name: Setup SSH for SourceForge
         env:

@@ -136,30 +136,17 @@ jobs:
           sudo apt-get install -y lftp sshpass
 
       - name: Setup SSH for SourceForge
-        env:
-          SF_SSH_KEY: ${{ secrets.OMEGAT_CI_RSA }}
-          SF_SSH_PASSPHRASE: ${{ secrets.SOURCEFORGE_KEY_PASS }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
           chmod 600 ~/.ssh/known_hosts
-          # Start the agent and persist its env for later steps
-          eval "$(ssh-agent -s)"
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          # Add the key, supplying the passphrase via sshpass
-          if [ -n "${SF_SSH_PASSPHRASE:-}" ]; then
-            printf '%s\n' "$SF_SSH_KEY" | \
-              sshpass -P "passphrase" -p "$SF_SSH_PASSPHRASE" ssh-add -
-          else
-            printf '%s\n' "$SF_SSH_KEY" | ssh-add -
-          fi
-          ssh-add -l
 
       - name: Upload to SourceForge via lftp/SFTP
         env:
+          SF_SSH_KEY: ${{ secrets.OMEGAT_CI_RSA }}
+          SF_SSH_PASSPHRASE: ${{ secrets.SOURCEFORGE_KEY_PASS }}
           SOURCEFORGE_CI_USER: ${{ secrets.SOURCEFORGE_CI_USER }}
           DEST_DIR: ${{ steps.info.outputs.dest_dir }}
         run: |
@@ -169,12 +156,11 @@ jobs:
           dest="sftp://${SOURCEFORGE_CI_USER}@${SF_HOST}"
           echo "Uploading from $srcdir to $DEST_DIR"
           # Single SFTP connection, sequential transfers, with retry/backoff. 
+          eval "$(ssh-agent -s)"
+          if [ -n "${SF_SSH_PASSPHRASE:-}" ]; then
+            printf '%s\n' "$SF_SSH_KEY" | sshpass -P "passphrase" -p "$SF_SSH_PASSPHRASE" ssh-add -
+          else
+            printf '%s\n' "$SF_SSH_KEY" | ssh-add -
+          fi
           cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; set mirror:parallel-transfer-count 1; mkdir -p '$DEST_DIR'; lcd $srcdir; cd '$DEST_DIR'; mirror -R -v --parallel=1; bye"
           lftp -e "$cmd" "$dest"
-
-      - name: Stop ssh-agent
-        if: always()
-        run: |
-          if [ -n "${SSH_AGENT_PID:-}" ]; then
-            ssh-agent -k || true
-          fi

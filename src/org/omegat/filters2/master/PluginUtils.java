@@ -96,7 +96,8 @@ public final class PluginUtils {
         /** File filters that provide IFilter API. */
         FILTER("filter"),
         /**
-         * Tokenizers, currently bundled, and it is for backward compatibility.
+         * Legacy tokenizer plugin type, kept for backward compatibility;
+         * tokenizers are bundled in current versions.
          */
         TOKENIZER("tokenizer"),
         /** Markers, that provide IMaker, mostly bundled. */
@@ -107,7 +108,7 @@ public final class PluginUtils {
          */
         MACHINETRANSLATOR("machinetranslator"),
         /**
-         * A plugin that changes base of OmegaT system, not recommended.
+         * A plugin that overrides core OmegaT classes; not recommended.
          */
         BASE("base"),
         /**
@@ -157,11 +158,11 @@ public final class PluginUtils {
         }
 
         /**
-         * Get a plugin type by value.
+         * Get the plugin type by value.
          * 
          * @param str
-         *            value of a plugin type.
-         * @return a plugin type by value.
+         *            value of the plugin type.
+         * @return the plugin type by value.
          */
         public static PluginType getTypeByValue(String str) {
             if (!StringUtil.isEmpty(str)) {
@@ -181,9 +182,9 @@ public final class PluginUtils {
         }
 
         /**
-         * Get localized value of a plugin type.
+         * Get localized value of the plugin type.
          * 
-         * @return localized value of a plugin type.
+         * @return localized value of the plugin type.
          */
         public String getLocalizedValue() {
             switch (this) {

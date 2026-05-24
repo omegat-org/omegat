@@ -126,7 +126,7 @@ public final class PluginInformation {
     }
 
     /**
-     * Get a description of plugin features.
+     * Get the description of the plugin features.
      * @return description of plugin features
      */
     public String getDescription() {
@@ -134,15 +134,15 @@ public final class PluginInformation {
     }
 
     /**
-     * Get author(s) of a plugin.
-     * @return author(s) of a plugin
+     * Get the author(s) of the plugin.
+     * @return the author(s) of the plugin
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     * Get category type of plugin.
+     * Get the category type of the plugin.
      * @return category type of plugin as PluginType enum
      */
     public PluginUtils.PluginType getCategory() {
@@ -158,7 +158,7 @@ public final class PluginInformation {
     }
 
     /**
-     * Get manifest URL of plugin jar.
+     * Get the manifest URL of the plugin jar.
      * @return manifest URL of plugin jar
      */
     public URL getUrl() {

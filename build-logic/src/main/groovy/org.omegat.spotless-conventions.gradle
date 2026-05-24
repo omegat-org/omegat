@@ -39,7 +39,7 @@ tasks.register('changedOnBranch') {
 
 tasks.register('spotlessChangedApply') {
     description = 'Applies code formatting to files that have been changed on the current branch.'
-    group = 'omegat workflow'
+    group = 'verification'
     finalizedBy 'spotlessApply'
     dependsOn changedOnBranch
     doFirst {

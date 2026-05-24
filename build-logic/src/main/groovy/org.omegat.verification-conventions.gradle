@@ -144,7 +144,7 @@ tasks.register('testIntegration', JavaExec) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    group = 'omegat workflow'
+    group = 'verification'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     if (System.hasProperty('java.util.logging.config.file')) {
@@ -260,6 +260,7 @@ tasks.register('spotbugsReport') {
             }
         }
     }
+    group = 'verification'
     doLast {
         printReport(rootProject)
         subprojects.each { p ->

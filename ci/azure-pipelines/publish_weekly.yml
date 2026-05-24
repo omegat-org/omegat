@@ -17,9 +17,8 @@ steps:
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
         ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-        chmod 600 ~/.ssh/known_hosts
         cp "$(sshKey.secureFilePath)" ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/config ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
         eval "$(ssh-agent -s)"
         sshpass -P "passphrase" -p "$SSH_KEY_PASS" ssh-add ~/.ssh/id_rsa 
         ssh-add -l

@@ -162,7 +162,7 @@ jobs:
           dest="sftp://${SOURCEFORGE_CI_USER}@${SF_HOST}"
           echo "Uploading from $srcdir to $DEST_DIR"
           # Single SFTP connection, sequential transfers, with retry/backoff. 
-          cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; set mirror:parallel-transfer-count 1; mkdir -p '$dest_dir'; lcd $srcdir; cd '$DEST_DIR'; mirror -R -v --parallel=1; bye"
+          cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; set mirror:parallel-transfer-count 1; mkdir -p '$DEST_DIR'; lcd $srcdir; cd '$DEST_DIR'; mirror -R -v --parallel=1; bye"
           lftp -e "$cmd" "$dest"
 
       - name: Stop ssh-agent

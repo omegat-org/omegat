@@ -20,6 +20,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'omegat-org/omegat' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -80,6 +81,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    if: github.repository == 'omegat-org/omegat'
     concurrency:
       group: sourceforge-upload
       cancel-in-progress: false

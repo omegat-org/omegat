@@ -4,6 +4,7 @@ parameters:
 
 steps:
   - task: DownloadSecureFile@1
+    name: sshKey
     displayName: "Download SSH private key"
     inputs:
       secureFile: omegat-ci-rsa
@@ -12,25 +13,32 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        set -euo pipefail
         mkdir -p ~/.ssh
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/config
-        chmod 600 ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        chmod 600 ~/.ssh/known_hosts
+        cp "$(sshKey.secureFilePath)" ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/config ~/.ssh/id_rsa
+        eval "$(ssh-agent -s)"
+        sshpass -P "passphrase" -p "$SSH_KEY_PASS" ssh-add ~/.ssh/id_rsa 
+        ssh-add -l
+    env:
+      SF_HOST: frs.sourceforge.net
+      SSH_KEY_PASS: $(SOURCEFORGE_KEY_PASS)
   - task: Bash@3
-    displayName: 📂upload to sourceforge file management via SCP/SFTP
+    displayName: 📂upload to sourceforge file management via SFTP
     inputs:
       targetType: 'inline'
       script: |
         sudo apt-get update
-        sudo apt-get install -y lftp
+        sudo apt-get install -y lftp sshpass
         echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
-        ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_KEY_PASS) lftp --env-password -e \"$cmd\" $dest"
+        cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R -v --parallel=1; bye"
+        lftp -e "$cmd" "$dest"
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}

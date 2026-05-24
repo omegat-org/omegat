@@ -1,0 +1,173 @@
+name: Publish Linux Weekly/Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  schedule:
+    # Every Saturday at 13:18 UTC
+    - cron: '18 13 * * 6'
+  workflow_dispatch:
+    inputs:
+      publish_type:
+        description: 'Publish type (release or weekly)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options:
+          - release
+          - weekly
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+            jre_url: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jre_aarch64_linux_hotspot_21.0.9_10.tar.gz
+            gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
+          - arch: amd64
+            runner: ubuntu-latest
+            jre_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jre_x64_linux_hotspot_17.0.17_10.tar.gz
+            gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm lftp sshpass
+
+      - name: Download JRE (${{ matrix.arch }})
+        run: |
+          mkdir -p asset
+          cd asset
+          curl -L -O ${{ matrix.jre_url }}
+
+      - name: Build distributions
+        run: |
+          ./gradlew ${{ matrix.gradle_tasks }} -PassetDir=asset --build-cache -PenvIsCi
+
+      - name: Record project version into artifact
+        run: |
+          set -euo pipefail
+          VERSION=$(./gradlew properties -q | grep "^version:" | awk '{print $2}')
+          test -n "$VERSION" || { echo "Failed to determine version"; exit 1; }
+          mkdir -p build/distributions
+          echo "$VERSION" > build/distributions/VERSION.txt 
+
+      - name: Upload distributions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.arch }}
+          path: build/distributions/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: sourceforge-upload
+      cancel-in-progress: false
+    env:
+      SF_HOST: frs.sourceforge.net
+    steps:
+      - name: Download distributions artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          pattern: dist-*
+          merge-multiple: true
+      - name: List files to upload
+        run: ls -l dist/
+
+      - name: Read Version and Upload Path
+        id: info
+        run: |
+          test -f dist/VERSION.txt || { echo "VERSION.txt missing in artifacts"; exit 1; }
+          VERSION=$(cat dist/VERSION.txt)
+          test -n "$VERSION" || { echo "VERSION.txt is empty"; exit 1; }
+          echo "Detected version: $VERSION"
+          # Decide publish mode:
+          #   - tag push        -> release
+          #   - schedule (cron) -> weekly
+          #   - manual dispatch -> use the publish_type input as fallback
+          case "${{ github.event_name }}" in
+            push)
+              MODE="release"
+              ;;
+            schedule)
+              MODE="weekly"
+              ;;
+            workflow_dispatch)
+              MODE="${{ github.event.inputs.publish_type }}"
+              ;;
+            *)
+              MODE="weekly"
+              ;;
+          esac
+          if [[ "$MODE" == "release" ]]; then
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+          else
+            echo "dest_dir=/home/frs/project/omegat/Weekly" >> $GITHUB_OUTPUT
+          fi
+          # Don't ship VERSION.txt to SourceForge.
+          rm -f dist/VERSION.txt
+
+      - name: Setup SSH for SourceForge
+        env:
+          SF_SSH_KEY: ${{ secrets.OMEGAT_CI_RSA }}
+          SF_SSH_PASSPHRASE: ${{ secrets.SOURCEFORGE_KEY_PASS }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 600 ~/.ssh/known_hosts
+          # Start the agent and persist its env for later steps
+          eval "$(ssh-agent -s)"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          # Add the key, supplying the passphrase via sshpass
+          if [ -n "${SF_SSH_PASSPHRASE:-}" ]; then
+            printf '%s\n' "$SF_SSH_KEY" | \
+              sshpass -P "passphrase" -p "$SF_SSH_PASSPHRASE" ssh-add -
+          else
+            printf '%s\n' "$SF_SSH_KEY" | ssh-add -
+          fi
+          ssh-add -l
+
+      - name: Upload to SourceForge via lftp/SFTP
+        env:
+          SOURCEFORGE_CI_USER: ${{ secrets.SOURCEFORGE_CI_USER }}
+          DEST_DIR: ${{ steps.info.outputs.dest_dir }}
+        run: |
+          set -euo pipefail
+          srcdir="${GITHUB_WORKSPACE}/dist"
+          test -d "$srcdir" || { echo "Source directory not found: $srcdir"; exit 1; }
+          dest="sftp://${SOURCEFORGE_CI_USER}@${SF_HOST}"
+          echo "Uploading from $srcdir to $DEST_DIR"
+          # Single SFTP connection, sequential transfers, with retry/backoff. 
+          cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; set mirror:parallel-transfer-count 1; mkdir -p '$dest_dir'; lcd $srcdir; cd '$DEST_DIR'; mirror -R -v --parallel=1; bye"
+          lftp -e "$cmd" "$dest"
+
+      - name: Stop ssh-agent
+        if: always()
+        run: |
+          if [ -n "${SSH_AGENT_PID:-}" ]; then
+            ssh-agent -k || true
+          fi

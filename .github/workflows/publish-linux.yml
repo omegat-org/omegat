@@ -140,27 +140,21 @@ jobs:
           set -euo pipefail
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+          echo "${{ secrets.OMEGAT_CI_RSA }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
           chmod 600 ~/.ssh/known_hosts
 
       - name: Upload to SourceForge via lftp/SFTP
         env:
-          SF_SSH_KEY: ${{ secrets.OMEGAT_CI_RSA }}
-          SF_SSH_PASSPHRASE: ${{ secrets.SOURCEFORGE_KEY_PASS }}
+          LFTP_PASSWORD: ${{ secrets.SOURCEFORGE_KEY_PASS }}
           SOURCEFORGE_CI_USER: ${{ secrets.SOURCEFORGE_CI_USER }}
-          DEST_DIR: ${{ steps.info.outputs.dest_dir }}
         run: |
           set -euo pipefail
           srcdir="${GITHUB_WORKSPACE}/dist"
+          dest_dir="${{ steps.info.outputs.dest_dir }}"
           test -d "$srcdir" || { echo "Source directory not found: $srcdir"; exit 1; }
           dest="sftp://${SOURCEFORGE_CI_USER}@${SF_HOST}"
-          echo "Uploading from $srcdir to $DEST_DIR"
-          # Single SFTP connection, sequential transfers, with retry/backoff. 
-          eval "$(ssh-agent -s)"
-          if [ -n "${SF_SSH_PASSPHRASE:-}" ]; then
-            printf '%s\n' "$SF_SSH_KEY" | sshpass -P "passphrase" -p "$SF_SSH_PASSPHRASE" ssh-add -
-          else
-            printf '%s\n' "$SF_SSH_KEY" | ssh-add -
-          fi
-          cmd="set sftp:auto-confirm yes; set net:max-retries 5; set net:reconnect-interval-base 10; set net:reconnect-interval-multiplier 2; set mirror:parallel-transfer-count 1; mkdir -p '$DEST_DIR'; lcd $srcdir; cd '$DEST_DIR'; mirror -R -v --parallel=1; bye"
-          lftp -e "$cmd" "$dest"
+          echo "Uploading from $srcdir to $dest_dir"
+          cmd="set net:max-retries 5; mkdir -p '$dest_dir'; lcd $srcdir; cd '$dest_dir'; mirror -R -v; bye"
+          lftp --env-password -e "$cmd" "$dest"

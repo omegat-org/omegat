@@ -10,9 +10,7 @@ dependencies {
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar'])
     } else {
         // Aligner
-        implementation(libs.tokyo.northside.maligna) {
-            exclude module: 'jaxb-core'
-        }
+        implementation(libs.tokyo.northside.maligna)
         compileOnly(libs.jetbrains.annotations)
         compileOnly(libs.jspecify)
         compileOnly(libs.jaxb4.api)

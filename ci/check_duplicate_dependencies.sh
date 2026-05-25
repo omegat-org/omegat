@@ -45,8 +45,11 @@ check_multi_versions() {
     # Typically version starts with a digit or follows a hyphen
     # Example: commons-lang3-3.12.0.jar -> commons-lang3
     # We use a regex to strip everything from the last hyphen followed by a digit
+    # Special case: annotations-26.1.0.jar (JetBrains) and annotations-4.1.1.4.jar (Google Android)
+    # are different libraries.
     local duplicates
     duplicates=$(find "$search_dir" -name "*.jar" 2>/dev/null | xargs -r -n 1 basename | \
+        sed -E 's/^annotations-2*.jar$/google-annotations/; s/^annotations-4.*.jar$/jetbrains-annotations/' | \
         sed -E 's/(-[0-9].*)\.jar$//' | sort | uniq -d)
     
     if [ -n "$duplicates" ]; then

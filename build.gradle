@@ -132,7 +132,9 @@ dependencies {
         implementation(libs.omegat.mnemonics)
 
         // LanguageTool
-        implementation(libs.languagetool.core)
+        implementation(libs.languagetool.core) {
+            exclude module: 'jaxb-core'
+        }
         implementation(libs.icu4j)
 
         // spellchecker dictionary API

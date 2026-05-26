@@ -116,6 +116,19 @@ public class LanguageTest {
         assertTrue(Language.verifySingleLangCode("ar-AE-x-dubai"));
     }
 
+    /**
+     * Test whether languages are treated as space-delimited correctly.
+     */
+    @Test
+    public void testIsSpaceDelimited() {
+        assertTrue(new Language("en").isSpaceDelimited());
+        assertTrue(new Language("fr").isSpaceDelimited());
+
+        assertFalse(new Language("zh").isSpaceDelimited());
+        assertFalse(new Language("ja").isSpaceDelimited());
+        assertFalse(new Language("bo").isSpaceDelimited());
+    }
+
     @Test
     public void testGetLowerCaseLanguageFromLocale_languageAndCountryLocale() {
         Locale.setDefault(LANGUAGE_AND_COUNTRY_LOCALE);

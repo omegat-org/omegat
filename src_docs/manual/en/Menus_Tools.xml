@@ -77,9 +77,7 @@
                      details.</para>
                   <note>
                      <para>Glossary entries with an empty target term are excluded
-                        from terminology checks. Such entries — for example, those in
-                        monolingual glossaries or entries that contain only a source term
-                        and a comment — will not produce false-positive warnings.</para>
+                        from terminology checks.</para>
                   </note>
                </listitem>
                <listitem>

@@ -105,13 +105,6 @@
          three-column lists, with the source term in the first column, an optional
          target term in the second column, and an optional comment in the third
          column.</para>
-      <note>
-         <para>Entries where the target term is empty (for example,
-            <code>source term\t\tcomment</code>) are treated as monolingual entries.
-            They will appear in the Glossary pane but will not be checked by the
-            <guilabel>Terminology Issues</guilabel> checker, so they will not raise
-            false-positive warnings.</para>
-      </note>
       <para>Glossaries can be “tab-separated values” (TSV) or “comma-separated
          values” (CSV) files or can also use the TermBase eXchange (TBX 2)
          format.</para>

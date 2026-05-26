@@ -89,7 +89,7 @@ jobs:
       SF_HOST: frs.sourceforge.net
     steps:
       - name: Download distributions artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: dist/
           pattern: dist-*

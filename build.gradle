@@ -132,7 +132,10 @@ dependencies {
         implementation(libs.omegat.mnemonics)
 
         // LanguageTool
-        implementation(libs.languagetool.core)
+        implementation(libs.languagetool.core) {
+            exclude module: 'jaxb-core'
+            exclude module: 'jcl-over-slf4j'
+        }
         implementation(libs.icu4j)
 
         // spellchecker dictionary API
@@ -142,7 +145,10 @@ dependencies {
         implementation(libs.bundles.lucene)
 
         // Team project server support
-        implementation(libs.bundles.jgit)
+        implementation(libs.bundles.jgit) {
+            exclude module: 'jcl-over-slf4j'
+        }
+        implementation(libs.slf4j.jcl)
 
         // For ed25519 and ecdsa support of ssh, java16+ or BC
         implementation(libs.bundles.ecdsa)
@@ -151,7 +157,9 @@ dependencies {
         implementation(libs.jgit.bc)
 
         // For subversion
-        implementation(libs.svnkit)
+        implementation(libs.svnkit) {
+            exclude module: 'jcl-over-slf4j'
+        }
 
         // Team project conflict resolution
         implementation(libs.madlonkay.supertmxmerge)

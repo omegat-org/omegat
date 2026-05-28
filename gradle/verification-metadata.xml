@@ -4,11 +4,8 @@
       <verify-metadata>true</verify-metadata>
       <verify-signatures>false</verify-signatures>
       <trusted-artifacts>
-         <!-- Source JARs are not executable, safe to skip -->
          <trust group=".*" regex="true" artifact=".*-sources\.jar"/>
          <trust group=".*" regex="true" artifact=".*-javadoc\.jar"/>
-         <trust group="org.omegat" regex="false"/>
-         <trust group="org.omegat.lucene" regex="false"/>
       </trusted-artifacts>
    </configuration>
    <components>

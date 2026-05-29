@@ -33,7 +33,10 @@ import java.util.regex.Pattern;
  * Translates cryptic TMXReader validation error messages into user-friendly
  * descriptions.
  */
-public class TMXReaderErrorMessageTranslator {
+public final class TMXReaderErrorMessageTranslator {
+
+    private TMXReaderErrorMessageTranslator() {
+    }
 
     // Extracts the stable error code before the colon, e.g.
     // "cvc-complex-type.4"
@@ -140,8 +143,9 @@ public class TMXReaderErrorMessageTranslator {
     private static List<String> extractQuotedNames(String message) {
         List<String> result = new ArrayList<>();
         Matcher m = QUOTED_NAMES.matcher(message);
-        while (m.find())
+        while (m.find()) {
             result.add(m.group(1));
+        }
         return result;
     }
 

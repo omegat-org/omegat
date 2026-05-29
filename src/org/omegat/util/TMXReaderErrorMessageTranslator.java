@@ -30,18 +30,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Translates cryptic TMXReader validation error messages into user-friendly descriptions.
+ * Translates cryptic TMXReader validation error messages into user-friendly
+ * descriptions.
  */
 public class TMXReaderErrorMessageTranslator {
 
-    // Extracts the stable error code before the colon, e.g. "cvc-complex-type.4"
+    // Extracts the stable error code before the colon, e.g.
+    // "cvc-complex-type.4"
     // The rest of the message is localized and must NOT be parsed.
-    private static final Pattern ERROR_CODE = Pattern.compile(
-            "^(cvc-[\\w.]+(?:\\.[\\w.]+)*):"
-    );
+    private static final Pattern ERROR_CODE = Pattern.compile("^(cvc-[\\w.]+(?:\\.[\\w.]+)*):");
 
-    // For the namespace-qualified attribute case we need the attribute name and element.
-    // These are proper nouns (attribute/element names from the XML document itself)
+    // For the namespace-qualified attribute case we need the attribute name and
+    // element.
+    // These are proper nouns (attribute/element names from the XML document
+    // itself)
     // and are never translated — safe to parse from any locale.
     private static final Pattern QUOTED_NAMES = Pattern.compile("'([^']+)'");
 
@@ -58,7 +60,8 @@ public class TMXReaderErrorMessageTranslator {
         }
         String code = codeMatcher.group(1);
 
-        // Extract all single-quoted tokens — these are XML names from the document,
+        // Extract all single-quoted tokens — these are XML names from the
+        // document,
         // not translated text, so they are safe regardless of locale.
         List<String> names = extractQuotedNames(rawMessage);
 
@@ -75,10 +78,11 @@ public class TMXReaderErrorMessageTranslator {
             if (names.isEmpty()) {
                 return fallback(line, column, rawMessage, code);
             }
-            return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_COMPLEX_TYPE_2_4", line, column, names.get(0));
+            return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_COMPLEX_TYPE_2_4", line, column,
+                    names.get(0));
         case "cvc-datatype-valid.1.2.1":
-            return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_DATATYPE_VALID", line, column, names.get(0),
-                    names.get(1));
+            return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_DATATYPE_VALID", line, column,
+                    names.get(0), names.get(1));
         case "cvc-enumeration-valid":
             if (names.isEmpty()) {
                 return fallback(line, column, rawMessage, code);
@@ -94,9 +98,10 @@ public class TMXReaderErrorMessageTranslator {
         // If the namespace URI appears in the message it is also quoted.
         // We detect the xml: namespace by its well-known URI.
         String attrLocal = !names.isEmpty() ? names.get(0) : "?";
-        String element   = names.size() > 1 ? names.get(names.size() - 1) : "?";
+        String element = names.size() > 1 ? names.get(names.size() - 1) : "?";
 
-        // Check for the XML namespace URI anywhere in the raw message (never translated)
+        // Check for the XML namespace URI anywhere in the raw message (never
+        // translated)
         boolean isXmlNs = raw.contains(XML_NAMESPACE);
         String attrDisplay = isXmlNs ? "xml:" + attrLocal : attrLocal;
         return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_COMPLEX_TYPE_4", line, column,
@@ -104,15 +109,17 @@ public class TMXReaderErrorMessageTranslator {
     }
 
     private static String describeEnumerationError(int line, int column, String value, String raw) {
-        // The allowed values list uses curly braces {a, b, c} — also not translated
+        // The allowed values list uses curly braces {a, b, c} — also not
+        // translated
         Matcher m = Pattern.compile("\\{([^}]+)}").matcher(raw);
         String allowed = m.find() ? m.group(1) : "(see schema)";
-        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_ENUMERATION_VALID", line, column, value, allowed);
+        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_ENUMERATION_VALID", line, column, value,
+                allowed);
     }
 
     private static String describeUnexpectedAttribute(int line, int column, String attr, String element) {
-        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_COMPLEX_TYPE_3_2_2", line, column,
-                attr, element, suggestForUnexpectedAttribute(attr, element));
+        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_CVC_COMPLEX_TYPE_3_2_2", line, column, attr,
+                element, suggestForUnexpectedAttribute(attr, element));
     }
 
     /** Domain-specific hints for TMX attributes */
@@ -133,7 +140,8 @@ public class TMXReaderErrorMessageTranslator {
     private static List<String> extractQuotedNames(String message) {
         List<String> result = new ArrayList<>();
         Matcher m = QUOTED_NAMES.matcher(message);
-        while (m.find()) result.add(m.group(1));
+        while (m.find())
+            result.add(m.group(1));
         return result;
     }
 
@@ -143,7 +151,9 @@ public class TMXReaderErrorMessageTranslator {
 
     private static String fallback(int line, int column, String raw, String code) {
         // Fallback: strip the error code prefix and return the raw text,
-        // which is still better than the full cvc-... jargon for unrecognised codes.
-        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_FALLBACK", line, column, stripCode(raw, code), code);
+        // which is still better than the full cvc-... jargon for unrecognised
+        // codes.
+        return OStrings.getString("TMX_ERROR_MESSAGE_TRANSLATOR_FALLBACK", line, column, stripCode(raw, code),
+                code);
     }
 }

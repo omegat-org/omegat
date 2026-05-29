@@ -131,7 +131,8 @@ public class TMXReader2 {
         inputFactory.setProperty(IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         inputFactory.setProperty(IS_REPLACING_ENTITY_REFERENCES, false);
         inputFactory.setXMLReporter((message, errorType, info, location) -> {
-            Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(), location.getColumnNumber());
+            Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
+                    location.getColumnNumber());
             Log.log(StringUtil.format("{0}: {1}", message, info));
             warningsCount++;
         });

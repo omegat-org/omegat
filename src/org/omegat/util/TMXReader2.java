@@ -210,12 +210,11 @@ public class TMXReader2 {
             validator.setErrorHandler(xsdErrorHandler);
             validator.validate(new StreamSource(getInputStream(file)));
             if (!xsdErrorHandler.getExceptions().isEmpty()) {
-                StringBuilder errorMessage = new StringBuilder("OmegaT TMX validation failed with the following errors:\n");
+                StringBuilder errorMessage = new StringBuilder(OStrings.getString("TMX_VALIDATOR_ERROR"));
+                errorMessage.append("\n");
                 for (SAXParseException e : xsdErrorHandler.getExceptions()) {
-                    errorMessage.append(String.format("Line %d:%d - %s%n",
-                            e.getLineNumber(),
-                            e.getColumnNumber(),
-                            e.getMessage()));
+                    errorMessage.append(TMXReaderErrorMessageTranslator.translate(e.getLineNumber(),
+                            e.getColumnNumber(), e.getMessage()));
                 }
                 throw new SAXException(errorMessage.toString());
             }

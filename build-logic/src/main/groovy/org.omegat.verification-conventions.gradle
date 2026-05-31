@@ -318,13 +318,18 @@ tasks.register('jacocoIntegrationReport', JacocoReport) {
 }
 
 tasks.register('spotbugsReport') {
+    // Capture at configuration time
+    def rootProjectDir = rootProject.projectDir
+    def rootProjectPath = rootProject.path
+    def subprojectDirs = subprojects.collect { [dir: it.projectDir, path: it.path] }
+
     // Reusable function to check and print the report for a given project
     def printReport = { project ->
         ["main", "test"].each { target ->
-            def reportFile = project.file("build/reports/spotbugs/${target}.txt")
+            def reportFile = new File(projectDir, "build/reports/spotbugs/${target}.txt")
             if (reportFile.exists()) {
                 def sep = "-".repeat(40)
-                def ppath = project.path
+                def ppath = projectPath == ":" ? "OmegaT root project" : projectPath
                 if (ppath.equals(":")) {
                     ppath = "OmegaT root project"
                 }
@@ -338,8 +343,6 @@ tasks.register('spotbugsReport') {
     group = 'verification'
     doLast {
         printReport(rootProject)
-        subprojects.each { p ->
-            printReport(p)
-        }
+        subprojectDirs.each { p -> printReport(p.dir, p.path) }
     }
 }

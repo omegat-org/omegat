@@ -25,7 +25,7 @@ steps:
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot
-        cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
+        cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=2 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
         ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_CI_PASS) lftp --env-password -e \"$cmd\" $dest"
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}

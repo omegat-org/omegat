@@ -45,7 +45,6 @@ genDocIndex.finalizedBy(copyDocIndex)
 
 tasks.register('manualZips') {
     description = 'Builds the zipped manuals to bundle into the application.'
-    group = 'other'
 }
 
 tasks.register('manualHtmls') {

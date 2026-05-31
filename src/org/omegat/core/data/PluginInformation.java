@@ -118,7 +118,7 @@ public final class PluginInformation {
     }
 
     /**
-     * Get a version of the plugin.
+     * Get the version of the plugin.
      * @return version of plugin
      */
     public String getVersion() {

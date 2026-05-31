@@ -31,7 +31,7 @@ steps:
         echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        dest=sftp://$(SOURCEFORGE_CI_USER)@$(SF_HOST)
+        dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         destdir=/home/frs/project/omegat/Weekly
         cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
         lftp -e "$cmd" $dest
@@ -45,7 +45,7 @@ steps:
       script: |
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/manual/
-        dest=sftp://$(SOURCEFORGE_CI_USER)@$(SF_HOST)
+        dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot
         cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"

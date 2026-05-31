@@ -2,17 +2,23 @@ parameters:
   omegatVersion: ''
 
 steps:
+  - task: DownloadSecureFile@1
+    name: sshKey
+    displayName: "Download SSH private key"
+    inputs:
+      secureFile: omegat-ci-rsa
   - task: Bash@3
     displayName: Configure SSH to disable host key checking and store private key
     inputs:
       targetType: 'inline'
       script: |
         mkdir -p ~/.ssh
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/config
-        chmod 600 ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        cp $(sshKey.secureFilePath) ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
+    env:
+      SF_HOST: frs.sourceforge.net
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
     inputs:
@@ -22,10 +28,12 @@ steps:
         sudo apt-get install -q -y lftp
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/manual/
-        dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
+        dest=sftp://$(SOURCEFORGE_CI_USER)@$(SF_HOST)
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}/
         target=/home/project-web/omegat/htdocs/manual-standard
-        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
-        ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_CI_PASS) lftp --env-password -e \"$cmd\" $dest"
+        cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
+        ssh-keygen -p -P "$(SOURCEFORGE_CI_PASSPHRASE)" -N "" -f ~/.ssh/id_rsa
+        lftp -e "$cmd" $dest
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
+      SF_HOST: frs.sourceforge.net

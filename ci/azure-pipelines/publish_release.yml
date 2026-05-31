@@ -18,6 +18,8 @@ steps:
         ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
         cp $(sshKey.secureFilePath) ~/.ssh/id_rsa
         chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
+    env:
+      SF_HOST: frs.sourceforge.net
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SCP/SFTP
     inputs:
@@ -28,7 +30,7 @@ steps:
         echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
+        dest=$(SOURCEFORGE_CI_USER)@$(SF_HOST)
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${OMEGAT_VERSION}/"
         cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
         ssh-keygen -p -P "$(SOURCEFORGE_CI_PASSPHRASE)" -N "" -f ~/.ssh/id_rsa

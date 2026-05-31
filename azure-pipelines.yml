@@ -110,7 +110,6 @@ stages:
         fetchTags: false
       - template: ci/azure-pipelines/test_java17_steps.yml
 
-  # Weekly release steps will be triggered after integration-test succeeded.
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
@@ -134,9 +133,6 @@ stages:
           duration: 600
   - job: WeeklyBuild
     displayName: Build for master weekly
-    dependsOn:
-      - CheckForWeekly
-      - IntegrationTestForWeekly
     pool:
       vmImage: 'ubuntu-24.04'
     steps:
@@ -160,7 +156,10 @@ stages:
           artifact: 'distributions'
 
   - job: WeeklyPublish
-    dependsOn: WeeklyBuild
+    dependsOn:
+      - WeeklyBuild
+      - CheckForWeekly
+      - IntegrationTestForWeekly
     variables:
       omegatVersion: $[ dependencies.WeeklyBuild.outputs['setVersion.version'] ]
     steps:

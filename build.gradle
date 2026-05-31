@@ -93,7 +93,9 @@ dependencies {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
         implementation(libs.commons.text)
-        implementation(libs.commons.validator)
+        implementation(libs.commons.validator) {
+            exclude module: 'commons-logging'
+        }
         implementation(libs.commons.codec)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
@@ -136,7 +138,7 @@ dependencies {
         // LanguageTool
         implementation(libs.languagetool.core) {
             exclude module: 'jaxb-core'
-            exclude module: 'jcl-over-slf4j'
+            exclude module: 'commons-logging'
         }
         implementation(libs.icu4j)
 
@@ -149,6 +151,7 @@ dependencies {
         // Team project server support
         implementation(libs.bundles.jgit) {
             exclude module: 'jcl-over-slf4j'
+            exclude module: 'commons-logging'
         }
         implementation(libs.slf4j.jcl)
 
@@ -218,7 +221,9 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
-    testFixturesImplementation(libs.languagetool.core)
+    testFixturesImplementation(libs.languagetool.core) {
+        exclude module: 'commons-logging'
+    }
     testFixturesImplementation(libs.jetbrains.annotations)
     testFixturesImplementation(libs.jspecify)
 

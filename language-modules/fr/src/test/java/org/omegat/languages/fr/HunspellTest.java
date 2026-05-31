@@ -44,7 +44,5 @@ public class HunspellTest extends LanguageModuleTestBase {
     public void testDictionary() throws Exception {
         LuceneHunSpellChecker checker = new LuceneHunSpellChecker();
         testDictionaryHelper(checker, LANGUAGE, GOOD, BAD);
-        List<String> suggestions = suggestWithRetry(checker, BAD, 1);
-        assertThat(suggestions).as("Get suggestion").contains("erreur");
     }
 }

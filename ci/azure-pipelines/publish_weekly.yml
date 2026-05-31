@@ -16,9 +16,8 @@ steps:
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
         ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
+        cp $(sshKey.secureFilePath) ~/.ssh/id_rsa
         chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
-        ssh-keygen -p -P "$(SOURCEFORGE_CI_PASS)" -N "" -f ~/.ssh/id_rsa
     env:
       SF_HOST: frs.sourceforge.net
   - task: Bash@3
@@ -33,8 +32,9 @@ steps:
         ls -l $srcdir/*
         dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         destdir=/home/frs/project/omegat/Weekly
-        cmd="set net:max-retries 5; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
-        lftp -e "$cmd" $dest"
+        cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
+        ssh-keygen -p -P "$(SOURCEFORGE_CI_PASSPHRASE)" -N "" -f ~/.ssh/id_rsa
+        lftp -e "$cmd" $dest
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
       SF_HOST: frs.sourceforge.net

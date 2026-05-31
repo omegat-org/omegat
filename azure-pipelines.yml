@@ -171,15 +171,12 @@ stages:
         inputs:
           artifact: 'distributions'
           path: '$(Pipeline.Workspace)/build/distributions'
-      - template: ci/azure-pipelines/publish_weekly.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
       - task: DownloadPipelineArtifact@2
         displayName: 'Download docs artifact'
         inputs:
           artifact: 'docs'
           path: '$(Pipeline.Workspace)/build/docs'
-      - template: ci/azure-pipelines/publish_manual_snapshot.yml
+      - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(omegatVersion)
 
@@ -232,17 +229,11 @@ stages:
         inputs:
           artifact: 'distributions'
           path: '$(Pipeline.Workspace)/build/distributions'
-      - template: ci/azure-pipelines/publish_release.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
       - task: DownloadPipelineArtifact@2
         displayName: 'Download docs artifact'
         inputs:
           artifact: 'docs'
           path: '$(Pipeline.Workspace)/build/docs'
-      - template: ci/azure-pipelines/publish_manual.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
-      - template: ci/azure-pipelines/publish_javadoc.yml
+      - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(omegatVersion)

@@ -5,7 +5,6 @@ import net.sf.saxon.lib.ResourceResolverWrappingURIResolver
 import net.sf.saxon.s9api.*
 import org.apache.xerces.jaxp.SAXParserFactoryImpl
 import org.gradle.api.file.FileTree
-import org.gradle.api.file.RegularFile
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
@@ -23,7 +22,7 @@ import javax.xml.transform.stream.StreamSource
 
 @CompileStatic
 @CacheableTask
-class TransformationTask extends AbstractDocumentTask {
+abstract class TransformationTask extends AbstractDocumentTask {
 
     private static final String EXTERNAL_GENERAL_ENTITIES = "http://xml.org/sax/features/external-general-entities"
     private static final String EXTERNAL_PARAMETER_ENTITIES = "http://xml.org/sax/features/external-parameter-entities"

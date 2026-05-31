@@ -24,6 +24,7 @@
 * [How to make filter plugin](11.HowToCreateFilterPlugin.md)
 * [Setup your plugin project](15.SetupPluginProject.md)
 * [Loading Plugins](17.LoadingPlugins.md)
+* [Plugin security architecture](24.PluginSecurity.md)
 * [Plugin manifest](19.PluginManifest.md)
 * [How to make Machine Translation connector plugin](12.HowToMakeMTConnector.md)
 
@@ -32,7 +33,6 @@
 * [OmegaT internals](21.OmegaTInternals.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
-* [Plugin Security Subsystem](24.PluginSecurity.md)
 * [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)

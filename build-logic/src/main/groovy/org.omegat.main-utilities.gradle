@@ -19,3 +19,50 @@ tasks.register('checksums') {
     }
 }
 
+tasks.register('downloadBuildLogicDependencies') {
+    description = 'Downloads build-logic dependencies for offline/enterprise builds'
+    group = 'build setup'
+
+    // List of build-logic dependencies that need to be cached
+    def buildLogicDeps = [
+            'com.github.ben-manes:gradle-versions-plugin:0.52.0',
+            'com.github.spotbugs.snom:spotbugs-gradle-plugin:6.1.5',
+            'com.diffplug.spotless:spotless-plugin-gradle:8.6.0',
+            'edu.sc.seis.launch4j:launch4j:4.0.0',
+            'org.hidetake.ssh:org.hidetake.ssh.gradle.plugin:2.11.2',
+            'net.ltgt.gradle:gradle-errorprone-plugin:4.2.0',
+            'net.ltgt.gradle:gradle-nullaway-plugin:2.2.0',
+            'xerces:xercesImpl:2.12.2',
+            'xml-resolver:xml-resolver:1.2',
+            'org.xmlresolver:xmlresolver:6.0.23',
+            'net.sf.saxon:Saxon-HE:12.9',
+            'org.docbook:docbook-xslTNG:2.7.6',
+            'com.nwalsh:sinclude:5.2.4',
+            'tokyo.northside:whc:3.6.0',
+            'xalan:xalan:2.7.3',
+            'xalan:serializer:2.7.3',
+            // launch4j dependency
+            'org.omegat:launch4j:3.55',
+            'org.omegat:launch4j:3.55:workdir-win32',
+            'org.omegat:launch4j:3.55:workdir-mac',
+            'org.omegat:launch4j:3.55:workdir-linux64',
+            'org.omegat:launch4j:3.55:workdir-linux'
+    ]
+
+    configurations.create('buildLogicDepsCopy') {
+        transitive = true
+    }
+
+    buildLogicDeps.each { dep ->
+        dependencies.add('buildLogicDepsCopy', dep)
+    }
+
+    configurations.buildLogicDepsCopy.resolve().each { file ->
+        copy {
+            from file
+            into layout.settingsDirectory.file('lib/build-logic')
+        }
+    }
+
+    logger.lifecycle("Build-logic dependencies downloaded successfully.")
+}

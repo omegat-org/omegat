@@ -24,6 +24,10 @@ gradlePlugin {
 }
 
 repositories {
+    // Support for offline builds in enterprise environments
+    if (file('../lib/provided/build-logic').exists()) {
+        flatDir { dirs '../lib/build-logic' }
+    }
     mavenCentral()
     // 'repository' for getting docbook xsd
     ivy {

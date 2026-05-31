@@ -18,10 +18,9 @@ steps:
         ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
         cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
         chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
-        ssh-keygen -p -P "$(KEY_PASSWORD)" -N "" -f ~/.ssh/id_rsa
+        ssh-keygen -p -P "$(SOURCEFORGE_CI_PASS)" -N "" -f ~/.ssh/id_rsa
     env:
       SF_HOST: frs.sourceforge.net
-      KEY_PASSWORD: $(SOURCEFORGE_CI_PASS)
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SFTP
     inputs:

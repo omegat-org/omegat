@@ -72,9 +72,13 @@
                   <para>
                      <guilabel>Terminology Issues</guilabel> (optional): detects
                      all the glossary items that are not properly translated. See the
-                     
+
                      <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"></link> preferences for
                      details.</para>
+                  <note>
+                     <para>Glossary entries with an empty target term are excluded
+                        from terminology checks.</para>
+                  </note>
                </listitem>
                <listitem>
                   <para>

@@ -6,6 +6,9 @@ import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.attributes.Usage
+import org.gradle.api.attributes.Category
+import org.gradle.api.attributes.LibraryElements
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.quality.PmdExtension
 import org.gradle.api.tasks.bundling.Jar
@@ -31,6 +34,22 @@ class OmegatModulePlugin implements Plugin<Project> {
         project.configurations.configureEach { conf ->
             if (conf.name == "runtimeClasspath") {
                 conf.canBeResolved = true
+            }
+        }
+
+        project.configurations.create("moduleRuntimeDependencies") {
+            canBeConsumed = true
+            canBeResolved = false
+            attributes {
+                attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage, Usage.JAVA_RUNTIME))
+                attribute(Category.CATEGORY_ATTRIBUTE, project.objects.named(Category, Category.LIBRARY))
+                attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, project.objects.named(LibraryElements, LibraryElements.JAR))
+            }
+        }
+
+        project.plugins.withId('java-library') {
+            project.configurations.named("moduleRuntimeDependencies").configure { conf ->
+                conf.extendsFrom(project.configurations.getByName("runtimeClasspath"))
             }
         }
 
@@ -101,13 +120,16 @@ class OmegatModulePlugin implements Plugin<Project> {
         def validateTask = project.tasks.register("validateModuleMetadata") {
             group = "verification"
             description = "Validate OmegaT module metadata (e.g., org.omegat.module.category)."
-            doLast {
-                def category = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
-                def allowed = resolveAllowedCategoriesFromSource(project)
-                def normalized = category?.toString()?.trim()?.toLowerCase(Locale.ENGLISH)
-                if (!allowed.contains(normalized)) {
-                    throw new GradleException("Invalid org.omegat.module.category '${category}' for project ${project.path}. Allowed values discovered from PluginType: ${allowed.join(', ')}")
-                }
+            // Resolve at configuration time and wire as task inputs
+            def category = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
+            def allowed = resolveAllowedCategoriesFromSource(project)
+            def normalized = category?.toString()?.trim()?.toLowerCase(Locale.ENGLISH)
+            if (!allowed.contains(normalized)) {
+                throw new GradleException(
+                        "Invalid org.omegat.module.category '${category}' " +
+                                "for project ${project.path}. " +
+                                "Allowed values: ${allowed.join(', ')}"
+                )
             }
         }
         project.tasks.named("check").configure { dependsOn(validateTask) }

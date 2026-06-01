@@ -311,6 +311,18 @@ test {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
+// Resolve module dependencies EAGERLY at configuration time
+def moduleLibs = subprojects
+        .findAll { it.subprojects.isEmpty() }
+        .collect {
+            it.configurations.matching {
+                it.name.endsWith('untimeClasspath')
+                        && !it.name.startsWith('test')
+                        && !it.name.startsWith('jaxb')
+            }
+        }
+        .flatten()
+
 distributions {
     main {
         contents {
@@ -412,13 +424,8 @@ distributions {
                 from configurations.runtimeClasspath
             }
             into(providedModuleLibsPath) {
-                // collect project runtime dependencies in all subprojects and sourceSets
-                from {subprojects.findAll { it.getSubprojects().isEmpty()}
-                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
-                                && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
-                        } }
-                }
-           }
+                from(moduleLibs)  // no lazy closure — resolved at config time
+            }
         }
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")

@@ -27,20 +27,29 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
+        set -euo pipefail
+        echo "=== Pre-flight check ==="
+        # Catch missing variable immediately (-u flag alone won't give a nice message)
+        [[ -n "$LFTP_PASSWORD" ]] && echo "✅ LFTP_PASSWORD is set" || { echo "❌ LFTP_PASSWORD is empty — check SOURCEFORGE_CI_PASSPHRASE variable"; exit 1; }
+        # Verify key file exists and passphrase is correct in one shot
+        ssh-keygen -y -f ~/.ssh/id_rsa -P "$LFTP_PASSWORD" > /dev/null && echo "✅ Key + passphrase OK" || { echo "❌ Key or passphrase wrong"; exit 1; }
+        # Upload distributions
         echo "Push OmegaT files to SourceForge file manager"
+        dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${OMEGAT_VERSION}/"
         cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
         lftp --env-password-e "$cmd" $dest
         dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
+        # Upload manuals
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/manual/
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}/
         target=/home/project-web/omegat/htdocs/manual-standard
         cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
         lftp --env-password-e "$cmd" $dest
+        # Upload javadoc
         echo "Push javadoc to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/javadoc/
         destdir=/home/project-web/omegat/htdocs/javadoc/${OMEGAT_VERSION}/

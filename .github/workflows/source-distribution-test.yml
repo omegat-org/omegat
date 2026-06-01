@@ -28,16 +28,13 @@ jobs:
       name: Setup Gradle
     - name: Build source distribution
       run: |
-        ./gradlew sourceDistZip
-        cd build/distributions
-        unzip -q OmegaT_*_Source.zip
+        ./gradlew installSourceDist
     - name: Test source distribution compilation
       run: |
-        cd build/distributions/OmegaT_*_Source
+        cd build/install/OmegaT-source
         chmod +x ./gradlew
         ./gradlew -PenvIsCi=true -Pheadless=true distZip
     - name: check source distribution dependencies duplication
       run: |
         chmod +x ./ci/check_duplicate_dependencies.sh
-        ./ci/check_duplicate_dependencies.sh build/distributions/OmegaT_*_Source
-        
+        ./ci/check_duplicate_dependencies.sh build/install/OmegaT-source

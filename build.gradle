@@ -43,6 +43,7 @@ def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
 def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
 def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
+def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
 
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -77,6 +78,7 @@ sourceSets {
 configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
+    moduleRuntimeLibs
 }
 
 dependencies {
@@ -261,7 +263,14 @@ dependencies {
         // for architectures other than x86_64 on linux
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
-    subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
+    subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
+        jacocoAggregation sub
+        sub.plugins.withId('org.omegat.module') {
+            moduleRuntimeLibs(project(sub.path)) {
+                targetConfiguration = 'moduleRuntimeDependencies'
+            }
+        }
+    }
 }
 
 jar {
@@ -303,13 +312,25 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    archiveFileName.set(project.property('org.omegat.omegatJarFilename'))
+    archiveFileName.set(omegatJarFilename)
 }
 
 test {
     // some test case depends on modules from subproject
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
+
+// Resolve module dependencies EAGERLY at configuration time
+def moduleLibs = subprojects
+        .findAll { it.subprojects.isEmpty() }
+        .collect {
+            it.configurations.matching {
+                it.name.endsWith('untimeClasspath')
+                        && !it.name.startsWith('test')
+                        && !it.name.startsWith('jaxb')
+            }
+        }
+        .flatten()
 
 distributions {
     main {
@@ -382,7 +403,6 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
@@ -412,13 +432,8 @@ distributions {
                 from configurations.runtimeClasspath
             }
             into(providedModuleLibsPath) {
-                // collect project runtime dependencies in all subprojects and sourceSets
-                from {subprojects.findAll { it.getSubprojects().isEmpty()}
-                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
-                                && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
-                        } }
-                }
-           }
+                from(configurations.moduleRuntimeLibs)
+            }
         }
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
@@ -486,16 +501,6 @@ processResources {
 
 // E.g. when doing `build`, run checks before making distribution files
 assemble.mustRunAfter check
-
-allprojects {
-    afterEvaluate {
-        tasks.findByName('compileJava')?.configure {
-            if (project == rootProject) {
-                options.errorprone.allErrorsAsWarnings = true
-            }
-        }
-    }
-}
 
 nexusPublishing.repositories {
     sonatype {

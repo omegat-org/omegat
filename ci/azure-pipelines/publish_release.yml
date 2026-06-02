@@ -5,6 +5,7 @@ parameters:
 steps:
   - task: DownloadSecureFile@1
     displayName: "Download SSH private key"
+    name: sshKey
     inputs:
       secureFile: omegat-ci-rsa
   - task: Bash@3
@@ -12,25 +13,42 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
         mkdir -p ~/.ssh
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/config
-        chmod 600 ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        cp $(sshKey.secureFilePath) ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
+    env:
+      SF_HOST: frs.sourceforge.net
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SCP/SFTP
     inputs:
       targetType: 'inline'
       script: |
-        sudo apt-get update
-        sudo apt-get install -y lftp
+        set -euo pipefail
+        echo "=== Pre-flight check ==="
+        # Catch missing variable immediately (-u flag alone won't give a nice message)
+        [[ -n "$LFTP_PASSWORD" ]] && echo "✅ LFTP_PASSWORD is set" || { echo "❌ LFTP_PASSWORD is empty — check SOURCEFORGE_CI_PASSPHRASE variable"; exit 1; }
+        # Verify key file exists and passphrase is correct in one shot
+        ssh-keygen -y -f ~/.ssh/id_rsa -P "$LFTP_PASSWORD" > /dev/null && echo "✅ Key + passphrase OK" || { echo "❌ Key or passphrase wrong"; exit 1; }
+        # Upload distributions
         echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        dest=$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
+        dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${OMEGAT_VERSION}/"
-        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
-        ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_KEY_PASS) lftp --env-password -e \"$cmd\" $dest"
-    env:
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R --verbose=3 ; bye"
+        lftp --env-password -e \"$cmd\" $dest"
+        # Upload manuals
+        echo "Push manuals to sourceforge project web"
+        srcdir=$(Pipeline.Workspace)/docs
+        destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}/
+        target=/home/project-web/omegat/htdocs/manual-standard
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
+        lftp --env-password -e "$cmd" $dest
+      env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
+      SF_HOST: frs.sourceforge.net
+      LFTP_PASSWORD: $(SOURCEFORGE_KEY_PASS)

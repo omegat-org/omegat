@@ -30,7 +30,7 @@ steps:
         set -euo pipefail
         echo "=== Pre-flight check ==="
         # Catch missing variable immediately (-u flag alone won't give a nice message)
-        [[ -n "$LFTP_PASSWORD" ]] && echo "✅ LFTP_PASSWORD is set" || { echo "❌ LFTP_PASSWORD is empty — check SOURCEFORGE_CI_PASSPHRASE variable"; exit 1; }
+        [[ -n "$LFTP_PASSWORD" ]] && echo "✅ LFTP_PASSWORD is set" || { echo "❌ LFTP_PASSWORD is empty — check SOURCEFORGE_KEY_PASS variable"; exit 1; }
         # Verify key file exists and passphrase is correct in one shot
         ssh-keygen -y -f ~/.ssh/id_rsa -P "$LFTP_PASSWORD" > /dev/null && echo "✅ Key + passphrase OK" || { echo "❌ Key or passphrase wrong"; exit 1; }
         # Upload distributions
@@ -51,4 +51,4 @@ steps:
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
       SF_HOST: frs.sourceforge.net
-      LFTP_PASSWORD: $(SOURCEFORGE_CI_PASSPHRASE)
+      LFTP_PASSWORD: $(SOURCEFORGE_KEY_PASS)

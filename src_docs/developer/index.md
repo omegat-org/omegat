@@ -44,6 +44,7 @@
 * [Integration test](34.IntegrationTest.md)
 * [Build and dependency security](37.BuildAndDependencySecurity.md)
 * [Test a specific feature](35.SpecificFeatureTests.md)
+* [Continuous Integration and Continuous Delivery](96.ContinuousIntegration.md)
 
 ## Documentation
 

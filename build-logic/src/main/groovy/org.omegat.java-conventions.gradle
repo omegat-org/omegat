@@ -20,6 +20,7 @@ ext {
     }
     providedCoreLibsPath = 'lib/provided/core'
     providedModuleLibsPath = 'lib/provided/module'
+    providedBuildLogicPath = 'lib/provided/build-logic'
     providedCoreLibsDir = layout.settingsDirectory.dir(providedCoreLibsPath).asFile
     providedModuleLibsDir = layout.settingsDirectory.dir(providedModuleLibsPath).asFile
 }

@@ -2,7 +2,7 @@ package org.omegat.core.matching;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.core.data.GlossaryEntry;
 
 /**
  * Technical implementation for the automated glossary checker.

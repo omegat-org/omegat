@@ -1,0 +1,1 @@
+- [OmegaT build setup](omegat-build.md) — Java Swing desktop app built with Gradle; had a bad import in GlossaryConsistencyValidator that needed fixing before build succeeded.

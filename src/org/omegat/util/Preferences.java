@@ -134,6 +134,12 @@ public final class Preferences {
     public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
+    // Shows per-file translation progress in the Project Files window
+    public static final String PROJECT_FILES_SHOW_PROGRESS = "project_files_show_progress";
+    public static final boolean PROJECT_FILES_SHOW_PROGRESS_DEFAULT = false;
+    // Shows color bars behind per-file progress values in the Project Files window
+    public static final String PROJECT_FILES_SHOW_PROGRESS_BARS = "project_files_show_progress_bars";
+    public static final boolean PROJECT_FILES_SHOW_PROGRESS_BARS_DEFAULT = false;
     // Determines whether or not the Project Files window is shown on project
     // load.
     // Currently not exposed in UI.

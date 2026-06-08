@@ -119,6 +119,7 @@ import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.view.SaveOptionsController;
 import org.omegat.gui.preferences.view.SecureStoreController;
+import org.omegat.gui.preferences.view.SourceFilesViewOptionsController;
 import org.omegat.gui.preferences.view.SpellcheckerConfigurationController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.preferences.view.TagProcessingOptionsController;
@@ -363,6 +364,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new DictionaryPreferencesController()));
         HideableNode appearanceNode = new HideableNode(new AppearanceController());
         appearanceNode.add(new HideableNode(new FontSelectionController()));
+        appearanceNode.add(new HideableNode(new SourceFilesViewOptionsController()));
         appearanceNode.add(new HideableNode(new CustomColorSelectionController()));
         root.add(appearanceNode);
         root.add(new HideableNode(new FiltersCustomizerController()));

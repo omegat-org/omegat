@@ -26,10 +26,11 @@
 package org.omegat.gui.preferences.view;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -45,8 +46,8 @@ import org.omegat.util.Preferences;
 public class SourceFilesViewOptionsController extends BasePreferencesController {
 
     private final JPanel panel = new JPanel(new BorderLayout());
-    private final JCheckBox showProgressCheckBox = new JCheckBox();
-    private final JCheckBox showProgressBarsCheckBox = new JCheckBox();
+    private final JComboBox<ProgressDisplayMode> progressDisplayComboBox = new JComboBox<>(
+            ProgressDisplayMode.values());
 
     public SourceFilesViewOptionsController() {
         initGui();
@@ -66,49 +67,64 @@ public class SourceFilesViewOptionsController extends BasePreferencesController 
     private void initGui() {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        JPanel checkBoxPanel = new JPanel();
-        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.PAGE_AXIS));
+        JPanel progressDisplayPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 5, 0));
+        JLabel progressDisplayLabel = new JLabel();
+        Mnemonics.setLocalizedText(progressDisplayLabel,
+                OStrings.getString("PREFS_PROJECT_FILES_PROGRESS_DISPLAY"));
+        progressDisplayLabel.setLabelFor(progressDisplayComboBox);
 
-        Mnemonics.setLocalizedText(showProgressCheckBox,
-                OStrings.getString("PREFS_SHOW_PROJECT_FILES_PROGRESS"));
-        Mnemonics.setLocalizedText(showProgressBarsCheckBox,
-                OStrings.getString("PREFS_SHOW_PROJECT_FILES_PROGRESS_BARS"));
-
-        showProgressCheckBox.addActionListener(e -> updateEnabledness());
-
-        checkBoxPanel.add(showProgressCheckBox);
-        checkBoxPanel.add(showProgressBarsCheckBox);
-        panel.add(checkBoxPanel, BorderLayout.NORTH);
+        progressDisplayPanel.add(progressDisplayLabel);
+        progressDisplayPanel.add(progressDisplayComboBox);
+        panel.add(progressDisplayPanel, BorderLayout.NORTH);
     }
 
     @Override
     protected void initFromPrefs() {
-        showProgressCheckBox.setSelected(Preferences.isPreferenceDefault(
-                Preferences.PROJECT_FILES_SHOW_PROGRESS, Preferences.PROJECT_FILES_SHOW_PROGRESS_DEFAULT));
-        showProgressBarsCheckBox.setSelected(Preferences.isPreferenceDefault(
-                Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS,
-                Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS_DEFAULT));
-        updateEnabledness();
+        progressDisplayComboBox.setSelectedItem(ProgressDisplayMode.fromPreferenceValue(
+                Preferences.getPreferenceDefault(Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE,
+                        Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_DEFAULT)));
     }
 
     @Override
     public void restoreDefaults() {
-        showProgressCheckBox.setSelected(Preferences.PROJECT_FILES_SHOW_PROGRESS_DEFAULT);
-        showProgressBarsCheckBox.setSelected(Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS_DEFAULT);
-        updateEnabledness();
-    }
-
-    private void updateEnabledness() {
-        if (!showProgressCheckBox.isSelected()) {
-            showProgressBarsCheckBox.setSelected(false);
-        }
-        showProgressBarsCheckBox.setEnabled(showProgressCheckBox.isSelected());
+        progressDisplayComboBox.setSelectedItem(ProgressDisplayMode.OFF);
     }
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_PROGRESS, showProgressCheckBox.isSelected());
-        Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS,
-                showProgressCheckBox.isSelected() && showProgressBarsCheckBox.isSelected());
+        ProgressDisplayMode selected = (ProgressDisplayMode) progressDisplayComboBox.getSelectedItem();
+        Preferences.setPreference(Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE,
+                selected == null ? Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_DEFAULT : selected.value);
+    }
+
+    private enum ProgressDisplayMode {
+        OFF(Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_OFF,
+                "PREFS_PROJECT_FILES_PROGRESS_DISPLAY_OFF"), PERCENTAGE(
+                        Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE,
+                        "PREFS_PROJECT_FILES_PROGRESS_DISPLAY_PERCENTAGE"), PERCENTAGE_BARS(
+                                Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE_BARS,
+                                "PREFS_PROJECT_FILES_PROGRESS_DISPLAY_PERCENTAGE_BARS");
+
+        private final String value;
+        private final String labelKey;
+
+        ProgressDisplayMode(String value, String labelKey) {
+            this.value = value;
+            this.labelKey = labelKey;
+        }
+
+        private static ProgressDisplayMode fromPreferenceValue(String value) {
+            for (ProgressDisplayMode mode : values()) {
+                if (mode.value.equals(value)) {
+                    return mode;
+                }
+            }
+            return OFF;
+        }
+
+        @Override
+        public String toString() {
+            return OStrings.getString(labelKey);
+        }
     }
 }

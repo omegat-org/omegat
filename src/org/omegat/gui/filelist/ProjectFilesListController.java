@@ -882,8 +882,8 @@ public class ProjectFilesListController implements IProjectFilesList {
                                 }
                             }
                         },
-        EMPTY_PROGRESS(5, String.class, getTextCellRenderer()),
-        MARGIN(6, String.class, new AlternatingHighlightRenderer().setDoHighlight(false));
+        EMPTY_PROGRESS(5, String.class, getTextCellRenderer()), MARGIN(6, String.class,
+                new AlternatingHighlightRenderer().setDoHighlight(false));
 
         private final int index;
         private final Class<?> clazz;
@@ -1049,15 +1049,26 @@ public class ProjectFilesListController implements IProjectFilesList {
         return translated + " (" + formatProgressPercent(translated, total) + ")";
     }
 
+    private static String getProjectFilesProgressDisplayMode() {
+        String mode = Preferences.getPreferenceDefault(Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE,
+                Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_DEFAULT);
+        switch (mode) {
+        case Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE:
+        case Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE_BARS:
+            return mode;
+        default:
+            return Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_OFF;
+        }
+    }
+
     private static boolean isProjectFilesProgressEnabled() {
-        return Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_PROGRESS,
-                Preferences.PROJECT_FILES_SHOW_PROGRESS_DEFAULT);
+        return !Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_OFF
+                .equals(getProjectFilesProgressDisplayMode());
     }
 
     private static boolean isProjectFilesProgressBarsEnabled() {
-        return isProjectFilesProgressEnabled()
-                && Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS,
-                        Preferences.PROJECT_FILES_SHOW_PROGRESS_BARS_DEFAULT);
+        return Preferences.PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE_BARS
+                .equals(getProjectFilesProgressDisplayMode());
     }
 
     private boolean shouldRefreshProjectFilesProgress() {
@@ -1074,7 +1085,19 @@ public class ProjectFilesListController implements IProjectFilesList {
         return new FileProgress(translated, fi.entries.size());
     }
 
-    static class FileProgress implements Comparable<FileProgress> {
+    static int compareFileProgress(FileProgress left, FileProgress right) {
+        int c = Double.compare(left.getRatio(), right.getRatio());
+        if (c != 0) {
+            return c;
+        }
+        c = Integer.compare(left.getTranslated(), right.getTranslated());
+        if (c != 0) {
+            return c;
+        }
+        return Integer.compare(left.getTotal(), right.getTotal());
+    }
+
+    static class FileProgress {
         private final int translated;
         private final int total;
 
@@ -1101,15 +1124,6 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         String getTooltip() {
             return StringUtil.format(OStrings.getString("PF_PROGRESS_TOOLTIP"), translated, total);
-        }
-
-        @Override
-        public int compareTo(FileProgress other) {
-            int c = Double.compare(getRatio(), other.getRatio());
-            if (c != 0) {
-                return c;
-            }
-            return Integer.compare(translated, other.translated);
         }
 
         @Override
@@ -1376,7 +1390,7 @@ public class ProjectFilesListController implements IProjectFilesList {
                     c = Integer.compare(n1, n2);
                     break;
                 case 5:
-                    c = calculateFileProgress(f1).compareTo(calculateFileProgress(f2));
+                    c = compareFileProgress(calculateFileProgress(f1), calculateFileProgress(f2));
                     if (c == 0) {
                         c = f1.filePath.compareToIgnoreCase(f2.filePath);
                     }

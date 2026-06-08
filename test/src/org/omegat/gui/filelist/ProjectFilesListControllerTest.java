@@ -49,14 +49,21 @@ public class ProjectFilesListControllerTest {
     }
 
     @Test
-    public void testFileProgressCompareTo() {
-        ProjectFilesListController.FileProgress lower = new ProjectFilesListController.FileProgress(1, 4);
-        ProjectFilesListController.FileProgress higher = new ProjectFilesListController.FileProgress(2, 4);
-        ProjectFilesListController.FileProgress sameRatioMoreSegments =
-                new ProjectFilesListController.FileProgress(2, 8);
+    public void testCompareFileProgress() {
+        ProjectFilesListController.FileProgress lower = fileProgress(1, 4);
+        ProjectFilesListController.FileProgress higher = fileProgress(2, 4);
+        ProjectFilesListController.FileProgress sameRatioMoreSegments = fileProgress(2, 8);
+        ProjectFilesListController.FileProgress sameTranslatedMoreSegments = fileProgress(0, 10);
+        ProjectFilesListController.FileProgress sameTranslatedFewerSegments = fileProgress(0, 5);
 
-        assertTrue(lower.compareTo(higher) < 0);
-        assertTrue(higher.compareTo(lower) > 0);
-        assertTrue(lower.compareTo(sameRatioMoreSegments) < 0);
+        assertTrue(ProjectFilesListController.compareFileProgress(lower, higher) < 0);
+        assertTrue(ProjectFilesListController.compareFileProgress(higher, lower) > 0);
+        assertTrue(ProjectFilesListController.compareFileProgress(lower, sameRatioMoreSegments) < 0);
+        assertTrue(ProjectFilesListController.compareFileProgress(sameTranslatedFewerSegments,
+                sameTranslatedMoreSegments) < 0);
+    }
+
+    private static ProjectFilesListController.FileProgress fileProgress(int translated, int total) {
+        return new ProjectFilesListController.FileProgress(translated, total);
     }
 }

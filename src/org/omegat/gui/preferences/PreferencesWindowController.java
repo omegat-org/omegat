@@ -358,13 +358,14 @@ public class PreferencesWindowController implements FurtherActionListener {
 
     private static DefaultMutableTreeNode createNodeTree() {
         HideableNode root = new HideableNode();
-        root.add(new HideableNode(new GeneralOptionsController()));
+        HideableNode generalNode = new HideableNode(new GeneralOptionsController());
+        generalNode.add(new HideableNode(new SourceFilesViewOptionsController()));
+        root.add(generalNode);
         root.add(new HideableNode(new MachineTranslationPreferencesController()));
         root.add(new HideableNode(new GlossaryPreferencesController()));
         root.add(new HideableNode(new DictionaryPreferencesController()));
         HideableNode appearanceNode = new HideableNode(new AppearanceController());
         appearanceNode.add(new HideableNode(new FontSelectionController()));
-        appearanceNode.add(new HideableNode(new SourceFilesViewOptionsController()));
         appearanceNode.add(new HideableNode(new CustomColorSelectionController()));
         root.add(appearanceNode);
         root.add(new HideableNode(new FiltersCustomizerController()));

@@ -134,13 +134,9 @@ public final class Preferences {
     public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
-    // Controls per-file translation progress display in the Project Files
-    // window
-    public static final String PROJECT_FILES_PROGRESS_DISPLAY_MODE = "project_files_progress_display_mode";
-    public static final String PROJECT_FILES_PROGRESS_DISPLAY_MODE_OFF = "off";
-    public static final String PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE = "percentage";
-    public static final String PROJECT_FILES_PROGRESS_DISPLAY_MODE_PERCENTAGE_BARS = "percentage_bars";
-    public static final String PROJECT_FILES_PROGRESS_DISPLAY_MODE_DEFAULT = PROJECT_FILES_PROGRESS_DISPLAY_MODE_OFF;
+    // Shows translation progress in the Project Files window
+    public static final String PROJECT_FILES_SHOW_PROGRESS = "project_files_show_translation_progress";
+    public static final boolean PROJECT_FILES_SHOW_PROGRESS_DEFAULT = false;
     // Determines whether or not the Project Files window is shown on project
     // load.
     // Currently not exposed in UI.

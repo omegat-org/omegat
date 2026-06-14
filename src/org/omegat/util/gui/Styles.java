@@ -300,6 +300,21 @@ public final class Styles {
         COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(OStrings.getString("COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT"),
                 UIManager.getColor("OmegaT.alignerTableRowHighlight")),
         /**
+         * Source Files low progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_LOW(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_LOW"),
+                "OmegaT.projectFilesProgressLow", "#f0b8b4"),
+        /**
+         * Source Files high progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_HIGH(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_HIGH"),
+                "OmegaT.projectFilesProgressHigh", "#b7d7b7"),
+        /**
+         * Source Files complete progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_COMPLETE(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_COMPLETE"),
+                "OmegaT.projectFilesProgressComplete", "#b8ccf0"),
+        /**
          * Aligner table selected row highlight.
          */
         COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(
@@ -323,11 +338,20 @@ public final class Styles {
             this(displayName, Color.decode(defaultColor));
         }
 
+        EditorColor(String displayName, String uiManagerKey, String defaultColor) {
+            this(displayName, getColor(uiManagerKey, defaultColor));
+        }
+
         EditorColor(String displayName) {
             this.displayName = displayName;
             this.color = null;
             this.defaultColor = null;
             setColorFromPreference();
+        }
+
+        private static Color getColor(String uiManagerKey, String defaultColor) {
+            Color color = UIManager.getColor(uiManagerKey);
+            return color == null ? Color.decode(defaultColor) : color;
         }
 
         private void setColorFromPreference() {

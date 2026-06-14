@@ -35,15 +35,22 @@ import java.util.Set;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.TestPreferencesInitializer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProjectFilesListControllerTest {
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        TestPreferencesInitializer.init();
+    }
 
     @Test
     public void testFormatProgressPercent() {
@@ -91,11 +98,11 @@ public class ProjectFilesListControllerTest {
 
     @Test
     public void testProgressColorThresholds() {
-        assertEquals(new Color(210, 80, 70, 120),
+        assertEquals(new Color(240, 184, 180),
                 ProjectFilesListController.getProgressColor(fileProgress(0, 10)));
-        assertEquals(new Color(85, 160, 85, 120),
+        assertEquals(new Color(183, 215, 183),
                 ProjectFilesListController.getProgressColor(fileProgress(5, 10)));
-        assertEquals(new Color(75, 135, 220, 120),
+        assertEquals(new Color(184, 204, 240),
                 ProjectFilesListController.getProgressColor(fileProgress(10, 10)));
     }
 

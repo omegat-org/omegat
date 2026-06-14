@@ -26,6 +26,13 @@
             encoding, and the number of segments it contains</para>
       </listitem>
       <listitem>
+         <para>If
+            <link linkend="dialogs.preferences.general.show.source.files.progress" endterm="dialogs.preferences.general.show.source.files.progress.title"></link>
+            is enabled, each file entry also shows its translation progress,
+            calculated from the number of unique segments in that file that have
+            already been translated.</para>
+      </listitem>
+      <listitem>
          <para>The total number of segments, the number of unique segments in the
             whole project, and the number of unique segments already translated are
             shown at the bottom.</para>
@@ -50,6 +57,10 @@
       <emphasis role="bold">Unique</emphasis> segments is
       calculated by removing the number of repeated segments from the total
       number of segments.</para>
+   <para>When the progress display is enabled, the bottom progress value shows
+      the overall translation progress for all source files in the project. The
+      progress colours can be changed in
+      <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"></link>.</para>
    <para>The difference between "Number of segments" and "Number
       of unique segments" provides an approximate idea of the number of
       repetitions in the text. Use 

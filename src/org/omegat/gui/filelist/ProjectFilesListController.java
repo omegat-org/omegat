@@ -96,7 +96,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -119,6 +119,7 @@ import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -150,9 +151,6 @@ public class ProjectFilesListController implements IProjectFilesList {
 
     private static final NumberFormat PROGRESS_PERCENT_FORMAT = createProgressPercentFormat();
     private static final int MIN_PROGRESS_WIDTH = 3;
-    private static final Color LOW_PROGRESS_COLOR = new Color(210, 80, 70, 120);
-    private static final Color HIGH_PROGRESS_COLOR = new Color(85, 160, 85, 120);
-    private static final Color COMPLETE_PROGRESS_COLOR = new Color(75, 135, 220, 120);
 
     private ProjectFilesList list;
     private FileInfoModel modelFiles;
@@ -1221,9 +1219,11 @@ public class ProjectFilesListController implements IProjectFilesList {
     static Color getProgressColor(FileProgress progress) {
         double ratio = progress.getRatio();
         if (ratio >= 1d) {
-            return COMPLETE_PROGRESS_COLOR;
+            return EditorColor.COLOR_PROJECT_FILES_PROGRESS_COMPLETE.getColor();
         }
-        return ratio >= 0.5d ? HIGH_PROGRESS_COLOR : LOW_PROGRESS_COLOR;
+        return ratio >= 0.5d
+                ? EditorColor.COLOR_PROJECT_FILES_PROGRESS_HIGH.getColor()
+                : EditorColor.COLOR_PROJECT_FILES_PROGRESS_LOW.getColor();
     }
 
     static int getProgressFillWidth(FileProgress progress, int width) {

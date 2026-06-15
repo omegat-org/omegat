@@ -147,6 +147,7 @@ import static org.omegat.util.gui.DataTableStyling.getTextCellRenderer;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
+@NullMarked
 public class ProjectFilesListController implements IProjectFilesList {
 
     private static final NumberFormat PROGRESS_PERCENT_FORMAT = createProgressPercentFormat();

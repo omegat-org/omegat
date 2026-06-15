@@ -140,7 +140,7 @@ ext.makeMacTask = { args ->
         group = 'distribution'
     }
 
-    def signedInstallTask = tasks.register(signedInstallTaskName, Sync) {
+    tasks.register(signedInstallTaskName, Sync) {
         description = 'Builds the signed macOS distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
@@ -165,7 +165,6 @@ ext.makeMacTask = { args ->
             }
         }
         group = 'distribution'
-        dependsOn tasks.named('hunspellSignedJar')
     }
     parentTask.dependsOn installTask
 }

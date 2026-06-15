@@ -82,6 +82,7 @@
 
 ## Other information
 
+* [Offline Build](09.OfflineBuild.md)
 * [Release procedure](90.ReleaseProcedure.md)
 * [Code Signing How-to](92.CodeSigning.md)
 * [Building installer](93.BuildingInstallerPackage.md)

@@ -20,13 +20,17 @@ ext {
     }
     providedCoreLibsPath = 'lib/provided/core'
     providedModuleLibsPath = 'lib/provided/module'
+    providedBuildLogicLibsPath = 'lib/build-logic'
     providedCoreLibsDir = layout.settingsDirectory.dir(providedCoreLibsPath).asFile
     providedModuleLibsDir = layout.settingsDirectory.dir(providedModuleLibsPath).asFile
+    providedBuildLogicLibsDir = layout.settingsDirectory.dir(providedBuildLogicLibsPath).asFile
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    // required by offline build
+    // mavenLocal()
+    // gradlePluginPortal()
 }
 
 java {

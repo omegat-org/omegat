@@ -333,6 +333,7 @@ def moduleLibs = subprojects
         .flatten()
 
 def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
+def providedBuildLogicPath = 'lib/provided/build-logic'
 
 distributions {
     main {

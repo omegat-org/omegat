@@ -336,6 +336,8 @@ public class LatexFilter extends AbstractFilter {
     private final List<String> oneArgInlineText = new LinkedList<>();
     private final List<String> oneArgParText = new LinkedList<>();
     private final List<String> parBreakCommand = new LinkedList<>();
+    private int verbatimLevel = 0;
+    private List<String> verbatimEnvironments;
 
     private void init() {
         oneArgNoText.add("\\begin");

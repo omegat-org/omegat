@@ -35,6 +35,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class LatexFilterTest extends TestFilterBase {
 
@@ -100,5 +101,34 @@ public class LatexFilterTest extends TestFilterBase {
         String target = entries.get(0);
         assertTrue("ends with unwanted string: " + target.substring(target.length() - 10),
                 target.matches("We <u\\d> it, and <u\\d> is compressed. Then we <u\\d>. "));
+    }
+    /**
+     * Verifies that verbatim environments (verbatim, minted, lstlisting, etc.)
+     * are preserved as-is and their content is NOT extracted as translatable segments.
+     */
+    @Test
+    public void testVerbatimPreserved() throws Exception {
+        String f = "test/data/filters/Latex/latexverbatim.tex";
+        List<String> segments = parse(new LatexFilter(), f);
+
+        // Normal text should be extracted as segments
+        assertTrue("Normal text before verbatim should be a segment",
+                segments.stream().anyMatch(s -> s.contains("Hello World")));
+        assertTrue("Normal text after verbatim should be a segment",
+                segments.stream().anyMatch(s -> s.contains("More text after verbatim")));
+
+        // Verbatim content must NOT appear as separate segments
+        assertFalse("C include directive should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("#include")));
+        assertFalse("C main function should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("int main")));
+        assertFalse("printf call should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("printf")));
+        assertFalse("Special chars should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("return 0")));
+        assertFalse("minted content should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("public class Test")));
+        assertFalse("minted code should NOT be a segment",
+                segments.stream().anyMatch(s -> s.contains("test$pecial")));
     }
 }

@@ -261,6 +261,21 @@ public class EditorStub implements IEditor {
     }
 
     @Override
+    public IEditorSorter getSort() {
+        return null;
+    }
+
+    @Override
+    public void setSort(IEditorSorter sorter) {
+        // do nothing
+    }
+
+    @Override
+    public void removeSort() {
+        // do nothing
+    }
+
+    @Override
     public String getCurrentTranslation() {
         return "";
     }

@@ -478,6 +478,28 @@ public interface IEditor {
     void removeFilter();
 
     /**
+     * Gets the sorter for this editor, or null if no custom sort is applied (i.e.
+     * segments are shown in natural file order).
+     */
+    @Nullable
+    IEditorSorter getSort();
+
+    /**
+     * Sets a sorter for this editor. The sorter changes the order in which the
+     * (filtered) segments are displayed, without changing which segments are
+     * shown. The document is reloaded so the new order takes effect immediately.
+     *
+     * @param sorter
+     *            Sorter instance
+     */
+    void setSort(IEditorSorter sorter);
+
+    /**
+     * Removes the current sorter, reverting to natural file order.
+     */
+    void removeSort();
+
+    /**
      * Returns current translation or null.
      */
     String getCurrentTranslation();

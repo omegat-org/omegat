@@ -68,7 +68,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -101,6 +103,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.dialogs.ConflictDialogController;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
+import org.omegat.gui.editor.sort.SortBar;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
@@ -184,6 +187,10 @@ public class EditorController implements IEditor {
     /** Dockable pane for editor. */
     private DockablePanel pane;
     private JScrollPane scrollPane;
+    /** Container at the top of the editor stacking the sort and filter bars. */
+    private JPanel northBars;
+    /** Always-visible bar to choose the segment display order. */
+    private SortBar sortBar;
 
     private String title;
 
@@ -255,6 +262,8 @@ public class EditorController implements IEditor {
     volatile @Nullable IEditorFilter entriesFilter;
     private @Nullable Component entriesFilterControlComponent;
 
+    volatile @Nullable IEditorSorter entriesSorter;
+
     private final SegmentExportImport segmentExportImport;
 
     protected @Nullable String currentEntryOrigin;
@@ -299,6 +308,11 @@ public class EditorController implements IEditor {
                 m_docSegList = null;
                 history.clear();
                 removeFilter();
+                entriesSorter = null;
+                if (sortBar != null) {
+                    sortBar.reset();
+                    sortBar.setVisible(false);
+                }
                 markerController.removeAll();
                 showType = SHOW_TYPE.INTRO;
                 deactivateWithoutCommit();
@@ -413,6 +427,17 @@ public class EditorController implements IEditor {
         scrollPane.setName("EditorScrollPane");
         pane.setLayout(new BorderLayout());
         pane.add(scrollPane, BorderLayout.CENTER);
+
+        // The sort and filter bars are stacked in this north container (the sort
+        // bar is always visible on top; the filter bar appears below it when a
+        // filter is active). BorderLayout.NORTH itself holds only one component.
+        northBars = new JPanel();
+        northBars.setLayout(new BoxLayout(northBars, BoxLayout.Y_AXIS));
+        sortBar = new SortBar();
+        // Hidden until a project with more than one (post-filter) segment is shown.
+        sortBar.setVisible(false);
+        northBars.add(sortBar);
+        pane.add(northBars, BorderLayout.NORTH);
 
         mw.addDockable(pane);
 
@@ -718,6 +743,12 @@ public class EditorController implements IEditor {
                 tmpSegList.add(sb);
             }
         }
+        // Filtering is done; now apply the (optional) display sort. The default
+        // (no sorter) preserves natural file order because tmpSegList is already
+        // built in file order. List.sort is stable, so equal keys keep that order.
+        if (entriesSorter != null) {
+            tmpSegList.sort(entriesSorter.getComparator());
+        }
         m_docSegList = tmpSegList.toArray(new SegmentBuilder[0]);
 
         // Clamp displayedSegment to actually available entries.
@@ -775,6 +806,11 @@ public class EditorController implements IEditor {
         });
 
         markerController.process(m_docSegList);
+
+        // Only offer sorting when there is more than one segment to reorder.
+        if (sortBar != null) {
+            sortBar.setVisible(m_docSegList != null && m_docSegList.length > 1);
+        }
 
         editor.repaint();
     }
@@ -1668,13 +1704,10 @@ public class EditorController implements IEditor {
                         displayedFileIndex = i;
                         loadDocument();
                     }
-                    // find correct displayedEntryIndex
-                    for (int j = 0; j < m_docSegList.length; j++) {
-                        if (m_docSegList[j].segmentNumberInProject >= entryNum) { //
-                            displayedEntryIndex = j;
-                            break;
-                        }
-                    }
+                    // find correct displayedEntryIndex. The list may be in any
+                    // display order (a sorter can reorder it), so locate by exact
+                    // entry number, falling back to the nearest available entry.
+                    displayedEntryIndex = findDisplayIndexForEntry(entryNum);
                     break;
                 }
             }
@@ -1682,6 +1715,30 @@ public class EditorController implements IEditor {
         activateEntry(pos);
         editor.setCursor(oldCursor);
         updateTitleCurrentFile();
+    }
+
+    /**
+     * Find the index in {@link #m_docSegList} of the segment with the given
+     * project entry number. The list may be in any display order (a sorter can
+     * reorder it), so we cannot assume ascending order. If the exact entry is not
+     * present (e.g. filtered out), return the index of the segment whose entry
+     * number is closest to {@code entryNum}, or 0 if the list is empty.
+     */
+    private int findDisplayIndexForEntry(int entryNum) {
+        int fallback = 0;
+        int bestDelta = Integer.MAX_VALUE;
+        for (int j = 0; j < m_docSegList.length; j++) {
+            int num = m_docSegList[j].segmentNumberInProject;
+            if (num == entryNum) {
+                return j;
+            }
+            int delta = Math.abs(num - entryNum);
+            if (delta < bestDelta) {
+                bestDelta = delta;
+                fallback = j;
+            }
+        }
+        return fallback;
     }
 
     @Override
@@ -2153,12 +2210,13 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         if (entriesFilterControlComponent != null) {
-            pane.remove(entriesFilterControlComponent);
+            northBars.remove(entriesFilterControlComponent);
         }
 
         entriesFilter = filter;
         entriesFilterControlComponent = filter.getControlComponent();
-        pane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        // Append below the always-present sort bar.
+        northBars.add(entriesFilterControlComponent);
         pane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();
@@ -2171,16 +2229,30 @@ public class EditorController implements IEditor {
             if (entriesFilter == null || entriesFilter.allowed(curEntry)) {
                 gotoEntry(curEntry.entryNum());
             } else {
-                // Go to next (available) segment. But first, we need to reset
-                // the displayedEntryIndex to the number where the current but
-                // filtered entry could have been if it was not filtered.
+                // The current entry was filtered out. Go to the visible segment
+                // closest after it in entry-number space (or the closest before it
+                // if none follows). The list may be in any display order, so search
+                // by entry number rather than by position.
+                int best = -1;
+                int bestNum = Integer.MAX_VALUE;
+                int prev = -1;
+                int prevNum = Integer.MIN_VALUE;
                 for (int j = 0; j < m_docSegList.length; j++) {
-                    if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
-                        displayedEntryIndex = j - 1;
-                        break;
+                    int num = m_docSegList[j].segmentNumberInProject;
+                    if (num >= curEntryNum && num < bestNum) {
+                        bestNum = num;
+                        best = j;
+                    }
+                    if (num < curEntryNum && num > prevNum) {
+                        prevNum = num;
+                        prev = j;
                     }
                 }
-                nextEntry();
+                int target = (best >= 0) ? best : prev;
+                if (target >= 0) {
+                    displayedEntryIndex = target;
+                    activateEntry();
+                }
             }
         }
     }
@@ -2199,7 +2271,7 @@ public class EditorController implements IEditor {
 
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
-            pane.remove(entriesFilterControlComponent);
+            northBars.remove(entriesFilterControlComponent);
             pane.revalidate();
             entriesFilterControlComponent = null;
         }
@@ -2212,6 +2284,63 @@ public class EditorController implements IEditor {
         if (doc != null && project != null && project.isProjectLoaded()) {
             List<FileInfo> files = project.getProjectFiles();
             if (files != null && !files.isEmpty()) {
+                loadDocument();
+                gotoEntry(curEntryNum);
+            }
+        }
+    }
+
+    @Override
+    public @Nullable IEditorSorter getSort() {
+        return entriesSorter;
+    }
+
+    /**
+     * {@inheritDoc} Document is reloaded to immediately apply the new display
+     * order, keeping the current entry active. The sort bar itself is always
+     * visible and managed by the editor, so no control component is added here.
+     */
+    @Override
+    public void setSort(IEditorSorter sorter) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        entriesSorter = sorter;
+
+        SourceTextEntry curEntry = getCurrentEntry();
+        Document3 doc = editor.getOmDocument();
+        IProject project = Core.getProject();
+        // Prevent NullPointerErrors in loadDocument. Only load if there is a document.
+        if (doc != null && project.getProjectFiles() != null && curEntry != null) {
+            commitAndDeactivate();
+            loadDocument(); // rebuild + re-sort entrylist
+            // The current entry is never removed by sorting, only repositioned.
+            gotoEntry(curEntry.entryNum());
+        }
+    }
+
+    /**
+     * {@inheritDoc} Document is reloaded if appropriate to revert to natural file
+     * order.
+     */
+    @Override
+    public void removeSort() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (entriesSorter == null) {
+            return;
+        }
+
+        entriesSorter = null;
+
+        int curEntryNum = getCurrentEntryNumber();
+        Document3 doc = editor.getOmDocument();
+        IProject project = Core.getProject();
+        // `if` check is to prevent NullPointerErrors in loadDocument.
+        // Only load if there is a document and the project is loaded.
+        if (doc != null && project != null && project.isProjectLoaded()) {
+            List<FileInfo> files = project.getProjectFiles();
+            if (files != null && !files.isEmpty()) {
+                commitAndDeactivate();
                 loadDocument();
                 gotoEntry(curEntryNum);
             }

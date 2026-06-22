@@ -31,6 +31,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
+import org.omegat.gui.editor.IEditorSorter;
 import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
@@ -290,6 +291,21 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
 
     @Override
     public void removeFilter() {
+
+    }
+
+    @Override
+    public final IEditorSorter getSort() {
+        return null;
+    }
+
+    @Override
+    public void setSort(IEditorSorter sorter) {
+
+    }
+
+    @Override
+    public void removeSort() {
 
     }
 

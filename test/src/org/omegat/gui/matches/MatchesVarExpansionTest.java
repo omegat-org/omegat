@@ -261,6 +261,19 @@ public class MatchesVarExpansionTest {
         }
 
         @Override
+        public org.omegat.gui.editor.IEditorSorter getSort() {
+            return null;
+        }
+
+        @Override
+        public void setSort(org.omegat.gui.editor.IEditorSorter sorter) {
+        }
+
+        @Override
+        public void removeSort() {
+        }
+
+        @Override
         public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         }
 

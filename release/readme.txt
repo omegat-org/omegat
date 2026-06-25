@@ -91,7 +91,8 @@ Applications folder (or another location of your choice).
 Installing OmegaT (Linux)
 =========================
 
-Using the deb or rpm package (recommended):
+Using the deb or rpm package
+----------------------------
 
 Install the package for your architecture (amd64 or aarch64) using your
 distribution's package manager, e.g.:
@@ -102,7 +103,8 @@ or
 
     sudo rpm -i omegat-<version>.<arch>.rpm
 
-Using the tar.bz2 archive:
+Using the tar.bz2 archive
+-------------------------
 
 Place the archive in any suitable folder and unpack it. OmegaT is then ready
 to be launched.
@@ -115,7 +117,7 @@ linux-install.sh script, and execute the script with ./linux-install.sh.
 
 
 Installing OmegaT (Solaris, FreeBSD, etc.)
-=========================================
+==========================================
 
 Place the archive in any suitable folder and unpack it. OmegaT is then ready to
 be launched.
@@ -205,7 +207,7 @@ Current team:
 
 - Marco Cevoli (Telegram community manager)
 - Jean-Christophe Helary (Twitter community manager)
-- Kos Ivantsov (localisation manager)
+- Kos Ivantsov (localisation manager, user group owner)
 - Concepción Martin (Facebook community manager)
 - Hiroshi Miura (lead developer and product integration manager)
 - Briac Pilpré (webmaster)

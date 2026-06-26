@@ -60,7 +60,7 @@ morfologik = "2.2.0"
 swing_extra_locales = "0.3.3"
 jgit_gpg_signer = "0.2.3"
 mockito = "5.23.0"
-json_java = "20251224"
+json_java = "20260522"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}

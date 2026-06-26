@@ -146,7 +146,7 @@ tasks.register('runOnJava21', JavaExec) {
 tasks.register('testIntegration', JavaExec) {
     description = 'Runs integration tests. Pass repo URL as -Domegat.test.repo=<repo>.'
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     group = 'verification'
@@ -281,7 +281,7 @@ tasks.register('testAcceptance', Test) {
     }
 
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
              "--add-opens", "java.base/java.util=ALL-UNNAMED"])

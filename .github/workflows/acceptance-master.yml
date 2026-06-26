@@ -32,18 +32,3 @@ jobs:
     - name: Run acceptance test
       run: ./gradlew -PenvIsCi=true -PtestDisplay=99 -PtestMaxHeapSize=2048M --scan testAcceptance
       id: gradle
-    - name: "Add Build Scan URL as PR comment"
-      uses: actions/github-script@v9
-      if: github.event_name == 'pull_request' && failure()
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `❌ ${{ github.workflow }} **failed**.
-
-             Please look a Gradle Scan page for details: 
-             ${{ steps.gradle.outputs.build-scan-url }}`
-          })

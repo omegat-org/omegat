@@ -45,8 +45,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -133,7 +135,7 @@ public class SearchWindowController {
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(form);
         }
-        dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
+        dateFormat = DateTimeFormatter.ofPattern(SAVED_DATE_FORMAT).withZone(ZoneId.systemDefault());
 
         form.m_searchField.setModel(new DefaultComboBoxModel<>(HistoryManager.getSearchItems()));
         if (form.m_searchField.getModel().getSize() > 0) {
@@ -657,10 +659,10 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, form.m_authorField.getText());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM, form.m_dateFromCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE,
-                dateFormat.format(dateFromModel.getDate()));
+                dateFormat.format(dateFromModel.getDate().toInstant()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO, form.m_dateToCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE,
-                dateFormat.format(dateToModel.getDate()));
+                dateFormat.format(dateToModel.getDate().toInstant()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
                 form.m_numberOfResults.getValue());
         Preferences.setPreference(Preferences.SEARCHWINDOW_EXCLUDE_ORPHANS,
@@ -1196,15 +1198,15 @@ public class SearchWindowController {
             form.m_dateFromCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_FROM));
             String dateFromValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE);
             if (!StringUtil.isEmpty(dateFromValue)) {
-                dateFromModel.setValue(dateFormat.parse(dateFromValue));
+                dateFromModel.setValue(Date.from(Instant.from(dateFormat.parse(dateFromValue))));
             }
             // to date
             form.m_dateToCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_TO));
             String dateToValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE);
             if (!StringUtil.isEmpty(dateToValue)) {
-                dateToModel.setValue(dateFormat.parse(dateToValue));
+                dateToModel.setValue(Date.from(Instant.from(dateFormat.parse(dateToValue))));
             }
-        } catch (ParseException e) {
+        } catch (DateTimeException e) {
             // use safe settings in case of parsing error
             form.m_dateFromCB.setSelected(false);
             form.m_dateToCB.setSelected(false);
@@ -1288,7 +1290,7 @@ public class SearchWindowController {
         });
     }
 
-    private final SimpleDateFormat dateFormat;
+    private final DateTimeFormatter dateFormat;
     private final SpinnerDateModel dateFromModel;
     private final SpinnerDateModel dateToModel;
 

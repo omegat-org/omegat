@@ -27,16 +27,16 @@ jobs:
         include:
           - arch: arm64
             runner: ubuntu-24.04-arm
-            jre_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.19_10.tar.gz
+            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
             gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
           - arch: amd64
             runner: ubuntu-latest
-            jre_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_x64_linux_hotspot_17.0.19_10.tar.gz
+            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
             gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

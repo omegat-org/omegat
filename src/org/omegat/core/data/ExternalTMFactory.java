@@ -205,9 +205,10 @@ public final class ExternalTMFactory {
                 }
             };
 
-            TMXReader2 reader = new TMXReader2();
-            reader.readTMX(file, sourceLang, targetLang, doSegmenting, false, extTmxLevel2, useSlash, loader);
-
+            TMXReader2.Builder builder = new TMXReader2.Builder();
+            TMXReader2 reader = builder.setSegmentingEnabled(doSegmenting).setNeedValidate(true)
+                    .setExtTmxLevel2(extTmxLevel2).setUseSlash(useSlash).build();
+            reader.readTMX(file, sourceLang, targetLang, loader);
             return entries;
         }
     }

@@ -10,12 +10,25 @@ import org.gradle.api.attributes.Usage
 import org.gradle.api.attributes.Category
 import org.gradle.api.attributes.LibraryElements
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.file.FileSystemOperations
 import org.gradle.api.plugins.quality.PmdExtension
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
+import org.gradle.process.ExecOperations
+
+import javax.inject.Inject
 
 class OmegatModulePlugin implements Plugin<Project> {
+
+    private final ExecOperations execOperations
+    private final FileSystemOperations fileSystemOperations
+
+    @Inject
+    OmegatModulePlugin(ExecOperations execOperations, FileSystemOperations fileSystemOperations) {
+        this.execOperations = execOperations
+        this.fileSystemOperations = fileSystemOperations
+    }
 
     @Override
     void apply(Project project) {
@@ -59,7 +72,13 @@ class OmegatModulePlugin implements Plugin<Project> {
             from({
                 project.configurations.getByName("runtimeClasspath")
                         .resolve()
-                        .collect { it.directory ? it : project.zipTree(it) }
+                        .collect { dep ->
+                            if (dep.directory) return dep
+                            if (shouldSignDylibs(project) && containsDylibs(dep)) {
+                                return project.fileTree(signAndExtractJar(project, dep))
+                            }
+                            return project.zipTree(dep)
+                        }
             })
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             exclude "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA"
@@ -78,8 +97,8 @@ class OmegatModulePlugin implements Plugin<Project> {
 
         // Add sources and javadoc jars
         project.java {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
         }
 
         project.tasks.withType(JavaCompile).configureEach { javaCompile ->
@@ -188,6 +207,62 @@ class OmegatModulePlugin implements Plugin<Project> {
     private static String getPropertyOrDefault(Project project, String propertyName, String defaultValue) {
         return project.hasProperty(propertyName) ?
                 project.property(propertyName).toString() : defaultValue
+    }
+
+    /**
+     * Returns true if the macCodesignIdentity property is set and the codesign tool is present on PATH.
+     */
+    private static boolean shouldSignDylibs(Project project) {
+        if (!project.hasProperty('macCodesignIdentity')) return false
+        return ['which codesign', 'where codesign'].any {
+            try {
+                def proc = it.execute()
+                proc.waitForProcessOutput()
+                return proc.exitValue() == 0
+            } catch (ignored) {
+                return false
+            }
+        }
+    }
+
+    /**
+     * Returns true if the given jar file contains at least one *.dylib entry.
+     */
+    private static boolean containsDylibs(File jar) {
+        if (!jar.name.endsWith('.jar') || !jar.exists()) return false
+        def zipFile = new java.util.zip.ZipFile(jar)
+        try {
+            return zipFile.entries().any { !it.directory && it.name.endsWith('.dylib') }
+        } finally {
+            zipFile.close()
+        }
+    }
+
+    /**
+     * Extracts the given dependency jar to a per-jar staging directory, signs all *.dylib files
+     * inside it with the Apple developer identity from the macCodesignIdentity project property,
+     * and returns the staging directory.  The caller should include this directory in the fat-jar
+     * instead of the original zipTree so that the signed native libraries end up in the module jar.
+     */
+    private File signAndExtractJar(Project project, File jar) {
+        def jarBaseName = jar.name.replaceAll(/\.jar$/, '')
+        def stagingDir = project.layout.buildDirectory.dir("signedJarContents/${jarBaseName}").get().asFile
+
+        fileSystemOperations.copy {
+            from project.zipTree(jar)
+            into stagingDir
+        }
+
+        def dylibs = project.fileTree(dir: stagingDir, include: '**/*.dylib').files.toList()
+        execOperations.exec {
+            commandLine(['codesign', '--deep', '--force',
+                    '--sign', project.property('macCodesignIdentity'),
+                    '--timestamp',
+                    '--options', 'runtime',
+                    '--entitlements', project.rootProject.file('release/mac-specific/java.entitlements')] + dylibs)
+        }
+
+        return stagingDir
     }
 
     /**

@@ -1,56 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
-]>
-<book lang="de" id="book.user.manual">
-  <bookinfo>
-    <title id="book.user.manual.title">OmegaT 5.8.0 - Bedienungsanleitung</title>
-    <pubdate>@timestamp@</pubdate>
-	<!-- TODO automate date insertion -->
-    <abstract>
-      <para>Dieses Dokument ist die offizielle Bedienungsanleitung für OmegaT, dem kostenlosen Tool für computergestützte Übersetzung.</para>
-
-	  <para>Der Hauptzweck von OmegaT besteht darin, Ihnen auf möglichst zuverlässige Weise Zugang zu Ihren Übersetzungsressourcen zu verschaffen, damit Sie eine gute Übersetzung so schnell wie möglich erstellen können.</para>
-
-	  <para>OmegaT wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Die Lizenz gewährt Ihnen die folgenden Freiheiten:<itemizedlist id="freedoms.list">
-		<listitem>
-		  <para>Die Freiheit, die Software für beliebige Zwecke zu nutzen.</para>
-		</listitem>
-
-		<listitem>
-		  <para>Die Freiheit, die Funktionsweise von OmegaT zu analysieren und es so zu verändern, dass es nach Ihren Wünschen läuft.</para>
-		</listitem>
-
-		<listitem>
-		  <para>Die Freiheit, Kopien weiterzugeben, damit Sie anderen helfen können.</para>
-		</listitem>
-
-		<listitem>
-		  <para>Die Freiheit, Kopien der von Ihnen geänderten Versionen an andere weiterzugeben.</para>
-		</listitem>
-	  </itemizedlist>
-	  </para>
-    </abstract>
-  </bookinfo>
-
-  
-  <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="OmegaT5_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	           
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="de" xml:id="book.user.manual">
+   <info>
+      <title xml:id="book.user.manual.title">OmegaT 6.1.0 - Bedienungsanleitung</title>
+      <!-- Copyright 2002-2023
+		 - Vincent Bidaux
+		 - Didier Briel
+		 - Jean-Christophe Helary
+		 - Aaron Madlon-Kay
+		 - Maxym Mychalchuk
+		 - Marc Prior
+		 - Vito Smolej
+		 - Kerry Swatridge
+		 - Philippe Tourigny
+	--><!-- <pubdate>@timestamp@</pubdate> --><!-- TODO automate date insertion -->
+      <abstract>
+         <para>Dieses Dokument ist die offizielle Bedienungsanleitung für OmegaT, ein kostenloses Tool für computergestützte Übersetzung.</para>
+         <para>Der Hauptzweck von OmegaT besteht darin, Ihnen einen möglichst zuverlässigen Zugriff auf Ihre Übersetzungsressourcen zu ermöglichen, damit Sie so schnell wie möglich eine gute Übersetzung anfertigen können.</para>
+         <para>OmegaT wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Diese Lizenz gibt Ihnen die folgenden Freiheiten:<itemizedlist xml:id="freedoms.list">
+               <listitem>
+                  <para>Die Freiheit, die Software für jeden Zweck zu verwenden.</para>
+               </listitem>
+               <listitem>
+                  <para>Die Freiheit, die Funktionsweise von OmegaT zu analysieren und es so zu verändern, dass es Ihren Wünschen entspricht.</para>
+               </listitem>
+               <listitem>
+                  <para>Die Freiheit, Kopien weiterzugeben, um anderen zu helfen.</para>
+               </listitem>
+               <listitem>
+                  <para>Die Freiheit, Kopien der von Ihnen geänderten Versionen an andere weiterzugeben.</para>
+               </listitem>
+            </itemizedlist>
+            	  </para>
+      </abstract>
+   </info>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Introduction.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_HowTo.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_EditorsPanes.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Menus.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_WindowsAndDialogs.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Preferences.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_ProjectFolder.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Appendices.xml"/>
 </book>

@@ -461,6 +461,7 @@ public interface IEditor {
     /**
      * Gets a filter for this editor, or null if filter doesn't applied.
      */
+    @Nullable
     IEditorFilter getFilter();
 
     /**

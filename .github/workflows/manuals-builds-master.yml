@@ -17,14 +17,19 @@ jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: actions/setup-java@v5
       with:
-        java-version: 17
+        java-version: 21
         distribution: 'temurin'
-    - uses: gradle/actions/setup-gradle@v5
+    - uses: gradle/actions/setup-gradle@v6
       name: Setup Gradle
       id: setup-gradle
     - name: Run gradle manualsHtmls
       run: ./gradlew -PenvIsCi=true manualHtmls
       id: gradle
+    - name: upload artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        name: manual
+        path: build/docs/manual

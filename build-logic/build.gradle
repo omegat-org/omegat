@@ -24,6 +24,7 @@ gradlePlugin {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     // 'repository' for getting docbook xsd
     ivy {
@@ -48,7 +49,7 @@ dependencies {
     // 3rd party gradle plugin
     implementation 'com.github.ben-manes:gradle-versions-plugin:0.52.0'
     implementation 'com.github.spotbugs.snom:spotbugs-gradle-plugin:6.1.5'
-    implementation 'com.diffplug.spotless:spotless-plugin-gradle:8.3.0'
+    implementation 'com.diffplug.spotless:spotless-plugin-gradle:8.7.0'
     implementation 'edu.sc.seis.launch4j:launch4j:4.0.0'
     implementation 'org.hidetake.ssh:org.hidetake.ssh.gradle.plugin:2.11.2'
     implementation 'net.ltgt.gradle:gradle-errorprone-plugin:4.2.0'
@@ -57,12 +58,70 @@ dependencies {
     // dependencies on Maven
     implementation 'xerces:xercesImpl:2.12.2'
     implementation 'xml-resolver:xml-resolver:1.2'
-    implementation 'net.sf.docbook:docbook-xsl:1.79.1:resources@zip'
+    implementation 'org.xmlresolver:xmlresolver:6.0.23'
+    implementation 'net.sf.saxon:Saxon-HE:12.9'
+    implementation 'org.docbook:docbook-xslTNG:2.8.2'
+    implementation 'com.nwalsh:sinclude:5.2.4'
     implementation 'tokyo.northside:whc:3.6.0'
     implementation 'xalan:xalan:2.7.3'
     implementation 'xalan:serializer:2.7.3'
+}
 
-    // dependencies not on Maven
-    // https://docbook.org/xml/4.5/docbook-xml-4.5.zip
-    implementation 'docbook:docbook-xml:4.5:resources@zip'
+// Extra deps only needed for the offline build (not on the compile/runtime classpath)
+def offlineOnlyDeps = [
+        'org.omegat:launch4j:3.55',
+        'org.omegat:launch4j:3.55:workdir-win32',
+        'org.omegat:launch4j:3.55:workdir-mac',
+        'org.omegat:launch4j:3.55:workdir-linux64',
+        'org.omegat:launch4j:3.55:workdir-linux',
+]
+
+// Declare the resolvable configuration at configuration time (not inside doLast)
+configurations.create('buildLogicDepsCopy') {
+    transitive = true
+    canBeConsumed = false
+    canBeResolved = true
+}
+// Populate it at configuration time
+configurations.implementation.dependencies.each { dep ->
+    dependencies.add('buildLogicDepsCopy', dep)
+}
+offlineOnlyDeps.each { coord ->
+    dependencies.add('buildLogicDepsCopy', coord)
+}
+
+def destDir = layout.buildDirectory.dir('libs/build-logic')
+tasks.register('downloadBuildLogicDependencies') {
+    description = 'Downloads build-logic dependencies for offline/enterprise builds'
+    group = 'build setup'
+
+    outputs.dir(destDir)
+
+    doLast {
+
+        configurations.buildLogicDepsCopy
+                .resolvedConfiguration
+                .resolvedArtifacts
+                .each { artifact ->
+                    def moduleVersion = artifact.moduleVersion.id
+                    // Reconstruct Maven layout: group/artifact/version/artifact-version[-classifier].ext
+                    def groupPath = moduleVersion.group.replace('.', '/')
+                    def artifactDir = new File(destDir.get().asFile,
+                            "${groupPath}/${moduleVersion.name}/${moduleVersion.version}")
+                    artifactDir.mkdirs()
+
+                    def classifier = artifact.classifier ? "-${artifact.classifier}" : ''
+                    def fileName = "${moduleVersion.name}-${moduleVersion.version}${classifier}.${artifact.extension}"
+                    copy { from artifact.file; into artifactDir; rename { fileName } }
+                    // Fetch POM separately
+                    def pomDep = "${moduleVersion.group}:${moduleVersion.name}:${moduleVersion.version}@pom"
+                    def pomConfig = configurations.detachedConfiguration(
+                            dependencies.create(pomDep)
+                    )
+                    pomConfig.resolvedConfiguration.resolvedArtifacts.each { pom ->
+                        def pomName = "${moduleVersion.name}-${moduleVersion.version}.pom"
+                        copy { from pom.file; into artifactDir; rename { pomName } }
+                    }
+                }
+    }
 }

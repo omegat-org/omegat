@@ -34,7 +34,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
-import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.util.OStrings;
 
@@ -45,7 +44,7 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class MappingRulesModel extends AbstractTableModel {
-    private SRX srx;
+    private final SRX srx;
 
     /**
      * Creates a new instance of MappingRulesModel
@@ -88,20 +87,17 @@ public class MappingRulesModel extends AbstractTableModel {
     }
 
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        MapRule maprule = srx.getMappingRules().get(rowIndex);
+        List<MapRule> maprules = srx.getMappingRules();
+        MapRule oldrule = maprules.get(rowIndex);
         switch (columnIndex) {
         case 0:
             String target = (String) aValue;
             String code = LanguageCodes.getLanguageCodeByName(target);
-            if (code != null) {
-                maprule.setLanguage(code);
-            } else {
-                maprule.setLanguage(target);
-            }
+            maprules.set(rowIndex, new MapRule(code != null ? code : target, oldrule.getPattern(), oldrule.getRules()));
             break;
         case 1:
             try {
-                maprule.setPattern((String) aValue);
+                maprules.set(rowIndex, new MapRule(oldrule.getLanguage(), (String) aValue, oldrule.getRules()));
             } catch (PatternSyntaxException pse) {
                 fireException(pse);
             }
@@ -116,12 +112,11 @@ public class MappingRulesModel extends AbstractTableModel {
     }
 
     /** Adds a new empty mapping rule. */
-    public int addRow() {
+    public void addRow() {
         int rows = srx.getMappingRules().size();
         srx.getMappingRules().add(
-                new MapRule(OStrings.getString("SEG_NEW_LN_CO"), "LN-CO", new ArrayList<Rule>()));
+                new MapRule(OStrings.getString("SEG_NEW_LN_CO"), "LN-CO", new ArrayList<>()));
         fireTableRowsInserted(rows, rows);
-        return rows;
     }
 
     /** Removes a mapping rule. */
@@ -149,7 +144,7 @@ public class MappingRulesModel extends AbstractTableModel {
     //
 
     /** List of listeners */
-    protected List<ExceptionListener> listeners = new ArrayList<ExceptionListener>();
+    protected List<ExceptionListener> listeners = new ArrayList<>();
 
     public void addExceptionListener(ExceptionListener l) {
         listeners.add(l);

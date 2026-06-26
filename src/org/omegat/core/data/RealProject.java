@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.segmentation.SRXManager;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -232,9 +233,7 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
-        projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), config.getProjectRootDir(), checkOrphanedCallback,
-                Core.getSegmenter());
+        projectTMX = new ProjectTMX(checkOrphanedCallback);
         sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
@@ -246,7 +245,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
+            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
@@ -1651,9 +1650,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());

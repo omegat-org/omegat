@@ -138,6 +138,7 @@ Jean-Christophe Helary (プロジェクトマネージャー)
 - Concepción Martin (Facebook community manager)
 - Hiroshi Miura (lead developer)
 - Briac Pilpré (webmaster)
+- Philippe Tourigny (documentation manager)
 - Lucie Vecerova (Facebook community manager)
 
 コードへの貢献は、/docs/contributors.txtに記載されています。
@@ -181,3 +182,7 @@ OmegaT に関する最新の情報は以下のウェブサイトで公開され�
 バグ報告も同じく SourceForge 内の開発サイトへ（英語のみ）：
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT貢献ガイド
+
+  https://omegat.readthedocs.io/en/latest/

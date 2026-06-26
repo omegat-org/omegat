@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="nl" id="first.steps">
-  <title>OmegaT</title>
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="nl">
   <section>
-	<title id="first-steps">Eerste stappen</title>
+	<title>Eerste stappen</title>
 	<para>Druk op <keycap>F1</keycap> of open het menu <guimenu>&gt; Help</guimenu> om de gebruikershandleiding te openen. Die bevat een uitgebreide introductie voor OmegaT. Doe dit om te beginnen met OmegaT met minimale instellingen:<orderedlist id="first-step-list">
 	  <listitem>
 		<para>Gebruik <guimenu>&gt; Project</guimenu> <guimenuitem>&gt; Nieuw…</guimenuitem> om een nieuw project te maken.</para>
@@ -38,7 +36,7 @@
   </section>
 
   <section>
-	<title id="freedoms">Vrijheden</title>
+	<title>Vrijheden</title>
 	<para>OmegaT is een gratis en vrije computer-assisted translation (CAT) oplossing voor professionele vertalers. Het wordt gedistribueerd onder de termen van de <emphasis>GNU General Public License, versie 3.0</emphasis>. Bekijk <guimenu>&gt; Help</guimenu> <guimenu>&gt; Over</guimenu>. De licentie geeft u de volgende vrijheden:<itemizedlist id="freedoms.list">
 	  <listitem>
 		<para>De vrijheid om OmegaT uit te voeren zoals u dat wilt, voor elk doel.</para>

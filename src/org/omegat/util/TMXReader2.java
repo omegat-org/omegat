@@ -96,10 +96,11 @@ public class TMXReader2 {
     private XMLEventReader xml;
 
     private boolean isParagraphSegtype = true;
-    private boolean isOmegaT = false;
+    private boolean createdByOmegaT = false;
     private boolean extTmxLevel2;
     private boolean useSlash;
     private boolean isSegmentingEnabled;
+    private boolean needValidate = true;
 
     private int errorsCount;
     private int warningsCount;
@@ -114,7 +115,7 @@ public class TMXReader2 {
     InlineTagHandler inlineTagHandler = new InlineTagHandler();
 
     /**
-     * Detects charset of XML file.
+     * Detects charset of the XML file.
      */
     public static String detectCharset(File file) throws IOException {
         try (XmlStreamReader rd = XmlStreamReader.builder().setFile(file).get()) {
@@ -131,7 +132,8 @@ public class TMXReader2 {
         inputFactory.setProperty(IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         inputFactory.setProperty(IS_REPLACING_ENTITY_REFERENCES, false);
         inputFactory.setXMLReporter((message, errorType, info, location) -> {
-            Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(), location.getColumnNumber());
+            Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
+                    location.getColumnNumber());
             Log.log(StringUtil.format("{0}: {1}", message, info));
             warningsCount++;
         });
@@ -150,19 +152,26 @@ public class TMXReader2 {
      * Read TMX file.
      */
     public void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
-            boolean isSegmentingEnabled, final boolean omegaTMX, final boolean extTmxLevel2,
-            final boolean useSlash, final LoadCallback callback) throws Exception {
-        this.extTmxLevel2 = extTmxLevel2;
-        this.useSlash = useSlash;
-        this.isSegmentingEnabled = isSegmentingEnabled;
+            boolean enableSegmenting, final boolean omegaTMX, final boolean myExtTmxLevel2,
+            final boolean myUseSlash, final LoadCallback callback) throws Exception {
+        extTmxLevel2 = myExtTmxLevel2;
+        useSlash = myUseSlash;
+        isSegmentingEnabled = enableSegmenting;
+        needValidate = !omegaTMX;
+        readTMX(file, sourceLanguage, targetLanguage, callback);
+    }
 
-        if (!omegaTMX) {
+    /**
+     * Read TMX file.
+     */
+    public void readTMX(File file, Language sourceLanguage, Language targetLanguage, LoadCallback callback)
+            throws Exception {
+        if (needValidate) {
             // log the validating attempt
             Log.logInfoRB("TMXR_INFO_VALIDATING_FILE", file.getAbsolutePath());
             boolean tmx11 = isTmx11(file);
             validateTMX(file, tmx11);
         }
-
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
         boolean allFound = true;
@@ -210,12 +219,11 @@ public class TMXReader2 {
             validator.setErrorHandler(xsdErrorHandler);
             validator.validate(new StreamSource(getInputStream(file)));
             if (!xsdErrorHandler.getExceptions().isEmpty()) {
-                StringBuilder errorMessage = new StringBuilder("OmegaT TMX validation failed with the following errors:\n");
+                StringBuilder errorMessage = new StringBuilder(OStrings.getString("TMX_VALIDATOR_ERROR"));
+                errorMessage.append("\n");
                 for (SAXParseException e : xsdErrorHandler.getExceptions()) {
-                    errorMessage.append(String.format("Line %d:%d - %s%n",
-                            e.getLineNumber(),
-                            e.getColumnNumber(),
-                            e.getMessage()));
+                    errorMessage.append(TMXReaderErrorMessageTranslator.translate(e.getLineNumber(),
+                            e.getColumnNumber(), e.getMessage()));
                 }
                 throw new SAXException(errorMessage.toString());
             }
@@ -323,7 +331,7 @@ public class TMXReader2 {
 
     protected void parseHeader(StartElement element, final Language sourceLanguage) {
         isParagraphSegtype = SEG_PARAGRAPH.equals(getAttributeValue(element, "segtype"));
-        isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
+        createdByOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
         // log some details
         Log.logInfoRB("TMXR_INFO_CREATION_TOOL", getAttributeValue(element, "creationtool"));
@@ -405,7 +413,7 @@ public class TMXReader2 {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = (StartElement) e;
                 if ("seg".equals(eStart.getName().getLocalPart())) {
-                    if (isOmegaT) {
+                    if (createdByOmegaT) {
                         parseSegOmegaT();
                     } else if (extTmxLevel2) {
                         parseSegExtLevel2();
@@ -799,27 +807,55 @@ public class TMXReader2 {
         public String text;
     }
 
-    public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {
-        public InputSource resolveEntity(String publicId, String systemId) {
-            if (systemId.endsWith("tmx11.dtd")) {
-                return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd"));
-            } else if (systemId.endsWith("tmx14.dtd")) {
-                return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd"));
-            } else {
-                return null;
-            }
+    public static final EntityResolver TMX_DTD_RESOLVER = (publicId, systemId) -> {
+        if (systemId.endsWith("tmx11.dtd")) {
+            return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd"));
+        } else if (systemId.endsWith("tmx14.dtd")) {
+            return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd"));
+        } else {
+            return null;
         }
     };
 
-    public static final XMLResolver TMX_DTD_RESOLVER_2 = new XMLResolver() {
-        public Object resolveEntity(String publicId, String systemId, String baseURI, String namespace) {
-            if (systemId.endsWith("tmx11.dtd")) {
-                return TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd");
-            } else if (systemId.endsWith("tmx14.dtd")) {
-                return TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd");
-            } else {
-                return null;
-            }
+    public static final XMLResolver TMX_DTD_RESOLVER_2 = (publicId, systemId, baseURI, namespace) -> {
+        if (systemId.endsWith("tmx11.dtd")) {
+            return TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd");
+        } else if (systemId.endsWith("tmx14.dtd")) {
+            return TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd");
+        } else {
+            return null;
         }
     };
+
+    public static class Builder {
+        private final TMXReader2 reader;
+
+        public Builder() {
+            this.reader = new TMXReader2();
+        }
+
+        public Builder setSegmentingEnabled(boolean enableSegmenting) {
+            reader.isSegmentingEnabled = enableSegmenting;
+            return this;
+        }
+
+        public Builder setExtTmxLevel2(boolean extTmxLevel2) {
+            reader.extTmxLevel2 = extTmxLevel2;
+            return this;
+        }
+
+        public Builder setUseSlash(boolean useSlash) {
+            reader.useSlash = useSlash;
+            return this;
+        }
+
+        public Builder setNeedValidate(boolean needValidate) {
+            reader.needValidate = needValidate;
+            return this;
+        }
+
+        public TMXReader2 build() {
+            return reader;
+        }
+    }
 }

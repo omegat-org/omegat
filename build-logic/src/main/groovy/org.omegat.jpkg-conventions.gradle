@@ -90,7 +90,6 @@ tasks.register('jpackageAppContent') {
 tasks.register('jpackage', Exec) {
     dependsOn cleanJpkgWorkdir
     dependsOn jars
-    group = 'other'
 
     inputs.files file(layout.buildDirectory.file('jars'))
     outputs.files file(layout.buildDirectory.file("jpackage/app-image"))

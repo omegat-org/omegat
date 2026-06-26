@@ -13,7 +13,7 @@ import org.gradle.api.tasks.Input
 
 @CompileStatic
 @CacheableTask
-class DocbookHtmlTask extends TransformationTask {
+abstract class DocbookHtmlTask extends TransformationTask {
 
     private final Provider<String> css = project.objects.property(String)
     private final Provider<String> pageStyle = project.objects.property(String)

@@ -11,4 +11,4 @@ steps:
     inputs:
       tasks: 'test'
       options: '--build-cache --no-daemon -PenvIsCi -PtestMaxHeapSize=2048M'
-      jdkVersionOption: '1.17'
+      jdkVersionOption: '1.21'

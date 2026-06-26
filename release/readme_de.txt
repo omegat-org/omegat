@@ -1,4 +1,8 @@
-@TRANSLATION_NOTICE@
+Die Deutsche Version von OmegaT wurde übersetzt von:
+Harald 'Ragnar-F' B. (Hauptübersetzer)
+Michael Motzkus
+Eugenie Neumann
+Sabine Wanner
 
 
 Was ist OmegaT?
@@ -27,8 +31,8 @@ in /lib/licenses/Licenses.txt aufgeführt.
 Voraussetzungen für die OmegaT-Installation
 ===========================================
 
-OmegaT erfordert, dass die Java Runtime Environment (JRE) Version 1.8 oder
-höher auf Ihrem System installiert ist.
+Für OmegaT muss Java Runtime Environment (JRE) Version 1.8 oder höher
+auf Ihrem System installiert sein.
 
 Wir empfehlen die Verwendung von OmegaT-Paketen, die die JRE bereits enthalten,
 um Ihnen die Suche, Beschaffung und Installation der JRE zu ersparen.
@@ -45,17 +49,17 @@ Starten Sie das Installationsprogramm.
 OmegaT installieren (Mac)
 =========================
 
-Entpacken Sie das .zip-Archiv von OmegaT, um einen Ordner zu erhalten, der eine
-Dokumentationsdatei und die OmegaT-Anwendung enthält. Verschieben Sie den
-Ordner an einen geeigneten Ort, z. B. in den Programme-Ordner.
+Entpacken Sie das .zip-Archiv von OmegaT, um einen Ordner mit einer
+Dokumentationsdatei und der OmegaT-Anwendung zu erhalten. Verschieben Sie den
+Ordner an einen geeigneten Ort, z.B. in den Programme-Ordner.
 
 
 
 OmegaT installieren (Linux)
 ===========================
 
-Platzieren Sie das Archiv in einen beliebigen geeigneten Ordner und entpacken
-Sie es. OmegaT kann danach gestartet werden.
+Platzieren Sie das Archiv in einen beliebigen Ordner und entpacken Sie es. 
+Danach kann OmegaT gestartet werden.
 
 Für eine übersichtlichere und benutzerfreundlichere Installation können Sie das
 Installationsskript (linux-install.sh) verwenden. Um dieses Skript zu
@@ -68,8 +72,8 @@ Skript mit ./linux-install.sh aus.
 OmegaT installieren (Solaris, FreeBSD, etc.)
 ============================================
 
-Platzieren Sie das Archiv in einen beliebigen geeigneten Ordner und entpacken
-Sie es. OmegaT kann danach gestartet werden.
+Platzieren Sie das Archiv in einen beliebigen Ordner und entpacken Sie es. 
+Danach kann OmegaT gestartet werden.
 
 
 
@@ -157,6 +161,7 @@ Aktuelles Team:
 - Concepción Martin (Facebook Community Manager)
 - Hiroshi Miura (Hauptentwickler)
 - Briac Pilpré (Webmaster)
+- Philippe Tourigny (Dokumentationsmanager)
 - Lucie Vecerova (Facebook Community Manager)
 
 Mitwirkende am Code sind in /docs/contributors.txt dokumentiert.
@@ -192,7 +197,7 @@ Die aktuellsten Informationen über OmegaT finden Sie unter:
 
   https://omegat.org/
 
-Unterstützungen für den Nutzer:
+Unterstützungen für den Benutzer:
 
   https://omegat.org/support
 
@@ -203,3 +208,7 @@ Verbesserungswünsche (in Englisch), auf der SourceForge-Seite:
 Fehlerberichte (in Englisch), auf der SourceForge-Seite:
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT Contribution Guide
+
+  https://omegat.readthedocs.io/en/latest/

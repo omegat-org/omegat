@@ -12,7 +12,7 @@ steps:
     inputs:
       tasks: check
       options: '-PenvIsCi --no-daemon --scan -PtestMaxHeapSize=2048M'
-      jdkVersionOption: '1.17'
+      jdkVersionOption: '1.21'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/reports/**/*.xml'
     condition: always()

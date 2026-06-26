@@ -29,8 +29,9 @@ package org.omegat.util.logging;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -60,18 +61,15 @@ public class OmegaTLogFormatter extends Formatter {
     private final boolean isMaskContainsLoggerName;
     private final boolean isMaskContainsTime;
 
-    private String defaultTimeFormat = "HH:mm:ss";
+    private static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
 
     /**
-     * We have to use ThreadLocal for formatting time because DateFormat is not
-     * thread safe.
+     * Formatter for the log timestamp. {@link DateTimeFormatter} is immutable
+     * and thread-safe, so a single shared instance can be reused across threads
+     * without the per-thread allocation and lookup overhead of a
+     * {@link ThreadLocal}.
      */
-    private final ThreadLocal<SimpleDateFormat> timeFormatter = new ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat(defaultTimeFormat);
-        }
-    };
+    private final DateTimeFormatter timeFormatter;
 
     /**
      * Initialize formatter.
@@ -88,9 +86,10 @@ public class OmegaTLogFormatter extends Formatter {
         }
 
         String timeFormat = manager.getProperty(cname + ".timeFormat");
-        if (timeFormat != null) {
-            defaultTimeFormat = timeFormat;
+        if (timeFormat == null) {
+            timeFormat = DEFAULT_TIME_FORMAT;
         }
+        timeFormatter = DateTimeFormatter.ofPattern(timeFormat).withZone(ZoneId.systemDefault());
 
         isMaskContainsKey = logMask.contains("$key");
         isMaskContainsLevel = logMask.contains("$level");
@@ -156,7 +155,7 @@ public class OmegaTLogFormatter extends Formatter {
             res = res.replace("$mark", LINE_MARK);
         }
         if (isMaskContainsTime) {
-            res = res.replace("$time", timeFormatter.get().format(new Date()));
+            res = res.replace("$time", timeFormatter.format(Instant.now()));
         }
         if (isMaskContainsLoggerName) {
             res = res.replace("$loggerName", record.getLoggerName());

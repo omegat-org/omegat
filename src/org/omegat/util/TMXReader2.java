@@ -56,15 +56,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
@@ -83,8 +84,11 @@ import static javax.xml.stream.XMLInputFactory.SUPPORT_DTD;
 public class TMXReader2 {
 
     private final XMLInputFactory inputFactory;
-    private final SimpleDateFormat dateFormat1;
-    private final SimpleDateFormat dateFormat2;
+
+    private static final DateTimeFormatter DATE_FORMAT1 = DateTimeFormatter
+            .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
+    private static final DateTimeFormatter DATE_FORMAT2 = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
 
     /** Segment Type attribute value: "paragraph" */
     public static final String SEG_PARAGRAPH = "paragraph";
@@ -136,10 +140,6 @@ public class TMXReader2 {
             warningsCount++;
         });
         inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
-        dateFormat1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
-        dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
-        dateFormat2.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
     public boolean isParagraphSegtype() {
@@ -743,12 +743,12 @@ public class TMXReader2 {
             return 0;
         }
         try {
-            return dateFormat1.parse(str).getTime();
-        } catch (ParseException ignored) {
+            return Instant.from(DATE_FORMAT1.parse(str)).toEpochMilli();
+        } catch (DateTimeException ignored) {
         }
         try {
-            return dateFormat2.parse(str).getTime();
-        } catch (ParseException ignored) {
+            return Instant.from(DATE_FORMAT2.parse(str)).toEpochMilli();
+        } catch (DateTimeException ignored) {
         }
 
         return 0;

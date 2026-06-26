@@ -39,11 +39,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -552,12 +554,12 @@ public class FilterMaster {
      * Return current system time in the specified date format.
      *
      * @param dateFormat
-     *            Date format for java.text.SimpleDateFormat.
+     *            Date format pattern for
+     *            {@link java.time.format.DateTimeFormatter}.
      */
     public static String now(String dateFormat) {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        return sdf.format(cal.getTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat, Locale.getDefault());
+        return formatter.format(ZonedDateTime.now(ZoneId.systemDefault()));
     }
 
     /**

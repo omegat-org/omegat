@@ -28,6 +28,9 @@
 package org.omegat.filters3.xml.wordpress;
 
 import java.util.regex.Pattern;
+
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attributes;
 
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -37,6 +40,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class WordpressDialect extends DefaultXMLDialect {
     public static final Pattern WORDPRESS_XMLNS = Pattern
             .compile("xmlns(:\\w+)?=\"http://wordpress.org/export/");
@@ -72,11 +76,9 @@ public class WordpressDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     @Override
-    public Boolean validateIntactTag(String tag, Attributes atts) {
-        if (tag.startsWith("wp:")) { // All these tags must be ignored
-            return true;
-        }
-        return false;
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
+        // All these tags must be ignored
+        return tag.startsWith("wp:");
     }
 
 }

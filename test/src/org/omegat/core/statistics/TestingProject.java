@@ -68,6 +68,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
         segmenter = new Segmenter(SRX.getDefault());
         projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
                 Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
+        loadSource();
     }
 
     @Override
@@ -90,9 +91,9 @@ public class TestingProject extends NotLoadedProject implements IProject {
         return r;
     }
 
-    @Override
-    public List<SourceTextEntry> getAllEntries() {
-        List<SourceTextEntry> ste = new ArrayList<>();
+    private List<SourceTextEntry> ste = new ArrayList<>();
+
+    private void loadSource() {
         IFilter filter = new PoFilter();
         Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
         IParseCallback testCallback = new TestingParseCallback(ste);
@@ -102,6 +103,10 @@ public class TestingProject extends NotLoadedProject implements IProject {
         } catch (Exception e) {
             Log.log(e);
         }
+    }
+
+    @Override
+    public List<SourceTextEntry> getAllEntries() {
         return ste;
     }
 
@@ -122,25 +127,16 @@ public class TestingProject extends NotLoadedProject implements IProject {
 
     @Override
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        TestingAllTranslations r = new TestingAllTranslations();
         synchronized (projectTMX) {
-            r.setDefaultTranslation(projectTMX.getDefaultTranslation(ste.getSrcText()));
-            r.setAlternativeTranslation(projectTMX.getMultipleTranslation(ste.getKey()));
-            if (r.getAlternativeTranslation() != null) {
-                r.setCurrentTranslation(r.getAlternativeTranslation());
-            } else if (r.getDefaultTranslation() != null) {
-                r.setCurrentTranslation(r.getDefaultTranslation());
-            } else {
-                r.setCurrentTranslation(EMPTY_TRANSLATION);
-            }
-            if (r.getDefaultTranslation() == null) {
-                r.setDefaultTranslation(EMPTY_TRANSLATION);
-            }
-            if (r.getAlternativeTranslation() == null) {
-                r.setAlternativeTranslation(EMPTY_TRANSLATION);
-            }
+            return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()), projectTMX.getMultipleTranslation(ste.getKey()));
         }
-        return r;
+    }
+
+    @Override
+    public List<IProject.FileInfo> getProjectFiles() {
+        FileInfo fi = new FileInfo("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+        fi.entries.addAll(ste);
+        return Collections.singletonList(fi);
     }
 
     @Override
@@ -170,21 +166,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
             setTargetLanguage(new Language("ca"));
             setTargetTokenizer(DefaultTokenizer.class);
             setProjectRoot(tmpDir.toString());
+            setSourceRoot("test/data/filters/po/");
         }
     }
-
-    public static class TestingAllTranslations extends IProject.AllTranslations {
-        public void setAlternativeTranslation(TMXEntry entry) {
-            alternativeTranslation = entry;
-        }
-
-        public void setDefaultTranslation(TMXEntry entry) {
-            defaultTranslation = entry;
-        }
-
-        public void setCurrentTranslation(TMXEntry entry) {
-            currentTranslation = entry;
-        }
-    }
-
 }

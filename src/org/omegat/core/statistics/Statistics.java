@@ -39,9 +39,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.BreakIterator;
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -67,6 +79,14 @@ public final class Statistics {
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;
+
+    /**
+     * Short date/time formatter for the statistics file header. Equivalent to
+     * the former {@code DateFormat.getInstance()} (short date and short time).
+     * {@link DateTimeFormatter} is immutable and thread-safe.
+     */
+    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter
+            .ofLocalizedDateTime(FormatStyle.SHORT).withZone(ZoneId.systemDefault());
 
     /**
      * Computes the number of characters excluding spaces in a string. Special
@@ -150,7 +170,7 @@ public final class Statistics {
 
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
+            writer.write(TIMESTAMP_FORMAT.format(Instant.now()) + "\n");
             writer.write(text);
         } catch (Exception ex) {
             Log.log(ex);
@@ -188,7 +208,7 @@ public final class Statistics {
                 StandardCharsets.UTF_8)) {
             switch (format) {
             case TEXT:
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
+                out.write(TIMESTAMP_FORMAT.format(Instant.now()) + "\n");
                 out.write(result.getTextData());
                 break;
             case XML:
@@ -202,5 +222,98 @@ public final class Statistics {
         } catch (Exception ex) {
             Log.log(ex);
         }
+    }
+
+    /**
+     * Get unique key for segment for uniqueness calculation.
+     */
+    public static String getUniquenessKey(SourceTextEntry ste) {
+        String src = ste.getSrcText();
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            String srcText = pp.getTextInSourceSegment();
+            String replacement = pp.getReplacementUniquenessCalculation();
+            if (srcText != null && replacement != null) {
+                src = src.replace(srcText, replacement);
+            }
+        }
+        return src;
+    }
+
+    /**
+     * Builds a file with statistic info about the project. The total word &amp;
+     * character count of the project, the total number of unique segments, plus
+     * the details for each file.
+     */
+    public static StatsResult buildProjectStats(final IProject project) {
+        StatCount total = new StatCount();
+        StatCount remaining = new StatCount();
+        StatCount unique = new StatCount();
+        StatCount remainingUnique = new StatCount();
+
+        Set<String> translated = new HashSet<>();
+        Set<String> filesUnique = new HashSet<>();
+        Set<String> filesRemainingUnique = new HashSet<>();
+        Map<String, Boolean> globalFirstSeenUnique = new HashMap<>();
+        List<FileData> counts = new ArrayList<>();
+
+        for (IProject.FileInfo file : project.getProjectFiles()) {
+            FileData numbers = new FileData();
+            numbers.filename = file.filePath;
+            counts.add(numbers);
+            int fileTotal = 0;
+            int fileRemaining = 0;
+
+            for (SourceTextEntry ste : file.entries) {
+                String key = getUniquenessKey(ste);
+                StatCount count = new StatCount(ste);
+                TMXEntry tr = project.getTranslationInfo(ste);
+                boolean isTranslated = tr.isTranslated();
+
+                // Project-wide total and remaining
+                total.add(count);
+                fileTotal = 1;
+                if (!isTranslated) {
+                    remaining.add(count);
+                    fileRemaining = 1;
+                }
+
+                // File-wide info
+                numbers.total.add(count);
+                if (!isTranslated) {
+                    numbers.remaining.add(count);
+                }
+
+                // Unique segments (Project-wide and File-wide)
+                if (!globalFirstSeenUnique.containsKey(key)) {
+                    globalFirstSeenUnique.put(key, isTranslated);
+                    unique.add(count);
+                    filesUnique.add(ste.getKey().file);
+                    numbers.unique.add(count);
+
+                    if (!isTranslated) {
+                        remainingUnique.add(count);
+                        filesRemainingUnique.add(ste.getKey().file);
+                        numbers.remainingUnique.add(count);
+                    }
+                } else if (isTranslated) {
+                    // Update translated status for project-wide translated set
+                    globalFirstSeenUnique.put(key, true);
+                }
+            }
+            total.addFiles(fileTotal);
+            remaining.addFiles(fileRemaining);
+        }
+
+        unique.addFiles(filesUnique.size());
+        remainingUnique.addFiles(filesRemainingUnique.size());
+
+        // Fill translated set for StatsResult
+        for (Map.Entry<String, Boolean> entry : globalFirstSeenUnique.entrySet()) {
+            if (entry.getValue()) {
+                translated.add(entry.getKey());
+            }
+        }
+
+        return new StatsResult(total, remaining, unique, remainingUnique, translated, counts);
     }
 }

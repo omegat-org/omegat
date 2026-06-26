@@ -32,6 +32,7 @@
 
 package org.omegat.util;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.html.EntityUtil;
 
 import java.util.Collection;
@@ -94,7 +95,7 @@ public final class HTMLUtils {
      *            A collection of tag-like strings ({@code <foo>}) that will be
      *            "protected", i.e. they will not be escaped as entities.
      */
-    public static String charsToEntities(String str, String encoding, Collection<String> shortcuts) {
+    public static String charsToEntities(String str, @Nullable String encoding, Collection<String> shortcuts) {
         return getEntityUtil().charsToEntities(str, encoding, shortcuts);
     }
 

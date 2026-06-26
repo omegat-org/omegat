@@ -28,7 +28,7 @@ package org.omegat.filters2;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 
 /**
@@ -58,8 +58,9 @@ public interface IParseCallback {
      * @param protectedParts
      *            protected parts
      */
-    void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
-            String path, IFilter filter, List<ProtectedPart> protectedParts);
+    void addEntryWithProperties(@Nullable String id, String source, @Nullable String translation, boolean isFuzzy,
+                                String[] props, @Nullable String path, IFilter filter,
+                                @Nullable List<ProtectedPart> protectedParts);
 
     /**
      * Read entry from a source file, with single "comment" property.
@@ -67,8 +68,8 @@ public interface IParseCallback {
      * {@link #addEntryWithProperties(String, String, String, boolean, String[], String, IFilter, List)}.
      */
     void addEntry(@Nullable String id, String source, @Nullable String translation, boolean isFuzzy,
-            @Nullable String comment, @Nullable String path, IFilter filter,
-            @Nullable List<ProtectedPart> protectedParts);
+                  @Nullable String comment, @Nullable String path, IFilter filter,
+                  @Nullable List<ProtectedPart> protectedParts);
 
     /**
      * This method is called by filters to add new entry in OmegaT after read it

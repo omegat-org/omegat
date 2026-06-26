@@ -62,7 +62,6 @@ public class TagUtilTest {
         assertEquals("Wrong tags found in '" + str + "'",
                 Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>"), new Tag(29, "<b1>")), tagList);
 
-        tagList.clear();
         ProtectedPart p;
         List<ProtectedPart> pp = new ArrayList<>();
         p = new ProtectedPart();
@@ -76,7 +75,6 @@ public class TagUtilTest {
                 Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>")), tagList);
 
         str = "Tag <test>case</test>.";
-        tagList.clear();
         pp.clear();
         p = new ProtectedPart();
         p.setTextInSourceSegment("<test>case</test>");

@@ -26,17 +26,19 @@
 
 package org.omegat.gui.exttrans;
 
+import org.jspecify.annotations.Nullable;
+
 /**
- * Class to store machine translation result.
+ * Class to store a machine translation result.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 public class MachineTranslationInfo {
     public final String translatorName;
-    public final String result;
+    public final @Nullable String result;
 
-    public MachineTranslationInfo(String translatorName, String result) {
+    public MachineTranslationInfo(String translatorName, @Nullable String result) {
         this.translatorName = translatorName;
         this.result = result;
     }

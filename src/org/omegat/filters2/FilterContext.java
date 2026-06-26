@@ -25,7 +25,7 @@
 
 package org.omegat.filters2;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;

@@ -63,12 +63,8 @@ import java.util.stream.Collectors;
 import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
 
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
-import org.omegat.core.team2.PreparedFileInfo;
-import org.omegat.core.team2.operation.GlossaryRebaseOperation;
-import org.omegat.core.team2.operation.RebaseUtils;
-import org.omegat.core.team2.operation.TMXRebaseOperation;
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -77,14 +73,18 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.team2.IRemoteRepository2;
+import org.omegat.core.team2.PreparedFileInfo;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.operation.GlossaryRebaseOperation;
+import org.omegat.core.team2.operation.RebaseUtils;
+import org.omegat.core.team2.operation.TMXRebaseOperation;
 import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -109,6 +109,8 @@ import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.filters.Filters;
+
+import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
 
 /**
  * Loaded project implementation. Only translation could be changed after
@@ -203,14 +205,6 @@ public class RealProject implements IProject {
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
 
-    /** This instance returned if translation not exist. */
-    private static final TMXEntry EMPTY_TRANSLATION;
-    static {
-        PrepareTMXEntry empty = new PrepareTMXEntry();
-        empty.source = "";
-        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
-    }
-
     private final boolean allowTranslationEqualToSource = Preferences
             .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
 
@@ -238,9 +232,7 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
-        projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), config.getProjectRootDir(), checkOrphanedCallback,
-                Core.getSegmenter());
+        projectTMX = new ProjectTMX(checkOrphanedCallback);
         sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
@@ -252,7 +244,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
+            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
@@ -402,7 +394,7 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             // build word count
-            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            StatsResult stat = Statistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             Statistics.writeStat(config.getProjectInternal(), stat);
 
@@ -658,8 +650,8 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return remoteRepositoryProvider.isManaged() && config.getTargetDir().isUnderRoot() && commitTargetFiles
-                && isOnlineMode;
+        return remoteRepositoryProvider.isManaged() && config.getTargetDir().isUnderRoot()
+                && commitTargetFiles && isOnlineMode;
     }
 
     private void exportTMXs() throws IOException {
@@ -738,7 +730,7 @@ public class RealProject implements IProject {
         // Ticket 1690 - build project statistics files
         // so that contents of these files is up to date with target files
         // sent at same moment
-        StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+        StatsResult stat = Statistics.buildProjectStats(this);
         stat.updateStatisticsInfo(hotStat);
         String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat.getTextData());
@@ -796,8 +788,8 @@ public class RealProject implements IProject {
             stdout.start();
             stderr.start();
         } catch (IOException e) {
-            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD", e.getCause() == null ?
-                    e.getLocalizedMessage() : e.getCause());
+            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD",
+                    e.getCause() == null ? e.getLocalizedMessage() : e.getCause());
         }
     }
 
@@ -857,8 +849,8 @@ public class RealProject implements IProject {
                     throw ex;
                 } catch (IRemoteRepository2.NetworkException e) {
                     if (isOnlineMode) {
-                        Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getLocalizedMessage()
-                                : e.getCause());
+                        Log.logErrorRB("TEAM_NETWORK_ERROR",
+                                e.getCause() == null ? e.getLocalizedMessage() : e.getCause());
                         setOfflineMode();
                     }
                 } catch (Exception e) {
@@ -869,7 +861,7 @@ public class RealProject implements IProject {
                 LastSegmentManager.saveLastSegment();
 
                 // update statistics
-                StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+                StatsResult stat = Statistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
                 Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
@@ -961,7 +953,8 @@ public class RealProject implements IProject {
                             if (tmxPrepared != null && glossaryPrepared != null) {
                                 String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                         remoteRepositoryProvider, null);
-                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider, newVersion);
+                                RebaseAndCommit.commitPrepared(glossaryPrepared, remoteRepositoryProvider,
+                                        newVersion);
                             }
 
                             tmxPrepared = null;
@@ -1144,10 +1137,8 @@ public class RealProject implements IProject {
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            FileInfo fi = new FileInfo();
-            fi.filePath = filepath;
-
             try {
+                FileInfo fi = new FileInfo(filepath);
                 loadFilesCallback.setCurrentFile(fi);
                 IFilter filter = fm.loadFile(config.getSourceRoot() + filepath, new FilterContext(config),
                         loadFilesCallback);
@@ -1395,25 +1386,10 @@ public class RealProject implements IProject {
     }
 
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        AllTranslations r = new AllTranslations();
         synchronized (projectTMX) {
-            r.defaultTranslation = projectTMX.getDefaultTranslation(ste.getSrcText());
-            r.alternativeTranslation = projectTMX.getMultipleTranslation(ste.getKey());
-            if (r.alternativeTranslation != null) {
-                r.currentTranslation = r.alternativeTranslation;
-            } else if (r.defaultTranslation != null) {
-                r.currentTranslation = r.defaultTranslation;
-            } else {
-                r.currentTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.defaultTranslation == null) {
-                r.defaultTranslation = EMPTY_TRANSLATION;
-            }
-            if (r.alternativeTranslation == null) {
-                r.alternativeTranslation = EMPTY_TRANSLATION;
-            }
+            return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()),
+                    projectTMX.getMultipleTranslation(ste.getKey()));
         }
-        return r;
     }
 
     /**
@@ -1447,15 +1423,15 @@ public class RealProject implements IProject {
 
         synchronized (projectTMX) {
             AllTranslations current = getAllTranslations(entry);
-            boolean wasAlternative = current.alternativeTranslation.isTranslated();
+            boolean wasAlternative = current.getAlternativeTranslation().isTranslated();
             if (defaultTranslation) {
-                if (!current.defaultTranslation.equals(previous.defaultTranslation)) {
+                if (!current.getDefaultTranslation().equals(previous.getDefaultTranslation())) {
                     throw new OptimisticLockingFail(previous.getDefaultTranslation().translation,
                             current.getDefaultTranslation().translation, current);
                 }
                 if (wasAlternative) {
                     // alternative -> default
-                    if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                    if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                         throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                                 current.getAlternativeTranslation().translation, current);
                     }
@@ -1464,7 +1440,7 @@ public class RealProject implements IProject {
                 }
             } else {
                 // new is alternative translation
-                if (!current.alternativeTranslation.equals(previous.alternativeTranslation)) {
+                if (!current.getAlternativeTranslation().equals(previous.getAlternativeTranslation())) {
                     throw new OptimisticLockingFail(previous.getAlternativeTranslation().translation,
                             current.getAlternativeTranslation().translation, current);
                 }
@@ -1557,9 +1533,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
@@ -1845,8 +1818,8 @@ public class RealProject implements IProject {
         List<String> sources = new ArrayList<>();
 
         @Override
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String sourcePath, IFilter filter) {
+        public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
+                                   boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

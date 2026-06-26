@@ -47,6 +47,12 @@ public class PreferencesImpl implements IPreferences {
         void load(List<String> keys, List<String> values);
 
         void save(List<String> keys, List<String> values) throws Exception;
+
+        boolean isFirstRun();
+
+        String getCreatedAt();
+
+        String getUpdatedAt();
     }
 
     private boolean m_changed;
@@ -68,6 +74,18 @@ public class PreferencesImpl implements IPreferences {
         for (int i = 0; i < m_nameList.size(); i++) {
             m_preferenceMap.put(m_nameList.get(i), i);
         }
+    }
+
+    /**
+     * Returns true if there was no existing preferences file at init time.
+     * Falls back to false if backing store does not provide this info.
+     */
+    @Override
+    public boolean isFirstRun() {
+        if (m_backing instanceof PreferencesXML) {
+            return m_backing.isFirstRun();
+        }
+        return false;
     }
 
     @Override

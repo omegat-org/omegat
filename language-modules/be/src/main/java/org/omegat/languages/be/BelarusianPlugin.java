@@ -25,10 +25,12 @@
 
 package org.omegat.languages.be;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
+@NullMarked
 public final class BelarusianPlugin {
 
     private static final String BELARUSIAN = "org.languagetool.language.Belarusian";

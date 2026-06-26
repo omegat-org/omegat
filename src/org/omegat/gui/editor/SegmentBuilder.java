@@ -30,9 +30,12 @@
 
 package org.omegat.gui.editor;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -42,6 +45,7 @@ import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -105,12 +109,12 @@ public class SegmentBuilder {
     /**
      * Source text of entry with internal bidi chars, or null if not displayed.
      */
-    private String sourceText;
+    private @Nullable String sourceText;
     /**
      * Translation text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    private String translationText;
+    private @Nullable String translationText;
     /** True if entry is active. */
     private boolean active;
     /** True if translation exist for entry. */
@@ -130,14 +134,14 @@ public class SegmentBuilder {
     protected int activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
-    protected Position beginPosP1;
-    protected Position endPosM1;
+    protected @Nullable Position beginPosP1;
+    protected @Nullable Position endPosM1;
 
     /** Source start position - for marks. */
-    protected Position posSourceBeg;
+    protected @Nullable Position posSourceBeg;
     protected int posSourceLength;
     /** Translation start position - for marks. */
-    protected Position posTranslationBeg;
+    protected @Nullable Position posTranslationBeg;
     protected int posTranslationLength;
 
     /** current offset in document to insert new stuff */
@@ -148,7 +152,7 @@ public class SegmentBuilder {
      *
      * Array of displayed marks. 1nd dimension - marker, 2nd dimension - marks
      */
-    protected MarkInfo[][] marks;
+    protected MarkInfo @Nullable [] @Nullable [] marks;
 
     /**
      * True if source OR target languages is RTL. In this case, we will insert
@@ -433,7 +437,7 @@ public class SegmentBuilder {
      * Get source text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    public String getSourceText() {
+    public @Nullable String getSourceText() {
         return sourceText;
     }
 
@@ -441,7 +445,7 @@ public class SegmentBuilder {
      * Get translation text of entry with internal bidi chars, or null if not
      * displayed.
      */
-    public String getTranslationText() {
+    public @Nullable String getTranslationText() {
         return translationText;
     }
 
@@ -519,7 +523,6 @@ public class SegmentBuilder {
      *            is text the source text (true) or translation text (false)
      * @param text
      *            segment part text
-     * @throws BadLocationException
      */
     private String addInactiveSegPart(boolean isSource, String text) throws BadLocationException {
         int prevOffset = offset;
@@ -537,7 +540,6 @@ public class SegmentBuilder {
      *
      * @param text
      *            other language translation text
-     * @throws BadLocationException
      */
     private void addOtherLanguagePart(String text, Language language) throws BadLocationException {
         int prevOffset = offset;
@@ -561,7 +563,6 @@ public class SegmentBuilder {
      *
      * @param trans
      *            The translation entry (can be null)
-     * @throws BadLocationException
      */
     private void addModificationInfoPart(TMXEntry trans) throws BadLocationException {
         if (!trans.isTranslated()) {
@@ -576,9 +577,13 @@ public class SegmentBuilder {
             String template;
             if (trans.changeDate != 0) {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
-                Date changeDate = new Date(trans.changeDate);
-                String changeDateString = DateFormat.getDateInstance().format(changeDate);
-                String changeTimeString = DateFormat.getTimeInstance().format(changeDate);
+                Instant changeDate = Instant.ofEpochMilli(trans.changeDate);
+                Locale locale = Locale.getDefault();
+                ZoneId zone = ZoneId.systemDefault();
+                String changeDateString = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                        .withLocale(locale).withZone(zone).format(changeDate);
+                String changeTimeString = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+                        .withLocale(locale).withZone(zone).format(changeDate);
                 Object[] args = { author, changeDateString, changeTimeString };
                 text = StringUtil.format(template, args);
             } else {

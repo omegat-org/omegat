@@ -65,7 +65,8 @@ public final class VersionCheckThread extends LongProcessThread {
                 synchronized (this) {
                     try {
                         if (enabled && !VersionChecker.getInstance().isUpToDate(false)) {
-                            VersionCheckDialog dialog = new VersionCheckDialog(VersionChecker.getInstance().getRemoteVersion());
+                            VersionCheckDialog dialog = new VersionCheckDialog(
+                                    VersionChecker.getInstance().getRemoteVersion());
                             SwingUtilities.invokeAndWait(() -> dialog.show(getParentWindow()));
                         }
                     } catch (Exception e) {

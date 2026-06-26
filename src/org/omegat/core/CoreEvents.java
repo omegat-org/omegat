@@ -34,6 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
@@ -46,12 +47,13 @@ import org.omegat.util.OStrings;
 
 /**
  * Class for distribute main application events.
- *
+ * <p>
  * All events can be fired in any threads, but will be delivered to listeners
  * only in the UI thread. It's required for better threads synchronization.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public final class CoreEvents {
     private static final List<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();

@@ -55,7 +55,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,9 +69,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.core.statistics.Statistics;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -84,7 +86,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -137,25 +138,25 @@ public final class Main {
     private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
-        if (args.length > 0
-                && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        CLIParameters cliParams = CLIParameters.parseArgs(args);
+        PARAMS.putAll(cliParams.getParams());
+
+        if (PARAMS.containsKey("help") || (args.length > 0 && CLIParameters.HELP_SHORT.equals(args[0]))) {
             System.out.println(
                     StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
 
-        if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
-            TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
+        if (CLIParameters.TEAM_TOOL.equals(cliParams.getSubcommand())) {
+            TeamTool.main(cliParams.getArgs().toArray(new String[0]));
         }
-
-        // Workaround for Java 17 or later support of JAXB.
-        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
-        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        PARAMS.putAll(CLIParameters.parseArgs(args));
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
         if (projectDir != null) {
@@ -165,7 +166,11 @@ public final class Main {
 
         applyConfigFile(PARAMS.get(CLIParameters.CONFIG_FILE));
 
-        runMode = CLIParameters.RUN_MODE.parse(PARAMS.get(CLIParameters.MODE));
+        String modeArg = PARAMS.get(CLIParameters.MODE);
+        if (modeArg == null) {
+            modeArg = cliParams.getSubcommand();
+        }
+        runMode = CLIParameters.RUN_MODE.parse(modeArg);
 
         String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {
@@ -225,6 +230,7 @@ public final class Main {
 
         // Do migration and load various settings. The order is important!
         Preferences.init();
+        StaticUtils.ensureUserScriptsDir();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
@@ -276,6 +282,15 @@ public final class Main {
     public static void restartGUI(String projectDir) {
         // Check we have `java` command in java.home
         Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
+        String installDir = StaticUtils.installDir();
+        Path parent = null;
+        if (installDir != null) {
+            parent = Paths.get(installDir).getParent();
+        }
+        if (!javaBin.toFile().exists()) {
+            // on Windows
+            javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java.exe");
+        }
         List<String> command = new ArrayList<>();
         if (javaBin.toFile().exists()) {
             // Build command: java -cp ... org.omegat.Main
@@ -286,25 +301,19 @@ public final class Main {
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
             command.addAll(CLIParameters.unparseArgs(PARAMS));
-        } else {
-            // assumes jpackage
-            String installDir = StaticUtils.installDir();
-            if (installDir == null) {
-                return;
-            } else {
-                Path parent = Paths.get(installDir).getParent();
-                if (parent == null) {
-                    return;
-                }
-                javaBin = parent.resolve("bin/OmegaT");
-                if (!javaBin.toFile().exists()) {
-                    // abort restart
-                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
-                    return;
-                }
-                command.add(javaBin.toString());
-                command.addAll(CLIParameters.unparseArgs(PARAMS));
+        } else if (parent != null) {
+            // assumes jpackage or Windows installer
+            javaBin = parent.resolve("bin/OmegaT");
+            if (!javaBin.toFile().exists()) {
+                javaBin = parent.resolve("OmegaT.exe");
             }
+            if (!javaBin.toFile().exists()) {
+                // abort restart
+                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                return;
+            }
+            command.add(javaBin.toString());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -371,14 +380,20 @@ public final class Main {
     private static int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
+        // set HiDPI configurations
+        System.setProperty("sun.java2d.uiScale.enabled", "true");
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-        tweakX11AppName();
-        System.setProperty("swing.aatext", "true");
+        if (Platform.isUnixLike()) {
+            tweakX11AppName();
+        }
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
@@ -468,7 +483,7 @@ public final class Main {
         Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
-        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+        StatsResult projectStats = Statistics.buildProjectStats(p);
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.
@@ -618,42 +633,30 @@ public final class Main {
 
     public static int runConsoleAlign() throws Exception {
         Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
+        if (!SubCommands.containsCommand("Align")) {
+            return 1;
+        }
 
         if (projectLocation == null) {
             System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
             return 1;
         }
 
-        String dir = PARAMS.get(CLIParameters.ALIGNDIR);
-        if (dir == null) {
-            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
-            return 1;
-        }
-
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
-        RealProject p = selectProjectConsoleMode(true);
-
+        BaseSubCommand command = SubCommands.getCommand("Align").getDeclaredConstructor().newInstance();
+        command.setParameters(PARAMS);
+        selectProjectConsoleMode(command.isProjectRequired());
         validateTagsConsoleMode();
-
-        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
-
-        String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-        ProjectProperties config = p.getProjectProperties();
-        boolean alt = !config.isSupportDefaultTranslations();
-        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
-                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
-        }
-        p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        return 0;
+        int status = command.call();
+        Log.logInfoRB("CONSOLE_FINISHED");
+        return status;
     }
 
     /**
      * creates the project class and adds it to the Core. Loads the project if
      * specified. An exit occurs on error loading the project. This method is
-     * for the different console modes, to prevent code duplication.
+     * for the different console modes to prevent code duplication.
      *
      * @param loadProject
      *            load the project or not

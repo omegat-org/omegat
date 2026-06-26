@@ -282,5 +282,4 @@ public class HTMLFilter2Test extends TestFilterBase {
         translate(new HTMLFilter2(), noHeaderFile, config);
         compareBinary(new File(addedHeaderFile), outFile);
     }
-
 }

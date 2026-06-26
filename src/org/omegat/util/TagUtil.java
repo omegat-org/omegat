@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -97,7 +98,7 @@ public final class TagUtil {
             return m.group(2) + m.group(3);
         }
 
-        public String getPairedTag() {
+        public @Nullable String getPairedTag() {
             switch (getType()) {
             case START:
                 return "</" + getName() + ">";
@@ -267,7 +268,7 @@ public final class TagUtil {
             return Collections.emptyList();
         }
 
-        List<Tag> tags = new ArrayList<Tag>();
+        List<Tag> tags = new ArrayList<>();
         // Put string in temporary buffer and replace tags with spaces as we
         // find them.
         // This ensures that we don't find identical tags multiple times unless
@@ -289,8 +290,8 @@ public final class TagUtil {
             }
         }
 
-        Collections.sort(tags, TAG_COMPARATOR);
-        return tags;
+        tags.sort(TAG_COMPARATOR);
+        return Collections.unmodifiableList(tags);
     }
 
     /*
@@ -320,9 +321,9 @@ public final class TagUtil {
     /**
      * Check whether a tag belongs to a list of tags
      * 
-     * @param tags
-     * @param tag
-     * @return true or false
+     * @param tags a list of tags to check.
+     * @param tag to look for.
+     * @return true when tag is found, false otherwise.
      */
     public static boolean containsTag(List<Tag> tags, String tag) {
         if (tag == null) {
@@ -365,7 +366,7 @@ public final class TagUtil {
      *            A segment
      * @return the first tag in the segment, or null if there are no tags
      */
-    public static String getFirstTag(String str) {
+    public static @Nullable String getFirstTag(String str) {
         Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         if (placeholderMatcher.find()) {
@@ -382,7 +383,7 @@ public final class TagUtil {
      * gray in editor and take part in tag validation.
      */
     public static List<ProtectedPart> applyCustomProtectedParts(String source, Pattern protectedPartsPatterns,
-            List<ProtectedPart> protectedParts) {
+            @Nullable List<ProtectedPart> protectedParts) {
         List<ProtectedPart> result;
         if (protectedParts != null) {
             // Remove already defined protected parts first to prevent

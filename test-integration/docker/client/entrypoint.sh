@@ -31,9 +31,10 @@ export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US:en
 
 # Create hash of all build configuration files including version catalogs
-BUILD_FILES_HASH=$(find /code/ -name "*.gradle*" -o -name "gradle.properties" -o -name "libs.versions.toml" \) \
-    -not -path "./build/*" -not -path "./.gradle/*" -not -path "./.git/*" | \
-    sort | xargs cat 2>/dev/null | sha256sum | cut -d' ' -f1)
+BUILD_FILES_HASH=$(find /code/ \
+    \( -path "*/.gradle" -o -path "*/build" -o -path "*/.git" \) -prune -o \
+    \( -name "build.gradle" -o -name "org.omegat.*.gradle" -o -name "gradle.properties" -o -name "libs.versions.toml" -o -name "gradle-wrapper.properties" \) \
+    -type f -print | sort | xargs cat 2>/dev/null | sha256sum | cut -d' ' -f1)
 
 rsync -rlD --exclude='.git' --exclude='.gradle' --exclude='build' /code/ /workdir
 

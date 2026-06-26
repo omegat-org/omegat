@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.CoreState;
@@ -89,6 +90,9 @@ public class MachineTranslateController {
      *         entries.
      */
     Map<String, String> getGlossaryMap() {
+        if (view.getCurrentlyProcessedEntry() == null) {
+            return Map.of();
+        }
         return Core.getGlossaryManager().searchSourceMatches(view.getCurrentlyProcessedEntry()).stream()
                 .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
     }
@@ -96,6 +100,7 @@ public class MachineTranslateController {
     /** Cycle getDisplayedTranslation **/
     private int selectedIndex;
 
+    @Nullable
     MachineTranslationInfo getDisplayedResult() {
         if (displayed.isEmpty()) {
             return null;

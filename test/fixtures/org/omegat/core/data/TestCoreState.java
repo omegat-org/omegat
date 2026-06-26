@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -135,6 +136,9 @@ public class TestCoreState extends CoreState {
         state.setDictionaries(null);
         state.setSegmentPropertiesArea(null);
         state.setSpellCheckerManager(null);
+
+        // Clear Issue Providers registry to ensure tests isolation
+        state.getIssueProvidersRegistry().clear();
 
         // 4. Clear core components
         state.setSegmenter(null);

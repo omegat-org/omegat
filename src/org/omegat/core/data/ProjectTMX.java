@@ -126,9 +126,11 @@ public class ProjectTMX {
             // file not exist - new project
             return;
         }
-        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, true,
-                true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
-                new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
+        TMXReader2.Builder tmxReaderBuilder = new TMXReader2.Builder();
+        TMXReader2.LoadCallback cb = new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled);
+        TMXReader2 reader = tmxReaderBuilder.setNeedValidate(false).setSegmentingEnabled(isSentenceSegmentingEnabled)
+                .setExtTmxLevel2(true).setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH)).build();
+        reader.readTMX(file, sourceLanguage, targetLanguage, cb);
     }
 
     /**

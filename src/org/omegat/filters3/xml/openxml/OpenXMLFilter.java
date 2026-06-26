@@ -50,6 +50,7 @@ import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -66,8 +67,8 @@ import org.omegat.util.OStrings;
  */
 public class OpenXMLFilter extends AbstractFilter {
     private static final Logger LOGGER = Logger.getLogger(OpenXMLFilter.class.getName());
-    private String documents;
-    private Pattern translatable;
+    private @Nullable String documents;
+    private @Nullable Pattern translatable;
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
 
     /**
@@ -236,7 +237,7 @@ public class OpenXMLFilter extends AbstractFilter {
      * of many XML files, some of which should be translated.
      */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc)
+    public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         defineDOCUMENTSOptions(processOptions); // Define the documents to read
 
@@ -401,7 +402,7 @@ public class OpenXMLFilter extends AbstractFilter {
      *         current options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenXMLOptionsDialog dialog = new EditOpenXMLOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

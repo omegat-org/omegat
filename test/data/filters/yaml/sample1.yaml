@@ -1,0 +1,15 @@
+title: Welcome
+menu:
+  items:
+    - Home
+    - About
+    - Contact
+footer:
+  copyright: "(c) 2025 Example Co."
+  links:
+    help: /help
+    terms: /terms
+features:
+  description: Enabled features
+  enabled: true
+  count: 3

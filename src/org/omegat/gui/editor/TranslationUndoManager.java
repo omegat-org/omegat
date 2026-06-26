@@ -35,6 +35,7 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.undo.UndoableEdit;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -50,9 +51,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class TranslationUndoManager implements UndoableEditListener {
     private final EditorTextArea3 editor;
-    private final List<Change> undos = new ArrayList<Change>();
-    private final List<Change> redos = new ArrayList<Change>();
-    private Change currentState;
+    private final List<Change> undos = new ArrayList<>();
+    private final List<Change> redos = new ArrayList<>();
+    private @Nullable Change currentState;
     private boolean inProgress;
 
     public TranslationUndoManager(EditorTextArea3 editor) {
@@ -135,7 +136,7 @@ public class TranslationUndoManager implements UndoableEditListener {
             Change ch = new Change();
             ch.text = editor.getOmDocument().extractTranslation();
             if (currentState != null) {
-                if (ch.text.equals(currentState.text)) {
+                if (currentState.text.equals(ch.text)) {
                     return;
                 }
                 currentState.caretPos = caretPos;
@@ -165,8 +166,7 @@ public class TranslationUndoManager implements UndoableEditListener {
         remember(caretPos);
     }
 
-    private static final String WRAPPER_CLASS_NAME =
-            "javax.swing.text.AbstractDocument.DefaultDocumentEventUndoableWrapper";
+    private static final String WRAPPER_CLASS_NAME = "javax.swing.text.AbstractDocument.DefaultDocumentEventUndoableWrapper";
 
     private AbstractDocument.DefaultDocumentEvent extractDefaultDocumentEvent(UndoableEdit edit) {
         if (edit instanceof AbstractDocument.DefaultDocumentEvent) {
@@ -177,6 +177,7 @@ public class TranslationUndoManager implements UndoableEditListener {
         }
         throw new RuntimeException("Unknown UndoableEdit class: " + edit.getClass().getName());
     }
+
     private static final String DEFAULT_DOCUMENT_EVENT_FIELD = "dde";
 
     private AbstractDocument.DefaultDocumentEvent handleWrapperCase(UndoableEdit edit) {
@@ -185,7 +186,8 @@ public class TranslationUndoManager implements UndoableEditListener {
             defaultDocumentEventField.setAccessible(true);
             return (AbstractDocument.DefaultDocumentEvent) defaultDocumentEventField.get(edit);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to extract field '" + DEFAULT_DOCUMENT_EVENT_FIELD + "' from UndoableEdit wrapper", e);
+            throw new RuntimeException("Failed to extract field '" + DEFAULT_DOCUMENT_EVENT_FIELD
+                    + "' from UndoableEdit wrapper", e);
         }
     }
 

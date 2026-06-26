@@ -55,7 +55,7 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
 
     @Test
     public void testSuggestions() {
-        GlossaryAutoCompleterView view = new GlossaryAutoCompleterView();
+        GlossaryAutoCompleterView view = new GlossaryAutoCompleterView(null);
         List<AutoCompleterItem> result = view.computeListData("blah", false);
 
         assertTrue(result.isEmpty());

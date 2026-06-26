@@ -36,6 +36,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
+import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DataTableStyling;
 
@@ -44,7 +45,7 @@ import org.omegat.util.gui.DataTableStyling;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class StatisticsPanel extends BaseStatisticsPanel {
+public class StatisticsPanel extends BaseStatisticsPanel implements IStatsConsumer {
 
     public StatisticsPanel(StatisticsWindow window) {
         super(window);
@@ -53,49 +54,18 @@ public class StatisticsPanel extends BaseStatisticsPanel {
 
     @Override
     public void appendTable(String title, String[] headers, String[][] data) {
-        // Nothing
-    }
-
-    @Override
-    public void appendTextData(String result) {
-        // Nothing
-    }
-
-    @Override
-    public void setTable(String[] headers, String[][] data) {
-        // Nothing
-    }
-
-    public void setProjectTableData(final String[] headers, final String[][] projectData) {
         if (headers == null || headers.length == 0) {
             return;
         }
-        if (projectData == null || projectData.length == 0) {
-            return;
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String title = OStrings.getString("CT_STATS_Project_Statistics");
-                add(generateTableDisplay(title, headers, projectData), BorderLayout.NORTH);
-            }
-        });
-    }
-
-    public void setFilesTableData(final String[] headers, final String[][] filesData) {
-        if (headers == null || headers.length == 0) {
-            return;
-        }
-        if (filesData == null || filesData.length == 0) {
+        if (data == null || data.length == 0) {
             return;
         }
         SwingUtilities.invokeLater(() -> {
-            String title = OStrings.getString("CT_STATS_FILE_Statistics");
-            TitledTablePanel panel = generateTableDisplay(title, headers, filesData);
+            TitledTablePanel panel = generateTableDisplay(title, headers, data);
 
             TableModel dataModel = panel.table.getModel();
 
-            TableRowSorter<TableModel> rowSorter = new TableRowSorter<TableModel>(dataModel);
+            TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(dataModel);
             Comparator<String> intComparator = (s1, s2) -> {
                 try {
                     return Integer.compare(Integer.parseInt(s1), Integer.parseInt(s2));
@@ -126,6 +96,25 @@ public class StatisticsPanel extends BaseStatisticsPanel {
 
             panel.table.getColumnModel().getColumn(0).setCellRenderer(DataTableStyling.getTextCellRenderer());
             add(panel, BorderLayout.CENTER);
+        });
+    }
+
+    @Override
+    public void appendTextData(String result) {
+        // Nothing
+    }
+
+    @Override
+    public void setTable(String[] headers, String[][] data) {
+        if (headers == null || headers.length == 0) {
+            return;
+        }
+        if (data == null || data.length == 0) {
+            return;
+        }
+        SwingUtilities.invokeLater(() -> {
+            String title = OStrings.getString("CT_STATS_Project_Statistics");
+            add(generateTableDisplay(title, headers, data), BorderLayout.NORTH);
         });
     }
 

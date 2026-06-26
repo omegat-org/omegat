@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir,
                 includes: ['**/language-it-*.jar'])
     } else {
@@ -23,8 +23,6 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
     testImplementation project(":spellchecker:morfologik")
 }
 

@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.l10nmgr;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -35,6 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class L10nmgrDialect extends DefaultXMLDialect {
     public static final Pattern TYPO3L10N = Pattern.compile("TYPO3L10N");
 

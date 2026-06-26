@@ -19,7 +19,7 @@ tasks.register('jars', Sync) {
     dependsOn tasks.jar
 }
 
-// prepare japckage contents
+// prepare jpackage contents
 tasks.register('jpackageAppContentGreetings', Sync) {
     dependsOn jpackage
     dependsOn tasks.findByName('firstSteps')
@@ -70,6 +70,12 @@ tasks.register('jpackageAppContentModules', Sync) {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
     dependsOn jpackage
 }
+tasks.register('jpackageAppContentTips', Sync) {
+    from layout.buildDirectory.file('docs/tips')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/tips")
+    dependsOn jpackage
+    dependsOn tipsHtmls
+}
 tasks.register('jpackageAppContent') {
     dependsOn jpackageAppContentGreetings
     dependsOn jpackageAppContentManuals
@@ -77,13 +83,13 @@ tasks.register('jpackageAppContent') {
     dependsOn jpackageAppContentImages
     dependsOn jpackageAppContentModules
     dependsOn jpackageAppContentScripts
+    dependsOn jpackageAppContentTips
 }
 
 // construct package contents in standard file tree
 tasks.register('jpackage', Exec) {
     dependsOn cleanJpkgWorkdir
     dependsOn jars
-    group = 'other'
 
     inputs.files file(layout.buildDirectory.file('jars'))
     outputs.files file(layout.buildDirectory.file("jpackage/app-image"))
@@ -114,14 +120,18 @@ tasks.register('jpackage', Exec) {
 }
 
 // generate DEB package
-tasks.register("linuxDebDist", Exec) {
+tasks.register("linuxDistDeb", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
     def debVersion = '3'
+    def debArch = 'amd64'
+    if (osdetector.classifier == 'linux-aarch_64') {
+        debArch = 'arm64'
+    }
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
-            .file("distributions/${application.applicationName}_${version}-${debVersion}_amd64.deb"))
+            .file("distributions/${application.applicationName}_${version}-${debVersion}_${debArch}.deb"))
     onlyIf { gradleOnJava17OrLater && exePresent('dpkg-deb') }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
@@ -143,18 +153,22 @@ tasks.register("linuxDebDist", Exec) {
             '--linux-menu-group', 'Office',
             '--linux-package-name', 'omegat',
             '--linux-shortcut')
-    assemble.dependsOn linuxDebDist
+    assemble.dependsOn linuxDistDeb
 }
 
 // generate RPM package
-tasks.register("linuxRpmDist", Exec) {
+tasks.register("linuxDistRpm", Exec) {
     dependsOn jpackage
     dependsOn jpackageAppContent
     group = 'distribution'
     def rpmVersion = '3'
+    def rpmArch = 'x86_64'
+    if (osdetector.classifier == 'linux-aarch_64') {
+        rpmArch = 'aarch64'
+    }
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
-            .file("distributions/${application.applicationName}-${version}-${rpmVersion}.x86_64.rpm"))
+            .file("distributions/${application.applicationName}-${version}-${rpmVersion}.${rpmArch}.rpm"))
     onlyIf { gradleOnJava17OrLater && exePresent('rpm') }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
@@ -175,5 +189,5 @@ tasks.register("linuxRpmDist", Exec) {
             '--linux-package-name', 'omegat',
             '--linux-rpm-license-type', 'GPLv3+',
             '--linux-shortcut')
-    assemble.dependsOn linuxRpmDist
+    assemble.dependsOn linuxDistRpm
 }

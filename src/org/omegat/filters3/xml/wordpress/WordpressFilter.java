@@ -30,6 +30,7 @@ package org.omegat.filters3.xml.wordpress;
 import java.io.BufferedReader;
 import java.util.regex.Matcher;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -41,6 +42,7 @@ import org.omegat.util.OStrings;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class WordpressFilter extends XMLFilter {
 
     /**

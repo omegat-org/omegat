@@ -32,7 +32,6 @@ import java.util.Map;
 
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.filters2.TranslationException;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
@@ -44,15 +43,10 @@ import org.omegat.util.Language;
  */
 public class NotLoadedProject implements IProject {
 
-    protected static final TMXEntry EMPTY_TRANSLATION;
-    static {
-        PrepareTMXEntry empty = new PrepareTMXEntry();
-        empty.source = "";
-        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
-    }
+    protected static final TMXEntry EMPTY_TRANSLATION = AllTranslations.EMPTY_TRANSLATION;
 
     @Override
-    public void compileProject(String sourcePattern) throws IOException, TranslationException {
+    public void compileProject(String sourcePattern) {
     }
 
     @Override

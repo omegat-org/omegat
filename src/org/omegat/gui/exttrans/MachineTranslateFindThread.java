@@ -30,6 +30,7 @@
 
 package org.omegat.gui.exttrans;
 
+import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -39,6 +40,8 @@ import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
+
+import java.util.Objects;
 
 class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
     private final IMachineTranslation translator;
@@ -54,7 +57,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
     }
 
     @Override
-    protected MachineTranslationInfo search() throws Exception {
+    protected @Nullable MachineTranslationInfo search() throws Exception {
         try {
             return fetchTranslation(translator, src, currentlyProcessedEntry, force, this::isEntryChanged);
         } catch (StoppedException ex) {
@@ -81,7 +84,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      *             if isStopped returns true
      */
     @VisibleForTesting
-    static MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
+    static @Nullable MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
             SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
 
         if (isStopped.isStopped()) {
@@ -113,8 +116,9 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
                 tr = translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
-                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
-                        e.getLocalizedMessage());
+                Objects.requireNonNull(Core.getMainWindow())
+                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                        e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getMessage());
                 return null;
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
@@ -135,6 +139,8 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      * Exception thrown when processing should stop.
      */
     static class StoppedException extends Exception {
+        private static final long serialVersionUID = 1L;
+
         StoppedException() {
             super("MT processing stopped");
         }

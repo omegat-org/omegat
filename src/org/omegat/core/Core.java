@@ -34,6 +34,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -45,6 +49,7 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -55,6 +60,7 @@ import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.MarkerController;
+import org.omegat.gui.editor.autocompleter.AbstractAutoCompleterView;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
@@ -93,6 +99,7 @@ import org.omegat.util.gui.UIDesignManager;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
+@NullMarked
 public final class Core {
 
     private Core() {
@@ -117,7 +124,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static IMainWindow getMainWindow() {
+    public static @Nullable IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 
@@ -246,6 +253,10 @@ public final class Core {
         coreState.initializeVersionCheckThread();
     }
 
+    public static LongProcessExecutor getLongProcessExecutor() {
+        return CoreState.getInstance().getExecutor();
+    }
+
     /**
      * initialize GUI body.
      * @throws Exception when an unexpected error happened.
@@ -334,6 +345,25 @@ public final class Core {
     }
 
     /**
+     * Register autocompleter.
+     */
+    public static void registerAutoCompleterClass(Class<? extends AbstractAutoCompleterView> clazz) {
+        PluginUtils.getAutoCompleterViewsClasses().add(clazz);
+    }
+
+    /**
+     * Registers a console command by associating a command name with its corresponding subcommand class.
+     * This method adds the specified command to a collection of subcommands, enabling it to be later
+     * utilized or executed through the command-line interface.
+     *
+     * @param name       the subcommand name of the console command to be registered.
+     * @param subcommand the class representing the subcommand implementation associated with the given name.
+     */
+    public static void registerConsoleCommand(String name, Class<? extends BaseSubCommand> subcommand) {
+        SubCommands.registerConsoleCommand(name, subcommand);
+    }
+
+    /**
      * Get all plugin loading errors.
      */
     public static List<String> getPluginsLoadingErrors() {
@@ -359,7 +389,7 @@ public final class Core {
      * @param run
      *            code for execute
      * @throws Exception
-     *            Throw exception from runnable if received.
+     *            Throw an exception from runnable if received.
      */
     public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
             throws Exception {
@@ -381,7 +411,7 @@ public final class Core {
         }
     }
 
-    private static StackTraceElement[] runningStackTrace;
+    private static StackTraceElement @Nullable [] runningStackTrace;
 
     public interface RunnableWithException {
         void run() throws Exception;

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">Instellen van een Teamproject</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.setup.team.project">
+  <title xml:id="how.to.setup.team.project.title">Instellen van een Teamproject</title>
 
   <para>Beheren van een teamproject vereist enige kennis van ofwel de<emphasis>SVN</emphasis> of <emphasis>Git</emphasis> versiesystemen (<emphasis>VCS</emphasis> in de rest van dit gedeelte).</para>
 
@@ -11,20 +10,20 @@
 	<para>Een teamproject van OmegaT synchroniseert het vertaalgeheugen van het project <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> en de beschrijfbare woordenlijst van het project <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> met de hostserver en alle deelnemende teamleden, en beheert alle mogelijke conflicten tussen hen.</para>
   </note>
 
-  <section id="how.to.setup.team.project.prepare.the.repository">
-    <title id="how.to.setup.team.project.prepare.the.repository.title">Voorbereidingen</title>
+  <section xml:id="how.to.setup.team.project.prepare.the.repository">
+    <title xml:id="how.to.setup.team.project.prepare.the.repository.title">Voorbereidingen</title>
 
 	<para>Hier zijn de stappen om een teamproject in te stellen:</para>
 
 	<orderedlist>
-      <listitem id="how.to.setup.team.project.create.empty.repository">
-		<para id="how.to.setup.team.project.create.empty.repository.title">Maak een lege opslagplaats op uw VCS hostserver</para>
+      <listitem xml:id="how.to.setup.team.project.create.empty.repository">
+		<para xml:id="how.to.setup.team.project.create.empty.repository.title">Maak een lege opslagplaats op uw VCS hostserver</para>
 
 		<para>Dit wordt normaal gesproken gedaan via een webinterface, een grafische toepassing, of de opdrachtregel. Bekijk de documentatie voor uw server of hostservice voor details.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.clone.locally">
-		<para id="how.to.setup.team.project.clone.locally.title">Gebruik het lokale VCS om een lokale kopie te maken (clone)</para>
+	  <listitem xml:id="how.to.setup.team.project.clone.locally">
+		<para xml:id="how.to.setup.team.project.clone.locally.title">Gebruik het lokale VCS om een lokale kopie te maken (clone)</para>
 
 		<note>
 		  <para>Deze lokale versie bevat uw kopie van de <emphasis>projectbeheerder</emphasis> van het project van OmegaT. Gebruik het om aanpassingen te maken die betrekking hebben op het gehele team.</para>
@@ -34,8 +33,8 @@
 		<para>We raden aan dat u vermijdt om die map voor taken met betrekking de vertaling te gebruiken. Wanneer u taken voor vertaling of nakijken moet uitvoeren in dat project, gebruik dan OmegaT om een afzonderlijk kopie van het teamproject te downloaden en werk vanuit daar. Bekijk de <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> how-to voor details.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.fill.local.clone">
-		<para id="how.to.setup.team.project.fill.local.clone.title">Vul d leke lokale kopie met een echt project van OmegaT</para>
+	  <listitem xml:id="how.to.setup.team.project.fill.local.clone">
+		<para xml:id="how.to.setup.team.project.fill.local.clone.title">Vul d leke lokale kopie met een echt project van OmegaT</para>
 		<itemizedlist>
 		  <listitem>
 			<para>Maak de structuur van het project</para>
@@ -72,20 +71,20 @@
 		</note>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.register">
-		<para id="how.to.setup.team.project.register.title">Registreer de projectbestanden in het lokale VCS</para>
+	  <listitem xml:id="how.to.setup.team.project.register">
+		<para xml:id="how.to.setup.team.project.register.title">Registreer de projectbestanden in het lokale VCS</para>
 
 		<para>Wanneer u het project hebt gemaakt vanuit de gebruikersinterface, moet u het expliciet toevoegen aan het versiesysteem (<command>add</command> in zowel SVN als Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.push">
-		<para id="how.to.setup.team.project.push.title">Plaats de geregistreerde bestanden op de hostserver</para>
+	  <listitem xml:id="how.to.setup.team.project.push">
+		<para xml:id="how.to.setup.team.project.push.title">Plaats de geregistreerde bestanden op de hostserver</para>
 
 		<para>Publiceer tenslotte uw project op de server op afstand (<command>commit</command> in SVN, <command>commit</command> en <command>push</command> in Git).</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.give.access.rights">
-		<para id="how.to.setup.team.project.give.access.rights.title">Geef toegangsrechten aan uw team</para>
+	  <listitem xml:id="how.to.setup.team.project.give.access.rights">
+		<para xml:id="how.to.setup.team.project.give.access.rights.title">Geef toegangsrechten aan uw team</para>
 
 		<note>
 		  <para>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</para>
@@ -112,8 +111,8 @@
 		</orderedlist>	  
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.have.members.download">
-		<para id="how.to.setup.team.project.have.members.download.title">Laat iedereen het project downloaden vanaf OmegaT</para>
+	  <listitem xml:id="how.to.setup.team.project.have.members.download">
+		<para xml:id="how.to.setup.team.project.have.members.download.title">Laat iedereen het project downloaden vanaf OmegaT</para>
 
 		<para>Beheerders hebben twee opties voor het verzenden van de locatie van het project naar de vertalers:</para>
 
@@ -132,18 +131,18 @@
 		<para>Indien zij niet overeenkomen, zorg ervoor dat de bestanden <filename>filters.xml</filename> en <filename>segmentation.conf</filename> op de juiste wijze worden gedeeld.</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het lokale teamproject</para>
+	  <listitem xml:id="how.to.setup.team.project.download.if.needed">
+		<para xml:id="how.to.setup.team.project.download.if.needed.title">Als u ook zelf aan het project moet werken, download dan het project zelf naar een lokale locatie die anders is dan de locatie van het lokale teamproject</para>
 	  </listitem>
 
-	  <listitem id="how.to.setup.team.project.translate">
-		<para id="how.to.setup.team.project.translate.title">U kunt nu ook met het team aan het project werken</para>
+	  <listitem xml:id="how.to.setup.team.project.translate">
+		<para xml:id="how.to.setup.team.project.translate.title">U kunt nu ook met het team aan het project werken</para>
 	  </listitem>
 	</orderedlist>
   </section>
 
-  <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">Routes in opslagplaats</title>
+  <section xml:id="how.to.setup.team.project.mapping.parameters">
+	<title xml:id="how.to.setup.team.project.mapping.parameters.title">Routes in opslagplaats</title>
 
 	<para>Het is mogelijk om routes naar verschillende locaties op afstand naar lokale bestanden te maken via de gebruikersinterface van OmegaT met <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, of door het bestand <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/> te bewerken. Hoewel de mogelijkheid voor routes primair is bedoeld voor het verzamelen van bronbestanden vanaf afzonderlijke, kan het ook worden gebruikt van andere typen bestanden.</para>
 
@@ -196,23 +195,23 @@
 	</variablelist>
   </section>
 
-  <section id="how.to.setup.team.project.example.mappings">
-	<title id="how.to.setup.team.project.example.mappings.title">Voorbeeld routes naar mappen</title>
+  <section xml:id="how.to.setup.team.project.example.mappings">
+	<title xml:id="how.to.setup.team.project.example.mappings.title">Voorbeeld routes naar mappen</title>
 
-	<para>Standaard route voor project:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_OmegaT_teamproject&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+	<para>Standaard route voor project:<programlisting>&lt;repository type="svn" url="https://opslag_voor_OmegaT_teamproject"&gt;
+	&lt;mapping local="" repository=""/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Alle inhoud van <filename>https://opslag_voor_OmegaT_teamproject</filename> volgt de route naar het lokale project van OmegaT</para>
 
-	<para>Route voor projecten in een submap van de opslagplaats:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_teamprojecten&quot;&gt;
-	&lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+	<para>Route voor projecten in een submap van de opslagplaats:<programlisting>&lt;repository type="svn" url="https://opslag_voor_alle_OmegaT_teamprojecten"&gt;
+	&lt;mapping local="" repository="En-US_DE_project"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Alle inhoud van <filename>https://opslag_voor_alle_OmegaT_teamprojecten/En-US_DE_project</filename> volgt de route naar het lokale project van OmegaT.</para>
 
-	<para>Routes naar aanvullende bronnen uit de opslagplaats op afstand, met filters:<programlisting>&lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_bronnen_van_teamproject&quot;&gt;
-	&lt;mapping local=&quot;source/submap&quot; repository=&quot;&quot;&gt;
+	<para>Routes naar aanvullende bronnen uit de opslagplaats op afstand, met filters:<programlisting>&lt;repository type="svn" url="https://opslag_voor_alle_OmegaT_bronnen_van_teamproject"&gt;
+	&lt;mapping local="source/submap" repository=""&gt;
 	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
     	&lt;includes&gt;readme.bak&lt;/includes&gt;
 	&lt;/mapping&gt;
@@ -220,23 +219,23 @@
 
 	<para>Alle inhoud van <filename>https://opslagplaats_voor_alle_OmegaT_team_project_bronnen</filename> wordt doorverwezen naar de lokale OmegaT project bronmap, behalve alle <filename>*.bak</filename>-bestanden. Echter, het bestand <filename>readme.bak</filename> is ook opgenomen.</para>
 
-	<para>Routes voor extra bronbestanden vanaf het web:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+	<para>Routes voor extra bronbestanden vanaf het web:<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> volgt de route naar het lokale bestand <filename>source/Bundle.properties</filename>.</para>
 
-	<para>Routes met hernoemen:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-	&lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+	<para>Routes met hernoemen:<programlisting>&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+	&lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> volgt de route naar het lokale bestand <filename>source/readme_tr.txt</filename>.</para>
 
 	<para>Dit maakt het mogelijk het te vertalen bestand te hernoemen.</para>
 
-	<para>Route naar lokaal bestand:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
-	&lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
-	&lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+	<para>Route naar lokaal bestand:<programlisting>&lt;repository type="file" url="/home/me/myfiles"&gt;
+	&lt;mapping local="source/file.txt" repository="my/file.txt"/&gt;
+	&lt;mapping local="source/file2.txt" repository="some/file.txt"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
 	<para>Het lokale bestand <filename>/home/me/myfiles/my/file.txt</filename> wordt verwezen naar het lokale bestand <filename>source/file.txt</filename> en <filename>/home/me/myfiles/some/file.txt</filename> wordt doorverwezen naar het lokale bestand <filename>source/file2.txt</filename>.</para>
@@ -248,8 +247,8 @@
 	<para>U mag net zoveel routes maken als u wilt, maar alleen in de context van een teamproject, d.i. één van de routes bevat het bestand <filename>omegat.project</filename>.</para>
 
   </section>
-  <section id="how.to.setup.team.project.selective.sharing">
-	<title id="how.to.setup.team.project.selective.sharing.title">Selectief delen</title>
+  <section xml:id="how.to.setup.team.project.selective.sharing">
+	<title xml:id="how.to.setup.team.project.selective.sharing.title">Selectief delen</title>
 
 	<para>Het proces hierboven beschrijft de meest voorkomende scenario's, waar de projectbeheerder volledige controle heeft over het project en waar alle bestanden (en de statistieken) identiek zijn aan beide zijden (aan de zijde van de server en aan de zijde van de lokale systemen van de vertaler).</para>
 

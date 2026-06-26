@@ -42,7 +42,8 @@ public class SegmentationCustomizer {
     private final SegmentationCustomizerController view;
     private final PreferencesDialog dialog;
 
-    public SegmentationCustomizer(boolean projectSpecific, SRX defaultSRX, SRX userSRX, @Nullable SRX projectSRX) {
+    public SegmentationCustomizer(boolean projectSpecific, SRX defaultSRX, @Nullable SRX userSRX,
+            @Nullable SRX projectSRX) {
         this.view = new SegmentationCustomizerController(projectSpecific, defaultSRX, userSRX, projectSRX);
         this.dialog = new PreferencesDialog(view);
     }

@@ -37,8 +37,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.VarExpansion;
 
 /**
- * Expand variables representing project properties.
- * Intended for use in preparing external commands for execution.
+ * Expand variables representing project properties. Intended for use in
+ * preparing external commands for execution.
  *
  * @author Aaron Madlon-Kay
  * @author Yu Tang
@@ -78,11 +78,13 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         localTemplate = localTemplate.replace(SOURCE_ROOT, fixSeparatorChar(props.getSourceRoot()));
         localTemplate = localTemplate.replace(TARGET_ROOT, fixSeparatorChar(props.getTargetRoot()));
         localTemplate = localTemplate.replace(GLOSSARY_ROOT, fixSeparatorChar(props.getGlossaryRoot()));
-        localTemplate = localTemplate.replace(WRITABLE_GLOSSARY_FILE, fixSeparatorChar(props.getWriteableGlossary()));
+        localTemplate = localTemplate.replace(WRITABLE_GLOSSARY_FILE,
+                fixSeparatorChar(props.getWriteableGlossary()));
         localTemplate = localTemplate.replace(TM_ROOT, fixSeparatorChar(props.getTMRoot()));
         localTemplate = localTemplate.replace(TM_AUTO_ROOT, fixSeparatorChar(props.getTMAutoRoot()));
         localTemplate = localTemplate.replace(DICT_ROOT, fixSeparatorChar(props.getDictRoot()));
-        localTemplate = localTemplate.replace(TM_OTHER_LANG_ROOT, fixSeparatorChar(props.getTMOtherLangRoot()));
+        localTemplate = localTemplate.replace(TM_OTHER_LANG_ROOT,
+                fixSeparatorChar(props.getTMOtherLangRoot()));
         localTemplate = localTemplate.replace(SOURCE_LANGUAGE, props.getSourceLanguage().getLanguage());
         localTemplate = localTemplate.replace(TARGET_LANGUAGE, props.getTargetLanguage().getLanguage());
         for (Entry<String, String> e : System.getenv().entrySet()) {
@@ -107,7 +109,7 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     }
 
     static {
-        ArrayList<String> vars = new ArrayList<String>();
+        ArrayList<String> vars = new ArrayList<>();
         vars.add(PROJECT_NAME);
         vars.add(PROJECT_ROOT);
         vars.add(SOURCE_ROOT);
@@ -129,6 +131,6 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
             vars.add(fixEnvarName(e.getKey()));
         }
 
-        COMMAND_VARIABLES = vars.toArray(new String[vars.size()]);
+        COMMAND_VARIABLES = vars.toArray(new String[0]);
     }
 }

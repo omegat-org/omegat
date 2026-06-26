@@ -36,6 +36,7 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -377,8 +378,8 @@ public final class Styles {
      * <p>
      * 1000000 attributes creation requires about 305 ms - it's enough fast.
      */
-    public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
-            Boolean italic) {
+    public static AttributeSet createAttributeSet(@Nullable Color foregroundColor, @Nullable Color backgroundColor,
+                                                  @Nullable Boolean bold, @Nullable Boolean italic) {
         MutableAttributeSet r = new SimpleAttributeSet();
         if (foregroundColor != null) {
             StyleConstants.setForeground(r, foregroundColor);
@@ -396,8 +397,9 @@ public final class Styles {
         return r;
     }
 
-    public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
-            Boolean italic, Boolean strikethrough, Boolean underline) {
+    public static AttributeSet createAttributeSet(@Nullable Color foregroundColor, @Nullable Color backgroundColor,
+                                                  @Nullable Boolean bold, @Nullable Boolean italic,
+                                                  @Nullable Boolean strikethrough, @Nullable Boolean underline) {
 
         MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor,
                 bold, italic);

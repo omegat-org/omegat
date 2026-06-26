@@ -27,9 +27,8 @@ OmegaT uses a number of libraries. The license of each library is mentioned in
 Prerequisites for installing OmegaT
 ===================================
 
-OmegaT requires the Java Runtime Environment (JRE) version 11 or higher to be
-installed on your system. Bundled JRE packages currently ship with JRE 17 or 21,
-and OmegaT has been verified to run correctly up to Java 21.
+OmegaT requires the Java Runtime Environment (JRE) version 21 or higher to be
+installed on your system. Bundled JRE packages currently ship with JRE 25.
 
 We recommend using OmegaT packages that include the JRE, to save you the trouble
 of selecting, getting, and installing it.

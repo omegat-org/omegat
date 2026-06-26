@@ -24,7 +24,7 @@ jobs:
       run: sudo apt-get install -f -q xvfb libsm-dev libxrender1 libxext-dev libxtst-dev libxcb1-dev fonts-dejavu xfonts-base xfonts-scalable
     - uses: actions/setup-java@v5
       with:
-        java-version: 17
+        java-version: 21
         distribution: 'temurin'
     - uses: gradle/actions/setup-gradle@v6
       name: Setup Gradle

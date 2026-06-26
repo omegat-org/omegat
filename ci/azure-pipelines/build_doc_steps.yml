@@ -14,5 +14,5 @@ steps:
     inputs:
       tasks: 'manualHtmls'
       options: '-PenvIsCi --no-daemon'
-      jdkVersionOption: '1.17'
+      jdkVersionOption: '1.21'
     displayName: 'Run Gradle clean&webManual'

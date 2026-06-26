@@ -1,4 +1,4 @@
-<html>
+<html lang="de">
 <!--
   ~  OmegaT - Computer Assisted Translation (CAT) tool
   ~           with fuzzy matching, translation memory, keyword search,
@@ -23,19 +23,23 @@
   ~  You should have received a copy of the GNU General Public License
   ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
-<header>
+
+<head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../tips.css">
-</header><body>
-<p>Ein OmegaT-Projekt besteht aus einer Reihe von Ordnern und Dateien, die Ressourcen für die Übersetzung enthalten.</p>
-<p>Standardmäßig enthält ein neu erstelltes Projekt alle erforderlichen Ressourcen in seinem Ordner, die mit den unten aufgeführten Standardnamen versehen sind.</p>
+    <title>Projektordner</title>
+</head><body>
+<h3 class="title">Projektordner</h3>
+<p>Ein OmegaT-Projekt besteht aus einer Reihe von Ordnern und Dateien, die Ressourcen für die Übersetzung enthalten. The default names are as follows.</p>
 <div class="itemizedlist">
-    <ul class="itemizedlist">
-        <li class="listitem"> enthält die Quelldateien </li>
-        <li class="listitem"> ist der Speicherort, wo die Zieldaten erstellt werden </li>
-        <li class="listitem"> enthält die Glossare </li>
-        <li class="listitem"> ist das projekteigene beschreibbare Glossar </li>
+    <ul class="itemizedlist" style="list-style-type: disc; ">
+        <li class="listitem"> source enthält die Quelldateien </li>
+        <li class="listitem"> target is the location where target files are created </li>
+        <li class="listitem"> glossary enthält die Glossare </li>
         <li class="listitem"> tm enthält die externen Translation Memories </li>
         <li class="listitem"> dictionary enthält die externen Wörterbücher </li>
     </ul>
+glossary.txt is the project writable glossary.
 </div>
-</body></html>
+</body>
+</html>

@@ -12,11 +12,26 @@ hr {
     margin: 1em 0;
 }
 
-hr {
-    height: 1px;
-    border-style: none;
+.keycap {
+    font-family: monospace;
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 0 .2rem;
+	padding-left: .3rem;
+	padding-right: .2rem;
 }
 
-blockquote {
-    margin: 2em 4em;
+.guibutton {
+    font-family: monospace;
+	font-size: 1.2em;
+    border: .1px solid;
+    border-radius:4px;
+    padding: 0 .3rem;
+    margin: 0 .2rem;
+}
+
+.guilabel,
+.guimenu {
+    font-family: monospace;
+	font-size: 1.2em;
 }

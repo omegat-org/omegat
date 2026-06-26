@@ -32,7 +32,7 @@ ext.getInnoSetupCustomMessages = {
     fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
             .sort()
             .collectMany { file ->
-                def match = file.name =~ /CustomMessages_?([^\.]*).ini/
+                def match = file.name =~ /CustomMessages_?([^.]*).ini/
                 if (match) {
                     def capture = match.group(1)
                     def lang = capture.empty ? 'en' : capture
@@ -63,11 +63,11 @@ launch4j {
     errTitle = 'OmegaT'
     headerType = 'gui'
     jreMinVersion = '11.0'
-    jreMaxVersion = '24.0'
+    jreMaxVersion = '25.0'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
     // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
     bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
-    requires64Bit = false  // support 32bit distribution
+    requires64Bit = true
     copyright = "The GNU General Public License, Version 3.0"
     version = shortVersion
     textVersion = fullVersion
@@ -79,12 +79,11 @@ launch4j {
 }
 
 def assetDir = findProperty('assetDir') ?: '../'
-def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
 def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 tasks.register('win') {
     description = 'Builds the Windows distributions.'
-    group = 'omegat distribution'
+    group = 'distribution'
 }
 ext.makeWinTask = { args ->
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
@@ -93,6 +92,7 @@ ext.makeWinTask = { args ->
     def prepDistsTaskName = "${args.name}Prep"
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
+    def archSubst = "x64compatible"
 
     def targetJar = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar")
     def originJar = layout.buildDirectory.file('libs/OmegaT.jar')
@@ -119,7 +119,7 @@ ext.makeWinTask = { args ->
                     VERSION_NUMBER_SUBST : fullVersion,
                     OUTPUT_BASENAME_SUBST: installerBasename.toString(),
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
-                    ARCHITECTURE_SUBST   : args.arch ?: ''
+                    ARCHITECTURE_SUBST   : archSubst
             ])
             filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             filteringCharset = 'UTF-8'
@@ -162,12 +162,11 @@ ext.makeWinTask = { args ->
         into base.distsDirectory
         outputs.file installerWinExe
         dependsOn genDistsTaskName
-        group = 'omegat distribution'
+        group = 'distribution'
     }
     assemble.dependsOn distsTaskName
     tasks.win.dependsOn distsTaskName
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE)
 makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)

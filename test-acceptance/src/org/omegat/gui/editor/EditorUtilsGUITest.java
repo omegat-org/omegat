@@ -60,13 +60,21 @@ public final class EditorUtilsGUITest {
             //    OmegaT will create a folder set that contains your files. It
             //    will also create an empty translation memory that it will fill in the
             //    background, one segment at as time as you type your translation. Matches
-            // We test the last word in the first segment in the paragraph.
-            String target = "translation";
-            int begin = 469;
-            int offs = begin + target.length() / 2;
-            int end = begin + target.length();
+            String target = "memory";
+            String anchor = "create an empty translation ";
             assertNotNull(window);
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
+
+            String docText = editPane.getDocument().getText(0, editPane.getDocument().getLength());
+            int anchorIndex = docText.indexOf(anchor);
+            assertTrue("Anchor text not found: " + anchor, anchorIndex >= 0);
+
+            int begin = docText.indexOf(target, anchorIndex + anchor.length());
+            assertTrue("Target text not found after anchor: " + target, begin >= 0);
+
+            int offs = begin + target.length() / 2;
+            int end = begin + target.length();
+
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
             String word = editPane.getText(posStart, posEnd - posStart);

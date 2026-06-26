@@ -44,7 +44,7 @@ ext.makeLinuxTask = { args ->
         }
         compression = Compression.BZIP2
         archiveExtension = 'tar.bz2'
-        group = 'omegat distribution'
+        group = 'distribution'
     }
     assemble.dependsOn tarTaskName
     parentTask.dependsOn tarTaskName

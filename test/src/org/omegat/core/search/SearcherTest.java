@@ -349,7 +349,7 @@ public class SearcherTest {
         assertEquals("source.txt", results.get(0).getPreamble());
         assertEquals("OmegaT is great", results.get(0).getSrcText());
         assertEquals("OmegaT est génial", results.get(0).getTranslation());
-        assertEquals("Orphan segments", results.get(1).getPreamble());
+        assertEquals(OStrings.getString("CT_ORPHAN_STRINGS"), results.get(1).getPreamble());
         assertEquals("OmegaT is great", results.get(1).getSrcText());
     }
 

@@ -71,8 +71,7 @@
                      <token>true</token> to 
                      <token>false</token>:</para>
                   <para>
-                     <programlisting>&lt;project_files_show_on_load&gt;
-                        <token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
+                     <programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
                   </para>
                </example>
                <note>
@@ -90,20 +89,23 @@
          <varlistentry xml:id="configuration.folder.default.contents.logs">
             <term xml:id="configuration.folder.default.contents.logs.title">logs/</term>
             <listitem>
-               <para>This folder contains a number of log files. The file name format is
-                  		  
-                  <filename>OmegaT_99999_yyyyMMdd-hhmmss.log</filename>.</para>
-               <para>99999 part is 5 digit session id from 00000 to 99999. It will be random number. </para>
-               <para>yyyyMMdd-hhmmss part is a date and time, like 20240704-201200 means July 4th, 2024,
-                  20:12:00 in local time.</para>
+              <para>This folder contains a number of log files. Their
+              file name indicates the beginning of the session they
+              logged.</para>
+                  	
+              <example xml:id="configuration.folder.default.contents.logs.title.example">
+		<title>A typical log file name</title>
+                <filename>OmegaT_2026-04-12_10-01_97543.log</filename>.
+		<para>97543 is a random number. It is the session id.</para>
+		<para>2026-04-12_10-01 indicates that the session started at 10:01, on the 12th of April, 2026.</para>
+	      </example>
                <para>These files record various internal state and program event
                   		  messages generated while OmegaT is running. If OmegaT behaves
                   		  erratically, include this file, or the relevant part thereof, to your
                   		  report.</para>
                <para>Use 
                   <link linkend="menus.help" endterm="menus.help.title"></link>
-                  <link linkend="menus.help.log" endterm="menus.help.log.title"></link> to view the
-                  		  contents of the log file of current session.</para>
+                  <link linkend="menus.help.log" endterm="menus.help.log.title"></link> to display the current session’s log file.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="configuration.folder.default.contents.script">
@@ -235,7 +237,7 @@
          <varlistentry xml:id="configuration.folder.extra.contents.spelling">
             <term xml:id="configuration.folder.extra.contents.spelling.title">spelling/</term>
             <listitem>
-               <para>This folder contains your custom spelling dictionaries. See the 
+               <para>This folder is where you put your spelling dictionaries. See the 
                   <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"></link> preferences for
                   		details.</para>
             </listitem>

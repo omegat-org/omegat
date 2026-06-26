@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Language;
 
 import net.loomchild.maligna.coretypes.Alignment;
@@ -52,12 +53,12 @@ class MutableBead {
     }
 
     public final float score;
-    public final List<String> sourceLines;
-    public final List<String> targetLines;
+    public final List<@Nullable String> sourceLines;
+    public final List<@Nullable String> targetLines;
     public boolean enabled;
     public MutableBead.Status status;
 
-    private MutableBead(float score, List<String> sourceLines, List<String> targetLines) {
+    private MutableBead(float score, List<@Nullable String> sourceLines, List<@Nullable String> targetLines) {
         this.score = score;
         this.sourceLines = new ArrayList<>(sourceLines);
         this.targetLines = new ArrayList<>(targetLines);
@@ -70,7 +71,7 @@ class MutableBead {
         this(alignment.getScore(), alignment.getSourceSegmentList(), alignment.getTargetSegmentList());
     }
 
-    MutableBead(List<String> sourceLines, List<String> targetLines) {
+    MutableBead(List<@Nullable String> sourceLines, List<@Nullable String> targetLines) {
         this(Float.MAX_VALUE, sourceLines, targetLines);
     }
 

@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir,
                 includes: ['**/language-be-*.jar'])
     } else {
@@ -16,16 +16,12 @@ dependencies {
             exclude module: 'languagetool-core'
         }
         compileOnly(libs.morfologik.stemming)
+        compileOnly(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.languagetool.core) {
-        exclude module: 'json'
-        exclude module: 'protobuf-java'
-    }
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
+    testImplementation(libs.languagetool.core)
     testImplementation project(":spellchecker:morfologik")
     testImplementation(libs.commons.io)
 }

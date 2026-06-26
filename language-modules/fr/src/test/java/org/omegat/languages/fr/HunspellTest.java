@@ -27,16 +27,24 @@ package org.omegat.languages.fr;
 import org.junit.Test;
 
 import org.omegat.languages.LanguageModuleTestBase;
-import org.omegat.spellchecker.hunspell.HunSpellChecker;
+import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "fr_FR";
     private static final String GOOD = "Bonjour";
+    private static final String BAD = "Erruer";
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new HunSpellChecker(), LANGUAGE, GOOD, null);
+        LuceneHunSpellChecker checker = new LuceneHunSpellChecker();
+        testDictionaryHelper(checker, LANGUAGE, GOOD, BAD);
+        List<String> suggestions = suggestWithRetry(checker, BAD, 1);
+        assertThat(suggestions).as("Get suggestion").contains("erreur");
     }
 }

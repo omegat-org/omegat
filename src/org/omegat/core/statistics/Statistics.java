@@ -39,9 +39,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.BreakIterator;
-import java.text.DateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -77,6 +79,14 @@ public final class Statistics {
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;
+
+    /**
+     * Short date/time formatter for the statistics file header. Equivalent to
+     * the former {@code DateFormat.getInstance()} (short date and short time).
+     * {@link DateTimeFormatter} is immutable and thread-safe.
+     */
+    private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter
+            .ofLocalizedDateTime(FormatStyle.SHORT).withZone(ZoneId.systemDefault());
 
     /**
      * Computes the number of characters excluding spaces in a string. Special
@@ -160,7 +170,7 @@ public final class Statistics {
 
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
+            writer.write(TIMESTAMP_FORMAT.format(Instant.now()) + "\n");
             writer.write(text);
         } catch (Exception ex) {
             Log.log(ex);
@@ -207,7 +217,7 @@ public final class Statistics {
                 StandardCharsets.UTF_8)) {
             switch (format) {
             case TEXT:
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
+                out.write(TIMESTAMP_FORMAT.format(Instant.now()) + "\n");
                 out.write(result.getTextData());
                 break;
             case XML:

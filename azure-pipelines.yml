@@ -87,7 +87,7 @@ stages:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
   - job: testOnWindows
     displayName: on Windows
     dependsOn: CheckChanges
@@ -97,7 +97,7 @@ stages:
     steps:
       - checkout: self
         fetchDepth: 2
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
   - job: testOnMac
     displayName: on mac
     dependsOn: CheckChanges
@@ -108,9 +108,8 @@ stages:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
 
-  # Weekly release steps will be triggered after integration-test succeeded.
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
@@ -134,9 +133,6 @@ stages:
           duration: 600
   - job: WeeklyBuild
     displayName: Build for master weekly
-    dependsOn:
-      - CheckForWeekly
-      - IntegrationTestForWeekly
     pool:
       vmImage: 'ubuntu-24.04'
     steps:
@@ -160,7 +156,10 @@ stages:
           artifact: 'distributions'
 
   - job: WeeklyPublish
-    dependsOn: WeeklyBuild
+    dependsOn:
+      - WeeklyBuild
+      - CheckForWeekly
+      - IntegrationTestForWeekly
     variables:
       omegatVersion: $[ dependencies.WeeklyBuild.outputs['setVersion.version'] ]
     steps:
@@ -172,15 +171,12 @@ stages:
         inputs:
           artifact: 'distributions'
           path: '$(Pipeline.Workspace)/build/distributions'
-      - template: ci/azure-pipelines/publish_weekly.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
       - task: DownloadPipelineArtifact@2
         displayName: 'Download docs artifact'
         inputs:
           artifact: 'docs'
           path: '$(Pipeline.Workspace)/build/docs'
-      - template: ci/azure-pipelines/publish_manual_snapshot.yml
+      - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(omegatVersion)
 
@@ -233,17 +229,11 @@ stages:
         inputs:
           artifact: 'distributions'
           path: '$(Pipeline.Workspace)/build/distributions'
-      - template: ci/azure-pipelines/publish_release.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
       - task: DownloadPipelineArtifact@2
         displayName: 'Download docs artifact'
         inputs:
           artifact: 'docs'
           path: '$(Pipeline.Workspace)/build/docs'
-      - template: ci/azure-pipelines/publish_manual.yml
-        parameters:
-          omegatVersion: $(omegatVersion)
-      - template: ci/azure-pipelines/publish_javadoc.yml
+      - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(omegatVersion)

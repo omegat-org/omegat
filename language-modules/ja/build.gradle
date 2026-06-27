@@ -18,8 +18,6 @@ dependencies {
         compileOnly(libs.icu4j)
     }
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
 
     testImplementation(libs.junit4)
     testRuntimeOnly(libs.slf4j.jdk14)

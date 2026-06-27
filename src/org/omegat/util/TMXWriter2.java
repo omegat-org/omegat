@@ -38,13 +38,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -81,12 +81,12 @@ public class TMXWriter2 implements AutoCloseable {
     private final boolean forceValidTMX;
 
     /**
-     * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC
-     * time.
-     *
-     * SimpleDateFormat IS NOT THREAD SAFE !!!
+     * Formatter with format YYYYMMDDThhmmssZ able to display a date in UTC time.
+     * <p>
+     * {@link DateTimeFormatter} is immutable and thread-safe.
      */
-    private final SimpleDateFormat tmxDateFormat;
+    private static final DateTimeFormatter TMX_DATE_FORMAT = DateTimeFormatter
+            .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
 
     /**
      *
@@ -140,9 +140,6 @@ public class TMXWriter2 implements AutoCloseable {
 
         langSrc = sourceLanguage.toString();
         langTar = targetLanguage.toString();
-
-        tmxDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        tmxDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
     public void close() throws XMLStreamException, IOException {
@@ -311,13 +308,13 @@ public class TMXWriter2 implements AutoCloseable {
                 xml.writeAttribute("changeid", changer);
             }
             if (changeDate > 0) {
-                xml.writeAttribute("changedate", tmxDateFormat.format(new Date(changeDate)));
+                xml.writeAttribute("changedate", TMX_DATE_FORMAT.format(Instant.ofEpochMilli(changeDate)));
             }
             if (!StringUtil.isEmpty(creator)) {
                 xml.writeAttribute("creationid", creator);
             }
             if (creationDate > 0) {
-                xml.writeAttribute("creationdate", tmxDateFormat.format(new Date(creationDate)));
+                xml.writeAttribute("creationdate", TMX_DATE_FORMAT.format(Instant.ofEpochMilli(creationDate)));
             }
             xml.writeCharacters(lineSeparator);
 

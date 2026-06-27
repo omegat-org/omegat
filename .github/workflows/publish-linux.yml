@@ -1,0 +1,159 @@
+name: Publish Linux Weekly/Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  schedule:
+    # Every Saturday at 13:18 UTC
+    - cron: '18 13 * * 6'
+  workflow_dispatch:
+    inputs:
+      publish_type:
+        description: 'Publish type (release or weekly)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options:
+          - release
+          - weekly
+
+jobs:
+  build:
+    if: github.repository == 'omegat-org/omegat' || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
+            gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
+          - arch: amd64
+            runner: ubuntu-latest
+            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
+            gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm
+
+      - name: Download JRE (${{ matrix.arch }})
+        run: |
+          mkdir -p asset
+          cd asset
+          curl -L -O ${{ matrix.jre_url }}
+
+      - name: Build distributions
+        run: |
+          ./gradlew ${{ matrix.gradle_tasks }} -PassetDir=asset --build-cache -PenvIsCi
+
+      - name: Record project version into artifact
+        run: |
+          set -euo pipefail
+          VERSION=$(./gradlew properties -q | grep "^version:" | awk '{print $2}')
+          test -n "$VERSION" || { echo "Failed to determine version"; exit 1; }
+          mkdir -p build/distributions
+          echo "$VERSION" > build/distributions/VERSION.txt 
+
+      - name: Upload distributions artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-${{ matrix.arch }}
+          path: build/distributions/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.repository == 'omegat-org/omegat'
+    concurrency:
+      group: sourceforge-upload
+      cancel-in-progress: false
+    env:
+      SF_HOST: frs.sourceforge.net
+    steps:
+      - name: Download distributions artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: dist/
+          pattern: dist-*
+          merge-multiple: true
+      - name: List files to upload
+        run: ls -l dist/
+
+      - name: Read Version and Upload Path
+        id: info
+        run: |
+          test -f dist/VERSION.txt || { echo "VERSION.txt missing in artifacts"; exit 1; }
+          VERSION=$(cat dist/VERSION.txt)
+          test -n "$VERSION" || { echo "VERSION.txt is empty"; exit 1; }
+          echo "Detected version: $VERSION"
+          # Decide publish mode:
+          #   - tag push        -> release
+          #   - schedule (cron) -> weekly
+          #   - manual dispatch -> use the publish_type input as fallback
+          case "${{ github.event_name }}" in
+            push)
+              MODE="release"
+              ;;
+            schedule)
+              MODE="weekly"
+              ;;
+            workflow_dispatch)
+              MODE="${{ github.event.inputs.publish_type }}"
+              ;;
+            *)
+              MODE="weekly"
+              ;;
+          esac
+          if [[ "$MODE" == "release" ]]; then
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+          else
+            echo "dest_dir=/home/frs/project/omegat/Weekly" >> $GITHUB_OUTPUT
+          fi
+          # Don't ship VERSION.txt to SourceForge.
+          rm -f dist/VERSION.txt
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Setup SSH for SourceForge
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.OMEGAT_CI_RSA }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H "$SF_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 600 ~/.ssh/known_hosts ~/.ssh/id_rsa
+
+      - name: Upload to SourceForge via lftp/SFTP
+        env:
+          LFTP_PASSWORD: ${{ secrets.SOURCEFORGE_KEY_PASS }}
+          SOURCEFORGE_CI_USER: ${{ secrets.SOURCEFORGE_CI_USER }}
+        run: |
+          set -euo pipefail
+          srcdir="${GITHUB_WORKSPACE}/dist"
+          dest_dir="${{ steps.info.outputs.dest_dir }}"
+          test -d "$srcdir" || { echo "Source directory not found: $srcdir"; exit 1; }
+          dest="sftp://${SOURCEFORGE_CI_USER}@${SF_HOST}"
+          echo "Uploading from $srcdir to $dest_dir"
+          cmd="set net:max-retries 5; mkdir -p '$dest_dir'; lcd $srcdir; cd '$dest_dir'; mirror -R -v; bye"
+          lftp --env-password -e "$cmd" "$dest"

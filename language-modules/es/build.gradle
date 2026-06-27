@@ -22,8 +22,6 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
     testImplementation project(":spellchecker:morfologik")
     testImplementation project(":spellchecker:lucene")
 }

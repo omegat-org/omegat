@@ -425,7 +425,7 @@ distributions {
                   'src/**/*.java', // main source
                   'test/**','test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
                   'scripts/**', // sample scripts
-                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', // submodules
+                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'scripting/**', 'spellchecker/**', 'theme/**', // submodules
                   'src_docs/**' // documents
                 exclude '**/.gradle/**', '**/build/**', 'local.properties', '**/out/**'
             }

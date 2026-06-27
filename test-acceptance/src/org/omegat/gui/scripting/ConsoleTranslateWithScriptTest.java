@@ -70,23 +70,10 @@ public class ConsoleTranslateWithScriptTest extends TestCore {
         if (Files.exists(projectData)) {
             FileUtils.copyDirectory(projectData.toFile(), tmpDir.toFile());
         }
-
-        // Prevent System.exit from killing the test
-        System.setSecurityManager(new SecurityManager() {
-            @Override
-            public void checkExit(int status) {
-                throw new SecurityException("System.exit(" + status + ") called");
-            }
-
-            @Override
-            public void checkPermission(java.security.Permission perm) {
-            }
-        });
     }
 
     @After
     public void tearDown() throws Exception {
-        System.setSecurityManager(null);
         System.setOut(originalOut);
         System.setErr(originalErr);
         if (tmpDir != null && Files.exists(tmpDir)) {

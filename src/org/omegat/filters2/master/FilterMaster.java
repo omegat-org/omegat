@@ -131,7 +131,7 @@ public class FilterMaster {
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
         MAPPER.registerModule(new JakartaXmlBindAnnotationModule());
         MAPPER.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        MAPPER.setDefaultPropertyInclusion(JsonInclude.Include.NON_EMPTY);
         MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
     }
 

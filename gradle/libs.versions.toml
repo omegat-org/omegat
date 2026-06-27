@@ -61,6 +61,7 @@ swing_extra_locales = "0.3.3"
 jgit_gpg_signer = "0.2.3"
 mockito = "5.23.0"
 json_java = "20260522"
+picocli = "4.7.5"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -187,6 +188,7 @@ morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", versi
 swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
 json = {group = "org.json", name = "json", version.ref = "json_java"}
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+picocli = {group = "info.picocli", name = "picocli", version.ref = "picocli"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]

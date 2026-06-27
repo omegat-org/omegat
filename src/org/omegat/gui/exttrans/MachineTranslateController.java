@@ -90,6 +90,9 @@ public class MachineTranslateController {
      *         entries.
      */
     Map<String, String> getGlossaryMap() {
+        if (view.getCurrentlyProcessedEntry() == null) {
+            return Map.of();
+        }
         return Core.getGlossaryManager().searchSourceMatches(view.getCurrentlyProcessedEntry()).stream()
                 .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
     }

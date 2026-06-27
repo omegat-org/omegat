@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*'])
     } else {
         // platform independent dark theme
         implementation(libs.flatlaf)

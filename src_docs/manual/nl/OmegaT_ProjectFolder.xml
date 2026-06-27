@@ -1,37 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.project.folder">
-  <title id="chapter.project.folder.title">Projectmap</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.project.folder">
+  <title xml:id="chapter.project.folder.title">Projectmap</title>
 
   <section>
 	<title>Standaard structuur</title>
 	<para>Een project van OmegaT bestaat uit een set mappen en bestanden die al uw bronnen voor vertaling bevat.</para>
 
-	<para>Standaard zal een nieuw gemaakt project alle vereiste bronnen in zijn map bevatten, en aan die bronnen worden de hieronder vermelde standaardnamen toegewezen.</para>
+	<para>Standaard zal een nieuw gemaakt project alle vereiste bronnen bevatten in zijn map, en aan deze bronnen worden de standaard namen hieronder toegewezen.</para>
 
 	<itemizedlist>
 	  <listitem>
-		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/> bevat de bronbestanden</para>
+		<para><link linkend="project.folder.source" endterm="project.folder.source.title"/>bevat de bronbestanden</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/> is de locatie waar de doelbestanden worden gemaakt</para>
+		<para><link linkend="project.folder.target" endterm="project.folder.target.title"/>is de locatie waar de doelbestanden worden gemaakt</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> bevat de woordenlijsten</para>
+		<para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>bevat de woordenlijsten</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/> is de voor het project beschrijfbare woordenlijst</para>
+		<para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>is de voor het project beschrijfbare woordenlijst</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/> bevat de vertaalgeheugens voor verwijzingen</para>
+		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>bevat de vertaalgeheugens voor verwijzingen</para>
 	  </listitem>
 
 	  <listitem>
-		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> bevat de woordenboeken voor verwijzingen</para>
+		<para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>bevat de woordenboeken voor verwijzingen</para>
 	  </listitem>
 	</itemizedlist>
 
@@ -71,14 +70,14 @@
 		  <programlisting>…
     &lt;externe_opdracht&gt;&lt;/externe_opdracht&gt;
     &lt;opslagplaatsen&gt;
-        &lt;repository type=&quot;git&quot; url=&quot;https://URL/VAN/DE/OPSLAGPLAATS/OP/AFSTAND&quot;&gt;
-            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;repository type="git" url="https://URL/VAN/DE/OPSLAGPLAATS/OP/AFSTAND"&gt;
+            &lt;mapping local="/" repository="/"/&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
 &lt;/project&gt;
 		  </programlisting>
 
-		  <para>Bekijk de how-to <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> voor details.</para>
+		  <para>Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
 		</listitem>
 	  </itemizedlist>
 	</note>
@@ -87,11 +86,11 @@
   <section>
 	<title>Minimale inhoud</title>
 
-	<para>Een projectmap moet, ten minste, het volgende bevatten:</para>
+	<para>Een project map moet, minstens, het volgende bevatten:</para>
 	
 	<variablelist>
-	  <varlistentry id="project.folder.omegat">
-		<term id="project.folder.omegat.title">omegat</term>
+	  <varlistentry xml:id="project.folder.omegat">
+		<term xml:id="project.folder.omegat.title">omegat</term>
 		<listitem>
 		  <para>Dit is de projectmap die altijd <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> bevat, het vertaalgeheugen voor het project, en <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, het gegevensbestand met statistieken voor het project.</para>
 
@@ -101,8 +100,8 @@
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry id="project.folder.omegat.project.file">
-		<term id="project.folder.omegat.project.file.title">omegat.project</term>
+	  <varlistentry xml:id="project.folder.omegat.project.file">
+		<term xml:id="project.folder.omegat.project.file.title">omegat.project</term>
 		<listitem>
 		  <para>Dit bestand bevat de parameters voor het project gedefinieerd in de <link linkend="dialogs.project.properties">projecteigenschappen</link>, zoals de bron- en doeltalen, hun respectievelijke tokenizers en het type segmentatie.</para>
 		  
@@ -114,45 +113,45 @@
 	</variablelist>
   </section>
   
-  <section id="project.folder.source">
-    <title id="project.folder.source.title">source</title>
+  <section xml:id="project.folder.source">
+    <title xml:id="project.folder.source.title">source</title>
     <para>De map source bevat de bestanden die moeten worden vertaald.</para>
 
-	<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> of zet bestanden neer in het <link linkend="panes.editor" endterm="panes.editor.title"/> om, elke keer als u dat wilt, bestanden toe te voegen.</para>
+	<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> of zet bestanden neer in het venster <link linkend="panes.editor" endterm="panes.editor.title"/> om, elke keer als u dat wilt, bestanden toe te voegen.</para>
 
-	<para>De inhoud van de bestanden in een indeling die wordt ondersteund door OmegaT zal voor vertaling worden weergegeven in het <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+	<para>De inhoud van de bestanden in een indeling die wordt ondersteund door OmegaT zal voor vertaling worden weergegeven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
 	<para>U kunt mappen toevoegen of verwijderen met uw bestandsbeheerder.</para>
 
 	<para>Als uw vertaalproject een aantal mappen bevat en u zou willen werken met één map tegelijk, gebruik dan <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te krijgen tot de projecteigenschappen en wijzig de aangewezen <link linkend="dialogs.project.properties.file.locations.source.files">map source</link> zoals u dat wilt.</para>
   </section>
 
-  <section id="project.folder.target">
-    <title id="project.folder.target.title">target</title>
+  <section xml:id="project.folder.target">
+    <title xml:id="project.folder.target.title">target</title>
     <para>Deze map is bij aanvang leeg.</para>
 
-	<para>Hij zal worden gevuld met de vertaalde bestanden, elk keer als u <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> gebruikt.</para>
+	<para>Hij zal worden gevuld met de vertaalde bestanden, elk keer dat u <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> gebruikt of <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
 
 	<para>De vertaalde bestanden die corresponderen met de inhoud van de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>, of zij volledig vertaald zijn of niet, worden dan hier gemaakt, met dezelfde hiërarchie als in de map source.</para>
 
 	<para>De hier gemaakte bestanden zullen de huidige staat van de vertaling weergeven. Niet-vertaalde segmenten zullen in de brontaal zijn.</para>
   </section>
 
-  <section id="project.folder.tm">
-    <title id="project.folder.tm.title">tm</title>
+  <section xml:id="project.folder.tm">
+    <title xml:id="project.folder.tm.title">tm</title>
     <para>Deze map kan elk aantal tweetalige documenten ter verwijzing bevatten (TMX-bestanden, maar ook elk bestand in een tweetalige indeling die wordt ondersteund door OmegaT, inclusief PO-bestanden, etc.) en de TMX-bestanden kunnen ook worden gecomprimeerd naar de indeling gzip.</para>
 	
 	<para>OmegaT kan worden geïnstrueerd om automatisch overeenkomsten in te voegen. OmegaT voegt het voorvoegsel dat is ingesteld in de voorkeur <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> toe om u er aan te herinneren dat een overeenkomst was ingevoegd door OmegaT en niet door u.</para>
 	
     <para>Overeenkomsten uit de vertaalgeheugens in het venster worden weergegeven in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, net als overeenkomsten uit <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, het vertaalgeheugen voor het project.</para>
 
-	<para>Zulke overeenkomsten zijn standaard beperkt tot de bron- en doeltalen die zijn gedefinieerd in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, maar u kunt ook overeenkomsten toevoegen die niet in de doeltaal zijn. Bekijk de voorkeuren <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> voor details.</para>
+	<para>Zulke overeenkomsten zijn standaard beperkt tot de bron- en doeltalen die zijn gedefinieerd in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, maar u kunt ook overeenkomsten toevoegen die niet in de doeltaal zijn. Bekijk de <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> voorkeuren voor details.</para>
 
 	<para>De map mag elk aantal submappen bevatten, inclusief sommige die speciale functies hebben:</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.tm.auto">
-		<term id="project.folder.tm.auto.title">tm/auto</term>
+      <varlistentry xml:id="project.folder.tm.auto">
+		<term xml:id="project.folder.tm.auto.title">tm/auto</term>
 		<listitem>
 		  <para>Deze map is bestemd voor betrouwbare verwijzingsbestanden die automatisch exacte overeenkomsten kunnen vullen en nog niet vertaalde segmenten.</para>
 
@@ -186,8 +185,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.enforce">
-		<term id="project.folder.tm.enforce.title">tm/enforce</term>
+      <varlistentry xml:id="project.folder.tm.enforce">
+		<term xml:id="project.folder.tm.enforce.title">tm/enforce</term>
 		<listitem>
 		  <para>Deze map is bestemd voor betrouwbare verwijzingsbestanden die ook zijn bedoeld om automatisch eerder vertaalde inhoud te overschrijven.</para>
 
@@ -237,8 +236,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.mt">
-		<term id="project.folder.tm.mt.title">tm/mt</term>
+      <varlistentry xml:id="project.folder.tm.mt">
+		<term xml:id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
 		  <para>Wanneer een overeenkomst wordt ingevoegd vanuit een TMX die is opgenomen in deze map, wordt de achtergrond van het actieve segment gewijzigd naar rood.</para>
 
@@ -246,8 +245,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-      <varlistentry id="project.folder.tm.penalty">
-		<term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
+      <varlistentry xml:id="project.folder.tm.penalty">
+		<term xml:id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
 		<listitem>
 		  <para><literal>xxx</literal> is een getal tussen 0 tot en met 100 dat zal acteren als een straf, afgetrokken van het percentage van de overeenkomst van segmenten die uit deze map komen.</para>
 
@@ -255,8 +254,8 @@
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.tm.tmx2source">
-		<term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
+      <varlistentry xml:id="project.folder.tm.tmx2source">
+		<term xml:id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
 		<listitem>
 		  <para>U kunt een derde taal weergeven <emphasis>direct onder</emphasis> het bronsegment om te gebruiken als verwijzing naar een derde taal. Bekijk de <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> how-to voor details.</para>
 		</listitem>
@@ -268,18 +267,18 @@
 	</note>
   </section>
 
-  <section id="project.folder.exported.tm">
-	<title id="project.folder.exported.tm.title">map voor geëxporteerde tm's</title>
-	<para>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen. Bekijk de how-to <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> voor details.</para>
+  <section xml:id="project.folder.exported.tm">
+	<title xml:id="project.folder.exported.tm.title">map voor geëxporteerde tm's</title>
+	<para>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen. Bekijk de <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/> how-to voor details.</para>
   </section>
 
-  <section id="project.folder.dictionary">
-    <title id="project.folder.dictionary.title">Woordenboek</title>
+  <section xml:id="project.folder.dictionary">
+    <title xml:id="project.folder.dictionary.title">Woordenboek</title>
     <para>Deze map is initieel leeg en wordt gebruikt om woordenboeken op te slaan die u toevoegt aan het project.</para>
 
-	<para>Termen van woordenboeken die overeenkomen met delen van het segment worden weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Bekijk de voorkeuren <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> voor details.</para>
+	<para>Termen van woordenboeken die overeenkomen met delen van het segment worden weergegeven in het venster <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Bekijk de <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> voorkeuren voor details.</para>
 
-    <para>OmegaT ondersteunt woordenboeken in de indelingen StarDict of Lingvo DSL. U kunt enkele woordenboeken vinden op de <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">wiki van OmegaT</ulink>.</para>
+    <para>OmegaT ondersteunt woordenboeken in de indelingen StarDict of Lingvo DSL. U kunt enkele woordenboeken vinden op de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">wiki van OmegaT</link>.</para>
 
 	<para>Installeren van woordenboeken:</para>
 
@@ -296,15 +295,15 @@
 	<para>Als u woorden uit potentiële overeenkomsten van woordenboeken wilt verwijderen, voeg dan een bestand <filename>ignore.txt</filename>, gecodeerd in UTF-8, toe aan de map. Het bestand moet één woord per regel hebben. Alle woorden die zijn opgenomen in die lijst zullen worden genegeerd door OmegaT.</para>
   </section>
 
-  <section id="project.folder.glossary">
-    <title id="project.folder.glossary.title">glossary</title>
+  <section xml:id="project.folder.glossary">
+    <title xml:id="project.folder.glossary.title">glossary</title>
     <para>Deze map is bij aanvang leeg. Het wordt gebruikt om de beschrijfbare woordenlijst en andere woordenlijsten, die u gebruikt in het project, op te slaan.</para>
 
 	<para>Termen van woordenlijsten die overeenkomen met delen van het segment worden weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>. Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
 
 	<variablelist>
-      <varlistentry id="project.folder.glossary.txt">
-        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+      <varlistentry xml:id="project.folder.glossary.txt">
+        <term xml:id="project.folder.glossary.txt.title">glossary.txt</term>
         <listitem>
           <para>Dit is de beschrijfbare woordenlijst voor het project Het wordt gemaakt als u voor de eerste keer <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> gebruikt.</para>
 
@@ -314,38 +313,38 @@
 	</variablelist>
   </section>
 
-  <section id="project.folder.omegat.folder">
-    <title id="project.folder.omegat.folder.title">omegat</title>
-    <para>De map <filename class="directory">omegat</filename> bevat, ten minste, de bestanden <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> en <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. Het kan ook verscheidene andere bestanden bevatten.</para>
+  <section xml:id="project.folder.omegat.folder">
+    <title xml:id="project.folder.omegat.folder.title">omegat</title>
+    <para>De map <filename class="directory">omegat</filename> bevat, minstens, de bestanden <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> en <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. Het kan ook verscheidene andere bestanden bevatten.</para>
 
     <variablelist>
-      <varlistentry id="project.folder.project.save.tmx">
-        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
+      <varlistentry xml:id="project.folder.project.save.tmx">
+        <term xml:id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
-          <para>Dit is het meest belangrijke bestand in het project. Wanneer u een nieuw project maakt is het bestand leeg en het wordt gaandeweg gevuld met de vertalingen van de tekst in bestanden die zijn geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
+          <para>Dit is het meest belangrijke bestand in het project. Wanneer u een nieuw project maakt is het ebstand leeg en het wordt gaandeweg gevuld met de vertalingen van de tekst in bestanden die zijn geplaatst in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
 		  <para>Het vormt het werkende vertaalgeheugen van het project.</para>
 
-		  <para>OmegaT maakt regelmatig back-ups van dat bestand. Bekijk de how-to <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> voor details.</para>
+		  <para>OmegaT maakt regelmatig back-ups van dat bestand. Bekijk de <link linkend="how.to.restore.your.data" endterm="how.to.restore.your.data.title"/> how-to voor details.</para>
 		</listitem>
       </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.bak">
-		<term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.bak">
+		<term xml:id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
 		  <para>Dit bestand is een back-up van <filename>project_save.tmx</filename> en wordt automatisch gemaakt, elke keer als <filename>project_save.tmx</filename> is aangepast: ofwel na het gebruiken van <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.save" endterm="menus.project.save.title"/>, of als een normale back-up, standaard elke 3 minuten. Bekijk de voorkeur <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> voor details.</para>
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
-		<term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.tijdstempel.bak</term>
+	  <varlistentry xml:id="project.folder.project.save.tmx.timestamp.bak">
+		<term xml:id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.tijdstempel.bak</term>
 		<listitem>
 		  <para>Elke keer als een project wordt geladen maakt OmegaT een back-up van <filename>project_save.tmx</filename> met de naam <filename>project_save.tmx.[tijdstempel].bak</filename>. OmegaT behoudt tot maximaal 10 van deze bestanden.</para>
 		</listitem>
 	  </varlistentry>
 
-      <varlistentry id="project.folder.project.stats">
-        <term id="project.folder.project.stats.title">project_stats.txt</term>
+      <varlistentry xml:id="project.folder.project.stats">
+        <term xml:id="project.folder.project.stats.title">project_stats.txt</term>
         <listitem>
           <para>Dit is het bestand met statistieken voor het gehele project. Het wordt, elke keer als een project wordt herladen, bijgewerkt.</para>
 
@@ -353,67 +352,67 @@
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.project.stats.match">
-        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match">
+        <term xml:id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
         <listitem>
           <para>Dit bestand bevat de laatst statistieken voor overeenkomsten in het project. Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> om het te maken.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.project.stats.match.per.file">
-        <term id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
+      <varlistentry xml:id="project.folder.omegat.project.stats.match.per.file">
+        <term xml:id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</term>
         <listitem>
           <para>Dit bestand bevat de laatst statistieken voor overeenkomsten voor het project, per bestand. Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics.per.file" endterm="menus.tools.match.statistics.per.file.title"/> om het te maken.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="       project.folder.omegat.spellcheck">
-        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt.</term>
-        <term id="project.folder.omegat.learned.words">learned_words.txt</term>
+      <varlistentry xml:id="project.folder.omegat.spellcheck">
+        <term xml:id="project.folder.omegat.ignored.words.title">ignored_words.txt.</term>
+        <term xml:id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>Deze bestanden worden gemaakt en gebruikt door de spellingscontrole. U kunt termen in het <link linkend="panes.editor" endterm="panes.editor.title"/> toevoegen door met rechts te klikken op een als onjuist gemarkeerd woord en, respectievelijk, <guimenuitem>Alles negeren</guimenuitem> (voor woorden die moeten worden overgeslagen gedurende spellingscontrole), of <guimenuitem>Aan woordenboek toevoegen</guimenuitem> (voor woorden die moeten worden geaccepteerd als correct) uit het <link linkend="panes.editor.context.menu">contextmenu</link>. Bekijk de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voor details.</para>
+          <para>Deze bestanden worden gemaakt en gebruikt door de spellingscontrole. U kunt termen in het venster <link linkend="panes.editor" endterm="panes.editor.title"/> toevoegen door met rechts te klikken op een als onjuist gemarkeerd woord en, respectievelijk, <guimenuitem>Alles negeren</guimenuitem> (voor woorden die moeten worden overgeslagen gedurende spellingscontrole), of <guimenuitem>Aan woordenboek toevoegen</guimenuitem> (voor woorden die moeten worden geaccepteerd als correct) uit het <link linkend="panes.editor.context.menu">contextmenu</link>. Bekijk de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voor details.</para>
 
 		  <para>Als u al een collectie woorden hebt verzameld, waarvan u wilt dat de spellingscontrole die negeert of accepteert, sla ze dan eenvoudigweg op in tekstbestanden met corresponderende namen in de map <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> van uw huidige project.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+      <varlistentry xml:id="project.folder.omegat.segmentation">
+        <term xml:id="project.folder.omegat.segmentation.title">segmentation.conf</term>
         <listitem>
           <para>Dit bestand bevat de project-specifieke segmentatieregels.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.filters">
-        <term id="project.folder.omegat.filters.title">filters.xml</term>
+      <varlistentry xml:id="project.folder.omegat.filters">
+        <term xml:id="project.folder.omegat.filters.title">filters.xml</term>
         <listitem>
           <para>Dit bestand bevat de project-specifieke bestandsfilters.</para>
         </listitem>
       </varlistentry>
 	  
-      <varlistentry id="project.folder.omegat.uiLayout">
-        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
+      <varlistentry xml:id="project.folder.omegat.uiLayout">
+        <term xml:id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
         <listitem>
-          <para>Dit bestand bevat de project-specifieke instellingen voor de gebruikersinterface.</para>
+          <para>Dit bestand bevat de project-specifieke instellingen voor de gebruikersinterface.&gt;</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.finder">
-        <term id="project.folder.omegat.finder.title">finder.xml</term>
+      <varlistentry xml:id="project.folder.omegat.finder">
+        <term xml:id="project.folder.omegat.finder.title">finder.xml</term>
         <listitem>
           <para>Dit bestand bevat de project-specifieke externe zoekacties.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.file.order">
-        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
+      <varlistentry xml:id="project.folder.omegat.file.order">
+        <term xml:id="project.folder.omegat.file.order.title">files_order.txt</term>
         <listitem>
           <para>Dit bestand wordt gemaakt als u handmatig de volgorde wijzigt van de bestanden in het venster <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"/>.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="project.folder.omegat.last.entry">
-        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+      <varlistentry xml:id="project.folder.omegat.last.entry">
+        <term xml:id="project.folder.omegat.last.entry.title">last_entry.properties</term>
         <listitem>
           <para>Dit bestand houdt bij welk segment u voor het laatst bezocht, inclusief het nummer ervan, de inhoud van de bron ervan, de bestandsnaam en de datum, zodat u er naar terug kan keren als u het project opnieuw laadt of opnieuw start.</para>
         </listitem>
@@ -421,11 +420,11 @@
     </variablelist>
   </section>
 
-  <section id="project.folder.repositories">
-    <title id="project.folder.repositories.title">.repositories</title>
+  <section xml:id="project.folder.repositories">
+    <title xml:id="project.folder.repositories.title">.repositories</title>
     <para>In een teamproject bevat deze map een geversioneerde kopie van de boomstructuur van het project, direct gekoppeld aan de server op afstand.</para>
 
-    <para>U kunt wijzigingen maken in bestanden op afstand (zoals ze verwijderen of vervangen)  door uw wijzigingen in de map te maken en een cliënt voor Git of SVN te gebruiken om ze te synchroniseren met de server op afstand. Bekijk de how-to <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> voor details.</para>
+    <para>U kunt wijzigingen maken in bestanden op afstand (zoals ze verwijderen of vervangen)  door uw wijzigingen in de map te maken en een cliënt voor Git of SVN te gebruiken om ze te synchroniseren met de server op afstand. Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
 
     <para>In sommige besturingssystemen is deze map standaard verborgen. Activeer de optie om verborgen bestanden weer te geven in uw systeem om hem zichtbaar te maken.</para>
   </section>

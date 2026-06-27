@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.text.search">
-  <title id="windows.text.search.title"><guilabel>Tekst zoeken</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
+  <title xml:id="windows.text.search.title"><guilabel>Tekst zoeken</guilabel></title>
 
   <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> om een nieuw venster Zoeken te openen en voer in het zoekveld het woord of de frase in waarnaar u wilt zoeken.</para>
   
@@ -16,8 +15,8 @@
   
   <para>Overeenkomsten zullen in vette blauwe tekens worden weergegeven.</para>
 
-  <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">Zoeken naar ドイツ</title>
+  <example xml:id="search.for.doitsu">
+	<title xml:id="search.for.doitsu.title">Zoeken naar ドイツ</title>
 	<para>
 	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -54,16 +53,16 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Type zoekactie</title>
+  <section xml:id="windows.text.search.methods">
+    <title xml:id="windows.text.search.methods.title">Type zoekactie</title>
 
     <para>Gebruik de radioknoppen om het type zoekactie te selecteren.</para>
 
 	<para>De volgende zoekacties zijn beschikbaar:</para>
 
     <variablelist>
-      <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">Exact zoeken</term>
+      <varlistentry xml:id="windows.text.search.methods.exact">
+        <term xml:id="windows.text.search.methods.exact.title">Exact zoeken</term>
         <listitem>
           <para>Exact zoeken naar de tekenreeks zoals die is ingevoerd in het zoekveld.</para>
 
@@ -71,8 +70,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">Sleutelwoorden zoeken</term>
+      <varlistentry xml:id="windows.text.search.methods.keyword">
+        <term xml:id="windows.text.search.methods.keyword.title">Sleutelwoorden zoeken</term>
         <listitem>
           <para>Zoekt naar segmenten die elk van de zoektermen bevatten, gescheiden door een spatie.</para>
 
@@ -102,8 +101,8 @@
 	</variablelist>
 
 	<variablelist>
-      <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">Reguliere uitdrukkingen</term>
+      <varlistentry xml:id="windows.text.search.methods.regex">
+        <term xml:id="windows.text.search.methods.regex.title">Reguliere uitdrukkingen</term>
         <listitem>
           <para>Behandelt de tekenreeks voor het zoeken als een reguliere expressie.</para>
 		  <para>Reguliere uitdrukkingen zijn een zeer krachtige manier om naar algemene of complexe patronen te zoeken in plaats van exacte tekenreeksen. Bekijk de appendix <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
@@ -116,8 +115,8 @@
     </variablelist>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">Opties</title>
+  <section xml:id="windows.text.search.options">
+	<title xml:id="windows.text.search.options.title">Opties</title>
 	
 	<variablelist>
 	  <varlistentry>
@@ -271,8 +270,8 @@
 	</variablelist>
   </section>
 
-  <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">Weergave resultaten</title>
+  <section xml:id="windows.text.search.result.display">
+    <title xml:id="windows.text.search.result.display.title">Weergave resultaten</title>
 
     <para>Overeenkomsten worden weergegeven in hun volgorde van verschijnen in het project. Voor vertaalde segmenten zal de originele tekst worden weergegeven boven de vertaalde tekst. Voor niet-vertaalde segmenten wordt alleen de brontekst weergegeven.</para>
 
@@ -304,12 +303,12 @@
 	
 	<para>Het geselecteerde segment wordt in groen geaccentueerd:</para>
 
-  	<example id="select.second.match">
-	  <title id="select.second.match.title">Selecteer de tweede overeenkomst</title>
+  	<example xml:id="select.second.match">
+	  <title xml:id="select.second.match.title">Selecteer de tweede overeenkomst</title>
 	  <para>
 		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
-<action>-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</action>
+<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
 	  </para>
 	</example>
@@ -330,8 +329,8 @@
 	</variablelist>
   </section>
   
-  <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">Filteren</title>
+  <section xml:id="windows.text.search.filter">
+    <title xml:id="windows.text.search.filter.title">Filteren</title>
 
 	<para>Klik op de knop <guibutton>Filter</guibutton> om alleen de overeenkomende zoekresultaten weer te geven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>. Druk op de knop <guibutton>Filter verwijderen</guibutton> aan de bovenzijde van het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, of laadt een project opnieuw om een filter te verwijderen.</para>
   </section>

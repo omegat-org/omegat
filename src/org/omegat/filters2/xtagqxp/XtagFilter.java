@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -48,6 +49,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
+@NullMarked
 public class XtagFilter extends AbstractFilter {
 
     protected static final String EOL = "\r\n";
@@ -113,8 +115,7 @@ public class XtagFilter extends AbstractFilter {
      * @param outFile
      *            Target document
      */
-    private void processXtagFile(BufferedReader inFile, Writer outFile) throws IOException,
-            TranslationException {
+    private void processXtagFile(BufferedReader inFile, Writer outFile) throws IOException {
         final int stateWaitText = 1;
         final int stateReadText = 2;
         int state = stateWaitText;
@@ -147,7 +148,7 @@ public class XtagFilter extends AbstractFilter {
     /**
      * Lists of Xtags in an entry
      */
-    private List<Xtag> listTags = new ArrayList<Xtag>();
+    private final List<Xtag> listTags = new ArrayList<>();
 
     /**
      * Finds the Xtag corresponding to an OmegaT tag
@@ -159,7 +160,7 @@ public class XtagFilter extends AbstractFilter {
      */
     private String findTag(StringBuilder tag) {
         for (Xtag oneTag : listTags) {
-            if (oneTag.toShortcut().equals(tag.toString())) {
+            if (tag.toString().equals(oneTag.toShortcut())) {
                 return oneTag.toOriginal();
             }
         }

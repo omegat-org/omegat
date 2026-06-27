@@ -24,6 +24,7 @@
 * [How to make filter plugin](11.HowToCreateFilterPlugin.md)
 * [Setup your plugin project](15.SetupPluginProject.md)
 * [Loading Plugins](17.LoadingPlugins.md)
+* [Plugin security architecture](24.PluginSecurity.md)
 * [Plugin manifest](19.PluginManifest.md)
 * [How to make Machine Translation connector plugin](12.HowToMakeMTConnector.md)
 
@@ -32,16 +33,18 @@
 * [OmegaT internals](21.OmegaTInternals.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
-* [Plugin Security Subsystem](24.PluginSecurity.md)
 * [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)
+* [Logging and debugging](28.LoggingAndDebugging.md)
 
 ## Quality Assurance and tests
 
 * [Test and coverage](33.TestAndCoverage.md)
 * [Integration test](34.IntegrationTest.md)
-* [Test a spcific features](35.SpecificFeatureTests.md)
+* [Build and dependency security](37.BuildAndDependencySecurity.md)
+* [Test a specific feature](35.SpecificFeatureTests.md)
+* [Continuous Integration and Continuous Delivery](96.ContinuousIntegration.md)
 
 ## Documentation
 
@@ -79,6 +82,7 @@
 
 ## Other information
 
+* [Offline Build](09.OfflineBuild.md)
 * [Release procedure](90.ReleaseProcedure.md)
 * [Code Signing How-to](92.CodeSigning.md)
 * [Building installer](93.BuildingInstallerPackage.md)

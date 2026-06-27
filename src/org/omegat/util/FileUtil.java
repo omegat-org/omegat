@@ -693,4 +693,24 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * Deletes a directory and its contents using Apache Commons IO.
+     *
+     * @param path Path to the directory to be deleted
+     * @return true if the directory was successfully deleted, false otherwise
+     */
+    public static boolean deleteDirectory(Path path) {
+        if (path == null) {
+            return false;
+        }
+        try {
+            FileUtils.deleteDirectory(path.toFile());
+            return true;
+        } catch (Exception e) {
+            Log.log(e);
+            return false;
+        }
+    }
+
+
 }

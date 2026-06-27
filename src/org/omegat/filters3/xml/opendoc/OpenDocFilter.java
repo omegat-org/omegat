@@ -249,7 +249,7 @@ public class OpenDocFilter extends AbstractFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenDocOptionsDialog dialog = new EditOpenDocOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

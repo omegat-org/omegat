@@ -31,14 +31,14 @@ package org.omegat.core.statistics;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -103,6 +103,14 @@ public class StatsResult {
     private Set<String> translated;
     @JsonProperty("files")
     private List<FileData> counts;
+
+    /**
+     * Formatter with format YYYYMMDDThhmmssZ able to display a date in UTC time.
+     * <p>
+     * {@link DateTimeFormatter} is immutable and thread-safe.
+     */
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
+            .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
 
     @JsonProperty("date")
     private String date;
@@ -238,9 +246,9 @@ public class StatsResult {
         setDate();
         StringWriter result = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        SequenceWriter writer = mapper.writer().writeValues(result);
-        writer.write(this);
-        writer.close();
+        try (SequenceWriter writer = mapper.writer().writeValues(result)) {
+            writer.write(this);
+        }
         return result.toString();
     }
 
@@ -260,9 +268,7 @@ public class StatsResult {
     }
 
     private void setDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        date = dateFormat.format(new Date());
+        date = DATE_FORMAT.format(Instant.now());
     }
 
     // CHECKSTYLE:OFF

@@ -74,7 +74,7 @@ public class XMLWriter extends Writer {
      * @param eol
      *            End-Of-Line character
      */
-    public XMLWriter(File file, @Nullable String encoding, String eol)
+    public XMLWriter(File file, @Nullable String encoding, @Nullable String eol)
             throws FileNotFoundException, UnsupportedEncodingException {
         if (encoding == null) {
             xmlHeader = "<?xml version=\"1.0\"?>";

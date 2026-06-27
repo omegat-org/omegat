@@ -53,8 +53,8 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
-import org.jetbrains.annotations.Nullable;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
 import org.omegat.core.data.ProtectedPart;
@@ -315,9 +315,9 @@ public class Aligner {
                     }
 
                     @Override
-                    public void addEntryWithProperties(String id, String source, String translation,
-                            boolean isFuzzy, String[] props, String path, IFilter filter,
-                            List<ProtectedPart> protectedParts) {
+                    public void addEntryWithProperties(@Nullable String id, String source, @Nullable String translation,
+                            boolean isFuzzy, String[] props, @Nullable String path, IFilter filter,
+                            @Nullable List<ProtectedPart> protectedParts) {
                         process(source, id != null ? id : path);
 
                     }
@@ -410,7 +410,10 @@ public class Aligner {
      * @return List of beads aligned by ID
      */
     private Stream<Alignment> alignByIdNotSegmented() {
-        if (!allowedModes.contains(ComparisonMode.ID)) {
+        if (allowedModes == null || !allowedModes.contains(ComparisonMode.ID)) {
+            throw new UnsupportedOperationException();
+        }
+        if (idPairs == null) {
             throw new UnsupportedOperationException();
         }
         return idPairs.stream().map(e -> new Alignment(Collections.singletonList(e.getKey()),

@@ -52,6 +52,8 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.segmentation.SRXManager;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
@@ -129,6 +131,7 @@ public final class TestTeamIntegrationChild {
             }
             TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
+            TestCoreState.getInstance().setSegmenter(new Segmenter(SRXManager.getDefault()));
 
             // Init UI stubs. In a CI environment, errors can occur when
             // initializing the RemoteRepositoryProvider, so we need to make

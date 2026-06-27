@@ -25,9 +25,9 @@
 
 package org.omegat.gui.align;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
@@ -44,6 +44,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.MenuExtender;
 
+@SuppressWarnings("unused")
 public final class AlignerModule implements IApplicationEventListener {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
@@ -70,18 +71,15 @@ public final class AlignerModule implements IApplicationEventListener {
     }
 
     private @Nullable JMenuItem alignerMenu;
-    private @Nullable Component mainWindow = null;
 
     @Override
     public void onApplicationStartup() {
-        mainWindow = Core.getMainWindow().getApplicationFrame();
         SwingUtilities.invokeLater(this::registerMenu);
     }
 
     @Override
     public void onApplicationShutdown() {
         unregisterMenu();
-        mainWindow = null;
     }
 
     private void unregisterMenu() {
@@ -180,7 +178,7 @@ public final class AlignerModule implements IApplicationEventListener {
         if (targetFile != null && !targetFile.isEmpty()) {
             picker.setTargetFile(targetFile);
         }
-        picker.show(mainWindow);
+        picker.show(Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame());
     }
 
     /**

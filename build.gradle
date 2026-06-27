@@ -32,17 +32,18 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "9.3.1" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "9.6.0" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version
 
 // Definition of bundled JRE file names
 def assetDir = findProperty('assetDir') ?: '../'
-def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
-def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
-def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
-def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_aarch64_linux_*.tar.gz')
+def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
 
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -77,6 +78,7 @@ sourceSets {
 configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
+    moduleRuntimeLibs
 }
 
 dependencies {
@@ -84,10 +86,9 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
-            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
-                '**/jaxb-runtime-*.jar'])
+            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
         runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
-            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/jaxb-runtime-*.jar'])
+            '**/language-detector-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -108,15 +109,17 @@ dependencies {
         // extra locales
         implementation(libs.swing.extra.locales)
 
-        // stax
-        implementation(libs.stax2.api)
-        implementation(libs.woodstox.core)
+        // stax - sync with languagetools/lucene
+        // implementation(libs.stax2.api)
+        // implementation(libs.woodstox.core)
 
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
 
         // PDF Filter
-        implementation(libs.apache.pdfbox)
+        implementation(libs.apache.pdfbox) {
+            exclude module: "commons-logging"
+        }
 
         // Dictionary
         implementation(libs.bundles.dictionary)
@@ -131,7 +134,10 @@ dependencies {
         implementation(libs.omegat.mnemonics)
 
         // LanguageTool
-        implementation(libs.languagetool.core)
+        implementation(libs.languagetool.core) {
+            exclude module: 'jaxb-core'
+            exclude module: 'jcl-over-slf4j'
+        }
         implementation(libs.icu4j)
 
         // spellchecker dictionary API
@@ -141,7 +147,10 @@ dependencies {
         implementation(libs.bundles.lucene)
 
         // Team project server support
-        implementation(libs.bundles.jgit)
+        implementation(libs.bundles.jgit) {
+            exclude module: 'jcl-over-slf4j'
+        }
+        implementation(libs.slf4j.jcl)
 
         // For ed25519 and ecdsa support of ssh, java16+ or BC
         implementation(libs.bundles.ecdsa)
@@ -151,8 +160,7 @@ dependencies {
 
         // For subversion
         implementation(libs.svnkit) {
-            exclude module: 'sshd-core'
-            exclude module: 'sshd-common'
+            exclude module: 'jcl-over-slf4j'
         }
 
         // Team project conflict resolution
@@ -161,8 +169,17 @@ dependencies {
         // Credentials encryption
         implementation(libs.jasypt)
 
-        // Javascript engine used for scripts
-        runtimeOnly(libs.nashorn.core)
+        // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
+        // Ivy is needed to handle Grape/@Grab dependencies
+        runtimeOnly(libs.bundles.groovy)
+
+        // Javascript used for scripts
+        implementation(libs.nashorn.core)
+
+        // Script editor
+        implementation(libs.bundles.fifesoft) {
+            exclude module: 'rhino'
+        }
 
         implementation(libs.guava)
 
@@ -201,14 +218,7 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
-    testFixturesImplementation(libs.languagetool.core) {
-        exclude module: 'guava'
-        exclude module: 'language-detector'
-        exclude group: 'com.google.android'
-        exclude module: 'hunspell'
-        exclude module: 'json'
-        exclude module: 'protobuf-java'
-    }
+    testFixturesImplementation(libs.languagetool.core)
     testFixturesImplementation(libs.jetbrains.annotations)
     testFixturesImplementation(libs.jspecify)
 
@@ -222,7 +232,8 @@ dependencies {
     testImplementation(libs.mockito.core)
     testImplementation(libs.languagetool.server)
     testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
+    testRuntimeOnly(libs.bundles.groovy)
+    testRuntimeOnly(libs.nashorn.core)
     testRuntimeOnly(libs.slf4j.jdk14)
 
     testAcceptanceImplementation sourceSets.main.output
@@ -233,7 +244,6 @@ dependencies {
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
     testAcceptanceImplementation(libs.bundles.lucene)
-    testAcceptanceImplementation(libs.bundles.groovy)
     testAcceptanceImplementation(project(':aligner'))
     testAcceptanceImplementation(project(':scripting'))
 
@@ -254,7 +264,14 @@ dependencies {
         // for architectures other than x86_64 on linux
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
-    subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
+    subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
+        jacocoAggregation sub
+        sub.plugins.withId('org.omegat.module') {
+            moduleRuntimeLibs(project(sub.path)) {
+                targetConfiguration = 'moduleRuntimeDependencies'
+            }
+        }
+    }
 }
 
 jar {
@@ -296,13 +313,28 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    archiveFileName.set(project.property('org.omegat.omegatJarFilename'))
+    archiveFileName.set(omegatJarFilename)
 }
 
 test {
     // some test case depends on modules from subproject
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
+
+// Resolve module dependencies EAGERLY at configuration time
+def moduleLibs = subprojects
+        .findAll { it.subprojects.isEmpty() }
+        .collect {
+            it.configurations.matching {
+                it.name.endsWith('untimeClasspath')
+                        && !it.name.startsWith('test')
+                        && !it.name.startsWith('jaxb')
+            }
+        }
+        .flatten()
+
+def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
+def providedBuildLogicPath = 'lib/provided/build-logic'
 
 distributions {
     main {
@@ -375,7 +407,6 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
-                def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }
@@ -387,45 +418,49 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
-                        'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
-                        'docs_devel/**', 'scripts/**',
-                        'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                        'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                        'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', '.checkstyle'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
+                include 'README.md', 'LICENSE', // readme
+                  'build-logic/**', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
+                  'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', '*.properties',
+                  'ci/iscc', 'ci/osslsigncode', '.checkstyle', // ci related
+                  'src/**/*.java', // main source
+                  'test/**','test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
+                  'scripts/**', // sample scripts
+                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', // submodules
+                  'src_docs/**' // documents
+                exclude '**/.gradle/**', '**/build/**', 'local.properties', '**/out/**'
             }
             from(processResources) {
                 into('src')
             }
-            into('lib/provided/core') {
+            into(providedCoreLibsPath) {
                 from configurations.runtimeClasspath
             }
-            into('lib/provided/module') {
-                // collect project runtime dependencies in all subprojects and sourceSets
-                from {subprojects.findAll { it.getSubprojects().isEmpty()}
-                        .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
-                                && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
-                        } }
-                }
-           }
+            into(providedModuleLibsPath) {
+                from(configurations.moduleRuntimeLibs)
+            }
+            into(providedBuildLogicPath) {
+                from buildLogicLibsDir
+            }
         }
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
 }
+def buildLogicLibsTask = gradle.includedBuild('build-logic')
+        .task(':downloadBuildLogicDependencies')
+installSourceDist.dependsOn(buildLogicLibsTask)
+sourceDistZip.dependsOn(buildLogicLibsTask)
 
 tasks.register('mac') {
     description = 'Builds the Mac distributions.'
-    group = 'omegat distribution'
+    group = 'distribution'
 }
-makeHunspellSignTask()
 makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 'mac')
 makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
 
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
-    group = 'omegat distribution'
+    group = 'distribution'
     dependsOn linuxDistDeb
     dependsOn linuxDistRpm
 }
@@ -475,18 +510,8 @@ processResources {
     }
 }
 
-// E.g. when doing `build`, run checks before making distfiles
+// E.g. when doing `build`, run checks before making distribution files
 assemble.mustRunAfter check
-
-allprojects {
-    afterEvaluate {
-        tasks.findByName('compileJava')?.configure {
-            if (project == rootProject) {
-                options.errorprone.allErrorsAsWarnings = true
-            }
-        }
-    }
-}
 
 nexusPublishing.repositories {
     sonatype {

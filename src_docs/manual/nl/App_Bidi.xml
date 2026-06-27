@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.bidi">
-  <title id="app.bidi.title">Directionele opmaaktekens</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.bidi">
+  <title xml:id="app.bidi.title">Directionele opmaaktekens</title>
 
   <para>Bi-drectionele beheerstekens zijn beschikbaar vanuit <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Zij kunnen worden gebruikt om:</para>
 
@@ -14,10 +13,10 @@
 	</listitem>
   </itemizedlist>
   
-  <para>Deze beheerstekens wijzigen de richting, maar zijn onzichtbaar. Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om een visuele indicatie van hun positie weer te geven.</para>
+  <para>Deze beheerstekens wijzigen de richting, maar zijn onzichtbaar. Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om een visuele indicatie van hun psitie weer te geven.</para>
 
-  <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">Markeringen</title>
+  <section xml:id="app.bidi.marks">
+	<title xml:id="app.bidi.marks.title">Markeringen</title>
 
 	<para>Voeg, om de positie van een teken met een zwakke of neutrale richting te wijzigen (zoals symbolen voor punctuatie), een teken LRM of RLM in na het teken, afhankelijk van de richting van het segment:</para>
 
@@ -31,8 +30,8 @@
 	</itemizedlist>
   </section>
 
-  <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">Inbeddingen</title>
+  <section xml:id="app.bidi.embeddings">
+	<title xml:id="app.bidi.embeddings.title">Inbeddingen</title>
 
 	<para>Inbeddingen kunnen worden gebruikt om een langere sectie tekst te maken (die meerdere woorden en spaties bevatten) die moeten lopen in de richting die tegengesteld is aan die van het segment. U kunt twee soorten inbeddingen maken, afhankelijk van de richting van het segment:</para>
 

@@ -50,7 +50,7 @@ signing {
 
 tasks.register('publishVersion') {
     description = 'Updates the version considered current by the version check.'
-    group = 'omegat release'
+    group = 'publishing'
     doLast {
         ssh.run {
             session(remotes.sourceforgeWeb) {

@@ -32,13 +32,19 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.function.Function;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.Core;
 import org.omegat.core.statistics.CalcMatchStatistics;
+import org.omegat.core.statistics.CalcPerFileMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
-import org.omegat.core.threads.LongProcessThread;
+import org.omegat.core.statistics.ICalcStatistics;
+import org.omegat.core.statistics.IStatsConsumer;
+import org.omegat.core.threads.LongProcessExecutor;
+import org.omegat.core.threads.LongProcessHandle;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
@@ -56,10 +62,36 @@ public class StatisticsWindow extends javax.swing.JDialog {
     private String textData;
 
     public enum STAT_TYPE {
-        STANDARD, MATCHES, MATCHES_PER_FILE
-    };
+        STANDARD("CT_STATSSTANDARD_WindowHeader", StatisticsPanel::new, CalcStandardStatistics::new),
+        MATCHES("CT_STATSMATCH_WindowHeader", MatchStatisticsPanel::new, CalcMatchStatistics::new),
+        MATCHES_PER_FILE("CT_STATSMATCH_PER_FILE_WindowHeader", PerFileMatchStatisticsPanel::new,
+                CalcPerFileMatchStatistics::new);
 
-    private transient LongProcessThread thread;
+        private final String titleKey;
+        private final Function<StatisticsWindow, JComponent> panelCreator;
+        private final Function<IStatsConsumer, ICalcStatistics> calcCreator;
+
+        STAT_TYPE(String titleKey, Function<StatisticsWindow, JComponent> panelCreator, Function<IStatsConsumer,
+                ICalcStatistics> calcCreator) {
+            this.titleKey = titleKey;
+            this.panelCreator = panelCreator;
+            this.calcCreator = calcCreator;
+        }
+
+        public String getTitle() {
+            return OStrings.getString(titleKey);
+        }
+
+        public JComponent createPanel(StatisticsWindow window) {
+            return panelCreator.apply(window);
+        }
+
+        public ICalcStatistics createCalculator(IStatsConsumer consumer) {
+            return calcCreator.apply(consumer);
+        }
+    }
+
+    LongProcessHandle<Void> handle;
 
     /**
      * Creates new form StatisticsWindow
@@ -69,45 +101,19 @@ public class StatisticsWindow extends javax.swing.JDialog {
         initComponents();
         copyDataButton.setVisible(false);
 
-        JComponent output = null;
-
-        switch (statType) {
-        case STANDARD:
-            setTitle(OStrings.getString("CT_STATSSTANDARD_WindowHeader"));
-            StatisticsPanel panel = new StatisticsPanel(this);
-            thread = new CalcStandardStatistics(panel);
-            output = panel;
-            break;
-        case MATCHES:
-            setTitle(OStrings.getString("CT_STATSMATCH_WindowHeader"));
-            MatchStatisticsPanel panel1 = new MatchStatisticsPanel(this);
-            thread = new CalcMatchStatistics(panel1, false);
-            output = panel1;
-            break;
-        case MATCHES_PER_FILE:
-            setTitle(OStrings.getString("CT_STATSMATCH_PER_FILE_WindowHeader"));
-            PerFileMatchStatisticsPanel panel2 = new PerFileMatchStatisticsPanel(this);
-            thread = new CalcMatchStatistics(panel2, true);
-            output = panel2;
-            break;
-        }
-
-        // Run calculation
-        thread.setPriority(Thread.MIN_PRIORITY);
-
+        setTitle(statType.getTitle());
+        JComponent output = statType.createPanel(this);
+        ICalcStatistics calcStat = statType.createCalculator((IStatsConsumer) output);
+        LongProcessExecutor executor = Core.getLongProcessExecutor();
+        handle = executor.submit(calcStat::run);
         displayPanel.add(output);
 
         StaticUIUtils.setEscapeClosable(this);
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowOpened(WindowEvent e) {
-                thread.start();
-            }
-
-            @Override
             public void windowClosing(WindowEvent e) {
-                thread.fin();
+                handle.cancel();
             }
         });
 
@@ -180,7 +186,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         // WindowListener.windowClosing() so we have to be sure to end the
         // thread here too.
         // See https://sourceforge.net/p/omegat/bugs/789/
-        thread.fin();
+        handle.cancel();
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 

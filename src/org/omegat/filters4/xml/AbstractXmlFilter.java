@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.List;
@@ -58,6 +59,8 @@ import javax.xml.stream.events.ProcessingInstruction;
 import javax.xml.stream.events.EntityReference;
 import javax.xml.stream.events.Namespace;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -85,10 +88,12 @@ import org.omegat.util.StaticUtils;
  *
  * @author Thomas Cordonnier
  */
+@NullMarked
 public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /** Detected encoding and eol of the input XML file. */
-    private String encoding, eol;
+    private @Nullable String encoding;
+    private @Nullable String eol;
 
     protected XMLInputFactory iFactory;
     protected XMLOutputFactory oFactory;
@@ -115,14 +120,11 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      *            The source file.
      * @return The reader of the source file.
      *
-     * @throws UnsupportedEncodingException
-     *             Thrown if JVM doesn't support the specified inEncoding.
      * @throws IOException
      *             If any I/O Error occurs upon reader creation.
      */
     @Override
-    public BufferedReader createReader(File inFile, String inEncoding)
-            throws UnsupportedEncodingException, IOException {
+    public BufferedReader createReader(File inFile, @Nullable String inEncoding) throws IOException {
         XMLReader xmlreader = new XMLReader(inFile, inEncoding);
         this.encoding = xmlreader.getEncoding();
         this.eol = xmlreader.getEol();
@@ -146,7 +148,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      *             If any I/O Error occurs upon writer creation
      */
     @Override
-    public BufferedWriter createWriter(File outFile, String outEncoding)
+    public BufferedWriter createWriter(@Nullable File outFile, @Nullable String outEncoding)
             throws UnsupportedEncodingException, IOException {
         if (outFile == null) {
             return new BufferedWriter(new StringWriter());
@@ -160,7 +162,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /** Processes an XML file. Does encoding/EOL detection, if necessary **/
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc)
+    public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
             inEncodingLastParsedFile = this.encoding;
@@ -181,7 +183,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * configured with correct encoding and EOL.
      **/
     @Override
-    public void processFile(BufferedReader inReader, BufferedWriter writer, FilterContext fc)
+    public void processFile(BufferedReader inReader, @Nullable BufferedWriter writer, FilterContext fc)
             throws IOException, TranslationException {
         try {
             XMLStreamReader strReader = null;
@@ -202,7 +204,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                         // calculated after checkCurrentCursorPosition may
                         // have changed!
                         if (isEventMode) {
-                            XMLEvent event = eventReader.nextEvent();
+                            XMLEvent event = Objects.requireNonNull(eventReader).nextEvent();
                             if (event.isStartElement()) {
                                 processStartElement(event.asStartElement(), null);
                             } else if (event.isEndElement()) {
@@ -252,7 +254,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                         // have changed!
                         if (isEventMode) {
                             boolean keep;
-                            XMLEvent event = eventReader.nextEvent();
+                            XMLEvent event = Objects.requireNonNull(eventReader).nextEvent();
                             if (event.isStartElement()) {
                                 keep = processStartElement(event.asStartElement(), strWriter);
                             } else if (event.isEndElement()) {
@@ -308,7 +310,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * 
      * @return true if the element must be kept in translation, false otherwise
      **/
-    protected abstract boolean processStartElement(StartElement el, XMLStreamWriter evWriter)
+    protected abstract boolean processStartElement(StartElement el, @Nullable XMLStreamWriter evWriter)
             throws IOException, XMLStreamException;
 
     /**
@@ -317,7 +319,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * 
      * @return true if the element must be kept in translation, false otherwise
      **/
-    protected abstract boolean processEndElement(EndElement el, XMLStreamWriter evWriter)
+    protected abstract boolean processEndElement(EndElement el, @Nullable XMLStreamWriter evWriter)
             throws IOException, XMLStreamException;
 
     /**
@@ -325,7 +327,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * 
      * @return true if the element must be kept in translation, false otherwise
      **/
-    protected abstract boolean processCharacters(Characters el, XMLStreamWriter evWriter)
+    protected abstract boolean processCharacters(Characters el, @Nullable XMLStreamWriter evWriter)
             throws IOException, XMLStreamException;
 
     // Inspired from http://www.java2s.com/Code/Java/XML/XmlReaderToWriter.htm
@@ -437,7 +439,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     }
 
     /** Used for file type detection **/
-    protected StartElement findEvent(File inputFile, Pattern path) throws IOException, TranslationException {
+    protected @Nullable StartElement findEvent(File inputFile, Pattern path) throws IOException, TranslationException {
         try {
             XMLEventReader eventReader = null;
             try {
@@ -480,7 +482,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * after buildTags(src, true) to have the necessary variables filled!
      **/
     protected List<XMLEvent> restoreTags(String tra) {
-        List<XMLEvent> res = new LinkedList<XMLEvent>();
+        List<XMLEvent> res = new LinkedList<>();
         while (!tra.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(tra);
             if (m.find()) {
@@ -548,7 +550,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /** Convert <xxx/> to <xxx></xxx> **/
     protected List<XMLEvent> toPair(StartElement ev) {
-        List<XMLEvent> l = new LinkedList<XMLEvent>();
+        List<XMLEvent> l = new LinkedList<>();
         l.add(ev);
         l.add(eFactory.createEndElement(ev.getName(), null));
         return l;

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<article lang="co" id="freedoms.article">
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="co">
     <section>
-        <title id="freedoms">Libertà d’usu è di mudificazione</title>
+        <title>Libertà d’usu è di mudificazione</title>
         <para>OmegaT hè una suluzione libera di traduzzione assistita da l’urdinatore (TAO in
-            francese è CAT in inglese) per i traduttori prufessiunali. Stu prugramma hè distribuitu sottu à i termini di a <emphasis>Licenza Publica Generale GNU, versione 3.0</emphasis>. Fighjate <guimenu>Aiutu</guimenu> eppò <guimenu>Apprupositu</guimenu>. A licenza vi cuncede quelle libertà :<itemizedlist id="freedoms.list">
+            francese è CAT in inglese) per i traduttori prufessiunali. Stu prugramma hè distribuitu sottu à i termini di a <emphasis>Licenza Publica Generale GNU, versione 3.0</emphasis>. Fighjate <guimenu>Aiutu</guimenu> eppò <guimenu>Apprupositu</guimenu>. A licenza vi cuncede quelle libertà :<itemizedlist>
                 <listitem>
                     <para>A libertà di lancià OmegaT cum’ella vi pare, per tutti i vostri bisogni.</para>
                 </listitem>

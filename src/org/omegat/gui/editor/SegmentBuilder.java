@@ -30,9 +30,12 @@
 
 package org.omegat.gui.editor;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -574,9 +577,13 @@ public class SegmentBuilder {
             String template;
             if (trans.changeDate != 0) {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
-                Date changeDate = new Date(trans.changeDate);
-                String changeDateString = DateFormat.getDateInstance().format(changeDate);
-                String changeTimeString = DateFormat.getTimeInstance().format(changeDate);
+                Instant changeDate = Instant.ofEpochMilli(trans.changeDate);
+                Locale locale = Locale.getDefault();
+                ZoneId zone = ZoneId.systemDefault();
+                String changeDateString = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                        .withLocale(locale).withZone(zone).format(changeDate);
+                String changeTimeString = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)
+                        .withLocale(locale).withZone(zone).format(changeDate);
                 Object[] args = { author, changeDateString, changeTimeString };
                 text = StringUtil.format(template, args);
             } else {

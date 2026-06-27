@@ -113,7 +113,7 @@ public class AndroidFilter extends XMLFilter {
     }
 
     @Override
-    public void tagEnd(@Nullable String path) {
+    public void tagEnd(String path) {
         comment = null;
         if ("/resources/string".equals(path)) {
             idComment = null;

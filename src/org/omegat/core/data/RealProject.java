@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jspecify.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.segmentation.SRXManager;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -75,7 +76,6 @@ import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.statistics.StatsResult;
@@ -233,9 +233,7 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
-        projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), config.getProjectRootDir(), checkOrphanedCallback,
-                Core.getSegmenter());
+        projectTMX = new ProjectTMX(checkOrphanedCallback);
         sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
@@ -247,7 +245,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
+            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
@@ -397,7 +395,7 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             // build word count
-            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            StatsResult stat = Statistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             Statistics.writeStat(config.getProjectInternal(), stat);
 
@@ -733,7 +731,7 @@ public class RealProject implements IProject {
         // Ticket 1690 - build project statistics files
         // so that contents of these files is up to date with target files
         // sent at same moment
-        StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+        StatsResult stat = Statistics.buildProjectStats(this);
         stat.updateStatisticsInfo(hotStat);
         String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat.getTextData());
@@ -864,7 +862,7 @@ public class RealProject implements IProject {
                 LastSegmentManager.saveLastSegment();
 
                 // update statistics
-                StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+                StatsResult stat = Statistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
                 Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
@@ -1652,9 +1650,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
@@ -1942,8 +1937,8 @@ public class RealProject implements IProject {
         List<String> sources = new ArrayList<>();
 
         @Override
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String sourcePath, IFilter filter) {
+        public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
+                                   boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

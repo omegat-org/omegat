@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Problemen oplossen</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.restore.your.data">
+  <title xml:id="how.to.restore.your.data.title">Problemen oplossen</title>
 
   <warning>
 	<para>OmegaT is een robuuste en betrouwbare toepassing, maar zelfs dan zou u echter toch voorzorgen moeten nemen tegen gegevensverlies als u OmegaT gebruikt, net als met elke andere toepassing.</para>
   </warning>
 
-  <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">Automatische back-ups</title>
+  <section xml:id="how.to.restore.your.data.automatic.backup">
+	<title xml:id="how.to.restore.your.data.automatic.backup.title">Automatische back-ups</title>
 
-	<para>OmegaT maakt back-ups van uw projectinstellingen om ervoor te zorgen dat het ze, bij problemen, weer kan terughalen. Bekijk het gedeelte <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> voor details.</para>
+	<para>OmegaT maakt back-ups van uw projectinstellingen om er voor te zorgen dat het ze bij problemen weer kan terughalen. Bekijk het gedeelte <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> voor details.</para>
 	  
-	<para>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, dat is geplaatst in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</para>
+	<para>OmegaT slaat regelmatig en automatisch al uw voortgang op in het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> dat is geplaats in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> van het project. OmegaT maakt ook regelmatig back-ups van dat bestand.</para>
 
 	<orderedlist>
 	  <listitem>
@@ -56,8 +55,8 @@
 
   </section>
 
-  <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">Verloor u uw vertaling?</title>
+  <section xml:id="how.to.restore.your.data.lost.in.translation">
+	<title xml:id="how.to.restore.your.data.lost.in.translation.title">Verloor u uw vertaling?</title>
 
 	<para>Zelfs als u bang bent dat u gegevens van de vertaling kwijt bent, zijn ze waarschijnlijk veilig opgeslagen in uw meest recente geheugen van de back-up, dat gewoonlijk niet ouder is dan enkele minuten.</para>
 
@@ -88,12 +87,12 @@
 	<para>Deze actie zal uw vertaling herstellen naar zijn status op het punt dat de geselecteerde back-up werd gemaakt. U zou, indien nodig, deze bewerking kunnen herhalen om eerdere statussen terug te vinden. Overweeg het veilig opslaan van alle verschillende bestanden die u hernoemt, om ze eventueel later opnieuw te kunnen gebruiken. Onthoud ook om in de tussentijd niet de configuratie van het project aan te passen of TMX-bestanden toe te voegen, omdat dat de resultaten zou kunnen beïnvloeden.</para>
 
 	<note>
-	  <para>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan, nadat u bent begonnen met uw vertaling, zou er toe kunnen leiden dat sommige segmenten verdwijnen, of dat er onverwacht nieuwe segmenten verschijnen.</para>
+	  <para>Wees voorzichtig met wijzigingen die gedurende het project worden gemaakt in de bestanden in de bronmap, de segmentatieregels, of de bestandsfilters. Aanpassen van één hiervan nadat u bent begonnen met uw vertaling zou er toe kunnen leiden dat sommige segmenten verdwijnen of dat er onverwacht nieuwe segmenten verschijnen.</para>
 	</note>
   </section>
 
-  <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">Uw project is vergrendeld?</title>
+  <section xml:id="how.to.restore.your.data.project.locked">
+	<title xml:id="how.to.restore.your.data.project.locked.title">Uw project is vergrendeld?</title>
 
 	<para>In het uitzonderlijke geval dat uw computer vastloopt en OmegaT geen tijd heeft om netjes af te sluiten kan het bestand <filename>omegat.project</filename> door het besturingssysteem worden vergrendeld en beletten om het te openen nadat u uw systeem opnieuw hebt opgestart.</para>
 
@@ -101,11 +100,11 @@
 
 	<orderedlist>
       <listitem>
-		<para>Identificeer de projectmap die OmegaT weigert te openen en open die in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <link linkend="chapter.project.folder">project</link>.</para>
+		<para>Identificeer de projectmap die OmegaT weigert te openen en open het in uw bestandsbeheerder. De inhoud van de map zou hetzelfde moeten zijn als in een standaard map <link linkend="chapter.project.folder">project</link>.</para>
       </listitem>
 
 	  <listitem>
-		<para>In de map zou u een bestand <filename>omegat.project</filename>, als ook een bestand <filename>omegat.project.bak</filename>, moeten aantreffen. Zorg ervoor dat de bestanden identiek zijn.</para>
+		<para>In de map zou u een bestand <filename>omegat.project</filename>, als ook een bestand <filename>omegat.project.bak</filename>. Zorg ervoor dat de bestanden identiek zijn.</para>
       </listitem>
 
       <listitem>
@@ -124,8 +123,8 @@
 	<para>Deze actie zal het project openen met het automatisch gemaakte back-upbestand <filename>omegat.project</filename>.</para>
   </section>
   
-  <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Uw project wil niet openen?</title>
+  <section xml:id="how.to.restore.your.data.project.wont.open">
+	<title xml:id="how.to.restore.your.data.project.wont.open.title">Uw project wil niet openen?</title>
 
 	<para>In het uitzonderlijke geval dat uw computer vastloopt en OmegaT geen tijd heeft om netjes af te sluiten, kunnen sommige belangrijke bestanden worden gecorrumpeerd en voorkomen dat uw project opnieuw wordt geopend nadat u uw systeem opnieuw hebt opgestart.</para>
 
@@ -160,8 +159,8 @@
 	<para>Deze actie zal uw vertaling herstellen naar de status van de vertaling op het punt dat het geselecteerde vertaalgeheugen voor het project werd gemaakt in het oude project.</para>
   </section>
 
-  <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Uw vertaalde bestand wil niet openen?</title>
+  <section xml:id="how.to.restore.your.data.translated.file.broken">
+	<title xml:id="how.to.restore.your.data.translated.file.broken.title">Uw vertaalde bestand wil niet openen?</title>
 
 	<para>Heel vaak bevatten bestanden uit kantoorpakketten tags die naar de vertaling moeten worden gekopieerd om er voor te zorgen dat het vertaalde bestand kan worden geopend in de originele toepassing. In sommige gevallen zullen ontbrekende tags voorkomen dat het bestand kan worden geopend.</para>
 	
@@ -192,8 +191,8 @@
 	<para>Deze actie zal problemen met inconsistente interne tags oplossen die niet correct werden ingevoerd bij het maken van de vertaling in OmegaT.</para>
   </section>
 
-  <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT gedraagt zich niet?</title>
+  <section xml:id="how.to.restore.your.data.omegat.wont.behave">
+	<title xml:id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT gedraagt zich niet?</title>
 
 	<para>Er gebeurde iets en OmegaT gedraagt zich niet meer. Wat u ook probeert, u lijkt niet in staat te zijn het op te lossen. U zou nog één laatste ding kunnen proberen voordat u hulp inroept: start OmegaT opnieuw met zijn standaard instellingen.</para>
 
@@ -246,8 +245,8 @@
 	</orderedlist>
   </section>
 
-  <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">Overzicht</title>
+  <section xml:id="how.to.restore.your.data.summary">
+	<title xml:id="how.to.restore.your.data.summary.title">Overzicht</title>
 
 	<itemizedlist>
       <listitem>

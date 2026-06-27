@@ -70,20 +70,20 @@ import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
-import org.omegat.cli.BaseSubCommand;
-import org.omegat.cli.SubCommands;
-import org.omegat.core.data.RuntimePreferenceStore;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -375,6 +375,11 @@ public final class Main {
     private static int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
+        // set HiDPI configurations
+        System.setProperty("sun.java2d.uiScale.enabled", "true");
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
@@ -384,7 +389,6 @@ public final class Main {
         if (Platform.isUnixLike()) {
             tweakX11AppName();
         }
-        System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
@@ -486,7 +490,7 @@ public final class Main {
         Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
-        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+        StatsResult projectStats = Statistics.buildProjectStats(p);
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             // no output file specified, print to console.

@@ -54,9 +54,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -400,8 +404,6 @@ public final class EditorPopups {
         }
     }
 
-    private static final String DUPLICATE_ITEM_FORMAT_STRING = " {0,number,#}";
-
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
 
@@ -426,9 +428,13 @@ public final class EditorPopups {
             JMenuItem header = menu.add(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER", dups.size()));
             header.setEnabled(false);
             MenuItemPager pager = new MenuItemPager(menu);
+
+            NumberFormat entryNumFormat = new DecimalFormat("#", DecimalFormatSymbols.getInstance(Locale.ROOT));
+            entryNumFormat.setGroupingUsed(false);
+
             for (SourceTextEntry entry : dups) {
                 int entryNum = entry.entryNum();
-                String numStr = StringUtil.format(DUPLICATE_ITEM_FORMAT_STRING, entryNum);
+                String numStr = entryNumFormat.format(entryNum);
                 String label = OStrings.getString("MW_GO_TO_DUPLICATE_ITEM", numStr);
                 JMenuItem item = pager.add(new JMenuItem(label));
                 item.addActionListener(e -> ec.gotoEntry(entryNum));

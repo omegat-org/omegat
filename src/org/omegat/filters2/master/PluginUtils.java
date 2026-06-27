@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.jar.Attributes;
@@ -95,29 +96,32 @@ public final class PluginUtils {
         /** File filters that provide IFilter API. */
         FILTER("filter"),
         /**
-         * Tokenizers, currently bundled and it is for backward compatibility.
+         * Legacy tokenizer plugin type, kept for backward compatibility;
+         * tokenizers are bundled in current versions.
          */
         TOKENIZER("tokenizer"),
         /** Markers, that provide IMaker, mostly bundled. */
         MARKER("marker"),
         /**
-         * Machine Translator service connectors, that provide
+         * Machine Translator service connectors that provide
          * IMachineTranslation API.
          */
         MACHINETRANSLATOR("machinetranslator"),
-        /** A plugin that change base of OmegaT system, not recommended. */
+        /**
+         * A plugin that overrides core OmegaT classes; not recommended.
+         */
         BASE("base"),
         /**
          * Glosary, that provide IGlossary API.
          */
         GLOSSARY("glossary"),
         /**
-         * Dictionary files/services connectors, that provide IDictionary and/or
+         * Dictionary files/services connectors that provide IDictionary and/or
          * IDictionaryFactory API.
          */
         DICTIONARY("dictionary"),
         /**
-         * theme, that register Swing-Look-and-Feel with OmegaT properties into
+         * Theme that registers Swing-Look-and-Feel with OmegaT properties into
          * UIManager.
          */
         THEME("theme"),
@@ -153,6 +157,13 @@ public final class PluginUtils {
             return typeValue;
         }
 
+        /**
+         * Get the plugin type by value.
+         * 
+         * @param str
+         *            value of the plugin type.
+         * @return the plugin type by value.
+         */
         public static PluginType getTypeByValue(String str) {
             if (!StringUtil.isEmpty(str)) {
                 String sType = str.toLowerCase(Locale.ENGLISH);
@@ -170,6 +181,11 @@ public final class PluginUtils {
             return getTypeValue();
         }
 
+        /**
+         * Get localized value of the plugin type.
+         * 
+         * @return localized value of the plugin type.
+         */
         public String getLocalizedValue() {
             switch (this) {
             case BASE:
@@ -243,10 +259,10 @@ public final class PluginUtils {
      * returns a list of URLs pointing to these plugin locations.
      * <p>
      * We should load all jars from /plugins/ dir first, because some plugin can
-     * use more than one jar. There are three different "plugins" directory, and
-     * one development treatment.
+     * use more than one jar. There are three different "plugins" directories,
+     * and one development treatment.
      * <ul>
-     * <li>(installdir)/core-plugins/ OmegaT genuine sub-component</li>
+     * <li>(installdir)/modules/ OmegaT genuine sub-component</li>
      * <li>(installdir/plugins/ System level 3rd party plugins</li>
      * <li>(configdir)/plugins/ User level 3rd party plugins</li>
      * </ul>
@@ -283,7 +299,7 @@ public final class PluginUtils {
      *             if an I/O error occurs during manifest processing.
      */
     private static boolean processPluginManifests(List<URL> pluginUrls) throws IOException {
-        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        MainClassLoader pluginsClassLoader = Objects.requireNonNull(MAINCLASSLOADERS.get(PluginType.UNKNOWN));
         boolean isMainManifestFound = false;
         Enumeration<URL> manifestUrls = pluginsClassLoader.getResources(MANIFEST_MF);
 
@@ -327,7 +343,8 @@ public final class PluginUtils {
             // Check for main manifest
             if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
                 isMainManifestFound = true;
-                MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+                MainClassLoader pluginsClassLoader = Objects
+                        .requireNonNull(MAINCLASSLOADERS.get(PluginType.UNKNOWN));
                 loadFromManifest(manifest, pluginsClassLoader, manifestUrl, true);
             }
 
@@ -413,7 +430,7 @@ public final class PluginUtils {
             if (type == PluginType.UNKNOWN) {
                 continue;
             }
-            MAINCLASSLOADERS.put(type,  new MainClassLoader(cl));
+            MAINCLASSLOADERS.put(type, new MainClassLoader(cl));
         }
     }
 
@@ -469,7 +486,7 @@ public final class PluginUtils {
     }
 
     private static void processPluginManifest(URL url, Manifest manifest,
-                                              Map<String, PluginInformation> pluginVersions, List<URL> jarToRemove) {
+            Map<String, PluginInformation> pluginVersions, List<URL> jarToRemove) {
         String pluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGINS);
         String oldPluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGIN);
 
@@ -493,7 +510,7 @@ public final class PluginUtils {
     private static final String VERSION_QUALIFIER_PATTERN = "-.*";
 
     private static void handleVersionConflict(Map<String, PluginInformation> pluginVersions,
-                                              List<URL> jarToRemove, PluginInformation newPlugin, String pluginName) {
+            List<URL> jarToRemove, PluginInformation newPlugin, String pluginName) {
         // Fetch all the information from the manifest
         PluginInformation existingPlugin = pluginVersions.get(pluginName);
 
@@ -502,29 +519,27 @@ public final class PluginUtils {
         String existingVersion = existingPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
         String newVersion = newPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
 
-        int comparison = VersionChecker.compareVersions(existingVersion, "0",
-                newVersion, "0");
+        int comparison = VersionChecker.compareVersions(existingVersion, "0", newVersion, "0");
 
-        updatePluginVersions(pluginVersions, jarToRemove, newPlugin, pluginName,
-                existingPlugin, comparison);
+        updatePluginVersions(pluginVersions, jarToRemove, newPlugin, pluginName, existingPlugin, comparison);
     }
 
     private static void updatePluginVersions(Map<String, PluginInformation> pluginVersions,
-                                             List<URL> jarToRemove, PluginInformation newPlugin, String pluginName,
-                                             PluginInformation existingPlugin, int comparison) {
+            List<URL> jarToRemove, PluginInformation newPlugin, String pluginName,
+            PluginInformation existingPlugin, int comparison) {
         if (comparison < 0) {
-            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
-                    existingPlugin.getVersion(), newPlugin.getVersion());
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, existingPlugin.getVersion(),
+                    newPlugin.getVersion());
             jarToRemove.add(existingPlugin.getUrl());
             pluginVersions.put(pluginName, newPlugin);
         } else if (comparison == 0) {
-            Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
-                    existingPlugin.getVersion(), newPlugin.getVersion());
+            Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName, existingPlugin.getVersion(),
+                    newPlugin.getVersion());
             jarToRemove.add(existingPlugin.getUrl());
             pluginVersions.put(pluginName, newPlugin);
         } else {
-            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
-                    newPlugin.getVersion(), existingPlugin.getVersion());
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, newPlugin.getVersion(),
+                    existingPlugin.getVersion());
             jarToRemove.add(newPlugin.getUrl());
             pluginVersions.put(pluginName, existingPlugin);
         }
@@ -532,8 +547,7 @@ public final class PluginUtils {
 
     private static List<URL> loadJarUrls(List<File> pluginsDirs) {
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> jarFiles = pluginsDirs.stream()
-                .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+        List<File> jarFiles = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
                 .collect(Collectors.toList());
 
         List<URL> urls = new ArrayList<>();
@@ -561,23 +575,41 @@ public final class PluginUtils {
         }
     }
 
+    /**
+     * Retrieves a list of filter classes.
+     *
+     * @return a list of filter class objects
+     */
     public static List<Class<?>> getFilterClasses() {
         return FILTER_CLASSES;
     }
 
+    /**
+     * Retrieves a list of tokenizer classes available in the system.
+     *
+     * @return a list of classes representing tokenizer implementations.
+     */
     public static List<Class<?>> getTokenizerClasses() {
         return TOKENIZER_CLASSES;
     }
 
     /**
-     * Reterun registered plugin classes for spellchecker category.
-     * 
-     * @return list of classes.
+     * Retrieves a list of spellchecker classes available in the system.
+     *
+     * @return a list of classes representing spellchecker implementations.
      */
     public static List<Class<?>> getSpellCheckClasses() {
         return SPELLCHECK_CLASSES;
     }
 
+    /**
+     * Retrieves the tokenizer class for a given language.
+     *
+     * @param lang
+     *            the language for which to retrieve the tokenizer class
+     * @return the tokenizer class for the specified language, or the default
+     *         tokenizer class if no specific tokenizer is found
+     */
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
@@ -747,12 +779,10 @@ public final class PluginUtils {
             }
             boolean isMainPlugin = key.equals("plugin");
             for (String clazz : classes) {
-                boolean loaded = isMainPlugin
-                        ? loadClass(clazz, classLoader)
-                        : loadClassOld(key, clazz);
+                boolean loaded = isMainPlugin ? loadClass(clazz, classLoader) : loadClassOld(key, clazz);
                 if (loaded) {
-                    PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
-                            null, PluginInformation.Status.BUNDLED));
+                    PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key, null,
+                            PluginInformation.Status.BUNDLED));
                 }
             }
         }
@@ -792,8 +822,7 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    private static void loadFromManifestOld(final Manifest m)
-            throws ClassNotFoundException {
+    private static void loadFromManifestOld(final Manifest m) throws ClassNotFoundException {
         if (m.getMainAttributes().getValue(OMEGAT_PLUGIN) == null) {
             return;
         }
@@ -814,8 +843,7 @@ public final class PluginUtils {
         }
     }
 
-    private static boolean loadClassOld(String sType, String key)
-            throws ClassNotFoundException {
+    private static boolean loadClassOld(String sType, String key) throws ClassNotFoundException {
         boolean loadOk = true;
         switch (PluginType.getTypeByValue(sType)) {
         case FILTER:
@@ -831,7 +859,8 @@ public final class PluginUtils {
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MACHINETRANSLATOR:
-            MACHINE_TRANSLATION_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MACHINETRANSLATOR).loadClass(key));
+            MACHINE_TRANSLATION_CLASSES
+                    .add(MAINCLASSLOADERS.get(PluginType.MACHINETRANSLATOR).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case BASE:
@@ -850,10 +879,24 @@ public final class PluginUtils {
         return loadOk;
     }
 
+    /**
+     * Get the list of plugin information.
+     * 
+     * @return the list of plugin information.
+     */
     public static Collection<PluginInformation> getPluginInformations() {
         return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
     }
 
+    /**
+     * Get the list of loaded plugins.
+     * 
+     * @param url
+     *            the resource URL
+     * @return the jar file URL from the resource URL
+     * @throws IOException
+     *             if an I/O error occurs
+     */
     public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
         JarURLConnection connection = (JarURLConnection) url.openConnection();
         return connection.getJarFileURL();

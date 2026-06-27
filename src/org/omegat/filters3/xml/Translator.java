@@ -68,8 +68,8 @@ public interface Translator {
      * @throws IOException
      *             If I/O Error occurs upon reader creation.
      */
-    BufferedReader createReader(File inFile, String inEncoding) throws UnsupportedEncodingException,
-            IOException;
+    BufferedReader createReader(File inFile, String inEncoding)
+            throws UnsupportedEncodingException, IOException;
 
     /**
      * Creates a writer of the translated file.
@@ -86,8 +86,8 @@ public interface Translator {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
-    BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
-            IOException;
+    BufferedWriter createWriter(@Nullable File outFile, String outEncoding)
+            throws UnsupportedEncodingException, IOException;
 
     /**
      * Start tag translation.
@@ -97,7 +97,7 @@ public interface Translator {
      * @param atts
      *            attributes
      */
-    void tagStart(String path, Attributes atts);
+    void tagStart(String path, @Nullable Attributes atts);
 
     /**
      * Finish tag translation.
@@ -122,7 +122,9 @@ public interface Translator {
      */
     boolean isInIgnored();
 
-    @Nullable Language getTargetLanguage();
+    @Nullable
+    Language getTargetLanguage();
 
-    @Nullable Language getSourceLanguage();
+    @Nullable
+    Language getSourceLanguage();
 }

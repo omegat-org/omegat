@@ -27,7 +27,7 @@ dependencies {
         exclude module: 'language-all'
     }
     testImplementation(libs.languagetool.ja)
-    testImplementation(libs.lucene.gosen)
+    testImplementation(libs.lucene.analyzers.kuromoji)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

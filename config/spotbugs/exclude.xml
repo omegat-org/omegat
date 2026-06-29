@@ -183,7 +183,6 @@
     <Match>
         <Or>
             <Class name="org.omegat.gui.editor.ViewLabel"/>
-            <Class name="~org\.omegat\.gui\.scripting.*"/>
             <Class name="org.omegat.util.gui.OSXIntegration"/>
         </Or>
         <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>

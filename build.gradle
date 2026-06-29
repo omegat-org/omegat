@@ -245,6 +245,7 @@ dependencies {
     testAcceptanceImplementation(libs.bundles.jackson)
     testAcceptanceImplementation(libs.bundles.lucene)
     testAcceptanceImplementation(project(':aligner'))
+    testAcceptanceImplementation(project(':scripting'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
@@ -424,7 +425,7 @@ distributions {
                   'src/**/*.java', // main source
                   'test/**','test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
                   'scripts/**', // sample scripts
-                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', // submodules
+                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'scripting/**', 'spellchecker/**', 'theme/**', // submodules
                   'src_docs/**' // documents
                 exclude '**/.gradle/**', '**/build/**', 'local.properties', '**/out/**'
             }

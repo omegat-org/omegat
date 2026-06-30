@@ -138,14 +138,18 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
             affixInputStream = new FileInputStream(affixName);
             Dictionary dict = new Dictionary(new NIOFSDirectory(tempDir), "omegat",
                     affixInputStream, dictInputStream);
-            hunspell = new Hunspell(dict, timeoutPolicy, () -> {});
+            hunspell = new Hunspell(dict, timeoutPolicy, LuceneProvider::callback);
         }
 
         private LuceneProvider(Dictionary dictionary, TimeoutPolicy timeoutPolicy, int suggestTimeoutMs) {
             this.suggestTimeoutMs = suggestTimeoutMs;
-            hunspell = new Hunspell(dictionary, timeoutPolicy, () -> {});
+            hunspell = new Hunspell(dictionary, timeoutPolicy, LuceneProvider::callback);
             dictInputStream = null;
             affixInputStream = null;
+        }
+
+        private static void callback() {
+            // empty method
         }
 
         @Override

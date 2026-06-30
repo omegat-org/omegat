@@ -32,7 +32,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;

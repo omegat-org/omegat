@@ -37,6 +37,7 @@ import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.Hunspell;
+import org.apache.lucene.analysis.hunspell.TimeoutPolicy;
 import org.apache.lucene.store.NIOFSDirectory;
 
 import org.jspecify.annotations.Nullable;
@@ -82,8 +83,21 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         // there is no way to unload
     }
 
+    private final TimeoutPolicy timeoutPolicy;
+    private final int suggestTimeoutMs;
+
+    public LuceneHunSpellChecker(int timeoutMs) {
+        this.timeoutPolicy = TimeoutPolicy.RETURN_PARTIAL_RESULT;
+        this.suggestTimeoutMs = timeoutMs;
+    }
+
+    public LuceneHunSpellChecker() {
+        this.timeoutPolicy = TimeoutPolicy.RETURN_PARTIAL_RESULT;
+        this.suggestTimeoutMs = 1_000;
+    }
+
     @Override
-    protected Optional<ISpellCheckerProvider> initializeWithLanguage(final String language) {
+    protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.getDefaultDictionaryDir().getPath());
@@ -96,14 +110,14 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
                 affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
                 dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
                 if (!isInvalidFile(affixName) && !isInvalidFile(dictionaryName)) {
-                    return Optional.of(new LuceneProvider(dictionaryName, affixName));
+                    return Optional.of(new LuceneProvider(dictionaryName, affixName, timeoutPolicy, suggestTimeoutMs));
                 }
             }
 
             // try bundled dictionary
             Dictionary dictionary = SpellCheckerManager.getHunspellDictionary(language);
             if (dictionary != null) {
-                return Optional.of(new LuceneProvider(dictionary));
+                return Optional.of(new LuceneProvider(dictionary, timeoutPolicy, suggestTimeoutMs));
             }
         } catch (Exception ex) {
             Log.log(ex);
@@ -115,18 +129,21 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         private final @Nullable InputStream dictInputStream;
         private final @Nullable InputStream affixInputStream;
         private final Hunspell hunspell;
+        private final int suggestTimeoutMs;
 
-        private LuceneProvider(File dictName, File affixName) throws IOException, ParseException {
+        private LuceneProvider(File dictName, File affixName, TimeoutPolicy timeoutPolicy, int suggestTimeoutMs) throws IOException, ParseException {
+            this.suggestTimeoutMs = suggestTimeoutMs;
             Path tempDir = Path.of(FileUtils.getTempDirectoryPath());
             dictInputStream = new FileInputStream(dictName);
             affixInputStream = new FileInputStream(affixName);
             Dictionary dict = new Dictionary(new NIOFSDirectory(tempDir), "omegat",
                     affixInputStream, dictInputStream);
-            hunspell = new Hunspell(dict);
+            hunspell = new Hunspell(dict, timeoutPolicy, () -> {});
         }
 
-        private LuceneProvider(Dictionary dictionary) {
-            hunspell = new Hunspell(dictionary);
+        private LuceneProvider(Dictionary dictionary, TimeoutPolicy timeoutPolicy, int suggestTimeoutMs) {
+            this.suggestTimeoutMs = suggestTimeoutMs;
+            hunspell = new Hunspell(dictionary, timeoutPolicy, () -> {});
             dictInputStream = null;
             affixInputStream = null;
         }
@@ -138,7 +155,7 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
 
         @Override
         public List<String> suggest(final String word) {
-            return hunspell.suggest(word);
+            return hunspell.suggest(word, suggestTimeoutMs);
         }
 
         @Override

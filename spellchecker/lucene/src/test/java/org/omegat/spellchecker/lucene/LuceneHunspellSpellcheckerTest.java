@@ -78,7 +78,7 @@ public class LuceneHunspellSpellcheckerTest {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("en"));
         setupProject(props);
-        ISpellChecker checker = new LuceneHunSpellChecker();
+        ISpellChecker checker = new LuceneHunSpellChecker(60_000);
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hello")).isTrue();
         assertThat(checker.isCorrect("incorrecti")).isFalse();
@@ -90,7 +90,7 @@ public class LuceneHunspellSpellcheckerTest {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
         setupProject(props);
-        ISpellChecker checker = new LuceneHunSpellChecker();
+        ISpellChecker checker = new LuceneHunSpellChecker(60_000);
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isTrue();
         assertThat(checker.isCorrect("Hello")).as("Spell check for wrong word").isFalse();
@@ -103,7 +103,7 @@ public class LuceneHunspellSpellcheckerTest {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
         setupProject(props);
-        ISpellChecker checker = new LuceneHunSpellChecker();
+        ISpellChecker checker = new LuceneHunSpellChecker(60_000);
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Bonjour")).as("Spell check for correct word").isTrue();
         assertThat(checker.isCorrect("Erruer")).as("Spell check for wrong word").isFalse();

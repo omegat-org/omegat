@@ -100,9 +100,10 @@ public final class IssueProviders {
         reg.removeIf(p -> SpellingIssueProvider.class.getCanonicalName().equals(p.getId())
                 || TerminologyIssueProvider.class.getCanonicalName().equals(p.getId()));
 
-        // Add defaults at the front in a stable order: Spelling, then Terminology
+        // Add defaults at the front in a stable order: Empty translation, Spelling, then Terminology
         reg.add(0, new TerminologyIssueProvider());
         reg.add(0, new SpellingIssueProvider());
+        reg.add(0, new EmptyTranslationIssueProvider());
     }
 
     public static void setProviderEnabled(String id, boolean enabled) {

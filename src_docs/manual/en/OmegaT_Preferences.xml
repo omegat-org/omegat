@@ -59,6 +59,19 @@
                </note>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.preferences.general.show.source.files.progress">
+            <term xml:id="dialogs.preferences.general.show.source.files.progress.title">
+               <option>Show Source Files progress</option>
+            </term>
+            <listitem>
+               <para>Displays a
+                  <guilabel>Progress</guilabel> column in the
+                  <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
+                  window and shows the overall project progress in the totals
+                  area. The progress is calculated from translated unique
+                  segments.</para>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="dialogs.preferences.mt">
@@ -376,6 +389,9 @@
          <title xml:id="dialogs.preferences.colours.title"><guilabel>Colours</guilabel></title>
          <para>You can assign different colours for the various parts of the user
             interface.</para>
+         <para>The Source Files progress colours shown in the
+            <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
+            window can also be changed here.</para>
          <para>Scripts can be used to set predefined themes. OmegaT is bundled with
             a script called 
             <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"></link> that

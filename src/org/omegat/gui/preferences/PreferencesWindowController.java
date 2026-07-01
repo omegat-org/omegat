@@ -119,6 +119,7 @@ import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.view.SaveOptionsController;
 import org.omegat.gui.preferences.view.SecureStoreController;
+import org.omegat.gui.preferences.view.SourceFilesViewOptionsController;
 import org.omegat.gui.preferences.view.SpellcheckerConfigurationController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.preferences.view.TagProcessingOptionsController;
@@ -357,7 +358,9 @@ public class PreferencesWindowController implements FurtherActionListener {
 
     private static DefaultMutableTreeNode createNodeTree() {
         HideableNode root = new HideableNode();
-        root.add(new HideableNode(new GeneralOptionsController()));
+        HideableNode generalNode = new HideableNode(new GeneralOptionsController());
+        generalNode.add(new HideableNode(new SourceFilesViewOptionsController()));
+        root.add(generalNode);
         root.add(new HideableNode(new MachineTranslationPreferencesController()));
         root.add(new HideableNode(new GlossaryPreferencesController()));
         root.add(new HideableNode(new DictionaryPreferencesController()));

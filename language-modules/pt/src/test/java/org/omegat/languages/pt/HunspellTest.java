@@ -37,6 +37,6 @@ public class HunspellTest extends LanguageModuleTestBase {
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new LuceneHunSpellChecker(), LANGUAGE, GOOD, null);
+        testDictionaryHelper(new LuceneHunSpellChecker(60_000), LANGUAGE, GOOD, null);
         }
 }

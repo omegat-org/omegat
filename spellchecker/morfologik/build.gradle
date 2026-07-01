@@ -20,10 +20,10 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
-    testRuntimeOnly(libs.languagetool.en)
+    testRuntimeOnly(libs.languagetool.pl)
 }
 
 test {
-    dependsOn project(':language-modules:en').tasks.withType(Jar)
+    dependsOn project(':language-modules:pl').tasks.withType(Jar)
     dependsOn project(':language-modules:de').tasks.withType(Jar)
 }

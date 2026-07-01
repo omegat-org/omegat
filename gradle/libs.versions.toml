@@ -12,10 +12,9 @@ jsoup = "1.22.2"
 icu4j = "78.3"
 stax2api = "4.3.0"
 woodstox = "7.2.1"
-languagetool = "6.5-omt6.1-1"
+languagetool = "6.8-omt6.2-2"
 languagedetector = "0.6-4"
-lucene = "8.11.3"
-lucene_gosen = "8.11.1"
+lucene = "9.12.3"
 checkstyle = "8.45.1"
 guava = "33.4.8-jre"
 annotations = "26.1.0"
@@ -110,11 +109,10 @@ languagetool-tl = {group = "org.omegat.lucene", name = "language-tl", version.re
 languagetool-uk = {group = "org.omegat.lucene", name = "language-uk", version.ref = "languagetool"}
 languagetool-zh = {group = "org.omegat.lucene", name = "language-zh", version.ref = "languagetool"}
 lucene-core = {group = "org.apache.lucene", name = "lucene-core", version.ref = "lucene"}
-lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analyzers-common", version.ref = "lucene"}
-lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analyzers-kuromoji", version.ref = "lucene"}
-lucene-analyzers-smartcn = {group = "org.apache.lucene", name = "lucene-analyzers-smartcn", version.ref = "lucene"}
-lucene-analyzers-stempel = {group = "org.apache.lucene", name = "lucene-analyzers-stempel", version.ref = "lucene"}
-lucene-gosen = {group = "org.omegat.lucene", name = "lucene-gosen", version.ref = "lucene_gosen"}
+lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analysis-common", version.ref = "lucene"}
+lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analysis-kuromoji", version.ref = "lucene"}
+lucene-analyzers-smartcn = {group = "org.apache.lucene", name = "lucene-analysis-smartcn", version.ref = "lucene"}
+lucene-analyzers-stempel = {group = "org.apache.lucene", name = "lucene-analysis-stempel", version.ref = "lucene"}
 guava = {group = "com.google.guava", name = "guava", version.ref = "guava"}
 jetbrains-annotations = {group = "org.jetbrains", name = "annotations", version.ref = "annotations"}
 jspecify = {group = "org.jspecify", name = "jspecify", version.ref = "jspecify"}

@@ -1,0 +1,29 @@
+% Verbatim test file for OmegaT LaTeX filter
+\documentclass{article}
+\begin{document}
+\section{Hello World}
+This is normal text that should be translated.
+
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\n");  // This line has special chars: $ % & { }
+    return 0;
+}
+\end{verbatim}
+
+More text after verbatim that should be translated too.
+
+\begin{verbatim*}
+Nested \begin and \end should NOT be interpreted.
+Special characters: $, %, &, #, {, }, ^, _, ~
+\end{verbatim*}
+
+\begin{minted}{java}
+public class Test {
+    // Code inside minted should be preserved too
+    String s = "test$pecial";
+}
+\end{minted}
+
+\end{document}

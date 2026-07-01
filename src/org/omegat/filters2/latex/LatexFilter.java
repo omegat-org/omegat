@@ -171,6 +171,43 @@ public class LatexFilter extends AbstractFilter {
              */
             String state;
             while ((s = lpin.readLine()) != null) {
+                // Enter verbatim mode on \begin{verbatim} etc.
+                if (verbatimLevel == 0) {
+                    String trimmed = s.trim();
+                    if (trimmed.startsWith("\\begin{")) {
+                        int openBrace = trimmed.indexOf("{");
+                        int closeBrace = trimmed.indexOf('}', openBrace);
+                        if (closeBrace > openBrace) {
+                            String envName = trimmed.substring(openBrace + 1, closeBrace).trim();
+                            if (verbatimEnvironments.contains(envName)) {
+                                verbatimLevel++;
+                                out.write(s);
+                                out.write(lpin.getLinebreak());
+                                continue;
+                            }
+                        }
+                    }
+                }
+
+                // Skip verbatim blocks as-is (copy through to \end{...})
+                if (verbatimLevel > 0) {
+                    out.write(s);
+                    out.write(lpin.getLinebreak());
+                    // Check for matching \end{verbatim} to leave verbatim mode
+                    String trimmed = s.trim();
+                    if (trimmed.startsWith("\\end{")) {
+                        int openBrace = trimmed.indexOf("{");
+                        int closeBrace = trimmed.indexOf('}', openBrace);
+                        if (closeBrace > openBrace) {
+                            String envName = trimmed.substring(openBrace + 1, closeBrace).trim();
+                            if (verbatimEnvironments.contains(envName)) {
+                                verbatimLevel--;
+                            }
+                        }
+                    }
+                    continue;
+                }
+                
                 lineBreak = lpin.getLinebreak();
                 // String[] c = s.split(""); In Java 8, that line gave a first
                 // empty element, so it was replaced with the
@@ -299,10 +336,19 @@ public class LatexFilter extends AbstractFilter {
     private final List<String> oneArgInlineText = new LinkedList<>();
     private final List<String> oneArgParText = new LinkedList<>();
     private final List<String> parBreakCommand = new LinkedList<>();
+    private int verbatimLevel = 0;
+    private List<String> verbatimEnvironments;
 
     private void init() {
         oneArgNoText.add("\\begin");
         oneArgNoText.add("\\end");
+
+        verbatimEnvironments = java.util.Arrays.asList(
+            "verbatim", "verbatim*",
+            "comment", "verbatimimport",
+            "lstlisting", "lstlisting*",
+            "minted", "listing", "listing*"
+        );
         oneArgNoText.add("\\cite");
         oneArgNoText.add("\\label");
         oneArgNoText.add("\\ref");

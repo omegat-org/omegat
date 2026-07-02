@@ -1,0 +1,35 @@
+modules = ["java-graalvm22.3", "web", "bash"]
+[agent]
+expertMode = true
+stack = "BEST_EFFORT_FALLBACK"
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew installDist --no-daemon -x checkstyleMain -x spotbugsMain -x pmdMain -x javadoc && ./build/install/OmegaT/OmegaT"
+
+[workflows.workflow.metadata]
+outputType = "vnc"
+
+[deployment]
+deploymentTarget = "vm"
+run = ["./build/install/OmegaT/OmegaT"]
+build = ["./gradlew", "installDist", "--no-daemon", "-x", "checkstyleMain", "-x", "spotbugsMain", "-x", "pmdMain", "-x", "javadoc"]

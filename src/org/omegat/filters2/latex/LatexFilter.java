@@ -173,19 +173,12 @@ public class LatexFilter extends AbstractFilter {
             while ((s = lpin.readLine()) != null) {
                 // Enter verbatim mode on \begin{verbatim} etc.
                 if (verbatimLevel == 0) {
-                    String trimmed = s.trim();
-                    if (trimmed.startsWith("\\begin{")) {
-                        int openBrace = trimmed.indexOf("{");
-                        int closeBrace = trimmed.indexOf('}', openBrace);
-                        if (closeBrace > openBrace) {
-                            String envName = trimmed.substring(openBrace + 1, closeBrace).trim();
-                            if (verbatimEnvironments.contains(envName)) {
-                                verbatimLevel++;
-                                out.write(s);
-                                out.write(lpin.getLinebreak());
-                                continue;
-                            }
-                        }
+                    String envName = parseBracedCommand(s.trim(), "\\begin{");
+                    if (envName != null && verbatimEnvironments.contains(envName)) {
+                        verbatimLevel++;
+                        out.write(s);
+                        out.write(lpin.getLinebreak());
+                        continue;
                     }
                 }
 
@@ -193,21 +186,13 @@ public class LatexFilter extends AbstractFilter {
                 if (verbatimLevel > 0) {
                     out.write(s);
                     out.write(lpin.getLinebreak());
-                    // Check for matching \end{verbatim} to leave verbatim mode
-                    String trimmed = s.trim();
-                    if (trimmed.startsWith("\\end{")) {
-                        int openBrace = trimmed.indexOf("{");
-                        int closeBrace = trimmed.indexOf('}', openBrace);
-                        if (closeBrace > openBrace) {
-                            String envName = trimmed.substring(openBrace + 1, closeBrace).trim();
-                            if (verbatimEnvironments.contains(envName)) {
-                                verbatimLevel--;
-                            }
-                        }
+                    String envName = parseBracedCommand(s.trim(), "\\end{");
+                    if (envName != null && verbatimEnvironments.contains(envName)) {
+                        verbatimLevel--;
                     }
                     continue;
                 }
-                
+
                 lineBreak = lpin.getLinebreak();
                 // String[] c = s.split(""); In Java 8, that line gave a first
                 // empty element, so it was replaced with the
@@ -330,6 +315,25 @@ public class LatexFilter extends AbstractFilter {
         par = par.replaceAll("%", "\\\\%");
         par = par.replaceAll("<br0>", "\\\\\\\\");
         return par;
+    }
+
+    /**
+     * Extracts the argument from a braced command like \command{arg}.
+     *
+     * @param line the line to parse
+     * @param prefix the command prefix to look for (e.g., "\\begin{")
+     * @return the content inside braces, or null if not found
+     */
+    private String parseBracedCommand(String line, String prefix) {
+        if (!line.startsWith(prefix)) {
+            return null;
+        }
+        int openBrace = line.indexOf("{");
+        int closeBrace = line.indexOf('}', openBrace);
+        if (closeBrace > openBrace) {
+            return line.substring(openBrace + 1, closeBrace).trim();
+        }
+        return null;
     }
 
     private final List<String> oneArgNoText = new LinkedList<>();

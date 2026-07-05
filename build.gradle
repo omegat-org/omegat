@@ -453,6 +453,9 @@ def buildLogicLibsTask = gradle.includedBuild('build-logic')
 installSourceDist.dependsOn(buildLogicLibsTask)
 sourceDistZip.dependsOn(buildLogicLibsTask)
 
+// Register the native-library signing task
+makeNativeLibsSignTask()
+
 tasks.register('mac') {
     description = 'Builds the Mac distributions.'
     group = 'distribution'

@@ -15,8 +15,16 @@ on:
         default: 'weekly'
         type: choice
         options:
-          - release
           - weekly
+          - release
+      branch:
+        description: 'Branch to build and publish'
+        required: true
+        default: 'master'
+        type: choice
+        options:
+          - releases/6.1
+          - master
 
 jobs:
   build:
@@ -38,6 +46,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
         with:
+          # For manual runs, build the selected branch; for tag pushes and
+          # scheduled runs, fall back to the triggering ref.
+          ref: ${{ github.event.inputs.branch || github.ref }}
           fetch-depth: 0
 
       - name: Set up JDK 21

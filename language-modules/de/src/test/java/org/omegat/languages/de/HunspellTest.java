@@ -43,7 +43,7 @@ public class HunspellTest extends LanguageModuleTestBase {
 
     @Test
     public void testDictionary() throws Exception {
-        ISpellChecker checker = new LuceneHunSpellChecker();
+        ISpellChecker checker = new LuceneHunSpellChecker(60_000);
         testDictionaryHelper(checker, LANGUAGE, GOOD, BAD);
         List<String> suggestion = suggestWithRetry(checker, BAD, 7);
         assertThat(suggestion).as("Get suggestion")

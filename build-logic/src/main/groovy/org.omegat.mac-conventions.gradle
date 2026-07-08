@@ -1,3 +1,4 @@
+import java.util.zip.ZipFile
 
 configurations {
     genMac
@@ -53,35 +54,69 @@ tasks.register('genMac') {
     }
 }
 
-ext.makeHunspellSignTask = {
-    def hunspellJar = configurations.runtimeClasspath.files.find {
-        it.name.startsWith('hunspell')
-    }
-    tasks.register('hunspellJarSignedContents', Sync) {
-        onlyIf {
-            // Set this in e.g. local.properties
-            conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
-                    [exePresent('codesign'), 'codesign command is not present in system.'])
+// Returns true if the given jar bundles at least one macOS native library.
+ext.jarContainsMacNativeLibs = { File jar ->
+    if (!jar.name.endsWith('.jar') || !jar.exists()) return false
+    def zf = new ZipFile(jar)
+    try {
+        return zf.entries().any {
+            !it.directory && (it.name.endsWith('.dylib') || it.name.endsWith('.jnilib'))
         }
-        from zipTree(hunspellJar)
+    } finally {
+        zf.close()
+    }
+}
 
-        destinationDir = file(layout.buildDirectory.file("hunspell"))
-        doLast {
-            def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
-            injected.execOps.exec {
-                commandLine('codesign', '--deep', '--force',
-                        '--sign', project.property('macCodesignIdentity'),
-                        '--timestamp',
-                        '--options', 'runtime',
-                        '--entitlements', file('release/mac-specific/java.entitlements'),
-                        *dylibs.toList())
+/*
+ * For every runtime dependency jar that bundles macOS native libraries
+ * (*.dylib / *.jnilib), register a pair of tasks that
+ *   1. extract the jar and codesign the native libraries inside it, then
+ *   2. repackage the signed contents into a jar with the original name.
+ *
+ * codesign --deep on the .app does not descend into jars, so native libraries
+ * shipped inside dependency jars (e.g. jna, jna-platform, lz4-java) must be
+ * signed here before the app is assembled and notarized.
+ *
+ * The repackaging (Jar) task providers are stored in ext.signedNativeLibJarTasks
+ * and the original jar names in ext.signedNativeLibJarNames, so the distribution
+ * can replace the unsigned originals with the signed jars.
+ */
+ext.makeNativeLibsSignTask = {
+    def nativeLibJars = configurations.runtimeClasspath.files.findAll { jarContainsMacNativeLibs(it) }
+    ext.signedNativeLibJarNames = nativeLibJars.collect { it.name }
+    ext.signedNativeLibJarTasks = nativeLibJars.collect { jar ->
+        def taskId = jar.name.replaceAll(/\.jar$/, '').replaceAll(/[^A-Za-z0-9]/, '_')
+        def contentsDir = layout.buildDirectory.dir("signedNativeLibs/${taskId}")
+
+        def contentsTask = tasks.register("signNativeLibContents_${taskId}", Sync) {
+            onlyIf {
+                // Set macCodesignIdentity in e.g. local.properties
+                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                        [exePresent('codesign'), 'codesign command is not present in system.'])
+            }
+            from zipTree(jar)
+            destinationDir = contentsDir.get().asFile
+            doLast {
+                def dylibs = fileTree(dir: destinationDir, includes: ['**/*.dylib', '**/*.jnilib']).files
+                injected.execOps.exec {
+                    commandLine(['codesign', '--deep', '--force',
+                            '--sign', project.property('macCodesignIdentity'),
+                            '--timestamp',
+                            '--options', 'runtime',
+                            '--entitlements', file('release/mac-specific/java.entitlements')] + dylibs.toList())
+                }
             }
         }
-    }
 
-    tasks.register('hunspellSignedJar', Jar) {
-        from hunspellJarSignedContents.outputs
-        archiveFileName.set(hunspellJar.name)
+        tasks.register("signNativeLibJar_${taskId}", Jar) {
+            onlyIf {
+                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                        [exePresent('codesign'), 'codesign command is not present in system.'])
+            }
+            from contentsTask
+            archiveFileName.set(jar.name)
+            destinationDirectory.set(layout.buildDirectory.dir('signedNativeLibJars'))
+        }
     }
 }
 
@@ -148,7 +183,14 @@ ext.makeMacTask = { args ->
                     [args.jrePath && !args.jrePath.empty, 'JRE not found'],
                     [exePresent('codesign'), 'codesign command is not present in system.'])
         }
-        from(installTask)
+        // Replace the unsigned native-library jars with versions whose *.dylib /
+        // *.jnilib have been codesigned (codesign --deep does not descend into jars).
+        from(installTask) {
+            exclude signedNativeLibJarNames.collect { "OmegaT.app/Contents/Java/lib/${it}" }
+        }
+        into('OmegaT.app/Contents/Java/lib') {
+            from(files(signedNativeLibJarTasks))
+        }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
         destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${versionPart}-${args.suffix}_Signed"))
         doFirst {
@@ -165,7 +207,6 @@ ext.makeMacTask = { args ->
             }
         }
         group = 'distribution'
-        dependsOn tasks.named('hunspellSignedJar')
     }
     parentTask.dependsOn installTask
 }

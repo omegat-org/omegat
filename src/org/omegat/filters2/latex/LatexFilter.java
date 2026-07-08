@@ -11,6 +11,7 @@
                2014 Adiel Mittmann
                2017 Didier Briel
                2023 Hiroshi Miura
+               2026 pierreldff
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -43,6 +44,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -157,7 +159,7 @@ public class LatexFilter extends AbstractFilter {
      * @param out
      *            Target document
      */
-    private void processLatexFile(BufferedReader in, Writer out) throws IOException {
+    void processLatexFile(BufferedReader in, Writer out) throws IOException {
         try (LinebreakPreservingReader lpin = new LinebreakPreservingReader(in)) {
             StringBuilder par = new StringBuilder();
             String s;
@@ -324,7 +326,8 @@ public class LatexFilter extends AbstractFilter {
      * @param prefix the command prefix to look for (e.g., "\\begin{")
      * @return the content inside braces, or null if not found
      */
-    private String parseBracedCommand(String line, String prefix) {
+    @VisibleForTesting
+    String parseBracedCommand(String line, String prefix) {
         if (!line.startsWith(prefix)) {
             return null;
         }

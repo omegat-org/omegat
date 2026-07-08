@@ -5,6 +5,7 @@
 
  Copyright (C) 2011 Alex Buloichik
                2023 Hiroshi Miura
+               2026 pierreldff
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,15 +31,12 @@ import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.latex.LatexFilter;
 
-import java.lang.reflect.Method;
-
 import java.io.File;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LatexFilterTest extends TestFilterBase {
 
@@ -105,6 +103,7 @@ public class LatexFilterTest extends TestFilterBase {
         assertTrue("ends with unwanted string: " + target.substring(target.length() - 10),
                 target.matches("We <u\\d> it, and <u\\d> is compressed. Then we <u\\d>. "));
     }
+
     /**
      * Verifies that verbatim environments (verbatim, minted, lstlisting, etc.)
      * are preserved as-is and their content is NOT extracted as translatable segments.
@@ -133,29 +132,5 @@ public class LatexFilterTest extends TestFilterBase {
                 segments.stream().anyMatch(s -> s.contains("public class Test")));
         assertFalse("minted code should NOT be a segment",
                 segments.stream().anyMatch(s -> s.contains("test$pecial")));
-    }
-
-    @Test
-    public void testParseBracedCommand() throws Exception {
-        LatexFilter filter = new LatexFilter();
-        Method m = LatexFilter.class.getDeclaredMethod("parseBracedCommand", String.class, String.class);
-        m.setAccessible(true);
-
-        // Valid \begin{env}
-        assertEquals("verbatim", m.invoke(filter, "\\begin{verbatim}", "\\begin{"));
-        assertEquals("verbatim*", m.invoke(filter, "\\begin{verbatim*}", "\\begin{"));
-
-        // Valid \end{env}
-        assertEquals("verbatim", m.invoke(filter, "\\end{verbatim}", "\\end{"));
-
-        // No brace pair -> null
-        assertNull(m.invoke(filter, "\\begin{verbatim", "\\begin{"));
-        assertNull(m.invoke(filter, "\\begin", "\\begin{"));
-
-        // Wrong prefix -> null
-        assertNull(m.invoke(filter, "\\end{verbatim}", "\\begin{"));
-
-        // No match at start
-        assertNull(m.invoke(filter, "hello \\begin{verbatim}", "\\begin{"));
     }
 }

@@ -24,7 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import picocli.CommandLine;
 
 import static picocli.CommandLine.Option;

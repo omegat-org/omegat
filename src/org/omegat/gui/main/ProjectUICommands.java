@@ -51,7 +51,7 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;

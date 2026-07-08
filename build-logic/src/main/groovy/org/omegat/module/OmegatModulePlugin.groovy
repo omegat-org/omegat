@@ -18,6 +18,7 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.process.ExecOperations
 
 import javax.inject.Inject
+import java.util.zip.ZipFile
 
 class OmegatModulePlugin implements Plugin<Project> {
 
@@ -74,7 +75,7 @@ class OmegatModulePlugin implements Plugin<Project> {
                         .resolve()
                         .collect { dep ->
                             if (dep.directory) return dep
-                            if (shouldSignDylibs(project) && containsDylibs(dep)) {
+                            if (shouldSignDylibs(project) && containsNativeLibs(dep)) {
                                 return project.fileTree(signAndExtractJar(project, dep))
                             }
                             return project.zipTree(dep)
@@ -228,11 +229,11 @@ class OmegatModulePlugin implements Plugin<Project> {
     /**
      * Returns true if the given jar file contains at least one *.dylib entry.
      */
-    private static boolean containsDylibs(File jar) {
+    private static boolean containsNativeLibs(File jar) {
         if (!jar.name.endsWith('.jar') || !jar.exists()) return false
-        def zipFile = new java.util.zip.ZipFile(jar)
+        def zipFile = new ZipFile(jar)
         try {
-            return zipFile.entries().any { !it.directory && it.name.endsWith('.dylib') }
+            return zipFile.entries().any { !it.directory && (it.name.endsWith('.dylib') || it.name.endsWith('.jnilib')) }
         } finally {
             zipFile.close()
         }
@@ -253,13 +254,13 @@ class OmegatModulePlugin implements Plugin<Project> {
             into stagingDir
         }
 
-        def dylibs = project.fileTree(dir: stagingDir, include: '**/*.dylib').files.toList()
+        def nativeLibs = project.fileTree(dir: stagingDir, includes: ['**/*.dylib', '**/*.jnilib']).files.toList()
         execOperations.exec {
             commandLine(['codesign', '--deep', '--force',
                     '--sign', project.property('macCodesignIdentity'),
                     '--timestamp',
                     '--options', 'runtime',
-                    '--entitlements', project.rootProject.file('release/mac-specific/java.entitlements')] + dylibs)
+                    '--entitlements', project.rootProject.file('release/mac-specific/java.entitlements')] + nativeLibs)
         }
 
         return stagingDir

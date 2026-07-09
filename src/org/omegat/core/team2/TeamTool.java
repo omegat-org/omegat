@@ -100,17 +100,18 @@ public final class TeamTool {
 
         // Create empty project TM
         ProjectTMX projectTMX = new ProjectTMX();
-        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null,
-                Core.getSegmenter());
-        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false, true);
+        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), null, Core.getSegmenter());
+        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false,
+                true);
 
         // If the supplied dir is under version control, add everything we made
         // and set EOL handling correctly for cross-platform work
         if (new File(dir, ".svn").isDirectory()) {
             SVNClientManager mgr = SVNClientManager.newInstance();
             mgr.getWCClient().doSetProperty(dir, "svn:auto-props",
-                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"), false,
-                    SVNDepth.EMPTY, null, null);
+                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"),
+                    false, SVNDepth.EMPTY, null, null);
             mgr.getWCClient().doAdd(dir.listFiles(f -> !f.getName().startsWith(".")), false, false, true,
                     SVNDepth.fromRecurse(true), false, false, false, true);
         } else if (new File(dir, ".git").isDirectory()) {
@@ -124,6 +125,7 @@ public final class TeamTool {
             }
         }
 
-        System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
+        System.out
+                .println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
     }
 }

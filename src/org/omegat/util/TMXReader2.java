@@ -140,6 +140,7 @@ public class TMXReader2 {
         inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
     }
 
+    @SuppressWarnings("unchecked")
     public boolean isParagraphSegtype() {
         return isParagraphSegtype;
     }
@@ -178,7 +179,8 @@ public class TMXReader2 {
                 switch (e.getEventType()) {
                 case XMLEvent.DTD:
                     DTD ed = (DTD) e;
-                    callback.setOldOmegaTFormat(ed.getDocumentTypeDeclaration().contains("11") || ed.getDocumentTypeDeclaration().contains("1.1"));
+                    callback.setOldOmegaTFormat(ed.getDocumentTypeDeclaration().contains("11")
+                            || ed.getDocumentTypeDeclaration().contains("1.1"));
                     break;
                 case XMLEvent.START_ELEMENT:
                     StartElement eStart = (StartElement) e;

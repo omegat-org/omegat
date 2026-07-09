@@ -469,14 +469,12 @@ public class FilterVisitor extends NodeVisitor {
         for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition;
              firstTagToIncludeFromPreceding++) {
             Node startNode = allNodesInParagraph.get(firstTagToIncludeFromPreceding);
-            if (startNode instanceof Tag) {
-                Tag openingTag = (Tag) startNode;
+            if (startNode instanceof Tag openingTag) {
                 int recursion = 1;
                 boolean found = false;
                 for (int i = firstTagToIncludeFromPreceding + 1; i <= lastTranslatableNodePosition; i++) {
                     Node candidateNode = allNodesInParagraph.get(i);
-                    if (candidateNode instanceof Tag) {
-                        Tag candidateTag = (Tag) candidateNode;
+                    if (candidateNode instanceof Tag candidateTag) {
                         if (candidateTag.getTagName().equals(openingTag.getTagName())) {
                             if (candidateTag.isEndTag()) {
                                 recursion--;
@@ -504,17 +502,15 @@ public class FilterVisitor extends NodeVisitor {
 
         // DETERMINE LAST TAG IN FOLLOWING TO INCLUDE
         int lastTagKeptInFollowing;
-        for (lastTagKeptInFollowing = lastFollowingPosition; lastTagKeptInFollowing > lastTranslatableNodePosition; lastTagKeptInFollowing--) {
+        for (lastTagKeptInFollowing = lastFollowingPosition; lastTagKeptInFollowing > lastTranslatableNodePosition;
+             lastTagKeptInFollowing--) {
             Node endNode = allNodesInParagraph.get(lastTagKeptInFollowing);
-            if (endNode instanceof Tag) {
-                Tag closingTag = (Tag) endNode;
-
+            if (endNode instanceof Tag closingTag) {
                 int recursion = 1;
                 boolean found = false;
                 for (int i = lastTagKeptInFollowing - 1; i > lastPrecedingNodePosition; i--) {
                     Node candidateNode = allNodesInParagraph.get(i);
-                    if (candidateNode instanceof Tag) {
-                        Tag candidateTag = (Tag) candidateNode;
+                    if (candidateNode instanceof Tag candidateTag) {
                         if (candidateTag.getTagName().equals(closingTag.getTagName())) {
                             if (candidateTag.isEndTag()) {
                                 recursion++;
@@ -708,8 +704,7 @@ public class FilterVisitor extends NodeVisitor {
             // trying to lookup for appropriate starting tag
             int recursion = 1;
             for (int i = sTags.size() - 1; i >= 0; i--) {
-                if (sTags.get(i) instanceof Tag) {
-                    Tag othertag = (Tag) sTags.get(i);
+                if (sTags.get(i) instanceof Tag othertag) {
                     if (othertag.getTagName().equals(tag.getTagName())) {
                         if (othertag.isEndTag()) {
                             recursion++;
@@ -788,8 +783,7 @@ public class FilterVisitor extends NodeVisitor {
             String shortcut = sShortcuts.get(i);
             int pos = -1;
             while ((pos = str.indexOf(shortcut, pos + 1)) >= 0) {
-                if (sTags.get(i) instanceof Tag) {
-                    Tag tag = (Tag) sTags.get(i);
+                if (sTags.get(i) instanceof Tag tag) {
                     try {
                         str = str.substring(0, pos) + "<" + tag.getText() + ">"
                                 + str.substring(pos + shortcut.length());
@@ -798,8 +792,7 @@ public class FilterVisitor extends NodeVisitor {
                         // but prevent endless loop
                         break;
                     }
-                } else if (sTags.get(i) instanceof Remark) {
-                    Remark comment = (Remark) sTags.get(i);
+                } else if (sTags.get(i) instanceof Remark comment) {
                     try {
                         str = str.substring(0, pos) + comment.toHtml()
                                 + str.substring(pos + shortcut.length());

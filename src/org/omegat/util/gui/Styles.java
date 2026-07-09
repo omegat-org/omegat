@@ -36,6 +36,7 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -299,6 +300,21 @@ public final class Styles {
         COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(OStrings.getString("COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT"),
                 UIManager.getColor("OmegaT.alignerTableRowHighlight")),
         /**
+         * Source Files low progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_LOW(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_LOW"),
+                "OmegaT.projectFilesProgressLow", "#f0b8b4"),
+        /**
+         * Source Files high progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_HIGH(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_HIGH"),
+                "OmegaT.projectFilesProgressHigh", "#b7d7b7"),
+        /**
+         * Source Files complete progress color.
+         */
+        COLOR_PROJECT_FILES_PROGRESS_COMPLETE(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_COMPLETE"),
+                "OmegaT.projectFilesProgressComplete", "#b8ccf0"),
+        /**
          * Aligner table selected row highlight.
          */
         COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(
@@ -322,11 +338,20 @@ public final class Styles {
             this(displayName, Color.decode(defaultColor));
         }
 
+        EditorColor(String displayName, String uiManagerKey, String defaultColor) {
+            this(displayName, getColor(uiManagerKey, defaultColor));
+        }
+
         EditorColor(String displayName) {
             this.displayName = displayName;
             this.color = null;
             this.defaultColor = null;
             setColorFromPreference();
+        }
+
+        private static Color getColor(String uiManagerKey, String defaultColor) {
+            Color color = UIManager.getColor(uiManagerKey);
+            return color == null ? Color.decode(defaultColor) : color;
         }
 
         private void setColorFromPreference() {
@@ -377,8 +402,8 @@ public final class Styles {
      * <p>
      * 1000000 attributes creation requires about 305 ms - it's enough fast.
      */
-    public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
-            Boolean italic) {
+    public static AttributeSet createAttributeSet(@Nullable Color foregroundColor, @Nullable Color backgroundColor,
+                                                  @Nullable Boolean bold, @Nullable Boolean italic) {
         MutableAttributeSet r = new SimpleAttributeSet();
         if (foregroundColor != null) {
             StyleConstants.setForeground(r, foregroundColor);
@@ -396,8 +421,9 @@ public final class Styles {
         return r;
     }
 
-    public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
-            Boolean italic, Boolean strikethrough, Boolean underline) {
+    public static AttributeSet createAttributeSet(@Nullable Color foregroundColor, @Nullable Color backgroundColor,
+                                                  @Nullable Boolean bold, @Nullable Boolean italic,
+                                                  @Nullable Boolean strikethrough, @Nullable Boolean underline) {
 
         MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor,
                 bold, italic);

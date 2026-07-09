@@ -16,9 +16,6 @@ def genjaxb = tasks.register('genJAXB') {
     description = 'Generate classes for loading and manipulating XML formats'
     outputs.dir layout.buildDirectory.dir('generated/sources/jaxb/main/java')
     group = 'jaxb'
-    doFirst {
-        mkdir layout.buildDirectory.dir('generated/sources/jaxb/main/java').get().asFile
-    }
 }
 compileJava.dependsOn(genjaxb)
 

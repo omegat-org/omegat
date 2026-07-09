@@ -31,8 +31,6 @@ package org.omegat.gui.dictionaries;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
@@ -60,6 +58,7 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -68,7 +67,6 @@ import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
 import org.omegat.core.dictionaries.IDictionary;
 import org.omegat.core.dictionaries.IDictionaryFactory;
-import org.omegat.core.events.IEditorEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -103,7 +101,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     protected final List<String> displayedWords = new ArrayList<>();
 
-    protected ITokenizer tokenizer;
+    protected @Nullable ITokenizer tokenizer;
 
     private final DockableScrollPane scrollPane;
 
@@ -125,11 +123,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
-        CoreEvents.registerEditorEventListener(new IEditorEventListener() {
-            public void onNewWord(String newWord) {
-                callDictionary(newWord);
-            }
-        });
+        CoreEvents.registerEditorEventListener(this::callDictionary);
+        CoreEvents.registerFontChangedEventListener(this::updateFont);
 
         Core.getEditor().registerPopupMenuConstructors(750, new DictionaryPopup());
 
@@ -142,7 +137,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
-        if (displayedWords != null && !displayedWords.isEmpty()) {
+    }
+
+    private void updateFont(Font font) {
+        setFont(font);
+        if (!displayedWords.isEmpty()) {
             initDocument();
             refresh();
         }
@@ -158,7 +157,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true)) {
             fontSize = font.getSize();
         } else {
-            fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_DICTIONARY_FONT_SIZE));
+            fontSize = Integer.parseInt(Preferences.getPreferenceDefault(Preferences.TF_DICTIONARY_FONT_SIZE, "12"));
         }
         baseStyleSheet.addRule("body { font-family: " + font.getName() + "; font-size: " + fontSize + ";"
                 + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + ";"
@@ -276,7 +275,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     @Override
-    protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
+    protected void setFoundResult(SourceTextEntry se, @Nullable List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
         List<String> oldDisplayWords = new ArrayList<>(displayedWords);
@@ -322,8 +321,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     // batching updates to the current document, but it turns out that
     // recreating the document from scratch is actually faster for very large
     // content. See https://sourceforge.net/p/omegat/bugs/1068/
-    private void fastReplaceContent(final String txt) {
-        Document doc = getDocument();
+    private void fastReplaceContent(String txt) {
+        Document doc;
         try {
             EditorKit editorKit = getEditorKit();
             doc = editorKit.createDefaultDocument();
@@ -358,17 +357,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             final String word = getWordAtOffset(mousepos);
             if (word != null) {
                 JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        manager.addIgnoreWord(word);
-                    };
-                });
+                item.addActionListener(e -> manager.addIgnoreWord(word));
                 popup.show(DictionariesTextArea.this, p.x, p.y);
             }
         }
     };
 
-    private String getWordAtOffset(int offset) {
+    private @Nullable String getWordAtOffset(int offset) {
         HTMLDocument doc = (HTMLDocument) getDocument();
         for (int i = 0; i < displayedWords.size(); i++) {
             Element el = doc.getElement(Integer.toString(i));
@@ -387,7 +382,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
      */
     public class DictionaryEntriesSearchThread extends EntryInfoSearchThread<List<DictionaryEntry>> {
         protected final String src;
-        protected final ITokenizer tok;
+        protected final @Nullable ITokenizer tok;
 
         public DictionaryEntriesSearchThread(final SourceTextEntry newEntry) {
             super(DictionariesTextArea.this, newEntry);
@@ -396,7 +391,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
 
         @Override
-        protected List<DictionaryEntry> search() {
+        protected @Nullable List<DictionaryEntry> search() {
             if (tok == null) {
                 return null;
             }
@@ -419,7 +414,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     public class DictionaryTextSearchThread extends Thread {
 
         private final String src;
-        private final ITokenizer tok;
+        private final @Nullable ITokenizer tok;
         private final DictionariesTextArea pane;
 
         public DictionaryTextSearchThread(final String text) {
@@ -428,7 +423,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             pane = DictionariesTextArea.this;
         }
 
-        protected List<DictionaryEntry> search() {
+        protected @Nullable List<DictionaryEntry> search() {
             if (tok == null) {
                 return null;
             }

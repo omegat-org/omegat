@@ -27,6 +27,7 @@ package org.omegat.gui.common;
 
 import javax.swing.SwingUtilities;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 
@@ -128,7 +129,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      *
      * @return result of search
      */
-    protected abstract T search() throws EntryChangedException, Exception;
+    protected abstract @Nullable T search() throws EntryChangedException, Exception;
 
     /**
      * Any search can generate this exception for stop searching if entry changed. All callers must catch it

@@ -25,7 +25,8 @@
 
 package org.omegat.core.segmentation;
 
-import java.io.Serializable;
+import org.jspecify.annotations.Nullable;
+
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -34,9 +35,7 @@ import java.util.regex.PatternSyntaxException;
  *
  * @author Maxym Mykhalchuk
  */
-public class Rule implements Serializable {
-
-    private static final long serialVersionUID = 7645267236376489908L;
+public class Rule {
 
     /** Creates a new empty instance of segmentation rule */
     public Rule() {
@@ -44,9 +43,9 @@ public class Rule implements Serializable {
 
     /** Creates an initialized instance of segmentation rule */
     public Rule(boolean breakRule, String beforebreak, String afterbreak) {
-        setBreakRule(breakRule);
-        setBeforebreak(beforebreak);
-        setAfterbreak(afterbreak);
+        this.breakRule = breakRule;
+        this.beforebreak = compilePattern(beforebreak);
+        this.afterbreak = compilePattern(afterbreak);
     }
 
     public Rule(gen.core.segmentation.Rule s) {
@@ -107,11 +106,7 @@ public class Rule implements Serializable {
      * @return regular expression of a text before break.
      */
     public String getBeforebreak() {
-        if (beforebreak != null) {
-            return beforebreak.pattern();
-        } else {
-            return null;
-        }
+        return beforebreak.pattern();
     }
 
     /**
@@ -148,11 +143,7 @@ public class Rule implements Serializable {
      * @return regular expression of a text after break.
      */
     public String getAfterbreak() {
-        if (afterbreak != null) {
-            return afterbreak.pattern();
-        } else {
-            return null;
-        }
+        return afterbreak.pattern();
     }
 
     /**
@@ -198,8 +189,8 @@ public class Rule implements Serializable {
 
     /** Indicates whether some other Rule is "equal to" this one. */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Rule)) {
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Rule)) {
             return false;
         }
         Rule that = (Rule) obj;

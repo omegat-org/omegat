@@ -91,7 +91,7 @@ public abstract class TestFilterBase extends TestCore {
 
     @Before
     public final void setUpFilterBase() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
+        Core.initializeConsole();
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setProject(new TestProject(new ProjectPropertiesTest()));
 
@@ -583,8 +583,7 @@ public abstract class TestFilterBase extends TestCore {
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            TestFileInfo fi = new TestFileInfo();
-            fi.filePath = file;
+            TestFileInfo fi = new TestFileInfo(file);
 
             loadFilesCallback.setCurrentFile(fi);
 
@@ -657,5 +656,9 @@ public abstract class TestFilterBase extends TestCore {
 
     public static class TestFileInfo extends FileInfo {
         public ExternalTMX referenceEntries;
+
+        public TestFileInfo(String filePath) {
+            super(filePath);
+        }
     }
 }

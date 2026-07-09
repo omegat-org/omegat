@@ -77,6 +77,8 @@ public class FiltersCustomizerPanel extends JPanel {
         optionsButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setMaximumSize(new java.awt.Dimension(2147483647, 900));
+        setMinimumSize(new java.awt.Dimension(600, 500));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         description.setEditable(false);
@@ -86,7 +88,6 @@ public class FiltersCustomizerPanel extends JPanel {
         description.setWrapStyleWord(true);
         description.setAlignmentX(0.0F);
         description.setAlignmentY(0.0F);
-        description.setDragEnabled(false);
         description.setFocusable(false);
         description.setOpaque(false);
         add(description);
@@ -116,13 +117,19 @@ public class FiltersCustomizerPanel extends JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 0));
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 400));
+        jPanel1.setMinimumSize(new java.awt.Dimension(112, 150));
+        jPanel1.setPreferredSize(new java.awt.Dimension(548, 250));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        filtersScrollPane.setMaximumSize(new java.awt.Dimension(32767, 560));
+        filtersScrollPane.setMinimumSize(new java.awt.Dimension(16, 146));
         filtersScrollPane.setViewportView(filtersTable);
 
         jPanel1.add(filtersScrollPane, java.awt.BorderLayout.CENTER);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        jPanel3.setMaximumSize(new java.awt.Dimension(2147483647, 100));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new java.awt.GridBagLayout());

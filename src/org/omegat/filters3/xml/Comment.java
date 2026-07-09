@@ -32,7 +32,7 @@ package org.omegat.filters3.xml;
  * @author Maxym Mykhalchuk
  */
 public class Comment extends XMLPseudoTag {
-    private String comment;
+    private final String comment;
 
     /** Creates a new instance of Comment */
     public Comment(String comment) {

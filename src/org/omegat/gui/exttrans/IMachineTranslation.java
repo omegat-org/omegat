@@ -29,6 +29,7 @@ package org.omegat.gui.exttrans;
 import java.awt.Window;
 import java.util.logging.Logger;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Language;
 
 /**
@@ -60,7 +61,7 @@ public interface IMachineTranslation {
      * The terms are provided as a map with keys being the source terms and
      * values being the target terms.
      *
-     * @param glossarySupplier
+     * @param glossarySupplier the glossary supplier
      */
     default void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
         Logger.getLogger(IMachineTranslation.class.getName())
@@ -78,6 +79,7 @@ public interface IMachineTranslation {
      *            text for translation
      * @return translated text, or null if translation impossible
      */
+    @Nullable
     String getTranslation(Language sLang, Language tLang, String text) throws Exception;
 
     /**
@@ -91,6 +93,7 @@ public interface IMachineTranslation {
      *            text for translation
      * @return translated text, or null if translation impossible
      */
+    @Nullable
     String getCachedTranslation(Language sLang, Language tLang, String text);
 
     /**

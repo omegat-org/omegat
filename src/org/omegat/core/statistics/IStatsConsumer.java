@@ -25,10 +25,10 @@
 
 package org.omegat.core.statistics;
 
+import org.omegat.core.threads.Completion;
+
 /**
  * An interface for consumers of statistical information.
- * <p>
- * TODO: Separate "setting" and "appending" into different interfaces.
  *
  * @author Aaron Madlon-Kay
  */
@@ -43,7 +43,23 @@ public interface IStatsConsumer {
 
     void setDataFile(String path);
 
-    void finishData();
+    /**
+     * Legacy completion signal (no status / no error detail).
+     * Prefer {@link #onComplete(Completion)}.
+     */
+    @Deprecated
+    default void finishData() {
+        onComplete(Completion.success());
+    }
+
+    /**
+     * Modern completion signal with status and optional error.
+     * Default bridges to the legacy {@link #finishData()} for older consumers.
+     */
+    default void onComplete(Completion completion) {
+        // Backward compatible fallback:
+        finishData();
+    }
 
     void showProgress(int percent);
 }

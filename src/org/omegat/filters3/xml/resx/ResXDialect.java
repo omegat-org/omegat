@@ -26,6 +26,8 @@
 
 package org.omegat.filters3.xml.resx;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -35,6 +37,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class ResXDialect extends DefaultXMLDialect {
     public ResXDialect() {
         defineParagraphTags(new String[] { "value", });
@@ -56,7 +59,8 @@ public class ResXDialect extends DefaultXMLDialect {
      * @return <code>false</code> if the content of this tag should be
      *         translated, <code>true</code> otherwise
      */
-    public Boolean validateIntactTag(String tag, Attributes atts) {
+    @Override
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
         if (!tag.equalsIgnoreCase("data")) {
             return false;
         }

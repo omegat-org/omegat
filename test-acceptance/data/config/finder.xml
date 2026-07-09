@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<items priority="50">
+    <item>
+        <name>Eng-Esp Trifecta</name>
+        <url encoding="default" target="both">http://www.wordreference.com/es/translation.asp?tranword={target}</url>
+        <url encoding="default" target="both">https://www.linguee.com/english-spanish/search?source=english&amp;query={target}</url>
+        <url encoding="default" target="both">http://www.proz.com/search/?term={target}&amp;from=eng&amp;to=esl</url>
+        <keystroke>shift ctrl pressed Y</keystroke>
+    </item>
+    <item>
+        <name>Esp-Eng Trifecta</name>
+        <url encoding="default" target="both">http://www.wordreference.com/es/en/translation.asp?spen={target}</url>
+        <url encoding="default" target="both">https://www.linguee.com/english-spanish/search?source=spanish&amp;query={target}</url>
+        <url encoding="default" target="both">https://www.proz.com/search/?term={target}&amp;from=esl&amp;to=eng</url>
+        <keystroke>shift ctrl pressed E</keystroke>
+    </item>
+</items>

@@ -60,7 +60,6 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         sourceFirstRadioButton = new javax.swing.JRadioButton();
         targetFirstRadioButton = new javax.swing.JRadioButton();
-        sortBySourceCheckBox = new javax.swing.JCheckBox();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         longerFirstCheckBox = new javax.swing.JCheckBox();
@@ -95,7 +94,7 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
 
         sourceButtonGroup.add(sourceFirstRadioButton);
         org.openide.awt.Mnemonics.setLocalizedText(sourceFirstRadioButton, OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
-        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST_TOOLTIP")); // NOI18N
+        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
         jPanel2.add(sourceFirstRadioButton);
 
         sourceButtonGroup.add(targetFirstRadioButton);
@@ -104,11 +103,6 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
         jPanel2.add(targetFirstRadioButton);
 
         jPanel3.add(jPanel2);
-
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(sortBySourceCheckBox, bundle.getString("AC_OPTIONS_SORT_SOURCE_ALPHABETICALLY")); // NOI18N
-        sortBySourceCheckBox.setAlignmentY(0.0F);
-        jPanel3.add(sortBySourceCheckBox);
 
         optionsPanel.add(jPanel3);
 
@@ -142,7 +136,6 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     javax.swing.JCheckBox longerFirstCheckBox;
     javax.swing.JPanel optionsPanel;
-    javax.swing.JCheckBox sortBySourceCheckBox;
     javax.swing.JCheckBox sortEntriesCheckBox;
     private javax.swing.ButtonGroup sourceButtonGroup;
     javax.swing.JRadioButton sourceFirstRadioButton;

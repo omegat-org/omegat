@@ -1,20 +1,21 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/hunspell-*.jar'])
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/languagetool-core-*.jar',
                 '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar',
-                '**/hunspell-*.jar'])
+                '**/lucene-analyzers-common-*.jar'])
     } else {
+        implementation(libs.dumont.hunspell)
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.languagetool.core)
         compileOnly(libs.lucene.analyzers.common)
-        compileOnly(libs.dumont.hunspell)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
@@ -23,11 +24,8 @@ dependencies {
     }
     testImplementation(libs.languagetool.core)
     testImplementation(libs.commons.io)
-    testImplementation(project(":language-modules:de"))
-    testImplementation(project(":language-modules:fr"))
+    testImplementation(libs.languagetool.de)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn project(':language-modules:de').tasks.withType(Jar)

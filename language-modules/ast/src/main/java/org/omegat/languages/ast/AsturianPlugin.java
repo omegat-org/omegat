@@ -25,10 +25,12 @@
 
 package org.omegat.languages.ast;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
+@NullMarked
 public final class AsturianPlugin {
 
     private static final String ASTURIAN = "org.languagetool.language.Asturian";

@@ -30,6 +30,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,13 +42,13 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Windows resource files.
  * <p>
- * Format described on
- * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
+ * Format described on the <a href=
+ * "http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx">Windows
+ * resource format specification</a>
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -67,7 +68,7 @@ public class RcFilter extends AbstractFilter {
     protected int b;
     protected int e;
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * Register plugin into OmegaT.
@@ -100,8 +101,8 @@ public class RcFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         PART cPart = PART.UNKNOWN;
         int cLevel = 0;
 
@@ -132,9 +133,9 @@ public class RcFilter extends AbstractFilter {
                 if (cLevel == 0) {
                     cPart = PART.UNKNOWN;
                 }
-            } else if (cLevel > 0 && cPart != PART.OTHER && cPart != PART.UNKNOWN) {
+            } else if (cLevel > 0 && cPart != PART.OTHER) {
                 markForTranslation(s);
-                if (b >= 0 && e >= 0 && b < e && e > 0) {
+                if (b >= 0 && e >= 0 && b < e) {
                     id = parseId(cPart, s, b, e);
                 }
             } else if (cLevel == 0 && cPart == PART.DIALOG) {
@@ -144,7 +145,7 @@ public class RcFilter extends AbstractFilter {
                 }
             }
 
-            if (b >= 0 && e >= 0 && b < e && e > 0) {
+            if (b >= 0 && e >= 0 && b < e) {
                 // extract source
                 String loc = s.substring(b + 1, e);
                 /*
@@ -163,7 +164,7 @@ public class RcFilter extends AbstractFilter {
                     trans = trans.replace("\"", "\"\"");
                     s = s.substring(0, b + 1) + trans + s.substring(e);
                 } else if (entryAlignCallback != null && id != null) {
-                    align.put(blockId + "/" + id, loc);
+                    Objects.requireNonNull(align).put(blockId + "/" + id, loc);
                 }
             }
             outFile.write(s);
@@ -172,9 +173,10 @@ public class RcFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -182,7 +184,7 @@ public class RcFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
+            if  (tr != null && !tr.isEmpty() && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
@@ -213,7 +215,7 @@ public class RcFilter extends AbstractFilter {
         return PART.OTHER;
     }
 
-    private String parseId(PART cPart, String line, int b, int e) {
+    private @Nullable String parseId(PART cPart, String line, int b, int e) {
         String[] w;
         switch (cPart) {
         case DIALOG:

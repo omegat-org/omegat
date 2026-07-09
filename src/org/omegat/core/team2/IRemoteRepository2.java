@@ -62,7 +62,7 @@ public interface IRemoteRepository2 {
      * @param path
      *            The relative path of the item from the root of the repo
      *            (should not start with a <code>/</code>)
-     * @throws Exception
+     * @throws Exception if error occurred
      */
     void addForCommit(String path) throws Exception;
 
@@ -73,7 +73,7 @@ public interface IRemoteRepository2 {
      * @param path
      *            The relative path of the item from the root of the repo
      *            (should not start with a <code>/</code>)
-     * @throws Exception
+     * @throws Exception if error occurred
      */
     void addForDeletion(String path) throws Exception;
 
@@ -84,11 +84,12 @@ public interface IRemoteRepository2 {
     File getLocalDirectory();
 
     /**
-     * Returns a list of files or directories (empty or not) that have been deleted since the last call to this function,
-     * relative to the repository root that has been checked out.
+     * Returns a list of files or directories (empty or not) that have been deleted since the last call to this
+     * function, relative to the repository root that has been checked out.
      * If this function is called for the first time, it returns the empty list.
-     * @return
-     * @throws Exception
+     *
+     * @return An array of relative paths of deleted files.
+     * @throws Exception If an error occurs.
      */
     String[] getRecentlyDeletedFiles() throws Exception;
 

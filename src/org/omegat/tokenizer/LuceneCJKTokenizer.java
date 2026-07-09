@@ -36,6 +36,13 @@ import org.apache.lucene.analysis.cjk.CJKWidthFilter;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 
 /**
+ * Tokenizer implementation specifically designed for processing CJK (Chinese, Japanese, Korean) text.
+ * It extends the BaseTokenizer to provide tokenization functionality tailored for CJK languages.
+ * <p>
+ * This tokenizer utilizes specific analysis tools like {@link CJKAnalyzer}, {@link CJKBigramFilter},
+ * {@link CJKWidthFilter}, and {@link LowerCaseFilter} to process and create tokens suitable for
+ * CJK text indexing and searching.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

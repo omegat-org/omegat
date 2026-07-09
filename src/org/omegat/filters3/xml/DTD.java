@@ -26,6 +26,8 @@
 
 package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,30 +40,30 @@ import java.util.List;
  * @author Didier Briel
  */
 public class DTD extends XMLPseudoTag {
-    private String name;
+    private final String name;
 
-    private String publicId;
+    private final @Nullable String publicId;
 
     /** Returns Public ID of this DTD. */
-    public String getPublicId() {
+    public @Nullable String getPublicId() {
         return publicId;
     }
 
-    private String systemId;
+    private final @Nullable String systemId;
 
     /** Returns System ID of this DTD. */
-    public String getSystemId() {
+    public @Nullable String getSystemId() {
         return systemId;
     }
 
-    private List<Entity> entities;
+    private final List<Entity> entities;
 
     /** Creates a new instance of Doctype */
-    public DTD(String name, String publicId, String systemId) {
+    public DTD(String name, @Nullable String publicId, @Nullable String systemId) {
         this.name = name;
         this.publicId = publicId;
         this.systemId = systemId;
-        entities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
     }
 
     public void addEntity(Entity entity) {
@@ -87,7 +89,7 @@ public class DTD extends XMLPseudoTag {
         if (!entities.isEmpty()) {
             res.append("\n[\n");
             for (Entity entity : entities) {
-                res.append(entity.toString()).append("\n");
+                res.append(entity).append("\n");
             }
             res.append("]");
         }

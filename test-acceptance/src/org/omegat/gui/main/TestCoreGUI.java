@@ -26,14 +26,15 @@ package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -41,17 +42,21 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FileUtils;
-import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.image.ScreenshotTaker;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import org.jetbrains.annotations.Nullable;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -59,6 +64,9 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.languagetools.LanguageManager;
+import org.omegat.util.Log;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -68,38 +76,43 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected @Nullable FrameFixture window;
     protected @Nullable JFrame frame;
     private @Nullable TestMainWindow mainWindow;
-
     protected @Nullable File tmpDir;
+
+    protected int timeout = 10;
+
+    private static final String FRENCH = "org.languagetool.language.French";
+    private static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
 
     /**
      * Close the project.
      * <p>
      *     block until the close action finished.
      */
-    protected void closeProject() {
+    protected void closeProject() throws Exception {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         CountDownLatch latch = new CountDownLatch(1);
-        Core.getProject().closeProject();
         CoreEvents.registerProjectChangeListener(event -> {
             if (!Core.getProject().isProjectLoaded()) {
                 latch.countDown();
             }
         });
-        try {
-            latch.await(5, TimeUnit.SECONDS);
-        } catch (InterruptedException ignored) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            ProjectFactory.closeProject();
+        } else {
+            SwingUtilities.invokeLater(ProjectFactory::closeProject);
         }
+        assertTrue("Project should unload within timeout.", latch.await(timeout, TimeUnit.SECONDS));
         assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
     }
 
     protected void openSampleProjectWaitPropertyPane(Path projectPath) throws Exception {
-        SegmentPropertiesArea segmentPropertiesArea = Core.getSegmentPropertiesArea();
+        SegmentPropertiesArea segmentPropertiesArea = CoreState.getInstance().getSegmentPropertiesArea();
         CountDownLatch latch = new CountDownLatch(1);
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
-        boolean result = latch.await(5, TimeUnit.SECONDS);
-        if (!result) {
-            fail("Segment properties are not loaded.");
-        }
+        assertTrue("Segment properties are not loaded.", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -110,10 +123,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         CountDownLatch latch = new CountDownLatch(1);
         dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> latch.countDown());
         openSampleProject(projectPath);
-        boolean result = latch.await(5, TimeUnit.SECONDS);
-        if (!result) {
-            fail("Dictionary is not loaded.");
-        }
+        assertTrue("Dictionary is not loaded.", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -127,14 +137,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         glossaryTextArea.addPropertyChangeListener("entries", evt -> latch.countDown());
         openSampleProject(projectPath);
         try {
-            boolean result = latch.await(5, TimeUnit.SECONDS);
-            if (!result) {
-                fail("Glossary is not loaded.");
-            }
+            assertTrue("Glossary is not loaded.", latch.await(timeout, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
             // Ignore and check in assertion.
         }
-        assertTrue("Glossary should be loaded.", !glossaryTextArea.getDisplayedEntries().isEmpty());
+        assertFalse("Glossary should be loaded.", glossaryTextArea.getDisplayedEntries().isEmpty());
     }
 
     /**
@@ -149,14 +156,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             }
         }));
         openSampleProject(projectPath);
-        try {
-            boolean result = latch.await(5, TimeUnit.SECONDS);
-            if (!result) {
-                fail("Active match is not set.");
-            }
-        } catch (InterruptedException ignored) {
-            fail("Waiting for active match interrupted.");
-        }
+        assertTrue("Active match not set", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -174,87 +174,122 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         // 1. Prepare preference for the test;
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         assertFalse(Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true));
-        // 2. Open a sample project.
-        SwingUtilities.invokeAndWait(() -> {
-            CountDownLatch latch = new CountDownLatch(1);
-            CoreEvents.registerProjectChangeListener(event -> {
-                if (Core.getProject().isProjectLoaded()) {
-                    latch.countDown();
-                }
-            });
-            ProjectUICommands.projectOpen(tmpDir);
-            try {
-                latch.await(5, TimeUnit.SECONDS);
-            } catch (InterruptedException ignored) {
+        // 2. ject.
+        CountDownLatch latch = new CountDownLatch(1);
+        CoreEvents.registerProjectChangeListener(event -> {
+            if (TestCoreState.getInstance().getProject().isProjectLoaded()) {
+                latch.countDown();
             }
         });
-        // 3. check Project loaded
+        // 3. Open project directly (if we're already on EDT) or via invokeLater
+        if (SwingUtilities.isEventDispatchThread()) {
+            ProjectUICommands.projectOpen(tmpDir);
+        } else {
+            SwingUtilities.invokeLater(() -> ProjectUICommands.projectOpen(tmpDir));
+        }
+        // 4. Wait for project to load
+        assertTrue("Project should load within timeout", latch.await(timeout, TimeUnit.SECONDS));
         assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
     }
 
     /**
-     * Clean up OmegaT main window.
+     * Clean up resources after each test.
      */
     @Override
     protected void onTearDown() throws Exception {
-        Core.setProject(new NotLoadedProject());
-        TestCoreInitializer.initMainWindow(null);
-        if (mainWindow != null) {
-            mainWindow.getApplicationFrame().setVisible(false);
+        try {
+            // Clean up GUI components on EDT
+            if (SwingUtilities.isEventDispatchThread()) {
+                cleanupGUIComponents();
+            } else {
+                SwingUtilities.invokeAndWait(this::cleanupGUIComponents);
+            }
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TEST_GUI_CLEANUP_FAILED");
         }
-        if (window != null) {
-            window.cleanUp();
+
+        // Reset core state
+        TestCoreInitializer.initMainWindow(null);
+        TestCoreState.resetState();
+    }
+
+    /**
+     * Clean up GUI components. Must be called on EDT.
+     */
+    private void cleanupGUIComponents() {
+        try {
+            if (window != null) {
+                window.cleanUp();
+                window = null;
+            }
+
+            if (mainWindow != null) {
+                mainWindow.getApplicationFrame().setVisible(false);
+                mainWindow = null;
+            }
+
+            frame = null;
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TEST_GUI_COMPONENT_CLEANUP_FAILED");
         }
     }
 
-    private static boolean initialized = false;
-
     /**
-     * set up OmegaT main window.
+     * Reset state and initialize GUI components for each individual test.
+     * This ensures test isolation while reusing the core system setup.
      */
     @Override
     protected void onSetUp() throws Exception {
-        initialize();
-        mainWindow = GuiActionRunner.execute(() -> {
-            TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
-            TestCoreInitializer.initMainWindow(mw);
-            CoreEvents.fireApplicationStartup();
-            SwingUtilities.invokeLater(() -> {
-                // setVisible can't be executed directly, because we need to
-                // call all application startup listeners for initialize UI
-                mw.getApplicationFrame().setVisible(true);
-            });
-            return mw;
-        });
-        if (mainWindow == null) {
-            throw new IllegalStateException("Main window is null.");
-        }
-        frame = mainWindow.getApplicationFrame();
-        window = new FrameFixture(robot(), frame);
-        window.show();
+        resetTestState();
+        // Initialize GUI components on EDT
+        initializeGUIComponents();
     }
 
     /**
-     * Initialize OmegaT Core startup only once.
-     * @throws Exception when error occurred.
+     * Initialize GUI components on the Event Dispatch Thread.
+     * This ensures all Swing operations happen on the correct thread.
      */
-    protected void initialize() throws Exception {
-        if (!initialized) {
-            Path tmp = Files.createTempDirectory("omegat");
-            FileUtils.forceDeleteOnExit(tmp.toFile());
-            RuntimePreferences.setConfigDir(tmp.toString());
-            TestMainInitializer.initClassloader();
-            // same order as Main.main
-            Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
-            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-            Preferences.initFilters();
-            Preferences.initSegmentation();
-            TestCoreInitializer.initAutoSave(autoSave);
-            UIDesignManager.initialize();
-            Core.setProject(new NotLoadedProject());
-            initialized = true;
+    protected void initializeGUIComponents() throws Exception {
+        // Create main window on EDT and wait for completion
+        CountDownLatch guiLatch = new CountDownLatch(1);
+        SwingUtilities.invokeLater(() -> {
+            try {
+                // Initialize UI design manager
+                UIDesignManager.initialize();
+
+                // Create main window
+                mainWindow = new TestMainWindow(TestMainWindowMenuHandler.class);
+                TestCoreInitializer.initMainWindow(mainWindow);
+
+                // Set up main window in core state
+                TestCoreState.getInstance().setMainWindow(mainWindow);
+
+                // Fire application startup events
+                CoreEvents.fireApplicationStartup();
+
+                // Make window visible (must be done on EDT)
+                mainWindow.getApplicationFrame().setVisible(true);
+
+            } catch (Exception e) {
+                Log.logErrorRB(e, "TEST_GUI_INITIALIZATION_FAILED");
+            } finally {
+                guiLatch.countDown();
+            }
+        });
+
+        // Wait for GUI initialization to complete
+        if (!guiLatch.await(10, TimeUnit.SECONDS)) {
+            throw new IllegalStateException("GUI initialization timed out");
         }
+
+        if (mainWindow == null) {
+            throw new IllegalStateException("Main window initialization failed");
+        }
+
+        // Set up test fixtures
+        frame = mainWindow.getApplicationFrame();
+        window = new FrameFixture(robot(), frame);
+        window.show();
     }
 
     static IAutoSave autoSave = new IAutoSave() {
@@ -307,4 +342,98 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Files.deleteIfExists(image);
         screenShotTaker.saveDesktopAsPng(image.toString());
     }
+
+    /**
+     * Initialize OmegaT Core components once per test class.
+     * This should be called only once for the entire test class.
+     * @throws Exception when the error occurred.
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        // Apply locale for the test class
+        LocaleRule.applyLocaleForClass(new Locale("en"));
+
+        // Initialize core system components that should persist across tests
+        initializeOmegaTCore();
+
+        // Initialize project
+        initializeProject();
+    }
+
+    /**
+     * Initialize the core OmegaT system components.
+     * Called once per test class to set up the basic infrastructure.
+     */
+    private static void initializeOmegaTCore() throws Exception {
+        // Set up temporary config directory for the test class
+        Path configTmp = Files.createTempDirectory("omegat-config");
+        FileUtils.forceDeleteOnExit(configTmp.toFile());
+        FileUtils.copyDirectory(new File("test-acceptance/data/config"), configTmp.toFile());
+        RuntimePreferences.setConfigDir(configTmp.toString());
+
+        // Initialize plugins
+        initPlugins();
+        TestMainInitializer.initClassloader();
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+
+        // Initialize preferences (must be after RuntimePreferences.setConfigDir)
+        Preferences.init();
+        Preferences.initFilters();
+        Preferences.initSegmentation();
+    }
+
+    public static void initPlugins() {
+        if (PluginUtils.getMachineTranslationClasses().isEmpty()) {
+            Log.log("Loading plugins from " + PLUGINS_LIST_FILE);
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            } catch (ClassNotFoundException | IOException ex) {
+                Log.log(ex);
+            }
+            LanguageManager.registerLTLanguage("fr", FRENCH);
+        }
+    }
+
+    private static void initializeProject() {
+        // Initialize project
+        NotLoadedProject nlp = new NotLoadedProject();
+        TestCoreState.getInstance().setProject(nlp);
+        Core.setProject(nlp);
+        TestCoreState.initAutoSave(autoSave);
+    }
+
+    /**
+     * Clean up class-level resources.
+     */
+    @AfterClass
+    public static void tearDownAfterClass() {
+        try {
+            // Restore original locale
+            LocaleRule.restoreLocaleForClass(Locale.getDefault());
+
+            // Final cleanup of any remaining resources
+            TestCoreState.resetState();
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TEST_CLASS_CLEANUP_FAILED");
+        }
+    }
+
+    /**
+     * Reset CoreState appropriately for GUI testing.
+     */
+    protected void resetTestState() throws Exception {
+        // Smart reset - will preserve singleton instance in GUI context
+        TestCoreState.resetState();
+
+        // Create temporary directory for this test
+        tmpDir = Files.createTempDirectory("omegat-test-").toFile();
+        FileUtils.forceDeleteOnExit(tmpDir);
+
+        // Initialize the core state with clean project
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        TestCoreState.initAutoSave(autoSave);
+    }
+
 }

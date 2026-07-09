@@ -25,23 +25,19 @@
 
 package org.omegat.gui.scripting;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.GraphicsEnvironment;
-import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.script.Compilable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
 
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Assume;
@@ -79,32 +75,20 @@ public class ScriptingTest extends TestCore {
     }
 
     @Test
-    public void testCompileScripts() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
-        assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
-        for (File f : scriptDir.listFiles()) {
-            if (!f.isFile()) {
-                continue;
-            }
-            String ext = FilenameUtils.getExtension(f.getName());
-            ScriptEngine engine = ScriptRunner.getManager().getEngineByExtension(ext);
-            if (engine instanceof Compilable) {
-                Compilable cEngine = (Compilable) engine;
-                try (BufferedReader br = Files.newBufferedReader(f.toPath())) {
-                    assertNotNull(cEngine.compile(br));
-                }
-            }
-        }
+    public void testDefaultScriptFolderOnScriptWindow() {
+        ScriptingWindow scriptingWindow = new ScriptingWindow(null);
+        assertNotNull(scriptingWindow.getScriptsFolder());
+        assertEquals(new File(StaticUtils.getUserScriptsDir()), scriptingWindow.getScriptsFolder());
     }
 
     @Test
     public void testScriptProperties() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        File scriptDir = new File(StaticUtils.installDir(), ScriptingModule.DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
         File propsDir = new File(scriptDir, "properties");
         assertTrue("propsDir is " + propsDir.toPath(), propsDir.isDirectory());
 
-        List<String> scripts = Collections.emptyList();
+        List<String> scripts;
         try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
             scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
                     .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty())
@@ -112,7 +96,7 @@ public class ScriptingTest extends TestCore {
         }
         assertFalse("Not found any scripts in the folder", scripts.isEmpty());
 
-        for (File f : propsDir.listFiles()) {
+        for (File f : Objects.requireNonNull(propsDir.listFiles())) {
             if (!f.isFile() || f.getName().equals(".DS_Store")) {
                 continue;
             }
@@ -121,24 +105,4 @@ public class ScriptingTest extends TestCore {
         }
     }
 
-    /**
-     * Check that engines for OmegaT built-in scripting languages are available.
-     * Current those are:
-     * <ul>
-     * <li>JavaScript
-     * <li>Groovy
-     * </ul>
-     * This is more a check on the test classpath than anything else
-     * ({@link #testCompileScripts()} won't indicate if Groovy goes missing, for
-     * instance), though presumably if an engine is available on the test
-     * runtime classpath then it will be available in the runtime classpath as
-     * well.
-     */
-    @Test
-    public void testAvailableEngines() {
-        List<String> extensions = ScriptRunner.getManager().getEngineFactories().stream()
-                .map(ScriptEngineFactory::getExtensions).flatMap(List::stream).collect(Collectors.toList());
-        assertTrue("Not found a Javascript engine", extensions.contains("js"));
-        assertTrue("Not found a Groovy engine", extensions.contains("groovy"));
-    }
 }

@@ -41,6 +41,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.TestCoreState;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -92,8 +94,8 @@ class TestMainWindow implements IMainWindow {
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
-        MainWindowStatusBar mainWindowStatusBar = new MainWindowStatusBar();
-        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
+        MainWindowStatusBarController mainWindowStatusBarController = new MainWindowStatusBarController();
+        applicationFrame.getContentPane().add(mainWindowStatusBarController.getUI(), BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(applicationFrame);
 
@@ -129,7 +131,8 @@ class TestMainWindow implements IMainWindow {
 
         // Set up prompt to reload if segmentation or filters settings change
         Preferences.addPropertyChangeListener(evt -> {
-            if (Core.getProject().isProjectLoaded()) {
+            IProject project = TestCoreState.getInstance().getProject();
+            if (project != null && project.isProjectLoaded()) {
                 String prop = evt.getPropertyName();
                 if (prop.equals(Preferences.PROPERTY_SRX)
                         && Core.getProject().getProjectProperties().getProjectSRX() == null) {

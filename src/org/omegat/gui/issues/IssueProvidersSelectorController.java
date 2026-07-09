@@ -43,6 +43,20 @@ import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
+ * The IssueProvidersSelectorController class is responsible for managing
+ * the UI and behavior of a dialog that allows users to select issue providers.
+ * This class provides functionality to display the dialog, handle user
+ * interactions, and update the application's state based on the user's
+ * selections.
+ * <p>
+ * Key Features:
+ * - Presents the user with a list of issue providers to enable or disable.
+ * - Allows the user to configure preferences for never being prompted again.
+ * - Ensures some providers, such as the "Tags" provider, are always enabled and
+ *   non-configurable.
+ * - Integrates with the application's preference system and updates the state
+ *   of issue providers based on user choices.
+ *
  * @author Aaron Madlon-Kay
  */
 public class IssueProvidersSelectorController {

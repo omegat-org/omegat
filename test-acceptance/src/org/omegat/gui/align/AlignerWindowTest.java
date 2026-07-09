@@ -28,7 +28,6 @@ package org.omegat.gui.align;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -42,12 +41,10 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.timing.Timeout;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.Language;
-import org.omegat.util.LocaleRule;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -58,9 +55,6 @@ public class AlignerWindowTest extends TestCoreGUI {
     private static final String PROJECT_PATH = "test-acceptance/data/project/";
     private static final String SOURCE_PATH = "source/parseSource.txt";
     private static final String TARGET_PATH = "target/parseTarget.txt";
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     // the test case is flaky.
     @Test
@@ -147,6 +141,7 @@ public class AlignerWindowTest extends TestCoreGUI {
         FileUtils.copyDirectory(projSrc, tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
         // Start aligner
+        assertNotNull(window);
         JFrame frame = GuiActionRunner.execute(() -> {
             AlignFilePickerController alignFilePickerController = new AlignFilePickerController();
             alignFilePickerController.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());

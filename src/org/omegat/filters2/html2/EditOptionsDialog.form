@@ -3,6 +3,9 @@
 <Form version="1.2" maxVersion="1.2" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+      </AuxValues>
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -33,6 +36,9 @@
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="buttonPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="South"/>
@@ -52,6 +58,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>
@@ -62,6 +71,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -73,6 +85,9 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
@@ -90,6 +105,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_OPTION_REWRITE_ENC" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="alwaysRB">
           <Properties>
@@ -100,6 +118,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REWRITE_ENC_ALWAYS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="ifHasHeaderRB">
           <Properties>
@@ -111,6 +132,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REWRITE_ENC_IF_HAS_HEADER" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="ifHasMetaRB">
           <Properties>
@@ -121,6 +145,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REWRITE_ENC_IF_HAS_META" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="neverRB">
           <Properties>
@@ -131,6 +158,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REWRITE_ENC_NEVER" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -138,6 +168,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_ATTRIBUTES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateHrefCB">
           <Properties>
@@ -146,6 +179,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_HREF" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateSrcCB">
           <Properties>
@@ -154,6 +190,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_SRC" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateLangCB">
           <Properties>
@@ -162,6 +201,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_LANG" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateHreflangCB">
           <Properties>
@@ -170,6 +212,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_HREFLANG" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateValueCB">
           <Properties>
@@ -178,6 +223,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_VALUE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="translateButtonValueCB">
           <Properties>
@@ -186,6 +234,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_TRANSLATE_BUTTON_VALUE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -193,6 +244,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_PARAGRAPH_ON" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="paragraphOnBrCB">
           <Properties>
@@ -200,6 +254,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_PARAGRAPH_ON_BR" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -207,8 +264,14 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_SKIPREGEXP" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="skipRegExpTF">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -216,8 +279,14 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_SKIPMETA" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="skipMetaTF">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -225,8 +294,14 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_IGNORE_TAGS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="ignoreTagsTF">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="compressWhitespaceCB">
           <Properties>
@@ -234,6 +309,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_COMPRESS_WHITESPACE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="removeCommentsCB">
           <Properties>
@@ -241,6 +319,9 @@
               <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REMOVE_COMMENTS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="18"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

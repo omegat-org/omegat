@@ -1,0 +1,305 @@
+package org.omegat.module
+
+import com.github.spotbugs.snom.SpotBugsExtension
+import net.ltgt.gradle.nullaway.NullAwayExtension
+import org.gradle.api.GradleException
+import org.gradle.api.JavaVersion
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.attributes.Usage
+import org.gradle.api.attributes.Category
+import org.gradle.api.attributes.LibraryElements
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.file.FileSystemOperations
+import org.gradle.api.plugins.quality.PmdExtension
+import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.testing.Test
+import org.gradle.process.ExecOperations
+
+import javax.inject.Inject
+import java.util.zip.ZipFile
+
+class OmegatModulePlugin implements Plugin<Project> {
+
+    private final ExecOperations execOperations
+    private final FileSystemOperations fileSystemOperations
+
+    @Inject
+    OmegatModulePlugin(ExecOperations execOperations, FileSystemOperations fileSystemOperations) {
+        this.execOperations = execOperations
+        this.fileSystemOperations = fileSystemOperations
+    }
+
+    @Override
+    void apply(Project project) {
+        project.plugins.apply('java-library')
+        project.plugins.apply('jacoco')
+        project.plugins.apply('checkstyle')
+        project.plugins.apply('pmd')
+        project.plugins.apply('com.github.spotbugs')
+        project.plugins.apply('net.ltgt.errorprone')
+        project.plugins.apply('net.ltgt.nullaway')
+
+        project.repositories {
+            mavenCentral()
+        }
+
+        project.configurations.configureEach { conf ->
+            if (conf.name == "runtimeClasspath") {
+                conf.canBeResolved = true
+            }
+        }
+
+        project.configurations.create("moduleRuntimeDependencies") {
+            canBeConsumed = true
+            canBeResolved = false
+            attributes {
+                attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage, Usage.JAVA_RUNTIME))
+                attribute(Category.CATEGORY_ATTRIBUTE, project.objects.named(Category, Category.LIBRARY))
+                attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, project.objects.named(LibraryElements, LibraryElements.JAR))
+            }
+        }
+
+        project.plugins.withId('java-library') {
+            project.configurations.named("moduleRuntimeDependencies").configure { conf ->
+                conf.extendsFrom(project.configurations.getByName("runtimeClasspath"))
+            }
+        }
+
+        Map<String, Object> manifestAttrs = buildManifestAttributes(project)
+
+        project.tasks.named("jar", Jar).configure { Jar jarTask ->
+            from({
+                project.configurations.getByName("runtimeClasspath")
+                        .resolve()
+                        .collect { dep ->
+                            if (dep.directory) return dep
+                            if (shouldSignDylibs(project) && containsNativeLibs(dep)) {
+                                return project.fileTree(signAndExtractJar(project, dep))
+                            }
+                            return project.zipTree(dep)
+                        }
+            })
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            exclude "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA"
+            destinationDirectory.set(project.rootProject.layout.buildDirectory.dir("modules"))
+            archiveBaseName.set(getPropertyOrDefault(project, 'org.omegat.module.packageName', project.name))
+            manifest {
+                if (!manifestAttrs.isEmpty()) {
+                    attributes(manifestAttrs)
+                }
+            }
+        }
+
+        project.tasks.named("assemble").configure {
+            dependsOn(project.tasks.named("jar"))
+        }
+
+        // Add sources and javadoc jars
+        project.java {
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
+        }
+
+        project.tasks.withType(JavaCompile).configureEach { javaCompile ->
+            javaCompile.options.encoding = "UTF-8"
+            javaCompile.options.compilerArgs.addAll '-Xlint'
+        }
+
+        project.dependencies {
+            // Error Prone dependencies
+            errorprone("com.google.errorprone:error_prone_core:2.40.0")
+            errorprone("com.uber.nullaway:nullaway:0.12.7")
+        }
+
+        project.extensions.configure(SpotBugsExtension) { spotbugs ->
+            spotbugs.extraArgs = ['-longBugCodes']
+            spotbugs.jvmArgs = ['-Duser.language=en']
+            spotbugs.toolVersion = '4.9.3'
+            def excludeFile = project.rootProject.file('config/spotbugs/exclude.xml')
+            if (excludeFile.exists()) {
+                spotbugs.excludeFilter = excludeFile
+            }
+        }
+
+        project.extensions.configure(PmdExtension) { pmd ->
+            pmd.toolVersion = '6.38.0'
+            def ruleset = project.rootProject.file('config/pmd/ruleset.xml')
+            if (ruleset.exists()) {
+                pmd.ruleSetFiles = project.files(ruleset)
+            }
+            pmd.consoleOutput = true
+        }
+
+        project.extensions.configure(NullAwayExtension) { nullaway ->
+            nullaway.annotatedPackages.add("org.omegat")
+        }
+
+        // Register a metadata validation task and wire it into the verification lifecycle
+        def validateTask = project.tasks.register("validateModuleMetadata") {
+            group = "verification"
+            description = "Validate OmegaT module metadata (e.g., org.omegat.module.category)."
+            // Resolve at configuration time and wire as task inputs
+            def category = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
+            def allowed = resolveAllowedCategoriesFromSource(project)
+            def normalized = category?.toString()?.trim()?.toLowerCase(Locale.ENGLISH)
+            if (!allowed.contains(normalized)) {
+                throw new GradleException(
+                        "Invalid org.omegat.module.category '${category}' " +
+                                "for project ${project.path}. " +
+                                "Allowed values: ${allowed.join(', ')}"
+                )
+            }
+        }
+        project.tasks.named("check").configure { dependsOn(validateTask) }
+
+        configureTestEnvironment(project)
+    }
+
+    private static Map<String, String> buildManifestAttributes(Project project) {
+        def attributes = new HashMap<String, String>()
+
+        // Standard OmegaT module attributes
+        attributes['Implementation-Title'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
+        attributes['Plugin-Name'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
+
+        def moduleVersion = getPropertyOrDefault(project, 'org.omegat.module.version', project.version.toString())
+        attributes['Implementation-Version'] = moduleVersion
+        attributes['Plugin-Version'] = moduleVersion
+        attributes['Implementation-Vendor'] = getPropertyOrDefault(project, 'org.omegat.vendor', 'OmegaT')
+        attributes['Built-By'] = System.getProperty('user.name')
+        attributes['Built-Date'] = new Date().toString()
+        attributes['Built-JDK'] = System.getProperty('java.version')
+        attributes['Created-By'] = "Gradle ${project.gradle.gradleVersion}".toString()
+
+        attributes['OmegaT-Plugins'] = project.property('org.omegat.module.class').toString()
+        attributes['Plugin-Version'] =  project.version.toString()
+        attributes['Plugin-Category'] = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
+        attributes['Plugin-License'] = getPropertyOrDefault(project, 'org.omegat.module.license', 'GNU Public License version 3 or later')
+
+        def moduleAuthor = getPropertyOrDefault(project, 'org.omegat.module.author', 'OmegaT team')
+        if (moduleAuthor) {
+            attributes['Plugin-Author'] = moduleAuthor
+        }
+        def moduleDescription = getPropertyOrDefault(project, 'org.omegat.module.description', null)
+        if (moduleDescription) {
+            attributes['Plugin-Description'] = moduleDescription
+        }
+
+        // Custom OmegaT module entries from gradle.properties
+        project.properties.each { key, value ->
+            if (key.startsWith('org.omegat.module.custom.')) {
+                def manifestKey = key.substring('org.omegat.module.custom.'.length())
+                attributes[manifestKey] = value.toString()
+            }
+        }
+        return attributes
+    }
+
+    private void configureTestEnvironment(Project project) {
+        project.tasks.named("test", Test).configure {
+            useJUnit()
+            workingDir project.rootProject.projectDir
+            systemProperty 'java.util.logging.config.file', project.rootProject.layout.settingsDirectory.file("config/test/logger.properties").asFile
+        }
+    }
+
+    private static String getPropertyOrDefault(Project project, String propertyName, String defaultValue) {
+        return project.hasProperty(propertyName) ?
+                project.property(propertyName).toString() : defaultValue
+    }
+
+    /**
+     * Returns true if the macCodesignIdentity property is set and the codesign tool is present on PATH.
+     */
+    private static boolean shouldSignDylibs(Project project) {
+        if (!project.hasProperty('macCodesignIdentity')) return false
+        return ['which codesign', 'where codesign'].any {
+            try {
+                def proc = it.execute()
+                proc.waitForProcessOutput()
+                return proc.exitValue() == 0
+            } catch (ignored) {
+                return false
+            }
+        }
+    }
+
+    /**
+     * Returns true if the given jar file contains at least one *.dylib entry.
+     */
+    private static boolean containsNativeLibs(File jar) {
+        if (!jar.name.endsWith('.jar') || !jar.exists()) return false
+        def zipFile = new ZipFile(jar)
+        try {
+            return zipFile.entries().any { !it.directory && (it.name.endsWith('.dylib') || it.name.endsWith('.jnilib')) }
+        } finally {
+            zipFile.close()
+        }
+    }
+
+    /**
+     * Extracts the given dependency jar to a per-jar staging directory, signs all *.dylib files
+     * inside it with the Apple developer identity from the macCodesignIdentity project property,
+     * and returns the staging directory.  The caller should include this directory in the fat-jar
+     * instead of the original zipTree so that the signed native libraries end up in the module jar.
+     */
+    private File signAndExtractJar(Project project, File jar) {
+        def jarBaseName = jar.name.replaceAll(/\.jar$/, '')
+        def stagingDir = project.layout.buildDirectory.dir("signedJarContents/${jarBaseName}").get().asFile
+
+        fileSystemOperations.copy {
+            from project.zipTree(jar)
+            into stagingDir
+        }
+
+        def nativeLibs = project.fileTree(dir: stagingDir, includes: ['**/*.dylib', '**/*.jnilib']).files.toList()
+        execOperations.exec {
+            commandLine(['codesign', '--deep', '--force',
+                    '--sign', project.property('macCodesignIdentity'),
+                    '--timestamp',
+                    '--options', 'runtime',
+                    '--entitlements', project.rootProject.file('release/mac-specific/java.entitlements')] + nativeLibs)
+        }
+
+        return stagingDir
+    }
+
+    /**
+     * Derive allowed module categories from Java source enum PluginUtils.PluginType to avoid duplication.
+     * Falls back to a conservative set if the source cannot be parsed.
+     */
+    private static Set<String> resolveAllowedCategoriesFromSource(Project project) {
+        Set<String> fallback = ['language', 'spellcheck', 'machinetranslator', 'theme', 'miscellaneous'] as Set
+        try {
+            def srcPath = 'src/org/omegat/filters2/master/PluginUtils.java'
+            def file = project.rootProject.file(srcPath)
+            if (!file.exists()) {
+                project.logger.info("[OmegatModulePlugin] PluginType source not found at ${file}. Using fallback categories: ${fallback}")
+                return fallback
+            }
+            String text = file.getText('UTF-8')
+            // Regex to capture enum constants with a single string constructor argument
+            def matcher = (text =~ /(?m)^\s*([A-Z_]+)\s*\(\s*"([^"]+)"\s*\)\s*[,;]?\s*$/)
+            Set<String> values = new LinkedHashSet<>()
+            matcher.each { m ->
+                String value = m[2]
+                if (value) {
+                    String v = value.trim().toLowerCase(Locale.ENGLISH)
+                    if (!v.equalsIgnoreCase('undefined')) {
+                        values.add(v)
+                    }
+                }
+            }
+            if (values.isEmpty()) {
+                project.logger.info("[OmegatModulePlugin] No values parsed from PluginType. Using fallback: ${fallback}")
+                return fallback
+            }
+            return values
+        } catch (Throwable t) {
+            project.logger.info("[OmegatModulePlugin] Failed to parse PluginType: ${t.class.simpleName}: ${t.message}. Using fallback: ${fallback}")
+            return fallback
+        }
+    }
+}

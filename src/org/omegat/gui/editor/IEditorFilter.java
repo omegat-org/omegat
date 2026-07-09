@@ -27,6 +27,7 @@ package org.omegat.gui.editor;
 
 import java.awt.Component;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.SourceTextEntry;
 
 /**
@@ -35,7 +36,7 @@ import org.omegat.core.data.SourceTextEntry;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IEditorFilter {
-    boolean allowed(SourceTextEntry ste);
+    boolean allowed(@Nullable SourceTextEntry ste);
 
     Component getControlComponent();
 

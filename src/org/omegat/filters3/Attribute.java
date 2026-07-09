@@ -31,7 +31,7 @@ package org.omegat.filters3;
  * @author Maxym Mykhalchuk
  */
 public class Attribute {
-    private String name;
+    private final String name;
 
     /** Returns attribute's name. */
     public String getName() {
@@ -64,6 +64,7 @@ public class Attribute {
     /**
      * Returns a string representation of the attribute. name="value".
      */
+    @Override
     public String toString() {
         return name + "=\"" + value + "\"";
     }

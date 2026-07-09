@@ -25,6 +25,9 @@
 
 package org.omegat.util;
 
+import org.jetbrains.annotations.Nullable;
+import org.omegat.core.data.RuntimePreferenceStore;
+
 /**
  * Class for store runtime-only preferences, which shouldn't be saved to config
  * dir.
@@ -36,46 +39,71 @@ public final class RuntimePreferences {
     private RuntimePreferences() {
     }
 
-    /** Quiet mode. */
-    private static boolean quietMode;
-
-    /** Force use specified config dir. */
-    private static String configDir;
-
-    private static boolean projectLockingEnabled = true;
-
-    /** Last opened project location save control **/
-    private static boolean locationSaveEnabled = true;
-
     public static boolean isQuietMode() {
-        return quietMode;
+        return RuntimePreferenceStore.getInstance().isQuietMode();
     }
 
     public static void setQuietMode(boolean v) {
-        quietMode = v;
+        RuntimePreferenceStore.getInstance().setQuietMode(v);
     }
 
     public static String getConfigDir() {
-        return configDir;
+        return RuntimePreferenceStore.getInstance().getConfigDir();
     }
 
     public static void setConfigDir(String v) {
-        configDir = v;
+        RuntimePreferenceStore.getInstance().setConfigDir(v);
     }
 
     public static boolean isProjectLockingEnabled() {
-        return projectLockingEnabled;
+        return !RuntimePreferenceStore.getInstance().isProjectLockingDisabled();
     }
 
     public static void setProjectLockingEnabled(boolean v) {
-        projectLockingEnabled = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setProjectLockingDisabled();
+        }
     }
 
     public static boolean isLocationSaveEnabled() {
-        return locationSaveEnabled;
+        return RuntimePreferenceStore.getInstance().isLocationSaveEnabled();
     }
 
     public static void setLocationSaveEnabled(boolean v) {
-        locationSaveEnabled = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setLocationSaveDisable();
+        }
+    }
+
+    public static void setAlternateFilenames(String anAlternateFilenameFrom, String anAlternateFilenameTo) {
+        if (anAlternateFilenameFrom == null || anAlternateFilenameTo == null) {
+            throw new IllegalArgumentException("Both alternateFilenameFrom and alternateFilenameTo are required.");
+        }
+        RuntimePreferenceStore.getInstance().setAlternateFilenameFrom(anAlternateFilenameFrom);
+        RuntimePreferenceStore.getInstance().setAlternateFilenameTo(anAlternateFilenameTo);
+    }
+
+    public static String getAlternateFilenameFrom() {
+        return RuntimePreferenceStore.getInstance().getAlternateFilenameFrom();
+    }
+
+    public static String getAlternateFilenameTo() {
+        return RuntimePreferenceStore.getInstance().getAlternateFilenameTo();
+    }
+
+    public static void setTokenizerSource(@Nullable String tokenizerSource) {
+        RuntimePreferenceStore.getInstance().setTokenizerSource(tokenizerSource);
+    }
+
+    public static void setTokenizerTarget(@Nullable String tokenizerTarget) {
+        RuntimePreferenceStore.getInstance().setTokenizerTarget(tokenizerTarget);
+    }
+
+    public static void setNoTeam() {
+        RuntimePreferenceStore.getInstance().setNoTeam();
+    }
+
+    public static boolean isNoTeam() {
+        return RuntimePreferenceStore.getInstance().isNoTeam();
     }
 }

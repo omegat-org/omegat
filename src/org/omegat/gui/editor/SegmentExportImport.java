@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.apache.commons.io.IOUtils;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -51,7 +52,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentExportImport {
     static final int WAIT_TIME = 100;
 
-    private final EditorController controller;
+    private final IEditor controller;
     private volatile long exportLastModified = Long.MAX_VALUE;
     private final File importFile;
 
@@ -64,23 +65,21 @@ public class SegmentExportImport {
     /** The name of the file with the source exported segment */
     public static final String SOURCE_EXPORT = "source.txt";
 
-    public SegmentExportImport(EditorController controller) {
+    public SegmentExportImport(IEditor controller) {
         this.controller = controller;
-        importFile = new File(StaticUtils.getScriptDir(), "import.txt");
-        new Thread() {
-            public void run() {
-                try {
-                    while (true) {
-                        if (importFile.lastModified() >= exportLastModified) {
-                            importText();
-                        } else {
-                            Thread.sleep(WAIT_TIME);
-                        }
+        importFile = getFile("import.txt");
+        new Thread(() -> {
+            try {
+                while (!Thread.currentThread().isInterrupted()) {
+                    if (importFile.lastModified() >= exportLastModified) {
+                        importText();
                     }
-                } catch (InterruptedException ex) {
+                    Thread.sleep(WAIT_TIME);
                 }
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
             }
-        }.start();
+        }).start();
     }
 
     private static File getFile(String name) {
@@ -90,7 +89,7 @@ public class SegmentExportImport {
     /**
      * Export the current source and target segments in text files.
      */
-    public synchronized void exportCurrentSegment(final SourceTextEntry ste) {
+    public synchronized void exportCurrentSegment(@Nullable SourceTextEntry ste) {
         importFile.delete();
         if (ste == null) {
             // entry deactivated
@@ -138,11 +137,7 @@ public class SegmentExportImport {
         try (FileInputStream fis = new FileInputStream(importFile)) {
             String text = IOUtils.toString(fis, StandardCharsets.UTF_8).replace(System.lineSeparator(),
                     "\n");
-            UIThreadsUtil.executeInSwingThread(new Runnable() {
-                public void run() {
-                    controller.replaceEditText(text);
-                }
-            });
+            UIThreadsUtil.executeInSwingThread(() -> controller.replaceEditText(text));
         } catch (IOException ex) {
             Log.log(ex);
         }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="co">
+    <section>
+        <title>Libertà d’usu è di mudificazione</title>
+        <para>OmegaT hè una suluzione libera di traduzzione assistita da l’urdinatore (TAO in
+            francese è CAT in inglese) per i traduttori prufessiunali. Stu prugramma hè distribuitu sottu à i termini di a <emphasis>Licenza Publica Generale GNU, versione 3.0</emphasis>. Fighjate <guimenu>Aiutu</guimenu> eppò <guimenu>Apprupositu</guimenu>. A licenza vi cuncede quelle libertà :<itemizedlist>
+                <listitem>
+                    <para>A libertà di lancià OmegaT cum’ella vi pare, per tutti i vostri bisogni.</para>
+                </listitem>
+
+                <listitem>
+                    <para>A libertà di studià cumu funziuneghja OmegaT è di mudificallu cum’ella vi pare.</para>
+                </listitem>
+
+                <listitem>
+                    <para>A libertà di ridistribuisce copie per aiutà d’altre persone.</para>
+                </listitem>
+
+                <listitem>
+                    <para>A libertà di distribuisce e copie di e vostre versioni mudificate à d’altre persone.</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+</article>

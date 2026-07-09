@@ -26,6 +26,7 @@
 package org.omegat.core;
 
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
@@ -44,15 +45,15 @@ public final class TestCoreInitializer {
     }
 
     public static void initEditor(IEditor editor) {
-        Core.setEditor(editor);
+        TestCoreState.getInstance().setEditor(editor);
     }
 
     public static void initAutoSave(IAutoSave autoSave) {
-        Core.setSaveThread(autoSave);
+        TestCoreState.initAutoSave(autoSave);
     }
 
     public static void initMainWindow(@Nullable IMainWindow mainWindow) throws Exception {
-        Core.setMainWindow(mainWindow);
+        TestCoreState.getInstance().setMainWindow(mainWindow);
 
         if (StaticUIUtils.isGUI() && mainWindow != null) {
             Core.initializeGUIimpl(mainWindow);
@@ -60,10 +61,10 @@ public final class TestCoreInitializer {
     }
 
     public static void initGlossary(IGlossaries glossaries) {
-        Core.setGlossary(glossaries);
+        TestCoreState.getInstance().setGlossaries(glossaries);
     }
 
     public static void initNotes(INotes notes) {
-        Core.setNotes(notes);
+        TestCoreState.getInstance().setNotes(notes);
     }
 }

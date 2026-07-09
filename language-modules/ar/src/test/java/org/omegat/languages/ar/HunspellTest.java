@@ -27,16 +27,17 @@ package org.omegat.languages.ar;
 import org.junit.Test;
 
 import org.omegat.languages.LanguageModuleTestBase;
-import org.omegat.spellchecker.hunspell.HunSpellChecker;
+import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
 
 
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "ar";
-    private static final String GOOD = "مرحبا.";
+    private static final String GOOD = "من"; // From/who (most common Arabic word)
+    private static final String BAD = "مں"; // Same with incorrect character
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new HunSpellChecker(), LANGUAGE, GOOD, null);
+        testDictionaryHelper(new LuceneHunSpellChecker(60_000), LANGUAGE, GOOD, BAD);
     }
 }

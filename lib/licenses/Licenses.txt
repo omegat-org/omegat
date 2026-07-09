@@ -9,8 +9,7 @@ License.
 jmyspell-core is distributed under the GNU Lesser General Public
 License version 2.1 and greater.
 
-svnkit-*.jar is distributed under the TMate Open Source / Commercial
-dual license.
+svnkit-*.jar is distributed under the TMate Open Source / Commercial dual license.
 
 sequence-library-*.jar is distributed under the Sequence Library
 License.
@@ -22,6 +21,9 @@ with a dual-licensing option for closed source usage.
 
 org.eclipse.jgit-*-r.jar is distributed under the Eclipse Distribution
 License (EDL) v 1.0.
+
+jgit-gpg-signer-*.jar is distributed under the Eclipse Public License (EPL)
+v2.0.
 
 jsch-*.jar is distributed under the JSch License.
 

@@ -31,6 +31,10 @@ import org.omegat.core.data.IProject;
 import org.omegat.filters2.latex.LatexFilter;
 
 import java.io.File;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LatexFilterTest extends TestFilterBase {
 
@@ -53,8 +57,8 @@ public class LatexFilterTest extends TestFilterBase {
         checkMulti("LaTeX Itemize example", null, null, "", "Itemize", null);
         checkMulti("Itemize", null, null, "LaTeX Itemize example", "<r0> INTERRUTTORE GENERALE ON/OFF (I/0)",
                 null);
-        checkMulti("<r0> INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize", "<r0> SPIA PRESENZA TENSIONE",
-                null);
+        checkMulti("<r0> INTERRUTTORE GENERALE ON/OFF (I/0)", null, null, "Itemize",
+                "<r0> SPIA PRESENZA TENSIONE", null);
         checkMulti("<r0> SPIA PRESENZA TENSIONE", null, null, "<r0> INTERRUTTORE GENERALE ON/OFF (I/0)",
                 "<r0> SPIA PREALLARME", null);
         checkMulti("<r0> SPIA PREALLARME", null, null, "<r0> SPIA PRESENZA TENSIONE",
@@ -86,5 +90,15 @@ public class LatexFilterTest extends TestFilterBase {
     public void testArticle() throws Exception {
         translate(new LatexFilter(), "test/data/filters/Latex/test-article.tex");
         compareBinary(new File("test/data/filters/Latex/test-article-exp.tex"), outFile);
+    }
+
+    @Test
+    public void testBugOverlap() throws Exception {
+        String f = "test/data/filters/Latex/bug_overlap.tex";
+        List<String> entries = parse(new LatexFilter(), f);
+        assertEquals(1, entries.size());
+        String target = entries.get(0);
+        assertTrue("ends with unwanted string: " + target.substring(target.length() - 10),
+                target.matches("We <u\\d> it, and <u\\d> is compressed. Then we <u\\d>. "));
     }
 }

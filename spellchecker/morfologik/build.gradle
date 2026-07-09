@@ -1,11 +1,11 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/languagetool-core-*.jar',
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/languagetool-core-*.jar',
                                        '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar'])
     } else {
         // morfologik stemming and speller are dependency of languagetool-core
@@ -20,13 +20,10 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
-    testRuntimeOnly(libs.languagetool.en)
-    testRuntimeOnly(libs.languagetool.de)
+    testRuntimeOnly(libs.languagetool.pl)
 }
 
-makeModuleTask(loadProperties(file('plugin.properties')))
-
 test {
-    dependsOn project(':language-modules:en').tasks.withType(Jar)
+    dependsOn project(':language-modules:pl').tasks.withType(Jar)
     dependsOn project(':language-modules:de').tasks.withType(Jar)
 }

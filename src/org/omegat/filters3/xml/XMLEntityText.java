@@ -55,7 +55,7 @@ public class XMLEntityText extends Text {
      * Creates a new instance of XMLText class. Because, well, translating
      * internal entities is, hmm, too complex.
      */
-    public Text createInstance(String text) {
-        return new XMLText(text, false);
+    public Text createInstance(String newText) {
+        return new XMLText(newText, false);
     }
 }

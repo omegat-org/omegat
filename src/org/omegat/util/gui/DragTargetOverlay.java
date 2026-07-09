@@ -61,6 +61,8 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
 
 /**
+ * A helper class for creating a drop target overlay.
+ *
  * @author Aaron Madlon-Kay
  */
 public final class DragTargetOverlay {

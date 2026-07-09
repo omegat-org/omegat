@@ -31,8 +31,19 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.snowball.SnowballFilter;
+import org.tartarus.snowball.ext.FrenchStemmer;
 
 /**
+ * The LuceneFrenchTokenizer is a specialized tokenizer intended for processing
+ * French language text with Lucene. It extends the functionality of the
+ * BaseTokenizer and integrates language-specific tokenization features.
+ * <p>
+ * This tokenizer provides support for stop words and stemming, enabling
+ * enhanced linguistic analysis for French text. When stop words and/or
+ * stemming are enabled, it utilizes the FrenchAnalyzer from the Lucene
+ * library. If stemming is disabled, standard tokenization is applied.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -41,13 +52,25 @@ public class LuceneFrenchTokenizer extends BaseTokenizer {
 
     @SuppressWarnings("resource")
     @Override
-    protected TokenStream getTokenStream(final String strOrig, final boolean stemsAllowed,
+    protected TokenStream getTokenStream(final String strOrig, final StemmingMode stemmingMode,
             final boolean stopWordsAllowed) throws IOException {
-        if (stemsAllowed) {
-            CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
-            return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
-        } else {
+        CharArraySet stopWords = stopWordsAllowed ? FrenchAnalyzer.getDefaultStopSet() : CharArraySet.EMPTY_SET;
+        switch (stemmingMode) {
+        case NONE:
             return getStandardTokenStream(strOrig);
+        case GLOSSARY_FULL:
+        case MATCHING_FULL:
+            return new SnowballFilter(
+                    new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig)),
+                    new FrenchStemmer());
+        default:
+            return new FrenchAnalyzer(stopWords).tokenStream("", new StringReader(strOrig));
         }
+    }
+
+    @Override
+    protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
+            throws IOException {
+        return getTokenStream(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stopWordsAllowed);
     }
 }

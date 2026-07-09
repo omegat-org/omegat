@@ -45,6 +45,8 @@ import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 
 /**
+ * Abstract base class for MyMemory connectors.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich

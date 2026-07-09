@@ -48,8 +48,13 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
      */
     private static JTable table;
 
+    @Deprecated
     public AutoCompleterTableView(String name) {
-        super(name);
+        this(name, null);
+    }
+
+    public AutoCompleterTableView(String name, AutoCompleter completer) {
+        super(name, completer);
         getTable().changeSelection(0, 0, false, false);
     }
 
@@ -248,8 +253,8 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     }
 
     /**
-     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.  It won't change the selection if the
-     * currently selected item is already the first item.
+     * Selects the item in the list preceding the current one by completer.pageRowCount items or go to the first item.
+     * It won't change the selection if the currently selected item is already the first item.
      */
     protected void selectPreviousPossibleValueByPage() {
         Point p = getSelectionPoint();

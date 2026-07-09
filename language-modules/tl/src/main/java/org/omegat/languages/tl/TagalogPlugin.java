@@ -25,10 +25,12 @@
 
 package org.omegat.languages.tl;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
+@NullMarked
 public final class TagalogPlugin {
 
     private static final String TAGALOG = "org.languagetool.language.Tagalog";

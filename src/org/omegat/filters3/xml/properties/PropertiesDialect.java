@@ -28,9 +28,16 @@
 
 package org.omegat.filters3.xml.properties;
 
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.HashMap;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -38,6 +45,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Tony Graham
  */
+@NullMarked
 public class PropertiesDialect extends DefaultXMLDialect {
     public static final Pattern PROPERTIES_ROOT_TAG = Pattern.compile("properties");
 
@@ -45,15 +53,45 @@ public class PropertiesDialect extends DefaultXMLDialect {
      * A map of attribute-name and attribute value pairs that, if exist in a
      * tag, indicate that this tag should not be translated
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private final HashMap<String, Set<String>> ignoreTagsAttributes;
 
     public PropertiesDialect() {
         defineConstraint(CONSTRAINT_ROOT, PROPERTIES_ROOT_TAG);
 
         defineParagraphTags(new String[] { "entry", });
 
-        ignoreTagsAttributes = new HashMap<String, String>();
-        ignoreTagsAttributes.put("TRANSLATE=FALSE", "");
+        ignoreTagsAttributes = new HashMap<>();
+
+        // Default rules: translate="false|no|0" means do not translate
+        addIgnoreAttributeValues("translate", "false", "no", "0");
+    }
+
+    private boolean checkIgnoreTags(String key, String value) {
+        String k = key.trim().toUpperCase(Locale.ENGLISH);
+        String v = value.trim().toUpperCase(Locale.ENGLISH);
+        Set<String> values = ignoreTagsAttributes.get(k);
+        return values != null && values.contains(v);
+    }
+
+    private void addIgnoreAttributeValues(String attributeName, String... values) {
+        String key = attributeName.trim().toUpperCase(Locale.ENGLISH);
+        Set<String> set = ignoreTagsAttributes.computeIfAbsent(key, k -> new HashSet<>());
+        for (String v : values) {
+            set.add(v.trim().toUpperCase(Locale.ENGLISH));
+        }
+    }
+
+    @Override
+    public Boolean validateIntactTag(String tag, @Nullable Attributes atts) {
+        if (atts != null) {
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute att = atts.get(i);
+                if (checkIgnoreTags(att.getName(), att.getValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -1,33 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.appendices">
-  <title id="chapter.appendices.title">Appendices</title>
-
-  <xi:include href="App_FileFilters.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Segmentation.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Regex.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Glossaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Bidi.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_PostProcessingCommands.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_ShortCuts.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_ConfigurationFolder.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
-  <xi:include href="App_ApplicationFolder.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  </chapter>
+<!-- Converted by db4-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.appendices">
+   <title xml:id="chapter.appendices.title">Appendices</title>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_FileFilters.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Segmentation.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Regex.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Glossaries.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_Bidi.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_PostProcessingCommands.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ShortCuts.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ConfigurationFolder.xml"></xi:include>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="App_ApplicationFolder.xml"></xi:include>
+</chapter>

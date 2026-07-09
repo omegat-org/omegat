@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.flash;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -35,6 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  *
  * @author Didier Briel
  */
+@NullMarked
 public class FlashDialect extends DefaultXMLDialect {
     public static final Pattern FLASH_XMLNS = Pattern
             .compile("xmlns(:\\w+)?=\"http://ns.adobe.com/xfl/2008/\"");

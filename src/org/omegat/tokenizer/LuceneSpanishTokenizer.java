@@ -32,6 +32,14 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.es.SpanishAnalyzer;
 
 /**
+ * A tokenizer implementation for the Spanish language using Lucene's analysis tools.
+ * This tokenizer provides support for tokenizing Spanish text, optionally allowing
+ * stemming and stop words removal.
+ * <p>
+ * The class utilizes Lucene's {@link SpanishAnalyzer} for Spanish-specific tokenization
+ * functionalities. If stemming is enabled, it applies stemming in conjunction with a
+ * configurable stop words set. Otherwise, it falls back to a standard token stream.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "es" }, isDefault = true)

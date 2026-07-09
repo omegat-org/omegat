@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default">
+  <title translate="true">Visible Title</title>
+  <body>
+    <!-- User-reported structure: para > text with translate attribute -->
+    <para styleclass="Normal"><text translate="false">Hidden A</text></para>
+    <para styleclass="Normal"><text translate="no">Hidden B</text></para>
+    <para styleclass="Normal"><text translate="0">Hidden C</text></para>
+
+    <!-- Control: visible content should be extracted -->
+    <para styleclass="Normal"><text translate="true">Visible Body</text></para>
+  </body>
+</topic>

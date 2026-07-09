@@ -41,7 +41,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.MixedEolHandlingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * Filter for subtitles files.
@@ -54,9 +53,9 @@ public class SrtFilter extends AbstractFilter {
             .compile("([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})");
     protected static final String EOL = "\r\n";
 
-    enum READ_STATE {
+    enum ReadState {
         WAIT_TIME, WAIT_TEXT
-    };
+    }
 
     protected @Nullable Map<String, String> align;
 
@@ -99,10 +98,10 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         out = outFile;
-        READ_STATE state = READ_STATE.WAIT_TIME;
+        ReadState state = ReadState.WAIT_TIME;
         key = null;
         text.setLength(0);
         Pattern pattern = getPattern();
@@ -114,7 +113,7 @@ public class SrtFilter extends AbstractFilter {
                 switch (state) {
                 case WAIT_TIME:
                     if (pattern.matcher(trimmed).matches()) {
-                        state = READ_STATE.WAIT_TEXT;
+                        state = ReadState.WAIT_TEXT;
                     }
                     key = trimmed;
                     text.setLength(0);
@@ -125,13 +124,15 @@ public class SrtFilter extends AbstractFilter {
                     if (trimmed.isEmpty()) {
                         flush();
                         outFile.write(EOL);
-                        state = READ_STATE.WAIT_TIME;
+                        state = ReadState.WAIT_TIME;
                     }
                     if (text.length() > 0) {
                         text.append('\n');
                     }
                     text.append(s);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected state: " + state);
                 }
             }
         }
@@ -165,7 +166,8 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
         Map<String, String> source = new HashMap<>();
         Map<String, String> translated = new HashMap<>();
 
@@ -175,7 +177,7 @@ public class SrtFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
+            if (tr != null && !tr.isEmpty() && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

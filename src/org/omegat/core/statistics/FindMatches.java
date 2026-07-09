@@ -387,7 +387,8 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS,
+                        false, maxPenalty);
             }
         }
         // fill similarity data only for a result
@@ -573,7 +574,11 @@ public class FindMatches {
     Token[] tokenizeStem(String str) {
         Token[] tokens = tokenizeStemCache.get(str);
         if (tokens == null) {
-            tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
+            if (Preferences.isPreference(Preferences.MATCHES_STEMMING_FULL)) {
+                tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING_FULL);
+            } else {
+                tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
+            }
             tokenizeStemCache.put(str, tokens);
         }
         return tokens;

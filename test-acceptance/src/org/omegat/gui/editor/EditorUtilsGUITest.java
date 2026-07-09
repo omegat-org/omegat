@@ -26,6 +26,7 @@
 package org.omegat.gui.editor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
@@ -41,7 +42,6 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 /**
  * @author Hiroshi Miura
@@ -54,26 +54,42 @@ public final class EditorUtilsGUITest {
 
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
 
-        @Rule
-        public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
-
         @Test
         public void testEditorUtilsGetWordFirstSteps() throws BadLocationException {
-            int offs = 518;
+            // First_Steps 3rd paragraph:
+            //    OmegaT will create a folder set that contains your files. It
+            //    will also create an empty translation memory that it will fill in the
+            //    background, one segment at as time as you type your translation. Matches
+            String target = "memory";
+            String anchor = "create an empty translation ";
+            assertNotNull(window);
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
+
+            String docText = editPane.getDocument().getText(0, editPane.getDocument().getLength());
+            int anchorIndex = docText.indexOf(anchor);
+            assertTrue("Anchor text not found: " + anchor, anchorIndex >= 0);
+
+            int begin = docText.indexOf(target, anchorIndex + anchor.length());
+            assertTrue("Target text not found after anchor: " + target, begin >= 0);
+
+            int offs = begin + target.length() / 2;
+            int end = begin + target.length();
+
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
             String word = editPane.getText(posStart, posEnd - posStart);
-            assertEquals("translation", word);
-            assertEquals(508, posStart);
-            assertEquals(519, posEnd);
+
+            // grab before and after words
+            String before = editPane.getText(posStart - 10, 10);
+            String after = editPane.getText(posEnd, 10);
+
+            assertEquals("We found \"" + before + "[" + word + "]" + after + "\"", target, word);
+            assertEquals(begin, posStart);
+            assertEquals(end, posEnd);
         }
     }
 
     public static class EditorUtilsLoadedProjectTest extends TestCoreGUI {
-
-        @Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
         @Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
@@ -81,6 +97,7 @@ public final class EditorUtilsGUITest {
         @Test
         public void testEditorUtilsGetWordLoadedProject() throws Exception {
             openSampleProject(Paths.get("test-acceptance/data/project_CN_JP/"));
+            assertNotNull(window);
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
             int length = editPane.getDocument().getLength();
             assertTrue(length > 0);

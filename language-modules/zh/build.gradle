@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -20,8 +20,5 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
     testImplementation(libs.commons.io)
 }
-makeModuleTask(loadProperties(file('plugin.properties')))

@@ -40,7 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,14 +68,14 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
+import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
-import org.omegat.util.Preferences;
-
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -128,11 +128,11 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected final EditorController controller;
 
-    protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<PopupMenuConstructorInfo>();
+    protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<>();
 
-    protected String currentWord;
+    protected @Nullable String currentWord;
 
-    protected AutoCompleter autoCompleter = new AutoCompleter(this);
+    protected transient IAutoCompleter autoCompleter;
 
     /**
      * Whether or not we are confining the cursor to the editable part of the
@@ -154,16 +154,18 @@ public class EditorTextArea3 extends JEditorPane {
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
+            @Override
             public ViewFactory getViewFactory() {
                 return FACTORY3;
             }
 
+            @Override
             protected void createInputAttributes(Element element, MutableAttributeSet set) {
                 set.removeAttributes(set);
                 EditorController c = EditorTextArea3.this.controller;
                 try {
                     c.m_docSegList[c.displayedEntryIndex].createInputAttributes(element, set);
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
                 }
             }
         });
@@ -205,6 +207,7 @@ public class EditorTextArea3 extends JEditorPane {
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
 
         updateLockInsertMessage();
+        autoCompleter = new AutoCompleter(this);
     }
 
     @Override
@@ -260,23 +263,20 @@ public class EditorTextArea3 extends JEditorPane {
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);
 
-            boolean singleClickSegmentActivation =
-                    Preferences.isPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION);
-            System.out.println("Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION: " + (singleClickSegmentActivation ? "ENABLED" : "DISABLED"));
-
-            if (singleClickSegmentActivation
-                   && e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1
-                   && lockCursorToInputArea) {
-               int location = getCaretPosition();
-               int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
-               int segmentIndex = controller.getSegmentIndexAtLocation(location);
-               int startLocation = controller.getStartForSegmentWithIndex(segmentIndex);
-               int offset = mousepos - startLocation;
-               boolean changed = controller.goToSegmentAtLocationAndJumpToOffset(mousepos, offset);
-               if (changed) {
-                   return;
-               }
-           }
+            boolean singleClickSegmentActivation = Preferences
+                    .isPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION);
+            if (singleClickSegmentActivation && e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1
+                    && lockCursorToInputArea) {
+                int location = getCaretPosition();
+                int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
+                int segmentIndex = controller.getSegmentIndexAtLocation(location);
+                int startLocation = controller.getStartForSegmentWithIndex(segmentIndex);
+                int offset = mousepos - startLocation;
+                boolean changed = controller.goToSegmentAtLocationAndJumpToOffset(mousepos, offset);
+                if (changed) {
+                    return;
+                }
+            }
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
@@ -294,7 +294,7 @@ public class EditorTextArea3 extends JEditorPane {
             if (e.isPopupTrigger()) {
                 doPopup(e.getPoint());
             }
-        };
+        }
 
         @Override
         public void mouseReleased(MouseEvent e) {
@@ -316,7 +316,7 @@ public class EditorTextArea3 extends JEditorPane {
 
         PopupMenuConstructorInfo[] cons;
         synchronized (popupConstructors) {
-            /**
+            /*
              * Copy constructors - for disable blocking in the procesing time.
              */
             cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
@@ -349,7 +349,7 @@ public class EditorTextArea3 extends JEditorPane {
     protected void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         synchronized (popupConstructors) {
             popupConstructors.add(new PopupMenuConstructorInfo(priority, constructor));
-            Collections.sort(popupConstructors, (o1, o2) -> o1.priority - o2.priority);
+            popupConstructors.sort(Comparator.comparingInt(o -> o.priority));
         }
     }
 
@@ -450,9 +450,13 @@ public class EditorTextArea3 extends JEditorPane {
                 if (!processed) {
                     int offset = getCaretPosition();
                     int nextWord = Utilities.getNextWord(this, offset);
-                    int c = Math.min(nextWord, doc.getTranslationEnd());
                     setSelectionStart(offset);
-                    setSelectionEnd(c);
+                    if (doc != null) {
+                        int c = Math.min(nextWord, doc.getTranslationEnd());
+                        setSelectionEnd(c);
+                    } else {
+                        setSelectionEnd(nextWord);
+                    }
                     replaceSelection("");
 
                     processed = true;
@@ -523,14 +527,14 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     private void updateLockInsertMessage() {
-        String lock = lockCursorToInputArea ? OStrings.getString("MW_STATUS_CURSOR_LOCK_ON") :
-                OStrings.getString("MW_STATUS_CURSOR_LOCK_OFF");
-        String ins = overtypeMode ? OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_ON") :
-                OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_OFF");
-        String lockTip = lockCursorToInputArea ? OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_ON") :
-                OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_OFF");
-        String insTip = overtypeMode ? OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_ON") :
-                OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_OFF");
+        String lock = lockCursorToInputArea ? OStrings.getString("MW_STATUS_CURSOR_LOCK_ON")
+                : OStrings.getString("MW_STATUS_CURSOR_LOCK_OFF");
+        String ins = overtypeMode ? OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_ON")
+                : OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_OFF");
+        String lockTip = lockCursorToInputArea ? OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_ON")
+                : OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_OFF");
+        String insTip = overtypeMode ? OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_ON")
+                : OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_OFF");
         Core.getMainWindow().showLockInsertMessage(lock + " | " + ins, lockTip + " | " + insTip);
     }
 
@@ -550,7 +554,7 @@ public class EditorTextArea3 extends JEditorPane {
                 Rectangle r = modelToView2D(caret.getDot()).getBounds();
                 caret.damage(r);
             } catch (BadLocationException e) {
-                e.printStackTrace();
+                Log.log(e);
             }
         } else {
             // reset to default insert caret
@@ -691,23 +695,60 @@ public class EditorTextArea3 extends JEditorPane {
                 String text = getOmDocument().getText(segment.getStartPosition(),
                         segment.getEndPosition() - segment.getStartPosition());
                 int off = pos - segment.getStartPosition();
-                if (off < 0 || off >= text.length()) {
-                    return false;
-                }
-                for (ProtectedPart pp : ste.getProtectedParts()) {
-                    int p = -1;
-                    while ((p = text.indexOf(pp.getTextInSourceSegment(), p + 1)) >= 0) {
-                        if (p <= off && off < p + pp.getTextInSourceSegment().length()) {
-                            p += segment.getStartPosition();
-                            select(p, p + pp.getTextInSourceSegment().length());
+                if (off >= 0 && off < text.length()) {
+                    for (ProtectedPart pp : ste.getProtectedParts()) {
+                        if (findAndSelectPart(text, off, pp, segment.getStartPosition())) {
                             return true;
                         }
                     }
                 }
             } catch (BadLocationException ex) {
+                Log.log(ex);
             }
         }
         return false;
+    }
+
+    private boolean findAndSelectPart(String text, int off, ProtectedPart pp, int segmentStart) {
+        String protectedPartText = pp.getTextInSourceSegment();
+        if (protectedPartText == null) {
+            return false;
+        }
+        int p = -1;
+        while ((p = text.indexOf(protectedPartText, p + 1)) >= 0) {
+            if (p <= off && off < p + protectedPartText.length()) {
+                int start = expandSelectionStart(text, p);
+                int end = expandSelectionEnd(text, p + protectedPartText.length());
+
+                select(start + segmentStart, end + segmentStart);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int expandSelectionStart(String text, int start) {
+        // expand selection if surrounded by bidi marks (up to 2 chars)
+        for (int i = 0; i < 2; i++) {
+            if (start > 0 && isDirectionChar(text.charAt(start - 1))) {
+                start--;
+            }
+        }
+        return start;
+    }
+
+    private int expandSelectionEnd(String text, int end) {
+        // expand selection if surrounded by bidi marks (up to 2 chars)
+        for (int i = 0; i < 2; i++) {
+            if (end < text.length() && isDirectionChar(text.charAt(end))) {
+                end++;
+            }
+        }
+        return end;
+    }
+
+    private boolean isDirectionChar(char ch) {
+        return ch == '\u200E' || ch == '\u200F' || ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
     }
 
     /**
@@ -815,13 +856,13 @@ public class EditorTextArea3 extends JEditorPane {
      * Remove invisible direction chars on the copy text into clipboard.
      */
     @Override
-    public String getSelectedText() {
+    public @Nullable String getSelectedText() {
         String st = super.getSelectedText();
         return st != null ? EditorUtils.removeDirectionChars(st) : null;
     }
 
     @Override
-    public String getToolTipText(MouseEvent event) {
+    public @Nullable String getToolTipText(MouseEvent event) {
         int pos = EditorTextArea3.this.viewToModel2D(event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
         return s < 0 ? null : controller.markerController.getToolTips(s, pos);
@@ -831,6 +872,7 @@ public class EditorTextArea3 extends JEditorPane {
      * Factory for create own view.
      */
     public static final ViewFactory FACTORY3 = new ViewFactory() {
+        @Override
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {
@@ -852,7 +894,7 @@ public class EditorTextArea3 extends JEditorPane {
         }
     };
 
-    private static class PopupMenuConstructorInfo {
+    protected static class PopupMenuConstructorInfo {
         final int priority;
         final IPopupMenuConstructor constructor;
 
@@ -864,10 +906,11 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public void replaceSelection(String content) {
-        // Overwrite current selection, and if at the end of the segment, allow
-        // inserting new text.
-        if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()
-                && getCaretPosition() < getOmDocument().getTranslationEnd()) {
+        // Overwrite the current selection, and if at the end of the segment,
+        // allow inserting new text.
+        var omDocument = getOmDocument();
+        if (isEditable() && omDocument != null && overtypeMode && getSelectionStart() == getSelectionEnd()
+                && getCaretPosition() < omDocument.getTranslationEnd()) {
             int pos = getCaretPosition();
             int lastPos = Math.min(getDocument().getLength(), pos + content.length());
             select(pos, lastPos);

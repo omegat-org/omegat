@@ -13,10 +13,7 @@ import org.gradle.api.tasks.*
 import org.gradle.api.tasks.options.Option
 
 @CompileStatic
-class WhcTask extends AbstractDocumentTask {
-
-    @InputFile
-    final Provider<RegularFile> inputFile = project.objects.fileProperty()
+abstract class WhcTask extends AbstractDocumentTask {
 
     @InputFiles
     final Provider<FileTree> contentFiles = project.objects.property(FileTree)
@@ -50,9 +47,9 @@ class WhcTask extends AbstractDocumentTask {
         // get task options
         def hasParameter = parameterList.get().size() > 1
         def toc = tocFile.get().asFile
-        def input = inputFile.get().asFile
         def output = outputDirectory.get().asFile
         File[] contents = contentFiles.get().getFiles().toArray(new File[0])
+        def input = inputFile.get().asFile
 
         // configure WHC compiler
         Compiler compiler = new Compiler(null)

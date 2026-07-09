@@ -30,11 +30,12 @@ import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Constructor;
-import java.text.DateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -47,6 +48,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
@@ -71,8 +73,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private static final Pattern SPLIT_COMMAS = Pattern.compile("\\s*,\\s*");
 
-    private final DateFormat dateFormat = DateFormat.getDateInstance();
-    private final DateFormat timeFormat = DateFormat.getTimeInstance();
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm:ss a",
+            Locale.getDefault()).withZone(ZoneId.systemDefault());
 
     private static final String KEY_ISDUP = "isDup";
     private static final String KEY_FILE = "file";
@@ -122,8 +124,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
-        String initModeClassName = Preferences.getPreferenceDefault(Preferences.SEGPROPS_INITIAL_MODE, null);
-        if (initModeClassName != null) {
+        String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);
+        if (!StringUtil.isEmpty(initModeClassName)) {
             try {
                 initModeClass = getClass().getClassLoader().loadClass(initModeClassName);
             } catch (ClassNotFoundException e1) {
@@ -282,10 +284,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             if (value) {
                 return OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase(Locale.ENGLISH));
             } else {
                 return OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase(Locale.ENGLISH));
             }
         } catch (MissingResourceException ex) {
             // fallback to default expression
@@ -297,7 +299,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
-    private void setProperties(SourceTextEntry ste) {
+    private void setProperties(@Nullable SourceTextEntry ste) {
         var oldProperties = new ArrayList<>(properties);
         properties.clear();
         if (ste == null) {
@@ -348,13 +350,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
             return;
         }
         if (entry.changeDate != 0) {
-            setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
-                    + timeFormat.format(new Date(entry.changeDate)));
+            setProperty(KEY_CHANGED, dateTimeFormatter.format(Instant.ofEpochMilli(entry.changeDate)));
         }
         setProperty(KEY_CHANGER, entry.changer);
         if (entry.creationDate != 0) {
-            setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
-                    + timeFormat.format(new Date(entry.creationDate)));
+            setProperty(KEY_CREATED, dateTimeFormatter.format(Instant.ofEpochMilli(entry.creationDate)));
         }
         setProperty(KEY_CREATOR, entry.creator);
         if (!entry.defaultTranslation) {

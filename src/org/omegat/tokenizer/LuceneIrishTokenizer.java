@@ -32,6 +32,15 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ga.IrishAnalyzer;
 
 /**
+ * A tokenizer for processing text in the Irish language. This class extends the
+ * functionality of the BaseTokenizer to provide tokenization specifically tailored
+ * for Irish. It handles token streams with optional stemming and stop-word removal
+ * based on the provided parameters.
+ * <p>
+ * The tokenizer utilizes Lucene's IrishAnalyzer when stemming is enabled. Stop-word
+ * support is configurable to include the default Irish stop-word set or none at all.
+ * If stemming is disabled, a standard token stream is generated.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "ga" })

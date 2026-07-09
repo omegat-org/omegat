@@ -25,6 +25,7 @@
 
 package org.omegat.gui.comments;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.SourceTextEntry;
 
 /**
@@ -36,5 +37,6 @@ public interface ICommentProvider {
     /**
      * Create comment for specific entry.
      */
+    @Nullable
     String getComment(SourceTextEntry newEntry);
 }

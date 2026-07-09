@@ -62,7 +62,7 @@ public class MozillaLangFilter extends AbstractFilter {
     protected static final Pattern LOCALIZATION_NOTE = Pattern.compile("# (.*)");
     protected static final Pattern PATTERN_SOURCE = Pattern.compile("^;(.*)");
 
-    enum READ_STATE {
+    enum ReadState {
         WAIT_SOURCE, WAIT_TARGET
     };
 
@@ -139,7 +139,7 @@ public class MozillaLangFilter extends AbstractFilter {
 
         out = outFile;
 
-        READ_STATE state = READ_STATE.WAIT_SOURCE;
+        ReadState state = ReadState.WAIT_SOURCE;
 
         String s;
         while ((s = inFile.readLine()) != null) {
@@ -155,7 +155,7 @@ public class MozillaLangFilter extends AbstractFilter {
                 m = PATTERN_SOURCE.matcher(s);
                 if (m.matches()) {
                     source.append(m.group(1));
-                    state = READ_STATE.WAIT_TARGET;
+                    state = ReadState.WAIT_TARGET;
                 }
                 if (LOCALIZATION_NOTE.matcher(s).matches()) {
                     localizationNote.append(s);
@@ -166,7 +166,7 @@ public class MozillaLangFilter extends AbstractFilter {
             case WAIT_TARGET:
                 target.append(s);
                 flushTranslation(fc);
-                state = READ_STATE.WAIT_SOURCE;
+                state = ReadState.WAIT_SOURCE;
                 break;
             default:
                 eol(s);
@@ -208,7 +208,7 @@ public class MozillaLangFilter extends AbstractFilter {
      * potentially with comments, using two callback mechanisms:
      * entryParseCallback and entryAlignCallback.
      *
-     * @param source
+     * @param alignSource
      *            The source string to be aligned.
      * @param translation
      *            The translated string corresponding to the source.
@@ -216,14 +216,14 @@ public class MozillaLangFilter extends AbstractFilter {
      *            An optional comment associated with the source and
      *            translation.
      */
-    protected void align(String source, @Nullable String translation, @Nullable String comments) {
+    protected void align(String alignSource, @Nullable String translation, @Nullable String comments) {
         if (entryParseCallback != null) {
-            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(alignSource,
                     PatternConsts.PRINTF_VARS, null);
-            entryParseCallback.addEntry(null, source, translation, false, comments, null, this,
+            entryParseCallback.addEntry(null, alignSource, translation, false, comments, null, this,
                     protectedParts);
         } else if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(null, source, translation, false, null, this);
+            entryAlignCallback.addTranslation(null, alignSource, translation, false, null, this);
         }
     }
 

@@ -64,7 +64,6 @@ public class GlossaryAutoCompleterOptionsController extends BasePreferencesContr
     }
 
     private void activateSourceItems(boolean activate) {
-        panel.sortBySourceCheckBox.setEnabled(activate);
         panel.sourceFirstRadioButton.setEnabled(activate);
         panel.targetFirstRadioButton.setEnabled(activate);
     }
@@ -76,7 +75,6 @@ public class GlossaryAutoCompleterOptionsController extends BasePreferencesContr
                 .setSelected(!Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE));
         panel.targetFirstRadioButton
                 .setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE));
-        panel.sortBySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE));
         panel.longerFirstCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH));
         panel.sortEntriesCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY));
         panel.enabledCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.AC_GLOSSARY_ENABLED,
@@ -90,7 +88,6 @@ public class GlossaryAutoCompleterOptionsController extends BasePreferencesContr
         panel.displaySourceCheckBox.setSelected(false);
         panel.sourceFirstRadioButton.setSelected(true);
         panel.targetFirstRadioButton.setSelected(false);
-        panel.sortBySourceCheckBox.setSelected(false);
         panel.longerFirstCheckBox.setSelected(false);
         panel.sortEntriesCheckBox.setSelected(false);
         panel.enabledCheckBox.setSelected(Preferences.AC_GLOSSARY_ENABLED_DEFAULT);
@@ -109,7 +106,6 @@ public class GlossaryAutoCompleterOptionsController extends BasePreferencesContr
         if (panel.displaySourceCheckBox.isSelected()) {
             Preferences.setPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE,
                     panel.targetFirstRadioButton.isSelected());
-            Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE, panel.sortBySourceCheckBox.isSelected());
         }
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH, panel.longerFirstCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY, panel.sortEntriesCheckBox.isSelected());

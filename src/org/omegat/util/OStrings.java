@@ -99,12 +99,10 @@ public final class OStrings {
      */
     public static void loadBundle(String filename) {
         boolean loaded = false;
-        try {
-            // Load the resource bundle
-            FileInputStream in = new FileInputStream(filename);
+        // Load the resource bundle
+        try (FileInputStream in = new FileInputStream(filename)) {
             bundle = new PropertyResourceBundle(in);
             loaded = true;
-            in.close();
         } catch (FileNotFoundException exception) {
             System.err.println("Resource bundle file not found: " + filename);
         } catch (IOException exception) {

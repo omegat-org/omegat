@@ -39,11 +39,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -56,7 +58,10 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -66,6 +71,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -90,11 +96,12 @@ import gen.core.filters.Filters;
  * @author Guido Leenders
  * @author Thomas Cordonnier
  */
+@NullMarked
 public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
 
-    private static final XmlMapper mapper;
+    private static final XmlMapper MAPPER;
 
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
@@ -120,20 +127,22 @@ public class FilterMaster {
     }
 
     static {
-        mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
+        MAPPER = XmlMapper.xmlBuilder().defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
-        mapper.registerModule(new JakartaXmlBindAnnotationModule());
-        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        MAPPER.registerModule(new JakartaXmlBindAnnotationModule());
+        MAPPER.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        MAPPER.setDefaultPropertyInclusion(JsonInclude.Include.NON_EMPTY);
+        MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     /**
      * Method for test.
+     * 
      * @return xmlMapper object.
      */
-    protected static XmlMapper getMapper() {
-        return mapper;
+    @VisibleForTesting
+    static XmlMapper getMapper() {
+        return MAPPER;
     }
 
     /**
@@ -262,7 +271,8 @@ public class FilterMaster {
             throw new IllegalStateException("Could not find a valid target langauge.");
         }
         File inFile = new File(sourcedir, filename).getCanonicalFile();
-        File outFile = new File(targetdir, getTargetForSource(filename, lookup, targetLang)).getCanonicalFile();
+        File outFile = new File(targetdir, getTargetForSource(filename, lookup, targetLang))
+                .getCanonicalFile();
 
         if (inFile.equals(outFile)) {
             throw new TranslationException(StringUtil
@@ -277,7 +287,10 @@ public class FilterMaster {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
         } catch (UnsupportedEncodingException | CharacterCodingException ex) {
             Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
-            Core.getMainWindow().displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            IMainWindow mw = Core.getMainWindow();
+            if (mw != null) {
+                mw.displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -339,7 +352,8 @@ public class FilterMaster {
      *            The full path to the source file
      * @return The corresponding LookupInformation
      */
-    private @Nullable LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException {
+    private @Nullable LookupInformation lookupFilter(File inFile, FilterContext fc)
+            throws TranslationException {
         for (Filter f : config.getFilters()) {
             if (!f.isEnabled()) {
                 continue;
@@ -376,7 +390,7 @@ public class FilterMaster {
      *            The file to check
      * @param quick
      *            When true, check only the file name
-     * @return Whether or not the file is supported
+     * @return Whether the file is supported
      */
     public boolean isFileSupported(File file, boolean quick) {
         FilterContext fc = new FilterContext(null, null, true);
@@ -459,19 +473,21 @@ public class FilterMaster {
      * Loads information about the filters from an XML file. If there's an error
      * loading a file, it calls <code>setupDefaultFilters</code>.
      *
-     * @param configFile the file from which the filter configuration is to be loaded
-     * @return an instance of {@code Filters} containing the loaded configuration,
-     *         or a new {@code Filters} instance if an error occurs or a new configuration
-     *         is generated
-     * @throws IOException if an I/O error occurs while reading the configuration file
+     * @param configFile
+     *            the file from which the filter configuration is to be loaded
+     * @return an instance of {@code Filters} containing the loaded
+     *         configuration, or a new {@code Filters} instance if an error
+     *         occurs or a new configuration is generated
+     * @throws IOException
+     *             if an I/O error occurs while reading the configuration file
      */
-    public static Filters loadConfig(File configFile) throws IOException {
+    public static @Nullable Filters loadConfig(File configFile) throws IOException {
         if (!configFile.exists()) {
             return null;
         }
         Filters result;
         try {
-            result = mapper.readValue(configFile, Filters.class);
+            result = MAPPER.readValue(configFile, Filters.class);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
             Log.log(e);
@@ -486,21 +502,26 @@ public class FilterMaster {
     }
 
     /**
-     * Saves information about the filters to an XML file. If the configuration is null,
-     * the file will be deleted. The configuration is written in a pretty-printed format.
+     * Saves information about the filters to an XML file. If the configuration
+     * is null, the file will be deleted. The configuration is written in a
+     * pretty-printed format.
      *
-     * @param config The configuration object to be saved. If null, the file is deleted.
-     * @param configFile The file to save the configuration to.
-     * @throws IOException If an error occurs while saving the configuration or deleting
-     *         the file.
+     * @param config
+     *            The configuration object to be saved. If null, the file is
+     *            deleted.
+     * @param configFile
+     *            The file to save the configuration to.
+     * @throws IOException
+     *             If an error occurs while saving the configuration or deleting
+     *             the file.
      */
-    public static void saveConfig(Filters config, File configFile) throws IOException {
+    public static void saveConfig(@Nullable Filters config, File configFile) throws IOException {
         if (config == null) {
             FileUtils.deleteQuietly(configFile);
             return;
         }
         try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
@@ -533,23 +554,30 @@ public class FilterMaster {
      * Return current system time in the specified date format.
      *
      * @param dateFormat
-     *            Date format for java.text.SimpleDateFormat.
+     *            Date format pattern for
+     *            {@link java.time.format.DateTimeFormatter}.
      */
     public static String now(String dateFormat) {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        return sdf.format(cal.getTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat, Locale.getDefault());
+        return formatter.format(ZonedDateTime.now(ZoneId.systemDefault()));
     }
 
     /**
      * Determines the target file path for a given source file path.
      *
-     * @param sourceDir the root directory of the source file
-     * @param srcRelPath the relative path of the source file within the source directory
-     * @param fc the filter context containing relevant translation parameters
+     * @param sourceDir
+     *            the root directory of the source file
+     * @param srcRelPath
+     *            the relative path of the source file within the source
+     *            directory
+     * @param fc
+     *            the filter context containing relevant translation parameters
      * @return the target file path corresponding to the source file
-     * @throws TranslationException if an error occurs during the translation processing
-     * @throws IllegalArgumentException if the specified sourceDir and srcRelPath do not point to an existing file
+     * @throws TranslationException
+     *             if an error occurs during the translation processing
+     * @throws IllegalArgumentException
+     *             if the specified sourceDir and srcRelPath do not point to an
+     *             existing file
      */
     public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc)
             throws TranslationException {
@@ -570,13 +598,14 @@ public class FilterMaster {
     }
 
     private static String getTargetForSource(String srcRelPath, LookupInformation lookup,
-            Language targetLang) {
+            @Nullable Language targetLang) {
         File srcRelFile = new File(srcRelPath);
         return new File(srcRelFile.getParent(),
                 constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), srcRelFile.getName(),
                         lookup.outFilesInfo.getTargetFilenamePattern(), targetLang,
                         lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
-                        lookup.filterObject.getFileFormatName())).getPath();
+                        lookup.filterObject.getFileFormatName()))
+                .getPath();
     }
 
     /**
@@ -631,9 +660,10 @@ public class FilterMaster {
      * @return The changed filename
      */
     private static String constructTargetFilename(String sourceMask, String filename, String pattern,
-            Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
+                                                  @Nullable Language targetLang, @Nullable String sourceEncoding,
+                                                  @Nullable String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
-        int dot = 0;
+        int dot;
         if (lastStarPos >= 0) {
             // bugfix #1204740
             // so where's the dot next to the star
@@ -659,13 +689,15 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_NAMEONLY, nameOnly);
         res = res.replace(AbstractFilter.TFP_EXTENSION, extension);
 
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
-        res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
-        // Replace also old variable spelling
-        res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
-        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        if (targetLang != null) {
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang.getLocaleCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
+            res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
+            // Replace also old variable spelling
+            res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
+            res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        }
         //
         // System generation time
         //
@@ -726,16 +758,16 @@ public class FilterMaster {
         java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
         if (sourceMatcher.find()) {
             for (int i = 1; i <= sourceMatcher.groupCount(); i++) {
-                res = res.replaceAll("\\$\\{" + i + "\\}", sourceMatcher.group(i));
+                res = res.replaceAll("\\$\\{" + i + "}", sourceMatcher.group(i));
             }
         }
 
-        String[] splitName = filename.split("\\.");
+        String[] splitName = StringUtils.split(filename, "\\.");
         StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
         StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {
-            res = res.replaceAll("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
-            res = res.replaceAll("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
+            res = res.replaceAll("\\$\\{nameOnly-" + i + "}", nameOnlyBuf.toString());
+            res = res.replaceAll("\\$\\{extension-" + i + "}", extensionBuf.toString());
             if (i + 1 < splitName.length) {
                 nameOnlyBuf.append(".").append(splitName[i + 1]);
                 extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
@@ -846,7 +878,7 @@ public class FilterMaster {
     }
 
     /**
-     * Convert options to xml from map.
+     * Convert options to XML from a map.
      *
      * @param f
      *            filter
@@ -856,9 +888,6 @@ public class FilterMaster {
     public static void setOptions(Filter f, Map<String, String> newOptions) {
         f.getOption().clear();
         for (Map.Entry<String, String> en : newOptions.entrySet()) {
-            if (en.getKey() == null) {
-                continue;
-            }
             Filter.Option opt = new Filter.Option();
             opt.setName(en.getKey());
             opt.setValue(en.getValue());

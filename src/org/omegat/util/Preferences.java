@@ -40,7 +40,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
 
@@ -89,6 +91,9 @@ public final class Preferences {
     public static final String TF_SRC_FONT_SIZE = "source_font_size";
     public static final int TF_FONT_SIZE_DEFAULT = 14;
 
+    /** Preference flag to suppress First Time Configuration wizard in the future. */
+    public static final String FIRST_TIME_WIZARD_DONE = "first_time_wizard_done";
+
     /** Whether to automatically perform MT requests on entering segment */
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
     /**
@@ -114,12 +119,24 @@ public final class Preferences {
     public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
     public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
+    /**
+     * A constant string identifier for the tokenizer configuration that enables
+     * full stemming functionality. This configuration applies to enable
+     * snawball stemmer in OmegaT tokenizers when supported. In default, light
+     * stemmer mode will be used.
+     */
+    public static final String MATCHES_STEMMING_FULL = "matches_stemming_full";
+    public static final String GLOSSARY_STEMMING_FULL = "glossary_stemming_full";
+
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position
     public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
+    // Shows translation progress in the Project Files window
+    public static final String PROJECT_FILES_SHOW_PROGRESS = "project_files_show_translation_progress";
+    public static final boolean PROJECT_FILES_SHOW_PROGRESS_DEFAULT = false;
     // Determines whether or not the Project Files window is shown on project
     // load.
     // Currently not exposed in UI.
@@ -195,7 +212,7 @@ public final class Preferences {
     public static final String MARK_PARA_DELIMITATIONS = "mark_para_delimitation";
     public static final String MARK_PARA_TEXT = "mark_para_delimitation_text";
     /** Default paragraph delimitation indicator */
-    public static final String MARK_PARA_TEXT_DEFAULT = "\u2014 \u00b6 \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014";
+    public static final String MARK_PARA_TEXT_DEFAULT = "— ¶ —————————————————————";
 
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";
@@ -233,8 +250,10 @@ public final class Preferences {
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
 
-    /** Editor Option:  When activated, a single mouse click activates a segment
-     *  in addition to the usual double click)  */
+    /**
+     * Editor Option: When activated, a single mouse click activates a segment
+     * in addition to the usual double click)
+     */
     public static final String SINGLE_CLICK_SEGMENT_ACTIVATION = "wf_singleClickSegmentActivation";
 
     /**
@@ -423,7 +442,6 @@ public final class Preferences {
     /**
      * Prefix for keys used to record default tokenizer behavior settings.
      * Prepend to the full name of the tokenizer, e.g.
-     *
      * <code>TOK_BEHAVIOR_PREFIX + tokenizer.class.getName()</code> to obtain
      * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
      */
@@ -437,7 +455,6 @@ public final class Preferences {
     public static final boolean AC_GLOSSARY_ENABLED_DEFAULT = true;
     public static final String AC_GLOSSARY_SHOW_SOURCE = "ac_glossary_show_source";
     public static final String AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE = "ac_glossary_show_target_before_source";
-    public static final String AC_GLOSSARY_SORT_BY_SOURCE = "ac_glossary_sort_by_source";
     public static final String AC_GLOSSARY_SORT_BY_LENGTH = "ac_glossary_sort_by_length";
     public static final String AC_GLOSSARY_SORT_ALPHABETICALLY = "ac_glossary_sort_alphabetically";
     public static final String AC_GLOSSARY_CAPITALIZE = "ac_glossary_capitalize";
@@ -527,7 +544,7 @@ public final class Preferences {
      *            class
      * @return preference defaultValue as a string
      */
-    public static String getPreference(String key) {
+    public static @Nullable String getPreference(String key) {
         return preferences.getPreference(key);
     }
 
@@ -662,8 +679,6 @@ public final class Preferences {
      * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
      * value returned by {@code PropertyChangeEvent#getOldValue()} will be the
      * String equivalent for storing in XML.
-     *
-     * @param listener
      */
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
         PROP_CHANGE_SUPPORT.addPropertyChangeListener(listener);
@@ -675,8 +690,6 @@ public final class Preferences {
      * Note: The value returned by {@code getNewValue()} will be of the
      * "correct" type (Integer, Boolean, Enum, etc.) but the value returned by
      * {@code getOldValue()} will be the String equivalent for storing in XML.
-     *
-     * @param listener
      */
     public static void addPropertyChangeListener(String property, PropertyChangeListener listener) {
         PROP_CHANGE_SUPPORT.addPropertyChangeListener(property, listener);
@@ -690,7 +703,7 @@ public final class Preferences {
         try {
             FilterMaster.saveConfig(filters, filtersFile);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
         // Must manually check for equality (see FiltersUtil.filtersEqual()
         // Javadoc)
@@ -709,10 +722,10 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
-                                        // directory
+            // save to segmentation.srx in the given directory
+            SRXManager.saveToSrx(srx, srxDir);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
         PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
     }
@@ -723,6 +736,17 @@ public final class Preferences {
 
     public static void save() {
         preferences.save();
+    }
+
+    /**
+     * Returns true if this looks like the first run (no existing omegat.prefs when initialized).
+     * If the underlying persistence does not provide the information, returns false.
+     */
+    public static boolean isFirstRun() {
+        if (preferences instanceof PreferencesImpl) {
+            return preferences.isFirstRun();
+        }
+        return false;
     }
 
     public interface IPreferences {
@@ -745,6 +769,10 @@ public final class Preferences {
         Object setPreference(String key, Object value);
 
         void save();
+
+        default boolean isFirstRun() {
+            return false;
+        }
     }
 
     /**
@@ -760,7 +788,7 @@ public final class Preferences {
      * <p>
      * When the preferences system is required but actual user preferences
      * shouldn't be loaded or altered (testing scenarios), use
-     * {@link org.omegat.util.TestPreferencesInitializer} methods or be sure to
+     * org.omegat.util.TestPreferencesInitializer methods or be sure to
      * set the config dir with {@link RuntimePreferences#setConfigDir(String)}
      * before calling this method.
      */
@@ -801,7 +829,7 @@ public final class Preferences {
         didInitSegmentation = true;
 
         File srxDir = new File(StaticUtils.getConfigDir());
-        SRX s = SRX.loadFromDir(srxDir); // may read SRX or CONF
+        SRX s = SRXManager.loadFromDir(srxDir); // may read SRX or CONF
         if (s == null) {
             s = SRX.getDefault();
         }

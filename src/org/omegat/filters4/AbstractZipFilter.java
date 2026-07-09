@@ -149,8 +149,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
         Comparator<ZipEntry> entryComparator = getEntryComparator();
 
         try (ZipFile zipFile = new ZipFile(inFile);
-             ZipOutputStream zipOutputStream = createZipOutputStream(outFile);
-             BufferedWriter writer = createWriter(zipOutputStream)) {
+                ZipOutputStream zipOutputStream = createZipOutputStream(outFile);
+                BufferedWriter writer = createWriter(zipOutputStream)) {
 
             Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
 
@@ -158,8 +158,10 @@ public abstract class AbstractZipFilter extends AbstractFilter {
                 ZipEntry zipEntry = zipEntries.nextElement();
 
                 if (mustTranslateInternalFile(zipEntry, zipOutputStream != null, fc)) {
-                    processTranslatableEntry(zipFile, zipOutputStream, writer, fc, translatableEntries, entryComparator, zipEntry);
-                } else if (!mustDeleteInternalFile(zipEntry, zipOutputStream != null, fc) && zipOutputStream != null) {
+                    processTranslatableEntry(zipFile, zipOutputStream, writer, fc, translatableEntries,
+                            entryComparator, zipEntry);
+                } else if (!mustDeleteInternalFile(zipEntry, zipOutputStream != null, fc)
+                        && zipOutputStream != null) {
                     copyUnchangedEntry(zipFile, zipOutputStream, zipEntry);
                 }
             }
@@ -171,32 +173,37 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     /**
      * Creates a ZipOutputStream for the specified output file.
      *
-     * @param outFile the file to which the ZIP output will be written;
-     *                passing null will result in a null return.
-     * @return a ZipOutputStream for writing to the specified file,
-     *         or null if the outFile is null.
-     * @throws IOException if an I/O error occurs while creating the output stream.
+     * @param outFile
+     *            the file to which the ZIP output will be written; passing null
+     *            will result in a null return.
+     * @return a ZipOutputStream for writing to the specified file, or null if
+     *         the outFile is null.
+     * @throws IOException
+     *             if an I/O error occurs while creating the output stream.
      */
     private ZipOutputStream createZipOutputStream(File outFile) throws IOException {
         return outFile == null ? null : new ZipOutputStream(new FileOutputStream(outFile));
     }
 
     /**
-     * Creates a BufferedWriter for the provided ZipOutputStream, using the specified
-     * internal encoding. If the ZipOutputStream is null, the method returns null.
+     * Creates a BufferedWriter for the provided ZipOutputStream, using the
+     * specified internal encoding. If the ZipOutputStream is null, the method
+     * returns null.
      *
-     * @param zipOutputStream the ZipOutputStream for which the BufferedWriter will be created;
-     *                        passing null will result in a null return.
-     * @return a BufferedWriter wrapping the given ZipOutputStream, or null if the ZipOutputStream is null.
+     * @param zipOutputStream
+     *            the ZipOutputStream for which the BufferedWriter will be
+     *            created; passing null will result in a null return.
+     * @return a BufferedWriter wrapping the given ZipOutputStream, or null if
+     *         the ZipOutputStream is null.
      */
     private BufferedWriter createWriter(ZipOutputStream zipOutputStream) {
-        return (zipOutputStream == null) ? null : new BufferedWriter(new OutputStreamWriter(zipOutputStream,
-                internalEncoding));
+        return (zipOutputStream == null) ? null
+                : new BufferedWriter(new OutputStreamWriter(zipOutputStream, internalEncoding));
     }
 
-    private void processTranslatableEntry(ZipFile zipFile, ZipOutputStream zipOutputStream, BufferedWriter writer,
-                                          FilterContext filterContext, List<ZipEntry> translatableEntries,
-                                          Comparator<ZipEntry> entryComparator, ZipEntry zipEntry) {
+    private void processTranslatableEntry(ZipFile zipFile, ZipOutputStream zipOutputStream,
+            BufferedWriter writer, FilterContext filterContext, List<ZipEntry> translatableEntries,
+            Comparator<ZipEntry> entryComparator, ZipEntry zipEntry) {
         if (entryComparator == null || zipOutputStream != null) {
             translateEntry(zipFile, zipOutputStream, writer, filterContext, zipEntry);
         } else {
@@ -204,7 +211,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
         }
     }
 
-    private void copyUnchangedEntry(ZipFile zipFile, ZipOutputStream zipOutputStream, ZipEntry zipEntry) throws IOException {
+    private void copyUnchangedEntry(ZipFile zipFile, ZipOutputStream zipOutputStream, ZipEntry zipEntry)
+            throws IOException {
         ZipEntry outputEntry = new ZipEntry(zipEntry.getName());
         zipOutputStream.putNextEntry(outputEntry);
         org.apache.commons.io.IOUtils.copy(zipFile.getInputStream(zipEntry), zipOutputStream);
@@ -212,8 +220,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     }
 
     private void finalizeProcessing(ZipFile zipFile, ZipOutputStream zipOutputStream, BufferedWriter writer,
-                                    FilterContext filterContext, List<ZipEntry> translatableEntries,
-                                    Comparator<ZipEntry> entryComparator) {
+            FilterContext filterContext, List<ZipEntry> translatableEntries,
+            Comparator<ZipEntry> entryComparator) {
         if (entryComparator != null) {
             translatableEntries.sort(entryComparator);
         }
@@ -239,7 +247,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
         }
     }
 
-    private void translateEntry(ZipFile zf, ZipOutputStream zipout, BufferedWriter writer, FilterContext fc, ZipEntry ze) {
+    private void translateEntry(ZipFile zf, ZipOutputStream zipout, BufferedWriter writer, FilterContext fc,
+            ZipEntry ze) {
         try (XMLReader xReader = new XMLReader(zf.getInputStream(ze))) {
             AbstractXmlFilter xmlfilter = getFilter(ze);
             try (BufferedReader reader = new BufferedReader(xReader)) {
@@ -263,7 +272,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     /**
      * Read the content of the entry from the ZipInputStream as a string.
      *
-     * @param zipInputStream The ZipInputStream to read from.
+     * @param zipInputStream
+     *            The ZipInputStream to read from.
      * @return The content of the input stream as a string.
      */
     public static String readZipEntryContent(ZipInputStream zipInputStream) throws IOException {

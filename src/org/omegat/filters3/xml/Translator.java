@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.data.ProtectedPart;
@@ -50,7 +51,7 @@ public interface Translator {
      * The method the Handler would call to pass translatable content to OmegaT
      * core and receive translation.
      */
-    String translate(String s, List<ProtectedPart> protectedParts);
+    String translate(String s, @Nullable List<ProtectedPart> protectedParts);
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
@@ -67,8 +68,8 @@ public interface Translator {
      * @throws IOException
      *             If I/O Error occurs upon reader creation.
      */
-    BufferedReader createReader(File inFile, String inEncoding) throws UnsupportedEncodingException,
-            IOException;
+    BufferedReader createReader(File inFile, String inEncoding)
+            throws UnsupportedEncodingException, IOException;
 
     /**
      * Creates a writer of the translated file.
@@ -85,8 +86,8 @@ public interface Translator {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
-    BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
-            IOException;
+    BufferedWriter createWriter(@Nullable File outFile, String outEncoding)
+            throws UnsupportedEncodingException, IOException;
 
     /**
      * Start tag translation.
@@ -96,7 +97,7 @@ public interface Translator {
      * @param atts
      *            attributes
      */
-    void tagStart(String path, Attributes atts);
+    void tagStart(String path, @Nullable Attributes atts);
 
     /**
      * Finish tag translation.
@@ -121,7 +122,9 @@ public interface Translator {
      */
     boolean isInIgnored();
 
+    @Nullable
     Language getTargetLanguage();
 
+    @Nullable
     Language getSourceLanguage();
 }

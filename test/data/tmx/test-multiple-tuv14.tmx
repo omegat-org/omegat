@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="4.2.1_0_dev" segtype="sentence" srclang="EN-US"/>
+  <body>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Hello World!</seg>
+      </tuv>
+      <tuv xml:lang="ES">
+        <seg>¡Hola Mundo!</seg>
+      </tuv>
+      <tuv xml:lang="ES-AR">
+        <seg>(es_AR) ¡Hola Mundo!</seg>
+      </tuv>
+      <tuv xml:lang="ES-BO">
+        <seg>(es_BO) ¡Hola Mundo!</seg>
+      </tuv>
+      
+      <tuv xml:lang="FR-CA">
+        <seg>fr_CA Bonjour le monde !</seg>
+      </tuv>
+      <tuv xml:lang="FR-CA">
+        <seg>fr_CA Bonjour tout le monde !</seg>
+      </tuv>
+      <tuv xml:lang="FR">
+        <seg>fr Bonjour tout le monde !</seg>
+      </tuv>
+      <tuv xml:lang="DE">
+        <seg>Hallo Welt!</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Hello Worlds.</seg>
+      </tuv>
+      <tuv xml:lang="FR-FR">
+        <seg>fr_FR 2 Bonjour les mondes.</seg>
+      </tuv>
+      <tuv xml:lang="FR">
+        <seg>fr 2 Bonjour les mondes.</seg>
+      </tuv>
+    </tu>
+
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This is an english sentence.</seg>
+      </tuv>
+      <tuv xml:lang="DE">
+        <seg>Es ist ein Satz in Englisch.</seg>
+      </tuv>
+      <tuv xml:lang="ES">
+        <seg>Es una oración en inglés.</seg>
+      </tuv>
+    </tu>
+
+
+  </body>
+</tmx>

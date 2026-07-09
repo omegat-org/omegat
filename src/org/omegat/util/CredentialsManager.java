@@ -264,8 +264,9 @@ public final class CredentialsManager {
             return true;
         case CANCEL:
             return false;
+        default:
+            throw new IllegalArgumentException("Unknown response: " + result.responseType);
         }
-        throw new IllegalArgumentException("Unknown response: " + result.responseType);
     }
 
     private boolean onDecryptionFailed() {

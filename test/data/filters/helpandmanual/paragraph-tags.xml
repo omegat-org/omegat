@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default">
+  <title>Title Text</title>
+  <body>
+    <caption>Caption Text</caption>
+    <config-value>Config Value Text</config-value>
+    <variable>Variable Text</variable>
+    <para><text>Para Text</text></para>
+    <keyword>Keyword Text</keyword>
+    <list type="ul"><li>List Item Text</li></list>
+  </body>
+</topic>

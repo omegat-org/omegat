@@ -25,7 +25,7 @@
 
 package org.omegat.filters2;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -60,7 +60,8 @@ public class FilterContext {
         this.targetTokenizerClass = props.getTargetTokenizer();
     }
 
-    public FilterContext(@Nullable Language sourceLang, @Nullable Language targetLang, boolean sentenceSegmentingEnabled) {
+    public FilterContext(@Nullable Language sourceLang, @Nullable Language targetLang,
+            boolean sentenceSegmentingEnabled) {
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -107,8 +108,8 @@ public class FilterContext {
         return isRemoveAllTags;
     }
 
-    public FilterContext setRemoveAllTags(boolean isRemoveAllTags) {
-        this.isRemoveAllTags = isRemoveAllTags;
+    public FilterContext setRemoveAllTags(boolean beRemoveAllTags) {
+        isRemoveAllTags = beRemoveAllTags;
         return this;
     }
 

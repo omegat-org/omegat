@@ -60,6 +60,10 @@ public class TmxSegmentationTest {
                     public boolean existEntryInProject(EntryKey key) {
                         return true;
                     }
+
+                    public void clear() {
+                        // do nothing
+                    }
                 });
         tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
                 new File("test/data/tmx/resegmenting.tmx"), Core.getSegmenter());

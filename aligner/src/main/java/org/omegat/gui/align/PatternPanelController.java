@@ -29,12 +29,11 @@ import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -44,6 +43,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -54,8 +54,8 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class PatternPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private final Pattern initialPattern;
-    private Pattern result;
+    private final @Nullable Pattern initialPattern;
+    private @Nullable Pattern result;
 
     /**
      * Create the controller with the initial pattern.
@@ -63,18 +63,19 @@ public class PatternPanelController {
      * @param pattern
      *            The pattern to be shown in the editing area
      */
-    public PatternPanelController(Pattern pattern) {
+    public PatternPanelController(@Nullable Pattern pattern) {
         this.initialPattern = pattern;
     }
 
     /**
-     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * Show the dialog. The dialog is modal, so this method will block until
+     * complete.
      *
      * @param parent
      *            The parent window of the dialog
      * @return The result of editing
      */
-    public Pattern show(Window parent) {
+    public Pattern show(@Nullable Window parent) {
         final JDialog dialog = new JDialog(parent, BUNDLE.getString("ALIGNER_DIALOG_PATTERN"),
                 ModalityType.DOCUMENT_MODAL);
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -91,18 +92,8 @@ public class PatternPanelController {
 
         StaticUIUtils.makeCaretAlwaysVisible(panel.editorPane);
 
-        panel.okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-            }
-        });
-        panel.cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doCancel(dialog);
-            }
-        });
+        panel.okButton.addActionListener(e -> dialog.dispose());
+        panel.cancelButton.addActionListener(e -> doCancel(dialog));
 
         panel.editorPane.addKeyListener(new KeyAdapter() {
             @Override
@@ -119,10 +110,12 @@ public class PatternPanelController {
             public void removeUpdate(DocumentEvent e) {
                 updatePattern(panel);
             }
+
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updatePattern(panel);
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
                 updatePattern(panel);
@@ -139,7 +132,7 @@ public class PatternPanelController {
         dialog.pack();
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
-        return result;
+        return Objects.requireNonNull(result);
     }
 
     private void updatePattern(EditingPanel panel) {

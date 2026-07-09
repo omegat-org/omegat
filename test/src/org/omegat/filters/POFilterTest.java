@@ -31,19 +31,25 @@ import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.po.PoFilter;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 public class POFilterTest extends TestFilterBase {
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testParse() throws Exception {
@@ -187,6 +193,28 @@ public class POFilterTest extends TestFilterBase {
         options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, "true");
         translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
+    }
+
+    @Test
+    public void testMultiLines() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multilines.po";
+        Map<String, String> options = new HashMap<>();
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("Multiline\nmessage ID with linefeed character.", null, "", null, null,
+                "References:\nmultiple_lines\n" + "\n");
+        checkMulti("Long context in only one line.", null,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+                        "Excepteur sint occaecat cupidatat non proident",
+                null, null, "References:\none_line_only_with_ctx\n" + "\n");
+        checkMulti("Long context in several lines.", null,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\\n" +
+                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\\n" +
+                        "Excepteur sint occaecat cupidatat non proident",
+                null, null, "References:\nmultiple_lines_with_ctx\n" + "\n");
+        checkMultiEnd();
     }
 
     @Override

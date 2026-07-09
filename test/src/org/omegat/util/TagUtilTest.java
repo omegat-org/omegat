@@ -27,6 +27,7 @@
 package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,8 +49,6 @@ public class TagUtilTest {
 
     /**
      * Test of buildTagList method, of class org.omegat.util.StaticUtils.
-     *
-     * @throws Exception
      */
     @Test
     public void testBuildTagList() throws Exception {
@@ -57,13 +56,14 @@ public class TagUtilTest {
 
         String str = "Tag <test> case <b0>one</b0>.<b1>";
         List<ProtectedPart> pps = TagUtil.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
-        List<Tag> tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts());
+        List<Tag> tagList = TagUtil.buildTagList(str,
+                new SourceTextEntry(null, 0, null, null, pps).getProtectedParts());
 
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>"), new Tag(29, "<b1>")), tagList);
+        assertEquals("Wrong tags found in '" + str + "'",
+                Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>"), new Tag(29, "<b1>")), tagList);
 
-        tagList.clear();
         ProtectedPart p;
-        List<ProtectedPart> pp = new ArrayList<ProtectedPart>();
+        List<ProtectedPart> pp = new ArrayList<>();
         p = new ProtectedPart();
         p.setTextInSourceSegment("<b0>");
         pp.add(p);
@@ -71,16 +71,17 @@ public class TagUtilTest {
         p.setTextInSourceSegment("</b0>");
         pp.add(p);
         tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts());
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>")), tagList);
+        assertEquals("Wrong tags found in '" + str + "'",
+                Arrays.asList(new Tag(16, "<b0>"), new Tag(23, "</b0>")), tagList);
 
         str = "Tag <test>case</test>.";
-        tagList.clear();
         pp.clear();
         p = new ProtectedPart();
         p.setTextInSourceSegment("<test>case</test>");
         pp.add(p);
         tagList = TagUtil.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts());
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList(new Tag(4, "<test>case</test>")), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", List.of(new Tag(4, "<test>case</test>")),
+                tagList);
     }
 
     @Test
@@ -117,11 +118,11 @@ public class TagUtilTest {
         assertEquals("</x0>", new Tag(-1, "<x0>").getPairedTag());
         assertEquals("</x10>", new Tag(-1, "<x10>").getPairedTag());
         assertEquals("<x0>", new Tag(-1, "</x0>").getPairedTag());
-        assertEquals(null, new Tag(-1, "<x0/>").getPairedTag());
-        assertEquals(null, new Tag(-1, "<x>").getPairedTag());
-        assertEquals(null, new Tag(-1, "<x/>").getPairedTag());
-        assertEquals(null, new Tag(-1, "</x>").getPairedTag());
-        assertEquals(null, new Tag(-1, "</x0/>").getPairedTag());
-        assertEquals(null, new Tag(-1, "foo").getPairedTag());
+        assertNull(new Tag(-1, "<x0/>").getPairedTag());
+        assertNull(new Tag(-1, "<x>").getPairedTag());
+        assertNull(new Tag(-1, "<x/>").getPairedTag());
+        assertNull(new Tag(-1, "</x>").getPairedTag());
+        assertNull(new Tag(-1, "</x0/>").getPairedTag());
+        assertNull(new Tag(-1, "foo").getPairedTag());
     }
 }

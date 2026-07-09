@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 
 /**
  * Utilities for string processing.
@@ -399,7 +399,7 @@ public final class StringUtil {
      * Returns first not null object from list, or null if all values is null.
      */
     @SafeVarargs
-    public static <T> T nvl(T... values) {
+    public static <T> T nvl(@Nullable T... values) {
         for (T val : values) {
             if (val != null) {
                 return val;
@@ -686,7 +686,7 @@ public final class StringUtil {
      * Compares two strings for equality. Handles nulls: if both strings are
      * nulls they are considered equal.
      */
-    public static boolean equal(String one, String two) {
+    public static boolean equal(@Nullable String one, @Nullable String two) {
         return (one == null && two == null) || (one != null && one.equals(two));
     }
 
@@ -883,7 +883,7 @@ public final class StringUtil {
      * {@link Character#isWhitespace(int)}, so it does not strip the extra
      * non-breaking whitespace included in {@link #isWhiteSpace(int)}.
      *
-     * @param text
+     * @param text the text to strip
      * @return text with trailing whitespace removed
      */
     public static String rstrip(@NotNull String text) {
@@ -997,7 +997,7 @@ public final class StringUtil {
                 return str;
             }
         }
-        return str.substring(start + Character.charCount(separator), str.length());
+        return str.substring(start + Character.charCount(separator));
     }
 
     /**
@@ -1041,4 +1041,25 @@ public final class StringUtil {
         return sb.toString();
     }
 
+    public static String unescapeLinefeed(String s) {
+        StringBuilder sb = new StringBuilder(s.length());
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '\\') {
+                if (++i >= s.length()) {
+                    sb.append('\\');
+                }
+                char next = s.charAt(i);
+                switch (next) {
+                case '\\':
+                    sb.append('\\');
+                    break;
+                case 'n':
+                    sb.append('\n');
+                    break;
+                }
+            }
+        }
+        return sb.toString();
+    }
 }

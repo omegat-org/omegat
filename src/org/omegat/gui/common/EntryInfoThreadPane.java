@@ -25,6 +25,7 @@
 
 package org.omegat.gui.common;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -40,7 +41,7 @@ import org.omegat.core.events.IEntryEventListener;
 @SuppressWarnings("serial")
 public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements IEntryEventListener {
 
-    protected volatile SourceTextEntry currentlyProcessedEntry;
+    protected volatile @Nullable SourceTextEntry currentlyProcessedEntry;
 
     public EntryInfoThreadPane(final boolean useApplicationFont) {
         super(useApplicationFont);

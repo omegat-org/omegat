@@ -35,8 +35,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,22 +43,14 @@ import javax.swing.border.Border;
 
 import org.openide.awt.Mnemonics;
 
-import org.omegat.core.Core;
-import org.omegat.gui.editor.EditorController;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 
 @SuppressWarnings("serial")
 public class MainWindowStatusBar extends JPanel {
-    public static final String STATUS_BAR_NAME = "main_window_status_bar";
-    public static final String STATUS_LABEL_NAME = "main_window_status_label";
-    public static final String STATUS_PROGRESS_LABEL_NAME = "main_window_status_progress_label";
-    public static final String LENGTH_LABEL_NAME = "main_window_status_length_label";
-    public static final String LOCK_INSERT_LABEL_NAME = "main_window_status_lock_insert_label";
-    private final JLabel statusLabel = new JLabel();
-    private final JLabel progressLabel = new JLabel();
-    private final JLabel lengthLabel = new JLabel();
-    private final JLabel lockInsertLabel = new JLabel();
+    final JLabel statusLabel = new JLabel();
+    final JLabel progressLabel = new JLabel();
+    final JLabel lengthLabel = new JLabel();
+    final JLabel lockInsertLabel = new JLabel();
 
     public MainWindowStatusBar() {
         super();
@@ -79,51 +69,7 @@ public class MainWindowStatusBar extends JPanel {
         float smallFontSize = defaultFont.getSize() * 0.85f;
         statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
-
-        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                StatusBarMode.DEFAULT);
-
-        String statusText;
-        String tooltipText;
-        if (progressMode == StatusBarMode.PERCENTAGE) {
-            statusText = OStrings.getProgressBarDefaultPrecentageText();
-            tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP_PERCENTAGE");
-        } else {
-            statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-            tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP");
-        }
-        Mnemonics.setLocalizedText(progressLabel, statusText);
-        progressLabel.setToolTipText(tooltipText);
-
         progressLabel.setBorder(border);
-        progressLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                StatusBarMode[] modes = StatusBarMode.values();
-                StatusBarMode progressMode = Preferences
-                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
-                progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
-
-                Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
-
-                String statusText;
-                String tooltipText;
-                if (progressMode == StatusBarMode.PERCENTAGE) {
-                    statusText = OStrings.getProgressBarDefaultPrecentageText();
-                    tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP_PERCENTAGE");
-                } else {
-                    statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-                    tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP");
-                }
-
-                if (Core.getProject().isProjectLoaded()) {
-                    ((EditorController) Core.getEditor()).showStat();
-                } else {
-                    Core.getMainWindow().showProgressMessage(statusText);
-                }
-                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(tooltipText);
-            }
-        });
 
         Mnemonics.setLocalizedText(lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
         lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
@@ -177,4 +123,12 @@ public class MainWindowStatusBar extends JPanel {
     public enum StatusBarMode {
         DEFAULT, PERCENTAGE,
     }
+
+    // Give names to the components in the status bar.
+    // Visible only for debug
+    public static final String STATUS_BAR_NAME = "main_window_status_bar";
+    public static final String STATUS_LABEL_NAME = "main_window_status_label";
+    public static final String STATUS_PROGRESS_LABEL_NAME = "main_window_status_progress_label";
+    public static final String LENGTH_LABEL_NAME = "main_window_status_length_label";
+    public static final String LOCK_INSERT_LABEL_NAME = "main_window_status_lock_insert_label";
 }

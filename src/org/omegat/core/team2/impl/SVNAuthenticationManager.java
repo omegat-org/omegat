@@ -29,6 +29,7 @@ import java.io.Console;
 
 import javax.net.ssl.TrustManager;
 
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNErrorCode;
@@ -69,8 +70,8 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
-    private final String predefinedUser;
-    private final String predefinedPass;
+    private final @Nullable String predefinedUser;
+    private final @Nullable String predefinedPass;
 
     @SuppressWarnings("unused")
     public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
@@ -78,7 +79,7 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         this(predefinedUser, predefinedPass);
     }
 
-    public SVNAuthenticationManager(String predefinedUser, String predefinedPass) {
+    public SVNAuthenticationManager(@Nullable String predefinedUser, @Nullable String predefinedPass) {
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
     }

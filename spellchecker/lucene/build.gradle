@@ -1,0 +1,24 @@
+plugins {
+    id 'org.omegat.module'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.bundles.lucene)
+    }
+    compileOnly(libs.jspecify)
+    testImplementation(libs.junit4)
+    testImplementation(libs.assertj)
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.de)
+}
+
+test {
+    dependsOn project(':language-modules:de').tasks.withType(Jar)
+    dependsOn project(':language-modules:fr').tasks.withType(Jar)
+}

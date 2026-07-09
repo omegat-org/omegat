@@ -1,12 +1,12 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir, includes: ['**/language-ast-*.jar'])
     } else {
         compileOnly(libs.commons.io)
@@ -15,7 +15,7 @@ dependencies {
             exclude module: 'languagetool-core'
         }
         compileOnly(libs.morfologik.stemming)
-        implementation(libs.jetbrains.annotations)
+        compileOnly(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
@@ -24,8 +24,6 @@ dependencies {
     testImplementation project(":spellchecker:morfologik")
     testImplementation(libs.commons.io)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

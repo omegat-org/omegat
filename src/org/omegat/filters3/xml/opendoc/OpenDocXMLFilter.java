@@ -43,10 +43,12 @@ public class OpenDocXMLFilter extends XMLFilter {
         super(new OpenDocDialect());
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()), };
     }
 
+    @Override
     public String getFileFormatName() {
         throw new RuntimeException("Not implemented!");
     }

@@ -25,403 +25,175 @@
 
 package org.omegat.core.statistics;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import org.omegat.core.Core;
-import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.ExternalTMFactory;
-import org.omegat.core.data.ExternalTMX;
-import org.omegat.core.data.IProject;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.ProtectedPart;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.TestCore;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.IFilter;
-import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.po.PoFilter;
-import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.tokenizer.ITokenizer;
-import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.Preferences;
-import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.core.threads.CancellationToken;
+import org.omegat.core.threads.Completion;
 
-public class CalcMatchStatisticsTest {
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
-    private FilterMaster filterMaster;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-    /*
-     * Setup test project.
-     */
+/**
+ * Unit tests for the {@code CalcMatchStatistics} class.
+ * This class validates the functionality of calculating match statistics for
+ * translation memory segments. The tests assert correctness of match categories
+ * such as repetitions, exact matches, fuzzy matches, and no matches across
+ * multiple similarity thresholds.
+ *
+ * The following annotations and methods are notable:
+ *
+ * - {@code @Before}: Used for test-specific setup, ensuring the testing environment
+ *   is initialized and isolated.
+ * - {@code @BeforeClass}: Utilized for one-time setup before all tests are executed,
+ *   including temporary directory creation for testing purposes.
+ * - {@code @Test}: Defines a method as a test case, validating different
+ *   statistical metrics with assertions.
+ *
+ * Key functionality tested:
+ *
+ * - Ensures that statistics calculations such as repetitions, exact matches, and
+ *   fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds) produce
+ *   expected and valid results.
+ * - Asserts total metrics for match statistics to verify data aggregation is
+ *   correct and comprehensive.
+ * - Confirms integration of dependent components like segmenters and testing
+ *   consumers used for capturing results.
+ */
+public class CalcMatchStatisticsTest extends TestCore {
+
+    // On some CI environments, calculating statistics can occasionally be slow
+    // due to limited CPU resources and I/O.
+    private static Path tmpDir;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        tmpDir = Files.createTempDirectory("omegat");
+        assertTrue(tmpDir.toFile().isDirectory());
+    }
+
+    private TestingProject project;
+    private final Segmenter segmenter = new Segmenter(SRX.getDefault());
+
     @Before
-    public final void setUp() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
-        TestPreferencesInitializer.init();
-        filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
+    public void setUp() throws Exception {
+        project = new TestingProject(tmpDir);
+        TestCoreState.getInstance().setProject(project);
+    }
+
+    @Test
+    public void testStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcStandardStatistics(project, testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calc.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        // Total: 108 938 4894 5699
+        assertRowValues(result[0], "108", "938", "4894", "5699");
+        // Remaining: 108 938 4894 5699
+        assertRowValues(result[1], "108", "938", "4894", "5699");
+        // Unique: 97 848 4385 5116
+        assertRowValues(result[2], "97", "848", "4385", "5116");
+        // Unique Remaining: 97 848 4385 5116
+        assertRowValues(result[3], "97", "848", "4385", "5116");
+        result = allResult.get(1);
+        assertNotNull(result);
+        // test/data/filters/po/file-POFilter-match-stat-en-ca.po: 108 108 97 97 ....
+        assertRowValues(result[0], "108", "108", "97", "97");
+    }
+
+    @Test
+    public void testPerFileCalcMatchStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcPerFileMatchStatistics(project, segmenter, testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calc.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        assertStatistics(result, true);
+
+        result = allResult.get(1);
+        assertNotNull(result);
+        assertStatistics(result, false);
     }
 
     @Test
     public void testCalcMatchStatics() {
-        TestProject project = new TestProject(new ProjectPropertiesTest(), filterMaster);
-        IStatsConsumer callback = new TestStatsConsumer();
+        TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
-        calcMatchStatistics.start();
-        try {
-            calcMatchStatistics.join();
-        } catch (InterruptedException e) {
-            calcMatchStatistics.checkInterrupted();
-        }
-        String[][] result = calcMatchStatistics.getTable();
-        Assert.assertNotNull(result);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calcMatchStatistics.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
+        assertTrue(completion.isSuccess());
 
-        // assertions
-        // RowRepetitions 11 90 509 583
-        Assert.assertEquals("11", result[0][1]);
-        Assert.assertEquals("90", result[0][2]);
-        Assert.assertEquals("509", result[0][3]);
-        Assert.assertEquals("583", result[0][4]);
-        // RowExactMatch 0 0 0 0
-        Assert.assertEquals("0", result[1][1]);
-        Assert.assertEquals("0", result[1][2]);
-        Assert.assertEquals("0", result[1][3]);
-        Assert.assertEquals("0", result[1][4]);
-        // RowMatch95 84 712 3606 4225
-        Assert.assertEquals("84", result[2][1]);
-        Assert.assertEquals("712", result[2][2]);
-        Assert.assertEquals("3606", result[2][3]);
-        Assert.assertEquals("4225", result[2][4]);
-        // RowMatch85 0 0 0 0
-        Assert.assertEquals("0", result[3][1]);
-        Assert.assertEquals("0", result[3][2]);
-        Assert.assertEquals("0", result[3][3]);
-        Assert.assertEquals("0", result[3][4]);
-        // RowMatch75 3 32 234 256
-        Assert.assertEquals("3", result[4][1]);
-        Assert.assertEquals("32", result[4][2]);
-        Assert.assertEquals("234", result[4][3]);
-        Assert.assertEquals("256", result[4][4]);
-        // RowMatch50 4 61 304 361
-        Assert.assertEquals("4", result[5][1]);
-        Assert.assertEquals("61", result[5][2]);
-        Assert.assertEquals("304", result[5][3]);
-        Assert.assertEquals("361", result[5][4]);
-        // RowNoMatch 6 43 241 274
-        Assert.assertEquals("6", result[6][1]);
-        Assert.assertEquals("43", result[6][2]);
-        Assert.assertEquals("241", result[6][3]);
-        Assert.assertEquals("274", result[6][4]);
-        // Total 108 938 4894 5699
-        Assert.assertEquals("108", result[7][1]);
-        Assert.assertEquals("938", result[7][2]);
-        Assert.assertEquals("4894", result[7][3]);
-        Assert.assertEquals("5699", result[7][4]);
-
-        // change threshold
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
-        calcMatchStatistics.start();
-        try {
-            calcMatchStatistics.join();
-        } catch (InterruptedException e) {
-            calcMatchStatistics.checkInterrupted();
-        }
-        result = calcMatchStatistics.getTable();
-        Assert.assertNotNull(result);
-
-        // assertions
-        // RowRepetitions 11 90 509 583
-        Assert.assertEquals("11", result[0][1]);
-        Assert.assertEquals("90", result[0][2]);
-        Assert.assertEquals("509", result[0][3]);
-        Assert.assertEquals("583", result[0][4]);
-        // RowExactMatch 0 0 0 0
-        Assert.assertEquals("0", result[1][1]);
-        Assert.assertEquals("0", result[1][2]);
-        Assert.assertEquals("0", result[1][3]);
-        Assert.assertEquals("0", result[1][4]);
-        // RowMatch95 84 712 3606 4225
-        Assert.assertEquals("84", result[2][1]);
-        Assert.assertEquals("712", result[2][2]);
-        Assert.assertEquals("3606", result[2][3]);
-        Assert.assertEquals("4225", result[2][4]);
-        // RowMatch85 0 0 0 0
-        Assert.assertEquals("0", result[3][1]);
-        Assert.assertEquals("0", result[3][2]);
-        Assert.assertEquals("0", result[3][3]);
-        Assert.assertEquals("0", result[3][4]);
-        // RowMatch75 3 32 234 256
-        Assert.assertEquals("3", result[4][1]);
-        Assert.assertEquals("32", result[4][2]);
-        Assert.assertEquals("234", result[4][3]);
-        Assert.assertEquals("256", result[4][4]);
-        // RowMatch50 4 61 304 361
-        Assert.assertEquals("4", result[5][1]);
-        Assert.assertEquals("61", result[5][2]);
-        Assert.assertEquals("304", result[5][3]);
-        Assert.assertEquals("361", result[5][4]);
-        // RowNoMatch 6 43 241 274
-        Assert.assertEquals("6", result[6][1]);
-        Assert.assertEquals("43", result[6][2]);
-        Assert.assertEquals("241", result[6][3]);
-        Assert.assertEquals("274", result[6][4]);
-        // Total 108 938 4894 5699
-        Assert.assertEquals("108", result[7][1]);
-        Assert.assertEquals("938", result[7][2]);
-        Assert.assertEquals("4894", result[7][3]);
-        Assert.assertEquals("5699", result[7][4]);
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        assertEquals(3, result.length);
+        // Repetitions: 11 90 509 583
+        assertRowValues(result[0], "11", "90", "509", "583");
+        assertRowValues(result[1], "0", "0", "0", "0");
+        assertRowValues(result[2], "0", "0", "0", "0");
+        result = allResult.get(1);
+        assertNotNull(result);
+        assertStatistics(result, false);
     }
 
-    protected static class ProjectPropertiesTest extends ProjectProperties {
-        ProjectPropertiesTest() {
-            super();
-            setSourceLanguage(new Language("en"));
-            setSourceTokenizer(LuceneEnglishTokenizer.class);
-            setSentenceSegmentingEnabled(false);
-            setTargetLanguage(new Language("ca"));
-            setTargetTokenizer(DefaultTokenizer.class);
+    private void assertStatistics(String[][] result, boolean perFile) {
+        int rowIndex = 0;
+        // Repetitions: 11 90 509 583
+        assertRowValues(result[rowIndex++], "11", "90", "509", "583");
+        if (perFile) {
+            // Repetition from other files: 0 0 0 0
+            assertRowValues(result[rowIndex++], "0", "0", "0", "0");
         }
+        // Exact match: 0 0 0 0
+        assertRowValues(result[rowIndex++], "0", "0", "0", "0");
+        // 95%-100%: 84 712 3606 4225
+        assertRowValues(result[rowIndex++], "84", "712", "3606", "4225");
+        // 85%-94%: 0 0 0 0
+        assertRowValues(result[rowIndex++], "0", "0", "0", "0");
+        // 75%-84%: 3 32 234 256
+        assertRowValues(result[rowIndex++], "3", "32", "234", "256");
+        // 50%-74%: 4 61 304 361
+        assertRowValues(result[rowIndex++], "4", "61", "304", "361");
+        // No match: 6 43 241 274
+        assertRowValues(result[rowIndex++], "6", "43", "241", "274");
+        // Total: 108 938 4894 5699
+        assertRowValues(result[rowIndex], "108", "938", "4894", "5699");
     }
 
-    static class TestProject extends NotLoadedProject implements IProject {
-        private final ProjectProperties prop;
-
-        private final ProjectTMX projectTMX;
-        private Map<String, ExternalTMX> transMemories;
-        private final Segmenter segmenter;
-        private final FilterMaster filterMaster;
-
-        TestProject(ProjectProperties prop, FilterMaster filterMaster) {
-            super();
-            this.prop = prop;
-            this.filterMaster = filterMaster;
-            segmenter = new Segmenter(Preferences.getSRX());
-            projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
-                    Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
-        }
-
-        @Override
-        public ProjectProperties getProjectProperties() {
-            return prop;
-        }
-
-        @Override
-        public TMXEntry getTranslationInfo(SourceTextEntry ste) {
-            if (projectTMX == null) {
-                return EMPTY_TRANSLATION;
-            }
-            TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
-            if (r == null) {
-                r = projectTMX.getDefaultTranslation(ste.getSrcText());
-            }
-            if (r == null) {
-                r = EMPTY_TRANSLATION;
-            }
-            return r;
-        }
-
-        @Override
-        public List<SourceTextEntry> getAllEntries() {
-            List<SourceTextEntry> ste = new ArrayList<>();
-            IFilter filter = new PoFilter();
-            Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
-            IParseCallback testCallback = new TestCallback(ste);
-            FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
-            try {
-                filter.parseFile(testSource.toFile(), Collections.emptyMap(), context, testCallback);
-            } catch (Exception e) {
-                Log.log(e);
-            }
-            return ste;
-        }
-
-        @Override
-        public ITokenizer getSourceTokenizer() {
-            return new LuceneEnglishTokenizer();
-        }
-
-        @Override
-        public ITokenizer getTargetTokenizer() {
-            return new DefaultTokenizer();
-        }
-
-        @Override
-        public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
-            return Collections.emptyMap();
-        }
-
-        @Override
-        public AllTranslations getAllTranslations(SourceTextEntry ste) {
-            TestAllTranslations r = new TestAllTranslations();
-            synchronized (projectTMX) {
-                r.setDefaultTranslation(projectTMX.getDefaultTranslation(ste.getSrcText()));
-                r.setAlternativeTranslation(projectTMX.getMultipleTranslation(ste.getKey()));
-                if (r.getAlternativeTranslation() != null) {
-                    r.setCurrentTranslation(r.getAlternativeTranslation());
-                } else if (r.getDefaultTranslation() != null) {
-                    r.setCurrentTranslation(r.getDefaultTranslation());
-                } else {
-                    r.setCurrentTranslation(EMPTY_TRANSLATION);
-                }
-                if (r.getDefaultTranslation() == null) {
-                    r.setDefaultTranslation(EMPTY_TRANSLATION);
-                }
-                if (r.getAlternativeTranslation() == null) {
-                    r.setAlternativeTranslation(EMPTY_TRANSLATION);
-                }
-            }
-            return r;
-        }
-
-        @Override
-        public Map<String, ExternalTMX> getTransMemories() {
-            synchronized (projectTMX) {
-                if (transMemories == null) {
-                    transMemories = new TreeMap<>();
-                    try {
-                        ExternalTMX newTMX;
-                        Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
-                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, filterMaster);
-                        transMemories.put(testTmx.toString(), newTMX);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            return Collections.unmodifiableMap(transMemories);
-        }
-    }
-
-    static class TestAllTranslations extends IProject.AllTranslations {
-        public void setAlternativeTranslation(TMXEntry entry) {
-            alternativeTranslation = entry;
-        }
-
-        public void setDefaultTranslation(TMXEntry entry) {
-            defaultTranslation = entry;
-        }
-
-        public void setCurrentTranslation(TMXEntry entry) {
-            currentTranslation = entry;
-        }
-    }
-
-    static class TestCallback implements IParseCallback {
-
-        private final List<SourceTextEntry> steList;
-
-        TestCallback(final List<SourceTextEntry> ste) {
-            this.steList = ste;
-        }
-
-        @Override
-        public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
-                String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
-            SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path), 1,
-                    props, translation, protectedParts);
-            ste.setSourceTranslationFuzzy(isFuzzy);
-            steList.add(ste);
-        }
-
-        @Override
-        public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                String path, IFilter filter, List<ProtectedPart> protectedParts) {
-            List<String> propList = new ArrayList<>(2);
-            if (comment != null) {
-                propList.add("comment");
-                propList.add(comment);
-            }
-            String[] props = propList.toArray(new String[0]);
-            addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
-        }
-
-        @Override
-        public void linkPrevNextSegments() {
-            // do nothing
-        }
-    }
-
-    static class CalcMatchStatisticsMock extends CalcMatchStatistics {
-
-        private final String[] rowsTotal = new String[] { "RowRepetitions", "RowExactMatch", "RowMatch95",
-                "RowMatch85", "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
-
-        private final IProject project;
-        private MatchStatCounts result;
-        private final IStatsConsumer callback;
-
-        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback) {
-            super(project, segmenter, callback, false);
-            this.project = project;
-            this.callback = callback;
-        }
-
-        @Override
-        public void run() {
-            entriesToProcess = project.getAllEntries().size();
-            result = calcTotal(false);
-            callback.finishData();
-        }
-
-        public String[][] getTable() {
-            if (result == null) {
-                return null;
-            }
-            return result.calcTable(rowsTotal, i -> i != 1);
-        }
-    }
-
-    static class TestStatsConsumer implements IStatsConsumer {
-
-        @Override
-        public void appendTextData(final String result) {
-            // do nothing
-        }
-
-        @Override
-        public void appendTable(final String title, final String[] headers, final String[][] data) {
-            // do nothing
-        }
-
-        @Override
-        public void setTextData(final String data) {
-            // do nothing
-        }
-
-        @Override
-        public void setTable(final String[] headers, final String[][] data) {
-            // do nothing
-        }
-
-        @Override
-        public void setDataFile(final String path) {
-            // do nothing
-        }
-
-        @Override
-        public void finishData() {
-            // do nothing
-        }
-
-        @Override
-        public void showProgress(final int percent) {
-            // do nothing
-        }
+    private void assertRowValues(String[] row, String v1, String v2, String v3, String v4) {
+        assertEquals(v1, row[1]);
+        assertEquals(v2, row[2]);
+        assertEquals(v3, row[3]);
+        assertEquals(v4, row[4]);
     }
 }

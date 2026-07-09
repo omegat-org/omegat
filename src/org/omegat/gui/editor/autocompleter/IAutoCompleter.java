@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,8 +26,55 @@
 
 package org.omegat.gui.editor.autocompleter;
 
+import java.awt.event.KeyEvent;
+
+/**
+ * Interface for autocompleter.
+ *
+ * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
+ */
 public interface IAutoCompleter {
+    /**
+     * Add a view to the autocompleter.
+     * @param view the view to add
+     * @deprecated
+     */
+    @Deprecated(since = "6.1.0")
     void addView(AbstractAutoCompleterView view);
 
+    /**
+     * Process the autocompletion keys.
+     * @param e the key event to process
+     * @return true if a key has been processed, false if otherwise.
+     */
+    boolean processKeys(KeyEvent e);
+
+    /**
+     * Reset the autocompletion keys.
+     */
     void resetKeys();
+
+    /**
+     * Check if the autocompleter is visible.
+     * @return true if visible, false otherwise.
+     */
+    boolean isVisible();
+
+    /**
+     * Set the visibility of the autocompleter.
+     * @param visible true to show, false to hide.
+     */
+    void setVisible(boolean visible);
+
+    /**
+     * Update the autocompleter popup.
+     * @param onlyIfVisible true to update only if visible, false otherwise.
+     */
+    void updatePopup(boolean onlyIfVisible);
+
+    /**
+     * Notify the autocompleter that the text has changed.
+     */
+    void textDidChange();
 }

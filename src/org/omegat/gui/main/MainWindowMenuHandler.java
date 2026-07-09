@@ -43,6 +43,8 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
@@ -96,12 +98,13 @@ import org.omegat.util.TagUtil.Tag;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
+@SuppressWarnings("unused")
 public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
-    private final MainWindow mainWindow;
-
     public MainWindowMenuHandler(final MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
+    }
+
+    public MainWindowMenuHandler() {
     }
 
     /**
@@ -206,10 +209,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         ProjectUICommands.projectEditProperties();
     }
 
-    public void viewFileListMenuItemActionPerformed() {
+    public void viewFileListMenuItemActionPerformed(ActionEvent evt) {
         IProjectFilesList projWin = Core.getProjectFilesList();
         if (projWin == null) {
-            mainWindow.menu.viewFileListMenuItem.setSelected(false);
+            Object o = evt.getSource();
+            if (o instanceof JMenuItem) {
+                JMenuItem menuItem = (JMenuItem) o;
+                menuItem.setSelected(false);
+            }
             return;
         }
 
@@ -638,72 +645,116 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkTranslated(mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
+    public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkTranslated(jcm.isSelected());
+        }
     }
 
-    public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkUntranslated(
-                mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+    public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkUntranslated(jcm.isSelected());
+        }
     }
 
-    public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkParagraphDelimitations(
-                mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
+    public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkParagraphDelimitations(jcm.isSelected());
+        }
     }
 
-    public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplaySegmentSources(
-                mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
+    public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setDisplaySegmentSources(jcm.isSelected());
+        }
     }
 
-    public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkNonUniqueSegments(
-                mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
+    public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkNonUniqueSegments(jcm.isSelected());
+        }
     }
 
-    public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkNotedSegments(mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
+    public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkNotedSegments(jcm.isSelected());
+        }
     }
 
-    public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkNBSP(mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
+    public void viewMarkNBSPCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkNBSP(jcm.isSelected());
+        }
     }
 
-    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkWhitespace(mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
+    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkWhitespace(jcm.isSelected());
+        }
     }
 
-    public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkBidi(mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
+    public void viewMarkBidiCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkBidi(jcm.isSelected());
+        }
     }
 
-    public void viewMarkAlternativeTranslationsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkAltTranslations(
-                mainWindow.menu.viewMarkAlternativeTranslationsCheckBoxMenuItem.isSelected());
+    public void viewMarkAlternativeTranslationsCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkAltTranslations(jcm.isSelected());
+        }
     }
 
-    public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
+    public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkAutoPopulated(jcm.isSelected());
+        }
     }
 
-    public void viewMarkGlossaryMatchesCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkGlossaryMatches(mainWindow.menu.viewMarkGlossaryMatchesCheckBoxMenuItem.isSelected());
+    public void viewMarkGlossaryMatchesCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkGlossaryMatches(jcm.isSelected());
+        }
     }
 
-    public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkLanguageChecker(mainWindow.menu.viewMarkLanguageCheckerCheckBoxMenuItem.isSelected());
+    public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkLanguageChecker(jcm.isSelected());
+        }
     }
 
-    public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setDoFontFallback(mainWindow.menu.viewMarkFontFallbackCheckBoxMenuItem.isSelected());
+    public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setDoFontFallback(jcm.isSelected());
+        }
     }
 
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
@@ -770,36 +821,54 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
                 StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
     }
 
-    public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
-        Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
-                mainWindow.menu.optionsAutoCompleteShowAutomaticallyItem.isSelected());
+    public void optionsAutoCompleteShowAutomaticallyItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY, jcm.isSelected());
+        }
     }
 
-    public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED,
-                mainWindow.menu.optionsAutoCompleteHistoryCompletionMenuItem.isSelected());
+    public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED, jcm.isSelected());
+        }
     }
 
-    public void optionsAutoCompleteHistoryPredictionMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
-                mainWindow.menu.optionsAutoCompleteHistoryPredictionMenuItem.isSelected());
+    public void optionsAutoCompleteHistoryPredictionMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED, jcm.isSelected());
+        }
     }
 
-    public void optionsMTAutoFetchCheckboxMenuItemActionPerformed() {
-        boolean enabled = mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
-        Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
+    public void optionsMTAutoFetchCheckboxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.MT_AUTO_FETCH, jcm.isSelected());
+        }
     }
 
-    public void optionsGlossaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
-                mainWindow.menu.optionsGlossaryFuzzyMatchingCheckBoxMenuItem.isSelected());
-        Preferences.save();
+    public void optionsGlossaryFuzzyMatchingCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.GLOSSARY_STEMMING, jcm.isSelected());
+            Preferences.save();
+        }
     }
 
-    public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
-                mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.isSelected());
-        Preferences.save();
+    public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING, jcm.isSelected());
+            Preferences.save();
+        }
     }
 
     /**

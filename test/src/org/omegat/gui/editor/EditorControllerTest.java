@@ -174,9 +174,7 @@ public class EditorControllerTest extends TestCore {
 
     private void fireCaretEvent(JTextComponent component, int position) {
         CountDownLatch latch = new CountDownLatch(1);
-        component.addCaretListener(e -> {
-            latch.countDown();
-        });
+        component.addCaretListener(e -> latch.countDown());
         component.setCaretPosition(position);
         try {
             latch.await(5, TimeUnit.SECONDS);
@@ -215,20 +213,19 @@ public class EditorControllerTest extends TestCore {
     }
 
     protected static class RealProjectWithTMX extends RealProject {
+
+        private static final String SOURCE_FILE_1 = "source.txt";
+        private static final String SOURCE_FILE_2 = "website/download.html";
+
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
             files = new ArrayList<>();
-            FileInfo file1 = new FileInfo();
-            file1.filePath = "source.txt";
-            file1.entries = new ArrayList<>();
-            file1.entries.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
-                    1, null, null, Collections.emptyList()));
+            FileInfo file1 = new FileInfo(SOURCE_FILE_1);
+            file1.entries.add(new SourceTextEntry(new EntryKey(SOURCE_FILE_1, "XXX", null,
+                    "", "", null), 1, null, null, Collections.emptyList()));
             files.add(file1);
-            FileInfo file2 = new FileInfo();
-            file2.filePath = "website/download.html";
-            file2.entries = new ArrayList<>();
-            file2.entries.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
+            FileInfo file2 = new FileInfo(SOURCE_FILE_2);
+            file2.entries.add(new SourceTextEntry(new EntryKey(SOURCE_FILE_2, "Other", "id",
                     "For installation on Linux.",
                     "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
                     null), 1, null, "Other", Collections.emptyList()));

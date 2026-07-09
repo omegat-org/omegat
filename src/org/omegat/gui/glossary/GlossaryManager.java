@@ -40,7 +40,10 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.io.FilenameUtils;
-import org.omegat.core.Core;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.glossaries.IGlossary;
@@ -56,7 +59,7 @@ import org.omegat.util.Token;
 /**
  * Class that loads glossary files and adds glossary entries to strings of the
  * source files.
- *
+ * <p>
  * This class don't need any threads synchronization code, since it only set and
  * clear 'glossaryEntries' var.
  *
@@ -65,6 +68,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Didier Briel
  */
+@NullMarked
 public class GlossaryManager implements DirectoryMonitor.Callback {
 
     /**
@@ -93,12 +97,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
     }
 
-    protected DirectoryMonitor monitor;
+    protected @Nullable DirectoryMonitor monitor;
 
     private final IGlossaries pane;
-    private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
+    private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<>();
 
-    protected File priorityGlossary;
+    protected @Nullable File priorityGlossary;
     protected IGlossary[] externalGlossaries;
 
     public GlossaryManager(final IGlossaries pane) {
@@ -114,7 +118,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
         externalGlossaries = gl.toArray(new IGlossary[gl.size()]);
         Preferences.addPropertyChangeListener(e -> {
-            if (Core.getProject().isProjectLoaded()) {
+            if (CoreState.getInstance().isProjectLoaded()) {
                 switch (e.getPropertyName()) {
                 case Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT:
                     forceReloadTBX();
@@ -129,20 +133,23 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void addGlossaryProvider(IGlossary provider) {
-        List<IGlossary> providers = new ArrayList<IGlossary>(Arrays.asList(externalGlossaries));
+        List<IGlossary> providers = new ArrayList<>(Arrays.asList(externalGlossaries));
         providers.add(provider);
         externalGlossaries = providers.toArray(new IGlossary[providers.size()]);
     }
 
     public void start() {
-        File dir = new File(Core.getProject().getProjectProperties().getGlossaryRoot());
-        priorityGlossary = new File(Core.getProject().getProjectProperties().getWriteableGlossary());
+        CoreState coreState = CoreState.getInstance();
+        File dir = new File(coreState.getProject().getProjectProperties().getGlossaryRoot());
+        priorityGlossary = new File(coreState.getProject().getProjectProperties().getWriteableGlossary());
         monitor = new DirectoryMonitor(dir, this);
         monitor.start();
     }
 
     public void stop() {
-        monitor.fin();
+        if (monitor != null) {
+            monitor.fin();
+        }
         synchronized (this) {
             glossaries.clear();
         }
@@ -172,6 +179,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void forceReloadTBX() {
+        if (monitor == null) {
+            return;
+        }
         Set<File> files = monitor.getExistFiles();
         for (File f : files) {
             if (f.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.EXT_TBX)) {
@@ -187,7 +197,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     /**
      * Loads one glossary file. It chooses and calls the required reader.
      */
-    private List<GlossaryEntry> loadGlossaryFile(File file, boolean isPriority) throws Exception {
+    private @Nullable List<GlossaryEntry> loadGlossaryFile(File file, boolean isPriority) throws Exception {
         String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
@@ -211,7 +221,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Get glossary entries.
      *
      * @return all entries
-     * @param src
+     * @param src keyword of the glossary to seek.
      */
     public List<GlossaryEntry> getGlossaryEntries(String src) {
         List<GlossaryEntry> result = new ArrayList<>();
@@ -246,9 +256,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     private void addExternalGlossaryEntries(List<GlossaryEntry> result, String src) {
-
-        Language source = Core.getProject().getProjectProperties().getSourceLanguage();
-        Language target = Core.getProject().getProjectProperties().getTargetLanguage();
+        CoreState coreState = CoreState.getInstance();
+        Language source = coreState.getProject().getProjectProperties().getSourceLanguage();
+        Language target = coreState.getProject().getProjectProperties().getTargetLanguage();
 
         for (IGlossary gl : externalGlossaries) {
             try {
@@ -265,7 +275,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of matching glossary entries
      */
     public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste) {
-        ITokenizer tok = Core.getProject().getSourceTokenizer();
+        CoreState coreState = CoreState.getInstance();
+        ITokenizer tok = coreState.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
         }
@@ -276,7 +287,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
 
         GlossarySearcher searcher = buildSearcher(tok,
-                Core.getProject().getProjectProperties().getSourceLanguage());
+                coreState.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatches(ste, entries);
     }
@@ -289,12 +300,13 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of tokens matching the supplied glossary entry
      */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
-        ITokenizer tok = Core.getProject().getSourceTokenizer();
+        CoreState coreState = CoreState.getInstance();
+        ITokenizer tok = coreState.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
         }
         GlossarySearcher searcher = buildSearcher(tok,
-                Core.getProject().getProjectProperties().getSourceLanguage());
+                coreState.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatchTokens(ste, entry);
     }
@@ -313,12 +325,13 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of matching target terms
      */
     public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
-        ITokenizer tok = Core.getProject().getTargetTokenizer();
+        CoreState coreState = CoreState.getInstance();
+        ITokenizer tok = coreState.getProject().getTargetTokenizer();
         if (tok == null) {
             return Collections.emptyList();
         }
         GlossarySearcher searcher = buildSearcher(tok,
-                Core.getProject().getProjectProperties().getTargetLanguage());
+                coreState.getProject().getProjectProperties().getTargetLanguage());
 
         return searcher.searchTargetMatches(trg, protectedParts, entry);
     }

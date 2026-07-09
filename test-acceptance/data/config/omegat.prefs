@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<omegat>
+  <preference version="1.0">
+    <ac_autotext_enabled>true</ac_autotext_enabled>
+    <ac_chartable_enabled>true</ac_chartable_enabled>
+    <ac_glossary_enabled>true</ac_glossary_enabled>
+    <ac_show_suggestions_automatically>true</ac_show_suggestions_automatically>
+    <allow_history_completer>true</allow_history_completer>
+    <current_folder>/tmp</current_folder>
+    <dictionary_fuzzy_matching>false</dictionary_fuzzy_matching>
+    <dictionary_use_font>true</dictionary_use_font>
+    <display_modification_info>selected</display_modification_info>
+    <glossary_stemming>true</glossary_stemming>
+    <history_completer_prediction_enabled>true</history_completer_prediction_enabled>
+    <lt_disabled>true</lt_disabled>
+    <mark_autopopulated>true</mark_autopopulated>
+    <mark_non_unique_segments>true</mark_non_unique_segments>
+    <mark_para_delimitation>true</mark_para_delimitation>
+    <mt_auto_fetch>false</mt_auto_fetch>
+    <paragraph_match_from_segment_tmx>true</paragraph_match_from_segment_tmx>
+    <project_files_show_on_load>false</project_files_show_on_load>
+    <project_files_window_height>400</project_files_window_height>
+    <project_files_window_width>640</project_files_window_width>
+    <project_files_window_x>1120</project_files_window_x>
+    <project_files_window_y>610</project_files_window_y>
+    <sb_progress_mode>DEFAULT</sb_progress_mode>
+    <script_window_height>650</script_window_height>
+    <script_window_width>1150</script_window_width>
+    <script_window_x>50</script_window_x>
+    <script_window_y>80</script_window_y>
+    <scripts_dir>scripts</scripts_dir>
+    <source_font>Dialog</source_font>
+    <source_font_size>14</source_font_size>
+    <theme_class_name>org.omegat.gui.theme.DefaultFlatTheme</theme_class_name>
+    <theme_color_mode>default</theme_color_mode>
+    <transtips>true</transtips>
+    <view_option_source_active_bold>true</view_option_source_active_bold>
+    <view_option_source_all_bold>true</view_option_source_all_bold>
+  </preference>
+</omegat>

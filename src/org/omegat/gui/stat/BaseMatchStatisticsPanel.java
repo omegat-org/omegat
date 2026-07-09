@@ -25,6 +25,8 @@
 
 package org.omegat.gui.stat;
 
+import org.omegat.core.threads.Completion;
+
 /**
  *
  * @author Aaron Madlon-Kay
@@ -45,8 +47,8 @@ public abstract class BaseMatchStatisticsPanel extends BaseStatisticsPanel {
     }
 
     @Override
-    public void finishData() {
-        super.finishData();
+    public void onComplete(Completion completion) {
+        super.onComplete(completion);
         buffer.setLength(0);
     }
 }

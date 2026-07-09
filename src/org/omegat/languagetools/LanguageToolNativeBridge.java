@@ -45,12 +45,13 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
 
     private final Language sourceLtLang;
     private final Language targetLtLang;
-    private ThreadLocal<JLanguageTool> sourceLt;
+    private final ThreadLocal<JLanguageTool> sourceLt;
     private ThreadLocal<JLanguageTool> targetLt;
     private List<BitextRule> bRules;
 
     public LanguageToolNativeBridge(org.omegat.util.Language sourceLang,
             org.omegat.util.Language targetLang) {
+        LanguageManager.getLTLanguage(new org.omegat.util.Language("en-US"));
         sourceLtLang = getLTLanguage(sourceLang);
         targetLtLang = getLTLanguage(targetLang);
         Log.logInfoRB("LANGUAGE_TOOL_SOURCE", getLanguageToolCode(sourceLtLang));

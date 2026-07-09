@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+    <section>
+        <title>Freedoms</title>
+        <para>OmegaT is a free computer-assisted translation (CAT) solution for
+            professional translators. It is distributed under the terms of the
+            <emphasis>GNU General Public License, version 3.0</emphasis>. See
+            <guimenu>> Help</guimenu> <guimenu>> About</guimenu>. The license grants you
+            the following freedoms:
+
+            <itemizedlist>
+                <listitem>
+                    <para>The freedom to run OmegaT as you wish, for any purpose.</para>
+                </listitem>
+
+                <listitem>
+                    <para>The freedom to study how OmegaT works, and change it so it does
+                        your computing as you wish.</para>
+                </listitem>
+
+                <listitem>
+                    <para>The freedom to redistribute copies so you can help others.</para>
+                </listitem>
+
+                <listitem>
+                    <para>The freedom to distribute copies of your modified versions to
+                        others.</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+</article>

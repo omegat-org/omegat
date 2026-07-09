@@ -91,7 +91,6 @@
 
     <!-- Old code which uses m_* style field names -->
     <suppress checks="MemberName" files="(ProjectFileList|PreferencesImpl|SourceEntryText)\.java"/>
-    <suppress checks="MemberName" files="(RichScriptEditor|ScriptSet|ScriptsMonitor|StandardScriptEditor)\.java"/>
 
     <!-- Old code violates style rule -->
     <suppress files="CLIParameters\.java" checks="TypeName"/>

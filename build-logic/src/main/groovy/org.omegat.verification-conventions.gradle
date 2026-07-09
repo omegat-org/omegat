@@ -293,6 +293,7 @@ tasks.register('testAcceptance', Test) {
     maxHeapSize = findProperty('testMaxHeapSize')
     dependsOn firstSteps
     dependsOn ':aligner:jar'
+    dependsOn ':scripting:jar'
 }
 
 tasks.register('jacocoAcceptanceReport', JacocoReport) {

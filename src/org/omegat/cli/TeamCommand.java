@@ -24,7 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;

@@ -41,7 +41,12 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.*;
+import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.DTD;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -140,7 +145,7 @@ public class TMXReader2 {
         inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unused")
     public boolean isParagraphSegtype() {
         return isParagraphSegtype;
     }

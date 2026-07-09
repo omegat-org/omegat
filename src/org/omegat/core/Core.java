@@ -36,6 +36,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import org.omegat.cli.BaseSubCommand;
+import org.omegat.cli.SubCommands;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -47,6 +49,7 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -121,7 +124,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static IMainWindow getMainWindow() {
+    public static @Nullable IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 
@@ -224,15 +227,14 @@ public final class Core {
     @Deprecated(since = "6.1.0", forRemoval = true)
     @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
-        initializeGUI(params);
+        initializeGUI();
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI() throws Exception {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
         coreState.setProject(new NotLoadedProject());
@@ -248,6 +250,10 @@ public final class Core {
 
         coreState.initializeSaveThread();
         coreState.initializeVersionCheckThread();
+    }
+
+    public static LongProcessExecutor getLongProcessExecutor() {
+        return CoreState.getInstance().getExecutor();
     }
 
     /**
@@ -287,9 +293,8 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) {
+    public static void initializeConsole() {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
         coreState.setTagValidation(new TagValidationTool());
         coreState.setProject(new NotLoadedProject());
         coreState.setMainWindow(new ConsoleWindow());
@@ -310,7 +315,8 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return CoreState.getInstance().getCmdLineParams();
+        // FIXME
+        return null;
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {
@@ -342,6 +348,18 @@ public final class Core {
      */
     public static void registerAutoCompleterClass(Class<? extends AbstractAutoCompleterView> clazz) {
         PluginUtils.getAutoCompleterViewsClasses().add(clazz);
+    }
+
+    /**
+     * Registers a console command by associating a command name with its corresponding subcommand class.
+     * This method adds the specified command to a collection of subcommands, enabling it to be later
+     * utilized or executed through the command-line interface.
+     *
+     * @param name       the subcommand name of the console command to be registered.
+     * @param subcommand the class representing the subcommand implementation associated with the given name.
+     */
+    public static void registerConsoleCommand(String name, Class<? extends BaseSubCommand> subcommand) {
+        SubCommands.registerConsoleCommand(name, subcommand);
     }
 
     /**

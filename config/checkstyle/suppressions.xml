@@ -137,7 +137,6 @@
     <!-- matching -->
     <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>
     <suppress files="NearString\.java" checks="ParameterNumber"/>
-    <suppress files="LevenshteinDistance\.java" checks="LocalVariableName" lines="147,159"/>
 
     <!-- Aligner, AlignFilePickerController, AlignPanelController -->
     <suppress files="Aligner\.java" checks="ParameterNumber"/>

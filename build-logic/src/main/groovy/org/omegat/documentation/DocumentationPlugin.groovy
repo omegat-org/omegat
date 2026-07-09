@@ -25,19 +25,9 @@ import org.gradle.api.Project
 @Slf4j
 class DocumentationPlugin implements Plugin<Project> {
 
-    static final String DOCUMENTATION_EXTENSION = 'docConfig'
-    static final String DOCUMENTATION_OUTPUT_TYPES = 'docOutputTypes'
-    static final String DOCUMENTATION_SET_CONTAINER = 'documentationSets'
-
     @Override
     void apply(Project project) {
         project.apply(plugin: 'base')
-
-        def extension = project.extensions.create(DOCUMENTATION_EXTENSION, DocConfigExtension, project.objects)
-        project.tasks.withType(DocConfigurable).whenTaskAdded { DocConfigurable docConfigurableTask ->
-            org.omegat.documentation.DocumentationPlugin.log.debug("Configuring task {}", docConfigurableTask)
-            docConfigurableTask.configureWith(extension)
-        }
     }
 
     private static String capitalizeFirst(String value) {

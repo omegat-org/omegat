@@ -31,7 +31,10 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.filters3.xml.XMLFilter;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 
 public class XMLFilterTest extends TestFilterBase {
@@ -47,6 +50,11 @@ public class XMLFilterTest extends TestFilterBase {
     public static class TestFilter extends XMLFilter {
         public TestFilter(XMLDialect dialect) {
             super(dialect);
+            try {
+                setSAXFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+            } catch (SAXNotSupportedException | SAXNotRecognizedException | ParserConfigurationException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         @Override

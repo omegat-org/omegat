@@ -21,14 +21,12 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
-    testImplementation(project(":spellchecker:hunspell"))
+    testImplementation(project(":spellchecker:lucene"))
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
     testRuntimeOnly(libs.commons.io)
 }
 
 test {
     dependsOn tasks.withType(Jar)
-    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
+    dependsOn project(":spellchecker:lucene").tasks.withType(Jar)
 }

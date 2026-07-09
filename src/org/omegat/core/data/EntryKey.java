@@ -49,8 +49,8 @@ public class EntryKey implements Comparable<EntryKey> {
      */
     private static boolean ignoreFileContext = false;
 
-    public EntryKey(final String file, final String sourceText, final @Nullable String id, final @Nullable String prev,
-            final @Nullable String next, final @Nullable String path) {
+    public EntryKey(final String file, final String sourceText, final @Nullable String id,
+            final @Nullable String prev, final @Nullable String next, final @Nullable String path) {
         this.file = file;
         this.sourceText = sourceText;
         this.id = id;
@@ -86,12 +86,12 @@ public class EntryKey implements Comparable<EntryKey> {
             return false;
         }
         EntryKey o = (EntryKey) obj;
-        return Objects.equals(sourceText, o.sourceText) && // source
-                (ignoreFileContext || Objects.equals(file, o.file)) && // file
-                Objects.equals(id, o.id) && // id
-                Objects.equals(prev, o.prev) && // prev
-                Objects.equals(next, o.next) && // next
-                Objects.equals(path, o.path); // path
+        return Objects.equals(sourceText, o.sourceText) // source
+                && (ignoreFileContext || Objects.equals(file, o.file)) // file
+                && Objects.equals(id, o.id) // id
+                && Objects.equals(prev, o.prev) // prev
+                && Objects.equals(next, o.next) // next
+                && Objects.equals(path, o.path); // path
     }
 
     @Override

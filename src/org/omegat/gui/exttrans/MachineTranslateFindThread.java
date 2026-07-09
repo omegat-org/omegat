@@ -30,7 +30,6 @@
 
 package org.omegat.gui.exttrans;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
@@ -42,7 +41,8 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
-@NullMarked
+import java.util.Objects;
+
 class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
     private final IMachineTranslation translator;
     private final String src;
@@ -85,7 +85,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      */
     @VisibleForTesting
     static @Nullable MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
-                                                             SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
+            SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
 
         if (isStopped.isStopped()) {
             throw new StoppedException();
@@ -116,7 +116,8 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
                 tr = translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
-                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                Objects.requireNonNull(Core.getMainWindow())
+                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
                         e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getMessage());
                 return null;
             } catch (Exception e) {
@@ -139,6 +140,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      */
     static class StoppedException extends Exception {
         private static final long serialVersionUID = 1L;
+
         StoppedException() {
             super("MT processing stopped");
         }

@@ -8,7 +8,7 @@
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
                2018 Thomas Cordonnier
-               2022-2025 Hiroshi Miura
+               2022-2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,6 +32,7 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Objects;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -42,8 +43,7 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
-import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -69,7 +69,6 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
-@NullMarked
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo>
         implements IPaneMenu {
 
@@ -116,6 +115,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     /**
      * Expose the currently processed entry for the controller.
      */
+    @Nullable
     SourceTextEntry getCurrentlyProcessedEntry() {
         return currentlyProcessedEntry;
     }
@@ -143,7 +143,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         int pos = el.getStartOffset();
         try {
             getHighlighter().removeAllHighlights();
-            getHighlighter().addHighlight(pos, pos + info.result.length(),
+            getHighlighter().addHighlight(pos, pos + (info.result == null ? 0 : info.result.length()),
                     new DefaultHighlighter.DefaultHighlightPainter(
                             Styles.EditorColor.COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT.getColor()));
         } catch (Exception ex) {
@@ -185,7 +185,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public void populatePaneMenu(JPopupMenu menu) {
         final JMenuItem prefs = new JMenuItem(OStrings.getString("GUI_MACHINETRANSLATESWINDOW_OPEN_PREFS"));
         prefs.addActionListener(e -> new PreferencesWindowController().show(
-                Core.getMainWindow().getApplicationFrame(), MachineTranslationPreferencesController.class));
+                Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame(), MachineTranslationPreferencesController.class));
         menu.add(prefs);
     }
 }

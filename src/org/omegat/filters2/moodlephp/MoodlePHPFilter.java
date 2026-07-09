@@ -58,7 +58,7 @@ public class MoodlePHPFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
-    protected static final Pattern RE_ENTITY = Pattern.compile("\\$string\\['(.+)'\\] (=) '(.+)(';)$",
+    protected static final Pattern RE_ENTITY = Pattern.compile("\\$string\\['(.+)'] (=) '(.+)(';)$",
             Pattern.DOTALL);
 
     protected Map<String, String> align;
@@ -114,8 +114,8 @@ public class MoodlePHPFilter extends AbstractFilter {
 
         if (processOptions != null) {
             String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
-            removeStringsUntranslated = (removeStringsUntranslatedStr != null)
-                    && (removeStringsUntranslatedStr.equalsIgnoreCase("true"));
+            removeStringsUntranslated = removeStringsUntranslatedStr != null
+                    && removeStringsUntranslatedStr.equalsIgnoreCase("true");
         } else {
             removeStringsUntranslated = false;
         }

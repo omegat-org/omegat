@@ -124,15 +124,15 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public void tagStart(@Nullable String path, @Nullable Attributes atts) {
-        if ("/root/data".equals(path)) {
+    public void tagStart(String path, @Nullable Attributes atts) {
+        if (atts != null && "/root/data".equals(path)) {
             id = StringUtil.nvl(atts.getValue("name"), "");
             comment = null;
         }
     }
 
     @Override
-    public void tagEnd(@Nullable String path) {
+    public void tagEnd(String path) {
         if ("/root/data/comment".equals(path)) {
             comment = text;
         } else if ("/root/data".equals(path)) {

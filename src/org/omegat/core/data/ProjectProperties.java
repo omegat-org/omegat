@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
@@ -173,11 +174,11 @@ public class ProjectProperties {
         // Default glossary file name depends on where glossaryDir is:
         // - Inside project folder: glossary.txt
         // - Outside project folder: ${projectName}-glossary.txt
-        String glossaryDir = getGlossaryRoot();
-        if (glossaryDir.startsWith(getProjectRoot())) {
-            return glossaryDir + OConsts.DEFAULT_W_GLOSSARY;
+        String glossaryRoot = getGlossaryRoot();
+        if (glossaryRoot.startsWith(getProjectRoot())) {
+            return glossaryRoot + OConsts.DEFAULT_W_GLOSSARY;
         } else {
-            return glossaryDir + projectName + OConsts.DEFAULT_W_GLOSSARY_SUFF;
+            return glossaryRoot + projectName + OConsts.DEFAULT_W_GLOSSARY_SUFF;
         }
     }
 
@@ -423,17 +424,17 @@ public class ProjectProperties {
      * arguments, corresponding to OmegaT, Level 1 and Level 2
      */
     public void setExportTmLevels(boolean omT, boolean level1, boolean level2) {
-        List<String> exportTmLevels = new ArrayList<>();
+        List<String> newExportTmLevels = new ArrayList<>();
         if (omT) {
-            exportTmLevels.add("omegat");
+            newExportTmLevels.add("omegat");
         }
         if (level1) {
-            exportTmLevels.add("level1");
+            newExportTmLevels.add("level1");
         }
         if (level2) {
-            exportTmLevels.add("level2");
+            newExportTmLevels.add("level2");
         }
-        this.exportTmLevels = exportTmLevels;
+        this.exportTmLevels = newExportTmLevels;
     }
 
     /**
@@ -493,10 +494,10 @@ public class ProjectProperties {
     }
 
     /**
-     * Determines if the project is a team project. A project is considered a team project
-     * if it has repositories defined, and at least one repository mapping has either
-     * a local path set to an empty string or a single forward slash to specify OmegaT
-     * project root.
+     * Determines if the project is a team project. A project is considered a
+     * team project if it has repositories defined, and at least one repository
+     * mapping has either a local path set to an empty string or a single
+     * forward slash to specify OmegaT project root.
      *
      * @return true if the project is a team project, false otherwise
      */
@@ -529,7 +530,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project.
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
+        this.projectSRX = SRXManager.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {
@@ -714,8 +715,8 @@ public class ProjectProperties {
          * path is directory(or file) as declared in the omegat.project, but not
          * __DEFAULT__.
          * <p>
-         * i.e. caller can send something like
-         * "/some/project/source", or "source", or "source/".
+         * i.e. caller can send something like "/some/project/source", or
+         * "source", or "source/".
          * <p>
          * Absolute paths from Windows will be treated as relative on
          * Linux/MacOS, and vice versa.

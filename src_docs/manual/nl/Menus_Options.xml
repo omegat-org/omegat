@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.options">
-  <title id="menus.options.title"><guimenu>Opties</guimenu></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.options">
+  <title xml:id="menus.options.title"><guimenu>Opties</guimenu></title>
 
   <para>Dit menu geeft snel toegang tot een aantal frequent gebruikte voorkeuren.</para>
   
   <variablelist>
-    <varlistentry id="menus.options.preferences">
-      <term id="menus.options.preferences.title"><guimenuitem>Voorkeuren…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.preferences">
+      <term xml:id="menus.options.preferences.title"><guimenuitem>Voorkeuren…</guimenuitem></term>
       <listitem>
         <para>Open het dialoogvenster <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
 
@@ -17,8 +16,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.mt">
-      <term id="menus.options.mt.title"><guisubmenu>Machinevertaling</guisubmenu></term>
+    <varlistentry xml:id="menus.options.mt">
+      <term xml:id="menus.options.mt.title"><guisubmenu>Machinevertaling</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -26,14 +25,14 @@
 		  </listitem>
 		</itemizedlist>
 
-        <para>Stelt u in staat om ingeschakelde en correct geconfigureerde programma's voor machinevertaling te activeren of te deactiveren.</para>
+		<para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren of te deactiveren.</para>
 
         <para>Als verscheidene programma's voor vertaling zijn geselecteerd, kunt u ook <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> gebruiken om tussen hen te schakelen en de laatst geselecteerde in te voegen. Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.glossary">
-      <term id="menus.options.glossary.title"><guisubmenu>Woordenlijst</guisubmenu></term>
+    <varlistentry xml:id="menus.options.glossary">
+      <term xml:id="menus.options.glossary.title"><guisubmenu>Woordenlijst</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -47,8 +46,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.dictionary">
-      <term id="menus.options.dictionary.title"><guisubmenu>Woordenboek</guisubmenu></term>
+    <varlistentry xml:id="menus.options.dictionary">
+      <term xml:id="menus.options.dictionary.title"><guisubmenu>Woordenboek</guisubmenu></term>
       <listitem>
 		<itemizedlist>
 		  <listitem>
@@ -62,15 +61,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.autocompletion">
-      <term id="menus.options.autocompletion.title"><guisubmenu>Auto-aanvullen</guisubmenu></term>
+    <varlistentry xml:id="menus.options.autocompletion">
+      <term xml:id="menus.options.autocompletion.title"><guisubmenu>Auto-aanvullen</guisubmenu></term>
       <listitem>
 		<para>Selecteer de verschillende opties om ze te activeren of te deactiveren. Bekijk de voorkeuren <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> voor details.</para>
 	  </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.file.filters">
-      <term id="menus.options.file.filters.title"><guimenuitem>Globale bestandsfilters…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.file.filters">
+      <term xml:id="menus.options.file.filters.title"><guimenuitem>Globale bestandsfilters…</guimenuitem></term>
       <listitem>
         <para>Opent de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
@@ -78,8 +77,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.segmentation">
-      <term id="menus.options.segmentation.title"><guimenuitem>Globale segmentatieregels…</guimenuitem></term>
+    <varlistentry xml:id="menus.options.segmentation">
+      <term xml:id="menus.options.segmentation.title"><guimenuitem>Globale segmentatieregels…</guimenuitem></term>
       <listitem>
         <para>Opent de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
@@ -87,15 +86,15 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.editor">
-      <term id="menus.options.editor.title"><guimenuitem>venster Bewerken</guimenuitem></term>
+    <varlistentry xml:id="menus.options.editor">
+      <term xml:id="menus.options.editor.title"><guimenuitem>venster Bewerken</guimenuitem></term>
       <listitem>
         <para>Opent de voorkeuren <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry id="menus.options.access.configuration.folder">
-      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Ga naar map voor configuratie</guimenuitem></term>
+    <varlistentry xml:id="menus.options.access.configuration.folder">
+      <term xml:id="menus.options.access.configuration.folder.title"><guimenuitem>Ga naar map voor configuratie</guimenuitem></term>
       <listitem>
         <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen.</para>
 

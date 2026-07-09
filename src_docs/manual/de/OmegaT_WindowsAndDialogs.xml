@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.windows.and.dialogs">
+   <title xml:id="chapter.windows.and.dialogs.title">Fenster und Dialogfenster</title>
+   <para>Ein <emphasis>Fenster</emphasis> kann parallel zum Editor geöffnet sein und ermöglicht die Interaktion mit beiden.</para>
+   <para>Ein <emphasis>Dialogfenster</emphasis> verlangt eine Aktion von Ihnen und muss geschlossen werden, bevor Sie mit der Übersetzung fortfahren können.</para>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Dialogs_ProjectProperties.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_SourceFilesList.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_TextSearch.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_TextReplace.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_Aligner.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_Scripts.xml"/>
+</chapter>

@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Bestanden uitlijnen</guilabel></title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.aligner">
+  <title xml:id="windows.aligner.title"><guilabel>Bestanden uitlijnen</guilabel></title>
 
   <para>Gebruik <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> om toegang te krijgen tot dit gereedschap.</para>
 
   <para>OmegaT biedt ook een op de opdrachtregel gebaseerde uitlijning voor op toetsen gebaseerde indelingen. Bekijk de optie <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> voor details.</para>
 
   <warning>
-    <para>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Het toegevoegde voordeel, door het op die manier te doen, is het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het handmatig corrigeren een stuk soepeler maakt.</para>
+    <para>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Door dat te doen heeft het het toegevoegde voordeel van het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het  handmatig corrigeren een stuk soepeler maakt.</para>
   </warning>
 
 
@@ -38,7 +37,7 @@
     <para>Als u een vertaalproject hebt geopend, zal de uitlijner automatisch de talen uit dat project gebruiken, als ook, indien aanwezig, de project-specifieke segmentatieregels.</para>
   </note>
 
-  <para>Klik, na het selecteren van de taal en bestanden, op de knop <guibutton>OK</guibutton> om het venster <guilabel>Uitlijnen</guilabel> op te roepen, dat de resultaten van het automatisch uitlijnen weergeeft.</para>
+  <para>Klik, na het selecteren van de taal en bestanden, op de knop <guibutton>OK</guibutton> om het venster <guilabel>Uitlijnen</guilabel> top te roepen, dat de resultaten van het automatisch uitlijnen weergeeft.</para>
 
   <para>Het hoofdgedeelte van het venster is opgedeeld in drie kolommen:</para>
   
@@ -56,8 +55,8 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Instellingen</title>
+  <section xml:id="windows.aligner.adjust">
+    <title xml:id="windows.aligner.adjust.title">Instellingen</title>
 
     <para>In deze stap geeft het onderste gedeelte van het venster verschillende parameters en opties weer die u kunt wijzigen als het eruit ziet alsof de initiële uitlijning kan worden verbeterd. Het geeft ook een resultaat <guilabel>Gemiddelde score</guilabel> voor de uitlijning weer. Als een vuistregel: hoe lager die score, hoe meer nauwkeuriger de uitlijning. Wijzigen van een parameter berekent onmiddellijk de uitlijning opnieuw, wat u in staat stelt snel verschillende combinaties te proberen om de beste resultaten te krijgen.</para>
 
@@ -152,8 +151,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">Accentueren</term>
+      <varlistentry xml:id="windows.aligner.adjust.highlight">
+        <term xml:id="windows.aligner.adjust.highlight.title">Accentueren</term>
         <listitem>
 		  <para>Deselecteer het keuzevak om accentuering uit te schakelen.</para>
 
@@ -219,8 +218,8 @@
     <para>Wanneer u tevreden bent met de resultaten van deze stap, klik dan op de knop <guibutton>Doorgaan</guibutton> om door te gaan naar de volgende.</para>
   </section>
 
-  <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">Correcties</title>
+  <section xml:id="windows.aligner.manual.corrections">
+    <title xml:id="windows.aligner.manual.corrections.title">Correcties</title>
 
     <para>Handmatige aanpassingen zijn over het algemeen nodig na het initiële automatische proces van uitlijnen. Dit betreft over het algemeen het verplaatsen van segmenten naar boven of naar beneden om ze uit te lijnen met de correcte segmenten in de andere taal, als ook het splitsen of samenvoegen van segmenten. De uitlijner stelt u ook in staat de inhoud van een segment te bewerken, wat nuttig kan zijn als u fouten opmerkt, zoals een spelfout in een segment.</para>
 

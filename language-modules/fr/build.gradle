@@ -23,12 +23,10 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
-    testImplementation project(":spellchecker:hunspell")
+    testImplementation project(":spellchecker:lucene")
 }
 
 test {
     dependsOn tasks.withType(Jar)
-    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
+    dependsOn project(":spellchecker:lucene").tasks.withType(Jar)
 }

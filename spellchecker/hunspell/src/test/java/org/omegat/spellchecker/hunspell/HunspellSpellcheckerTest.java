@@ -28,6 +28,7 @@ package org.omegat.spellchecker.hunspell;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,7 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -56,6 +58,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
+import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -78,13 +81,20 @@ public class HunspellSpellcheckerTest {
         copyFile("es_MX.dic");
     }
 
+    @Before
+    public void assumeSupportedPlatform() {
+        assumeTrue("Tests only run on supported platforms (Mac, Windows x64, or Linux x64)", Platform.isMacOSX()
+                || (Platform.isWindows && Platform.isX86_64)
+                || (Platform.isLinux() && Platform.isX86_64));
+    }
+
     @AfterClass
     public static void tearDownClass() throws Exception {
         FileUtils.forceDeleteOnExit(tmpDir.toFile());
     }
 
     @Test
-    public void testReadHunspellDictionary() throws Exception {
+    public void testReadHunspellDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("es_MX"));
         setupProject(props, false);
@@ -96,7 +106,7 @@ public class HunspellSpellcheckerTest {
     }
 
     @Test
-    public void testReadHunspellLTDictionary() throws Exception {
+    public void testReadHunspellLTDictionary() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
         setupProject(props, false);
@@ -109,7 +119,7 @@ public class HunspellSpellcheckerTest {
     }
 
     @Test
-    public void testBundledDictionaryFR() throws Exception {
+    public void testBundledDictionaryFR() {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
         setupProject(props, false);
@@ -141,7 +151,7 @@ public class HunspellSpellcheckerTest {
     @Test
     public void testSaveWordListsWhenProjectStatusChanged() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
-        tmpDir.resolve("omegat").toFile().mkdir();
+        Files.createDirectory(tmpDir.resolve("omegat"));
         props.setTargetLanguage(new Language("fr_FR"));
         verifyWordListsSave(props, false);
         verifyWordListsSave(props, true);

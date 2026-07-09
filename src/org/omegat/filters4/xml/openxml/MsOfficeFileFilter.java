@@ -36,6 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -200,7 +201,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     protected java.util.Comparator<ZipEntry> getEntryComparator() {
-        /** Same order as in Filter3 **/
+        /* Same order as in Filter3 */
         return (ZipEntry z1, ZipEntry z2) -> {
             String s1 = z1.getName();
             String s2 = z2.getName();
@@ -219,25 +220,15 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 if (getDigits.find()) {
                     number2 = Integer.parseInt(getDigits.group(1));
                 }
-                if (number1 > number2) {
-                    return 1;
-                } else if (number1 < number2) {
-                    return -1;
-                } else {
-                    return 0;
-                }
+                return Integer.compare(number1, number2);
             } else {
                 String shortname1 = removePath(words1[0]);
                 String shortname2 = removePath(words2[0]);
 
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
-                if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                    if (shortname2.indexOf("sharedStrings") >= 0) {
-                        return 1; // sharedStrings must be first
-                    } else {
-                        return -1;
-                    }
+                if (shortname1.contains("sharedStrings") || shortname2.contains("sharedStrings")) {
+                    return shortname2.contains("sharedStrings") ? 1 : -1; // sharedStrings must be first
                 }
 
                 if (shortname1.endsWith(".xml")) {
@@ -281,7 +272,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenXMLOptionsDialog dialog = new EditOpenXMLOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);

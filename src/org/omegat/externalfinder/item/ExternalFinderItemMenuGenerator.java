@@ -77,6 +77,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
 
             JMenuItem item = new JMenuItem();
             Mnemonics.setLocalizedText(item, finderItem.getName());
+            item.setName(finderItem.getName());
 
             // set keyboard shortcut
             if (!popup) {

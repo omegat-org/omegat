@@ -61,8 +61,8 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.IRemoteRepository2;
@@ -215,7 +215,7 @@ public final class ProjectUICommands {
                 remoteRepositoryProvider.switchAllToLatest();
                 for (String file : new String[] { OConsts.FILE_PROJECT,
                         OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
-                        OConsts.DEFAULT_INTERNAL + '/' + SRX.CONF_SENTSEG }) {
+                        OConsts.DEFAULT_INTERNAL + '/' + SRXManager.CONF_SENTSEG }) {
                     remoteRepositoryProvider.copyFilesFromReposToProject(file);
                 }
 
@@ -1308,7 +1308,7 @@ public final class ProjectUICommands {
         chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
 
         int result = chooser.showOpenDialog(Core.getMainWindow().getApplicationFrame());
-        if (result == OmegaTFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             File[] selFiles = chooser.getSelectedFiles();
             projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(), selFiles);
         }

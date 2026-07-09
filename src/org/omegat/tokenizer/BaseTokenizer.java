@@ -227,7 +227,7 @@ public abstract class BaseTokenizer implements ITokenizer {
     }
 
     protected String[] tokenizeToStrings(String str, StemmingMode stemmingMode, boolean stemsAllowed,
-                                         boolean stopWordsAllowed, boolean filterDigits, boolean filterWhitespace) {
+            boolean stopWordsAllowed, boolean filterDigits, boolean filterWhitespace) {
         if (StringUtil.isEmpty(str)) {
             return EMPTY_STRING_LIST;
         }
@@ -373,12 +373,12 @@ public abstract class BaseTokenizer implements ITokenizer {
     }
 
     protected String printTest(String[] strings, String input) {
-        return StringUtils.join(strings, ", ") + '\n' +
-                "Is verbatim: " + StringUtils.join(strings, "").equals(input) + '\n';
+        return StringUtils.join(strings, ", ") + '\n' + "Is verbatim: "
+                + StringUtils.join(strings, "").equals(input) + '\n';
     }
 
     @SuppressWarnings("unused")
     @VisibleForTesting
-    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = newEntry ->
-            ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
+    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = newEntry -> ((BaseTokenizer) Core
+            .getProject().getSourceTokenizer()).test(newEntry.getSrcText());
 }

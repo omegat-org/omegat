@@ -24,6 +24,10 @@
  ******************************************************************************/
 package org.omegat.core.statistics;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.omegat.core.threads.Completion;
+
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -48,35 +52,38 @@ import java.util.concurrent.CompletableFuture;
  * - Other methods from {@code IStatsConsumer} do not perform any actions.
  */
 public class TestingStatsConsumer implements IStatsConsumer {
-    private volatile String[][] result;
-    private final CompletableFuture<Void> future;
+    private final List<String[][]> result = new ArrayList<>();
+    private final StringBuilder buffer = new StringBuilder();
 
-    public TestingStatsConsumer(CompletableFuture<Void> future) {
-        this.future = future;
-    }
+    private final CompletableFuture<Completion> completion = new CompletableFuture<>();
 
-    public String[][] getTable() {
+    public List<String[][]> getTable() {
         return result;
     }
 
-    @Override
-    public void appendTextData(final String result) {
-        // do nothing
+    public String getTextData() {
+        return buffer.toString();
     }
 
     @Override
-    public void appendTable(final String title, final String[] headers, final String[][] data) {
-        // do nothing
+    public void appendTextData(String result) {
+        buffer.append(result);
+    }
+
+    @Override
+    public void appendTable(String title, String[] headers, String[][] data) {
+        result.add(data);
     }
 
     @Override
     public void setTextData(final String data) {
-        // do nothing
+        buffer.setLength(0);
+        buffer.append(data);
     }
 
     @Override
-    public void setTable(final String[] headers, final String[][] data) {
-        result = data;
+    public void setTable(String[] headers, String[][] data) {
+        result.add(data);
     }
 
     @Override
@@ -85,12 +92,16 @@ public class TestingStatsConsumer implements IStatsConsumer {
     }
 
     @Override
-    public void finishData() {
-        future.complete(null);
+    public void showProgress(final int percent) {
+        // do nothing
+    }
+
+    public CompletableFuture<Completion> completion() {
+        return completion;
     }
 
     @Override
-    public void showProgress(final int percent) {
-        // do nothing
+    public void onComplete(Completion completion) {
+        this.completion.complete(completion);
     }
 }

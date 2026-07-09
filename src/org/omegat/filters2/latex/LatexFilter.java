@@ -36,10 +36,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -272,11 +274,11 @@ public class LatexFilter extends AbstractFilter {
 
     private String substituteUnicode(String par) {
         par = par.replaceAll("\\\\\\\\", "<br0>");
-        par = par.replaceAll("\\{?\\\\ss\\}?", "\u00df");
-        par = par.replaceAll("\\{?\\\\glqq\\}?(\\{\\})?", "\u301f");
-        par = par.replaceAll("\\{?\\\\grqq\\}?(\\{\\})?", "\u301d");
-        par = par.replaceAll("\\{?\\\\glq\\}?(\\{\\})?", "\u201a");
-        par = par.replaceAll("\\{?\\\\grq\\}?(\\{\\})?", "\u2018");
+        par = par.replaceAll("\\{?\\\\ss}?", "ß");
+        par = par.replaceAll("\\{?\\\\glqq}?(\\{})?", "〟");
+        par = par.replaceAll("\\{?\\\\grqq}?(\\{})?", "〝");
+        par = par.replaceAll("\\{?\\\\glq}?(\\{})?", "‚");
+        par = par.replaceAll("\\{?\\\\grq}?(\\{})?", "‘");
         par = par.replaceAll("\\\\%", "%");
         par = par.replaceAll("\\\\-", "\u00ad");
         par = par.replaceAll("\\\\,", "\u2009");
@@ -424,7 +426,8 @@ public class LatexFilter extends AbstractFilter {
                     if (m.group(2) != null) {
                         content = processParagraph(commands, m.group(2));
                     }
-                    String[] subst = { reHarden(lineBreak + m.group(1) + "{" + content + "}"), reHarden(replace) };
+                    String[] subst = { reHarden(lineBreak + m.group(1) + "{" + content + "}"),
+                            reHarden(replace) };
 
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
@@ -440,9 +443,11 @@ public class LatexFilter extends AbstractFilter {
 
     private String replaceUnknownCommand(LinkedList<String[]> substituted, List<String> commands,
             String par) {
-        int counter = 0;
+        int placeholderIndex = 0;
+        List<String> sortedCommands = commands.stream()
+                .sorted(Comparator.comparingInt(String::length).reversed()).collect(Collectors.toList());
 
-        for (String command : commands) {
+        for (String command : sortedCommands) {
             if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[")
                     || command.equals("\\|")) {
                 // continue;
@@ -456,11 +461,11 @@ public class LatexFilter extends AbstractFilter {
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(par);
                 while (m.find()) {
-                    String replace = "<u" + counter + ">";
+                    String replace = "<u" + placeholderIndex + ">";
                     String[] subst = { reHarden(m.group(0)), reHarden(replace) };
                     substituted.addFirst(subst);
                     m.appendReplacement(sb, replace);
-                    counter++;
+                    placeholderIndex++;
                 }
                 m.appendTail(sb);
 
@@ -528,11 +533,10 @@ public class LatexFilter extends AbstractFilter {
             StringBuilder sb = new StringBuilder();
 
             if (parBreakCommand.contains(command)) {
-                String find = String.format(".*(\\%s)", command, command);
+                String find = String.format(".*(\\%s)", command);
 
                 Pattern p = Pattern.compile(find);
                 Matcher m = p.matcher(tmp);
-                int lastStart = 0;
                 while (m.find()) {
                     String replace = "<r" + counter + ">";
                     String content = processParagraph(commands, tmp.substring(0, m.start(1)));

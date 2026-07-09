@@ -76,15 +76,15 @@ public class SpellCheckerManager {
         return spellChecker;
     }
 
-    private static final Map<String, String> morfologikDictionaryProviders = new HashMap<>();
-    private static final Map<String, String> hunspellDictionaryProviders = new HashMap<>();
+    private static final Map<String, String> MORFOLOGIK_DICTIONARY_PROVIDERS = new HashMap<>();
+    private static final Map<String, String> HUNSPELL_DICTIONARY_PROVIDERS = new HashMap<>();
 
     public static Set<String> getMorfologikDictionaryLanguages() {
-        return morfologikDictionaryProviders.keySet();
+        return MORFOLOGIK_DICTIONARY_PROVIDERS.keySet();
     }
 
     public static Set<String> getHunspellDictionaryLanguages() {
-        return hunspellDictionaryProviders.keySet();
+        return HUNSPELL_DICTIONARY_PROVIDERS.keySet();
     }
 
     /**
@@ -100,9 +100,9 @@ public class SpellCheckerManager {
     public static void registerSpellCheckerDictionaryProvider(String lang, SpellCheckDictionaryType type,
             String dictionaryProvider) {
         if (Objects.requireNonNull(type) == SpellCheckDictionaryType.HUNSPELL) {
-            hunspellDictionaryProviders.put(lang, dictionaryProvider);
+            HUNSPELL_DICTIONARY_PROVIDERS.put(lang, dictionaryProvider);
         } else if (type == SpellCheckDictionaryType.MORFOLOGIK) {
-            morfologikDictionaryProviders.put(lang, dictionaryProvider);
+            MORFOLOGIK_DICTIONARY_PROVIDERS.put(lang, dictionaryProvider);
         }
     }
 
@@ -116,7 +116,7 @@ public class SpellCheckerManager {
      * @return Path of the dictionary installed.
      */
     public static Path installHunspellDictionary(String dictionaryDir, String language) {
-        String className = hunspellDictionaryProviders.get(language);
+        String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;
         }
@@ -132,7 +132,7 @@ public class SpellCheckerManager {
      * @return Lucene hunspell Dictionary object.
      */
     public static org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
-        String className = hunspellDictionaryProviders.get(language);
+        String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;
         }
@@ -148,7 +148,7 @@ public class SpellCheckerManager {
      * @return Morfologik Dictionary object.
      */
     public static morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
-        String className = morfologikDictionaryProviders.get(language);
+        String className = MORFOLOGIK_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;
         }

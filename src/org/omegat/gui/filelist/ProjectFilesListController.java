@@ -36,6 +36,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -51,11 +53,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -88,6 +96,9 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -109,6 +120,7 @@ import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -136,12 +148,18 @@ import static org.omegat.util.gui.DataTableStyling.getTextCellRenderer;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
+@NullMarked
 public class ProjectFilesListController implements IProjectFilesList {
+
+    private static final NumberFormat PROGRESS_PERCENT_FORMAT = createProgressPercentFormat();
+    private static final int MIN_PROGRESS_WIDTH = 3;
 
     private ProjectFilesList list;
     private FileInfoModel modelFiles;
     private AbstractTableModel modelTotal;
     private Sorter currentSorter;
+    private @Nullable TableColumn filesProgressColumn;
+    private @Nullable TableColumn totalsProgressColumn;
 
     private TableFilterPanel filterPanel;
 
@@ -201,6 +219,8 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         // set the position and size
         initWindowLayout();
+        Preferences.addPropertyChangeListener(Preferences.PROJECT_FILES_SHOW_PROGRESS,
+                e -> SwingUtilities.invokeLater(this::updateProjectFilesProgressDisplay));
 
         list.m_addNewFileButton.addActionListener(e -> doImportSourceFiles());
         list.m_wikiImportButton.addActionListener(e -> doWikiImport());
@@ -258,6 +278,9 @@ public class ProjectFilesListController implements IProjectFilesList {
                 list.tableFiles.repaint();
                 list.tableTotal.repaint();
                 modelTotal.fireTableDataChanged();
+                if (shouldRefreshProjectFilesProgress()) {
+                    modelFiles.fireTableDataChanged();
+                }
             }
 
             /**
@@ -268,6 +291,9 @@ public class ProjectFilesListController implements IProjectFilesList {
             public void onEntryActivated(SourceTextEntry newEntry) {
                 UIThreadsUtil.mustBeSwingThread();
                 modelTotal.fireTableDataChanged();
+                if (shouldRefreshProjectFilesProgress()) {
+                    modelFiles.fireTableDataChanged();
+                }
             }
         });
 
@@ -682,20 +708,41 @@ public class ProjectFilesListController implements IProjectFilesList {
     private void createTableFiles() {
         applyColors(list.tableFiles);
         list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        list.tableFiles.setRowSelectionAllowed(true);
+        list.tableFiles.setColumnSelectionAllowed(false);
+        list.tableFiles.setCellSelectionEnabled(false);
     }
 
     private void propagateTableColumns() {
+        TableColumnModel filesColumns = list.tableFiles.getColumnModel();
+        TableColumnModel totalsColumns = list.tableTotal.getColumnModel();
+        syncTotalColumnsToFileColumns(filesColumns, totalsColumns);
+
         // Set last column of tableTotal to match size of scrollbar.
         JScrollBar scrollbar = list.scrollFiles.getVerticalScrollBar();
         int sbWidth = scrollbar == null || !scrollbar.isVisible() ? 0 : scrollbar.getWidth();
-        list.tableTotal.getColumnModel().getColumn(TotalsTableColumn.MARGIN.index).setPreferredWidth(sbWidth);
+        TableColumn marginColumn = getColumnByModelIndex(totalsColumns, TotalsTableColumn.MARGIN.index);
+        marginColumn.setPreferredWidth(sbWidth);
+        marginColumn.setWidth(sbWidth);
 
         // Propagate column sizes to totals table
-        for (int i = 0; i < list.tableFiles.getColumnCount(); i++) {
-            TableColumn srcCol = list.tableFiles.getColumnModel().getColumn(i);
-            TableColumn trgCol = list.tableTotal.getColumnModel().getColumn(i);
+        for (int i = 0; i < filesColumns.getColumnCount(); i++) {
+            TableColumn srcCol = filesColumns.getColumn(i);
+            TableColumn trgCol = getColumnByModelIndex(totalsColumns, srcCol.getModelIndex());
             trgCol.setPreferredWidth(srcCol.getWidth());
+            trgCol.setWidth(srcCol.getWidth());
         }
+    }
+
+    static void syncTotalColumnsToFileColumns(TableColumnModel filesColumns,
+            TableColumnModel totalsColumns) {
+        for (int i = 0; i < filesColumns.getColumnCount(); i++) {
+            TableColumn totalsColumn = getColumnByModelIndex(totalsColumns,
+                    filesColumns.getColumn(i).getModelIndex());
+            moveColumn(totalsColumns, totalsColumn, i);
+        }
+        TableColumn marginColumn = getColumnByModelIndex(totalsColumns, TotalsTableColumn.MARGIN.index);
+        moveColumn(totalsColumns, marginColumn, totalsColumns.getColumnCount() - 1);
     }
 
     /**
@@ -716,6 +763,7 @@ public class ProjectFilesListController implements IProjectFilesList {
      * <li>ENCODING: Character encoding used.</li>
      * <li>SEGMENTS: Total number of segments in the file.</li>
      * <li>UNIQUE_SEGMENTS: Number of unique segments in the file.</li>
+     * <li>PROGRESS: Translation progress.</li>
      * </ul>
      */
     enum FilesTableColumn {
@@ -747,7 +795,11 @@ public class ProjectFilesListController implements IProjectFilesList {
          * a particular context.
          */
         UNIQUE_SEGMENTS(4, OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class,
-                getNumberCellRenderer());
+                getNumberCellRenderer()),
+        /**
+         * Represents per-file translation progress in the project files list.
+         */
+        PROGRESS(5, OStrings.getString("PF_PROGRESS"), FileProgress.class, new ProgressCellRenderer());
 
         private final int index;
         private final String label;
@@ -790,8 +842,7 @@ public class ProjectFilesListController implements IProjectFilesList {
 
             @Override
             public void columnMoved(TableColumnModelEvent e) {
-                // Propagate movement to tableTotal
-                list.tableTotal.getColumnModel().moveColumn(e.getFromIndex(), e.getToIndex());
+                propagateTableColumns();
             }
 
             @Override
@@ -806,9 +857,100 @@ public class ProjectFilesListController implements IProjectFilesList {
             TableColumn tCol = colModel.getColumn(col.index);
             tCol.setCellRenderer(new CustomRenderer(files, col.renderer));
         }
+        filesProgressColumn = getColumnByModelIndex(colModel, FilesTableColumn.PROGRESS.index);
+        updateProjectFilesProgressDisplay();
         currentSorter = new Sorter(files);
         currentSorter.addRowSorterListener(e -> updateTitle());
         list.tableFiles.setRowSorter(currentSorter);
+    }
+
+    private void updateProjectFilesProgressDisplay() {
+        if (list == null) {
+            return;
+        }
+        boolean visible = isProjectFilesProgressEnabled();
+        if (!visible && currentSorter != null) {
+            currentSorter.clearProgressSort();
+        }
+        if (visible) {
+            updateProgressColumn(list.tableTotal.getColumnModel(), totalsProgressColumn,
+                    TotalsTableColumn.PROGRESS.index, true);
+            updateProgressColumn(list.tableFiles.getColumnModel(), filesProgressColumn,
+                    FilesTableColumn.PROGRESS.index, true);
+        } else {
+            updateProgressColumn(list.tableFiles.getColumnModel(), filesProgressColumn,
+                    FilesTableColumn.PROGRESS.index, false);
+            updateProgressColumn(list.tableTotal.getColumnModel(), totalsProgressColumn,
+                    TotalsTableColumn.PROGRESS.index, false);
+        }
+        list.tableFiles.revalidate();
+        list.tableFiles.repaint();
+        list.tableFiles.getTableHeader().resizeAndRepaint();
+        list.tableTotal.revalidate();
+        list.tableTotal.repaint();
+        list.tableTotal.getTableHeader().resizeAndRepaint();
+        propagateTableColumns();
+        if (modelTotal != null) {
+            modelTotal.fireTableDataChanged();
+        }
+        if (modelFiles != null && visible) {
+            modelFiles.fireTableDataChanged();
+        }
+    }
+
+    static void updateProgressColumn(TableColumnModel columnModel, @Nullable TableColumn column,
+            int targetIndex, boolean visible) {
+        if (column == null) {
+            return;
+        }
+        boolean present = containsColumn(columnModel, column);
+        if (visible) {
+            if (!present) {
+                columnModel.addColumn(column);
+                columnModel.moveColumn(columnModel.getColumnCount() - 1,
+                        Math.min(targetIndex, columnModel.getColumnCount() - 1));
+            }
+            column.setMinWidth(15);
+            column.setPreferredWidth(Math.max(column.getPreferredWidth(), 90));
+            column.setResizable(true);
+        } else if (present) {
+            columnModel.removeColumn(column);
+        }
+    }
+
+    private static boolean containsColumn(TableColumnModel columnModel, TableColumn column) {
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            if (columnModel.getColumn(i) == column) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static TableColumn getColumnByModelIndex(TableColumnModel columnModel, int modelIndex) {
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            if (column.getModelIndex() == modelIndex) {
+                return column;
+            }
+        }
+        throw new IllegalArgumentException("No table column with model index " + modelIndex);
+    }
+
+    private static void moveColumn(TableColumnModel columnModel, TableColumn column, int targetIndex) {
+        int currentIndex = getColumnIndex(columnModel, column);
+        if (currentIndex != targetIndex) {
+            columnModel.moveColumn(currentIndex, targetIndex);
+        }
+    }
+
+    private static int getColumnIndex(TableColumnModel columnModel, TableColumn column) {
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            if (columnModel.getColumn(i) == column) {
+                return i;
+            }
+        }
+        throw new IllegalArgumentException("Column is not present in the table column model");
     }
 
     enum TotalsTableColumn {
@@ -848,7 +990,17 @@ public class ProjectFilesListController implements IProjectFilesList {
                                 }
                             }
                         },
-        MARGIN(5, String.class, new AlternatingHighlightRenderer().setDoHighlight(false));
+        PROGRESS(5, FileProgress.class, new ProgressCellRenderer()) {
+            @Override
+            protected Object getValue(int row) {
+                if (row != 2 || !Core.getProject().isProjectLoaded() || !isProjectFilesProgressEnabled()) {
+                    return "";
+                }
+                StatisticsInfo stat = Core.getProject().getStatistics();
+                return new FileProgress(stat.numberOfTranslatedSegments, stat.numberOfUniqueSegments);
+            }
+        },
+        MARGIN(6, String.class, new AlternatingHighlightRenderer().setDoHighlight(false));
 
         private final int index;
         private final Class<?> clazz;
@@ -902,6 +1054,8 @@ public class ProjectFilesListController implements IProjectFilesList {
             tCol.setCellRenderer(new CustomRenderer(null, col.renderer));
             tCol.setMinWidth(0);
         }
+        totalsProgressColumn = getColumnByModelIndex(colModel, TotalsTableColumn.PROGRESS.index);
+        updateProjectFilesProgressDisplay();
     }
 
     /**
@@ -993,6 +1147,195 @@ public class ProjectFilesListController implements IProjectFilesList {
         list.statLabel.setFont(font);
     }
 
+    private static NumberFormat createProgressPercentFormat() {
+        DecimalFormat format = new DecimalFormat("0.0%");
+        format.setRoundingMode(RoundingMode.DOWN);
+        return format;
+    }
+
+    static String formatProgressPercent(int translated, int total) {
+        if (translated <= 0 || total <= 0) {
+            return "0%";
+        }
+        synchronized (PROGRESS_PERCENT_FORMAT) {
+            return PROGRESS_PERCENT_FORMAT.format((double) translated / total);
+        }
+    }
+
+    private static boolean isProjectFilesProgressEnabled() {
+        return Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_PROGRESS,
+                Preferences.PROJECT_FILES_SHOW_PROGRESS_DEFAULT);
+    }
+
+    private boolean shouldRefreshProjectFilesProgress() {
+        return list.isVisible() && isProjectFilesProgressEnabled();
+    }
+
+    private static FileProgress calculateFileProgress(IProject.FileInfo fi) {
+        return calculateFileProgress(fi.entries,
+                ste -> Core.getProject().getTranslationInfo(ste).isTranslated(),
+                ProjectFilesListController::isUniqueSourceEntry);
+    }
+
+    private static FileProgress getCachedFileProgress(Map<FileInfo, FileProgress> progressByFile,
+            FileInfo fi) {
+        FileProgress progress = progressByFile.get(fi);
+        if (progress == null) {
+            progress = calculateFileProgress(fi);
+            progressByFile.put(fi, progress);
+        }
+        return progress;
+    }
+
+    static FileProgress calculateFileProgress(List<SourceTextEntry> entries,
+            Predicate<SourceTextEntry> isTranslated, Predicate<SourceTextEntry> isUnique) {
+        int translated = 0;
+        int total = 0;
+        for (SourceTextEntry ste : entries) {
+            if (isUnique.test(ste)) {
+                total++;
+                if (isTranslated.test(ste)) {
+                    translated++;
+                }
+            }
+        }
+        return new FileProgress(translated, total);
+    }
+
+    private static boolean isUniqueSourceEntry(SourceTextEntry ste) {
+        return ste.getDuplicate() != SourceTextEntry.DUPLICATE.NEXT;
+    }
+
+    static int compareFileProgress(FileProgress left, FileProgress right) {
+        int c = Double.compare(left.getRatio(), right.getRatio());
+        if (c != 0) {
+            return c;
+        }
+        c = Integer.compare(left.getTranslated(), right.getTranslated());
+        if (c != 0) {
+            return c;
+        }
+        return Integer.compare(left.getTotal(), right.getTotal());
+    }
+
+    static Color getProgressColor(FileProgress progress) {
+        double ratio = progress.getRatio();
+        if (ratio >= 1d) {
+            return EditorColor.COLOR_PROJECT_FILES_PROGRESS_COMPLETE.getColor();
+        }
+        return ratio >= 0.5d
+                ? EditorColor.COLOR_PROJECT_FILES_PROGRESS_HIGH.getColor()
+                : EditorColor.COLOR_PROJECT_FILES_PROGRESS_LOW.getColor();
+    }
+
+    static int getProgressFillWidth(FileProgress progress, int width) {
+        if (width <= 0) {
+            return 0;
+        }
+        int progressWidth = Math.min(width, Math.max(0, (int) Math.round(width * progress.getRatio())));
+        if (progressWidth == 0 && progress.getTotal() > 0) {
+            return Math.min(MIN_PROGRESS_WIDTH, width);
+        }
+        return progressWidth;
+    }
+
+    static class FileProgress {
+        static final FileProgress EMPTY = new FileProgress(0, 0);
+
+        private final int translated;
+        private final int total;
+
+        FileProgress(int translated, int total) {
+            this.translated = translated;
+            this.total = total;
+        }
+
+        int getTranslated() {
+            return translated;
+        }
+
+        int getTotal() {
+            return total;
+        }
+
+        double getRatio() {
+            return total <= 0 ? 0d : (double) translated / total;
+        }
+
+        String getTooltip() {
+            return StringUtil.format(OStrings.getString("PF_PROGRESS_TOOLTIP"), translated, total);
+        }
+
+        @Override
+        public String toString() {
+            return formatProgressPercent(translated, total);
+        }
+    }
+
+    private static class ProgressCellRenderer extends javax.swing.JComponent implements TableCellRenderer {
+        private static final long serialVersionUID = 1L;
+        private static final int TEXT_PADDING = 6;
+
+        private transient TableCellRenderer textRenderer = getTextCellRenderer();
+        private transient FileProgress progress = FileProgress.EMPTY;
+
+        ProgressCellRenderer() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            if (!(value instanceof FileProgress)) {
+                Component c = getTextRenderer().getTableCellRendererComponent(table, value, isSelected, hasFocus,
+                        row, column);
+                return c;
+            }
+
+            FileProgress progressValue = (FileProgress) value;
+            progress = progressValue;
+            setFont(table.getFont());
+            setBackground(isSelected ? table.getSelectionBackground()
+                    : row % 2 != 0 ? COLOR_ALTERNATING_HILITE : table.getBackground());
+            setToolTipText(progressValue.getTooltip());
+            return this;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            int width = getWidth();
+            int height = getHeight();
+            g.setColor(getBackground());
+            g.fillRect(0, 0, width, height);
+
+            FileProgress currentProgress = getProgress();
+            int progressWidth = getProgressFillWidth(currentProgress, width);
+            if (progressWidth > 0) {
+                g.setColor(getProgressColor(currentProgress));
+                g.fillRect(0, 0, progressWidth, height);
+            }
+
+            String text = currentProgress.toString();
+            FontMetrics metrics = g.getFontMetrics(getFont());
+            int textWidth = metrics.stringWidth(text);
+            int x = Math.max(TEXT_PADDING, width - textWidth - TEXT_PADDING);
+            int y = (height - metrics.getHeight()) / 2 + metrics.getAscent();
+            g.setColor(Color.BLACK);
+            g.drawString(text, x, y);
+        }
+
+        private TableCellRenderer getTextRenderer() {
+            if (textRenderer == null) {
+                textRenderer = getTextCellRenderer();
+            }
+            return textRenderer;
+        }
+
+        private FileProgress getProgress() {
+            return progress == null ? FileProgress.EMPTY : progress;
+        }
+    }
+
     static class FileInfoModel extends AbstractTableModel {
         private final List<IProject.FileInfo> files;
 
@@ -1021,6 +1364,8 @@ public class ProjectFilesListController implements IProjectFilesList {
             case UNIQUE_SEGMENTS:
                 StatisticsInfo stat = Core.getProject().getStatistics();
                 return stat.uniqueCountsByFile.get(fi.filePath);
+            case PROGRESS:
+                return isProjectFilesProgressEnabled() ? calculateFileProgress(fi) : FileProgress.EMPTY;
             default:
                 throw new IllegalArgumentException();
             }
@@ -1110,7 +1455,7 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         @Override
         public FileInfoModel getModel() {
-            throw new RuntimeException("Not implemented");
+            return modelFiles;
         }
 
         @Override
@@ -1119,26 +1464,27 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         @Override
         public void allRowsChanged() {
-            throw new RuntimeException("Not implemented");
+            sort();
         }
 
         @Override
         public void rowsInserted(int firstRow, int endRow) {
-            throw new RuntimeException("Not implemented");
+            sort();
         }
 
         @Override
         public void rowsUpdated(int firstRow, int endRow) {
-            throw new RuntimeException("Not implemented");
+            sort();
         }
 
         @Override
         public void rowsUpdated(int firstRow, int endRow, int column) {
+            rowsUpdated(firstRow, endRow);
         }
 
         @Override
         public void rowsDeleted(int firstRow, int endRow) {
-            throw new RuntimeException("Not implemented");
+            sort();
         }
 
         @Override
@@ -1148,7 +1494,14 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         @Override
         public void setSortKeys(List<? extends javax.swing.RowSorter.SortKey> keys) {
-            throw new RuntimeException("Not implemented");
+            if (keys == null || keys.isEmpty()) {
+                sortKey = new SortKey(0, SortOrder.UNSORTED);
+            } else {
+                SortKey key = keys.get(0);
+                sortKey = new SortKey(key.getColumn(), key.getSortOrder());
+            }
+            sort();
+            save();
         }
 
         @Override
@@ -1160,6 +1513,13 @@ public class ProjectFilesListController implements IProjectFilesList {
             sortKey = new SortKey(column, order);
             sort();
             save();
+        }
+
+        void clearProgressSort() {
+            if (sortKey.getColumn() == FilesTableColumn.PROGRESS.index) {
+                sortKey = new SortKey(0, SortOrder.UNSORTED);
+                sort();
+            }
         }
 
         @Override
@@ -1178,6 +1538,13 @@ public class ProjectFilesListController implements IProjectFilesList {
                 return;
             }
             final StatisticsInfo stat = Core.getProject().getStatistics();
+            final Map<FileInfo, FileProgress> progressByFile = new HashMap<>();
+            if (sortKey.getColumn() == FilesTableColumn.PROGRESS.index && isProjectFilesProgressEnabled()) {
+                for (Integer modelIndex : viewToModel) {
+                    FileInfo file = files.get(modelIndex);
+                    progressByFile.put(file, calculateFileProgress(file));
+                }
+            }
             viewToModel.sort((o1, o2) -> {
                 FileInfo f1 = files.get(o1);
                 FileInfo f2 = files.get(o2);
@@ -1203,6 +1570,17 @@ public class ProjectFilesListController implements IProjectFilesList {
                     int n1 = stat.uniqueCountsByFile.get(f1.filePath);
                     int n2 = stat.uniqueCountsByFile.get(f2.filePath);
                     c = Integer.compare(n1, n2);
+                    break;
+                case 5:
+                    if (!isProjectFilesProgressEnabled()) {
+                        c = f1.filePath.compareToIgnoreCase(f2.filePath);
+                        break;
+                    }
+                    c = compareFileProgress(getCachedFileProgress(progressByFile, f1),
+                            getCachedFileProgress(progressByFile, f2));
+                    if (c == 0) {
+                        c = f1.filePath.compareToIgnoreCase(f2.filePath);
+                    }
                     break;
                 }
                 if (sortKey.getSortOrder() == SortOrder.DESCENDING) {

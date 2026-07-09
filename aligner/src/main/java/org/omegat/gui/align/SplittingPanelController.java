@@ -29,8 +29,6 @@ import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -42,9 +40,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -56,7 +53,7 @@ public class SplittingPanelController {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private final String text;
-    private final String reference;
+    private final @Nullable String reference;
     private int splitOffset = -1;
 
     /**
@@ -68,7 +65,7 @@ public class SplittingPanelController {
      * @param reference
      *            Reference text to serve as a hint to the user
      */
-    public SplittingPanelController(String text, String reference) {
+    public SplittingPanelController(String text, @Nullable String reference) {
         this.text = text;
         this.reference = reference;
     }
@@ -103,29 +100,16 @@ public class SplittingPanelController {
 
         StaticUIUtils.makeCaretAlwaysVisible(panel.editorPane);
 
-        panel.okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                splitOffset = panel.editorPane.getCaretPosition();
-                dialog.dispose();
-            }
+        panel.okButton.addActionListener(e -> {
+            splitOffset = panel.editorPane.getCaretPosition();
+            dialog.dispose();
         });
-        panel.cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doCancel(dialog);
-            }
-        });
+        panel.cancelButton.addActionListener(e -> doCancel(dialog));
 
         panel.okButton.setEnabled(false);
 
-        panel.editorPane.addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                panel.okButton.setEnabled(
-                        e.getDot() == e.getMark() && e.getDot() > 0 && e.getDot() < text.length());
-            }
-        });
+        panel.editorPane.addCaretListener(e -> panel.okButton.setEnabled(
+                e.getDot() == e.getMark() && e.getDot() > 0 && e.getDot() < text.length()));
 
         panel.editorPane.addKeyListener(new KeyAdapter() {
             @Override
@@ -162,7 +146,7 @@ public class SplittingPanelController {
             return new String[] { text };
         } else {
             return new String[] { text.substring(0, splitOffset).trim(),
-                    text.substring(splitOffset, text.length()).trim() };
+                    text.substring(splitOffset).trim() };
         }
     }
 

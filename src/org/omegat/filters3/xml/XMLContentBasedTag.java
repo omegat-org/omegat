@@ -33,12 +33,12 @@ import org.jspecify.annotations.Nullable;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class XMLContentBasedTag extends XMLIntactTag {
-    private String shortcut;
+    private @Nullable String shortcut;
     private int shortcutLetter;
     private int shortcutIndex;
 
     /** Creates a new instance of XML Tag */
-    public XMLContentBasedTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut, Type type,
+    public XMLContentBasedTag(XMLDialect xmlDialect, Handler handler, String tag, @Nullable String shortcut, Type type,
             org.xml.sax.@Nullable Attributes attributes) {
         super(xmlDialect, handler, tag, shortcut, type, attributes);
     }
@@ -47,7 +47,8 @@ public class XMLContentBasedTag extends XMLIntactTag {
         this.shortcut = shortcut;
     }
 
-    public String toShortcut() {
+    @Override
+    public @Nullable String toShortcut() {
         return shortcut;
     }
 

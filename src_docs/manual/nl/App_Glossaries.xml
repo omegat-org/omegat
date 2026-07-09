@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="app.glossaries">
-  <title id="app.glossaries.title">Woordenlijsten</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="app.glossaries">
+  <title xml:id="app.glossaries.title">Woordenlijsten</title>
 
   <para>Woordenlijsten zijn bestanden voor terminologie, opgeslagen in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
@@ -28,13 +27,13 @@
 
 		  <para>Als u een andere codering wilt specificeren, kunt u dat doen door een “magische” opmerking in de volgende vorm op te nemen:</para>
 
-		  <simplelist>
+		  <simplelist type="vert">
             <member>
               <code># -*- coding: &lt;charset&gt; -*-</code>,
             </member>
           </simplelist>
 		  
-          <para>waar <parameter>&lt;charset&gt;</parameter> gewoonlijk een van de lijsten is die is vermeld in de <ulink url="https://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>.</para>
+          <para>waar <parameter>&lt;charset&gt;</parameter> gewoonlijk een van de lijsten is die is vermeld in de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</link>.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -51,37 +50,37 @@
 	<para>Aanpassingen in een woordenlijst worden onmiddellijk herkend door OmegaT en weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
   </note>
 
-  <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">De map voor woordenlijsten</title>
+  <section xml:id="glossaries.glossary.folder">
+    <title xml:id="glossaries.glossary.folder.title">De map voor woordenlijsten</title>
 
     <para>Standaard bevat elk project een map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> om de beschrijfbare woordenlijst in te plaatsen en andere woordenlijsten voor verwijzing die u wilt toevoegen aan het project. Bekijk de projecteigenschap <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> voor details.</para>
 
     <para>Alle woordenlijst moeten zijn geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>. Woordenlijsten die zijn geplaatst in geneste mappen worden ook herkend.</para>
 
     <para>Binnen die map voor woordenlijsten ter verwijzing kunt u meerdere submappen voor terminologie maken, gerangschikt op onderwerp, cliënt of elke andere categorie die geschikt is voor uw werkstroom.</para>
-    <para>Gebruik de projecteigenschap <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> om de locatie van de map voor woordenlijsten in te stellen. Deze map mag buiten het project worden ingesteld, wat u in staat stelt het, of een van de specifieke submappen, te gebruiken in andere projecten.</para>
+    <para>Gebruik de <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> projecteigenschap om de locatie van de map voor woordenlijsten in te stellen. Deze map mag buiten het project worden ingesteld, wat u in staat stelt het te gebruiken, of een van de specifieke submappen, in andere projecten.</para>
   </section>
 
-  <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">De woordenlijst voor het project</title>
+  <section xml:id="glossaries.default.glossary">
+    <title xml:id="glossaries.default.glossary.title">De woordenlijst voor het project</title>
 
     <para>De beschrijfbare woordenlijst is standaard geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> en is genaamd <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
     <para>U kunt de naam en de locatie ervan wijzigen in het dialoogvenster <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>, maar u moet het een extensie <filename>.txt</filename> of <filename>.utf8</filename> geven, en het opslaan binnen de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> of in één van diens submappen.</para>
   </section>
 
-  <section id="glossaries.fileformat">
-    <title id="glossaries.fileformat.title">Bestandsindeling</title>
+  <section xml:id="glossaries.fileformat">
+    <title xml:id="glossaries.fileformat.title">Bestandsindeling</title>
 
     <para>Bestanden voor woordenlijsten in OmegaT zijn eenvoudige platte tekst lijsten met drie kolommen, met de bronterm in de eerste kolom, een optionele doelterm in de tweede kolom en een optionele opmerking in de derde kolom.</para>
 
-    <para>Woordenlijsten mogen &quot;tab gescheiden waarden&quot; (TSV)-bestanden of &quot;komma gescheiden waarden&quot; (CSV)-bestanden zijn of mogen de indeling TermBase eXchange (TBX 2) gebruiken.</para>
+    <para>Woordenlijsten mogen "tab gescheiden waarden" (TSV)-bestanden of "komma gescheiden waarden" (CSV)-bestanden zijn of mogen de indeling TermBase eXchange (TBX 2) gebruiken.</para>
 
-    <para>Een beschrijfbare woordenlijst die is gemaakt voor het project door OmegaT zal altijd een TSV-bestand zijn dat is opgeslagen in UTF-8. Door gebruikers gemaakte bestanden die alleen Latijnse tekens bevatten kunnen worden herkend en behandeld als ISO-8859-1, als zij geen niet-ASCII-tekens bevatten, of andere tekens die worden geïnterpreteerd als UTF-8.</para>
+    <para>Een beschrijfbare woordenlijst die is gemaakt voor het project door OmegaT zal altijd een TSV-bestand zijn dat is opgeslagen in UTF-8. Door gebruikers gemaakte bestanden die alleen Latijns tekens bevatten kunnen worden herkend en behandeld als ISO-8859-1 als zij geen niet-ASCII-tekens bevatten of andere tekens die worden geïnterpreteerd als UTF-8.</para>
 
     <para>De codering die wordt gebruikt voor het lezen van woordenlijsten voor verwijzing is afhankelijk van hun bestandsextensie:</para>
 
-    <table id="glossary.extensions">
+    <table xml:id="glossary.extensions">
       <title>Indeling, extensies en verwachte codering</title>
 	  <tgroup cols="3">
       <thead>

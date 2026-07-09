@@ -33,7 +33,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -52,6 +51,8 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.segmentation.SRXManager;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
@@ -129,11 +130,12 @@ public final class TestTeamIntegrationChild {
             }
             TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
+            TestCoreState.getInstance().setSegmenter(new Segmenter(SRXManager.getDefault()));
 
             // Init UI stubs. In a CI environment, errors can occur when
             // initializing the RemoteRepositoryProvider, so we need to make
             // sure the "main window" is available for logging first.
-            Core.initializeConsole(Collections.emptyMap());
+            Core.initializeConsole();
             TestCoreInitializer.initMainWindow(mainWindow);
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);

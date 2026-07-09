@@ -44,12 +44,12 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.MissingResourceException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.CancellationException;
 import java.util.regex.Matcher;
@@ -546,7 +546,7 @@ public class AlignPanelController {
 
         alignPanel.table.setTransferHandler(new AlignTransferHandler());
         alignPanel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        alignPanel.table.setFont(Core.getMainWindow().getApplicationFont());
+        alignPanel.table.setFont(Objects.requireNonNull(Core.getMainWindow()).getApplicationFont());
         CoreEvents.registerFontChangedEventListener(alignPanel.table::setFont);
 
         // Set initial state
@@ -715,7 +715,7 @@ public class AlignPanelController {
             }
         });
         int relocateCol = ppRow < row ? ppCol : col;
-        List<String> toRelocate = new ArrayList<>();
+        List<@Nullable String> toRelocate = new ArrayList<>();
         for (int i = Math.min(ppRow, row); i <= Math.max(ppRow, row); i++) {
             String line = model.removeLine(i, relocateCol);
             toRelocate.add(line);
@@ -1152,8 +1152,8 @@ public class AlignPanelController {
         // It also speeds up access.
         List<Float> rowToDistance;
         List<MutableBead> rowToBead;
-        List<String> rowToSourceLine;
-        List<String> rowToTargetLine;
+        List<@Nullable String> rowToSourceLine;
+        List<@Nullable String> rowToTargetLine;
 
         BeadTableModel(List<MutableBead> data) {
             this.data = data;
@@ -1177,8 +1177,8 @@ public class AlignPanelController {
             }
             List<Float> aRowToDistance = new ArrayList<>();
             List<MutableBead> aRowToBead = new ArrayList<>();
-            List<String> aRowToSourceLine = new ArrayList<>();
-            List<String> aRowToTargetLine = new ArrayList<>();
+            List<@Nullable String> aRowToSourceLine = new ArrayList<>();
+            List<@Nullable String> aRowToTargetLine = new ArrayList<>();
             for (MutableBead bead : data) {
                 int beadRows = Math.max(bead.sourceLines.size(), bead.targetLines.size());
                 for (int i = 0; i < beadRows; i++) {
@@ -1313,8 +1313,8 @@ public class AlignPanelController {
                 throw new IllegalArgumentException();
             }
             Collections.sort(rows);
-            List<String> selected = new ArrayList<>(rows.size());
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> selected = new ArrayList<>(rows.size());
+            List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             int origRowCount = getRowCount();
             // Bead to be modified selected here
             MutableBead trgBead;
@@ -1329,7 +1329,7 @@ public class AlignPanelController {
             } else {
                 trgBead = rowToBead.get(trgRow);
             }
-            List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
+            List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             for (int row : rows) {
                 String line = lines.get(row);
                 selected.add(line);
@@ -1366,9 +1366,9 @@ public class AlignPanelController {
          *         target lines after the split.
          */
         private MutableBead splitBeadByCount(MutableBead bead, int count) {
-            List<String> splitSrc = new ArrayList<>(bead.sourceLines);
+            List<@Nullable String> splitSrc = new ArrayList<>(bead.sourceLines);
             bead.sourceLines.clear();
-            List<String> splitTrg = new ArrayList<>(bead.targetLines);
+            List<@Nullable String> splitTrg = new ArrayList<>(bead.targetLines);
             bead.targetLines.clear();
             bead.status = Status.DEFAULT;
             for (int i = 0; i < count; i++) {
@@ -1407,7 +1407,7 @@ public class AlignPanelController {
             if ((row == 0 && up) || (row == rowToBead.size() - 1 && !up)) {
                 return !(col == COL_SRC ? bead.targetLines : bead.sourceLines).isEmpty();
             }
-            List<String> lines = col == COL_SRC ? bead.sourceLines : bead.targetLines;
+            List<@Nullable String> lines = col == COL_SRC ? bead.sourceLines : bead.targetLines;
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int index = Util.indexByIdentity(lines, line);
             return up ? index == 0 : index == lines.size() - 1;
@@ -1439,9 +1439,7 @@ public class AlignPanelController {
             if (trgRow >= 0 && trgRow < rowToBead.size()) {
                 MutableBead srcBead = rowToBead.get(row);
                 MutableBead trgBead = rowToBead.get(trgRow);
-                if (srcBead == trgBead) {
-                    return false;
-                }
+                return srcBead != trgBead;
             }
             return true;
         }
@@ -1544,8 +1542,8 @@ public class AlignPanelController {
                 throw new IllegalArgumentException();
             }
             int origRowCount = getRowCount();
-            List<String> toCombine = new ArrayList<>();
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> toCombine = new ArrayList<>();
+            List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             toCombine.add(lines.get(rows.get(0)));
             for (int i = 1; i < rows.size(); i++) {
                 int row = rows.get(i);
@@ -1556,7 +1554,7 @@ public class AlignPanelController {
                 bead.status = Status.DEFAULT;
             }
             MutableBead trgBead = rowToBead.get(rows.get(0));
-            List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
+            List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
             String combined = lang != null ? Util.join(lang, toCombine) : null;
             trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
@@ -1589,7 +1587,7 @@ public class AlignPanelController {
             }
             int origRowCount = getRowCount();
             MutableBead trgBead = rowToBead.get(row);
-            List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
+            List<@Nullable String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
             trgLines.set(insertAt++, split[0]);
@@ -1601,7 +1599,7 @@ public class AlignPanelController {
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
             }
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             return new int[] { Util.indexByIdentity(lines, split[0]),
                     Util.indexByIdentity(lines, split[split.length - 1]) };
         }
@@ -1623,7 +1621,7 @@ public class AlignPanelController {
                 throw new IllegalArgumentException();
             }
             MutableBead trgBead = rowToBead.get(row);
-            List<String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
+            List<@Nullable String> trgLines = (col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines);
             String line = (col == COL_SRC ? rowToSourceLine : rowToTargetLine).get(row);
             int insertAt = Util.indexByIdentity(trgLines, line);
             trgLines.set(insertAt, newVal);
@@ -1664,9 +1662,9 @@ public class AlignPanelController {
                 Collections.reverse(rows);
             }
             int origRowCount = getRowCount();
-            List<String> selected = new ArrayList<>(rows.size());
+            List<@Nullable String> selected = new ArrayList<>(rows.size());
             for (int row : rows) {
-                List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+                List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
                 String line = lines.get(row);
                 selected.add(line);
                 MutableBead bead = rowToBead.get(row);
@@ -1687,10 +1685,10 @@ public class AlignPanelController {
                     // Already in target bead
                     continue;
                 }
-                // XXX: Bead modified here
+                // Note: Bead modified here
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 bead.status = Status.DEFAULT;
-                List<String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
+                List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
                 int insertIndex = trgRow > row ? 0 : trgLines.size();
                 trgLines.add(insertIndex, line);
                 trgBead.status = Status.DEFAULT;
@@ -1699,7 +1697,7 @@ public class AlignPanelController {
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
             }
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             int[] resultRows = new int[] { Util.indexByIdentity(lines, selected.get(0)),
                     Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
             // Sort result rows so that callers can expect high-to-low order
@@ -1734,7 +1732,7 @@ public class AlignPanelController {
             int beadIndex = data.indexOf(bead);
             for (int row : rows) {
                 String line = rowToSourceLine.get(row);
-                List<String> indexFrom = bead.sourceLines;
+                List<@Nullable String> indexFrom = bead.sourceLines;
                 int index = Util.indexByIdentity(indexFrom, line);
                 if (index == -1) {
                     throw new IllegalArgumentException();
@@ -1777,7 +1775,7 @@ public class AlignPanelController {
                 throw new IllegalArgumentException();
             }
             // Clarify which list we operate on
-            List<String> selectedColumnLines = (col == COL_SRC) ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> selectedColumnLines = (col == COL_SRC) ? rowToSourceLine : rowToTargetLine;
             int nextIndex = row + 1;
             if (nextIndex < selectedColumnLines.size()) {
                 return nextIndex;
@@ -1792,12 +1790,13 @@ public class AlignPanelController {
             fireTableDataChanged();
         }
 
+        @Nullable
         String removeLine(int row, int col) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
             }
             MutableBead bead = rowToBead.get(row);
-            List<String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
+            List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
             String line = lines.get(row);
             // XXX: Bead modified here
             Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
@@ -1805,7 +1804,7 @@ public class AlignPanelController {
             return line;
         }
 
-        int insertLines(List<String> lines, int row, int col) {
+        int insertLines(List<@Nullable String> lines, int row, int col) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
             }
@@ -1947,7 +1946,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
             if (ARRAY2DFLAVOR.equals(flavor)) {
                 return new int[][] { rows, cols };
             }
@@ -1963,8 +1962,8 @@ public class AlignPanelController {
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            DropLocation oldVal = (DropLocation) evt.getOldValue();
-            DropLocation newVal = (DropLocation) evt.getNewValue();
+            @Nullable DropLocation oldVal = (DropLocation) evt.getOldValue();
+            @Nullable DropLocation newVal = (DropLocation) evt.getNewValue();
             if (equals(oldVal, newVal)) {
                 return;
             }
@@ -1977,17 +1976,12 @@ public class AlignPanelController {
             if (newVal != null) {
                 final Rectangle rect = rectForTarget(table, newVal);
                 rect.grow(INSET_MARGIN, INSET_MARGIN);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y, rect.width,
-                                rect.height);
-                    }
-                });
+                SwingUtilities.invokeLater(() -> BORDER.paintBorder(table, table.getGraphics(), rect.x, rect.y,
+                        rect.width, rect.height));
             }
         }
 
-        private boolean equals(DropLocation oldVal, DropLocation newVal) {
+        private boolean equals(@Nullable DropLocation oldVal, @Nullable DropLocation newVal) {
             if (oldVal == newVal) {
                 return true;
             }

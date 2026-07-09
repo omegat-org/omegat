@@ -29,10 +29,8 @@ import java.io.InputStream;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
-import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 
-public class GermanMorfologikDictionary extends AbstractMorfologikDictionary implements ISpellCheckerDictionary,
-        AutoCloseable {
+public class GermanMorfologikDictionary extends AbstractMorfologikDictionary {
 
     private static final String DICTIONARY_BASE = "/org/languagetool/resource/de/hunspell/";
     private static final String[] MORFOLOGIK = { "de_AT", "de_CH", "de_DE" };

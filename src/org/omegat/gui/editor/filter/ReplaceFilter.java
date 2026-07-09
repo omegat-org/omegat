@@ -78,7 +78,9 @@ public class ReplaceFilter implements IEditorFilter {
         controlComponent.btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Core.getEditor().commitAndDeactivate(); // Make sure that any change done in the current segment is not lost
+                // Make sure that any change done in the current segment is not
+                // lost
+                Core.getEditor().commitAndDeactivate();
                 Core.getEditor().removeFilter();
             }
         });
@@ -111,7 +113,8 @@ public class ReplaceFilter implements IEditorFilter {
             if (trans == null) {
                 continue;
             }
-            // Avoid to replace more than once with variables when entries have duplicates
+            // Avoid to replace more than once with variables when entries have
+            // duplicates
             if (en.defaultTranslation && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
                 continue; // Already replaced when we parsed the first entry
             }
@@ -237,8 +240,9 @@ public class ReplaceFilter implements IEditorFilter {
     }
 
     /**
-     * Returns text of entry where replacement should be found. It can be translation or source text depends
-     * on settings, or null if entry should be skipped.
+     * Returns text of entry where replacement should be found. It can be
+     * translation or source text depends on settings, or null if entry should
+     * be skipped.
      */
     private @Nullable String getEntryText(SourceTextEntry ste, TMXEntry en) {
         if (en.isTranslated()) {

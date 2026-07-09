@@ -24,53 +24,26 @@
  */
 package org.omegat.languages.br;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-import morfologik.stemming.Dictionary;
-import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
 import org.languagetool.JLanguageTool;
 
-import org.omegat.core.spellchecker.ISpellCheckerDictionary;
-import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
 
 @NullMarked
-public class BretonMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public class BretonMorfologikDictionary extends AbstractMorfologikDictionary {
 
     private static final String DICTIONARY_PATH = "/org/languagetool/resource/br/hunspell/";
-
-    private InputStream infoInputStream;
-    private InputStream dictInputStream;
+    private static final String[] DICTIONARY = {"br_FR"};
 
     @Override
-    public @Nullable Dictionary getMorfologikDictionary(String language) {
-        if ("br_FR".startsWith(language)) {
-            infoInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "br_FR.info");
-            dictInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "br_FR.dict");
-            if (infoInputStream == null || dictInputStream == null) {
-                return null;
-            }
-            try {
-                return Dictionary.read(dictInputStream, infoInputStream);
-            } catch (IOException ignored) {
-            }
-        }
-        return null;
+    protected String[] getDictionaries() {
+        return DICTIONARY;
     }
 
     @Override
-    public SpellCheckDictionaryType getDictionaryType() {
-        return SpellCheckDictionaryType.MORFOLOGIK;
-    }
-
-    @Override
-    public void close() {
-
-        try {
-            infoInputStream.close();
-            dictInputStream.close();
-        } catch (IOException ignored) {
-        }
+    protected InputStream getResourceAsStream(String resource) {
+        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + resource);
     }
 }

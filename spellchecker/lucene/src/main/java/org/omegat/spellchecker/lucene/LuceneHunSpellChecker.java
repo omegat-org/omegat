@@ -37,8 +37,10 @@ import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.Hunspell;
+import org.apache.lucene.analysis.hunspell.TimeoutPolicy;
 import org.apache.lucene.store.NIOFSDirectory;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.AbstractSpellChecker;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -81,27 +83,42 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         // there is no way to unload
     }
 
+    private final TimeoutPolicy timeoutPolicy;
+    private final int suggestTimeoutMs;
+
+    public LuceneHunSpellChecker(int timeoutMs) {
+        this.timeoutPolicy = TimeoutPolicy.RETURN_PARTIAL_RESULT;
+        this.suggestTimeoutMs = timeoutMs;
+    }
+
+    public LuceneHunSpellChecker() {
+        this.timeoutPolicy = TimeoutPolicy.RETURN_PARTIAL_RESULT;
+        this.suggestTimeoutMs = 1_000;
+    }
+
     @Override
-    protected Optional<ISpellCheckerProvider> initializeWithLanguage(final String language) {
+    protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.getDefaultDictionaryDir().getPath());
 
-        File affixName = Path.of(dictionaryDir).resolve(Path.of(language)).resolve(SC_AFFIX_FILENAME).toFile();
-        File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
-
-        if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-            // try to load <language>.dic/aff
-            affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
-            dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
-            if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-                return Optional.empty();
-            }
-        }
-
         try {
-            ISpellCheckerProvider result = new LuceneProvider(dictionaryName, affixName);
-            return Optional.of(result);
+            File affixName = Path.of(dictionaryDir).resolve(Path.of(language)).resolve(SC_AFFIX_FILENAME).toFile();
+            File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
+            if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
+                // try to load ~/.omegat/spelling/<language>.dic/aff
+                affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_FILE_EXTENSION).toFile();
+                dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_FILE_EXTENSION).toFile();
+                if (!isInvalidFile(affixName) && !isInvalidFile(dictionaryName)) {
+                    return Optional.of(new LuceneProvider(dictionaryName, affixName, timeoutPolicy, suggestTimeoutMs));
+                }
+            }
+
+            // try bundled dictionary
+            Dictionary dictionary = SpellCheckerManager.getHunspellDictionary(language);
+            if (dictionary != null) {
+                return Optional.of(new LuceneProvider(dictionary, timeoutPolicy, suggestTimeoutMs));
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -109,17 +126,30 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
     }
 
     private static final class LuceneProvider implements ISpellCheckerProvider {
-        private final InputStream dictInputStream;
-        private final InputStream affixInputStream;
+        private final @Nullable InputStream dictInputStream;
+        private final @Nullable InputStream affixInputStream;
         private final Hunspell hunspell;
+        private final int suggestTimeoutMs;
 
-        private LuceneProvider(File dictName, File affixName) throws IOException, ParseException {
+        private LuceneProvider(File dictName, File affixName, TimeoutPolicy timeoutPolicy, int suggestTimeoutMs) throws IOException, ParseException {
+            this.suggestTimeoutMs = suggestTimeoutMs;
             Path tempDir = Path.of(FileUtils.getTempDirectoryPath());
             dictInputStream = new FileInputStream(dictName);
             affixInputStream = new FileInputStream(affixName);
             Dictionary dict = new Dictionary(new NIOFSDirectory(tempDir), "omegat",
                     affixInputStream, dictInputStream);
-            hunspell = new Hunspell(dict);
+            hunspell = new Hunspell(dict, timeoutPolicy, LuceneProvider::callback);
+        }
+
+        private LuceneProvider(Dictionary dictionary, TimeoutPolicy timeoutPolicy, int suggestTimeoutMs) {
+            this.suggestTimeoutMs = suggestTimeoutMs;
+            hunspell = new Hunspell(dictionary, timeoutPolicy, LuceneProvider::callback);
+            dictInputStream = null;
+            affixInputStream = null;
+        }
+
+        private static void callback() {
+            // empty method
         }
 
         @Override
@@ -129,7 +159,7 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
 
         @Override
         public List<String> suggest(final String word) {
-            return hunspell.suggest(word);
+            return hunspell.suggest(word, suggestTimeoutMs);
         }
 
         @Override
@@ -139,9 +169,18 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         @Override
         public void destroy() {
             try {
-                dictInputStream.close();
-                affixInputStream.close();
+                if (dictInputStream != null) {
+                    dictInputStream.close();
+                }
             } catch (Exception ignored) {
+                // ignore close error
+            }
+            try {
+                if (affixInputStream != null) {
+                    affixInputStream.close();
+                }
+            } catch (Exception ignored) {
+                // ignore close error
             }
         }
     }

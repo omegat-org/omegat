@@ -1,19 +1,28 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  62 Enhancement
-  96 Bug fixes
+  65 Enhancement
+ 100 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - Suggest quality default fonts based on platform
+  https://sourceforge.net/p/omegat/feature-requests/1792/
+
   - Improve TMX validation error reporting: Show detailed parser errors in dialog instead of only in log file
   https://sourceforge.net/p/omegat/feature-requests/1787/
 
   - Tokenizer to support the snowball generated stemming mode
   https://sourceforge.net/p/omegat/feature-requests/1785/
+
+  - Upgrade LanguageTool to v6.5
+  https://sourceforge.net/p/omegat/feature-requests/1783/
+
+  - expand manual in the application data directory to allow users to keep bookmark on the browser
+  https://sourceforge.net/p/omegat/feature-requests/1778/
 
   - Support Windows 11 and Linux on ARM64 for development environment
   https://sourceforge.net/p/omegat/feature-requests/1773/
@@ -188,8 +197,17 @@
 
   Bug fixes:
 
+  - Right-click error when duplicate element
+  https://sourceforge.net/p/omegat/bugs/1314/
+
+  - No automatic spellchecking in 6.1
+  https://sourceforge.net/p/omegat/bugs/1309/
+
   - .PO filter bug: display issue when a msgctxt spans several lines
   https://sourceforge.net/p/omegat/bugs/1305/
+
+  - LanguageTool failed to load en-US when project is other than English
+  https://sourceforge.net/p/omegat/bugs/1303/
 
   - Unable to import a team project to a path containing Chinese characters
   https://sourceforge.net/p/omegat/bugs/1302/
@@ -228,6 +246,9 @@
 
   - Speller: morfologik: LT bundled dictionary not found in Dutch
   https://sourceforge.net/p/omegat/bugs/1271/
+
+  - Help and Manual Translation Filter not recognized
+  https://sourceforge.net/p/omegat/bugs/1268/
 
   - Console-stats command failed with error
   https://sourceforge.net/p/omegat/bugs/1267/

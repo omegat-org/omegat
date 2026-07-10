@@ -145,7 +145,7 @@ public class ProjectTMX {
     }
 
     /**
-     * It saves current translation into file.
+     * It saves a current translation into the TMX file.
      */
     public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser,
             boolean isTeamProject) throws Exception {

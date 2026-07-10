@@ -466,8 +466,7 @@ public class FilterVisitor extends NodeVisitor {
 
         // DETERMINE FIRST TAG IN PRECEDING TO INCLUDE
         int firstTagToIncludeFromPreceding;
-        for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition;
-             firstTagToIncludeFromPreceding++) {
+        for (firstTagToIncludeFromPreceding = 0; firstTagToIncludeFromPreceding <= lastPrecedingNodePosition; firstTagToIncludeFromPreceding++) {
             Node startNode = allNodesInParagraph.get(firstTagToIncludeFromPreceding);
             if (startNode instanceof Tag openingTag) {
                 int recursion = 1;
@@ -502,8 +501,7 @@ public class FilterVisitor extends NodeVisitor {
 
         // DETERMINE LAST TAG IN FOLLOWING TO INCLUDE
         int lastTagKeptInFollowing;
-        for (lastTagKeptInFollowing = lastFollowingPosition; lastTagKeptInFollowing > lastTranslatableNodePosition;
-             lastTagKeptInFollowing--) {
+        for (lastTagKeptInFollowing = lastFollowingPosition; lastTagKeptInFollowing > lastTranslatableNodePosition; lastTagKeptInFollowing--) {
             Node endNode = allNodesInParagraph.get(lastTagKeptInFollowing);
             if (endNode instanceof Tag closingTag) {
                 int recursion = 1;

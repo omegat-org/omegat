@@ -46,16 +46,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -346,7 +337,8 @@ public class RealProject implements IProject {
                     glossaryPrepared = null;
                     remoteRepositoryProvider.switchAllToLatest();
                 } catch (IRemoteRepository2.NetworkException e) {
-                    Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getMessage() : e.getCause());
+                    Log.logErrorRB("TEAM_NETWORK_ERROR",
+                            e.getCause() == null ? e.getMessage() : e.getCause());
                     setOfflineMode();
                 }
                 remoteRepositoryProvider.copyFilesFromReposToProject("");
@@ -841,7 +833,7 @@ public class RealProject implements IProject {
                         tmxPrepared = null;
                         glossaryPrepared = null;
                         remoteRepositoryProvider.cleanPrepared();
-                        Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                        Objects.requireNonNull(Core.getMainWindow()).showStatusMessageRB("TEAM_SYNCHRONIZE");
                         rebaseAndCommitProject(true);
                         setOnlineMode();
                     }
@@ -857,7 +849,7 @@ public class RealProject implements IProject {
                     }
                 } catch (Exception e) {
                     Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-                    Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                    Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
                 }
 
                 LastSegmentManager.saveLastSegment();
@@ -880,7 +872,8 @@ public class RealProject implements IProject {
     }
 
     private void setProjectMenuEnabled(boolean enabled) {
-        JMenu projectMenu = CoreState.getInstance().getMainWindow().getMainMenu().getProjectMenu();
+        JMenu projectMenu = Objects.requireNonNull(CoreState.getInstance().getMainWindow()).getMainMenu()
+                .getProjectMenu();
         if (projectMenu != null) {
             projectMenu.setEnabled(enabled);
         }
@@ -1152,9 +1145,12 @@ public class RealProject implements IProject {
     /**
      * Do 3-way merge of:
      * <dl>
-     * <dt>Base:</dt><dd>baseTMX</dd>
-     * <dt>File 1:</dt><dd>projectTMX (mine)</dd>
-     * <dt>File 2:</dt><dd>headTMX (theirs)</dd>
+     * <dt>Base:</dt>
+     * <dd>baseTMX</dd>
+     * <dt>File 1:</dt>
+     * <dd>projectTMX (mine)</dd>
+     * <dt>File 2:</dt>
+     * <dd>headTMX (theirs)</dd>
      * </dl>
      */
     protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
@@ -1939,7 +1935,7 @@ public class RealProject implements IProject {
 
         @Override
         public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
-                                   boolean isFuzzy, String sourcePath, IFilter filter) {
+                boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

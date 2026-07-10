@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2026 zollsoft
+ Copyright (C) 2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,7 +42,7 @@ import org.omegat.gui.editor.SegmentBuilder;
  * descending. Text keys collate using a {@link Collator} built for the source
  * language so that accents and language-specific ordering are respected.
  *
- * @author zollsoft
+ * @author stephan.pakebusch at zollsoft.de
  */
 public class MultiKeySorter implements IEditorSorter {
 

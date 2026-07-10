@@ -25,6 +25,8 @@
 
 package org.omegat.gui.stat;
 
+import org.omegat.core.statistics.IStatsConsumer;
+
 import java.awt.BorderLayout;
 
 import javax.swing.SwingUtilities;
@@ -34,7 +36,7 @@ import javax.swing.SwingUtilities;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class MatchStatisticsPanel extends BaseMatchStatisticsPanel {
+public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IStatsConsumer {
 
     public MatchStatisticsPanel(StatisticsWindow window) {
         super(window);
@@ -54,14 +56,11 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel {
         if (data == null || data.length == 0) {
             return;
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // A simpler table is first shown, then replaced with a fancier one,
-                // so have to remove first.
-                removeAll();
-                add(generateTableDisplay(null, headers, data));
-            }
+        SwingUtilities.invokeLater(() -> {
+            // A simpler table is first shown, then replaced with a fancier one,
+            // so have to remove first.
+            removeAll();
+            add(generateTableDisplay(null, headers, data));
         });
     }
 }

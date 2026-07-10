@@ -27,9 +27,9 @@
 FROM debian:bookworm-slim
 ARG TARGETARCH
 ARG CAVER=1.0.3-1
-ARG JAVA=17
-ARG JDKVER=jdk_17.0.14.0.0+7-1
-ARG GRADLE=8.13
+ARG JAVA=25
+ARG JDKVER=jdk_25.0.3.0.0+9-1
+ARG GRADLE=9.4.1
 RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git inotify-tools curl subversion unzip rsync  \
  java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit locales
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh

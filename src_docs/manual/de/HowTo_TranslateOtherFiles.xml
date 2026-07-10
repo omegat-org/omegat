@@ -1,107 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.translate.other.files">
-  <title id="how.to.translate.other.files.title">Andere Formate unterstützen</title>
-
-  <para>Die Dateifilter von OmegaT bieten eine breite Palette an Unterstützung für gängige und weniger gängige Dateiformate. Wenn Sie Formate unterstützen müssen, die nicht von OmegaT abgedeckt werden, gibt es vier Möglichkeiten, dies zu tun:</para>
-
-  <itemizedlist>
-	<listitem>
-	  <para><link linkend="how.to.translate.other.files.associate">Verknüpfen</link> Sie das Format mit einem bereits unterstützten Format.</para>
-	</listitem>
-	
-	<listitem>
-	  <para><link linkend="how.to.translate.other.files.convert">Konvertieren</link> Sie das Format in ein bereits unterstütztes Format.</para>
-	</listitem>
-
-	<listitem>
-	  <para><link linkend="how.to.translate.other.files.third.party.plugins">Erweitern</link> Sie OmegaT mit Plugins von Drittanbietern, die das Format unterstützen.</para>
-	</listitem>
-
-	<listitem>
-	  <para><link linkend="how.to.translate.other.files.develop">Entwickeln</link> Sie ein Filter für das Format.</para>
-	</listitem>
-  </itemizedlist>
-  
-	<section id="how.to.translate.other.files.associate">
-	  <title id="how.to.translate.other.files.associate.title">Verknüpfung</title>
-
-	  <para>Dateifilter haben eine Liste von Dateiendungen, die mit ihnen verknüpft sind. Wenn das Format, die Sie übersetzen möchten, strukturell einem bereits unterstützten Format ähnelt, fügen Sie einfach dessen Dateiendung zur Liste der unterstützten Formatendungen hinzu, oder ändern Sie die Dateiendung in eine Endung, die vom gewünschten Dateifilter akzeptiert wird. Einzelheiten finden Sie unter <link linkend="file.filters" endterm="file.filters.title"/>.</para>
-		
-	  <para>Sie können auch die &quot;Benutzerdefinierte Tags&quot;-Funktion von OmegaT verwenden, um formatspezifische Zeichenketten zu registrieren und sie von OmegaT wie normale Tags behandeln zu lassen. Siehe die <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>-Einstellungen für weitere Informationen.</para>
-	</section>
-	
-	<section id="how.to.translate.other.files.convert">
-	  <title id="how.to.translate.other.files.convert.title">Konvertierung</title>
-
-	  <para>Um sicherzustellen, dass alle Eigenschaften eines Formats ordnungsgemäß berücksichtigt werden, ist es manchmal besser, die Datei in ein unterstütztes Format zu konvertieren und dann die übersetzte Datei wieder in das ursprüngliche Format zu konvertieren.</para>
-
-	  <para>Es gibt eine Vielzahl von kostenlosen Dienstprogrammen von Drittanbietern, die eine solche Hin-und-Her-Konvertierung ermöglichen, z. B.:</para>
-	  
-	  <itemizedlist id="how.to.translate.other.files.third.party.utilities">
-		<listitem id="how.to.translate.other.files.third.party.utilities.rainbow">
-		  <para>Rainbow, vom <ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
-
-		  <para>Lizenz: Apache License Version 2.0</para>
-
-		  <para>Das Okapi Framework kommt mit einer Reihe von Dateifiltern, darunter einige, die von OmegaT nicht nativ unterstützt werden. Einzelheiten finden Sie unter <ulink url="https://okapiframework.org/wiki/index.php?title=Filters">List of file filters</ulink>.</para>
-
-		  <para>Rainbow kann XLIFF-1.2-konforme Dateien oder OmegaT-Projekte von allen Dateien erstellen, die als &quot;Eingabedateien&quot; festgelegt wurden. Rainbow-unterstützte Dateien werden in XLIFF konvertiert und als Quelldateien in ein vollwertiges OmegaT-Projekt eingefügt, das Sie sofort mit OmegaT öffnen können. Einzelheiten finden Sie unter <ulink url="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project">Rainbow TKit - OmegaT Project</ulink>.</para>
-		</listitem>
-
-		<listitem id="how.to.translate.other.files.third.party.utilities.po4a">
-		  <para><ulink url="https://po4a.org">po4a</ulink></para>
-
-		  <para>Lizenz: GNU General Public License v2</para>
-
-		  <para>po4a unterstützt eine Vielzahl von freien Formaten für Software-Dokumentation, die auf der Startseite aufgelistet sind, und bietet Werkzeuge zur Konvertierung in und aus dem po-Format. Einzelheiten finden Sie im Abschnitt <link linkend="file.filters.po" endterm="file.filters.po.title"/>.</para>
-		</listitem>
-
-		<listitem>
-		  <para>Die Konverter vom <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate Toolkit</ulink></para>
-
-		  <para>Lizenz: GNU General Public License v2</para>
-
-		  <para>Das Translate Toolkit bietet eine Vielzahl von Werkzeugen zur Konvertierung in und aus dem po-Format. Einzelheiten finden Sie unter <ulink url="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Converters</ulink>.</para>
-		</listitem>
-
-		<listitem id="how.to.translate.other.files.third.party.utilities.openxliff">
-		  <para>OpenXLIFF von <ulink url="https://maxprograms.com/">Maxprograms</ulink></para>
-
-		  <para>Lizenz: Eclipse Public License v1.0</para>
-
-		  <para>OpenXLIFF unterstützt eine Reihe von Dateifiltern, darunter einige, die von OmegaT nicht nativ unterstützt werden. Einzelheiten finden Sie unter <ulink url="https://maxprograms.com/products/openxliff.html">OpenXLIFF Filters</ulink>. Maxprograms stellt auch den <ulink url="https://maxprograms.com/products/xliffmanager.html">XLIFF Manager</ulink> zur Verfügung, eine grafische Benutzeroberfläche für die OpenXLIFF-Filter.</para>
-
-		  <para>OpenXLIFF erzeugt XLIFF-1.2-konforme Dateien.</para>
-		</listitem>
-	  </itemizedlist>
-	  
-		<para>Einige Formate, wie z. B. PDF, können nicht ordnungsgemäß durch Hin-und-Her-Konvertierungen verarbeitet werden. Diese müssen zunächst in ein unterstütztes Format konvertiert werden, das als Grundlage für die manuelle Erstellung eines geeigneten Dokuments in der Zielsprache dient.</para>
-		
-		<para>Es gibt eine Reihe von Online- oder Offline-Dienstprogrammen, die PDF in gängige Office-Formate konvertieren, allerdings erfordert die Konvertierung immer umfassende manuelle Anpassungen des Zieldokuments, bevor daraus ein ordentliches PDF-Dokument wird. Machen Sie sich zuerst mit den Formatanforderungen vertraut, bevor Sie mit der Arbeit an einer PDF-Datei oder Ähnlichem beginnen.</para>
-	  </section>
-
-	  <section id="how.to.translate.other.files.third.party.plugins">
-		<title id="how.to.translate.other.files.third.party.plugins.title">Drittanbieter-Plugins</title>
-
-		<itemizedlist>
-		  <listitem>
-			<para>Das Okapi Filters Plugin für OmegaT, vom <ulink url="https://okapiframework.org">Okapi Framework</ulink></para>
-
-			<para>Lizenz: Apache License Version 2.0</para>
-
-			<para>Das Dateifilter-Plugin enthält nicht alle Okapi-Framework-Dateifilter. Einzelheiten finden Sie unter <ulink url="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included">Filters Included</ulink>.</para>
-
-			<para>Wenn das Plugin installiert ist, bietet es direkten Zugriff auf die hinzugefügten Formate und gibt Ihnen außerdem die Möglichkeit, eine in Rainbow erstellte benutzerdefinierte Filterparameterdatei zu verknüpfen. Siehe <link linkend="how.to.translate.other.files.third.party.utilities.rainbow">oben</link>.</para>
-		  </listitem>
-		</itemizedlist>
-
-		<para>Weitere Plugins für weniger verbreitete Formate finden Sie in der OmegaT-Wiki. Siehe <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">Plugins</ulink>.</para>
-	</section>
-
-	<section id="how.to.translate.other.files.develop">
-	  <title id="how.to.translate.other.files.develop.title">Entwicklung</title>
-
-	  <para>OmegaT bietet Entwicklern eine ausführliche Dokumentation zur Erstellung von Dateifilter-Plugins. Einzelheiten finden Sie unter <ulink url="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">How to create a file filter plugin for OmegaT</ulink>.</para>
-	</section>
-  </section>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.translate.other.files">
+   <title xml:id="how.to.translate.other.files.title">Andere Formate unterstützen</title>
+   <para>Die Dateifilter von OmegaT unterstützen eine Vielzahl gängiger und weniger gängiger Dateiformate. Wenn Sie Formate benötigen, die OmegaT nicht unterstützt, können Sie das auf vier Arten tun:</para>
+   <itemizedlist>
+      <listitem>
+         <para>
+            <link linkend="how.to.translate.other.files.associate" role="xref">Verknüpfen</link> Sie das Format mit einem bereits unterstützten Format.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <link linkend="how.to.translate.other.files.convert" role="xref">Konvertieren</link> Sie das Format in ein bereits unterstütztes Format.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <link linkend="how.to.translate.other.files.third.party.plugins" role="xref">Erweitern</link> Sie OmegaT um Plugins von Drittanbietern, die das Format unterstützen.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <link linkend="how.to.translate.other.files.develop" role="xref">Entwickeln</link> Sie einen Filter für das Format.</para>
+      </listitem>
+   </itemizedlist>
+   <section xml:id="how.to.translate.other.files.associate">
+      <title xml:id="how.to.translate.other.files.associate.title">Verknüpfung</title>
+      <para>Dateifilter haben eine Liste von Dateiendungen, die mit ihnen verknüpft sind. Wenn ein Format, das Sie übersetzen möchten, strukturell einem bereits unterstützten Format ähnelt, fügen Sie einfach seine Dateiendung zur Liste der unterstützten Formatendungen hinzu oder ändern Sie die Dateiendung in eine, die vom gewünschten Dateifilter akzeptiert wird. Einzelheiten finden Sie im Kapitel <link linkend="file.filters" endterm="file.filters.title"/>.</para>
+      <para>Sie können auch die &quot;Benutzerdefinierte Tags&quot;-Funktion von OmegaT verwenden, um formatspezifische Zeichenketten zu registrieren und sie von OmegaT wie normale Tags behandeln zu lassen. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> (Einstellungen).</para>
+   </section>
+   <section xml:id="how.to.translate.other.files.convert">
+      <title xml:id="how.to.translate.other.files.convert.title">Konvertierung</title>
+      <para>Um sicherzustellen, dass alle Eigenschaften eines Formats korrekt berücksichtigt werden, ist es manchmal besser, die Datei in ein unterstütztes Format zu konvertieren und dann die übersetzte Datei wieder in das Originalformat zurückzukonvertieren.</para>
+      <para>Es gibt eine Reihe von kostenlosen Dienstprogrammen von Drittanbietern, die eine solche Hin- und Rückkonvertierung ermöglichen, zum Beispiel:</para>
+      <itemizedlist xml:id="how.to.translate.other.files.third.party.utilities">
+         <listitem xml:id="how.to.translate.other.files.third.party.utilities.rainbow">
+            <para>Rainbow, from the 
+               <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://okapiframework.org">Okapi
+                  		  Framework</link>
+            </para>
+            <para>Lizenz: Apache License Version 2.0</para>
+            <para>Das Okapi Framework kommt mit einer Reihe von Dateifiltern, die nicht alle von OmegaT nativ unterstützt werden. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://okapiframework.org/wiki/index.php?title=Filters">List of file filters</link> for details.</para>
+            <para>Rainbow kann XLIFF-1.2-konforme Dateien oder OmegaT-Projekte von allen Dateien erstellen, die als &quot;Eingabedateien&quot; festgelegt wurden. Rainbow-unterstützte Dateien werden in XLIFF konvertiert und als Quelldateien in ein vollwertiges OmegaT-Projekt eingefügt, das Sie sofort mit OmegaT öffnen können. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://okapiframework.org/wiki/index.php/Rainbow_TKit_-_OmegaT_Project">Rainbow TKit - OmegaT Project</link> for details.</para>
+         </listitem>
+         <listitem xml:id="how.to.translate.other.files.third.party.utilities.po4a">
+            <para>
+               <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://po4a.org">po4a</link>
+            </para>
+            <para>Lizenz: GNU General Public License v2</para>
+            <para>po4a unterstützt eine Vielzahl von freien Formaten für Software-Dokumentation, die auf der Startseite aufgelistet sind, und bietet Werkzeuge zur Konvertierung in und aus dem po-Format. Einzelheiten finden Sie im Abschnitt <link linkend="file.filters.po" endterm="file.filters.po.title"/>.</para>
+         </listitem>
+         <listitem>
+            <para>The converters from the 
+               <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/index.html">Translate
+                  		  Toolkit</link>
+            </para>
+            <para>Lizenz: GNU General Public License v2</para>
+            <para>Das Translate Toolkit bietet eine Vielzahl von Werkzeugen zur Konvertierung in und aus dem po-Format. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.translatehouse.org/projects/translate-toolkit/en/latest/commands/index.html">Converters</link> for details.</para>
+         </listitem>
+         <listitem xml:id="how.to.translate.other.files.third.party.utilities.openxliff">
+            <para>OpenXLIFF from 
+               <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://maxprograms.com/">Maxprograms</link>
+            </para>
+            <para>Lizenz: Eclipse Public License v1.0</para>
+            <para>OpenXLIFF unterstützt eine Reihe von Dateifiltern, die nicht alle von OmegaT nativ unterstützt werden. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://maxprograms.com/products/openxliff.html">OpenXLIFF Filters</link> for details. Maxprograms also distributes <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://maxprograms.com/products/xliffmanager.html">XLIFF Manager</link>, a graphical user interface for the OpenXLIFF Filters.</para>
+            <para>OpenXLIFF erzeugt XLIFF-1.2-konforme Dateien.</para>
+         </listitem>
+      </itemizedlist>
+      <para>Einige Formate, wie z.B. PDF, können durch Hin- und Rückkonvertierung nicht korrekt verarbeitet werden. Diese Formate müssen zunächst in ein unterstütztes Format konvertiert werden, das als Grundlage für die manuelle Erstellung eines geeigneten Dokuments in der Zielsprache dient.</para>
+      <para>Es gibt eine Reihe von Online- und Offline-Dienstprogrammen, die PDF in gängige Office-Formate konvertieren können, allerdings erfordert die Konvertierung immer eine umfassende manuelle Anpassung des Zieldokuments, bevor daraus ein ordentliches PDF-Dokument wird. Machen Sie sich zuerst mit den Formatanforderungen vertraut, bevor Sie mit der Arbeit an einer PDF-Datei oder Ähnlichem beginnen.</para>
+   </section>
+   <section xml:id="how.to.translate.other.files.third.party.plugins">
+      <title xml:id="how.to.translate.other.files.third.party.plugins.title">Plugins von Drittanbietern</title>
+      <itemizedlist>
+         <listitem>
+            <para>The Okapi Filters Plugin for OmegaT, from the 
+               <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://okapiframework.org">Okapi Framework</link>
+            </para>
+            <para>Lizenz: Apache License Version 2.0</para>
+            <para>Das Dateifilter-Plugin enthält nicht alle Okapi-Framework-Dateifilter. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://okapiframework.org/wiki/index.php/Okapi_Filters_Plugin_for_OmegaT#Filters_Included">Filters Included</link> for details.</para>
+            <para>Wenn das Plugin installiert ist, bietet es direkten Zugriff auf die hinzugefügten Formate und ermöglicht es, eine in Rainbow erstellte benutzerdefinierte Filterparameterdatei zu verknüpfen. Siehe <link linkend="how.to.translate.other.files.third.party.utilities.rainbow" role="xref">oben</link>.</para>
+         </listitem>
+      </itemizedlist>
+      <para>Weitere Plugins für weniger verbreitete Formate finden Sie in der OmegaT-Wiki. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Plugins/">Plugins</link>.</para>
+   </section>
+   <section xml:id="how.to.translate.other.files.develop">
+      <title xml:id="how.to.translate.other.files.develop.title">Entwicklung</title>
+      <para>OmegaT bietet Entwicklern eine ausführliche Dokumentation zur Erstellung von Dateifilter-Plugins. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.readthedocs.io/en/latest/11.HowToCreateFilterPlugin/">How to create a file filter plugin for OmegaT</link> for details.</para>
+   </section>
+</section>

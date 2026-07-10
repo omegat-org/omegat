@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import picocli.CommandLine;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -88,5 +90,22 @@ public final class SubCommands {
      */
     public static Set<String> getSubcommandNames() {
         return SUB_COMMAND_ENTRIES.keySet();
+    }
+
+    /**
+     * Registers all subcommand entries stored in the collection to the provided
+     * command line object.
+     * <p>
+     * This method iterates through the predefined set of
+     * subcommand entries and dynamically adds them to the given command line
+     * instance.
+     *
+     * @param commandLine the command line object to which the subcommand
+     *                    entries will be registered.
+     */
+    public static void registerSubCommandEntriesToCommandLine(CommandLine commandLine) {
+        for (Map.Entry<String, Class<? extends BaseSubCommand>> entry : SUB_COMMAND_ENTRIES.entrySet()) {
+            commandLine.addSubcommand(entry.getKey(), entry.getValue());
+        }
     }
 }

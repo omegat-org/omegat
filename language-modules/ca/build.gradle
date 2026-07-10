@@ -23,8 +23,6 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(project(":spellchecker:lucene"))
     testImplementation(libs.languagetool.core)
-    testRuntimeOnly(libs.json)
-    testRuntimeOnly(libs.protobuf)
     testRuntimeOnly(libs.commons.io)
 }
 

@@ -26,7 +26,7 @@ mkdir -p $CONTEXT
 cp -p ci/iscc-entrypoint.sh $CONTEXT/
 
 cat << __EOF__  > $CONTEXT/Dockerfile
-FROM docker.io/amake/innosetup:innosetup6-buster
+FROM docker.io/amake/innosetup:innosetup6-bookworm
 USER root
 RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers
 RUN chown -R $PUID:$PGID /home/xclient /work

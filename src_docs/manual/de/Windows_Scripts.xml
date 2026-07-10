@@ -1,379 +1,312 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.scripts">
-  <title id="windows.scripts.title"><guilabel>Scripting</guilabel></title>
-
-  <para>Skripte sind kurze Programme (ähnlich den Makros in Office-Applikationen), die zur Automatisierung von Aufgaben sowie zur Erweiterung oder Anpassung der OmegaT-Funktionen verwendet werden können. Nutzer können zum Schreiben von Skripten nur Skriptsprachen verwenden, die von der verwendeten Java Virtual Machine unterstützt wird.</para>
-
-
-  <para>Das Scripting-Fenster ermöglicht es Ihnen, ein existierendes Skript zu laden und im aktuellen Projekt auszuführen.</para>
-
-  <para>Verwenden Sie <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>, um auf das Fenster zuzugreifen.</para>
-
-  <section id="windows.scripts.folder">
-  <title id="windows.scripts.folder.title">Der Skriptordner</title>
-
-  <para>Standardmäßig werden Skripte im <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner des Applikationsordners von OmegaT aufbewahrt.</para>
-
-  <para>Neue Skripte, die dort hinzugefügt werden, erscheinen in der Liste der verfügbaren Skripte im linken Bereich des Fensters.</para>
-
-  <warning>
-    <para>Wenn auf der linken Seite des Scripting-Fensters keine Skriptliste angezeigt wird, verwenden Sie den Menüpunkt <guimenu>Datei</guimenu> &gt; <guimenuitem>Scripts-Ordner setzen...</guimenuitem>, um den Speicherort der Skripte zu setzen.</para>
-  </warning>
-
-  <para>Weitere Skripte können Sie hier finden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>. Kopieren Sie die Datei einfach in den <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner.</para>
-
-  <para>Einige Skripte basieren auf <emphasis>Ereignissen</emphasis>. Der Ordner mit den Skripten enthält Unterordner, die den verfügbaren Ereignissen entsprechen. Sie können Skripte automatisch auslösen lassen, indem Sie sie in den entsprechenden Unterordner ablegen:</para>
-
-  <variablelist>
-	<varlistentry id="application.folder.scripts.application.shutdown">
-	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, bevor OmegaT heruntergefahren wird.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.application.startup">
-	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, sobald die Scripting-Engine verfügbar ist, kurz nachdem OmegaT gestartet wurde.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.entry.activated">
-	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Segment editiert wird. Das Segment ist im <code>newEntry</code>-Binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.file">
-	  <term id="application.folder.scripts.new.file.title">new_file</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn der Editor zur nächsten Datei im Projekt wechselt. Der neue Dateiname ist im <code>activeFileName</code>-Binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.word">
-	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Wort im Editorfenster editiert wird. Das neue Wort ist im <code>newWord</code>-Binding verfügbar.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.project.changed">
-	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn sich der Status des Projekts ändert. Ein <code>eventType</code>-Objekt wird gebunden und kann die folgenden Werte akzeptieren: CLOSE, COMPILE, CREATE, LOAD oder SAVE.</para></listitem>
-	</varlistentry>
-  </variablelist>
-
-  <para>Diese Unterordner sind bereits im Skriptordner angelegt, der mit der Distribution einhergeht.</para>
-  
-  <warning>
-	<para>Skripte werden auch gestartet, wenn Sie andere Skripte ausführen. Folglich wird in einem großen Projekt ein <code>entry_activated</code>-Skript häufig aufgerufen, wenn ein Skript vom Typ Suchen/Ersetzen verwendet wird, das alle Segmente in einer Schleife durchläuft, was die Performance der Applikation negativ beeinträchtigt.</para>
-  </warning>
-  </section>
-  
-  <section id="windows.scripts.usage">
-	<title id="windows.scripts.usage.title">Verwendung</title>
-
-	<itemizedlist>
-    <listitem>
-		<para>Klicken Sie auf den Namen eines Skripts in der Liste im linken Bereich. Das Skript wird in den Editor geladen.</para>
-      </listitem>
-
-      <listitem>
-		<para>Klicken Sie auf die <guibutton>Ausführen</guibutton>-Schaltfläche am unteren Rand des Fensters oder drücken Sie <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>, um das Skript sofort zu starten.</para>
-      </listitem>
-
-      <listitem>
-		<para>Um einen Shortcut (Tastenkürzel und Menüpunkt) für ein häufig verwendetes Skript zu erstellen, rechtsklicken Sie auf eine der Schaltflächen <guibutton>&lt;1&gt;</guibutton> bis <guibutton>&lt;12&gt;</guibutton> am unteren Rand des Fensters und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus, um das Skript dieser Nummer zuzuweisen.</para>
-
-		<para>Wenn Sie das Skript vom Shortcut lösen möchten, rechtsklicken Sie auf seine Schaltfläche und wählen Sie <guilabel>Skript entfernen</guilabel> aus.</para>
-      </listitem>
-
-      <listitem>
-		<para>Sie können dann auf die Nummer klicken, um das das zugewiesene Skript auszuführen. Sie können das Skript auch über das Menü <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> ausführen, indem Sie den entsprechenden Menüpunkt auswählen oder das zugehörige Tastenkürzel (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 bis F12</keycap></keycombo>) drücken.</para>
-      </listitem>
-	</itemizedlist>
-
-	<warning>
-      <para>Linux-Nutzer: Je nach der Konfiguration Ihres Betriebssystems kann es sein, dass Sie keine Schreibrechte für standardmäßig verwendeten Scripts-Ordner haben.</para>
-
-      <para>In solchen Fällen müssen Sie den Skriptordner an einen anderen Speicherort kopieren oder verschieben, für den Sie Schreibrechte haben, z. B. der <link linkend="configuration.folder.location">Konfigurationsordner</link>, wenn Sie Ihre eigenen Skripte schreiben, neue hinzufügen oder bestehende ändern wollen.</para>
-
-      <para>Wenn Sie Schreibrechte für den Standardordner haben, stellen Sie sicher, dass Sie den Namen aller von Ihnen geänderten Skripte ändern oder eine Sicherungskopie erstellen, da sie bei einer Aktualisierung von OmegaT überschrieben werden.</para>
-	</warning>
-  </section>
-
-  <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Mitgelieferte Skripte</title>
-
-    <para>OmegaT kommt mit einer Reihe von Skripten, die von Freiwilligen entwickelt wurden. Verwenden Sie den Skripteditor, um Skripte direkt zu öffnen, auszuführen oder zu ändern, oder um neue Skripte für den eigenen Gebrauch zu schreiben.</para>
-
-	<note>
-	  <para>Die mitgelieferten Skripte sollen Ihnen den Umgang mit OmegaT erleichtern, werden aber nicht von den OmegaT-Entwicklern unterstützt.</para>
-	</note>
-	
-	<para>Folgen Sie den Anweisungen im Skript selbst.</para>
-
-    <variablelist>
-      <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
-        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapt standard tags (Standard-Tags adaptieren)</term>
-
-        <listitem>
-          <para>Standard-Tags adaptieren, wenn der Befehl &quot;Mit Match ersetzen&quot; ausgeführt wird.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.auto.open.last.project">
-        <term id="windows.scripts.distribution.auto.open.last.project.title">Auto Open Last Project (Letztes Projekt automatisch öffnen)</term>
-
-        <listitem>
-          <para>Das zuletzt verwendete OmegaT-Projekt automatisch öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.check.same.segment">
-        <term id="windows.scripts.distribution.check.same.segment.title">Check Same Segment (Identische Segmente suchen)</term>
-
-        <listitem>
-          <para>Identische Segmente suchen (Groß-/Kleinschreibung-sensitiv).</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.currency.translator">
-        <term id="windows.scripts.distribution.currency.translator.title">Currency Translator (Währungsübersetzer)</term>
-
-        <listitem>
-          <para>Währungen entsprechend der Quell- und Zielsprache übersetzen.</para>
-
-          <para>Dadurch wird zum Beispiel eine Zeichenkette wie &quot;$123,399.99&quot; in &quot;123 399,99 USD&quot; übersetzt.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.example.gui.scripting">
-        <term id="windows.scripts.distribution.example.gui.scripting.title">Example - GUI Scripting (Beispiel - GUI-Scripting)</term>
-
-        <listitem>
-          <para>Beispiel für GUI-Scripting.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.example.key.binding">
-        <term id="windows.scripts.distribution.example.key.binding.title">Example - Key Binding (Beispiel - Tastenbindung)</term>
-
-        <listitem>
-          <para>Beispiel für die Nutzung eines Tastenbindungsereignisses.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.example.modify.segment">
-        <term id="windows.scripts.distribution.example.modify.segment.title">Example - Modify Segment (Beispiel - Segment modifizieren)</term>
-
-        <listitem>
-          <para>Beispiel, das zeigt, wie man ein Segment modifiziert.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.example.search.and.replace">
-        <term id="windows.scripts.distribution.example.search.and.replace.title">Beispiel - Suchen und Ersetzen</term>
-
-        <listitem>
-          <para>Ein einfaches Suchen-und-Ersetzen-Skript.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.external.spellcheck">
-        <term id="windows.scripts.distribution.external.spellcheck.title">External spellcheck (Externe Rechtschreibprüfung)</term>
-
-        <listitem>
-          <para>Schreibt alle Segmente in eine Datei namens <filename>[Projektname].doc</filename> und öffnet sie im standardmäßig verwendeten Textverarbeitungsprogramm des Systems. Beachten Sie, dass die Datei eine reine Textdatei ist. Die <filename>.doc</filename>-Endung sorgt lediglich dafür, dass die Datei im Textverarbeitungsprogramm geöffnet wird.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.extract.text.content">
-        <term id="windows.scripts.distribution.extract.text.content.title">Extract Text Content (Textinhalt extrahieren)</term>
-
-        <listitem>
-          <para>Extrahiert den Inhalt des Projekts in eine einzelne Textdatei (eine Zeile pro Segment). Siehe <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink>.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.non.breaking.space">
-        <term id="windows.scripts.distribution.non.breaking.space.title">Geschütztes Leerzeichen</term>
-
-        <listitem>
-          <para>Leerzeichen mit geschützten Leerzeichen ersetzen, wo dies in Französisch angebracht ist.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.open.current.file">
-        <term id="windows.scripts.distribution.open.current.file.title">Open Current File (Aktuelle Datei öffnen)</term>
-
-        <listitem>
-          <para>Die aktuelle Quelldatei öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.open.glossary">
-        <term id="windows.scripts.distribution.open.glossary.title">Open Glossary (Glossar öffnen)</term>
-
-        <listitem>
-          <para>Das beschreibbare Glossar in einem Editor öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.open.project.folder">
-        <term id="windows.scripts.distribution.open.project.folder.title">Open Project Folder (Projektordner öffnen)</term>
-
-        <listitem>
-          <para>Den Projektordner im Standard-Dateimanager öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.open.tm.folder">
-        <term id="windows.scripts.distribution.open.tm.folder.title">Open TM Folder (TM-Ordner öffnen)</term>
-
-        <listitem>
-          <para>Den <filename class="directory">/tm</filename>-Ordner öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
-        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open project_save.tmx (project_save.tmx öffnen)</term>
-
-        <listitem>
-          <para>Die project_save.tmx-Datei in einem Texteditor öffnen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.qa.check.rules">
-        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Regeln überprüfen</term>
-
-        <listitem>
-          <para>QA-Skript (Quality Assurance bzw. Qualitätssicherung).</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.qa.identical.segments">
-        <term id="windows.scripts.distribution.qa.identical.segments.title">QA - Identical Segments (QA - Identische Segmente)</term>
-
-        <listitem>
-          <para>Identische Segmente suchen (Groß-/Kleinschreibung-sensitiv).</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
-        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - Cleanup (rekursiv)</term>
-
-        <listitem>
-          <para>SVN-Cleanup auf das aktuelle Projekt oder einen beliebigen Ordner anwenden (rekursiv).</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.show.same.segments">
-        <term id="windows.scripts.distribution.show.same.segments.title">Show Same Segments (Identische Segmente anzeigen)</term>
-
-        <listitem>
-          <para>Eine Liste von Segmenten anzeigen, bei denen Quelle und Ziel den gleichen Inhalt haben.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.spellcheck">
-        <term id="windows.scripts.distribution.spellcheck.title">Rechtschreibprüfung</term>
-
-        <listitem>
-          <para>Globale Rechtschreibprüfung.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
-        <term id="windows.scripts.distribution.strip.bidi.marks.title">BiDi-Markierungen entfernen</term>
-
-        <listitem>
-          <para>BiDi-Markierungen im aktuellen Zieltext oder markierten Text entfernen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.strip.tags">
-        <term id="windows.scripts.distribution.strip.tags.title">Tags entfernen</term>
-
-        <listitem>
-          <para>Tags im aktuellen Zieltext oder markierten Text entfernen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.switch.colour.theme">
-        <term id="windows.scripts.distribution.switch.colour.theme.title">Switch Colour Theme (Farbschema umschalten)</term>
-
-        <listitem>
-          <para>Das im Editor verwendete Farbschema umschalten.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.tag.free.match">
-        <term id="windows.scripts.distribution.tag.free.match.title">Tag-Free Match (Tagfreier Match)</term>
-
-        <listitem>
-          <para>Aktuelles Ziel mit einem tagfreien Match ersetzen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.tagwipe">
-        <term id="windows.scripts.distribution.tagwipe.title">Tagwipe</term>
-
-        <listitem>
-          <para>Überflüssige Tags aus docx-Dokumenten entfernen.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
-        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
-
-        <listitem>
-          <para>(keine Beschreibung)</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
-        <listitem>
-          <para>(keine Beschreibung)</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-  </section>
-
-  <section id="windows.scripts.references">
-    <title id="windows.scripts.references.title">Referenzen</title>
-
-    <variablelist>
-      <varlistentry>
-        <term>OmegaT-Javadoc</term>
-
-        <listitem>
-          <para>Die <ulink url="https://omegat.sourceforge.io/javadoc-latest/">OmegaT API</ulink>-Dokumentation.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Groovy</term>
-
-        <listitem>
-          <para>Eine dynamische Sprache für die Java Virtual Machine. Sie baut auf den Stärken von Java auf, und fügt mächtige Features hinzu, die von Sprachen wie Python, Ruby und Smalltalk inspiriert sind. Einzelheiten finden Sie unter <ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink>.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>JavaScript</term>
-
-        <listitem>
-          <para>Eine prototypbasierte Skriptsprache, die dynamisch typisiert ist und über erstklassige Features verfügt. Sie ist eine Multi-Paradigma-Sprache, die objektorientierte, imperative und funktionale Programmierstile unterstützt. Siehe <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink> und <ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</ulink>.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <para>Alle Sprachen haben Zugriff auf das OmegaT-Objektmodell; das Projekt selbst kann über das Objekt namens &quot;project&quot; angesprochen werden. Das folgende Groovy-Code-Snippet-Beispiel scannt alle Segmente in jeder Datei und zeigt die Quell- und Zieltexte von Segmenten an, die eine Übersetzung enthalten.</para>
-
-    <programlisting>files = project.projectFiles;
-for (i in 0 ..&lt; files.size())
-{
-	for (j in 0 ..&lt; files[i].entries.size())
-	{
-		currSegment = files[i].entries[j];
-		if (project.getTranslationInfo(currSegment))
-		{
-			source = currSegment.getSrcText();
-			target = project.getTranslationInfo(currSegment).translation;
-			console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
-		}     
-	}
-}</programlisting>
-  </section>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.scripts">
+   <title xml:id="windows.scripts.title"><guilabel>Scripting</guilabel></title>
+   <para>Skripte sind kurze Programme (ähnlich den Makros in Office-Applikationen), die zur Automatisierung von Aufgaben und zur Erweiterung oder Anpassung der OmegaT-Funktionen verwendet werden können. Benutzer können Skripte nur in Skriptsprachen schreiben, die von der verwendeten Java Virtual Machine unterstützt werden.</para>
+   <para>Das Scripting-Fenster ermöglicht es Ihnen, ein bestehendes Skript zu laden und im aktuellen Projekt auszuführen.</para>
+   <para>Use 
+      <link endterm="menus.tools.title" linkend="menus.tools"/>
+      <link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/> to
+      access the window.</para>
+   <section xml:id="windows.scripts.folder">
+      <title xml:id="windows.scripts.folder.title">Der Skriptordner</title>
+      <para>Standardmäßig werden Skripte im <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner des Applikationsordners von OmegaT aufbewahrt.</para>
+      <para>Neue Skripte, die dort hinzugefügt werden, erscheinen in der Liste der verfügbaren Skripte auf der linken Seite des Fensters.</para>
+      <warning>
+         <para>Wenn diese Liste leer ist, verwenden Sie den Menüpunkt <guimenu>Datei</guimenu> &gt; <guimenuitem>Scripts-Ordner setzen...</guimenuitem>, um den Speicherort der Skripte zu setzen.</para>
+      </warning>
+      <para>Additional scripts can be found here: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</link>. Kopieren Sie die Datei einfach in den <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner.</para>
+      <para>Einige Skripte sind <emphasis>ereignisgesteuert</emphasis>. Der Ordner mit den Skripten enthält Unterordner, die den verfügbaren Ereignissen entsprechen. Sie können Skripte automatisch ausführen lassen, indem Sie sie in den entsprechenden Unterordner kopieren oder verschieben:</para>
+      <variablelist>
+         <varlistentry xml:id="application.folder.scripts.application.shutdown">
+            <term xml:id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, bevor OmegaT heruntergefahren wird.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="application.folder.scripts.application.startup">
+            <term xml:id="application.folder.scripts.application.startup.title">application_startup</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, sobald die Scripting-Engine verfügbar ist, kurz nachdem OmegaT gestartet wurde.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="application.folder.scripts.entry.activated">
+            <term xml:id="application.folder.scripts.entry.activated.title">entry_activated</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, wenn ein neues Segment editiert wird. Das Segment befindet sich im <code>newEntry</code>-Binding.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="application.folder.scripts.new.file">
+            <term xml:id="application.folder.scripts.new.file.title">new_file</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, wenn der Editor zur nächsten Datei im Projekt wechselt. Der neue Dateiname befindet sich im <code>activeFileName</code>-Binding.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="application.folder.scripts.new.word">
+            <term xml:id="application.folder.scripts.new.word.title">new_word</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, wenn ein neues Wort im Editorfenster editiert wird. Das neue Wort befindet sich im <code>newWord</code>-Binding.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="application.folder.scripts.project.changed">
+            <term xml:id="application.folder.scripts.project.changed.title">project_changed</term>
+            <listitem>
+               <para>Skripte in diesem Ordner werden gestartet, wenn sich der Status des Projekts ändert. Ein <code>eventType</code>-Objekt wird gebunden und kann folgende Werte akzeptieren: CLOSE, COMPILE, CREATE, LOAD oder SAVE.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+      <para>Diese Unterordner sind bereits im Skriptordner angelegt, der mit der Distribution einhergeht.</para>
+      <warning>
+         <para>Skripte werden auch gestartet, wenn Sie andere Skripte ausführen. Folglich wird in einem großen Projekt ein <code>entry_activated</code>-Skript häufig aufgerufen, wenn ein Skript vom Typ Suchen/Ersetzen verwendet wird, das alle Segmente in einer Schleife durchläuft, was sich negativ auf die Leistungsfähigkeit der Applikation auswirkt.</para>
+      </warning>
+   </section>
+   <section xml:id="windows.scripts.usage">
+      <title xml:id="windows.scripts.usage.title">Verwendung</title>
+      <itemizedlist>
+         <listitem>
+            <para>Klicken Sie auf den Namen eines Skripts in der linken Liste. Das Skript wird in den Editor geladen.</para>
+         </listitem>
+         <listitem>
+            <para>Click the 
+               <guibutton>Run</guibutton> button at the bottom of the window, or
+               		press 
+               <keycombo>
+                  <keycap>C</keycap>
+                  <keycap>R</keycap>
+               </keycombo> to
+               		launch the script immediately.</para>
+         </listitem>
+         <listitem>
+            <para>Um einen Shortcut (Tastenkürzel und Menüpunkt) für ein häufig verwendetes Skript zu erstellen, rechtsklicken Sie auf eine der Schaltflächen <guibutton>&lt;1&gt;</guibutton> bis <guibutton>&lt;12&gt;</guibutton> am unteren Rand des Fensters und wählen Sie &quot;<guilabel>Skript hinzufügen</guilabel>&quot; aus, um das Skript dieser Nummer zuzuweisen.</para>
+            <para>Wenn Sie das Skript vom Shortcut lösen möchten, rechtsklicken Sie auf seine Schaltfläche und wählen Sie &quot;<guilabel>Skript entfernen</guilabel>&quot; aus.
+            </para>
+         </listitem>
+         <listitem>
+            <para>Sie können dann auf die Nummer klicken, um das zugewiesene Skript auszuführen. You can also run the script from the <link linkend="menus.tools" endterm="menus.tools.title"/> <link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> menu by selecting the applicable menu item or by pressing the associated shortcut ( <keycombo> <keycap>C</keycap> <keycap>A</keycap> <keycap>F1 to F12</keycap> </keycombo>).</para>
+         </listitem>
+      </itemizedlist>
+      <warning>
+         <para>Linux-Benutzer: Je nach Konfiguration Ihres Betriebssystems kann es vorkommen, dass Sie keine Schreibrechte für den regulären Scripts-Ordner haben.</para>
+         <para>In diesem Fall müssen Sie den Skriptordner an einen anderen Speicherort kopieren oder verschieben, für den Sie Schreibrechte haben, z.B. den <link linkend="configuration.folder.location" role="xref">Konfigurationsordner</link>, wenn Sie eigene Skripte schreiben, neue Skripte hinzufügen oder bestehende Skripte ändern möchten.</para>
+         <para>Wenn Sie Schreibrechte für den Standardordner haben und ein Skript ändern, sollten Sie das Skript umbenennen oder eine Sicherungskopie erstellen, da es bei einem Update von OmegaT überschrieben wird.</para>
+      </warning>
+   </section>
+   <section xml:id="windows.scripts.distribution">
+      <title xml:id="windows.scripts.distribution.title">Mitgelieferte Skripte</title>
+      <para>OmegaT wird mit einer Reihe von Skripten ausgeliefert, die von Freiwilligen entwickelt wurden. Verwenden Sie den Skripteditor, um Skripte direkt zu öffnen, auszuführen oder zu ändern, oder um neue Skripte für den eigenen Gebrauch zu schreiben.</para>
+      <note>
+         <para>Die mitgelieferten Skripte sollen Ihnen die Arbeit mit OmegaT erleichtern, werden aber nicht von den OmegaT-Entwicklern unterstützt.</para>
+      </note>
+      <para>Folgen Sie den Anweisungen im Skript selbst.</para>
+      <variablelist>
+         <varlistentry xml:id="windows.scripts.distribution.adapt.standard.tags">
+            <term xml:id="windows.scripts.distribution.adapt.standard.tags.title">Adapt standard tags (Standard-Tags adaptieren)</term>
+            <listitem>
+               <para>Standard-Tags adaptieren, wenn der Befehl &quot;Mit Match ersetzen&quot; ausgeführt wird.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.auto.open.last.project">
+            <term xml:id="windows.scripts.distribution.auto.open.last.project.title">Auto Open Last Project (Letztes Projekt automatisch öffnen)</term>
+            <listitem>
+               <para>Das zuletzt verwendete OmegaT-Projekt automatisch öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.check.same.segment">
+            <term xml:id="windows.scripts.distribution.check.same.segment.title">Check Same Segment (Identische Segmente suchen)</term>
+            <listitem>
+               <para>Identische Segmente suchen (Groß-/Kleinschreibung-sensitiv).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.currency.translator">
+            <term xml:id="windows.scripts.distribution.currency.translator.title">Currency Translator (Währungsübersetzer)</term>
+            <listitem>
+               <para>Währungen entsprechend der Quell- und Zielsprache übersetzen.</para>
+               <para>Zum Beispiel wird eine Zeichenkette wie &quot;$123,399.99&quot; in &quot;123 399,99 USD&quot; übersetzt.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.example.gui.scripting">
+            <term xml:id="windows.scripts.distribution.example.gui.scripting.title">Example - GUI Scripting (Beispiel - GUI-Scripting)</term>
+            <listitem>
+               <para>Beispiel für GUI-Scripting.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.example.key.binding">
+            <term xml:id="windows.scripts.distribution.example.key.binding.title">Example - Key Binding (Beispiel - Tastenbindung)</term>
+            <listitem>
+               <para>Beispiel für die Nutzung eines Tastenbindungsereignisses.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.example.modify.segment">
+            <term xml:id="windows.scripts.distribution.example.modify.segment.title">Example - Modify Segment (Beispiel - Segment modifizieren)</term>
+            <listitem>
+               <para>Beispiel für die Modifikation eines Segments.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.example.search.and.replace">
+            <term xml:id="windows.scripts.distribution.example.search.and.replace.title">Beispiel - Suchen und Ersetzen</term>
+            <listitem>
+               <para>Ein einfaches Suchen-und-Ersetzen-Skript.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.external.spellcheck">
+            <term xml:id="windows.scripts.distribution.external.spellcheck.title">External spellcheck (Externe Rechtschreibprüfung)</term>
+            <listitem>
+               <para>Schreibt alle Segmente in eine Datei namens <filename>[Projektname].doc</filename> und öffnet sie im regulären Textverarbeitungsprogramm des Systems. Beachten Sie, dass es sich um eine reine Textdatei handelt. Die Endung <filename>.doc</filename> stellt lediglich sicher, dass die Datei in einem Textverarbeitungsprogramm geöffnet werden kann.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.extract.text.content">
+            <term xml:id="windows.scripts.distribution.extract.text.content.title">Extract Text Content (Textinhalt extrahieren)</term>
+            <listitem>
+               <para>Extrahiert den Inhalt des Projekts in eine einzelne Textdatei (eine Zeile pro Segment). See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</link>.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.non.breaking.space">
+            <term xml:id="windows.scripts.distribution.non.breaking.space.title">Geschütztes Leerzeichen</term>
+            <listitem>
+               <para>Leerzeichen mit geschützten Leerzeichen ersetzen, wo dies im Französischen angebracht ist.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.open.current.file">
+            <term xml:id="windows.scripts.distribution.open.current.file.title">Open Current File (Aktuelle Datei öffnen)</term>
+            <listitem>
+               <para>Die aktuelle Quelldatei öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.open.glossary">
+            <term xml:id="windows.scripts.distribution.open.glossary.title">Open Glossary (Glossar öffnen)</term>
+            <listitem>
+               <para>Das beschreibbare Glossar in einem Editor öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.open.project.folder">
+            <term xml:id="windows.scripts.distribution.open.project.folder.title">Open Project Folder (Projektordner öffnen)</term>
+            <listitem>
+               <para>Den Projektordner in Ihrem Dateimanager öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.open.tm.folder">
+            <term xml:id="windows.scripts.distribution.open.tm.folder.title">Open TM Folder (TM-Ordner öffnen)</term>
+            <listitem>
+               <para>Den <filename class="directory">/tm</filename>-Ordner öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.open.project.save.tmx">
+            <term xml:id="windows.scripts.distribution.open.project.save.tmx.title">Open project_save.tmx (project_save.tmx öffnen)</term>
+            <listitem>
+               <para>Die project_save.tmx-Datei in einem Texteditor öffnen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.qa.check.rules">
+            <term xml:id="windows.scripts.distribution.qa.check.rules.title">QA - Regeln prüfen</term>
+            <listitem>
+               <para>Ein Skript zur Qualitätssicherung (engl. Quality Assurance, kurz QA).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.qa.identical.segments">
+            <term xml:id="windows.scripts.distribution.qa.identical.segments.title">QA - Identical Segments (QA - Identische Segmente)</term>
+            <listitem>
+               <para>Identische Segmente suchen (Groß-/Kleinschreibung-sensitiv).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.svn.cleanup.recursive">
+            <term xml:id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - Cleanup (rekursiv)</term>
+            <listitem>
+               <para>SVN-Cleanup auf das aktuelle Projekt oder einen beliebigen Ordner anwenden (rekursiv).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.show.same.segments">
+            <term xml:id="windows.scripts.distribution.show.same.segments.title">Show Same Segments (Identische Segmente anzeigen)</term>
+            <listitem>
+               <para>Eine Liste von Segmenten anzeigen, bei denen Quelle und Ziel den gleichen Inhalt haben.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.spellcheck">
+            <term xml:id="windows.scripts.distribution.spellcheck.title">Rechtschreibprüfung</term>
+            <listitem>
+               <para>Globale Rechtschreibprüfung.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.strip.bidi.marks">
+            <term xml:id="windows.scripts.distribution.strip.bidi.marks.title">BiDi-Markierungen entfernen</term>
+            <listitem>
+               <para>BiDi-Markierungen im aktuellen Zieltext oder markierten Text entfernen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.strip.tags">
+            <term xml:id="windows.scripts.distribution.strip.tags.title">Tags entfernen</term>
+            <listitem>
+               <para>Tags im aktuellen Zieltext oder markierten Text entfernen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.switch.colour.theme">
+            <term xml:id="windows.scripts.distribution.switch.colour.theme.title">Switch Colour Theme (Farbschema umschalten)</term>
+            <listitem>
+               <para>Das im Editor verwendete Farbschema umschalten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.tag.free.match">
+            <term xml:id="windows.scripts.distribution.tag.free.match.title">Tag-Free Match (Tagfreier Match)</term>
+            <listitem>
+               <para>Aktuelles Ziel mit einem tagfreien Match ersetzen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.tagwipe">
+            <term xml:id="windows.scripts.distribution.tagwipe.title">Tagwipe</term>
+            <listitem>
+               <para>Überflüssige Tags aus docx-Dokumenten entfernen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.issue.provider.sample.groovy">
+            <term xml:id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+            <listitem>
+               <para>(keine Beschreibung)</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.scripts.distribution.toolbar.groovy">
+            <term xml:id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+            <listitem>
+               <para>(keine Beschreibung)</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="windows.scripts.references">
+      <title xml:id="windows.scripts.references.title">Referenzen</title>
+      <variablelist>
+         <varlistentry>
+            <term>OmegaT-Javadoc</term>
+            <listitem>
+               <para>The 
+                  <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://omegat.sourceforge.io/javadoc-latest/">OmegaT API</link>
+                  documentation.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Groovy</term>
+            <listitem>
+               <para>Eine dynamische Sprache für die Java Virtual Machine. Sie baut auf den Stärken von Java auf und fügt mächtige Features hinzu, die von Sprachen wie Python, Ruby und Smalltalk inspiriert sind. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://groovy-lang.org/documentation.html">Apache Groovy</link> for details.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>JavaScript</term>
+            <listitem>
+               <para>Eine prototypbasierte Skriptsprache, die dynamisch typisiert ist und über erstklassige Features verfügt. Sie ist eine Multi-Paradigma-Sprache, die objektorientierte, imperative und funktionale Programmierstile unterstützt. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</link> and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</link>.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+      <para>Alle Sprachen haben Zugriff auf das OmegaT-Objektmodell; das Projekt selbst kann über das Objekt namens &quot;project&quot; angesprochen werden. Das folgende Groovy-Code-Snippet-Beispiel scannt alle Segmente in jeder Datei und zeigt die Quell- und Zieltexte von Segmenten an, die eine Übersetzung enthalten.</para>
+<programlisting>   files = project.projectFiles;
+   for (i in 0 ..&lt; files.size())
+   {
+      for (j in 0 ..&lt; files[i].entries.size())
+      {
+          currSegment = files[i].entries[j];
+          if (project.getTranslationInfo(currSegment))
+          {
+              source = currSegment.getSrcText();
+              target = project.getTranslationInfo(currSegment).translation;
+              console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+          }
+      }
+   }</programlisting>
+   </section>
 </section>

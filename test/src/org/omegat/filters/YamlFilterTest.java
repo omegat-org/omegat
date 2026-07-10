@@ -26,10 +26,13 @@
 package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +40,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.yaml.YamlFilter;
+import org.omegat.filters2.text.yaml.YamlOptions;
 
 /**
  * Tests for {@link YamlFilter}.
@@ -124,29 +128,77 @@ public class YamlFilterTest extends TestFilterBase {
     }
 
     @Test
-    public void testLoadMultipleFiles() throws Exception {
-        String f1 = "test/data/filters/yaml/sample1.yaml";
-        String f2 = "test/data/filters/yaml/sample2.yml";
-        YamlFilter filter = new YamlFilter();
-        IProject.FileInfo fi1 = loadSourceFiles(filter, f1);
-        IProject.FileInfo fi2 = loadSourceFiles(filter, f2);
+    public void testParseWithExclude() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/links/help;footer/links/terms");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(6, entries.size());
+        assertEquals("Welcome", entries.get(0));
+        assertEquals("Home", entries.get(1));
+        assertEquals("About", entries.get(2));
+        assertEquals("Contact", entries.get(3));
+        assertEquals("(c) 2025 Example Co.", entries.get(4));
+        assertEquals("Enabled features", entries.get(5));
+    }
 
-        checkMultiStart(fi1, f1);
-        checkMulti("Welcome", "title_0", null, null, null, "name=title");
-        checkMulti("Home", "menu/items[0]_0", null, null, null, "name=menu/items[0]");
-        checkMulti("About", "menu/items[1]_0", null, null, null, "name=menu/items[1]");
-        checkMulti("Contact", "menu/items[2]_0", null, null, null, "name=menu/items[2]");
-        checkMulti("(c) 2025 Example Co.", "footer/copyright_0", null, null, null, "name=footer/copyright");
-        checkMulti("/help", "footer/links/help_0", null, null, null, "name=footer/links/help");
-        checkMulti("/terms", "footer/links/terms_0", null, null, null, "name=footer/links/terms");
-        checkMulti("Enabled features", "features/description_0", null, null, null, "name=features/description");
-        checkMultiEnd();
+    @Test
+    public void testParseWithInclude() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_INCLUDE, "menu/**");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(3, entries.size());
+        assertEquals("Home", entries.get(0));
+        assertEquals("About", entries.get(1));
+        assertEquals("Contact", entries.get(2));
+    }
 
-        checkMultiStart(fi2, f2);
-        checkMulti("OmegaT - The Free Translation Memory Tool", "title_1", null, null, null, "name=title");
-        checkMulti("Welcome to OmegaT!", "description_0", null, null, null, "name=description");
-        checkMulti("About", "menu/items_0", null, null, null, "name=menu/items");
-        checkMulti("Documentation", "menu/documentation_0", null, null, null, "name=menu/documentation");
-        checkMultiEnd();
+    @Test
+    public void testParseWithWildcard() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/*/*");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(6, entries.size());
+        assertEquals("Welcome", entries.get(0));
+        assertEquals("Home", entries.get(1));
+        assertEquals("About", entries.get(2));
+        assertEquals("Contact", entries.get(3));
+        assertEquals("(c) 2025 Example Co.", entries.get(4));
+        assertEquals("Enabled features", entries.get(5));
+    }
+
+    @Test
+    public void testParseWithIncludeAndExclude() throws Exception {
+        Map<String, String> options = Map.of(
+            YamlOptions.OPTION_INCLUDE, "footer/copyright",
+            YamlOptions.OPTION_EXCLUDE, "**/links/**"
+        );
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        assertEquals(1, entries.size());
+        assertEquals("(c) 2025 Example Co.", entries.get(0));
+    }
+
+    @Test
+    public void testParseWithExcludeFileKey() throws Exception {
+        Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "**/file");
+        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/tips.yaml", options);
+        // "file" keys should be excluded, "name" keys should be included.
+        // tips[0]/file: shortcut_help.html (excluded)
+        // tips[0]/name: Call user manual (included)
+        // tips[1]/file: automatic_backup.html (excluded)
+        // tips[1]/name: Automatic backup (included)
+        assertEquals(2, entries.size());
+        assertEquals("Call user manual", entries.get(0));
+        assertEquals("Automatic backup", entries.get(1));
+    }
+
+    @Test
+    public void testParseWithEscapedIgnore() {
+        // Test with semicolon in key (if such a thing is possible in YAML paths we generate)
+        // and test our escaping logic directly in YamlOptions
+        YamlOptions options = new YamlOptions(new HashMap<>());
+        options.setExcludeKeys(List.of("key;with;semicolons", "key\\with\\backslashes", "normal/key"));
+        
+        List<String> recovered = options.getExcludeKeys();
+        assertEquals(3, recovered.size());
+        assertTrue(recovered.contains("key;with;semicolons"));
+        assertTrue(recovered.contains("key\\with\\backslashes"));
+        assertTrue(recovered.contains("normal/key"));
     }
 }

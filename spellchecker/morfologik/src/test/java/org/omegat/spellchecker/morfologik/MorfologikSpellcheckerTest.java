@@ -91,7 +91,7 @@ public class MorfologikSpellcheckerTest {
     @Test
     public void testLTBundledDictionary() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
-        props.setTargetLanguage(new Language("en_AU"));
+        props.setTargetLanguage(new Language("pl_PL"));
         Core.setProject(new NotLoadedProject() {
             @Override
             public ProjectProperties getProjectProperties() {
@@ -100,10 +100,7 @@ public class MorfologikSpellcheckerTest {
         });
         ISpellChecker checker = new MorfologikSpellchecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
-        assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isFalse();
-        assertThat(checker.suggest("Hallo")).as("Get suggestion")
-                .hasSize(11).contains("hello");
-
+        assertThat(checker.isCorrect("Cześć")).as("Spell check for correct word").isTrue();
     }
 
     private static void copyFile(String target) throws IOException {

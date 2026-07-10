@@ -29,13 +29,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Test;
+import org.omegat.gui.editor.sort.MultiKeySorter.KeySpec;
 import org.omegat.util.OStrings;
 
 /**
  * Behavioral tests for {@link SortBar} that do not require a loaded project:
- * the new collapsed-by-default state and the collapsed summary composition.
- * The sort ordering logic itself is covered by {@link MultiKeySorterTest}.
+ * the collapsed-by-default state, the collapsed summary composition, and the
+ * staged (deferred) apply model (pending detection + discard revert). The
+ * actual apply path needs the editor/project and is verified live; the sort
+ * ordering logic is covered by {@link MultiKeySorterTest}.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
@@ -61,7 +66,7 @@ public class SortBarTest {
     }
 
     @Test
-    public void summaryShowsFileOrderWhenUnsorted() {
+    public void summaryShowsFileOrderWhenNothingApplied() {
         SortBar bar = new SortBar();
         assertEquals(unsortedSummary(), bar.buildSummary());
     }
@@ -69,7 +74,55 @@ public class SortBarTest {
     @Test
     public void resetRestoresUnsortedDefault() {
         SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
         bar.reset();
+        assertFalse(bar.hasPendingChanges());
         assertEquals(unsortedSummary(), bar.buildSummary());
+    }
+
+    @Test
+    public void editingCriteriaCreatesPendingChange() {
+        SortBar bar = new SortBar();
+        assertFalse("no pending changes initially", bar.hasPendingChanges());
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        assertTrue("editing a criterion must stage a pending change", bar.hasPendingChanges());
+    }
+
+    @Test
+    public void pendingEditsDoNotChangeAppliedSummary() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        // Nothing applied yet, so the collapsed summary still reflects file order.
+        assertEquals(unsortedSummary(), bar.buildSummary());
+    }
+
+    @Test
+    public void discardRevertsToAppliedState() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        assertTrue(bar.hasPendingChanges());
+        bar.discardPending();
+        assertFalse("discard must clear pending changes", bar.hasPendingChanges());
+        assertEquals(unsortedSummary(), bar.buildSummary());
+    }
+
+    @Test
+    public void secondaryNaturalRowIsNotIncludedInKeys() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow(); // a secondary row that stays at NATURAL (file order)
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals("a NATURAL secondary row must not leak into the applied keys", 1, keys.size());
+        assertEquals(SortKey.SOURCE_ALPHA, keys.get(0).key);
+    }
+
+    @Test
+    public void revertingPrimaryToNaturalClearsPending() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        assertTrue(bar.hasPendingChanges());
+        bar.selectKey(0, SortKey.NATURAL);
+        assertFalse("returning the primary to file order clears the pending change",
+                bar.hasPendingChanges());
     }
 }

@@ -24,7 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;

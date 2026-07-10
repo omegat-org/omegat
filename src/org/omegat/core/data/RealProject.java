@@ -826,10 +826,10 @@ public class RealProject implements IProject {
                     saveProjectProperties();
                     synchronized (projectTMX) {
                         projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
-                                isProjectModified(), remoteRepositoryProvider != null);
+                                isProjectModified(), remoteRepositoryProvider.isManaged());
                     }
 
-                    if (remoteRepositoryProvider != null && doTeamSync) {
+                    if (remoteRepositoryProvider.isManaged() && doTeamSync) {
                         tmxPrepared = null;
                         glossaryPrepared = null;
                         remoteRepositoryProvider.cleanPrepared();
@@ -928,7 +928,7 @@ public class RealProject implements IProject {
             preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
                 projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
-                        isProjectModified(), remoteRepositoryProvider != null);
+                        isProjectModified(), remoteRepositoryProvider.isManaged());
             }
             rebaseAndCommitProject(glossaryPrepared != null);
             preparedStatus = PreparedStatus.REBASED;

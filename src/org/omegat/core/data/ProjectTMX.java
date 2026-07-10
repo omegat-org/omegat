@@ -144,6 +144,12 @@ public class ProjectTMX {
         return defaults.isEmpty() && alternatives.isEmpty();
     }
 
+    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
+            throws Exception {
+        boolean isTeam = Core.getProject().getProjectProperties().isTeamProject();
+        save(props, translationFile, translationUpdatedByUser, isTeam);
+    }
+
     /**
      * It saves a current translation into the TMX file.
      */

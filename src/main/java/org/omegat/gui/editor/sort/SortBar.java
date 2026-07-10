@@ -28,6 +28,7 @@ package org.omegat.gui.editor.sort;
 import java.awt.Component;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,20 +45,25 @@ import org.omegat.core.Core;
 import org.omegat.gui.editor.CollapsibleBar;
 import org.omegat.gui.editor.sort.MultiKeySorter.KeySpec;
 import org.omegat.util.OStrings;
+import org.openide.awt.Mnemonics;
 
 /**
  * Collapsible control bar for the editor's segment sort, stacked in the editor
  * north container above the filter bar. It supports up to three combinable
  * criteria (primary, secondary, tertiary), each a SortKey with an
  * ascending/descending direction; criteria are added or removed with the +/-
- * buttons. The default is a single SortKey.NATURAL criterion (file order,
- * unsorted). Changes are applied live through the editor's setSort/removeSort.
+ * buttons.
  *
- * While collapsed, the bar shows a one-line summary of the active criteria,
- * assembled from the same localized SortKey names used in the expanded combos,
- * so collapsing adds no new translatable strings. Whether the bar is shown at
- * all (project open and more than one segment after filtering) is decided by the
- * editor controller, not here.
+ * Sorting is NOT applied on every combo change (that can be slow on large
+ * projects). Changes are staged: as soon as the edited criteria differ from the
+ * currently applied sort, an extra row with Apply/Discard buttons appears.
+ * Apply runs the sort and Discard reverts the combos to the last applied state;
+ * in both cases the bar collapses afterwards. While collapsed, the bar shows a
+ * one-line summary of the APPLIED sort, assembled from the existing localized
+ * SortKey names plus an arrow for direction (no new translatable strings).
+ *
+ * Whether the bar is shown at all (project open and more than one segment after
+ * filtering) is decided by the editor controller, not here.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
@@ -70,6 +76,10 @@ public class SortBar extends CollapsibleBar {
 
     private final List<CriterionRow> rows = new ArrayList<>();
     private final JLabel warning = new JLabel(OStrings.getString("SORT_BAR_WARNING"));
+    /** The criteria that are currently applied to the editor (empty = unsorted). */
+    private List<KeySpec> appliedKeys = Collections.emptyList();
+    /** Guards programmatic combo changes so they do not count as user edits. */
+    private boolean adjusting;
     /** The "add criterion" button of the current last row, or null if none is shown. */
     private JButton plusButton;
 
@@ -78,20 +88,21 @@ public class SortBar extends CollapsibleBar {
         rebuild();
     }
 
-    /** Reset to the default single, unsorted criterion. */
+    /** Reset to the default single, unsorted criterion (called on project close). */
     public void reset() {
         rows.clear();
         rows.add(new CriterionRow());
+        appliedKeys = Collections.emptyList();
         rebuild();
     }
 
-    /** Rebuild the row layout inside the collapsible body (after adding/removing a criterion). */
+    /** Rebuild the row layout inside the collapsible body. */
     private void rebuild() {
         JPanel body = getBody();
         body.removeAll();
 
         // Notice that the segment numbers are no longer sequential, on its own
-        // line above the controls; only relevant while a sort is active.
+        // line above the controls; only relevant while a sort is applied.
         JPanel warnRow = new JPanel();
         warnRow.setLayout(new BoxLayout(warnRow, BoxLayout.LINE_AXIS));
         warnRow.add(Box.createHorizontalGlue());
@@ -124,11 +135,33 @@ public class SortBar extends CollapsibleBar {
             body.add(rp);
         }
 
-        warning.setVisible(isSortActive());
+        if (hasPendingChanges()) {
+            body.add(pendingRow());
+        }
+
+        warning.setVisible(!appliedKeys.isEmpty());
         refreshPlusEnabled();
         refreshSummary();
         body.revalidate();
         body.repaint();
+    }
+
+    /** The Apply/Discard row, shown only while there are staged, unapplied changes. */
+    private JPanel pendingRow() {
+        JPanel pr = new JPanel();
+        pr.setLayout(new BoxLayout(pr, BoxLayout.LINE_AXIS));
+        pr.add(Box.createHorizontalGlue());
+        JButton apply = new JButton();
+        Mnemonics.setLocalizedText(apply, OStrings.getString("BUTTON_APPLY"));
+        apply.addActionListener(e -> applyPending());
+        JButton discard = new JButton();
+        Mnemonics.setLocalizedText(discard, OStrings.getString("BUTTON_DISCARD"));
+        discard.addActionListener(e -> discardPending());
+        pr.add(apply);
+        pr.add(Box.createHorizontalStrut(4));
+        pr.add(discard);
+        pr.add(Box.createHorizontalGlue());
+        return pr;
     }
 
     /**
@@ -164,13 +197,12 @@ public class SortBar extends CollapsibleBar {
         return minus;
     }
 
-    private void addRow() {
+    void addRow() {
         if (rows.size() >= MAX_KEYS) {
             return;
         }
         rows.add(new CriterionRow());
         rebuild();
-        apply();
     }
 
     private void removeRow(int index) {
@@ -179,7 +211,6 @@ public class SortBar extends CollapsibleBar {
         }
         rows.remove(index);
         rebuild();
-        apply();
     }
 
     /** True if the primary criterion actually reorders (i.e. is not file order). */
@@ -188,19 +219,54 @@ public class SortBar extends CollapsibleBar {
     }
 
     /**
-     * The collapsed one-line summary of the current sort, built from the same
+     * The criteria currently selected in the combos (empty = unsorted / file
+     * order). Rows left at NATURAL are skipped so a secondary "file order" row
+     * never leaks into the applied sort or the summary.
+     */
+    List<KeySpec> currentKeys() {
+        if (!isSortActive()) {
+            return Collections.emptyList();
+        }
+        List<KeySpec> keys = new ArrayList<>();
+        for (CriterionRow r : rows) {
+            if (r.key() != SortKey.NATURAL) {
+                keys.add(r.spec());
+            }
+        }
+        return keys;
+    }
+
+    /** True if the edited criteria differ from what is currently applied. */
+    boolean hasPendingChanges() {
+        return !sameKeys(currentKeys(), appliedKeys);
+    }
+
+    private static boolean sameKeys(List<KeySpec> a, List<KeySpec> b) {
+        if (a.size() != b.size()) {
+            return false;
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i).key != b.get(i).key || a.get(i).ascending != b.get(i).ascending) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * The collapsed one-line summary of the APPLIED sort, built from the same
      * localized SortKey names shown in the expanded combos plus an arrow for the
      * direction (a symbol, so no new translatable string is needed).
      */
     @Override
     protected String buildSummary() {
         String prefix = OStrings.getString("SORT_BAR_LABEL");
-        if (!isSortActive()) {
+        if (appliedKeys.isEmpty()) {
             return prefix + " " + SortKey.NATURAL.getLocalizedName();
         }
         StringBuilder sb = new StringBuilder(prefix);
-        for (int i = 0; i < rows.size(); i++) {
-            KeySpec spec = rows.get(i).spec();
+        for (int i = 0; i < appliedKeys.size(); i++) {
+            KeySpec spec = appliedKeys.get(i);
             sb.append(i == 0 ? " " : ", ");
             sb.append(spec.key.getLocalizedName());
             sb.append(spec.ascending ? " ↑" : " ↓");
@@ -208,24 +274,49 @@ public class SortBar extends CollapsibleBar {
         return sb.toString();
     }
 
-    private void apply() {
-        refreshSummary();
+    /** Apply the staged criteria to the editor, then collapse the bar. */
+    private void applyPending() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        Core.getEditor().commitAndDeactivate();
-        if (!isSortActive()) {
-            warning.setVisible(false);
+        List<KeySpec> pend = currentKeys();
+        if (pend.isEmpty()) {
             Core.getEditor().removeSort();
-            return;
+        } else {
+            Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+            Core.getEditor().setSort(new MultiKeySorter(pend, loc));
         }
-        List<KeySpec> keys = new ArrayList<>();
-        for (CriterionRow r : rows) {
-            keys.add(r.spec());
+        appliedKeys = pend;
+        setExpanded(false);
+        rebuild();
+    }
+
+    /** Discard the staged criteria: revert the combos to the applied sort, then collapse. */
+    void discardPending() {
+        adjusting = true;
+        setRowsFromKeys(appliedKeys);
+        adjusting = false;
+        setExpanded(false);
+        rebuild();
+    }
+
+    /** Rebuild the criterion rows to reflect the given key list (empty = single unsorted row). */
+    private void setRowsFromKeys(List<KeySpec> keys) {
+        rows.clear();
+        if (keys.isEmpty()) {
+            rows.add(new CriterionRow());
+        } else {
+            for (KeySpec k : keys) {
+                CriterionRow r = new CriterionRow();
+                r.setSpec(k);
+                rows.add(r);
+            }
         }
-        Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-        Core.getEditor().setSort(new MultiKeySorter(keys, loc));
-        warning.setVisible(true);
+    }
+
+    /** Test/support hook: select a key in the given row as a user would. */
+    void selectKey(int rowIndex, SortKey key) {
+        rows.get(rowIndex).keyCombo.setSelectedItem(key);
     }
 
     /** A single criterion: a sort key plus a direction. */
@@ -244,11 +335,18 @@ public class SortBar extends CollapsibleBar {
             dirCombo.setMaximumSize(dirCombo.getPreferredSize());
             updateDirEnabled();
             keyCombo.addActionListener(e -> {
+                if (adjusting) {
+                    return;
+                }
                 updateDirEnabled();
-                refreshPlusEnabled();
-                apply();
+                rebuild();
             });
-            dirCombo.addActionListener(e -> apply());
+            dirCombo.addActionListener(e -> {
+                if (adjusting) {
+                    return;
+                }
+                rebuild();
+            });
         }
 
         /** Direction is meaningless for the unsorted "file order" option. */
@@ -262,6 +360,12 @@ public class SortBar extends CollapsibleBar {
 
         KeySpec spec() {
             return new KeySpec(key(), Boolean.TRUE.equals(dirCombo.getSelectedItem()));
+        }
+
+        void setSpec(KeySpec k) {
+            keyCombo.setSelectedItem(k.key);
+            dirCombo.setSelectedItem(k.ascending);
+            updateDirEnabled();
         }
     }
 

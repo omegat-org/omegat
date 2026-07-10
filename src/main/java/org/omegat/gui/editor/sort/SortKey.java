@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2026 zollsoft
+ Copyright (C) 2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,7 +39,7 @@ import org.omegat.util.OStrings;
  * {@link #comparator(Collator, boolean)}, so adding a new criterion only
  * requires defining one comparator here.
  *
- * @author zollsoft
+ * @author stephan.pakebusch at zollsoft.de
  */
 public enum SortKey {
 

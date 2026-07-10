@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2026 zollsoft
+ Copyright (C) 2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,29 +39,30 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
 
 import org.omegat.core.Core;
+import org.omegat.gui.editor.CollapsibleBar;
 import org.omegat.gui.editor.sort.MultiKeySorter.KeySpec;
 import org.omegat.util.OStrings;
 
 /**
- * Always-available control bar for the editor's segment sort, shown above the
- * filter bar. It supports up to three combinable criteria (primary, secondary,
- * tertiary), each a {@link SortKey} with an ascending/descending direction.
- * Criteria are added/removed with the {@code +}/{@code −} buttons. The default
- * is a single {@link SortKey#NATURAL} criterion ("file order / unsorted").
- * Changes are applied live through {@link org.omegat.gui.editor.IEditor#setSort}
- * / {@link org.omegat.gui.editor.IEditor#removeSort}.
- * <p>
- * Whether the bar is shown at all (project open and more than one segment after
- * filtering) is decided by the editor controller, not here.
+ * Collapsible control bar for the editor's segment sort, stacked in the editor
+ * north container above the filter bar. It supports up to three combinable
+ * criteria (primary, secondary, tertiary), each a SortKey with an
+ * ascending/descending direction; criteria are added or removed with the +/-
+ * buttons. The default is a single SortKey.NATURAL criterion (file order,
+ * unsorted). Changes are applied live through the editor's setSort/removeSort.
  *
- * @author zollsoft
+ * While collapsed, the bar shows a one-line summary of the active criteria,
+ * assembled from the same localized SortKey names used in the expanded combos,
+ * so collapsing adds no new translatable strings. Whether the bar is shown at
+ * all (project open and more than one segment after filtering) is decided by the
+ * editor controller, not here.
+ *
+ * @author stephan.pakebusch at zollsoft.de
  */
 @SuppressWarnings("serial")
-public class SortBar extends JPanel {
+public class SortBar extends CollapsibleBar {
 
     private static final int MAX_KEYS = 3;
     private static final String[] ROW_LABEL_KEYS = { "SORT_KEY_PRIMARY", "SORT_KEY_SECONDARY",
@@ -73,11 +74,6 @@ public class SortBar extends JPanel {
     private JButton plusButton;
 
     public SortBar() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        Border border = UIManager.getBorder("OmegaTEditorFilter.border");
-        if (border != null) {
-            setBorder(border);
-        }
         rows.add(new CriterionRow());
         rebuild();
     }
@@ -89,9 +85,10 @@ public class SortBar extends JPanel {
         rebuild();
     }
 
-    /** Rebuild the row layout (after adding/removing a criterion). */
+    /** Rebuild the row layout inside the collapsible body (after adding/removing a criterion). */
     private void rebuild() {
-        removeAll();
+        JPanel body = getBody();
+        body.removeAll();
 
         // Notice that the segment numbers are no longer sequential, on its own
         // line above the controls; only relevant while a sort is active.
@@ -100,7 +97,7 @@ public class SortBar extends JPanel {
         warnRow.add(Box.createHorizontalGlue());
         warnRow.add(warning);
         warnRow.add(Box.createHorizontalGlue());
-        add(warnRow);
+        body.add(warnRow);
 
         plusButton = null;
         boolean multi = rows.size() > 1;
@@ -124,13 +121,14 @@ public class SortBar extends JPanel {
                 rp.add(plusButton);
             }
             rp.add(Box.createHorizontalGlue());
-            add(rp);
+            body.add(rp);
         }
 
         warning.setVisible(isSortActive());
         refreshPlusEnabled();
-        revalidate();
-        repaint();
+        refreshSummary();
+        body.revalidate();
+        body.repaint();
     }
 
     /**
@@ -189,7 +187,29 @@ public class SortBar extends JPanel {
         return !rows.isEmpty() && rows.get(0).key() != SortKey.NATURAL;
     }
 
+    /**
+     * The collapsed one-line summary of the current sort, built from the same
+     * localized SortKey names shown in the expanded combos plus an arrow for the
+     * direction (a symbol, so no new translatable string is needed).
+     */
+    @Override
+    protected String buildSummary() {
+        String prefix = OStrings.getString("SORT_BAR_LABEL");
+        if (!isSortActive()) {
+            return prefix + " " + SortKey.NATURAL.getLocalizedName();
+        }
+        StringBuilder sb = new StringBuilder(prefix);
+        for (int i = 0; i < rows.size(); i++) {
+            KeySpec spec = rows.get(i).spec();
+            sb.append(i == 0 ? " " : ", ");
+            sb.append(spec.key.getLocalizedName());
+            sb.append(spec.ascending ? " ↑" : " ↓");
+        }
+        return sb.toString();
+    }
+
     private void apply() {
+        refreshSummary();
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }

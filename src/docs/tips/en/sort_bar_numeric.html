@@ -1,0 +1,48 @@
+<html lang="en">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sort segments by numeric value</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Sort segments by numeric value</h3>
+<p>When you sort by a text-based criterion in the sort bar, the direction
+selector offers <b>Numeric ascending</b> and <b>Numeric descending</b> next to
+the plain alphabetical order.</p>
+<p>Numeric sorting orders segments by the actual value of the number they
+contain, so "Step 2" comes before "Step 10" &mdash; where a plain alphabetical
+sort would place "10" before "2".</p>
+<p>It recognizes numbers written in many ways: a leading sign, decimals and
+fractions (for example -5, 1.5, 3/2, &frac12;), and numerals from many writing
+systems &mdash; Western and other decimal digits, Roman numerals (XII), CJK
+(&#21313;&#20108;) and further systems supported by
+<a class="ulink" href="https://icu4c-demos.unicode.org/icu-bin/locexp" target="_blank">ICU</a>, as well as enclosed or
+circled numbers (&#9321;).</p>
+<p>Values are compared exactly, so 1/3 orders correctly against any decimal and
+very large numbers never overflow. Segments with no recognizable number, or with
+equal values, fall back to the normal alphabetical order for a stable result.</p>
+</body></html>

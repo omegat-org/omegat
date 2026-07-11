@@ -72,3 +72,7 @@ tips:
   name: "Tag-Probleme untersuchen"
 - file: "ignore_dictionary_word.html"
   name: "Wörter im Wörterbuch ignorieren"
+- file: "sort_bar_reorder.html"
+  name: "Segmente mit der Sortierleiste umsortieren"
+- file: "sort_bar_numeric.html"
+  name: "Segmente nach Zahlenwert sortieren"

@@ -117,6 +117,37 @@ public class SortBarTest {
     }
 
     @Test
+    public void numericDirectionIsCarriedInKeys() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_FILE); // supports numeric
+        bar.selectDir(0, true, true);          // numeric ascending
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals(1, keys.size());
+        assertEquals(SortKey.SOURCE_FILE, keys.get(0).key);
+        assertTrue("ascending", keys.get(0).ascending);
+        assertTrue("numeric", keys.get(0).numeric);
+    }
+
+    @Test
+    public void numericModeIgnoredForNonNumericKey() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_LENGTH); // not a text key -> only asc/desc offered
+        bar.selectDir(0, true, true);            // requesting numeric is a no-op here
+        assertFalse(bar.currentKeys().get(0).numeric);
+    }
+
+    @Test
+    public void switchingToNonNumericKeyDropsNumericMode() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_FILE);
+        bar.selectDir(0, true, true);
+        assertTrue(bar.currentKeys().get(0).numeric);
+        bar.selectKey(0, SortKey.DUPLICATE_COUNT); // non-numeric key
+        assertFalse("numeric mode must reset when the key cannot sort numerically",
+                bar.currentKeys().get(0).numeric);
+    }
+
+    @Test
     public void revertingPrimaryToNaturalClearsPending() {
         SortBar bar = new SortBar();
         bar.selectKey(0, SortKey.SOURCE_ALPHA);
@@ -124,5 +155,92 @@ public class SortBarTest {
         bar.selectKey(0, SortKey.NATURAL);
         assertFalse("returning the primary to file order clears the pending change",
                 bar.hasPendingChanges());
+    }
+
+    // --- removing the (first) criterion --------------------------------------
+
+    @Test
+    public void removingTheSoleRowResetsToFileOrder() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.removeRow(0); // the only row: reset to unsorted rather than leaving it empty
+        assertEquals(1, bar.rowCount());
+        assertTrue(bar.currentKeys().isEmpty());
+        assertEquals(unsortedSummary(), bar.buildSummary());
+    }
+
+    @Test
+    public void removingTheFirstRowPromotesTheSecond() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow();
+        bar.selectKey(1, SortKey.TARGET_ALPHA);
+        bar.removeRow(0);
+        assertEquals(1, bar.rowCount());
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals(1, keys.size());
+        assertEquals(SortKey.TARGET_ALPHA, keys.get(0).key);
+    }
+
+    // --- at most four criteria -----------------------------------------------
+
+    @Test
+    public void atMostFourCriteria() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        for (int i = 0; i < 6; i++) {
+            bar.addRow();
+        }
+        assertEquals("no more than four criterion rows are allowed", 4, bar.rowCount());
+    }
+
+    // --- no criterion can be picked twice (dynamic exclusion) ----------------
+
+    @Test
+    public void aKeyChosenInOneRowIsNotOfferedInAnother() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow();
+        assertTrue("the owning row still offers its own key", bar.rowOffersKey(0, SortKey.SOURCE_ALPHA));
+        assertFalse("a used key is removed from other rows", bar.rowOffersKey(1, SortKey.SOURCE_ALPHA));
+        assertTrue("free keys stay available", bar.rowOffersKey(1, SortKey.TARGET_ALPHA));
+        assertTrue("file order stays available everywhere", bar.rowOffersKey(1, SortKey.NATURAL));
+    }
+
+    @Test
+    public void aFreedKeyReappearsInOtherRows() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow();
+        assertFalse(bar.rowOffersKey(1, SortKey.SOURCE_ALPHA));
+        bar.selectKey(0, SortKey.TARGET_ALPHA); // frees SOURCE_ALPHA, takes TARGET_ALPHA
+        assertTrue("the freed key is offered again", bar.rowOffersKey(1, SortKey.SOURCE_ALPHA));
+        assertFalse("the newly taken key is now hidden", bar.rowOffersKey(1, SortKey.TARGET_ALPHA));
+    }
+
+    @Test
+    public void selectingAnAlreadyUsedKeyIsRejected() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow();
+        bar.selectKey(1, SortKey.SOURCE_ALPHA); // excluded from row 1 -> no-op, stays NATURAL
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals("the duplicate selection must not take effect", 1, keys.size());
+        assertEquals(SortKey.SOURCE_ALPHA, keys.get(0).key);
+    }
+
+    // --- reordering criteria --------------------------------------------------
+
+    @Test
+    public void movingACriterionSwapsPriority() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow();
+        bar.selectKey(1, SortKey.TARGET_ALPHA);
+        assertEquals(SortKey.SOURCE_ALPHA, bar.currentKeys().get(0).key);
+        bar.moveRow(0, +1); // move the primary down
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals(SortKey.TARGET_ALPHA, keys.get(0).key);
+        assertEquals(SortKey.SOURCE_ALPHA, keys.get(1).key);
     }
 }

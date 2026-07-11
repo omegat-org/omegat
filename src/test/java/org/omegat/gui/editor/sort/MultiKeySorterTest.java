@@ -160,4 +160,25 @@ public class MultiKeySorterTest {
     public void emptyKeyListSerializesToEmptyString() {
         assertEquals("", MultiKeySorter.toPreferenceString(Collections.emptyList()));
     }
+
+    @Test
+    public void numericPreferenceRoundTrip() {
+        List<KeySpec> keys = Arrays.asList(new KeySpec(SortKey.SOURCE_ALPHA, true, true),
+                new KeySpec(SortKey.SOURCE_LENGTH, false, false));
+        String s = MultiKeySorter.toPreferenceString(keys);
+        assertEquals("SOURCE_ALPHA:asc:num;SOURCE_LENGTH:desc", s);
+        List<KeySpec> back = MultiKeySorter.fromPreferenceString(s);
+        assertEquals(2, back.size());
+        assertTrue(back.get(0).numeric);
+        assertTrue(back.get(0).ascending);
+        assertFalse(back.get(1).numeric);
+        assertFalse(back.get(1).ascending);
+    }
+
+    @Test
+    public void legacyAndMalformedPreferenceDefaultNumericFalse() {
+        assertFalse(MultiKeySorter.fromPreferenceString("SOURCE_ALPHA:asc").get(0).numeric);
+        // only the exact ":num" suffix enables numeric
+        assertFalse(MultiKeySorter.fromPreferenceString("SOURCE_ALPHA:asc:foo").get(0).numeric);
+    }
 }

@@ -46,14 +46,20 @@ import org.omegat.gui.editor.SegmentBuilder;
  */
 public class MultiKeySorter implements IEditorSorter {
 
-    /** One (key, direction) pair of the sort chain. */
+    /** One (key, direction, numeric) entry of the sort chain. */
     public static final class KeySpec {
         public final SortKey key;
         public final boolean ascending;
+        public final boolean numeric;
 
         public KeySpec(SortKey key, boolean ascending) {
+            this(key, ascending, false);
+        }
+
+        public KeySpec(SortKey key, boolean ascending, boolean numeric) {
             this.key = key;
             this.ascending = ascending;
+            this.numeric = numeric;
         }
     }
 
@@ -75,7 +81,7 @@ public class MultiKeySorter implements IEditorSorter {
     public Comparator<SegmentBuilder> getComparator() {
         Comparator<SegmentBuilder> cmp = null;
         for (KeySpec ks : keys) {
-            Comparator<SegmentBuilder> next = ks.key.comparator(collator, ks.ascending);
+            Comparator<SegmentBuilder> next = ks.key.comparator(collator, ks.ascending, ks.numeric);
             cmp = (cmp == null) ? next : cmp.thenComparing(next);
         }
         // Stable tiebreaker: equal keys keep natural project order. This also keeps
@@ -111,6 +117,9 @@ public class MultiKeySorter implements IEditorSorter {
                 sb.append(';');
             }
             sb.append(ks.key.name()).append(':').append(ks.ascending ? "asc" : "desc");
+            if (ks.numeric) {
+                sb.append(":num");
+            }
         }
         return sb.toString();
     }
@@ -126,13 +135,14 @@ public class MultiKeySorter implements IEditorSorter {
         }
         for (String part : s.split(";")) {
             String[] kv = part.split(":");
-            if (kv.length != 2) {
+            if (kv.length < 2) {
                 continue;
             }
             try {
                 SortKey key = SortKey.valueOf(kv[0].trim());
                 boolean asc = !"desc".equalsIgnoreCase(kv[1].trim());
-                result.add(new KeySpec(key, asc));
+                boolean numeric = kv.length >= 3 && "num".equalsIgnoreCase(kv[2].trim());
+                result.add(new KeySpec(key, asc, numeric));
             } catch (IllegalArgumentException ex) {
                 // unknown key name - skip
             }

@@ -72,3 +72,7 @@ tips:
   name: Use Check Issues for tag problems
 - file: ignore_dictionary_word.html
   name: Ignore a word in the dictionary
+- file: sort_bar_reorder.html
+  name: Reorder segments with the sort bar
+- file: sort_bar_numeric.html
+  name: Sort segments by numeric value

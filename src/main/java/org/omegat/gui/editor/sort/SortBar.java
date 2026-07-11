@@ -25,6 +25,7 @@
 
 package org.omegat.gui.editor.sort;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
 import java.util.ArrayList;
@@ -32,14 +33,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
+import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.gui.editor.CollapsibleBar;
@@ -49,10 +54,14 @@ import org.openide.awt.Mnemonics;
 
 /**
  * Collapsible control bar for the editor's segment sort, stacked in the editor
- * north container above the filter bar. It supports up to three combinable
- * criteria (primary, secondary, tertiary), each a SortKey with an
- * ascending/descending direction; criteria are added or removed with the +/-
- * buttons.
+ * north container above the filter bar. It supports up to four combinable
+ * criteria ("Sort by ... then by ..."), each a SortKey with a direction; criteria
+ * are added or removed with the +/- buttons and reordered with the up/down
+ * buttons. A key already chosen in one row is removed from the other rows' key
+ * choosers (and offered again when it is freed), so the same criterion can never
+ * be selected twice. The key chooser separates the many criteria into thematic
+ * blocks (order/structure, source, translation, notes, repetitions, history)
+ * with thin dividers so the flat list stays scannable.
  *
  * Sorting is NOT applied on every combo change (that can be slow on large
  * projects). Changes are staged: as soon as the edited criteria differ from the
@@ -70,9 +79,27 @@ import org.openide.awt.Mnemonics;
 @SuppressWarnings("serial")
 public class SortBar extends CollapsibleBar {
 
-    private static final int MAX_KEYS = 3;
-    private static final String[] ROW_LABEL_KEYS = { "SORT_KEY_PRIMARY", "SORT_KEY_SECONDARY",
-            "SORT_KEY_TERTIARY" };
+    private static final int MAX_KEYS = 4;
+
+    /**
+     * The sort keys grouped into thematic blocks for the key chooser. The blocks
+     * are separated by a thin divider (no visible heading). {@link SortKey#NATURAL}
+     * is offered separately at the very top (it means "unsorted"), so it is not
+     * part of any group here.
+     */
+    private static final KeyGroup[] KEY_GROUPS = {
+            new KeyGroup("SORT_CAT_STRUCTURE", SortKey.PARAGRAPH_START, SortKey.SOURCE_FILE, SortKey.PATH_ALPHA,
+                    SortKey.ID_ALPHA),
+            new KeyGroup("SORT_CAT_SOURCE", SortKey.SOURCE_ALPHA, SortKey.SOURCE_RHYME, SortKey.SOURCE_LENGTH),
+            new KeyGroup("SORT_CAT_TARGET", SortKey.TARGET_ALPHA, SortKey.TARGET_RHYME, SortKey.TARGET_LENGTH,
+                    SortKey.TRANSLATION_STATUS, SortKey.ORIGIN_ALPHA, SortKey.LINK_STATUS, SortKey.SOURCE_FUZZY),
+            new KeyGroup("SORT_CAT_NOTES", SortKey.NOTE_ALPHA, SortKey.NOTE_RHYME, SortKey.NOTE_LENGTH,
+                    SortKey.HAS_NOTE, SortKey.COMMENT_ALPHA, SortKey.COMMENT_RHYME, SortKey.COMMENT_LENGTH),
+            new KeyGroup("SORT_CAT_REPETITION", SortKey.DUPLICATE_STATUS, SortKey.DUPLICATE_COUNT,
+                    SortKey.TAG_COUNT),
+            new KeyGroup("SORT_CAT_HISTORY", SortKey.CHANGE_DATE, SortKey.CREATION_DATE, SortKey.CHANGER,
+                    SortKey.CREATOR),
+    };
 
     private final List<CriterionRow> rows = new ArrayList<>();
     private final JLabel warning = new JLabel(OStrings.getString("SORT_BAR_WARNING"));
@@ -98,6 +125,7 @@ public class SortBar extends CollapsibleBar {
 
     /** Rebuild the row layout inside the collapsible body. */
     private void rebuild() {
+        refreshKeyChoices();
         JPanel body = getBody();
         body.removeAll();
 
@@ -111,21 +139,27 @@ public class SortBar extends CollapsibleBar {
         body.add(warnRow);
 
         plusButton = null;
-        boolean multi = rows.size() > 1;
         for (int i = 0; i < rows.size(); i++) {
             CriterionRow row = rows.get(i);
             JPanel rp = new JPanel();
             rp.setLayout(new BoxLayout(rp, BoxLayout.LINE_AXIS));
             rp.add(Box.createHorizontalGlue());
-            rp.add(new JLabel(rowLabel(i, multi)));
+            rp.add(new JLabel(rowLabel(i)));
             rp.add(Box.createHorizontalStrut(4));
             rp.add(row.keyCombo);
             rp.add(Box.createHorizontalStrut(4));
             rp.add(row.dirCombo);
+            // Reorder: every row but the first can move up, every row but the last can move down.
             if (i > 0) {
                 rp.add(Box.createHorizontalStrut(4));
-                rp.add(minusButton(i));
+                rp.add(moveButton(i, -1));
             }
+            if (i < rows.size() - 1) {
+                rp.add(Box.createHorizontalStrut(4));
+                rp.add(moveButton(i, +1));
+            }
+            rp.add(Box.createHorizontalStrut(4));
+            rp.add(minusButton(i));
             if (i == rows.size() - 1 && rows.size() < MAX_KEYS) {
                 rp.add(Box.createHorizontalStrut(4));
                 plusButton = createPlusButton();
@@ -165,20 +199,18 @@ public class SortBar extends CollapsibleBar {
     }
 
     /**
-     * Adding a secondary/tertiary criterion only makes sense once the primary
-     * criterion actually sorts, so the "+" is disabled while it is "file order".
+     * The "+" is shown on the last row only while another criterion still fits
+     * ({@code rows < MAX_KEYS}); whenever it is shown it is enabled.
      */
     private void refreshPlusEnabled() {
         if (plusButton != null) {
-            plusButton.setEnabled(isSortActive());
+            plusButton.setEnabled(true);
         }
     }
 
-    private String rowLabel(int index, boolean multi) {
-        if (!multi) {
-            return OStrings.getString("SORT_BAR_LABEL");
-        }
-        return OStrings.getString(ROW_LABEL_KEYS[index]);
+    /** Row label: "Sort by:" for the first criterion, "then by:" for the rest. */
+    private String rowLabel(int index) {
+        return OStrings.getString(index == 0 ? "SORT_BAR_SORT_BY" : "SORT_BAR_THEN_BY");
     }
 
     private JButton createPlusButton() {
@@ -194,7 +226,20 @@ public class SortBar extends CollapsibleBar {
         minus.setMargin(new Insets(0, 6, 0, 6));
         minus.setToolTipText(OStrings.getString("SORT_BAR_REMOVE_KEY"));
         minus.addActionListener(e -> removeRow(index));
+        // Removing makes sense for any row when several exist; with a single row
+        // it only does something when that row actually sorts (removing it resets
+        // to file order). A lone "file order" row has nothing to remove.
+        minus.setEnabled(rows.size() > 1 || rows.get(0).key() != SortKey.NATURAL);
         return minus;
+    }
+
+    /** An up ({@code delta < 0}) or down ({@code delta > 0}) reorder button for the given row. */
+    private JButton moveButton(int index, int delta) {
+        JButton b = new JButton(delta < 0 ? "▲" : "▼");
+        b.setMargin(new Insets(0, 6, 0, 6));
+        b.setToolTipText(OStrings.getString(delta < 0 ? "SORT_BAR_MOVE_UP" : "SORT_BAR_MOVE_DOWN"));
+        b.addActionListener(e -> moveRow(index, delta));
+        return b;
     }
 
     void addRow() {
@@ -205,12 +250,54 @@ public class SortBar extends CollapsibleBar {
         rebuild();
     }
 
-    private void removeRow(int index) {
-        if (index <= 0 || index >= rows.size()) {
+    /**
+     * Remove the criterion in the given row. Removing the only remaining row does
+     * not leave the bar empty; it resets that row to "file order" (unsorted).
+     */
+    void removeRow(int index) {
+        if (index < 0 || index >= rows.size()) {
             return;
         }
-        rows.remove(index);
+        if (rows.size() == 1) {
+            rows.set(0, new CriterionRow());
+        } else {
+            rows.remove(index);
+        }
         rebuild();
+    }
+
+    /** Swap the given row with its neighbour to change criterion priority. */
+    void moveRow(int index, int delta) {
+        int target = index + delta;
+        if (index < 0 || index >= rows.size() || target < 0 || target >= rows.size()) {
+            return;
+        }
+        Collections.swap(rows, index, target);
+        rebuild();
+    }
+
+    /**
+     * Repopulate every row's key chooser so that a key already selected in another
+     * row is not offered again (and reappears once it is freed). Guarded so the
+     * programmatic repopulation does not register as a user edit.
+     */
+    private void refreshKeyChoices() {
+        boolean prev = adjusting;
+        adjusting = true;
+        for (CriterionRow r : rows) {
+            r.populateKeys();
+        }
+        adjusting = prev;
+    }
+
+    /** The non-NATURAL keys selected in rows other than {@code self}. */
+    private boolean usedElsewhere(CriterionRow self, SortKey key) {
+        for (CriterionRow r : rows) {
+            if (r != self && r.key() == key) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** True if the primary criterion actually reorders (i.e. is not file order). */
@@ -246,7 +333,8 @@ public class SortBar extends CollapsibleBar {
             return false;
         }
         for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).key != b.get(i).key || a.get(i).ascending != b.get(i).ascending) {
+            if (a.get(i).key != b.get(i).key || a.get(i).ascending != b.get(i).ascending
+                    || a.get(i).numeric != b.get(i).numeric) {
                 return false;
             }
         }
@@ -269,7 +357,11 @@ public class SortBar extends CollapsibleBar {
             KeySpec spec = appliedKeys.get(i);
             sb.append(i == 0 ? " " : ", ");
             sb.append(spec.key.getLocalizedName());
-            sb.append(spec.ascending ? " ↑" : " ↓");
+            if (spec.numeric) {
+                sb.append(spec.ascending ? " #↑" : " #↓");
+            } else {
+                sb.append(spec.ascending ? " ↑" : " ↓");
+            }
         }
         return sb.toString();
     }
@@ -319,26 +411,99 @@ public class SortBar extends CollapsibleBar {
         rows.get(rowIndex).keyCombo.setSelectedItem(key);
     }
 
-    /** A single criterion: a sort key plus a direction. */
+    /** Test/support hook: set the direction (and numeric mode) of the given row. */
+    void selectDir(int rowIndex, boolean ascending, boolean numeric) {
+        rows.get(rowIndex).dirCombo.setSelectedItem(Dir.of(ascending, numeric));
+    }
+
+    /** Test/support hook: the number of criterion rows currently shown. */
+    int rowCount() {
+        return rows.size();
+    }
+
+    /** Test/support hook: true if the given row currently offers the key as a choice. */
+    boolean rowOffersKey(int rowIndex, SortKey key) {
+        JComboBox<Object> combo = rows.get(rowIndex).keyCombo;
+        for (int i = 0; i < combo.getItemCount(); i++) {
+            if (combo.getItemAt(i) == key) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A labelled, non-selectable group header plus its member keys, for the key combo. */
+    private static final class KeyGroup {
+        private final String labelKey;
+        private final SortKey[] keys;
+
+        KeyGroup(String labelKey, SortKey... keys) {
+            this.labelKey = labelKey;
+            this.keys = keys;
+        }
+
+        String getLabel() {
+            return OStrings.getString(labelKey);
+        }
+    }
+
+    /** Direction option: plain or value-based (numeric), ascending or descending. */
+    private enum Dir {
+        ASC(true, false, "SORT_ASCENDING"),
+        DESC(false, false, "SORT_DESCENDING"),
+        NUM_ASC(true, true, "SORT_NUM_ASCENDING"),
+        NUM_DESC(false, true, "SORT_NUM_DESCENDING");
+
+        final boolean ascending;
+        final boolean numeric;
+        private final String labelKey;
+
+        Dir(boolean ascending, boolean numeric, String labelKey) {
+            this.ascending = ascending;
+            this.numeric = numeric;
+            this.labelKey = labelKey;
+        }
+
+        String getLabel() {
+            return OStrings.getString(labelKey);
+        }
+
+        static Dir of(boolean ascending, boolean numeric) {
+            if (numeric) {
+                return ascending ? NUM_ASC : NUM_DESC;
+            }
+            return ascending ? ASC : DESC;
+        }
+    }
+
+    /** A single criterion: a sort key plus a direction (with optional numeric mode). */
     private final class CriterionRow {
-        final JComboBox<SortKey> keyCombo = new JComboBox<>();
-        final JComboBox<Boolean> dirCombo = new JComboBox<>(new Boolean[] { Boolean.TRUE, Boolean.FALSE });
+        final JComboBox<Object> keyCombo = new JComboBox<>();
+        final JComboBox<Dir> dirCombo = new JComboBox<>();
+        /** The last real (non-header) key selected, used to reject header clicks. */
+        private SortKey lastSelectedKey = SortKey.NATURAL;
 
         CriterionRow() {
-            for (SortKey k : SortKey.values()) {
-                keyCombo.addItem(k);
-            }
-            keyCombo.setSelectedItem(SortKey.NATURAL);
             keyCombo.setRenderer(new KeyRenderer());
             dirCombo.setRenderer(new DirectionRenderer());
-            keyCombo.setMaximumSize(keyCombo.getPreferredSize());
-            dirCombo.setMaximumSize(dirCombo.getPreferredSize());
-            updateDirEnabled();
+            populateKeys();
             keyCombo.addActionListener(e -> {
+                // Ignore programmatic changes (repopulation/discard); their direction
+                // options are set explicitly, so we must not react to transient
+                // selections here (that would clobber a chosen numeric direction).
                 if (adjusting) {
                     return;
                 }
-                updateDirEnabled();
+                Object sel = keyCombo.getSelectedItem();
+                if (sel instanceof KeyGroup) {
+                    // Divider rows are not selectable; revert to the last real key.
+                    adjusting = true;
+                    keyCombo.setSelectedItem(lastSelectedKey);
+                    adjusting = false;
+                    return;
+                }
+                lastSelectedKey = (SortKey) sel;
+                updateDirOptions();
                 rebuild();
             });
             dirCombo.addActionListener(e -> {
@@ -349,44 +514,156 @@ public class SortBar extends CollapsibleBar {
             });
         }
 
-        /** Direction is meaningless for the unsorted "file order" option. */
-        void updateDirEnabled() {
-            dirCombo.setEnabled(key() != SortKey.NATURAL);
+        /**
+         * (Re)fill the key chooser: "file order" first, then each thematic block
+         * (preceded by a divider) with the keys not already taken by another row.
+         * This row's own current selection is always kept available and reselected.
+         * Empty blocks (all members used elsewhere) are dropped, divider included.
+         */
+        void populateKeys() {
+            SortKey selected = key();
+            boolean prev = adjusting;
+            adjusting = true;
+            keyCombo.removeAllItems();
+            keyCombo.addItem(SortKey.NATURAL);
+            for (KeyGroup g : KEY_GROUPS) {
+                List<SortKey> available = new ArrayList<>();
+                for (SortKey k : g.keys) {
+                    if (k == selected || !usedElsewhere(this, k)) {
+                        available.add(k);
+                    }
+                }
+                if (!available.isEmpty()) {
+                    keyCombo.addItem(g);
+                    for (SortKey k : available) {
+                        keyCombo.addItem(k);
+                    }
+                }
+            }
+            keyCombo.setSelectedItem(selected);
+            lastSelectedKey = selected;
+            keyCombo.setMaximumSize(keyCombo.getPreferredSize());
+            // Re-derive the direction options for the (restored) key. Done here,
+            // with the correct key selected, so a valid numeric direction is kept
+            // and an invalid one (key no longer numeric) is dropped.
+            updateDirOptions();
+            adjusting = prev;
+        }
+
+        /**
+         * Populate the direction combo with 2 options (asc/desc) or 4 (plus
+         * numeric asc/desc) depending on whether the selected key supports
+         * value-based ordering. Disabled for the unsorted "file order" option.
+         */
+        void updateDirOptions() {
+            SortKey k = key();
+            Dir current = (Dir) dirCombo.getSelectedItem();
+            boolean prev = adjusting;
+            adjusting = true;
+            dirCombo.removeAllItems();
+            dirCombo.addItem(Dir.ASC);
+            dirCombo.addItem(Dir.DESC);
+            boolean numeric = k.supportsNumeric();
+            if (numeric) {
+                dirCombo.addItem(Dir.NUM_ASC);
+                dirCombo.addItem(Dir.NUM_DESC);
+            }
+            boolean keepCurrent = current == Dir.ASC || current == Dir.DESC
+                    || (numeric && (current == Dir.NUM_ASC || current == Dir.NUM_DESC));
+            dirCombo.setSelectedItem(keepCurrent ? current : Dir.ASC);
+            dirCombo.setEnabled(k != SortKey.NATURAL);
+            dirCombo.setMaximumSize(dirCombo.getPreferredSize());
+            adjusting = prev;
         }
 
         SortKey key() {
-            return (SortKey) keyCombo.getSelectedItem();
+            Object sel = keyCombo.getSelectedItem();
+            return (sel instanceof SortKey) ? (SortKey) sel : SortKey.NATURAL;
         }
 
         KeySpec spec() {
-            return new KeySpec(key(), Boolean.TRUE.equals(dirCombo.getSelectedItem()));
+            Dir d = (Dir) dirCombo.getSelectedItem();
+            if (d == null) {
+                d = Dir.ASC;
+            }
+            return new KeySpec(key(), d.ascending, d.numeric);
         }
 
         void setSpec(KeySpec k) {
             keyCombo.setSelectedItem(k.key);
-            dirCombo.setSelectedItem(k.ascending);
-            updateDirEnabled();
+            updateDirOptions();
+            dirCombo.setSelectedItem(Dir.of(k.ascending, k.numeric));
         }
     }
 
-    /** Renders a {@link SortKey} with its localized name. */
+    /**
+     * Renders {@link SortKey} entries (with an explanatory tooltip for the less
+     * obvious ones) and renders the non-selectable {@link KeyGroup} markers as a
+     * thin divider between thematic blocks (no visible heading).
+     */
     private static class KeyRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
-            String text = (value == null) ? "" : ((SortKey) value).getLocalizedName();
-            return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            if (value instanceof KeyGroup) {
+                // A group marker becomes a subtle divider (a thin top line), not
+                // selectable. It stays a JLabel like every other cell so the combo
+                // keeps one consistent cell height (a bare JSeparator cell can make
+                // the popup collapse all rows to a sliver under some look & feels).
+                // The block name is kept only as a hover tooltip, not a heading.
+                Component c = super.getListCellRendererComponent(list, " ", index, false, false);
+                if (c instanceof JComponent jc) {
+                    jc.setEnabled(false);
+                    Color line = UIManager.getColor("Separator.foreground");
+                    jc.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,
+                            line != null ? line : Color.GRAY));
+                    jc.setToolTipText(((KeyGroup) value).getLabel());
+                }
+                return c;
+            }
+            SortKey k = (SortKey) value;
+            String text = (k == null) ? "" : k.getLocalizedName();
+            Component c = super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            if (c instanceof JComponent) {
+                ((JComponent) c).setToolTipText(k == null ? null : k.getTooltip());
+            }
+            return c;
         }
     }
 
-    /** Renders the ascending/descending direction flag. */
+    /**
+     * Renders a {@link Dir} direction option. The plain ascending/descending
+     * options are labelled "alphabetical …" when the same combo also offers the
+     * numeric options, so the two orderings are clearly distinguished.
+     */
     private static class DirectionRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
-            String text = Boolean.TRUE.equals(value) ? OStrings.getString("SORT_ASCENDING")
-                    : OStrings.getString("SORT_DESCENDING");
+            String text = "";
+            if (value instanceof Dir) {
+                Dir d = (Dir) value;
+                boolean numericOffered = containsNumericOption(list);
+                if (d == Dir.ASC) {
+                    text = OStrings.getString(numericOffered ? "SORT_ALPHA_ASCENDING" : "SORT_ASCENDING");
+                } else if (d == Dir.DESC) {
+                    text = OStrings.getString(numericOffered ? "SORT_ALPHA_DESCENDING" : "SORT_DESCENDING");
+                } else {
+                    text = d.getLabel();
+                }
+            }
             return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+        }
+
+        /** True if the combo's item list offers the numeric direction options. */
+        private static boolean containsNumericOption(JList<?> list) {
+            ListModel<?> model = list.getModel();
+            for (int i = 0; i < model.getSize(); i++) {
+                if (model.getElementAt(i) == Dir.NUM_ASC) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

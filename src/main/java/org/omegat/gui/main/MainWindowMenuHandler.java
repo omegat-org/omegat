@@ -58,6 +58,7 @@ import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
 import org.omegat.gui.dialogs.LogDialogController;
+import org.omegat.gui.numberconvert.NumberAutoConvertWindow;
 import org.omegat.gui.dialogs.VersionCheckDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
@@ -784,6 +785,10 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void toolsCheckIssuesCurrentFileMenuItemActionPerformed() {
         Core.getIssues().showForFiles(Pattern.quote(Core.getEditor().getCurrentFile()));
+    }
+
+    public void toolsNumberConvertMenuItemActionPerformed() {
+        new NumberAutoConvertWindow(Core.getMainWindow().getApplicationFrame()).show();
     }
 
     /**

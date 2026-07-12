@@ -34,13 +34,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public abstract class AbstractStatisticsWriter {
 
@@ -65,7 +62,8 @@ public abstract class AbstractStatisticsWriter {
      *            the statistics result object containing the data to be written
      */
     public void writeStat(File statFile, StatsResult result) {
-        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile), StandardCharsets.UTF_8)) {
+        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
+                StandardCharsets.UTF_8)) {
             write(result, out);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CONSOLE_STATS_FILE_OPEN_ERROR");
@@ -73,21 +71,22 @@ public abstract class AbstractStatisticsWriter {
     }
 
     /**
-     * Formatter with format YYYYMMDDThhmmssZ able to display a date in UTC time.
+     * Formatter with format YYYYMMDDThhmmssZ able to display a date in UTC
+     * time.
      * <p>
      * {@link DateTimeFormatter} is immutable and thread-safe.
      */
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
             .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
 
-
     /**
-     * Updates the date field of the provided {@link StatsResult} object
-     * with the current date and time, formatted in UTC and using the
-     * pattern "yyyyMMdd'T'HHmmss'Z'".
+     * Updates the date field of the provided {@link StatsResult} object with
+     * the current date and time, formatted in UTC and using the pattern
+     * "yyyyMMdd'T'HHmmss'Z'".
      *
      * @param result
-     *        the {@link StatsResult} object whose date field is to be updated
+     *            the {@link StatsResult} object whose date field is to be
+     *            updated
      */
     protected void setDate(StatsResult result) {
         result.setDate(DATE_FORMAT.format(Instant.now()));

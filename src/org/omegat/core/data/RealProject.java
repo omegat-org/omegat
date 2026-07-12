@@ -346,7 +346,8 @@ public class RealProject implements IProject {
                     glossaryPrepared = null;
                     remoteRepositoryProvider.switchAllToLatest();
                 } catch (IRemoteRepository2.NetworkException e) {
-                    Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getMessage() : e.getCause());
+                    Log.logErrorRB("TEAM_NETWORK_ERROR",
+                            e.getCause() == null ? e.getMessage() : e.getCause());
                     setOfflineMode();
                 }
                 remoteRepositoryProvider.copyFilesFromReposToProject("");
@@ -1031,13 +1032,14 @@ public class RealProject implements IProject {
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isManaged() && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             synchronized (projectTMX) {
-                tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
-                        tmxPath, getTMXRebaseOperation());
+                tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider,
+                        config.getProjectRootDir(), tmxPath, getTMXRebaseOperation());
             }
         }
 
         final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
-        if (processGlossary && glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+        if (processGlossary && glossaryPath != null
+                && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
             synchronized (projectTMX) {
                 glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
                         config.getProjectRootDir(), glossaryPath, getGlossaryRebaseOperation());
@@ -1057,7 +1059,8 @@ public class RealProject implements IProject {
     }
 
     private boolean canRebaseAndCommit() {
-        return remoteRepositoryProvider.isManaged() && preparedStatus == PreparedStatus.PREPARED && isOnlineMode;
+        return remoteRepositoryProvider.isManaged() && preparedStatus == PreparedStatus.PREPARED
+                && isOnlineMode;
     }
 
     @Deprecated(since = "6.1.0", forRemoval = true)
@@ -1824,7 +1827,7 @@ public class RealProject implements IProject {
 
         @Override
         public void addTranslation(@Nullable String id, @Nullable String source, @Nullable String translation,
-                                   boolean isFuzzy, String sourcePath, IFilter filter) {
+                boolean isFuzzy, String sourcePath, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();

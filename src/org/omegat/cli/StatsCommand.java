@@ -45,20 +45,25 @@ import java.util.concurrent.Callable;
 public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    @Nullable LegacyParameters legacyParams;
+    @Nullable
+    LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    @Nullable CommonParameters params;
+    @Nullable
+    CommonParameters params;
 
     @CommandLine.Option(names = {
             "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml", descriptionKey = "STATS_TYPE")
-    @Nullable String format;
+    @Nullable
+    String format;
     @CommandLine.Option(names = {
             "output" }, paramLabel = "<stats-output-file>", descriptionKey = "OUTPUT_FILE")
-    @Nullable String output;
+    @Nullable
+    String output;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
-    @Nullable String project;
+    @Nullable
+    String project;
 
     @Override
     public Integer call() {

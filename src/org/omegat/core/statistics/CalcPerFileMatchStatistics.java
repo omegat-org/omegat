@@ -84,7 +84,8 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
 
             MatchStatCounts perFileCounts = forFile(fi);
             cancellationToken.throwIfCancelled();
-            String title = StringUtil.format(OStrings.getString("CT_STATSMATCH_File"), fileNumber, fi.filePath);
+            String title = StringUtil.format(OStrings.getString("CT_STATSMATCH_File"), fileNumber,
+                    fi.filePath);
             showTextTable(title, perFileCounts, i -> true, true);
         }
 

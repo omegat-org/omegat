@@ -34,7 +34,6 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.Completion;
-import org.omegat.util.Preferences;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,30 +45,28 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Unit tests for the {@code CalcMatchStatistics} class.
- * This class validates the functionality of calculating match statistics for
- * translation memory segments. The tests assert correctness of match categories
- * such as repetitions, exact matches, fuzzy matches, and no matches across
- * multiple similarity thresholds.
+ * Unit tests for the {@code CalcMatchStatistics} class. This class validates
+ * the functionality of calculating match statistics for translation memory
+ * segments. The tests assert correctness of match categories such as
+ * repetitions, exact matches, fuzzy matches, and no matches across multiple
+ * similarity thresholds.
  *
  * The following annotations and methods are notable:
  *
- * - {@code @Before}: Used for test-specific setup, ensuring the testing environment
- *   is initialized and isolated.
- * - {@code @BeforeClass}: Utilized for one-time setup before all tests are executed,
- *   including temporary directory creation for testing purposes.
- * - {@code @Test}: Defines a method as a test case, validating different
- *   statistical metrics with assertions.
+ * - {@code @Before}: Used for test-specific setup, ensuring the testing
+ * environment is initialized and isolated. - {@code @BeforeClass}: Utilized for
+ * one-time setup before all tests are executed, including temporary directory
+ * creation for testing purposes. - {@code @Test}: Defines a method as a test
+ * case, validating different statistical metrics with assertions.
  *
  * Key functionality tested:
  *
- * - Ensures that statistics calculations such as repetitions, exact matches, and
- *   fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds) produce
- *   expected and valid results.
- * - Asserts total metrics for match statistics to verify data aggregation is
- *   correct and comprehensive.
- * - Confirms integration of dependent components like segmenters and testing
- *   consumers used for capturing results.
+ * - Ensures that statistics calculations such as repetitions, exact matches,
+ * and fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds)
+ * produce expected and valid results. - Asserts total metrics for match
+ * statistics to verify data aggregation is correct and comprehensive. -
+ * Confirms integration of dependent components like segmenters and testing
+ * consumers used for capturing results.
  */
 public class CalcMatchStatisticsTest extends TestCore {
 
@@ -118,7 +115,8 @@ public class CalcMatchStatisticsTest extends TestCore {
         TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
-        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter,
+                testingStatsConsumer);
         CancellationToken ctoken = new CancellationToken();
         calcMatchStatistics.run(ctoken);
         Completion completion = testingStatsConsumer.completion().join();

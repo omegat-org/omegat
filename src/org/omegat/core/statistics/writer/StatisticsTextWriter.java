@@ -38,7 +38,6 @@ import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
-import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -94,10 +93,14 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
     }
 
     /**
-     * Populates the statistics panel with data from the given statistics result object.
+     * Populates the statistics panel with data from the given statistics result
+     * object.
      *
-     * @param result   the statistics result containing the data to be displayed
-     * @param callback the statistics panel that will be updated with the provided data
+     * @param result
+     *            the statistics result containing the data to be displayed
+     * @param callback
+     *            the statistics panel that will be updated with the provided
+     *            data
      */
     public void write(StatsResult result, IStatsConsumer callback) {
         callback.setTextData(getTextData(result));
@@ -105,7 +108,8 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
     public void setData(StatsResult result, IStatsConsumer callback) {
         callback.setTable(HT_HEADERS, getHeaderTable(result));
-        callback.appendTable(OStrings.getString("CT_STATS_FILE_Statistics"), FT_HEADERS, getFilesTable(result));
+        callback.appendTable(OStrings.getString("CT_STATS_FILE_Statistics"), FT_HEADERS,
+                getFilesTable(result));
     }
 
     /**

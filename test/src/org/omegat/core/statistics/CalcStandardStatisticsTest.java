@@ -89,7 +89,8 @@ public class CalcStandardStatisticsTest extends TestCore {
         assertRowValues(result[3], "97", "848", "4385", "5116");
         result = allResult.get(1);
         assertNotNull(result);
-        // test/data/filters/po/file-POFilter-match-stat-en-ca.po: 108 108 97 97 ....
+        // test/data/filters/po/file-POFilter-match-stat-en-ca.po: 108 108 97 97
+        // ....
         assertRowValues(result[0], "108", "108", "97", "97");
     }
 

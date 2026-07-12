@@ -174,17 +174,18 @@ public final class Statistics {
     }
 
     /**
-     * Writes the provided statistics result to the specified file in the given output format.
-     * Depending on the format, the data is written as plain text, XML, or JSON. The file is
-     * encoded in UTF-8. If any errors occur during file writing, they are logged.
+     * Writes the provided statistics result to the specified file in the given
+     * output format. Depending on the format, the data is written as plain
+     * text, XML, or JSON. The file is encoded in UTF-8. If any errors occur
+     * during file writing, they are logged.
      *
      * @param statFile
-     *          the file where the statistics should be written
+     *            the file where the statistics should be written
      * @param result
-     *          the statistics result object containing the data to be written
+     *            the statistics result object containing the data to be written
      * @param format
-     *          the format in which the statistics should be written (TEXT,
-     *          XML, or JSON)
+     *            the format in which the statistics should be written (TEXT,
+     *            XML, or JSON)
      */
     public static void writeStat(File statFile, StatsResult result, StatOutputFormat format) {
         switch (format) {

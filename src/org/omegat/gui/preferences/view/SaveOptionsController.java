@@ -67,8 +67,8 @@ public class SaveOptionsController extends BasePreferencesController {
 
         Object item = panel.variablesList.getSelectedItem();
         if (item != null) {
-            panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
-                    .replaceSelection(item.toString()));
+            panel.insertButton
+                    .addActionListener(e -> panel.externalCommandTextArea.replaceSelection(item.toString()));
         }
     }
 

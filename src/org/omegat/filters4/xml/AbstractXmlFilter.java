@@ -440,7 +440,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     }
 
     /** Used for file type detection **/
-    protected @Nullable StartElement findEvent(File inputFile, Pattern path) throws IOException, TranslationException {
+    protected @Nullable StartElement findEvent(File inputFile, Pattern path)
+            throws IOException, TranslationException {
         try {
             XMLEventReader eventReader = null;
             try {

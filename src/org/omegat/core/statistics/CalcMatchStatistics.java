@@ -36,13 +36,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.text.DateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -137,7 +135,8 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
 
     public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback) {
         super(project, callback);
-        finder = ThreadLocal.withInitial(() -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
+        finder = ThreadLocal
+                .withInitial(() -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
     }
 
     @Override

@@ -49,8 +49,7 @@ public class StatisticsJsonWriter extends AbstractStatisticsWriter {
     public String getJsonData(StatsResult result) throws IOException {
         setDate(result);
         ObjectMapper mapper = new ObjectMapper();
-        try (StringWriter sw = new StringWriter();
-            SequenceWriter writer = mapper.writer().writeValues(sw)) {
+        try (StringWriter sw = new StringWriter(); SequenceWriter writer = mapper.writer().writeValues(sw)) {
             writer.write(result);
             return sw.toString();
         }

@@ -60,6 +60,7 @@ import org.omegat.util.OConsts;
 public class CalcStandardStatistics implements ICalcStatistics {
 
     protected final IStatsConsumer callback;
+    protected CancellationToken cancellationToken;
     final IProject project;
 
     public CalcStandardStatistics(IProject project, IStatsConsumer callback) {
@@ -73,6 +74,7 @@ public class CalcStandardStatistics implements ICalcStatistics {
 
     @Override
     public Void run(CancellationToken token) {
+        cancellationToken = token;
         token.throwIfCancelled();
 
         StatsResult result = Statistics.buildProjectStats(project);
@@ -92,5 +94,9 @@ public class CalcStandardStatistics implements ICalcStatistics {
         } catch (IOException ignored) {
         }
         return null;
+    }
+
+    public boolean isInterrupted() {
+        return cancellationToken.isCancelled();
     }
 }

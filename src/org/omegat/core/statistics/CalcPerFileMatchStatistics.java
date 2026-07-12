@@ -71,24 +71,24 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
     @Override
     public Void run(CancellationToken token) throws StoppedException, LongProcessInterruptedException {
         entriesToProcess = getEntrySize() * 2;
-        calcPerFile(token);
+        calcPerFile();
         callback.onComplete(Completion.success());
         return null;
     }
 
-    private void calcPerFile(CancellationToken cancellationToken) {
+    private void calcPerFile() {
         int fileNumber = 0;
         for (IProject.FileInfo fi : project.getProjectFiles()) {
             fileNumber++;
 
-            MatchStatCounts perFileCounts = forFile(fi, cancellationToken);
+            MatchStatCounts perFileCounts = forFile(fi);
             cancellationToken.throwIfCancelled();
             String title = StringUtil.format(OStrings.getString("CT_STATSMATCH_File"), fileNumber,
                     fi.filePath);
             showTextTable(title, perFileCounts, i -> true, true);
         }
 
-        MatchStatCounts total = calcTotal(false, cancellationToken);
+        MatchStatCounts total = calcTotal(false);
         String title = OStrings.getString("CT_STATSMATCH_FileTotal");
         showTextTable(title, total, i -> i != 1, false);
         String fn = project.getProjectProperties().getProjectInternal()
@@ -97,7 +97,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         callback.setDataFile(fn);
     }
 
-    private MatchStatCounts forFile(IProject.FileInfo fi, CancellationToken cancellationToken) {
+    private MatchStatCounts forFile(IProject.FileInfo fi) {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInFile.clear();
 
@@ -130,7 +130,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         }
         addEntryProcessed(alreadyProcessedInFile);
 
-        calcSimilarity(untranslatedEntries, cancellationToken).ifPresent(result::addCounts);
+        calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
 
         return result;
     }

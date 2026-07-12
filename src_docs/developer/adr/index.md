@@ -10,7 +10,7 @@
 - 2025007 [CLI Plugin API Implementation](2025007.CLIPluginAPI.md)
 - 2025008 [Adoption of JSpecify for Null-Safety](2025008.AdoptionJSpecifyForNullSafety.md)
 - 2025012 [Plugin Security Architecture and ClassLoader Isolation](2025012.PluginSecurityArchitecture.md)
-- 2025013 [Machine Translation SPI with multi-level context for LLM Support](2025013.MultiLevelContextSupportForMT.md)
+- 2025013 [Machine Translation SPI with multi-level context](2025013.MultiLevelContextSupportForMT.md)
 - 2026002 [Preferences Architecture and Testable Store Injection](2026002.PreferencesArchitecture.md)
 
 ## Core features

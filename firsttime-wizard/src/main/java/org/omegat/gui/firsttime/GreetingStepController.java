@@ -30,7 +30,7 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URL;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.preferences.IPreferencesController;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;

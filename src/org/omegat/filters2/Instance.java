@@ -25,7 +25,8 @@
 
 package org.omegat.filters2;
 
-import org.jetbrains.annotations.Nullable;
+
+import org.jspecify.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -43,13 +44,13 @@ public class Instance implements Serializable {
 
     private static final long serialVersionUID = -8290853406593590600L;
 
-    private @Nullable String sourceFilenameMask;
+    private String sourceFilenameMask;
 
-    public @Nullable String getSourceFilenameMask() {
+    public String getSourceFilenameMask() {
         return sourceFilenameMask;
     }
 
-    public void setSourceFilenameMask(@Nullable String sourceFilenameMask) {
+    public void setSourceFilenameMask(String sourceFilenameMask) {
         this.sourceFilenameMask = sourceFilenameMask;
     }
 
@@ -63,8 +64,8 @@ public class Instance implements Serializable {
         return sourceEncoding;
     }
 
-    public void setSourceEncoding(String sourceEncoding) {
-        if (sourceEncoding == null || sourceEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN)) {
+    public void setSourceEncoding(@Nullable String sourceEncoding) {
+        if (AbstractFilter.ENCODING_AUTO_HUMAN.equals(sourceEncoding)) {
             this.sourceEncoding = null;
         } else {
             this.sourceEncoding = sourceEncoding;
@@ -81,8 +82,8 @@ public class Instance implements Serializable {
         return targetEncoding;
     }
 
-    public void setTargetEncoding(String targetEncoding) {
-        if (targetEncoding == null || targetEncoding.equals(AbstractFilter.ENCODING_AUTO_HUMAN)) {
+    public void setTargetEncoding(@Nullable String targetEncoding) {
+        if (AbstractFilter.ENCODING_AUTO_HUMAN.equals(targetEncoding)) {
             this.targetEncoding = null;
         } else {
             this.targetEncoding = targetEncoding;
@@ -99,14 +100,6 @@ public class Instance implements Serializable {
         this.targetFilenamePattern = targetFilenamePattern;
     }
 
-    private void init(String newSourceFilenameMask, String newSourceEncoding, String newTargetEncoding,
-            String newTargetFilenamePattern) {
-        setSourceFilenameMask(newSourceFilenameMask);
-        setSourceEncoding(newSourceEncoding);
-        setTargetEncoding(newTargetEncoding);
-        setTargetFilenamePattern(newTargetFilenamePattern);
-    }
-
     /**
      * Creates a new instance of FilterInstance.
      * <p>
@@ -117,7 +110,18 @@ public class Instance implements Serializable {
      */
     public Instance(String sourceFilenameMask, @Nullable String sourceEncoding,
             @Nullable String targetEncoding, String targetFilenamePattern) {
-        init(sourceFilenameMask, sourceEncoding, targetEncoding, targetFilenamePattern);
+        this.sourceFilenameMask = sourceFilenameMask;
+        if (AbstractFilter.ENCODING_AUTO_HUMAN.equals(sourceEncoding)) {
+            this.sourceEncoding = null;
+        } else {
+            this.sourceEncoding = sourceEncoding;
+        }
+        if (AbstractFilter.ENCODING_AUTO_HUMAN.equals(targetEncoding)) {
+            this.targetEncoding = null;
+        } else {
+            this.targetEncoding = targetEncoding;
+        }
+        this.targetFilenamePattern = targetFilenamePattern;
     }
 
     /**
@@ -132,7 +136,7 @@ public class Instance implements Serializable {
      * input file.
      */
     public Instance(String sourceFilenameMask, @Nullable String sourceEncoding, @Nullable String targetEncoding) {
-        init(sourceFilenameMask, sourceEncoding, targetEncoding, AbstractFilter.TARGET_DEFAULT);
+        this(sourceFilenameMask, sourceEncoding, targetEncoding, AbstractFilter.TARGET_DEFAULT);
     }
 
     /**
@@ -151,7 +155,7 @@ public class Instance implements Serializable {
      * input file.
      */
     public Instance(String sourceFilenameMask, String sourceEncoding) {
-        init(sourceFilenameMask, sourceEncoding, null, AbstractFilter.TARGET_DEFAULT);
+        this(sourceFilenameMask, sourceEncoding, null, AbstractFilter.TARGET_DEFAULT);
     }
 
     /**
@@ -166,7 +170,7 @@ public class Instance implements Serializable {
      * input file.
      */
     public Instance(String sourceFilenameMask) {
-        init(sourceFilenameMask, null, null, AbstractFilter.TARGET_DEFAULT);
+        this(sourceFilenameMask, null, null, AbstractFilter.TARGET_DEFAULT);
     }
 
     /**
@@ -174,7 +178,7 @@ public class Instance implements Serializable {
      * JavaBeans specification, <b>don't use</b> it in filters.
      */
     public Instance() {
-        init("*.*", null, null, AbstractFilter.TARGET_DEFAULT);
+        this("*.*", null, null, AbstractFilter.TARGET_DEFAULT);
     }
 
 }

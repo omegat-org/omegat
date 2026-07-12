@@ -1,0 +1,149 @@
+/*
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2026 Hiroshi Miura
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+package org.omegat.core.segmentation;
+
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
+/**
+ * Unit tests for the {@link SRXManager#getDefault()} method. This method loads
+ * the default segmentation rules and configures the SRX object accordingly.
+ */
+public class SRXManagerTest {
+
+    @Rule
+    public TemporaryFolder tempFolder = new TemporaryFolder();
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method successfully loads
+     * the default SRX object.
+     */
+    @Test
+    public void testGetDefaultLoadsSRXSuccessfully() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertNotNull("The SRX object should not be null.", srx);
+    }
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method sets
+     * includeEndingTags to true.
+     */
+    @Test
+    public void testGetDefaultIncludeEndingTagsIsTrue() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertTrue("The includeEndingTags property should be true.", srx.isIncludeEndingTags());
+    }
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method sets segmentSubflows
+     * to true.
+     */
+    @Test
+    public void testGetDefaultSegmentSubflowsIsTrue() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertTrue("The segmentSubflows property should be true.", srx.isSegmentSubflows());
+    }
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with a non-null and non-empty version string.
+     */
+    @Test
+    public void testGetDefaultVersion() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertEquals("The SRX version should be 2.0.", "2.0", srx.getVersion());
+    }
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with non-null mapping rules.
+     */
+    @Test
+    public void testGetDefaultMappingRulesIsNotNull() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertNotNull("The mapping rules should not be null.", srx.getMappingRules());
+    }
+
+    /**
+     * Test that the {@link SRXManager#getDefault()} method returns an SRX
+     * object with mapping rules containing at least one rule.
+     */
+    @Test
+    public void testGetDefaultMappingRulesHas18() throws IOException {
+        SRX srx = SRXManager.getDefault();
+        Assert.assertEquals("The mapping rules should contain at least one rule.", 18,
+                srx.getMappingRules().size());
+    }
+
+    /**
+     * Test that the {@link org.omegat.core.segmentation.SRXManager#loadSrxFile} and
+     * {@link SRXManager#saveToSrx(SRX, File)} methods can successfully load
+     * and save an SRX file.
+     */
+    @Test
+    public void testLoadAndSaveSrxFile() throws IOException {
+        // Copy test data to temporary folder
+        File sourceFile = new File("test/data/segmentation/default/segmentation.srx");
+        File tempFile = tempFolder.newFile("original.srx");
+        Files.copy(sourceFile.toPath(), tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        // Load SRX from the temporary file
+        SRX srx = SRXManager.loadSrxFile(tempFile.toURI());
+        Assert.assertNotNull("The loaded SRX object should not be null.", srx);
+
+        // Save SRX to a new file in the temporary folder
+        File outputFile = new File(tempFolder.getRoot(), "segmentation.srx");
+        SRXManager.saveToSrx(srx, tempFolder.getRoot());
+        Assert.assertTrue("The output file should exist.", outputFile.exists());
+
+        // Compare original.srx and segmentation.srx with XMLUnit
+        Diff diff = DiffBuilder.compare(tempFile)
+                .withTest(outputFile)
+                .ignoreWhitespace()
+                .ignoreComments()
+                .build();
+        Assert.assertFalse("The original and saved SRX files should be identical: " + diff.toString(),
+                diff.hasDifferences());
+    }
+
+    @Test
+    public void testRemoveSrxWhenNull() throws IOException {
+        // Copy test data to temporary folder
+        File sourceFile = new File("test/data/segmentation/default/segmentation.srx");
+        File tempFile = tempFolder.newFile("segmentation.srx");
+        Files.copy(sourceFile.toPath(), tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        File segmentFile = new File(tempFolder.getRoot(), "segmentation.srx");
+        SRXManager.saveToSrx(null, tempFolder.getRoot());
+        Assert.assertFalse("The segmentation file should be removed when srx is null.", segmentFile.exists());
+    }
+}

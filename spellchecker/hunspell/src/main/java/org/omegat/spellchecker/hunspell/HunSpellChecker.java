@@ -35,6 +35,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dumonts.hunspell.Hunspell;
+import org.omegat.util.Platform;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -74,7 +75,13 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
      * Register plugins into OmegaT.
      */
     public static void loadPlugins() {
-        Core.registerSpellCheckClass(HunSpellChecker.class);
+        // dumont hunspell only supports limited platform
+        boolean isSupportedPlatform = Platform.isMacOSX()
+                || (Platform.isWindows && Platform.isX86_64)
+                || (Platform.isLinux() && Platform.isX86_64);
+        if (isSupportedPlatform) {
+            Core.registerSpellCheckClass(HunSpellChecker.class);
+        }
     }
 
     public static void unloadPlugins() {

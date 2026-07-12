@@ -64,8 +64,12 @@ public final class TipOfTheDayModule {
 
     public static class TipOfTheDayModuleListener implements IApplicationEventListener {
 
-        private final TipOfTheDayController controller = new TipOfTheDayController();
+        private final TipOfTheDayController controller;
         private @Nullable JMenuItem totdMenu;
+
+        public TipOfTheDayModuleListener() {
+            controller = new TipOfTheDayController();
+        }
 
         @Override
         public void onApplicationStartup() {

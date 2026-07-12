@@ -102,6 +102,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the class name of the plugin entry point.
      * @return className of plugin entry point
      */
     public String getClassName() {
@@ -109,6 +110,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the name of the plugin.
      * @return name of plugin
      */
     public String getName() {
@@ -116,6 +118,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the version of the plugin.
      * @return version of plugin
      */
     public String getVersion() {
@@ -123,6 +126,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the description of the plugin features.
      * @return description of plugin features
      */
     public String getDescription() {
@@ -130,13 +134,15 @@ public final class PluginInformation {
     }
 
     /**
-     * @return author(s) of plugin
+     * Get the author(s) of the plugin.
+     * @return the author(s) of the plugin
      */
     public String getAuthor() {
         return author;
     }
 
     /**
+     * Get the category type of the plugin.
      * @return category type of plugin as PluginType enum
      */
     public PluginUtils.PluginType getCategory() {
@@ -144,6 +150,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the link URL of the plugin homepage.
      * @return link URL of plugin homepage
      */
     public String getLink() {
@@ -151,6 +158,7 @@ public final class PluginInformation {
     }
 
     /**
+     * Get the manifest URL of the plugin jar.
      * @return manifest URL of plugin jar
      */
     public URL getUrl() {
@@ -158,8 +166,8 @@ public final class PluginInformation {
     }
 
     /**
-     * @return true if plugin is bundled with OmegaT distribution, otherwise
-     *         false when 3rd party plugin
+     * @return true if the plugin is bundled with OmegaT distribution,
+     *         otherwise false when 3rd party plugin
      */
     public boolean isBundled() {
         return status == Status.BUNDLED;
@@ -219,11 +227,10 @@ public final class PluginInformation {
         } else if (!name.equals(other.name))
             return false;
         if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+            return other.version == null;
+        } else {
+            return version.equals(other.version);
+        }
     }
 
     /**

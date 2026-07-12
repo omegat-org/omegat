@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
@@ -78,6 +79,7 @@ import org.omegat.util.TagUtil;
  * @author Didier Briel
  * @author Enrique Estevez
  */
+@NullMarked
 public class PoFilter extends AbstractFilter {
 
     public static final String OPTION_ALLOW_BLANK = "disallowBlank";

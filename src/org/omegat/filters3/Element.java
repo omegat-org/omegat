@@ -25,6 +25,8 @@
 
 package org.omegat.filters3;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Element of the translatable entry. Can be a tag or a piece of text.
  *
@@ -35,6 +37,7 @@ public interface Element {
      * Returns shortcut string representation of the element. E.g. for
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
+    @Nullable
     String toShortcut();
 
     /**

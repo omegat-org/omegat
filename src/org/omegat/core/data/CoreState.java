@@ -33,6 +33,7 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.master.FilterMaster;
@@ -51,13 +52,13 @@ import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
 import java.util.List;
 
 public class CoreState {
 
     protected static volatile CoreState instance = new CoreState();
+
+    private final LongProcessExecutor executor = new LongProcessExecutor("omegat-longprocess");
 
     private IAutoSave saveThread;
 
@@ -66,14 +67,16 @@ public class CoreState {
     }
 
     public void initializeSaveThread() {
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
+        saveThread = new SaveThread();
     }
 
     public void initializeVersionCheckThread() {
         VersionCheckThread th = new VersionCheckThread(10);
         th.start();
+    }
+
+    public LongProcessExecutor getExecutor() {
+        return executor;
     }
 
     public IAutoSave getAutoSave() {
@@ -98,7 +101,6 @@ public class CoreState {
         return instance;
     }
 
-    private Map<String, String> cmdLineParams = Collections.emptyMap();
     private IProject project;
     private Segmenter segmenter;
     private FilterMaster filterMaster;
@@ -141,14 +143,6 @@ public class CoreState {
             issueProvidersRegistry = new ArrayList<>();
         }
         return issueProvidersRegistry;
-    }
-
-    public Map<String, String> getCmdLineParams() {
-        return cmdLineParams;
-    }
-
-    public void setCmdLineParams(Map<String, String> cmdLineParams) {
-        this.cmdLineParams = cmdLineParams;
     }
 
     public IProject getProject() {

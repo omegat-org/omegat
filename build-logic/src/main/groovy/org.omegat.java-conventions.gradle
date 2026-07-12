@@ -9,19 +9,19 @@ plugins {
     id 'net.ltgt.nullaway'
 }
 
-// Definition of OmegaT versioning
-def localPropsFile = file('local.properties')
-
 ext {
+    localPropsFile = layout.settingsDirectory.file('local.properties').asFile
     if (localPropsFile.file) {
         loadProperties(localPropsFile).each { k, v ->
-            if (!findProperty(k)) {
+            if (findProperty(k) == null) {
                 set(k, v)
             }
         }
     }
-    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
-    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
+    providedCoreLibsPath = 'lib/provided/core'
+    providedModuleLibsPath = 'lib/provided/module'
+    providedCoreLibsDir = layout.settingsDirectory.dir(providedCoreLibsPath).asFile
+    providedModuleLibsDir = layout.settingsDirectory.dir(providedModuleLibsPath).asFile
 }
 
 repositories {
@@ -32,8 +32,8 @@ repositories {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.named("test", Test) {
@@ -68,6 +68,7 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.addAll '-Xlint'
     options.errorprone.disableWarningsInGeneratedCode = true
     options.errorprone.disable 'InlineMeSuggester', 'EmptyCatch'
+    options.errorprone.allErrorsAsWarnings = true
 }
 
 tasks {

@@ -18,3 +18,4 @@ dependencies {
         compileOnly(libs.jackson.yaml)
     }
 }
+jar.dependsOn rootProject.tasks.named("tipsHtmls")

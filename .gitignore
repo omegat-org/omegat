@@ -9,19 +9,43 @@ bin
 .nb-gradle
 local.properties
 
-.idea
+# IDE
+.replit
+.idea/
+.vscode/
 .fleet
 .run
 out
+.venv
 
 # Docs
 .fop
 docs/
 doc_src/*/index.xml
 doc_src/*/xhtml5
+src_docs/site
 
 # emacs backup files
 *~
 
 # MacOS system file
 .DS_Store
+
+# AI related files
+AGENTS.md
+.codex/
+.claude/
+CLAUDE.md
+.gemini/
+GEMINI.md
+.cursor/
+.windsurf/
+.agents/
+.aiconfig
+.aider*
+.codeium/
+.continue/
+.gateway/
+.github/copilot-instructions.md
+.supermaven/
+.idx/

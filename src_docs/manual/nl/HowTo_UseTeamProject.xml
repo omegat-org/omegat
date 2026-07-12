@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.use.team.project">
-  <title id="how.to.use.team.project.title">Een Teamproject gebruiken</title>
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="how.to.use.team.project">
+  <title xml:id="how.to.use.team.project.title">Een Teamproject gebruiken</title>
 
   <para>Teamprojecten gebruiken mechanismen voor synchronisatie tussen projectleden.</para>
 
-  <para>Als een teamproject van OmegaT eenmaal op een server is geïnstalleerd, stuurt de projectbeheerder de informatie, die ze nodig hebben om toegang te verkrijgen, naar de leden. Dat kan een URL zijn die de locatie van het project aangeeft, of een bestand <filename>omegat.project</filename>.</para>
+  <para>Als een teamproject van OmegaT eenmaal is geïnstalleerd op een server, stuurt de beheerder de informatie, die zij nodig hebben om toegang te verkrijgen, naar de leden: een URL die de locatie van het project aangeeft, of een bestand <filename>omegat.project</filename>.</para>
 
-  <para>Downloaden van het project maakt een kopie op de computer van de vertaler, dat alleen lokaal hoeft te worden geopend om te synchroniseren met de server.</para>
+  <para>Nadat het project is gedownload, het lokaal is geïnstalleerd en hoeft alleen lokaal te worden geopend om te synchroniseren met de server.</para>
 
   <para>Logingegevens voor de opslagplaats worden opgeslagen in het bestand <link linkend="configuration.folder.extra.contents.repositories" endterm="configuration.folder.extra.contents.repositories.title"/> en kunnen worden verwijderd vanuit de voorkeuren <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/>.</para>
 
-  <para>Synchronisatie gebeurt standaard elke drie minuten en dus kan een projectlid soms een segment vertalen of aanpassen dat al eerder werd vertaald door een ander lid, maar nog niet is gesynchroniseerd. Als dat gebeurt moeten leden de toepasselijke vertaling selecteren.</para>
+  <para>Synchronisatie gebeurt standaard elke drie minuten en dus zullen projectleden soms een segment vertalen of aanpassen dat als eerder werd vertaald door een ander lid, maar nog niet is gesynchroniseerd. Als dat gebeurt moeten leden de toepasselijke vertaling selecteren.</para>
 
-  <para>Leden kunnen beurtelings de bestanden vertalen en nakijken. De functie Zoeken biedt een aantal nuttige opties om de inhoud van de bestanden te filteren. Leden kunnen bijvoorbeeld het venster Bewerken inhoud laten weergeven die is vertaald door een bepaald persoon, of op inhoud die is vertaald vóór of na een bepaalde opgegeven tijd, of combinaties daarvan.</para>
+  <para>Leden kunnen beurtelings de bestanden vertalen en nakijken. De functie Zoeken stelt hen in staat het venster Bewerken te filteren op inhoud die is vertaald door een bepaald persoon, of bijvoorbeeld op inhoud die is vertaald vóór of na een bepaalde opgegeven tijd.</para>
   
   <variablelist>
     <varlistentry>
@@ -25,7 +24,7 @@
 
 			<para>Gebruik <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.download.team.project.title" linkend="menus.project.download.team.project"/> om het dialoogvenster <guilabel>Teamproject downloaden</guilabel> op te roepen.</para>
 
-			<para>Voer de URL in die is verschaft door de projectbeheerder in het veld <guilabel>URL opslagplaats:</guilabel> aan de bovenzijde van het dialoogvenster, en specificeer een map voor het project in het veld <guilabel>Nieuwe lokale projectmap:</guilabel>. Laat de optie <guilabel>Standaard tak</guilabel> geselecteerd, tenzij de beheerder van het project instructies heeft gegeven om een aangepaste tak te gebruiken.</para>
+			<para>Voer de URL in die is verschaft door de beheerder van het teamproject in het veld <guilabel>URL opslagplaats:</guilabel> aan de bovenzijde van het dialoogvenster, en specificeer een map voor het project in het veld <guilabel>Nieuwe lokale projectmap:</guilabel>. Laat de optie <guilabel>Standaard branch</guilabel> geselecteerd, tenzij de beheerder van het project instructies heeft gegeven om een aangepaste branch te gebruiken.</para>
 		  </listitem>
 
 		  <listitem>
@@ -38,13 +37,11 @@
 		<note>
 		  <para>Servers gebruiken over het algemeen twee typen authenticatie: invoeren van een <emphasis>gebruikersnaam/wachtwoord</emphasis>, of <emphasis>SSH</emphasis>.</para>
 
-		  <para>Als de server authenticatie met gebruikersnaam/wachtwoord gebruikt, zal OmegaT u een dialoogvenster <guilabel>Authenticatie</guilabel> laten zien om uw gebruikersnaam en wachtwoord in te voeren, ofwel als u het project voor het eerst download, of later in het proces. OmegaT zal dan uw inloggegevens onthouden voor dat specifieke project, tenzij u ze expliciet verwijdert. Bekijk de voorkeuren <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> voor details.</para>
-      
-		  <para>Als de server SSH-authenticatie gebruikt, zorg er dan voor dat u uw configuratie van SSH bijwerkt om die server op te nemen, voordat u probeert het project te downloaden, anders zult u een fout in de authenticatie krijgen en zal het project niet laden.</para>
-            
-      <para>Sommige hostingservices eisen dat u een wachtwoord-frase of een andere vorm toegangstoken genereert, in aanvulling op uw wachtwoord. In die gevallen, voer het wachtwoord of token in waar OmegaT naar vraagt bij uw wachtwoord.</para>
-      
-		  <para>Wanneer u meerdere projecten op dezelfde server gebruikt, zult u slechts één keer worden gevraagd naar de inloggegevens voor die server.</para>
+		  <para>Als de server authenticatie met gebruikersnaam/wachtwoord gebruikt, zal OmegaT u een dialoogvenster <guilabel>Authenticatie</guilabel> laten zien om uw gebruikersnaam en wachtwoord in te voeren ofwel als u het project voor het eerst download the project of later in het proces. OmegaT zal dan uw inloggegevens onthouden voor dat specifieke project, tenzij u ze expliciet verwijdert. Bekijk de <link linkend="dialog.preferences.team.title.repository.credentials" endterm="dialog.preferences.team.title.repository.credentials.title"/> voorkeuren voor details.</para>
+
+		  <para>Als de server SSH-authenticatie gebruikt, zorg er dan voor dat uw uw configuratie van SSH bijwerkt om die server op te nemen, voordat u probeert het project te downloaden, anders zult u een fout in de authenticatie krijgen en het project zal niet laden.</para>
+
+		  <para>Wanneer u meerdere projecten op dezelfde server gebruikt, zullen inloggegevens slechts één keer worden gevraagd voor die server.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -57,7 +54,7 @@
 
 		<itemizedlist>
           <listitem>
-			<para><filename>project_save.tmx</filename></para>
+			<para><filename>project.save</filename></para>
           </listitem>
 
           <listitem>
@@ -83,13 +80,13 @@
           <listitem>
             <para><emphasis>Basisconfiguratie van het project:</emphasis> Bron en talen, tokenizers, en de hiërarchie van de projectmap.</para>
 
-			<para>In een teamproject worden parameters van de basisconfiguratie van het lokale project altijd overschreven door de configuratie op de server, origineel ingesteld door de projectbeheerder.</para>
+			<para>In een team project worden parameters van de basisconfiguratie van het lokale project altijd overschreven door de configuratie op de server, origineel ingesteld door de beheerder.</para>
           </listitem>
 
           <listitem>
-            <para><emphasis>Routes naar opslagplaats</emphasis></para>
+            <para><emphasis>Routes in opslagplaats</emphasis></para>
 
-            <para>Bekijk de how-to <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> voor details.</para>
+            <para>Bekijk de <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> how-to voor details.</para>
 
             <itemizedlist>
               <listitem>
@@ -107,7 +104,7 @@
               </listitem>
 
               <listitem>
-                <para>Wanneer u voor het eerst het project op afstand downloadt met een bestand <filename>omegat.project</filename> dat is verschaft door de projectbeheerder, zal OmegaT de routes in dat bestand gebruiken, indien aanwezig.</para>
+                <para>Wanneer u eerst het project op afstand download met een bestand <filename>omegat.project</filename> dat is verschaft door de projectbeheerder, zal OmegaT de routes in dat bestand gebruiken, indien aanwezig.</para>
               </listitem>
 
               <listitem>
@@ -127,9 +124,8 @@
       <term>Bronbestanden</term>
 
       <listitem>
-        <para>Tenzij er aangepaste routes of <link endterm="how.to.setup.team.project.selective.sharing.title" linkend="how.to.setup.team.project.selective.sharing"/> zijn ingesteld, worden alle bronbestanden gedeeld door alle teamleden en alle wijzigingen die aan de lokale bronbestanden worden gemaakt, worden overschreven als het project de volgende keer wordt gesynchroniseerd, tenzij ze worden ingediend op de server met de opdracht <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/>.</para>
         <warning>
-		  <para>Omdat wijzigingen aan de bronbestanden <emphasis role="italic">alle</emphasis> leden treft, gebruik die opdracht voorzichtig en alleen in overeenstemming met de richtlijnen en werkstroom die is ingesteld door de projectbeheerder van dat project.</para>
+		  <para>Alleen de projectbeheerder zou <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.source.files.title" linkend="menus.project.commit.source.files"/> moeten gebruiken.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -138,7 +134,7 @@
       <term>Doelbestanden</term>
 
       <listitem>
-        <para>Nadat u de doelbestanden hebt gemaakt, gebruik de opdracht <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> om ze aan de server toe te voegen, als de projectbeheerder u heeft gevraagd om dat te doen. Indienen van de doelbestanden uploadt ook de bestanden met statistieken naar de server.</para>
+        <para>Nadat u de doelbestanden hebt gemaakt, gebruik dan <link endterm="menus.project.title" linkend="menus.project"/><link endterm="menus.project.commit.target.files.title" linkend="menus.project.commit.target.files"/> om ze aan de server toe te voegen, als de projectbeheerder u heeft gevraagd om dat te doen.</para>
       </listitem>
     </varlistentry>
 
@@ -146,7 +142,7 @@
       <term>Bestanden verwijderen</term>
 
       <listitem>
-        <para>Deze taak wordt normaal gesproken uitgevoerd door de projectbeheerder, omdat bestanden in een teamproject worden hersteld als het project de volgende keer wordt gesynchroniseerd. Dat betekent dat gebruikers niets kunnen verwijderen uit OmegaT of van het lokale bestandssysteem, tenzij de projectbeheerder ze verwijdert van de server.</para>
+        <para>Bestanden in een teamproject kunnen niet worden verwijderd uit OmegaT of het lokale bestandssysteem. De volgende keer dat het project wordt gesynchroniseerd zullen zij worden hersteld. Deze taak wordt normaal gesproken uitgevoerd door de projectbeheerder.</para>
       </listitem>
     </varlistentry>
 
@@ -154,8 +150,7 @@
       <term>Offline werken</term>
 
       <listitem>
-        <para>U kunt een teamproject openen en er offline aan werken. Alle wijzigingen zullen de volgende keer, als een verbinding beschikbaar is, worden gesynchroniseerd.</para>
-        <para>Als er op dat moment conflicten zijn, zal OmegaT een dialoogvenster weergeven om u de juiste versie te laten kiezen.</para>
+        <para>U kunt een teamproject openen en er offline aan werken. Alle wijzigingen zullen de volgende keer als een verbinding beschikbaar worden gesynchroniseerd.</para>
 
         <para>Er zijn twee manieren om offline te werken:</para>
 

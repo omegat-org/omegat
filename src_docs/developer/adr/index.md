@@ -9,6 +9,7 @@
 - 2025004 [Format Compliance and Purpose of `project_save.tmx` and TMX Validation Strategy](2025004.TMXFormatAndValidation.md)
 - 2025007 [CLI Plugin API Implementation](2025007.CLIPluginAPI.md)
 - 2025008 [Adoption of JSpecify for Null-Safety](2025008.AdoptionJSpecifyForNullSafety.md)
+- 2025012 [Plugin Security Architecture and ClassLoader Isolation](2025012.PluginSecurityArchitecture.md)
 
 ## Core features
 
@@ -32,6 +33,10 @@
 ## Quality Assurance and Maintenance
 
 - 2025003 [Comprehensive Static Code Analysis Strategy](2025003.StaticCodeAnalysis.md)
+
+## Debugging and Logging
+
+- 2024002 [Logging system and logging format](2024002.LoggingSystem.md)
 
 ## Bundled Plugins and Extensions
 

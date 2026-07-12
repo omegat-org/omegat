@@ -42,6 +42,7 @@ import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
 
@@ -133,6 +134,9 @@ public final class Preferences {
     public static final String PROJECT_FILES_WINDOW_GEOMETRY_PREFIX = "project_files_window";
     // Using the main font for the Project Files window
     public static final String PROJECT_FILES_USE_FONT = "project_files_use_font";
+    // Shows translation progress in the Project Files window
+    public static final String PROJECT_FILES_SHOW_PROGRESS = "project_files_show_translation_progress";
+    public static final boolean PROJECT_FILES_SHOW_PROGRESS_DEFAULT = false;
     // Determines whether or not the Project Files window is shown on project
     // load.
     // Currently not exposed in UI.
@@ -718,10 +722,10 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveToSrx(srx, srxDir); // save to segmentation.srx in the given
-                                        // directory
+            // save to segmentation.srx in the given directory
+            SRXManager.saveToSrx(srx, srxDir);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
         PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
     }
@@ -825,7 +829,7 @@ public final class Preferences {
         didInitSegmentation = true;
 
         File srxDir = new File(StaticUtils.getConfigDir());
-        SRX s = SRX.loadFromDir(srxDir); // may read SRX or CONF
+        SRX s = SRXManager.loadFromDir(srxDir); // may read SRX or CONF
         if (s == null) {
             s = SRX.getDefault();
         }

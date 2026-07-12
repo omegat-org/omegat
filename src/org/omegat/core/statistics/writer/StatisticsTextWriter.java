@@ -34,6 +34,7 @@ import java.io.Writer;
 import java.text.DateFormat;
 import java.util.Date;
 
+import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
@@ -55,7 +56,7 @@ import org.omegat.util.gui.TextUtil;
  */
 public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
-    private static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files"), };
 
@@ -65,7 +66,7 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    private static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
+    public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
@@ -98,11 +99,13 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
      * @param result   the statistics result containing the data to be displayed
      * @param callback the statistics panel that will be updated with the provided data
      */
-    public void write(StatsResult result, StatisticsPanel callback) {
-        callback.setProjectTableData(HT_HEADERS, getHeaderTable(result));
-        callback.setFilesTableData(FT_HEADERS, getFilesTable(result));
+    public void write(StatsResult result, IStatsConsumer callback) {
         callback.setTextData(getTextData(result));
-        callback.finishData();
+    }
+
+    public void setData(StatsResult result, IStatsConsumer callback) {
+        callback.setTable(HT_HEADERS, getHeaderTable(result));
+        callback.appendTable(OStrings.getString("CT_STATS_FILE_Statistics"), FT_HEADERS, getFilesTable(result));
     }
 
     /**

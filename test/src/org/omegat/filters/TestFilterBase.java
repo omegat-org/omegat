@@ -91,7 +91,7 @@ public abstract class TestFilterBase extends TestCore {
 
     @Before
     public final void setUpFilterBase() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
+        Core.initializeConsole();
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setProject(new TestProject(new ProjectPropertiesTest()));
 

@@ -35,6 +35,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -70,6 +73,15 @@ public abstract class AbstractStatisticsWriter {
     }
 
     /**
+     * Formatter with format YYYYMMDDThhmmssZ able to display a date in UTC time.
+     * <p>
+     * {@link DateTimeFormatter} is immutable and thread-safe.
+     */
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
+            .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
+
+
+    /**
      * Updates the date field of the provided {@link StatsResult} object
      * with the current date and time, formatted in UTC and using the
      * pattern "yyyyMMdd'T'HHmmss'Z'".
@@ -78,9 +90,7 @@ public abstract class AbstractStatisticsWriter {
      *        the {@link StatsResult} object whose date field is to be updated
      */
     protected void setDate(StatsResult result) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        result.setDate(dateFormat.format(new Date()));
+        result.setDate(DATE_FORMAT.format(Instant.now()));
     }
 
 }

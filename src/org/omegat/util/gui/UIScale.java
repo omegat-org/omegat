@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura
+ *  Copyright (C) 2023-2026 Hiroshi Miura
  *                2019 FormDev Software GmbH
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
@@ -74,10 +74,12 @@ import org.omegat.util.Platform;
  * "defaultFont" or "Label.font" has changed. If system scaling mode is
  * available, the user scale factor is usually 1, but may be larger on Linux or
  * if the default font is changed.
+ * <p>
+ * Note:
+ * This class is derived from the FlatLaf library licensed by Apache-2.0.
  *
- * This class is derived from FlatLaf library licensed by Apache-2.0.
- * 
  * @author Karl Tauber
+ * @author Hiroshi Miura
  */
 public final class UIScale {
 
@@ -163,41 +165,71 @@ public final class UIScale {
         // because even if we are on a HiDPI display, it is not sure
         // that a larger font size is set by the current LaF
         // (e.g., can avoid large icons with small text)
-        Font font = UIManager.getFont("defaultFont");
-        if (font == null) {
-            font = UIManager.getFont("Label.font");
-        }
+        setUserScaleFactor(computeFontScaleFactor(getDefaultFont()));
+    }
 
-        setUserScaleFactor(computeFontScaleFactor(font));
+    private static Font getDefaultFont() {
+        Font font = UIManager.getFont("defaultFont");
+        if (font != null) {
+            return font;
+        }
+        return UIManager.getFont("Label.font");
     }
 
     private static float computeFontScaleFactor(Font font) {
+        if (Platform.isMacOS) {
+            return computeScaleFactorForMac(font);
+        }
         if (Platform.isWindows) {
-            // Special handling for Windows to be compatible with OS scaling,
-            // which distinguish between "screen scaling" and "text scaling".
-            // - Windows "screen scaling" scales everything (text, icon, gaps,
-            // etc)
-            // and may have different scaling factors for each screen.
-            // - Windows "text scaling" increases only the font size, but on all
-            // screens.
-            //
-            // Both can be changed by the user in the Windows 10 Settings:
-            // - Settings > Display > Scale and layout
-            // - Settings > Ease of Access > Display > Make text bigger (100% -
-            // 225%)
-            if (font instanceof UIResource) {
-                Font uiFont = (Font) Toolkit.getDefaultToolkit().getDesktopProperty("win.messagebox.font");
-                if (uiFont == null || uiFont.getSize() == font.getSize()) {
-                    // Do not apply own scaling if the JRE scales using a
-                    // Windows screen scale factor.
-                    // If a user increases font size in Windows 10 settings,
-                    // desktop property "win.messagebox.font" is changed,
-                    // and we use the larger font.
-                    return 1;
-                }
+            return computeScaleFactorForWindows(font);
+        }
+        if ((Platform.isUnixLike())) {
+            return computeScaleFactorForLinux(font);
+        }
+        float defaultFontSizeDivider = 12f;
+        return font.getSize() / defaultFontSizeDivider;
+    }
+
+    private static float computeScaleFactorForMac(Font font) {
+        // the default font size on macOS is 13
+        float fontSizeDivider = 13f;
+        return font.getSize() / fontSizeDivider;
+    }
+
+    private static float computeScaleFactorForWindows(Font font) {
+        // Special handling for Windows to be compatible with OS scaling,
+        // which distinguish between "screen scaling" and "text scaling".
+        // - Windows "screen scaling" scales everything (text, icon, gaps,
+        // etc)
+        // and may have different scaling factors for each screen.
+        // - Windows "text scaling" increases only the font size, but on all
+        // screens.
+        //
+        // Both can be changed by the user in the Windows 10 Settings:
+        // - Settings > Display > Scale and layout
+        // - Settings > Ease of Access > Display > Make text bigger (100% -
+        // 225%)
+        if (font instanceof UIResource) {
+            Font uiFont = (Font) Toolkit.getDefaultToolkit().getDesktopProperty("win.messagebox.font");
+            if (uiFont == null || uiFont.getSize() == font.getSize()) {
+                // Do not apply own scaling if the JRE scales using a
+                // Windows screen scale factor.
+                // If a user increases font size in Windows 10 settings,
+                // desktop property "win.messagebox.font" is changed,
+                // and we use the larger font.
+                return 1;
             }
         }
-        if ((Platform.isUnixLike()) && !isSystemScaling()) {
+        // Windows LaF uses Tahoma font rather than the actual Windows
+        // system font (Segoe UI), and its size is always 10% smaller
+        // than the actual system font size.
+        // Tahoma 11 is used at 100%
+        float fontSizeDivider = "Tahoma".equals(font.getFamily()) ? 11f : 12f;
+        return font.getSize() / fontSizeDivider;
+    }
+
+    private static float computeScaleFactorForLinux(Font font) {
+        if (!isSystemScaling()) {
             // see class com.sun.java.swing.plaf.gtk.PangoFonts background
             // information
             Object value = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Xft/DPI");
@@ -209,31 +241,9 @@ public final class UIScale {
                 return (float) (dpi / 96.0);
             }
         }
-        return computeScaleFactor(font);
-    }
-
-    private static float computeScaleFactor(Font font) {
-        // default font size
-        float fontSizeDivider = 12f;
-
-        if (Platform.isWindows) {
-            // Windows LaF uses Tahoma font rather than the actual Windows
-            // system font (Segoe UI),
-            // and its size is always ca. 10% smaller than the actual system
-            // font size.
-            // Tahoma 11 is used at 100%
-            if ("Tahoma".equals(font.getFamily())) {
-                fontSizeDivider = 11f;
-            }
-        } else if (Platform.isMacOS) {
-            // the default font size on macOS is 13
-            fontSizeDivider = 13f;
-        } else if (Platform.isUnixLike()) {
-            // the default font size for Unity and Gnome is 15 and for KDE it is
-            // 13
-            fontSizeDivider = Platform.isKDE ? 13f : 15f;
-        }
-
+        // the default font size for Unity and Gnome is 15
+        // and for KDE it is 13.
+        float fontSizeDivider = Platform.isKDE ? 13f : 15f;
         return font.getSize() / fontSizeDivider;
     }
 
@@ -287,41 +297,6 @@ public final class UIScale {
             return value;
         }
         return Math.round(value * scaleFactor);
-    }
-
-    /**
-     * Similar as {@link #scale(int)} but always "rounds down".
-     * <p>
-     * For use in special cases. {@link #scale(int)} is the preferred method.
-     */
-    public static int scale2(int value) {
-        initialize();
-        if (scaleFactor == 1) {
-            return value;
-        }
-        return (int) (value * scaleFactor);
-    }
-
-    /**
-     * Divides the given value by the user scale factor.
-     */
-    public static float unscale(float value) {
-        initialize();
-        if (scaleFactor == 1f) {
-            return value;
-        }
-        return value / scaleFactor;
-    }
-
-    /**
-     * Divides the given value by the user scale factor and rounds the result.
-     */
-    public static int unscale(int value) {
-        initialize();
-        if (scaleFactor == 1f) {
-            return value;
-        }
-        return Math.round(value / scaleFactor);
     }
 
     /**

@@ -30,7 +30,15 @@ package org.omegat.core.statistics;
 
 import java.io.File;
 import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.omegat.core.statistics.dso.FileData;
+import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.statistics.writer.StatisticsJsonWriter;
 import org.omegat.core.statistics.writer.StatisticsTextWriter;
@@ -58,6 +66,7 @@ import org.omegat.util.StaticUtils;
  * @author Thomas Cordonnier
  */
 public final class Statistics {
+
     private Statistics() {
     }
 
@@ -138,7 +147,8 @@ public final class Statistics {
                 StatOutputFormat.getDefaultFormats());
         for (StatOutputFormat format : StatOutputFormat.values()) {
             if (format.isSelected(outputFormats)) {
-                writeStat(dir, result, format);
+                File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+                writeStat(statFile, result, format);
             }
         }
     }
@@ -157,6 +167,7 @@ public final class Statistics {
      *            the format in which the statistics should be written (TEXT,
      *            XML, or JSON)
      */
+    @Deprecated
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
         writeStat(statFile, result, format);

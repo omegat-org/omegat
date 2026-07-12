@@ -54,6 +54,19 @@ public enum StatOutputFormat {
         return (outputFormats & id) != 0;
     }
 
+    public static StatOutputFormat detect(String filename) {
+        if (filename == null || filename.trim().isEmpty()) {
+            return null;
+        }
+        String ext = filename.substring(filename.lastIndexOf('.') + 1);
+        for (StatOutputFormat mp : StatOutputFormat.values()) {
+            if (ext.equalsIgnoreCase(mp.getFileExtension())) {
+                return mp;
+            }
+        }
+        return null;
+    }
+
     public static StatOutputFormat parse(String code) {
         if (code == null || code.trim().isEmpty()) {
             return null;

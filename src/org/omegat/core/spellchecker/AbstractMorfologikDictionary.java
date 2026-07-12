@@ -30,7 +30,7 @@ import java.util.Arrays;
 
 import morfologik.stemming.Dictionary;
 
-public abstract class AbstractMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public abstract class AbstractMorfologikDictionary implements ISpellCheckerDictionary {
     private static final String DICT_EXT = ".dict";
     private static final String META_EXT = ".info";
 

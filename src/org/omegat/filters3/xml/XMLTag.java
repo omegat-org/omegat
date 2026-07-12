@@ -46,8 +46,8 @@ public class XMLTag extends Tag {
     private final @Nullable Language targetLanguage;
 
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, Type type, @Nullable org.xml.sax.Attributes attributes,
-                  Translator translator) {
+    public XMLTag(String tag, @Nullable String shortcut, Type type,
+            @Nullable org.xml.sax.Attributes attributes, Translator translator) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.sourceLanguage = translator.getSourceLanguage();
         this.targetLanguage = translator.getTargetLanguage();
@@ -55,8 +55,8 @@ public class XMLTag extends Tag {
 
     /**
      * Returns the tag in its original form as it was in original document. E.g.
-     * for &lt;strong&gt; tag should return &lt;strong&gt;.
-     * Do specific processing for Open XML documents
+     * for &lt;strong&gt; tag should return &lt;strong&gt;. Do specific
+     * processing for Open XML documents
      */
     @Override
     public String toOriginal() {
@@ -67,7 +67,8 @@ public class XMLTag extends Tag {
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);
 
-        // Skip special (i/b/sz) tags for target language to keep only those from the source language
+        // Skip special (i/b/sz) tags for target language to keep only those
+        // from the source language
         // (e.g don't include <w:bCs/> from the LTR source in the RTL target.)
         if (differentDir && ((isRtl && isSpecialDocxTagRTL) || (!isRtl && isSpecialDocxTagLTR))) {
             return "";
@@ -78,10 +79,12 @@ public class XMLTag extends Tag {
             buf.append("/");
         }
 
-        // In Docx, the bold, italic and fontSize are handled differently for complex
+        // In Docx, the bold, italic and fontSize are handled differently for
+        // complex
         // script
         if (differentDir && isRtl && isSpecialDocxTagLTR) {
-            // For LTR -> RTL, convert the i/b/sz to iCs/bCs/szCs if source and target
+            // For LTR -> RTL, convert the i/b/sz to iCs/bCs/szCs if source and
+            // target
             // languages directionality are different.
             buf.append(getTag()).append("Cs");
         } else if (differentDir && !isRtl && isSpecialDocxTagRTL) {
@@ -94,7 +97,8 @@ public class XMLTag extends Tag {
         Attributes atts = getAttributes();
         if (atts != null) {
             buf.append(atts);
-            // If that's an Open XML document, we preserve spaces for all <w:t> tags
+            // If that's an Open XML document, we preserve spaces for all <w:t>
+            // tags
             if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
                 boolean preserve = false;
                 for (int i = 0; i < atts.size(); i++) {

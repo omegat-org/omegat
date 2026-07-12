@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -239,7 +240,7 @@ public class FilterVisitor extends NodeVisitor {
         if (!options.getTranslateValue() && !options.getTranslateButtonValue()) {
             return false;
         }
-        return TRANSLATABLE_ATTRIBUTES.contains(tag.getAttribute("type").toLowerCase());
+        return TRANSLATABLE_ATTRIBUTES.contains(tag.getAttribute("type").toLowerCase(Locale.ENGLISH));
     }
 
     /**
@@ -396,8 +397,8 @@ public class FilterVisitor extends NodeVisitor {
         String[] parentElementTags = { "HEAD", "HTML" };
 
         return (tagname.equals("BR") && options.getParagraphOnBr())
-                || Arrays.stream(parentElementTags).anyMatch(tagname::equals)
-                || Arrays.stream(blockElementTags).anyMatch(tagname::equals);
+                || Arrays.asList(parentElementTags).contains(tagname)
+                || Arrays.asList(blockElementTags).contains(tagname);
     }
 
     /** Should the content of this tag be kept intact? */
@@ -405,7 +406,7 @@ public class FilterVisitor extends NodeVisitor {
         String tagname = tag.getTagName();
 
         String[] noEditTags = { "!DOCTYPE", "STYLE", "SCRIPT", "OBJECT", "EMBED" };
-        boolean keepIntact = Arrays.stream(noEditTags).anyMatch(tagname::equals) || (tagname.equals("META")
+        boolean keepIntact = Arrays.asList(noEditTags).contains(tagname) || (tagname.equals("META")
                 && "content-type".equalsIgnoreCase(tag.getAttribute("http-equiv")));
 
         if (!keepIntact) {

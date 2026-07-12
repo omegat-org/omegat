@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
@@ -529,7 +530,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project.
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
+        this.projectSRX = SRXManager.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {

@@ -15,9 +15,9 @@ services:
     build:
       context: test-integration/docker/client
       args:
-        JAVA: 17
-        JDKVER: jdk_17.0.14.0.0+7-1
-        GRADLE: 8.13
+        JAVA: 21
+        JDKVER: jdk_25.0.3.0.0+9-1
+        GRADLE: 9.6.0
     depends_on:
       server:
         condition: service_started

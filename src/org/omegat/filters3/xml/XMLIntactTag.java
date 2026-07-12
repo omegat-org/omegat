@@ -42,15 +42,15 @@ public class XMLIntactTag extends Tag {
     }
 
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut,
+    public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, @Nullable String shortcut,
             org.xml.sax.@Nullable Attributes attributes) {
         super(tag, shortcut, Type.ALONE, XMLUtils.convertAttributes(attributes));
         this.intactContents = new XMLIntactEntry(xmlDialect, handler);
     }
 
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut, Type type,
-            org.xml.sax.@Nullable Attributes attributes) {
+    public XMLIntactTag(XMLDialect xmlDialect, Handler handler, String tag, @Nullable String shortcut,
+            Type type, org.xml.sax.@Nullable Attributes attributes) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.intactContents = new XMLIntactEntry(xmlDialect, handler);
     }
@@ -66,6 +66,6 @@ public class XMLIntactTag extends Tag {
      */
     public String toOriginal() {
         String atts = getAttributes() != null ? getAttributes().toString() : "";
-        return "<" + getTag() + atts  + ">" + intactContents.sourceToOriginal() + "<" + "/" + getTag() + ">";
+        return "<" + getTag() + atts + ">" + intactContents.sourceToOriginal() + "<" + "/" + getTag() + ">";
     }
 }

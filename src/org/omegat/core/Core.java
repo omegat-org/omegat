@@ -49,6 +49,7 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -123,7 +124,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static IMainWindow getMainWindow() {
+    public static @Nullable IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 
@@ -226,15 +227,14 @@ public final class Core {
     @Deprecated(since = "6.1.0", forRemoval = true)
     @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
-        initializeGUI(params);
+        initializeGUI();
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI() throws Exception {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
         coreState.setProject(new NotLoadedProject());
@@ -250,6 +250,10 @@ public final class Core {
 
         coreState.initializeSaveThread();
         coreState.initializeVersionCheckThread();
+    }
+
+    public static LongProcessExecutor getLongProcessExecutor() {
+        return CoreState.getInstance().getExecutor();
     }
 
     /**
@@ -289,9 +293,8 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) {
+    public static void initializeConsole() {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
         coreState.setTagValidation(new TagValidationTool());
         coreState.setProject(new NotLoadedProject());
         coreState.setMainWindow(new ConsoleWindow());
@@ -312,7 +315,8 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return CoreState.getInstance().getCmdLineParams();
+        // FIXME
+        return null;
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

@@ -50,7 +50,7 @@ public final class Util {
      *            Item to find
      * @return Index of item in list, or -1 if not found
      */
-    static <T> int indexByIdentity(List<T> items, @Nullable T item) {
+    static <T> int indexByIdentity(List<@Nullable T> items, @Nullable T item) {
         if (item == null) {
             return -1;
         }
@@ -72,7 +72,7 @@ public final class Util {
      *            Item to remove
      * @return true if item was found and removed, false otherwise
      */
-    static <T> boolean removeByIdentity(List<T> items, T item) {
+    static <T> boolean removeByIdentity(List<@Nullable T> items, @Nullable T item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) == item) {
                 items.remove(i);

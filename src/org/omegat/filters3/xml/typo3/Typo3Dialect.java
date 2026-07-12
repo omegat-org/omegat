@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.typo3;
 
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
@@ -67,7 +68,7 @@ public class Typo3Dialect extends DefaultXMLDialect {
      *         translated, <code>false</code> otherwise
      */
     @Override
-    public Boolean validateTranslatableTag(String tag, Attributes atts) {
+    public Boolean validateTranslatableTag(String tag, @Nullable Attributes atts) {
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);

@@ -29,7 +29,9 @@
 
 package org.omegat.core.statistics;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -41,19 +43,24 @@ import org.omegat.core.statistics.dso.FileData;
 import org.omegat.core.statistics.dso.StatCount;
 import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.statistics.writer.StatisticsTextWriter;
+import org.omegat.core.threads.Completion;
+import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
+import org.omegat.core.threads.Completion;
+import org.omegat.core.threads.CancellationToken;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 
 /**
  * Thread for calculate standard statistics.
- *
+ * <p>
  * Calculation requires two different tags stripping: one for calculate unique
  * and remaining, and second for calculate number of words and chars.
- *
+ * <p>
  * Number of words/chars calculation requires to just strip all tags, protected
  * parts, placeholders(see StatCount.java).
- *
+ * <p>
  * Calculation of unique and remaining also requires to just strip all tags,
  * protected parts, placeholders for standard calculation.
  *
@@ -61,36 +68,43 @@ import org.omegat.util.OConsts;
  * @author Arno Peters
  * @author Aaron Madlon-Kay
  */
-public class CalcStandardStatistics extends LongProcessThread {
+public class CalcStandardStatistics implements ICalcStatistics {
 
-    private final StatisticsPanel callback;
+    protected final IStatsConsumer callback;
+    protected CancellationToken cancellationToken;
+    final IProject project;
 
-    public CalcStandardStatistics(StatisticsPanel callback) {
+    public CalcStandardStatistics(IProject project, IStatsConsumer callback) {
         this.callback = callback;
+        this.project = project;
+    }
+
+    public CalcStandardStatistics(IStatsConsumer callback) {
+        this(Core.getProject(), callback);
     }
 
     @Override
-    public void run() {
-        IProject p = Core.getProject();
-        StatsResult result = Statistics.buildProjectStats(p);
-        callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
-        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
-        callback.setTextData(result.getTextData());
-        callback.finishData();
+    public Void run(CancellationToken token) {
+        cancellationToken = token;
 
-        String internalDir = p.getProjectProperties().getProjectInternal();
-        // removing old stats
+        token.throwIfCancelled();
+
+        StatsResult result = Statistics.buildProjectStats(project);
+        StatisticsTextWriter writer = new StatisticsTextWriter();
+        writer.write(result, callback);
+        writer.setData(result, callback);
+        callback.onComplete(Completion.success());
+
+        String internalDir = project.getProjectProperties().getProjectInternal();
         try {
-            File oldstats = new File(internalDir + "word_counts");
-            if (oldstats.exists()) {
-                oldstats.delete();
-            }
-        } catch (Exception ignored) {
+            // removing old stats
+            Files.deleteIfExists(Paths.get(internalDir + "word_counts"));
+            // now dump file based word counts to disk
+            String fn = internalDir + OConsts.STATS_FILENAME;
+            Statistics.writeStat(internalDir, result);
+            callback.setDataFile(fn);
+        } catch (IOException ignored) {
         }
-
-        // now dump file based word counts to disk
-        String fn = internalDir + OConsts.STATS_FILENAME;
-        Statistics.writeStat(internalDir, result);
-        callback.setDataFile(fn);
+        return null;
     }
 }

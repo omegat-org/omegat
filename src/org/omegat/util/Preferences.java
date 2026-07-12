@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
@@ -796,11 +797,28 @@ public final class Preferences {
         if (didInit) {
             return;
         }
-        didInit = true;
-
         File loadFile = getPreferencesFile();
         File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
-        preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+        setPreferences(new PreferencesImpl(new PreferencesXML(loadFile, saveFile)));
+    }
+
+    /**
+     * Install the preferences store to be used by the static facade.
+     * <p>
+     * This is the single point that assigns the backing {@link IPreferences}
+     * instance, mirroring the {@code setInstance} approach used by
+     * {@link org.omegat.core.data.CoreState} and
+     * {@link org.omegat.core.data.RuntimePreferenceStore}. Production code
+     * reaches it once through {@link #init()}. Tests inject an isolated store
+     * (see {@code org.omegat.util.TestPreferences}) so preference state cannot
+     * leak between tests; installing a store marks the system initialized, so a
+     * later {@link #init()} call keeps the injected store rather than replacing
+     * it with the user's on-disk preferences.
+     */
+    @VisibleForTesting
+    static synchronized void setPreferences(IPreferences preferences) {
+        Preferences.preferences = preferences;
+        didInit = true;
     }
 
     public static synchronized void initFilters() {

@@ -24,7 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import picocli.CommandLine;
@@ -199,7 +199,7 @@ public class LegacyParameters implements Callable<Integer> {
      * @param path
      *            to config file
      */
-    void applyConfigFile(String path) {
+    void applyConfigFile(@Nullable String path) {
         if (path == null) {
             return;
         }
@@ -223,8 +223,8 @@ public class LegacyParameters implements Callable<Integer> {
             if (config.containsKey("user.language")) {
                 String userLanguage = config.getString("user.language");
                 Locale userLocale = config.containsKey("user.country")
-                        ? new Locale(userLanguage, config.getString("user.country"))
-                        : new Locale(userLanguage);
+                        ? Locale.of(userLanguage, config.getString("user.country"))
+                        : Locale.of(userLanguage);
                 Locale.setDefault(userLocale);
             }
         } catch (FileNotFoundException exception) {

@@ -24,7 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
@@ -67,7 +67,7 @@ public class TeamCommand implements Callable<Integer> {
      * @param tLang
      *            target language.
      */
-    private int executeInit(String dir, String sLang, String tLang) {
+    private int executeInit(@Nullable String dir, String sLang, String tLang) {
         CommandCommon.showStartUpLogInfo();
         Log.setLevel(Level.WARNING);
 

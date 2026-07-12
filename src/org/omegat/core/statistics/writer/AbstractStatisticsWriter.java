@@ -76,7 +76,7 @@ public abstract class AbstractStatisticsWriter {
      * <p>
      * {@link DateTimeFormatter} is immutable and thread-safe.
      */
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
+    static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
             .ofPattern("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH).withZone(ZoneOffset.UTC);
 
     /**

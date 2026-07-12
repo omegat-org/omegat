@@ -70,26 +70,25 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
 
     @Override
     public Void run(CancellationToken token) throws StoppedException, LongProcessInterruptedException {
-        cancellationToken = token;
         entriesToProcess = getEntrySize() * 2;
-        calcPerFile();
+        calcPerFile(token);
         callback.onComplete(Completion.success());
         return null;
     }
 
-    private void calcPerFile() {
+    private void calcPerFile(CancellationToken cancellationToken) {
         int fileNumber = 0;
         for (IProject.FileInfo fi : project.getProjectFiles()) {
             fileNumber++;
 
-            MatchStatCounts perFileCounts = forFile(fi);
+            MatchStatCounts perFileCounts = forFile(fi, cancellationToken);
             cancellationToken.throwIfCancelled();
             String title = StringUtil.format(OStrings.getString("CT_STATSMATCH_File"), fileNumber,
                     fi.filePath);
             showTextTable(title, perFileCounts, i -> true, true);
         }
 
-        MatchStatCounts total = calcTotal(false);
+        MatchStatCounts total = calcTotal(false, cancellationToken);
         String title = OStrings.getString("CT_STATSMATCH_FileTotal");
         showTextTable(title, total, i -> i != 1, false);
         String fn = project.getProjectProperties().getProjectInternal()
@@ -98,7 +97,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         callback.setDataFile(fn);
     }
 
-    private MatchStatCounts forFile(IProject.FileInfo fi) {
+    private MatchStatCounts forFile(IProject.FileInfo fi, CancellationToken cancellationToken) {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInFile.clear();
 
@@ -131,7 +130,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         }
         addEntryProcessed(alreadyProcessedInFile);
 
-        calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
+        calcSimilarity(untranslatedEntries, cancellationToken).ifPresent(result::addCounts);
 
         return result;
     }

@@ -32,6 +32,7 @@ package org.omegat.core.statistics.writer;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.DateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 import org.omegat.core.statistics.IStatsConsumer;
@@ -55,7 +56,7 @@ import org.omegat.util.gui.TextUtil;
  */
 public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
-    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+    private static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files"), };
 
@@ -65,7 +66,7 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
+    private static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
@@ -88,7 +89,7 @@ public class StatisticsTextWriter extends AbstractStatisticsWriter {
 
     @Override
     public void write(StatsResult result, Writer out) throws IOException {
-        out.write(DateFormat.getInstance().format(new Date()) + "\n");
+        out.write(DATE_FORMAT.format(Instant.now()) + "\n");
         out.write(getTextData(result));
     }
 

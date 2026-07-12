@@ -141,7 +141,6 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
 
     @Override
     public Void run(CancellationToken token) {
-        cancellationToken = token;
         Completion completion = Completion.success();
         try {
             entriesToProcess = project.getAllEntries().size();
@@ -207,7 +206,7 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         }
     }
 
-    MatchStatCounts calcTotal(boolean outData) {
+    MatchStatCounts calcTotal(boolean outData, CancellationToken cancellationToken) {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInProject.clear();
 
@@ -274,7 +273,7 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
      * Similarity calculates between tokens tokenized by
      * ITokenizer.tokenizeAllExactly() (adjustedScore)
      */
-    Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries) {
+    Optional<MatchStatCounts> calcSimilarity(List<SourceTextEntry> untranslatedEntries, CancellationToken cancellationToken) {
         // If we have more than one available processor then we do the
         // calculation in parallel unless explicitly disabled via system
         // property.

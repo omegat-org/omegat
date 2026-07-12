@@ -48,9 +48,39 @@ import org.omegat.util.TMXProp;
  * @author Aaron Madlon-Kay
  */
 public class TMXEntry implements ITMXEntry {
+    /**
+     * Declares how this entry's translation was linked from an external source
+     * instead of being typed by the translator. A null value (not in this enum)
+     * means an ordinary, manually entered translation.
+     */
     public enum ExternalLinked {
-        // declares how this entry linked to external TMX in the tm/auto/
-        xICE, x100PC, xAUTO, xENFORCED
+        /**
+         * In-Context Exact match imported from the tm/auto/ folder: the source
+         * matched exactly and the surrounding context (previous and next
+         * segment) matched too. Stored as an alternative translation.
+         */
+        xICE,
+        /**
+         * Plain 100% match imported from the tm/auto/ folder: the source
+         * matched exactly, but without an in-context guarantee. Stored as an
+         * alternative translation.
+         */
+        x100PC,
+        /**
+         * Auto-populated from the tm/auto/ folder as neither an ICE nor a 100%
+         * match (an ordinary automatic default translation).
+         */
+        xAUTO,
+        /**
+         * Imported from the tm/enforce/ folder: an enforced translation that
+         * takes priority over and is not overwritten by other automatic matches.
+         */
+        xENFORCED,
+        /**
+         * Auto-conversion of a number-only segment produced by OmegaT itself
+         * (feature request #794), not imported from any external TM.
+         */
+        xNUMBER
     }
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
@@ -79,37 +109,30 @@ public class TMXEntry implements ITMXEntry {
         this.origin = from.getPropValue(PROP_ORIGIN);
     }
 
-    @Override
     public String getSourceText() {
         return source;
     }
 
-    @Override
     public String getTranslationText() {
         return translation;
     }
 
-    @Override
     public String getCreator() {
         return creator;
     }
 
-    @Override
     public long getCreationDate() {
         return creationDate;
     }
 
-    @Override
     public String getChanger() {
         return changer;
     }
 
-    @Override
     public long getChangeDate() {
         return changeDate;
     }
 
-    @Override
     public String getNote() {
         return note;
     }
@@ -183,7 +206,6 @@ public class TMXEntry implements ITMXEntry {
      * We only hold origin property in TMXEntry.
      * @return true when has origin property, otherwise false.
      */
-    @Override
     public boolean hasProperties() {
         return origin != null;
     }
@@ -193,7 +215,6 @@ public class TMXEntry implements ITMXEntry {
      * @param propType property type. Currently we just support origin.
      * @return mtsource when requested, otherwise null.
      */
-    @Override
     public String getPropValue(String propType) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin;
@@ -207,7 +228,6 @@ public class TMXEntry implements ITMXEntry {
      * @param propValue expected value.
      * @return true when hold a queried type/value, otherwise false.
     */
-    @Override
     public boolean hasPropValue(String propType, String propValue) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin.equals(propValue);
@@ -219,7 +239,6 @@ public class TMXEntry implements ITMXEntry {
      * return properties.
      * @return singletonList of mtsource when it has, otherwise null.
      */
-    @Override
     public List<TMXProp> getProperties() {
         if (origin != null) {
             return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));

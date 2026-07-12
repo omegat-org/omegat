@@ -36,6 +36,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.ibm.icu.text.DateFormat;
+import com.ibm.icu.text.DecimalFormatSymbols;
 import com.ibm.icu.text.Normalizer2;
 import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
@@ -142,6 +143,20 @@ public final class NumberAutoConverter {
      */
     public static List<Conversion> convert(String source, Locale sourceLocale, Locale targetLocale,
             Set<DataType> types) {
+        return convert(source, sourceLocale, targetLocale, types, true);
+    }
+
+    /**
+     * As {@link #convert(String, Locale, Locale, Set)}, but with control over
+     * Roman-numeral recognition.
+     *
+     * @param allowRoman
+     *            when false, a bare Roman numeral is not recognized as an
+     *            integer; Roman numerals collide with ordinary Latin words
+     *            (CD, MIX, XL), so a caller scanning free text should opt in
+     */
+    public static List<Conversion> convert(String source, Locale sourceLocale, Locale targetLocale,
+            Set<DataType> types, boolean allowRoman) {
         List<Conversion> out = new ArrayList<>();
         if (source == null || types == null || types.isEmpty()) {
             return out;
@@ -151,6 +166,11 @@ public final class NumberAutoConverter {
             return out;
         }
         String folded = Normalizer2.getNFKCInstance().normalize(cleaned);
+        if (folded.matches("\\d{1,3}(\\.\\d{1,3}){3}")) {
+            // A dotted-quad IP address is not a number to convert (and would
+            // otherwise parse as a grouped integer where '.' groups digits).
+            return out;
+        }
         ULocale src = ULocale.forLocale(sourceLocale == null ? Locale.ROOT : sourceLocale);
         ULocale tgt = ULocale.forLocale(targetLocale == null ? Locale.ROOT : targetLocale);
 
@@ -165,7 +185,7 @@ public final class NumberAutoConverter {
             Optional<Conversion> c;
             switch (t) {
             case INTEGER:
-                c = ordinalWins ? Optional.empty() : tryInteger(folded, tgt);
+                c = ordinalWins ? Optional.empty() : tryInteger(folded, tgt, allowRoman);
                 break;
             case DECIMAL:
                 c = ordinalWins ? Optional.empty() : tryDecimal(folded, src, tgt);
@@ -188,25 +208,56 @@ public final class NumberAutoConverter {
             default:
                 c = Optional.empty();
             }
-            c.ifPresent(out::add);
+            c.map(conv -> bumpIfIdentical(conv, source)).ifPresent(out::add);
         }
         out.sort((a, b) -> Double.compare(b.confidence, a.confidence));
         return out;
     }
 
+    /**
+     * A conversion whose rendering is identical to the source is a safe no-op,
+     * so it earns a small confidence bonus (capped at 1.0).
+     */
+    private static Conversion bumpIfIdentical(Conversion conv, String source) {
+        String original = source == null ? "" : source.trim();
+        if (conv.getTarget().equals(original)) {
+            return new Conversion(conv.getType(), conv.getTarget(),
+                    Math.min(1.0, conv.getConfidence() + 0.06));
+        }
+        return conv;
+    }
+
     // --- per-type handlers -------------------------------------------------
 
-    private static Optional<Conversion> tryInteger(String s, ULocale tgt) {
+    private static Optional<Conversion> tryInteger(String s, ULocale tgt, boolean allowRoman) {
         // A grouping or decimal separator means this is the DECIMAL type's job.
         if (hasGroupingOrDecimal(s)) {
+            return Optional.empty();
+        }
+        // Phone numbers and identifiers, not quantities: a leading plus (country
+        // code), a leading zero, or space-separated digit groups.
+        if (s.startsWith("+") || s.indexOf(' ') >= 0 || s.matches("0[0-9]+")) {
+            return Optional.empty();
+        }
+        // Roman is the only ASCII-letter numeral system (ICU also parses odd
+        // forms like "N"=0 or "MDN"), and it collides with ordinary Latin words
+        // (cm, mm, CD, MIX). Any all-ASCII-letter token is recognized only when
+        // the caller opts in; digit and non-Latin numerals (CJK, Arabic-Indic,
+        // Ethiopic) are unaffected.
+        boolean roman = s.matches("[A-Za-z]+");
+        if (!allowRoman && roman) {
             return Optional.empty();
         }
         Optional<BigInteger> value = NumeralValueParser.parseWhole(s);
         if (!value.isPresent()) {
             return Optional.empty();
         }
-        String rendered = NumberFormat.getIntegerInstance(tgt).format(value.get());
-        return Optional.of(new Conversion(DataType.INTEGER, rendered, 0.9));
+        NumberFormat renderer = NumberFormat.getIntegerInstance(tgt);
+        renderer.setGroupingUsed(false); // a bare digit run carries no grouping
+        // Roman stays ambiguous with words even when opted in, so it scores low
+        // and is not auto-selected at the default confidence threshold.
+        double confidence = roman ? 0.4 : 0.9;
+        return Optional.of(new Conversion(DataType.INTEGER, renderer.format(value.get()), confidence));
     }
 
     private static Optional<Conversion> tryDecimal(String s, ULocale src, ULocale tgt) {
@@ -220,7 +271,15 @@ public final class NumberAutoConverter {
             return Optional.empty();
         }
         NumberFormat renderer = NumberFormat.getNumberInstance(tgt);
-        renderer.setMaximumFractionDigits(MAX_FRACTION_DIGITS);
+        // Preserve the source's own precision (e.g. "1.000,50" keeps two
+        // fraction digits) rather than dropping trailing zeros.
+        int fractionDigits = sourceFractionDigits(s, src);
+        renderer.setMinimumFractionDigits(fractionDigits);
+        renderer.setMaximumFractionDigits(fractionDigits);
+        // Mirror the source's grouping: only group the output when the source
+        // itself used a grouping separator.
+        char grouping = DecimalFormatSymbols.getInstance(src).getGroupingSeparator();
+        renderer.setGroupingUsed(s.indexOf(grouping) >= 0);
         return Optional.of(new Conversion(DataType.DECIMAL, renderer.format(value), 0.8));
     }
 
@@ -238,8 +297,11 @@ public final class NumberAutoConverter {
             return Optional.empty();
         }
         NumberFormat renderer = NumberFormat.getPercentInstance(tgt);
-        renderer.setMinimumFractionDigits(0);
-        renderer.setMaximumFractionDigits(MAX_FRACTION_DIGITS);
+        // Mirror the source's fraction digits: "100,0 %" stays "100.0%", "50%"
+        // stays "50%".
+        int fractionDigits = sourceFractionDigits(s, src);
+        renderer.setMinimumFractionDigits(fractionDigits);
+        renderer.setMaximumFractionDigits(fractionDigits);
         return Optional.of(new Conversion(DataType.PERCENT, renderer.format(value), 0.85));
     }
 
@@ -293,11 +355,31 @@ public final class NumberAutoConverter {
             parser.setLenient(false);
             Date value = parseFull(parser, s);
             if (value != null) {
-                String rendered = DateFormat.getTimeInstance(DateFormat.SHORT, tgt).format(value);
+                // Keep the source's precision: seconds in, seconds out.
+                boolean hasSeconds = s.chars().filter(c -> c == ':').count() >= 2;
+                int renderStyle = hasSeconds ? DateFormat.MEDIUM : DateFormat.SHORT;
+                String rendered = DateFormat.getTimeInstance(renderStyle, tgt).format(value);
                 return Optional.of(new Conversion(DataType.TIME, rendered, 0.7));
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Count the digits after the source locale's decimal separator, so a
+     * conversion can reproduce the source's own precision.
+     */
+    private static int sourceFractionDigits(String s, ULocale locale) {
+        char decimal = DecimalFormatSymbols.getInstance(locale).getDecimalSeparator();
+        int at = s.lastIndexOf(decimal);
+        if (at < 0) {
+            return 0;
+        }
+        int digits = 0;
+        for (int i = at + 1; i < s.length() && Character.isDigit(s.charAt(i)); i++) {
+            digits++;
+        }
+        return digits;
     }
 
     private static Optional<Conversion> tryOrdinal(String s, ULocale src, ULocale tgt) {
@@ -321,8 +403,6 @@ public final class NumberAutoConverter {
     }
 
     // --- helpers -----------------------------------------------------------
-
-    private static final int MAX_FRACTION_DIGITS = 6;
 
     /**
      * Strip formatting control characters (bidirectional marks, zero-width and

@@ -72,24 +72,64 @@ public class NumberAutoConverterTest {
     @Test
     public void integersAnyScript() {
         assertConv("15", DE, EN, DataType.INTEGER, "15");
-        assertConv("XL", DE, EN, DataType.INTEGER, "40"); // Roman
+        assertConv("XL", DE, EN, DataType.INTEGER, "40"); // Roman (opt-in default)
         assertConv("三百", DE, EN, DataType.INTEGER, "300"); // CJK
         assertConv("٩", DE, EN, DataType.INTEGER, "9"); // Arabic-Indic
         assertConv("９０", DE, EN, DataType.INTEGER, "90"); // full-width
     }
 
+    @Test
+    public void bareIntegerCarriesNoGrouping() {
+        // Source had no grouping separator, so neither does the proposal.
+        assertConv("9443", DE, EN, DataType.INTEGER, "9443");
+        assertConv("116117", DE, EN, DataType.INTEGER, "116117");
+    }
+
+    @Test
+    public void phoneNumbersAndIdentifiersAreRejected() {
+        assertEmpty("03641 26 87 183", DE, EN); // spaced groups + leading zero
+        assertEmpty("+49", DE, EN); // leading country-code plus
+        assertEmpty("03641", DE, EN); // leading zero identifier
+    }
+
+    @Test
+    public void romanScoresLowSoItIsNotAutoSelected() {
+        java.util.Set<DataType> all = java.util.EnumSet.allOf(DataType.class);
+        Conversion c = NumberAutoConverter.convert("XL", DE, EN, all, true).get(0);
+        assertEquals(DataType.INTEGER, c.getType());
+        assertTrue("Roman confidence should be low: " + c.getConfidence(), c.getConfidence() < 0.5);
+    }
+
     // --- decimals, percent, currency ---------------------------------------
 
     @Test
-    public void decimalReformatsGroupingAndSeparators() {
-        assertConv("1.000,50", DE, EN, DataType.DECIMAL, "1,000.5");
+    public void decimalReformatsGroupingAndPreservesPrecision() {
+        assertConv("1.000,50", DE, EN, DataType.DECIMAL, "1,000.50"); // grouping + two fraction kept
+        assertConv("1.000,5", DE, EN, DataType.DECIMAL, "1,000.5"); // one kept
+        assertConv("1000,50", DE, EN, DataType.DECIMAL, "1000.50"); // no source grouping -> none
     }
 
     @Test
     public void percentPreservesFractionAcrossScripts() {
         assertConv("12,5 %", DE, EN, DataType.PERCENT, "12.5%");
+        assertConv("100,0 %", DE, EN, DataType.PERCENT, "100.0%"); // trailing zero kept
+        assertConv("50 %", DE, EN, DataType.PERCENT, "50%"); // no fraction stays none
         assertConv("９０％", DE, EN, DataType.PERCENT, "90%"); // full-width digits and sign
         assertConv("٥٠٪", Locale.forLanguageTag("ar"), EN, DataType.PERCENT, "50%"); // Arabic percent
+    }
+
+    @Test
+    public void timePreservesSecondsPresence() {
+        Conversion withSeconds = top("14:30:00", DE, EN);
+        assertNotNull(withSeconds);
+        assertEquals(DataType.TIME, withSeconds.getType());
+        assertTrue("seconds should be kept: " + withSeconds.getTarget(),
+                withSeconds.getTarget().contains("2:30:00"));
+
+        Conversion noSeconds = top("14:30", DE, EN);
+        assertNotNull(noSeconds);
+        assertTrue("no seconds should stay: " + noSeconds.getTarget(),
+                noSeconds.getTarget().startsWith("2:30") && !noSeconds.getTarget().contains("2:30:00"));
     }
 
     @Test
@@ -182,6 +222,30 @@ public class NumberAutoConverterTest {
         assertEmpty("", DE, EN);
         assertEmpty("   ", DE, EN);
         assertEmpty(null, DE, EN);
+    }
+
+    @Test
+    public void ipAddressIsNotANumber() {
+        // A dotted-quad IP would otherwise parse as a grouped integer in de.
+        assertEmpty("192.168.168.255", DE, EN);
+        assertEmpty("10.0.0.1", DE, EN);
+    }
+
+    @Test
+    public void romanIsOptIn() {
+        java.util.Set<DataType> all = java.util.EnumSet.allOf(DataType.class);
+        // Opted out: a bare Roman numeral / Latin word is not an integer,
+        // including ICU's odd forms ("N"=0) and words that contain non-standard
+        // letters ("MDN") which a narrow [IVXLCDM] gate would have missed.
+        assertTrue(NumberAutoConverter.convert("XL", DE, EN, all, false).isEmpty());
+        assertTrue(NumberAutoConverter.convert("CD", DE, EN, all, false).isEmpty());
+        assertTrue(NumberAutoConverter.convert("N", DE, EN, all, false).isEmpty());
+        assertTrue(NumberAutoConverter.convert("MDN", DE, EN, all, false).isEmpty());
+        // Opted in: recognized as an integer.
+        Conversion c = NumberAutoConverter.convert("XL", DE, EN, all, true).stream().findFirst().orElse(null);
+        assertNotNull(c);
+        assertEquals(DataType.INTEGER, c.getType());
+        assertEquals("40", c.getTarget());
     }
 
     @Test

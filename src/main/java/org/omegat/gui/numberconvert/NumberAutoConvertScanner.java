@@ -96,7 +96,16 @@ public final class NumberAutoConvertScanner {
      */
     public static Optional<Proposal> propose(int segmentNumber, String source, Locale sourceLocale,
             Locale targetLocale, Set<DataType> types) {
-        return NumberAutoConverter.convert(source, sourceLocale, targetLocale, types).stream().findFirst()
-                .map(c -> new Proposal(segmentNumber, source, c));
+        return propose(segmentNumber, source, sourceLocale, targetLocale, types, true);
+    }
+
+    /**
+     * As {@link #propose(int, String, Locale, Locale, Set)}, but with control
+     * over Roman-numeral recognition (opt-in when scanning free text).
+     */
+    public static Optional<Proposal> propose(int segmentNumber, String source, Locale sourceLocale,
+            Locale targetLocale, Set<DataType> types, boolean allowRoman) {
+        return NumberAutoConverter.convert(source, sourceLocale, targetLocale, types, allowRoman).stream()
+                .findFirst().map(c -> new Proposal(segmentNumber, source, c));
     }
 }

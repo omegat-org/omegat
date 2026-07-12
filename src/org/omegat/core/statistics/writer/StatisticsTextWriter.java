@@ -31,9 +31,7 @@ package org.omegat.core.statistics.writer;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.text.DateFormat;
 import java.time.Instant;
-import java.util.Date;
 
 import org.omegat.core.statistics.IStatsConsumer;
 import org.omegat.core.statistics.dso.FileData;

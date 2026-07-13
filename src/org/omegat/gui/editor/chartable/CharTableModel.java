@@ -32,16 +32,23 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  * Character table table model
+ *
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class CharTableModel extends AbstractTableModel {
+    public static final char ZERO_WIDTH_SPACE = '\u200B';
+    private static final int DEFAULT_GLYPH_START = 32;
+    private static final int DEFAULT_GLYPH_END = 0xFFF;
+    private static final int DEFAULT_GLYPH_COUNT = DEFAULT_GLYPH_END - DEFAULT_GLYPH_START;
+    private static final char[] EXTRA_DEFAULT_GLYPHS = { ZERO_WIDTH_SPACE };
+
     Font font;
 
     int columnCount = 16;
 
-    int glyphCount = 65535 - 32;
+    int glyphCount = DEFAULT_GLYPH_COUNT + EXTRA_DEFAULT_GLYPHS.length;
 
     StringBuilder data = null;
 
@@ -51,7 +58,9 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * set the data to a selected string
-     * @param data the new string
+     *
+     * @param data
+     *            the new string
      * @return true if the data have been replaced.
      */
     public boolean setData(String data) {
@@ -65,7 +74,7 @@ public class CharTableModel extends AbstractTableModel {
         }
 
         if (data == null) {
-            glyphCount = 0xFFF - 32;
+            glyphCount = DEFAULT_GLYPH_COUNT + EXTRA_DEFAULT_GLYPHS.length;
             this.data = null;
         } else {
             glyphCount = data.length();
@@ -100,8 +109,11 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * Append a new character to the data.
-     * @param c the character
-     * @param checkUnique check for being unique or not
+     *
+     * @param c
+     *            the character
+     * @param checkUnique
+     *            check for being unique or not
      */
     public void appendChar(Character c, boolean checkUnique) {
         char cv = c.charValue();
@@ -119,10 +131,15 @@ public class CharTableModel extends AbstractTableModel {
 
     /**
      * Remove the selected characters from the model.
-     * @param row1 from row
-     * @param col1 from column
-     * @param row2 to row
-     * @param col2 to column
+     *
+     * @param row1
+     *            from row
+     * @param col1
+     *            from column
+     * @param row2
+     *            to row
+     * @param col2
+     *            to column
      */
     public void removeSelection(int row1, int col1, int row2, int col2) {
         if (data.length() == 0) {
@@ -155,8 +172,10 @@ public class CharTableModel extends AbstractTableModel {
         if (value < glyphCount) {
             if (data != null) {
                 return data.charAt(value);
+            } else if (value < DEFAULT_GLYPH_COUNT) {
+                return (char) (value + DEFAULT_GLYPH_START);
             } else {
-                return (char) (value + 32);
+                return EXTRA_DEFAULT_GLYPHS[value - DEFAULT_GLYPH_COUNT];
             }
         } else {
             return null;
@@ -169,8 +188,11 @@ public class CharTableModel extends AbstractTableModel {
     }
 
     /**
-     * Prevent the use of invalid points in the table (beyond data string length).
-     * @param p the point in question
+     * Prevent the use of invalid points in the table (beyond data string
+     * length).
+     *
+     * @param p
+     *            the point in question
      * @return the modified point.
      */
     public Point modifyPoint(Point p) {

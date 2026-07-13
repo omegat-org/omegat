@@ -85,6 +85,18 @@ public final class PluginInstaller {
     private PluginInstaller() {
     }
 
+    /**
+     * Installs a plugin from the specified file.
+     * <p>
+     * The method validates the plugin file, * unpacks it, checks the manifest
+     * information, and confirms the installation with the user. If the plugin
+     * is already installed, the user is prompted to overwrite or upgrade the
+     * plugin. Returns whether the installation was successful.
+     *
+     * @param pluginFile
+     *            the plugin file to be installed (either in JAR or ZIP format)
+     * @return true if the plugin was successfully installed, false otherwise
+     */
     public boolean install(final File pluginFile) {
         Path pluginJarFile;
         Set<PluginInformation> infoSet;
@@ -147,13 +159,11 @@ public final class PluginInstaller {
         JTextArea msg = new JTextArea(message);
         msg.setEditable(false);
         if (Math.max(installed.size(), currentSet.size()) > 1) {
-            String[] titles = {OStrings.getString("PREFS_PLUGINS_TITLE_NAME"),
-                OStrings.getString("PREFS_PLUGINS_TITLE_CURRENT_VERSION"),
-                OStrings.getString("PREFS_PLUGINS_TITLE_TARGET_VERSION")
-            };
+            String[] titles = { OStrings.getString("PREFS_PLUGINS_TITLE_NAME"),
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CURRENT_VERSION"),
+                    OStrings.getString("PREFS_PLUGINS_TITLE_TARGET_VERSION") };
             JTable compareTable = new JTable();
-            compareTable.setModel(new PluginInstallerTableModel(titles, currentSet,
-                    infoSet));
+            compareTable.setModel(new PluginInstallerTableModel(titles, currentSet, infoSet));
             confirmPanel.setPreferredSize(new Dimension(400, 200));
             confirmPanel.add(compareTable.getTableHeader(), BorderLayout.NORTH);
             confirmPanel.add(new JScrollPane(compareTable), BorderLayout.CENTER);
@@ -173,8 +183,8 @@ public final class PluginInstaller {
             }
             JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -209,12 +219,12 @@ public final class PluginInstaller {
     }
 
     /**
-     * Check if jarFile is placed in OmegaT installed system directory.
+     * Check if the jarFile is placed in OmegaT installed system directory.
      *
      * @param jarFile
-     *            a file determine.
-     * @return true when a file is under installed directory, otherwise return
-     *         false.
+     *            a file determining.
+     * @return true when a file is under an installed directory, otherwise
+     *         return false.
      */
     private static boolean jarFileInInstallDir(File jarFile) {
         Path installDir = Paths.get(StaticUtils.installDir()).normalize();
@@ -223,8 +233,9 @@ public final class PluginInstaller {
     }
 
     /**
-     * Return known available plugins.
-     * It has plugins that have already installed.
+     * Return the list of known available plugins. It includes plugins that have
+     * already been installed.
+     * 
      * @return List of PluginInformation
      */
     public List<PluginInformation> getPluginList() {
@@ -271,7 +282,7 @@ public final class PluginInstaller {
     }
 
     /**
-     * Parse Manifest from plugin jar file.
+     * Parse Manifest from the plugin jar file.
      *
      * @param pluginJarFile
      *            plugin jar file

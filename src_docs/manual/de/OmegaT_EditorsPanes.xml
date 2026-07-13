@@ -1,0 +1,819 @@
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="chapter.panes">
+   <title xml:id="chapter.panes.title">Fensterbereiche</title>
+   <section xml:id="panes.default.layout">
+      <title xml:id="panes.default.layout.title">Standardlayout</title>
+      <para>Wenn Sie OmegaT zum ersten Mal starten, hat das Hauptfenster das folgende Standardlayout:</para>
+      <figure xml:id="default.omegat.layout.macos">
+         <title xml:id="default.omegat.layout.macos.title">Standardlayout von OmegaT unter macOS</title>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/defaultOmegaTLayout.png"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/defaultOmegaTLayout.png"/>
+            </imageobject>
+         </mediaobject>
+      </figure>
+      <orderedlist>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.editor" endterm="panes.editor.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.notes" endterm="panes.notes.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.glossary" endterm="panes.glossary.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.comments" endterm="panes.comments.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Der Fensterbereich <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/></para>
+         </listitem>
+         <listitem>
+            <para>Die Fensterbereiche <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> und <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/> sind angedockt</para>
+         </listitem>
+         <listitem>
+            <para>Die rechte <link linkend="panes.statusbar" endterm="panes.statusbar.title"/> enthält Informationen über das Projekt</para>
+         </listitem>
+      </orderedlist>
+      <para>Verwenden Sie die Optionen im Menü <link linkend="menus.view" endterm="menus.view.title"/> und verschieben Sie die einzelnen <link linkend="chapter.panes" role="xref">Fensterbereiche</link>, um Ihren Workflow zu verbessern.</para>
+      <warning>
+         <para>Use 
+            <link linkend="menus.view" endterm="menus.view.title"/>
+            <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> if you run into
+            	  problems while rearranging the window layout.</para>
+      </warning>
+   </section>
+   <section xml:id="panes.principles">
+      <title xml:id="panes.principles.title">Grundsätze</title>
+      <variablelist>
+         <varlistentry xml:id="panes.manipulation">
+            <term xml:id="panes.manipulation.title">Anpassung</term>
+            <listitem>
+               <para>Das Hauptfenster ist in Fensterbereiche (die hier beschrieben werden), Menüs (siehe <link linkend="chapter.menus" endterm="chapter.menus.title"/>) und eine Statusleiste (siehe <link linkend="panes.statusbar" role="xref">unten</link>) unterteilt. Sie können einen Fensterbereich durch Ziehen und Ablegen seines Titels neu positionieren oder ihn sogar als separates Fenster abdocken.</para>
+               <para>In der rechten oberen Ecke eines Fensterbereichs werden je nach Typ und aktuellem Status unterschiedliche Symbole angezeigt:</para>
+               <table xml:id="table.pane.widgets">
+                  <title xml:id="table.pane.widgets.title">Fensterbereich-Widgets</title>
+                  <tgroup cols="2">
+                     <tbody>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Settings.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Settings.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>Listet zusätzliche <emphasis role="bold">Aktionen</emphasis> für den Fensterbereich auf.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Minimize.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Minimize.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>
+                              <emphasis role="bold">Minimieren</emphasis> des Fensterbereichs zu einem Tab am unteren Rand des Hauptfensters.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Maximize.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Maximize.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>
+                              <emphasis role="bold">Maximieren</emphasis> des Fensterbereichs</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Restore.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Restore.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>
+                              <emphasis role="bold">Wiederherstellen</emphasis> des vorherigen Layouts eines maximierten Fensterbereichs.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Undock.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Undock.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>
+                              <emphasis role="bold">Abdocken</emphasis> des Fensterbereichs vom Hauptfenster.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <inlinemediaobject>
+                                 <imageobject role="html">
+                                    <imagedata fileref="images/Dock.png"/>
+                                 </imageobject>
+                                 <imageobject role="fo">
+                                    <imagedata fileref="images/Dock.png"/>
+                                 </imageobject>
+                              </inlinemediaobject>
+                           </entry>
+                           <entry>
+                              <emphasis role="bold">Andocken</emphasis> des Fensterbereichs an das Hauptfenster.</entry>
+                        </row>
+                     </tbody>
+                  </tgroup>
+               </table>
+               <para>Sie können Fensterbereiche in einem Bereich des Hauptfensters gruppieren. In diesem Fall wird ein Tab mit dem Namen des Fensterbereichs ganz oben in der Gruppe angezeigt. Fensterbereiche können durch Ziehen der Trennbalken zwischen den Fensterbereichen größer/kleiner gemacht werden.</para>
+               <note>
+                  <para>Use 
+                     <link endterm="menus.view.title" linkend="menus.view"/>
+                     <link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> to go back to the default
+                     layout if you lose track of the changes you made to the user
+                     interface and can no longer see certain panes.</para>
+               </note>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.context.menus">
+            <term xml:id="panes.context.menus.title">Kontextmenüs</term>
+            <listitem>
+               <para>Einige Fensterbereiche haben ein Kontextmenü. Sie können dieses Menü mit der Standardmethode Ihres Betriebssystems oder mit den von OmegaT definierten Tastenkürzeln aufrufen:<itemizedlist>
+                     <listitem>
+                        <para>Unter Windows und Linux: <keycap>Menü</keycap>
+                        </para>
+                     </listitem>
+                     <listitem>
+                        <para>Unter macOS: <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo>
+                        </para>
+                     </listitem>
+                  </itemizedlist>
+               </para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.drag.and.drop">
+            <term xml:id="panes.drag.and.drop.title">Ziehen und Ablegen</term>
+            <listitem>
+               <para>Dateien können auf bestimmte Fensterbereiche gezogen und abgelegt werden, was folgendes bewirkt:</para>
+               <variablelist>
+                  <varlistentry>
+                     <term>Editorbereich</term>
+                     <listitem>
+                        <para>Dropping an OmegaT project file
+                           (
+                           <filename>omegat.project</filename>) or a full project here
+                           will open the corresponding project after closing the
+                           currently open project, if any.</para>
+                        <para>Wenn Sie andere Dateien ablegen, werden diese in den <filename class="directory">source</filename>-Ordner kopiert. Dies gilt auch für das Fenster <link endterm="windows.source.files.list.title" linkend="windows.source.files.list"/>.</para>
+                     </listitem>
+                  </varlistentry>
+                  <varlistentry>
+                     <term>Fuzzy-Matches-Bereich</term>
+                     <listitem>
+                        <para>Wenn Sie hier <filename>.tmx</filename>-Dateien ablegen, werden diese in den <filename class="directory">tm</filename>-Ordner kopiert.</para>
+                     </listitem>
+                  </varlistentry>
+                  <varlistentry>
+                     <term>Glossarbereich</term>
+                     <listitem>
+                        <para>Dropping files with a recognized glossary extension
+                           (
+                           <filename>.txt</filename>, 
+                           <filename>.tab</filename>, etc.)
+                           here will copy them to the 
+                           <filename class="directory">glossary</filename> folder.</para>
+                     </listitem>
+                  </varlistentry>
+               </variablelist>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.notifications">
+            <term xml:id="panes.notifications.title">Benachrichtigungen</term>
+            <listitem>
+               <para>Wenn ein Fensterbereich geschlossen ist, aber Inhalte zum Anzeigen hat, kann OmegaT den Tab des Fensterbereichs kurzzeitig orange hervorheben, wenn Sie das Segment betreten.</para>
+               <para>Für die Fensterbereiche &quot;<guilabel>Kommentare</guilabel>&quot; und &quot;<guilabel>Notizblock</guilabel>&quot; sind Benachrichtigungen standardmäßig aktiviert.</para>
+               <para>Um Benachrichtigungen zu aktivieren oder zu deaktivieren,</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>Gehen Sie zum Fensterbereich.</para>
+                  </listitem>
+                  <listitem>
+                     <para>Klicken Sie auf das <guilabel>Aktion</guilabel>-Widget oben rechts.</para>
+                  </listitem>
+                  <listitem>
+                     <para>Wählen Sie &quot;<guilabel>Mich benachrichtigen, wenn ein Segment X hat</guilabel>&quot; aus, wobei X je nach Fensterbereich variiert.</para>
+                  </listitem>
+               </itemizedlist>
+               <para>Die folgenden Fensterbereiche können Sie benachrichtigen:</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>Kommentare</para>
+                  </listitem>
+                  <listitem>
+                     <para>Wörterbücher</para>
+                  </listitem>
+                  <listitem>
+                     <para>Fuzzy Matches</para>
+                  </listitem>
+                  <listitem>
+                     <para>Glossare</para>
+                  </listitem>
+                  <listitem>
+                     <para>Mehrere Übersetzungen</para>
+                  </listitem>
+                  <listitem>
+                     <para>Notizblock</para>
+                  </listitem>
+                  <listitem>
+                     <para>Segmenteigenschaften</para>
+                     <para>Im Fensterbereich &quot;<guilabel>Segmenteigenschaften</guilabel>&quot; können Sie die Benachrichtigungseinstellungen für jeden seiner Einträge festlegen.</para>
+                     <para>Wenn die <guilabel>Tabellenansicht</guilabel> aktiv ist, rechtsklicken Sie auf eine Eigenschaft und wählen Sie &quot;<guilabel>Mich benachrichtigen, wenn ein Segment X hat</guilabel>&quot; aus, wobei X der Name der Eigenschaft ist.</para>
+                     <para>Wenn die <guilabel>Listenansicht</guilabel> aktiv ist, klicken Sie auf das <guilabel>Aktion</guilabel>-Widget rechts neben einer Eigenschaft und wählen Sie &quot;<guilabel>Mich benachrichtigen, wenn ein Segment X hat</guilabel>&quot; aus, wobei X der Name der Eigenschaft ist.</para>
+                  </listitem>
+               </itemizedlist>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="panes.editor">
+      <title xml:id="panes.editor.title"><guilabel>Editor</guilabel></title>
+      <para>Hier können Sie Ihre Übersetzungen eingeben und bearbeiten.</para>
+      <para>Der Text ist in nummerierte Segmente unterteilt. Sie können durch das Dokument scrollen und auf ein beliebiges Segment doppelklicken, um es zu öffnen und zu bearbeiten.</para>
+      <example xml:id="panes.editor.default.editor.writing.space">
+         <title xml:id="panes.editor.default.editor.writing.space.title">Standard-Editor-Arbeitsbereich</title>
+         <para>
+            		
+   <programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|Dissimuler les balises<token>&lt;Segment 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+When enabled, all formatting in the source segments are hidden.</programlisting>
+</para>
+      </example>
+      <itemizedlist>
+         <listitem>
+            <para>Die erste Zeile, in fetter Schrift auf grünem Hintergrund, ist der zu übersetzende Quelltext.</para>
+         </listitem>
+         <listitem>
+            <para>Die zweite Zeile ist das <emphasis role="bold">Übersetzungsfeld</emphasis>, zwischen dem linken Rand und dem rechts befindlichen Segmentmarker. Im <emphasis role="bold">Übersetzungsfeld</emphasis> können Sie Ihre Übersetzung eingeben.</para>
+         </listitem>
+         <listitem>
+            <para><literal>&lt;Segment 2148 ¶&gt;</literal> ist der Segmentmarker.</para>
+            <para>
+               <literal>2148</literal> ist die Nummer des Segments innerhalb des Projekts. Das <literal>¶</literal>-Symbol gibt an, dass es sich um das erste Segment in einem Absatz handelt.</para>
+         </listitem>
+         <listitem>
+            <para>Der Textcursor ist standardmäßig auf das Übersetzungsfeld beschränkt.</para>
+            <para>Verwenden Sie <keycap>F2</keycap>, um den Textcursor zu lösen und ihn frei zwischen dem Übersetzungsfeld und den anderen Teilen des Fensterbereichs hin und her zu bewegen.</para>
+         </listitem>
+         <listitem>
+            <para>Die Zeile unter dem Übersetzungsfeld ist ein weiteres Segment.</para>
+         </listitem>
+         <listitem>
+            <para>Use 
+               <link linkend="menus.goto" endterm="menus.goto.title"/>
+               <link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> or other navigation commands
+               to:</para>
+            <itemizedlist>
+               <listitem>
+                  <para>den Inhalt des Übersetzungsfeldes in den Translation Memory des Projekts aufzunehmen, und</para>
+               </listitem>
+               <listitem>
+                  <para>das nächste zu übersetzende Segment zu betreten.</para>
+               </listitem>
+            </itemizedlist>
+            <para>Einzelheiten finden Sie unter <link endterm="menus.goto.title" linkend="menus.goto"/> (Menü).</para>
+         </listitem>
+      </itemizedlist>
+      <note>
+         <para>Passen Sie den Editor an Ihren Workflow an.</para>
+         <!--   <example id="panes.editor.modified.editor.target.field"> -->
+         <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+         <!--         editor writing space</title> -->
+         <!-- 	<para> -->
+         <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+         <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+         <!-- <token>Hide Ta&amp;gs</token> -->
+         <!-- <token>Dissi&amp;muler les balises</token> -->
+
+         <!-- — ¶ ————————————————————— -->
+
+         <!-- <token>External Post-processing Command:</token> -->
+         <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+         <!-- — ¶ —————————————————————</programlisting></para> -->
+         <!--   </example> -->
+         <para>Zu den Anpassungen gehören:</para>
+         <itemizedlist>
+            <listitem>
+               <para>Die Schriftart ändern, mit der Einstellung <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Showing or hiding paragraph delimitations using 
+                  <link endterm="menus.view.title" linkend="menus.view"/>
+                  <link endterm="menus.view.mark.paragraph.delimitations.title" linkend="menus.view.mark.paragraph.delimitations"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Darstellung der Absatzbegrenzung ändern, mit der Einstellung <link endterm="dialogs.preferences.editor.paragraph.delimitation.format.title" linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Showing segment modification information using 
+                  <link endterm="menus.view.title" linkend="menus.view"/>
+                  <link endterm="menus.view.modification.info.title" linkend="menus.view.modification.info"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Showing or hiding source segments using 
+                  <link endterm="menus.view.title" linkend="menus.view"/>
+                  <link endterm="menus.view.display.source.segments.title" linkend="menus.view.display.source.segments"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Highlighting translated segments using 
+                  <link endterm="menus.view.title" linkend="menus.view"/>
+                  <link endterm="menus.view.mark.translated.segments.title" linkend="menus.view.mark.translated.segments"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Den Quelltext automatisch in das Übersetzungsfeld einfügen. Deaktivieren Sie dazu die Einstellung <link endterm="dialogs.preferences.editor.leave.the.segment.empty.title" linkend="dialogs.preferences.editor.leave.the.segment.empty"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Den besten Fuzzy Match anhand eines Schwellenwerts einfügen, mit der Einstellung <link endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title" linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>.</para>
+            </listitem>
+            <listitem>
+               <para>Text definieren, der nicht übersetzt werden soll, mit der Einstellung <link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>.</para>
+            </listitem>
+         </itemizedlist>
+         <para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> (Einstellungen) und <link endterm="menus.view.title" linkend="menus.view"/> (Menü).</para>
+      </note>
+      <variablelist>
+         <varlistentry>
+            <term>Leere Übersetzungen</term>
+            <listitem>
+               <para>Wenn Sie das Übersetzungsfeld leer lassen, behandelt OmegaT das Segment als unübersetzt und belässt es beim Erstellen der übersetzten Dokumente in der Originalsprache.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Übersetzungen identisch zur Quelle</term>
+            <listitem>
+               <para>OmegaT kann Übersetzungen speichern, die identisch mit dem Quelltext sind. Dies kann für Dokumente nützlich sein, die Eigennamen wie Markennamen usw. enthalten, oder für fremdsprachige Segmente, die nicht übersetzt werden müssen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Text ziehen und ablegen</term>
+            <listitem>
+               <para>Es ist möglich, Text von einer beliebigen Stelle im Hauptfenster in das Übersetzungsfeld zu ziehen. Texte, die von außen auf das Übersetzungsfeld gezogen werden, werden kopiert, während Texte, die von innen auf das Übersetzungsfeld gezogen werden, verschoben werden.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.editor.overwriting">
+            <term xml:id="panes.editor.overwriting.title">Überschreiben</term>
+            <listitem>
+               <para>Standardmäßig wird neuer Text je nach Schreibrichtung vor oder hinter dem Textcursor eingefügt. Um den vorhandenen Text stattdessen zu überschreiben, verwenden Sie die folgenden Tasten:</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>Unter Windows und Linux: <keycombo> <keycap>EINFG</keycap> </keycombo>
+                     </para>
+                  </listitem>
+                  <listitem>
+                     <para>Unter macOS: <keycap>F3</keycap>
+                     </para>
+                  </listitem>
+               </itemizedlist>
+               <para>Der Schreibmodus (Überschreiben - <guilabel>OVR</guilabel> oder Einfügen - <guilabel>INS</guilabel>) wird rechts neben der <link linkend="panes.statusbar" role="xref">Statusleiste</link> angezeigt. Mit derselben Taste kann zwischen den Modi gewechselt werden.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.editor.cursor.lock">
+            <term xml:id="panes.editor.cursor.lock.title">Textcursormodus</term>
+            <listitem>
+               <para>Standardmäßig ist der Textcursor auf das Übersetzungsfeld beschränkt. Es ist nicht möglich, mit den Pfeiltasten im Quelltext zu navigieren.</para>
+               <para>Drücken Sie <keycap>F2</keycap>, um den Textcursor zu lösen und mit den Pfeiltasten im Quelltext (oder irgendwo anders im Editor) zu navigieren. Auf diese Weise können Sie Text mit der Tastatur markieren.</para>
+               <para>Der Textcursormodus (fixiert - <guilabel>LCK</guilabel> oder gelöst - <guilabel>UNL</guilabel>) wird rechts neben der <link linkend="panes.statusbar" role="xref">Statusleiste</link> angezeigt. Mit derselben Taste kann zwischen fixiertem und gelöstem Textcursor umgeschaltet werden.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.editor.context.menu">
+            <term xml:id="panes.editor.context.menu.title">Kontextmenü</term>
+            <listitem>
+               <para>Standardtastenkürzel:</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>Unter Windows und Linux: <keycap>Menü</keycap>
+                     </para>
+                  </listitem>
+                  <listitem>
+                     <para>Unter macOS: <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo>
+                     </para>
+                  </listitem>
+               </itemizedlist>
+               <para>You can also bring up the menu by right-clicking the mouse
+                  		  (
+                  <keycap>C</keycap> + 
+                  <keycap>click</keycap> on macOS).</para>
+               <para>Das Kontextmenü des Editorbereichs bietet verschiedene Funktionen, die auch im Menü <link endterm="menus.edit.title" linkend="menus.edit"/> verfügbar sind, insbesondere:</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>Gefundene Glossareinträge, ggf. mit Kommentaren als Tooltip. Use <link endterm="menus.view.title" linkend="menus.view"/> <link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> to enable this feature.</para>
+                  </listitem>
+                  <listitem>
+                     <para>
+                        <guilabel>Ausschneiden</guilabel>, <guilabel>Kopieren</guilabel>, <guilabel>Einfügen</guilabel>,</para>
+                  </listitem>
+                  <listitem>
+                     <para>
+                        <guilabel>Zum Segment springen</guilabel> (das Segment unter dem Mauszeiger).</para>
+                  </listitem>
+                  <listitem>
+                     <para>
+                        <guilabel>Wörterbücher durchsuchen</guilabel> (um nach dem markierten Begriff in einem installierten Wörterbuch zu suchen).</para>
+                  </listitem>
+                  <listitem>
+                     <para>
+                        <guilabel>Add Glossary Entry</guilabel> (equivalent to using
+                        
+                        <link endterm="menus.edit.title" linkend="menus.edit"/>
+                        <link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>).</para>
+                  </listitem>
+               </itemizedlist>
+               <para>Wenn Sie einen Text markieren und <link endterm="dialogs.preferences.external.searches.title" linkend="dialogs.preferences.external.searches"/> vorhanden sind, werden diese auch in diesem Menü angezeigt (ebenso wie lokale Suchvorgänge).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.editor.auto.completion.menu">
+            <term xml:id="panes.editor.auto.completion.menu.title">Autovervollständigungsmenü</term>
+            <listitem>
+               <para>Standardtastenkürzel:</para>
+               <itemizedlist>
+                  <listitem>
+                     <para>In Windows und Linux: <keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo>
+                     </para>
+                  </listitem>
+                  <listitem>
+                     <para>Unter macOS: <keycap>Esc</keycap>
+                     </para>
+                  </listitem>
+               </itemizedlist>
+               <para>Dieses Menü bietet Autovervollständigungsoptionen, die in der Einstellung <link endterm="dialog.preferences.auto.completion.title" linkend="dialog.preferences.auto.completion"/> festgelegt wurden.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="panes.editor.navigation">
+            <term xml:id="panes.editor.navigation.title">Navigation</term>
+            <listitem>
+               <para>Use 
+                  <link linkend="menus.goto" endterm="menus.goto.title"/>
+                  <link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> to enter the pane and add or
+                  		  modify a note.</para>
+               <para>Use 
+                  <link linkend="menus.goto" endterm="menus.goto.title"/>
+                  <link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> to go back to the
+                  		  Editor.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="panes.fuzzy.matches">
+      <title xml:id="panes.fuzzy.matches.title"><guilabel>Fuzzy Matches</guilabel></title>
+      <para>In diesem Fensterbereich werden Segmente aus Ihren Translation Memories angezeigt, die dem Segment, das Sie gerade übersetzen, am ähnlichsten sind.</para>
+      <para>Matches stammen sowohl aus dem internen Translation Memory des Projekts, der während Ihrer Übersetzung in Echtzeit erstellt wird, als auch aus externen Translation Memories, die Sie aus früheren Projekten importiert oder von Dritten erhalten haben. Einzelheiten finden Sie unter <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>.</para>
+      <para>Wenn Sie ein Segment betreten, wird automatisch der erste Fuzzy Match (der mit der höchsten Trefferquote) ausgewählt. You can press <keycombo> <keycap>C</keycap> <keycap>2, 3, 4, or 5</keycap> </keycombo> to select a specific match, or cycle through the available matches with <keycombo> <keycap>C</keycap> <keycap>↑ or ↓</keycap> </keycombo> ( <keycombo> <keycap>A</keycap> <keycap>↑ or ↓</keycap> </keycombo> on macOS). Alternativ können Sie auch <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> verwenden, um einen anderen Match auszuwählen.</para>
+      <example xml:id="the.first.match">
+         <title xml:id="the.first.match.title">Ein leeres Segment und seine ersten zwei Matches</title>
+         <para>
+            		
+            <informaltable xml:id="table.pane.matches">
+               <tgroup cols="2">
+                  <tbody>
+                     <row>
+                        <entry>
+                           <para>
+                              				  
+                              <informaltable>
+                                 <tgroup cols="1">
+                                    <tbody>
+                                       <row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;Segment 1879 ¶&gt;</token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+                                       </row>
+                                    </tbody>
+                                 </tgroup>
+                              </informaltable>
+                              				</para>
+                           				</entry>
+                        <entry>
+                           <para>
+                              				  
+                              <informaltable>
+                                 <tgroup cols="1">
+                                    <tbody>
+                                       <row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Verwaiste Segmente (+1 mehr)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
+                                       </row>
+                                    </tbody>
+                                 </tgroup>
+                              </informaltable>
+                              				</para>
+                           				</entry>
+                     </row>
+                  </tbody>
+               </tgroup>
+            </informaltable>
+            	  </para>
+      </example>
+      <para>Der aktuell ausgewählte Fuzzy Match wird <emphasis role="bold">fett</emphasis> dargestellt. Wörter, die im Zieltext des Segments fehlen, sind <emphasis role="bold">blau</emphasis> gefärbt, während Textbereiche, die an die fehlenden Wörter angrenzen, <emphasis role="bold">grün</emphasis> gefärbt sind (wenn der angrenzende Bereich wie oben ein Leerzeichen ist, bleibt der Bereich ungefärbt).</para>
+      <para>The match also displays three matching percentages, the origin of the
+      match and how many times is the match repeated in the matching data.</para>
+    
+      <para>When a match comes from the project memory, its origin is only specified in
+      two cases:</para>
+    
+      <itemizedlist>
+         <listitem>
+            <para>If the matching segment is no longer present in the files located in the
+            source folder, it is labeled <emphasis role="bold">Orphan segment</emphasis>.</para>
+         </listitem>
+         <listitem>
+            <para>If the matching segment exists in the files located in the source folder,
+            as well as in other reference memories, it is labeled <emphasis role="bold">This
+            project</emphasis>.</para>
+         </listitem>
+      </itemizedlist>
+
+      <para>The matching percentages have the following meaning, in order:</para>
+      <itemizedlist>
+         <listitem>
+            <para>Ein Prozentsatz, der <emphasis role="bold">mit Stammformreduktion</emphasis> auf Basis des Tokenizers der Quellsprache <emphasis role="bold">ohne Berücksichtigung von Tags und Zahlen</emphasis> berechnet wird (generell der höchste).</para>
+         </listitem>
+         <listitem>
+            <para>Ein Prozentsatz, der <emphasis role="bold">ohne Stammformreduktion</emphasis> und <emphasis role="bold">ohne Berücksichtigung von Tags und Zahlen</emphasis> berechnet wird (generell etwas niedriger).</para>
+         </listitem>
+         <listitem>
+            <para>Ein Prozentsatz, der <emphasis role="bold">unter Berücksichtigung des vollständigen Textes, einschließlich Tags und Zahlen</emphasis>, berechnet wird (generell der niedrigste).</para>
+            <note>
+               <para>Wenn das Segment nur Zahlen oder Symbole enthält, ist dies der höchste Prozentsatz.</para>
+            </note>
+         </listitem>
+      </itemizedlist>
+      <para>Sie können die Darstellung und Sortierung der Matches ändern. Einzelheiten finden Sie unter <link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/> (Einstellungen).</para>
+      <para>Use 
+         <link linkend="menus.edit" endterm="menus.edit.title"/>
+         <link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/> to replace the
+         translation field with the match, or 
+         <link linkend="menus.edit" endterm="menus.edit.title"/>
+         <link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/> to insert it at the cursor
+         position.</para>
+   </section>
+   <section xml:id="panes.glossary">
+      <title xml:id="panes.glossary.title"><guilabel>Glossare</guilabel></title>
+      <para>In diesem Fensterbereich werden Einträge aus Ihren Glossardateien angezeigt, die mit Begriffen im aktuellen Segment übereinstimmen. Die Glossardateien befinden sich im Ordner <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> Ihres Projekts.</para>
+      <para>Der Quellbegriff wird vor dem &quot;=&quot; angezeigt, während die Zielbegriffe nach dem &quot;=&quot; angezeigt werden. Wenn der Eintrag Kommentare enthält, werden diese nummeriert in separaten Zeilen unter den Begriffen angezeigt. Begriffe aus dem beschreibbaren Glossar werden fett dargestellt, während Begriffe aus anderen Glossaren als normaler Text dargestellt werden.</para>
+      <example xml:id="glossary.matches">
+         <title xml:id="glossary.matches.title">Glossar-Matches</title>
+         <para>
+            <programlisting>Project = <token>Projet</token>
+1. Projet de traduction
+
+Folder = <token>Dossier</token></programlisting>
+            	  </para>
+      </example>
+      <para>Wenn Sie den Mauszeiger über einen Begriff bewegen, erscheint ein Tooltip mit dem Pfad der Glossardatei.</para>
+      <para>Das Kommentarfeld eines Eintrags kann Links enthalten, die angeklickt werden können, um weitere Informationen zu erhalten.</para>
+      <para>Links to local files (
+         <filename>file:///PATH/filename</filename>) open
+         	in the associated program. Web addresses (
+         <filename>https://...</filename>)
+         	open in the default browser.</para>
+      <para>Sie können einen Begriff im Glossarbereich auswählen und mit der rechten Maustaste anklicken, um ihn in die Übersetzung einzufügen.</para>
+      <para>Use 
+         <link endterm="menus.view.title" linkend="menus.view"/>
+         <link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> to underline glossary
+         matches.</para>
+      <para>Sie können dann einen Rechtsklick auf das unterstrichene Wort im Quelltext machen, um ein Kontextmenü zu öffnen, das die Übersetzungen aus Ihren Glossaren auflistet. Wählen Sie einen der Vorschläge aus, um ihn an der aktuellen Position des Textcursors im Segment einzufügen.</para>
+      <para>Sie können die Glossar-Einstellungen verwenden, um die Darstellung der Glossare zu optimieren. Einzelheiten finden Sie unter <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> (Einstellungen).</para>
+      <para>Änderungen an einer beliebigen Glossardatei im Glossarordner werden von OmegaT sofort erkannt und im Glossarbereich angezeigt.</para>
+      <para>OmegaT stellt für jedes Projekt eine beschreibbare Glossardatei zur Verfügung. Use <link endterm="menus.edit.title" linkend="menus.edit"/> <link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> to add terms to that file.</para>
+      <para>Einzelheiten finden Sie unter <link linkend="app.glossaries" endterm="app.glossaries.title"/>.</para>
+   </section>
+   <section xml:id="panes.dictionary">
+      <title xml:id="panes.dictionary.title"><guilabel>Wörterbücher</guilabel></title>
+      <para>In diesem Fensterbereich werden Einträge aus Ihren Wörterbüchern angezeigt, die mit Begriffen im aktuellen Segment übereinstimmen. Die Wörterbuchdateien befinden sich im Ordner <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> Ihres Projekts. Einzelheiten finden Sie unter <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> (Einstellungen).</para>
+   </section>
+   <section xml:id="panes.machinetranslation">
+      <title xml:id="panes.machinetranslation.title"><guilabel>Maschinelle Übersetzungen</guilabel></title>
+      <para>Wenn Sie mindestens einen maschinellen Übersetzungsdienst aktiviert und korrekt konfiguriert haben, werden in diesem Fensterbereich Vorschläge für das aktuelle Segment angezeigt, die von den verfügbaren Übersetzungsdiensten erzeugt wurden. Wenn Vorschläge von mehr als einem Übersetzungsdienst verfügbar sind,</para>
+      <itemizedlist>
+         <listitem>
+            <para>wird der Name des Dienstes hinter dem übersetzten Text angezeigt,</para>
+         </listitem>
+         <listitem>
+            <para>werden die Ergebnisse alphabetisch nach Dienstnamen sortiert,</para>
+         </listitem>
+         <listitem>
+            <para>wird die aktuell ausgewählte Übersetzung hervorgehoben.</para>
+         </listitem>
+      </itemizedlist>
+      <para>Use 
+         <link linkend="menus.edit" endterm="menus.edit.title"/>
+         <link linkend="menus.edit.replace.with.mt.title" endterm="menus.edit.replace.with.mt.title"/> to replace the translation of
+         the current segment with the selected translation engine.</para>
+      <para>Der ausgewählte Dienst wird der <parameter>Herkunft</parameter>-Eigenschaft des aktiven Segments zugewiesen.</para>
+      <para>Wenn ein Verbindungs- oder Authentifizierungsfehler mit einem maschinellen Übersetzungsdienst auftritt, wird in der Statusleiste am unteren Rand des Fensters kurz eine Statusmeldung angezeigt.</para>
+      <para>Vergewissern Sie sich, dass der Dienst aktiviert ist und dass Sie Ihre Zugangsdaten korrekt eingegeben haben. Wenn dies der Fall ist und der Dienst immer noch nicht funktioniert, müssen Sie sich an den Anbieter des Dienstes wenden. Ein Fehler wie <literal>Unable to parse translation service response</literal> deutet auf ein Kommunikationsproblem zwischen Ihrem System und dem Server des Anbieters hin.</para>
+      <para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> (Einstellungen).</para>
+   </section>
+   <section xml:id="panes.multipletranslations">
+      <title xml:id="panes.multipletranslations.title"><guilabel>Mehrere Übersetzungen</guilabel></title>
+      <para>Ein Quelltext, der an mehreren Stellen im Projekt vorkommt, kann je nach Kontext mehrere verschiedene Übersetzungen erfordern.</para>
+      <para>Use <link endterm="menus.edit.title" linkend="menus.edit"/> <link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/> to register an alternative translation if the current translation of the segment is not suitable. Die eingegebene Übersetzung wird dann als alternative Übersetzung des Quelltextes behandelt.</para>
+      <para>Use 
+         <link endterm="menus.edit.title" linkend="menus.edit"/>
+         <link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/> to define one of the
+         alternatives—the most common or likely, for instance—as the default
+         translation.</para>
+   </section>
+   <section xml:id="panes.notes">
+      <title xml:id="panes.notes.title"><guilabel>Notizblock</guilabel></title>
+      <para>Dieser Fensterbereich ist ein <emphasis>editierbares</emphasis> Feld, mit dem Sie Notizen zum gerade aktiven Segment hinzufügen können.</para>
+      <para>Sie können später darauf zurückgreifen, um die Übersetzung zu kontrollieren, die Richtigkeit alternativer Übersetzungen zu prüfen oder die Meinung von Kollegen einzuholen, z.B. bei gemeinsam genutzten Projekten.</para>
+      <para>Use 
+         <link endterm="menus.goto.title" linkend="menus.goto"/>
+         <link endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/> and
+         	
+         <link endterm="menus.goto.title" linkend="menus.goto"/>
+         <link endterm="menus.goto.previous.note.title" linkend="menus.goto.previous.note"/> to browse through the notes.</para>
+      <para>Use 
+         <link linkend="menus.goto" endterm="menus.goto.title"/>
+         <link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> to
+         	enter the pane and add or modify a note.</para>
+      <para>Use 
+         <link linkend="menus.goto" endterm="menus.goto.title"/>
+         <link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> to
+         	go back to the Editor.</para>
+      <note>
+         <para>Die Notizen werden in den Translation Memory des Projekts gespeichert. Sie werden <emphasis>nicht</emphasis> in den übersetzten Dateien gespeichert.</para>
+      </note>
+   </section>
+   <section xml:id="panes.comments">
+      <title xml:id="panes.comments.title"><guilabel>Kommentare</guilabel></title>
+      <para>Einige Dateiformate, wie z.B. das PO-Format, können Kommentare enthalten, mit denen der Übersetzer Kontext für die Übersetzung hinzufügen kann. Diese Kommentare werden hier angezeigt.</para>
+      <note>
+         <para>Der Fensterbereich &quot;<guilabel>Kommentare</guilabel>&quot; ist <emphasis>nicht</emphasis> editierbar. Er zeigt nur die in der Datei enthaltenen Informationen an.</para>
+         <para>Verwenden Sie den Fensterbereich <link endterm="panes.notes.title" linkend="panes.notes"/>, um eigene Kommentare zu einer Übersetzung hinzuzufügen.</para>
+      </note>
+   </section>
+   <section xml:id="panes.segment.properties">
+      <title xml:id="panes.segment.properties.title"><guilabel>Segmenteigenschaften</guilabel></title>
+      <para>Alle Segmente haben Eigenschaften. Die Eigenschaften werden in diesem Fensterbereich angezeigt.</para>
+      <para>Zu den üblichen Eigenschaften gehören:</para>
+      <variablelist>
+         <varlistentry>
+            <term>Ist mehrmalig</term>
+            <listitem>
+               <para>Gibt an, dass ein Segment mehrfach vorkommt und ob es das erste Segment (FIRST) ist.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Datei</term>
+            <listitem>
+               <para>Gibt an, in welcher Datei das Segment enthalten ist.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+      <note>
+         <para>Der Fensterbereich &quot;Segmenteigenschaften&quot; ist <emphasis>nicht</emphasis> editierbar. Er zeigt nur Informationen über das Segment an.</para>
+      </note>
+   </section>
+   <section xml:id="panes.statusbar">
+      <title xml:id="panes.statusbar.title"><guilabel>Statusleiste</guilabel></title>
+      <para>Der untere Teil des Hauptfensters ist die Statusleiste.</para>
+      <para>Die linke Seite der Statusleiste zeigt Fehlermeldungen oder projektbezogene Aktionen.</para>
+      <example xml:id="panes.statusbar.messages">
+         <title xml:id="panes.statusbar.messages.title">Beispiele für Meldungen in der Statusleiste</title>
+         <para>
+            <literal>Synchronisiere Repositories</literal>
+         </para>
+         <para>→ OmegaT öffnet ein Teamprojekt und synchronisiert sich mit dem Remote-Repository.</para>
+         <para>
+            <literal>Springe zum zuletzt bearbeiteten Segment...</literal>
+         </para>
+         <para>→ OmegaT öffnet das zuletzt bearbeitete Segment der letzten Sitzung.</para>
+         <para>
+            <literal>Projekt automatisch gespeichert um 15:19</literal>
+         </para>
+         <para>→ OmegaT hat das Projekt kürzlich gespeichert.</para>
+         <para>
+            <literal>Übersetzte Dateien wurden erstellt</literal>
+         </para>
+         <para>→ Die Dateien wurden vom Benutzer erstellt.</para>
+      </example>
+      <para>Die rechte Seite der Statusleiste gibt an, ob der Textcursor auf das Segment beschränkt ist (siehe die Einstellung <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) und ob der Textcursor den vorhandenen Text überschreibt (siehe die Einstellung <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). Außerdem werden Fortschrittsinformationen angezeigt.</para>
+      <para>Klicken Sie auf die Zahlen, um zwischen der numerischen und der prozentualen Fortschrittsanzeige umzuschalten.</para>
+      <example xml:id="panes.statusbar.widgets">
+         <title xml:id="panes.statusbar.widgets.title">Statusleisteninformationen</title>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
+         <variablelist>
+            <varlistentry>
+               <term>Textcursorstatus</term>
+               <listitem>
+                  <para>
+                     <literal>LCK</literal> bedeutet, dass der Textcursor auf das Segment beschränkt ist.</para>
+                  <para>
+                     <literal>OVR</literal> bedeutet, dass der Textcursor den vorhandenen Text überschreibt.</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>In der Datei</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">257</emphasis> = Anzahl übersetzter Segmente / <emphasis role="bold">271</emphasis> = Gesamtzahl der Segmente</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>Im Projekt</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">12292</emphasis> = Anzahl einmalig übersetzter Segmente / <emphasis role="bold">154896</emphasis> = Gesamtzahl einmaliger Segmente, <emphasis role="bold">(177692)</emphasis> = Gesamtzahl der Segmente</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>Im Segment</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">35</emphasis> = Anzahl der Zeichen im Quelltext / <emphasis role="bold">0</emphasis> = Anzahl der Zeichen im Zieltext</para>
+               </listitem>
+            </varlistentry>
+         </variablelist>
+      </example>
+      <example xml:id="panes.statusbar.widgets.percentage">
+         <title xml:id="panes.statusbar.widgets.percentage.title">Statusleisteninformationen, Prozentual</title>
+	  <para><literal>UNL | INS <token>94,8% (14 verbleibend) / 7,9% (142.604 verbleibend), 177.692</token> <token>35/0</token></literal></para>
+         <variablelist>
+            <varlistentry>
+               <term>Textcursorstatus</term>
+               <listitem>
+                  <para>
+                     <literal>UNL</literal> zeigt an, dass der Textcursor auch außerhalb des Übersetzungsfeldes verwendet werden darf.</para>
+                  <para>
+                     <literal>INS</literal> zeigt an, dass der Textcursor den Eingabetext einfügt.</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>In der Datei</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">94,8%</emphasis> = % übersetzter Segmente / <emphasis role="bold">14</emphasis> = Anzahl unübersetzter Segmente</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>Im Projekt</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">7,9%</emphasis> = % übersetzter Segmente / <emphasis role="bold">142.604</emphasis> = Anzahl unübersetzter Segmente, <emphasis role="bold">(177.692)</emphasis> = Gesamtzahl der Segmente</para>
+               </listitem>
+            </varlistentry>
+            <varlistentry>
+               <term>Im Segment</term>
+               <listitem>
+                  <para>
+                     <emphasis role="bold">35</emphasis> = Anzahl der Zeichen im Quelltext / <emphasis role="bold">0</emphasis> = Anzahl der Zeichen im Zieltext</para>
+               </listitem>
+            </varlistentry>
+         </variablelist>
+      </example>
+   </section>
+</chapter>

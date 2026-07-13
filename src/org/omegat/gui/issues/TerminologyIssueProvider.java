@@ -78,11 +78,19 @@ class TerminologyIssueProvider implements IIssueProvider {
         if (glossaryEntries.isEmpty()) {
             return Collections.emptyList();
         }
-        return glossaryEntries.stream().map(glossaryEntry -> {
-            List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
-                    sourceEntry.getProtectedParts(), glossaryEntry);
-            return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, glossaryEntry) : null;
-        }).filter(Objects::nonNull).collect(Collectors.toList());
+        return glossaryEntries.stream()
+                .filter(TerminologyIssueProvider::hasNonEmptyTargetTerms)
+                .map(glossaryEntry -> {
+                    List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
+                            sourceEntry.getProtectedParts(), glossaryEntry);
+                    return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, glossaryEntry) : null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    private static boolean hasNonEmptyTargetTerms(GlossaryEntry entry) {
+        return Arrays.stream(entry.getLocTerms(false)).anyMatch(t -> !t.isEmpty());
     }
 
     /**

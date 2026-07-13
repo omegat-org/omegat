@@ -38,6 +38,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -125,9 +126,11 @@ public class ProjectTMX {
             // file not exist - new project
             return;
         }
-        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, true,
-                true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
-                new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
+        TMXReader2.Builder tmxReaderBuilder = new TMXReader2.Builder();
+        TMXReader2.LoadCallback cb = new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled);
+        TMXReader2 reader = tmxReaderBuilder.setNeedValidate(false).setSegmentingEnabled(isSentenceSegmentingEnabled)
+                .setExtTmxLevel2(true).setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH)).build();
+        reader.readTMX(file, sourceLanguage, targetLanguage, cb);
     }
 
     /**
@@ -448,6 +451,11 @@ public class ProjectTMX {
         return defaults.values();
     }
 
+    @VisibleForTesting
+    public Collection<String> getDefaultKeys() {
+        return defaults.keySet();
+    }
+
     /**
      * Returns the collection of TMX entries that have an alternative
      * translation.
@@ -456,6 +464,11 @@ public class ProjectTMX {
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
+    }
+
+    @VisibleForTesting
+    public Collection<EntryKey> getAlternativeKeys() {
+        return alternatives.keySet();
     }
 
     /**

@@ -26,10 +26,12 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
-import java.text.DateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -128,41 +130,51 @@ public final class ModificationInfoManager {
 
     public static class ModificationInfoVarExpansion extends VarExpansion<TMXEntry> {
 
-        private final DateFormat dateFormat;
-        private final DateFormat dateFormatCountry;
-        private final DateFormat dateFormatShort;
-        private final DateFormat dateFormatShortCountry;
-        private final DateFormat timeFormat;
-        private final DateFormat timeFormatCountry;
-        private final DateFormat timeFormatShort;
-        private final DateFormat timeFormatShortCountry;
+        private final DateTimeFormatter dateFormat;
+        private final DateTimeFormatter dateFormatCountry;
+        private final DateTimeFormatter dateFormatShort;
+        private final DateTimeFormatter dateFormatShortCountry;
+        private final DateTimeFormatter timeFormat;
+        private final DateTimeFormatter timeFormatCountry;
+        private final DateTimeFormatter timeFormatShort;
+        private final DateTimeFormatter timeFormatShortCountry;
 
         public ModificationInfoVarExpansion(String template) {
             super(template);
 
+            ZoneId zone = ZoneId.systemDefault();
             Locale defaultLocale = Locale.getDefault();
-            dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
-            dateFormatShort = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
-            timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
-            timeFormatShort = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
+            dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(defaultLocale)
+                    .withZone(zone);
+            dateFormatShort = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(defaultLocale)
+                    .withZone(zone);
+            timeFormat = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(defaultLocale)
+                    .withZone(zone);
+            timeFormatShort = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(defaultLocale)
+                    .withZone(zone);
 
+            Locale countryLocale = defaultLocale;
             Locale[] locales = Locale.getAvailableLocales();
             for (Locale l : locales) {
                 if (l.getCountry().equals(defaultLocale.getCountry())) {
-                    defaultLocale = l;
+                    countryLocale = l;
                     break;
                 }
             }
-            dateFormatCountry = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
-            dateFormatShortCountry = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
-            timeFormatCountry = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
-            timeFormatShortCountry = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
+            dateFormatCountry = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(countryLocale)
+                    .withZone(zone);
+            dateFormatShortCountry = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+                    .withLocale(countryLocale).withZone(zone);
+            timeFormatCountry = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(countryLocale)
+                    .withZone(zone);
+            timeFormatShortCountry = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
+                    .withLocale(countryLocale).withZone(zone);
         }
 
         @Override
         public String expandVariables(TMXEntry trans) {
-            Date creationDate = new Date(trans.creationDate);
-            Date changeDate = new Date(trans.changeDate);
+            Instant creationDate = Instant.ofEpochMilli(trans.creationDate);
+            Instant changeDate = Instant.ofEpochMilli(trans.changeDate);
 
             // do not modify template directly, so that we can reuse for another change
             String localTemplate = this.template;

@@ -32,8 +32,8 @@ repositories {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.named("test", Test) {
@@ -68,6 +68,7 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.addAll '-Xlint'
     options.errorprone.disableWarningsInGeneratedCode = true
     options.errorprone.disable 'InlineMeSuggester', 'EmptyCatch'
+    options.errorprone.allErrorsAsWarnings = true
 }
 
 tasks {

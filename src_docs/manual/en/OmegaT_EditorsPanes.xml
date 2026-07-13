@@ -343,7 +343,7 @@
    <programlisting>— ¶ —————————————————————
 
 <token>Hide Tags</token>
-|Dissimuler les balises<token>&lt;segment 2148 ¶&gt;</token>
+|Dissimuler les balises<token>&lt;segment 2148 ¶></token>
 
 — ¶ —————————————————————
 
@@ -406,7 +406,23 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </itemizedlist>
       <note>
          <para>Modify the Editor display to suit your workflow.</para>
-         <!--   <example id="panes.editor.modified.editor.target.field"> --><!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified --><!--         editor writing space</title> --><!-- 	<para> --><!-- 	  <programlisting>— ¶ ————————————————————— --><!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM --><!-- <token>Hide Ta&amp;gs</token> --><!-- <token>Dissi&amp;muler les balises</token> --><!-- — ¶ ————————————————————— --><!-- <token>External Post-processing Command:</token> --><!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> --><!-- — ¶ —————————————————————</programlisting></para> --><!--   </example> -->
+         <!--   <example id="panes.editor.modified.editor.target.field"> -->
+         <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+         <!--         editor writing space</title> -->
+         <!-- 	<para> -->
+         <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+         <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+         <!-- <token>Hide Ta&amp;gs</token> -->
+         <!-- <token>Dissi&amp;muler les balises</token> -->
+
+         <!-- — ¶ ————————————————————— -->
+
+         <!-- <token>External Post-processing Command:</token> -->
+         <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+         <!-- — ¶ —————————————————————</programlisting></para> -->
+         <!--   </example> -->
          <para>Modifications can include:</para>
          <itemizedlist>
             <listitem>
@@ -685,9 +701,14 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>— ¶ —————————————————————&#10;&#10;<token>Application Folder</token>&#10;| <token>&lt;segment 1879 ¶&gt;</token>&#10;— ¶ —————————————————————</programlisting>
-                                          </entry>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segment 1879 ¶></token>
+
+— ¶ —————————————————————
+</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -701,9 +722,13 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>1. <token>Top</token> Folder&#10;Dossier racine&#10;&lt;50/50/66% Orphan segments (+1 more)&gt;&#10;2. Configuration Folder&#10;Dossier de configuration&#10;&lt;50/50/66% &gt;</programlisting>
-                                         </entry>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Dossier racine
+&lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -723,8 +748,25 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
          parts in 
          <emphasis role="bold">green</emphasis> (when the adjacent part is a
          space, as above, the part is left uncolored).</para>
-      <para>The match also displays three matching percentages.</para>
-      <para>These percentages have the following meaning, in order:</para>
+      <para>The match also displays three matching percentages, the origin of the
+      match and how many times is the match repeated in the matching data.</para>
+    
+      <para>When a match comes from the project memory, its origin is only specified in
+      two cases:</para>
+    
+      <itemizedlist>
+         <listitem>
+            <para>If the matching segment is no longer present in the files located in the
+            source folder, it is labeled <emphasis role="bold">Orphan segment</emphasis>.</para>
+         </listitem>
+         <listitem>
+            <para>If the matching segment exists in the files located in the source folder,
+            as well as in other reference memories, it is labeled <emphasis role="bold">This
+            project</emphasis>.</para>
+         </listitem>
+      </itemizedlist>
+
+      <para>The matching percentages have the following meaning, in order:</para>
       <itemizedlist>
          <listitem>
             <para>Percentage calculated 
@@ -775,11 +817,10 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       <example xml:id="glossary.matches">
          <title xml:id="glossary.matches.title">Glossary matches</title>
          <para>
-<programlisting>Project = <token>Projet</token>
+            <programlisting>Project = <token>Projet</token>
 1. Projet de traduction
 
-Folder = <token>Dossier</token>
-</programlisting>
+Folder = <token>Dossier</token></programlisting>
             	  </para>
       </example>
       <para>The glossary file name is shown as a tooltip when hovering over the
@@ -981,13 +1022,8 @@ Folder = <token>Dossier</token>
          percentages.</para>
       <example xml:id="panes.statusbar.widgets">
          <title xml:id="panes.statusbar.widgets.title">Status bar information</title>
-         <para>
-            <literal>LCK | OVR 
-               <token>257/271 (12292/154896,
-                  	  177692)</token>
-               <token> 35/0 </token>
-            </literal>
-         </para>
+	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
+	  177692)</token><token> 35/0 </token></literal></para>
          <variablelist>
             <varlistentry>
                <term>Cursor status</term>
@@ -1037,13 +1073,8 @@ Folder = <token>Dossier</token>
       <example xml:id="panes.statusbar.widgets.percentage">
          <title xml:id="panes.statusbar.widgets.percentage.title">Status bar
       information, percentage mode</title>
-         <para>
-            <literal>UNL | INS 
-               <token>94.8% (14 left) / 7.9% (142,604 left),
-                  	  177,692</token> 
-               <token>35/0</token>
-            </literal>
-         </para>
+	  <para><literal>UNL | INS <token>94.8% (14 left) / 7.9% (142,604 left),
+	  177,692</token> <token>35/0</token></literal></para>
          <variablelist>
             <varlistentry>
                <term>Cursor status</term>

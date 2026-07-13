@@ -13,7 +13,7 @@ import org.gradle.api.tasks.*
 import org.gradle.api.tasks.options.Option
 
 @CompileStatic
-class WhcTask extends AbstractDocumentTask {
+abstract class WhcTask extends AbstractDocumentTask {
 
     @InputFiles
     final Provider<FileTree> contentFiles = project.objects.property(FileTree)

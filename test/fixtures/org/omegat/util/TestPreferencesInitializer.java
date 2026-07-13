@@ -66,7 +66,12 @@ public final class TestPreferencesInitializer {
     public static synchronized void init(String configDir) {
         TestRuntimePreferenceStore.reset();
         TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
-        Preferences.init();
+        // Install a fresh, isolated preferences store for this test. Preferences
+        // builds its store only once per JVM, so without this every test after
+        // the first would share (and inherit the mutations of) whatever store the
+        // first test created. Injecting a TestPreferences gives each test a clean
+        // store and prevents preference state from leaking across the suite.
+        Preferences.setPreferences(new TestPreferences());
         Preferences.initFilters();
         Preferences.initSegmentation();
     }

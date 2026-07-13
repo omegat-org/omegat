@@ -59,6 +59,19 @@
                </note>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.preferences.general.show.source.files.progress">
+            <term xml:id="dialogs.preferences.general.show.source.files.progress.title">
+               <option>Show Source Files progress</option>
+            </term>
+            <listitem>
+               <para>Displays a
+                  <guilabel>Progress</guilabel> column in the
+                  <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
+                  window and shows the overall project progress in the totals
+                  area. The progress is calculated from translated unique
+                  segments.</para>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="dialogs.preferences.mt">
@@ -376,6 +389,9 @@
          <title xml:id="dialogs.preferences.colours.title"><guilabel>Colours</guilabel></title>
          <para>You can assign different colours for the various parts of the user
             interface.</para>
+         <para>The Source Files progress colours shown in the
+            <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
+            window can also be changed here.</para>
          <para>Scripts can be used to set predefined themes. OmegaT is bundled with
             a script called 
             <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"></link> that
@@ -856,8 +872,8 @@
                   Use this option if you prefer to enter segments with a single-click.</para>
                <note>
                   <para>If the cursor is unlocked, neither single-clicking nor double-clicking can be used
-                     to enter the segment. See the 
-                     <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"></link> setting.</para>
+                     to enter the segment. See 
+                     <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"></link> to lock or unlock the cursor.</para>
                </note>
             </listitem>
          </varlistentry>
@@ -938,7 +954,7 @@
                   		  time can be marked in the 
                   <guilabel>Editor</guilabel> pane by using
                   		  
-                  <link linkend="menus.view" endterm="menus.view.title"></link>.
+                  <link linkend="menus.view" endterm="menus.view.title"></link>
                   <link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"></link>.</para>
                <para>See the 
                   <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"></link> how-to for details.</para>
@@ -1188,10 +1204,12 @@
                   <programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}&#10;&lt;${score}/${noStemScore}/${adjustedScore}%${filePath}&gt;</programlisting>
                </para>
                <para>Here is a possible alternative:</para>
-               <para>
-                  			
-                  <programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}&#10;[NEW]▷ ${diff}&#10;&#10;[OLD]◀ ${diffReversed}&#10;     ◀ ${targetText}</programlisting>
-               </para>
+		  <para>
+			<programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%> ${fuzzyFlag} ${fileNameOnly}
+[NEW]▷ ${diff}
+			
+[OLD]◀ ${diffReversed}
+◀ ${targetText}</programlisting></para>
                <para>The template variables are also available from a drop-down menu
                   		  and can be inserted with a button.</para>
                <table xml:id="table.match.pane.setup" colsep="0" rowsep="0">

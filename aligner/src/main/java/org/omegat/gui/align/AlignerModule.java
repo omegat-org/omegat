@@ -58,7 +58,7 @@ public final class AlignerModule implements IApplicationEventListener {
      */
     @SuppressWarnings("unused")
     public static void loadPlugins() {
-        Core.registerConsoleCommand("Align", AlignCommand.class);
+        Core.registerConsoleCommand("Align", AlignerCommand.class);
         alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
     }
@@ -203,7 +203,7 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param srcRoot
      *            The root directory containing the source files to be aligned.
      */
-    public static void alignerShow(String srcRoot) {
+    public static void alignerShow(@Nullable String srcRoot) {
         new AlignerModule().alignerShow(null, null, null, null, srcRoot, null);
     }
 }

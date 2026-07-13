@@ -285,6 +285,37 @@ public class NumberAutoConverterTest {
     }
 
     @Test
+    public void groupingOptionAppliesToCurrency() {
+        NumberAutoConverter.RenderOptions.Style keepStyle = NumberAutoConverter.RenderOptions.Style.ORIGINAL;
+        NumberAutoConverter.RenderOptions.Fraction keepFrac = NumberAutoConverter.RenderOptions.Fraction.ORIGINAL;
+        Conversion never = first("20.456,23 €", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.NEVER, keepFrac,
+                        keepStyle));
+        assertEquals(DataType.CURRENCY, never.getType());
+        assertEquals("€20456.23", never.getTarget());
+        Conversion always = first("20456,23 €", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ALWAYS, keepFrac,
+                        keepStyle));
+        assertEquals("€20,456.23", always.getTarget());
+        // ORIGINAL mirrors the ungrouped source.
+        Conversion original = first("20456,23 €", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ORIGINAL, keepFrac,
+                        keepStyle));
+        assertEquals("€20456.23", original.getTarget());
+    }
+
+    @Test
+    public void groupingOptionAppliesToPercent() {
+        NumberAutoConverter.RenderOptions.Style keepStyle = NumberAutoConverter.RenderOptions.Style.ORIGINAL;
+        NumberAutoConverter.RenderOptions.Fraction keepFrac = NumberAutoConverter.RenderOptions.Fraction.ORIGINAL;
+        Conversion never = first("20.456 %", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.NEVER, keepFrac,
+                        keepStyle));
+        assertEquals(DataType.PERCENT, never.getType());
+        assertEquals("20456%", never.getTarget());
+    }
+
+    @Test
     public void fractionOptionOverridesSource() {
         Conversion two = first("1,5", DE, EN,
                 new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ORIGINAL,

@@ -638,6 +638,8 @@ public final class NumberAutoConverter {
         int fractionDigits = fractionFor(opts.getFraction(), sourceFractionDigits(s, src));
         renderer.setMinimumFractionDigits(fractionDigits);
         renderer.setMaximumFractionDigits(fractionDigits);
+        char grouping = DecimalFormatSymbols.getInstance(src).getGroupingSeparator();
+        renderer.setGroupingUsed(groupingFor(opts.getGrouping(), s.indexOf(grouping) >= 0));
         return Optional.of(base(DataType.PERCENT, renderer.format(value), "PERCENT", 0.85));
     }
 
@@ -660,6 +662,10 @@ public final class NumberAutoConverter {
         int fractionDigits = fractionFor(opts.getFraction(), sourceFractionDigits(s, src));
         renderer.setMinimumFractionDigits(fractionDigits);
         renderer.setMaximumFractionDigits(fractionDigits);
+        // Amounts use the monetary grouping separator, which some locales
+        // distinguish from the plain numeric one.
+        char grouping = DecimalFormatSymbols.getInstance(src).getMonetaryGroupingSeparator();
+        renderer.setGroupingUsed(groupingFor(opts.getGrouping(), s.indexOf(grouping) >= 0));
         String rendered = renderer.format(amount.getNumber());
         return Optional.of(base(DataType.CURRENCY, rendered, "CURRENCY", 0.8));
     }

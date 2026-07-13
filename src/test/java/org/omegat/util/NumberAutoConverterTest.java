@@ -352,6 +352,18 @@ public class NumberAutoConverterTest {
     }
 
     @Test
+    public void foreignSeparatorLowersConfidence() {
+        // The apostrophe is not a German separator; the lenient parse of the
+        // Swiss-style "99'999" is a guess and must cost confidence.
+        Conversion foreign = top("99'999", DE, EN);
+        assertNotNull(foreign);
+        assertTrue(foreign.getFactors().stream().anyMatch(f -> "FOREIGN_SEPARATOR".equals(f.getId())));
+        // The locale's own separators stay unpenalized.
+        Conversion own = top("1.000,50", DE, EN);
+        assertTrue(own.getFactors().stream().noneMatch(f -> "FOREIGN_SEPARATOR".equals(f.getId())));
+    }
+
+    @Test
     public void parsedSourceValueIsExposedForConsistentSorting() {
         // "99'999" (Swiss-style grouping accepted by the lenient de parser)
         // must expose 99999 as its numeric value, so numeric sorting agrees
@@ -468,8 +480,10 @@ public class NumberAutoConverterTest {
         java.util.Set<String> expectedEmpty = new java.util.HashSet<>(
                 java.util.Arrays.asList("fmt-cur-usd", "fmt-sci"));
 
-        File xliff = new File("test/data/editor/sort/numeric-sort-demo.xliff");
-        assertTrue("fixture missing: " + xliff.getAbsolutePath(), xliff.isFile());
+        // Resolved from the test classpath so tree reorganizations cannot break it.
+        java.net.URL fixture = getClass().getResource("/data/editor/sort/numeric-sort-demo.xliff");
+        assertNotNull("fixture missing on test classpath", fixture);
+        File xliff = new File(fixture.toURI());
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xliff);
         NodeList units = doc.getElementsByTagName("trans-unit");
 

@@ -394,6 +394,11 @@ public final class NumberAutoConverter {
                 factors.add(same ? new ConfidenceFactor("VALUE_SAME", 0.03)
                         : new ConfidenceFactor("VALUE_DIFF", -0.10));
             }
+            // A separator the source locale does not use ("99'999" in de) was
+            // accepted leniently; the author may have meant something else.
+            if (hasForeignSeparator(folded, src)) {
+                factors.add(new ConfidenceFactor("FOREIGN_SEPARATOR", -0.05));
+            }
             break;
         default:
             break;
@@ -460,6 +465,33 @@ public final class NumberAutoConverter {
         String g = java.util.regex.Pattern.quote(String.valueOf(grouping));
         String d = java.util.regex.Pattern.quote(String.valueOf(decimal));
         return !core.toString().matches("\\d{1,3}(?:" + g + "\\d{3})+(?:" + d + "\\d+)?");
+    }
+
+    /**
+     * Characters that group or punctuate digits in some locale. Whitespace is
+     * excluded: it appears legitimately between value and unit symbol, and
+     * space-grouped digit runs are rejected before conversion anyway.
+     */
+    // . , ' right single quote, modifier apostrophe, middle dot, Arabic
+    // decimal and thousands separators
+    private static final String SEPARATOR_CANDIDATES = ".,'\u2019\u02BC\u00B7\u066B\u066C";
+
+    /**
+     * A separator-like character the source locale uses neither for grouping
+     * nor as decimal mark ("99'999" in de) means the author followed another
+     * locale's convention; the lenient parse may not match the intent.
+     */
+    private static boolean hasForeignSeparator(String folded, ULocale src) {
+        DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(src);
+        String own = "" + symbols.getGroupingSeparator() + symbols.getDecimalSeparator()
+                + symbols.getMonetaryGroupingSeparator() + symbols.getMonetaryDecimalSeparator();
+        for (int i = 0; i < folded.length(); i++) {
+            char c = folded.charAt(i);
+            if (SEPARATOR_CANDIDATES.indexOf(c) >= 0 && own.indexOf(c) < 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

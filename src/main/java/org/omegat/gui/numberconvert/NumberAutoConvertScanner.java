@@ -77,6 +77,20 @@ public final class NumberAutoConvertScanner {
         public double getConfidence() {
             return conversion.getConfidence();
         }
+
+        /** The named contributions that make up the confidence (base first). */
+        public java.util.List<NumberAutoConverter.ConfidenceFactor> getConfidenceFactors() {
+            return conversion.getFactors();
+        }
+
+        /**
+         * The numeric value parsed from the source in the source locale, when
+         * the data type has one. Numeric sorting must use this value so it
+         * agrees with the value-preservation heuristic.
+         */
+        public Optional<Double> getNumericValue() {
+            return conversion.getSourceValue();
+        }
     }
 
     /**
@@ -105,7 +119,18 @@ public final class NumberAutoConvertScanner {
      */
     public static Optional<Proposal> propose(int segmentNumber, String source, Locale sourceLocale,
             Locale targetLocale, Set<DataType> types, boolean allowRoman) {
-        return NumberAutoConverter.convert(source, sourceLocale, targetLocale, types, allowRoman).stream()
-                .findFirst().map(c -> new Proposal(segmentNumber, source, c));
+        return propose(segmentNumber, source, sourceLocale, targetLocale, types, allowRoman,
+                NumberAutoConverter.RenderOptions.DEFAULTS);
+    }
+
+    /**
+     * As {@link #propose(int, String, Locale, Locale, Set, boolean)}, but with
+     * explicit rendering options for the proposal.
+     */
+    public static Optional<Proposal> propose(int segmentNumber, String source, Locale sourceLocale,
+            Locale targetLocale, Set<DataType> types, boolean allowRoman,
+            NumberAutoConverter.RenderOptions options) {
+        return NumberAutoConverter.convert(source, sourceLocale, targetLocale, types, allowRoman, options)
+                .stream().findFirst().map(c -> new Proposal(segmentNumber, source, c));
     }
 }

@@ -28,8 +28,11 @@ package org.omegat.util;
 import java.math.BigInteger;
 import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -88,16 +91,93 @@ public final class NumberAutoConverter {
         INTEGER, DECIMAL, PERCENT, CURRENCY, DATE, TIME, ORDINAL
     }
 
+    /**
+     * How a matched value is rendered into the target. Every choice defaults to
+     * mirroring the source, so the defaults reproduce the source's own format.
+     */
+    public static final class RenderOptions {
+        public enum Grouping {
+            ORIGINAL, NEVER, ALWAYS
+        }
+
+        public enum Fraction {
+            ORIGINAL, ZERO, ONE, TWO
+        }
+
+        /** Notation style, applied to dates, times and ordinals. */
+        public enum Style {
+            ORIGINAL, SHORT, MEDIUM, LONG, SPELLOUT
+        }
+
+        public static final RenderOptions DEFAULTS =
+                new RenderOptions(Grouping.ORIGINAL, Fraction.ORIGINAL, Style.ORIGINAL);
+
+        private final Grouping grouping;
+        private final Fraction fraction;
+        private final Style style;
+
+        public RenderOptions(Grouping grouping, Fraction fraction, Style style) {
+            this.grouping = grouping;
+            this.fraction = fraction;
+            this.style = style;
+        }
+
+        public Grouping getGrouping() {
+            return grouping;
+        }
+
+        public Fraction getFraction() {
+            return fraction;
+        }
+
+        public Style getStyle() {
+            return style;
+        }
+    }
+
+    /** One named contribution to a conversion's confidence. */
+    public static final class ConfidenceFactor {
+        private final String id;
+        private final double delta;
+
+        ConfidenceFactor(String id, double delta) {
+            this.id = id;
+            this.delta = delta;
+        }
+
+        /** Stable identifier (a bundle-key suffix), e.g. "INTEGER", "IDENTICAL". */
+        public String getId() {
+            return id;
+        }
+
+        /** Signed contribution to the confidence; the first factor is the base. */
+        public double getDelta() {
+            return delta;
+        }
+    }
+
     /** A single conversion proposal for one data type. */
     public static final class Conversion {
         private final DataType type;
         private final String target;
         private final double confidence;
+        private final List<ConfidenceFactor> factors;
+        private final Double sourceValue;
 
         Conversion(DataType type, String target, double confidence) {
+            this(type, target, Collections.singletonList(new ConfidenceFactor(type.name(), confidence)), null);
+        }
+
+        Conversion(DataType type, String target, List<ConfidenceFactor> factors, Double sourceValue) {
             this.type = type;
             this.target = target;
-            this.confidence = confidence;
+            this.sourceValue = sourceValue;
+            this.factors = Collections.unmodifiableList(new ArrayList<>(factors));
+            double sum = 0.0;
+            for (ConfidenceFactor f : factors) {
+                sum += f.getDelta();
+            }
+            this.confidence = Math.max(0.0, Math.min(1.0, sum));
         }
 
         public DataType getType() {
@@ -114,10 +194,29 @@ public final class NumberAutoConverter {
             return confidence;
         }
 
+        /** The named contributions that make up the confidence (base first). */
+        public List<ConfidenceFactor> getFactors() {
+            return factors;
+        }
+
+        /**
+         * The numeric value parsed from the source in the source locale, when
+         * the data type has one (integer, decimal, percent, currency). Numeric
+         * sorting must use this so it agrees with the value heuristics.
+         */
+        public Optional<Double> getSourceValue() {
+            return Optional.ofNullable(sourceValue);
+        }
+
         @Override
         public String toString() {
             return type + "=" + target + " (" + confidence + ")";
         }
+    }
+
+    private static Conversion base(DataType type, String target, String baseId, double value) {
+        return new Conversion(type, target, Collections.singletonList(new ConfidenceFactor(baseId, value)),
+                null);
     }
 
     /**
@@ -157,6 +256,15 @@ public final class NumberAutoConverter {
      */
     public static List<Conversion> convert(String source, Locale sourceLocale, Locale targetLocale,
             Set<DataType> types, boolean allowRoman) {
+        return convert(source, sourceLocale, targetLocale, types, allowRoman, RenderOptions.DEFAULTS);
+    }
+
+    /**
+     * As {@link #convert(String, Locale, Locale, Set, boolean)}, but with
+     * explicit rendering options for the proposal.
+     */
+    public static List<Conversion> convert(String source, Locale sourceLocale, Locale targetLocale,
+            Set<DataType> types, boolean allowRoman, RenderOptions options) {
         List<Conversion> out = new ArrayList<>();
         if (source == null || types == null || types.isEmpty()) {
             return out;
@@ -178,29 +286,29 @@ public final class NumberAutoConverter {
         // German "3.") is not simultaneously offered as a bare integer or
         // decimal, which would be noise.
         Optional<Conversion> ordinal =
-                types.contains(DataType.ORDINAL) ? tryOrdinal(cleaned, src, tgt) : Optional.empty();
+                types.contains(DataType.ORDINAL) ? tryOrdinal(cleaned, src, tgt, options) : Optional.empty();
         boolean ordinalWins = ordinal.isPresent();
 
         for (DataType t : types) {
             Optional<Conversion> c;
             switch (t) {
             case INTEGER:
-                c = ordinalWins ? Optional.empty() : tryInteger(folded, tgt, allowRoman);
+                c = ordinalWins ? Optional.empty() : tryInteger(folded, tgt, allowRoman, options);
                 break;
             case DECIMAL:
-                c = ordinalWins ? Optional.empty() : tryDecimal(folded, src, tgt);
+                c = ordinalWins ? Optional.empty() : tryDecimal(folded, src, tgt, options);
                 break;
             case PERCENT:
-                c = tryPercent(folded, src, tgt);
+                c = tryPercent(folded, src, tgt, options);
                 break;
             case CURRENCY:
-                c = tryCurrency(folded, src, tgt);
+                c = tryCurrency(folded, src, tgt, options);
                 break;
             case DATE:
-                c = tryDate(folded, src, tgt);
+                c = tryDate(folded, src, tgt, options);
                 break;
             case TIME:
-                c = tryTime(folded, src, tgt);
+                c = tryTime(folded, src, tgt, options);
                 break;
             case ORDINAL:
                 c = ordinal;
@@ -208,28 +316,257 @@ public final class NumberAutoConverter {
             default:
                 c = Optional.empty();
             }
-            c.map(conv -> bumpIfIdentical(conv, source)).ifPresent(out::add);
+            c.map(conv -> adjustConfidence(conv, source, folded, src, tgt)).ifPresent(out::add);
         }
         out.sort((a, b) -> Double.compare(b.confidence, a.confidence));
         return out;
     }
 
     /**
-     * A conversion whose rendering is identical to the source is a safe no-op,
-     * so it earns a small confidence bonus (capped at 1.0).
+     * Adjust a conversion's confidence with content- and culture-aware
+     * heuristics. Safe transformations gain confidence; culturally ambiguous
+     * ones lose it. The result is clamped to the range 0 to 1.
      */
-    private static Conversion bumpIfIdentical(Conversion conv, String source) {
+    private static Conversion adjustConfidence(Conversion conv, String source, String folded, ULocale src,
+            ULocale tgt) {
         String original = source == null ? "" : source.trim();
-        if (conv.getTarget().equals(original)) {
-            return new Conversion(conv.getType(), conv.getTarget(),
-                    Math.min(1.0, conv.getConfidence() + 0.06));
+        boolean identical = conv.getTarget().equals(original);
+        List<ConfidenceFactor> factors = new ArrayList<>(conv.getFactors());
+        // Identical rendering is a safe no-op.
+        if (identical) {
+            factors.add(new ConfidenceFactor("IDENTICAL", 0.06));
+        } else if (conv.getTarget().length() == original.length()) {
+            // Same shape is a mild safety signal; a changed length means the
+            // value's presentation really moved.
+            factors.add(new ConfidenceFactor("LENGTH_SAME", 0.02));
+        } else {
+            factors.add(new ConfidenceFactor("LENGTH_DIFF", -0.02));
         }
-        return conv;
+        // Pure digit-script normalization (full-width / non-Latin -> target) is
+        // value-preserving and safe.
+        if (hasNonAsciiDigit(original)) {
+            factors.add(new ConfidenceFactor("SCRIPT", 0.06));
+        }
+        // Dropping a leading zero the source had may lose a code or padding.
+        if (firstDigitIsZero(original) && !firstDigitIsZero(conv.getTarget())) {
+            factors.add(new ConfidenceFactor("LEADING_ZERO", -0.10));
+        }
+        // Roman refinement: SI/metric abbreviations that also parse as Roman
+        // (m, l, mm, cm, c, d, cc, cd) are most likely units; a canonical
+        // uppercase numeral containing I, V or X is unambiguously Roman.
+        if ("ROMAN".equals(factors.get(0).getId())) {
+            if (METRIC_ABBREVIATIONS.contains(original.toLowerCase(Locale.ROOT))) {
+                factors.add(new ConfidenceFactor("METRIC_UNIT", -0.02));
+            } else if (original.equals(original.toUpperCase(Locale.ROOT))
+                    && original.matches("M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})")
+                    && original.matches(".*[IVX].*")) {
+                factors.add(new ConfidenceFactor("ROMAN_CLEAR", 0.05));
+            }
+        }
+        switch (conv.getType()) {
+        case INTEGER:
+        case DECIMAL:
+            // A leading zero on a quantity is unusual; it hints at a code.
+            if (firstDigitIsZero(original)) {
+                factors.add(new ConfidenceFactor("LEADING_ZERO_PRESENT", -0.05));
+            }
+            break;
+        default:
+            break;
+        }
+        Double numericSource = null;
+        switch (conv.getType()) {
+        case INTEGER:
+        case DECIMAL:
+        case PERCENT:
+        case CURRENCY:
+            // Compare the numeric value read in the source locale with the one
+            // read back from the rendering in the target locale: a preserved
+            // value is a strong safety signal, a changed one (lossy rounding,
+            // reinterpreted separators) a strong warning.
+            Optional<Double> sourceValue = quantityValue(original, src, conv.getType());
+            Optional<Double> targetValue = quantityValue(conv.getTarget(), tgt, conv.getType());
+            numericSource = sourceValue.orElse(null);
+            if (sourceValue.isPresent() && targetValue.isPresent()) {
+                double a = sourceValue.get();
+                double b = targetValue.get();
+                boolean same = Math.abs(a - b) <= 1e-9 * Math.max(1.0, Math.max(Math.abs(a), Math.abs(b)));
+                factors.add(same ? new ConfidenceFactor("VALUE_SAME", 0.03)
+                        : new ConfidenceFactor("VALUE_DIFF", -0.10));
+            }
+            break;
+        default:
+            break;
+        }
+        switch (conv.getType()) {
+        case DECIMAL:
+            // A single separator with exactly three following digits ("1.234")
+            // is maximally ambiguous between decimal and grouping across locales.
+            if (folded.matches("\\d{1,3}[.,]\\d{3}")) {
+                factors.add(new ConfidenceFactor("AMBIGUOUS_DECIMAL", -0.15));
+            }
+            if (hasMisplacedGrouping(folded, src)) {
+                factors.add(new ConfidenceFactor("MISPLACED_GROUPING", -0.25));
+            }
+            break;
+        case CURRENCY:
+            // Symbols shared by many currencies ($, kr, ¥, £) are ambiguous.
+            if (hasAmbiguousCurrencySymbol(original)) {
+                factors.add(new ConfidenceFactor("CURRENCY_AMBIGUOUS", -0.10));
+            }
+            if (hasMisplacedGrouping(folded, src)) {
+                factors.add(new ConfidenceFactor("MISPLACED_GROUPING", -0.25));
+            }
+            break;
+        case DATE:
+            // Day/month order: clear when one component exceeds 12, irrelevant
+            // when both are equal (01.01.x), ambiguous otherwise.
+            switch (dateOrderClarity(folded)) {
+            case 1:
+                factors.add(new ConfidenceFactor("DATE_UNAMBIGUOUS", 0.10));
+                break;
+            case -1:
+                factors.add(new ConfidenceFactor("DATE_AMBIGUOUS", -0.10));
+                break;
+            default:
+                break;
+            }
+            break;
+        default:
+            break;
+        }
+        return new Conversion(conv.getType(), conv.getTarget(), factors, numericSource);
+    }
+
+    /**
+     * A grouping separator that does not sit on proper three-digit groups
+     * ("123.45" in a locale where the dot groups thousands) usually means the
+     * author used another locale's decimal convention; the parsed value is then
+     * probably wrong.
+     */
+    private static boolean hasMisplacedGrouping(String folded, ULocale src) {
+        DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance(src);
+        char grouping = symbols.getGroupingSeparator();
+        if (folded.indexOf(grouping) < 0) {
+            return false;
+        }
+        char decimal = symbols.getDecimalSeparator();
+        StringBuilder core = new StringBuilder();
+        for (char c : folded.toCharArray()) {
+            if (Character.isDigit(c) || c == grouping || c == decimal) {
+                core.append(c);
+            }
+        }
+        String g = java.util.regex.Pattern.quote(String.valueOf(grouping));
+        String d = java.util.regex.Pattern.quote(String.valueOf(decimal));
+        return !core.toString().matches("\\d{1,3}(?:" + g + "\\d{3})+(?:" + d + "\\d+)?");
+    }
+
+    /**
+     * The numeric value of a quantity string read in the given locale with the
+     * type-appropriate parser, falling back to the cross-script numeral parser
+     * for non-Latin or Roman digits.
+     */
+    private static Optional<Double> quantityValue(String s, ULocale locale, DataType type) {
+        String t = s.trim();
+        if (type == DataType.CURRENCY) {
+            NumberFormat parser = NumberFormat.getCurrencyInstance(locale);
+            parser.setParseStrict(false);
+            ParsePosition pp = new ParsePosition(0);
+            CurrencyAmount amount = parser.parseCurrency(t, pp);
+            if (amount != null && pp.getIndex() == t.length()) {
+                return Optional.of(amount.getNumber().doubleValue());
+            }
+            return Optional.empty();
+        }
+        NumberFormat parser = type == DataType.PERCENT ? NumberFormat.getPercentInstance(locale)
+                : NumberFormat.getNumberInstance(locale);
+        parser.setParseStrict(false);
+        Number value = parseFull(parser, t);
+        if (value != null) {
+            return Optional.of(value.doubleValue());
+        }
+        return NumeralValueParser.parseWhole(Normalizer2.getNFKCInstance().normalize(t))
+                .map(BigInteger::doubleValue);
+    }
+
+    /** SI/metric abbreviations that would otherwise parse as Roman numerals. */
+    private static final Set<String> METRIC_ABBREVIATIONS =
+            new HashSet<>(Arrays.asList("m", "l", "mm", "cm", "c", "d", "cc", "cd"));
+
+    private static boolean firstDigitIsZero(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isDigit(s.charAt(i))) {
+                return s.charAt(i) == '0';
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasNonAsciiDigit(String s) {
+        for (int i = 0; i < s.length();) {
+            int cp = s.codePointAt(i);
+            i += Character.charCount(cp);
+            if (cp > 0x7F && Character.isDigit(cp)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Day/month order clarity of a numeric date: 1 when a day/month component
+     * exceeds 12 (the order is pinned), 0 when day and month candidates are
+     * equal (the order does not matter, "01.01.2024"), -1 otherwise. The year
+     * component (three or more digits, or the last group when all groups are
+     * short) is excluded so "01.01.21" and "01.01.2024" behave alike.
+     */
+    private static int dateOrderClarity(String folded) {
+        List<String> groups = new ArrayList<>();
+        for (String group : folded.split("\\D+")) {
+            if (!group.isEmpty()) {
+                groups.add(group);
+            }
+        }
+        List<Integer> dayMonth = new ArrayList<>();
+        int yearIndex = -1;
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).length() >= 3) {
+                yearIndex = i;
+            }
+        }
+        if (yearIndex < 0 && groups.size() == 3) {
+            yearIndex = groups.size() - 1;
+        }
+        for (int i = 0; i < groups.size(); i++) {
+            if (i != yearIndex && groups.get(i).length() <= 2) {
+                try {
+                    dayMonth.add(Integer.parseInt(groups.get(i)));
+                } catch (NumberFormatException ignore) {
+                    // not a small integer group
+                }
+            }
+        }
+        if (dayMonth.size() < 2) {
+            return 0;
+        }
+        int a = dayMonth.get(0);
+        int b = dayMonth.get(1);
+        if (a == b) {
+            return 0;
+        }
+        return (a > 12 || b > 12) ? 1 : -1;
+    }
+
+    private static boolean hasAmbiguousCurrencySymbol(String s) {
+        return s.indexOf('$') >= 0 || s.indexOf('¥') >= 0 || s.indexOf('£') >= 0
+                || s.contains("kr");
     }
 
     // --- per-type handlers -------------------------------------------------
 
-    private static Optional<Conversion> tryInteger(String s, ULocale tgt, boolean allowRoman) {
+    private static Optional<Conversion> tryInteger(String s, ULocale tgt, boolean allowRoman,
+            RenderOptions opts) {
         // A grouping or decimal separator means this is the DECIMAL type's job.
         if (hasGroupingOrDecimal(s)) {
             return Optional.empty();
@@ -253,14 +590,17 @@ public final class NumberAutoConverter {
             return Optional.empty();
         }
         NumberFormat renderer = NumberFormat.getIntegerInstance(tgt);
-        renderer.setGroupingUsed(false); // a bare digit run carries no grouping
+        // A bare digit run has no grouping of its own, so ORIGINAL/NEVER render
+        // without grouping and only ALWAYS adds it.
+        renderer.setGroupingUsed(groupingFor(opts.getGrouping(), false));
         // Roman stays ambiguous with words even when opted in, so it scores low
         // and is not auto-selected at the default confidence threshold.
-        double confidence = roman ? 0.4 : 0.9;
-        return Optional.of(new Conversion(DataType.INTEGER, renderer.format(value.get()), confidence));
+        double confidence = roman ? 0.2 : 0.9;
+        return Optional.of(base(DataType.INTEGER, renderer.format(value.get()), roman ? "ROMAN" : "INTEGER",
+                confidence));
     }
 
-    private static Optional<Conversion> tryDecimal(String s, ULocale src, ULocale tgt) {
+    private static Optional<Conversion> tryDecimal(String s, ULocale src, ULocale tgt, RenderOptions opts) {
         if (!hasGroupingOrDecimal(s)) {
             return Optional.empty();
         }
@@ -271,19 +611,15 @@ public final class NumberAutoConverter {
             return Optional.empty();
         }
         NumberFormat renderer = NumberFormat.getNumberInstance(tgt);
-        // Preserve the source's own precision (e.g. "1.000,50" keeps two
-        // fraction digits) rather than dropping trailing zeros.
-        int fractionDigits = sourceFractionDigits(s, src);
+        int fractionDigits = fractionFor(opts.getFraction(), sourceFractionDigits(s, src));
         renderer.setMinimumFractionDigits(fractionDigits);
         renderer.setMaximumFractionDigits(fractionDigits);
-        // Mirror the source's grouping: only group the output when the source
-        // itself used a grouping separator.
         char grouping = DecimalFormatSymbols.getInstance(src).getGroupingSeparator();
-        renderer.setGroupingUsed(s.indexOf(grouping) >= 0);
-        return Optional.of(new Conversion(DataType.DECIMAL, renderer.format(value), 0.8));
+        renderer.setGroupingUsed(groupingFor(opts.getGrouping(), s.indexOf(grouping) >= 0));
+        return Optional.of(base(DataType.DECIMAL, renderer.format(value), "DECIMAL", 0.8));
     }
 
-    private static Optional<Conversion> tryPercent(String s, ULocale src, ULocale tgt) {
+    private static Optional<Conversion> tryPercent(String s, ULocale src, ULocale tgt, RenderOptions opts) {
         // ASCII, full-width and Arabic percent signs.
         if (s.indexOf('%') < 0 && s.indexOf('٪') < 0) {
             return Optional.empty();
@@ -297,15 +633,15 @@ public final class NumberAutoConverter {
             return Optional.empty();
         }
         NumberFormat renderer = NumberFormat.getPercentInstance(tgt);
-        // Mirror the source's fraction digits: "100,0 %" stays "100.0%", "50%"
-        // stays "50%".
-        int fractionDigits = sourceFractionDigits(s, src);
+        // Fraction digits follow the option, defaulting to the source's own
+        // precision: "100,0 %" stays "100.0%", "50%" stays "50%".
+        int fractionDigits = fractionFor(opts.getFraction(), sourceFractionDigits(s, src));
         renderer.setMinimumFractionDigits(fractionDigits);
         renderer.setMaximumFractionDigits(fractionDigits);
-        return Optional.of(new Conversion(DataType.PERCENT, renderer.format(value), 0.85));
+        return Optional.of(base(DataType.PERCENT, renderer.format(value), "PERCENT", 0.85));
     }
 
-    private static Optional<Conversion> tryCurrency(String s, ULocale src, ULocale tgt) {
+    private static Optional<Conversion> tryCurrency(String s, ULocale src, ULocale tgt, RenderOptions opts) {
         // Require a currency symbol so a bare number is never lenient-parsed as
         // an amount in the locale's default currency.
         if (!hasCurrencySymbol(s)) {
@@ -321,45 +657,54 @@ public final class NumberAutoConverter {
         }
         NumberFormat renderer = NumberFormat.getCurrencyInstance(tgt);
         renderer.setCurrency(amount.getCurrency());
+        int fractionDigits = fractionFor(opts.getFraction(), sourceFractionDigits(s, src));
+        renderer.setMinimumFractionDigits(fractionDigits);
+        renderer.setMaximumFractionDigits(fractionDigits);
         String rendered = renderer.format(amount.getNumber());
-        return Optional.of(new Conversion(DataType.CURRENCY, rendered, 0.8));
+        return Optional.of(base(DataType.CURRENCY, rendered, "CURRENCY", 0.8));
     }
 
-    private static Optional<Conversion> tryDate(String s, ULocale src, ULocale tgt) {
+    private static Optional<Conversion> tryDate(String s, ULocale src, ULocale tgt, RenderOptions opts) {
+        int renderStyle = dateRenderStyle(opts.getStyle());
         // ISO 8601 first: unambiguous, so it scores highest.
         SimpleDateFormat iso = new SimpleDateFormat("yyyy-MM-dd", ULocale.ROOT);
         iso.setLenient(false);
         Date isoDate = parseFull(iso, s);
         if (isoDate != null) {
-            String rendered = DateFormat.getDateInstance(DateFormat.MEDIUM, tgt).format(isoDate);
-            return Optional.of(new Conversion(DataType.DATE, rendered, 0.8));
+            String rendered = DateFormat.getDateInstance(renderStyle, tgt).format(isoDate);
+            return Optional.of(base(DataType.DATE, rendered, "DATE", 0.8));
         }
-        int[] styles = { DateFormat.MEDIUM, DateFormat.SHORT, DateFormat.LONG };
-        for (int style : styles) {
-            DateFormat parser = DateFormat.getDateInstance(style, src);
+        int[] parseStyles = { DateFormat.MEDIUM, DateFormat.SHORT, DateFormat.LONG };
+        for (int parseStyle : parseStyles) {
+            DateFormat parser = DateFormat.getDateInstance(parseStyle, src);
             parser.setLenient(false);
             Date value = parseFull(parser, s);
             if (value != null) {
-                String rendered = DateFormat.getDateInstance(DateFormat.MEDIUM, tgt).format(value);
+                String rendered = DateFormat.getDateInstance(renderStyle, tgt).format(value);
                 // Localized numeric dates are inherently ambiguous (day/month).
-                return Optional.of(new Conversion(DataType.DATE, rendered, 0.55));
+                return Optional.of(base(DataType.DATE, rendered, "DATE", 0.55));
             }
         }
         return Optional.empty();
     }
 
-    private static Optional<Conversion> tryTime(String s, ULocale src, ULocale tgt) {
+    private static Optional<Conversion> tryTime(String s, ULocale src, ULocale tgt, RenderOptions opts) {
         int[] styles = { DateFormat.SHORT, DateFormat.MEDIUM };
         for (int style : styles) {
             DateFormat parser = DateFormat.getTimeInstance(style, src);
             parser.setLenient(false);
             Date value = parseFull(parser, s);
             if (value != null) {
-                // Keep the source's precision: seconds in, seconds out.
-                boolean hasSeconds = s.chars().filter(c -> c == ':').count() >= 2;
-                int renderStyle = hasSeconds ? DateFormat.MEDIUM : DateFormat.SHORT;
+                int renderStyle;
+                if (opts.getStyle() == RenderOptions.Style.ORIGINAL) {
+                    // Keep the source's precision: seconds in, seconds out.
+                    boolean hasSeconds = s.chars().filter(c -> c == ':').count() >= 2;
+                    renderStyle = hasSeconds ? DateFormat.MEDIUM : DateFormat.SHORT;
+                } else {
+                    renderStyle = dateRenderStyle(opts.getStyle());
+                }
                 String rendered = DateFormat.getTimeInstance(renderStyle, tgt).format(value);
-                return Optional.of(new Conversion(DataType.TIME, rendered, 0.7));
+                return Optional.of(base(DataType.TIME, rendered, "TIME", 0.7));
             }
         }
         return Optional.empty();
@@ -382,7 +727,48 @@ public final class NumberAutoConverter {
         return digits;
     }
 
-    private static Optional<Conversion> tryOrdinal(String s, ULocale src, ULocale tgt) {
+    private static int fractionFor(RenderOptions.Fraction option, int sourceDigits) {
+        switch (option) {
+        case ZERO:
+            return 0;
+        case ONE:
+            return 1;
+        case TWO:
+            return 2;
+        case ORIGINAL:
+        default:
+            return sourceDigits;
+        }
+    }
+
+    private static boolean groupingFor(RenderOptions.Grouping option, boolean sourceHasGrouping) {
+        switch (option) {
+        case NEVER:
+            return false;
+        case ALWAYS:
+            return true;
+        case ORIGINAL:
+        default:
+            return sourceHasGrouping;
+        }
+    }
+
+    private static int dateRenderStyle(RenderOptions.Style style) {
+        switch (style) {
+        case SHORT:
+            return DateFormat.SHORT;
+        case LONG:
+            return DateFormat.LONG;
+        case SPELLOUT:
+            return DateFormat.FULL;
+        case MEDIUM:
+        case ORIGINAL:
+        default:
+            return DateFormat.MEDIUM;
+        }
+    }
+
+    private static Optional<Conversion> tryOrdinal(String s, ULocale src, ULocale tgt, RenderOptions opts) {
         // A bare digit run is a cardinal integer, not an ordinal. An ordinal
         // must carry a locale marker (a trailing dot, a letter suffix, a
         // leading CJK marker), so it is never a pure digit sequence.
@@ -398,8 +784,24 @@ public final class NumberAutoConverter {
         if (value == null || pp.getIndex() != s.length() || value.longValue() < 1) {
             return Optional.empty();
         }
-        RuleBasedNumberFormat renderer = new RuleBasedNumberFormat(tgt, RuleBasedNumberFormat.ORDINAL);
-        return Optional.of(new Conversion(DataType.ORDINAL, renderer.format(value.longValue()), 0.75));
+        String rendered = null;
+        if (opts.getStyle() == RenderOptions.Style.SPELLOUT) {
+            // Spelled-out ordinal ("third") where the target locale has the
+            // rule set; otherwise fall back to the digit ordinal below.
+            RuleBasedNumberFormat spell = new RuleBasedNumberFormat(tgt, RuleBasedNumberFormat.SPELLOUT);
+            for (String ruleSet : spell.getRuleSetNames()) {
+                if ("%spellout-ordinal".equals(ruleSet)) {
+                    spell.setDefaultRuleSet(ruleSet);
+                    rendered = spell.format(value.longValue());
+                    break;
+                }
+            }
+        }
+        if (rendered == null) {
+            rendered = new RuleBasedNumberFormat(tgt, RuleBasedNumberFormat.ORDINAL)
+                    .format(value.longValue());
+        }
+        return Optional.of(base(DataType.ORDINAL, rendered, "ORDINAL", 0.75));
     }
 
     // --- helpers -----------------------------------------------------------

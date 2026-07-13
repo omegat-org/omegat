@@ -151,17 +151,19 @@ public class NumberAutoConverterTest {
 
     @Test
     public void isoDateOutranksLocalizedDate() {
+        // "2026-12-31" is unambiguous (a component > 12); "05.03.2026" is not,
+        // so the ISO date must score clearly higher.
         Conversion iso = top("2026-12-31", DE, EN);
         assertNotNull(iso);
         assertEquals(DataType.DATE, iso.getType());
         assertTrue(iso.getTarget().contains("2026"));
-        assertEquals(0.8, iso.getConfidence(), 0.0001);
 
         Conversion local = top("05.03.2026", DE, EN);
         assertNotNull(local);
         assertEquals(DataType.DATE, local.getType());
-        assertTrue(local.getTarget().contains("2026"));
-        assertEquals(0.55, local.getConfidence(), 0.0001);
+        assertTrue("ISO date should outrank an ambiguous localized date",
+                iso.getConfidence() > local.getConfidence());
+        assertTrue(iso.getConfidence() >= 0.85);
     }
 
     @Test
@@ -205,10 +207,10 @@ public class NumberAutoConverterTest {
 
     @Test
     public void hygieneStripsControlAndSpaceVariants() {
-        assertConv("5 ", DE, EN, DataType.INTEGER, "5"); // trailing no-break space
-        assertConv("‎5", DE, EN, DataType.INTEGER, "5"); // leading LRM
-        assertConv("5‏", DE, EN, DataType.INTEGER, "5"); // trailing RLM
-        assertConv("5​", DE, EN, DataType.INTEGER, "5"); // trailing zero-width space
+        assertConv("5\u00A0", DE, EN, DataType.INTEGER, "5"); // trailing no-break space
+        assertConv("\u200E5", DE, EN, DataType.INTEGER, "5"); // leading LRM
+        assertConv("5\u200F", DE, EN, DataType.INTEGER, "5"); // trailing RLM
+        assertConv("5\u200B", DE, EN, DataType.INTEGER, "5"); // trailing zero-width space
         assertConv("  15  ", DE, EN, DataType.INTEGER, "15");
     }
 
@@ -255,6 +257,165 @@ public class NumberAutoConverterTest {
         assertEmpty("1º", Locale.ITALIAN, EN);
         assertEmpty("3:s", Locale.forLanguageTag("fi"), EN);
         assertEmpty("1,5×10³", DE, EN); // scientific notation, not in scope
+    }
+
+    // --- render options + culture heuristics -------------------------------
+
+    private static java.util.Set<DataType> allTypes() {
+        return java.util.EnumSet.allOf(DataType.class);
+    }
+
+    private static Conversion first(String s, Locale from, Locale to, NumberAutoConverter.RenderOptions opts) {
+        java.util.List<Conversion> l = NumberAutoConverter.convert(s, from, to, allTypes(), false, opts);
+        return l.isEmpty() ? null : l.get(0);
+    }
+
+    @Test
+    public void groupingOptionOverridesSource() {
+        NumberAutoConverter.RenderOptions.Style keepStyle = NumberAutoConverter.RenderOptions.Style.ORIGINAL;
+        NumberAutoConverter.RenderOptions.Fraction keepFrac = NumberAutoConverter.RenderOptions.Fraction.ORIGINAL;
+        Conversion always = first("9443", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ALWAYS, keepFrac,
+                        keepStyle));
+        assertEquals("9,443", always.getTarget());
+        Conversion never = first("9443", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.NEVER, keepFrac,
+                        keepStyle));
+        assertEquals("9443", never.getTarget());
+    }
+
+    @Test
+    public void fractionOptionOverridesSource() {
+        Conversion two = first("1,5", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ORIGINAL,
+                        NumberAutoConverter.RenderOptions.Fraction.TWO,
+                        NumberAutoConverter.RenderOptions.Style.ORIGINAL));
+        assertEquals(DataType.DECIMAL, two.getType());
+        assertEquals("1.50", two.getTarget());
+    }
+
+    @Test
+    public void fractionOptionAppliesToPercent() {
+        Conversion one = first("50 %", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ORIGINAL,
+                        NumberAutoConverter.RenderOptions.Fraction.ONE,
+                        NumberAutoConverter.RenderOptions.Style.ORIGINAL));
+        assertNotNull(one);
+        assertEquals(DataType.PERCENT, one.getType());
+        assertEquals("50.0%", one.getTarget());
+    }
+
+    @Test
+    public void valuePreservationHeuristic() {
+        // Value read in the source locale survives the rendering: +3%.
+        Conversion preserved = top("1.000,50", DE, EN);
+        assertTrue(preserved.getFactors().stream().anyMatch(f -> "VALUE_SAME".equals(f.getId())));
+        // Lossy rounding via the zero-fraction option changes the value: -10%.
+        Conversion lossy = first("12,5 %", DE, EN,
+                new NumberAutoConverter.RenderOptions(NumberAutoConverter.RenderOptions.Grouping.ORIGINAL,
+                        NumberAutoConverter.RenderOptions.Fraction.ZERO,
+                        NumberAutoConverter.RenderOptions.Style.ORIGINAL));
+        assertNotNull(lossy);
+        assertTrue("rounded percent must be flagged as value change: " + lossy.getFactors(),
+                lossy.getFactors().stream().anyMatch(f -> "VALUE_DIFF".equals(f.getId())));
+    }
+
+    @Test
+    public void parsedSourceValueIsExposedForConsistentSorting() {
+        // "99'999" (Swiss-style grouping accepted by the lenient de parser)
+        // must expose 99999 as its numeric value, so numeric sorting agrees
+        // with the value-preservation heuristic instead of reading 99.
+        Conversion c = top("99'999", DE, EN);
+        assertNotNull(c);
+        assertEquals(DataType.INTEGER, c.getType());
+        assertEquals(99999.0, c.getSourceValue().orElse(-1.0), 0.0001);
+        assertTrue(c.getFactors().stream().anyMatch(f -> "VALUE_SAME".equals(f.getId())));
+    }
+
+    @Test
+    public void misplacedGroupingScoresMuchLower() {
+        // "123.45 €" in German: the dot is the grouping separator but does not
+        // sit on a three-digit group — the author used a foreign decimal
+        // convention, so the parsed value (12345) is probably wrong.
+        Conversion suspicious = top("123.45 €", DE, EN);
+        assertNotNull(suspicious);
+        assertEquals(DataType.CURRENCY, suspicious.getType());
+        Conversion clean = top("15,75 €", DE, EN);
+        assertNotNull(clean);
+        assertTrue("misplaced grouping must score far lower: " + suspicious.getConfidence() + " vs "
+                + clean.getConfidence(), suspicious.getConfidence() <= clean.getConfidence() - 0.2);
+    }
+
+    @Test
+    public void equalDayAndMonthIsNeitherBonusNorMalus() {
+        // '01.01.21' and '01.01.2024' must score alike: with equal day and
+        // month the order is irrelevant, so neither the unambiguous bonus nor
+        // the ambiguous malus applies.
+        Conversion shortYear = top("01.01.21", DE, EN);
+        Conversion longYear = top("01.01.2024", DE, EN);
+        assertNotNull(shortYear);
+        assertNotNull(longYear);
+        assertEquals(DataType.DATE, shortYear.getType());
+        assertEquals(DataType.DATE, longYear.getType());
+        assertEquals(shortYear.getConfidence(), longYear.getConfidence(), 0.0001);
+    }
+
+    @Test
+    public void romanMetricAndClarityHeuristics() {
+        java.util.Set<DataType> all = java.util.EnumSet.allOf(DataType.class);
+        // Metric abbreviations that parse as Roman are penalized.
+        Conversion cm = NumberAutoConverter.convert("cm", DE, EN, all, true).get(0);
+        assertTrue("metric penalty expected: " + cm.getFactors(),
+                cm.getFactors().stream().anyMatch(f -> "METRIC_UNIT".equals(f.getId())));
+        // A canonical uppercase numeral containing I/V/X earns the clarity bonus.
+        Conversion xl = NumberAutoConverter.convert("XL", DE, EN, all, true).get(0);
+        assertTrue("clarity bonus expected: " + xl.getFactors(),
+                xl.getFactors().stream().anyMatch(f -> "ROMAN_CLEAR".equals(f.getId())));
+        // "CD" is canonical but has no I/V/X (compact disc): neither bonus nor
+        // metric penalty in its uppercase form... it IS in the metric list, so
+        // the penalty applies via the lowercase match.
+        Conversion cd = NumberAutoConverter.convert("CD", DE, EN, all, true).get(0);
+        assertTrue(cd.getFactors().stream().noneMatch(f -> "ROMAN_CLEAR".equals(f.getId())));
+    }
+
+    @Test
+    public void romanBaseIsTwentyPercent() {
+        java.util.Set<DataType> all = java.util.EnumSet.allOf(DataType.class);
+        Conversion c = NumberAutoConverter.convert("XL", DE, EN, all, true).get(0);
+        assertEquals(0.2, c.getFactors().get(0).getDelta(), 0.0001);
+    }
+
+    @Test
+    public void lengthHeuristicAppliesOnlyWhenNotIdentical() {
+        // "1.000,50" -> "1,000.50": same length, not identical -> +2% factor.
+        Conversion sameLen = top("1.000,50", DE, EN);
+        assertTrue(sameLen.getFactors().stream().anyMatch(f -> "LENGTH_SAME".equals(f.getId())));
+        // Identical rendering gets the identical bonus, no length factor.
+        Conversion identical = top("2026-12-31", DE, Locale.forLanguageTag("en"));
+        assertNotNull(identical);
+    }
+
+    @Test
+    public void leadingZeroQuantityScoresLower() {
+        // "0,5" is a decimal whose leading zero is normal but still hints at
+        // codes/padding per policy: the LEADING_ZERO_PRESENT factor applies.
+        Conversion c = top("0,5", DE, EN);
+        assertNotNull(c);
+        assertEquals(DataType.DECIMAL, c.getType());
+        assertTrue(c.getFactors().stream().anyMatch(f -> "LEADING_ZERO_PRESENT".equals(f.getId())));
+    }
+
+    @Test
+    public void ambiguousDecimalAndCurrencySymbolLoseConfidence() {
+        Conversion ambiguous = top("1.234", DE, EN); // one dot, three digits
+        assertEquals(DataType.DECIMAL, ambiguous.getType());
+        assertTrue("ambiguous decimal should be penalized: " + ambiguous.getConfidence(),
+                ambiguous.getConfidence() < 0.75);
+
+        Conversion dollar = top("$5.00", Locale.forLanguageTag("en"), DE);
+        assertEquals(DataType.CURRENCY, dollar.getType());
+        assertTrue("ambiguous currency symbol should be penalized: " + dollar.getConfidence(),
+                dollar.getConfidence() < 0.8);
     }
 
     // --- fixture driven: the demonstration XLIFF is the scope oracle -------

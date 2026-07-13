@@ -69,7 +69,7 @@ public class ExportBilingualHandlerTest {
     @Test
     public void testCsvFieldWithQuotes() {
         // Embedded double-quotes must be doubled per RFC-4180
-        assertEquals("\"say \\\"hi\\\"\"".replace("\\\"", "\""),
+        assertEquals("\"say \"\"hi\"\"\"",
                 ExportBilingualHandler.csvField("say \"hi\""));
     }
 

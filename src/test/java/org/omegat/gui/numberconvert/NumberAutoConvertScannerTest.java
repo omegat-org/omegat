@@ -27,6 +27,7 @@ package org.omegat.gui.numberconvert;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -69,8 +70,10 @@ public class NumberAutoConvertScannerTest {
         expected.put("fmt-ord-de", DataType.ORDINAL);
         expected.put("fmt-time", DataType.TIME);
 
-        File xliff = new File("test/data/editor/sort/numeric-sort-demo.xliff");
-        assertTrue("fixture missing", xliff.isFile());
+        // Resolved from the test classpath so tree reorganizations cannot break it.
+        java.net.URL fixture = getClass().getResource("/data/editor/sort/numeric-sort-demo.xliff");
+        assertNotNull("fixture missing on test classpath", fixture);
+        File xliff = new File(fixture.toURI());
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xliff);
         NodeList units = doc.getElementsByTagName("trans-unit");
 

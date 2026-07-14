@@ -94,7 +94,7 @@ public class LanguageToolTest {
 
     @Test
     public void testFrench() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(new Locale("fr")));
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(Locale.of("fr")));
 
         // example from
         // https://github.com/languagetool-org/languagetool/issues/2852
@@ -105,7 +105,7 @@ public class LanguageToolTest {
 
     @Test
     public void testEnglish() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(new Locale("en", "US")));
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(Locale.of("en", "US")));
 
         List<RuleMatch> matches = lt.check("Check test");
         assertEquals(0, matches.size());
@@ -187,9 +187,9 @@ public class LanguageToolTest {
     public void testLanguageMapping() {
         org.languagetool.Language lang;
         lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
-        assertEquals(Languages.getLanguageForLocale(new Locale("en", "US")).getClass(), lang.getClass());
+        assertEquals(Languages.getLanguageForLocale(Locale.of("en", "US")).getClass(), lang.getClass());
         lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-CA"));
-        assertEquals(Languages.getLanguageForLocale(new Locale("en", "CA")).getClass(), lang.getClass());
+        assertEquals(Languages.getLanguageForLocale(Locale.of("en", "CA")).getClass(), lang.getClass());
         lang = LanguageToolNativeBridge.getLTLanguage(new Language("en"));
         assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
         // Unknown region--fall back to generic class

@@ -108,8 +108,11 @@ public class NearString {
      * @param fuzzyMark
      *            fuzzy or not
      * @param nearScore
+     *            similarity score
      * @param nearScoreNoStem
+     *            similarity score for match without non-word tokens
      * @param adjustedScore
+     *            adjusted similarity score for match including all tokens
      * @param nearData
      *            similarity data.
      * @param projName
@@ -177,24 +180,22 @@ public class NearString {
     public static NearString merge(NearString ns, EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom,
             boolean fuzzyMark, Scores scores, byte[] nearData, String projName) {
 
-        List<String> projs = new ArrayList<>();
-        List<Scores> mergedScores = new ArrayList<>();
-        projs.addAll(Arrays.asList(ns.projs));
-        mergedScores.addAll(Arrays.asList(ns.scores));
+        List<String> projs = new ArrayList<>(List.of(ns.projs));
+        List<Scores> mergedScores = new ArrayList<>(List.of(ns.scores));
 
         NearString merged;
         if (scores.score > ns.scores[0].score) {
             merged = new NearString(key, entry, comesFrom, fuzzyMark, scores, nearData, null);
-            projs.add(0, projName);
-            mergedScores.add(0, merged.scores[0]);
+            projs.addFirst(projName);
+            mergedScores.addFirst(merged.scores[0]);
         } else {
             merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, scores,
                     ns.attr, null, ns.creator, ns.creationDate, ns.changer, ns.changedDate, ns.props);
             projs.add(projName);
             mergedScores.add(merged.scores[0]);
         }
-        merged.projs = projs.toArray(new String[projs.size()]);
-        merged.scores = mergedScores.toArray(new Scores[mergedScores.size()]);
+        merged.projs = projs.toArray(new String[0]);
+        merged.scores = mergedScores.toArray(new Scores[0]);
         return merged;
     }
 
@@ -205,18 +206,16 @@ public class NearString {
             final String creator, final long creationDate, final String changer, final long changedDate,
             final List<TMXProp> props) {
 
-        List<String> projs = new ArrayList<>();
-        List<Scores> mergedScores = new ArrayList<>();
-        projs.addAll(Arrays.asList(ns.projs));
-        mergedScores.addAll(Arrays.asList(ns.scores));
+        List<String> projs = Arrays.asList(ns.projs);
+        List<Scores> mergedScores = Arrays.asList(ns.scores);
 
         NearString merged;
         if (nearScore > ns.scores[0].score) {
             merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore,
                     nearScoreNoStem, adjustedScore, nearData, null, creator, creationDate, changer,
                     changedDate, props);
-            projs.add(0, projName);
-            mergedScores.add(0, merged.scores[0]);
+            projs.addFirst(projName);
+            mergedScores.addFirst(merged.scores[0]);
         } else {
             merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, nearScore,
                     nearScoreNoStem, adjustedScore, ns.attr, null, ns.creator, ns.creationDate, ns.changer,
@@ -224,8 +223,8 @@ public class NearString {
             projs.add(projName);
             mergedScores.add(merged.scores[0]);
         }
-        merged.projs = projs.toArray(new String[projs.size()]);
-        merged.scores = mergedScores.toArray(new Scores[mergedScores.size()]);
+        merged.projs = projs.toArray(new String[0]);
+        merged.scores = mergedScores.toArray(new Scores[0]);
         return merged;
     }
 
@@ -274,15 +273,7 @@ public class NearString {
         }
 
         public String toString() {
-            StringBuilder b = new StringBuilder();
-            b.append("(");
-            b.append(score);
-            b.append("/");
-            b.append(scoreNoStem);
-            b.append("/");
-            b.append(adjustedScore);
-            b.append("%)");
-            return b.toString();
+            return "(" + score + "/" + scoreNoStem + "/" + adjustedScore + "%)";
         }
     }
 

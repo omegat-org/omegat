@@ -36,7 +36,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.font.TextLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -200,7 +199,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private static Font getTitleFont() {
-        boolean fontAvailable = Arrays.asList(StaticUtils.getFontNames())
+        boolean fontAvailable = List.of(StaticUtils.getFontNames())
                 .contains(DEFAULT_MARKER_FONT_NAME);
         String fontName = fontAvailable ? DEFAULT_MARKER_FONT_NAME : Font.SERIF;
         int fontSize = Preferences.getPreferenceDefault(

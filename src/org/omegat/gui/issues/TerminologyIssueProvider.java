@@ -156,7 +156,7 @@ class TerminologyIssueProvider implements IIssueProvider {
             String[] uniqueTerms = glossaryEntry.getLocTerms(true);
             // Multiple origins, but just one term
             if (uniqueTerms.length == 1) {
-                String origin = String.join(oDelim, FileUtil.getUniqueNames(Arrays.asList(uniqueOrigins)));
+                String origin = String.join(oDelim, FileUtil.getUniqueNames(List.of(uniqueOrigins)));
                 return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", origin, glossaryEntry.getSrcText(),
                         uniqueTerms[0]);
             }

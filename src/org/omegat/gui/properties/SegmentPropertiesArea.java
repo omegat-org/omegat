@@ -34,7 +34,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -233,7 +232,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                     Preferences.SEGPROPS_NOTIFY_DEFAULT_PROPS);
         }
         String rawProps = Preferences.getPreference(Preferences.SEGPROPS_NOTIFY_PROPS);
-        return Arrays.asList(SPLIT_COMMAS.split(rawProps));
+        return List.of(SPLIT_COMMAS.split(rawProps));
     }
 
     private void setKeyToNotify(String key, boolean enabled) {

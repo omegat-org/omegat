@@ -30,8 +30,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -88,7 +86,7 @@ public final class ModificationInfoManager {
     };
 
     public static List<String> getModInfoVariables() {
-        return Collections.unmodifiableList(Arrays.asList(MOD_INFO_VARIABLES));
+        return List.of(MOD_INFO_VARIABLES);
     }
 
     private static final String[] MOD_INFO_VARIABLES_NO_DATE = {
@@ -96,7 +94,7 @@ public final class ModificationInfoManager {
     };
 
     public static List<String> getModInfoVariablesNoDate() {
-        return Collections.unmodifiableList(Arrays.asList(MOD_INFO_VARIABLES_NO_DATE));
+        return List.of(MOD_INFO_VARIABLES_NO_DATE);
     }
 
     public static final String DEFAULT_TEMPLATE =

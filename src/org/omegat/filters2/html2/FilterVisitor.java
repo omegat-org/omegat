@@ -397,8 +397,8 @@ public class FilterVisitor extends NodeVisitor {
         String[] parentElementTags = { "HEAD", "HTML" };
 
         return (tagname.equals("BR") && options.getParagraphOnBr())
-                || Arrays.asList(parentElementTags).contains(tagname)
-                || Arrays.asList(blockElementTags).contains(tagname);
+                || List.of(parentElementTags).contains(tagname)
+                || List.of(blockElementTags).contains(tagname);
     }
 
     /** Should the content of this tag be kept intact? */

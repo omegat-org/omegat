@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -177,7 +176,7 @@ public class RemoteRepositoryProvider {
             throw new IllegalArgumentException("There is no mapping for file '" + path + "'");
         }
 
-        return mappings.get(0);
+        return mappings.getFirst();
     }
 
     /**
@@ -228,7 +227,7 @@ public class RemoteRepositoryProvider {
         }
 
         if (!errors.isEmpty()) {
-            throw errors.get(0);
+            throw errors.getFirst();
         }
     }
 
@@ -464,7 +463,7 @@ public class RemoteRepositoryProvider {
         }
 
         private void addRawExcludes(String... excludes) {
-            this.forceExcludes.addAll(Arrays.asList(excludes));
+            this.forceExcludes.addAll(List.of(excludes));
         }
 
         private void addTruncatedExcludes(String prefix, String... excludes) {

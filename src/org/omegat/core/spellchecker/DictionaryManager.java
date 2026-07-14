@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -81,9 +80,9 @@ public class DictionaryManager {
             String[] parts = dic.split("_");
             Locale locale;
             if (parts.length == 1) {
-                locale = new Locale(parts[0]);
+                locale = Locale.of(parts[0]);
             } else {
-                locale = new Locale(parts[0], parts[1]);
+                locale = Locale.of(parts[0], parts[1]);
             }
             result.add(dic + " - " + locale.getDisplayName());
         }
@@ -270,7 +269,7 @@ public class DictionaryManager {
         if (pos != -1) {
             langCode = langCode.substring(0, pos);
         }
-        List<String> expectedFiles = Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION,
+        List<String> expectedFiles = List.of(langCode + OConsts.SC_AFFIX_EXTENSION,
                 langCode + OConsts.SC_DICTIONARY_EXTENSION);
         HttpConnectionUtils.downloadZipFileAndExtract(new URL(from), dir, expectedFiles);
     }

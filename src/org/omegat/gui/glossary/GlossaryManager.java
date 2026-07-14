@@ -133,9 +133,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void addGlossaryProvider(IGlossary provider) {
-        List<IGlossary> providers = new ArrayList<>(Arrays.asList(externalGlossaries));
+        List<IGlossary> providers = Arrays.asList(externalGlossaries);
         providers.add(provider);
-        externalGlossaries = providers.toArray(new IGlossary[providers.size()]);
+        externalGlossaries = providers.toArray(new IGlossary[0]);
     }
 
     public void start() {

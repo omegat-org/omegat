@@ -49,7 +49,7 @@ import org.omegat.util.StringUtil;
 public class POFilterTest extends TestFilterBase {
 
     @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
     @Test
     public void testParse() throws Exception {

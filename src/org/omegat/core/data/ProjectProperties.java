@@ -36,8 +36,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
@@ -75,7 +73,7 @@ public class ProjectProperties {
     };
 
     public static List<String> getDefaultExcludes() {
-        return Collections.unmodifiableList(Arrays.asList(DEFAULT_EXCLUDES));
+        return List.of(DEFAULT_EXCLUDES);
     }
 
     /**
@@ -92,7 +90,7 @@ public class ProjectProperties {
         projectRootDir = projectDir;
         projectName = projectDir.getName();
         setSourceRoot(getProjectRoot() + OConsts.DEFAULT_SOURCE + File.separator);
-        sourceRootExcludes.addAll(Arrays.asList(DEFAULT_EXCLUDES));
+        sourceRootExcludes.addAll(List.of(DEFAULT_EXCLUDES));
         setTargetRoot(getProjectRoot() + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator);
         setWriteableGlossary(

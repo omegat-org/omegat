@@ -351,7 +351,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         // Apply locale for the test class
-        LocaleRule.applyLocaleForClass(new Locale("en"));
+        LocaleRule.applyLocaleForClass(Locale.of("en"));
 
         // Initialize core system components that should persist across tests
         initializeOmegaTCore();

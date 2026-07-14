@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 
 public class KnownExceptionTest {
     @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
     @Test
     public void testExceptions() {

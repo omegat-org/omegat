@@ -111,7 +111,7 @@ public class LanguageToolTest {
         assertEquals(0, matches.size());
     }
 
-    private static final int[] FREE_PORT_RANGE = {8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086};
+    private static final int[] FREE_PORT_RANGE = { 8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086 };
 
     private int getFreePort() {
         for (int p : FREE_PORT_RANGE) {

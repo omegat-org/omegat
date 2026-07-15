@@ -28,10 +28,12 @@ package org.omegat.core.spellchecker;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.regex.Matcher;
 
 import org.apache.commons.io.FilenameUtils;
@@ -144,8 +146,8 @@ public class DictionaryManager {
                 }
 
                 if (match) {
-                    result.add(new SpellingDictionaryEntry(affixName, SpellCheckDictionaryType.HUNSPELL,
-                                    true));
+                    result.add(
+                            new SpellingDictionaryEntry(affixName, SpellCheckDictionaryType.HUNSPELL, true));
                 }
             }
         }
@@ -158,10 +160,10 @@ public class DictionaryManager {
             }
         }
 
-        for (String language: SpellCheckerManager.getHunspellDictionaryLanguages()) {
+        for (String language : SpellCheckerManager.getHunspellDictionaryLanguages()) {
             result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.HUNSPELL, false));
         }
-        for (String language: SpellCheckerManager.getMorfologikDictionaryLanguages()) {
+        for (String language : SpellCheckerManager.getMorfologikDictionaryLanguages()) {
             result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.MORFOLOGIK, false));
         }
 
@@ -180,7 +182,8 @@ public class DictionaryManager {
         if (lang == null || lang.isEmpty()) {
             return false;
         }
-        var target = getLocalDictionaryEntries().stream().filter(it -> it.languageCode.equals(lang)).findFirst();
+        Optional<SpellingDictionaryEntry> target = getLocalDictionaryEntries().stream().filter(
+                it -> it.languageCode.equals(lang)).findFirst();
         if (target.isPresent()) {
             String base = getDirectory() + File.separator + lang;
             if (target.get().type.equals(SpellCheckDictionaryType.HUNSPELL)) {
@@ -233,8 +236,11 @@ public class DictionaryManager {
         List<String> result = new ArrayList<>();
 
         // download the file
-        URL url = new URL(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
-        String htmlfile = HttpConnectionUtils.getURL(url);
+        String dictionary = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
+        if (dictionary == null || dictionary.isEmpty()) {
+            return result;
+        }
+        String htmlfile = HttpConnectionUtils.getURL(URI.create(dictionary).toURL());
 
         // build a list of available language codes
         Matcher matcher = PatternConsts.DICTIONARY_ZIP.matcher(htmlfile);
@@ -260,7 +266,8 @@ public class DictionaryManager {
      */
     @Deprecated
     public void installRemoteDictionary(String langCode) throws IOException {
-        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
+        String dictionary = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
+        String from = dictionary + "/" + langCode + ".zip";
 
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
@@ -271,7 +278,7 @@ public class DictionaryManager {
         }
         List<String> expectedFiles = List.of(langCode + OConsts.SC_AFFIX_EXTENSION,
                 langCode + OConsts.SC_DICTIONARY_EXTENSION);
-        HttpConnectionUtils.downloadZipFileAndExtract(new URL(from), dir, expectedFiles);
+        HttpConnectionUtils.downloadZipFileAndExtract(URI.create(from).toURL(), dir, expectedFiles);
     }
 
     public static class SpellingDictionaryEntry {

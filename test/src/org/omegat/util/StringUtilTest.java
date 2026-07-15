@@ -452,7 +452,7 @@ public class StringUtilTest {
         assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English
                                                                                          // version
         assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", Locale.of("tr"))); // Turkish
-                                                                                                // version
+                                                                                               // version
     }
 
     @Test

@@ -221,7 +221,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Get glossary entries.
      *
      * @return all entries
-     * @param src keyword of the glossary to seek.
+     * @param src
+     *            keyword of the glossary to seek.
      */
     public List<GlossaryEntry> getGlossaryEntries(String src) {
         List<GlossaryEntry> result = new ArrayList<>();

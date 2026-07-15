@@ -3,8 +3,17 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 import java.nio.file.Paths
 
-def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 def omegatJarFilename = jar.archiveFileName.get()
+def jpkgContentRoot = {
+    def osName = System.getProperty('os.name').toLowerCase()
+    if (osName.contains('windows')) {
+        return layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")
+    } else if (osName.contains('mac')) {
+        return layout.buildDirectory.file("jpackage/app-image/${application.applicationName}.app/Contents")
+    } else {
+        return layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib")
+    }
+}
 
 // clean work folder for jpackage
 def jpackageWorkdir = layout.buildDirectory.file('jpackage')
@@ -22,25 +31,24 @@ tasks.register('jars', Sync) {
 // prepare jpackage contents
 tasks.register('jpackageAppContentGreetings', Sync) {
     dependsOn jpackage
-    dependsOn tasks.findByName('firstSteps')
+    dependsOn tasks.named('firstSteps')
 
     from layout.buildDirectory.file('docs/greetings')
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
+    into "${jpkgContentRoot.call().get()}/docs/greetings"
 }
 
 tasks.register('jpackageAppContentManuals', Sync) {
     dependsOn jpackage
-    dependsOn tasks.findByName("manualZips")
+    dependsOn tasks.named("manualZips")
 
     from layout.buildDirectory.file('docs/manuals')
     include '*.zip'
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/manuals")
+    into "${jpkgContentRoot.call().get()}/docs/manuals"
 }
 
 tasks.register('jpackageAppContentDocs', Copy) {
     dependsOn jpackage
-
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    into "${jpkgContentRoot.call().get()}/docs"
     from("release") {
         include 'doc-license.txt'
         filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
@@ -57,25 +65,29 @@ tasks.register('jpackageAppContentDocs', Copy) {
 tasks.register('jpackageAppContentScripts', Sync) {
     from 'scripts'
     into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/scripts")
+    into "${jpkgContentRoot.call().get()}/scripts"
     dependsOn jpackage
 }
 tasks.register('jpackageAppContentImages', Sync) {
     from 'images'
     into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/images")
+    into "${jpkgContentRoot.call().get()}/images"
     dependsOn jpackage
 }
 tasks.register('jpackageAppContentModules', Sync) {
     from layout.buildDirectory.file('modules')
-    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/modules")
+    into "${jpkgContentRoot.call().get()}/modules"
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
     dependsOn jpackage
 }
 tasks.register('jpackageAppContentTips', Sync) {
     from layout.buildDirectory.file('docs/tips')
     into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/tips")
+    into "${jpkgContentRoot.call().get()}/docs/tips"
     dependsOn jpackage
     dependsOn tipsHtmls
 }
+
 tasks.register('jpackageAppContent') {
     dependsOn jpackageAppContentGreetings
     dependsOn jpackageAppContentManuals
@@ -93,7 +105,6 @@ tasks.register('jpackage', Exec) {
 
     inputs.files file(layout.buildDirectory.file('jars'))
     outputs.files file(layout.buildDirectory.file("jpackage/app-image"))
-    onlyIf { gradleOnJava17OrLater }
 
     def osName = System.getProperty('os.name').toLowerCase()
     def icon = 'images/OmegaT.png'
@@ -116,7 +127,7 @@ tasks.register('jpackage', Exec) {
             '--java-options', "-Xmx1024M",
             '--java-options', "--add-opens",
             '--java-options', "java.desktop/sun.awt.X11=ALL-UNNAMED",
-            '--resource-dir', file("release/jpackage-specific/linux/"))
+            '--resource-dir', file("release/jpackage-specific"))
 }
 
 // generate DEB package
@@ -132,7 +143,6 @@ tasks.register("linuxDistDeb", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}_${version}-${debVersion}_${debArch}.deb"))
-    onlyIf { gradleOnJava17OrLater && exePresent('dpkg-deb') }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'deb',
@@ -145,7 +155,7 @@ tasks.register("linuxDistDeb", Exec) {
             '--vendor', project.property('org.omegat.vendor'),
             '--resource-dir', file("release/jpackage-specific/linux/"),
             '--about-url', project.property('org.omegat.url'),
-            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--license-file', file(layout.projectDirectory.file("release/OmegaT-license.txt")),
             '--install-dir', '/opt/omegat-org',
             '--linux-app-category', 'editors',
             '--linux-app-release', debVersion,
@@ -153,7 +163,6 @@ tasks.register("linuxDistDeb", Exec) {
             '--linux-menu-group', 'Office',
             '--linux-package-name', 'omegat',
             '--linux-shortcut')
-    assemble.dependsOn linuxDistDeb
 }
 
 // generate RPM package
@@ -169,7 +178,6 @@ tasks.register("linuxDistRpm", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}-${version}-${rpmVersion}.${rpmArch}.rpm"))
-    onlyIf { gradleOnJava17OrLater && exePresent('rpm') }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'rpm',
@@ -181,7 +189,7 @@ tasks.register("linuxDistRpm", Exec) {
             '--dest', file(layout.buildDirectory.file('distributions')),
             '--vendor', project.property('org.omegat.vendor'),
             '--about-url', project.property('org.omegat.url'),
-            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--license-file', file(layout.projectDirectory.file("release/OmegaT-license.txt")),
             '--install-dir', '/opt/omegat-org',
             '--linux-app-category', 'Application/Editors',
             '--linux-app-release', rpmVersion,
@@ -189,5 +197,52 @@ tasks.register("linuxDistRpm", Exec) {
             '--linux-package-name', 'omegat',
             '--linux-rpm-license-type', 'GPLv3+',
             '--linux-shortcut')
-    assemble.dependsOn linuxDistRpm
+}
+
+// generate windows MSI package
+tasks.register("winDistMsi", Exec) {
+    description = "Creates Windows .exe package"
+    group = 'distribution'
+    dependsOn jpackage
+    dependsOn jpackageAppContent
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage.exe")),
+            '--type', 'msi',
+            "--dest", "build/jpackage",
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--copyright', 'GNU General Public License Version 3+',
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.ico")),
+            '--name', project.property('org.omegat.appName'),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--about-url', project.property('org.omegat.url'),
+            '--license-file', file(layout.projectDirectory.file("release/OmegaT-license.txt")),
+            "--win-shortcut",
+            "--win-menu",
+            "--win-menu-group", "OmegaT"
+    )
+}
+
+// generate mac pkg
+tasks.register("macDistPkg", Exec) {
+    description = "Creates Mac .dmg package"
+    group = 'distribution'
+    dependsOn jpackage
+    dependsOn jpackageAppContent
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'pkg',
+            "--dest", "build/jpackage",
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}.app")),
+            '--app-version', version,
+            '--description', project.property('org.omegat.distDescription'),
+            '--copyright', 'GNU General Public License Version 3+',
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.icns")),
+            '--name', project.property('org.omegat.appName'),
+            '--vendor', project.property('org.omegat.vendor'),
+            '--about-url', project.property('org.omegat.url'),
+            '--license-file', file(layout.projectDirectory.file("release/OmegaT-license.txt")),
+            '--mac-entitlements', file(layout.projectDirectory.file("release/mac-specific/java.entitlements"))
+    )
 }

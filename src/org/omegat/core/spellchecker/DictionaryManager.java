@@ -29,7 +29,6 @@ package org.omegat.core.spellchecker;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -205,6 +204,7 @@ public class DictionaryManager {
      * return a list of names of installable dictionaries (e.g. en_US - english
      * (USA))
      */
+    @Deprecated
     public List<String> getInstallableDictionaryNameList() throws IOException {
         return getDictionaryNameList(getInstallableDictionaryCodeList());
     }
@@ -272,7 +272,7 @@ public class DictionaryManager {
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
         // [ 2138846 ] French dictionary cannot be downloaded and installed
-        int pos = langCode.indexOf("_1-3-2", 0);
+        int pos = langCode.indexOf("_1-3-2");
         if (pos != -1) {
             langCode = langCode.substring(0, pos);
         }

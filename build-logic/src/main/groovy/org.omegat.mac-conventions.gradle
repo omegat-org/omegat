@@ -175,7 +175,7 @@ ext.makeMacTask = { args ->
         group = 'distribution'
     }
 
-    tasks.register(signedInstallTaskName, Sync) {
+    def signedInstallTask = tasks.register(signedInstallTaskName, Sync) {
         description = 'Builds the signed macOS distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties

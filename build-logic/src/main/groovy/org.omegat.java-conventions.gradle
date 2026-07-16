@@ -26,9 +26,7 @@ ext {
 
 repositories {
     mavenCentral()
-    // required by offline build
-    // mavenLocal()
-    // gradlePluginPortal()
+    mavenLocal()
 }
 
 java {

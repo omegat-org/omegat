@@ -143,6 +143,93 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         ProjectUICommands.doWikiImport();
     }
 
+    /**
+     * Exports all unique source segments (and their current translations) to a
+     * bilingual CSV or Excel file chosen by the user.
+     */
+    public void projectExportBilingualMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+        chooser.setDialogTitle(OStrings.getString("TF_BILINGUAL_EXPORT_TITLE"));
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("TF_BILINGUAL_FILTER_CSV"), "csv"));
+        chooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("TF_BILINGUAL_FILTER_XLSX"), "xlsx"));
+        chooser.setSelectedFile(new File("bilingual_export.csv"));
+        if (chooser.showSaveDialog(
+                Core.getMainWindow().getApplicationFrame()) != javax.swing.JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File outputFile = chooser.getSelectedFile();
+        // Append extension if missing
+        String name = outputFile.getName().toLowerCase(java.util.Locale.ROOT);
+        if (!name.endsWith(".csv") && !name.endsWith(".xlsx")) {
+            outputFile = new File(outputFile.getParent(), outputFile.getName() + ".csv");
+        }
+        final File finalFile = outputFile;
+        try {
+            if (finalFile.getName().toLowerCase(java.util.Locale.ROOT).endsWith(".xlsx")) {
+                org.omegat.core.export.ExportBilingualHandler.exportToXlsx(finalFile, Core.getProject());
+            } else {
+                org.omegat.core.export.ExportBilingualHandler.exportToCSV(finalFile, Core.getProject());
+            }
+            Core.getMainWindow().showStatusMessageRB("TF_BILINGUAL_EXPORT_SUCCESS", finalFile.getName());
+        } catch (Exception ex) {
+            Log.log(ex);
+            JOptionPane.showMessageDialog(
+                    Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("TF_BILINGUAL_EXPORT_ERROR", ex.getMessage()),
+                    OStrings.getString("ERROR_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Imports translations from a bilingual CSV or Excel file chosen by the
+     * user back into the current project.
+     */
+    public void projectImportBilingualMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+        chooser.setDialogTitle(OStrings.getString("TF_BILINGUAL_IMPORT_TITLE"));
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("TF_BILINGUAL_FILTER_ALL"), "csv", "xlsx"));
+        chooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("TF_BILINGUAL_FILTER_CSV"), "csv"));
+        chooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("TF_BILINGUAL_FILTER_XLSX"), "xlsx"));
+        if (chooser.showOpenDialog(
+                Core.getMainWindow().getApplicationFrame()) != javax.swing.JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File inputFile = chooser.getSelectedFile();
+        try {
+            int count;
+            if (inputFile.getName().toLowerCase(java.util.Locale.ROOT).endsWith(".xlsx")) {
+                count = org.omegat.core.export.ExportBilingualHandler.importFromXlsx(inputFile, Core.getProject());
+            } else {
+                count = org.omegat.core.export.ExportBilingualHandler.importFromCSV(inputFile, Core.getProject());
+            }
+            if (count > 0) {
+                ProjectUICommands.projectSave();
+                Core.getMainWindow().showStatusMessageRB("TF_BILINGUAL_IMPORT_SUCCESS", count);
+            } else {
+                Core.getMainWindow().showStatusMessageRB("TF_BILINGUAL_IMPORT_NONE");
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
+            JOptionPane.showMessageDialog(
+                    Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("TF_BILINGUAL_IMPORT_ERROR", ex.getMessage()),
+                    OStrings.getString("ERROR_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void projectReloadMenuItemActionPerformed() {
         ProjectUICommands.projectReload();
     }
@@ -364,7 +451,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * replaces entire edited segment text with a the source text of a segment at cursor position
+     * replaces entire edited segment text with a the source text of a segment at
+     * cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {

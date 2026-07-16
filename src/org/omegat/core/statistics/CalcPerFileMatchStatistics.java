@@ -70,6 +70,7 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
 
     @Override
     public Void run(CancellationToken token) throws StoppedException, LongProcessInterruptedException {
+        cancellationToken = token;
         entriesToProcess = getEntrySize() * 2;
         calcPerFile();
         callback.onComplete(Completion.success());

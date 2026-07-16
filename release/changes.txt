@@ -1,4 +1,28 @@
 ----------------------------------------------------------------------
+ OmegaT 6.2.0
+----------------------------------------------------------------------
+   4 Enhancement
+   0 Bug fixes
+   0 Localisation updates
+----------------------------------------------------------------------
+6.2.0 vs 6.1.0
+
+  Implemented requests:
+
+  - Display translated percentage on Project files dialog
+    https://sourceforge.net/p/omegat/feature-requests/1775/
+
+  - Convert full-width Arabic numbers to half-width when inserting a fuzzy match
+    https://sourceforge.net/p/omegat/feature-requests/1193/
+
+  - Migrate the main data store project_save.tmx as TMX 1.4 level 2
+    https://github.com/omegat-org/omegat/pull/1577
+
+  - Improve CLI command line parser
+    https://github.com/omegat-org/omegat/pull/1321
+
+
+----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   65 Enhancement

@@ -90,6 +90,27 @@ offlineOnlyDeps.each { coord ->
     dependencies.add('buildLogicDepsCopy', coord)
 }
 
+// Lazy provider of the primary artifacts (jars/zips), config-cache serializable.
+def jarArtifactsProvider = configurations.buildLogicDepsCopy.incoming.artifacts.resolvedArtifacts
+
+// Enumerate the resolved module component ids so we can fetch a POM for each.
+// This resolves the graph metadata at configuration time (inherent to fetching
+// every transitive POM); on a configuration-cache hit nothing runs.
+def moduleComponentIds = configurations.buildLogicDepsCopy.incoming.resolutionResult.allComponents
+        .findAll { it.id instanceof ModuleComponentIdentifier }
+        .collect { it.id }
+
+// Resolvable configuration holding one @pom artifact per resolved module.
+configurations.create('buildLogicPomsCopy') {
+    transitive = false
+    canBeConsumed = false
+    canBeResolved = true
+}
+moduleComponentIds.each { id ->
+    dependencies.add('buildLogicPomsCopy', "${id.group}:${id.module}:${id.version}@pom")
+}
+def pomArtifactsProvider = configurations.buildLogicPomsCopy.incoming.artifacts.resolvedArtifacts
+
 def destDir = layout.buildDirectory.dir('libs/build-logic')
 tasks.register('downloadBuildLogicDependencies') {
     description = 'Downloads build-logic dependencies for offline/enterprise builds'
@@ -97,31 +118,40 @@ tasks.register('downloadBuildLogicDependencies') {
 
     outputs.dir(destDir)
 
+    // Capture config-cache-serializable locals; the action must NOT reference the
+    // `configurations`/`dependencies`/`project` script objects at execution time.
+    def jars = jarArtifactsProvider
+    def poms = pomArtifactsProvider
+    def dest = destDir
+
     doLast {
+        def root = dest.get().asFile
 
-        configurations.buildLogicDepsCopy
-                .resolvedConfiguration
-                .resolvedArtifacts
-                .each { artifact ->
-                    def moduleVersion = artifact.moduleVersion.id
-                    // Reconstruct Maven layout: group/artifact/version/artifact-version[-classifier].ext
-                    def groupPath = moduleVersion.group.replace('.', '/')
-                    def artifactDir = new File(destDir.get().asFile,
-                            "${groupPath}/${moduleVersion.name}/${moduleVersion.version}")
-                    artifactDir.mkdirs()
+        // Primary artifacts (jars/zips, incl. classifier'd). The resolved file name
+        // already encodes classifier + extension, so it is the correct Maven name.
+        jars.get().each { artifact ->
+            def id = artifact.id.componentIdentifier
+            if (id instanceof ModuleComponentIdentifier) {
+                def artifactDir = new File(root,
+                        "${id.group.replace('.', '/')}/${id.module}/${id.version}")
+                artifactDir.mkdirs()
+                java.nio.file.Files.copy(artifact.file.toPath(),
+                        new File(artifactDir, artifact.file.name).toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+            }
+        }
 
-                    def classifier = artifact.classifier ? "-${artifact.classifier}" : ''
-                    def fileName = "${moduleVersion.name}-${moduleVersion.version}${classifier}.${artifact.extension}"
-                    copy { from artifact.file; into artifactDir; rename { fileName } }
-                    // Fetch POM separately
-                    def pomDep = "${moduleVersion.group}:${moduleVersion.name}:${moduleVersion.version}@pom"
-                    def pomConfig = configurations.detachedConfiguration(
-                            dependencies.create(pomDep)
-                    )
-                    pomConfig.resolvedConfiguration.resolvedArtifacts.each { pom ->
-                        def pomName = "${moduleVersion.name}-${moduleVersion.version}.pom"
-                        copy { from pom.file; into artifactDir; rename { pomName } }
-                    }
-                }
+        // One POM per resolved module.
+        poms.get().each { artifact ->
+            def id = artifact.id.componentIdentifier
+            if (id instanceof ModuleComponentIdentifier) {
+                def artifactDir = new File(root,
+                        "${id.group.replace('.', '/')}/${id.module}/${id.version}")
+                artifactDir.mkdirs()
+                java.nio.file.Files.copy(artifact.file.toPath(),
+                        new File(artifactDir, "${id.module}-${id.version}.pom").toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+            }
+        }
     }
 }

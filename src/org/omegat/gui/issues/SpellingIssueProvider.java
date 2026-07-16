@@ -28,7 +28,6 @@ package org.omegat.gui.issues;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,7 +70,7 @@ class SpellingIssueProvider implements IIssueProvider {
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
         List<Token> misspelled = Core.getSpellChecker().getMisspelledTokens(tmxEntry.translation);
         return misspelled.isEmpty() ? Collections.emptyList()
-                : Arrays.asList(new SpellingIssue(sourceEntry, tmxEntry, misspelled));
+                : List.of(new SpellingIssue(sourceEntry, tmxEntry, misspelled));
     }
 
     /**

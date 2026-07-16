@@ -62,6 +62,7 @@ import javax.xml.stream.events.Namespace;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
@@ -439,7 +440,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     }
 
     /** Used for file type detection **/
-    protected @Nullable StartElement findEvent(File inputFile, Pattern path) throws IOException, TranslationException {
+    protected @Nullable StartElement findEvent(File inputFile, Pattern path)
+            throws IOException, TranslationException {
         try {
             XMLEventReader eventReader = null;
             try {
@@ -532,7 +534,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                 ProtectedPart pp = new ProtectedPart();
                 pp.setTextInSourceSegment(m.group());
                 pp.setDetailsFromSourceFile(buildProtectedPartDetails(saved));
-                if (org.omegat.core.statistics.StatisticsSettings.isCountingStandardTags()) {
+                if (StatisticsSettings.isCountingStandardTags()) {
                     pp.setReplacementWordsCountCalculation(
                             StaticUtils.TAG_REPLACEMENT_CHAR + m.group().replace('<', '_').replace('>', '_')
                                     + StaticUtils.TAG_REPLACEMENT_CHAR);

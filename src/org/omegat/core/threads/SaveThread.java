@@ -29,8 +29,9 @@
 
 package org.omegat.core.threads;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -151,7 +152,7 @@ public class SaveThread implements IAutoSave {
                 dataEngine.teamSyncPrepare();
             });
             Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
-                    DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+                    DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).format(LocalTime.now()));
         } catch (TimeoutException ex) {
             Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
         } catch (KnownException ex) {

@@ -29,26 +29,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
 import org.omegat.core.Core;
+import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 
-import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
 
@@ -62,8 +57,6 @@ public final class TeamTool {
 
     private TeamTool() {
     }
-
-    public static final String COMMAND_INIT = "init";
 
     /**
      * Utility function to create a minimal project to serve as a base for a
@@ -107,17 +100,18 @@ public final class TeamTool {
 
         // Create empty project TM
         ProjectTMX projectTMX = new ProjectTMX();
-        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null,
-                Core.getSegmenter());
-        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false);
+        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), null, Core.getSegmenter());
+        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false,
+                true);
 
         // If the supplied dir is under version control, add everything we made
         // and set EOL handling correctly for cross-platform work
         if (new File(dir, ".svn").isDirectory()) {
             SVNClientManager mgr = SVNClientManager.newInstance();
             mgr.getWCClient().doSetProperty(dir, "svn:auto-props",
-                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"), false,
-                    SVNDepth.EMPTY, null, null);
+                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"),
+                    false, SVNDepth.EMPTY, null, null);
             mgr.getWCClient().doAdd(dir.listFiles(f -> !f.getName().startsWith(".")), false, false, true,
                     SVNDepth.fromRecurse(true), false, false, false, true);
         } else if (new File(dir, ".git").isDirectory()) {
@@ -131,38 +125,7 @@ public final class TeamTool {
             }
         }
 
-        System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
-    }
-
-    public static void showHelp() {
-        System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_HELP"), OStrings.getNameAndVersion()));
-    }
-
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            showHelp();
-            System.exit(1);
-        }
-        if (Arrays.asList(CLIParameters.HELP, CLIParameters.HELP_SHORT).contains(args[0])) {
-            showHelp();
-            System.exit(0);
-        }
-
-        Log.setLevel(Level.WARNING);
-
-        try {
-            Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
-            if (COMMAND_INIT.equals(args[0]) && args.length == 3) {
-                initTeamProject(new File("").getAbsoluteFile(), args[1], args[2]);
-                System.exit(0);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        }
-
-        showHelp();
-        System.exit(1);
+        System.out
+                .println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
     }
 }

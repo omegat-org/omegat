@@ -113,7 +113,7 @@ public final class SRXTest {
     public static class SRXMigrateTest {
 
         @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
@@ -129,7 +129,7 @@ public final class SRXTest {
     public static class SRXMigrateJaTest {
 
         @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("ja"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.of("ja"));
 
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
@@ -145,7 +145,7 @@ public final class SRXTest {
     public static class SRXMigrateOldDeTest {
 
         @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("de"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.of("de"));
 
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
@@ -165,7 +165,7 @@ public final class SRXTest {
     public static class SRXMigrateExtDeTest {
 
         @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("de"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.of("de"));
 
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
@@ -219,7 +219,7 @@ public final class SRXTest {
     public static class SRXSecurityTest {
 
         @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
         @org.junit.Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();

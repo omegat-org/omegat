@@ -27,8 +27,6 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -63,7 +61,7 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     private static final String[] COMMAND_VARIABLES;
 
     public static List<String> getCommandVariables() {
-        return Collections.unmodifiableList(Arrays.asList(COMMAND_VARIABLES));
+        return List.of(COMMAND_VARIABLES);
     }
 
     public CommandVarExpansion(String template) {

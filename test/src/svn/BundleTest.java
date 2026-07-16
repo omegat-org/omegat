@@ -41,9 +41,11 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.util.CommonVerifications;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 /**
@@ -51,6 +53,9 @@ import org.omegat.util.OStrings;
  * @author Aaron Madlon-Kay
  */
 public class BundleTest extends CommonVerifications {
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
 
     /**
      * Ensure that all UI string bundles have either US-ASCII encoding or
@@ -125,7 +130,6 @@ public class BundleTest extends CommonVerifications {
      */
     @Test(expected = MissingResourceException.class)
     public void testUndefinedString() {
-        Locale.setDefault(Locale.ENGLISH);
         // Not sure why we'd ever have a UUID key, but just in case, keep trying
         // new UUIDs until we hit one that's missing (or we give up at
         // Integer.MAX_VALUE and fail).

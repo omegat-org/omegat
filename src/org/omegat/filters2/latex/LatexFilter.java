@@ -11,6 +11,7 @@
                2014 Adiel Mittmann
                2017 Didier Briel
                2023 Hiroshi Miura
+               2026 pierreldff
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -43,6 +44,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -62,6 +66,7 @@ import org.omegat.util.OStrings;
  * @author Adiel Mittmann
  * @author Hiroshi Miura
  */
+@NullMarked
 public class LatexFilter extends AbstractFilter {
 
     /**
@@ -157,7 +162,7 @@ public class LatexFilter extends AbstractFilter {
      * @param out
      *            Target document
      */
-    private void processLatexFile(BufferedReader in, Writer out) throws IOException {
+    void processLatexFile(BufferedReader in, Writer out) throws IOException {
         try (LinebreakPreservingReader lpin = new LinebreakPreservingReader(in)) {
             StringBuilder par = new StringBuilder();
             String s;
@@ -171,6 +176,28 @@ public class LatexFilter extends AbstractFilter {
              */
             String state;
             while ((s = lpin.readLine()) != null) {
+                // Enter verbatim mode on \begin{verbatim} etc.
+                if (verbatimLevel == 0) {
+                    String envName = parseBracedCommand(s.trim(), "\\begin{");
+                    if (envName != null && verbatimEnvironments.contains(envName)) {
+                        verbatimLevel++;
+                        out.write(s);
+                        out.write(lpin.getLinebreak());
+                        continue;
+                    }
+                }
+
+                // Skip verbatim blocks as-is (copy through to \end{...})
+                if (verbatimLevel > 0) {
+                    out.write(s);
+                    out.write(lpin.getLinebreak());
+                    String envName = parseBracedCommand(s.trim(), "\\end{");
+                    if (envName != null && verbatimEnvironments.contains(envName)) {
+                        verbatimLevel--;
+                    }
+                    continue;
+                }
+
                 lineBreak = lpin.getLinebreak();
                 // String[] c = s.split(""); In Java 8, that line gave a first
                 // empty element, so it was replaced with the
@@ -295,10 +322,36 @@ public class LatexFilter extends AbstractFilter {
         return par;
     }
 
+    /**
+     * Extracts the argument from a braced command like \command{arg}.
+     *
+     * @param line
+     *            the line to parse
+     * @param prefix
+     *            the command prefix to look for (e.g., "\\begin{")
+     * @return the content inside braces, or null if not found
+     */
+    @VisibleForTesting
+    @Nullable
+    String parseBracedCommand(String line, String prefix) {
+        if (!line.startsWith(prefix)) {
+            return null;
+        }
+        int openBrace = line.indexOf("{");
+        int closeBrace = line.indexOf('}', openBrace);
+        if (closeBrace > openBrace) {
+            return line.substring(openBrace + 1, closeBrace).trim();
+        }
+        return null;
+    }
+
     private final List<String> oneArgNoText = new LinkedList<>();
     private final List<String> oneArgInlineText = new LinkedList<>();
     private final List<String> oneArgParText = new LinkedList<>();
     private final List<String> parBreakCommand = new LinkedList<>();
+    private int verbatimLevel = 0;
+    private final List<String> verbatimEnvironments = List.of("verbatim", "verbatim*", "comment",
+            "verbatimimport", "lstlisting", "lstlisting*", "minted", "listing", "listing*");
 
     private void init() {
         oneArgNoText.add("\\begin");

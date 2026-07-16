@@ -49,7 +49,7 @@ import org.omegat.util.StringUtil;
 public class POFilterTest extends TestFilterBase {
 
     @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
     @Test
     public void testParse() throws Exception {
@@ -205,14 +205,14 @@ public class POFilterTest extends TestFilterBase {
         checkMulti("Multiline\nmessage ID with linefeed character.", null, "", null, null,
                 "References:\nmultiple_lines\n" + "\n");
         checkMulti("Long context in only one line.", null,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-                        "Excepteur sint occaecat cupidatat non proident",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+                        + "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+                        + "Excepteur sint occaecat cupidatat non proident",
                 null, null, "References:\none_line_only_with_ctx\n" + "\n");
         checkMulti("Long context in several lines.", null,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\\n" +
-                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\\n" +
-                        "Excepteur sint occaecat cupidatat non proident",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\\n"
+                        + "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\\n"
+                        + "Excepteur sint occaecat cupidatat non proident",
                 null, null, "References:\nmultiple_lines_with_ctx\n" + "\n");
         checkMultiEnd();
     }

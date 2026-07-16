@@ -47,7 +47,7 @@ public class IssuesTypeListModelTest {
      */
 
     @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
     @Test
     public void testCalculateData_NoIssues() {

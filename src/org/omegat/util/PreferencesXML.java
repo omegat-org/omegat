@@ -79,7 +79,7 @@ public class PreferencesXML implements IPrefsPersistence {
         mapper = new XmlMapper();
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
         this.firstRun = loadFile == null || !loadFile.exists();
         this.prefCreatedAt = null;
         this.prefUpdatedAt = null;

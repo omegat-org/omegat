@@ -25,11 +25,13 @@
 
 package org.omegat.filters2.text.yaml;
 
+import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -115,15 +117,37 @@ public class YamlFilter extends AbstractFilter {
         }
     }
 
+    @Override
+    public boolean hasOptions() {
+        return true;
+    }
+
+    @Override
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+        YamlOptionsDialog dialog = new YamlOptionsDialog(parent, config);
+        dialog.setVisible(true);
+        return dialog.getOptions();
+    }
+
     /**
      * Traverse the YAML tree depth-first. For every string scalar, ask OmegaT
      * for translation and replace the value with the translation (or same as
      * source when parsing).
      */
     private JsonNode translateNode(JsonNode node, @Nullable String path) {
+        YamlOptions options = new YamlOptions(processOptions);
         if (node.isTextual()) {
             String src = node.asText();
             String currentPath = path == null ? "" : path;
+
+            List<String> include = options.getIncludeKeys();
+            List<String> exclude = options.getExcludeKeys();
+
+            if ((!include.isEmpty() && !options.match(currentPath, include))
+                    || (include.isEmpty() && options.match(currentPath, exclude))) {
+                return node;
+            }
+
             int index = counters.getOrDefault(currentPath, 0);
             counters.put(currentPath, index + 1);
 

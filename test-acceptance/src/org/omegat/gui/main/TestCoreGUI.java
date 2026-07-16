@@ -86,7 +86,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     /**
      * Close the project.
      * <p>
-     *     block until the close action finished.
+     * block until the close action finished.
      */
     protected void closeProject() throws Exception {
         if (!Core.getProject().isProjectLoaded()) {
@@ -116,7 +116,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Open project from the specified path and wait until the dictionary is loaded.
+     * Open project from the specified path and wait until the dictionary is
+     * loaded.
      */
     protected void openSampleProjectWaitDictionary(Path projectPath) throws Exception {
         DictionariesTextArea dictionariesTextArea = (DictionariesTextArea) Core.getDictionaries();
@@ -127,9 +128,13 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Open project from the specified path and wait until the glossary is loaded.
-     * @param projectPath project root path.
-     * @throws Exception when error occurred.
+     * Open project from the specified path and wait until the glossary is
+     * loaded.
+     * 
+     * @param projectPath
+     *            project root path.
+     * @throws Exception
+     *             when error occurred.
      */
     protected void openSampleProjectWaitGlossary(Path projectPath) throws Exception {
         GlossaryTextArea glossaryTextArea = (GlossaryTextArea) Core.getGlossary();
@@ -145,7 +150,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Open project from the specified path and wait until the active match is set.
+     * Open project from the specified path and wait until the active match is
+     * set.
      */
     protected void openSampleProjectWaitMatches(Path projectPath) throws Exception {
         MatchesTextArea matchesTextArea = (MatchesTextArea) Core.getMatcher();
@@ -162,8 +168,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     /**
      * Opens a sample project from the specified path for testing purposes.
      *
-     * @param projectPath the path to the sample project to be opened
-     * @throws Exception if an error occurs while opening the project
+     * @param projectPath
+     *            the path to the sample project to be opened
+     * @throws Exception
+     *             if an error occurs while opening the project
      */
     protected void openSampleProject(Path projectPath) throws Exception {
         // 0. Prepare project folder
@@ -235,8 +243,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Reset state and initialize GUI components for each individual test.
-     * This ensures test isolation while reusing the core system setup.
+     * Reset state and initialize GUI components for each individual test. This
+     * ensures test isolation while reusing the core system setup.
      */
     @Override
     protected void onSetUp() throws Exception {
@@ -246,8 +254,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Initialize GUI components on the Event Dispatch Thread.
-     * This ensures all Swing operations happen on the correct thread.
+     * Initialize GUI components on the Event Dispatch Thread. This ensures all
+     * Swing operations happen on the correct thread.
      */
     protected void initializeGUIComponents() throws Exception {
         // Create main window on EDT and wait for completion
@@ -296,6 +304,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         @Override
         public void enable() {
         }
+
         @Override
         public void disable() {
         }
@@ -326,11 +335,14 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      * Captures a screenshot of the current desktop and saves it as a PNG file
      * in a directory structure based on the provided class name.
      *
-     * @param className the name of the class used to determine the directory structure
-     *                  where the screenshot will be saved
-     * @param name      the name of the screenshot file
-     * @throws IOException if an I/O error occurs during directory creation,
-     *                     file deletion, or saving the screenshot
+     * @param className
+     *            the name of the class used to determine the directory
+     *            structure where the screenshot will be saved
+     * @param name
+     *            the name of the screenshot file
+     * @throws IOException
+     *             if an I/O error occurs during directory creation, file
+     *             deletion, or saving the screenshot
      */
     protected void takeScreenshot(String className, String name) throws IOException {
         Path imageDir = Paths.get(IMAGE_PARENT).resolve(className);
@@ -344,14 +356,16 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Initialize OmegaT Core components once per test class.
-     * This should be called only once for the entire test class.
-     * @throws Exception when the error occurred.
+     * Initialize OmegaT Core components once per test class. This should be
+     * called only once for the entire test class.
+     * 
+     * @throws Exception
+     *             when the error occurred.
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         // Apply locale for the test class
-        LocaleRule.applyLocaleForClass(new Locale("en"));
+        LocaleRule.applyLocaleForClass(Locale.of("en"));
 
         // Initialize core system components that should persist across tests
         initializeOmegaTCore();
@@ -361,8 +375,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Initialize the core OmegaT system components.
-     * Called once per test class to set up the basic infrastructure.
+     * Initialize the core OmegaT system components. Called once per test class
+     * to set up the basic infrastructure.
      */
     private static void initializeOmegaTCore() throws Exception {
         // Set up temporary config directory for the test class

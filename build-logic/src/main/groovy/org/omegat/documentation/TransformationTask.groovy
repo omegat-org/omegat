@@ -11,9 +11,8 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 import org.xml.sax.InputSource
 import org.xml.sax.XMLReader
-import org.xmlresolver.Resolver
-import org.xmlresolver.ResolverConfiguration
 import org.xmlresolver.ResolverFeature
+import org.xmlresolver.XMLResolver
 import org.xmlresolver.XMLResolverConfiguration
 
 import javax.xml.parsers.SAXParserFactory
@@ -127,10 +126,10 @@ abstract class TransformationTask extends AbstractDocumentTask {
 
     private static ResourceResolverWrappingURIResolver initializeResourceResolver() {
         // Use the Catalog Resolver for URI resolution
-        ResolverConfiguration resolverConfig = new XMLResolverConfiguration()
+        XMLResolverConfiguration resolverConfig = new XMLResolverConfiguration()
         resolverConfig.addCatalog(CATALOG)
         resolverConfig.setFeature(ResolverFeature.CLASSPATH_CATALOGS, true)
-        def resolver = new Resolver(resolverConfig)
-        return new ResourceResolverWrappingURIResolver(resolver)
+        XMLResolver xmlResolver = new XMLResolver(resolverConfig)
+        return new ResourceResolverWrappingURIResolver(xmlResolver.getURIResolver())
     }
 }

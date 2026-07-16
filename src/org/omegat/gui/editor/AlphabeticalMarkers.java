@@ -36,7 +36,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.font.TextLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -200,7 +199,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private static Font getTitleFont() {
-        boolean fontAvailable = Arrays.asList(StaticUtils.getFontNames())
+        boolean fontAvailable = List.of(StaticUtils.getFontNames())
                 .contains(DEFAULT_MARKER_FONT_NAME);
         String fontName = fontAvailable ? DEFAULT_MARKER_FONT_NAME : Font.SERIF;
         int fontSize = Preferences.getPreferenceDefault(
@@ -260,9 +259,11 @@ public abstract class AlphabeticalMarkers extends JPanel {
     protected abstract Map<Integer, Point> getViewableSegmentLocations();
 
     /**
-     * Translate a marker title letter to a segment number. If the letter
-     * found, it will be converted to actual segment number string.
-     * @param inputValue as marker title letter
+     * Translate a marker title letter to a segment number. If the letter found,
+     * it will be converted to actual segment number string.
+     * 
+     * @param inputValue
+     *            as marker title letter
      * @return if the letter found translated string, otherwise inputValue.
      */
     public String translateSegmentNumber(String inputValue) {
@@ -274,9 +275,11 @@ public abstract class AlphabeticalMarkers extends JPanel {
         }
     }
 
-     /**
+    /**
      * Returns <tt>true</tt> if this list contains the specified title.
-     * @param title as segment shortcut letter
+     * 
+     * @param title
+     *            as segment shortcut letter
      * @return <tt>true</tt> if this list contains the specified title
      */
     public boolean containsTitle(int title) {
@@ -311,7 +314,8 @@ public abstract class AlphabeticalMarkers extends JPanel {
 
     private static class Marker {
         int segmentNumber = 0;
-        @Nullable Point location = null;
+        @Nullable
+        Point location = null;
         int title = 0;
 
         @Override

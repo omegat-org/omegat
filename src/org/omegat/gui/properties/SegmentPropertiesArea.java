@@ -30,11 +30,11 @@ import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Constructor;
-import java.text.DateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -72,8 +72,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private static final Pattern SPLIT_COMMAS = Pattern.compile("\\s*,\\s*");
 
-    private final DateFormat dateFormat = DateFormat.getDateInstance();
-    private final DateFormat timeFormat = DateFormat.getTimeInstance();
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm:ss a",
+            Locale.getDefault()).withZone(ZoneId.systemDefault());
 
     private static final String KEY_ISDUP = "isDup";
     private static final String KEY_FILE = "file";
@@ -232,7 +232,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                     Preferences.SEGPROPS_NOTIFY_DEFAULT_PROPS);
         }
         String rawProps = Preferences.getPreference(Preferences.SEGPROPS_NOTIFY_PROPS);
-        return Arrays.asList(SPLIT_COMMAS.split(rawProps));
+        return List.of(SPLIT_COMMAS.split(rawProps));
     }
 
     private void setKeyToNotify(String key, boolean enabled) {
@@ -349,13 +349,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
             return;
         }
         if (entry.changeDate != 0) {
-            setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
-                    + timeFormat.format(new Date(entry.changeDate)));
+            setProperty(KEY_CHANGED, dateTimeFormatter.format(Instant.ofEpochMilli(entry.changeDate)));
         }
         setProperty(KEY_CHANGER, entry.changer);
         if (entry.creationDate != 0) {
-            setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
-                    + timeFormat.format(new Date(entry.creationDate)));
+            setProperty(KEY_CREATED, dateTimeFormatter.format(Instant.ofEpochMilli(entry.creationDate)));
         }
         setProperty(KEY_CREATOR, entry.creator);
         if (!entry.defaultTranslation) {

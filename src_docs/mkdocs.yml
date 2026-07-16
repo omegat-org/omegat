@@ -14,6 +14,8 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
 
 theme:
   name: material
@@ -26,6 +28,8 @@ theme:
 # Enable Mermaid diagrams
 extra_javascript:
   - https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - stylesheets/extra.css

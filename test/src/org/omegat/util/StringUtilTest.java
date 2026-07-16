@@ -234,7 +234,7 @@ public class StringUtilTest {
         assertEquals("\u01CB", StringUtil.toTitleCase("\u01CC", locale));
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT
         // ABOVE (U+0130) in Turkish
-        assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", new Locale("tr")));
+        assertEquals("\u0130jk", StringUtil.toTitleCase("ijk", Locale.of("tr")));
         // Non-letters in front
         assertEquals("'Good day, sir.'", StringUtil.toTitleCase("'GOOD DAY, SIR.'", locale));
         // No letters at all
@@ -279,7 +279,7 @@ public class StringUtilTest {
         assertEquals("\u01CB", StringUtil.capitalizeFirst("\u01CC", locale));
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT
         // ABOVE (U+0130) in Turkish
-        assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
+        assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", Locale.of("tr")));
         // Empty string -> empty string (like toLowerCase, toUpperCase)
         assertEquals("", StringUtil.capitalizeFirst("", locale));
     }
@@ -451,8 +451,8 @@ public class StringUtilTest {
         // Test that behavior changes for Turkish
         assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English
                                                                                          // version
-        assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr"))); // Turkish
-                                                                                                // version
+        assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", Locale.of("tr"))); // Turkish
+                                                                                               // version
     }
 
     @Test

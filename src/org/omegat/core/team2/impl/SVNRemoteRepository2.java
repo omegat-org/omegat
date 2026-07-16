@@ -29,7 +29,7 @@ package org.omegat.core.team2.impl;
 import java.io.File;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -217,7 +217,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                     // to get the list of files changed/deleted
                     1000000, new ISVNLogEntryHandler() {
                         @Override
-                        public void handleLogEntry(final SVNLogEntry en) throws SVNException {
+                        public void handleLogEntry(final SVNLogEntry en) {
                             if (en.getRevision() == sinceRevision.getNumber()) {
                                 return;
                             }
@@ -285,7 +285,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             LOGGER.atDebug().log(SVN_FINISH_MSG, "commit");
             return Long.toString(info.getNewRevision());
         } catch (SVNException ex) {
-            if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE,
+            if (List.of(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE,
                     SVNErrorCode.FS_CONFLICT).contains(ex.getErrorMessage().getErrorCode())) {
                 // Somebody else committed changes - it's normal. Will upload on
                 // next save.
@@ -314,7 +314,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
                 throw new NetworkException(se);
             }
 
-            if (Arrays.asList(SVNErrorCode.RA_SVN_IO_ERROR, SVNErrorCode.RA_SVN_CONNECTION_CLOSED)
+            if (List.of(SVNErrorCode.RA_SVN_IO_ERROR, SVNErrorCode.RA_SVN_CONNECTION_CLOSED)
                     .contains(se.getErrorMessage().getErrorCode())) {
                 throw new NetworkException(se);
             }

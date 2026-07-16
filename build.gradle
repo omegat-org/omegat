@@ -32,17 +32,17 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "9.3.1" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "9.6.0" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version
 
 // Definition of bundled JRE file names
 def assetDir = findProperty('assetDir') ?: '../'
-def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
-def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
-def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
-def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_aarch64_linux_*.tar.gz')
 def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
 
 sourcesJar {
@@ -101,6 +101,9 @@ dependencies {
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
 
+        // cli
+        implementation(libs.picocli)
+
         // jaxb gen compilation
         implementation(libs.jaxb4.api)
         runtimeOnly(libs.jaxb4.core)
@@ -138,7 +141,7 @@ dependencies {
         // LanguageTool
         implementation(libs.languagetool.core) {
             exclude module: 'jaxb-core'
-            exclude module: 'commons-logging'
+            exclude module: 'jcl-over-slf4j'
         }
         implementation(libs.icu4j)
 
@@ -151,7 +154,6 @@ dependencies {
         // Team project server support
         implementation(libs.bundles.jgit) {
             exclude module: 'jcl-over-slf4j'
-            exclude module: 'commons-logging'
         }
         implementation(libs.slf4j.jcl)
 
@@ -221,9 +223,7 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
-    testFixturesImplementation(libs.languagetool.core) {
-        exclude module: 'commons-logging'
-    }
+    testFixturesImplementation(libs.languagetool.core)
     testFixturesImplementation(libs.jetbrains.annotations)
     testFixturesImplementation(libs.jspecify)
 
@@ -324,6 +324,21 @@ test {
     // some test case depends on modules from subproject
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
+
+// Resolve module dependencies EAGERLY at configuration time
+def moduleLibs = subprojects
+        .findAll { it.subprojects.isEmpty() }
+        .collect {
+            it.configurations.matching {
+                it.name.endsWith('untimeClasspath')
+                        && !it.name.startsWith('test')
+                        && !it.name.startsWith('jaxb')
+            }
+        }
+        .flatten()
+
+def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
+def providedBuildLogicPath = 'lib/provided/build-logic'
 
 distributions {
     main {
@@ -427,11 +442,21 @@ distributions {
             into(providedModuleLibsPath) {
                 from(configurations.moduleRuntimeLibs)
             }
+            into(providedBuildLogicPath) {
+                from buildLogicLibsDir
+            }
         }
         sourceDistZip.archiveFileName.set(
                 "${application.applicationName}_${project.version}${omtVersion.beta}_Source.zip")
     }
 }
+def buildLogicLibsTask = gradle.includedBuild('build-logic')
+        .task(':downloadBuildLogicDependencies')
+installSourceDist.dependsOn(buildLogicLibsTask)
+sourceDistZip.dependsOn(buildLogicLibsTask)
+
+// Register the native-library signing task
+makeNativeLibsSignTask()
 
 tasks.register('mac') {
     description = 'Builds the Mac distributions.'

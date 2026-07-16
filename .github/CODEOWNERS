@@ -15,7 +15,7 @@ readme*.txt          @kazephil @brandelune @kosivantsov
 /src_docs/template/  @kazephil @brandelune @kosivantsov
 
 # Developer documentation
-/src_docs/developer/ @miurahr @brandelune 
+/src_docs/developer/ @miurahr @brandelune
 OmegaT-license.txt   @kazephil @brandelune @kosivantsov @miurahr
 
 # Build system and CI/CD
@@ -50,3 +50,9 @@ Plugins.properties @miurahr
 
 # Scripts
 /scripts @kosivantsov
+
+# CLI
+/src/org/omegat/cli/Parameters*.properties    @kazephil @brandelune @kosivantsov
+
+# Packages owners
+/src/org/omegat/cli/*.java @miurahr

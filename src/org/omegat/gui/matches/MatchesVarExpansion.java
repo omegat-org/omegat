@@ -28,8 +28,6 @@
 package org.omegat.gui.matches;
 
 import java.text.DateFormat;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -99,7 +97,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             VAR_MATCH_SOURCE };
 
     public static List<String> getMatchesVariables() {
-        return Collections.unmodifiableList(Arrays.asList(MATCHES_VARIABLES));
+        return List.of(MATCHES_VARIABLES);
     }
 
     public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_SOURCE_TEXT + "\n"

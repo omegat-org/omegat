@@ -19,12 +19,12 @@ jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: setup xvfb environment
       run: sudo apt-get install -f -q xvfb libsm-dev libxrender1 libxext-dev libxtst-dev libxcb1-dev fonts-dejavu xfonts-base xfonts-scalable
     - uses: actions/setup-java@v5
       with:
-        java-version: 17
+        java-version: 21
         distribution: 'temurin'
     - uses: gradle/actions/setup-gradle@v6
       name: Setup Gradle
@@ -32,18 +32,3 @@ jobs:
     - name: Run acceptance test
       run: ./gradlew -PenvIsCi=true -PtestDisplay=99 -PtestMaxHeapSize=2048M --scan testAcceptance
       id: gradle
-    - name: "Add Build Scan URL as PR comment"
-      uses: actions/github-script@v9
-      if: github.event_name == 'pull_request' && failure()
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `❌ ${{ github.workflow }} **failed**.
-
-             Please look a Gradle Scan page for details: 
-             ${{ steps.gradle.outputs.build-scan-url }}`
-          })

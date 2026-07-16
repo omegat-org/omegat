@@ -87,7 +87,7 @@ stages:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
   - job: testOnWindows
     displayName: on Windows
     dependsOn: CheckChanges
@@ -97,7 +97,7 @@ stages:
     steps:
       - checkout: self
         fetchDepth: 2
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
   - job: testOnMac
     displayName: on mac
     dependsOn: CheckChanges
@@ -108,7 +108,7 @@ stages:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
-      - template: ci/azure-pipelines/test_java17_steps.yml
+      - template: ci/azure-pipelines/test_steps.yml
 
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))

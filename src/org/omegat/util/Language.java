@@ -31,8 +31,6 @@
 
 package org.omegat.util;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -63,7 +61,7 @@ import java.util.regex.Matcher;
  * @author Briac Pilpre
  */
 public class Language implements Comparable<Object> {
-    private static final Locale EMPTY_LOCALE = new Locale("");
+    private static final Locale EMPTY_LOCALE = Locale.of("");
     private final Locale locale;
 
     /** Creates a new instance of Language, based on Locale */
@@ -99,7 +97,7 @@ public class Language implements Comparable<Object> {
                     String languageCode = m.group(1);
                     String countryCode = m.group(2) == null ? "" : m.group(2);
 
-                    locale = new Locale(languageCode.toLowerCase(Locale.ENGLISH),
+                    locale = Locale.of(languageCode.toLowerCase(Locale.ENGLISH),
                             countryCode.toUpperCase(Locale.ENGLISH));
 
                 } else {
@@ -644,7 +642,7 @@ public class Language implements Comparable<Object> {
      * @return Unmodifiable list of languages
      */
     public static List<Language> getLanguages() {
-        return Collections.unmodifiableList(Arrays.asList(LANGUAGES));
+        return List.of(LANGUAGES);
     }
 
     /**

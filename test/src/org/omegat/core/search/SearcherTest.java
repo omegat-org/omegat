@@ -65,7 +65,7 @@ public class SearcherTest {
     private IProject.FileInfo fi;
 
     @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    public final LocaleRule localeRule = new LocaleRule(Locale.of("en"));
 
     @Before
     public void preUp() throws Exception {

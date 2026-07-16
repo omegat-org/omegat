@@ -214,18 +214,18 @@ public class TMXWriterTest extends TestFilterBase {
         if (translations != null) {
             translations.clear();
         }
-        new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
-                extLevel2, useSlash, new TMXReader2.LoadCallback() {
-                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                        if (sources != null) {
-                            sources.add(tuvSource.text);
-                        }
-                        if (translations != null) {
-                            translations.add(tuvTarget.text);
-                        }
-                        return true;
+        TMXReader2.Builder builder = new TMXReader2.Builder();
+        TMXReader2 reader = builder.setExtTmxLevel2(extLevel2).setUseSlash(useSlash).setSegmentingEnabled(false)
+                .setNeedValidate(true).build();
+        reader.readTMX(outFile, new Language("en-US"), new Language("be-BY"),
+                (TMXReader2.LoadCallback) (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    if (sources != null) {
+                        sources.add(tuvSource.text);
                     }
+                    if (translations != null) {
+                        translations.add(tuvTarget.text);
+                    }
+                    return true;
                 });
     }
 

@@ -100,7 +100,7 @@ public final class ProjectFileStorage {
                 .constructMapType(def.getOtherAttributes().getClass(), QName.class, String.class)));
         mapper.registerModule(module);
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 

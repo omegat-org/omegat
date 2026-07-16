@@ -34,13 +34,13 @@ public class EditorUtilsTest {
     @Test
     public void testGetBoundarySimple() {
         final String lineString = "Hello world of toys!";
-        assertEquals(lineString.indexOf('w'), EditorUtils.getWordBoundary(new Locale("en"), lineString, 8,
+        assertEquals(lineString.indexOf('w'), EditorUtils.getWordBoundary(Locale.of("en"), lineString, 8,
                 false));
-        assertEquals(lineString.indexOf('d') + 1, EditorUtils.getWordBoundary(new Locale("en"), lineString, 8,
+        assertEquals(lineString.indexOf('d') + 1, EditorUtils.getWordBoundary(Locale.of("en"), lineString, 8,
                 true));
-        assertEquals(lineString.indexOf('!'), EditorUtils.getWordBoundary(new Locale("en"), lineString, 15,
+        assertEquals(lineString.indexOf('!'), EditorUtils.getWordBoundary(Locale.of("en"), lineString, 15,
                 true));
-        assertEquals(lineString.indexOf('!') + 1, EditorUtils.getWordBoundary(new Locale("en"), lineString,
+        assertEquals(lineString.indexOf('!') + 1, EditorUtils.getWordBoundary(Locale.of("en"), lineString,
                 lineString.length() + 2, true));
     }
 
@@ -48,13 +48,13 @@ public class EditorUtilsTest {
     public void testGetWordBoundaryJa() {
         final String lineString = "太平寺の中心的なペン塔";
         //太平寺-の-中心-的-な-ペン-塔
-        assertEquals(lineString.indexOf('太'), EditorUtils.getWordBoundary(new Locale("ja"), lineString, 2,
+        assertEquals(lineString.indexOf('太'), EditorUtils.getWordBoundary(Locale.of("ja"), lineString, 2,
                 false));
-        assertEquals(lineString.indexOf('寺') + 1, EditorUtils.getWordBoundary(new Locale("ja"), lineString, 2,
+        assertEquals(lineString.indexOf('寺') + 1, EditorUtils.getWordBoundary(Locale.of("ja"), lineString, 2,
                 true));
-        assertEquals(lineString.indexOf('中'), EditorUtils.getWordBoundary(new Locale("ja"), lineString, 5,
+        assertEquals(lineString.indexOf('中'), EditorUtils.getWordBoundary(Locale.of("ja"), lineString, 5,
                 false));
-        assertEquals(lineString.indexOf('心') + 1, EditorUtils.getWordBoundary(new Locale("ja"), lineString, 5,
+        assertEquals(lineString.indexOf('心') + 1, EditorUtils.getWordBoundary(Locale.of("ja"), lineString, 5,
                 true));
     }
 
@@ -62,13 +62,13 @@ public class EditorUtilsTest {
     public void testGetWordBoundaryCn() {
         final String lineString = "太平寺中的文笔塔";
         // 太平寺-中的-文笔-塔
-        assertEquals(lineString.indexOf('太'), EditorUtils.getWordBoundary(new Locale("zh_CN"), lineString, 2,
+        assertEquals(lineString.indexOf('太'), EditorUtils.getWordBoundary(Locale.of("zh_CN"), lineString, 2,
                 false));
-        assertEquals(lineString.indexOf('寺') + 1, EditorUtils.getWordBoundary(new Locale("zh_CN"), lineString, 2,
+        assertEquals(lineString.indexOf('寺') + 1, EditorUtils.getWordBoundary(Locale.of("zh_CN"), lineString, 2,
                 true));
-        assertEquals(lineString.indexOf('中'), EditorUtils.getWordBoundary(new Locale("zh_CN"), lineString, 4,
+        assertEquals(lineString.indexOf('中'), EditorUtils.getWordBoundary(Locale.of("zh_CN"), lineString, 4,
                 false));
-        assertEquals(lineString.indexOf('的') + 1, EditorUtils.getWordBoundary(new Locale("zh_CN"), lineString, 4,
+        assertEquals(lineString.indexOf('的') + 1, EditorUtils.getWordBoundary(Locale.of("zh_CN"), lineString, 4,
                 true));
     }
 }

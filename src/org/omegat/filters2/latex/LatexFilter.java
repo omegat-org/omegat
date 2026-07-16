@@ -45,6 +45,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -64,6 +65,7 @@ import org.omegat.util.OStrings;
  * @author Adiel Mittmann
  * @author Hiroshi Miura
  */
+@NullMarked
 public class LatexFilter extends AbstractFilter {
 
     /**
@@ -322,8 +324,10 @@ public class LatexFilter extends AbstractFilter {
     /**
      * Extracts the argument from a braced command like \command{arg}.
      *
-     * @param line the line to parse
-     * @param prefix the command prefix to look for (e.g., "\\begin{")
+     * @param line
+     *            the line to parse
+     * @param prefix
+     *            the command prefix to look for (e.g., "\\begin{")
      * @return the content inside braces, or null if not found
      */
     @VisibleForTesting
@@ -344,18 +348,12 @@ public class LatexFilter extends AbstractFilter {
     private final List<String> oneArgParText = new LinkedList<>();
     private final List<String> parBreakCommand = new LinkedList<>();
     private int verbatimLevel = 0;
-    private List<String> verbatimEnvironments;
+    private final List<String> verbatimEnvironments = List.of("verbatim", "verbatim*", "comment",
+            "verbatimimport", "lstlisting", "lstlisting*", "minted", "listing", "listing*");
 
     private void init() {
         oneArgNoText.add("\\begin");
         oneArgNoText.add("\\end");
-
-        verbatimEnvironments = java.util.Arrays.asList(
-            "verbatim", "verbatim*",
-            "comment", "verbatimimport",
-            "lstlisting", "lstlisting*",
-            "minted", "listing", "listing*"
-        );
         oneArgNoText.add("\\cite");
         oneArgNoText.add("\\label");
         oneArgNoText.add("\\ref");

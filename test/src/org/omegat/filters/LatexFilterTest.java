@@ -106,7 +106,8 @@ public class LatexFilterTest extends TestFilterBase {
 
     /**
      * Verifies that verbatim environments (verbatim, minted, lstlisting, etc.)
-     * are preserved as-is and their content is NOT extracted as translatable segments.
+     * are preserved as-is and their content is NOT extracted as translatable
+     * segments.
      */
     @Test
     public void testVerbatimPreserved() throws Exception {

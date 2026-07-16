@@ -29,6 +29,11 @@ import org.junit.Test;
 import org.omegat.languages.LanguageModuleTestBase;
 import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "fr_FR";

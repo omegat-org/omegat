@@ -408,15 +408,11 @@ distributions {
                   'build-logic/**', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
                   'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', '*.properties',
                   'ci/iscc', 'ci/osslsigncode', '.checkstyle', // ci related
-                  'src/**/*.java', // main source
-                  'test/**','test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
+                  'src/**', // root project and docs
+                  'test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
                   'scripts/**', // sample scripts
-                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', // submodules
-                  'src_docs/**' // documents
+                  'firsttime-wizard/**', 'tipoftheday/**', 'machinetranslators/**', 'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**' // submodules
                 exclude '**/.gradle/**', '**/build/**', 'local.properties', '**/out/**'
-            }
-            from(processResources) {
-                into('src')
             }
             into(providedCoreLibsPath) {
                 from configurations.runtimeClasspath

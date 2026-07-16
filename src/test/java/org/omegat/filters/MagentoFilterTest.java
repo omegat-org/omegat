@@ -44,7 +44,7 @@ public class MagentoFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
+        List<String> entries = parse(new MagentoFilter(), "src/test/resources/data/filters/magento/MagentoFilter.csv");
         assertEquals(5, entries.size());
         int i = 0;
         assertEquals("Tr: %s", entries.get(i++));
@@ -57,7 +57,7 @@ public class MagentoFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new MagentoFilter(), "test/data/filters/magento/MagentoFilter.csv");
+        translateText(new MagentoFilter(), "src/test/resources/data/filters/magento/MagentoFilter.csv");
     }
 
     @Test

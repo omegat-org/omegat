@@ -49,7 +49,7 @@ public class ExternalFinderTest extends TestCore {
     @Before
     public void preUp() throws Exception {
         File configDir = new File(StaticUtils.getConfigDir());
-        File[] config = new File[]{new File(new File("test/data/externalfinder/"), FINDER_XML)};
+        File[] config = new File[]{new File(new File("src/test/resources/data/externalfinder/"), FINDER_XML)};
         FileUtil.copyFilesTo(configDir, config, null);
     }
 

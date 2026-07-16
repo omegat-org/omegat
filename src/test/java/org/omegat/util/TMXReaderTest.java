@@ -48,7 +48,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testLeveL1() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-level1.tmx"), new Language("en-US"),
                 new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
@@ -65,7 +65,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testLeveL2() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-level2.tmx"), new Language("en-US"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
@@ -81,7 +81,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testGzip() throws Exception {
         final Map<String, String> tr = new TreeMap<>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx.gz"), new Language("en"), new Language("be"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-level2.tmx.gz"), new Language("en"), new Language("be"),
                 false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
                     tr.put(tuvSource.text, tuvTarget.text);
                     return true;
@@ -96,7 +96,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testZip() throws Exception {
         final Map<String, String> tr = new TreeMap<>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx.zip"), new Language("en"), new Language("be"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-level2.tmx.zip"), new Language("en"), new Language("be"),
                 false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
                     tr.put(tuvSource.text, tuvTarget.text);
                     return true;
@@ -111,7 +111,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testInvalidTMX() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        new TMXReader2().readTMX(new File("test/data/tmx/invalid.tmx"), new Language("en"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/invalid.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
@@ -124,7 +124,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testSMP() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-SMP.tmx"), new Language("en"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-SMP.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
@@ -206,7 +206,7 @@ public class TMXReaderTest extends TestCore {
     @Test
     public void testMissingSource() throws Exception {
         Map<String, String> tr = new TreeMap<>();
-        new TMXReader2().readTMX(new File("test/data/tmx/test-missingSource.tmx"), new Language("en"),
+        new TMXReader2().readTMX(new File("src/test/resources/data/tmx/test-missingSource.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
                     if (tuvSource != null && tuvTarget != null) {
                         tr.put(tuvSource.text, tuvTarget.text);

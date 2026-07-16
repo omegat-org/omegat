@@ -34,7 +34,7 @@ import org.junit.Test;
 
 public class OpenXmlFilterTest extends org.omegat.filters.TestFilterBase {
 
-    private static final String TEST_DATA = "test/data/filters/openXML/document.xml";
+    private static final String TEST_DATA = "src/test/resources/data/filters/openXML/document.xml";
 
     @Test
     public void testOpenXmlFilterIsFileSupported() {

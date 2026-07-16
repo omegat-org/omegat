@@ -52,27 +52,11 @@ sourcesJar {
 sourceSets {
     main {
         java {
-            srcDir 'src'
+            srcDir 'src/main/java'
             srcDir tasks.genJAXB.outputs
         }
-        resources {
-            srcDir 'src'
-        }
     }
-    test {
-        java {
-            srcDir 'test/src'
-        }
-        resources {
-            srcDir 'test/src'
-            srcDir 'test/data'
-        }
-    }
-    testFixtures {
-        java {
-            srcDir 'test/fixtures'
-        }
-    }
+    testFixtures
 }
 
 configurations {

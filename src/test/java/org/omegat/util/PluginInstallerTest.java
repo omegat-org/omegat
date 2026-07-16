@@ -61,7 +61,7 @@ public class PluginInstallerTest {
 
     @Test
     public final void testUnpackPlugin() throws Exception {
-        File zipFile = new File("test/data/plugin/ex-filter.zip");
+        File zipFile = new File("src/test/resources/data/plugin/ex-filter.zip");
         PluginInstaller.unpackPlugin(zipFile, tmpDir.toPath());
         Path target = tmpDir.toPath().resolve("ex-filter-1.0.0.jar");
         assertTrue(target.toFile().exists());
@@ -69,7 +69,7 @@ public class PluginInstallerTest {
 
     @Test
     public final void testParseManifest() throws Exception {
-        File manifest = new File("test/data/plugin/simple/MANIFEST.MF");
+        File manifest = new File("src/test/resources/data/plugin/simple/MANIFEST.MF");
         final String expectedName = "Filters for OmegaT";
         URL mu = manifest.toURI().toURL();
         Set<PluginInformation> pluginInformationSet = PluginInstaller.parsePluginJarFileManifest(mu);
@@ -82,7 +82,7 @@ public class PluginInstallerTest {
 
     @Test
     public final void testParseLegacyManifest() throws Exception {
-        File manifest = new File("test/data/plugin/legacy/MANIFEST.MF");
+        File manifest = new File("src/test/resources/data/plugin/legacy/MANIFEST.MF");
         String[] expected = {"Xliff1Filter", "Xliff2Filter", "SdlXliff", "SdlProject", "MqXliff", "MsOfficeFileFilter"};
         final Set<String> expectedSet = new HashSet<>();
         Collections.addAll(expectedSet, expected);
@@ -106,7 +106,7 @@ public class PluginInstallerTest {
 
     @Test
     public final void testParseLegacyWithNameManifest() throws Exception {
-        File manifest = new File("test/data/plugin/withName/MANIFEST.MF");
+        File manifest = new File("src/test/resources/data/plugin/withName/MANIFEST.MF");
         URL mu = manifest.toURI().toURL();
         Set<PluginInformation> pluginInformationSet = PluginInstaller.parsePluginJarFileManifest(mu);
         assertEquals(6, pluginInformationSet.size());

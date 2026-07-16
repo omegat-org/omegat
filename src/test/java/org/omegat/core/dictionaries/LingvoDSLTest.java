@@ -56,8 +56,8 @@ public class LingvoDSLTest {
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
-    private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
+    private static final File TEST_DICT = new File("src/test/resources/data/dicts-lingvo/test.dsl");
+    private static final File TEST_DICT_DZ = new File("src/test/resources/data/dicts-lingvo-dz/test.dsl.dz");
     private static final Path TEST_DICT_IDX = Paths.get(Paths.get(TEST_DICT.toURI()) + ".idx");
     private static final Path TEST_DICT_DZ_IDX = Paths.get(Paths.get(TEST_DICT_DZ.toURI()) + ".idx");
 

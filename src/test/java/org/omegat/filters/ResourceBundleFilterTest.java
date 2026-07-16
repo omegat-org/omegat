@@ -46,7 +46,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         parse(new ResourceBundleFilter(),
-                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
+                "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         Map<String, String> options = new TreeMap<>();
         options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "true");
         translateText(new ResourceBundleFilter(),
-                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties", options);
+                "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties", options);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -89,7 +89,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603"); // U+2603 SNOWMAN
         checkMultiEnd();
 
-        f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
+        f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
         fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
@@ -100,7 +100,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testDoNotEscapeUnicodeLiterals() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         Map<String, String> options = new HashMap<String, String>();
         options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, "true");
@@ -119,7 +119,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
      */
     @Test
     public void testNonEscapeUnicode() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeUTF8.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeUTF8.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         context.setOutEncoding("UTF-8");
         IProject.FileInfo fi = loadSourceFiles(filter, f);
@@ -140,7 +140,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
      */
     @Test
     public void testEscapeUnicodeWhenASCII() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeEscaped.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeEscaped.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         context.setOutEncoding("US-ASCII");
         Map<String, String> options = new HashMap<>();
@@ -157,7 +157,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testBadUnicodeLiterals() throws Exception {
-        String base = "test/data/filters/resourceBundle/";
+        String base = "src/test/resources/data/filters/resourceBundle/";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         try {
             loadSourceFiles(filter, base + "file-ResourceBundleFilter-BadLiteral1.properties");
@@ -183,7 +183,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         boolean removeSpacesOrig = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         Core.getFilterMaster().getConfig().setRemoveSpacesNonseg(false);
 
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -195,7 +195,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiEnd();
 
         translate(filter, f);
-        compareBinary(new File("test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
+        compareBinary(new File("src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
                 outFile);
 
         // Restore old value
@@ -204,7 +204,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testNOI18N() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -217,7 +217,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testCommentEscaping() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-Comments.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-Comments.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
@@ -230,7 +230,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testRegressionGithub227() throws Exception {
-        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-NonASCIIComments.properties";
+        String f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-NonASCIIComments.properties";
         ResourceBundleFilter filter = new ResourceBundleFilter();
 
         assertTrue(filter.isSourceEncodingVariable());

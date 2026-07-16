@@ -6,6 +6,6 @@
 # These are Windows script files and should use crlf
 /gradlew.bat           text eol=crlf
 # Test data
-test/data/filters/pdf/file-PdfFilter-gold.txt text eol=lf
+src/test/resources/data/filters/pdf/file-PdfFilter-gold.txt text eol=lf
 # archive version
 .git-archival.properties  export-subst

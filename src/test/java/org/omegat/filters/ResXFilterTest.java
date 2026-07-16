@@ -38,14 +38,14 @@ import org.omegat.filters3.xml.resx.ResXFilter;
 public class ResXFilterTest extends TestFilterBase {
     @Test
     public void testParseSimple() throws Exception {
-        List<String> lines = parse(new ResXFilter(), "test/data/filters/ResX/Simple.resx");
+        List<String> lines = parse(new ResXFilter(), "src/test/resources/data/filters/ResX/Simple.resx");
         assertEquals(1, lines.size());
         assertEquals("\"Hocht\u00FCddel\"", lines.get(0));
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/ResX/Resources.resx";
+        String f = "src/test/resources/data/filters/ResX/Resources.resx";
         IProject.FileInfo fi = loadSourceFiles(new ResXFilter(), f);
 
         checkMultiStart(fi, f);
@@ -57,13 +57,13 @@ public class ResXFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        List<String> lines = parse(new ResXFilter(), "test/data/filters/ResX/Resources.resx");
+        List<String> lines = parse(new ResXFilter(), "src/test/resources/data/filters/ResX/Resources.resx");
         assertEquals(2, lines.size());
     }
 
     @Test
     public void testTranslateXMLIdentical() throws Exception {
-        translate(new ResXFilter(), "test/data/filters/ResX/Resources.resx");
-        compareXML(new File("test/data/filters/ResX/Resources.resx"), outFile);
+        translate(new ResXFilter(), "src/test/resources/data/filters/ResX/Resources.resx");
+        compareXML(new File("src/test/resources/data/filters/ResX/Resources.resx"), outFile);
     }
 }

@@ -55,7 +55,7 @@ public class XMLStreamReaderTest {
         XMLStreamReader xml = new XMLStreamReader();
         xml.killEmptyBlocks();
 
-        xml.setStream(new File("test/data/xml/test.xml"));
+        xml.setStream(new File("src/test/resources/data/xml/test.xml"));
 
         XMLBlock blk;
         List<XMLBlock> lst;
@@ -111,7 +111,7 @@ public class XMLStreamReaderTest {
 
             XMLBlock blk;
 
-            xml.setStream(new File("test/data/xml/test-badDecimalEntity.xml"));
+            xml.setStream(new File("src/test/resources/data/xml/test-badDecimalEntity.xml"));
 
             assertNotNull(xml.advanceToTag("root"));
             assertNotNull(blk = xml.advanceToTag("body"));
@@ -121,7 +121,7 @@ public class XMLStreamReaderTest {
             } catch (TranslationException ex) {
             }
 
-            xml.setStream(new File("test/data/xml/test-badHexEntity.xml"));
+            xml.setStream(new File("src/test/resources/data/xml/test-badHexEntity.xml"));
 
             assertNotNull(xml.advanceToTag("root"));
             assertNotNull(blk = xml.advanceToTag("body"));

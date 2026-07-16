@@ -37,27 +37,27 @@ public class EncodingDetectorTest {
     @Test
     public void testDetectHTMLEncoding() {
         // Test with UTF-8 content-type provided in meta
-        String utf8File = "test/data/util/file-HTMLUtils-utf8-content-type.html";
+        String utf8File = "src/test/resources/data/util/file-HTMLUtils-utf8-content-type.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf8File, null).name());
 
         // Test with UTF-16 BE BOM
-        String utf16BEFile = "test/data/util/file-HTMLUtils-utf16_be_with_bom.html";
+        String utf16BEFile = "src/test/resources/data/util/file-HTMLUtils-utf16_be_with_bom.html";
         assertEquals("UTF-16BE", detectHtmlEncoding(utf16BEFile, null).name());
 
         // Test with UTF-16 LE BOM
-        String utf16LEFile = "test/data/util/file-HTMLUtils-utf16_le_with_bom.html";
+        String utf16LEFile = "src/test/resources/data/util/file-HTMLUtils-utf16_le_with_bom.html";
         assertEquals("UTF-16LE", detectHtmlEncoding(utf16LEFile, null).name());
 
         // Test with UTF-8 BOM
-        String utf8BomFile = "test/data/util/file-HTMLUtils-utf8_with_bom.html";
+        String utf8BomFile = "src/test/resources/data/util/file-HTMLUtils-utf8_with_bom.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf8BomFile, null).name());
 
         // Test with UTF-8 xml declaration.
-        String utf8XmlFile = "test/data/util/file-HTMLUtils-utf8-xml-declaration.html";
+        String utf8XmlFile = "src/test/resources/data/util/file-HTMLUtils-utf8-xml-declaration.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf8XmlFile, null).name());
 
         // Test with no BOM and default encoding provided
-        String noBomFile = "test/data/util/file-HTMLUtils-no_header_no_bom.html";
+        String noBomFile = "src/test/resources/data/util/file-HTMLUtils-no_header_no_bom.html";
         assertEquals("ISO-8859-1", detectHtmlEncoding(noBomFile, "ISO-8859-1").name());
 
         // Test with no BOM and no default encoding
@@ -67,18 +67,18 @@ public class EncodingDetectorTest {
     @Test
     public void testDetectHTMLEncodingSpecialCase() {
         // Test with charset="x-user-defined"
-        String userDefinedFile = "test/data/util/file-HTMLUtils-x-user-defined-charset.html";
+        String userDefinedFile = "src/test/resources/data/util/file-HTMLUtils-x-user-defined-charset.html";
         assertEquals("windows-1252", detectHtmlEncoding(userDefinedFile, null).name());
 
         // Test with content="x-user-defined"
-        String userDefined2File = "test/data/util/file-HTMLUtils-x-user-defined-content.html";
+        String userDefined2File = "src/test/resources/data/util/file-HTMLUtils-x-user-defined-content.html";
         assertEquals("windows-1252", detectHtmlEncoding(userDefined2File, null).name());
 
         // Test with content="UTF16-BE"
-        String utf16BE2File = "test/data/util/file-HTMLUtils-utf16_be-charset.html";
+        String utf16BE2File = "src/test/resources/data/util/file-HTMLUtils-utf16_be-charset.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf16BE2File, null).name());
 
-        String windows1252File = "test/data/util/file-HTMLUtils-windows-1252.html";
+        String windows1252File = "src/test/resources/data/util/file-HTMLUtils-windows-1252.html";
         assertEquals("windows-1252", detectHtmlEncoding(windows1252File, "windows-1252").name());
     }
 
@@ -87,7 +87,7 @@ public class EncodingDetectorTest {
         assumeTrue(System.getProperty("os.name").toLowerCase().contains("windows"));
         assumeTrue(Charset.defaultCharset().name().equalsIgnoreCase("windows-1252"));
 
-        String windows1252File = "test/data/util/file-HTMLUtils-windows-1252.html";
+        String windows1252File = "src/test/resources/data/util/file-HTMLUtils-windows-1252.html";
         assertEquals(Charset.defaultCharset().name(), detectHtmlEncoding(windows1252File, null).name());
     }
 }

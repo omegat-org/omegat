@@ -145,7 +145,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
         tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
-                new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), Core.getSegmenter());
+                new File("src/test/resources/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), Core.getSegmenter());
         tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
@@ -159,7 +159,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
         tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
-                new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), Core.getSegmenter());
+                new File("src/test/resources/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), Core.getSegmenter());
         assertEquals(0, tmx.defaults.size());
     }
 
@@ -176,9 +176,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1A() throws Exception {
-        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A.tmx");
-        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A.rc");
-        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A_fr.rc");
+        File tmxFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1A.tmx");
+        File sourceFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1A.rc");
+        File translatedFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1A_fr.rc");
 
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
 
@@ -194,9 +194,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1B() throws Exception {
-        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B.tmx");
-        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B.htm");
-        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B_fr.htm");
+        File tmxFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1B.tmx");
+        File sourceFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1B.htm");
+        File translatedFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1B_fr.htm");
 
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
 
@@ -227,9 +227,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1C() throws Exception {
-        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C.tmx");
-        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C.properties");
-        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C_fr.properties");
+        File tmxFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1C.tmx");
+        File sourceFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1C.properties");
+        File translatedFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1C_fr.properties");
 
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
 
@@ -252,9 +252,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
          * file it contains ID.
          */
 
-//        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
-//        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.po");
-//        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
+//        File tmxFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
+//        File sourceFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1D.po");
+//        File translatedFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
 //
 //        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
 //
@@ -291,7 +291,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
                 "windows-1252", props, fix);
 
-        List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"), "windows-1252");
+        List<String> lines1 = readTextFile(new File("src/test/resources/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"), "windows-1252");
         List<String> lines2 = readTextFile(outFile, "windows-1252");
 
         // fix meta line, since OmegaT writes own meta line for encoding
@@ -320,7 +320,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A-0index.tmx",
                 "windows-1252", props, fix);
 
-        List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"),
+        List<String> lines1 = readTextFile(new File("src/test/resources/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"),
                 "windows-1252");
         List<String> lines2 = readTextFile(outFile, "windows-1252");
 
@@ -362,9 +362,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport2A() throws Exception {
-        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A.tmx");
-        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A.htm");
-        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A_fr.htm");
+        File tmxFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest2A.tmx");
+        File sourceFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest2A.htm");
+        File translatedFile = new File("src/test/resources/data/tmx/TMXComplianceKit/ExportTest2A_fr.htm");
 
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
         props.setSentenceSegmentingEnabled(true);

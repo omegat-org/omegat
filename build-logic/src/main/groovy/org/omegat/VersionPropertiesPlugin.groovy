@@ -7,7 +7,7 @@ class VersionPropertiesPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        def versionPropertiesFile = project.layout.projectDirectory.file('src/org/omegat/Version.properties')
+        def versionPropertiesFile = project.layout.projectDirectory.file('src/main/resources/org/omegat/Version.properties')
         def versionPropProvider = project.providers.fileContents(versionPropertiesFile)
                 .asText // Get the contents as a String
                 .map { content ->

@@ -113,7 +113,7 @@ public class SRXManagerTest {
     @Test
     public void testLoadAndSaveSrxFile() throws IOException {
         // Copy test data to temporary folder
-        File sourceFile = new File("test/data/segmentation/default/segmentation.srx");
+        File sourceFile = new File("src/test/resources/data/segmentation/default/segmentation.srx");
         File tempFile = tempFolder.newFile("original.srx");
         Files.copy(sourceFile.toPath(), tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
@@ -139,7 +139,7 @@ public class SRXManagerTest {
     @Test
     public void testRemoveSrxWhenNull() throws IOException {
         // Copy test data to temporary folder
-        File sourceFile = new File("test/data/segmentation/default/segmentation.srx");
+        File sourceFile = new File("src/test/resources/data/segmentation/default/segmentation.srx");
         File tempFile = tempFolder.newFile("segmentation.srx");
         Files.copy(sourceFile.toPath(), tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         File segmentFile = new File(tempFolder.getRoot(), "segmentation.srx");

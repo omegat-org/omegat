@@ -15,8 +15,8 @@ dependencies {
     docbookXsl 'org.docbook:docbook-xslTNG:2.5.0'
 }
 
-def documentRootDir = 'src_docs'
-def styleRootDir = 'src_docs/xsl'
+def documentRootDir = 'src/docs'
+def styleRootDir = 'src/docs/xsl'
 
 tasks.register('genDocIndex', Copy) {
     def inputTemplate = layout.projectDirectory.file("${documentRootDir}/template/index.html")
@@ -61,7 +61,7 @@ tasks.register('manualPdfs') {
 tasks.register('tipsHtmls', Sync) {
     description = 'Copy tips html/css contents into build folder'
     group = 'documentation'
-    from project.layout.projectDirectory.dir('src_docs/tips')
+    from project.layout.projectDirectory.dir('src/docs/tips')
     into layout.buildDirectory.dir('docs/tips')
 }
 

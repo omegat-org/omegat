@@ -37,7 +37,7 @@ import org.omegat.filters2.mozdtd.MozillaDTDFilter;
 public class MozillaDTDFilterTest extends TestFilterBase {
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/MozillaDTD/file.dtd";
+        String f = "src/test/resources/data/filters/MozillaDTD/file.dtd";
         IProject.FileInfo fi = loadSourceFiles(new MozillaDTDFilter(), f);
 
         checkMultiStart(fi, f);
@@ -49,7 +49,7 @@ public class MozillaDTDFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new MozillaDTDFilter(), "test/data/filters/MozillaDTD/file.dtd");
+        translateText(new MozillaDTDFilter(), "src/test/resources/data/filters/MozillaDTD/file.dtd");
     }
 
     public static class AlignResult {

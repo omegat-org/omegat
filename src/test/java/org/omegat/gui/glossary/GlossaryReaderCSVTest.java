@@ -39,7 +39,7 @@ public class GlossaryReaderCSVTest extends TestCore {
     @Test
     public void testRead() throws Exception {
         List<GlossaryEntry> g = GlossaryReaderCSV.read(new File(
-                "test/data/glossaries/test.csv"), false);
+                "src/test/resources/data/glossaries/test.csv"), false);
         assertEquals(7, g.size());
         assertEquals(g.get(0).getSrcText(), "kde");
         assertEquals(g.get(0).getLocText(), "csv kde");

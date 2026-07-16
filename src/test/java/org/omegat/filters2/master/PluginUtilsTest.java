@@ -52,7 +52,7 @@ public class PluginUtilsTest {
     public void testLoadLatestPluginVersionOnly()
             throws JsonProcessingException, JAXBException, MalformedURLException, URISyntaxException {
         final List<File> pluginsDirs = new ArrayList<>();
-        File testDataDir = new File("test/data/plugin/jar");
+        File testDataDir = new File("src/test/resources/data/plugin/jar");
         URL testDataDirURL = testDataDir.toURI().toURL();
         pluginsDirs.add(testDataDir);
 

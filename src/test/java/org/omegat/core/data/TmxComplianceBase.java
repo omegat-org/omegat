@@ -131,7 +131,7 @@ public abstract class TmxComplianceBase {
 
         ProjectProperties props = new TestProjectProperties(sourceLang, targetLang);
         translateUsingTmx(f, c, fileTextIn, inCharset, fileTMX, outCharset, props, tmxPatch);
-        compareTexts(new File("test/data/tmx/TMXComplianceKit/" + fileTextOut), outCharset, outFile,
+        compareTexts(new File("src/test/resources/data/tmx/TMXComplianceKit/" + fileTextOut), outCharset, outFile,
                 outCharset);
     }
 
@@ -140,7 +140,7 @@ public abstract class TmxComplianceBase {
             Map<String, TMXEntry> tmxPatch) throws Exception {
         final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
                tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
-                       new File("test/data/tmx/TMXComplianceKit/" + fileTMX), Core.getSegmenter());
+                       new File("src/test/resources/data/tmx/TMXComplianceKit/" + fileTMX), Core.getSegmenter());
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
         }
@@ -162,7 +162,7 @@ public abstract class TmxComplianceBase {
                 return fileTextIn;
             }
         };
-        filter.translateFile(new File("test/data/tmx/TMXComplianceKit/" + fileTextIn), outFile, config, fc,
+        filter.translateFile(new File("src/test/resources/data/tmx/TMXComplianceKit/" + fileTextIn), outFile, config, fc,
                 cb);
     }
 

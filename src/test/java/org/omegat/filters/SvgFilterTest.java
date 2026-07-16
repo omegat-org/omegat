@@ -33,7 +33,7 @@ public class SvgFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/SVG/Neural_network_example.svg";
+        String f = "src/test/resources/data/filters/SVG/Neural_network_example.svg";
         IProject.FileInfo fi = loadSourceFiles(new SvgFilter(), f);
 
         checkMultiStart(fi, f);

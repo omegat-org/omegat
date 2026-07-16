@@ -12,9 +12,9 @@ build:
     python: "3.14"
 
 sphinx:
-  configuration: src_docs/developer/conf.py
+  configuration: src/docs/developer/conf.py
 
 # Optionally declare the Python requirements required to build your docs
 python:
    install:
-   - requirements: src_docs/requirements.txt
+   - requirements: src/docs/requirements.txt

@@ -40,19 +40,19 @@ public class PdfFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<ParsedEntry> lines = parse3(new PdfFilter(),
-                "test/data/filters/pdf/file-PdfFilter.pdf", null);
+                "src/test/resources/data/filters/pdf/file-PdfFilter.pdf", null);
         assertEquals("This is some text. This is also some text. ", lines.get(0).source);
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translate(new PdfFilter(), "test/data/filters/pdf/file-PdfFilter.pdf", Collections.emptyMap());
-        compareBinary(new File("test/data/filters/pdf/file-PdfFilter-gold.txt"), outFile);
+        translate(new PdfFilter(), "src/test/resources/data/filters/pdf/file-PdfFilter.pdf", Collections.emptyMap());
+        compareBinary(new File("src/test/resources/data/filters/pdf/file-PdfFilter-gold.txt"), outFile);
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/pdf/file-PdfFilter.pdf";
+        String f = "src/test/resources/data/filters/pdf/file-PdfFilter.pdf";
         IProject.FileInfo fi = loadSourceFiles(new PdfFilter(), f);
 
         checkMultiStart(fi, f);
@@ -62,7 +62,7 @@ public class PdfFilterTest extends TestFilterBase {
 
     @Test
     public void testPasswordProtected() throws Exception {
-        String f = "test/data/filters/pdf/file-PdfFilter-password.pdf";
+        String f = "src/test/resources/data/filters/pdf/file-PdfFilter-password.pdf";
         try {
             loadSourceFiles(new PdfFilter(), f);
             fail("Password-protected PDFs are not supported");

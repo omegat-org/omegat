@@ -31,7 +31,7 @@ ext.makeJaxbTask = { args ->
     genJAXB.dependsOn taskName
 }
 
-def schemaSourcePath = 'src/schemas/'
+def schemaSourcePath = 'src/main/resources/schemas/'
 def generatedSourcePath = 'build/generated/sources/jaxb/main/java/'
 makeJaxbTask(name: 'segmentation', outdir: generatedSourcePath + 'gen/core/segmentation',
         args: ['-no-header', '-npa', '-d', generatedSourcePath, '-p', 'gen.core.segmentation',

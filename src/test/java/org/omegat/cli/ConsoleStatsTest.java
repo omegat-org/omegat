@@ -97,7 +97,7 @@ public class ConsoleStatsTest extends ConsoleTestsCommon {
 
     private void prepareTestConsoleStats() throws Exception {
         prepOmegaTProjectAndDirectries();
-        Path testTmx = Paths.get("test/data/tmx/project_save.tmx");
+        Path testTmx = Paths.get("src/test/resources/data/tmx/project_save.tmx");
         Files.copy(testTmx, getProjectDir().resolve("omegat/project_save.tmx"));
     }
 }

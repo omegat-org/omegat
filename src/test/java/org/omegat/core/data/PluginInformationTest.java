@@ -50,7 +50,7 @@ public class PluginInformationTest {
 
    @Test
    public void test1() throws IOException {
-      File manifest = new File("test/data/plugin/simple/MANIFEST.MF");
+      File manifest = new File("src/test/resources/data/plugin/simple/MANIFEST.MF");
       URL mu = manifest.toURI().toURL();
       try (InputStream in = Files.newInputStream(manifest.toPath())) {
          Manifest m = new Manifest(in);
@@ -68,7 +68,7 @@ public class PluginInformationTest {
 
    @Test
    public void test2() throws IOException {
-      File manifest = new File("test/data/plugin/bundled/MANIFEST.MF");
+      File manifest = new File("src/test/resources/data/plugin/bundled/MANIFEST.MF");
       URL mu = manifest.toURI().toURL();
       try (InputStream in = Files.newInputStream(manifest.toPath())) {
          Manifest m = new Manifest(in);
@@ -84,7 +84,7 @@ public class PluginInformationTest {
 
    @Test
    public void test3() throws IOException {
-      File manifest = new File("test/data/plugin/bundled/MANIFEST.MF");
+      File manifest = new File("src/test/resources/data/plugin/bundled/MANIFEST.MF");
       URL mu = manifest.toURI().toURL();
       try (InputStream in = Files.newInputStream(manifest.toPath())) {
          Manifest m = new Manifest(in);
@@ -101,7 +101,7 @@ public class PluginInformationTest {
 
    @Test
    public void test4() throws IOException {
-      File manifest = new File("test/data/plugin/bundled/MANIFEST.MF");
+      File manifest = new File("src/test/resources/data/plugin/bundled/MANIFEST.MF");
       URL mu = manifest.toURI().toURL();
       try (InputStream in = Files.newInputStream(manifest.toPath())) {
          Manifest m = new Manifest(in);

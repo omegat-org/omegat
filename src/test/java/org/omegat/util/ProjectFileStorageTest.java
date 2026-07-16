@@ -62,7 +62,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class ProjectFileStorageTest {
 
-    private static final File PROJECT_DIR = new File("test/data/project");
+    private static final File PROJECT_DIR = new File("src/test/resources/data/project");
 
     private File tempDir;
 

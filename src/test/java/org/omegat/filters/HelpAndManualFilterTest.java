@@ -41,7 +41,7 @@ public class HelpAndManualFilterTest extends TestFilterBase {
     @Test
     public void testTranslateAttributeFalseIsSkipped() throws Exception {
         HelpAndManualFilter filter = new HelpAndManualFilter();
-        List<String> entries = parse(filter, "test/data/filters/helpandmanual/translate-attr.xml");
+        List<String> entries = parse(filter, "src/test/resources/data/filters/helpandmanual/translate-attr.xml");
 
         // Positive extractions
         assertTrue(entries.contains("Visible Title"));
@@ -56,7 +56,7 @@ public class HelpAndManualFilterTest extends TestFilterBase {
     @Test
     public void testParagraphTagsAreExtracted() throws Exception {
         HelpAndManualFilter filter = new HelpAndManualFilter();
-        List<String> entries = parse(filter, "test/data/filters/helpandmanual/paragraph-tags.xml");
+        List<String> entries = parse(filter, "src/test/resources/data/filters/helpandmanual/paragraph-tags.xml");
 
         // Text coming from each tag declared via defineParagraphTags in the dialect
         assertTrue("caption text should be extracted", entries.contains("Caption Text"));

@@ -54,8 +54,8 @@ public class AutoTmxTest {
 
     @Test
     public void autoFromIceAnd100PC() throws Exception {
-        ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/autotmx/project1.tmx"),
-                new File("test/data/autotmx/auto1.tmx"));
+        ExternalTMX autoTMX = prepareExternalTMX(new File("src/test/resources/data/autotmx/project1.tmx"),
+                new File("src/test/resources/data/autotmx/auto1.tmx"));
 
         ITMXEntry e1 = autoTMX.getEntries().get(0);
         checkListValues(e1, ProjectTMX.PROP_XICE, "11");
@@ -79,8 +79,8 @@ public class AutoTmxTest {
 
     @Test
     public void enforcedMatchesOverrideDefault() throws Exception {
-        ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/enforce1.tmx"));
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/enforce1.tmx"));
 
         SourceTextEntry ste;
         p.allProjectEntries.add(ste = createSTE(null, "Edit"));
@@ -96,8 +96,8 @@ public class AutoTmxTest {
      */
     @Test
     public void enforcedAlternativeMatches() throws Exception {
-        ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/alternative.tmx"));
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/alternative.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);
@@ -113,8 +113,8 @@ public class AutoTmxTest {
      */
     @Test
     public void autoAlternativeMatches() throws Exception {
-        ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/alternative.tmx"));
+        ExternalTMX autoTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/alternative.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);

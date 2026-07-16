@@ -368,8 +368,8 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
-        File inFile = new File("test/data/filters/" + in);
-        File outFile = new File("test/data/filters/" + out);
+        File inFile = new File("src/test/resources/data/filters/" + in);
+        File outFile = new File("src/test/resources/data/filters/" + out);
         filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
     }
 

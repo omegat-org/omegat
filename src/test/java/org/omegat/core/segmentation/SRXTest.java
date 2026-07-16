@@ -57,8 +57,8 @@ import org.omegat.util.LocaleRule;
 @RunWith(Enclosed.class)
 public final class SRXTest {
 
-    private static final File SEGMENT_DEFAULT = new File("test/data/segmentation/default/");
-    private static final String SEGMENT_CONF_BASE = "test/data/segmentation/migrate/";
+    private static final File SEGMENT_DEFAULT = new File("src/test/resources/data/segmentation/default/");
+    private static final String SEGMENT_CONF_BASE = "src/test/resources/data/segmentation/migrate/";
 
     public static boolean checkRules(List<MapRule> mapRuleList, String pattern, String language) {
         return mapRuleList.stream().filter(mapRule -> Objects.equals(language, mapRule.getLanguage()))

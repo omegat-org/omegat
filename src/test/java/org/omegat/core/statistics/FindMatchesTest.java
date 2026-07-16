@@ -73,12 +73,12 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class FindMatchesTest {
 
-    private static final File TMX_MATCH_EN_CA = new File("test/data/tmx/test-match-stat-en-ca.tmx");
-    private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
-    private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
-    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
-    private static final File TMX_SEGMENT_2 = new File("test/data/tmx/segment_2.tmx");
-    private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
+    private static final File TMX_MATCH_EN_CA = new File("src/test/resources/data/tmx/test-match-stat-en-ca.tmx");
+    private static final File TMX_EN_US_SR = new File("src/test/resources/data/tmx/en-US_sr.tmx");
+    private static final File TMX_EN_US_GB_SR = new File("src/test/resources/data/tmx/en-US_en-GB_fr_sr.tmx");
+    private static final File TMX_SEGMENT = new File("src/test/resources/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_SEGMENT_2 = new File("src/test/resources/data/tmx/segment_2.tmx");
+    private static final File TMX_MULTI = new File("src/test/resources/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
 

@@ -66,7 +66,7 @@ public class TmxSegmentationTest {
                     }
                 });
         tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
-                new File("test/data/tmx/resegmenting.tmx"), Core.getSegmenter());
+                new File("src/test/resources/data/tmx/resegmenting.tmx"), Core.getSegmenter());
         assertEquals(2, tmx.defaults.size());
         assertEquals("Ceci est un test.", tmx.defaults.get("This is test.").getTranslationText());
         assertEquals("Juste un test.", tmx.defaults.get("Just a test.").getTranslationText());
@@ -74,7 +74,7 @@ public class TmxSegmentationTest {
 
     @Test
     public void testExternalTMX() throws Exception {
-        ExternalTMX tmx = new ExternalTMFactory.TMXLoader(new File("test/data/tmx/resegmenting.tmx"))
+        ExternalTMX tmx = new ExternalTMFactory.TMXLoader(new File("src/test/resources/data/tmx/resegmenting.tmx"))
                 .setDoSegmenting(true).load(new Language("en"), new Language("fr"));
 
         assertEquals(2, tmx.getEntries().size());

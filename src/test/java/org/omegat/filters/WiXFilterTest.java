@@ -32,7 +32,7 @@ import org.omegat.filters3.xml.wix.WiXFilter;
 public class WiXFilterTest extends TestFilterBase {
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/Wix/fr-fr.wxl";
+        String f = "src/test/resources/data/filters/Wix/fr-fr.wxl";
         IProject.FileInfo fi = loadSourceFiles(new WiXFilter(), f);
 
         checkMultiStart(fi, f);

@@ -109,14 +109,14 @@ public class HunspellTokenizerTest extends TokenizerTestBase {
             File affixFile;
             File dictionaryFile;
             if (language.isSameLanguage("en_GB")) {
-                affixFile = new File("test/data/spelldicts/en_GB.aff");
-                dictionaryFile = new File("test/data/spelldicts/en_GB.dic");
+                affixFile = new File("src/test/resources/data/spelldicts/en_GB.aff");
+                dictionaryFile = new File("src/test/resources/data/spelldicts/en_GB.dic");
             } else if (language.isSameLanguage("es")) {
-                affixFile = new File("test/data/spelldicts/es.aff");
-                dictionaryFile = new File("test/data/spelldicts/es.dic");
+                affixFile = new File("src/test/resources/data/spelldicts/es.aff");
+                dictionaryFile = new File("src/test/resources/data/spelldicts/es.dic");
             } else if (language.isSameLanguage("vi")) {
-                affixFile = new File("test/data/spelldicts/vi.aff");
-                dictionaryFile = new File("test/data/spelldicts/vi.dic");
+                affixFile = new File("src/test/resources/data/spelldicts/vi.aff");
+                dictionaryFile = new File("src/test/resources/data/spelldicts/vi.dic");
             } else {
                 return null;
             }

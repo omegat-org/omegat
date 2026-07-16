@@ -199,7 +199,7 @@ public class PreferencesTest {
 
     @Test
     public void testLoadingUserPreferencesXML() {
-        File loadFile = new File("test/data/preferences/omegat.prefs.xml");
+        File loadFile = new File("src/test/resources/data/preferences/omegat.prefs.xml");
         File saveFile = new File(tmpDir, "omegat-save.prefs");
         Preferences.IPreferences preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
         Assert.assertEquals("14", preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));

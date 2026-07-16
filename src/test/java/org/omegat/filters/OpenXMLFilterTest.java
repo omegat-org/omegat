@@ -38,7 +38,7 @@ import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 public class OpenXMLFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new OpenXMLFilter(), "test/data/filters/openXML/file-OpenXMLFilter.docx");
+        List<String> entries = parse(new OpenXMLFilter(), "src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx");
         assertEquals(2, entries.size());
         assertEquals("This is first line.", entries.get(0));
         assertEquals("This is second line.", entries.get(1));
@@ -46,7 +46,7 @@ public class OpenXMLFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        File in = new File("test/data/filters/openXML/file-OpenXMLFilter.docx");
+        File in = new File("src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx");
         translate(new OpenXMLFilter(), in.getPath());
 
         for (String f : new String[] { "word/document.xml" }) {
@@ -57,7 +57,7 @@ public class OpenXMLFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+        String f = "src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx";
         IProject.FileInfo fi = loadSourceFiles(new OpenXMLFilter(), f);
 
         checkMultiStart(fi, f);

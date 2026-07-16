@@ -50,7 +50,7 @@ public class AltTranslationsMarkerTest extends MarkerTestBase {
         TestCoreInitializer.initEditor(editor);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         Core.setSegmenter(segmenter);
-        Core.setProject(new MarkTestProject(Paths.get("test/data/mark/alternative.tmx").toFile(), segmenter));
+        Core.setProject(new MarkTestProject(Paths.get("src/test/resources/data/mark/alternative.tmx").toFile(), segmenter));
     }
 
     @Test

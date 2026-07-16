@@ -63,7 +63,7 @@ public class StarDictTest {
     @Test
     public void testStardict4j() throws Exception {
         StarDictDictionary dict = StarDictDictionary.loadDictionary(
-                new File("test/data/dicts/latin-francais.ifo"));
+                new File("src/test/resources/data/dicts/latin-francais.ifo"));
         assertEquals(10451, dict.getInformation().getWordCount());
 
         String word = "testudo";
@@ -85,7 +85,7 @@ public class StarDictTest {
     @Test
     public void testReadFileDict() throws Exception {
         StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts/latin-francais.ifo"), FRENCH);
+                new File("src/test/resources/data/dicts/latin-francais.ifo"), FRENCH);
 
         String word = "testudo";
         List<DictionaryEntry> result = dict.readArticles(word);
@@ -113,7 +113,7 @@ public class StarDictTest {
     @Test
     public void testReadZipDict() throws Exception {
         StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
+                new File("src/test/resources/data/dicts-zipped/latin-francais.ifo"), FRENCH);
         String word = "testudo";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());
@@ -125,7 +125,7 @@ public class StarDictTest {
     @Test
     public void testReadDictPangoMarkup() throws Exception {
         StarDict.StarDictDict dict = new StarDict.StarDictDict(
-                new File("test/data/dicts-pango/english-czech.ifo"), SLOVNIK);
+                new File("src/test/resources/data/dicts-pango/english-czech.ifo"), SLOVNIK);
         String word = "lookup";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());

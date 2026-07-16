@@ -49,7 +49,7 @@ public class ComesFromAutoTMMarkerTest extends MarkerTestBase {
         TestCoreInitializer.initEditor(editor);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         Core.setSegmenter(segmenter);
-        Core.setProject(new MarkTestProject(Paths.get("test/data/autotmx/auto1.tmx").toFile(), segmenter));
+        Core.setProject(new MarkTestProject(Paths.get("src/test/resources/data/autotmx/auto1.tmx").toFile(), segmenter));
     }
 
     @Test

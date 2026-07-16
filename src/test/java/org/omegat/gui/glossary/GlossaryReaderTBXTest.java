@@ -66,7 +66,7 @@ public class GlossaryReaderTBXTest extends TestCore {
             }
         });
         List<GlossaryEntry> g = GlossaryReaderTBX.read(new File(
-                "test/data/glossaries/sampleTBXfile.tbx"), false);
+                "src/test/resources/data/glossaries/sampleTBXfile.tbx"), false);
         assertEquals(1, g.size());
         assertEquals("alpha smoothing factor", g.get(0).getSrcText());
         assertEquals("hu translation", g.get(0).getLocText());

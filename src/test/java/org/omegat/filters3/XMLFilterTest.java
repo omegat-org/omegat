@@ -42,7 +42,7 @@ public class XMLFilterTest extends TestFilterBase {
     @Test
     public void testLoadCJKPath() throws Exception {
         TestFilter filter = new TestFilter(new DefaultXMLDialect());
-        String f = "test/data/xml/\u6587\u4EF6/test.xml";
+        String f = "src/test/resources/data/xml/\u6587\u4EF6/test.xml";
         File inputFile = new File(f);
         filter.processFile(inputFile, outFile, context);
     }

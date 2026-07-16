@@ -42,7 +42,7 @@ public class LatexFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/Latex/latexexample.tex";
+        String f = "src/test/resources/data/filters/Latex/latexexample.tex";
         IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
 
         checkMultiStart(fi, f);
@@ -52,7 +52,7 @@ public class LatexFilterTest extends TestFilterBase {
 
     @Test
     public void testLoadItemize() throws Exception {
-        String f = "test/data/filters/Latex/file-latex-items.tex";
+        String f = "src/test/resources/data/filters/Latex/file-latex-items.tex";
         IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
 
         checkMultiStart(fi, f);
@@ -71,13 +71,13 @@ public class LatexFilterTest extends TestFilterBase {
 
     @Test
     public void testParseItemize() throws Exception {
-        translate(new LatexFilter(), "test/data/filters/Latex/file-latex-items.tex");
-        compareBinary(new File("test/data/filters/Latex/file-latex-items-exp.tex"), outFile);
+        translate(new LatexFilter(), "src/test/resources/data/filters/Latex/file-latex-items.tex");
+        compareBinary(new File("src/test/resources/data/filters/Latex/file-latex-items-exp.tex"), outFile);
     }
 
     @Test
     public void testLoadComments() throws Exception {
-        String f = "test/data/filters/Latex/file-latex-comments.tex";
+        String f = "src/test/resources/data/filters/Latex/file-latex-comments.tex";
         IProject.FileInfo fi = loadSourceFiles(new LatexFilter(), f);
 
         checkMultiStart(fi, f);
@@ -90,13 +90,13 @@ public class LatexFilterTest extends TestFilterBase {
 
     @Test
     public void testArticle() throws Exception {
-        translate(new LatexFilter(), "test/data/filters/Latex/test-article.tex");
-        compareBinary(new File("test/data/filters/Latex/test-article-exp.tex"), outFile);
+        translate(new LatexFilter(), "src/test/resources/data/filters/Latex/test-article.tex");
+        compareBinary(new File("src/test/resources/data/filters/Latex/test-article-exp.tex"), outFile);
     }
 
     @Test
     public void testBugOverlap() throws Exception {
-        String f = "test/data/filters/Latex/bug_overlap.tex";
+        String f = "src/test/resources/data/filters/Latex/bug_overlap.tex";
         List<String> entries = parse(new LatexFilter(), f);
         assertEquals(1, entries.size());
         String target = entries.get(0);

@@ -5,7 +5,7 @@ plugins {
     id 'org.omegat.module'
 }
 
-def documentRootDir = 'src_docs'
+def documentRootDir = 'src/docs'
 
 dependencies {
     compileOnly(project.rootProject)

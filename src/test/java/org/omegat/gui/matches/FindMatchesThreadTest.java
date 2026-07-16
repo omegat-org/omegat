@@ -68,7 +68,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class FindMatchesThreadTest {
-    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_SEGMENT = new File("src/test/resources/data/tmx/penalty-010/segment_1.tmx");
     private static final String SOURCE_TEXT = "地力の搾取と浪費が現われる。(1)";
     private static Path tmpDir;
 

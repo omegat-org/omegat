@@ -67,7 +67,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
         filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
         segmenter = new Segmenter(SRX.getDefault());
         projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
-                Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
+                Paths.get("src/test/resources/data/tmx/empty.tmx").toFile(), null, segmenter);
         loadSource();
     }
 
@@ -95,7 +95,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
 
     private void loadSource() {
         IFilter filter = new PoFilter();
-        Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+        Path testSource = Paths.get("src/test/resources/data/filters/po/file-POFilter-match-stat-en-ca.po");
         IParseCallback testCallback = new TestingParseCallback(ste);
         FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
         try {
@@ -134,7 +134,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
 
     @Override
     public List<IProject.FileInfo> getProjectFiles() {
-        FileInfo fi = new FileInfo("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+        FileInfo fi = new FileInfo("src/test/resources/data/filters/po/file-POFilter-match-stat-en-ca.po");
         fi.entries.addAll(ste);
         return Collections.singletonList(fi);
     }
@@ -146,7 +146,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
                 transMemories = new TreeMap<>();
                 try {
                     ExternalTMX newTMX;
-                    Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
+                    Path testTmx = Paths.get("src/test/resources/data/tmx/test-match-stat-en-ca.tmx");
                     newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, filterMaster);
                     transMemories.put(testTmx.toString(), newTMX);
                 } catch (Exception e) {
@@ -166,7 +166,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
             setTargetLanguage(new Language("ca"));
             setTargetTokenizer(DefaultTokenizer.class);
             setProjectRoot(tmpDir.toString());
-            setSourceRoot("test/data/filters/po/");
+            setSourceRoot("src/test/resources/data/filters/po/");
         }
     }
 }

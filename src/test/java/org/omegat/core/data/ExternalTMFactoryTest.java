@@ -81,7 +81,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadTMX() throws Exception {
-        File tmxFile = new File("test/data/tmx/resegmenting.tmx");
+        File tmxFile = new File("src/test/resources/data/tmx/resegmenting.tmx");
         sourceLang = new Language("en");
         targetLang = new Language("fr");
 
@@ -98,7 +98,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadPO() throws Exception {
-        File tmxFile = new File("test/data/filters/po/file-POFilter-be-utf8.po");
+        File tmxFile = new File("src/test/resources/data/filters/po/file-POFilter-be-utf8.po");
         sourceLang = new Language("en");
         targetLang = new Language("be");
 
@@ -120,7 +120,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadMozillaLang() throws Exception {
-        File tmxFile = new File("test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
+        File tmxFile = new File("src/test/resources/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
         sourceLang = new Language("en");
         targetLang = new Language("de");
 
@@ -137,7 +137,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadXliff() throws Exception {
-        File tmxFile = new File("test/data/filters/xliff/filters4-xliff1/en-ca.xlf");
+        File tmxFile = new File("src/test/resources/data/filters/xliff/filters4-xliff1/en-ca.xlf");
 
         sourceLang = new Language("en");
         targetLang = new Language("ca");
@@ -165,7 +165,7 @@ public class ExternalTMFactoryTest extends TestCore {
         TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
 
-        File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");
+        File tmxFile = new File("src/test/resources/data/tmx/test-multiple-tuv.tmx");
         sourceLang = new Language("en");
         targetLang = new Language("fr");
 

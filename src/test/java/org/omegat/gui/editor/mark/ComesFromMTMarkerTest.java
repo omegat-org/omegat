@@ -52,7 +52,7 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
 
     @Before
     public void preUp() throws Exception {
-        Path tmroot = Paths.get("test/data/tmx/");
+        Path tmroot = Paths.get("src/test/resources/data/tmx/");
         project = tmroot.resolve("mt/mt1.tmx"); // should under 'mt'
         TestCoreInitializer.initEditor(editor);
         Segmenter segmenter =  new Segmenter(SRX.getDefault());

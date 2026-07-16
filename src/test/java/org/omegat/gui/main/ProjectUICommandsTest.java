@@ -49,7 +49,7 @@ public class ProjectUICommandsTest extends TestCore {
 
     @Test
     public void testIsIdenticalOmegatProjectProperties0() throws Exception {
-        final File projectRootFolder = new File("test/data/team-project/l10n-ja");
+        final File projectRootFolder = new File("src/test/resources/data/team-project/l10n-ja");
         ProjectProperties props = ProjectFileStorage
                 .loadProjectProperties(projectRootFolder.getAbsoluteFile());
         ProjectProperties another = ProjectFileStorage
@@ -86,7 +86,7 @@ public class ProjectUICommandsTest extends TestCore {
 
     @Test
     public void testGetRootRepositoryMappingSvn() throws Exception {
-        final File projectRootFolder = new File("test/data/team-project/svn");
+        final File projectRootFolder = new File("src/test/resources/data/team-project/svn");
         ProjectProperties props = ProjectFileStorage
                 .loadProjectProperties(projectRootFolder.getAbsoluteFile());
         RepositoryDefinition rootRepo = ProjectUICommands.getRootRepositoryMapping(props.getRepositories());

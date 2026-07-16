@@ -49,7 +49,7 @@ public class YamlFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml");
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml");
         // Expected extraction order follows insertion order in YAML
         assertEquals(8, entries.size());
         assertEquals("Welcome", entries.get(0));
@@ -73,12 +73,12 @@ public class YamlFilterTest extends TestFilterBase {
         YamlFilter filter = new YamlFilter();
 
         // Run the actual translation flow to produce outFile
-        translate(filter, "test/data/filters/yaml/sample1.yaml");
+        translate(filter, "src/test/resources/data/filters/yaml/sample1.yaml");
 
         // Parse source and produced YAML and compare the list of textual scalars
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         JsonNode src =
-                mapper.readTree(new File("test/data/filters/yaml/sample1.yaml"));
+                mapper.readTree(new File("src/test/resources/data/filters/yaml/sample1.yaml"));
         JsonNode trg = mapper.readTree(outFile);
 
         java.util.List<String> srcTexts = new ArrayList<>();
@@ -112,7 +112,7 @@ public class YamlFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/yaml/sample1.yaml";
+        String f = "src/test/resources/data/filters/yaml/sample1.yaml";
         IProject.FileInfo fi = loadSourceFiles(new YamlFilter(), f);
 
         checkMultiStart(fi, f);
@@ -130,7 +130,7 @@ public class YamlFilterTest extends TestFilterBase {
     @Test
     public void testParseWithExclude() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/links/help;footer/links/terms");
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
         assertEquals(6, entries.size());
         assertEquals("Welcome", entries.get(0));
         assertEquals("Home", entries.get(1));
@@ -143,7 +143,7 @@ public class YamlFilterTest extends TestFilterBase {
     @Test
     public void testParseWithInclude() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_INCLUDE, "menu/**");
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
         assertEquals(3, entries.size());
         assertEquals("Home", entries.get(0));
         assertEquals("About", entries.get(1));
@@ -153,7 +153,7 @@ public class YamlFilterTest extends TestFilterBase {
     @Test
     public void testParseWithWildcard() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/*/*");
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
         assertEquals(6, entries.size());
         assertEquals("Welcome", entries.get(0));
         assertEquals("Home", entries.get(1));
@@ -169,7 +169,7 @@ public class YamlFilterTest extends TestFilterBase {
             YamlOptions.OPTION_INCLUDE, "footer/copyright",
             YamlOptions.OPTION_EXCLUDE, "**/links/**"
         );
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/sample1.yaml", options);
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
         assertEquals(1, entries.size());
         assertEquals("(c) 2025 Example Co.", entries.get(0));
     }
@@ -177,7 +177,7 @@ public class YamlFilterTest extends TestFilterBase {
     @Test
     public void testParseWithExcludeFileKey() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "**/file");
-        List<String> entries = parse(new YamlFilter(), "test/data/filters/yaml/tips.yaml", options);
+        List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/tips.yaml", options);
         // "file" keys should be excluded, "name" keys should be included.
         // tips[0]/file: shortcut_help.html (excluded)
         // tips[0]/name: Call user manual (included)

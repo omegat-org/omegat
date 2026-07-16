@@ -52,7 +52,7 @@ import org.omegat.util.Language;
  */
 public class DictionariesManagerTest {
 
-    private static final String DICTS_DIR = "test/data/dicts";
+    private static final String DICTS_DIR = "src/test/resources/data/dicts";
     private static final File IGNORE_FILE = new File(DICTS_DIR, DictionariesManager.IGNORE_FILE);
     private static final File DICT_FILE = new File(DICTS_DIR, "latin-francais.ifo");
 

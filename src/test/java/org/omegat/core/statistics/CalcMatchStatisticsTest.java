@@ -45,28 +45,30 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Unit tests for the {@code CalcMatchStatistics} class. This class validates
- * the functionality of calculating match statistics for translation memory
- * segments. The tests assert correctness of match categories such as
- * repetitions, exact matches, fuzzy matches, and no matches across multiple
- * similarity thresholds.
+ * Unit tests for the {@code CalcMatchStatistics} class.
+ * This class validates the functionality of calculating match statistics for
+ * translation memory segments. The tests assert correctness of match categories
+ * such as repetitions, exact matches, fuzzy matches, and no matches across
+ * multiple similarity thresholds.
  *
  * The following annotations and methods are notable:
  *
- * - {@code @Before}: Used for test-specific setup, ensuring the testing
- * environment is initialized and isolated. - {@code @BeforeClass}: Utilized for
- * one-time setup before all tests are executed, including temporary directory
- * creation for testing purposes. - {@code @Test}: Defines a method as a test
- * case, validating different statistical metrics with assertions.
+ * - {@code @Before}: Used for test-specific setup, ensuring the testing environment
+ *   is initialized and isolated.
+ * - {@code @BeforeClass}: Utilized for one-time setup before all tests are executed,
+ *   including temporary directory creation for testing purposes.
+ * - {@code @Test}: Defines a method as a test case, validating different
+ *   statistical metrics with assertions.
  *
  * Key functionality tested:
  *
- * - Ensures that statistics calculations such as repetitions, exact matches,
- * and fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds)
- * produce expected and valid results. - Asserts total metrics for match
- * statistics to verify data aggregation is correct and comprehensive. -
- * Confirms integration of dependent components like segmenters and testing
- * consumers used for capturing results.
+ * - Ensures that statistics calculations such as repetitions, exact matches, and
+ *   fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds) produce
+ *   expected and valid results.
+ * - Asserts total metrics for match statistics to verify data aggregation is
+ *   correct and comprehensive.
+ * - Confirms integration of dependent components like segmenters and testing
+ *   consumers used for capturing results.
  */
 public class CalcMatchStatisticsTest extends TestCore {
 
@@ -87,6 +89,34 @@ public class CalcMatchStatisticsTest extends TestCore {
     public void setUp() throws Exception {
         project = new TestingProject(tmpDir);
         TestCoreState.getInstance().setProject(project);
+    }
+
+    @Test
+    public void testStatistics() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        ICalcStatistics calc = new CalcStandardStatistics(project, testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calc.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertFalse(ctoken.isCancelled());
+        assertTrue(completion.isSuccess());
+
+        List<String[][]> allResult = testingStatsConsumer.getTable();
+        assertEquals(2, allResult.size());
+        String[][] result = allResult.get(0);
+        assertNotNull(result);
+        // Total: 108 938 4894 5699
+        assertRowValues(result[0], "108", "938", "4894", "5699");
+        // Remaining: 108 938 4894 5699
+        assertRowValues(result[1], "108", "938", "4894", "5699");
+        // Unique: 97 848 4385 5116
+        assertRowValues(result[2], "97", "848", "4385", "5116");
+        // Unique Remaining: 97 848 4385 5116
+        assertRowValues(result[3], "97", "848", "4385", "5116");
+        result = allResult.get(1);
+        assertNotNull(result);
+        // src/test/resources/data/filters/po/file-POFilter-match-stat-en-ca.po: 108 108 97 97 ....
+        assertRowValues(result[0], "108", "108", "97", "97");
     }
 
     @Test
@@ -115,8 +145,7 @@ public class CalcMatchStatisticsTest extends TestCore {
         TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
-        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter,
-                testingStatsConsumer);
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer);
         CancellationToken ctoken = new CancellationToken();
         calcMatchStatistics.run(ctoken);
         Completion completion = testingStatsConsumer.completion().join();

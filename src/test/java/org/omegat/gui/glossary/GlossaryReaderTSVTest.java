@@ -38,7 +38,7 @@ import org.omegat.core.TestCore;
 public class GlossaryReaderTSVTest extends TestCore {
     @Test
     public void testRead() throws Exception {
-        List<GlossaryEntry> g = GlossaryReaderTSV.read(new File("test/data/glossaries/test.tab"), false);
+        List<GlossaryEntry> g = GlossaryReaderTSV.read(new File("src/test/resources/data/glossaries/test.tab"), false);
         assertEquals(4, g.size());
         assertEquals("kde", g.get(0).getSrcText());
         assertEquals("koo moo", g.get(0).getLocText());
@@ -51,7 +51,7 @@ public class GlossaryReaderTSVTest extends TestCore {
         assertEquals("손가락", g.get(3).getSrcText());
         assertEquals("Korean Term", g.get(3).getLocText());
 
-        g = GlossaryReaderTSV.read(new File("test/data/glossaries/testUTF16LE.txt"), false);
+        g = GlossaryReaderTSV.read(new File("src/test/resources/data/glossaries/testUTF16LE.txt"), false);
         assertEquals(2, g.size());
         assertEquals("UTF", g.get(0).getSrcText());
         assertEquals("Unicode Transformation Format", g.get(0).getLocText());

@@ -77,7 +77,7 @@ public class StatsResultTest {
         //
         String actual = new StatisticsXmlWriter().getXmlData(result);
         //
-        URL f1 = Paths.get("test/data/statistics/stats-result-1.xml").toUri().toURL();
+        URL f1 = Paths.get("src/test/resources/data/statistics/stats-result-1.xml").toUri().toURL();
         Document expected = builder.parse(f1.toExternalForm());
         Document actualParsed = builder.parse(new InputSource(new StringReader(actual)));
         assertThat(actualParsed).and(expected)

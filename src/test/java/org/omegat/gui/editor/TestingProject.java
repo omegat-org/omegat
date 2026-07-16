@@ -58,7 +58,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
         super();
         this.prop = prop;
         projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
-                Paths.get("test/data/tmx/en-ca.tmx").toFile(), null);
+                Paths.get("src/test/resources/data/tmx/en-ca.tmx").toFile(), null);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
     public List<SourceTextEntry> getAllEntries() {
         List<SourceTextEntry> ste = new ArrayList<>();
         IFilter filter = new PoFilter();
-        Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+        Path testSource = Paths.get("src/test/resources/data/filters/po/file-POFilter-match-stat-en-ca.po");
         FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
         try {
             filter.parseFile(testSource.toFile(), Collections.emptyMap(), context, null);
@@ -121,7 +121,7 @@ public class TestingProject extends NotLoadedProject implements IProject {
                 transMemories = new TreeMap<>();
                 try {
                     ExternalTMX newTMX;
-                    Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
+                    Path testTmx = Paths.get("src/test/resources/data/tmx/test-match-stat-en-ca.tmx");
                     newTMX = ExternalTMFactory.load(testTmx.toFile());
                     transMemories.put(testTmx.toString(), newTMX);
                 } catch (Exception e) {

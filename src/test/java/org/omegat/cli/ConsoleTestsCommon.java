@@ -49,7 +49,7 @@ public class ConsoleTestsCommon {
         tmpDir = Files.createTempDirectory("omegat");
         assertTrue(tmpDir.toFile().isDirectory());
         configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
-        Files.copy(Path.of("test/data/preferences/filters.xml"), tmpDir.resolve(".omegat/filters.xml"));
+        Files.copy(Path.of("src/test/resources/data/preferences/filters.xml"), tmpDir.resolve(".omegat/filters.xml"));
     }
 
     @After

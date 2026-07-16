@@ -39,13 +39,13 @@ import org.omegat.filters2.text.TextFilter;
 public class TextFilterTest extends TestFilterBase {
     @Test
     public void testTextFilterParsing() throws Exception {
-        List<String> entries = parse(new TextFilter(), "test/data/filters/text/text1.txt");
+        List<String> entries = parse(new TextFilter(), "src/test/resources/data/filters/text/text1.txt");
         assertEquals("First entry\r\n", entries.get(0));
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new TextFilter(), "test/data/filters/text/text1.txt");
+        translateText(new TextFilter(), "src/test/resources/data/filters/text/text1.txt");
     }
 
     @Test
@@ -69,16 +69,16 @@ public class TextFilterTest extends TestFilterBase {
 
         TextFilter filter = new TextFilter();
 
-        List<String> entries = parse(filter, "test/data/filters/text/file-TextFilter.txt", options);
+        List<String> entries = parse(filter, "src/test/resources/data/filters/text/file-TextFilter.txt", options);
         assertEquals(count1, entries.size());
 
-        entries = parse(filter, "test/data/filters/text/file-TextFilter-noemptylines.txt", options);
+        entries = parse(filter, "src/test/resources/data/filters/text/file-TextFilter-noemptylines.txt", options);
         assertEquals(count2, entries.size());
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/text/file-TextFilter-multiple.txt";
+        String f = "src/test/resources/data/filters/text/file-TextFilter-multiple.txt";
         IProject.FileInfo fi = loadSourceFiles(new TextFilter(), f);
 
         checkMultiStart(fi, f);
@@ -97,7 +97,7 @@ public class TextFilterTest extends TestFilterBase {
 
         TextFilter filter = new TextFilter();
 
-        translate(filter, "test/data/filters/text/file-TextFilter-SMP.txt", options);
-        compareBinary(new File("test/data/filters/text/file-TextFilter-SMP-gold.txt"), outFile);
+        translate(filter, "src/test/resources/data/filters/text/file-TextFilter-SMP.txt", options);
+        compareBinary(new File("src/test/resources/data/filters/text/file-TextFilter-SMP-gold.txt"), outFile);
     }
 }

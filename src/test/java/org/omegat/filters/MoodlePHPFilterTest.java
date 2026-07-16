@@ -36,12 +36,12 @@ import org.omegat.filters2.moodlephp.MoodlePHPFilter;
 public class MoodlePHPFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        parse(new MoodlePHPFilter(), "test/data/filters/MoodlePHP/file.php");
+        parse(new MoodlePHPFilter(), "src/test/resources/data/filters/MoodlePHP/file.php");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/MoodlePHP/file.php";
+        String f = "src/test/resources/data/filters/MoodlePHP/file.php";
         IProject.FileInfo fi = loadSourceFiles(new MoodlePHPFilter(), f);
 
         checkMultiStart(fi, f);
@@ -58,7 +58,7 @@ public class MoodlePHPFilterTest extends TestFilterBase {
     @Test
     public void testTranslate() throws Exception {
         translateText(new MoodlePHPFilter(),
-                "test/data/filters/MoodlePHP/file.php");
+                "src/test/resources/data/filters/MoodlePHP/file.php");
     }
 
     @Test

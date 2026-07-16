@@ -109,7 +109,7 @@ public class TMXWriterTest extends TestFilterBase {
 
         wr.close();
 
-        compareTMX(outFile, new File("test/data/tmx/test-save-tmx14.tmx"));
+        compareTMX(outFile, new File("src/test/resources/data/tmx/test-save-tmx14.tmx"));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class TMXWriterTest extends TestFilterBase {
         final List<String> sources = new ArrayList<String>();
 
         // patch for 'OmegaT' tmx
-        setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
+        setCreationTool(new File("src/test/resources/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
         load(sources, null, true, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
@@ -126,7 +126,7 @@ public class TMXWriterTest extends TestFilterBase {
         assertEquals("6<a1>7", sources.get(3));
 
         // patch for 'ext' tmx
-        setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "ext", outFile);
+        setCreationTool(new File("src/test/resources/data/tmx/test-save-tmx14.tmx"), "ext", outFile);
 
         // extLevel2 = false; useSlash = false
         load(sources, null, false, false);

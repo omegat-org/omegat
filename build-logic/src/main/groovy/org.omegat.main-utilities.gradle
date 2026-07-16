@@ -18,3 +18,4 @@ tasks.register('checksums') {
         }
     }
 }
+

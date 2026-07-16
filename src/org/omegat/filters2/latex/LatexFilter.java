@@ -46,6 +46,7 @@ import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -331,6 +332,7 @@ public class LatexFilter extends AbstractFilter {
      * @return the content inside braces, or null if not found
      */
     @VisibleForTesting
+    @Nullable
     String parseBracedCommand(String line, String prefix) {
         if (!line.startsWith(prefix)) {
             return null;

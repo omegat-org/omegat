@@ -162,6 +162,9 @@ public final class NumeralValueParser {
         if (decimal.isPresent()) {
             return decimal;
         }
+        if (!mayBeAlgorithmicNumeral(s)) {
+            return Optional.empty();
+        }
         for (RuleBasedNumberFormat parser : PARSERS.get()) {
             ParsePosition pp = new ParsePosition(0);
             Number value;
@@ -179,6 +182,59 @@ public final class NumeralValueParser {
             }
         }
         return Optional.empty();
+    }
+
+    private static final String ROMAN_DIGITS = "IVXLCDMivxlcdm";
+
+    /**
+     * Cheap pre-filter for the rule-based parse attempts: only a string whose
+     * every code point can occur in one of the supported algorithmic numeral
+     * systems is worth handing to the ICU parsers. Ordinary prose tokens (the
+     * overwhelming majority of real inputs, and in Latin scripts almost every
+     * word) are rejected here instead of failing through all rule sets, which
+     * is orders of magnitude more expensive.
+     */
+    private static boolean mayBeAlgorithmicNumeral(String s) {
+        for (int i = 0; i < s.length();) {
+            int cp = s.codePointAt(i);
+            if (!isNumeralPlausible(cp)) {
+                return false;
+            }
+            i += Character.charCount(cp);
+        }
+        return true;
+    }
+
+    private static boolean isNumeralPlausible(int cp) {
+        int type = Character.getType(cp);
+        if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER
+                || type == Character.OTHER_NUMBER) {
+            return true;
+        }
+        if (cp == 0x02B9 || cp == 0x0374 || cp == 0x0375 || cp == 0x00B4) {
+            // Greek numeral marks (keraia in its various forms, and the acute
+            // accent ICU emits for it); these have script Common.
+            return true;
+        }
+        switch (Character.UnicodeScript.of(cp)) {
+        case LATIN:
+            // Latin letters form numerals only in the Roman system.
+            return ROMAN_DIGITS.indexOf(cp) >= 0;
+        case INHERITED:
+            // Combining marks (e.g. the Cyrillic titlo) inherit their script.
+            return true;
+        case GREEK:
+        case HEBREW:
+        case ARMENIAN:
+        case ETHIOPIC:
+        case TAMIL:
+        case GEORGIAN:
+        case CYRILLIC:
+        case HAN:
+            return true;
+        default:
+            return false;
+        }
     }
 
     /**

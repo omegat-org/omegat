@@ -429,4 +429,21 @@ public class NumeralValueParserTest {
         assertEquals(r(9, 1), NumeralValueParser.firstValue("Punkt ⑼.").orElse(null));
     }
 
+    /**
+     * Prose tokens must be rejected by the cheap pre-filter, not by failing
+     * through all ICU rule sets: sorting a large project evaluates the parser
+     * for (nearly) every segment, and without the pre-filter that froze the
+     * UI for minutes.
+     */
+    @Test
+    public void prosePreFilterKeepsParsingCheap() {
+        NumeralValueParser.parseWhole("XII"); // warm up the ICU parsers
+        long t0 = System.nanoTime();
+        for (int i = 0; i < 100_000; i++) {
+            assertFalse(NumeralValueParser.parseWhole("Beispielwort" + (i % 97)).isPresent());
+        }
+        long ms = (System.nanoTime() - t0) / 1_000_000;
+        assertTrue("100k prose tokens must be rejected cheaply, took " + ms + " ms", ms < 2000);
+    }
+
 }

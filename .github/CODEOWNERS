@@ -4,18 +4,18 @@
 Bundle*.properties    @kazephil @brandelune @kosivantsov
 
 # User Documents and UI contents
-/src_docs/manual/    @kazephil @brandelune @kosivantsov
-/src_docs/greeting/  @kazephil @brandelune @kosivantsov
-/src_docs/tips/      @kazephil @brandelune @kosivantsov @miurahr
+/src/docs/manual/    @kazephil @brandelune @kosivantsov
+/src/docs/greeting/  @kazephil @brandelune @kosivantsov
+/src/docs/tips/      @kazephil @brandelune @kosivantsov @miurahr
 readme*.txt          @kazephil @brandelune @kosivantsov
 
 # Document styles
-/src_docs/xsl/       @kazephil @brandelune @kosivantsov
-/src_docs/style/     @kazephil @brandelune @kosivantsov
-/src_docs/template/  @kazephil @brandelune @kosivantsov
+/src/docs/xsl/       @kazephil @brandelune @kosivantsov
+/src/docs/style/     @kazephil @brandelune @kosivantsov
+/src/docs/template/  @kazephil @brandelune @kosivantsov
 
 # Developer documentation
-/src_docs/developer/ @miurahr @brandelune
+/src/docs/developer/ @miurahr @brandelune
 OmegaT-license.txt   @kazephil @brandelune @kosivantsov @miurahr
 
 # Build system and CI/CD
@@ -44,7 +44,7 @@ Plugins.properties @miurahr
 /tipoftheday @miurahr
 
 # Tests
-/test @miurahr
+/src/test @miurahr
 /test-acceptance @miurahr
 /test-integration @miurahr
 
@@ -52,7 +52,7 @@ Plugins.properties @miurahr
 /scripts @kosivantsov
 
 # CLI
-/src/org/omegat/cli/Parameters*.properties    @kazephil @brandelune @kosivantsov
+/src/main/resources/org/omegat/cli/Parameters*.properties    @kazephil @brandelune @kosivantsov
 
 # Packages owners
-/src/org/omegat/cli/*.java @miurahr
+/src/main/java/org/omegat/cli/*.java @miurahr

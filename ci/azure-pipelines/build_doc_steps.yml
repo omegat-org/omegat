@@ -3,7 +3,7 @@ steps:
     displayName: 'Cache Gradle'
     condition: ${{ parameters.condition }}
     inputs:
-      key: 'gradle-docs | "$(Agent.OS)" | gradle/wrapper/gradle-wrapper.properties | build-logic/build.gradle | build-logic/src/main/groovy/org.omegat.document-conventions.gradle | src_docs/manual | src_docs/xsl | src_docs/style'
+      key: 'gradle-docs | "$(Agent.OS)" | gradle/wrapper/gradle-wrapper.properties | build-logic/build.gradle | build-logic/src/main/groovy/org.omegat.document-conventions.gradle | src/docs/manual | src/docs/xsl | src/docs/style'
       restoreKeys: |
         gradle-docs | "$(Agent.OS)"
         gradle | "$(Agent.OS)"

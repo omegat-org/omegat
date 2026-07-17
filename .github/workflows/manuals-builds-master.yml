@@ -7,11 +7,11 @@ on:
       - releases/*
     paths:
       - 'build-logic/src/main/groovy/org.omegat.document-conventions.gradle'
-      - 'src_docs/manual/**'
+      - 'src/docs/manual/**'
   pull_request:
     paths:
       - 'build-logic/src/main/groovy/org.omegat.document-conventions.gradle'
-      - 'src_docs/manual/**'
+      - 'src/docs/manual/**'
 
 jobs:
   gradle:

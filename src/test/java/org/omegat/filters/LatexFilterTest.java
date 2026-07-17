@@ -111,7 +111,7 @@ public class LatexFilterTest extends TestFilterBase {
      */
     @Test
     public void testVerbatimPreserved() throws Exception {
-        String f = "test/data/filters/Latex/latexverbatim.tex";
+        String f = "src/test/resources/data/filters/Latex/latexverbatim.tex";
         List<String> segments = parse(new LatexFilter(), f);
 
         // Normal text should be extracted as segments

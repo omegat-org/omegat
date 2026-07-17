@@ -56,12 +56,16 @@
         <property name="headerFile" value="${config_loc}/java.header"/>
         <property name="multiLines" value="6"/>
         <property name="fileExtensions" value="java"/>
+        <message key="java.header.missing" value="Java source file is missing the required OmegaT copyright header. Please get it from src/docs/developer/assets/java.header"/>
+        <message key="java.header.mismatch" value="Java source file has an invalid copyright header."/>
     </module>
 
     <module name="RegexpHeader">
         <property name="headerFile" value="${config_loc}/properties.header"/>
         <property name="multiLines" value="6"/>
         <property name="fileExtensions" value="properties"/>
+        <message key="properties.header.missing" value="Properties file is missing the required OmegaT copyright header. Please get it from src/docs/developer/assets/properties.header"/>
+        <message key="properties.header.mismatch" value="Properties file has an invalid copyright header."/>
     </module>
 
     <!-- Checks for Size Violations.                    -->

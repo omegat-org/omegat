@@ -748,7 +748,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
             remoteRepositoryProvider.switchAllToLatest();
             remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
-            remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+            remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Commit target files");
             // Convert stats file name to relative
             ProjectProperties.ProjectPath path = config.new ProjectPath(true);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;

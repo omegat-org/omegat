@@ -793,7 +793,16 @@ Dossier de configuration
             </note>
          </listitem>
       </itemizedlist>
-      <para>You can change how matches are displayed or sorted. See the 
+      <para>Hover over a match to see a tooltip that presents the three
+         		percentages with plain-language labels, together with any penalties that
+         		were applied to the match.</para>
+      <para>If the project option
+         <link linkend="dialogs.project.properties.match.numbers" endterm="dialogs.project.properties.match.numbers.title"></link> is enabled, numbers
+         		are compared by their numeric value, segments consisting only of numbers
+         		can be offered as matches for each other, and the tooltip warns when the
+         		numbers of the match differ in value from those of the segment being
+         		translated.</para>
+      <para>You can change how matches are displayed or sorted. See the
          <link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"></link> preferences for details.</para>
       <para>Use 
          <link linkend="menus.edit" endterm="menus.edit.title"></link>

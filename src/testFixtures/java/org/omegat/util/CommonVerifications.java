@@ -39,7 +39,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
@@ -101,7 +100,7 @@ public class CommonVerifications {
      * @throws Exception if there is missing key in Bundle.
      */
     protected void assertBundleHasAllKeys(String[] targets, ResourceBundle bundle) throws Exception {
-        Pattern pattern = Pattern.compile("(OStrings|BUNDLE)\\.getString\\(\\s*\"([^\"]+)\"\\s*[,\\)]");
+        Pattern pattern = Pattern.compile("(OStrings|BUNDLE)\\.getString\\(\\s*\"([^\"]+)\"\\s*[,)]");
         processSourceContent(targets, (path, chars) -> {
             Matcher m = pattern.matcher(chars);
             while (m.find()) {
@@ -124,7 +123,8 @@ public class CommonVerifications {
      * @throws IOException
      *             from Files.find()
      */
-    public static void processSourceContent(String[] targets, BiConsumer<Path, CharSequence> consumer) throws IOException {
+    public static void processSourceContent(String[] targets, BiConsumer<Path, CharSequence> consumer)
+            throws IOException {
         CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
         decoder.onMalformedInput(CodingErrorAction.REPORT);
         decoder.onUnmappableCharacter(CodingErrorAction.REPORT);

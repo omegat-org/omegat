@@ -27,6 +27,8 @@ package org.omegat.gui.editor.sort;
 
 import java.text.Collator;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.omegat.util.NumeralValueParser;
@@ -50,14 +52,22 @@ public class NumericValueComparator implements Comparator<String> {
 
     private final Collator collator;
 
+    /**
+     * Numeric keys are parsed once per distinct string, not once per
+     * comparison: a sort makes O(n log n) comparisons, and re-parsing on every
+     * one of them froze the UI for minutes on large projects. Instances are
+     * built per sort pass, so the cache lives exactly as long as one sort.
+     */
+    private final Map<String, Optional<Rational>> cache = new HashMap<>();
+
     public NumericValueComparator(Collator collator) {
         this.collator = collator;
     }
 
     @Override
     public int compare(String a, String b) {
-        Optional<Rational> va = value(a);
-        Optional<Rational> vb = value(b);
+        Optional<Rational> va = cachedValue(a);
+        Optional<Rational> vb = cachedValue(b);
         if (va.isPresent() && vb.isPresent()) {
             int byValue = va.get().compareTo(vb.get());
             return byValue != 0 ? byValue : collator.compare(a, b);
@@ -69,6 +79,10 @@ public class NumericValueComparator implements Comparator<String> {
             return 1;
         }
         return collator.compare(a, b);
+    }
+
+    private Optional<Rational> cachedValue(String s) {
+        return cache.computeIfAbsent(s, NumericValueComparator::value);
     }
 
     private static Optional<Rational> value(String s) {

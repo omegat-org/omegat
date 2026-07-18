@@ -31,8 +31,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.function.Function;
 
 import org.jspecify.annotations.Nullable;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditorSorter;
 import org.omegat.gui.editor.SegmentBuilder;
 
@@ -67,6 +70,32 @@ public class MultiKeySorter implements IEditorSorter {
     private final Collator collator;
 
     /**
+     * Per text key: the entry-level text extractor and the shared comparator
+     * whose per-string key cache is pre-filled via {@link #prepare} (numeric
+     * value or collation key). Parallel to the text entries of {@link #keys}.
+     */
+    private final List<PreparableKey> preparableKeys = new ArrayList<>();
+
+    /**
+     * The comparator chain, built once and reused across re-sorts so the
+     * pre-computed key caches keep paying off for the lifetime of this sorter.
+     */
+    private @Nullable Comparator<SegmentBuilder> comparator;
+
+    private static final class PreparableKey {
+        private final Function<SourceTextEntry, String> extractor;
+        private final TextKeyComparator textComparator;
+
+        PreparableKey(Function<SourceTextEntry, String> extractor, TextKeyComparator textComparator) {
+            this.extractor = extractor;
+            this.textComparator = textComparator;
+        }
+    }
+
+    /** The primable text comparator of each key, or null for non-text keys. Parallel to {@link #keys}. */
+    private final List<@Nullable TextKeyComparator> textComparators = new ArrayList<>();
+
+    /**
      * @param keys
      *            ordered list of sort keys (primary first); may be empty
      * @param sourceLocale
@@ -75,20 +104,57 @@ public class MultiKeySorter implements IEditorSorter {
     public MultiKeySorter(List<KeySpec> keys, Locale sourceLocale) {
         this.keys = new ArrayList<>(keys);
         this.collator = Collator.getInstance(sourceLocale);
+        for (KeySpec ks : this.keys) {
+            TextKeyComparator tc = null;
+            Optional<Function<SourceTextEntry, String>> extractor = ks.key.sortTextExtractor();
+            if (extractor.isPresent()) {
+                tc = ks.numeric && ks.key.supportsNumeric() ? new NumericValueComparator(collator)
+                        : new CachingCollatorComparator(collator);
+                preparableKeys.add(new PreparableKey(extractor.get(), tc));
+            }
+            textComparators.add(tc);
+        }
     }
 
     @Override
     public Comparator<SegmentBuilder> getComparator() {
-        Comparator<SegmentBuilder> cmp = null;
-        for (KeySpec ks : keys) {
-            Comparator<SegmentBuilder> next = ks.key.comparator(collator, ks.ascending, ks.numeric);
-            cmp = (cmp == null) ? next : cmp.thenComparing(next);
+        if (comparator == null) {
+            Comparator<SegmentBuilder> cmp = null;
+            for (int i = 0; i < keys.size(); i++) {
+                KeySpec ks = keys.get(i);
+                Comparator<SegmentBuilder> next = ks.key.comparator(collator, ks.ascending,
+                        textComparators.get(i));
+                cmp = (cmp == null) ? next : cmp.thenComparing(next);
+            }
+            // Stable tiebreaker: equal keys keep natural project order. This also keeps
+            // gotoEntry()'s exact-match relocation deterministic.
+            Comparator<SegmentBuilder> natural = Comparator
+                    .comparingInt(sb -> sb.getSourceTextEntry().entryNum());
+            comparator = (cmp == null) ? natural : cmp.thenComparing(natural);
         }
-        // Stable tiebreaker: equal keys keep natural project order. This also keeps
-        // gotoEntry()'s exact-match relocation deterministic.
-        Comparator<SegmentBuilder> natural = Comparator
-                .comparingInt(sb -> sb.getSourceTextEntry().entryNum());
-        return (cmp == null) ? natural : cmp.thenComparing(natural);
+        return comparator;
+    }
+
+    /**
+     * True when applying this sort benefits from a background preparation pass
+     * (some key orders text, whose sort keys - numeric values or collation
+     * keys - can be pre-computed).
+     */
+    public boolean needsPreparation() {
+        return !preparableKeys.isEmpty();
+    }
+
+    /**
+     * Pre-computes the sort keys of one entry. Called from a background worker
+     * for every entry before the sort is applied, so the expensive per-string
+     * work (numeral parsing, collation keys) does not block the UI; the later
+     * sort then only reads the cached values. Must not run concurrently with
+     * the sort itself.
+     */
+    public void prepare(SourceTextEntry ste) {
+        for (PreparableKey pk : preparableKeys) {
+            pk.textComparator.prime(pk.extractor.apply(ste));
+        }
     }
 
     /** The configured sort keys, in priority order. */

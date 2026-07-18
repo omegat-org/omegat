@@ -33,6 +33,7 @@ import java.util.function.Function;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.OStrings;
@@ -348,10 +349,22 @@ public enum SortKey {
      * is used. The requested direction is applied last.
      */
     public Comparator<SegmentBuilder> comparator(Collator collator, boolean asc, boolean numeric) {
+        return comparator(collator, asc,
+                numeric && supportsNumeric() ? new NumericValueComparator(collator) : null);
+    }
+
+    /**
+     * Comparator variant taking a caller-owned text comparator (or null for
+     * the plain built-in ordering), so the caller can keep the instance and
+     * pre-compute its per-string key cache before the sort runs. The text
+     * comparator orders the value of {@link #sortTextExtractor()}.
+     */
+    Comparator<SegmentBuilder> comparator(Collator collator, boolean asc, TextKeyComparator textComparator) {
         Comparator<SegmentBuilder> c;
-        Optional<Function<SegmentBuilder, String>> extractor = textExtractor();
-        if (numeric && extractor.isPresent()) {
-            c = Comparator.comparing(extractor.get(), new NumericValueComparator(collator));
+        Optional<Function<SourceTextEntry, String>> extractor = sortTextExtractor();
+        if (textComparator != null && extractor.isPresent()) {
+            Function<SourceTextEntry, String> f = extractor.get();
+            c = Comparator.comparing(sb -> f.apply(sb.getSourceTextEntry()), textComparator);
         } else {
             c = ascending(collator);
         }
@@ -360,14 +373,44 @@ public enum SortKey {
 
     /** True if this key sorts textual values that can also be ordered numerically. */
     public boolean supportsNumeric() {
-        return textExtractor().isPresent();
+        return entryTextExtractor().isPresent();
     }
 
-    /** The text-value extractor for keys that sort text; empty for the others. */
-    private Optional<Function<SegmentBuilder, String>> textExtractor() {
+    /**
+     * The entry-level extractor of the text this key actually orders by (for
+     * the rhyme keys: the reversed text); empty for non-text keys. Every key
+     * with such an extractor can have its sort key pre-computed by the sort
+     * bar's background preparation pass.
+     */
+    Optional<Function<SourceTextEntry, String>> sortTextExtractor() {
+        switch (this) {
+            case SOURCE_RHYME:
+                return Optional.of(ste -> reverse(nullToEmpty(ste.getSrcText())));
+            case TARGET_RHYME:
+                return Optional.of(ste -> reverse(targetText(ste)));
+            case NOTE_RHYME:
+                return Optional.of(ste -> reverse(noteText(ste)));
+            case COMMENT_RHYME:
+                return Optional.of(ste -> reverse(commentText(ste)));
+            default:
+                return entryTextExtractor();
+        }
+    }
+
+    private static String reverse(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+
+    /**
+     * The entry-level text extractor for keys that sort text; empty for the
+     * others. Working on {@link SourceTextEntry} (all text criteria only depend
+     * on it) lets the sort bar pre-compute numeric sort keys in the background
+     * without needing the editor's segment builders.
+     */
+    Optional<Function<SourceTextEntry, String>> entryTextExtractor() {
         switch (this) {
             case SOURCE_ALPHA:
-                return Optional.of(sb -> nullToEmpty(sb.getSourceTextEntry().getSrcText()));
+                return Optional.of(ste -> nullToEmpty(ste.getSrcText()));
             case TARGET_ALPHA:
                 return Optional.of(SortKey::targetText);
             case NOTE_ALPHA:
@@ -377,11 +420,11 @@ public enum SortKey {
             case ORIGIN_ALPHA:
                 return Optional.of(SortKey::originText);
             case SOURCE_FILE:
-                return Optional.of(sb -> nullToEmpty(sb.getSourceTextEntry().getKey().file));
+                return Optional.of(ste -> nullToEmpty(ste.getKey().file));
             case PATH_ALPHA:
-                return Optional.of(sb -> nullToEmpty(sb.getSourceTextEntry().getKey().path));
+                return Optional.of(ste -> nullToEmpty(ste.getKey().path));
             case ID_ALPHA:
-                return Optional.of(sb -> nullToEmpty(sb.getSourceTextEntry().getKey().id));
+                return Optional.of(ste -> nullToEmpty(ste.getKey().id));
             default:
                 return Optional.empty();
         }
@@ -393,22 +436,37 @@ public enum SortKey {
 
     /** Null-safe target/translation text of a segment. */
     private static String targetText(SegmentBuilder sb) {
-        return nullToEmpty(Core.getProject().getTranslationInfo(sb.getSourceTextEntry()).getTranslationText());
+        return targetText(sb.getSourceTextEntry());
+    }
+
+    private static String targetText(SourceTextEntry ste) {
+        return nullToEmpty(Core.getProject().getTranslationInfo(ste).getTranslationText());
     }
 
     /** Null-safe user note text of a segment. */
     private static String noteText(SegmentBuilder sb) {
-        return nullToEmpty(Core.getProject().getTranslationInfo(sb.getSourceTextEntry()).getNote());
+        return noteText(sb.getSourceTextEntry());
+    }
+
+    private static String noteText(SourceTextEntry ste) {
+        return nullToEmpty(Core.getProject().getTranslationInfo(ste).getNote());
     }
 
     /** Null-safe source-document comment of a segment. */
     private static String commentText(SegmentBuilder sb) {
-        return nullToEmpty(sb.getSourceTextEntry().getComment());
+        return commentText(sb.getSourceTextEntry());
+    }
+
+    private static String commentText(SourceTextEntry ste) {
+        return nullToEmpty(ste.getComment());
     }
 
     /** Null-safe translation origin ("Herkunft") of a segment, e.g. the MT engine name. */
     private static String originText(SegmentBuilder sb) {
-        return nullToEmpty(Core.getProject().getTranslationInfo(sb.getSourceTextEntry())
-                .getPropValue(ProjectTMX.PROP_ORIGIN));
+        return originText(sb.getSourceTextEntry());
+    }
+
+    private static String originText(SourceTextEntry ste) {
+        return nullToEmpty(Core.getProject().getTranslationInfo(ste).getPropValue(ProjectTMX.PROP_ORIGIN));
     }
 }

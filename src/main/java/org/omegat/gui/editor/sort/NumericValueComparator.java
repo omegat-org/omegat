@@ -26,7 +26,6 @@
 package org.omegat.gui.editor.sort;
 
 import java.text.Collator;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -48,7 +47,7 @@ import org.omegat.util.NumeralValueParser.Rational;
  *
  * @author stephan.pakebusch at zollsoft.de
  */
-public class NumericValueComparator implements Comparator<String> {
+public class NumericValueComparator implements TextKeyComparator {
 
     private final Collator collator;
 
@@ -79,6 +78,17 @@ public class NumericValueComparator implements Comparator<String> {
             return 1;
         }
         return collator.compare(a, b);
+    }
+
+    /**
+     * Compute and cache the value for {@code s} without comparing. Used to
+     * pre-fill the cache from a background thread before the sort runs; the
+     * later sort (on the EDT) then only reads. Callers must ensure the two
+     * phases do not overlap (SwingWorker's done() gives that ordering).
+     */
+    @Override
+    public void prime(String s) {
+        cachedValue(s);
     }
 
     private Optional<Rational> cachedValue(String s) {

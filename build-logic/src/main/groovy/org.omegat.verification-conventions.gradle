@@ -15,11 +15,7 @@ jacoco {
 }
 
 sourceSets {
-    testAcceptance {
-        java {
-            srcDir 'test-acceptance/src'
-        }
-    }
+    testAcceptance
     testIntegration {
         java {
             srcDir 'test-integration/src'

@@ -7,12 +7,12 @@ on:
       - releases/*
     paths-ignore:
       - 'ci/**'
-      - 'src_docs/**'
+      - 'src/docs/**'
       - '*.md'
   pull_request:
     paths-ignore:
       - 'ci/**'
-      - 'src_docs/**'
+      - 'src/docs/**'
       - '*.md'
 
 jobs:

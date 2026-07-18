@@ -13,7 +13,7 @@ echo
 
 # Main code paths - remove trailing slashes
 MAIN_PATHS=(
-  "src"
+  "src/main"
   "aligner/src/main"
   "language-modules/*/src/main"
   "machinetranslators/apertium/src/main"
@@ -31,9 +31,9 @@ MAIN_PATHS=(
 
 # Test code paths - remove trailing slashes
 TEST_PATHS=(
-  "test"
+  "src/test"
   "test-integration"
-  "test-acceptance"
+  "src/testAcceptance"
   "aligner/src/test"
   "language-modules/*/src/test"
   "machinetranslators/apertium/src/test"
@@ -47,8 +47,7 @@ TEST_PATHS=(
 )
 
 DOCS_PATHS=(
-  "doc_src"
-  "src_docs"
+  "src/docs"
   "release"
 )
 

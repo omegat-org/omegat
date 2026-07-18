@@ -35,5 +35,5 @@ exclude:
   - name: All
     paths:
       - test-integration
-      - test-acceptance
+      - src/testAcceptance
       - scripts

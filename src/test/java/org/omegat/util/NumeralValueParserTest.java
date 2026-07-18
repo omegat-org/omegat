@@ -446,4 +446,26 @@ public class NumeralValueParserTest {
         assertTrue("100k prose tokens must be rejected cheaply, took " + ms + " ms", ms < 2000);
     }
 
+    /**
+     * The pre-filter must not cut off separator-grouped digit runs: the
+     * rule-based parsers read "99'999" via their loose number matching, and
+     * NumberAutoConverter relies on that for foreign-grouping repair.
+     */
+    @Test
+    public void separatorGroupedDigitsReachTheParsers() {
+        assertEquals(Optional.of(BigInteger.valueOf(99999)), NumeralValueParser.parseWhole("99'999"));
+        assertEquals(Optional.of(BigInteger.valueOf(1234567)),
+                NumeralValueParser.parseWhole("1'234'567"));
+        // "1.234" stays unpinned: the dot doubles as a decimal point, so its
+        // whole-string value is locale-ambiguous by design.
+    }
+
+    /** Separator punctuation alone is prose, not a numeral. */
+    @Test
+    public void pureSeparatorPunctuationIsRejected() {
+        assertFalse(NumeralValueParser.parseWhole("...").isPresent());
+        assertFalse(NumeralValueParser.parseWhole(",").isPresent());
+        assertFalse(NumeralValueParser.parseWhole("don't").isPresent());
+    }
+
 }

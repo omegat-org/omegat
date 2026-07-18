@@ -15,7 +15,7 @@ services:
     build:
       context: test-integration/docker/client
       args:
-        JAVA: 21
+        JAVA: 25
         JDKVER: jdk_25.0.3.0.0+9-1
         GRADLE: 9.6.0
     depends_on:

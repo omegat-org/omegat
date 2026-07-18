@@ -28,6 +28,7 @@ package org.omegat.gui.editor.sort;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,10 +44,14 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.ListModel;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.CollapsibleBar;
 import org.omegat.gui.editor.sort.MultiKeySorter.KeySpec;
 import org.omegat.util.OStrings;
@@ -109,6 +114,14 @@ public class SortBar extends CollapsibleBar {
     private boolean adjusting;
     /** The "add criterion" button of the current last row, or null if none is shown. */
     private JButton plusButton;
+    /**
+     * Progress of the numeric-key preparation pass (analogous to the scan
+     * progress of the number-conversion window); hidden while idle.
+     */
+    private final JProgressBar prepareProgress = new JProgressBar();
+    /** Apply/Discard of the pending row, disabled while a preparation runs. */
+    private JButton applyButton;
+    private JButton discardButton;
 
     public SortBar() {
         rows.add(new CriterionRow());
@@ -185,15 +198,19 @@ public class SortBar extends CollapsibleBar {
         JPanel pr = new JPanel();
         pr.setLayout(new BoxLayout(pr, BoxLayout.LINE_AXIS));
         pr.add(Box.createHorizontalGlue());
-        JButton apply = new JButton();
-        Mnemonics.setLocalizedText(apply, OStrings.getString("BUTTON_APPLY"));
-        apply.addActionListener(e -> applyPending());
-        JButton discard = new JButton();
-        Mnemonics.setLocalizedText(discard, OStrings.getString("BUTTON_DISCARD"));
-        discard.addActionListener(e -> discardPending());
-        pr.add(apply);
+        applyButton = new JButton();
+        Mnemonics.setLocalizedText(applyButton, OStrings.getString("BUTTON_APPLY"));
+        applyButton.addActionListener(e -> applyPending());
+        discardButton = new JButton();
+        Mnemonics.setLocalizedText(discardButton, OStrings.getString("BUTTON_DISCARD"));
+        discardButton.addActionListener(e -> discardPending());
+        pr.add(applyButton);
         pr.add(Box.createHorizontalStrut(4));
-        pr.add(discard);
+        pr.add(discardButton);
+        pr.add(Box.createHorizontalStrut(8));
+        prepareProgress.setStringPainted(true);
+        prepareProgress.setVisible(false);
+        pr.add(prepareProgress);
         pr.add(Box.createHorizontalGlue());
         return pr;
     }
@@ -367,20 +384,102 @@ public class SortBar extends CollapsibleBar {
     }
 
     /** Apply the staged criteria to the editor, then collapse the bar. */
-    private void applyPending() {
+    void applyPending() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
         List<KeySpec> pend = currentKeys();
         if (pend.isEmpty()) {
             Core.getEditor().removeSort();
-        } else {
-            Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-            Core.getEditor().setSort(new MultiKeySorter(pend, loc));
+            finishApply(pend);
+            return;
         }
+        Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        // Every sort goes through the background preparation pass with its
+        // progress bar; for sorts without preparable text keys the pass is a
+        // fast counting sweep, so the feedback is consistent either way.
+        prepareAndApply(new MultiKeySorter(pend, loc), pend);
+    }
+
+    /** Record the applied criteria and collapse the bar. */
+    private void finishApply(List<KeySpec> pend) {
         appliedKeys = pend;
         setExpanded(false);
         rebuild();
+    }
+
+    /**
+     * Numeric criteria parse a value out of every segment text, which is too
+     * slow to do inside the sort on the UI thread for large files. So the
+     * values are pre-computed here in a background worker with a progress bar
+     * (like the number-conversion window's scan), and the sort is applied when
+     * the pass is done - it then only reads the cached values.
+     */
+    private void prepareAndApply(MultiKeySorter sorter, List<KeySpec> pend) {
+        List<SourceTextEntry> entries = currentFileEntries();
+        if (applyButton != null) {
+            applyButton.setEnabled(false);
+        }
+        if (discardButton != null) {
+            discardButton.setEnabled(false);
+        }
+        prepareProgress.setMaximum(Math.max(1, entries.size()));
+        prepareProgress.setValue(0);
+        prepareProgress.setString(MessageFormat.format(OStrings.getString("SORT_BAR_PREPARE_PROGRESS"),
+                0, entries.size()));
+        prepareProgress.setVisible(true);
+
+        new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() {
+                int done = 0;
+                for (SourceTextEntry ste : entries) {
+                    sorter.prepare(ste);
+                    done++;
+                    if ((done & 0x3F) == 0 || done == entries.size()) {
+                        publish(done);
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(List<Integer> chunks) {
+                int done = chunks.get(chunks.size() - 1);
+                prepareProgress.setValue(done);
+                prepareProgress.setString(MessageFormat.format(
+                        OStrings.getString("SORT_BAR_PREPARE_PROGRESS"), done, entries.size()));
+            }
+
+            @Override
+            protected void done() {
+                prepareProgress.setVisible(false);
+                if (Core.getProject().isProjectLoaded()) {
+                    Core.getEditor().setSort(sorter);
+                    finishApply(pend);
+                } else {
+                    // The project went away during preparation; nothing to sort.
+                    rebuild();
+                }
+            }
+        }.execute();
+    }
+
+    /**
+     * All entries of the file currently shown in the editor (unfiltered: a
+     * superset of what the sort will order, which only makes the preparation
+     * cache slightly larger).
+     */
+    private static List<SourceTextEntry> currentFileEntries() {
+        String currentFile = Core.getEditor().getCurrentFile();
+        if (currentFile != null) {
+            for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
+                if (currentFile.equals(fi.filePath)) {
+                    return fi.entries;
+                }
+            }
+        }
+        return Collections.emptyList();
     }
 
     /** Discard the staged criteria: revert the combos to the applied sort, then collapse. */

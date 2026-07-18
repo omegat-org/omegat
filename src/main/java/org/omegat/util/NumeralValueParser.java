@@ -187,6 +187,15 @@ public final class NumeralValueParser {
     private static final String ROMAN_DIGITS = "IVXLCDMivxlcdm";
 
     /**
+     * Digit-group and decimal punctuation accepted by the rule-based parsers'
+     * loose number matching: period, comma, apostrophe, right single quote,
+     * modifier apostrophe, middle dot, Arabic decimal and thousands
+     * separators. "99'999" or "1.234" must reach the parsers (they read such
+     * groupings), but these characters alone make no numeral.
+     */
+    private static final String SEPARATOR_CHARS = ".,'’ʼ·٫٬";
+
+    /**
      * Cheap pre-filter for the rule-based parse attempts: only a string whose
      * every code point can occur in one of the supported algorithmic numeral
      * systems is worth handing to the ICU parsers. Ordinary prose tokens (the
@@ -195,14 +204,19 @@ public final class NumeralValueParser {
      * is orders of magnitude more expensive.
      */
     private static boolean mayBeAlgorithmicNumeral(String s) {
+        boolean sawNumeral = false;
         for (int i = 0; i < s.length();) {
             int cp = s.codePointAt(i);
-            if (!isNumeralPlausible(cp)) {
-                return false;
+            if (SEPARATOR_CHARS.indexOf(cp) < 0) {
+                if (!isNumeralPlausible(cp)) {
+                    return false;
+                }
+                sawNumeral = true;
             }
             i += Character.charCount(cp);
         }
-        return true;
+        // Pure punctuation ("...") is not worth the parse attempts.
+        return sawNumeral;
     }
 
     private static boolean isNumeralPlausible(int cp) {

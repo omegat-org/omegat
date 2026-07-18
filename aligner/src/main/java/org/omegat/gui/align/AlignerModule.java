@@ -107,8 +107,17 @@ public final class AlignerModule implements IApplicationEventListener {
             }
             alignerShow(sourceLanguage, sourceFile, targetlanguage, null, srcRoot, props.getTMRoot());
         } else {
-            String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-            String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
+            // Prefer the languages of the previous aligner session (feature
+            // request #1456); the locales of the last created project only
+            // serve as a first-use fallback.
+            String srcLang = Preferences.getPreference(AlignerPrefs.ALIGNER_SOURCE_LANGUAGE);
+            if (srcLang.isEmpty()) {
+                srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
+            }
+            String trgLang = Preferences.getPreference(AlignerPrefs.ALIGNER_TARGET_LANGUAGE);
+            if (trgLang.isEmpty()) {
+                trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
+            }
             alignerShow(srcLang, null, trgLang, null);
         }
     }

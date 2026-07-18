@@ -81,9 +81,84 @@ public class AlignFilePickerController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
 
     public AlignFilePickerController() {
+        // Preselect the languages of the previous aligner session (feature
+        // request #1456). Callers overwrite them through the setters when a
+        // project is open.
         List<Language> allLangs = Language.getLanguages();
-        sourceLanguage = allLangs.get(0);
-        targetLanguage = allLangs.get(allLangs.size() - 1);
+        sourceLanguage = restorePersistedLanguage(AlignerPrefs.ALIGNER_SOURCE_LANGUAGE, allLangs.get(0));
+        targetLanguage = restorePersistedLanguage(AlignerPrefs.ALIGNER_TARGET_LANGUAGE,
+                allLangs.get(allLangs.size() - 1));
+        sourceDefaultDir = restorePersistedDir(AlignerPrefs.ALIGNER_LAST_SOURCE_DIR);
+        targetDefaultDir = restorePersistedDir(AlignerPrefs.ALIGNER_LAST_TARGET_DIR);
+    }
+
+    /**
+     * Read a directory stored in the given preference.
+     *
+     * @param prefKey
+     *            preference key holding a directory path
+     * @return the stored directory, or null when nothing is stored
+     */
+    static @Nullable String restorePersistedDir(String prefKey) {
+        String dir = Preferences.getPreferenceDefault(prefKey, "");
+        return StringUtil.isEmpty(dir) ? null : dir;
+    }
+
+    /**
+     * Read a language stored in the given preference, falling back when
+     * nothing valid is stored.
+     *
+     * @param prefKey
+     *            preference key holding a language code
+     * @param fallback
+     *            language to use when the preference is empty or invalid
+     * @return the stored language, or the fallback
+     */
+    static Language restorePersistedLanguage(String prefKey, Language fallback) {
+        String code = Preferences.getPreferenceDefault(prefKey, "");
+        if (StringUtil.isEmpty(code) || !Language.verifySingleLangCode(code)) {
+            return fallback;
+        }
+        return new Language(code);
+    }
+
+    /**
+     * Store the chosen languages for the next aligner session (feature
+     * request #1456).
+     *
+     * @param source
+     *            source language to store, skipped when null
+     * @param target
+     *            target language to store, skipped when null
+     */
+    static void persistLanguages(@Nullable Language source, @Nullable Language target) {
+        if (source != null) {
+            Preferences.setPreference(AlignerPrefs.ALIGNER_SOURCE_LANGUAGE, source.getLanguage());
+        }
+        if (target != null) {
+            Preferences.setPreference(AlignerPrefs.ALIGNER_TARGET_LANGUAGE, target.getLanguage());
+        }
+    }
+
+    /**
+     * Store the directory of the given file for the next aligner session
+     * (feature request #1456). Covers files that arrived by typing or drag and
+     * drop, which never pass through the file chooser.
+     *
+     * @param prefKey
+     *            preference key to store the directory under
+     * @param file
+     *            file whose parent directory is stored, skipped when null or
+     *            without a parent
+     */
+    static void persistInputDir(String prefKey, @Nullable String file) {
+        if (file == null) {
+            return;
+        }
+        String parent = new File(file).getParent();
+        if (parent != null) {
+            Preferences.setPreference(prefKey, parent);
+        }
     }
 
     /**
@@ -181,6 +256,9 @@ public class AlignFilePickerController {
         initializeFilePicker(picker);
         // add the main listener.
         picker.okButton.addActionListener(e -> {
+            persistLanguages(sourceLanguage, targetLanguage);
+            persistInputDir(AlignerPrefs.ALIGNER_LAST_SOURCE_DIR, sourceFile);
+            persistInputDir(AlignerPrefs.ALIGNER_LAST_TARGET_DIR, targetFile);
             picker.bottomPanel.remove(picker.messageTextArea);
             picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
             picker.bottomPanel.revalidate();
@@ -334,6 +412,7 @@ public class AlignFilePickerController {
                     "aligner_choose_source");
             if (file != null) {
                 sourceDefaultDir = file.getParent();
+                Preferences.setPreference(AlignerPrefs.ALIGNER_LAST_SOURCE_DIR, sourceDefaultDir);
                 targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
                 defaultSaveDir = defaultSaveDir == null ? sourceDefaultDir : defaultSaveDir;
                 picker.sourceLanguageFileField.setText(file.getAbsolutePath());
@@ -349,6 +428,7 @@ public class AlignFilePickerController {
                     "aligner_choose_target");
             if (file != null) {
                 targetDefaultDir = file.getParent();
+                Preferences.setPreference(AlignerPrefs.ALIGNER_LAST_TARGET_DIR, targetDefaultDir);
                 sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
                 defaultSaveDir = defaultSaveDir == null ? targetDefaultDir : defaultSaveDir;
                 picker.targetLanguageFileField.setText(file.getAbsolutePath());

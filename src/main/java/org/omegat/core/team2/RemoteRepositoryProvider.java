@@ -28,6 +28,7 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,16 +192,25 @@ public class RemoteRepositoryProvider {
     }
 
     /**
+     * Ensures the 'prepared' base directory exists.
+     * Tolerates it already existing, and tolerates losing a benign
+     * creation race against another thread/process.
+     */
+    private File preparedBaseDir() throws IOException {
+        File base = new File(projectRoot, REPO_PREPARE_SUBDIR);
+        if (!base.isDirectory() && !base.mkdirs() && !base.isDirectory()) {
+            Log.logErrorRB("TEAM_PREPARE_DIR_ERROR", base.getAbsolutePath());
+            throw new IOException("Can't create directory " + base.getAbsolutePath());
+        }
+        return base;
+    }
+
+    /**
      * Saves file into 'prepared' dir.
      */
     public File toPrepared(File inFile) throws IOException {
-        File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
-        boolean dirCreated = dir.mkdirs();
-        if (!dirCreated) {
-            Log.logErrorRB("TEAM_PREPARE_DIR_ERROR", dir.getAbsolutePath());
-            throw new IOException("Can't create directory " + dir.getAbsolutePath());
-        }
-        File out = File.createTempFile("prepared", "", dir);
+        Path dir = Files.createTempDirectory(preparedBaseDir().toPath(), "prep-");
+        File out = File.createTempFile("prepared", "", dir.toFile());
         FileUtils.copyFile(inFile, out);
         return out;
     }

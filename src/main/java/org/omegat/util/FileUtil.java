@@ -76,7 +76,8 @@ import org.omegat.core.Core;
  * @author Aaron Madlon-Kay
  */
 public final class FileUtil {
-    public static final long RENAME_RETRY_TIMEOUT = 3000;
+    private static final long RENAME_RETRY_TIMEOUT = 3000;
+    private static final long BACKUP_RETRY_INTERVAL = 100;
 
     private FileUtil() {
     }
@@ -132,11 +133,23 @@ public final class FileUtil {
      */
     public static File backupFile(File original) {
         File backup = new File(original.getParentFile(), getBackupFilename(original));
-        try {
-            FileUtils.copyFile(original, backup);
-        } catch (IOException ex) {
-            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
+        long start = System.currentTimeMillis();
+        IOException lastError = null;
+        while (System.currentTimeMillis() - start < RENAME_RETRY_TIMEOUT) {
+            try {
+                FileUtils.copyFile(original, backup);
+                return backup;
+            } catch (IOException ex) {
+                lastError = ex;
+                try {
+                    Thread.sleep(BACKUP_RETRY_INTERVAL);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
         }
+        Log.logErrorRB(lastError, "PP_ERROR_UNABLE_TO_CREATE_BACKUP_FILE", original.getName());
         return backup;
     }
 

@@ -4,6 +4,7 @@
  *           glossaries, and translation leveraging into updated projects.
  *
  *  Copyright (C) 2024 Hiroshi Miura.
+ *                2026 Stephan Pakebusch
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -75,6 +76,56 @@ public class NBSPMarkerTest extends MarkerTestBase {
         assertEquals(1, result.size());
         assertEquals(16, result.get(0).startOffset);
         assertEquals(17, result.get(0).endOffset);
+    }
+
+    @Test
+    public void testMarkerNarrowNBSP() throws Exception {
+        IMarker marker = new NBSPMarker();
+        Core.getEditor().getSettings().setMarkNBSP(true);
+        String sourceText = "narrow space before\u202f!";
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        List<Mark> result = marker.getMarksForEntry(ste, sourceText, null, true);
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(19, result.get(0).startOffset);
+        assertEquals(20, result.get(0).endOffset);
+    }
+
+    @Test
+    public void testMarkerFigureSpace() throws Exception {
+        IMarker marker = new NBSPMarker();
+        Core.getEditor().getSettings().setMarkNBSP(true);
+        String sourceText = "1\u2007000 units";
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        List<Mark> result = marker.getMarksForEntry(ste, sourceText, null, true);
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(1, result.get(0).startOffset);
+        assertEquals(2, result.get(0).endOffset);
+    }
+
+    @Test
+    public void testMarkerBothNoBreakSpaces() throws Exception {
+        IMarker marker = new NBSPMarker();
+        Core.getEditor().getSettings().setMarkNBSP(true);
+        String sourceText = "a\u00a0b\u202fc";
+        String translationText = "x\u202fy";
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        List<Mark> result = marker.getMarksForEntry(ste, sourceText, translationText, true);
+        assertNotNull(result);
+        assertEquals(3, result.size());
+        assertEquals(Mark.ENTRY_PART.SOURCE, result.get(0).entryPart);
+        assertEquals(1, result.get(0).startOffset);
+        assertEquals(2, result.get(0).endOffset);
+        assertEquals(Mark.ENTRY_PART.SOURCE, result.get(1).entryPart);
+        assertEquals(3, result.get(1).startOffset);
+        assertEquals(4, result.get(1).endOffset);
+        assertEquals(Mark.ENTRY_PART.TRANSLATION, result.get(2).entryPart);
+        assertEquals(1, result.get(2).startOffset);
+        assertEquals(2, result.get(2).endOffset);
     }
 
 }

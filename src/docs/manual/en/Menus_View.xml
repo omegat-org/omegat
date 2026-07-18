@@ -80,7 +80,10 @@
          </term>
          <listitem>
             <para>If checked, non-breakable spaces are displayed with a gray
-               background.</para>
+               background. This covers the no-break space (U+00A0), the narrow
+               no-break space (U+202F) used before tall punctuation in French
+               typography, and the figure space (U+2007) used to group digits in
+               numbers.</para>
          </listitem>
       </varlistentry>
       <varlistentry xml:id="menus.view.mark.white.space">

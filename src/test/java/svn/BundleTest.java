@@ -119,7 +119,7 @@ public class BundleTest extends CommonVerifications {
      */
     @Test
     public void testUndefinedStrings() throws Exception {
-        assertBundleHasAllKeys(new String[] { "src/main", "src/test", "src/testFixtures", "test-integration", "tipoftheday", "aligner" },
+        assertBundleHasAllKeys(new String[] { "src/main/java", "src/test/java", "src/testFixtures/java" },
                 OStrings.getResourceBundle());
     }
 

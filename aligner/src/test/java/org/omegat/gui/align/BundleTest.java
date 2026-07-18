@@ -42,8 +42,10 @@ public class BundleTest extends CommonVerifications {
     public void testBundleLoading() {
         assertBundleLoading(BUNDLE_BASENAME);
     }
+
     @Test
     public void testUndefinedStrings() throws Exception {
-        assertBundleHasAllKeys(new String[] { "src"}, ResourceBundle.getBundle(BUNDLE_BASENAME));
+        assertBundleHasAllKeys(new String[] { "src/main/java", "src/test/java" },
+                ResourceBundle.getBundle(BUNDLE_BASENAME));
     }
 }

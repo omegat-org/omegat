@@ -347,6 +347,20 @@
                   		  instead of the default resource folder.</para>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.project.properties.file.locations.open">
+            <term xml:id="dialogs.project.properties.file.locations.open.title">
+               <guibutton>Open</guibutton>
+            </term>
+            <listitem>
+               <para>The
+                  <guibutton>Open</guibutton> button next to each
+                  <guibutton>Browse</guibutton> button opens that resource folder in
+                  		  the system file manager. For the writable glossary, it opens the
+                  		  folder that contains the glossary file.</para>
+               <para>The button is only available while the folder entered in the
+                  		  corresponding field exists.</para>
+            </listitem>
+         </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.source.files">
             <term xml:id="dialogs.project.properties.file.locations.source.files.title">
                <option>Source files folder</option>

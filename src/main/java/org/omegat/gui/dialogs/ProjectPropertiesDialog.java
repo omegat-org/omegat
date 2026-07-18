@@ -10,6 +10,7 @@
                2013 Aaron Madlon-Kay, Yu Tang
                2014-2015 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,6 +42,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Vector;
@@ -96,6 +98,7 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Yu Tang
+ * @author stephan.pakebusch at zollsoft.de
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
@@ -470,6 +473,9 @@ public class ProjectPropertiesDialog extends JDialog {
         bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
         bSrc.add(srcBrowse);
         Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
+        configureOpenButton(srcOpen, SRC_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_SRC_ROOT");
+        bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
+        bSrc.add(srcOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bSrcRootLabel);
         dirsBox.add(bSrc);
@@ -486,6 +492,9 @@ public class ProjectPropertiesDialog extends JDialog {
         tmBrowse.setName(TM_BROWSE_BUTTON_NAME);
         bTM.add(Box.createRigidArea(new Dimension(5, 0)));
         bTM.add(tmBrowse);
+        configureOpenButton(tmOpen, TM_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_TM_ROOT");
+        bTM.add(Box.createRigidArea(new Dimension(5, 0)));
+        bTM.add(tmOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bTmRootLabel);
         dirsBox.add(bTM);
@@ -502,6 +511,9 @@ public class ProjectPropertiesDialog extends JDialog {
         glosBrowse.setName(GLOSSARY_BROWSE_BUTTON_NAME);
         bGlos.add(Box.createRigidArea(new Dimension(5, 0)));
         bGlos.add(glosBrowse);
+        configureOpenButton(glosOpen, GLOSSARY_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_GLOS_ROOT");
+        bGlos.add(Box.createRigidArea(new Dimension(5, 0)));
+        bGlos.add(glosOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bGlosRootLabel);
         dirsBox.add(bGlos);
@@ -518,6 +530,9 @@ public class ProjectPropertiesDialog extends JDialog {
         wGlosBrowse.setName(WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME);
         bwGlos.add(Box.createRigidArea(new Dimension(5, 0)));
         bwGlos.add(wGlosBrowse);
+        configureOpenButton(wGlosOpen, WRITABLE_GLOSSARY_OPEN_BUTTON_NAME, "PP_OPEN_W_GLOS_FOLDER_TOOLTIP", "PP_WRITEABLE_GLOS");
+        bwGlos.add(Box.createRigidArea(new Dimension(5, 0)));
+        bwGlos.add(wGlosOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bWriteableGlosLabel);
         dirsBox.add(bwGlos);
@@ -534,6 +549,9 @@ public class ProjectPropertiesDialog extends JDialog {
         dictBrowse.setName(DICTIONARY_BROWSE_BUTTON_NAME);
         bDict.add(Box.createRigidArea(new Dimension(5, 0)));
         bDict.add(dictBrowse);
+        configureOpenButton(dictOpen, DICTIONARY_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_DICT_ROOT");
+        bDict.add(Box.createRigidArea(new Dimension(5, 0)));
+        bDict.add(dictOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bLocDictLabel);
         dirsBox.add(bDict);
@@ -550,10 +568,19 @@ public class ProjectPropertiesDialog extends JDialog {
         locBrowse.setName(LOC_BROWSE_BUTTON_NAME);
         bLoc.add(Box.createRigidArea(new Dimension(5, 0)));
         bLoc.add(locBrowse);
+        configureOpenButton(locOpen, LOC_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_LOC_ROOT");
+        bLoc.add(Box.createRigidArea(new Dimension(5, 0)));
+        bLoc.add(locOpen);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(bLocRootLabel);
         dirsBox.add(bLoc);
 
+        addExportTMSection(dirsBox, emptyBorder);
+
+        return dirsBox;
+    }
+
+    private void addExportTMSection(Box dirsBox, Border emptyBorder) {
         JLabel exportTMRootLabel = new JLabel();
         Mnemonics.setLocalizedText(exportTMRootLabel, OStrings.getString("PP_EXPORT_TM_ROOT"));
         Box bExportTMRootLabel = Box.createHorizontalBox();
@@ -566,6 +593,9 @@ public class ProjectPropertiesDialog extends JDialog {
         exportTMBrowse.setName(EXPORT_TM_BROWSE_BUTTON_NAME);
         bExpTM.add(Box.createRigidArea(new Dimension(5, 0)));
         bExpTM.add(exportTMBrowse);
+        configureOpenButton(exportTMOpen, EXPORT_TM_OPEN_BUTTON_NAME, "PP_OPEN_FOLDER_TOOLTIP", "PP_EXPORT_TM_ROOT");
+        bExpTM.add(Box.createRigidArea(new Dimension(5, 0)));
+        bExpTM.add(exportTMOpen);
         // Supply check boxes to choose which TM formats to export
         exportTMOmegaTCheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_OMEGAT"));
         exportTMLevel1CheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL1"));
@@ -587,8 +617,36 @@ public class ProjectPropertiesDialog extends JDialog {
         exportTMPanel.add(exportTMLevel2CheckBox);
         dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(exportTMPanel);
+    }
 
-        return dirsBox;
+    /**
+     * Configures one of the small buttons that open a folder of the file
+     * locations section in the system file manager. The buttons keep a short
+     * caption and carry an explanatory tooltip instead, so that the layout
+     * stays compact. Because all these buttons share the same caption, each
+     * gets an accessible name naming its resource row, so that screen reader
+     * users can tell them apart.
+     *
+     * @param button
+     *            button to configure
+     * @param name
+     *            component name used by UI tests
+     * @param tooltipKey
+     *            resource bundle key of the tooltip text
+     * @param rowLabelKey
+     *            resource bundle key of the label of the resource row the
+     *            button belongs to
+     */
+    private void configureOpenButton(JButton button, String name, String tooltipKey, String rowLabelKey) {
+        button.setText(OStrings.getString("PP_BUTTON_OPEN_FOLDER"));
+        button.setToolTipText(OStrings.getString(tooltipKey));
+        button.setName(name);
+        String rowLabel = OStrings.getString(rowLabelKey).replace("&", "");
+        if (rowLabel.endsWith(":")) {
+            rowLabel = rowLabel.substring(0, rowLabel.length() - 1);
+        }
+        button.getAccessibleContext().setAccessibleName(
+                MessageFormat.format(OStrings.getString("PP_OPEN_FOLDER_ACCESSIBLE_NAME"), rowLabel));
     }
 
     private void setResolveDirsDefaults() {
@@ -747,6 +805,15 @@ public class ProjectPropertiesDialog extends JDialog {
     JButton glosBrowse = new JButton();
     JButton dictBrowse = new JButton();
 
+    // buttons to open the file location folders in the system file manager
+    JButton srcOpen = new JButton();
+    JButton locOpen = new JButton();
+    JButton glosOpen = new JButton();
+    JButton wGlosOpen = new JButton();
+    JButton tmOpen = new JButton();
+    JButton exportTMOpen = new JButton();
+    JButton dictOpen = new JButton();
+
     // extern command
     JLabel variablesLabel = new javax.swing.JLabel();
     JComboBox<String> variablesList;
@@ -777,6 +844,14 @@ public class ProjectPropertiesDialog extends JDialog {
             "project_properties_writable_glossary_browse_button";
     public static final String LOC_BROWSE_BUTTON_NAME = "project_properties_loc_browse_button";
     public static final String DICTIONARY_BROWSE_BUTTON_NAME = "project_properties_dictionary_browse_button";
+    public static final String SRC_OPEN_BUTTON_NAME = "project_properties_src_open_button";
+    public static final String LOC_OPEN_BUTTON_NAME = "project_properties_loc_open_button";
+    public static final String GLOSSARY_OPEN_BUTTON_NAME = "project_properties_glossary_open_button";
+    public static final String WRITABLE_GLOSSARY_OPEN_BUTTON_NAME =
+            "project_properties_writable_glossary_open_button";
+    public static final String TM_OPEN_BUTTON_NAME = "project_properties_tm_open_button";
+    public static final String EXPORT_TM_OPEN_BUTTON_NAME = "project_properties_export_tm_open_button";
+    public static final String DICTIONARY_OPEN_BUTTON_NAME = "project_properties_dictionary_open_button";
     public static final String SOURCE_TOKENIZER_FIELD_NAME = "project_properties_source_tokenizer_field";
     public static final String TARGET_TOKENIZER_FIELD_NAME = "project_properties_target_tokenizer_field";
     public static final String SOURCE_LOCALE_CB_NAME = "project_properties_source_locale_cb";

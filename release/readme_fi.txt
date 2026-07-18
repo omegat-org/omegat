@@ -25,7 +25,7 @@ OmegaT käyttää useita kirjastoja. Jokaisen kirjaston lisenssi on kerrottu koh
 Mitä OmegaT:n asennukseen tarvitaan
 ===================================
 
-OmegaT vaatii, että järjestelmääsi on asennettu Java Runtime Environment (JRE) 1.8 tai uudempi.
+OmegaT vaatii, että järjestelmääsi on asennettu Java Runtime Environment (JRE) 11 tai uudempi.
 
 Suosittelemme, että käytät OmegaT-paketteja, joissa on JRE. Tällöin vältyt sopivan
 JRE:n valitsemiselta, hankinnalta ja asennukselta.

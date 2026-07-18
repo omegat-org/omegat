@@ -22,7 +22,7 @@ OmegaT-k zenbait liburutegi erabiltzen ditu. Liburutegi bakoitzaren lizentzia ho
 OmegaT instalatu aurreko baldintzak
 ===================================
 
-OmegaT-k Java Runtime Environment (JRE) 1.8 edo berriagoa behar du zure sisteman instalatu ahal izateko.
+OmegaT-k Java Runtime Environment (JRE) 11 edo berriagoa behar du zure sisteman instalatu ahal izateko.
 
 JRE integratuta daukaten OmegaT paketeak erabiltzea gomendatzen dugu, arazorik izan ez dezazun hura hautatu, eskuratu eta instalatzeko orduan.
 

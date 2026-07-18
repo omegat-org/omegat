@@ -155,9 +155,9 @@ public class ProjectFilesListController implements IProjectFilesList {
     private static final int MIN_PROGRESS_WIDTH = 3;
 
     private ProjectFilesList list;
-    private FileInfoModel modelFiles;
+    private @Nullable FileInfoModel modelFiles;
     private AbstractTableModel modelTotal;
-    private Sorter currentSorter;
+    private @Nullable Sorter currentSorter;
     private @Nullable TableColumn filesProgressColumn;
     private @Nullable TableColumn totalsProgressColumn;
 
@@ -247,6 +247,14 @@ public class ProjectFilesListController implements IProjectFilesList {
         CoreEvents.registerProjectChangeListener(eventType -> {
             switch (eventType) {
             case CLOSE:
+                // Drop every reference to the closed project's file list: the
+                // sorter, the model and the progress column each hold the
+                // FileInfo list and with it the project's whole segment
+                // graph, which otherwise stays in memory until the next load.
+                list.tableFiles.setRowSorter(null);
+                currentSorter = null;
+                modelFiles = null;
+                filesProgressColumn = null;
                 list.tableFiles.setModel(new DefaultTableModel());
                 list.tableFiles.repaint();
                 modelTotal.fireTableDataChanged();
@@ -278,8 +286,9 @@ public class ProjectFilesListController implements IProjectFilesList {
                 list.tableFiles.repaint();
                 list.tableTotal.repaint();
                 modelTotal.fireTableDataChanged();
-                if (shouldRefreshProjectFilesProgress()) {
-                    modelFiles.fireTableDataChanged();
+                FileInfoModel model = modelFiles;
+                if (model != null && shouldRefreshProjectFilesProgress()) {
+                    model.fireTableDataChanged();
                 }
             }
 
@@ -291,8 +300,9 @@ public class ProjectFilesListController implements IProjectFilesList {
             public void onEntryActivated(SourceTextEntry newEntry) {
                 UIThreadsUtil.mustBeSwingThread();
                 modelTotal.fireTableDataChanged();
-                if (shouldRefreshProjectFilesProgress()) {
-                    modelFiles.fireTableDataChanged();
+                FileInfoModel model = modelFiles;
+                if (model != null && shouldRefreshProjectFilesProgress()) {
+                    model.fireTableDataChanged();
                 }
             }
         });
@@ -387,9 +397,14 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     private void updateTitle() {
-        int numFiles = currentSorter.getModelRowCount();
+        Sorter sorter = currentSorter;
+        if (sorter == null) {
+            // No project is shown (the sorter is dropped on close).
+            return;
+        }
+        int numFiles = sorter.getModelRowCount();
         if (isFiltering()) {
-            int showingFiles = currentSorter.getViewRowCount();
+            int showingFiles = sorter.getViewRowCount();
             list.setTitle(StringUtil.format(OStrings.getString("PF_WINDOW_TITLE_FILTERED"), showingFiles,
                     numFiles));
         } else {
@@ -405,7 +420,12 @@ public class ProjectFilesListController implements IProjectFilesList {
         list.btnUp.setEnabled(enabled);
     }
 
-    private JPopupMenu createContextMenuForRow(int row) {
+    private @Nullable JPopupMenu createContextMenuForRow(int row) {
+        FileInfoModel model = modelFiles;
+        if (model == null || list.tableFiles.getRowSorter() == null) {
+            // No project is shown (model and sorter are dropped on close).
+            return null;
+        }
         int[] rows;
         if (IntStream.of(list.tableFiles.getSelectedRows()).anyMatch(r -> r == row)) {
             // If clicked on selection, use selection
@@ -415,7 +435,7 @@ public class ProjectFilesListController implements IProjectFilesList {
             rows = new int[] { row };
         }
         List<FileInfo> infos = IntStream.of(rows).map(list.tableFiles.getRowSorter()::convertRowIndexToModel)
-                .mapToObj(modelFiles::getDataAtRow).collect(Collectors.toList());
+                .mapToObj(model::getDataAtRow).collect(Collectors.toList());
         if (infos.isEmpty() || infos.stream().anyMatch(Objects::isNull)) {
             return null;
         }
@@ -575,7 +595,12 @@ public class ProjectFilesListController implements IProjectFilesList {
         Pattern findPattern = Pattern.compile(quoted, Pattern.CASE_INSENSITIVE);
         FilesTableColumn.FILE_NAME.setHighlightPattern(findPattern);
         Pattern matchPattern = Pattern.compile(".*" + quoted + ".*", Pattern.CASE_INSENSITIVE);
-        currentSorter.setFilter(matchPattern);
+        Sorter sorter = currentSorter;
+        if (sorter != null) {
+            // The filter panel only exists while a project is shown, but the
+            // project may go away underneath it on close.
+            sorter.setFilter(matchPattern);
+        }
         selectRow(0);
     }
 
@@ -590,7 +615,11 @@ public class ProjectFilesListController implements IProjectFilesList {
         list.btnFirst.setEnabled(true);
         list.btnLast.setEnabled(true);
         filterPanel = null;
-        currentSorter.setFilter(null);
+        Sorter sorter = currentSorter;
+        if (sorter != null) {
+            // See applyFilter: the project may have been closed meanwhile.
+            sorter.setFilter(null);
+        }
         list.tableFiles.requestFocus();
         int currentRow = list.tableFiles.getSelectedRow();
         list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(currentRow, 0, true));
@@ -599,6 +628,12 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     ActionListener moveAction = e -> {
+        Sorter sorter = currentSorter;
+        if (sorter == null) {
+            // No project is shown (the move buttons are disabled then, this
+            // guards against stray events anyway).
+            return;
+        }
         int[] selected = list.tableFiles.getSelectedRows();
         if (selected.length == 0) {
             return;
@@ -618,7 +653,7 @@ public class ProjectFilesListController implements IProjectFilesList {
         } else {
             return;
         }
-        pos = currentSorter.moveTo(selected, newPos);
+        pos = sorter.moveTo(selected, newPos);
         list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos + selected.length - 1);
     };
 
@@ -1454,7 +1489,9 @@ public class ProjectFilesListController implements IProjectFilesList {
         }
 
         @Override
-        public FileInfoModel getModel() {
+        public @Nullable FileInfoModel getModel() {
+            // Null only after the project was closed; the sorter is dropped
+            // together with the model then.
             return modelFiles;
         }
 

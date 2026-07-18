@@ -203,6 +203,19 @@
             </listitem>
          </varlistentry>
          <varlistentry>
+            <term>Whole words only</term>
+            <listitem>
+               <para>Search terms only match whole words: matches that are directly
+                  		  preceded or followed by a letter or digit are ignored. In a
+                  		  keyword search this applies to each keyword separately. Word
+                  		  characters are recognized in any script, not only in the Latin
+                  		  alphabet.</para>
+               <para>The option applies to exact and keyword searches. In a regular
+                  		  expression search you define word boundaries in the expression
+                  		  itself, so the option is disabled there.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
             <term>In source</term>
             <listitem>
                <para>Search in the source segments.</para>

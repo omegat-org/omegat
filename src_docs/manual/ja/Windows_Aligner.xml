@@ -193,27 +193,27 @@
       <note>
          <para>ショートカットキーは、整合ツールを頻繁に使用する場合や、大きなドキュメントで作業する場合に覚えておくと便利です。ショートカットキーを使用すると、操作をすばやく実行できます。</para>
       </note>
-      <para>操作を実行するには、該当する分節または連続する分節のブロックを選択します。個々の分節は、マウスまたは矢印キーで選択できます。分節のブロックは、マウスで最初の分節をクリックし、<keycombo>Shift</keycombo>キーを押しながら最後の分節をクリックすることによって選択できます。</para>
-      <para>または、<keycombo>Shift</keycombo>を押しながら矢印キーを押して、連続する分節を選択することもできます。使用可能な操作を以下に示します。</para>
+      <para>操作を実行するには、該当する分節または連続する分節のブロックを選択します。個々の分節は、マウスまたは矢印キーで選択できます。分節のブロックは、マウスで最初の分節をクリックし、<keycombo><keycap>Shift</keycap></keycombo>キーを押しながら最後の分節をクリックすることによって選択できます。</para>
+      <para>または、<keycombo><keycap>Shift</keycap></keycombo>を押しながら矢印キーを押して、連続する分節を選択することもできます。使用可能な操作を以下に示します。</para>
       <variablelist>
          <varlistentry>
-            <term>上へ移動(<keycombo>U</keycombo>)</term>
+            <term>上へ移動(<keycombo><keycap>U</keycap></keycombo>)</term>
             <listitem>
                <para>選択した分節、または連続する分節のブロックを1行上に移動します。</para>
                <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>下へ移動(<keycombo>D</keycombo>)</term>
+            <term>下へ移動(<keycombo><keycap>D</keycap></keycombo>)</term>
             <listitem>
                <para>選択した分節、または連続する分節のブロックを1行下に移動します。</para>
                <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>分割(<keycombo>S</keycombo>)</term>
+            <term>分割(<keycombo><keycap>S</keycap></keycombo>)</term>
             <listitem>
-               <para>単一の分節が選択されている場合、このコマンドは<guilabel>文章の分割</guilabel>ダイアログを開きます。マウスまたは矢印キーを使用して文章を分割する位置にカーソルを置き、<guibutton>確定</guibutton>ボタンをクリックするか、<keycombo>Enter</keycombo>を押します。</para>
+               <para>単一の分節が選択されている場合、このコマンドは<guilabel>文章の分割</guilabel>ダイアログを開きます。マウスまたは矢印キーを使用して文章を分割する位置にカーソルを置き、<guibutton>確定</guibutton>ボタンをクリックするか、<keycombo><keycap>Enter</keycap></keycombo>を押します。</para>
                <para>同じ行の別々のセルを占有する2つ以上の分節(<guilabel>採用</guilabel>チェックボックスのない行を含む複数のセル分節)が選択されている場合、このコマンドは選択されたセルを(<guilabel>採用</guilabel>チェックボックスを使用)別々の行に分割します。</para>
                <para>このコマンドは、メインウィンドウの右側にあるボタンからも使用できます。</para>
             </listitem>

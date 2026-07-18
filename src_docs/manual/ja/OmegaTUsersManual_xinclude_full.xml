@@ -18,7 +18,7 @@
          <para>OmegaTは、優れた翻訳を可能な限り迅速に作成可能にするために、信頼性の高い方法で翻訳に必要な資材にアクセスできるようしてくれます。</para>
          <para>OmegaTは、<emphasis>GNU General Public License, version 3.0</emphasis>の条件で頒布されています。このライセンスは、ユーザに次の自由を保障しています。<itemizedlist xml:id="freedoms.list">
                <listitem>
-                  <para>OmegaTをいかなる目的に対しても利用することができる自由。</para>
+                  <para>OmegaTをいかなる目的に対しても利用できる自由。</para>
                </listitem>
                <listitem>
                   <para>OmegaTがどのように動作しているのかを学び、望みに応じて自分で好きなように変更する自由。</para>

@@ -196,10 +196,10 @@
          <para>以下の手順は、<keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo>ショートカットを<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>メニュー項目に割り当てる方法を示しています。</para>
          <orderedlist>
             <listitem>
-               <para><link linkend="configuration.folder" endterm="configuration.folder.title"/>にコピーした<filename>MainMenuShortcuts.properties</filename>をテキストエディターで開きます。</para>
+               <para><link linkend="configuration.folder" role="xref">構成フォルダー</link>にコピーした<filename>MainMenuShortcuts.properties</filename>をテキストエディターで開きます。</para>
             </listitem>
             <listitem>
-               <para>以下の<xref linkend="app.shortcuts.lists.function.codes.edit.menu.table"/>&gt;に示すように、<guimenuitem>[例外訳文の作成]</guimenuitem>の機能コードは<code>editMultipleAlternate</code>です。</para>
+               <para>以下の<link linkend="app.shortcuts.lists.function.codes.edit.menu.table">編集メニュー表</link>に示すように、<guimenuitem>[例外訳文の作成]</guimenuitem>の機能コードは<code>editMultipleAlternate</code>です。</para>
                <para>ファイル内でそのコードを検索すると、次の行が表示されます。</para>
                <para><code>#	editMultipleAlternate=</code></para>
             </listitem>

@@ -27,6 +27,7 @@ package org.omegat.gui.editor.sort;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.junit.Test;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.editor.sort.MultiKeySorter.KeySpec;
@@ -180,5 +182,37 @@ public class MultiKeySorterTest {
         assertFalse(MultiKeySorter.fromPreferenceString("SOURCE_ALPHA:asc").get(0).numeric);
         // only the exact ":num" suffix enables numeric
         assertFalse(MultiKeySorter.fromPreferenceString("SOURCE_ALPHA:asc:foo").get(0).numeric);
+    }
+
+    @Test
+    public void numericSortNeedsPreparationAndReusesItsComparator() {
+        MultiKeySorter sorter = new MultiKeySorter(
+                Collections.singletonList(new KeySpec(SortKey.SOURCE_ALPHA, true, true)), Locale.ENGLISH);
+        assertTrue("numeric keys must ask for a preparation pass", sorter.needsPreparation());
+        // The chain is built once, so the values cached by prepare() (and by
+        // earlier re-sorts) are still used by later re-sorts.
+        assertSame(sorter.getComparator(), sorter.getComparator());
+        // Preparing an entry parses and caches its numeric key; must be callable
+        // repeatedly and without the editor.
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("f", "Chapter 12", null, "", "", null), 1,
+                null, null, Collections.emptyList());
+        sorter.prepare(ste);
+        sorter.prepare(ste);
+    }
+
+    @Test
+    public void plainTextSortIsPreparedToo() {
+        // Non-numeric text keys pre-compute collation keys, so they also get
+        // the background pass (and the progress bar).
+        MultiKeySorter sorter = new MultiKeySorter(
+                Collections.singletonList(new KeySpec(SortKey.SOURCE_ALPHA, true, false)), Locale.ENGLISH);
+        assertTrue(sorter.needsPreparation());
+    }
+
+    @Test
+    public void nonTextSortNeedsNoPreparation() {
+        MultiKeySorter sorter = new MultiKeySorter(
+                Collections.singletonList(new KeySpec(SortKey.SOURCE_LENGTH, true, false)), Locale.ENGLISH);
+        assertFalse(sorter.needsPreparation());
     }
 }

@@ -333,6 +333,27 @@
                		opening a new one.</para>
          </listitem>
       </varlistentry>
+      <varlistentry xml:id="menus.edit.search.source.segment">
+         <term xml:id="menus.edit.search.source.segment.title">
+            <guimenuitem>Search for Source Segment</guimenuitem>
+
+            <keycombo>
+               <keycap>C</keycap>
+               <keycap>S</keycap>
+               <keycap>E</keycap>
+            </keycombo>
+            	  </term>
+         <listitem>
+            <para>Searches the whole project for the source text of the current
+               segment, similar to the concordance search of other CAT tools.</para>
+            <para>The search runs immediately in the most recent still open Search
+               window, or in a new
+               <link linkend="windows.text.search" endterm="windows.text.search.title"></link> window when none is
+               	   open. Exact search, the
+               <guilabel>In source</guilabel> option and the project-wide scope are
+               	   selected automatically.</para>
+         </listitem>
+      </varlistentry>
       <varlistentry xml:id="menus.edit.search.and.replace">
          <term xml:id="menus.edit.search.and.replace.title">
             <guimenuitem>Replace...</guimenuitem>

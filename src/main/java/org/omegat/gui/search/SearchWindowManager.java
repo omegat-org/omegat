@@ -64,6 +64,27 @@ public final class SearchWindowManager {
         }
     }
 
+    /**
+     * Run a search for the given source text in the most recent open SEARCH
+     * window, or in a new one when none is open. Used by the source
+     * concordance search menu action.
+     *
+     * @param query
+     *            source text to search for
+     */
+    public static void searchSource(String query) {
+        for (int i = searches.size() - 1; i >= 0; i--) {
+            SearchWindowController swc = searches.get(i);
+            if (swc.getMode() == SearchMode.SEARCH) {
+                swc.searchImmediately(query);
+                return;
+            }
+        }
+        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
+        addSearchWindow(search);
+        search.searchImmediately(query);
+    }
+
     public static boolean reuseSearchWindow(String text) {
         for (int i = searches.size() - 1; i >= 0; i--) {
             SearchWindowController swc = searches.get(i);

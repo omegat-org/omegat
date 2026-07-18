@@ -456,6 +456,21 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         SearchWindowManager.createSearchWindow(SearchMode.SEARCH);
     }
 
+    /**
+     * Search the whole project for the source text of the current segment,
+     * like the concordance search of other CAT tools (feature request #1162).
+     */
+    public void editSearchSourceSegmentMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste == null) {
+            return;
+        }
+        SearchWindowManager.searchSource(ste.getSrcText());
+    }
+
     public void editReplaceInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;

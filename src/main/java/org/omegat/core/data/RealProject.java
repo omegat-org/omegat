@@ -923,7 +923,7 @@ public class RealProject implements IProject {
     }
 
     private boolean canPrepare() {
-        return remoteRepositoryProvider.isManaged() && preparedStatus == PreparedStatus.NONE && !isOnlineMode;
+        return remoteRepositoryProvider.isManaged() && preparedStatus == PreparedStatus.NONE && isOnlineMode;
     }
 
     @Override
@@ -1028,9 +1028,6 @@ public class RealProject implements IProject {
      * </ol>
      */
     private void rebaseAndCommitProject(boolean processGlossary) throws Exception {
-        if (!canRebaseAndCommit()) {
-            return;
-        }
         Log.logInfoRB("TEAM_REBASE_START");
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isManaged() && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
@@ -1059,11 +1056,6 @@ public class RealProject implements IProject {
     @VisibleForTesting
     GlossaryRebaseOperation getGlossaryRebaseOperation() {
         return new GlossaryRebaseOperation(config);
-    }
-
-    private boolean canRebaseAndCommit() {
-        return remoteRepositoryProvider.isManaged() && preparedStatus == PreparedStatus.PREPARED
-                && isOnlineMode;
     }
 
     @Deprecated(since = "6.1.0", forRemoval = true)

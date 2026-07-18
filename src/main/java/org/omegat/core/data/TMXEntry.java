@@ -32,15 +32,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
- *
+ * <p>
  * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
  * unchangeable.
- *
+ * <p>
  * Only RealProject can create and change TMXEntry objects.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -122,10 +122,9 @@ public class TMXEntry implements ITMXEntry {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof TMXEntry other)) {
             return false;
         }
-        TMXEntry other = (TMXEntry) obj;
         /*
          * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
          * but written to file with 1 second accuracy.

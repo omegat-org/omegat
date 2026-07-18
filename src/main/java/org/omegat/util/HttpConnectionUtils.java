@@ -65,8 +65,8 @@ import org.apache.commons.validator.routines.UrlValidator;
  * @author Hiroshi Miura
  */
 public final class HttpConnectionUtils {
-    protected static final String DEFAULT_RESPONSE_CHARSET = "ISO-8859-1";
-    protected static final String CHARSET_MARK = "charset=";
+    private static final String DEFAULT_RESPONSE_CHARSET = "ISO-8859-1";
+    private static final String CHARSET_MARK = "charset=";
     /**
      * Buffer size for downloading.
      */
@@ -93,22 +93,12 @@ public final class HttpConnectionUtils {
             + "(?::\\d{2,5})?" // port (optional)
             + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?"; // resources
 
-    /**
-     * Regular Expression for https and ftp URL validation.
-     * <p>
-     * You are recommended to use commons-validator instead of hand-crafted
-     * here. We leave it as is for keeping compatibility.
-     */
-    public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
-
     private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
             Pattern.CASE_INSENSITIVE);
 
     /**
      * Regular Expression for file URL validation.
      */
-    public static final Pattern FILE_URL_PATTERN = Pattern
-            .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
     private static final URLCodec codec = new URLCodec(StandardCharsets.UTF_8.name());
 
     /**
@@ -245,7 +235,7 @@ public final class HttpConnectionUtils {
      *             raise when connection failed.
      */
     public static byte[] getURLasByteArray(String target) throws IOException {
-        URL url = new URL(target);
+        URL url = URI.create(target).toURL();
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
             return null;
@@ -323,7 +313,7 @@ public final class HttpConnectionUtils {
             url = s.toString();
         }
 
-        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+        HttpURLConnection conn = (HttpURLConnection) URI.create(url).toURL().openConnection();
         try {
             conn.setRequestMethod("GET");
             if (additionalHeaders != null) {
@@ -355,7 +345,7 @@ public final class HttpConnectionUtils {
      */
     public static String post(String address, Map<String, String> params,
             Map<String, String> additionalHeaders) throws IOException {
-        URL url = new URL(address);
+        URL url = URI.create(address).toURL();
 
         ByteArrayOutputStream pout = new ByteArrayOutputStream();
         if (params != null) {
@@ -407,7 +397,7 @@ public final class HttpConnectionUtils {
      */
     public static String postJSON(String address, String json, Map<String, String> additionalHeaders)
             throws IOException {
-        URL url = new URL(address);
+        URL url = URI.create(address).toURL();
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -608,7 +598,7 @@ public final class HttpConnectionUtils {
             code = conn.getResponseCode();
             message = conn.getResponseMessage();
             try (InputStream in = conn.getErrorStream()) {
-                body = IOUtils.toString(in, StandardCharsets.UTF_8.name());
+                body = IOUtils.toString(in, StandardCharsets.UTF_8);
             }
         }
     }

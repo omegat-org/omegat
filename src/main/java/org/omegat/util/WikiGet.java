@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -77,7 +78,6 @@ public final class WikiGet {
      *                   retrieved
      * @param projectdir string representation of path to the project-dir where the
      *                   file should be saved.
-     * @throws IOException
      */
     public static void doWikiGet(String remoteUrl, String projectdir) throws IOException {
         String joined = null; // contains edited url
@@ -106,7 +106,7 @@ public final class WikiGet {
             joined = joinString("/", splitted);
             joined = joined + "?action=raw";
         }
-        String page = HttpConnectionUtils.getURL(new URL(joined));
+        String page = HttpConnectionUtils.getURL(URI.create(joined).toURL());
         saveUTF8(projectdir, name + ".UTF8", page);
     }
 

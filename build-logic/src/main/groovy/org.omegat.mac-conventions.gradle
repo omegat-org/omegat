@@ -1,4 +1,7 @@
+import java.nio.file.Files
 import java.util.zip.ZipFile
+
+import org.omegat.gradle.InjectedOps
 
 configurations {
     genMac
@@ -14,29 +17,50 @@ dependencies {
 
 tasks.register('genMac') {
     def appbundlerClasspath = configurations.genMac.asPath
-    def outDir = layout.buildDirectory.file("appbundler").get().toString()
+    def outDir = layout.buildDirectory.dir("appbundler")
     def appName = project.property('org.omegat.appName')
     def appClass = project.property('org.omegat.mainClassName')
+    def ver = project.version.toString()
+    def jvmRequired = project.property('org.omegat.mac.jvmRequired')
+    // $APP_ROOT is expanded at runtime by the launcher binary
+    def configFile = '$APP_ROOT/Contents/Resources/Configuration.properties'
+    def macSpecificDir = layout.projectDirectory.dir('release/mac-specific/OmegaT.app')
+    def fs = project.objects.newInstance(InjectedOps).fs
+
     description = 'Generates the macOS .app skeleton. Depends on AppBundler (https://github.com/TheInfiniteKind/appbundler).'
-    outputs.dir layout.buildDirectory.file("appbundler")
+    inputs.files(configurations.genMac)
+            .withPropertyName('appbundlerClasspath')
+            .withNormalizer(ClasspathNormalizer)
+    inputs.property('appName', appName)
+    inputs.property('appClass', appClass)
+    inputs.property('ver', ver)
+    inputs.property('jvmRequired', jvmRequired)
+    inputs.property('configFile', configFile)
+    inputs.dir(macSpecificDir)
+            .withPropertyName('macSpecificOverrides')
+            .withPathSensitivity(PathSensitivity.RELATIVE)
+
+    outputs.dir(outDir).withPropertyName('appBundleOutput')
+    outputs.cacheIf { true }
+
     doLast {
         ant.taskdef(name: 'appbundler',
                 classname: 'com.oracle.appbundler.AppBundlerTask',
                 classpath: appbundlerClasspath)
-        ant.appbundler(outputdirectory: outDir,
+        ant.appbundler(outputdirectory: outDir.get().asFile.toString(),
                 name: appName,
                 displayname: appName,
                 executablename: appName,
                 identifier: 'org.omegat.OmegaT',
                 icon: 'images/OmegaT.icns',
-                version: '${version}',
-                jvmrequired: '${jvmRequired}',
-                shortversion: '${version}',
+                version: ver,
+                jvmrequired: jvmRequired,
+                shortversion: ver,
                 mainclassname: appClass) {
             option(value: "-Xdock:name=${appName}")
             option(value: "-Dapple.awt.application.name=${appName}")
             option(value: "-Dapple.awt.application.appearance=system")
-            argument(value: '--config-file=${configfile}')
+            argument(value: "--config-file=${configFile}")
             bundledocument(extensions: 'project',
                     name: "${appName} Project",
                     role: 'editor',
@@ -46,11 +70,14 @@ tasks.register('genMac') {
                     role: 'none')
             plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
-        copy {
-            from 'release/mac-specific/OmegaT.app/'
-            include '**/*.lproj/Localizable.strings'
-            into "${outDir}/${appName}.app/"
+        fs.copy {
+            from(macSpecificDir) {
+                include '**/*.lproj/Localizable.strings'
+            }
+            into outDir.get().dir("${appName}.app")
         }
+        def exePath = outDir.get().file("${appName}.app/Contents/MacOS/${appName}").asFile
+        ant.chmod(file: exePath, perm: '0755')
     }
 }
 
@@ -125,29 +152,17 @@ ext.makeMacTask = { args ->
     String signedInstallTaskName = 'install' + args.name.capitalize() + "SignedDist"
     def parentTask = tasks.getByName(args.parentTaskName)
     def versionPart = project.ext.omtVersion.version + project.ext.omtVersion.beta
+    def appName = project.property('org.omegat.appName')
+    def outDir = layout.buildDirectory.dir("install/${appName}-${versionPart}-${args.suffix}")
 
     def installTask = tasks.register(installTaskName, Sync) {
         description = 'Builds the macOS distribution.'
-        onlyIf {
-            condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
-        }
+
         // mac specific contents
         from(genMac.outputs) {
-            exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
+            exclude '**/java.entitlements'
         }
-        from(genMac.outputs) {
-            include '**/MacOS/OmegaT'
-            filePermissions {
-                unix(0755)
-            }
-        }
-        from(genMac.outputs) {
-            include '**/Info.plist'
-            expand(version: project.version,
-                    jvmRequired: '11+',
-                    // $APP_ROOT is expanded at runtime by the launcher binary
-                    configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-        }
+        // app contents
         into('OmegaT.app/Contents/Java') {
             with distributions.main.contents
             exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat', 'omegat.desktop', '*.exe'
@@ -162,7 +177,7 @@ ext.makeMacTask = { args ->
             }
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${versionPart}-${args.suffix}"))
+        destinationDir = outDir.get().asFile
         outputs.upToDateWhen {
             // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
             def f1 = file("$destinationDir/OmegaT.app/Contents/Java/OmegaT.jar")

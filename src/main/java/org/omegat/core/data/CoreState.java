@@ -51,8 +51,8 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CoreState {
 
@@ -123,7 +123,7 @@ public class CoreState {
     private SpellCheckerManager spellCheckerManager;
 
     // Issues providers registry (per CoreState instance)
-    private List<IIssueProvider> issueProvidersRegistry;
+    private final List<IIssueProvider> issueProvidersRegistry = new CopyOnWriteArrayList<>();
 
     public boolean isProjectLoaded() {
         if (project == null) {
@@ -138,10 +138,7 @@ public class CoreState {
      * visibility issues. Default providers are installed by the IssueProviders facade
      * in the org.omegat.gui.issues package.
      */
-    public synchronized List<IIssueProvider> getIssueProvidersRegistry() {
-        if (issueProvidersRegistry == null) {
-            issueProvidersRegistry = new ArrayList<>();
-        }
+    public List<IIssueProvider> getIssueProvidersRegistry() {
         return issueProvidersRegistry;
     }
 

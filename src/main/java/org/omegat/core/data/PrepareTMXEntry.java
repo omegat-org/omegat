@@ -31,6 +31,8 @@ package org.omegat.core.data;
 import java.util.Collections;
 import java.util.List;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
 /**
@@ -45,20 +47,21 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class PrepareTMXEntry implements ITMXEntry {
     public String source;
-    public String translation;
-    public String changer;
+    public @Nullable String translation;
+    public @Nullable String changer;
     public long changeDate;
-    public String creator;
+    public @Nullable String creator;
     public long creationDate;
-    public String note;
-    public List<TMXProp> otherProperties;
+    public @Nullable String note;
+    public @Nullable List<TMXProp> otherProperties;
 
     public PrepareTMXEntry() {
     }
 
-    public PrepareTMXEntry(String source, String translation) {
+    public PrepareTMXEntry(String source, @Nullable String translation) {
         this.source = source;
         this.translation = translation;
     }
@@ -73,46 +76,56 @@ public class PrepareTMXEntry implements ITMXEntry {
         note = e.note;
     }
 
+    @Override
     public String getSourceText() {
         return source;
     }
 
-    public String getTranslationText() {
+    @Override
+    public @Nullable String getTranslationText() {
         return translation;
     }
 
-    public String getCreator() {
+    @Override
+    public @Nullable String getCreator() {
         return creator;
     }
 
+    @Override
     public long getCreationDate() {
         return creationDate;
     }
 
-    public String getChanger() {
+    @Override
+    public @Nullable String getChanger() {
         return changer;
     }
 
+    @Override
     public long getChangeDate() {
         return changeDate;
     }
 
-    public String getNote() {
+    @Override
+    public @Nullable String getNote() {
         return note;
     }
 
+    @Override
     public boolean hasProperties() {
         return (otherProperties != null) && (otherProperties.size() > 0);
     }
 
-    public List<TMXProp> getProperties() {
+    @Override
+    public @Nullable List<TMXProp> getProperties() {
         if (otherProperties == null) {
             return null;
         }
         return Collections.unmodifiableList(otherProperties);
     }
 
-    public String getPropValue(String propType) {
+    @Override
+    public @Nullable String getPropValue(String propType) {
         if (otherProperties == null) {
             return null;
         }
@@ -125,7 +138,8 @@ public class PrepareTMXEntry implements ITMXEntry {
         return null;
     }
 
-    public boolean hasPropValue(String propType, String propValue) {
+    @Override
+    public boolean hasPropValue(String propType, @Nullable String propValue) {
         if (otherProperties == null) {
             return false;
         }

@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 import org.omegat.util.TMXProp;
 
 /**
@@ -47,23 +48,24 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
+@NullMarked
 public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
-    };
+    }
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     public final String source;
-    public final String translation;
-    public final String changer;
+    public final @Nullable String translation;
+    public final @Nullable String changer;
     public final long changeDate;
-    public final String creator;
+    public final @Nullable String creator;
     public final long creationDate;
-    public final String note;
+    public final @Nullable String note;
     public final boolean defaultTranslation;
-    public final ExternalLinked linked;
-    public final String origin;
+    public final @Nullable ExternalLinked linked;
+    public final @Nullable String origin;
 
     TMXEntry(ITMXEntry from, boolean defaultTranslation, @Nullable ExternalLinked linked) {
         this.source = from.getSourceText();
@@ -79,36 +81,43 @@ public class TMXEntry implements ITMXEntry {
         this.origin = from.getPropValue(PROP_ORIGIN);
     }
 
+    @Override
     public String getSourceText() {
         return source;
     }
 
-    public String getTranslationText() {
+    @Override
+    public @Nullable String getTranslationText() {
         return translation;
     }
 
-    public String getCreator() {
+    @Override
+    public @Nullable String getCreator() {
         return creator;
     }
 
+    @Override
     public long getCreationDate() {
         return creationDate;
     }
 
-    public String getChanger() {
+    @Override
+    public @Nullable String getChanger() {
         return changer;
     }
 
+    @Override
     public long getChangeDate() {
         return changeDate;
     }
 
-    public String getNote() {
+    @Override
+    public @Nullable String getNote() {
         return note;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -157,7 +166,7 @@ public class TMXEntry implements ITMXEntry {
      * Two TMXEntrys are considered interchangeable if this method returns true,
      * even if equals() != true.
      */
-    public boolean equalsTranslation(TMXEntry other) {
+    public boolean equalsTranslation(@Nullable TMXEntry other) {
         if (other == null) {
             return false;
         }
@@ -177,6 +186,7 @@ public class TMXEntry implements ITMXEntry {
      * We only hold origin property in TMXEntry.
      * @return true when has origin property, otherwise false.
      */
+    @Override
     public boolean hasProperties() {
         return origin != null;
     }
@@ -186,7 +196,8 @@ public class TMXEntry implements ITMXEntry {
      * @param propType property type. Currently we just support origin.
      * @return mtsource when requested, otherwise null.
      */
-    public String getPropValue(String propType) {
+    @Override
+    public @Nullable String getPropValue(String propType) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin;
         }
@@ -199,6 +210,7 @@ public class TMXEntry implements ITMXEntry {
      * @param propValue expected value.
      * @return true when hold a queried type/value, otherwise false.
     */
+    @Override
     public boolean hasPropValue(String propType, String propValue) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin.equals(propValue);
@@ -210,7 +222,8 @@ public class TMXEntry implements ITMXEntry {
      * return properties.
      * @return singletonList of mtsource when it has, otherwise null.
      */
-    public List<TMXProp> getProperties() {
+    @Override
+    public @Nullable List<TMXProp> getProperties() {
         if (origin != null) {
             return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));
         }

@@ -27,6 +27,7 @@ package org.omegat.cli;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.data.NotLoadedProject;
@@ -149,7 +150,7 @@ public final class CommandCommon {
      *            load the project or not
      * @return the project.
      */
-    public static RealProject selectProjectConsoleMode(boolean loadProject, CommonParameters params) {
+    public static @Nullable RealProject selectProjectConsoleMode(boolean loadProject, CommonParameters params) {
 
         if (params.projectLocation == null) {
             Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -162,24 +163,22 @@ public final class CommandCommon {
             projectProperties = ProjectFileStorage
                     .loadProjectProperties(Paths.get(params.projectLocation).toFile());
             projectProperties.verifyProject();
+            RealProject p = new RealProject(projectProperties);
+            Core.setProject(p);
+            if (loadProject) {
+                Log.logInfoRB("CONSOLE_LOADING_PROJECT");
+                p.loadProject(true);
+                if (!p.isProjectLoaded()) {
+                    Core.setProject(new NotLoadedProject());
+                } else {
+                    executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD, params);
+                }
+            }
+            return p;
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            System.exit(1);
         }
-
-        RealProject p = new RealProject(projectProperties);
-        Core.setProject(p);
-        if (loadProject) {
-            Log.logInfoRB("CONSOLE_LOADING_PROJECT");
-            p.loadProject(true);
-            if (!p.isProjectLoaded()) {
-                Core.setProject(new NotLoadedProject());
-            } else {
-                executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD, params);
-            }
-
-        }
-        return p;
+        return null;
     }
 
     public static void showStartUpLogInfo() {

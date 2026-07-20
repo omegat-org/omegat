@@ -87,6 +87,9 @@ public class AlignerCommand extends BaseSubCommand {
 
         CommandCommon.parseCommonParams(params);
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+        if (p == null) {
+            return 1;
+        }
         CommandCommon.validateTagsConsoleMode(params);
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";

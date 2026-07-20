@@ -66,6 +66,9 @@ public class LegacyAlignCommand {
         params.setProjectLocation(legacyParams.project);
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+        if (p == null) {
+            return 1;
+        }
 
         Log.logInfoRB("CONSOLE_ALIGN_AGAINST", legacyParams.alignDirPath);
 

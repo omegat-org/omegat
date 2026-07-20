@@ -124,6 +124,9 @@ public class StatsCommand implements Callable<Integer> {
         }
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+        if (p == null) {
+            return 1;
+        }
         StatsResult projectStats = Statistics.buildProjectStats(p);
         StatOutputFormat statsMode;
 

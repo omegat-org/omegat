@@ -108,6 +108,9 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         }
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
+        if (p == null) {
+            return 1;
+        }
 
         CommandCommon.validateTagsConsoleMode(params);
 

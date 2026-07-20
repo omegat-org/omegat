@@ -45,9 +45,8 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Martin Fleurke
  */
 public class ConsoleWindow implements IMainWindow {
-    /**
-     * {@inheritDoc}
-     */
+
+    @Override
     public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
         String msg;
         if (params != null) {
@@ -69,6 +68,7 @@ public class ConsoleWindow implements IMainWindow {
     /**
      * {@inheritDoc} Nothing is shown in quiet mode.
      */
+    @Override
     public void showStatusMessageRB(String messageKey, Object... params) {
         if (RuntimePreferenceStore.getInstance().isQuietMode()) {
             return;
@@ -91,64 +91,76 @@ public class ConsoleWindow implements IMainWindow {
         showStatusMessageRB(messageKey, params);
     }
 
+    @Override
     public void displayWarningRB(String message, Object... args) {
         displayWarningRB(message, null, args);
     }
 
+    @Override
     public void displayWarningRB(String message, String supercedesKey, Object... args) {
         System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void showErrorDialogRB(String title, String message, Object... args) {
         System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
+    @Override
     public void addDockable(Dockable pane) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public Font getApplicationFont() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public JFrame getApplicationFrame() {
         return null;
     }
 
+    @Override
     public void lockUI() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public void showLengthMessage(String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public void showProgressMessage(String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public void unlockUI() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public IMainMenu getMainMenu() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
+    @Override
     public DockingDesktop getDesktop() {
         return null;
     }
 
+    @Override
     public Cursor getCursor() {
         return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }
 
+    @Override
     public void setCursor(Cursor cursor) {
     }
 
+    @Override
     public int showConfirmDialog(Object message, String title, int optionType, int messageType)
             throws HeadlessException {
 
@@ -158,6 +170,7 @@ public class ConsoleWindow implements IMainWindow {
         return 0; // JOptionPane.YES_OPTION
     }
 
+    @Override
     public void showMessageDialog(String message) {
         System.out.println(message);
     }

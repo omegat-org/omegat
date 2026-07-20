@@ -310,8 +310,11 @@ public class SegmentBuilder {
                     altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
                 }
                 if (altTrans != null && altTrans.isTranslated()) {
-                    Language language = entry.getKey();
-                    addOtherLanguagePart(altTrans.translation, language);
+                    var currentAltTranslation = altTrans.translation;
+                    if (currentAltTranslation != null) {
+                        Language language = entry.getKey();
+                        addOtherLanguagePart(currentAltTranslation, language);
+                    }
                 }
             }
 
@@ -326,8 +329,8 @@ public class SegmentBuilder {
                 // Preferences.DONT_INSERT_SOURCE_TEXT = false
                 boolean insertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
                         DONT_INSERT_SOURCE_TEXT_DEFAULT);
-                if (controller.entriesFilter != null
-                        && controller.entriesFilter.isSourceAsEmptyTranslation()) {
+                IEditorFilter activeFilter = controller.entriesFilter;
+                if (activeFilter != null && activeFilter.isSourceAsEmptyTranslation()) {
                     insertSource = true;
                 }
                 if (insertSource) {
@@ -343,7 +346,8 @@ public class SegmentBuilder {
                 }
             }
 
-            translationText = addActiveSegPart(translationText);
+            String activeTranslationText = translationText == null ? "" : translationText;
+            translationText = addActiveSegPart(activeTranslationText);
             posTranslationBeg = null;
 
             doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset - 1);

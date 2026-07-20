@@ -52,6 +52,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentExportImport {
     static final int WAIT_TIME = 100;
 
+    private static final Object EXPORT_LOCK = new Object();
+
     private final IEditor controller;
     private volatile long exportLastModified = Long.MAX_VALUE;
     private final File importFile;
@@ -89,26 +91,28 @@ public class SegmentExportImport {
     /**
      * Export the current source and target segments in text files.
      */
-    public synchronized void exportCurrentSegment(@Nullable SourceTextEntry ste) {
-        importFile.delete();
-        if (ste == null) {
-            // entry deactivated
-            exportLastModified = Long.MAX_VALUE;
-            return;
-        }
+    public void exportCurrentSegment(@Nullable SourceTextEntry ste) {
+        synchronized (EXPORT_LOCK) {
+            importFile.delete();
+            if (ste == null) {
+                // entry deactivated
+                exportLastModified = Long.MAX_VALUE;
+                return;
+            }
 
-        String s1 = ste.getSrcText();
-        TMXEntry te = Core.getProject().getTranslationInfo(ste);
-        String s2 = te.isTranslated() ? te.translation : "";
+            String s1 = ste.getSrcText();
+            TMXEntry te = Core.getProject().getTranslationInfo(ste);
+            String s2 = te.isTranslated() ? te.translation : "";
 
-        File sourceFile = getFile(SOURCE_EXPORT);
-        File targetFile = getFile(TARGET_EXPORT);
-        try {
-            writeFile(sourceFile, s1);
-            writeFile(targetFile, s2);
-            exportLastModified = sourceFile.lastModified();
-        } catch (IOException ex) {
-            Log.log(ex);
+            File sourceFile = getFile(SOURCE_EXPORT);
+            File targetFile = getFile(TARGET_EXPORT);
+            try {
+                writeFile(sourceFile, s1);
+                writeFile(targetFile, s2 == null ? "" : s2);
+                exportLastModified = sourceFile.lastModified();
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
         }
     }
 
@@ -120,15 +124,17 @@ public class SegmentExportImport {
         }
     }
 
-    public static synchronized void exportCurrentSelection(String selection) {
-        try {
-            writeFile(getFile(SELECTION_EXPORT), selection);
-        } catch (IOException ex) {
-            Log.log(ex);
+    public static void exportCurrentSelection(String selection) {
+        synchronized (EXPORT_LOCK) {
+            try {
+                writeFile(getFile(SELECTION_EXPORT), selection);
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
         }
     }
 
-    synchronized void importText() {
+    void importText() {
         if (importFile.lastModified() < exportLastModified) {
             // check again inside synchronized block
             return;
@@ -146,14 +152,16 @@ public class SegmentExportImport {
     /**
      * Empties the exported segments.
      */
-    public static synchronized void flushExportedSegments() {
-        File sourceFile = getFile(SOURCE_EXPORT);
-        File targetFile = getFile(TARGET_EXPORT);
-        try {
-            writeFile(sourceFile, "");
-            writeFile(targetFile, "");
-        } catch (IOException ex) {
-            Log.log(ex);
+    public static void flushExportedSegments() {
+        synchronized (EXPORT_LOCK) {
+            File sourceFile = getFile(SOURCE_EXPORT);
+            File targetFile = getFile(TARGET_EXPORT);
+            try {
+                writeFile(sourceFile, "");
+                writeFile(targetFile, "");
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
         }
     }
 }

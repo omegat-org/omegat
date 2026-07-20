@@ -44,73 +44,83 @@ public final class TeamSettings {
     private TeamSettings() {
     }
 
+    private static final Object LOCK = new Object();
+
     private static File configFile;
 
-    private static synchronized File getConfigFile() {
-        if (configFile == null) {
-            configFile = new File(StaticUtils.getConfigDir(), "repositories.properties");
+    private static File getConfigFile() {
+        synchronized (LOCK) {
+            if (configFile == null) {
+                configFile = new File(StaticUtils.getConfigDir(), "repositories.properties");
+            }
+            return configFile;
         }
-        return configFile;
     }
 
-    public static synchronized Set<Object> listKeys() {
-        try {
-            Properties p = new Properties();
-            if (getConfigFile().exists()) {
-                try (FileInputStream in = new FileInputStream(getConfigFile())) {
-                    p.load(in);
+    public static Set<Object> listKeys() {
+        synchronized (LOCK) {
+            try {
+                Properties p = new Properties();
+                if (getConfigFile().exists()) {
+                    try (FileInputStream in = new FileInputStream(getConfigFile())) {
+                        p.load(in);
+                    }
                 }
+                return p.keySet();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
-            return p.keySet();
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 
     /**
      * Get setting.
      */
-    public static synchronized String get(String key) {
-        try {
-            Properties p = new Properties();
-            if (getConfigFile().exists()) {
-                try (FileInputStream in = new FileInputStream(getConfigFile())) {
-                    p.load(in);
+    public static String get(String key) {
+        synchronized (LOCK) {
+            try {
+                Properties p = new Properties();
+                if (getConfigFile().exists()) {
+                    try (FileInputStream in = new FileInputStream(getConfigFile())) {
+                        p.load(in);
+                    }
                 }
+                return p.getProperty(key);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
-            return p.getProperty(key);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 
     /**
      * Update setting.
      */
-    public static synchronized void set(String key, String newValue) {
-        try {
-            Properties p = new Properties();
-            File f = getConfigFile();
-            File fNew = new File(getConfigFile().getAbsolutePath() + ".new");
-            if (f.exists()) {
-                try (FileInputStream in = new FileInputStream(f)) {
-                    p.load(in);
+    public static void set(String key, String newValue) {
+        synchronized (LOCK) {
+            try {
+                Properties p = new Properties();
+                File f = getConfigFile();
+                File fNew = new File(getConfigFile().getAbsolutePath() + ".new");
+                if (f.exists()) {
+                    try (FileInputStream in = new FileInputStream(f)) {
+                        p.load(in);
+                    }
+                } else {
+                    boolean ignored = f.getParentFile().mkdirs();
                 }
-            } else {
-                boolean ignored = f.getParentFile().mkdirs();
+                if (newValue != null) {
+                    p.setProperty(key, newValue);
+                } else {
+                    p.remove(key);
+                }
+                try (FileOutputStream out = new FileOutputStream(fNew)) {
+                    p.store(out, null);
+                }
+                boolean ignored = f.delete();
+                FileUtils.moveFile(fNew, f);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
-            if (newValue != null) {
-                p.setProperty(key, newValue);
-            } else {
-                p.remove(key);
-            }
-            try (FileOutputStream out = new FileOutputStream(fNew)) {
-                p.store(out, null);
-            }
-            boolean ignored = f.delete();
-            FileUtils.moveFile(fNew, f);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
     }
 }

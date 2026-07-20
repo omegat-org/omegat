@@ -189,8 +189,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 && learnedFilePath.toFile().canRead()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
-                if (checker != null) {
-                    learnedList.forEach(word -> checker.learnWord(word));
+                ISpellCheckerProvider currentChecker = checker;
+                if (currentChecker != null) {
+                    learnedList.forEach(currentChecker::learnWord);
                 }
             } catch (Exception ex) {
                 Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_READ_ERROR", ex.getLocalizedMessage());

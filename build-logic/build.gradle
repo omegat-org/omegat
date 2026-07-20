@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
 plugins {
     id 'groovy'
     id 'groovy-gradle-plugin'
@@ -48,7 +51,7 @@ dependencies {
 
     // 3rd party gradle plugin
     implementation 'com.github.ben-manes:gradle-versions-plugin:0.52.0'
-    implementation 'com.github.spotbugs.snom:spotbugs-gradle-plugin:6.1.5'
+    implementation 'com.github.spotbugs.snom:spotbugs-gradle-plugin:6.5.9'
     implementation 'com.diffplug.spotless:spotless-plugin-gradle:8.8.0'
     implementation 'edu.sc.seis.launch4j:launch4j:4.0.0'
     implementation 'org.hidetake.ssh:org.hidetake.ssh.gradle.plugin:2.11.2'
@@ -135,9 +138,9 @@ tasks.register('downloadBuildLogicDependencies') {
                 def artifactDir = new File(root,
                         "${id.group.replace('.', '/')}/${id.module}/${id.version}")
                 artifactDir.mkdirs()
-                java.nio.file.Files.copy(artifact.file.toPath(),
+                Files.copy(artifact.file.toPath(),
                         new File(artifactDir, artifact.file.name).toPath(),
-                        java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                        StandardCopyOption.REPLACE_EXISTING)
             }
         }
 
@@ -148,9 +151,9 @@ tasks.register('downloadBuildLogicDependencies') {
                 def artifactDir = new File(root,
                         "${id.group.replace('.', '/')}/${id.module}/${id.version}")
                 artifactDir.mkdirs()
-                java.nio.file.Files.copy(artifact.file.toPath(),
+                Files.copy(artifact.file.toPath(),
                         new File(artifactDir, "${id.module}-${id.version}.pom").toPath(),
-                        java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                        StandardCopyOption.REPLACE_EXISTING)
             }
         }
     }

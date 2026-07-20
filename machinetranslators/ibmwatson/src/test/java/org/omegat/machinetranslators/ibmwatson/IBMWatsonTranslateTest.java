@@ -86,18 +86,20 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                                + "  \"translations\": [\n"
-                                + "    {\n"
-                                + "      \"translation\": \"Hola, \u00BFc\u00F3mo est\u00E1s hoy?\"\n"
-                                + "    }\n"
-                                + "  ],\n"
-                                + "  \"word_count\": 7,\n"
-                                + "  \"character_count\": 25\n"
-                                + "}")));
+                        .withBody("""
+                                        {
+                                          "translations": [
+                                            {
+                                              "translation": "Hola, ¿cómo estás hoy?"
+                                            }
+                                          ],
+                                          "word_count": 7,
+                                          "character_count": 25
+                                        }""")));
+
 
         IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
         String result = ibmWatsonTranslate.translate(new Language("EN"), new Language("ES"), sourceText);
-        assertEquals("Hola, \u00BFc\u00F3mo est\u00E1s hoy?", result);
+        assertEquals("Hola, ¿cómo estás hoy?", result);
     }
 }

@@ -38,30 +38,32 @@ import org.omegat.util.Preferences;
 
 public class Google2TranslateTest extends TestCoreWireMock {
 
-    private static final String JSON = "{\n"
-            + "  \"data\": {\n"
-            + "    \"translations\": [\n"
-            + "      {\n"
-            + "        \"translatedText\": \"Hallo Welt\",\n"
-            + "        \"detectedSourceLanguage\": \"en\"\n"
-            + "      },\n"
-            + "      {\n"
-            + "        \"translatedText\": \"Mein Name ist Jeff\",\n"
-            + "        \"detectedSourceLanguage\": \"en\"\n"
-            + "      }\n"
-            + "    ]\n"
-            + "  }\n"
-            + "}";
+    private static final String JSON = """
+            {
+              "data": {
+                "translations": [
+                  {
+                    "translatedText": "Hallo Welt",
+                    "detectedSourceLanguage": "en"
+                  },
+                  {
+                    "translatedText": "Mein Name ist Jeff",
+                    "detectedSourceLanguage": "en"
+                  }
+                ]
+              }
+            }""";
 
-    private static final String JSON2 = "{\n"
-            + "  \"data\": {\n"
-            + "     \"translations\": [{\n"
-            + "        \"translatedText\": \"Hallo Welt\",\n"
-            + "        \"detectedSourceLanguage\": \"en\",\n"
-            + "        \"model\": \"projects/PROJECT_NUMBER/locations/LOCATION/models/123\"\n"
-            + "     }]\n"
-            + "   }\n"
-            + "}";
+    private static final String JSON2 = """
+            {
+              "data": {
+                 "translations": [{
+                    "translatedText": "Hallo Welt",
+                    "detectedSourceLanguage": "en",
+                    "model": "projects/PROJECT_NUMBER/locations/LOCATION/models/123"
+                 }]
+               }
+            }""";
 
     @Test
     public void testGetJsonResults() throws MachineTranslateError {

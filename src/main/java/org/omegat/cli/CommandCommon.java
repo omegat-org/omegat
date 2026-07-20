@@ -158,9 +158,8 @@ public final class CommandCommon {
         }
 
         // check if project okay
-        ProjectProperties projectProperties = null;
         try {
-            projectProperties = ProjectFileStorage
+            ProjectProperties projectProperties = ProjectFileStorage
                     .loadProjectProperties(Paths.get(params.projectLocation).toFile());
             projectProperties.verifyProject();
             RealProject p = new RealProject(projectProperties);
@@ -185,7 +184,7 @@ public final class CommandCommon {
         // initialize logging backend and loading configuration.
         Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
                 DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
-                        .format(ZonedDateTime.now()),
+                        .format(ZonedDateTime.now(ZoneId.systemDefault())),
                 ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
                 Locale.getDefault().toLanguageTag());
         Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),

@@ -282,7 +282,7 @@ public interface IProject {
         /**
          * Characterset name used for parsing the source file.
          */
-        public String fileEncoding;
+        public @Nullable String fileEncoding;
 
         public final List<SourceTextEntry> entries = new ArrayList<>();
 
@@ -290,7 +290,7 @@ public interface IProject {
             this.filePath = filePath;
         }
 
-        public FileInfo(String filePath, Class<?> filterClass, String filterName, String fileEncoding) {
+        public FileInfo(String filePath, Class<?> filterClass, String filterName, @Nullable String fileEncoding) {
             this.filePath = filePath;
             this.filterClass = filterClass;
             this.filterFileFormatName = filterName;

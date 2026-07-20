@@ -363,7 +363,7 @@ public class MainWindow implements IMainWindow {
         return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
     }
 
-    public void showStatusMessageRB(final String messageKey, final Object... params) {
+    public void showStatusMessageRB(String messageKey, Object... params) {
         mainWindowStatusBarController.showStatusMessageRB(messageKey, params);
     }
 

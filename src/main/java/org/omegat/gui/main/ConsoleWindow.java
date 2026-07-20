@@ -74,7 +74,7 @@ public class ConsoleWindow implements IMainWindow {
             return;
         }
         final String msg;
-        if (messageKey == null) {
+        if (messageKey == null || messageKey.isEmpty()) {
             msg = " ";
         } else {
             if (params != null) {

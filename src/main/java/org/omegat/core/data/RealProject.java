@@ -309,7 +309,7 @@ public class RealProject implements IProject {
             loaded = true;
 
             // clear status message
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMainWindow().showStatusMessageRB("");
         } catch (Exception e) {
             // trouble in Tinseltown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
@@ -404,7 +404,7 @@ public class RealProject implements IProject {
             loaded = true;
 
             // Project Loaded...
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMainWindow().showStatusMessageRB("");
 
             setProjectModified(importHandler.didAnyChange);
         } catch (OutOfMemoryError oome) {

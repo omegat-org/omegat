@@ -140,7 +140,7 @@ public final class LastSegmentManager {
 
         if (allEntries.size() < lastEntryNumber) {
             LOGGER.atDebug().log("Not enough segments to jump to {}", lastEntryNumber);
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMainWindow().showStatusMessageRB("");
             return 1;
         }
 
@@ -153,7 +153,7 @@ public final class LastSegmentManager {
         // filename, it's still okay)
         if (propEntry.getSrcText().equals(lastSrc)) {
             // gotoEntry(propEntry.entryNum(), editor);
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMainWindow().showStatusMessageRB("");
             return propEntry.entryNum();
         }
 
@@ -165,7 +165,7 @@ public final class LastSegmentManager {
 
         if (fileIndex == -1) {
             LOGGER.atDebug().log("File \"{}\" is not in the project anymore.", lastFile);
-            Core.getMainWindow().showStatusMessageRB(null);
+            Core.getMainWindow().showStatusMessageRB("");
             return 1;
         }
 
@@ -187,7 +187,7 @@ public final class LastSegmentManager {
             }
         }
 
-        Core.getMainWindow().showStatusMessageRB(null);
+        Core.getMainWindow().showStatusMessageRB("");
         return 1;
     }
 

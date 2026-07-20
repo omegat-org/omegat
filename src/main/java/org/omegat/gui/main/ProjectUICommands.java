@@ -41,6 +41,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JFileChooser;
@@ -187,8 +188,8 @@ public final class ProjectUICommands {
 
             @Override
             protected Void doInBackground() throws Exception {
-                mainWindow = Core.getMainWindow();
-                mainWindow.showStatusMessageRB(null);
+                mainWindow = Objects.requireNonNull(Core.getMainWindow());
+                mainWindow.showStatusMessageRB("");
                 NewTeamProjectController newTeamProjectController = new NewTeamProjectController(mainWindow);
                 File dir = newTeamProjectController.show();
                 if (dir == null || !ensureProjectDir(dir)) {

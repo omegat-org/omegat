@@ -221,11 +221,11 @@ class TestMainWindow implements IMainWindow {
     }
 
     @Override
-    public void showStatusMessageRB(final String messageKey, final Object... params) {
+    public void showStatusMessageRB(String messageKey, Object... params) {
     }
 
     @Override
-    public void showTimedStatusMessageRB(final String messageKey, final Object... params) {
+    public void showTimedStatusMessageRB(String messageKey, Object... params) {
     }
 
     @Override

@@ -120,7 +120,7 @@ public final class MainWindowStatusBarController {
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
         showStatusMessageRB(messageKey, params);
 
-        if (messageKey == null) {
+        if (messageKey == null || messageKey.isEmpty()) {
             return;
         }
 

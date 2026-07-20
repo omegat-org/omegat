@@ -1535,6 +1535,7 @@ public class RealProject implements IProject {
         setProjectModified(true);
     }
 
+    @Override
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
@@ -1545,6 +1546,7 @@ public class RealProject implements IProject {
         }
     }
 
+    @Override
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
@@ -1562,32 +1564,32 @@ public class RealProject implements IProject {
         return set.toArray(a);
     }
 
+    @Override
     public boolean isOrphaned(String source) {
         return !checkOrphanedCallback.existSourceInProject(source);
     }
 
+    @Override
     public boolean isOrphaned(EntryKey entry) {
         return !checkOrphanedCallback.existEntryInProject(entry);
     }
 
+    @Override
     public Map<String, ExternalTMX> getTransMemories() {
         return Collections.unmodifiableMap(transMemories);
     }
 
+    @Override
     public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
         return Collections.unmodifiableMap(otherTargetLangTMs);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ITokenizer getSourceTokenizer() {
         return sourceTokenizer;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ITokenizer getTargetTokenizer() {
         return targetTokenizer;
     }
@@ -1625,9 +1627,7 @@ public class RealProject implements IProject {
         return new DefaultTokenizer();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public List<FileInfo> getProjectFiles() {
         return Collections.unmodifiableList(projectFilesList);
     }

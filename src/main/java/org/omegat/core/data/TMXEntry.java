@@ -51,7 +51,7 @@ public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
-    };
+    }
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     public final String source;
@@ -79,30 +79,37 @@ public class TMXEntry implements ITMXEntry {
         this.origin = from.getPropValue(PROP_ORIGIN);
     }
 
+    @Override
     public String getSourceText() {
         return source;
     }
 
+    @Override
     public String getTranslationText() {
         return translation;
     }
 
+    @Override
     public String getCreator() {
         return creator;
     }
 
+    @Override
     public long getCreationDate() {
         return creationDate;
     }
 
+    @Override
     public String getChanger() {
         return changer;
     }
 
+    @Override
     public long getChangeDate() {
         return changeDate;
     }
 
+    @Override
     public String getNote() {
         return note;
     }
@@ -177,6 +184,7 @@ public class TMXEntry implements ITMXEntry {
      * We only hold origin property in TMXEntry.
      * @return true when has origin property, otherwise false.
      */
+    @Override
     public boolean hasProperties() {
         return origin != null;
     }
@@ -186,6 +194,7 @@ public class TMXEntry implements ITMXEntry {
      * @param propType property type. Currently we just support origin.
      * @return mtsource when requested, otherwise null.
      */
+    @Override
     public String getPropValue(String propType) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin;
@@ -199,6 +208,7 @@ public class TMXEntry implements ITMXEntry {
      * @param propValue expected value.
      * @return true when hold a queried type/value, otherwise false.
     */
+    @Override
     public boolean hasPropValue(String propType, String propValue) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin.equals(propValue);
@@ -210,6 +220,7 @@ public class TMXEntry implements ITMXEntry {
      * return properties.
      * @return singletonList of mtsource when it has, otherwise null.
      */
+    @Override
     public List<TMXProp> getProperties() {
         if (origin != null) {
             return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));

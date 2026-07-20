@@ -407,11 +407,13 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             TMXEntry te = Core.getProject().getTranslationInfo(ste);
             if (te.isTranslated()) {
                 selection = te.translation;
-            } else {
+            } else if (ste != null) {
                 selection = ste.getSrcText();
             }
         }
-        SegmentExportImport.exportCurrentSelection(selection);
+        if (selection != null) {
+            SegmentExportImport.exportCurrentSelection(selection);
+        }
     }
 
     public void editSearchDictionaryMenuItemActionPerformed() {

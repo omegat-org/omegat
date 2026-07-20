@@ -26,17 +26,17 @@ package org.omegat.cli;
 
 import picocli.CommandLine;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class SubCommands {
 
     private SubCommands() {
     }
 
-    private static final Map<String, Class<? extends BaseSubCommand>> SUB_COMMAND_ENTRIES = new HashMap<>();
+    private static final Map<String, Class<? extends BaseSubCommand>> SUB_COMMAND_ENTRIES = new ConcurrentHashMap<>();
 
     /**
      * Registers a console command by associating a command name with its corresponding subcommand class.
@@ -46,7 +46,7 @@ public final class SubCommands {
      * @param name       the subcommand name of the console command to be registered.
      * @param subcommand the class representing the subcommand implementation associated with the given name.
      */
-    public static synchronized void registerConsoleCommand(String name, Class<? extends BaseSubCommand> subcommand) {
+    public static void registerConsoleCommand(String name, Class<? extends BaseSubCommand> subcommand) {
         SUB_COMMAND_ENTRIES.put(name.toLowerCase(Locale.ENGLISH), subcommand);
     }
 
@@ -59,7 +59,7 @@ public final class SubCommands {
      * @param subcommand the class representing the subcommand implementation whose name is to be
      *                   derived and registered in the subcommand registry.
      */
-    public static synchronized void registerConsoleCommand(Class<? extends BaseSubCommand> subcommand) {
+    public static void registerConsoleCommand(Class<? extends BaseSubCommand> subcommand) {
         String name = subcommand.getSimpleName();
         name = name.substring(0, name.length() - "Command".length()).toLowerCase(Locale.ENGLISH);
         registerConsoleCommand(name, subcommand);

@@ -53,7 +53,10 @@ tasks.register('spotlessChangedApply') {
     description = 'Applies code formatting to files that have been changed on the current branch.'
     group = 'verification'
     finalizedBy 'spotlessApply'
-    dependsOn changedOnBranch
+}
+
+def hasSiblingFormFile = { File javaFile ->
+    new File(javaFile.parentFile, javaFile.name[0..-6] + '.form').exists()
 }
 
 spotless {
@@ -63,17 +66,14 @@ spotless {
         // by the .form file next to them): reformatting breaks the
         // //GEN-BEGIN editor-fold markers the Form Editor relies on.
         if (branchWorkflowRequested) {
-            target chnangedFiles.findAll {
-                it.path.endsWith('.java')
-                        && !new File(it.parentFile, it.name[0..-6] + '.form').exists()
+            target changedFiles.findAll { path ->
+                path.endsWith('.java') && !hasSiblingFormFile(file(path))
             }
         } else {
             targetExclude fileTree(projectDir) {
                 include '**/*.java'
                 exclude '**/build/**'
-            }.filter { javaFile ->
-                new File(javaFile.parentFile, javaFile.name[0..-6] + '.form').exists()
-            }
+            }.filter(hasSiblingFormFile)
         }
         eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()

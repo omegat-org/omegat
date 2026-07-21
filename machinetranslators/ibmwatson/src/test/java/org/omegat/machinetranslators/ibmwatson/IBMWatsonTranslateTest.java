@@ -42,9 +42,7 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
     public void getJsonResults() throws Exception {
         Preferences.setPreference(IBMWatsonTranslate.ALLOW_IBMWATSON_TRANSLATE, true);
         IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
-        String json = "{\"translations\": ["
-                + "  {\"translation\": \"translated text goes here.\" }"
-                + "],"
+        String json = "{\"translations\": [" + "  {\"translation\": \"translated text goes here.\" }" + "],"
                 + " \"word_count\": 4, \"character_count\": 53 }";
         String translation = ibmWatsonTranslate.getJsonResults(json);
         assertEquals("translated text goes here.", translation);
@@ -75,28 +73,25 @@ public class IBMWatsonTranslateTest extends TestCoreWireMock {
 
         String sourceText = "Hello, how are you today?";
 
-        WireMock.stubFor(WireMock.post(WireMock.anyUrl())   //WireMock.urlPathEqualTo
+        WireMock.stubFor(WireMock.post(WireMock.anyUrl()) // WireMock.urlPathEqualTo
                 // ("/language-translator/api/v3/translate"))
-                        .withQueryParam("version", WireMock.equalTo("2018-05-01"))
-                        .withRequestBody(WireMock.equalToJson(
-                                "{\"source\":\"EN\",\"target\":\"ES\",\"text\":[\"" + sourceText + "\"]}"))
-                        .withHeader("Accept", WireMock.equalTo("application/json"))
-                        .withHeader("Authorization", WireMock.containing("Basic "))
-                        .withHeader("X-Watson-Learning-Opt-Out", WireMock.equalTo("true"))
-                .willReturn(WireMock.aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("""
-                                        {
-                                          "translations": [
-                                            {
-                                              "translation": "Hola, ¿cómo estás hoy?"
-                                            }
-                                          ],
-                                          "word_count": 7,
-                                          "character_count": 25
-                                        }""")));
-
+                .withQueryParam("version", WireMock.equalTo("2018-05-01"))
+                .withRequestBody(WireMock.equalToJson(
+                        "{\"source\":\"EN\",\"target\":\"ES\",\"text\":[\"" + sourceText + "\"]}"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .withHeader("Authorization", WireMock.containing("Basic "))
+                .withHeader("X-Watson-Learning-Opt-Out", WireMock.equalTo("true"))
+                .willReturn(WireMock.aResponse().withStatus(200)
+                        .withHeader("Content-Type", "application/json").withBody("""
+                                {
+                                  "translations": [
+                                    {
+                                      "translation": "Hola, ¿cómo estás hoy?"
+                                    }
+                                  ],
+                                  "word_count": 7,
+                                  "character_count": 25
+                                }""")));
 
         IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
         String result = ibmWatsonTranslate.translate(new Language("EN"), new Language("ES"), sourceText);

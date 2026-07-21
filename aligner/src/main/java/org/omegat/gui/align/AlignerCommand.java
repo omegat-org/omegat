@@ -66,7 +66,7 @@ public class AlignerCommand extends BaseSubCommand {
     public Integer call() throws Exception {
         int status;
         if (gui) {
-           status = runGUIAligner();
+            status = runGUIAligner();
         } else {
             Core.initializeConsole();
             status = runConsoleAlign();
@@ -97,8 +97,7 @@ public class AlignerCommand extends BaseSubCommand {
         boolean alt = !config.isSupportDefaultTranslations();
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
                 config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(project))),
-                    alt);
+            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(project))), alt);
         }
         p.closeProject();
         Log.logInfoRB("CONSOLE_FINISHED");

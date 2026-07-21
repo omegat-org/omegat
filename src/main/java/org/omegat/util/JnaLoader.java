@@ -32,31 +32,36 @@ import com.sun.jna.Native;
  * Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by
  * the Apache 2.0 license.
  */
-public class JnaLoader {
-    private static Boolean ourJnaLoaded = null;
+public final class JnaLoader {
+    private static final Object LOCK = new Object();
+    private static Boolean ourJnaLoaded = false;
 
-    public static synchronized void load() {
-        if (ourJnaLoaded == null) {
-            ourJnaLoaded = Boolean.FALSE;
+    public static void load() {
+        synchronized (LOCK) {
+            if (ourJnaLoaded == null) {
+                ourJnaLoaded = Boolean.FALSE;
 
-            try {
-                long t = System.currentTimeMillis();
-                int ptrSize = Native.POINTER_SIZE;
-                t = System.currentTimeMillis() - t;
-                Log.log("JNA library (" + (ptrSize << 3) + "-bit) loaded in " + t + " ms");
-                ourJnaLoaded = Boolean.TRUE;
-            } catch (Throwable t) {
-                Log.log("Unable to load JNA library (" + "os=" + System.getProperty("os.name") + " "
-                        + System.getProperty("os.version") + ", jna.boot.library.path="
-                        + System.getProperty("jna.boot.library.path") + ")");
+                try {
+                    long t = System.currentTimeMillis();
+                    int ptrSize = Native.POINTER_SIZE;
+                    t = System.currentTimeMillis() - t;
+                    Log.log("JNA library (" + (ptrSize << 3) + "-bit) loaded in " + t + " ms");
+                    ourJnaLoaded = Boolean.TRUE;
+                } catch (Throwable t) {
+                    Log.log("Unable to load JNA library (" + "os=" + System.getProperty("os.name") + " "
+                            + System.getProperty("os.version") + ", jna.boot.library.path="
+                            + System.getProperty("jna.boot.library.path") + ")");
+                }
             }
         }
     }
 
-    public static synchronized boolean isLoaded() {
-        if (ourJnaLoaded == null) {
-            load();
+    public static boolean isLoaded() {
+        synchronized (LOCK) {
+            if (ourJnaLoaded == null) {
+                load();
+            }
+            return ourJnaLoaded;
         }
-        return ourJnaLoaded;
     }
 }

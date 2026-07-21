@@ -26,12 +26,12 @@
 package org.omegat.gui.editor.filter;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditorFilter;
@@ -41,20 +41,19 @@ import org.omegat.gui.editor.IEditorFilter;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@NullMarked
 public class SearchFilter implements IEditorFilter {
-    private final Set<Integer> entriesList = new HashSet<Integer>();
-    private FilterBarSearch controlComponent;
+    private final Set<Integer> entriesList = new HashSet<>();
+    private final FilterBarSearch controlComponent;
 
     public SearchFilter(List<Integer> entries) {
         entriesList.addAll(entries);
         controlComponent = new FilterBarSearch();
-        controlComponent.btnRemoveFilter.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Make sure that any change done in the current segment is not
-                // lost
-                Core.getEditor().commitAndDeactivate();
-                Core.getEditor().removeFilter();
-            }
+        controlComponent.btnRemoveFilter.addActionListener(e -> {
+            // Make sure that any change done in the current segment is not
+            // lost
+            Core.getEditor().commitAndDeactivate();
+            Core.getEditor().removeFilter();
         });
     }
 
@@ -64,7 +63,10 @@ public class SearchFilter implements IEditorFilter {
     }
 
     @Override
-    public boolean allowed(SourceTextEntry ste) {
+    public boolean allowed(@Nullable SourceTextEntry ste) {
+        if (ste == null) {
+            return false;
+        }
         return entriesList.contains(ste.entryNum());
     }
 

@@ -41,13 +41,13 @@ import javax.swing.event.HyperlinkListener;
  *
  * @author Hiroshi Miura
  */
-public class SoundActionListener implements HyperlinkListener {
+public final class SoundActionListener implements HyperlinkListener {
 
     /**
      * Play specified file on default device.
      * @param file media file.
      */
-    public static synchronized void playSound(final File file) {
+    public static void playSound(final File file) {
         new SwingWorker<Void, Void>() {
 
             private Clip clip;

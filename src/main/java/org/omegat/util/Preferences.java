@@ -776,6 +776,8 @@ public final class Preferences {
         }
     }
 
+    private static final Object LOCK = new Object();
+
     /**
      * Initialize the preferences system. This will load
      * <ul>
@@ -793,13 +795,15 @@ public final class Preferences {
      * set the config dir with {@link RuntimePreferences#setConfigDir(String)}
      * before calling this method.
      */
-    public static synchronized void init() {
-        if (didInit) {
-            return;
+    public static void init() {
+        synchronized (LOCK) {
+            if (didInit) {
+                return;
+            }
+            File loadFile = getPreferencesFile();
+            File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
+            setPreferences(new PreferencesImpl(new PreferencesXML(loadFile, saveFile)));
         }
-        File loadFile = getPreferencesFile();
-        File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
-        setPreferences(new PreferencesImpl(new PreferencesXML(loadFile, saveFile)));
     }
 
     /**
@@ -816,42 +820,48 @@ public final class Preferences {
      * it with the user's on-disk preferences.
      */
     @VisibleForTesting
-    static synchronized void setPreferences(IPreferences preferences) {
-        Preferences.preferences = preferences;
-        didInit = true;
+    static void setPreferences(IPreferences preferences) {
+        synchronized (LOCK) {
+            Preferences.preferences = preferences;
+            didInit = true;
+        }
     }
 
-    public static synchronized void initFilters() {
-        if (didInitFilters) {
-            return;
-        }
-        didInitFilters = true;
+    public static void initFilters() {
+        synchronized (LOCK) {
+            if (didInitFilters) {
+                return;
+            }
+            didInitFilters = true;
 
-        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        Filters f = null;
-        try {
-            f = FilterMaster.loadConfig(filtersFile);
-        } catch (Exception ex) {
-            Log.log(ex);
+            File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+            Filters f = null;
+            try {
+                f = FilterMaster.loadConfig(filtersFile);
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+            if (f == null) {
+                f = FilterMaster.createDefaultFiltersConfig();
+            }
+            filters = f;
         }
-        if (f == null) {
-            f = FilterMaster.createDefaultFiltersConfig();
-        }
-        filters = f;
     }
 
-    public static synchronized void initSegmentation() {
-        if (didInitSegmentation) {
-            return;
-        }
-        didInitSegmentation = true;
+    public static void initSegmentation() {
+        synchronized (LOCK) {
+            if (didInitSegmentation) {
+                return;
+            }
+            didInitSegmentation = true;
 
-        File srxDir = new File(StaticUtils.getConfigDir());
-        SRX s = SRXManager.loadFromDir(srxDir); // may read SRX or CONF
-        if (s == null) {
-            s = SRX.getDefault();
+            File srxDir = new File(StaticUtils.getConfigDir());
+            SRX s = SRXManager.loadFromDir(srxDir); // may read SRX or CONF
+            if (s == null) {
+                s = SRX.getDefault();
+            }
+            srx = s;
         }
-        srx = s;
     }
 
     private static volatile boolean didInit = false;

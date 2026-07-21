@@ -5,35 +5,47 @@ plugins {
     id 'org.omegat.common-utilities'
 }
 
-tasks.register('changedOnBranch') {
-    description = 'Lists files that have been modified on this git branch.'
-    doLast {
-        def branch = providers.exec {commandLine("git", "name-rev", "--name-only", "HEAD")}
-                .standardOutput.asText.get().trim()
+// The git queries run at configuration time, and only when one of the branch
+// workflow tasks was requested: their results become configuration inputs,
+// which keeps the tasks compatible with the configuration cache.
+def branchWorkflowRequested = gradle.startParameter.taskNames.any {
+    def taskName = it.tokenize(':').last()
+    taskName == 'changedOnBranch' || taskName == 'spotlessChangedApply'
+}
+
+def changedFiles = []
+if (branchWorkflowRequested) {
+    def branch = providers.exec {
+        commandLine("git", "name-rev", "--name-only", "HEAD")
+    }.standardOutput.asText.get().trim()
+    def remote = ''
+    for (key in ["branch.${branch}.pushRemote", "branch.${branch}.remote"]) {
         def exe = providers.exec {
             ignoreExitValue = true
-            commandLine("git", "config", "branch.${branch}.pushRemote")
+            commandLine("git", "config", key)
         }
-        def remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
-        if (remote.empty) {
-            exe = providers.exec {
-                ignoreExitValue = true
-                commandLine("git", "config", "branch.${branch}.remote")
-            }
-            remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
+        if (exe.result.get().exitValue == 0) {
+            remote = exe.standardOutput.asText.get().trim()
+            break
         }
-        if (remote.empty) {
-            logger.warn("Could not detect git remote name. Assuming 'origin'.")
-            remote = 'origin'
-        }
-        def splitPoint = providers.exec {
-            commandLine("git", "merge-base", "HEAD", "$remote/master")
-        }.standardOutput.asText.get().trim()
-        def gitModifiedFiles = providers.exec {
-            commandLine("git", "diff", "--name-only", "HEAD", "$splitPoint")
-        }.standardOutput.asText.get().trim().tokenize()
-        ext.files = project.files(gitModifiedFiles)
-        files.each { println(it) }
+    }
+    if (remote.empty) {
+        logger.warn("Could not detect git remote name. Assuming 'origin'.")
+        remote = 'origin'
+    }
+    def splitPoint = providers.exec {
+        commandLine("git", "merge-base", "HEAD", "$remote/master")
+    }.standardOutput.asText.get().trim()
+    changedFiles = providers.exec {
+        commandLine("git", "diff", "--name-only", "HEAD", splitPoint)
+    }.standardOutput.asText.get().trim().tokenize()
+}
+
+tasks.register('changedOnBranch') {
+    description = 'Lists files that have been modified on this git branch.'
+    def listedFiles = changedFiles
+    doLast {
+        listedFiles.each { println(it) }
     }
 }
 
@@ -41,17 +53,15 @@ tasks.register('spotlessChangedApply') {
     description = 'Applies code formatting to files that have been changed on the current branch.'
     group = 'verification'
     finalizedBy 'spotlessApply'
-    dependsOn changedOnBranch
-    doFirst {
-        spotlessJava.target = changedOnBranch.files.findAll {
-            it.path.endsWith('.java')
-        }
-    }
+    dependsOn 'changedOnBranch'
 }
 
 spotless {
     enforceCheck = false
     java {
+        if (branchWorkflowRequested) {
+            target changedFiles.findAll { it.endsWith('.java') }
+        }
         eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()
     }

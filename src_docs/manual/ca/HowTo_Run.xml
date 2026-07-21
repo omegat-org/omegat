@@ -295,7 +295,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.config.dir.">
                         <term xml:id="launch.with.command.line.config.dir.title">
-                           <option>--config-dir=</option> <userinput>&lt;camí&gt;</userinput>
+                           <option>--config-dir=</option><userinput>&lt;camí&gt;</userinput>
                         </term>
                         <listitem>
                            <para>Carpeta utilitzada per a llegir i escriure els fitxers de configuració de l'OmegaT. Consulteu el capítol <link endterm="configuration.folder.title" linkend="configuration.folder"/> per a conèixer més detalls.</para>
@@ -303,7 +303,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.config.file.">
                         <term xml:id="launch.with.command.line.config.file.title">
-                           <option>--config-file=</option> <userinput>&lt;camí&gt;</userinput>
+                           <option>--config-file=</option><userinput>&lt;camí&gt;</userinput>
                         </term>
                         <listitem>
                            <para>Fitxer escrit en el format .properties del Java utilitzat per a especificar un lot d'opcions de la línia d'ordres.</para>
@@ -319,7 +319,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.resource.bundle.">
                         <term xml:id="launch.with.command.line.resource.bundle.title">
-                           <option>--resource-bundle=</option> <userinput>&lt;camí&gt;</userinput>
+                           <option>--resource-bundle=</option><userinput>&lt;camí&gt;</userinput>
                         </term>
                         <listitem>
                            <para>Fitxer .properties del Java que voleu utilitzar per al text de la interfície.</para>
@@ -389,7 +389,7 @@
                                     <variablelist>
                                        <varlistentry xml:id="launch.with.command.line.pseudotranslatetmx.">
                                           <term xml:id="launch.with.command.line.pseudotranslatetmx.title">
-                                             <option>--pseudotranslatetmx=</option> <userinput>&lt;camí&gt;</userinput>
+                                             <option>--pseudotranslatetmx=</option><userinput>&lt;camí&gt;</userinput>
                                           </term>
                                           <listitem>
                                              <para>Fitxer TMX pseudotraduït de sortida.</para>
@@ -472,7 +472,7 @@
                      </varlistentry>
                      <varlistentry xml:id="launch.with.command.line.script.">
                         <term xml:id="launch.with.command.line.script.title">
-                           <option>--script=</option> <userinput>&lt;camí&gt;</userinput>
+                           <option>--script=</option><userinput>&lt;camí&gt;</userinput>
                         </term>
                         <listitem>
                            <para>Fitxer de script que s'ha d'executar quan s'activi un esdeveniment del projecte.</para>

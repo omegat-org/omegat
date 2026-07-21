@@ -35,6 +35,9 @@
                <listitem>
                   <para>
                      <guilabel>Errors de terminologia</guilabel> (opcional): detecta tots els termes del glossari que no s'han traduït correctament. Consulteu les preferències de <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> per a conèixer més detalls.</para>
+                  <note>
+                     <para>Les entrades del glossari amb un terme de destinació buit s'exclouen de les comprovacions de terminologia.</para>
+                  </note>
                </listitem>
                <listitem>
                   <para>
@@ -117,7 +120,7 @@
          </term>
          <listitem>
             <para>Seleccioneu els dos fitxers que vulgueu alinear (el fitxer d'origen i la traducció) i feu clic en <guibutton>D'acord</guibutton> per a obrir la finestra <link linkend="windows.aligner" endterm="windows.aligner.title"/>.</para>
-            <para>Els formats de fitxer admesos depenen de la configuració del projecte. Consulteu l'annex <link linkend="file.filters" endterm="file.filters.title"/> per a conèixer més detalls.</para>
+            <para>Els formats de fitxer admesos depenen de les preferències del projecte. Consulteu l'annex <link linkend="file.filters" endterm="file.filters.title"/> per a conèixer més detalls.</para>
             <para>Els fitxers d'origen i de destinació poden tenir formats diferents (per exemple, es pot alinear un fitxer <filename>.docx</filename> amb un fitxer <filename>.pdf</filename>).</para>
          </listitem>
       </varlistentry>

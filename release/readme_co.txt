@@ -22,7 +22,7 @@ OmegaT impiegheghja bibliuteche numerose. A licenza d’ogni bibliuteca hè amme
 Prerichiesti per installà OmegaT
 ================================
 
-OmegaT richiede chì a versione 1.8 - o una più recente - di l’ambiente d’esecuzione Java (JRE) sia installata nant’à u vostru sistema.
+OmegaT richiede chì a versione 11 - o una più recente - di l’ambiente d’esecuzione Java (JRE) sia installata nant’à u vostru sistema.
 
 Vi ricumandemu d’impiegà i pacchetti OmegaT chì cuntenenu u JRE, per impediscevi u penseru di selezziunalu, d’ottenelu, è d’installalu.
 

@@ -1,337 +1,294 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
-  <title xml:id="windows.text.search.title"><guilabel>Tekst zoeken</guilabel></title>
-
-  <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> om een nieuw venster Zoeken te openen en voer in het zoekveld het woord of de frase in waarnaar u wilt zoeken.</para>
-  
-  <para>U kunt meerdere vensters Zoeken tegelijkertijd geopend hebben. Druk op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> om het meest recente venster Zoeken te opnieuw te gebruiken.</para>
-
-  <para>Als alternatief, selecteer een woord of frase in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, of <link linkend="panes.glossary" endterm="panes.glossary.title"/> en gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>. De selectie wordt automatisch ingevoerd in het zoekveld.</para>
-
-
-  <para>Klik op de pijl naar beneden van het veld <guilabel>Zoeken naar:</guilabel> om toegang te krijgen tot de tien laatste zoekacties.</para>
-
-  <para>Klik op <guibutton>Zoeken</guibutton> of druk op <keycap>Enter</keycap> als het zoekveld is geselecteerd om de zoekactie te beginnen.</para>
-  
-  <para>Overeenkomsten zullen in vette blauwe tekens worden weergegeven.</para>
-
-  <example xml:id="search.for.doitsu">
-	<title xml:id="search.for.doitsu.title">Zoeken naar ドイツ</title>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.text.search">
+   <title xml:id="windows.text.search.title"><guilabel>Tekst zoeken</guilabel></title>
+   <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/> om een nieuw venster Zoeken te openen en voer in het zoekveld het woord of de frase in waarnaar u wilt zoeken.</para>
+   <para>U kunt meerdere vensters Zoeken tegelijkertijd geopend hebben. Druk op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> om het meest recente venster Zoeken opnieuw te gebruiken.</para>
+   <para>Als alternatief, selecteer een woord of frase in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, of <link linkend="panes.glossary" endterm="panes.glossary.title"/> en gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>. De selectie wordt automatisch ingevoerd in het zoekveld.</para>
+   <para>Klik op de pijl naar beneden van het veld <guilabel>Zoeken naar:</guilabel> om toegang te krijgen tot de tien laatste zoekacties.</para>
+   <para>Klik op <guibutton>Zoeken</guibutton> of druk op <keycombo><keycap>Enter</keycap></keycombo> als het zoekveld is geselecteerd om de zoekactie te beginnen.</para>
+   <para>Overeenkomsten zullen in vette blauwe tekens worden weergegeven.</para>
+   <example xml:id="search.for.doitsu">
+      <title xml:id="search.for.doitsu.title">Zoeken naar ドイツ</title>
 	<para>
 	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
 -- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。
 ---------</programlisting>
 	</para>
-  </example>
-
-  <para>Het venster Zoeken heeft zijn eigen menu's:</para>
-
-  <itemizedlist>
-    <listitem>
-      <para><guimenu>Bestand</guimenu> &gt; <guimenuitem>Zoeken naar selectie</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): de huidige selectie wordt ingevoerd in het zoekveld.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Bestand</guimenu> &gt; <guimenuitem>Sluiten</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): sluit het venster Vervangen.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Bron invoegen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): voeg de inhoud van het huidige bronsegment in.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Vervangen door bron</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): vervang de inhoud van het zoekveld door die van het huidige bronsegment.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Item voor woordenlijst maken</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): een nieuw item voor de woordenlijst toevoegen. Bekijk <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> voor de details.</para>
-    </listitem>
-
-    <listitem>
-      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Opties herstellen</guimenuitem>: de opties voor het zoekvenster herstellen.</para>
-    </listitem>
-  </itemizedlist>
-
-  <section xml:id="windows.text.search.methods">
-    <title xml:id="windows.text.search.methods.title">Type zoekactie</title>
-
-    <para>Gebruik de radioknoppen om het type zoekactie te selecteren.</para>
-
-	<para>De volgende zoekacties zijn beschikbaar:</para>
-
-    <variablelist>
-      <varlistentry xml:id="windows.text.search.methods.exact">
-        <term xml:id="windows.text.search.methods.exact.title">Exact zoeken</term>
-        <listitem>
-          <para>Exact zoeken naar de tekenreeks zoals die is ingevoerd in het zoekveld.</para>
-
-		  <para>Het is equivalent aan een zoekactie op het web, omsloten door aanhalingstekens.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry xml:id="windows.text.search.methods.keyword">
-        <term xml:id="windows.text.search.methods.keyword.title">Sleutelwoorden zoeken</term>
-        <listitem>
-          <para>Zoekt naar segmenten die elk van de zoektermen bevatten, gescheiden door een spatie.</para>
-
-		  <para>Het is equivalent aan een zoekactie op het web zonder aanhalingstekens.</para>
-
-		  <note>
-			<para>De tekens <code>*</code> en <code>?</code> kunnen beide worden gebruikt in Sleutelwoorden zoeken:</para>
-
-			<itemizedlist>
-			  <listitem>
-				<para><code>*</code> komt overeen met nul of meer tekens, vanaf de huidige positie tot het einde van een woord.</para>
-
-				<para>De zoekterm <literal>'run*'</literal> komt, bijvoorbeeld, overeen met <literal>'run</literal>, <literal>'runs'</literal>' en <literal>'running'</literal>.</para>
-			  </listitem>
-			</itemizedlist>
-
-			<itemizedlist>
-			  <listitem>
-				<para><code>?</code> komt overeen met één teken.</para>
-
-				<para><literal>'run?'</literal> komt, bijvoorbeeld, overeen met <literal>'runs'</literal>', als ook het gedeelte <literal>'runn'</literal>' in het woord <literal>'running'</literal> of <literal>'runner'</literal>.</para>
-			  </listitem>
-			</itemizedlist>
-		  </note>
-        </listitem>
-      </varlistentry>
-	</variablelist>
-
-	<variablelist>
-      <varlistentry xml:id="windows.text.search.methods.regex">
-        <term xml:id="windows.text.search.methods.regex.title">Reguliere uitdrukkingen</term>
-        <listitem>
-          <para>Behandelt de tekenreeks voor het zoeken als een reguliere expressie.</para>
-		  <para>Reguliere uitdrukkingen zijn een zeer krachtige manier om naar algemene of complexe patronen te zoeken in plaats van exacte tekenreeksen. Bekijk de appendix <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
-
-		  <warning>
-			<para>De tekens <code>*</code> en <code>?</code> hebben een speciale betekenis in reguliere expressies. Daarom kunnen de hierboven beschreven zoekacties met jokertekens alleen uitgevoerd worden in exacte zoekacties en Sleutelwoorden zoeken.</para>
-		  </warning>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-  </section>
-
-  <section xml:id="windows.text.search.options">
-	<title xml:id="windows.text.search.options.title">Opties</title>
-	
-	<variablelist>
-	  <varlistentry>
-		<term>Hoofd-/kleine letters.</term>
-		<listitem>
-		  <para>Geeft alleen resultaten terug waarin de hoofd-/kleine letters hetzelfde zijn als in de zoektermen.</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term>Spatie komt overeen met nbsp</term>
-		<listitem>
-		  <para>Tekens voor spaties in zoektermen zullen overeenkomen met zowel een normale spatie als een teken voor een niet-afbreekbare spatie (\u00A).</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>In bron</term>
-		<listitem>
-		  <para>Zoeken in de bronsegmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>In vertaling</term>
-		<listitem>
-		  <para>Zoeken in de doelsegmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>In notities</term>
-		<listitem>
-		  <para>Zoeken in notities van segmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>In opmerkingen</term>
-		<listitem>
-		  <para>Zoeken in opmerkingen van segmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Vertaald of niet-vertaald</term>
-		<listitem>
-		  <para>Zoeken in zowel vertaalde als niet-vertaalde segmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Vertaald</term>
-		<listitem>
-		  <para>Alleen zoeken in vertaalde segmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Niet-vertaald</term>
-		<listitem>
-		  <para>Alleen zoeken in niet vertaalde segmenten.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Weergeven: alle overeenkomende segmenten</term>
-		<listitem>
-		  <para>Elk segment wordt individueel weergegeven, zelfs als het een herhaling is die is gevonden in ofwel hetzelfde document of een ander document in het project.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Weergaven: bestandsnamen</term>
-		<listitem>
-		  <para>De naam van het bestand waar elk segment is gevonden wordt boven elk resultaat weergegeven.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term>Zoeken in: Project</term>
-		<listitem>
-		  <para>Zoeken in de verschillende tweetalige bronnen van het project.</para>
-
-		  <para>Selecteer het bereik van de zoekactie:</para>
-		  
-		  <variablelist>
-			<varlistentry>
-			  <term>Geheugen</term>
-			  <listitem>
-				<para>Neem het projectgeheugen (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) op.</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>TM's</term>
-			  <listitem>
-				<para>Neem de vertaalgeheugens op die zijn geplaatst in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>Woordenlijsten</term>
-			  <listitem>
-				<para>Neem de woordenlijsten op die zijn geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term>Zoeken in: Bestanden</term>
-		<listitem>
-		  <para>Zoeken in verwijzingsbestanden die niet zijn opgenomen in de bronnen van het project.</para>
-
-		  <para>OmegaT kan zoekacties uitvoeren in elk bestand dat het kan lezen als een bronbestand. Bekijk het hoofdstuk <link linkend="file.filters" endterm="file.filters.title"/> voor details.</para>
-
-		  <para>TMX-bestanden zijn uitgesloten van de zoekacties in bestanden omdat OmegaT ze niet herkent als een indeling voor een bronbestand, ondanks dat ze worden ondersteunt als vertaalgeheugens.</para>
-		</listitem>
-	  </varlistentry>
-
-	  <varlistentry>
-		<term><guibutton>TM Opties voor zoeken</guibutton></term>
-		<listitem>
-		  <para>Selecteer aanvullende criteria, zoals de persoon die de vertaling heeft geschreven of gewijzigd, de datum en tijd van de vertaling (aanpassing), of dat Wezen-segmenten moeten worden uitgesloten.</para>
-
-		  <warning>
-			<para>De TM opties voor zoeken zijn alleen van toepassing op het hoofdgeheugen en niet op de geheugens voor verwijzing.</para>
-		  </warning>
-
-		  <variablelist>
-			<varlistentry>
-			  <term>Volledige/Halve breedte tekens ongevoelig</term>
-			  <listitem>
-				<para>Geeft resultaten terug die overeenkomen met zowel de volledige als de halve breedte vormen (CJK-tekens) van de tekens in de zoektermen.</para>
-			  </listitem>
-			</varlistentry>
-
-			<varlistentry>
-			  <term>Aantal overeenkomende segmenten</term>
-			  <listitem>
-				<para>Stelt the maximale aantal overeenkomsten in dat wordt weergegeven in het gebied van de zoekresultaten.</para>
-			  </listitem>
-			</varlistentry>
-		  </variablelist>
-
-		  <para>Gebruik de knop <guibutton>Gevorderde opties verbergen</guibutton> om het weergeven van de geavanceerde opties te stoppen.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-  </section>
-
-  <section xml:id="windows.text.search.result.display">
-    <title xml:id="windows.text.search.result.display.title">Weergave resultaten</title>
-
-    <para>Overeenkomsten worden weergegeven in hun volgorde van verschijnen in het project. Voor vertaalde segmenten zal de originele tekst worden weergegeven boven de vertaalde tekst. Voor niet-vertaalde segmenten wordt alleen de brontekst weergegeven.</para>
-
-    <para>Dubbelklik op een segment om het te openen in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
-
-    <para>U kunt ook de volgende sneltoetsen gebruiken in de resultaten van de zoekactie:</para>
-	
-	<variablelist>
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
-		<listitem>
-		  <para>Verplaatst naar het volgende segment.</para>
-		</listitem>
-	  </varlistentry>
-	  
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
-		<listitem>
-		  <para>Verplaatst naar het vorige segment.</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
-		<listitem>
-		  <para>Springt naar het huidige segment in de bewerker.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-	
-	<para>Het geselecteerde segment wordt in groen geaccentueerd:</para>
-
-  	<example xml:id="select.second.match">
-	  <title xml:id="select.second.match.title">Selecteer de tweede overeenkomst</title>
+   </example>
+   <para>Het venster Zoeken heeft zijn eigen menu's:</para>
+   <itemizedlist>
+      <listitem>
+         <para>
+            <guimenu>Bestand</guimenu> &gt; <guimenuitem>Zoeken naar selectie</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): de huidige selectie wordt ingevoerd in het zoekveld.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <guimenu>Bestand</guimenu> &gt; <guimenuitem>Sluiten</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): sluit het venster Vervangen.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <guimenu>Bewerken</guimenu> &gt; <guimenuitem>Bron invoegen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): voeg de inhoud van het huidige bronsegment in.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <guimenu>Bewerken</guimenu> &gt; <guimenuitem>Vervangen door bron</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): vervang de inhoud van het zoekveld door die van het huidige bronsegment.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <guimenu>Bewerken</guimenu> &gt; <guimenuitem>Item voor woordenlijst maken</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): een nieuw item voor de woordenlijst toevoegen. Bekijk <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> voor details.</para>
+      </listitem>
+      <listitem>
+         <para>
+            <guimenu>Bewerken</guimenu> &gt; <guimenuitem>Opties herstellen</guimenuitem>: de opties voor het zoekvenster herstellen.</para>
+      </listitem>
+   </itemizedlist>
+   <section xml:id="windows.text.search.methods">
+      <title xml:id="windows.text.search.methods.title">Type zoekactie</title>
+      <para>Gebruik de radioknoppen om het type zoekactie te selecteren.</para>
+      <para>De volgende zoekacties zijn beschikbaar:</para>
+      <variablelist>
+         <varlistentry xml:id="windows.text.search.methods.exact">
+            <term xml:id="windows.text.search.methods.exact.title">Exact zoeken</term>
+            <listitem>
+               <para>Exact zoeken naar de tekenreeks zoals die is ingevoerd in het zoekveld.</para>
+               <para>Het is equivalent aan een zoekactie op het web, omsloten door aanhalingstekens.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="windows.text.search.methods.keyword">
+            <term xml:id="windows.text.search.methods.keyword.title">Sleutelwoorden zoeken</term>
+            <listitem>
+               <para>Zoekt naar segmenten die elk van de zoektermen bevatten, gescheiden door een spatie.</para>
+               <para>Het is equivalent aan een zoekactie op het web zonder aanhalingstekens.</para>
+               <note>
+                  <para>De tekens <code>*</code> en <code>?</code> kunnen beide worden gebruikt in Sleutelwoorden zoeken:</para>
+                  <itemizedlist>
+                     <listitem>
+                        <para><code>*</code> komt overeen met nul of meer tekens, vanaf de huidige positie tot het einde van een woord.</para>
+                        <para>De zoekterm <literal>'run*'</literal> komt, bijvoorbeeld, overeen met <literal>'run</literal>, <literal>'runs'</literal>' en <literal>'running'</literal>.</para>
+                     </listitem>
+                  </itemizedlist>
+                  <itemizedlist>
+                     <listitem>
+                        <para><code>?</code> komt overeen met één teken.</para>
+                        <para><literal>'run?'</literal> komt, bijvoorbeeld, overeen met <literal>'runs'</literal>', als ook het gedeelte <literal>'runn'</literal>' in het woord <literal>'running'</literal> of <literal>'runner'</literal>.</para>
+                     </listitem>
+                  </itemizedlist>
+               </note>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+      <variablelist>
+         <varlistentry xml:id="windows.text.search.methods.regex">
+            <term xml:id="windows.text.search.methods.regex.title">Reguliere uitdrukkingen</term>
+            <listitem>
+               <para>Behandelt de tekenreeks voor het zoeken als een reguliere expressie.</para>
+               <para>Reguliere uitdrukkingen zijn een zeer krachtige manier om naar algemene of complexe patronen te zoeken in plaats van exacte tekenreeksen. Bekijk de appendix <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
+               <warning>
+                  <para>De tekens <code>*</code> en <code>?</code> hebben een speciale betekenis in reguliere expressies. Daarom kunnen de hierboven beschreven zoekacties met jokertekens alleen uitgevoerd worden in exacte zoekacties en Sleutelwoorden zoeken.</para>
+               </warning>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="windows.text.search.options">
+      <title xml:id="windows.text.search.options.title">Opties</title>
+      <variablelist>
+         <varlistentry>
+            <term>Hoofd-/kleine letters.</term>
+            <listitem>
+               <para>Geeft alleen resultaten terug waarin de hoofd-/kleine letters hetzelfde zijn als in de zoektermen.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Spatie komt overeen met nbsp</term>
+            <listitem>
+               <para>Tekens voor spaties in zoektermen zullen overeenkomen met zowel een normale spatie als een teken voor een niet-afbreekbare spatie (\u00A).</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>In bron</term>
+            <listitem>
+               <para>Zoeken in de bronsegmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>In vertaling</term>
+            <listitem>
+               <para>Zoeken in de doelsegmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>In notities</term>
+            <listitem>
+               <para>Zoeken in notities van segmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>In opmerkingen</term>
+            <listitem>
+               <para>Zoeken in opmerkingen van segmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Vertaald of niet-vertaald</term>
+            <listitem>
+               <para>Zoeken in zowel vertaalde als niet-vertaalde segmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Vertaald</term>
+            <listitem>
+               <para>Alleen zoeken in vertaalde segmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Niet-vertaald</term>
+            <listitem>
+               <para>Alleen zoeken in niet vertaalde segmenten.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Weergeven: alle overeenkomende segmenten</term>
+            <listitem>
+               <para>Elk segment wordt individueel weergegeven, zelfs als het een herhaling is die is gevonden in ofwel hetzelfde document of een ander document in het project.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Weergaven: bestandsnamen</term>
+            <listitem>
+               <para>De naam van het bestand waar elk segment is gevonden wordt boven elk resultaat weergegeven.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Zoeken in: Project</term>
+            <listitem>
+               <para>Zoeken in de verschillende tweetalige bronnen van het project.</para>
+               <para>Selecteer het bereik van de zoekactie:</para>
+               <variablelist>
+                  <varlistentry>
+                     <term>Geheugen</term>
+                     <listitem>
+                        <para>Neem het projectgeheugen (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) op.</para>
+                     </listitem>
+                  </varlistentry>
+                  <varlistentry>
+                     <term>TM's</term>
+                     <listitem>
+                        <para>Neem de vertaalgeheugens op die zijn geplaatst in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
+                     </listitem>
+                  </varlistentry>
+                  <varlistentry>
+                     <term>Woordenlijsten</term>
+                     <listitem>
+                        <para>Neem de woordenlijsten op die zijn geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
+                     </listitem>
+                  </varlistentry>
+               </variablelist>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Zoeken in: Bestanden</term>
+            <listitem>
+               <para>Zoeken in verwijzingsbestanden die niet zijn opgenomen in de bronnen van het project.</para>
+               <para>OmegaT kan zoekacties uitvoeren in elk bestand dat het kan lezen als een bronbestand. Bekijk het hoofdstuk <link linkend="file.filters" endterm="file.filters.title"/> voor details.</para>
+               <para>TMX-bestanden zijn uitgesloten van de zoekacties in bestanden omdat OmegaT ze niet herkent als een indeling voor een bronbestand, ondanks dat ze worden ondersteunt als vertaalgeheugens.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>
+               <guibutton>TM Opties voor zoeken</guibutton>
+            </term>
+            <listitem>
+               <para>Selecteer aanvullende criteria, zoals de persoon die de vertaling heeft geschreven of gewijzigd, de datum en tijd van de vertaling (aanpassing), of dat Wezen-segmenten moeten worden uitgesloten.</para>
+               <warning>
+                  <para>De TM opties voor zoeken zijn alleen van toepassing op het hoofdgeheugen en niet op de geheugens voor verwijzing.</para>
+               </warning>
+               <variablelist>
+                  <varlistentry>
+                     <term>Volledige/Halve breedte tekens ongevoelig</term>
+                     <listitem>
+                        <para>Geeft resultaten terug die overeenkomen met zowel de volledige als de halve breedte vormen (CJK-tekens) van de tekens in de zoektermen.</para>
+                     </listitem>
+                  </varlistentry>
+                  <varlistentry>
+                     <term>Aantal overeenkomende segmenten</term>
+                     <listitem>
+                        <para>Stelt the maximale aantal overeenkomsten in dat wordt weergegeven in het gebied van de zoekresultaten.</para>
+                     </listitem>
+                  </varlistentry>
+               </variablelist>
+               <para>Gebruik de knop <guibutton>Gevorderde opties verbergen</guibutton> om het weergeven van de geavanceerde opties te stoppen.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="windows.text.search.result.display">
+      <title xml:id="windows.text.search.result.display.title">Weergave resultaten</title>
+      <para>Overeenkomsten worden weergegeven in hun volgorde van verschijnen in het project. Voor vertaalde segmenten zal de originele tekst worden weergegeven boven de vertaalde tekst. Voor niet-vertaalde segmenten wordt alleen de brontekst weergegeven.</para>
+      <para>Dubbelklik op een segment om het te openen in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+      <para>U kunt ook de volgende sneltoetsen gebruiken in de resultaten van de zoekactie:</para>
+      <variablelist>
+         <varlistentry>
+            <term>
+               <keycombo>
+                  <keycap>C</keycap>
+                  <keycap>N</keycap>
+               </keycombo>
+            </term>
+            <listitem>
+               <para>Verplaatst naar het volgende segment.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>
+               <keycombo>
+                  <keycap>C</keycap>
+                  <keycap>P</keycap>
+               </keycombo>
+            </term>
+            <listitem>
+               <para>Verplaatst naar het vorige segment.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>
+               <keycombo>
+                  <keycap>C</keycap>
+                  <keycap>J</keycap>
+               </keycombo>
+            </term>
+            <listitem>
+               <para>Springt naar het huidige segment in de bewerker.</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+      <para>Het geselecteerde segment wordt in groen geaccentueerd:</para>
+      <example xml:id="select.second.match">
+         <title xml:id="select.second.match.title">Selecteer de tweede overeenkomst</title>
 	  <para>
 		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
----------
-<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
+<phrase remap="action">-- 177&gt; [[2001年]]、 <token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
 	  </para>
-	</example>
-
-	<variablelist>
-	  <varlistentry>
-		<term>Automatisch synchroniseren met venster Bewerken</term>
-		<listitem>
-		  <para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/> synchroniseert zijn weergave met de selectie in de resultaten van het zoeken</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>Terug naar initiële segment bij sluiten</term>
-		<listitem>
-		  <para>Wanneer u het venster voor zoeken sluit gaat het venster <link linkend="panes.editor" endterm="panes.editor.title"/> automatisch terug naar het segment dat werd weergegeven voordat de zoekactie begon</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
-  </section>
-  
-  <section xml:id="windows.text.search.filter">
-    <title xml:id="windows.text.search.filter.title">Filteren</title>
-
-	<para>Klik op de knop <guibutton>Filter</guibutton> om alleen de overeenkomende zoekresultaten weer te geven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>. Druk op de knop <guibutton>Filter verwijderen</guibutton> aan de bovenzijde van het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, of laadt een project opnieuw om een filter te verwijderen.</para>
-  </section>
+      </example>
+      <variablelist>
+         <varlistentry>
+            <term>Automatisch synchroniseren met venster Bewerken</term>
+            <listitem>
+               <para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/> synchroniseert zijn weergave met de selectie in de resultaten van het zoeken</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
+            <term>Terug naar initiële segment bij sluiten</term>
+            <listitem>
+               <para>Wanneer u het venster voor zoeken sluit gaat het venster <link linkend="panes.editor" endterm="panes.editor.title"/> automatisch terug naar het segment dat werd weergegeven voordat de zoekactie begon</para>
+            </listitem>
+         </varlistentry>
+      </variablelist>
+   </section>
+   <section xml:id="windows.text.search.filter">
+      <title xml:id="windows.text.search.filter.title">Filteren</title>
+      <para>Klik op de knop <guibutton>Filter</guibutton> om alleen de overeenkomende zoekresultaten weer te geven in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>. Druk op de knop <guibutton>Filter verwijderen</guibutton> aan de bovenzijde van het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, of laadt een project opnieuw om een filter te verwijderen.</para>
+   </section>
 </section>

@@ -169,7 +169,7 @@
                   <listitem>
                      <para>
                         <link linkend="menus.edit" endterm="menus.edit.title"/>
-                        <link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/> or</para>
+                        <link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/>や</para>
                   </listitem>
                   <listitem>
                      <para><link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/>設定など</para>
@@ -202,22 +202,18 @@
                <para>用語集の用語に複数の定義があったときに、同じ行に一度に表示します。</para>
             </listitem>
          </varlistentry>
-         <varlistentry xml:id="dialogs.preferences.glossary.sort.by.source.term.length">
-            <term xml:id="dialogs.preferences.glossary.sort.by.source.term.length.title">
-               <option>用語の原文の長さ順に並べ替える</option>
-            </term>
-            <listitem>
-               <para>一部の用語集項目がソース用語テキストで類似しており、そのうちの1つに別の用語テキストが含まれている場合は、ソーステキストの長さでソートします。</para>
-            </listitem>
-         </varlistentry>
-         <varlistentry xml:id="dialogs.preferences.glossary.sort.by.target.term.length">
-            <term xml:id="dialogs.preferences.glossary.sort.by.target.term.length.title">
-               <option>用語の原文の長さ順に並べ替える</option>
-            </term>
-            <listitem>
-               <para>用語集の項目に複数の定義がある場合は、定義テキストの長さで並べ替えます。</para>
-            </listitem>
-         </varlistentry>
+	     <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		    <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>用語が長い順に表示する</option></term>
+		    <listitem>
+			   <para>同様の用語の表示順は、長い用語を先に表示します。</para>
+		    </listitem>
+	     </varlistentry>
+		 <varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>訳文が長い用語を先に表示する</option></term>
+			<listitem>
+			   <para>複数の定義を持つ用語集の項目は、定義の長い順で表示します。</para>
+			</listitem>
+		 </varlistentry>
          <varlistentry xml:id="dialogs.preferences.glossary.use.full.stemming">
             <term xml:id="dialogs.preferences.glossary.use.full.stemming.title">
                <option>完全ステミング（語幹処理）</option>
@@ -616,7 +612,7 @@
             <listitem>
                <para>デフォルトでは、OmegaTは入力する分節を選択するのにダブルクリックする必要があります。このオプションは、シングルクリックで入力する分節を選択する場合に使用します。</para>
                <note>
-                  <para>カーソルがロック解除されている場合、シングルクリックもダブルクリックも使用してセグメントに入ることはできません。<link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/>設定を参照してください。</para>
+                  <para>カーソルがロック解除されている場合、シングルクリックもダブルクリックも使用してセグメントに入ることはできません。カーソルのロックやアンロック<link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/>を参照してください。</para>
                </note>
             </listitem>
          </varlistentry>
@@ -673,7 +669,7 @@
                <option>auto フォルダー由来の翻訳かどうかを記録する</option>
             </term>
             <listitem>
-               <para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>と<link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>に配置された翻訳メモリによって、プロジェクトのメモリを自動的に設定できます。自動翻訳を受けいれる分節は、<link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>を使用して<guilabel>編集</guilabel>ウィンドウで色づけ表示されます。<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
+               <para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>と<link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>に配置された翻訳メモリによって、プロジェクトのメモリを自動的に設定できます。自動翻訳を受けいれる分節は、<link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>を使用して<guilabel>編集</guilabel>ウィンドウで色づけ表示されます。</para>
                <para>詳細については、 <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/>を参照してください。</para>
             </listitem>
          </varlistentry>
@@ -862,14 +858,12 @@
 ${filePath}&gt;</programlisting>
                </para>
                <para>次に、可能な代替案を示します:</para>
-               <para>
-                  			
-                  <programlisting>l⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
+		  <para>
+			<programlisting>l⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
 [NEW]▷ ${diff}
 			
 [OLD]◀ ${diffReversed}
-     ◀ ${targetText}</programlisting>
-               </para>
+◀ ${targetText}</programlisting></para>
                <para>テンプレート変数はドロップダウンメニューからも使用でき、ボタンを使用して挿入できます。</para>
                <table xml:id="table.match.pane.setup" colsep="0" rowsep="0">
                   <title xml:id="table.match.pane.setup.title">テンプレート変数の一致</title>
@@ -1149,7 +1143,7 @@ ${filePath}&gt;</programlisting>
       <title xml:id="dialogs.preferences.plugins.title"><guilabel>プラグイン</guilabel></title>
       <para>インストールされているすべてのプラグインを一覧表示します。</para>
       <para>プラグインは、<link linkend="configuration.folder" role="xref">構成フォルダー</link>にインストールされますが、<link linkend="application.folder" role="xref">プログラム</link>フォルダーの下の<link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>フォルダーにインストールすることもできます。</para>
-      <para>その他のプラグインは、&lt;u0&gt;OmegaT wiki サイト&lt;/u0&gt;にあります。</para>
+      <para>その他のプラグインは、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT wiki サイト</link>にあります。</para>
       <para>「<guibutton>ディスクからプラグインをインストール</guibutton>」ボタンを使用して、プラグインをインストールまたはアップグレードします。プラグインファイルは、<filename>拡張子が.jar</filename> JARファイルです。OmegaT は、JAR プラグインファイルを含む zip アーカイブも受け付けます。サードパーティのプラグインは通常、プラグインファイル自体、READMEファイル、LICENSEファイルを含むzipアーカイブとして配布されます。</para>
       <warning>
          <para>プラグインインストーラは、JAR プラグインを含むアーカイブのみを受け入れます。<filename>.zip</filename>拡張子で名前が変更されたプラグインファイルは認識されません。</para>

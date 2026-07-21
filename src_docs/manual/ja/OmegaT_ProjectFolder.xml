@@ -211,7 +211,7 @@
       <title xml:id="project.folder.dictionary.title">辞書</title>
       <para>このフォルダーは最初は空で、プロジェクトに追加する辞書を格納するために使用されます。</para>
       <para>分節の用語の一部に一致する辞書の項目が、<link linkend="panes.dictionary" endterm="panes.dictionary.title"/>ウィンドウに表示されます。詳細の<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>環境設定を参照してください。</para>
-      <para>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。&lt;u0&gt;OmegaTウィキ&lt;/u0&gt;で公開されている辞書を探すこともできます。</para>
+      <para>OmegaTは、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">OmegaTウィキ</link>で公開されている辞書を探すこともできます。</para>
       <para>辞書をインストールするには:</para>
       <orderedlist>
          <listitem>

@@ -32,7 +32,7 @@ s'indica a «/lib/licenses/Licenses.txt».
 Requisits per a instal·lar l'OmegaT
 ===================================
 
-L'OmegaT requereix que tingueu instal·lada la versió 1.8 o posterior del Java
+L'OmegaT requereix que tingueu instal·lada la versió 11 o posterior del Java
 Runtime Environment (JRE) en el sistema.
 
 Us recomanem que utilitzeu els paquets de l'OmegaT que inclouen el JRE, per a

@@ -9,12 +9,12 @@
    <para>Les coincidències es mostraran en negreta, de color blau.</para>
    <example xml:id="search.for.doitsu">
       <title xml:id="search.for.doitsu.title">Cerca de ドイツ</title>
-      <para>
-<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+	<para>
+	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
--- 177&gt; [[2001年]]、 <token>ドイツ</token>の永住権を取得。
+-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。
 ---------</programlisting>
-         	</para>
+	</para>
    </example>
    <para>La finestra de cerca té els seus menús propis:</para>
    <itemizedlist>
@@ -266,12 +266,11 @@
       <para>El segment seleccionat es ressalta en verd:</para>
       <example xml:id="select.second.match">
          <title xml:id="select.second.match.title">Selecció de la segona coincidència</title>
-         <para>
-<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
----------
+	  <para>
+		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 <phrase remap="action">-- 177&gt; [[2001年]]、 <token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
-      </para>
+	  </para>
       </example>
       <variablelist>
          <varlistentry>

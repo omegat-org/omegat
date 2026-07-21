@@ -20,7 +20,7 @@ OmegaT servi enn kantite bibliotek. Lisans sak bibliotek finn mansione dan /lib/
 Kondision prealab pou instal OmegaT
 ===================================
 
-OmegaT nesesit omwin version 1.8 "Java Runtime Environment (JRE)" pou fonksionn lor ou sistem.
+OmegaT nesesit omwin version 11 "Java Runtime Environment (JRE)" pou fonksionn lor ou sistem.
 
 Ou kapav servi bann version OmegaT ki deza ena JRE pou evit ou traka seleksionn, ’download’ ek instal JRE.
 

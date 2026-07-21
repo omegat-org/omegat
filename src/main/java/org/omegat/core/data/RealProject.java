@@ -46,6 +46,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,7 +56,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.Stack;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -215,7 +215,7 @@ public class RealProject implements IProject {
      * long-running processes to be forcibly terminated when compiling the
      * project anew or when closing the project.
      */
-    private final Stack<Process> processCache = new Stack<>();
+    private final ArrayDeque<Process> processCache = new ArrayDeque<>();
 
     /**
      * Create new project instance. It required to call {@link #createProject()}

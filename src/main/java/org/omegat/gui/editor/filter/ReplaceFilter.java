@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.PrepareTMXEntry;
@@ -53,8 +54,9 @@ import org.omegat.gui.editor.IEditorFilter;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
  */
+@NullMarked
 public class ReplaceFilter implements IEditorFilter {
-    private final Map<Integer, SourceTextEntry> entries = new HashMap<Integer, SourceTextEntry>();
+    private final Map<Integer, SourceTextEntry> entries = new HashMap<>();
     private final FilterBarReplace controlComponent;
     private final Searcher searcher;
     private int minEntryNum, maxEntryNum;
@@ -75,27 +77,14 @@ public class ReplaceFilter implements IEditorFilter {
 
         controlComponent = new FilterBarReplace();
 
-        controlComponent.btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Make sure that any change done in the current segment is not
-                // lost
-                Core.getEditor().commitAndDeactivate();
-                Core.getEditor().removeFilter();
-            }
+        controlComponent.btnCancel.addActionListener(e -> {
+            // Make sure that any change done in the current segment is not
+            // lost
+            Core.getEditor().commitAndDeactivate();
+            Core.getEditor().removeFilter();
         });
-        controlComponent.btnSkip.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                skip();
-            }
-        });
-        controlComponent.btnReplaceNext.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                replace();
-            }
-        });
+        controlComponent.btnSkip.addActionListener(e -> skip());
+        controlComponent.btnReplaceNext.addActionListener(e -> replace());
     }
 
     @Override
@@ -136,7 +125,10 @@ public class ReplaceFilter implements IEditorFilter {
     }
 
     @Override
-    public boolean allowed(SourceTextEntry ste) {
+    public boolean allowed(@Nullable SourceTextEntry ste) {
+        if (ste == null) {
+            return false;
+        }
         return entries.containsKey(ste.entryNum());
     }
 

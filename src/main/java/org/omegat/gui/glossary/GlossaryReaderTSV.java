@@ -58,26 +58,30 @@ import org.omegat.util.StringUtil;
  */
 public final class GlossaryReaderTSV {
 
+    private static final Object LOCK = new Object();
+
     private GlossaryReaderTSV() {
     }
 
     /**
      * Create a new empty TSV glossary file with a leading comment
-     * @param file
+     * @param file A new glossary file
      * @return true if the file was created successfully
-     * @throws IOException
+     * @throws IOException when the file cannot be created
      */
     public static boolean createEmpty(File file) throws IOException {
         if (file.exists()) {
             return false;
         }
-        file.getParentFile().mkdirs();
-        if (file.createNewFile()) {
-            try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
-                writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
-                writer.write(System.lineSeparator());
+        synchronized (LOCK) {
+            file.getParentFile().mkdirs();
+            if (file.createNewFile()) {
+                try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
+                    writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
+                    writer.write(System.lineSeparator());
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -86,7 +90,7 @@ public final class GlossaryReaderTSV {
         return getFileEncoding(file, Charset.defaultCharset().name());
     }
 
-    public static String getFileEncoding(final File file, String defaultEncoding) throws IOException {
+    public static String getFileEncoding(final File file, String defaultEncoding) {
         String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
@@ -110,7 +114,7 @@ public final class GlossaryReaderTSV {
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
         String encoding = getFileEncoding(file);
-        List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+        List<GlossaryEntry> result = new ArrayList<>();
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
             // BOM (byte order mark) bugfix
@@ -151,9 +155,9 @@ public final class GlossaryReaderTSV {
      *
      * @param file The file to (create and) append to
      * @param newEntry the entry to append.
-     * @throws IOException
+     * @throws IOException when the file cannot be appended to
      */
-    public static synchronized void append(final File file, GlossaryEntry newEntry) throws IOException {
+    public static void append(final File file, GlossaryEntry newEntry) throws IOException {
         Charset encoding;
         if (!file.exists()) {
             createEmpty(file);
@@ -165,12 +169,14 @@ public final class GlossaryReaderTSV {
         if (encoding.equals(StandardCharsets.US_ASCII)) {
             encoding = StandardCharsets.UTF_8;
         }
-        try (BufferedWriter wr = Files.newBufferedWriter(file.toPath(), encoding, StandardOpenOption.APPEND)) {
-            wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
-            if (!StringUtil.isEmpty(newEntry.getCommentText())) {
-                wr.append('\t').append(newEntry.getCommentText());
+        synchronized (LOCK) {
+            try (BufferedWriter wr = Files.newBufferedWriter(file.toPath(), encoding, StandardOpenOption.APPEND)) {
+                wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
+                if (!StringUtil.isEmpty(newEntry.getCommentText())) {
+                    wr.append('\t').append(newEntry.getCommentText());
+                }
+                wr.append(System.lineSeparator());
             }
-            wr.append(System.lineSeparator());
         }
     }
 }

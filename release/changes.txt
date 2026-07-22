@@ -9,6 +9,12 @@
 
   Implemented requests:
 
+  - TMX validation error is difficult to understand for ordinary users
+    https://sourceforge.net/p/omegat/feature-requests/1797/
+
+  - Zero Width Space as special character
+    URL https://sourceforge.net/p/omegat/feature-requests/1796/
+
   - Display translated percentage on Project files dialog
     https://sourceforge.net/p/omegat/feature-requests/1775/
 
@@ -18,9 +24,13 @@
   - Migrate the main data store project_save.tmx as TMX 1.4 level 2
     https://github.com/omegat-org/omegat/pull/1577
 
-  - Improve CLI command line parser
+  - Improve CLI command line parser with detailed help message
     https://github.com/omegat-org/omegat/pull/1321
 
+  - Add vabatim environment in latex filter
+    https://github.com/omegat-org/omegat/pull/2086
+
+Bug fixes:
 
 ----------------------------------------------------------------------
  OmegaT 6.1.0

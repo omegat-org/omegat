@@ -76,9 +76,10 @@
 * [Team project](83.TeamProject.md)
 
 
-## Architecture Designs 
+## Architecture Designs/change log 
 
 * [Architecture Decisional Records](adr/index.md)
+* [Changelog](changes/index.md)
 
 ## Other information
 

@@ -1,0 +1,59 @@
+<html lang="de">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zahlensegmente automatisch ausfüllen</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Zahlensegmente automatisch ausfüllen</h3>
+<p>Preislisten, Datenblätter, Kataloge und Finanzberichte stecken voller
+Segmente, die nur aus einer Zahl, einem Preis, einem Datum oder einer Uhrzeit
+bestehen. <b>Tools &gt; Zahlensegmente automatisch umwandeln...</b> füllt
+sie alle auf einmal aus &ndash; so geschrieben, wie es die Zielsprache
+verlangt.</p>
+<p>Das ist mehr als Kopieren: Die Zahl wird in der Ausgangssprache gelesen
+und für die Zielsprache neu geschrieben &ndash; in beliebiger Richtung. Zum
+Beispiel:</p>
+<ul>
+<li>Englisch &euro;1,234.56 &rarr; Deutsch 1.234,56&nbsp;&euro;</li>
+<li>Englisch 12/31/2026 &rarr; Deutsch 31.12.2026</li>
+<li>Arabisch &#1637;&#1632;&#1642; &rarr; Englisch 50%</li>
+<li>Chinesisch &#31532;3 &rarr; Englisch 3rd, und Englisch 1st &rarr;
+Deutsch 1.</li>
+<li>Schwedisch 3:e &rarr; Englisch 3rd</li>
+</ul>
+<p>Auch Zahlzeichen vieler Schriftsysteme werden gelesen: das römische
+MMMCCXIV, das ideografische
+&#19977;&#21315;&#20108;&#30334;&#21313;&#22235;, arabisch-indische
+&#1635;&#1634;&#1633;&#1636;, Devanagari-Ziffern
+&#2409;&#2408;&#2407;&#2410;, thailändische &#3667;&#3666;&#3665;&#3668;
+und vollbreite &#65299;&#65298;&#65297;&#65300; werden alle zur schlichten
+3214, die die Zielsprache erwartet.</p>
+<p>Jede Konvertierung wird vor dem Anwenden mit Vorschau und Konfidenzwert
+angezeigt, und die konvertierten Segmente werden markiert, sodass der Sprung
+zum nächsten unübersetzten Segment sie überspringt.</p>
+</body></html>

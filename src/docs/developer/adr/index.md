@@ -18,6 +18,7 @@
 ### Search and Sorting
 
 - 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)
+- 2026003 [Separation of Segment Sorting and Filtering in the Editor](2026003.EditorSortingFilteringSeparation.md)
 
 ### Filters
 

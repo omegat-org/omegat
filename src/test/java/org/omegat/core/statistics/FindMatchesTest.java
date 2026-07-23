@@ -354,6 +354,7 @@ public class FindMatchesTest {
         private final ITokenizer sourceTokenizer;
         private final ITokenizer targetTokenizer;
         private final Segmenter segmenter;
+        private final Object projectTMXLock = new Object();
 
         final ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
             public boolean existSourceInProject(String src) {
@@ -390,7 +391,7 @@ public class FindMatchesTest {
                 return;
             }
             Map.Entry<String, TMXEntry>[] entries;
-            synchronized (checkOrphanedCallback) {
+            synchronized (projectTMXLock) {
                 entries = entrySetToArray(projectTMX.getDefaultsMap().entrySet());
             }
             for (Map.Entry<String, TMXEntry> en : entries) {
@@ -403,7 +404,7 @@ public class FindMatchesTest {
                 return;
             }
             Map.Entry<EntryKey, TMXEntry>[] entries;
-            synchronized (checkOrphanedCallback) {
+            synchronized (projectTMXLock) {
                 entries = entrySetToArray(projectTMX.getAlternativesMap().entrySet());
             }
             for (Map.Entry<EntryKey, TMXEntry> en : entries) {

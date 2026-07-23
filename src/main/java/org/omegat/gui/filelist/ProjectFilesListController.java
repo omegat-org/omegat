@@ -151,7 +151,6 @@ import static org.omegat.util.gui.DataTableStyling.getTextCellRenderer;
 @NullMarked
 public class ProjectFilesListController implements IProjectFilesList {
 
-    private static final NumberFormat PROGRESS_PERCENT_FORMAT = createProgressPercentFormat();
     private static final int MIN_PROGRESS_WIDTH = 3;
 
     private ProjectFilesList list;
@@ -1192,9 +1191,10 @@ public class ProjectFilesListController implements IProjectFilesList {
         if (translated <= 0 || total <= 0) {
             return "0%";
         }
-        synchronized (PROGRESS_PERCENT_FORMAT) {
-            return PROGRESS_PERCENT_FORMAT.format((double) translated / total);
-        }
+        // Create the format per call: a static instance would freeze the
+        // locale active when this class was first loaded, and DecimalFormat
+        // is not thread-safe anyway.
+        return createProgressPercentFormat().format((double) translated / total);
     }
 
     private static boolean isProjectFilesProgressEnabled() {

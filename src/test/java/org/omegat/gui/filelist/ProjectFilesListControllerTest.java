@@ -30,22 +30,32 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.TestPreferencesInitializer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProjectFilesListControllerTest {
+
+    /**
+     * The expected percent strings use the English decimal separator; pin the
+     * locale so the test does not depend on the runtime locale.
+     */
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
 
     @BeforeClass
     public static void setUpClass() throws Exception {

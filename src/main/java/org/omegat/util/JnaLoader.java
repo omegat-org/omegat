@@ -34,7 +34,7 @@ import com.sun.jna.Native;
  */
 public final class JnaLoader {
     private static final Object LOCK = new Object();
-    private static Boolean ourJnaLoaded = false;
+    private static Boolean ourJnaLoaded = null;
 
     public static void load() {
         synchronized (LOCK) {

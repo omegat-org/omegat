@@ -117,7 +117,11 @@ class SpellingIssueProvider implements IIssueProvider {
 
         @Override
         public String getDescription() {
-            return misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.translation)).distinct()
+            String translation = tmxEntry.translation;
+            if (translation == null) {
+                return "";
+            }
+            return misspelledTokens.stream().map(tok -> tok.getTextFromString(translation)).distinct()
                     .collect(Collectors.joining(OStrings.getString("ISSUES_SPELLING_WORD_DELIMITER")));
         }
 
@@ -141,9 +145,13 @@ class SpellingIssueProvider implements IIssueProvider {
 
         @Override
         public List<? extends JMenuItem> getMenuComponents() {
+            String translation = tmxEntry.translation;
+            if (translation == null) {
+                return Collections.emptyList();
+            }
             List<JMenuItem> result = new ArrayList<>();
             ISpellChecker checker = Core.getSpellChecker();
-            misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.translation)).distinct()
+            misspelledTokens.stream().map(tok -> tok.getTextFromString(translation)).distinct()
                     .forEach(word -> {
                         boolean enabled = !checker.isIgnoredWord(word) && !checker.isLearnedWord(word);
                         JMenuItem item = new JMenuItem(

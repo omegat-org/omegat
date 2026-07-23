@@ -122,6 +122,17 @@ public class EditorResizePerformanceTest extends TestCore {
     public void expandedSortBarDoesNotSlowDownResize() throws Exception {
         TestProjectProperties props = new TestProjectProperties();
         props.setProjectRoot(projectRootDir.getAbsolutePath());
+        // Project-change listeners left registered by earlier tests in the
+        // same JVM (e.g. a ProjectFilesListController) render these roots
+        // while our LOAD event is dispatched; leaving them unset aborts the
+        // event chain with an error dialog before the editor builds its
+        // document.
+        props.setSourceRoot(new File(projectRootDir, "source").getAbsolutePath() + File.separator);
+        props.setTargetRoot(new File(projectRootDir, "target").getAbsolutePath() + File.separator);
+        props.setGlossaryRoot(new File(projectRootDir, "glossary").getAbsolutePath() + File.separator);
+        props.setWriteableGlossary(new File(new File(projectRootDir, "glossary"), "glossary.txt").getAbsolutePath());
+        props.setTMRoot(new File(projectRootDir, "tm").getAbsolutePath() + File.separator);
+        props.setDictRoot(new File(projectRootDir, "dictionary").getAbsolutePath() + File.separator);
         props.setSupportDefaultTranslations(false);
         props.setTargetTokenizer(DefaultTokenizer.class);
         TestCoreInitializer.initNotes(new EditorControllerTest.MyNotes());

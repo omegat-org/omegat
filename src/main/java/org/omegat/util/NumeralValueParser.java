@@ -110,9 +110,22 @@ public final class NumeralValueParser {
             new RuleSpec(ULocale.forLanguageTag("ja"), RuleBasedNumberFormat.SPELLOUT, "%spellout-numbering"));
 
     /** RuleBasedNumberFormat is not thread-safe, so build one set of parsers per thread. */
-    private static final ThreadLocal<List<RuleBasedNumberFormat>> PARSERS = ThreadLocal.withInitial(() -> {
+    private static final ThreadLocal<List<RuleBasedNumberFormat>> PARSERS = ThreadLocal
+            .withInitial(() -> buildParsers(true));
+
+    /**
+     * The same parsers minus the Roman rule sets, for callers that must not
+     * read ordinary Latin words ("I", "mix", "XL") as numerals.
+     */
+    private static final ThreadLocal<List<RuleBasedNumberFormat>> PARSERS_NO_ROMAN = ThreadLocal
+            .withInitial(() -> buildParsers(false));
+
+    private static List<RuleBasedNumberFormat> buildParsers(boolean includeRoman) {
         List<RuleBasedNumberFormat> list = new ArrayList<>();
         for (RuleSpec s : SPECS) {
+            if (!includeRoman && s.ruleSet().startsWith("%roman")) {
+                continue;
+            }
             try {
                 RuleBasedNumberFormat f = new RuleBasedNumberFormat(s.locale(), s.type());
                 f.setDefaultRuleSet(s.ruleSet());
@@ -123,7 +136,7 @@ public final class NumeralValueParser {
             }
         }
         return list;
-    });
+    }
 
     private static final Normalizer2 NFKC = Normalizer2.getNFKCInstance();
 
@@ -133,6 +146,15 @@ public final class NumeralValueParser {
      * ICU algorithmic systems are recognized.
      */
     public static Optional<BigInteger> parseWhole(String s) {
+        return parseWhole(s, true);
+    }
+
+    /**
+     * Like {@link #parseWhole(String)}, but with {@code includeRoman} false the
+     * Roman system is not recognized: Latin letters (and the single-codepoint
+     * Roman number forms) never count as numerals then.
+     */
+    public static Optional<BigInteger> parseWhole(String s, boolean includeRoman) {
         if (s == null) {
             return Optional.empty();
         }
@@ -143,7 +165,7 @@ public final class NumeralValueParser {
         // Try the text as-is first. NFKC would alter the numeral marks of some
         // systems (Greek/Hebrew/Armenian numeral signs), so raw parsing must be
         // attempted before normalization.
-        Optional<BigInteger> value = parseExact(trimmed);
+        Optional<BigInteger> value = parseExact(trimmed, includeRoman);
         if (value.isPresent()) {
             return value;
         }
@@ -151,21 +173,21 @@ public final class NumeralValueParser {
         // (U+216B becomes XII), fullwidth digits, etc. into a parseable form.
         String norm = NFKC.normalize(trimmed);
         if (!norm.equals(trimmed)) {
-            value = parseExact(norm);
+            value = parseExact(norm, includeRoman);
         }
         return value;
     }
 
     /** Parse the exact string (no trimming/normalization) as decimal or one ICU system. */
-    private static Optional<BigInteger> parseExact(String s) {
+    private static Optional<BigInteger> parseExact(String s, boolean includeRoman) {
         Optional<BigInteger> decimal = allDecimalDigits(s);
         if (decimal.isPresent()) {
             return decimal;
         }
-        if (!mayBeAlgorithmicNumeral(s)) {
+        if (!mayBeAlgorithmicNumeral(s, includeRoman)) {
             return Optional.empty();
         }
-        for (RuleBasedNumberFormat parser : PARSERS.get()) {
+        for (RuleBasedNumberFormat parser : (includeRoman ? PARSERS : PARSERS_NO_ROMAN).get()) {
             ParsePosition pp = new ParsePosition(0);
             Number value;
             try {
@@ -203,12 +225,12 @@ public final class NumeralValueParser {
      * word) are rejected here instead of failing through all rule sets, which
      * is orders of magnitude more expensive.
      */
-    private static boolean mayBeAlgorithmicNumeral(String s) {
+    private static boolean mayBeAlgorithmicNumeral(String s, boolean includeRoman) {
         boolean sawNumeral = false;
         for (int i = 0; i < s.length();) {
             int cp = s.codePointAt(i);
             if (SEPARATOR_CHARS.indexOf(cp) < 0) {
-                if (!isNumeralPlausible(cp)) {
+                if (!isNumeralPlausible(cp, includeRoman)) {
                     return false;
                 }
                 sawNumeral = true;
@@ -219,7 +241,12 @@ public final class NumeralValueParser {
         return sawNumeral;
     }
 
-    private static boolean isNumeralPlausible(int cp) {
+    private static boolean isNumeralPlausible(int cp, boolean includeRoman) {
+        if (!includeRoman && Character.UnicodeScript.of(cp) == Character.UnicodeScript.LATIN) {
+            // Covers both the letters of the Roman system (I, V, X ...) and the
+            // single-codepoint Roman number forms (Ⅻ), whose script is Latin.
+            return false;
+        }
         int type = Character.getType(cp);
         if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER
                 || type == Character.OTHER_NUMBER) {
@@ -259,6 +286,11 @@ public final class NumeralValueParser {
      * words are not misread as (for example) Roman numerals.
      */
     public static Optional<BigInteger> firstNumber(String text) {
+        return firstNumber(text, true);
+    }
+
+    /** Like {@link #firstNumber(String)}, optionally without the Roman system. */
+    public static Optional<BigInteger> firstNumber(String text, boolean includeRoman) {
         if (text == null || text.isEmpty()) {
             return Optional.empty();
         }
@@ -278,7 +310,7 @@ public final class NumeralValueParser {
                 }
                 i += Character.charCount(c);
             }
-            Optional<BigInteger> value = tokenNumber(text.substring(start, i));
+            Optional<BigInteger> value = tokenNumber(text.substring(start, i), includeRoman);
             if (value.isPresent()) {
                 return value;
             }
@@ -287,12 +319,12 @@ public final class NumeralValueParser {
     }
 
     /** A number for this token: its first decimal-digit run, else a whole-token algorithmic numeral. */
-    private static Optional<BigInteger> tokenNumber(String token) {
+    private static Optional<BigInteger> tokenNumber(String token, boolean includeRoman) {
         Optional<BigInteger> decimalRun = firstDecimalRun(token);
         if (decimalRun.isPresent()) {
             return decimalRun;
         }
-        return parseWhole(token);
+        return parseWhole(token, includeRoman);
     }
 
     private static Optional<BigInteger> allDecimalDigits(String s) {
@@ -469,6 +501,11 @@ public final class NumeralValueParser {
      * values).
      */
     public static Optional<Rational> parseValue(String s) {
+        return parseValue(s, true);
+    }
+
+    /** Like {@link #parseValue(String)}, optionally without the Roman system. */
+    public static Optional<Rational> parseValue(String s, boolean includeRoman) {
         if (s == null) {
             return Optional.empty();
         }
@@ -488,7 +525,7 @@ public final class NumeralValueParser {
         if (mag.isEmpty()) {
             return Optional.empty();
         }
-        Optional<Rational> value = parseMagnitude(mag);
+        Optional<Rational> value = parseMagnitude(mag, includeRoman);
         if (value.isEmpty()) {
             return Optional.empty();
         }
@@ -505,6 +542,11 @@ public final class NumeralValueParser {
      * {@link #parseValue} on the whole string, not when embedded in a sentence.
      */
     public static Optional<Rational> firstValue(String text) {
+        return firstValue(text, true);
+    }
+
+    /** Like {@link #firstValue(String)}, optionally without the Roman system. */
+    public static Optional<Rational> firstValue(String text, boolean includeRoman) {
         if (text == null || text.isEmpty()) {
             return Optional.empty();
         }
@@ -524,7 +566,7 @@ public final class NumeralValueParser {
                 }
                 i += Character.charCount(c);
             }
-            Optional<Rational> value = tokenValue(text.substring(start, i));
+            Optional<Rational> value = tokenValue(text.substring(start, i), includeRoman);
             if (value.isPresent()) {
                 return value;
             }
@@ -537,8 +579,8 @@ public final class NumeralValueParser {
      * run, else the first embedded single Nl/No numeric code point (so a numeral
      * glued to punctuation, an enclosed number before a period say, is found).
      */
-    private static Optional<Rational> tokenValue(String token) {
-        Optional<Rational> whole = parseValue(token);
+    private static Optional<Rational> tokenValue(String token, boolean includeRoman) {
+        Optional<Rational> whole = parseValue(token, includeRoman);
         if (whole.isPresent()) {
             return whole;
         }
@@ -548,7 +590,7 @@ public final class NumeralValueParser {
         }
         for (int i = 0; i < token.length();) {
             int cp = token.codePointAt(i);
-            Optional<Rational> v = singleCodePointNumericValue(new String(Character.toChars(cp)));
+            Optional<Rational> v = singleCodePointNumericValue(new String(Character.toChars(cp)), includeRoman);
             if (v.isPresent()) {
                 return v;
             }
@@ -558,7 +600,7 @@ public final class NumeralValueParser {
     }
 
     /** Non-negative magnitude: vulgar/mixed/fraction/decimal, else an integer numeral. */
-    private static Optional<Rational> parseMagnitude(String u) {
+    private static Optional<Rational> parseMagnitude(String u, boolean includeRoman) {
         // A trailing vulgar fraction char, optionally with an integer prefix.
         int lastCp = u.codePointBefore(u.length());
         Rational vulgar = VULGAR.get(lastCp);
@@ -613,7 +655,7 @@ public final class NumeralValueParser {
         if (hasDecimalDigit(u)) {
             return Optional.empty();
         }
-        Optional<Rational> algorithmic = parseWhole(u).map(Rational::ofInteger);
+        Optional<Rational> algorithmic = parseWhole(u, includeRoman).map(Rational::ofInteger);
         if (algorithmic.isPresent()) {
             return algorithmic;
         }
@@ -623,7 +665,7 @@ public final class NumeralValueParser {
         // numerals (Aegean, cuneiform, Aramaic, Greek acrophonic ...). Only a
         // single, non-negative integer value is taken; fractional forms and
         // multi-sign additive sequences are left for a later, dedicated step.
-        return singleCodePointNumericValue(u);
+        return singleCodePointNumericValue(u, includeRoman);
     }
 
     /**
@@ -631,11 +673,15 @@ public final class NumeralValueParser {
      * is a non-negative integer. Symbols without a numeric value, the emoji for a
      * hundred points or the keycap ten say, and fractional values yield empty.
      */
-    private static Optional<Rational> singleCodePointNumericValue(String u) {
+    private static Optional<Rational> singleCodePointNumericValue(String u, boolean includeRoman) {
         if (u.codePointCount(0, u.length()) != 1) {
             return Optional.empty();
         }
         int cp = u.codePointAt(0);
+        if (!includeRoman && Character.UnicodeScript.of(cp) == Character.UnicodeScript.LATIN) {
+            // Roman number forms (Ⅻ, ⅲ) carry Latin script.
+            return Optional.empty();
+        }
         int type = Character.getType(cp);
         if (type != Character.LETTER_NUMBER && type != Character.OTHER_NUMBER) {
             return Optional.empty();

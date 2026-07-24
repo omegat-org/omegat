@@ -54,15 +54,22 @@ public class MultiKeySorter implements IEditorSorter {
         public final SortKey key;
         public final boolean ascending;
         public final boolean numeric;
+        /** In numeric mode: treat Roman numerals as plain text, not as numbers. */
+        public final boolean ignoreRoman;
 
         public KeySpec(SortKey key, boolean ascending) {
-            this(key, ascending, false);
+            this(key, ascending, false, false);
         }
 
         public KeySpec(SortKey key, boolean ascending, boolean numeric) {
+            this(key, ascending, numeric, false);
+        }
+
+        public KeySpec(SortKey key, boolean ascending, boolean numeric, boolean ignoreRoman) {
             this.key = key;
             this.ascending = ascending;
             this.numeric = numeric;
+            this.ignoreRoman = ignoreRoman;
         }
     }
 
@@ -108,7 +115,8 @@ public class MultiKeySorter implements IEditorSorter {
             TextKeyComparator tc = null;
             Optional<Function<SourceTextEntry, String>> extractor = ks.key.sortTextExtractor();
             if (extractor.isPresent()) {
-                tc = ks.numeric && ks.key.supportsNumeric() ? new NumericValueComparator(collator)
+                tc = ks.numeric && ks.key.supportsNumeric()
+                        ? new NumericValueComparator(collator, !ks.ignoreRoman)
                         : new CachingCollatorComparator(collator);
                 preparableKeys.add(new PreparableKey(extractor.get(), tc));
             }
@@ -184,7 +192,7 @@ public class MultiKeySorter implements IEditorSorter {
             }
             sb.append(ks.key.name()).append(':').append(ks.ascending ? "asc" : "desc");
             if (ks.numeric) {
-                sb.append(":num");
+                sb.append(ks.ignoreRoman ? ":num-noroman" : ":num");
             }
         }
         return sb.toString();
@@ -207,8 +215,10 @@ public class MultiKeySorter implements IEditorSorter {
             try {
                 SortKey key = SortKey.valueOf(kv[0].trim());
                 boolean asc = !"desc".equalsIgnoreCase(kv[1].trim());
-                boolean numeric = kv.length >= 3 && "num".equalsIgnoreCase(kv[2].trim());
-                result.add(new KeySpec(key, asc, numeric));
+                String mode = kv.length >= 3 ? kv[2].trim() : "";
+                boolean noRoman = "num-noroman".equalsIgnoreCase(mode);
+                boolean numeric = noRoman || "num".equalsIgnoreCase(mode);
+                result.add(new KeySpec(key, asc, numeric, noRoman));
             } catch (IllegalArgumentException ex) {
                 // unknown key name - skip
             }

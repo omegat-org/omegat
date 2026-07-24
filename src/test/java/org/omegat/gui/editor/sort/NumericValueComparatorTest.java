@@ -64,6 +64,24 @@ public class NumericValueComparatorTest {
     }
 
     @Test
+    public void romanFreeModeTreatsRomanAsPlainText() {
+        NumericValueComparator noRoman = new NumericValueComparator(Collator.getInstance(Locale.ENGLISH),
+                false);
+        // Default mode: "XL" is 40, so it carries a number and sorts before the
+        // numberless word; Roman-free mode sees two numberless strings and
+        // falls back to collation (spare < XL).
+        assertTrue(c("XL", "spare") < 0);
+        assertTrue(Integer.signum(noRoman.compare("XL", "spare")) > 0);
+        // Single-codepoint Roman forms are excluded too: Ⅻ is numberless, so it
+        // sorts after the numbered string instead of as 12 < 20.
+        assertTrue(c("Ⅻ", "20") < 0);
+        assertTrue(Integer.signum(noRoman.compare("Ⅻ", "20")) > 0);
+        // All other numerals keep working in Roman-free mode.
+        assertTrue(Integer.signum(noRoman.compare("item2", "item10")) < 0);
+        assertTrue(Integer.signum(noRoman.compare("十二", "三")) > 0);
+    }
+
+    @Test
     public void stringsWithNumberSortBeforeStringsWithout() {
         assertTrue(c("item2", "hello") < 0);
         assertTrue(c("hello", "item2") > 0);

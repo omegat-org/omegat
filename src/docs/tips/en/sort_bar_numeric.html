@@ -42,6 +42,10 @@ systems &mdash; Western and other decimal digits, Roman numerals (XII), CJK
 (&#21313;&#20108;) and further systems supported by
 <a class="ulink" href="https://icu4c-demos.unicode.org/icu-bin/locexp" target="_blank">ICU</a>, as well as enclosed or
 circled numbers (&#9321;).</p>
+<p>Because ordinary words such as "mix" or "XL" are valid Roman numerals too,
+the selector also offers <b>Numeric asc./desc. no-Roman</b>: the same
+value-based order, but Roman numerals count as plain text. The collapsed sort bar shows this mode as 1&uarr;/1&darr; instead of
+#&uarr;/#&darr;.</p>
 <p>Values are compared exactly, so 1/3 orders correctly against any decimal and
 very large numbers never overflow. Segments with no recognizable number, or with
 equal values, fall back to the normal alphabetical order for a stable result.</p>

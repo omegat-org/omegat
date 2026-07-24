@@ -47,6 +47,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.ListModel;
 import javax.swing.SwingWorker;
+import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
 import org.omegat.core.Core;
@@ -351,7 +352,8 @@ public class SortBar extends CollapsibleBar {
         }
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).key != b.get(i).key || a.get(i).ascending != b.get(i).ascending
-                    || a.get(i).numeric != b.get(i).numeric) {
+                    || a.get(i).numeric != b.get(i).numeric
+                    || a.get(i).ignoreRoman != b.get(i).ignoreRoman) {
                 return false;
             }
         }
@@ -374,7 +376,9 @@ public class SortBar extends CollapsibleBar {
             KeySpec spec = appliedKeys.get(i);
             sb.append(i == 0 ? " " : ", ");
             sb.append(spec.key.getLocalizedName());
-            if (spec.numeric) {
+            if (spec.numeric && spec.ignoreRoman) {
+                sb.append(spec.ascending ? " 1↑" : " 1↓");
+            } else if (spec.numeric) {
                 sb.append(spec.ascending ? " #↑" : " #↓");
             } else {
                 sb.append(spec.ascending ? " ↑" : " ↓");
@@ -512,7 +516,12 @@ public class SortBar extends CollapsibleBar {
 
     /** Test/support hook: set the direction (and numeric mode) of the given row. */
     void selectDir(int rowIndex, boolean ascending, boolean numeric) {
-        rows.get(rowIndex).dirCombo.setSelectedItem(Dir.of(ascending, numeric));
+        selectDir(rowIndex, ascending, numeric, false);
+    }
+
+    /** Test/support hook: set the direction including the Roman-free numeric mode. */
+    void selectDir(int rowIndex, boolean ascending, boolean numeric, boolean ignoreRoman) {
+        rows.get(rowIndex).dirCombo.setSelectedItem(Dir.of(ascending, numeric, ignoreRoman));
     }
 
     /** Test/support hook: the number of criterion rows currently shown. */
@@ -546,20 +555,24 @@ public class SortBar extends CollapsibleBar {
         }
     }
 
-    /** Direction option: plain or value-based (numeric), ascending or descending. */
+    /** Direction option: plain or value-based (numeric, optionally without Roman), ascending or descending. */
     private enum Dir {
-        ASC(true, false, "SORT_ASCENDING"),
-        DESC(false, false, "SORT_DESCENDING"),
-        NUM_ASC(true, true, "SORT_NUM_ASCENDING"),
-        NUM_DESC(false, true, "SORT_NUM_DESCENDING");
+        ASC(true, false, false, "SORT_ASCENDING"),
+        DESC(false, false, false, "SORT_DESCENDING"),
+        NUM_ASC(true, true, false, "SORT_NUM_ASCENDING"),
+        NUM_DESC(false, true, false, "SORT_NUM_DESCENDING"),
+        NUM_NO_ROMAN_ASC(true, true, true, "SORT_NUM_NO_ROMAN_ASCENDING"),
+        NUM_NO_ROMAN_DESC(false, true, true, "SORT_NUM_NO_ROMAN_DESCENDING");
 
         final boolean ascending;
         final boolean numeric;
+        final boolean ignoreRoman;
         private final String labelKey;
 
-        Dir(boolean ascending, boolean numeric, String labelKey) {
+        Dir(boolean ascending, boolean numeric, boolean ignoreRoman, String labelKey) {
             this.ascending = ascending;
             this.numeric = numeric;
+            this.ignoreRoman = ignoreRoman;
             this.labelKey = labelKey;
         }
 
@@ -567,7 +580,10 @@ public class SortBar extends CollapsibleBar {
             return OStrings.getString(labelKey);
         }
 
-        static Dir of(boolean ascending, boolean numeric) {
+        static Dir of(boolean ascending, boolean numeric, boolean ignoreRoman) {
+            if (numeric && ignoreRoman) {
+                return ascending ? NUM_NO_ROMAN_ASC : NUM_NO_ROMAN_DESC;
+            }
             if (numeric) {
                 return ascending ? NUM_ASC : NUM_DESC;
             }
@@ -666,9 +682,10 @@ public class SortBar extends CollapsibleBar {
             if (numeric) {
                 dirCombo.addItem(Dir.NUM_ASC);
                 dirCombo.addItem(Dir.NUM_DESC);
+                dirCombo.addItem(Dir.NUM_NO_ROMAN_ASC);
+                dirCombo.addItem(Dir.NUM_NO_ROMAN_DESC);
             }
-            boolean keepCurrent = current == Dir.ASC || current == Dir.DESC
-                    || (numeric && (current == Dir.NUM_ASC || current == Dir.NUM_DESC));
+            boolean keepCurrent = current != null && (!current.numeric || numeric);
             dirCombo.setSelectedItem(keepCurrent ? current : Dir.ASC);
             dirCombo.setEnabled(k != SortKey.NATURAL);
             dirCombo.setMaximumSize(dirCombo.getPreferredSize());
@@ -685,13 +702,13 @@ public class SortBar extends CollapsibleBar {
             if (d == null) {
                 d = Dir.ASC;
             }
-            return new KeySpec(key(), d.ascending, d.numeric);
+            return new KeySpec(key(), d.ascending, d.numeric, d.ignoreRoman);
         }
 
         void setSpec(KeySpec k) {
             keyCombo.setSelectedItem(k.key);
             updateDirOptions();
-            dirCombo.setSelectedItem(Dir.of(k.ascending, k.numeric));
+            dirCombo.setSelectedItem(Dir.of(k.ascending, k.numeric, k.ignoreRoman));
         }
     }
 
@@ -740,6 +757,7 @@ public class SortBar extends CollapsibleBar {
         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             String text = "";
+            String tip = null;
             if (value instanceof Dir) {
                 Dir d = (Dir) value;
                 boolean numericOffered = containsNumericOption(list);
@@ -750,8 +768,26 @@ public class SortBar extends CollapsibleBar {
                 } else {
                     text = d.getLabel();
                 }
+                // The alphabetical/numeric distinction only needs explaining
+                // when both are on offer.
+                if (numericOffered) {
+                    if (!d.numeric) {
+                        tip = OStrings.getString("SORT_DIR_ALPHA_TOOLTIP");
+                    } else if (d.ignoreRoman) {
+                        tip = OStrings.getString("SORT_DIR_NUM_NO_ROMAN_TOOLTIP");
+                    } else {
+                        tip = OStrings.getString("SORT_DIR_NUM_TOOLTIP");
+                    }
+                }
             }
-            return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            // Per-cell tooltips only show once the popup list reports them.
+            if (list.getClientProperty("sortbar.tooltips") == null) {
+                list.putClientProperty("sortbar.tooltips", Boolean.TRUE);
+                ToolTipManager.sharedInstance().registerComponent(list);
+            }
+            super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+            setToolTipText(tip);
+            return this;
         }
 
         /** True if the combo's item list offers the numeric direction options. */

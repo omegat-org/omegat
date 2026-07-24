@@ -114,6 +114,24 @@ public class SortBarApplyTest extends TestCore {
     }
 
     @Test
+    public void romanFreeNumericApplyCarriesModeAndSummarySymbol() throws Exception {
+        setStubProject();
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectDir(0, true, true, true); // numeric ascending without Roman numerals
+
+        SwingUtilities.invokeAndWait(bar::applyPending);
+        assertTrue("the prepared sort must be applied when the worker finishes",
+                appliedLatch.await(15, TimeUnit.SECONDS));
+
+        MultiKeySorter sorter = (MultiKeySorter) applied;
+        assertTrue(sorter.getKeys().get(0).numeric);
+        assertTrue(sorter.getKeys().get(0).ignoreRoman);
+        assertTrue("the collapsed summary must show the Roman-free numeric symbol",
+                bar.buildSummary().endsWith(" 1↑"));
+    }
+
+    @Test
     public void applyWithoutProjectIsANoop() {
         Core.setProject(new NotLoadedProject());
         SortBar bar = new SortBar();

@@ -129,6 +129,18 @@ public class SortBarTest {
     }
 
     @Test
+    public void romanFreeNumericDirectionIsCarriedInKeys() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_FILE); // supports numeric
+        bar.selectDir(0, false, true, true);   // numeric descending, Roman-free
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals(1, keys.size());
+        assertFalse("descending", keys.get(0).ascending);
+        assertTrue("numeric", keys.get(0).numeric);
+        assertTrue("Roman-free", keys.get(0).ignoreRoman);
+    }
+
+    @Test
     public void numericModeIgnoredForNonNumericKey() {
         SortBar bar = new SortBar();
         bar.selectKey(0, SortKey.SOURCE_LENGTH); // not a text key -> only asc/desc offered

@@ -349,8 +349,18 @@ public enum SortKey {
      * is used. The requested direction is applied last.
      */
     public Comparator<SegmentBuilder> comparator(Collator collator, boolean asc, boolean numeric) {
+        return comparator(collator, asc, numeric, false);
+    }
+
+    /**
+     * Like {@link #comparator(Collator, boolean, boolean)}; with
+     * {@code ignoreRoman} true the numeric mode treats Roman numerals as plain
+     * text instead of numbers.
+     */
+    public Comparator<SegmentBuilder> comparator(Collator collator, boolean asc, boolean numeric,
+            boolean ignoreRoman) {
         return comparator(collator, asc,
-                numeric && supportsNumeric() ? new NumericValueComparator(collator) : null);
+                numeric && supportsNumeric() ? new NumericValueComparator(collator, !ignoreRoman) : null);
     }
 
     /**

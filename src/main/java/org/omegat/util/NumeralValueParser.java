@@ -27,11 +27,14 @@ package org.omegat.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormatSymbols;
 import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import com.ibm.icu.lang.UCharacter;
 import com.ibm.icu.text.Normalizer2;
@@ -66,9 +69,11 @@ import com.ibm.icu.util.ULocale;
  * A rational is exact for every one of those inputs, so comparison by
  * cross-multiplication is a provably total, transitive order with no rounding,
  * and values such as 1/3 order correctly against any terminating decimal.
- * A comma is deliberately NOT treated as a decimal or grouping separator (it is
- * irreducibly locale-ambiguous), so "1,000" and "1,5" contribute only their
- * leading integer. Division by zero yields no value.
+ * A comma is only treated as a decimal separator when the caller names a
+ * comma-decimal locale (see {@link #parseValue(String, boolean, Locale)}); the
+ * convention is irreducibly locale-ambiguous, so without a locale "1,000" and
+ * "1,5" contribute only their leading integer. Division by zero yields no
+ * value.
  *
  * As a final step, a single code point that carries a Unicode numeric value but
  * is neither a decimal digit nor an algorithmic numeral is resolved from its
@@ -501,11 +506,21 @@ public final class NumeralValueParser {
      * values).
      */
     public static Optional<Rational> parseValue(String s) {
-        return parseValue(s, true);
+        return parseValue(s, true, null);
     }
 
     /** Like {@link #parseValue(String)}, optionally without the Roman system. */
     public static Optional<Rational> parseValue(String s, boolean includeRoman) {
+        return parseValue(s, includeRoman, null);
+    }
+
+    /**
+     * Like {@link #parseValue(String)}; {@code numberLocale} (may be null)
+     * names the convention decimals are written in. For comma-decimal locales
+     * (German etc.) "9,90" is nine point nine and "1.234,56" uses dots for
+     * grouping; without a locale only the dot-decimal forms are read.
+     */
+    public static Optional<Rational> parseValue(String s, boolean includeRoman, Locale numberLocale) {
         if (s == null) {
             return Optional.empty();
         }
@@ -525,7 +540,7 @@ public final class NumeralValueParser {
         if (mag.isEmpty()) {
             return Optional.empty();
         }
-        Optional<Rational> value = parseMagnitude(mag, includeRoman);
+        Optional<Rational> value = parseMagnitude(mag, includeRoman, isCommaDecimal(numberLocale));
         if (value.isEmpty()) {
             return Optional.empty();
         }
@@ -542,31 +557,40 @@ public final class NumeralValueParser {
      * {@link #parseValue} on the whole string, not when embedded in a sentence.
      */
     public static Optional<Rational> firstValue(String text) {
-        return firstValue(text, true);
+        return firstValue(text, true, null);
     }
 
     /** Like {@link #firstValue(String)}, optionally without the Roman system. */
     public static Optional<Rational> firstValue(String text, boolean includeRoman) {
+        return firstValue(text, includeRoman, null);
+    }
+
+    /**
+     * Like {@link #firstValue(String)}; {@code numberLocale} (may be null)
+     * names the decimal convention, see {@link #parseValue(String, boolean, Locale)}.
+     */
+    public static Optional<Rational> firstValue(String text, boolean includeRoman, Locale numberLocale) {
         if (text == null || text.isEmpty()) {
             return Optional.empty();
         }
+        boolean commaDecimal = isCommaDecimal(numberLocale);
         int i = 0;
         int n = text.length();
         while (i < n) {
             int cp = text.codePointAt(i);
-            if (isValueSeparator(cp)) {
+            if (isValueSeparator(cp, commaDecimal)) {
                 i += Character.charCount(cp);
                 continue;
             }
             int start = i;
             while (i < n) {
                 int c = text.codePointAt(i);
-                if (isValueSeparator(c)) {
+                if (isValueSeparator(c, commaDecimal)) {
                     break;
                 }
                 i += Character.charCount(c);
             }
-            Optional<Rational> value = tokenValue(text.substring(start, i), includeRoman);
+            Optional<Rational> value = tokenValue(text.substring(start, i), includeRoman, commaDecimal);
             if (value.isPresent()) {
                 return value;
             }
@@ -579,8 +603,9 @@ public final class NumeralValueParser {
      * run, else the first embedded single Nl/No numeric code point (so a numeral
      * glued to punctuation, an enclosed number before a period say, is found).
      */
-    private static Optional<Rational> tokenValue(String token, boolean includeRoman) {
-        Optional<Rational> whole = parseValue(token, includeRoman);
+    private static Optional<Rational> tokenValue(String token, boolean includeRoman,
+            boolean commaDecimal) {
+        Optional<Rational> whole = parseMagnitudeToken(token, includeRoman, commaDecimal);
         if (whole.isPresent()) {
             return whole;
         }
@@ -600,7 +625,57 @@ public final class NumeralValueParser {
     }
 
     /** Non-negative magnitude: vulgar/mixed/fraction/decimal, else an integer numeral. */
-    private static Optional<Rational> parseMagnitude(String u, boolean includeRoman) {
+    /** A signed token from the scanner: optional sign, then a magnitude. */
+    private static Optional<Rational> parseMagnitudeToken(String token, boolean includeRoman,
+            boolean commaDecimal) {
+        if (token.isEmpty()) {
+            return Optional.empty();
+        }
+        boolean negative = false;
+        int first = token.codePointAt(0);
+        if (first == '-' || first == MINUS_SIGN) {
+            negative = true;
+            token = token.substring(Character.charCount(first));
+        } else if (first == '+') {
+            token = token.substring(Character.charCount(first));
+        }
+        if (token.isEmpty()) {
+            return Optional.empty();
+        }
+        Optional<Rational> value = parseMagnitude(token, includeRoman, commaDecimal);
+        if (value.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(negative ? value.get().negate() : value.get());
+    }
+
+    private static boolean isCommaDecimal(Locale numberLocale) {
+        return numberLocale != null
+                && DecimalFormatSymbols.getInstance(numberLocale).getDecimalSeparator() == ',';
+    }
+
+    /**
+     * Rewrites a comma-decimal magnitude into the dot-decimal form the rest of
+     * the parser reads: "9,90" -> "9.90", "1.234,56" -> "1234.56", and a pure
+     * dot-grouped integer "1.234" -> "1234". Anything else is returned as-is.
+     */
+    private static String normalizeCommaDecimal(String u) {
+        if (GROUPED_COMMA_DECIMAL.matcher(u).matches()) {
+            return u.replace(".", "").replace(',', '.');
+        }
+        if (SIMPLE_COMMA_DECIMAL.matcher(u).matches()) {
+            return u.replace(',', '.');
+        }
+        return u;
+    }
+
+    private static final Pattern GROUPED_COMMA_DECIMAL = Pattern.compile("\\p{Nd}{1,3}(\\.\\p{Nd}{3})+(,\\p{Nd}+)?");
+    private static final Pattern SIMPLE_COMMA_DECIMAL = Pattern.compile("\\p{Nd}+,\\p{Nd}+");
+
+    private static Optional<Rational> parseMagnitude(String u, boolean includeRoman, boolean commaDecimal) {
+        if (commaDecimal) {
+            u = normalizeCommaDecimal(u);
+        }
         // A trailing vulgar fraction char, optionally with an integer prefix.
         int lastCp = u.codePointBefore(u.length());
         Rational vulgar = VULGAR.get(lastCp);
@@ -802,8 +877,14 @@ public final class NumeralValueParser {
      * fraction slashes stay inside a token so a signed/decimal/fraction number is
      * read as one unit; a comma, colon and other punctuation still separate.
      */
-    private static boolean isValueSeparator(int cp) {
+    private static boolean isValueSeparator(int cp, boolean commaDecimal) {
         if (cp == '-' || cp == '+' || cp == '.' || cp == '/' || cp == MINUS_SIGN || cp == FRACTION_SLASH) {
+            return false;
+        }
+        if (commaDecimal && cp == ',') {
+            // The decimal comma stays inside the token; a trailing list comma
+            // makes the token unparseable as a whole and the digit-run
+            // fallback still finds the number.
             return false;
         }
         if (Character.digit(cp, 10) >= 0 || Character.isLetter(cp)) {

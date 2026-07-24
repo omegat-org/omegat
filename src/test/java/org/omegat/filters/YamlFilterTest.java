@@ -25,8 +25,8 @@
 
 package org.omegat.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,15 +51,8 @@ public class YamlFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml");
         // Expected extraction order follows insertion order in YAML
-        assertEquals(8, entries.size());
-        assertEquals("Welcome", entries.get(0));
-        assertEquals("Home", entries.get(1));
-        assertEquals("About", entries.get(2));
-        assertEquals("Contact", entries.get(3));
-        assertEquals("(c) 2025 Example Co.", entries.get(4));
-        assertEquals("/help", entries.get(5));
-        assertEquals("/terms", entries.get(6));
-        assertEquals("Enabled features", entries.get(7));
+        assertThat(entries).containsExactly("Welcome", "Home", "About", "Contact", "(c) 2025 Example Co.",
+                         "/help", "/terms", "Enabled features");
     }
 
     @Test
@@ -114,53 +107,40 @@ public class YamlFilterTest extends TestFilterBase {
     public void testLoad() throws Exception {
         String f = "src/test/resources/data/filters/yaml/sample1.yaml";
         IProject.FileInfo fi = loadSourceFiles(new YamlFilter(), f);
-
-        checkMultiStart(fi, f);
-        checkMulti("Welcome", "title_0", null, null, null, "name=title");
-        checkMulti("Home", "menu/items[0]_0", null, null, null, "name=menu/items[0]");
-        checkMulti("About", "menu/items[1]_0", null, null, null, "name=menu/items[1]");
-        checkMulti("Contact", "menu/items[2]_0", null, null, null, "name=menu/items[2]");
-        checkMulti("(c) 2025 Example Co.", "footer/copyright_0", null, null, null, "name=footer/copyright");
-        checkMulti("/help", "footer/links/help_0", null, null, null, "name=footer/links/help");
-        checkMulti("/terms", "footer/links/terms_0", null, null, null, "name=footer/links/terms");
-        checkMulti("Enabled features", "features/description_0", null, null, null, "name=features/description");
-        checkMultiEnd();
+        assertEntries(fi, f,
+                entry("Welcome", "title_0", null, null, null, "name=title"),
+                entry("Home", "menu/items[0]_0", null, null, null, "name=menu/items[0]"),
+                entry("About", "menu/items[1]_0", null, null, null, "name=menu/items[1]"),
+                entry("Contact", "menu/items[2]_0", null, null, null, "name=menu/items[2]"),
+                entry("(c) 2025 Example Co.", "footer/copyright_0", null, null, null,
+                        "name=footer/copyright"),
+                entry("/help", "footer/links/help_0", null, null, null, "name=footer/links/help"),
+                entry("/terms", "footer/links/terms_0", null, null, null, "name=footer/links/terms"),
+                entry("Enabled features", "features/description_0", null, null, null,
+                        "name=features/description"));
     }
 
     @Test
     public void testParseWithExclude() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/links/help;footer/links/terms");
         List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
-        assertEquals(6, entries.size());
-        assertEquals("Welcome", entries.get(0));
-        assertEquals("Home", entries.get(1));
-        assertEquals("About", entries.get(2));
-        assertEquals("Contact", entries.get(3));
-        assertEquals("(c) 2025 Example Co.", entries.get(4));
-        assertEquals("Enabled features", entries.get(5));
+        assertThat(entries).containsExactly("Welcome", "Home", "About", "Contact", "(c) 2025 Example Co.",
+                "Enabled features");
     }
 
     @Test
     public void testParseWithInclude() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_INCLUDE, "menu/**");
         List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
-        assertEquals(3, entries.size());
-        assertEquals("Home", entries.get(0));
-        assertEquals("About", entries.get(1));
-        assertEquals("Contact", entries.get(2));
+        assertThat(entries).containsExactly("Home", "About", "Contact");
     }
 
     @Test
     public void testParseWithWildcard() throws Exception {
         Map<String, String> options = Map.of(YamlOptions.OPTION_EXCLUDE, "footer/*/*");
         List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
-        assertEquals(6, entries.size());
-        assertEquals("Welcome", entries.get(0));
-        assertEquals("Home", entries.get(1));
-        assertEquals("About", entries.get(2));
-        assertEquals("Contact", entries.get(3));
-        assertEquals("(c) 2025 Example Co.", entries.get(4));
-        assertEquals("Enabled features", entries.get(5));
+        assertThat(entries).containsExactly("Welcome", "Home", "About", "Contact", "(c) 2025 Example Co.",
+                "Enabled features");
     }
 
     @Test
@@ -170,8 +150,7 @@ public class YamlFilterTest extends TestFilterBase {
             YamlOptions.OPTION_EXCLUDE, "**/links/**"
         );
         List<String> entries = parse(new YamlFilter(), "src/test/resources/data/filters/yaml/sample1.yaml", options);
-        assertEquals(1, entries.size());
-        assertEquals("(c) 2025 Example Co.", entries.get(0));
+        assertThat(entries).containsExactly("(c) 2025 Example Co.");
     }
 
     @Test
@@ -196,9 +175,6 @@ public class YamlFilterTest extends TestFilterBase {
         options.setExcludeKeys(List.of("key;with;semicolons", "key\\with\\backslashes", "normal/key"));
         
         List<String> recovered = options.getExcludeKeys();
-        assertEquals(3, recovered.size());
-        assertTrue(recovered.contains("key;with;semicolons"));
-        assertTrue(recovered.contains("key\\with\\backslashes"));
-        assertTrue(recovered.contains("normal/key"));
+        assertThat(recovered).containsExactly("key;with;semicolons", "key\\with\\backslashes", "normal/key");
     }
 }

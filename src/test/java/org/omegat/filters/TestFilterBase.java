@@ -28,7 +28,6 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,10 +45,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.w3c.dom.Document;
+import org.xmlunit.assertj3.XmlAssert;
 import org.xmlunit.diff.DefaultNodeMatcher;
 import org.xmlunit.diff.ElementSelectors;
 
@@ -455,7 +457,7 @@ public abstract class TestFilterBase extends TestCore {
 
         Document doc1 = builder.parse(f1);
         Document doc2 = builder.parse(f2);
-        assertThat(doc1).and(doc2).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+        XmlAssert.assertThat(doc1).and(doc2).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
                 .withAttributeFilter(attr -> !("creationtoolversion".equals(attr.getName())
                         || "creationtool".equals(attr.getName())))
                 .ignoreWhitespace().areIdentical();
@@ -476,7 +478,7 @@ public abstract class TestFilterBase extends TestCore {
         DocumentBuilder builder = factory.newDocumentBuilder();
         var doc1 = builder.parse(f1.toExternalForm());
         var doc2 = builder.parse(f2.toExternalForm());
-        assertThat(doc2).and(doc1).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+        XmlAssert.assertThat(doc2).and(doc1).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
                 .areIdentical();
     }
 
@@ -551,6 +553,44 @@ public abstract class TestFilterBase extends TestCore {
 
     protected void skipMulti() {
         fiCount++;
+    }
+
+    protected static Tuple entry(String sourceText, String id, String path, String prev, String next, String comment) {
+        return Assertions.tuple(sourceText, id, path, prev, next, comment);
+    }
+
+    /**
+     * Asserts that the entries in the given file information match the expected tuples.
+     * This method verifies that all entries have a file name equal to the provided file name,
+     * and that the source text of each entry matches its key's source text. Additionally,
+     * it checks that the extracted properties of the entries match the expected tuples.
+     * <p>
+     * Example:
+     * <pre>{@code
+     * assertEntries(fi, file,
+     *         entry("Title", "mainWindow.title", null, null, null, null),
+     *         entry("File", "fileMenu.label", null, null, null, null),
+     *         entry("Edit", "editMenu.label", null, null, null, null));
+     * }</pre>
+     *
+     * @param fi the file information containing the entries to be asserted
+     * @param file the expected file name to be matched for all entries
+     * @param entries the expected tuples that the extracted properties of the entries should match
+     */
+    protected void assertEntries(IProject.FileInfo fi, String file, Tuple... entries) {
+        Assertions.assertThat(fi.entries)
+                .allSatisfy(ste -> {
+                    Assertions.assertThat(ste.getKey().file).isEqualTo(file);
+                    Assertions.assertThat(ste.getSrcText()).isEqualTo(ste.getKey().sourceText);
+                })
+                .extracting(
+                        SourceTextEntry::getSrcText,
+                        ste -> ste.getKey().id,
+                        ste -> ste.getKey().path,
+                        ste -> ste.getKey().prev,
+                        ste -> ste.getKey().next,
+                        SourceTextEntry::getComment)
+                .containsExactly(entries);
     }
 
     /**

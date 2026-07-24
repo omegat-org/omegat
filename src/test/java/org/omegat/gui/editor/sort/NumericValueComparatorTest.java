@@ -64,6 +64,16 @@ public class NumericValueComparatorTest {
     }
 
     @Test
+    public void germanSourceLocaleReadsCommaDecimals() {
+        NumericValueComparator de = new NumericValueComparator(Collator.getInstance(Locale.GERMANY), true,
+                Locale.GERMANY);
+        // "9,90" is nine point nine in a German source, so it sorts after 9.
+        assertTrue(Integer.signum(de.compare("Das Modul kostet 9,90€ pro Monat.",
+                "Die BSNR muss genau 9 Ziffern haben.")) > 0);
+        assertTrue(Integer.signum(de.compare("Preis 1.234,56 gesamt", "Preis 1234 gesamt")) > 0);
+    }
+
+    @Test
     public void romanFreeModeTreatsRomanAsPlainText() {
         NumericValueComparator noRoman = new NumericValueComparator(Collator.getInstance(Locale.ENGLISH),
                 false);

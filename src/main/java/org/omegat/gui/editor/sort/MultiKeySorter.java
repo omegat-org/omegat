@@ -116,7 +116,7 @@ public class MultiKeySorter implements IEditorSorter {
             Optional<Function<SourceTextEntry, String>> extractor = ks.key.sortTextExtractor();
             if (extractor.isPresent()) {
                 tc = ks.numeric && ks.key.supportsNumeric()
-                        ? new NumericValueComparator(collator, !ks.ignoreRoman)
+                        ? new NumericValueComparator(collator, !ks.ignoreRoman, sourceLocale)
                         : new CachingCollatorComparator(collator);
                 preparableKeys.add(new PreparableKey(extractor.get(), tc));
             }

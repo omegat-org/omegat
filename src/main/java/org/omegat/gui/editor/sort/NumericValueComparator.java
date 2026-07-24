@@ -27,6 +27,7 @@ package org.omegat.gui.editor.sort;
 
 import java.text.Collator;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -62,13 +63,21 @@ public class NumericValueComparator implements TextKeyComparator {
     /** When false, Roman numerals count as plain text, not as numbers. */
     private final boolean includeRoman;
 
+    /** Decimal convention of the sorted text (null: dot-decimal only). */
+    private final Locale numberLocale;
+
     public NumericValueComparator(Collator collator) {
-        this(collator, true);
+        this(collator, true, null);
     }
 
     public NumericValueComparator(Collator collator, boolean includeRoman) {
+        this(collator, includeRoman, null);
+    }
+
+    public NumericValueComparator(Collator collator, boolean includeRoman, Locale numberLocale) {
         this.collator = collator;
         this.includeRoman = includeRoman;
+        this.numberLocale = numberLocale;
     }
 
     @Override
@@ -104,7 +113,7 @@ public class NumericValueComparator implements TextKeyComparator {
     }
 
     private Optional<Rational> value(String s) {
-        Optional<Rational> whole = NumeralValueParser.parseValue(s, includeRoman);
-        return whole.isPresent() ? whole : NumeralValueParser.firstValue(s, includeRoman);
+        Optional<Rational> whole = NumeralValueParser.parseValue(s, includeRoman, numberLocale);
+        return whole.isPresent() ? whole : NumeralValueParser.firstValue(s, includeRoman, numberLocale);
     }
 }

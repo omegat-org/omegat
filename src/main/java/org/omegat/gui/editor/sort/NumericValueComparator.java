@@ -59,8 +59,16 @@ public class NumericValueComparator implements TextKeyComparator {
      */
     private final Map<String, Optional<Rational>> cache = new HashMap<>();
 
+    /** When false, Roman numerals count as plain text, not as numbers. */
+    private final boolean includeRoman;
+
     public NumericValueComparator(Collator collator) {
+        this(collator, true);
+    }
+
+    public NumericValueComparator(Collator collator, boolean includeRoman) {
         this.collator = collator;
+        this.includeRoman = includeRoman;
     }
 
     @Override
@@ -92,11 +100,11 @@ public class NumericValueComparator implements TextKeyComparator {
     }
 
     private Optional<Rational> cachedValue(String s) {
-        return cache.computeIfAbsent(s, NumericValueComparator::value);
+        return cache.computeIfAbsent(s, this::value);
     }
 
-    private static Optional<Rational> value(String s) {
-        Optional<Rational> whole = NumeralValueParser.parseValue(s);
-        return whole.isPresent() ? whole : NumeralValueParser.firstValue(s);
+    private Optional<Rational> value(String s) {
+        Optional<Rational> whole = NumeralValueParser.parseValue(s, includeRoman);
+        return whole.isPresent() ? whole : NumeralValueParser.firstValue(s, includeRoman);
     }
 }

@@ -144,6 +144,31 @@ public class MultiKeySorterTest {
     }
 
     @Test
+    public void romanFreeNumericModeSortsRomanAsText() {
+        // "XL" is 40 in normal numeric mode, plain text in Roman-free mode.
+        List<SegmentBuilder> segs = Arrays.asList(seg(1, "XL"), seg(2, "9"), seg(3, "alpha"));
+        assertEquals(Arrays.asList(2, 1, 3),
+                order(segs, sorter(new KeySpec(SortKey.SOURCE_ALPHA, true, true))));
+        assertEquals(Arrays.asList(2, 3, 1),
+                order(segs, sorter(new KeySpec(SortKey.SOURCE_ALPHA, true, true, true))));
+    }
+
+    @Test
+    public void romanFreePreferenceRoundTrip() {
+        List<KeySpec> keys = Arrays.asList(new KeySpec(SortKey.SOURCE_ALPHA, true, true, true),
+                new KeySpec(SortKey.SOURCE_LENGTH, false, true, false));
+        String s = MultiKeySorter.toPreferenceString(keys);
+        assertEquals("SOURCE_ALPHA:asc:num-noroman;SOURCE_LENGTH:desc:num", s);
+
+        List<KeySpec> back = MultiKeySorter.fromPreferenceString(s);
+        assertEquals(2, back.size());
+        assertTrue(back.get(0).numeric);
+        assertTrue(back.get(0).ignoreRoman);
+        assertTrue(back.get(1).numeric);
+        assertFalse(back.get(1).ignoreRoman);
+    }
+
+    @Test
     public void fromPreferenceStringHandlesEmptyAndNull() {
         assertTrue(MultiKeySorter.fromPreferenceString(null).isEmpty());
         assertTrue(MultiKeySorter.fromPreferenceString("").isEmpty());

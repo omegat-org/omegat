@@ -41,6 +41,8 @@ import org.omegat.core.data.TestRuntimePreferenceStore;
  */
 public final class TestPreferencesInitializer {
 
+    private static final Object LOCK = new Object();
+
     private TestPreferencesInitializer() {
     }
 
@@ -63,16 +65,18 @@ public final class TestPreferencesInitializer {
      *
      * @param configDir OmegaT user configuration directory for test.
      */
-    public static synchronized void init(String configDir) {
-        TestRuntimePreferenceStore.reset();
-        TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
-        // Install a fresh, isolated preferences store for this test. Preferences
-        // builds its store only once per JVM, so without this every test after
-        // the first would share (and inherit the mutations of) whatever store the
-        // first test created. Injecting a TestPreferences gives each test a clean
-        // store and prevents preference state from leaking across the suite.
-        Preferences.setPreferences(new TestPreferences());
-        Preferences.initFilters();
-        Preferences.initSegmentation();
+    public static void init(String configDir) {
+        synchronized (LOCK) {
+            TestRuntimePreferenceStore.reset();
+            TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
+            // Install a fresh, isolated preferences store for this test. Preferences
+            // builds its store only once per JVM, so without this every test after
+            // the first would share (and inherit the mutations of) whatever store the
+            // first test created. Injecting a TestPreferences gives each test a clean
+            // store and prevents preference state from leaking across the suite.
+            Preferences.setPreferences(new TestPreferences());
+            Preferences.initFilters();
+            Preferences.initSegmentation();
+        }
     }
 }

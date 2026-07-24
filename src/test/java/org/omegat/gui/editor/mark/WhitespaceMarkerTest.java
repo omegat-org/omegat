@@ -31,16 +31,26 @@ import static org.junit.Assert.assertNull;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.LocaleRule;
 
 public class WhitespaceMarkerTest extends MarkerTestBase {
+
+    /**
+     * The expected tooltips come from the English resource bundle; pin the
+     * locale so the test does not depend on the runtime locale.
+     */
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
 
     @Before
     public void preUp() {

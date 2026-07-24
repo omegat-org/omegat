@@ -108,7 +108,7 @@ public final class MainWindowStatusBarController {
     }
 
     private String getLocalizedString(String messageKey, Object... params) {
-        if (messageKey == null) {
+        if (messageKey == null || messageKey.isEmpty()) {
             return " ";
         } else if (params == null) {
             return OStrings.getString(messageKey);

@@ -97,9 +97,31 @@ public class GlossaryTextAreaTest extends TestCore {
         renderer.render(entries.get(0), doc);
         renderer.render(entries.get(1), doc);
         renderer.render(entries.get(2), doc);
-        Thread.sleep(300);
         String expected = doc.getText(0, doc.getLength()).replaceAll("%C3%A8", "è");
-        assertEquals(expected, gta.getText());
+        assertTextEventually(gta, expected);
+    }
+
+    /**
+     * The linkifier rewrites the URL asynchronously: the document insert
+     * schedules a refresh with invokeLater, decoding the URL triggers a
+     * second one, and further refreshes run on a Swing timer. A fixed sleep
+     * is either too short on a busy machine or wastes time, so poll the
+     * text on the EDT until it reaches the expected state.
+     */
+    private static void assertTextEventually(GlossaryTextArea gta, String expected) throws Exception {
+        long deadline = System.currentTimeMillis() + 5_000;
+        String actual = getTextOnEdt(gta);
+        while (!expected.equals(actual) && System.currentTimeMillis() < deadline) {
+            Thread.sleep(10);
+            actual = getTextOnEdt(gta);
+        }
+        assertEquals(expected, actual);
+    }
+
+    private static String getTextOnEdt(GlossaryTextArea gta) throws Exception {
+        String[] result = new String[1];
+        SwingUtilities.invokeAndWait(() -> result[0] = gta.getText());
+        return result[0];
     }
 
     /**

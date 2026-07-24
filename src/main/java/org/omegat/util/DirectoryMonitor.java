@@ -46,7 +46,7 @@ public class DirectoryMonitor extends Thread {
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(DirectoryMonitor.class.getName());
 
-    private boolean stopped = false;
+    private volatile boolean stopped = false;
     protected final File dir;
     protected final Callback callback;
     protected final DirectoryCallback directoryCallback;
@@ -87,6 +87,9 @@ public class DirectoryMonitor extends Thread {
      */
     public void fin() {
         stopped = true;
+        // Wake the polling sleep so the thread (whose callback references the
+        // project being closed) ends now instead of up to a second later.
+        interrupt();
     }
 
     @Override

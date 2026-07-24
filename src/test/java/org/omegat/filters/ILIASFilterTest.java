@@ -33,7 +33,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.text.ilias.ILIASFilter;
 
 /**
@@ -44,14 +43,16 @@ public class ILIASFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new ILIASFilter(), "src/test/resources/data/filters/ilias/ILIASFilter.lang");
+        List<String> entries = parse(new ILIASFilter(),
+                "src/test/resources/data/filters/ilias/ILIASFilter.lang");
         assertEquals(7, entries.size());
         int i = 0;
         assertEquals("Good line", entries.get(i++));
         assertEquals("Another good line with HTML <br/> entity", entries.get(i++));
         assertEquals("The text may include : too", entries.get(i++));
         assertEquals("The text may include # as well", entries.get(i++));
-        assertEquals("The text may include  #:# or ", entries.get(i++)); // note the space after "or"
+        // note the space after "or"
+        assertEquals("The text may include  #:# or ", entries.get(i++));
         assertEquals("have it at the end #:#", entries.get(i++));
         assertEquals("#:#", entries.get(i++));
     }
@@ -65,15 +66,10 @@ public class ILIASFilterTest extends TestFilterBase {
     public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
 
-        align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang",
-                "ilias/ILIASFilterAlign-tr.lang", new IAlignCallback() {
-                    @Override
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String comment, IFilter filter) {
-                        alignResult.aligned = id.equals("module_name#:#variable_name") && source.equals("original")
-                                && translation.equals("translated");
-                    }
-                });
+        align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang", "ilias/ILIASFilterAlign-tr.lang",
+                (IAlignCallback) (id, source, translation, isFuzzy, comment,
+                        filter) -> alignResult.aligned = "module_name#:#variable_name".equals(id)
+                                && "original".equals(source) && "translated".equals(translation));
 
         assertTrue(alignResult.aligned);
     }

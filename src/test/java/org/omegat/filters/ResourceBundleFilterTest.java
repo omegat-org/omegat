@@ -38,7 +38,6 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
@@ -54,19 +53,18 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         Map<String, String> options = new TreeMap<>();
         options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "true");
         translateText(new ResourceBundleFilter(),
-                "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties", options);
+                "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties",
+                options);
     }
 
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
         align(new ResourceBundleFilter(), "resourceBundle/file-ResourceBundleFilter.properties",
-                "resourceBundle/file-ResourceBundleFilter_be.properties", new IAlignCallback() {
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String path, IFilter filter) {
-                        ar.found = id.equals("ID") && source.equals("Value") && translation.equals("test");
-                    }
-                });
+                "resourceBundle/file-ResourceBundleFilter_be.properties",
+                (IAlignCallback) (id, source, translation, isFuzzy, path,
+                        filter) -> ar.found = "ID".equals(id) && "Value".equals(source)
+                                && "test".equals(translation));
         assertTrue(ar.found);
     }
 
@@ -86,7 +84,8 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Value3", "ID3", null, null, null, "# some comment");
         checkMulti("Value4", "ID4", null, null, null, "# multiple line\n# comment");
         checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
-        checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603"); // U+2603 SNOWMAN
+        checkMulti("Value\u2603", "ID6", null, null, null, "# Unicode escape \u2603"); // U+2603
+                                                                                       // SNOWMAN
         checkMultiEnd();
 
         f = "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties";
@@ -115,7 +114,9 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     /**
      * Test Unicode case.
-     * @throws Exception when error occurred.
+     * 
+     * @throws Exception
+     *             when error occurred.
      */
     @Test
     public void testNonEscapeUnicode() throws Exception {
@@ -132,11 +133,12 @@ public class ResourceBundleFilterTest extends TestFilterBase {
     }
 
     /**
-     * Test Unicode case, when the filter configured not to force escape
-     * and output encoding context is US-ASCII.
-     * Check loaded Unicode literals are in code points out of ASCII,
-     * then check the output file is escaped.
-     * @throws Exception when error occurred.
+     * Test Unicode case, when the filter configured not to force escape and
+     * output encoding context is US-ASCII. Check loaded Unicode literals are in
+     * code points out of ASCII, then check the output file is escaped.
+     * 
+     * @throws Exception
+     *             when error occurred.
      */
     @Test
     public void testEscapeUnicodeWhenASCII() throws Exception {
@@ -190,12 +192,14 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("Value", "KEY", null, null, null, "# Tab->\t<-Tab");
         checkMulti("Value    ", "KEY2", null, null, null, "# Trailing whitespace must be preserved");
-        checkMulti("Value1\tValue2", "KEY3", null, null, null, "# Significant whitespace on continuation line");
+        checkMulti("Value1\tValue2", "KEY3", null, null, null,
+                "# Significant whitespace on continuation line");
         checkMulti("Value1 Value2", "KEY4", null, null, null, null);
         checkMultiEnd();
 
         translate(filter, f);
-        compareBinary(new File("src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
+        compareBinary(new File(
+                "src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties"),
                 outFile);
 
         // Restore old value
@@ -239,31 +243,25 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(filter, f, config);
         checkMultiStart(fi, f);
         checkMulti("Unpack project from OMT file...", "omt.menu.import", null, null, null,
-                "#/**************************************************************************\n" +
-                        "# OmegaT Plugin - OMT Package Manager\n" +
-                        "#\n" +
-                        "# Copyright (C) 2019 Briac Pilpr\u00E9\n" +
-                        "# Home page: http://www.omegat.org/\n" +
-                        "# Support center: http://groups.yahoo.com/group/OmegaT/\n" +
-                        "#\n" +
-                        "# This program is free software: you can redistribute it and/or modify\n" +
-                        "# it under the terms of the GNU General Public License as published by\n" +
-                        "# the Free Software Foundation, either version 3 of the License, or\n" +
-                        "# (at your option) any later version.\n" +
-                        "#\n" +
-                        "# This program is distributed in the hope that it will be useful,\n" +
-                        "# but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                        "# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                        "# GNU General Public License for more details.\n" +
-                        "#\n" +
-                        "# You should have received a copy of the GNU General Public License\n" +
-                        "# along with this program. If not, see <http://www.gnu.org/licenses/>.\n" +
-                        "#\n" +
-                        "# **************************************************************************/"
-        );
+                "#/**************************************************************************\n"
+                        + "# OmegaT Plugin - OMT Package Manager\n" + "#\n"
+                        + "# Copyright (C) 2019 Briac Pilpr\u00E9\n" + "# Home page: http://www.omegat.org/\n"
+                        + "# Support center: http://groups.yahoo.com/group/OmegaT/\n" + "#\n"
+                        + "# This program is free software: you can redistribute it and/or modify\n"
+                        + "# it under the terms of the GNU General Public License as published by\n"
+                        + "# the Free Software Foundation, either version 3 of the License, or\n"
+                        + "# (at your option) any later version.\n" + "#\n"
+                        + "# This program is distributed in the hope that it will be useful,\n"
+                        + "# but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                        + "# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+                        + "# GNU General Public License for more details.\n" + "#\n"
+                        + "# You should have received a copy of the GNU General Public License\n"
+                        + "# along with this program. If not, see <http://www.gnu.org/licenses/>.\n" + "#\n"
+                        + "# **************************************************************************/");
         checkMulti("Pack project as OMT file...", "omt.menu.export", null, null, null, null);
         checkMulti("Pack and delete project...", "omt.menu.export.delete", null, null, null, null);
-        checkMulti("The project already has an ongoing translation.\nDo you want to overwrite it with the translation from the package ?",
+        checkMulti(
+                "The project already has an ongoing translation.\nDo you want to overwrite it with the translation from the package ?",
                 "omt.dialog.overwrite_project_save", null, null, null, null);
         checkMulti("Deleting project...", "omt.status.delete_project", null, null, null, null);
         checkMultiEnd();

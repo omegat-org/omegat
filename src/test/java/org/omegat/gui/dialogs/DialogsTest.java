@@ -36,19 +36,26 @@ import java.util.Locale;
 
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.Platform;
 
 public class DialogsTest extends TestCore {
 
+    /**
+     * Use English so that uses of old/stale resource keys can't be masked by
+     * out-of-date translated resources when the runtime locale is not English.
+     * The rule restores the original locale so it does not leak into tests
+     * running later in the same JVM.
+     */
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
+
     @Before
     public final void setUp() {
-        // Set default locale to English so that uses of old/stale
-        // resource keys can't be masked by out-of-date translated
-        // resources when runtime locale is not English.
-        Locale.setDefault(Locale.ENGLISH);
         // All tests in this class should require a GUI; any tests that can be
         // run when headless should be put in a different class.
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());

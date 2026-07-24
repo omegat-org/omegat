@@ -275,30 +275,35 @@ tasks.register('jacocoIntegrationReport', JacocoReport) {
 
 tasks.register('spotbugsReport') {
     // Capture at configuration time
-    def rootProjectDir = rootProject.projectDir
-    def rootProjectPath = rootProject.path
-    def subprojectDirs = subprojects.collect { [dir: it.projectDir, path: it.path] }
+    def spotbugsProjects = ([[
+             reportsDir : layout.projectDirectory.dir("build/reports/spotbugs").asFile,
+             displayName: "OmegaT root project"
+     ]] + subprojects.collect { subproject ->
+        [
+                reportsDir : subproject.layout.projectDirectory.dir("build/reports/spotbugs").asFile,
+                displayName: subproject.path
+        ]
+    })
+    group = 'verification'
+    inputs.files(spotbugsProjects.collect { projectReport ->
+        fileTree(projectReport.reportsDir) {
+            include "main.txt", "test.txt"
+        }
+    }).optional()
 
     // Reusable function to check and print the report for a given project
-    def printReport = { project ->
-        ["main", "test"].each { target ->
-            def reportFile = new File(projectDir, "build/reports/spotbugs/${target}.txt")
-            if (reportFile.exists()) {
-                def sep = "-".repeat(40)
-                def ppath = projectPath == ":" ? "OmegaT root project" : projectPath
-                if (ppath.equals(":")) {
-                    ppath = "OmegaT root project"
-                }
-                println(sep + " Report from project: ${ppath} for ${target} code" + sep) // Use full project path
-                reportFile.eachLine { line ->
-                    println(line)
+    doLast {
+        spotbugsProjects.each { projectReport ->
+            ["main", "test"].each { target ->
+                def reportFile = new File(projectReport.reportsDir, "${target}.txt")
+                if (reportFile.exists()) {
+                    def sep = "-".repeat(40)
+                    println(sep + "${sep} Report from project: ${projectReport.displayName} for ${target} code ${sep}")
+                    reportFile.eachLine { line ->
+                        println(line)
+                    }
                 }
             }
         }
-    }
-    group = 'verification'
-    doLast {
-        printReport(rootProject)
-        subprojectDirs.each { p -> printReport(p.dir, p.path) }
     }
 }

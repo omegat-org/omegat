@@ -30,6 +30,7 @@ import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -42,9 +43,10 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromMTMarker implements IMarker {
+    private final Object LOCK = new Object();
     private final HighlightPainter highlightPainter;
-    private SourceTextEntry markedSte;
-    private String markedText;
+    private @Nullable SourceTextEntry markedSte;
+    private @Nullable String markedText;
 
     public ComesFromMTMarker() {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
@@ -52,33 +54,30 @@ public class ComesFromMTMarker implements IMarker {
             }
 
             public void onEntryActivated(SourceTextEntry newEntry) {
-                synchronized (ComesFromMTMarker.this) {
-                    markedSte = null;
-                    markedText = null;
-                }
+                setMark(null, null);
             }
         });
         highlightPainter = new TransparentHighlightPainter(
                 Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getColor(), 0.5F);
     }
 
-    public void setMark(SourceTextEntry ste, String text) {
-        synchronized (this) {
+    public void setMark(@Nullable SourceTextEntry ste, @Nullable String text) {
+        synchronized (LOCK) {
             markedSte = ste;
             markedText = text;
         }
     }
 
     @Override
-    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
-        synchronized (this) {
+        synchronized (LOCK) {
             if (!isActive || ste != markedSte || translationText == null || !translationText.equals(markedText)) {
                 return null;
             }
+            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
+            m.painter = highlightPainter;
+            return Collections.singletonList(m);
         }
-        Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-        m.painter = highlightPainter;
-        return Collections.singletonList(m);
     }
 }

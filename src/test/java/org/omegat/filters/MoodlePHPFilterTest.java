@@ -30,7 +30,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.moodlephp.MoodlePHPFilter;
 
 public class MoodlePHPFilterTest extends TestFilterBase {
@@ -47,30 +46,29 @@ public class MoodlePHPFilterTest extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("Accessibility", "access", null, null, null, null);
         checkMulti("Accessibility help", "accesshelp", null, null, null, null);
-        checkMulti("Unrecognised options:\n" +
-                "  {$a}\n" +
-                "Please use --help option.", "cliunknowoption", null, null, null, null);
-        checkMulti("You cannot uninstall the \\'{$a->filter}\\' because it is part of the \\'{$a->module}\\' module.", "cannotdeletemodfilter", null, null, null, null);
-        checkMulti("List of groups or contexts whose members are allowed to create attributes. Separate multiple groups with \\';\\'. Usually something like \\'cn=teachers,ou=staff,o=myorg\\'", "auth_ldap_attrcreators", null, null, null, null);
+        checkMulti("Unrecognised options:\n" + "  {$a}\n" + "Please use --help option.", "cliunknowoption",
+                null, null, null, null);
+        checkMulti(
+                "You cannot uninstall the \\'{$a->filter}\\' because it is part of the \\'{$a->module}\\' module.",
+                "cannotdeletemodfilter", null, null, null, null);
+        checkMulti(
+                "List of groups or contexts whose members are allowed to create attributes. Separate multiple groups with \\';\\'. Usually something like \\'cn=teachers,ou=staff,o=myorg\\'",
+                "auth_ldap_attrcreators", null, null, null, null);
         checkMultiEnd();
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new MoodlePHPFilter(),
-                "src/test/resources/data/filters/MoodlePHP/file.php");
+        translateText(new MoodlePHPFilter(), "src/test/resources/data/filters/MoodlePHP/file.php");
     }
 
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new MoodlePHPFilter(), "MoodlePHP/filesAlign.php",
-                "MoodlePHP/filesAlign_gl.php", new IAlignCallback() {
-            public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                    String path, IFilter filter) {
-                ar.found = id.equals("access") && source.equals("Accessibility") && translation.equals("Accesibilidade");
-            }
-        });
+        align(new MoodlePHPFilter(), "MoodlePHP/filesAlign.php", "MoodlePHP/filesAlign_gl.php",
+                (IAlignCallback) (id, source, translation, isFuzzy, path,
+                        filter) -> ar.found = "access".equals(id) && "Accessibility".equals(source)
+                                && "Accesibilidade".equals(translation));
         assertTrue(ar.found);
     }
 

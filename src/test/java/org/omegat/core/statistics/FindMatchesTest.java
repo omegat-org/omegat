@@ -70,10 +70,10 @@ import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
-
 public class FindMatchesTest {
 
-    private static final File TMX_MATCH_EN_CA = new File("src/test/resources/data/tmx/test-match-stat-en-ca.tmx");
+    private static final File TMX_MATCH_EN_CA = new File(
+            "src/test/resources/data/tmx/test-match-stat-en-ca.tmx");
     private static final File TMX_EN_US_SR = new File("src/test/resources/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("src/test/resources/data/tmx/en-US_en-GB_fr_sr.tmx");
     private static final File TMX_SEGMENT = new File("src/test/resources/data/tmx/penalty-010/segment_1.tmx");
@@ -81,14 +81,13 @@ public class FindMatchesTest {
     private static final File TMX_MULTI = new File("src/test/resources/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
-
     /**
      * Test the case when a translation project is configured in segmented mode,
      * then change to non-segmented translation.
      * <p>
      * This is the case in which the original source text has three sentences.
-     * The project is configured in non-segmenting mode.
-     * There are three tmx entries for each sentence.
+     * The project is configured in non-segmenting mode. There are three tmx
+     * entries for each sentence.
      */
     @Test
     public void testSegmented() {
@@ -102,12 +101,10 @@ public class FindMatchesTest {
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
-                + "time on the site to become full members. "
-                + "Wow! "
+                + "time on the site to become full members. " + "Wow! "
                 + "Thanks for expanding the diversity of our community with new members!";
         String expectWhole = "Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment "
-                + "han passat prou temps en ellloc web per a convertir-se en membres plens. "
-                + "Bé! "
+                + "han passat prou temps en ellloc web per a convertir-se en membres plens. " + "Bé! "
                 + "Gràcies per ampliar la diversitat de la comunitat amb nous membres.";
         String expectFirst = "Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment "
                 + "han passat prou temps en ellloc web per a convertir-se en membres plens.";
@@ -153,11 +150,11 @@ public class FindMatchesTest {
      *
      * test conditions:
      * <ul>
-     *   <li>header adminlang=en</li>
-     *   <li>header srclang=en-US</li>
-     *   <li>header segtype=sentence</li>
-     *   <li>1st tuv: en-US  value: XXX</li>
-     *   <li>2nd tuv: sr     value: YYY</li>
+     * <li>header adminlang=en</li>
+     * <li>header srclang=en-US</li>
+     * <li>header segtype=sentence</li>
+     * <li>1st tuv: en-US value: XXX</li>
+     * <li>2nd tuv: sr value: YYY</li>
      * </ul>
      */
     @Test
@@ -184,18 +181,18 @@ public class FindMatchesTest {
      * <p>
      * test conditions:
      * <ul>
-     *   <li>header adminlang=en</li>
-     *   <li>header srclang=en-US</li>
-     *   <li>header segtype=sentence</li>
-     *   <li>1st tuv: en-US  value: XXx</li>
-     *   <li>2nd tuv: en-GB  value: XXX</li>
-     *   <li>3rd tuv: fr     value: YYY</li>
-     *   <li>4th tuv: sr     value: ZZZ</li>
+     * <li>header adminlang=en</li>
+     * <li>header srclang=en-US</li>
+     * <li>header segtype=sentence</li>
+     * <li>1st tuv: en-US value: XXx</li>
+     * <li>2nd tuv: en-GB value: XXX</li>
+     * <li>3rd tuv: fr value: YYY</li>
+     * <li>4th tuv: sr value: ZZZ</li>
      * </ul>
      * project properties:
      * <ul>
-     *   <li>source: en</li>
-     *   <li>target: cnr</li>
+     * <li>source: en</li>
+     * <li>target: cnr</li>
      * </ul>
      */
     @Test
@@ -252,7 +249,7 @@ public class FindMatchesTest {
         assertEquals(90, result.get(1).scores[0].score);
         assertEquals(10, result.get(1).scores[0].penalty);
         // FIXME
-        //assertTrue(result.get(1).projs[0].contains("penalty-010"));
+        // assertTrue(result.get(1).projs[0].contains("penalty-010"));
     }
 
     @Test
@@ -289,8 +286,7 @@ public class FindMatchesTest {
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
-                + "time on the site to become full members. "
-                + "Wow! "
+                + "time on the site to become full members. " + "Wow! "
                 + "Thanks for expanding the diversity of our community with new members!";
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         List<NearString> result = finder.search(srcText, false, iStopped, true);
@@ -329,7 +325,6 @@ public class FindMatchesTest {
         assertEquals("Other", result.get(2).translation); // source translation
     }
 
-
     @BeforeClass
     public static void setUpClass() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
@@ -354,21 +349,24 @@ public class FindMatchesTest {
         private final ITokenizer sourceTokenizer;
         private final ITokenizer targetTokenizer;
         private final Segmenter segmenter;
+        private final Object projectTMXLock = new Object();
 
         final ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
             public boolean existSourceInProject(String src) {
                 return false;
             }
+
             public boolean existEntryInProject(EntryKey key) {
                 return false;
             }
+
             public void clear() {
                 // do nothing
             }
         };
 
-        TestProject(final ProjectProperties prop, File testTmx, File externalTmx,
-                    ITokenizer sourceTokenizer, ITokenizer targetTokenizer, Segmenter segmenter) {
+        TestProject(final ProjectProperties prop, File testTmx, File externalTmx, ITokenizer sourceTokenizer,
+                ITokenizer targetTokenizer, Segmenter segmenter) {
             this.prop = prop;
             this.sourceTokenizer = sourceTokenizer;
             this.targetTokenizer = targetTokenizer;
@@ -383,14 +381,14 @@ public class FindMatchesTest {
                     Log.log(e);
                 }
             }
-       }
+        }
 
         public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
             if (projectTMX == null) {
                 return;
             }
             Map.Entry<String, TMXEntry>[] entries;
-            synchronized (checkOrphanedCallback) {
+            synchronized (projectTMXLock) {
                 entries = entrySetToArray(projectTMX.getDefaultsMap().entrySet());
             }
             for (Map.Entry<String, TMXEntry> en : entries) {
@@ -403,7 +401,7 @@ public class FindMatchesTest {
                 return;
             }
             Map.Entry<EntryKey, TMXEntry>[] entries;
-            synchronized (checkOrphanedCallback) {
+            synchronized (projectTMXLock) {
                 entries = entrySetToArray(projectTMX.getAlternativesMap().entrySet());
             }
             for (Map.Entry<EntryKey, TMXEntry> en : entries) {
@@ -426,8 +424,8 @@ public class FindMatchesTest {
         @Override
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
-            ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
-                    1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null), 1, null, null,
+                    Collections.emptyList()));
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
                     1, null, null, Collections.emptyList()));
             ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
@@ -487,8 +485,8 @@ public class FindMatchesTest {
     public static class ProjectTMXMock extends ProjectTMX {
 
         public ProjectTMXMock(Language sourceLanguage, Language targetLanguage,
-                           boolean isSentenceSegmentingEnabled,
-                          File file, CheckOrphanedCallback callback, Segmenter segmenter) throws Exception {
+                boolean isSentenceSegmentingEnabled, File file, CheckOrphanedCallback callback,
+                Segmenter segmenter) throws Exception {
             super(callback);
             load(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, segmenter);
         }

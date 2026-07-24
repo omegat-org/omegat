@@ -150,6 +150,8 @@ public class RealProject implements IProject {
     private volatile PreparedFileInfo tmxPrepared;
     private volatile PreparedFileInfo glossaryPrepared;
 
+    private final Object projectTMXLock = new Object();
+
     private boolean isOnlineMode;
 
     private RandomAccessFile raFile;
@@ -838,7 +840,7 @@ public class RealProject implements IProject {
 
                 try {
                     saveProjectProperties();
-                    synchronized (projectTMX) {
+                    synchronized (projectTMXLock) {
                         projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
                                 isProjectModified(), remoteRepositoryProvider.isManaged());
                     }
@@ -1031,7 +1033,7 @@ public class RealProject implements IProject {
         Log.logInfoRB("TEAM_REBASE_START");
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isManaged() && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
-            synchronized (projectTMX) {
+            synchronized (projectTMXLock) {
                 tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider,
                         config.getProjectRootDir(), tmxPath, getTMXRebaseOperation());
             }
@@ -1040,7 +1042,7 @@ public class RealProject implements IProject {
         final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
         if (processGlossary && glossaryPath != null
                 && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
-            synchronized (projectTMX) {
+            synchronized (projectTMXLock) {
                 glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
                         config.getProjectRootDir(), glossaryPath, getGlossaryRebaseOperation());
             }
@@ -1097,7 +1099,7 @@ public class RealProject implements IProject {
         File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            synchronized (projectTMX) {
+            synchronized (projectTMXLock) {
                 projectTMX.clear();
                 projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
                         config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
@@ -1365,7 +1367,7 @@ public class RealProject implements IProject {
      * Append new translation from auto TMX.
      */
     void appendFromAutoTMX(ExternalTMX autoTmx, boolean isEnforcedTMX) {
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             importHandler.process(autoTmx, isEnforcedTMX);
         }
     }
@@ -1389,7 +1391,7 @@ public class RealProject implements IProject {
     }
 
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             return new AllTranslations(projectTMX.getDefaultTranslation(ste.getSrcText()),
                     projectTMX.getMultipleTranslation(ste.getKey()));
         }
@@ -1424,7 +1426,7 @@ public class RealProject implements IProject {
             throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
         }
 
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             AllTranslations current = getAllTranslations(entry);
             boolean wasAlternative = current.getAlternativeTranslation().isTranslated();
             if (defaultTranslation) {
@@ -1538,7 +1540,7 @@ public class RealProject implements IProject {
     @Override
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
         Map.Entry<String, TMXEntry>[] entries;
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
         }
         for (Map.Entry<String, TMXEntry> en : entries) {
@@ -1549,7 +1551,7 @@ public class RealProject implements IProject {
     @Override
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
         Map.Entry<EntryKey, TMXEntry>[] entries;
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             entries = entrySetToArray(projectTMX.alternatives.entrySet());
         }
         for (Map.Entry<EntryKey, TMXEntry> en : entries) {

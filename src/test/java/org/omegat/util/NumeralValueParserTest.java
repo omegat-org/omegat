@@ -167,6 +167,24 @@ public class NumeralValueParserTest {
         assertFalse(NumeralValueParser.firstNumber("第十二章").isPresent());
     }
 
+    @Test
+    public void romanSystemCanBeExcluded() {
+        // Roman numerals in all their forms stop being numbers ...
+        assertFalse(NumeralValueParser.parseWhole("XII", false).isPresent());
+        assertFalse(NumeralValueParser.parseWhole("xii", false).isPresent());
+        assertFalse(NumeralValueParser.parseWhole("Ⅻ", false).isPresent()); // single codepoint U+216B
+        assertFalse(NumeralValueParser.parseValue("MMXXV", false).isPresent());
+        assertFalse(NumeralValueParser.firstNumber("Bravo won XL games.", false).isPresent());
+        assertFalse(NumeralValueParser.firstValue("See appendix Ⅷ for details.", false).isPresent());
+        // ... while every other system and plain digits are unaffected.
+        assertEquals(BigInteger.valueOf(12), NumeralValueParser.parseWhole("十二", false).orElse(null));
+        assertEquals(BigInteger.valueOf(12), NumeralValueParser.parseWhole("١٢", false).orElse(null));
+        assertEquals(BigInteger.valueOf(15), NumeralValueParser.firstNumber("weighs 15 grams", false).orElse(null));
+        assertTrue(NumeralValueParser.parseValue("2½", false).isPresent());
+        // The two-arg form with includeRoman still parses Roman.
+        assertEquals(BigInteger.valueOf(40), NumeralValueParser.parseWhole("XL", true).orElse(null));
+    }
+
     // --- higher-value numerals across writing systems -----------------------
 
     @Test

@@ -247,6 +247,21 @@ public class NumeralValueParserTest {
     }
 
     @Test
+    public void commaDecimalLocaleReadsGermanDecimals() {
+        java.util.Locale de = java.util.Locale.GERMANY;
+        assertEquals(r(99, 10), NumeralValueParser.parseValue("9,90", true, de).orElse(null));
+        assertEquals(r(99, 10), NumeralValueParser.firstValue("kostet 9,90€ pro Monat", true, de).orElse(null));
+        assertEquals(r(123456, 100), NumeralValueParser.parseValue("1.234,56", true, de).orElse(null));
+        // A dot-grouped integer is grouping, not a decimal, in a comma locale.
+        assertEquals(r(1234, 1), NumeralValueParser.parseValue("1.234", true, de).orElse(null));
+        // A list comma still separates: the digit-run fallback finds the 9.
+        assertEquals(r(9, 1), NumeralValueParser.firstValue("9, dann mehr", true, de).orElse(null));
+        // Without a locale the old dot-only behavior is unchanged.
+        assertEquals(r(9, 1), NumeralValueParser.firstValue("kostet 9,90€", true, null).orElse(null));
+        assertEquals(r(99, 10), NumeralValueParser.parseValue("9.90", true, null).orElse(null));
+    }
+
+    @Test
     public void signedIntegers() {
         assertValue("5", 5, 1);
         assertValue("-5", -5, 1);

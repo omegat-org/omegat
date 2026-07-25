@@ -36,6 +36,10 @@
 
 - 2025003 [Comprehensive Static Code Analysis Strategy](2025003.StaticCodeAnalysis.md)
 
+## Project stewardship
+
+- 2026004 [User Base Measurement and Market Position](2026004.UserBaseMeasurement.md)
+
 ## Debugging and Logging
 
 - 2024002 [Logging system and logging format](2024002.LoggingSystem.md)

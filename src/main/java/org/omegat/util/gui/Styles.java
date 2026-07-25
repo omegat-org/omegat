@@ -235,6 +235,11 @@ public final class Styles {
          */
         COLOR_MARK_COMES_FROM_TM_XENFORCED("OmegaT.markComesFromTmXenforced", "#ffccff"),
         /**
+         * The background color of a segment whose translation was pre-filled
+         * from the source file.
+         */
+        COLOR_MARK_COMES_FROM_SOURCE_FILE("OmegaT.markComesFromSourceFile", "#a0e8c0"),
+        /**
          * Alternative translation highlight color.
          */
         COLOR_MARK_ALT_TRANSLATION("OmegaT.markAltTranslations", "#33ffff"),

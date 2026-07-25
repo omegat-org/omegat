@@ -29,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
+import java.net.URI;
 import java.util.List;
 
 import org.junit.Test;
@@ -51,8 +51,8 @@ public class OpenDocFilterTest extends TestFilterBase {
         translate(new OpenDocFilter(), in.getPath());
 
         for (String f : new String[] { "content.xml", "styles.xml", "meta.xml" }) {
-            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
-                    new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
+            compareXML(new URI("jar", in.toURI() + "!/" + f, null).toURL(),
+                    new URI("jar", outFile.toURI() + "!/" + f, null).toURL());
         }
     }
 

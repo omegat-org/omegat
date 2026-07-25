@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketException;
-import java.net.URL;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.security.MessageDigest;
@@ -145,7 +145,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public void addForDeletion(String path) throws Exception {
+    public void addForDeletion(String path) {
         logger.atDebug().setMessage("Cannot add files for deletion for HTTP repositories. Skipping \"{0}\".")
                 .addArgument(path).log();
     }
@@ -206,7 +206,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             throw new IOException("Failed to create directory " + outputFile.getParentFile());
         }
 
-        HttpURLConnection connection = (HttpURLConnection) new URL(fileUrl).openConnection();
+        HttpURLConnection connection = (HttpURLConnection) URI.create(fileUrl).toURL().openConnection();
         try {
             // Set ETag if available
             if (currentEtag != null) {

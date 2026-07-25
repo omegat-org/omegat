@@ -26,7 +26,7 @@
 package org.omegat.util;
 
 import java.io.InputStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -91,7 +91,7 @@ public final class VersionChecker {
         }
         LOGGER.atDebug().log("Fetching latest version info");
         Properties props = new Properties();
-        try (InputStream in = new URL(VERSION_FILE).openStream()) {
+        try (InputStream in = URI.create(VERSION_FILE).toURL().openStream()) {
             props.load(in);
         }
         try {
@@ -118,7 +118,6 @@ public final class VersionChecker {
      * @param force
      *            If true, fetch the latest data from the server even if the
      *            current data is not stale yet
-     * @throws Exception
      */
     public boolean isUpToDate(boolean force) throws Exception {
         boolean result = compareVersions(force) >= 0;

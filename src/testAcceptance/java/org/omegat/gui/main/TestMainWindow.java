@@ -126,7 +126,7 @@ class TestMainWindow implements IMainWindow {
 
         UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getScaledFont()));
         CoreEvents.registerFontChangedEventListener(
-                newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
+                newFont -> font = (newFont instanceof FontUIResource fontUIResource) ? fontUIResource
                         : new FontUIResource(newFont));
 
         // Set up prompt to reload if segmentation or filters settings change

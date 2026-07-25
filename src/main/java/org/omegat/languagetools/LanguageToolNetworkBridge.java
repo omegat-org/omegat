@@ -36,6 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -270,7 +271,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             return Collections.emptyList();
         }
 
-        URL url = new URL(serverUrl);
+        URL url = URI.create(serverUrl).toURL();
         URLConnection conn = url.openConnection();
         conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
@@ -318,7 +319,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         // it'll do for now.
         String langsUrl = serverUrl.replace(CHECK_PATH, LANGS_PATH);
 
-        URL url = new URL(langsUrl);
+        URL url = URI.create(langsUrl).toURL();
         URLConnection conn = url.openConnection();
         conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
@@ -401,7 +402,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             return false;
         }
         try {
-            URL url = new URL(testUrl);
+            URL url = URI.create(testUrl).toURL();
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             try (OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(),

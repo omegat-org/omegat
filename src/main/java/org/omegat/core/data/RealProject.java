@@ -59,7 +59,6 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
@@ -245,6 +244,7 @@ public class RealProject implements IProject {
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
     }
 
+    @Override
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
@@ -1132,7 +1132,7 @@ public class RealProject implements IProject {
         List<String> srcPathList = FileUtil
                 .buildRelativeFilesList(root, Collections.emptyList(), config.getSourceRootExcludes())
                 .stream().sorted(StreamUtil.comparatorByList(getSourceFilesOrder()))
-                .collect(Collectors.toList());
+                .toList();
 
         List<String> errorSrcList = new ArrayList<>();
 
@@ -1635,7 +1635,7 @@ public class RealProject implements IProject {
     }
 
     @Override
-    public String getTargetPathForSourceFile(String currentSource) {
+    public @Nullable String getTargetPathForSourceFile(String currentSource) {
         if (StringUtil.isEmpty(currentSource)) {
             return null;
         }
@@ -1649,7 +1649,7 @@ public class RealProject implements IProject {
     }
 
     @Override
-    public List<String> getSourceFilesOrder() {
+    public @Nullable List<String> getSourceFilesOrder() {
         Path path = Paths.get(config.getProjectInternal(), OConsts.FILES_ORDER_FILENAME);
         try {
             return Files.readAllLines(path, StandardCharsets.UTF_8);

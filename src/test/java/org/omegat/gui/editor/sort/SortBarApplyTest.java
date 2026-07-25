@@ -124,6 +124,7 @@ public class SortBarApplyTest extends TestCore {
         SwingUtilities.invokeAndWait(bar::applyPending);
         assertTrue("the prepared sort must be applied when the worker finishes",
                 appliedLatch.await(15, TimeUnit.SECONDS));
+        drainEdt();
 
         MultiKeySorter sorter = (MultiKeySorter) applied;
         assertTrue(sorter.getKeys().get(0).random);
@@ -131,6 +132,18 @@ public class SortBarApplyTest extends TestCore {
         assertFalse("the drawn seed must be written back into the field", bar.seedText(0).isEmpty());
         assertTrue("the collapsed summary must mark the seeded random mode",
                 bar.buildSummary().endsWith(" ~°"));
+    }
+
+    /**
+     * The applied latch opens inside setSort, which the worker's done() calls
+     * BEFORE finishApply stores the applied keys - all on the EDT. An empty
+     * invokeAndWait afterwards both waits for that tail work and establishes
+     * the happens-before edge for reading the bar's state from this thread
+     * (without it the summary assertions race the EDT and fail on slow CI).
+     */
+    private static void drainEdt() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+        });
     }
 
     @Test
@@ -143,6 +156,7 @@ public class SortBarApplyTest extends TestCore {
         SwingUtilities.invokeAndWait(bar::applyPending);
         assertTrue("the prepared sort must be applied when the worker finishes",
                 appliedLatch.await(15, TimeUnit.SECONDS));
+        drainEdt();
 
         MultiKeySorter sorter = (MultiKeySorter) applied;
         assertTrue(sorter.getKeys().get(0).numeric);

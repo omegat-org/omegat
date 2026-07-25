@@ -28,12 +28,11 @@ package org.omegat.languagetools;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collections;
 import java.util.List;
@@ -111,26 +110,30 @@ public class LanguageToolTest {
         assertEquals(0, matches.size());
     }
 
-    private static final int[] FREE_PORT_RANGE = { 8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086 };
-
-    private int getFreePort() {
-        for (int p : FREE_PORT_RANGE) {
-            try (ServerSocket serverSocket = new ServerSocket(p)) {
-                return serverSocket.getLocalPort();
-            } catch (IOException ignored) {
-            }
-        }
-        return -1;
-    }
-
     @Test
     public void testRemoteServer() throws Exception {
-        int port = getFreePort();
-        assertNotEquals("Port has been already used.", -1, port);
-        HTTPServerConfig config = new HTTPServerConfig(port);
-        HTTPServer server = new HTTPServer(config);
+        HTTPServer server = null;
+        int port = -1;
+        // Let the OS assign an ephemeral port instead of probing a fixed
+        // port list that other processes on a busy CI machine may occupy.
+        // Another process can still grab the port between the probe and the
+        // bind, so retry a few times instead of failing on the first race.
+        for (int attempt = 0; attempt < 5 && server == null; attempt++) {
+            try (ServerSocket probe = new ServerSocket(0)) {
+                port = probe.getLocalPort();
+            }
+            try {
+                server = new HTTPServer(new HTTPServerConfig(port));
+                server.run();
+            } catch (Exception e) {
+                if (server != null) {
+                    server.stop();
+                    server = null;
+                }
+            }
+        }
+        assertNotNull("Could not bind the LanguageTool server to a free port.", server);
         try {
-            server.run();
 
             String urlBase = "http://localhost:" + port;
 

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Martin Fleurke
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,20 +26,29 @@
 
 package org.omegat.gui.editor.mark;
 
+import java.util.regex.Pattern;
+
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles;
 
 /**
- * Marker for Non-breakable space
+ * Marker for no-break spaces.
+ *
+ * Marks the regular NO-BREAK SPACE (U+00A0), the NARROW NO-BREAK SPACE
+ * (U+202F), which is the recommended space before tall punctuation in
+ * French typography and therefore common in translated text, and the
+ * FIGURE SPACE (U+2007), a non-breaking space as wide as a digit that is
+ * used to group digits in numbers.
  *
  * @author Martin Fleurke
+ * @author stephan.pakebusch at zollsoft.de
  */
 public class NBSPMarker extends AbstractMarker {
     public NBSPMarker() throws Exception {
         painter = new TransparentHighlightPainter(Styles.EditorColor.COLOR_NBSP.getColor(), 0.5F);
         toolTip = OStrings.getString("MARKER_NBSP");
-        patternChar = '\u00a0';
+        pattern = Pattern.compile("[\u00a0\u202f\u2007]");
     }
     protected boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkNBSP();

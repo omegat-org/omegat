@@ -168,6 +168,85 @@ public class SortBarTest {
     }
 
     @Test
+    public void applyIsAlwaysVisibleAndEnabledOnlyWhilePending() {
+        SortBar bar = new SortBar();
+        assertFalse("nothing staged yet, Apply must be disabled", bar.applyEnabled());
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        assertTrue("a staged change must enable Apply", bar.applyEnabled());
+        bar.discardPending();
+        assertFalse("discard must disable Apply again", bar.applyEnabled());
+    }
+
+    @Test
+    public void emptySeedFieldStillAllowsApplying() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectRandomDir(0, true, null); // seeded mode, field left empty
+        assertTrue("an empty seed must not block applying (it is drawn on apply)", bar.applyEnabled());
+    }
+
+    @Test
+    public void randomDirectionIsCarriedInKeys() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectRandomDir(0, false, null);
+        List<KeySpec> keys = bar.currentKeys();
+        assertEquals(1, keys.size());
+        assertTrue(keys.get(0).random);
+        assertEquals(null, keys.get(0).seed);
+
+        bar.selectRandomDir(0, true, 42L);
+        keys = bar.currentKeys();
+        assertTrue(keys.get(0).random);
+        assertEquals(Long.valueOf(42L), keys.get(0).seed);
+    }
+
+    @Test
+    public void randomIsOfferedForNonNumericKeysToo() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_LENGTH); // no numeric text mode offered
+        bar.selectRandomDir(0, true, 7L);
+        List<KeySpec> keys = bar.currentKeys();
+        assertTrue("random must be selectable for every key", keys.get(0).random);
+        assertEquals(Long.valueOf(7L), keys.get(0).seed);
+    }
+
+    @Test
+    public void seedFieldOnlyPresentForSeededRandom() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectRandomDir(0, false, null);
+        assertFalse("no seed field for the truly random mode", containsTextField(bar));
+        bar.selectRandomDir(0, true, null);
+        assertTrue("seed field must appear for the seeded mode", containsTextField(bar));
+    }
+
+    private static boolean containsTextField(java.awt.Container c) {
+        for (java.awt.Component child : c.getComponents()) {
+            if (child instanceof javax.swing.JTextField && child.getParent() != null) {
+                return true;
+            }
+            if (child instanceof java.awt.Container && containsTextField((java.awt.Container) child)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void randomSpecRoundTripsThroughSetSpec() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectRandomDir(0, true, 4711L);
+        List<KeySpec> keys = bar.currentKeys();
+        SortBar second = new SortBar();
+        second.setRowsForTest(keys);
+        assertEquals("4711", second.seedText(0));
+        assertTrue(second.currentKeys().get(0).random);
+        assertEquals(Long.valueOf(4711L), second.currentKeys().get(0).seed);
+    }
+
+    @Test
     public void numericModeIgnoredForNonNumericKey() {
         SortBar bar = new SortBar();
         bar.selectKey(0, SortKey.SOURCE_LENGTH); // not a text key -> only asc/desc offered

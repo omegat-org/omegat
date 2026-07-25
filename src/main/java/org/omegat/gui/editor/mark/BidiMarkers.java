@@ -25,6 +25,8 @@
 
 package org.omegat.gui.editor.mark;
 
+import java.awt.Color;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,27 +51,8 @@ public class BidiMarkers extends AbstractMarker {
     static final int LRO = 0x202d;
     static final int RLO = 0x202e;
 
-    private final HighlightPainter lreBidiPainter;
-    private final HighlightPainter rleBidiPainter;
-    private final HighlightPainter lrmBidiPainter;
-    private final HighlightPainter rlmBidiPainter;
-    private final HighlightPainter rloBidiPainter;
-    private final HighlightPainter lroBidiPainter;
-
     public BidiMarkers() throws Exception {
         super();
-        lreBidiPainter = new BidiPainter(LRE,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-        rleBidiPainter = new BidiPainter(RLE,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-        lrmBidiPainter = new BidiPainter(LRM,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-        rlmBidiPainter = new BidiPainter(RLM,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-        rloBidiPainter = new BidiPainter(RLO,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-        lroBidiPainter = new BidiPainter(LRO,
-                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
     }
 
     @Override
@@ -81,6 +64,16 @@ public class BidiMarkers extends AbstractMarker {
         if (!isActive || text == null || text.trim().isEmpty()) {
             return Collections.emptyList();
         }
+
+        // painters are created per call so that color preference changes take
+        // effect without restarting the application
+        Color color = Styles.EditorColor.COLOR_BIDIMARKERS.getColor();
+        HighlightPainter lreBidiPainter = new BidiPainter(LRE, color);
+        HighlightPainter rleBidiPainter = new BidiPainter(RLE, color);
+        HighlightPainter lrmBidiPainter = new BidiPainter(LRM, color);
+        HighlightPainter rlmBidiPainter = new BidiPainter(RLM, color);
+        HighlightPainter rloBidiPainter = new BidiPainter(RLO, color);
+        HighlightPainter lroBidiPainter = new BidiPainter(LRO, color);
 
         text = StringUtil.normalizeUnicode(text);
         List<Mark> marks = new ArrayList<>();

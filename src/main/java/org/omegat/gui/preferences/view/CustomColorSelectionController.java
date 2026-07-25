@@ -35,7 +35,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.swing.Icon;
@@ -48,6 +47,7 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles.EditorColor;
 
@@ -111,7 +111,6 @@ public class CustomColorSelectionController extends BasePreferencesController {
     private void recordTemporaryPreference() {
         getSelection().ifPresent(style -> {
             temporaryPreferences.put(style, panel.colorChooser.getColor());
-            setRestartRequired(hasChanges());
             updateSelectionIcon();
         });
     }
@@ -176,9 +175,6 @@ public class CustomColorSelectionController extends BasePreferencesController {
             Color color = temporaryPreferences.getOrDefault(style, style.getColor());
             setColorChooserWithoutNotifying(color);
         });
-        if (enabled) {
-            setRestartRequired(hasChanges());
-        }
     }
 
     private void resetCurrentColor() {
@@ -190,25 +186,25 @@ public class CustomColorSelectionController extends BasePreferencesController {
             } else {
                 panel.colorChooser.setColor(defaultColor);
             }
-            setRestartRequired(hasChanges());
+            // resetting is an explicit action and takes effect immediately
+            style.setColor(null);
+            PreferencesWindowController.refreshEditorView();
             updateSelectionIcon();
         });
-    }
-
-    private boolean hasChanges() {
-        return !temporaryPreferences.entrySet().stream()
-                .allMatch(e -> Objects.equals(e.getKey().getColor(), e.getValue()));
     }
 
     @Override
     public void restoreDefaults() {
         for (EditorColor style : EditorColor.values()) {
             temporaryPreferences.put(style, style.getDefault());
+            // restoring the defaults is an explicit action and takes effect
+            // immediately
+            style.setColor(null);
         }
         panel.colorStylesTable.repaint();
         panel.colorStylesTable.clearSelection();
         onSelectionChanged();
-        setRestartRequired(hasChanges());
+        PreferencesWindowController.refreshEditorView();
     }
 
     @Override

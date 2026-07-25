@@ -44,12 +44,6 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ReplaceMarker implements IMarker {
-    private final HighlightPainter highlightPainter;
-
-    public ReplaceMarker() {
-        highlightPainter = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_REPLACE.getColor(), 0.4F);
-    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
@@ -66,6 +60,10 @@ public class ReplaceMarker implements IMarker {
             return Collections.emptyList();
         }
 
+        // created per call so that color preference changes take effect
+        // without restarting the application
+        HighlightPainter highlightPainter = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_REPLACE.getColor(), 0.4F);
         List<Mark> r = new ArrayList<>(matches.size());
         for (SearchMatch s : matches) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, s.getStart(), s.getEnd());

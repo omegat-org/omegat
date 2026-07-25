@@ -8,6 +8,9 @@
       <literal>OmegaT</literal> menu on macOS).</para>
    <para>Use the search field at the top of the preferences list to look for
       specific items.</para>
+   <para>Use the
+      <guibutton>Apply</guibutton> button to save your changes and see their
+      effect without closing the dialog.</para>
    <para>Preferences set in this dialog are saved to the default 
       <link linkend="configuration.folder" role="xref">configuration folder</link> and apply to all
       translation projects unless you have specified a different configuration
@@ -388,7 +391,10 @@
       <section xml:id="dialogs.preferences.colours">
          <title xml:id="dialogs.preferences.colours.title"><guilabel>Colours</guilabel></title>
          <para>You can assign different colours for the various parts of the user
-            interface.</para>
+            interface. Colour changes take effect as soon as you confirm them
+            with
+            <guibutton>OK</guibutton> or
+            <guibutton>Apply</guibutton>.</para>
          <para>The Source Files progress colours shown in the
             <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
             window can also be changed here.</para>

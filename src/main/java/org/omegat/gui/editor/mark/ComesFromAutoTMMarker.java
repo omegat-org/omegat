@@ -42,21 +42,6 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    private final HighlightPainter painterXice;
-    private final HighlightPainter painterX100Pc;
-    private final HighlightPainter painterXauto;
-    private final HighlightPainter painterXenforced;
-
-    public ComesFromAutoTMMarker() {
-        painterXice = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
-        painterX100Pc = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
-        painterXauto = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
-        painterXenforced = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
-    }
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
@@ -69,19 +54,25 @@ public class ComesFromAutoTMMarker implements IMarker {
             return null;
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
+        // painters are created per call so that color preference changes take
+        // effect without restarting the application
         switch (e.linked) {
         case xICE:
-            m.painter = painterXice;
+            m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE);
             break;
         case x100PC:
-            m.painter = painterX100Pc;
+            m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC);
             break;
         case xAUTO:
-            m.painter = painterXauto;
+            m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO);
             break;
         case xENFORCED:
-            m.painter = painterXenforced;
+            m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED);
         }
         return Collections.singletonList(m);
+    }
+
+    private static HighlightPainter createPainter(Styles.EditorColor color) {
+        return new TransparentHighlightPainter(color.getColor(), 0.5F);
     }
 }

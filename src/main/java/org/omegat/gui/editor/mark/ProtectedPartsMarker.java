@@ -49,34 +49,29 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  */
 public class ProtectedPartsMarker implements IMarker {
-    private final HighlightPainter painterRtl;
-    private final AttributeSet attributesLtr;
-
-    public ProtectedPartsMarker() {
-        painterRtl = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
-        attributesLtr = Styles
-                .createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null, null);
-    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
-        HighlightPainter painter;
-        AttributeSet attrs;
-        if (Core.getEditor().isOrientationAllLtr()) {
-            attrs = attributesLtr;
-            painter = null;
-        } else {
-            attrs = null;
-            painter = painterRtl;
-        }
-
         if (ste.getProtectedParts().length == 0) {
             return null;
         }
         if (sourceText == null && translationText == null) {
             return null;
+        }
+
+        // painter and attributes are created per call so that color
+        // preference changes take effect without restarting the application
+        HighlightPainter painter;
+        AttributeSet attrs;
+        if (Core.getEditor().isOrientationAllLtr()) {
+            attrs = Styles.createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null,
+                    null);
+            painter = null;
+        } else {
+            attrs = null;
+            painter = new TransparentHighlightPainter(
+                    Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
         }
 
         List<Mark> r = new ArrayList<Mark>();

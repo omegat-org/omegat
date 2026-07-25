@@ -81,13 +81,17 @@ class SpellingIssueProvider implements IIssueProvider {
      *
      */
     static class SpellingIssue implements IIssue {
-        private static final Icon ICON = new SimpleColorIcon(EditorColor.COLOR_SPELLCHECK.getColor());
-        private static final AttributeSet ERROR_STYLE;
-        static {
+        // created on demand so that color preference changes take effect
+        // without restarting the application
+        private static Icon icon() {
+            return new SimpleColorIcon(EditorColor.COLOR_SPELLCHECK.getColor());
+        }
+
+        private static AttributeSet errorStyle() {
             SimpleAttributeSet attr = new SimpleAttributeSet();
             StyleConstants.setForeground(attr, EditorColor.COLOR_SPELLCHECK.getColor());
             StyleConstants.setBold(attr, true);
-            ERROR_STYLE = attr;
+            return attr;
         }
 
         private final SourceTextEntry ste;
@@ -102,7 +106,7 @@ class SpellingIssueProvider implements IIssueProvider {
 
         @Override
         public Icon getIcon() {
-            return ICON;
+            return icon();
         }
 
         @Override
@@ -128,7 +132,7 @@ class SpellingIssueProvider implements IIssueProvider {
             panel.lastTextPane.setText(tmxEntry.translation);
             StyledDocument doc = panel.lastTextPane.getStyledDocument();
             for (Token tok : misspelledTokens) {
-                doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
+                doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), errorStyle(), false);
             }
             panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
             return panel;

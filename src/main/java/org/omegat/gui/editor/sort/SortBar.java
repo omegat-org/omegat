@@ -45,11 +45,17 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.SwingWorker;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -163,6 +169,10 @@ public class SortBar extends CollapsibleBar {
             rp.add(row.keyCombo);
             rp.add(Box.createHorizontalStrut(4));
             rp.add(row.dirCombo);
+            if (row.dir() == Dir.RANDOM_SEEDED) {
+                rp.add(Box.createHorizontalStrut(4));
+                rp.add(row.seedField);
+            }
             // Reorder: every row but the first can move up, every row but the last can move down.
             if (i > 0) {
                 rp.add(Box.createHorizontalStrut(4));
@@ -183,9 +193,11 @@ public class SortBar extends CollapsibleBar {
             body.add(rp);
         }
 
-        if (hasPendingChanges()) {
-            body.add(pendingRow());
-        }
+        // Always present, so the user never wonders where Apply went (and a
+        // click cannot land on a component a rebuild just removed); enabled
+        // only while there is something to apply.
+        body.add(pendingRow());
+        refreshPendingControls();
 
         warning.setVisible(!appliedKeys.isEmpty());
         refreshPlusEnabled();
@@ -216,6 +228,17 @@ public class SortBar extends CollapsibleBar {
         return pr;
     }
 
+    /** Enable Apply/Discard exactly while there are staged, unapplied changes. */
+    private void refreshPendingControls() {
+        boolean pending = hasPendingChanges();
+        if (applyButton != null) {
+            applyButton.setEnabled(pending);
+        }
+        if (discardButton != null) {
+            discardButton.setEnabled(pending);
+        }
+    }
+
     /**
      * The "+" is shown on the last row only while another criterion still fits
      * ({@code rows < MAX_KEYS}); whenever it is shown it is enabled.
@@ -242,7 +265,35 @@ public class SortBar extends CollapsibleBar {
         JButton b = new JButton(symbol);
         b.setMargin(new Insets(0, 6, 0, 6));
         b.putClientProperty("JButton.buttonType", "square");
+        extendTooltipDismiss(b);
         return b;
+    }
+
+    /**
+     * Show this component's tooltips well beyond the Swing default (the
+     * multi-line direction explanations take longer than four seconds to
+     * read). There is no per-component API and no OmegaT-wide preference, so
+     * the global delay is raised while the pointer is over the component and
+     * restored when it leaves.
+     */
+    private static void extendTooltipDismiss(JComponent c) {
+        c.addMouseListener(new java.awt.event.MouseAdapter() {
+            private int previous = -1;
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                previous = ToolTipManager.sharedInstance().getDismissDelay();
+                ToolTipManager.sharedInstance().setDismissDelay(30_000);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                if (previous >= 0) {
+                    ToolTipManager.sharedInstance().setDismissDelay(previous);
+                    previous = -1;
+                }
+            }
+        });
     }
 
     private JButton createPlusButton() {
@@ -364,7 +415,9 @@ public class SortBar extends CollapsibleBar {
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).key != b.get(i).key || a.get(i).ascending != b.get(i).ascending
                     || a.get(i).numeric != b.get(i).numeric
-                    || a.get(i).ignoreRoman != b.get(i).ignoreRoman) {
+                    || a.get(i).ignoreRoman != b.get(i).ignoreRoman
+                    || a.get(i).random != b.get(i).random
+                    || !java.util.Objects.equals(a.get(i).seed, b.get(i).seed)) {
                 return false;
             }
         }
@@ -387,7 +440,11 @@ public class SortBar extends CollapsibleBar {
             KeySpec spec = appliedKeys.get(i);
             sb.append(i == 0 ? " " : ", ");
             sb.append(spec.key.getLocalizedName());
-            if (spec.numeric && spec.ignoreRoman) {
+            if (spec.random) {
+                // The degree sign marks the reproducible variant; the seed
+                // value itself stays in the row's field.
+                sb.append(spec.seed != null ? " ~°" : " ~");
+            } else if (spec.numeric && spec.ignoreRoman) {
                 sb.append(spec.ascending ? " 1↑" : " 1↓");
             } else if (spec.numeric) {
                 sb.append(spec.ascending ? " #↑" : " #↓");
@@ -402,6 +459,14 @@ public class SortBar extends CollapsibleBar {
     void applyPending() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
+        }
+        // An empty seed of a pseudo-random row is drawn from the clock now
+        // and written back into its field, so this very shuffle can be
+        // reproduced (and is what gets persisted).
+        for (CriterionRow row : rows) {
+            if (row.dir() == Dir.RANDOM_SEEDED && row.seed() == null) {
+                row.seedField.setText(Long.toString(System.currentTimeMillis()));
+            }
         }
         List<KeySpec> pend = currentKeys();
         if (pend.isEmpty()) {
@@ -535,6 +600,28 @@ public class SortBar extends CollapsibleBar {
         rows.get(rowIndex).dirCombo.setSelectedItem(Dir.of(ascending, numeric, ignoreRoman));
     }
 
+    /** Test/support hook: select a random direction; non-null {@code seed} selects the seeded mode. */
+    void selectRandomDir(int rowIndex, boolean seeded, @Nullable Long seed) {
+        rows.get(rowIndex).seedField.setText(seed != null ? String.valueOf(seed) : "");
+        rows.get(rowIndex).dirCombo.setSelectedItem(seeded ? Dir.RANDOM_SEEDED : Dir.RANDOM);
+    }
+
+    /** Test/support hook: the text of the row's seed field. */
+    String seedText(int rowIndex) {
+        return rows.get(rowIndex).seedField.getText();
+    }
+
+    /** Test/support hook: load rows from the given key specs, as a restore would. */
+    void setRowsForTest(List<KeySpec> keys) {
+        setRowsFromKeys(keys);
+        rebuild();
+    }
+
+    /** Test/support hook: whether the always-visible Apply button is enabled. */
+    boolean applyEnabled() {
+        return applyButton != null && applyButton.isEnabled();
+    }
+
     /** Test/support hook: the number of criterion rows currently shown. */
     int rowCount() {
         return rows.size();
@@ -566,24 +653,35 @@ public class SortBar extends CollapsibleBar {
         }
     }
 
-    /** Direction option: plain or value-based (numeric, optionally without Roman), ascending or descending. */
+    /**
+     * Direction option: plain or value-based (numeric, optionally without
+     * Roman) ascending/descending, or a direction-less random order (truly
+     * random per apply, or seeded and reproducible).
+     */
     private enum Dir {
-        ASC(true, false, false, "SORT_ASCENDING"),
-        DESC(false, false, false, "SORT_DESCENDING"),
-        NUM_ASC(true, true, false, "SORT_NUM_ASCENDING"),
-        NUM_DESC(false, true, false, "SORT_NUM_DESCENDING"),
-        NUM_NO_ROMAN_ASC(true, true, true, "SORT_NUM_NO_ROMAN_ASCENDING"),
-        NUM_NO_ROMAN_DESC(false, true, true, "SORT_NUM_NO_ROMAN_DESCENDING");
+        ASC(true, false, false, false, false, "SORT_ASCENDING"),
+        DESC(false, false, false, false, false, "SORT_DESCENDING"),
+        NUM_ASC(true, true, false, false, false, "SORT_NUM_ASCENDING"),
+        NUM_DESC(false, true, false, false, false, "SORT_NUM_DESCENDING"),
+        NUM_NO_ROMAN_ASC(true, true, true, false, false, "SORT_NUM_NO_ROMAN_ASCENDING"),
+        NUM_NO_ROMAN_DESC(false, true, true, false, false, "SORT_NUM_NO_ROMAN_DESCENDING"),
+        RANDOM(true, false, false, true, false, "SORT_RANDOM"),
+        RANDOM_SEEDED(true, false, false, true, true, "SORT_RANDOM_SEEDED");
 
         final boolean ascending;
         final boolean numeric;
         final boolean ignoreRoman;
+        final boolean random;
+        final boolean seeded;
         private final String labelKey;
 
-        Dir(boolean ascending, boolean numeric, boolean ignoreRoman, String labelKey) {
+        Dir(boolean ascending, boolean numeric, boolean ignoreRoman, boolean random, boolean seeded,
+                String labelKey) {
             this.ascending = ascending;
             this.numeric = numeric;
             this.ignoreRoman = ignoreRoman;
+            this.random = random;
+            this.seeded = seeded;
             this.labelKey = labelKey;
         }
 
@@ -600,14 +698,88 @@ public class SortBar extends CollapsibleBar {
             }
             return ascending ? ASC : DESC;
         }
+
+        static Dir of(KeySpec k) {
+            if (k.random) {
+                return k.seed != null ? RANDOM_SEEDED : RANDOM;
+            }
+            return of(k.ascending, k.numeric, k.ignoreRoman);
+        }
     }
 
     /** A single criterion: a sort key plus a direction (with optional numeric mode). */
     private final class CriterionRow {
         final JComboBox<Object> keyCombo = new JComboBox<>();
         final JComboBox<Dir> dirCombo = new JComboBox<>();
+        /**
+         * Seed of the pseudo-random order, only in the row while
+         * {@link Dir#RANDOM_SEEDED} is selected. Empty means: draw a clock
+         * seed on apply and write it back here, so the run stays reproducible
+         * after the fact.
+         */
+        final JTextField seedField = createSeedField();
         /** The last real (non-header) key selected, used to reject header clicks. */
         private SortKey lastSelectedKey = SortKey.NATURAL;
+
+        private JTextField createSeedField() {
+            JTextField f = new JTextField(6);
+            ((AbstractDocument) f.getDocument()).setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+                        throws BadLocationException {
+                    super.insertString(fb, offset, digitsOnly(string), attr);
+                }
+
+                @Override
+                public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                        throws BadLocationException {
+                    super.replace(fb, offset, length, digitsOnly(text), attrs);
+                }
+
+                private String digitsOnly(String s) {
+                    return s == null ? "" : s.replaceAll("[^0-9]", "");
+                }
+            });
+            f.setMaximumSize(f.getPreferredSize());
+            f.setToolTipText(OStrings.getString("SORT_BAR_SEED_TOOLTIP"));
+            extendTooltipDismiss(f);
+            // Never rebuild() from here: a click on Apply first moves the
+            // focus out of this field, and a rebuild's removeAll() would
+            // destroy the very button under the cursor before the click
+            // lands. The field only refreshes the Apply/Discard state.
+            f.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                    refreshPendingControls();
+                }
+
+                @Override
+                public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                    refreshPendingControls();
+                }
+
+                @Override
+                public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                    refreshPendingControls();
+                }
+            });
+            f.addActionListener(e -> applyPending());
+            return f;
+        }
+
+        /** The seed typed into the row, or null while the field is empty. */
+        @Nullable
+        Long seed() {
+            String text = seedField.getText().trim();
+            if (text.isEmpty()) {
+                return null;
+            }
+            try {
+                return Long.parseLong(text);
+            } catch (NumberFormatException ex) {
+                return null; // digits-only filter allows lengths beyond Long
+            }
+        }
 
         CriterionRow() {
             keyCombo.setRenderer(new KeyRenderer());
@@ -637,7 +809,15 @@ public class SortBar extends CollapsibleBar {
                     return;
                 }
                 rebuild();
+                if (dir() == Dir.RANDOM_SEEDED) {
+                    seedField.requestFocusInWindow();
+                }
             });
+        }
+
+        Dir dir() {
+            Dir d = (Dir) dirCombo.getSelectedItem();
+            return d != null ? d : Dir.ASC;
         }
 
         /**
@@ -696,6 +876,10 @@ public class SortBar extends CollapsibleBar {
                 dirCombo.addItem(Dir.NUM_NO_ROMAN_ASC);
                 dirCombo.addItem(Dir.NUM_NO_ROMAN_DESC);
             }
+            // Random works for every key: values without sort text shuffle by
+            // entry, which is the "file order + random" full-shuffle case.
+            dirCombo.addItem(Dir.RANDOM);
+            dirCombo.addItem(Dir.RANDOM_SEEDED);
             boolean keepCurrent = current != null && (!current.numeric || numeric);
             dirCombo.setSelectedItem(keepCurrent ? current : Dir.ASC);
             dirCombo.setEnabled(k != SortKey.NATURAL);
@@ -709,9 +893,9 @@ public class SortBar extends CollapsibleBar {
         }
 
         KeySpec spec() {
-            Dir d = (Dir) dirCombo.getSelectedItem();
-            if (d == null) {
-                d = Dir.ASC;
+            Dir d = dir();
+            if (d.random) {
+                return KeySpec.random(key(), d.seeded ? seed() : null);
             }
             return new KeySpec(key(), d.ascending, d.numeric, d.ignoreRoman);
         }
@@ -719,7 +903,8 @@ public class SortBar extends CollapsibleBar {
         void setSpec(KeySpec k) {
             keyCombo.setSelectedItem(k.key);
             updateDirOptions();
-            dirCombo.setSelectedItem(Dir.of(k.ascending, k.numeric, k.ignoreRoman));
+            dirCombo.setSelectedItem(Dir.of(k));
+            seedField.setText(k.random && k.seed != null ? String.valueOf(k.seed) : "");
         }
     }
 
@@ -780,8 +965,11 @@ public class SortBar extends CollapsibleBar {
                     text = d.getLabel();
                 }
                 // The alphabetical/numeric distinction only needs explaining
-                // when both are on offer.
-                if (numericOffered) {
+                // when both are on offer; random always does.
+                if (d.random) {
+                    tip = OStrings.getString(
+                            d.seeded ? "SORT_DIR_RANDOM_SEEDED_TOOLTIP" : "SORT_DIR_RANDOM_TOOLTIP");
+                } else if (numericOffered) {
                     if (!d.numeric) {
                         tip = OStrings.getString("SORT_DIR_ALPHA_TOOLTIP");
                     } else if (d.ignoreRoman) {
@@ -795,6 +983,7 @@ public class SortBar extends CollapsibleBar {
             if (list.getClientProperty("sortbar.tooltips") == null) {
                 list.putClientProperty("sortbar.tooltips", Boolean.TRUE);
                 ToolTipManager.sharedInstance().registerComponent(list);
+                extendTooltipDismiss(list);
             }
             super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
             setToolTipText(tip);

@@ -169,6 +169,58 @@ public class MultiKeySorterTest {
     }
 
     @Test
+    public void randomPreferenceRoundTrip() {
+        List<KeySpec> keys = Arrays.asList(KeySpec.random(SortKey.SOURCE_ALPHA, 42L),
+                KeySpec.random(SortKey.SOURCE_LENGTH, null));
+        String s = MultiKeySorter.toPreferenceString(keys);
+        assertEquals("SOURCE_ALPHA:rnd-42;SOURCE_LENGTH:rnd", s);
+
+        List<KeySpec> back = MultiKeySorter.fromPreferenceString(s);
+        assertEquals(2, back.size());
+        assertTrue(back.get(0).random);
+        assertEquals(Long.valueOf(42L), back.get(0).seed);
+        assertTrue(back.get(1).random);
+        assertEquals(null, back.get(1).seed);
+        // A malformed seed skips the entry, the rest still parses.
+        List<KeySpec> partial = MultiKeySorter.fromPreferenceString("SOURCE_ALPHA:rnd-abc;SOURCE_LENGTH:asc");
+        assertEquals(1, partial.size());
+        assertEquals(SortKey.SOURCE_LENGTH, partial.get(0).key);
+    }
+
+    @Test
+    public void seededRandomSortGroupsEqualValuesAndReproduces() {
+        List<SegmentBuilder> segs = Arrays.asList(seg(1, "Anna"), seg(2, "Bert"), seg(3, "Anna"),
+                seg(4, "Carla"), seg(5, "Bert"));
+        List<Integer> first = order(segs, sorter(KeySpec.random(SortKey.SOURCE_ALPHA, 42L)));
+        // Same seed, fresh sorter: identical order.
+        assertEquals(first, order(segs, sorter(KeySpec.random(SortKey.SOURCE_ALPHA, 42L))));
+        // Equal source texts stay adjacent; within a group the entry order holds.
+        assertTrue(first.indexOf(1) + 1 == first.indexOf(3));
+        assertTrue(first.indexOf(2) + 1 == first.indexOf(5));
+    }
+
+    @Test
+    public void clockSeededRandomShufflesPerSorter() {
+        // Without a seed every sorter instance draws its own; two instances
+        // are allowed to collide occasionally, ten identical draws are not.
+        List<SegmentBuilder> segs = new java.util.ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            segs.add(seg(i, "src" + i));
+        }
+        List<Integer> first = order(segs, sorter(KeySpec.random(SortKey.SOURCE_ALPHA, null)));
+        boolean anyDifferent = false;
+        for (int i = 0; i < 10 && !anyDifferent; i++) {
+            anyDifferent = !first.equals(order(segs, sorter(KeySpec.random(SortKey.SOURCE_ALPHA, null))));
+            try {
+                Thread.sleep(2); // the clock seed has millisecond granularity
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        assertTrue("ten clock-seeded sorters must not all agree", anyDifferent);
+    }
+
+    @Test
     public void fromPreferenceStringHandlesEmptyAndNull() {
         assertTrue(MultiKeySorter.fromPreferenceString(null).isEmpty());
         assertTrue(MultiKeySorter.fromPreferenceString("").isEmpty());

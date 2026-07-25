@@ -357,7 +357,7 @@ distributions {
                 from(layout.buildDirectory.dir('docs/manuals'))
             }
             into('docs/tips') {
-                from('src_docs/tips')
+                from('src/docs/tips')
             }
             from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'

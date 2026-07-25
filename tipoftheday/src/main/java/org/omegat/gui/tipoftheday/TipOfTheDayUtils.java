@@ -66,8 +66,10 @@ public final class TipOfTheDayUtils {
     }
 
     static boolean hasIndex() {
-        try (InputStream ignored = getIndexStream()) { // validate exists
-            return true;
+        try (InputStream is = getIndexStream()) { // validate exists
+            // try-with-resources tolerates a null resource, so check
+            // explicitly: no index found means there are no tips to show.
+            return is != null;
         } catch (Exception e) {
             return false;
         }

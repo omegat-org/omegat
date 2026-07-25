@@ -273,7 +273,7 @@ def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs
 firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
         description = 'Copy CSS files to target'
-        from layout.projectDirectory.file("src_docs/style/greeting.css")
+        from layout.projectDirectory.file("src/docs/style/greeting.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
 

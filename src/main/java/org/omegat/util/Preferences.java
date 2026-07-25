@@ -696,6 +696,21 @@ public final class Preferences {
         PROP_CHANGE_SUPPORT.addPropertyChangeListener(property, listener);
     }
 
+    /**
+     * Stop receiving notifications when preferences change.
+     */
+    public static void removePropertyChangeListener(PropertyChangeListener listener) {
+        PROP_CHANGE_SUPPORT.removePropertyChangeListener(listener);
+    }
+
+    /**
+     * Stop receiving notifications when the specified preference changes. The
+     * listener must be removed with the same property it was registered with.
+     */
+    public static void removePropertyChangeListener(String property, PropertyChangeListener listener) {
+        PROP_CHANGE_SUPPORT.removePropertyChangeListener(property, listener);
+    }
+
     public static void setFilters(Filters newFilters) {
         Filters oldValue = filters;
         filters = newFilters;

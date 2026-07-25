@@ -37,7 +37,6 @@ import org.omegat.util.TMXProp;
  * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
  * parameters in the setTranslation() method since count of parameters is too much. Structure of this class is
  * almost the save like TMXEntry.
- *
  * Instead, we will set all parameters into this class, then ProjectTMX will convert in into TMXEntry than
  * save internally.
  *
@@ -102,7 +101,7 @@ public class PrepareTMXEntry implements ITMXEntry {
     }
 
     public boolean hasProperties() {
-        return (otherProperties != null) && (otherProperties.size() > 0);
+        return (otherProperties != null) && (!otherProperties.isEmpty());
     }
 
     public List<TMXProp> getProperties() {
@@ -116,8 +115,7 @@ public class PrepareTMXEntry implements ITMXEntry {
         if (otherProperties == null) {
             return null;
         }
-        for (int i = 0; i < otherProperties.size(); i++) {
-            TMXProp kv = otherProperties.get(i);
+        for (TMXProp kv : otherProperties) {
             if (propType.equals(kv.getType())) {
                 return kv.getValue();
             }
@@ -129,8 +127,7 @@ public class PrepareTMXEntry implements ITMXEntry {
         if (otherProperties == null) {
             return false;
         }
-        for (int i = 0; i < otherProperties.size(); i++) {
-            TMXProp kv = otherProperties.get(i);
+        for (TMXProp kv : otherProperties) {
             if (propType.equals(kv.getType())) {
                 if (propValue == null) {
                     return true;
@@ -145,12 +142,10 @@ public class PrepareTMXEntry implements ITMXEntry {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
-                .append(", creator=").append(creator).append(", changer=").append(changer).append(", creationDate=")
-                .append(creationDate).append(", changeDate=").append(changeDate).append(", note=").append(note)
-                .append(", otherProperties=").append(otherProperties).append("]");
-        return builder.toString();
+        return "PrepareTMXEntry [source=" + source + ", translation=" + translation +
+                ", creator=" + creator + ", changer=" + changer + ", creationDate=" +
+                creationDate + ", changeDate=" + changeDate + ", note=" + note +
+                ", otherProperties=" + otherProperties + "]";
     }
 
 }

@@ -173,19 +173,34 @@ public class EditorProjectReloadLeakTest extends TestCore {
         assertTrue("EDT must drain", latch.await(15, TimeUnit.SECONDS));
     }
 
+    /**
+     * A weakly reachable referent must be cleared at the latest by the full
+     * collection the JVM runs before failing an allocation with
+     * OutOfMemoryError. Exhausting the heap therefore gives a deterministic
+     * verdict even when the advisory System.gc() rounds are ignored, which
+     * happens under load on the Windows CI runners.
+     */
     private boolean becomesUnreachable(WeakReference<?> ref) throws InterruptedException {
-        for (int attempt = 0; attempt < 50; attempt++) {
+        for (int attempt = 0; attempt < 10; attempt++) {
             System.gc();
             if (ref.get() == null) {
                 return true;
             }
             // Brief backoff: releasing can lag behind close by a few
             // milliseconds (monitor threads finish, EDT drains).
-            byte[][] pressure = new byte[64][];
-            for (int i = 0; i < pressure.length; i++) {
-                pressure[i] = new byte[1024 * 1024];
-            }
             Thread.sleep(10);
+        }
+        List<byte[]> hog = new ArrayList<>();
+        try {
+            while (ref.get() != null) {
+                hog.add(new byte[4 * 1024 * 1024]);
+            }
+        } catch (OutOfMemoryError oom) {
+            // Expected while the referent is still reachable: the heap
+            // filled up although the preceding full collection would have
+            // cleared a weakly reachable referent.
+        } finally {
+            hog.clear();
         }
         return ref.get() == null;
     }

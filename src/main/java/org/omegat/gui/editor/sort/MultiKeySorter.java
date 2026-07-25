@@ -49,27 +49,46 @@ import org.omegat.gui.editor.SegmentBuilder;
  */
 public class MultiKeySorter implements IEditorSorter {
 
-    /** One (key, direction, numeric) entry of the sort chain. */
+    /** One (key, direction, numeric/random mode) entry of the sort chain. */
     public static final class KeySpec {
         public final SortKey key;
         public final boolean ascending;
         public final boolean numeric;
         /** In numeric mode: treat Roman numerals as plain text, not as numbers. */
         public final boolean ignoreRoman;
+        /** Random order: equal key values stay grouped, distinct values shuffle. */
+        public final boolean random;
+        /**
+         * Seed of the random order; null means a fresh clock seed on every
+         * apply (and on every restore from preferences).
+         */
+        public final @Nullable Long seed;
 
         public KeySpec(SortKey key, boolean ascending) {
-            this(key, ascending, false, false);
+            this(key, ascending, false, false, false, null);
         }
 
         public KeySpec(SortKey key, boolean ascending, boolean numeric) {
-            this(key, ascending, numeric, false);
+            this(key, ascending, numeric, false, false, null);
         }
 
         public KeySpec(SortKey key, boolean ascending, boolean numeric, boolean ignoreRoman) {
+            this(key, ascending, numeric, ignoreRoman, false, null);
+        }
+
+        /** A randomly ordered key; {@code seed} null draws a clock seed per apply. */
+        public static KeySpec random(SortKey key, @Nullable Long seed) {
+            return new KeySpec(key, true, false, false, true, seed);
+        }
+
+        private KeySpec(SortKey key, boolean ascending, boolean numeric, boolean ignoreRoman,
+                boolean random, @Nullable Long seed) {
             this.key = key;
             this.ascending = ascending;
             this.numeric = numeric;
             this.ignoreRoman = ignoreRoman;
+            this.random = random;
+            this.seed = seed;
         }
     }
 
@@ -103,6 +122,14 @@ public class MultiKeySorter implements IEditorSorter {
     private final List<@Nullable TextKeyComparator> textComparators = new ArrayList<>();
 
     /**
+     * For random keys: the text the rank is computed over - the key's own sort
+     * text, or the entry number for keys that do not order by text (there the
+     * "grouping" degenerates to a full shuffle, which is the point of e.g.
+     * "file order + random"). Null for non-random keys.
+     */
+    private final List<@Nullable Function<SourceTextEntry, String>> randomExtractors = new ArrayList<>();
+
+    /**
      * @param keys
      *            ordered list of sort keys (primary first); may be empty
      * @param sourceLocale
@@ -114,11 +141,21 @@ public class MultiKeySorter implements IEditorSorter {
         for (KeySpec ks : this.keys) {
             TextKeyComparator tc = null;
             Optional<Function<SourceTextEntry, String>> extractor = ks.key.sortTextExtractor();
-            if (extractor.isPresent()) {
-                tc = ks.numeric && ks.key.supportsNumeric()
-                        ? new NumericValueComparator(collator, !ks.ignoreRoman, sourceLocale)
-                        : new CachingCollatorComparator(collator);
-                preparableKeys.add(new PreparableKey(extractor.get(), tc));
+            if (ks.random) {
+                long seed = ks.seed != null ? ks.seed : System.currentTimeMillis();
+                tc = new RandomValueComparator(collator, seed);
+                Function<SourceTextEntry, String> f = extractor
+                        .orElse(ste -> Integer.toString(ste.entryNum()));
+                preparableKeys.add(new PreparableKey(f, tc));
+                randomExtractors.add(f);
+            } else {
+                if (extractor.isPresent()) {
+                    tc = ks.numeric && ks.key.supportsNumeric()
+                            ? new NumericValueComparator(collator, !ks.ignoreRoman, sourceLocale)
+                            : new CachingCollatorComparator(collator);
+                    preparableKeys.add(new PreparableKey(extractor.get(), tc));
+                }
+                randomExtractors.add(null);
             }
             textComparators.add(tc);
         }
@@ -130,8 +167,16 @@ public class MultiKeySorter implements IEditorSorter {
             Comparator<SegmentBuilder> cmp = null;
             for (int i = 0; i < keys.size(); i++) {
                 KeySpec ks = keys.get(i);
-                Comparator<SegmentBuilder> next = ks.key.comparator(collator, ks.ascending,
-                        textComparators.get(i));
+                Comparator<SegmentBuilder> next;
+                Function<SourceTextEntry, String> rf = randomExtractors.get(i);
+                if (rf != null) {
+                    // Random has no direction; the key's own comparator would
+                    // ignore the rank comparator for keys without sort text.
+                    TextKeyComparator tc = textComparators.get(i);
+                    next = Comparator.comparing(sb -> rf.apply(sb.getSourceTextEntry()), tc);
+                } else {
+                    next = ks.key.comparator(collator, ks.ascending, textComparators.get(i));
+                }
                 cmp = (cmp == null) ? next : cmp.thenComparing(next);
             }
             // Stable tiebreaker: equal keys keep natural project order. This also keeps
@@ -190,9 +235,16 @@ public class MultiKeySorter implements IEditorSorter {
             if (sb.length() > 0) {
                 sb.append(';');
             }
-            sb.append(ks.key.name()).append(':').append(ks.ascending ? "asc" : "desc");
-            if (ks.numeric) {
-                sb.append(ks.ignoreRoman ? ":num-noroman" : ":num");
+            sb.append(ks.key.name()).append(':');
+            if (ks.random) {
+                // In the direction slot: older versions read an unknown
+                // direction as "ascending" instead of failing.
+                sb.append(ks.seed != null ? "rnd-" + ks.seed : "rnd");
+            } else {
+                sb.append(ks.ascending ? "asc" : "desc");
+                if (ks.numeric) {
+                    sb.append(ks.ignoreRoman ? ":num-noroman" : ":num");
+                }
             }
         }
         return sb.toString();
@@ -214,7 +266,18 @@ public class MultiKeySorter implements IEditorSorter {
             }
             try {
                 SortKey key = SortKey.valueOf(kv[0].trim());
-                boolean asc = !"desc".equalsIgnoreCase(kv[1].trim());
+                String dir = kv[1].trim();
+                if ("rnd".equalsIgnoreCase(dir)) {
+                    result.add(KeySpec.random(key, null));
+                    continue;
+                }
+                if (dir.regionMatches(true, 0, "rnd-", 0, 4)) {
+                    // A malformed seed throws NumberFormatException, an
+                    // IllegalArgumentException: the entry is skipped below.
+                    result.add(KeySpec.random(key, Long.parseLong(dir.substring(4))));
+                    continue;
+                }
+                boolean asc = !"desc".equalsIgnoreCase(dir);
                 String mode = kv.length >= 3 ? kv[2].trim() : "";
                 boolean noRoman = "num-noroman".equalsIgnoreCase(mode);
                 boolean numeric = noRoman || "num".equalsIgnoreCase(mode);

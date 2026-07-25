@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.gui.editor.sort;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -111,6 +112,25 @@ public class SortBarApplyTest extends TestCore {
 
         MultiKeySorter sorter = (MultiKeySorter) applied;
         assertTrue(sorter.getKeys().get(0).numeric);
+    }
+
+    @Test
+    public void randomApplyMaterializesTheSeedAndShowsTheSymbol() throws Exception {
+        setStubProject();
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.selectRandomDir(0, true, null); // seeded mode with an empty field
+
+        SwingUtilities.invokeAndWait(bar::applyPending);
+        assertTrue("the prepared sort must be applied when the worker finishes",
+                appliedLatch.await(15, TimeUnit.SECONDS));
+
+        MultiKeySorter sorter = (MultiKeySorter) applied;
+        assertTrue(sorter.getKeys().get(0).random);
+        assertNotNull("an empty seed must be drawn and persisted on apply", sorter.getKeys().get(0).seed);
+        assertFalse("the drawn seed must be written back into the field", bar.seedText(0).isEmpty());
+        assertTrue("the collapsed summary must mark the seeded random mode",
+                bar.buildSummary().endsWith(" ~°"));
     }
 
     @Test

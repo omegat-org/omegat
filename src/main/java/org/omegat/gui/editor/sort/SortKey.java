@@ -387,6 +387,14 @@ public enum SortKey {
     }
 
     /**
+     * True if this key orders target-language text; its collation and number
+     * parsing then follow the project's target locale, not the source locale.
+     */
+    public boolean usesTargetText() {
+        return this == TARGET_ALPHA || this == TARGET_RHYME || this == TARGET_LENGTH;
+    }
+
+    /**
      * The entry-level extractor of the text this key actually orders by (for
      * the rhyme keys: the reversed text); empty for non-text keys. Every key
      * with such an extractor can have its sort key pre-computed by the sort

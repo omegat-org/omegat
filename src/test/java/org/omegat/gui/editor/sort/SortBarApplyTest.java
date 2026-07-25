@@ -199,5 +199,10 @@ public class SortBarApplyTest extends TestCore {
         public Language getSourceLanguage() {
             return new Language("en");
         }
+
+        @Override
+        public Language getTargetLanguage() {
+            return new Language("de");
+        }
     }
 }

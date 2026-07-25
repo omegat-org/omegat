@@ -118,6 +118,9 @@ public class MultiKeySorter implements IEditorSorter {
         }
     }
 
+    /** Collator of the target locale, for keys that order target text. */
+    private final Collator targetCollator;
+
     /** The primable text comparator of each key, or null for non-text keys. Parallel to {@link #keys}. */
     private final List<@Nullable TextKeyComparator> textComparators = new ArrayList<>();
 
@@ -136,14 +139,30 @@ public class MultiKeySorter implements IEditorSorter {
      *            locale used for text collation
      */
     public MultiKeySorter(List<KeySpec> keys, Locale sourceLocale) {
+        this(keys, sourceLocale, sourceLocale);
+    }
+
+    /**
+     * @param keys
+     *            ordered list of sort keys (primary first); may be empty
+     * @param sourceLocale
+     *            locale for collation and number parsing of source-text keys
+     * @param targetLocale
+     *            same for target-text keys: every text column collates with
+     *            its own language
+     */
+    public MultiKeySorter(List<KeySpec> keys, Locale sourceLocale, Locale targetLocale) {
         this.keys = new ArrayList<>(keys);
         this.collator = Collator.getInstance(sourceLocale);
+        this.targetCollator = Collator.getInstance(targetLocale);
         for (KeySpec ks : this.keys) {
+            Collator coll = collatorFor(ks);
+            Locale numberLocale = ks.key.usesTargetText() ? targetLocale : sourceLocale;
             TextKeyComparator tc = null;
             Optional<Function<SourceTextEntry, String>> extractor = ks.key.sortTextExtractor();
             if (ks.random) {
                 long seed = ks.seed != null ? ks.seed : System.currentTimeMillis();
-                tc = new RandomValueComparator(collator, seed);
+                tc = new RandomValueComparator(coll, seed);
                 Function<SourceTextEntry, String> f = extractor
                         .orElse(ste -> Integer.toString(ste.entryNum()));
                 preparableKeys.add(new PreparableKey(f, tc));
@@ -151,14 +170,18 @@ public class MultiKeySorter implements IEditorSorter {
             } else {
                 if (extractor.isPresent()) {
                     tc = ks.numeric && ks.key.supportsNumeric()
-                            ? new NumericValueComparator(collator, !ks.ignoreRoman, sourceLocale)
-                            : new CachingCollatorComparator(collator);
+                            ? new NumericValueComparator(coll, !ks.ignoreRoman, numberLocale)
+                            : new CachingCollatorComparator(coll);
                     preparableKeys.add(new PreparableKey(extractor.get(), tc));
                 }
                 randomExtractors.add(null);
             }
             textComparators.add(tc);
         }
+    }
+
+    private Collator collatorFor(KeySpec ks) {
+        return ks.key.usesTargetText() ? targetCollator : collator;
     }
 
     @Override
@@ -175,7 +198,7 @@ public class MultiKeySorter implements IEditorSorter {
                     TextKeyComparator tc = textComparators.get(i);
                     next = Comparator.comparing(sb -> rf.apply(sb.getSourceTextEntry()), tc);
                 } else {
-                    next = ks.key.comparator(collator, ks.ascending, textComparators.get(i));
+                    next = ks.key.comparator(collatorFor(ks), ks.ascending, textComparators.get(i));
                 }
                 cmp = (cmp == null) ? next : cmp.thenComparing(next);
             }

@@ -44,8 +44,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.Bidi;
 import java.text.Collator;
+import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -95,6 +97,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -113,6 +117,7 @@ import org.omegat.util.NumberAutoConverter.RenderOptions;
 import org.omegat.util.NumeralValueParser;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -204,10 +209,11 @@ public class NumberAutoConvertWindow {
     private final JTable table = new JTable(model) {
         @Override
         public String getToolTipText(MouseEvent e) {
-            // The confidence breakdown is shown for the whole row.
+            // Everything known about the segment plus the confidence
+            // breakdown is shown for the whole row.
             int row = rowAtPoint(e.getPoint());
             if (row >= 0 && row < model.rows.size()) {
-                return confidenceTooltip(model.rows.get(row).proposal);
+                return rowTooltip(model.rows.get(row));
             }
             return super.getToolTipText(e);
         }
@@ -1182,17 +1188,87 @@ public class NumberAutoConvertWindow {
         return f;
     }
 
-    private static String confidenceTooltip(Proposal p) {
-        java.text.NumberFormat pct = guiPercent();
+    private static String rowTooltip(Row r) {
         StringBuilder sb = new StringBuilder("<html>");
+        appendConfidenceHtml(sb, r.proposal);
+        sb.append("<hr>");
+        sb.append(segmentInfoHtml(r.entry, Core.getProject().getTranslationInfo(r.entry)));
+        sb.append("</html>");
+        return sb.toString();
+    }
+
+    /**
+     * The segment-context half of the row tooltip: everything else the
+     * project knows about the entry, one line per piece of information,
+     * lines omitted when the information is absent.
+     */
+    static String segmentInfoHtml(SourceTextEntry entry, @Nullable TMXEntry info) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<b>")
+                .append(MessageFormat.format(OStrings.getString("NUMBERCONVERT_TIP_SEGMENT"),
+                        String.valueOf(entry.entryNum())))
+                .append("</b> — ").append(escapeHtml(entry.getKey().file)).append("<br>");
+        if (!StringUtil.isEmpty(entry.getKey().id)) {
+            appendTipLine(sb, "NUMBERCONVERT_TIP_ID", escapeHtml(entry.getKey().id));
+        }
+        if (!StringUtil.isEmpty(entry.getComment())) {
+            appendTipLine(sb, "NUMBERCONVERT_TIP_COMMENT", escapeHtml(clip(entry.getComment())));
+        }
+        if (entry.getDuplicate() != SourceTextEntry.DUPLICATE.NONE) {
+            appendTipLine(sb, "NUMBERCONVERT_TIP_REPEATED",
+                    String.valueOf(entry.getNumberOfDuplicates()));
+        }
+        if (info != null && info.isTranslated()) {
+            appendTipLine(sb, "NUMBERCONVERT_TIP_TRANSLATION",
+                    escapeHtml(clip(info.getTranslationText())));
+            if (!StringUtil.isEmpty(info.getChanger()) && info.getChangeDate() != 0) {
+                appendTipLine(sb, "NUMBERCONVERT_TIP_CHANGED", escapeHtml(info.getChanger()),
+                        formatTipDate(info.getChangeDate()));
+            } else if (!StringUtil.isEmpty(info.getCreator()) && info.getCreationDate() != 0) {
+                appendTipLine(sb, "NUMBERCONVERT_TIP_CREATED", escapeHtml(info.getCreator()),
+                        formatTipDate(info.getCreationDate()));
+            }
+            if (!StringUtil.isEmpty(info.getNote())) {
+                appendTipLine(sb, "NUMBERCONVERT_TIP_NOTE", escapeHtml(clip(info.getNote())));
+            }
+            if (info.linked != null) {
+                appendTipLine(sb, "NUMBERCONVERT_TIP_ORIGIN", info.linked.name());
+            } else if (!StringUtil.isEmpty(info.origin)) {
+                appendTipLine(sb, "NUMBERCONVERT_TIP_ORIGIN", escapeHtml(info.origin));
+            }
+        }
+        return sb.toString();
+    }
+
+    private static void appendTipLine(StringBuilder sb, String key, Object... args) {
+        sb.append(MessageFormat.format(OStrings.getString(key), args)).append("<br>");
+    }
+
+    private static String formatTipDate(long millis) {
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+                .format(new Date(millis));
+    }
+
+    /** Minimal escaping for user text embedded in the HTML tooltip. */
+    private static String escapeHtml(String s) {
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
+
+    /** Notes and comments can be arbitrarily long; keep the tooltip readable. */
+    private static String clip(String s) {
+        String flat = s.replace('\n', ' ').trim();
+        return flat.length() > 160 ? flat.substring(0, 159) + "…" : flat;
+    }
+
+    private static void appendConfidenceHtml(StringBuilder sb, Proposal p) {
+        java.text.NumberFormat pct = guiPercent();
         // Numbers first so the signed values line up and read at a glance; the
         // base value carries a plus sign like every other contribution.
         for (ConfidenceFactor f : p.getConfidenceFactors()) {
             String value = (f.getDelta() >= 0 ? "+" : "") + pct.format(f.getDelta());
             sb.append(value).append(' ').append(factorLabel(f.getId())).append("<br>");
         }
-        sb.append("<b>= ").append(pct.format(p.getConfidence())).append("</b></html>");
-        return sb.toString();
+        sb.append("<b>= ").append(pct.format(p.getConfidence())).append("</b>");
     }
 
     private static String factorLabel(String id) {

@@ -169,6 +169,31 @@ public class MultiKeySorterTest {
     }
 
     @Test
+    public void targetKeysCollateWithTheTargetLocale() {
+        // Swedish sorts ö after z; English sorts it like o. The target-text
+        // key must follow the TARGET locale, not the source locale.
+        org.omegat.core.data.IProject project = mock(org.omegat.core.data.IProject.class);
+        org.omegat.core.data.TMXEntry oel = mock(org.omegat.core.data.TMXEntry.class);
+        when(oel.getTranslationText()).thenReturn("öl");
+        org.omegat.core.data.TMXEntry zebra = mock(org.omegat.core.data.TMXEntry.class);
+        when(zebra.getTranslationText()).thenReturn("zebra");
+
+        List<SegmentBuilder> segs = Arrays.asList(seg(1, "a"), seg(2, "b"));
+        when(project.getTranslationInfo(segs.get(0).getSourceTextEntry())).thenReturn(oel);
+        when(project.getTranslationInfo(segs.get(1).getSourceTextEntry())).thenReturn(zebra);
+        org.omegat.core.Core.setProject(project);
+        try {
+            KeySpec targetAlpha = new KeySpec(SortKey.TARGET_ALPHA, true);
+            assertEquals(Arrays.asList(2, 1), order(segs, new MultiKeySorter(
+                    Arrays.asList(targetAlpha), Locale.ENGLISH, Locale.forLanguageTag("sv"))));
+            assertEquals(Arrays.asList(1, 2), order(segs, new MultiKeySorter(
+                    Arrays.asList(targetAlpha), Locale.ENGLISH, Locale.ENGLISH)));
+        } finally {
+            org.omegat.core.Core.setProject(new org.omegat.core.data.NotLoadedProject());
+        }
+    }
+
+    @Test
     public void randomPreferenceRoundTrip() {
         List<KeySpec> keys = Arrays.asList(KeySpec.random(SortKey.SOURCE_ALPHA, 42L),
                 KeySpec.random(SortKey.SOURCE_LENGTH, null));

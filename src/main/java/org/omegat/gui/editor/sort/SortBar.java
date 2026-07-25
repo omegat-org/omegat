@@ -474,11 +474,12 @@ public class SortBar extends CollapsibleBar {
             finishApply(pend);
             return;
         }
-        Locale loc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        Locale srcLoc = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        Locale tgtLoc = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         // Every sort goes through the background preparation pass with its
         // progress bar; for sorts without preparable text keys the pass is a
         // fast counting sweep, so the feedback is consistent either way.
-        prepareAndApply(new MultiKeySorter(pend, loc), pend);
+        prepareAndApply(new MultiKeySorter(pend, srcLoc, tgtLoc), pend);
     }
 
     /** Record the applied criteria and collapse the bar. */

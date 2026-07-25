@@ -153,7 +153,7 @@ tasks.register("linuxDistDeb", Exec) {
             '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
             '--dest', file(layout.buildDirectory.file('distributions')),
             '--vendor', project.property('org.omegat.vendor'),
-            '--resource-dir', file("release/jpackage-specific/linux/"),
+            '--resource-dir', file("release/jpackage-specific"),
             '--about-url', project.property('org.omegat.url'),
             '--license-file', file(layout.projectDirectory.file("release/OmegaT-license.txt")),
             '--install-dir', '/opt/omegat-org',

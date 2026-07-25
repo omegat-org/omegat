@@ -129,6 +129,33 @@ public class SortBarTest {
     }
 
     @Test
+    public void symbolButtonsStayCompactAcrossLookAndFeels() {
+        SortBar bar = new SortBar();
+        bar.selectKey(0, SortKey.SOURCE_ALPHA);
+        bar.addRow(); // two rows, so the move and remove buttons all exist
+        List<javax.swing.JButton> symbols = new java.util.ArrayList<>();
+        collectSymbolButtons(bar, symbols);
+        assertFalse("expected the +/−/arrow buttons in the expanded bar", symbols.isEmpty());
+        for (javax.swing.JButton b : symbols) {
+            assertEquals("margin of '" + b.getText() + "'", new java.awt.Insets(0, 6, 0, 6), b.getMargin());
+            assertEquals("button type of '" + b.getText() + "'", "square",
+                    b.getClientProperty("JButton.buttonType"));
+        }
+    }
+
+    private static void collectSymbolButtons(java.awt.Container c, List<javax.swing.JButton> out) {
+        for (java.awt.Component child : c.getComponents()) {
+            if (child instanceof javax.swing.JButton
+                    && List.of("+", "−", "▲", "▼").contains(((javax.swing.JButton) child).getText())) {
+                out.add((javax.swing.JButton) child);
+            }
+            if (child instanceof java.awt.Container) {
+                collectSymbolButtons((java.awt.Container) child, out);
+            }
+        }
+    }
+
+    @Test
     public void romanFreeNumericDirectionIsCarriedInKeys() {
         SortBar bar = new SortBar();
         bar.selectKey(0, SortKey.SOURCE_FILE); // supports numeric

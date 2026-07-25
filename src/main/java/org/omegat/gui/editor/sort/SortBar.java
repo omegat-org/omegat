@@ -231,17 +231,29 @@ public class SortBar extends CollapsibleBar {
         return OStrings.getString(index == 0 ? "SORT_BAR_SORT_BY" : "SORT_BAR_THEN_BY");
     }
 
+    /**
+     * A small symbol button (+, −, ▲, ▼). The "square" button type keeps it
+     * compact under every look and feel: Aqua otherwise ignores the margins
+     * and paints a wide rounded bezel with an invisible focus halo; FlatLaf
+     * merely drops the corner rounding; the other L&Fs ignore the property
+     * and already honor the margins.
+     */
+    private static JButton symbolButton(String symbol) {
+        JButton b = new JButton(symbol);
+        b.setMargin(new Insets(0, 6, 0, 6));
+        b.putClientProperty("JButton.buttonType", "square");
+        return b;
+    }
+
     private JButton createPlusButton() {
-        JButton plus = new JButton("+");
-        plus.setMargin(new Insets(0, 6, 0, 6));
+        JButton plus = symbolButton("+");
         plus.setToolTipText(OStrings.getString("SORT_BAR_ADD"));
         plus.addActionListener(e -> addRow());
         return plus;
     }
 
     private JButton minusButton(int index) {
-        JButton minus = new JButton("−");
-        minus.setMargin(new Insets(0, 6, 0, 6));
+        JButton minus = symbolButton("−");
         minus.setToolTipText(OStrings.getString("SORT_BAR_REMOVE_KEY"));
         minus.addActionListener(e -> removeRow(index));
         // Removing makes sense for any row when several exist; with a single row
@@ -253,8 +265,7 @@ public class SortBar extends CollapsibleBar {
 
     /** An up ({@code delta < 0}) or down ({@code delta > 0}) reorder button for the given row. */
     private JButton moveButton(int index, int delta) {
-        JButton b = new JButton(delta < 0 ? "▲" : "▼");
-        b.setMargin(new Insets(0, 6, 0, 6));
+        JButton b = symbolButton(delta < 0 ? "▲" : "▼");
         b.setToolTipText(OStrings.getString(delta < 0 ? "SORT_BAR_MOVE_UP" : "SORT_BAR_MOVE_DOWN"));
         b.addActionListener(e -> moveRow(index, delta));
         return b;

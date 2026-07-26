@@ -47,12 +47,6 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    private final HighlightPainter transtipsUnderliner;
-
-    public TransTipsMarker() {
-        transtipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
-                Styles.EditorColor.COLOR_TRANSTIPS.getColor());
-    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
@@ -67,6 +61,10 @@ public class TransTipsMarker implements IMarker {
         if (glossaryEntries == null || glossaryEntries.isEmpty()) {
             return null;
         }
+        // created per call so that color preference changes take effect
+        // without restarting the application
+        HighlightPainter transtipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
+                Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
         List<Mark> marks = new ArrayList<>();
 
@@ -74,12 +72,13 @@ public class TransTipsMarker implements IMarker {
         for (GlossaryEntry ent : glossaryEntries) {
             String tooltip = renderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
-            marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
+            marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip, transtipsUnderliner));
         }
         return marks;
     }
 
-    private List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip) {
+    private List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip,
+            HighlightPainter underliner) {
         if (tokens.isEmpty() || srcText.isEmpty()) {
             return Collections.emptyList();
         }
@@ -103,7 +102,7 @@ public class TransTipsMarker implements IMarker {
                     newMark = new Mark(Mark.ENTRY_PART.SOURCE, currStart, currEnd);
                     result.add(newMark);
                 }
-                newMark.painter = transtipsUnderliner;
+                newMark.painter = underliner;
                 newMark.toolTipText = tooltip;
             }
         }

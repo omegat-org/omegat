@@ -27,9 +27,6 @@
 
 package org.omegat.gui.editor.mark;
 
-import javax.swing.text.AttributeSet;
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.util.OStrings;
@@ -44,17 +41,9 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  */
 public class RemoveTagMarker extends AbstractMarker {
-    private final HighlightPainter painterRtl;
-    private final AttributeSet attributesLtrSource;
-    private final AttributeSet attributesLtrTranslation;
 
     public RemoveTagMarker() throws Exception {
-        painterRtl = new TransparentHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), 0.2f);
         toolTip = OStrings.getString("MARKER_REMOVETAG");
-
-        attributesLtrSource = Styles.createAttributeSet(null, null, null, true);
-        attributesLtrTranslation = Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(),
-                null, null, null);
         CoreEvents.registerProjectChangeListener(e -> pattern = PatternConsts.getRemovePattern());
     }
 
@@ -65,12 +54,17 @@ public class RemoveTagMarker extends AbstractMarker {
 
     @Override
     protected void initDrawers(boolean isSource, boolean isActive) {
+        // painters and attributes are created per call so that color
+        // preference changes take effect without restarting the application
         if (Core.getEditor().isOrientationAllLtr()) {
-            attributes = isSource ? attributesLtrSource : attributesLtrTranslation;
+            attributes = isSource ? Styles.createAttributeSet(null, null, null, true)
+                    : Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(),
+                            null, null, null);
             painter = null;
         } else {
             attributes = null;
-            painter = painterRtl;
+            painter = new TransparentHighlightPainter(
+                    Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), 0.2f);
         }
     }
 }

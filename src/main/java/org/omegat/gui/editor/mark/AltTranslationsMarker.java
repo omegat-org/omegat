@@ -29,14 +29,10 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.gui.Styles;
 
-import javax.swing.text.Highlighter;
 import java.util.Collections;
 import java.util.List;
 
 public class AltTranslationsMarker extends AbstractMarker {
-
-    private final Highlighter.HighlightPainter painter = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor(), 0.5F);
 
     public AltTranslationsMarker() throws Exception {
         super();
@@ -56,7 +52,10 @@ public class AltTranslationsMarker extends AbstractMarker {
 
         if (!Core.getProject().getTranslationInfo(ste).defaultTranslation) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-            m.painter = painter;
+            // created per call so that color preference changes take effect
+            // without restarting the application
+            m.painter = new TransparentHighlightPainter(
+                    Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor(), 0.5F);
             return Collections.singletonList(m);
         }
 

@@ -90,8 +90,6 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 class EntryListPane extends JTextPane {
-    protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Styles.EditorColor.COLOR_SEARCH_FOUND_MARK.getColor(), null, true, null);
-    protected static final AttributeSet REPLACE_MARK = Styles.createAttributeSet(Styles.EditorColor.COLOR_SEARCH_REPLACE_MARK.getColor(), null, false, null);
     protected static final int MARKS_PER_REQUEST = 100;
     protected static final String ENTRY_SEPARATOR = "---------\n";
     private static final String KEY_GO_TO_NEXT_SEGMENT = "gotoNextSegmentMenuItem";
@@ -398,14 +396,20 @@ class EntryListPane extends JTextPane {
             }
 
             StyledDocument doc = (StyledDocument) getDocument();
+            // attributes are created per request so that color preference
+            // changes take effect without restarting the application
+            AttributeSet foundMark = Styles.createAttributeSet(
+                    Styles.EditorColor.COLOR_SEARCH_FOUND_MARK.getColor(), null, true, null);
+            AttributeSet replaceMark = Styles.createAttributeSet(
+                    Styles.EditorColor.COLOR_SEARCH_REPLACE_MARK.getColor(), null, false, null);
             List<SearchMatch> matchesToMark = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
             for (SearchMatch m : matchesToMark) {
-                doc.setCharacterAttributes(m.getStart(), m.getLength(), FOUND_MARK, true);
+                doc.setCharacterAttributes(m.getStart(), m.getLength(), foundMark, true);
             }
             matchesToMark.clear();
             List<SearchMatch> replToMark = replMatches.subList(0, Math.min(MARKS_PER_REQUEST, replMatches.size()));
             for (SearchMatch m : replToMark) {
-                doc.setCharacterAttributes(m.getStart(), m.getLength(), REPLACE_MARK, true);
+                doc.setCharacterAttributes(m.getStart(), m.getLength(), replaceMark, true);
             }
             replToMark.clear();
 

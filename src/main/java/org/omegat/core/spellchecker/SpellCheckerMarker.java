@@ -45,11 +45,6 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerMarker implements IMarker {
-    protected final HighlightPainter highlightPainter;
-
-    public SpellCheckerMarker() {
-        highlightPainter = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
-    }
 
     @Override
     public @Nullable List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
@@ -62,6 +57,10 @@ public class SpellCheckerMarker implements IMarker {
             // spell checker disabled
             return null;
         }
+        // created per call so that color preference changes take effect
+        // without restarting the application
+        HighlightPainter highlightPainter = new UnderlineFactory.WaveUnderline(
+                Styles.EditorColor.COLOR_SPELLCHECK.getColor());
         return Core.getSpellChecker().getMisspelledTokens(translationText).stream().map(tok -> {
             int st = tok.getOffset();
             int en = st + tok.getLength();

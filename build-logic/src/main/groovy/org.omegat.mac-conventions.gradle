@@ -211,7 +211,7 @@ ext.makeMacTask = { args ->
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
-        def macCodesignIdentity = project.property('macCodesignIdentity')
+        def macCodesignIdentity = project.findProperty('macCodesignIdentity')
         doLast {
             injected.execOps.exec {
                 commandLine 'codesign', '--deep', '--force',

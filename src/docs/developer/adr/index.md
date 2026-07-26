@@ -38,7 +38,7 @@
 
 ## Project stewardship
 
-- 2026006 [User Base Measurement and Market Position](2026006.UserBaseMeasurement.md)
+- 2026006 [User Base Measurement and Adoption](2026006.UserBaseMeasurement.md)
 
 ## Debugging and Logging
 

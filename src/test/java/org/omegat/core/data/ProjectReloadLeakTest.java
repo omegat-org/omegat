@@ -37,7 +37,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.omegat.core.Core;
+import org.omegat.core.MemoryStressTests;
 import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -56,6 +58,7 @@ import org.omegat.util.Language;
  *
  * @author stephan.pakebusch at zollsoft.de
  */
+@Category(MemoryStressTests.class)
 public class ProjectReloadLeakTest extends TestCore {
 
     private static final int CYCLES = 3;

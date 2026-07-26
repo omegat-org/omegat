@@ -41,8 +41,10 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.MemoryStressTests;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
@@ -68,6 +70,7 @@ import org.omegat.util.Language;
  *
  * @author stephan.pakebusch at zollsoft.de
  */
+@Category(MemoryStressTests.class)
 public class EditorProjectReloadLeakTest extends TestCore {
 
     private static final int CYCLES = 3;

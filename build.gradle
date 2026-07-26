@@ -305,6 +305,31 @@ jar {
 test {
     // some test case depends on modules from subproject
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    useJUnit {
+        // Destructive memory-stress tests deliberately exhaust the heap;
+        // they only run on explicit request via the memoryStressTest task.
+        excludeCategories 'org.omegat.core.MemoryStressTests'
+    }
+}
+
+tasks.register('memoryStressTest', Test) {
+    group = 'verification'
+    description = 'Runs the destructive memory-stress tests, which deliberately exhaust the heap.'
+    // some test case depends on modules from subproject
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    workingDir = projectDir
+    // Test in headless mode with ./gradlew memoryStressTest -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    maxHeapSize = findProperty('testMaxHeapSize')
+    systemProperty 'java.util.logging.config.file',
+            layout.settingsDirectory.file('config/test/logger.properties').asFile
+    useJUnit {
+        includeCategories 'org.omegat.core.MemoryStressTests'
+    }
 }
 
 // Resolve module dependencies EAGERLY at configuration time

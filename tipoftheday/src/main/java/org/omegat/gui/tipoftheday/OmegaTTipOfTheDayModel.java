@@ -69,6 +69,12 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
     private void initTips() {
         try (InputStream is = TipOfTheDayUtils.getIndexStream()) {
+            if (is == null) {
+                // No tips index for the current locale (or none shipped at
+                // all): leave the model empty instead of feeding null into
+                // the parser.
+                return;
+            }
             JsonNode data = mapper.readTree(is);
             if (data != null) {
                 data.get("tips").forEach(this::addIfExist);

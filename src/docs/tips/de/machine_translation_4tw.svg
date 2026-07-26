@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **********************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2026 Stephan Pakebusch
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ********************************************************************** -->
+<!--
+ Hand-editierte Quelle: bevorzugt im Texteditor pflegen. Nach Bearbeitung in
+ GUI-Editoren (Inkscape: als "Plain SVG" speichern; Anzeigemodus "Kein Filter"
+ beschleunigt das Arbeiten) den Diff normalisieren und prüfen, dass
+ Lizenz-Header und CSS-Klassen erhalten geblieben sind.
+
+ Seitenraster: Seite n liegt bei translate(40, 40+(n-1)*700); Seitenhöhe 660
+ plus 40 Lücke; Gesamthöhe = 40 + n*700 (aktuell n=3, also 2140). Beim
+ Einfügen/Entfernen einer Seite anpassen: height und viewBox des
+ Wurzelelements, das Hintergrund-Rect und die Seitenzahlen "x / n".
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="2140" viewBox="0 0 1280 2140" font-family="'Comic Sans MS','Comic Neue','Comic Relief','Marker Felt','Chalkboard SE',cursive">
+
+  <defs>
+    <!-- dezenter Bleistift-Look: leichte Verwacklung der Linien -->
+    <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="pencil2" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="21" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- weicher Papierschatten der Seiten; bewusst als Primitiv-Kette statt
+         feDropShadow, das Inkscape nicht kennt (Seiten wären dort unsichtbar
+         und ein Inkscape-Save zerstörte die Filterregion) -->
+    <filter id="paperShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dy="6"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Definitionen des Original-Logos, kopiert aus images/OmegaT.svg
+         (Stand 2026-07); bei einer Logo-Änderung neu synchronisieren -->
+    <filter id="OMEGA_SHADOW" x="0" y="0" width="2" height="2">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="10" dy="10"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="OMEGA_GRAD" gradientUnits="userSpaceOnUse" x1="127.8472" y1="271.71091" x2="127.8472" y2="32.0532" gradientTransform="translate(17.999819,2.62897)">
+      <stop offset="0.0053" stop-color="#6F868C"/>
+      <stop offset="0.0165" stop-color="#72888F"/>
+      <stop offset="0.1363" stop-color="#8CA0A6"/>
+      <stop offset="0.2648" stop-color="#A4B6BC"/>
+      <stop offset="0.4031" stop-color="#B7C9CF"/>
+      <stop offset="0.5558" stop-color="#C7DADF"/>
+      <stop offset="0.7342" stop-color="#D1E3E8"/>
+      <stop offset="1" stop-color="#D4E6EB"/>
+    </linearGradient>
+    <linearGradient id="T_GRAD" gradientUnits="userSpaceOnUse" x1="189.86819" y1="187.1973" x2="229.1293" y2="2.4877999">
+      <stop offset="0.0053" stop-color="#F89838"/>
+      <stop offset="0.206" stop-color="#F6B236"/>
+      <stop offset="0.4384" stop-color="#F6CA32"/>
+      <stop offset="0.6554" stop-color="#F7DB2B"/>
+      <stop offset="0.8491" stop-color="#F7E628"/>
+      <stop offset="1" stop-color="#F7EC25"/>
+    </linearGradient>
+
+    <style>
+      .pagebg   { fill:#fdfcf6; stroke:#e5e1d3; stroke-width:2; }
+      .kicker   { fill:#b07a35; font-size:26px; letter-spacing:3px; }
+      .h1       { fill:#2b2b2b; font-weight:bold; }
+      .h2       { fill:#2b2b2b; font-weight:bold; }
+      .body     { fill:#3a3a3a; }
+      .accent   { fill:#c2452f; font-weight:bold; }
+      .muted    { fill:#6f6f6f; }
+      .pen      { fill:none; stroke:#7a7a7a; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+      .pen-thin { fill:none; stroke:#8a8a8a; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+      .pen-fill { fill:#ededea; stroke:#7a7a7a; stroke-width:3; stroke-linejoin:round; }
+      .pagenum  { fill:#bdb8a6; font-size:24px; }
+      .land     { fill:#e7e3d7; stroke:#7a7a7a; stroke-width:2; }
+      .bubble   { fill:#fbfaf4; stroke:#7a7a7a; stroke-width:2.4; }
+      .glyph    { fill:#2b2b2b; text-anchor:middle; }
+      .node     { fill:#f4f2ea; stroke:#7a7a7a; stroke-width:2.6; }
+      .nodetext { fill:#2f2f2f; text-anchor:middle; font-size:14px; font-weight:bold; }
+      .flow     { fill:none; stroke:#8a8a8a; stroke-width:2.8; stroke-linecap:round; }
+    </style>
+
+    <marker id="ah" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+
+  <!-- Gesamthintergrund -->
+  <rect x="0" y="0" width="1280" height="2140" fill="#efece2"/>
+
+  <!-- ============================================================ -->
+  <!-- SEITE 1 — Jubel                                              -->
+  <!-- ============================================================ -->
+  <g transform="translate(40,40)">
+    <rect class="pagebg" width="1200" height="660" rx="14" filter="url(#paperShadow)"/>
+
+    <!-- Cartoon: Erdball mit Sprechblasen diverser Schriftsysteme -->
+    <g transform="translate(0,0)">
+      <!-- Globus (Bleistift) -->
+      <g filter="url(#pencil)">
+        <circle class="pen-fill" cx="950" cy="305" r="110"/>
+        <!-- Längengrade -->
+        <ellipse class="pen-thin" cx="950" cy="305" rx="40" ry="110"/>
+        <ellipse class="pen-thin" cx="950" cy="305" rx="78" ry="110"/>
+        <line class="pen-thin" x1="950" y1="195" x2="950" y2="415"/>
+        <!-- Breitengrade -->
+        <line class="pen-thin" x1="842" y1="305" x2="1058" y2="305"/>
+        <path class="pen-thin" d="M858,250 Q950,238 1042,250"/>
+        <path class="pen-thin" d="M858,360 Q950,372 1042,360"/>
+        <!-- Kontinent-Kleckse -->
+        <path class="land" d="M905,250 q26,-14 44,4 q18,16 4,34 q-22,16 -44,2 q-18,-22 -4,-40 Z"/>
+        <path class="land" d="M972,322 q30,-6 40,16 q6,24 -18,30 q-28,4 -34,-20 q-2,-20 12,-26 Z"/>
+        <path class="land" d="M886,330 q18,-4 24,12 q2,16 -14,18 q-18,0 -18,-16 q0,-12 8,-14 Z"/>
+      </g>
+
+      <!-- Sprechblasen mit Schriftzeichen -->
+      <g>
+        <g filter="url(#pencil2)"><circle class="bubble" cx="853" cy="201" r="5"/><ellipse class="bubble" cx="812" cy="170" rx="29" ry="24"/></g>
+        <text class="glyph" x="812" y="180" font-size="26">字</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="950" cy="186" r="5"/><ellipse class="bubble" cx="950" cy="150" rx="29" ry="24"/></g>
+        <text class="glyph" x="950" y="160" font-size="28">Ω</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="1050" cy="206" r="5"/><ellipse class="bubble" cx="1088" cy="172" rx="29" ry="24"/></g>
+        <text class="glyph" x="1088" y="183" font-size="30">ع</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="1075" cy="298" r="5"/><ellipse class="bubble" cx="1112" cy="294" rx="29" ry="24"/></g>
+        <text class="glyph" x="1112" y="304" font-size="28">あ</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="1050" cy="392" r="5"/><ellipse class="bubble" cx="1086" cy="416" rx="29" ry="24"/></g>
+        <text class="glyph" x="1086" y="426" font-size="28">Я</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="950" cy="408" r="5"/><ellipse class="bubble" cx="950" cy="444" rx="29" ry="24"/></g>
+        <text class="glyph" x="950" y="455" font-size="28">अ</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="853" cy="392" r="5"/><ellipse class="bubble" cx="814" cy="416" rx="29" ry="24"/></g>
+        <text class="glyph" x="814" y="427" font-size="28">한</text>
+
+        <g filter="url(#pencil2)"><circle class="bubble" cx="833" cy="298" r="5"/><ellipse class="bubble" cx="796" cy="294" rx="29" ry="24"/></g>
+        <text class="glyph" x="796" y="304" font-size="28">A</text>
+      </g>
+
+      <!-- kleine jubelnde Person oben rechts -->
+      <g filter="url(#pencil)" transform="translate(1150,118) scale(0.5)">
+        <circle class="pen-fill" cx="0" cy="-60" r="42"/>
+        <g class="pen-thin">
+          <path d="M-18,-68 q6,-10 14,0"/>
+          <path d="M6,-68 q6,-10 14,0"/>
+          <path d="M-20,-44 q20,22 40,0"/>
+        </g>
+        <path class="pen" d="M0,-18 L0,90"/>
+        <path class="pen" d="M0,6 L-66,-66"/>
+        <path class="pen" d="M0,6 L66,-66"/>
+        <circle class="pen-thin" cx="-70" cy="-72" r="9"/>
+        <circle class="pen-thin" cx="70" cy="-72" r="9"/>
+        <path class="pen" d="M0,90 L-40,170"/>
+        <path class="pen" d="M0,90 L40,170"/>
+      </g>
+    </g>
+
+    <!-- Text im Vordergrund (mit Papier-Halo für Lesbarkeit) -->
+    <g stroke="#fdfcf6" stroke-width="6" paint-order="stroke">
+      <text class="kicker" x="70" y="92">MACHINE TRANSLATION 4TW</text>
+      <text class="h1" x="68" y="180" font-size="76">Juchu! Yeah! Yippieh!</text>
+      <text class="h1" x="68" y="262" font-size="76">Jawoll! <tspan class="accent">Free for All!</tspan></text>
+
+      <text class="body" x="70" y="372" font-size="34">Jauchzet und frohlocket, Übersetzer des Planeten —</text>
+      <text class="accent" x="70" y="420" font-size="40">euch erwartet viel freie Zeit.</text>
+
+      <text class="body" x="70" y="510" font-size="30">Horchet und staunet, oh Menschenheit:</text>
+      <text class="muted" x="70" y="552" font-size="30">beliebig viel <tspan fill="#c2452f">AI slop</tspan> aus allen Ecken und Winkeln des Planeten …</text>
+    </g>
+
+    <text class="pagenum" x="1120" y="624">1 / 3</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SEITE 2 — Auto-Translate Beispiel                            -->
+  <!-- ============================================================ -->
+  <g transform="translate(40,740)">
+    <rect class="pagebg" width="1200" height="660" rx="14" filter="url(#paperShadow)"/>
+
+    <text class="kicker" x="70" y="92">BEISPIEL: WEBSEITE MIT AUTO-TRANSLATE</text>
+    <text class="h2" x="68" y="166" font-size="50">Bei jedem Refresh ein neuer</text>
+    <text class="h2" x="68" y="222" font-size="50">kreativer Fehler.</text>
+
+    <text class="body" x="70" y="316" font-size="30">Ein und derselbe unveränderliche</text>
+    <text class="body" x="70" y="356" font-size="30">niederländische Originaltext, per Auto-Translate</text>
+    <text class="body" x="70" y="396" font-size="30">nach Deutsch — mal so, mal so:</text>
+
+    <!-- variierende Ergebnis-Bubbles -->
+    <g font-size="30" font-weight="bold">
+      <g transform="translate(70,440)">
+        <rect class="pen-fill" x="0" y="0" width="185" height="52" rx="26" filter="url(#pencil2)"/>
+        <text class="accent" x="24" y="35">15 Fässer</text>
+      </g>
+      <g transform="translate(275,440)">
+        <rect class="pen-fill" x="0" y="0" width="110" height="52" rx="26" filter="url(#pencil2)"/>
+        <text class="accent" x="28" y="35">15 t</text>
+      </g>
+      <g transform="translate(405,440)">
+        <rect class="pen-fill" x="0" y="0" width="130" height="52" rx="26" filter="url(#pencil2)"/>
+        <text class="accent" x="26" y="35">15 ton</text>
+      </g>
+      <g transform="translate(555,440)">
+        <rect class="pen-fill" x="0" y="0" width="180" height="52" rx="26" filter="url(#pencil2)"/>
+        <text class="accent" x="22" y="35">1.5 Mio €</text>
+      </g>
+    </g>
+
+    <text class="muted" x="70" y="588" font-size="26">Sehr nah verwandte Sprachen — jedes für sich vielleicht</text>
+    <text class="muted" x="70" y="620" font-size="26">berechtigt. Errate den korrekten Kontext.</text>
+
+    <!-- Cartoon: Browserfenster mit Refresh-Pfeil -->
+    <g filter="url(#pencil)" transform="translate(900,300)">
+      <rect class="pen-fill" x="-40" y="-150" width="320" height="230" rx="10"/>
+      <line class="pen-thin" x1="-40" y1="-112" x2="280" y2="-112"/>
+      <circle class="pen-thin" cx="-18" cy="-131" r="7"/>
+      <circle class="pen-thin" cx="6" cy="-131" r="7"/>
+      <circle class="pen-thin" cx="30" cy="-131" r="7"/>
+      <!-- "Text", der sich ändert -->
+      <line class="pen-thin" x1="-14" y1="-78" x2="240" y2="-78"/>
+      <line class="pen-thin" x1="-14" y1="-46" x2="200" y2="-46"/>
+      <line class="pen-thin" x1="-14" y1="-14" x2="240" y2="-14"/>
+      <line class="pen-thin" x1="-14" y1="18" x2="160" y2="18"/>
+      <!-- großer Refresh-Kreis -->
+      <g class="pen" transform="translate(120,-40)">
+        <path d="M40,0 A40,40 0 1 1 28,-28"/>
+        <path d="M28,-44 L34,-26 L14,-22 Z" fill="#7a7a7a" stroke="none"/>
+      </g>
+    </g>
+
+    <text class="pagenum" x="1120" y="624">2 / 3</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SEITE 3 — Unscharf -> Übersetzungsspeicher                   -->
+  <!-- ============================================================ -->
+  <g transform="translate(40,1440)">
+    <rect class="pagebg" width="1200" height="660" rx="14" filter="url(#paperShadow)"/>
+
+    <text class="kicker" x="70" y="86">MANAGER &amp; KLIENTEN LIEBEN MT</text>
+    <text class="h2" x="68" y="150" font-size="44">Aber: zusammengeklaubt …</text>
+    <text class="muted" x="70" y="192" font-size="20">stochastisch · probabilistisch · unscharf · nondeterministisch · nicht-idempotent · etc. pp.</text>
+    <text class="accent" x="70" y="246" font-size="30">→ zwingend: ein Übersetzungsspeicher <tspan class="muted" font-weight="normal" font-size="24">(TM, translation memory)</tspan></text>
+    <text class="body" x="70" y="286" font-size="26">für stabile Begrifflichkeit — statt <tspan class="accent">Rewörding</tspan> je Durchlauf.</text>
+
+    <text class="muted" x="70" y="330" font-size="22" font-weight="bold">Der Weg eines Strings durch die Pipeline:</text>
+
+    <!-- großes OmegaT-Logo über den Übersetzungsprojekten: Original-Pfade
+         kopiert aus images/OmegaT.svg (Stand 2026-07), Icon-Kachel SQUARE_BACK
+         bewusst weggelassen; bei einer Logo-Änderung neu synchronisieren -->
+    <g transform="translate(928,75) scale(0.62)">
+      <path style="fill:url(#OMEGA_GRAD);filter:url(#OMEGA_SHADOW)" d="m 25.658819,143.89497 c 0,41.372 28.660999,70.73 54.890999,88.936 -7.585999,0 -20.790999,0 -20.790999,0 -16.153,0 -20.249,-0.706 -27.689001,-19.266 -0.303999,-0.759 -1.038999,-1.256 -1.855999,-1.256 l -10.214,0 c -0.567,0 -1.108,0.241 -1.487,0.663 -0.379,0.422 -0.562,0.985 -0.501,1.55 l 6.201,58.031 c 0.109,1.017 0.966,1.787 1.989,1.787 l 93.383001,0 c 0.708,0 1.364,-0.375 1.724,-0.985 l 2.917,-4.955 c 0.368,-0.624 0.369,-1.398 0.003,-2.024 l -0.506,-0.864 c -14.385,-24.598 -41.163001,-70.384 -40.804002,-119.125 0,-29.854 5.41,-53.143 16.081001,-69.235 10.699001,-16.135 26.338001,-24.316 46.483001,-24.316 20.274,0 36.027,7.953 46.821,23.637 10.688,15.531 16.107,37.858 16.107,66.362 0,51.946 -29.167,101.864 -41.622,123.18 l -0.417,0.714 c -0.397,0.68 -0.358,1.529 0.099,2.17 l 3.283,4.604 c 0.375,0.526 0.981,0.839 1.628,0.839 l 91.923,0 c 0.994,0 1.837,-0.73 1.979,-1.714 l 8.391,-58.031 c 0.083,-0.574 -0.088,-1.156 -0.468,-1.596 -0.38,-0.438 -0.932,-0.69 -1.512,-0.69 l -10.216,0 c -0.806,0 -1.532,0.483 -1.844,1.226 -7.783,18.531 -11.865,19.296 -26.243,19.296 0,0 -17.382,0 -24.938,0 23.381,-18.69 56.85,-46.58 56.85,-90.352 0,-63.469 -49.123,-107.797 -119.458,-107.797 -70.764002,-0.002 -120.187002,44.908 -120.187002,109.211 z"/>
+      <path style="fill:#1e282c" d="m 145.84482,32.68197 c -17.435,0 -33.882,2.683 -48.883002,7.973 -14.783,5.214 -27.816,12.832 -38.737,22.641 -11.013,9.892 -19.58,21.744 -25.462,35.229 -6.042,13.851 -9.105,29.115 -9.105,45.37 0,21.473 7.679,41.858 22.823,60.588 7.582,9.379 16.92,18.207 27.854,26.347 l -14.577,0 c -8.347,0 -12.896,-0.369 -16.173,-2.465 -3.317,-2.122 -6.026,-6.481 -9.66,-15.545 -0.609,-1.518 -2.079,-2.511 -3.713,-2.511 l -10.212,0 c -1.135,0 -2.216,0.481 -2.975,1.325 -0.759,0.845 -1.123,1.972 -1.002,3.1 l 6.201,58.031 c 0.217,2.032 1.932,3.574 3.977,3.574 l 93.382002,0 c 1.417,0 2.728,-0.75 3.447,-1.971 l 2.917,-4.955 c 0.735,-1.248 0.737,-2.797 0.006,-4.048 l -0.507,-0.867 c -6.861,-11.732 -17.231,-29.463 -25.685002,-50.082 -4.62,-11.265 -8.205,-22.288 -10.656,-32.763 -2.861,-12.226 -4.27,-24.086 -4.188,-35.254 0,-0.009 0,-0.019 0,-0.029 0,-14.669 1.357,-27.923 4.033,-39.395 2.639,-11.314 6.581,-20.977 11.715002,-28.719 10.305,-15.542 25.384,-23.422 44.816,-23.422 19.577,0 34.775,7.661 45.174,22.771 5.137,7.465 9.082,16.756 11.725,27.616 2.674,10.988 4.03,23.643 4.03,37.612 0,22.021 -5.354,46.297 -15.911,72.155 -8.788,21.52 -19.212,39.359 -25.44,50.018 l -0.416,0.712 c -0.794,1.36 -0.717,3.06 0.197,4.342 l 3.283,4.603 c 0.751,1.052 1.964,1.677 3.257,1.677 l 91.923,0 c 1.988,0 3.674,-1.46 3.959,-3.428 l 8.392,-58.031 c 0.166,-1.147 -0.175,-2.313 -0.936,-3.189 -0.76,-0.878 -1.862,-1.382 -3.023,-1.382 l -10.216,0 c -1.611,0 -3.064,0.966 -3.688,2.45 -3.762,8.958 -6.614,13.492 -9.842,15.649 -3.081,2.059 -7.149,2.421 -14.558,2.421 l -19.256,0 c 10.409,-8.448 22.111,-18.599 31.947,-31.103 6.544,-8.32 11.629,-16.954 15.112,-25.663 4.054,-10.133 6.108,-20.76 6.108,-31.585 0,-15.938 -3.008,-30.927 -8.938,-44.549 -5.799,-13.318 -14.252,-25.029 -25.125,-34.809 -10.83,-9.742 -23.774,-17.308 -38.474,-22.488 -14.97,-5.275 -31.429,-7.951 -48.92,-7.951 l 0,0 z m -118.187002,111.213 c 0,-64.045 49.244001,-107.213 118.187002,-107.213 69.307,0 117.458,43.168 117.458,105.797 l 0,0 0,0 c 0,45.646 -37.572,73.952 -60.553,92.351 l 4,0 0,0 2.41,0 0,0 24.23,0 c 15.321,0 20.063,-1.414 28.088,-20.521 l 10.216,0 0,0 0,0 -8.392,58.03 -91.922,0 -3.283,-4.603 0,0 0,0 c 12.402,-21.231 42.313,-71.829 42.313,-124.903 0,-57.323 -22.25,-91.999 -64.929,-91.999 -42.315,0 -64.564001,35.385 -64.564001,95.536 -0.002,0.292 -0.003,0.584 -0.003,0.877 -0.035,49.569 27.808001,96.569 41.586001,120.137 l 0,0 0,0 -2.917,4.955 -93.382001,0 -6.201001,-58.029 0,0 0,0 10.212001,0 c 7.660999,19.106 12.404999,20.521 29.545999,20.521 l 20.159,0 0,0 3.202001,0 0,0 4,0 c -20.793001,-13.446 -59.461001,-43.876 -59.461001,-90.936 l 0,0 0,0 z"/>
+      <g transform="translate(17.999819,2.62897)">
+        <path style="opacity:0.75" d="m 213.799,0.835 c -2.431,0 -6.061,0.811 -9.55,4.678 0,0 0.001,-0.001 0.002,-0.001 -12.968,14.276 -41.592,38.801 -52.015,43.395 l -0.067,0.029 -0.066,0.032 c -4.885,2.37 -9.878,5.65 -9.878,12.002 0,2.827 1.132,5.242 3.185,6.801 1.667,1.265 3.807,1.906 6.361,1.906 l 15.028,0 -0.316,40.34 0,0.015 0,0.016 c 0,6.482 -0.182,16.369 -0.356,25.93 -0.173,9.441 -0.336,18.357 -0.336,24.157 0,8.939 4.283,17.845 11.75,24.43 3.834,3.38 8.338,6.031 13.389,7.878 5.359,1.96 11.189,2.954 17.326,2.954 19.707,0 37.266,-4.894 50.775,-14.149 l 0.046,-0.032 0.046,-0.032 c 3.351,-2.438 4.382,-6.308 2.564,-9.492 l -2.351,-4.887 -0.024,-0.054 -0.027,-0.052 c -1.671,-3.229 -3.932,-3.908 -5.533,-3.908 -1.076,0 -2.141,0.321 -3.168,0.952 -4.635,2.506 -9.133,3.484 -15.994,3.484 -3.84,0 -7.019,-1.641 -9.449,-4.874 -1.67,-2.224 -2.989,-5.201 -3.924,-8.853 -1.118,-4.365 -1.684,-9.711 -1.684,-15.889 l 0,-26.556 c 0,-14.072 0,-28.579 0.517,-41.378 l 36.72,0 c 1.664,0 5.678,-0.555 6.991,-5.7 l 0.009,-0.028 0.007,-0.029 3.387,-14.113 c 0.671,-1.711 0.509,-3.624 -0.467,-5.223 -1.175,-1.926 -3.331,-3.076 -5.768,-3.076 l -39.853,0 1.225,-31.475 0.003,-0.078 0,-0.078 c -0.001,-5.324 -3.498,-9.042 -8.505,-9.042 l 0,0 z M 146.225,60.97 c 0,-3.361 2.078,-5.712 7.624,-8.403 11.438,-5.04 40.544,-30.252 53.366,-44.37 2.426,-2.69 4.853,-3.362 6.584,-3.362 3.117,0 4.504,2.354 4.504,5.042 l 0,0 0,0 -1.387,35.631 4,0 0,0 0.003,0 0,0 40.009,0 c 1.64,0 2.633,1.046 2.639,2.148 0.002,0.294 -0.066,0.593 -0.212,0.876 l -3.47,14.455 c -0.344,1.346 -1.038,2.69 -3.116,2.69 l -40.543,0 c -0.683,13.567 -0.693,29.414 -0.693,44.653 0,0.242 0,0.483 0,0.725 l 0,26.556 c 0,27.564 10.742,33.616 19.057,33.616 7.279,0 12.479,-1.008 18.021,-4.033 0.38,-0.246 0.76,-0.403 1.141,-0.403 0.659,0 1.319,0.468 1.98,1.746 l 2.424,5.041 c 0.292,0.474 0.42,0.946 0.422,1.404 0.006,1.17 -0.812,2.241 -1.809,2.966 -5.892,4.037 -21.483,13.449 -48.514,13.449 -23.564,0 -38.465,-15.799 -38.465,-31.262 l 0,0 0,0 c 0,-11.767 0.692,-37.313 0.692,-50.087 l 0.316,-40.371 0,0 0,0 0,0 0.031,-4 -19.06,0 c -3.118,0 -5.544,-1.344 -5.544,-4.707 l 0,0 0,0 z"/>
+        <path style="fill:url(#T_GRAD)" d="m 208.565,4.022 0.005,-0.005 c -13.372,14.725 -41.87,39.116 -52.692,43.885 -4.611,2.235 -8.817,4.998 -8.817,10.233 0,4.137 2.891,6.707 7.545,6.707 0,0 13.82,0 17.044,0 -0.029,3.673 -0.332,42.355 -0.332,42.355 0,6.515 -0.182,16.412 -0.356,25.982 -0.173,9.431 -0.336,18.338 -0.336,24.118 l 0,0.001 c 0,15.996 15.471,33.262 40.466,33.262 19.303,0 36.47,-4.771 49.645,-13.8 2.63,-1.911 3.397,-4.74 1.956,-7.07 l 0.102,0.186 -2.424,-5.041 c -0.812,-1.572 -1.76,-2.461 -2.924,-2.77 -1.01,-0.268 -2.05,-0.06 -3.089,0.614 l 0.131,-0.078 c -4.995,2.727 -9.779,3.789 -17.063,3.789 -11,0 -17.058,-11.228 -17.058,-31.615 l 0,-26.555 c 0,-14.82 0.018,-30.067 0.621,-43.378 3.495,0 38.616,0 38.616,0 1.816,0 4.168,-0.728 5.054,-4.195 l 3.476,-14.483 -0.166,0.448 c 0.29,-0.564 0.435,-1.173 0.435,-1.781 0,-0.705 -0.194,-1.409 -0.579,-2.04 -0.809,-1.326 -2.326,-2.118 -4.059,-2.119 0,0 -38.158,0 -41.934,0 0.144,-3.685 1.306,-33.556 1.306,-33.557 0,-4.288 -2.613,-7.116 -6.502,-7.116 -2.028,0.001 -5.073,0.699 -8.071,4.023 z"/>
+        <path style="fill:#ef3b39" d="m 216.634,-2 c -2.431,0 -6.061,0.811 -9.55,4.678 0,0 0.001,-10e-4 0.002,-10e-4 -12.968,14.276 -41.592,38.801 -52.015,43.395 l -0.067,0.029 -0.066,0.032 c -4.885,2.37 -9.878,5.65 -9.878,12.002 0,2.827 1.132,5.242 3.185,6.801 1.667,1.265 3.807,1.906 6.361,1.906 l 15.028,0 -0.316,40.34 0,0.015 0,0.016 c 0,6.482 -0.182,16.369 -0.356,25.93 -0.173,9.441 -0.336,18.357 -0.336,24.156 0,8.939 4.283,17.845 11.75,24.43 3.834,3.38 8.338,6.031 13.389,7.878 5.359,1.96 11.189,2.954 17.326,2.954 19.707,0 37.266,-4.894 50.775,-14.149 l 0.046,-0.032 0.046,-0.032 c 3.351,-2.438 4.382,-6.308 2.564,-9.492 l -2.351,-4.887 -0.024,-0.054 -0.027,-0.052 c -1.671,-3.229 -3.932,-3.908 -5.533,-3.908 -1.076,0 -2.141,0.321 -3.168,0.952 -4.635,2.506 -9.133,3.484 -15.994,3.484 -3.84,0 -7.019,-1.641 -9.449,-4.874 -1.67,-2.224 -2.989,-5.201 -3.924,-8.852 -1.118,-4.365 -1.684,-9.711 -1.684,-15.889 l 0,-26.556 c 0,-14.072 0,-28.579 0.517,-41.378 l 36.72,0 c 1.664,0 5.678,-0.555 6.991,-5.7 l 0.009,-0.028 0.007,-0.029 3.387,-14.113 c 0.671,-1.711 0.509,-3.624 -0.467,-5.223 -1.175,-1.926 -3.331,-3.076 -5.768,-3.076 l -39.854,0 1.225,-31.475 0.003,-0.078 0,-0.078 C 225.138,1.718 221.641,-2 216.634,-2 l 0,0 z M 149.06,58.135 c 0,-3.361 2.078,-5.712 7.624,-8.403 11.438,-5.04 40.544,-30.252 53.366,-44.37 2.426,-2.69 4.852,-3.362 6.584,-3.362 3.117,0 4.504,2.354 4.504,5.042 l 0,0 0,0 -1.387,35.631 4,0 0,0 0.003,0 0,0 40.009,0 c 1.64,0 2.633,1.046 2.639,2.148 0.002,0.294 -0.066,0.593 -0.212,0.876 l -3.47,14.455 c -0.344,1.346 -1.038,2.69 -3.116,2.69 l -40.543,0 c -0.683,13.567 -0.693,29.414 -0.693,44.653 0,0.242 0,0.483 0,0.725 l 0,26.556 c 0,27.563 10.742,33.615 19.057,33.615 7.279,0 12.479,-1.008 18.021,-4.033 0.38,-0.246 0.76,-0.403 1.141,-0.403 0.659,0 1.319,0.468 1.98,1.746 l 2.424,5.041 c 0.292,0.474 0.42,0.946 0.422,1.404 0.006,1.17 -0.812,2.241 -1.809,2.966 -5.892,4.037 -21.483,13.449 -48.514,13.449 -23.564,0 -38.465,-15.799 -38.465,-31.262 l 0,0 0,0 c 0,-11.767 0.692,-37.313 0.692,-50.086 l 0.316,-40.371 0,0 0,0 0,0 0.031,-4 -19.06,0 c -3.118,0 -5.544,-1.344 -5.544,-4.707 l 0,0 0,0 z"/>
+      </g>
+    </g>
+    <!-- OmegaT-Kasten in der Logo-Farbe: der Abschnitt von XLIFF (hin) bis XLIFF (zurück) -->
+    <g filter="url(#pencil2)">
+      <path d="M586,320 H1114 V572 H762 V470 H586 Z"
+            fill="#F7DB2B" fill-opacity="0.20"
+            stroke="#F6B236" stroke-width="4" stroke-dasharray="14 10" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Ablaufdiagramm: Formen (Bleistift).
+         Raster: Spalte i liegt bei x = 70 + i*176 (Kastenbreite 152 + 24
+         Lücke); Pfeile laufen von x+152 bis zum nächsten Kasten. -->
+    <g filter="url(#pencil2)">
+      <!-- Reihe 1 -->
+      <rect class="node" x="70"  y="348" width="152" height="60" rx="10"/>
+      <rect class="node" x="246" y="348" width="152" height="60" rx="10"/>
+      <rect class="node" x="422" y="348" width="152" height="60" rx="10"/>
+      <rect class="node" x="598" y="348" width="152" height="60" rx="10"/>
+      <rect class="node" x="774" y="348" width="152" height="60" rx="10"/>
+      <!-- Knoten 6: Stapel (mind. 3 Projekte) -->
+      <rect class="node" x="934" y="332" width="152" height="60" rx="10"/>
+      <rect class="node" x="942" y="340" width="152" height="60" rx="10"/>
+      <rect class="node" x="950" y="348" width="152" height="60" rx="10"/>
+      <!-- Reihe 2 -->
+      <rect class="node" x="950" y="500" width="152" height="60" rx="10"/>
+      <rect class="node" x="774" y="500" width="152" height="60" rx="10"/>
+      <rect class="node" x="598" y="500" width="152" height="60" rx="10"/>
+      <rect class="node" x="422" y="500" width="152" height="60" rx="10"/>
+      <rect class="node" x="246" y="500" width="152" height="60" rx="10"/>
+
+      <!-- Pfeile Reihe 1 -->
+      <line class="flow" marker-end="url(#ah)" x1="222" y1="378" x2="243" y2="378"/>
+      <line class="flow" marker-end="url(#ah)" x1="398" y1="378" x2="419" y2="378"/>
+      <line class="flow" marker-end="url(#ah)" x1="574" y1="378" x2="595" y2="378"/>
+      <line class="flow" marker-end="url(#ah)" x1="750" y1="378" x2="771" y2="378"/>
+      <line class="flow" marker-end="url(#ah)" x1="926" y1="378" x2="947" y2="378"/>
+      <!-- U-Turn -->
+      <line class="flow" marker-end="url(#ah)" x1="1026" y1="410" x2="1026" y2="497"/>
+      <!-- Pfeile Reihe 2 (rückwärts) -->
+      <line class="flow" marker-end="url(#ah)" x1="948" y1="530" x2="929" y2="530"/>
+      <line class="flow" marker-end="url(#ah)" x1="772" y1="530" x2="753" y2="530"/>
+      <line class="flow" marker-end="url(#ah)" x1="596" y1="530" x2="577" y2="530"/>
+      <line class="flow" marker-end="url(#ah)" x1="420" y1="530" x2="401" y2="530"/>
+      <!-- Auslieferung: Paket + Pfeil -->
+      <line class="flow" marker-end="url(#ah)" x1="244" y1="530" x2="190" y2="530"/>
+      <g class="flow" transform="translate(118,502)">
+        <rect x="0" y="0" width="64" height="56" rx="4"/>
+        <line x1="0" y1="20" x2="64" y2="20"/>
+        <line x1="32" y1="0" x2="32" y2="56"/>
+      </g>
+    </g>
+
+    <!-- Ablaufdiagramm: Beschriftung (scharf) -->
+    <g>
+      <text class="nodetext" x="146"  y="374">Source</text><text class="nodetext" x="146"  y="392">Code</text>
+      <text class="nodetext" x="322"  y="374">statische</text><text class="nodetext" x="322"  y="392">Code-Analyse</text>
+      <text class="nodetext" x="498"  y="374">Strings-</text><text class="nodetext" x="498"  y="392">Extraktion</text>
+      <text class="nodetext" x="674"  y="383">XLIFF</text>
+      <text class="nodetext" x="850"  y="383">Segmentierung</text>
+      <text class="nodetext" x="1026" y="374">Übersetzungs-</text><text class="nodetext" x="1026" y="392">projekte (≥3)</text>
+
+      <text class="nodetext" x="1026" y="535">Konkatenierung</text>
+      <text class="nodetext" x="850"  y="535">XLIFF</text>
+      <text class="nodetext" x="674"  y="535">Strings</text>
+      <text class="nodetext" x="498"  y="535">Xcode</text>
+      <text class="nodetext" x="322"  y="526">Shipping</text><text class="nodetext" x="322"  y="544">Product</text>
+    </g>
+
+    <text class="pagenum" x="1120" y="624">3 / 3</text>
+  </g>
+
+</svg>

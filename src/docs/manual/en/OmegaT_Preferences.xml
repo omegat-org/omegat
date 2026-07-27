@@ -1362,6 +1362,44 @@
                      </tbody>
                   </tgroup>
                </table>
+               <para>Values of TMX segment properties can additionally be inserted with the
+                  templates below. Unlike the variables above, these are <emphasis>not</emphasis>
+                  offered in the drop-down menu.</para>
+               <table xml:id="table.match.pane.setup.tmxprop" colsep="0" rowsep="0">
+                  <title xml:id="table.match.pane.setup.tmxprop.title">TMX property template variables</title>
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                     <colspec align="left"></colspec>
+                     <colspec align="left"></colspec>
+                     <tbody>
+                        <row>
+                           <entry>
+                              <literal>@{propertyType}</literal>
+                           </entry>
+                           <entry>The value of the TMX property of the given
+                              <literal>propertyType</literal>.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <literal>@[propertyType][keyValueSeparator][valueSeparator]</literal>
+                           </entry>
+                           <entry>All TMX properties whose type matches <literal>propertyType</literal>
+                              (where <literal>*</literal> and <literal>?</literal> act as wildcards),
+                              each rendered as the property type, the
+                              <literal>keyValueSeparator</literal> and the value, with the individual
+                              results joined by the <literal>valueSeparator</literal>.</entry>
+                        </row>
+                     </tbody>
+                  </tgroup>
+               </table>
+               <example xml:id="dialog.preferences.tm.matches.template.tmxprop.example">
+                  <title xml:id="dialog.preferences.tm.matches.template.tmxprop.example.title">Displaying a TMX property</title>
+                  <para>For a TMX entry property
+                     <literal>&lt;prop type="Att::Doc. Type"&gt;Regulation&lt;/prop&gt;</literal>, the
+                     template <literal>@{Att::Doc. Type}</literal> renders as
+                     <literal>Regulation</literal>, and the template
+                     <literal>@[Att::Doc. Type][=][,]</literal> renders as
+                     <literal>Att::Doc. Type=Regulation</literal>.</para>
+               </example>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx">

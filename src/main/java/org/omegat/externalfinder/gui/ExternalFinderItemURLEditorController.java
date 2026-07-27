@@ -37,6 +37,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.omegat.util.StringUtil;
 import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItemURL;
 import org.omegat.externalfinder.item.ExternalFinderValidationException;
@@ -134,7 +135,7 @@ public class ExternalFinderItemURLEditorController {
             } catch (Exception ex) {
                 Logger.getLogger(ExternalFinderItemURLEditorController.class.getName()).log(Level.SEVERE,
                         null, ex);
-                JOptionPane.showMessageDialog(dialog, ex.getLocalizedMessage(),
+                JOptionPane.showMessageDialog(dialog, StringUtil.describeException(ex),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });

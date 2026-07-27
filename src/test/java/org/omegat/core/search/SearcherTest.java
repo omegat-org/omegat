@@ -132,6 +132,26 @@ public class SearcherTest {
     }
 
     @Test
+    public void testSearchProjectFindsKeyFields() throws Exception {
+        // the file, id and path of the EntryKey are searched with the
+        // properties option, matching what the properties pane shows
+        addSTE(fi, "chapter_one.html", "MSG_GREETING_42", "body/p[3]", "OmegaT is great", null);
+        for (String needle : new String[] { "chapter_one.html", "MSG_GREETING_42", "body/p[3]" }) {
+            SearchExpression s = createSearchExpression(needle, SearchExpressionType.EXACT, true, false);
+            s.searchComments = true;
+            assertEquals("key field '" + needle + "' should match with the properties option", 1,
+                    startSearcher(s).getSearchResults().size());
+
+            // without the properties option a key field must not match
+            SearchExpression noProps = createSearchExpression(needle, SearchExpressionType.EXACT, true,
+                    false);
+            noProps.searchComments = false;
+            assertTrue("key field '" + needle + "' must not match without the properties option",
+                    startSearcher(noProps).getSearchResults().isEmpty());
+        }
+    }
+
+    @Test
     public void testSearchCheckEntryAuthor() {
         addSTE(fi, "id1", "OmegaT is great", null);
         SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
@@ -448,7 +468,17 @@ public class SearcherTest {
 
     private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation,
                                    String[] properties) {
-        EntryKey key = new EntryKey("test", source, id, null, null, null);
+        return addSTE(fi, "test", id, null, source, translation, properties);
+    }
+
+    private SourceTextEntry addSTE(IProject.FileInfo fi, String file, String id, String path, String source,
+                                   String translation) {
+        return addSTE(fi, file, id, path, source, translation, null);
+    }
+
+    private SourceTextEntry addSTE(IProject.FileInfo fi, String file, String id, String path, String source,
+                                   String translation, String[] properties) {
+        EntryKey key = new EntryKey(file, source, id, null, null, path);
         SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, properties, translation,
                 new ArrayList<>());
         ste.setSourceTranslationFuzzy(false);

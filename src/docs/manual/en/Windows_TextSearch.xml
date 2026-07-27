@@ -223,8 +223,8 @@
          <varlistentry>
             <term>In properties</term>
             <listitem>
-               <para>Search in the properties (other than ID) attached to
-                  		  segments, as displayed in the
+               <para>Search in the properties attached to segments, including the
+                  		  segment's file, ID and path, as displayed in the
                   <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"></link> pane.</para>
             </listitem>
          </varlistentry>

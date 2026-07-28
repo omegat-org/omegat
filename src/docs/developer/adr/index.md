@@ -39,6 +39,7 @@
 ## Project stewardship
 
 - 2026004 [User Base Measurement and Adoption](2026004.UserBaseMeasurement.md)
+- 2026005 [International and Multilingual Adoption Footprint](2026005.InternationalAdoptionFootprint.md)
 
 ## Debugging and Logging
 

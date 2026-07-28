@@ -234,6 +234,22 @@ public interface IEditor {
     void nextUniqueEntry();
 
     /**
+     * Finds the next entry whose translation is identical to the source.
+     * Must be called from UI thread. Default no-op so non-GUI editor
+     * implementations need not override it.
+     */
+    default void nextIdenticalEntry() {
+    }
+
+    /**
+     * Finds the previous entry whose translation is identical to the source.
+     * Must be called from UI thread. Default no-op so non-GUI editor
+     * implementations need not override it.
+     */
+    default void prevIdenticalEntry() {
+    }
+
+    /**
      * Goto first entry in specified file.
      *
      * @param fileIndex

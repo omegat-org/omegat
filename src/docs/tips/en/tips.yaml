@@ -72,3 +72,5 @@ tips:
   name: Use Check Issues for tag problems
 - file: ignore_dictionary_word.html
   name: Ignore a word in the dictionary
+- file: share_colour_scheme.html
+  name: Share your colour scheme

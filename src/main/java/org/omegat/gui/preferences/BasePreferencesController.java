@@ -69,6 +69,12 @@ public abstract class BasePreferencesController implements IPreferencesControlle
         }
     }
 
+    protected void fireTransientMessage(String message) {
+        for (FurtherActionListener listener : listeners) {
+            listener.showTransientMessage(message);
+        }
+    }
+
     public void setRestartRequired(boolean restartRequired) {
         this.restartRequired = restartRequired;
         fireRestartRequired();

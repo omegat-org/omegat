@@ -811,6 +811,14 @@ public class PreferencesWindowController implements FurtherActionListener {
         }
     }
 
+    @Override
+    public void showTransientMessage(String message) {
+        outerPanel.messageTextArea.setText(message);
+        Timer timer = new Timer(APPLIED_MESSAGE_TIMEOUT_MS, e -> updateMessage());
+        timer.setRepeats(false);
+        timer.start();
+    }
+
     /**
      * Redisplay the current document so that saved preferences (e.g. colors)
      * take effect immediately. refreshView reloads the document the same way

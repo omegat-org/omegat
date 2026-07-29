@@ -42,6 +42,7 @@ import javax.swing.table.TableCellRenderer;
 
 import org.omegat.core.Core;
 import org.omegat.util.gui.DataTableStyling;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -92,6 +93,14 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         table.addMouseListener(mouseAdapter);
         table.addMouseMotionListener(mouseAdapter);
         parent.getScrollPane().setViewportView(table);
+    }
+
+    @Override
+    public void applyColors() {
+        if (table != null) {
+            Styles.applyColors(table);
+            table.repaint();
+        }
     }
 
     private final MouseAdapter mouseAdapter = new MouseAdapter() {

@@ -29,6 +29,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
@@ -51,6 +52,18 @@ import org.omegat.util.Preferences;
 public final class Styles {
 
     private Styles() {
+    }
+
+    /**
+     * Apply the current editor base colours (foreground and background) to a
+     * component. Consumers reacting to an
+     * {@link org.omegat.core.events.IColorsChangedEventListener} event should
+     * call this and repaint, rather than re-reading the colours themselves, so
+     * a live colour change is reflected everywhere without a restart.
+     */
+    public static void applyColors(Component component) {
+        component.setForeground(EditorColor.COLOR_FOREGROUND.getColor());
+        component.setBackground(EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     public enum EditorColor {

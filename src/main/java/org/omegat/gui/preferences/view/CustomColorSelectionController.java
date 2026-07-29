@@ -46,6 +46,7 @@ import javax.swing.JSpinner;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.table.AbstractTableModel;
 
+import org.omegat.core.CoreEvents;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.OStrings;
@@ -189,6 +190,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
             // resetting is an explicit action and takes effect immediately
             style.setColor(null);
             PreferencesWindowController.refreshEditorView();
+            CoreEvents.fireColorsChanged();
             updateSelectionIcon();
         });
     }
@@ -205,6 +207,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
         panel.colorStylesTable.clearSelection();
         onSelectionChanged();
         PreferencesWindowController.refreshEditorView();
+        CoreEvents.fireColorsChanged();
     }
 
     @Override
@@ -218,6 +221,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
     @Override
     public void persist() {
         temporaryPreferences.entrySet().forEach(e -> e.getKey().setColor(e.getValue()));
+        CoreEvents.fireColorsChanged();
     }
 
     enum ColorColumns {

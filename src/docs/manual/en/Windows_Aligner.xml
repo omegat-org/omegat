@@ -42,7 +42,7 @@
          use the languages from that project, as well the project-specific
          segmentation rules, if any.</para>
    </note>
-   <para>The aligner remembers its window position and size, the align
+   <para>The aligner remembers its window position and size, the alignment
       parameters, the selected languages, and the folders last used for the
       input files and the saved TMX file between sessions. When a translation
       project is open, its languages take precedence over the remembered

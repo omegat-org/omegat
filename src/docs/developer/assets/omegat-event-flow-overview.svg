@@ -23,7 +23,7 @@
   <rect x="0" y="0" width="1760" height="1700" fill="#ffffff"/>
 
   <!-- title -->
-  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Event Flow Map</text>
+  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Event Flow Map — ΩᵗEFMap</text>
   <text x="880" y="78" text-anchor="middle" font-size="14" fill="#666666">Who fires what, where it is delivered, who reacts — with core/GUI territories and known hazards · org.omegat.core.CoreEvents · July 2026</text>
 
   <!-- legend -->
@@ -193,5 +193,5 @@
   </g>
 
   <!-- footer -->
-  <text x="40" y="1672" font-size="11.5" fill="#888888">Hand-maintained overview (July 2026). Companion: omegat-architecture-overview.svg · src/docs/developer/22.CoreEvents.md · 21.OmegaTInternals.md</text>
+  <text x="40" y="1672" font-size="11.5" fill="#888888">Machine generated overview (snapshot of master, end of July 2026, not automatically updated). Companion: omegat-architecture-overview.svg · src/docs/developer/22.CoreEvents.md · 21.OmegaTInternals.md</text>
 </svg>

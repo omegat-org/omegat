@@ -21,7 +21,7 @@
   <rect x="0" y="0" width="1760" height="1300" fill="#ffffff"/>
 
   <!-- title -->
-  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Architecture Overview</text>
+  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Architecture Overview — ΩᵗAO</text>
   <text x="880" y="78" text-anchor="middle" font-size="14" fill="#666666">Components, event flow and editor internals · src/main/java/org/omegat · July 2026</text>
 
   <!-- legend -->
@@ -76,7 +76,7 @@
     <text x="640" y="454">MarkerController — runs the IMarker pipeline</text>
     <text x="640" y="480">mark/ — IMarker impls (Identical…, ComesFromMT…)</text>
     <text x="640" y="506">EditorSettings — view options (marks, colours)</text>
-    <text x="640" y="532">sort/ — SortBar · MultiKeySorter (SF-1094)</text>
+    <text x="640" y="532">sort/ — SortBar · MultiKeySorter (SF-1094) 🫣</text>
     <text x="640" y="558">filter/ — editor document filtering</text>
   </g>
 
@@ -213,5 +213,5 @@
   </g>
 
   <!-- footer -->
-  <text x="40" y="1266" font-size="11.5" fill="#888888">Hand-maintained overview (July 2026). Companion docs: src/docs/developer/21.OmegaTInternals.md · 22.CoreEvents.md · 23.CoreMethods.md · 36.SourceTree.md</text>
+  <text x="40" y="1266" font-size="11.5" fill="#888888">Machine generated overview (snapshot of master, end of July 2026, not automatically updated). Companion docs: src/docs/developer/21.OmegaTInternals.md · 22.CoreEvents.md · 23.CoreMethods.md · 36.SourceTree.md</text>
 </svg>

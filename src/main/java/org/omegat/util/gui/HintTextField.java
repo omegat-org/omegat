@@ -67,6 +67,9 @@ public class HintTextField extends JTextField {
 
     public void setHintText(String hintText) {
         this.hintText = hintText;
+        // The hint doubles as the field's label; expose it to assistive
+        // technologies, which otherwise only see the hint as field content.
+        getAccessibleContext().setAccessibleName(hintText);
         if (!isDirty) {
             showHint();
         }

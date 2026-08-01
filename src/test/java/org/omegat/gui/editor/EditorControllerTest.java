@@ -58,7 +58,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -92,18 +91,12 @@ public class EditorControllerTest extends TestCore {
         TestCoreState.initFilters(List.of(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
     }
 
-
     private void setEmptyProject() {
         TestProjectProperties props = new TestProjectProperties();
         Core.setProject(new NotLoadedProject() {
             @Override
             public ProjectProperties getProjectProperties() {
                 return props;
-            }
-
-            @Override
-            public List<SourceTextEntry> getAllEntries() {
-                return Collections.emptyList();
             }
         });
     }

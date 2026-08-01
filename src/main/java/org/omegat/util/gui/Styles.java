@@ -29,6 +29,8 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.util.EnumSet;
+import java.util.Set;
 
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
@@ -323,15 +325,24 @@ public final class Styles {
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
 
+        /** Preference key suffixes for the configurable text style flags. */
+        private static final String STYLE_BOLD = "_STYLE_BOLD";
+        private static final String STYLE_ITALIC = "_STYLE_ITALIC";
+        private static final String STYLE_STRIKETHROUGH = "_STYLE_STRIKETHROUGH";
+
         private final String displayName;
         private final Color defaultColor;
         private Color color;
+        private boolean bold;
+        private boolean italic;
+        private boolean strikethrough;
 
         EditorColor(String displayName, Color defaultColor) {
             this.displayName = displayName;
             this.color = defaultColor;
             this.defaultColor = defaultColor;
             setColorFromPreference();
+            setTextStyleFromPreference();
         }
 
         EditorColor(String displayName, String defaultColor) {
@@ -347,6 +358,7 @@ public final class Styles {
             this.color = null;
             this.defaultColor = null;
             setColorFromPreference();
+            setTextStyleFromPreference();
         }
 
         private static Color getColor(String uiManagerKey, String defaultColor) {
@@ -390,6 +402,64 @@ public final class Styles {
                 Preferences.setPreference(name(), toHex());
             }
         }
+
+        private void setTextStyleFromPreference() {
+            bold = Preferences.isPreference(name() + STYLE_BOLD);
+            italic = Preferences.isPreference(name() + STYLE_ITALIC);
+            strikethrough = Preferences.isPreference(name() + STYLE_STRIKETHROUGH);
+        }
+
+        public boolean isBold() {
+            return bold;
+        }
+
+        public boolean isItalic() {
+            return italic;
+        }
+
+        public boolean isStrikethrough() {
+            return strikethrough;
+        }
+
+        /**
+         * Configure the text style rendered for text this colour marks. The
+         * flags are additive: they never remove bold/italic that a view
+         * option or a marker itself requests.
+         */
+        public void setTextStyle(boolean newBold, boolean newItalic, boolean newStrikethrough) {
+            if (bold == newBold && italic == newItalic && strikethrough == newStrikethrough) {
+                return;
+            }
+            this.bold = newBold;
+            this.italic = newItalic;
+            this.strikethrough = newStrikethrough;
+            Preferences.setPreference(name() + STYLE_BOLD, newBold);
+            Preferences.setPreference(name() + STYLE_ITALIC, newItalic);
+            Preferences.setPreference(name() + STYLE_STRIKETHROUGH, newStrikethrough);
+        }
+
+        /**
+         * Whether the entry marks text whose style can usefully be
+         * configured (as opposed to pure surfaces like backgrounds,
+         * separators or underline-only markers).
+         */
+        public boolean isTextStyleable() {
+            return TEXT_STYLEABLE.contains(this);
+        }
+
+        private static final Set<EditorColor> TEXT_STYLEABLE = EnumSet.of(
+                COLOR_ACTIVE_SOURCE, COLOR_ACTIVE_TARGET,
+                COLOR_SOURCE, COLOR_NOTED, COLOR_UNTRANSLATED, COLOR_TRANSLATED,
+                COLOR_NON_UNIQUE, COLOR_MOD_INFO, COLOR_PLACEHOLDER, COLOR_REMOVETEXT_TARGET,
+                COLOR_MARK_COMES_FROM_TM_MT, COLOR_MARK_COMES_FROM_TM_XICE,
+                COLOR_MARK_COMES_FROM_TM_X100PC, COLOR_MARK_COMES_FROM_TM_XAUTO,
+                COLOR_MARK_COMES_FROM_TM_XENFORCED, COLOR_MARK_ALT_TRANSLATION,
+                COLOR_REPLACE, COLOR_LANGUAGE_TOOLS, COLOR_TRANSTIPS, COLOR_TERMINOLOGY,
+                COLOR_MATCHES_CHANGED, COLOR_MATCHES_UNCHANGED,
+                COLOR_MATCHES_INS_ACTIVE, COLOR_MATCHES_INS_INACTIVE,
+                COLOR_MATCHES_DEL_ACTIVE, COLOR_MATCHES_DEL_INACTIVE,
+                COLOR_GLOSSARY_SOURCE, COLOR_GLOSSARY_TARGET, COLOR_GLOSSARY_NOTE,
+                COLOR_SEARCH_FOUND_MARK, COLOR_SEARCH_REPLACE_MARK);
     }
 
     /**
@@ -435,6 +505,29 @@ public final class Styles {
             StyleConstants.setUnderline(r, underline);
         }
 
+        return r;
+    }
+
+    /**
+     * Overlay the text style configured for the given colour entry onto an
+     * attribute set. Additive: flags that are off leave the base attributes
+     * untouched, so view options and marker-specific styling keep working.
+     */
+    public static AttributeSet overlayTextStyle(@Nullable EditorColor style, AttributeSet base) {
+        if (style == null || !(style.isBold() || style.isItalic() || style.isStrikethrough())) {
+            return base;
+        }
+        MutableAttributeSet r = new SimpleAttributeSet();
+        r.addAttributes(base);
+        if (style.isBold()) {
+            StyleConstants.setBold(r, true);
+        }
+        if (style.isItalic()) {
+            StyleConstants.setItalic(r, true);
+        }
+        if (style.isStrikethrough()) {
+            StyleConstants.setStrikeThrough(r, true);
+        }
         return r;
     }
 }

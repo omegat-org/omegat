@@ -72,7 +72,7 @@ public class FilterMasterTest {
 
         TestCoreState.resetState();
         TestCoreState.getInstance().setFilterClasses(
-                Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
+                List.of(org.omegat.filters3.xml.xhtml.XHTMLFilter.class));
     }
 
     @After

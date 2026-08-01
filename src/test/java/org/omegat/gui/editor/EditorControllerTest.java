@@ -89,7 +89,7 @@ public class EditorControllerTest extends TestCore {
     public final void setUp() throws IOException {
         projectRootDir = Files.createTempDirectory("omegat").toFile();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        TestCoreState.initFilters(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
+        TestCoreState.initFilters(List.of(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
     }
 
 

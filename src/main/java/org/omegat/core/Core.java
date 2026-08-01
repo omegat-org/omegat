@@ -161,6 +161,14 @@ public final class Core {
         EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
     }
 
+    public static List<Class<?>> getFilterClasses() {
+        return CoreState.getInstance().getFilterClasses();
+    }
+
+    public static void setFilterClasses(List<Class<?>> classes) {
+        CoreState.getInstance().setFilterClasses(classes);
+    }
+
     public static IProjectFilesList getProjectFilesList() {
         return CoreState.getInstance().getProjWin();
     }

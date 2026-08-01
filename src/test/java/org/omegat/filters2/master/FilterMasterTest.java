@@ -50,6 +50,7 @@ import org.junit.Test;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -69,13 +70,15 @@ public class FilterMasterTest {
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
 
-        FilterMaster.setFilterClasses(
+        TestCoreState.resetState();
+        TestCoreState.getInstance().setFilterClasses(
                 Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
     }
 
     @After
     public final void tearDown() throws Exception {
         FileUtils.delete(tempFilter);
+        TestCoreState.resetState();
     }
 
     @Test
@@ -104,13 +107,13 @@ public class FilterMasterTest {
             throw new ExceptionInInitializerError(ex);
         }
         Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
-        List<Option> option = filtersConfig.getFilters().get(0).getOption();
+        List<Option> option = filtersConfig.getFilters().getFirst().getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());
         assertNull(option.get(0).getName());
 
         XmlMapper mapper = FilterMaster.getMapper();
         Filters filtersConfig2 = mapper.readValue(filters, Filters.class);
-        List<Option> option2 = filtersConfig2.getFilters().get(0).getOption();
+        List<Option> option2 = filtersConfig2.getFilters().getFirst().getOption();
         assertFalse("Desierialized <option/> is empty", option2.isEmpty());
         assertNull(option2.get(0).getName());
     }

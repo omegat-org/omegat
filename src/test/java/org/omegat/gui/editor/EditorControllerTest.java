@@ -37,10 +37,10 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
@@ -89,8 +89,7 @@ public class EditorControllerTest extends TestCore {
     public final void setUp() throws IOException {
         projectRootDir = Files.createTempDirectory("omegat").toFile();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.initFilters(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
     }
 
 

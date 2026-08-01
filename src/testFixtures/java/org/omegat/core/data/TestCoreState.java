@@ -25,12 +25,17 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import org.omegat.core.Core;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.main.IMainWindow;
+
+import gen.core.filters.Filters;
 
 import javax.swing.SwingUtilities;
 import java.awt.HeadlessException;
 import java.awt.Window;
+import java.util.List;
 
 public class TestCoreState extends CoreState {
 
@@ -142,6 +147,7 @@ public class TestCoreState extends CoreState {
         // 4. Clear core components
         state.setSegmenter(null);
         state.setFilterMaster(null);
+        state.getFilterClasses().clear();
         state.setGlossaryManager(null);
         state.setTagValidation(null);
         state.setIssuesWindow(null);
@@ -179,5 +185,34 @@ public class TestCoreState extends CoreState {
 
     public static void initAutoSave(IAutoSave autoSave) {
         CoreState.getInstance().setSaveThread(autoSave);
+    }
+
+    /**
+     * Register the given filter classes and install a {@link FilterMaster} built
+     * from the default configuration. Convenience for tests that need filter
+     * lookup. Order matters: classes are registered first so that
+     * {@link FilterMaster#createDefaultFiltersConfig()} sees them.
+     *
+     * @param filterClasses
+     *            the filter classes to register
+     */
+    public static void initFilters(List<Class<?>> filterClasses) {
+        initFilters(filterClasses, null);
+    }
+
+    /**
+     * Register the given filter classes and install a {@link FilterMaster}. When
+     * {@code config} is null the default configuration is used; pass a custom
+     * {@link Filters} to test a specific filter configuration.
+     *
+     * @param filterClasses
+     *            the filter classes to register
+     * @param config
+     *            the filter configuration, or null to use the default
+     */
+    public static void initFilters(List<Class<?>> filterClasses, Filters config) {
+        getInstance().setFilterClasses(filterClasses);
+        Filters cfg = config != null ? config : FilterMaster.createDefaultFiltersConfig();
+        Core.setFilterMaster(new FilterMaster(cfg));
     }
 }

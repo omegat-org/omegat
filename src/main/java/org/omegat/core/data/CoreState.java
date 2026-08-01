@@ -125,6 +125,9 @@ public class CoreState {
     // Issues providers registry (per CoreState instance)
     private final List<IIssueProvider> issueProvidersRegistry = new CopyOnWriteArrayList<>();
 
+    // Registry of available filter classes (per CoreState instance)
+    private final List<Class<?>> filterClasses = new CopyOnWriteArrayList<>();
+
     public boolean isProjectLoaded() {
         if (project == null) {
             return false;
@@ -202,6 +205,20 @@ public class CoreState {
 
     public void setFilterMaster(FilterMaster filterMaster) {
         this.filterMaster = filterMaster;
+    }
+
+    /**
+     * Returns the mutable registry of available filter classes bound to this
+     * CoreState instance. Used by {@link FilterMaster} to look up and
+     * instantiate filters.
+     */
+    public List<Class<?>> getFilterClasses() {
+        return filterClasses;
+    }
+
+    public void setFilterClasses(List<Class<?>> classes) {
+        filterClasses.clear();
+        filterClasses.addAll(classes);
     }
 
     public ITagValidation getTagValidation() {

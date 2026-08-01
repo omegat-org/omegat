@@ -8,12 +8,13 @@ dependencies {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/icu4j-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir,
-                includes: ['**/language-ja-*.jar', '**/lucene-gosen-*.jar'])
+                includes: ['**/language-ja-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.ja) {
             exclude module: 'languagetool-core'
+            exclude module: 'lucene-analysis-kuromoji'
         }
         compileOnly(libs.icu4j)
     }

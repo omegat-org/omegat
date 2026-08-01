@@ -165,7 +165,7 @@ dependencies {
 
         // Script editor
         implementation(libs.bundles.fifesoft) {
-            exclude module: 'rhino'
+            exclude module: 'rhino-all'
         }
 
         implementation(libs.guava)

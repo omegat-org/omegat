@@ -33,14 +33,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: arm64
-            runner: ubuntu-24.04-arm
-            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
-            gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
-          - arch: amd64
-            runner: ubuntu-latest
-            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
-            gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
+        - arch: arm64
+          runner: ubuntu-24.04-arm
+          jre25_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
+          jre17_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.19_10.tar.gz
+          gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
+        - arch: amd64
+          runner: ubuntu-latest
+          jre25_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
+          jre17_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_x64_linux_hotspot_17.0.19_10.tar.gz
+          gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
@@ -65,12 +67,21 @@ jobs:
 
       - name: Download JRE (${{ matrix.arch }})
         env:
-          JRE_URL: ${{ matrix.jre_url }}
+          TARGET_BRANCH: ${{ github.event.inputs.branch || github.ref_name }}
+          JRE17_URL: ${{ matrix.jre17_url }}
+          JRE25_URL: ${{ matrix.jre25_url }}
         run: |
+          set -euo pipefail
           mkdir -p "$RUNNER_TEMP/asset"
-          JRE_FILE="$RUNNER_TEMP/asset/$(basename "$JRE_URL")"
-          curl -fL "${{ env.JRE_URL }}" -o "$JRE_FILE"
+          if [[ "$TARGET_BRANCH" == "releases/6.1" ]]; then
+            URL="$JRE17_URL"
+          else
+            URL="$JRE25_URL"
+          fi
+          JRE_FILE="$RUNNER_TEMP/asset/$(basename "$URL")"
+          curl -fL --retry 5 --retry-delay 5 --retry-all-errors "$URL" -o "$JRE_FILE"
           tar tf "$JRE_FILE" | head -30
+
 
       - name: Build distributions
         run: |

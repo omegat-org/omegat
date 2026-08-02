@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.2.0
 ----------------------------------------------------------------------
-   4 Enhancement
+   9 Enhancement
    0 Bug fixes
    0 Localisation updates
 ----------------------------------------------------------------------
@@ -18,8 +18,23 @@
   - Display translated percentage on Project files dialog
     https://sourceforge.net/p/omegat/feature-requests/1775/
 
+  - Change label "Project translation" to "Committed target files"
+    https://sourceforge.net/p/omegat/feature-requests/1731/
+
+  - rename 'Search in comments', it is actually searching in all properties
+    https://sourceforge.net/p/omegat/feature-requests/1516/
+
+  - Add a "Find Previous" button to the Search window
+    https://sourceforge.net/p/omegat/feature-requests/1380/
+
+  - Rename "Save" to "Export" in Autotext Configuration dialog
+    https://sourceforge.net/p/omegat/feature-requests/1265/
+
   - Convert full-width Arabic numbers to half-width when inserting a fuzzy match
     https://sourceforge.net/p/omegat/feature-requests/1193/
+
+  - Find Next button on Search window
+    https://sourceforge.net/p/omegat/feature-requests/1125/
 
   - Migrate the main data store project_save.tmx as TMX 1.4 level 2
     https://github.com/omegat-org/omegat/pull/1577

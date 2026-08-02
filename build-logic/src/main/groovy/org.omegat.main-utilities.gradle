@@ -1,6 +1,3 @@
-plugins {
-    id 'org.omegat.common-utilities'
-}
 
 tasks.register('checksums') {
     def algos = ['SHA-512']

@@ -1,5 +1,6 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.omegat.gradle.DistPathUtil
 
 plugins {
     id 'edu.sc.seis.launch4j'
@@ -131,7 +132,7 @@ ext.makeWinTask = { args ->
             from(zipTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
-                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                    DistPathUtil.replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
                 }
             }
         }

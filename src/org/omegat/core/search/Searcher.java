@@ -61,6 +61,7 @@ import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.CancellationToken;
@@ -503,7 +504,8 @@ public class Searcher {
                 SourceTextEntry ste = allEntries.get(i);
                 TMXEntry te = project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, te.note, propertiesWithKeyFields(ste), te, i,
+                        null);
                 checkInterrupted();
             }
 
@@ -589,6 +591,41 @@ public class Searcher {
             checkEntry(tm.getSourceText(), tm.getTranslationText(), tm.getNote(), null, null, origin, tmxID);
 
             checkInterrupted();
+        }
+    }
+
+    /**
+     * The segment properties pane shows the entry's file, id and path (the
+     * {@link EntryKey} fields) next to the raw entry properties, so the
+     * property search covers those key fields as well. They are appended as
+     * name/value pairs, matching the layout the value-only property loop in
+     * {@link #searchString} expects.
+     */
+    private static String @Nullable [] propertiesWithKeyFields(SourceTextEntry ste) {
+        EntryKey key = ste.getKey();
+        List<String> keyFields = new ArrayList<>(6);
+        addKeyField(keyFields, SegmentProperties.FILE, key.file);
+        addKeyField(keyFields, SegmentProperties.ID, key.id);
+        addKeyField(keyFields, SegmentProperties.PATH, key.path);
+        String[] props = ste.getRawProperties();
+        if (keyFields.isEmpty()) {
+            return props;
+        }
+        int base = props == null ? 0 : props.length;
+        String[] result = new String[base + keyFields.size()];
+        if (props != null) {
+            System.arraycopy(props, 0, result, 0, base);
+        }
+        for (int i = 0; i < keyFields.size(); i++) {
+            result[base + i] = keyFields.get(i);
+        }
+        return result;
+    }
+
+    private static void addKeyField(List<String> target, String name, @Nullable String value) {
+        if (value != null && !value.isEmpty()) {
+            target.add(name);
+            target.add(value);
         }
     }
 

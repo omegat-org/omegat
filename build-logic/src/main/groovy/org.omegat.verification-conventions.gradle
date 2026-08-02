@@ -4,7 +4,6 @@ import org.gradle.api.services.BuildServiceParameters
 import java.util.concurrent.atomic.AtomicReference
 
 plugins {
-    id 'org.omegat.common-utilities'
     id 'application'
     id 'jacoco'
     id 'jacoco-report-aggregation'

@@ -473,7 +473,7 @@ tasks.withType(Zip).configureEach {
 }
 
 def provided = findProperty('repoRevision') ?: ''
-def gitArchival = loadProperties(file('.git-archival.properties')).getProperty('node')
+def gitArchival = PropertiesUtil.loadProperties(file('.git-archival.properties')).getProperty('node')
 def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
 def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
     !it.empty && it != '@dev@' && it != '$Format:%H$'

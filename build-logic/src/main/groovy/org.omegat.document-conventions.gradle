@@ -3,7 +3,6 @@ import org.omegat.gradle.PropertiesUtil
 
 plugins {
     id 'org.omegat.documentation'
-    id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
 }

@@ -221,9 +221,11 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>In comments</term>
+            <term>In properties</term>
             <listitem>
-               <para>Search in comments attached to segments.</para>
+               <para>Search in the properties attached to segments, including the
+                  		  segment's file, ID and path, as displayed in the
+                  <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"></link> pane.</para>
             </listitem>
          </varlistentry>
          <varlistentry>

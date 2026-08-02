@@ -64,14 +64,17 @@ jobs:
           sudo apt-get install -y rpm
 
       - name: Download JRE (${{ matrix.arch }})
+        env:
+          JRE_URL: ${{ matrix.jre_url }}
         run: |
-          mkdir -p asset
-          cd asset
-          curl -L -O ${{ matrix.jre_url }}
+          mkdir -p "$RUNNER_TEMP/asset"
+          JRE_FILE="$RUNNER_TEMP/asset/$(basename "$JRE_URL")"
+          curl -fL "${{ env.JRE_URL }}" -o "$JRE_FILE"
+          tar tf "$JRE_FILE" | head -30
 
       - name: Build distributions
         run: |
-          ./gradlew ${{ matrix.gradle_tasks }} -PassetDir=asset --build-cache -PenvIsCi
+          ./gradlew ${{ matrix.gradle_tasks }} --build-cache -PenvIsCi "-PassetDir=$RUNNER_TEMP/asset"
 
       - name: Record project version into artifact
         run: |

@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,6 +57,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Language;
 
@@ -76,6 +78,7 @@ public class EditorProjectReloadLeakTest extends TestCore {
     private static final int CYCLES = 3;
 
     private EditorController editorController;
+    private ProjectFilesListController projectFilesListController;
     private File projectRoot;
 
     @BeforeClass
@@ -215,7 +218,17 @@ public class EditorProjectReloadLeakTest extends TestCore {
      */
     @Before
     public final void setUpProjectFilesWindow() {
-        new org.omegat.gui.filelist.ProjectFilesListController();
+        projectFilesListController = new ProjectFilesListController();
+    }
+
+    /**
+     * Unregister the controller's global listeners again: they would stay
+     * registered for the rest of the test JVM and fire on later tests'
+     * project events, against project stubs they were never written for.
+     */
+    @After
+    public final void tearDownProjectFilesWindow() {
+        projectFilesListController.dispose();
     }
 
     @Override

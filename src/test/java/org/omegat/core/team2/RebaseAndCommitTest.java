@@ -30,6 +30,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,7 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.omegat.core.KnownException;
 import org.omegat.core.team2.operation.IRebaseOperation;
 
 import gen.core.project.RepositoryDefinition;
@@ -189,6 +191,38 @@ public class RebaseAndCommitTest {
         assertEquals("merged", repo.versions.get(getMarker()));
     }
 
+    // ---------------------------------------------------------------------
+    // Repository initialization failures must fail fast and clear
+    // ---------------------------------------------------------------------
+
+    @Test
+    public void initFailureThrowsLocalizedError() {
+        RemoteRepositoryFactory.addRepositoryConnector("failing", FailingRepo.class);
+        RepositoryDefinition def = definition("https://example.com/broken.git");
+        def.setType("failing");
+        try {
+            new RemoteRepositoryProvider(projectDir, List.of(def));
+            fail("provider construction must fail when a repository cannot be initialized");
+        } catch (KnownException ex) {
+            assertEquals("TEAM_REPOSITORY_INIT_ERROR", ex.getMessage());
+            assertEquals("https://example.com/broken.git", ex.getParams()[0]);
+            assertTrue(ex.getCause() instanceof IOException);
+        }
+    }
+
+    @Test
+    public void initFailureOnUnknownConnectorTypeThrowsLocalizedError() {
+        RepositoryDefinition def = definition("https://example.com/other.git");
+        def.setType("no-such-connector-type");
+        try {
+            new RemoteRepositoryProvider(projectDir, List.of(def));
+            fail("provider construction must fail for an unknown connector type");
+        } catch (KnownException ex) {
+            assertEquals("TEAM_REPOSITORY_INIT_ERROR", ex.getMessage());
+            assertEquals("https://example.com/other.git", ex.getParams()[0]);
+        }
+    }
+
     @Test
     public void prepareWithoutMarkerReturnsNull() throws Exception {
         repo.addVersion("one");
@@ -299,6 +333,47 @@ public class RebaseAndCommitTest {
         @Override
         public String commit(String[] onVersions, String comment) throws Exception {
             return addVersion(Files.readString(new File(workDir, PATH).toPath()));
+        }
+    }
+
+    /** Repository connector whose initialization always fails. */
+    public static final class FailingRepo implements IRemoteRepository2 {
+        @Override
+        public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings)
+                throws Exception {
+            throw new IOException("boom");
+        }
+
+        @Override
+        public String getFileVersion(String file) {
+            return null;
+        }
+
+        @Override
+        public void switchToVersion(String version) {
+        }
+
+        @Override
+        public void addForCommit(String path) {
+        }
+
+        @Override
+        public void addForDeletion(String path) {
+        }
+
+        @Override
+        public File getLocalDirectory() {
+            return null;
+        }
+
+        @Override
+        public String[] getRecentlyDeletedFiles() {
+            return new String[0];
+        }
+
+        @Override
+        public String commit(String[] onVersions, String comment) {
+            return null;
         }
     }
 

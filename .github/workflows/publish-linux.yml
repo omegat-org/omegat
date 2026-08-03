@@ -102,7 +102,7 @@ jobs:
           name: dist-${{ matrix.arch }}
           path: build/distributions/
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 1
 
   publish:
     needs: build

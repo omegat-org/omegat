@@ -223,6 +223,41 @@ public class RebaseAndCommitTest {
         }
     }
 
+    // ---------------------------------------------------------------------
+    // Version checkout failures must name the file, version and repository
+    // ---------------------------------------------------------------------
+
+    @Test
+    public void switchToUnknownVersionExplainsWhatWasLookedUp() throws Exception {
+        repo.addVersion("one");
+        try {
+            provider.switchToVersion(PATH, "deadbeef");
+            fail("switching to an unknown version must fail");
+        } catch (KnownException ex) {
+            assertEquals("TEAM_SWITCH_VERSION_ERROR", ex.getMessage());
+            assertEquals(PATH, ex.getParams()[0]);
+            assertEquals("deadbeef", ex.getParams()[1]);
+            assertEquals(REPO_URL, ex.getParams()[2]);
+            assertTrue(ex.getCause().getMessage().contains("Missing unknown"));
+            assertTrue("localized text must name the looked-up file",
+                    ex.getLocalizedMessage().contains(PATH));
+            assertTrue("localized text must name the missing version",
+                    ex.getLocalizedMessage().contains("deadbeef"));
+        }
+    }
+
+    @Test
+    public void switchToLatestVersionFailurePassesThrough() {
+        // an empty repository cannot even provide a latest version; that is no
+        // stale-marker situation, so the raw backend error must survive
+        try {
+            provider.switchToVersion(PATH, null);
+            fail("switching in an empty repository must fail");
+        } catch (Exception ex) {
+            assertFalse(ex instanceof KnownException);
+        }
+    }
+
     @Test
     public void prepareWithoutMarkerReturnsNull() throws Exception {
         repo.addVersion("one");

@@ -254,9 +254,24 @@ public class RemoteRepositoryProvider {
      * Switch repository that contains path to specified version. If version is
      * null, need to switch to latest version. Returns the path in the remote
      * repository ( /path/to/omegatproject/.repositories/url/filepath
+     * <p>
+     * A failure to reach a specific version is reported with the file, the
+     * version and the repository URL instead of the raw backend error (such as
+     * JGit's "Missing unknown &lt;hash&gt;"), because the version usually
+     * comes from the stored team sync marker and the plain backend message
+     * gives the user no clue what was looked up, or why.
      */
     public File switchToVersion(String filePath, @Nullable String version) throws Exception {
-        return oneMapping(filePath).switchToVersion(version);
+        Mapping mapping = oneMapping(filePath);
+        if (version == null) {
+            return mapping.switchToVersion(null);
+        }
+        try {
+            return mapping.switchToVersion(version);
+        } catch (Exception ex) {
+            throw new KnownException(ex, "TEAM_SWITCH_VERSION_ERROR", filePath, version,
+                    mapping.repoDefinition.getUrl());
+        }
     }
 
     /**

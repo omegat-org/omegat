@@ -1,5 +1,7 @@
 import java.util.zip.ZipFile
 
+import org.omegat.gradle.BuildConditions
+import org.omegat.gradle.DistPathUtil
 import org.omegat.gradle.InjectedOps
 
 configurations {
@@ -119,7 +121,7 @@ ext.makeNativeLibsSignTask = {
         def contentsTask = tasks.register("signNativeLibContents_${taskId}", Sync) {
             onlyIf {
                 // Set macCodesignIdentity in e.g. local.properties
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                BuildConditions.conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
                         [exePresent('codesign'), 'codesign command is not present in system.'])
             }
             from zipTree(jar)
@@ -139,7 +141,7 @@ ext.makeNativeLibsSignTask = {
 
         tasks.register("signNativeLibJar_${taskId}", Jar) {
             onlyIf {
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                BuildConditions.conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
                         [exePresent('codesign'), 'codesign command is not present in system.'])
             }
             from contentsTask
@@ -184,7 +186,7 @@ ext.makeMacTask = { args ->
                 into 'OmegaT.app/Contents/PlugIns'
                 includeEmptyDirs = false
                 eachFile {
-                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                    DistPathUtil.replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                 }
             }
         }
@@ -208,7 +210,7 @@ ext.makeMacTask = { args ->
         description = 'Builds the signed macOS distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
-            conditions([macSigned, 'Code signing property not set'],
+            BuildConditions.conditions([macSigned, 'Code signing property not set'],
                     [args.jrePath && !args.jrePath.empty, 'JRE not found'],
                     [exePresent('codesign'), 'codesign command is not present in system.'])
         }

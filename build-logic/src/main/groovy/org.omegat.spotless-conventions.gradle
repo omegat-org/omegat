@@ -2,7 +2,6 @@ plugins {
     id 'java-library'
     id 'eclipse'
     id 'com.diffplug.spotless'
-    id 'org.omegat.common-utilities'
 }
 
 // The git queries run at configuration time, and only when one of the branch

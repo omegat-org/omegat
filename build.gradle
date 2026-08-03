@@ -1,5 +1,6 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.omegat.gradle.PropertiesUtil
 
 plugins {
     id 'org.omegat.version'
@@ -262,7 +263,7 @@ dependencies {
 
 jar {
     def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
-    def omtPlugins = loadProperties(pluginProperties.asFile)
+    def omtPlugins = PropertiesUtil.loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -472,7 +473,7 @@ tasks.withType(Zip).configureEach {
 }
 
 def provided = findProperty('repoRevision') ?: ''
-def gitArchival = loadProperties(file('.git-archival.properties')).getProperty('node')
+def gitArchival = PropertiesUtil.loadProperties(file('.git-archival.properties')).getProperty('node')
 def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
 def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
     !it.empty && it != '@dev@' && it != '$Format:%H$'

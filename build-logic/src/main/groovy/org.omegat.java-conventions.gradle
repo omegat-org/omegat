@@ -4,7 +4,6 @@ plugins {
     id 'jacoco'
     id 'pmd'
     id 'com.github.spotbugs'
-    id 'org.omegat.common-utilities'
     id 'net.ltgt.errorprone'
     id 'net.ltgt.nullaway'
 }

@@ -24,7 +24,7 @@ jobs:
       with:
         java-version: 21
         distribution: 'temurin'
-    - uses: gradle/actions/setup-gradle@v6
+    - uses: gradle/actions/setup-gradle@v6.2.0
       name: Setup Gradle
     - name: Build source distribution
       run: |

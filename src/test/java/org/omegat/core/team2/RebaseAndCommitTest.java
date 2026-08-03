@@ -258,10 +258,114 @@ public class RebaseAndCommitTest {
         }
     }
 
+    // ---------------------------------------------------------------------
+    // A stored base version that no longer exists must not break the project
+    // ---------------------------------------------------------------------
+
     @Test
     public void prepareWithoutMarkerReturnsNull() throws Exception {
         repo.addVersion("one");
         assertNull(RebaseAndCommit.prepare(provider, projectDir, PATH));
+    }
+
+    @Test
+    public void prepareWithStaleMarkerReturnsNullInsteadOfFailing() throws Exception {
+        repo.addVersion("one");
+        setMarker("gone1234");
+        assertNull(RebaseAndCommit.prepare(provider, projectDir, PATH));
+    }
+
+    @Test
+    public void rebaseWithStaleMarkerMergesAgainstEmptyBaseAndHealsTheMarker() throws Exception {
+        repo.addVersion("content");
+        setMarker("gone1234");
+        writeLocal("content");
+
+        RebaseAndCommit.rebaseAndCommit(null, provider, projectDir, PATH, rebaser);
+        assertNotNull("project loading must survive a stale marker", rebaser.reloaded);
+        assertTrue("without a trustworthy base, local and remote must be merged", rebaser.rebased);
+        assertNull("the base must be treated as empty data", rebaser.baseContent);
+        assertEquals("content", rebaser.headContent);
+        assertEquals("the marker must be healed to the merged commit", "merged",
+                repo.versions.get(getMarker()));
+    }
+
+    @Test
+    public void rebaseWithStaleMarkerNeverOverwritesRemoteChanges() throws Exception {
+        // remote moved on after the history rewrite; the local file is based
+        // on a lost version. Neither side may silently win.
+        repo.addVersion("remote work by a colleague");
+        setMarker("gone1234");
+        writeLocal("local work based on a lost version");
+
+        RebaseAndCommit.rebaseAndCommit(null, provider, projectDir, PATH, rebaser);
+        assertTrue("a three-way merge with an empty base is required", rebaser.rebased);
+        assertEquals("remote work by a colleague", rebaser.headContent);
+        assertEquals("the merge result must be committed, not the plain local file", "merged",
+                repo.versions.get(getMarker()));
+    }
+
+    @Test
+    public void staleMarkerWithUnreachableLatestVersionStillFails() throws Exception {
+        // no versions in the repository at all: the fallback cannot determine
+        // a latest version either, and that failure must surface
+        setMarker("gone1234");
+        writeLocal("content");
+        try {
+            RebaseAndCommit.rebaseAndCommit(null, provider, projectDir, PATH, rebaser);
+            fail("an unreachable latest version must still be an error");
+        } catch (Exception ex) {
+            assertTrue("no commit must have happened", repo.versions.isEmpty());
+            assertEquals("the marker must not be healed on failure", "gone1234", getMarker());
+        }
+    }
+
+    @Test
+    public void transientCheckoutFailureFailsLoudAndKeepsTheMarker() throws Exception {
+        // a lock file or a network outage is not a lost version: recovering
+        // would replace a still-valid base and merge against the wrong state
+        String v1 = repo.addVersion("content");
+        setMarker(v1);
+        writeLocal("content with local change");
+        repo.nextSwitchFailure = new IOException("cannot lock index.lock");
+        try {
+            RebaseAndCommit.rebaseAndCommit(null, provider, projectDir, PATH, rebaser);
+            fail("a transient checkout failure must not be swallowed");
+        } catch (Exception ex) {
+            assertEquals("the valid marker must survive a transient failure", v1, getMarker());
+            assertEquals("nothing must have been committed", 1, repo.versions.size());
+        }
+    }
+
+    @Test
+    public void transientCheckoutFailureInPrepareIsNotSwallowed() throws Exception {
+        String v1 = repo.addVersion("content");
+        setMarker(v1);
+        repo.nextSwitchFailure = new IOException("connection refused");
+        try {
+            RebaseAndCommit.prepare(provider, projectDir, PATH);
+            fail("a transient checkout failure must not be reported as a lost version");
+        } catch (Exception ex) {
+            assertEquals(v1, getMarker());
+        }
+    }
+
+    @Test
+    public void reusingTheReturnedInfoRechecksOutInsteadOfCrashing() throws Exception {
+        // the returned info carries versions but no prepared files; a second
+        // rebase with it must fall back to fresh checkouts, not NPE
+        String v1 = repo.addVersion("one");
+        setMarker(v1);
+        writeLocal("one");
+
+        PreparedFileInfo first = RebaseAndCommit.prepare(provider, projectDir, PATH);
+        PreparedFileInfo result = RebaseAndCommit.rebaseAndCommit(first, provider, projectDir, PATH,
+                rebaser);
+        PreparedFileInfo again = RebaseAndCommit.rebaseAndCommit(result, provider, projectDir, PATH,
+                rebaser);
+        assertNotNull(again);
+        assertFalse(again.needToCommit());
+        assertEquals(v1, getMarker());
     }
 
     @Test
@@ -274,6 +378,19 @@ public class RebaseAndCommitTest {
         assertNotNull(rebaser.reloaded);
         assertEquals("an intact marker must stay untouched", v1, getMarker());
         assertEquals(1, repo.versions.size());
+    }
+
+    @Test
+    public void missingLocalFileTakesRemoteWithStaleMarker() throws Exception {
+        String v1 = repo.addVersion("remote content");
+        setMarker("gone1234");
+        // no local file at all
+
+        RebaseAndCommit.rebaseAndCommit(null, provider, projectDir, PATH, rebaser);
+        File localFile = new File(projectDir, PATH);
+        assertTrue("the remote content must have been taken over", localFile.isFile());
+        assertEquals("remote content", Files.readString(localFile.toPath()));
+        assertEquals(v1, getMarker());
     }
 
     // ---------------------------------------------------------------------

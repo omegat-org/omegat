@@ -200,6 +200,10 @@ public final class RebaseAndCommit {
 
         if (prep != null) {
             Prepared prepared = new Prepared();
+            // commitPrepared() later needs the path and the head version
+            prepared.path = path;
+            prepared.versionBase = currentBaseVersion;
+            prepared.versionHead = headVersion;
             prepared.needToCommit = fileChangedLocally;
             prepared.commitComment = rebaser.getCommentForCommit();
             if (fileChangedLocally) {

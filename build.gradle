@@ -64,6 +64,15 @@ configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     moduleRuntimeLibs
+    // Module jars shipped in the distribution 'modules' folder. Declared as project
+    // dependencies (see the dependencies block below) so that configure-on-demand
+    // configures the module projects; reaching into their task containers instead
+    // silently yields nothing when only root-qualified task paths (e.g. ':installDist')
+    // are requested.
+    moduleDist {
+        canBeConsumed = false
+        transitive = false
+    }
 }
 
 dependencies {
@@ -253,10 +262,14 @@ dependencies {
     }
     subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
         jacocoAggregation sub
-        sub.plugins.withId('org.omegat.module') {
-            moduleRuntimeLibs(project(sub.path)) {
-                targetConfiguration = 'moduleRuntimeDependencies'
-            }
+        // Declared unconditionally: a plugins.withId callback never fires for projects
+        // that configure-on-demand leaves unconfigured. Every leaf subproject applies
+        // org.omegat.module, which provides both target configurations.
+        moduleRuntimeLibs(project(sub.path)) {
+            targetConfiguration = 'moduleRuntimeDependencies'
+        }
+        moduleDist(project(sub.path)) {
+            targetConfiguration = 'moduleJarElements'
         }
     }
 }
@@ -305,7 +318,7 @@ jar {
 
 test {
     // some test case depends on modules from subproject
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn configurations.moduleDist
     useJUnit {
         // Destructive memory-stress tests deliberately exhaust the heap;
         // they only run on explicit request via the memoryStressTest task.
@@ -317,7 +330,7 @@ tasks.register('memoryStressTest', Test) {
     group = 'verification'
     description = 'Runs the destructive memory-stress tests, which deliberately exhaust the heap.'
     // some test case depends on modules from subproject
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn configurations.moduleDist
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
     workingDir = projectDir
@@ -332,18 +345,6 @@ tasks.register('memoryStressTest', Test) {
         includeCategories 'org.omegat.core.MemoryStressTests'
     }
 }
-
-// Resolve module dependencies EAGERLY at configuration time
-def moduleLibs = subprojects
-        .findAll { it.subprojects.isEmpty() }
-        .collect {
-            it.configurations.matching {
-                it.name.endsWith('untimeClasspath')
-                        && !it.name.startsWith('test')
-                        && !it.name.startsWith('jaxb')
-            }
-        }
-        .flatten()
 
 def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
 def providedBuildLogicPath = 'lib/provided/build-logic'
@@ -363,7 +364,7 @@ distributions {
             from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
-                // in releases/win32-specific/OmegaT.iss
+                // in release/win32-specific/OmegaT.iss
                 // 'contributors.txt' and 'libraries.txt' are expected
                 // in org.omegat.gui.dialogs.AboutDialog#getContributors
                 // and org.omegat.gui.dialogs.AboutDialog#getLibraries
@@ -414,8 +415,8 @@ distributions {
             }
             // system core plugins into modules
             into('modules') {
-                from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from(layout.settingsDirectory.dir('releases/modules-specific'))
+                from(configurations.moduleDist)
+                from(layout.settingsDirectory.dir('release/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.

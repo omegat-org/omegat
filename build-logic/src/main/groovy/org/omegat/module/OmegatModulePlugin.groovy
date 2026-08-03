@@ -67,6 +67,13 @@ class OmegatModulePlugin implements Plugin<Project> {
             }
         }
 
+        // Exposes the module fat jar to the root project's moduleDist configuration.
+        project.configurations.create("moduleJarElements") {
+            canBeConsumed = true
+            canBeResolved = false
+        }
+        project.artifacts.add("moduleJarElements", project.tasks.named("jar", Jar))
+
         Map<String, Object> manifestAttrs = buildManifestAttributes(project)
 
         project.tasks.named("jar", Jar).configure { Jar jarTask ->

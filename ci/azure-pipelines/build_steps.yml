@@ -4,16 +4,25 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        mkdir -p $(System.ArtifactsDirectory)/asset
-        cd $(System.ArtifactsDirectory)/asset || exit 1
+        set -euo pipefail
+        props="$(Build.SourcesDirectory)/gradle.properties"
+        read_prop() { awk -F= -v k="$1" '$1==k{sub(/^[^=]*=/,""); print; exit}' "$props"; }
+        mkdir -p "$(System.ArtifactsDirectory)/asset"
+        cd "$(System.ArtifactsDirectory)/asset"
         jres=(
-          https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jre_aarch64_windows_hotspot_21.0.9_10.zip
-          https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_windows_hotspot_25.0.3_9.zip
+          "$(read_prop org.omegat.jre.windows.x64.url)"
+          "$(read_prop org.omegat.jre.windows.aarch64.url)"
+          "$(read_prop org.omegat.jre.linux.x64.url)"
+          "$(read_prop org.omegat.jre.linux.aarch64.url)"
         )
         for url in "${jres[@]}"; do
+          [ -n "$url" ] || { echo "##vso[task.logissue type=error]Missing JRE URL in gradle.properties"; exit 1; }
           file="$(basename "$url")"
           curl -fL "$url" -o "$file"
-          unzip -tq "$file" || { echo "##vso[task.logissue type=error]Downloaded file is not a valid zip: $file"; exit 1; }
+          case "$file" in
+            *.zip)    unzip -tq "$file" || { echo "##vso[task.logissue type=error]Invalid zip: $file";  exit 1; } ;;
+            *.tar.gz) gzip  -t  "$file" || { echo "##vso[task.logissue type=error]Invalid gzip: $file"; exit 1; } ;;
+          esac
         done
   - task: Cache@2
     displayName: 'Cache Gradle'
@@ -31,7 +40,7 @@ steps:
     displayName: 'Build docs'
   - task: Gradle@3
     inputs:
-      tasks: 'sourceDistZip distZip mac win'
+      tasks: 'sourceDistZip distZip mac win linux64DistTarBz linuxArm64DistTarBz'
       options: '--build-cache -PenvIsCi --scan -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.21'
     displayName: 'Build distribution packages'

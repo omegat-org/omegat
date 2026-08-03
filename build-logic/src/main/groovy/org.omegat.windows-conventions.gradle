@@ -79,13 +79,6 @@ launch4j {
     priority = 'normal'
 }
 
-def assetDir = findProperty('assetDir') ?: '../'
-def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK25U-jre_x64_windows_*.zip')
-def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
-tasks.register('win') {
-    description = 'Builds the Windows distributions.'
-    group = 'distribution'
-}
 ext.makeWinTask = { args ->
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
@@ -168,6 +161,3 @@ ext.makeWinTask = { args ->
     assemble.dependsOn distsTaskName
     tasks.win.dependsOn distsTaskName
 }
-makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE)
-makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)

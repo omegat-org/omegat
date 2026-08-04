@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,6 +34,8 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
+import org.jetbrains.annotations.VisibleForTesting;
+
 /**
  * Localizable strings.
  * <p>
@@ -60,6 +63,9 @@ public final class OStrings {
     /** Repository revision number, e.g. r7500 */
     public static final String REVISION;
 
+    /** Git branch of a development checkout, empty for release builds. */
+    public static final String BRANCH;
+
     /** Indicates whether this is a "beta" (or "latest") version or a "standard" version. */
     public static final boolean IS_BETA;
 
@@ -69,6 +75,7 @@ public final class OStrings {
         VERSION = b.getString("version");
         UPDATE = b.getString("update");
         REVISION = b.getString("revision");
+        BRANCH = b.containsKey("branch") ? b.getString("branch") : "";
         IS_BETA = !b.getString("beta").isEmpty();
     }
 
@@ -167,6 +174,25 @@ public final class OStrings {
             return StringUtil.format(getString("app-version-template-pretty"),
                     getApplicationDisplayName(), VERSION);
         }
+    }
+
+    /**
+     * Returns a marker identifying a development build, made of the revision
+     * and branch of the checkout, e.g. "[6d79ee8db @ master]". Empty when
+     * this build was not made from a branch checkout (release and tag builds).
+     */
+    public static String getDevBuildMarker() {
+        return getDevBuildMarker(REVISION, BRANCH);
+    }
+
+    @VisibleForTesting
+    static String getDevBuildMarker(String revision, String branch) {
+        // "HEAD" means a detached checkout, e.g. a tag build; the raw token
+        // means the resource was not filtered (running from an IDE build).
+        if (branch.isEmpty() || "HEAD".equals(branch) || "@gitbranch@".equals(branch)) {
+            return "";
+        }
+        return "[" + revision + " @ " + branch + "]";
     }
 
     /**

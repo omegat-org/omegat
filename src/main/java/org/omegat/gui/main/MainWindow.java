@@ -12,6 +12,7 @@
                2015 Yu Tang, Aaron Madlon-Kay
                2016 Didier Briel
                2023 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -291,6 +292,10 @@ public class MainWindow implements IMainWindow {
      */
     private void updateTitle() {
         String s = OStrings.getDisplayNameAndVersion();
+        String devBuildMarker = OStrings.getDevBuildMarker();
+        if (!devBuildMarker.isEmpty()) {
+            s += " " + devBuildMarker;
+        }
         if (Core.getProject().isProjectLoaded()) {
             s += " :: " + Core.getProject().getProjectProperties().getProjectName();
         }

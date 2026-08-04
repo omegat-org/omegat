@@ -76,10 +76,21 @@ class OmegatModulePlugin implements Plugin<Project> {
 
         Map<String, Object> manifestAttrs = buildManifestAttributes(project)
 
+        // Jars the application itself ships in lib/ must not be merged into the
+        // module fat jar: modules load through a parent-first class loader, so the
+        // application's copy always wins and a bundled duplicate is unreachable dead
+        // weight. Matching by archive file name keeps the filter conservative - as
+        // soon as either side changes the version, the artifact is bundled again.
+        // Reaching into the root project's configurations will need rework once
+        // Gradle enforces isolated projects, like the plugin's other rootProject uses.
+        def coreRuntimeClasspath = project.rootProject.configurations.getByName("runtimeClasspath")
+
         project.tasks.named("jar", Jar).configure { Jar jarTask ->
             from({
+                Set<String> coreJarNames = coreRuntimeClasspath.files.collect { it.name } as Set
                 project.configurations.getByName("runtimeClasspath")
                         .resolve()
+                        .findAll { dep -> !(dep.name in coreJarNames) }
                         .collect { dep ->
                             if (dep.directory) return dep
                             if (shouldSignDylibs(project) && containsNativeLibs(dep)) {

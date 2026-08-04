@@ -150,7 +150,7 @@ public final class Styles {
         /**
          * non unique entry text.
          */
-        COLOR_NON_UNIQUE("OmegaT.nonUnique", "#808080"),
+        COLOR_NON_UNIQUE("OmegaT.nonUnique", "#666666"),
         /**
          * non unique entry background. Defaults to the theme's subtle
          * alternating hilite, so repeated segments are tinted out of the box.
@@ -167,15 +167,15 @@ public final class Styles {
         /**
          * Tags placeholder color.
          */
-        COLOR_PLACEHOLDER("OmegaT.placeholder", "#969696"),
+        COLOR_PLACEHOLDER("OmegaT.placeholder", "#6b6b6b"),
         /**
          * Flagged text target color.
          */
-        COLOR_REMOVETEXT_TARGET("OmegaT.removeTextTarget", "#ff0000"),
+        COLOR_REMOVETEXT_TARGET("OmegaT.removeTextTarget", "#db0000"),
         /**
          * Non-breakable space character background.
          */
-        COLOR_NBSP("OmegaT.nbsp", "#c8c8c8"),
+        COLOR_NBSP("OmegaT.nbsp", "#888888"),
         /**
          * White space marker background color.
          */
@@ -187,7 +187,7 @@ public final class Styles {
         /**
          * Paragraph start delimitation background color.
          */
-        COLOR_PARAGRAPH_START("OmegaT.paragraphStart", "#aeaeae"),
+        COLOR_PARAGRAPH_START("OmegaT.paragraphStart", "#888888"),
         /**
          * The background color of a segment comes from MT memory.
          */
@@ -231,7 +231,7 @@ public final class Styles {
         /**
          * Terminology suggestion highlight color.
          */
-        COLOR_TERMINOLOGY("OmegaT.terminology", "#ff6600"),
+        COLOR_TERMINOLOGY("OmegaT.terminology", "#b84c00"),
         /**
          * Matches changed words background color.
          */
@@ -239,7 +239,7 @@ public final class Styles {
         /**
          * Matches unchanged words background color.
          */
-        COLOR_MATCHES_UNCHANGED("OmegaT.matchesUnchanged", "#00ff00"),
+        COLOR_MATCHES_UNCHANGED("OmegaT.matchesUnchanged", "#007a00"),
         /**
          * Glossary source text color (used as the foreground of glossary hits).
          */
@@ -267,7 +267,7 @@ public final class Styles {
         /**
          * Matches inserted inactive background color.
          */
-        COLOR_MATCHES_INS_INACTIVE("OmegaT.matchesInsInactive", "#808080"),
+        COLOR_MATCHES_INS_INACTIVE("OmegaT.matchesInsInactive", "#6c6c6c"),
         /**
          * Hyperlink highlight color.
          */
@@ -279,7 +279,7 @@ public final class Styles {
         /**
          * Search replace mark highlight color.
          */
-        COLOR_SEARCH_REPLACE_MARK("OmegaT.searchReplaceMark", "#ff9900"),
+        COLOR_SEARCH_REPLACE_MARK("OmegaT.searchReplaceMark", "#995c00"),
         /**
          * Notification (steady) color.
          */

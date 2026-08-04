@@ -113,16 +113,16 @@ public class DefaultFlatDarkTheme extends FlatLaf {
         // they style, so a typo cannot silently disconnect a value. Pen and
         // foreground colors are lightened for the dark background; the dark
         // background fills stay as designed.
-        defaults.put(EditorColor.COLOR_ACTIVE_SOURCE.getUIManagerKey(), new Color(0x287128));
-        defaults.put(EditorColor.COLOR_SOURCE.getUIManagerKey(), new Color(0x327682));
+        defaults.put(EditorColor.COLOR_ACTIVE_SOURCE.getUIManagerKey(), new Color(0x276d27));
+        defaults.put(EditorColor.COLOR_SOURCE.getUIManagerKey(), new Color(0x2b6570));
         defaults.put(EditorColor.COLOR_NOTED.getUIManagerKey(), new Color(0x306030));
         defaults.put(EditorColor.COLOR_UNTRANSLATED.getUIManagerKey(), new Color(0x4d4daa));
         defaults.put(EditorColor.COLOR_TRANSLATED.getUIManagerKey(), new Color(0x57572d));
-        defaults.put(EditorColor.COLOR_NON_UNIQUE.getUIManagerKey(), new Color(0x808080));
-        defaults.put(EditorColor.COLOR_PLACEHOLDER.getUIManagerKey(), new Color(0x969696));
-        defaults.put(EditorColor.COLOR_REMOVETEXT_TARGET.getUIManagerKey(), new Color(0x8f0000));
+        defaults.put(EditorColor.COLOR_NON_UNIQUE.getUIManagerKey(), new Color(0xebebeb));
+        defaults.put(EditorColor.COLOR_PLACEHOLDER.getUIManagerKey(), new Color(0xadadad));
+        defaults.put(EditorColor.COLOR_REMOVETEXT_TARGET.getUIManagerKey(), new Color(0xff9d9d));
         defaults.put(EditorColor.COLOR_NBSP.getUIManagerKey(), new Color(0xc8c8c8));
-        defaults.put(EditorColor.COLOR_WHITESPACE.getUIManagerKey(), new Color(0x808080));
+        defaults.put(EditorColor.COLOR_WHITESPACE.getUIManagerKey(), new Color(0x8d8d8d));
         defaults.put(EditorColor.COLOR_BIDIMARKERS.getUIManagerKey(), new Color(0xff8a80));
         defaults.put(EditorColor.COLOR_PARAGRAPH_START.getUIManagerKey(), new Color(0xaeaeae));
         defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getUIManagerKey(), new Color(0xaa8072));
@@ -135,12 +135,12 @@ public class DefaultFlatDarkTheme extends FlatLaf {
         defaults.put(EditorColor.COLOR_TRANSTIPS.getUIManagerKey(), new Color(0x4fa3ff));
         defaults.put(EditorColor.COLOR_SPELLCHECK.getUIManagerKey(), new Color(0xff5252));
         defaults.put(EditorColor.COLOR_TERMINOLOGY.getUIManagerKey(), new Color(0xffa94d));
-        defaults.put(EditorColor.COLOR_MATCHES_CHANGED.getUIManagerKey(), new Color(0x4fa3ff));
+        defaults.put(EditorColor.COLOR_MATCHES_CHANGED.getUIManagerKey(), new Color(0x69b0ff));
         defaults.put(EditorColor.COLOR_MATCHES_UNCHANGED.getUIManagerKey(), new Color(0x6cd96c));
-        defaults.put(EditorColor.COLOR_MATCHES_INS_ACTIVE.getUIManagerKey(), new Color(0x4fa3ff));
-        defaults.put(EditorColor.COLOR_MATCHES_INS_INACTIVE.getUIManagerKey(), new Color(0x308080));
-        defaults.put(EditorColor.COLOR_HYPERLINK.getUIManagerKey(), new Color(0x4fa3ff));
-        defaults.put(EditorColor.COLOR_SEARCH_FOUND_MARK.getUIManagerKey(), new Color(0x4fa3ff));
+        defaults.put(EditorColor.COLOR_MATCHES_INS_ACTIVE.getUIManagerKey(), new Color(0x69b0ff));
+        defaults.put(EditorColor.COLOR_MATCHES_INS_INACTIVE.getUIManagerKey(), new Color(0x4bbcbc));
+        defaults.put(EditorColor.COLOR_HYPERLINK.getUIManagerKey(), new Color(0x69b0ff));
+        defaults.put(EditorColor.COLOR_SEARCH_FOUND_MARK.getUIManagerKey(), new Color(0x69b0ff));
         defaults.put(EditorColor.COLOR_SEARCH_REPLACE_MARK.getUIManagerKey(), new Color(0xffb866));
         defaults.put(EditorColor.COLOR_NOTIFICATION_MIN.getUIManagerKey(), new Color(0x332233));
         defaults.put(EditorColor.COLOR_NOTIFICATION_MAX.getUIManagerKey(), new Color(0x647354));

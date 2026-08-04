@@ -12,10 +12,12 @@ OmegaT is een vrij en open source multiplatform Computer Assisted Translation-pr
 Informatie over Licentie
 ========================
 
-OmegaT is beschikbaar onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 3 van die License of (naar uw eigen inzicht) een willekeurige latere versie. U vindt de tekst van de licentie in
+OmegaT is available under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the License or
+(at your option) any later version. U vindt de tekst van de licentie in
 /docs/OmegaT-license.txt.
 
-OmegaT gebruikt een aantal bibliotheken. De licentie van elke bibliotheek is vermeld
+OmegaT uses a number of libraries. De licentie van elke bibliotheek is vermeld
 in /lib/licenses/Licenses.txt.
 
 
@@ -23,11 +25,48 @@ in /lib/licenses/Licenses.txt.
 Vereisten voor installeren van OmegaT
 =====================================
 
-OmegaT vereist dat de Java Runtime Environment (JRE) versie 1.8 of hoger is
-geïnstalleerd op uw systeem.
+OmegaT requires the Java Runtime Environment (JRE) version 11 or higher to be
+installed on your system. Bundled JRE packages currently ship with JRE 17.
 
-We bevelen aan OmegaT-pakketten te gebruiken die de JRE bevatten,
-om u het probleem van selecteren, verkrijgen en installeren te besparen.
+We recommend using OmegaT packages that include the JRE, to save you the trouble
+of selecting, getting, and installing it.
+
+
+
+Available packages
+===================
+
+OmegaT is distributed in several package formats, depending on your platform
+and needs:
+
+Linux:
+  - deb and rpm packages are provided for the amd64 and aarch64
+    architectures. Older 32-bit environments are not supported.
+  - A tar.bz2 archive is also available.
+
+Mac:
+  - A notarized dmg package is provided, supporting both Apple Silicon and
+    Intel architectures.
+
+Windows:
+  - Installer EXE files are provided in three variants: one bundled with an
+    amd64 JRE, one bundled with an aarch64 JRE, and one without any JRE
+    (for use with a JRE already installed on your system). A 32-bit
+    JRE-bundled variant is not provided. Note that the installer program
+    itself is a 32-bit Intel binary; this does not affect the architecture
+    of OmegaT or the JRE that gets installed.
+
+Source package:
+  - The source package bundles all required library dependencies, so its
+    size is relatively large. For normal development purposes, we recommend
+    cloning the repository from GitHub instead. The source package is
+    intended to support building OmegaT even in environments with limited
+    or no internet access.
+
+Simple ZIP archive:
+  - A plain ZIP archive is also available. This is useful on Linux or
+    Windows when you need a portable package and can supply your own JRE.
+    It may also be used on Mac for self-notarization purposes.
 
 
 
@@ -41,24 +80,40 @@ Start het installatieprogramma.
 Installeren van OmegaT (Mac)
 =======================
 
-Pak het OmegaT .zip-archief uit om een map te krijgen die een
-bestand met documentatie en de toepassing OmegaT bevat. Verplaats de map naar een
-toepasselijke locatie, zoals de map Applications.
+Open the OmegaT .dmg package and drag the OmegaT application to the
+Applications folder (or another location of your choice).
 
 
 
 Installeren van OmegaT (Linux)
 ==============================
 
-Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
+Using the deb or rpm package
+----------------------------
 
-U kunt echter een meer nette en gebruikersvriendelijker installatie verkrijgen door installatie krijgen door het installatiescript te gebruiken (linux-install.sh). Open, om dit script te gebruiken, een venster voor de terminal
+Install the package for your architecture (amd64 or aarch64) using your
+distribution's package manager, e.g.:
+
+    sudo dpkg -i omegat_<version>_<arch>.deb
+
+of
+
+    sudo rpm -i omegat-<version>.<arch>.rpm
+
+Using the tar.bz2 archive
+-------------------------
+
+Plaats het archief in een geschikte map en pak het uit. OmegaT is then ready
+to be launched.
+
+You can, however, get a neater and more user-friendly installation by using the
+installation script (linux-install.sh). Open, om dit script te gebruiken, een venster voor de terminal
 (console), wijzig de folder naar de folder die OmegaT.jar bevat en het script linux-install.sh, en voer het script uit met ./linux-install.sh.
 
 
 
-Installeren van OmegaT (Solaris, FreeBSD, etc.)
-=============================================
+Installing OmegaT (Solaris, FreeBSD, etc.)
+==========================================
 
 Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
 
@@ -70,9 +125,9 @@ Starten van OmegaT (Windows)
 Als u, gedurende de installatie, een snelkoppeling op het bureaublad hebt gemaakt,
 dubbelklik dan op die snelkoppeling.
 
-Het installatieprogramma kan voor u snelkoppelingen maken in het menu Start,
-naar het menu Start, op het bureaublad en in het gebied voor snel starten. U kunt ook handmatig het bestand OmegaT.exe slepen naar het menu Start, 
-op het bureaublad en in het gebied voor snel starten om het van daaruit te koppelen.
+The installer can create shortcuts for you in the start menu, on the desktop, and
+in the quick launch area. You can also manually drag the file OmegaT.exe to the
+start menu, the desktop, or the quick launch area to link it from there.
 
 Als u het bestand OmegaT wel in uw bestandsbeheer (Windows Verkenner) kunt zien
 maar niet OmegaT.exe, wijzig dan de instellingen zodat de bestandsextensies worden weergegeven.
@@ -92,6 +147,13 @@ om het vanaf elke locatie te kunnen starten. U kunt het ook starten
 
 Starten van OmegaT (Linux)
 ==========================
+
+If you installed OmegaT using the deb or rpm package, launch it from your
+desktop environment's application menu, or run:
+
+    omegat
+
+from a terminal.
 
 Indien u linux-install.sh script gebruikte, zou u OmegaT moeten kunnen opstarten met:
 
@@ -135,14 +197,14 @@ Jean-Christophe Helary is de OmegaT projectmanager.
 Huidige team:
 (alfabetische volgorde)
 
-- Marco Cevoli (beheerder van gemeenschap van Telegram)
-- Jean-Christophe Helary (beheerder van gemeenschap van Twitter)
-- Kos Ivantsov (beheerder voor vertalingen)
-- Concepción Martin (beheerder van gemeenschap van Facebook)
-- Hiroshi Miura (hoofdontwikkelaar)
+- Marco Cevoli (Telegram community manager)
+- Jean-Christophe Helary (Twitter community manager)
+- Kos Ivantsov (localisation manager, user group owner)
+- Concepción Martin (Facebook community manager)
+- Hiroshi Miura (lead developer and product integration manager)
 - Briac Pilpré (webmaster)
-- Philippe Tourigny (beheerder van de documentatie)
-- Lucie Vecerova (beheerder van gemeenschap van Facebook)
+- Philippe Tourigny (documentation manager)
+- Lucie Vecerova (Facebook community manager)
 
 Bijdragen aan de code zijn gedocumenteerd in /docs/contributors.txt.
 

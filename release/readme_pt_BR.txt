@@ -20,7 +20,7 @@ O OmegaT usa várias bibliotecas. A licença de cada biblioteca é mencionada em
 Pré-requisitos para a instalação do OmegaT
 ==========================================
 
-O OmegaT requer o Java Runtime Environment (JRE) versão 1.8 ou maior para ser instalado em seu sistema.
+O OmegaT requer o Java Runtime Environment (JRE) versão 11 ou maior para ser instalado em seu sistema.
 
 Recomendamos usar os pacotes do OmegaT que incluem o JRE para poupá-lo do trabalho de instalá-lo.
 

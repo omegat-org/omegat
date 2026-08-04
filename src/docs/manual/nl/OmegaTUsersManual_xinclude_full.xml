@@ -1,9 +1,8 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="nl" xml:id="book.user.manual">
-  <info>
-    <title xml:id="book.user.manual.title">OmegaT 6.1.0 - Gebruikershandleiding</title>
-
-	<!-- Copyright 2002-2023
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="nl" xml:id="book.user.manual">
+   <info>
+      <title xml:id="book.user.manual.title">OmegaT 6.1.0 - Gebruikershandleiding</title>
+      <!-- Copyright 2002-2023
 		 - Vincent Bidaux
 		 - Didier Briel
 		 - Jean-Christophe Helary
@@ -13,51 +12,33 @@
 		 - Vito Smolej
 		 - Kerry Swatridge
 		 - Philippe Tourigny
-	-->
-
-    <!-- <pubdate>@timestamp@</pubdate> -->
-	<!-- TODO automate date insertion -->
-    <abstract>
-      <para>Dit document is de officiële gebruikershandleiding voor OmegaT, het gratis Computer Aided Translation-programma.</para>
-
-	  <para>Het belangrijkste doel van OmegaT is om u te helpen een goede vertaling te maken op de snelst mogelijke manier door u toegang te verschaffen tot de bronnen van uw vertaling op de meest betrouwbare manier.</para>
-
-	  <para>OmegaT wordt gedistribueerd onder de termen van de <emphasis>GNU General Public License, versie 3.0</emphasis>. De licentie geeft u de volgende vrijheden:<itemizedlist xml:id="freedoms.list">
-		<listitem>
-		  <para>De vrijheid om OmegaT uit te voeren zoals u dat wilt, voor elk doel.</para>
-		</listitem>
-
-		<listitem>
-		  <para>De vrijheid om te bestuderen hoe OmegaT werkt, en het te wijzigen zodat het uw computerwerk uitvoert zoals u dat wilt.</para>
-		</listitem>
-
-		<listitem>
-		  <para>De vrijheid om kopieën opnieuw te distribueren, zodat u anderen kunt helpen.</para>
-		</listitem>
-
-		<listitem>
-		  <para>De vrijheid om kopieën van uw aangepaste versies te distribueren aan anderen.</para>
-		</listitem>
-	  </itemizedlist>
-	  </para>
-    </abstract>
-  </info>
-
-  
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Introduction.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_HowTo.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_EditorsPanes.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Menus.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_WindowsAndDialogs.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Preferences.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_ProjectFolder.xml"/>
-
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Appendices.xml"/>
-	           
+	--><!-- <pubdate>@timestamp@</pubdate> --><!-- TODO automate date insertion -->
+      <abstract>
+         <para>Dit document is de officiële gebruikershandleiding voor OmegaT, het gratis Computer Aided Translation-programma.</para>
+         <para>Het belangrijkste doel van OmegaT is om u te helpen een goede vertaling te maken op de snelst mogelijke manier door u toegang te verschaffen tot de bronnen van uw vertaling op de meest betrouwbare manier.</para>
+         <para>OmegaT wordt gedistribueerd onder de termen van de <emphasis>GNU General Public License, versie 3.0</emphasis>. De licentie geeft u de volgende vrijheden:<itemizedlist xml:id="freedoms.list">
+               <listitem>
+                  <para>De vrijheid om OmegaT uit te voeren zoals u dat wilt, voor elk doel.</para>
+               </listitem>
+               <listitem>
+                  <para>De vrijheid om te bestuderen hoe OmegaT werkt, en het te wijzigen zodat het uw computerwerk uitvoert zoals u dat wilt.</para>
+               </listitem>
+               <listitem>
+                  <para>De vrijheid om kopieën opnieuw te distribueren, zodat u anderen kunt helpen.</para>
+               </listitem>
+               <listitem>
+                  <para>De vrijheid om kopieën van uw aangepaste versies te distribueren aan anderen.</para>
+               </listitem>
+            </itemizedlist>
+            	  </para>
+      </abstract>
+   </info>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Introduction.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_HowTo.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_EditorsPanes.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Menus.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_WindowsAndDialogs.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Preferences.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_ProjectFolder.xml"/>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="OmegaT_Appendices.xml"/>
 </book>

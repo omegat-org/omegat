@@ -22,7 +22,7 @@ OmegaT používá množství knihoven. Licence ke každé knihovně je uvedena v
 Co potřebujete k instalaci OmegaT
 ===================================
 
-OmegaT požaduje k instalaci na váš systém prostředí Java Runtime Environment (JRE) ve verzi 1.8 a novější.
+OmegaT požaduje k instalaci na váš systém prostředí Java Runtime Environment (JRE) ve verzi 11 a novější.
 
 Doporučujeme použít instalační balíček OmegaT, který obsahuje JRE, a tak si ušetříte možné potíže s výběrem, získáním a instalací programu.
 

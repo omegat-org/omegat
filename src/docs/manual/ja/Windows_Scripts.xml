@@ -11,7 +11,7 @@
       <warning>
          <para>スクリプト編集ウィンドウの左側に、スクリプト一覧が表示されない場合は、スクリプトウィンドウの<guimenu>ファイル</guimenu>]&gt;<guimenuitem>スクリプトフォルダーの設定...</guimenuitem>メニューを使用して、スクリプトの場所を設定してください。</para>
       </warning>
-      <para>追加できるスクリプトが&lt;u0&gt;OmegaT Scripts&lt;/u0&gt; にあります。ファイルを<link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>フォルダにコピーします。</para>
+      <para>追加できるスクリプトが<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</link> にあります。ファイルを<link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>フォルダにコピーします。</para>
       <para><emphasis>イベント</emphasis>ベースのスクリプトもあります。スクリプトを含むフォルダーには、使用可能なイベントに対応するサブフォルダが含まれます。スクリプトを適切なサブフォルダーに配置することで、スクリプトを自動的にトリガーできます。</para>
       <variablelist>
          <varlistentry xml:id="application.folder.scripts.application.shutdown">

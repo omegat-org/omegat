@@ -1,9 +1,5 @@
 import java.util.zip.ZipFile
 
-import org.omegat.gradle.BuildConditions
-import org.omegat.gradle.DistPathUtil
-import org.omegat.gradle.InjectedOps
-
 configurations {
     genMac
 }

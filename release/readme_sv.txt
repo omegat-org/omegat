@@ -26,7 +26,7 @@ i /lib/licenses/Licenses.txt.
 Förutsättningar för att installera OmegaT
 ===================================
 
-OmegaT kräver Java Runtime Environment (JRE) version 1.8 eller högre för att kunna
+OmegaT kräver Java Runtime Environment (JRE) version 11 eller högre för att kunna
 installeras i ditt system.
 
 Vi rekommenderar att man använder ett OmegaT-paket som redan innehåller JRE, för

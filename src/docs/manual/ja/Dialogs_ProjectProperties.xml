@@ -49,7 +49,7 @@
                </note>
                <para>翻訳中に分節化規則の設定を変更しても、プロジェクトの翻訳メモリに登録されている分節は変更されません。</para>
                <para>たとえば、翻訳の途中で分節化を<emphasis role="bold">文単位</emphasis>から<emphasis role="bold">段落単位</emphasis>に変更しても、そのプロジェクトの内部翻訳メモリは何も変わりません。OmegaT は段落単位でしか分節化できなかった旧形式の翻訳メモリをアップグレードできますが、その逆はできないのです。</para>
-               <para>OmegaT は、オプションで、文単位の既存の翻訳を結合して、段落単位の参考訳文を作ることはできます。<link linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx" endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/>を使用して、この機能を有効にします。</para>
+               <para>OmegaT は、オプションで、文単位の既存の翻訳を結合して、段落単位の参考訳文を作ることはできます。この機能を有効にするには、<link linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx" endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/>を参照してください。</para>
                <para>翻訳中に分節化規則を変更した場合は、新しい分節化規則を有効にするためにプロジェクトを再ロードする必要があります。すると、以前に翻訳済みの一部の分節が分割または結合され、翻訳済みの分節ではなくなります。ただし、元の翻訳はプロジェクトの翻訳メモリ内に残ります。</para>
                <para>(ユーザレベルまたはプロジェクト専用、段落または文、設定など)分節化の一般的な説明については、付録<link linkend="app.segmentation" endterm="app.segmentation.title"/>を参照してください。</para>
             </listitem>
@@ -211,7 +211,7 @@
                               <para>訳文ファイル生成時に、<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーにコピーされません。</para>
                            </listitem>
                         </itemizedlist>
-                        <para>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<keycombo>F2</keycombo> キーを押すと編集もできます。除外定義には <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</link>が使えます。</para>
+                        <para>除外構成例集ダイアログで、構成例の追加と削除ができます。また ダブルクリックや構成例を選んで<keycombo><keycap>F2</keycap></keycombo> キーを押すと編集もできます。除外定義には <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://ant.apache.org/manual/dirtasks.html#patterns">Ant 構文</link>が使えます。</para>
                      </listitem>
                   </varlistentry>
                </variablelist>

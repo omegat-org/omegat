@@ -470,7 +470,7 @@
             <listitem>
                <para>Aquest caràcter inicia un <emphasis>grup</emphasis>, que és un conjunt de caràcters tractats com una sola unitat. Els grups estan numerats i el contingut s'emmagatzema en la memòria. Es poden reutilitzar més endavant en l'expressió de cerca utilitzant <literal>\<option>n</option></literal>, on <option>n</option> és el número del grup.</para>
                <note>
-                  <para>El contingut del grup també es pot utilitzar en el <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>. Utilitzeu <literal>$<option>n</option></literal>, on <option>n</option> és el número del grup definit en la cerca.</para>
+                  <para>El contingut del grup també es pot utilitzar en el text de substitució. Consulteu <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>. Utilitzeu <literal>$<option>n</option></literal>, on <option>n</option> és el número del grup definit en la cerca.</para>
                </note>
                <para>Sempre s'utilitzen parèntesis en parells d'obertura i tancament. Si intenteu utilitzar només els parèntesis d'obertura o tancament sols, es produirà un error.</para>
                <informaltable>

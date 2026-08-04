@@ -5,16 +5,16 @@
    <para>同時に複数の検索ウィンドウを開くことができます。最後に使用した検索ウィンドウを呼びだすには、<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> を使用します。</para>
    <para>あるいは、 <link linkend="panes.editor" endterm="panes.editor.title"/>、 <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>、 または <link linkend="panes.glossary" endterm="panes.glossary.title"/>ウィンドウで単語や語句を選択してから <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.project" endterm="menus.edit.search.project.title"/>を使用できます。この場合、検索領域に選択した単語や語句が自動的に入力されます。</para>
    <para><guilabel>［検索文字列］</guilabel>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。</para>
-   <para>検索欄を選択して検索をスタートするには、 <guibutton>検索</guibutton>をクリックするか、 <keycombo>Enter</keycombo> キーを入力します。</para>
+   <para>検索欄を選択して検索をスタートするには、 <guibutton>検索</guibutton>をクリックするか、 <keycombo><keycap>Enter</keycap></keycombo> キーを入力します。</para>
    <para>一致した文字列は、青い太字で表示されます。</para>
    <example xml:id="search.for.doitsu">
       <title xml:id="search.for.doitsu.title">ドイツの検索</title>
-      <para>
-<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+	<para>
+	  <programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
 -- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。
 ---------</programlisting>
-         	</para>
+	</para>
    </example>
    <para>「プロジェクトの検索」ウィンドウには独自のメニューがあります。</para>
    <itemizedlist>
@@ -263,12 +263,12 @@
       <para>選択した分節が緑色でハイライト表示されます。</para>
       <example xml:id="select.second.match">
          <title xml:id="select.second.match.title">二番目の検索結果を選択</title>
-         <para>
-<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
+	  <para>
+		<programlisting>-- 148&gt; | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
-&lt;a1&gt;-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。&lt;/a1&gt;
+<phrase remap="action">-- 177&gt; [[2001年]]、<token>ドイツ</token>の永住権を取得。</phrase>
 ---------</programlisting>
-      </para>
+	  </para>
       </example>
       <variablelist>
          <varlistentry>

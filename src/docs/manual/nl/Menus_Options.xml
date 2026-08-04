@@ -1,107 +1,111 @@
-<!-- Converted by db4-upgrade version 1.1 -->
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.options">
-  <title xml:id="menus.options.title"><guimenu>Opties</guimenu></title>
-
-  <para>Dit menu geeft snel toegang tot een aantal frequent gebruikte voorkeuren.</para>
-  
-  <variablelist>
-    <varlistentry xml:id="menus.options.preferences">
-      <term xml:id="menus.options.preferences.title"><guimenuitem>Voorkeuren…</guimenuitem></term>
-      <listitem>
-        <para>Open het dialoogvenster <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
-
-		<note>
-		  <para>Op macOS is dit menu te vinden onder het menu <guimenu>OmegaT</guimenu>.</para>
-		</note>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.mt">
-      <term xml:id="menus.options.mt.title"><guisubmenu>Machinevertaling</guisubmenu></term>
-      <listitem>
-		<itemizedlist>
-		  <listitem>
-			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
-		  </listitem>
-		</itemizedlist>
-
-		<para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren of te deactiveren.</para>
-
-        <para>Als verscheidene programma's voor vertaling zijn geselecteerd, kunt u ook <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> gebruiken om tussen hen te schakelen en de laatst geselecteerde in te voegen. Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.glossary">
-      <term xml:id="menus.options.glossary.title"><guisubmenu>Woordenlijst</guisubmenu></term>
-      <listitem>
-		<itemizedlist>
-		  <listitem>
-			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
-		  </listitem>
-		</itemizedlist>
-
-        <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenlijsten te activeren of te deactiveren.</para>
-
-		<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voor details.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.dictionary">
-      <term xml:id="menus.options.dictionary.title"><guisubmenu>Woordenboek</guisubmenu></term>
-      <listitem>
-		<itemizedlist>
-		  <listitem>
-			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
-		  </listitem>
-		</itemizedlist>
-
-        <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenboeken te activeren of te deactiveren.</para>
-
-		<para>Bekijk de voorkeuren <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> voor details.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.autocompletion">
-      <term xml:id="menus.options.autocompletion.title"><guisubmenu>Auto-aanvullen</guisubmenu></term>
-      <listitem>
-		<para>Selecteer de verschillende opties om ze te activeren of te deactiveren. Bekijk de voorkeuren <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> voor details.</para>
-	  </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.file.filters">
-      <term xml:id="menus.options.file.filters.title"><guimenuitem>Globale bestandsfilters…</guimenuitem></term>
-      <listitem>
-        <para>Opent de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
-
-        <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te krijgen tot de lokale voorkeuren voor bestandsfilters.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.segmentation">
-      <term xml:id="menus.options.segmentation.title"><guimenuitem>Globale segmentatieregels…</guimenuitem></term>
-      <listitem>
-        <para>Opent de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
-
-        <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te verkrijgen tot de globale segmentatieregels.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.editor">
-      <term xml:id="menus.options.editor.title"><guimenuitem>venster Bewerken</guimenuitem></term>
-      <listitem>
-        <para>Opent de voorkeuren <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry xml:id="menus.options.access.configuration.folder">
-      <term xml:id="menus.options.access.configuration.folder.title"><guimenuitem>Ga naar map voor configuratie</guimenuitem></term>
-      <listitem>
-        <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen.</para>
-
-		<note>
-		  <para>De locatie is afhankelijk van het besturingssysteem en de opties voor het opstarten. Bekijk de appendix <link linkend="configuration.folder" endterm="configuration.folder.title"/> voor details.</para>
-		</note>
-      </listitem>
-    </varlistentry>
-  </variablelist>
+<?xml version="1.0"?>
+<!-- Converted by db4-upgrade version 1.1 --><section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="menus.options">
+   <title xml:id="menus.options.title"><guimenu>Opties</guimenu></title>
+   <para>Dit menu geeft snel toegang tot een aantal frequent gebruikte voorkeuren.</para>
+   <variablelist>
+      <varlistentry xml:id="menus.options.preferences">
+         <term xml:id="menus.options.preferences.title">
+            <guimenuitem>Voorkeuren…</guimenuitem>
+         </term>
+         <listitem>
+            <para>Open het dialoogvenster <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+            <note>
+               <para>Op macOS is dit menu te vinden onder het menu <guimenu>OmegaT</guimenu>.</para>
+            </note>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.mt">
+         <term xml:id="menus.options.mt.title">
+            <guisubmenu>Machinevertaling</guisubmenu>
+         </term>
+         <listitem>
+            <itemizedlist>
+               <listitem>
+                  <para>
+                     <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/>
+                  </para>
+               </listitem>
+            </itemizedlist>
+            <para>Stelt u in staat om ingeschakelde en correct geconfigureerde programma's voor machinevertaling te activeren of te deactiveren.</para>
+            <para>Als verscheidene programma's voor vertaling zijn geselecteerd, kunt u ook <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> gebruiken om tussen hen te schakelen en de laatst geselecteerde in te voegen. Bekijk de voorkeuren <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voor details.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.glossary">
+         <term xml:id="menus.options.glossary.title">
+            <guisubmenu>Woordenlijst</guisubmenu>
+         </term>
+         <listitem>
+            <itemizedlist>
+               <listitem>
+                  <para>
+                     <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/>
+                  </para>
+               </listitem>
+            </itemizedlist>
+            <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenlijsten te activeren of te deactiveren.</para>
+            <para>Bekijk de voorkeuren <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> voor details.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.dictionary">
+         <term xml:id="menus.options.dictionary.title">
+            <guisubmenu>Woordenboek</guisubmenu>
+         </term>
+         <listitem>
+            <itemizedlist>
+               <listitem>
+                  <para>
+                     <link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/>
+                  </para>
+               </listitem>
+            </itemizedlist>
+            <para>Stelt u in staat om de fuzzy overeenkomsten voor overeenkomsten in woordenboeken te activeren of te deactiveren.</para>
+            <para>Bekijk de voorkeuren <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> voor details.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.autocompletion">
+         <term xml:id="menus.options.autocompletion.title">
+            <guisubmenu>Auto-aanvullen</guisubmenu>
+         </term>
+         <listitem>
+            <para>Selecteer de verschillende opties om ze te activeren of te deactiveren. Bekijk de voorkeuren <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> voor details.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.file.filters">
+         <term xml:id="menus.options.file.filters.title">
+            <guimenuitem>Globale bestandsfilters…</guimenuitem>
+         </term>
+         <listitem>
+            <para>Opent de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
+            <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te krijgen tot de lokale voorkeuren voor bestandsfilters.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.segmentation">
+         <term xml:id="menus.options.segmentation.title">
+            <guimenuitem>Globale segmentatieregels…</guimenuitem>
+         </term>
+         <listitem>
+            <para>Opent de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
+            <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> om toegang te verkrijgen tot de globale segmentatieregels.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.editor">
+         <term xml:id="menus.options.editor.title">
+            <guimenuitem>venster Bewerken</guimenuitem>
+         </term>
+         <listitem>
+            <para>Opent de voorkeuren <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.options.access.configuration.folder">
+         <term xml:id="menus.options.access.configuration.folder.title">
+            <guimenuitem>Ga naar map voor configuratie</guimenuitem>
+         </term>
+         <listitem>
+            <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen.</para>
+            <note>
+               <para>De locatie is afhankelijk van het besturingssysteem en de opties voor het opstarten. Bekijk de appendix <link linkend="configuration.folder" endterm="configuration.folder.title"/> voor details.</para>
+            </note>
+         </listitem>
+      </varlistentry>
+   </variablelist>
 </section>

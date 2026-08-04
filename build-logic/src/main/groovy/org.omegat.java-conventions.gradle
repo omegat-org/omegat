@@ -1,3 +1,5 @@
+import org.omegat.gradle.PropertiesUtil
+
 plugins {
     id 'java-library'
     id 'checkstyle'
@@ -11,7 +13,7 @@ plugins {
 ext {
     localPropsFile = layout.settingsDirectory.file('local.properties').asFile
     if (localPropsFile.file) {
-        loadProperties(localPropsFile).each { k, v ->
+        PropertiesUtil.loadProperties(localPropsFile).each { k, v ->
             if (findProperty(k) == null) {
                 set(k, v)
             }

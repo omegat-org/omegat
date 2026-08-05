@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,6 +28,7 @@ package org.omegat.cli;
 import org.jspecify.annotations.Nullable;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -132,6 +134,9 @@ public class LegacyParameters implements Callable<Integer> {
     @Nullable String project;
 
     public void initialize() {
+        if (configDir != null) {
+            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
+        }
         if (configFile != null) {
             applyConfigFile(configFile);
         }
@@ -142,6 +147,10 @@ public class LegacyParameters implements Callable<Integer> {
      */
     @Override
     public Integer call() {
+        // the sub-commands run this from their own call() methods; the
+        // legacy syntax reaches the run methods directly, so apply the
+        // configuration options here.
+        initialize();
         CommonParameters params = new CommonParameters();
         CommandCommon.logLevelInitialize(params);
         if (project != null) {
@@ -149,6 +158,7 @@ public class LegacyParameters implements Callable<Integer> {
         }
         if (consoleMode == null) {
             StartCommand command = new StartCommand();
+            command.legacyParams = this;
             command.params = params;
             return command.runGUI();
         } else {

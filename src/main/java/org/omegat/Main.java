@@ -10,6 +10,7 @@
                2014 Alex Buloichik
                2018 Enrique Estevez Fernandez
                2022-2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,10 +43,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.cli.LegacyParameters;
 import org.omegat.cli.SubCommands;
 import org.omegat.core.Core;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.FileUtil;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -74,6 +79,15 @@ public final class Main {
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        // --config-dir must take effect before plugins are loaded (user
+        // plugins live below the configuration folder) and thus before the
+        // command line is parsed by picocli; pre-scan the arguments like
+        // extractPluginConfiguration() does.
+        String configDir = extractConfigDir(args);
+        if (configDir != null) {
+            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
+        }
 
         Map<String, String> pluginConfig = extractPluginConfiguration(args);
         PluginUtils.loadPlugins(pluginConfig);
@@ -169,8 +183,37 @@ public final class Main {
         return config;
     }
 
+    /**
+     * Pre-scan the command-line arguments for --config-dir before picocli
+     * parses them, so that user plugins below the configuration folder are
+     * already visible to loadPlugins().
+     */
+    @VisibleForTesting
+    @Nullable
+    static String extractConfigDir(String @Nullable [] args) {
+        if (args == null) {
+            return null;
+        }
+        for (int i = 0; i < args.length; i++) {
+            String value = null;
+            if (LegacyParameters.CONFIG_DIR.equals(args[i]) && i + 1 < args.length) {
+                value = args[i + 1];
+            } else if (args[i].startsWith(LegacyParameters.CONFIG_DIR + "=")) {
+                value = args[i].substring(LegacyParameters.CONFIG_DIR.length() + 1);
+            }
+            if (value != null && !value.isEmpty()) {
+                return value;
+            }
+        }
+        return null;
+    }
+
     private static void constructCommandParams(List<String> command) {
         command.add("start");
+        if (RuntimePreferences.getConfigDir() != null) {
+            command.add(LegacyParameters.CONFIG_DIR);
+            command.add(RuntimePreferences.getConfigDir());
+        }
         if (RuntimePreferences.isNoTeam()) {
             command.add("--no-team");
         }

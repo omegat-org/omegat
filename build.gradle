@@ -499,10 +499,15 @@ tasks.withType(Zip).configureEach {
 
 def provided = findProperty('repoRevision') ?: ''
 def gitArchival = PropertiesUtil.loadProperties(file('.git-archival.properties')).getProperty('node')
-def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
+// .git is a directory in a plain clone but a file in a linked git worktree
+def insideGitCheckout = file('.git').exists()
+def git = insideGitCheckout ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
 def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
     !it.empty && it != '@dev@' && it != '$Format:%H$'
 }
+// The branch name is empty outside a git checkout and "HEAD" when detached
+// (e.g. a tag build); both cases mean "not a development build".
+def gitBranch = insideGitCheckout ? providers.exec {commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")}.standardOutput.asText.get().trim() : ''
 
 processResources {
     /*
@@ -515,9 +520,11 @@ processResources {
      3. If none of the above, the value "unknown"
      */
     inputs.property 'revision', revision
-    logger.lifecycle("Detected revision " + revision)
+    inputs.property 'branch', gitBranch
+    logger.lifecycle("Detected revision " + revision
+            + (gitBranch.empty ? "" : " on branch " + gitBranch))
     filesMatching('**/Version.properties') {
-        filter ReplaceTokens, tokens:["dev": revision]
+        filter ReplaceTokens, tokens:["dev": revision, "gitbranch": gitBranch]
     }
 }
 

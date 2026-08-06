@@ -28,6 +28,7 @@ package org.omegat.cli;
 import org.jspecify.annotations.Nullable;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
@@ -139,6 +140,21 @@ public class LegacyParameters implements Callable<Integer> {
         }
         if (configFile != null) {
             applyConfigFile(configFile);
+            RuntimePreferences.setConfigFile(FileUtil.expandTildeHomeDir(configFile));
+        }
+        if (resourceBundle != null) {
+            String bundleFile = FileUtil.expandTildeHomeDir(resourceBundle);
+            OStrings.loadBundle(bundleFile);
+            RuntimePreferences.setResourceBundleFile(bundleFile);
+        }
+        if (disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
+        if (noTeam) {
+            RuntimePreferences.setNoTeam();
         }
     }
 

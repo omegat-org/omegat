@@ -91,12 +91,36 @@ public final class RuntimePreferences {
         return RuntimePreferenceStore.getInstance().getAlternateFilenameTo();
     }
 
+    public static String getConfigFile() {
+        return RuntimePreferenceStore.getInstance().getConfigFile();
+    }
+
+    public static void setConfigFile(String v) {
+        RuntimePreferenceStore.getInstance().setConfigFile(v);
+    }
+
+    public static String getResourceBundleFile() {
+        return RuntimePreferenceStore.getInstance().getResourceBundleFile();
+    }
+
+    public static void setResourceBundleFile(String v) {
+        RuntimePreferenceStore.getInstance().setResourceBundleFile(v);
+    }
+
     public static void setTokenizerSource(@Nullable String tokenizerSource) {
         RuntimePreferenceStore.getInstance().setTokenizerSource(tokenizerSource);
     }
 
+    public static String getTokenizerSource() {
+        return RuntimePreferenceStore.getInstance().getTokenizerSource();
+    }
+
     public static void setTokenizerTarget(@Nullable String tokenizerTarget) {
         RuntimePreferenceStore.getInstance().setTokenizerTarget(tokenizerTarget);
+    }
+
+    public static String getTokenizerTarget() {
+        return RuntimePreferenceStore.getInstance().getTokenizerTarget();
     }
 
     public static void setNoTeam() {

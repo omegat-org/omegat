@@ -134,7 +134,7 @@ jobs:
               ;;
           esac
           if [[ "$MODE" == "release" ]]; then
-            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Standard/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
           else
             echo "dest_dir=/home/frs/project/omegat/Weekly" >> $GITHUB_OUTPUT
           fi

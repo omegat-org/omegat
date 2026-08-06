@@ -27,6 +27,7 @@ package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
@@ -467,5 +468,71 @@ public class NumeralValueParserTest {
         assertFalse(NumeralValueParser.parseWhole(",").isPresent());
         assertFalse(NumeralValueParser.parseWhole("don't").isPresent());
     }
+
+    /**
+     * The token forms gate letter-only input: a word must not become a numeral
+     * just because its letters happen to be Roman digits, while an unambiguous
+     * numeral of any system is read.
+     */
+    @Test
+    public void tokenFormsGateLetterOnlyInput() {
+        // Words made of Roman letters stay words, whatever ICU would read.
+        assertFalse(NumeralValueParser.parseTokenWhole("mix", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole("civil", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole("DID", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole("", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole(null, true).isPresent());
+
+        // Unambiguous numerals are read, by value.
+        assertEquals(Optional.of(BigInteger.valueOf(12)), NumeralValueParser.parseTokenWhole("XII", true));
+        assertEquals(Optional.of(BigInteger.valueOf(12)), NumeralValueParser.parseTokenWhole("十二", true));
+        assertEquals(Optional.of(BigInteger.valueOf(9)), NumeralValueParser.parseTokenWhole("٩", true));
+        assertEquals(Optional.of(BigInteger.valueOf(5)), NumeralValueParser.parseTokenWhole("５", true));
+
+        // The value form adds the non-integer numbers on top of the same gate.
+        assertEquals(Optional.of("3/2"), NumeralValueParser.parseTokenValue("1.5", true).map(Object::toString));
+        assertEquals(Optional.of("3/4"), NumeralValueParser.parseTokenValue("3/4", true).map(Object::toString));
+        assertFalse(NumeralValueParser.parseTokenValue("mix", true).isPresent());
+
+        // Deliberate boundary: Number-Other code points are not numeral tokens,
+        // so an exponent, a vulgar fraction and an enclosed number stay out of
+        // the number comparisons even though they carry a numeric value.
+        assertFalse(NumeralValueParser.parseTokenValue("²", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenValue("¾", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenValue("⑩", true).isPresent());
+
+        // Deliberate boundary: a Roman form without I, V or X is a unit or an
+        // abbreviation more often than a number.
+        assertFalse(NumeralValueParser.parseTokenWhole("L", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole("M", true).isPresent());
+        assertFalse(NumeralValueParser.parseTokenWhole("CD", true).isPresent());
+
+        // Latin-letter Roman numerals are the caller's decision, because there is
+        // no telling them apart from ordinary uppercase words: the English
+        // pronoun, a size, a version prefix and a handful of words read as
+        // numbers where they are allowed and as prose where they are not.
+        for (String roman : new String[] { "I", "V", "X", "XL", "MIX", "DIV" }) {
+            assertTrue(roman, NumeralValueParser.parseTokenWhole(roman, true).isPresent());
+            assertFalse(roman, NumeralValueParser.parseTokenWhole(roman, false).isPresent());
+        }
+        assertEquals(Optional.of(BigInteger.ONE), NumeralValueParser.parseTokenWhole("I", true));
+        assertEquals(Optional.of(BigInteger.valueOf(1009)),
+                NumeralValueParser.parseTokenWhole("MIX", true));
+
+        // The switch is about Latin letters only: numerals of every other system,
+        // the dedicated Roman code points included, read the same either way.
+        for (String numeral : new String[] { "Ⅻ", "十二", "٩", "５", "12" }) {
+            assertEquals(numeral, NumeralValueParser.parseTokenWhole(numeral, true),
+                    NumeralValueParser.parseTokenWhole(numeral, false));
+            assertTrue(numeral, NumeralValueParser.parseTokenWhole(numeral, false).isPresent());
+        }
+
+        // Arbitrary length: the value is exact, not a double.
+        String big = "1234567890123456789012345678901234567890";
+        assertEquals(Optional.of(new BigInteger(big)), NumeralValueParser.parseTokenWhole(big, true));
+        assertNotEquals(NumeralValueParser.parseTokenValue("99999999999999999999", true),
+                NumeralValueParser.parseTokenValue("99999999999999999998", true));
+    }
+
 
 }

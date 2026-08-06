@@ -668,54 +668,18 @@ public class FindMatches {
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];
             String text = token.getTextFromString(str);
-            BigInteger value = numeralValue(text);
+            // Roman numerals count here: a word misread as one only shifts the
+            // similarity a little, and reading them is the point of the option.
+            BigInteger value = NumeralValueParser.parseTokenWhole(text, true).orElse(null);
             String mappedText;
             if (value != null) {
-                mappedText = placeholder ? " #" : " #" + value;
+                mappedText = placeholder ? "\0#" : "\0#" + value;
             } else {
                 mappedText = text.toLowerCase(srcLocale);
             }
             mapped[i] = new Token(mappedText, token.getOffset(), token.getLength());
         }
         return mapped;
-    }
-
-    /**
-     * Matches a canonical uppercase Roman numeral; lowercase or non-canonical
-     * letter runs (like "mix" or "civil") stay ordinary words.
-     */
-    private static final Pattern CANONICAL_ROMAN = Pattern
-            .compile("M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})");
-    private static final Pattern ANY_ROMAN_DIGIT = Pattern.compile(".*[IVX].*");
-    /** Han numeral ideographs, the unambiguous CJK number tokens. */
-    private static final Pattern HAN_NUMERALS = Pattern.compile(
-            "[〇零一二三四五六七八九"
-                    + "十百千万萬億兆两兩]+");
-
-    /**
-     * The numeric value of a token, or null when the token must not be treated
-     * as a number. Tokens containing a decimal digit or letter numeral of any
-     * script always count; letter-only tokens count only in unambiguous forms
-     * (canonical uppercase Roman, Han numerals), so ordinary words are never
-     * misread as numerals.
-     */
-    private static BigInteger numeralValue(String text) {
-        boolean numeric = false;
-        for (int i = 0; i < text.length();) {
-            int cp = text.codePointAt(i);
-            int type = Character.getType(cp);
-            if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER) {
-                numeric = true;
-                break;
-            }
-            i += Character.charCount(cp);
-        }
-        if (!numeric
-                && !(CANONICAL_ROMAN.matcher(text).matches() && ANY_ROMAN_DIGIT.matcher(text).matches())
-                && !HAN_NUMERALS.matcher(text).matches()) {
-            return null;
-        }
-        return NumeralValueParser.parseWhole(text).orElse(null);
     }
 
     private void checkStopped(IStopped stop) throws StoppedException {

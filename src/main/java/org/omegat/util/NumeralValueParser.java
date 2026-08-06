@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import com.ibm.icu.lang.UCharacter;
 import com.ibm.icu.text.Normalizer2;
@@ -749,6 +750,86 @@ public final class NumeralValueParser {
             i += Character.charCount(cp);
         }
         return -1;
+    }
+
+    // ------------------------------------------------------------------------
+    // Number tokens of a segment
+    // ------------------------------------------------------------------------
+
+    /**
+     * Matches a canonical uppercase Roman numeral; lowercase or non-canonical
+     * letter runs (like "mix" or "civil") stay ordinary words.
+     */
+    private static final Pattern CANONICAL_ROMAN = Pattern
+            .compile("M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})");
+    private static final Pattern ANY_ROMAN_DIGIT = Pattern.compile(".*[IVX].*");
+    /** Han numeral ideographs, the unambiguous CJK number tokens. */
+    private static final Pattern HAN_NUMERALS = Pattern.compile(
+            "[〇零一二三四五六七八九"
+                    + "十百千万萬億兆两兩]+");
+
+    /**
+     * Whether a token taken from running text may be read as a number at all.
+     * Tokens containing a decimal digit or a letter numeral of any script always
+     * count; letter-only tokens count only in unambiguous forms (canonical
+     * uppercase Roman where the caller allows them, Han numerals), so ordinary
+     * words are never misread as numerals.
+     *
+     * Two boundaries are deliberate. A Roman form without I, V or X is rejected,
+     * because "L", "C", "D" and "M" stand for a unit or an abbreviation far more
+     * often than for 50, 100, 500 and 1000. And a Number-Other code point is not
+     * a numeral token, which keeps a superscript exponent, a vulgar fraction and
+     * an enclosed number out of the number comparisons.
+     */
+    private static boolean isNumeralToken(String text, boolean allowRoman) {
+        if (text == null || text.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < text.length();) {
+            int cp = text.codePointAt(i);
+            int type = Character.getType(cp);
+            if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER) {
+                return true;
+            }
+            i += Character.charCount(cp);
+        }
+        return allowRoman && CANONICAL_ROMAN.matcher(text).matches()
+                && ANY_ROMAN_DIGIT.matcher(text).matches()
+                || HAN_NUMERALS.matcher(text).matches();
+    }
+
+    /**
+     * The integer value of a token that may be read as a number, or empty when
+     * the token is not one. The gated form of {@link #parseWhole}: safe to apply
+     * to every token of a segment, because ordinary words are rejected before
+     * they reach the numeral parsers.
+     *
+     * Every caller decides for itself whether Roman numerals written with Latin
+     * letters count, because there is no telling "I", "V", "X", "MIX" or "DIV"
+     * apart from ordinary uppercase words. Where a false positive only shifts a
+     * similarity score it is worth reading them; where it rewrites text a
+     * translator is handed, it is not. Roman numerals written with the dedicated
+     * code points are letter numerals and count either way.
+     *
+     * @param allowRoman
+     *            whether a Latin-letter Roman numeral is a number here
+     */
+    public static Optional<BigInteger> parseTokenWhole(String token, boolean allowRoman) {
+        return isNumeralToken(token, allowRoman) ? parseWhole(token) : Optional.empty();
+    }
+
+    /**
+     * The exact value of a token that may be read as a number, or empty when the
+     * token is not one. The gated form of {@link #parseValue}, so decimals,
+     * fractions and the integer numeral systems are all recognized while
+     * ordinary words are not.
+     *
+     * @param allowRoman
+     *            whether a Latin-letter Roman numeral is a number here; see
+     *            {@link #parseTokenWhole(String, boolean)} for what that costs
+     */
+    public static Optional<Rational> parseTokenValue(String token, boolean allowRoman) {
+        return isNumeralToken(token, allowRoman) ? parseValue(token) : Optional.empty();
     }
 
     /**

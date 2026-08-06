@@ -83,19 +83,10 @@ public class StartCommand implements Callable<Integer> {
         CommandCommon.showStartUpLogInfo();
         if (params != null) {
             CommandCommon.logLevelInitialize(params);
-            if (params.tokenizerSource != null) {
-                RuntimePreferences.setTokenizerSource(params.tokenizerSource);
-            }
-            if (params.tokenizerTarget != null) {
-                RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
-            }
+            CommandCommon.parseCommonParams(params);
         }
 
         CommandCommon.initializeApp();
-
-        if ((params != null && !params.team) || (legacyParams != null && legacyParams.noTeam)) {
-            RuntimePreferences.setNoTeam();
-        }
 
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 

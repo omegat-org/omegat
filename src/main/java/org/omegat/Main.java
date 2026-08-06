@@ -46,6 +46,7 @@ import java.util.ResourceBundle;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.Nullable;
 
+import org.omegat.cli.CommonParameters;
 import org.omegat.cli.LegacyParameters;
 import org.omegat.cli.SubCommands;
 import org.omegat.core.Core;
@@ -208,22 +209,51 @@ public final class Main {
         return null;
     }
 
-    private static void constructCommandParams(List<String> command) {
-        command.add("start");
+    /**
+     * Reconstructs the command line arguments for a GUI restart from the
+     * runtime preferences. Options of the top-level command must precede the
+     * start sub-command; the options of its {@link CommonParameters} mixin
+     * must follow it.
+     */
+    @VisibleForTesting
+    static void constructCommandParams(List<String> command) {
         if (RuntimePreferences.getConfigDir() != null) {
             command.add(LegacyParameters.CONFIG_DIR);
             command.add(RuntimePreferences.getConfigDir());
         }
-        if (RuntimePreferences.isNoTeam()) {
-            command.add("--no-team");
+        if (RuntimePreferences.getConfigFile() != null) {
+            command.add(LegacyParameters.CONFIG_FILE);
+            command.add(RuntimePreferences.getConfigFile());
         }
+        if (RuntimePreferences.getResourceBundleFile() != null) {
+            command.add(LegacyParameters.RESOURCE_BUNDLE);
+            command.add(RuntimePreferences.getResourceBundleFile());
+        }
+        if (!RuntimePreferences.isProjectLockingEnabled()) {
+            command.add(LegacyParameters.DISABLE_PROJECT_LOCKING);
+        }
+        if (!RuntimePreferences.isLocationSaveEnabled()) {
+            command.add(LegacyParameters.DISABLE_LOCATION_SAVE);
+        }
+        if (RuntimePreferences.isNoTeam()) {
+            command.add(LegacyParameters.NO_TEAM);
+        }
+        command.add("start");
         if (RuntimePreferences.isQuietMode()) {
-            command.add("--quiet");
+            command.add(CommonParameters.QUIET);
+        }
+        if (RuntimePreferences.getTokenizerSource() != null) {
+            command.add(CommonParameters.TOKENIZER_SOURCE);
+            command.add(RuntimePreferences.getTokenizerSource());
+        }
+        if (RuntimePreferences.getTokenizerTarget() != null) {
+            command.add(CommonParameters.TOKENIZER_TARGET);
+            command.add(RuntimePreferences.getTokenizerTarget());
         }
         if (useAlternateFilename()) {
-            command.add("--alternate-filename-from");
+            command.add(CommonParameters.ALTERNATE_FILENAME_FROM);
             command.add(RuntimePreferences.getAlternateFilenameFrom());
-            command.add("--alternate-filenames-to");
+            command.add(CommonParameters.ALTERNATE_FILENAME_TO);
             command.add(RuntimePreferences.getAlternateFilenameTo());
         }
     }

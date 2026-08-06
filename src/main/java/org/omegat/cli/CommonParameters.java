@@ -32,11 +32,14 @@ import static picocli.CommandLine.Option;
 public class CommonParameters {
 
     /**
-     * CLI parameter to disable team functionality (treat as local project)
+     * CLI parameter to disable team functionality (treat as local project).
+     * Declared with the negative name because picocli sets a negatable option
+     * to the opposite of its default only when the declared form is matched;
+     * declaring positive "--team" with default true made "--no-team" a no-op.
      */
-    public static final String TEAM = "--team";
-    @Option(names = { TEAM }, negatable = true, descriptionKey = "params.TEAM")
-    boolean team = true;
+    public static final String NO_TEAM = "--no-team";
+    @Option(names = { NO_TEAM }, negatable = true, descriptionKey = "params.TEAM")
+    boolean noTeam = false;
 
     /**
      * CLI parameter to specify source tokenizer

@@ -38,7 +38,7 @@ steps:
         dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${OMEGAT_VERSION}/"
+        destdir="/home/frs/project/omegat/OmegaT - Standard/OmegaT ${OMEGAT_VERSION}/"
         cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
         lftp --env-password -e "$cmd" $dest
         dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST

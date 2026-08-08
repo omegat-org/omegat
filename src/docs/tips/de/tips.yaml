@@ -72,3 +72,5 @@ tips:
   name: "Tag-Probleme untersuchen"
 - file: "ignore_dictionary_word.html"
   name: "Wörter im Wörterbuch ignorieren"
+- file: "share_colour_scheme.html"
+  name: "Farbschema weitergeben"

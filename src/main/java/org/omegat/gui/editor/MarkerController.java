@@ -47,6 +47,7 @@ import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.FontFallbackMarker;
+import org.omegat.gui.editor.mark.IdenticalSegmentMarker;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.editor.mark.NBSPMarker;
@@ -86,6 +87,7 @@ public class MarkerController {
         Core.registerMarker(new ReplaceMarker());
         Core.registerMarker(new ComesFromAutoTMMarker());
         Core.registerMarker(new ComesFromMTMarker());
+        Core.registerMarker(new IdenticalSegmentMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new SpellCheckerMarker());
         Core.registerMarker(new AltTranslationsMarker());

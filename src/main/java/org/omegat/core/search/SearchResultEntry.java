@@ -51,8 +51,8 @@ public class SearchResultEntry {
      */
     public SearchResultEntry(int num, @Nullable String preamble, @Nullable String srcPrefix, String src,
                              @Nullable String target, @Nullable String note, @Nullable String properties,
-                             SearchMatch@Nullable [] srcMatch, SearchMatch@Nullable [] targetMatch,
-                             SearchMatch@Nullable [] noteMatch, SearchMatch@Nullable [] propertiesMatch) {
+                             SearchMatch @Nullable [] srcMatch, SearchMatch @Nullable [] targetMatch,
+                             SearchMatch @Nullable [] noteMatch, SearchMatch @Nullable [] propertiesMatch) {
         entryNum = num;
         preambleText = preamble;
         this.srcPrefix = srcPrefix;
@@ -109,19 +109,19 @@ public class SearchResultEntry {
         return srcPrefix;
     }
 
-    public SearchMatch@Nullable [] getSrcMatch() {
+    public SearchMatch @Nullable [] getSrcMatch() {
         return srcMatch;
     }
 
-    public SearchMatch@Nullable [] getTargetMatch() {
+    public SearchMatch @Nullable [] getTargetMatch() {
         return targetMatch;
     }
 
-    public SearchMatch@Nullable [] getNoteMatch() {
+    public SearchMatch @Nullable [] getNoteMatch() {
         return noteMatch;
     }
 
-    public SearchMatch@Nullable [] getPropertiesMatch() {
+    public SearchMatch @Nullable [] getPropertiesMatch() {
         return propertiesMatch;
     }
 
@@ -132,10 +132,10 @@ public class SearchResultEntry {
     private final @Nullable String targetText;
     private final @Nullable String note;
     private final @Nullable String propertiesString;
-    private final SearchMatch@Nullable [] srcMatch;
-    private final SearchMatch@Nullable [] targetMatch;
-    private final SearchMatch@Nullable [] noteMatch;
-    private final SearchMatch@Nullable [] propertiesMatch;
+    private final SearchMatch @Nullable [] srcMatch;
+    private final SearchMatch @Nullable [] targetMatch;
+    private final SearchMatch @Nullable [] noteMatch;
+    private final SearchMatch @Nullable [] propertiesMatch;
 
     public static Builder builder() {
         return new Builder();
@@ -149,10 +149,10 @@ public class SearchResultEntry {
         private @Nullable String targetText;
         private @Nullable String note;
         private @Nullable String propertiesString;
-        private SearchMatch@Nullable [] srcMatch;
-        private SearchMatch@Nullable [] targetMatch;
-        private SearchMatch@Nullable [] noteMatch;
-        private SearchMatch@Nullable [] propertiesMatch;
+        private SearchMatch @Nullable [] srcMatch;
+        private SearchMatch @Nullable [] targetMatch;
+        private SearchMatch @Nullable [] noteMatch;
+        private SearchMatch @Nullable [] propertiesMatch;
 
         public Builder entryNum(int newEntryNum) {
             this.entryNum = newEntryNum;
@@ -213,8 +213,8 @@ public class SearchResultEntry {
             if (sourceText == null) {
                 throw new IllegalArgumentException("sourceText cannot be null");
             }
-            return new SearchResultEntry(entryNum, preambleText, srcPrefix, sourceText, targetText,
-                    note, propertiesString, srcMatch, targetMatch, noteMatch, propertiesMatch);
+            return new SearchResultEntry(entryNum, preambleText, srcPrefix, sourceText, targetText, note,
+                    propertiesString, srcMatch, targetMatch, noteMatch, propertiesMatch);
         }
     }
 }

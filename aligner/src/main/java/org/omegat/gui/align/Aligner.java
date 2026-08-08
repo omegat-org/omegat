@@ -193,8 +193,14 @@ public class Aligner {
         restoreDefaults();
         SRX srx = Preferences.getSRX();
         updateSegmenter(srx != null ? srx : SRX.getDefault());
-        Filters filters = Preferences.getFilters() != null ? Preferences.getFilters()
-                : FilterMaster.createDefaultFiltersConfig();
+        // An empty filters configuration (as left behind by a fresh
+        // preferences store that never saved filter settings) would make the
+        // FilterMaster unable to parse any file, so fall back to the defaults
+        // in that case as well.
+        Filters filters = Preferences.getFilters();
+        if (filters == null || filters.getFilters().isEmpty()) {
+            filters = FilterMaster.createDefaultFiltersConfig();
+        }
         fm = new FilterMaster(filters);
     }
 

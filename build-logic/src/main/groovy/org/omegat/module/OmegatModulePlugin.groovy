@@ -76,10 +76,21 @@ class OmegatModulePlugin implements Plugin<Project> {
 
         Map<String, Object> manifestAttrs = buildManifestAttributes(project)
 
+        // Jars the application itself ships in lib/ must not be merged into the
+        // module fat jar: modules load through a parent-first class loader, so the
+        // application's copy always wins and a bundled duplicate is unreachable dead
+        // weight. Matching by archive file name keeps the filter conservative - as
+        // soon as either side changes the version, the artifact is bundled again.
+        // Reaching into the root project's configurations will need rework once
+        // Gradle enforces isolated projects, like the plugin's other rootProject uses.
+        def coreRuntimeClasspath = project.rootProject.configurations.getByName("runtimeClasspath")
+
         project.tasks.named("jar", Jar).configure { Jar jarTask ->
             from({
+                Set<String> coreJarNames = coreRuntimeClasspath.files.collect { it.name } as Set
                 project.configurations.getByName("runtimeClasspath")
                         .resolve()
+                        .findAll { dep -> !(dep.name in coreJarNames) }
                         .collect { dep ->
                             if (dep.directory) return dep
                             if (shouldSignDylibs(project) && containsNativeLibs(dep)) {
@@ -171,17 +182,19 @@ class OmegatModulePlugin implements Plugin<Project> {
         attributes['Implementation-Title'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
         attributes['Plugin-Name'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
 
-        def moduleVersion = getPropertyOrDefault(project, 'org.omegat.module.version', project.version.toString())
+        // Modules ship with the application, so they carry the root project's
+        // version unless they declare their own.
+        def moduleVersion = getPropertyOrDefault(project, 'org.omegat.module.version',
+                project.rootProject.version.toString())
         attributes['Implementation-Version'] = moduleVersion
         attributes['Plugin-Version'] = moduleVersion
         attributes['Implementation-Vendor'] = getPropertyOrDefault(project, 'org.omegat.vendor', 'OmegaT')
         attributes['Built-By'] = System.getProperty('user.name')
-        attributes['Built-Date'] = new Date().toString()
         attributes['Built-JDK'] = System.getProperty('java.version')
         attributes['Created-By'] = "Gradle ${project.gradle.gradleVersion}".toString()
 
         attributes['OmegaT-Plugins'] = project.property('org.omegat.module.class').toString()
-        attributes['Plugin-Version'] =  project.version.toString()
+        attributes['Plugin-Bundled'] = 'true'
         attributes['Plugin-Category'] = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
         attributes['Plugin-License'] = getPropertyOrDefault(project, 'org.omegat.module.license', 'GNU Public License version 3 or later')
 

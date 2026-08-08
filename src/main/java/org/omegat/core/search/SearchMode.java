@@ -26,7 +26,7 @@
 package org.omegat.core.search;
 
 /**
- * Search mode sfor separate search and replace.
+ * Search modes for separate search and replace.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

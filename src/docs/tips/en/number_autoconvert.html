@@ -1,0 +1,57 @@
+<html lang="en">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fill number-only segments automatically</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Fill number-only segments automatically</h3>
+<p>Price lists, spec tables, catalogs and financial reports are full of
+segments that contain nothing but a number, a price, a date or a time.
+<b>Tools &gt; Auto-convert Number Segments...</b> fills them all in one go,
+written the way your target language writes them.</p>
+<p>This is more than copying the source: the number is read in the source
+language and rewritten for the target language, whatever the pair. For
+example:</p>
+<ul>
+<li>German 1.234,56&nbsp;&euro; &rarr; English &euro;1,234.56</li>
+<li>English 12/31/2026 &rarr; German 31.12.2026</li>
+<li>Arabic &#1637;&#1632;&#1642; &rarr; English 50%</li>
+<li>Chinese &#31532;3 &rarr; English 3rd, and English 1st &rarr; German 1.</li>
+<li>Swedish 3:e &rarr; English 3rd</li>
+</ul>
+<p>It also reads numerals of many writing systems: Roman
+MMMCCXIV, ideographic
+&#19977;&#21315;&#20108;&#30334;&#21313;&#22235;, Arabic-Indic
+&#1635;&#1634;&#1633;&#1636;, Devanagari &#2409;&#2408;&#2407;&#2410;, Thai
+&#3667;&#3666;&#3665;&#3668; and full-width
+&#65299;&#65298;&#65297;&#65300; all become the plain 3214 your target
+language expects.</p>
+<p>Every conversion is shown with a preview and a confidence value before
+anything is applied, and the converted segments are marked so the jump to the
+next untranslated segment skips them.</p>
+</body></html>

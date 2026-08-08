@@ -15,6 +15,10 @@
 
 ## Core features
 
+### Presentation and Accessibility
+
+- 2026003 [Unified Presentation and Accessibility](2026003.PresentationAndAccessibility.md)
+
 ### Search and Sorting
 
 - 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)

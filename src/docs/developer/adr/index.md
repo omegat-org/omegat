@@ -36,6 +36,11 @@
 
 - 2025003 [Comprehensive Static Code Analysis Strategy](2025003.StaticCodeAnalysis.md)
 
+## Project stewardship
+
+- 2026004 [User Base Measurement and Adoption](2026004.UserBaseMeasurement.md)
+- 2026005 [International and Multilingual Adoption Footprint](2026005.InternationalAdoptionFootprint.md)
+
 ## Debugging and Logging
 
 - 2024002 [Logging system and logging format](2024002.LoggingSystem.md)

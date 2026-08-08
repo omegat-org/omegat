@@ -1,0 +1,878 @@
+ICU rule-based number formatters: every rule set, formatting the number 2143
+
+  This file is part of OmegaT, released under the GNU General Public License
+  version 3 or (at your option) any later version. OmegaT is distributed
+  WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or
+  FITNESS FOR A PARTICULAR PURPOSE - see the GNU General Public License for more
+  details.
+
+  Source      com.ibm.icu:icu4j 78.3, the version this build ships.
+  Method      RuleBasedNumberFormat.getRuleSetNames() for the NUMBERING_SYSTEM,
+              SPELLOUT and ORDINAL formatters of every available language, then
+              format(2143) for each rule set.
+  Caveat      The default locale is set to the root locale before asking. A
+              language without rules of its own otherwise inherits the rules of
+              the JVM default language, which makes it look as though Basque,
+              say, spelled its numbers in German.
+  Omitted     192 languages that have no rules of their own and fall back to the
+              root rules, printing digits rather than words.
+  Note        The numbering systems in the root locale are script-bound and
+              locale-independent; OmegaT's NumeralValueParser reads eleven of
+              them, and %spellout-numbering for zh, zh-Hant and ja.
+
+ no.  locale    type       rule set                                 2143
+----  --------  ---------  ---------------------------------------  --------------------
+   1  root      numbering  %armenian-lower                          սճխգ
+   2  root      numbering  %armenian-upper                          ՍՃԽԳ
+   3  root      numbering  %cyrillic-lower                          ҂врм҃г
+   4  root      numbering  %ethiopic                                ፳፩፻፵፫
+   5  root      numbering  %georgian                                ჩრმგ
+   6  root      numbering  %greek-lower                             ͵βρμγ´
+   7  root      numbering  %greek-upper                             ͵ΒΡΜΓ´
+   8  root      numbering  %hebrew                                  ב׳קמ״ג
+   9  root      numbering  %hebrew-item                             2,143
+  10  root      numbering  %roman-lower                             mmcxliii
+  11  root      numbering  %roman-upper                             MMCXLIII
+  12  root      numbering  %tamil                                   ௨௲௱௪௰௩
+  13  root      numbering  %zz-default                              2,143
+  14  root      spellout   %spellout-cardinal                       2,143
+  15  root      spellout   %spellout-numbering                      2,143
+  16  root      spellout   %spellout-numbering-year                 2143
+  17  root      spellout   %spellout-ordinal                        2,143.
+  18  root      ordinal    %digits-ordinal                          2,143.
+  19  af        spellout   %spellout-cardinal                       twee­duisend honderd drie-en-veertig
+  20  af        spellout   %spellout-numbering                      twee­duisend honderd drie-en-veertig
+  21  af        spellout   %spellout-numbering-year                 een-en-twintig drie-en-veertig
+  22  af        spellout   %spellout-ordinal                        twee duisend een honderd drie-en-veertigste
+  23  af        ordinal    %digits-ordinal                          2 143ste
+  24  ak        spellout   %spellout-cardinal                       mpem-abien-na-­ɔha-na-­aduanan-abiasa
+  25  ak        spellout   %spellout-numbering                      mpem-abien-na-­ɔha-na-­aduanan-abiasa
+  26  ak        spellout   %spellout-numbering-year                 abien koro anan abiasa
+  27  ak        spellout   %spellout-ordinal                        a-ɛ-tɔ-so-mpem-abien-na-­ɔha-na-­aduanan-abiasa
+  28  ak        ordinal    %digits-ordinal                          2,143.
+  29  am        spellout   %spellout-cardinal                       ሁለት ሺ መቶ አራት አስር ሦስት
+  30  am        spellout   %spellout-numbering                      ሁለት ሺ መቶ አራት አስር ሦስት
+  31  am        spellout   %spellout-numbering-year                 ሁለት አስር አንድ መቶ አራት አስር ሦስት
+  32  am        spellout   %spellout-ordinal                        ሁለት ሺ መቶ አራት አስር ሦስትኛ
+  33  am        ordinal    %digits-ordinal                          2,143ኛ
+  34  ar        spellout   %spellout-cardinal-feminine              ألفي ومائة وثلاثة وأربعون
+  35  ar        spellout   %spellout-cardinal-masculine             ألفي ومائة وثلاثة وأربعون
+  36  ar        spellout   %spellout-numbering                      ألفين ومائة وثلاثة وأربعون
+  37  ar        spellout   %spellout-numbering-year                 ألفين ومائة وثلاثة وأربعون
+  38  ar        spellout   %spellout-ordinal-feminine               الألفي ومائة وثلاثة وأربعون
+  39  ar        spellout   %spellout-ordinal-masculine              الألفي ومائة وثلاثة وأربعون
+  40  ar        ordinal    %digits-ordinal                          2,143
+  41  az        spellout   %spellout-cardinal                       iki min bir yüz qırx üç
+  42  az        spellout   %spellout-numbering                      iki min bir yüz qırx üç
+  43  az        spellout   %spellout-numbering-year                 iki min bir yüz qırx üç
+  44  az        spellout   %spellout-ordinal                        iki bin bir yüz qırx üçüncü
+  45  az        ordinal    %digits-ordinal                          2.143'inci
+  46  az-Latn   spellout   %spellout-cardinal                       iki min bir yüz qırx üç
+  47  az-Latn   spellout   %spellout-numbering                      iki min bir yüz qırx üç
+  48  az-Latn   spellout   %spellout-numbering-year                 iki min bir yüz qırx üç
+  49  az-Latn   spellout   %spellout-ordinal                        iki bin bir yüz qırx üçüncü
+  50  az-Latn   ordinal    %digits-ordinal                          2.143'inci
+  51  be        spellout   %spellout-cardinal-feminine              дзве тысячы сто сорак тры
+  52  be        spellout   %spellout-cardinal-masculine             дзве тысячы сто сорак тры
+  53  be        spellout   %spellout-cardinal-neuter                дзве тысячы сто сорак тры
+  54  be        spellout   %spellout-numbering                      дзве тысячы сто сорак тры
+  55  be        spellout   %spellout-numbering-year                 дзве тысячы сто сорак тры
+  56  be        spellout   %spellout-ordinal-feminine               дзве тысячы сто сорак трэццяя
+  57  be        spellout   %spellout-ordinal-masculine              дзве тысячы сто сорак трэйці
+  58  be        spellout   %spellout-ordinal-neuter                 дзве тысячы сто сорак трэццяе
+  59  be        ordinal    %digits-ordinal                          2 143.
+  60  bg        spellout   %spellout-cardinal-feminine              две хиляди сто четиресет и три
+  61  bg        spellout   %spellout-cardinal-feminine-financial    две хиляди сто четиридесет и три
+  62  bg        spellout   %spellout-cardinal-masculine             две хиляди сто четиресет и три
+  63  bg        spellout   %spellout-cardinal-masculine-financial   две хиляди сто четиридесет и три
+  64  bg        spellout   %spellout-cardinal-masculine-personal    две хиляди сто четиресет и трима
+  65  bg        spellout   %spellout-cardinal-masculine-personal-financial две хиляди сто четиримадесет и трима
+  66  bg        spellout   %spellout-cardinal-neuter                две хиляди сто четиресет и три
+  67  bg        spellout   %spellout-cardinal-neuter-financial      две хиляди сто четиридесет и три
+  68  bg        spellout   %spellout-numbering                      две хиляди сто четиресет и три
+  69  bg        spellout   %spellout-numbering-year                 две хиляди сто четиресет и три
+  70  bg        spellout   %spellout-ordinal-feminine               две хиляди сто четиресет и трета
+  71  bg        spellout   %spellout-ordinal-masculine              две хиляди сто четиресет и трети
+  72  bg        spellout   %spellout-ordinal-neuter                 две хиляди сто четиресет и трето
+  73  bg        ordinal    %digits-ordinal                          2 143-и
+  74  bg        ordinal    %digits-ordinal-feminine                 2 143-а
+  75  bg        ordinal    %digits-ordinal-masculine                2 143-и
+  76  bg        ordinal    %digits-ordinal-neuter                   2 143-o
+  77  bs        spellout   %spellout-cardinal-feminine              dve hiljada sto četrdeset tri
+  78  bs        spellout   %spellout-cardinal-masculine             dve hiljada sto četrdeset tri
+  79  bs        spellout   %spellout-cardinal-neuter                dve hiljada sto četrdeset tri
+  80  bs        spellout   %spellout-numbering                      dve hiljada sto četrdeset tri
+  81  bs        spellout   %spellout-numbering-year                 dve hiljada sto četrdeset tri
+  82  bs        ordinal    %digits-ordinal                          2.143.
+  83  bs-Latn   spellout   %spellout-cardinal-feminine              dve hiljada sto četrdeset tri
+  84  bs-Latn   spellout   %spellout-cardinal-masculine             dve hiljada sto četrdeset tri
+  85  bs-Latn   spellout   %spellout-cardinal-neuter                dve hiljada sto četrdeset tri
+  86  bs-Latn   spellout   %spellout-numbering                      dve hiljada sto četrdeset tri
+  87  bs-Latn   spellout   %spellout-numbering-year                 dve hiljada sto četrdeset tri
+  88  bs-Latn   ordinal    %digits-ordinal                          2.143.
+  89  ca        spellout   %spellout-cardinal-feminine              dues mil cent quaranta-tres
+  90  ca        spellout   %spellout-cardinal-masculine             dos mil cent quaranta-tres
+  91  ca        spellout   %spellout-numbering                      dos mil cent quaranta-tres
+  92  ca        spellout   %spellout-numbering-year                 dos mil cent quaranta-tres
+  93  ca        spellout   %spellout-ordinal-feminine               dos mils cent quaranta-tercera
+  94  ca        spellout   %spellout-ordinal-feminine-plural        dos mil cent quaranta-tresenes
+  95  ca        spellout   %spellout-ordinal-masculine              dos mil cent quaranta-tercer
+  96  ca        spellout   %spellout-ordinal-masculine-plural       dos mil cent quaranta-tercers
+  97  ca        ordinal    %digits-ordinal                          2.143è
+  98  ca        ordinal    %digits-ordinal-feminine                 2.143a
+  99  ca        ordinal    %digits-ordinal-feminine-plural          2.143es
+ 100  ca        ordinal    %digits-ordinal-masculine                2.143è
+ 101  ca        ordinal    %digits-ordinal-masculine-plural         2.143ns
+ 102  ccp       spellout   %spellout-cardinal                       𑄘𑄨 𑄦𑄎𑄢𑄴 𑄆𑄇𑄴𑄥𑄧 𑄌𑄣𑄨𑄨𑄌𑄴 𑄖𑄨𑄚𑄴
+ 103  ccp       spellout   %spellout-numbering                      𑄘𑄨 𑄦𑄎𑄢𑄴 𑄆𑄇𑄴𑄥𑄧 𑄌𑄣𑄨𑄨𑄌𑄴 𑄖𑄨𑄚𑄴
+ 104  ccp       spellout   %spellout-numbering-year                 𑄘𑄨 𑄦𑄎𑄢𑄴 𑄆𑄇𑄴𑄥𑄧 𑄌𑄣𑄨𑄨𑄌𑄴 𑄖𑄨𑄚𑄴
+ 105  ccp       spellout   %spellout-ordinal                        𑄘𑄨 𑄦𑄎𑄢𑄴 𑄆𑄇𑄴𑄥𑄧 𑄌𑄣𑄨𑄨𑄌𑄴 𑄖𑄨𑄚𑄴 𑄛𑄳𑄆𑄘𑄳𑄠𑄬
+ 106  ccp       ordinal    %digits-ordinal                          𑄸,𑄷𑄺𑄹.
+ 107  chr       spellout   %spellout-cardinal                       ꮤꮅ ꭲꮿꭶᏼꮅ ꮠꮼ ꮝꭺꭿꮵꮖ ꮕꭹꮝꭺ ꮶꭲ
+ 108  chr       spellout   %spellout-numbering                      ꮤꮅ ꭲꮿꭶᏼꮅ ꮠꮼ ꮝꭺꭿꮵꮖ ꮕꭹꮝꭺ ꮶꭲ
+ 109  chr       spellout   %spellout-numbering-year                 ꮤꮅ ꭲꮿꭶᏼꮅ ꮠꮼ ꮝꭺꭿꮵꮖ ꮕꭹꮝꭺ ꮶꭲ
+ 110  chr       ordinal    %digits-ordinal                          2,143.
+ 111  cs        spellout   %spellout-cardinal-feminine              dvě tisíce sto čtyřicet tři
+ 112  cs        spellout   %spellout-cardinal-masculine             dvě tisíce sto čtyřicet tři
+ 113  cs        spellout   %spellout-cardinal-neuter                dvě tisíce sto čtyřicet tři
+ 114  cs        spellout   %spellout-numbering                      dvě tisíce sto čtyřicet tři
+ 115  cs        spellout   %spellout-numbering-year                 dvě tisíce sto čtyřicet tři
+ 116  cs        ordinal    %digits-ordinal                          2 143.
+ 117  cy        spellout   %spellout-cardinal-feminine              dau mil un cant pedwar deg tair
+ 118  cy        spellout   %spellout-cardinal-feminine-before-consonant dau mil un cant pedwar deg tair
+ 119  cy        spellout   %spellout-cardinal-masculine             dau mil un cant pedwar deg tri
+ 120  cy        spellout   %spellout-cardinal-masculine-before-consonant dau mil un cant pedwar deg tri
+ 121  cy        spellout   %spellout-numbering                      dau mil un cant pedwar deg tri
+ 122  cy        spellout   %spellout-numbering-year                 dau mil un cant pedwar deg tri
+ 123  cy        ordinal    %digits-ordinal                          2,143.
+ 124  da        spellout   %spellout-cardinal-common                to tusinde hundrede og tre­og­fyrre
+ 125  da        spellout   %spellout-cardinal-neuter                to tusind hundrede og tre­og­fyrre
+ 126  da        spellout   %spellout-numbering                      to tusind hundrede og tre­og­fyrre
+ 127  da        spellout   %spellout-numbering-year                 en­og­tyve­hundrede og tre­og­fyrre
+ 128  da        spellout   %spellout-ordinal-common                 to tusind hundrede og tre­og­fyrrende
+ 129  da        spellout   %spellout-ordinal-neuter                 to tusind hundrede og tre­og­fyrrende
+ 130  da        ordinal    %digits-ordinal                          2.143.
+ 131  de        spellout   %spellout-cardinal-feminine              zwei­tausend­ein­hundert­drei­und­vierzig
+ 132  de        spellout   %spellout-cardinal-m                     zwei­tausend­ein­hundert­drei­und­vierzig
+ 133  de        spellout   %spellout-cardinal-masculine             zwei­tausend­ein­hundert­drei­und­vierzig
+ 134  de        spellout   %spellout-cardinal-n                     zwei­tausend­ein­hundert­drei­und­vierzig
+ 135  de        spellout   %spellout-cardinal-neuter                zwei­tausend­ein­hundert­drei­und­vierzig
+ 136  de        spellout   %spellout-cardinal-r                     zwei­tausend­ein­hundert­drei­und­vierzig
+ 137  de        spellout   %spellout-cardinal-s                     zwei­tausend­ein­hundert­drei­und­vierzig
+ 138  de        spellout   %spellout-numbering                      zwei­tausend­ein­hundert­drei­und­vierzig
+ 139  de        spellout   %spellout-numbering-year                 zwei­tausend­ein­hundert­drei­und­vierzig
+ 140  de        spellout   %spellout-ordinal                        zwei­tausend­ein­hundert­drei­und­vierzigste
+ 141  de        spellout   %spellout-ordinal-m                      zwei­tausend­ein­hundert­drei­und­vierzigstem
+ 142  de        spellout   %spellout-ordinal-n                      zwei­tausend­ein­hundert­drei­und­vierzigsten
+ 143  de        spellout   %spellout-ordinal-r                      zwei­tausend­ein­hundert­drei­und­vierzigster
+ 144  de        spellout   %spellout-ordinal-s                      zwei­tausend­ein­hundert­drei­und­vierzigstes
+ 145  de        ordinal    %digits-ordinal                          2.143.
+ 146  ee        spellout   %spellout-cardinal                       akpe eve alafa ɖeka blaene vɔ etɔ̃
+ 147  ee        spellout   %spellout-numbering                      akpe eve alafa ɖeka blaene vɔ etɔ̃
+ 148  ee        spellout   %spellout-numbering-year                 akpe eve alafa ɖeka blaene vɔ etɔ̃
+ 149  ee        spellout   %spellout-ordinal                        akpe eve alafa ɖeka blaene vɔ etɔ̃lia
+ 150  ee        ordinal    %digits-ordinal                          2,143 lia
+ 151  el        spellout   %spellout-cardinal-feminine              δύο χίλιάδες εκατόν σαράντα τρεις
+ 152  el        spellout   %spellout-cardinal-masculine             δύο χίλιάδες εκατόν σαράντα τρεις
+ 153  el        spellout   %spellout-cardinal-neuter                δύο χίλιάδες εκατόν σαράντα τρία
+ 154  el        spellout   %spellout-numbering                      δύο χίλιάδες εκατόν σαράντα τρία
+ 155  el        spellout   %spellout-numbering-year                 δύο χίλιάδες εκατόν σαράντα τρία
+ 156  el        spellout   %spellout-ordinal-feminine               δισχιλιοστή εκατοστή τεσσαρακοστή τρίτη
+ 157  el        spellout   %spellout-ordinal-masculine              δισχιλιοστός εκατοστός τεσσαρακοστός τρίτος
+ 158  el        spellout   %spellout-ordinal-neuter                 δισχιλιοστό εκατοστό τεσσαρακοστό τρίτο
+ 159  el        ordinal    %digits-ordinal                          2.143
+ 160  en        spellout   %spellout-cardinal                       two thousand one hundred forty-three
+ 161  en        spellout   %spellout-cardinal-verbose               two thousand one hundred and forty-three
+ 162  en        spellout   %spellout-numbering                      two thousand one hundred forty-three
+ 163  en        spellout   %spellout-numbering-verbose              two thousand one hundred and forty-three
+ 164  en        spellout   %spellout-numbering-year                 twenty-one forty-three
+ 165  en        spellout   %spellout-ordinal                        two thousand one hundred forty-third
+ 166  en        spellout   %spellout-ordinal-verbose                two thousand one hundred and forty-third
+ 167  en        ordinal    %digits-ordinal                          2,143rd
+ 168  eo        spellout   %spellout-cardinal                       du mil cent kvardek tri
+ 169  eo        spellout   %spellout-numbering                      du mil cent kvardek tri
+ 170  eo        spellout   %spellout-numbering-year                 du mil cent kvardek tri
+ 171  eo        spellout   %spellout-ordinal                        du mil cent kvardek tria
+ 172  eo        ordinal    %digits-ordinal                          2 143.
+ 173  es        spellout   %spellout-cardinal-feminine              dos mil ciento cuarenta y tres
+ 174  es        spellout   %spellout-cardinal-masculine             dos mil ciento cuarenta y tres
+ 175  es        spellout   %spellout-numbering                      dos mil ciento cuarenta y tres
+ 176  es        spellout   %spellout-numbering-year                 dos mil ciento cuarenta y tres
+ 177  es        spellout   %spellout-ordinal-feminine               dos milésima centésima cuadragésima tercera
+ 178  es        spellout   %spellout-ordinal-feminine-plural        dos milésima centésima cuadragésima terceras
+ 179  es        spellout   %spellout-ordinal-masculine              dos milésimo centésimo cuadragésimo tercero
+ 180  es        spellout   %spellout-ordinal-masculine-adjective    dos milésimo centésimo cuadragésimo tercer
+ 181  es        spellout   %spellout-ordinal-masculine-plural       dos milésimo centésimo cuadragésimo terceros
+ 182  es        ordinal    %digits-ordinal                          2.143.º
+ 183  es        ordinal    %digits-ordinal-feminine                 2.143.ª
+ 184  es        ordinal    %digits-ordinal-feminine-plural          2.143.ᵃˢ
+ 185  es        ordinal    %digits-ordinal-masculine                2.143.º
+ 186  es        ordinal    %digits-ordinal-masculine-adjective      2.143.ᵉʳ
+ 187  es        ordinal    %digits-ordinal-masculine-plural         2.143.ᵒˢ
+ 188  et        spellout   %spellout-cardinal                       kaks tuhat ükssada nelikümmend kolm
+ 189  et        spellout   %spellout-numbering                      kaks tuhat ükssada nelikümmend kolm
+ 190  et        spellout   %spellout-numbering-year                 kakskümmend üks sada nelikümmend kolm
+ 191  et        ordinal    %digits-ordinal                          2 143.
+ 192  fa        spellout   %spellout-cardinal                       دو هزار و صد و چهل و سه
+ 193  fa        spellout   %spellout-numbering                      دو هزار و صد و چهل و سه
+ 194  fa        spellout   %spellout-numbering-year                 دو هزار و صد و چهل و سه
+ 195  fa        ordinal    %digits-ordinal                          ۲٬۱۴۳.
+ 196  ff        spellout   %spellout-cardinal                       ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 197  ff        spellout   %spellout-cardinal-class-o               ujunere ɗiɗo e temedere gooto e cepanze nawo e tato
+ 198  ff        spellout   %spellout-numbering                      ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 199  ff        spellout   %spellout-numbering-year                 ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 200  ff        spellout   %spellout-ordinal                        ujunere ɗiɗaɓo e temedere arande e cepanze nawaɓo e tatiaɓo
+ 201  ff        ordinal    %digits-ordinal                          2 143.
+ 202  ff-Latn   spellout   %spellout-cardinal                       ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 203  ff-Latn   spellout   %spellout-cardinal-class-o               ujunere ɗiɗo e temedere gooto e cepanze nawo e tato
+ 204  ff-Latn   spellout   %spellout-numbering                      ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 205  ff-Latn   spellout   %spellout-numbering-year                 ujunere ɗiɗi e temedere goʼo e cepanze nawi e tati
+ 206  ff-Latn   spellout   %spellout-ordinal                        ujunere ɗiɗaɓo e temedere arande e cepanze nawaɓo e tatiaɓo
+ 207  ff-Latn   ordinal    %digits-ordinal                          2 143.
+ 208  fi        spellout   %spellout-cardinal                       kaksi­tuhatta­sata­neljä­kymmentä­kolme
+ 209  fi        spellout   %spellout-cardinal-ablative              kahdelta­tuhannelta­sadalta­neljältä­kymmeneltä­kolmelta
+ 210  fi        spellout   %spellout-cardinal-ablative-plural       kaksilta­tuhansilta­sadoilta­neljiltä­kymmeniltä­kolmilta
+ 211  fi        spellout   %spellout-cardinal-adessive              kahdella­tuhannella­sadalla­neljällä­kymmenellä­kolmella
+ 212  fi        spellout   %spellout-cardinal-adessive-plural       kaksilla­tuhansilla­sadoilla­neljillä­kymmenillä­kolmilla
+ 213  fi        spellout   %spellout-cardinal-allative              kahdelle­tuhannelle­sadalle­neljälle­kymmenelle­kolmelle
+ 214  fi        spellout   %spellout-cardinal-allative-plural       kaksille­tuhansille­sadoille­neljille­kymmenille­kolmille
+ 215  fi        spellout   %spellout-cardinal-elative               kahdesta­tuhannesta­sadasta­neljästä­kymmenestä­kolmesta
+ 216  fi        spellout   %spellout-cardinal-elative-plural        kaksista­tuhansista­sadoista­neljistä­kymmenistä­kolmista
+ 217  fi        spellout   %spellout-cardinal-essive                kahtena­tuhantena­satana­neljänä­kymmenenä­kolmena
+ 218  fi        spellout   %spellout-cardinal-essive-plural         kaksina­tuhansina­satoina­neljinä­kymmeninä­kolmina
+ 219  fi        spellout   %spellout-cardinal-genitive              kahden­tuhannen­sadan­neljän­kymmenen­kolmen
+ 220  fi        spellout   %spellout-cardinal-genitive-plural       kaksien­tuhansien­satojen­neljien­kymmenien­kolmien
+ 221  fi        spellout   %spellout-cardinal-illative              kahteen­tuhanteen­sataan­neljään­kymmeneen­kolmeen
+ 222  fi        spellout   %spellout-cardinal-illative-plural       kaksiin­tuhansiin­­satoihin­neljiin­kymmeniin­kolmiin
+ 223  fi        spellout   %spellout-cardinal-inessive              kahdessa­tuhannessa­sadassa­neljässä­kymmenessä­kolmessa
+ 224  fi        spellout   %spellout-cardinal-inessive-plural       kaksissa­tuhansissa­sadoissa­neljissä­kymmenissä­kolmissa
+ 225  fi        spellout   %spellout-cardinal-partitive             kahta­tuhatta­sataa­neljää­kymmentä­kolmea
+ 226  fi        spellout   %spellout-cardinal-partitive-plural      kaksia­tuhansia­satoja­neljiä­kymmeniä­kolmia
+ 227  fi        spellout   %spellout-cardinal-plural                kahdet­tuhannet­sadat­neljät-kymmenet­kolmet
+ 228  fi        spellout   %spellout-cardinal-translative           kahdeksi­tuhanneksi­sadaksi­neljäksi­kymmeneksi­kolmeksi
+ 229  fi        spellout   %spellout-cardinal-translative-plural    kaksiksi­tuhansiksi­sadoiksi­neljiksi­kymmeniksi­kolmiksi
+ 230  fi        spellout   %spellout-numbering                      kaksi­tuhatta­sata­neljä­kymmentä­kolme
+ 231  fi        spellout   %spellout-numbering-year                 kaksi­tuhatta­sata­neljä­kymmentä­kolme
+ 232  fi        spellout   %spellout-ordinal                        kahdes­tuhannes­sadas­neljäs­kymmenes­kolmas
+ 233  fi        spellout   %spellout-ordinal-ablative               kahdennelta­tuhannennelta­sadannelta­neljänneltä­kymmenenneltä­kolmannelta
+ 234  fi        spellout   %spellout-ordinal-ablative-plural        kahdennilta­tuhannennilta­sadannilta­neljänniltä­kymmenenniltä­kolmannilta
+ 235  fi        spellout   %spellout-ordinal-adessive               kahdennella­tuhannennella­sadannella­neljännellä­kymmenennellä­kolmannella
+ 236  fi        spellout   %spellout-ordinal-adessive-plural        kahdennilla­tuhannennilla­sadannilla­neljännillä­kymmenennillä­kolmannilla
+ 237  fi        spellout   %spellout-ordinal-allative               kahdennelle­tuhannennelle­sadannelle­neljännelle­kymmenennelle­kolmannelle
+ 238  fi        spellout   %spellout-ordinal-allative-plural        kahdennille­tuhannennille­sadannille­neljännille­kymmenennille­kolmannille
+ 239  fi        spellout   %spellout-ordinal-elative                kahdennesta­tuhannennesta­sadannesta­neljännestä­kymmenennestä­kolmannesta
+ 240  fi        spellout   %spellout-ordinal-elative-plural         kahdensista­tuhannensista­sadansista­neljänsistä­kymmenensistä­kolmansista
+ 241  fi        spellout   %spellout-ordinal-essive                 kahdentena­tuhannentena­sadantena­neljäntenä­kymmenentenä­kolmantena
+ 242  fi        spellout   %spellout-ordinal-essive-plural          kahdensina­tuhannensina­sadansina­neljänsinä­kymmenensinä­kolmansina
+ 243  fi        spellout   %spellout-ordinal-genitive               kahdennen­tuhannennen­sadannen­neljännen­kymmenennen­kolmannen
+ 244  fi        spellout   %spellout-ordinal-genitive-plural        kahdensien­tuhannensien­sadansien­neljänsien­kymmenensien­kolmansien
+ 245  fi        spellout   %spellout-ordinal-illative               kahdenteen­tuhannenteen­sadanteen­neljänteen­kymmenenteen­kolmanteen
+ 246  fi        spellout   %spellout-ordinal-illative-plural        kahdensiin­tuhannensiin­sadansiin­neljänsiin­kymmenensiin­kolmansiin
+ 247  fi        spellout   %spellout-ordinal-inessive               kahdennessa­tuhannennessa­sadannessa­neljännessä­kymmenennessä­kolmannessa
+ 248  fi        spellout   %spellout-ordinal-inessive-plural        kahdensissa­tuhannensissa­sadansissa­neljänsissä­kymmenensissä­kolmansissa
+ 249  fi        spellout   %spellout-ordinal-partitive              kahdetta­tuhannetta­sadatta­neljättä­kymmenettä­kolmatta
+ 250  fi        spellout   %spellout-ordinal-partitive-plural       kahdensia­tuhannensia­sadansia­neljänsiä­kymmenensiä­kolmansia
+ 251  fi        spellout   %spellout-ordinal-plural                 kahdennet­tuhannennet­sadannet­neljännet­kymmenennet­kolmannet
+ 252  fi        spellout   %spellout-ordinal-translative            kahdenneksi­tuhannenneksi­sadanneksi­neljänneksi­kymmenenneksi­kolmanneksi
+ 253  fi        spellout   %spellout-ordinal-translative-plural     kahdensiksi­tuhannensiksi­sadansiksi­neljänsiksi­kymmenensiksi­kolmansiksi
+ 254  fi        ordinal    %digits-ordinal                          2 143.
+ 255  fil       spellout   %spellout-cardinal                       dalawáng libó’t isáng daán at ápat na pû’t tatló
+ 256  fil       spellout   %spellout-numbering                      dalawáng libó’t isáng daán at ápat na pû’t tatló
+ 257  fil       spellout   %spellout-numbering-year                 dalawáng libó’t isáng daán at ápat na pû’t tatló
+ 258  fil       spellout   %spellout-ordinal                        ika dalawáng libó’t isáng daán at ápat na pû’t tatló
+ 259  fil       ordinal    %digits-ordinal                          ika2,143
+ 260  fo        spellout   %spellout-cardinal-feminine              tvey tusin og eitt­hundrað­og­fýrati­tríggjar
+ 261  fo        spellout   %spellout-cardinal-masculine             tvey tusin og eitt­hundrað­og­fýrati­tríggir
+ 262  fo        spellout   %spellout-cardinal-neuter                tvey tusin og eitt­hundrað­og­fýrati­trý
+ 263  fo        spellout   %spellout-numbering                      tvey tusin og eitt­hundrað­og­fýrati­tríggir
+ 264  fo        spellout   %spellout-numbering-year                 tjúgo­ein­hundrað­og­fýrati­tríggir
+ 265  fo        ordinal    %digits-ordinal                          2.143.
+ 266  fr        spellout   %spellout-cardinal-feminine              deux mille cent quarante-trois
+ 267  fr        spellout   %spellout-cardinal-masculine             deux mille cent quarante-trois
+ 268  fr        spellout   %spellout-numbering                      deux mille cent quarante-trois
+ 269  fr        spellout   %spellout-numbering-year                 deux mille cent quarante-trois
+ 270  fr        spellout   %spellout-ordinal-feminine               deux mille cent quarante-troisième
+ 271  fr        spellout   %spellout-ordinal-feminine-plural        deux mille cent quarante-troisièmes
+ 272  fr        spellout   %spellout-ordinal-masculine              deux mille cent quarante-troisième
+ 273  fr        spellout   %spellout-ordinal-masculine-plural       deux mille cent quarante-troisièmes
+ 274  fr        ordinal    %digits-ordinal                          2 143e
+ 275  fr        ordinal    %digits-ordinal-feminine                 2 143e
+ 276  fr        ordinal    %digits-ordinal-feminine-plural          2 143es
+ 277  fr        ordinal    %digits-ordinal-masculine                2 143e
+ 278  fr        ordinal    %digits-ordinal-masculine-plural         2 143es
+ 279  ga        spellout   %spellout-cardinal                       dhá mhíle, céad daichead a trí
+ 280  ga        spellout   %spellout-numbering                      dhá mhíle, céad daichead a trí
+ 281  ga        spellout   %spellout-numbering-year                 fiche a haon daichead a trí
+ 282  ga        ordinal    %digits-ordinal                          2,143ú
+ 283  gu        spellout   %spellout-cardinal                       બે હજાર એક સો ત્રેતાલીસ
+ 284  gu        spellout   %spellout-numbering                      બે હજાર એક સો ત્રેતાલીસ
+ 285  gu        spellout   %spellout-numbering-year                 બે હજાર એક સો ત્રેતાલીસ
+ 286  gu        spellout   %spellout-ordinal-feminine               બે હજાર એક સો ત્રેતાલીસમી
+ 287  gu        spellout   %spellout-ordinal-masculine              બે હજાર એક સો ત્રેતાલીસમું
+ 288  gu        ordinal    %digits-ordinal                          2,143મા
+ 289  gu        ordinal    %digits-ordinal-feminine                 2,143મી
+ 290  gu        ordinal    %digits-ordinal-masculine                2,143મા
+ 291  gu        ordinal    %digits-ordinal-masculine-oblique        2,143મેં
+ 292  he        spellout   %spellout-cardinal-feminine              אלפיים מאה ארבעים ושלוש
+ 293  he        spellout   %spellout-cardinal-feminine-standalone   אלפיים מאה ארבעים ושלוש
+ 294  he        spellout   %spellout-cardinal-masculine             אלפיים מאה ארבעים ושלושה
+ 295  he        spellout   %spellout-cardinal-masculine-standalone  אלפיים מאה ארבעים ושלושה
+ 296  he        spellout   %spellout-construct-feminine             אלפיים מאה ארבעים ושלוש
+ 297  he        spellout   %spellout-construct-masculine            אלפיים מאה ארבעים ושלושה
+ 298  he        spellout   %spellout-numbering                      אלפיים מאה ארבעים ושלוש
+ 299  he        spellout   %spellout-numbering-year                 אלפיים מאה ארבעים ושלוש
+ 300  he        spellout   %spellout-ordinal-feminine               אלפיים מאה ארבעים ושלוש
+ 301  he        spellout   %spellout-ordinal-masculine              אלפיים מאה ארבעים ושלושה
+ 302  he        ordinal    %digits-ordinal                          2,143
+ 303  hi        spellout   %spellout-cardinal                       दो हज़ार एक सौ तैंतालीस
+ 304  hi        spellout   %spellout-numbering                      दो हज़ार एक सौ तैंतालीस
+ 305  hi        spellout   %spellout-numbering-year                 दो हज़ार एक सौ तैंतालीस
+ 306  hi        spellout   %spellout-ordinal-feminine               दो हज़ार एक सौ तैंतालीसवी
+ 307  hi        spellout   %spellout-ordinal-masculine              दो हज़ार एक सौ तैंतालीसवाँ
+ 308  hi        spellout   %spellout-ordinal-masculine-oblique      दो हज़ार एक सौ तैंतालीसवें
+ 309  hi        ordinal    %digits-ordinal                          2,143वाँ
+ 310  hi        ordinal    %digits-ordinal-feminine                 2,143वीँ
+ 311  hi        ordinal    %digits-ordinal-masculine                2,143वाँ
+ 312  hi        ordinal    %digits-ordinal-masculine-oblique        2,143वें
+ 313  hi-Latn   spellout   %spellout-cardinal                       two thousand one hundred forty-three
+ 314  hi-Latn   spellout   %spellout-cardinal-verbose               two thousand one hundred and forty-three
+ 315  hi-Latn   spellout   %spellout-numbering                      two thousand one hundred forty-three
+ 316  hi-Latn   spellout   %spellout-numbering-verbose              two thousand one hundred and forty-three
+ 317  hi-Latn   spellout   %spellout-numbering-year                 twenty-one forty-three
+ 318  hi-Latn   spellout   %spellout-ordinal                        two thousand one hundred forty-third
+ 319  hi-Latn   spellout   %spellout-ordinal-verbose                two thousand one hundred and forty-third
+ 320  hi-Latn   ordinal    %digits-ordinal                          2,143th
+ 321  hr        spellout   %spellout-cardinal-feminine              dvije tisuće sto četrdeset i tri
+ 322  hr        spellout   %spellout-cardinal-masculine             dvije tisuće sto četrdeset i tri
+ 323  hr        spellout   %spellout-cardinal-neuter                dvije tisuće sto četrdeset i tri
+ 324  hr        spellout   %spellout-numbering                      dvije tisuće sto četrdeset i tri
+ 325  hr        spellout   %spellout-numbering-year                 dvije tisuće sto četrdeset i tri
+ 326  hr        spellout   %spellout-ordinal-feminine               dvije tisuće st četrdeset treća
+ 327  hr        spellout   %spellout-ordinal-masculine              dvije tisuće st četrdeset treći
+ 328  hr        spellout   %spellout-ordinal-neuter                 dvije tisuće st četrdeset trećo
+ 329  hr        ordinal    %digits-ordinal                          2.143.
+ 330  hu        spellout   %spellout-cardinal                       két­ezer­száz­negyven­három
+ 331  hu        spellout   %spellout-cardinal-verbose               kettő­ezer­egy­száz­negyven­három
+ 332  hu        spellout   %spellout-numbering                      két­ezer­száz­negyven­három
+ 333  hu        spellout   %spellout-numbering-year                 két­ezer­száz­negyven­három
+ 334  hu        spellout   %spellout-ordinal                        két­ezer­száznegyvenharmadik
+ 335  hu        spellout   %spellout-ordinal-verbose                kettő­ezer­egyszáznegyvenharmadik
+ 336  hu        ordinal    %digits-ordinal                          2 143.
+ 337  hy        spellout   %spellout-cardinal                       երկու հազար մեկ­հարյուր քառասուն­երեք
+ 338  hy        spellout   %spellout-numbering                      երկու հազար մեկ­հարյուր քառասուն­երեք
+ 339  hy        spellout   %spellout-numbering-year                 երկու հազար մեկ­հարյուր քառասուն­երեք
+ 340  hy        ordinal    %digits-ordinal                          2 143.
+ 341  id        spellout   %spellout-cardinal                       dua ribu seratus empat puluh tiga
+ 342  id        spellout   %spellout-numbering                      dua ribu seratus empat puluh tiga
+ 343  id        spellout   %spellout-numbering-year                 dua ribu seratus empat puluh tiga
+ 344  id        spellout   %spellout-ordinal                        kedua ribu seratus empat puluh tiga
+ 345  id        ordinal    %digits-ordinal                          ke-2.143
+ 346  is        spellout   %spellout-cardinal-feminine              tvö þúsund og eitt­hundrað og fjörutíu og þrjár
+ 347  is        spellout   %spellout-cardinal-masculine             tvö þúsund og eitt­hundrað og fjörutíu og þrír
+ 348  is        spellout   %spellout-cardinal-neuter                tvö þúsund og eitt­hundrað og fjörutíu og þrjú
+ 349  is        spellout   %spellout-numbering                      tvö þúsund og eitt­hundrað og fjörutíu og þrír
+ 350  is        spellout   %spellout-numbering-year                 tuttugu og einn hundrað og fjörutíu og þrír
+ 351  is        ordinal    %digits-ordinal                          2.143.
+ 352  it        spellout   %spellout-cardinal-feminine              due­mila­cento­quaranta­tré
+ 353  it        spellout   %spellout-cardinal-masculine             due­mila­cento­quaranta­tré
+ 354  it        spellout   %spellout-numbering                      due­mila­cento­quaranta­tré
+ 355  it        spellout   %spellout-numbering-year                 due­mila­cento­quaranta­tré
+ 356  it        spellout   %spellout-ordinal-feminine               due­mila­cento­quaranta­treesima
+ 357  it        spellout   %spellout-ordinal-feminine-plural        due­mila­cento­quaranta­treesima
+ 358  it        spellout   %spellout-ordinal-masculine              due­mila­cento­quaranta­treesimo
+ 359  it        spellout   %spellout-ordinal-masculine-plural       due­mila­cento­quaranta­treesimo
+ 360  it        ordinal    %digits-ordinal                          2.143º
+ 361  it        ordinal    %digits-ordinal-feminine                 2.143ª
+ 362  it        ordinal    %digits-ordinal-masculine                2.143º
+ 363  ja        spellout   %spellout-cardinal                       二千百四十三
+ 364  ja        spellout   %spellout-cardinal-financial             弐千壱百四拾参
+ 365  ja        spellout   %spellout-numbering                      二千百四十三
+ 366  ja        spellout   %spellout-numbering-year                 二一四三
+ 367  ja        spellout   %spellout-numbering-year-latn            2143
+ 368  ja        spellout   %spellout-ordinal                        第二千百四十三
+ 369  ja        ordinal    %digits-ordinal                          第2,143
+ 370  ka        spellout   %spellout-cardinal                       ორი ათას ას­ორმოცდა­სამი
+ 371  ka        spellout   %spellout-numbering                      ორი ათას ას­ორმოცდა­სამი
+ 372  ka        spellout   %spellout-numbering-year                 ორი ათას ას­ორმოცდა­სამი
+ 373  ka        ordinal    %digits-ordinal                          2 143.
+ 374  kk        spellout   %spellout-cardinal                       екі мың жүз қырық үш
+ 375  kk        spellout   %spellout-numbering                      екі мың жүз қырық үш
+ 376  kk        spellout   %spellout-numbering-year                 екі мың жүз қырық үш
+ 377  kk        spellout   %spellout-ordinal                        екі мың жүз қырық үшінші
+ 378  kk        ordinal    %digits-ordinal                          2 143-ші
+ 379  kk-Cyrl   spellout   %spellout-cardinal                       екі мың жүз қырық үш
+ 380  kk-Cyrl   spellout   %spellout-numbering                      екі мың жүз қырық үш
+ 381  kk-Cyrl   spellout   %spellout-numbering-year                 екі мың жүз қырық үш
+ 382  kk-Cyrl   spellout   %spellout-ordinal                        екі мың жүз қырық үшінші
+ 383  kk-Cyrl   ordinal    %digits-ordinal                          2 143-ші
+ 384  kl        spellout   %spellout-cardinal                       marlunnik tuusintillit uutritit sisamanik qulillit pingasut
+ 385  kl        spellout   %spellout-numbering                      marlunnik tuusintillit uutritit sisamanik qulillit pingasut
+ 386  kl        spellout   %spellout-numbering-year                 marlunnik tuusintillit uutritit sisamanik qulillit pingasut
+ 387  kl        ordinal    %digits-ordinal                          2.143.
+ 388  km        spellout   %spellout-cardinal                       ពីរ​ពាន់​មួយ​រយ​សែសិប​បី
+ 389  km        spellout   %spellout-numbering                      ពីរ​ពាន់​មួយ​រយ​សែសិប​បី
+ 390  km        spellout   %spellout-numbering-year                 ពីរ​ពាន់​មួយ​រយ​សែសិប​បី
+ 391  km        spellout   %spellout-ordinal                        ទីពីរ​ពាន់​មួយ​រយ​សែសិប​បី
+ 392  km        ordinal    %digits-ordinal                          ទី2,143
+ 393  ko        spellout   %spellout-cardinal-financial             이천일백사십삼
+ 394  ko        spellout   %spellout-cardinal-native                이천백사십삼
+ 395  ko        spellout   %spellout-cardinal-native-attributive    이천백마흔세
+ 396  ko        spellout   %spellout-cardinal-sinokorean            이천백사십삼
+ 397  ko        spellout   %spellout-numbering                      이천백사십삼
+ 398  ko        spellout   %spellout-numbering-year                 이천백사십삼
+ 399  ko        spellout   %spellout-ordinal-native                 이천백마흔셋째
+ 400  ko        spellout   %spellout-ordinal-native-count           이천백마흔세 번째
+ 401  ko        spellout   %spellout-ordinal-sinokorean             이천백사십삼째
+ 402  ko        spellout   %spellout-ordinal-sinokorean-count       이천백사십삼 번째
+ 403  ko        ordinal    %digits-ordinal                          2,143번째
+ 404  ky        spellout   %spellout-cardinal                       эки миң бир жүз кырк үч
+ 405  ky        spellout   %spellout-cardinal-verbose               эки миң бир жүз жана кырк үч
+ 406  ky        spellout   %spellout-numbering                      эки миң бир жүз кырк үч
+ 407  ky        spellout   %spellout-numbering-year                 эки миң бир жүз кырк үч
+ 408  ky        spellout   %spellout-ordinal                        эки миң бир жүз кырк үчүнчү
+ 409  ky        ordinal    %digits-ordinal                          2 143'инчи
+ 410  lb        spellout   %spellout-cardinal-feminine              zwee­dausend­­honnert­dräianvéierzeg
+ 411  lb        spellout   %spellout-cardinal-masculine             zwee­dausend­­honnert­dräianvéierzeg
+ 412  lb        spellout   %spellout-cardinal-neuter                zwee­dausend­­honnert­dräianvéierzeg
+ 413  lb        spellout   %spellout-numbering                      zwee­dausend­­honnert­dräianvéierzeg
+ 414  lb        spellout   %spellout-numbering-year                 eenanzwanzeghonnertdräianvéierzeg
+ 415  lb        spellout   %spellout-ordinal-feminine               zwee­dausend­­honnert­dräianvéierzegster
+ 416  lb        spellout   %spellout-ordinal-masculine              zwee­dausend­­honnert­dräianvéierzegsten
+ 417  lb        spellout   %spellout-ordinal-neuter                 zwee­dausend­­honnert­dräianvéierzegst
+ 418  lb        ordinal    %digits-ordinal                          2.143.
+ 419  lo        spellout   %spellout-cardinal                       ສອງ​พัน​ໜຶ່ງ​ร้อย​ສີ່​ສິບ​ສາມ
+ 420  lo        spellout   %spellout-numbering                      ສອງ​พัน​ໜຶ່ງ​ร้อย​ສີ່​ສິບ​ສາມ
+ 421  lo        spellout   %spellout-numbering-year                 ສອງ​พัน​ໜຶ່ງ​ร้อย​ສີ່​ສິບ​ສາມ
+ 422  lo        spellout   %spellout-ordinal                        ที่​ສອງ​พัน​ໜຶ່ງ​ร้อย​ສີ່​ສິບ​ສາມ
+ 423  lo        ordinal    %digits-ordinal                          ที่​2.143
+ 424  lrc       spellout   %spellout-cardinal                       دۏ هزار و صد و چاٛهل و ساٛ
+ 425  lrc       spellout   %spellout-numbering                      دۏ هزار و صد و چاٛهل و ساٛ
+ 426  lrc       spellout   %spellout-numbering-year                 دۏ هزار و صد و چاٛهل و ساٛ
+ 427  lrc       ordinal    %digits-ordinal                          ۲٬۱۴۳.
+ 428  lt        spellout   %spellout-cardinal-feminine              du tūkstančiai šimtas keturiasdešimt trys
+ 429  lt        spellout   %spellout-cardinal-feminine-accusative   du tūkstančiai šimtas keturiasdešimt tris
+ 430  lt        spellout   %spellout-cardinal-feminine-dative       du tūkstančiai šimtas keturiasdešimt trims
+ 431  lt        spellout   %spellout-cardinal-feminine-genitive     du tūkstančiai šimtas keturiasdešimt trijų
+ 432  lt        spellout   %spellout-cardinal-feminine-instrumental du tūkstančiai šimtas keturiasdešimt trimis
+ 433  lt        spellout   %spellout-cardinal-feminine-locative     du tūkstančiai šimtas keturiasdešimt trijose
+ 434  lt        spellout   %spellout-cardinal-masculine             du tūkstančiai šimtas keturiasdešimt trys
+ 435  lt        spellout   %spellout-cardinal-masculine-accusative  du tūkstančiai šimtas keturiasdešimt tris
+ 436  lt        spellout   %spellout-cardinal-masculine-dative      du tūkstančiai šimtas keturiasdešimt trims
+ 437  lt        spellout   %spellout-cardinal-masculine-genitive    du tūkstančiai šimtas keturiasdešimt trijų
+ 438  lt        spellout   %spellout-cardinal-masculine-instrumental du tūkstančiai šimtas keturiasdešimt trimis
+ 439  lt        spellout   %spellout-cardinal-masculine-locative    du tūkstančiai šimtas keturiasdešimt trijuose
+ 440  lt        spellout   %spellout-numbering                      du tūkstančiai šimtas keturiasdešimt trys
+ 441  lt        spellout   %spellout-numbering-year                 du tūkstantai šimtas keturiasdešimt trečių
+ 442  lt        spellout   %spellout-ordinal-feminine               du tūkstantai šimtas keturiasdešimt trečia
+ 443  lt        spellout   %spellout-ordinal-feminine-accusative    du tūkstantai šimtas keturiasdešimt trečią
+ 444  lt        spellout   %spellout-ordinal-feminine-dative        du tūkstantai šimtas keturiasdešimt trečiai
+ 445  lt        spellout   %spellout-ordinal-feminine-genitive      du tūkstantai šimtas keturiasdešimt trečios
+ 446  lt        spellout   %spellout-ordinal-feminine-instrumental  du tūkstantai šimtas keturiasdešimt trečia
+ 447  lt        spellout   %spellout-ordinal-feminine-locative      du tūkstantai šimtas keturiasdešimt trečioje
+ 448  lt        spellout   %spellout-ordinal-feminine-plural        du tūkstantai šimtas keturiasdešimt trečios
+ 449  lt        spellout   %spellout-ordinal-feminine-plural-accusative du tūkstantai šimtas keturiasdešimt trečias
+ 450  lt        spellout   %spellout-ordinal-feminine-plural-dative du tūkstantai šimtas keturiasdešimt trečioms
+ 451  lt        spellout   %spellout-ordinal-feminine-plural-genitive du tūkstantai šimtas keturiasdešimt trečių
+ 452  lt        spellout   %spellout-ordinal-feminine-plural-instrumental du tūkstantai šimtas keturiasdešimt trečiomis
+ 453  lt        spellout   %spellout-ordinal-feminine-plural-locative du tūkstantai šimtas keturiasdešimt trečiose
+ 454  lt        spellout   %spellout-ordinal-masculine              du tūkstantai šimtas keturiasdešimt trečias
+ 455  lt        spellout   %spellout-ordinal-masculine-accusative   du tūkstantai šimtas keturiasdešimt trečią
+ 456  lt        spellout   %spellout-ordinal-masculine-dative       du tūkstantai šimtas keturiasdešimt trečiam
+ 457  lt        spellout   %spellout-ordinal-masculine-genitive     du tūkstantai šimtas keturiasdešimt trečio
+ 458  lt        spellout   %spellout-ordinal-masculine-instrumental du tūkstantai šimtas keturiasdešimt trečiu
+ 459  lt        spellout   %spellout-ordinal-masculine-locative     du tūkstantai šimtas keturiasdešimt trečiame
+ 460  lt        spellout   %spellout-ordinal-masculine-plural       du tūkstantai šimtas keturiasdešimt treti
+ 461  lt        spellout   %spellout-ordinal-masculine-plural-accusative du tūkstantai šimtas keturiasdešimt trečius
+ 462  lt        spellout   %spellout-ordinal-masculine-plural-dative du tūkstantai šimtas keturiasdešimt tretiems
+ 463  lt        spellout   %spellout-ordinal-masculine-plural-genitive du tūkstantai šimtas keturiasdešimt trečių
+ 464  lt        spellout   %spellout-ordinal-masculine-plural-instrumental du tūkstantai šimtas keturiasdešimt trečiais
+ 465  lt        spellout   %spellout-ordinal-masculine-plural-locative du tūkstantai šimtas keturiasdešimt trečiuose
+ 466  lt        spellout   %spellout-ordinal-neuter                 du tūkstantai šimtas keturiasdešimt trečia
+ 467  lt        ordinal    %digits-ordinal                          2 143.
+ 468  lv        spellout   %spellout-cardinal-feminine              divtūkstoš simt četrdesmit trīs
+ 469  lv        spellout   %spellout-cardinal-masculine             divtūkstoš simt četrdesmit trīs
+ 470  lv        spellout   %spellout-numbering                      divtūkstoš simt četrdesmit trīs
+ 471  lv        spellout   %spellout-numbering-year                 divtūkstoš simt četrdesmit trīs
+ 472  lv        ordinal    %digits-ordinal                          2 143.
+ 473  mk        spellout   %spellout-cardinal-feminine              две илјада еднасто четириесет и три
+ 474  mk        spellout   %spellout-cardinal-masculine             две илјада еднасто четириесет и три
+ 475  mk        spellout   %spellout-cardinal-neuter                две илјада еднасто четириесет и три
+ 476  mk        spellout   %spellout-numbering                      две илјада еднасто четириесет и три
+ 477  mk        spellout   %spellout-numbering-year                 две илјада еднасто четириесет и три
+ 478  mk        ordinal    %digits-ordinal                          2.143.
+ 479  ms        spellout   %spellout-cardinal                       dua ribu seratus empat puluh tiga
+ 480  ms        spellout   %spellout-numbering                      dua ribu seratus empat puluh tiga
+ 481  ms        spellout   %spellout-numbering-year                 dua ribu seratus empat puluh tiga
+ 482  ms        spellout   %spellout-ordinal                        kedua ribu seratus empat puluh tiga
+ 483  ms        ordinal    %digits-ordinal                          ke-2,143
+ 484  mt        spellout   %spellout-cardinal-feminine              elfejn u mija u tliet u erbgħin
+ 485  mt        spellout   %spellout-cardinal-masculine             elfejn u mija u tliet u erbgħin
+ 486  mt        spellout   %spellout-numbering                      elfejn u mija u tlieta u erbgħin
+ 487  mt        spellout   %spellout-numbering-year                 elfejn u mija u tlieta u erbgħin
+ 488  mt        ordinal    %digits-ordinal                          2,143.
+ 489  my        spellout   %spellout-cardinal                       နှစ်ထောင့်တစ်ရာ့လေးဆယ်သုံး
+ 490  my        spellout   %spellout-numbering                      နှစ်ထောင့်တစ်ရာ့လေးဆယ်သုံး
+ 491  my        spellout   %spellout-numbering-year                 နှစ်ထောင့်တစ်ရာ့လေးဆယ်သုံး
+ 492  my        spellout   %spellout-ordinal                        နှစ်ထောင့်တစ်ရာ့လေးဆယ်သုံး
+ 493  my        ordinal    %digits-ordinal                          ၂,၁၄၃.
+ 494  nb        spellout   %spellout-cardinal-feminine              to tusen hundre og førti­tre
+ 495  nb        spellout   %spellout-cardinal-masculine             to tusen hundre og førti­tre
+ 496  nb        spellout   %spellout-cardinal-neuter                to tusen hundre og førti­tre
+ 497  nb        spellout   %spellout-numbering                      to tusen hundre og førti­tre
+ 498  nb        spellout   %spellout-numbering-year                 tjue­én­hundre og førti­tre
+ 499  nb        spellout   %spellout-ordinal-feminine               to­tusen én­hundre førti­tredje
+ 500  nb        spellout   %spellout-ordinal-masculine              to­tusen én­hundre førti­tredje
+ 501  nb        spellout   %spellout-ordinal-neuter                 to­tusen én­hundre førti­tredje
+ 502  nb        spellout   %spellout-ordinal-plural                 to­tusen én­hundre førti­tredje
+ 503  nb        ordinal    %digits-ordinal                          2 143.
+ 504  ne        spellout   %spellout-cardinal                       दुई हजार एक सय त्रिचालिस
+ 505  ne        spellout   %spellout-numbering                      दुई हजार एक सय त्रिचालिस
+ 506  ne        spellout   %spellout-numbering-year                 एक्काइस सय त्रिचालिस
+ 507  ne        spellout   %spellout-ordinal-feminine               दुई हजार एक सय त्रिचालिसौँ
+ 508  ne        spellout   %spellout-ordinal-masculine              दुई हजार एक सय त्रिचालिसौँ
+ 509  ne        ordinal    %digits-ordinal                          २,१४३.
+ 510  nl        spellout   %spellout-cardinal                       twee­duizend­honderddrie­ën­veertig
+ 511  nl        spellout   %spellout-cardinal-stressed              twee­duizend­honderddrie­ën­veertig
+ 512  nl        spellout   %spellout-numbering                      twee­duizend­honderddrie­ën­veertig
+ 513  nl        spellout   %spellout-numbering-year                 een­en­twintigdrie­ën­veertig
+ 514  nl        spellout   %spellout-ordinal                        twee­duizend­honderd­drie­ën­veertigste
+ 515  nl        ordinal    %digits-ordinal                          2.143e
+ 516  nn        spellout   %spellout-cardinal-feminine              to tusen og eitt hundre og førti­tre
+ 517  nn        spellout   %spellout-cardinal-masculine             to tusen og eitt hundre og førti­tre
+ 518  nn        spellout   %spellout-cardinal-neuter                to tusen og eitt hundre og førti­tre
+ 519  nn        spellout   %spellout-cardinal-reale                 to tusen og eitt hundre og førti­tre
+ 520  nn        spellout   %spellout-numbering                      to tusen og eitt hundre og førti­tre
+ 521  nn        spellout   %spellout-numbering-year                 tjue­éin hundre og førti­tre
+ 522  nn        ordinal    %digits-ordinal                          2 143.
+ 523  no        spellout   %spellout-cardinal-feminine              to tusen hundre og førti­tre
+ 524  no        spellout   %spellout-cardinal-masculine             to tusen hundre og førti­tre
+ 525  no        spellout   %spellout-cardinal-neuter                to tusen hundre og førti­tre
+ 526  no        spellout   %spellout-numbering                      to tusen hundre og førti­tre
+ 527  no        spellout   %spellout-numbering-year                 tjue­én­hundre og førti­tre
+ 528  no        spellout   %spellout-ordinal-feminine               to­tusen én­hundre førti­tredje
+ 529  no        spellout   %spellout-ordinal-masculine              to­tusen én­hundre førti­tredje
+ 530  no        spellout   %spellout-ordinal-neuter                 to­tusen én­hundre førti­tredje
+ 531  no        spellout   %spellout-ordinal-plural                 to­tusen én­hundre førti­tredje
+ 532  no        ordinal    %digits-ordinal                          2 143.
+ 533  pl        spellout   %spellout-cardinal-feminine              dwa tysiące sto czterdzieści trzy
+ 534  pl        spellout   %spellout-cardinal-feminine-accusative   dwa tysiące sto czterdzieści trzy
+ 535  pl        spellout   %spellout-cardinal-feminine-dative       dwóm tysiącom stu czterdziestu trzem
+ 536  pl        spellout   %spellout-cardinal-feminine-genitive     dwóch tysięcy stu czterdziestu trzech
+ 537  pl        spellout   %spellout-cardinal-feminine-instrumental dwoma tysiącami stu czterdziestoma trzema
+ 538  pl        spellout   %spellout-cardinal-feminine-locative     dwóch tysiącach stu czterdziestu trzech
+ 539  pl        spellout   %spellout-cardinal-masculine             dwa tysiące sto czterdzieści trzy
+ 540  pl        spellout   %spellout-cardinal-masculine-accusative  dwa tysiące sto czterdzieści trzy
+ 541  pl        spellout   %spellout-cardinal-masculine-accusative-animate dwa tysiące sto czterdzieści trzy
+ 542  pl        spellout   %spellout-cardinal-masculine-accusative-personal dwa tysiące stu czterdziestu trzech
+ 543  pl        spellout   %spellout-cardinal-masculine-dative      dwóm tysiącom stu czterdziestu trzem
+ 544  pl        spellout   %spellout-cardinal-masculine-genitive    dwóch tysięcy stu czterdziestu trzech
+ 545  pl        spellout   %spellout-cardinal-masculine-instrumental dwoma tysiącami stu czterdziestoma trzema
+ 546  pl        spellout   %spellout-cardinal-masculine-locative    dwóch tysiącach stu czterdziestu trzech
+ 547  pl        spellout   %spellout-cardinal-masculine-personal    dwa tysiące stu czterdziestu trzech
+ 548  pl        spellout   %spellout-cardinal-neuter                dwa tysiące sto czterdzieści trzy
+ 549  pl        spellout   %spellout-cardinal-neuter-accusative     dwa tysiące sto czterdzieści trzy
+ 550  pl        spellout   %spellout-cardinal-neuter-dative         dwóm tysiącom stu czterdziestu trzem
+ 551  pl        spellout   %spellout-cardinal-neuter-genitive       dwóch tysięcy stu czterdziestu trzech
+ 552  pl        spellout   %spellout-cardinal-neuter-instrumental   dwoma tysiącami stu czterdziestoma trzema
+ 553  pl        spellout   %spellout-cardinal-neuter-locative       dwóch tysiącach stu czterdziestu trzech
+ 554  pl        spellout   %spellout-numbering                      dwa tysiące sto czterdzieści trzy
+ 555  pl        spellout   %spellout-numbering-year                 dwa tysiące sto czterdziestego trzeciego
+ 556  pl        spellout   %spellout-ordinal-feminine               dwa tysiące sto czterdziesta trzecia
+ 557  pl        spellout   %spellout-ordinal-feminine-accusative    dwa tysiące sto czterdziestą trzecią
+ 558  pl        spellout   %spellout-ordinal-feminine-dative        dwa tysiące sto czterdziestej trzeciej
+ 559  pl        spellout   %spellout-ordinal-feminine-genitive      dwa tysiące sto czterdziestej trzeciej
+ 560  pl        spellout   %spellout-ordinal-feminine-instrumental  dwa tysiące sto czterdziestą trzecią
+ 561  pl        spellout   %spellout-ordinal-feminine-locative      dwa tysiące sto czterdziestej trzeciej
+ 562  pl        spellout   %spellout-ordinal-masculine              dwa tysiące sto czterdziesty trzeci
+ 563  pl        spellout   %spellout-ordinal-masculine-accusative   dwa tysiące sto czterdziesty trzeci
+ 564  pl        spellout   %spellout-ordinal-masculine-animate-accusative dwa tysiące sto czterdziestego trzeciego
+ 565  pl        spellout   %spellout-ordinal-masculine-dative       dwa tysiące sto czterdziestemu trzeciemu
+ 566  pl        spellout   %spellout-ordinal-masculine-genitive     dwa tysiące sto czterdziestego trzeciego
+ 567  pl        spellout   %spellout-ordinal-masculine-instrumental dwa tysiące sto czterdziestym trzecim
+ 568  pl        spellout   %spellout-ordinal-masculine-locative     dwa tysiące sto czterdziestym trzecim
+ 569  pl        spellout   %spellout-ordinal-masculine-personal-plural dwa tysiące sto czterdzieści trzeci
+ 570  pl        spellout   %spellout-ordinal-masculine-personal-plural-accusative dwa tysiące sto czterdziestych trzecich
+ 571  pl        spellout   %spellout-ordinal-neuter                 dwa tysiące sto czterdzieste trzecie
+ 572  pl        spellout   %spellout-ordinal-neuter-accusative      dwa tysiące sto czterdzieste trzecie
+ 573  pl        spellout   %spellout-ordinal-neuter-dative          dwa tysiące sto czterdziestemu trzeciemu
+ 574  pl        spellout   %spellout-ordinal-neuter-genitive        dwa tysiące sto czterdziestego trzeciego
+ 575  pl        spellout   %spellout-ordinal-neuter-instrumental    dwa tysiące sto czterdziestym trzecim
+ 576  pl        spellout   %spellout-ordinal-neuter-locative        dwa tysiące sto czterdziestym trzecim
+ 577  pl        spellout   %spellout-ordinal-plural                 dwa tysiące sto czterdzieste trzecie
+ 578  pl        spellout   %spellout-ordinal-plural-accusative      dwa tysiące sto czterdzieste trzecie
+ 579  pl        spellout   %spellout-ordinal-plural-dative          dwa tysiące sto czterdziestym trzecim
+ 580  pl        spellout   %spellout-ordinal-plural-genitive        dwa tysiące sto czterdziestych trzecich
+ 581  pl        spellout   %spellout-ordinal-plural-instrumental    dwa tysiące sto czterdziestymi trzecimi
+ 582  pl        spellout   %spellout-ordinal-plural-locative        dwa tysiące sto czterdziestych trzecich
+ 583  pl        ordinal    %digits-ordinal                          2 143.
+ 584  pt        spellout   %spellout-cardinal-feminine              duas mil cento e quarenta e três
+ 585  pt        spellout   %spellout-cardinal-masculine             dois mil cento e quarenta e três
+ 586  pt        spellout   %spellout-numbering                      dois mil cento e quarenta e três
+ 587  pt        spellout   %spellout-numbering-year                 dois mil cento e quarenta e três
+ 588  pt        spellout   %spellout-ordinal-feminine               duas milésima centésima quadragésima terceira
+ 589  pt        spellout   %spellout-ordinal-masculine              dois milésimo centésimo quadragésimo terceiro
+ 590  pt        ordinal    %digits-ordinal                          2.143º
+ 591  pt        ordinal    %digits-ordinal-feminine                 2.143ª
+ 592  pt        ordinal    %digits-ordinal-masculine                2.143º
+ 593  qu        spellout   %spellout-cardinal                       iskay waranqa huk pachak tawa chunka kinsa-yuq
+ 594  qu        spellout   %spellout-numbering                      iskay waranqa huk pachak tawa chunka kinsa-yuq
+ 595  qu        spellout   %spellout-numbering-year                 iskay waranqa huk pachak tawa chunka kinsa-yuq
+ 596  qu        spellout   %spellout-ordinal                        iskay waranqa huk pachak tawa chunka kinsa-yuq-ñiqin
+ 597  qu        ordinal    %digits-ordinal                          2,143.
+ 598  ro        spellout   %spellout-cardinal-feminine              două mii una sută patruzeci și trei
+ 599  ro        spellout   %spellout-cardinal-masculine             două mii una sută patruzeci și trei
+ 600  ro        spellout   %spellout-cardinal-neuter                două mii una sută patruzeci și trei
+ 601  ro        spellout   %spellout-numbering                      două mii una sută patruzeci și trei
+ 602  ro        spellout   %spellout-numbering-year                 două mii una sută patruzeci și trei
+ 603  ro        ordinal    %digits-ordinal                          2.143a
+ 604  ru        spellout   %spellout-cardinal-feminine              две тысячи сто сорок три
+ 605  ru        spellout   %spellout-cardinal-feminine-ablative     двумя тысячами ста сорока тремя
+ 606  ru        spellout   %spellout-cardinal-feminine-accusative   две тысячи сто сорок три
+ 607  ru        spellout   %spellout-cardinal-feminine-dative       двум тысячам ста сорока трем
+ 608  ru        spellout   %spellout-cardinal-feminine-genitive     двух тысяч ста сорока трех
+ 609  ru        spellout   %spellout-cardinal-feminine-instrumental двумя тысячами ста сорока тремя
+ 610  ru        spellout   %spellout-cardinal-feminine-locative     двух тысячах ста сорока трех
+ 611  ru        spellout   %spellout-cardinal-feminine-prepositional двух тысячах ста сорока трех
+ 612  ru        spellout   %spellout-cardinal-masculine             две тысячи сто сорок три
+ 613  ru        spellout   %spellout-cardinal-masculine-ablative    двумя тысячами ста сорока тремя
+ 614  ru        spellout   %spellout-cardinal-masculine-accusative  две тысячи сто сорок три
+ 615  ru        spellout   %spellout-cardinal-masculine-dative      двум тысячам ста сорока трем
+ 616  ru        spellout   %spellout-cardinal-masculine-genitive    двух тысяч ста сорока трех
+ 617  ru        spellout   %spellout-cardinal-masculine-instrumental двумя тысячами ста сорока тремя
+ 618  ru        spellout   %spellout-cardinal-masculine-locative    двух тысячах ста сорока трех
+ 619  ru        spellout   %spellout-cardinal-masculine-prepositional двух тысячах ста сорока трех
+ 620  ru        spellout   %spellout-cardinal-neuter                две тысячи сто сорок три
+ 621  ru        spellout   %spellout-cardinal-neuter-ablative       двумя тысячами ста сорока тремя
+ 622  ru        spellout   %spellout-cardinal-neuter-accusative     две тысячи сто сорок три
+ 623  ru        spellout   %spellout-cardinal-neuter-dative         двум тысячам ста сорока трем
+ 624  ru        spellout   %spellout-cardinal-neuter-genitive       двух тысяч ста сорока трех
+ 625  ru        spellout   %spellout-cardinal-neuter-instrumental   двумя тысячами ста сорока тремя
+ 626  ru        spellout   %spellout-cardinal-neuter-locative       двух тысячах ста сорока трех
+ 627  ru        spellout   %spellout-cardinal-neuter-prepositional  двух тысячах ста сорока трех
+ 628  ru        spellout   %spellout-cardinal-plural                две тысячи сто сорок три
+ 629  ru        spellout   %spellout-cardinal-plural-ablative       двумя тысячами ста сорока тремя
+ 630  ru        spellout   %spellout-cardinal-plural-accusative     две тысячи сто сорок три
+ 631  ru        spellout   %spellout-cardinal-plural-dative         двум тысячам ста сорока трем
+ 632  ru        spellout   %spellout-cardinal-plural-genitive       двух тысяч ста сорока трех
+ 633  ru        spellout   %spellout-cardinal-plural-instrumental   двумя тысячами ста сорока тремя
+ 634  ru        spellout   %spellout-cardinal-plural-locative       двух тысячах ста сорока трех
+ 635  ru        spellout   %spellout-cardinal-plural-prepositional  двух тысячах ста сорока трех
+ 636  ru        spellout   %spellout-numbering                      две тысячи сто сорок три
+ 637  ru        spellout   %spellout-numbering-year                 две тысячи сто сорок третьего
+ 638  ru        spellout   %spellout-ordinal-feminine               две тысячи сто сорок третья
+ 639  ru        spellout   %spellout-ordinal-feminine-ablative      две тысячи сто сорок третьей
+ 640  ru        spellout   %spellout-ordinal-feminine-accusative    две тысячи сто сорок третью
+ 641  ru        spellout   %spellout-ordinal-feminine-dative        две тысячи сто сорок третьей
+ 642  ru        spellout   %spellout-ordinal-feminine-genitive      две тысячи сто сорок третьей
+ 643  ru        spellout   %spellout-ordinal-feminine-instrumental  две тысячи сто сорок третьей
+ 644  ru        spellout   %spellout-ordinal-feminine-locative      две тысячи сто сорок третьей
+ 645  ru        spellout   %spellout-ordinal-feminine-prepositional две тысячи сто сорок третьей
+ 646  ru        spellout   %spellout-ordinal-masculine              две тысячи сто сорок третий
+ 647  ru        spellout   %spellout-ordinal-masculine-ablative     две тысячи сто сорок третьим
+ 648  ru        spellout   %spellout-ordinal-masculine-accusative   две тысячи сто сорок третий
+ 649  ru        spellout   %spellout-ordinal-masculine-dative       две тысячи сто сорок третьому
+ 650  ru        spellout   %spellout-ordinal-masculine-genitive     две тысячи сто сорок третьего
+ 651  ru        spellout   %spellout-ordinal-masculine-instrumental две тысячи сто сорок третьим
+ 652  ru        spellout   %spellout-ordinal-masculine-locative     две тысячи сто сорок третьем
+ 653  ru        spellout   %spellout-ordinal-masculine-prepositional две тысячи сто сорок третьем
+ 654  ru        spellout   %spellout-ordinal-neuter                 две тысячи сто сорок третье
+ 655  ru        spellout   %spellout-ordinal-neuter-ablative        две тысячи сто сорок третьим
+ 656  ru        spellout   %spellout-ordinal-neuter-accusative      две тысячи сто сорок третье
+ 657  ru        spellout   %spellout-ordinal-neuter-dative          две тысячи сто сорок третьому
+ 658  ru        spellout   %spellout-ordinal-neuter-genitive        две тысячи сто сорок третьего
+ 659  ru        spellout   %spellout-ordinal-neuter-instrumental    две тысячи сто сорок третьим
+ 660  ru        spellout   %spellout-ordinal-neuter-locative        две тысячи сто сорок третьем
+ 661  ru        spellout   %spellout-ordinal-neuter-prepositional   две тысячи сто сорок третьем
+ 662  ru        spellout   %spellout-ordinal-plural                 две тысячи сто сорок третьи
+ 663  ru        spellout   %spellout-ordinal-plural-ablative        две тысячи сто сорок третьими
+ 664  ru        spellout   %spellout-ordinal-plural-accusative      две тысячи сто сорок третьи
+ 665  ru        spellout   %spellout-ordinal-plural-dative          две тысячи сто сорок третьим
+ 666  ru        spellout   %spellout-ordinal-plural-genitive        две тысячи сто сорок третьих
+ 667  ru        spellout   %spellout-ordinal-plural-instrumental    две тысячи сто сорок третьими
+ 668  ru        spellout   %spellout-ordinal-plural-locative        две тысячи сто сорок третьих
+ 669  ru        spellout   %spellout-ordinal-plural-prepositional   две тысячи сто сорок третьих
+ 670  ru        ordinal    %digits-ordinal                          2 143
+ 671  ru        ordinal    %digits-ordinal-feminine                 2 143-я
+ 672  ru        ordinal    %digits-ordinal-feminine-ablative        2 143-й
+ 673  ru        ordinal    %digits-ordinal-feminine-accusative      2 143-ю
+ 674  ru        ordinal    %digits-ordinal-feminine-dative          2 143-й
+ 675  ru        ordinal    %digits-ordinal-feminine-genitive        2 143-й
+ 676  ru        ordinal    %digits-ordinal-feminine-instrumental    2 143-й
+ 677  ru        ordinal    %digits-ordinal-feminine-locative        2 143-й
+ 678  ru        ordinal    %digits-ordinal-feminine-prepositional   2 143-й
+ 679  ru        ordinal    %digits-ordinal-masculine                2 143-й
+ 680  ru        ordinal    %digits-ordinal-masculine-ablative       2 143-м
+ 681  ru        ordinal    %digits-ordinal-masculine-accusative     2 143-й
+ 682  ru        ordinal    %digits-ordinal-masculine-dative         2 143-му
+ 683  ru        ordinal    %digits-ordinal-masculine-genitive       2 143-го
+ 684  ru        ordinal    %digits-ordinal-masculine-instrumental   2 143-м
+ 685  ru        ordinal    %digits-ordinal-masculine-locative       2 143-м
+ 686  ru        ordinal    %digits-ordinal-masculine-prepositional  2 143-м
+ 687  ru        ordinal    %digits-ordinal-neuter                   2 143-е
+ 688  ru        ordinal    %digits-ordinal-neuter-ablative          2 143-м
+ 689  ru        ordinal    %digits-ordinal-neuter-accusative        2 143-е
+ 690  ru        ordinal    %digits-ordinal-neuter-dative            2 143-му
+ 691  ru        ordinal    %digits-ordinal-neuter-genitive          2 143-го
+ 692  ru        ordinal    %digits-ordinal-neuter-instrumental      2 143-м
+ 693  ru        ordinal    %digits-ordinal-neuter-locative          2 143-м
+ 694  ru        ordinal    %digits-ordinal-neuter-prepositional     2 143-м
+ 695  ru        ordinal    %digits-ordinal-plural                   2 143-e
+ 696  ru        ordinal    %digits-ordinal-plural-ablative          2 143-ми
+ 697  ru        ordinal    %digits-ordinal-plural-accusative        2 143-e
+ 698  ru        ordinal    %digits-ordinal-plural-dative            2 143-м
+ 699  ru        ordinal    %digits-ordinal-plural-genitive          2 143-х
+ 700  ru        ordinal    %digits-ordinal-plural-instrumental      2 143-ми
+ 701  ru        ordinal    %digits-ordinal-plural-locative          2 143-х
+ 702  ru        ordinal    %digits-ordinal-plural-prepositional     2 143-х
+ 703  se        spellout   %spellout-cardinal                       guokte­duhát okta­čuođi­njeallje­logi­golbma
+ 704  se        spellout   %spellout-numbering                      guokte­duhát okta­čuođi­njeallje­logi­golbma
+ 705  se        spellout   %spellout-numbering-year                 guokte­logi­okta­čuođi­njeallje­logi­golbma
+ 706  se        ordinal    %digits-ordinal                          2 143.
+ 707  sk        spellout   %spellout-cardinal-feminine              dve tisíc jedna­sto štyridsať­tri
+ 708  sk        spellout   %spellout-cardinal-masculine             dve tisíc jedna­sto štyridsať­tri
+ 709  sk        spellout   %spellout-cardinal-neuter                dve tisíc jedna­sto štyridsať­tri
+ 710  sk        spellout   %spellout-numbering                      dve tisíc jedna­sto štyridsať­tri
+ 711  sk        spellout   %spellout-numbering-year                 dve tisíc jedna­sto štyridsať­tri
+ 712  sk        ordinal    %digits-ordinal                          2 143.
+ 713  sl        spellout   %spellout-cardinal-feminine              dvije tisuće sto štirideset tri
+ 714  sl        spellout   %spellout-cardinal-masculine             dvije tisuće sto štirideset tri
+ 715  sl        spellout   %spellout-cardinal-neuter                dvije tisuće sto štirideset tri
+ 716  sl        spellout   %spellout-numbering                      dvije tisuće sto štirideset tri
+ 717  sl        spellout   %spellout-numbering-year                 dvije tisuće sto štirideset tri
+ 718  sl        ordinal    %digits-ordinal                          2.143.
+ 719  sq        spellout   %spellout-cardinal-feminine              dy mijë e njëqind e dyzet e tri
+ 720  sq        spellout   %spellout-cardinal-masculine             dy mijë e njëqind e dyzet e tre
+ 721  sq        spellout   %spellout-numbering                      dy mijë e njëqind e dyzet e tre
+ 722  sq        spellout   %spellout-numbering-year                 dy mijë e njëqind e dyzet e tre
+ 723  sq        ordinal    %digits-ordinal                          2 143.
+ 724  sr        spellout   %spellout-cardinal-feminine              две хиљада сто четрдесет и три
+ 725  sr        spellout   %spellout-cardinal-masculine             две хиљада сто четрдесет и три
+ 726  sr        spellout   %spellout-cardinal-neuter                две хиљада сто четрдесет и три
+ 727  sr        spellout   %spellout-numbering                      две хиљада сто четрдесет и три
+ 728  sr        spellout   %spellout-numbering-year                 две хиљада сто четрдесет и три
+ 729  sr        spellout   %spellout-ordinal                        двадесет и једнасто четрдесет и трећи
+ 730  sr        ordinal    %digits-ordinal                          2.143.
+ 731  sr-Cyrl   spellout   %spellout-cardinal-feminine              две хиљада сто четрдесет и три
+ 732  sr-Cyrl   spellout   %spellout-cardinal-masculine             две хиљада сто четрдесет и три
+ 733  sr-Cyrl   spellout   %spellout-cardinal-neuter                две хиљада сто четрдесет и три
+ 734  sr-Cyrl   spellout   %spellout-numbering                      две хиљада сто четрдесет и три
+ 735  sr-Cyrl   spellout   %spellout-numbering-year                 две хиљада сто четрдесет и три
+ 736  sr-Cyrl   spellout   %spellout-ordinal                        двадесет и једнасто четрдесет и трећи
+ 737  sr-Cyrl   ordinal    %digits-ordinal                          2.143.
+ 738  sr-Latn   spellout   %spellout-cardinal-feminine              dve hiljada sto četrdeset i tri
+ 739  sr-Latn   spellout   %spellout-cardinal-masculine             dve hiljada sto četrdeset i tri
+ 740  sr-Latn   spellout   %spellout-cardinal-neuter                dve hiljada sto četrdeset i tri
+ 741  sr-Latn   spellout   %spellout-numbering                      dve hiljada sto četrdeset i tri
+ 742  sr-Latn   spellout   %spellout-numbering-year                 dve hiljada sto četrdeset i tri
+ 743  sr-Latn   spellout   %spellout-ordinal                        dvadeset i jednasto četrdeset i treći
+ 744  sr-Latn   ordinal    %digits-ordinal                          2.143.
+ 745  su        spellout   %spellout-cardinal                       dua rebu saratus opat puluh tilu
+ 746  su        spellout   %spellout-numbering                      dua rebu saratus opat puluh tilu
+ 747  su        spellout   %spellout-numbering-year                 dua rebu saratus opat puluh tilu
+ 748  su        spellout   %spellout-ordinal                        kadua rebu saratus opat puluh tilu
+ 749  su        ordinal    %digits-ordinal                          2.143.
+ 750  su-Latn   spellout   %spellout-cardinal                       dua rebu saratus opat puluh tilu
+ 751  su-Latn   spellout   %spellout-numbering                      dua rebu saratus opat puluh tilu
+ 752  su-Latn   spellout   %spellout-numbering-year                 dua rebu saratus opat puluh tilu
+ 753  su-Latn   spellout   %spellout-ordinal                        kadua rebu saratus opat puluh tilu
+ 754  su-Latn   ordinal    %digits-ordinal                          2.143.
+ 755  sv        spellout   %spellout-cardinal-feminine              två­tusen ett­hundra­fyrtio­tre
+ 756  sv        spellout   %spellout-cardinal-masculine             två­tusen ett­hundra­fyrtio­tre
+ 757  sv        spellout   %spellout-cardinal-neuter                två­tusen ett­hundra­fyrtio­tre
+ 758  sv        spellout   %spellout-cardinal-reale                 två­tusen ett­hundra­fyrtio­tre
+ 759  sv        spellout   %spellout-numbering                      två­tusen ett­hundra­fyrtio­tre
+ 760  sv        spellout   %spellout-numbering-year                 tjugo­ett­hundra­fyrtio­tre
+ 761  sv        spellout   %spellout-ordinal-feminine               två­tusen ett­hundra fyrtio­tredje
+ 762  sv        spellout   %spellout-ordinal-masculine              två­tusen ett­hundra fyrtio­tredje
+ 763  sv        spellout   %spellout-ordinal-neuter                 två­tusen ett­hundra fyrtio­tredje
+ 764  sv        spellout   %spellout-ordinal-reale                  två­tusen ett­hundra fyrtio­tredje
+ 765  sv        ordinal    %digits-ordinal                          2 143:e
+ 766  sv        ordinal    %digits-ordinal-feminine                 2 143:e
+ 767  sv        ordinal    %digits-ordinal-masculine                2 143:e
+ 768  sv        ordinal    %digits-ordinal-neuter                   2 143:e
+ 769  sv        ordinal    %digits-ordinal-reale                    2 143:e
+ 770  sw        spellout   %spellout-cardinal                       elfu mbili, mia moja na arobaini na tatu
+ 771  sw        spellout   %spellout-numbering                      elfu mbili, mia moja na arobaini na tatu
+ 772  sw        spellout   %spellout-numbering-year                 elfu mbili, mia moja na arobaini na tatu
+ 773  sw        spellout   %spellout-ordinal                        wa elfu mbili, mia moja na arobaini na tatu
+ 774  sw        ordinal    %digits-ordinal                          2,143.
+ 775  ta        spellout   %spellout-cardinal                       இரண்டு ஆயிரம் நூறு நாற்பது மூன்று
+ 776  ta        spellout   %spellout-numbering                      இரண்டு ஆயிரம் நூறு நாற்பது மூன்று
+ 777  ta        spellout   %spellout-numbering-year                 இரண்டு ஆயிரம் நூறு நாற்பது மூன்று
+ 778  ta        spellout   %spellout-ordinal                        2,143ாவது
+ 779  ta        ordinal    %digits-ordinal                          2,143.
+ 780  th        spellout   %spellout-cardinal                       สอง​พัน​หนึ่ง​ร้อย​สี่​สิบ​สาม
+ 781  th        spellout   %spellout-numbering                      สอง​พัน​หนึ่ง​ร้อย​สี่​สิบ​สาม
+ 782  th        spellout   %spellout-numbering-year                 สอง​พัน​หนึ่ง​ร้อย​สี่​สิบ​สาม
+ 783  th        spellout   %spellout-ordinal                        ที่​สอง​พัน​หนึ่ง​ร้อย​สี่​สิบ​สาม
+ 784  th        ordinal    %digits-ordinal                          ที่ 2,143
+ 785  tr        spellout   %spellout-cardinal                       iki bin yüz kırk üç
+ 786  tr        spellout   %spellout-numbering                      iki bin yüz kırk üç
+ 787  tr        spellout   %spellout-numbering-year                 iki bin yüz kırk üç
+ 788  tr        spellout   %spellout-ordinal                        iki bin yüz kırk üçüncü
+ 789  tr        ordinal    %digits-ordinal                          2.143.
+ 790  uk        spellout   %spellout-cardinal-feminine              дві тисячі сто сорок три
+ 791  uk        spellout   %spellout-cardinal-masculine             дві тисячі сто сорок три
+ 792  uk        spellout   %spellout-cardinal-neuter                дві тисячі сто сорок три
+ 793  uk        spellout   %spellout-numbering                      дві тисячі сто сорок три
+ 794  uk        spellout   %spellout-numbering-year                 дві тисячі сто сорок три
+ 795  uk        ordinal    %digits-ordinal                          2 143-ій
+ 796  uk        ordinal    %digits-ordinal-feminine                 2 143-я
+ 797  uk        ordinal    %digits-ordinal-masculine                2 143-ій
+ 798  uk        ordinal    %digits-ordinal-neuter                   2 143-є
+ 799  vec       spellout   %spellout-cardinal-feminine              du­miła­sento­cuaranta­trè
+ 800  vec       spellout   %spellout-cardinal-masculine             du­miła­sento­cuaranta­trè
+ 801  vec       spellout   %spellout-numbering                      du­miła­sento­cuaranta­trè
+ 802  vec       spellout   %spellout-numbering-year                 du­miła­sento­cuaranta­trè
+ 803  vec       spellout   %spellout-ordinal-feminine               do­miła­sento­cuaranta­treèzema
+ 804  vec       spellout   %spellout-ordinal-masculine              du­miła­sento­cuaranta­treèzemo
+ 805  vec       ordinal    %digits-ordinal                          2 143.
+ 806  vi        spellout   %spellout-cardinal                       hai nghìn một trăm bốn mươi ba
+ 807  vi        spellout   %spellout-numbering                      hai nghìn một trăm bốn mươi ba
+ 808  vi        spellout   %spellout-numbering-year                 hai nghìn một trăm bốn mươi ba
+ 809  vi        spellout   %spellout-ordinal                        thứ hai nghìn một trăm bốn mươi ba
+ 810  vi        ordinal    %digits-ordinal                          thứ 2.143
+ 811  yue       spellout   %spellout-cardinal                       二千一百四十三
+ 812  yue       spellout   %spellout-cardinal-alternate2            二千一百四十三
+ 813  yue       spellout   %spellout-cardinal-financial             貳仟壹佰肆拾叁
+ 814  yue       spellout   %spellout-numbering                      二千一百四十三
+ 815  yue       spellout   %spellout-numbering-year                 二一四三
+ 816  yue       spellout   %spellout-ordinal                        第二千一百四十三
+ 817  yue       ordinal    %digits-ordinal                          第2,143
+ 818  yue-Hans  spellout   %spellout-cardinal                       二千一百四十三
+ 819  yue-Hans  spellout   %spellout-cardinal-alternate2            二千一百四十三
+ 820  yue-Hans  spellout   %spellout-cardinal-financial             贰仟壹佰肆拾叁
+ 821  yue-Hans  spellout   %spellout-numbering                      二千一百四十三
+ 822  yue-Hans  spellout   %spellout-numbering-year                 二一四三
+ 823  yue-Hans  spellout   %spellout-ordinal                        第二千一百四十三
+ 824  yue-Hans  ordinal    %digits-ordinal                          第2,143
+ 825  yue-Hant  spellout   %spellout-cardinal                       二千一百四十三
+ 826  yue-Hant  spellout   %spellout-cardinal-alternate2            二千一百四十三
+ 827  yue-Hant  spellout   %spellout-cardinal-financial             貳仟壹佰肆拾叁
+ 828  yue-Hant  spellout   %spellout-numbering                      二千一百四十三
+ 829  yue-Hant  spellout   %spellout-numbering-year                 二一四三
+ 830  yue-Hant  spellout   %spellout-ordinal                        第二千一百四十三
+ 831  yue-Hant  ordinal    %digits-ordinal                          第2,143
+ 832  zh        spellout   %spellout-cardinal                       二千一百四十三
+ 833  zh        spellout   %spellout-cardinal-alternate2            两千一百四十三
+ 834  zh        spellout   %spellout-cardinal-financial             贰仟壹佰肆拾叁
+ 835  zh        spellout   %spellout-numbering                      二千一百四十三
+ 836  zh        spellout   %spellout-numbering-days                 二千一百四十三
+ 837  zh        spellout   %spellout-numbering-year                 二一四三
+ 838  zh        spellout   %spellout-ordinal                        第二千一百四十三
+ 839  zh        ordinal    %digits-ordinal                          第2,143
+ 840  zh-Hans   spellout   %spellout-cardinal                       二千一百四十三
+ 841  zh-Hans   spellout   %spellout-cardinal-alternate2            两千一百四十三
+ 842  zh-Hans   spellout   %spellout-cardinal-financial             贰仟壹佰肆拾叁
+ 843  zh-Hans   spellout   %spellout-numbering                      二千一百四十三
+ 844  zh-Hans   spellout   %spellout-numbering-days                 二千一百四十三
+ 845  zh-Hans   spellout   %spellout-numbering-year                 二一四三
+ 846  zh-Hans   spellout   %spellout-ordinal                        第二千一百四十三
+ 847  zh-Hans   ordinal    %digits-ordinal                          第2,143
+ 848  zh-Hant   spellout   %spellout-cardinal                       二千一百四十三
+ 849  zh-Hant   spellout   %spellout-cardinal-alternate2            兩千一百四十三
+ 850  zh-Hant   spellout   %spellout-cardinal-financial             貳仟壹佰肆拾參
+ 851  zh-Hant   spellout   %spellout-numbering                      二千一百四十三
+ 852  zh-Hant   spellout   %spellout-numbering-year                 二一四三
+ 853  zh-Hant   spellout   %spellout-ordinal                        第二千一百四十三
+ 854  zh-Hant   ordinal    %digits-ordinal                          第2,143

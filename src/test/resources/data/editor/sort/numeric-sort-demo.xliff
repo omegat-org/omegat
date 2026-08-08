@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file original="benutzerhandbuch.txt" source-language="de" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="demo" tool-name="sort-demo" tool-version="1.0"/>
+    </header>
+    <body>
+
+      <!-- Western numbers embedded in text; numeric IDs. target = source. -->
+      <trans-unit id="1">
+        <source>Kapitel 1: Einführung in das Programm.</source>
+        <target>Kapitel 1: Einführung in das Programm.</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Kapitel 2: Installation und erste Schritte.</source>
+        <target>Kapitel 2: Installation und erste Schritte.</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Kapitel 10: Erweiterte Fehlerbehebung.</source>
+        <target>Kapitel 10: Erweiterte Fehlerbehebung.</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Kapitel 20: Anhang und Referenzen.</source>
+        <target>Kapitel 20: Anhang und Referenzen.</target>
+      </trans-unit>
+
+      <!-- Roman numerals as whole tokens; roman IDs. -->
+      <trans-unit id="III">
+        <source>Anhang III enthält die Lizenzbedingungen.</source>
+        <target>Anhang III enthält die Lizenzbedingungen.</target>
+      </trans-unit>
+      <trans-unit id="IX">
+        <source>Anhang IX beschreibt die Programmierschnittstelle.</source>
+        <target>Anhang IX beschreibt die Programmierschnittstelle.</target>
+      </trans-unit>
+      <trans-unit id="XII">
+        <source>Anhang XII listet alle Tastenkürzel auf.</source>
+        <target>Anhang XII listet alle Tastenkürzel auf.</target>
+      </trans-unit>
+
+      <!-- Roman higher-value numerals (analog: thousands/hundreds). -->
+      <trans-unit id="rom-1984">
+        <source>Baujahr MCMLXXXIV ist dokumentiert.</source>
+        <target>Baujahr MCMLXXXIV ist dokumentiert.</target>
+      </trans-unit>
+      <trans-unit id="rom-2024">
+        <source>Baujahr MMXXIV ist geplant.</source>
+        <target>Baujahr MMXXIV ist geplant.</target>
+      </trans-unit>
+
+      <!-- CJK ideographic numerals as delimited tokens (low values). -->
+      <trans-unit id="cjk-3">
+        <source>Abschnitt 三 folgt im nächsten Kapitel.</source>
+        <target>Abschnitt 三 folgt im nächsten Kapitel.</target>
+      </trans-unit>
+      <trans-unit id="cjk-10">
+        <source>Abschnitt 十 ist völlig optional.</source>
+        <target>Abschnitt 十 ist völlig optional.</target>
+      </trans-unit>
+      <trans-unit id="cjk-12">
+        <source>Abschnitt 十二 behandelt die Details.</source>
+        <target>Abschnitt 十二 behandelt die Details.</target>
+      </trans-unit>
+
+      <!-- Japanese higher-value numerals: 百 (100), 千 (1000), 万 (10000), 億 (10^8). -->
+      <trans-unit id="ja-100">
+        <source>Zeile 百 kommt bald.</source>
+        <target>Zeile 百 kommt bald.</target>
+      </trans-unit>
+      <trans-unit id="ja-1000">
+        <source>Kapitel 千 ist umfangreich.</source>
+        <target>Kapitel 千 ist umfangreich.</target>
+      </trans-unit>
+      <trans-unit id="ja-10000">
+        <source>Posten 一万 wird geliefert.</source>
+        <target>Posten 一万 wird geliefert.</target>
+      </trans-unit>
+      <trans-unit id="ja-oku">
+        <source>Summe 一億 ist gewaltig.</source>
+        <target>Summe 一億 ist gewaltig.</target>
+      </trans-unit>
+
+      <!-- Japanese composed 7-digit values; must sort 2500034 < 3400025 < 4300052 < 5200043. -->
+      <trans-unit id="ja-2500034">
+        <source>Betrag 二百五十万三十四 Yen.</source>
+        <target>Betrag 二百五十万三十四 Yen.</target>
+      </trans-unit>
+      <trans-unit id="ja-3400025">
+        <source>Betrag 三百四十万二十五 Yen.</source>
+        <target>Betrag 三百四十万二十五 Yen.</target>
+      </trans-unit>
+      <trans-unit id="ja-4300052">
+        <source>Betrag 四百三十万五十二 Yen.</source>
+        <target>Betrag 四百三十万五十二 Yen.</target>
+      </trans-unit>
+      <trans-unit id="ja-5200043">
+        <source>Betrag 五百二十万四十三 Yen.</source>
+        <target>Betrag 五百二十万四十三 Yen.</target>
+      </trans-unit>
+
+      <!-- Chinese higher unit 亿 (10^8) as delimited token. -->
+      <trans-unit id="zh-oku">
+        <source>Gesamt 一亿 Einheiten.</source>
+        <target>Gesamt 一亿 Einheiten.</target>
+      </trans-unit>
+
+      <!-- Non-Latin decimal digits (Arabic-Indic, Devanagari) and Ethiopic numerals. -->
+      <trans-unit id="ai-3">
+        <source>Seite ٣ zeigt das Ablaufdiagramm.</source>
+        <target>Seite ٣ zeigt das Ablaufdiagramm.</target>
+      </trans-unit>
+      <trans-unit id="ai-10">
+        <source>Seite ١٠ zeigt die Vergleichstabelle.</source>
+        <target>Seite ١٠ zeigt die Vergleichstabelle.</target>
+      </trans-unit>
+      <trans-unit id="dev-2">
+        <source>Regel २ gilt in jedem Fall.</source>
+        <target>Regel २ gilt in jedem Fall.</target>
+      </trans-unit>
+      <trans-unit id="ethi-12">
+        <source>Die Ziffer ፲፪ dient als Beispiel.</source>
+        <target>Die Ziffer ፲፪ dient als Beispiel.</target>
+      </trans-unit>
+
+      <!-- Ethiopic higher-value numerals: ፻ (100), ፼ (10000). -->
+      <trans-unit id="ethi-100">
+        <source>Kapitel ፻ endet hier.</source>
+        <target>Kapitel ፻ endet hier.</target>
+      </trans-unit>
+      <trans-unit id="ethi-10000">
+        <source>Posten ፼ ist auf Lager.</source>
+        <target>Posten ፼ ist auf Lager.</target>
+      </trans-unit>
+
+      <!-- Duplicated source (duplicate status / count). -->
+      <trans-unit id="save-a">
+        <source>Bitte speichern Sie das Dokument regelmäßig.</source>
+        <target>Bitte speichern Sie das Dokument regelmäßig.</target>
+      </trans-unit>
+      <trans-unit id="save-b">
+        <source>Bitte speichern Sie das Dokument regelmäßig.</source>
+        <target>Bitte speichern Sie das Dokument regelmäßig.</target>
+      </trans-unit>
+      <trans-unit id="save-c">
+        <source>Bitte speichern Sie das Dokument regelmäßig.</source>
+        <target>Bitte speichern Sie das Dokument regelmäßig.</target>
+      </trans-unit>
+
+      <!-- Length variety (source length sort). -->
+      <trans-unit id="short-1">
+        <source>Ende.</source>
+        <target>Ende.</target>
+      </trans-unit>
+      <trans-unit id="long-1">
+        <source>Dieser besonders lange Absatz dient dazu, die Sortierung nach Segmentlänge zu prüfen, indem er deutlich mehr Zeichen enthält als alle anderen Beispielsätze in diesem Dokument.</source>
+        <target>Dieser besonders lange Absatz dient dazu, die Sortierung nach Segmentlänge zu prüfen, indem er deutlich mehr Zeichen enthält als alle anderen Beispielsätze in diesem Dokument.</target>
+      </trans-unit>
+
+      <!-- Inline tags (tag-count sort): one, two and three tags. target = source. -->
+      <trans-unit id="tag-1">
+        <source>Klicken Sie auf <g id="1">Speichern</g>, um fortzufahren.</source>
+        <target>Klicken Sie auf <g id="1">Speichern</g>, um fortzufahren.</target>
+      </trans-unit>
+      <trans-unit id="tag-2">
+        <source>Wählen Sie <g id="1">Datei</g> und dann <x id="2"/> Öffnen.</source>
+        <target>Wählen Sie <g id="1">Datei</g> und dann <x id="2"/> Öffnen.</target>
+      </trans-unit>
+      <trans-unit id="tag-3">
+        <source>Nutzen Sie <g id="1">Kopieren</g>, <g id="2">Einfügen</g> und <x id="3"/> zum Abschluss.</source>
+        <target>Nutzen Sie <g id="1">Kopieren</g>, <g id="2">Einfügen</g> und <x id="3"/> zum Abschluss.</target>
+      </trans-unit>
+
+      <!-- Source comments via <note>. target = source. -->
+      <trans-unit id="note-1">
+        <source>Der Assistent führt Sie durch die Einrichtung.</source>
+        <target>Der Assistent führt Sie durch die Einrichtung.</target>
+        <note>Bitte in formeller Anrede übersetzen.</note>
+      </trans-unit>
+      <trans-unit id="note-2">
+        <source>Weitere Hinweise finden Sie in der Hilfe.</source>
+        <target>Weitere Hinweise finden Sie in der Hilfe.</target>
+        <note>Kontext: Fußzeile der Startseite.</note>
+      </trans-unit>
+
+      <!-- Plain alphabetical variety (alphabetical / rhyme sort). -->
+      <trans-unit id="alpha-1">
+        <source>Achtung: Diese Aktion kann nicht rückgängig gemacht werden.</source>
+        <target>Achtung: Diese Aktion kann nicht rückgängig gemacht werden.</target>
+      </trans-unit>
+      <trans-unit id="alpha-2">
+        <source>Zusammenfassung der wichtigsten Funktionen.</source>
+        <target>Zusammenfassung der wichtigsten Funktionen.</target>
+      </trans-unit>
+
+      <!-- === Numeric hardening examples: signs, decimals, fractions === -->
+      <trans-unit id="neg-5"><source>Temperatur -5 Grad gemessen.</source><target>Temperatur -5 Grad gemessen.</target></trans-unit>
+      <trans-unit id="neg-half"><source>Abweichung -1/2 Punkt.</source><target>Abweichung -1/2 Punkt.</target></trans-unit>
+      <trans-unit id="dec-1_5"><source>Ausgabe 1.5 ist verfügbar.</source><target>Ausgabe 1.5 ist verfügbar.</target></trans-unit>
+      <trans-unit id="dec-3_14"><source>Pi beträgt etwa 3.14 hier.</source><target>Pi beträgt etwa 3.14 hier.</target></trans-unit>
+      <trans-unit id="frac-3_4"><source>Anteil 3/4 der Summe.</source><target>Anteil 3/4 der Summe.</target></trans-unit>
+      <trans-unit id="frac-7_4"><source>Faktor 7/4 angewendet.</source><target>Faktor 7/4 angewendet.</target></trans-unit>
+      <trans-unit id="mixed-1_5"><source>Menge 1 1/2 Liter benötigt.</source><target>Menge 1 1/2 Liter benötigt.</target></trans-unit>
+
+      <!-- === Vulgar fractions (¼ ½ ¾ ⅓) === -->
+      <trans-unit id="vulg-quarter"><source>Rest ¼ übrig.</source><target>Rest ¼ übrig.</target></trans-unit>
+      <trans-unit id="vulg-half"><source>Etwa ½ erledigt.</source><target>Etwa ½ erledigt.</target></trans-unit>
+      <trans-unit id="vulg-third"><source>Nur ⅓ verbraucht.</source><target>Nur ⅓ verbraucht.</target></trans-unit>
+
+      <!-- === Enclosed / parenthesized numbers (No): value via Unicode numeric === -->
+      <trans-unit id="enc-9"><source>Punkt ⑼ folgt.</source><target>Punkt ⑼ folgt.</target></trans-unit>
+      <trans-unit id="enc-25"><source>Regel ㉕ gilt.</source><target>Regel ㉕ gilt.</target></trans-unit>
+      <trans-unit id="enc-12"><source>Absatz ⓬ endet.</source><target>Absatz ⓬ endet.</target></trans-unit>
+
+      <!-- === Single-code-point Roman and mathematical digit === -->
+      <trans-unit id="rom-8"><source>Kapitel Ⅷ beginnt.</source><target>Kapitel Ⅷ beginnt.</target></trans-unit>
+      <trans-unit id="math-9"><source>Ziffer 𝟵 erscheint.</source><target>Ziffer 𝟵 erscheint.</target></trans-unit>
+
+      <!-- === Historic script numerals (Aegean, cuneiform, Aramaic, Greek acrophonic) === -->
+      <trans-unit id="aeg-8"><source>Ägäisch 𐄎 als Beispiel.</source><target>Ägäisch 𐄎 als Beispiel.</target></trans-unit>
+      <trans-unit id="aeg-900"><source>Ägäisch 𐄡 als Beispiel.</source><target>Ägäisch 𐄡 als Beispiel.</target></trans-unit>
+      <trans-unit id="cun-6"><source>Keilschrift 𒐄 als Beispiel.</source><target>Keilschrift 𒐄 als Beispiel.</target></trans-unit>
+      <trans-unit id="ara-3"><source>Aramäisch 𐡚 als Beispiel.</source><target>Aramäisch 𐡚 als Beispiel.</target></trans-unit>
+      <trans-unit id="grk-500"><source>Akrophonisch 𐅰 als Beispiel.</source><target>Akrophonisch 𐅰 als Beispiel.</target></trans-unit>
+
+      <!-- === Guardrail: emoji symbol has NO numeric value, sorts as non-number === -->
+      <trans-unit id="emoji-100"><source>Bewertung 💯 Prozent.</source><target>Bewertung 💯 Prozent.</target></trans-unit>
+
+      <!-- === More systems: superscript/subscript, ideographic zero, Phoenician, mixed vulgar === -->
+      <trans-unit id="sup-2"><source>Fläche 5 km² gemessen.</source><target>Fläche 5 km² gemessen.</target></trans-unit>
+      <trans-unit id="ideo-0"><source>Wert 〇 als Null.</source><target>Wert 〇 als Null.</target></trans-unit>
+      <trans-unit id="phoen-3"><source>Phönizisch 𐤛 als Beispiel.</source><target>Phönizisch 𐤛 als Beispiel.</target></trans-unit>
+      <trans-unit id="mixed-vulgar"><source>Strecke 2½ Meilen.</source><target>Strecke 2½ Meilen.</target></trans-unit>
+      <trans-unit id="dec-point5"><source>Faktor 0.3 im Modell.</source><target>Faktor 0.3 im Modell.</target></trans-unit>
+
+      <!-- === Alphabetical order != numeric order (the whole point of numeric sort) === -->
+      <!-- Roman: alpha -> IV, IX, V, VIII, X ; numeric -> IV, V, VIII, IX, X -->
+      <trans-unit id="div-rom-4"><source>Norm IV wird geprüft.</source><target>Norm IV wird geprüft.</target></trans-unit>
+      <trans-unit id="div-rom-5"><source>Norm V wird geprüft.</source><target>Norm V wird geprüft.</target></trans-unit>
+      <trans-unit id="div-rom-8"><source>Norm VIII wird geprüft.</source><target>Norm VIII wird geprüft.</target></trans-unit>
+      <trans-unit id="div-rom-9"><source>Norm IX wird geprüft.</source><target>Norm IX wird geprüft.</target></trans-unit>
+      <trans-unit id="div-rom-10"><source>Norm X wird geprüft.</source><target>Norm X wird geprüft.</target></trans-unit>
+      <!-- Decimal: alpha -> 10, 100, 2, 21 ; numeric -> 2, 10, 21, 100 -->
+      <trans-unit id="div-dec-2"><source>Schritt 2 ausführen.</source><target>Schritt 2 ausführen.</target></trans-unit>
+      <trans-unit id="div-dec-10"><source>Schritt 10 ausführen.</source><target>Schritt 10 ausführen.</target></trans-unit>
+      <trans-unit id="div-dec-21"><source>Schritt 21 ausführen.</source><target>Schritt 21 ausführen.</target></trans-unit>
+      <trans-unit id="div-dec-100"><source>Schritt 100 ausführen.</source><target>Schritt 100 ausführen.</target></trans-unit>
+
+      <!-- ================================================================= -->
+      <!-- Three-orders-differ set across mixed numeral systems (CJK,         -->
+      <!-- full-width, Arabic-Indic, Devanagari, Ethiopic, Roman, Western).   -->
+      <!-- File order, alphabetical order and numeric-value order are all     -->
+      <!-- pairwise distinct. target = source.                                -->
+      <!--   file order   : Z A M D T G K B                                   -->
+      <!--   alphabetical : A B D G K M T Z                                   -->
+      <!--   numeric value: Z(1) M(7) K(15) T(20) B(40) G(50) A(90) D(300)    -->
+      <!-- ================================================================= -->
+      <trans-unit id="tri-z"><source>Zebras zählen bis 一 im Zoo.</source><target>Zebras zählen bis 一 im Zoo.</target></trans-unit>
+      <trans-unit id="tri-a"><source>Apfelernte erreicht ９０ Kisten.</source><target>Apfelernte erreicht ９０ Kisten.</target></trans-unit>
+      <trans-unit id="tri-m"><source>Mango Nummer ٧ ist reif.</source><target>Mango Nummer ٧ ist reif.</target></trans-unit>
+      <trans-unit id="tri-d"><source>Delta umfasst 三百 Hektar.</source><target>Delta umfasst 三百 Hektar.</target></trans-unit>
+      <trans-unit id="tri-t"><source>Tiger leben ፳ Jahre hier.</source><target>Tiger leben ፳ Jahre hier.</target></trans-unit>
+      <trans-unit id="tri-g"><source>Gamma misst ५० Einheiten.</source><target>Gamma misst ५० Einheiten.</target></trans-unit>
+      <trans-unit id="tri-k"><source>Kilo wiegt 15 Gramm genau.</source><target>Kilo wiegt 15 Gramm genau.</target></trans-unit>
+      <trans-unit id="tri-b"><source>Bravo Team gewann XL Spiele.</source><target>Bravo Team gewann XL Spiele.</target></trans-unit>
+
+      <!-- === Translated segments (target != source) with exotic numerals. === -->
+      <trans-unit id="tr-rom8"><source>Siehe Anhang Ⅷ für Details.</source><target>See appendix Ⅷ for details.</target></trans-unit>
+      <trans-unit id="tr-cjk12"><source>Kapitel 十二 ist wichtig.</source><target>Chapter 十二 is important.</target></trans-unit>
+      <trans-unit id="tr-ai25"><source>Seite ٢٥ enthält die Tabelle.</source><target>Page ٢٥ contains the table.</target></trans-unit>
+      <trans-unit id="tr-dev3"><source>Regel ३ gilt immer.</source><target>Rule ३ always applies.</target></trans-unit>
+      <trans-unit id="tr-vul34"><source>Etwa ¾ sind fertig.</source><target>About ¾ are done.</target></trans-unit>
+      <trans-unit id="tr-rom2025"><source>Das Jahr MMXXV beginnt.</source><target>The year MMXXV begins.</target></trans-unit>
+      <trans-unit id="tr-fw9"><source>Ziffer ９ erscheint zuerst.</source><target>Digit ９ appears first.</target></trans-unit>
+      <trans-unit id="tr-eth20"><source>Punkt ፳ folgt gleich.</source><target>Item ፳ follows soon.</target></trans-unit>
+      <trans-unit id="tr-half"><source>Rund ½ ist verbraucht.</source><target>Around ½ is used up.</target></trans-unit>
+      <trans-unit id="tr-cjk300"><source>Fläche 三百 Quadratmeter.</source><target>Area 三百 square meters.</target></trans-unit>
+
+      <!-- === Segments carrying a translator <note> that itself holds exotic numerals. === -->
+      <trans-unit id="nt-cjk30"><source>Bitte prüfen Sie die Fußnote.</source><target>Bitte prüfen Sie die Fußnote.</target><note>Verweist auf Formel 三十 im Anhang.</note></trans-unit>
+      <trans-unit id="nt-ai42"><source>Hier folgt ein Hinweis.</source><target>Hier folgt ein Hinweis.</target><note>Vergleiche Seite ٤٢ im Original.</note></trans-unit>
+      <trans-unit id="nt-rom"><source>Der Absatz endet hier.</source><target>Der Absatz endet hier.</target><note>Siehe Normen Ⅺ und Ⅻ.</note></trans-unit>
+      <trans-unit id="nt-vul23"><source>Diese Zeile ist speziell.</source><target>Diese Zeile ist speziell.</target><note>Menge ⅔ laut Rezept.</note></trans-unit>
+      <trans-unit id="nt-eth2000"><source>Ein weiterer Satz folgt.</source><target>Ein weiterer Satz folgt.</target><note>Baujahr ፳፻ ist belegt.</note></trans-unit>
+      <trans-unit id="nt-dev55"><source>Kurzer Kommentarfall hier.</source><target>Kurzer Kommentarfall hier.</target><note>Wert ५५ in Devanagari.</note></trans-unit>
+      <trans-unit id="nt-cjkrange"><source>Noch ein Notizfall folgt.</source><target>Noch ein Notizfall folgt.</target><note>Kapitel 十 bis 二十 lesen.</note></trans-unit>
+      <trans-unit id="nt-frac"><source>Vorletzter Notizsatz steht.</source><target>Vorletzter Notizsatz steht.</target><note>Anteil 7/8 verbleibt.</note></trans-unit>
+      <trans-unit id="nt-fwpct"><source>Weiterer Hinweis steht hier.</source><target>Weiterer Hinweis steht hier.</target><note>Rabatt ９０％ gewährt.</note></trans-unit>
+      <trans-unit id="nt-mixed"><source>Letzter Notizfall steht hier.</source><target>Letzter Notizfall steht hier.</target><note>Etwa 2½ Einheiten übrig.</note></trans-unit>
+      <trans-unit id="nt-arm"><source>Zusatznotiz mit Wert.</source><target>Zusatznotiz mit Wert.</target><note>Armenisch ԺԲ als Zahl.</note></trans-unit>
+      <trans-unit id="nt-grk"><source>Weitere Zusatznotiz hier.</source><target>Weitere Zusatznotiz hier.</target><note>Griechisch ιβʹ als Zahl.</note></trans-unit>
+
+      <!-- === Data formats expected for #794: NUMBER-ONLY segments, no surrounding text. === -->
+      <!-- Surrounding prose would take them out of the ticket's "number only" scope. -->
+      <!-- Some targets show the locale-aware re-render #794 would produce; others stay untranslated. -->
+      <trans-unit id="fmt-cur-eur"><source>1.234,56 €</source><target>€1,234.56</target></trans-unit>
+      <trans-unit id="fmt-cur-usd"><source>$2,500.00</source><target>$2,500.00</target></trans-unit>
+      <trans-unit id="fmt-date-de"><source>05.03.2026</source><target>2026-03-05</target></trans-unit>
+      <trans-unit id="fmt-date-iso"><source>2026-12-31</source><target>2026-12-31</target></trans-unit>
+      <trans-unit id="fmt-pct-de"><source>12,5 %</source><target>12.5%</target></trans-unit>
+      <trans-unit id="fmt-pct-fw"><source>９０％</source><target>９０％</target></trans-unit>
+      <trans-unit id="fmt-ord-en"><source>3.</source><target>3rd</target></trans-unit>
+      <trans-unit id="fmt-ord-de"><source>21.</source><target>21.</target></trans-unit>
+      <trans-unit id="fmt-time"><source>14:30</source><target>2:30 PM</target></trans-unit>
+      <trans-unit id="fmt-sci"><source>1,5×10³</source><target>1.5×10³</target></trans-unit>
+
+    </body>
+  </file>
+</xliff>

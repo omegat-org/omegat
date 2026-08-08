@@ -72,3 +72,5 @@ tips:
   name: "Tag-Probleme untersuchen"
 - file: "ignore_dictionary_word.html"
   name: "Wörter im Wörterbuch ignorieren"
+- file: "fuzzy_match_numbers.html"
+  name: "Unscharfe Treffer, die Zahlen verstehen"

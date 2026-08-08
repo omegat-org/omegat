@@ -1,0 +1,119 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2026 Stephan Pakebusch
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+**************************************************************************/
+
+package org.omegat;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.junit.Test;
+
+/**
+ * Audits the build scripts of the language modules.
+ * <p>
+ * Every language module bundles its LanguageTool language jar into the module
+ * jar. When OmegaT is built from the source distribution, that jar has to be
+ * taken from the provided module libraries via the providedModuleLib helper,
+ * which fails on an empty match; a plain fileTree over the provided core
+ * libraries matches nothing there and silently produces a module without its
+ * content (no grammar rules, no bundled spelling dictionaries). The same
+ * applies to the additional dictionary jars some modules pull in at runtime,
+ * so every provided jar has to go through the helper. This test also catches
+ * copy-paste mistakes where a module references the language jar or version
+ * catalog alias of another language.
+ *
+ * @author stephan.pakebusch at zollsoft.de
+ */
+public class LanguageModuleContentTest {
+
+    private static final Pattern LANGUAGE_JAR_INCLUDE = Pattern.compile("language-([a-z]+)-\\*\\.jar");
+    private static final Pattern PROVIDED_MODULE_LIB = Pattern
+            .compile("providedModuleLib\\(['\"]language-([a-z]+)['\"]");
+    private static final Pattern CATALOG_ALIAS = Pattern.compile("libs\\.languagetool\\.([a-z]+)");
+    private static final List<String> NON_LANGUAGE_ALIASES = Arrays.asList("core", "server");
+
+    @Test
+    public void testLanguageModulesBundleTheirOwnLanguage() throws IOException {
+        File[] moduleDirs = new File("language-modules").listFiles(File::isDirectory);
+        assertNotNull("language-modules directory not found; the test must run in the project root",
+                moduleDirs);
+        Arrays.sort(moduleDirs);
+        List<String> violations = new ArrayList<>();
+        int checked = 0;
+        for (File moduleDir : moduleDirs) {
+            File buildFile = new File(moduleDir, "build.gradle");
+            if (!buildFile.isFile()) {
+                continue;
+            }
+            checked++;
+            String script = Files.readString(buildFile.toPath(), StandardCharsets.UTF_8);
+            String language = moduleDir.getName();
+            checkOwnLanguage(violations, language, LANGUAGE_JAR_INCLUDE.matcher(script));
+            checkOwnLanguage(violations, language, PROVIDED_MODULE_LIB.matcher(script));
+            checkCatalogAlias(violations, language, CATALOG_ALIAS.matcher(script));
+            if (!PROVIDED_MODULE_LIB.matcher(script).find()) {
+                violations.add(language + ": language jar is not resolved via providedModuleLib(...); "
+                        + "an incomplete source distribution would not be detected");
+            }
+            if (script.contains("implementation fileTree(dir: providedCoreLibsDir")) {
+                violations.add(language + ": bundles its content from the provided core libraries, "
+                        + "which do not contain the language jars");
+            }
+            if (script.contains("fileTree(dir: providedModuleLibsDir")) {
+                violations.add(language + ": resolves provided jars via a bare fileTree; "
+                        + "use providedModuleLib(...) so that empty matches fail the build");
+            }
+        }
+        assertTrue("Expected to audit at least 25 language modules, found " + checked, checked >= 25);
+        assertTrue(String.join("\n", violations), violations.isEmpty());
+    }
+
+    private static void checkOwnLanguage(List<String> violations, String language, Matcher matcher) {
+        while (matcher.find()) {
+            if (!matcher.group(1).equals(language)) {
+                violations.add(language + ": references the language jar of '" + matcher.group(1) + "'");
+            }
+        }
+    }
+
+    private static void checkCatalogAlias(List<String> violations, String language, Matcher matcher) {
+        while (matcher.find()) {
+            String alias = matcher.group(1);
+            if (!NON_LANGUAGE_ALIASES.contains(alias) && !alias.equals(language)) {
+                violations.add(language + ": depends on the version catalog alias of '" + alias + "'");
+            }
+        }
+    }
+}

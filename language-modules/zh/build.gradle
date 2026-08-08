@@ -7,8 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir, includes: ['**/language-zh-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/hanlp-portable-*.jar')
+        implementation providedModuleLib('language-zh')
+        runtimeOnly providedModuleLib('hanlp-portable')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

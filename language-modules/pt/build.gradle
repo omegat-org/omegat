@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-pt-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/portuguese-pos-dict-*.jar')
+        implementation providedModuleLib('language-pt')
+        runtimeOnly providedModuleLib('portuguese-pos-dict')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

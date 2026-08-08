@@ -323,6 +323,9 @@ test {
         // Destructive memory-stress tests deliberately exhaust the heap;
         // they only run on explicit request via the memoryStressTest task.
         excludeCategories 'org.omegat.core.MemoryStressTests'
+        // Distribution smoke tests need an installed distribution; they only
+        // run on explicit request via the distributionSmokeTest task.
+        excludeCategories 'org.omegat.core.DistributionSmokeTests'
     }
 }
 
@@ -343,6 +346,25 @@ tasks.register('memoryStressTest', Test) {
             layout.settingsDirectory.file('config/test/logger.properties').asFile
     useJUnit {
         includeCategories 'org.omegat.core.MemoryStressTests'
+    }
+}
+
+tasks.register('distributionSmokeTest', Test) {
+    group = 'verification'
+    description = 'Smoke-tests plugin loading, spell checking and LanguageTool against the installed distribution.'
+    dependsOn tasks.named('installDist')
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    workingDir = projectDir
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'omegat.dist.dir', layout.buildDirectory.dir('install/OmegaT').get().asFile.absolutePath
+    systemProperty 'java.util.logging.config.file',
+            layout.settingsDirectory.file('config/test/logger.properties').asFile
+    // The tests read the installed distribution, which is not modelled as a
+    // task input; always rerun instead of trusting a stale up-to-date check.
+    outputs.upToDateWhen { false }
+    useJUnit {
+        includeCategories 'org.omegat.core.DistributionSmokeTests'
     }
 }
 

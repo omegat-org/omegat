@@ -11,6 +11,7 @@
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
                2023 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,10 +43,10 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +57,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.VisibleForTesting;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
@@ -460,25 +462,35 @@ public final class StaticUtils {
         return userScriptsDir;
     }
 
-    private static Path determineUserScriptsPath() {
-        Path scriptsPath = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
-        // ensure directory exists
+    @VisibleForTesting
+    static Path determineUserScriptsPath() {
+        Path scriptsPath = Paths.get(getApplicationDataDir(), SCRIPTS_DIR);
         if (Files.exists(scriptsPath)) {
             return scriptsPath;
         }
-        // it seems first run.
+        // Earlier 6.1 development builds created the folder under the
+        // segment-export folder name "script"; keep such user scripts by
+        // renaming the folder.
+        Path legacyPath = Paths.get(getApplicationDataDir(), SCRIPT_DIR);
+        if (Files.isDirectory(legacyPath)) {
+            try {
+                Files.move(legacyPath, scriptsPath);
+                return scriptsPath;
+            } catch (FileAlreadyExistsException e) {
+                // another instance won the rename race
+                return scriptsPath;
+            } catch (IOException e) {
+                Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+                return legacyPath;
+            }
+        }
+        // it seems first run; default scripts are installed afterwards by
+        // ensureUserScriptsDir().
         try {
             Files.createDirectories(scriptsPath);
         } catch (IOException e) {
             Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
-            scriptsPath = Paths.get(getConfigDir() + SCRIPT_DIR);
-        }
-        try {
-            // ensure default script files installed
-            Path defaultScripts = Paths.get(installDir(), SCRIPT_DIR);
-            Files.copy(defaultScripts, scriptsPath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            Log.logErrorRB(e, "SU_SCRIPT_DIR_CREATE_ERROR");
+            scriptsPath = Paths.get(getConfigDir(), SCRIPTS_DIR);
         }
         return scriptsPath;
     }
@@ -495,7 +507,7 @@ public final class StaticUtils {
                 FileUtils.copyDirectory(defaultScripts, userScriptsPath.toFile());
             } catch (IOException e) {
                 // fallback to app install dir which contains default scripts
-                userScriptsDir = Paths.get(installDir() + SCRIPTS_DIR);
+                userScriptsDir = Paths.get(installDir(), SCRIPTS_DIR);
                 Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, userScriptsDir.toString());
             }
         }

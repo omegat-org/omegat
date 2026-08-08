@@ -31,6 +31,7 @@
 
 package org.omegat.core.search;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OConsts;
 
 /**
@@ -49,20 +50,26 @@ import org.omegat.util.OConsts;
 public class SearchExpression {
     public enum SearchExpressionType {
         EXACT, KEYWORD, REGEXP
-    };
+    }
 
     public enum SearchPlace {
         SOURCE_TRANSLATION, SOURCE_ONLY, TRANSLATION_ONLY
-    };
+    }
 
     public enum SearchState {
         TRANSLATED_UNTRANSLATED, TRANSLATED, UNTRANSLATED
-    };
+    }
+
+    public SearchExpression() {
+        this.mode = SearchMode.SEARCH;
+        this.searchExpressionType = SearchExpressionType.EXACT;
+        numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
+    }
 
     public SearchMode mode;
-    public String text;
-    public String rootDir;
-    public String replacement;
+    public @Nullable String text;
+    public @Nullable String rootDir;
+    public @Nullable String replacement;
     public boolean recursive = true;
     public SearchExpressionType searchExpressionType;
     public boolean caseSensitive = false;
@@ -87,6 +94,6 @@ public class SearchExpression {
     public long dateAfter;
     public boolean searchDateBefore = false;
     public long dateBefore;
-    public int numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
+    public int numberOfResults;
     public boolean excludeOrphans = false;
 }

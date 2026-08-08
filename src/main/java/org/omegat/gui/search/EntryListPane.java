@@ -58,6 +58,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
@@ -223,7 +224,7 @@ class EntryListPane extends JTextPane {
         offsetList.clear();
         firstMatchList.clear();
 
-        if (searcher == null || searcher.getSearchResults() == null) {
+        if (searcher.getSearchResults().isEmpty()) {
             // empty marks - just reset
             setText("");
             return;
@@ -299,16 +300,17 @@ class EntryListPane extends JTextPane {
         }
 
         // add entry text - remember what its number is and where it ends
-        public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
-                String src, String loc, String note, String properties, SearchMatch[] srcMatches,
-                SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, boolean isReplace) {
-            if (stringBuf.length() > 0) {
+        public void addEntry(StringBuilder stringBuf, int num, @Nullable String preamble, @Nullable String srcPrefix,
+                @Nullable String src, @Nullable String loc, @Nullable String note, @Nullable String properties,
+                SearchMatch@Nullable[] srcMatches, SearchMatch@Nullable[] targetMatches,
+                SearchMatch@Nullable[] noteMatches, SearchMatch@Nullable[] propertiesMatches, boolean isReplace) {
+            if (!stringBuf.isEmpty()) {
                 stringBuf.append(ENTRY_SEPARATOR);
             }
-            if (preamble != null && !preamble.equals("")) {
+            if (!StringUtil.isEmpty(preamble)) {
                 stringBuf.append(preamble).append("\n");
             }
-            if (src != null && !src.equals("")) {
+            if (!StringUtil.isEmpty(src)) {
                 stringBuf.append("-- ");
                 if (srcPrefix != null) {
                     stringBuf.append(srcPrefix);
@@ -322,7 +324,7 @@ class EntryListPane extends JTextPane {
                 stringBuf.append(src);
                 stringBuf.append('\n');
             }
-            if (loc != null && !loc.equals("")) {
+            if (!StringUtil.isEmpty(loc)) {
                 String repl = null;
                 int shift = 0;
                 if (targetMatches != null && targetMatches.length > 0) {
@@ -359,7 +361,7 @@ class EntryListPane extends JTextPane {
                 }
             }
 
-            if (note != null && !note.equals("")) {
+            if (!StringUtil.isEmpty(note)) {
                 stringBuf.append("= ");
                 if (noteMatches != null) {
                     for (SearchMatch m : noteMatches) {
@@ -371,7 +373,7 @@ class EntryListPane extends JTextPane {
                 stringBuf.append('\n');
             }
 
-            if (properties != null && !properties.equals("")) {
+            if (!StringUtil.isEmpty(properties)) {
                 stringBuf.append("# ");
                 if (propertiesMatches != null) {
                     for (SearchMatch m : propertiesMatches) {
@@ -428,7 +430,7 @@ class EntryListPane extends JTextPane {
      */
     private void addMessage(StringBuilder stringBuf, String message) {
         // Insert entry/message separator if necessary
-        if (stringBuf.length() > 0) {
+        if (!stringBuf.isEmpty()) {
             stringBuf.append(ENTRY_SEPARATOR);
         }
         // Insert the message text
@@ -436,7 +438,12 @@ class EntryListPane extends JTextPane {
     }
 
     public void reset() {
-        displaySearchResult(null, 0);
+        this.numberOfResults = 0;
+        currentlyDisplayedMatches = null;
+        entryList.clear();
+        offsetList.clear();
+        firstMatchList.clear();
+        setText("");
     }
 
     public int getNrEntries() {
@@ -448,7 +455,11 @@ class EntryListPane extends JTextPane {
     }
 
     public Searcher getSearcher() {
-        return searcher;
+        Searcher result = searcher;
+        if (result == null) {
+            throw new IllegalStateException("Searcher has not been initialized");
+        }
+        return result;
     }
 
     /**
@@ -744,11 +755,11 @@ class EntryListPane extends JTextPane {
         }
     }
 
-    private volatile Searcher searcher;
+    private volatile @Nullable Searcher searcher;
     private final List<Integer> entryList = new ArrayList<>();
     private final List<Integer> offsetList = new ArrayList<>();
     private final Map<Integer, CaretPosition> firstMatchList = new HashMap<>();
-    private DisplayMatches currentlyDisplayedMatches;
+    private @Nullable DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
     private boolean useTabForAdvance;
     private boolean autoSyncWithEditor;

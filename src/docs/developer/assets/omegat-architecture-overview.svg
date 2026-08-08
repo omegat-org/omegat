@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OmegaT architecture overview diagram (hand-maintained, editable SVG).
+  Companion to src/docs/developer/21.OmegaTInternals.md.
+
+  Copyright (C) 2026 Stephan Pakebusch
+  This file is part of OmegaT, released under the GNU General Public License
+  version 3 or (at your option) any later version.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1300" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555555"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0605c"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1760" height="1300" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Architecture Overview — ΩᵗAO</text>
+  <text x="880" y="78" text-anchor="middle" font-size="14" fill="#666666">Components, event flow and editor internals · src/main/java/org/omegat · July 2026</text>
+
+  <!-- legend -->
+  <line x1="1500" y1="44" x2="1544" y2="44" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="1552" y="48" font-size="11.5" fill="#444444">call / composition</text>
+  <line x1="1500" y1="68" x2="1544" y2="68" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="1552" y="72" font-size="11.5" fill="#444444">event flow (async, on the EDT)</text>
+
+  <!-- Main -->
+  <rect x="800" y="104" width="160" height="46" rx="8" fill="#ffffff" stroke="#888888" stroke-width="1.4"/>
+  <text x="880" y="124" text-anchor="middle" font-size="15" font-weight="bold" fill="#222222">Main</text>
+  <text x="880" y="141" text-anchor="middle" font-size="11.5" fill="#666666">bootstrap (CLI / GUI)</text>
+  <line x1="880" y1="150" x2="880" y2="174" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Core hub -->
+  <rect x="240" y="178" width="1280" height="76" rx="10" fill="#fff3cd" stroke="#c9971a" stroke-width="1.6"/>
+  <text x="880" y="206" text-anchor="middle" font-size="17" font-weight="bold" fill="#222222">Core — static service hub</text>
+  <text x="880" y="232" text-anchor="middle" font-size="13" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#554400">Core.getProject() · Core.getEditor() · Core.getMainWindow() · Core.getMatcher() · Core.getSpellChecker() · Core.registerMarker(…)</text>
+
+  <!-- arrows Core -> components -->
+  <line x1="300" y1="254" x2="300" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="880" y1="254" x2="880" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="1460" y1="254" x2="1460" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ============ column A: project ============ -->
+  <rect x="40" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="300" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IProject — RealProject · NotLoadedProject</text>
+  <text x="300" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.core.data</text>
+  <line x1="300" y1="360" x2="300" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="40" y="372" width="520" height="290" rx="8" fill="#f0f7f0" stroke="#6a9a6a" stroke-width="1.3"/>
+  <text x="60" y="398" font-size="13.5" font-weight="bold" fill="#2c522c">Data model &amp; project I/O</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="60" y="428">SourceTextEntry — one source segment</text>
+    <text x="60" y="454">TMXEntry — a stored translation</text>
+    <text x="60" y="480">ProjectTMX — project memory (project_save.tmx)</text>
+    <text x="60" y="506">ProjectProperties — omegat.project settings</text>
+    <text x="60" y="532">team2/ — team project sync via Git / SVN</text>
+    <text x="60" y="558">core.threads — SaveThread (autosave)</text>
+  </g>
+
+  <!-- ============ column B: editor ============ -->
+  <rect x="620" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="880" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IEditor — EditorController</text>
+  <text x="880" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.gui.editor</text>
+  <line x1="880" y1="360" x2="880" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="620" y="372" width="520" height="290" rx="8" fill="#eef3fb" stroke="#5b7fb8" stroke-width="1.3"/>
+  <text x="640" y="398" font-size="13.5" font-weight="bold" fill="#2a4470">Editor internals</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="640" y="428">SegmentBuilder — renders one segment</text>
+    <text x="640" y="454">MarkerController — runs the IMarker pipeline</text>
+    <text x="640" y="480">mark/ — IMarker impls (Identical…, ComesFromMT…)</text>
+    <text x="640" y="506">EditorSettings — view options (marks, colours)</text>
+    <text x="640" y="532">sort/ — SortBar · MultiKeySorter (SF-1094) 🫣</text>
+    <text x="640" y="558">filter/ — editor document filtering</text>
+  </g>
+
+  <!-- ============ column C: main window ============ -->
+  <rect x="1200" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="1460" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IMainWindow — MainWindow</text>
+  <text x="1460" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.gui.main</text>
+  <line x1="1460" y1="360" x2="1460" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="1200" y="372" width="520" height="128" rx="8" fill="#eef3fb" stroke="#5b7fb8" stroke-width="1.3"/>
+  <text x="1220" y="398" font-size="13.5" font-weight="bold" fill="#2a4470">Menus &amp; frame</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="1220" y="428">BaseMainWindowMenu — menu construction</text>
+    <text x="1220" y="454">MainWindowMenuHandler — menu actions</text>
+    <text x="1220" y="480">docking framework — hosts the panes below</text>
+  </g>
+
+  <rect x="1200" y="514" width="520" height="148" rx="8" fill="#e6f6f4" stroke="#3f9187" stroke-width="1.3"/>
+  <text x="1220" y="540" font-size="13.5" font-weight="bold" fill="#1e5b53">Preferences — org.omegat.gui.preferences</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="1220" y="570">PreferencesWindowController — dialog shell</text>
+    <text x="1220" y="596">view/*Controller extend BasePreferencesController</text>
+    <text x="1220" y="622">e.g. CustomColorSelection·, Appearance·, Editing·</text>
+  </g>
+
+  <!-- fires arrows into the bus -->
+  <line x1="300" y1="662" x2="300" y2="704" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="312" y="690" font-size="11.5" fill="#a34844">fires project events</text>
+  <line x1="880" y1="662" x2="880" y2="704" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="892" y="690" font-size="11.5" fill="#a34844">fires entry events</text>
+
+  <!-- ============ event bus ============ -->
+  <rect x="40" y="706" width="1680" height="84" rx="10" fill="#fdeaea" stroke="#c0605c" stroke-width="1.6"/>
+  <text x="880" y="736" text-anchor="middle" font-size="16" font-weight="bold" fill="#7a2e2b">CoreEvents — application event bus (delivered on the EDT via SwingUtilities.invokeLater)</text>
+  <text x="880" y="764" text-anchor="middle" font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#5c3331">fireProjectChange(LOAD·SAVE·COMPILE·CLOSE) · fireEntryActivated · fireFontChanged · fireApplicationStartup/Shutdown — IProjectEventListener · IEntryEventListener · …</text>
+
+  <!-- listen arrows to the panes -->
+  <line x1="500" y1="790" x2="500" y2="832" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="512" y="818" font-size="11.5" fill="#a34844">listen</text>
+  <line x1="1250" y1="790" x2="1250" y2="832" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="1262" y="818" font-size="11.5" fill="#a34844">listen</text>
+
+  <!-- ============ panes ============ -->
+  <rect x="40" y="834" width="1680" height="210" rx="10" fill="#f4effb" stroke="#7d5fa8" stroke-width="1.5"/>
+  <text x="60" y="862" font-size="14.5" font-weight="bold" fill="#4a3572">Dockable panes — event consumers (org.omegat.gui.*) · read the model via Core.getProject()</text>
+
+  <!-- pane boxes row 1 -->
+  <g>
+    <rect x="66" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="195" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Matches</text>
+    <text x="195" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">MatchesTextArea · VarExpansion</text>
+
+    <rect x="336" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="465" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Glossary</text>
+    <text x="465" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">GlossaryTextArea</text>
+
+    <rect x="606" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="735" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Dictionaries</text>
+    <text x="735" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">DictionariesTextArea</text>
+
+    <rect x="876" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1005" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Machine Translation</text>
+    <text x="1005" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.exttrans</text>
+
+    <rect x="1146" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1275" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Notes · Comments</text>
+    <text x="1275" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.notes · gui.comments</text>
+
+    <rect x="1416" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1545" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Multiple Translations</text>
+    <text x="1545" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.multtrans</text>
+  </g>
+
+  <!-- pane boxes row 2 -->
+  <g>
+    <rect x="66" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="195" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Segment Properties</text>
+    <text x="195" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.properties</text>
+
+    <rect x="336" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="465" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Project Files</text>
+    <text x="465" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">ProjectFilesListController</text>
+
+    <rect x="606" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="735" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Issues</text>
+    <text x="735" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.issues — provider registry</text>
+
+    <rect x="876" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1005" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Search</text>
+    <text x="1005" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.search — Search window</text>
+
+    <rect x="1146" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1275" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Scripting</text>
+    <text x="1275" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">ScriptingWindow · ScriptsMonitor</text>
+
+    <rect x="1416" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1545" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Statistics</text>
+    <text x="1545" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.stat</text>
+  </g>
+
+  <!-- ============ cross-cutting ============ -->
+  <g>
+    <rect x="40" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="60" y="1106" font-size="14" font-weight="bold" fill="#333333">File filters</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="60" y="1134">filters2 / filters3 / filters4</text>
+      <text x="60" y="1158">IFilter implementations, one per format</text>
+      <text x="60" y="1182">(plugin-like registry)</text>
+    </g>
+
+    <rect x="465" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="485" y="1106" font-size="14" font-weight="bold" fill="#333333">Segmentation &amp; matching</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="485" y="1134">core.segmentation — SRX · Segmenter</text>
+      <text x="485" y="1158">core.matching — NearString,</text>
+      <text x="485" y="1182">fuzzy scoring (tokens, Levenshtein)</text>
+    </g>
+
+    <rect x="890" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="910" y="1106" font-size="14" font-weight="bold" fill="#333333">MT · spellcheck · modules</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="910" y="1134">core.machinetranslators · core.spellchecker</text>
+      <text x="910" y="1158">Gradle submodules: machinetranslators/,</text>
+      <text x="910" y="1182">spellchecker/, language-modules/, theme/, …</text>
+    </g>
+
+    <rect x="1315" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="1335" y="1106" font-size="14" font-weight="bold" fill="#333333">Utilities</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="1335" y="1134">util — Preferences · OStrings · Log</text>
+      <text x="1335" y="1158">util.gui — Styles.EditorColor,</text>
+      <text x="1335" y="1182">UIDesignManager</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="40" y="1266" font-size="11.5" fill="#888888">Machine generated overview (snapshot of master, end of July 2026, not automatically updated). Companion docs: src/docs/developer/21.OmegaTInternals.md · 22.CoreEvents.md · 23.CoreMethods.md · 36.SourceTree.md</text>
+</svg>

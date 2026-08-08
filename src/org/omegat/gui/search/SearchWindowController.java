@@ -908,7 +908,7 @@ public class SearchWindowController {
 
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        handle.cancel();
+        cancelHandlerIfRunning();
         form.dispose();
     }
 
@@ -927,10 +927,14 @@ public class SearchWindowController {
     }
 
     public void dispose() {
+        cancelHandlerIfRunning();
+        form.dispose();
+    }
+
+    private void cancelHandlerIfRunning() {
         if (handle != null && !handle.completion().isDone()) {
             handle.cancel();
         }
-        form.dispose();
     }
 
     /**

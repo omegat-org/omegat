@@ -190,6 +190,12 @@ public final class Styles {
         COLOR_MARK_COMES_FROM_TM_XENFORCED(OStrings.getString("COLOR_MARK_COMES_FROM_TM_XENFORCED"),
                 UIManager.getColor("OmegaT.markComesFromTmXenforced")),
         /**
+         * The background color of a segment whose translation was pre-filled
+         * from the source file.
+         */
+        COLOR_MARK_COMES_FROM_SOURCE_FILE(OStrings.getString("COLOR_MARK_COMES_FROM_SOURCE_FILE"),
+                UIManager.getColor("OmegaT.markComesFromSourceFile")),
+        /**
          * Alternative translation highlight color.
          */
         COLOR_MARK_ALT_TRANSLATION(OStrings.getString("COLOR_MARK_ALT_TRANSLATION"),

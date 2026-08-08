@@ -77,6 +77,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.util.StringUtil;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
@@ -601,7 +602,7 @@ public class IssuesPanelController implements IIssues {
                 allIssues = get();
             } catch (InterruptedException | ExecutionException e) {
                 Log.log(e);
-                JOptionPane.showMessageDialog(parent, e.getMessage(), OStrings.getString("ERROR_TITLE"),
+                JOptionPane.showMessageDialog(parent, StringUtil.describeException(e), OStrings.getString("ERROR_TITLE"),
                         JOptionPane.ERROR_MESSAGE);
                 frame.setVisible(false);
                 return;

@@ -1,0 +1,56 @@
+<html lang="de">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Segmente nach Zahlenwert sortieren</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Segmente nach Zahlenwert sortieren</h3>
+<p>Wenn Sie in der Sortierleiste nach einem textbasierten Kriterium sortieren,
+bietet die Richtungsauswahl neben der einfachen alphabetischen Reihenfolge auch
+<b>Numerisch aufsteigend</b> und <b>Numerisch absteigend</b> an.</p>
+<p>Die numerische Sortierung ordnet Segmente nach dem tatsächlichen Wert der
+enthaltenen Zahl. So steht "Schritt 2" vor "Schritt 10" &mdash; w&auml;hrend eine
+rein alphabetische Sortierung "10" vor "2" einordnen w&uuml;rde.</p>
+<p>Erkannt werden Zahlen in vielerlei Schreibweise: ein vorangestelltes
+Vorzeichen, Dezimalzahlen und Br&uuml;che (zum Beispiel -5, 1.5, 3/2,
+&frac12;) sowie Ziffern aus vielen Schriftsystemen &mdash; westliche und andere
+Dezimalziffern, r&ouml;mische Zahlen (XII), CJK (&#21313;&#20108;) und weitere von
+<a class="ulink" href="https://icu4c-demos.unicode.org/icu-bin/locexp" target="_blank">ICU</a>
+unterst&uuml;tzte Systeme, ebenso eingekreiste oder umschlossene Zahlen
+(&#9321;).</p>
+<p>Da gew&ouml;hnliche W&ouml;rter wie "mix" oder "XL" zugleich g&uuml;ltige
+r&ouml;mische Zahlen sind, bietet die Auswahl zus&auml;tzlich <b>Numerisch
+auf/ab ohne r&ouml;misch</b> an: dieselbe wertbasierte Reihenfolge, aber
+r&ouml;mische Zahlen z&auml;hlen als gew&ouml;hnlicher Text.
+Die eingeklappte Sortierleiste zeigt diesen Modus als 1&uarr;/1&darr; statt
+#&uarr;/#&darr;.</p>
+<p>Die Werte werden exakt verglichen, sodass 1/3 korrekt gegen jede Dezimalzahl
+einsortiert wird und sehr gro&szlig;e Zahlen nie &uuml;berlaufen. Segmente ohne
+erkennbare Zahl oder mit gleichem Wert fallen f&uuml;r ein stabiles Ergebnis auf
+die normale alphabetische Reihenfolge zur&uuml;ck.</p>
+</body></html>

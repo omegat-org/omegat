@@ -432,7 +432,12 @@ class EntryListPane extends JTextPane {
     }
 
     public void reset() {
-        displaySearchResult(null, 0);
+        this.numberOfResults = 0;
+        currentlyDisplayedMatches = null;
+        entryList.clear();
+        offsetList.clear();
+        firstMatchList.clear();
+        setText("");
     }
 
     public int getNrEntries() {

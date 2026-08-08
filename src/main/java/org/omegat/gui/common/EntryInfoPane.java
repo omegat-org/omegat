@@ -58,10 +58,20 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             CoreEvents.registerFontChangedEventListener(this::setFont);
         }
         CoreEvents.registerProjectChangeListener(this);
+        CoreEvents.registerColorsChangedEventListener(this::applyColors);
         if (!GraphicsEnvironment.isHeadless()) {
             setDragEnabled(true);
         }
         getDocument().addDocumentListener(new FontFallbackListener(this));
+        applyColors();
+    }
+
+    /**
+     * Apply the pane's foreground, caret and background colours from the
+     * current preferences. Re-run on a colour change so it takes effect
+     * without a restart.
+     */
+    protected void applyColors() {
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());

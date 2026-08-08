@@ -283,6 +283,22 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         return result;
     }
 
+    /**
+     * Composite a possibly translucent color over an opaque base. Theme
+     * defaults handed to {@code Styles.EditorColor} must be opaque: the
+     * color chooser and the persisted hex value drop the alpha channel, so a
+     * translucent default would save a different color than it previews.
+     */
+    public static Color compositeOver(Color color, Color base) {
+        int alpha = color.getAlpha();
+        if (alpha == 255) {
+            return color;
+        }
+        return new Color((color.getRed() * alpha + base.getRed() * (255 - alpha)) / 255,
+                (color.getGreen() * alpha + base.getGreen() * (255 - alpha)) / 255,
+                (color.getBlue() * alpha + base.getBlue() * (255 - alpha)) / 255);
+    }
+
     // Windows Classic LAF detection from http://stackoverflow.com/a/4386821/448068
     private static boolean isWindowsLAF(String systemID) {
         return systemID.equals("Windows");

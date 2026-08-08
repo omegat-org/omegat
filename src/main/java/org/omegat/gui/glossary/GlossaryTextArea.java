@@ -204,6 +204,17 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     }
 
     @Override
+    protected void applyColors() {
+        super.applyColors();
+        // The glossary renderer reads the entry colours per render, so
+        // re-render the shown entries. Guarded via the project state so it is
+        // a no-op when first called from the superclass constructor.
+        if (Core.getProject().isProjectLoaded()) {
+            refresh();
+        }
+    }
+
+    @Override
     public void onEntryActivated(SourceTextEntry newEntry) {
         scrollPane.stopNotifying();
         super.onEntryActivated(newEntry);

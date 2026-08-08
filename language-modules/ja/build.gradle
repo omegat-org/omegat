@@ -7,8 +7,7 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/icu4j-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir,
-                includes: ['**/language-ja-*.jar'])
+        implementation providedModuleLib('language-ja')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

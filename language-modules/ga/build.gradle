@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-ga-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/languagetool-ga-dicts-*.jar')
+        implementation providedModuleLib('language-ga')
+        runtimeOnly providedModuleLib('languagetool-ga-dicts')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

@@ -8,6 +8,7 @@
                2010 Alex Buloichik, Didier Briel
                2014 Piotr Kulik
                2015 Yu Tang
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -58,6 +59,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
@@ -80,13 +82,14 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * EntryListPane displays translation segments and, upon doubleclick of a
  * segment, instructs the main UI to jump to that segment this replaces the
- * previous huperlink interface and is much more flexible in the fonts it
+ * previous hyperlink interface and is much more flexible in the fonts it
  * displays than the HTML text
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 class EntryListPane extends JTextPane {
@@ -97,13 +100,13 @@ class EntryListPane extends JTextPane {
     private static final String KEY_TRANSFER_FOCUS = "transferFocus";
     private static final String KEY_TRANSFER_FOCUS_BACKWARD = "transferFocusBackward";
     private static final String KEY_JUMP_TO_ENTRY_IN_EDITOR = "jumpToEntryInEditor";
-    private static final int ENTRY_LIST_INDEX_NO_ENTRIES  = -1;
+    private static final int ENTRY_LIST_INDEX_NO_ENTRIES = -1;
     private static final int ENTRY_LIST_INDEX_END_OF_TEXT = -2;
 
     private static void bindKeyStrokesFromMainMenuShortcuts(InputMap map) {
         // Add KeyStrokes Ctrl+N/P (Cmd+N/P for MacOS) to the map
-        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(map,
-                KEY_GO_TO_NEXT_SEGMENT, KEY_GO_TO_PREVIOUS_SEGMENT, KEY_JUMP_TO_ENTRY_IN_EDITOR);
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(map, KEY_GO_TO_NEXT_SEGMENT,
+                KEY_GO_TO_PREVIOUS_SEGMENT, KEY_JUMP_TO_ENTRY_IN_EDITOR);
     }
 
     private static InputMap createDefaultInputMap(InputMap parent) {
@@ -113,8 +116,8 @@ class EntryListPane extends JTextPane {
 
         // Add KeyStrokes: Enter, Ctrl+Enter (Cmd+Enter for MacOS)
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_GO_TO_NEXT_SEGMENT);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
-                Java8Compat.getMenuShortcutKeyMaskEx()), KEY_GO_TO_PREVIOUS_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Java8Compat.getMenuShortcutKeyMaskEx()),
+                KEY_GO_TO_PREVIOUS_SEGMENT);
         return map;
     }
 
@@ -125,14 +128,12 @@ class EntryListPane extends JTextPane {
 
         // Add KeyStrokes: Tab, Shift+Tab, Ctrl+Tab, Ctrl+Shift+Tab
         // (Cmd+Tab is used by the system on OS X)
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
-                KEY_GO_TO_NEXT_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), KEY_GO_TO_NEXT_SEGMENT);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
                 KEY_GO_TO_PREVIOUS_SEGMENT);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK),
-                KEY_TRANSFER_FOCUS);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK),
-                KEY_TRANSFER_FOCUS_BACKWARD);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK), KEY_TRANSFER_FOCUS);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB,
+                InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK), KEY_TRANSFER_FOCUS_BACKWARD);
         // Enter to jump to selected segment in editor
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_JUMP_TO_ENTRY_IN_EDITOR);
         return map;
@@ -197,7 +198,7 @@ class EntryListPane extends JTextPane {
         setFocusTraversalKeysEnabled(!useTabForAdvance);
         InputMap parent = getInputMap().getParent();
         InputMap newMap = useTabForAdvance ? createDefaultInputMapUseTab(parent)
-                                           : createDefaultInputMap(parent);
+                : createDefaultInputMap(parent);
         setInputMap(WHEN_FOCUSED, newMap);
     }
 
@@ -209,7 +210,7 @@ class EntryListPane extends JTextPane {
     }
 
     /**
-     * Show search result for user
+     * Show search result for user.
      */
     public void displaySearchResult(Searcher searcher, int numberOfResults) {
         UIThreadsUtil.mustBeSwingThread();
@@ -223,7 +224,7 @@ class EntryListPane extends JTextPane {
         offsetList.clear();
         firstMatchList.clear();
 
-        if (searcher == null || searcher.getSearchResults() == null) {
+        if (searcher.getSearchResults().isEmpty()) {
             // empty marks - just reset
             setText("");
             return;
@@ -260,6 +261,11 @@ class EntryListPane extends JTextPane {
         return ENTRY_LIST_INDEX_END_OF_TEXT;
     }
 
+    /**
+     * The DisplayMatches class is responsible for displaying and formatting search results
+     * within a text-based user interface. It processes a list of search result entries,
+     * formats them, and associates match information for later use in highlighting and navigation.
+     */
     protected class DisplayMatches {
         private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
         private final List<SearchMatch> replMatches = new ArrayList<SearchMatch>();
@@ -275,14 +281,14 @@ class EntryListPane extends JTextPane {
             }
 
             if (entries.size() >= numberOfResults) {
-                addMessage(stringBuf, StringUtil.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
-                        numberOfResults));
+                addMessage(stringBuf,
+                        StringUtil.format(OStrings.getString("SW_MAX_FINDS_REACHED"), numberOfResults));
             }
 
             for (SearchResultEntry e : entries) {
                 addEntry(stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
-                        e.getTranslation(), e.getNote(), e.getProperties(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch(),
-                        e.getPropertiesMatch(), isReplace);
+                        e.getTranslation(), e.getNote(), e.getProperties(), e.getSrcMatch(),
+                        e.getTargetMatch(), e.getNoteMatch(), e.getPropertiesMatch(), isReplace);
             }
 
             Document doc = getDocument();
@@ -298,17 +304,45 @@ class EntryListPane extends JTextPane {
             }
         }
 
+        /**
+         * Construct and append content of a result entry produced by the
+         * Search.
+         *
+         * @param stringBuf
+         *            StringBuffer object to output the result.
+         * @param num
+         *            Entry number of the segment.
+         * @param preamble
+         *            where this entry comes from
+         * @param srcPrefix
+         * @param src
+         *            source text of the segment.
+         * @param loc
+         *            localized text of the segment.
+         * @param note
+         *            note text entry of the segment properties.
+         * @param properties
+         *            properties of the segment.
+         * @param srcMatches
+         * @param targetMatches
+         * @param noteMatches
+         * @param propertiesMatches
+         * @param isReplace
+         *            A flag that the entry for replace operation.
+         */
         // add entry text - remember what its number is and where it ends
-        public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
-                String src, String loc, String note, String properties, SearchMatch[] srcMatches,
-                SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, boolean isReplace) {
-            if (stringBuf.length() > 0) {
+        public void addEntry(StringBuilder stringBuf, int num, @Nullable String preamble,
+                @Nullable String srcPrefix, @Nullable String src, @Nullable String loc, @Nullable String note,
+                @Nullable String properties, SearchMatch @Nullable [] srcMatches,
+                SearchMatch @Nullable [] targetMatches, SearchMatch @Nullable [] noteMatches,
+                SearchMatch @Nullable [] propertiesMatches, boolean isReplace) {
+            if (!stringBuf.isEmpty()) {
                 stringBuf.append(ENTRY_SEPARATOR);
             }
-            if (preamble != null && !preamble.equals("")) {
+            if (!StringUtil.isEmpty(preamble)) {
                 stringBuf.append(preamble).append("\n");
             }
-            if (src != null && !src.equals("")) {
+            if (!StringUtil.isEmpty(src)) {
                 stringBuf.append("-- ");
                 if (srcPrefix != null) {
                     stringBuf.append(srcPrefix);
@@ -322,11 +356,12 @@ class EntryListPane extends JTextPane {
                 stringBuf.append(src);
                 stringBuf.append('\n');
             }
-            if (loc != null && !loc.equals("")) {
+            if (!StringUtil.isEmpty(loc)) {
                 String repl = null;
                 int shift = 0;
                 if (targetMatches != null && targetMatches.length > 0) {
-                    // Save first match position to select it in Editor pane later
+                    // Save first match position to select it in Editor pane
+                    // later
                     if (num > 0) {
                         SearchMatch m = targetMatches[0];
                         firstMatchList.put(num, new CaretPosition(m.getStart(), m.getEnd()));
@@ -343,7 +378,8 @@ class EntryListPane extends JTextPane {
                             repl = repl.substring(0, m.getStart() - shift) + m.getReplacement()
                                     + repl.substring(m.getEnd() - shift);
                             int start = m.getStart() + stringBuf.length() - shift;
-                            start += loc.length() + 4; // (loc + "\n-> ").length()
+                            start += loc.length() + 4; // (loc + "\n->
+                                                       // ").length()
                             replMatches.add(new SearchMatch(start, start + m.getReplacement().length()));
                             shift += m.getEnd() - m.getStart() - m.getReplacement().length();
                         }
@@ -359,7 +395,7 @@ class EntryListPane extends JTextPane {
                 }
             }
 
-            if (note != null && !note.equals("")) {
+            if (!StringUtil.isEmpty(note)) {
                 stringBuf.append("= ");
                 if (noteMatches != null) {
                     for (SearchMatch m : noteMatches) {
@@ -371,7 +407,7 @@ class EntryListPane extends JTextPane {
                 stringBuf.append('\n');
             }
 
-            if (properties != null && !properties.equals("")) {
+            if (!StringUtil.isEmpty(properties)) {
                 stringBuf.append("# ");
                 if (propertiesMatches != null) {
                     for (SearchMatch m : propertiesMatches) {
@@ -387,6 +423,9 @@ class EntryListPane extends JTextPane {
             offsetList.add(stringBuf.length());
         }
 
+        /**
+         * Marks search matches in the entry list.
+         */
         public void doMarks() {
             UIThreadsUtil.mustBeSwingThread();
 
@@ -407,7 +446,8 @@ class EntryListPane extends JTextPane {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), foundMark, true);
             }
             matchesToMark.clear();
-            List<SearchMatch> replToMark = replMatches.subList(0, Math.min(MARKS_PER_REQUEST, replMatches.size()));
+            List<SearchMatch> replToMark = replMatches.subList(0,
+                    Math.min(MARKS_PER_REQUEST, replMatches.size()));
             for (SearchMatch m : replToMark) {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), replaceMark, true);
             }
@@ -428,34 +468,61 @@ class EntryListPane extends JTextPane {
      */
     private void addMessage(StringBuilder stringBuf, String message) {
         // Insert entry/message separator if necessary
-        if (stringBuf.length() > 0) {
+        if (!stringBuf.isEmpty()) {
             stringBuf.append(ENTRY_SEPARATOR);
         }
         // Insert the message text
         stringBuf.append(message);
     }
 
+    /**
+     * Resets the entry list pane.
+     */
     public void reset() {
-        displaySearchResult(null, 0);
+        this.numberOfResults = 0;
+        currentlyDisplayedMatches = null;
+        entryList.clear();
+        offsetList.clear();
+        firstMatchList.clear();
+        setText("");
     }
 
+    /**
+     * Returns the number of entries in the entry list.
+     *
+     * @return The number of entries.
+     */
     public int getNrEntries() {
         return entryList.size();
     }
 
+    /**
+     * Returns the list of entries in the entry list.
+     *
+     * @return The list of entries.
+     */
     public List<Integer> getEntryList() {
         return entryList;
     }
 
+    /**
+     * Returns the searcher associated with the entry list.
+     *
+     * @return The searcher object corresponding to the entry list.
+     */
     public Searcher getSearcher() {
-        return searcher;
+        Searcher result = searcher;
+        if (result == null) {
+            throw new IllegalStateException("Searcher has not been initialized");
+        }
+        return result;
     }
 
     /**
      * Move the active (highlighted) search result one entry forward, wrapping
-     * around to the first result after the last one, and show it in the
-     * editor regardless of the auto-sync option. Used by the Find Next button
-     * and its shortcut (feature requests #1125 and #1380).
+     * around to the first result after the last one, and show it in the editor
+     * regardless of the auto-sync option. Used by the Find Next button and its
+     * shortcut (feature requests #1125 and #1380).
      *
      * @return true when the navigation wrapped around the end of the results
      */
@@ -546,13 +613,13 @@ class EntryListPane extends JTextPane {
         int activeEntryListIndex = getActiveEntryListIndex();
 
         switch (activeEntryListIndex) {
-            case ENTRY_LIST_INDEX_NO_ENTRIES:
-                return new EmptyDisplayedEntry();
-            case ENTRY_LIST_INDEX_END_OF_TEXT:
-                // end of text (out of entries range)
-                return new DisplayedEntryImpl(getNrEntries());
-            default:
-                return new DisplayedEntryImpl(activeEntryListIndex);
+        case ENTRY_LIST_INDEX_NO_ENTRIES:
+            return new EmptyDisplayedEntry();
+        case ENTRY_LIST_INDEX_END_OF_TEXT:
+            // end of text (out of entries range)
+            return new DisplayedEntryImpl(getNrEntries());
+        default:
+            return new DisplayedEntryImpl(activeEntryListIndex);
         }
     }
 
@@ -682,8 +749,8 @@ class EntryListPane extends JTextPane {
         private final AttributeSet attrActive;
 
         private int entryListIndex = -1;
-        private int offset         = -1;
-        private int length         = -1;
+        private int offset = -1;
+        private int length = -1;
 
         SegmentHighlighter() {
             MutableAttributeSet attrNormal = new SimpleAttributeSet();
@@ -702,7 +769,8 @@ class EntryListPane extends JTextPane {
         public void run() {
             int activeEntryListIndex = getActiveEntryListIndex();
             if (activeEntryListIndex == ENTRY_LIST_INDEX_END_OF_TEXT) {
-                // end of text (out of entries range) should belongs to the last segment
+                // end of text (out of entries range) should belongs to the last
+                // segment
                 activeEntryListIndex = getNrEntries() - 1;
             }
 
@@ -734,7 +802,10 @@ class EntryListPane extends JTextPane {
 
             int offset = entryListIndex == 0 ? 0
                     : offsetList.get(entryListIndex - 1) + ENTRY_SEPARATOR.length();
-            int length = offsetList.get(entryListIndex) - offset - 1; // except tail line break
+            int length = offsetList.get(entryListIndex) - offset - 1; // except
+                                                                      // tail
+                                                                      // line
+                                                                      // break
 
             getStyledDocument().setCharacterAttributes(offset, length, attrActive, false);
 
@@ -744,11 +815,11 @@ class EntryListPane extends JTextPane {
         }
     }
 
-    private volatile Searcher searcher;
+    private volatile @Nullable Searcher searcher;
     private final List<Integer> entryList = new ArrayList<>();
     private final List<Integer> offsetList = new ArrayList<>();
     private final Map<Integer, CaretPosition> firstMatchList = new HashMap<>();
-    private DisplayMatches currentlyDisplayedMatches;
+    private @Nullable DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
     private boolean useTabForAdvance;
     private boolean autoSyncWithEditor;

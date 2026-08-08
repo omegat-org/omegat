@@ -25,6 +25,8 @@
 
 package org.omegat.core.search;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Class for store info about matching position.
  *
@@ -32,7 +34,7 @@ package org.omegat.core.search;
  */
 public class SearchMatch implements Comparable<SearchMatch> {
     private int start, end;
-    private String replacement;
+    private final @Nullable String replacement;
 
     public SearchMatch(int start, int end) {
         this.start = start;
@@ -66,7 +68,7 @@ public class SearchMatch implements Comparable<SearchMatch> {
         return end - start;
     }
 
-    public String getReplacement() {
+    public @Nullable String getReplacement() {
         return replacement;
     }
 

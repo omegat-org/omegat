@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik
+ Copyright (C) 2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,13 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
+@NullMarked
 package org.omegat.core.search;
 
-/**
- * Search modes for separate search and replace.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public enum SearchMode {
-    SEARCH, REPLACE
-}
+import org.jspecify.annotations.NullMarked;

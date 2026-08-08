@@ -5,12 +5,13 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
-               2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei, Didier Briel
-               2012 Didier Briel
-               2013 Aaron Madlon-Kay, Alex Buloichik
-               2014 Aaron Madlon-Kay, Piotr Kulik
-               2015 Yu Tang, Aaron Madlon-Kay, Hiroshi Miura
+               2009-2012 Didier Briel
+               2010 Martin Fleurke, Antonio Vilei
+               2013 Alex Buloichik
+               2013-2015 Aaron Madlon-Kay,
+               2014 Piotr Kulik
+               2015 Yu Tang
+               2015,2026 Hiroshi Miura
                2017-2018 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
@@ -52,9 +53,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.swing.AbstractAction;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -71,6 +74,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.editor.IEditor;
 import org.openide.awt.Mnemonics;
 
@@ -99,8 +103,8 @@ import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * This is a window that appears when a user wants to search for something.
- * For each new user's request a new window is created. Actual search is done by
+ * This is a window that appears when a user wants to search for something. For
+ * each new user's request a new window is created. Actual search is done by
  * SearchThread.
  *
  * @author Keith Godfrey
@@ -122,7 +126,9 @@ public class SearchWindowController {
     private final int initialEntry;
     private final CaretPosition initialCaret;
 
-    private LongProcessHandle<Void> handle;
+    private @Nullable LongProcessHandle<Void> handle;
+
+    private final Map<ButtonModel, SearchExpression.SearchExpressionType> modelToType;
 
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
@@ -208,15 +214,19 @@ public class SearchWindowController {
         default:
             throw new IllegalArgumentException("Unknown mode: " + mode);
         }
+        modelToType = Map.of(form.m_searchExactSearchRB.getModel(),
+                SearchExpression.SearchExpressionType.EXACT, form.m_searchKeywordSearchRB.getModel(),
+                SearchExpression.SearchExpressionType.KEYWORD, form.m_searchRegexpSearchRB.getModel(),
+                SearchExpression.SearchExpressionType.REGEXP);
         setComponentNames();
         CoreEvents.registerFontChangedEventListener(this::setFont);
     }
 
     /**
-     * Update the results label after walking through the results with the
-     * Find Previous and Find Next buttons: while the navigation has just
-     * wrapped around the end of the results, a short note is appended to the
-     * number of results, and it disappears with the next step.
+     * Update the results' label after walking through the results with the Find
+     * Previous and Find Next buttons: while the navigation has just wrapped
+     * around the end of the results, a short note is appended to the number of
+     * results, and it disappears with the next step.
      *
      * @param wrapped
      *            whether the last navigation step wrapped around
@@ -231,10 +241,10 @@ public class SearchWindowController {
     }
 
     /**
-     * Let F3 and Shift+F3 walk through the search results from anywhere in
-     * the Search window, mirroring the Find Next and Find Previous buttons
-     * (feature requests #1125 and #1380). The keys go through the buttons so
-     * that they stay inactive while there are no results.
+     * Let F3 and Shift+F3 walk through the search results from anywhere in the
+     * Search window, mirroring the Find Next and Find Previous buttons (feature
+     * requests #1125 and #1380). The keys go through the buttons so that they
+     * stay inactive while there are no results.
      */
     private void bindResultNavigationKeys() {
         InputMap inputMap = form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -301,10 +311,10 @@ public class SearchWindowController {
         form.m_searchButton.addActionListener(e -> doSearch());
 
         if (mode == SearchMode.SEARCH) {
-            form.m_findPreviousButton.addActionListener(e -> showResultNavigationStatus(
-                    ((EntryListPane) form.m_viewer).selectPreviousEntry()));
-            form.m_findNextButton.addActionListener(e -> showResultNavigationStatus(
-                    ((EntryListPane) form.m_viewer).selectNextEntry()));
+            form.m_findPreviousButton.addActionListener(
+                    e -> showResultNavigationStatus(((EntryListPane) form.m_viewer).selectPreviousEntry()));
+            form.m_findNextButton.addActionListener(
+                    e -> showResultNavigationStatus(((EntryListPane) form.m_viewer).selectNextEntry()));
             bindResultNavigationKeys();
         }
 
@@ -807,7 +817,7 @@ public class SearchWindowController {
     /**
      * Show search result for user
      */
-    public void displaySearchResult(final Searcher searcher) {
+    public void displaySearchResult(Searcher searcher) {
         UIThreadsUtil.executeInSwingThread(() -> {
             EntryListPane viewer = (EntryListPane) form.m_viewer;
             viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
@@ -967,9 +977,12 @@ public class SearchWindowController {
         handle = Core.getLongProcessExecutor().submit(task::run);
     }
 
+    /**
+     * Cancels the asynchronous operation associated with the search process.
+     */
     void doCancel() {
         UIThreadsUtil.mustBeSwingThread();
-        handle.cancel();
+        cancelHandlerIfRunning();
         form.dispose();
     }
 
@@ -977,21 +990,30 @@ public class SearchWindowController {
      * Completes the asynchronous operation associated with the search process.
      */
     @VisibleForTesting
+    @SuppressWarnings("unused")
     void complete() {
+        if (handle == null) {
+            throw new IllegalStateException("Searcher has not been initialized");
+        }
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
                 Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
-                Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
+                Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(error,
+                        "ST_SEARCH_COMPLETE_ERROR");
             }
             form.dispose();
         });
     }
 
     public void dispose() {
+        cancelHandlerIfRunning();
+        form.dispose();
+    }
+
+    private void cancelHandlerIfRunning() {
         if (handle != null && !handle.completion().isDone()) {
             handle.cancel();
         }
-        form.dispose();
     }
 
     /**
@@ -1048,26 +1070,22 @@ public class SearchWindowController {
     }
 
     private SearchExpression.SearchExpressionType getSearchExpressionTypeForSearchMode() {
-        if (form.m_searchExactSearchRB.isSelected()) {
-            return SearchExpression.SearchExpressionType.EXACT;
+        SearchExpression.SearchExpressionType searchExpressionType = modelToType
+                .get(form.m_searchExactSearchRB.getModel());
+        if (searchExpressionType == null) {
+            throw new IllegalStateException("None of radio button is selected.");
         }
-        if (form.m_searchKeywordSearchRB.isSelected()) {
-            return SearchExpression.SearchExpressionType.KEYWORD;
-        }
-        if (form.m_searchRegexpSearchRB.isSelected()) {
-            return SearchExpression.SearchExpressionType.REGEXP;
-        }
-        return null;
+        return searchExpressionType;
     }
 
     private SearchExpression.SearchExpressionType getSearchExpressionTypeForReplaceMode() {
-        if (form.m_replaceExactSearchRB.isSelected()) {
-            return SearchExpression.SearchExpressionType.EXACT;
+        SearchExpression.SearchExpressionType searchExpressionType = modelToType
+                .get(form.m_searchExactSearchRB.getModel());
+        if (searchExpressionType == null
+                || searchExpressionType == SearchExpression.SearchExpressionType.KEYWORD) {
+            throw new IllegalStateException("The radio button selection is not consistent.");
         }
-        if (form.m_replaceRegexpSearchRB.isSelected()) {
-            return SearchExpression.SearchExpressionType.REGEXP;
-        }
-        return null;
+        return searchExpressionType;
     }
 
     private void applySearchState(SearchExpression expression) {
@@ -1249,7 +1267,8 @@ public class SearchWindowController {
 
         // author options
         form.m_authorCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR));
-        form.m_authorField.setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_AUTHOR_NAME, ""));
+        form.m_authorField
+                .setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_AUTHOR_NAME, ""));
 
         // date options
         try {
@@ -1296,15 +1315,15 @@ public class SearchWindowController {
         form.m_dateToButton.setEnabled(form.m_dateToCB.isSelected());
     }
 
-
     /**
-     * Recursively sets the enabled state of a container and all its child components.
+     * Recursively sets the enabled state of a container and all its child
+     * components.
      *
      * @param component
-     *        The container whose enabled state is to be updated.
+     *            The container whose enabled state is to be updated.
      * @param enabled
-     *        The desired enabled state. If true, the container and its components
-     *        will be enabled; if false, they will be disabled.
+     *            The desired enabled state. If true, the container and its
+     *            components will be enabled; if false, they will be disabled.
      */
     private void setEnabled(Container component, boolean enabled) {
         component.setEnabled(enabled);
@@ -1331,7 +1350,7 @@ public class SearchWindowController {
      * @param params
      *            error text parameters
      */
-    public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
+    public void displayErrorRB(Throwable ex, String errorKey, Object @Nullable... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
             if (params != null) {
@@ -1339,11 +1358,7 @@ public class SearchWindowController {
             } else {
                 msg = OStrings.getString(errorKey);
             }
-
-            String fulltext = msg;
-            if (ex != null) {
-                fulltext += "\n" + ex.getLocalizedMessage();
-            }
+            String fulltext = msg + "\n" + ex.getLocalizedMessage();
             JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
         });

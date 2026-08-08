@@ -58,7 +58,6 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
@@ -389,7 +388,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         // Initialize plugins
         initPlugins();
         TestMainInitializer.initClassloader();
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Core.setFilterClasses(PluginUtils.getFilterClasses());
 
         // Initialize preferences (must be after RuntimePreferences.setConfigDir)
         Preferences.init();

@@ -37,10 +37,10 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
@@ -58,7 +58,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -89,10 +88,8 @@ public class EditorControllerTest extends TestCore {
     public final void setUp() throws IOException {
         projectRootDir = Files.createTempDirectory("omegat").toFile();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.initFilters(List.of(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
     }
-
 
     private void setEmptyProject() {
         TestProjectProperties props = new TestProjectProperties();
@@ -100,11 +97,6 @@ public class EditorControllerTest extends TestCore {
             @Override
             public ProjectProperties getProjectProperties() {
                 return props;
-            }
-
-            @Override
-            public List<SourceTextEntry> getAllEntries() {
-                return Collections.emptyList();
             }
         });
     }

@@ -178,9 +178,9 @@ manualLangsProvider.get().each { lang ->
 
     // Create a new publication for this language
     def publication = publishing.publications.create("manual${lang.capitalize()}", MavenPublication) {
-        groupId = 'org.omegat'
+        groupId = project.property('org.omegat.groupId')
         artifactId = "omegat-manual-${lang}"
-        version = '6.1.0'
+        version = project.ext.omtVersion.mavenStyleVersion
 
         // Add the jar task to the publication
         artifact(zipTask)

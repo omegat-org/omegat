@@ -79,6 +79,7 @@
 ## Architecture Designs 
 
 * [Architecture Decisional Records](adr/index.md)
+* [Changelog](changes/index.md)
 
 ## Other information
 

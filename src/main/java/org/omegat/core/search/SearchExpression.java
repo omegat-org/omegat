@@ -73,6 +73,7 @@ public class SearchExpression {
     public boolean recursive = true;
     public SearchExpressionType searchExpressionType;
     public boolean caseSensitive = false;
+    public boolean wholeWordsOnly = false;
     public boolean widthInsensitive = true;
     public boolean spaceMatchNbsp = false;
     public boolean glossary = true;

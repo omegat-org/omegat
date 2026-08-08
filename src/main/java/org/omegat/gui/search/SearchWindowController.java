@@ -272,6 +272,7 @@ public class SearchWindowController {
         form.m_searchRegexpSearchRB.setName("SearchWindowForm.m_searchRegexpSearchRB");
         form.m_searchCase.setName("SearchWindowForm.m_searchCase");
         form.m_searchSpaceMatchNbsp.setName("SearchWindowForm.m_searchSpaceMatchNbsp");
+        form.m_searchWholeWords.setName("SearchWindowForm.m_searchWholeWords");
         form.m_searchSource.setName("SearchWindowForm.m_searchSource");
         form.m_searchTranslation.setName("SearchWindowForm.m_searchTranslation");
         form.m_searchTranslatedUntranslated.setName("SearchWindowForm.m_searchTranslatedUntranslated");
@@ -356,14 +357,21 @@ public class SearchWindowController {
 
         ActionListener searchFieldRequestFocus = e -> form.m_searchField.requestFocus();
 
+        ActionListener wholeWordsStatusUpdate = e -> updateWholeWordsStatus();
+
         form.m_searchExactSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchExactSearchRB.addActionListener(wholeWordsStatusUpdate);
 
         form.m_searchKeywordSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchKeywordSearchRB.addActionListener(wholeWordsStatusUpdate);
 
         form.m_searchRegexpSearchRB.addActionListener(searchFieldRequestFocus);
+        form.m_searchRegexpSearchRB.addActionListener(wholeWordsStatusUpdate);
 
         form.m_searchCase.addActionListener(searchFieldRequestFocus);
         form.m_searchSpaceMatchNbsp.addActionListener(searchFieldRequestFocus);
+        form.m_searchWholeWords.addActionListener(searchFieldRequestFocus);
+        form.m_searchWholeWords.setToolTipText(OStrings.getString("SW_WHOLE_WORDS_TOOLTIP"));
 
         form.m_searchSource.addActionListener(searchFieldRequestFocus);
         form.m_searchTranslation.addActionListener(searchFieldRequestFocus);
@@ -574,6 +582,11 @@ public class SearchWindowController {
         form.m_searchSpaceMatchNbsp.setSelected(
                 Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, false));
 
+        // whole words only
+        form.m_searchWholeWords.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_WHOLE_WORDS, false));
+        updateWholeWordsStatus();
+
         // search source
         form.m_searchSource
                 .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
@@ -676,6 +689,8 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_searchCase.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP,
                 form.m_searchSpaceMatchNbsp.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_WHOLE_WORDS,
+                form.m_searchWholeWords.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE, form.m_searchSource.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION,
@@ -767,6 +782,8 @@ public class SearchWindowController {
         form.m_searchCase.setSelected(false);
 
         form.m_searchSpaceMatchNbsp.setSelected(false);
+        form.m_searchWholeWords.setSelected(false);
+        updateWholeWordsStatus();
 
         form.m_searchSource.setSelected(true);
         form.m_searchTranslation.setSelected(true);
@@ -809,6 +826,15 @@ public class SearchWindowController {
         form.m_rbProject.setEnabled(true);
         setEnabled(form.m_SearchInDirPane, form.m_rbDir.isSelected());
         form.m_rbDir.setEnabled(true);
+    }
+
+    /**
+     * The whole words only option (RFE#849) applies to exact and keyword
+     * searches; in a regular expression search the user controls word
+     * boundaries in the expression itself, so the checkbox is disabled there.
+     */
+    private void updateWholeWordsStatus() {
+        form.m_searchWholeWords.setEnabled(!form.m_searchRegexpSearchRB.isSelected());
     }
 
     // //////////////////////////////////////////////////////////////
@@ -1036,6 +1062,7 @@ public class SearchWindowController {
         expression.searchExpressionType = getSearchExpressionTypeForSearchMode();
         expression.caseSensitive = form.m_searchCase.isSelected();
         expression.spaceMatchNbsp = form.m_searchSpaceMatchNbsp.isSelected();
+        expression.wholeWordsOnly = form.m_searchWholeWords.isSelected();
         expression.glossary = form.m_cbSearchInGlossaries.isSelected();
         expression.memory = form.m_cbSearchInMemory.isSelected();
         expression.tm = form.m_cbSearchInTMs.isSelected();

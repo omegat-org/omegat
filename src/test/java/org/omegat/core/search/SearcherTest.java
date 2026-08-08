@@ -206,6 +206,65 @@ public class SearcherTest {
     }
 
     @Test
+    public void testSearchStringExactWholeWordsOnly() throws Exception {
+        addSTE(fi, "id1", "the Netherlands", null);
+        SearchExpression s = createSearchExpression("the", SearchExpressionType.EXACT, false, false);
+        s.wholeWordsOnly = true;
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("the Netherlands"));
+        assertFalse(searcher.searchString("Netherlands"));
+        assertFalse(searcher.searchString("them"));
+        assertFalse(searcher.searchString("blithe"));
+    }
+
+    @Test
+    public void testSearchStringKeywordWholeWordsOnly() throws Exception {
+        addSTE(fi, "id1", "OmegaT is great software", null);
+        SearchExpression s = createSearchExpression("great soft", SearchExpressionType.KEYWORD, false,
+                false);
+        s.wholeWordsOnly = true;
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("soft and great"));
+        // "soft" must not match inside "software"
+        assertFalse(searcher.searchString("OmegaT is great software"));
+    }
+
+    @Test
+    public void testSearchStringWildcardWholeWordsOnly() throws Exception {
+        addSTE(fi, "id1", "greatness counts", null);
+        SearchExpression s = createSearchExpression("great*", SearchExpressionType.EXACT, false, false);
+        s.wholeWordsOnly = true;
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("greatness counts"));
+        assertTrue(searcher.searchString("great"));
+        assertFalse(searcher.searchString("ungrateful"));
+    }
+
+    @Test
+    public void testSearchStringUnicodeWholeWordsOnly() throws Exception {
+        addSTE(fi, "id1", "слово и дело", null);
+        // "слово" must match as a word but not inside "словообразование";
+        // requires Unicode-aware word characters, see RFE#849
+        SearchExpression s = createSearchExpression("слово",
+                SearchExpressionType.EXACT, false, false);
+        s.wholeWordsOnly = true;
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("слово и дело"));
+        assertFalse(searcher.searchString(
+                "словообразование"));
+    }
+
+    @Test
+    public void testSearchStringWholeWordsOnlyIgnoredForRegex() throws Exception {
+        addSTE(fi, "id1", "the Netherlands", null);
+        SearchExpression s = createSearchExpression("the", SearchExpressionType.REGEXP, false, false);
+        s.wholeWordsOnly = true;
+        Searcher searcher = startSearcher(s);
+        // regular expressions are used as written, no whole-word anchoring
+        assertTrue(searcher.searchString("Netherlands"));
+    }
+
+    @Test
     public void testSearchReplaceExactMatch() throws Exception {
         SearchExpression s = createSearchExpression("great", SearchExpressionType.EXACT, false, false);
         s.mode = SearchMode.REPLACE;

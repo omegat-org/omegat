@@ -2087,6 +2087,20 @@ public class EditorController implements IEditor {
 
         applyIntroColors();
         CoreEvents.registerColorsChangedEventListener(this::applyIntroColors);
+        CoreEvents.registerColorsChangedEventListener(this::remarkAfterColorsChange);
+    }
+
+    /**
+     * Marker painters bake their colours when a segment is marked, so a
+     * palette change re-runs the markers once (in the marker threads — no
+     * document rebuild, caret and scroll position stay put). The segment
+     * span colours themselves are bound to the palette and already resolve
+     * when painting.
+     */
+    private void remarkAfterColorsChange() {
+        if (m_docSegList != null) {
+            markerController.process(m_docSegList);
+        }
     }
 
     /**

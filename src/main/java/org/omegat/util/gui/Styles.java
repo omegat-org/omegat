@@ -55,6 +55,32 @@ public final class Styles {
     }
 
     /**
+     * Attribute key under which a text span stores the palette entry its
+     * foreground is bound to. Views resolve the entry when they paint, so a
+     * palette change takes effect with a plain repaint instead of a document
+     * rebuild — the basis for instantaneous colour switching on documents of
+     * any size. A dedicated key object cannot collide with string-valued
+     * attribute keys, mirroring how {@code StyleConstants} defines its keys.
+     */
+    public static final Object EDITOR_COLOR_FOREGROUND = new BindingKey("boundForeground");
+
+    /** Background counterpart of {@link #EDITOR_COLOR_FOREGROUND}. */
+    public static final Object EDITOR_COLOR_BACKGROUND = new BindingKey("boundBackground");
+
+    private static final class BindingKey {
+        private final String name;
+
+        private BindingKey(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "OmegaT." + name;
+        }
+    }
+
+    /**
      * Apply the current editor base colors (foreground and background) to a
      * component. Consumers reacting to an
      * {@link org.omegat.core.events.IColorsChangedEventListener} event should
@@ -462,5 +488,48 @@ public final class Styles {
         }
 
         return r;
+    }
+
+    /**
+     * Construct an attribute set whose colors stay bound to the given palette
+     * entries. The colors currently in effect are baked in under the plain
+     * {@link StyleConstants} keys for consumers that read those directly; the
+     * entries themselves ride along under {@link #EDITOR_COLOR_FOREGROUND}
+     * and {@link #EDITOR_COLOR_BACKGROUND}, so painting resolves the palette
+     * at draw time and a palette change needs no re-attribution.
+     */
+    public static AttributeSet createBoundAttributeSet(@Nullable EditorColor foreground,
+            @Nullable EditorColor background, @Nullable Boolean bold, @Nullable Boolean italic) {
+        MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(
+                foreground == null ? null : foreground.getColor(),
+                background == null ? null : background.getColor(), bold, italic);
+        if (foreground != null) {
+            r.addAttribute(EDITOR_COLOR_FOREGROUND, foreground);
+        }
+        if (background != null) {
+            r.addAttribute(EDITOR_COLOR_BACKGROUND, background);
+        }
+        return r;
+    }
+
+    /**
+     * The color currently in effect for the palette entry the attributes bind
+     * their foreground to, or null when the attributes carry no binding.
+     */
+    public static @Nullable Color resolveBoundForeground(AttributeSet attributes) {
+        return resolveBound(attributes, EDITOR_COLOR_FOREGROUND);
+    }
+
+    /**
+     * The color currently in effect for the palette entry the attributes bind
+     * their background to, or null when the attributes carry no binding.
+     */
+    public static @Nullable Color resolveBoundBackground(AttributeSet attributes) {
+        return resolveBound(attributes, EDITOR_COLOR_BACKGROUND);
+    }
+
+    private static @Nullable Color resolveBound(AttributeSet attributes, Object key) {
+        Object bound = attributes.getAttribute(key);
+        return bound instanceof EditorColor ? ((EditorColor) bound).getColor() : null;
     }
 }

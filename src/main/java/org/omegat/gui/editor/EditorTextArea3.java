@@ -217,6 +217,13 @@ public class EditorTextArea3 extends JEditorPane {
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        Document3 doc = getOmDocument();
+        if (doc != null) {
+            doc.applyDefaultColors();
+        }
+        // span colors are bound to the palette and resolve when painting
+        // (see Styles#createBoundAttributeSet) — a repaint shows them
+        repaint();
     }
 
     @Override

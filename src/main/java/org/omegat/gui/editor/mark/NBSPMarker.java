@@ -46,11 +46,18 @@ import org.omegat.util.gui.Styles;
  */
 public class NBSPMarker extends AbstractMarker {
     public NBSPMarker() throws Exception {
-        painter = new TransparentHighlightPainter(Styles.EditorColor.COLOR_NBSP.getColor(), 0.5F);
         toolTip = OStrings.getString("MARKER_NBSP");
         pattern = Pattern.compile("[\u00a0\u202f\u2007]");
     }
+
     protected boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkNBSP();
+    }
+
+    @Override
+    protected void initDrawers(boolean isSource, boolean isActive) {
+        // created per call so that color preference changes take effect
+        // without restarting the application
+        painter = new TransparentHighlightPainter(Styles.EditorColor.COLOR_NBSP.getColor(), 0.5F);
     }
 }

@@ -65,7 +65,11 @@ import org.openide.awt.Mnemonics;
  *
  */
 public class TagIssue implements IIssue {
-    private static final Icon ICON = new SimpleColorIcon(EditorColor.COLOR_PLACEHOLDER.getColor());
+    // created on demand so that color preference changes take effect
+    // without restarting the application
+    private static Icon icon() {
+        return new SimpleColorIcon(EditorColor.COLOR_PLACEHOLDER.getColor());
+    }
 
     private final ErrorReport report;
 
@@ -75,7 +79,7 @@ public class TagIssue implements IIssue {
 
     @Override
     public Icon getIcon() {
-        return ICON;
+        return icon();
     }
 
     @Override

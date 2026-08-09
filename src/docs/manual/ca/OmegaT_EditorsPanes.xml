@@ -296,7 +296,23 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </itemizedlist>
       <note>
          <para>Modifica la visualització de l'editor perquè s'adapti al vostre flux de treball.</para>
-         <!--   <example id="panes.editor.modified.editor.target.field"> --><!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified --><!--         editor writing space</title> --><!-- 	<para> --><!-- 	  <programlisting>— ¶ ————————————————————— --><!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM --><!-- <token>Hide Ta&amp;gs</token> --><!-- <token>Dissi&amp;muler les balises</token> --><!-- — ¶ ————————————————————— --><!-- <token>External Post-processing Command:</token> --><!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> --><!-- — ¶ —————————————————————</programlisting></para> --><!--   </example> -->
+         <!--   <example id="panes.editor.modified.editor.target.field"> -->
+         <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+         <!--         editor writing space</title> -->
+         <!-- 	<para> -->
+         <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+         <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+         <!-- <token>Hide Ta&amp;gs</token> -->
+         <!-- <token>Dissi&amp;muler les balises</token> -->
+
+         <!-- — ¶ ————————————————————— -->
+
+         <!-- <token>External Post-processing Command:</token> -->
+         <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+         <!-- — ¶ —————————————————————</programlisting></para> -->
+         <!--   </example> -->
          <para>Les modificacions poden incloure:</para>
          <itemizedlist>
             <listitem>
@@ -459,14 +475,14 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>— ¶ —————————————————————
+						  <entry>
+							<programlisting>— ¶ —————————————————————
 
 <token>Application Folder</token>
-| <token>&lt;segment 1879 ¶&gt;</token>
+|<token>&lt;segment 1879 ¶&gt;</token>
 
-— ¶ —————————————————————</programlisting>
-                                          </entry>
+— ¶ —————————————————————
+</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -480,14 +496,13 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                                  <tgroup cols="1">
                                     <tbody>
                                        <row>
-                                          <entry>
-                                             <programlisting>1. <token>Top</token> Folder
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
 Dossier racine
-&lt;50/50/66% Segments orfes (i 1 més)&gt;
-2. Configuration Folder
+&lt;50/50/66% Segments orfes (i 1 més)&gt;</programlisting>
+<programlisting>2. Configuration Folder
 Dossier de configuration
-&lt;50/50/66% &gt;</programlisting>
-                                         </entry>
+&lt;50/50/66% &gt;</programlisting></entry>
                                        </row>
                                     </tbody>
                                  </tgroup>
@@ -501,8 +516,20 @@ Dossier de configuration
             	  </para>
       </example>
       <para>La coincidència parcial seleccionada es ressalta en <emphasis role="bold">negreta</emphasis>. Les paraules que falten en el segment que traduïu es mostren de color <emphasis role="bold">blau</emphasis>, i les parts adjacents apareixen en color <emphasis role="bold">verd</emphasis> (quan la part adjacent és un espai, com en el cas anterior, no es mostra cap color).</para>
-      <para>La coincidència també mostra tres percentatges de coincidència.</para>
-      <para>Aquests percentatges tenen el significat següent, en ordre:</para>
+      <para>La coincidència també mostra tres percentatges de coincidència, l'oriden de la coincidència i quantes vegades es repeteix a les dades de coincidències.</para>
+    
+      <para>Quan una coincidència prové de la memòria del projecte, l'origen només s'esmenta en dos casos:</para>
+    
+      <itemizedlist>
+         <listitem>
+            <para>Si el segment coincident ja no està present als fitxers de la carpeta de fitxers d'origen, s'etiqueta com a <emphasis role="bold">Segment orfe</emphasis>.</para>
+         </listitem>
+         <listitem>
+            <para>Si el segment coincident existeix als fitxers de la carpeta de fitxers d'origen, a més d'altres memòries de referència, s'etiqueta com a <emphasis role="bold">Aquest projecte</emphasis>.</para>
+         </listitem>
+      </itemizedlist>
+
+      <para>Aquests percentatges de coincidència tenen el significat següent, en ordre:</para>
       <itemizedlist>
          <listitem>
             <para>Percentatge calculat <emphasis role="bold">amb lematització</emphasis> a partir del lematitzador de la llengua d'origen i <emphasis role="bold">ignorant les etiquetes i les xifres</emphasis> (generalment és el més alt).</para>
@@ -527,11 +554,10 @@ Dossier de configuration
       <example xml:id="glossary.matches">
          <title xml:id="glossary.matches.title">Coincidències dels glossaris</title>
          <para>
-<programlisting>Project = <token>Projet</token>
+            <programlisting>Project = <token>Projet</token>
 1. Projet de traduction
 
-Folder = <token>Dossier</token>
-</programlisting>
+Folder = <token>Dossier</token></programlisting>
             	  </para>
       </example>
       <para>El nom del fitxer de glossari es mostra com a indicador de funció en passar el ratolí sobre els termes.</para>
@@ -643,10 +669,7 @@ Folder = <token>Dossier</token>
       <para>Feu clic en les figures per a canviar entre la visualització del progrés en xifres o percentatges.</para>
       <example xml:id="panes.statusbar.widgets">
          <title xml:id="panes.statusbar.widgets.title">Informació de la barra d'estat</title>
-         <para>
-            <literal>BLOC | SBR <token>257/271 (12292/154896, 177692)</token> <token> 35/0 </token>
-            </literal>
-         </para>
+	  <para><literal>BLOC | SBR <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
          <variablelist>
             <varlistentry>
                <term>Estat del cursor</term>
@@ -682,10 +705,7 @@ Folder = <token>Dossier</token>
       </example>
       <example xml:id="panes.statusbar.widgets.percentage">
          <title xml:id="panes.statusbar.widgets.percentage.title">Informació de la barra d'estat, mode percentatge</title>
-         <para>
-            <literal>DESBLOC | INS <token>94,8% (14 restants) / 7.9% (142.604 restants), 177.692</token> <token>35/0</token>
-            </literal>
-         </para>
+	  <para><literal>DESBLOC | INS <token>94,8% (14 restants) / 7.9% (142.604 restants), 177.692</token> <token>35/0</token></literal></para>
          <variablelist>
             <varlistentry>
                <term>Estat del cursor</term>

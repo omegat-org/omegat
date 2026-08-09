@@ -26,7 +26,7 @@ dosyasında belirtilmektedir:
 OmegaT kurulumunun ön koşulları
 ===================================
 
-OmegaT, Java Çalışma Zamanı Ortamı (JRE) 1.8 ya da üzeri sürümünün sisteminizde
+OmegaT, Java Çalışma Zamanı Ortamı (JRE) 11 ya da üzeri sürümünün sisteminizde
 yüklü olmasını gerektirir.
 
 JRE seçmek, bulmak ve kurmakla uğraşmamak için JRE ile birlikte gelen OmegaT

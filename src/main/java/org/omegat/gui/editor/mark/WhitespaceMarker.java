@@ -50,26 +50,6 @@ public final class WhitespaceMarker implements IMarker {
     public static void unloadPlugins() {
     }
 
-    private final SymbolPainter spacePainter;
-    /**
-     * Marker for tab
-     */
-    private final SymbolPainter tabPainter;
-
-    /**
-     * Marker for linefeed.
-     *
-     * There is a linefeed symbol: U+240A. But it is so small / hard to see,
-     * that instead we use U+00B6 as the symbol to show, like other applications do.
-     */
-    private final SymbolPainter lfPainter;
-
-    public WhitespaceMarker() {
-        spacePainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "·");
-        tabPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "»");
-        lfPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "¶");
-    }
-
     /**
      * Marker for whitespaces.
      *
@@ -82,6 +62,14 @@ public final class WhitespaceMarker implements IMarker {
         if (sourceText == null || !isEnabled()) {
             return null;
         }
+        // painters are created per call so that color preference changes take
+        // effect without restarting the application.
+        // There is a linefeed symbol: U+240A. But it is so small / hard to
+        // see, that instead we use U+00B6 as the symbol to show, like other
+        // applications do.
+        SymbolPainter spacePainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "·");
+        SymbolPainter tabPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "»");
+        SymbolPainter lfPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "¶");
         List<Mark> marks = new ArrayList<>();
         char spacePatternChar = ' ';
         String tabToolTip = OStrings.getString("MARKER_TAB");

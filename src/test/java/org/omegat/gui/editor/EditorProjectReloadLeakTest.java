@@ -38,11 +38,14 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.MemoryStressTests;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
@@ -54,6 +57,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Language;
 
@@ -68,11 +72,13 @@ import org.omegat.util.Language;
  *
  * @author stephan.pakebusch at zollsoft.de
  */
+@Category(MemoryStressTests.class)
 public class EditorProjectReloadLeakTest extends TestCore {
 
     private static final int CYCLES = 3;
 
     private EditorController editorController;
+    private ProjectFilesListController projectFilesListController;
     private File projectRoot;
 
     @BeforeClass
@@ -173,19 +179,34 @@ public class EditorProjectReloadLeakTest extends TestCore {
         assertTrue("EDT must drain", latch.await(15, TimeUnit.SECONDS));
     }
 
+    /**
+     * A weakly reachable referent must be cleared at the latest by the full
+     * collection the JVM runs before failing an allocation with
+     * OutOfMemoryError. Exhausting the heap therefore gives a deterministic
+     * verdict even when the advisory System.gc() rounds are ignored, which
+     * happens under load on the Windows CI runners.
+     */
     private boolean becomesUnreachable(WeakReference<?> ref) throws InterruptedException {
-        for (int attempt = 0; attempt < 50; attempt++) {
+        for (int attempt = 0; attempt < 10; attempt++) {
             System.gc();
             if (ref.get() == null) {
                 return true;
             }
             // Brief backoff: releasing can lag behind close by a few
             // milliseconds (monitor threads finish, EDT drains).
-            byte[][] pressure = new byte[64][];
-            for (int i = 0; i < pressure.length; i++) {
-                pressure[i] = new byte[1024 * 1024];
-            }
             Thread.sleep(10);
+        }
+        List<byte[]> hog = new ArrayList<>();
+        try {
+            while (ref.get() != null) {
+                hog.add(new byte[4 * 1024 * 1024]);
+            }
+        } catch (OutOfMemoryError oom) {
+            // Expected while the referent is still reachable: the heap
+            // filled up although the preceding full collection would have
+            // cleared a weakly reachable referent.
+        } finally {
+            hog.clear();
         }
         return ref.get() == null;
     }
@@ -197,7 +218,17 @@ public class EditorProjectReloadLeakTest extends TestCore {
      */
     @Before
     public final void setUpProjectFilesWindow() {
-        new org.omegat.gui.filelist.ProjectFilesListController();
+        projectFilesListController = new ProjectFilesListController();
+    }
+
+    /**
+     * Unregister the controller's global listeners again: they would stay
+     * registered for the rest of the test JVM and fire on later tests'
+     * project events, against project stubs they were never written for.
+     */
+    @After
+    public final void tearDownProjectFilesWindow() {
+        projectFilesListController.dispose();
     }
 
     @Override

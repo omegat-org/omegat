@@ -25,7 +25,7 @@
    </section>
    <section xml:id="app.bidi.embeddings">
       <title xml:id="app.bidi.embeddings.title">埋め込み</title>
-      <para>埋め込みを使用して、分節の綴り方向と反対に綴る必要がある(いくつかの単語とスペースを含むような)長い文章を作成することができます。分節の綴り方向に応じて、次の2種類の埋め込みを作成できます。</para>
+      <para>埋め込みを使用して、分節の綴り方向と反対に綴る必要がある(いくつかの単語とスペースを含むような)長い文章を作成できます。分節の綴り方向に応じて、次の2種類の埋め込みを作成できます。</para>
       <itemizedlist>
          <listitem>
             <para>右から左への分節に左から右への埋め込みを作成するには、左から右への埋め込み(LRE: Left-to-Right Embedding)文字を挿入し、左から右への文章を入力または挿入してから、ポップ方向書式設定(PDF: Pop Directional Formatting)文字を挿入します。</para>

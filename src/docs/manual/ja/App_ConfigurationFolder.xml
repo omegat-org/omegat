@@ -49,8 +49,7 @@
                   <title xml:id="no.source.file.display.title">翻訳対象ファイル一覧を自動表示しない</title>
                   <para>プロジェクトを開いたときに、翻訳対象ファイル一覧ウィンドウを自動的に開かないようにするには、<token>&lt;project_files_show_on_load&gt;</token>を検索して、<token>true</token>を<token>false</token>に置き換える編集をします。</para>
                   <para>
-                     <programlisting>&lt;project_files_show_on_load&gt;
-                        <token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
+                     <programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
                   </para>
                </example>
                <note>
@@ -67,11 +66,16 @@
          <varlistentry xml:id="configuration.folder.default.contents.logs">
             <term xml:id="configuration.folder.default.contents.logs.title">logs/</term>
             <listitem>
-               <para>このフォルダーには、たくさんのログファイルが保存されています。ファイル名の形式は <filename>OmegaT_99999_yyyyMMdd-hhmmss.log</filename> です。</para>
-               <para>99999 の部分は、00000 から 99999 までの 5 桁のセッション ID です。乱数になります。</para>
-               <para>yyyyMMdd-hhmmss の部分は日付と時刻で、20240704-201200 は、現地時間の 2024 年 7 月 4 日の 20:12:00 を意味します。</para>
+              <para>このフォルダーには、たくさんのログファイルが保存されています。ファイル名は、ユーザーがログインしたセッションの開始時刻を示しています。</para>
+                  	
+              <example xml:id="configuration.folder.default.contents.logs.title.example">
+		<title>典型的なログファイル名</title>
+                <filename>OmegaT_2026-04-12_10-01_97543.log</filename>.
+		<para>97543 は乱数になります。それはセッションIDです。</para>
+		<para>2026-04-12_10-01は、セッションが2026年4月12日10:01に開始されたことを示しています。</para>
+	      </example>
                <para>これらのファイルには、様々な内部の状態が記録されており、OmegaT実行中のプログラム内のイベントメッセージが記録されています。もしOmegaTの動作がおかしいときは、サポートのコミュニティに報告するときに、このファイルを添付するようにしてください。</para>
-               <para><link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/> を使用して、現在のセッションのログ・ファイルの内容を表示します。</para>
+               <para><link linkend="menus.help" endterm="menus.help.title"/> <link linkend="menus.help.log" endterm="menus.help.log.title"/>を使って現在のセッションのログファイルを表示してください。</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="configuration.folder.default.contents.script">
@@ -160,7 +164,7 @@
          <varlistentry xml:id="configuration.folder.extra.contents.spelling">
             <term xml:id="configuration.folder.extra.contents.spelling.title">spelling/</term>
             <listitem>
-               <para>このフォルダには、綴り確認用の辞書が格納されます。詳細については、<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>環境設定を参照してください。</para>
+               <para>このフォルダには、スペリング辞書を保存します。詳細については、<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>環境設定を参照してください。</para>
             </listitem>
          </varlistentry>
       </variablelist>

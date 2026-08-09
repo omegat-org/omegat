@@ -10,6 +10,7 @@
                2013 Aaron Madlon-Kay, Yu Tang
                2014-2015 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,9 +40,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
@@ -51,6 +55,7 @@ import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -225,6 +230,74 @@ public class ProjectPropertiesDialogController {
                 filters = dlg.getResult(); // saving config
             }
         });
+        initializeOpenButtons();
+    }
+
+    /**
+     * Wires the buttons that open the folders of the file locations section in
+     * the system file manager. For the writable glossary the containing
+     * folder is opened, because the field points to a file. Each button is
+     * only enabled while the folder taken from the corresponding text field
+     * exists.
+     */
+    private void initializeOpenButtons() {
+        setupOpenButton(dialog.srcOpen, dialog.srcRootField, false);
+        setupOpenButton(dialog.locOpen, dialog.locRootField, false);
+        setupOpenButton(dialog.glosOpen, dialog.glosRootField, false);
+        setupOpenButton(dialog.wGlosOpen, dialog.writeableGlosField, true);
+        setupOpenButton(dialog.tmOpen, dialog.tmRootField, false);
+        setupOpenButton(dialog.exportTMOpen, dialog.exportTMRootField, false);
+        setupOpenButton(dialog.dictOpen, dialog.dictRootField, false);
+    }
+
+    private void setupOpenButton(JButton button, JTextField field, boolean openParent) {
+        button.addActionListener(e -> {
+            File folder = getOpenButtonTarget(field, openParent);
+            if (folder != null) {
+                ProjectUICommands.openFile(folder);
+            }
+        });
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateOpenButtonState(button, field, openParent);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateOpenButtonState(button, field, openParent);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateOpenButtonState(button, field, openParent);
+            }
+        });
+        updateOpenButtonState(button, field, openParent);
+    }
+
+    private static void updateOpenButtonState(JButton button, JTextField field, boolean openParent) {
+        File folder = getOpenButtonTarget(field, openParent);
+        button.setEnabled(folder != null && folder.isDirectory());
+    }
+
+    /**
+     * Returns the folder a given open button should open, or null when the
+     * field is empty or no folder can be derived from it.
+     *
+     * @param field
+     *            text field holding the path
+     * @param openParent
+     *            true when the field holds a file path whose containing folder
+     *            should be opened instead
+     */
+    private static File getOpenButtonTarget(JTextField field, boolean openParent) {
+        String path = field.getText();
+        if (StringUtil.isEmpty(path)) {
+            return null;
+        }
+        File target = new File(path);
+        return openParent ? target.getParentFile() : target;
     }
 
     /**

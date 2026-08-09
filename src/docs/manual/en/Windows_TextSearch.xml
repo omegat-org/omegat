@@ -203,6 +203,19 @@
             </listitem>
          </varlistentry>
          <varlistentry>
+            <term>Whole words only</term>
+            <listitem>
+               <para>Search terms only match whole words: matches that are directly
+                  		  preceded or followed by a letter or digit are ignored. In a
+                  		  keyword search this applies to each keyword separately. Word
+                  		  characters are recognized in any script, not only in the Latin
+                  		  alphabet.</para>
+               <para>The option applies to exact and keyword searches. In a regular
+                  		  expression search you define word boundaries in the expression
+                  		  itself, so the option is disabled there.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry>
             <term>In source</term>
             <listitem>
                <para>Search in the source segments.</para>
@@ -221,9 +234,11 @@
             </listitem>
          </varlistentry>
          <varlistentry>
-            <term>In comments</term>
+            <term>In properties</term>
             <listitem>
-               <para>Search in comments attached to segments.</para>
+               <para>Search in the properties attached to segments, including the
+                  		  segment's file, ID and path, as displayed in the
+                  <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"></link> pane.</para>
             </listitem>
          </varlistentry>
          <varlistentry>
@@ -382,6 +397,21 @@
             </listitem>
          </varlistentry>
       </variablelist>
+      <para>The
+         <guibutton>Find Previous</guibutton> and
+         <guibutton>Find Next</guibutton> buttons below the results, as well as
+         <keycombo>
+            <keycap>S</keycap>
+            <keycap>F3</keycap>
+         </keycombo> and
+         <keycap>F3</keycap> from anywhere in the window, move the selection one
+         	result backward or forward, wrapping around at both ends of the list.
+         	The reached segment is always displayed in the
+         <link linkend="panes.editor" endterm="panes.editor.title"></link> pane,
+         	regardless of the
+         <guilabel>Auto-sync with editor</guilabel> option, without moving the
+         	focus away from the Search window. When the navigation wraps around,
+         	a short note appears next to the number of results.</para>
       <para>The selected segment is highlighted in green:</para>
       <example xml:id="select.second.match">
          <title xml:id="select.second.match.title">Select the second match</title>

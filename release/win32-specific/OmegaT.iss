@@ -35,34 +35,21 @@ Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca
 Source: "readme_cs.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cs
 Source: "readme_co.txt"; DestDir: "{app}"; Flags: isreadme; Languages: co
-;Source: "readme_cy.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cy
-Source: "readme_da.txt"; DestDir: "{app}"; Flags: isreadme; Languages: da
 Source: "readme_de.txt"; DestDir: "{app}"; Flags: isreadme; Languages: de
 Source: "readme_es.txt"; DestDir: "{app}"; Flags: isreadme; Languages: es
 Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fi.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fi
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
-Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hr
-Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
-;Source: "readme_id.txt"; DestDir: "{app}"; Flags: isreadme; Languages: id
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
 Source: "readme_ja.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ja
-Source: "readme_ko.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ko
 Source: "readme_nl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: nl
-Source: "readme_no.txt"; DestDir: "{app}"; Flags: isreadme; Languages: no
-Source: "readme_pl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pl
 Source: "readme_pt_BR.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pt_BR
 Source: "readme_ru.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ru
-;Source: "readme_sh.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sh
-Source: "readme_sk.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sk
-Source: "readme_sl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sl
-Source: "readme_sq.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sq
 Source: "readme_sv.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sv
 Source: "readme_tr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: tr
 Source: "readme_uk.txt"; DestDir: "{app}"; Flags: isreadme; Languages: uk
 Source: "readme_zh_CN.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_CN
-Source: "readme_zh_TW.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_TW
 Source: "readme*.txt"; DestDir: "{app}";
 Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"

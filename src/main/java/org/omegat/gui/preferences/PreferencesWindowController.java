@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -82,6 +83,7 @@ import javax.swing.JScrollBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
@@ -99,6 +101,7 @@ import javax.swing.tree.TreeSelectionModel;
 import org.omegat.core.Core;
 import org.omegat.core.team2.gui.RepositoriesCredentialsController;
 import org.omegat.externalfinder.gui.ExternalFinderPreferencesController;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.preferences.IPreferencesController.FurtherActionListener;
@@ -148,6 +151,7 @@ public class PreferencesWindowController implements FurtherActionListener {
     private static final String ACTION_KEY_NEW_SEARCH = "clearSearch";
     private static final String ACTION_KEY_CLEAR_OR_CLOSE = "clearSearchOrClose";
     private static final String ACTION_KEY_DO_SEARCH = "doSearch";
+    private static final int APPLIED_MESSAGE_TIMEOUT_MS = 5000;
 
     private JDialog dialog;
     private PreferencePanel outerPanel;
@@ -262,12 +266,41 @@ public class PreferencesWindowController implements FurtherActionListener {
 
                     @Override
                     protected void done() {
+                        refreshEditorView();
                         if (getIsReloadRequired()) {
                             SwingUtilities.invokeLater(ProjectUICommands::promptReload);
                         }
                     }
                 }.execute();
                 StaticUIUtils.closeWindowByEvent(dialog);
+            }
+        });
+        outerPanel.applyButton.addActionListener(e -> {
+            if (currentView == null || currentView.validate()) {
+                outerPanel.applyButton.setEnabled(false);
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        doSave();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        outerPanel.applyButton.setEnabled(true);
+                        try {
+                            get();
+                        } catch (InterruptedException | ExecutionException ex) {
+                            LOGGER.log(Level.SEVERE, "Error saving preferences", ex);
+                            return;
+                        }
+                        refreshEditorView();
+                        showAppliedMessage();
+                        if (getIsReloadRequired()) {
+                            SwingUtilities.invokeLater(ProjectUICommands::promptReload);
+                        }
+                    }
+                }.execute();
             }
         });
         outerPanel.cancelButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(dialog));
@@ -750,6 +783,39 @@ public class PreferencesWindowController implements FurtherActionListener {
                 }
             }
         });
+    }
+
+    /**
+     * Confirm in the message area that the changes were applied, unless a
+     * more important restart/reload notice is displayed there. The
+     * confirmation disappears again after a few seconds.
+     */
+    private void showAppliedMessage() {
+        updateMessage();
+        if (StringUtil.isEmpty(outerPanel.messageTextArea.getText())) {
+            outerPanel.messageTextArea.setText(OStrings.getString("PREFERENCES_MESSAGE_APPLIED"));
+            Timer timer = new Timer(APPLIED_MESSAGE_TIMEOUT_MS, e -> updateMessage());
+            timer.setRepeats(false);
+            timer.start();
+        }
+    }
+
+    /**
+     * Redisplay the current document so that saved preferences (e.g. colors)
+     * take effect immediately. refreshView reloads the document the same way
+     * as the editor settings toggles; a pending edit is committed by that
+     * sequence, so nothing is lost.
+     */
+    public static void refreshEditorView() {
+        IEditor editor = Core.getEditor();
+        if (editor == null || !Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        if (editor.getCurrentFile() == null) {
+            // empty project: no document is displayed, nothing to refresh
+            return;
+        }
+        editor.refreshView(true);
     }
 
     private void doSave() {

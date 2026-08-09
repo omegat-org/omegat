@@ -59,6 +59,7 @@ public class PreferencePanel extends javax.swing.JPanel {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        applyButton = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -93,12 +94,16 @@ public class PreferencePanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         bottomButtonsPanel.add(cancelButton);
 
+        org.openide.awt.Mnemonics.setLocalizedText(applyButton, OStrings.getString("BUTTON_APPLY")); // NOI18N
+        bottomButtonsPanel.add(applyButton);
+
         bottomPanel.add(bottomButtonsPanel, java.awt.BorderLayout.EAST);
 
         add(bottomPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton applyButton;
     public javax.swing.JPanel bottomButtonsPanel;
     public javax.swing.JPanel bottomPanel;
     public javax.swing.JButton cancelButton;

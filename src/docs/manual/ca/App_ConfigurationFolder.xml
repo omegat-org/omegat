@@ -49,8 +49,7 @@
                   <title xml:id="no.source.file.display.title">No mostris automàticament la llista de fitxers d'origen</title>
                   <para>Per a impedir que la finestra amb llista de fitxers d'origen s'obri automàticament en carregar un projecte, cerqueu <token>&lt;project_files_show_on_load&gt;</token> i substituïu <token>true</token> per <token>false</token>:</para>
                   <para>
-                     <programlisting>&lt;project_files_show_on_load&gt;
-                        <token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
+                     <programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting>
                   </para>
                </example>
                <note>
@@ -67,11 +66,16 @@
          <varlistentry xml:id="configuration.folder.default.contents.logs">
             <term xml:id="configuration.folder.default.contents.logs.title">logs/</term>
             <listitem>
-               <para>Aquesta carpeta conté diversos fitxers de registre. El format del nom del fitxer és <filename>OmegaT_99999_aaaaMMdd-hhmmss.log</filename>.</para>
-               <para>La part «99999» és un ID de sessió de 5 dígits entre 00000 i 99999. Serà un nombre aleatori.</para>
-               <para>La part «aaaaMMdd-hhmmss» és una marca de data i hora; per exemple, «20240704-201200» és el 4 de juliol de 2024 a les 20:12:00 hora local.</para>
+              <para>Aquesta carpeta conté diversos fitxers de registre. El nom del fitxer indica l'inici de la sessió registrada</para>
+                  	
+              <example xml:id="configuration.folder.default.contents.logs.title.example">
+		<title>Nom típic d'un fitxer de registre</title>
+                <filename>OmegaT_2026-04-12_10-01_97543.log</filename>.
+		<para>97543 és un nombre aleatori. És l'ID de la sessió.</para>
+		<para>2026-04-12_10-01 indica que la sessió es va iniciar a les 10:01 del 12 d'abril de 2026.</para>
+	      </example>
                <para>Aquests fitxers registren diversos missatges de l'estat intern i els esdeveniments del programa generats durant l'execució de l'OmegaT. Si l'OmegaT té cap comportament estrany, incloeu aquest fitxer o la part rellevant en l'informe.</para>
-               <para>Utilitzeu <link linkend="menus.help" endterm="menus.help.title"/> <link linkend="menus.help.log" endterm="menus.help.log.title"/> per a visualitzar el contingut del fitxer de registre de la sessió actual.</para>
+               <para>Utilitzeu <link linkend="menus.help" endterm="menus.help.title"/> <link linkend="menus.help.log" endterm="menus.help.log.title"/> per a mostrar el fitxer de registre de la sessió actual.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="configuration.folder.default.contents.script">
@@ -160,7 +164,7 @@
          <varlistentry xml:id="configuration.folder.extra.contents.spelling">
             <term xml:id="configuration.folder.extra.contents.spelling.title">spelling/</term>
             <listitem>
-               <para>Aquesta carpeta conté els diccionaris ortogràfics personalitzats. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
+               <para>Aquesta carpeta és on podeu copiar diccionaris ortogràfics. Consulteu les preferències de <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> per a conèixer més detalls.</para>
             </listitem>
          </varlistentry>
       </variablelist>

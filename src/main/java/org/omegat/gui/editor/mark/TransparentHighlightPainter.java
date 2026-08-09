@@ -56,6 +56,10 @@ public class TransparentHighlightPainter extends Underliner {
         this.alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
     }
 
+    Color getColor() {
+        return color;
+    }
+
     protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
         Graphics2D g2d = (Graphics2D) g;
         Composite originalComposite = g2d.getComposite();

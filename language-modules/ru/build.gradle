@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-ru-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/openregex-*.jar')
+        implementation providedModuleLib('language-ru')
+        runtimeOnly providedModuleLib('openregex')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

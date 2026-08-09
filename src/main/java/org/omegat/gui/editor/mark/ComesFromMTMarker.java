@@ -28,8 +28,6 @@ package org.omegat.gui.editor.mark;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -44,7 +42,6 @@ import org.omegat.util.gui.Styles;
  */
 public class ComesFromMTMarker implements IMarker {
     private final Object LOCK = new Object();
-    private final HighlightPainter highlightPainter;
     private @Nullable SourceTextEntry markedSte;
     private @Nullable String markedText;
 
@@ -57,8 +54,6 @@ public class ComesFromMTMarker implements IMarker {
                 setMark(null, null);
             }
         });
-        highlightPainter = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getColor(), 0.5F);
     }
 
     public void setMark(@Nullable SourceTextEntry ste, @Nullable String text) {
@@ -76,7 +71,10 @@ public class ComesFromMTMarker implements IMarker {
                 return null;
             }
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-            m.painter = highlightPainter;
+            // created per call so that color preference changes take effect
+            // without restarting the application
+            m.painter = new TransparentHighlightPainter(
+                    Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getColor(), 0.5F);
             return Collections.singletonList(m);
         }
     }

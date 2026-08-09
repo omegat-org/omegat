@@ -7,7 +7,7 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir, includes: ['**/language-ast-*.jar'])
+        implementation providedModuleLib('language-ast')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

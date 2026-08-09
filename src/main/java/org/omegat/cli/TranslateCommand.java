@@ -30,7 +30,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
-import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.util.Objects;
@@ -78,21 +77,7 @@ public class TranslateCommand implements Callable<Integer> {
         CommandCommon.initializeApp();
         Core.initializeConsole();
 
-        if (!params.team || legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
-        if (legacyParams.disableProjectLocking) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-        if (legacyParams.disableLocationSave) {
-            RuntimePreferences.setLocationSaveEnabled(false);
-        }
-        if (params.tokenizerSource != null) {
-            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
-        }
-        if (params.tokenizerTarget != null) {
-            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
-        }
+        CommandCommon.parseCommonParams(params);
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
         if (p == null) {

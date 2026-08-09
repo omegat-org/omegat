@@ -149,6 +149,7 @@ public final class Preferences {
     public static final String SEARCHWINDOW_REPLACE_TYPE = "search_window_replace_type";
     public static final String SEARCHWINDOW_CASE_SENSITIVE = "search_window_case_sensitive";
     public static final String SEARCHWINDOW_SPACE_MATCH_NBSP = "search_window_space_match_nbsp";
+    public static final String SEARCHWINDOW_WHOLE_WORDS = "search_window_whole_words";
     public static final String SEARCHWINDOW_CASE_SENSITIVE_REPLACE = "search_window_case_sensitive_replace";
     public static final String SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE = "search_window_space_match_nbsp_replace";
     public static final String SEARCHWINDOW_REPLACE_UNTRANSLATED = "search_window_replace_untranslated";
@@ -694,6 +695,21 @@ public final class Preferences {
      */
     public static void addPropertyChangeListener(String property, PropertyChangeListener listener) {
         PROP_CHANGE_SUPPORT.addPropertyChangeListener(property, listener);
+    }
+
+    /**
+     * Stop receiving notifications when preferences change.
+     */
+    public static void removePropertyChangeListener(PropertyChangeListener listener) {
+        PROP_CHANGE_SUPPORT.removePropertyChangeListener(listener);
+    }
+
+    /**
+     * Stop receiving notifications when the specified preference changes. The
+     * listener must be removed with the same property it was registered with.
+     */
+    public static void removePropertyChangeListener(String property, PropertyChangeListener listener) {
+        PROP_CHANGE_SUPPORT.removePropertyChangeListener(property, listener);
     }
 
     public static void setFilters(Filters newFilters) {

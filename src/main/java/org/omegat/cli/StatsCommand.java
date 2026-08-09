@@ -34,7 +34,6 @@ import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.writer.StatisticsTextWriter;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
-import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -107,21 +106,7 @@ public class StatsCommand implements Callable<Integer> {
         CommandCommon.initializeApp();
         Core.initializeConsole();
 
-        if (!params.team || legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
-        if (legacyParams.disableProjectLocking) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-        if (legacyParams.disableLocationSave) {
-            RuntimePreferences.setLocationSaveEnabled(false);
-        }
-        if (params.tokenizerSource != null) {
-            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
-        }
-        if (params.tokenizerTarget != null) {
-            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
-        }
+        CommandCommon.parseCommonParams(params);
 
         RealProject p = CommandCommon.selectProjectConsoleMode(true, params);
         if (p == null) {

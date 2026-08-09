@@ -39,6 +39,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.omegat.util.StringUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -226,7 +227,7 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
         } catch (PatternSyntaxException e) {
             textfield.setCaretPosition(e.getIndex());
             JOptionPane.showMessageDialog(this,
-                    e.getLocalizedMessage(), OStrings.getString("HTML_ERROR_CUSTOMREGEXP_TITLE"),
+                    StringUtil.describeException(e), OStrings.getString("HTML_ERROR_CUSTOMREGEXP_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
             textfield.grabFocus();
             return false;

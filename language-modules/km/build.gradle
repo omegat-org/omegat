@@ -7,8 +7,7 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/lucene-analyzers-common-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-km-*.jar'])
+        implementation providedModuleLib('language-km')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

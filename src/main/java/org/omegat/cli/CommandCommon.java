@@ -122,8 +122,13 @@ public final class CommandCommon {
         }
     }
 
+    /**
+     * Applies the options shared through {@link CommonParameters} to the
+     * runtime preferences. The options of the parent command are applied by
+     * {@link LegacyParameters#initialize()}.
+     */
     public static void parseCommonParams(CommonParameters params) {
-        if (!params.team) {
+        if (params.noTeam) {
             RuntimePreferences.setNoTeam();
         }
         if (params.disableProjectLocking) {
@@ -138,7 +143,6 @@ public final class CommandCommon {
         if (params.tokenizerTarget != null) {
             RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
         }
-        validateTagsConsoleMode(params);
     }
 
     /**

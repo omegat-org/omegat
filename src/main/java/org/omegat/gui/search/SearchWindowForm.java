@@ -93,6 +93,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler29 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchSpaceMatchNbsp = new javax.swing.JCheckBox();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_searchWholeWords = new javax.swing.JCheckBox();
+        filler33 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchSource = new javax.swing.JCheckBox();
         filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchTranslation = new javax.swing.JCheckBox();
@@ -176,6 +178,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_replaceButton = new javax.swing.JButton();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_findPreviousButton = new javax.swing.JButton();
+        filler31 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_findNextButton = new javax.swing.JButton();
+        filler32 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_filterButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_dismissButton = new javax.swing.JButton();
@@ -265,6 +271,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
         org.openide.awt.Mnemonics.setLocalizedText(m_searchSpaceMatchNbsp, OStrings.getString("SW_SEARCH_SPACE_MATCH_NBSP")); // NOI18N
         jPanel3.add(m_searchSpaceMatchNbsp);
         jPanel3.add(filler5);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_searchWholeWords, OStrings.getString("SW_WHOLE_WORDS")); // NOI18N
+        jPanel3.add(m_searchWholeWords);
+        jPanel3.add(filler33);
 
         m_searchSource.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_searchSource, OStrings.getString("SW_SEARCH_SOURCE")); // NOI18N
@@ -628,6 +638,16 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel7.add(m_replaceButton);
         jPanel7.add(filler16);
 
+        org.openide.awt.Mnemonics.setLocalizedText(m_findPreviousButton, OStrings.getString("BUTTON_FIND_PREVIOUS")); // NOI18N
+        m_findPreviousButton.setEnabled(false);
+        jPanel7.add(m_findPreviousButton);
+        jPanel7.add(filler31);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_findNextButton, OStrings.getString("BUTTON_FIND_NEXT")); // NOI18N
+        m_findNextButton.setEnabled(false);
+        jPanel7.add(m_findNextButton);
+        jPanel7.add(filler32);
+
         org.openide.awt.Mnemonics.setLocalizedText(m_filterButton, OStrings.getString("BUTTON_FILTER")); // NOI18N
         m_filterButton.setEnabled(false);
         jPanel7.add(m_filterButton);
@@ -674,6 +694,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler29;
     javax.swing.Box.Filler filler3;
     javax.swing.Box.Filler filler30;
+    javax.swing.Box.Filler filler31;
+    javax.swing.Box.Filler filler32;
+    javax.swing.Box.Filler filler33;
     javax.swing.Box.Filler filler4;
     javax.swing.Box.Filler filler5;
     javax.swing.Box.Filler filler6;
@@ -721,6 +744,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_excludeOrphans;
     javax.swing.JCheckBox m_fileNamesCB;
     javax.swing.JButton m_filterButton;
+    javax.swing.JButton m_findNextButton;
+    javax.swing.JButton m_findPreviousButton;
     javax.swing.JCheckBox m_fullHalfWidthInsensitive;
     javax.swing.JLabel m_numberLabel;
     javax.swing.JSpinner m_numberOfResults;
@@ -753,6 +778,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_searchSpaceMatchNbsp;
     javax.swing.JRadioButton m_searchTranslated;
     javax.swing.JRadioButton m_searchTranslatedUntranslated;
+    javax.swing.JCheckBox m_searchWholeWords;
     javax.swing.JCheckBox m_searchTranslation;
     javax.swing.JRadioButton m_searchUntranslated;
     javax.swing.JTextPane m_viewer;

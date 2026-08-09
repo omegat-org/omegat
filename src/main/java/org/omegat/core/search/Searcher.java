@@ -61,6 +61,7 @@ import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.CancellationToken;
@@ -273,9 +274,6 @@ public class Searcher {
         entryMap.clear();
         matchers.clear();
 
-        // determine pattern matching flags
-        int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
-
         // Normalize width of search string if width insensitivity is requested.
         // Then, instead of modifying the regex, we also normalize the
         // comparison strings later on.
@@ -293,16 +291,23 @@ public class Searcher {
             // expression
             textSearchExpression = StaticUtils.globToRegex(textSearchExpression,
                     searchExpression.spaceMatchNbsp);
+            if (searchExpression.wholeWordsOnly) {
+                textSearchExpression = anchorWholeWords(textSearchExpression);
+            }
 
             // create a matcher for the search string
-            matchers.add(Pattern.compile(textSearchExpression, flags).matcher(""));
+            matchers.add(Pattern.compile(textSearchExpression, getPatternFlags()).matcher(""));
             break;
         case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
+            final int flags = getPatternFlags();
             Pattern.compile(" ").splitAsStream(textSearchExpression.trim()).filter(word -> !word.isEmpty())
                     .map(word -> {
                         String glob = StaticUtils.globToRegex(word, false);
+                        if (searchExpression.wholeWordsOnly) {
+                            glob = anchorWholeWords(glob);
+                        }
                         return Pattern.compile(glob, flags).matcher("");
                     }).forEach(matchers::add);
             break;
@@ -314,7 +319,7 @@ public class Searcher {
             }
 
             // create a matcher for the search string
-            matchers.add(Pattern.compile(textSearchExpression, flags).matcher(""));
+            matchers.add(Pattern.compile(textSearchExpression, getPatternFlags()).matcher(""));
             break;
         default:
             throw new IllegalStateException("Unknown search expression type");
@@ -344,6 +349,38 @@ public class Searcher {
     @SuppressWarnings("unused")
     public boolean isSearchCompleted() {
         return searchCompleted;
+    }
+
+    /**
+     * Determine the pattern matching flags for the search expression.
+     * When the whole words only option is active for a non-regex search,
+     * Unicode character classes are enabled so that word characters are
+     * recognized in non-ASCII languages as well.
+     *
+     * @return flags to pass to Pattern.compile
+     */
+    private int getPatternFlags() {
+        int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+        if (searchExpression.wholeWordsOnly
+                && searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
+            flags |= Pattern.UNICODE_CHARACTER_CLASS;
+        }
+        return flags;
+    }
+
+    /**
+     * Wrap the given regular expression so that it only matches whole words
+     * (RFE#849). Lookaround on word characters is used instead of the word
+     * boundary anchor so that search terms that start or end with a non-word
+     * character (for example punctuation or the wildcards asterisk and
+     * question mark) can still match.
+     *
+     * @param regex
+     *            regular expression for a single search term
+     * @return regular expression matching the term as whole words only
+     */
+    private static String anchorWholeWords(String regex) {
+        return "(?<!\\w)(?:" + regex + ")(?!\\w)";
     }
 
     /** create a matcher for the author search string. */
@@ -503,7 +540,8 @@ public class Searcher {
                 SourceTextEntry ste = allEntries.get(i);
                 TMXEntry te = project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, te.note, propertiesWithKeyFields(ste), te, i,
+                        null);
                 checkInterrupted();
             }
 
@@ -589,6 +627,41 @@ public class Searcher {
             checkEntry(tm.getSourceText(), tm.getTranslationText(), tm.getNote(), null, null, origin, tmxID);
 
             checkInterrupted();
+        }
+    }
+
+    /**
+     * The segment properties pane shows the entry's file, id and path (the
+     * {@link EntryKey} fields) next to the raw entry properties, so the
+     * property search covers those key fields as well. They are appended as
+     * name/value pairs, matching the layout the value-only property loop in
+     * {@link #searchString} expects.
+     */
+    private static String @Nullable [] propertiesWithKeyFields(SourceTextEntry ste) {
+        EntryKey key = ste.getKey();
+        List<String> keyFields = new ArrayList<>(6);
+        addKeyField(keyFields, SegmentProperties.FILE, key.file);
+        addKeyField(keyFields, SegmentProperties.ID, key.id);
+        addKeyField(keyFields, SegmentProperties.PATH, key.path);
+        String[] props = ste.getRawProperties();
+        if (keyFields.isEmpty()) {
+            return props;
+        }
+        int base = props == null ? 0 : props.length;
+        String[] result = new String[base + keyFields.size()];
+        if (props != null) {
+            System.arraycopy(props, 0, result, 0, base);
+        }
+        for (int i = 0; i < keyFields.size(); i++) {
+            result[base + i] = keyFields.get(i);
+        }
+        return result;
+    }
+
+    private static void addKeyField(List<String> target, String name, @Nullable String value) {
+        if (value != null && !value.isEmpty()) {
+            target.add(name);
+            target.add(value);
         }
     }
 

@@ -40,6 +40,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
 
+import org.omegat.util.StringUtil;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.gui.dialogs.ChoosePluginFile;
@@ -155,7 +156,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
             } catch (Exception ex) {
-                JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                JOptionPane.showConfirmDialog(panel, StringUtil.describeException(ex), OStrings.getString("ERROR_TITLE"),
                         JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
         });

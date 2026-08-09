@@ -182,7 +182,7 @@ stages:
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
-  condition: and(succeeded(), eq(variables.isRelease, true))
+  condition: eq(variables.isRelease, true)
   jobs:
   - job: CheckForRelease
     displayName: Test and Check

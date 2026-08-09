@@ -83,13 +83,17 @@ public class LanguageToolIssueProvider implements IIssueProvider {
 
     static class LanguageToolIssue implements IIssue {
 
-        static final Icon ICON = new SimpleColorIcon(EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
-        static final AttributeSet ERROR_STYLE;
-        static {
+        // created on demand so that color preference changes take effect
+        // without restarting the application
+        private static Icon icon() {
+            return new SimpleColorIcon(EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+        }
+
+        private static AttributeSet errorStyle() {
             SimpleAttributeSet attr = new SimpleAttributeSet();
             StyleConstants.setForeground(attr, EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
             StyleConstants.setBold(attr, true);
-            ERROR_STYLE = attr;
+            return attr;
         }
 
         private final SourceTextEntry ste;
@@ -104,7 +108,7 @@ public class LanguageToolIssueProvider implements IIssueProvider {
 
         @Override
         public Icon getIcon() {
-            return ICON;
+            return icon();
         }
 
         @Override
@@ -129,7 +133,7 @@ public class LanguageToolIssueProvider implements IIssueProvider {
             panel.firstTextPane.setText(ste.getSrcText());
             panel.lastTextPane.setText(targetText);
             StyledDocument doc = panel.lastTextPane.getStyledDocument();
-            doc.setCharacterAttributes(result.start, result.end - result.start, ERROR_STYLE, false);
+            doc.setCharacterAttributes(result.start, result.end - result.start, errorStyle(), false);
             panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
             return panel;
         }

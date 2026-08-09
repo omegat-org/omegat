@@ -101,13 +101,17 @@ class TerminologyIssueProvider implements IIssueProvider {
      *
      */
     static class TerminologyIssue implements IIssue {
-        private static final Icon ICON = new SimpleColorIcon(EditorColor.COLOR_TERMINOLOGY.getColor());
-        private static final AttributeSet ERROR_STYLE;
-        static {
+        // created on demand so that color preference changes take effect
+        // without restarting the application
+        private static Icon icon() {
+            return new SimpleColorIcon(EditorColor.COLOR_TERMINOLOGY.getColor());
+        }
+
+        private static AttributeSet errorStyle() {
             SimpleAttributeSet attr = new SimpleAttributeSet();
             StyleConstants.setForeground(attr, EditorColor.COLOR_TERMINOLOGY.getColor());
             StyleConstants.setBold(attr, true);
-            ERROR_STYLE = attr;
+            return attr;
         }
 
         private final String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
@@ -128,7 +132,7 @@ class TerminologyIssueProvider implements IIssueProvider {
 
         @Override
         public Icon getIcon() {
-            return ICON;
+            return icon();
         }
 
         @Override
@@ -217,7 +221,7 @@ class TerminologyIssueProvider implements IIssueProvider {
             StyledDocument doc = splitPanel.firstTextPane.getStyledDocument();
             for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(ste, glossaryEntry)) {
                 for (Token tok : toks) {
-                    doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
+                    doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), errorStyle(), false);
                 }
             }
             splitPanel.setMinimumSize(new Dimension(0, splitPanel.firstTextPane.getFont().getSize() * 6));

@@ -403,20 +403,50 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * Render the given source number in the digit script of the target token it
      * replaces, which is what makes a full-width target keep full-width digits
      * (feature request #1193). A target written in a system this code cannot
-     * write back, a Han numeral for one, receives plain digits instead: the right
-     * number in a foreign notation beats the wrong number in the right one.
+     * write back, a Tamil numeral for one, receives plain digits instead: the
+     * right number in a foreign notation beats the wrong number in the right
+     * one.
      */
     private static String renderLike(String number, String template) {
         int zero = digitZeroOf(template);
         if (zero < 0) {
+            // The target writes a numeral system, not digits: write the source
+            // value in that system, whatever system the source itself uses.
+            Optional<NumeralValueParser.Rational> sourceValue = NumeralValueParser.parseTokenValue(number,
+                    ALLOW_ROMAN);
+            if (sourceValue.isPresent()) {
+                if (BigInteger.ONE.equals(sourceValue.get().denominator())) {
+                    Optional<String> rendered = NumeralValueParser
+                            .renderInSystemOf(sourceValue.get().numerator(), template);
+                    if (rendered.isPresent()) {
+                        return rendered.get();
+                    }
+                } else {
+                    // A fraction value: a vulgar-fraction target receives the
+                    // matching precomposed glyph; a value without a glyph is
+                    // spelled out, because the right number in a foreign
+                    // notation beats the target's own, wrong one.
+                    Optional<String> glyph = NumeralValueParser
+                            .renderVulgarFractionOf(sourceValue.get(), template);
+                    return glyph.orElseGet(() -> sourceValue.get().numerator() + "/"
+                            + sourceValue.get().denominator());
+                }
+            }
             return StringUtil.normalizeWidth(number);
         }
         if (!hasDecimalDigit(number)) {
-            // The source number is written in an algorithmic system (a Han
-            // numeral) while the target writes digits: spell the value out.
-            Optional<BigInteger> value = NumeralValueParser.parseTokenWhole(number, ALLOW_ROMAN);
+            // The source number is written in a non-digit system (a Han
+            // numeral, a sign numeral such as cuneiform or Ethiopic) while
+            // the target writes digits: spell the whole value out.
+            Optional<NumeralValueParser.Rational> value = NumeralValueParser.parseTokenValue(number,
+                    ALLOW_ROMAN);
             if (value.isPresent()) {
-                return toDigitScript(value.get().toString(), zero);
+                if (BigInteger.ONE.equals(value.get().denominator())) {
+                    return toDigitScript(value.get().numerator().toString(), zero);
+                }
+                // A fractional sign value is spelled out as a digit fraction
+                // in the target's digit script.
+                return toDigitScript(value.get().numerator() + "/" + value.get().denominator(), zero);
             }
         }
         return toDigitScript(number, zero);

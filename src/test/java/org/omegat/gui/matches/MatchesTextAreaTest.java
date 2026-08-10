@@ -211,11 +211,12 @@ public class MatchesTextAreaTest {
         ITokenizer tok = new DefaultTokenizer();
 
         // A Roman numeral written with the dedicated code points is unambiguous
-        // and counts, so the numbers pair up and the source number is inserted.
+        // and counts, so the numbers pair up and the source value is written
+        // back in the target's own notation.
         String source = "Kapitel 7";
         String srcMatch = "Kapitel 4";
         String trgMatch = "Chapter Ⅳ";
-        assertEquals("Chapter 7",
+        assertEquals("Chapter Ⅶ",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
 
         // Written with Latin letters the same numeral is not a number here, so
@@ -461,13 +462,12 @@ public class MatchesTextAreaTest {
         assertEquals("n 𐒧",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
 
-        // Documented limit: there is no writer for the Han system here, so a Han
-        // target receives the value spelled out in digits. The number is right,
-        // the notation is not preserved.
+        // A Han target keeps its notation: the source value is written through
+        // the same ICU rule set that read the target number.
         source = "chapter 7";
         srcMatch = "chapter 12";
         trgMatch = "第 十二 章";
-        assertEquals("第 7 章",
+        assertEquals("第 七 章",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
     }
 
@@ -534,5 +534,153 @@ public class MatchesTextAreaTest {
         String trgMatch = "This is a sample sentence 8";
         assertEquals("This is a sample sentence 9",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, jaTok, enTok));
+    }
+
+    /**
+     * Sign numerals of the Number-Other category (Mayan and Kaktovik digits,
+     * Ethiopic composites, cuneiform and others) pair by value and are
+     * spelled out as digits in a digit-writing target.
+     */
+    @Test
+    public void testSubstituteSignNumerals() {
+        ITokenizer tok = new DefaultTokenizer();
+        String mayanNineteen = new String(Character.toChars(0x1D2F3));
+        String mayanEleven = new String(Character.toChars(0x1D2EB));
+        assertEquals("day 19 dawns",
+                MatchesTextArea.substituteNumbers("day " + mayanNineteen + " dawns",
+                        "day " + mayanEleven + " dawns", "day 11 dawns", tok, tok));
+
+        String ethiopic1976 = "፲፱፻፸፮";
+        String ethiopic1974 = "፲፱፻፸፬";
+        assertEquals("year 1976 begins",
+                MatchesTextArea.substituteNumbers("year " + ethiopic1976 + " begins",
+                        "year " + ethiopic1974 + " begins", "year 1974 begins", tok, tok));
+
+        String cuneiformLarge = new String(Character.toChars(0x12433));
+        String cuneiformHalf = new String(Character.toChars(0x12432));
+        assertEquals("tally 432000 sila",
+                MatchesTextArea.substituteNumbers("tally " + cuneiformLarge + " sila",
+                        "tally " + cuneiformHalf + " sila", "tally 216000 sila", tok, tok));
+    }
+
+    /**
+     * When the target match writes its number in a numeral system rather than
+     * digits, the source value is written in that same system: composed
+     * additively for sign systems, positionally for the base-twenty digit
+     * blocks, and through the ICU rule sets for the algorithmic systems.
+     */
+    @Test
+    public void testSubstituteAcrossNumeralSystems() {
+        ITokenizer tok = new DefaultTokenizer();
+
+        // Ethiopic source value 840, Aegean target: composed as 800 plus 40
+        String aegean600 = new String(Character.toChars(0x1011E));
+        String aegean840 = new String(Character.toChars(0x10120)) + new String(Character.toChars(0x10113));
+        assertEquals("toll " + aegean840 + " due",
+                MatchesTextArea.substituteNumbers("toll ፰፻፵ due", "toll ፮፻ due",
+                        "toll " + aegean600 + " due", tok, tok));
+
+        // Ethiopic source value 40, Mayan digit target: positional base twenty
+        String mayanNine = new String(Character.toChars(0x1D2E9));
+        String mayanForty = new String(Character.toChars(0x1D2E2)) + new String(Character.toChars(0x1D2E0));
+        assertEquals("count " + mayanForty + " tuns",
+                MatchesTextArea.substituteNumbers("count ፵ tuns", "count ፱ tuns",
+                        "count " + mayanNine + " tuns", tok, tok));
+
+        // Meroitic source value 900000, Ethiopic target: the rule set that
+        // writes the template back verbatim also writes the value - and no
+        // other, so a Roman or grouped-digit rendition would fail here.
+        String meroiticLarge = new String(Character.toChars(0x109F5));
+        String meroiticThousand = new String(Character.toChars(0x109DB));
+        assertEquals("stock ፺፼ kept",
+                MatchesTextArea.substituteNumbers("stock " + meroiticLarge + " kept",
+                        "stock " + meroiticThousand + " kept", "stock ፲፻ kept", tok, tok));
+    }
+
+    /**
+     * A sequence of numeral signs from one block reads as one number: additive
+     * sums for the historic systems, positional base twenty for the Mayan
+     * digit block - so those numbers pair and substitute like any other.
+     */
+    @Test
+    public void testSignSequencesReadAsOneNumber() {
+        ITokenizer tok = new DefaultTokenizer();
+
+        // Aegean 1984 written additively (1000, 900, 80, 4) in the source
+        String aegean1984 = new String(Character.toChars(0x10122)) + new String(Character.toChars(0x10121))
+                + new String(Character.toChars(0x10117)) + new String(Character.toChars(0x1010A));
+        assertEquals("anno 1984 scripta",
+                MatchesTextArea.substituteNumbers("year " + aegean1984 + " written", "year 1291 written",
+                        "anno 1291 scripta", tok, tok));
+
+        // Mayan two-digit positional source value: 1;0 in base twenty is 20
+        String mayanTwenty = new String(Character.toChars(0x1D2E1)) + new String(Character.toChars(0x1D2E0));
+        assertEquals("cycle 20 closes",
+                MatchesTextArea.substituteNumbers("cycle " + mayanTwenty + " closes", "cycle 13 closes",
+                        "cycle 13 closes", tok, tok));
+    }
+
+    /**
+     * A composition is only inserted when it is valid notation in the target's
+     * system: Roman forty is written subtractively rather than as a pile of
+     * twelves, counting rods are positional and cannot be composed (the value
+     * arrives in plain digits), and a fractional sign value has no digit
+     * spelling at all, so the target keeps its own number.
+     */
+    @Test
+    public void testInvalidCompositionsNeverReachTheTarget() {
+        ITokenizer tok = new DefaultTokenizer();
+
+        assertEquals("Chapter ⅩⅬ", MatchesTextArea.substituteNumbers("Kapitel 40", "Kapitel 4",
+                "Chapter Ⅳ", tok, tok));
+
+        String rods32 = new String(Character.toChars(0x1D36B)) + new String(Character.toChars(0x1D361));
+        assertEquals("silk 432 bolts", MatchesTextArea.substituteNumbers("bolt 432", "bolt 32",
+                "silk " + rods32 + " bolts", tok, tok));
+
+        // A fractional sign value is spelled out as a digit fraction.
+        assertEquals("mische 1/4 Tassen", MatchesTextArea.substituteNumbers("mix ꠰ cup", "mix 2 cup",
+                "mische 2 Tassen", tok, tok));
+    }
+
+    /**
+     * A genuine number in a segment substitutes even when a protected
+     * presentation form sits next to it, and the decoration numbers of the
+     * dingbat blocks are never treated as numbers at all.
+     */
+    @Test
+    public void testProtectedFormsDoNotBlockRealNumbers() {
+        ITokenizer tok = new DefaultTokenizer();
+        assertEquals("room 7 measures 3² units",
+                MatchesTextArea.substituteNumbers("room 7 measures 5² units", "room 4 measures 3² units",
+                        "room 4 measures 3² units", tok, tok));
+        assertEquals("❷ item 9", MatchesTextArea.substituteNumbers("❶ item 9", "❷ item 4",
+                "❷ item 4", tok, tok));
+    }
+
+    /**
+     * Presentation forms with a compatibility decomposition stay out of the
+     * substitution - a superscript exponent and an enclosed number must never
+     * be rewritten, so those target matches stay untouched even though the
+     * values differ. The precomposed vulgar fractions are real numbers and
+     * substitute like any other, glyph for glyph.
+     */
+    @Test
+    public void testPresentationFormsStayUntouched() {
+        ITokenizer tok = new DefaultTokenizer();
+        assertEquals("area 3² units", MatchesTextArea.substituteNumbers("area 5² units",
+                "area 3² units", "area 3² units", tok, tok));
+        assertEquals("floor ⑫ opens", MatchesTextArea.substituteNumbers("floor ⑪ opens",
+                "floor ⑫ opens", "floor ⑫ opens", tok, tok));
+        assertEquals("add ¼ measure", MatchesTextArea.substituteNumbers("add ¼ measure",
+                "add ½ measure", "add ½ measure", tok, tok));
+        assertEquals("knead ¾ portion", MatchesTextArea.substituteNumbers("knead ¾ portion",
+                "knead ⅔ portion", "knead ⅔ portion", tok, tok));
+        // A value no glyph carries (a Meroitic twelfth) is spelled out as a
+        // digit fraction: the right value in a foreign notation beats the
+        // target's own, wrong one.
+        String meroiticTwelfth = new String(Character.toChars(0x109F6));
+        assertEquals("pour 1/12 barrel", MatchesTextArea.substituteNumbers("pour " + meroiticTwelfth + " barrel",
+                "pour ⅚ barrel", "pour ⅚ barrel", tok, tok));
     }
 }

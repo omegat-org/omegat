@@ -494,11 +494,11 @@ public class NumeralValueParserTest {
         assertEquals(Optional.of("3/4"), NumeralValueParser.parseTokenValue("3/4", true).map(Object::toString));
         assertFalse(NumeralValueParser.parseTokenValue("mix", true).isPresent());
 
-        // Deliberate boundary: Number-Other code points are not numeral tokens,
-        // so an exponent, a vulgar fraction and an enclosed number stay out of
-        // the number comparisons even though they carry a numeric value.
+        // Deliberate boundary: an exponent and an enclosed number stay out of
+        // the number comparisons even though they carry a numeric value; the
+        // precomposed vulgar fractions are real numbers and count.
         assertFalse(NumeralValueParser.parseTokenValue("²", true).isPresent());
-        assertFalse(NumeralValueParser.parseTokenValue("¾", true).isPresent());
+        assertEquals(Optional.of("3/4"), NumeralValueParser.parseTokenValue("¾", true).map(Object::toString));
         assertFalse(NumeralValueParser.parseTokenValue("⑩", true).isPresent());
 
         // Deliberate boundary: a Roman form without I, V or X is a unit or an
@@ -534,5 +534,67 @@ public class NumeralValueParserTest {
                 NumeralValueParser.parseTokenValue("99999999999999999998", true));
     }
 
+    /**
+     * The Number Forms block is never composed additively - forty is not four
+     * twelves. The Roman rule sets write the value subtractively instead, in
+     * the template's case, preferring the precomposed forms one to twelve.
+     */
+    @Test
+    public void renderRomanFormsSubtractively() {
+        assertEquals(Optional.of("ⅩⅬ"), NumeralValueParser.renderInSystemOf(BigInteger.valueOf(40), "Ⅳ"));
+        assertEquals(Optional.of("ⅹⅼ"), NumeralValueParser.renderInSystemOf(BigInteger.valueOf(40), "ⅳ"));
+        assertEquals(Optional.of("ⅯⅭⅯⅬⅩⅩⅩⅠⅤ"),
+                NumeralValueParser.renderInSystemOf(BigInteger.valueOf(1984), "Ⅻ"));
+        assertEquals(Optional.of("Ⅶ"), NumeralValueParser.renderInSystemOf(BigInteger.valueOf(7), "Ⅻ"));
+        assertEquals(Optional.of("ⅶ"), NumeralValueParser.renderInSystemOf(BigInteger.valueOf(7), "ⅻ"));
+    }
 
+    /**
+     * Counting rods are positional above the tens, so a greedy additive
+     * spelling would be invalid notation: the block is read, never written.
+     */
+    @Test
+    public void countingRodsAreReadButNotWritten() {
+        String rods32 = new String(Character.toChars(0x1D36B)) + new String(Character.toChars(0x1D361));
+        assertEquals(Optional.of(BigInteger.valueOf(32)),
+                NumeralValueParser.parseTokenWhole(rods32, false));
+        assertEquals(Optional.empty(),
+                NumeralValueParser.renderInSystemOf(BigInteger.valueOf(432), rods32));
+    }
+
+    /**
+     * A fraction value renders as the precomposed vulgar-fraction glyph when
+     * the template is such a glyph and a glyph with exactly that value
+     * exists; anything else stays unwritable.
+     */
+    @Test
+    public void renderVulgarFractionsExactly() {
+        NumeralValueParser.Rational quarter = NumeralValueParser.parseValue("1/4").orElseThrow();
+        NumeralValueParser.Rational twoFifths = NumeralValueParser.parseValue("2/5").orElseThrow();
+        NumeralValueParser.Rational fiveSevenths = NumeralValueParser.parseValue("5/7").orElseThrow();
+
+        assertEquals(Optional.of("¼"), NumeralValueParser.renderVulgarFractionOf(quarter, "½"));
+        assertEquals(Optional.of("⅖"), NumeralValueParser.renderVulgarFractionOf(twoFifths, "⅓"));
+        // No precomposed glyph carries five sevenths.
+        assertEquals(Optional.empty(), NumeralValueParser.renderVulgarFractionOf(fiveSevenths, "½"));
+        // A non-fraction template is not written.
+        assertEquals(Optional.empty(), NumeralValueParser.renderVulgarFractionOf(quarter, "12"));
+    }
+
+    /**
+     * The sign numerals join the whole-token reading, so the match scorer
+     * pairs them just like the insertion step does.
+     */
+    @Test
+    public void wholeTokenFormReadsSignNumerals() {
+        String mayanTwenty = new String(Character.toChars(0x1D2E1))
+                + new String(Character.toChars(0x1D2E0));
+        assertEquals(Optional.of(BigInteger.valueOf(20)),
+                NumeralValueParser.parseTokenWhole(mayanTwenty, false));
+        String aegeanLarge = new String(Character.toChars(0x10133));
+        assertEquals(Optional.of(BigInteger.valueOf(90000)),
+                NumeralValueParser.parseTokenWhole(aegeanLarge, false));
+        // A fractional sign is a value, not a whole number.
+        assertFalse(NumeralValueParser.parseTokenWhole("꠰", false).isPresent());
+    }
 }

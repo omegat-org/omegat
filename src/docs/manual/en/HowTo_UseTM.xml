@@ -133,8 +133,8 @@
                		available for matching purposes.</para>
          </listitem>
          <listitem>
-            <para>If you switch to paragraph segmentation in a project that originally used 
-               <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"></link>,
+            <para>If you switch to paragraph segmentation in a project that originally used rules based segmentation (see the 
+               <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"></link> section),
                		    you can have OmegaT present matches assembled from existing segments by enabling
                the
                		    

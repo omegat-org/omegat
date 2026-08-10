@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header creationtool="OmegaT" creationtoolversion="6.2.0" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" segtype="sentence" srclang="en"/>
+  <body>
+    <tu>
+      <tuv xml:lang="en"><seg>The warehouse inventory lists 1750 clay jars.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Lagerverzeichnis nennt 1750 Tonkrüge.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Angkor census recorded ៩៨៧៦៥ households.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Volkszählung von Angkor erfasste 98765 Haushalte.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The chronicle dates the synod to the year ፲፱፻፸፬.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Chronik datiert die Synode auf das Jahr 1974.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The temple archive tallies 𒐲 measures of barley.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Tempelarchiv verzeichnet 216000 Maß Gerste.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Knossos tablet counts 𐄲 sheep.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Tafel aus Knossos zählt 80000 Schafe.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The stela marks day 𝋫 of the winal.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Stele markiert Tag 11 des Winal.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Inupiaq worksheet shows 𝋄 seals.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Inupiaq-Arbeitsblatt zeigt 4 Robben.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The cornerstone bears the year MMXXVI.</seg></tuv>
+      <tuv xml:lang="de"><seg>Der Grundstein trägt die Jahreszahl 2026.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The ledger totals 千九百八十四 copper coins.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Kontobuch summiert 1984 Kupfermünzen.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The offering table lists 𐧛 measures of incense.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Opfertafel führt 1000 Maß Weihrauch auf.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Pahawh primer spells the number 𖭝.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Pahawh-Fibel schreibt die Zahl 10000.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Attic inscription pledges 𐅆 drachmas.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die attische Inschrift gelobt 5000 Drachmen.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Ottoman ledger registers 𞴥 akce.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das osmanische Rechnungsbuch verzeichnet 10000 Akçe.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>Add ½ measure of honey to the mixture.</seg></tuv>
+      <tuv xml:lang="de"><seg>Der Mischung ½ Maß Honig hinzufügen.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Adlam textbook prints the year 𞥒𞥐𞥒𞥖.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Adlam-Schulbuch druckt die Jahreszahl 2026.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Medefaidrin hymnal numbers verse 𖺇.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Medefaidrin-Gesangbuch nummeriert Vers 7.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The customs house restates the toll of ፮፻ in the island ledger.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Zollhaus weist die Abgabe von 𐄞 im Insel-Hauptbuch aus.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The calendar priest transcribes ፱ tuns into the Long Count.</seg></tuv>
+      <tuv xml:lang="de"><seg>Der Kalenderpriester überträgt 𝋩 Tun in die Lange Zählung.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Kushite granary restates 𐧛 measures in the highland script.</seg></tuv>
+      <tuv xml:lang="de"><seg>Der kuschitische Speicher weist ፲፻ Maß in der Hochlandschrift aus.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Long Count tablet records 33 tuns.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Tafel der Langen Zählung verzeichnet 33 Tun.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The Uruk tally joins 𒐆 baskets.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Zählung aus Uruk fasst 8 Körbe zusammen.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The chronicle dates the council to year 4.</seg></tuv>
+      <tuv xml:lang="de"><seg>Die Chronik datiert das Konzil auf das Jahr Ⅳ.</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>The abacus ledger counts 32 coins.</seg></tuv>
+      <tuv xml:lang="de"><seg>Das Rechenbrett zählt 𝍫𝍡 Münzen.</seg></tuv>
+    </tu>
+  </body>
+</tmx>

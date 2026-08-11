@@ -220,13 +220,20 @@ class OmegatModulePlugin implements Plugin<Project> {
     /**
      * Returns true if the macCodesignIdentity property is set and the codesign tool is present on PATH.
      */
-    private static boolean shouldSignDylibs(Project project) {
-        if (!project.hasProperty('macCodesignIdentity')) return false
-        return ['which codesign', 'where codesign'].any {
+    private boolean shouldSignDylibs(Project project) {
+        project.hasProperty('macCodesignIdentity') && codesignPresent()
+    }
+
+    private boolean codesignPresent() {
+        ['where', 'which'].any { probe ->
             try {
-                def proc = it.execute()
-                proc.waitForProcessOutput()
-                return proc.exitValue() == 0
+                def result = execOperations.exec {
+                    commandLine(probe, 'codesign')
+                    ignoreExitValue = true
+                    standardOutput = OutputStream.nullOutputStream()
+                    errorOutput = OutputStream.nullOutputStream()
+                }
+                return result.exitValue == 0
             } catch (ignored) {
                 return false
             }

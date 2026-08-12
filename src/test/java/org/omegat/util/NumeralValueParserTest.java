@@ -597,4 +597,29 @@ public class NumeralValueParserTest {
         // A fractional sign is a value, not a whole number.
         assertFalse(NumeralValueParser.parseTokenWhole("꠰", false).isPresent());
     }
+
+    /**
+     * A separator-written digit token means every value its spelling
+     * allows: a grouped integer, a decimal fraction, or both, while an
+     * enumeration-like spelling means none.
+     */
+    @Test
+    public void separatedSpellingsListTheirReadings() {
+        assertEquals(java.util.List.of(Rational.ofInteger(BigInteger.valueOf(35000000))),
+                NumeralValueParser.parseSeparatedValues("35\u00A0000\u00A0000", false));
+        // Mixed separators do not group.
+        assertTrue(NumeralValueParser.parseSeparatedValues("35\u00A0000\u0020000", false)
+                .isEmpty());
+        assertEquals(java.util.List.of(Rational.of(BigInteger.ONE, BigInteger.TWO)),
+                NumeralValueParser.parseSeparatedValues("0,5", false));
+        // 1.000 reads as a grouped thousand and as a decimal one.
+        assertEquals(java.util.List.of(Rational.ofInteger(BigInteger.valueOf(1000)),
+                Rational.ofInteger(BigInteger.ONE)),
+                NumeralValueParser.parseSeparatedValues("1.000", false));
+        assertTrue(NumeralValueParser.parseSeparatedValues("5,6,7", false).isEmpty());
+        // Without separators the plain token parse answers.
+        assertEquals(java.util.List.of(Rational.ofInteger(BigInteger.valueOf(12))),
+                NumeralValueParser.parseSeparatedValues("\u2169\u2160\u2160", false));
+    }
 }
+

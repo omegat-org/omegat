@@ -152,6 +152,11 @@ public final class Styles {
          */
         COLOR_NBSP(OStrings.getString("COLOR_NBSP"), UIManager.getColor("OmegaT.nbsp")),
         /**
+         * Numeral underline color. Ships without a color, so the numeral
+         * marks stay unpainted until the user picks a color of their own.
+         */
+        COLOR_NUMERALS(OStrings.getString("COLOR_NUMERALS")),
+        /**
          * White space marker background color.
          */
         COLOR_WHITESPACE(OStrings.getString("COLOR_WHITESPACE"), UIManager.getColor("OmegaT.whiteSpace")),

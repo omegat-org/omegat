@@ -432,6 +432,20 @@ public class ProjectProperties {
     }
 
     /**
+     * Returns whether the tag checks compare numbers by value for this
+     * project, whatever the numeral system (feature request #465). Default,
+     * yes.
+     */
+    public boolean isCheckNumbersEnabled() {
+        return checkNumbersEnabled;
+    }
+
+    /** Sets whether the tag checks compare numbers by value for this project */
+    public void setCheckNumbersEnabled(boolean checkNumbersEnabled) {
+        this.checkNumbersEnabled = checkNumbersEnabled;
+    }
+
+    /**
      * Sets level(s) of TMs to be exported by project. Accepts three booleans as
      * arguments, corresponding to OmegaT, Level 1 and Level 2
      */
@@ -688,6 +702,7 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingEnabled;
     private boolean matchNumbersEnabled;
+    private boolean checkNumbersEnabled = true;
     private boolean supportDefaultTranslations;
     private boolean removeTags;
     private List<String> exportTmLevels;

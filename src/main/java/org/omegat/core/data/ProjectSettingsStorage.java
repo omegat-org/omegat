@@ -59,6 +59,12 @@ public final class ProjectSettingsStorage {
     /** Whether fuzzy matching considers numbers by value (SF #465). */
     public static final String KEY_MATCH_NUMBERS = "match_numbers";
 
+    /**
+     * Whether tag validation checks numbers by value (SF #465). Opt-out: an
+     * absent key means the default, enabled.
+     */
+    public static final String KEY_CHECK_NUMBERS = "check_numbers";
+
     private ProjectSettingsStorage() {
     }
 
@@ -89,11 +95,55 @@ public final class ProjectSettingsStorage {
     }
 
     /**
+     * The stored check_numbers value, null when file or key are absent (the
+     * caller treats that as the default, enabled).
+     */
+    public static @Nullable Boolean loadCheckNumbers(ProjectProperties config) {
+        File file = getFile(config);
+        if (!file.isFile()) {
+            return null;
+        }
+        Properties props = new Properties();
+        try (Reader in = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
+            props.load(in);
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "TEAM_MATCH_NUMBERS_APPLY_ERROR");
+            return null;
+        }
+        String value = props.getProperty(KEY_CHECK_NUMBERS);
+        return value == null ? null : Boolean.valueOf(value.trim());
+    }
+
+    /**
+     * Store the check_numbers value. The default (enabled) is represented
+     * by an absent key, so default projects need no settings file at all.
+     */
+    public static void saveCheckNumbers(ProjectProperties config, boolean enabled) throws IOException {
+        File file = getFile(config);
+        if (!file.isFile() && enabled) {
+            return;
+        }
+        Map<String, String> entries = loadEntries(file);
+        if (enabled) {
+            entries.remove(KEY_CHECK_NUMBERS);
+        } else {
+            entries.put(KEY_CHECK_NUMBERS, "false");
+        }
+        writeEntries(file, entries);
+    }
+
+    /**
      * Store the match_numbers value, keeping any other keys of the file so
      * future settings can share it.
      */
     public static void saveMatchNumbers(ProjectProperties config, boolean enabled) throws IOException {
         File file = getFile(config);
+        Map<String, String> entries = loadEntries(file);
+        entries.put(KEY_MATCH_NUMBERS, Boolean.toString(enabled));
+        writeEntries(file, entries);
+    }
+
+    private static Map<String, String> loadEntries(File file) throws IOException {
         Map<String, String> entries = new TreeMap<>();
         if (file.isFile()) {
             Properties existing = new Properties();
@@ -102,7 +152,10 @@ public final class ProjectSettingsStorage {
             }
             existing.stringPropertyNames().forEach(k -> entries.put(k, existing.getProperty(k)));
         }
-        entries.put(KEY_MATCH_NUMBERS, Boolean.toString(enabled));
+        return entries;
+    }
+
+    private static void writeEntries(File file, Map<String, String> entries) throws IOException {
         File dir = file.getParentFile();
         if (dir != null && !dir.isDirectory() && !dir.mkdirs()) {
             throw new IOException("Cannot create " + dir);

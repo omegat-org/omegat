@@ -1204,6 +1204,69 @@ public final class NumeralValueParser {
         return isNumeralToken(token, allowRoman) ? parseValue(token) : Optional.empty();
     }
 
+    /** The separator characters a digit token may be written with. */
+    private static final String DIGIT_SEPARATORS = ".,\u00A0\u202F\u2007 ";
+
+    /**
+     * The values a separator-written digit token can mean. A token grouped
+     * by one repeated separator into blocks of three digits reads as the
+     * grouped integer; a token with a single dot or comma also reads as a
+     * decimal fraction, since either character marks decimals somewhere. A
+     * spelling that allows both returns both, a token without separators
+     * falls back to {@link #parseTokenValue}, and an unreadable token
+     * returns no values at all.
+     */
+    public static List<Rational> parseSeparatedValues(String token, boolean allowRoman) {
+        List<String> groups = new ArrayList<>();
+        List<Character> separators = new ArrayList<>();
+        int groupStart = 0;
+        for (int i = 0; i < token.length(); i++) {
+            if (DIGIT_SEPARATORS.indexOf(token.charAt(i)) >= 0) {
+                groups.add(token.substring(groupStart, i));
+                separators.add(token.charAt(i));
+                groupStart = i + 1;
+            }
+        }
+        if (separators.isEmpty()) {
+            return parseTokenValue(token, allowRoman).map(List::of).orElse(List.of());
+        }
+        groups.add(token.substring(groupStart));
+        if (groups.stream().anyMatch(group -> digitsValue(group).isEmpty())) {
+            return List.of();
+        }
+        List<Rational> values = new ArrayList<>();
+        if (separators.stream().distinct().count() == 1 && groups.get(0).length() <= 3
+                && groups.stream().skip(1).allMatch(group -> group.length() == 3)) {
+            digitsValue(String.join("", groups)).map(Rational::ofInteger).ifPresent(values::add);
+        }
+        char separator = separators.get(0);
+        if (separators.size() == 1 && (separator == '.' || separator == ',')) {
+            BigInteger numerator = digitsValue(groups.get(0) + groups.get(1)).orElseThrow();
+            Rational decimal = Rational.of(numerator, BigInteger.TEN.pow(groups.get(1).length()));
+            if (!values.contains(decimal)) {
+                values.add(decimal);
+            }
+        }
+        return values;
+    }
+
+    /** The value of a run of decimal digits of any script, empty when it is none. */
+    private static Optional<BigInteger> digitsValue(String digits) {
+        if (digits.isEmpty()) {
+            return Optional.empty();
+        }
+        BigInteger value = BigInteger.ZERO;
+        for (int cp, i = 0; i < digits.length(); i += Character.charCount(cp)) {
+            cp = digits.codePointAt(i);
+            int digit = Character.digit(cp, 10);
+            if (digit < 0 || !Character.isDigit(cp)) {
+                return Optional.empty();
+            }
+            value = value.multiply(BigInteger.TEN).add(BigInteger.valueOf(digit));
+        }
+        return Optional.of(value);
+    }
+
     /**
      * Token boundaries for the real-value scanner. Sign, decimal point and the
      * fraction slashes stay inside a token so a signed/decimal/fraction number is

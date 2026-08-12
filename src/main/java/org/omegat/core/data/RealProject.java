@@ -262,6 +262,9 @@ public class RealProject implements IProject {
                     && (config.isMatchNumbersEnabled() || ProjectSettingsStorage.getFile(config).isFile())) {
                 ProjectSettingsStorage.saveMatchNumbers(config, config.isMatchNumbersEnabled());
             }
+            // Opt-out flag, absent key = default (enabled); only materialised
+            // when the project turns the check off.
+            ProjectSettingsStorage.saveCheckNumbers(config, config.isCheckNumbersEnabled());
         } finally {
             lockProject();
         }
@@ -370,6 +373,10 @@ public class RealProject implements IProject {
         MatchNumbersState state = resolveMatchNumbers(preSyncMatchNumbers, stored, identical, teamOnline);
         config.setMatchNumbersEnabled(state.effective);
         supersededLocalMatchNumbers = state.supersededLocal;
+        // The numeral value check is on unless the (possibly just synced)
+        // settings file disables it; no negotiation, the file state rules.
+        config.setCheckNumbersEnabled(
+                !Boolean.FALSE.equals(ProjectSettingsStorage.loadCheckNumbers(config)));
     }
 
     /** Resolution of the match_numbers setting after a load. */

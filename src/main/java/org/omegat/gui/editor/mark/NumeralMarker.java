@@ -45,7 +45,7 @@ import org.omegat.util.gui.Styles;
 /**
  * Marker underlining the numerals the numeral check watches over, in the
  * manner of the glossary match underline: every numeral of any writing
- * system, in the source and in the translation, outside the tags. The
+ * system, in the source and in the translation, outside the real tags. The
  * marker has no view option of its own - it follows the per-project numeral
  * check - and it ships without a color, so nothing is painted until the
  * user picks a color under Options &gt; Preferences &gt; Colours.
@@ -92,10 +92,23 @@ public class NumeralMarker implements IMarker {
         }
     }
 
-    /** The tags of the text; numerals inside them belong to the tag checks, not to this marker. */
+    /**
+     * The real tags of the text; numerals inside them belong to the tag
+     * checks, not to this marker. A protected part that is itself a numeral
+     * the parser reads - typically a number turned into a custom tag by the
+     * default custom tag expression - is no tag to this marker: the numeral
+     * check compares such a part by value, exactly like a plain numeral, so
+     * the marker underlines it too.
+     */
     private List<Tag> tagSpans(String text, SourceTextEntry ste) {
-        List<Tag> tags = ste == null ? new ArrayList<>()
-                : new ArrayList<>(TagUtil.buildTagList(text, ste.getProtectedParts()));
+        List<Tag> tags = new ArrayList<>();
+        if (ste != null) {
+            for (Tag tag : TagUtil.buildTagList(text, ste.getProtectedParts())) {
+                if (NumeralValueParser.parseTokenValue(tag.tag, false).isEmpty()) {
+                    tags.add(tag);
+                }
+            }
+        }
         Matcher m = PatternConsts.OMEGAT_TAG.matcher(text);
         while (m.find()) {
             tags.add(new Tag(m.start(), m.group()));

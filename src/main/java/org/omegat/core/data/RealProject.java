@@ -106,6 +106,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagPatternsStorage;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -251,6 +252,7 @@ public class RealProject implements IProject {
             SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
+            saveTagPatterns();
             ProjectFileStorage.writeProjectFile(config);
         } finally {
             lockProject();
@@ -293,6 +295,10 @@ public class RealProject implements IProject {
             SRX srx = config.getProjectSRX();
             Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
 
+            // Project-specific custom tag / removed-text expressions take
+            // effect before the initial source parse.
+            PatternConsts.applyProjectPatterns(config.getCustomTagPattern(), config.getRemoveTextPattern());
+
             loadTranslations();
             setProjectModified(true);
             saveProject(false);
@@ -316,6 +322,12 @@ public class RealProject implements IProject {
             // trouble in Tinseltown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
+        } finally {
+            if (!loaded) {
+                // An aborted creation must not leak the project expressions
+                // into the globally visible patterns.
+                PatternConsts.clearProjectPatterns();
+            }
         }
         Log.logInfoRB("LOG_DATAENGINE_CREATE_END");
     }
@@ -359,7 +371,13 @@ public class RealProject implements IProject {
                 // reload them again
                 config.loadProjectFilters();
                 config.loadProjectSRX();
+                config.loadProjectTagPatterns();
             }
+
+            // Project-specific custom tag / removed-text expressions take
+            // effect before any source file is parsed, and only after the
+            // team sync above delivered the current tag_patterns.xml.
+            PatternConsts.applyProjectPatterns(config.getCustomTagPattern(), config.getRemoveTextPattern());
 
             loadFilterSettings();
             loadSegmentationSettings();
@@ -440,9 +458,33 @@ public class RealProject implements IProject {
             if (!loaded) {
                 unlockProject();
             }
+        } finally {
+            if (!loaded) {
+                // An aborted load must not leak the project expressions into
+                // the globally visible patterns.
+                PatternConsts.clearProjectPatterns();
+            }
         }
 
         Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
+    }
+
+    /**
+     * Writes the project-specific tag expressions to omegat/tag_patterns.xml,
+     * or deletes the file when the project inherits the global preferences.
+     */
+    private void saveTagPatterns() throws IOException {
+        if (config.isTagPatternsLoadFailed()) {
+            // The file could not be read, so the in-memory state does not
+            // represent it: leave it in place for repair instead of letting
+            // a routine save delete or overwrite it.
+            return;
+        }
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern(config.getCustomTagPattern());
+        patterns.setRemoveTextPattern(config.getRemoveTextPattern());
+        TagPatternsStorage.save(patterns,
+                new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
     }
 
     /**
@@ -511,6 +553,7 @@ public class RealProject implements IProject {
     @Override
     public void closeProject() {
         loaded = false;
+        PatternConsts.clearProjectPatterns();
         flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();

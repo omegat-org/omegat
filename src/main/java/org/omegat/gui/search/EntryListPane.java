@@ -61,6 +61,7 @@ import javax.swing.text.StyledDocument;
 
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
@@ -147,9 +148,11 @@ class EntryListPane extends JTextPane {
         StaticUIUtils.makeCaretAlwaysVisible(this);
         StaticUIUtils.setCaretUpdateEnabled(this, false);
 
-        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyColors();
+        CoreEvents.registerColorsChangedEventListener(() -> {
+            applyColors();
+            repaint();
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -192,6 +195,12 @@ class EntryListPane extends JTextPane {
         autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, true);
         initInputMap(useTabForAdvance);
         setEditable(false);
+    }
+
+    private void applyColors() {
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     private void initInputMap(boolean useTabForAdvance) {

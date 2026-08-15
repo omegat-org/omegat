@@ -217,6 +217,8 @@ public class SearchWindowController {
         modelToType = Map.of(form.m_searchExactSearchRB.getModel(),
                 SearchExpression.SearchExpressionType.EXACT, form.m_searchKeywordSearchRB.getModel(),
                 SearchExpression.SearchExpressionType.KEYWORD, form.m_searchRegexpSearchRB.getModel(),
+                SearchExpression.SearchExpressionType.REGEXP, form.m_replaceExactSearchRB.getModel(),
+                SearchExpression.SearchExpressionType.EXACT, form.m_replaceRegexpSearchRB.getModel(),
                 SearchExpression.SearchExpressionType.REGEXP);
         setComponentNames();
         CoreEvents.registerFontChangedEventListener(this::setFont);
@@ -1096,18 +1098,20 @@ public class SearchWindowController {
         expression.replacement = form.m_replaceField.getEditor().getItem().toString();
     }
 
-    private SearchExpression.SearchExpressionType getSearchExpressionTypeForSearchMode() {
-        SearchExpression.SearchExpressionType searchExpressionType = modelToType
-                .get(form.m_searchExactSearchRB.getModel());
-        if (searchExpressionType == null) {
+    @VisibleForTesting
+    SearchExpression.SearchExpressionType getSearchExpressionTypeForSearchMode() {
+        ButtonModel selection = form.buttonGroupSearch.getSelection();
+        if (selection == null) {
             throw new IllegalStateException("None of radio button is selected.");
         }
-        return searchExpressionType;
+        return modelToType.get(selection);
     }
 
-    private SearchExpression.SearchExpressionType getSearchExpressionTypeForReplaceMode() {
-        SearchExpression.SearchExpressionType searchExpressionType = modelToType
-                .get(form.m_searchExactSearchRB.getModel());
+    @VisibleForTesting
+    SearchExpression.SearchExpressionType getSearchExpressionTypeForReplaceMode() {
+        ButtonModel selection = form.buttonGroupReplace.getSelection();
+        SearchExpression.SearchExpressionType searchExpressionType = selection == null ? null
+                : modelToType.get(selection);
         if (searchExpressionType == null
                 || searchExpressionType == SearchExpression.SearchExpressionType.KEYWORD) {
             throw new IllegalStateException("The radio button selection is not consistent.");

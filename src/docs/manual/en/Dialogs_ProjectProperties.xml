@@ -352,13 +352,10 @@
                <guibutton>Open</guibutton>
             </term>
             <listitem>
-               <para>The
-                  <guibutton>Open</guibutton> button next to each
-                  <guibutton>Browse</guibutton> button opens that resource folder in
+               <para>Click on the button to open the folder in
                   		  the system file manager. For the writable glossary, it opens the
                   		  folder that contains the glossary file.</para>
-               <para>The button is only available while the folder entered in the
-                  		  corresponding field exists.</para>
+               <para>The button is only available if the folder exists.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.file.locations.source.files">

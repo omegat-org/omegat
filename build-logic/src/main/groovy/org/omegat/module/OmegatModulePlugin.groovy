@@ -212,14 +212,6 @@ class OmegatModulePlugin implements Plugin<Project> {
         if (moduleDescription) {
             attributes['Plugin-Description'] = moduleDescription
         }
-
-        // Custom OmegaT module entries from gradle.properties
-        project.properties.each { key, value ->
-            if (key.startsWith('org.omegat.module.custom.')) {
-                def manifestKey = key.substring('org.omegat.module.custom.'.length())
-                attributes[manifestKey] = value.toString()
-            }
-        }
         return attributes
     }
 

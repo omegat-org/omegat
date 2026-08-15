@@ -1,5 +1,6 @@
-package org.omegat.module
+package org.omegat.gradle
 
+import groovy.io.FileType
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ArchiveOperations
 import org.gradle.api.file.DirectoryProperty
@@ -35,9 +36,10 @@ abstract class SignNativeJarTask extends DefaultTask {
         }
 
         def nativeLibs = []
-        staging.eachFileRecurse { f ->
-            if (f.name.endsWith('.dylib') || f.name.endsWith('.jnilib')) {
-                nativeLibs << f
+        staging.toPath().eachFileRecurse(FileType.FILES) { path ->
+            def name = path.fileName.toString()
+            if (name.endsWith('.dylib') || name.endsWith('.jnilib')) {
+                nativeLibs << path.toAbsolutePath().toString()
             }
         }
 

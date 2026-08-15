@@ -2,6 +2,7 @@ import java.util.zip.ZipFile
 
 import org.omegat.gradle.DistPathUtil
 import org.omegat.gradle.InjectedOps
+import org.omegat.gradle.SignNativeJarTask
 
 configurations {
     genMac
@@ -84,7 +85,7 @@ tasks.register('genMac') {
 }
 
 // Returns true if the given jar bundles at least one macOS native library.
-ext.jarContainsMacNativeLibs = { File jar ->
+def jarContainsMacNativeLibs = { File jar ->
     if (!jar.name.endsWith('.jar') || !jar.exists()) return false
     def zf = new ZipFile(jar)
     try {
@@ -119,38 +120,30 @@ def conditions = { List... items ->
  * and the original jar names in ext.signedNativeLibJarNames, so the distribution
  * can replace the unsigned originals with the signed jars.
  */
+def macSigned = project.hasProperty('macCodesignIdentity')
+def macCodesignIdentity = macSigned ? project.findProperty('macCodesignIdentity').toString() : null
+def entitlementsFile = project.layout.projectDirectory.file('release/mac-specific/java.entitlements')
 ext.makeNativeLibsSignTask = {
     def nativeLibJars = configurations.runtimeClasspath.files.findAll { jarContainsMacNativeLibs(it) }
     ext.signedNativeLibJarNames = nativeLibJars.collect { it.name }
-    ext.signedNativeLibJarTasks = nativeLibJars.collect { jar ->
-        def taskId = jar.name.replaceAll(/\.jar$/, '').replaceAll(/[^A-Za-z0-9]/, '_')
-        def contentsDir = layout.buildDirectory.dir("signedNativeLibs/${taskId}").get().asFile
-
-        def contentsTask = tasks.register("signNativeLibContents_${taskId}", Sync) {
+    ext.signedNativeLibJarTasks = nativeLibJars.collect { dep ->
+        def taskId = dep.name.replaceAll(/\.jar$/, '').replaceAll(/[^A-Za-z0-9]/, '_')
+        def signTask = tasks.register("signNativeLibContents_${taskId}", SignNativeJarTask) {
             onlyIf {
                 // Set macCodesignIdentity in e.g. local.properties
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'])
+                conditions([macSigned, 'Code signing property not set'])
             }
-            from zipTree(jar)
-            destinationDir = contentsDir
-            def macCodesignIdentity = project.property('macCodesignIdentity')
-            doLast {
-                def dylibs = fileTree(dir: destinationDir, includes: ['**/*.dylib', '**/*.jnilib']).files
-                injected.execOps.exec {
-                    commandLine(['codesign', '--deep', '--force',
-                            '--sign', macCodesignIdentity,
-                            '--timestamp',
-                            '--options', 'runtime',
-                            '--entitlements', file('release/mac-specific/java.entitlements')] + dylibs.toList())
-                }
-            }
+            sourceJar.set(dep)
+            signingIdentity.set(macCodesignIdentity)
+            entitlements.set(entitlementsFile)
+            stagingDir.set(layout.buildDirectory.dir("signedNativeLibs/${taskId}"))
         }
 
         tasks.register("signNativeLibJar_${taskId}", Jar) {
             onlyIf {
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'])
+                conditions([macSigned, 'Code signing property not set'])
             }
-            from contentsTask
+            from signTask
             archiveFileName.set(jar.name)
             destinationDirectory = layout.buildDirectory.dir('signedNativeLibJars')
         }
@@ -165,13 +158,10 @@ ext.makeMacTask = { args ->
     def appName = project.property('org.omegat.appName')
 
     def outDir = layout.buildDirectory.dir("install/${appName}-${versionPart}-${args.suffix}")
-    def entitlementsFile = project.layout.projectDirectory.file('release/mac-specific/java.entitlements')
     def jreDir = outDir.map {it.dir("OmegaT.app/Contents/PlugIns/jre.bundle")}
     def inputJar = layout.buildDirectory.file('libs/OmegaT.jar')
     def bundledJar = outDir.map { it.file("OmegaT.app/Contents/Java/OmegaT.jar")}
 
-    def macSigned = project.hasProperty('macCodesignIdentity')
-    def macCodesignIdentity = macSigned ? project.property('macCodesignIdentity').toString() : null
     def signedDistDir = layout.buildDirectory.file("install/${appName}-${versionPart}-${args.suffix}_Signed")
     def appBundleDir = layout.buildDirectory.file("install/${appName}-${versionPart}-${args.suffix}_Signed/OmegaT.app")
 

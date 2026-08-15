@@ -31,21 +31,20 @@
 </head><body>
 <h3 class="title">Let fuzzy matching understand numbers</h3>
 <p>Manuals, price lists and reports repeat the same sentence with different
-numbers: "Tighten to 12&nbsp;Nm" and "Tighten to 8&nbsp;Nm", or segments that
-are nothing but a date or an amount. Normally such number-only segments find
-no fuzzy match at all.</p>
-<p>Enable <b>Consider numbers in fuzzy matching</b> in the project properties,
-and the Fuzzy Matches pane starts comparing numbers by their value:</p>
+numbers: "Tighten to 12&nbsp;Nm" and "Tighten to 8&nbsp;Nm" &mdash; and
+number-only segments (a date, an amount) normally find no fuzzy match at
+all.</p>
+<p><b>Consider numbers in fuzzy matching</b> in the project properties makes
+the Fuzzy Matches pane compare numbers by value:</p>
 <ul>
-<li>Number-only segments (dates, quantities, prices) are offered as matches
-for each other, with a small penalty.</li>
-<li>Numbers count as equal across writing systems when their value is the
-same: XIV, &#21313;&#22235;, &#1633;&#1636; and the full-width
-&#65297;&#65300; all equal 14.</li>
-<li>A tooltip on every match shows how its score was computed &mdash; and
-warns you when the numbers of the match differ in value from your segment, so
-a wrong number never slips into your translation unnoticed.</li>
+<li>Number-only segments (dates, quantities, prices) match each other, with a
+small penalty.</li>
+<li>Equal value counts as equal across writing systems: XIV,
+&#21313;&#22235;, &#1633;&#1636; and the full-width &#65297;&#65300; all
+equal 14.</li>
+<li>A tooltip shows how each score was computed and warns when the match's
+numbers differ from your segment's &mdash; no wrong number slips in
+unnoticed.</li>
 </ul>
-<p>The option is stored in the project, so the whole team benefits from
-it.</p>
+<p>Stored in the project, so the whole team benefits.</p>
 </body></html>

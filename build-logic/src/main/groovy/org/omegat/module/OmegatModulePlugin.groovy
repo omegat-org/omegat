@@ -76,18 +76,37 @@ class OmegatModulePlugin implements Plugin<Project> {
 
         Map<String, Object> manifestAttrs = buildManifestAttributes(project)
 
+        def macSigningIdentity = project.findProperty('macCodesignIdentity')
+        def entitlementsFile = project.rootProject.layout.projectDirectory
+                .file('release/mac-specific/java.entitlements')
+
+        def resolvedJars = project.configurations.getByName('runtimeClasspath').resolve()
+
+        def plainEntries = []
+        def signingTasks = []
+
+        resolvedJars.each { dep ->
+            if (dep.directory) {
+                plainEntries << dep
+                return
+            }
+            if (macSigningIdentity && containsNativeLibs(dep)) {
+                def jarBaseName = dep.name.replaceAll(/\.jar$/, '')
+                signingTasks << project.tasks.register("sign${jarBaseName.capitalize()}NativeLibs", SignNativeJarTask) {
+                    sourceJar.set(dep)
+                    signingIdentity.set(macSigningIdentity as String)
+                    entitlements.set(entitlementsFile)
+                    stagingDir.set(project.layout.buildDirectory.dir("signedJarContents/${jarBaseName}"))
+                }
+            } else {
+                plainEntries << dep
+            }
+        }
+
         project.tasks.named("jar", Jar).configure { Jar jarTask ->
-            from({
-                project.configurations.getByName("runtimeClasspath")
-                        .resolve()
-                        .collect { dep ->
-                            if (dep.directory) return dep
-                            if (shouldSignDylibs(project) && containsNativeLibs(dep)) {
-                                return project.fileTree(signAndExtractJar(project, dep))
-                            }
-                            return project.zipTree(dep)
-                        }
-            })
+            from(plainEntries.collect { project.zipTree(it) })
+            signingTasks.each { st -> from(st.map { it.stagingDir }) }
+
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
             exclude "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA"
             destinationDirectory.set(project.rootProject.layout.buildDirectory.dir("modules"))
@@ -215,29 +234,6 @@ class OmegatModulePlugin implements Plugin<Project> {
     private static String getPropertyOrDefault(Project project, String propertyName, String defaultValue) {
         return project.hasProperty(propertyName) ?
                 project.property(propertyName).toString() : defaultValue
-    }
-
-    /**
-     * Returns true if the macCodesignIdentity property is set and the codesign tool is present on PATH.
-     */
-    private boolean shouldSignDylibs(Project project) {
-        project.hasProperty('macCodesignIdentity') && codesignPresent()
-    }
-
-    private boolean codesignPresent() {
-        ['where', 'which'].any { probe ->
-            try {
-                def result = execOperations.exec {
-                    commandLine(probe, 'codesign')
-                    ignoreExitValue = true
-                    standardOutput = OutputStream.nullOutputStream()
-                    errorOutput = OutputStream.nullOutputStream()
-                }
-                return result.exitValue == 0
-            } catch (ignored) {
-                return false
-            }
-        }
     }
 
     /**

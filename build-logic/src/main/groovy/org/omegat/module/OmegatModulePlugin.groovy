@@ -17,6 +17,8 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 import org.gradle.process.ExecOperations
 
+import org.omegat.gradle.SignNativeJarTask
+
 import javax.inject.Inject
 import java.util.zip.ZipFile
 
@@ -76,6 +78,10 @@ class OmegatModulePlugin implements Plugin<Project> {
 
         Map<String, Object> manifestAttrs = buildManifestAttributes(project)
 
+        def macSigningIdentity = project.findProperty('macCodesignIdentity')
+        def entitlementsFile = project.rootProject.layout.projectDirectory
+                .file('release/mac-specific/java.entitlements')
+
         // Jars the application itself ships in lib/ must not be merged into the
         // module fat jar: modules load through a parent-first class loader, so the
         // application's copy always wins and a bundled duplicate is unreachable dead
@@ -83,29 +89,58 @@ class OmegatModulePlugin implements Plugin<Project> {
         // soon as either side changes the version, the artifact is bundled again.
         // Reaching into the root project's configurations will need rework once
         // Gradle enforces isolated projects, like the plugin's other rootProject uses.
-        def coreRuntimeClasspath = project.rootProject.configurations.getByName("runtimeClasspath")
+        def coreRuntimeClasspath = project.rootProject.configurations.named("runtimeClasspath")
+        def moduleRuntimeClasspath = project.configurations.named("runtimeClasspath")
 
-        project.tasks.named("jar", Jar).configure { Jar jarTask ->
-            from({
-                Set<String> coreJarNames = coreRuntimeClasspath.files.collect { it.name } as Set
-                project.configurations.getByName("runtimeClasspath")
-                        .resolve()
-                        .findAll { dep -> !(dep.name in coreJarNames) }
-                        .collect { dep ->
-                            if (dep.directory) return dep
-                            if (shouldSignDylibs(project) && containsNativeLibs(dep)) {
-                                return project.fileTree(signAndExtractJar(project, dep))
-                            }
-                            return project.zipTree(dep)
-                        }
-            })
-            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-            exclude "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA"
-            destinationDirectory.set(project.rootProject.layout.buildDirectory.dir("modules"))
-            archiveBaseName.set(getPropertyOrDefault(project, 'org.omegat.module.packageName', project.name))
-            manifest {
-                if (!manifestAttrs.isEmpty()) {
-                    attributes(manifestAttrs)
+        project.afterEvaluate {
+            def plainEntries = []
+            def signingTasks = []
+
+            Set<String> coreJarNames = coreRuntimeClasspath.get().files.collect { it.name } as Set
+
+            moduleRuntimeClasspath.get().files.each { dep ->
+                if (dep.name in coreJarNames) {
+                    return
+                }
+
+                if (dep.directory) {
+                    plainEntries << dep
+                    return
+                }
+
+                if (macSigningIdentity && containsNativeLibs(dep)) {
+                    def jarBaseName = dep.name.replaceAll(/\.jar$/, '')
+                    def safeTaskName = jarBaseName.replaceAll(/[^A-Za-z0-9_]/, '_').capitalize()
+
+                    signingTasks << project.tasks.register("sign${safeTaskName}NativeLibs", SignNativeJarTask) {
+                        sourceJar.set(dep)
+                        signingIdentity.set(macSigningIdentity as String)
+                        entitlements.set(entitlementsFile)
+                        stagingDir.set(project.layout.buildDirectory.dir("signedJarContents/${jarBaseName}"))
+                    }
+                } else {
+                    plainEntries << dep
+                }
+            }
+
+            project.tasks.named("jar", Jar).configure { Jar jarTask ->
+                from(plainEntries.collect { entry ->
+                    entry.directory ? entry : project.zipTree(entry)
+                })
+
+                signingTasks.each { signTask ->
+                    dependsOn(signTask)
+                    from(signTask.map { it.stagingDir })
+                }
+
+                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                exclude "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA"
+                destinationDirectory.set(project.rootProject.layout.buildDirectory.dir("modules"))
+                archiveBaseName.set(getPropertyOrDefault(project, 'org.omegat.module.packageName', project.name))
+                manifest {
+                    if (!manifestAttrs.isEmpty()) {
+                        attributes(manifestAttrs)
+                    }
                 }
             }
         }
@@ -204,14 +239,6 @@ class OmegatModulePlugin implements Plugin<Project> {
         if (moduleDescription) {
             attributes['Plugin-Description'] = moduleDescription
         }
-
-        // Custom OmegaT module entries from gradle.properties
-        project.properties.each { key, value ->
-            if (key.startsWith('org.omegat.module.custom.')) {
-                def manifestKey = key.substring('org.omegat.module.custom.'.length())
-                attributes[manifestKey] = value.toString()
-            }
-        }
         return attributes
     }
 
@@ -229,22 +256,6 @@ class OmegatModulePlugin implements Plugin<Project> {
     }
 
     /**
-     * Returns true if the macCodesignIdentity property is set and the codesign tool is present on PATH.
-     */
-    private static boolean shouldSignDylibs(Project project) {
-        if (!project.hasProperty('macCodesignIdentity')) return false
-        return ['which codesign', 'where codesign'].any {
-            try {
-                def proc = it.execute()
-                proc.waitForProcessOutput()
-                return proc.exitValue() == 0
-            } catch (ignored) {
-                return false
-            }
-        }
-    }
-
-    /**
      * Returns true if the given jar file contains at least one *.dylib entry.
      */
     private static boolean containsNativeLibs(File jar) {
@@ -255,33 +266,6 @@ class OmegatModulePlugin implements Plugin<Project> {
         } finally {
             zipFile.close()
         }
-    }
-
-    /**
-     * Extracts the given dependency jar to a per-jar staging directory, signs all *.dylib files
-     * inside it with the Apple developer identity from the macCodesignIdentity project property,
-     * and returns the staging directory.  The caller should include this directory in the fat-jar
-     * instead of the original zipTree so that the signed native libraries end up in the module jar.
-     */
-    private File signAndExtractJar(Project project, File jar) {
-        def jarBaseName = jar.name.replaceAll(/\.jar$/, '')
-        def stagingDir = project.layout.buildDirectory.dir("signedJarContents/${jarBaseName}").get().asFile
-
-        fileSystemOperations.copy {
-            from project.zipTree(jar)
-            into stagingDir
-        }
-
-        def nativeLibs = project.fileTree(dir: stagingDir, includes: ['**/*.dylib', '**/*.jnilib']).files.toList()
-        execOperations.exec {
-            commandLine(['codesign', '--deep', '--force',
-                    '--sign', project.property('macCodesignIdentity'),
-                    '--timestamp',
-                    '--options', 'runtime',
-                    '--entitlements', project.rootProject.file('release/mac-specific/java.entitlements')] + nativeLibs)
-        }
-
-        return stagingDir
     }
 
     /**

@@ -29,63 +29,69 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import org.omegat.util.OStrings;
+import org.omegat.gui.editor.SegmentMetadataConfigDialog.ColumnTableModel;
+import org.omegat.gui.editor.SegmentMetadataGutter.Column;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
- * Tests for the editor pane settings menu.
+ * Tests for the column configuration of the segment metadata gutter.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
-public class EditorPaneMenuTest {
+public class SegmentMetadataConfigDialogTest {
 
     private AtomicInteger refreshes;
-    private JPopupMenu popup;
+    private ColumnTableModel model;
 
     @Before
     public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
         refreshes = new AtomicInteger();
-        popup = new JPopupMenu();
-        new EditorPaneMenu(refreshes::incrementAndGet, column -> 60, () -> 120, () -> 14)
-                .populatePaneMenu(popup);
+        model = new ColumnTableModel(refreshes::incrementAndGet);
     }
 
     @Test
-    public void testOffersThePreferencesShortcut() {
-        // the gutter toggle, the configuration dialog, a separator, the
-        // preferences shortcut
-        assertEquals(4, popup.getComponentCount());
-        assertTrue(popup.getComponent(2) instanceof JSeparator);
-        JMenuItem prefs = (JMenuItem) popup.getComponent(3);
-        assertEquals(OStrings.getString("GUI_EDITORWINDOW_OPEN_PREFS"), prefs.getText());
-        assertTrue(prefs.isEnabled());
-        assertEquals(1, prefs.getActionListeners().length);
-
-        JMenuItem configure = (JMenuItem) popup.getComponent(1);
-        assertEquals(OStrings.getString("GUI_EDITORWINDOW_GUTTER_CONFIGURE"), configure.getText());
-        assertEquals(1, configure.getActionListeners().length);
+    public void testOffersOneRowPerColumnInDisplayOrder() {
+        assertEquals(Column.values().length, model.getRowCount());
+        assertEquals(Column.NUMBER.getLabel(), model.getValueAt(0, 2));
+        assertEquals(Boolean.TRUE, model.getValueAt(0, 0));
+        assertEquals(Boolean.FALSE, model.getValueAt(model.getRowCount() - 1, 0));
+        assertTrue(model.isCellEditable(0, 0));
+        assertFalse(model.isCellEditable(0, 1));
+        assertFalse(model.isCellEditable(0, 2));
     }
 
     @Test
     public void testTheToggleWritesThePreferenceAndRefreshes() {
-        JCheckBoxMenuItem show = (JCheckBoxMenuItem) popup.getComponent(0);
-        assertEquals(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"), show.getText());
-        assertFalse("The gutter is off by default", show.isSelected());
-
-        show.doClick();
-        assertTrue(Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER));
+        model.setValueAt(Boolean.FALSE, 0, 0);
+        assertFalse("The default-on column must persist its deselection",
+                Column.NUMBER.isEnabled());
         assertEquals(1, refreshes.get());
+    }
+
+    @Test
+    public void testMovingARowPersistsTheDisplayOrder() {
+        model.moveRow(0, Column.values().length);
+        List<Column> order = Column.inDisplayOrder();
+        assertEquals(Column.STATUS, order.get(0));
+        assertEquals(Column.NUMBER, order.get(order.size() - 1));
+        assertEquals(1, refreshes.get());
+        assertEquals(Column.STATUS.getLabel(), model.getValueAt(0, 2));
+    }
+
+    @Test
+    public void testTheDisplayOrderSurvivesUnknownNames() {
+        Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER_ORDER, "DATE,UNSINN,DATE");
+        List<Column> order = Column.inDisplayOrder();
+        assertEquals(Column.values().length, order.size());
+        assertEquals(Column.DATE, order.get(0));
+        assertEquals(Column.NUMBER, order.get(1));
     }
 }

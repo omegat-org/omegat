@@ -26,30 +26,91 @@
 package org.omegat.gui.editor;
 
 import java.util.Objects;
+import java.util.function.IntSupplier;
+import java.util.function.ToIntFunction;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+
+import org.jspecify.annotations.Nullable;
 
 import org.omegat.core.Core;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.IPaneMenu;
 
 /**
- * Settings menu of the editor pane. Offers a shortcut to the editor
- * preferences.
+ * Settings menu of the editor pane. Offers the segment metadata gutter
+ * configuration and a shortcut to the editor preferences.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
 final class EditorPaneMenu implements IPaneMenu {
 
+    /** Notified after a change of the gutter preferences. */
+    private final Runnable displaySettingsListener;
+
+    /** The effective width of a gutter column, presets the width sliders. */
+    private final ToIntFunction<SegmentMetadataGutter.Column> columnWidthProvider;
+
+    /** The effective total gutter width, shown in the configuration dialog. */
+    private final IntSupplier totalWidthProvider;
+
+    /** The editor font size, the reference for the chosen widths. */
+    private final IntSupplier fontSizeProvider;
+
+    /** The dialog opens at most once; a second call brings it to the front. */
+    private @Nullable SegmentMetadataConfigDialog configDialog;
+
+    EditorPaneMenu(Runnable displaySettingsListener,
+            ToIntFunction<SegmentMetadataGutter.Column> columnWidthProvider,
+            IntSupplier totalWidthProvider, IntSupplier fontSizeProvider) {
+        this.displaySettingsListener = displaySettingsListener;
+        this.columnWidthProvider = columnWidthProvider;
+        this.totalWidthProvider = totalWidthProvider;
+        this.fontSizeProvider = fontSizeProvider;
+    }
+
     @Override
     public void populatePaneMenu(JPopupMenu menu) {
+        menu.add(createToggle(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"),
+                Preferences.EDITOR_METADATA_GUTTER,
+                Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER)));
+        JMenuItem configure = new JMenuItem(OStrings.getString("GUI_EDITORWINDOW_GUTTER_CONFIGURE"));
+        configure.addActionListener(e -> showConfigDialog());
+        menu.add(configure);
+        menu.addSeparator();
+
         JMenuItem prefs = new JMenuItem(OStrings.getString("GUI_EDITORWINDOW_OPEN_PREFS"));
         prefs.addActionListener(e -> new PreferencesWindowController().show(
                 Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame(),
                 EditingBehaviorController.class));
         menu.add(prefs);
+    }
+
+    private void showConfigDialog() {
+        if (configDialog != null && configDialog.isDisplayable()) {
+            configDialog.setVisible(true);
+            configDialog.toFront();
+            configDialog.requestFocus();
+            return;
+        }
+        configDialog = new SegmentMetadataConfigDialog(
+                Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame(),
+                displaySettingsListener, columnWidthProvider, totalWidthProvider,
+                fontSizeProvider);
+        configDialog.setVisible(true);
+    }
+
+    private JMenuItem createToggle(String label, String prefKey, boolean selected) {
+        JCheckBoxMenuItem item = new JCheckBoxMenuItem(label, selected);
+        item.addActionListener(e -> {
+            Preferences.setPreference(prefKey, item.isSelected());
+            displaySettingsListener.run();
+        });
+        return item;
     }
 }

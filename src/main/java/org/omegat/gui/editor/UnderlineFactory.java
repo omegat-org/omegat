@@ -57,6 +57,11 @@ public class UnderlineFactory {
         }
 
         @Override
+        public Color getUnderlineColor() {
+            return color;
+        }
+
+        @Override
         protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
             g.setColor(color);
 
@@ -71,6 +76,11 @@ public class UnderlineFactory {
 
         public SolidBoldUnderliner(final Color c) {
             color = c;
+        }
+
+        @Override
+        public Color getUnderlineColor() {
+            return color;
         }
 
         @Override
@@ -89,6 +99,11 @@ public class UnderlineFactory {
 
         public WaveUnderline(final Color c) {
             color = c;
+        }
+
+        @Override
+        public Color getUnderlineColor() {
+            return color;
         }
 
         @Override
@@ -113,6 +128,11 @@ public class UnderlineFactory {
     }
 
     public abstract static class Underliner extends LayeredHighlighter.LayerPainter {
+
+        /** The colour of the underline; null when unknown. */
+        public @Nullable Color getUnderlineColor() {
+            return null;
+        }
 
         public @Nullable Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds, JTextComponent c, View view) {
             Rectangle rect = null;

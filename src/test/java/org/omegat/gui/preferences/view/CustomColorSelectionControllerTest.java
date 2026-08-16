@@ -28,13 +28,59 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
+import java.util.Comparator;
 
 import org.junit.Test;
+
+import org.omegat.gui.preferences.view.CustomColorSelectionController.ColorColumns;
 
 /**
  * @author stephan.pakebusch at zollsoft.de
  */
 public class CustomColorSelectionControllerTest {
+
+    @Test
+    public void hsbComparatorGroupsUnsetThenGreyThenChromatic() {
+        Comparator<Color> cmp = CustomColorSelectionController.hsbComparator();
+        // Unset (null, "follows the look and feel") sorts before any real colour.
+        assertTrue(cmp.compare(null, Color.GRAY) < 0);
+        // Greys (achromatic) sort before chromatic colours.
+        assertTrue(cmp.compare(Color.GRAY, Color.RED) < 0);
+        // Within the greys, darker before lighter.
+        assertTrue(cmp.compare(Color.DARK_GRAY, Color.LIGHT_GRAY) < 0);
+        // Within the chromatic colours, the hue wheel orders red before blue.
+        assertTrue(cmp.compare(Color.RED, Color.BLUE) < 0);
+        // Equal colours compare equal (stable grouping of identical values).
+        assertEquals(0, cmp.compare(Color.RED, new Color(255, 0, 0)));
+    }
+
+    @Test
+    public void luminanceComparatorOrdersDarkBeforeLight() {
+        Comparator<Color> cmp = CustomColorSelectionController.luminanceComparator();
+        // Unset sorts first, then by perceived brightness, darkest first.
+        assertTrue(cmp.compare(null, Color.BLACK) < 0);
+        assertTrue(cmp.compare(Color.BLACK, Color.WHITE) < 0);
+        // Blue is far less luminant than green under Rec. 709 weighting.
+        assertTrue(cmp.compare(Color.BLUE, Color.GREEN) < 0);
+    }
+
+    @Test
+    public void hexComparatorSortsUnsetFirstThenByHexValue() {
+        Comparator<Color> cmp = CustomColorSelectionController.hexComparator();
+        assertTrue(cmp.compare(null, Color.BLACK) < 0);
+        assertTrue(cmp.compare(Color.BLACK, Color.WHITE) < 0);
+        // Lexicographic on #rrggbb: red channel dominates.
+        assertTrue(cmp.compare(new Color(0x10, 0xff, 0xff), new Color(0x20, 0x00, 0x00)) < 0);
+    }
+
+    @Test
+    public void runningNumberIsTheFirstColumn() {
+        // The "#" column must be the leading column so that it doubles as the
+        // default sort order (natural EditorColor enum order).
+        assertEquals(0, ColorColumns.NUMBER.ordinal());
+        assertEquals(ColorColumns.NUMBER, ColorColumns.values()[0]);
+        assertEquals(ColorColumns.NUMBER, ColorColumns.get(0));
+    }
 
     @Test
     public void colorSortKeyFormatsAsLowercaseHex() {

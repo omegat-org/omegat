@@ -31,29 +31,35 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.SwingConstants;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.CoreEvents;
@@ -116,19 +122,57 @@ public class CustomColorSelectionController extends BasePreferencesController {
                 .setCellRenderer(swatchRenderer);
         panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.INTERNAL.index)
                 .setCellRenderer(textRenderer);
-        // Filter as the user types and let header clicks sort each column; the
-        // colour column sorts by its hex value.
-        sorter = new TableRowSorter<>(model);
-        sorter.setComparator(ColorColumns.COLOR.index,
-                Comparator.comparing(CustomColorSelectionController::colorSortKey));
+        // Give the running-number column 8px of horizontal padding so the
+        // numbers are not cramped against the column edges, right-aligned.
+        DefaultTableCellRenderer numberRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 8));
+                return this;
+            }
+        };
+        numberRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.NUMBER.index)
+                .setCellRenderer(numberRenderer);
+        // Filter as the user types and let header clicks sort each column. The
+        // colour column is special: repeated clicks rotate through several
+        // colour orderings (see ColorRowSorter), so give its header a tooltip
+        // that explains this. Other columns just toggle ascending/descending.
+        JTableHeader tableHeader = new JTableHeader(panel.colorStylesTable.getColumnModel()) {
+            @Override
+            public String getToolTipText(MouseEvent event) {
+                int viewColumn = columnAtPoint(event.getPoint());
+                int modelColumn = viewColumn < 0 ? -1
+                        : panel.colorStylesTable.convertColumnIndexToModel(viewColumn);
+                if (modelColumn == ColorColumns.COLOR.index) {
+                    return OStrings.getString("GUI_COLORS_COLUMN_COLOR_SORT_TOOLTIP");
+                }
+                return null;
+            }
+        };
+        // Pin the columns so the running-number column stays first and cannot be
+        // dragged out of place; resizing column widths stays enabled.
+        tableHeader.setReorderingAllowed(false);
+        panel.colorStylesTable.setTableHeader(tableHeader);
+        sorter = new ColorRowSorter(model);
         panel.colorStylesTable.setRowSorter(sorter);
-        // Start sorted by the internal identifier, ascending.
+        // Start sorted by the running number, ascending, i.e. in the natural
+        // EditorColor enum order.
         sorter.setSortKeys(Collections.singletonList(
-                new RowSorter.SortKey(ColorColumns.INTERNAL.index, SortOrder.ASCENDING)));
+                new RowSorter.SortKey(ColorColumns.NUMBER.index, SortOrder.ASCENDING)));
         // Force a minimum width on the colour column so its swatch is never
         // clipped, regardless of the header/content measurement.
         panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.COLOR.index)
                 .setMinWidth(rowHeight + 8);
+        // The running-number column carries the default sort, so its header also
+        // paints a sort arrow that the width measurement does not account for.
+        // Reserve room for the title plus the arrow so "#" is never truncated.
+        int numberColumnWidth = tableHeader.getFontMetrics(tableHeader.getFont())
+                .stringWidth(ColorColumns.NUMBER.getTitle()) + rowHeight + 8;
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.NUMBER.index)
+                .setMinWidth(numberColumnWidth);
         // Size every column to its own content (the item column ends up as wide
         // as its widest text cell) and turn off auto-resize, so the layout does
         // not depend on the viewport width - it renders correctly even with no
@@ -177,6 +221,72 @@ public class CustomColorSelectionController extends BasePreferencesController {
     static String colorSortKey(Color color) {
         return color == null ? "" : String.format("#%02x%02x%02x", color.getRed(), color.getGreen(),
                 color.getBlue());
+    }
+
+    /** Saturation at or below which a colour is treated as grey (achromatic). */
+    private static final float ACHROMATIC_SATURATION = 0.05f;
+
+    /**
+     * Compares colours lexicographically by their {@code #rrggbb} hex value.
+     * Unset colours (null, i.e. "follows the look and feel") sort first.
+     */
+    static Comparator<Color> hexComparator() {
+        return Comparator.comparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    /**
+     * Compares colours the way a colour wheel groups them: unset colours first,
+     * then greys ordered by brightness, then chromatic colours ordered by hue,
+     * saturation and brightness. A trailing hex tie-break keeps the order total
+     * and stable.
+     */
+    static Comparator<Color> hsbComparator() {
+        return Comparator.comparingInt(CustomColorSelectionController::colorGroup)
+                .thenComparingDouble(CustomColorSelectionController::hue)
+                .thenComparingDouble(CustomColorSelectionController::saturation)
+                .thenComparingDouble(CustomColorSelectionController::brightness)
+                .thenComparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    /**
+     * Compares colours by perceived brightness (Rec. 709 relative luminance),
+     * darkest first. Unset colours sort first, with a trailing hex tie-break.
+     */
+    static Comparator<Color> luminanceComparator() {
+        return Comparator.comparingInt(CustomColorSelectionController::nullGroup)
+                .thenComparingDouble(CustomColorSelectionController::luminance)
+                .thenComparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    private static int nullGroup(Color color) {
+        return color == null ? 0 : 1;
+    }
+
+    private static int colorGroup(Color color) {
+        if (color == null) {
+            return 0;
+        }
+        return saturation(color) <= ACHROMATIC_SATURATION ? 1 : 2;
+    }
+
+    private static float hue(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[0];
+    }
+
+    private static float saturation(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[1];
+    }
+
+    private static float brightness(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[2];
+    }
+
+    private static double luminance(Color color) {
+        return color == null ? 0d
+                : 0.2126 * color.getRed() + 0.7152 * color.getGreen() + 0.0722 * color.getBlue();
     }
 
     private Optional<EditorColor> getSelection() {
@@ -307,8 +417,9 @@ public class CustomColorSelectionController extends BasePreferencesController {
     }
 
     enum ColorColumns {
-        NAME(0, String.class, "GUI_COLORS_COLUMN_NAME"), COLOR(1, Color.class, "GUI_COLORS_COLUMN_COLOR"),
-        INTERNAL(2, String.class, "GUI_COLORS_COLUMN_INTERNAL");
+        NUMBER(0, Integer.class, "GUI_COLORS_COLUMN_NUMBER"),
+        NAME(1, String.class, "GUI_COLORS_COLUMN_NAME"), COLOR(2, Color.class, "GUI_COLORS_COLUMN_COLOR"),
+        INTERNAL(3, String.class, "GUI_COLORS_COLUMN_INTERNAL");
 
         private final int index;
         private final Class<?> clss;
@@ -392,6 +503,47 @@ public class CustomColorSelectionController extends BasePreferencesController {
 
     }
 
+    /**
+     * Row sorter whose colour column does not just toggle ascending/descending
+     * but rotates through several colour orderings on repeated header clicks:
+     * hex, HSB (colour wheel) and luminance, each ascending then descending.
+     * Every other column keeps the usual single ascending/descending toggle.
+     */
+    @SuppressWarnings("serial")
+    static class ColorRowSorter extends TableRowSorter<ColorTableModel> {
+
+        /** The (comparator, direction) pairs the colour header cycles through. */
+        private static final List<Map.Entry<Comparator<Color>, SortOrder>> COLOR_SORTS = List.of(
+                Map.entry(hexComparator(), SortOrder.ASCENDING),
+                Map.entry(hexComparator(), SortOrder.DESCENDING),
+                Map.entry(hsbComparator(), SortOrder.ASCENDING),
+                Map.entry(hsbComparator(), SortOrder.DESCENDING),
+                Map.entry(luminanceComparator(), SortOrder.ASCENDING),
+                Map.entry(luminanceComparator(), SortOrder.DESCENDING));
+
+        /** Index into {@link #COLOR_SORTS}, or -1 when the colour column is not sorted. */
+        private int colorSortState = -1;
+
+        ColorRowSorter(ColorTableModel model) {
+            super(model);
+            setComparator(ColorColumns.COLOR.index, hexComparator());
+        }
+
+        @Override
+        public void toggleSortOrder(int column) {
+            if (column == ColorColumns.COLOR.index) {
+                colorSortState = (colorSortState + 1) % COLOR_SORTS.size();
+                Map.Entry<Comparator<Color>, SortOrder> sort = COLOR_SORTS.get(colorSortState);
+                setComparator(ColorColumns.COLOR.index, sort.getKey());
+                setSortKeys(Collections.singletonList(
+                        new RowSorter.SortKey(ColorColumns.COLOR.index, sort.getValue())));
+            } else {
+                colorSortState = -1;
+                super.toggleSortOrder(column);
+            }
+        }
+    }
+
     @SuppressWarnings("serial")
     class ColorTableModel extends AbstractTableModel {
 
@@ -409,6 +561,8 @@ public class CustomColorSelectionController extends BasePreferencesController {
         public Object getValueAt(int rowIndex, int columnIndex) {
             EditorColor style = getEditorColorAtRow(rowIndex);
             switch (ColorColumns.get(columnIndex)) {
+            case NUMBER:
+                return rowIndex + 1;
             case NAME:
                 return style.getDisplayName();
             case COLOR:

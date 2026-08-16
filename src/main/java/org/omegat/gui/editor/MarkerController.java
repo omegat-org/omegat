@@ -45,6 +45,7 @@ import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
+import org.omegat.gui.editor.mark.ComesFromSourceFileMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.FontFallbackMarker;
 import org.omegat.gui.editor.mark.IMarker;
@@ -85,6 +86,7 @@ public class MarkerController {
         Core.registerMarker(new BidiMarkers());
         Core.registerMarker(new ReplaceMarker());
         Core.registerMarker(new ComesFromAutoTMMarker());
+        Core.registerMarker(new ComesFromSourceFileMarker());
         Core.registerMarker(new ComesFromMTMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new SpellCheckerMarker());

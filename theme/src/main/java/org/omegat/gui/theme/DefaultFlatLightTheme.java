@@ -117,6 +117,7 @@ public class DefaultFlatLightTheme extends FlatLaf {
         defaults.put("OmegaT.markComesFromTmX100pc", new Color(0xff9408));
         defaults.put("OmegaT.markComesFromTmXauto", new Color(0xff9596));
         defaults.put("OmegaT.markComesFromTmXendorced", new Color(0xffccff));
+        defaults.put("OmegaT.markComesFromSourceFile", new Color(0xa0e8c0));
         defaults.put("OmegaT.replace", new Color(0x0000ff));
         defaults.put("OmegaT.languageTools", new Color(0x0000ff));
         defaults.put("OmegaT.transTips", new Color(0x0000ff));

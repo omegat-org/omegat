@@ -1060,6 +1060,28 @@ public class SearchWindowController {
         form.m_searchField.requestFocus();
     }
 
+    /**
+     * Make the Search window visible, put the given text into the search
+     * field and run the search right away. Used for the source concordance
+     * search of the current segment (feature request #1162).
+     *
+     * Exact search, searching in source texts and the project-wide scope are
+     * switched on before running: a source concordance search with the scope
+     * options off would silently return nothing useful, and a remembered
+     * regular expression mode would misread the segment text as a pattern.
+     *
+     * @param query
+     *            source text to search for
+     */
+    public void searchImmediately(String query) {
+        UIThreadsUtil.mustBeSwingThread();
+        form.m_searchExactSearchRB.setSelected(true);
+        form.m_searchSource.setSelected(true);
+        form.m_rbProject.setSelected(true);
+        makeVisible(query);
+        doSearch();
+    }
+
     private void applySearchModeOptions(SearchExpression expression) {
         expression.searchExpressionType = getSearchExpressionTypeForSearchMode();
         expression.caseSensitive = form.m_searchCase.isSelected();

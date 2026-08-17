@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.function.IntSupplier;
 import java.util.function.ToIntFunction;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -39,7 +38,6 @@ import org.omegat.core.Core;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.IPaneMenu;
 
 /**
@@ -76,9 +74,6 @@ final class EditorPaneMenu implements IPaneMenu {
 
     @Override
     public void populatePaneMenu(JPopupMenu menu) {
-        menu.add(createToggle(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"),
-                Preferences.EDITOR_METADATA_GUTTER,
-                Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER)));
         JMenuItem configure = new JMenuItem(OStrings.getString("GUI_EDITORWINDOW_GUTTER_CONFIGURE"));
         configure.addActionListener(e -> showConfigDialog());
         menu.add(configure);
@@ -103,14 +98,5 @@ final class EditorPaneMenu implements IPaneMenu {
                 displaySettingsListener, columnWidthProvider, totalWidthProvider,
                 fontSizeProvider);
         configDialog.setVisible(true);
-    }
-
-    private JMenuItem createToggle(String label, String prefKey, boolean selected) {
-        JCheckBoxMenuItem item = new JCheckBoxMenuItem(label, selected);
-        item.addActionListener(e -> {
-            Preferences.setPreference(prefKey, item.isSelected());
-            displaySettingsListener.run();
-        });
-        return item;
     }
 }

@@ -407,6 +407,8 @@ public class EditorController implements IEditor {
         });
 
         scrollPane = new JScrollPane(editor);
+        // The layout knows the extra viewport of the right-hand gutter.
+        scrollPane.setLayout(new RightGutterLayout());
         Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
         if (panelBorder != null) {
             scrollPane.setBorder(panelBorder);
@@ -441,20 +443,22 @@ public class EditorController implements IEditor {
      */
     void updateMetadataGutter() {
         boolean visible = Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER);
-        scrollPane.setRowHeaderView(visible ? metadataGutter : null);
-        // The alternating backgrounds lie under the text, so while they are
-        // on, the editor may not paint its opaque background over them.
-        editor.setOpaque(!(visible
-                && Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER_ZEBRA)));
+        // The gutter sits left of the text, or right of it when the text
+        // pair leads the configured column order.
+        boolean after = SegmentMetadataGutter.Column.metadataAfterText();
+        scrollPane.setRowHeaderView(visible && !after ? metadataGutter : null);
+        updateRightGutter(visible && after);
         // The editor holds a share of the decorations (grid lines and
         // alternating backgrounds); a toggle has to erase them there too.
+        // It stays opaque throughout: its paint lays the stripes under the
+        // text itself, so blit scrolling keeps working.
         editor.repaint();
         if (visible) {
-            // Reusing the row header viewport does not re-run the scroll pane
+            // Reusing the gutter viewport does not re-run the scroll pane
             // synchronization, so align it with the current scroll position.
-            JViewport rowHeader = scrollPane.getRowHeader();
-            if (rowHeader != null) {
-                rowHeader.setViewPosition(
+            JViewport gutterViewport = after ? rightGutterViewport : scrollPane.getRowHeader();
+            if (gutterViewport != null) {
+                gutterViewport.setViewPosition(
                         new Point(0, scrollPane.getViewport().getViewPosition().y));
             }
             metadataGutter.revalidate();
@@ -463,9 +467,10 @@ public class EditorController implements IEditor {
         // Only a changed gutter geometry reflows the text; a plain repaint
         // toggle (grid, zebra) must not move the viewport.
         int gutterWidth = visible ? metadataGutter.getPreferredSize().width : 0;
-        boolean geometryChanged = visible != lastGutterVisible
+        boolean geometryChanged = visible != lastGutterVisible || after != lastGutterAfter
                 || gutterWidth != lastGutterWidth;
         lastGutterVisible = visible;
+        lastGutterAfter = after;
         lastGutterWidth = gutterWidth;
         if (geometryChanged && Core.getProject().isProjectLoaded() && m_docSegList != null) {
             // The changed gutter width reflows the text; keep the active
@@ -500,7 +505,91 @@ public class EditorController implements IEditor {
 
     /** The last applied gutter geometry, to skip needless recentering. */
     private boolean lastGutterVisible;
+    private boolean lastGutterAfter;
     private int lastGutterWidth;
+
+    /**
+     * Re-applies the user text alignments to the built document, much
+     * cheaper than rebuilding it.
+     */
+    void realignTextParts() {
+        if (m_docSegList == null) {
+            return;
+        }
+        for (SegmentBuilder builder : m_docSegList) {
+            builder.reapplyTextAlignment();
+        }
+        Document3 doc = editor.getOmDocument();
+        if (doc != null) {
+            // The quiet batch above ends in one document-wide event.
+            doc.fireAlignmentBatchDone();
+        }
+        editor.revalidate();
+        editor.repaint();
+    }
+
+    /**
+     * Shows or hides the gutter viewport right of the text, between the
+     * editor viewport and the vertical scroll bar. The scroll pane layout
+     * knows no such role, so a subclass carves its bounds out of the editor
+     * viewport; scrolling stays in sync through the viewport listener.
+     */
+    private void updateRightGutter(boolean show) {
+        if (show && rightGutterViewport == null) {
+            rightGutterViewport = new JViewport();
+            scrollPane.add(rightGutterViewport, RIGHT_GUTTER);
+            scrollPane.getViewport().addChangeListener(e -> {
+                if (rightGutterViewport.isVisible()) {
+                    rightGutterViewport.setViewPosition(
+                            new Point(0, scrollPane.getViewport().getViewPosition().y));
+                }
+            });
+        }
+        if (rightGutterViewport == null) {
+            return;
+        }
+        if (show && rightGutterViewport.getView() != metadataGutter) {
+            rightGutterViewport.setView(metadataGutter);
+        }
+        rightGutterViewport.setVisible(show);
+        scrollPane.revalidate();
+        scrollPane.repaint();
+    }
+
+    /** The layout constraint of the right gutter viewport. */
+    private static final String RIGHT_GUTTER = "RIGHT_GUTTER";
+
+    /** Viewport of the gutter right of the text, created on first use. */
+    private @Nullable JViewport rightGutterViewport;
+
+    /** Scroll pane layout that knows the extra right gutter viewport. */
+    @SuppressWarnings("serial")
+    private final class RightGutterLayout extends javax.swing.ScrollPaneLayout {
+        @Override
+        public void addLayoutComponent(String s, java.awt.Component c) {
+            if (RIGHT_GUTTER.equals(s)) {
+                // Managed by the override below, only tracked here.
+                return;
+            }
+            super.addLayoutComponent(s, c);
+        }
+
+        @Override
+        public void layoutContainer(java.awt.Container parent) {
+            super.layoutContainer(parent);
+            JViewport gutterViewport = rightGutterViewport;
+            if (gutterViewport == null || !gutterViewport.isVisible()
+                    || gutterViewport.getView() == null) {
+                return;
+            }
+            Rectangle bounds = viewport.getBounds();
+            int width = Math.min(gutterViewport.getView().getPreferredSize().width,
+                    bounds.width / 2);
+            viewport.setBounds(bounds.x, bounds.y, bounds.width - width, bounds.height);
+            gutterViewport.setBounds(bounds.x + bounds.width - width, bounds.y, width,
+                    bounds.height);
+        }
+    }
 
     private final AdjustmentListener scrollListener = (AdjustmentEvent e) -> {
         if (m_docSegList == null) {

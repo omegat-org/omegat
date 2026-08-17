@@ -315,6 +315,13 @@ public final class Preferences {
     public static final String EDITOR_METADATA_GUTTER_CREATION_AUTHOR_REGEX = "editor_metadata_gutter_creation_author_regex";
     public static final String EDITOR_METADATA_GUTTER_DATE_FORMAT = "editor_metadata_gutter_date_format";
     public static final String EDITOR_METADATA_GUTTER_CREATION_DATE_FORMAT = "editor_metadata_gutter_creation_date_format";
+    /** Editor Option: order entries of the source and target text pseudo columns */
+    public static final String EDITOR_LAYOUT_SOURCE_TEXT = "editor_layout_source_text";
+    public static final String EDITOR_LAYOUT_TARGET_TEXT = "editor_layout_target_text";
+    /** Editor Option: Source above target (classic) instead of side by side */
+    public static final String EDITOR_LAYOUT_STACKED = "editor_layout_stacked";
+    /** Editor Option: last folder of the layout export and import */
+    public static final String EDITOR_LAYOUT_DIRECTORY = "editor_layout_directory";
 
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";

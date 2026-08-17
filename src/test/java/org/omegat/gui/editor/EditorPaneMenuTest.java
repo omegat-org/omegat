@@ -26,12 +26,10 @@
 package org.omegat.gui.editor;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -40,7 +38,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -64,28 +61,16 @@ public class EditorPaneMenuTest {
 
     @Test
     public void testOffersThePreferencesShortcut() {
-        // the gutter toggle, the configuration dialog, a separator, the
-        // preferences shortcut
-        assertEquals(4, popup.getComponentCount());
-        assertTrue(popup.getComponent(2) instanceof JSeparator);
-        JMenuItem prefs = (JMenuItem) popup.getComponent(3);
+        // the configuration dialog, a separator, the preferences shortcut
+        assertEquals(3, popup.getComponentCount());
+        assertTrue(popup.getComponent(1) instanceof JSeparator);
+        JMenuItem prefs = (JMenuItem) popup.getComponent(2);
         assertEquals(OStrings.getString("GUI_EDITORWINDOW_OPEN_PREFS"), prefs.getText());
         assertTrue(prefs.isEnabled());
         assertEquals(1, prefs.getActionListeners().length);
 
-        JMenuItem configure = (JMenuItem) popup.getComponent(1);
+        JMenuItem configure = (JMenuItem) popup.getComponent(0);
         assertEquals(OStrings.getString("GUI_EDITORWINDOW_GUTTER_CONFIGURE"), configure.getText());
         assertEquals(1, configure.getActionListeners().length);
-    }
-
-    @Test
-    public void testTheToggleWritesThePreferenceAndRefreshes() {
-        JCheckBoxMenuItem show = (JCheckBoxMenuItem) popup.getComponent(0);
-        assertEquals(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"), show.getText());
-        assertFalse("The gutter is off by default", show.isSelected());
-
-        show.doClick();
-        assertTrue(Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER));
-        assertEquals(1, refreshes.get());
     }
 }

@@ -79,9 +79,12 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
+import org.jspecify.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
+import org.omegat.core.Core;
 import org.omegat.gui.editor.SegmentMetadataGutter.Column;
+import org.omegat.gui.editor.SegmentMetadataGutter.ColumnAlignment;
 import org.omegat.gui.editor.SegmentMetadataGutter.ColumnOption;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -102,32 +105,68 @@ import org.omegat.util.gui.StaticUIUtils;
 @SuppressWarnings("serial")
 final class SegmentMetadataConfigDialog extends JDialog {
 
+    /** The open dialog, refreshed live while a gutter boundary is dragged. */
+    private static @Nullable SegmentMetadataConfigDialog openDialog;
+
+    // Heavily shortened project header, like the colour scheme export.
+    private static final String[] EXPORT_HEADER = {
+        "# OmegaT editor layout",
+        "# OmegaT is free/open-source software (GPLv3, https://omegat.org).",
+        "# This exported layout is yours: use, share and modify it freely.",
+        "# Each line maps one layout preference to its value.",
+    };
+
     private final JLabel totalWidthLabel = new JLabel();
+    private final IntSupplier totalWidthProvider;
+    private final ToIntFunction<Column> columnWidthProvider;
+    private final Runnable onChange;
+    private JTable table;
+    private JCheckBox showToggle;
+    private JCheckBox gridToggle;
+    private JCheckBox zebraToggle;
 
     SegmentMetadataConfigDialog(Frame owner, Runnable externalOnChange,
             ToIntFunction<Column> columnWidthProvider, IntSupplier totalWidthProvider,
             IntSupplier fontSizeProvider) {
         super(owner, OStrings.getString("GUI_EDITORWINDOW_GUTTER_MENU"), false);
+        this.totalWidthProvider = totalWidthProvider;
+        this.columnWidthProvider = columnWidthProvider;
+        setOpenDialog(this);
         setLayout(new BorderLayout());
         // Every change also refreshes the shown total width.
-        Runnable onChange = () -> {
+        onChange = () -> {
             externalOnChange.run();
             updateTotalWidthLabel(totalWidthProvider);
         };
 
-        JCheckBox show = new JCheckBox(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"),
+        showToggle = new JCheckBox(OStrings.getString("GUI_EDITORWINDOW_GUTTER_SHOW"),
                 Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER));
-        show.addActionListener(e -> {
-            Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER, show.isSelected());
+        showToggle.addActionListener(e -> {
+            Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER,
+                    showToggle.isSelected());
             onChange.run();
+            // The master switch turns the whole customization on or off.
+            realignEditorText();
+            relayoutEditorText();
         });
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEADING));
         top.setBorder(new EmptyBorder(6, 4, 0, 4));
-        top.add(show);
+        top.add(showToggle);
         add(top, BorderLayout.NORTH);
 
         ColumnTableModel model = new ColumnTableModel(onChange);
-        JTable table = new JTable(model);
+        table = new JTable(model) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component cell = super.prepareRenderer(renderer, row, column);
+                // While the texts are stacked, the target row is mostly
+                // inert; its alignment controls stay live and keep their look.
+                setEnabledTree(cell,
+                        column == 4 || column == 3 || !(model.columnAt(row) == Column.TARGET_TEXT
+                                && ColumnTableModel.stacked()));
+                return cell;
+            }
+        };
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setDragEnabled(true);
         table.setDropMode(DropMode.INSERT_ROWS);
@@ -167,10 +206,12 @@ final class SegmentMetadataConfigDialog extends JDialog {
         columnsBox.add(tablePane, BorderLayout.CENTER);
         JPanel display = new JPanel(new BorderLayout());
         JPanel toggles = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        toggles.add(createGutterToggle("GUI_EDITORWINDOW_GUTTER_GRID",
-                Preferences.EDITOR_METADATA_GUTTER_GRID, onChange));
-        toggles.add(createGutterToggle("GUI_EDITORWINDOW_GUTTER_ZEBRA",
-                Preferences.EDITOR_METADATA_GUTTER_ZEBRA, onChange));
+        gridToggle = createGutterToggle("GUI_EDITORWINDOW_GUTTER_GRID",
+                Preferences.EDITOR_METADATA_GUTTER_GRID, onChange);
+        toggles.add(gridToggle);
+        zebraToggle = createGutterToggle("GUI_EDITORWINDOW_GUTTER_ZEBRA",
+                Preferences.EDITOR_METADATA_GUTTER_ZEBRA, onChange);
+        toggles.add(zebraToggle);
         display.add(toggles, BorderLayout.WEST);
         // The total sits at the trailing edge, beneath the width column.
         updateTotalWidthLabel(totalWidthProvider);
@@ -181,12 +222,28 @@ final class SegmentMetadataConfigDialog extends JDialog {
         add(columnsBox, BorderLayout.CENTER);
 
         JPanel bottom = new JPanel(new BorderLayout());
+        JButton restore = new JButton();
+        Mnemonics.setLocalizedText(restore, OStrings.getString("GUI_EDITORWINDOW_GUTTER_RESTORE"));
+        restore.addActionListener(e -> restoreDefaults());
+        JButton importButton = new JButton();
+        Mnemonics.setLocalizedText(importButton,
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_IMPORT"));
+        importButton.addActionListener(e -> importLayout());
+        JButton exportButton = new JButton();
+        Mnemonics.setLocalizedText(exportButton,
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_EXPORT"));
+        exportButton.addActionListener(e -> exportLayout());
+        JPanel restorePanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        restorePanel.add(restore);
+        restorePanel.add(importButton);
+        restorePanel.add(exportButton);
+        bottom.add(restorePanel, BorderLayout.WEST);
         JButton close = new JButton();
         Mnemonics.setLocalizedText(close, OStrings.getString("BUTTON_CLOSE"));
         close.addActionListener(e -> dispose());
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         buttons.add(close);
-        bottom.add(buttons, BorderLayout.SOUTH);
+        bottom.add(buttons, BorderLayout.EAST);
         add(bottom, BorderLayout.SOUTH);
         getRootPane().setDefaultButton(close);
 
@@ -208,8 +265,391 @@ final class SegmentMetadataConfigDialog extends JDialog {
     }
 
     private void updateTotalWidthLabel(IntSupplier totalWidthProvider) {
-        totalWidthLabel.setText(OStrings.getString("GUI_EDITORWINDOW_GUTTER_TOTAL_WIDTH") + ": "
-                + totalWidthProvider.getAsInt() + " px");
+        int total = totalWidthProvider.getAsInt();
+        int columnSum = 0;
+        for (Column column : Column.gutterColumns()) {
+            if (column.isEnabled()) {
+                columnSum += columnWidthProvider.applyAsInt(column);
+            }
+        }
+        totalWidthLabel.setText(OStrings.getString("GUI_EDITORWINDOW_GUTTER_TOTAL_WIDTH")
+                + ": ≈ " + total + " px");
+        // The shown total exceeds the sum of the width fields a little: the
+        // leading inset and the gaps between the columns count too.
+        totalWidthLabel.setToolTipText(OStrings.getString(
+                "GUI_EDITORWINDOW_GUTTER_TOTAL_WIDTH_TIP", columnSum, total - columnSum));
+    }
+
+    @Override
+    public void dispose() {
+        if (openDialog == this) {
+            setOpenDialog(null);
+        }
+        super.dispose();
+    }
+
+    private static void setOpenDialog(@Nullable SegmentMetadataConfigDialog dialog) {
+        openDialog = dialog;
+    }
+
+    /**
+     * Reloads the open dialog from the preferences, e.g. while a column
+     * boundary is dragged in the editor: the width cells then follow the
+     * mouse. No-op without an open dialog.
+     */
+    static void refreshOpenDialog() {
+        SegmentMetadataConfigDialog dialog = openDialog;
+        if (dialog == null || !dialog.isDisplayable()) {
+            return;
+        }
+        if (dialog.table.isEditing()) {
+            dialog.table.getCellEditor().cancelCellEditing();
+        }
+        ((ColumnTableModel) dialog.table.getModel()).reloadRows();
+        ((AbstractTableModel) dialog.table.getModel()).fireTableDataChanged();
+        dialog.showToggle.setSelected(Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER));
+        dialog.gridToggle
+                .setSelected(Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER_GRID));
+        dialog.zebraToggle
+                .setSelected(Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER_ZEBRA));
+        dialog.updateTotalWidthLabel(dialog.totalWidthProvider);
+    }
+
+    /**
+     * All layout preferences with their default values: the classic view of
+     * the previous versions, i.e. no metadata column, source above target,
+     * leading alignments and filling widths.
+     */
+    private static java.util.Map<String, String> defaultPreferences() {
+        java.util.Map<String, String> defaults = new java.util.LinkedHashMap<>();
+        defaults.put(Preferences.EDITOR_METADATA_GUTTER, "false");
+        defaults.put(Preferences.EDITOR_LAYOUT_STACKED, "true");
+        defaults.put(Preferences.EDITOR_METADATA_GUTTER_ORDER, "");
+        defaults.put(Preferences.EDITOR_METADATA_GUTTER_GRID, "false");
+        defaults.put(Preferences.EDITOR_METADATA_GUTTER_ZEBRA, "false");
+        for (Column column : Column.values()) {
+            if (!column.isText()) {
+                defaults.put(column.getPrefKey(), String.valueOf(column.isEnabledByDefault()));
+            }
+            defaults.put(column.getWidthKey(), "0");
+            defaults.put(column.getWidthRefKey(), "0");
+            defaults.put(column.getAlignmentKey(), column.defaultAlignment().name());
+            if (column.isText()) {
+                defaults.put(column.getFillWeightKey(), "50");
+            }
+            if (column.getOptionOnKey() != null && column.getOptionValueKey() != null) {
+                defaults.put(column.getOptionOnKey(), "false");
+                defaults.put(column.getOptionValueKey(), "");
+            }
+            if (column.getOption() == ColumnOption.LENGTH) {
+                defaults.put(column.getTrimKey(), "false");
+                defaults.put(column.getNonSpaceKey(), "false");
+            }
+        }
+        return defaults;
+    }
+
+    /**
+     * Restores the classic editor layout after a confirmation, which only
+     * appears when the current settings actually differ.
+     */
+    private void restoreDefaults() {
+        if (isLayoutApplying()) {
+            return;
+        }
+        java.util.Map<String, String> defaults = defaultPreferences();
+        boolean differs = defaults.entrySet().stream().anyMatch(entry -> !Preferences
+                .getPreferenceDefault(entry.getKey(), entry.getValue()).equals(entry.getValue()));
+        if (!differs) {
+            return;
+        }
+        int answer = javax.swing.JOptionPane.showConfirmDialog(this,
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_RESTORE_CONFIRM"),
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_RESTORE"),
+                javax.swing.JOptionPane.YES_NO_OPTION);
+        if (answer != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+        defaults.forEach(Preferences::setPreference);
+        applyLoadedLayout();
+    }
+
+    /** Refreshes the dialog and the editor after a bulk settings change. */
+    private void applyLoadedLayout() {
+        refreshOpenDialog();
+        onChange.run();
+        realignEditorText();
+        relayoutEditorText();
+    }
+
+    /** The file chooser of the export and import, in the last used folder. */
+    private static javax.swing.JFileChooser layoutChooser(String title) {
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+        chooser.setDialogTitle(title);
+        chooser.setAcceptAllFileFilterUsed(true);
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_FILE_DESCRIPTION"), "properties"));
+        String lastDirectory = Preferences.getPreference(Preferences.EDITOR_LAYOUT_DIRECTORY);
+        if (lastDirectory != null && !lastDirectory.isEmpty()) {
+            java.io.File directory = new java.io.File(lastDirectory);
+            if (directory.isDirectory()) {
+                chooser.setCurrentDirectory(directory);
+            }
+        }
+        return chooser;
+    }
+
+    private static void rememberDirectory(java.io.File file) {
+        java.io.File directory = file.getParentFile();
+        if (directory != null) {
+            Preferences.setPreference(Preferences.EDITOR_LAYOUT_DIRECTORY,
+                    directory.getAbsolutePath());
+        }
+    }
+
+    /** Writes all layout preferences to a properties file of choice. */
+    private void exportLayout() {
+        if (isLayoutApplying()) {
+            return;
+        }
+        String title = Mnemonics
+                .removeMnemonics(OStrings.getString("GUI_EDITORWINDOW_GUTTER_EXPORT"));
+        javax.swing.JFileChooser chooser = layoutChooser(title);
+        chooser.setSelectedFile(new java.io.File(chooser.getCurrentDirectory(),
+                "omegat-editor-layout.properties"));
+        if (chooser.showSaveDialog(this) != javax.swing.JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        java.io.File file = chooser.getSelectedFile();
+        if (!file.getName().toLowerCase(java.util.Locale.ENGLISH).endsWith(".properties")) {
+            file = new java.io.File(file.getParentFile(), file.getName() + ".properties");
+        }
+        if (file.exists() && javax.swing.JOptionPane.showConfirmDialog(this,
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_OVERWRITE_CONFIRM", file.getName()),
+                title,
+                javax.swing.JOptionPane.YES_NO_OPTION) != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+        rememberDirectory(file);
+        // A plain, human-readable .properties file in a stable order,
+        // loadable with java.util.Properties. Backslashes (e.g. of the
+        // regex options) are the only characters that need escaping.
+        try (java.io.BufferedWriter out = java.nio.file.Files.newBufferedWriter(file.toPath(),
+                java.nio.charset.StandardCharsets.UTF_8)) {
+            for (String line : EXPORT_HEADER) {
+                out.write(line);
+                out.newLine();
+            }
+            for (java.util.Map.Entry<String, String> entry : defaultPreferences().entrySet()) {
+                String value = Preferences.getPreferenceDefault(entry.getKey(),
+                        entry.getValue());
+                out.write(entry.getKey() + " = " + value.replace("\\", "\\\\"));
+                out.newLine();
+            }
+        } catch (java.io.IOException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), title,
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Loads layout preferences from a properties file of choice. Only the
+     * known layout keys are applied, anything else in the file is ignored,
+     * so the files stay forward-compatible.
+     */
+    private void importLayout() {
+        if (isLayoutApplying()) {
+            return;
+        }
+        String title = Mnemonics
+                .removeMnemonics(OStrings.getString("GUI_EDITORWINDOW_GUTTER_IMPORT"));
+        javax.swing.JFileChooser chooser = layoutChooser(title);
+        if (chooser.showOpenDialog(this) != javax.swing.JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        java.io.File file = chooser.getSelectedFile();
+        rememberDirectory(file);
+        java.util.Properties properties = new java.util.Properties();
+        try (java.io.BufferedReader in = java.nio.file.Files.newBufferedReader(file.toPath(),
+                java.nio.charset.StandardCharsets.UTF_8)) {
+            properties.load(in);
+        } catch (java.io.IOException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), title,
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        java.util.Map<String, String> known = defaultPreferences();
+        long found = known.keySet().stream().filter(properties::containsKey).count();
+        if (found == 0) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    OStrings.getString("GUI_EDITORWINDOW_GUTTER_IMPORT_NONE", file.getName()),
+                    title, javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (javax.swing.JOptionPane.showConfirmDialog(this,
+                OStrings.getString("GUI_EDITORWINDOW_GUTTER_IMPORT_CONFIRM", file.getName()),
+                title,
+                javax.swing.JOptionPane.YES_NO_OPTION) != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+        for (String key : known.keySet()) {
+            String value = properties.getProperty(key);
+            if (value != null) {
+                Preferences.setPreference(key, sanitizeImportedValue(key, value));
+            }
+        }
+        applyLoadedLayout();
+    }
+
+    /**
+     * Keeps imported numbers in their working ranges: a hand-edited width
+     * of some thousand pixels would grow the gutter beyond the window.
+     * Non-numeric keys pass through, their readers fall back to defaults.
+     */
+    private static String sanitizeImportedValue(String key, String value) {
+        for (Column column : Column.values()) {
+            if (key.equals(column.getWidthKey())) {
+                return String.valueOf(
+                        clampInt(value, 0, WidthSliderPanel.MAX_WIDTH, 0));
+            }
+            if (column.isText() && key.equals(column.getFillWeightKey())) {
+                return String.valueOf(clampInt(value, SegmentColumnsView.MIN_CELL_PERCENT,
+                        SegmentColumnsView.MAX_CELL_PERCENT, 50));
+            }
+        }
+        return value;
+    }
+
+    /** The value as an int within the range, or the fallback. */
+    private static int clampInt(String value, int min, int max, int fallback) {
+        try {
+            return Math.max(min, Math.min(max, Integer.parseInt(value.trim())));
+        } catch (NumberFormatException ignored) {
+            return fallback;
+        }
+    }
+
+    /** Repaints the table row of the given column in the open dialog. */
+    static void refreshRowOf(Column column) {
+        SegmentMetadataConfigDialog dialog = openDialog;
+        if (dialog == null || !dialog.isDisplayable()) {
+            return;
+        }
+        ColumnTableModel model = (ColumnTableModel) dialog.table.getModel();
+        for (int row = 0; row < model.getRowCount(); row++) {
+            if (model.columnAt(row) == column) {
+                model.fireTableRowsUpdated(row, row);
+                return;
+            }
+        }
+    }
+
+    /** Enables or disables a renderer component including its children. */
+    private static void setEnabledTree(Component component, boolean enabled) {
+        component.setEnabled(enabled);
+        if (component instanceof java.awt.Container) {
+            for (Component child : ((java.awt.Container) component).getComponents()) {
+                setEnabledTree(child, enabled);
+            }
+        }
+    }
+
+    /** True from a layout change until its rendering finished. */
+    private static boolean layoutApplying;
+
+    /**
+     * Changes arriving during an apply, run afterwards. Coalesced by kind:
+     * repeated ticks of one control collapse into the newest, but a realign
+     * cannot displace a still pending relayout or the other way round.
+     */
+    private static final java.util.Map<String, Runnable> pendingLayoutChanges =
+            new java.util.LinkedHashMap<>();
+
+    /**
+     * Button-like layout controls drop their clicks while an apply still
+     * renders, so an accidental second click cannot fire twice.
+     */
+    static boolean isLayoutApplying() {
+        return layoutApplying;
+    }
+
+    /**
+     * Runs a potentially long layout change busy-gated: the wait cursor
+     * shows from the trigger until the pass rendered, the apply runs after
+     * the cursor became visible, and the render is forced synchronously, so
+     * the release really means done. A change arriving meanwhile (e.g. a
+     * width slider tick) replaces any earlier pending one of the same kind
+     * and runs once after the release: the last state wins, nothing piles
+     * up.
+     */
+    static void applyLayoutChange(String kind, Runnable change) {
+        if (!(Core.getEditor() instanceof EditorController)) {
+            return;
+        }
+        if (layoutApplying) {
+            pendingLayoutChanges.put(kind, change);
+            return;
+        }
+        EditorController controller = (EditorController) Core.getEditor();
+        layoutApplying = true;
+        java.awt.Cursor wait = java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR);
+        controller.editor.setCursor(wait);
+        SegmentMetadataConfigDialog dialog = openDialog;
+        if (dialog != null) {
+            dialog.setCursor(wait);
+        }
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                change.run();
+                // Render synchronously, so the release really means done.
+                javax.swing.RepaintManager repaints = javax.swing.RepaintManager
+                        .currentManager(controller.editor);
+                repaints.validateInvalidComponents();
+                repaints.paintDirtyRegions();
+            } finally {
+                controller.editor.setCursor(java.awt.Cursor
+                        .getPredefinedCursor(java.awt.Cursor.TEXT_CURSOR));
+                if (dialog != null) {
+                    dialog.setCursor(java.awt.Cursor.getDefaultCursor());
+                }
+                layoutApplying = false;
+                if (!pendingLayoutChanges.isEmpty()) {
+                    String next = pendingLayoutChanges.keySet().iterator().next();
+                    applyLayoutChange(next, pendingLayoutChanges.remove(next));
+                }
+            }
+        });
+    }
+
+    /** Re-applies the text alignments to the built document, busy-gated. */
+    static void realignEditorText() {
+        applyLayoutChange("realign", () -> {
+            if (Core.getEditor() instanceof EditorController
+                    && Core.getProject().isProjectLoaded()) {
+                ((EditorController) Core.getEditor()).realignTextParts();
+            }
+        });
+    }
+
+    /**
+     * Lays the editor text out again, so changes the views read at layout
+     * time (stacked vs. side by side, the text widths) become visible.
+     */
+    static void relayoutEditorText() {
+        applyLayoutChange("relayout", () -> {
+            if (!(Core.getEditor() instanceof EditorController)) {
+                return;
+            }
+            EditorController controller = (EditorController) Core.getEditor();
+            SegmentColumnsView view = controller.editor.columnsView();
+            if (view != null) {
+                // The box view caches its layout; a plain revalidate with an
+                // unchanged size would keep the stale arrangement.
+                view.relayout();
+            }
+            controller.editor.revalidate();
+            controller.editor.repaint();
+        });
     }
 
     private JCheckBox createGutterToggle(String labelKey, String prefKey, Runnable onChange) {
@@ -502,8 +942,8 @@ final class SegmentMetadataConfigDialog extends JDialog {
      */
     static final class WidthSliderPanel extends JPanel {
 
-        private static final int MIN_WIDTH = 8;
-        private static final int MAX_WIDTH = 300;
+        static final int MIN_WIDTH = 8;
+        static final int MAX_WIDTH = 300;
 
         WidthSliderPanel(Column column, Runnable onChange,
                 ToIntFunction<Column> columnWidthProvider, IntSupplier fontSizeProvider) {
@@ -529,6 +969,76 @@ final class SegmentMetadataConfigDialog extends JDialog {
             pixels.addChangeListener(e -> slider.setValue((Integer) pixels.getValue()));
             add(slider);
             add(pixels);
+        }
+    }
+
+    /**
+     * The width cell of the text rows: one percent slider per row, coupled
+     * with its partner row, so source and target always sum up to one
+     * hundred percent of the text width.
+     */
+    static final class PercentSliderPanel extends JPanel {
+
+        PercentSliderPanel(Column column, Runnable onChange) {
+            super(new FlowLayout(FlowLayout.LEADING, 2, 1));
+            setOpaque(false);
+            int current = SegmentColumnsView.cellPercent(column);
+            JSlider slider = new JSlider(SegmentColumnsView.MIN_CELL_PERCENT,
+                    SegmentColumnsView.MAX_CELL_PERCENT, current);
+            slider.setPreferredSize(new Dimension(110, slider.getPreferredSize().height));
+            slider.setOpaque(false);
+            slider.getAccessibleContext().setAccessibleName(
+                    OStrings.getString("GUI_EDITORWINDOW_GUTTER_TABLE_WIDTH") + " "
+                            + column.getLabel());
+            JSpinner percent = new JSpinner(
+                    new SpinnerNumberModel(current, SegmentColumnsView.MIN_CELL_PERCENT,
+                            SegmentColumnsView.MAX_CELL_PERCENT, 1));
+            percent.getAccessibleContext().setAccessibleName(
+                    OStrings.getString("GUI_EDITORWINDOW_GUTTER_TABLE_WIDTH") + " "
+                            + column.getLabel());
+            Column partner = column == Column.SOURCE_TEXT ? Column.TARGET_TEXT
+                    : Column.SOURCE_TEXT;
+            slider.addChangeListener(e -> {
+                percent.setValue(slider.getValue());
+                Preferences.setPreference(column.getFillWeightKey(), slider.getValue());
+                Preferences.setPreference(partner.getFillWeightKey(), 100 - slider.getValue());
+                // The partner slider shows the coupled complement.
+                refreshRowOf(partner);
+                onChange.run();
+                relayoutEditorText();
+            });
+            percent.addChangeListener(e -> slider.setValue((Integer) percent.getValue()));
+            add(slider);
+            add(percent);
+            // The percent sign doubles as the equal-widths reset button.
+            JButton equalWidths = new JButton("%");
+            equalWidths.setMargin(new Insets(0, 4, 0, 4));
+            equalWidths.setToolTipText(
+                    OStrings.getString("GUI_EDITORWINDOW_GUTTER_EQUAL_WIDTHS"));
+            equalWidths.getAccessibleContext().setAccessibleName(
+                    OStrings.getString("GUI_EDITORWINDOW_GUTTER_EQUAL_WIDTHS"));
+            // The slider listener persists both shares and relayouts.
+            equalWidths.addActionListener(e -> slider.setValue(50));
+            add(equalWidths);
+        }
+
+        @Override
+        public @Nullable String getToolTipText(MouseEvent event) {
+            // As a cell renderer this panel is asked for the tooltip; hand
+            // the question to the control under the mouse (see
+            // PairAlignmentPanel).
+            if (!isValid()) {
+                setSize(getPreferredSize());
+                doLayout();
+            }
+            Component child = getComponentAt(event.getX(), event.getY());
+            if (child instanceof JComponent && child != this) {
+                String tip = ((JComponent) child).getToolTipText();
+                if (tip != null) {
+                    return tip;
+                }
+            }
+            return super.getToolTipText(event);
         }
     }
 
@@ -609,6 +1119,13 @@ final class SegmentMetadataConfigDialog extends JDialog {
             if (!gutterColumn.isEnabled()) {
                 return new JPanel();
             }
+            if (gutterColumn.isText()) {
+                if (ColumnTableModel.stacked()) {
+                    return new JPanel();
+                }
+                return new PercentSliderPanel(gutterColumn, () -> {
+                });
+            }
             return new WidthSliderPanel(gutterColumn, () -> {
             }, columnWidthProvider, () -> 0);
         }
@@ -639,7 +1156,11 @@ final class SegmentMetadataConfigDialog extends JDialog {
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
-            return new WidthSliderPanel(model.columnAt(row), onChange, columnWidthProvider,
+            Column gutterColumn = model.columnAt(row);
+            if (gutterColumn.isText()) {
+                return new PercentSliderPanel(gutterColumn, onChange);
+            }
+            return new WidthSliderPanel(gutterColumn, onChange, columnWidthProvider,
                     fontSizeProvider);
         }
     }
@@ -677,8 +1198,106 @@ final class SegmentMetadataConfigDialog extends JDialog {
             return new OptionCellPanel(column, onChange);
         case LENGTH:
             return new LengthOptionPanel(column, onChange);
+        case STACKED:
+            return new StackedOptionPanel(onChange);
+        case PAIR_ALIGNMENT:
+            return new PairAlignmentPanel(onChange);
         default:
             return new JPanel();
+        }
+    }
+
+    /**
+     * The option cell of the target text row: one-click alignment patterns
+     * for both text rows at once. The schematic labels show the two texts
+     * around their boundary; the first alignment goes to the first row of
+     * the pair in the configured order, the second to its partner.
+     */
+    static final class PairAlignmentPanel extends JPanel {
+
+        PairAlignmentPanel(Runnable onChange) {
+            super(new FlowLayout(FlowLayout.LEADING, 4, 1));
+            setOpaque(false);
+            add(createButton("x..|a..", "GUI_EDITORWINDOW_GUTTER_ALIGN_PAIR_LEADING",
+                    ColumnAlignment.LEADING, ColumnAlignment.LEADING, onChange));
+            add(createButton("..x|..a", "GUI_EDITORWINDOW_GUTTER_ALIGN_PAIR_TRAILING",
+                    ColumnAlignment.TRAILING, ColumnAlignment.TRAILING, onChange));
+            add(createButton("..x|a..", "GUI_EDITORWINDOW_GUTTER_ALIGN_PAIR_INNER",
+                    ColumnAlignment.TRAILING, ColumnAlignment.LEADING, onChange));
+            add(createButton("x..|..a", "GUI_EDITORWINDOW_GUTTER_ALIGN_PAIR_OUTER",
+                    ColumnAlignment.LEADING, ColumnAlignment.TRAILING, onChange));
+            add(createButton(".x.|.a.", "GUI_EDITORWINDOW_GUTTER_ALIGN_PAIR_CENTER",
+                    ColumnAlignment.CENTER, ColumnAlignment.CENTER, onChange));
+        }
+
+        @Override
+        public @Nullable String getToolTipText(MouseEvent event) {
+            // As a cell renderer this panel is asked for the tooltip; hand
+            // the question to the button under the mouse. The renderer copy
+            // is never laid out, so lay it out for the hit test first.
+            if (!isValid()) {
+                setSize(getPreferredSize());
+                doLayout();
+            }
+            Component child = getComponentAt(event.getX(), event.getY());
+            if (child instanceof JComponent && child != this) {
+                String tip = ((JComponent) child).getToolTipText();
+                if (tip != null) {
+                    return tip;
+                }
+            }
+            return super.getToolTipText(event);
+        }
+
+        private static JButton createButton(String pattern, String tooltipKey,
+                ColumnAlignment first, ColumnAlignment second, Runnable onChange) {
+            JButton button = new JButton(pattern);
+            button.setMargin(new Insets(0, 4, 0, 4));
+            button.setToolTipText(OStrings.getString(tooltipKey));
+            button.getAccessibleContext().setAccessibleName(OStrings.getString(tooltipKey));
+            button.addActionListener(e -> {
+                if (isLayoutApplying()) {
+                    return;
+                }
+                Column firstColumn = SegmentColumnsView.leftCell();
+                Column secondColumn = firstColumn == Column.SOURCE_TEXT ? Column.TARGET_TEXT
+                        : Column.SOURCE_TEXT;
+                Preferences.setPreference(firstColumn.getAlignmentKey(), first.name());
+                Preferences.setPreference(secondColumn.getAlignmentKey(), second.name());
+                refreshOpenDialog();
+                onChange.run();
+                realignEditorText();
+            });
+            return button;
+        }
+    }
+
+    /**
+     * The option cell of the source text row: the classic layout with the
+     * source above the translation. While it is on, the source row stands
+     * for both texts and the target row is inert.
+     */
+    static final class StackedOptionPanel extends JPanel {
+
+        StackedOptionPanel(Runnable onChange) {
+            super(new FlowLayout(FlowLayout.LEADING, 4, 1));
+            setOpaque(false);
+            JCheckBox box = new JCheckBox(OStrings.getString("GUI_EDITORWINDOW_GUTTER_OPT_STACKED"),
+                    ColumnTableModel.stacked());
+            box.setOpaque(false);
+            box.addActionListener(e -> {
+                if (isLayoutApplying()) {
+                    // Dropped like the other layout clicks while busy.
+                    box.setSelected(ColumnTableModel.stacked());
+                    return;
+                }
+                Preferences.setPreference(Preferences.EDITOR_LAYOUT_STACKED, box.isSelected());
+                onChange.run();
+                // The target row of the table greys out or comes back.
+                refreshOpenDialog();
+                relayoutEditorText();
+            });
+            add(box);
         }
     }
 
@@ -732,6 +1351,16 @@ final class SegmentMetadataConfigDialog extends JDialog {
             this.onChange = onChange;
         }
 
+        /**
+         * Reloads the row order from the preferences: after an import or a
+         * restore the stored order may differ from the shown one, and the
+         * next move would persist the stale rows otherwise.
+         */
+        void reloadRows() {
+            rows.clear();
+            rows.addAll(Column.inDisplayOrder());
+        }
+
         Column columnAt(int row) {
             return rows.get(row);
         }
@@ -771,18 +1400,33 @@ final class SegmentMetadataConfigDialog extends JDialog {
             return column == 0 ? Boolean.class : String.class;
         }
 
+        /** The classic layout: the source text above the translation. */
+        static boolean stacked() {
+            return Preferences.isPreferenceDefault(Preferences.EDITOR_LAYOUT_STACKED, true);
+        }
+
         @Override
         public boolean isCellEditable(int row, int column) {
+            Column gutterColumn = rows.get(row);
             if (column == 0) {
-                return true;
+                // The text rows have no visibility of their own, but while
+                // they sit side by side, their box folds the layout back.
+                return !gutterColumn.isText() || !stacked();
+            }
+            if (gutterColumn == Column.TARGET_TEXT && stacked() && column != 4 && column != 3) {
+                // Mostly inert while the texts are stacked; only the
+                // alignment controls stay configurable, they apply there too.
+                return false;
             }
             if (column == 3) {
-                return rows.get(row).getOption() != ColumnOption.NONE;
+                return gutterColumn.getOption() != ColumnOption.NONE;
             }
             if (column == 4) {
-                return rows.get(row).isEnabled() && rows.get(row) != Column.COLOR;
+                return gutterColumn.isEnabled() && gutterColumn != Column.COLOR;
             }
-            return column == 5 && rows.get(row).isEnabled();
+            // The stacked texts fill the editor width, so no width control.
+            return column == 5 && gutterColumn.isEnabled()
+                    && !(gutterColumn.isText() && stacked());
         }
 
         @Override
@@ -800,12 +1444,26 @@ final class SegmentMetadataConfigDialog extends JDialog {
 
         @Override
         public void setValueAt(Object value, int row, int column) {
-            if (column == 0) {
-                Preferences.setPreference(rows.get(row).getPrefKey(), Boolean.TRUE.equals(value));
-                // The width slider of the row appears and disappears with it.
-                fireTableRowsUpdated(row, row);
-                onChange.run();
+            if (column != 0) {
+                return;
             }
+            Column gutterColumn = rows.get(row);
+            if (gutterColumn.isText()) {
+                if (isLayoutApplying()) {
+                    return;
+                }
+                // Unchecking a text row folds the layout back to the classic
+                // stacked view; the text rows themselves always stay on.
+                Preferences.setPreference(Preferences.EDITOR_LAYOUT_STACKED, true);
+                fireTableDataChanged();
+                onChange.run();
+                relayoutEditorText();
+                return;
+            }
+            Preferences.setPreference(gutterColumn.getPrefKey(), Boolean.TRUE.equals(value));
+            // The width slider of the row appears and disappears with it.
+            fireTableRowsUpdated(row, row);
+            onChange.run();
         }
 
         /** Cycles the alignment of the row, also reachable by keyboard. */
@@ -814,25 +1472,83 @@ final class SegmentMetadataConfigDialog extends JDialog {
             if (!column.isEnabled() || column == Column.COLOR) {
                 return;
             }
+            // Debounced by the busy state: while the previous layout change
+            // still applies and renders, another click must not cycle again.
+            if (column.isText() && isLayoutApplying()) {
+                return;
+            }
             Preferences.setPreference(column.getAlignmentKey(),
                     column.getAlignment().next().name());
             fireTableRowsUpdated(row, row);
             onChange.run();
+            if (column.isText()) {
+                // The text alignments are baked into the paragraphs.
+                realignEditorText();
+            }
         }
 
         /**
          * Moves a row by the given delta and persists the new order. Returns
-         * the new row index, negative when nothing moved.
+         * the new row index, negative when nothing moved. The two text rows
+         * stay an adjacent pair at the start or the end of the table: they
+         * swap with each other, a farther move carries the pair to the other
+         * end, and the metadata rows never land between or beyond them.
          */
         int move(int row, int delta) {
+            if (row < 0 || row >= rows.size() || delta == 0) {
+                return -1;
+            }
+            boolean textMove = rows.get(row).isText();
+            // The arrow buttons and keys drop their clicks while a previous
+            // layout change still renders, like the alignment does.
+            if (textMove && isLayoutApplying()) {
+                return -1;
+            }
+            int moved = textMove ? moveTextRow(row, delta) : moveMetadataRow(row, delta);
+            if (moved >= 0) {
+                Column.persistDisplayOrder(rows);
+                fireTableDataChanged();
+                onChange.run();
+                if (textMove) {
+                    // The pair order is a layout property of the editor.
+                    relayoutEditorText();
+                }
+            }
+            return moved;
+        }
+
+        private int moveTextRow(int row, int delta) {
+            int partner = rows.indexOf(rows.get(row) == Column.SOURCE_TEXT ? Column.TARGET_TEXT
+                    : Column.SOURCE_TEXT);
             int to = row + delta;
-            if (row < 0 || row >= rows.size() || to < 0 || to >= rows.size()) {
+            if (to == partner) {
+                java.util.Collections.swap(rows, row, partner);
+                return to;
+            }
+            // A farther move carries the pair to the other end of the table,
+            // which flips the metadata columns to the other side of the text.
+            boolean pairAtStart = rows.get(0).isText();
+            if (pairAtStart != (delta > 0) || to < 0 || to >= rows.size()) {
+                return -1;
+            }
+            Column movingColumn = rows.get(row);
+            java.util.List<Column> pair = new java.util.ArrayList<>(
+                    pairAtStart ? rows.subList(0, 2) : rows.subList(rows.size() - 2, rows.size()));
+            rows.removeAll(pair);
+            rows.addAll(pairAtStart ? rows.size() : 0, pair);
+            return rows.indexOf(movingColumn);
+        }
+
+        private int moveMetadataRow(int row, int delta) {
+            // Clamped to the metadata block on its side of the text pair.
+            boolean pairAtStart = rows.get(0).isText();
+            int lowest = pairAtStart ? 2 : 0;
+            int highest = pairAtStart ? rows.size() - 1 : rows.size() - 3;
+            int to = Math.max(lowest, Math.min(highest, row + delta));
+            if (to == row) {
                 return -1;
             }
             rows.add(to, rows.remove(row));
-            Column.persistDisplayOrder(rows);
-            fireTableDataChanged();
-            onChange.run();
             return to;
         }
 

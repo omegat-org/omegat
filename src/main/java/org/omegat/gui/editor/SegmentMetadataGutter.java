@@ -91,7 +91,7 @@ final class SegmentMetadataGutter extends JComponent {
 
     /** The kind of per-column option shown in the configuration table. */
     enum ColumnOption {
-        NONE, REGEX, DATE_FORMAT, LENGTH
+        NONE, REGEX, DATE_FORMAT, LENGTH, STACKED, PAIR_ALIGNMENT
     }
 
     /** The horizontal alignment of a column, orientation-aware. */
@@ -146,7 +146,16 @@ final class SegmentMetadataGutter extends JComponent {
                 null),
         ALTERNATIVE(Preferences.EDITOR_METADATA_GUTTER_ALTERNATIVE, false,
                 "GUI_EDITORWINDOW_GUTTER_COL_ALTERNATIVE",
-                SegmentMetadataFormatter.ALTERNATIVE_MARK, false);
+                SegmentMetadataFormatter.ALTERNATIVE_MARK, false),
+        // The two pseudo columns of the editor text itself. They are rows of
+        // the configuration table like the metadata columns, but the gutter
+        // never paints them: they stand for the source and translation texts,
+        // which the editor lays out according to their settings.
+        SOURCE_TEXT(Preferences.EDITOR_LAYOUT_SOURCE_TEXT, true,
+                "GUI_EDITORWINDOW_GUTTER_COL_SOURCE_TEXT", "", false, ColumnOption.STACKED, null),
+        TARGET_TEXT(Preferences.EDITOR_LAYOUT_TARGET_TEXT, true,
+                "GUI_EDITORWINDOW_GUTTER_COL_TARGET_TEXT", "", false,
+                ColumnOption.PAIR_ALIGNMENT, null);
 
         private final String prefKey;
         private final boolean enabledByDefault;
@@ -205,7 +214,7 @@ final class SegmentMetadataGutter extends JComponent {
             }
         }
 
-        private ColumnAlignment defaultAlignment() {
+        ColumnAlignment defaultAlignment() {
             if (this == STATUS) {
                 return ColumnAlignment.CENTER;
             }
@@ -249,18 +258,64 @@ final class SegmentMetadataGutter extends JComponent {
         }
 
         boolean isEnabled() {
-            return Preferences.isPreferenceDefault(prefKey, enabledByDefault);
+            // The text pseudo columns have no visibility of their own.
+            return isText() || Preferences.isPreferenceDefault(prefKey, enabledByDefault);
         }
+
+        boolean isEnabledByDefault() {
+            return enabledByDefault;
+        }
+
+        /** One of the two text pseudo columns, never painted by the gutter. */
+        boolean isText() {
+            return this == SOURCE_TEXT || this == TARGET_TEXT;
+        }
+
+        /** Preference key of the percent share of the text rows. */
+        String getFillWeightKey() {
+            return prefKey + "_fill_weight";
+        }
+
+        /** The parsed display order with the preference it came from. */
+        private static final class DisplayOrder {
+            private final String spec;
+            private final List<Column> columns;
+
+            DisplayOrder(String spec, List<Column> columns) {
+                this.spec = spec;
+                this.columns = columns;
+            }
+        }
+
+        /** One volatile holder, so a reader never pairs spec and list from
+         * different writes; in practice all access is on the EDT. */
+        private static volatile @Nullable DisplayOrder displayOrderCache;
 
         /**
          * The columns in the user-chosen display order: the persisted order
          * first, columns unknown to the preference appended in declaration
-         * order, unknown names ignored.
+         * order, unknown names ignored. The text pseudo columns are
+         * normalized to an adjacent pair at the start or the end of the
+         * list, so the metadata columns sit before or after the text, never
+         * between its two parts. The parsed order is cached per preference
+         * value: the painters and mouse handlers ask on every pass, and the
+         * callers mutate the returned list, so each call hands out a copy.
          */
         static List<Column> inDisplayOrder() {
+            String spec = Preferences
+                    .getPreferenceDefault(Preferences.EDITOR_METADATA_GUTTER_ORDER, "");
+            DisplayOrder cached = displayOrderCache;
+            if (cached != null && spec.equals(cached.spec)) {
+                return new ArrayList<>(cached.columns);
+            }
+            List<Column> result = buildDisplayOrder(spec);
+            displayOrderCache = new DisplayOrder(spec, List.copyOf(result));
+            return result;
+        }
+
+        private static List<Column> buildDisplayOrder(String spec) {
             List<Column> result = new ArrayList<>();
-            for (String name : Preferences
-                    .getPreferenceDefault(Preferences.EDITOR_METADATA_GUTTER_ORDER, "").split(",")) {
+            for (String name : spec.split(",")) {
                 try {
                     Column column = valueOf(name.trim());
                     if (!result.contains(column)) {
@@ -275,7 +330,27 @@ final class SegmentMetadataGutter extends JComponent {
                     result.add(column);
                 }
             }
+            // The text pair sits at the very start or the very end: at the
+            // start when the persisted order began with a text row.
+            boolean textFirst = result.get(0).isText();
+            boolean targetFirst = result.indexOf(TARGET_TEXT) < result.indexOf(SOURCE_TEXT);
+            result.removeIf(Column::isText);
+            List<Column> pair = targetFirst ? List.of(TARGET_TEXT, SOURCE_TEXT)
+                    : List.of(SOURCE_TEXT, TARGET_TEXT);
+            result.addAll(textFirst ? 0 : result.size(), pair);
             return result;
+        }
+
+        /** The metadata columns in display order, without the text rows. */
+        static List<Column> gutterColumns() {
+            List<Column> result = inDisplayOrder();
+            result.removeIf(Column::isText);
+            return result;
+        }
+
+        /** Whether the metadata columns sit after (right of) the text. */
+        static boolean metadataAfterText() {
+            return inDisplayOrder().get(0).isText();
         }
 
         static void persistDisplayOrder(List<Column> order) {
@@ -294,31 +369,68 @@ final class SegmentMetadataGutter extends JComponent {
     private static final int LEADING_INSET = 4;
     private static final int MAX_EXTRA_COLORS = 3;
 
+    /**
+     * A drag tick lays the text out at most this often (in milliseconds):
+     * every width change reflows the whole text, which must not pile up per
+     * mouse event.
+     */
+    private static final int DRAG_LAYOUT_INTERVAL = 60;
+
     private final transient EditorController controller;
     private final EditorTextArea3 editor;
 
+    /**
+     * A document change repaints only the gutter: the metadata of the rows
+     * (e.g. the live target length) may change with any edit. The editor
+     * needs nothing extra, because an edit within the line moves no
+     * decoration, and an edit that rebreaks the text makes the paragraph
+     * layout repaint the editor by itself.
+     */
     private final transient DocumentListener repaintOnChange = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-            repaintWithEditorShare();
+            EditorRenderStats.documentChanged();
+            repaint();
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-            repaintWithEditorShare();
+            EditorRenderStats.documentChanged();
+            repaint();
         }
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-            repaintWithEditorShare();
+            // Attribute changes are not typing: they stay out of the
+            // type-to-paint latency probe.
+            repaint();
+        }
+    };
+
+    /** The notes variant: it repaints the note length of the active row,
+     * but must not feed the typing latency probe of the editor. */
+    private final transient DocumentListener repaintOnNoteChange = new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            repaint();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            repaint();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            repaint();
         }
     };
 
     /**
      * Repaints the gutter and, while grid lines or alternating backgrounds
-     * extend into the editor, the editor as well: a document change shifts
-     * the segments below it, but the text repaints only the changed lines,
-     * which would leave the decorations beneath at their stale positions.
+     * extend into the editor, the editor as well: used for toggles and
+     * segment activation, where the decorations move without a matching
+     * text repaint.
      */
     private void repaintWithEditorShare() {
         repaint();
@@ -358,7 +470,7 @@ final class SegmentMetadataGutter extends JComponent {
                 // Typing a note updates the note length of the active row.
                 if (Core.getNotes() instanceof JTextComponent) {
                     ((JTextComponent) Core.getNotes()).getDocument()
-                            .addDocumentListener(repaintOnChange);
+                            .addDocumentListener(repaintOnNoteChange);
                 }
             }
 
@@ -387,6 +499,202 @@ final class SegmentMetadataGutter extends JComponent {
                 repaintWithEditorShare();
             }
         });
+        installColumnResizer();
+    }
+
+    /**
+     * Lets the mouse drag the column boundaries: near a boundary the cursor
+     * becomes a resize handle, dragging sets the width of the column left of
+     * it, live and coupled to the width fields of the configuration dialog.
+     * The boundaries work whether or not the grid lines are shown.
+     */
+    private void installColumnResizer() {
+        java.awt.event.MouseAdapter resizer = new java.awt.event.MouseAdapter() {
+            private @Nullable Column dragged;
+            private int originalWidth;
+            private long lastDragLayout;
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                setCursor(java.awt.Cursor.getPredefinedCursor(boundaryAt(e.getX()) != null
+                        ? java.awt.Cursor.E_RESIZE_CURSOR : java.awt.Cursor.DEFAULT_CURSOR));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (!javax.swing.SwingUtilities.isLeftMouseButton(e) || e.isPopupTrigger()) {
+                    // A right click near a boundary is not a resize.
+                    return;
+                }
+                dragged = boundaryAt(e.getX());
+                if (dragged != null) {
+                    originalWidth = currentColumnWidth(dragged);
+                }
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Column column = dragged;
+                if (column != null) {
+                    // A changed gutter width reflows the whole text, so the
+                    // drag ticks apply it throttled; the release finishes.
+                    long now = System.currentTimeMillis();
+                    if (now - lastDragLayout >= DRAG_LAYOUT_INTERVAL) {
+                        lastDragLayout = now;
+                        // The gutter and the editor share their view y.
+                        keepLineAnchored(editor, e.getY(),
+                                () -> resizeColumnTo(column, e.getX()));
+                    }
+                    showDragHint(e, dragHintText(column.getLabel(), originalWidth,
+                            currentColumnWidth(column)));
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                Column column = dragged;
+                dragged = null;
+                hideDragHint();
+                if (column != null) {
+                    // The throttle may have skipped the last ticks.
+                    keepLineAnchored(editor, e.getY(),
+                            () -> resizeColumnTo(column, e.getX()));
+                }
+            }
+        };
+        addMouseListener(resizer);
+        addMouseMotionListener(resizer);
+    }
+
+    /**
+     * Runs a width change and keeps the text line at the given view y where
+     * it is, so the content jumps less while dragging: the line nearest the
+     * cursor stays fixed instead of the last active segment.
+     */
+    static void keepLineAnchored(EditorTextArea3 editor, int viewY, Runnable change) {
+        int anchorOffset = editor.viewToModel2D(new Point(0, viewY));
+        double oldY = -1;
+        try {
+            Rectangle2D rect = editor.modelToView2D(anchorOffset);
+            oldY = rect == null ? -1 : rect.getY();
+        } catch (BadLocationException ignored) {
+            // no anchor without a laid out line
+        }
+        change.run();
+        double anchorY = oldY;
+        if (anchorY < 0 || !(editor.getParent() instanceof javax.swing.JViewport)) {
+            return;
+        }
+        javax.swing.JViewport viewport = (javax.swing.JViewport) editor.getParent();
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                javax.swing.RepaintManager.currentManager(editor).validateInvalidComponents();
+                Rectangle2D rect = editor.modelToView2D(anchorOffset);
+                if (rect == null) {
+                    return;
+                }
+                int delta = (int) Math.round(rect.getY() - anchorY);
+                if (delta != 0) {
+                    Point position = viewport.getViewPosition();
+                    viewport.setViewPosition(
+                            new Point(position.x, Math.max(0, position.y + delta)));
+                }
+            } catch (BadLocationException ignored) {
+                // the anchor line disappeared, nothing to fix
+            }
+        });
+    }
+
+    /** The floating hint beside the cursor during a boundary drag. */
+    private static javax.swing.@Nullable JWindow dragHint;
+    private static javax.swing.@Nullable JLabel dragHintLabel;
+
+    /** Shows the drag hint beside the mouse, tooltip-coloured. */
+    static void showDragHint(MouseEvent event, String text) {
+        javax.swing.JLabel label = dragHintLabel;
+        javax.swing.JWindow hint = dragHint;
+        if (hint == null || label == null) {
+            label = new javax.swing.JLabel();
+            label.setOpaque(true);
+            label.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                    javax.swing.BorderFactory.createLineBorder(
+                            javax.swing.UIManager.getColor("ToolTip.foreground")),
+                    javax.swing.BorderFactory.createEmptyBorder(2, 6, 2, 6)));
+            hint = new javax.swing.JWindow();
+            hint.setFocusableWindowState(false);
+            hint.setType(java.awt.Window.Type.POPUP);
+            hint.getContentPane().add(label);
+            dragHintLabel = label;
+            dragHint = hint;
+        }
+        label.setBackground(javax.swing.UIManager.getColor("ToolTip.background"));
+        label.setForeground(javax.swing.UIManager.getColor("ToolTip.foreground"));
+        label.setText(text);
+        hint.pack();
+        Point screen = event.getLocationOnScreen();
+        hint.setLocation(screen.x + 14, screen.y + 18);
+        hint.setVisible(true);
+    }
+
+    static void hideDragHint() {
+        if (dragHint != null) {
+            dragHint.setVisible(false);
+        }
+    }
+
+    /** The drag hint wording: name, original and new width, difference. */
+    static String dragHintText(String label, int originalWidth, int newWidth) {
+        int difference = newWidth - originalWidth;
+        return label + ": " + originalWidth + " px → " + newWidth + " px ("
+                + (difference >= 0 ? "+" : "−") + Math.abs(difference) + " px)";
+    }
+
+    /** The column whose right boundary lies at the given x, or null. */
+    private @Nullable Column boundaryAt(int eventX) {
+        SegmentBuilder[] builders = builders();
+        if (builders == null) {
+            return null;
+        }
+        FontMetrics fm = getFontMetrics(getRowFont(true));
+        int x = LEADING_INSET;
+        for (Column column : Column.gutterColumns()) {
+            if (!column.isEnabled()) {
+                continue;
+            }
+            x += columnWidth(column, builders, fm) + COLUMN_GAP;
+            if (Math.abs(eventX - (x - COLUMN_GAP / 2 - 1)) <= 4) {
+                return column;
+            }
+        }
+        return null;
+    }
+
+    /** Sets the width of the column so its right boundary follows the drag. */
+    private void resizeColumnTo(Column column, int eventX) {
+        SegmentBuilder[] builders = builders();
+        if (builders == null) {
+            return;
+        }
+        FontMetrics fm = getFontMetrics(getRowFont(true));
+        int start = LEADING_INSET;
+        for (Column other : Column.gutterColumns()) {
+            if (other == column || !other.isEnabled()) {
+                if (other == column) {
+                    break;
+                }
+                continue;
+            }
+            start += columnWidth(other, builders, fm) + COLUMN_GAP;
+        }
+        // Clamped to the slider range, so the drag and the dialog agree.
+        int width = Math.max(SegmentMetadataConfigDialog.WidthSliderPanel.MIN_WIDTH,
+                Math.min(SegmentMetadataConfigDialog.WidthSliderPanel.MAX_WIDTH,
+                        eventX - start + COLUMN_GAP / 2));
+        Preferences.setPreference(column.getWidthKey(), width);
+        Preferences.setPreference(column.getWidthRefKey(), editor.getFont().getSize());
+        revalidate();
+        repaint();
+        SegmentMetadataConfigDialog.refreshOpenDialog();
     }
 
     @Override
@@ -397,7 +705,7 @@ final class SegmentMetadataGutter extends JComponent {
         }
         FontMetrics fm = getFontMetrics(getRowFont(true));
         int width = LEADING_INSET;
-        for (Column column : Column.inDisplayOrder()) {
+        for (Column column : Column.gutterColumns()) {
             if (column.isEnabled()) {
                 width += columnWidth(column, builders, fm) + COLUMN_GAP;
             }
@@ -407,6 +715,7 @@ final class SegmentMetadataGutter extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g) {
+        long renderToken = EditorRenderStats.begin();
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(editor.getBackground());
         g2.fillRect(0, 0, getWidth(), getHeight());
@@ -436,6 +745,19 @@ final class SegmentMetadataGutter extends JComponent {
         Color zebraColor = zebraColor(editor.getForeground(), editor.getBackground());
         Color gridColor = gridColor(editor.getForeground(), editor.getBackground());
 
+        // The enabled columns and their widths are loop invariants; resolving
+        // them per row multiplies preference lookups into every paint.
+        List<Column> enabledColumns = new ArrayList<>();
+        for (Column column : Column.gutterColumns()) {
+            if (column.isEnabled()) {
+                enabledColumns.add(column);
+            }
+        }
+        int[] columnWidths = new int[enabledColumns.size()];
+        for (int c = 0; c < columnWidths.length; c++) {
+            columnWidths[c] = columnWidth(enabledColumns.get(c), builders, fm);
+        }
+
         for (int i = firstRowIndex(builders, clipTopOffset); i < builders.length; i++) {
             SegmentBuilder builder = builders[i];
             if (!builder.hasBeenCreated()) {
@@ -446,7 +768,7 @@ final class SegmentMetadataGutter extends JComponent {
             }
             Rectangle2D rect;
             try {
-                rect = editor.modelToView2D(builder.getStartPosition());
+                rect = segmentTopRect(editor, builder);
             } catch (BadLocationException ex) {
                 continue;
             }
@@ -487,18 +809,16 @@ final class SegmentMetadataGutter extends JComponent {
                     + (fm.getAscent() - fm.getDescent()) / 2;
             int x = LEADING_INSET;
             TMXEntry trans = Core.getProject().getTranslationInfo(builder.getSourceTextEntry());
-            for (Column column : Column.inDisplayOrder()) {
-                if (!column.isEnabled()) {
-                    continue;
-                }
-                int columnWidth = columnWidth(column, builders, fm);
+            for (int c = 0; c < columnWidths.length; c++) {
+                Column column = enabledColumns.get(c);
+                int columnWidth = columnWidths[c];
                 Graphics2D cell = (Graphics2D) g2.create();
                 try {
                     if (column == Column.COLOR) {
                         // The target pair sits at the height of the first
                         // translation line, so the clip spans the segment.
                         cell.clipRect(x, rowTop, columnWidth, getHeight() - rowTop);
-                        paintColorSwatch(cell, x, rowTop, fm, builder, muted);
+                        paintColorSwatch(cell, x, columnWidth, rowTop, fm, builder, muted);
                     } else {
                         cell.clipRect(x, textTop, columnWidth, fm.getHeight());
                         String value = value(column, builder, trans);
@@ -526,21 +846,24 @@ final class SegmentMetadataGutter extends JComponent {
         if (grid) {
             // Vertical grid lines on the column boundaries.
             g2.setColor(gridColor);
+            if (Column.metadataAfterText()) {
+                // The boundary between the text and the trailing gutter.
+                g2.drawLine(0, clipTop, 0, clipBottom);
+            }
             int x = LEADING_INSET;
-            for (Column column : Column.inDisplayOrder()) {
-                if (!column.isEnabled()) {
-                    continue;
-                }
-                x += columnWidth(column, builders, fm) + COLUMN_GAP;
+            for (int columnWidth : columnWidths) {
+                x += columnWidth + COLUMN_GAP;
                 g2.drawLine(x - COLUMN_GAP / 2 - 1, clipTop, x - COLUMN_GAP / 2 - 1, clipBottom);
             }
         }
+        EditorRenderStats.end("gutter.paint", renderToken);
     }
 
     /**
      * Paints the alternating backgrounds of the segments across the editor.
-     * Called from the editor's paint before the text renders, so the stripes
-     * lie under it; the gutter draws its own share.
+     * Called from the editor's highlighter, between the background fill of
+     * the UI delegate and the text, so the stripes lie under everything the
+     * text paints; the gutter draws its own share.
      */
     static void paintZebraStripes(EditorTextArea3 editor, Graphics g) {
         if (!Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER)
@@ -552,6 +875,7 @@ final class SegmentMetadataGutter extends JComponent {
         if (builders == null) {
             return;
         }
+        long renderToken = EditorRenderStats.begin();
         g.setColor(zebraColor(editor.getForeground(), editor.getBackground()));
         int clipTop = g.getClipBounds().y;
         int clipBottom = clipTop + g.getClipBounds().height;
@@ -572,7 +896,7 @@ final class SegmentMetadataGutter extends JComponent {
                 continue;
             }
             try {
-                Rectangle2D rect = editor.modelToView2D(builder.getStartPosition());
+                Rectangle2D rect = segmentTopRect(editor, builder);
                 if (rect == null) {
                     continue;
                 }
@@ -587,6 +911,7 @@ final class SegmentMetadataGutter extends JComponent {
                 // a not yet laid out segment has no stripe
             }
         }
+        EditorRenderStats.end("zebra.paint", renderToken);
     }
 
     /**
@@ -604,10 +929,49 @@ final class SegmentMetadataGutter extends JComponent {
         if (builders == null) {
             return;
         }
+        long renderToken = EditorRenderStats.begin();
         g.setColor(gridColor(editor.getForeground(), editor.getBackground()));
         int clipTop = g.getClipBounds().y;
         int clipBottom = clipTop + g.getClipBounds().height;
         int lineHeight = editor.getFontMetrics(editor.getFont()).getHeight();
+        // The vertical boundary between the two text cells of the side by
+        // side layout; it is also the drag handle for the cell widths. It
+        // skips the active segment, which keeps the stacked layout.
+        SegmentColumnsView columnsView = editor.columnsView();
+        int boundary = columnsView == null ? -1 : columnsView.boundaryX();
+        if (boundary >= 0) {
+            // The view x and the component x differ by the text margin.
+            boundary += editor.getInsets().left;
+            int skipTop = Integer.MAX_VALUE;
+            int skipBottom = Integer.MIN_VALUE;
+            int activeIndex = editor.controller.displayedEntryIndex;
+            SegmentBuilder activeBuilder = activeIndex >= 0 && activeIndex < builders.length
+                    ? builders[activeIndex] : null;
+            if (activeBuilder != null && activeBuilder.isActive()
+                    && activeBuilder.hasBeenCreated()) {
+                try {
+                    Rectangle2D active = segmentTopRect(editor, activeBuilder);
+                    if (active != null) {
+                        int activeTop = (int) active.getY();
+                        skipTop = activeTop - lineHeight / 2;
+                        skipBottom = segmentTextBottom(editor, activeBuilder, activeTop)
+                                + lineHeight - lineHeight / 2;
+                    }
+                } catch (BadLocationException ignored) {
+                    // no active row laid out, nothing to skip
+                }
+            }
+            if (skipTop == Integer.MAX_VALUE) {
+                g.drawLine(boundary, clipTop, boundary, clipBottom);
+            } else {
+                if (skipTop > clipTop) {
+                    g.drawLine(boundary, clipTop, boundary, Math.min(clipBottom, skipTop));
+                }
+                if (skipBottom < clipBottom) {
+                    g.drawLine(boundary, Math.max(clipTop, skipBottom), boundary, clipBottom);
+                }
+            }
+        }
         int clipTopOffset = editor.viewToModel2D(new Point(0, clipTop));
         // One line further down: the separator line of a segment sits above
         // its start, so a segment just below the repainted strip still owns a
@@ -622,7 +986,7 @@ final class SegmentMetadataGutter extends JComponent {
                 break;
             }
             try {
-                Rectangle2D rect = editor.modelToView2D(builder.getStartPosition());
+                Rectangle2D rect = segmentTopRect(editor, builder);
                 if (rect == null) {
                     continue;
                 }
@@ -632,6 +996,7 @@ final class SegmentMetadataGutter extends JComponent {
                 // a not yet laid out segment has no line
             }
         }
+        EditorRenderStats.end("grid.paint", renderToken);
     }
 
     /**
@@ -645,7 +1010,7 @@ final class SegmentMetadataGutter extends JComponent {
                 continue;
             }
             try {
-                Rectangle2D rect = editor.modelToView2D(builders[j].getStartPosition());
+                Rectangle2D rect = segmentTopRect(editor, builders[j]);
                 if (rect != null) {
                     return (int) rect.getY() - lineHeight / 2;
                 }
@@ -656,19 +1021,50 @@ final class SegmentMetadataGutter extends JComponent {
         return textBottom + lineHeight - lineHeight / 2;
     }
 
+    /**
+     * The view rectangle of the visual top of the segment: with the swapped
+     * stacked order the translation block sits above the segment's first
+     * document offset.
+     */
+    private static @Nullable Rectangle2D segmentTopRect(EditorTextArea3 editor,
+            SegmentBuilder builder) throws BadLocationException {
+        EditorRenderStats.count("topRect", 1);
+        Rectangle2D rect = editor.modelToView2D(builder.getStartPosition());
+        int translationStart = builder.getStartTranslationPosition();
+        if (translationStart >= 0) {
+            Rectangle2D translation = editor.modelToView2D(translationStart);
+            if (translation != null && (rect == null || translation.getY() < rect.getY())) {
+                rect = translation;
+            }
+        }
+        return rect;
+    }
+
     /** The view bottom of the last text line of the segment. */
     private static int segmentTextBottom(EditorTextArea3 editor, SegmentBuilder builder,
             int rowTop) {
+        int bottom = -1;
         try {
             Rectangle2D rect = builder.endPosM1 == null ? null
                     : editor.modelToView2D(builder.endPosM1.getOffset());
             if (rect != null) {
-                return (int) (rect.getY() + rect.getHeight());
+                bottom = (int) (rect.getY() + rect.getHeight());
+            }
+            // With the swapped stacked order the source block sits below
+            // the segment's last document offset.
+            String sourceText = builder.getSourceText();
+            if (sourceText != null && builder.getStartSourcePosition() >= 0) {
+                Rectangle2D source = editor.modelToView2D(
+                        builder.getStartSourcePosition() + sourceText.length());
+                if (source != null) {
+                    bottom = Math.max(bottom, (int) (source.getY() + source.getHeight()));
+                }
             }
         } catch (BadLocationException ignored) {
             // fall through to the fallback
         }
-        return rowTop + editor.getFontMetrics(editor.getFont()).getHeight();
+        return bottom >= 0 ? bottom
+                : rowTop + editor.getFontMetrics(editor.getFont()).getHeight();
     }
 
     @Override
@@ -742,7 +1138,7 @@ final class SegmentMetadataGutter extends JComponent {
         }
         FontMetrics fm = getFontMetrics(getRowFont(true));
         int x = LEADING_INSET;
-        for (Column column : Column.inDisplayOrder()) {
+        for (Column column : Column.gutterColumns()) {
             if (!column.isEnabled()) {
                 continue;
             }
@@ -859,9 +1255,17 @@ final class SegmentMetadataGutter extends JComponent {
         if (column == Column.COLOR) {
             // The base pair plus room for boxes of further marker colours
             // and for the underline miniatures.
-            return colorPairWidth(fm) + 2 * MAX_EXTRA_COLORS * (foregroundBoxSize(fm) + 2);
+            int single = colorPairWidth(fm) + 2 * MAX_EXTRA_COLORS * (foregroundBoxSize(fm) + 2);
+            // Side by side, source and target sit level: the colour column
+            // doubles into a source half and a target half beside it.
+            return stackedTexts() ? single : 2 * single + COLUMN_GAP;
         }
         return fm.stringWidth(widthSample(column, builders, fm));
+    }
+
+    /** The classic layout with the source text above the translation. */
+    private static boolean stackedTexts() {
+        return Preferences.isPreferenceDefault(Preferences.EDITOR_LAYOUT_STACKED, true);
     }
 
     /** The background box, a gap, the smaller foreground box. */
@@ -893,15 +1297,18 @@ final class SegmentMetadataGutter extends JComponent {
      * entries are resolved when painting, so the boxes follow colour changes
      * like the editor does.
      */
-    private void paintColorSwatch(Graphics2D g2, int x, int rowTop, FontMetrics fm,
-            SegmentBuilder builder, Color outline) {
+    private void paintColorSwatch(Graphics2D g2, int x, int columnWidth, int rowTop,
+            FontMetrics fm, SegmentBuilder builder, Color outline) {
+        // Side by side, both parts start level, so the target pair moves
+        // into the second half of the doubled column.
+        int targetX = stackedTexts() ? x : x + columnWidth / 2 + 1;
         if (builder.getSourceText() != null && builder.posSourceBeg != null) {
             paintColorPair(g2, x, lineTop(builder.posSourceBeg.getOffset(), rowTop), fm, outline,
                     builder.posSourceBeg.getOffset(), sourceRange(builder));
         }
         int translationStart = translationStartOffset(builder);
         if (translationStart >= 0) {
-            paintColorPair(g2, x, lineTop(translationStart, rowTop), fm, outline,
+            paintColorPair(g2, targetX, lineTop(translationStart, rowTop), fm, outline,
                     translationStart, targetRange(builder));
         }
     }
@@ -959,12 +1366,17 @@ final class SegmentMetadataGutter extends JComponent {
         // inserted at document offset 0 and a Position created there sticks
         // at 0 forever, so their source anchor ends up pointing at whatever
         // is the top of the document once more segments load above them.
+        // The smaller of the two part tops counts: with the swapped stacked
+        // order the translation block sits above the source block.
+        int top = Integer.MAX_VALUE;
         if (builder.getSourceText() != null && builder.posSourceBeg != null) {
-            return Math.max(fallback, lineTop(builder.posSourceBeg.getOffset(), fallback));
+            top = lineTop(builder.posSourceBeg.getOffset(), fallback);
         }
         int translationStart = translationStartOffset(builder);
-        return translationStart >= 0 ? Math.max(fallback, lineTop(translationStart, fallback))
-                : fallback;
+        if (translationStart >= 0) {
+            top = Math.min(top, lineTop(translationStart, fallback));
+        }
+        return top == Integer.MAX_VALUE ? fallback : Math.max(fallback, top);
     }
 
     /** The view top of the line at the offset, the row top as fallback. */

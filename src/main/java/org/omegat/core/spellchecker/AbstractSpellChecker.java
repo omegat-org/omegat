@@ -7,6 +7,7 @@
  *                2009 Didier Briel
  *                2015 Aaron Madlon-Kay
  *                2020 Briac Pilpre
+ *                2026 Stephan Pakebusch
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -36,7 +37,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -82,6 +85,21 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * Cache of incorrect words.
      */
     private final Set<String> incorrectWordsCache = new HashSet<>();
+    /**
+     * Cache of suggestions per misspelled word: a suggestion lookup is far
+     * more expensive than a spell check, and the editor tooltips ask on
+     * every hover. Bounded, access ordered; guarded by the same monitor as
+     * the word caches, which also serializes the provider access with the
+     * background checks (the providers are not thread safe).
+     */
+    private static final int SUGGESTIONS_CACHE_SIZE = 500;
+    private final Map<String, List<String>> suggestionsCache = new LinkedHashMap<String, List<String>>(
+            16, 0.75f, true) {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, List<String>> eldest) {
+            return size() > SUGGESTIONS_CACHE_SIZE;
+        }
+    };
 
     public AbstractSpellChecker() {
         CoreEvents.registerProjectChangeListener(eventType -> {
@@ -209,12 +227,16 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
             checker.destroy();
             checker = null;
         }
+        // The settings dialog destroys and reinitializes without a project
+        // event: cached suggestions of the old dictionary must go with it.
+        resetCache();
     }
 
     protected void resetCache() {
         synchronized (this) {
             incorrectWordsCache.clear();
             correctWordsCache.clear();
+            suggestionsCache.clear();
         }
     }
 
@@ -274,10 +296,12 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word)) {
             isCorrect = true;
-        } else if (checker != null) {
-            isCorrect = checker.isCorrect(word);
         } else {
-            isCorrect = false;
+            // The providers are not thread safe: the check runs under the
+            // same monitor as the suggestion lookup of the tooltips.
+            synchronized (this) {
+                isCorrect = checker != null && checker.isCorrect(word);
+            }
         }
 
         // remember in cache
@@ -300,10 +324,22 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         }
         // Check if a spellchecker is already initialized.
         // If not, skip checking to prevent nullPointerErrors.
-        if (checker != null) {
-            return checker.suggest(normalize(word));
+        if (checker == null) {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+        String normalized = normalize(word);
+        synchronized (this) {
+            List<String> cached = suggestionsCache.get(normalized);
+            if (cached != null) {
+                return cached;
+            }
+            if (checker == null) {
+                return Collections.emptyList();
+            }
+            List<String> suggestions = List.copyOf(checker.suggest(normalized));
+            suggestionsCache.put(normalized, suggestions);
+            return suggestions;
+        }
     }
 
     /**
@@ -316,6 +352,8 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
             synchronized (this) {
                 incorrectWordsCache.remove(word);
                 correctWordsCache.add(word);
+                // A changed word list changes what suggestions make sense.
+                suggestionsCache.clear();
             }
         }
     }
@@ -333,6 +371,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
             synchronized (this) {
                 incorrectWordsCache.remove(word);
                 correctWordsCache.add(word);
+                // A learned word may now appear among the suggestions of
+                // its neighbours.
+                suggestionsCache.clear();
             }
         }
     }

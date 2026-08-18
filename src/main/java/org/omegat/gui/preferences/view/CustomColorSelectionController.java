@@ -60,6 +60,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.CoreEvents;
@@ -180,6 +181,14 @@ public class CustomColorSelectionController extends BasePreferencesController {
         // fully sized from the start (no leading "...") and extends past the
         // right edge, reachable via the horizontal scroll bar.
         TableColumnSizer.autoSize(panel.colorStylesTable, ColorColumns.INTERNAL.index, false);
+        // The sizer re-measures on every model change, but only over the
+        // VIEW rows: with an active search filter the item column would
+        // shrink to the longest visible name and truncate others. Content
+        // is static, so lock the full-content width measured just now
+        // (no filter active yet) as the minimum.
+        TableColumn nameColumn = panel.colorStylesTable.getColumnModel()
+                .getColumn(ColorColumns.NAME.index);
+        nameColumn.setMinWidth(nameColumn.getPreferredWidth());
         panel.searchTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

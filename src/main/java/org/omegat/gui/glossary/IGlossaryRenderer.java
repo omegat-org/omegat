@@ -110,7 +110,7 @@ public interface IGlossaryRenderer {
                     buf.append("<i>");
                 }
                 Color attrColor = StyleConstants.getForeground(attr);
-                if (attrColor != Color.black) {
+                if (!Color.black.equals(attrColor)) {
                     String colorString = String.format("%02x%02x%02x", attrColor.getRed(),
                             attrColor.getGreen(), attrColor.getBlue());
                     buf.append("<font color=#").append(colorString).append(">");
@@ -120,7 +120,7 @@ public interface IGlossaryRenderer {
             buf.append(doc);
             if (attr != null) {
                 Color attrColor = StyleConstants.getForeground(attr);
-                if (attrColor != Color.black) {
+                if (!Color.black.equals(attrColor)) {
                     buf.append("</font>");
                 }
                 if (StyleConstants.isItalic(attr)) {

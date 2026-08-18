@@ -88,6 +88,22 @@ import org.omegat.util.gui.UIDesignManager;
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
 
+    @Override
+    protected void paintComponent(java.awt.Graphics g) {
+        if (!isOpaque()) {
+            // Not opaque while the alternating background of the segment
+            // metadata gutter extends into the editor: the stripes must lie
+            // under the text, so this paints the background itself.
+            g.setColor(getBackground());
+            java.awt.Rectangle clip = g.getClipBounds();
+            g.fillRect(clip.x, clip.y, clip.width, clip.height);
+            SegmentMetadataGutter.paintZebraStripes(this, g);
+        }
+        super.paintComponent(g);
+        // Grid lines of the segment metadata gutter span the whole editor.
+        SegmentMetadataGutter.paintSegmentSeparators(this, g);
+    }
+
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorContextMenu");
     private static final KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()
@@ -202,12 +218,28 @@ public class EditorTextArea3 extends JEditorPane {
         });
         setToolTipText("");
         setDragEnabled(true);
-        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyColors();
+        CoreEvents.registerColorsChangedEventListener(this::applyColors);
 
         updateLockInsertMessage();
         autoCompleter = new AutoCompleter(this);
+    }
+
+    /**
+     * Apply the editor's foreground, caret and background colours from the
+     * current preferences, so a colour change takes effect without a restart.
+     */
+    public void applyColors() {
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        Document3 doc = getOmDocument();
+        if (doc != null) {
+            doc.applyDefaultColors();
+        }
+        // span colors are bound to the palette and resolve when painting
+        // (see Styles#createBoundAttributeSet) — a repaint shows them
+        repaint();
     }
 
     @Override

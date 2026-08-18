@@ -28,9 +28,11 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
@@ -119,10 +121,43 @@ public class Document3 extends DefaultStyledDocument {
     public Document3(final EditorController controller) {
         this.controller = controller;
 
-        Style defaultStyle = getDefaultStyle();
-        StyleConstants.setForeground(defaultStyle, Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyDefaultColors();
         setFont(controller.font);
+    }
+
+    /**
+     * Bake the editor-wide default colors into the default style. Kept a
+     * no-op while they are unchanged, so a palette edit of span colors stays
+     * a pure repaint; an actual default change lets Swing revalidate the
+     * views without rebuilding the document.
+     */
+    void applyDefaultColors() {
+        Style defaultStyle = getDefaultStyle();
+        Color foreground = Styles.EditorColor.COLOR_FOREGROUND.getColor();
+        Color background = Styles.EditorColor.COLOR_BACKGROUND.getColor();
+        if (!foreground.equals(StyleConstants.getForeground(defaultStyle))
+                || !background.equals(StyleConstants.getBackground(defaultStyle))) {
+            StyleConstants.setForeground(defaultStyle, foreground);
+            StyleConstants.setBackground(defaultStyle, background);
+        }
+    }
+
+    /**
+     * Spans bound to a palette entry resolve their colors against the
+     * palette currently in effect (see
+     * {@link Styles#createBoundAttributeSet}), so consumers that ask the
+     * document — instead of a view — see live colors as well.
+     */
+    @Override
+    public Color getForeground(AttributeSet attr) {
+        Color bound = Styles.resolveBoundForeground(attr);
+        return bound != null ? bound : super.getForeground(attr);
+    }
+
+    @Override
+    public Color getBackground(AttributeSet attr) {
+        Color bound = Styles.resolveBoundBackground(attr);
+        return bound != null ? bound : super.getBackground(attr);
     }
 
     private Style getDefaultStyle() {
@@ -204,26 +239,64 @@ public class Document3 extends DefaultStyledDocument {
      *            false - left alignment, true - right alignment
      */
     protected void setAlignment(int beginOffset, int endOffset, boolean isRightAlignment) {
+        setAlignmentValue(beginOffset, endOffset,
+                isRightAlignment ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
+    }
+
+    /** Set a specific paragraph alignment, e.g. the user-chosen centering. */
+    protected void setAlignmentValue(int beginOffset, int endOffset, int alignment) {
         try {
             writeLock();
 
             DefaultDocumentEvent changes = new DefaultDocumentEvent(beginOffset, endOffset - beginOffset,
                     DocumentEvent.EventType.CHANGE);
 
-            Element root = getDefaultRootElement();
-            int parBeg = root.getElementIndex(beginOffset);
-            int parEnd = root.getElementIndex(endOffset - 1);
-            for (int par = parBeg; par <= parEnd; par++) {
-                Element el = root.getElement(par);
-                MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
-                attr.addAttribute(StyleConstants.Alignment,
-                        isRightAlignment ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
-            }
+            applyAlignmentAttributes(beginOffset, endOffset, alignment);
 
             changes.end();
             fireChangedUpdate(changes);
         } finally {
             writeUnlock();
+        }
+    }
+
+    /**
+     * Set a paragraph alignment without firing a change event. For batch
+     * passes over the whole document: one event per part lets the view
+     * updates pile up, so the batch fires a single document-wide event
+     * through {@link #fireAlignmentBatchDone()} at its end.
+     */
+    protected void applyAlignmentValue(int beginOffset, int endOffset, int alignment) {
+        try {
+            writeLock();
+            applyAlignmentAttributes(beginOffset, endOffset, alignment);
+        } finally {
+            writeUnlock();
+        }
+    }
+
+    /** The one document-wide change event closing a quiet alignment batch. */
+    protected void fireAlignmentBatchDone() {
+        try {
+            writeLock();
+            DefaultDocumentEvent changes = new DefaultDocumentEvent(0, getLength(),
+                    DocumentEvent.EventType.CHANGE);
+            changes.end();
+            fireChangedUpdate(changes);
+        } finally {
+            writeUnlock();
+        }
+    }
+
+    private void applyAlignmentAttributes(int beginOffset, int endOffset, int alignment) {
+        Element root = getDefaultRootElement();
+        int parBeg = root.getElementIndex(beginOffset);
+        // An empty part still owns the paragraph at its begin offset.
+        int parEnd = root.getElementIndex(Math.max(beginOffset, endOffset - 1));
+        for (int par = parBeg; par <= parEnd; par++) {
+            Element el = root.getElement(par);
+            MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
+            attr.addAttribute(StyleConstants.Alignment, alignment);
         }
     }
 

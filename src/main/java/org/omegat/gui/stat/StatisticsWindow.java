@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2012 Thomas Cordonnier
                2015 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,12 +33,22 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.function.Function;
 
+import javax.swing.Box;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcPerFileMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
@@ -47,6 +58,7 @@ import org.omegat.core.threads.LongProcessExecutor;
 import org.omegat.core.threads.LongProcessHandle;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -91,37 +103,120 @@ public class StatisticsWindow extends javax.swing.JDialog {
         }
     }
 
-    LongProcessHandle<Void> handle;
+    private @Nullable LongProcessHandle<Void> handle;
+
+    private static final Map<STAT_TYPE, StatisticsWindow> OPEN_WINDOWS = new EnumMap<>(STAT_TYPE.class);
+
+    /**
+     * Short date/time formatter for the last scan label.
+     */
+    private static final DateTimeFormatter LAST_SCAN_FORMAT = DateTimeFormatter
+            .ofLocalizedDateTime(FormatStyle.SHORT).withZone(ZoneId.systemDefault());
+
+    private final STAT_TYPE statType;
+    private final JComponent output;
+    private final javax.swing.JButton recalculateButton = new javax.swing.JButton();
+    private final JLabel lastScanLabel = new JLabel();
+    private final IProjectEventListener projectListener = eventType -> {
+        if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+            cancelCalculation();
+            dispose();
+        }
+    };
+
+    /**
+     * Show the statistics window of the given type, or bring the already open
+     * one to the front. The window is non-modal, so the editor stays usable
+     * while it is open. Must be called on the Swing thread.
+     */
+    public static void showWindow(Frame parent, STAT_TYPE statType) {
+        StatisticsWindow existing = OPEN_WINDOWS.get(statType);
+        if (existing != null) {
+            existing.toFront();
+            existing.requestFocus();
+            return;
+        }
+        StatisticsWindow window = new StatisticsWindow(parent, statType);
+        OPEN_WINDOWS.put(statType, window);
+        window.setVisible(true);
+    }
 
     /**
      * Creates new form StatisticsWindow
      */
     public StatisticsWindow(Frame parent, STAT_TYPE statType) {
-        super(parent, true);
+        super(parent, false);
+        this.statType = statType;
         initComponents();
         copyDataButton.setVisible(false);
 
         setTitle(statType.getTitle());
-        JComponent output = statType.createPanel(this);
-        ICalcStatistics calcStat = statType.createCalculator((IStatsConsumer) output);
-        LongProcessExecutor executor = Core.getLongProcessExecutor();
-        handle = executor.submit(calcStat::run);
+        output = statType.createPanel(this);
         displayPanel.add(output);
+
+        // These widgets are added programmatically because initComponents is
+        // generated from the form.
+        jPanel2.add(lastScanLabel, 0);
+        jPanel2.add(Box.createHorizontalStrut(10), 1);
+        org.openide.awt.Mnemonics.setLocalizedText(recalculateButton,
+                OStrings.getString("BUTTON_STATSMATCH_RECALCULATE"));
+        recalculateButton.setVisible(statType == STAT_TYPE.MATCHES);
+        recalculateButton.addActionListener(e -> startCalculation());
+        jPanel2.add(recalculateButton, jPanel2.getComponentZOrder(copyDataButton));
 
         StaticUIUtils.setEscapeClosable(this);
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                handle.cancel();
+                cancelCalculation();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                OPEN_WINDOWS.remove(statType, StatisticsWindow.this);
+                CoreEvents.unregisterProjectChangeListener(projectListener);
             }
         });
+        CoreEvents.registerProjectChangeListener(projectListener);
+
+        boolean restored = statType == STAT_TYPE.MATCHES && output instanceof MatchStatisticsPanel panel
+                && panel.restoreFromCache();
+        if (restored) {
+            finishData();
+        } else {
+            startCalculation();
+        }
 
         setSize(800, 400);
         StaticUIUtils.persistGeometry(this, Preferences.STATISTICS_WINDOW_GEOMETRY_PREFIX);
         // setLocationRealativeTo called after persistGeometry
         // to make sure the stat window always pops up in the center of the parent window
         setLocationRelativeTo(parent);
+    }
+
+    private void startCalculation() {
+        recalculateButton.setEnabled(false);
+        progressBar.setValue(0);
+        progressBar.setString("");
+        progressBar.setVisible(true);
+        ICalcStatistics calcStat = statType.createCalculator((IStatsConsumer) output);
+        LongProcessExecutor executor = Core.getLongProcessExecutor();
+        handle = executor.submit(calcStat::run);
+    }
+
+    private void cancelCalculation() {
+        if (handle != null) {
+            handle.cancel();
+        }
+    }
+
+    private void updateLastScanLabel() {
+        if (statType != STAT_TYPE.MATCHES) {
+            return;
+        }
+        MatchStatisticsCache.get().ifPresent(snapshot -> lastScanLabel.setText(StringUtil.format(
+                OStrings.getString("CT_STATSMATCH_LastScan"), LAST_SCAN_FORMAT.format(snapshot.getLastScan()))));
     }
 
     /**
@@ -186,7 +281,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
         // WindowListener.windowClosing() so we have to be sure to end the
         // thread here too.
         // See https://sourceforge.net/p/omegat/bugs/789/
-        handle.cancel();
+        cancelCalculation();
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
 
@@ -218,6 +313,8 @@ public class StatisticsWindow extends javax.swing.JDialog {
                 progressBar.setString("");
                 progressBar.setVisible(false);
                 copyDataButton.setVisible(true);
+                recalculateButton.setEnabled(true);
+                updateLastScanLabel();
             }
         });
     }

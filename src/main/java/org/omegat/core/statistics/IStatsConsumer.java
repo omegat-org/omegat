@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,6 +26,8 @@
 
 package org.omegat.core.statistics;
 
+import java.util.Map;
+
 import org.omegat.core.threads.Completion;
 
 /**
@@ -42,6 +45,20 @@ public interface IStatsConsumer {
     void setTable(String[] headers, String[][] data);
 
     void setDataFile(String path);
+
+    /**
+     * Receive the mapping from segment entry number to the row index of the
+     * match statistics category the segment was counted in (see
+     * {@link org.omegat.core.statistics.dso.MatchStatCounts}). Delivered by
+     * total match statistics calculations only, once per run, before the final
+     * table is delivered via {@link #setTable(String[], String[][])}. The
+     * default implementation ignores the data.
+     *
+     * @param entryRowIndexes
+     *            unmodifiable map of entry number to category row index
+     */
+    default void setEntryRowIndexes(Map<Integer, Integer> entryRowIndexes) {
+    }
 
     /**
      * Legacy completion signal (no status / no error detail).

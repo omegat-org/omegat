@@ -38,6 +38,9 @@ import org.omegat.core.threads.Completion;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
+
+import org.omegat.core.statistics.dso.MatchStatCounts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -164,6 +167,34 @@ public class CalcMatchStatisticsTest extends TestCore {
         result = allResult.get(1);
         assertNotNull(result);
         assertStatistics(result, false);
+    }
+
+    @Test
+    public void testEntryRowIndexes() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter,
+                testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calcMatchStatistics.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
+        Map<Integer, Integer> rows = testingStatsConsumer.getEntryRowIndexes();
+        assertNotNull(rows);
+        // Every entry is assigned to exactly one category.
+        assertEquals(108, rows.size());
+        // Category sizes match the segment column of the statistics table.
+        assertCategoryCount(rows, MatchStatCounts.ROW_REPETITIONS, 11);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(Statistics.PERCENT_EXACT_MATCH), 0);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(95), 84);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(85), 0);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(75), 3);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(50), 4);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(0), 6);
+    }
+
+    private void assertCategoryCount(Map<Integer, Integer> rows, int categoryRow, long expected) {
+        assertEquals(expected, rows.values().stream().filter(row -> row == categoryRow).count());
     }
 
     private void assertStatistics(String[][] result, boolean perFile) {

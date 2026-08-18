@@ -34,6 +34,7 @@ import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.jspecify.annotations.NullMarked;
+import org.omegat.util.gui.Styles.EditorColor;
 
 /**
  * A default light theme customized from FlatLightLaf.
@@ -99,48 +100,77 @@ public class DefaultFlatLightTheme extends FlatLaf {
         defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
         defaults.put("OmegaTDockablePanel.isProportionalMargins", true);
 
-        // Default application Colors
-        defaults.put("OmegaT.activeSource", new Color(0xc0ffc0));
-        defaults.put("OmegaT.source", new Color(0xc0ffc0));
-        defaults.put("OmegaT.noted", new Color(0xc0ffff));
-        defaults.put("OmegaT.untranslated", new Color(0xc0c0ff));
-        defaults.put("OmegaT.translated", new Color(0xffff99));
-        defaults.put("OmegaT.nonUnique", new Color(0x808080));
-        defaults.put("OmegaT.placeholder", new Color(0x969696));
-        defaults.put("OmegaT.removeTextTarget", new Color(0xff0000));
-        defaults.put("OmegaT.nbsp", new Color(0xc8c8c8));
-        defaults.put("OmegaT.whiteSpace", new Color(0x808080));
-        defaults.put("OmegaT.bidiMarkers", new Color(0xc80000));
-        defaults.put("OmegaT.paragraphStart", new Color(0xaeaeae));
-        defaults.put("OmegaT.markComesFromTm", new Color(0xfa8072));
-        defaults.put("OmegaT.markComesFromTxXice", new Color(0xaf76df));
-        defaults.put("OmegaT.markComesFromTmX100pc", new Color(0xff9408));
-        defaults.put("OmegaT.markComesFromTmXauto", new Color(0xff9596));
-        defaults.put("OmegaT.markComesFromTmXendorced", new Color(0xffccff));
-        defaults.put("OmegaT.replace", new Color(0x0000ff));
-        defaults.put("OmegaT.languageTools", new Color(0x0000ff));
-        defaults.put("OmegaT.transTips", new Color(0x0000ff));
-        defaults.put("OmegaT.spellCheck", new Color(0xff0000));
-        defaults.put("OmegaT.terminology", new Color(0xff6600));
-        defaults.put("OmegaT.matchesChanged", new Color(0x0000ff));
-        defaults.put("OmegaT.matchesUnchanged", new Color(0x00ff00));
-        defaults.put("OmegaT.matchesInsActive", new Color(0x0000ff));
-        defaults.put("OmegaT.matchesInsInactive", new Color(0x808080));
-        defaults.put("OmegaT.hyperlink", new Color(0x0000ff));
-        defaults.put("OmegaT.searchFoundMark", new Color(0x0000ff));
-        defaults.put("OmegaT.searchReplaceMark", new Color(0xff9900));
-        defaults.put("OmegaT.notificationMin", new Color(0xfff2d4));
-        defaults.put("OmegaT.notificationMax", new Color(0xff9900));
-        defaults.put("OmegaT.alignerAccepted", new Color(0x15bb45));
-        defaults.put("OmegaT.alignerNeedsReview", new Color(0xff0000));
-        defaults.put("OmegaT.alignerHighlight", new Color(0xffff00));
-        defaults.put("OmegaT.alignerTableRowHighlight", new Color(0xc8c8c8));
+        // Default application Colors. Keys come from the EditorColor entry
+        // they style, so a typo cannot silently disconnect a value.
+        defaults.put(EditorColor.COLOR_ACTIVE_SOURCE.getUIManagerKey(), new Color(0xc0ffc0));
+        defaults.put(EditorColor.COLOR_SOURCE.getUIManagerKey(), new Color(0xc0ffc0));
+        defaults.put(EditorColor.COLOR_NOTED.getUIManagerKey(), new Color(0xc0ffff));
+        defaults.put(EditorColor.COLOR_UNTRANSLATED.getUIManagerKey(), new Color(0xc0c0ff));
+        defaults.put(EditorColor.COLOR_TRANSLATED.getUIManagerKey(), new Color(0xffff99));
+        defaults.put(EditorColor.COLOR_NON_UNIQUE.getUIManagerKey(), new Color(0x666666));
+        defaults.put(EditorColor.COLOR_PLACEHOLDER.getUIManagerKey(), new Color(0x6b6b6b));
+        defaults.put(EditorColor.COLOR_REMOVETEXT_TARGET.getUIManagerKey(), new Color(0xdb0000));
+        defaults.put(EditorColor.COLOR_NBSP.getUIManagerKey(), new Color(0x888888));
+        defaults.put(EditorColor.COLOR_WHITESPACE.getUIManagerKey(), new Color(0x808080));
+        defaults.put(EditorColor.COLOR_BIDIMARKERS.getUIManagerKey(), new Color(0xc80000));
+        defaults.put(EditorColor.COLOR_PARAGRAPH_START.getUIManagerKey(), new Color(0x888888));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getUIManagerKey(), new Color(0xfa8072));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getUIManagerKey(), new Color(0xaf76df));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getUIManagerKey(), new Color(0xff9408));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getUIManagerKey(), new Color(0xff9596));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getUIManagerKey(), new Color(0xffccff));
+        defaults.put(EditorColor.COLOR_REPLACE.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_LANGUAGE_TOOLS.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_TRANSTIPS.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_SPELLCHECK.getUIManagerKey(), new Color(0xff0000));
+        defaults.put(EditorColor.COLOR_TERMINOLOGY.getUIManagerKey(), new Color(0xb84c00));
+        defaults.put(EditorColor.COLOR_MATCHES_CHANGED.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_MATCHES_UNCHANGED.getUIManagerKey(), new Color(0x007a00));
+        defaults.put(EditorColor.COLOR_MATCHES_INS_ACTIVE.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_MATCHES_INS_INACTIVE.getUIManagerKey(), new Color(0x6c6c6c));
+        defaults.put(EditorColor.COLOR_HYPERLINK.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_SEARCH_FOUND_MARK.getUIManagerKey(), new Color(0x0000ff));
+        defaults.put(EditorColor.COLOR_SEARCH_REPLACE_MARK.getUIManagerKey(), new Color(0x995c00));
+        defaults.put(EditorColor.COLOR_NOTIFICATION_MIN.getUIManagerKey(), new Color(0xfff2d4));
+        defaults.put(EditorColor.COLOR_NOTIFICATION_MAX.getUIManagerKey(), new Color(0xff9900));
+        defaults.put(EditorColor.COLOR_ALIGNER_ACCEPTED.getUIManagerKey(), new Color(0x15bb45));
+        defaults.put(EditorColor.COLOR_ALIGNER_NEEDSREVIEW.getUIManagerKey(), new Color(0xff0000));
+        defaults.put(EditorColor.COLOR_ALIGNER_HIGHLIGHT.getUIManagerKey(), new Color(0xffff00));
+        defaults.put(EditorColor.COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT.getUIManagerKey(), new Color(0xc8c8c8));
         defaults.put("OmegaT.projectFilesCurrentFileForeground", new Color(0x0));
         defaults.put("OmegaT.projectFilesCurrentFileBackground", new Color(0xc8ddf2));
         defaults.put("OmegaT.searchFieldErrorText", new Color(0xff0000));
         defaults.put("OmegaT.searchDimmedBackground", new Color(0x80, 0x80, 0x80, 0x80));
         defaults.put("OmegaT.searchResultBorder", new Color(0xEE, 0xD2, 0x00, 0x80));
-        defaults.put("OmegaT.machinetranslateSelectedHighlight", new Color(0xffff00));
+        defaults.put(EditorColor.COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT.getUIManagerKey(),
+                new Color(0xffff00));
+        defaults.put(EditorColor.COLOR_PROJECT_FILES_PROGRESS_LOW.getUIManagerKey(), new Color(0xf0b8b4));
+        defaults.put(EditorColor.COLOR_PROJECT_FILES_PROGRESS_HIGH.getUIManagerKey(), new Color(0xb7d7b7));
+        defaults.put(EditorColor.COLOR_PROJECT_FILES_PROGRESS_COMPLETE.getUIManagerKey(),
+                new Color(0xb8ccf0));
+
+        // Text and surface colors that default to the theme's own base
+        // colors, so they render exactly like the former "inherit"
+        // behavior until a user configures them.
+        Color standardFgColor = defaults.getColor("TextPane.foreground");
+        defaults.put(EditorColor.COLOR_ACTIVE_SOURCE_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_ACTIVE_TARGET.getUIManagerKey(), standardBgColor);
+        defaults.put(EditorColor.COLOR_ACTIVE_TARGET_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_SEGMENT_MARKER_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_SEGMENT_MARKER_BG.getUIManagerKey(), standardBgColor);
+        defaults.put(EditorColor.COLOR_SOURCE_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_NOTED_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_UNTRANSLATED_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_TRANSLATED_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_MOD_INFO.getUIManagerKey(), standardBgColor);
+        defaults.put(EditorColor.COLOR_MOD_INFO_FG.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_GLOSSARY_SOURCE.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_GLOSSARY_TARGET.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_GLOSSARY_NOTE.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_MATCHES_DEL_ACTIVE.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_MATCHES_DEL_INACTIVE.getUIManagerKey(), standardFgColor);
+        defaults.put(EditorColor.COLOR_NON_UNIQUE_BG.getUIManagerKey(), DefaultFlatTheme
+                .compositeOver(defaults.getColor("OmegaT.alternatingHilite"), standardBgColor));
 
         // Panel title bars
         Color activeTitleText = defaults.getColor("Label.foreground");

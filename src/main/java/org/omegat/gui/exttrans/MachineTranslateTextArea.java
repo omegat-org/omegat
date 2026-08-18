@@ -112,6 +112,21 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         setEditorKit(htmlEditorKit);
     }
 
+    @Override
+    protected void applyColors() {
+        super.applyColors();
+        // The colours live in the HTML stylesheet, so rebuild the document and
+        // re-render the shown translation. Guarded: first called from the
+        // superclass constructor, before the controller is initialised.
+        initDocument();
+        if (controller != null) {
+            MachineTranslationInfo current = controller.getDisplayedResult();
+            if (current != null) {
+                controller.setFoundResult(current);
+            }
+        }
+    }
+
     /**
      * Expose the currently processed entry for the controller.
      */

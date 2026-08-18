@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,6 +37,8 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -45,6 +48,9 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerMarker implements IMarker {
+
+    /** At most this many suggestions fit a readable tooltip. */
+    static final int MAX_TOOLTIP_SUGGESTIONS = 5;
 
     @Override
     public @Nullable List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
@@ -66,7 +72,40 @@ public class SpellCheckerMarker implements IMarker {
             int en = st + tok.getLength();
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
             m.painter = highlightPainter;
+            // Resolved when the mouse rests on the word: a suggestion
+            // lookup is too expensive to run per mark, especially for the
+            // active segment, whose marks recompute on every keystroke.
+            String word = tok.getTextFromString(translationText);
+            m.toolTipSupplier = () -> suggestionToolTip(word);
             return m;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * The tooltip of a misspelled word: its suggestions, cached per word by
+     * the spell checker, so only the first hover of a word runs a lookup.
+     */
+    static String suggestionToolTip(String word) {
+        return formatSuggestions(Core.getSpellChecker().suggest(word));
+    }
+
+    /**
+     * The suggestions as tooltip text, or the "no suggestions" notice. The
+     * suggestion tags render bold, like in the language checker tooltips
+     * (MarkerController.getToolTips maps them); a trailing ellipsis points
+     * to the context menu when the list was cut.
+     */
+    static String formatSuggestions(List<String> suggestions) {
+        if (suggestions.isEmpty()) {
+            return OStrings.getString("SC_NO_SUGGESTIONS");
+        }
+        String shown = suggestions.stream().limit(MAX_TOOLTIP_SUGGESTIONS)
+                .map(StringUtil::makeValidXML)
+                .map(s -> "<suggestion>" + s + "</suggestion>")
+                .collect(Collectors.joining(", "));
+        if (suggestions.size() > MAX_TOOLTIP_SUGGESTIONS) {
+            shown += ", ...";
+        }
+        return StringUtil.format(OStrings.getString("SC_TOOLTIP_SUGGESTIONS"), shown);
     }
 }

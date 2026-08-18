@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,6 +40,13 @@ import java.util.stream.Stream;
  */
 public class MatchStatCounts {
     private static final int BASE_FOR_PERCENTS = 2;
+
+    /**
+     * Row index of the repetitions bucket (in per-file mode: repetitions within
+     * this file).
+     */
+    public static final int ROW_REPETITIONS = 0;
+
     private final StatCount[] counts;
 
     public MatchStatCounts() {
@@ -90,7 +98,7 @@ public class MatchStatCounts {
      *            match percent
      * @return row index
      */
-    private int getRowByPercent(int percent) {
+    public static int getRowByPercent(int percent) {
         if (percent == Statistics.PERCENT_EXACT_MATCH) {
             // exact match
             return BASE_FOR_PERCENTS;

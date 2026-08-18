@@ -33,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import org.omegat.core.Core;
 import org.omegat.core.statistics.IStatsConsumer;
@@ -104,6 +105,10 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
     }
 
     protected TitledTablePanel generateTableDisplay(String title, String[] headers, String[][] data) {
+        return generateTableDisplay(title, headers, new StringArrayTableModel(data));
+    }
+
+    protected TitledTablePanel generateTableDisplay(String title, String[] headers, TableModel model) {
         TitledTablePanel panel = new TitledTablePanel();
 
         DataTableStyling.applyColors(panel.table);
@@ -115,7 +120,7 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
         DataTableStyling.applyFont(panel.table, font);
 
         panel.title.setText(title);
-        panel.table.setModel(new StringArrayTableModel(data));
+        panel.table.setModel(model);
         setTableHeaders(panel.table, headers);
         panel.table.getColumnModel().getColumn(0)
                 .setCellRenderer(DataTableStyling.getHeaderTextCellRenderer());

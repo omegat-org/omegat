@@ -53,7 +53,13 @@ public class CustomColorSelectionPanel extends javax.swing.JPanel {
 
         sampleEditorPane = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
-        colorStylesLabel = new javax.swing.JLabel();
+        tablePanel = new javax.swing.JPanel();
+        searchPanel = new javax.swing.JPanel();
+        searchLabel = new javax.swing.JLabel();
+        searchTextField = new javax.swing.JTextField();
+        searchEastPanel = new javax.swing.JPanel();
+        clearSearchButton = new javax.swing.JButton();
+        matchCountLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         colorStylesTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -74,14 +80,39 @@ public class CustomColorSelectionPanel extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(colorStylesLabel, OStrings.getString("GUI_COLORS_COLOR")); // NOI18N
-        jPanel1.add(colorStylesLabel, java.awt.BorderLayout.NORTH);
+        tablePanel.setLayout(new java.awt.BorderLayout());
+
+        searchPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        searchPanel.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(searchLabel, OStrings.getString("GUI_COLORS_SEARCH_LABEL")); // NOI18N
+        searchLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        searchPanel.add(searchLabel, java.awt.BorderLayout.WEST);
+        searchPanel.add(searchTextField, java.awt.BorderLayout.CENTER);
+
+        searchEastPanel.setLayout(new java.awt.BorderLayout());
+
+        clearSearchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/clear-button.png"))); // NOI18N
+        clearSearchButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        clearSearchButton.setBorderPainted(false);
+        clearSearchButton.setContentAreaFilled(false);
+        clearSearchButton.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/clear-button-disabled.png"))); // NOI18N
+        clearSearchButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/clear-button-pressed.png"))); // NOI18N
+        searchEastPanel.add(clearSearchButton, java.awt.BorderLayout.WEST);
+
+        matchCountLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 8, 0, 0));
+        searchEastPanel.add(matchCountLabel, java.awt.BorderLayout.CENTER);
+
+        searchPanel.add(searchEastPanel, java.awt.BorderLayout.EAST);
+
+        tablePanel.add(searchPanel, java.awt.BorderLayout.NORTH);
 
         colorStylesTable.setFillsViewportHeight(true);
-        colorStylesTable.setTableHeader(null);
         jScrollPane2.setViewportView(colorStylesTable);
 
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        tablePanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(tablePanel, java.awt.BorderLayout.CENTER);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -101,14 +132,20 @@ public class CustomColorSelectionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JButton clearSearchButton;
     javax.swing.JColorChooser colorChooser;
-    private javax.swing.JLabel colorStylesLabel;
     javax.swing.JTable colorStylesTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    javax.swing.JLabel matchCountLabel;
     javax.swing.JButton resetCurrentColorButton;
     private javax.swing.JEditorPane sampleEditorPane;
+    private javax.swing.JPanel searchEastPanel;
+    private javax.swing.JLabel searchLabel;
+    private javax.swing.JPanel searchPanel;
+    javax.swing.JTextField searchTextField;
+    private javax.swing.JPanel tablePanel;
     // End of variables declaration//GEN-END:variables
 }

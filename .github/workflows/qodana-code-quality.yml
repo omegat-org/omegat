@@ -37,4 +37,4 @@ jobs:
           cache-default-branch-only: true
           use-annotations: true
           upload-result: true
-          args: --baseline,qodana.sarif.json
+          args: --baseline,tool/qodana.sarif.json

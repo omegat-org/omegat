@@ -36,5 +36,5 @@ jobs:
         ./gradlew -PenvIsCi=true -Pheadless=true distZip
     - name: check source distribution dependencies duplication
       run: |
-        chmod +x ./ci/check_duplicate_dependencies.sh
+        chmod +x ./tool/check_duplicate_dependencies.sh
         ./ci/check_duplicate_dependencies.sh build/install/OmegaT-source

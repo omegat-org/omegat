@@ -1,0 +1,46 @@
+<!-- Converted by db4-upgrade version 1.1 -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="windows.number.convert">
+   <title xml:id="windows.number.convert.title"><guilabel>Auto-convert Number
+  Segments</guilabel></title>
+   <para>Some segments contain only a number: a count, a price, a date or a
+      time. You do not have to fill them in by hand. This window finds such
+      segments and writes the number the way the target language writes
+      it.</para>
+   <para>Use
+      <link linkend="menus.tools" endterm="menus.tools.title"></link>
+      <link linkend="menus.tools.auto.convert.number.segments" endterm="menus.tools.auto.convert.number.segments.title"></link> to open it.</para>
+   <orderedlist>
+      <listitem>
+         <para>Choose the number types to look for: integer, decimal, percent,
+            		currency, date, time or ordinal. If you want, set the formatting of
+            		the result (thousands separator, decimals, date style). The default
+            		keeps the form of the original.</para>
+      </listitem>
+      <listitem>
+         <para>Choose where to look: the whole project, the current file, or
+            		the current filter. Segments that already have a translation are
+            		only included if you say so.</para>
+      </listitem>
+      <listitem>
+         <para>Click
+            <guibutton>Scan</guibutton>. Every hit appears in the table with
+            		its original text, a preview of the result, and a confidence value.
+            		Hover over a row to see what raised or lowered the
+            		confidence.</para>
+      </listitem>
+      <listitem>
+         <para>Check the rows you want to apply. Rows at or above the
+            		confidence threshold are already checked for you.</para>
+      </listitem>
+      <listitem>
+         <para>Click
+            <guibutton>Apply selected</guibutton>.</para>
+      </listitem>
+   </orderedlist>
+   <para>The filled-in segments are marked as automatic conversions: they get
+      their own marker color, and the command that jumps to the next
+      untranslated segment skips them.</para>
+   <para>Double-click a row to open that segment in the editor. The
+      <guibutton>Filter</guibutton> button shows only the hits of the last scan
+      in the editor.</para>
+</section>

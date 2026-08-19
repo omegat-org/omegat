@@ -72,6 +72,10 @@ public class CustomContainerFactory extends DefaultDockableContainerFactory {
             settingsButton.setRolloverIcon(SETTINGS_ICON);
             settingsButton.setPressedIcon(SETTINGS_ICON_PRESSED);
             settingsButton.setToolTipText(OStrings.getString("DOCKING_HINT_SETTINGS"));
+            // Icon-only button: without a name, assistive technologies
+            // announce nothing useful.
+            settingsButton.getAccessibleContext()
+                    .setAccessibleName(OStrings.getString("DOCKING_HINT_SETTINGS"));
 
             // These values are set to match defaults in DockViewTitleBarUI
             settingsButton.setRolloverEnabled(true);

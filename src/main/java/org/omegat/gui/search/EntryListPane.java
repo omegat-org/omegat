@@ -61,7 +61,6 @@ import javax.swing.text.StyledDocument;
 
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
@@ -148,11 +147,7 @@ class EntryListPane extends JTextPane {
         StaticUIUtils.makeCaretAlwaysVisible(this);
         StaticUIUtils.setCaretUpdateEnabled(this, false);
 
-        applyColors();
-        CoreEvents.registerColorsChangedEventListener(() -> {
-            applyColors();
-            repaint();
-        });
+        Styles.bindColors(this, this::applyColors);
 
         addMouseListener(new MouseAdapter() {
             @Override

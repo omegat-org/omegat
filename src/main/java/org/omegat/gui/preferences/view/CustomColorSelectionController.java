@@ -43,7 +43,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -85,7 +85,8 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.Styles.EditorColor;
+import org.omegat.util.gui.ColorEntry;
+import org.omegat.util.gui.ColorRegistry;
 import org.omegat.util.gui.TableColumnSizer;
 
 /**
@@ -106,7 +107,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
         "# are not listed. Each remaining line maps a colour to a #rrggbb value.",
     };
 
-    private final Map<EditorColor, Color> temporaryPreferences = new EnumMap<>(EditorColor.class);
+    private final Map<ColorEntry, Color> temporaryPreferences = new LinkedHashMap<>();
     private CustomColorSelectionPanel panel;
     private TableRowSorter<ColorTableModel> sorter;
     private boolean listenerEnabled = true;
@@ -189,7 +190,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
         sorter = new ColorRowSorter(model);
         panel.colorStylesTable.setRowSorter(sorter);
         // Start sorted by the running number, ascending, i.e. in the natural
-        // EditorColor enum order.
+        // registry order (core colours first, then plugin colours).
         sorter.setSortKeys(Collections.singletonList(
                 new RowSorter.SortKey(ColorColumns.NUMBER.index, SortOrder.ASCENDING)));
         // Force a minimum width on the colour column so its swatch is never
@@ -295,8 +296,8 @@ public class CustomColorSelectionController extends BasePreferencesController {
             return;
         }
         rememberDirectory(file);
-        // A plain, human-readable .properties file: one "EditorColor = #rrggbb"
-        // line per colour, in enum order. Same shape as the bundled
+        // A plain, human-readable .properties file: one "colour id = #rrggbb"
+        // line per colour, in registry order. Same shape as the bundled
         // ColorScheme_*.properties, and loadable with java.util.Properties.
         int count = 0;
         try (BufferedWriter w = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
@@ -304,10 +305,10 @@ public class CustomColorSelectionController extends BasePreferencesController {
                 w.write(line);
                 w.newLine();
             }
-            for (EditorColor style : EditorColor.values()) {
+            for (ColorEntry style : ColorRegistry.all()) {
                 Color color = temporaryPreferences.getOrDefault(style, style.getColor());
                 if (color != null) {
-                    w.write(style.name() + " = " + toHex(color));
+                    w.write(style.getId() + " = " + toHex(color));
                     w.newLine();
                     count++;
                 }
@@ -340,15 +341,15 @@ public class CustomColorSelectionController extends BasePreferencesController {
         }
         int count = 0;
         for (String key : props.stringPropertyNames()) {
-            EditorColor style = editorColorForName(key);
-            if (style == null) {
+            Optional<ColorEntry> style = ColorRegistry.byId(key);
+            if (!style.isPresent()) {
                 // Unknown key: ignore, so schemes stay forward-compatible.
                 continue;
             }
             try {
                 // Stage the colour only: it shows in the table at once but is
                 // applied by persist() on "Apply"/"OK", so "Cancel" discards it.
-                temporaryPreferences.put(style, Color.decode(props.getProperty(key).trim()));
+                temporaryPreferences.put(style.get(), Color.decode(props.getProperty(key).trim()));
                 count++;
             } catch (NumberFormatException ex) {
                 Log.log(ex);
@@ -357,14 +358,6 @@ public class CustomColorSelectionController extends BasePreferencesController {
         panel.colorStylesTable.repaint();
         onSelectionChanged();
         fireTransientMessage(OStrings.getString("GUI_COLORS_IMPORTED", count));
-    }
-
-    private static EditorColor editorColorForName(String name) {
-        try {
-            return EditorColor.valueOf(name);
-        } catch (IllegalArgumentException ex) {
-            return null;
-        }
     }
 
     private static String toHex(Color color) {
@@ -458,14 +451,14 @@ public class CustomColorSelectionController extends BasePreferencesController {
                 : 0.2126 * color.getRed() + 0.7152 * color.getGreen() + 0.0722 * color.getBlue();
     }
 
-    private Optional<EditorColor> getSelection() {
+    private Optional<ColorEntry> getSelection() {
         int row = panel.colorStylesTable.getSelectedRow();
         if (row < 0) {
             return Optional.empty();
         } else {
             int modelRow = panel.colorStylesTable.convertRowIndexToModel(row);
             ColorTableModel model = ((ColorTableModel) panel.colorStylesTable.getModel());
-            return Optional.of(model.getEditorColorAtRow(modelRow));
+            return Optional.of(model.getEntryAtRow(modelRow));
         }
     }
 
@@ -529,7 +522,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
     }
 
     private void onSelectionChanged() {
-        Optional<EditorColor> selection = getSelection();
+        Optional<ColorEntry> selection = getSelection();
         boolean enabled = selection.isPresent();
         panel.colorChooser.setEnabled(enabled);
         panel.resetCurrentColorButton.setEnabled(enabled);
@@ -568,7 +561,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
                 JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        for (EditorColor style : EditorColor.values()) {
+        for (ColorEntry style : ColorRegistry.all()) {
             temporaryPreferences.put(style, style.getDefault());
             // restoring the defaults is an explicit action and takes effect
             // immediately
@@ -583,7 +576,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
     }
 
     private boolean differsFromDefaults() {
-        for (EditorColor style : EditorColor.values()) {
+        for (ColorEntry style : ColorRegistry.all()) {
             Color current = temporaryPreferences.getOrDefault(style, style.getColor());
             if (!Objects.equals(current, style.getDefault())) {
                 return true;
@@ -737,9 +730,12 @@ public class CustomColorSelectionController extends BasePreferencesController {
     @SuppressWarnings("serial")
     class ColorTableModel extends AbstractTableModel {
 
+        /** Snapshot of the registry; plugins register at load time, before this table exists. */
+        private final List<ColorEntry> entries = ColorRegistry.all();
+
         @Override
         public int getRowCount() {
-            return EditorColor.values().length;
+            return entries.size();
         }
 
         @Override
@@ -749,7 +745,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            EditorColor style = getEditorColorAtRow(rowIndex);
+            ColorEntry style = getEntryAtRow(rowIndex);
             switch (ColorColumns.get(columnIndex)) {
             case NUMBER:
                 return rowIndex + 1;
@@ -758,7 +754,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
             case COLOR:
                 return temporaryPreferences.getOrDefault(style, style.getColor());
             case INTERNAL:
-                return style.name();
+                return style.getId();
             }
             throw new IllegalArgumentException();
         }
@@ -773,8 +769,8 @@ public class CustomColorSelectionController extends BasePreferencesController {
             return ColorColumns.get(columnIndex).getTitle();
         }
 
-        public EditorColor getEditorColorAtRow(int row) {
-            return EditorColor.values()[row];
+        public ColorEntry getEntryAtRow(int row) {
+            return entries.get(row);
         }
     }
 }

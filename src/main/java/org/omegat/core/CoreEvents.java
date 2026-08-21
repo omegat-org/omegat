@@ -27,14 +27,12 @@ package org.omegat.core;
 
 import java.awt.Component;
 import java.awt.Font;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.jspecify.annotations.NullMarked;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
@@ -53,20 +51,19 @@ import org.omegat.util.OStrings;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-@NullMarked
 public final class CoreEvents {
-    private static final List<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
 
     private CoreEvents() {
     }
 
     /** Register listener. */
     public static void registerProjectChangeListener(final IProjectEventListener listener) {
-        PROJECT_EVENT_LISTENERS.add(listener);
+        PROJECT_EVENT_LISTENERS.addIfAbsent(listener);
     }
 
     /** Unregister listener. */
@@ -76,7 +73,7 @@ public final class CoreEvents {
 
     /** Register listener. */
     public static void registerApplicationEventListener(final IApplicationEventListener listener) {
-        APPLICATION_EVENT_LISTENERS.add(listener);
+        APPLICATION_EVENT_LISTENERS.addIfAbsent(listener);
     }
 
     /** Unregister listener. */
@@ -86,7 +83,7 @@ public final class CoreEvents {
 
     /** Register listener. */
     public static void registerEntryEventListener(final IEntryEventListener listener) {
-        ENTRY_EVENT_LISTENERS.add(listener);
+        ENTRY_EVENT_LISTENERS.addIfAbsent(listener);
     }
 
     /** Unregister listener. */
@@ -96,7 +93,7 @@ public final class CoreEvents {
 
     /** Register listener. */
     public static void registerFontChangedEventListener(final IFontChangedEventListener listener) {
-        FONT_CHANGED_EVENT_LISTENERS.add(listener);
+        FONT_CHANGED_EVENT_LISTENERS.addIfAbsent(listener);
     }
 
     /** Unregister listener. */
@@ -106,7 +103,7 @@ public final class CoreEvents {
 
     /** Register listener. */
     public static void registerEditorEventListener(final IEditorEventListener listener) {
-        EDITOR_EVENT_LISTENERS.add(listener);
+        EDITOR_EVENT_LISTENERS.addIfAbsent(listener);
     }
 
     /** Unregister listener. */

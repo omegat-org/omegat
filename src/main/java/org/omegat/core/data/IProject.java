@@ -37,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.TagPatternsStorage;
 
 /**
  * Interface for access to loaded project. Each loaded project will be new instance of IProject.
@@ -106,6 +107,78 @@ public interface IProject {
      * @throws Exception if any error occurs during the commit process
      */
     void commitSourceFiles() throws Exception;
+
+    /**
+     * Whether this checkout of a team project carries a local
+     * omegat/tag_patterns.xml that the team repository does not contain and
+     * the user has not yet decided to keep local. Always false for non-team
+     * projects.
+     */
+    default boolean isTagPatternsLocalOnly() {
+        return false;
+    }
+
+    /**
+     * Writes the given tag expressions to omegat/tag_patterns.xml and commits
+     * the file to the team repository, so the whole team gets them. No
+     * operation for non-team projects.
+     *
+     * @param customTagPattern
+     *            custom-tag expression, or null when the project follows the
+     *            global preference
+     * @param removeTextPattern
+     *            removed-text expression, or null when the project follows
+     *            the global preference
+     * @throws Exception
+     *             if writing or committing the file fails
+     */
+    default void publishTagPatterns(@Nullable String customTagPattern, @Nullable String removeTextPattern)
+            throws Exception {
+    }
+
+    /**
+     * Deletes the local omegat/tag_patterns.xml so the project matches the
+     * team again, and re-applies the resulting expressions. The protected
+     * parts of already loaded source files keep the old expressions until the
+     * project is reloaded.
+     *
+     * @throws Exception
+     *             if the file cannot be deleted
+     */
+    default void discardLocalTagPatterns() throws Exception {
+    }
+
+    /**
+     * Remembers for this checkout that the user wants to keep the local
+     * omegat/tag_patterns.xml without sharing it, so the question is not
+     * asked on every project load.
+     */
+    default void keepLocalTagPatterns() {
+    }
+
+    /**
+     * The tag definitions this checkout carried before the team
+     * synchronisation of the current load replaced them with the team's
+     * differing version, or null when they did not differ. Always null for
+     * non-team projects.
+     */
+    default TagPatternsStorage.@Nullable TagPatterns getDivergedLocalTagPatterns() {
+        return null;
+    }
+
+    /**
+     * Arms the given tag expressions to be restored during the next project
+     * load, without sharing them with the team: the caller reloads the
+     * project, whose team sync brings the team version back in, and the load
+     * then writes these expressions over it and parses the source files with
+     * them. Later loads synchronise and ask again. No operation for non-team
+     * projects.
+     *
+     * @param patterns
+     *            the expressions to restore
+     */
+    default void useLocalTagPatterns(TagPatternsStorage.TagPatterns patterns) {
+    }
 
     /**
      * Get project properties.

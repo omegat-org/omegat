@@ -154,6 +154,26 @@ public class RealProject implements IProject {
 
     private boolean isOnlineMode;
 
+    /** Team settings key remembering the user's wish to keep a local-only tag_patterns.xml. */
+    static final String TAG_PATTERNS_KEEP_LOCAL = "tagPatternsKeepLocal";
+    /** The local tag_patterns.xml of this team checkout is unknown to the team repository. */
+    private boolean tagPatternsLocalOnly;
+    /**
+     * The tag definitions this checkout carried before the team
+     * synchronisation replaced them with the team's differing version, or
+     * null when there was no difference.
+     */
+    private TagPatternsStorage.@Nullable TagPatterns divergedLocalTagPatterns;
+    /**
+     * One-shot handover of the 'use the local version this time' decision to
+     * the project reload that puts it into effect: the reload's team sync
+     * restores the team version, so the load itself has to write the local
+     * expressions back (and must not raise the divergence question again).
+     * Static because the reload creates a new project instance; project
+     * loads never run concurrently.
+     */
+    private static volatile TagPatternsStorage.@Nullable TagPatterns restoreLocalTagPatternsOnce;
+
     private RandomAccessFile raFile;
     private FileChannel lockChannel;
     private FileLock lock;
@@ -365,6 +385,10 @@ public class RealProject implements IProject {
                             e.getCause() == null ? e.getMessage() : e.getCause());
                     setOfflineMode();
                 }
+                // The full sync below overwrites a locally changed
+                // tag_patterns.xml with the team's version, so its state has
+                // to be captured now for the divergence question.
+                TagPatternsStorage.TagPatterns preSyncTagPatterns = loadTagPatternsQuietly(config);
                 remoteRepositoryProvider.copyFilesFromReposToProject("");
 
                 // After adding filters.xml and segmentation.conf, we must
@@ -372,6 +396,13 @@ public class RealProject implements IProject {
                 config.loadProjectFilters();
                 config.loadProjectSRX();
                 config.loadProjectTagPatterns();
+                boolean restored = consumeRestoredLocalTagPatterns(config);
+                // A local-only tag_patterns.xml never reaches the team by
+                // itself; the GUI asks the user once what to do with it.
+                tagPatternsLocalOnly = isOnlineMode
+                        && detectLocalOnlyTagPatterns(config, remoteRepositoryProvider);
+                divergedLocalTagPatterns = isOnlineMode && !restored
+                        ? detectDivergedTagPatterns(config, preSyncTagPatterns) : null;
             }
 
             // Project-specific custom tag / removed-text expressions take
@@ -485,6 +516,162 @@ public class RealProject implements IProject {
         patterns.setRemoveTextPattern(config.getRemoveTextPattern());
         TagPatternsStorage.save(patterns,
                 new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
+    }
+
+    /**
+     * Whether the local tag_patterns.xml of this checkout is unknown to the
+     * team repository. Evaluated after the team sync and after
+     * loadProjectTagPatterns: an unreadable file is skipped (the user must
+     * repair it first), as is a checkout whose user chose to keep the file
+     * local. Static for testability.
+     */
+    static boolean detectLocalOnlyTagPatterns(ProjectProperties config, RemoteRepositoryProvider provider) {
+        File localFile = new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS);
+        if (!localFile.exists() || config.isTagPatternsLoadFailed()) {
+            return false;
+        }
+        if (Boolean.parseBoolean(provider.getTeamSettings().get(TAG_PATTERNS_KEEP_LOCAL))) {
+            return false;
+        }
+        String underRoot = config.getProjectInternalRelative() + TagPatternsStorage.FILE_TAG_PATTERNS;
+        return provider.isUnderMapping(underRoot) && !provider.existsInRepositories(underRoot);
+    }
+
+    /**
+     * The parsed local tag_patterns.xml, or null when the file is absent or
+     * unreadable. Used for the pre-sync snapshot, where a broken file simply
+     * means there is nothing to preserve.
+     */
+    private static TagPatternsStorage.@Nullable TagPatterns loadTagPatternsQuietly(ProjectProperties config) {
+        try {
+            return TagPatternsStorage
+                    .load(new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
+        } catch (IOException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * The local tag definitions that the team sync just replaced with a
+     * differing team version, or null when nothing user-visible changed.
+     * Compares the parsed expressions rather than file bytes, so
+     * formatting-only differences do not raise the question. Static for
+     * testability.
+     */
+    static TagPatternsStorage.@Nullable TagPatterns detectDivergedTagPatterns(ProjectProperties config,
+            TagPatternsStorage.@Nullable TagPatterns preSync) {
+        if (preSync == null || preSync.isEmpty() || config.isTagPatternsLoadFailed()) {
+            return null;
+        }
+        if (!new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS).exists()) {
+            // The team deleted the file; the sync propagated that locally.
+            return null;
+        }
+        if (Objects.equals(preSync.getCustomTagPattern(), config.getCustomTagPattern())
+                && Objects.equals(preSync.getRemoveTextPattern(), config.getRemoveTextPattern())) {
+            return null;
+        }
+        return preSync;
+    }
+
+    @Override
+    public boolean isTagPatternsLocalOnly() {
+        return tagPatternsLocalOnly;
+    }
+
+    @Override
+    public TagPatternsStorage.@Nullable TagPatterns getDivergedLocalTagPatterns() {
+        return divergedLocalTagPatterns;
+    }
+
+    @Override
+    public void useLocalTagPatterns(TagPatternsStorage.TagPatterns patterns) {
+        armRestoreLocalTagPatterns(patterns);
+    }
+
+    static void armRestoreLocalTagPatterns(TagPatternsStorage.TagPatterns patterns) {
+        restoreLocalTagPatternsOnce = patterns;
+    }
+
+    /**
+     * Writes the armed 'use the local version this time' expressions back
+     * over the just synchronised team version and reloads them, or does
+     * nothing when none are armed. Static for testability.
+     *
+     * @return whether local expressions were restored
+     */
+    static boolean consumeRestoredLocalTagPatterns(ProjectProperties config) throws IOException {
+        TagPatternsStorage.TagPatterns restore = restoreLocalTagPatternsOnce;
+        restoreLocalTagPatternsOnce = null;
+        if (restore == null) {
+            return false;
+        }
+        TagPatternsStorage.save(restore,
+                new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
+        config.loadProjectTagPatterns();
+        return true;
+    }
+
+    @Override
+    public void publishTagPatterns(@Nullable String customTagPattern, @Nullable String removeTextPattern)
+            throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern(customTagPattern);
+        patterns.setRemoveTextPattern(removeTextPattern);
+        if (patterns.isEmpty()) {
+            // Nothing to distribute: publishing a removal would mean deleting
+            // the file from the repository, which stays a manual step.
+            return;
+        }
+        // The checkout may be stale, and a commit onto an old base would be
+        // rejected on push.
+        remoteRepositoryProvider.switchAllToLatest();
+        TagPatternsStorage.save(patterns,
+                new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
+        String underRoot = config.getProjectInternalRelative() + TagPatternsStorage.FILE_TAG_PATTERNS;
+        // An unchanged file makes the git commit a no-op, which reports the
+        // same way as a rejected push - so an already identical repository
+        // copy counts as shared instead of going through the commit.
+        if (!remoteRepositoryProvider.isIdenticalInRepositories(underRoot)) {
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(underRoot, null);
+            if (!remoteRepositoryProvider.commitFilesChecked(underRoot, "Update project tag patterns")) {
+                throw new IOException(OStrings.getString("TEAM_TAG_PATTERNS_SHARE_ERROR"));
+            }
+        }
+        // The published expressions become the live project state, so the
+        // session cannot diverge from the file even when the surrounding
+        // properties dialog is cancelled afterwards.
+        config.setCustomTagPattern(customTagPattern);
+        config.setRemoveTextPattern(removeTextPattern);
+        config.resetTagPatternsLoadFailed();
+        PatternConsts.applyProjectPatterns(customTagPattern, removeTextPattern);
+        remoteRepositoryProvider.getTeamSettings().set(TAG_PATTERNS_KEEP_LOCAL, null);
+        tagPatternsLocalOnly = false;
+        divergedLocalTagPatterns = null;
+    }
+
+    @Override
+    public void discardLocalTagPatterns() throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        Files.deleteIfExists(
+                new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS).toPath());
+        config.loadProjectTagPatterns();
+        PatternConsts.applyProjectPatterns(config.getCustomTagPattern(), config.getRemoveTextPattern());
+        tagPatternsLocalOnly = false;
+        divergedLocalTagPatterns = null;
+    }
+
+    @Override
+    public void keepLocalTagPatterns() {
+        if (remoteRepositoryProvider.isManaged()) {
+            remoteRepositoryProvider.getTeamSettings().set(TAG_PATTERNS_KEEP_LOCAL, "true");
+        }
+        tagPatternsLocalOnly = false;
     }
 
     /**

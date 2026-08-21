@@ -32,6 +32,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
 import java.text.MessageFormat;
+import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -46,6 +47,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import org.jetbrains.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.util.OStrings;
@@ -64,6 +66,7 @@ public class TagDefinitionsDialog {
     public static final String USE_LOCAL_CB_NAME = "tag_definitions_use_local_cb";
     public static final String CUSTOM_TAG_PATTERN_FIELD_NAME = "tag_definitions_custom_tag_pattern_field";
     public static final String REMOVE_TEXT_PATTERN_FIELD_NAME = "tag_definitions_remove_text_pattern_field";
+    public static final String SHARE_BUTTON_NAME = "tag_definitions_share_button";
 
     private final String globalCustomTagPattern;
     private final String globalRemoveTextPattern;
@@ -72,6 +75,8 @@ public class TagDefinitionsDialog {
     private boolean userDidConfirm;
     /** The prefill runs at most once, so emptied fields stay empty on a re-tick. */
     private boolean prefilled;
+    /** Publishes confirmed expressions to the team project; null hides the share button. */
+    private @Nullable BiConsumer<String, String> publisher;
 
     /**
      * @param customTagPattern
@@ -92,6 +97,44 @@ public class TagDefinitionsDialog {
         this.removeTextPattern = removeTextPattern;
         this.globalCustomTagPattern = globalCustomTagPattern;
         this.globalRemoveTextPattern = globalRemoveTextPattern;
+    }
+
+    /**
+     * Enables the "Share with the Team" button. The consumer receives the
+     * confirmed expressions (null meaning the global preference applies) and
+     * is expected to write and commit them to the team repository, handling
+     * its own errors. Only set for loaded team projects.
+     */
+    public void setPublisher(@Nullable BiConsumer<String, String> publisher) {
+        this.publisher = publisher;
+    }
+
+    /**
+     * Validates the fields and moves them into the result values. Returns
+     * false when an expression does not compile; the dialog stays open then.
+     */
+    private boolean applyFields(JDialog dialog, JCheckBox useLocalCheckBox,
+            JTextField customTagPatternField, JTextField removeTextPatternField) {
+        if (!useLocalCheckBox.isSelected()) {
+            customTagPattern = null;
+            removeTextPattern = null;
+            return true;
+        }
+        for (JTextField field : new JTextField[] { customTagPatternField, removeTextPatternField }) {
+            try {
+                Pattern.compile(field.getText());
+            } catch (PatternSyntaxException ex) {
+                JOptionPane.showMessageDialog(dialog,
+                        MessageFormat.format(OStrings.getString("PP_TAG_PATTERN_INVALID"),
+                                ex.getLocalizedMessage()),
+                        OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                field.requestFocusInWindow();
+                return false;
+            }
+        }
+        customTagPattern = customTagPatternField.getText();
+        removeTextPattern = removeTextPatternField.getText();
+        return true;
     }
 
     /**
@@ -187,31 +230,34 @@ public class TagDefinitionsDialog {
         Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
         Box buttonBox = Box.createHorizontalBox();
         buttonBox.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        BiConsumer<String, String> publisherAction = publisher;
+        if (publisherAction != null) {
+            JButton shareButton = new JButton();
+            Mnemonics.setLocalizedText(shareButton, OStrings.getString("PP_TAG_PATTERNS_SHARE_BUTTON"));
+            shareButton.setName(SHARE_BUTTON_NAME);
+            // Without the override there is nothing to distribute.
+            shareButton.setEnabled(useLocalCheckBox.isSelected());
+            useLocalCheckBox.addActionListener(e -> shareButton.setEnabled(useLocalCheckBox.isSelected()));
+            buttonBox.add(shareButton);
+            shareButton.addActionListener(e -> {
+                if (!applyFields(dialog, useLocalCheckBox, customTagPatternField, removeTextPatternField)) {
+                    return;
+                }
+                // The expressions are published right away; the enclosing
+                // properties dialog then saves the same values locally.
+                publisherAction.accept(customTagPattern, removeTextPattern);
+                userDidConfirm = true;
+                StaticUIUtils.closeWindowByEvent(dialog);
+            });
+        }
         buttonBox.add(Box.createHorizontalGlue());
         buttonBox.add(okButton);
         buttonBox.add(Box.createHorizontalStrut(5));
         buttonBox.add(cancelButton);
 
         okButton.addActionListener(e -> {
-            if (!useLocalCheckBox.isSelected()) {
-                customTagPattern = null;
-                removeTextPattern = null;
-            } else {
-                for (JTextField field : new JTextField[] { customTagPatternField,
-                        removeTextPatternField }) {
-                    try {
-                        Pattern.compile(field.getText());
-                    } catch (PatternSyntaxException ex) {
-                        JOptionPane.showMessageDialog(dialog,
-                                MessageFormat.format(OStrings.getString("PP_TAG_PATTERN_INVALID"),
-                                        ex.getLocalizedMessage()),
-                                OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-                        field.requestFocusInWindow();
-                        return;
-                    }
-                }
-                customTagPattern = customTagPatternField.getText();
-                removeTextPattern = removeTextPatternField.getText();
+            if (!applyFields(dialog, useLocalCheckBox, customTagPatternField, removeTextPatternField)) {
+                return;
             }
             userDidConfirm = true;
             StaticUIUtils.closeWindowByEvent(dialog);

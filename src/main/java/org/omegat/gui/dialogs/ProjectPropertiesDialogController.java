@@ -44,9 +44,11 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -58,6 +60,7 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -218,6 +221,33 @@ public class ProjectPropertiesDialogController {
         dialog.tagDefinitionsButton.addActionListener(e -> {
             TagDefinitionsDialog dlg = new TagDefinitionsDialog(customTagPattern, removeTextPattern,
                     globalCustomTagPattern(), globalRemoveTextPattern());
+            if (Core.getProject().isProjectLoaded() && Core.getProject().isRemoteProject()) {
+                // The repository work must stay off the EDT and must not run
+                // beside the auto-save thread.
+                dlg.setPublisher((custom, remove) -> new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        Core.executeExclusively(true, () -> {
+                            try {
+                                Core.getProject().publishTagPatterns(custom, remove);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        });
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                            Core.getMainWindow().displayErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                        }
+                    }
+                }.execute());
+            }
             if (dlg.show(dialog)) {
                 customTagPattern = dlg.getCustomTagPattern();
                 removeTextPattern = dlg.getRemoveTextPattern();

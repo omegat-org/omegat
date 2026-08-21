@@ -44,9 +44,11 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -58,8 +60,10 @@ import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -87,6 +91,17 @@ public class ProjectPropertiesDialogController {
      * Whether the user canceled the dialog.
      */
     private boolean dialogCancelled;
+    /** The project's custom-tag expression; null means the global preference applies. */
+    private String customTagPattern;
+    /** The project's removed-text expression; null means the global preference applies. */
+    private String removeTextPattern;
+    /**
+     * Whether the user confirmed the tag definitions editor. The stored
+     * expressions are only rewritten in that case, so a routine OK neither
+     * touches them nor lifts the load-failure guard of a broken
+     * tag_patterns.xml.
+     */
+    private boolean tagPatternsEdited;
 
     private final Frame parent;
     private final ProjectPropertiesDialog dialog;
@@ -135,6 +150,19 @@ public class ProjectPropertiesDialogController {
         dialog.targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
 
         dialog.externalCommandTextArea.setText(projectProperties.getExternalCommand());
+
+        customTagPattern = projectProperties.getCustomTagPattern();
+        removeTextPattern = projectProperties.getRemoveTextPattern();
+    }
+
+    private static String globalCustomTagPattern() {
+        return Preferences.existsPreference(Preferences.CHECK_CUSTOM_PATTERN)
+                ? Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN)
+                : PatternConsts.CHECK_CUSTOM_PATTERN_DEFAULT;
+    }
+
+    private static String globalRemoveTextPattern() {
+        return Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
     }
 
     private void initializeActions(ProjectPropertiesDialog.Mode dialogType) {
@@ -188,6 +216,42 @@ public class ProjectPropertiesDialogController {
             ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
             if (dlg.show(dialog)) {
                 externalFinderConfig = dlg.getResult();
+            }
+        });
+        dialog.tagDefinitionsButton.addActionListener(e -> {
+            TagDefinitionsDialog dlg = new TagDefinitionsDialog(customTagPattern, removeTextPattern,
+                    globalCustomTagPattern(), globalRemoveTextPattern());
+            if (Core.getProject().isProjectLoaded() && Core.getProject().isRemoteProject()) {
+                // The repository work must stay off the EDT and must not run
+                // beside the auto-save thread.
+                dlg.setPublisher((custom, remove) -> new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        Core.executeExclusively(true, () -> {
+                            try {
+                                Core.getProject().publishTagPatterns(custom, remove);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        });
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                            Core.getMainWindow().displayErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                        }
+                    }
+                }.execute());
+            }
+            if (dlg.show(dialog)) {
+                customTagPattern = dlg.getCustomTagPattern();
+                removeTextPattern = dlg.getRemoveTextPattern();
+                tagPatternsEdited = true;
             }
         });
         dialog.cancelButton.addActionListener(e -> doCancel());
@@ -547,6 +611,11 @@ public class ProjectPropertiesDialogController {
         projectProperties.setExportTmLevels(dialog.exportTMOmegaTCheckBox.isSelected(),
                 dialog.exportTMLevel1CheckBox.isSelected(), dialog.exportTMLevel2CheckBox.isSelected());
         projectProperties.setExternalCommand(dialog.externalCommandTextArea.getText());
+        if (tagPatternsEdited) {
+            projectProperties.setCustomTagPattern(customTagPattern);
+            projectProperties.setRemoveTextPattern(removeTextPattern);
+            projectProperties.resetTagPatternsLoadFailed();
+        }
         projectProperties.setSourceRoot(dialog.srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator)) {
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);

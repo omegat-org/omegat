@@ -32,6 +32,7 @@
 package org.omegat.util;
 
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Constant patterns, used in different other classes.
@@ -227,15 +228,61 @@ public final class PatternConsts {
     /**
      * combined pattern for all placeholder tags
      */
-    private static Pattern placeholders;
+    private static volatile Pattern placeholders;
     /**
      * pattern for text that should be removed from translation. Can be null!
      */
-    private static Pattern remove;
+    private static volatile Pattern remove;
     /**
      * Pattern for text that should be considered a custom tag. Can be null!
      */
-    private static Pattern customTags;
+    private static volatile Pattern customTags;
+    /**
+     * Project-specific overrides for the custom tag and removed-text
+     * regular expressions. Null means the global preference applies; an
+     * empty string is a real override that turns the pattern off for the
+     * project.
+     */
+    private static volatile String projectCustomTagPattern;
+    private static volatile String projectRemoveTextPattern;
+
+    /**
+     * Installs the project-specific tag patterns when a project is opened.
+     * A null argument keeps the global preference for that pattern. An
+     * expression that does not compile is refused and logged, so a broken
+     * project file cannot take the whole tag pipeline down.
+     */
+    public static void applyProjectPatterns(String customTagPattern, String removeTextPattern) {
+        projectCustomTagPattern = validated(customTagPattern);
+        projectRemoveTextPattern = validated(removeTextPattern);
+        resetCachedPatterns();
+    }
+
+    /** Removes the project-specific tag patterns when the project is closed. */
+    public static void clearProjectPatterns() {
+        projectCustomTagPattern = null;
+        projectRemoveTextPattern = null;
+        resetCachedPatterns();
+    }
+
+    private static String validated(String regex) {
+        if (regex == null) {
+            return null;
+        }
+        try {
+            Pattern.compile(regex);
+            return regex;
+        } catch (PatternSyntaxException e) {
+            Log.logWarningRB("LOG_PROJECT_TAG_PATTERN_INVALID", regex, e.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    private static void resetCachedPatterns() {
+        updatePlaceholderPattern();
+        updateRemovePattern();
+        updateCustomTagPattern();
+    }
 
     /**
      * Returns the placeholder pattern (OmegaT tags, printf tags, java
@@ -256,7 +303,9 @@ public final class PatternConsts {
                 regexp += "|" + RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
             String customRegExp;
-            if (Preferences.existsPreference(Preferences.CHECK_CUSTOM_PATTERN)) {
+            if (projectCustomTagPattern != null) {
+                customRegExp = projectCustomTagPattern;
+            } else if (Preferences.existsPreference(Preferences.CHECK_CUSTOM_PATTERN)) {
                 customRegExp = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             } else {
                 // assume default
@@ -281,7 +330,8 @@ public final class PatternConsts {
 
     public static Pattern getRemovePattern() {
         if (remove == null) {
-            String removeRegExp = Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
+            String removeRegExp = projectRemoveTextPattern != null ? projectRemoveTextPattern
+                    : Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
             if (!"".equalsIgnoreCase(removeRegExp)) {
                 remove = Pattern.compile(removeRegExp);
             }
@@ -298,7 +348,8 @@ public final class PatternConsts {
 
     public static Pattern getCustomTagPattern() {
         if (customTags == null) {
-            String customTagsRegex = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
+            String customTagsRegex = projectCustomTagPattern != null ? projectCustomTagPattern
+                    : Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customTagsRegex)) {
                 customTags = Pattern.compile(customTagsRegex);
             }

@@ -121,7 +121,7 @@
 
     <suppress files="StaticUtils\.java" checks="EmptyStatement" lines="158,162,549"/>
     <suppress files="StaticUtils\.java" checks="LineLength" lines="715"/>
-    <suppress files="PatternConsts\.java" checks="LineLength" lines="50,259,294"/>
+    <suppress files="PatternConsts\.java" checks="LineLength" lines="51"/>
 
     <!-- repository -->
     <suppress checks="(ConstantName|OperatorWrap)" files="GITCredentialProvider\.java" lines="89,90,91,94,95"/>

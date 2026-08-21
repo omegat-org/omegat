@@ -58,6 +58,7 @@ import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
@@ -87,6 +88,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagPatternsStorage;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -329,13 +331,170 @@ public final class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    SwingUtilities.invokeLater(Core.getEditor()::requestFocus);
+                    SwingUtilities.invokeLater(() -> {
+                        Core.getEditor().requestFocus();
+                        // The two situations are mutually exclusive: diverged
+                        // means the team repository carries the file,
+                        // local-only means it does not.
+                        promptForDivergedTagPatterns();
+                        promptForLocalOnlyTagPatterns();
+                    });
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
             }
         }.execute();
+    }
+
+    /**
+     * The opened team project carries a local omegat/tag_patterns.xml that
+     * the team repository does not contain (feature request #926). Asks the
+     * user once what to do with it: share it with the team, remove it so the
+     * project matches the team again, or keep it local (remembered per
+     * checkout, so the question is not repeated). Dismissing the dialog
+     * decides nothing and asks again on the next load.
+     */
+    private static void promptForLocalOnlyTagPatterns() {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded() || !project.isTagPatternsLocalOnly()) {
+            return;
+        }
+        ProjectProperties props = project.getProjectProperties();
+        String[] options = { OStrings.getString("TEAM_TAG_PATTERNS_SHARE"),
+                OStrings.getString("TEAM_TAG_PATTERNS_REMOVE"),
+                OStrings.getString("TEAM_TAG_PATTERNS_KEEP") };
+        int answer = JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TEAM_TAG_PATTERNS_LOCAL_ONLY_MESSAGE",
+                        describeTagPatterns(props.getCustomTagPattern(), props.getRemoveTextPattern())),
+                OStrings.getString("TEAM_TAG_PATTERNS_LOCAL_ONLY_TITLE"), JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (answer == 2) {
+            project.keepLocalTagPatterns();
+            return;
+        }
+        if (answer != 0 && answer != 1) {
+            return;
+        }
+        // The repository work must stay off the EDT and must not run beside
+        // the auto-save thread.
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Core.executeExclusively(true, () -> {
+                    try {
+                        if (answer == 0) {
+                            ProjectProperties props = project.getProjectProperties();
+                            project.publishTagPatterns(props.getCustomTagPattern(),
+                                    props.getRemoveTextPattern());
+                        } else {
+                            project.discardLocalTagPatterns();
+                        }
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                    if (answer == 1) {
+                        // The protected parts of the already loaded source
+                        // files were computed with the local expressions, so
+                        // recompute them.
+                        projectReload();
+                    }
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                    Core.getMainWindow().displayErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                }
+            }
+        }.execute();
+    }
+
+    /**
+     * The team synchronisation of the load just replaced this checkout's tag
+     * definitions with a differing team version. Asks the user what to do
+     * with their version: share it with the team, use the team's version, or
+     * restore theirs for this session only - the next load synchronises and
+     * asks again. Dismissing the dialog leaves the team's version active.
+     */
+    private static void promptForDivergedTagPatterns() {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded()) {
+            return;
+        }
+        TagPatternsStorage.TagPatterns local = project.getDivergedLocalTagPatterns();
+        if (local == null) {
+            return;
+        }
+        ProjectProperties props = project.getProjectProperties();
+        String[] options = { OStrings.getString("TEAM_TAG_PATTERNS_SHARE"),
+                OStrings.getString("TEAM_TAG_PATTERNS_TAKE_TEAM"),
+                OStrings.getString("TEAM_TAG_PATTERNS_KEEP_THIS_TIME") };
+        int answer = JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TEAM_TAG_PATTERNS_DIVERGED_MESSAGE",
+                        describeTagPatterns(local.getCustomTagPattern(), local.getRemoveTextPattern()),
+                        describeTagPatterns(props.getCustomTagPattern(), props.getRemoveTextPattern())),
+                OStrings.getString("TEAM_TAG_PATTERNS_DIVERGED_TITLE"), JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        if (answer == 2) {
+            // No repository work: arm the restore and let the reload put the
+            // local expressions into effect (and parse the sources with
+            // them).
+            project.useLocalTagPatterns(local);
+            projectReload();
+            return;
+        }
+        if (answer != 0) {
+            // The team's version is already active.
+            return;
+        }
+        // The repository work must stay off the EDT and must not run beside
+        // the auto-save thread.
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Core.executeExclusively(true, () -> {
+                    try {
+                        project.publishTagPatterns(local.getCustomTagPattern(),
+                                local.getRemoveTextPattern());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                    // The protected parts of the already loaded source files
+                    // were computed with the team's expressions, so recompute
+                    // them with the now shared local ones.
+                    projectReload();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                    Core.getMainWindow().displayErrorRB(ex, "TEAM_TAG_PATTERNS_SHARE_ERROR");
+                }
+            }
+        }.execute();
+    }
+
+    /**
+     * One dialog line naming the concrete expressions, using the field labels
+     * of the tag definitions dialog.
+     */
+    private static String describeTagPatterns(@Nullable String customTagPattern,
+            @Nullable String removeTextPattern) {
+        String none = OStrings.getString("TEAM_TAG_PATTERNS_VALUE_NONE");
+        return OStrings.getString("TEAM_TAG_PATTERNS_VALUES",
+                customTagPattern == null ? none : customTagPattern,
+                removeTextPattern == null ? none : removeTextPattern);
     }
 
     private static @Nullable File selectProjectRootFolder(File projectDirectory) {
@@ -740,6 +899,10 @@ public final class ProjectUICommands {
                         // activate entry later - after project will be loaded
                         Core.getEditor().gotoEntry(previousCurEntryNum);
                         Core.getEditor().requestFocus();
+                        // A team project synchronises its configuration
+                        // files on this load path too.
+                        promptForDivergedTagPatterns();
+                        promptForLocalOnlyTagPatterns();
                     });
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -902,6 +1065,10 @@ public final class ProjectUICommands {
                         // activate entry later - after project will be loaded
                         Core.getEditor().gotoEntry(previousCurEntryNum);
                         Core.getEditor().requestFocus();
+                        // The reload synchronised the team configuration
+                        // files over just saved local tag definitions.
+                        promptForDivergedTagPatterns();
+                        promptForLocalOnlyTagPatterns();
                     });
                 } catch (Exception ex) {
                     processSwingWorkerException(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

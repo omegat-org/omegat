@@ -187,6 +187,45 @@ public class RemoteRepositoryProvider {
         return !getMappings(path).isEmpty();
     }
 
+    /**
+     * Whether a file with the given project path currently exists in one of
+     * the checked-out repositories, i.e. whether the team project already
+     * carries it. Only meaningful after the repositories have been switched
+     * to a version. Mapping excludes are not considered: the check looks at
+     * the raw repository copy.
+     */
+    public boolean existsInRepositories(String localPath) {
+        for (Mapping m : getMappings(localPath)) {
+            if (m.existsInRepository(localPath)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether every checked-out repository copy of the given project file is
+     * byte-identical to the file in the project directory, i.e. committing
+     * it would be a no-op. Only meaningful for files that are copied without
+     * EOL conversion, and after the repositories have been switched to a
+     * version.
+     */
+    public boolean isIdenticalInRepositories(String localPath) throws IOException {
+        File localFile = new File(projectRoot, localPath);
+        boolean found = false;
+        for (Mapping m : getMappings(localPath)) {
+            File repoFile = m.fileInRepository(localPath);
+            if (repoFile == null) {
+                continue;
+            }
+            if (!repoFile.exists() || !FileUtils.contentEquals(localFile, repoFile)) {
+                return false;
+            }
+            found = true;
+        }
+        return found;
+    }
+
     public void cleanPrepared() throws IOException {
         FileUtils.deleteDirectory(new File(projectRoot, REPO_PREPARE_SUBDIR));
     }
@@ -273,6 +312,23 @@ public class RemoteRepositoryProvider {
         for (IRemoteRepository2 repo : repos.values()) {
             repo.commit(null, commentText);
         }
+    }
+
+    /**
+     * Same as commitFiles, but reports whether every affected repository
+     * accepted the commit: a rejected push (for example non-fast-forward)
+     * makes IRemoteRepository2.commit return null instead of throwing.
+     */
+    public boolean commitFilesChecked(String path, String commentText) throws Exception {
+        Map<String, IRemoteRepository2> repos = new TreeMap<>();
+        for (Mapping m : getMappings(path)) {
+            repos.put(m.repoDefinition.getUrl(), m.repo);
+        }
+        boolean accepted = true;
+        for (IRemoteRepository2 repo : repos.values()) {
+            accepted &= repo.commit(null, commentText) != null;
+        }
+        return accepted;
     }
 
     /**
@@ -485,6 +541,38 @@ public class RemoteRepositoryProvider {
          */
         public boolean matches() {
             return filterPrefix != null;
+        }
+
+        /**
+         * Whether the given project path currently exists in this mapping's
+         * checked-out repository copy.
+         */
+        boolean existsInRepository(String path) {
+            File f = fileInRepository(path);
+            return f != null && f.exists();
+        }
+
+        /**
+         * The file for the given project path inside this mapping's
+         * checked-out repository copy, or null when the path is outside the
+         * mapping.
+         */
+        @Nullable
+        File fileInRepository(String path) {
+            String p = withLeadingSlash(withoutTrailingSlash(path));
+            String local = withSlashes(repoMapping.getLocal());
+            String relative;
+            if (withTrailingSlash(p).equals(local)) {
+                // file mapping: the repository part is the file itself
+                relative = "";
+            } else if (p.startsWith(local)) {
+                relative = p.substring(local.length());
+            } else {
+                return null;
+            }
+            File base = new File(getRepositoryDir(repoDefinition),
+                    withoutLeadingSlash(repoMapping.getRepository()));
+            return new File(base, relative);
         }
 
         public void copyFromRepoToProject(final String postfix) throws IOException {

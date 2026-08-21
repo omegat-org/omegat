@@ -80,24 +80,6 @@ public class ProjectFileStorageTest {
     }
 
     @Test
-    public void testMatchNumbersRoundTrip() throws Exception {
-        // Absent flag reads as disabled and is not written for a default
-        // project; an enabled flag survives the write/read round trip.
-        ProjectProperties defaults = getProjectProperties();
-        assertFalse(defaults.isMatchNumbersEnabled());
-        ProjectFileStorage.writeProjectFile(defaults);
-        ProjectProperties reread = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(tempDir, "omegat.project"));
-        assertFalse(reread.isMatchNumbersEnabled());
-
-        ProjectProperties enabled = getProjectProperties();
-        enabled.setMatchNumbersEnabled(true);
-        ProjectFileStorage.writeProjectFile(enabled);
-        reread = ProjectFileStorage.loadPropertiesFile(tempDir, new File(tempDir, "omegat.project"));
-        assertTrue(reread.isMatchNumbersEnabled());
-    }
-
-    @Test
     public void testLoadDefaults() throws Exception {
         ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(PROJECT_DIR, "defaultdirs.project"));

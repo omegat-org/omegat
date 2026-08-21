@@ -252,11 +252,162 @@ public class RealProject implements IProject {
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
+            // Opt-in sidecar: only materialised once the setting was used, so
+            // default projects stay byte-identical to older OmegaT versions.
+            // While a superseded local value awaits the user's decision, the
+            // session runs on the team value but the file keeps the local
+            // one - persisting the session value here would silently turn a
+            // dismissed question into "take the team value".
+            if (supersededLocalMatchNumbers == null
+                    && (config.isMatchNumbersEnabled() || ProjectSettingsStorage.getFile(config).isFile())) {
+                ProjectSettingsStorage.saveMatchNumbers(config, config.isMatchNumbersEnabled());
+            }
         } finally {
             lockProject();
         }
         Preferences.setPreference(Preferences.SOURCE_LOCALE, config.getSourceLanguage().toString());
         Preferences.setPreference(Preferences.TARGET_LOCALE, config.getTargetLanguage().toString());
+    }
+
+    /**
+     * The local match_numbers value that the just synced team value
+     * superseded during the load, or null when both agreed. Read by the
+     * question shown after a team project opened.
+     */
+    private volatile @Nullable Boolean supersededLocalMatchNumbers;
+
+    @Override
+    public @Nullable Boolean getSupersededLocalMatchNumbers() {
+        return supersededLocalMatchNumbers;
+    }
+
+    @Override
+    public void publishMatchNumbersEnabled(boolean enabled) throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        // The session and the local file keep the user's value even when the
+        // commit fails: the file then still diverges from the team and the
+        // next open asks again.
+        config.setMatchNumbersEnabled(enabled);
+        ProjectSettingsStorage.saveMatchNumbers(config, enabled);
+        // A checkout parked between teamSyncPrepare and teamSync must not be
+        // moved to latest behind the sync's back (same cleanup as
+        // saveProject).
+        tmxPrepared = null;
+        glossaryPrepared = null;
+        remoteRepositoryProvider.cleanPrepared();
+        commitProjectSettings(remoteRepositoryProvider, config);
+        supersededLocalMatchNumbers = null;
+    }
+
+    /**
+     * Commit the project settings file to the team repositories. Skips the
+     * commit when every repository copy is already byte-identical, because
+     * git reports the no-op commit of an unchanged file the same way as a
+     * rejected push. Static for testability.
+     */
+    static void commitProjectSettings(RemoteRepositoryProvider provider, ProjectProperties config)
+            throws Exception {
+        // The checkout may be stale, and a commit onto an old base would be
+        // rejected on push.
+        provider.switchAllToLatest();
+        String underRoot = config.getProjectInternalRelative()
+                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS;
+        if (!provider.isIdenticalInRepositoriesIgnoringEol(underRoot)) {
+            provider.copyFilesFromProjectToRepos(underRoot, null);
+            if (!provider.commitFilesChecked(underRoot, "Update the fuzzy number matching setting")) {
+                throw new IOException(OStrings.getString("TEAM_MATCH_NUMBERS_SHARE_ERROR"));
+            }
+        }
+    }
+
+    @Override
+    public void useLocalMatchNumbersEnabled(boolean enabled) throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        config.setMatchNumbersEnabled(enabled);
+        // Local write only: the next open of the team project syncs the
+        // remote file back in, notices a divergence and asks again.
+        ProjectSettingsStorage.saveMatchNumbers(config, enabled);
+        supersededLocalMatchNumbers = null;
+    }
+
+    /**
+     * Apply the stored project settings to the session. For an online team
+     * project the team's state wins: the sync just overwrote a diverging
+     * local file with the remote one, and a purely local file (which the
+     * sync leaves alone, because it never existed remotely) does not count
+     * either - the team default stays active until the value is shared.
+     * Either way the superseded local value is kept for the question shown
+     * after the load, so every open asks again until the value is shared or
+     * dropped, as the share prompt promises.
+     *
+     * @param preSyncMatchNumbers
+     *            the locally stored value from before the team sync, null
+     *            when the file or key was absent
+     */
+    private void loadProjectSettings(@Nullable Boolean preSyncMatchNumbers) {
+        Boolean stored = ProjectSettingsStorage.loadMatchNumbers(config);
+        boolean teamOnline = remoteRepositoryProvider.isManaged() && isOnlineMode;
+        boolean identical = false;
+        if (teamOnline) {
+            try {
+                // After the sync a settings file that exists remotely is
+                // byte-identical locally; a non-identical or absent file
+                // means the team does not carry the setting, so the local
+                // file is a local-only divergence.
+                identical = remoteRepositoryProvider.isIdenticalInRepositories(
+                        config.getProjectInternalRelative()
+                                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS);
+            } catch (IOException ex) {
+                Log.logErrorRB(ex, "TEAM_MATCH_NUMBERS_APPLY_ERROR");
+                // fall back to trusting the local file
+                identical = true;
+            }
+        }
+        MatchNumbersState state = resolveMatchNumbers(preSyncMatchNumbers, stored, identical, teamOnline);
+        config.setMatchNumbersEnabled(state.effective);
+        supersededLocalMatchNumbers = state.supersededLocal;
+    }
+
+    /** Resolution of the match_numbers setting after a load. */
+    static final class MatchNumbersState {
+        final boolean effective;
+        final @Nullable Boolean supersededLocal;
+
+        MatchNumbersState(boolean effective, @Nullable Boolean supersededLocal) {
+            this.effective = effective;
+            this.supersededLocal = supersededLocal;
+        }
+    }
+
+    /**
+     * Decide which match_numbers value a load activates and whether it
+     * superseded a diverging local value that the user should be asked
+     * about. Pure function for testability.
+     *
+     * @param preSyncStored
+     *            locally stored value from before the team sync, null when
+     *            file or key were absent
+     * @param postSyncStored
+     *            stored value after the team sync
+     * @param identicalInRepositories
+     *            whether the settings file is byte-identical in every team
+     *            repository (meaningless when teamOnline is false)
+     * @param teamOnline
+     *            whether this is a team project loaded in online mode
+     */
+    static MatchNumbersState resolveMatchNumbers(@Nullable Boolean preSyncStored,
+            @Nullable Boolean postSyncStored, boolean identicalInRepositories, boolean teamOnline) {
+        boolean stored = Boolean.TRUE.equals(postSyncStored);
+        if (!teamOnline) {
+            return new MatchNumbersState(stored, null);
+        }
+        boolean team = stored && identicalInRepositories;
+        boolean localEffective = Boolean.TRUE.equals(preSyncStored);
+        return new MatchNumbersState(team, localEffective != team ? localEffective : null);
     }
 
     /**
@@ -343,6 +494,7 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
+            Boolean preSyncMatchNumbers = ProjectSettingsStorage.loadMatchNumbers(config);
             if (remoteRepositoryProvider.isManaged()) {
                 try {
                     tmxPrepared = null;
@@ -360,6 +512,7 @@ public class RealProject implements IProject {
                 config.loadProjectFilters();
                 config.loadProjectSRX();
             }
+            loadProjectSettings(preSyncMatchNumbers);
 
             loadFilterSettings();
             loadSegmentationSettings();

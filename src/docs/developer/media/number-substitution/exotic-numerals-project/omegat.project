@@ -28,7 +28,6 @@
     <sentence_seg>true</sentence_seg>
     <support_default_translations>true</support_default_translations>
     <remove_tags>false</remove_tags>
-    <match_numbers>true</match_numbers>
     <external_command></external_command>
   </project>
 </omegat>

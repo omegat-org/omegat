@@ -108,6 +108,45 @@ public interface IProject {
     void commitSourceFiles() throws Exception;
 
     /**
+     * Sets the match_numbers project setting and commits the project
+     * settings file (omegat/project_settings.properties) to the team
+     * repository, so the whole team gets the value. The setting lives in
+     * its own file because older OmegaT versions reject unknown elements in
+     * omegat.project but ignore extra files. No operation for non-team
+     * projects.
+     *
+     * @param enabled
+     *            the value to distribute
+     * @throws Exception
+     *             if writing or committing the file fails
+     */
+    default void publishMatchNumbersEnabled(boolean enabled) throws Exception {
+    }
+
+    /**
+     * Sets the match_numbers project setting for this session and writes it
+     * to the local project settings file only: the next open of the team
+     * project supersedes it with the remote value again. No operation for
+     * non-team projects.
+     *
+     * @param enabled
+     *            the value to restore
+     * @throws Exception
+     *             if writing the file fails
+     */
+    default void useLocalMatchNumbersEnabled(boolean enabled) throws Exception {
+    }
+
+    /**
+     * The local match_numbers value that the team value superseded during
+     * the last load of a team project, or null when they agreed. Always
+     * null for non-team projects.
+     */
+    default @Nullable Boolean getSupersededLocalMatchNumbers() {
+        return null;
+    }
+
+    /**
      * Get project properties.
      *
      * @return project properties

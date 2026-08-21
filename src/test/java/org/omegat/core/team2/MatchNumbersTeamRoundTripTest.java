@@ -25,10 +25,12 @@
 
 package org.omegat.core.team2;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
 
@@ -40,11 +42,9 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProjectSettingsStorage;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
-import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.OConsts;
-import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import gen.core.project.RepositoryDefinition;
@@ -52,14 +52,13 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Proves that the per-project fuzzy number matching option (feature request
- * #465) survives the team project round trip. The option lives in
- * omegat.project, so the relevant team mechanics differ from separate
- * configuration files: opening a team project fetches the remote
- * omegat.project as omegat.project.NEW (the sequence below mirrors
- * ProjectUICommands.projectOpen), while the routine full sync leaves the
- * local omegat.project alone.
+ * #465) survives the team project round trip in its sidecar file
+ * omegat/project_settings.properties: the routine full sync distributes and
+ * supersedes it like any other configuration file, a purely local file
+ * survives the sync and is recognisable as local-only divergence through
+ * the repository comparison.
  *
- * @author Stephan Pakebusch
+ * @author stephan.pakebusch at zollsoft.de
  */
 public class MatchNumbersTeamRoundTripTest {
 
@@ -68,6 +67,7 @@ public class MatchNumbersTeamRoundTripTest {
 
     private File remoteDir;
     private File projectDir;
+    private ProjectProperties config;
     private RemoteRepositoryProvider provider;
 
     @BeforeClass
@@ -79,120 +79,79 @@ public class MatchNumbersTeamRoundTripTest {
     @Before
     public void setUp() throws Exception {
         remoteDir = folder.newFolder("remote");
-        writeProjectFile(remoteDir, true);
-        try (Git git = Git.init().setDirectory(remoteDir).call()) {
-            Files.writeString(new File(remoteDir, "readme.txt").toPath(), "team project");
-            commitAll(git, "team project with match_numbers");
-        }
+        Files.writeString(new File(remoteDir, "readme.txt").toPath(), "team project",
+                StandardCharsets.UTF_8);
+        // the provider detects the repository type at construction time, so
+        // the remote must be a git repository before newProvider runs
+        commitRemote("initial team state");
         projectDir = folder.newFolder("project");
+        config = new ProjectProperties(projectDir);
         provider = newProvider(projectDir, remoteDir);
     }
 
     @Test
-    public void testTeamOpenDeliversTheRemoteOption() throws Exception {
-        ProjectProperties delivered = fetchRemoteProjectFile(provider, projectDir);
-        assertTrue("the remote omegat.project must deliver the enabled option",
-                delivered.isMatchNumbersEnabled());
-    }
-
-    @Test
-    public void testRoutineSyncLeavesTheLocalProjectFileAlone() throws Exception {
-        // The local checkout enabled the option while the team's
-        // omegat.project does not carry it yet.
-        writeProjectFile(remoteDir, false);
-        commitRemote("team without the option");
-        writeProjectFile(projectDir, true);
+    public void testTeamOpenDeliversTheRemoteSettingsFile() throws Exception {
+        writeRemoteSettings("match_numbers=true\n");
+        commitRemote("team with the option");
 
         provider.switchAllToLatest();
         provider.copyFilesFromReposToProject("");
 
-        assertTrue("the full sync must deliver the other files",
-                new File(projectDir, "readme.txt").exists());
-        ProjectProperties local = ProjectFileStorage.loadPropertiesFile(projectDir,
-                new File(projectDir, OConsts.FILE_PROJECT));
-        assertTrue("omegat.project is excluded from the full sync and must keep the local option",
-                local.isMatchNumbersEnabled());
+        assertEquals("the full sync must deliver the settings file", Boolean.TRUE,
+                ProjectSettingsStorage.loadMatchNumbers(config));
+        assertTrue("a delivered file is identical to the repository copy",
+                provider.isIdenticalInRepositories(settingsPathUnderRoot()));
     }
 
     @Test
-    public void testAdminCommitDistributesTheOptionToTheNextCheckout() throws Exception {
-        // The team starts without the option; the admin enables it locally
-        // and commits omegat.project through the repository provider.
-        writeProjectFile(remoteDir, false);
+    public void testRemoteFileSupersedesADivergingLocalFile() throws Exception {
+        writeRemoteSettings("match_numbers=false\n");
         commitRemote("team without the option");
+        ProjectSettingsStorage.saveMatchNumbers(config, true);
+
+        // the pre-sync snapshot is what the open uses to notice and report
+        // the superseded local value
+        assertEquals(Boolean.TRUE, ProjectSettingsStorage.loadMatchNumbers(config));
         provider.switchAllToLatest();
-        writeProjectFile(projectDir, true);
-        provider.copyFilesFromProjectToRepos(OConsts.FILE_PROJECT, null);
-        provider.commitFiles(OConsts.FILE_PROJECT, "Enable fuzzy number matching");
+        provider.copyFilesFromReposToProject("");
 
-        // The second team member opens their checkout the next time.
-        File projectDir2 = folder.newFolder("project2");
-        RemoteRepositoryProvider provider2 = newProvider(projectDir2, remoteDir);
-        ProjectProperties delivered = fetchRemoteProjectFile(provider2, projectDir2);
-        assertTrue("the next open of another checkout must receive the enabled option",
-                delivered.isMatchNumbersEnabled());
+        assertEquals("on open, the team's file wins", Boolean.FALSE,
+                ProjectSettingsStorage.loadMatchNumbers(config));
     }
 
     @Test
-    public void testRemoteProjectFileSupersedesALocalOnlyEnablement() throws Exception {
-        // Documented team semantics: on open, the remote omegat.project wins.
-        // A purely local enablement therefore does not survive the next open
-        // and has to be committed by the project admin to stick.
-        writeProjectFile(remoteDir, false);
-        commitRemote("team without the option");
-        writeProjectFile(projectDir, true);
+    public void testLocalOnlyFileSurvivesTheSyncAndReadsAsDivergence() throws Exception {
+        commitRemote("team without a settings file");
+        ProjectSettingsStorage.saveMatchNumbers(config, true);
 
-        ProjectProperties delivered = fetchRemoteProjectFile(provider, projectDir);
-        assertFalse("the delivered remote omegat.project does not carry the local-only option",
-                delivered.isMatchNumbersEnabled());
-        ProjectProperties local = ProjectFileStorage.loadPropertiesFile(projectDir,
-                new File(projectDir, OConsts.FILE_PROJECT));
-        assertTrue("the fetch itself must not touch the local file", local.isMatchNumbersEnabled());
+        provider.switchAllToLatest();
+        provider.copyFilesFromReposToProject("");
 
-        // projectOpen then replaces the local file with the delivered
-        // properties (after a timestamped backup) - the local-only
-        // enablement is gone.
-        ProjectFileStorage.writeProjectFile(delivered);
-        ProjectProperties reloaded = ProjectFileStorage.loadPropertiesFile(projectDir,
-                new File(projectDir, OConsts.FILE_PROJECT));
-        assertFalse("after the open, the remote state has superseded the local-only option",
-                reloaded.isMatchNumbersEnabled());
+        assertEquals("a file the team never had survives the full sync", Boolean.TRUE,
+                ProjectSettingsStorage.loadMatchNumbers(config));
+        assertFalse("the survivor is recognisable as local-only, so the open "
+                + "keeps the team default active and asks",
+                provider.isIdenticalInRepositories(settingsPathUnderRoot()));
     }
 
-    /** The omegat.project fetch sequence of ProjectUICommands.projectOpen. */
-    private static ProjectProperties fetchRemoteProjectFile(RemoteRepositoryProvider p, File projectRoot)
-            throws Exception {
-        p.switchToVersion(OConsts.FILE_PROJECT, null);
-        p.copyFilesFromReposToProject(OConsts.FILE_PROJECT, ".NEW", false);
-        File fetched = new File(projectRoot, OConsts.FILE_PROJECT + ".NEW");
-        assertTrue("the team open must deliver omegat.project.NEW", fetched.exists());
-        return ProjectFileStorage.loadPropertiesFile(projectRoot, fetched);
+    private String settingsPathUnderRoot() {
+        return OConsts.DEFAULT_INTERNAL + "/" + ProjectSettingsStorage.FILE_PROJECT_SETTINGS;
     }
 
-    /**
-     * The remote repository is non-bare and its work tree goes stale once a
-     * provider pushed to it, so only call this before the first provider
-     * commit of a test.
-     */
+    private void writeRemoteSettings(String content) throws Exception {
+        File f = new File(remoteDir,
+                OConsts.DEFAULT_INTERNAL + "/" + ProjectSettingsStorage.FILE_PROJECT_SETTINGS);
+        Files.createDirectories(f.getParentFile().toPath());
+        Files.writeString(f.toPath(), content, StandardCharsets.UTF_8);
+    }
+
     private void commitRemote(String message) throws Exception {
-        try (Git git = Git.open(remoteDir)) {
-            commitAll(git, message);
+        try (Git git = new File(remoteDir, ".git").exists() ? Git.open(remoteDir)
+                : Git.init().setDirectory(remoteDir).call()) {
+            git.add().addFilepattern(".").call();
+            git.commit().setMessage(message).setAuthor("OmegaT unit test", "test@test.nl").setSign(false)
+                    .call();
         }
-    }
-
-    private static void commitAll(Git git, String message) throws Exception {
-        git.add().addFilepattern(".").call();
-        git.commit().setMessage(message).setAuthor("OmegaT unit test", "test@test.nl").setSign(false).call();
-    }
-
-    private static void writeProjectFile(File root, boolean matchNumbers) throws Exception {
-        ProjectProperties p = new ProjectProperties(root);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setMatchNumbersEnabled(matchNumbers);
-        ProjectFileStorage.writeProjectFile(p);
     }
 
     private static RemoteRepositoryProvider newProvider(File projectRoot, File remote) {

@@ -1,6 +1,6 @@
 # Exotic numerals demo project
 
-A minimal OmegaT project (English to German, `match_numbers` enabled)
+A minimal OmegaT project (English to German, `match_numbers` enabled via `omegat/project_settings.properties`)
 illustrating how far the value-based fuzzy match number handling of SF-465
 reaches across the numeral systems encoded in Unicode. Every example was
 verified against `NumeralValueParser` before it went into this project.

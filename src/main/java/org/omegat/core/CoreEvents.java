@@ -39,6 +39,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IColorsChangedEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.IMainWindow;
@@ -59,6 +60,8 @@ public final class CoreEvents {
     private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
+    private static final List<IColorsChangedEventListener> COLORS_CHANGED_EVENT_LISTENERS =
+            new CopyOnWriteArrayList<>();
     private static final List<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
 
     private CoreEvents() {
@@ -102,6 +105,16 @@ public final class CoreEvents {
     /** Unregister listener. */
     public static void unregisterFontChangedEventListener(final IFontChangedEventListener listener) {
         FONT_CHANGED_EVENT_LISTENERS.remove(listener);
+    }
+
+    /** Register listener. */
+    public static void registerColorsChangedEventListener(final IColorsChangedEventListener listener) {
+        COLORS_CHANGED_EVENT_LISTENERS.add(listener);
+    }
+
+    /** Unregister listener. */
+    public static void unregisterColorsChangedEventListener(final IColorsChangedEventListener listener) {
+        COLORS_CHANGED_EVENT_LISTENERS.remove(listener);
     }
 
     /** Register listener. */
@@ -192,6 +205,20 @@ public final class CoreEvents {
                     listener.onFontChanged(newFont);
                 } catch (Throwable t) {
                     log("ERROR_EVENT_FONT_CHANGED", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event: the editor colours have changed. */
+    public static void fireColorsChanged() {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_COLORS_CHANGED");
+            for (IColorsChangedEventListener listener : COLORS_CHANGED_EVENT_LISTENERS) {
+                try {
+                    listener.onColorsChanged();
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_COLORS_CHANGED", t);
                 }
             }
         });

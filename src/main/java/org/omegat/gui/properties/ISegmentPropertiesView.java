@@ -84,4 +84,12 @@ public interface ISegmentPropertiesView {
     void install(SegmentPropertiesArea parent);
 
     String getKeyAtPoint(Point p);
+
+    /**
+     * Re-apply the current editor colours to this view and repaint. Default is a
+     * no-op; views that cache colours in their components or cell renderers
+     * override it so a live colour change is reflected without a restart.
+     */
+    default void applyColors() {
+    }
 }

@@ -123,6 +123,7 @@ import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -253,6 +254,11 @@ public class ProjectFilesListController implements IProjectFilesList {
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
+        });
+
+        // The progress-column colours are read per cell paint, so the repaint
+        // performed by the binding is enough to pick up a colour change.
+        Styles.bindColors(list.tableFiles, () -> {
         });
 
         projectListener = eventType -> {

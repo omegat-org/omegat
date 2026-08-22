@@ -147,6 +147,18 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
     }
 
+    @Override
+    protected void applyColors() {
+        super.applyColors();
+        // The colours live in the HTML stylesheet, so rebuild the document and
+        // re-render the shown entries. Guarded: first called from the
+        // superclass constructor, before this pane's fields are initialised.
+        initDocument();
+        if (displayedWords != null && !displayedWords.isEmpty()) {
+            refresh();
+        }
+    }
+
     @SuppressWarnings({"avoidinlineconditionals"})
     private void initDocument() {
         StyleSheet baseStyleSheet = new StyleSheet();

@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -310,7 +311,21 @@ public class PreferencesWindowController implements FurtherActionListener {
         outerPanel.resetButton.setVisible(false);
         // Use ones on inner panel to indicate that actions are view-specific
         innerPanel.undoButton.addActionListener(e -> currentView.undoChanges());
-        innerPanel.resetButton.addActionListener(e -> currentView.restoreDefaults());
+        innerPanel.resetButton.addActionListener(e -> {
+            // Restoring defaults can take a moment (e.g. resetting all
+            // colours refreshes the editor); block re-clicks and show a
+            // busy cursor until the view is done.
+            innerPanel.resetButton.setEnabled(false);
+            innerPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    currentView.restoreDefaults();
+                } finally {
+                    innerPanel.setCursor(Cursor.getDefaultCursor());
+                    innerPanel.resetButton.setEnabled(currentView.canRestoreDefaults());
+                }
+            });
+        });
 
         dialog.addWindowListener(new WindowAdapter() {
             @Override
@@ -798,6 +813,14 @@ public class PreferencesWindowController implements FurtherActionListener {
             timer.setRepeats(false);
             timer.start();
         }
+    }
+
+    @Override
+    public void showTransientMessage(String message) {
+        outerPanel.messageTextArea.setText(message);
+        Timer timer = new Timer(APPLIED_MESSAGE_TIMEOUT_MS, e -> updateMessage());
+        timer.setRepeats(false);
+        timer.start();
     }
 
     /**

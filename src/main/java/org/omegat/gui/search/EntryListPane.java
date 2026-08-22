@@ -147,9 +147,7 @@ class EntryListPane extends JTextPane {
         StaticUIUtils.makeCaretAlwaysVisible(this);
         StaticUIUtils.setCaretUpdateEnabled(this, false);
 
-        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        Styles.bindColors(this, this::applyColors);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -192,6 +190,12 @@ class EntryListPane extends JTextPane {
         autoSyncWithEditor = Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, true);
         initInputMap(useTabForAdvance);
         setEditable(false);
+    }
+
+    private void applyColors() {
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     private void initInputMap(boolean useTabForAdvance) {

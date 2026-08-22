@@ -118,10 +118,13 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         });
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
-
-        scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        scrollPane.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
-        scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        Styles.bindColors(scrollPane, () -> {
+            applyColors();
+            if (viewImpl != null) {
+                viewImpl.applyColors();
+                viewImpl.update();
+            }
+        });
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
         String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);
@@ -133,6 +136,12 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
+    }
+
+    private void applyColors() {
+        scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        scrollPane.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     public void addPropertyChangeListener(String key, PropertyChangeListener l) {

@@ -27,6 +27,7 @@ package org.omegat.core.data;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
 /**
@@ -40,6 +41,7 @@ public interface ITMXEntry extends ITranslationEntry {
     /**
      * Gets the initial creator of the entry
      */
+    @Nullable
     String getCreator();
 
     /**
@@ -50,6 +52,7 @@ public interface ITMXEntry extends ITranslationEntry {
     /**
      * Gets the author of last change in the entry
      */
+    @Nullable
     String getChanger();
 
     /**
@@ -60,6 +63,7 @@ public interface ITMXEntry extends ITranslationEntry {
     /**
      * Gets text note (markup &lt;note&gt; in TMX format)
      */
+    @Nullable
     String getNote();
 
     default boolean hasNote() {
@@ -70,9 +74,11 @@ public interface ITMXEntry extends ITranslationEntry {
 
     boolean hasProperties();
 
+    @Nullable
     String getPropValue(String propType);
 
     boolean hasPropValue(String propType, String propValue);
 
+    @Nullable
     List<TMXProp> getProperties();
 }

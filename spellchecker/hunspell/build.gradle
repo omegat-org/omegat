@@ -16,6 +16,7 @@ dependencies {
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.languagetool.core)
         compileOnly(libs.lucene.analyzers.common)
+        compileOnly(libs.jspecify)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

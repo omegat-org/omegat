@@ -37,6 +37,7 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -63,9 +64,9 @@ public class HTMLWriter extends Writer {
     private BufferedWriter realWriter;
 
     /** Replacement string for HTML content-type META */
-    private String htmlMeta;
+    private @Nullable String htmlMeta;
     /** Replacement string for XML (XHTML) header */
-    private String xmlHeader;
+    private @Nullable String xmlHeader;
 
     /**
      * Encoding to write this file in. null value means no encoding declaration.
@@ -84,7 +85,7 @@ public class HTMLWriter extends Writer {
      *            - the encoding to write HTML file in (null means OS-default
      *            encoding)
      */
-    public HTMLWriter(String fileName, String encoding, HTMLOptions options)
+    public HTMLWriter(String fileName, @Nullable String encoding, HTMLOptions options)
             throws FileNotFoundException, UnsupportedEncodingException {
         this.encoding = encoding;
 
@@ -219,7 +220,7 @@ public class HTMLWriter extends Writer {
      *             - If an I/O error occurs
      */
     @Override
-    public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
+    public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();

@@ -6,11 +6,12 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
         implementation providedModuleLib('language-en')
         runtimeOnly providedModuleLib('opennlp')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.en) {
             exclude module: 'languagetool-core'

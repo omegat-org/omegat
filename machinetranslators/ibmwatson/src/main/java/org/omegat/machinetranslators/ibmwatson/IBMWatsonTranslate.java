@@ -48,7 +48,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 import org.omegat.core.Core;
 import org.omegat.core.machinetranslators.BaseCachedTranslate;
 import org.omegat.core.machinetranslators.BaseTranslate;
@@ -71,7 +70,6 @@ import org.omegat.util.Preferences;
  *      "https://www.ibm.com/watson/developercloud/language-translator/api/v3/">Translation
  *      API</a>
  */
-@NullMarked
 @SuppressWarnings("unused")
 public class IBMWatsonTranslate extends BaseCachedTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";

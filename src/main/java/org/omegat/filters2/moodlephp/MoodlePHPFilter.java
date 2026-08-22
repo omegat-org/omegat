@@ -61,7 +61,7 @@ public class MoodlePHPFilter extends AbstractFilter {
     protected static final Pattern RE_ENTITY = Pattern.compile("\\$string\\['(.+)'] (=) '(.+)(';)$",
             Pattern.DOTALL);
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * If true, will remove non-translated segments in the target files

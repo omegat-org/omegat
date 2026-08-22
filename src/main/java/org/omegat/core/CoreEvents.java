@@ -34,7 +34,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.jspecify.annotations.NullMarked;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
@@ -53,7 +52,6 @@ import org.omegat.util.OStrings;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-@NullMarked
 public final class CoreEvents {
     private static final List<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();

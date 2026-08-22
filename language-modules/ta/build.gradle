@@ -6,10 +6,11 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
         implementation providedModuleLib('language-ta')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.ta) {
             exclude module: 'languagetool-core'

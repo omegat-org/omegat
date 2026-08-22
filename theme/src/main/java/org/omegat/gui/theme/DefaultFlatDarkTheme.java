@@ -37,7 +37,6 @@ import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.SystemInfo;
-import org.jspecify.annotations.NullMarked;
 
 /**
  * A default dark theme customized from FlatDarkLaf.
@@ -45,7 +44,6 @@ import org.jspecify.annotations.NullMarked;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
-@NullMarked
 public class DefaultFlatDarkTheme extends FlatLaf {
     private static final String NAME = "Flat dark theme";
     private static final String ID = "FlatDarkTheme";

@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.jspecify.annotations.Nullable;
 import org.trie4j.MapTrie;
 import org.trie4j.doublearray.MapDoubleArray;
 import org.trie4j.patricia.MapPatriciaTrie;
@@ -55,7 +56,7 @@ import org.omegat.util.StringUtil;
 public class DictionaryData<T> {
 
     private final Language language;
-    private MapDoubleArray<Object> data;
+    private @Nullable MapDoubleArray<Object> data;
     private MapTrie<Object> temp;
 
     /**

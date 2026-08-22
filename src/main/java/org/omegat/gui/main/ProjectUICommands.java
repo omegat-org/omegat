@@ -1198,7 +1198,7 @@ public final class ProjectUICommands {
      * @param skipConfirm if true, do not show any confirmation dialog even if preferences would
      *                    normally require it and even if a project is open but unmodified
      */
-    public static void projectRestart(String projectDir, boolean skipConfirm) {
+    public static void projectRestart(@Nullable String projectDir, boolean skipConfirm) {
         prepareForExit(skipConfirm, () -> Main.restartGUI(projectDir));
     }
 

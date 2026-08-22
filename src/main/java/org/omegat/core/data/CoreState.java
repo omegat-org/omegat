@@ -60,7 +60,7 @@ public class CoreState {
 
     private final LongProcessExecutor executor = new LongProcessExecutor("omegat-longprocess");
 
-    private IAutoSave saveThread;
+    private @Nullable IAutoSave saveThread;
 
     protected CoreState() {
         project = new NotLoadedProject();
@@ -79,7 +79,7 @@ public class CoreState {
         return executor;
     }
 
-    public IAutoSave getAutoSave() {
+    public @Nullable IAutoSave getAutoSave() {
         return saveThread;
     }
 
@@ -101,26 +101,26 @@ public class CoreState {
         return instance;
     }
 
-    private IProject project;
-    private Segmenter segmenter;
-    private FilterMaster filterMaster;
-    private GlossaryManager glossaryManager;
-    private ITagValidation tagValidation;
-    private IIssues issuesWindow;
-    private MachineTranslatorsManager machineTranslatorsManager;
+    private @Nullable IProject project;
+    private @Nullable Segmenter segmenter;
+    private @Nullable FilterMaster filterMaster;
+    private @Nullable GlossaryManager glossaryManager;
+    private @Nullable ITagValidation tagValidation;
+    private @Nullable IIssues issuesWindow;
+    private @Nullable MachineTranslatorsManager machineTranslatorsManager;
 
     // GUI panes
-    private IMainWindow mainWindow;
-    private IEditor editor;
-    private IGlossaries glossaries;
-    private INotes notes;
-    private IMatcher matcher;
-    private IProjectFilesList projWin;
-    private IComments comments;
-    private MachineTranslateTextArea machineTranslatePane;
-    private DictionariesTextArea dictionaries;
-    private SegmentPropertiesArea segmentPropertiesArea;
-    private SpellCheckerManager spellCheckerManager;
+    private @Nullable IMainWindow mainWindow;
+    private @Nullable IEditor editor;
+    private @Nullable IGlossaries glossaries;
+    private @Nullable INotes notes;
+    private @Nullable IMatcher matcher;
+    private @Nullable IProjectFilesList projWin;
+    private @Nullable IComments comments;
+    private @Nullable MachineTranslateTextArea machineTranslatePane;
+    private @Nullable DictionariesTextArea dictionaries;
+    private @Nullable SegmentPropertiesArea segmentPropertiesArea;
+    private @Nullable SpellCheckerManager spellCheckerManager;
 
     // Issues providers registry (per CoreState instance)
     private final List<IIssueProvider> issueProvidersRegistry = new CopyOnWriteArrayList<>();
@@ -142,7 +142,7 @@ public class CoreState {
         return issueProvidersRegistry;
     }
 
-    public IProject getProject() {
+    public @Nullable IProject getProject() {
         return project;
     }
 
@@ -164,7 +164,7 @@ public class CoreState {
         this.mainWindow = mainWindow;
     }
 
-    public IEditor getEditor() {
+    public @Nullable IEditor getEditor() {
         return editor;
     }
 
@@ -172,7 +172,7 @@ public class CoreState {
         this.editor = editor;
     }
 
-    public IGlossaries getGlossaries() {
+    public @Nullable IGlossaries getGlossaries() {
         return glossaries;
     }
 
@@ -180,7 +180,7 @@ public class CoreState {
         this.glossaries = glossaries;
     }
 
-    public GlossaryManager getGlossaryManager() {
+    public @Nullable GlossaryManager getGlossaryManager() {
         return glossaryManager;
     }
 
@@ -188,7 +188,7 @@ public class CoreState {
         this.glossaryManager = glossaryManager;
     }
 
-    public Segmenter getSegmenter() {
+    public @Nullable Segmenter getSegmenter() {
         return segmenter;
     }
 
@@ -196,7 +196,7 @@ public class CoreState {
         this.segmenter = segmenter;
     }
 
-    public FilterMaster getFilterMaster() {
+    public @Nullable FilterMaster getFilterMaster() {
         return filterMaster;
     }
 
@@ -204,7 +204,7 @@ public class CoreState {
         this.filterMaster = filterMaster;
     }
 
-    public ITagValidation getTagValidation() {
+    public @Nullable ITagValidation getTagValidation() {
         return tagValidation;
     }
 
@@ -212,7 +212,7 @@ public class CoreState {
         this.tagValidation = tagValidation;
     }
 
-    public INotes getNotes() {
+    public @Nullable INotes getNotes() {
         return notes;
     }
 
@@ -220,7 +220,7 @@ public class CoreState {
         this.notes = notes;
     }
 
-    public IIssues getIssuesWindow() {
+    public @Nullable IIssues getIssuesWindow() {
         return issuesWindow;
     }
 
@@ -228,7 +228,7 @@ public class CoreState {
         this.issuesWindow = issuesWindow;
     }
 
-    public IMatcher getMatcher() {
+    public @Nullable IMatcher getMatcher() {
         return matcher;
     }
 
@@ -236,7 +236,7 @@ public class CoreState {
         this.matcher = matcher;
     }
 
-    public IProjectFilesList getProjWin() {
+    public @Nullable IProjectFilesList getProjWin() {
         return projWin;
     }
 
@@ -244,7 +244,7 @@ public class CoreState {
         this.projWin = projWin;
     }
 
-    public IComments getComments() {
+    public @Nullable IComments getComments() {
         return comments;
     }
 
@@ -252,7 +252,7 @@ public class CoreState {
         this.comments = comments;
     }
 
-    public MachineTranslateTextArea getMachineTranslatePane() {
+    public @Nullable MachineTranslateTextArea getMachineTranslatePane() {
         return machineTranslatePane;
     }
 
@@ -260,7 +260,7 @@ public class CoreState {
         this.machineTranslatePane = machineTranslatePane;
     }
 
-    public DictionariesTextArea getDictionaries() {
+    public @Nullable DictionariesTextArea getDictionaries() {
         return dictionaries;
     }
 
@@ -268,7 +268,7 @@ public class CoreState {
         this.dictionaries = dictionaries;
     }
 
-    public SegmentPropertiesArea getSegmentPropertiesArea() {
+    public @Nullable SegmentPropertiesArea getSegmentPropertiesArea() {
         return segmentPropertiesArea;
     }
 
@@ -277,7 +277,7 @@ public class CoreState {
     }
 
     @SuppressWarnings("unused")
-    public SpellCheckerManager getSpellCheckerManager() {
+    public @Nullable SpellCheckerManager getSpellCheckerManager() {
         return spellCheckerManager;
     }
 
@@ -286,11 +286,11 @@ public class CoreState {
     }
 
     /** Get spell checker instance. */
-    public ISpellChecker getCurrentSpellChecker() {
+    public @Nullable ISpellChecker getCurrentSpellChecker() {
         return spellCheckerManager.getCurrentSpellChecker();
     }
 
-    public MachineTranslatorsManager getMachineTranslatorsManager() {
+    public @Nullable MachineTranslatorsManager getMachineTranslatorsManager() {
         return machineTranslatorsManager;
     }
 

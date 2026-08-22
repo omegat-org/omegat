@@ -45,7 +45,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -66,7 +65,6 @@ import org.omegat.util.OStrings;
  * @author Adiel Mittmann
  * @author Hiroshi Miura
  */
-@NullMarked
 public class LatexFilter extends AbstractFilter {
 
     /**

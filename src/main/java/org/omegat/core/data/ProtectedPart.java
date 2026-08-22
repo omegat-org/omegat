@@ -73,7 +73,7 @@ public class ProtectedPart {
      */
     protected @Nullable String replacementMatchCalculation;
 
-    public String getTextInSourceSegment() {
+    public @Nullable String getTextInSourceSegment() {
         return textInSourceSegment;
     }
 
@@ -81,7 +81,7 @@ public class ProtectedPart {
         this.textInSourceSegment = textInSourceSegment;
     }
 
-    public String getDetailsFromSourceFile() {
+    public @Nullable String getDetailsFromSourceFile() {
         return detailsFromSourceFile;
     }
 
@@ -89,7 +89,7 @@ public class ProtectedPart {
         this.detailsFromSourceFile = detailsFromSourceFile;
     }
 
-    public String getReplacementWordsCountCalculation() {
+    public @Nullable String getReplacementWordsCountCalculation() {
         return replacementWordsCountCalculation;
     }
 
@@ -97,7 +97,7 @@ public class ProtectedPart {
         this.replacementWordsCountCalculation = replacementWordsCountCalculation;
     }
 
-    public String getReplacementUniquenessCalculation() {
+    public @Nullable String getReplacementUniquenessCalculation() {
         return replacementUniquenessCalculation;
     }
 
@@ -105,7 +105,7 @@ public class ProtectedPart {
         this.replacementUniquenessCalculation = replacementUniquenessCalculation;
     }
 
-    public String getReplacementMatchCalculation() {
+    public @Nullable String getReplacementMatchCalculation() {
         return replacementMatchCalculation;
     }
 
@@ -113,7 +113,7 @@ public class ProtectedPart {
         this.replacementMatchCalculation = replacementMatchCalculation;
     }
 
-    public static List<ProtectedPart> extractFor(List<ProtectedPart> original, String text) {
+    public static @Nullable List<ProtectedPart> extractFor(@Nullable List<ProtectedPart> original, String text) {
         if (original == null) {
             return null;
         }

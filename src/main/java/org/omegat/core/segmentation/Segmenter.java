@@ -79,7 +79,7 @@ public final class Segmenter {
      *            list to store rules that account to breaks (can be null)
      * @return list of sentences (String objects)
      */
-    public List<String> segment(Language lang, String paragraph,
+    public List<String> segment(Language lang, @Nullable String paragraph,
                                 @Nullable List<StringBuilder> spaces, @Nullable List<Rule> brules) {
         if (paragraph == null) {
             return Collections.emptyList();

@@ -1,0 +1,50 @@
+<html lang="de">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unscharfe Treffer, die Zahlen verstehen</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Unscharfe Treffer, die Zahlen verstehen</h3>
+<p>Handbücher, Preislisten und Berichte wiederholen denselben Satz mit
+anderen Zahlen: &bdquo;Mit 12&nbsp;Nm anziehen&ldquo; und &bdquo;Mit
+8&nbsp;Nm anziehen&ldquo; &ndash; und reine Zahlensegmente (Datum, Betrag)
+finden normalerweise gar keinen unscharfen Treffer.</p>
+<p><b>Zahlen bei unscharfen Treffern berücksichtigen</b> in den
+Projekteigenschaften lässt das Fuzzy-Matches-Fenster Zahlen nach Wert
+vergleichen:</p>
+<ul>
+<li>Reine Zahlensegmente (Daten, Mengen, Preise) treffen einander, mit
+kleinem Abzug.</li>
+<li>Gleicher Wert zählt über Schriftsysteme hinweg als gleich: XIV,
+&#21313;&#22235;, &#1633;&#1636; und die vollbreite &#65297;&#65300; sind
+alle 14.</li>
+<li>Ein Tooltip zeigt die Berechnung und warnt, wenn die Zahlen des Treffers
+vom Segment abweichen &ndash; keine falsche Zahl rutscht unbemerkt durch.</li>
+</ul>
+<p>Im Projekt gespeichert &ndash; das ganze Team profitiert.</p>
+</body></html>

@@ -196,6 +196,30 @@
                </note>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.project.properties.match.numbers">
+            <term xml:id="dialogs.project.properties.match.numbers.title">
+               <option>Consider numbers in fuzzy matching</option>
+            </term>
+            <listitem>
+               <para>By default, the word-based match percentages ignore numbers, and
+                  		  a segment that consists only of numbers (a date, a bare quantity)
+                  		  scores too low against a segment with different numbers to be
+                  		  offered as a match.</para>
+               <para>Activating this option makes fuzzy matching compare number
+                  		  tokens by their numeric value: numbers written in different
+                  		  numbering systems (Roman numerals, ideographic numbers,
+                  		  Arabic-Indic or full-width digits, and so on) count as equal to
+                  		  their Western counterpart of the same value. Two segments that
+                  		  consist only of numbers are scored against each other as number
+                  		  sequences, with a small fixed penalty, so differing dates or bare
+                  		  numbers surface as fuzzy matches at all.</para>
+               <para>The setting is stored in the project and applies to everyone
+                  		  working on it. Hover over a match in the
+                  <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"></link> pane to see how its score was
+                  		  computed; a warning is shown there when the numbers of the match
+                  		  differ in value from those of the segment.</para>
+            </listitem>
+         </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.external.processing.command">
             <term xml:id="dialogs.project.properties.external.processing.command.title">
                <option>Local post-processing commands</option>

@@ -36,6 +36,7 @@ tasks.withType(Wrapper.class).configureEach {
     gradleVersion = "9.6.0" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
+group = project.property('org.omegat.groupId')
 version = omtVersion.version
 
 // Definition of bundled JRE file names

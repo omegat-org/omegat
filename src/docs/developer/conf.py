@@ -55,7 +55,7 @@ root_doc = 'index'
 html_theme_options = {
     "source_repository": "https://github.com/omegat-org/omegat/",
     "source_branch": "master",
-    "source_directory": "src_docs/developer/",
+    "source_directory": "src/docs/developer/",
     "footer_icons": [
         {
             "name": "GitHub",

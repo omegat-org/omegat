@@ -5,7 +5,6 @@ import org.omegat.gradle.PropertiesUtil
 plugins {
     id 'org.omegat.version'
     id 'org.omegat.document-conventions'
-    id 'org.omegat.main-utilities'
     id 'org.omegat.java-conventions'
     id 'org.omegat.jaxb-conventions'
     id 'org.omegat.windows-conventions'

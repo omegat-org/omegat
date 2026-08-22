@@ -77,6 +77,7 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.FileUtil;
 import tokyo.northside.jgit.signing.GpgSetup;
 import tokyo.northside.logging.ILogger;
@@ -109,13 +110,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     protected static final int TIMEOUT = 30; // seconds
     protected static final int CLONE_DEPTH = 1; // clone depth
 
+    @Nullable
     String repositoryURL;
+    @Nullable
     String branch;
     Boolean trackBranch = false;
+    @Nullable
     File localDirectory;
 
-    protected Repository repository;
+    protected @Nullable Repository repository;
 
+    @Nullable
     ProjectTeamSettings projectTeamSettings;
 
     /**
@@ -166,7 +171,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      *             when error happened.
      */
     @Override
-    public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, @Nullable ProjectTeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
         localDirectory = dir;
         projectTeamSettings = teamSettings;
@@ -273,7 +278,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      *             when error occurred.
      */
     @Override
-    public String getFileVersion(String file) throws IOException {
+    public @Nullable String getFileVersion(String file) throws IOException {
         File f = new File(localDirectory, file);
         if (!f.exists()) {
             return null;
@@ -443,7 +448,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      *             when error occurred.
      */
     @Override
-    public String commit(String[] onVersions, String comment) throws Exception {
+    public String commit(@Nullable String@Nullable [] onVersions, String comment) throws Exception {
         if (onVersions != null) {
             // check versions
             String currentVersion = getCurrentVersion();

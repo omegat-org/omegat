@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -87,7 +88,7 @@ public class ProjectTMX {
      */
     protected final Map<EntryKey, TMXEntry> alternatives;
 
-    final CheckOrphanedCallback checkOrphanedCallback;
+    final @Nullable CheckOrphanedCallback checkOrphanedCallback;
 
     // Variable to be set during loading
     boolean isOldOmegaTFormat = false;
@@ -110,7 +111,7 @@ public class ProjectTMX {
         }
     }
 
-    public ProjectTMX(CheckOrphanedCallback callback) {
+    public ProjectTMX(@Nullable CheckOrphanedCallback callback) {
         this.checkOrphanedCallback = callback;
         alternatives = new HashMap<>();
         defaults = new HashMap<>();
@@ -297,21 +298,21 @@ public class ProjectTMX {
     /**
      * Get default translation or null if not exist.
      */
-    public synchronized TMXEntry getDefaultTranslation(String source) {
+    public synchronized @Nullable TMXEntry getDefaultTranslation(String source) {
         return defaults.get(source);
     }
 
     /**
      * Get multiple translation or null if not exist.
      */
-    public synchronized TMXEntry getMultipleTranslation(EntryKey ek) {
+    public synchronized @Nullable TMXEntry getMultipleTranslation(EntryKey ek) {
         return alternatives.get(ek);
     }
 
     /**
      * Set a new translation.
      */
-    public void setTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
+    public void setTranslation(SourceTextEntry ste, @Nullable TMXEntry te, boolean isDefault) {
         if (te == null) {
             removeTranslation(ste, isDefault);
         } else {
@@ -369,8 +370,8 @@ public class ProjectTMX {
             ProjectTMX.this.isOldOmegaTFormat = isOmegaTFormat;
         }
 
-        public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+        public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.@Nullable ParsedTuv tuvSource,
+                TMXReader2.@Nullable ParsedTuv tuvTarget, boolean isParagraphSegtype) {
             if (tuvSource == null) {
                 // source Tuv not found
                 return false;
@@ -442,7 +443,7 @@ public class ProjectTMX {
         }
     }
 
-    private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
+    private TMXEntry.@Nullable ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
         String id = te.getPropValue(PROP_ID);
         if (id == null) {
             id = te.getPropValue(ATTR_TUID);

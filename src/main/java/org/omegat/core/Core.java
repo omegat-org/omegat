@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.cli.BaseSubCommand;
 import org.omegat.cli.SubCommands;
@@ -99,7 +98,6 @@ import org.omegat.util.gui.UIDesignManager;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
-@NullMarked
 public final class Core {
 
     private Core() {
@@ -124,7 +122,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static @Nullable IMainWindow getMainWindow() {
+    public static IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 
@@ -314,8 +312,7 @@ public final class Core {
         return MARKERS;
     }
 
-    public static Map<String, String> getParams() {
-        // FIXME
+    public static @Nullable Map<String, String> getParams() {
         return null;
     }
 

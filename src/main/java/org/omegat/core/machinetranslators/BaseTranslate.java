@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 
 import javax.swing.JCheckBoxMenuItem;
 
+import org.jspecify.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -56,7 +57,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     private static final int FILLER_LEN = FILLER.length();
 
     protected boolean enabled;
-    protected IMTGlossarySupplier glossarySupplier;
+    protected @Nullable IMTGlossarySupplier glossarySupplier;
 
     protected BaseTranslate() {
         // Options menu item
@@ -93,7 +94,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     @Override
-    public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
+    public @Nullable String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
             return translate(sLang, tLang, getTruncateText(text));
         } else {
@@ -102,7 +103,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     @Override
-    public String getCachedTranslation(Language sLang, Language tLang, String text) {
+    public @Nullable String getCachedTranslation(Language sLang, Language tLang, String text) {
         return null;
     }
 
@@ -169,7 +170,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      * @return translated text if exists in cache, otherwise null.
      */
     @Deprecated(since = "6.1")
-    protected String getFromCache(Language sLang, Language tLang, String text) {
+    protected @Nullable String getFromCache(Language sLang, Language tLang, String text) {
         return null;
     }
 

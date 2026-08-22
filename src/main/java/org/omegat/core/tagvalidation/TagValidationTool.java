@@ -34,6 +34,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.IProject.FileInfo;
@@ -56,7 +57,7 @@ public class TagValidationTool implements ITagValidation {
     static final String ALL_FILES_PATTERN = ".*";
 
     @Override
-    public synchronized void logTagValidationErrors(List<ErrorReport> suspects) {
+    public synchronized void logTagValidationErrors(@Nullable List<ErrorReport> suspects) {
         if (suspects != null && !suspects.isEmpty()) {
             for (ErrorReport report : suspects) {
                 System.out.println(report.entryNum);

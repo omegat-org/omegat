@@ -146,15 +146,15 @@ public class RealProject implements IProject {
      * Status required for execute prepare/rebase/commit in the correct order.
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
-    private volatile PreparedFileInfo tmxPrepared;
-    private volatile PreparedFileInfo glossaryPrepared;
+    private volatile @Nullable PreparedFileInfo tmxPrepared;
+    private volatile @Nullable PreparedFileInfo glossaryPrepared;
 
     private final Object projectTMXLock = new Object();
 
     private boolean isOnlineMode;
 
-    private RandomAccessFile raFile;
-    private FileChannel lockChannel;
+    private @Nullable RandomAccessFile raFile;
+    private @Nullable FileChannel lockChannel;
     private FileLock lock;
 
     private boolean modified;
@@ -1420,8 +1420,8 @@ public class RealProject implements IProject {
     }
 
     @Override
-    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
+    public void setTranslation(SourceTextEntry entry, @Nullable PrepareTMXEntry trans, boolean defaultTranslation,
+            @Nullable ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
         if (trans == null) {
             throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
         }
@@ -1704,17 +1704,17 @@ public class RealProject implements IProject {
     }
 
     protected class LoadFilesCallback extends ParseEntry {
-        private FileInfo fileInfo;
-        private String entryKeyFilename;
+        private @Nullable FileInfo fileInfo;
+        private @Nullable String entryKeyFilename;
 
         private final Set<String> existSource;
         private final Set<EntryKey> existKeys;
-        private final Map<String, ExternalTMX> externalTms;
+        private final @Nullable Map<String, ExternalTMX> externalTms;
 
-        private ExternalTMFactory.Builder tmBuilder;
+        private ExternalTMFactory.@Nullable Builder tmBuilder;
 
         public LoadFilesCallback(Set<String> existSource, Set<EntryKey> existKeys,
-                Map<String, ExternalTMX> externalTms) {
+                @Nullable Map<String, ExternalTMX> externalTms) {
             super(config);
             this.existSource = existSource;
             this.existKeys = existKeys;
@@ -1780,7 +1780,7 @@ public class RealProject implements IProject {
     }
 
     private class TranslateFilesCallback extends TranslateEntry {
-        private String currentFile;
+        private @Nullable String currentFile;
 
         /**
          * Getter for currentFile
@@ -1788,7 +1788,7 @@ public class RealProject implements IProject {
          * @return the current file being processed
          */
         @Override
-        protected String getCurrentFile() {
+        protected @Nullable String getCurrentFile() {
             return currentFile;
         }
 
@@ -1801,7 +1801,7 @@ public class RealProject implements IProject {
             super.fileStarted();
         }
 
-        protected String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
+        protected @Nullable String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
                 String prevSegment, String nextSegment, String path) {
             EntryKey ek = new EntryKey(currentFile, segmentSource, id, prevSegment, nextSegment, path);
             TMXEntry tr = projectTMX.getMultipleTranslation(ek);

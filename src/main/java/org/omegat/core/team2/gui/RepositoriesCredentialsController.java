@@ -34,6 +34,7 @@ import java.util.TreeSet;
 import javax.swing.JComponent;
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
@@ -48,7 +49,7 @@ public class RepositoriesCredentialsController extends BasePreferencesController
 
     private static final int MAX_ROW_COUNT = 10;
 
-    private RepositoriesCredentialsPanel dialog;
+    private @Nullable RepositoriesCredentialsPanel dialog;
 
     @Override
     public JComponent getGui() {

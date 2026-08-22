@@ -31,6 +31,7 @@ package org.omegat.core.spellchecker;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Token;
 
 /**
@@ -54,36 +55,36 @@ public interface ISpellChecker {
      * Check the word. If it is ignored or learned (valid), returns true.
      * Otherwise, false.
      */
-    boolean isCorrect(String word);
+    boolean isCorrect(@Nullable String word);
 
     /**
      * return a list of strings as suggestions.
      */
-    List<String> suggest(String word);
+    List<String> suggest(@Nullable String word);
 
     /**
      * Add a word to the list of correct words.
      */
-    void learnWord(String word);
+    void learnWord(@Nullable String word);
 
     /**
      * Add a word to the list of ignored words.
      */
-    void ignoreWord(String word);
+    void ignoreWord(@Nullable String word);
 
     /**
      * Get a list of misspelled tokens from the given text.
      */
-    List<Token> getMisspelledTokens(String text);
+    List<Token> getMisspelledTokens(@Nullable String text);
 
     /**
      * Determine if the given word is on the ignored list.
      */
-    boolean isIgnoredWord(String word);
+    boolean isIgnoredWord(@Nullable String word);
 
     /**
      * Determine if the given word is on the learned list.
      */
-    boolean isLearnedWord(String word);
+    boolean isLearnedWord(@Nullable String word);
 
 }

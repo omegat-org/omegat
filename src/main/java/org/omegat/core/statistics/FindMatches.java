@@ -29,6 +29,7 @@
 
 package org.omegat.core.statistics;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +58,7 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.NumeralValueParser;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -93,6 +95,13 @@ public class FindMatches {
      */
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
+    /**
+     * Number-only segments have no word tokens, so their first two similarity
+     * passes would always score 0. With the match-numbers project option they
+     * are compared with numbers as a placeholder class instead, minus this
+     * penalty (feature request #465).
+     */
+    private static final int PENALTY_FOR_NUMBER_ONLY = 10;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
 
     private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
@@ -130,6 +139,9 @@ public class FindMatches {
     private Token[] strTokensAll;
 
     private final int fuzzyMatchThreshold;
+
+    /** Consider numbers by value during matching (project option, #465). */
+    private final boolean matchNumbers;
 
     private final Segmenter segmenter;
 
@@ -181,6 +193,7 @@ public class FindMatches {
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
         this.fuzzyMatchThreshold = threshold;
+        this.matchNumbers = project.getProjectProperties().isMatchNumbersEnabled();
     }
 
     /**
@@ -441,6 +454,18 @@ public class FindMatches {
         // First percent value - with stemming if possible
         int similarityStem = FuzzyMatcher.calcSimilarity(distance, strTokensStem, candTokens);
 
+        // Both sides without word tokens means two number-only segments; the
+        // word passes then carry no signal, so compare with numbers as a
+        // placeholder class instead of letting the score stay 0 (#465).
+        int numberOnlySimilarity = -1;
+        if (matchNumbers && strTokensStem.length == 0 && candTokens.length == 0
+                && strTokensAll.length > 0) {
+            numberOnlySimilarity = Math.max(0, FuzzyMatcher.calcSimilarity(distance,
+                    tokenizeAllPlaceholder(srcText), tokenizeAllPlaceholder(realSource))
+                    - PENALTY_FOR_NUMBER_ONLY);
+            similarityStem = numberOnlySimilarity;
+        }
+
         similarityStem -= penalty;
         if (fuzzy) {
             // penalty for fuzzy
@@ -456,6 +481,9 @@ public class FindMatches {
         Token[] candTokensNoStem = tokenizeNoStem(realSource);
         // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
+        if (numberOnlySimilarity >= 0 && strTokensNoStem.length == 0 && candTokensNoStem.length == 0) {
+            similarityNoStem = numberOnlySimilarity;
+        }
         similarityNoStem -= penalty;
         if (fuzzy) {
             // penalty for fuzzy
@@ -570,6 +598,7 @@ public class FindMatches {
     Map<String, Token[]> tokenizeStemCache = new HashMap<>();
     Map<String, Token[]> tokenizeNoStemCache = new HashMap<>();
     Map<String, Token[]> tokenizeAllCache = new HashMap<>();
+    Map<String, Token[]> tokenizeAllPlaceholderCache = new HashMap<>();
 
     Token[] tokenizeStem(String str) {
         Token[] tokens = tokenizeStemCache.get(str);
@@ -597,6 +626,16 @@ public class FindMatches {
     }
 
     Token[] tokenizeAll(String str) {
+        if (matchNumbers) {
+            // Tokenize the original-case string: the Roman numeral gate needs
+            // the case; non-number tokens are lowercased token by token below.
+            Token[] tokens = tokenizeAllCache.get(str);
+            if (tokens == null) {
+                tokens = mapNumberTokens(str, false);
+                tokenizeAllCache.put(str, tokens);
+            }
+            return tokens;
+        }
         // Verbatim token comparisons are intentionally case-insensitive.
         // for matching purposes.
         str = str.toLowerCase(srcLocale);
@@ -606,6 +645,77 @@ public class FindMatches {
             tokenizeAllCache.put(str, tokens);
         }
         return tokens;
+    }
+
+    Token[] tokenizeAllPlaceholder(String str) {
+        Token[] tokens = tokenizeAllPlaceholderCache.get(str);
+        if (tokens == null) {
+            tokens = mapNumberTokens(str, true);
+            tokenizeAllPlaceholderCache.put(str, tokens);
+        }
+        return tokens;
+    }
+
+    /**
+     * Verbatim tokens with every number token replaced: by its numeric value
+     * (so differently written but equal numbers compare as equal, "XII" and
+     * "12"), or by one shared placeholder (so any two numbers compare as
+     * equal). Other tokens are lowercased as in the plain verbatim pass.
+     */
+    private Token[] mapNumberTokens(String str, boolean placeholder) {
+        Token[] tokens = tok.tokenizeVerbatim(str);
+        Token[] mapped = new Token[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            Token token = tokens[i];
+            String text = token.getTextFromString(str);
+            BigInteger value = numeralValue(text);
+            String mappedText;
+            if (value != null) {
+                mappedText = placeholder ? " #" : " #" + value;
+            } else {
+                mappedText = text.toLowerCase(srcLocale);
+            }
+            mapped[i] = new Token(mappedText, token.getOffset(), token.getLength());
+        }
+        return mapped;
+    }
+
+    /**
+     * Matches a canonical uppercase Roman numeral; lowercase or non-canonical
+     * letter runs (like "mix" or "civil") stay ordinary words.
+     */
+    private static final Pattern CANONICAL_ROMAN = Pattern
+            .compile("M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})");
+    private static final Pattern ANY_ROMAN_DIGIT = Pattern.compile(".*[IVX].*");
+    /** Han numeral ideographs, the unambiguous CJK number tokens. */
+    private static final Pattern HAN_NUMERALS = Pattern.compile(
+            "[〇零一二三四五六七八九"
+                    + "十百千万萬億兆两兩]+");
+
+    /**
+     * The numeric value of a token, or null when the token must not be treated
+     * as a number. Tokens containing a decimal digit or letter numeral of any
+     * script always count; letter-only tokens count only in unambiguous forms
+     * (canonical uppercase Roman, Han numerals), so ordinary words are never
+     * misread as numerals.
+     */
+    private static BigInteger numeralValue(String text) {
+        boolean numeric = false;
+        for (int i = 0; i < text.length();) {
+            int cp = text.codePointAt(i);
+            int type = Character.getType(cp);
+            if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER) {
+                numeric = true;
+                break;
+            }
+            i += Character.charCount(cp);
+        }
+        if (!numeric
+                && !(CANONICAL_ROMAN.matcher(text).matches() && ANY_ROMAN_DIGIT.matcher(text).matches())
+                && !HAN_NUMERALS.matcher(text).matches()) {
+            return null;
+        }
+        return NumeralValueParser.parseWhole(text).orElse(null);
     }
 
     private void checkStopped(IStopped stop) throws StoppedException {

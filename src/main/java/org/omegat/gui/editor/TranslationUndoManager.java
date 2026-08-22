@@ -127,6 +127,30 @@ public class TranslationUndoManager implements UndoableEditListener {
     }
 
     /**
+     * Run a mutation whose document events shall form a single undo step,
+     * then remember the result once. Unlike the document's trusted-changes
+     * flag this pauses only the undo bookkeeping: the document filter and
+     * the text-change notifications stay fully active.
+     *
+     * @param mutation
+     *            the document mutation to run
+     * @param caretPos
+     *            caret position, relative to the translation start, that an
+     *            undo of this mutation shall restore
+     */
+    void runAtomic(Runnable mutation, int caretPos) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        inProgress = true;
+        try {
+            mutation.run();
+        } finally {
+            inProgress = false;
+        }
+        remember(caretPos);
+    }
+
+    /**
      * Remember change.
      */
     public void remember(int caretPos) {

@@ -57,7 +57,11 @@ public class Mark {
     public @Nullable String toolTipText;
     /**
      * Text attributes for specific Mark. Will be added to text by
-     * Document.setCharacterAttributes() without replacement.
+     * Document.setCharacterAttributes() without replacement. Colors must be
+     * bound to their palette entry with
+     * {@link org.omegat.util.gui.Styles#createBoundAttributeSet}: the editor
+     * resolves bound colors when painting, so a plain color attribute is
+     * shadowed by the bound state color the segment text already carries.
      */
     public @Nullable AttributeSet attributes;
 

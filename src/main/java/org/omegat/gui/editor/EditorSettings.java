@@ -28,7 +28,6 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import javax.swing.text.AttributeSet;
@@ -525,29 +524,29 @@ public class EditorSettings implements IEditorSettings {
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
         // determine foreground color
-        Color fg = null;
+        Styles.EditorColor fg = null;
 
         // Custom foreground colors
         if (active) {
             if (isSource) {
-                fg = Styles.EditorColor.COLOR_ACTIVE_SOURCE_FG.getColor();
+                fg = Styles.EditorColor.COLOR_ACTIVE_SOURCE_FG;
             } else {
-                fg = Styles.EditorColor.COLOR_ACTIVE_TARGET_FG.getColor();
+                fg = Styles.EditorColor.COLOR_ACTIVE_TARGET_FG;
             }
         } else {
             if (isSource) {
                 if (isMarkNotedSegments() && hasNote && !translationExists) {
-                    fg = Styles.EditorColor.COLOR_NOTED_FG.getColor();
+                    fg = Styles.EditorColor.COLOR_NOTED_FG;
                 } else if (markUntranslated && !translationExists) {
-                    fg = Styles.EditorColor.COLOR_UNTRANSLATED_FG.getColor();
+                    fg = Styles.EditorColor.COLOR_UNTRANSLATED_FG;
                 } else if (isDisplaySegmentSources()) {
-                    fg = Styles.EditorColor.COLOR_SOURCE_FG.getColor();
+                    fg = Styles.EditorColor.COLOR_SOURCE_FG;
                 }
             } else {
                 if (isMarkNotedSegments() && hasNote) {
-                    fg = Styles.EditorColor.COLOR_NOTED_FG.getColor();
+                    fg = Styles.EditorColor.COLOR_NOTED_FG;
                 } else if (markTranslated) {
-                    fg = Styles.EditorColor.COLOR_TRANSLATED_FG.getColor();
+                    fg = Styles.EditorColor.COLOR_TRANSLATED_FG;
                 }
             }
         }
@@ -557,65 +556,64 @@ public class EditorSettings implements IEditorSettings {
                 break;
             case FIRST:
                 if (markFirstNonUnique) {
-                    fg = Styles.EditorColor.COLOR_NON_UNIQUE.getColor();
+                    fg = Styles.EditorColor.COLOR_NON_UNIQUE;
                 }
                 break;
             case NEXT:
-                fg = Styles.EditorColor.COLOR_NON_UNIQUE.getColor();
+                fg = Styles.EditorColor.COLOR_NON_UNIQUE;
                 break;
             }
         }
         if (isPlaceholder) {
-            fg = Styles.EditorColor.COLOR_PLACEHOLDER.getColor();
+            fg = Styles.EditorColor.COLOR_PLACEHOLDER;
         }
         if (isRemoveText && !isSource) {
-            fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
+            fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET;
         }
 
         // determine background color
-        Color bg = null;
+        Styles.EditorColor bg = null;
         if (active) {
             if (isSource) {
-                bg = Styles.EditorColor.COLOR_ACTIVE_SOURCE.getColor();
+                bg = Styles.EditorColor.COLOR_ACTIVE_SOURCE;
             } else {
-                bg = Styles.EditorColor.COLOR_ACTIVE_TARGET.getColor();
+                bg = Styles.EditorColor.COLOR_ACTIVE_TARGET;
             }
         } else {
             if (isSource) {
                 if (isMarkNotedSegments() && hasNote && !translationExists) {
-                    bg = Styles.EditorColor.COLOR_NOTED.getColor();
+                    bg = Styles.EditorColor.COLOR_NOTED;
                 } else if (markUntranslated && !translationExists) {
-                    bg = Styles.EditorColor.COLOR_UNTRANSLATED.getColor();
+                    bg = Styles.EditorColor.COLOR_UNTRANSLATED;
                 } else if (isDisplaySegmentSources()) {
-                    bg = Styles.EditorColor.COLOR_SOURCE.getColor();
+                    bg = Styles.EditorColor.COLOR_SOURCE;
                 }
             } else {
                 if (isMarkNotedSegments() && hasNote) {
-                    bg = Styles.EditorColor.COLOR_NOTED.getColor();
+                    bg = Styles.EditorColor.COLOR_NOTED;
                 } else if (markTranslated) {
-                    bg = Styles.EditorColor.COLOR_TRANSLATED.getColor();
+                    bg = Styles.EditorColor.COLOR_TRANSLATED;
                 }
             }
         }
 
-        Color nonUniqueBg = Styles.EditorColor.COLOR_NON_UNIQUE_BG.getColor();
-        if (markNonUniqueSegments && nonUniqueBg != null) {
+        if (markNonUniqueSegments) {
             switch (duplicate) {
             case NONE:
                 break;
             case FIRST:
                 if (markFirstNonUnique) {
-                    bg = nonUniqueBg;
+                    bg = Styles.EditorColor.COLOR_NON_UNIQUE_BG;
                 }
                 break;
             case NEXT:
-                bg = nonUniqueBg;
+                bg = Styles.EditorColor.COLOR_NON_UNIQUE_BG;
                 break;
             }
         }
         if (isNBSP && isMarkNBSP()) { // overwrite others, because space is
                                       // smallest.
-            bg = Styles.EditorColor.COLOR_NBSP.getColor();
+            bg = Styles.EditorColor.COLOR_NBSP;
         }
 
         // determine bold
@@ -632,7 +630,7 @@ public class EditorSettings implements IEditorSettings {
             italic = true;
         }
 
-        return Styles.createAttributeSet(fg, bg, bold, italic);
+        return Styles.createBoundAttributeSet(fg, bg, bold, italic);
     }
 
     /**
@@ -641,8 +639,7 @@ public class EditorSettings implements IEditorSettings {
      * @return
      */
     public AttributeSet getParagraphStartAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), null, false,
-                true);
+        return Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START, null, false, true);
     }
 
     /**
@@ -651,8 +648,8 @@ public class EditorSettings implements IEditorSettings {
      * @return
      */
     public AttributeSet getModificationInfoAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG.getColor(),
-                Styles.EditorColor.COLOR_MOD_INFO.getColor(), false, true);
+        return Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_MOD_INFO_FG,
+                Styles.EditorColor.COLOR_MOD_INFO, false, true);
     }
 
     /**
@@ -661,8 +658,8 @@ public class EditorSettings implements IEditorSettings {
      * @return
      */
     public AttributeSet getSegmentMarkerAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG.getColor(),
-                Styles.EditorColor.COLOR_SEGMENT_MARKER_BG.getColor(), true, false);
+        return Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_SEGMENT_MARKER_FG,
+                Styles.EditorColor.COLOR_SEGMENT_MARKER_BG, true, false);
     }
 
     /**
@@ -671,7 +668,7 @@ public class EditorSettings implements IEditorSettings {
      * @return
      */
     public AttributeSet getOtherLanguageTranslationAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG.getColor(),
-                Styles.EditorColor.COLOR_SOURCE.getColor(), false, true);
+        return Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_SOURCE_FG,
+                Styles.EditorColor.COLOR_SOURCE, false, true);
     }
 }

@@ -46,8 +46,8 @@ import javax.swing.JSpinner;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.table.AbstractTableModel;
 
+import org.omegat.core.CoreEvents;
 import org.omegat.gui.preferences.BasePreferencesController;
-import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles.EditorColor;
 
@@ -186,9 +186,10 @@ public class CustomColorSelectionController extends BasePreferencesController {
             } else {
                 panel.colorChooser.setColor(defaultColor);
             }
-            // resetting is an explicit action and takes effect immediately
+            // resetting is an explicit action and takes effect immediately;
+            // bound spans repaint with the new palette, no rebuild needed
             style.setColor(null);
-            PreferencesWindowController.refreshEditorView();
+            CoreEvents.fireColorsChanged();
             updateSelectionIcon();
         });
     }
@@ -204,7 +205,16 @@ public class CustomColorSelectionController extends BasePreferencesController {
         panel.colorStylesTable.repaint();
         panel.colorStylesTable.clearSelection();
         onSelectionChanged();
-        PreferencesWindowController.refreshEditorView();
+        CoreEvents.fireColorsChanged();
+    }
+
+    /**
+     * Color changes broadcast a colors-changed event and repaint; the editor
+     * document does not need to be rebuilt for them.
+     */
+    @Override
+    public boolean requiresEditorRefresh() {
+        return false;
     }
 
     @Override
@@ -218,6 +228,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
     @Override
     public void persist() {
         temporaryPreferences.entrySet().forEach(e -> e.getKey().setColor(e.getValue()));
+        CoreEvents.fireColorsChanged();
     }
 
     enum ColorColumns {

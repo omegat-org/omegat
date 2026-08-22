@@ -28,9 +28,11 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
@@ -119,10 +121,43 @@ public class Document3 extends DefaultStyledDocument {
     public Document3(final EditorController controller) {
         this.controller = controller;
 
-        Style defaultStyle = getDefaultStyle();
-        StyleConstants.setForeground(defaultStyle, Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyDefaultColors();
         setFont(controller.font);
+    }
+
+    /**
+     * Bake the editor-wide default colors into the default style. Kept a
+     * no-op while they are unchanged, so a palette edit of span colors stays
+     * a pure repaint; an actual default change lets Swing revalidate the
+     * views without rebuilding the document.
+     */
+    void applyDefaultColors() {
+        Style defaultStyle = getDefaultStyle();
+        Color foreground = Styles.EditorColor.COLOR_FOREGROUND.getColor();
+        Color background = Styles.EditorColor.COLOR_BACKGROUND.getColor();
+        if (!foreground.equals(StyleConstants.getForeground(defaultStyle))
+                || !background.equals(StyleConstants.getBackground(defaultStyle))) {
+            StyleConstants.setForeground(defaultStyle, foreground);
+            StyleConstants.setBackground(defaultStyle, background);
+        }
+    }
+
+    /**
+     * Spans bound to a palette entry resolve their colors against the
+     * palette currently in effect (see
+     * {@link Styles#createBoundAttributeSet}), so consumers that ask the
+     * document — instead of a view — see live colors as well.
+     */
+    @Override
+    public Color getForeground(AttributeSet attr) {
+        Color bound = Styles.resolveBoundForeground(attr);
+        return bound != null ? bound : super.getForeground(attr);
+    }
+
+    @Override
+    public Color getBackground(AttributeSet attr) {
+        Color bound = Styles.resolveBoundBackground(attr);
+        return bound != null ? bound : super.getBackground(attr);
     }
 
     private Style getDefaultStyle() {

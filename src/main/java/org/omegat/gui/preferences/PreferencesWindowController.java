@@ -160,6 +160,12 @@ public class PreferencesWindowController implements FurtherActionListener {
     private IPreferencesController currentView;
     private boolean didLoadGuis;
     private final Map<String, Runnable> persistenceRunnables = new HashMap<>();
+    /**
+     * True once any visited view requires the editor rebuild after saving;
+     * views that apply their changes themselves (see
+     * {@link IPreferencesController#requiresEditorRefresh()}) don't set it.
+     */
+    private boolean editorRefreshRequired;
 
     public void show(Window parent) {
         show(parent, null);
@@ -266,7 +272,9 @@ public class PreferencesWindowController implements FurtherActionListener {
 
                     @Override
                     protected void done() {
-                        refreshEditorView();
+                        if (editorRefreshRequired) {
+                            refreshEditorView();
+                        }
                         if (getIsReloadRequired()) {
                             SwingUtilities.invokeLater(ProjectUICommands::promptReload);
                         }
@@ -294,7 +302,9 @@ public class PreferencesWindowController implements FurtherActionListener {
                             LOGGER.log(Level.SEVERE, "Error saving preferences", ex);
                             return;
                         }
-                        refreshEditorView();
+                        if (editorRefreshRequired) {
+                            refreshEditorView();
+                        }
                         showAppliedMessage();
                         if (getIsReloadRequired()) {
                             SwingUtilities.invokeLater(ProjectUICommands::promptReload);
@@ -509,6 +519,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         }
         if (!persistenceRunnables.containsKey(newView.getClass().getName())) {
             persistenceRunnables.put(newView.getClass().getName(), newView::persist);
+            editorRefreshRequired |= newView.requiresEditorRefresh();
         }
         overlay.setHighlightComponent(null);
         innerPanel.innerViewHolder.removeAll();

@@ -128,6 +128,7 @@ import org.omegat.util.TMXProp;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -337,6 +338,10 @@ public class EditorController implements IEditor {
 
             // fonts have changed
             emptyProjectPane.setFont(font);
+            if (introPane != null) {
+                introPane.setFont(font);
+                styleIntroHtml();
+            }
         });
 
         // register Swing error logger
@@ -2063,6 +2068,7 @@ public class EditorController implements IEditor {
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             introPane.setName("IntroPane");
+            introPane.addPropertyChangeListener("page", e -> styleIntroHtml());
             DragTargetOverlay.apply(introPane, dropInfo);
             URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
@@ -2078,6 +2084,61 @@ public class EditorController implements IEditor {
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
         emptyProjectPane.setFont(mw.getApplicationFont());
         DragTargetOverlay.apply(emptyProjectPane, dropInfo);
+
+        applyIntroColors();
+        CoreEvents.registerColorsChangedEventListener(this::applyIntroColors);
+        CoreEvents.registerColorsChangedEventListener(this::remarkAfterColorsChange);
+    }
+
+    /**
+     * Marker painters bake their colours when a segment is marked, so a
+     * palette change re-runs the markers once (in the marker threads — no
+     * document rebuild, caret and scroll position stay put). The segment
+     * span colours themselves are bound to the palette and already resolve
+     * when painting.
+     */
+    private void remarkAfterColorsChange() {
+        if (m_docSegList != null) {
+            markerController.process(m_docSegList);
+        }
+    }
+
+    /**
+     * Apply the editor colours and font to the first-steps and empty-project
+     * panes, so they match the editor instead of the raw Look-and-Feel defaults.
+     */
+    private void applyIntroColors() {
+        Font font = mw.getApplicationFont();
+        if (introPane != null) {
+            Styles.applyColors(introPane);
+            introPane.setFont(font);
+            styleIntroHtml();
+        }
+        Styles.applyColors(emptyProjectPane);
+        emptyProjectPane.setFont(font);
+    }
+
+    /**
+     * The first-steps pane loads external HTML via {@code setPage}, whose
+     * HTMLEditorKit default stylesheet would otherwise force black text in a
+     * serif font. Push the editor colour and font into the document stylesheet
+     * so the text matches too; the background stays transparent so the pane
+     * background shows through.
+     */
+    private void styleIntroHtml() {
+        if (introPane == null) {
+            return;
+        }
+        javax.swing.text.Document doc = introPane.getDocument();
+        if (doc instanceof javax.swing.text.html.HTMLDocument) {
+            Font font = mw.getApplicationFont();
+            ((javax.swing.text.html.HTMLDocument) doc).getStyleSheet()
+                    .addRule(String.format("body { color: %s; background: transparent; "
+                            + "font-family: \"%s\"; font-size: %dpt; }",
+                            Styles.EditorColor.COLOR_FOREGROUND.toHex(), font.getFamily(),
+                            font.getSize()));
+            introPane.repaint();
+        }
     }
 
     /**

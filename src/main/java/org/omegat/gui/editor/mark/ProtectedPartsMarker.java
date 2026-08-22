@@ -60,13 +60,14 @@ public class ProtectedPartsMarker implements IMarker {
             return null;
         }
 
-        // painter and attributes are created per call so that color
-        // preference changes take effect without restarting the application
+        // The attributes bind the foreground to the palette entry so the mark
+        // is not shadowed by the bound state color of the segment text (see
+        // Mark#attributes). The painter still snapshots the color and is
+        // created per call so that preference changes take effect.
         HighlightPainter painter;
         AttributeSet attrs;
         if (Core.getEditor().isOrientationAllLtr()) {
-            attrs = Styles.createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null,
-                    null);
+            attrs = Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER, null, null, null);
             painter = null;
         } else {
             attrs = null;

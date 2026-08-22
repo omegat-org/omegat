@@ -105,6 +105,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IColorsChangedEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -174,6 +175,7 @@ public class ProjectFilesListController implements IProjectFilesList {
     private final IProjectEventListener projectListener;
     private final IEntryEventListener entryListener;
     private final IFontChangedEventListener fontListener;
+    private final IColorsChangedEventListener colorsListener;
     private final PropertyChangeListener showProgressListener;
 
     public ProjectFilesListController() {
@@ -254,6 +256,11 @@ public class ProjectFilesListController implements IProjectFilesList {
                 doCancel();
             }
         });
+
+        // The progress-column colours are read per cell paint, so a repaint
+        // is enough to pick up a colour change without a restart.
+        colorsListener = () -> list.tableFiles.repaint();
+        CoreEvents.registerColorsChangedEventListener(colorsListener);
 
         projectListener = eventType -> {
             switch (eventType) {
@@ -420,6 +427,7 @@ public class ProjectFilesListController implements IProjectFilesList {
         CoreEvents.unregisterProjectChangeListener(projectListener);
         CoreEvents.unregisterEntryEventListener(entryListener);
         CoreEvents.unregisterFontChangedEventListener(fontListener);
+        CoreEvents.unregisterColorsChangedEventListener(colorsListener);
         Preferences.removePropertyChangeListener(Preferences.PROJECT_FILES_SHOW_PROGRESS,
                 showProgressListener);
         list.dispose();

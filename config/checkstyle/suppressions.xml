@@ -64,7 +64,7 @@
               checks="(DesignForExtension|MagicNumber)"/>
     <suppress checks="WhitespaceAround"
             files="(AlignFilePicker|InstanceEditor|CreateGlossaryEntry|NewTeamProject|FilenamePatternsEditor|FilterEditor|SegmentPropertiesListCell|FilterBarReplace|ProjectFilesList)\.java"/>
-    <suppress checks="ParameterNumber" files="EntryListPane\.java" lines="300-400"/>
+    <suppress checks="ParameterNumber" files="EntryListPane\.java"/>
     <suppress checks="LineLength" files="(CreateGlossaryEntry|FilterBarReplace|FilterEditor|InstanceEditor|NewTeamProject|ProjectFilesList)\.java"/>
 
     <!-- Suppress for readability -->
@@ -99,7 +99,7 @@
     <suppress files="(BidiUtils|Java8Compat|MagicComment|JnaLoader)\.java" checks="HideUtilityClassConstructor"/>
     <suppress files="JTextPaneLinkifier\.java" checks="EmptyBlock"/>
     <suppress files="RepositoriesMappingController\.java:" checks="MethodLength"/>
-    <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="525"/>
+    <suppress files="EditorSettings\.java" checks="ParameterNumber"/>
     <suppress files="PreferencesWindowController\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>

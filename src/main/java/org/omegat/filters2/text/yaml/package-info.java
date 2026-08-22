@@ -1,9 +1,9 @@
-/*
+/**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2025 Hiroshi Miura.
+ Copyright (C) 2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -21,7 +21,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
+ **************************************************************************/
 
 @NullMarked
 package org.omegat.filters2.text.yaml;

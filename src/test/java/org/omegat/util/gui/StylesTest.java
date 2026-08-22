@@ -27,6 +27,7 @@ package org.omegat.util.gui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -37,6 +38,7 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
 import org.junit.Before;
@@ -45,6 +47,17 @@ import org.omegat.util.OStrings;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class StylesTest {
+
+    /**
+     * Scheme keys consumed straight through {@code UIManager.getColor}
+     * instead of a {@link Styles.EditorColor} entry.
+     */
+    private static final Set<String> DIRECT_UIMANAGER_KEYS = Set.of(
+            "OmegaT.projectFilesCurrentFileBackground",
+            "OmegaT.projectFilesCurrentFileForeground",
+            "OmegaT.searchDimmedBackground",
+            "OmegaT.searchFieldErrorText",
+            "OmegaT.searchResultBorder");
 
     @Before
     public void setUp() throws Exception {
@@ -134,7 +147,10 @@ public class StylesTest {
      * otherwise silently disconnect the theme from the color — the failure
      * mode behind the dead {@code markComesFromTmXendorced}-style keys.
      * Other tests may leave OmegaT keys in the UIManager, so each key is
-     * cleared and restored around the fallback check.
+     * cleared and restored around the fallback check. Finally, every scheme
+     * key must have a consumer: either an EditorColor or one of the known
+     * direct UIManager lookups, so an orphaned key present in both scheme
+     * files cannot go unnoticed.
      */
     @Test
     public void testFallbacksMatchBundledColorScheme() throws Exception {
@@ -142,6 +158,17 @@ public class StylesTest {
         Properties dark = ResourcesUtil.getBundleColorProperties("dark");
         assertEquals("Light and dark color schemes must define the same keys", light.keySet(),
                 dark.keySet());
+
+        Set<String> editorColorKeys = new HashSet<>();
+        for (Styles.EditorColor c : Styles.EditorColor.values()) {
+            editorColorKeys.add(c.getUIManagerKey());
+        }
+        for (Object schemeKey : light.keySet()) {
+            String key = (String) schemeKey;
+            assertTrue("Scheme key " + key + " has no consumer; hook it up to an EditorColor, add it to "
+                    + "DIRECT_UIMANAGER_KEYS if it is read straight from the UIManager, or drop it from "
+                    + "the bundled schemes", editorColorKeys.contains(key) || DIRECT_UIMANAGER_KEYS.contains(key));
+        }
 
         for (Styles.EditorColor c : Styles.EditorColor.values()) {
             String key = c.getUIManagerKey();
@@ -163,6 +190,24 @@ public class StylesTest {
             } finally {
                 UIManager.put(key, previous);
             }
+        }
+    }
+
+    /**
+     * The fallback check above parses only the light values; the dark
+     * scheme feeds no fallback and would otherwise first be parsed at
+     * theme load time. Run it through the production loader, which
+     * throws on any malformed value.
+     */
+    @Test
+    public void testDarkSchemeValuesAreParseableColors() throws Exception {
+        UIDefaults defaults = new UIDefaults();
+        // the loader derives a highlight color from this key
+        defaults.put("TextArea.background", Color.DARK_GRAY);
+        UIDesignManager.loadDefaultAppDarkColors(defaults);
+        for (Object key : ResourcesUtil.getBundleColorProperties("dark").keySet()) {
+            assertNotNull("Dark scheme key " + key + " did not load as a color",
+                    defaults.getColor((String) key));
         }
     }
 }

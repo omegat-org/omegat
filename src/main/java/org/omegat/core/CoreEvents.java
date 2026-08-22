@@ -28,6 +28,7 @@ package org.omegat.core;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -60,7 +61,7 @@ public final class CoreEvents {
     private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IColorsChangedEventListener> COLORS_CHANGED_EVENT_LISTENERS =
+    private static final CopyOnWriteArrayList<IColorsChangedEventListener> COLORS_CHANGED_EVENT_LISTENERS =
             new CopyOnWriteArrayList<>();
     private static final List<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
 
@@ -109,7 +110,7 @@ public final class CoreEvents {
 
     /** Register listener. */
     public static void registerColorsChangedEventListener(final IColorsChangedEventListener listener) {
-        COLORS_CHANGED_EVENT_LISTENERS.add(listener);
+        COLORS_CHANGED_EVENT_LISTENERS.addIfAbsent(Objects.requireNonNull(listener));
     }
 
     /** Unregister listener. */

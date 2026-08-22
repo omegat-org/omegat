@@ -72,9 +72,9 @@ public class MarkerBoundColorsTest extends MarkerTestBase {
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertNotNull(result.get(0).attributes);
+        assertNotNull(result.getFirst().attributes);
         assertEquals(EditorColor.COLOR_PLACEHOLDER.getColor(),
-                Styles.resolveBoundForeground(result.get(0).attributes));
+                Styles.resolveBoundForeground(result.getFirst().attributes));
     }
 
     @Test
@@ -93,10 +93,10 @@ public class MarkerBoundColorsTest extends MarkerTestBase {
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals(Mark.ENTRY_PART.TRANSLATION, result.get(0).entryPart);
-        assertNotNull(result.get(0).attributes);
+        assertEquals(Mark.ENTRY_PART.TRANSLATION, result.getFirst().entryPart);
+        assertNotNull(result.getFirst().attributes);
         assertEquals(EditorColor.COLOR_REMOVETEXT_TARGET.getColor(),
-                Styles.resolveBoundForeground(result.get(0).attributes));
+                Styles.resolveBoundForeground(result.getFirst().attributes));
 
         // in the source the matched text is only italicized, never colored
         String matchingSource = "source %remove";
@@ -106,6 +106,6 @@ public class MarkerBoundColorsTest extends MarkerTestBase {
         List<Mark> sourceOnly = marker.getMarksForEntry(sourceSte, matchingSource, null, true);
         assertNotNull(sourceOnly);
         assertEquals(1, sourceOnly.size());
-        assertNull(Styles.resolveBoundForeground(sourceOnly.get(0).attributes));
+        assertNull(Styles.resolveBoundForeground(sourceOnly.getFirst().attributes));
     }
 }

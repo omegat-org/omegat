@@ -26,7 +26,9 @@
 package org.omegat.util.gui;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 
@@ -87,8 +89,8 @@ public class StylesBoundAttributesTest {
                 EditorColor.COLOR_UNTRANSLATED, true, false);
         assertEquals(EditorColor.COLOR_UNTRANSLATED_FG.getColor(), StyleConstants.getForeground(attrs));
         assertEquals(EditorColor.COLOR_UNTRANSLATED.getColor(), StyleConstants.getBackground(attrs));
-        assertEquals(true, StyleConstants.isBold(attrs));
-        assertEquals(false, StyleConstants.isItalic(attrs));
+        assertTrue(StyleConstants.isBold(attrs));
+        assertFalse(StyleConstants.isItalic(attrs));
     }
 
     @Test

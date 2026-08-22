@@ -69,8 +69,8 @@ public class RemoteRepositoryProvider {
     public static final String REPO_SVN_SUBDIR = ".svn/";
 
     final File projectRoot;
-    final ProjectTeamSettings teamSettings;
-    final List<RepositoryDefinition> repositoriesDefinitions;
+    final @Nullable ProjectTeamSettings teamSettings;
+    final @Nullable List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<>();
     /**
      * exclude some path like .git, .svn, project_save.tmx and glossary.txt when
@@ -78,13 +78,13 @@ public class RemoteRepositoryProvider {
      */
     private String[] forceExcludes = {};
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions,
+    public RemoteRepositoryProvider(File projectRoot, @Nullable List<RepositoryDefinition> repositoriesDefinitions,
             ProjectProperties props) {
         this(projectRoot, repositoriesDefinitions);
         setForceExcludesFromProjectProperties(props);
     }
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) {
+    public RemoteRepositoryProvider(File projectRoot, @Nullable List<RepositoryDefinition> repositoriesDefinitions) {
         this.projectRoot = projectRoot;
         this.repositoriesDefinitions = repositoriesDefinitions;
         if (repositoriesDefinitions != null) {
@@ -109,7 +109,7 @@ public class RemoteRepositoryProvider {
                 '/' + props.getTargetDir().getUnderRoot() };
     }
 
-    public ProjectTeamSettings getTeamSettings() {
+    public @Nullable ProjectTeamSettings getTeamSettings() {
         return teamSettings;
     }
 
@@ -118,6 +118,9 @@ public class RemoteRepositoryProvider {
      */
     protected void checkDefinitions() {
         Set<String> dirs = new TreeSet<>();
+        if (repositoriesDefinitions == null) {
+            return;
+        }
         for (RepositoryDefinition r : repositoriesDefinitions) {
             if (StringUtil.isEmpty(r.getUrl())) {
                 throw new IllegalArgumentException("There is no repository url");
@@ -137,6 +140,9 @@ public class RemoteRepositoryProvider {
      * Initialize repositories instances.
      */
     protected void initializeRepositories() {
+        if (repositoriesDefinitions == null) {
+            return;
+        }
         for (RepositoryDefinition r : repositoriesDefinitions) {
             IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
             try {
@@ -254,7 +260,7 @@ public class RemoteRepositoryProvider {
      * Commit specific file after rebase. Used for omegat/project_save.tmx,
      * glossaries, etc.
      */
-    public String commitFileAfterVersion(String path, String commentText, String... onVersions)
+    public @Nullable String commitFileAfterVersion(String path, String commentText, @Nullable String... onVersions)
             throws Exception {
         return oneMapping(path).repo.commit(onVersions, commentText);
     }
@@ -329,7 +335,7 @@ public class RemoteRepositoryProvider {
     /**
      * Get version of specified file.
      */
-    public String getVersion(String file) throws Exception {
+    public @Nullable String getVersion(String file) throws Exception {
         return oneMapping(file).getVersion();
     }
 
@@ -410,7 +416,7 @@ public class RemoteRepositoryProvider {
      * Class for mapping by specified local path.
      */
     protected class Mapping {
-        final String filterPrefix;
+        final @Nullable String filterPrefix;
         final IRemoteRepository2 repo;
         final RepositoryDefinition repoDefinition;
         final RepositoryMapping repoMapping;
@@ -510,7 +516,7 @@ public class RemoteRepositoryProvider {
                         + "' does not exist in repository " + repoDefinition.getUrl());
             } else {
                 // file mapping
-                if (!filterPrefix.equals("/")) {
+                if (!"/".equals(filterPrefix)) {
                     throw new IllegalArgumentException(
                             "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
@@ -551,18 +557,18 @@ public class RemoteRepositoryProvider {
             }
         }
 
-        public File switchToVersion(String version) throws Exception {
+        public File switchToVersion(@Nullable String version) throws Exception {
             repo.switchToVersion(version);
             File to = new File(getRepositoryDir(repoDefinition), repoMapping.getRepository());
             return new File(to, filterPrefix);
         }
 
-        public String getVersion() throws Exception {
+        public @Nullable String getVersion() throws Exception {
             return repo.getFileVersion(new File(repoMapping.getRepository(), filterPrefix).getPath());
         }
 
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
-                List<String> excludes, String eolConversionCharset) throws IOException {
+                List<String> excludes, @Nullable String eolConversionCharset) throws IOException {
             return copy(from, to, prefix, "", includes, excludes, eolConversionCharset);
         }
 
@@ -571,7 +577,7 @@ public class RemoteRepositoryProvider {
          *         start and end</em>
          */
         protected List<String> copy(File from, File to, String prefix, String postfix, List<String> includes,
-                List<String> excludes, String eolConversionCharset) throws IOException {
+                List<String> excludes, @Nullable String eolConversionCharset) throws IOException {
             prefix = withSlashes(prefix);
             List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<>();

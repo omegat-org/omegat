@@ -41,6 +41,7 @@ import java.util.Formatter;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OStrings;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -96,7 +97,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
      * Use SHA-1 as a file version.
      */
     @Override
-    public String getFileVersion(String file) throws Exception {
+    public @Nullable String getFileVersion(String file) throws Exception {
         MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
         sha1.reset();
 
@@ -161,7 +162,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String[] onVersions, String comment) throws Exception {
+    public @Nullable String commit(@Nullable String@Nullable [] onVersions, String comment) throws Exception {
         logger.atDebug().log("Commit not supported for HTTP repositories.");
 
         return null;

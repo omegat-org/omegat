@@ -25,6 +25,8 @@
 
 package org.omegat.externalfinder.item;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,7 +76,7 @@ public class ExternalFinderConfiguration {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }

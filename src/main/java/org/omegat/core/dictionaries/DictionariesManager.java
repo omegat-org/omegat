@@ -43,6 +43,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -65,7 +66,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
 
     private final IDictionaries pane;
-    protected DirectoryMonitor monitor;
+    protected @Nullable DirectoryMonitor monitor;
     protected final List<IDictionaryFactory> factories = new ArrayList<>();
     protected final Map<String, IDictionary> dictionaries = new TreeMap<>();
     protected final List<IDictionary> onlineDictionaries = new ArrayList<>();

@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Store runtime-only preference values, which shouldn't be saved to config
@@ -79,9 +80,9 @@ public class RuntimePreferenceStore {
     /** The last opened project location is not saved **/
     private boolean locationSaveEnabled = true;
 
-    private String alternateFilenameFrom;
+    private @Nullable String alternateFilenameFrom;
 
-    private String alternateFilenameTo;
+    private @Nullable String alternateFilenameTo;
 
     private String tokenizerSource;
 
@@ -227,7 +228,7 @@ public class RuntimePreferenceStore {
         return tokenizerTarget;
     }
 
-    public String getAlternateFilenameFrom() {
+    public @Nullable String getAlternateFilenameFrom() {
         return alternateFilenameFrom;
     }
 
@@ -235,7 +236,7 @@ public class RuntimePreferenceStore {
         alternateFilenameFrom = v;
     }
 
-    public String getAlternateFilenameTo() {
+    public @Nullable String getAlternateFilenameTo() {
         return alternateFilenameTo;
     }
 

@@ -38,6 +38,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
@@ -662,27 +663,27 @@ public class ProjectProperties {
         }
     }
 
-    private String projectName;
+    private @Nullable String projectName;
     private final List<String> sourceRootExcludes = new ArrayList<>();
-    private List<RepositoryDefinition> repositories;
+    private @Nullable List<RepositoryDefinition> repositories;
 
-    private Language sourceLanguage;
-    private Language targetLanguage;
+    private @Nullable Language sourceLanguage;
+    private @Nullable Language targetLanguage;
 
-    private Class<?> sourceTokenizer;
-    private Class<?> targetTokenizer;
+    private @Nullable Class<?> sourceTokenizer;
+    private @Nullable Class<?> targetTokenizer;
 
     private boolean sentenceSegmentingEnabled;
     private boolean supportDefaultTranslations;
     private boolean removeTags;
-    private List<String> exportTmLevels;
+    private @Nullable List<String> exportTmLevels;
 
-    private SRX projectSRX;
-    private Filters projectFilters;
+    private @Nullable SRX projectSRX;
+    private @Nullable Filters projectFilters;
 
-    private String externalCommand;
+    private @Nullable String externalCommand;
 
-    protected File projectRootDir;
+    protected @Nullable File projectRootDir;
     protected ProjectPath sourceDir = new ProjectPath(true);
     protected ProjectPath targetDir = new ProjectPath(true);
     protected ProjectPath glossaryDir = new ProjectPath(true);
@@ -696,7 +697,7 @@ public class ProjectProperties {
      */
     public final class ProjectPath {
         private final boolean isDirectory;
-        private File fs;
+        private @Nullable File fs;
         /** Null if path is not under project root */
         private String underRoot;
 

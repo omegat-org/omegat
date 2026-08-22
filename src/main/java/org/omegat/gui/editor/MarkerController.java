@@ -50,6 +50,7 @@ import org.omegat.gui.editor.mark.FontFallbackMarker;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.editor.mark.NBSPMarker;
+import org.omegat.gui.editor.mark.NumeralMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.ReplaceMarker;
@@ -81,6 +82,7 @@ public class MarkerController {
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());
         Core.registerMarker(new NBSPMarker());
+        Core.registerMarker(new NumeralMarker());
         Core.registerMarker(new TransTipsMarker());
         Core.registerMarker(new BidiMarkers());
         Core.registerMarker(new ReplaceMarker());

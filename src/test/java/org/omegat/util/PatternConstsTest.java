@@ -26,11 +26,13 @@
 package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -75,4 +77,28 @@ public class PatternConstsTest {
         assertEquals("Wrong country extracted", "abc", m.group(2));
     }
 
+    /**
+     * The numeral pattern covers numbers of every notation, not only ASCII
+     * digit runs: decimal digits of any script and the numerals of the
+     * sign-written systems, each matched as one run.
+     */
+    @Test
+    public void testNumeralsPatternCoversEveryNotation() {
+        Pattern p = PatternConsts.NUMERALS;
+        for (String numeral : new String[] { "1984", "١٩٨٤", "១២៣", "Ⅻ", "፲፱፻፸፮",
+                new String(Character.toChars(0x12433)),
+                new String(Character.toChars(0x1D2E1)) + new String(Character.toChars(0x1D2E0)) }) {
+            assertTrue("Numeral pattern should match " + numeral, p.matcher(numeral).matches());
+        }
+        assertTrue("Vulgar fractions are quantities and count",
+                p.matcher("¼").matches());
+        assertFalse("Words must stay unmatched", p.matcher("word").find());
+        assertFalse("Roman letters must stay unmatched", p.matcher("MIX").find());
+        // Decoration numbers - list bullets, footnote superscripts, enclosed
+        // and dingbat forms - number things rather than count them.
+        for (String decoration : new String[] { "⑫", "❶", "²", "¹²³", "⁴", "㋀" }) {
+            assertFalse("Decoration number should stay unmatched: " + decoration,
+                    p.matcher(decoration).find());
+        }
+    }
 }

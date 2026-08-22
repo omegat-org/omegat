@@ -80,3 +80,7 @@ tips:
   name: "MT-4tw-3"
 - file: "machine_translation_4tw_3.html"
   name: "MT-4tw-4"
+- file: "fuzzy_match_numbers.html"
+  name: "Unscharfe Treffer, die Zahlen verstehen"
+- file: "numbers_checked_in_every_system.html"
+  name: "Zahlen werden in jedem Zahlsystem geprüft"

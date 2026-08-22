@@ -226,9 +226,14 @@
          <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"></link> dialog opens after you have
          named your project.</para>
       <para>In that dialog, select or enter the languages of your source and
-         	translated files, set the various options, and click on 
+         	translated files, set the various options, and click on
          <guibutton>OK</guibutton>
          	to continue.</para>
+      <note>
+         <para>If your files contain many numbers, consider enabling the
+            <link linkend="dialogs.project.properties.match.numbers" endterm="dialogs.project.properties.match.numbers.title"></link> option in this
+            	  dialog.</para>
+      </note>
       <para>OmegaT provides a convenient short list of two-letter language
          	codes, but you can type any code that conforms to 
          <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</link>

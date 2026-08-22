@@ -41,14 +41,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,6 +58,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Caret;
 import javax.swing.text.StyledDocument;
@@ -77,6 +79,8 @@ import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.NumeralValueParser;
+import org.omegat.util.NumeralValueParser.Rational;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -145,6 +149,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         setMinimumSize(new Dimension(100, 50));
 
         addMouseListener(mouseListener);
+        // per-match score tooltips (#465)
+        ToolTipManager.sharedInstance().registerComponent(this);
 
         DragTargetOverlay.apply(this, new FileDropInfo(false) {
             @Override
@@ -301,29 +307,34 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         List<String> sourceNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(source))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
-        // Compare and map numbers on their width-normalized form so that
-        // full-width (ASCII) digits (U+FF10-U+FF19, common in Japanese) are
-        // treated as equivalent to their half-width counterparts. See feature
-        // request #1193.
-        List<String> normSourceMatchNumbers = normalizeDigitWidth(sourceMatchNumbers);
-        List<String> normTargetMatchNumbers = normalizeDigitWidth(targetMatchNumbers);
+        // Compare and pair the numbers by their value, not by their spelling, so
+        // that the same number written differently counts as the same number:
+        // decimal digits of any script including full-width ones (feature
+        // request #1193) and Han numerals. What counts as one number is the
+        // tokenizer's decision, so a percentage or a dotted date, which arrive
+        // as a single token without a value, are out of reach here.
+        List<Rational> sourceMatchValues = values(sourceMatchNumbers);
+        List<Rational> targetMatchValues = values(targetMatchNumbers);
 
         if (sourceMatchNumbers.size() != sourceNumbers.size()
                 || sourceMatchNumbers.size() != targetMatchNumbers.size()
-                || !new HashSet<>(normSourceMatchNumbers).equals(new HashSet<>(normTargetMatchNumbers))) {
+                || !sameNumbers(sourceMatchValues, targetMatchValues)) {
             return targetMatch;
         }
 
-        Map<Integer, Integer> locationMap = mapIndices(normSourceMatchNumbers, normTargetMatchNumbers);
+        // Map each target number to the source number belonging there. Asking in
+        // that direction keeps the mapping correct for any permutation of the
+        // numbers, and complete for repeated numbers.
+        Map<Integer, Integer> locationMap = mapIndices(targetMatchValues, sourceMatchValues);
 
-        // Substitute new numbers in the target match. The inserted number
-        // adopts the digit width of the target token it replaces, so the
-        // target match's digit convention is preserved.
+        // Substitute new numbers in the target match. The inserted number adopts
+        // the notation of the target token it replaces, so the target match's own
+        // convention is preserved.
         StringBuilder result = new StringBuilder();
         int i = 0;
         for (String tok : targetTokens) {
             if (isNumber(tok)) {
-                result.append(toDigitWidthOf(sourceNumbers.get(locationMap.get(i)), tok));
+                result.append(renderLike(sourceNumbers.get(locationMap.get(i)), tok));
                 i++;
             } else {
                 result.append(tok);
@@ -333,67 +344,149 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         return result.toString();
     }
 
-    /**
-     * Return a copy of the given number strings with every digit normalized to
-     * half-width, so that full-width and half-width digits compare equal.
-     * Feature request #1193.
-     */
-    private static List<String> normalizeDigitWidth(List<String> numbers) {
-        return numbers.stream().map(StringUtil::normalizeWidth).collect(Collectors.toList());
+    /** The values of number tokens that {@link #isNumber} accepted. */
+    private static List<Rational> values(List<String> numbers) {
+        return numbers.stream()
+                .map(n -> NumeralValueParser.parseTokenValue(n, ALLOW_ROMAN).orElseThrow())
+                .collect(Collectors.toList());
     }
 
     /**
-     * Render the given number with the digit width used by the template token:
-     * full-width when the template contains full-width digits, half-width
-     * otherwise. This makes a substituted number follow the target match's
-     * digit convention. Feature request #1193.
+     * Whether both lists hold the same numbers with the same multiplicities.
+     * Comparing as multisets rather than as sets keeps a repeated number from
+     * standing in for a missing one, which would leave a target number without a
+     * counterpart.
      */
-    private static String toDigitWidthOf(String number, String template) {
-        return hasFullwidthDigit(template) ? toFullwidthDigits(number)
-                : StringUtil.normalizeWidth(number);
+    private static boolean sameNumbers(List<Rational> first, List<Rational> second) {
+        Map<Rational, Integer> pending = new HashMap<>();
+        first.forEach(value -> pending.merge(value, 1, Integer::sum));
+        for (Rational value : second) {
+            Integer count = pending.get(value);
+            if (count == null) {
+                return false;
+            }
+            if (count == 1) {
+                pending.remove(value);
+            } else {
+                pending.put(value, count - 1);
+            }
+        }
+        return pending.isEmpty();
     }
 
-    private static boolean hasFullwidthDigit(String text) {
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c >= '０' && c <= '９') {
+    /**
+     * Render the given source number in the digit script of the target token it
+     * replaces, which is what makes a full-width target keep full-width digits
+     * (feature request #1193). A target written in a system this code cannot
+     * write back, a Tamil numeral for one, receives plain digits instead: the
+     * right number in a foreign notation beats the wrong number in the right
+     * one.
+     */
+    private static String renderLike(String number, String template) {
+        int zero = digitZeroOf(template);
+        if (zero < 0) {
+            // The target writes a numeral system, not digits: write the source
+            // value in that system, whatever system the source itself uses.
+            Optional<NumeralValueParser.Rational> sourceValue = NumeralValueParser.parseTokenValue(number,
+                    ALLOW_ROMAN);
+            if (sourceValue.isPresent()) {
+                if (BigInteger.ONE.equals(sourceValue.get().denominator())) {
+                    Optional<String> rendered = NumeralValueParser
+                            .renderInSystemOf(sourceValue.get().numerator(), template);
+                    if (rendered.isPresent()) {
+                        return rendered.get();
+                    }
+                } else {
+                    // A fraction value: a vulgar-fraction target receives the
+                    // matching precomposed glyph; a value without a glyph is
+                    // spelled out, because the right number in a foreign
+                    // notation beats the target's own, wrong one.
+                    Optional<String> glyph = NumeralValueParser
+                            .renderVulgarFractionOf(sourceValue.get(), template);
+                    return glyph.orElseGet(() -> sourceValue.get().numerator() + "/"
+                            + sourceValue.get().denominator());
+                }
+            }
+            return StringUtil.normalizeWidth(number);
+        }
+        if (!hasDecimalDigit(number)) {
+            // The source number is written in a non-digit system (a Han
+            // numeral, a sign numeral such as cuneiform or Ethiopic) while
+            // the target writes digits: spell the whole value out.
+            Optional<NumeralValueParser.Rational> value = NumeralValueParser.parseTokenValue(number,
+                    ALLOW_ROMAN);
+            if (value.isPresent()) {
+                if (BigInteger.ONE.equals(value.get().denominator())) {
+                    return toDigitScript(value.get().numerator().toString(), zero);
+                }
+                // A fractional sign value is spelled out as a digit fraction
+                // in the target's digit script.
+                return toDigitScript(value.get().numerator() + "/" + value.get().denominator(), zero);
+            }
+        }
+        return toDigitScript(number, zero);
+    }
+
+    private static boolean hasDecimalDigit(String text) {
+        for (int i = 0; i < text.length();) {
+            int cp = text.codePointAt(i);
+            if (Character.digit(cp, 10) >= 0) {
                 return true;
             }
+            i += Character.charCount(cp);
         }
         return false;
     }
 
-    private static String toFullwidthDigits(String number) {
+    /**
+     * The code point of digit zero in the script of the template's first decimal
+     * digit, or -1 when the template holds no decimal digit.
+     */
+    private static int digitZeroOf(String template) {
+        for (int i = 0; i < template.length();) {
+            int cp = template.codePointAt(i);
+            int digit = Character.digit(cp, 10);
+            if (digit >= 0) {
+                return cp - digit;
+            }
+            i += Character.charCount(cp);
+        }
+        return -1;
+    }
+
+    /** The number with every decimal digit rewritten in the given digit script. */
+    private static String toDigitScript(String number, int zero) {
         StringBuilder sb = new StringBuilder(number.length());
-        for (int i = 0; i < number.length(); i++) {
-            char c = number.charAt(i);
-            sb.append(c >= '0' && c <= '9' ? (char) (c - '0' + 0xFF10) : c);
+        for (int i = 0; i < number.length();) {
+            int cp = number.codePointAt(i);
+            int digit = Character.digit(cp, 10);
+            sb.appendCodePoint(digit < 0 ? cp : zero + digit);
+            i += Character.charCount(cp);
         }
         return sb.toString();
     }
 
     /**
-     * Determine whether the given string is a number. Integers and simple
-     * doubles (not localized) are recognized.
+     * Whether a Roman numeral written with Latin letters counts as a number when
+     * inserting a match. It does not: "I", "V", "X", "MIX" and "DIV" are ordinary
+     * uppercase words at least as often as they are numbers, and here a false
+     * positive does not cost a few similarity points, it rewrites the text the
+     * translator is handed. Roman numerals written with the dedicated code points
+     * are unambiguous and remain numbers.
+     */
+    private static final boolean ALLOW_ROMAN = false;
+
+    /**
+     * Determine whether the given string is a number: a token that may be read
+     * as one and has an exact value. Decimal digits of every script, Han
+     * numerals, decimals and fractions are recognized; ordinary words are not.
      *
      * @param text
      *            A string
      * @return True if the string represents a number
      */
     private static boolean isNumber(String text) {
-        try {
-            Integer.parseInt(text);
-            return true;
-        } catch (NumberFormatException nfe) {
-            // Eat exception silently
-        }
-        try {
-            Double.parseDouble(text);
-            return true;
-        } catch (NumberFormatException nfe) {
-            // Eat exception silently
-        }
-        return false;
+        return NumeralValueParser.parseTokenValue(text, ALLOW_ROMAN).isPresent();
     }
 
     /**
@@ -571,7 +664,58 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         diffInfos.clear();
     }
 
+    /** The index of the match block at the given point, or -1 when there is none. */
+    private int matchIndexAt(Point p) {
+        if (matches == null || matches.isEmpty()) {
+            return -1;
+        }
+        int matchIndex = -1;
+        int mousepos = viewToModel2D(p);
+        for (int i = 0; i < delimiters.size() - 1; i++) {
+            int start = delimiters.get(i);
+            int end = delimiters.get(i + 1);
+            if (mousepos >= start && mousepos < end) {
+                matchIndex = i;
+                break;
+            }
+        }
+        if (matchIndex == -1) {
+            matchIndex = delimiters.size() - 1;
+        }
+        if (matchIndex >= matches.size()) {
+            return -1;
+        }
+        return matchIndex;
+    }
+
+    @Override
+    public String getToolTipText(MouseEvent event) {
+        int index = matchIndexAt(event.getPoint());
+        if (index < 0) {
+            return null;
+        }
+        SourceTextEntry entry = currentlyProcessedEntry;
+        return MatchScoresTooltip.render(index + 1, matches.get(index),
+                entry == null ? null : entry.getSrcText());
+    }
+
+    /** Dismiss delay to restore when the mouse leaves the pane. */
+    private int savedTooltipDismissDelay;
+
     protected final transient MouseListener mouseListener = new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            // Score tooltips carry several lines; keep them up long enough
+            // to read, and restore the global delay on exit.
+            savedTooltipDismissDelay = ToolTipManager.sharedInstance().getDismissDelay();
+            ToolTipManager.sharedInstance().setDismissDelay(60_000);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ToolTipManager.sharedInstance().setDismissDelay(savedTooltipDismissDelay);
+        }
+
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1) {
@@ -594,35 +738,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         private int getClickedItem(Point p) {
-            if (matches == null || matches.isEmpty()) {
-                return -1;
-            }
-
-            // find out the clicked item
-            int clickedItem = -1;
-
-            // where did we click?
-            int mousepos = MatchesTextArea.this.viewToModel2D(p);
-
-            for (int i = 0; i < delimiters.size() - 1; i++) {
-                int start = delimiters.get(i);
-                int end = delimiters.get(i + 1);
-
-                if (mousepos >= start && mousepos < end) {
-                    clickedItem = i;
-                    break;
-                }
-            }
-
-            if (clickedItem == -1) {
-                clickedItem = delimiters.size() - 1;
-            }
-
-            if (clickedItem >= matches.size()) {
-                return -1;
-            }
-
-            return clickedItem;
+            return matchIndexAt(p);
         }
 
         private void doPopup(Point p) {

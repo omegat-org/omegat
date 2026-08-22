@@ -58,6 +58,7 @@ import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
@@ -329,13 +330,86 @@ public final class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    SwingUtilities.invokeLater(Core.getEditor()::requestFocus);
+                    SwingUtilities.invokeLater(() -> {
+                        Core.getEditor().requestFocus();
+                        promptForSupersededMatchNumbers();
+                    });
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
             }
         }.execute();
+    }
+
+    /**
+     * The team's project settings file of the just opened team project
+     * carried a different value for the fuzzy number matching setting than
+     * this checkout, and the team value is now active (feature request
+     * #465). Asks the user what to do with the local value: share it with
+     * the team, use the team's value, or restore it for this session only -
+     * the next open supersedes and asks again. Dismissing the dialog leaves
+     * the team's value active.
+     */
+    private static void promptForSupersededMatchNumbers() {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded()) {
+            return;
+        }
+        Boolean localValue = project.getSupersededLocalMatchNumbers();
+        if (localValue == null) {
+            return;
+        }
+        boolean local = localValue;
+        String[] options = { OStrings.getString("TEAM_MATCH_NUMBERS_SHARE"),
+                OStrings.getString("TEAM_MATCH_NUMBERS_TAKE_TEAM"),
+                OStrings.getString("TEAM_MATCH_NUMBERS_KEEP_THIS_TIME") };
+        int answer = JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TEAM_MATCH_NUMBERS_DIVERGED_MESSAGE", describeMatchNumbers(local),
+                        describeMatchNumbers(!local)),
+                OStrings.getString("TEAM_MATCH_NUMBERS_DIVERGED_TITLE"), JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        if (answer != 0 && answer != 1 && answer != 2) {
+            // Dismissed: the team's value stays active for this session, the
+            // local file keeps the local value, and the next open asks again.
+            return;
+        }
+        // The repository work must stay off the EDT and must not run beside
+        // the auto-save thread. Taking the team's value persists it locally,
+        // so the divergence is settled instead of resurfacing on every open.
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Core.executeExclusively(true, () -> {
+                    try {
+                        if (answer == 0) {
+                            project.publishMatchNumbersEnabled(local);
+                        } else {
+                            project.useLocalMatchNumbersEnabled(answer == 1 ? !local : local);
+                        }
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    String key = answer == 0 ? "TEAM_MATCH_NUMBERS_SHARE_ERROR"
+                            : "TEAM_MATCH_NUMBERS_APPLY_ERROR";
+                    Log.logErrorRB(ex, key);
+                    Core.getMainWindow().displayErrorRB(ex, key);
+                }
+            }
+        }.execute();
+    }
+
+    private static String describeMatchNumbers(boolean enabled) {
+        return OStrings.getString(enabled ? "TEAM_MATCH_NUMBERS_VALUE_ON" : "TEAM_MATCH_NUMBERS_VALUE_OFF");
     }
 
     private static @Nullable File selectProjectRootFolder(File projectDirectory) {
@@ -864,18 +938,54 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
+        // The dialog edits the live properties, so the current value has to
+        // be captured before it is shown.
+        final boolean matchNumbersBefore = Core.getProject().getProjectProperties()
+                .isMatchNumbersEnabled();
+
         // displaying the dialog to change paths and other properties
         final ProjectProperties newProps =
                 ProjectPropertiesDialogController.showDialog(frame, Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
+            // The dialog edits the live properties even before a validation
+            // stops its OK, so cancelling must not leave a flipped value.
+            Core.getProject().getProjectProperties().setMatchNumbersEnabled(matchNumbersBefore);
             return;
         }
+
+        // Changing the team setting right here is the natural moment to
+        // offer its distribution; declining keeps it local, and the next
+        // open of the project asks again.
+        final boolean matchNumbersChangedInTeam = Core.getProject().isRemoteProject()
+                && newProps.isMatchNumbersEnabled() != matchNumbersBefore;
+        final boolean shareMatchNumbers = matchNumbersChangedInTeam
+                && promptToShareMatchNumbersChange(newProps.isMatchNumbersEnabled());
 
         int res = JOptionPane.showConfirmDialog(frame, OStrings.getString("MW_REOPEN_QUESTION"),
                 OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
         if (res != JOptionPane.YES_OPTION) {
+            if (shareMatchNumbers) {
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        Core.executeExclusively(true,
+                                () -> publishMatchNumbersLoggingErrors(newProps.isMatchNumbersEnabled()));
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "TEAM_MATCH_NUMBERS_SHARE_ERROR");
+                            Core.getMainWindow().displayErrorRB(ex, "TEAM_MATCH_NUMBERS_SHARE_ERROR");
+                        }
+                    }
+                }.execute();
+            }
             return;
         }
 
@@ -885,10 +995,28 @@ public final class ProjectUICommands {
             @Override
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
+                    if (shareMatchNumbers) {
+                        // A failed share must not abort the reload; the
+                        // local file keeps the value, so the next open
+                        // offers the distribution again.
+                        publishMatchNumbersLoggingErrors(newProps.isMatchNumbersEnabled());
+                    }
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
 
                     ProjectFactory.loadProject(newProps, true);
+                    if (matchNumbersChangedInTeam && !shareMatchNumbers) {
+                        // The share was declined, so the freshly chosen value
+                        // must stay local: without this, the reload would
+                        // classify it as local-only divergence and fall back
+                        // to the team default without a word.
+                        try {
+                            Core.getProject()
+                                    .useLocalMatchNumbersEnabled(newProps.isMatchNumbersEnabled());
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "TEAM_MATCH_NUMBERS_APPLY_ERROR");
+                        }
+                    }
                 });
                 return null;
             }
@@ -908,6 +1036,30 @@ public final class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    /**
+     * The properties dialog of a team project just changed the fuzzy number
+     * matching setting; asks whether to distribute the change (feature
+     * request #465).
+     */
+    private static boolean promptToShareMatchNumbersChange(boolean enabled) {
+        String[] options = { OStrings.getString("TEAM_MATCH_NUMBERS_SHARE"),
+                OStrings.getString("TEAM_MATCH_NUMBERS_KEEP_FOR_NOW") };
+        return JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TEAM_MATCH_NUMBERS_CHANGED_MESSAGE", describeMatchNumbers(enabled)),
+                OStrings.getString("TEAM_MATCH_NUMBERS_DIVERGED_TITLE"), JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == 0;
+    }
+
+    private static void publishMatchNumbersLoggingErrors(boolean enabled) {
+        try {
+            Core.getProject().publishMatchNumbersEnabled(enabled);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "TEAM_MATCH_NUMBERS_SHARE_ERROR");
+            SwingUtilities.invokeLater(
+                    () -> Core.getMainWindow().displayErrorRB(ex, "TEAM_MATCH_NUMBERS_SHARE_ERROR"));
+        }
     }
 
     public static void projectCompile() {

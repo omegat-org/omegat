@@ -28,14 +28,21 @@ package org.omegat.core.tagvalidation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.ibm.icu.text.Normalizer2;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
+import org.omegat.util.NumeralValueParser;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.TagUtil;
@@ -45,6 +52,11 @@ import org.omegat.util.TagUtil.Tag;
  * @author Aaron Madlon-Kay
  */
 public final class TagValidation {
+
+    private static final Normalizer2 NFKC = Normalizer2.getNFKCInstance();
+
+    /** Characters that would extend a compatibility spelling into a different word or number. */
+    private static final String COMPAT_BOUNDARY = "[\\p{L}\\p{Nd}/]";
 
     private TagValidation() {
     }
@@ -140,12 +152,198 @@ public final class TagValidation {
 
     public static void inspectOmegaTTags(SourceTextEntry ste, ErrorReport report) {
         // extract tags from src and loc string
-        List<Tag> srcTags = TagUtil.buildTagList(report.source, ste.getProtectedParts());
+        List<Tag> srcTags = new ArrayList<>(TagUtil.buildTagList(report.source, ste.getProtectedParts()));
         List<Tag> locTags = new ArrayList<>(TagUtil.buildTagList(report.translation, ste.getProtectedParts()));
         // Add extra tags in target that are not in protected parts
         TagUtil.addExtraTags(locTags, srcTags, report.translation);
 
+        if (isNumeralCheckEnabled()) {
+            inspectNumerals(srcTags, locTags, report);
+        }
+
         inspectOrderedTags(srcTags, locTags, Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING), report);
+    }
+
+    /**
+     * Whether the current project checks numbers by value; on unless the
+     * project properties turn it off.
+     */
+    public static boolean isNumeralCheckEnabled() {
+        if (Core.getProject() == null) {
+            return true;
+        }
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        return props == null || props.isCheckNumbersEnabled();
+    }
+
+    /**
+     * The numeral check: numbers compare by value, not by spelling, whatever
+     * the writing system and whatever the custom-tag pattern. A source
+     * numeral - a custom tag or plain text alike - with no verbatim
+     * counterpart in the translation is satisfied by a translation numeral of
+     * equal value in any notation, so a value rewritten in the target's own
+     * number system raises no alarm while a changed or missing value still
+     * does. A separator-written number counts by each value its spelling can
+     * mean, so a decimal or grouped rewrite (a half as 0,5; a thousand as
+     * 1.000) is equal too, and the compatibility spelling counts as well,
+     * which covers the notations the numeral pattern cannot tokenize: a
+     * Roman code point written out with Latin letters, a vulgar fraction
+     * written with a plain slash. A satisfied numeral tag leaves the ordered
+     * tag check; a source numeral outside the tag machinery reports its
+     * missing value here.
+     */
+    static void inspectNumerals(List<Tag> srcTags, List<Tag> locTags, ErrorReport report) {
+        String translation = report.translation;
+        if (translation == null) {
+            return;
+        }
+        // Tokenize both sides, delegate tags inside larger numeral tokens
+        // (the digit runs of a decimal number) to the value check, and pool
+        // the values the translation offers outside its tags.
+        List<NumeralToken> offeredTokens = numeralTokens(translation, locTags);
+        subsumeTags(locTags, offeredTokens);
+        List<NumeralToken> sourceTokens = numeralTokens(report.source, srcTags);
+        subsumeTags(srcTags, sourceTokens);
+        List<List<NumeralValueParser.Rational>> offered = new ArrayList<>();
+        for (NumeralToken token : offeredTokens) {
+            if (!token.tagOwned && !token.values.isEmpty()) {
+                offered.add(token.values);
+            }
+        }
+        // Numeral tags match by value: a satisfied tag leaves the ordered
+        // tag check. One verbatim occurrence in the translation pairs one
+        // source tag there; only the tags beyond that budget match by value.
+        Map<String, Integer> verbatim = new HashMap<>();
+        for (Tag tag : locTags) {
+            verbatim.merge(tag.tag, 1, Integer::sum);
+        }
+        for (Iterator<Tag> it = srcTags.iterator(); it.hasNext();) {
+            Tag tag = it.next();
+            Optional<NumeralValueParser.Rational> value = NumeralValueParser.parseTokenValue(tag.tag,
+                    false);
+            if (value.isEmpty()) {
+                continue;
+            }
+            if (verbatim.getOrDefault(tag.tag, 0) > 0) {
+                verbatim.merge(tag.tag, -1, Integer::sum);
+                continue;
+            }
+            if (consume(offered, value.get()) || containsCompatibilityForm(translation, tag.tag)) {
+                it.remove();
+            }
+        }
+        // Source numerals outside the tag machinery get the same check.
+        for (NumeralToken token : sourceTokens) {
+            if (token.tagOwned || token.values.isEmpty()) {
+                continue;
+            }
+            boolean satisfied = false;
+            for (NumeralValueParser.Rational value : token.values) {
+                if (consume(offered, value)) {
+                    satisfied = true;
+                    break;
+                }
+            }
+            if (!satisfied && !containsCompatibilityForm(translation, token.text)) {
+                report.srcErrors.put(new Tag(token.start, token.text), TagError.MISSING);
+            }
+        }
+    }
+
+    /** One numeral spelling of a text, with every value it can mean. */
+    private static final class NumeralToken {
+        private final int start;
+        private final int end;
+        private final String text;
+        private final List<NumeralValueParser.Rational> values;
+        /** A tag reaching beyond this token owns it; the tag checks apply, not the value check. */
+        private final boolean tagOwned;
+
+        NumeralToken(int start, String text, List<NumeralValueParser.Rational> values, List<Tag> tags) {
+            this.start = start;
+            this.end = start + text.length();
+            this.text = text;
+            this.values = values;
+            this.tagOwned = tags.stream()
+                    .anyMatch(tag -> overlaps(tag) && !strictlyContains(tag));
+        }
+
+        private boolean overlaps(Tag tag) {
+            return start < tag.pos + tag.tag.length() && tag.pos < end;
+        }
+
+        /** Whether the tag lies inside this token without being all of it. */
+        private boolean strictlyContains(Tag tag) {
+            return tag.pos >= start && tag.pos + tag.tag.length() <= end
+                    && tag.tag.length() < text.length();
+        }
+    }
+
+    /**
+     * The numeral tokens of a text: each separator-written digit spelling as
+     * one token with its candidate values, each plain numeral with its single
+     * value. A separated spelling that reads as no number at all (an
+     * enumeration like 5,6,7) falls back to its plain digit runs, so those
+     * keep their ordinary checks.
+     */
+    private static List<NumeralToken> numeralTokens(String text, List<Tag> tags) {
+        List<NumeralToken> tokens = new ArrayList<>();
+        Matcher m = PatternConsts.NUMERALS_WITH_SEPARATORS.matcher(text);
+        while (m.find()) {
+            List<NumeralValueParser.Rational> values = NumeralValueParser
+                    .parseSeparatedValues(m.group(), false);
+            if (values.isEmpty() && !PatternConsts.NUMERALS.matcher(m.group()).matches()) {
+                Matcher plain = PatternConsts.NUMERALS.matcher(m.group());
+                while (plain.find()) {
+                    tokens.add(new NumeralToken(m.start() + plain.start(), plain.group(),
+                            NumeralValueParser.parseTokenValue(plain.group(), false).map(List::of)
+                                    .orElse(List.of()),
+                            tags));
+                }
+                continue;
+            }
+            tokens.add(new NumeralToken(m.start(), m.group(), values, tags));
+        }
+        return tokens;
+    }
+
+    /**
+     * Remove the tags that larger numeral tokens delegate to the value
+     * check: the digit runs of a decimal number must not demand verbatim
+     * pairing when the number as a whole matches by value.
+     */
+    private static void subsumeTags(List<Tag> tags, List<NumeralToken> tokens) {
+        tags.removeIf(tag -> tokens.stream().anyMatch(
+                token -> !token.tagOwned && !token.values.isEmpty() && token.strictlyContains(tag)));
+    }
+
+    /** Consume one offered token that can mean the value; false when none can. */
+    private static boolean consume(List<List<NumeralValueParser.Rational>> offered,
+            NumeralValueParser.Rational value) {
+        for (Iterator<List<NumeralValueParser.Rational>> it = offered.iterator(); it.hasNext();) {
+            if (it.next().contains(value)) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether the translation spells the numeral in its compatibility form,
+     * as a whole: a spelling embedded in a longer word or number (the Roman
+     * twelve inside a thirteen or inside taxiing, a quarter inside an eleven
+     * forty-seconds) does not count.
+     */
+    private static boolean containsCompatibilityForm(String translation, String numeral) {
+        // U+2044 FRACTION SLASH, the separator of the decomposed vulgar fractions
+        String compat = NFKC.normalize(numeral).replace('\u2044', '/');
+        if (compat.equals(numeral)) {
+            return false;
+        }
+        return Pattern.compile(
+                "(?<!" + COMPAT_BOUNDARY + ")" + Pattern.quote(compat) + "(?!" + COMPAT_BOUNDARY + ")")
+                .matcher(translation).find();
     }
 
     public static void inspectRemovePattern(ErrorReport report) {

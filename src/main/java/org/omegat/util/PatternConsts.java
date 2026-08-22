@@ -54,6 +54,37 @@ public final class PatternConsts {
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
 
+    private static final String RE_NUMERALS = "\\p{Nd}+|[\\p{Nl}\\p{No}&&["
+            + "^\\u00B9\\u00B2\\u00B3"
+            + "\\p{InSUPERSCRIPTS_AND_SUBSCRIPTS}"
+            + "\\p{InENCLOSED_ALPHANUMERICS}"
+            + "\\p{InENCLOSED_ALPHANUMERIC_SUPPLEMENT}"
+            + "\\p{InENCLOSED_CJK_LETTERS_AND_MONTHS}"
+            + "\\p{InENCLOSED_IDEOGRAPHIC_SUPPLEMENT}"
+            + "\\p{InDINGBATS}]]+";
+
+    /**
+     * A whole numeral in any writing system, matched as one run: decimal
+     * digits of every script, and the letter and other numerals, which cover
+     * the sign-written systems (Roman code points, Ethiopic, cuneiform, Mayan
+     * and others) and the precomposed vulgar fractions. The decoration
+     * numbers are subtracted - superscripts and the enclosed and dingbat
+     * forms number list items and footnotes rather than quantities.
+     */
+    public static final Pattern NUMERALS = Pattern.compile(RE_NUMERALS);
+
+    /**
+     * {@link #NUMERALS}, preceded by the separator-written digit forms: a
+     * decimal fraction with one dot or comma, or a number grouped by dots,
+     * commas or the space characters into blocks of three digits. The
+     * separated alternatives come first, so a decimal or grouped number
+     * matches as one token rather than as its digit runs.
+     */
+    public static final Pattern NUMERALS_WITH_SEPARATORS = Pattern.compile(
+            "\\p{Nd}{1,3}(?:([.,\\u00A0\\u202F\\u2007 ])\\p{Nd}{3}(?:\\1\\p{Nd}{3})*)(?![\\p{Nd}.,])"
+                    + "|\\p{Nd}+[.,]\\p{Nd}+(?![\\p{Nd}.,])"
+                    + "|" + RE_NUMERALS);
+
     /**
      * Compiled pattern to extract the encoding from XML file, if any. Found
      * encoding is stored in group #1.

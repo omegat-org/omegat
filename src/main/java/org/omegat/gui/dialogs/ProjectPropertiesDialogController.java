@@ -127,6 +127,8 @@ public class ProjectPropertiesDialogController {
         dialog.sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
         dialog.allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
         dialog.removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
+        dialog.matchNumbersCheckBox.setSelected(projectProperties.isMatchNumbersEnabled());
+        dialog.checkNumbersCheckBox.setSelected(projectProperties.isCheckNumbersEnabled());
 
         dialog.sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         dialog.targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
@@ -544,6 +546,8 @@ public class ProjectPropertiesDialogController {
         projectProperties.setSentenceSegmentingEnabled(dialog.sentenceSegmentingCheckBox.isSelected());
         projectProperties.setSupportDefaultTranslations(dialog.allowDefaultsCheckBox.isSelected());
         projectProperties.setRemoveTags(dialog.removeTagsCheckBox.isSelected());
+        projectProperties.setMatchNumbersEnabled(dialog.matchNumbersCheckBox.isSelected());
+        projectProperties.setCheckNumbersEnabled(dialog.checkNumbersCheckBox.isSelected());
         projectProperties.setExportTmLevels(dialog.exportTMOmegaTCheckBox.isSelected(),
                 dialog.exportTMLevel1CheckBox.isSelected(), dialog.exportTMLevel2CheckBox.isSelected());
         projectProperties.setExternalCommand(dialog.externalCommandTextArea.getText());

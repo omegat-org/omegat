@@ -112,11 +112,16 @@ tasks.register('testIntegration', JavaExec) {
     } else {
         systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     }
-    systemProperty 'omegat.test.duration', System.getProperty('omegat.test.duration')
-    systemProperty 'omegat.test.repo', System.getProperty('omegat.test.repo')
-    systemProperty 'omegat.test.repo.alt', System.getProperty('omegat.test.repo.alt')
-    systemProperty 'omegat.test.map.repo', System.getProperty('omegat.test.map.repo')
-    systemProperty 'omegat.test.map.file', System.getProperty('omegat.test.map.file')
+    // Forward only the properties that are actually set: an absent value
+    // would be rendered as "-Dname" and reach the test JVM as an empty
+    // string, which TestTeamIntegration cannot tell apart from a real value.
+    ['omegat.test.duration', 'omegat.test.delay', 'omegat.test.repo', 'omegat.test.repo.alt',
+     'omegat.test.map.repo', 'omegat.test.map.type', 'omegat.test.map.file'].each { name ->
+        def value = System.getProperty(name)
+        if (value != null) {
+            systemProperty name, value
+        }
+    }
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PtestMaxHeapSize=1024M testIntegration`
     maxHeapSize = findProperty('testMaxHeapSize')

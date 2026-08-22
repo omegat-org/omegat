@@ -155,7 +155,7 @@ public class RealProject implements IProject {
 
     private @Nullable RandomAccessFile raFile;
     private @Nullable FileChannel lockChannel;
-    private FileLock lock;
+    private @Nullable FileLock lock;
 
     private boolean modified;
 

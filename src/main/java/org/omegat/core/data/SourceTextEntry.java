@@ -150,7 +150,7 @@ public class SourceTextEntry {
     /**
      * Returns comment of entry if exist in source document.
      */
-    public String getComment() {
+    public @Nullable String getComment() {
         if (SegmentProperties.isEmpty(props)) {
             return null;
         }

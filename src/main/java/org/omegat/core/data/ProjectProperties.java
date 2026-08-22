@@ -714,7 +714,7 @@ public class ProjectProperties {
         private final boolean isDirectory;
         private @Nullable File fs;
         /** Null if path is not under project root */
-        private String underRoot;
+        private @Nullable String underRoot;
 
         /**
          * @param isDirectory

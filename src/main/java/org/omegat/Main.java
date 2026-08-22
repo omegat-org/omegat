@@ -113,7 +113,7 @@ public final class Main {
         }
     }
 
-    public static void restartGUI(String projectDir) {
+    public static void restartGUI(@Nullable String projectDir) {
         // Check we have `java` command in java.home
         Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
         String installDir = StaticUtils.installDir();

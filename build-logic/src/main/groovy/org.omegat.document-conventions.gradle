@@ -1,8 +1,8 @@
 import org.omegat.documentation.*
+import org.omegat.gradle.PropertiesUtil
 
 plugins {
     id 'org.omegat.documentation'
-    id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
 }
@@ -22,7 +22,7 @@ tasks.register('genDocIndex', Copy) {
     def inputTemplate = layout.projectDirectory.file("${documentRootDir}/template/index.html")
     def docPropsFiles = fileTree(dir: "${documentRootDir}/manual", include: '**/version*.properties')
     def langInformation = docPropsFiles.collect { props ->
-        def docVersion = loadProperties(props).version
+        def docVersion = PropertiesUtil.loadProperties(props).version
         ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
          'name'  : Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
          'status': docVersion == version ? 'up-to-date' : 'out-of-date']
@@ -222,9 +222,9 @@ manualLangsProvider.get().each { lang ->
 
     // Create a new publication for this language
     def publication = publishing.publications.create("manual${lang.capitalize()}", MavenPublication) {
-        groupId = 'org.omegat'
+        groupId = project.property('org.omegat.groupId')
         artifactId = "omegat-manual-${lang}"
-        version = '6.1.0'
+        version = project.ext.omtVersion.mavenStyleVersion
 
         // Add the jar task to the publication
         artifact(zipTask)

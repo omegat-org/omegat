@@ -331,6 +331,20 @@ public final class StaticUIUtils {
         return cs;
     }
 
+    /**
+     * Tell whether window geometry is stored under the given key. Callers of
+     * {@link #persistGeometry(Window, String)} can use this to find out
+     * whether a previous session left geometry to restore, e.g. to decide
+     * between the restored position and centering on a parent window.
+     *
+     * @param key
+     *            preference key prefix, same as used for persistGeometry
+     * @return true when a previous session stored geometry under the key
+     */
+    public static boolean hasStoredGeometry(String key) {
+        return getStoredRectangle(key).isPresent();
+    }
+
     private static Optional<Rectangle> getStoredRectangle(String key) {
         String xStr = Preferences.getPreference(key + "_x");
         String yStr = Preferences.getPreference(key + "_y");

@@ -35,6 +35,9 @@
                <listitem>
                   <para>
                      <guilabel>用語の問題</guilabel>(オプション)：適切に翻訳されていない用語の利用を検出します。詳細の<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>環境設定を参照してください。</para>
+                  <note>
+                     <para>対象用語が空欄の用語集項目は、用語チェックの対象から除外されます。</para>
+                  </note>
                </listitem>
                <listitem>
                   <para>
@@ -117,7 +120,7 @@
          </term>
          <listitem>
             <para>整列する2つのファイル(原文ファイルとその訳文ファイル)を選択し、<guibutton>確定</guibutton>をクリックして<link linkend="windows.aligner" endterm="windows.aligner.title"/>ウィンドウを開きます。</para>
-            <para>サポートされるファイル形式は、プロジェクトの設定によって異なります。詳細は、付録の <link linkend="file.filters" endterm="file.filters.title"/> をご覧ください。</para>
+            <para>サポートされているファイル形式は、プロジェクトの設定によって異なります。詳細は、付録の <link linkend="file.filters" endterm="file.filters.title"/> をご覧ください。</para>
             <para>ソースファイルとターゲットファイルの形式は異なる場合があります(たとえば、<filename>.docx</filename>ファイルは<filename>.pdf</filename>ファイルと整合できます)。</para>
          </listitem>
       </varlistentry>

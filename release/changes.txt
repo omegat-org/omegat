@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.2.0
 ----------------------------------------------------------------------
-   4 Enhancement
-   0 Bug fixes
+  17 Enhancement
+   1 Bug fixes
    0 Localisation updates
 ----------------------------------------------------------------------
 6.2.0 vs 6.1.0
@@ -18,11 +18,38 @@
   - Display translated percentage on Project files dialog
     https://sourceforge.net/p/omegat/feature-requests/1775/
 
+  - Change label "Project translation" to "Committed target files"
+    https://sourceforge.net/p/omegat/feature-requests/1731/
+
+  - Make "Mark Non-breaking spaces" show also narrow no-break spaces
+    https://sourceforge.net/p/omegat/feature-requests/1684/
+
+  - Add "open folder/file" button for paths in the "File locations" part of the "Edit Project" window
+    https://sourceforge.net/p/omegat/feature-requests/1535/
+
+  - rename 'Search in comments', it is actually searching in all properties
+    https://sourceforge.net/p/omegat/feature-requests/1516/
+
+  - Aligner to remember window position, size, and values of parameters.
+    https://sourceforge.net/p/omegat/feature-requests/1456/
+
+  - Add a "Find Previous" button to the Search window
+    https://sourceforge.net/p/omegat/feature-requests/1380/
+
+  - Rename "Save" to "Export" in Autotext Configuration dialog
+    https://sourceforge.net/p/omegat/feature-requests/1265/
+
   - Convert full-width Arabic numbers to half-width when inserting a fuzzy match
     https://sourceforge.net/p/omegat/feature-requests/1193/
 
+  - Find Next button on Search window
+    https://sourceforge.net/p/omegat/feature-requests/1125/
+
   - Migrate the main data store project_save.tmx as TMX 1.4 level 2
     https://github.com/omegat-org/omegat/pull/1577
+
+  - Remember aligned TMX save location
+    https://sourceforge.net/p/omegat/feature-requests/1358/
 
   - Improve CLI command line parser with detailed help message
     https://github.com/omegat-org/omegat/pull/1321
@@ -30,10 +57,16 @@
   - Add vabatim environment in latex filter
     https://github.com/omegat-org/omegat/pull/2086
 
+  - Add "whole words only" option to Find dialog
+    https://sourceforge.net/p/omegat/feature-requests/849/
+
 Bug fixes:
 
+  - NPE when closing a search window without any search/replace action
+    https://sourceforge.net/p/omegat/bugs/1327/
+
 ----------------------------------------------------------------------
- OmegaT 6.1.0
+ OmegaT 6.1.0 (2026-08-02)
 ----------------------------------------------------------------------
   65 Enhancement
  100 Bug fixes

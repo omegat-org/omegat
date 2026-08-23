@@ -7,11 +7,13 @@ on:
       - releases/*
     paths-ignore:
       - 'ci/**'
+      - 'tool/**'
       - 'src/docs/**'
       - '*.md'
   pull_request:
     paths-ignore:
       - 'ci/**'
+      - 'tool/**'
       - 'src/docs/**'
       - '*.md'
 

@@ -77,7 +77,7 @@ tasks.register('jpackageAppContentImages', Sync) {
 tasks.register('jpackageAppContentModules', Sync) {
     from layout.buildDirectory.file('modules')
     into "${jpkgContentRoot.call().get()}/modules"
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn rootProject.configurations.named('moduleDist')
     dependsOn jpackage
 }
 tasks.register('jpackageAppContentTips', Sync) {

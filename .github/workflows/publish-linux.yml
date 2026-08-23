@@ -33,14 +33,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: arm64
-            runner: ubuntu-24.04-arm
-            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
-            gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
-          - arch: amd64
-            runner: ubuntu-latest
-            jre_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
-            gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
+        - arch: arm64
+          runner: ubuntu-24.04-arm
+          jre25_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_aarch64_linux_hotspot_25.0.3_9.tar.gz
+          jre17_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_aarch64_linux_hotspot_17.0.19_10.tar.gz
+          gradle_tasks: linuxDistDeb linuxDistRpm linuxArm64DistTarBz
+        - arch: amd64
+          runner: ubuntu-latest
+          jre25_url: https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_linux_hotspot_25.0.3_9.tar.gz
+          jre17_url: https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_x64_linux_hotspot_17.0.19_10.tar.gz
+          gradle_tasks: linuxDistDeb linuxDistRpm linux64DistTarBz
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
@@ -64,14 +66,27 @@ jobs:
           sudo apt-get install -y rpm
 
       - name: Download JRE (${{ matrix.arch }})
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.branch || github.ref_name }}
+          JRE17_URL: ${{ matrix.jre17_url }}
+          JRE25_URL: ${{ matrix.jre25_url }}
         run: |
-          mkdir -p asset
-          cd asset
-          curl -L -O ${{ matrix.jre_url }}
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/asset"
+          if [[ "$TARGET_BRANCH" == "releases/6.1" ]]; then
+            URL="$JRE17_URL"
+          else
+            URL="$JRE25_URL"
+          fi
+          JRE_FILE="$RUNNER_TEMP/asset/$(basename "$URL")"
+          mkdir -p "$(dirname "$JRE_FILE")"
+          curl -fL "$URL" -o "$JRE_FILE"
+          file "$JRE_FILE"
+          gzip -t "$JRE_FILE" || { echo "::error::Downloaded file is not a valid gzip archive: $JRE_FILE"; exit 1; }
 
       - name: Build distributions
         run: |
-          ./gradlew ${{ matrix.gradle_tasks }} -PassetDir=asset --build-cache -PenvIsCi
+          ./gradlew ${{ matrix.gradle_tasks }} --build-cache -PenvIsCi "-PassetDir=$RUNNER_TEMP/asset"
 
       - name: Record project version into artifact
         run: |
@@ -87,7 +102,7 @@ jobs:
           name: dist-${{ matrix.arch }}
           path: build/distributions/
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 1
 
   publish:
     needs: build
@@ -134,7 +149,7 @@ jobs:
               ;;
           esac
           if [[ "$MODE" == "release" ]]; then
-            echo "dest_dir=/home/frs/project/omegat/OmegaT - Latest/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
+            echo "dest_dir=/home/frs/project/omegat/OmegaT - Standard/OmegaT ${VERSION}/" >> $GITHUB_OUTPUT
           else
             echo "dest_dir=/home/frs/project/omegat/Weekly" >> $GITHUB_OUTPUT
           fi

@@ -32,4 +32,12 @@ public class TestRuntimePreferenceStore extends RuntimePreferenceStore {
         getInstance().setLocationSaveDisable();
         getInstance().setProjectLockingDisabled();
     }
+
+    /**
+     * Installs a fresh store without the test defaults, for tests that assert
+     * how command line options change the store.
+     */
+    public static void resetPristine() {
+        setInstance(new TestRuntimePreferenceStore());
+    }
 }

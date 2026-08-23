@@ -10,6 +10,7 @@
                2014 Alex Buloichik
                2018 Enrique Estevez Fernandez
                2022-2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,10 +43,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.Nullable;
+
+import org.omegat.cli.CommonParameters;
 import org.omegat.cli.LegacyParameters;
 import org.omegat.cli.SubCommands;
 import org.omegat.core.Core;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.FileUtil;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
@@ -74,6 +80,15 @@ public final class Main {
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        // --config-dir must take effect before plugins are loaded (user
+        // plugins live below the configuration folder) and thus before the
+        // command line is parsed by picocli; pre-scan the arguments like
+        // extractPluginConfiguration() does.
+        String configDir = extractConfigDir(args);
+        if (configDir != null) {
+            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
+        }
 
         Map<String, String> pluginConfig = extractPluginConfiguration(args);
         PluginUtils.loadPlugins(pluginConfig);
@@ -169,18 +184,76 @@ public final class Main {
         return config;
     }
 
-    private static void constructCommandParams(List<String> command) {
-        command.add("start");
-        if (RuntimePreferences.isNoTeam()) {
-            command.add("--no-team");
+    /**
+     * Pre-scan the command-line arguments for --config-dir before picocli
+     * parses them, so that user plugins below the configuration folder are
+     * already visible to loadPlugins().
+     */
+    @VisibleForTesting
+    @Nullable
+    static String extractConfigDir(String @Nullable [] args) {
+        if (args == null) {
+            return null;
         }
+        for (int i = 0; i < args.length; i++) {
+            String value = null;
+            if (LegacyParameters.CONFIG_DIR.equals(args[i]) && i + 1 < args.length) {
+                value = args[i + 1];
+            } else if (args[i].startsWith(LegacyParameters.CONFIG_DIR + "=")) {
+                value = args[i].substring(LegacyParameters.CONFIG_DIR.length() + 1);
+            }
+            if (value != null && !value.isEmpty()) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Reconstructs the command line arguments for a GUI restart from the
+     * runtime preferences. Options of the top-level command must precede the
+     * start sub-command; the options of its {@link CommonParameters} mixin
+     * must follow it.
+     */
+    @VisibleForTesting
+    static void constructCommandParams(List<String> command) {
+        if (RuntimePreferences.getConfigDir() != null) {
+            command.add(LegacyParameters.CONFIG_DIR);
+            command.add(RuntimePreferences.getConfigDir());
+        }
+        if (RuntimePreferences.getConfigFile() != null) {
+            command.add(LegacyParameters.CONFIG_FILE);
+            command.add(RuntimePreferences.getConfigFile());
+        }
+        if (RuntimePreferences.getResourceBundleFile() != null) {
+            command.add(LegacyParameters.RESOURCE_BUNDLE);
+            command.add(RuntimePreferences.getResourceBundleFile());
+        }
+        if (!RuntimePreferences.isProjectLockingEnabled()) {
+            command.add(LegacyParameters.DISABLE_PROJECT_LOCKING);
+        }
+        if (!RuntimePreferences.isLocationSaveEnabled()) {
+            command.add(LegacyParameters.DISABLE_LOCATION_SAVE);
+        }
+        if (RuntimePreferences.isNoTeam()) {
+            command.add(LegacyParameters.NO_TEAM);
+        }
+        command.add("start");
         if (RuntimePreferences.isQuietMode()) {
-            command.add("--quiet");
+            command.add(CommonParameters.QUIET);
+        }
+        if (RuntimePreferences.getTokenizerSource() != null) {
+            command.add(CommonParameters.TOKENIZER_SOURCE);
+            command.add(RuntimePreferences.getTokenizerSource());
+        }
+        if (RuntimePreferences.getTokenizerTarget() != null) {
+            command.add(CommonParameters.TOKENIZER_TARGET);
+            command.add(RuntimePreferences.getTokenizerTarget());
         }
         if (useAlternateFilename()) {
-            command.add("--alternate-filename-from");
+            command.add(CommonParameters.ALTERNATE_FILENAME_FROM);
             command.add(RuntimePreferences.getAlternateFilenameFrom());
-            command.add("--alternate-filenames-to");
+            command.add(CommonParameters.ALTERNATE_FILENAME_TO);
             command.add(RuntimePreferences.getAlternateFilenameTo());
         }
     }

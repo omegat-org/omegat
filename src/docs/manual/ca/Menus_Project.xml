@@ -256,7 +256,8 @@
                   </term>
                   <listitem>
                      <para>El fitxer d'origen actual és en la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
-                     <para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix. Si premeu la tecla Alt mentre seleccioneu l'element del menú, s'obre la carpeta que conté el fitxer en el gestor de fitxers estàndard del sistema operatiu, com ara el Finder o l'Explorador de fitxers, en comptes d'obrir el fitxer.</para>
+			<para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix.</para>
+			<para>Per a obrir la carpeta que conté el fitxer a l'explorador de fitxers del sistema operatiu, mantingueu premuda la tecla <keycombo><keycap>ALT</keycap></keycombo> mentre seleccioneu aquest element del menú.</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -265,7 +266,8 @@
                   </term>
                   <listitem>
                      <para>El fitxer de destinació actual és en la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
-                     <para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix. Si premeu la tecla Alt mentre seleccioneu l'element del menú, s'obre la carpeta que conté el fitxer en el gestor de fitxers estàndard del sistema operatiu, com ara el Finder o l'Explorador de fitxers, en comptes d'obrir el fitxer.</para>
+			<para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix.</para>
+			<para>Per a obrir la carpeta que conté el fitxer a l'explorador de fitxers del sistema operatiu, mantingueu premuda la tecla <keycombo><keycap>ALT</keycap></keycombo> mentre seleccioneu aquest element del menú.</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -274,7 +276,8 @@
                   </term>
                   <listitem>
                      <para>El glossari d'escriptura és en la carpeta <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
-                     <para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix. Si premeu la tecla Alt mentre seleccioneu l'element del menú, s'obre la carpeta que conté el fitxer en el gestor de fitxers estàndard del sistema operatiu, com ara el Finder o l'Explorador de fitxers, en comptes d'obrir el fitxer.</para>
+			<para>Obre el fitxer amb l'aplicació associada, si el fitxer existeix.</para>
+			<para>Per a obrir la carpeta que conté el fitxer a l'explorador de fitxers del sistema operatiu, mantingueu premuda la tecla <keycombo><keycap>ALT</keycap></keycombo> mentre seleccioneu aquest element del menú.</para>
                   </listitem>
                </varlistentry>
             </variablelist>

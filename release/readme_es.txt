@@ -28,7 +28,7 @@ Prerrequisitos para instalar OmegaT
 ===================================
 
 OmegaT requiere que tenga instalado en su sistema Java Runtime Environment (JRE) 
-versión 1.8 o superior.
+versión 11 o superior.
 
 Recomendamos usar paquetes de OmegaT que incluyan JRE para evitarle la molestia 
 de seleccionarlo, obtenerlo e instalarlo.

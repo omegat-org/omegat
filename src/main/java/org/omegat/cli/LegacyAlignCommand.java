@@ -30,7 +30,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.TMXWriter2;
 
 import java.io.File;
@@ -51,16 +50,6 @@ public class LegacyAlignCommand {
 
         CommandCommon.initializeApp();
         Core.initializeConsole();
-
-        if (legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
-        if (legacyParams.disableProjectLocking) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-        if (legacyParams.disableLocationSave) {
-            RuntimePreferences.setLocationSaveEnabled(false);
-        }
 
         CommonParameters params = new CommonParameters();
         params.setProjectLocation(legacyParams.project);

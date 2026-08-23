@@ -395,9 +395,6 @@
             with
             <guibutton>OK</guibutton> or
             <guibutton>Apply</guibutton>.</para>
-         <para>The Source Files progress colours shown in the
-            <link linkend="windows.source.files.list" endterm="windows.source.files.list.title"></link>
-            window can also be changed here.</para>
          <para>Scripts can be used to set predefined themes. OmegaT is bundled with
             a script called 
             <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"></link> that
@@ -631,12 +628,12 @@
                   		  dictionaries. It is generally in the 
                   <link linkend="configuration.folder" endterm="configuration.folder.title"></link>
                   		  folder.</para>
-               <para>If the OmegaT language module for your project target language provides
+               <para>If the language module for your project target language provides
                   		  a Hunspell dictionary, it will automatically install it in this folder when you
                   		  enable spell checking. If the module provides a Morfologik dictionary,
                   		  spellchecking works without having to install a dictionary in the folder.</para>
-               <para>You can put a dictionary in this folder to a use custom spelling dictionary,
-                  		  or if your project target language is not covered by an OmegaT language module.</para>
+               <para>You can put a dictionary in this folder to use a custom spelling dictionary,
+                  		  or if your project target language is not covered by a language module.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="dialog.preferences.spellchecker.already.installed">
@@ -877,7 +874,7 @@
                <para>By default, OmegaT requires a double-click to enter the segment under the cursor.
                   Use this option if you prefer to enter segments with a single-click.</para>
                <note>
-                  <para>If the cursor is unlocked, neither single-clicking nor double-clicking can be used
+                  <para>If the cursor is unlocked, only double-clicking can be used
                      to enter the segment. See 
                      <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"></link> to lock or unlock the cursor.</para>
                </note>
@@ -1362,6 +1359,44 @@
                      </tbody>
                   </tgroup>
                </table>
+               <para>Values of TMX segment properties can additionally be inserted with the
+                  templates below. Unlike the variables above, these are <emphasis>not</emphasis>
+                  offered in the drop-down menu.</para>
+               <table xml:id="table.match.pane.setup.tmxprop" colsep="0" rowsep="0">
+                  <title xml:id="table.match.pane.setup.tmxprop.title">TMX property template variables</title>
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                     <colspec align="left"></colspec>
+                     <colspec align="left"></colspec>
+                     <tbody>
+                        <row>
+                           <entry>
+                              <literal>@{propertyType}</literal>
+                           </entry>
+                           <entry>The value of the TMX property of the given
+                              <literal>propertyType</literal>.</entry>
+                        </row>
+                        <row>
+                           <entry>
+                              <literal>@[propertyType][keyValueSeparator][valueSeparator]</literal>
+                           </entry>
+                           <entry>All TMX properties whose type matches <literal>propertyType</literal>
+                              (where <literal>*</literal> and <literal>?</literal> act as wildcards),
+                              each rendered as the property type, the
+                              <literal>keyValueSeparator</literal> and the value, with the individual
+                              results joined by the <literal>valueSeparator</literal>.</entry>
+                        </row>
+                     </tbody>
+                  </tgroup>
+               </table>
+               <example xml:id="dialog.preferences.tm.matches.template.tmxprop.example">
+                  <title xml:id="dialog.preferences.tm.matches.template.tmxprop.example.title">Displaying a TMX property</title>
+                  <para>For a TMX entry property
+                     <literal>&lt;prop type="Att::Doc. Type"&gt;Regulation&lt;/prop&gt;</literal>, the
+                     template <literal>@{Att::Doc. Type}</literal> renders as
+                     <literal>Regulation</literal>, and the template
+                     <literal>@[Att::Doc. Type][=][,]</literal> renders as
+                     <literal>Att::Doc. Type=Regulation</literal>.</para>
+               </example>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx">
@@ -1370,9 +1405,8 @@
                <option>Show matches assembled from multiple segments</option>
             </term>
             <listitem>
-               <para>Enable matches for paragraphs assembled from matches found in segmented
-                  		    memory entries from a segmented source text in a project that uses paragraph
-                  segmentation.</para>
+               <para>In a project that uses paragraph segmentation, enable matching from assembled matches found in
+                  		    sentence-level segmentation memories.</para>
             </listitem>
          </varlistentry>
       </variablelist>

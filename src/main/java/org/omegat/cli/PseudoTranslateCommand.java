@@ -31,7 +31,6 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import picocli.CommandLine;
@@ -86,19 +85,10 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         CommandCommon.logLevelInitialize(params);
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
-        if (!params.team || legacyParameters.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
-
         CommandCommon.initializeApp();
         Core.initializeConsole();
 
-        if (legacyParameters.disableProjectLocking) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-        if (legacyParameters.disableLocationSave) {
-            RuntimePreferences.setLocationSaveEnabled(false);
-        }
+        CommandCommon.parseCommonParams(params);
 
         if (filename == null && legacyParameters.pseudoTranslateTmxPath != null) {
             filename = legacyParameters.pseudoTranslateTmxPath;

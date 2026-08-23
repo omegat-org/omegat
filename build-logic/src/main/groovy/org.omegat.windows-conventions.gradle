@@ -1,5 +1,6 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.omegat.gradle.DistPathUtil
 
 plugins {
     id 'edu.sc.seis.launch4j'
@@ -131,14 +132,14 @@ ext.makeWinTask = { args ->
             from(zipTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
-                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                    DistPathUtil.replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
                 }
             }
         }
         dependsOn createAllExecutables
     }
 
-    def exe = layout.projectDirectory.file('ci/iscc')
+    def exe = layout.projectDirectory.file('tool/iscc')
     def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
 
     tasks.register(genDistsTaskName, Exec) {

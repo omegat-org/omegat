@@ -133,13 +133,12 @@
                		available for matching purposes.</para>
          </listitem>
          <listitem>
-            <para>If you switch to paragraph segmentation in a project that originally used 
-               <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"></link>,
-               		    you can have OmegaT present matches assembled from existing segments by enabling
+            <para>If you switch to paragraph segmentation in a project that originally used rules based segmentation (see the 
+               <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"></link> section),
+               		    you can also have OmegaT present matches assembled from existing segments by enabling
                the
                		    
-               <link linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx" endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"></link> option in addition to
-               			showing regular fuzzy matches.</para>
+               <link linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx" endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"></link> option.</para>
             <para> OmegaT will try to segment the source text into sentences,
                			apply fuzzy matching on the segmented memory entries, and then assemble a paragraph
                from those matches.

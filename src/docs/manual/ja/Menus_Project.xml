@@ -256,7 +256,8 @@
                   </term>
                   <listitem>
                      <para>現在の原文ファイルは<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにあります。</para>
-                     <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
+			<para>アプリケーションでドキュメントを再度開きます。</para>
+			<para>OSのファイルマネージャーで、そのファイルが含まれているフォルダを開くには、このメニュー項目を選択する際に、<keycombo><keycap>ALT</keycap></keycombo>キーを押し続けてください。</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -265,7 +266,8 @@
                   </term>
                   <listitem>
                      <para>現在の訳文ファイルは<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーにあります。</para>
-                     <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
+			<para>アプリケーションでドキュメントを再度開きます。</para>
+			<para>OSのファイルマネージャーで、そのファイルが含まれているフォルダを開くには、このメニュー項目を選択する際に、<keycombo><keycap>ALT</keycap></keycombo>キーを押し続けてください。</para>
                   </listitem>
                </varlistentry>
                <varlistentry>
@@ -274,7 +276,8 @@
                   </term>
                   <listitem>
                      <para>書き込み可能な用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあります。</para>
-                     <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
+			<para>アプリケーションでドキュメントを再度開きます。</para>
+			<para>OSのファイルマネージャーで、そのファイルが含まれているフォルダを開くには、このメニュー項目を選択する際に、<keycombo><keycap>ALT</keycap></keycombo>キーを押し続けてください。</para>
                   </listitem>
                </varlistentry>
             </variablelist>

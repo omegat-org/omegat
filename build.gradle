@@ -1,10 +1,10 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.omegat.gradle.PropertiesUtil
 
 plugins {
     id 'org.omegat.version'
     id 'org.omegat.document-conventions'
-    id 'org.omegat.main-utilities'
     id 'org.omegat.java-conventions'
     id 'org.omegat.jaxb-conventions'
     id 'org.omegat.windows-conventions'
@@ -35,6 +35,7 @@ tasks.withType(Wrapper.class).configureEach {
     gradleVersion = "9.6.0" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
+group = project.property('org.omegat.groupId')
 version = omtVersion.version
 
 // Definition of bundled JRE file names
@@ -63,6 +64,15 @@ configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     moduleRuntimeLibs
+    // Module jars shipped in the distribution 'modules' folder. Declared as project
+    // dependencies (see the dependencies block below) so that configure-on-demand
+    // configures the module projects; reaching into their task containers instead
+    // silently yields nothing when only root-qualified task paths (e.g. ':installDist')
+    // are requested.
+    moduleDist {
+        canBeConsumed = false
+        transitive = false
+    }
 }
 
 dependencies {
@@ -165,7 +175,7 @@ dependencies {
 
         // Script editor
         implementation(libs.bundles.fifesoft) {
-            exclude module: 'rhino'
+            exclude module: 'rhino-all'
         }
 
         implementation(libs.guava)
@@ -252,17 +262,21 @@ dependencies {
     }
     subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
         jacocoAggregation sub
-        sub.plugins.withId('org.omegat.module') {
-            moduleRuntimeLibs(project(sub.path)) {
-                targetConfiguration = 'moduleRuntimeDependencies'
-            }
+        // Declared unconditionally: a plugins.withId callback never fires for projects
+        // that configure-on-demand leaves unconfigured. Every leaf subproject applies
+        // org.omegat.module, which provides both target configurations.
+        moduleRuntimeLibs(project(sub.path)) {
+            targetConfiguration = 'moduleRuntimeDependencies'
+        }
+        moduleDist(project(sub.path)) {
+            targetConfiguration = 'moduleJarElements'
         }
     }
 }
 
 jar {
     def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
-    def omtPlugins = loadProperties(pluginProperties.asFile)
+    def omtPlugins = PropertiesUtil.loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -304,20 +318,55 @@ jar {
 
 test {
     // some test case depends on modules from subproject
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn configurations.moduleDist
+    useJUnit {
+        // Destructive memory-stress tests deliberately exhaust the heap;
+        // they only run on explicit request via the memoryStressTest task.
+        excludeCategories 'org.omegat.core.MemoryStressTests'
+        // Distribution smoke tests need an installed distribution; they only
+        // run on explicit request via the distributionSmokeTest task.
+        excludeCategories 'org.omegat.core.DistributionSmokeTests'
+    }
 }
 
-// Resolve module dependencies EAGERLY at configuration time
-def moduleLibs = subprojects
-        .findAll { it.subprojects.isEmpty() }
-        .collect {
-            it.configurations.matching {
-                it.name.endsWith('untimeClasspath')
-                        && !it.name.startsWith('test')
-                        && !it.name.startsWith('jaxb')
-            }
-        }
-        .flatten()
+tasks.register('memoryStressTest', Test) {
+    group = 'verification'
+    description = 'Runs the destructive memory-stress tests, which deliberately exhaust the heap.'
+    // some test case depends on modules from subproject
+    dependsOn configurations.moduleDist
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    workingDir = projectDir
+    // Test in headless mode with ./gradlew memoryStressTest -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    maxHeapSize = findProperty('testMaxHeapSize')
+    systemProperty 'java.util.logging.config.file',
+            layout.settingsDirectory.file('config/test/logger.properties').asFile
+    useJUnit {
+        includeCategories 'org.omegat.core.MemoryStressTests'
+    }
+}
+
+tasks.register('distributionSmokeTest', Test) {
+    group = 'verification'
+    description = 'Smoke-tests plugin loading, spell checking and LanguageTool against the installed distribution.'
+    dependsOn tasks.named('installDist')
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    workingDir = projectDir
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'omegat.dist.dir', layout.buildDirectory.dir('install/OmegaT').get().asFile.absolutePath
+    systemProperty 'java.util.logging.config.file',
+            layout.settingsDirectory.file('config/test/logger.properties').asFile
+    // The tests read the installed distribution, which is not modelled as a
+    // task input; always rerun instead of trusting a stale up-to-date check.
+    outputs.upToDateWhen { false }
+    useJUnit {
+        includeCategories 'org.omegat.core.DistributionSmokeTests'
+    }
+}
 
 def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
 def providedBuildLogicPath = 'lib/provided/build-logic'
@@ -337,7 +386,7 @@ distributions {
             from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
-                // in releases/win32-specific/OmegaT.iss
+                // in release/win32-specific/OmegaT.iss
                 // 'contributors.txt' and 'libraries.txt' are expected
                 // in org.omegat.gui.dialogs.AboutDialog#getContributors
                 // and org.omegat.gui.dialogs.AboutDialog#getLibraries
@@ -388,8 +437,8 @@ distributions {
             }
             // system core plugins into modules
             into('modules') {
-                from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from(layout.settingsDirectory.dir('releases/modules-specific'))
+                from(configurations.moduleDist)
+                from(layout.settingsDirectory.dir('release/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -405,9 +454,9 @@ distributions {
         contents {
             from(rootDir) {
                 include 'README.md', 'LICENSE', // readme
-                  'build-logic/**', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
+                  'build-logic/**', '.checkstyle', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
                   'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', '*.properties',
-                  'ci/iscc', 'ci/osslsigncode', '.checkstyle', // ci related
+                  'tool/iscc', // package build
                   'src/**', // root project and docs
                   'test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
                   'scripts/**', // sample scripts
@@ -472,11 +521,16 @@ tasks.withType(Zip).configureEach {
 }
 
 def provided = findProperty('repoRevision') ?: ''
-def gitArchival = loadProperties(file('.git-archival.properties')).getProperty('node')
-def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
+def gitArchival = PropertiesUtil.loadProperties(file('.git-archival.properties')).getProperty('node')
+// .git is a directory in a plain clone but a file in a linked git worktree
+def insideGitCheckout = file('.git').exists()
+def git = insideGitCheckout ? providers.exec {commandLine("git", "rev-parse", "--short", "HEAD")}.standardOutput.asText.get().trim() : ''
 def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
     !it.empty && it != '@dev@' && it != '$Format:%H$'
 }
+// The branch name is empty outside a git checkout and "HEAD" when detached
+// (e.g. a tag build); both cases mean "not a development build".
+def gitBranch = insideGitCheckout ? providers.exec {commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")}.standardOutput.asText.get().trim() : ''
 
 processResources {
     /*
@@ -489,9 +543,11 @@ processResources {
      3. If none of the above, the value "unknown"
      */
     inputs.property 'revision', revision
-    logger.lifecycle("Detected revision " + revision)
+    inputs.property 'branch', gitBranch
+    logger.lifecycle("Detected revision " + revision
+            + (gitBranch.empty ? "" : " on branch " + gitBranch))
     filesMatching('**/Version.properties') {
-        filter ReplaceTokens, tokens:["dev": revision]
+        filter ReplaceTokens, tokens:["dev": revision, "gitbranch": gitBranch]
     }
 }
 

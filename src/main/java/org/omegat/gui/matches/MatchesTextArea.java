@@ -57,6 +57,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Caret;
 import javax.swing.text.StyledDocument;
@@ -108,19 +109,17 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
 
     private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
-    private static final AttributeSet ATTRIBUTES_CHANGED = Styles
-            .createAttributeSet(Styles.EditorColor.COLOR_MATCHES_CHANGED.getColor(), null, null, null);
-    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles
-            .createAttributeSet(Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null, null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
-    private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
+
+    // Colour-carrying attributes are rebuilt from the preferences by
+    // rebuildColorAttributes() so a colour change takes effect without a
+    // restart (they used to be cached in static fields at class-load time).
+    private AttributeSet attributesChanged;
+    private AttributeSet attributesUnchanged;
+    private AttributeSet attributesDeletedActive;
+    private AttributeSet attributesDeletedInactive;
+    private AttributeSet attributesInsertedActive;
+    private AttributeSet attributesInsertedInactive;
 
     private final DockableScrollPane scrollPane;
     private final List<NearString> matches = new ArrayList<>();
@@ -145,6 +144,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         setMinimumSize(new Dimension(100, 50));
 
         addMouseListener(mouseListener);
+        // per-match score tooltips (#465)
+        ToolTipManager.sharedInstance().registerComponent(this);
 
         DragTargetOverlay.apply(this, new FileDropInfo(false) {
             @Override
@@ -172,6 +173,33 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 return scrollPane;
             }
         });
+    }
+
+    @Override
+    protected void applyColors() {
+        super.applyColors();
+        rebuildColorAttributes();
+        // Re-render the shown matches with the new colours. Guarded because
+        // this is first called from the superclass constructor, before the
+        // matches list is initialised.
+        if (matches != null && !matches.isEmpty()) {
+            setFoundResult(null, new ArrayList<>(matches));
+        }
+    }
+
+    private void rebuildColorAttributes() {
+        attributesChanged = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_CHANGED.getColor(), null, null, null);
+        attributesUnchanged = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null, null);
+        attributesDeletedActive = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
+        attributesDeletedInactive = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
+        attributesInsertedActive = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
+        attributesInsertedInactive = Styles.createAttributeSet(
+                Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
     }
 
     @Override
@@ -508,9 +536,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
                 int toklength = token.getLength();
                 if ((attributes[i] & StringData.UNIQ) != 0) {
-                    doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
+                    doc.setCharacterAttributes(tokstart, toklength, attributesChanged, false);
                 } else if ((attributes[i] & StringData.PAIR) != 0) {
-                    doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
+                    doc.setCharacterAttributes(tokstart, toklength, attributesUnchanged, false);
                 }
             }
         }
@@ -529,14 +557,14 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         switch (r.type) {
                         case DELETE:
                             doc.setCharacterAttributes(tokstart, r.length,
-                                    i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE
-                                            : ATTRIBUTES_DELETED_INACTIVE,
+                                    i == activeMatch ? attributesDeletedActive
+                                            : attributesDeletedInactive,
                                     false);
                             break;
                         case INSERT:
                             doc.setCharacterAttributes(tokstart, r.length,
-                                    i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE
-                                            : ATTRIBUTES_INSERTED_INACTIVE,
+                                    i == activeMatch ? attributesInsertedActive
+                                            : attributesInsertedInactive,
                                     false);
                             break;
                         case NOCHANGE:
@@ -571,7 +599,58 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         diffInfos.clear();
     }
 
+    /** The index of the match block at the given point, or -1 when there is none. */
+    private int matchIndexAt(Point p) {
+        if (matches == null || matches.isEmpty()) {
+            return -1;
+        }
+        int matchIndex = -1;
+        int mousepos = viewToModel2D(p);
+        for (int i = 0; i < delimiters.size() - 1; i++) {
+            int start = delimiters.get(i);
+            int end = delimiters.get(i + 1);
+            if (mousepos >= start && mousepos < end) {
+                matchIndex = i;
+                break;
+            }
+        }
+        if (matchIndex == -1) {
+            matchIndex = delimiters.size() - 1;
+        }
+        if (matchIndex >= matches.size()) {
+            return -1;
+        }
+        return matchIndex;
+    }
+
+    @Override
+    public String getToolTipText(MouseEvent event) {
+        int index = matchIndexAt(event.getPoint());
+        if (index < 0) {
+            return null;
+        }
+        SourceTextEntry entry = currentlyProcessedEntry;
+        return MatchScoresTooltip.render(index + 1, matches.get(index),
+                entry == null ? null : entry.getSrcText());
+    }
+
+    /** Dismiss delay to restore when the mouse leaves the pane. */
+    private int savedTooltipDismissDelay;
+
     protected final transient MouseListener mouseListener = new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            // Score tooltips carry several lines; keep them up long enough
+            // to read, and restore the global delay on exit.
+            savedTooltipDismissDelay = ToolTipManager.sharedInstance().getDismissDelay();
+            ToolTipManager.sharedInstance().setDismissDelay(60_000);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ToolTipManager.sharedInstance().setDismissDelay(savedTooltipDismissDelay);
+        }
+
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1) {
@@ -594,35 +673,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         private int getClickedItem(Point p) {
-            if (matches == null || matches.isEmpty()) {
-                return -1;
-            }
-
-            // find out the clicked item
-            int clickedItem = -1;
-
-            // where did we click?
-            int mousepos = MatchesTextArea.this.viewToModel2D(p);
-
-            for (int i = 0; i < delimiters.size() - 1; i++) {
-                int start = delimiters.get(i);
-                int end = delimiters.get(i + 1);
-
-                if (mousepos >= start && mousepos < end) {
-                    clickedItem = i;
-                    break;
-                }
-            }
-
-            if (clickedItem == -1) {
-                clickedItem = delimiters.size() - 1;
-            }
-
-            if (clickedItem >= matches.size()) {
-                return -1;
-            }
-
-            return clickedItem;
+            return matchIndexAt(p);
         }
 
         private void doPopup(Point p) {

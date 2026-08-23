@@ -192,10 +192,10 @@
          <para>Els passos següents mostren com assignar la drecera <keycombo> <keycap>Alt</keycap> <keycap>X</keycap> </keycombo> a l'element del menú <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>.</para>
          <orderedlist>
             <listitem>
-               <para>Obriu el fitxer <filename>MainMenuShortcuts.properties</filename> que heu copiat a la <link linkend="configuration.folder" endterm="configuration.folder.title"/> amb un editor de text.</para>
+               <para>Obriu el fitxer <filename>MainMenuShortcuts.properties</filename> que heu copiat a la <link linkend="configuration.folder" role="xref">carpeta de configuració</link> amb un editor de text.</para>
             </listitem>
             <listitem>
-               <para>Com es mostra en la <xref linkend="app.shortcuts.lists.function.codes.edit.menu.table"/> a continuació, el codi de funció per a <guimenuitem>Crea una traducció alternativa</guimenuitem> és <code>editMultipleAlternate</code>.</para>
+               <para>Com es mostra en la <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">taula del menú Edita</link> a continuació, el codi de funció per a <guimenuitem>Crea una traducció alternativa</guimenuitem> és <code>editMultipleAlternate</code>.</para>
                <para>Si cerqueu aquest codi en el fitxer, trobareu la línia següent:</para>
                <para><code>#	editMultipleAlternate=</code></para>
             </listitem>

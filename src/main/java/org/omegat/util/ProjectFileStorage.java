@@ -220,6 +220,9 @@ public final class ProjectFileStorage {
         if (om.getProject().isRemoveTags() != null) {
             result.setRemoveTags(om.getProject().isRemoveTags());
         }
+        if (om.getProject().isMatchNumbers() != null) {
+            result.setMatchNumbersEnabled(om.getProject().isMatchNumbers());
+        }
         if (om.getProject().getExternalCommand() != null) {
             result.setExternalCommand(om.getProject().getExternalCommand());
         }
@@ -275,6 +278,11 @@ public final class ProjectFileStorage {
         om.getProject().setSentenceSeg(props.isSentenceSegmentingEnabled());
         om.getProject().setSupportDefaultTranslations(props.isSupportDefaultTranslations());
         om.getProject().setRemoveTags(props.isRemoveTags());
+        // Opt-in flag: only written when set, so default project files stay
+        // identical to the ones older OmegaT versions write.
+        if (props.isMatchNumbersEnabled()) {
+            om.getProject().setMatchNumbers(true);
+        }
         om.getProject().setExternalCommand(props.getExternalCommand());
 
         if (props.getRepositories() != null && !props.getRepositories().isEmpty()) {

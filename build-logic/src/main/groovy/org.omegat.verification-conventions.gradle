@@ -4,7 +4,6 @@ import org.gradle.api.services.BuildServiceParameters
 import java.util.concurrent.atomic.AtomicReference
 
 plugins {
-    id 'org.omegat.common-utilities'
     id 'application'
     id 'jacoco'
     id 'jacoco-report-aggregation'
@@ -82,7 +81,7 @@ tasks.named("run") {
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn rootProject.configurations.named('moduleDist')
 }
 
 tasks.register('runDebugger', JavaExec) {
@@ -96,7 +95,7 @@ tasks.register('runDebugger', JavaExec) {
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn rootProject.configurations.named('moduleDist')
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -122,7 +121,7 @@ tasks.register('testIntegration', JavaExec) {
     // `gradle -PtestMaxHeapSize=1024M testIntegration`
     maxHeapSize = findProperty('testMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn rootProject.configurations.named('moduleDist')
 }
 
 // Define a shared service to hold the PID

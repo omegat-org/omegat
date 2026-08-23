@@ -193,7 +193,7 @@
             </varlistentry>
          </variablelist>
          <para><literal>${nameOnly}</literal> と<literal> ${extension}</literal> に関しては、追加の変数を使用できます。</para>
-         <para>ファイル名に複数のピリオドを利用するなどでファイル名と拡張子があいまいな場合、使用する構成要素を <literal>${nameOnly-</literal><emphasis>番号</emphasis>} と <literal>${extension-</literal>-<emphasis>番号}</emphasis> の形式で、次に示す例のように指定することができます。</para>
+         <para>ファイル名に複数のピリオドを利用するなどでファイル名と拡張子があいまいな場合、使用する構成要素を <literal>${nameOnly-</literal><emphasis>番号</emphasis>} と <literal>${extension-</literal>-<emphasis>番号}</emphasis> の形式で、次に示す例のように指定できます。</para>
          <example xml:id="target.name.example">
             <title xml:id="target.name.example.title">訳文ファイル名</title>
             <para>文書.xx.docxという名前のソースファイルに対して、以下の変数定義を使用すると、次のような結果になります。</para>
@@ -354,7 +354,7 @@
                   <varlistentry>
                      <term>以下のタグで分節化</term>
                      <listitem>
-                        <para>HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</para>
+                        <para>HTML の &lt;br&gt; タグがある場所を段落とみなして分節化できます。</para>
                      </listitem>
                   </varlistentry>
                   <varlistentry>

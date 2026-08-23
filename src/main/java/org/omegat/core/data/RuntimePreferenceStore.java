@@ -67,6 +67,12 @@ public class RuntimePreferenceStore {
     /** Force use specified config dir. */
     private String configDir;
 
+    /** Configuration properties file given on the command line. */
+    private String configFile;
+
+    /** Resource bundle file given on the command line. */
+    private String resourceBundleFile;
+
     /** Project locking is disabled. */
     private boolean projectLockingDisabled = false;
 
@@ -112,6 +118,42 @@ public class RuntimePreferenceStore {
      */
     public void setConfigDir(String v) {
         configDir = v;
+    }
+
+    /**
+     * Returns the configuration properties file given on the command line.
+     *
+     * @return the configuration file path, or {@code null} if not given
+     */
+    public String getConfigFile() {
+        return configFile;
+    }
+
+    /**
+     * Remembers the configuration properties file given on the command line.
+     *
+     * @param v the configuration file path to set
+     */
+    public void setConfigFile(String v) {
+        configFile = v;
+    }
+
+    /**
+     * Returns the resource bundle file given on the command line.
+     *
+     * @return the resource bundle file path, or {@code null} if not given
+     */
+    public String getResourceBundleFile() {
+        return resourceBundleFile;
+    }
+
+    /**
+     * Remembers the resource bundle file given on the command line.
+     *
+     * @param v the resource bundle file path to set
+     */
+    public void setResourceBundleFile(String v) {
+        resourceBundleFile = v;
     }
 
     public boolean isProjectLockingDisabled() {

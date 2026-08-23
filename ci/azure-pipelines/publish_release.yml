@@ -38,9 +38,9 @@ steps:
         dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${OMEGAT_VERSION}/"
+        destdir="/home/frs/project/omegat/OmegaT - Standard/OmegaT ${OMEGAT_VERSION}/"
         cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
-        lftp --env-password-e "$cmd" $dest
+        lftp --env-password -e "$cmd" $dest
         dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         # Upload manuals
         echo "Push manuals to sourceforge project web"
@@ -48,14 +48,14 @@ steps:
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}/
         target=/home/project-web/omegat/htdocs/manual-standard
         cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
-        lftp --env-password-e "$cmd" $dest
+        lftp --env-password -e "$cmd" $dest
         # Upload javadoc
         echo "Push javadoc to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/javadoc/
         destdir=/home/project-web/omegat/htdocs/javadoc/${OMEGAT_VERSION}/
         target=/home/project-web/omegat/htdocs/javadoc-standard
         cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
-        lftp --env-password-e "$cmd" $dest
+        lftp --env-password -e "$cmd" $dest
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
       SF_HOST: frs.sourceforge.net

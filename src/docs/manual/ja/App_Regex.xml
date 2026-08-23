@@ -30,7 +30,7 @@
       <varlistentry>
          <term>検索</term>
          <listitem>
-            <para>検索には<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>オプションがあり、ファイルを横断して非常に強力な検索を行うことができます。</para>
+            <para>検索には<link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>オプションがあり、ファイルを横断して非常に強力な検索を行えます。</para>
             <para><link linkend="windows.text.replace" endterm="windows.text.replace.title"/>ダイアログの同じオプションを使用すると、検索テキストと置換テキストの両方に正規表現を適用できます。</para>
          </listitem>
       </varlistentry>
@@ -44,7 +44,7 @@
       <varlistentry>
          <term>フラグ付き文字列</term>
          <listitem>
-            <para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> 設定を使用すると、 OmegaT がデフォルトで赤色でマークする文字列を定義し、検証の際に検証対象ではないタグとして扱うことができます。</para>
+            <para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> 設定を使用すると、 OmegaT がデフォルトで赤色でマークする文字列を定義し、検証の際に検証対象ではないタグとして扱えます。</para>
             <para><code>|</code>(OR)文字を使用して、個々の文字列定義を区切ります。</para>
          </listitem>
       </varlistentry>
@@ -104,7 +104,7 @@
             <term><literal>\</literal>文字は非常に特殊な文字です。</term>
             <listitem>
                <para>前述したように、<literal>\</literal>文字には、他の文字の特別な意味をキャンセルまたはアクティブにするというデフォルトの特別な意味があります。特別な意味を持たない文字(デフォルトまたは追加)の前に配置しても効果はありません。</para>
-               <para><literal>\</literal>は、<literal>\\</literal>という形式に二重化することによって、それ自体の特別な意味をキャンセルすることができます。これは、単に<emphasis>バックスラッシュ</emphasis>文字自体に一致します。</para>
+               <para><literal>\</literal>は、<literal>\\</literal>という形式に二重化することによって、それ自体の特別な意味をキャンセルできます。これは、単に<emphasis>バックスラッシュ</emphasis>文字自体に一致します。</para>
             </listitem>
          </varlistentry>
       </variablelist>
@@ -515,7 +515,7 @@
             <listitem>
                <para>この文字は<emphasis>グループ</emphasis>を開始します。グループとは、1つの単位として扱われる文字のセットです。グループには番号が付けられ、その内容グループはメモリに格納されます。これらは、後で<literal>\<option>n</option></literal>を使用して検索式で再利用できます。ここで、<option>n</option>はグループの番号です。</para>
                <note>
-                  <para>グループの内容は、<link linkend="windows.text.replace" endterm="windows.text.replace.title"/>でも使用できます。検索で定義された<option>n</option> 番目のグループを参照するには<literal>$<option>n</option></literal> を使用します。</para>
+                  <para>グループの内容は、置換テキストでも使用できます。<link linkend="windows.text.replace" endterm="windows.text.replace.title"/>参照。検索で定義された<option>n</option> 番目のグループを参照するには<literal>$<option>n</option></literal> を使用します。</para>
                </note>
                <para>開始と終了のペアでは、常に括弧が使用されます。開き括弧または閉じ括弧だけを単独で使用しようとすると、エラーが発生します。</para>
                <informaltable>

@@ -11,7 +11,9 @@ steps:
           https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jre_x64_windows_hotspot_25.0.3_9.zip
         )
         for url in "${jres[@]}"; do
-          curl -L -O "$url"
+          file="$(basename "$url")"
+          curl -fL "$url" -o "$file"
+          unzip -tq "$file" || { echo "##vso[task.logissue type=error]Downloaded file is not a valid zip: $file"; exit 1; }
         done
   - task: Cache@2
     displayName: 'Cache Gradle'

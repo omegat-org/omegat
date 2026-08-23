@@ -20,7 +20,7 @@ OmegaT koristi više biblioteka. Licence svake pojedine biblioteke navedene su u
 Preduvjeti za instaliranje programa OmegaT
 ==========================================
 
-Za korištenje programa OmegaT morate na računalu imati instaliran Java Runtime Environment (JRE) inačice 1.8 ili novije.
+Za korištenje programa OmegaT morate na računalu imati instaliran Java Runtime Environment (JRE) inačice 11 ili novije.
 
 Preporučujemo instalacijske pakete OmegaT koji obuhvaćaju JRE, čime ćete biti pošteđeni brige oko njegovoga odabira, preuzimanja i instaliranja.
 

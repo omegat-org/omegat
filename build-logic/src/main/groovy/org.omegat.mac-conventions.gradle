@@ -1,6 +1,8 @@
 import java.util.zip.ZipFile
 
+import org.omegat.gradle.DistPathUtil
 import org.omegat.gradle.InjectedOps
+import org.omegat.gradle.SignNativeJarTask
 
 configurations {
     genMac
@@ -14,8 +16,10 @@ dependencies {
     genMac(libs.evolvedbinary.appbundler)
 }
 
+def ops = project.objects.newInstance(InjectedOps)
 tasks.register('genMac') {
     def appbundlerClasspath = configurations.genMac.asPath
+    def iconFile = layout.settingsDirectory.file('images/OmegaT.icns').asFile.absolutePath
     def outDir = layout.buildDirectory.dir("appbundler")
     def appName = project.property('org.omegat.appName')
     def appClass = project.property('org.omegat.mainClassName')
@@ -24,7 +28,6 @@ tasks.register('genMac') {
     // $APP_ROOT is expanded at runtime by the launcher binary
     def configFile = '$APP_ROOT/Contents/Resources/Configuration.properties'
     def macSpecificDir = layout.projectDirectory.dir('release/mac-specific/OmegaT.app')
-    def fs = project.objects.newInstance(InjectedOps).fs
 
     description = 'Generates the macOS .app skeleton. Depends on AppBundler (https://github.com/TheInfiniteKind/appbundler).'
     inputs.files(configurations.genMac)
@@ -35,6 +38,7 @@ tasks.register('genMac') {
     inputs.property('ver', ver)
     inputs.property('jvmRequired', jvmRequired)
     inputs.property('configFile', configFile)
+    inputs.property('iconFile', iconFile)
     inputs.dir(macSpecificDir)
             .withPropertyName('macSpecificOverrides')
             .withPathSensitivity(PathSensitivity.RELATIVE)
@@ -51,7 +55,7 @@ tasks.register('genMac') {
                 displayname: appName,
                 executablename: appName,
                 identifier: 'org.omegat.OmegaT',
-                icon: 'images/OmegaT.icns',
+                icon: iconFile,
                 version: ver,
                 jvmrequired: jvmRequired,
                 shortversion: ver,
@@ -63,13 +67,13 @@ tasks.register('genMac') {
             bundledocument(extensions: 'project',
                     name: "${appName} Project",
                     role: 'editor',
-                    icon: 'images/OmegaT.icns')
+                    icon: iconFile)
             bundledocument(extensions: '*',
                     name: 'All Files',
                     role: 'none')
             plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
-        fs.copy {
+        ops.fs.copy {
             from(macSpecificDir) {
                 include '**/*.lproj/Localizable.strings'
             }
@@ -81,7 +85,7 @@ tasks.register('genMac') {
 }
 
 // Returns true if the given jar bundles at least one macOS native library.
-ext.jarContainsMacNativeLibs = { File jar ->
+def jarContainsMacNativeLibs = { File jar ->
     if (!jar.name.endsWith('.jar') || !jar.exists()) return false
     def zf = new ZipFile(jar)
     try {
@@ -91,6 +95,15 @@ ext.jarContainsMacNativeLibs = { File jar ->
     } finally {
         zf.close()
     }
+}
+
+def conditions = { List... items ->
+    items.each { val, str ->
+        if (!val) {
+            logger.warn(str)
+        }
+    }
+    items.every { it[0] }
 }
 
 /*
@@ -107,40 +120,30 @@ ext.jarContainsMacNativeLibs = { File jar ->
  * and the original jar names in ext.signedNativeLibJarNames, so the distribution
  * can replace the unsigned originals with the signed jars.
  */
+def macSigned = project.hasProperty('macCodesignIdentity')
+def macCodesignIdentity = macSigned ? project.findProperty('macCodesignIdentity').toString() : null
+def entitlementsFile = project.layout.projectDirectory.file('release/mac-specific/java.entitlements')
 ext.makeNativeLibsSignTask = {
     def nativeLibJars = configurations.runtimeClasspath.files.findAll { jarContainsMacNativeLibs(it) }
     ext.signedNativeLibJarNames = nativeLibJars.collect { it.name }
-    ext.signedNativeLibJarTasks = nativeLibJars.collect { jar ->
-        def taskId = jar.name.replaceAll(/\.jar$/, '').replaceAll(/[^A-Za-z0-9]/, '_')
-        def contentsDir = layout.buildDirectory.dir("signedNativeLibs/${taskId}").get().asFile
-
-        def contentsTask = tasks.register("signNativeLibContents_${taskId}", Sync) {
+    ext.signedNativeLibJarTasks = nativeLibJars.collect { dep ->
+        def taskId = dep.name.replaceAll(/\.jar$/, '').replaceAll(/[^A-Za-z0-9]/, '_')
+        def signTask = tasks.register("signNativeLibContents_${taskId}", SignNativeJarTask) {
             onlyIf {
                 // Set macCodesignIdentity in e.g. local.properties
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
-                        [exePresent('codesign'), 'codesign command is not present in system.'])
+                conditions([macSigned, 'Code signing property not set'])
             }
-            from zipTree(jar)
-            destinationDir = contentsDir
-            def macCodesignIdentity = project.property('macCodesignIdentity')
-            doLast {
-                def dylibs = fileTree(dir: destinationDir, includes: ['**/*.dylib', '**/*.jnilib']).files
-                injected.execOps.exec {
-                    commandLine(['codesign', '--deep', '--force',
-                            '--sign', macCodesignIdentity,
-                            '--timestamp',
-                            '--options', 'runtime',
-                            '--entitlements', file('release/mac-specific/java.entitlements')] + dylibs.toList())
-                }
-            }
+            sourceJar.set(dep)
+            signingIdentity.set(macCodesignIdentity)
+            entitlements.set(entitlementsFile)
+            stagingDir.set(layout.buildDirectory.dir("signedNativeLibs/${taskId}"))
         }
 
         tasks.register("signNativeLibJar_${taskId}", Jar) {
             onlyIf {
-                conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
-                        [exePresent('codesign'), 'codesign command is not present in system.'])
+                conditions([macSigned, 'Code signing property not set'])
             }
-            from contentsTask
+            from signTask
             archiveFileName.set(jar.name)
             destinationDirectory = layout.buildDirectory.dir('signedNativeLibJars')
         }
@@ -153,7 +156,14 @@ ext.makeMacTask = { args ->
     def parentTask = tasks.getByName(args.parentTaskName)
     def versionPart = project.ext.omtVersion.version + project.ext.omtVersion.beta
     def appName = project.property('org.omegat.appName')
-    def outDir = layout.buildDirectory.dir("install/${appName}-${versionPart}-${args.suffix}").get().asFile
+
+    def outDir = layout.buildDirectory.dir("install/${appName}-${versionPart}-${args.suffix}")
+    def jreDir = outDir.map {it.dir("OmegaT.app/Contents/PlugIns/jre.bundle")}
+    def inputJar = layout.buildDirectory.file('libs/OmegaT.jar')
+    def bundledJar = outDir.map { it.file("OmegaT.app/Contents/Java/OmegaT.jar")}
+
+    def signedDistDir = layout.buildDirectory.file("install/${appName}-${versionPart}-${args.suffix}_Signed")
+    def appBundleDir = layout.buildDirectory.file("install/${appName}-${versionPart}-${args.suffix}_Signed/OmegaT.app")
 
     def installTask = tasks.register(installTaskName, Sync) {
         description = 'Builds the macOS distribution.'
@@ -172,31 +182,32 @@ ext.makeMacTask = { args ->
                 into 'OmegaT.app/Contents/PlugIns'
                 includeEmptyDirs = false
                 eachFile {
-                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
+                    DistPathUtil.replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                 }
             }
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        destinationDir = outDir
+        destinationDir = outDir.get().asFile
         outputs.upToDateWhen {
             // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
-            def f1 = file("$destinationDir/OmegaT.app/Contents/Java/OmegaT.jar")
-            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            def f1 = bundledJar.get().asFile
+            def f2 = inputJar.get().asFile
             f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
         }
         doFirst {
-            delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+            ops.fs.delete {
+                delete(jreDir.get().asFile)
+            }
         }
         group = 'distribution'
     }
 
-    def signedInstallTask = tasks.register(signedInstallTaskName, Sync) {
+    tasks.register(signedInstallTaskName, Sync) {
         description = 'Builds the signed macOS distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
-            conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
-                    [args.jrePath && !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('codesign'), 'codesign command is not present in system.'])
+            conditions([macSigned, 'Code signing property not set'],
+                    [args.jrePath && !args.jrePath.empty, 'JRE not found'])
         }
         // Replace the unsigned native-library jars with versions whose *.dylib /
         // *.jnilib have been codesigned (codesign --deep does not descend into jars).
@@ -207,19 +218,16 @@ ext.makeMacTask = { args ->
             from(files(signedNativeLibJarTasks))
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${versionPart}-${args.suffix}_Signed"))
-        doFirst {
-            delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
-        }
-        def macCodesignIdentity = project.findProperty('macCodesignIdentity')
+        destinationDir = signedDistDir.get().asFile
         doLast {
+            def appBundle = appBundleDir.get().asFile
             injected.execOps.exec {
                 commandLine 'codesign', '--deep', '--force',
                         '--sign', macCodesignIdentity,
                         '--timestamp',
                         '--options', 'runtime',
-                        '--entitlements', file('release/mac-specific/java.entitlements'),
-                        file("${destinationDir}/OmegaT.app")
+                        '--entitlements', entitlementsFile,
+                        appBundle
             }
         }
         group = 'distribution'

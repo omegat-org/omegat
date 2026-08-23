@@ -50,6 +50,7 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.validator.routines.UrlValidator;
 
+import org.omegat.util.StringUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -270,7 +271,7 @@ public final class JTextPaneLinkifier {
                 try {
                     DesktopWrapper.browse(target);
                 } catch (Exception e) {
-                    JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
+                    JOptionPane.showConfirmDialog(null, StringUtil.describeException(e),
                             OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     Log.log(e);
                 }

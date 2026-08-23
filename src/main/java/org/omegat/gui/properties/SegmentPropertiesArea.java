@@ -51,6 +51,7 @@ import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -76,11 +77,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
             Locale.getDefault()).withZone(ZoneId.systemDefault());
 
     private static final String KEY_ISDUP = "isDup";
-    private static final String KEY_FILE = "file";
-    private static final String KEY_ID = "id";
+    private static final String KEY_FILE = SegmentProperties.FILE;
+    private static final String KEY_ID = SegmentProperties.ID;
     private static final String KEY_TRANSLATION = "translation";
     private static final String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
-    private static final String KEY_PATH = "path";
+    private static final String KEY_PATH = SegmentProperties.PATH;
     private static final String KEY_HASNOTE = "hasNote";
     private static final String KEY_HASCOMMENT = "hasComment";
     private static final String KEY_CHANGED = "changed";
@@ -117,10 +118,15 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         });
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
+        CoreEvents.registerColorsChangedEventListener(() -> {
+            applyColors();
+            if (viewImpl != null) {
+                viewImpl.applyColors();
+                viewImpl.update();
+            }
+        });
 
-        scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        scrollPane.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
-        scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyColors();
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
         String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);
@@ -132,6 +138,12 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
+    }
+
+    private void applyColors() {
+        scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        scrollPane.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        scrollPane.getViewport().setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     public void addPropertyChangeListener(String key, PropertyChangeListener l) {

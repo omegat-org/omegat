@@ -407,6 +407,14 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(removeTagsCheckBox, gbc);
 
+        // Numbers in fuzzy matching
+        Mnemonics.setLocalizedText(matchNumbersCheckBox, OStrings.getString("PP_MATCH_NUMBERS"));
+        matchNumbersCheckBox.setName(MATCH_NUMBERS_CB_NAME);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        optionsBox.add(matchNumbersCheckBox, gbc);
+
         return optionsBox;
     }
     
@@ -658,6 +666,7 @@ public class ProjectPropertiesDialog extends JDialog {
         sentenceSegmentingCheckBox.setEnabled(false);
         allowDefaultsCheckBox.setEnabled(false);
         removeTagsCheckBox.setEnabled(false);
+        matchNumbersCheckBox.setEnabled(false);
         externalCommandTextArea.setEnabled(false);
         insertButton.setEnabled(false);
         variablesList.setEnabled(false);
@@ -764,6 +773,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
     // Remove Tags
     JCheckBox removeTagsCheckBox = new JCheckBox();
+
+    // Numbers in fuzzy matching
+    JCheckBox matchNumbersCheckBox = new JCheckBox();
     JButton exportTMBrowse = new JButton();
     JButton sentenceSegmentingButton = new JButton();
 
@@ -826,6 +838,7 @@ public class ProjectPropertiesDialog extends JDialog {
     public static final String SENTENCE_SEGMENTING_BUTTON_NAME = "project_properties_sentence_segmenting_button";
     public static final String ALLOW_DEFAULTS_CB_NAME = "project_properties_allow_defaults_cb";
     public static final String REMOVE_TAGS_CB_NAME = "project_properties_remove_tags_cb";
+    public static final String MATCH_NUMBERS_CB_NAME = "project_properties_match_numbers_cb";
     public static final String EXPORT_TM_BROWSE_BUTTON_NAME = "project_properties_export_tm_browse_button";
     public static final String FILE_FILTER_BUTTON_NAME = "project_properties_file_filter_button";
     public static final String EXPORT_TM_ROOT_FIELD_NAME = "project_properties_export_tm_root_field";

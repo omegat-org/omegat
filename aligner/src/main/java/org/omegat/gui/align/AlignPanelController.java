@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -112,6 +113,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
 import org.omegat.util.gui.RoundedCornerBorder;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
 
 import gen.core.filters.Filters;
@@ -226,6 +228,7 @@ public class AlignPanelController {
             AlgorithmClass newValue = (AlgorithmClass) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.algorithmClass && confirmReset(alignMenuFrame)) {
                 aligner.algorithmClass = newValue;
+                persistSettings(aligner);
                 reloadBeads(aligner);
             } else {
                 alignPanel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
@@ -238,6 +241,7 @@ public class AlignPanelController {
             CalculatorType newValue = (CalculatorType) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.calculatorType && confirmReset(alignMenuFrame)) {
                 aligner.calculatorType = newValue;
+                persistSettings(aligner);
                 reloadBeads(aligner);
             } else {
                 alignPanel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
@@ -250,6 +254,7 @@ public class AlignPanelController {
             CounterType newValue = (CounterType) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.counterType && confirmReset(alignMenuFrame)) {
                 aligner.counterType = newValue;
+                persistSettings(aligner);
                 reloadBeads(aligner);
             } else {
                 alignPanel.counterComboBox.setSelectedItem(aligner.counterType);
@@ -262,6 +267,7 @@ public class AlignPanelController {
             boolean newValue = ((AbstractButton) e.getSource()).isSelected();
             if (newValue != aligner.segment && confirmReset(alignMenuFrame)) {
                 aligner.segment = newValue;
+                persistSettings(aligner);
                 reloadBeads(aligner);
             } else {
                 alignPanel.segmentingCheckBox.setSelected(aligner.segment);
@@ -384,7 +390,13 @@ public class AlignPanelController {
             }
             while (true) {
                 JFileChooser chooser = new JFileChooser();
-                chooser.setSelectedFile(new File(defaultSaveDir, getOutFileName(aligner)));
+                // Offer the directory of the last saved TMX first, so that
+                // aligning several file pairs in a row does not require
+                // navigating to the same location again (feature request
+                // #1358).
+                String lastSaveDir = Preferences.getPreferenceDefault(AlignerPrefs.ALIGNER_LAST_SAVE_DIR, "");
+                String startDir = StringUtil.isEmpty(lastSaveDir) ? defaultSaveDir : lastSaveDir;
+                chooser.setSelectedFile(new File(startDir, getOutFileName(aligner)));
                 chooser.setDialogTitle(BUNDLE.getString("ALIGNER_PANEL_DIALOG_SAVE"));
                 if (JFileChooser.APPROVE_OPTION == chooser.showSaveDialog(alignMenuFrame)) {
                     File file = chooser.getSelectedFile();
@@ -403,6 +415,7 @@ public class AlignPanelController {
                             aligner.writePairsToTMX(file,
                                     MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
                             modified = false;
+                            Preferences.setPreference(AlignerPrefs.ALIGNER_LAST_SAVE_DIR, file.getParent());
                         } else {
                             throw new IllegalArgumentException("srcLang and trgLang must not be null");
                         }
@@ -423,6 +436,7 @@ public class AlignPanelController {
             if (confirmReset(alignMenuFrame)) {
                 if (phase == Phase.ALIGN) {
                     aligner.restoreDefaults();
+                    persistSettings(aligner);
                 }
                 reloadBeads(aligner);
             }
@@ -442,6 +456,7 @@ public class AlignPanelController {
             boolean newValue = ((AbstractButton) e.getSource()).isSelected();
             if (newValue != aligner.removeTags && confirmReset(alignMenuFrame)) {
                 aligner.removeTags = newValue;
+                persistSettings(aligner);
                 aligner.clearLoaded();
                 reloadBeads(aligner);
             } else {
@@ -550,6 +565,7 @@ public class AlignPanelController {
         CoreEvents.registerFontChangedEventListener(alignPanel.table::setFont);
 
         // Set initial state
+        restorePersistedSettings(aligner);
         updateHighlight();
         updatePanel(aligner);
         reloadBeads(aligner);
@@ -557,8 +573,56 @@ public class AlignPanelController {
         alignMenuFrame.add(alignPanel);
         alignMenuFrame.pack();
         alignMenuFrame.setMinimumSize(alignMenuFrame.getSize());
-        alignMenuFrame.setLocationRelativeTo(parent);
+        // Reuse position and size from the previous aligner session (feature
+        // request #1456); center on the parent only on the very first run.
+        boolean hasStoredGeometry = StaticUIUtils
+                .hasStoredGeometry(AlignerPrefs.ALIGNER_WINDOW_GEOMETRY_PREFIX);
+        StaticUIUtils.persistGeometry(alignMenuFrame, AlignerPrefs.ALIGNER_WINDOW_GEOMETRY_PREFIX);
+        if (!hasStoredGeometry) {
+            alignMenuFrame.setLocationRelativeTo(parent);
+        }
         alignMenuFrame.setVisible(true);
+    }
+
+    /**
+     * Restore the align parameters chosen in a previous aligner session
+     * (feature request #1456). The comparison mode is deliberately not
+     * restored: which modes are available depends on the files being aligned,
+     * and loading the files picks the best mode automatically.
+     *
+     * @param aligner
+     *            aligner to apply the stored parameters to
+     */
+    static void restorePersistedSettings(Aligner aligner) {
+        aligner.algorithmClass = Preferences.getPreferenceEnumDefault(AlignerPrefs.ALIGNER_ALGORITHM_CLASS,
+                aligner.algorithmClass);
+        aligner.calculatorType = Preferences.getPreferenceEnumDefault(AlignerPrefs.ALIGNER_CALCULATOR_TYPE,
+                aligner.calculatorType);
+        aligner.counterType = Preferences.getPreferenceEnumDefault(AlignerPrefs.ALIGNER_COUNTER_TYPE,
+                aligner.counterType);
+        aligner.segment = Preferences.isPreferenceDefault(AlignerPrefs.ALIGNER_SEGMENT, aligner.segment);
+        aligner.removeTags = Preferences.isPreferenceDefault(AlignerPrefs.ALIGNER_REMOVE_TAGS,
+                aligner.removeTags);
+    }
+
+    /**
+     * Remember the current align parameters for the next aligner session.
+     *
+     * @param aligner
+     *            aligner whose parameters are stored
+     */
+    static void persistSettings(Aligner aligner) {
+        if (aligner.algorithmClass != null) {
+            Preferences.setPreference(AlignerPrefs.ALIGNER_ALGORITHM_CLASS, aligner.algorithmClass.name());
+        }
+        if (aligner.calculatorType != null) {
+            Preferences.setPreference(AlignerPrefs.ALIGNER_CALCULATOR_TYPE, aligner.calculatorType.name());
+        }
+        if (aligner.counterType != null) {
+            Preferences.setPreference(AlignerPrefs.ALIGNER_COUNTER_TYPE, aligner.counterType.name());
+        }
+        Preferences.setPreference(AlignerPrefs.ALIGNER_SEGMENT, aligner.segment);
+        Preferences.setPreference(AlignerPrefs.ALIGNER_REMOVE_TAGS, aligner.removeTags);
     }
 
     private static void setKeyboardShortcut(JComponent comp, Object actionName, char stroke) {

@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew genJAXB
         id: gradle
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2026.1
+        uses: JetBrains/qodana-action@v2026.2
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
@@ -37,4 +37,4 @@ jobs:
           cache-default-branch-only: true
           use-annotations: true
           upload-result: true
-          args: --baseline,qodana.sarif.json
+          args: --baseline,tool/qodana.sarif.json

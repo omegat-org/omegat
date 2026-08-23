@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+<header datatype="plaintext" srclang="en" adminlang="EN-US" o-tmf="OmegaT TMX" segtype="sentence"
+creationtoolversion="test" creationtool="test"/>
+  <body>
+<!-- number-only segment: an ISO date -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>2007-11-21</seg>
+      </tuv>
+      <tuv xml:lang="cs">
+        <seg>21. listopadu 2007</seg>
+      </tuv>
+    </tu>
+<!-- number-only segment: a plain integer -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>99999</seg>
+      </tuv>
+      <tuv xml:lang="cs">
+        <seg>99 999</seg>
+      </tuv>
+    </tu>
+<!-- prose differing only in the contained number -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The meeting takes place on 2007-11-21 in the main hall.</seg>
+      </tuv>
+      <tuv xml:lang="cs">
+        <seg>Schůzka se koná 21. listopadu 2007 v hlavním sále.</seg>
+      </tuv>
+    </tu>
+<!-- prose with a Roman numeral -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Chapter XII</seg>
+      </tuv>
+      <tuv xml:lang="cs">
+        <seg>Kapitola XII</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

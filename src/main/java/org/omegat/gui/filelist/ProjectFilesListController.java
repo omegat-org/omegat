@@ -51,6 +51,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.math.RoundingMode;
@@ -104,7 +105,10 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IColorsChangedEventListener;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Java8Compat;
@@ -164,6 +168,16 @@ public class ProjectFilesListController implements IProjectFilesList {
 
     private final Font defaultFont;
 
+    /**
+     * The global (static-registry) listeners this controller registers, kept
+     * so {@link #dispose()} can unregister them again.
+     */
+    private final IProjectEventListener projectListener;
+    private final IEntryEventListener entryListener;
+    private final IFontChangedEventListener fontListener;
+    private final IColorsChangedEventListener colorsListener;
+    private final PropertyChangeListener showProgressListener;
+
     public ProjectFilesListController() {
 
         list = new ProjectFilesList();
@@ -218,8 +232,8 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         // set the position and size
         initWindowLayout();
-        Preferences.addPropertyChangeListener(Preferences.PROJECT_FILES_SHOW_PROGRESS,
-                e -> SwingUtilities.invokeLater(this::updateProjectFilesProgressDisplay));
+        showProgressListener = e -> SwingUtilities.invokeLater(this::updateProjectFilesProgressDisplay);
+        Preferences.addPropertyChangeListener(Preferences.PROJECT_FILES_SHOW_PROGRESS, showProgressListener);
 
         list.m_addNewFileButton.addActionListener(e -> doImportSourceFiles());
         list.m_wikiImportButton.addActionListener(e -> doWikiImport());
@@ -243,7 +257,12 @@ public class ProjectFilesListController implements IProjectFilesList {
             }
         });
 
-        CoreEvents.registerProjectChangeListener(eventType -> {
+        // The progress-column colours are read per cell paint, so a repaint
+        // is enough to pick up a colour change without a restart.
+        colorsListener = () -> list.tableFiles.repaint();
+        CoreEvents.registerColorsChangedEventListener(colorsListener);
+
+        projectListener = eventType -> {
             switch (eventType) {
             case CLOSE:
                 // Drop every reference to the closed project's file list: the
@@ -277,9 +296,10 @@ public class ProjectFilesListController implements IProjectFilesList {
             default:
                 // Nothing
             }
-        });
+        };
+        CoreEvents.registerProjectChangeListener(projectListener);
 
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+        entryListener = new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
                 list.tableFiles.repaint();
@@ -304,14 +324,16 @@ public class ProjectFilesListController implements IProjectFilesList {
                     model.fireTableDataChanged();
                 }
             }
-        });
+        };
+        CoreEvents.registerEntryEventListener(entryListener);
 
-        CoreEvents.registerFontChangedEventListener(newFont -> {
+        fontListener = newFont -> {
             if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
                 newFont = defaultFont;
             }
             setFont(newFont);
-        });
+        };
+        CoreEvents.registerFontChangedEventListener(fontListener);
 
         list.tableFiles.addMouseListener(new MouseAdapter() {
             @Override
@@ -393,6 +415,22 @@ public class ProjectFilesListController implements IProjectFilesList {
         list.btnDown.addActionListener(moveAction);
         list.btnFirst.addActionListener(moveAction);
         list.btnLast.addActionListener(moveAction);
+    }
+
+    /**
+     * Unregisters the globally registered listeners and disposes the window.
+     * The controller is defunct afterwards; anything that creates more than
+     * one controller per JVM (tests, embedders) must call this, or the stale
+     * controller keeps reacting to project events forever.
+     */
+    public void dispose() {
+        CoreEvents.unregisterProjectChangeListener(projectListener);
+        CoreEvents.unregisterEntryEventListener(entryListener);
+        CoreEvents.unregisterFontChangedEventListener(fontListener);
+        CoreEvents.unregisterColorsChangedEventListener(colorsListener);
+        Preferences.removePropertyChangeListener(Preferences.PROJECT_FILES_SHOW_PROGRESS,
+                showProgressListener);
+        list.dispose();
     }
 
     private void updateTitle() {

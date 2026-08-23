@@ -169,12 +169,14 @@ public class RemoteRepositoryProvider {
      */
     protected List<Mapping> getMappings(String path, String... forceExcludePaths) {
         List<Mapping> result = new ArrayList<>();
-        for (int i = 0; i < repositoriesDefinitions.size(); i++) {
-            RepositoryDefinition rd = repositoriesDefinitions.get(i);
-            for (RepositoryMapping repoMapping : rd.getMapping()) {
-                Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludePaths);
-                if (m.matches()) {
-                    result.add(m);
+        if (repositoriesDefinitions != null) {
+            for (int i = 0; i < repositoriesDefinitions.size(); i++) {
+                RepositoryDefinition rd = repositoriesDefinitions.get(i);
+                for (RepositoryMapping repoMapping : rd.getMapping()) {
+                    Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludePaths);
+                    if (m.matches()) {
+                        result.add(m);
+                    }
                 }
             }
         }
@@ -330,10 +332,10 @@ public class RemoteRepositoryProvider {
      */
     public void copyFilesFromReposToProject(final String localPath, final String postfix,
             final boolean propagateDelete) throws IOException {
-        String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[] {};
+        String[] myForceExcludes = localPath.isEmpty() ? forceExcludes : new String[] {};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
             m.copyFromRepoToProject(postfix);
-            if (propagateDelete && "".equals(localPath)) {
+            if (propagateDelete && localPath.isEmpty()) {
                 m.propagateDeletes();
             }
         }
@@ -531,7 +533,8 @@ public class RemoteRepositoryProvider {
                 // directory mapping
                 List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
                 excludes.addAll(forceExcludes);
-                copy(from, to, filterPrefix, postfix, repoMapping.getIncludes(), excludes, null);
+                String prefix = filterPrefix == null ? "" : filterPrefix;
+                copy(from, to, prefix, postfix, repoMapping.getIncludes(), excludes, null);
             } else if (!from.exists()) {
                 // e.g. you opened an omegat.properties to download a team
                 // project, but it refers to a remote repo location that doesn't
@@ -560,10 +563,11 @@ public class RemoteRepositoryProvider {
                     withoutLeadingSlash(repoMapping.getRepository()));
             if (from.isDirectory()) {
                 // directory mapping or full mapping
-                List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(),
+                String prefix = filterPrefix == null ? "" : filterPrefix;
+                List<String> files = copy(from, to, prefix, repoMapping.getIncludes(),
                         repoMapping.getExcludes(), eolConversionCharset);
                 String repoSubdir = withoutLeadingSlash(repoMapping.getRepository());
-                if (!"".equals(repoSubdir)) {
+                if (!repoSubdir.isEmpty()) {
                     repoSubdir = withTrailingSlash(repoSubdir);
                 }
                 for (String f : files) {
@@ -571,7 +575,7 @@ public class RemoteRepositoryProvider {
                 }
             } else {
                 // file mapping
-                if (!filterPrefix.equals("/")) {
+                if (!"/".equals(filterPrefix)) {
                     throw new IllegalArgumentException(
                             "Filter prefix should have been '/' for file mapping, but was '" + filterPrefix
                                     + "'");
@@ -584,10 +588,16 @@ public class RemoteRepositoryProvider {
         public File switchToVersion(@Nullable String version) throws Exception {
             repo.switchToVersion(version);
             File to = new File(getRepositoryDir(repoDefinition), repoMapping.getRepository());
+            if (filterPrefix == null) {
+                return to;
+            }
             return new File(to, filterPrefix);
         }
 
         public @Nullable String getVersion() throws Exception {
+            if (filterPrefix == null) {
+                return repo.getFileVersion(repoMapping.getRepository());
+            }
             return repo.getFileVersion(new File(repoMapping.getRepository(), filterPrefix).getPath());
         }
 

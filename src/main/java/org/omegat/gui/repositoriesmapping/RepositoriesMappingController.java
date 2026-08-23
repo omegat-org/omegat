@@ -386,12 +386,22 @@ public class RepositoriesMappingController {
                 return MessageFormat.format(OStrings.getString("RMD_INVALID_DUPLICATE_REPO"), r.url);
             }
         }
+        Set<String> locals = new TreeSet<String>();
         for (RowMapping r : listMapping) {
             if (StringUtil.isEmpty(r.repoUrl)) {
                 return OStrings.getString("RMD_INVALID_BLANK_REPO");
             }
             if (!urls.contains(r.repoUrl)) {
                 return MessageFormat.format(OStrings.getString("RMD_INVALID_UNKNOWN_REPO"), r.repoUrl);
+            }
+            // Two mappings onto the same local folder make every file under
+            // it match more than one mapping, and the project then refuses
+            // to load with "Multiple mappings for file". Leading and
+            // trailing slashes address the same folder, like in the
+            // repository provider's path matching.
+            if (!locals.add(normalizeMapping(r.local).replaceAll("^/+|/+$", ""))) {
+                return MessageFormat.format(OStrings.getString("RMD_INVALID_DUPLICATE_MAPPING"),
+                        normalizeMapping(r.local));
             }
         }
         return null;

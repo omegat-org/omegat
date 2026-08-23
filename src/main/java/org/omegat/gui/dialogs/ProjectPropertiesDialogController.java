@@ -35,6 +35,8 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +83,12 @@ public class ProjectPropertiesDialogController {
     /** Project ExternalFinder config */
     private ExternalFinderConfiguration externalFinderConfig;
 
+    /**
+     * Project team repositories mapping. Buffered like the SRX and filter
+     * settings, so edits reach the live project properties on OK only.
+     */
+    private List<RepositoryDefinition> repositories;
+
     private final List<String> srcExcludes = new ArrayList<>();
 
     /**
@@ -98,6 +106,7 @@ public class ProjectPropertiesDialogController {
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
         this.filters = projectProperties.getProjectFilters();
+        this.repositories = projectProperties.getRepositories();
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
         externalFinderConfig = ExternalFinder.getProjectConfig();
         initFromProperties();
@@ -146,6 +155,15 @@ public class ProjectPropertiesDialogController {
                 doCancel();
             }
         });
+        // The window close button must count as Cancel; without this it
+        // leaves dialogCancelled at its initial false and getResult()
+        // reports the properties as confirmed.
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                doCancel();
+            }
+        });
 
         // Configure locale actions and initialize
         ActionListener sourceLocaleListener = e -> {
@@ -180,9 +198,9 @@ public class ProjectPropertiesDialogController {
 
         dialog.repositoriesButton.addActionListener(e -> {
             RepositoriesMappingDialog rmd = new RepositoriesMappingDialog(parent, true);
-            List<RepositoryDefinition> r = rmd.show(projectProperties.getRepositories());
+            List<RepositoryDefinition> r = rmd.show(repositories);
             if (r != null) {
-                projectProperties.setRepositories(r);
+                repositories = r;
             }
         });
         dialog.externalFinderButton.addActionListener(e -> {
@@ -641,6 +659,7 @@ public class ProjectPropertiesDialogController {
 
         projectProperties.setProjectSRX(srx);
         projectProperties.setProjectFilters(filters);
+        projectProperties.setRepositories(repositories);
         projectProperties.getSourceRootExcludes().clear();
         projectProperties.getSourceRootExcludes().addAll(srcExcludes);
 

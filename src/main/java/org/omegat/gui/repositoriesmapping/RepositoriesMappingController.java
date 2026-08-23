@@ -41,6 +41,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
@@ -69,7 +70,7 @@ public class RepositoriesMappingController {
         }
     }
 
-    private List<RepositoryDefinition> result;
+    private @Nullable List<RepositoryDefinition> result;
     private final RepositoriesMappingPanel repositoriesMappingPanel;
     private AbstractTableModel modelRepo;
     private final List<RowRepo> listRepo;
@@ -443,10 +444,13 @@ public class RepositoriesMappingController {
     }
 
     /**
-     * Result after ok. In embedded use, if onOk() hasn't been called, returns current data snapshot.
+     * Result after a successful onOk(), otherwise null. Embedded users that
+     * want the current table state regardless of confirmation call getData()
+     * explicitly; returning the snapshot from here let a cancelled dialog
+     * apply its table edits anyway.
      */
-    public List<RepositoryDefinition> getResult() {
-        return result != null ? result : getData();
+    public @Nullable List<RepositoryDefinition> getResult() {
+        return result;
     }
 
     String normalizeMapping(String mapping) {

@@ -124,6 +124,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
             if (newEntry.getKey().path != null) {
                 text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
                 text.append(' ');
+                assert newEntry.getKey().path != null;
                 text.append(StringUtil.unescapeLinefeed(newEntry.getKey().path));
                 text.append('\n');
             }

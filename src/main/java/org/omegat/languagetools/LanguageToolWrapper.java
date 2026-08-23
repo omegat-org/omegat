@@ -30,7 +30,6 @@ package org.omegat.languagetools;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,14 +139,7 @@ public final class LanguageToolWrapper {
         if (matches.isEmpty() || ste == null || ste.getProtectedParts().length == 0) {
             return matches;
         }
-        List<int[]> occurrences = new ArrayList<>();
-        for (ProtectedPart pp : ste.getProtectedParts()) {
-            String text = pp.getTextInSourceSegment();
-            int pos = -1;
-            while ((pos = translationText.indexOf(text, pos + 1)) >= 0) {
-                occurrences.add(new int[] { pos, pos + text.length() });
-            }
-        }
+        List<int[]> occurrences = ProtectedPart.occurrencesIn(translationText, ste.getProtectedParts());
         if (occurrences.isEmpty()) {
             return matches;
         }

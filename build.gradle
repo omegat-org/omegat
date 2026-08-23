@@ -454,9 +454,9 @@ distributions {
         contents {
             from(rootDir) {
                 include 'README.md', 'LICENSE', // readme
-                  'build-logic/**', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
+                  'build-logic/**', '.checkstyle', 'config/**', 'images/**', 'lib/**', 'release/**', // build system
                   'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', '*.properties',
-                  'ci/iscc', 'ci/osslsigncode', '.checkstyle', // ci related
+                  'tool/iscc', // package build
                   'src/**', // root project and docs
                   'test-acceptance/**', 'test-integration/**', 'compose.yml', // test codes
                   'scripts/**', // sample scripts

@@ -23,7 +23,7 @@ PGID=`id -g`
 IMAGE=omegatorg/innosetup:innosetup6
 CONTEXT=${TMPDIR}/iscc
 mkdir -p $CONTEXT
-cp -p ci/iscc-entrypoint.sh $CONTEXT/
+cp -p tool/iscc-entrypoint.sh $CONTEXT/
 
 cat << __EOF__  > $CONTEXT/Dockerfile
 FROM docker.io/amake/innosetup:innosetup6-bookworm

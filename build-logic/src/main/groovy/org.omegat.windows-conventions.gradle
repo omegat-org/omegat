@@ -139,7 +139,7 @@ ext.makeWinTask = { args ->
         dependsOn createAllExecutables
     }
 
-    def exe = layout.projectDirectory.file('ci/iscc')
+    def exe = layout.projectDirectory.file('tool/iscc')
     def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
 
     tasks.register(genDistsTaskName, Exec) {

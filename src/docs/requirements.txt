@@ -1,16 +1,8 @@
-mkdocs
-markdown
-jinja2
-mkdocs-material
-pymdown-extensions
-mkdocs-git-revision-date-localized-plugin
 sphinx
 myst-parser
 furo
 linkify-it-py
 sphinx-copybutton
 sphinx-design
-sphinxcontrib-mermaid
 sphinx-last-updated-by-git
-sphinx-copybutton
-sphinx-design
+sphinxcontrib-mermaid

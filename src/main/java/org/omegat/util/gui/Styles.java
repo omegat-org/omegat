@@ -29,6 +29,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
@@ -53,308 +54,330 @@ public final class Styles {
     private Styles() {
     }
 
+    /**
+     * Attribute key under which a text span stores the palette entry its
+     * foreground is bound to. Views resolve the entry when they paint, so a
+     * palette change takes effect with a plain repaint instead of a document
+     * rebuild — the basis for instantaneous colour switching on documents of
+     * any size. A dedicated key object cannot collide with string-valued
+     * attribute keys, mirroring how {@code StyleConstants} defines its keys.
+     */
+    public static final Object EDITOR_COLOR_FOREGROUND = new BindingKey("boundForeground");
+
+    /** Background counterpart of {@link #EDITOR_COLOR_FOREGROUND}. */
+    public static final Object EDITOR_COLOR_BACKGROUND = new BindingKey("boundBackground");
+
+    private static final class BindingKey {
+        private final String name;
+
+        private BindingKey(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "OmegaT." + name;
+        }
+    }
+
+    /**
+     * Apply the current editor base colors (foreground and background) to a
+     * component. Consumers reacting to an
+     * {@link org.omegat.core.events.IColorsChangedEventListener} event should
+     * call this and repaint, rather than re-reading the colors themselves, so
+     * a live color change is reflected everywhere without a restart.
+     */
+    public static void applyColors(Component component) {
+        component.setForeground(EditorColor.COLOR_FOREGROUND.getColor());
+        component.setBackground(EditorColor.COLOR_BACKGROUND.getColor());
+    }
+
+    /**
+     * The configurable application colors.
+     * <p>
+     * Every entry names the UIManager key under which the installed look and
+     * feel provides its default. The default is looked up on every read
+     * instead of being captured once at class-load time, so entries stay
+     * correct when the theme is applied after this class loads or is switched
+     * at runtime. Every entry carries a built-in fallback that mirrors the
+     * bundled light color scheme, so a color resolves even under a look
+     * and feel that defines no OmegaT keys; the bundled themes default
+     * text-like entries to their own base foreground and surface-like
+     * entries to their own base background, which renders exactly like the
+     * former "inherit" behavior.
+     */
     public enum EditorColor {
         /**
          * Background color.
          * <p>
          * Also used for EditorPane.background
          */
-        COLOR_BACKGROUND(OStrings.getString("COLOR_BACKGROUND"), UIManager.getColor("TextPane.background")),
+        COLOR_BACKGROUND("TextPane.background", "#ffffff"),
         /**
          * Foreground color.
          */
-        COLOR_FOREGROUND(OStrings.getString("COLOR_FOREGROUND"), UIManager.getColor("TextPane.foreground")),
+        COLOR_FOREGROUND("TextPane.foreground", "#000000"),
         /**
          * Active source text background.
          */
-        COLOR_ACTIVE_SOURCE(OStrings.getString("COLOR_ACTIVE_SOURCE"),
-                UIManager.getColor("OmegaT.activeSource")),
+        COLOR_ACTIVE_SOURCE("OmegaT.activeSource", "#c0ffc0"),
         /**
          * Active source text foreground.
          */
-        COLOR_ACTIVE_SOURCE_FG(OStrings.getString("COLOR_ACTIVE_SOURCE_FG")),
+        COLOR_ACTIVE_SOURCE_FG("OmegaT.activeSourceForeground", "#000000"),
         /**
          * Active target text background.
          */
-        COLOR_ACTIVE_TARGET(OStrings.getString("COLOR_ACTIVE_TARGET")),
+        COLOR_ACTIVE_TARGET("OmegaT.activeTarget", "#ffffff"),
         /**
          * Active target text foreground.
          */
-        COLOR_ACTIVE_TARGET_FG(OStrings.getString("COLOR_ACTIVE_TARGET_FG")),
+        COLOR_ACTIVE_TARGET_FG("OmegaT.activeTargetForeground", "#000000"),
         /**
          * Segment marker foreground color.
          */
-        COLOR_SEGMENT_MARKER_FG(OStrings.getString("COLOR_SEGMENT_MARKER_FG")),
+        COLOR_SEGMENT_MARKER_FG("OmegaT.segmentMarkerForeground", "#000000"),
         /**
-         * SEgment marker background color.
+         * Segment marker background color.
          */
-        COLOR_SEGMENT_MARKER_BG(OStrings.getString("COLOR_SEGMENT_MARKER_BG")),
+        COLOR_SEGMENT_MARKER_BG("OmegaT.segmentMarkerBackground", "#ffffff"),
         /**
          * source text background.
          */
-        COLOR_SOURCE(OStrings.getString("COLOR_SOURCE"), UIManager.getColor("OmegaT.source")),
+        COLOR_SOURCE("OmegaT.source", "#c0ffc0"),
         /**
          * source text foreground.
          */
-        COLOR_SOURCE_FG(OStrings.getString("COLOR_SOURCE_FG")),
+        COLOR_SOURCE_FG("OmegaT.sourceForeground", "#000000"),
         /**
          * noted segment background.
          */
-        COLOR_NOTED(OStrings.getString("COLOR_NOTED"), UIManager.getColor("OmegaT.noted")),
+        COLOR_NOTED("OmegaT.noted", "#c0ffff"),
         /**
          * noted segment foreground.
          */
-        COLOR_NOTED_FG(OStrings.getString("COLOR_NOTED_FG")),
+        COLOR_NOTED_FG("OmegaT.notedForeground", "#000000"),
         /**
          * untranslated segment background.
          */
-        COLOR_UNTRANSLATED(OStrings.getString("COLOR_UNTRANSLATED"),
-                UIManager.getColor("OmegaT.untranslated")),
+        COLOR_UNTRANSLATED("OmegaT.untranslated", "#c0c0ff"),
         /**
          * untranslated segment foreground.
          */
-        COLOR_UNTRANSLATED_FG(OStrings.getString("COLOR_UNTRANSLATED_FG")),
+        COLOR_UNTRANSLATED_FG("OmegaT.untranslatedForeground", "#000000"),
         /**
          * translated segment background.
          */
-        COLOR_TRANSLATED(OStrings.getString("COLOR_TRANSLATED"), UIManager.getColor("OmegaT.translated")),
+        COLOR_TRANSLATED("OmegaT.translated", "#ffff99"),
         /**
          * translated segment text.
          */
-        COLOR_TRANSLATED_FG(OStrings.getString("COLOR_TRANSLATED_FG")),
+        COLOR_TRANSLATED_FG("OmegaT.translatedForeground", "#000000"),
         /**
          * non unique entry text.
          */
-        COLOR_NON_UNIQUE(OStrings.getString("COLOR_NON_UNIQUE"), UIManager.getColor("OmegaT.nonUnique")),
+        COLOR_NON_UNIQUE("OmegaT.nonUnique", "#666666"),
         /**
-         * non unique entry background.
+         * non unique entry background. Defaults to the theme's subtle
+         * alternating hilite, so repeated segments are tinted out of the box.
          */
-        COLOR_NON_UNIQUE_BG(OStrings.getString("COLOR_NON_UNIQUE_BG")),
+        COLOR_NON_UNIQUE_BG("OmegaT.nonUniqueBackground", "#f5f5f5"),
         /**
          * Modification information background.
          */
-        COLOR_MOD_INFO(OStrings.getString("COLOR_MOD_INFO")),
+        COLOR_MOD_INFO("OmegaT.modInfo", "#ffffff"),
         /**
          * Modification information text.
          */
-        COLOR_MOD_INFO_FG(OStrings.getString("COLOR_MOD_INFO_FG")),
+        COLOR_MOD_INFO_FG("OmegaT.modInfoForeground", "#000000"),
         /**
          * Tags placeholder color.
          */
-        COLOR_PLACEHOLDER(OStrings.getString("COLOR_PLACEHOLDER"), UIManager.getColor("OmegaT.placeholder")),
+        COLOR_PLACEHOLDER("OmegaT.placeholder", "#6b6b6b"),
         /**
          * Flagged text target color.
          */
-        COLOR_REMOVETEXT_TARGET(OStrings.getString("COLOR_REMOVETEXT_TARGET"),
-                UIManager.getColor("OmegaT.removeTextTarget")),
+        COLOR_REMOVETEXT_TARGET("OmegaT.removeTextTarget", "#db0000"),
         /**
          * Non-breakable space character background.
          */
-        COLOR_NBSP(OStrings.getString("COLOR_NBSP"), UIManager.getColor("OmegaT.nbsp")),
+        COLOR_NBSP("OmegaT.nbsp", "#888888"),
         /**
          * White space marker background color.
          */
-        COLOR_WHITESPACE(OStrings.getString("COLOR_WHITESPACE"), UIManager.getColor("OmegaT.whiteSpace")),
+        COLOR_WHITESPACE("OmegaT.whiteSpace", "#808080"),
         /**
          * Bidirectional control characters background color.
          */
-        COLOR_BIDIMARKERS(OStrings.getString("COLOR_BIDIMARKERS"), UIManager.getColor("OmegaT.bidiMarkers")),
+        COLOR_BIDIMARKERS("OmegaT.bidiMarkers", "#c80000"),
         /**
          * Paragraph start delimitation background color.
          */
-        COLOR_PARAGRAPH_START(OStrings.getString("COLOR_PARAGRAPH_START"),
-                UIManager.getColor("OmegaT.paragraphStart")),
+        COLOR_PARAGRAPH_START("OmegaT.paragraphStart", "#888888"),
         /**
          * The background color of a segment comes from MT memory.
          */
-        COLOR_MARK_COMES_FROM_TM_MT(OStrings.getString("COLOR_MARK_COMES_FROM_TM_MT"),
-                UIManager.getColor("OmegaT.markComesFromTmMt")),
+        COLOR_MARK_COMES_FROM_TM_MT("OmegaT.markComesFromTmMt", "#fa8072"),
         /**
          * The background color of a segment comes from ICE memory.
          */
-        COLOR_MARK_COMES_FROM_TM_XICE(OStrings.getString("COLOR_MARK_COMES_FROM_TM_XICE"),
-                UIManager.getColor("OmegaT.markComesFromTmXice")),
+        COLOR_MARK_COMES_FROM_TM_XICE("OmegaT.markComesFromTmXice", "#af76df"),
         /**
          * The background color of a segment comes from 100% memory.
          */
-        COLOR_MARK_COMES_FROM_TM_X100PC(OStrings.getString("COLOR_MARK_COMES_FROM_TM_X100PC"),
-                UIManager.getColor("OmegaT.markComesFromTmX100pc")),
+        COLOR_MARK_COMES_FROM_TM_X100PC("OmegaT.markComesFromTmX100pc", "#ff9408"),
         /**
          * The background color of a segment comes from auto memory.
          */
-        COLOR_MARK_COMES_FROM_TM_XAUTO(OStrings.getString("COLOR_MARK_COMES_FROM_TM_XAUTO"),
-                UIManager.getColor("OmegaT.markComesFromTmXauto")),
+        COLOR_MARK_COMES_FROM_TM_XAUTO("OmegaT.markComesFromTmXauto", "#ffd596"),
         /**
-         * The background color of a segment comes from enforced memroy.
+         * The background color of a segment comes from enforced memory.
          */
-        COLOR_MARK_COMES_FROM_TM_XENFORCED(OStrings.getString("COLOR_MARK_COMES_FROM_TM_XENFORCED"),
-                UIManager.getColor("OmegaT.markComesFromTmXenforced")),
+        COLOR_MARK_COMES_FROM_TM_XENFORCED("OmegaT.markComesFromTmXenforced", "#ffccff"),
         /**
          * Alternative translation highlight color.
          */
-        COLOR_MARK_ALT_TRANSLATION(OStrings.getString("COLOR_MARK_ALT_TRANSLATION"),
-                UIManager.getColor("OmegaT.markAltTranslations")),
+        COLOR_MARK_ALT_TRANSLATION("OmegaT.markAltTranslations", "#33ffff"),
         /**
          * Replace background color.
          */
-        COLOR_REPLACE(OStrings.getString("COLOR_REPLACE"), UIManager.getColor("OmegaT.replace")),
+        COLOR_REPLACE("OmegaT.replace", "#0000ff"),
         /**
          * Language checker suggestion highlight color.
          */
-        COLOR_LANGUAGE_TOOLS(OStrings.getString("COLOR_LANGUAGE_TOOLS"),
-                UIManager.getColor("OmegaT.languageTools")),
+        COLOR_LANGUAGE_TOOLS("OmegaT.languageTools", "#0000ff"),
         /**
          * Glossary matches highlight color.
          */
-        COLOR_TRANSTIPS(OStrings.getString("COLOR_TRANSTIPS"), UIManager.getColor("OmegaT.transTips")),
+        COLOR_TRANSTIPS("OmegaT.transTips", "#0000ff"),
         /**
          * Spellcheck suggestion highlight color.
          */
-        COLOR_SPELLCHECK(OStrings.getString("COLOR_SPELLCHECK"), UIManager.getColor("OmegaT.spellCheck")),
+        COLOR_SPELLCHECK("OmegaT.spellCheck", "#ff0000"),
         /**
          * Terminology suggestion highlight color.
          */
-        COLOR_TERMINOLOGY(OStrings.getString("COLOR_TERMINOLOGY"), UIManager.getColor("OmegaT.terminology")),
+        COLOR_TERMINOLOGY("OmegaT.terminology", "#b84c00"),
         /**
          * Matches changed words background color.
          */
-        COLOR_MATCHES_CHANGED(OStrings.getString("COLOR_MATCHES_CHANGED"),
-                UIManager.getColor("OmegaT.matchesChanged")),
+        COLOR_MATCHES_CHANGED("OmegaT.matchesChanged", "#0000ff"),
         /**
          * Matches unchanged words background color.
          */
-        COLOR_MATCHES_UNCHANGED(OStrings.getString("COLOR_MATCHES_UNCHANGED"),
-                UIManager.getColor("OmegaT.matchesUnchanged")),
+        COLOR_MATCHES_UNCHANGED("OmegaT.matchesUnchanged", "#007a00"),
         /**
-         * Glossary source background color.
+         * Glossary source text color (used as the foreground of glossary hits).
          */
-        COLOR_GLOSSARY_SOURCE(OStrings.getString("COLOR_GLOSSARY_SOURCE")),
+        COLOR_GLOSSARY_SOURCE("OmegaT.glossarySource", "#000000"),
         /**
-         * Glossary target background color.
+         * Glossary target text color (used as the foreground of glossary hits).
          */
-        COLOR_GLOSSARY_TARGET(OStrings.getString("COLOR_GLOSSARY_TARGET")),
+        COLOR_GLOSSARY_TARGET("OmegaT.glossaryTarget", "#000000"),
         /**
-         * Glossary note background color.
+         * Glossary note text color (used as the foreground of glossary hits).
          */
-        COLOR_GLOSSARY_NOTE(OStrings.getString("COLOR_GLOSSARY_NOTE")),
+        COLOR_GLOSSARY_NOTE("OmegaT.glossaryNote", "#000000"),
         /**
-         * Matches deleted active background color.
+         * Matches deleted active text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_ACTIVE(OStrings.getString("COLOR_MATCHES_DEL_ACTIVE")),
+        COLOR_MATCHES_DEL_ACTIVE("OmegaT.matchesDelActive", "#000000"),
         /**
-         * Matches deleted inactive background color.
+         * Matches deleted inactive text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_INACTIVE(OStrings.getString("COLOR_MATCHES_DEL_INACTIVE")),
+        COLOR_MATCHES_DEL_INACTIVE("OmegaT.matchesDelInactive", "#000000"),
         /**
          * Matches inserted active background color.
          */
-        COLOR_MATCHES_INS_ACTIVE(OStrings.getString("COLOR_MATCHES_INS_ACTIVE"),
-                UIManager.getColor("OmegaT.matchesInsActive")),
+        COLOR_MATCHES_INS_ACTIVE("OmegaT.matchesInsActive", "#0000ff"),
         /**
          * Matches inserted inactive background color.
          */
-        COLOR_MATCHES_INS_INACTIVE(OStrings.getString("COLOR_MATCHES_INS_INACTIVE"),
-                UIManager.getColor("OmegaT.matchesInsInactive")),
+        COLOR_MATCHES_INS_INACTIVE("OmegaT.matchesInsInactive", "#6c6c6c"),
         /**
          * Hyperlink highlight color.
          */
-        COLOR_HYPERLINK(OStrings.getString("COLOR_HYPERLINK"), UIManager.getColor("OmegaT.hyperlink")),
+        COLOR_HYPERLINK("OmegaT.hyperlink", "#0000ff"),
         /**
          * Search found mark highlight color.
          */
-        COLOR_SEARCH_FOUND_MARK(OStrings.getString("COLOR_SEARCH_FOUND_MARK"),
-                UIManager.getColor("OmegaT.searchFoundMark")),
+        COLOR_SEARCH_FOUND_MARK("OmegaT.searchFoundMark", "#0000ff"),
         /**
          * Search replace mark highlight color.
          */
-        COLOR_SEARCH_REPLACE_MARK(OStrings.getString("COLOR_SEARCH_REPLACE_MARK"),
-                UIManager.getColor("OmegaT.searchReplaceMark")),
+        COLOR_SEARCH_REPLACE_MARK("OmegaT.searchReplaceMark", "#995c00"),
         /**
          * Notification (steady) color.
          */
-        COLOR_NOTIFICATION_MIN(OStrings.getString("COLOR_NOTIFICATION_MIN"),
-                UIManager.getColor("OmegaT.notificationMin")),
+        COLOR_NOTIFICATION_MIN("OmegaT.notificationMin", "#fff2d4"),
         /**
          * Notification (flash) color.
          */
-        COLOR_NOTIFICATION_MAX(OStrings.getString("COLOR_NOTIFICATION_MAX"),
-                UIManager.getColor("OmegaT.notificationMax")),
+        COLOR_NOTIFICATION_MAX("OmegaT.notificationMax", "#ff9900"),
         /**
          * Aligner "accepted" group color.
          */
-        COLOR_ALIGNER_ACCEPTED(OStrings.getString("COLOR_ALIGNER_ACCEPTED"),
-                UIManager.getColor("OmegaT.alignerAccepted")),
+        COLOR_ALIGNER_ACCEPTED("OmegaT.alignerAccepted", "#15bb45"),
         /**
          * Aligner "needs review" group color.
          */
-        COLOR_ALIGNER_NEEDSREVIEW(OStrings.getString("COLOR_ALIGNER_NEEDSREVIEW"),
-                UIManager.getColor("OmegaT.alignerNeedsReview")),
+        COLOR_ALIGNER_NEEDSREVIEW("OmegaT.alignerNeedsReview", "#ff0000"),
         /**
          * Aligner highlight color.
          */
-        COLOR_ALIGNER_HIGHLIGHT(OStrings.getString("COLOR_ALIGNER_HIGHLIGHT"),
-                UIManager.getColor("OmegaT.alignerHighlight")),
+        COLOR_ALIGNER_HIGHLIGHT("OmegaT.alignerHighlight", "#ffff00"),
         /**
          * Aligner table row highlight color.
          */
-        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(OStrings.getString("COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT"),
-                UIManager.getColor("OmegaT.alignerTableRowHighlight")),
+        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT("OmegaT.alignerTableRowHighlight", "#c8c8c8"),
         /**
          * Source Files low progress color.
          */
-        COLOR_PROJECT_FILES_PROGRESS_LOW(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_LOW"),
-                "OmegaT.projectFilesProgressLow", "#f0b8b4"),
+        COLOR_PROJECT_FILES_PROGRESS_LOW("OmegaT.projectFilesProgressLow", "#f0b8b4"),
         /**
          * Source Files high progress color.
          */
-        COLOR_PROJECT_FILES_PROGRESS_HIGH(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_HIGH"),
-                "OmegaT.projectFilesProgressHigh", "#b7d7b7"),
+        COLOR_PROJECT_FILES_PROGRESS_HIGH("OmegaT.projectFilesProgressHigh", "#b7d7b7"),
         /**
          * Source Files complete progress color.
          */
-        COLOR_PROJECT_FILES_PROGRESS_COMPLETE(OStrings.getString("COLOR_PROJECT_FILES_PROGRESS_COMPLETE"),
-                "OmegaT.projectFilesProgressComplete", "#b8ccf0"),
+        COLOR_PROJECT_FILES_PROGRESS_COMPLETE("OmegaT.projectFilesProgressComplete", "#b8ccf0"),
         /**
-         * Aligner table selected row highlight.
+         * Machine translation selected match highlight.
          */
-        COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(
-                OStrings.getString("COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT"),
-                UIManager.getColor("OmegaT.machinetranslateSelectedHighlight"));
+        COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT("OmegaT.machinetranslateSelectedHighlight", "#ffff00");
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
 
         private final String displayName;
-        private final Color defaultColor;
-        private Color color;
+        private final String uiManagerKey;
+        private final Color fallbackColor;
+        private @Nullable Color color;
 
-        EditorColor(String displayName, Color defaultColor) {
-            this.displayName = displayName;
-            this.color = defaultColor;
-            this.defaultColor = defaultColor;
+        /**
+         * A color whose default is provided by the installed look and feel
+         * under {@code uiManagerKey}, with {@code fallbackHex} taking over
+         * when no theme defines the key.
+         */
+        EditorColor(String uiManagerKey, String fallbackHex) {
+            this(uiManagerKey, Color.decode(fallbackHex));
+        }
+
+        EditorColor(String uiManagerKey, Color fallbackColor) {
+            this.displayName = OStrings.getString(name());
+            this.uiManagerKey = uiManagerKey;
+            this.fallbackColor = fallbackColor;
             setColorFromPreference();
-        }
-
-        EditorColor(String displayName, String defaultColor) {
-            this(displayName, Color.decode(defaultColor));
-        }
-
-        EditorColor(String displayName, String uiManagerKey, String defaultColor) {
-            this(displayName, getColor(uiManagerKey, defaultColor));
-        }
-
-        EditorColor(String displayName) {
-            this.displayName = displayName;
-            this.color = null;
-            this.defaultColor = null;
-            setColorFromPreference();
-        }
-
-        private static Color getColor(String uiManagerKey, String defaultColor) {
-            Color color = UIManager.getColor(uiManagerKey);
-            return color == null ? Color.decode(defaultColor) : color;
         }
 
         private void setColorFromPreference() {
+            if (!Preferences.isInitialized()) {
+                // Standalone look-and-feel usage (theme preview tools, doc
+                // generators) loads this enum before the application
+                // initializes preferences; themed defaults still resolve,
+                // only user overrides cannot apply.
+                return;
+            }
             String prefColor = Preferences.getPreferenceDefault(name(), null);
             if (prefColor != null && !DEFAULT_COLOR.equals(prefColor)) {
                 try {
@@ -365,25 +388,54 @@ public final class Styles {
             }
         }
 
+        /**
+         * The color currently in effect as {@code #rrggbb}.
+         */
         public String toHex() {
-            return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+            Color c = getColor();
+            return String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
         }
 
+        /**
+         * The color currently in effect: the user-configured color if one
+         * is set, otherwise {@link #getDefault()}.
+         */
         public Color getColor() {
-            return color;
+            return color != null ? color : getDefault();
         }
 
+        /**
+         * The default for the installed look and feel: the UIManager value
+         * under {@link #getUIManagerKey()} when the theme defines the key,
+         * otherwise the built-in fallback.
+         */
         public Color getDefault() {
-            return defaultColor;
+            Color themed = UIManager.getColor(uiManagerKey);
+            return themed != null ? themed : fallbackColor;
+        }
+
+        /**
+         * The UIManager key under which themes provide the default for this
+         * color. Theme classes should reference this accessor instead of
+         * repeating the string literal, so a key typo cannot silently
+         * disconnect a theme from the color it means to style.
+         */
+        public String getUIManagerKey() {
+            return uiManagerKey;
         }
 
         public String getDisplayName() {
             return displayName;
         }
 
-        public void setColor(Color newColor) {
-            if (newColor == null || newColor.equals(defaultColor)) {
-                color = defaultColor;
+        /**
+         * Set the user-configured color. Passing {@code null} — or a color
+         * equal to the current default — resets the entry, so it keeps
+         * following the (theme-dependent) default from then on.
+         */
+        public void setColor(@Nullable Color newColor) {
+            if (newColor == null || newColor.equals(getDefault())) {
+                color = null;
                 Preferences.setPreference(name(), DEFAULT_COLOR);
             } else {
                 color = newColor;
@@ -436,5 +488,48 @@ public final class Styles {
         }
 
         return r;
+    }
+
+    /**
+     * Construct an attribute set whose colors stay bound to the given palette
+     * entries. The colors currently in effect are baked in under the plain
+     * {@link StyleConstants} keys for consumers that read those directly; the
+     * entries themselves ride along under {@link #EDITOR_COLOR_FOREGROUND}
+     * and {@link #EDITOR_COLOR_BACKGROUND}, so painting resolves the palette
+     * at draw time and a palette change needs no re-attribution.
+     */
+    public static AttributeSet createBoundAttributeSet(@Nullable EditorColor foreground,
+            @Nullable EditorColor background, @Nullable Boolean bold, @Nullable Boolean italic) {
+        MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(
+                foreground == null ? null : foreground.getColor(),
+                background == null ? null : background.getColor(), bold, italic);
+        if (foreground != null) {
+            r.addAttribute(EDITOR_COLOR_FOREGROUND, foreground);
+        }
+        if (background != null) {
+            r.addAttribute(EDITOR_COLOR_BACKGROUND, background);
+        }
+        return r;
+    }
+
+    /**
+     * The color currently in effect for the palette entry the attributes bind
+     * their foreground to, or null when the attributes carry no binding.
+     */
+    public static @Nullable Color resolveBoundForeground(AttributeSet attributes) {
+        return resolveBound(attributes, EDITOR_COLOR_FOREGROUND);
+    }
+
+    /**
+     * The color currently in effect for the palette entry the attributes bind
+     * their background to, or null when the attributes carry no binding.
+     */
+    public static @Nullable Color resolveBoundBackground(AttributeSet attributes) {
+        return resolveBound(attributes, EDITOR_COLOR_BACKGROUND);
+    }
+
+    private static @Nullable Color resolveBound(AttributeSet attributes, Object key) {
+        Object bound = attributes.getAttribute(key);
+        return bound instanceof EditorColor ? ((EditorColor) bound).getColor() : null;
     }
 }

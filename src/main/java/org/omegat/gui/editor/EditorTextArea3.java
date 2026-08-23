@@ -202,12 +202,28 @@ public class EditorTextArea3 extends JEditorPane {
         });
         setToolTipText("");
         setDragEnabled(true);
-        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        applyColors();
+        CoreEvents.registerColorsChangedEventListener(this::applyColors);
 
         updateLockInsertMessage();
         autoCompleter = new AutoCompleter(this);
+    }
+
+    /**
+     * Apply the editor's foreground, caret and background colours from the
+     * current preferences, so a colour change takes effect without a restart.
+     */
+    public void applyColors() {
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+        Document3 doc = getOmDocument();
+        if (doc != null) {
+            doc.applyDefaultColors();
+        }
+        // span colors are bound to the palette and resolve when painting
+        // (see Styles#createBoundAttributeSet) — a repaint shows them
+        repaint();
     }
 
     @Override

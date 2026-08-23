@@ -96,6 +96,18 @@ public interface IPreferencesController {
     void persist();
 
     /**
+     * Whether the editor view must be rebuilt after this view persisted its
+     * changes. Defaults to true because most preferences influence how the
+     * editor renders its document; views whose changes take effect on their
+     * own — for example through a colors-changed event and a repaint — should
+     * override this to return false, so applying them stays instantaneous on
+     * large documents.
+     */
+    default boolean requiresEditorRefresh() {
+        return true;
+    }
+
+    /**
      * Validate the current preferences. Implementors should override to
      * implement validation logic as necessary.
      * <p>

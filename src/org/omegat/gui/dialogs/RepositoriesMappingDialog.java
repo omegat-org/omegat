@@ -51,8 +51,10 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class RepositoriesMappingDialog extends JDialog {
-    private JButton cancelButton;
-    private JButton okButton;
+    JButton cancelButton;
+    JButton okButton;
+
+    List<RepositoryDefinition> result;
 
     /**
      * Creates new form RepositoriesMappingDialog
@@ -67,6 +69,20 @@ public class RepositoriesMappingDialog extends JDialog {
      * Show the dialog and return the resulting repositories definitions, or null if cancelled.
      */
     public List<RepositoryDefinition> show(List<RepositoryDefinition> input) {
+        result = null;
+        init(input);
+        setVisible(true);
+        dispose();
+        return result;
+    }
+
+    /**
+     * Bind panel and controller and register the button actions. The result
+     * is captured on a successful OK only, so every other way of leaving the
+     * dialog (Cancel, Escape, window close) discards the table state instead
+     * of applying it.
+     */
+    void init(List<RepositoryDefinition> input) {
         RepositoriesMappingPanel panel = new RepositoriesMappingPanel();
         add(panel, BorderLayout.CENTER);
         // Core controller binds logic to the panel
@@ -80,16 +96,13 @@ public class RepositoriesMappingDialog extends JDialog {
                 JOptionPane.showMessageDialog(panel, err, OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            result = controller.getResult();
             setVisible(false);
         });
         cancelButton.addActionListener(e -> {
             controller.onCancel();
             setVisible(false);
         });
-
-        setVisible(true);
-        dispose();
-        return controller.getResult();
     }
 
     private void initComponents() {

@@ -443,10 +443,13 @@ public class RepositoriesMappingController {
     }
 
     /**
-     * Result after ok. In embedded use, if onOk() hasn't been called, returns current data snapshot.
+     * Result after a successful onOk(), otherwise null. Embedded users that
+     * want the current table state regardless of confirmation call getData()
+     * explicitly; returning the snapshot from here let a cancelled dialog
+     * apply its table edits anyway.
      */
     public List<RepositoryDefinition> getResult() {
-        return result != null ? result : getData();
+        return result;
     }
 
     String normalizeMapping(String mapping) {

@@ -37,4 +37,4 @@ jobs:
     - name: check source distribution dependencies duplication
       run: |
         chmod +x ./tool/check_duplicate_dependencies.sh
-        ./ci/check_duplicate_dependencies.sh build/install/OmegaT-source
+        ./tool/check_duplicate_dependencies.sh build/install/OmegaT-source

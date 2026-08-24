@@ -89,7 +89,7 @@ public class FilterContext {
     }
 
     /** Target file encoding, but can be 'null'. */
-    public String getOutEncoding() {
+    public @Nullable String getOutEncoding() {
         return outEncoding;
     }
 

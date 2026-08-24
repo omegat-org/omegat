@@ -9,10 +9,11 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar',
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar', '**/*commons-*.jar', '**/slf4j*.jar',
                                                                   '**/jackson*.jar'])
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.commons.text)
         compileOnly(libs.slf4j.format.jdk14)
         // JSON parser

@@ -39,7 +39,6 @@ import javax.swing.JCheckBox;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -65,7 +64,6 @@ import org.omegat.util.Preferences;
  *      "https://cloud.google.com/translate/docs/basic/setup-basic">Translation
  *      API</a>
  */
-@NullMarked
 @SuppressWarnings("unused")
 public class Google2Translate extends BaseCachedTranslate {
 

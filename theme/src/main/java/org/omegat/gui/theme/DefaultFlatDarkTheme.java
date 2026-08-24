@@ -37,7 +37,6 @@ import javax.swing.border.MatteBorder;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.SystemInfo;
-import org.jspecify.annotations.NullMarked;
 import org.omegat.util.gui.Styles.EditorColor;
 
 /**
@@ -46,7 +45,6 @@ import org.omegat.util.gui.Styles.EditorColor;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
-@NullMarked
 public class DefaultFlatDarkTheme extends FlatLaf {
     private static final String NAME = "Flat dark theme";
     private static final String ID = "FlatDarkTheme";

@@ -33,6 +33,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.preferences.IPreferencesController;
 
 /**
@@ -44,7 +45,7 @@ final class StartOptionsStepController implements IPreferencesController {
 
     private final Runnable onAdvanced;
 
-    private JPanel panel;
+    private @Nullable JPanel panel;
 
     StartOptionsStepController(Runnable onAdvanced) {
         this.onAdvanced = onAdvanced;

@@ -31,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.NumeralValueParser;
 import org.omegat.util.NumeralValueParser.Rational;
 
@@ -64,7 +65,7 @@ public class NumericValueComparator implements TextKeyComparator {
     private final boolean includeRoman;
 
     /** Decimal convention of the sorted text (null: dot-decimal only). */
-    private final Locale numberLocale;
+    private final @Nullable Locale numberLocale;
 
     public NumericValueComparator(Collator collator) {
         this(collator, true, null);
@@ -74,7 +75,8 @@ public class NumericValueComparator implements TextKeyComparator {
         this(collator, includeRoman, null);
     }
 
-    public NumericValueComparator(Collator collator, boolean includeRoman, Locale numberLocale) {
+    public NumericValueComparator(Collator collator, boolean includeRoman,
+            @Nullable Locale numberLocale) {
         this.collator = collator;
         this.includeRoman = includeRoman;
         this.numberLocale = numberLocale;

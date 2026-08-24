@@ -30,6 +30,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
@@ -303,13 +304,13 @@ public enum SortKey {
 
     private final String bundleKey;
     /** Optional bundle key for a longer explanatory tooltip, or null for none. */
-    private final String tooltipKey;
+    private final @Nullable String tooltipKey;
 
     SortKey(String bundleKey) {
         this(bundleKey, null);
     }
 
-    SortKey(String bundleKey, String tooltipKey) {
+    SortKey(String bundleKey, @Nullable String tooltipKey) {
         this.bundleKey = bundleKey;
         this.tooltipKey = tooltipKey;
     }
@@ -323,7 +324,7 @@ public enum SortKey {
      * Localized explanatory tooltip for the less obvious criteria, or {@code null}
      * when the display name alone is clear enough.
      */
-    public String getTooltip() {
+    public @Nullable String getTooltip() {
         return tooltipKey == null ? null : OStrings.getString(tooltipKey);
     }
 
@@ -369,7 +370,8 @@ public enum SortKey {
      * pre-compute its per-string key cache before the sort runs. The text
      * comparator orders the value of {@link #sortTextExtractor()}.
      */
-    Comparator<SegmentBuilder> comparator(Collator collator, boolean asc, TextKeyComparator textComparator) {
+    Comparator<SegmentBuilder> comparator(Collator collator, boolean asc,
+            @Nullable TextKeyComparator textComparator) {
         Comparator<SegmentBuilder> c;
         Optional<Function<SourceTextEntry, String>> extractor = sortTextExtractor();
         if (textComparator != null && extractor.isPresent()) {
@@ -448,7 +450,7 @@ public enum SortKey {
         }
     }
 
-    private static String nullToEmpty(String s) {
+    private static String nullToEmpty(@Nullable String s) {
         return s == null ? "" : s;
     }
 

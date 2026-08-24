@@ -737,7 +737,7 @@ public class SortBar extends CollapsibleBar {
                     super.replace(fb, offset, length, digitsOnly(text), attrs);
                 }
 
-                private String digitsOnly(String s) {
+                private String digitsOnly(@Nullable String s) {
                     return s == null ? "" : s.replaceAll("[^0-9]", "");
                 }
             });

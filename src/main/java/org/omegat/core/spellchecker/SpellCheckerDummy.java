@@ -55,35 +55,35 @@ public class SpellCheckerDummy implements ISpellCheckerProvider, ISpellChecker {
     }
 
     @Override
-    public boolean isCorrect(@Nullable String word) {
+    public boolean isCorrect(String word) {
         return true;
     }
 
     @Override
-    public List<String> suggest(@Nullable String word) {
+    public List<String> suggest(String word) {
         return Collections.emptyList();
     }
 
     @Override
-    public void learnWord(@Nullable String word) {
+    public void learnWord(String word) {
     }
 
     @Override
-    public void ignoreWord(@Nullable String word) {
+    public void ignoreWord(String word) {
     }
 
     @Override
-    public List<Token> getMisspelledTokens(@Nullable String text) {
+    public List<Token> getMisspelledTokens(String text) {
         return Collections.emptyList();
     }
 
     @Override
-    public boolean isIgnoredWord(@Nullable String word) {
+    public boolean isIgnoredWord(String word) {
         return false;
     }
 
     @Override
-    public boolean isLearnedWord(@Nullable String word) {
+    public boolean isLearnedWord(String word) {
         return false;
     }
 }

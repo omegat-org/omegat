@@ -55,22 +55,22 @@ public interface ISpellChecker {
      * Check the word. If it is ignored or learned (valid), returns true.
      * Otherwise, false.
      */
-    boolean isCorrect(@Nullable String word);
+    boolean isCorrect(String word);
 
     /**
      * return a list of strings as suggestions.
      */
-    List<String> suggest(@Nullable String word);
+    List<String> suggest(String word);
 
     /**
      * Add a word to the list of correct words.
      */
-    void learnWord(@Nullable String word);
+    void learnWord(String word);
 
     /**
      * Add a word to the list of ignored words.
      */
-    void ignoreWord(@Nullable String word);
+    void ignoreWord(String word);
 
     /**
      * Get a list of misspelled tokens from the given text.
@@ -80,11 +80,11 @@ public interface ISpellChecker {
     /**
      * Determine if the given word is on the ignored list.
      */
-    boolean isIgnoredWord(@Nullable String word);
+    boolean isIgnoredWord(String word);
 
     /**
      * Determine if the given word is on the learned list.
      */
-    boolean isLearnedWord(@Nullable String word);
+    boolean isLearnedWord(String word);
 
 }

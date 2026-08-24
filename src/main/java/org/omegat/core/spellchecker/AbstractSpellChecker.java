@@ -115,6 +115,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * Initialize the library for the given project. Loads the lists of ignored
      * and learned words for the project
      */
+    @Override
     public boolean initialize() {
         Language targetLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
 
@@ -204,6 +205,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * destroy the library
      */
+    @Override
     public void destroy() {
         if (checker != null) {
             checker.destroy();
@@ -221,6 +223,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * Save the word lists to disk
      */
+    @Override
     public void saveWordLists() {
         // find out the internal project directory
         if (!Core.getProject().isProjectLoaded()) {
@@ -251,6 +254,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * Check the word. If it is ignored or learned (valid), returns true.
      * Otherwise, false.
      */
+    @Override
     public boolean isCorrect(String word) {
         // Check if a spellchecker is already initialized. If not, skip
         // checking to prevent nullPointerErrors.
@@ -294,6 +298,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * return a list of strings as suggestions
      */
+    @Override
     public List<String> suggest(String word) {
         if (isCorrect(word)) {
             return Collections.emptyList();
@@ -309,6 +314,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * Add a word to the list of ignored words
      */
+    @Override
     public void ignoreWord(String word) {
         word = normalize(word);
         if (!ignoreList.contains(word)) {
@@ -323,6 +329,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * Add a word to the list of correct words
      */
+    @Override
     public void learnWord(String word) {
         word = normalize(word);
         if (!learnedList.contains(word)) {

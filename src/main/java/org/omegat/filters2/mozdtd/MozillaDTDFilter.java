@@ -182,7 +182,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 out.write(trans != null ? trans : text);
                 out.write(block.substring(m.end(3)));
             }
-        } else if (entryAlignCallback != null && id != null) {
+        } else if (align != null && entryAlignCallback != null && id != null) {
             align.put(id, text);
         }
     }

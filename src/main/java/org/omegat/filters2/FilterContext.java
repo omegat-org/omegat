@@ -79,7 +79,7 @@ public class FilterContext {
     }
 
     /** Source file encoding, but can be 'null'. */
-    public String getInEncoding() {
+    public @Nullable String getInEncoding() {
         return inEncoding;
     }
 

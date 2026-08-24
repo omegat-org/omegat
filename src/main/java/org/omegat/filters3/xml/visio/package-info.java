@@ -24,6 +24,6 @@
  **************************************************************************/
 
 @NullMarked
-package org.omegat.filters2.text.yaml;
+package org.omegat.filters3.xml.visio;
 
 import org.jspecify.annotations.NullMarked;

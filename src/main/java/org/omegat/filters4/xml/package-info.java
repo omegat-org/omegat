@@ -24,6 +24,6 @@
  **************************************************************************/
 
 @NullMarked
-package org.omegat.filters2.text.yaml;
+package org.omegat.filters4.xml;
 
 import org.jspecify.annotations.NullMarked;

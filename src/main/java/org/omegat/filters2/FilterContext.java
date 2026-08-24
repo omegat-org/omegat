@@ -39,17 +39,17 @@ public class FilterContext {
 
     private final @Nullable Language targetLang;
 
-    private String inEncoding;
+    private @Nullable String inEncoding;
 
-    private String outEncoding;
+    private @Nullable String outEncoding;
 
     private final boolean sentenceSegmentingEnabled;
 
     private boolean isRemoveAllTags;
 
-    private Class<?> sourceTokenizerClass;
+    private @Nullable Class<?> sourceTokenizerClass;
 
-    private Class<?> targetTokenizerClass;
+    private @Nullable Class<?> targetTokenizerClass;
 
     public FilterContext(ProjectProperties props) {
         this.sourceLang = props.getSourceLanguage();

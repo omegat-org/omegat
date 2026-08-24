@@ -356,7 +356,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
-    protected @Nullable BufferedWriter createWriter(File outFile, String outEncoding)
+    protected @Nullable BufferedWriter createWriter(@Nullable File outFile, @Nullable String outEncoding)
             throws UnsupportedEncodingException, IOException {
         if (outFile == null) {
             return null;
@@ -676,7 +676,10 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     @Override
-    public @Nullable String getInEncodingLastParsedFile() {
+    public String getInEncodingLastParsedFile() {
+        if (inEncodingLastParsedFile == null) {
+            inEncodingLastParsedFile = Charset.defaultCharset().name();
+        }
         return inEncodingLastParsedFile;
     }
 

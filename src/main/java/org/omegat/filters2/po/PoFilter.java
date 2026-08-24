@@ -46,7 +46,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
@@ -79,7 +79,6 @@ import org.omegat.util.TagUtil;
  * @author Didier Briel
  * @author Enrique Estevez
  */
-@NullMarked
 public class PoFilter extends AbstractFilter {
 
     public static final String OPTION_ALLOW_BLANK = "disallowBlank";
@@ -314,20 +313,20 @@ public class PoFilter extends AbstractFilter {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     }
 
-    private StringBuilder[] sources;
-    private StringBuilder[] targets;
-    private StringBuilder translatorComments;
-    private StringBuilder extractedComments;
-    private StringBuilder references;
-    private StringBuilder sourceFuzzyTrue;
+    private StringBuilder@Nullable [] sources;
+    private StringBuilder@Nullable [] targets;
+    private @Nullable StringBuilder translatorComments;
+    private @Nullable StringBuilder extractedComments;
+    private @Nullable StringBuilder references;
+    private @Nullable StringBuilder sourceFuzzyTrue;
     private int plurals = 2;
-    private String path;
+    private @Nullable String path;
     private boolean nowrap, fuzzy, fuzzyTrue;
     private boolean headerProcessed;
 
-    private BufferedWriter out;
+    private @Nullable BufferedWriter out;
 
-    private MODE currentMode;
+    private @Nullable MODE currentMode;
     private int currentPlural;
 
     @Override
@@ -358,7 +357,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc)
+    public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
 
         String allowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
@@ -392,7 +391,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(BufferedReader in, BufferedWriter writer, FilterContext fc) throws IOException {
+    public void processFile(BufferedReader in, @Nullable BufferedWriter writer, FilterContext fc) throws IOException {
         out = writer;
         processPoFile(in, fc);
     }

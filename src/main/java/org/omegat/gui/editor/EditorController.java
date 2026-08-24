@@ -16,6 +16,7 @@
                2016 Didier Briel
                2019 Thomas Cordonnier, Briac Pilpre
                2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -479,6 +480,22 @@ public class EditorController implements IEditor {
                 }
             });
         }
+    }
+
+    /**
+     * Tells the metadata gutter about changed marker highlights. Highlighter
+     * changes damage the editor text only; the gutter shows the same
+     * highlights in its COLOR column and repaints on its own schedule.
+     */
+    void metadataGutterMarksChanged() {
+        if (metadataGutter != null) {
+            metadataGutter.marksChanged();
+        }
+    }
+
+    /** Test/support hook: the metadata gutter of this editor. */
+    SegmentMetadataGutter getMetadataGutter() {
+        return metadataGutter;
     }
 
     /** The last applied gutter geometry, to skip needless recentering. */

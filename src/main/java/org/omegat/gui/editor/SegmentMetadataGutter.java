@@ -329,6 +329,17 @@ final class SegmentMetadataGutter extends JComponent {
         }
     }
 
+    /**
+     * Repaint on a marker highlight change (spell checker, language checker,
+     * ...). Only the COLOR column mirrors the marker highlights, so rows
+     * without it need no repaint.
+     */
+    void marksChanged() {
+        if (Column.COLOR.isEnabled()) {
+            repaint();
+        }
+    }
+
     SegmentMetadataGutter(EditorController controller, EditorTextArea3 editor) {
         this.controller = controller;
         this.editor = editor;

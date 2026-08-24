@@ -195,11 +195,11 @@ public class NumberAutoConvertWindow {
     private final JComboBox<RenderOptions.Fraction> fractionCombo =
             new JComboBox<>(RenderOptions.Fraction.values());
     private final JComboBox<RenderOptions.Style> styleCombo = new JComboBox<>(RenderOptions.Style.values());
-    private JComponent groupingRow;
-    private JComponent fractionRow;
-    private JComponent styleRow;
-    private Locale lastSrc;
-    private Locale lastTgt;
+    private @Nullable JComponent groupingRow;
+    private @Nullable JComponent fractionRow;
+    private @Nullable JComponent styleRow;
+    private @Nullable Locale lastSrc;
+    private @Nullable Locale lastTgt;
     private Set<DataType> lastTypes = EnumSet.noneOf(DataType.class);
     private boolean lastAllowRoman;
     private boolean lastIncludeTranslated;
@@ -430,7 +430,7 @@ public class NumberAutoConvertWindow {
             drawLinks(g, styleRow, DataType.DATE, DataType.TIME, DataType.ORDINAL);
         }
 
-        private void drawLinks(Graphics g, JComponent formatRow, DataType... types) {
+        private void drawLinks(Graphics g, @Nullable JComponent formatRow, DataType... types) {
             if (formatRow == null || !formatRow.isShowing() || !isShowing()) {
                 return;
             }
@@ -1026,7 +1026,7 @@ public class NumberAutoConvertWindow {
         }
 
         @Override
-        public boolean allowed(SourceTextEntry ste) {
+        public boolean allowed(@Nullable SourceTextEntry ste) {
             return ste != null && segmentNumbers.contains(ste.entryNum());
         }
 
@@ -1555,6 +1555,7 @@ public class NumberAutoConvertWindow {
             return modeTag(mode) + " " + columns[column];
         }
 
+        @Nullable
         Icon headerIcon(int column) {
             if (column != sortColumn) {
                 return null;
@@ -1618,7 +1619,7 @@ public class NumberAutoConvertWindow {
         }
 
         @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
+        public @Nullable Object getValueAt(int rowIndex, int columnIndex) {
             Row r = rows.get(rowIndex);
             switch (columnIndex) {
             case COL_ACCEPT:

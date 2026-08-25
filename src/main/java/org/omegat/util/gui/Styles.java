@@ -238,8 +238,7 @@ public final class Styles {
          * The background color of a segment auto-converted from a number-only
          * source (#794).
          */
-        COLOR_MARK_COMES_FROM_TM_XNUMBER(OStrings.getString("COLOR_MARK_COMES_FROM_TM_XNUMBER"),
-                UIManager.getColor("OmegaT.markComesFromTmXnumber")),
+        COLOR_MARK_COMES_FROM_TM_XNUMBER("OmegaT.markComesFromTmXnumber", "#c8e6c9"),
         /**
          * Alternative translation highlight color.
          */

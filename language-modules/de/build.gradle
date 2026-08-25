@@ -6,11 +6,12 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
         implementation providedModuleLib('language-de')
         runtimeOnly providedModuleLib('commons-lang3', 'jwordsplitter', 'german', 'openregex')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.de) {
             exclude module: 'languagetool-core'

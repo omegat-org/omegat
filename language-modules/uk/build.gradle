@@ -6,11 +6,12 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/lucene-analyzers-common-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/lucene-analyzers-common-*.jar'])
         implementation providedModuleLib('language-uk')
         runtimeOnly providedModuleLib('morfologik-ukrainian')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.uk) {
             exclude module: 'languagetool-core'

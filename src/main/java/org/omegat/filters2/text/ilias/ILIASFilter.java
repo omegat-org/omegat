@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -59,7 +60,7 @@ import org.omegat.util.StringUtil;
  * @author Michael Zakharov <trapman.hunt@gmail.com>
  */
 public class ILIASFilter extends AbstractFilter {
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * Register plugin into OmegaT.

@@ -69,7 +69,7 @@ public class MozillaDTDFilter extends AbstractFilter {
     protected static final Pattern RE_ENTITY = Pattern.compile("<!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>",
             Pattern.DOTALL);
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * If true, will remove non-translated segments in the target files
@@ -182,7 +182,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 out.write(trans != null ? trans : text);
                 out.write(block.substring(m.end(3)));
             }
-        } else if (entryAlignCallback != null && id != null) {
+        } else if (align != null && entryAlignCallback != null && id != null) {
             align.put(id, text);
         }
     }

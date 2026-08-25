@@ -24,6 +24,6 @@
  **************************************************************************/
 
 @NullMarked
-package org.omegat.filters2.text.yaml;
+package org.omegat.filters2.text.magento;
 
 import org.jspecify.annotations.NullMarked;

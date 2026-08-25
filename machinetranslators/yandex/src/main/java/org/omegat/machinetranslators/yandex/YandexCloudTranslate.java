@@ -47,7 +47,6 @@ import javax.swing.JPanel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -73,7 +72,6 @@ import org.omegat.util.Preferences;
  *      "https://cloud.yandex.com/docs/translate/api-ref/Translation/">Translation
  *      API</a>
  */
-@NullMarked
 @SuppressWarnings("unused")
 public class YandexCloudTranslate extends BaseCachedTranslate {
 

@@ -26,6 +26,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Shape;
@@ -33,6 +34,8 @@ import java.awt.Shape;
 import javax.swing.text.Element;
 import javax.swing.text.LabelView;
 import javax.swing.text.View;
+
+import org.omegat.util.gui.Styles;
 
 /**
  * Custom implementation of view.
@@ -48,6 +51,23 @@ public class ViewLabel extends LabelView {
 
     public ViewLabel(final Element el) {
         super(el);
+    }
+
+    /**
+     * Colors bound to a palette entry resolve at paint time, so a palette
+     * change (Colors preferences, flash notifications) only needs a repaint —
+     * the document, its attributes and the layout stay untouched.
+     */
+    @Override
+    public Color getForeground() {
+        Color bound = Styles.resolveBoundForeground(getAttributes());
+        return bound != null ? bound : super.getForeground();
+    }
+
+    @Override
+    public Color getBackground() {
+        Color bound = Styles.resolveBoundBackground(getAttributes());
+        return bound != null ? bound : super.getBackground();
     }
 
     @Override

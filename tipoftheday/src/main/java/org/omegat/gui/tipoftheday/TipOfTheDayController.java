@@ -41,6 +41,8 @@ import org.omegat.util.gui.Styles;
 import tokyo.northside.tipoftheday.TipOfTheDay;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IColorsChangedEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -61,23 +63,7 @@ public final class TipOfTheDayController {
         TipOfTheDay totd = new TipOfTheDay(new OmegaTTipOfTheDayModel());
         totd.setPreferredSize(new Dimension(900, 450));
 
-        // respect theme colors
-        totd.clearUserStyleSheets();
-        String background = Styles.EditorColor.COLOR_BACKGROUND.toHex();
-        String foreground = Styles.EditorColor.COLOR_FOREGROUND.toHex();
-        String bodyCss = "body { background-color: " + background + "; color: " + foreground + "; }";
-        totd.addUserStyleSheetText(bodyCss);
-        // Apply theme-specific CSS to TipOfTheDay content
-        boolean dark = UIDesignManager.isDarkTheme(UIManager.getLookAndFeelDefaults());
-        String cssPath = dark ? "/tips/dark.css" : "/tips/light.css";
-        try {
-            URL url = getClass().getResource(cssPath);
-            if (url != null) {
-                totd.addUserStyleSheetUri(url.toURI());
-            }
-        } catch (Exception e) {
-            Log.log(e);
-        }
+        applyThemeColors(totd);
         //
         String current = Preferences.getPreference(TIPOFTHEDAY_CURRENT_TIP);
         int currentTip = 0;
@@ -111,10 +97,44 @@ public final class TipOfTheDayController {
         totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "nextTip");
         totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "close");
 
-        dialog.setVisible(true);
+        // Restyle live while the dialog is open (e.g. colours changed in the
+        // Preferences window shown on top of it), then unregister on close.
+        IColorsChangedEventListener colorsListener = () -> {
+            applyThemeColors(totd);
+            totd.revalidate();
+            totd.repaint();
+        };
+        CoreEvents.registerColorsChangedEventListener(colorsListener);
+        try {
+            dialog.setVisible(true);
+        } finally {
+            CoreEvents.unregisterColorsChangedEventListener(colorsListener);
+        }
         Preferences.setPreference(TIPOFTHEDAY_CURRENT_TIP, totd.getCurrentTip());
         Preferences.setPreference(TIPOFTHEDAY_SHOW_ON_STARTUP, dialog.showOnCB.isSelected());
         close(dialog);
+    }
+
+    private void applyThemeColors(TipOfTheDay totd) {
+        // respect theme colors
+        totd.clearUserStyleSheets();
+        String background = Styles.EditorColor.COLOR_BACKGROUND.toHex();
+        String foreground = Styles.EditorColor.COLOR_FOREGROUND.toHex();
+        String bodyCss = "body { background-color: " + background + "; color: " + foreground + "; }";
+        totd.addUserStyleSheetText(bodyCss);
+        // Apply theme-specific CSS to TipOfTheDay content
+        boolean dark = UIDesignManager.isDarkTheme(UIManager.getLookAndFeelDefaults());
+        String cssPath = dark ? "/tips/dark.css" : "/tips/light.css";
+        try {
+            URL url = getClass().getResource(cssPath);
+            if (url != null) {
+                totd.addUserStyleSheetUri(url.toURI());
+            }
+        } catch (Exception e) {
+            Log.log(e);
+        }
+        // also set the pane's own Swing colours so it does not keep the L&F defaults
+        Styles.applyColors(totd);
     }
 
     public void close(JDialog dialog) {

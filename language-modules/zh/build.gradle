@@ -6,11 +6,12 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
         implementation providedModuleLib('language-zh')
         runtimeOnly providedModuleLib('hanlp-portable')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.zh) {
             exclude module: 'languagetool-core'

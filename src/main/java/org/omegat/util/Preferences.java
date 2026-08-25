@@ -843,6 +843,18 @@ public final class Preferences {
         }
     }
 
+    /**
+     * Whether {@link #init()} (or a test injection) has installed a
+     * preferences store yet. Lets early-loading consumers such as
+     * {@link org.omegat.util.gui.Styles.EditorColor} skip reading preferences
+     * instead of failing when a look and feel is used standalone.
+     */
+    public static boolean isInitialized() {
+        synchronized (LOCK) {
+            return didInit;
+        }
+    }
+
     public static void initFilters() {
         synchronized (LOCK) {
             if (didInitFilters) {

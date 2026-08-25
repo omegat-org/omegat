@@ -5,12 +5,12 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar', '**/commons-io-*.jar', '**/lucene-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.bundles.lucene)
+        compileOnly(libs.jspecify)
     }
-    compileOnly(libs.jspecify)
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))

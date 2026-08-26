@@ -2,13 +2,16 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation providedModuleLib('language-ca')
-        runtimeOnly providedModuleLib('catalan-pos-dict')
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/language-ca-*.jar'])
+        runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/catalan-pos-dict-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.jspecify)

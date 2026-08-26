@@ -2,9 +2,12 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedModuleLibsDir.directory) {
+    if (file(providedModuleLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
             '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-*.jar', '**/jspecify-*.jar', '**/annotations-*.jar',
             '**/picocli*.jar', '**/jakarta.xml.bind-api*.jar'])

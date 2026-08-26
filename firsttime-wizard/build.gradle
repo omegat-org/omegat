@@ -7,9 +7,11 @@ plugins {
 
 def documentRootDir = 'src/docs'
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar', '**/jspecify-**.jar', '**/lib-mnemonics-*.jar'])
     } else {
         compileOnly(libs.jspecify)

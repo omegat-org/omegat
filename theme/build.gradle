@@ -2,9 +2,12 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedModuleLibsDir.directory) {
+    if (file(providedModuleLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*'])
     } else {

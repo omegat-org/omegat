@@ -6,9 +6,12 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar','**/cssbox-*.jar',
                                                                        '**/jstyleparser-*.jar'])

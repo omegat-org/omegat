@@ -2,12 +2,15 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar', '**/jspecify-*.jar'])
-        implementation providedModuleLib('language-ast')
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/language-ast-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.jspecify)

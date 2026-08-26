@@ -2,9 +2,12 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/hunspell-*.jar'])
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/languagetool-core-*.jar',
                 '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar',

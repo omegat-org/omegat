@@ -2,9 +2,11 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedModuleLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/languagetool-core-*.jar',
                                        '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar',
                                        '**/jspecify-*.jar'])

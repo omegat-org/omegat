@@ -2,13 +2,16 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+
 dependencies {
     compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
+    if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation providedModuleLib('language-de')
-        runtimeOnly providedModuleLib('commons-lang3', 'jwordsplitter', 'german', 'openregex')
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/language-de-*.jar'])
+        runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/jwordsplitter-*.jar', '**/german-*.jar', '**/openregex-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.jspecify)

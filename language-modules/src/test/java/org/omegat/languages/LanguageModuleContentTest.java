@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 **************************************************************************/
 
-package org.omegat;
+package org.omegat.languages;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -59,8 +59,9 @@ import org.junit.Test;
 public class LanguageModuleContentTest {
 
     private static final Pattern LANGUAGE_JAR_INCLUDE = Pattern.compile("language-([a-z]+)-\\*\\.jar");
-    private static final Pattern PROVIDED_MODULE_LIB = Pattern
-            .compile("providedModuleLib\\(['\"]language-([a-z]+)['\"]");
+    private static final Pattern PROVIDED_MODULE_FILE_TREE = Pattern.compile(
+            "fileTree\\s*\\(\\s*dir\\s*:\\s*providedModuleLibsDir[^)]*language-([a-z]+)-\\*\\.jar",
+            Pattern.DOTALL);
     private static final Pattern CATALOG_ALIAS = Pattern.compile("libs\\.languagetool\\.([a-z]+)");
     private static final List<String> NON_LANGUAGE_ALIASES = Arrays.asList("core", "server");
 
@@ -81,19 +82,15 @@ public class LanguageModuleContentTest {
             String script = Files.readString(buildFile.toPath(), StandardCharsets.UTF_8);
             String language = moduleDir.getName();
             checkOwnLanguage(violations, language, LANGUAGE_JAR_INCLUDE.matcher(script));
-            checkOwnLanguage(violations, language, PROVIDED_MODULE_LIB.matcher(script));
+            checkOwnLanguage(violations, language, PROVIDED_MODULE_FILE_TREE.matcher(script));
             checkCatalogAlias(violations, language, CATALOG_ALIAS.matcher(script));
-            if (!PROVIDED_MODULE_LIB.matcher(script).find()) {
-                violations.add(language + ": language jar is not resolved via providedModuleLib(...); "
+            if (!PROVIDED_MODULE_FILE_TREE.matcher(script).find()) {
+                violations.add(language + ": language jar is not resolved from providedModuleLibsDir; "
                         + "an incomplete source distribution would not be detected");
             }
             if (script.contains("implementation fileTree(dir: providedCoreLibsDir")) {
                 violations.add(language + ": bundles its content from the provided core libraries, "
                         + "which do not contain the language jars");
-            }
-            if (script.contains("fileTree(dir: providedModuleLibsDir")) {
-                violations.add(language + ": resolves provided jars via a bare fileTree; "
-                        + "use providedModuleLib(...) so that empty matches fail the build");
             }
         }
         assertTrue("Expected to audit at least 25 language modules, found " + checked, checked >= 25);

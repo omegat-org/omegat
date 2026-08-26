@@ -21,7 +21,7 @@ dependencies {
         compileOnly(libs.lucene.analyzers.common)
     }
     testImplementation(libs.junit4)
-    testImplementation(libs.assertj)
+    testImplementation(libs.assertj.core)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.languagetool.core)
     testImplementation project(":spellchecker:morfologik")

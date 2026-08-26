@@ -32,7 +32,7 @@ dependencies {
     }
     testImplementation(libs.languagetool.ja)
     testImplementation(libs.lucene.analyzers.kuromoji)
-    testImplementation(libs.assertj)
+    testImplementation(libs.assertj.core)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }

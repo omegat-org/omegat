@@ -22,7 +22,7 @@ dependencies {
         compileOnly(libs.jspecify)
     }
     testImplementation(libs.junit4)
-    testImplementation(libs.assertj)
+    testImplementation(libs.assertj.core)
     testImplementation(testFixtures(project.rootProject)) {
         exclude module: 'wiremock'
     }

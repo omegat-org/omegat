@@ -221,7 +221,7 @@ dependencies {
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)
-    testImplementation(libs.assertj)
+    testImplementation(libs.assertj.core)
     testImplementation(libs.bundles.xmlunit) {
         exclude module: 'assertj-core'
     }

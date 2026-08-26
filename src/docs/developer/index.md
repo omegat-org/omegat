@@ -49,6 +49,7 @@
 ## Documentation
 
 * [Contributing to Documentation](40.ContributingDocument.md)
+* [Developer documentation](48.DeveloperDocumentation.md)
 
 ## Localization
 

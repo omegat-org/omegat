@@ -5,7 +5,7 @@ plugins {
 def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar', '**/commons-io-*.jar', '**/lucene-*.jar'])
     } else {
@@ -15,7 +15,7 @@ dependencies {
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj.core)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
     testImplementation(libs.languagetool.de)
 }

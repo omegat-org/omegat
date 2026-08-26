@@ -6,7 +6,7 @@ def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar',
@@ -24,7 +24,7 @@ dependencies {
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj.core)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.languagetool.core)
     testImplementation(project(":spellchecker:hunspell"))
     testImplementation project(":spellchecker:morfologik")

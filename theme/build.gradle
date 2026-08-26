@@ -6,7 +6,7 @@ def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedModuleLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*'])
@@ -15,6 +15,6 @@ dependencies {
         implementation(libs.flatlaf)
         compileOnly(libs.jspecify)
     }
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
 }

@@ -6,7 +6,7 @@ def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/icu4j-*.jar'])
@@ -25,7 +25,7 @@ dependencies {
 
     testImplementation(libs.junit4)
     testRuntimeOnly(libs.slf4j.jdk14)
-    testImplementation(project.rootProject)
+    testImplementation(project(':'))
 
     testImplementation(libs.languagetool.core) {
         exclude module: 'language-all'
@@ -33,7 +33,7 @@ dependencies {
     testImplementation(libs.languagetool.ja)
     testImplementation(libs.lucene.analyzers.kuromoji)
     testImplementation(libs.assertj.core)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
 }
 

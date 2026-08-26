@@ -237,14 +237,14 @@ dependencies {
     testAcceptanceImplementation(libs.commons.io)
     testAcceptanceImplementation(libs.slf4j.jdk14)
     testAcceptanceImplementation(libs.slf4j.format.jdk14)
-    testAcceptanceImplementation(testFixtures(project.rootProject))
+    testAcceptanceImplementation(testFixtures(project(':')))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
     testAcceptanceImplementation(libs.bundles.lucene)
     testAcceptanceImplementation(project(':aligner'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
-    testIntegrationImplementation(testFixtures(project.rootProject))
+    testIntegrationImplementation(testFixtures(project(':')))
     testIntegrationImplementation(libs.slf4j.api)
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
@@ -261,7 +261,7 @@ dependencies {
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
     subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
-        jacocoAggregation sub
+        jacocoAggregation(project(sub.path))
         // Declared unconditionally: a plugins.withId callback never fires for projects
         // that configure-on-demand leaves unconfigured. Every leaf subproject applies
         // org.omegat.module, which provides both target configurations.

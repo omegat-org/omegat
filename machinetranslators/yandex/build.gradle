@@ -9,7 +9,7 @@ plugins {
 def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar',
                                                                     '**/jackson*.jar', '**/jspecify-*.jar'])
@@ -22,7 +22,7 @@ dependencies {
         compileOnly(libs.jackson.databind)
         compileOnly(libs.jspecify)
     }
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.jackson.core)
     testImplementation(libs.jackson.databind)
 }

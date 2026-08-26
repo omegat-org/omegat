@@ -10,7 +10,7 @@ def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar', '**/jspecify-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar','**/cssbox-*.jar',

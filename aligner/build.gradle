@@ -6,7 +6,7 @@ def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedModuleLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
             '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-*.jar', '**/jspecify-*.jar', '**/annotations-*.jar',
@@ -28,7 +28,7 @@ dependencies {
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.picocli)
     }
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
     testImplementation(libs.picocli)
     testRuntimeOnly(libs.jaxb4.runtime)

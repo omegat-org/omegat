@@ -5,7 +5,7 @@ plugins {
 def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
 
 dependencies {
-    compileOnly(project.rootProject)
+    compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/languagetool-core-*.jar',
                                        '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar',
@@ -22,7 +22,7 @@ dependencies {
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj.core)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
     testRuntimeOnly(libs.languagetool.pl)
 }

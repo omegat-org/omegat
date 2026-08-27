@@ -39,6 +39,7 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.machinetranslators.BaseCachedTranslate;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
@@ -63,7 +64,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
 
     protected static final ResourceBundle BUNDLE = ResourceBundle.getBundle(BUNDLE_BASENAME);
 
-    private String gtURL;
+    private final String gtURL;
 
     public AbstractMyMemoryTranslate(String url) {
         gtURL = url;
@@ -79,24 +80,12 @@ public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
     @Override
     public abstract String getName();
 
-    /**
-     * Modify some country codes to fit with MyMemory
-     *
-     * @param language
-     *            An OmegaT language
-     * @return A code modified for MyMemory languages
-     */
-    protected String mymemoryCode(Language language) {
-        return language.getLocaleLCID();
-    }
-
     @Override
-    protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
+    protected abstract @Nullable String translate(Language sLang, Language tLang, String text) throws Exception;
 
     /**
      * Query MyMemory API and return parsed JsonNode object.
      */
-    @SuppressWarnings("unchecked")
     protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws IOException {
 
         String targetLang = tLang.getLocaleLCID();

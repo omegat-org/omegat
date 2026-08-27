@@ -2,16 +2,14 @@ plugins {
     id 'org.omegat.module'
 }
 
-def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
-def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+def providedCoreLibsDir = omegatModule.providedCoreLibsDir
 
 dependencies {
     compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/hunspell-*.jar'])
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/languagetool-core-*.jar',
-                '**/commons-io-*.jar', '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar',
-                '**/lucene-analyzers-common-*.jar', '**/jspecify-*.jar'])
+        implementation omegatModule.providedModuleLib('hunspell')
+        compileOnly omegatModule.providedCoreLib('languagetool-core', 'commons-io', 'lib-mnemonics',
+                'slf4j-format-jdk14', 'lucene-analysis-common', 'jspecify')
     } else {
         implementation(libs.dumont.hunspell)
         compileOnly(libs.commons.io)

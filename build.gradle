@@ -75,6 +75,10 @@ configurations {
     }
 }
 
+def providedCoreLibsPath = 'lib/provided/core'
+def providedModuleLibsPath = 'lib/provided/module'
+def providedBuildLogicPath = 'lib/provided/build-logic'
+def providedCoreLibsDir = project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedCoreLibsDir.directory) {
@@ -369,7 +373,6 @@ tasks.register('distributionSmokeTest', Test) {
 }
 
 def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
-def providedBuildLogicPath = 'lib/provided/build-logic'
 
 distributions {
     main {

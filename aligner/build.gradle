@@ -2,16 +2,14 @@ plugins {
     id 'org.omegat.module'
 }
 
-def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
-def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+def providedModuleLibsDir = omegatModule.providedModuleLibsDir
 
 dependencies {
     compileOnly(project(':'))
     if (file(providedModuleLibsDir).directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-*.jar', '**/jspecify-*.jar', '**/annotations-*.jar',
-            '**/picocli*.jar', '**/jakarta.xml.bind-api*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar', '**/jcl-over-slf4j-*.jar'])
+        compileOnly omegatModule.providedCoreLib('commons', 'lib-mnemonics', 'slf4j', 'supertmxmerge', 'jaxb',
+                'jspecify', 'annotations', 'picocli', 'jakarta.xml.bind-api')
+        implementation omegatModule.providedModuleLib('maligna', 'jcl-over-slf4j')
     } else {
         // Aligner
         implementation(libs.tokyo.northside.maligna) {

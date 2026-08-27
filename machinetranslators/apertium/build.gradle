@@ -6,13 +6,12 @@ plugins {
     id 'org.omegat.module'
 }
 
-def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
+def providedCoreLibsDir = omegatModule.providedCoreLibsDir
 
 dependencies {
     compileOnly(project(':'))
     if (file(providedCoreLibsDir).directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar', '**/*commons-*.jar', '**/slf4j*.jar',
-                                                                  '**/jackson*.jar'])
+        compileOnly omegatModule.providedCoreLib('jspecify', '*commons', 'slf4j', 'jackson')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.jspecify)

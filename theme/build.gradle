@@ -2,14 +2,13 @@ plugins {
     id 'org.omegat.module'
 }
 
-def providedCoreLibsDir = rootProject.property('providedCoreLibsDir')
-def providedModuleLibsDir = rootProject.property('providedModuleLibsDir')
+def providedCoreLibsDir = omegatModule.providedCoreLibsDir
 
 dependencies {
     compileOnly(project(':'))
-    if (file(providedModuleLibsDir).directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jspecify-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/flatlaf*'])
+    if (file(providedCoreLibsDir).directory) {
+        compileOnly omegatModule.providedCoreLib('jspecify')
+        implementation omegatModule.providedModuleLib('flatlaf')
     } else {
         // platform independent dark theme
         implementation(libs.flatlaf)

@@ -58,10 +58,11 @@ import org.junit.Test;
  */
 public class LanguageModuleContentTest {
 
-    private static final Pattern LANGUAGE_JAR_INCLUDE = Pattern.compile("language-([a-z]+)-\\*\\.jar");
-    private static final Pattern PROVIDED_MODULE_FILE_TREE = Pattern.compile(
-            "fileTree\\s*\\(\\s*dir\\s*:\\s*providedModuleLibsDir[^)]*language-([a-z]+)-\\*\\.jar",
-            Pattern.DOTALL);
+    private static final Pattern LANGUAGE_ARTIFACT = Pattern.compile("'language-([a-z]+)'");
+    private static final Pattern PROVIDED_MODULE_LIB = Pattern.compile(
+            "providedModuleLib\\s*\\(([^)]*)\\)", Pattern.DOTALL);
+    private static final Pattern PROVIDED_LIBS_FILE_TREE = Pattern.compile(
+            "fileTree\\s*\\(\\s*dir\\s*:\\s*provided(?:Core|Module)LibsDir");
     private static final Pattern CATALOG_ALIAS = Pattern.compile("libs\\.languagetool\\.([a-z]+)");
     private static final List<String> NON_LANGUAGE_ALIASES = Arrays.asList("core", "server");
 
@@ -81,27 +82,45 @@ public class LanguageModuleContentTest {
             checked++;
             String script = Files.readString(buildFile.toPath(), StandardCharsets.UTF_8);
             String language = moduleDir.getName();
-            checkOwnLanguage(violations, language, LANGUAGE_JAR_INCLUDE.matcher(script));
-            checkOwnLanguage(violations, language, PROVIDED_MODULE_FILE_TREE.matcher(script));
+            checkLanguageArtifacts(violations, language, script);
             checkCatalogAlias(violations, language, CATALOG_ALIAS.matcher(script));
-            if (!PROVIDED_MODULE_FILE_TREE.matcher(script).find()) {
-                violations.add(language + ": language jar is not resolved from providedModuleLibsDir; "
-                        + "an incomplete source distribution would not be detected");
-            }
-            if (script.contains("implementation fileTree(dir: providedCoreLibsDir")) {
+            if (script.contains("implementation omegatModule.providedCoreLib(")) {
                 violations.add(language + ": bundles its content from the provided core libraries, "
                         + "which do not contain the language jars");
+            }
+            if (PROVIDED_LIBS_FILE_TREE.matcher(script).find()) {
+                violations.add(language + ": resolves provided libraries with a plain fileTree; "
+                        + "use omegatModule.providedCoreLib / providedModuleLib instead, which fail "
+                        + "on an empty match");
             }
         }
         assertTrue("Expected to audit at least 25 language modules, found " + checked, checked >= 25);
         assertTrue(String.join("\n", violations), violations.isEmpty());
     }
 
-    private static void checkOwnLanguage(List<String> violations, String language, Matcher matcher) {
-        while (matcher.find()) {
-            if (!matcher.group(1).equals(language)) {
-                violations.add(language + ": references the language jar of '" + matcher.group(1) + "'");
+    /**
+     * Every LanguageTool language jar requested from the provided module libraries has
+     * to be the module's own, and the module has to request it. Additional artifacts in
+     * the same call, such as the part-of-speech dictionaries, are left alone.
+     */
+    private static void checkLanguageArtifacts(List<String> violations, String language, String script) {
+        boolean bundlesOwnLanguage = false;
+        Matcher calls = PROVIDED_MODULE_LIB.matcher(script);
+        while (calls.find()) {
+            Matcher artifacts = LANGUAGE_ARTIFACT.matcher(calls.group(1));
+            while (artifacts.find()) {
+                if (artifacts.group(1).equals(language)) {
+                    bundlesOwnLanguage = true;
+                } else {
+                    violations.add(language + ": references the language jar of '"
+                            + artifacts.group(1) + "'");
+                }
             }
+        }
+        if (!bundlesOwnLanguage) {
+            violations.add(language + ": language jar is not resolved through "
+                    + "omegatModule.providedModuleLib('language-" + language + "'); "
+                    + "an incomplete source distribution would not be detected");
         }
     }
 

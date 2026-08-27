@@ -52,7 +52,7 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -545,7 +545,7 @@ public final class ProjectUICommands {
      *            local omegat.project.
      * @return true if identical, otherwise false.
      */
-    static boolean isIdenticalOmegatProjectProperties(ProjectProperties that, ProjectProperties my) {
+    static boolean isIdenticalOmegatProjectProperties(@Nullable ProjectProperties that, @Nullable ProjectProperties my) {
         if (my == that) {
             return true;
         }
@@ -621,7 +621,7 @@ public final class ProjectUICommands {
     }
 
     static void setRootRepositoryMapping(List<RepositoryDefinition> repos,
-            RepositoryDefinition repositoryDefinition) {
+            @Nullable RepositoryDefinition repositoryDefinition) {
         if (repositoryDefinition == null) {
             return;
         }
@@ -1198,7 +1198,7 @@ public final class ProjectUICommands {
      * @param skipConfirm if true, do not show any confirmation dialog even if preferences would
      *                    normally require it and even if a project is open but unmodified
      */
-    public static void projectRestart(String projectDir, boolean skipConfirm) {
+    public static void projectRestart(@Nullable String projectDir, boolean skipConfirm) {
         prepareForExit(skipConfirm, () -> Main.restartGUI(projectDir));
     }
 

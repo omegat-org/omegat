@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2018 Thomas Cordonnier
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,14 +26,14 @@
 
 package org.omegat.filters4.xml.openxml;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamWriter;
@@ -43,12 +44,11 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.stream.events.Attribute;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.filters3.xml.openxml.OpenXMLOptions;
 import org.omegat.filters4.xml.AbstractXmlFilter;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.FilterContext;
 import org.omegat.util.OStrings;
 
 /**
@@ -81,20 +81,13 @@ public class OpenXmlFilter extends AbstractXmlFilter {
         return new Instance[] { new Instance("*.xml") };
     }
 
-    private boolean doCompactTags = false;
-
-    @Override
-    public boolean isFileSupported(java.io.File inFile, Map<String, String> config, FilterContext context) {
-        this.doCompactTags = new OpenXMLOptions(config).getAggregateTags();
-        return inFile.getName().toLowerCase().endsWith(".xml");
-    }
 
     // ------------------ AbstractXmlFilter part-----------
 
-    private QName ooxmlMainParaElement = null;
+    private @Nullable QName ooxmlMainParaElement = null;
 
-    private LinkedList<List<XMLEvent>> currentPara = null;
-    private List<XMLEvent> currentBuffer = null;
+    private @Nullable List<List<XMLEvent>> currentPara = null;
+    private @Nullable List<XMLEvent> currentBuffer = null;
 
     @Override // start events on body
     protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
@@ -103,8 +96,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
+    protected boolean processStartElement(StartElement startElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         if (ooxmlMainParaElement == null) {
             ooxmlMainParaElement = startElement.getName();
@@ -118,15 +110,18 @@ public class OpenXmlFilter extends AbstractXmlFilter {
             if ("p".equals(name.getLocalPart()) // word
                     || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
-                currentBuffer = new LinkedList<>();
-                currentPara = new LinkedList<>();
+                currentBuffer = new ArrayList<>();
+                currentPara = new ArrayList<>();
                 currentPara.add(currentBuffer);
                 currentBuffer.add(startElement);
                 return false;
             }
             if ("r".equals(name.getLocalPart())) {
-                if ((currentBuffer == null) || (!currentBuffer.isEmpty())) {
-                    currentBuffer = new LinkedList<>();
+                if ((currentBuffer == null) || !currentBuffer.isEmpty()) {
+                    currentBuffer = new ArrayList<>();
+                    if (currentPara == null) {
+                        currentPara = new ArrayList<>();
+                    }
                     currentPara.add(currentBuffer);
                 }
                 currentBuffer.add(startElement);
@@ -181,7 +176,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
             }
             if ("del".equals(name.getLocalPart())) { // contents of del is
                                                      // totally removed
-                currentBuffer = new LinkedList<>();
+                currentBuffer = new ArrayList<>();
                 return false;
             }
         }
@@ -192,7 +187,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
         return true;
     }
 
-    protected void fromEventToWriterOrBuffer(XMLEvent ev, XMLStreamWriter writer) throws XMLStreamException {
+    protected void fromEventToWriterOrBuffer(XMLEvent ev, @Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (currentBuffer != null) {
             currentBuffer.add(ev);
         } else if (writer != null) {
@@ -201,22 +196,28 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     @Override
-    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
+    protected boolean processEndElement(EndElement endElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         QName name = endElement.getName();
-        if (ooxmlMainParaElement.getNamespaceURI().equals(name.getNamespaceURI())) {
+        if (ooxmlMainParaElement != null && ooxmlMainParaElement.getNamespaceURI().equals(name.getNamespaceURI())) {
             if ("p".equals(name.getLocalPart()) // word
                     || "si".equals(name.getLocalPart()) || "comment".equals(name.getLocalPart()) // excel
             ) {
-                flushTranslation(writer);
+                if (currentPara != null) {
+                    flushTranslation(writer);
+                }
                 currentBuffer = null;
+                currentPara = null;
                 return true;
             }
             if ("r".equals(name.getLocalPart())) {
                 if (currentBuffer != null) {
                     // run which almost contains some text
                     currentBuffer.add(endElement);
-                    currentBuffer = new LinkedList<>();
+                    currentBuffer = new ArrayList<>();
+                    if (currentPara == null) {
+                        currentPara = new ArrayList<>();
+                    }
                     currentPara.add(currentBuffer);
                 }
                 return false;
@@ -239,7 +240,11 @@ public class OpenXmlFilter extends AbstractXmlFilter {
             }
             if ("del".equals(name.getLocalPart())) {
                 // end of deletion, restore normal behaviour
-                currentBuffer = currentPara.getLast();
+                if (currentPara != null && !currentPara.isEmpty()) {
+                    currentBuffer = currentPara.getLast();
+                } else {
+                    currentBuffer = null;
+                }
                 return false;
             }
         }
@@ -251,16 +256,16 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     @Override
-    protected boolean processCharacters(Characters event, XMLStreamWriter writer) {
+    protected boolean processCharacters(Characters event, @Nullable XMLStreamWriter writer) {
         if (currentBuffer != null) {
             currentBuffer.add(event);
         }
         return currentBuffer == null;
     }
 
-    private void flushTranslation(XMLStreamWriter writer) throws XMLStreamException {
+    private void flushTranslation(@Nullable XMLStreamWriter writer) throws XMLStreamException {
         String src = buildTags();
-        if (writer != null) {
+        if (writer != null && currentPara != null && !currentPara.isEmpty()) {
             for (XMLEvent ev : currentPara.getFirst()) {
                 fromEventToWriter(ev, writer);
             }
@@ -294,27 +299,26 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     protected Map<Character, Integer> tagsCount = new TreeMap<>();
-    private List<XMLEvent> defaultsForParagraph = new LinkedList<>();
+    private @Nullable List<XMLEvent> defaultsForParagraph = new ArrayList<>();
 
-    private QName textElement;
-    private static final Pattern PTN_EMPTY_AND_START = Pattern
-            .compile("((?:<[a-zA-Z]+[0-9]+/>)*)<([a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)"),
-            PTN_EMPTY_AND_END = Pattern
-                    .compile("((?:<[a-zA-Z]+[0-9]+/>)*)<(/[a-zA-Z]+[0-9]+)>((?:<[a-zA-Z]+[0-9]+/>)*)");
+    private @Nullable QName textElement;
 
     /**
      * Converts List<XMLEvent> to OmegaT format, with <x0/>, <g0>...</g0>, etc.
      * Also build maps to be reused later
      **/
     protected String buildTags() {
+        if (ooxmlMainParaElement == null) {
+            throw new IllegalStateException("ooxmlMainParaElement is null");
+        }
         if (textElement == null) {
             textElement = new QName(ooxmlMainParaElement.getNamespaceURI(), "t");
         }
         tagsMap.clear();
         tagsCount.replaceAll((c, v) -> 0);
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         defaultsForParagraph = null;
-        for (int i = 0; i < currentPara.size(); i++) {
+        for (int i = 0; i < Objects.requireNonNull(currentPara).size(); i++) {
             List<XMLEvent> run = currentPara.get(i);
             if (run.isEmpty()) {
                 continue;
@@ -354,12 +358,12 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                             ListIterator<XMLEvent> ir = currentPara.get(j).listIterator();
                             if (!ir.hasNext()) {
                                 currentPara.remove(j);
-                                continue LOOP2;
+                                continue;
                             }
                             XMLEvent ev = ir.next();
                             if (!(ev.isStartElement()
                                     && ev.asStartElement().getName().getLocalPart().equals("r"))) {
-                                continue LOOP2;
+                                continue;
                             }
                             ev = ir.next();
                             if (!(ev.isStartElement()
@@ -367,30 +371,30 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                                 // Segments contain <w:r> without <w:rPr>:
                                 // cannot use defaults
                                 defaultsForParagraph = null;
-                                break LOOP2;
+                                break;
                             }
-                            LOOP3: while (ir.hasNext()) {
+                            while (ir.hasNext()) {
                                 ev = ir.next();
                                 if (ev.isEndElement()
                                         && ev.asEndElement().getName().getLocalPart().equals("rPr")) {
-                                    break LOOP3;
+                                    break;
                                 }
                                 // We keep defaultsForParagraph only if all
                                 // elements from it
                                 // remain unchanged in current run
                                 if (ev.isEndElement()) {
-                                    continue LOOP3; // in StaX, empty tags are
-                                                    // represented by open+close
+                                    continue; // in StaX, empty tags are
+                                    // represented by open+close
                                 }
                                 if (!ev.isStartElement()) {
                                     defaultsForParagraph = null;
                                     break LOOP2; // we compare only start
-                                                 // elements
+                                    // elements
                                 }
                                 if (isInDefaults(ev.asStartElement()) == 1) {
                                     // Check whenever attributes are in separate
                                     // StaX events
-                                    List<Attribute> la = new LinkedList<>();
+                                    List<Attribute> la = new ArrayList<>();
                                     XMLEvent ev2 = ir.next();
                                     while (ev2.isAttribute()) {
                                         la.add((Attribute) ev2);
@@ -440,39 +444,13 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                 tagsCount.put('x', tc + 1);
             }
         }
-        // compact result
-        if (!this.doCompactTags) {
-            return res.toString();
-        }
-        compactBuiltTags(res, PTN_EMPTY_AND_START);
-        compactBuiltTags(res, PTN_EMPTY_AND_END);
-        for (Map.Entry<Character, Integer> me : tagsCount.entrySet()) {
-            char key = me.getKey();
-            int count = me.getValue();
-            // Search for removed tags...
-            for (int i = count - 2; i >= 0; i--) {
-                if (!res.toString().contains("<" + key + i)) {
-                    // found removed tag, shift number of next tags
-                    for (int j = i + 1; j < count; j++) {
-                        tagsMap.put("" + key + (j - 1), tagsMap.get("" + key + j));
-                        tagsMap.put("/" + key + (j - 1), tagsMap.get("/" + key + j));
-                        tagsMap.put("" + key + (j - 1), tagsMap.get("" + key + j));
-                        // res.replaceAll("(</?)$key$j(/?>)", "$1$key${j-1}$2")
-                        Pattern ptnThisTag = Pattern.compile("(</?)" + key + j + "(/?>)");
-                        Matcher mThisTag = ptnThisTag.matcher(res);
-                        while (mThisTag.find()) {
-                            res.replace(mThisTag.start(), mThisTag.end(),
-                                    mThisTag.group(1) + key + (j - 1) + mThisTag.group(2));
-                            mThisTag.reset(res);
-                        }
-                    }
-                }
-            }
-        }
         return res.toString();
     }
 
-    private void browseRunContents(List<XMLEvent> run, ListIterator<XMLEvent> runIter, StringBuffer res) {
+    private void browseRunContents(List<XMLEvent> run, ListIterator<XMLEvent> runIter, StringBuilder res) {
+        if (ooxmlMainParaElement == null) {
+            throw new IllegalStateException("ooxmlMainParaElement is null");
+        }
         XMLEvent next;
         while (runIter.hasNext()) {
             next = runIter.next();
@@ -486,20 +464,13 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                 final int idx = runIter.previousIndex();
                 String name = next.asStartElement().getName().getLocalPart();
                 switch (name) {
-                case "footnoteRef":
-                    prefixInt = 'n';
-                    break;
-                case "tab":
-                case "br":
-                    prefixInt = 'd';
-                    break;
-                case "drawing":
-                    prefixInt = 'g';
-                    break;
-                case "t":
+                case "footnoteRef" -> prefixInt = 'n';
+                case "tab", "br" -> prefixInt = 'd';
+                case "drawing" -> prefixInt = 'g';
+                case "t" -> {
                     continue;
-                default:
-                    prefixInt = 'e';
+                }
+                default -> prefixInt = 'e';
                 }
                 while (!(next.isEndElement() && next.asEndElement().getName().getLocalPart().equals(name))) {
                     next = runIter.next();
@@ -508,10 +479,10 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                 if (tcInt == null) {
                     tcInt = 0;
                 }
-                LinkedList<XMLEvent> nList = new LinkedList<>(run.subList(idx, runIter.nextIndex()));
+                List<XMLEvent> nList = new ArrayList<>(run.subList(idx, runIter.nextIndex()));
                 QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
                         ooxmlMainParaElement.getPrefix());
-                nList.add(0, eFactory.createStartElement(qR, null, null));
+                nList.addFirst(eFactory.createStartElement(qR, null, null));
                 nList.add(eFactory.createEndElement(qR, null));
                 res.append("<").append(prefixInt).append(tcInt).append("/>");
                 tagsMap.put("" + prefixInt + tcInt, nList);
@@ -521,44 +492,16 @@ public class OpenXmlFilter extends AbstractXmlFilter {
         }
     }
 
-    private void compactBuiltTags(StringBuffer res, Pattern pattern) {
-        Matcher mFull = pattern.matcher(res), mUniq;
-        while (mFull.find()) {
-            if (!mFull.group().contains("/>")) {
-                continue;
-            }
-            List<XMLEvent> lGlobal = tagsMap.get(mFull.group(2));
-            if (!(lGlobal instanceof LinkedList)) { // subList: copy because it
-                                                    // will be modified
-                lGlobal = new LinkedList<>(tagsMap.get(mFull.group(2)));
-                tagsMap.put(mFull.group(2), lGlobal);
-            }
-            mUniq = OMEGAT_TAG.matcher(mFull.group(3));
-            while (mUniq.find()) {
-                lGlobal.addAll(tagsMap.get(mUniq.group(2)));
-            }
-            LinkedList<XMLEvent> lToAdd = new LinkedList<>();
-            mUniq = OMEGAT_TAG.matcher(mFull.group(1));
-            while (mUniq.find()) {
-                lToAdd.addAll(tagsMap.get(mUniq.group(2)));
-            }
-            for (java.util.Iterator<XMLEvent> iAdd = lToAdd.descendingIterator(); iAdd.hasNext();) {
-                lGlobal.add(0, iAdd.next());
-            }
-            res.replace(mFull.start(), mFull.end(), "<" + mFull.group(2) + ">");
-            mFull.reset(res);
-        }
-    }
-
     protected char findPrefix(ListIterator<XMLEvent> wr) {
-        XMLEvent next = wr.next();
+        XMLEvent next;
+        wr.next();
         next = wr.next(); // pass w:r
         if (next.isStartElement() && next.asStartElement().getName().getLocalPart().equals("t")) {
             return '\u0000';
         }
         if (next.isStartElement() && next.asStartElement().getName().getLocalPart().equals("rPr")) {
-            List<String> attrs = new LinkedList<>();
-            RPR_LOOP: while (wr.hasNext()) { // read w:rPr
+            List<String> attrs = new ArrayList<>();
+            while (wr.hasNext()) { // read w:rPr
                 next = wr.next();
                 if (next.isEndElement() && next.asEndElement().getName().getLocalPart().equals("rPr")) {
                     break;
@@ -610,7 +553,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
             if (attrs.size() > 1) {
                 return 'p'; // plural
             }
-            switch (attrs.get(0)) {
+            switch (attrs.getFirst()) {
             case "rStyle":
                 return 's';
             case "rFonts":
@@ -638,6 +581,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
             case "lang":
                 return '\u0000';
             default:
+                // There is no default in design
             }
         }
         while (wr.hasNext()) { // not a w:rPr, generate something else
@@ -660,6 +604,8 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                 case "instrText":
                     // instrText should NOT be translated!!!
                     return 'e';
+                default:
+                    // There is no default in design
                 }
             } else if (next.isCharacters()) {
                 wr.previous();
@@ -671,8 +617,10 @@ public class OpenXmlFilter extends AbstractXmlFilter {
 
     // True if we can find in defaults this element with same attributes.
     // 0 = not found, 1 = found but differs, 2 = found equal
-    @SuppressWarnings("unchecked")
     private int isInDefaults(StartElement stEl) {
+        if (defaultsForParagraph == null) {
+            return 0;
+        }
         for (XMLEvent dev : defaultsForParagraph) {
             if (dev.isStartElement() && dev.asStartElement().getName().equals(stEl.getName())) {
                 Map<QName, String> mapNext = new java.util.HashMap<>(), mapDev = new java.util.HashMap<>();
@@ -691,11 +639,12 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     /**
-     * Produces xliff content for the translated text. Note: must be called
+     * {@inheritDoc} Produces xliff content for the translated text. Note: must be called
      * after buildTags(src, true) to have the necessary variables filled!
      **/
+    @Override
     protected List<XMLEvent> restoreTags(String tra) {
-        LinkedList<XMLEvent> res = new LinkedList<>();
+        List<XMLEvent> res = new ArrayList<>();
         while (!tra.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(tra);
             if (m.find()) {
@@ -730,7 +679,10 @@ public class OpenXmlFilter extends AbstractXmlFilter {
         return res;
     }
 
-    private void addSimpleRun(LinkedList<XMLEvent> res, String text) {
+    private void addSimpleRun(List<XMLEvent> res, String text) {
+        if (ooxmlMainParaElement == null) {
+            throw new IllegalStateException("ooxmlMainParaElement is null");
+        }
         QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
                 ooxmlMainParaElement.getPrefix());
         QName qT = new QName(ooxmlMainParaElement.getNamespaceURI(), "t",
@@ -759,8 +711,7 @@ public class OpenXmlFilter extends AbstractXmlFilter {
     }
 
     // Add characters with eventually xml:space=preserve
-    @SuppressWarnings("unchecked")
-    private void addCharacters(LinkedList<XMLEvent> res, String text) {
+    private void addCharacters(List<XMLEvent> res, String text) {
         if (text.trim().equals(text)) {
             res.add(eFactory.createCharacters(text));
             return;

@@ -72,5 +72,7 @@ tips:
   name: Use Check Issues for tag problems
 - file: ignore_dictionary_word.html
   name: Ignore a word in the dictionary
+- file: number_autoconvert.html
+  name: Fill number-only segments automatically
 - file: fuzzy_match_numbers.html
   name: Let fuzzy matching understand numbers

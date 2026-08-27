@@ -70,6 +70,7 @@ public class ProjectTMX {
     protected static final String PROP_XICE = "x-ice";
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
+    protected static final String PROP_XNUMBER = "x-number";
 
     public static final String PROP_ORIGIN = "origin";
 
@@ -255,6 +256,9 @@ public class ProjectTMX {
                     if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
                         p.add(PROP_XAUTO);
                         p.add("auto");
+                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.xNUMBER) {
+                        p.add(PROP_XNUMBER);
+                        p.add("number");
                     }
                 }
                 if (Preferences.isPreference(Preferences.SAVE_ORIGIN)) {
@@ -456,6 +460,9 @@ public class ProjectTMX {
         }
         if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
             externalLinked = TMXEntry.ExternalLinked.xAUTO;
+        }
+        if (externalLinked == null && te.hasPropValue(PROP_XNUMBER, null)) {
+            externalLinked = TMXEntry.ExternalLinked.xNUMBER;
         }
         return externalLinked;
     }

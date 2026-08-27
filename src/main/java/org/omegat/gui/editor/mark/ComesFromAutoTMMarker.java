@@ -68,6 +68,9 @@ public class ComesFromAutoTMMarker implements IMarker {
             break;
         case xENFORCED:
             m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED);
+            break;
+        case xNUMBER:
+            m.painter = createPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XNUMBER);
         }
         return Collections.singletonList(m);
     }

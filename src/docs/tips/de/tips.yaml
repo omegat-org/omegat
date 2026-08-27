@@ -82,3 +82,5 @@ tips:
   name: "MT-4tw-3"
 - file: "machine_translation_4tw_3.html"
   name: "MT-4tw-4"
+- file: "number_autoconvert.html"
+  name: "Zahlensegmente automatisch ausfüllen"

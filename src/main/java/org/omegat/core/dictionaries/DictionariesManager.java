@@ -43,6 +43,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -65,7 +66,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
 
     private final IDictionaries pane;
-    protected DirectoryMonitor monitor;
+    protected @Nullable DirectoryMonitor monitor;
     protected final List<IDictionaryFactory> factories = new ArrayList<>();
     protected final Map<String, IDictionary> dictionaries = new TreeMap<>();
     protected final List<IDictionary> onlineDictionaries = new ArrayList<>();
@@ -199,7 +200,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
         List<IDictionaryFactory> currFactories;
         synchronized (factories) {
-            currFactories = new ArrayList<IDictionaryFactory>(factories);
+            currFactories = new ArrayList<>(factories);
         }
         for (IDictionaryFactory factory : currFactories) {
             if (factory.isSupportedFile(file)) {
@@ -220,7 +221,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         synchronized (ignoreWords) {
             ignoreWords.clear();
-            lines.stream().map(String::trim).forEach(line -> ignoreWords.add(line));
+            lines.stream().map(String::trim).forEach(ignoreWords::add);
         }
     }
 
@@ -228,10 +229,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      * Add new ignore word.
      */
     public void addIgnoreWord(final String word) {
-        Collection<String> words = Collections.emptyList();
+        Collection<String> words;
         synchronized (ignoreWords) {
             ignoreWords.add(word);
-            words = new ArrayList<String>(ignoreWords);
+            words = new ArrayList<>(ignoreWords);
         }
         if (monitor != null) {
             saveIgnoreWords(words, new File(monitor.getDir(), IGNORE_FILE));
@@ -296,7 +297,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                     predictive.add(stemmed[0]);
                 }
             }
-            if (predictive.size() > 0) {
+            if (!predictive.isEmpty()) {
                 result.addAll(dict.retrieveArticlesPredictive(predictive));
             }
         } catch (Exception ex) {

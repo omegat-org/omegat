@@ -133,13 +133,14 @@ public final class TestTeamIntegration {
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
     private static final String PROJECT_SAVE_PATH = "omegat/project_save.tmx";
 
-    static final int MAX_DELAY_SECONDS = 15;
+    static final int DEFAULT_MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
 
     static @Nullable String mapRepo;
     static @Nullable String mapRepoType;
     static @Nullable String mapFile;
     static int processSeconds;
+    static int maxDelaySeconds;
 
     // referenced from TestTeamIntegrationChild class
     static final Language SRC_LANG = new Language("en");
@@ -178,9 +179,18 @@ public final class TestTeamIntegration {
         } catch (NumberFormatException ignored) {
             processSeconds = 4 * 60 * 60;
         }
+        try {
+            String propDelay = System.getProperty("omegat.test.delay");
+            maxDelaySeconds = propDelay != null ? Integer.parseInt(propDelay) : DEFAULT_MAX_DELAY_SECONDS;
+        } catch (NumberFormatException ignored) {
+            maxDelaySeconds = DEFAULT_MAX_DELAY_SECONDS;
+        }
+        // child nodes get randomized sleep intervals with nextInt(maxDelaySeconds * 1000)
+        maxDelaySeconds = Math.max(1, maxDelaySeconds);
 
         System.out.println("Target repository: " + repositoryProperty);
         System.out.println("Process duration: " + processSeconds + " seconds");
+        System.out.println("Max delay between changes: " + maxDelaySeconds + " seconds");
         if (mapRepo != null) {
             System.out.println("Map repository: " + mapRepo);
             System.out.println("Map repository type: " + mapRepoType);
@@ -194,7 +204,7 @@ public final class TestTeamIntegration {
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
             Path runnerDir = setupRunnerDirectory(tempDir, i);
-            runs[i] = new Run(THREADS[i], runnerDir.toFile(), MAX_DELAY_SECONDS,
+            runs[i] = new Run(THREADS[i], runnerDir.toFile(), maxDelaySeconds,
                     repositoryUrls.get(i % repositoryUrls.size()), logConfig);
         }
         for (int i = 0; i < THREADS.length; i++) {

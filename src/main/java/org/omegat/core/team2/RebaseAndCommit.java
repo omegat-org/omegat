@@ -26,15 +26,18 @@
 package org.omegat.core.team2;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
+import org.eclipse.jgit.errors.MissingObjectException;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.team2.operation.IRebaseOperation;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
+import org.tmatesoft.svn.core.SVNErrorCode;
+import org.tmatesoft.svn.core.SVNException;
 
-import org.omegat.util.OStrings;
+import org.omegat.util.Log;
 
 /**
  * Core for rebase and commit files.
@@ -47,8 +50,6 @@ public final class RebaseAndCommit {
 
     private RebaseAndCommit() {
     }
-
-    private static final ILogger LOGGER = LoggerFactory.getLogger(RebaseAndCommit.class, OStrings.getResourceBundle());
 
     public static final String VERSION_PREFIX = "version-based-on.";
 
@@ -71,7 +72,20 @@ public final class RebaseAndCommit {
         r.path = path;
         final String currentBaseVersion = savedVersion;
         // retrieve BASE version
-        File baseFile = provider.switchToVersion(path, currentBaseVersion);
+        File baseFile;
+        try {
+            baseFile = provider.switchToVersion(path, currentBaseVersion);
+        } catch (Exception ex) {
+            if (!isMissingVersion(ex)) {
+                throw ex;
+            }
+            // The saved base version no longer exists in the repository, e.g.
+            // after the repository or the local copy was rebuilt. Skip the
+            // preparation; the synchronous rebase recovers via an empty base.
+            Log.logWarningRB("TEAM_BASE_VERSION_LOST", path, currentBaseVersion);
+            Log.logDebug("stale base version in prepare: {0}", ex);
+            return null;
+        }
         // save it to prepared dir
         r.versionBase = currentBaseVersion;
         r.fileBase = provider.toPrepared(baseFile);
@@ -92,33 +106,21 @@ public final class RebaseAndCommit {
             throw new RuntimeException("Path is not under mapping: " + path);
         }
 
-        final String currentBaseVersion;
-        String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
-        if (savedVersion != null) {
-            currentBaseVersion = savedVersion;
-        } else {
-            provider.switchToVersion(path, null);
-            currentBaseVersion = provider.getVersion(path);
-        }
+        final BaseState base = resolveBase(prep, provider, projectDir, path);
+        final String currentBaseVersion = base.version();
+        final File baseRepoFile = base.file();
         final File localFile = new File(projectDir, path);
         final boolean fileChangedLocally;
-        File baseRepoFile = null;
-        if (prep != null && prep.getVersionBase().equals(currentBaseVersion)) {
-            baseRepoFile = prep.getFileBase();
-        }
-        if (baseRepoFile == null) {
-            baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
-        }
         if (!localFile.exists()) {
             // there is no local file - just use remote
-            LOGGER.atDebug().setMessage("local file '{0}' doesn't exist").addArgument(path).log();
+            Log.logDebug("local file '{0}' doesn't exist", path);
             fileChangedLocally = false;
         } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
             // versioned file was not changed - no need to commit
-            LOGGER.atDebug().setMessage("local file '{0}' wasn't changed").addArgument(path).log();
+            Log.logDebug("local file '{0}' wasn't changed", path);
             fileChangedLocally = false;
         } else {
-            LOGGER.atDebug().setMessage("local file '{0}' was changed").addArgument(path).log();
+            Log.logDebug("local file '{0}' was changed", path);
             fileChangedLocally = true;
             rebaser.parseBaseFile(baseRepoFile);
         }
@@ -127,7 +129,7 @@ public final class RebaseAndCommit {
 
         File headRepoFile = null;
         String headVersion = null;
-        if (prep != null) {
+        if (prep != null && prep.getVersionHead() != null && prep.getFileHead() != null) {
             headVersion = prep.getVersionHead();
             headRepoFile = prep.getFileHead();
         }
@@ -146,12 +148,12 @@ public final class RebaseAndCommit {
                 fileChangedRemotely = false;
             }
         } else if (Objects.equals(currentBaseVersion, headVersion)) {
-            LOGGER.atDebug().setMessage("remote file '{0}' wasn't changed").addArgument(path).log();
+            Log.logDebug("remote file '{0}' wasn't changed", path);
             fileChangedRemotely = false;
         } else {
             // base and head versions are differ - somebody else committed
             // changes
-            LOGGER.atDebug().setMessage("remote file '{0}' was changed").addArgument(path).log();
+            Log.logDebug("remote file '{0}' was changed", path);
             fileChangedRemotely = true;
             rebaser.parseHeadFile(headRepoFile);
         }
@@ -163,21 +165,21 @@ public final class RebaseAndCommit {
         boolean needBackup = false;
         if (fileChangedLocally && fileChangedRemotely) {
             // rebase need only in case file was changed locally AND remotely
-            LOGGER.atDebug().setMessage("rebase and save '{0}'").addArgument(path).log();
+            Log.logDebug("rebase and save '{0}'", path);
             needBackup = true;
             rebaser.rebaseAndSave(tempOut);
         } else if (fileChangedLocally /* && !fileChangedRemotely = true */) {
             // only local changes - just use local file
-            LOGGER.atDebug().setMessage("only local changes - just use local file '{0}'").addArgument(path).log();
+            Log.logDebug("only local changes - just use local file '{0}'", path);
         } else if (fileChangedRemotely /* && !fileChangedLocally = true */) {
             // only remote changes - get remote
-            LOGGER.atDebug().setMessage("only remote changes - get remote '{0}'").addArgument(path).log();
+            Log.logDebug("only remote changes - get remote '{0}'", path);
             needBackup = true;
             if (headRepoFile.exists()) { // otherwise file was removed remotely
                 FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
-            LOGGER.atDebug().setMessage("there are no changes '{0}'").addArgument(path).log();
+            Log.logDebug("there are no changes '{0}'", path);
             // there are no changes
         }
 
@@ -194,12 +196,21 @@ public final class RebaseAndCommit {
             if (tempOut.exists()) {
                 boolean ignored = localFile.delete();
                 FileUtils.moveFile(tempOut, localFile);
-                LOGGER.atDebug().setMessage("create local file {0}").addArgument(localFile).log();
+                Log.logDebug("create local file {0}", localFile);
             }
+        }
+
+        if (base.stale() && !needBackup && headVersion != null) {
+            // nothing was merged or committed, so heal the lost marker directly
+            provider.getTeamSettings().set(VERSION_PREFIX + path, headVersion);
         }
 
         if (prep != null) {
             Prepared prepared = new Prepared();
+            // commitPrepared() later needs the path and the head version
+            prepared.path = path;
+            prepared.versionBase = currentBaseVersion;
+            prepared.versionHead = headVersion;
             prepared.needToCommit = fileChangedLocally;
             prepared.commitComment = rebaser.getCommentForCommit();
             if (fileChangedLocally) {
@@ -294,6 +305,66 @@ public final class RebaseAndCommit {
          * return null if conversion not required.
          */
         String getFileCharset(File file) throws Exception;
+    }
+
+    /**
+     * The base version to rebase against and its checked-out file. When the
+     * stored marker is stale (the version no longer exists in the repository),
+     * {@code stale} is true, {@code file} does not exist and {@code version}
+     * is a sentinel: the rebase contract treats a non-existent file as empty
+     * data, so local and remote survive as a three-way merge with an empty
+     * base instead of one side silently overwriting the other.
+     */
+    private record BaseState(String version, File file, boolean stale) {
+    }
+
+    private static BaseState resolveBase(PreparedFileInfo prep, RemoteRepositoryProvider provider,
+            File projectDir, String path) throws Exception {
+        String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
+        if (savedVersion == null) {
+            File file = provider.switchToVersion(path, null);
+            return new BaseState(provider.getVersion(path), file, false);
+        }
+        if (prep != null && savedVersion.equals(prep.getVersionBase()) && prep.getFileBase() != null) {
+            return new BaseState(savedVersion, prep.getFileBase(), false);
+        }
+        try {
+            return new BaseState(savedVersion, provider.switchToVersion(path, savedVersion), false);
+        } catch (Exception ex) {
+            if (!isMissingVersion(ex)) {
+                throw ex;
+            }
+            // The saved base version no longer exists in the repository, e.g.
+            // after the repository or the local copy was rebuilt. Recover with
+            // an empty base instead of making the project unloadable.
+            Log.logWarningRB("TEAM_BASE_VERSION_LOST", path, savedVersion);
+            Log.logDebug("stale base version in rebaseAndCommit: {0}", ex);
+            File empty = new File(projectDir, path + "#lost_base_" + savedVersion);
+            if (empty.exists() && !empty.delete()) {
+                throw new IOException("Unable to delete previous temp file " + empty);
+            }
+            return new BaseState("lost-base-" + savedVersion, empty, true);
+        }
+    }
+
+    /**
+     * Only a version that provably does not exist (anymore) in the repository
+     * counts as a stale marker. Transient failures - network outages, stale
+     * lock files, full disks - must keep failing loudly: recovering from them
+     * would destroy a still-valid marker and turn a hiccup into a merge
+     * against the wrong base.
+     */
+    private static boolean isMissingVersion(Throwable ex) {
+        for (Throwable t = ex; t != null; t = t.getCause() == t ? null : t.getCause()) {
+            if (t instanceof MissingObjectException || t instanceof RefNotFoundException) {
+                return true;
+            }
+            if (t instanceof SVNException
+                    && ((SVNException) t).getErrorMessage().getErrorCode() == SVNErrorCode.FS_NO_SUCH_REVISION) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

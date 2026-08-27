@@ -25,8 +25,8 @@
 
 package org.omegat.filters4.xml.xliff;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -44,6 +44,7 @@ import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters4.xml.AbstractXmlFilter;
@@ -62,7 +63,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
         return new Instance[] { new Instance("*.xlf"), new Instance("*.xliff") };
     }
 
-    protected String namespace = null;
+    protected @Nullable String namespace = null;
 
     @Override
     public boolean isFileSupported(java.io.File inFile, Map<String, String> config, FilterContext context) {
@@ -101,12 +102,12 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     /* -- Data about current unit */
     protected String path = "/";
-    protected String ignoreScope = null;
-    protected List<XMLEvent> currentBuffer = null;
+    protected @Nullable String ignoreScope = null;
+    protected @Nullable List<XMLEvent> currentBuffer = null;
     protected boolean inTarget = false;
-    protected List<XMLEvent> source = new LinkedList<>();
-    protected List<XMLEvent> target = null;
-    protected List<XMLEvent> note = new LinkedList<>();
+    protected List<XMLEvent> source = new ArrayList<>();
+    protected @Nullable List<XMLEvent> target = null;
+    protected final List<XMLEvent> note = new ArrayList<>();
 
     protected void cleanBuffers() {
         source.clear();
@@ -115,7 +116,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     }
 
     @Override
-    protected boolean processCharacters(Characters event, XMLStreamWriter evWriter)
+    protected boolean processCharacters(Characters event, @Nullable XMLStreamWriter evWriter)
             throws XMLStreamException {
         if (currentBuffer != null) {
             currentBuffer.add(event);
@@ -138,13 +139,13 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     protected abstract String buildTags(List<XMLEvent> srcList, boolean reuse);
 
     /** Enables not to add some entries. To be overridden by subtypes **/
-    protected boolean isToIgnore(String src, String tra) {
+    protected boolean isToIgnore(String src, @Nullable String tra) {
         return false;
     }
 
     /** Add one unit to OmegaT, or more in case of <mrk mtype="seg"> **/
     protected void registerCurrentTransUnit(String entryId, List<XMLEvent> unitSource,
-            List<XMLEvent> unitTarget, String notePattern) {
+            @Nullable List<XMLEvent> unitTarget, @Nullable String notePattern) {
         String src = buildTags(unitSource, false);
         String tra = null;
         if (unitTarget != null && !unitTarget.isEmpty()) {
@@ -154,9 +155,9 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             return; // may ignore some pre-translated src->tra pairs
         }
         if (entryParseCallback != null) {
-            StringBuffer noteStr = null;
-            if (notePattern != null && note != null && !note.isEmpty()) {
-                noteStr = new StringBuffer();
+            StringBuilder noteStr = null;
+            if (notePattern != null && !note.isEmpty()) {
+                noteStr = new StringBuilder();
                 for (XMLEvent ev : note) {
                     String noteContent = ev.getEventType() == XMLStreamConstants.CHARACTERS
                             ? ((Characters) ev).getData()
@@ -165,9 +166,9 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 }
             }
             if (notePattern != null && !".*".equals(notePattern)) {
-                StringBuffer subNoteBuf = noteStr;
+                StringBuilder subNoteBuf = noteStr;
                 if (subNoteBuf != null) {
-                    subNoteBuf = new StringBuffer();
+                    subNoteBuf = new StringBuilder();
                     Matcher noteMatch = Pattern.compile(notePattern).matcher(noteStr.toString());
                     while (noteMatch.find()) {
                         if (noteMatch.group(1).equals(entryId.substring(entryId.lastIndexOf("/") + 1))) {
@@ -226,15 +227,14 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 break;
             }
         }
-        String key = pairedHolders.get(pairId.getValue());
+        String key = pairedHolders.get(Objects.requireNonNull(pairId).getValue());
         if (!reuse) {
             tagsMap.put("/" + key, nativeCode);
         }
         return "</" + key + ">";
     }
 
-    protected void startStackElement(boolean reuse, StartElement stEl, char prefix, int count,
-            StringBuffer res) {
+    protected void startStackElement(boolean reuse, StartElement stEl, char prefix, int count, StringBuilder res) {
         if (reuse) {
             String k = findKey(stEl, false);
             Matcher m = OMEGAT_TAG.matcher(k);

@@ -414,6 +414,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         toolsCheckIssuesMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES");
         toolsCheckIssuesCurrentFileMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE");
+        toolsNumberConvertMenuItem = createMenuItem("TF_MENU_TOOLS_NUMBER_CONVERT");
         toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD");
         toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES");
         toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem(
@@ -600,6 +601,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         toolsMenu.add(toolsCheckIssuesMenuItem);
         toolsMenu.add(toolsCheckIssuesCurrentFileMenuItem);
+        toolsMenu.add(toolsNumberConvertMenuItem);
         toolsMenu.add(toolsShowStatisticsStandardMenuItem);
         toolsMenu.add(toolsShowStatisticsMatchesMenuItem);
         toolsMenu.add(toolsShowStatisticsMatchesPerFileMenuItem);
@@ -846,6 +848,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem, gotoMatchSourceSegment,
 
                 viewFileListMenuItem, toolsCheckIssuesMenuItem, toolsCheckIssuesCurrentFileMenuItem,
+                toolsNumberConvertMenuItem,
                 toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
                 toolsShowStatisticsMatchesPerFileMenuItem };
 
@@ -1128,6 +1131,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenu toolsMenu;
     JMenuItem toolsCheckIssuesMenuItem;
     JMenuItem toolsCheckIssuesCurrentFileMenuItem;
+    JMenuItem toolsNumberConvertMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem toolsShowStatisticsMatchesPerFileMenuItem;

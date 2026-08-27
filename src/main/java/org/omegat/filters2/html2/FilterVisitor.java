@@ -187,20 +187,22 @@ public class FilterVisitor extends NodeVisitor {
             maybeTranslateAttribute(tag, "abbr");
             maybeTranslateAttribute(tag, "alt");
             maybeTranslateAttribute(tag, "dir");
-            if (options.getTranslateHref()) {
-                maybeTranslateAttribute(tag, "href");
-            }
-            if (options.getTranslateHreflang()) {
-                maybeTranslateAttribute(tag, "hreflang");
-            }
-            if (options.getTranslateLang()) {
-                maybeTranslateAttribute(tag, "lang");
-                maybeTranslateAttribute(tag, "xml:lang");
+            if (options != null) {
+                if (options.getTranslateHref()) {
+                    maybeTranslateAttribute(tag, "href");
+                }
+                if (options.getTranslateHreflang()) {
+                    maybeTranslateAttribute(tag, "hreflang");
+                }
+                if (options.getTranslateLang()) {
+                    maybeTranslateAttribute(tag, "lang");
+                    maybeTranslateAttribute(tag, "xml:lang");
+                }
+                if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc()) {
+                    maybeTranslateAttribute(tag, "src");
+                }
             }
             maybeTranslateAttribute(tag, "label");
-            if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc()) {
-                maybeTranslateAttribute(tag, "src");
-            }
             maybeTranslateAttribute(tag, "summary");
             maybeTranslateAttribute(tag, "title");
             if ("INPUT".equals(tag.getTagName())) {
@@ -238,7 +240,7 @@ public class FilterVisitor extends NodeVisitor {
     private static final Set<String> TRANSLATABLE_ATTRIBUTES = Set.of("submit", "button", "reset");
 
     private boolean isTranslateAttribute(Tag tag) {
-        if (!options.getTranslateValue() && !options.getTranslateButtonValue()) {
+        if (options == null || !options.getTranslateValue() && !options.getTranslateButtonValue()) {
             return false;
         }
         return TRANSLATABLE_ATTRIBUTES.contains(tag.getAttribute("type").toLowerCase(Locale.ENGLISH));
@@ -337,6 +339,9 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     private boolean shouldKeepComments() {
+        if (options == null) {
+            return true;
+        }
         return !options.getRemoveComments();
     }
 
@@ -397,7 +402,7 @@ public class FilterVisitor extends NodeVisitor {
                 "TITLE", "TR", "UL", "VIDEO" };
         String[] parentElementTags = { "HEAD", "HTML" };
 
-        return (tagname.equals("BR") && options.getParagraphOnBr())
+        return (tagname.equals("BR") && options != null && options.getParagraphOnBr())
                 || List.of(parentElementTags).contains(tagname)
                 || List.of(blockElementTags).contains(tagname);
     }
@@ -597,10 +602,10 @@ public class FilterVisitor extends NodeVisitor {
         // appending all tags starting from "first good" one to paragraph text
         for (int i = firstTagToIncludeFromPreceding; i <= lastTagKeptInFollowing; i++) {
             Node node = allNodesInParagraph.get(i);
-            if (node instanceof Tag) {
-                assignShortcut((Tag) node, paragraph);
-            } else if (node instanceof Remark) {
-                assignShortcut((Remark) node, paragraph);
+            if (node instanceof Tag tag) {
+                assignShortcut(tag, paragraph);
+            } else if (node instanceof Remark remark) {
+                assignShortcut(remark, paragraph);
             } else { // node instanceof Text
                 paragraph.append(HTMLUtils.entitiesToChars(node.toHtml()));
             }
@@ -626,10 +631,11 @@ public class FilterVisitor extends NodeVisitor {
         // Core.getFilterMaster().getConfig().isPreserveSpaces() option instead
         // to compress if
         // not checked.)
+        boolean compressWhitespace = options != null && options.getCompressWhitespace();
         if (!betweenPreformattingTags) {
 
-            spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());
-            spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, options.getCompressWhitespace());
+            spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, compressWhitespace);
+            spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, compressWhitespace);
 
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(uncompressed);
@@ -642,7 +648,7 @@ public class FilterVisitor extends NodeVisitor {
         String translation = filter.privateProcessEntry(compressed, null);
 
         // writing out uncompressed
-        if (compressed.equals(translation) && !options.getCompressWhitespace()) {
+        if (compressed.equals(translation) && !compressWhitespace) {
             translation = uncompressed;
             // uncompressed contains pre/postfix whitespace, so do not add that
             // extra!
@@ -909,7 +915,7 @@ public class FilterVisitor extends NodeVisitor {
      * @return the compressed input.
      */
     private String compressWhitespace(String input) {
-        if (options.getCompressWhitespace()) {
+        if (options != null && options.getCompressWhitespace()) {
             Matcher whitespaceMatch = PatternConsts.SPACE_TAB.matcher(input);
             // keep at least 1 space, as not to change the meaning of the
             // document.

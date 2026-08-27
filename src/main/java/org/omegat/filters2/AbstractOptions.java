@@ -79,17 +79,21 @@ public abstract class AbstractOptions {
     }
 
     /**
-     * Get string from string option.
+     * Get string from a string option.
      *
      * @param key
      *            value key
      * @param defaultValue
-     *            default value, if value will be null
+     *            default non-null value, if value is null
      * @return parsed value
      */
-    protected @Nullable String getString(String key, @Nullable String defaultValue) {
+    protected String getString(String key, String defaultValue) {
         String value = options.get(key);
         return value != null ? value : defaultValue;
+    }
+
+    protected @Nullable String getString(String key) {
+        return options.get(key);
     }
 
     /**
@@ -105,20 +109,39 @@ public abstract class AbstractOptions {
     }
 
     /**
-     * Get string from string option.
+     * Get string from a string option.
      *
      * @param key
      *            value key
      * @param defaultValue
-     *            default value, if value will be null
+     *            default non-null value, if value will be null
      * @return parsed value
      */
-    protected @Nullable <T extends Enum<T>> T getEnum(Class<T> enumType, String key, @Nullable T defaultValue) {
+    protected <T extends Enum<T>> T getEnum(Class<T> enumType, String key, T defaultValue) {
         String value = options.get(key);
         try {
             return Enum.valueOf(enumType, value);
         } catch (Exception ex) {
             return defaultValue;
+        }
+    }
+
+    /**
+     * Retrieves the enum constant of the specified enum type corresponding to the value
+     * associated with the given key in the options map.
+     *
+     * @param <T> the type of the enum
+     * @param enumType the class of the enum type from which to get the constant
+     * @param key the key used to look up the value in the options map
+     * @return the enum constant corresponding to the value associated with the key,
+     *         or {@code null} if no matching value is found or an error occurs during the lookup
+     */
+    protected @Nullable <T extends Enum<T>> T getEnum(Class<T> enumType, String key) {
+        String value = options.get(key);
+        try {
+            return Enum.valueOf(enumType, value);
+        } catch (Exception ex) {
+            return null;
         }
     }
 

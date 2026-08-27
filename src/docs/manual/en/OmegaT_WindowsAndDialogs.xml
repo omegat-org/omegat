@@ -12,6 +12,5 @@
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_TextSearch.xml"></xi:include>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_TextReplace.xml"></xi:include>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_Aligner.xml"></xi:include>
-   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_NumberConvert.xml"></xi:include>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Windows_Scripts.xml"></xi:include>
 </chapter>

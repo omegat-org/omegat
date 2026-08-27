@@ -36,8 +36,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
@@ -432,6 +436,27 @@ public class ProjectProperties {
     }
 
     /**
+     * Character equivalence classes disabled for fuzzy matching in this
+     * project (feature request #1681). Default, none: every class active.
+     */
+    public Set<MatchEquivalence> getDisabledMatchEquivalences() {
+        return EnumSet.copyOf(disabledMatchEquivalences);
+    }
+
+    /** Sets character equivalence classes disabled for fuzzy matching. */
+    public void setDisabledMatchEquivalences(Collection<MatchEquivalence> disabled) {
+        disabledMatchEquivalences.clear();
+        disabledMatchEquivalences.addAll(disabled);
+    }
+
+    /** Character equivalence classes active for fuzzy matching. */
+    public Set<MatchEquivalence> getActiveMatchEquivalences() {
+        Set<MatchEquivalence> active = MatchEquivalence.all();
+        active.removeAll(disabledMatchEquivalences);
+        return active;
+    }
+
+    /**
      * Sets level(s) of TMs to be exported by project. Accepts three booleans as
      * arguments, corresponding to OmegaT, Level 1 and Level 2
      */
@@ -688,6 +713,8 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingEnabled;
     private boolean matchNumbersEnabled;
+    private final Set<MatchEquivalence> disabledMatchEquivalences = EnumSet
+            .noneOf(MatchEquivalence.class);
     private boolean supportDefaultTranslations;
     private boolean removeTags;
     private List<String> exportTmLevels;

@@ -37,6 +37,7 @@ package org.omegat.gui.search;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,17 +54,25 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
-import javax.swing.JComponent;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
@@ -81,6 +90,7 @@ import org.openide.awt.Mnemonics;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
 import org.omegat.core.search.Searcher;
@@ -122,6 +132,10 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SearchWindowController {
 
     private final SearchWindowForm form;
+    private final Map<MatchEquivalence, JCheckBox> searchEquivalenceCBs = new EnumMap<>(
+            MatchEquivalence.class);
+    private final Map<MatchEquivalence, JCheckBox> replaceEquivalenceCBs = new EnumMap<>(
+            MatchEquivalence.class);
     private final SearchMode mode;
     private final int initialEntry;
     private final CaretPosition initialCaret;
@@ -133,6 +147,7 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
+        insertEquivalenceRows();
         Font f = Objects.requireNonNull(Core.getMainWindow()).getApplicationFont();
         setFont(f);
 
@@ -361,6 +376,8 @@ public class SearchWindowController {
 
         ActionListener wholeWordsStatusUpdate = e -> updateWholeWordsStatus();
 
+        wireReplaceEquivalenceStatus();
+
         form.m_searchExactSearchRB.addActionListener(searchFieldRequestFocus);
         form.m_searchExactSearchRB.addActionListener(wholeWordsStatusUpdate);
 
@@ -580,10 +597,6 @@ public class SearchWindowController {
         form.m_searchCase
                 .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
 
-        // nbsp as space
-        form.m_searchSpaceMatchNbsp.setSelected(
-                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, false));
-
         // whole words only
         form.m_searchWholeWords.setSelected(
                 Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_WHOLE_WORDS, false));
@@ -614,10 +627,6 @@ public class SearchWindowController {
         // case sensitivity
         form.m_replaceCase.setSelected(
                 Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
-
-        // nbsp as space
-        form.m_replaceSpaceMatchNbsp.setSelected(
-                Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE, false));
 
         // replace type
         SearchExpression.SearchExpressionType replaceType = Preferences.getPreferenceEnumDefault(
@@ -689,8 +698,6 @@ public class SearchWindowController {
 
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_searchCase.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP,
-                form.m_searchSpaceMatchNbsp.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_WHOLE_WORDS,
                 form.m_searchWholeWords.isSelected());
 
@@ -712,8 +719,6 @@ public class SearchWindowController {
         // replace options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE,
                 form.m_replaceCase.isSelected());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE,
-                form.m_replaceSpaceMatchNbsp.isSelected());
         if (form.m_replaceExactSearchRB.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_REPLACE_TYPE,
                     SearchExpression.SearchExpressionType.EXACT);
@@ -795,6 +800,7 @@ public class SearchWindowController {
 
         form.m_replaceSpaceMatchNbsp.setSelected(false);
         form.m_replaceExactSearchRB.setSelected(true);
+        resetEquivalenceOptions();
 
         form.m_replaceUntranslated.setSelected(true);
 
@@ -837,6 +843,94 @@ public class SearchWindowController {
      */
     private void updateWholeWordsStatus() {
         form.m_searchWholeWords.setEnabled(!form.m_searchRegexpSearchRB.isSelected());
+        // Folding a regular expression would corrupt its syntax, so character
+        // equivalence only applies to exact and keyword searches.
+        boolean plainSearch = !form.m_searchRegexpSearchRB.isSelected();
+        searchEquivalenceCBs.values().forEach(cb -> cb.setEnabled(plainSearch));
+    }
+
+    private void wireReplaceEquivalenceStatus() {
+        form.m_replaceExactSearchRB.addActionListener(e -> updateReplaceEquivalenceStatus());
+        form.m_replaceRegexpSearchRB.addActionListener(e -> updateReplaceEquivalenceStatus());
+        updateReplaceEquivalenceStatus();
+    }
+
+    private void updateReplaceEquivalenceStatus() {
+        boolean plainSearch = !form.m_replaceRegexpSearchRB.isSelected();
+        replaceEquivalenceCBs.values().forEach(cb -> cb.setEnabled(plainSearch));
+    }
+
+    /**
+     * One row of character equivalence checkboxes per panel (#1681), inserted
+     * below the option row that held the retired "space matches nbsp" box.
+     * Prefilled from the classes active in the current project; toggling here
+     * only affects this window, never the project setting.
+     */
+    private void insertEquivalenceRows() {
+        form.m_searchSpaceMatchNbsp.setVisible(false);
+        form.m_replaceSpaceMatchNbsp.setVisible(false);
+        Set<MatchEquivalence> active = Core.getProject().isProjectLoaded()
+                ? Core.getProject().getProjectProperties().getActiveMatchEquivalences()
+                : MatchEquivalence.all();
+        insertRowAfter(form.m_searchSpaceMatchNbsp, buildEquivalenceRow(searchEquivalenceCBs, active,
+                "SearchWindowForm.search_equivalence_"));
+        insertRowAfter(form.m_replaceSpaceMatchNbsp, buildEquivalenceRow(replaceEquivalenceCBs, active,
+                "SearchWindowForm.replace_equivalence_"));
+    }
+
+    private JPanel buildEquivalenceRow(Map<MatchEquivalence, JCheckBox> checkboxes,
+            Set<MatchEquivalence> active, String namePrefix) {
+        JPanel row = new JPanel();
+        row.setLayout(new BoxLayout(row, BoxLayout.LINE_AXIS));
+        row.add(new JLabel(OStrings.getString("SW_EQUIVALENCE_LABEL")));
+        for (MatchEquivalence eq : MatchEquivalence.values()) {
+            row.add(Box.createHorizontalStrut(10));
+            JCheckBox checkbox = new JCheckBox(OStrings.getString("SW_EQUIVALENCE_" + eq.name()),
+                    active.contains(eq));
+            checkbox.setName(namePrefix + eq.getId());
+            checkboxes.put(eq, checkbox);
+            row.add(checkbox);
+        }
+        row.add(Box.createHorizontalGlue());
+        return row;
+    }
+
+    private static void insertRowAfter(JComponent anchor, JPanel row) {
+        Container anchorRow = anchor.getParent();
+        Container parent = anchorRow.getParent();
+        if (parent.getLayout() instanceof GridLayout) {
+            // The option panels use a fixed-row GridLayout; without one more
+            // row, an added component opens a second column instead.
+            GridLayout grid = (GridLayout) parent.getLayout();
+            grid.setRows(grid.getRows() + 1);
+        }
+        for (int i = 0; i < parent.getComponentCount(); i++) {
+            if (parent.getComponent(i) == anchorRow) {
+                row.setAlignmentX(((JComponent) anchorRow).getAlignmentX());
+                parent.add(row, i + 1);
+                return;
+            }
+        }
+    }
+
+    /** Resets both equivalence rows to the classes active in the project. */
+    private void resetEquivalenceOptions() {
+        Set<MatchEquivalence> active = Core.getProject().isProjectLoaded()
+                ? Core.getProject().getProjectProperties().getActiveMatchEquivalences()
+                : MatchEquivalence.all();
+        searchEquivalenceCBs.forEach((eq, checkbox) -> checkbox.setSelected(active.contains(eq)));
+        replaceEquivalenceCBs.forEach((eq, checkbox) -> checkbox.setSelected(active.contains(eq)));
+        updateReplaceEquivalenceStatus();
+    }
+
+    private static Set<MatchEquivalence> selectedEquivalences(Map<MatchEquivalence, JCheckBox> checkboxes) {
+        Set<MatchEquivalence> selected = EnumSet.noneOf(MatchEquivalence.class);
+        checkboxes.forEach((eq, checkbox) -> {
+            if (checkbox.isSelected()) {
+                selected.add(eq);
+            }
+        });
+        return selected;
     }
 
     // //////////////////////////////////////////////////////////////
@@ -1063,7 +1157,9 @@ public class SearchWindowController {
     private void applySearchModeOptions(SearchExpression expression) {
         expression.searchExpressionType = getSearchExpressionTypeForSearchMode();
         expression.caseSensitive = form.m_searchCase.isSelected();
-        expression.spaceMatchNbsp = form.m_searchSpaceMatchNbsp.isSelected();
+        expression.equivalences = getSearchExpressionTypeForSearchMode() == SearchExpression.SearchExpressionType.REGEXP
+                ? EnumSet.noneOf(MatchEquivalence.class)
+                : selectedEquivalences(searchEquivalenceCBs);
         expression.wholeWordsOnly = form.m_searchWholeWords.isSelected();
         expression.glossary = form.m_cbSearchInGlossaries.isSelected();
         expression.memory = form.m_cbSearchInMemory.isSelected();
@@ -1081,7 +1177,9 @@ public class SearchWindowController {
     private void applyReplaceModeOptions(SearchExpression expression) {
         expression.searchExpressionType = getSearchExpressionTypeForReplaceMode();
         expression.caseSensitive = form.m_replaceCase.isSelected();
-        expression.spaceMatchNbsp = form.m_replaceSpaceMatchNbsp.isSelected();
+        boolean replaceRegexp = getSearchExpressionTypeForReplaceMode() == SearchExpression.SearchExpressionType.REGEXP;
+        expression.equivalences = replaceRegexp ? EnumSet.noneOf(MatchEquivalence.class)
+                : selectedEquivalences(replaceEquivalenceCBs);
         expression.glossary = false;
         expression.memory = true;
         expression.tm = false;

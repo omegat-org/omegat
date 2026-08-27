@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+<header datatype="plaintext" srclang="en" adminlang="EN-US" o-tmf="OmegaT TMX" segtype="sentence"
+creationtoolversion="test" creationtool="test"/>
+  <body>
+<!-- curly double quotes -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Select the “Save” command from the menu.</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Wählen Sie den Befehl „Speichern“ im Menü.</seg>
+      </tuv>
+    </tu>
+<!-- curly apostrophe inside a word -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>It’s John’s house near the river.</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Es ist Johns Haus am Fluss.</seg>
+      </tuv>
+    </tu>
+<!-- en dash in a page range -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>See pages 3–4 for details.</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Details finden Sie auf den Seiten 3–4.</seg>
+      </tuv>
+    </tu>
+<!-- no-break space before the percent sign -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The discount is 10 % this week.</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Der Rabatt beträgt diese Woche 10 %.</seg>
+      </tuv>
+    </tu>
+<!-- soft hyphen inside the word "information" -->
+    <tu>
+      <tuv xml:lang="en">
+        <seg>More infor­mation is available online.</seg>
+      </tuv>
+      <tuv xml:lang="de">
+        <seg>Weitere Informationen sind online verfügbar.</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

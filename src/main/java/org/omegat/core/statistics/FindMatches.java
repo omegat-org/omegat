@@ -49,10 +49,12 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.StringData;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
@@ -143,6 +145,19 @@ public class FindMatches {
     /** Consider numbers by value during matching (project option, #465). */
     private final boolean matchNumbers;
 
+    /**
+     * Replacement map of the character equivalence classes active in this
+     * project (#1681); character variants fold together before comparison.
+     */
+    private final Map<Integer, String> equivalenceFoldMap;
+
+    /**
+     * Length-preserving subset of the fold map, applied to whole strings
+     * before tokenization so variant characters cannot shift word boundaries
+     * (straight and curly apostrophes segment differently).
+     */
+    private final Map<Integer, String> equivalenceSameLengthFoldMap;
+
     private final Segmenter segmenter;
 
     /**
@@ -194,6 +209,10 @@ public class FindMatches {
         this.searchExactlyTheSame = searchExactlyTheSame;
         this.fuzzyMatchThreshold = threshold;
         this.matchNumbers = project.getProjectProperties().isMatchNumbersEnabled();
+        Set<MatchEquivalence> activeEquivalences = project.getProjectProperties()
+                .getActiveMatchEquivalences();
+        this.equivalenceFoldMap = MatchEquivalence.buildFoldMap(activeEquivalences);
+        this.equivalenceSameLengthFoldMap = MatchEquivalence.buildSameLengthFoldMap(activeEquivalences);
     }
 
     /**
@@ -407,7 +426,7 @@ public class FindMatches {
         // fill similarity data only for a result
         if (fillSimilarityData) {
             for (NearString near : result) {
-                near.attr = FuzzyMatcher.buildSimilarityData(strTokensAll, tokenizeAll(near.source));
+                near.attr = buildDisplaySimilarityData(near.source);
             }
         }
         return result;
@@ -601,6 +620,10 @@ public class FindMatches {
     Map<String, Token[]> tokenizeAllPlaceholderCache = new HashMap<>();
 
     Token[] tokenizeStem(String str) {
+        // Word-token passes compare token text only, so folding the whole
+        // string before tokenization is safe and also aligns token boundaries
+        // (an apostrophe variant can change word segmentation).
+        str = foldEquivalence(str);
         Token[] tokens = tokenizeStemCache.get(str);
         if (tokens == null) {
             if (Preferences.isPreference(Preferences.MATCHES_STEMMING_FULL)) {
@@ -616,7 +639,7 @@ public class FindMatches {
     Token[] tokenizeNoStem(String str) {
         // No-stemming token comparisons are intentionally case-insensitive
         // for matching purposes.
-        str = str.toLowerCase(srcLocale);
+        str = foldEquivalence(str.toLowerCase(srcLocale));
         Token[] tokens = tokenizeNoStemCache.get(str);
         if (tokens == null) {
             tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.NONE);
@@ -641,10 +664,69 @@ public class FindMatches {
         str = str.toLowerCase(srcLocale);
         Token[] tokens = tokenizeAllCache.get(str);
         if (tokens == null) {
-            tokens = tok.tokenizeVerbatim(str);
+            String folded = MatchEquivalence.foldSameLength(str, equivalenceSameLengthFoldMap);
+            tokens = foldTokens(tok.tokenizeVerbatim(folded), folded);
             tokenizeAllCache.put(str, tokens);
         }
         return tokens;
+    }
+
+    /**
+     * Similarity data for match-pane highlighting. The pane pairs the flags
+     * with a verbatim tokenization of the raw match source, while similarity
+     * is computed on the folded comparison tokens, whose boundaries can
+     * differ. The length-preserving fold keeps both tokenizations in the same
+     * string coordinates, so the folded flags project onto the raw tokens by
+     * offset overlap.
+     */
+    private byte[] buildDisplaySimilarityData(String matchSource) {
+        Token[] foldedTokens = tokenizeAll(matchSource);
+        byte[] foldedFlags = FuzzyMatcher.buildSimilarityData(strTokensAll, foldedTokens);
+        Token[] rawTokens = tok.tokenizeVerbatim(matchSource);
+        byte[] rawFlags = new byte[rawTokens.length];
+        for (int i = 0; i < rawTokens.length; i++) {
+            int rawStart = rawTokens[i].getOffset();
+            int rawEnd = rawStart + rawTokens[i].getLength();
+            byte flags = 0;
+            for (int j = 0; j < foldedTokens.length; j++) {
+                int foldedStart = foldedTokens[j].getOffset();
+                if (foldedStart < rawEnd && rawStart < foldedStart + foldedTokens[j].getLength()) {
+                    if ((foldedFlags[j] & StringData.UNIQ) != 0) {
+                        flags = StringData.UNIQ;
+                        break;
+                    }
+                    if ((foldedFlags[j] & StringData.PAIR) != 0) {
+                        flags = StringData.PAIR;
+                    }
+                }
+            }
+            rawFlags[i] = flags;
+        }
+        return rawFlags;
+    }
+
+    private String foldEquivalence(String str) {
+        return MatchEquivalence.fold(str, equivalenceFoldMap);
+    }
+
+    /**
+     * Verbatim tokens with equivalence folding applied to the token text;
+     * tokens folded to nothing (invisible formatting characters) are dropped.
+     * Offsets and lengths keep referring to the original string, so similarity
+     * data built from these tokens highlights the right characters.
+     */
+    private Token[] foldTokens(Token[] tokens, String str) {
+        List<Token> kept = new ArrayList<>(tokens.length);
+        for (Token token : tokens) {
+            String text = token.getTextFromString(str);
+            String folded = foldEquivalence(text);
+            if (folded.isEmpty()) {
+                continue;
+            }
+            kept.add(folded.equals(text) ? token
+                    : new Token(folded, token.getOffset(), token.getLength()));
+        }
+        return kept.toArray(new Token[0]);
     }
 
     Token[] tokenizeAllPlaceholder(String str) {
@@ -663,10 +745,10 @@ public class FindMatches {
      * equal). Other tokens are lowercased as in the plain verbatim pass.
      */
     private Token[] mapNumberTokens(String str, boolean placeholder) {
+        str = MatchEquivalence.foldSameLength(str, equivalenceSameLengthFoldMap);
         Token[] tokens = tok.tokenizeVerbatim(str);
-        Token[] mapped = new Token[tokens.length];
-        for (int i = 0; i < tokens.length; i++) {
-            Token token = tokens[i];
+        List<Token> mapped = new ArrayList<>(tokens.length);
+        for (Token token : tokens) {
             String text = token.getTextFromString(str);
             // Roman numerals count here: a word misread as one only shifts the
             // similarity a little, and reading them is the point of the option.
@@ -675,11 +757,14 @@ public class FindMatches {
             if (value != null) {
                 mappedText = placeholder ? "\0#" : "\0#" + value;
             } else {
-                mappedText = text.toLowerCase(srcLocale);
+                mappedText = foldEquivalence(text.toLowerCase(srcLocale));
+                if (mappedText.isEmpty()) {
+                    continue;
+                }
             }
-            mapped[i] = new Token(mappedText, token.getOffset(), token.getLength());
+            mapped.add(new Token(mappedText, token.getOffset(), token.getLength()));
         }
-        return mapped;
+        return mapped.toArray(new Token[0]);
     }
 
     private void checkStopped(IStopped stop) throws StoppedException {

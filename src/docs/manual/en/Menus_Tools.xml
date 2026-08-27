@@ -126,6 +126,17 @@
                Editor pane.</para>
          </listitem>
       </varlistentry>
+      <varlistentry xml:id="menus.tools.auto.convert.number.segments">
+         <term xml:id="menus.tools.auto.convert.number.segments.title">
+            <guimenuitem>Auto-convert Number Segments...</guimenuitem>
+         </term>
+         <listitem>
+            <para>Opens the
+               <link linkend="windows.number.convert" endterm="windows.number.convert.title"></link> window. It finds segments
+               		that contain only a number and fills them in, written the way the
+               		target language writes that number.</para>
+         </listitem>
+      </varlistentry>
       <varlistentry xml:id="menus.tools.statistics">
          <term xml:id="menus.tools.statistics.title">
             <guimenuitem>Statistics</guimenuitem>

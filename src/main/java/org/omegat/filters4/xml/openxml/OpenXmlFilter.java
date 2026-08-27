@@ -460,25 +460,21 @@ public class OpenXmlFilter extends AbstractXmlFilter {
                     break;
                 }
             } else if (next.isStartElement()) {
-                char prefixInt;
                 final int idx = runIter.previousIndex();
                 String name = next.asStartElement().getName().getLocalPart();
-                switch (name) {
-                case "footnoteRef" -> prefixInt = 'n';
-                case "tab", "br" -> prefixInt = 'd';
-                case "drawing" -> prefixInt = 'g';
-                case "t" -> {
+                if (name.equals("t")) {
                     continue;
-                }
-                default -> prefixInt = 'e';
                 }
                 while (!(next.isEndElement() && next.asEndElement().getName().getLocalPart().equals(name))) {
                     next = runIter.next();
                 }
-                Integer tcInt = tagsCount.get(prefixInt);
-                if (tcInt == null) {
-                    tcInt = 0;
-                }
+                char prefixInt = switch (name) {
+                    case "footnoteRef" -> 'n';
+                    case "tab", "br" -> 'd';
+                    case "drawing" -> 'g';
+                    default -> 'e';
+                };
+                int tcInt = tagsCount.getOrDefault(prefixInt, 0);
                 List<XMLEvent> nList = new ArrayList<>(run.subList(idx, runIter.nextIndex()));
                 QName qR = new QName(ooxmlMainParaElement.getNamespaceURI(), "r",
                         ooxmlMainParaElement.getPrefix());

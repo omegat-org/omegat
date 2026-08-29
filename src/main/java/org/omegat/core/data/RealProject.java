@@ -252,11 +252,214 @@ public class RealProject implements IProject {
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
+            persistSessionSettings(config, supersededLocalSettings.keySet());
         } finally {
             lockProject();
         }
         Preferences.setPreference(Preferences.SOURCE_LOCALE, config.getSourceLanguage().toString());
         Preferences.setPreference(Preferences.TARGET_LOCALE, config.getTargetLanguage().toString());
+    }
+
+    /**
+     * Persist the session values of all registered team settings to the
+     * sidecar file. Opt-in: only materialised once a setting was used, so
+     * default projects stay byte-identical to older OmegaT versions. While
+     * a superseded local value awaits the user's decision, the session runs
+     * on the team value but the file keeps the local one - persisting the
+     * session value here would silently turn a dismissed question into
+     * "take the team value". Static for testability.
+     */
+    static void persistSessionSettings(ProjectProperties config, Set<String> supersededKeys)
+            throws IOException {
+        for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            String sessionValue = setting.read(config);
+            if (!supersededKeys.contains(setting.getKey())
+                    && (sessionValue != null || ProjectSettingsStorage.getFile(config).isFile())) {
+                ProjectSettingsStorage.save(config, setting.getKey(), sessionValue);
+            }
+        }
+    }
+
+    /**
+     * The local raw values that the just synced team values superseded
+     * during the load, keyed by setting key (null value = local default), or
+     * empty when everything agreed. Read by the question shown after a team
+     * project opened.
+     */
+    private volatile Map<String, @Nullable String> supersededLocalSettings = Collections.emptyMap();
+
+    @Override
+    public Map<String, @Nullable String> getSupersededLocalSettings() {
+        return supersededLocalSettings;
+    }
+
+    @Override
+    public void publishProjectSetting(String key, @Nullable String value) throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        TeamSetting setting = requireRegistered(key);
+        // The session and the local file keep the user's value even when the
+        // commit fails: the file then still diverges from the team and the
+        // next open asks again.
+        setting.apply(config, value);
+        ProjectSettingsStorage.save(config, key, setting.normalize(value));
+        // A checkout parked between teamSyncPrepare and teamSync must not be
+        // moved to latest behind the sync's back (same cleanup as
+        // saveProject).
+        tmxPrepared = null;
+        glossaryPrepared = null;
+        remoteRepositoryProvider.cleanPrepared();
+        commitProjectSettings(remoteRepositoryProvider, config);
+        clearSupersededLocalSetting(key);
+    }
+
+    @Override
+    public void useLocalProjectSetting(String key, @Nullable String value) throws Exception {
+        if (!remoteRepositoryProvider.isManaged()) {
+            return;
+        }
+        TeamSetting setting = requireRegistered(key);
+        setting.apply(config, value);
+        // Local write only: the next open of the team project syncs the
+        // remote file back in, notices a divergence and asks again.
+        ProjectSettingsStorage.save(config, key, setting.normalize(value));
+        clearSupersededLocalSetting(key);
+    }
+
+    private static TeamSetting requireRegistered(String key) {
+        TeamSetting setting = TeamSettingsRegistry.byKey(key);
+        if (setting == null) {
+            throw new IllegalArgumentException("Unknown team setting: " + key);
+        }
+        return setting;
+    }
+
+    private void clearSupersededLocalSetting(String key) {
+        if (supersededLocalSettings.containsKey(key)) {
+            Map<String, @Nullable String> remaining = new HashMap<>(supersededLocalSettings);
+            remaining.remove(key);
+            supersededLocalSettings = Collections.unmodifiableMap(remaining);
+        }
+    }
+
+    /**
+     * Commit the project settings file to the team repositories. Skips the
+     * commit when every repository copy is already byte-identical, because
+     * git reports the no-op commit of an unchanged file the same way as a
+     * rejected push. Static for testability.
+     */
+    static void commitProjectSettings(RemoteRepositoryProvider provider, ProjectProperties config)
+            throws Exception {
+        // The checkout may be stale, and a commit onto an old base would be
+        // rejected on push.
+        provider.switchAllToLatest();
+        String underRoot = config.getProjectInternalRelative()
+                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS;
+        if (!provider.isIdenticalInRepositoriesIgnoringEol(underRoot)) {
+            provider.copyFilesFromProjectToRepos(underRoot, null);
+            if (!provider.commitFilesChecked(underRoot, "Update the shared project settings")) {
+                throw new IOException(OStrings.getString("TEAM_SETTING_SHARE_ERROR"));
+            }
+        }
+    }
+
+    /**
+     * Apply the stored project settings to the session. For an online team
+     * project the team's state wins: the sync just overwrote a diverging
+     * local file with the remote one, and a purely local file (which the
+     * sync leaves alone, because it never existed remotely) does not count
+     * either - the team default stays active until the value is shared.
+     * Either way the superseded local values are kept for the question shown
+     * after the load, so every open asks again until the value is shared or
+     * dropped, as the share prompt promises.
+     *
+     * @param preSyncValues
+     *            the locally stored normalized values from before the team
+     *            sync, keyed by setting key
+     */
+    private void loadProjectSettings(Map<String, @Nullable String> preSyncValues) {
+        if (TeamSettingsRegistry.all().isEmpty()) {
+            supersededLocalSettings = Collections.emptyMap();
+            return;
+        }
+        boolean teamOnline = remoteRepositoryProvider.isManaged() && isOnlineMode;
+        boolean identical = false;
+        if (teamOnline) {
+            try {
+                // After the sync a settings file that exists remotely is
+                // byte-identical locally; a non-identical or absent file
+                // means the team does not carry the setting, so the local
+                // file is a local-only divergence.
+                identical = remoteRepositoryProvider.isIdenticalInRepositories(
+                        config.getProjectInternalRelative()
+                                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS);
+            } catch (IOException ex) {
+                Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+                // fall back to trusting the local file
+                identical = true;
+            }
+        }
+        Map<String, @Nullable String> superseded = new HashMap<>();
+        for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            String preSync = preSyncValues.get(setting.getKey());
+            String postSync = setting.normalize(ProjectSettingsStorage.load(config, setting.getKey()));
+            SettingResolution state = resolveSetting(preSync, postSync, identical, teamOnline);
+            setting.apply(config, state.effective);
+            if (state.asks) {
+                superseded.put(setting.getKey(), state.supersededLocal);
+            }
+        }
+        supersededLocalSettings = Collections.unmodifiableMap(superseded);
+    }
+
+    /** Snapshot of the stored normalized values of all registered settings. */
+    private Map<String, @Nullable String> readStoredSettings() {
+        Map<String, @Nullable String> values = new HashMap<>();
+        for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            values.put(setting.getKey(),
+                    setting.normalize(ProjectSettingsStorage.load(config, setting.getKey())));
+        }
+        return values;
+    }
+
+    /** Resolution of one team setting after a load. */
+    static final class SettingResolution {
+        final @Nullable String effective;
+        final boolean asks;
+        final @Nullable String supersededLocal;
+
+        SettingResolution(@Nullable String effective, boolean asks, @Nullable String supersededLocal) {
+            this.effective = effective;
+            this.asks = asks;
+            this.supersededLocal = supersededLocal;
+        }
+    }
+
+    /**
+     * Decide which raw value a load activates and whether it superseded a
+     * diverging local value that the user should be asked about. Works on
+     * normalized values (default = null). Pure function for testability.
+     *
+     * @param preSyncStored
+     *            locally stored value from before the team sync, null when
+     *            file or key were absent
+     * @param postSyncStored
+     *            stored value after the team sync
+     * @param identicalInRepositories
+     *            whether the settings file is byte-identical in every team
+     *            repository (meaningless when teamOnline is false)
+     * @param teamOnline
+     *            whether this is a team project loaded in online mode
+     */
+    static SettingResolution resolveSetting(@Nullable String preSyncStored,
+            @Nullable String postSyncStored, boolean identicalInRepositories, boolean teamOnline) {
+        if (!teamOnline) {
+            return new SettingResolution(postSyncStored, false, null);
+        }
+        String team = identicalInRepositories ? postSyncStored : null;
+        boolean asks = !Objects.equals(preSyncStored, team);
+        return new SettingResolution(team, asks, asks ? preSyncStored : null);
     }
 
     /**
@@ -343,6 +546,7 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
+            Map<String, @Nullable String> preSyncSettings = readStoredSettings();
             if (remoteRepositoryProvider.isManaged()) {
                 try {
                     tmxPrepared = null;
@@ -360,6 +564,7 @@ public class RealProject implements IProject {
                 config.loadProjectFilters();
                 config.loadProjectSRX();
             }
+            loadProjectSettings(preSyncSettings);
 
             loadFilterSettings();
             loadSegmentationSettings();

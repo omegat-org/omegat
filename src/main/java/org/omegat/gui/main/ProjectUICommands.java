@@ -40,7 +40,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
@@ -58,9 +60,12 @@ import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
+import org.omegat.core.data.TeamSetting;
+import org.omegat.core.data.TeamSettingsRegistry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.segmentation.SRXManager;
@@ -329,13 +334,104 @@ public final class ProjectUICommands {
             protected void done() {
                 try {
                     get();
-                    SwingUtilities.invokeLater(Core.getEditor()::requestFocus);
+                    SwingUtilities.invokeLater(() -> {
+                        Core.getEditor().requestFocus();
+                        promptForSupersededSettings();
+                    });
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
             }
         }.execute();
+    }
+
+    /**
+     * The team's project settings file of the just opened team project
+     * carried different values than this checkout, and the team values are
+     * now active. Asks the user per setting what to do with the local value:
+     * share it with the team, use the team's value, or restore it for this
+     * session only - the next open supersedes and asks again. Dismissing a
+     * dialog leaves the team's value active.
+     */
+    private static void promptForSupersededSettings() {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded()) {
+            return;
+        }
+        for (Map.Entry<String, @Nullable String> entry : project.getSupersededLocalSettings().entrySet()) {
+            TeamSetting setting = TeamSettingsRegistry.byKey(entry.getKey());
+            if (setting == null) {
+                continue;
+            }
+            String localValue = entry.getValue();
+            String teamValue = setting.read(project.getProjectProperties());
+            String[] options = { OStrings.getString("TEAM_SETTING_SHARE"),
+                    OStrings.getString("TEAM_SETTING_TAKE_TEAM"),
+                    OStrings.getString("TEAM_SETTING_KEEP_THIS_TIME") };
+            int answer = JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("TEAM_SETTING_DIVERGED_MESSAGE", setting.getDisplayName(),
+                            setting.describe(localValue), setting.describe(teamValue)),
+                    OStrings.getString("TEAM_SETTING_DIVERGED_TITLE"), JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            if (answer != 0 && answer != 1 && answer != 2) {
+                // Dismissed: the team's value stays active for this session,
+                // the local file keeps the local value, and the next open
+                // asks again.
+                continue;
+            }
+            boolean share = answer == 0;
+            String value = answer == 1 ? teamValue : localValue;
+            // The repository work must stay off the EDT and must not run
+            // beside the auto-save thread. Taking the team's value persists
+            // it locally, so the divergence is settled instead of
+            // resurfacing on every open.
+            new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    Core.executeExclusively(true, () -> {
+                        try {
+                            if (share) {
+                                project.publishProjectSetting(entry.getKey(), value);
+                            } else {
+                                project.useLocalProjectSetting(entry.getKey(), value);
+                            }
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception ex) {
+                        String key = share ? "TEAM_SETTING_SHARE_ERROR" : "TEAM_SETTING_APPLY_ERROR";
+                        Log.logErrorRB(ex, key);
+                        Core.getMainWindow().displayErrorRB(ex, key);
+                    }
+                }
+            }.execute();
+        }
+    }
+
+    /** Session values of all registered team settings, keyed by setting key. */
+    private static Map<String, @Nullable String> readSessionTeamSettings() {
+        Map<String, @Nullable String> values = new HashMap<>();
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            values.put(setting.getKey(), setting.read(props));
+        }
+        return values;
+    }
+
+    private static void applySessionTeamSettings(Map<String, @Nullable String> values) {
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            setting.apply(props, values.get(setting.getKey()));
+        }
     }
 
     private static @Nullable File selectProjectRootFolder(File projectDirectory) {
@@ -864,18 +960,64 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
+        // The dialog edits the live properties, so the current values have
+        // to be captured before it is shown.
+        final Map<String, @Nullable String> teamSettingsBefore = readSessionTeamSettings();
+
         // displaying the dialog to change paths and other properties
         final ProjectProperties newProps =
                 ProjectPropertiesDialogController.showDialog(frame, Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
+            // The dialog edits the live properties even before a validation
+            // stops its OK, so cancelling must not leave flipped values.
+            applySessionTeamSettings(teamSettingsBefore);
             return;
         }
+
+        // Changing a team setting right here is the natural moment to offer
+        // its distribution; declining keeps it local, and the next open of
+        // the project asks again.
+        final Map<String, @Nullable String> changedTeamSettings = new HashMap<>();
+        if (Core.getProject().isRemoteProject()) {
+            for (TeamSetting setting : TeamSettingsRegistry.all()) {
+                String after = setting.read(newProps);
+                if (!Objects.equals(teamSettingsBefore.get(setting.getKey()), after)) {
+                    changedTeamSettings.put(setting.getKey(), after);
+                }
+            }
+        }
+        final Map<String, @Nullable String> settingsToShare = new HashMap<>();
+        changedTeamSettings.forEach((key, value) -> {
+            TeamSetting setting = TeamSettingsRegistry.byKey(key);
+            if (setting != null && promptToShareSettingChange(setting, value)) {
+                settingsToShare.put(key, value);
+            }
+        });
 
         int res = JOptionPane.showConfirmDialog(frame, OStrings.getString("MW_REOPEN_QUESTION"),
                 OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
         if (res != JOptionPane.YES_OPTION) {
+            if (!settingsToShare.isEmpty()) {
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        Core.executeExclusively(true, () -> publishSettingsLoggingErrors(settingsToShare));
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception ex) {
+                            Log.logErrorRB(ex, "TEAM_SETTING_SHARE_ERROR");
+                            Core.getMainWindow().displayErrorRB(ex, "TEAM_SETTING_SHARE_ERROR");
+                        }
+                    }
+                }.execute();
+            }
             return;
         }
 
@@ -885,10 +1027,30 @@ public final class ProjectUICommands {
             @Override
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
+                    if (!settingsToShare.isEmpty()) {
+                        // A failed share must not abort the reload; the
+                        // local file keeps the value, so the next open
+                        // offers the distribution again.
+                        publishSettingsLoggingErrors(settingsToShare);
+                    }
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
 
                     ProjectFactory.loadProject(newProps, true);
+                    changedTeamSettings.forEach((key, value) -> {
+                        if (!settingsToShare.containsKey(key)) {
+                            // The share was declined, so the freshly chosen
+                            // value must stay local: without this, the
+                            // reload would classify it as local-only
+                            // divergence and fall back to the team default
+                            // without a word.
+                            try {
+                                Core.getProject().useLocalProjectSetting(key, value);
+                            } catch (Exception ex) {
+                                Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+                            }
+                        }
+                    });
                 });
                 return null;
             }
@@ -908,6 +1070,32 @@ public final class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    /**
+     * The properties dialog of a team project just changed a registered
+     * team setting; asks whether to distribute the change.
+     */
+    private static boolean promptToShareSettingChange(TeamSetting setting, @Nullable String value) {
+        String[] options = { OStrings.getString("TEAM_SETTING_SHARE"),
+                OStrings.getString("TEAM_SETTING_KEEP_FOR_NOW") };
+        return JOptionPane.showOptionDialog(Core.getMainWindow().getApplicationFrame(),
+                OStrings.getString("TEAM_SETTING_CHANGED_MESSAGE", setting.getDisplayName(),
+                        setting.describe(value)),
+                OStrings.getString("TEAM_SETTING_DIVERGED_TITLE"), JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == 0;
+    }
+
+    private static void publishSettingsLoggingErrors(Map<String, @Nullable String> settings) {
+        settings.forEach((key, value) -> {
+            try {
+                Core.getProject().publishProjectSetting(key, value);
+            } catch (Exception ex) {
+                Log.logErrorRB(ex, "TEAM_SETTING_SHARE_ERROR");
+                SwingUtilities.invokeLater(
+                        () -> Core.getMainWindow().displayErrorRB(ex, "TEAM_SETTING_SHARE_ERROR"));
+            }
+        });
     }
 
     public static void projectCompile() {

@@ -83,21 +83,27 @@ public final class JTextPaneLinkifier {
         jTextPane.addMouseMotionListener(mouseAdapter);
 
         // Those are the main called points from user's activities.
-        setDocumentFilter(jTextPane, extended);
+        setDocumentFilter(jTextPane, extended, false);
 
         jTextPane.addPropertyChangeListener("document", evt -> {
             Object source = evt.getSource();
             if (source instanceof JTextPane) {
-                setDocumentFilter((JTextPane) source, extended);
+                setDocumentFilter((JTextPane) source, extended, true);
             }
         });
     }
 
-    private static void setDocumentFilter(JTextPane textPane, boolean extended) {
+    private static void setDocumentFilter(JTextPane textPane, boolean extended, boolean refreshExisting) {
         final StyledDocument doc = textPane.getStyledDocument();
         if (doc instanceof AbstractDocument) {
             final AbstractDocument abstractDocument = (AbstractDocument) doc;
-            abstractDocument.setDocumentFilter(new AttributeInserterDocumentFilter(doc, extended));
+            AttributeInserterDocumentFilter filter = new AttributeInserterDocumentFilter(doc, extended);
+            abstractDocument.setDocumentFilter(filter);
+            if (refreshExisting && doc.getLength() > 0) {
+                // A swapped-in document arrives fully built, so no insert will
+                // trigger the refresh: style its links once now.
+                SwingUtilities.invokeLater(filter::refreshPane);
+            }
         }
     }
 

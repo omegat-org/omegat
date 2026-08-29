@@ -58,6 +58,8 @@ import javax.swing.KeyStroke;
 import javax.swing.ToolTipManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Caret;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.StyledDocument;
@@ -241,9 +243,18 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
 
         IGlossaryRenderer entryRenderer = GlossaryRenderers.getPreferredGlossaryRenderer();
+        // Render into an offline document and swap it in whole: every insert
+        // into the displayed document costs time proportional to the document
+        // length, which stalls the EDT for seconds once a large glossary
+        // produces hundreds of matches (SF bug #981).
+        StyledDocument newDoc = new DefaultStyledDocument();
+        // getText() falls back to the platform line separator without this
+        // property; setText-created documents carry it, so match them.
+        newDoc.putProperty(DefaultEditorKit.EndOfLineStringProperty, "\n");
         for (GlossaryEntry entry : entries) {
-            entryRenderer.render(entry, getStyledDocument());
+            entryRenderer.render(entry, newDoc);
         }
+        setStyledDocument(newDoc);
 
         firePropertyChange("entries", oldEntries, entries);
     }

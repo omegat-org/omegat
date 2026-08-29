@@ -65,6 +65,7 @@ import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.FilterEncodingException;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -285,6 +286,16 @@ public class FilterMaster {
         IFilter filterObject = lookup.filterObject;
         try {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
+        } catch (FilterEncodingException ex) {
+            Log.log(ex);
+            IMainWindow mw = Core.getMainWindow();
+            if (mw != null) {
+                mw.displayErrorRB(null, "FILTERMASTER_ERROR_MALFORMED_FILE_ENCODING",
+                        filename,
+                        ex.getFilterName(),
+                        ex.getSourceEncoding(),
+                        ex.getTargetEncoding());
+            }
         } catch (UnsupportedEncodingException | CharacterCodingException ex) {
             Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
             IMainWindow mw = Core.getMainWindow();

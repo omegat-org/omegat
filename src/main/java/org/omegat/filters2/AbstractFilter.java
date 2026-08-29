@@ -37,7 +37,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -439,12 +441,13 @@ public abstract class AbstractFilter implements IFilter {
     protected void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         String encoding = getInputEncoding(fc, inFile);
+        String outEncoding = null;
         try (BufferedReader reader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
             BufferedWriter writer = null;
             try {
                 if (outFile != null) {
-                    String outEncoding = getOutputEncoding(fc);
+                    outEncoding = getOutputEncoding(fc);
                     writer = createWriter(outFile, outEncoding);
                 } else {
                     writer = new NullBufferedWriter();
@@ -455,7 +458,17 @@ public abstract class AbstractFilter implements IFilter {
                     writer.close();
                 }
             }
+        } catch (CharacterCodingException | IllegalCharsetNameException | UnsupportedEncodingException ex) {
+            throw new FilterEncodingException(inFile, outFile, getFileFormatName(),
+                    encoding == null ? ENCODING_AUTO_HUMAN : encoding, getOutEncodingString(outFile, outEncoding), ex);
         }
+    }
+
+    private String getOutEncodingString(@Nullable File outFile, @Nullable String outEncoding) {
+        if (outEncoding == null) {
+            return outFile == null ? "" : ENCODING_AUTO_HUMAN;
+        }
+        return outEncoding;
     }
 
     /**
@@ -472,7 +485,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             when I/O error occurred.
      */
-    protected String getInputEncoding(FilterContext fc, File inFile) throws IOException {
+    protected @Nullable String getInputEncoding(FilterContext fc, File inFile) throws IOException {
         String encoding = fc.getInEncoding();
         if (encoding == null && isSourceEncodingVariable()) {
             encoding = EncodingDetector.detectEncoding(inFile);

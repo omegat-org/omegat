@@ -66,6 +66,7 @@ import javax.xml.stream.XMLStreamException;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.statistics.StatOutputFormat;
+import org.omegat.filters2.FilterEncodingException;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -1160,6 +1161,11 @@ public class RealProject implements IProject {
                     fi.fileEncoding = filter.getInEncodingLastParsedFile();
                     projectFilesList.add(fi);
                 }
+            } catch (FilterEncodingException ex) {
+                Log.logErrorRB("TF_SOURCE_LOAD_ENCODING_ERROR", filepath, ex.getFilterName(), ex.getSourceEncoding());
+                Core.getMainWindow().displayErrorRB(null, "TF_SOURCE_LOAD_ENCODING_ERROR", filepath,
+                        ex.getFilterName(), ex.getSourceEncoding());
+                errorSrcList.add(filepath);
             } catch (TranslationException e) {
                 // ignore failed file and continue loading next.
                 Log.logErrorRB("TF_SOURCE_LOAD_ERROR", e.getLocalizedMessage());

@@ -1,0 +1,22 @@
+# Tolerated legacy version skews between lib/provided/core and
+# lib/provided/module, checked by check_duplicate_dependencies.py.
+# Goal: shrink list to empty. Remove line once versions align;
+# checker errors on stale entries.
+error_prone_annotations
+guava
+icu4j
+j2objc-annotations
+jackson-core
+jackson-databind
+jaxb-core
+jaxb-runtime
+jetbrains-annotations
+jna
+jna-platform
+jspecify
+jsr305
+morfologik-fsa
+morfologik-stemming
+segment
+slf4j-api
+txw2

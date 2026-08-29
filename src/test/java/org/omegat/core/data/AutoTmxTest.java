@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,6 +26,7 @@
 package org.omegat.core.data;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -36,6 +38,7 @@ import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -122,6 +125,96 @@ public class AutoTmxTest {
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(autoTMX, false);
         checkTranslation(ste, "alternative", TMXEntry.ExternalLinked.xAUTO);
+    }
+
+    /**
+     * The enforced status must survive a save/load cycle of the project TMX
+     * when the user opted into persisting auto states, in the same way the
+     * x-auto/x-ice/x-100pc states do (SF bug #1171).
+     */
+    @Test
+    public void enforcedStatusSurvivesSaveAndReloadWhenOptedIn() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/enforce1.tmx"));
+
+        SourceTextEntry ste = createSTE(null, "Edit");
+        p.allProjectEntries.add(ste);
+        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+        p.appendFromAutoTMX(enforceTMX, true);
+        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+
+        ProjectTMX reloaded = saveAndReload(true);
+        assertEquals(TMXEntry.ExternalLinked.xENFORCED, reloaded.getDefaultTranslation("Edit").linked);
+    }
+
+    @Test
+    public void enforcedStatusIsDroppedOnSaveWithoutOptIn() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/enforce1.tmx"));
+
+        SourceTextEntry ste = createSTE(null, "Edit");
+        p.allProjectEntries.add(ste);
+        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+        p.appendFromAutoTMX(enforceTMX, true);
+
+        ProjectTMX reloaded = saveAndReload(false);
+        assertNull(reloaded.getDefaultTranslation("Edit").linked);
+    }
+
+    @Test
+    public void enforcedAlternativeStatusSurvivesSaveAndReloadWhenOptedIn() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/alternative.tmx"));
+
+        SourceTextEntry ste = createSTE("1_0", "Edit");
+        p.allProjectEntries.add(ste);
+        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+        p.appendFromAutoTMX(enforceTMX, true);
+        checkTranslation(ste, "alternative", TMXEntry.ExternalLinked.xENFORCED);
+
+        ProjectTMX reloaded = saveAndReload(true);
+        assertEquals(TMXEntry.ExternalLinked.xENFORCED,
+                reloaded.getMultipleTranslation(ste.getKey()).linked);
+    }
+
+    /**
+     * Rebasing a team project replaces the project TMX content with entries
+     * parsed from the merged file, which carry no enforced status; re-applying
+     * the enforce memory (as RealProject does after the rebase) must restore
+     * it (SF bug #1171).
+     */
+    @Test
+    public void enforcedStatusIsRestoredByReapplyAfterContentReplacement() throws Exception {
+        ExternalTMX enforceTMX = prepareExternalTMX(new File("src/test/resources/data/enforcetmx/project1.tmx"),
+                new File("src/test/resources/data/enforcetmx/enforce1.tmx"));
+
+        SourceTextEntry ste = createSTE(null, "Edit");
+        p.allProjectEntries.add(ste);
+        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+        p.appendFromAutoTMX(enforceTMX, true);
+        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+
+        p.projectTMX.replaceContent(saveAndReload(false));
+        assertNull(p.getTranslationInfo(ste).linked);
+
+        p.appendFromAutoTMX(enforceTMX, true);
+        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+    }
+
+    private ProjectTMX saveAndReload(boolean saveAutoStatus) throws Exception {
+        Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, saveAutoStatus);
+        try {
+            File out = File.createTempFile("omegat-autotmx", ".tmx");
+            out.deleteOnExit();
+            ProjectProperties props = p.getProjectProperties();
+            p.projectTMX.exportTMX(props, out, false, false, true);
+            ProjectTMX reloaded = new ProjectTMX();
+            reloaded.load(props.getSourceLanguage(), props.getTargetLanguage(), false, out,
+                    Core.getSegmenter());
+            return reloaded;
+        } finally {
+            Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, false);
+        }
     }
 
     private ExternalTMX prepareExternalTMX(File projectFile, File tmxFile) throws Exception {

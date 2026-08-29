@@ -13,6 +13,15 @@ dependencies {
         // Aligner
         implementation(libs.tokyo.northside.maligna) {
             exclude module: 'commons-logging'
+            // Fork of net.loomchild:segment keeping original package names;
+            // parent-first loading shadows it completely behind application's
+            // loomchild copy (LanguageTool dependency), so bundling it only
+            // adds unreachable dead weight. OmegaT's aligner never invokes
+            // maligna's SRX split path - only maligna class touching segment
+            // is SrxSplitAlgorithm (new SrxAnyParser(), SrxParser.parse,
+            // SrxTextIterator, TextIterator.hasNext/next; all present in
+            // application copy with identical signatures anyway).
+            exclude group: 'tokyo.northside', module: 'segment'
         }
         implementation(libs.slf4j.jcl)
         compileOnly(libs.jetbrains.annotations)

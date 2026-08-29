@@ -92,6 +92,12 @@ class OmegatModulePlugin implements Plugin<Project> {
         def coreRuntimeClasspath = project.rootProject.configurations.named("runtimeClasspath")
         def moduleRuntimeClasspath = project.configurations.named("runtimeClasspath")
 
+        ['compileClasspath', 'runtimeClasspath', 'testCompileClasspath', 'testRuntimeClasspath'].each { alignedName ->
+            project.configurations.matching { it.name == alignedName }.configureEach { conf ->
+                DependencyAlignment.alignToApplication(project.rootProject, conf)
+            }
+        }
+
         project.afterEvaluate {
             def plainEntries = []
             def signingTasks = []

@@ -1186,14 +1186,12 @@ public class EditorController implements IEditor {
         SourceTextEntry entry = sb.ste;
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
-        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED && oldTE.defaultTranslation;
-        boolean defaultTranslation = sb.isDefaultTranslation();
-        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
-        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
+        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED && oldTE.defaultTranslation
+                && sb.isDefaultTranslation();
 
         // When the entry translation is linked with xENFORCED
         // and the user does not set it as an alternate translation.
-        if (isEnforced && !isNewAltTrans) {
+        if (isEnforced) {
             deactivateWithoutCommit();
             mw.displayWarningRB("EC_WARNING_REVERT_ENFORCED_SEGMENT");
             return;
@@ -1210,7 +1208,7 @@ public class EditorController implements IEditor {
                 newen.translation = "";
                 break;
             case EQUALS_TO_SOURCE:
-                newen.translation = newen.source;
+                newen.translation = sb.ste.getSrcText();
                 break;
             default:
                 throw new AssertionError();
@@ -1221,6 +1219,9 @@ public class EditorController implements IEditor {
         newen.source = sb.ste.getSrcText();
         newen.note = Core.getNotes().getNoteText();
 
+        boolean defaultTranslation = sb.isDefaultTranslation();
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
+        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
         resetOrigin();

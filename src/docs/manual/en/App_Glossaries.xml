@@ -31,16 +31,15 @@
             <para>You do not need to prepare the file in advance.</para>
             <para>It will be created the first time you add an entry to the
                		glossary.</para>
-            <note>
+            <warning>
                <para>If you choose to use an existing file as the default glossary,
                   all new entries will be recorded in tab-separated format and saved in
                   UTF-8 by default.</para>
-               <para>In case of using an external UTF-8 file glossary.txt file not created within OmegaT, change the file extension to .utf8 or add "# Glossary in tab-separated format -*- coding: utf-8 -*-" comment as the first line in the file.</para>
-               <para>If you want to specify a different encoding, you can do so by
-                  		  adding a “magic” comment that takes the following form:</para>
+               <para>If the file is in a different encoding, specify that encoding by
+                  		  adding a comment that takes the following form:</para>
                <simplelist type="vert">
                   <member>
-                     <code># -*- coding: &lt;charset&gt; -*-</code>,
+                     <code># -*- coding: &lt;charset&gt; -*-</code>
                      </member>
                </simplelist>
                <para>where 
@@ -48,7 +47,9 @@
                   the sets listed in the 
                   <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA
                      Charset Registry</link>.</para>
-            </note>
+               <para>Even if the file is in UTF-8, make sure to add a comment that properly
+                  specifies the encoding: <code># -*- coding: utf-8 -*-</code>.</para>
+            </warning>
          </listitem>
       </varlistentry>
       <varlistentry>

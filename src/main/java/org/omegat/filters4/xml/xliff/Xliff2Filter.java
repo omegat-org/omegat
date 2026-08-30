@@ -350,9 +350,9 @@ public class Xliff2Filter extends AbstractXliffFilter {
             }
         }
         writer.writeEndElement(/* target */);
-        if (note !=null) {
+        if (note != null) {
             writer.writeStartElement(namespace, "note");
-            fromEventToWriter(eFactory.createCharacters(note), writer) ;
+            fromEventToWriter(eFactory.createCharacters(note), writer);
             writer.writeEndElement();
         }
         flushedSegment = true;

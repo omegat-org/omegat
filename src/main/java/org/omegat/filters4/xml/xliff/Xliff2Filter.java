@@ -327,8 +327,10 @@ public class Xliff2Filter extends AbstractXliffFilter {
 
         String src = buildTags(source, false);
         String tra = null;
+        String note = null;
         if (entryTranslateCallback != null) {
             tra = entryTranslateCallback.getTranslation(segId, src, path);
+            note = entryTranslateCallback.getNote(segId, src, path);
         }
         if (tra != null) {
             writer.writeStartElement(namespace, "target");
@@ -348,6 +350,11 @@ public class Xliff2Filter extends AbstractXliffFilter {
             }
         }
         writer.writeEndElement(/* target */);
+        if (note !=null) {
+            writer.writeStartElement(namespace, "note");
+            fromEventToWriter(eFactory.createCharacters(note), writer) ;
+            writer.writeEndElement();
+        }
         flushedSegment = true;
     }
 

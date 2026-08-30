@@ -31,6 +31,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -129,6 +131,27 @@ public class RemoteRepositoryProvider {
                 if (m.getLocal() == null || m.getRepository() == null) {
                     throw new IllegalArgumentException("Invalid mapping: local and/or remote is not set.");
                 }
+            }
+            dropDuplicateMappings(r);
+        }
+    }
+
+    /**
+     * Drop mapping entries that duplicate an earlier entry of the same
+     * repository. Exact duplicates carry no information but make every file
+     * under them match more than one mapping, and oneMapping() then refuses
+     * to load the project. Mappings that differ only in leading or trailing
+     * slashes address the same folders and count as duplicates.
+     */
+    static void dropDuplicateMappings(RepositoryDefinition repo) {
+        Set<String> seen = new HashSet<>();
+        for (Iterator<RepositoryMapping> it = repo.getMapping().iterator(); it.hasNext();) {
+            RepositoryMapping m = it.next();
+            String key = withoutSlashes(m.getLocal()) + ' ' + withoutSlashes(m.getRepository());
+            if (!seen.add(key)) {
+                Log.logWarningRB("TEAM_DUPLICATE_MAPPING_IGNORED", m.getLocal(), m.getRepository(),
+                        repo.getUrl());
+                it.remove();
             }
         }
     }

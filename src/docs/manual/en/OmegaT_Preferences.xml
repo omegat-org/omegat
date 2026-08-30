@@ -1204,7 +1204,7 @@
                   		  pre-configured variables:</para>
                <para>The default is:</para>
                <para>
-                  <programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}&#10;&lt;${score}/${noStemScore}/${adjustedScore}%${filePath}&gt;</programlisting>
+                  <programlisting>${id}. ${fuzzyFlag}${diff}&#10;${targetText}&#10;&lt;${score}/${noStemScore}/${adjustedScore}% ${matchSource} ${filePath}&gt;</programlisting>
                </para>
                <para>Here is a possible alternative:</para>
 		  <para>

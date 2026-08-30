@@ -27,15 +27,14 @@ package org.omegat.core.spellchecker;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.omegat.core.data.ProtectedPartsFixtures.entryWithProtectedParts;
+import static org.omegat.core.data.ProtectedPartsFixtures.tokenAt;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Token;
@@ -48,20 +47,6 @@ import org.omegat.util.Token;
  * @author stephan.pakebusch at zollsoft.de
  */
 public class SpellCheckerProtectedPartsTest {
-
-    private static SourceTextEntry entryWithProtectedParts(String source, String... parts) {
-        List<ProtectedPart> pps = Arrays.stream(parts).map(p -> {
-            ProtectedPart pp = new ProtectedPart();
-            pp.setTextInSourceSegment(p);
-            return pp;
-        }).collect(Collectors.toList());
-        return new SourceTextEntry(new EntryKey("file.txt", source, null, "", "", null), 1, null, null,
-                pps, true);
-    }
-
-    private static Token tokenAt(String text, String word) {
-        return new Token(word, text.indexOf(word), word.length());
-    }
 
     @Test
     public void testTokenInsidePlaceholderIsDropped() {

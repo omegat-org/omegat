@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OmegaT developer documentation - distribution slimming potential.
+  Treemap of the unpacked contents of the 30 language module jars; the red
+  share is third-party code and data that duplicates jars already shipped in
+  lib/ of the distribution and is unreachable at runtime (parent-first class
+  loading), i.e. removable dead weight.
+
+  🄯 2026 - This file is part of OmegaT, released under the GNU General
+  Public License version 3 or (at your option) any later version.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 712" font-family="Helvetica, Arial, sans-serif">
+<rect width="1200" height="700" fill="#ffffff"/>
+<g transform="translate(24,10) scale(0.16)"><path fill="#1e282c" d="m 145.84482,32.68197 c -17.435,0 -33.882,2.683 -48.883002,7.973 -14.783,5.214 -27.816,12.832 -38.737,22.641 -11.013,9.892 -19.58,21.744 -25.462,35.229 -6.042,13.851 -9.105,29.115 -9.105,45.37 0,21.473 7.679,41.858 22.823,60.588 7.582,9.379 16.92,18.207 27.854,26.347 l -14.577,0 c -8.347,0 -12.896,-0.369 -16.173,-2.465 -3.317,-2.122 -6.026,-6.481 -9.66,-15.545 -0.609,-1.518 -2.079,-2.511 -3.713,-2.511 l -10.212,0 c -1.135,0 -2.216,0.481 -2.975,1.325 -0.759,0.845 -1.123,1.972 -1.002,3.1 l 6.201,58.031 c 0.217,2.032 1.932,3.574 3.977,3.574 l 93.382002,0 c 1.417,0 2.728,-0.75 3.447,-1.971 l 2.917,-4.955 c 0.735,-1.248 0.737,-2.797 0.006,-4.048 l -0.507,-0.867 c -6.861,-11.732 -17.231,-29.463 -25.685002,-50.082 -4.62,-11.265 -8.205,-22.288 -10.656,-32.763 -2.861,-12.226 -4.27,-24.086 -4.188,-35.254 0,-0.009 0,-0.019 0,-0.029 0,-14.669 1.357,-27.923 4.033,-39.395 2.639,-11.314 6.581,-20.977 11.715002,-28.719 10.305,-15.542 25.384,-23.422 44.816,-23.422 19.577,0 34.775,7.661 45.174,22.771 5.137,7.465 9.082,16.756 11.725,27.616 2.674,10.988 4.03,23.643 4.03,37.612 0,22.021 -5.354,46.297 -15.911,72.155 -8.788,21.52 -19.212,39.359 -25.44,50.018 l -0.416,0.712 c -0.794,1.36 -0.717,3.06 0.197,4.342 l 3.283,4.603 c 0.751,1.052 1.964,1.677 3.257,1.677 l 91.923,0 c 1.988,0 3.674,-1.46 3.959,-3.428 l 8.392,-58.031 c 0.166,-1.147 -0.175,-2.313 -0.936,-3.189 -0.76,-0.878 -1.862,-1.382 -3.023,-1.382 l -10.216,0 c -1.611,0 -3.064,0.966 -3.688,2.45 -3.762,8.958 -6.614,13.492 -9.842,15.649 -3.081,2.059 -7.149,2.421 -14.558,2.421 l -19.256,0 c 10.409,-8.448 22.111,-18.599 31.947,-31.103 6.544,-8.32 11.629,-16.954 15.112,-25.663 4.054,-10.133 6.108,-20.76 6.108,-31.585 0,-15.938 -3.008,-30.927 -8.938,-44.549 -5.799,-13.318 -14.252,-25.029 -25.125,-34.809 -10.83,-9.742 -23.774,-17.308 -38.474,-22.488 -14.97,-5.275 -31.429,-7.951 -48.92,-7.951 l 0,0 z m -118.187002,111.213 c 0,-64.045 49.244001,-107.213 118.187002,-107.213 69.307,0 117.458,43.168 117.458,105.797 l 0,0 0,0 c 0,45.646 -37.572,73.952 -60.553,92.351 l 4,0 0,0 2.41,0 0,0 24.23,0 c 15.321,0 20.063,-1.414 28.088,-20.521 l 10.216,0 0,0 0,0 -8.392,58.03 -91.922,0 -3.283,-4.603 0,0 0,0 c 12.402,-21.231 42.313,-71.829 42.313,-124.903 0,-57.323 -22.25,-91.999 -64.929,-91.999 -42.315,0 -64.564001,35.385 -64.564001,95.536 -0.002,0.292 -0.003,0.584 -0.003,0.877 -0.035,49.569 27.808001,96.569 41.586001,120.137 l 0,0 0,0 -2.917,4.955 -93.382001,0 -6.201001,-58.029 0,0 0,0 10.212001,0 c 7.660999,19.106 12.404999,20.521 29.545999,20.521 l 20.159,0 0,0 3.202001,0 0,0 4,0 c -20.793001,-13.446 -59.461001,-43.876 -59.461001,-90.936 l 0,0 0,0 z"/><path fill="#ef3b39" d="m 216.634,-2 c -2.431,0 -6.061,0.811 -9.55,4.678 0,0 0.001,-10e-4 0.002,-10e-4 -12.968,14.276 -41.592,38.801 -52.015,43.395 l -0.067,0.029 -0.066,0.032 c -4.885,2.37 -9.878,5.65 -9.878,12.002 0,2.827 1.132,5.242 3.185,6.801 1.667,1.265 3.807,1.906 6.361,1.906 l 15.028,0 -0.316,40.34 0,0.015 0,0.016 c 0,6.482 -0.182,16.369 -0.356,25.93 -0.173,9.441 -0.336,18.357 -0.336,24.156 0,8.939 4.283,17.845 11.75,24.43 3.834,3.38 8.338,6.031 13.389,7.878 5.359,1.96 11.189,2.954 17.326,2.954 19.707,0 37.266,-4.894 50.775,-14.149 l 0.046,-0.032 0.046,-0.032 c 3.351,-2.438 4.382,-6.308 2.564,-9.492 l -2.351,-4.887 -0.024,-0.054 -0.027,-0.052 c -1.671,-3.229 -3.932,-3.908 -5.533,-3.908 -1.076,0 -2.141,0.321 -3.168,0.952 -4.635,2.506 -9.133,3.484 -15.994,3.484 -3.84,0 -7.019,-1.641 -9.449,-4.874 -1.67,-2.224 -2.989,-5.201 -3.924,-8.852 -1.118,-4.365 -1.684,-9.711 -1.684,-15.889 l 0,-26.556 c 0,-14.072 0,-28.579 0.517,-41.378 l 36.72,0 c 1.664,0 5.678,-0.555 6.991,-5.7 l 0.009,-0.028 0.007,-0.029 3.387,-14.113 c 0.671,-1.711 0.509,-3.624 -0.467,-5.223 -1.175,-1.926 -3.331,-3.076 -5.768,-3.076 l -39.854,0 1.225,-31.475 0.003,-0.078 0,-0.078 C 225.138,1.718 221.641,-2 216.634,-2 l 0,0 z M 149.06,58.135 c 0,-3.361 2.078,-5.712 7.624,-8.403 11.438,-5.04 40.544,-30.252 53.366,-44.37 2.426,-2.69 4.852,-3.362 6.584,-3.362 3.117,0 4.504,2.354 4.504,5.042 l 0,0 0,0 -1.387,35.631 4,0 0,0 0.003,0 0,0 40.009,0 c 1.64,0 2.633,1.046 2.639,2.148 0.002,0.294 -0.066,0.593 -0.212,0.876 l -3.47,14.455 c -0.344,1.346 -1.038,2.69 -3.116,2.69 l -40.543,0 c -0.683,13.567 -0.693,29.414 -0.693,44.653 0,0.242 0,0.483 0,0.725 l 0,26.556 c 0,27.563 10.742,33.615 19.057,33.615 7.279,0 12.479,-1.008 18.021,-4.033 0.38,-0.246 0.76,-0.403 1.141,-0.403 0.659,0 1.319,0.468 1.98,1.746 l 2.424,5.041 c 0.292,0.474 0.42,0.946 0.422,1.404 0.006,1.17 -0.812,2.241 -1.809,2.966 -5.892,4.037 -21.483,13.449 -48.514,13.449 -23.564,0 -38.465,-15.799 -38.465,-31.262 l 0,0 0,0 c 0,-11.767 0.692,-37.313 0.692,-50.086 l 0.316,-40.371 0,0 0,0 0,0 0.031,-4 -19.06,0 c -3.118,0 -5.544,-1.344 -5.544,-4.707 l 0,0 0,0 z"/></g>
+<text x="115" y="36" font-size="19" font-weight="bold" fill="#1e282c">Distribution slimming: inside the 30 language module jars (unpacked, 549 MB)</text>
+<text x="115" y="57" font-size="12" fill="#5f6b71">Red = classes and data files that duplicate jars already shipped in lib/ - parent-first class loading makes the bundled copies unreachable dead weight.</text>
+<text x="115" y="74" font-size="12" fill="#5f6b71">Name-matched filtering realizes -53.4 MB compressed (modules/ 253.7 -&gt; 200.3 MB); ja/fr keep drifted ICU4J 78.1 / Jackson 2.22.0 - 15.3 MB more after version alignment.</text>
+
+<!-- treemap tiles: area = unpacked size; red bottom share = dead weight -->
+<!-- nl 80.5 MB, 24.6 dup -->
+<rect x="30" y="92" width="325.6" height="281.4" fill="#7e94a9"/>
+<rect x="30" y="287.3" width="325.6" height="86.1" fill="#ef3b39"/>
+<rect x="30" y="92" width="325.6" height="281.4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="38" y="114" font-size="16" font-weight="bold" fill="#ffffff">nl</text>
+<text x="38" y="132" font-size="11" fill="#ffffff">80.5 MB unpacked</text>
+<text x="38" y="305" font-size="11" fill="#ffffff">24.6 MB duplicates (fastutil, Guava, commons)</text>
+<!-- de 76.3 MB, 25.1 dup -->
+<rect x="30" y="373.4" width="325.6" height="266.6" fill="#7e94a9"/>
+<rect x="30" y="552.3" width="325.6" height="87.7" fill="#ef3b39"/>
+<rect x="30" y="373.4" width="325.6" height="266.6" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="38" y="395" font-size="16" font-weight="bold" fill="#ffffff">de</text>
+<text x="38" y="413" font-size="11" fill="#ffffff">76.3 MB unpacked</text>
+<text x="38" y="570" font-size="11" fill="#ffffff">25.1 MB duplicates (fastutil, Guava, commons)</text>
+<!-- en 54.8 MB, 25.1 dup -->
+<rect x="355.6" y="92" width="261.4" height="238.6" fill="#7e94a9"/>
+<rect x="355.6" y="221.3" width="261.4" height="109.3" fill="#ef3b39"/>
+<rect x="355.6" y="92" width="261.4" height="238.6" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="363.6" y="114" font-size="16" font-weight="bold" fill="#ffffff">en</text>
+<text x="363.6" y="132" font-size="11" fill="#ffffff">54.8 MB unpacked</text>
+<text x="363.6" y="239" font-size="11" fill="#ffffff">25.1 MB duplicates</text>
+<!-- ar 35.6 MB, 1.5 dup -->
+<rect x="355.6" y="330.6" width="261.4" height="155.1" fill="#7e94a9"/>
+<rect x="355.6" y="479.3" width="261.4" height="6.4" fill="#ef3b39"/>
+<rect x="355.6" y="330.6" width="261.4" height="155.1" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="363.6" y="352.6" font-size="16" font-weight="bold" fill="#ffffff">ar</text>
+<text x="363.6" y="370.6" font-size="11" fill="#ffffff">35.6 MB unpacked</text>
+<!-- ru 35.5 MB, 24.1 dup -->
+<rect x="355.6" y="485.6" width="261.4" height="154.4" fill="#7e94a9"/>
+<rect x="355.6" y="534.9" width="261.4" height="105.1" fill="#ef3b39"/>
+<rect x="355.6" y="485.6" width="261.4" height="154.4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="363.6" y="507" font-size="16" font-weight="bold" fill="#ffffff">ru</text>
+<text x="363.6" y="525" font-size="11" fill="#ffffff">35.5 MB unpacked</text>
+<text x="363.6" y="553" font-size="11" fill="#ffffff">24.1 MB duplicates</text>
+<!-- ja 33.0 MB, 32.7 dup (almost all ICU4J) -->
+<rect x="617" y="92" width="192.1" height="195.3" fill="#7e94a9"/>
+<rect x="617" y="94" width="192.1" height="193.3" fill="#ef3b39"/>
+<rect x="617" y="92" width="192.1" height="195.3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="625" y="114" font-size="16" font-weight="bold" fill="#ffffff">ja</text>
+<text x="625" y="132" font-size="11" fill="#ffffff">33.0 MB unpacked</text>
+<text x="625" y="150" font-size="11" fill="#ffffff">32.7 MB ICU4J - kept: 78.1 vs 78.3 in lib/</text>
+<!-- ca 30.0 MB, 7.9 dup -->
+<rect x="617" y="287.3" width="192.1" height="177.7" fill="#7e94a9"/>
+<rect x="617" y="418.4" width="192.1" height="46.6" fill="#ef3b39"/>
+<rect x="617" y="287.3" width="192.1" height="177.7" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="625" y="309" font-size="16" font-weight="bold" fill="#ffffff">ca</text>
+<text x="625" y="327" font-size="11" fill="#ffffff">30.0 MB unpacked</text>
+<text x="625" y="435" font-size="11" fill="#ffffff">7.9 MB duplicates</text>
+<!-- ga 29.6 MB, clean -->
+<rect x="617" y="465" width="192.1" height="175" fill="#7e94a9"/>
+<rect x="617" y="465" width="192.1" height="175" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="625" y="487" font-size="16" font-weight="bold" fill="#ffffff">ga</text>
+<text x="625" y="505" font-size="11" fill="#ffffff">29.6 MB unpacked</text>
+<!-- pt 27.6 MB, 2.0 dup -->
+<rect x="809.2" y="92" width="185.8" height="169" fill="#7e94a9"/>
+<rect x="809.2" y="249" width="185.8" height="12" fill="#ef3b39"/>
+<rect x="809.2" y="92" width="185.8" height="169" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="817" y="114" font-size="16" font-weight="bold" fill="#ffffff">pt</text>
+<text x="817" y="132" font-size="11" fill="#ffffff">27.6 MB unpacked</text>
+<!-- zh 26.0 MB, clean -->
+<rect x="995" y="92" width="175" height="169" fill="#7e94a9"/>
+<rect x="995" y="92" width="175" height="169" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1003" y="114" font-size="16" font-weight="bold" fill="#ffffff">zh</text>
+<text x="1003" y="132" font-size="11" fill="#ffffff">26.0 MB unpacked</text>
+<!-- uk 24.9 MB, 1.5 dup -->
+<rect x="809.2" y="261" width="192.5" height="147.3" fill="#7e94a9"/>
+<rect x="809.2" y="399.6" width="192.5" height="8.7" fill="#ef3b39"/>
+<rect x="809.2" y="261" width="192.5" height="147.3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="817" y="283" font-size="16" font-weight="bold" fill="#ffffff">uk</text>
+<text x="817" y="301" font-size="11" fill="#ffffff">24.9 MB unpacked</text>
+<!-- fr 21.8 MB, 6.9 dup -->
+<rect x="1001.6" y="261" width="168.4" height="147.3" fill="#7e94a9"/>
+<rect x="1001.6" y="361.8" width="168.4" height="46.5" fill="#ef3b39"/>
+<rect x="1001.6" y="261" width="168.4" height="147.3" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1009.6" y="283" font-size="16" font-weight="bold" fill="#ffffff">fr</text>
+<text x="1009.6" y="301" font-size="11" fill="#ffffff">21.8 MB unpacked</text>
+<text x="1009.6" y="378" font-size="11" fill="#ffffff">6.9 MB dup. (Jackson kept)</text>
+<!-- gl 20.1 MB, clean -->
+<rect x="809.2" y="408.3" width="152.8" height="149.7" fill="#7e94a9"/>
+<rect x="809.2" y="408.3" width="152.8" height="149.7" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="817" y="430" font-size="16" font-weight="bold" fill="#ffffff">gl</text>
+<text x="817" y="448" font-size="11" fill="#ffffff">20.1 MB unpacked</text>
+<!-- es 11.0 MB, 1.5 dup -->
+<rect x="809.2" y="558" width="152.8" height="82" fill="#7e94a9"/>
+<rect x="809.2" y="629" width="152.8" height="11" fill="#ef3b39"/>
+<rect x="809.2" y="558" width="152.8" height="82" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="817" y="580" font-size="16" font-weight="bold" fill="#ffffff">es</text>
+<text x="817" y="598" font-size="11" fill="#ffffff">11.0 MB unpacked</text>
+<!-- pl 10.4 MB, clean -->
+<rect x="962" y="408.3" width="146.7" height="81" fill="#7e94a9"/>
+<rect x="962" y="408.3" width="146.7" height="81" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="970" y="430" font-size="16" font-weight="bold" fill="#ffffff">pl</text>
+<text x="970" y="448" font-size="11" fill="#ffffff">10.4 MB unpacked</text>
+<!-- sk 4.4 MB -->
+<rect x="1108.7" y="408.3" width="61.3" height="81" fill="#7e94a9"/>
+<rect x="1108.7" y="408.3" width="61.3" height="81" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1115" y="428" font-size="13" font-weight="bold" fill="#ffffff">sk</text>
+<text x="1115" y="443" font-size="10" fill="#ffffff">4.4 MB</text>
+<!-- br 4.2 MB -->
+<rect x="962" y="489.2" width="58.8" height="80.7" fill="#7e94a9"/>
+<rect x="962" y="489.2" width="58.8" height="80.7" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="969" y="509" font-size="13" font-weight="bold" fill="#ffffff">br</text>
+<text x="969" y="524" font-size="10" fill="#ffffff">4.2 MB</text>
+<!-- da 3.6 MB -->
+<rect x="962" y="569.9" width="58.8" height="70.1" fill="#7e94a9"/>
+<rect x="962" y="569.9" width="58.8" height="70.1" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="969" y="589" font-size="13" font-weight="bold" fill="#ffffff">da</text>
+<text x="969" y="604" font-size="10" fill="#ffffff">3.6 MB</text>
+<!-- ro 3.0 MB -->
+<rect x="1020.8" y="489.2" width="50.7" height="67.9" fill="#7e94a9"/>
+<rect x="1020.8" y="489.2" width="50.7" height="67.9" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1027" y="509" font-size="13" font-weight="bold" fill="#ffffff">ro</text>
+<text x="1027" y="524" font-size="10" fill="#ffffff">3.0 MB</text>
+<!-- sv 3.0 MB -->
+<rect x="1071.5" y="489.2" width="49.9" height="67.9" fill="#7e94a9"/>
+<rect x="1071.5" y="489.2" width="49.9" height="67.9" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1078" y="509" font-size="13" font-weight="bold" fill="#ffffff">sv</text>
+<text x="1078" y="524" font-size="10" fill="#ffffff">3.0 MB</text>
+<!-- ast 2.9 MB -->
+<rect x="1121.4" y="489.2" width="48.6" height="67.9" fill="#7e94a9"/>
+<rect x="1121.4" y="489.2" width="48.6" height="67.9" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1128" y="509" font-size="13" font-weight="bold" fill="#ffffff">ast</text>
+<text x="1128" y="524" font-size="10" fill="#ffffff">2.9 MB</text>
+<!-- fa 2.9 MB -->
+<rect x="1020.8" y="557.2" width="73.9" height="43.9" fill="#7e94a9"/>
+<rect x="1020.8" y="557.2" width="73.9" height="43.9" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1027" y="574" font-size="13" font-weight="bold" fill="#ffffff">fa</text>
+<text x="1027" y="588" font-size="10" fill="#ffffff">2.9 MB</text>
+<!-- km 2.5 MB -->
+<rect x="1020.8" y="601.1" width="73.9" height="38.9" fill="#7e94a9"/>
+<rect x="1020.8" y="601.1" width="73.9" height="38.9" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1027" y="618" font-size="13" font-weight="bold" fill="#ffffff">km</text>
+<text x="1027" y="632" font-size="10" fill="#ffffff">2.5 MB</text>
+<!-- it 1.4 MB -->
+<rect x="1094.7" y="557.2" width="43" height="38.1" fill="#7e94a9"/>
+<rect x="1094.7" y="557.2" width="43" height="38.1" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1101" y="573" font-size="12" font-weight="bold" fill="#ffffff">it</text>
+<text x="1101" y="587" font-size="9" fill="#ffffff">1.4</text>
+<!-- be 1.1 MB -->
+<rect x="1137.7" y="557.2" width="32.3" height="38.1" fill="#7e94a9"/>
+<rect x="1137.7" y="557.2" width="32.3" height="38.1" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1144" y="573" font-size="12" font-weight="bold" fill="#ffffff">be</text>
+<!-- el 1.1 MB -->
+<rect x="1094.7" y="595.3" width="26.7" height="44.7" fill="#7e94a9"/>
+<rect x="1094.7" y="595.3" width="26.7" height="44.7" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1100" y="612" font-size="11" font-weight="bold" fill="#ffffff">el</text>
+<!-- eo 0.9 MB -->
+<rect x="1121.4" y="595.3" width="22.4" height="44.7" fill="#7e94a9"/>
+<rect x="1121.4" y="595.3" width="22.4" height="44.7" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1125" y="612" font-size="10" font-weight="bold" fill="#ffffff">eo</text>
+<!-- sl 0.4 MB -->
+<rect x="1143.8" y="595.3" width="26.2" height="19.1" fill="#7e94a9"/>
+<rect x="1143.8" y="595.3" width="26.2" height="19.1" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<text x="1148" y="609" font-size="9" font-weight="bold" fill="#ffffff">sl</text>
+<!-- ta 0.3 MB (unlabeled) -->
+<rect x="1143.8" y="614.4" width="14.2" height="25.6" fill="#7e94a9"/>
+<rect x="1143.8" y="614.4" width="14.2" height="25.6" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<!-- tl 0.3 MB (unlabeled) -->
+<rect x="1158" y="614.4" width="12" height="25.6" fill="#7e94a9"/>
+<rect x="1158" y="614.4" width="12" height="25.6" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+
+<!-- legend -->
+<rect x="30" y="652" width="12" height="12" fill="#7e94a9"/>
+<text x="48" y="662" font-size="11" fill="#1e282c">cargo: dictionaries, grammar rules, module code</text>
+<rect x="330" y="652" width="12" height="12" fill="#ef3b39"/>
+<text x="348" y="662" font-size="11" fill="#1e282c">dead weight: fastutil, Guava, ICU4J, Jackson, commons, Trove - class-for-class identical with jars in lib/ (smallest unlabeled tiles: ta, tl)</text>
+
+<!-- footer -->
+<circle cx="30" cy="680.2" r="5.6" fill="none" stroke="#5f6b71" stroke-width="1.1"/>
+<path d="M 27.2,678.5 A 3.3 3.3 0 1 1 27.2,681.9" fill="none" stroke="#5f6b71" stroke-width="1.2" stroke-linecap="round"/>
+<text x="42" y="684" font-size="11" fill="#5f6b71">2026  -  OmegaT - Computer Assisted Translation (CAT) tool  -  This file is part of OmegaT, released under the GNU General Public License v3 or later</text>
+  <text x="42" y="699" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5f6b71" font-weight="normal" text-anchor="start">OmegaT is distributed WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE - see the GNU General Public License for more details.</text>
+</svg>

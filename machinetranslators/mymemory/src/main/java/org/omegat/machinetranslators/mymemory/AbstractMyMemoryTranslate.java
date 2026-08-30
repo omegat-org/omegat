@@ -57,7 +57,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseCachedTranslate {
 
     protected static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
     protected static final String MYMEMORY_API_KEY = "mymemory.api.key";
-    private static final String DEFAULT_GT_URL = "https://mymemory.translated.net/api/get";
+    private static final String DEFAULT_GT_URL = "https://api.mymemory.translated.net/get";
 
     protected static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.mymemory.Bundle";
 

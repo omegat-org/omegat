@@ -295,12 +295,12 @@ public final class Styles {
         /**
          * Matches deleted active text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_ACTIVE("OmegaT.matchesDelActive", "#000000", TextStyle.BOLD,
+        COLOR_MATCHES_DEL_ACTIVE("OmegaT.matchesDelActive", "#ff3399", TextStyle.BOLD,
                 TextStyle.STRIKETHROUGH),
         /**
          * Matches deleted inactive text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_INACTIVE("OmegaT.matchesDelInactive", "#000000", TextStyle.STRIKETHROUGH),
+        COLOR_MATCHES_DEL_INACTIVE("OmegaT.matchesDelInactive", "#ff0000", TextStyle.STRIKETHROUGH),
         /**
          * Matches inserted active text color (underlined foreground).
          */

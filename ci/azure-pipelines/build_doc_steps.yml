@@ -9,6 +9,9 @@ steps:
         gradle | "$(Agent.OS)"
         gradle
       path: '$(GRADLE_USER_HOME)/caches/modules-2'
+  - script: python3 ci/check-docs-assets.py
+    condition: ${{ parameters.condition }}
+    displayName: 'Check documentation assets are referenced'
   - task: Gradle@3
     condition: ${{ parameters.condition }}
     inputs:

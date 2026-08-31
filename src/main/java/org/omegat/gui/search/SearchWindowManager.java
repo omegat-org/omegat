@@ -73,22 +73,41 @@ public final class SearchWindowManager {
     /**
      * Run a search for the given source text in the most recent open SEARCH
      * window, or in a new one when none is open. Used by the source
-     * concordance search menu action.
+     * concordance search menu action when its immediate search option is on.
      *
      * @param query
      *            source text to search for
      */
     public static void searchSource(String query) {
+        obtainSearchWindow().searchImmediately(query);
+    }
+
+    /**
+     * Insert the given source text into the most recent open SEARCH window,
+     * or into a new one when none is open. The search field gets the focus
+     * and the inserted text is selected, so typing replaces it right away.
+     * Used by the source concordance search menu action when its immediate
+     * search option is off.
+     *
+     * @param query
+     *            source text to insert
+     */
+    public static void insertSource(String query) {
+        SearchWindowController swc = obtainSearchWindow();
+        swc.makeVisible(query);
+        swc.focusSearchField();
+    }
+
+    private static SearchWindowController obtainSearchWindow() {
         for (int i = searches.size() - 1; i >= 0; i--) {
             SearchWindowController swc = searches.get(i);
             if (swc.getMode() == SearchMode.SEARCH) {
-                swc.searchImmediately(query);
-                return;
+                return swc;
             }
         }
         SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
         addSearchWindow(search);
-        search.searchImmediately(query);
+        return search;
     }
 
     /**

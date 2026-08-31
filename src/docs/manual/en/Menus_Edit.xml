@@ -347,8 +347,8 @@
             <para>Lets you search the whole project for the source text of the
                current segment, similar to the concordance search of other CAT
                tools.</para>
-            <para>The source text is inserted into the most recent still open Search
-               window, or into a new
+            <para>The source text is inserted, ready to be typed over, into the most
+               recent still open Search window, or into a new
                <link linkend="windows.text.search" endterm="windows.text.search.title"></link> window when none is
                	   open. With the
                <link linkend="dialogs.preferences.editor.search.for.source.segment" endterm="dialogs.preferences.editor.search.for.source.segment.title"></link>

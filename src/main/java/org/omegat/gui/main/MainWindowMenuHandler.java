@@ -474,8 +474,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         String query = ste.getSrcText();
         if (Preferences.isPreference(Preferences.SEARCH_SOURCE_SEGMENT_IMMEDIATELY)) {
             SearchWindowManager.searchSource(query);
-        } else if (!SearchWindowManager.reuseSearchWindow(query)) {
-            SearchWindowManager.createSearchWindow(SearchMode.SEARCH, query);
+        } else {
+            SearchWindowManager.insertSource(query);
         }
     }
 

@@ -259,6 +259,13 @@ public final class Preferences {
     public static final String SINGLE_CLICK_SEGMENT_ACTIVATION = "wf_singleClickSegmentActivation";
 
     /**
+     * Editor Option: Search for Source Segment adjusts the search options and
+     * starts the search immediately instead of only pre-filling the search
+     * field (feature request #1162)
+     */
+    public static final String SEARCH_SOURCE_SEGMENT_IMMEDIATELY = "wf_searchSourceSegmentImmediately";
+
+    /**
      * Workflow Option: Go To Next Untranslated Segment stops when there is at
      * least one alternative translation
      */

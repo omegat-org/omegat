@@ -78,6 +78,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_replaceLabel = new javax.swing.JLabel();
         m_replaceField = new javax.swing.JComboBox<>();
         m_searchButton = new javax.swing.JButton();
+        m_optionsButton = new javax.swing.JButton();
         m_panelSearch = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         m_searchExactSearchRB = new javax.swing.JRadioButton();
@@ -227,6 +228,11 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         jPanel1.add(m_searchButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        jPanel1.add(m_optionsButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -749,6 +755,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_fullHalfWidthInsensitive;
     javax.swing.JLabel m_numberLabel;
     javax.swing.JSpinner m_numberOfResults;
+    javax.swing.JButton m_optionsButton;
     javax.swing.JPanel m_panelReplace;
     javax.swing.JPanel m_panelSearch;
     javax.swing.JRadioButton m_rbDir;

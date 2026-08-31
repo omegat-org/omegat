@@ -111,6 +111,10 @@
                Options</guimenuitem>: reset the search window options.</para>
       </listitem>
    </itemizedlist>
+   <para>The gear button next to the Search button offers the
+      <link linkend="dialogs.preferences.editor.search.for.source.segment" endterm="dialogs.preferences.editor.search.for.source.segment.title"></link>
+      editor preference followed by the items of the
+      <guimenu>Edit</guimenu> menu.</para>
    <section xml:id="windows.text.search.methods">
       <title xml:id="windows.text.search.methods.title">Search type</title>
       <para>Use the radio buttons to select the type of search.</para>

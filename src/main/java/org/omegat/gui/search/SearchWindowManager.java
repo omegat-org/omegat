@@ -27,11 +27,17 @@ package org.omegat.gui.search;
 
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchMode;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.gui.StaticUIUtils;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.KeyStroke;
 
 public final class SearchWindowManager {
 
@@ -62,6 +68,39 @@ public final class SearchWindowManager {
             }
             searches.clear();
         }
+    }
+
+    /**
+     * Run a search for the given source text in the most recent open SEARCH
+     * window, or in a new one when none is open. Used by the source
+     * concordance search menu action.
+     *
+     * @param query
+     *            source text to search for
+     */
+    public static void searchSource(String query) {
+        for (int i = searches.size() - 1; i >= 0; i--) {
+            SearchWindowController swc = searches.get(i);
+            if (swc.getMode() == SearchMode.SEARCH) {
+                swc.searchImmediately(query);
+                return;
+            }
+        }
+        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
+        addSearchWindow(search);
+        search.searchImmediately(query);
+    }
+
+    /**
+     * Label of the search behaviour option of the Search for Source Segment
+     * command, with the currently effective menu shortcut baked in. Used by
+     * the editor preferences panel and the gear menu of the Search window.
+     */
+    public static String searchSourceSegmentOptionLabel() {
+        KeyStroke ks = PropertiesShortcuts.getMainMenuShortcuts()
+                .getKeyStroke("editSearchSourceSegmentMenuItem");
+        String shortcut = ks == null ? "" : StaticUIUtils.getKeyStrokeText(ks);
+        return StringUtil.format(OStrings.getString("WF_OPTION_SEARCH_SOURCE_SEGMENT"), shortcut);
     }
 
     public static boolean reuseSearchWindow(String text) {

@@ -59,15 +59,20 @@ import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -91,6 +96,7 @@ import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -99,6 +105,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -133,6 +140,7 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
+        initOptionsButton();
         Font f = Objects.requireNonNull(Core.getMainWindow()).getApplicationFont();
         setFont(f);
 
@@ -1058,6 +1066,73 @@ public class SearchWindowController {
         form.setVisible(true);
         form.setState(JFrame.NORMAL);
         form.m_searchField.requestFocus();
+    }
+
+    /**
+     * Make the Search window visible, put the given text into the search
+     * field and run the search right away. Used for the source concordance
+     * search of the current segment (feature request #1162).
+     *
+     * Exact search, searching in source texts and the project-wide scope are
+     * switched on before running: a source concordance search with the scope
+     * options off would silently return nothing useful, and a remembered
+     * regular expression mode would misread the segment text as a pattern.
+     *
+     * @param query
+     *            source text to search for
+     */
+    public void searchImmediately(String query) {
+        UIThreadsUtil.mustBeSwingThread();
+        form.m_searchExactSearchRB.setSelected(true);
+        form.m_searchSource.setSelected(true);
+        form.m_rbProject.setSelected(true);
+        makeVisible(query);
+        doSearch();
+    }
+
+    /**
+     * Style the gear button next to the search field and let it open the
+     * options menu.
+     */
+    private void initOptionsButton() {
+        form.m_optionsButton.setIcon(
+                new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.inactive.png")));
+        form.m_optionsButton.setRolloverIcon(
+                new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png")));
+        form.m_optionsButton.setPressedIcon(
+                new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.pressed.png")));
+        form.m_optionsButton.setBorder(new EmptyBorder(2, 2, 2, 2));
+        form.m_optionsButton.setContentAreaFilled(false);
+        form.m_optionsButton.setFocusable(false);
+        form.m_optionsButton.setToolTipText(OStrings.getString("SW_OPTIONS_MENU"));
+        form.m_optionsButton.getAccessibleContext()
+                .setAccessibleName(OStrings.getString("SW_OPTIONS_MENU"));
+        form.m_optionsButton.addActionListener(e -> showOptionsMenu());
+    }
+
+    /**
+     * Show the gear menu: the search behaviour option of the Search for
+     * Source Segment command first, followed by the items of the Edit menu.
+     */
+    private void showOptionsMenu() {
+        JPopupMenu menu = new JPopupMenu();
+        JCheckBoxMenuItem immediate = new JCheckBoxMenuItem();
+        Mnemonics.setLocalizedText(immediate, SearchWindowManager.searchSourceSegmentOptionLabel());
+        immediate.setSelected(Preferences.isPreference(Preferences.SEARCH_SOURCE_SEGMENT_IMMEDIATELY));
+        immediate.addActionListener(e -> Preferences
+                .setPreference(Preferences.SEARCH_SOURCE_SEGMENT_IMMEDIATELY, immediate.isSelected()));
+        menu.add(immediate);
+        menu.addSeparator();
+        SearchWindowMenu.addEditItems(menu, this);
+        // Display the same shortcut hints as in the menu bar. The real
+        // bindings live in the menu bar; accelerators of a free popup are
+        // display only.
+        for (Component c : menu.getComponents()) {
+            if (c instanceof JMenuItem) {
+                PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes((JMenuItem) c);
+            }
+        }
+        menu.show(form.m_optionsButton, 0, form.m_optionsButton.getHeight());
     }
 
     private void applySearchModeOptions(SearchExpression expression) {

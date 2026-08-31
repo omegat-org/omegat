@@ -36,6 +36,7 @@ import javax.swing.JComponent;
 
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.gui.search.SearchWindowManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
@@ -101,6 +102,8 @@ public class EditingBehaviorController extends BasePreferencesController {
         setLocalizedText(panel.paraMarkLabel, OStrings.getString("WG_PARA_MARK"));
         setLocalizedText(panel.singleClickActivationCheckBox, OStrings.getString(
                 "WF_OPTION_ALLOW_SELECT_SINGLE_CLICK"));
+        setLocalizedText(panel.searchSourceSegmentCheckBox,
+                SearchWindowManager.searchSourceSegmentOptionLabel());
     }
 
     @Override
@@ -124,6 +127,8 @@ public class EditingBehaviorController extends BasePreferencesController {
                 Preferences.isPreferenceDefault(Preferences.ALLOW_TRANS_EQUAL_TO_SRC, true));
         panel.singleClickActivationCheckBox.setSelected(
                 Preferences.isPreferenceDefault(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, false));
+        panel.searchSourceSegmentCheckBox.setSelected(
+                Preferences.isPreference(Preferences.SEARCH_SOURCE_SEGMENT_IMMEDIATELY));
         panel.exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         panel.stopOnAlternativeTranslation
                 .setSelected(Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
@@ -150,6 +155,7 @@ public class EditingBehaviorController extends BasePreferencesController {
 
         panel.allowTranslationEqualToSource.setSelected(true);
         panel.singleClickActivationCheckBox.setSelected(false);
+        panel.searchSourceSegmentCheckBox.setSelected(false);
         panel.exportCurrentSegment.setSelected(false);
         panel.stopOnAlternativeTranslation.setSelected(false);
         panel.convertNumbers.setSelected(true);
@@ -186,6 +192,8 @@ public class EditingBehaviorController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXPORT_CURRENT_SEGMENT, panel.exportCurrentSegment.isSelected());
         Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION,
                 panel.singleClickActivationCheckBox.isSelected());
+        Preferences.setPreference(Preferences.SEARCH_SOURCE_SEGMENT_IMMEDIATELY,
+                panel.searchSourceSegmentCheckBox.isSelected());
         Preferences.setPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION,
                 panel.stopOnAlternativeTranslation.isSelected());
         Preferences.setPreference(Preferences.CONVERT_NUMBERS, panel.convertNumbers.isSelected());

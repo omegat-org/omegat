@@ -626,6 +626,12 @@
                      <entry>meta shift F</entry>
                   </row>
                   <row>
+                     <entry>Search for Source Segment</entry>
+                     <entry>editSearchSourceSegmentMenuItem</entry>
+                     <entry>ctrl shift E</entry>
+                     <entry>meta shift E</entry>
+                  </row>
+                  <row>
                      <entry>Replace...</entry>
                      <entry>editReplaceInProjectMenuItem</entry>
                      <entry>ctrl K</entry>

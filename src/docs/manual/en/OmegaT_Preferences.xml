@@ -993,6 +993,21 @@
                   		  segments that belong to the same paragraph.</para>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.preferences.editor.search.for.source.segment">
+            <term xml:id="dialogs.preferences.editor.search.for.source.segment.title">
+               <option>Search Source Segment adjusts settings + searches at once</option>
+            </term>
+            <listitem>
+               <para>By default,
+                  <link linkend="menus.edit" endterm="menus.edit.title"></link>
+                  <link linkend="menus.edit.search.source.segment" endterm="menus.edit.search.source.segment.title"></link> only inserts the
+                  		  source text of the current segment into the Search window. Use this
+                  		  option to also select exact search, the
+                  <guilabel>In source</guilabel> option and the project-wide scope, and
+                  		  to start the search immediately. The option is also available from
+                  		  the gear menu of the Search window.</para>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="dialogs.preferences.tag.processing">

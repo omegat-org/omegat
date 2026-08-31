@@ -27,9 +27,11 @@ package org.omegat.gui.search;
 
 import java.awt.event.KeyEvent;
 
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
@@ -74,35 +76,53 @@ public class SearchWindowMenu extends JMenuBar {
 
         JMenu editMenu = add(new JMenu());
         Mnemonics.setLocalizedText(editMenu, OStrings.getString("SW_EDIT_MENU"));
+        addEditItems(editMenu, controller);
 
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
+    }
+
+    /**
+     * Add the items of the Edit menu to the given menu. Also used by the gear
+     * button popup of the Search window.
+     *
+     * @param menu
+     *            must be a JMenu or a JPopupMenu
+     * @param controller
+     *            the controller of the receiving Search window
+     */
+    static void addEditItems(JComponent menu, SearchWindowController controller) {
         // "Action Commands" must be the same as equivalent MainWindowMenu
         // members in order to get matching shortcuts.
 
-        item = editMenu.add(new JMenuItem());
+        JMenuItem item;
+
+        item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
         item.setActionCommand("editInsertSourceMenuItem");
         item.addActionListener(
                 e -> controller.insertIntoActiveField(Core.getEditor().getCurrentEntry().getSrcText()));
+        menu.add(item);
 
-        item = editMenu.add(new JMenuItem());
+        item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         item.setActionCommand("editOverwriteSourceMenuItem");
         item.addActionListener(
                 e -> controller.replaceCurrentFieldText(Core.getEditor().getCurrentEntry().getSrcText()));
+        menu.add(item);
 
-        editMenu.addSeparator();
+        menu.add(new JPopupMenu.Separator());
 
-        item = editMenu.add(new JMenuItem());
+        item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
         item.setActionCommand("editCreateGlossaryEntryMenuItem");
         item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(controller.getWindow()));
+        menu.add(item);
 
-        editMenu.addSeparator();
+        menu.add(new JPopupMenu.Separator());
 
-        item = editMenu.add(new JMenuItem());
+        item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_EDIT_MENU_RESET_OPTIONS"));
         item.addActionListener(e -> controller.resetOptions());
-
-        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
+        menu.add(item);
     }
 }

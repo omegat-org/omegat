@@ -55,13 +55,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
 import javax.swing.JMenu;
 import javax.xml.stream.XMLStreamException;
+
+import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.Nullable;
@@ -207,6 +215,52 @@ public class RealProject implements IProject {
 
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
+
+    /**
+     * FilterMaster instance {@link TargetPathCache#CACHE} was computed
+     * against. Editing filter preferences installs a new instance without
+     * firing a project event or forcing a reload
+     * (FiltersCustomizerController#persist), so cache empties itself when
+     * instance changed.
+     */
+    private static volatile @Nullable FilterMaster targetPathCacheSource;
+
+    /**
+     * Source path to target path, as computed by
+     * {@link #getTargetPathForSourceFile(String)}. Selecting the filter that
+     * determines a target path can require parsing the source file, so
+     * callers must not recompute it on every call. JCache layer (Caffeine)
+     * bounds cache by size and age; cleared on project close and when
+     * another {@link FilterMaster} instance gets installed, see
+     * {@link #targetPathCacheSource}. Key includes source root, so an
+     * in-flight lookup of a closed project cannot leak its target path into
+     * the next one. Lazy holder keeps a JCache provider failure out of
+     * RealProject class init.
+     */
+    private static final class TargetPathCache {
+        private static final String NAME = "realProjectTargetPath";
+        private static final int SIZE = 1_000;
+        static final Cache<String, String> CACHE = create();
+
+        private static Cache<String, String> create() {
+            CacheManager manager = Caching.getCachingProvider().getCacheManager();
+            Cache<String, String> cache = manager.getCache(NAME);
+            if (cache == null) {
+                CaffeineConfiguration<String, String> cacheConfig = new CaffeineConfiguration<>();
+                cacheConfig.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+                cacheConfig.setMaximumSize(OptionalLong.of(SIZE));
+                cache = manager.createCache(NAME, cacheConfig);
+            }
+            Cache<String, String> created = cache;
+            CoreEvents.registerProjectChangeListener(eventType -> {
+                if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                    created.clear();
+                    targetPathCacheSource = null;
+                }
+            });
+            return cache;
+        }
+    }
 
     private final boolean allowTranslationEqualToSource = Preferences
             .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
@@ -1639,9 +1693,25 @@ public class RealProject implements IProject {
         if (StringUtil.isEmpty(currentSource)) {
             return null;
         }
+        FilterMaster filterMaster = Core.getFilterMaster();
+        if (filterMaster != targetPathCacheSource) {
+            TargetPathCache.CACHE.clear();
+            targetPathCacheSource = filterMaster;
+        }
+        String cacheKey = config.getSourceRoot() + '\0' + currentSource;
+        String cached = TargetPathCache.CACHE.get(cacheKey);
+        if (cached != null) {
+            return cached;
+        }
         try {
-            return Core.getFilterMaster().getTargetForSource(config.getSourceRoot(), currentSource,
+            String target = filterMaster.getTargetForSource(config.getSourceRoot(), currentSource,
                     new FilterContext(config));
+            // Recheck keeps a value computed under a replaced FilterMaster
+            // out of the fresh cache.
+            if (target != null && filterMaster == targetPathCacheSource) {
+                TargetPathCache.CACHE.put(cacheKey, target);
+            }
+            return target;
         } catch (Exception e) {
             Log.log(e);
         }

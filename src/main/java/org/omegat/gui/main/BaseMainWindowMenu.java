@@ -45,6 +45,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,6 +58,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -66,6 +68,8 @@ import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -114,6 +118,12 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** MainWindow menu handler instance. */
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
+
+    /**
+     * Distinguishes the latest enablement check of the access-project-files
+     * menu from superseded ones. Only touched on the EDT.
+     */
+    private int projectAccessDocumentsGeneration;
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
             final BaseMainWindowMenuHandler mainWindowMenuHandler) {
@@ -663,19 +673,48 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectAccessProjectFilesMenu.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
-                if (Core.getProject().isProjectLoaded()) {
-                    String sourcePath = Core.getEditor().getCurrentFile();
-                    projectAccessCurrentSourceDocumentMenuItem.setEnabled(!StringUtil.isEmpty(sourcePath)
-                            && new File(Core.getProject().getProjectProperties().getSourceRoot(), sourcePath)
-                                    .isFile());
-                    String targetPath = Core.getEditor().getCurrentTargetFile();
-                    projectAccessCurrentTargetDocumentMenuItem.setEnabled(!StringUtil.isEmpty(targetPath)
-                            && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath)
-                                    .isFile());
-                    String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
-                    projectAccessWriteableGlossaryMenuItem
-                            .setEnabled(!StringUtil.isEmpty(glossaryPath) && new File(glossaryPath).isFile());
+                IProject project = Core.getProject();
+                if (!project.isProjectLoaded()) {
+                    return;
                 }
+                ProjectProperties props = project.getProjectProperties();
+                String sourcePath = Core.getEditor().getCurrentFile();
+                int generation = ++projectAccessDocumentsGeneration;
+                new SwingWorker<boolean[], Void>() {
+                    @Override
+                    protected boolean[] doInBackground() {
+                        // Resolving the target path can require parsing the
+                        // source file to select a filter, and existence checks
+                        // can hit slow storage; keep both off the EDT.
+                        boolean source = !StringUtil.isEmpty(sourcePath)
+                                && new File(props.getSourceRoot(), sourcePath).isFile();
+                        String targetPath = sourcePath == null ? null
+                                : project.getTargetPathForSourceFile(sourcePath);
+                        boolean target = !StringUtil.isEmpty(targetPath)
+                                && new File(props.getTargetRoot(), targetPath).isFile();
+                        String glossaryPath = props.getWriteableGlossary();
+                        boolean glossary = !StringUtil.isEmpty(glossaryPath)
+                                && new File(glossaryPath).isFile();
+                        return new boolean[] { source, target, glossary };
+                    }
+
+                    @Override
+                    protected void done() {
+                        if (generation != projectAccessDocumentsGeneration || Core.getProject() != project) {
+                            // a newer check was started or the project changed
+                            // in the meantime
+                            return;
+                        }
+                        try {
+                            boolean[] exists = get();
+                            projectAccessCurrentSourceDocumentMenuItem.setEnabled(exists[0]);
+                            projectAccessCurrentTargetDocumentMenuItem.setEnabled(exists[1]);
+                            projectAccessWriteableGlossaryMenuItem.setEnabled(exists[2]);
+                        } catch (InterruptedException | ExecutionException ex) {
+                            Log.log(ex);
+                        }
+                    }
+                }.execute();
             }
 
             @Override

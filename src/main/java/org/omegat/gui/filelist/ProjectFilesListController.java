@@ -779,10 +779,20 @@ public class ProjectFilesListController implements IProjectFilesList {
 
     private void createTableFiles() {
         applyColors(list.tableFiles);
-        list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        list.tableFiles.setRowSelectionAllowed(true);
-        list.tableFiles.setColumnSelectionAllowed(false);
-        list.tableFiles.setCellSelectionEnabled(false);
+        configureProjectFilesTableSelection(list.tableFiles);
+    }
+
+    /**
+     * Configures the selection model of the project files table.
+     * <p>
+     * Important: do not call setCellSelectionEnabled(false) here.
+     * With rowSelectionAllowed == true and columnSelectionAllowed == false,
+     * JTable#cellSelectionEnabled is already effectively false.
+     */
+    static void configureProjectFilesTableSelection(JTable table) {
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        table.setRowSelectionAllowed(true);
+        table.setColumnSelectionAllowed(false);
     }
 
     private void propagateTableColumns() {

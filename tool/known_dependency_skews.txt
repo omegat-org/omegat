@@ -4,7 +4,6 @@
 # checker errors on stale entries.
 error_prone_annotations
 guava
-icu4j
 j2objc-annotations
 jackson-core
 jackson-databind

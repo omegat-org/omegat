@@ -92,7 +92,7 @@ public class ProjectSettingsPublishTest {
     public void testPublishDeliversTheSettingsFileToTheTeam() throws Exception {
         ProjectSettingsStorage.save(config, KEY, "true");
 
-        RealProject.commitProjectSettings(provider, config);
+        RealProject.commitProjectSettings(provider, config, sidecarSetting());
 
         assertEquals("the team must receive the value", "true", loadDeliveredValue("member2"));
         assertFalse("omegat.project must stay untouched for older versions",
@@ -106,7 +106,7 @@ public class ProjectSettingsPublishTest {
         commitAll("team with the option");
 
         ProjectSettingsStorage.save(config, KEY, "false");
-        RealProject.commitProjectSettings(provider, config);
+        RealProject.commitProjectSettings(provider, config, sidecarSetting());
 
         assertEquals("the team must receive the new value", "false", loadDeliveredValue("member2"));
     }
@@ -121,7 +121,7 @@ public class ProjectSettingsPublishTest {
         commitAll("team already carries the value");
 
         ProjectSettingsStorage.save(config, KEY, "true");
-        RealProject.commitProjectSettings(provider, config);
+        RealProject.commitProjectSettings(provider, config, sidecarSetting());
 
         assertEquals("true", loadDeliveredValue("member2"));
     }
@@ -155,8 +155,9 @@ public class ProjectSettingsPublishTest {
         assertResolved(null, null, RealProject.resolveSetting(null, null, false, false));
         assertResolved("true", null, RealProject.resolveSetting(null, "true", false, false));
         // team: remote delivered a value over an absent local file - first
-        // arrival activates and asks once
-        assertAsks("true", null, RealProject.resolveSetting(null, "true", true, true));
+        // arrival activates quietly, there is no local value to rescue and
+        // nothing a fresh checkout should question
+        assertResolved("true", null, RealProject.resolveSetting(null, "true", true, true));
         // team: remote delivered a differing value - team wins, asks
         assertAsks("false", "true", RealProject.resolveSetting("true", "false", true, true));
         // team: local-only survivor - team default stays active, asks
@@ -226,6 +227,13 @@ public class ProjectSettingsPublishTest {
         assertEquals("foreign key must survive the rewrite unchanged", before.getProperty("future key=x"),
                 after.getProperty("future key=x"));
         assertEquals("true", ProjectSettingsStorage.load(config, KEY));
+    }
+
+    /** Sidecar-backed setting under KEY, for the commit calls. */
+    private static TeamSetting sidecarSetting() {
+        return TeamSetting.ofBoolean(KEY, "TEAM_SETTING_DIVERGED_TITLE", false, p -> true,
+                (p, v) -> {
+                });
     }
 
     private Properties loadRaw() throws Exception {

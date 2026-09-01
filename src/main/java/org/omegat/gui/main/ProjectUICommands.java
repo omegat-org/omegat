@@ -63,6 +63,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProjectSettingsStorage;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.data.TeamSetting;
 import org.omegat.core.data.TeamSettingsRegistry;
@@ -221,7 +222,9 @@ public final class ProjectUICommands {
                 remoteRepositoryProvider.switchAllToLatest();
                 for (String file : new String[] { OConsts.FILE_PROJECT,
                         OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
-                        OConsts.DEFAULT_INTERNAL + '/' + SRXManager.CONF_SENTSEG }) {
+                        OConsts.DEFAULT_INTERNAL + '/' + SRXManager.CONF_SENTSEG,
+                        OConsts.DEFAULT_INTERNAL + '/' + SRXManager.SRX_SENTSEG,
+                        OConsts.DEFAULT_INTERNAL + '/' + ProjectSettingsStorage.FILE_PROJECT_SETTINGS }) {
                     remoteRepositoryProvider.copyFilesFromReposToProject(file);
                 }
 
@@ -999,11 +1002,27 @@ public final class ProjectUICommands {
         int res = JOptionPane.showConfirmDialog(frame, OStrings.getString("MW_REOPEN_QUESTION"),
                 OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
         if (res != JOptionPane.YES_OPTION) {
-            if (!settingsToShare.isEmpty()) {
+            if (!changedTeamSettings.isEmpty()) {
                 new SwingWorker<Void, Void>() {
                     @Override
                     protected Void doInBackground() throws Exception {
-                        Core.executeExclusively(true, () -> publishSettingsLoggingErrors(settingsToShare));
+                        Core.executeExclusively(true, () -> {
+                            publishSettingsLoggingErrors(settingsToShare);
+                            changedTeamSettings.forEach((key, value) -> {
+                                if (!settingsToShare.containsKey(key)) {
+                                    // Declined share, no reload: the edit
+                                    // must still reach the local storage,
+                                    // and a pending divergence question on
+                                    // the same setting must not keep
+                                    // suppressing that write.
+                                    try {
+                                        Core.getProject().useLocalProjectSetting(key, value);
+                                    } catch (Exception ex) {
+                                        Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+                                    }
+                                }
+                            });
+                        });
                         return null;
                     }
 

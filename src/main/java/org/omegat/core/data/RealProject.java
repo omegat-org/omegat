@@ -57,6 +57,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,7 +75,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.SRXManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.dso.StatsResult;
 import org.omegat.core.statistics.Statistics;
@@ -135,6 +135,15 @@ import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
+
+    static {
+        // The built-in file-backed settings must be registered wherever
+        // projects are handled - GUI, console and tests alike - because
+        // persistSessionSettings took over writing their files from
+        // saveProjectProperties.
+        TeamSettingFiles.ensureRegistered();
+    }
+
     protected final ProjectProperties config;
     protected RemoteRepositoryProvider remoteRepositoryProvider;
 
@@ -248,10 +257,9 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRXManager.saveToSrx(config.getProjectSRX(), new File(config.getProjectInternal()));
-            FilterMaster.saveConfig(config.getProjectFilters(),
-                    new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
+            // Also writes the project's filters.xml and segmentation files,
+            // registered as file-backed team settings.
             persistSessionSettings(config, supersededLocalSettings.keySet());
         } finally {
             lockProject();
@@ -261,12 +269,12 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Persist the session values of all registered team settings to the
-     * sidecar file. Opt-in: only materialised once a setting was used, so
+     * Persist the session values of all registered team settings to their
+     * storage. Opt-in: only materialised once a setting was used, so
      * default projects stay byte-identical to older OmegaT versions. While
      * a superseded local value awaits the user's decision, the session runs
-     * on the team value but the file keeps the local one - persisting the
-     * session value here would silently turn a dismissed question into
+     * on the team value but the storage keeps the local one - persisting
+     * the session value here would silently turn a dismissed question into
      * "take the team value". Static for testability.
      */
     static void persistSessionSettings(ProjectProperties config, Set<String> supersededKeys)
@@ -274,8 +282,8 @@ public class RealProject implements IProject {
         for (TeamSetting setting : TeamSettingsRegistry.all()) {
             String sessionValue = setting.read(config);
             if (!supersededKeys.contains(setting.getKey())
-                    && (sessionValue != null || ProjectSettingsStorage.getFile(config).isFile())) {
-                ProjectSettingsStorage.save(config, setting.getKey(), sessionValue);
+                    && (sessionValue != null || setting.storageMaterialized(config))) {
+                setting.saveStored(config, sessionValue);
             }
         }
     }
@@ -303,14 +311,14 @@ public class RealProject implements IProject {
         // commit fails: the file then still diverges from the team and the
         // next open asks again.
         setting.apply(config, value);
-        ProjectSettingsStorage.save(config, key, setting.normalize(value));
+        setting.saveStored(config, value);
         // A checkout parked between teamSyncPrepare and teamSync must not be
         // moved to latest behind the sync's back (same cleanup as
         // saveProject).
         tmxPrepared = null;
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
-        commitProjectSettings(remoteRepositoryProvider, config);
+        commitProjectSettings(remoteRepositoryProvider, config, setting);
         clearSupersededLocalSetting(key);
     }
 
@@ -323,7 +331,7 @@ public class RealProject implements IProject {
         setting.apply(config, value);
         // Local write only: the next open of the team project syncs the
         // remote file back in, notices a divergence and asks again.
-        ProjectSettingsStorage.save(config, key, setting.normalize(value));
+        setting.saveStored(config, value);
         clearSupersededLocalSetting(key);
     }
 
@@ -344,23 +352,36 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Commit the project settings file to the team repositories. Skips the
-     * commit when every repository copy is already byte-identical, because
-     * git reports the no-op commit of an unchanged file the same way as a
-     * rejected push. Static for testability.
+     * Commit the files carrying the given setting to the team repositories.
+     * Skips a file whose repository copies are already byte-identical,
+     * because git reports the no-op commit of an unchanged file the same
+     * way as a rejected push; a file absent from the checkout but present
+     * in a repository is deleted there, so sharing "no project-specific
+     * configuration" distributes the removal. Static for testability.
      */
-    static void commitProjectSettings(RemoteRepositoryProvider provider, ProjectProperties config)
-            throws Exception {
+    static void commitProjectSettings(RemoteRepositoryProvider provider, ProjectProperties config,
+            TeamSetting setting) throws Exception {
         // The checkout may be stale, and a commit onto an old base would be
         // rejected on push.
         provider.switchAllToLatest();
-        String underRoot = config.getProjectInternalRelative()
-                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS;
-        if (!provider.isIdenticalInRepositoriesIgnoringEol(underRoot)) {
-            provider.copyFilesFromProjectToRepos(underRoot, null);
-            if (!provider.commitFilesChecked(underRoot, "Update the shared project settings")) {
-                throw new IOException(OStrings.getString("TEAM_SETTING_SHARE_ERROR"));
+        List<String> toCommit = new ArrayList<>();
+        for (String underRoot : setting.storagePaths(config)) {
+            if (new File(config.getProjectRootDir(), underRoot).isFile()) {
+                if (!provider.isIdenticalInRepositoriesIgnoringEol(underRoot)) {
+                    provider.copyFilesFromProjectToRepos(underRoot, null);
+                    toCommit.add(underRoot);
+                }
+            } else if (setting.isFileBacked() && provider.existsInRepositories(underRoot)) {
+                // Only for a file-backed setting is the file the value: the
+                // sidecar also carries other settings, a missing checkout
+                // copy must never delete it in the repositories.
+                provider.deleteFilesFromRepos(underRoot);
+                toCommit.add(underRoot);
             }
+        }
+        if (!toCommit.isEmpty()
+                && !provider.commitFilesChecked(toCommit, "Update the shared project settings")) {
+            throw new IOException(OStrings.getString("TEAM_SETTING_SHARE_ERROR"));
         }
     }
 
@@ -384,27 +405,19 @@ public class RealProject implements IProject {
             return;
         }
         boolean teamOnline = remoteRepositoryProvider.isManaged() && isOnlineMode;
-        boolean identical = false;
-        if (teamOnline) {
-            try {
-                // After the sync a settings file that exists remotely is
-                // byte-identical locally; a non-identical or absent file
-                // means the team does not carry the setting, so the local
-                // file is a local-only divergence.
-                identical = remoteRepositoryProvider.isIdenticalInRepositories(
-                        config.getProjectInternalRelative()
-                                + ProjectSettingsStorage.FILE_PROJECT_SETTINGS);
-            } catch (IOException ex) {
-                Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
-                // fall back to trusting the local file
-                identical = true;
-            }
-        }
         Map<String, @Nullable String> superseded = new HashMap<>();
         for (TeamSetting setting : TeamSettingsRegistry.all()) {
+            // The team's value is read from the repository checkouts by
+            // content, not by byte comparison: a repository copy may be
+            // differently formatted or still in a legacy format (like
+            // segmentation.conf next to a migrated checkout) while carrying
+            // the same configuration. Null means the team does not carry
+            // the setting, so a local value is a local-only divergence.
+            String teamValue = teamOnline ? repositoryStoredValue(setting) : null;
             String preSync = preSyncValues.get(setting.getKey());
-            String postSync = setting.normalize(ProjectSettingsStorage.load(config, setting.getKey()));
-            SettingResolution state = resolveSetting(preSync, postSync, identical, teamOnline);
+            String postSync = setting.loadStored(config);
+            SettingResolution state = resolveSetting(preSync,
+                    teamValue != null ? teamValue : postSync, teamValue != null, teamOnline);
             setting.apply(config, state.effective);
             if (state.asks) {
                 superseded.put(setting.getKey(), state.supersededLocal);
@@ -413,12 +426,33 @@ public class RealProject implements IProject {
         supersededLocalSettings = Collections.unmodifiableMap(superseded);
     }
 
+    /**
+     * The normalized value the team repositories carry for the setting:
+     * null when no repository carries it, or when the repositories
+     * disagree among themselves - the load then treats the setting as not
+     * carried and asks about the local value instead of guessing.
+     */
+    private @Nullable String repositoryStoredValue(TeamSetting setting) {
+        String value = null;
+        boolean first = true;
+        for (Function<String, @Nullable File> view : remoteRepositoryProvider
+                .repositoryFileViews(setting.storagePaths(config))) {
+            String repoValue = setting.loadStoredFrom(config, view);
+            if (first) {
+                value = repoValue;
+                first = false;
+            } else if (!Objects.equals(value, repoValue)) {
+                return null;
+            }
+        }
+        return value;
+    }
+
     /** Snapshot of the stored normalized values of all registered settings. */
     private Map<String, @Nullable String> readStoredSettings() {
         Map<String, @Nullable String> values = new HashMap<>();
         for (TeamSetting setting : TeamSettingsRegistry.all()) {
-            values.put(setting.getKey(),
-                    setting.normalize(ProjectSettingsStorage.load(config, setting.getKey())));
+            values.put(setting.getKey(), setting.loadStored(config));
         }
         return values;
     }
@@ -440,6 +474,10 @@ public class RealProject implements IProject {
      * Decide which raw value a load activates and whether it superseded a
      * diverging local value that the user should be asked about. Works on
      * normalized values (default = null). Pure function for testability.
+     * A team value arriving over a locally absent one activates quietly:
+     * there is nothing to rescue, a fresh checkout would question every
+     * new member, and sharing the absence back would delete the team's
+     * files.
      *
      * @param preSyncStored
      *            locally stored value from before the team sync, null when
@@ -447,8 +485,8 @@ public class RealProject implements IProject {
      * @param postSyncStored
      *            stored value after the team sync
      * @param identicalInRepositories
-     *            whether the settings file is byte-identical in every team
-     *            repository (meaningless when teamOnline is false)
+     *            whether the team carries the locally stored value
+     *            (meaningless when teamOnline is false)
      * @param teamOnline
      *            whether this is a team project loaded in online mode
      */
@@ -458,7 +496,7 @@ public class RealProject implements IProject {
             return new SettingResolution(postSyncStored, false, null);
         }
         String team = identicalInRepositories ? postSyncStored : null;
-        boolean asks = !Objects.equals(preSyncStored, team);
+        boolean asks = preSyncStored != null && !Objects.equals(preSyncStored, team);
         return new SettingResolution(team, asks, asks ? preSyncStored : null);
     }
 

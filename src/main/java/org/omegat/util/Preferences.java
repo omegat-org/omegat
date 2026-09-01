@@ -275,6 +275,27 @@ public final class Preferences {
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
 
+    /** Segment CSV format, shared by export and import: character set */
+    public static final String EDITOR_CSV_CHARSET = "editor_csv_charset";
+    /** Segment CSV format, shared by export and import: field separator choice */
+    public static final String EDITOR_CSV_SEPARATOR = "editor_csv_separator";
+    /** Segment CSV format, shared by export and import: user-supplied separator */
+    public static final String EDITOR_CSV_SEPARATOR_CUSTOM = "editor_csv_separator_custom";
+    /** Segment CSV format, shared by export and import: quote every field */
+    public static final String EDITOR_CSV_QUOTE_ALL = "editor_csv_quote_all";
+    /** Segment CSV format, shared by export and import: line breaks as literal \n */
+    public static final String EDITOR_CSV_ESCAPE_NEWLINES = "editor_csv_escape_newlines";
+    /** Segment CSV format, shared by export and import: quote escaping style */
+    public static final String EDITOR_CSV_QUOTE_ESCAPE = "editor_csv_quote_escape";
+    /** Segment CSV export: segment scope */
+    public static final String EDITOR_CSV_EXPORT_SCOPE = "editor_csv_export_scope";
+    /** Segment CSV export: apply the editor's current filter */
+    public static final String EDITOR_CSV_EXPORT_APPLY_FILTER = "editor_csv_export_apply_filter";
+    /** Segment CSV export: keep the editor's display order */
+    public static final String EDITOR_CSV_EXPORT_APPLY_SORT = "editor_csv_export_apply_sort";
+    /** Segment CSV export: exported columns */
+    public static final String EDITOR_CSV_EXPORT_COLUMNS = "editor_csv_export_columns";
+
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";
     public static final boolean DONT_CHECK_PRINTF_TAGS_DEFAULT = true;

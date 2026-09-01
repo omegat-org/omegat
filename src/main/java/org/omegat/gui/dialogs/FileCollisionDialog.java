@@ -44,7 +44,14 @@ public class FileCollisionDialog extends javax.swing.JDialog {
     private JButton userClicked;
 
     public static boolean promptToReplace(javax.swing.JDialog parent, String filename) {
-        FileCollisionDialog dialog = new FileCollisionDialog(parent);
+        return promptToReplace(new FileCollisionDialog(parent), filename);
+    }
+
+    public static boolean promptToReplace(java.awt.Frame parent, String filename) {
+        return promptToReplace(new FileCollisionDialog(parent), filename);
+    }
+
+    private static boolean promptToReplace(FileCollisionDialog dialog, String filename) {
         dialog.setFilename(filename);
         dialog.enableApplyToAll(false);
         dialog.pack();

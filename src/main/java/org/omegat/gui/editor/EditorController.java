@@ -394,7 +394,7 @@ public class EditorController implements IEditor {
 
     private void createUI() {
         pane = new DockablePanel("EDITOR", " ", false);
-        pane.setMenuProvider(new EditorPaneMenu());
+        pane.setMenuProvider(new EditorPaneMenu(this));
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
         pane.setMinimumSize(new Dimension(100, 100));
         pane.addComponentListener(new ComponentAdapter() {

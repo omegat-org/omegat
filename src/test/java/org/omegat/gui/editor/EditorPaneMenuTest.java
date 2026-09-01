@@ -26,13 +26,18 @@
 package org.omegat.gui.editor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.util.OStrings;
 
 /**
@@ -42,15 +47,30 @@ import org.omegat.util.OStrings;
  */
 public class EditorPaneMenuTest {
 
+    private JPopupMenu popup;
+
+    @Before
+    public void setUp() {
+        Core.setProject(new NotLoadedProject());
+        popup = new JPopupMenu();
+        new EditorPaneMenu(mock(EditorController.class)).populatePaneMenu(popup);
+        assertEquals(2, popup.getComponentCount());
+    }
+
     @Test
     public void testOffersThePreferencesShortcut() {
-        JPopupMenu popup = new JPopupMenu();
-        new EditorPaneMenu().populatePaneMenu(popup);
-
-        assertEquals(1, popup.getComponentCount());
         JMenuItem prefs = (JMenuItem) popup.getComponent(0);
         assertEquals(OStrings.getString("GUI_EDITORWINDOW_OPEN_PREFS"), prefs.getText());
         assertTrue(prefs.isEnabled());
         assertEquals(1, prefs.getActionListeners().length);
+    }
+
+    @Test
+    public void testOffersTheCsvExport() {
+        JMenuItem export = (JMenuItem) popup.getComponent(1);
+        assertEquals(OStrings.getString("GUI_EDITORWINDOW_EXPORT_CSV"), export.getText());
+        // No loaded project, nothing to export.
+        assertFalse(export.isEnabled());
+        assertEquals(1, export.getActionListeners().length);
     }
 }

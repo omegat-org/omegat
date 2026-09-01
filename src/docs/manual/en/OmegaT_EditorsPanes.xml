@@ -653,6 +653,21 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                   		  Editor.</para>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="panes.editor.csv.export">
+            <term xml:id="panes.editor.csv.export.title">CSV export</term>
+            <listitem>
+               <para>The gear icon in the title bar of the pane offers
+                  <guilabel>Export CSV...</guilabel>, which saves segments as a
+                  CSV file. The save dialog contains the options: export the
+                  whole project or the current document, optionally restricted
+                  to the segments matched by the current editor filter and
+                  ordered as currently displayed, the columns (number, ID,
+                  file, source, translation, notes, comments, authors, dates
+                  and more) with their order, the character set, the field
+                  separator, and the quoting and escaping of quotes and line
+                  breaks.</para>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="panes.fuzzy.matches">

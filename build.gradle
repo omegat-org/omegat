@@ -1,6 +1,7 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.omegat.gradle.PropertiesUtil
+import org.omegat.module.OmegatModuleExtension
 
 plugins {
     id 'org.omegat.version'
@@ -75,8 +76,8 @@ configurations {
     }
 }
 
-def providedCoreLibsPath = 'lib/provided/core'
-def providedModuleLibsPath = 'lib/provided/module'
+def providedCoreLibsPath = OmegatModuleExtension.PROVIDED_CODE_LIBS_PATH
+def providedModuleLibsPath = OmegatModuleExtension.PROVIDED_MODULE_LIBS_PATH
 def providedBuildLogicPath = 'lib/provided/build-logic'
 def providedCoreLibsDir = project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
 dependencies {

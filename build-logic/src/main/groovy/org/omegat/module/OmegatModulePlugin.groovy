@@ -212,48 +212,6 @@ class OmegatModulePlugin implements Plugin<Project> {
         configureTestEnvironment(project)
     }
 
-    static class OmegatModuleExtension {
-        private final Project project
-
-        @Inject
-        OmegatModuleExtension(Project project) {
-            this.project = project
-        }
-
-        String getProvidedCoreLibsPath() {
-            return 'lib/provided/core'
-        }
-
-        String getProvidedModuleLibsPath() {
-            return 'lib/provided/module'
-        }
-
-        File getProvidedCoreLibsDir() {
-            return project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
-        }
-
-        File getProvidedModuleLibsDir() {
-            return project.layout.settingsDirectory.dir(providedModuleLibsPath).asFile
-        }
-
-        def providedCoreLib(String... artifacts) {
-            return providedLib(providedCoreLibsDir, artifacts)
-        }
-
-        def providedModuleLib(String... artifacts) {
-            return providedLib(providedModuleLibsDir, artifacts)
-        }
-
-        private def providedLib(File libsDir, String... artifacts) {
-            def patterns = artifacts.collect { "**/${it}-*.jar".toString() }
-            def tree = project.fileTree(dir: libsDir, includes: patterns)
-            if (tree.isEmpty()) {
-                throw new GradleException("No jar matches ${patterns} in ${libsDir}; "
-                        + "the provided libraries are incomplete.")
-            }
-            return tree
-        }
-    }
     private static Map<String, String> buildManifestAttributes(Project project) {
         def attributes = new HashMap<String, String>()
 

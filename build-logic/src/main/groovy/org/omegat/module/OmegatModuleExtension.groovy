@@ -15,11 +15,11 @@ class OmegatModuleExtension {
         this.project = project
     }
 
-    String getProvidedCoreLibsPath() {
+    static String getProvidedCoreLibsPath() {
         return PROVIDED_CODE_LIBS_PATH
     }
 
-    String getProvidedModuleLibsPath() {
+    static String getProvidedModuleLibsPath() {
         return PROVIDED_MODULE_LIBS_PATH
     }
 
@@ -32,11 +32,11 @@ class OmegatModuleExtension {
     }
 
     def providedCoreLib(String... artifacts) {
-        return providedLib(providedCoreLibsDir, artifacts)
+        return providedLib('core', providedCoreLibsDir, artifacts)
     }
 
     def providedModuleLib(String... artifacts) {
-        return providedLib(providedModuleLibsDir, artifacts)
+        return providedLib('module', providedModuleLibsDir, artifacts)
     }
 
     private def providedLib(String scope, File libsDir, String... artifacts) {

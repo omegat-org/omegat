@@ -71,7 +71,14 @@ public final class ProjectSettingsStorage {
      * configured" from an explicit value.
      */
     public static @Nullable String load(ProjectProperties config, String key) {
-        File file = getFile(config);
+        return loadFromFile(getFile(config), key);
+    }
+
+    /**
+     * Like {@link #load}, but from an explicit settings file, e.g. the copy
+     * in a repository checkout.
+     */
+    public static @Nullable String loadFromFile(File file, String key) {
         if (!file.isFile()) {
             return null;
         }

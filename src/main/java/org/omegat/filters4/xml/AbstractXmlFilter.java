@@ -31,12 +31,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -388,7 +388,6 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     protected final void fromEventToWriter(XMLEvent ev, XMLStreamWriter writer) throws XMLStreamException {
         switch (ev.getEventType()) {
         case XMLEvent.ENTITY_REFERENCE:
@@ -484,7 +483,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      * after buildTags(src, true) to have the necessary variables filled!
      **/
     protected List<XMLEvent> restoreTags(String tra) {
-        List<XMLEvent> res = new LinkedList<>();
+        List<XMLEvent> res = new ArrayList<>();
         while (!tra.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(tra);
             if (m.find()) {
@@ -523,7 +522,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     }
 
     protected List<ProtectedPart> buildProtectedParts(String src) {
-        List<ProtectedPart> protectedParts = new LinkedList<ProtectedPart>();
+        List<ProtectedPart> protectedParts = new ArrayList<>();
         while (!src.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(src);
             if (!m.find()) {
@@ -552,17 +551,16 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     /** Convert <xxx/> to <xxx></xxx> **/
     protected List<XMLEvent> toPair(StartElement ev) {
-        List<XMLEvent> l = new LinkedList<>();
+        List<XMLEvent> l = new ArrayList<>();
         l.add(ev);
         l.add(eFactory.createEndElement(ev.getName(), null));
         return l;
     }
 
-    @SuppressWarnings("unchecked")
     protected String findKey(StartElement findEl, boolean isEmpty) {
         for (Map.Entry<String, List<XMLEvent>> me : tagsMap.entrySet()) {
             try {
-                StartElement mapEl = me.getValue().get(0).asStartElement();
+                StartElement mapEl = me.getValue().getFirst().asStartElement();
                 if (mapEl.getName().equals(findEl.getName())) {
                     boolean foundDiff = false;
                     for (Iterator<Attribute> iter = mapEl.getAttributes(); iter.hasNext();) {

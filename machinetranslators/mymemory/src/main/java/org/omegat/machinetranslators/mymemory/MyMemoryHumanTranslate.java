@@ -34,6 +34,7 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 
@@ -54,6 +55,7 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         super(url);
     }
 
+    /** Instantiated reflectively by MachineTranslatorsManager. */
     public MyMemoryHumanTranslate() {
     }
 
@@ -72,9 +74,8 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         return false;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
+    protected @Nullable String translate(final Language sLang, final Language tLang, final String text) throws Exception {
         try {
             // Get MyMemory response in JSON format
             JsonNode jsonResponse = getMyMemoryResponse(sLang, tLang, text);

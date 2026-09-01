@@ -26,6 +26,24 @@ extensions = [
 
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# Allow GitHub-style Mermaid fences in Markdown files:
+#
+# ```mermaid
+# flowchart TD
+#     A --> B
+# ```
+myst_fence_as_directive = ["mermaid"]
+
+# -- Options for diagrams -----------------------------------------------------
+# Mermaid diagrams are rendered by sphinxcontrib-mermaid.
+# Static SVG infographics can be referenced as regular Markdown/MyST images,
+# for example:
+#
+# ![Architecture overview](assets/architecture-overview.svg)
+mermaid_version = "latest"
+mermaid_output_format = "svg"
+mermaid_params = ["--theme", "default"]
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 

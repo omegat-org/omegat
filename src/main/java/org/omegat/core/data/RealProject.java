@@ -1037,6 +1037,7 @@ public class RealProject implements IProject {
                 tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider,
                         config.getProjectRootDir(), tmxPath, getTMXRebaseOperation());
             }
+            reapplyEnforcedTMXs();
         }
 
         final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
@@ -1369,6 +1370,37 @@ public class RealProject implements IProject {
     void appendFromAutoTMX(ExternalTMX autoTmx, boolean isEnforcedTMX) {
         synchronized (projectTMXLock) {
             importHandler.process(autoTmx, isEnforcedTMX);
+        }
+    }
+
+    /**
+     * The enforced status of a translation exists only in memory: rebasing a
+     * team project replaces the project TMX content with entries parsed from
+     * the merged file, which silently downgrades enforced translations to
+     * plain ones and their highlighting disappears until the next full
+     * project load re-applies the enforce memories (SF bug #1171). Re-apply
+     * the already loaded tm/enforce memories directly after the rebase
+     * instead.
+     */
+    private void reapplyEnforcedTMXs() {
+        if (importHandler == null) {
+            // called during initial load, before the import handler exists;
+            // loadTM will apply the enforce memories right afterwards
+            return;
+        }
+        File tmRoot = new File(config.getTMRoot());
+        // Snapshot: the tm folder monitor replaces transMemories from another
+        // thread, so iterate a copy to avoid a concurrent modification.
+        for (Map.Entry<String, ExternalTMX> en : new TreeMap<>(transMemories).entrySet()) {
+            try {
+                if (FileUtil.computeRelativePath(tmRoot, new File(en.getKey()))
+                        .startsWith(OConsts.AUTO_ENFORCE_TM + '/')) {
+                    appendFromAutoTMX(en.getValue(), true);
+                }
+            } catch (IOException e) {
+                // Memories mapped from outside the tm root cannot be
+                // relativized; they are never enforce memories.
+            }
         }
     }
 

@@ -53,9 +53,12 @@ import org.omegat.util.Language;
 
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
+import java.awt.EventQueue;
 import java.awt.GraphicsEnvironment;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -128,7 +131,7 @@ public class EditorControllerTest extends TestCore {
     @Test
     public void testEditorControllerLoadEmptyProject() {
         setEmptyProject();
-        fireLoadProjectEvent();
+        fireLoadProjectEventWithoutDocument();
         assertTrue(editorController.isOrientationAllLtr());
         assertNull(editorController.editor.getOmDocument());
     }
@@ -159,16 +162,55 @@ public class EditorControllerTest extends TestCore {
 
     private void fireLoadProjectEvent() {
         CountDownLatch latch = new CountDownLatch(1);
-        editorController.editor.addPropertyChangeListener("model", evt -> {
+        // JTextComponent.setDocument fires "document"; nothing ever fires
+        // "model", so the old listener never counted down and every call
+        // sat out the full timeout.
+        PropertyChangeListener onDocument = evt -> {
             if (editorController.editor.getOmDocument() != null) {
                 latch.countDown();
             }
-        });
+        };
+        editorController.editor.addPropertyChangeListener("document", onDocument);
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
         try {
-            latch.await(5, TimeUnit.SECONDS);
-        } catch (InterruptedException ignored) {
-            // Pass through when timeout, allow opportunistic test.
+            assertTrue("editor did not load a document", latch.await(5, TimeUnit.SECONDS));
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new AssertionError(ex);
+        } finally {
+            editorController.editor.removePropertyChangeListener("document", onDocument);
+        }
+        // The document is set in the middle of the loading block on the
+        // event dispatch thread; the barrier lets the rest of the block
+        // (entry activation, caret placement) finish before the test
+        // asserts on it.
+        drainEventQueue(1);
+    }
+
+    /**
+     * An empty project never sets an editor document (the editor swaps to
+     * the empty project pane instead), so there is no event to wait for:
+     * this pumps the event queue until the project change and the editor
+     * state update, one queued hop each, went through.
+     */
+    private void fireLoadProjectEventWithoutDocument() {
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        drainEventQueue(3);
+    }
+
+    /** Barriers on the event dispatch thread: each one lets every event
+     * queued so far, including the tails of running handlers, complete. */
+    private void drainEventQueue(int barriers) {
+        try {
+            for (int i = 0; i < barriers; i++) {
+                EventQueue.invokeAndWait(() -> {
+                });
+            }
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new AssertionError(ex);
+        } catch (InvocationTargetException ex) {
+            throw new AssertionError(ex);
         }
     }
 

@@ -42,6 +42,7 @@ import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -135,16 +136,24 @@ public class RemoteRepositoryProvider {
 
     /**
      * Initialize repositories instances.
+     * <p>
+     * Every method of this class indexes {@code repositories} by the position
+     * of the corresponding definition, so a repository that cannot be
+     * initialized must abort the provider instead of leaving the two lists out
+     * of sync.
+     *
+     * @throws KnownException
+     *             when a repository connector cannot be created or initialized
      */
     protected void initializeRepositories() {
         for (RepositoryDefinition r : repositoriesDefinitions) {
-            IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
             try {
+                IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
                 repo.init(r, getRepositoryDir(r), teamSettings);
                 repositories.add(repo);
             } catch (Exception e) {
-                Log.log(e);
-                break;
+                throw new KnownException(e, "TEAM_REPOSITORY_INIT_ERROR", r.getUrl(),
+                        e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.toString());
             }
         }
     }
@@ -245,9 +254,24 @@ public class RemoteRepositoryProvider {
      * Switch repository that contains path to specified version. If version is
      * null, need to switch to latest version. Returns the path in the remote
      * repository ( /path/to/omegatproject/.repositories/url/filepath
+     * <p>
+     * A failure to reach a specific version is reported with the file, the
+     * version and the repository URL instead of the raw backend error (such as
+     * JGit's "Missing unknown &lt;hash&gt;"), because the version usually
+     * comes from the stored team sync marker and the plain backend message
+     * gives the user no clue what was looked up, or why.
      */
     public File switchToVersion(String filePath, @Nullable String version) throws Exception {
-        return oneMapping(filePath).switchToVersion(version);
+        Mapping mapping = oneMapping(filePath);
+        if (version == null) {
+            return mapping.switchToVersion(null);
+        }
+        try {
+            return mapping.switchToVersion(version);
+        } catch (Exception ex) {
+            throw new KnownException(ex, "TEAM_SWITCH_VERSION_ERROR", filePath, version,
+                    mapping.repoDefinition.getUrl());
+        }
     }
 
     /**

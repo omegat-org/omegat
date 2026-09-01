@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
@@ -46,6 +48,7 @@ import org.omegat.util.LocaleRule;
 import org.omegat.util.TestPreferencesInitializer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ProjectFilesListControllerTest {
@@ -161,6 +164,22 @@ public class ProjectFilesListControllerTest {
         ProjectFilesListController.syncTotalColumnsToFileColumns(filesColumns, totalsColumns);
 
         assertColumnOrder(totalsColumns, 0, 5, 1, 2, 3, 4, 6);
+    }
+
+    @Test
+    public void testProjectFilesTableKeepsRowSelectionEnabled() {
+        JTable table = new JTable();
+
+        ProjectFilesListController.configureProjectFilesTableSelection(table);
+
+        assertEquals(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION,
+                table.getSelectionModel().getSelectionMode());
+        assertTrue("Project files table must allow row selection.",
+                table.getRowSelectionAllowed());
+        assertFalse("Project files table must not allow column selection.",
+                table.getColumnSelectionAllowed());
+        assertFalse("Project files table should use row selection, not cell selection.",
+                table.getCellSelectionEnabled());
     }
 
     private static ProjectFilesListController.FileProgress fileProgress(int translated, int total) {

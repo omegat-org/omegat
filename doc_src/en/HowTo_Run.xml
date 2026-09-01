@@ -68,60 +68,16 @@
 	you can use to launch OmegaT from the command line. See the <link
 	endterm="launch.with.command.line.title"
 	linkend="launch.with.command.line"/> section for details.</para>
-
-	<para>You can modify the behaviour of OmegaT.app by editing the
-	<filename>Configuration.properties</filename> (OmegaT configuration) as well
-	as the <filename>Info.plist</filename> (Java configuration) files located
-	inside the OmegaT.app package.</para>
-
-	<para>The <filename>Configuration.properties</filename> file is located in
-	the <filename>Contents/Resources/</filename> folder.</para>
-	<para>The <filename>Info.plist</filename> file is located in the
-	<filename>Contents/</filename> folder.</para>
-
-	<note>
-	  <para>To access the files inside the <filename>OmegaT.app</filename>
-	  package, right-click on <filename>OmegaT.app</filename> and select “Show 
-	  Package Contents”.</para>
-
-	  <para>It is also possible to use <filename>OmegaT.app</filename> itself to
-	  launch OmegaT from the terminal. See the <link
-	  linkend="launch.with.command.line.omegat.terminal.command.syntax"
-	  endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/>
-	  section below for details.</para>
-	</note>
-
-	<para>Use your text editor of choice to modify the files.</para>
-
-	<variablelist>
-	  <varlistentry>
-		<term>Configuration.properties</term>
-
-		<listitem>
-		  <para>For predefined options, remove the <literal>#</literal> symbol 
-		  before a parameter to enable it. For example,
-		  <literal>user.language=ja</literal> (without the <literal>#</literal>)
-		  will launch OmegaT with the user interface in Japanese.</para>
-		</listitem>
-	  </varlistentry>
-	  <varlistentry>
-		<term>Info.plist</term>
-
-		<listitem>
-		  <para>For example, to change the amount of memory available uncomment
-		  the line</para>
-
-		  <para><literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
-		  --&gt;</literal></para>
-		  <para>by removing the <literal>&lt;!--</literal> and
-		  <literal>--&gt;</literal> markers.</para>
-
-		  <para>This will launch OmegaT with 6 GB of memory; change the
-		  <literal>6g</literal> to the desired amount.</para>
-		</listitem>
-	  </varlistentry>
-	</variablelist>
 	
+	<warning>
+	  <para>OmegaT is now a macOS notarized application. Any modification to
+	  files inside <filename>OmegaT.app</filename> will keep OmegaT from
+	  running.</para>
+
+	  <para>To change OmegaT’s launch parameters (alloted memory, etc.), you now
+	  need to use the command line. See above.</para>
+	</warning>
+
 	<note>
 	  <para><filename>OmegaT.app</filename> can make use of macOS Services.  You
 	  can also use AppleScript, Automator or Shortcuts to create Services or

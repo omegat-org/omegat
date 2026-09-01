@@ -9,14 +9,10 @@ class OmegatModuleExtension {
     static final String PROVIDED_CODE_LIBS_PATH = 'lib/provided/core'
     static final String PROVIDED_MODULE_LIBS_PATH = 'lib/provided/module'
     private final Project project
-    private final File providedCoreLibsDir
-    private final File providedModuleLibsDir
 
     @Inject
     OmegatModuleExtension(Project project) {
         this.project = project
-        providedCoreLibsDir = project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
-        providedModuleLibsDir = project.layout.settingsDirectory.dir(providedModuleLibsPath).asFile
     }
 
     static String getProvidedCoreLibsPath() {
@@ -28,11 +24,11 @@ class OmegatModuleExtension {
     }
 
     File getProvidedCoreLibsDir() {
-        return providedCoreLibsDir
+        return this.@project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
     }
 
     File getProvidedModuleLibsDir() {
-        return providedModuleLibsDir
+        return this.@project.layout.settingsDirectory.dir(providedModuleLibsPath).asFile
     }
 
     def providedCoreLib(String... artifacts) {
@@ -47,14 +43,15 @@ class OmegatModuleExtension {
         // Require every requested artifact to match at least one jar. A single
         // combined FileTree would hide missing jars when another artifact in
         // the same call still matches.
+        Project ownerProject = this.@project
         def patterns = artifacts.collect { "**/${it}-*.jar".toString() }
         patterns.each { pattern ->
-            def matches = this.project.fileTree(dir: libsDir, include: pattern)
+            def matches = ownerProject.fileTree(dir: libsDir, include: pattern)
             if (matches.isEmpty()) {
                 throw new GradleException("No ${scope} provided jar matches ${patterns} in ${libsDir}; "
                         + "the ${scope} provided libraries are incomplete.")
             }
         }
-        return this.project.fileTree(dir: libsDir, includes: patterns)
+        return ownerProject.fileTree(dir: libsDir, includes: patterns)
     }
 }

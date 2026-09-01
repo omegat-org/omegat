@@ -797,9 +797,22 @@ public class RealProject implements IProject {
             stdout.start();
             stderr.start();
         } catch (IOException e) {
-            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD",
-                    e.getCause() == null ? e.getLocalizedMessage() : e.getCause());
+            if (e.getCause() != null) {
+                Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD", e.getCause());
+            } else {
+                Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD", describeError(e));
+            }
         }
+    }
+
+    private static String describeError(Throwable e) {
+        if (!StringUtil.isEmpty(e.getLocalizedMessage())) {
+            return e.getLocalizedMessage();
+        }
+        if (!StringUtil.isEmpty(e.getMessage())) {
+            return e.getMessage();
+        }
+        return e.getClass().getName();
     }
 
     /**

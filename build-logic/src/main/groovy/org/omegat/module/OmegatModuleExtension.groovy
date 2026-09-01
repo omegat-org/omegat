@@ -9,10 +9,14 @@ class OmegatModuleExtension {
     static final String PROVIDED_CODE_LIBS_PATH = 'lib/provided/core'
     static final String PROVIDED_MODULE_LIBS_PATH = 'lib/provided/module'
     private final Project project
+    private final File providedCoreLibsDir
+    private final File providedModuleLibsDir
 
     @Inject
     OmegatModuleExtension(Project project) {
         this.project = project
+        providedCoreLibsDir = project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
+        providedModuleLibsDir = project.layout.settingsDirectory.dir(providedModuleLibsPath).asFile
     }
 
     static String getProvidedCoreLibsPath() {
@@ -24,11 +28,11 @@ class OmegatModuleExtension {
     }
 
     File getProvidedCoreLibsDir() {
-        return project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
+        return providedCoreLibsDir
     }
 
     File getProvidedModuleLibsDir() {
-        return project.layout.settingsDirectory.dir(providedModuleLibsPath).asFile
+        return providedModuleLibsDir
     }
 
     def providedCoreLib(String... artifacts) {
@@ -45,12 +49,12 @@ class OmegatModuleExtension {
         // the same call still matches.
         def patterns = artifacts.collect { "**/${it}-*.jar".toString() }
         patterns.each { pattern ->
-            def matches = project.fileTree(dir: libsDir, include: pattern)
+            def matches = this.project.fileTree(dir: libsDir, include: pattern)
             if (matches.isEmpty()) {
                 throw new GradleException("No ${scope} provided jar matches ${patterns} in ${libsDir}; "
                         + "the ${scope} provided libraries are incomplete.")
             }
         }
-        return project.fileTree(dir: libsDir, includes: patterns)
+        return this.project.fileTree(dir: libsDir, includes: patterns)
     }
 }

@@ -120,8 +120,9 @@
                <filename>omegat.project</filename>
                file and the optional use of special files for project-specific
                filters or segmentation rules.</para>
-            <para>Project-specific file filter settings and segmentation rules
-               are negotiated with the team instead of being silently
+            <para>Project-specific file filter settings, segmentation rules
+               and tag definitions are negotiated with the team instead of
+               being silently
                overwritten: after changing them in the project properties,
                OmegaT offers to share the change, and when the local version
                differs from the team version on opening the project, it asks

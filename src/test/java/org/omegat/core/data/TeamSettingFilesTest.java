@@ -46,6 +46,7 @@ import org.junit.rules.TemporaryFolder;
 
 import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.TagPatternsStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import gen.core.filters.Filter;
@@ -53,9 +54,10 @@ import gen.core.filters.Filters;
 
 /**
  * Proves that the built-in file-backed team settings expose the project's
- * filters.xml and segmentation files as canonical raw values: differently
- * formatted files with equal content read as the same value, reading never
- * modifies the checkout, and storing null removes the files.
+ * filters.xml, segmentation and tag_patterns.xml files as canonical raw
+ * values: differently formatted files with equal content read as the same
+ * value, reading never modifies the checkout, and storing null removes the
+ * files.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
@@ -190,6 +192,109 @@ public class TeamSettingFilesTest {
                 TeamSettingFiles.FILTERS.describe("content one"));
         assertTrue("the description must carry the fingerprint",
                 one.contains(TeamSettingFiles.fingerprint("content one")));
+    }
+
+    private static String sampleTagPatternsRaw() throws Exception {
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern("<x\\d+>");
+        patterns.setRemoveTextPattern("\\[remove]");
+        return TagPatternsStorage.writeToString(patterns);
+    }
+
+    @Test
+    public void testTagPatternsValueIsCanonicalRegardlessOfFileFormatting() throws Exception {
+        String raw = sampleTagPatternsRaw();
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, raw);
+        assertEquals("stored value must read back unchanged", raw,
+                TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+
+        File file = new File(internalDir, TagPatternsStorage.FILE_TAG_PATTERNS);
+        String content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
+        String sep = content.contains("\r\n") ? "\r\n" : "\n";
+        String reformatted = content.replace(">" + sep, ">" + sep + sep);
+        assertNotEquals("the reformatting must change the file", reformatted,
+                Files.readString(file.toPath(), StandardCharsets.UTF_8));
+        Files.writeString(file.toPath(), reformatted, StandardCharsets.UTF_8);
+        assertEquals("formatting must not count as divergence", raw,
+                TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+    }
+
+    @Test
+    public void testTagPatternsEmptyStringOverrideIsARealValue() throws Exception {
+        // an empty expression switches the pattern off for the project,
+        // unlike an absent one, which means the global preference applies
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern("");
+        String raw = TagPatternsStorage.writeToString(patterns);
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, raw);
+        assertTrue(TeamSettingFiles.TAG_PATTERNS.storageMaterialized(config));
+        assertEquals("the switched-off expression must survive the round trip", raw,
+                TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+    }
+
+    @Test
+    public void testTagPatternsNullRemovesTheFile() throws Exception {
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, sampleTagPatternsRaw());
+        assertTrue(TeamSettingFiles.TAG_PATTERNS.storageMaterialized(config));
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, null);
+        assertFalse("null must remove the file",
+                new File(internalDir, TagPatternsStorage.FILE_TAG_PATTERNS).isFile());
+        assertNull(TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+    }
+
+    @Test
+    public void testTagPatternsBrokenFileSurvivesRoutineSaves() throws Exception {
+        File file = new File(internalDir, TagPatternsStorage.FILE_TAG_PATTERNS);
+        Files.writeString(file.toPath(), "<tag_patterns><unclosed", StandardCharsets.UTF_8);
+        config.loadProjectTagPatterns();
+        assertTrue(config.isTagPatternsLoadFailed());
+        assertNull("a broken file must read as no value",
+                TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+
+        // the null session value does not represent the unreadable file, so
+        // a routine save must leave it in place for repair
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, null);
+        assertTrue("the broken file must survive the routine save", file.isFile());
+
+        // writing real content replaces the broken file and ends the guard
+        String raw = sampleTagPatternsRaw();
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, raw);
+        assertFalse(config.isTagPatternsLoadFailed());
+        assertEquals(raw, TeamSettingFiles.TAG_PATTERNS.loadStored(config));
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, null);
+        assertFalse("after the repair null must remove the file again", file.isFile());
+    }
+
+    @Test
+    public void testTagPatternsSessionRoundTrip() throws Exception {
+        config.setCustomTagPattern("<x\\d+>");
+        config.setRemoveTextPattern(null);
+        String raw = TeamSettingFiles.TAG_PATTERNS.read(config);
+        assertNotNull(raw);
+
+        ProjectProperties other = new ProjectProperties(folder.newFolder("other"));
+        TeamSettingFiles.TAG_PATTERNS.apply(other, raw);
+        assertEquals("<x\\d+>", other.getCustomTagPattern());
+        assertNull(other.getRemoveTextPattern());
+
+        TeamSettingFiles.TAG_PATTERNS.apply(other, null);
+        assertNull(other.getCustomTagPattern());
+        assertNull("a default session must read as no value",
+                TeamSettingFiles.TAG_PATTERNS.read(other));
+    }
+
+    @Test
+    public void testTagPatternsDescribeNamesTheExpressions() throws Exception {
+        String noFile = TeamSettingFiles.TAG_PATTERNS.describe(null);
+        String named = TeamSettingFiles.TAG_PATTERNS.describe(sampleTagPatternsRaw());
+        assertNotEquals(noFile, named);
+        assertTrue("the description must show the expressions", named.contains("<x\\d+>"));
+
+        TagPatternsStorage.TagPatterns off = new TagPatternsStorage.TagPatterns();
+        off.setCustomTagPattern("");
+        assertNotEquals("a switched-off expression must describe differently "
+                + "than an inherited one", named,
+                TeamSettingFiles.TAG_PATTERNS.describe(TagPatternsStorage.writeToString(off)));
     }
 
     @Test

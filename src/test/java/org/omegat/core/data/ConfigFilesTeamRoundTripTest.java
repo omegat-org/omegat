@@ -48,6 +48,7 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OConsts;
+import org.omegat.util.TagPatternsStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import gen.core.filters.Filter;
@@ -57,7 +58,8 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Proves that the file-backed team settings distribute the project's
- * filters.xml and segmentation files through the team repository: sharing a
+ * filters.xml, segmentation and tag_patterns.xml files through the team
+ * repository: sharing a
  * configuration delivers the file to the next member, sharing "no
  * project-specific configuration" deletes it there, and sharing migrated
  * segmentation rules replaces the legacy conf file with the srx file.
@@ -143,6 +145,36 @@ public class ConfigFilesTeamRoundTripTest {
 
         ProjectProperties member = syncNewMember("member2");
         assertEquals(raw, TeamSettingFiles.FILTERS.loadStored(member));
+    }
+
+    @Test
+    public void testShareDeliversTheTagPatternsFileToTheTeam() throws Exception {
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern("<x\\d+>");
+        String raw = TagPatternsStorage.writeToString(patterns);
+        TeamSettingFiles.TAG_PATTERNS.saveStored(config, raw);
+
+        RealProject.commitProjectSettings(provider, config, TeamSettingFiles.TAG_PATTERNS);
+
+        ProjectProperties member = syncNewMember("member2");
+        assertEquals("the team must receive the tag definitions", raw,
+                TeamSettingFiles.TAG_PATTERNS.loadStored(member));
+    }
+
+    @Test
+    public void testShareDistributesTheRemovalOfTheTagPatternsFile() throws Exception {
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setRemoveTextPattern("\\[note]");
+        Files.writeString(remoteFile(TagPatternsStorage.FILE_TAG_PATTERNS).toPath(),
+                TagPatternsStorage.writeToString(patterns), StandardCharsets.UTF_8);
+        commitRemote("team with a tag patterns file");
+
+        RealProject.commitProjectSettings(provider, config, TeamSettingFiles.TAG_PATTERNS);
+
+        RemoteRepositoryProvider member = newProvider(folder.newFolder("member2"), remoteDir);
+        member.switchAllToLatest();
+        assertFalse("the removal must reach the team", member.existsInRepositories(
+                OConsts.DEFAULT_INTERNAL + "/" + TagPatternsStorage.FILE_TAG_PATTERNS));
     }
 
     @Test

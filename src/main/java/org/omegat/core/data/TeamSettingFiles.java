@@ -45,17 +45,20 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.TagPatternsStorage;
 
 /**
  * The built-in file-backed team settings: the project's file filter
- * configuration ({@code omegat/filters.xml}) and segmentation rules
- * ({@code omegat/segmentation.srx}, legacy {@code segmentation.conf}). A
- * team sync used to overwrite local changes to these files silently and
- * OmegaT never committed them itself; registered as {@link TeamSetting},
- * the generic negotiation asks instead and offers to distribute a change
- * to the team. The raw value is the canonical serialized content, so
- * differently formatted files with equal rules do not count as diverged.
+ * configuration ({@code omegat/filters.xml}), segmentation rules
+ * ({@code omegat/segmentation.srx}, legacy {@code segmentation.conf}) and
+ * tag definitions ({@code omegat/tag_patterns.xml}). A team sync used to
+ * overwrite local changes to these files silently and OmegaT never
+ * committed them itself; registered as {@link TeamSetting}, the generic
+ * negotiation asks instead and offers to distribute a change to the team.
+ * The raw value is the canonical serialized content, so differently
+ * formatted files with equal rules do not count as diverged.
  *
  * @author stephan.pakebusch at zollsoft.de
  */
@@ -66,6 +69,9 @@ public final class TeamSettingFiles {
 
     /** Registry key of the segmentation rules setting. */
     public static final String SEGMENTATION_KEY = "segmentation";
+
+    /** Registry key of the tag definitions setting. */
+    public static final String TAG_PATTERNS_KEY = "tag_patterns";
 
     /** File filter configuration as a team setting. */
     public static final TeamSetting FILTERS = TeamSetting.ofStoredFile(FILTERS_KEY,
@@ -79,15 +85,24 @@ public final class TeamSettingFiles {
             TeamSettingFiles::applySessionSegmentation, TeamSettingFiles::describeFile,
             new SegmentationStorage());
 
+    /**
+     * Project-specific custom tag and removed-text expressions as a team
+     * setting.
+     */
+    public static final TeamSetting TAG_PATTERNS = TeamSetting.ofStoredFile(TAG_PATTERNS_KEY,
+            "TEAM_SETTING_NAME_TAG_PATTERNS", TeamSettingFiles::readSessionTagPatterns,
+            TeamSettingFiles::applySessionTagPatterns, TeamSettingFiles::describeTagPatterns,
+            new TagPatternsFileStorage());
+
     private static final Object REGISTER_LOCK = new Object();
 
     private TeamSettingFiles() {
     }
 
-    /** Registers both settings when absent; safe under concurrent calls. */
+    /** Registers the settings when absent; safe under concurrent calls. */
     public static void ensureRegistered() {
         synchronized (REGISTER_LOCK) {
-            for (TeamSetting setting : List.of(FILTERS, SEGMENTATION)) {
+            for (TeamSetting setting : List.of(FILTERS, SEGMENTATION, TAG_PATTERNS)) {
                 if (TeamSettingsRegistry.byKey(setting.getKey()) == null) {
                     TeamSettingsRegistry.register(setting);
                 }
@@ -172,6 +187,73 @@ public final class TeamSettingFiles {
         }
     }
 
+    private static @Nullable String readSessionTagPatterns(ProjectProperties config) {
+        TagPatternsStorage.TagPatterns patterns = new TagPatternsStorage.TagPatterns();
+        patterns.setCustomTagPattern(config.getCustomTagPattern());
+        patterns.setRemoveTextPattern(config.getRemoveTextPattern());
+        if (patterns.isEmpty()) {
+            return null;
+        }
+        try {
+            return TagPatternsStorage.writeToString(patterns);
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+            return null;
+        }
+    }
+
+    private static void applySessionTagPatterns(ProjectProperties config, @Nullable String raw) {
+        if (raw == null) {
+            config.setCustomTagPattern(null);
+            config.setRemoveTextPattern(null);
+        } else {
+            TagPatternsStorage.TagPatterns patterns;
+            try {
+                patterns = TagPatternsStorage.loadFromString(raw);
+            } catch (IOException ex) {
+                // Unparseable content: keep the current session expressions
+                // instead of silently falling back to global defaults.
+                Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+                return;
+            }
+            config.setCustomTagPattern(patterns.getCustomTagPattern());
+            config.setRemoveTextPattern(patterns.getRemoveTextPattern());
+        }
+        if (appliesToLoadedProject(config)) {
+            PatternConsts.applyProjectPatterns(config.getCustomTagPattern(),
+                    config.getRemoveTextPattern());
+        }
+    }
+
+    /**
+     * The two expressions are short enough to show, so unlike the other
+     * file-backed settings the description names them instead of a
+     * fingerprint.
+     */
+    private static String describeTagPatterns(@Nullable String raw) {
+        if (raw == null) {
+            return OStrings.getString("TEAM_SETTING_VALUE_FILE_NONE");
+        }
+        try {
+            TagPatternsStorage.TagPatterns patterns = TagPatternsStorage.loadFromString(raw);
+            return OStrings.getString("TEAM_SETTING_VALUE_TAG_PATTERNS",
+                    describePattern(patterns.getCustomTagPattern()),
+                    describePattern(patterns.getRemoveTextPattern()));
+        } catch (IOException ex) {
+            return describeFile(raw);
+        }
+    }
+
+    private static String describePattern(@Nullable String pattern) {
+        if (pattern == null) {
+            return OStrings.getString("TEAM_SETTING_VALUE_TAG_PATTERNS_GLOBAL");
+        }
+        if (pattern.isEmpty()) {
+            return OStrings.getString("TEAM_SETTING_VALUE_TAG_PATTERNS_OFF");
+        }
+        return '"' + pattern + '"';
+    }
+
     /**
      * Whether the given properties belong to the loaded project, so the
      * apply must also rewire the live filter master or segmenter. False
@@ -243,6 +325,46 @@ public final class TeamSettingFiles {
         @Override
         public List<String> pathsUnderRoot(ProjectProperties config) {
             return List.of(config.getProjectInternalRelative() + FilterMaster.FILE_FILTERS);
+        }
+    }
+
+    private static final class TagPatternsFileStorage implements TeamSetting.Storage {
+
+        @Override
+        public @Nullable String loadFrom(ProjectProperties config,
+                Function<String, @Nullable File> fileResolver) {
+            File file = fileResolver.apply(pathsUnderRoot(config).get(0));
+            if (file == null || !file.isFile()) {
+                return null;
+            }
+            try {
+                TagPatternsStorage.TagPatterns patterns = TagPatternsStorage.load(file);
+                return patterns == null || patterns.isEmpty() ? null
+                        : TagPatternsStorage.writeToString(patterns);
+            } catch (IOException ex) {
+                Log.logErrorRB(ex, "TEAM_SETTING_APPLY_ERROR");
+                return null;
+            }
+        }
+
+        @Override
+        public void save(ProjectProperties config, @Nullable String raw) throws IOException {
+            if (raw == null && config.isTagPatternsLoadFailed()) {
+                // An unreadable file is not represented by the session's
+                // null value: leave it in place for repair instead of
+                // deleting it on a routine save.
+                return;
+            }
+            TagPatternsStorage.save(raw == null ? null : TagPatternsStorage.loadFromString(raw),
+                    new File(config.getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS));
+            // A successful write of real content replaces a possibly broken
+            // file, so the repair protection may end.
+            config.resetTagPatternsLoadFailed();
+        }
+
+        @Override
+        public List<String> pathsUnderRoot(ProjectProperties config) {
+            return List.of(config.getProjectInternalRelative() + TagPatternsStorage.FILE_TAG_PATTERNS);
         }
     }
 

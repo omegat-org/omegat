@@ -55,6 +55,13 @@ public interface IEditorSettings {
 
     void setMarkNonUniqueSegments(boolean markNonUniqueSegments);
 
+    default boolean isMarkIdentical() {
+        return false;
+    }
+
+    default void setMarkIdentical(boolean markIdentical) {
+    }
+
     boolean isMarkNotedSegments();
 
     void setMarkNotedSegments(boolean markNotedSegments);

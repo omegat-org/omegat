@@ -15,5 +15,16 @@
 		<tuv lang="en"><seg>Edit</seg></tuv>
 		<tuv lang="fr"><seg>Modifier</seg></tuv>
 	</tu>
+
+	<tu>
+		<note>Translation identical to the source, for IdenticalSegmentMarkerTest.</note>
+		<tuv lang="en"><seg>OmegaT</seg></tuv>
+		<tuv lang="fr"><seg>OmegaT</seg></tuv>
+	</tu>
+
+	<tu>
+		<tuv lang="en"><seg>Lets make Ωt even greater</seg></tuv>
+		<tuv lang="fr"><seg>Lets make Ωt even greater</seg></tuv>
+	</tu>
   </body>
 </tmx>

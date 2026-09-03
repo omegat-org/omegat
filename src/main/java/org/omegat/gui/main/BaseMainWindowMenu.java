@@ -339,6 +339,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE");
         gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
         gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE");
+        gotoNextIdenticalMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_IDENTICAL");
+        gotoPreviousIdenticalMenuItem = createMenuItem("TF_MENU_GOTO_PREV_IDENTICAL");
         gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU", GOTO_X_ENTRY_SUBMENU);
 
@@ -368,6 +370,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
         viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI");
         viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED");
+        viewMarkIdenticalCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_IDENTICAL");
         viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
         viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
         viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
@@ -562,6 +565,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoMenu.add(gotoNextNoteMenuItem);
         gotoMenu.add(gotoPreviousNoteMenuItem);
         gotoMenu.add(gotoNextUniqueMenuItem);
+        gotoMenu.add(gotoNextIdenticalMenuItem);
+        gotoMenu.add(gotoPreviousIdenticalMenuItem);
         gotoMenu.add(gotoMatchSourceSegment);
         gotoMenu.addSeparator();
         gotoMenu.add(gotoXEntrySubmenu);
@@ -587,6 +592,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem);
         viewMenu.add(viewMarkBidiCheckBoxMenuItem);
         viewMenu.add(viewMarkAutoPopulatedCheckBoxMenuItem);
+        viewMenu.add(viewMarkIdenticalCheckBoxMenuItem);
         viewMenu.add(viewMarkGlossaryMatchesCheckBoxMenuItem);
         viewMenu.add(viewMarkLanguageCheckerCheckBoxMenuItem);
         viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem);
@@ -844,6 +850,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem, gotoMatchSourceSegment,
+                gotoNextUniqueMenuItem, gotoNextIdenticalMenuItem, gotoPreviousIdenticalMenuItem,
 
                 viewFileListMenuItem, toolsCheckIssuesMenuItem, toolsCheckIssuesCurrentFileMenuItem,
                 toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
@@ -904,6 +911,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkBidi());
         viewMarkAutoPopulatedCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkAutoPopulated());
+        viewMarkIdenticalCheckBoxMenuItem
+                .setSelected(Core.getEditor().getSettings().isMarkIdentical());
         viewMarkGlossaryMatchesCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkGlossaryMatches());
         viewMarkLanguageCheckerCheckBoxMenuItem
@@ -1069,6 +1078,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem gotoPreviousNoteMenuItem;
     JMenuItem gotoMatchSourceSegment;
     JMenuItem gotoNextUniqueMenuItem;
+    JMenuItem gotoNextIdenticalMenuItem;
+    JMenuItem gotoPreviousIdenticalMenuItem;
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
     JMenuItem helpLastChangesMenuItem;
@@ -1140,6 +1151,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkAutoPopulatedCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkIdenticalCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkGlossaryMatchesCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkLanguageCheckerCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkFontFallbackCheckBoxMenuItem;

@@ -1609,6 +1609,29 @@ public class EditorController implements IEditor {
         iterateToEntry(true, ste -> ste.getDuplicate() != DUPLICATE.NEXT);
     }
 
+    private void identicalEntry(boolean forward) {
+        iterateToEntry(forward, ste -> {
+            TMXEntry info = Core.getProject().getTranslationInfo(ste);
+            return info.isTranslated() && info.translation.equals(ste.getSrcText());
+        });
+    }
+
+    /**
+     * Finds the next entry whose translation is identical to the source.
+     */
+    @Override
+    public void nextIdenticalEntry() {
+        identicalEntry(true);
+    }
+
+    /**
+     * Finds the previous entry whose translation is identical to the source.
+     */
+    @Override
+    public void prevIdenticalEntry() {
+        identicalEntry(false);
+    }
+
     @Override
     public int getCurrentEntryNumber() {
         SourceTextEntry e = getCurrentEntry();

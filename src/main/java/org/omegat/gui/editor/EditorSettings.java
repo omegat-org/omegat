@@ -56,6 +56,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markAutoPopulated;
     private boolean displaySegmentSources;
     private boolean markNonUniqueSegments;
+    private boolean markIdentical;
     private boolean markNoted;
     private boolean markNBSP;
     private boolean markWhitespace;
@@ -90,6 +91,7 @@ public class EditorSettings implements IEditorSettings {
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
                 MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
+        markIdentical = Preferences.isPreference(Preferences.MARK_IDENTICAL_SEGMENTS);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markAltTranslations = Preferences.isPreference(Preferences.MARK_ALT_TRANSLATIONS);
         markNBSP = Preferences.isPreference(Preferences.MARK_NBSP);
@@ -194,6 +196,24 @@ public class EditorSettings implements IEditorSettings {
 
     public boolean isMarkNonUniqueSegments() {
         return markNonUniqueSegments;
+    }
+
+    public boolean isMarkIdentical() {
+        return markIdentical;
+    }
+
+    public void setMarkIdentical(boolean markIdentical) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markIdentical = markIdentical;
+        Preferences.setPreference(Preferences.MARK_IDENTICAL_SEGMENTS, markIdentical);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
 
     public boolean isHideDuplicateSegments() {

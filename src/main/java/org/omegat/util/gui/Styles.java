@@ -235,6 +235,11 @@ public final class Styles {
          */
         COLOR_MARK_COMES_FROM_TM_XENFORCED("OmegaT.markComesFromTmXenforced", "#ffccff"),
         /**
+         * The background color of a segment whose translation is identical to
+         * the source.
+         */
+        COLOR_MARK_IDENTICAL(OStrings.getString("COLOR_MARK_IDENTICAL"), "OmegaT.markIdentical", "#c8e6c9"),
+        /**
          * Alternative translation highlight color.
          */
         COLOR_MARK_ALT_TRANSLATION("OmegaT.markAltTranslations", "#33ffff"),

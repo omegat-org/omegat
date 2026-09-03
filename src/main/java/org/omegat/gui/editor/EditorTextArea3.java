@@ -88,6 +88,22 @@ import org.omegat.util.gui.UIDesignManager;
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
 
+    @Override
+    protected void paintComponent(java.awt.Graphics g) {
+        if (!isOpaque()) {
+            // Not opaque while the alternating background of the segment
+            // metadata gutter extends into the editor: the stripes must lie
+            // under the text, so this paints the background itself.
+            g.setColor(getBackground());
+            java.awt.Rectangle clip = g.getClipBounds();
+            g.fillRect(clip.x, clip.y, clip.width, clip.height);
+            SegmentMetadataGutter.paintZebraStripes(this, g);
+        }
+        super.paintComponent(g);
+        // Grid lines of the segment metadata gutter span the whole editor.
+        SegmentMetadataGutter.paintSegmentSeparators(this, g);
+    }
+
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorContextMenu");
     private static final KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()

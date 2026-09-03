@@ -30,6 +30,8 @@ import java.awt.Component;
 
 import javax.swing.JPanel;
 
+import org.omegat.util.gui.IPaneMenu;
+
 import com.vlsolutions.swing.docking.DockKey;
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingConstants;
@@ -48,6 +50,11 @@ public class DockablePanel extends JPanel implements Dockable {
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);
+    }
+
+    /** Sets the provider of the settings menu shown in the title bar. */
+    public void setMenuProvider(IPaneMenu provider) {
+        dockKey.putProperty(IPaneMenu.PROPERTY_PANE_MENU_ACTION_LISTENER, provider);
     }
 
     @Override

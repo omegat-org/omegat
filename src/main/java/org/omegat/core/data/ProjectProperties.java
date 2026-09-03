@@ -48,6 +48,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagPatternsStorage;
 
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
@@ -111,6 +112,7 @@ public class ProjectProperties {
 
         loadProjectSRX();
         loadProjectFiltersOrDefaults();
+        loadProjectTagPatterns();
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
@@ -589,6 +591,68 @@ public class ProjectProperties {
         this.externalCommand = command;
     }
 
+    /**
+     * Loads tag_patterns.xml if found in the /omegat folder of the project
+     * (feature requests #926, #1427, #824). An unreadable file is logged and
+     * treated as no override, but it is remembered so that the next save
+     * does not delete a file the user could still repair.
+     */
+    public void loadProjectTagPatterns() {
+        File configFile = new File(getProjectInternal(), TagPatternsStorage.FILE_TAG_PATTERNS);
+        TagPatternsStorage.TagPatterns patterns;
+        try {
+            patterns = TagPatternsStorage.load(configFile);
+            tagPatternsLoadFailed = false;
+        } catch (IOException e) {
+            Log.logErrorRB("LOG_PROJECT_TAG_PATTERNS_LOAD_ERROR", configFile);
+            Log.log(e);
+            patterns = null;
+            tagPatternsLoadFailed = true;
+        }
+        customTagPattern = patterns == null ? null : patterns.getCustomTagPattern();
+        removeTextPattern = patterns == null ? null : patterns.getRemoveTextPattern();
+    }
+
+    /**
+     * Whether the last attempt to read tag_patterns.xml failed. While true,
+     * the broken file must not be overwritten or deleted by a routine save.
+     */
+    public boolean isTagPatternsLoadFailed() {
+        return tagPatternsLoadFailed;
+    }
+
+    /**
+     * Clears the load-failure marker once the user has actively chosen new
+     * tag expressions, so the next save may replace the broken file.
+     */
+    public void resetTagPatternsLoadFailed() {
+        tagPatternsLoadFailed = false;
+    }
+
+    /**
+     * The project-specific custom tag regular expression, or null when the
+     * project inherits the global preference (feature requests #926, #1427).
+     */
+    public String getCustomTagPattern() {
+        return customTagPattern;
+    }
+
+    public void setCustomTagPattern(String customTagPattern) {
+        this.customTagPattern = customTagPattern;
+    }
+
+    /**
+     * The project-specific removed-text regular expression, or null when the
+     * project inherits the global preference (feature request #824).
+     */
+    public String getRemoveTextPattern() {
+        return removeTextPattern;
+    }
+
+    public void setRemoveTextPattern(String removeTextPattern) {
+        this.removeTextPattern = removeTextPattern;
+    }
+
     public boolean isProjectValid() {
         boolean returnValue;
         try {
@@ -696,6 +760,9 @@ public class ProjectProperties {
     private Filters projectFilters;
 
     private String externalCommand;
+    private String customTagPattern;
+    private String removeTextPattern;
+    private boolean tagPatternsLoadFailed;
 
     protected File projectRootDir;
     protected ProjectPath sourceDir = new ProjectPath(true);

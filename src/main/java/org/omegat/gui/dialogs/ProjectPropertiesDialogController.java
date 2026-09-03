@@ -47,6 +47,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -60,6 +62,7 @@ import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -87,6 +90,17 @@ public class ProjectPropertiesDialogController {
      * Whether the user canceled the dialog.
      */
     private boolean dialogCancelled;
+    /** The project's custom-tag expression; null means the global preference applies. */
+    private @Nullable String customTagPattern;
+    /** The project's removed-text expression; null means the global preference applies. */
+    private @Nullable String removeTextPattern;
+    /**
+     * Whether the user confirmed the tag definitions editor. The stored
+     * expressions are only rewritten in that case, so a routine OK neither
+     * touches them nor lifts the load-failure guard of a broken
+     * tag_patterns.xml.
+     */
+    private boolean tagPatternsEdited;
 
     private final Frame parent;
     private final ProjectPropertiesDialog dialog;
@@ -136,6 +150,19 @@ public class ProjectPropertiesDialogController {
         dialog.targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
 
         dialog.externalCommandTextArea.setText(projectProperties.getExternalCommand());
+
+        customTagPattern = projectProperties.getCustomTagPattern();
+        removeTextPattern = projectProperties.getRemoveTextPattern();
+    }
+
+    private static String globalCustomTagPattern() {
+        return Preferences.existsPreference(Preferences.CHECK_CUSTOM_PATTERN)
+                ? Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN)
+                : PatternConsts.CHECK_CUSTOM_PATTERN_DEFAULT;
+    }
+
+    private static String globalRemoveTextPattern() {
+        return Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
     }
 
     private void initializeActions(ProjectPropertiesDialog.Mode dialogType) {
@@ -189,6 +216,16 @@ public class ProjectPropertiesDialogController {
             ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
             if (dlg.show(dialog)) {
                 externalFinderConfig = dlg.getResult();
+            }
+        });
+        dialog.tagDefinitionsButton.addActionListener(e -> {
+            TagDefinitionsDialog dlg = new TagDefinitionsDialog(customTagPattern, removeTextPattern,
+                    globalCustomTagPattern(), globalRemoveTextPattern(),
+                    projectProperties.isTagPatternsLoadFailed());
+            if (dlg.show(dialog)) {
+                customTagPattern = dlg.getCustomTagPattern();
+                removeTextPattern = dlg.getRemoveTextPattern();
+                tagPatternsEdited = true;
             }
         });
         dialog.cancelButton.addActionListener(e -> doCancel());
@@ -641,6 +678,14 @@ public class ProjectPropertiesDialogController {
 
         projectProperties.setProjectSRX(srx);
         projectProperties.setProjectFilters(filters);
+        if (tagPatternsEdited) {
+            // Only past every validation above: an earlier write would let a
+            // failed-then-abandoned OK lift the load-failure guard of a
+            // broken tag_patterns.xml without the user's decision.
+            projectProperties.setCustomTagPattern(customTagPattern);
+            projectProperties.setRemoveTextPattern(removeTextPattern);
+            projectProperties.resetTagPatternsLoadFailed();
+        }
         projectProperties.getSourceRootExcludes().clear();
         projectProperties.getSourceRootExcludes().addAll(srcExcludes);
 

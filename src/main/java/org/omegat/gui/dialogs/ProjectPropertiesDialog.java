@@ -391,6 +391,14 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(externalFinderButton, gbc);
 
+        // Project-specific custom tag and removed-text expressions
+        Mnemonics.setLocalizedText(tagDefinitionsButton, OStrings.getString("PP_LOCAL_TAG_DEFINITIONS"));
+        tagDefinitionsButton.setName(TAG_DEFINITIONS_BUTTON_NAME);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        optionsBox.add(tagDefinitionsButton, gbc);
+
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
         allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
@@ -667,6 +675,7 @@ public class ProjectPropertiesDialog extends JDialog {
         allowDefaultsCheckBox.setEnabled(false);
         removeTagsCheckBox.setEnabled(false);
         matchNumbersCheckBox.setEnabled(false);
+        tagDefinitionsButton.setEnabled(false);
         externalCommandTextArea.setEnabled(false);
         insertButton.setEnabled(false);
         variablesList.setEnabled(false);
@@ -776,6 +785,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
     // Numbers in fuzzy matching
     JCheckBox matchNumbersCheckBox = new JCheckBox();
+
+    // Project-specific tag patterns
+    JButton tagDefinitionsButton = new JButton();
     JButton exportTMBrowse = new JButton();
     JButton sentenceSegmentingButton = new JButton();
 
@@ -839,6 +851,7 @@ public class ProjectPropertiesDialog extends JDialog {
     public static final String ALLOW_DEFAULTS_CB_NAME = "project_properties_allow_defaults_cb";
     public static final String REMOVE_TAGS_CB_NAME = "project_properties_remove_tags_cb";
     public static final String MATCH_NUMBERS_CB_NAME = "project_properties_match_numbers_cb";
+    public static final String TAG_DEFINITIONS_BUTTON_NAME = "project_properties_tag_definitions_button";
     public static final String EXPORT_TM_BROWSE_BUTTON_NAME = "project_properties_export_tm_browse_button";
     public static final String FILE_FILTER_BUTTON_NAME = "project_properties_file_filter_button";
     public static final String EXPORT_TM_ROOT_FIELD_NAME = "project_properties_export_tm_root_field";

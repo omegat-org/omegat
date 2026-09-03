@@ -472,6 +472,13 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                   <link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"></link>
                   		  preference.</para>
             </listitem>
+            <listitem>
+               <para>Underlining numerals by assigning the
+                  <guilabel>Numerals</guilabel> colour in the
+                  <link endterm="dialogs.preferences.colours.title" linkend="dialogs.preferences.colours"></link> preferences, when the
+                  <link linkend="dialogs.project.properties.check.numbers" endterm="dialogs.project.properties.check.numbers.title"></link> project
+                  		  property is enabled.</para>
+            </listitem>
          </itemizedlist>
          <para>See the 
             <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"></link> preferences and the 

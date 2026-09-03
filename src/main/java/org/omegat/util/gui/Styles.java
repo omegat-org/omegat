@@ -203,6 +203,11 @@ public final class Styles {
          */
         COLOR_NBSP("OmegaT.nbsp", "#888888"),
         /**
+         * Numeral underline color. Ships without a color, so the numeral
+         * marks stay unpainted until the user picks a color of their own.
+         */
+        COLOR_NUMERALS("OmegaT.numerals", (Color) null),
+        /**
          * White space marker background color.
          */
         COLOR_WHITESPACE("OmegaT.whiteSpace", "#808080"),

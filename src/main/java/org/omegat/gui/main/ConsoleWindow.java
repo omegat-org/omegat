@@ -31,6 +31,7 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -47,7 +48,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class ConsoleWindow implements IMainWindow {
 
     @Override
-    public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
+    public void displayErrorRB(@Nullable Throwable ex, String errorKey, Object@Nullable... params) {
         String msg;
         if (params != null) {
             msg = StringUtil.format(OStrings.getString(errorKey), params);

@@ -33,6 +33,7 @@ import javax.swing.JFrame;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface for access to main window functionality.
@@ -142,7 +143,7 @@ public interface IMainWindow {
      * @param params
      *            error text parameters
      */
-    void displayErrorRB(Throwable ex, String errorKey, Object... params);
+    void displayErrorRB(@Nullable Throwable ex, String errorKey, Object@Nullable... params);
 
     /**
      * Show message in an ErrorDialog

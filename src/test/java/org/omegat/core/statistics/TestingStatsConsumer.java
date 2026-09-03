@@ -26,6 +26,7 @@ package org.omegat.core.statistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.omegat.core.threads.Completion;
 
 import java.util.concurrent.CompletableFuture;
@@ -54,11 +55,21 @@ import java.util.concurrent.CompletableFuture;
 public class TestingStatsConsumer implements IStatsConsumer {
     private final List<String[][]> result = new ArrayList<>();
     private final StringBuilder buffer = new StringBuilder();
+    private Map<Integer, Integer> entryRowIndexes;
 
     private final CompletableFuture<Completion> completion = new CompletableFuture<>();
 
     public List<String[][]> getTable() {
         return result;
+    }
+
+    public Map<Integer, Integer> getEntryRowIndexes() {
+        return entryRowIndexes;
+    }
+
+    @Override
+    public void setEntryRowIndexes(Map<Integer, Integer> entryRowIndexes) {
+        this.entryRowIndexes = entryRowIndexes;
     }
 
     public String getTextData() {

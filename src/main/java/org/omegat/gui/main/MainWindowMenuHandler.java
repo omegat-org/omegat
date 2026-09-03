@@ -807,18 +807,18 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.STANDARD)
-                .setVisible(true);
+        StatisticsWindow.showWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.STANDARD);
     }
 
     public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES)
-                .setVisible(true);
+        StatisticsWindow.showWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.MATCHES);
     }
 
     public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
-                StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
+        StatisticsWindow.showWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE);
     }
 
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed(ActionEvent evt) {

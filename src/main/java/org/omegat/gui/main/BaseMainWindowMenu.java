@@ -299,6 +299,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION");
         editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
         editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
+        editSearchSourceSegmentMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_SOURCE_SEGMENT");
         editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE");
         editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY");
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE", SWITCH_CASE_SUBMENU);
@@ -518,6 +519,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editMenu.add(editCreateGlossaryEntryMenuItem);
         editMenu.addSeparator();
         editMenu.add(editFindInProjectMenuItem);
+        editMenu.add(editSearchSourceSegmentMenuItem);
         editMenu.add(editReplaceInProjectMenuItem);
         editMenu.addSeparator();
         editMenu.add(editSearchDictionaryMenuItem);
@@ -834,7 +836,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
 
-                editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
+                editMenu, editFindInProjectMenuItem, editSearchSourceSegmentMenuItem,
+                editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
                 editOverwriteTranslationMenuItem, editRedoMenuItem, editSelectFuzzy1MenuItem,
                 editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
@@ -1016,6 +1019,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
+    JMenuItem editSearchSourceSegmentMenuItem;
     JMenuItem editReplaceInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;
     JMenuItem editInsertTranslationMenuItem;

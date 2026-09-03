@@ -81,6 +81,7 @@ public class EditingBehaviorPanel extends JPanel {
         paraMarkLabel = new javax.swing.JLabel();
         paraMarkText = new javax.swing.JTextField();
         singleClickActivationCheckBox = new javax.swing.JCheckBox();
+        searchSourceSegmentCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.GridBagLayout());
@@ -280,7 +281,7 @@ public class EditingBehaviorPanel extends JPanel {
         add(initialSegCountSpinner, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridy = 18;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -312,6 +313,15 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(singleClickActivationCheckBox, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(searchSourceSegmentCheckBox, "jCheckBox2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(searchSourceSegmentCheckBox, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void radiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiosActionPerformed
@@ -337,6 +347,7 @@ public class EditingBehaviorPanel extends JPanel {
     javax.swing.JTextField paraMarkText;
     javax.swing.JLabel prefixLabel;
     javax.swing.JTextField prefixText;
+    javax.swing.JCheckBox searchSourceSegmentCheckBox;
     javax.swing.JLabel similarityLabel;
     javax.swing.JSpinner similaritySpinner;
     javax.swing.JCheckBox singleClickActivationCheckBox;

@@ -403,6 +403,8 @@ public class EditorController implements IEditor {
             }
         });
 
+        editor.getAccessibleContext()
+                .setAccessibleName(OStrings.getString("TF_MENU_GOTO_EDITOR_PANEL"));
         scrollPane = new JScrollPane(editor);
         Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
         if (panelBorder != null) {

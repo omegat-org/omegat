@@ -48,6 +48,7 @@ public class DockablePanel extends JPanel implements Dockable {
         dockKey = new DockKey(key, name, null, null, DockingConstants.HIDE_BOTTOM);
         dockKey.setFloatEnabled(detouchable);
         dockKey.setCloseEnabled(false);
+        getAccessibleContext().setAccessibleName(name);
     }
 
     @Override
@@ -64,12 +65,14 @@ public class DockablePanel extends JPanel implements Dockable {
     @Override
     public void setToolTipText(String text) {
         dockKey.setTooltip(text);
+        getAccessibleContext().setAccessibleDescription(text);
     }
 
     /** Updates the name of the docking pane. */
     @Override
     public void setName(String name) {
         dockKey.setName(name);
+        getAccessibleContext().setAccessibleName(name);
     }
 
     @Override

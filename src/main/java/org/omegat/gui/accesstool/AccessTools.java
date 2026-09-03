@@ -106,6 +106,8 @@ public class AccessTools extends JPanel {
         recentProjectCB.setEnabled(true);
         recentProjectCB.setPreferredSize(new Dimension(cbWidth, cbHeight));
         recentProjectCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
+        recentProjectCB.getAccessibleContext()
+                .setAccessibleName(OStrings.getString("TF_MENU_NEWUI_PROJECT_SELECTOR"));
         add(recentProjectCB);
         goButton = new JButton(OStrings.getString("TF_MENU_NEWUI_PROJECT_GO"));
         add(goButton);
@@ -120,16 +122,21 @@ public class AccessTools extends JPanel {
         sourceFilesCB.setEnabled(true);
         sourceFilesCB.setPreferredSize(new Dimension(cbWidth, cbHeight));
         sourceFilesCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
+        sourceTitle.setLabelFor(sourceFilesCB);
         add(sourceFilesCB);
 
         searchButton = new JButton("",
                 Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
                         () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
         searchButton.setBorderPainted(false);
+        searchButton.setToolTipText(OStrings.getString("TF_MENU_NEWUI_SEARCH"));
+        searchButton.getAccessibleContext().setAccessibleName(OStrings.getString("TF_MENU_NEWUI_SEARCH"));
         settingsButton = new JButton("", Objects.requireNonNullElseGet(
                 UIManager.getIcon("OmegaT.newUI.settings.icon"),
                 () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
         settingsButton.setBorderPainted(false);
+        settingsButton.setToolTipText(OStrings.getString("TF_MENU_NEWUI_SETTINGS"));
+        settingsButton.getAccessibleContext().setAccessibleName(OStrings.getString("TF_MENU_NEWUI_SETTINGS"));
 
         // -- right side
         add(Box.createGlue());

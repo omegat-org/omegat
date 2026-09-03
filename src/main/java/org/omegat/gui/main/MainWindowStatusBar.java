@@ -73,6 +73,8 @@ public class MainWindowStatusBar extends JPanel {
 
         Mnemonics.setLocalizedText(lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
         lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
+        lengthLabel.getAccessibleContext()
+                .setAccessibleDescription(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
         lengthLabel.setBorder(border);
         lengthLabel.setFocusable(false);
 
@@ -106,6 +108,7 @@ public class MainWindowStatusBar extends JPanel {
 
     public void setProgressToolTip(String text) {
         progressLabel.setToolTipText(text);
+        progressLabel.getAccessibleContext().setAccessibleDescription(text);
     }
 
     public void setLengthLabel(String text) {
@@ -118,6 +121,7 @@ public class MainWindowStatusBar extends JPanel {
 
     public void setLockInsertToolTipText(String text) {
         lockInsertLabel.setToolTipText(text);
+        lockInsertLabel.getAccessibleContext().setAccessibleDescription(text);
     }
 
     public enum StatusBarMode {

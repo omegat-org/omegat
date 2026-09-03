@@ -35,6 +35,7 @@ import javax.swing.UIManager;
 import javax.swing.event.MenuListener;
 
 import org.omegat.gui.accesstool.AccessTools;
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.ResourcesUtil;
 
 /**
@@ -60,6 +61,8 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu
         Icon burgerIcon = UIManager.getIcon("OmegaT.newUI.menu.icon");
         burgerMenu.setIcon(Objects.requireNonNullElseGet(burgerIcon,
                 () -> new ImageIcon(ResourcesUtil.getBundledImage("newUI.burgerMenu.png"))));
+        // Icon-only menu: give assistive technologies a name.
+        burgerMenu.getAccessibleContext().setAccessibleName(OStrings.getString("TF_MENU_NEWUI_MAIN_MENU"));
         burgerMenu.add(projectMenu);
         burgerMenu.add(editMenu);
         burgerMenu.add(gotoMenu);

@@ -39,6 +39,8 @@ public class PreferenceViewSelectorPanel extends javax.swing.JPanel {
      */
     public PreferenceViewSelectorPanel() {
         initComponents();
+        clearButton.setToolTipText(OStrings.getString("PREFERENCES_SEARCH_CLEAR"));
+        clearButton.getAccessibleContext().setAccessibleName(OStrings.getString("PREFERENCES_SEARCH_CLEAR"));
     }
 
     /**

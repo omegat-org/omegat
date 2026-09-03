@@ -30,6 +30,9 @@ package org.omegat.util.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Set;
 
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
@@ -93,6 +96,13 @@ public final class Styles {
     }
 
     /**
+     * Configurable text style flags of {@link EditorColor} entries.
+     */
+    public enum TextStyle {
+        BOLD, ITALIC, STRIKETHROUGH, UNDERLINE
+    }
+
+    /**
      * The configurable application colors.
      * <p>
      * Every entry names the UIManager key under which the installed look and
@@ -105,6 +115,10 @@ public final class Styles {
      * text-like entries to their own base foreground and surface-like
      * entries to their own base background, which renders exactly like the
      * former "inherit" behavior.
+     * <p>
+     * Entries can carry intrinsic default {@link TextStyle} flags (e.g.
+     * struck-through deleted match text); user configuration overrides per
+     * flag.
      */
     public enum EditorColor {
         /**
@@ -281,19 +295,21 @@ public final class Styles {
         /**
          * Matches deleted active text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_ACTIVE("OmegaT.matchesDelActive", "#000000"),
+        COLOR_MATCHES_DEL_ACTIVE("OmegaT.matchesDelActive", "#ff3399", TextStyle.BOLD,
+                TextStyle.STRIKETHROUGH),
         /**
          * Matches deleted inactive text color (struck-through foreground).
          */
-        COLOR_MATCHES_DEL_INACTIVE("OmegaT.matchesDelInactive", "#000000"),
+        COLOR_MATCHES_DEL_INACTIVE("OmegaT.matchesDelInactive", "#ff0000", TextStyle.STRIKETHROUGH),
         /**
-         * Matches inserted active background color.
+         * Matches inserted active text color (underlined foreground).
          */
-        COLOR_MATCHES_INS_ACTIVE("OmegaT.matchesInsActive", "#0000ff"),
+        COLOR_MATCHES_INS_ACTIVE("OmegaT.matchesInsActive", "#0000ff", TextStyle.BOLD,
+                TextStyle.UNDERLINE),
         /**
-         * Matches inserted inactive background color.
+         * Matches inserted inactive text color (underlined foreground).
          */
-        COLOR_MATCHES_INS_INACTIVE("OmegaT.matchesInsInactive", "#6c6c6c"),
+        COLOR_MATCHES_INS_INACTIVE("OmegaT.matchesInsInactive", "#6c6c6c", TextStyle.UNDERLINE),
         /**
          * Hyperlink highlight color.
          */
@@ -352,22 +368,28 @@ public final class Styles {
         private final String displayName;
         private final String uiManagerKey;
         private final Color fallbackColor;
+        private final EnumSet<TextStyle> defaultTextStyle;
         private @Nullable Color color;
+        private EnumSet<TextStyle> textStyle = EnumSet.noneOf(TextStyle.class);
 
         /**
          * A color whose default is provided by the installed look and feel
          * under {@code uiManagerKey}, with {@code fallbackHex} taking over
-         * when no theme defines the key.
+         * when no theme defines the key. Optional {@code defaultTextStyle}
+         * flags: intrinsic marker text style.
          */
-        EditorColor(String uiManagerKey, String fallbackHex) {
-            this(uiManagerKey, Color.decode(fallbackHex));
+        EditorColor(String uiManagerKey, String fallbackHex, TextStyle... defaultTextStyle) {
+            this(uiManagerKey, Color.decode(fallbackHex), defaultTextStyle);
         }
 
-        EditorColor(String uiManagerKey, Color fallbackColor) {
+        EditorColor(String uiManagerKey, Color fallbackColor, TextStyle... defaultTextStyle) {
             this.displayName = OStrings.getString(name());
             this.uiManagerKey = uiManagerKey;
             this.fallbackColor = fallbackColor;
+            this.defaultTextStyle = EnumSet.noneOf(TextStyle.class);
+            Collections.addAll(this.defaultTextStyle, defaultTextStyle);
             setColorFromPreference();
+            setTextStyleFromPreference();
         }
 
         private void setColorFromPreference() {
@@ -442,6 +464,92 @@ public final class Styles {
                 Preferences.setPreference(name(), toHex());
             }
         }
+
+        private String textStylePrefKey(TextStyle flag) {
+            return name() + "_TEXT_STYLE_" + flag.name();
+        }
+
+        private void setTextStyleFromPreference() {
+            if (!Preferences.isInitialized()) {
+                // Standalone guard as in setColorFromPreference: intrinsic
+                // defaults apply, user overrides cannot.
+                textStyle = EnumSet.copyOf(defaultTextStyle);
+                return;
+            }
+            textStyle = EnumSet.noneOf(TextStyle.class);
+            for (TextStyle flag : TextStyle.values()) {
+                // Sentinel or absent key = flag follows intrinsic default
+                // (color pattern). existsPreference guard needed:
+                // getPreferenceDefault writes absent keys back, would pin
+                // defaults into user's prefs file.
+                boolean on = defaultTextStyle.contains(flag);
+                String key = textStylePrefKey(flag);
+                if (Preferences.existsPreference(key)) {
+                    String pref = Preferences.getPreferenceDefault(key, "");
+                    if (!pref.isEmpty() && !DEFAULT_COLOR.equals(pref)) {
+                        on = Boolean.parseBoolean(pref);
+                    }
+                }
+                if (on) {
+                    textStyle.add(flag);
+                }
+            }
+        }
+
+        /** Whether flag is currently in effect. */
+        public boolean is(TextStyle flag) {
+            return textStyle.contains(flag);
+        }
+
+        /** Text style flags currently in effect. */
+        public Set<TextStyle> getTextStyle() {
+            return Collections.unmodifiableSet(textStyle);
+        }
+
+        /** Intrinsic default text style flags. */
+        public Set<TextStyle> getDefaultTextStyle() {
+            return Collections.unmodifiableSet(defaultTextStyle);
+        }
+
+        /**
+         * Configure the text style rendered for text this colour marks. The
+         * flags are additive: they never remove bold/italic that a view
+         * option or a marker itself requests.
+         */
+        public void setTextStyle(Set<TextStyle> newStyle) {
+            EnumSet<TextStyle> style = EnumSet.noneOf(TextStyle.class);
+            style.addAll(newStyle);
+            if (style.equals(textStyle)) {
+                return;
+            }
+            textStyle = style;
+            for (TextStyle flag : TextStyle.values()) {
+                // Flags matching intrinsic default store sentinel: entry
+                // keeps following changed defaults (as setColor).
+                boolean on = style.contains(flag);
+                Preferences.setPreference(textStylePrefKey(flag),
+                        on == defaultTextStyle.contains(flag) ? DEFAULT_COLOR : Boolean.toString(on));
+            }
+        }
+
+        /**
+         * Whether entry's call sites render configured style flags; only
+         * such entries expose editable flag cells in colours table.
+         */
+        public boolean isTextStyleable() {
+            return TEXT_STYLEABLE.contains(this);
+        }
+
+        // Entries with wired call sites: editor segment states
+        // (EditorSettings), match pane attributes (MatchesTextArea). Extend
+        // together with call sites.
+        private static final Set<EditorColor> TEXT_STYLEABLE = EnumSet.of(
+                COLOR_ACTIVE_SOURCE, COLOR_ACTIVE_TARGET,
+                COLOR_SOURCE, COLOR_NOTED, COLOR_UNTRANSLATED, COLOR_TRANSLATED,
+                COLOR_NON_UNIQUE, COLOR_PLACEHOLDER, COLOR_REMOVETEXT_TARGET,
+                COLOR_MATCHES_CHANGED, COLOR_MATCHES_UNCHANGED,
+                COLOR_MATCHES_INS_ACTIVE, COLOR_MATCHES_INS_INACTIVE,
+                COLOR_MATCHES_DEL_ACTIVE, COLOR_MATCHES_DEL_INACTIVE);
     }
 
     /**
@@ -531,5 +639,39 @@ public final class Styles {
     private static @Nullable Color resolveBound(AttributeSet attributes, Object key) {
         Object bound = attributes.getAttribute(key);
         return bound instanceof EditorColor ? ((EditorColor) bound).getColor() : null;
+    }
+
+    /**
+     * Overlay the text style configured for the given colour entry onto an
+     * attribute set. Additive: flags that are off leave the base attributes
+     * untouched, so view options and marker-specific styling keep working.
+     */
+    public static AttributeSet overlayTextStyle(@Nullable EditorColor style, AttributeSet base) {
+        if (style == null || style.textStyle.isEmpty()) {
+            return base;
+        }
+        MutableAttributeSet r = new SimpleAttributeSet();
+        r.addAttributes(base);
+        if (style.is(TextStyle.BOLD)) {
+            StyleConstants.setBold(r, true);
+        }
+        if (style.is(TextStyle.ITALIC)) {
+            StyleConstants.setItalic(r, true);
+        }
+        if (style.is(TextStyle.STRIKETHROUGH)) {
+            StyleConstants.setStrikeThrough(r, true);
+        }
+        if (style.is(TextStyle.UNDERLINE)) {
+            StyleConstants.setUnderline(r, true);
+        }
+        return r;
+    }
+
+    /**
+     * Foreground attribute set of entry: current colour plus configured
+     * text style flags.
+     */
+    public static AttributeSet createStyledAttributeSet(EditorColor foreground) {
+        return overlayTextStyle(foreground, createAttributeSet(foreground.getColor(), null, null, null));
     }
 }

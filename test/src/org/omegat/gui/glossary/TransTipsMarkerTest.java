@@ -25,6 +25,7 @@
 
 package org.omegat.gui.glossary;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.TestCore;
@@ -54,6 +55,13 @@ public class TransTipsMarkerTest extends TestCore {
         Preferences.setPreference(Preferences.MARK_GLOSSARY_MATCHES, true);
         initEditor(null);
         TestCoreState.getInstance().getEditor().getSettings().setMarkGlossaryMatches(true);
+    }
+
+    @After
+    public final void resetPreferredRenderer() {
+        // The mock renderer is stored statically; later tests in the same JVM
+        // must get the real one again.
+        GlossaryRenderers.setPreferredGlossaryRenderer(GlossaryRenderers.DEFAULT_RENDERER);
     }
 
     /**
@@ -135,8 +143,8 @@ public class TransTipsMarkerTest extends TestCore {
         List<Token[]> tokenMatches = new ArrayList<>();
         tokenMatches.add(new Token[]{new Token("text", 7)});
         tokenMatches.add(new Token[]{new Token("source", 0)});
-        when(glossaryManagerMock.searchSourceMatchTokens(any(SourceTextEntry.class), eq(glossaryEntry)))
-                .thenReturn(tokenMatches);
+        when(glossaryManagerMock.searchSourceMatchTokens(any(SourceTextEntry.class), eq(glossaryEntries)))
+                .thenReturn(Collections.singletonList(tokenMatches));
         TestCoreState.getInstance().setGlossaryManager(glossaryManagerMock);
 
         SourceTextEntry ste = mock(SourceTextEntry.class);
@@ -171,8 +179,8 @@ public class TransTipsMarkerTest extends TestCore {
         GlossaryRenderers.setPreferredGlossaryRenderer(rendererMock);
 
         GlossaryManager glossaryManagerMock = mock(GlossaryManager.class);
-        when(glossaryManagerMock.searchSourceMatchTokens(any(SourceTextEntry.class), eq(glossaryEntry)))
-                .thenReturn(Collections.emptyList());
+        when(glossaryManagerMock.searchSourceMatchTokens(any(SourceTextEntry.class), eq(glossaryEntries)))
+                .thenReturn(Collections.singletonList(Collections.emptyList()));
         TestCoreState.getInstance().setGlossaryManager(glossaryManagerMock);
 
         SourceTextEntry ste = mock(SourceTextEntry.class);

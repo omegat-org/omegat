@@ -30,6 +30,8 @@ import java.awt.Rectangle;
 
 import javax.swing.JTextPane;
 
+import javax.swing.text.Document;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
@@ -61,7 +63,19 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         if (!GraphicsEnvironment.isHeadless()) {
             setDragEnabled(true);
         }
-        getDocument().addDocumentListener(new FontFallbackListener(this));
+        FontFallbackListener fontFallback = new FontFallbackListener(this);
+        getDocument().addDocumentListener(fontFallback);
+        // Subclasses may swap in a prebuilt document (SF bug #981): move the
+        // fallback listener along and style the arriving content once.
+        addPropertyChangeListener("document", evt -> {
+            if (evt.getOldValue() instanceof Document) {
+                ((Document) evt.getOldValue()).removeDocumentListener(fontFallback);
+            }
+            if (evt.getNewValue() instanceof Document) {
+                ((Document) evt.getNewValue()).addDocumentListener(fontFallback);
+                fontFallback.styleWholeDocument((Document) evt.getNewValue());
+            }
+        });
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());

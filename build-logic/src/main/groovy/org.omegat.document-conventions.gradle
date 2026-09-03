@@ -1,5 +1,4 @@
 import org.omegat.documentation.*
-import org.omegat.gradle.PropertiesUtil
 
 plugins {
     id 'org.omegat.documentation'
@@ -18,17 +17,17 @@ dependencies {
 def documentRootDir = 'src/docs'
 def styleRootDir = 'src/docs/xsl'
 
+def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
+        .map { it.split(',') }
+
 tasks.register('genDocIndex', Copy) {
     def inputTemplate = layout.projectDirectory.file("${documentRootDir}/template/index.html")
-    def docPropsFiles = fileTree(dir: "${documentRootDir}/manual", include: '**/version*.properties')
-    def langInformation = docPropsFiles.collect { props ->
-        def docVersion = PropertiesUtil.loadProperties(props).version
-        ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
-         'name'  : Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
-         'status': docVersion == version ? 'up-to-date' : 'out-of-date']
+    def langInformation = manualLangsProvider.get().collect { lang ->
+        ['code': lang, 'name': Locale.forLanguageTag(lang.replace('_', '-')).getDisplayName()]
     }
     description = 'Generates the HTML docs index file.'
-    inputs.files docPropsFiles, inputTemplate
+    inputs.property('languages', langInformation)
+    inputs.file inputTemplate
     from inputTemplate
     into layout.buildDirectory.dir("tmp/manual/")
     expand('languages': langInformation)
@@ -65,8 +64,6 @@ tasks.register('tipsHtmls', Sync) {
     into layout.buildDirectory.dir('docs/tips')
 }
 
-def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
-        .map { it.split(',') }
 manualLangsProvider.get().each { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(layout.projectDirectory.file("${styleRootDir}/passthrough.xsl"))
@@ -211,7 +208,6 @@ manualLangsProvider.get().each { lang ->
 
     def zipTask = tasks.register("manualZip${lang.capitalize()}", Zip) {
         from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-        from fileTree(dir: "${documentRootDir}/manual/${lang}", include: '**/version*.properties')
         archiveFileName = "${lang}.zip"
         destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))
         dependsOn buildDocumentTask

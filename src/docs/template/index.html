@@ -3,8 +3,6 @@
    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
    <title>OmegaT User Manual</title>
    <style type="text/css">
-      .up-to-date { color: green; font-weight: bold; }
-      .out-of-date { color: red; }
         h1 {
             width: 20%;
             text-align: center;
@@ -30,30 +28,19 @@
 
 <table>
     <thead>
-    <tr><td>Language Name</td><td>Document Version</td></tr>
+    <tr><td>Language Name</td></tr>
     </thead>
     <tbody>
-        <% languages.each { lang -> if (lang.nomanual) { %>
-            <tr>
-                <td>
-                    <p class="lang"><a href="${lang.code}/instantStartGuideNoTOC.html">${lang.name}</a></p>
-
-                </td>
-                <td>
-                    <p>(<span class="${lang.status}">&mdash;</span>)</p>
-                </td>
-            </tr>
-        <% } else { %>
+        <% languages.each { lang -> %>
             <tr>
                 <td>
                     <p class="lang"><a href="${lang.code}/index.html">${lang.name}</a></p>
                 </td>
-                <td>(<span class="${lang.status}">${lang.version}</span>)</td>
             </tr>
-        <% } } %>
+        <% } %>
     </tbody>
 </table>
 
 </body>
 
-</html>
+</html>

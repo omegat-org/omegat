@@ -501,7 +501,6 @@ public class SearcherTest {
         s.allResults = allResults;
         s.fileNames = true;
         s.caseSensitive = caseSensitive;
-        s.spaceMatchNbsp = false;
         s.searchSource = true;
         s.searchTarget = true;
         s.searchTranslated = true;

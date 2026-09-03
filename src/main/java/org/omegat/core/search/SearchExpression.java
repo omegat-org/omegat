@@ -31,7 +31,12 @@
 
 package org.omegat.core.search;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import org.jspecify.annotations.Nullable;
+
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.util.OConsts;
 
 /**
@@ -75,7 +80,12 @@ public class SearchExpression {
     public boolean caseSensitive = false;
     public boolean wholeWordsOnly = false;
     public boolean widthInsensitive = true;
-    public boolean spaceMatchNbsp = false;
+    /**
+     * Character equivalence classes applied to exact and keyword searches
+     * (feature request #1681); empty means no folding. Regular-expression
+     * searches ignore the field: folding a pattern would corrupt its syntax.
+     */
+    public Set<MatchEquivalence> equivalences = EnumSet.noneOf(MatchEquivalence.class);
     public boolean glossary = true;
     public boolean memory = true;
     public boolean tm = true;

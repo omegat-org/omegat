@@ -37,7 +37,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -48,6 +50,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
@@ -74,6 +77,7 @@ public class ProjectPropertiesDialogController {
 
     /** Project SRX. */
     private SRX srx;
+    private Set<MatchEquivalence> disabledMatchEquivalences = EnumSet.noneOf(MatchEquivalence.class);
 
     /** Project filters. */
     private Filters filters;
@@ -128,6 +132,7 @@ public class ProjectPropertiesDialogController {
         dialog.allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
         dialog.removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
         dialog.matchNumbersCheckBox.setSelected(projectProperties.isMatchNumbersEnabled());
+        disabledMatchEquivalences = projectProperties.getDisabledMatchEquivalences();
 
         dialog.sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         dialog.targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
@@ -183,6 +188,12 @@ public class ProjectPropertiesDialogController {
             List<RepositoryDefinition> r = rmd.show(projectProperties.getRepositories());
             if (r != null) {
                 projectProperties.setRepositories(r);
+            }
+        });
+        dialog.matchEquivalenceButton.addActionListener(e -> {
+            Set<MatchEquivalence> updated = MatchEquivalenceDialog.show(dialog, disabledMatchEquivalences);
+            if (updated != null) {
+                disabledMatchEquivalences = updated;
             }
         });
         dialog.externalFinderButton.addActionListener(e -> {
@@ -546,6 +557,7 @@ public class ProjectPropertiesDialogController {
         projectProperties.setSupportDefaultTranslations(dialog.allowDefaultsCheckBox.isSelected());
         projectProperties.setRemoveTags(dialog.removeTagsCheckBox.isSelected());
         projectProperties.setMatchNumbersEnabled(dialog.matchNumbersCheckBox.isSelected());
+        projectProperties.setDisabledMatchEquivalences(disabledMatchEquivalences);
         projectProperties.setExportTmLevels(dialog.exportTMOmegaTCheckBox.isSelected(),
                 dialog.exportTMLevel1CheckBox.isSelected(), dialog.exportTMLevel2CheckBox.isSelected());
         projectProperties.setExternalCommand(dialog.externalCommandTextArea.getText());

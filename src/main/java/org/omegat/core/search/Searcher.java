@@ -64,6 +64,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
@@ -288,9 +289,10 @@ public class Searcher {
         switch (searchExpression.searchExpressionType) {
         case EXACT:
             // escape the search string, it's not supposed to be a regular
-            // expression
-            textSearchExpression = StaticUtils.globToRegex(textSearchExpression,
-                    searchExpression.spaceMatchNbsp);
+            // expression; variant characters match their whole equivalence
+            // group (#1681)
+            textSearchExpression = MatchEquivalence.globToRegex(textSearchExpression,
+                    searchExpression.equivalences);
             if (searchExpression.wholeWordsOnly) {
                 textSearchExpression = anchorWholeWords(textSearchExpression);
             }
@@ -300,11 +302,14 @@ public class Searcher {
             break;
         case KEYWORD:
             // break the search string into keywords,
-            // each of which is a separate search string
+            // each of which is a separate search string; fold space variants
+            // first so no-break spaces also separate keywords
             final int flags = getPatternFlags();
-            Pattern.compile(" ").splitAsStream(textSearchExpression.trim()).filter(word -> !word.isEmpty())
+            String keywords = MatchEquivalence.foldSameLength(textSearchExpression,
+                    MatchEquivalence.buildSameLengthFoldMap(searchExpression.equivalences));
+            Pattern.compile(" ").splitAsStream(keywords.trim()).filter(word -> !word.isEmpty())
                     .map(word -> {
-                        String glob = StaticUtils.globToRegex(word, false);
+                        String glob = MatchEquivalence.globToRegex(word, searchExpression.equivalences);
                         if (searchExpression.wholeWordsOnly) {
                             glob = anchorWholeWords(glob);
                         }
@@ -312,12 +317,6 @@ public class Searcher {
                     }).forEach(matchers::add);
             break;
         case REGEXP:
-            // space match nbsp (\u00a0)
-            if (searchExpression.spaceMatchNbsp) {
-                textSearchExpression = textSearchExpression.replace(" ", "( |\u00A0)");
-                textSearchExpression = textSearchExpression.replace("\\\\s", "(\\\\s|\u00A0)");
-            }
-
             // create a matcher for the search string
             matchers.add(Pattern.compile(textSearchExpression, getPatternFlags()).matcher(""));
             break;
@@ -383,13 +382,16 @@ public class Searcher {
         return "(?<!\\w)(?:" + regex + ")(?!\\w)";
     }
 
+    /** Author matcher, created once per search (the pattern can be large). */
+    private @Nullable Matcher authorMatcher;
+
     /** create a matcher for the author search string. */
     private Matcher createAuthorSearchExpression() {
         String authorSearchExpression = searchExpression.author;
         int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
         if (searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
-            authorSearchExpression = StaticUtils.globToRegex(authorSearchExpression,
-                    searchExpression.spaceMatchNbsp);
+            authorSearchExpression = MatchEquivalence.globToRegex(authorSearchExpression,
+                    searchExpression.equivalences);
         }
         return Pattern.compile(authorSearchExpression, flags).matcher("");
     }
@@ -1020,10 +1022,10 @@ public class Searcher {
      */
     boolean searchReplaceImpl(SearchExpression newSearchExpression, List<SearchMatch> foundMatchesList,
             Matcher matcher, int end, int start, Locale targetLocale) {
+        if ((end == start) && (start > 0)) {
+            return true;
+        }
         if (newSearchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
-            if ((end == start) && (start > 0)) {
-                return true;
-            }
             String repl = newSearchExpression.replacement;
             Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
             while (replaceMatcher.find()) {
@@ -1078,7 +1080,10 @@ public class Searcher {
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(@Nullable ITMXEntry te) {
-        Matcher author = createAuthorSearchExpression();
+        if (authorMatcher == null) {
+            authorMatcher = createAuthorSearchExpression();
+        }
+        Matcher author = authorMatcher;
         if (te == null) {
             return false;
         }

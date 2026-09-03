@@ -58,11 +58,13 @@ public class FuzzyMatchesSegmentsTest extends TestCoreGUI {
 
         String text = window.textBox("matches_pane").text();
         assertNotNull(text);
-        assertTrue(text.contains("2. 地力の搾取と浪費が現われる。(1)"));
+        // default template renders ${diff}: match source merged with current
+        // segment's insertions
+        assertTrue(text.contains("2. 地力の搾取と浪費が現われる。(1注意書参照)"));
         assertTrue(text.contains(OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM")));
 
         // produce paragram produced from segmented results.
-        assertTrue(text.contains("4. 地力の搾取と浪費が現われる。(1)"));
+        assertTrue(text.contains("4. 地力の搾取と浪費が現われる。(1注意書参照)"));
         assertTrue(text.contains(OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS")));
 
         closeProject();
@@ -83,11 +85,11 @@ public class FuzzyMatchesSegmentsTest extends TestCoreGUI {
 
         String text = window.textBox("matches_pane").text();
         assertNotNull(text);
-        assertTrue(text.contains("2. 地力の搾取と浪費が現われる。(1)"));
+        assertTrue(text.contains("2. 地力の搾取と浪費が現われる。(1注意書参照)"));
         assertTrue(text.contains(OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM")));
 
         // No produce paragram produced from segmented results.
-        assertFalse(text.contains("4. 地力の搾取と浪費が現われる。(1)"));
+        assertFalse(text.contains("4. 地力の搾取と浪費が現われる。(1注意書参照)"));
         assertFalse(text.contains(OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS")));
 
         closeProject();

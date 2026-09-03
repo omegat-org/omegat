@@ -111,9 +111,10 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
 
-    // Colour-carrying attributes are rebuilt from the preferences by
-    // rebuildColorAttributes() so a colour change takes effect without a
-    // restart (they used to be cached in static fields at class-load time).
+    // Colour- and style-carrying attributes are rebuilt from the preferences
+    // by rebuildColorAttributes() so a colour or text style change takes
+    // effect without a restart (they used to be cached in static fields at
+    // class-load time).
     private AttributeSet attributesChanged;
     private AttributeSet attributesUnchanged;
     private AttributeSet attributesDeletedActive;
@@ -188,18 +189,18 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     }
 
     private void rebuildColorAttributes() {
-        attributesChanged = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_CHANGED.getColor(), null, null, null);
-        attributesUnchanged = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null, null);
-        attributesDeletedActive = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
-        attributesDeletedInactive = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
-        attributesInsertedActive = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
-        attributesInsertedInactive = Styles.createAttributeSet(
-                Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
+        // Text styles (struck-through deleted, underlined inserted, ...)
+        // come from entries' configurable flags, intrinsic defaults included.
+        attributesChanged = Styles.createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_CHANGED);
+        attributesUnchanged = Styles.createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_UNCHANGED);
+        attributesDeletedActive = Styles
+                .createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE);
+        attributesDeletedInactive = Styles
+                .createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE);
+        attributesInsertedActive = Styles
+                .createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE);
+        attributesInsertedInactive = Styles
+                .createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE);
     }
 
     @Override

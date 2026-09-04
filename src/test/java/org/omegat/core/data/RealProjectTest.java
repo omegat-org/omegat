@@ -32,11 +32,15 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -44,9 +48,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.text.TextFilter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
+
+import gen.core.filters.Filters;
 
 /**
  * Tests for RealProject classs.
@@ -65,6 +75,8 @@ public class RealProjectTest {
         Core.initializeConsole();
         TestPreferencesInitializer.init();
         Core.initializeConsole();
+        FilterMaster.setFilterClasses(Collections.singletonList(TextFilter.class));
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
     }
 
     @After
@@ -301,6 +313,50 @@ public class RealProjectTest {
         tr.source = source;
         tr.translation = translation;
         return tr;
+    }
+
+    /**
+     * The target path lookup can parse the source file to select a filter, so
+     * RealProject must answer repeated calls from a cache.
+     */
+    @Test
+    public void testGetTargetPathForSourceFileIsCached() throws Exception {
+        createProject(true);
+        project.getProjectProperties().setSourceLanguage("en");
+        project.getProjectProperties().setTargetLanguage("fr");
+        File sourceDir = new File(project.getProjectProperties().getSourceRoot());
+        assertTrue(sourceDir.isDirectory() || sourceDir.mkdirs());
+        Files.write(sourceDir.toPath().resolve("cached.txt"),
+                "Probe sentence for the filter lookup.".getBytes(StandardCharsets.UTF_8));
+
+        assertEquals("cached.txt", project.getTargetPathForSourceFile("cached.txt"));
+
+        // Deleting the source file makes a fresh lookup impossible, so a
+        // repeated answer proves it comes from the cache.
+        Files.delete(sourceDir.toPath().resolve("cached.txt"));
+        assertEquals("cached.txt", project.getTargetPathForSourceFile("cached.txt"));
+        assertNull(project.getTargetPathForSourceFile("uncached.txt"));
+
+        // Project close event must empty the cache; a fresh lookup on the
+        // deleted file then answers null.
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
+        SwingUtilities.invokeAndWait(() -> { });
+        assertNull(project.getTargetPathForSourceFile("cached.txt"));
+
+        // Re-prime the cache for the FilterMaster part.
+        Files.write(sourceDir.toPath().resolve("cached.txt"),
+                "Probe sentence for the filter lookup.".getBytes(StandardCharsets.UTF_8));
+        assertEquals("cached.txt", project.getTargetPathForSourceFile("cached.txt"));
+        Files.delete(sourceDir.toPath().resolve("cached.txt"));
+        assertEquals("cached.txt", project.getTargetPathForSourceFile("cached.txt"));
+
+        // Installing another FilterMaster instance must empty the cache.
+        try {
+            Core.setFilterMaster(new FilterMaster(new Filters()));
+            assertNull(project.getTargetPathForSourceFile("cached.txt"));
+        } finally {
+            Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        }
     }
 
     /**

@@ -7,6 +7,7 @@
                2012 Aaron Madlon-Kay
                2014 Briac Pilpre
                2015 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,7 +31,10 @@ package org.omegat.util.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 
+import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.MutableAttributeSet;
@@ -38,6 +42,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.jspecify.annotations.Nullable;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IColorsChangedEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -85,11 +91,88 @@ public final class Styles {
      * component. Consumers reacting to an
      * {@link org.omegat.core.events.IColorsChangedEventListener} event should
      * call this and repaint, rather than re-reading the colors themselves, so
-     * a live color change is reflected everywhere without a restart.
+     * a live color change is reflected everywhere without a restart. Most
+     * consumers should not call this directly but use
+     * {@link #bindColors(JComponent)}, which keeps the component up to date
+     * automatically.
      */
     public static void applyColors(Component component) {
         component.setForeground(EditorColor.COLOR_FOREGROUND.getColor());
         component.setBackground(EditorColor.COLOR_BACKGROUND.getColor());
+    }
+
+    /**
+     * Bind a component to the current editor base colors: apply them now and
+     * re-apply them automatically on every color change for as long as the
+     * component is displayable. This replaces the manual
+     * register/apply/repaint triple that every pane had to repeat, and unlike
+     * most of those hand-written registrations it also unregisters itself, so
+     * short-lived components (dialogs, search windows) do not leak listeners.
+     * Call on the Swing thread (or during the single-threaded application
+     * startup, like the rest of the GUI construction). Bind a component at
+     * most once: every call installs an independent binding, so a second call
+     * makes the applier run twice per color change.
+     */
+    public static void bindColors(JComponent component) {
+        bindColors(component, () -> applyColors(component));
+    }
+
+    /**
+     * Variant of {@link #bindColors(JComponent)} for components that apply
+     * more than plain foreground and background: {@code colorApplier} runs
+     * once now and again on every color change while the component is
+     * displayable, each time followed by a repaint.
+     */
+    public static void bindColors(JComponent component, Runnable colorApplier) {
+        component.addHierarchyListener(new ColorBinding(component, colorApplier));
+    }
+
+    /**
+     * Listener pair behind {@link #bindColors(JComponent, Runnable)}:
+     * registers with {@link CoreEvents} while the bound component is
+     * displayable and unregisters when it is not. Re-applies the colors on
+     * re-registration because the palette may have changed while unbound.
+     */
+    static final class ColorBinding implements HierarchyListener, IColorsChangedEventListener {
+
+        private final Component component;
+        private final Runnable colorApplier;
+        private boolean registered;
+
+        ColorBinding(Component component, Runnable colorApplier) {
+            this.component = component;
+            this.colorApplier = colorApplier;
+            if (component.isDisplayable()) {
+                CoreEvents.registerColorsChangedEventListener(this);
+                registered = true;
+            }
+            onColorsChanged();
+        }
+
+        @Override
+        public void hierarchyChanged(HierarchyEvent e) {
+            if ((e.getChangeFlags() & HierarchyEvent.DISPLAYABILITY_CHANGED) != 0) {
+                syncRegistration();
+            }
+        }
+
+        private void syncRegistration() {
+            boolean displayable = component.isDisplayable();
+            if (displayable && !registered) {
+                CoreEvents.registerColorsChangedEventListener(this);
+                registered = true;
+                onColorsChanged();
+            } else if (!displayable && registered) {
+                CoreEvents.unregisterColorsChangedEventListener(this);
+                registered = false;
+            }
+        }
+
+        @Override
+        public void onColorsChanged() {
+            colorApplier.run();
+            component.repaint();
+        }
     }
 
     /**
@@ -106,7 +189,7 @@ public final class Styles {
      * entries to their own base background, which renders exactly like the
      * former "inherit" behavior.
      */
-    public enum EditorColor {
+    public enum EditorColor implements ColorEntry {
         /**
          * Background color.
          * <p>
@@ -400,6 +483,7 @@ public final class Styles {
          * The color currently in effect: the user-configured color if one
          * is set, otherwise {@link #getDefault()}.
          */
+        @Override
         public Color getColor() {
             return color != null ? color : getDefault();
         }
@@ -409,6 +493,7 @@ public final class Styles {
          * under {@link #getUIManagerKey()} when the theme defines the key,
          * otherwise the built-in fallback.
          */
+        @Override
         public Color getDefault() {
             Color themed = UIManager.getColor(uiManagerKey);
             return themed != null ? themed : fallbackColor;
@@ -424,8 +509,15 @@ public final class Styles {
             return uiManagerKey;
         }
 
+        @Override
         public String getDisplayName() {
             return displayName;
+        }
+
+        /** The enum constant name doubles as the stable entry id. */
+        @Override
+        public String getId() {
+            return name();
         }
 
         /**
@@ -433,6 +525,7 @@ public final class Styles {
          * equal to the current default — resets the entry, so it keeps
          * following the (theme-dependent) default from then on.
          */
+        @Override
         public void setColor(@Nullable Color newColor) {
             if (newColor == null || newColor.equals(getDefault())) {
                 color = null;

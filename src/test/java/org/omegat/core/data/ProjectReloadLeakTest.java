@@ -32,7 +32,6 @@ import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -68,8 +67,7 @@ public class ProjectReloadLeakTest extends TestCore {
     @Before
     public final void setUpProject() throws Exception {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class));
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.initFilters(List.of(TextFilter.class));
 
         projectRoot = Files.createTempDirectory("omegat-leak").toFile();
         StringBuilder sb = new StringBuilder();

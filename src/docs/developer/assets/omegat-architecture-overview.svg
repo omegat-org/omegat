@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OmegaT architecture overview diagram (editable SVG).
+  Companion to src/docs/developer/21.OmegaTInternals.md.
+
+  🄯 2026 - This file is part of OmegaT, released under the GNU General
+  Public License version 3 or (at your option) any later version.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1320" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <g transform="translate(24,10) scale(0.16)">
+    <path fill="#1e282c" d="m 145.84482,32.68197 c -17.435,0 -33.882,2.683 -48.883002,7.973 -14.783,5.214 -27.816,12.832 -38.737,22.641 -11.013,9.892 -19.58,21.744 -25.462,35.229 -6.042,13.851 -9.105,29.115 -9.105,45.37 0,21.473 7.679,41.858 22.823,60.588 7.582,9.379 16.92,18.207 27.854,26.347 l -14.577,0 c -8.347,0 -12.896,-0.369 -16.173,-2.465 -3.317,-2.122 -6.026,-6.481 -9.66,-15.545 -0.609,-1.518 -2.079,-2.511 -3.713,-2.511 l -10.212,0 c -1.135,0 -2.216,0.481 -2.975,1.325 -0.759,0.845 -1.123,1.972 -1.002,3.1 l 6.201,58.031 c 0.217,2.032 1.932,3.574 3.977,3.574 l 93.382002,0 c 1.417,0 2.728,-0.75 3.447,-1.971 l 2.917,-4.955 c 0.735,-1.248 0.737,-2.797 0.006,-4.048 l -0.507,-0.867 c -6.861,-11.732 -17.231,-29.463 -25.685002,-50.082 -4.62,-11.265 -8.205,-22.288 -10.656,-32.763 -2.861,-12.226 -4.27,-24.086 -4.188,-35.254 0,-0.009 0,-0.019 0,-0.029 0,-14.669 1.357,-27.923 4.033,-39.395 2.639,-11.314 6.581,-20.977 11.715002,-28.719 10.305,-15.542 25.384,-23.422 44.816,-23.422 19.577,0 34.775,7.661 45.174,22.771 5.137,7.465 9.082,16.756 11.725,27.616 2.674,10.988 4.03,23.643 4.03,37.612 0,22.021 -5.354,46.297 -15.911,72.155 -8.788,21.52 -19.212,39.359 -25.44,50.018 l -0.416,0.712 c -0.794,1.36 -0.717,3.06 0.197,4.342 l 3.283,4.603 c 0.751,1.052 1.964,1.677 3.257,1.677 l 91.923,0 c 1.988,0 3.674,-1.46 3.959,-3.428 l 8.392,-58.031 c 0.166,-1.147 -0.175,-2.313 -0.936,-3.189 -0.76,-0.878 -1.862,-1.382 -3.023,-1.382 l -10.216,0 c -1.611,0 -3.064,0.966 -3.688,2.45 -3.762,8.958 -6.614,13.492 -9.842,15.649 -3.081,2.059 -7.149,2.421 -14.558,2.421 l -19.256,0 c 10.409,-8.448 22.111,-18.599 31.947,-31.103 6.544,-8.32 11.629,-16.954 15.112,-25.663 4.054,-10.133 6.108,-20.76 6.108,-31.585 0,-15.938 -3.008,-30.927 -8.938,-44.549 -5.799,-13.318 -14.252,-25.029 -25.125,-34.809 -10.83,-9.742 -23.774,-17.308 -38.474,-22.488 -14.97,-5.275 -31.429,-7.951 -48.92,-7.951 l 0,0 z m -118.187002,111.213 c 0,-64.045 49.244001,-107.213 118.187002,-107.213 69.307,0 117.458,43.168 117.458,105.797 l 0,0 0,0 c 0,45.646 -37.572,73.952 -60.553,92.351 l 4,0 0,0 2.41,0 0,0 24.23,0 c 15.321,0 20.063,-1.414 28.088,-20.521 l 10.216,0 0,0 0,0 -8.392,58.03 -91.922,0 -3.283,-4.603 0,0 0,0 c 12.402,-21.231 42.313,-71.829 42.313,-124.903 0,-57.323 -22.25,-91.999 -64.929,-91.999 -42.315,0 -64.564001,35.385 -64.564001,95.536 -0.002,0.292 -0.003,0.584 -0.003,0.877 -0.035,49.569 27.808001,96.569 41.586001,120.137 l 0,0 0,0 -2.917,4.955 -93.382001,0 -6.201001,-58.029 0,0 0,0 10.212001,0 c 7.660999,19.106 12.404999,20.521 29.545999,20.521 l 20.159,0 0,0 3.202001,0 0,0 4,0 c -20.793001,-13.446 -59.461001,-43.876 -59.461001,-90.936 l 0,0 0,0 z"/>
+    <path fill="#ef3b39" d="m 216.634,-2 c -2.431,0 -6.061,0.811 -9.55,4.678 0,0 0.001,-10e-4 0.002,-10e-4 -12.968,14.276 -41.592,38.801 -52.015,43.395 l -0.067,0.029 -0.066,0.032 c -4.885,2.37 -9.878,5.65 -9.878,12.002 0,2.827 1.132,5.242 3.185,6.801 1.667,1.265 3.807,1.906 6.361,1.906 l 15.028,0 -0.316,40.34 0,0.015 0,0.016 c 0,6.482 -0.182,16.369 -0.356,25.93 -0.173,9.441 -0.336,18.357 -0.336,24.156 0,8.939 4.283,17.845 11.75,24.43 3.834,3.38 8.338,6.031 13.389,7.878 5.359,1.96 11.189,2.954 17.326,2.954 19.707,0 37.266,-4.894 50.775,-14.149 l 0.046,-0.032 0.046,-0.032 c 3.351,-2.438 4.382,-6.308 2.564,-9.492 l -2.351,-4.887 -0.024,-0.054 -0.027,-0.052 c -1.671,-3.229 -3.932,-3.908 -5.533,-3.908 -1.076,0 -2.141,0.321 -3.168,0.952 -4.635,2.506 -9.133,3.484 -15.994,3.484 -3.84,0 -7.019,-1.641 -9.449,-4.874 -1.67,-2.224 -2.989,-5.201 -3.924,-8.852 -1.118,-4.365 -1.684,-9.711 -1.684,-15.889 l 0,-26.556 c 0,-14.072 0,-28.579 0.517,-41.378 l 36.72,0 c 1.664,0 5.678,-0.555 6.991,-5.7 l 0.009,-0.028 0.007,-0.029 3.387,-14.113 c 0.671,-1.711 0.509,-3.624 -0.467,-5.223 -1.175,-1.926 -3.331,-3.076 -5.768,-3.076 l -39.854,0 1.225,-31.475 0.003,-0.078 0,-0.078 C 225.138,1.718 221.641,-2 216.634,-2 l 0,0 z M 149.06,58.135 c 0,-3.361 2.078,-5.712 7.624,-8.403 11.438,-5.04 40.544,-30.252 53.366,-44.37 2.426,-2.69 4.852,-3.362 6.584,-3.362 3.117,0 4.504,2.354 4.504,5.042 l 0,0 0,0 -1.387,35.631 4,0 0,0 0.003,0 0,0 40.009,0 c 1.64,0 2.633,1.046 2.639,2.148 0.002,0.294 -0.066,0.593 -0.212,0.876 l -3.47,14.455 c -0.344,1.346 -1.038,2.69 -3.116,2.69 l -40.543,0 c -0.683,13.567 -0.693,29.414 -0.693,44.653 0,0.242 0,0.483 0,0.725 l 0,26.556 c 0,27.563 10.742,33.615 19.057,33.615 7.279,0 12.479,-1.008 18.021,-4.033 0.38,-0.246 0.76,-0.403 1.141,-0.403 0.659,0 1.319,0.468 1.98,1.746 l 2.424,5.041 c 0.292,0.474 0.42,0.946 0.422,1.404 0.006,1.17 -0.812,2.241 -1.809,2.966 -5.892,4.037 -21.483,13.449 -48.514,13.449 -23.564,0 -38.465,-15.799 -38.465,-31.262 l 0,0 0,0 c 0,-11.767 0.692,-37.313 0.692,-50.086 l 0.316,-40.371 0,0 0,0 0,0 0.031,-4 -19.06,0 c -3.118,0 -5.544,-1.344 -5.544,-4.707 l 0,0 0,0 z"/>
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555555"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0605c"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1760" height="1300" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="880" y="50" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">OmegaT — Architecture Overview — ΩᵗAO</text>
+  <text x="880" y="78" text-anchor="middle" font-size="14" fill="#666666">Components, event flow and editor internals · src/main/java/org/omegat · July 2026</text>
+
+  <!-- legend -->
+  <line x1="1500" y1="44" x2="1544" y2="44" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="1552" y="48" font-size="11.5" fill="#444444">call / composition</text>
+  <line x1="1500" y1="68" x2="1544" y2="68" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="1552" y="72" font-size="11.5" fill="#444444">event flow (async, on the EDT)</text>
+
+  <!-- Main -->
+  <rect x="800" y="104" width="160" height="46" rx="8" fill="#ffffff" stroke="#888888" stroke-width="1.4"/>
+  <text x="880" y="124" text-anchor="middle" font-size="15" font-weight="bold" fill="#222222">Main</text>
+  <text x="880" y="141" text-anchor="middle" font-size="11.5" fill="#666666">bootstrap (CLI / GUI)</text>
+  <line x1="880" y1="150" x2="880" y2="174" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Core hub -->
+  <rect x="240" y="178" width="1280" height="76" rx="10" fill="#fff3cd" stroke="#c9971a" stroke-width="1.6"/>
+  <text x="880" y="206" text-anchor="middle" font-size="17" font-weight="bold" fill="#222222">Core — static service hub</text>
+  <text x="880" y="232" text-anchor="middle" font-size="13" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#554400">Core.getProject() · Core.getEditor() · Core.getMainWindow() · Core.getMatcher() · Core.getSpellChecker() · Core.registerMarker(…)</text>
+
+  <!-- arrows Core -> components -->
+  <line x1="300" y1="254" x2="300" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="880" y1="254" x2="880" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="1460" y1="254" x2="1460" y2="294" stroke="#555555" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ============ column A: project ============ -->
+  <rect x="40" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="300" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IProject — RealProject · NotLoadedProject</text>
+  <text x="300" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.core.data</text>
+  <line x1="300" y1="360" x2="300" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="40" y="372" width="520" height="290" rx="8" fill="#f0f7f0" stroke="#6a9a6a" stroke-width="1.3"/>
+  <text x="60" y="398" font-size="13.5" font-weight="bold" fill="#2c522c">Data model &amp; project I/O</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="60" y="428">SourceTextEntry — one source segment</text>
+    <text x="60" y="454">TMXEntry — a stored translation</text>
+    <text x="60" y="480">ProjectTMX — project memory (project_save.tmx)</text>
+    <text x="60" y="506">ProjectProperties — omegat.project settings</text>
+    <text x="60" y="532">team2/ — team project sync via Git / SVN</text>
+    <text x="60" y="558">core.threads — SaveThread (autosave)</text>
+  </g>
+
+  <!-- ============ column B: editor ============ -->
+  <rect x="620" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="880" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IEditor — EditorController</text>
+  <text x="880" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.gui.editor</text>
+  <line x1="880" y1="360" x2="880" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="620" y="372" width="520" height="290" rx="8" fill="#eef3fb" stroke="#5b7fb8" stroke-width="1.3"/>
+  <text x="640" y="398" font-size="13.5" font-weight="bold" fill="#2a4470">Editor internals</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="640" y="428">SegmentBuilder — renders one segment</text>
+    <text x="640" y="454">MarkerController — runs the IMarker pipeline</text>
+    <text x="640" y="480">mark/ — IMarker impls (Identical…, ComesFromMT…)</text>
+    <text x="640" y="506">EditorSettings — view options (marks, colours)</text>
+    <text x="640" y="558">filter/ — editor document filtering</text>
+  </g>
+
+  <!-- ============ column C: main window ============ -->
+  <rect x="1200" y="296" width="520" height="64" rx="8" fill="#dfeefb" stroke="#4a7ba6" stroke-width="1.5"/>
+  <text x="1460" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1d3f5e">IMainWindow — MainWindow</text>
+  <text x="1460" y="344" text-anchor="middle" font-size="12" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#44607a">org.omegat.gui.main</text>
+  <line x1="1460" y1="360" x2="1460" y2="372" stroke="#555555" stroke-width="1.4"/>
+
+  <rect x="1200" y="372" width="520" height="128" rx="8" fill="#eef3fb" stroke="#5b7fb8" stroke-width="1.3"/>
+  <text x="1220" y="398" font-size="13.5" font-weight="bold" fill="#2a4470">Menus &amp; frame</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="1220" y="428">BaseMainWindowMenu — menu construction</text>
+    <text x="1220" y="454">MainWindowMenuHandler — menu actions</text>
+    <text x="1220" y="480">docking framework — hosts the panes below</text>
+  </g>
+
+  <rect x="1200" y="514" width="520" height="148" rx="8" fill="#e6f6f4" stroke="#3f9187" stroke-width="1.3"/>
+  <text x="1220" y="540" font-size="13.5" font-weight="bold" fill="#1e5b53">Preferences — org.omegat.gui.preferences</text>
+  <g font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#333333">
+    <text x="1220" y="570">PreferencesWindowController — dialog shell</text>
+    <text x="1220" y="596">view/*Controller extend BasePreferencesController</text>
+    <text x="1220" y="622">e.g. CustomColorSelection·, Appearance·, Editing·</text>
+  </g>
+
+  <!-- fires arrows into the bus -->
+  <line x1="300" y1="662" x2="300" y2="704" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="312" y="690" font-size="11.5" fill="#a34844">fires project events</text>
+  <line x1="880" y1="662" x2="880" y2="704" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="892" y="690" font-size="11.5" fill="#a34844">fires entry events</text>
+
+  <!-- ============ event bus ============ -->
+  <rect x="40" y="706" width="1680" height="84" rx="10" fill="#fdeaea" stroke="#c0605c" stroke-width="1.6"/>
+  <text x="880" y="736" text-anchor="middle" font-size="16" font-weight="bold" fill="#7a2e2b">CoreEvents — application event bus (delivered on the EDT via SwingUtilities.invokeLater)</text>
+  <text x="880" y="764" text-anchor="middle" font-size="12.5" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" fill="#5c3331">fireProjectChange(LOAD·SAVE·COMPILE·CLOSE) · fireEntryActivated · fireFontChanged · fireApplicationStartup/Shutdown — IProjectEventListener · IEntryEventListener · …</text>
+
+  <!-- listen arrows to the panes -->
+  <line x1="500" y1="790" x2="500" y2="832" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="512" y="818" font-size="11.5" fill="#a34844">listen</text>
+  <line x1="1250" y1="790" x2="1250" y2="832" stroke="#c0605c" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrowRed)"/>
+  <text x="1262" y="818" font-size="11.5" fill="#a34844">listen</text>
+
+  <!-- ============ panes ============ -->
+  <rect x="40" y="834" width="1680" height="210" rx="10" fill="#f4effb" stroke="#7d5fa8" stroke-width="1.5"/>
+  <text x="60" y="862" font-size="14.5" font-weight="bold" fill="#4a3572">Dockable panes — event consumers (org.omegat.gui.*) · read the model via Core.getProject()</text>
+
+  <!-- pane boxes row 1 -->
+  <g>
+    <rect x="66" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="195" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Matches</text>
+    <text x="195" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">MatchesTextArea · VarExpansion</text>
+
+    <rect x="336" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="465" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Glossary</text>
+    <text x="465" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">GlossaryTextArea</text>
+
+    <rect x="606" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="735" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Dictionaries</text>
+    <text x="735" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">DictionariesTextArea</text>
+
+    <rect x="876" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1005" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Machine Translation</text>
+    <text x="1005" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.exttrans</text>
+
+    <rect x="1146" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1275" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Notes · Comments</text>
+    <text x="1275" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.notes · gui.comments</text>
+
+    <rect x="1416" y="876" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1545" y="900" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Multiple Translations</text>
+    <text x="1545" y="922" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.multtrans</text>
+  </g>
+
+  <!-- pane boxes row 2 -->
+  <g>
+    <rect x="66" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="195" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Segment Properties</text>
+    <text x="195" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.properties</text>
+
+    <rect x="336" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="465" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Project Files</text>
+    <text x="465" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">ProjectFilesListController</text>
+
+    <rect x="606" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="735" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Issues</text>
+    <text x="735" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.issues — provider registry</text>
+
+    <rect x="876" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1005" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Search</text>
+    <text x="1005" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.search — Search window</text>
+
+    <rect x="1146" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1275" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Scripting</text>
+    <text x="1275" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">ScriptingWindow · ScriptsMonitor</text>
+
+    <rect x="1416" y="948" width="258" height="64" rx="6" fill="#ffffff" stroke="#9a83bd" stroke-width="1"/>
+    <text x="1545" y="972" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">Statistics</text>
+    <text x="1545" y="994" text-anchor="middle" font-size="11.5" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#555555">gui.stat</text>
+  </g>
+
+  <!-- ============ cross-cutting ============ -->
+  <g>
+    <rect x="40" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="60" y="1106" font-size="14" font-weight="bold" fill="#333333">File filters</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="60" y="1134">filters2 / filters3 / filters4</text>
+      <text x="60" y="1158">IFilter implementations, one per format</text>
+      <text x="60" y="1182">(plugin-like registry)</text>
+    </g>
+
+    <rect x="465" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="485" y="1106" font-size="14" font-weight="bold" fill="#333333">Segmentation &amp; matching</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="485" y="1134">core.segmentation — SRX · Segmenter</text>
+      <text x="485" y="1158">core.matching — NearString,</text>
+      <text x="485" y="1182">fuzzy scoring (tokens, Levenshtein)</text>
+    </g>
+
+    <rect x="890" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="910" y="1106" font-size="14" font-weight="bold" fill="#333333">MT · spellcheck · modules</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="910" y="1134">core.machinetranslators · core.spellchecker</text>
+      <text x="910" y="1158">Gradle submodules: machinetranslators/,</text>
+      <text x="910" y="1182">spellchecker/, language-modules/, theme/, …</text>
+    </g>
+
+    <rect x="1315" y="1078" width="405" height="140" rx="8" fill="#f2f2f2" stroke="#8a8a8a" stroke-width="1.2"/>
+    <text x="1335" y="1106" font-size="14" font-weight="bold" fill="#333333">Utilities</text>
+    <g font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#444444">
+      <text x="1335" y="1134">util — Preferences · OStrings · Log</text>
+      <text x="1335" y="1158">util.gui — Styles.EditorColor,</text>
+      <text x="1335" y="1182">UIDesignManager</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="40" y="1266" font-size="11.5" fill="#888888">Snapshot of master, end of July 2026, not automatically updated. Companion docs: src/docs/developer/21.OmegaTInternals.md · 22.CoreEvents.md · 23.CoreMethods.md · 36.SourceTree.md</text>
+  <circle cx="30" cy="1284.2" r="5.6" fill="none" stroke="#5f6b71" stroke-width="1.1"/>
+  <path d="M 27.2,1282.5 A 3.3 3.3 0 1 1 27.2,1285.9" fill="none" stroke="#5f6b71" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="42" y="1288" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5f6b71">2026  -  OmegaT - Computer Assisted Translation (CAT) tool  -  This file is part of OmegaT, released under the GNU General Public License v3 or later</text>
+  <text x="42" y="1303" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#5f6b71">OmegaT is distributed WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE - see the GNU General Public License for more details.</text>
+</svg>

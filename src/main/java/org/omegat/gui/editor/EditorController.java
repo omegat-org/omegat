@@ -1229,6 +1229,22 @@ public class EditorController implements IEditor {
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
+
+        // When the entry translation is linked with xENFORCED and the user
+        // does not set it as an alternate translation, reverting the enforced
+        // default translation is not allowed. Only warn when the user actually
+        // changed the translation or note; a mere deactivation - navigating
+        // away, or the view refresh after a preferences/colour change - must
+        // leave the enforced segment untouched and stay silent instead of
+        // raising the warning (twice, via gotoFile and gotoEntry).
+        if (isEnforced && !isNewAltTrans) {
+            deactivateWithoutCommit();
+            if (translationChanged || noteChanged) {
+                mw.displayWarningRB("EC_WARNING_REVERT_ENFORCED_SEGMENT");
+            }
+            return;
+        }
+
         resetOrigin();
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {

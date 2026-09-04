@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/icu4j-*.jar'])
+                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
         implementation providedModuleLib('language-ja')
     } else {
         compileOnly(libs.commons.io)
@@ -15,11 +15,15 @@ dependencies {
         implementation(libs.languagetool.ja) {
             exclude module: 'languagetool-core'
             exclude module: 'lucene-analysis-kuromoji'
+            // Leftover runtime dependency of stock LanguageTool's gosen-based
+            // tokenizer; the omt build tokenizes through kuromoji and no class
+            // on the module classpath references com.ibm.icu. Excluding it
+            // keeps the application-wide icu4j the only copy in the
+            // distribution (the module jar filter matches by file name, so a
+            // version skew would bundle an unreachable duplicate).
+            exclude group: 'com.ibm.icu', module: 'icu4j'
         }
-        compileOnly(libs.icu4j)
     }
-    testImplementation(libs.languagetool.core)
-
     testImplementation(libs.junit4)
     testRuntimeOnly(libs.slf4j.jdk14)
     testImplementation(project.rootProject)
@@ -27,8 +31,13 @@ dependencies {
     testImplementation(libs.languagetool.core) {
         exclude module: 'language-all'
     }
-    testImplementation(libs.languagetool.ja)
+    testImplementation(libs.languagetool.ja) {
+        exclude group: 'com.ibm.icu', module: 'icu4j'
+    }
     testImplementation(libs.lucene.analyzers.kuromoji)
+    // Pins the catalog version the application ships; the compatibility test
+    // proves it covers the NFKC surface the excluded transitive copy served.
+    testImplementation(libs.icu4j)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

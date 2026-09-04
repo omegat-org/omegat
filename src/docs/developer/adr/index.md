@@ -19,6 +19,7 @@
 ### Search and Sorting
 
 - 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)
+- 2026008 [Segment Sorting in the Editor](2026008.EditorSegmentSorting.md)
 
 ### Filters
 

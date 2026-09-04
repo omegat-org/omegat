@@ -55,6 +55,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         super(url);
     }
 
+    /** Instantiated reflectively by MachineTranslatorsManager. */
     public MyMemoryMachineTranslate() {
     }
 

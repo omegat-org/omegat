@@ -41,6 +41,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
@@ -121,22 +122,22 @@ public class FindMatches {
     private final int maxCount;
 
     /** Result list. */
-    private List<NearString> result;
+    private @Nullable List<NearString> result;
 
     private final boolean searchExactlyTheSame;
-    private String srcText;
+    private @Nullable String srcText;
 
     /**
      * Text that was removed by the removePattern from the source text.
      */
-    private String removedText;
+    private @Nullable String removedText;
 
     /** Tokens for original string, with and without stems. */
-    private Token[] strTokensStem;
-    private Token[] strTokensNoStem;
+    private Token@Nullable [] strTokensStem;
+    private Token@Nullable [] strTokensNoStem;
 
     /** Tokens for original string, includes numbers and tags. */
-    private Token[] strTokensAll;
+    private Token@Nullable [] strTokensAll;
 
     private final int fuzzyMatchThreshold;
 
@@ -429,7 +430,7 @@ public class FindMatches {
      * @param tmxName
      *            tmx name
      */
-    public void processEntry(EntryKey key, ITMXEntry entry, String tmxName,
+    public void processEntry(@Nullable EntryKey key, ITMXEntry entry, String tmxName,
                               NearString.MATCH_SOURCE comesFrom, boolean fuzzy, int penalty) {
         // remove part that is to be removed prior to tokenize
         String realSource = entry.getSourceText();

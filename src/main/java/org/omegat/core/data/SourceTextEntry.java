@@ -54,10 +54,10 @@ public class SourceTextEntry {
      * String properties from source file. Contents are alternating
      * key (even index), value (odd index) strings. Should be of even length.
      */
-    private final String[] props;
+    private final String@Nullable [] props;
 
     /** Translation from source files. */
-    private final String sourceTranslation;
+    private final @Nullable String sourceTranslation;
 
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
@@ -107,7 +107,7 @@ public class SourceTextEntry {
      * @param sourceTranslation
      *            translation from source file
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
+    public SourceTextEntry(EntryKey key, int entryNum, String@Nullable [] props, @Nullable String sourceTranslation,
                            List<ProtectedPart> protectedParts, boolean paragraphStart) {
         this.key = key;
         this.entryNum = entryNum;
@@ -130,7 +130,7 @@ public class SourceTextEntry {
         this.firstInstance = null;
     }
 
-    public SourceTextEntry(EntryKey key, int entryNum, @Nullable String[] props, @Nullable String sourceTranslation,
+    public SourceTextEntry(EntryKey key, int entryNum, @Nullable String@Nullable [] props, @Nullable String sourceTranslation,
                            List<ProtectedPart> protectedParts) {
         this(key,  entryNum, props, sourceTranslation, protectedParts, true);
     }
@@ -150,7 +150,7 @@ public class SourceTextEntry {
     /**
      * Returns comment of entry if exist in source document.
      */
-    public String getComment() {
+    public @Nullable String getComment() {
         if (SegmentProperties.isEmpty(props)) {
             return null;
         }
@@ -195,7 +195,7 @@ public class SourceTextEntry {
         }
     }
 
-    public String getSourceTranslation() {
+    public @Nullable String getSourceTranslation() {
         return sourceTranslation;
     }
 

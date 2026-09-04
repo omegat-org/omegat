@@ -57,7 +57,7 @@ public final class RebaseAndCommit {
      * Load BASE and HEAD from remote repository into temp storage for future
      * rebase.
      */
-    public static PreparedFileInfo prepare(RemoteRepositoryProvider provider, File projectDir, String path)
+    public static @Nullable PreparedFileInfo prepare(RemoteRepositoryProvider provider, File projectDir, String path)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
             throw new RuntimeException("Path is not under mapping: " + path);
@@ -99,7 +99,7 @@ public final class RebaseAndCommit {
         return new PreparedFileInfo(r);
     }
 
-    public static PreparedFileInfo rebaseAndCommit(PreparedFileInfo prep, RemoteRepositoryProvider provider,
+    public static @Nullable PreparedFileInfo rebaseAndCommit(@Nullable PreparedFileInfo prep, RemoteRepositoryProvider provider,
                                                    File projectDir, String path, IRebaseOperation rebaser)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
@@ -240,7 +240,7 @@ public final class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static String commitPrepared(PreparedFileInfo prep, RemoteRepositoryProvider provider,
+    public static @Nullable String commitPrepared(PreparedFileInfo prep, RemoteRepositoryProvider provider,
             @Nullable String possibleHeadVersion) throws Exception {
         if (!prep.needToCommit()) {
             // there was no changes
@@ -372,10 +372,11 @@ public final class RebaseAndCommit {
      */
     public static class Prepared {
         public String path;
-        public File fileBase, fileHead;
-        public String versionBase, versionHead;
+        public @Nullable File fileBase, fileHead;
+        public @Nullable String versionBase;
+        public @Nullable String versionHead;
         public boolean needToCommit;
-        public String commitComment;
-        public String charset;
+        public @Nullable String commitComment;
+        public @Nullable String charset;
     }
 }

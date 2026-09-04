@@ -32,6 +32,7 @@ import java.util.regex.PatternSyntaxException;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.segmentation.LanguageCodes;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
@@ -53,7 +54,7 @@ public class MappingRulesModel extends AbstractTableModel {
         this.srx = srx;
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public @Nullable Object getValueAt(int rowIndex, int columnIndex) {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
         switch (columnIndex) {
         case 0:

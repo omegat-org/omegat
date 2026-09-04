@@ -29,6 +29,7 @@ package org.omegat.core.spellchecker;
 import java.util.Collections;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Token;
 
 /**
@@ -68,21 +69,21 @@ public class SpellCheckerDummy implements ISpellCheckerProvider, ISpellChecker {
     }
 
     @Override
-    public void ignoreWord(final String word) {
+    public void ignoreWord(String word) {
     }
 
     @Override
-    public List<Token> getMisspelledTokens(final String text) {
+    public List<Token> getMisspelledTokens(String text) {
         return Collections.emptyList();
     }
 
     @Override
-    public boolean isIgnoredWord(final String word) {
+    public boolean isIgnoredWord(String word) {
         return false;
     }
 
     @Override
-    public boolean isLearnedWord(final String word) {
+    public boolean isLearnedWord(String word) {
         return false;
     }
 }

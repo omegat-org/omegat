@@ -31,6 +31,7 @@ package org.omegat.core.spellchecker;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Token;
 
 /**
@@ -74,7 +75,7 @@ public interface ISpellChecker {
     /**
      * Get a list of misspelled tokens from the given text.
      */
-    List<Token> getMisspelledTokens(String text);
+    List<Token> getMisspelledTokens(@Nullable String text);
 
     /**
      * Determine if the given word is on the ignored list.

@@ -26,6 +26,8 @@
 package org.omegat.core.data;
 
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Common interface for any object storing a pair source / translation text
  *
@@ -36,11 +38,13 @@ public interface ITranslationEntry {
     /**
      * Gets the source text
      */
+    @Nullable
     String getSourceText();
 
     /**
      * Gets translation text
      */
+    @Nullable
     String getTranslationText();
 
     /**

@@ -32,6 +32,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -46,7 +47,7 @@ public final class TeamSettings {
 
     private static final Object LOCK = new Object();
 
-    private static File configFile;
+    private static @Nullable File configFile;
 
     private static File getConfigFile() {
         synchronized (LOCK) {
@@ -95,7 +96,7 @@ public final class TeamSettings {
     /**
      * Update setting.
      */
-    public static void set(String key, String newValue) {
+    public static void set(String key, @Nullable String newValue) {
         synchronized (LOCK) {
             try {
                 Properties p = new Properties();

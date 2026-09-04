@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.statistics.dso.StatsResult;
@@ -60,7 +61,7 @@ import org.omegat.util.OConsts;
 public class CalcStandardStatistics implements ICalcStatistics {
 
     protected final IStatsConsumer callback;
-    protected CancellationToken cancellationToken;
+    protected @Nullable CancellationToken cancellationToken;
     final IProject project;
 
     public CalcStandardStatistics(IProject project, IStatsConsumer callback) {

@@ -25,6 +25,7 @@
 
 package org.omegat.core.data;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.StringUtil;
 
 /*
@@ -68,7 +69,7 @@ public class StringEntry {
      * equal to the source, than the empty string is set as a translation to
      * indicate that there's no translation.
      */
-    public void setTranslation(String trans) {
+    public void setTranslation(@Nullable String trans) {
         if (trans == null) {
             trans = "";
         }

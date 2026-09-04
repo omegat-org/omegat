@@ -286,10 +286,10 @@ public class SRX {
     public static final String CURRENT_VERSION = OT160RC9_VERSION;
 
     /** Version of OmegaT segmentation support. */
-    private String version;
+    private @Nullable String version;
 
     /** Returns segmentation support version. */
-    public String getVersion() {
+    public @Nullable String getVersion() {
         return version;
     }
 
@@ -312,7 +312,7 @@ public class SRX {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }

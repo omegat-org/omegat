@@ -486,7 +486,7 @@ public final class EncodingSniffer {
      * @throws IOException
      *             if an IO error occurs
      */
-    public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
+    public static @Nullable Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
         if (!startsWithXmlDeclaration(bytes)) {
             return null;
@@ -513,7 +513,7 @@ public final class EncodingSniffer {
                 && XML_DECLARATION_PREFIX[5] == bytes[5];
     }
 
-    private static Charset extractEncodingFromDeclaration(final String declaration) {
+    private static @Nullable Charset extractEncodingFromDeclaration(final String declaration) {
         int encodingStart = declaration.indexOf(ENCODING_ATTRIBUTE);
         if (encodingStart == -1) {
             return null;
@@ -560,7 +560,7 @@ public final class EncodingSniffer {
      * @throws IOException
      *             if an IO error occurs
      */
-    public static Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
+    public static @Nullable Charset sniffEncodingFromCssDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_CSS_CONTENT_SNIFFED);
         if (bytes.length < CSS_CHARSET_DECLARATION_PREFIX.length) {
             return null;
@@ -594,7 +594,7 @@ public final class EncodingSniffer {
      * @return {@code Charset} if the specified charset name is supported on
      *         this platform
      */
-    public static Charset toCharset(final String charsetName) {
+    public static @Nullable Charset toCharset(final String charsetName) {
         try {
             return Charset.forName(charsetName);
         } catch (final IllegalCharsetNameException | UnsupportedCharsetException e) {

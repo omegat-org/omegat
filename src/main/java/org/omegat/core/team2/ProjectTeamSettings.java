@@ -31,6 +31,7 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Class for read/save project-specific settings.
@@ -47,7 +48,7 @@ public class ProjectTeamSettings {
     /**
      * Get setting.
      */
-    public synchronized String get(String key) {
+    public synchronized @Nullable String get(String key) {
         try {
             Properties p = new Properties();
             if (configFile.exists()) {
@@ -64,7 +65,7 @@ public class ProjectTeamSettings {
     /**
      * Update setting.
      */
-    public synchronized void set(String key, String newValue) {
+    public synchronized void set(String key, @Nullable String newValue) {
         try {
             Properties p = new Properties();
             File f = configFile;

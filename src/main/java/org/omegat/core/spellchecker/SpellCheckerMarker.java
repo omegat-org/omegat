@@ -48,13 +48,10 @@ public class SpellCheckerMarker implements IMarker {
 
     @Override
     public @Nullable List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
-            String translationText, boolean isActive) throws Exception {
-        if (translationText == null) {
-            // translation is not displayed
-            return null;
-        }
-        if (!Core.getEditor().getSettings().isAutoSpellChecking()) {
-            // spell checker disabled
+            @Nullable String translationText, boolean isActive) throws Exception {
+        // translation is not displayed when translationText is null,
+        // or spell checker is disabled, then early return with null.
+        if (translationText == null || !Core.getEditor().getSettings().isAutoSpellChecking()) {
             return null;
         }
         // created per call so that color preference changes take effect

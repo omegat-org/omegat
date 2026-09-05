@@ -94,6 +94,12 @@ class OmegatModulePlugin implements Plugin<Project> {
         def coreRuntimeClasspath = project.rootProject.configurations.named("runtimeClasspath")
         def moduleRuntimeClasspath = project.configurations.named("runtimeClasspath")
 
+        ['compileClasspath', 'runtimeClasspath', 'testCompileClasspath', 'testRuntimeClasspath'].each { alignedName ->
+            project.configurations.matching { it.name == alignedName }.configureEach { conf ->
+                DependencyAlignment.alignToApplication(project.rootProject, conf)
+            }
+        }
+
         project.afterEvaluate {
             def plainEntries = []
             def signingTasks = []
@@ -219,17 +225,19 @@ class OmegatModulePlugin implements Plugin<Project> {
         attributes['Implementation-Title'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
         attributes['Plugin-Name'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
 
-        def moduleVersion = getPropertyOrDefault(project, 'org.omegat.module.version', project.version.toString())
+        // Modules ship with the application, so they carry the root project's
+        // version unless they declare their own.
+        def moduleVersion = getPropertyOrDefault(project, 'org.omegat.module.version',
+                project.rootProject.version.toString())
         attributes['Implementation-Version'] = moduleVersion
         attributes['Plugin-Version'] = moduleVersion
         attributes['Implementation-Vendor'] = getPropertyOrDefault(project, 'org.omegat.vendor', 'OmegaT')
         attributes['Built-By'] = System.getProperty('user.name')
-        attributes['Built-Date'] = new Date().toString()
         attributes['Built-JDK'] = System.getProperty('java.version')
         attributes['Created-By'] = "Gradle ${project.gradle.gradleVersion}".toString()
 
         attributes['OmegaT-Plugins'] = project.property('org.omegat.module.class').toString()
-        attributes['Plugin-Version'] =  project.version.toString()
+        attributes['Plugin-Bundled'] = 'true'
         attributes['Plugin-Category'] = getPropertyOrDefault(project, 'org.omegat.module.category', 'miscellaneous')
         attributes['Plugin-License'] = getPropertyOrDefault(project, 'org.omegat.module.license', 'GNU Public License version 3 or later')
 

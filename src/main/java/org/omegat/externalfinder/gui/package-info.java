@@ -24,6 +24,6 @@
  */
 
 @NullMarked
-package org.omegat.filters2.text.ilias;
+package org.omegat.externalfinder.gui;
 
 import org.jspecify.annotations.NullMarked;

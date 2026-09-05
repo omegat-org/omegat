@@ -63,6 +63,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -71,6 +72,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
 
@@ -81,6 +83,10 @@ public class EditorControllerTest extends TestCore {
 
     private final Language sourceLang = new Language("en");
     private final Language targetLang = new Language("pl");
+
+    /** Orders displayed segments by descending project entry number. */
+    private static final IEditorSorter REVERSE_BY_ENTRYNUM = () ->
+            Comparator.comparingInt((SegmentBuilder sb) -> sb.segmentNumberInProject).reversed();
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -121,6 +127,29 @@ public class EditorControllerTest extends TestCore {
         Core.setProject(new RealProjectWithTMX(props));
     }
 
+    private void setMultiEntryProject() {
+        TestProjectProperties props = new TestProjectProperties();
+        props.setProjectRoot(projectRootDir.getAbsolutePath());
+        props.setSupportDefaultTranslations(false);
+        props.setTargetTokenizer(DefaultTokenizer.class);
+        TestCoreInitializer.initNotes(new MyNotes());
+        Core.setProject(new RealProjectMultiEntry(props));
+    }
+
+    /**
+     * Assert that {@link EditorController#m_docSegList} holds exactly the given
+     * project entry numbers, in the given order.
+     */
+    private void assertSegmentOrder(int... expectedEntryNums) {
+        SegmentBuilder[] segments = editorController.m_docSegList;
+        assertNotNull(segments);
+        assertEquals(expectedEntryNums.length, segments.length);
+        for (int i = 0; i < expectedEntryNums.length; i++) {
+            assertEquals("segment at display index " + i, expectedEntryNums[i],
+                    segments[i].segmentNumberInProject);
+        }
+    }
+
     @Test
     public void testEditorControllerDefaults() {
         assertNotNull(editorController);
@@ -158,6 +187,75 @@ public class EditorControllerTest extends TestCore {
         fireCaretEvent(editorController.editor, 0);
         assertEquals(31, editorController.editor.getOmDocument().getTranslationEnd());
         assertEquals(31, editorController.editor.getOmDocument().getTranslationStart());
+    }
+
+    @Test
+    public void testGetSortDefaultsToNull() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+        assertNull(editorController.getSort());
+        // No sorter => natural file order.
+        assertSegmentOrder(1, 2, 3, 4);
+    }
+
+    @Test
+    public void testSetSortReordersSegmentsAndKeepsCurrentEntry() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+        int current = editorController.getCurrentEntryNumber();
+
+        editorController.setSort(REVERSE_BY_ENTRYNUM);
+
+        assertSame(REVERSE_BY_ENTRYNUM, editorController.getSort());
+        assertSegmentOrder(4, 3, 2, 1);
+        // Sorting repositions the current entry, it never removes it.
+        assertEquals(current, editorController.getCurrentEntryNumber());
+    }
+
+    @Test
+    public void testRemoveSortRevertsToNaturalOrder() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+        editorController.setSort(REVERSE_BY_ENTRYNUM);
+        assertSegmentOrder(4, 3, 2, 1);
+
+        editorController.removeSort();
+
+        assertNull(editorController.getSort());
+        assertSegmentOrder(1, 2, 3, 4);
+    }
+
+    @Test
+    public void testGotoEntryLocatesByEntryNumberUnderSort() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+        editorController.setSort(REVERSE_BY_ENTRYNUM);
+
+        // Entry 2 sits at display index 2 in the reversed order [4, 3, 2, 1];
+        // gotoEntry must find it by entry number, not by position.
+        editorController.gotoEntry(2);
+
+        assertEquals(2, editorController.getCurrentEntryNumber());
+        assertEquals(2, editorController.displayedEntryIndex);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetSortRejectsNull() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+        // Clearing the sort is done via removeSort(); null is a programming error.
+        editorController.setSort(null);
+    }
+
+    @Test
+    public void testRemoveSortWithoutActiveSortIsNoop() {
+        setMultiEntryProject();
+        fireLoadProjectEvent();
+
+        editorController.removeSort();
+
+        assertNull(editorController.getSort());
+        assertSegmentOrder(1, 2, 3, 4);
     }
 
     private void fireLoadProjectEvent() {
@@ -306,6 +404,64 @@ public class EditorControllerTest extends TestCore {
             ste.add(files.get(0).entries.get(0));
             ste.add(files.get(1).entries.get(0));
             return ste;
+        }
+
+        @Override
+        public boolean isProjectLoaded() {
+            return true;
+        }
+    }
+
+    /**
+     * Project with a single source file holding four entries, used to exercise
+     * within-file display ordering. Source texts are chosen so that alphabetical
+     * order is the reverse of natural entry order.
+     */
+    protected static class RealProjectMultiEntry extends RealProject {
+
+        private static final String SOURCE_FILE = "multi.txt";
+
+        private final List<FileInfo> files;
+
+        public RealProjectMultiEntry(ProjectProperties props) {
+            super(props);
+            files = new ArrayList<>();
+            FileInfo file = new FileInfo(SOURCE_FILE);
+            file.entries.add(entry("delta", 1));
+            file.entries.add(entry("charlie", 2));
+            file.entries.add(entry("bravo", 3));
+            file.entries.add(entry("alpha", 4));
+            files.add(file);
+        }
+
+        private static SourceTextEntry entry(String source, int entryNum) {
+            return new SourceTextEntry(new EntryKey(SOURCE_FILE, source, null, "", "", null),
+                    entryNum, null, null, Collections.emptyList());
+        }
+
+        @Override
+        public ITokenizer getSourceTokenizer() {
+            return new LuceneEnglishTokenizer();
+        }
+
+        @Override
+        public ITokenizer getTargetTokenizer() {
+            return new DefaultTokenizer();
+        }
+
+        @Override
+        public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
+            return Collections.emptyMap();
+        }
+
+        @Override
+        public List<FileInfo> getProjectFiles() {
+            return files;
+        }
+
+        @Override
+        public List<SourceTextEntry> getAllEntries() {
+            return new ArrayList<>(files.get(0).entries);
         }
 
         @Override

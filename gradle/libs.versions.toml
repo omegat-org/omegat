@@ -154,7 +154,7 @@ wiremock = {group = "org.wiremock", name = "wiremock", version.ref = "wiremock"}
 omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vldocking"}
 xmlunit-core = {group = "org.xmlunit", name = "xmlunit-core", version.ref = "xmlunit"}
 xmlunit-assertj = {group = "org.xmlunit", name = "xmlunit-assertj3", version.ref = "xmlunit"}
-assertj = {group = "org.assertj", name = "assertj-core", version.ref= "assertj"}
+assertj-core = {group = "org.assertj", name = "assertj-core", version.ref= "assertj"}
 evolvedbinary-appbundler = {group = "com.evolvedbinary.appbundler", name = "appbundler", version.ref = "appbundler"}
 madlonkay-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
 jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
@@ -198,4 +198,4 @@ caffeine = ["caffeine", "caffeine-jcache"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh", "jgit-gpg-signer"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
-xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
+xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj-core"]

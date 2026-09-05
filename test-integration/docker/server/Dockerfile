@@ -23,7 +23,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #  **************************************************************************/
 #
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 RUN apt-get -y update && apt-get -y upgrade \
     && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion libapache2-mod-svn \
     && adduser --system --group --shell /bin/bash git && (echo 'git:gitpass' | chpasswd) \

@@ -5,6 +5,7 @@
 
  Copyright (C) 2020 Briac Pilpre
                2021-2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -244,6 +245,7 @@ public final class PluginInformation {
         private static final String PLUGIN_CATEGORY = "Plugin-Category";
         private static final String PLUGIN_LINK = "Plugin-Link";
         private static final String PLUGIN_TYPE = "OmegaT-Plugin";
+        private static final String OMEGAT_PLUGINS = "OmegaT-Plugins";
         private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
         private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
         private static final String IMPLEMENTATION_VERSION = "Implementation-Version";
@@ -275,7 +277,7 @@ public final class PluginInformation {
          *            Plugin status, bundled or installed
          * @return PluginInformation object.
          */
-        public static PluginInformation fromManifest(final String className, final Manifest manifest,
+        public static PluginInformation fromManifest(final @Nullable String className, final Manifest manifest,
                 @Nullable URL mu, final Status defaultStatus) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
             String packageName = className == null ? ""
@@ -304,7 +306,7 @@ public final class PluginInformation {
             // create the object.
             PluginInformation result = new PluginInformation();
             result.className = className;
-            result.name = findName(className, targetAttrs);
+            result.name = findName(className, manifest, targetAttrs);
             result.version = findVersion(targetAttrs);
             result.author = findAuthor(targetAttrs);
             result.description = lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION);
@@ -360,12 +362,38 @@ public final class PluginInformation {
             return PluginUtils.PluginType.MISCELLANEOUS;
         }
 
-        private static String findName(String className, Attributes attrs) {
+        private static String findName(@Nullable String className, Manifest manifest, Attributes attrs) {
             String name = lookupAttribute(attrs, PLUGIN_NAME, BUNDLE_NAME, IMPLEMENTATION_TITLE);
-            if (name != null) {
+            if (name == null) {
+                return findName(className);
+            }
+            if (className == null) {
                 return name;
             }
-            return findName(className);
+            // A name from the plugin's own class section is authoritative.
+            Attributes classAttrs = manifest.getEntries().get(className);
+            if (classAttrs != null) {
+                String classSectionName = lookupAttribute(classAttrs, PLUGIN_NAME, BUNDLE_NAME,
+                        IMPLEMENTATION_TITLE);
+                if (classSectionName != null) {
+                    return classSectionName;
+                }
+            }
+            // A name shared by several plugins - inherited from a package
+            // section or from the main attributes of a jar declaring more
+            // than one plugin - gets the class appended so that every
+            // plugin list row stays distinguishable.
+            String mainName = lookupAttribute(manifest.getMainAttributes(), PLUGIN_NAME, BUNDLE_NAME,
+                    IMPLEMENTATION_TITLE);
+            if (!name.equals(mainName) || declaresSeveralPlugins(manifest)) {
+                return name + ": " + findName(className);
+            }
+            return name;
+        }
+
+        private static boolean declaresSeveralPlugins(Manifest manifest) {
+            String classes = manifest.getMainAttributes().getValue(OMEGAT_PLUGINS);
+            return classes != null && classes.trim().split("\\s+").length > 1;
         }
 
         private static String findName(String className) {

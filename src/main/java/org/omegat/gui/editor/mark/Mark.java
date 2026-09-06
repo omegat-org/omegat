@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -24,6 +25,8 @@
  **************************************************************************/
 
 package org.omegat.gui.editor.mark;
+
+import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -55,6 +58,13 @@ public class Mark {
      * over Mark.
      */
     public @Nullable String toolTipText;
+    /**
+     * Lazy variant of toolTipText, resolved when the mouse rests on the
+     * Mark. An expensive lookup, e.g. for spelling suggestions, then runs
+     * once per hover instead of on every marker pass. When set, it wins
+     * over toolTipText; a null or empty result shows no tooltip.
+     */
+    public @Nullable Supplier<String> toolTipSupplier;
     /**
      * Text attributes for specific Mark. Will be added to text by
      * Document.setCharacterAttributes() without replacement. Colors must be

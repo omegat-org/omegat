@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2025 Hiroshi Miura
+ *  Copyright (C) 2025-2026 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -26,6 +26,8 @@ package org.omegat.util;
 
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 import static org.junit.Assert.assertEquals;
@@ -89,5 +91,12 @@ public class EncodingDetectorTest {
 
         String windows1252File = "src/test/resources/data/util/file-HTMLUtils-windows-1252.html";
         assertEquals(Charset.defaultCharset().name(), detectHtmlEncoding(windows1252File, null).name());
+    }
+
+    @Test
+    public void testDetectorWithShortPolish() throws IOException {
+        File shortPolishFile = new File("src/test/resources/data/util/file-EncodingDetector-short-polish.txt");
+        String encoding = EncodingDetector.detectEncoding(shortPolishFile);
+        assertEquals("UTF-8", encoding);
     }
 }

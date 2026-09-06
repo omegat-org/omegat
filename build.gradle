@@ -330,6 +330,25 @@ test {
         // Distribution smoke tests need an installed distribution; they only
         // run on explicit request via the distributionSmokeTest task.
         excludeCategories 'org.omegat.core.DistributionSmokeTests'
+        // Render benchmarks print paint durations for a human and gate
+        // nothing; they only run on explicit request via renderBenchmark.
+        excludeCategories 'org.omegat.core.RenderBenchmarkTests'
+    }
+}
+
+tasks.register('renderBenchmark', Test) {
+    group = 'verification'
+    description = 'Measures editor and metadata gutter paint durations and prints them.'
+    // some test case depends on modules from subproject
+    dependsOn configurations.moduleDist
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    workingDir = projectDir
+    testLogging.showStandardStreams = true
+    systemProperty 'java.util.logging.config.file',
+            layout.settingsDirectory.file('config/test/logger.properties').asFile
+    useJUnit {
+        includeCategories 'org.omegat.core.RenderBenchmarkTests'
     }
 }
 

@@ -44,6 +44,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
+import javax.swing.text.StyleConstants;
 
 import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
@@ -498,19 +499,86 @@ public class SegmentBuilder {
      *            is text right-to-left?
      */
     private void setAlignment(int begin, int end, boolean isRTL) {
-        boolean rtl = false;
+        doc.setAlignment(begin, end, effectiveRtl(isRTL));
+    }
+
+    /** The display direction of a part under the current orientation mode. */
+    private boolean effectiveRtl(boolean isRTL) {
         switch (controller.currentOrientation) {
         case ALL_LTR:
-            rtl = false;
-            break;
+            return false;
         case ALL_RTL:
-            rtl = true;
-            break;
-        case DIFFER:
-            rtl = isRTL;
-            break;
+            return true;
+        default:
+            return isRTL;
         }
+    }
+
+    /**
+     * Set attributes of a source or translation text part: the direction
+     * default first, then the user-chosen alignment of its layout row on
+     * top.
+     */
+    private void setTextAlignment(int begin, int end, boolean isRTL, boolean isSource) {
+        boolean rtl = effectiveRtl(isRTL);
         doc.setAlignment(begin, end, rtl);
+        int user = userAlignmentValue(rtl, isSource);
+        if (user >= 0) {
+            doc.setAlignmentValue(begin, end, user);
+        }
+    }
+
+    /** The chosen alignment of the part's layout row, -1 for the default. */
+    private static int userAlignmentValue(boolean rtl, boolean isSource) {
+        if (!Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER)) {
+            // The customize toggle is the master switch: off means the pure
+            // default rendering, whatever the stored layout says.
+            return -1;
+        }
+        SegmentMetadataGutter.Column column = isSource
+                ? SegmentMetadataGutter.Column.SOURCE_TEXT
+                : SegmentMetadataGutter.Column.TARGET_TEXT;
+        switch (column.getAlignment()) {
+        case CENTER:
+            return StyleConstants.ALIGN_CENTER;
+        case TRAILING:
+            return rtl ? StyleConstants.ALIGN_LEFT : StyleConstants.ALIGN_RIGHT;
+        default:
+            // LEADING is the direction default
+            return -1;
+        }
+    }
+
+    /**
+     * Re-applies the alignment attributes of the existing text parts, so a
+     * changed user alignment needs no rebuilt document. Quiet: the caller
+     * runs this over all segments and closes the batch with the one
+     * document-wide change event, else the per-part events pile up.
+     */
+    void reapplyTextAlignment() {
+        if (!hasBeenCreated()) {
+            return;
+        }
+        if (posSourceBeg != null) {
+            reapplyPartAlignment(posSourceBeg.getOffset(),
+                    posSourceBeg.getOffset() + posSourceLength, controller.sourceLangIsRTL, true);
+        }
+        if (posTranslationBeg != null) {
+            reapplyPartAlignment(posTranslationBeg.getOffset(),
+                    posTranslationBeg.getOffset() + posTranslationLength,
+                    controller.targetLangIsRTL, false);
+        }
+        if (active && doc.activeTranslationBeginM1 != null && doc.activeTranslationEndP1 != null) {
+            reapplyPartAlignment(doc.activeTranslationBeginM1.getOffset() + 1,
+                    doc.activeTranslationEndP1.getOffset() - 1, controller.targetLangIsRTL, false);
+        }
+    }
+
+    private void reapplyPartAlignment(int begin, int end, boolean isRTL, boolean isSource) {
+        boolean rtl = effectiveRtl(isRTL);
+        int user = userAlignmentValue(rtl, isSource);
+        doc.applyAlignmentValue(begin, end, user >= 0 ? user
+                : rtl ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
     }
 
     /**
@@ -535,7 +603,7 @@ public class SegmentBuilder {
         String result = insertTextWithTags(text, isSource);
         insertDirectionEndEmbedding();
         insert("\n", null);
-        setAlignment(prevOffset, offset, rtl);
+        setTextAlignment(prevOffset, offset, rtl, isSource);
         return result;
     }
 
@@ -645,7 +713,7 @@ public class SegmentBuilder {
 
         insert("\n", null);
 
-        setAlignment(prevOffset, offset, rtl);
+        setTextAlignment(prevOffset, offset, rtl, false);
         return result;
     }
 

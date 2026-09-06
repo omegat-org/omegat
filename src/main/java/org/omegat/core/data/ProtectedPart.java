@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -72,6 +73,26 @@ public class ProtectedPart {
      * Replacement for match calculation.
      */
     protected @Nullable String replacementMatchCalculation;
+
+    /**
+     * Spans of every occurrence of the given protected parts in text, as
+     * (start, end) pairs. Protected part texts are assumed to match the
+     * text character-wise, as everywhere else in OmegaT.
+     */
+    public static List<int[]> occurrencesIn(String text, ProtectedPart[] parts) {
+        List<int[]> occurrences = new ArrayList<>();
+        for (ProtectedPart pp : parts) {
+            String ppText = pp.getTextInSourceSegment();
+            if (ppText == null || ppText.isEmpty()) {
+                continue;
+            }
+            int pos = -1;
+            while ((pos = text.indexOf(ppText, pos + 1)) >= 0) {
+                occurrences.add(new int[] { pos, pos + ppText.length() });
+            }
+        }
+        return occurrences;
+    }
 
     public String getTextInSourceSegment() {
         return textInSourceSegment;

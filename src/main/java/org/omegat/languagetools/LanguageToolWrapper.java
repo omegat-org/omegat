@@ -6,6 +6,7 @@
  Copyright (C) 2010-2013 Alex Buloichik
                2015 Aaron Madlon-Kay
                2016 Lev Abashkin
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -34,8 +35,11 @@ import java.util.stream.Collectors;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.jetbrains.annotations.Nullable;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.editor.UnderlineFactory;
@@ -109,6 +113,41 @@ public final class LanguageToolWrapper {
         return bridge;
     }
 
+    /**
+     * Drop matches that lie entirely inside an occurrence of one of the
+     * entry's protected parts in the translation text. Rules routinely
+     * misread placeholder syntax (for example a currency rule firing on the
+     * "3$" inside the placeholder "%3$@"), and protected parts are not
+     * prose the translator can fix. Matches reaching beyond a single
+     * occurrence are kept on purpose, even ones spanning two adjacent
+     * placeholders: they may point at a real problem around them. Protected
+     * part texts are assumed to match the checked text character-wise, as
+     * everywhere else in OmegaT.
+     *
+     * @param matches
+     *            check results whose offsets refer to translationText
+     * @param ste
+     *            source entry providing the protected parts; may be null
+     *            (e.g. when the marker is invoked without an entry, as in
+     *            tests), in which case nothing is filtered
+     * @param translationText
+     *            the text that was checked
+     * @return the matches without those inside protected parts
+     */
+    static List<LanguageToolResult> filterProtectedParts(List<LanguageToolResult> matches,
+            @Nullable SourceTextEntry ste, String translationText) {
+        if (matches.isEmpty() || ste == null || ste.getProtectedParts().length == 0) {
+            return matches;
+        }
+        List<int[]> occurrences = ProtectedPart.occurrencesIn(translationText, ste.getProtectedParts());
+        if (occurrences.isEmpty()) {
+            return matches;
+        }
+        return matches.stream()
+                .filter(m -> occurrences.stream().noneMatch(o -> m.start >= o[0] && m.end <= o[1]))
+                .collect(Collectors.toList());
+    }
+
     static class LanguageToolMarker implements IMarker {
         static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
                 Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
@@ -142,7 +181,9 @@ public final class LanguageToolWrapper {
                 sourceText = ste.getSrcText();
             }
 
-            return bridge.getCheckResults(sourceText, translationText).stream().map(match -> {
+            List<LanguageToolResult> results = filterProtectedParts(
+                    bridge.getCheckResults(sourceText, translationText), ste, translationText);
+            return results.stream().map(match -> {
                 Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start, match.end);
                 m.toolTipText = match.message;
                 m.painter = PAINTER;

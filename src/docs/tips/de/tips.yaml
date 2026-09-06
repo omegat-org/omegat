@@ -82,3 +82,7 @@ tips:
   name: "MT-4tw-3"
 - file: "machine_translation_4tw_3.html"
   name: "MT-4tw-4"
+- file: "sort_bar_reorder.html"
+  name: "Segmente mit der Sortierleiste umsortieren"
+- file: "sort_bar_numeric.html"
+  name: "Segmente nach Zahlenwert sortieren"

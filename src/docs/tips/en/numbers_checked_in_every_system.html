@@ -26,25 +26,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Let fuzzy matching understand numbers</title>
+    <title>Numbers are checked in every numeral system</title>
     <link rel="stylesheet" type="text/css" href="../tips.css">
 </head><body>
-<h3 class="title">Let fuzzy matching understand numbers</h3>
-<p>Manuals, price lists and reports repeat the same sentence with different
-numbers: "Tighten to 12&nbsp;Nm" and "Tighten to 8&nbsp;Nm" &mdash; and
-number-only segments (a date, an amount) normally find no fuzzy match at
-all.</p>
-<p><b>Consider numbers in matches</b> in the project properties makes
-the Fuzzy Matches pane compare numbers by value:</p>
-<ul>
-<li>Number-only segments (dates, quantities, prices) match each other, with a
-small penalty.</li>
-<li>Equal value counts as equal across writing systems: XIV,
-&#21313;&#22235;, &#1633;&#1636; and the full-width &#65297;&#65300; all
-equal 14.</li>
-<li>A tooltip shows how each score was computed and warns when the match's
-numbers differ from your segment's &mdash; no wrong number slips in
-unnoticed.</li>
-</ul>
-<p>Stored in the project, so the whole team benefits.</p>
+<h3 class="title">Numbers are checked in every numeral system</h3>
+<p>OmegaT compares source and translation numbers by value, whatever numeral
+system they are written in, and reports changed or missing values in the
+<b>Issues</b> window.</p>
+<p><b>Check numerals by value</b> in <b>Project &gt; Properties</b> turns the
+check off per project.</p>
 </body></html>

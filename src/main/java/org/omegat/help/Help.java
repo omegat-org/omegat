@@ -32,7 +32,6 @@ package org.omegat.help;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -40,7 +39,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -50,7 +48,6 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.VersionChecker;
 import org.omegat.util.gui.DesktopWrapper;
 
 /**
@@ -95,12 +92,6 @@ public final class Help {
         URI uri = getHelpZipFileURI(lang);
         if (uri == null) {
             uri = getHelpFileURI(lang, OConsts.HELP_HOME);
-            if (uri != null) {
-                String version = getDocVersion(lang);
-                if (version == null || VersionChecker.compareMinorVersions(OStrings.VERSION, version) < 0) {
-                    uri = URI.create(ONLINE_HELP_URL);
-                }
-            }
         }
         if (uri == null) {
             uri = URI.create(ONLINE_HELP_URL);
@@ -223,30 +214,5 @@ public final class Help {
             return locale;
         }
         return language;
-    }
-
-    /**
-     * Returns the version of (a translation of) the user manual. If there is no
-     * translation for the specified locale, null is returned.
-     */
-    private static @Nullable String getDocVersion(String locale) {
-        // Load the property file containing the doc version
-        Properties prop = new Properties();
-        URI u = getHelpFileURI(locale, "version_" + locale + ".properties");
-        if (u == null) {
-            u = getHelpFileURI(locale, "version.properties");
-        }
-        if (u == null) {
-            return null;
-        }
-        try (InputStream in = u.toURL().openStream()) {
-            prop.load(in);
-        } catch (IOException ex) {
-            return null;
-        }
-
-        // Get the doc version and return it
-        // (null if the version entry is not present)
-        return prop.getProperty("version");
     }
 }

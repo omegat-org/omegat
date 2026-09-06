@@ -1191,10 +1191,8 @@ public class EditorController implements IEditor {
         SourceTextEntry entry = sb.ste;
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
-        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED && oldTE.defaultTranslation;
-        boolean defaultTranslation = sb.isDefaultTranslation();
-        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
-        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
+        boolean isEnforced  = oldTE.linked == TMXEntry.ExternalLinked.xENFORCED && oldTE.defaultTranslation
+                && sb.isDefaultTranslation();
 
         PrepareTMXEntry newen;
         if (forceTranslation != null) { // there is force translation
@@ -1207,7 +1205,7 @@ public class EditorController implements IEditor {
                 newen.translation = "";
                 break;
             case EQUALS_TO_SOURCE:
-                newen.translation = newen.source;
+                newen.translation = sb.ste.getSrcText();
                 break;
             default:
                 throw new AssertionError();
@@ -1218,6 +1216,9 @@ public class EditorController implements IEditor {
         newen.source = sb.ste.getSrcText();
         newen.note = Core.getNotes().getNoteText();
 
+        boolean defaultTranslation = sb.isDefaultTranslation();
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
+        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
 
@@ -1228,7 +1229,7 @@ public class EditorController implements IEditor {
         // away, or the view refresh after a preferences/colour change - must
         // leave the enforced segment untouched and stay silent instead of
         // raising the warning (twice, via gotoFile and gotoEntry).
-        if (isEnforced && !isNewAltTrans) {
+        if (isEnforced) {
             deactivateWithoutCommit();
             if (translationChanged || noteChanged) {
                 mw.displayWarningRB("EC_WARNING_REVERT_ENFORCED_SEGMENT");

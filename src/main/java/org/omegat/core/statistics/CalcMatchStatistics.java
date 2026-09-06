@@ -8,6 +8,7 @@
                2013 Alex Buloichik
                2015 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,10 +42,14 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntPredicate;
 import java.util.logging.Logger;
@@ -95,6 +100,11 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
 
+    /**
+     * Row labels of the total table. Its final shape (all rows except index 1,
+     * plus the total row) is mirrored by the filter buttons of
+     * org.omegat.gui.stat.MatchStatisticsPanel.
+     */
     protected final String[] rowsTotal = new String[] { OStrings.getString("CT_STATSMATCH_RowRepetitions"),
             OStrings.getString("CT_STATSMATCH_RowExactMatch"), OStrings.getString("CT_STATSMATCH_RowMatch95"),
             OStrings.getString("CT_STATSMATCH_RowMatch85"), OStrings.getString("CT_STATSMATCH_RowMatch75"),
@@ -115,6 +125,17 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
 
     /** Already processed segments. Used for repetitions detect. */
     private final Set<String> alreadyProcessedInProject = new HashSet<>();
+
+    /**
+     * Category row index per entry number, following the row semantics of
+     * {@link MatchStatCounts}. Concurrent because the similarity pass may run
+     * on a parallel stream. Only recorded for total calculations that output
+     * data; the per-file mode reuses calcSimilarity but never delivers the map.
+     */
+    private final Map<Integer, Integer> entryRowIndexes = new ConcurrentHashMap<>();
+
+    /** Volatile because calcSimilarity may record from parallel stream workers. */
+    private volatile boolean recordEntryRows;
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
@@ -210,6 +231,8 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
     MatchStatCounts calcTotal(boolean outData) {
         MatchStatCounts result = new MatchStatCounts();
         alreadyProcessedInProject.clear();
+        entryRowIndexes.clear();
+        recordEntryRows = outData;
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<>();
 
@@ -222,10 +245,17 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
                 // segment has translation - should be calculated as "Exact
                 // matched"
                 result.addExact(count);
+                if (recordEntryRows) {
+                    entryRowIndexes.put(ste.entryNum(),
+                            MatchStatCounts.getRowByPercent(Statistics.PERCENT_EXACT_MATCH));
+                }
                 entryProcessed();
             } else if (!isFirst) {
                 // already processed - repetition
                 result.addRepetition(count);
+                if (recordEntryRows) {
+                    entryRowIndexes.put(ste.entryNum(), MatchStatCounts.ROW_REPETITIONS);
+                }
                 entryProcessed();
             } else {
                 // first time
@@ -241,11 +271,16 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         }
 
         calcSimilarity(untranslatedEntries).ifPresent(result::addCounts);
+        // calcSimilarity swallows cancellation to deliver partial results to
+        // the closing window, but a cancelled run must not be published as a
+        // complete result (entryRowIndexes would have gaps).
+        cancellationToken.throwIfCancelled();
 
         if (outData) {
             String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
+            callback.setEntryRowIndexes(Collections.unmodifiableMap(new HashMap<>(entryRowIndexes)));
             callback.setTable(header, table);
             String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
             writeStat(fn, outText);
@@ -288,7 +323,11 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         try {
             result = stream.collect(MatchStatCounts::new, (counts, ste) -> {
                 cancellationToken.throwIfCancelled();
-                counts.addForPercents(calcMaxSimilarity(ste), new StatCount(ste));
+                int maxSimilarity = calcMaxSimilarity(ste);
+                counts.addForPercents(maxSimilarity, new StatCount(ste));
+                if (recordEntryRows) {
+                    entryRowIndexes.put(ste.entryNum(), MatchStatCounts.getRowByPercent(maxSimilarity));
+                }
                 entryProcessed();
             }, MatchStatCounts::addCounts);
         } catch (StoppedException | LongProcessInterruptedException ignored) {

@@ -182,6 +182,11 @@
             <para>Displays the match statistics for the project, which consist of 
                the number of repetitions, exact matches, fuzzy matches and no-matches 
                for segments, words and characters.</para>
+            <para>Every category row has a
+               <guibutton>Filter</guibutton> button that restricts the editor to
+               the segments of that category. The window is not modal, and the
+               last result is kept for the session, with its date and time,
+               until you use <guibutton>Recalculate</guibutton>.</para>
             <para>The data is saved in the 
                <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"></link> file located in the 
                <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"></link> folder of the

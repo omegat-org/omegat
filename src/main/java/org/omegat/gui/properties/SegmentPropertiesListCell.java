@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
@@ -65,6 +66,8 @@ public class SegmentPropertiesListCell extends javax.swing.JPanel {
         value.setBorder(ISegmentPropertiesView.MARGIN_BORDER);
         JTextPaneLinkifier.linkify(value);
         settingsButton.setBackground(highlightColor);
+        settingsButton.getAccessibleContext()
+                .setAccessibleName(OStrings.getString("DOCKING_HINT_SETTINGS"));
         settingsButton.setIcon(ISegmentPropertiesView.SETTINGS_ICON_INVISIBLE);
         settingsButton.setRolloverIcon(ISegmentPropertiesView.SETTINGS_ICON);
         settingsButton.setPressedIcon(ISegmentPropertiesView.SETTINGS_ICON_PRESSED);

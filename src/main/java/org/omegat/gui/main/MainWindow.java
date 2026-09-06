@@ -68,6 +68,7 @@ import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.JTextComponent;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
@@ -439,7 +440,7 @@ public class MainWindow implements IMainWindow {
     }
 
     @Override
-    public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
+    public void displayErrorRB(@Nullable Throwable ex, String errorKey, Object@Nullable... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
             if (params != null) {

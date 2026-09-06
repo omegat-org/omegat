@@ -12,6 +12,7 @@
 - 2025012 [Plugin Security Architecture and ClassLoader Isolation](2025012.PluginSecurityArchitecture.md)
 - 2025013 [Machine Translation SPI with multi-level context](2025013.MultiLevelContextSupportForMT.md)
 - 2026002 [Preferences Architecture and Testable Store Injection](2026002.PreferencesArchitecture.md)
+- 2026003 [Filter Class Registry Migration to CoreState](2026003.FilterClassRegistryInCoreState.md)
 - 2026004 [EditorColor Registry Consistency](2026004.EditorColorRegistryConsistency.md)
 
 ## Core features

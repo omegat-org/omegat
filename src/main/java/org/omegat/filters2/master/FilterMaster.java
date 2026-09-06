@@ -43,7 +43,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -107,23 +106,39 @@ public class FilterMaster {
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
      * RC12).
      */
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String INITIAL_VERSION = "";
     /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String OT160RC12A_VERSION = "1.6 RC12a";
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String OT160FINAL_VERSION = "1.6.0";
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String OT161_VERSION = "1.6.1";
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String OT170_VERSION = "1.7.0";
     /** Currently file filters support version. */
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static final String CURRENT_VERSION = "2.0";
 
     /** Filters config stored in XML file. */
     private final Filters config;
 
-    /** Classes of all filters. */
-    static List<Class<?>> filtersClasses = Collections.emptyList();
-
+    /**
+     * Registers the filter classes available to OmegaT.
+     *
+     * @param classes
+     *            list of filter classes
+     * @deprecated The filter class registry is now application state managed by
+     *             {@link org.omegat.core.data.CoreState}. Use
+     *             {@link Core#setFilterClasses(java.util.List)} instead. Retained
+     *             temporarily for backward compatibility with plugins; delegates to
+     *             {@code Core.setFilterClasses(...)} and is scheduled for removal in
+     *             a future version.
+     */
+    @Deprecated(since = "6.2.0", forRemoval = true)
     public static void setFilterClasses(List<Class<?>> classes) {
-        filtersClasses = new ArrayList<>(classes);
+        Core.setFilterClasses(classes);
     }
 
     static {
@@ -161,7 +176,7 @@ public class FilterMaster {
      */
     private static boolean addNewFiltersToConfig(final Filters conf) {
         boolean result = false;
-        for (Class<?> fclass : filtersClasses) {
+        for (Class<?> fclass : Core.getFilterClasses()) {
             boolean found = false;
             for (Filter fc : conf.getFilters()) {
                 if (fclass.getName().equals(fc.getClassName())) {
@@ -190,7 +205,7 @@ public class FilterMaster {
      * @return filter instance
      */
     public static @Nullable IFilter getFilterInstance(final String classname) {
-        for (Class<?> f : filtersClasses) {
+        for (Class<?> f : Core.getFilterClasses()) {
             if (f.getName().equals(classname)) {
                 try {
                     return (IFilter) f.getDeclaredConstructor().newInstance();

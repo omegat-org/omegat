@@ -2,13 +2,13 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = omegatModule.providedCoreLibsDir
+
 dependencies {
-    compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/jspecify-*.jar', '**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation providedModuleLib('language-ru')
-        runtimeOnly providedModuleLib('openregex')
+    compileOnly(project(':'))
+    if (file(providedCoreLibsDir).directory) {
+        compileOnly omegatModule.providedCoreLib('jspecify', 'languagetool-core', 'commons-io')
+        implementation omegatModule.providedModuleLib('language-ru', 'openregex')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.jspecify)
@@ -19,8 +19,8 @@ dependencies {
         compileOnly(libs.morfologik.stemming)
     }
     testImplementation(libs.junit4)
-    testImplementation(libs.assertj)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.assertj.core)
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
     testImplementation(libs.languagetool.core)
     testImplementation project(":spellchecker:morfologik")

@@ -101,6 +101,7 @@ CACHED_CONFIGS=$(find /gradle-cache -name ".deps-*" | wc -l)
 echo "Gradle cache size: $CACHE_SIZE, cached configurations: $CACHED_CONFIGS"
 
 exec /opt/gradle/bin/gradle testIntegration --scan \
+   --stacktrace -Dscan.uploadInBackground=false /
    -Djava.util.logging.config.file=/workdir/test-integration/logger.properties \
    -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
    -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

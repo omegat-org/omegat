@@ -2,7 +2,7 @@
  OmegaT 6.2.0
 ----------------------------------------------------------------------
   17 Enhancement
-   1 Bug fixes
+   3 Bug fixes
    0 Localisation updates
 ----------------------------------------------------------------------
 6.2.0 vs 6.1.0
@@ -64,6 +64,12 @@ Bug fixes:
 
   - NPE when closing a search window without any search/replace action
     https://sourceforge.net/p/omegat/bugs/1327/
+
+  - Java Exception while trying to access MyMemory (machine)
+    https://sourceforge.net/p/omegat/bugs/1319/
+
+  - Enforced translations lose background color
+    https://sourceforge.net/p/omegat/bugs/1171/
 
 ----------------------------------------------------------------------
  OmegaT 6.1.0 (2026-08-02)

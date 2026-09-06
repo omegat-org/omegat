@@ -22,6 +22,12 @@ sourceSets {
     }
 }
 
+def testExecJavaLauncher = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(
+            (findProperty('org.omegat.test.runtimeJavaVersion') ?: '25') as int
+    )
+}
+
 configurations {
     testIntegrationImplementation.extendsFrom implementation
     testAcceptanceImplementation.extendsFrom testImplementation
@@ -100,10 +106,7 @@ tasks.register('runDebugger', JavaExec) {
 
 tasks.register('testIntegration', JavaExec) {
     description = 'Runs integration tests. Pass repo URL as -Domegat.test.repo=<repo>.'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
+    javaLauncher = testExecJavaLauncher
     group = 'verification'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath

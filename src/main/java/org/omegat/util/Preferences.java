@@ -367,6 +367,11 @@ public final class Preferences {
     public static final String MARK_NON_UNIQUE_SEGMENTS = "mark_non_unique_segments";
 
     /**
+     * mark segments whose translation is identical to the source
+     */
+    public static final String MARK_IDENTICAL_SEGMENTS = "mark_identical_segments";
+
+    /**
      * display modification info (author and modification date)
      */
     public static final String DISPLAY_MODIFICATION_INFO = "display_modification_info";

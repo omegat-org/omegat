@@ -100,7 +100,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         return List.of(MATCHES_VARIABLES);
     }
 
-    public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_SOURCE_TEXT + "\n"
+    public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_DIFF + "\n"
             + VAR_TARGET_TEXT + "\n" + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/"
             + VAR_SCORE_ADJUSTED + "%" + " " + VAR_MATCH_SOURCE + " " + VAR_FILE_PATH + ">";
 

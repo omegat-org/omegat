@@ -21,6 +21,10 @@
 - 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)
 - 2026008 [Segment Sorting in the Editor](2026008.EditorSegmentSorting.md)
 
+### Numbers and Numerals
+
+- 2026007 [Number-Only Segment Auto-Conversion](2026007.NumberOnlyAutofill.md)
+
 ### Filters
 
 - 2025009 [Yaml Filter Specification](2025009.YAMLFilterSpecification.md) 

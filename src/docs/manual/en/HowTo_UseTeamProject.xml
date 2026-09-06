@@ -116,10 +116,18 @@
          <term>Team project configuration</term>
          <listitem>
             <para>As in regular local projects, the configuration of the team
-               project is defined by the contents of the 
+               project is defined by the contents of the
                <filename>omegat.project</filename>
                file and the optional use of special files for project-specific
                filters or segmentation rules.</para>
+            <para>Project-specific file filter settings, segmentation rules
+               and tag definitions are negotiated with the team instead of
+               being silently
+               overwritten: after changing them in the project properties,
+               OmegaT offers to share the change, and when the local version
+               differs from the team version on opening the project, it asks
+               whether to share the local version, use the team version, or
+               keep the local version for the current session.</para>
             <para>The first time the project is downloaded, OmegaT retrieves the
                
                <filename>omegat.project</filename> file from the server. This file

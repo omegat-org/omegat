@@ -1104,6 +1104,10 @@
                   <literal>|</literal> to have OmegaT consider
                   		  the two tags: 
                   <userinput>(\d+)|(&lt;/?[^&gt;]+&gt;)</userinput>.</para>
+               <para>Individual projects can replace this expression and the 
+                  <option>Flagged text</option> expression with their own using the 
+                  <link linkend="dialogs.project.properties.tag.definitions" endterm="dialogs.project.properties.tag.definitions.title"></link>
+                  		  button in the project properties.</para>
                <para>See the 
                   <link linkend="app.regex" endterm="app.regex.title"></link>
                   		  appendix for details.</para>

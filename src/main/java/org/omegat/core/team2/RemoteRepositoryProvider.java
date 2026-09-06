@@ -28,14 +28,18 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -196,6 +200,123 @@ public class RemoteRepositoryProvider {
         return !getMappings(path).isEmpty();
     }
 
+    /**
+     * Whether every checked-out repository copy of the given project file is
+     * byte-identical to the file in the project directory, i.e. committing
+     * it would be a no-op. Only meaningful for files that are copied without
+     * EOL conversion, and after the repositories have been switched to a
+     * version.
+     */
+    public boolean isIdenticalInRepositories(String localPath) throws IOException {
+        File localFile = new File(projectRoot, localPath);
+        boolean found = false;
+        for (Mapping m : getMappings(localPath)) {
+            File repoFile = m.fileInRepository(localPath);
+            if (repoFile == null) {
+                continue;
+            }
+            if (!repoFile.exists() || !FileUtils.contentEquals(localFile, repoFile)) {
+                return false;
+            }
+            found = true;
+        }
+        return found;
+    }
+
+    /**
+     * Like {@link #isIdenticalInRepositories}, but treating CRLF and LF line
+     * endings as equal: repository checkouts may re-line-end text files (git
+     * autocrlf on Windows), and that must not disguise an unchanged file as
+     * a change, whose empty commit then reports like a rejected push.
+     */
+    public boolean isIdenticalInRepositoriesIgnoringEol(String localPath) throws IOException {
+        File localFile = new File(projectRoot, localPath);
+        boolean found = false;
+        for (Mapping m : getMappings(localPath)) {
+            File repoFile = m.fileInRepository(localPath);
+            if (repoFile == null) {
+                continue;
+            }
+            if (!repoFile.exists() || !contentEqualsIgnoringEol(localFile, repoFile)) {
+                return false;
+            }
+            found = true;
+        }
+        return found;
+    }
+
+    private static boolean contentEqualsIgnoringEol(File a, File b) throws IOException {
+        return normalizeEol(FileUtils.readFileToByteArray(a))
+                .equals(normalizeEol(FileUtils.readFileToByteArray(b)));
+    }
+
+    private static String normalizeEol(byte[] content) {
+        return new String(content, StandardCharsets.ISO_8859_1).replace("\r\n", "\n");
+    }
+
+    /**
+     * One resolver per repository carrying any of the given paths, mapping
+     * a project path to the file in that repository's checkout - null when
+     * the path is outside the repository's mappings. Lets callers read the
+     * team-side state of a group of files repository by repository,
+     * independent of the file formatting a byte comparison would need.
+     */
+    public List<Function<String, @Nullable File>> repositoryFileViews(List<String> paths) {
+        Map<String, List<Mapping>> byRepo = new TreeMap<>();
+        for (String path : paths) {
+            for (Mapping m : getMappings(path)) {
+                byRepo.computeIfAbsent(m.repoDefinition.getUrl(), k -> new ArrayList<>()).add(m);
+            }
+        }
+        List<Function<String, @Nullable File>> views = new ArrayList<>();
+        for (List<Mapping> mappings : byRepo.values()) {
+            views.add(path -> {
+                List<File> candidates = mappings.stream().map(m -> m.fileInRepository(path))
+                        .filter(Objects::nonNull).collect(Collectors.toList());
+                // several mappings may cover the path; an existing file
+                // beats the mere possibility of one
+                return candidates.stream().filter(File::exists).findFirst()
+                        .orElse(candidates.isEmpty() ? null : candidates.get(0));
+            });
+        }
+        return views;
+    }
+
+    /**
+     * Whether any checked-out repository copy of the given project file
+     * exists, i.e. the team carries the file even when the checkout does
+     * not.
+     */
+    public boolean existsInRepositories(String localPath) {
+        for (Mapping m : getMappings(localPath)) {
+            File repoFile = m.fileInRepository(localPath);
+            if (repoFile != null && repoFile.exists()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Stages the given project file for deletion in every repository that
+     * carries it, the counterpart of copyFilesFromProjectToRepos for a file
+     * that no longer exists in the checkout. The deletion becomes effective
+     * with the next commit of the affected repositories.
+     */
+    public void deleteFilesFromRepos(String localPath) throws Exception {
+        for (Mapping m : getMappings(localPath)) {
+            File repoFile = m.fileInRepository(localPath);
+            String repoRelative = m.pathInRepository(localPath);
+            if (repoFile != null && repoFile.exists() && repoRelative != null) {
+                m.repo.addForDeletion(repoRelative);
+                // Version control staged the deletion; make sure the
+                // checkout copy is gone even when it only unstaged the
+                // file.
+                FileUtils.deleteQuietly(repoFile);
+            }
+        }
+    }
+
     public void cleanPrepared() throws IOException {
         FileUtils.deleteDirectory(new File(projectRoot, REPO_PREPARE_SUBDIR));
     }
@@ -297,6 +418,34 @@ public class RemoteRepositoryProvider {
         for (IRemoteRepository2 repo : repos.values()) {
             repo.commit(null, commentText);
         }
+    }
+
+    /**
+     * Same as commitFiles, but reports whether every affected repository
+     * accepted the commit: a rejected push (for example non-fast-forward)
+     * makes IRemoteRepository2.commit return null instead of throwing.
+     */
+    public boolean commitFilesChecked(String path, String commentText) throws Exception {
+        return commitFilesChecked(Collections.singletonList(path), commentText);
+    }
+
+    /**
+     * Like {@link #commitFilesChecked(String, String)} for several paths at
+     * once: every affected repository commits a single time, covering all
+     * of its staged paths.
+     */
+    public boolean commitFilesChecked(List<String> paths, String commentText) throws Exception {
+        Map<String, IRemoteRepository2> repos = new TreeMap<>();
+        for (String path : paths) {
+            for (Mapping m : getMappings(path)) {
+                repos.put(m.repoDefinition.getUrl(), m.repo);
+            }
+        }
+        boolean accepted = true;
+        for (IRemoteRepository2 repo : repos.values()) {
+            accepted &= repo.commit(null, commentText) != null;
+        }
+        return accepted;
     }
 
     /**
@@ -509,6 +658,55 @@ public class RemoteRepositoryProvider {
          */
         public boolean matches() {
             return filterPrefix != null;
+        }
+
+        /**
+         * The file for the given project path inside this mapping's
+         * checked-out repository copy, or null when the path is outside the
+         * mapping.
+         */
+        @Nullable
+        File fileInRepository(String path) {
+            String p = withLeadingSlash(withoutTrailingSlash(path));
+            String local = withSlashes(repoMapping.getLocal());
+            String relative;
+            if (withTrailingSlash(p).equals(local)) {
+                // file mapping: the repository part is the file itself
+                relative = "";
+            } else if (p.startsWith(local)) {
+                relative = p.substring(local.length());
+            } else {
+                return null;
+            }
+            File base = new File(getRepositoryDir(repoDefinition),
+                    withoutLeadingSlash(repoMapping.getRepository()));
+            return new File(base, relative);
+        }
+
+        /**
+         * The repository-root-relative path for the given project path,
+         * following the same conventions as the addForCommit calls of
+         * copyFromProjectToRepo, or null when the path is outside the
+         * mapping.
+         */
+        @Nullable
+        String pathInRepository(String path) {
+            String p = withLeadingSlash(withoutTrailingSlash(path));
+            String local = withSlashes(repoMapping.getLocal());
+            String relative;
+            if (withTrailingSlash(p).equals(local)) {
+                // file mapping: the repository part is the file itself
+                return withoutSlashes(repoMapping.getRepository());
+            } else if (p.startsWith(local)) {
+                relative = p.substring(local.length());
+            } else {
+                return null;
+            }
+            String repoSubdir = withoutLeadingSlash(repoMapping.getRepository());
+            if (!repoSubdir.isEmpty()) {
+                repoSubdir = withTrailingSlash(repoSubdir);
+            }
+            return repoSubdir + withoutSlashes(relative);
         }
 
         public void copyFromRepoToProject(final String postfix) throws IOException {

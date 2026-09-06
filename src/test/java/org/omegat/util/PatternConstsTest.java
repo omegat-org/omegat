@@ -26,6 +26,7 @@
 package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -75,4 +76,37 @@ public class PatternConstsTest {
         assertEquals("Wrong country extracted", "abc", m.group(2));
     }
 
+    @Test
+    public void testProjectSpecificPatternsOverrideTheGlobals() throws Exception {
+        TestPreferencesInitializer.init();
+        try {
+            Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, "\\d+");
+            Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, "foo");
+            PatternConsts.clearProjectPatterns();
+            assertTrue(PatternConsts.getPlaceholderPattern().matcher("42").find());
+            assertEquals("foo", PatternConsts.getRemovePattern().pattern());
+            assertEquals("\\d+", PatternConsts.getCustomTagPattern().pattern());
+
+            PatternConsts.applyProjectPatterns("%[a-z]+", "bar");
+            assertFalse(PatternConsts.getPlaceholderPattern().matcher("42").find());
+            assertTrue(PatternConsts.getPlaceholderPattern().matcher("%s").find());
+            assertEquals("bar", PatternConsts.getRemovePattern().pattern());
+            assertEquals("%[a-z]+", PatternConsts.getCustomTagPattern().pattern());
+
+            // An empty expression is a real override that switches custom
+            // tags off; one that does not compile is refused and the global
+            // expression stays in force.
+            PatternConsts.applyProjectPatterns("", "[");
+            assertFalse(PatternConsts.getPlaceholderPattern().matcher("42").find());
+            assertNull(PatternConsts.getCustomTagPattern());
+            assertEquals("foo", PatternConsts.getRemovePattern().pattern());
+        } finally {
+            // Leave neither the project overrides nor the mutated global
+            // expressions behind for later tests in the same JVM. Writing ""
+            // would not restore the pristine state - the key would then
+            // exist - so the preferences store is re-initialized instead.
+            TestPreferencesInitializer.init();
+            PatternConsts.clearProjectPatterns();
+        }
+    }
 }

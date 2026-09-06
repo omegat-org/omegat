@@ -551,6 +551,12 @@
                <para>This file contains the project-specific external searches.</para>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="project.folder.omegat.tag.patterns">
+            <term xml:id="project.folder.omegat.tag.patterns.title">tag_patterns.xml</term>
+            <listitem>
+               <para>This file contains the project-specific tag definitions.</para>
+            </listitem>
+         </varlistentry>
          <varlistentry xml:id="project.folder.omegat.file.order">
             <term xml:id="project.folder.omegat.file.order.title">files_order.txt</term>
             <listitem>

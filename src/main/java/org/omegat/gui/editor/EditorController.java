@@ -16,6 +16,7 @@
                2016 Didier Briel
                2019 Thomas Cordonnier, Briac Pilpre
                2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -185,6 +186,8 @@ public class EditorController implements IEditor {
     /** Dockable pane for editor. */
     private DockablePanel pane;
     private JScrollPane scrollPane;
+
+    private SegmentMetadataGutter metadataGutter;
 
     private String title;
 
@@ -416,6 +419,11 @@ public class EditorController implements IEditor {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
         scrollPane.setName("EditorScrollPane");
+        metadataGutter = new SegmentMetadataGutter(this, editor);
+        updateMetadataGutter();
+        pane.setMenuProvider(new EditorPaneMenu(this::updateMetadataGutter,
+                metadataGutter::currentColumnWidth, metadataGutter::currentTotalWidth,
+                () -> editor.getFont().getSize()));
         pane.setLayout(new BorderLayout());
         pane.add(scrollPane, BorderLayout.CENTER);
 
@@ -426,6 +434,73 @@ public class EditorController implements IEditor {
             desktop.addDockableSelectionListener(e -> dockableSelected = pane == e.getSelectedDockable());
         }
     }
+
+    /**
+     * Shows or hides the segment metadata gutter according to the
+     * preferences. Called at startup and from the settings menu of the pane.
+     */
+    void updateMetadataGutter() {
+        boolean visible = Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER);
+        scrollPane.setRowHeaderView(visible ? metadataGutter : null);
+        // The alternating backgrounds lie under the text, so while they are
+        // on, the editor may not paint its opaque background over them.
+        editor.setOpaque(!(visible
+                && Preferences.isPreference(Preferences.EDITOR_METADATA_GUTTER_ZEBRA)));
+        // The editor holds a share of the decorations (grid lines and
+        // alternating backgrounds); a toggle has to erase them there too.
+        editor.repaint();
+        if (visible) {
+            // Reusing the row header viewport does not re-run the scroll pane
+            // synchronization, so align it with the current scroll position.
+            JViewport rowHeader = scrollPane.getRowHeader();
+            if (rowHeader != null) {
+                rowHeader.setViewPosition(
+                        new Point(0, scrollPane.getViewport().getViewPosition().y));
+            }
+            metadataGutter.revalidate();
+            metadataGutter.repaint();
+        }
+        // Only a changed gutter geometry reflows the text; a plain repaint
+        // toggle (grid, zebra) must not move the viewport.
+        int gutterWidth = visible ? metadataGutter.getPreferredSize().width : 0;
+        boolean geometryChanged = visible != lastGutterVisible
+                || gutterWidth != lastGutterWidth;
+        lastGutterVisible = visible;
+        lastGutterWidth = gutterWidth;
+        if (geometryChanged && Core.getProject().isProjectLoaded() && m_docSegList != null) {
+            // The changed gutter width reflows the text; keep the active
+            // segment centred. Runs after the pending revalidation.
+            SwingUtilities.invokeLater(() -> {
+                Rectangle rect = getSegmentBounds(displayedEntryIndex);
+                if (rect != null) {
+                    int viewportHeight = scrollPane.getViewport().getHeight();
+                    rect.y -= (viewportHeight - rect.height) / 2;
+                    rect.height = viewportHeight;
+                    editor.scrollRectToVisible(rect);
+                }
+            });
+        }
+    }
+
+    /**
+     * Tells the metadata gutter about changed marker highlights. Highlighter
+     * changes damage the editor text only; the gutter shows the same
+     * highlights in its COLOR column and repaints on its own schedule.
+     */
+    void metadataGutterMarksChanged() {
+        if (metadataGutter != null) {
+            metadataGutter.marksChanged();
+        }
+    }
+
+    /** Test/support hook: the metadata gutter of this editor. */
+    SegmentMetadataGutter getMetadataGutter() {
+        return metadataGutter;
+    }
+
+    /** The last applied gutter geometry, to skip needless recentering. */
+    private boolean lastGutterVisible;
+    private int lastGutterWidth;
 
     private final AdjustmentListener scrollListener = (AdjustmentEvent e) -> {
         if (m_docSegList == null) {

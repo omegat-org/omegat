@@ -275,6 +275,47 @@ public final class Preferences {
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
 
+    /** Editor Option: Show the segment metadata gutter left of the editor */
+    public static final String EDITOR_METADATA_GUTTER = "editor_metadata_gutter";
+    /** Editor Option: Show the segment number in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_NUMBER = "editor_metadata_gutter_number";
+    /** Editor Option: Show the translation status in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_STATUS = "editor_metadata_gutter_status";
+    /** Editor Option: Show the last author in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_AUTHOR = "editor_metadata_gutter_author";
+    /** Editor Option: Show the last change date in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_DATE = "editor_metadata_gutter_date";
+    /** Editor Option: Show the bound marker colours in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_COLOR = "editor_metadata_gutter_color";
+    /** Editor Option: Comma separated column order of the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_ORDER = "editor_metadata_gutter_order";
+    /** Editor Option: Show the segment identifier in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_ID = "editor_metadata_gutter_id";
+    /** Editor Option: Show the source text length in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_SOURCE_LENGTH = "editor_metadata_gutter_source_length";
+    /** Editor Option: Show the translation length in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_TARGET_LENGTH = "editor_metadata_gutter_target_length";
+    /** Editor Option: Show the comment length in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_COMMENT_LENGTH = "editor_metadata_gutter_comment_length";
+    /** Editor Option: Show the note length in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_NOTE_LENGTH = "editor_metadata_gutter_note_length";
+    /** Editor Option: Mark alternative translations in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_ALTERNATIVE = "editor_metadata_gutter_alternative";
+    /** Editor Option: Show guide lines in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_GRID = "editor_metadata_gutter_grid";
+    /** Editor Option: Alternating row background in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_ZEBRA = "editor_metadata_gutter_zebra";
+    /** Editor Option: Show the creation date in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_CREATION_DATE = "editor_metadata_gutter_creation_date";
+    /** Editor Option: Show the creation author in the metadata gutter */
+    public static final String EDITOR_METADATA_GUTTER_CREATION_AUTHOR = "editor_metadata_gutter_creation_author";
+    /** Editor Option: Regex filters and date formats of the gutter columns, one preference per column */
+    public static final String EDITOR_METADATA_GUTTER_ID_REGEX = "editor_metadata_gutter_id_regex";
+    public static final String EDITOR_METADATA_GUTTER_AUTHOR_REGEX = "editor_metadata_gutter_author_regex";
+    public static final String EDITOR_METADATA_GUTTER_CREATION_AUTHOR_REGEX = "editor_metadata_gutter_creation_author_regex";
+    public static final String EDITOR_METADATA_GUTTER_DATE_FORMAT = "editor_metadata_gutter_date_format";
+    public static final String EDITOR_METADATA_GUTTER_CREATION_DATE_FORMAT = "editor_metadata_gutter_creation_date_format";
+
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";
     public static final boolean DONT_CHECK_PRINTF_TAGS_DEFAULT = true;

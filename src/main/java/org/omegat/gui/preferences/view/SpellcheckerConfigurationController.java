@@ -156,7 +156,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         }
 
         DictionaryManager dicMan = new DictionaryManager(dir);
-        dicMan.getLocalDictionaryNameList().stream().sorted().forEach(languageListModel::addElement);
+        dicMan.getLocalDictionaryDisplayList().forEach(languageListModel::addElement);
     }
 
     protected Language getCurrentLanguage() {

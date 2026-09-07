@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
@@ -124,7 +125,7 @@ public final class Core {
     }
 
     /** Get main window instance. */
-    public static @Nullable IMainWindow getMainWindow() {
+    public static IMainWindow getMainWindow() {
         return CoreState.getInstance().getMainWindow();
     }
 
@@ -273,7 +274,7 @@ public final class Core {
         // window.
         coreState.setEditor(new EditorController(me));
         coreState.setTagValidation(new TagValidationTool());
-        coreState.setIssuesWindow(new IssuesPanelController(me.getApplicationFrame()));
+        coreState.setIssuesWindow(new IssuesPanelController(Objects.requireNonNull(me.getApplicationFrame())));
         coreState.setMatcher(new MatchesTextArea(me));
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         coreState.setGlossaries(glossaryArea);

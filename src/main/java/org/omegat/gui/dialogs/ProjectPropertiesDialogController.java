@@ -47,6 +47,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.externalfinder.ExternalFinder;
@@ -666,8 +667,8 @@ public class ProjectPropertiesDialogController {
         dialog.setVisible(false);
     }
 
-    public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-            String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
+    public static @Nullable ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
+                                                         String projFileName, ProjectPropertiesDialog.@Nullable Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");
         }

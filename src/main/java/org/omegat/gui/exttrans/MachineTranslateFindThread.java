@@ -41,7 +41,8 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
-import java.util.Objects;
+import java.io.Serial;
+
 
 class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
     private final IMachineTranslation translator;
@@ -116,8 +117,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
                 tr = translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
-                Objects.requireNonNull(Core.getMainWindow())
-                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
                         e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getMessage());
                 return null;
             } catch (Exception e) {
@@ -139,6 +139,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
      * Exception thrown when processing should stop.
      */
     static class StoppedException extends Exception {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         StoppedException() {

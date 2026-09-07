@@ -53,7 +53,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonModel;
@@ -131,7 +130,7 @@ public class SearchWindowController {
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
         form.setJMenuBar(new SearchWindowMenu(this));
-        Font f = Objects.requireNonNull(Core.getMainWindow()).getApplicationFont();
+        Font f = Core.getMainWindow().getApplicationFont();
         setFont(f);
 
         this.mode = mode;
@@ -968,8 +967,7 @@ public class SearchWindowController {
         handle.completion().whenComplete((result, error) -> {
             if (error != null) {
                 Log.logErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
-                Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(error,
-                        "ST_SEARCH_COMPLETE_ERROR");
+                Core.getMainWindow().displayErrorRB(error, "ST_SEARCH_COMPLETE_ERROR");
             }
             form.dispose();
         });

@@ -139,11 +139,10 @@ public final class ProjectUICommands {
                 ProjectProperties props = new ProjectProperties(dir);
                 props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
-                final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
-                        Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
-                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
-
                 IMainWindow mainWindow = Core.getMainWindow();
+                final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
+                        Objects.requireNonNull(mainWindow.getApplicationFrame()), props, dir.getAbsolutePath(),
+                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
@@ -188,7 +187,7 @@ public final class ProjectUICommands {
 
             @Override
             protected Void doInBackground() throws Exception {
-                mainWindow = Objects.requireNonNull(Core.getMainWindow());
+                mainWindow = Core.getMainWindow();
                 mainWindow.showStatusMessageRB("");
                 NewTeamProjectController newTeamProjectController = new NewTeamProjectController(mainWindow);
                 File dir = newTeamProjectController.show();

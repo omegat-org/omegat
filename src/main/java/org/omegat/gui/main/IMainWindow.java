@@ -33,6 +33,7 @@ import javax.swing.JFrame;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface for access to main window functionality.
@@ -43,16 +44,19 @@ public interface IMainWindow {
     /**
      * Get application frame.
      */
+    @Nullable
     JFrame getApplicationFrame();
 
     /**
      * Lock UI for long-term operations.
      */
+    @Deprecated
     void lockUI();
 
     /**
      * Unlock UI after locking.
      */
+    @Deprecated
     void unlockUI();
 
     /**
@@ -68,7 +72,7 @@ public interface IMainWindow {
      * @param params
      *            message parameters for formatting
      */
-    void showStatusMessageRB(String messageKey, Object... params);
+    void showStatusMessageRB(@Nullable String messageKey, Object@Nullable... params);
 
     /**
      * Same as {@link #showStatusMessageRB(String, Object...)} but this will
@@ -79,7 +83,7 @@ public interface IMainWindow {
      * @param params
      *            message parameters for formatting
      */
-    void showTimedStatusMessageRB(String messageKey, Object... params);
+    void showTimedStatusMessageRB(@Nullable String messageKey, Object@Nullable... params);
 
     /**
      * Show message in progress bar. Progress bar shows the translation
@@ -88,7 +92,7 @@ public interface IMainWindow {
      * @param messageText
      *            message text
      */
-    void showProgressMessage(String messageText);
+    void showProgressMessage(@Nullable String messageText);
 
     /**
      * Show message in length label. Length label shows length (in nr of
@@ -97,7 +101,7 @@ public interface IMainWindow {
      * @param messageText
      *            message text
      */
-    void showLengthMessage(String messageText);
+    void showLengthMessage(@Nullable String messageText);
 
     /**
      * Show message indicating the state of the Lock cursor and Insert/overwrite
@@ -106,7 +110,7 @@ public interface IMainWindow {
      * @param messageText
      *            message text
      */
-    void showLockInsertMessage(String messageText, String toolTip);
+    void showLockInsertMessage(@Nullable String messageText, @Nullable String toolTip);
 
     /**
      * Display warning.
@@ -116,7 +120,7 @@ public interface IMainWindow {
      * @param params
      *            warning text parameters
      */
-    void displayWarningRB(String warningKey, Object... params);
+    void displayWarningRB(@Nullable String warningKey, Object@Nullable ... params);
 
     /**
      * Same as {@link #displayWarningRB(String, Object...)} but this will close
@@ -130,7 +134,7 @@ public interface IMainWindow {
      * @param params
      *            warning text parameters
      */
-    void displayWarningRB(String warningKey, String supercedesKey, Object... params);
+    void displayWarningRB(@Nullable String warningKey, @Nullable String supercedesKey, Object@Nullable... params);
 
     /**
      * Display error.
@@ -142,7 +146,7 @@ public interface IMainWindow {
      * @param params
      *            error text parameters
      */
-    void displayErrorRB(Throwable ex, String errorKey, Object... params);
+    void displayErrorRB(@Nullable Throwable ex, @Nullable String errorKey, Object@Nullable... params);
 
     /**
      * Show message in an ErrorDialog
@@ -156,7 +160,7 @@ public interface IMainWindow {
      *            title of dialog. message key in resource bundle of title that
      *            is to be displayed
      */
-    void showErrorDialogRB(String title, String message, Object... args);
+    void showErrorDialogRB(@Nullable String title, @Nullable String message, Object@Nullable... args);
 
     /**
      * shows a confirm dialog. For a GUI main window, this can be implemented as
@@ -179,7 +183,7 @@ public interface IMainWindow {
      * @throws HeadlessException
      *             if GraphicsEnvironment.isHeadless returns true
      */
-    int showConfirmDialog(Object message, String title, int optionType, int messageType)
+    int showConfirmDialog(@Nullable Object message, @Nullable String title, int optionType, int messageType)
             throws HeadlessException;
 
     /**
@@ -188,7 +192,7 @@ public interface IMainWindow {
      * @param message
      *            the message to show
      */
-    void showMessageDialog(String message);
+    void showMessageDialog(@Nullable String message);
 
     /**
      * Add new dockable pane into application frame. This method called on
@@ -197,7 +201,7 @@ public interface IMainWindow {
      * @param pane
      *            dockable pane
      */
-    void addDockable(Dockable pane);
+    void addDockable(@Nullable Dockable pane);
 
     /**
      * Sets cursor of window
@@ -205,7 +209,7 @@ public interface IMainWindow {
      * @param cursor
      *            the new cursor
      */
-    void setCursor(Cursor cursor);
+    void setCursor(@Nullable Cursor cursor);
 
     /**
      * Retrieves current cursor of window

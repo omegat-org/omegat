@@ -849,7 +849,7 @@ public class RealProject implements IProject {
                         tmxPrepared = null;
                         glossaryPrepared = null;
                         remoteRepositoryProvider.cleanPrepared();
-                        Objects.requireNonNull(Core.getMainWindow()).showStatusMessageRB("TEAM_SYNCHRONIZE");
+                        Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                         rebaseAndCommitProject(true);
                         setOnlineMode();
                     }
@@ -865,7 +865,7 @@ public class RealProject implements IProject {
                     }
                 } catch (Exception e) {
                     Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-                    Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                    Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
                 }
 
                 LastSegmentManager.saveLastSegment();
@@ -888,11 +888,8 @@ public class RealProject implements IProject {
     }
 
     private void setProjectMenuEnabled(boolean enabled) {
-        JMenu projectMenu = Objects.requireNonNull(CoreState.getInstance().getMainWindow()).getMainMenu()
-                .getProjectMenu();
-        if (projectMenu != null) {
-            projectMenu.setEnabled(enabled);
-        }
+        JMenu projectMenu = CoreState.getInstance().getMainWindow().getMainMenu().getProjectMenu();
+        projectMenu.setEnabled(enabled);
     }
 
     /**

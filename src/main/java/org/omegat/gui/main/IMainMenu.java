@@ -56,4 +56,12 @@ public interface IMainMenu {
     JMenu getMenu(MenuExtender.MenuKey marker);
 
     void invokeAction(String action, int modifiers);
+
+    /**
+     * Re-reads the shortcut definitions and rebinds the menu accelerators
+     * and window-level bindings; no operation for implementations without
+     * shortcut support.
+     */
+    default void updateShortcuts() {
+    }
 }

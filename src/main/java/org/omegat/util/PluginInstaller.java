@@ -271,7 +271,7 @@ public final class PluginInstaller {
                 if (extracted.isEmpty()) {
                     throw new FileNotFoundException("Could not extract a jar file from zip");
                 }
-                target = targetPath.resolve(extracted.get(0));
+                target = targetPath.resolve(extracted.getFirst());
             }
         } else {
             throw new IOException("Unknown archive type: " + sourceFile.getName());
@@ -372,10 +372,10 @@ public final class PluginInstaller {
             this.current.addAll(current);
             this.installer.addAll(installer);
             classes.addAll(
-                    current.stream().map(PluginInformation::getClassName).collect(Collectors.toList()));
+                    current.stream().map(PluginInformation::getClassName).toList());
             classes.addAll(installer.stream().map(PluginInformation::getClassName)
                     .filter(className -> current.stream().noneMatch(j -> j.getClassName().equals(className)))
-                    .collect(Collectors.toList()));
+                    .toList());
         }
 
         @Override

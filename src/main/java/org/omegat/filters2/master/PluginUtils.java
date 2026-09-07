@@ -54,7 +54,6 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
-import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.Nullable;
@@ -187,32 +186,20 @@ public final class PluginUtils {
          * @return localized value of the plugin type.
          */
         public String getLocalizedValue() {
-            switch (this) {
-            case BASE:
-                return OStrings.getString("PLUGIN_TYPE_BASE");
-            case THEME:
-                return OStrings.getString("PLUGIN_TYPE_THEME");
-            case FILTER:
-                return OStrings.getString("PLUGIN_TYPE_FILTER");
-            case MISCELLANEOUS:
-                return OStrings.getString("PLUGIN_TYPE_MISC");
-            case MARKER:
-                return OStrings.getString("PLUGIN_TYPE_MARKER");
-            case GLOSSARY:
-                return OStrings.getString("PLUGIN_TYPE_GLOSSARY");
-            case TOKENIZER:
-                return OStrings.getString("PLUGIN_TYPE_TOKENIZER");
-            case DICTIONARY:
-                return OStrings.getString("PLUGIN_TYPE_DICTIONARY");
-            case MACHINETRANSLATOR:
-                return OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
-            case LANGUAGE:
-                return OStrings.getString("PLUGIN_TYPE_LANGUAGE");
-            case UNKNOWN:
-                return OStrings.getString("PLUGIN_TYPE_UNKNOWN");
-            default:
-                return getTypeValue();
-            }
+            return switch (this) {
+                case BASE -> OStrings.getString("PLUGIN_TYPE_BASE");
+                case THEME -> OStrings.getString("PLUGIN_TYPE_THEME");
+                case FILTER -> OStrings.getString("PLUGIN_TYPE_FILTER");
+                case MISCELLANEOUS -> OStrings.getString("PLUGIN_TYPE_MISC");
+                case MARKER -> OStrings.getString("PLUGIN_TYPE_MARKER");
+                case GLOSSARY -> OStrings.getString("PLUGIN_TYPE_GLOSSARY");
+                case TOKENIZER -> OStrings.getString("PLUGIN_TYPE_TOKENIZER");
+                case DICTIONARY -> OStrings.getString("PLUGIN_TYPE_DICTIONARY");
+                case MACHINETRANSLATOR -> OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
+                case LANGUAGE -> OStrings.getString("PLUGIN_TYPE_LANGUAGE");
+                case UNKNOWN -> OStrings.getString("PLUGIN_TYPE_UNKNOWN");
+                default -> getTypeValue();
+            };
         }
     }
 
@@ -548,7 +535,7 @@ public final class PluginUtils {
     private static List<URL> loadJarUrls(List<File> pluginsDirs) {
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
         List<File> jarFiles = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
+                .toList();
 
         List<URL> urls = new ArrayList<>();
         for (File file : jarFiles) {
@@ -563,7 +550,7 @@ public final class PluginUtils {
         return urls;
     }
 
-    private static boolean isValidPlugin(String pluginClass, String oldPluginClass) {
+    private static boolean isValidPlugin(@Nullable String pluginClass, @Nullable String oldPluginClass) {
         return (oldPluginClass != null || pluginClass != null)
                 && (pluginClass == null || pluginClass.indexOf('.') >= 0);
     }
@@ -610,7 +597,7 @@ public final class PluginUtils {
      * @return the tokenizer class for the specified language, or the default
      *         tokenizer class if no specific tokenizer is found
      */
-    public static Class<?> getTokenizerClassForLanguage(Language lang) {
+    public static Class<?> getTokenizerClassForLanguage(@Nullable Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
         }
@@ -747,7 +734,7 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when plugin class is not found.
      */
-    private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu, boolean bundled)
+    private static void loadFromManifest(Manifest m, ClassLoader classLoader, @Nullable URL mu, boolean bundled)
             throws ClassNotFoundException {
         String classes = m.getMainAttributes().getValue(OMEGAT_PLUGINS);
         if (classes != null) {

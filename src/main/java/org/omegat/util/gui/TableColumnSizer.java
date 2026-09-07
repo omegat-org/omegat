@@ -32,7 +32,9 @@ import java.awt.event.HierarchyBoundsAdapter;
 import java.awt.event.HierarchyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JTable;
@@ -55,6 +57,8 @@ import javax.swing.table.TableModel;
 public final class TableColumnSizer {
 
     private int[] optimalColWidths;
+    /** Content-width caps by column, surviving recalculations. */
+    private final Map<Integer, Integer> contentCaps = new HashMap<>();
     private int remainderColReferenceWidth = -1;
     private boolean didManuallyAdjustCols;
     private int remainderColumn = 0;
@@ -268,6 +272,7 @@ public final class TableColumnSizer {
             }
             optimalColWidths[column] = preferredWidth;
         }
+        contentCaps.forEach((column, width) -> table.getColumnModel().getColumn(column).setMaxWidth(width));
     }
 
     /**
@@ -285,6 +290,31 @@ public final class TableColumnSizer {
 
         Component parent = table.getParent();
         return parent == null ? 0 : parent.getWidth() - otherCols;
+    }
+
+    /**
+     * Pins every column's current optimal width as its minimum, so later
+     * recalculations (for example while a row filter narrows the table) can
+     * grow but never shrink the columns. Call once after the initial sizing
+     * with the full model.
+     */
+    public void freezeCurrentWidthsAsMinimum() {
+        calculateOptimalColWidths();
+        for (int i = 0; i < optimalColWidths.length; i++) {
+            table.getColumnModel().getColumn(i).setMinWidth(optimalColWidths[i]);
+        }
+    }
+
+    /**
+     * Caps the column at its current optimal content width, so surplus table
+     * width never stretches it. Call after the initial sizing with the full
+     * model.
+     */
+    public void capWidthToContent(int column) {
+        calculateOptimalColWidths();
+        // remembered, because every recalculation lifts the max width again
+        contentCaps.put(column, optimalColWidths[column]);
+        table.getColumnModel().getColumn(column).setMaxWidth(optimalColWidths[column]);
     }
 
     /**

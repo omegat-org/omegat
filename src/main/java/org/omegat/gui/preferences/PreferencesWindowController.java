@@ -123,6 +123,7 @@ import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.view.SaveOptionsController;
 import org.omegat.gui.preferences.view.SecureStoreController;
+import org.omegat.gui.preferences.view.ShortcutsPreferencesController;
 import org.omegat.gui.preferences.view.SourceFilesViewOptionsController;
 import org.omegat.gui.preferences.view.SpellcheckerConfigurationController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
@@ -438,6 +439,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new LanguageToolConfigurationController()));
         root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));
+        root.add(new HideableNode(new ShortcutsPreferencesController()));
         root.add(new HideableNode(new TagProcessingOptionsController()));
         HideableNode teamNode = new HideableNode(new TeamOptionsController());
         teamNode.add(new HideableNode(new RepositoriesCredentialsController()));

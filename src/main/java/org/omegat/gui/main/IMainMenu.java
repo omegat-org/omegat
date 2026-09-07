@@ -28,6 +28,9 @@
 package org.omegat.gui.main;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+
+import org.jspecify.annotations.Nullable;
 
 import org.omegat.util.gui.MenuExtender;
 
@@ -63,5 +66,13 @@ public interface IMainMenu {
      * shortcut support.
      */
     default void updateShortcuts() {
+    }
+
+    /**
+     * The menu bar carrying the menus, or null for implementations without
+     * one; lets generic code enumerate the menu functions.
+     */
+    default @Nullable JMenuBar getMenuBar() {
+        return null;
     }
 }

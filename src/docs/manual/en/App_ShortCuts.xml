@@ -123,7 +123,12 @@
          <link linkend="panes.editor" endterm="panes.editor.title"></link>
          pane. You can also add or modify the shortcuts for most of the
          functions.</para>
-      <para>To do so, you have to put the appropriate shortcut definition file in
+      <para>The simplest way is the <guimenuitem>Keyboard
+         	Shortcuts</guimenuitem> view in the Preferences dialog: it lists
+         	every function in a searchable, sortable table, lets you assign,
+         	remove, export and import shortcuts entirely from the keyboard,
+         	and changes apply immediately.</para>
+      <para>Alternatively, put the appropriate shortcut definition file in
          	your OmegaT configuration folder. See the 
          <link endterm="configuration.folder.title" linkend="configuration.folder"></link>
          	appendix for details.</para>

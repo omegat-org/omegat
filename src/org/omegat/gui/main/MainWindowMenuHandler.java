@@ -919,7 +919,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             Help.showHelp();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
-                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    StringUtil.describeException(ex), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }

@@ -633,4 +633,18 @@ public class StringUtilTest {
         // Test empty string
         assertEquals("", StringUtil.stripFromEnd("", "suffix"));
     }
+
+    @Test
+    public void testDescribeException() {
+        // Prefers the (localized) message when present.
+        assertEquals("boom", StringUtil.describeException(new RuntimeException("boom")));
+        // Falls back to the class name when the message is null or empty, so
+        // the result is never blank.
+        assertEquals("java.lang.RuntimeException",
+                StringUtil.describeException(new RuntimeException()));
+        assertEquals("java.lang.RuntimeException",
+                StringUtil.describeException(new RuntimeException("")));
+        // Null-safe.
+        assertEquals("", StringUtil.describeException(null));
+    }
 }

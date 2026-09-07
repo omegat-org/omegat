@@ -33,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 
+import org.omegat.util.StringUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -62,7 +63,7 @@ public class VersionCheckDialog {
                 } catch (Exception e) {
                     Log.logWarningRB("VERSION_CHECK_FAILED", e.getCause().getMessage());
                     JOptionPane.showMessageDialog(parent,
-                            OStrings.getString("VERSION_CHECK_FAILED", e.getCause().getMessage()),
+                            OStrings.getString("VERSION_CHECK_FAILED", StringUtil.describeException(e.getCause())),
                             OStrings.getString("ERROR_TITLE"),
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -95,7 +96,7 @@ public class VersionCheckDialog {
                 StaticUIUtils.closeWindowByEvent(dialog);
             } catch (Exception ex) {
                 Log.log(ex);
-                JOptionPane.showMessageDialog(parent, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                JOptionPane.showMessageDialog(parent, StringUtil.describeException(ex), OStrings.getString("ERROR_TITLE"),
                         JOptionPane.ERROR_MESSAGE);
             }
         });

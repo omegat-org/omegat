@@ -76,6 +76,29 @@ public final class StringUtil {
     }
 
     /**
+     * Produce a non-empty, human-readable description of a throwable, suitable
+     * for a status line or error dialog. Prefers the localized message, then
+     * the plain message, and falls back to the class name so the text is never
+     * blank (which would otherwise surface as an empty or "null" dialog).
+     *
+     * @param t
+     *            the throwable to describe, may be null
+     * @return the description, or an empty string if {@code t} is null
+     */
+    public static String describeException(final @Nullable Throwable t) {
+        if (t == null) {
+            return "";
+        }
+        if (!isEmpty(t.getLocalizedMessage())) {
+            return t.getLocalizedMessage();
+        }
+        if (!isEmpty(t.getMessage())) {
+            return t.getMessage();
+        }
+        return t.getClass().getName();
+    }
+
+    /**
      * Returns true if the input has at least one letter and all letters are
      * lower case.
      */

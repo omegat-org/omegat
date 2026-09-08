@@ -136,9 +136,6 @@ public class AppearanceController extends BasePreferencesController {
                         .findFirst().orElse("");
             }
         });
-        panel.cbMenustyleSelect.addActionListener(e -> {
-            setRestartRequired(isModified());
-        });
 
         String[] lightLafs = lightThemeList.stream().map(LookAndFeelInfo::getClassName)
                 .toArray(String[]::new);
@@ -187,6 +184,10 @@ public class AppearanceController extends BasePreferencesController {
     private void initListeners() {
         panel.restoreWindowButton
                 .addActionListener(e -> Core.getMainWindow().resetDesktopLayout());
+        // Registered here, after initFromPrefs, so that populating the combo
+        // does not fire setRestartRequired before the theme radios are set,
+        // which made a fresh configuration wrongly demand a restart.
+        panel.cbMenustyleSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.cbLightThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.cbDarkThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.useDarkThemeRB.addActionListener(e -> setRestartRequired(isModified()));
@@ -223,7 +224,11 @@ public class AppearanceController extends BasePreferencesController {
             return true;
         }
         Object selected = panel.cbMenustyleSelect.getSelectedItem();
-        if (selected != null && !selected.toString().equals(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME))) {
+        // Compare against the same effective default the combo was initialised
+        // with; comparing against the raw (empty) preference made a fresh
+        // configuration look modified and wrongly demanded a restart.
+        if (selected != null && !selected.toString().equals(Preferences.getPreferenceDefault(
+                Preferences.MENUUI_CLASS_NAME, MainMenuUI.class.getName()))) {
             return true;
         }
         if (themeMode.equals("sync")) {

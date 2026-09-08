@@ -58,12 +58,11 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             CoreEvents.registerFontChangedEventListener(this::setFont);
         }
         CoreEvents.registerProjectChangeListener(this);
-        CoreEvents.registerColorsChangedEventListener(this::applyColors);
+        Styles.bindColors(this, this::applyColors);
         if (!GraphicsEnvironment.isHeadless()) {
             setDragEnabled(true);
         }
         getDocument().addDocumentListener(new FontFallbackListener(this));
-        applyColors();
     }
 
     /**

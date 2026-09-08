@@ -118,15 +118,13 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         });
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
-        CoreEvents.registerColorsChangedEventListener(() -> {
+        Styles.bindColors(scrollPane, () -> {
             applyColors();
             if (viewImpl != null) {
                 viewImpl.applyColors();
                 viewImpl.update();
             }
         });
-
-        applyColors();
 
         Class<?> initModeClass = SegmentPropertiesTableView.class;
         String initModeClassName = Preferences.getPreference(Preferences.SEGPROPS_INITIAL_MODE);

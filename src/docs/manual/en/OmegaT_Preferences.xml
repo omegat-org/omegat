@@ -396,10 +396,21 @@
             <guibutton>OK</guibutton> or
             <guibutton>Apply</guibutton>.</para>
          <para>Scripts can be used to set predefined themes. OmegaT is bundled with
-            a script called 
+            a script called
             <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"></link> that
-            provides a default dark theme. See the 
+            provides a default dark theme. See the
             <link linkend="windows.scripts" endterm="windows.scripts.title"></link> window for details.</para>
+         <para><guibutton>Export Scheme...</guibutton> writes your current colours
+            to a plain, human-readable <literal>.properties</literal> file (one
+            colour per line), which you can keep, share or edit in any text
+            editor. <guibutton>Import Scheme...</guibutton> reads such a file
+            back: the imported colours appear in the table at once and are
+            applied when you confirm with <guibutton>Apply</guibutton> or
+            <guibutton>OK</guibutton>, so <guibutton>Cancel</guibutton> discards
+            them. Unknown entries in an imported file are ignored, so schemes
+            stay compatible across versions. This exchanges only the editor
+            colours listed here, not the overall look and feel, which is chosen
+            separately under <guilabel>Appearance</guilabel>.</para>
          <note>
             <para>Automatic dark theme detection is available on Linux systems
                		with the Gnome/GTK look and feel for users who run OmegaT on OpenJDK.

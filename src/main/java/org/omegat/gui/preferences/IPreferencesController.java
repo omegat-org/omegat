@@ -45,6 +45,13 @@ public interface IPreferencesController {
         void setReloadRequired(boolean reloadRequired);
 
         void setRestartRequired(boolean restartRequired);
+
+        /**
+         * Show a short-lived message in the preferences window, in the same
+         * place as the restart/reload notices. Default no-op.
+         */
+        default void showTransientMessage(String message) {
+        }
     }
 
     /**

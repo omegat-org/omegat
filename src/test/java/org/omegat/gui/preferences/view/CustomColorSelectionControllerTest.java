@@ -30,14 +30,25 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.util.Comparator;
 
+import org.junit.After;
 import org.junit.Test;
 
 import org.omegat.gui.preferences.view.CustomColorSelectionController.ColorColumns;
+import org.omegat.util.gui.ColorEntry;
+import org.omegat.util.gui.ColorRegistry;
 
 /**
  * @author stephan.pakebusch at zollsoft.de
  */
 public class CustomColorSelectionControllerTest {
+
+    @After
+    public void tearDown() {
+        // The registry is session-global; drop the plugin entry registered by
+        // tableModelIncludesRegisteredPluginColors so re-runs in the same JVM
+        // and later tests do not see it.
+        ColorRegistry.clearPluginEntries();
+    }
 
     @Test
     public void hsbComparatorGroupsUnsetThenGreyThenChromatic() {
@@ -89,6 +100,24 @@ public class CustomColorSelectionControllerTest {
         assertEquals("#0000ff", CustomColorSelectionController.colorSortKey(Color.BLUE));
         assertEquals("#000000", CustomColorSelectionController.colorSortKey(Color.BLACK));
         assertEquals("#0a141e", CustomColorSelectionController.colorSortKey(new Color(10, 20, 30)));
+    }
+
+    @Test
+    public void tableModelIncludesRegisteredPluginColors() {
+        ColorEntry entry = ColorRegistry.registerPluginColor("testcontroller", "swatch",
+                "Controller Test Swatch", "Test.swatch", Color.PINK);
+        CustomColorSelectionController controller = new CustomColorSelectionController();
+        CustomColorSelectionController.ColorTableModel model = controller.new ColorTableModel();
+        boolean found = false;
+        for (int row = 0; row < model.getRowCount(); row++) {
+            if (entry.getId().equals(model.getValueAt(row, ColorColumns.INTERNAL.ordinal()))) {
+                assertEquals("Controller Test Swatch",
+                        model.getValueAt(row, ColorColumns.NAME.ordinal()));
+                assertEquals(Color.PINK, model.getValueAt(row, ColorColumns.COLOR.ordinal()));
+                found = true;
+            }
+        }
+        assertTrue("plugin color must appear in the colors table model", found);
     }
 
     @Test

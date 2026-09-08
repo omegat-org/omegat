@@ -46,3 +46,6 @@ GEMINI.md
 .github/copilot-instructions.md
 .supermaven/
 .idx/
+
+# heap dumps from GUI/OOM test runs
+*.hprof

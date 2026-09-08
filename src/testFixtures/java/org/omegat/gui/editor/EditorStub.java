@@ -39,9 +39,20 @@ import java.util.List;
 public class EditorStub implements IEditor {
 
     private final IEditorSettings editorSettings;
+    private boolean orientationAllLtr = true;
 
     public EditorStub(IEditorSettings settings) {
         this.editorSettings = settings;
+    }
+
+    /** Lets tests simulate a right-to-left target orientation. */
+    public void setOrientationAllLtr(boolean value) {
+        this.orientationAllLtr = value;
+    }
+
+    @Override
+    public boolean isOrientationAllLtr() {
+        return orientationAllLtr;
     }
 
     @Override

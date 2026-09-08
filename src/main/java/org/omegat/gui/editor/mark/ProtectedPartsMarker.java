@@ -35,7 +35,6 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.apache.commons.text.StringEscapeUtils;
 
-import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.PatternConsts;
@@ -62,18 +61,15 @@ public class ProtectedPartsMarker implements IMarker {
 
         // The attributes bind the foreground to the palette entry so the mark
         // is not shadowed by the bound state color of the segment text (see
-        // Mark#attributes). The painter still snapshots the color and is
-        // created per call so that preference changes take effect.
-        HighlightPainter painter;
-        AttributeSet attrs;
-        if (Core.getEditor().isOrientationAllLtr()) {
-            attrs = Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER, null, null, null);
-            painter = null;
-        } else {
-            attrs = null;
-            painter = new TransparentHighlightPainter(
-                    Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
-        }
+        // Mark#attributes) and colour preference changes take effect without
+        // restarting the application. The tag colour is applied regardless of
+        // the editor orientation: a right-to-left target used to receive only
+        // a faint (0.2 alpha) background highlight instead, which left the
+        // tags barely legible (SF bug #1122). Merging the foreground attribute
+        // keeps the bidi attributes that hold the tags left-to-right intact.
+        HighlightPainter painter = null;
+        AttributeSet attrs = Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER, null,
+                null, null);
 
         List<Mark> r = new ArrayList<Mark>();
 

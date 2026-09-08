@@ -17,5 +17,7 @@ dependencies {
         compileOnly(libs.jspecify)
         compileOnly(libs.jackson.yaml)
     }
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.junit4)
 }
 jar.dependsOn rootProject.tasks.named("tipsHtmls")

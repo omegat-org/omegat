@@ -36,15 +36,18 @@ package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.AWTEvent;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -157,6 +160,7 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerFontChangedEventListener(
                 newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
                         : new FontUIResource(newFont));
+        installGlobalFontZoom();
 
         MainWindowUI.handlePerProjectLayouts(this);
 
@@ -260,6 +264,46 @@ public class MainWindow implements IMainWindow {
     @Override
     public Font getApplicationFont() {
         return font;
+    }
+
+    /**
+     * Ctrl/Cmd + mouse wheel anywhere in the application adjusts the editor
+     * font size. Installed as an EventQueue interceptor because scroll panes
+     * handle wheel events regardless of listeners consuming them.
+     */
+    private void installGlobalFontZoom() {
+        int shortcutMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
+        Toolkit.getDefaultToolkit().getSystemEventQueue().push(new EventQueue() {
+            private double accumulated;
+
+            @Override
+            protected void dispatchEvent(AWTEvent event) {
+                if (event instanceof MouseWheelEvent) {
+                    MouseWheelEvent e = (MouseWheelEvent) event;
+                    if ((e.getModifiersEx() & shortcutMask) != 0) {
+                        accumulated += e.getPreciseWheelRotation();
+                        int steps = (int) accumulated;
+                        if (steps != 0) {
+                            accumulated -= steps;
+                            changeConfiguredFontSizeBy(-steps);
+                        }
+                        return;
+                    }
+                }
+                super.dispatchEvent(event);
+            }
+        });
+    }
+
+    private void changeConfiguredFontSizeBy(int delta) {
+        int oldSize = FontUtil.getConfiguredFontSize();
+        int newSize = Math.max(6, Math.min(72, oldSize + delta));
+        if (newSize == oldSize) {
+            return;
+        }
+        Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newSize);
+        // Keep the current font family; only the size changes.
+        CoreEvents.fireFontChanged(new FontUIResource(font.deriveFont((float) UIScale.scale(newSize))));
     }
 
     @Override

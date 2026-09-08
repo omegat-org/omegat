@@ -44,8 +44,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -81,6 +83,10 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.gui.IPaneMenu;
+import org.omegat.util.gui.StaticUIUtils;
+
+import com.vlsolutions.swing.docking.Dockable;
 
 /**
  * Handler for main menu items.
@@ -613,6 +619,94 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void gotoEditorPanelMenuItemActionPerformed() {
         Core.getEditor().requestFocus();
+    }
+
+    public void gotoMatchesPanelMenuItemActionPerformed() {
+        focusDockablePane("MATCHES");
+    }
+
+    public void gotoGlossaryPanelMenuItemActionPerformed() {
+        focusDockablePane("GLOSSARY");
+    }
+
+    public void gotoDictionaryPanelMenuItemActionPerformed() {
+        focusDockablePane("DICTIONARY");
+    }
+
+    public void gotoMachineTranslationPanelMenuItemActionPerformed() {
+        focusDockablePane("MACHINE_TRANSLATE");
+    }
+
+    public void gotoMultipleTranslationsPanelMenuItemActionPerformed() {
+        focusDockablePane("MULTIPLE_TRANS");
+    }
+
+    public void gotoCommentsPanelMenuItemActionPerformed() {
+        focusDockablePane("COMMENTS");
+    }
+
+    public void gotoSegmentPropertiesPanelMenuItemActionPerformed() {
+        focusDockablePane("SEGMENTPROPERTIES");
+    }
+
+    /**
+     * Show the pane with the given dock key and move keyboard focus into it.
+     */
+    private static void focusDockablePane(String dockKey) {
+        IMainWindow mainWindow = Core.getMainWindow();
+        if (mainWindow == null) {
+            return;
+        }
+        Dockable dockable = mainWindow.getDesktop().getContext().getDockableByKey(dockKey);
+        if (dockable instanceof DockableScrollPane) {
+            DockableScrollPane pane = (DockableScrollPane) dockable;
+            StaticUIUtils.requestVisible(pane);
+            Component view = pane.getViewport().getView();
+            if (view != null) {
+                view.requestFocusInWindow();
+            }
+        }
+    }
+
+    /**
+     * Keyboard-reachable equivalent of the gear button in the pane title bar,
+     * which is deliberately not focusable.
+     */
+    public void viewPaneSettingsMenuItemActionPerformed() {
+        Component comp = findFocusedDockableComponent();
+        if (comp == null) {
+            return;
+        }
+        IPaneMenu callback = getPaneMenuProvider((Dockable) comp);
+        if (callback == null) {
+            return;
+        }
+        JPopupMenu menu = new JPopupMenu();
+        callback.populatePaneMenu(menu);
+        menu.show(comp, 0, 0);
+    }
+
+    /** Grey out the pane settings entry when the focused pane has no menu. */
+    public void viewMenuMenuSelected(JMenu menu) {
+        for (int i = 0; i < menu.getItemCount(); i++) {
+            JMenuItem item = menu.getItem(i);
+            if (item != null && "viewPaneSettingsMenuItem".equals(item.getActionCommand())) {
+                Component comp = findFocusedDockableComponent();
+                item.setEnabled(comp != null && getPaneMenuProvider((Dockable) comp) != null);
+            }
+        }
+    }
+
+    private static Component findFocusedDockableComponent() {
+        Component comp = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+        while (comp != null && !(comp instanceof Dockable)) {
+            comp = comp.getParent();
+        }
+        return comp;
+    }
+
+    private static IPaneMenu getPaneMenuProvider(Dockable dockable) {
+        return (IPaneMenu) dockable.getDockKey().getProperty(IPaneMenu.PROPERTY_PANE_MENU_ACTION_LISTENER);
     }
 
     /**

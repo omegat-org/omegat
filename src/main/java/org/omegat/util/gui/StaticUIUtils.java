@@ -76,6 +76,8 @@ import org.omegat.util.StringUtil;
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.DockingUtilities;
+import com.vlsolutions.swing.docking.TabbedDockableContainer;
 
 /**
  * @author Henry Pijffers
@@ -494,6 +496,11 @@ public final class StaticUIUtils {
                 Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
                 desktop.setAutoHide(dockable, false);
             }
+        }
+        // The pane may still be behind another tab of a tabbed dock.
+        TabbedDockableContainer tabs = DockingUtilities.findTabbedDockableContainer(scrollPane);
+        if (tabs != null) {
+            tabs.setSelectedDockable(scrollPane);
         }
     }
 

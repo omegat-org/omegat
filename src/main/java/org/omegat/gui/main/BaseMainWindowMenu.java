@@ -351,6 +351,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY");
         gotoNotesPanelMenuItem = createMenuItem("TF_MENU_GOTO_NOTES_PANEL");
         gotoEditorPanelMenuItem = createMenuItem("TF_MENU_GOTO_EDITOR_PANEL");
+        gotoMatchesPanelMenuItem = createMenuItem("TF_MENU_GOTO_MATCHES_PANEL");
+        gotoGlossaryPanelMenuItem = createMenuItem("TF_MENU_GOTO_GLOSSARY_PANEL");
+        gotoDictionaryPanelMenuItem = createMenuItem("TF_MENU_GOTO_DICTIONARY_PANEL");
+        gotoMachineTranslationPanelMenuItem = createMenuItem("TF_MENU_GOTO_MACHINE_TRANSLATE_PANEL");
+        gotoMultipleTranslationsPanelMenuItem = createMenuItem("TF_MENU_GOTO_MULTIPLE_TRANS_PANEL");
+        gotoCommentsPanelMenuItem = createMenuItem("TF_MENU_GOTO_COMMENTS_PANEL");
+        gotoSegmentPropertiesPanelMenuItem = createMenuItem("TF_MENU_GOTO_SEGPROP_PANEL");
 
         viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 "TF_MENU_DISPLAY_MARK_TRANSLATED");
@@ -410,6 +417,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(
                 UIManager.getColor("Label.foreground"), new Font("Serif", Font.ITALIC, 16), 'F'));
 
+        viewPaneSettingsMenuItem = createMenuItem("MW_VIEW_MENU_PANE_SETTINGS");
         viewRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI");
 
         toolsCheckIssuesMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES");
@@ -573,7 +581,16 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoMenu.add(gotoHistoryBackMenuItem);
         gotoMenu.add(gotoHistoryForwardMenuItem);
         gotoMenu.addSeparator();
+        gotoMenu.add(gotoMatchesPanelMenuItem);
+        gotoMenu.add(gotoGlossaryPanelMenuItem);
+        gotoMenu.add(gotoDictionaryPanelMenuItem);
+        gotoMenu.add(gotoMachineTranslationPanelMenuItem);
+        gotoMenu.add(gotoMultipleTranslationsPanelMenuItem);
+        gotoMenu.add(gotoCommentsPanelMenuItem);
+        gotoMenu.add(gotoSegmentPropertiesPanelMenuItem);
         gotoMenu.add(gotoNotesPanelMenuItem);
+        // Keep the editor entry last: it anchors MenuExtender's GOTO
+        // extension point (see MainWindowMenuTest.testMenuPositions).
         gotoMenu.add(gotoEditorPanelMenuItem);
 
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem);
@@ -596,6 +613,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewModificationInfoMenu.add(viewDisplayModificationInfoSelectedRadioButtonMenuItem);
         viewModificationInfoMenu.add(viewDisplayModificationInfoAllRadioButtonMenuItem);
         viewMenu.addSeparator();
+        viewMenu.add(viewPaneSettingsMenuItem);
         viewMenu.add(viewRestoreGUIMenuItem);
 
         toolsMenu.add(toolsCheckIssuesMenuItem);
@@ -1054,6 +1072,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public JMenuItem gotoHistoryForwardMenuItem;
     JMenuItem gotoNotesPanelMenuItem;
     JMenuItem gotoEditorPanelMenuItem;
+    JMenuItem gotoMatchesPanelMenuItem;
+    JMenuItem gotoGlossaryPanelMenuItem;
+    JMenuItem gotoDictionaryPanelMenuItem;
+    JMenuItem gotoMachineTranslationPanelMenuItem;
+    JMenuItem gotoMultipleTranslationsPanelMenuItem;
+    JMenuItem gotoCommentsPanelMenuItem;
+    JMenuItem gotoSegmentPropertiesPanelMenuItem;
     JMenu gotoMenu;
     JMenuItem gotoNextSegmentMenuItem;
     JMenuItem gotoNextUntranslatedMenuItem;
@@ -1077,6 +1102,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenu helpMenu;
     JMenuItem lowerCaseMenuItem;
     JMenu optionsMenu;
+    JMenuItem viewPaneSettingsMenuItem;
     JMenuItem viewRestoreGUIMenuItem;
     JMenuItem optionsAccessConfigDirMenuItem;
     JMenuItem optionsSentsegMenuItem;

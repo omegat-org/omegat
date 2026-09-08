@@ -26,7 +26,7 @@
 FROM debian:bookworm-slim
 RUN apt-get -y update && apt-get -y upgrade \
     && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion libapache2-mod-svn \
-    && adduser --system --group --shell /bin/bash git && (echo 'git:gitpass' | chpasswd) \
+    && adduser --system --group --shell /bin/bash --home /home/git git && (echo 'git:gitpass' | chpasswd) \
     && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
     && adduser --system --group --shell /bin/bash svn && (echo 'svn:svnpass' | chpasswd) \
     && mkdir -p /home/svn/.ssh && chmod 700 /home/svn/.ssh \

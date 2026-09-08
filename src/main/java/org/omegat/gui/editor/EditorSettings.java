@@ -523,30 +523,40 @@ public class EditorSettings implements IEditorSettings {
      */
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
             DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
-        // determine foreground color
+        // determine foreground color; stateStyle tracks the winning state so
+        // its configured text style (bold/italic/strikethrough) can be
+        // overlaid at the end
         Styles.EditorColor fg = null;
+        Styles.EditorColor stateStyle = null;
 
         // Custom foreground colors
         if (active) {
             if (isSource) {
                 fg = Styles.EditorColor.COLOR_ACTIVE_SOURCE_FG;
+                stateStyle = Styles.EditorColor.COLOR_ACTIVE_SOURCE;
             } else {
                 fg = Styles.EditorColor.COLOR_ACTIVE_TARGET_FG;
+                stateStyle = Styles.EditorColor.COLOR_ACTIVE_TARGET;
             }
         } else {
             if (isSource) {
                 if (isMarkNotedSegments() && hasNote && !translationExists) {
                     fg = Styles.EditorColor.COLOR_NOTED_FG;
+                    stateStyle = Styles.EditorColor.COLOR_NOTED;
                 } else if (markUntranslated && !translationExists) {
                     fg = Styles.EditorColor.COLOR_UNTRANSLATED_FG;
+                    stateStyle = Styles.EditorColor.COLOR_UNTRANSLATED;
                 } else if (isDisplaySegmentSources()) {
                     fg = Styles.EditorColor.COLOR_SOURCE_FG;
+                    stateStyle = Styles.EditorColor.COLOR_SOURCE;
                 }
             } else {
                 if (isMarkNotedSegments() && hasNote) {
                     fg = Styles.EditorColor.COLOR_NOTED_FG;
+                    stateStyle = Styles.EditorColor.COLOR_NOTED;
                 } else if (markTranslated) {
                     fg = Styles.EditorColor.COLOR_TRANSLATED_FG;
+                    stateStyle = Styles.EditorColor.COLOR_TRANSLATED;
                 }
             }
         }
@@ -557,18 +567,22 @@ public class EditorSettings implements IEditorSettings {
             case FIRST:
                 if (markFirstNonUnique) {
                     fg = Styles.EditorColor.COLOR_NON_UNIQUE;
+                    stateStyle = Styles.EditorColor.COLOR_NON_UNIQUE;
                 }
                 break;
             case NEXT:
                 fg = Styles.EditorColor.COLOR_NON_UNIQUE;
+                stateStyle = Styles.EditorColor.COLOR_NON_UNIQUE;
                 break;
             }
         }
         if (isPlaceholder) {
             fg = Styles.EditorColor.COLOR_PLACEHOLDER;
+            stateStyle = Styles.EditorColor.COLOR_PLACEHOLDER;
         }
         if (isRemoveText && !isSource) {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET;
+            stateStyle = Styles.EditorColor.COLOR_REMOVETEXT_TARGET;
         }
 
         // determine background color
@@ -630,7 +644,7 @@ public class EditorSettings implements IEditorSettings {
             italic = true;
         }
 
-        return Styles.createBoundAttributeSet(fg, bg, bold, italic);
+        return Styles.overlayTextStyle(stateStyle, Styles.createBoundAttributeSet(fg, bg, bold, italic));
     }
 
     /**

@@ -64,7 +64,8 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
 
     /**
      * Number of rows in the final total match statistics table, including the
-     * total row. Intermediate tables are smaller and get no filter buttons.
+     * total row. Only tables of this shape carry filter buttons, and only once
+     * the entry mapping of the running scan has arrived.
      */
     static final int FINAL_TABLE_ROWS = 8;
 
@@ -79,6 +80,18 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
     public MatchStatisticsPanel(StatisticsWindow window) {
         super(window);
         setLayout(new BorderLayout());
+    }
+
+    /**
+     * Forget the entry mapping of the previous scan before a recalculation
+     * starts. The intermediate table of the new scan has the final shape but
+     * fresh numbers; wiring filter buttons against the previous mapping would
+     * filter on stale categories. The mapping of the running scan arrives
+     * before its final table; on failure or cancellation
+     * {@link #onComplete(Completion)} restores the cached one.
+     */
+    void onCalculationStart() {
+        entryRowIndexes = null;
     }
 
     /**

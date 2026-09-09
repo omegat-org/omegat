@@ -264,7 +264,9 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         }
 
         if (outData) {
-            String[][] table = result.calcTableWithoutPercentage(rowsTotal);
+            // Same rows as the final table below: the similarity buckets are
+            // still empty, but every count already sits in its final row.
+            String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
             callback.setTable(header, table);

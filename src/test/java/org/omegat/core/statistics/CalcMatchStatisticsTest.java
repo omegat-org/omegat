@@ -159,14 +159,23 @@ public class CalcMatchStatisticsTest extends TestCore {
         assertEquals(2, allResult.size());
         String[][] result = allResult.get(0);
         assertNotNull(result);
-        assertEquals(3, result.length);
+        String[][] finalResult = allResult.get(1);
+        assertNotNull(finalResult);
+        // The intermediate table has the shape of the final one: same rows,
+        // every count already in its final row, similarity buckets still empty.
+        assertEquals(finalResult.length, result.length);
+        for (int i = 0; i < result.length; i++) {
+            assertEquals(finalResult[i][0], result[i][0]);
+        }
         // Repetitions: 11 90 509 583
         assertRowValues(result[0], "11", "90", "509", "583");
-        assertRowValues(result[1], "0", "0", "0", "0");
-        assertRowValues(result[2], "0", "0", "0", "0");
-        result = allResult.get(1);
-        assertNotNull(result);
-        assertStatistics(result, false);
+        // Exact match and all similarity buckets: still empty
+        for (int i = 1; i < result.length - 1; i++) {
+            assertRowValues(result[i], "0", "0", "0", "0");
+        }
+        // Total so far: the repetitions
+        assertRowValues(result[result.length - 1], "11", "90", "509", "583");
+        assertStatistics(finalResult, false);
     }
 
     @Test
@@ -181,6 +190,9 @@ public class CalcMatchStatisticsTest extends TestCore {
 
         Map<Integer, Integer> rows = testingStatsConsumer.getEntryRowIndexes();
         assertNotNull(rows);
+        // The mapping arrives after the intermediate but before the final
+        // table; the consumer wires filter buttons on that contract.
+        assertEquals(1, testingStatsConsumer.getTablesBeforeEntryRowIndexes());
         // Every entry is assigned to exactly one category.
         assertEquals(108, rows.size());
         // Category sizes match the segment column of the statistics table.

@@ -196,6 +196,9 @@ public class StatisticsWindow extends javax.swing.JDialog {
     }
 
     private void startCalculation() {
+        if (output instanceof MatchStatisticsPanel panel) {
+            panel.onCalculationStart();
+        }
         recalculateButton.setEnabled(false);
         progressBar.setValue(0);
         progressBar.setString("");

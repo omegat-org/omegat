@@ -39,10 +39,17 @@ steps:
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l "$srcdir/*"
         destdir=/home/frs/project/omegat/Weekly
-        # Weekly keeps older builds on SourceForge, so upload only newer local files.
-        # Without --only-newer, lftp mirror may fail on remote-only old files.
-        cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd '$srcdir'; cd '$destdir'; mirror -R --only-newer --verbose=3; bye"
-        lftp --env-password -e "$cmd" "$dest"
+        # Keep mirror: weekly builds reuse filenames and must replace existing files.
+        # Retry because SourceForge SFTP may fail during replacement and leave a partial file.
+        cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd '$srcdir'; cd '$destdir'; mirror -R --verbose=3; bye"
+        for attempt in 1 2 3; do
+          lftp --env-password -e "$cmd" "$dest" && break
+          if [[ "$attempt" == 3 ]]; then
+            exit 1
+          fi
+          echo "lftp upload failed; retrying in 30 seconds..."
+          sleep 30
+        done
         # Upload manuals
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/manual/

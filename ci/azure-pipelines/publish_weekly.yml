@@ -37,17 +37,19 @@ steps:
         echo "Push OmegaT files to SourceForge file manager"
         dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         srcdir=$(Pipeline.Workspace)/build/distributions/
-        ls -l $srcdir/*
+        ls -l "$srcdir/*"
         destdir=/home/frs/project/omegat/Weekly
-        cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
-        lftp --env-password -e "$cmd" $dest
+        # Weekly keeps older builds on SourceForge, so upload only newer local files.
+        # Without --only-newer, lftp mirror may fail on remote-only old files.
+        cmd="set net:max-retries 10; mkdir -p '$destdir'; lcd '$srcdir'; cd '$destdir'; mirror -R --only-newer --verbose=3; bye"
+        lftp --env-password -e "$cmd" "$dest"
         # Upload manuals
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/build/docs/manual/
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot
-        cmd="set net:max-retries 10; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s $destdir $target ; bye"
-        lftp --env-password -e "$cmd" $dest
+        cmd="set net:max-retries 10; mkdir -p '$destdir' ; lcd '$srcdir' ; cd '$destdir' ; mirror -Re --parallel=4 --verbose=3 ; rm $target ; ln -s '$destdir' '$target' ; bye"
+        lftp --env-password -e "$cmd" "$dest"
     env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
       SF_HOST: frs.sourceforge.net

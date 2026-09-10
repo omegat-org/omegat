@@ -529,6 +529,60 @@ public class FilterMaster {
         }
     }
 
+    /**
+     * Serializes a filter configuration to the same XML text that
+     * {@link #saveConfig} writes, for content comparisons that must not
+     * depend on file formatting.
+     *
+     * @param config
+     *            the configuration to serialize
+     * @return the configuration as pretty-printed XML
+     * @throws IOException
+     *             if the configuration cannot be serialized
+     */
+    public static String writeConfigToString(Filters config) throws IOException {
+        try {
+            return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(config);
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * Parses a filter configuration from XML text. Unlike
+     * {@link #loadConfig}, this neither adds newly available filters nor
+     * rewrites any file, so it is free of side effects.
+     *
+     * @param content
+     *            the configuration as XML text
+     * @return the parsed configuration
+     * @throws IOException
+     *             if the text cannot be parsed
+     */
+    public static Filters loadConfigFromString(String content) throws IOException {
+        try {
+            return MAPPER.readValue(content, Filters.class);
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * Adds the filters available in this installation that the given
+     * configuration lacks, the same completion {@link #loadConfig} applies
+     * when reading a file - but in memory only. Lets callers bring
+     * configurations from other sources (a team repository, an older
+     * OmegaT version) to the form this installation works with.
+     *
+     * @param config
+     *            the configuration to complete; modified in place
+     * @return the same configuration, completed
+     */
+    public static Filters completeWithAvailableFilters(Filters config) {
+        addNewFiltersToConfig(config);
+        return config;
+    }
+
     // ////////////////////////////////////////////////////////////////////////
     // Static Utility Methods
     // ////////////////////////////////////////////////////////////////////////

@@ -65,10 +65,13 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
     /** Index of the filter button column, inserted before the segment counts. */
     static final int FILTER_COLUMN = 1;
 
-    private volatile @Nullable Map<Integer, Integer> entryRowIndexes;
-    private volatile String @Nullable [] lastHeaders;
-    private volatile String @Nullable [][] lastData;
-    private volatile @Nullable String lastTextData;
+    /**
+     * Parts of the current scan, accumulated across the IStatsConsumer
+     * callbacks. Replaced wholesale when a calculation starts, so filter
+     * buttons never act on the mapping of a previous scan and the cache can
+     * never receive parts of two different scans.
+     */
+    private volatile MatchStatisticsResult.Builder scanResult = new MatchStatisticsResult.Builder();
 
     public MatchStatisticsPanel(StatisticsWindow window) {
         super(window);
@@ -76,15 +79,14 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
     }
 
     /**
-     * Forget the entry mapping of the previous scan before a recalculation
-     * starts. The intermediate table of the new scan has the final shape but
-     * fresh numbers; wiring filter buttons against the previous mapping would
-     * filter on stale categories. The mapping of the running scan arrives
-     * before its final table; on failure or cancellation
-     * {@link #onComplete(Completion)} restores the cached one.
+     * Start accumulating a fresh scan before a recalculation begins. The
+     * intermediate table of the new scan has the final shape but fresh
+     * numbers; the mapping of the running scan arrives before its final
+     * table; on failure or cancellation {@link #onComplete(Completion)}
+     * restores the cached result.
      */
     void onCalculationStart() {
-        entryRowIndexes = null;
+        scanResult = new MatchStatisticsResult.Builder();
     }
 
     /**
@@ -93,45 +95,45 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
      * @return true if a cached result was restored
      */
     public boolean restoreFromCache() {
-        Optional<MatchStatisticsCache.Snapshot> cached = MatchStatisticsCache.get();
+        Optional<MatchStatisticsCache.Entry> cached = MatchStatisticsCache.get();
         if (!cached.isPresent()) {
             return false;
         }
-        MatchStatisticsCache.Snapshot snapshot = cached.get();
-        if (!snapshot.getProjectRoot().equals(currentProjectRoot())) {
+        MatchStatisticsCache.Entry entry = cached.get();
+        if (!entry.projectRoot().equals(currentProjectRoot())) {
             // A scan of another project must never leak through; entry
             // numbers are only meaningful within the project they came from.
             return false;
         }
-        entryRowIndexes = snapshot.getEntryRowIndexes();
-        String textData = snapshot.getTextData();
+        MatchStatisticsResult result = entry.result();
+        scanResult = new MatchStatisticsResult.Builder();
+        setEntryRowIndexes(result.entryRowIndexes());
+        String textData = result.textData();
         if (textData != null) {
             setTextData(textData);
         }
-        setTable(snapshot.getHeaders(), snapshot.getData());
+        setTable(result.headers(), result.data());
         return true;
     }
 
     @Override
     public void setEntryRowIndexes(Map<Integer, Integer> entryRowIndexes) {
-        this.entryRowIndexes = entryRowIndexes;
+        scanResult.setEntryRowIndexes(entryRowIndexes);
     }
 
     @Override
     public void setTextData(String data) {
-        lastTextData = data;
+        scanResult.setTextData(data);
         super.setTextData(data);
     }
 
     @Override
     public void onComplete(Completion completion) {
-        Map<Integer, Integer> rows = entryRowIndexes;
-        String[] headers = lastHeaders;
-        String[][] data = lastData;
+        MatchStatisticsResult result = scanResult.build();
         String projectRoot = currentProjectRoot();
-        if (completion.isSuccess() && rows != null && headers != null && data != null
-                && data.length == MatchStatCounts.FINAL_TABLE_ROWS && projectRoot != null) {
-            MatchStatisticsCache.store(headers, data, rows, lastTextData, projectRoot);
+        if (completion.isSuccess() && result != null
+                && result.data().length == MatchStatCounts.FINAL_TABLE_ROWS && projectRoot != null) {
+            MatchStatisticsCache.store(result, projectRoot);
         } else if (!completion.isSuccess()) {
             // A failed or cancelled recalculation leaves the intermediate
             // table behind; fall back to the last complete result.
@@ -161,8 +163,7 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
         if (data == null || data.length == 0) {
             return;
         }
-        lastHeaders = headers;
-        lastData = data;
+        scanResult.setTable(headers, data);
         SwingUtilities.invokeLater(() -> {
             // A simpler table is first shown, then replaced with a fancier one,
             // so have to remove first.
@@ -174,7 +175,7 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
     }
 
     private Component createTablePanel(String[] headers, String[][] data) {
-        Map<Integer, Integer> rows = entryRowIndexes;
+        Map<Integer, Integer> rows = scanResult.entryRowIndexes();
         if (rows == null || data.length != MatchStatCounts.FINAL_TABLE_ROWS) {
             return generateTableDisplay(null, headers, data);
         }
@@ -212,7 +213,7 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
     }
 
     private void applyFilter(int displayRow, String categoryLabel) {
-        Map<Integer, Integer> rows = entryRowIndexes;
+        Map<Integer, Integer> rows = scanResult.entryRowIndexes();
         if (rows == null) {
             return;
         }

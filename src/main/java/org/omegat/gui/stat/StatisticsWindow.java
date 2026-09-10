@@ -218,8 +218,8 @@ public class StatisticsWindow extends javax.swing.JDialog {
         if (statType != STAT_TYPE.MATCHES) {
             return;
         }
-        MatchStatisticsCache.get().ifPresent(snapshot -> lastScanLabel.setText(StringUtil.format(
-                OStrings.getString("CT_STATSMATCH_LastScan"), LAST_SCAN_FORMAT.format(snapshot.getLastScan()))));
+        MatchStatisticsCache.get().ifPresent(entry -> lastScanLabel.setText(StringUtil.format(
+                OStrings.getString("CT_STATSMATCH_LastScan"), LAST_SCAN_FORMAT.format(entry.lastScan()))));
     }
 
     /**

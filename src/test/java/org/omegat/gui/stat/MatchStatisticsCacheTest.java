@@ -59,19 +59,20 @@ public class MatchStatisticsCacheTest {
     @Test
     public void testStoreAndGet() {
         assertFalse(MatchStatisticsCache.get().isPresent());
-        MatchStatisticsCache.store(HEADERS, DATA, ROWS, "text", PROJECT_ROOT);
-        MatchStatisticsCache.Snapshot snapshot = MatchStatisticsCache.get().orElseThrow(AssertionError::new);
-        assertArrayEquals(HEADERS, snapshot.getHeaders());
-        assertArrayEquals(DATA, snapshot.getData());
-        assertEquals(ROWS, snapshot.getEntryRowIndexes());
-        assertEquals("text", snapshot.getTextData());
-        assertEquals(PROJECT_ROOT, snapshot.getProjectRoot());
-        assertNotNull(snapshot.getLastScan());
+        MatchStatisticsCache.store(new MatchStatisticsResult(HEADERS, DATA, ROWS, "text"), PROJECT_ROOT);
+        MatchStatisticsCache.Entry entry = MatchStatisticsCache.get().orElseThrow(AssertionError::new);
+        assertArrayEquals(HEADERS, entry.result().headers());
+        assertArrayEquals(DATA, entry.result().data());
+        assertEquals(ROWS, entry.result().entryRowIndexes());
+        assertEquals("text", entry.result().textData());
+        assertEquals(PROJECT_ROOT, entry.projectRoot());
+        assertNotNull(entry.lastScan());
     }
 
     @Test
     public void testClearedOnProjectChange() {
-        MatchStatisticsCache.store(HEADERS, DATA, ROWS, null, PROJECT_ROOT);
+        MatchStatisticsResult result = new MatchStatisticsResult(HEADERS, DATA, ROWS, null);
+        MatchStatisticsCache.store(result, PROJECT_ROOT);
         MatchStatisticsCache.onProjectChanged(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         assertTrue(MatchStatisticsCache.get().isPresent());
         MatchStatisticsCache.onProjectChanged(IProjectEventListener.PROJECT_CHANGE_TYPE.MODIFIED);
@@ -79,7 +80,7 @@ public class MatchStatisticsCacheTest {
         MatchStatisticsCache.onProjectChanged(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
         assertFalse(MatchStatisticsCache.get().isPresent());
 
-        MatchStatisticsCache.store(HEADERS, DATA, ROWS, null, PROJECT_ROOT);
+        MatchStatisticsCache.store(result, PROJECT_ROOT);
         MatchStatisticsCache.onProjectChanged(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
         assertFalse(MatchStatisticsCache.get().isPresent());
     }

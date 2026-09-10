@@ -26,7 +26,6 @@
 package org.omegat.gui.stat;
 
 import java.time.Instant;
-import java.util.Map;
 import java.util.Optional;
 
 import org.jspecify.annotations.Nullable;
@@ -43,59 +42,16 @@ import org.omegat.core.events.IProjectEventListener;
  */
 public final class MatchStatisticsCache {
 
-    /** Immutable result of one finished match statistics scan. */
-    public static final class Snapshot {
-        private final String[] headers;
-        private final String[][] data;
-        private final Map<Integer, Integer> entryRowIndexes;
-        private final @Nullable String textData;
-        private final String projectRoot;
-        private final Instant lastScan;
-
-        Snapshot(String[] headers, String[][] data, Map<Integer, Integer> entryRowIndexes,
-                @Nullable String textData, String projectRoot, Instant lastScan) {
-            this.headers = headers.clone();
-            this.data = new String[data.length][];
-            for (int i = 0; i < data.length; i++) {
-                this.data[i] = data[i].clone();
-            }
-            this.entryRowIndexes = entryRowIndexes;
-            this.textData = textData;
-            this.projectRoot = projectRoot;
-            this.lastScan = lastScan;
-        }
-
-        public String[] getHeaders() {
-            return headers;
-        }
-
-        public String[][] getData() {
-            return data;
-        }
-
-        /** Root folder of the project the scan belongs to. */
-        public String getProjectRoot() {
-            return projectRoot;
-        }
-
-        /**
-         * Map of entry number to category row index, see
-         * {@link org.omegat.core.statistics.dso.MatchStatCounts}.
-         */
-        public Map<Integer, Integer> getEntryRowIndexes() {
-            return entryRowIndexes;
-        }
-
-        public @Nullable String getTextData() {
-            return textData;
-        }
-
-        public Instant getLastScan() {
-            return lastScan;
-        }
+    /**
+     * One finished scan, wrapped with the cache-specific metadata to judge
+     * its validity: the root folder of the project the scan belongs to and
+     * the scan time. The statistics data itself is the already-copied
+     * {@link MatchStatisticsResult}.
+     */
+    public record Entry(MatchStatisticsResult result, String projectRoot, Instant lastScan) {
     }
 
-    private static volatile @Nullable Snapshot snapshot;
+    private static volatile @Nullable Entry entry;
 
     static {
         CoreEvents.registerProjectChangeListener(MatchStatisticsCache::onProjectChanged);
@@ -112,16 +68,15 @@ public final class MatchStatisticsCache {
         }
     }
 
-    public static void store(String[] headers, String[][] data, Map<Integer, Integer> entryRowIndexes,
-            @Nullable String textData, String projectRoot) {
-        snapshot = new Snapshot(headers, data, entryRowIndexes, textData, projectRoot, Instant.now());
+    public static void store(MatchStatisticsResult result, String projectRoot) {
+        entry = new Entry(result, projectRoot, Instant.now());
     }
 
-    public static Optional<Snapshot> get() {
-        return Optional.ofNullable(snapshot);
+    public static Optional<Entry> get() {
+        return Optional.ofNullable(entry);
     }
 
     public static void clear() {
-        snapshot = null;
+        entry = null;
     }
 }

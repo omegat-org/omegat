@@ -31,6 +31,7 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -47,7 +48,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class ConsoleWindow implements IMainWindow {
 
     @Override
-    public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
+    public void displayErrorRB(@Nullable Throwable ex, @Nullable String errorKey, Object@Nullable... params) {
         String msg;
         if (params != null) {
             msg = StringUtil.format(OStrings.getString(errorKey), params);
@@ -58,7 +59,7 @@ public class ConsoleWindow implements IMainWindow {
         System.err.println(msg);
         String fulltext = msg;
         if (ex != null) {
-            fulltext += "\n" + ex.toString();
+            fulltext += "\n" + ex;
         }
         System.err.println(OStrings.getString("TF_ERROR"));
         System.err.println(fulltext);
@@ -69,7 +70,7 @@ public class ConsoleWindow implements IMainWindow {
      * {@inheritDoc} Nothing is shown in quiet mode.
      */
     @Override
-    public void showStatusMessageRB(String messageKey, Object... params) {
+    public void showStatusMessageRB(@Nullable String messageKey, Object@Nullable... params) {
         if (RuntimePreferenceStore.getInstance().isQuietMode()) {
             return;
         }
@@ -87,27 +88,27 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public void showTimedStatusMessageRB(String messageKey, Object... params) {
+    public void showTimedStatusMessageRB(@Nullable String messageKey, Object@Nullable... params) {
         showStatusMessageRB(messageKey, params);
     }
 
     @Override
-    public void displayWarningRB(String message, Object... args) {
+    public void displayWarningRB(@Nullable String message, Object@Nullable... args) {
         displayWarningRB(message, null, args);
     }
 
     @Override
-    public void displayWarningRB(String message, String supercedesKey, Object... args) {
+    public void displayWarningRB(@Nullable String message, @Nullable String supercedesKey, Object@Nullable... args) {
         System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
     @Override
-    public void showErrorDialogRB(String title, String message, Object... args) {
+    public void showErrorDialogRB(@Nullable String title, @Nullable String message, Object@Nullable... args) {
         System.err.println(StringUtil.format(OStrings.getString(message), args));
     }
 
     @Override
-    public void addDockable(Dockable pane) {
+    public void addDockable(@Nullable Dockable pane) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
@@ -117,7 +118,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public JFrame getApplicationFrame() {
+    public @Nullable JFrame getApplicationFrame() {
         return null;
     }
 
@@ -127,12 +128,12 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public void showLengthMessage(String messageText) {
+    public void showLengthMessage(@Nullable String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
     @Override
-    public void showProgressMessage(String messageText) {
+    public void showProgressMessage(@Nullable String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
 
@@ -147,7 +148,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public DockingDesktop getDesktop() {
+    public @Nullable DockingDesktop getDesktop() {
         return null;
     }
 
@@ -161,7 +162,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public int showConfirmDialog(Object message, String title, int optionType, int messageType)
+    public int showConfirmDialog(Object message, @Nullable String title, int optionType, int messageType)
             throws HeadlessException {
 
         System.out.println(title);
@@ -176,7 +177,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     @Override
-    public void showLockInsertMessage(String messageText, String toolTip) {
+    public void showLockInsertMessage(@Nullable String messageText, @Nullable String toolTip) {
         /* empty */
     }
 

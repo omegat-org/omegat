@@ -136,7 +136,7 @@ public class StartCommand implements Callable<Integer> {
         SwingUtilities.invokeLater(() -> {
             // setVisible can't be executed directly, because we need to
             // call all application startup listeners for initialize UI
-            Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame().setVisible(true);
+            Objects.requireNonNull(Core.getMainWindow().getApplicationFrame()).setVisible(true);
             if (params != null && params.projectLocation != null) {
                 if (isProjectRemote(params.projectLocation)) {
                     ProjectUICommands.projectRemote(params.projectLocation);

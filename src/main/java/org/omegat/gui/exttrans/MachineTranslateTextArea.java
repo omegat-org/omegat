@@ -119,11 +119,9 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         // re-render the shown translation. Guarded: first called from the
         // superclass constructor, before the controller is initialised.
         initDocument();
-        if (controller != null) {
-            MachineTranslationInfo current = controller.getDisplayedResult();
-            if (current != null) {
-                controller.setFoundResult(current);
-            }
+        MachineTranslationInfo current = controller.getDisplayedResult();
+        if (current != null) {
+            controller.setFoundResult(current);
         }
     }
 
@@ -200,7 +198,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public void populatePaneMenu(JPopupMenu menu) {
         final JMenuItem prefs = new JMenuItem(OStrings.getString("GUI_MACHINETRANSLATESWINDOW_OPEN_PREFS"));
         prefs.addActionListener(e -> new PreferencesWindowController().show(
-                Objects.requireNonNull(Core.getMainWindow()).getApplicationFrame(), MachineTranslationPreferencesController.class));
+                Objects.requireNonNull(Core.getMainWindow().getApplicationFrame()), MachineTranslationPreferencesController.class));
         menu.add(prefs);
     }
 }

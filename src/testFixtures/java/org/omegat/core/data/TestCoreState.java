@@ -78,14 +78,12 @@ public class TestCoreState extends CoreState {
 
         // Check if main window exists and has a frame
         IMainWindow mainWindow = CoreState.getInstance().getMainWindow();
-        if (mainWindow != null) {
-            try {
-                if (mainWindow.getApplicationFrame() != null) {
-                    return true;
-                }
-            } catch (HeadlessException ignored) {
-                return false;
+        try {
+            if (mainWindow.getApplicationFrame() != null) {
+                return true;
             }
+        } catch (HeadlessException ignored) {
+            return false;
         }
 
         // Check if any GUI components are registered in CoreState

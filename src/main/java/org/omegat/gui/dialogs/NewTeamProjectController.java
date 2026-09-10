@@ -38,6 +38,7 @@ import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.gui.main.IMainWindow;
@@ -63,7 +64,7 @@ public class NewTeamProjectController {
         mw = mainWindow;
     }
 
-    public File show() {
+    public @Nullable File show() {
         ok = false;
         initComponents();
 

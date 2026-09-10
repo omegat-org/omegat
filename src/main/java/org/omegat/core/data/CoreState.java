@@ -46,6 +46,7 @@ import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.issues.IIssues;
 import org.omegat.gui.issues.IIssueProvider;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
@@ -110,7 +111,7 @@ public class CoreState {
     private MachineTranslatorsManager machineTranslatorsManager;
 
     // GUI panes
-    private IMainWindow mainWindow;
+    private IMainWindow mainWindow = new ConsoleWindow();
     private IEditor editor;
     private IGlossaries glossaries;
     private INotes notes;
@@ -150,7 +151,7 @@ public class CoreState {
         this.project = project;
     }
 
-    public @Nullable IMainWindow getMainWindow() {
+    public IMainWindow getMainWindow() {
         return mainWindow;
     }
 
@@ -161,7 +162,7 @@ public class CoreState {
      *                   Can be null when testing.
      */
     public void setMainWindow(@Nullable IMainWindow mainWindow) {
-        this.mainWindow = mainWindow;
+        this.mainWindow = mainWindow == null ? new ConsoleWindow() : mainWindow;
     }
 
     public IEditor getEditor() {

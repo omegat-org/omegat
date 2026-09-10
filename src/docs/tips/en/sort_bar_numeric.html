@@ -1,0 +1,47 @@
+<html lang="en">
+<!--
+  ~  OmegaT - Computer Assisted Translation (CAT) tool
+  ~           with fuzzy matching, translation memory, keyword search,
+  ~           glossaries, and translation leveraging into updated projects.
+  ~
+  ~  Copyright (C) 2026 Stephan Pakebusch.
+  ~                Home page: https://www.omegat.org/
+  ~                Support center: https://omegat.org/support
+  ~
+  ~  This file is part of OmegaT.
+  ~
+  ~  OmegaT is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  OmegaT is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sort segments by numeric value</title>
+    <link rel="stylesheet" type="text/css" href="../tips.css">
+</head><body>
+<h3 class="title">Sort segments by numeric value</h3>
+<p>The sort bar's direction selector also offers <b>Numeric ascending</b> and
+<b>Numeric descending</b>: segments are ordered by the value of the number they
+contain, so "Step 2" comes before "Step 10" &mdash; alphabetically, "10" would
+come first.</p>
+<p>Recognized are signs, decimals and fractions (-5, 1.5, 3/2, &frac12;) and
+numerals of many writing systems &mdash; Roman (XII), CJK (&#21313;&#20108;),
+circled numbers (&#9321;) and further systems supported by
+<a class="ulink" href="https://icu4c-demos.unicode.org/icu-bin/locexp" target="_blank">ICU</a>.
+Values compare exactly: 1/3 orders correctly against any decimal, very large
+numbers never overflow, and segments without a number fall back to alphabetical
+order.</p>
+<p>Words such as "mix" or "XL" are valid Roman numerals too, so <b>Numeric
+asc./desc. no-Roman</b> counts them as plain text &mdash; the collapsed sort
+bar shows 1&uarr;/1&darr; instead of #&uarr;/#&darr;.</p>
+</body></html>

@@ -128,6 +128,8 @@ public class DefaultFlatDarkTheme extends FlatLaf {
         defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getUIManagerKey(), new Color(0x3f5488));
         defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getUIManagerKey(), new Color(0x64456C));
         defaults.put(EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getUIManagerKey(), new Color(0x108810));
+        defaults.put(EditorColor.COLOR_MARK_COMES_FROM_SOURCE_FILE.getUIManagerKey(),
+                new Color(0x2e6b4f));
         defaults.put(EditorColor.COLOR_REPLACE.getUIManagerKey(), new Color(0x4fa3ff));
         defaults.put(EditorColor.COLOR_LANGUAGE_TOOLS.getUIManagerKey(), new Color(0x4fa3ff));
         defaults.put(EditorColor.COLOR_TRANSTIPS.getUIManagerKey(), new Color(0x4fa3ff));

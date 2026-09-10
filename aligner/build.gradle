@@ -2,13 +2,14 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedModuleLibsDir = omegatModule.providedModuleLibsDir
+
 dependencies {
-    compileOnly(project.rootProject)
-    if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-*.jar', '**/jspecify-*.jar', '**/annotations-*.jar',
-            '**/picocli*.jar', '**/jakarta.xml.bind-api*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar', '**/jcl-over-slf4j-*.jar'])
+    compileOnly(project(':'))
+    if (file(providedModuleLibsDir).directory) {
+        compileOnly omegatModule.providedCoreLib('commons', 'lib-mnemonics', 'slf4j', 'supertmxmerge', 'jaxb',
+                'jspecify', 'annotations', 'picocli', 'jakarta.xml.bind-api')
+        implementation omegatModule.providedModuleLib('maligna', 'jcl-over-slf4j')
     } else {
         // Aligner
         implementation(libs.tokyo.northside.maligna) {
@@ -34,7 +35,7 @@ dependencies {
         compileOnly(libs.slf4j.format.jdk14)
         compileOnly(libs.picocli)
     }
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.commons.io)
     testImplementation(libs.picocli)
     testRuntimeOnly(libs.jaxb4.runtime)

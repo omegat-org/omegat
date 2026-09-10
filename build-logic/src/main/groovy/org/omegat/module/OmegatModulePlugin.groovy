@@ -35,6 +35,8 @@ class OmegatModulePlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+        project.extensions.create('omegatModule', OmegatModuleExtension, project)
+
         project.plugins.apply('java-library')
         project.plugins.apply('jacoco')
         project.plugins.apply('checkstyle')

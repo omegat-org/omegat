@@ -300,15 +300,30 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of tokens matching the supplied glossary entry
      */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+        return searchSourceMatchTokens(ste, Collections.singletonList(entry)).get(0);
+    }
+
+    /**
+     * Get tokens of the source text that match the supplied glossary entries;
+     * the source text is tokenized only once (SF bug #981).
+     *
+     * @param ste
+     *            The entry to search
+     * @param entries
+     *            The glossary entries to match against
+     * @return One (possibly empty) token list per glossary entry, in the
+     *         order of {@code entries}; empty lists are immutable
+     */
+    public List<List<Token[]>> searchSourceMatchTokens(SourceTextEntry ste, List<GlossaryEntry> entries) {
         CoreState coreState = CoreState.getInstance();
         ITokenizer tok = coreState.getProject().getSourceTokenizer();
         if (tok == null) {
-            return Collections.emptyList();
+            return Collections.nCopies(entries.size(), Collections.emptyList());
         }
         GlossarySearcher searcher = buildSearcher(tok,
                 coreState.getProject().getProjectProperties().getSourceLanguage());
 
-        return searcher.searchSourceMatchTokens(ste, entry);
+        return searcher.searchSourceMatchTokens(ste, entries);
     }
 
     /**

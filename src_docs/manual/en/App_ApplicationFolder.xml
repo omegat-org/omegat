@@ -43,6 +43,13 @@
          </varlistentry>
       </variablelist>
    </note>
+
+   <warning>
+	<para>OmegaT is now a macOS notarized application. Any
+	modification to files inside <filename>OmegaT.app</filename> will
+	keep OmegaT from running.</para>
+   </warning>
+   
    <variablelist>
       <varlistentry xml:id="application.folder.omegat.license">
          <term xml:id="application.folder.omegat.license.title">OmegaT-license.txt</term>

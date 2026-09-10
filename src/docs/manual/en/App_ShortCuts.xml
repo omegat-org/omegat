@@ -583,6 +583,48 @@
                      <entry>meta shift I</entry>
                   </row>
                   <row>
+                     <entry>Insert Source with Glossary Hits Replaced</entry>
+                     <entry>editInsertSourceGlossarySubstitutedMenuItem</entry>
+                     <entry>ctrl alt shift I</entry>
+                     <entry>meta alt shift I</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Match with Glossary Hits Replaced</entry>
+                     <entry>editInsertTranslationGlossarySubstitutedMenuItem</entry>
+                     <entry>ctrl alt I</entry>
+                     <entry>meta alt I</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Glossary Hit #1</entry>
+                     <entry>editInsertGlossaryHit1MenuItem</entry>
+                     <entry>ctrl alt 1</entry>
+                     <entry>meta alt 1</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Glossary Hit #2</entry>
+                     <entry>editInsertGlossaryHit2MenuItem</entry>
+                     <entry>ctrl alt 2</entry>
+                     <entry>meta alt 2</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Glossary Hit #3</entry>
+                     <entry>editInsertGlossaryHit3MenuItem</entry>
+                     <entry>ctrl alt 3</entry>
+                     <entry>meta alt 3</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Glossary Hit #4</entry>
+                     <entry>editInsertGlossaryHit4MenuItem</entry>
+                     <entry>ctrl alt 4</entry>
+                     <entry>meta alt 4</entry>
+                  </row>
+                  <row>
+                     <entry>Insert Glossary Hit #5</entry>
+                     <entry>editInsertGlossaryHit5MenuItem</entry>
+                     <entry>ctrl alt 5</entry>
+                     <entry>meta alt 5</entry>
+                  </row>
+                  <row>
                      <entry>Select Source Text</entry>
                      <entry>editSelectSourceMenuItem</entry>
                      <entry>ctrl shift A</entry>

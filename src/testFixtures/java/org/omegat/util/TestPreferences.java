@@ -1,4 +1,4 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
@@ -26,8 +26,6 @@
 package org.omegat.util;
 
 import java.util.List;
-
-import org.omegat.util.PreferencesImpl.IPrefsPersistence;
 
 /**
  * An isolated preferences store for tests.

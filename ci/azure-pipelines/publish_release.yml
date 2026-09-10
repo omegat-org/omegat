@@ -4,8 +4,8 @@ parameters:
 
 steps:
   - task: DownloadSecureFile@1
-    displayName: "Download SSH private key"
     name: sshKey
+    displayName: "Download SSH private key"
     inputs:
       secureFile: omegat-ci-rsa
   - task: Bash@3
@@ -33,22 +33,21 @@ steps:
         [[ -n "$LFTP_PASSWORD" ]] && echo "✅ LFTP_PASSWORD is set" || { echo "❌ LFTP_PASSWORD is empty — check SOURCEFORGE_CI_PASSPHRASE variable"; exit 1; }
         # Verify key file exists and passphrase is correct in one shot
         ssh-keygen -y -f ~/.ssh/id_rsa -P "$LFTP_PASSWORD" > /dev/null && echo "✅ Key + passphrase OK" || { echo "❌ Key or passphrase wrong"; exit 1; }
+        dest=sftp://$(SOURCEFORGE_CI_USER)@$SF_HOST
         # Upload distributions
         echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(Pipeline.Workspace)/build/distributions/
         ls -l $srcdir/*
-        dest=$(SOURCEFORGE_CI_USER)@$SF_HOST
         destdir="/home/frs/project/omegat/OmegaT - Standard/OmegaT ${OMEGAT_VERSION}/"
-        cmd="mkdir -p '$destdir' ; lcd '$srcdir' ; cd '$destdir' ; mirror -R --verbose=3 ; bye"
-        lftp --env-password -e \"$cmd\" $dest"
+        cmd="set net:timeout 20; set net:max-retries 3; set net:reconnect-interval-base 5; set net:reconnect-interval-max 30; open $dest; mkdir -p '$destdir'; lcd $srcdir; cd '$destdir'; mirror -R --verbose=3; bye"
+        lftp --env-password -e "$cmd" $dest
         # Upload manuals
         echo "Push manuals to sourceforge project web"
         srcdir=$(Pipeline.Workspace)/docs
         destdir=/home/project-web/omegat/htdocs/manual/${OMEGAT_VERSION}/
-        target=/home/project-web/omegat/htdocs/manual-standard
-        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
+        cmd="set net:timeout 20; set net:max-retries 3; set net:reconnect-interval-base 5; set net:reconnect-interval-max 30; open $dest; mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -Re --parallel=4 --verbose=3 ; bye"
         lftp --env-password -e "$cmd" $dest
-      env:
+    env:
       OMEGAT_VERSION: ${{ parameters.omegatVersion }}
       SF_HOST: frs.sourceforge.net
       LFTP_PASSWORD: $(SOURCEFORGE_KEY_PASS)

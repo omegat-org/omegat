@@ -256,6 +256,8 @@ public class EditorController implements IEditor {
     volatile @Nullable IEditorFilter entriesFilter;
     private @Nullable Component entriesFilterControlComponent;
 
+    volatile @Nullable IEditorSorter entriesSorter;
+
     private final SegmentExportImport segmentExportImport;
 
     protected @Nullable String currentEntryOrigin;
@@ -722,6 +724,13 @@ public class EditorController implements IEditor {
                 SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
                 tmpSegList.add(sb);
             }
+        }
+        // Apply the optional display sort to the segments being displayed. The
+        // default (no sorter) preserves natural file order because tmpSegList is
+        // already built in file order. List.sort is stable, so equal keys keep
+        // that order.
+        if (entriesSorter != null) {
+            tmpSegList.sort(entriesSorter.getComparator());
         }
         m_docSegList = tmpSegList.toArray(new SegmentBuilder[0]);
 
@@ -1681,13 +1690,10 @@ public class EditorController implements IEditor {
                         displayedFileIndex = i;
                         loadDocument();
                     }
-                    // find correct displayedEntryIndex
-                    for (int j = 0; j < m_docSegList.length; j++) {
-                        if (m_docSegList[j].segmentNumberInProject >= entryNum) { //
-                            displayedEntryIndex = j;
-                            break;
-                        }
-                    }
+                    // find correct displayedEntryIndex. The list may be in any
+                    // display order (a sorter can reorder it), so locate by exact
+                    // entry number, falling back to the nearest available entry.
+                    displayedEntryIndex = findDisplayIndexForEntry(entryNum);
                     break;
                 }
             }
@@ -1695,6 +1701,30 @@ public class EditorController implements IEditor {
         activateEntry(pos);
         editor.setCursor(oldCursor);
         updateTitleCurrentFile();
+    }
+
+    /**
+     * Find the index in {@link #m_docSegList} of the segment with the given
+     * project entry number. The list may be in any display order (a sorter can
+     * reorder it), so we cannot assume ascending order. If the exact entry is not
+     * present (e.g. filtered out), return the index of the segment whose entry
+     * number is closest to entryNum, or 0 if the list is empty.
+     */
+    private int findDisplayIndexForEntry(int entryNum) {
+        int fallback = 0;
+        int bestDelta = Integer.MAX_VALUE;
+        for (int j = 0; j < m_docSegList.length; j++) {
+            int num = m_docSegList[j].segmentNumberInProject;
+            if (num == entryNum) {
+                return j;
+            }
+            int delta = Math.abs(num - entryNum);
+            if (delta < bestDelta) {
+                bestDelta = delta;
+                fallback = j;
+            }
+        }
+        return fallback;
     }
 
     @Override
@@ -2240,16 +2270,30 @@ public class EditorController implements IEditor {
             if (entriesFilter == null || entriesFilter.allowed(curEntry)) {
                 gotoEntry(curEntry.entryNum());
             } else {
-                // Go to next (available) segment. But first, we need to reset
-                // the displayedEntryIndex to the number where the current but
-                // filtered entry could have been if it was not filtered.
+                // The current entry was filtered out. Go to the visible segment
+                // closest after it in entry-number space (or the closest before it
+                // if none follows). The list may be in any display order, so search
+                // by entry number rather than by position.
+                int best = -1;
+                int bestNum = Integer.MAX_VALUE;
+                int prev = -1;
+                int prevNum = Integer.MIN_VALUE;
                 for (int j = 0; j < m_docSegList.length; j++) {
-                    if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
-                        displayedEntryIndex = j - 1;
-                        break;
+                    int num = m_docSegList[j].segmentNumberInProject;
+                    if (num >= curEntryNum && num < bestNum) {
+                        bestNum = num;
+                        best = j;
+                    }
+                    if (num < curEntryNum && num > prevNum) {
+                        prevNum = num;
+                        prev = j;
                     }
                 }
-                nextEntry();
+                int target = (best >= 0) ? best : prev;
+                if (target >= 0) {
+                    displayedEntryIndex = target;
+                    activateEntry();
+                }
             }
         }
     }
@@ -2285,6 +2329,72 @@ public class EditorController implements IEditor {
                 gotoEntry(curEntryNum);
             }
         }
+    }
+
+    @Override
+    public @Nullable IEditorSorter getSort() {
+        return entriesSorter;
+    }
+
+    /**
+     * {@inheritDoc} Document is reloaded to immediately apply the new display
+     * order, keeping the current entry active.
+     */
+    @Override
+    public void setSort(IEditorSorter sorter) {
+        UIThreadsUtil.mustBeSwingThread();
+        // Fail fast on misuse: clearing the sort is done via removeSort(), not by
+        // passing null.
+        Objects.requireNonNull(sorter, "sorter must not be null; use removeSort() to clear the sort");
+
+        entriesSorter = sorter;
+
+        SourceTextEntry curEntry = getCurrentEntry();
+        // The current entry is never removed by sorting, only repositioned.
+        if (curEntry != null && canReloadDocument()) {
+            commitAndDeactivate();
+            loadDocument(); // rebuild + re-sort entrylist
+            gotoEntry(curEntry.entryNum());
+        }
+    }
+
+    /**
+     * {@inheritDoc} Document is reloaded if appropriate to revert to natural file
+     * order.
+     */
+    @Override
+    public void removeSort() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (entriesSorter == null) {
+            return;
+        }
+
+        entriesSorter = null;
+
+        int curEntryNum = getCurrentEntryNumber();
+        if (canReloadDocument()) {
+            commitAndDeactivate();
+            loadDocument();
+            gotoEntry(curEntryNum);
+        }
+    }
+
+    /**
+     * Whether the editor currently holds a loaded document that can be safely
+     * rebuilt via {@link #loadDocument()}. Guards setSort/removeSort against NPEs
+     * when there is no document or no loaded project (e.g. an empty project).
+     */
+    private boolean canReloadDocument() {
+        if (editor.getOmDocument() == null) {
+            return false;
+        }
+        IProject project = Core.getProject();
+        if (project == null || !project.isProjectLoaded()) {
+            return false;
+        }
+        List<FileInfo> files = project.getProjectFiles();
+        return files != null && !files.isEmpty();
     }
 
     @Override

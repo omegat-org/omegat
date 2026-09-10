@@ -47,6 +47,17 @@ public class MatchStatCounts {
      */
     public static final int ROW_REPETITIONS = 0;
 
+    /**
+     * Number of rows in the total match statistics table, including the total
+     * row. Must be kept in sync with the row labels of
+     * {@link org.omegat.core.statistics.CalcMatchStatistics} (all categories
+     * plus the total row; the slot unused in total mode is skipped). Used by
+     * org.omegat.gui.stat.MatchStatisticsPanel to recognize the shape of the
+     * total table (the per-file table has one row more); whether a scan
+     * completed is decided by the entry mapping, not by this count.
+     */
+    public static final int FINAL_TABLE_ROWS = 8;
+
     private final StatCount[] counts;
 
     public MatchStatCounts() {

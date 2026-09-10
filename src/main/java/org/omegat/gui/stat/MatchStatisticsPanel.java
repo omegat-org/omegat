@@ -62,13 +62,6 @@ import org.omegat.util.OStrings;
 @SuppressWarnings("serial")
 public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IStatsConsumer {
 
-    /**
-     * Number of rows in the final total match statistics table, including the
-     * total row. Only tables of this shape carry filter buttons, and only once
-     * the entry mapping of the running scan has arrived.
-     */
-    static final int FINAL_TABLE_ROWS = 8;
-
     /** Index of the filter button column, inserted before the segment counts. */
     static final int FILTER_COLUMN = 1;
 
@@ -137,7 +130,7 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
         String[][] data = lastData;
         String projectRoot = currentProjectRoot();
         if (completion.isSuccess() && rows != null && headers != null && data != null
-                && data.length == FINAL_TABLE_ROWS && projectRoot != null) {
+                && data.length == MatchStatCounts.FINAL_TABLE_ROWS && projectRoot != null) {
             MatchStatisticsCache.store(headers, data, rows, lastTextData, projectRoot);
         } else if (!completion.isSuccess()) {
             // A failed or cancelled recalculation leaves the intermediate
@@ -182,7 +175,7 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
 
     private Component createTablePanel(String[] headers, String[][] data) {
         Map<Integer, Integer> rows = entryRowIndexes;
-        if (rows == null || data.length != FINAL_TABLE_ROWS) {
+        if (rows == null || data.length != MatchStatCounts.FINAL_TABLE_ROWS) {
             return generateTableDisplay(null, headers, data);
         }
         String[] headersWithFilter = new String[headers.length + 1];

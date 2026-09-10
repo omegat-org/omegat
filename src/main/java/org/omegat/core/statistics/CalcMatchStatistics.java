@@ -103,7 +103,8 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
     /**
      * Row labels of the total table. Its final shape (all rows except index 1,
      * plus the total row) is mirrored by the filter buttons of
-     * org.omegat.gui.stat.MatchStatisticsPanel.
+     * org.omegat.gui.stat.MatchStatisticsPanel; the row count is pinned as
+     * {@link MatchStatCounts#FINAL_TABLE_ROWS}.
      */
     protected final String[] rowsTotal = new String[] { OStrings.getString("CT_STATSMATCH_RowRepetitions"),
             OStrings.getString("CT_STATSMATCH_RowExactMatch"), OStrings.getString("CT_STATSMATCH_RowMatch95"),

@@ -161,6 +161,8 @@ public class CalcMatchStatisticsTest extends TestCore {
         assertNotNull(result);
         String[][] finalResult = allResult.get(1);
         assertNotNull(finalResult);
+        // Fails loudly when the row set drifts away from the pinned constant.
+        assertEquals(MatchStatCounts.FINAL_TABLE_ROWS, finalResult.length);
         // The intermediate table has the shape of the final one: same rows,
         // every count already in its final row, similarity buckets still empty.
         assertEquals(finalResult.length, result.length);

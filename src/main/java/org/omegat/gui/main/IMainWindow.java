@@ -120,7 +120,7 @@ public interface IMainWindow {
      * @param params
      *            warning text parameters
      */
-    void displayWarningRB(@Nullable String warningKey, Object@Nullable ... params);
+    void displayWarningRB(@Nullable String warningKey, Object@Nullable... params);
 
     /**
      * Same as {@link #displayWarningRB(String, Object...)} but this will close

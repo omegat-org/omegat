@@ -483,6 +483,52 @@ public class SearcherTest {
         assertEquals("Duplicate entry", results.get(1).getSrcText());
     }
 
+    /**
+     * A number-only search term with the numbers option finds every writing
+     * of the same value; a differing value stays out.
+     */
+    @Test
+    public void numberValueSearchFindsOtherNumeralSystems() throws Exception {
+        addSTE(fi, "id1", "chapter \u5341\u4e8c of the book", null);
+        addSTE(fi, "id2", "chapter \u0661\u0662 again", null);
+        addSTE(fi, "id3", "chapter 13 differs", null);
+        SearchExpression s = createSearchExpression("12", SearchExpressionType.EXACT, false, false);
+        s.matchNumbers = true;
+        Searcher searcher = startSearcher(s);
+        assertEquals(2, searcher.getSearchResults().size());
+    }
+
+    /**
+     * A term that reads as a number only through the source locale's
+     * separators still finds its own literal writing (first) and the
+     * value-equivalent plain writing (after it).
+     */
+    @Test
+    public void numberValueSearchKeepsLiteralWritingAndRanksItFirst() throws Exception {
+        proj.getProjectProperties().setSourceLanguage("de");
+        proj.getProjectProperties().setTargetLanguage("en-US");
+        addSTE(fi, "id1", "counted 1234 pieces", null);
+        addSTE(fi, "id2", "literal 1.234 here", null);
+        SearchExpression s = createSearchExpression("1.234", SearchExpressionType.EXACT, false, false);
+        s.matchNumbers = true;
+        Searcher searcher = startSearcher(s);
+        List<SearchResultEntry> results = searcher.getSearchResults();
+        assertEquals(2, results.size());
+        assertTrue(results.get(0).getSrcText(), results.get(0).getSrcText().contains("1.234"));
+        assertTrue(results.get(1).getSrcText(), results.get(1).getSrcText().contains("1234"));
+    }
+
+    /** Without the numbers option the term stays a literal search string. */
+    @Test
+    public void numberValueSearchOffKeepsLiteralSemantics() throws Exception {
+        addSTE(fi, "id1", "counted 1234 pieces", null);
+        addSTE(fi, "id2", "literal 1.234 here", null);
+        SearchExpression s = createSearchExpression("1.234", SearchExpressionType.EXACT, false, false);
+        s.matchNumbers = false;
+        Searcher searcher = startSearcher(s);
+        assertEquals(1, searcher.getSearchResults().size());
+    }
+
     private static @NotNull SearchExpression createSearchExpression(String text, SearchExpressionType type,
                                                                     boolean caseSensitive, boolean widthInsensitive) {
         return createSearchExpression(text, type, caseSensitive, widthInsensitive, true);
@@ -501,7 +547,6 @@ public class SearcherTest {
         s.allResults = allResults;
         s.fileNames = true;
         s.caseSensitive = caseSensitive;
-        s.spaceMatchNbsp = false;
         s.searchSource = true;
         s.searchTarget = true;
         s.searchTranslated = true;

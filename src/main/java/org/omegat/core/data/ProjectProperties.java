@@ -36,8 +36,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.SRXManager;
 import org.omegat.filters2.master.FilterMaster;
@@ -104,7 +108,8 @@ public class ProjectProperties {
         setSentenceSegmentingEnabled(true);
         setSupportDefaultTranslations(true);
         setRemoveTags(false);
-        setMatchNumbersEnabled(false);
+        setMatchNumbersEnabled(true);
+        setMatchNumbersRomanEnabled(false);
 
         setSourceLanguage("AR-LB");
         setTargetLanguage("UK-UA");
@@ -420,7 +425,7 @@ public class ProjectProperties {
 
     /**
      * Returns whether fuzzy matching considers numbers by value for this
-     * project (feature request #465). Default, no.
+     * project (feature request #465). Default, yes.
      */
     public boolean isMatchNumbersEnabled() {
         return matchNumbersEnabled;
@@ -429,6 +434,42 @@ public class ProjectProperties {
     /** Sets whether fuzzy matching considers numbers by value for this project */
     public void setMatchNumbersEnabled(boolean matchNumbersEnabled) {
         this.matchNumbersEnabled = matchNumbersEnabled;
+    }
+
+    /**
+     * Returns whether number matching also reads Roman numerals written with
+     * Latin letters. Default, no: ordinary uppercase words ("I", "MIX") read
+     * as numbers too easily. Roman numerals written with the dedicated code
+     * points always count.
+     */
+    public boolean isMatchNumbersRomanEnabled() {
+        return matchNumbersRomanEnabled;
+    }
+
+    /** Sets whether number matching also reads Latin-letter Roman numerals. */
+    public void setMatchNumbersRomanEnabled(boolean matchNumbersRomanEnabled) {
+        this.matchNumbersRomanEnabled = matchNumbersRomanEnabled;
+    }
+
+    /**
+     * Character equivalence classes disabled for fuzzy matching in this
+     * project (feature request #1681). Default, none: every class active.
+     */
+    public Set<MatchEquivalence> getDisabledMatchEquivalences() {
+        return EnumSet.copyOf(disabledMatchEquivalences);
+    }
+
+    /** Sets character equivalence classes disabled for fuzzy matching. */
+    public void setDisabledMatchEquivalences(Collection<MatchEquivalence> disabled) {
+        disabledMatchEquivalences.clear();
+        disabledMatchEquivalences.addAll(disabled);
+    }
+
+    /** Character equivalence classes active for fuzzy matching. */
+    public Set<MatchEquivalence> getActiveMatchEquivalences() {
+        Set<MatchEquivalence> active = MatchEquivalence.all();
+        active.removeAll(disabledMatchEquivalences);
+        return active;
     }
 
     /**
@@ -688,6 +729,9 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingEnabled;
     private boolean matchNumbersEnabled;
+    private boolean matchNumbersRomanEnabled;
+    private final Set<MatchEquivalence> disabledMatchEquivalences = EnumSet
+            .noneOf(MatchEquivalence.class);
     private boolean supportDefaultTranslations;
     private boolean removeTags;
     private List<String> exportTmLevels;

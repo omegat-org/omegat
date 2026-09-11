@@ -33,6 +33,7 @@
 package org.omegat.core.search;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,8 +45,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -64,6 +67,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.threads.CancellationToken;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
@@ -74,6 +78,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.NumeralValueParser;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
@@ -113,6 +118,12 @@ import org.omegat.util.StringUtil;
 public class Searcher {
 
     private final List<SearchResultEntry> searchResults = new ArrayList<>();
+
+    /**
+     * The trimmed search term while the number-value alternation is active,
+     * so literal hits can rank before value-equivalent ones; null otherwise.
+     */
+    private @Nullable String numberSearchTerm;
     private boolean preprocessResults;
     private final IProject project;
     /**
@@ -285,12 +296,36 @@ public class Searcher {
         // search string; otherwise, if keyword, break up the string into
         // separate words (= multiple search strings)
 
+        // A number-only search term matches by value: the whole (trimmed)
+        // term must read as one number - universally, or with the grouping
+        // and decimal separators of the project's source or target locale
+        // ("1.234" in a German project searches like 1234) - then the pattern
+        // becomes the alternation of every writing of that value.
+        String numberAlternation = null;
+        String term = textSearchExpression.trim();
+        if (searchExpression.matchNumbers
+                && searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
+            numberAlternation = searchTermValue(term)
+                    .map(value -> Stream
+                            .of(Stream.of(term), localeWritings(value),
+                                    NumeralValueParser
+                                            .renderings(value, searchExpression.matchNumbersRoman)
+                                            .stream())
+                            .flatMap(writings -> writings).distinct().map(Pattern::quote)
+                            .collect(Collectors.joining("|", "(?:", ")")))
+                    .orElse(null);
+        }
+        // The same (possibly width-normalized) term the alternation leads
+        // with, so the literal-first ranking recognizes its own hits.
+        numberSearchTerm = numberAlternation != null ? term : null;
+
         switch (searchExpression.searchExpressionType) {
         case EXACT:
             // escape the search string, it's not supposed to be a regular
-            // expression
-            textSearchExpression = StaticUtils.globToRegex(textSearchExpression,
-                    searchExpression.spaceMatchNbsp);
+            // expression; variant characters match their whole equivalence
+            // group (#1681)
+            textSearchExpression = numberAlternation != null ? numberAlternation
+                    : MatchEquivalence.globToRegex(textSearchExpression, searchExpression.equivalences);
             if (searchExpression.wholeWordsOnly) {
                 textSearchExpression = anchorWholeWords(textSearchExpression);
             }
@@ -300,11 +335,22 @@ public class Searcher {
             break;
         case KEYWORD:
             // break the search string into keywords,
-            // each of which is a separate search string
+            // each of which is a separate search string; fold space variants
+            // first so no-break spaces also separate keywords
             final int flags = getPatternFlags();
-            Pattern.compile(" ").splitAsStream(textSearchExpression.trim()).filter(word -> !word.isEmpty())
+            if (numberAlternation != null) {
+                String glob = numberAlternation;
+                if (searchExpression.wholeWordsOnly) {
+                    glob = anchorWholeWords(glob);
+                }
+                matchers.add(Pattern.compile(glob, flags).matcher(""));
+                break;
+            }
+            String keywords = MatchEquivalence.foldSameLength(textSearchExpression,
+                    MatchEquivalence.buildSameLengthFoldMap(searchExpression.equivalences));
+            Pattern.compile(" ").splitAsStream(keywords.trim()).filter(word -> !word.isEmpty())
                     .map(word -> {
-                        String glob = StaticUtils.globToRegex(word, false);
+                        String glob = MatchEquivalence.globToRegex(word, searchExpression.equivalences);
                         if (searchExpression.wholeWordsOnly) {
                             glob = anchorWholeWords(glob);
                         }
@@ -312,12 +358,6 @@ public class Searcher {
                     }).forEach(matchers::add);
             break;
         case REGEXP:
-            // space match nbsp (\u00a0)
-            if (searchExpression.spaceMatchNbsp) {
-                textSearchExpression = textSearchExpression.replace(" ", "( |\u00A0)");
-                textSearchExpression = textSearchExpression.replace("\\\\s", "(\\\\s|\u00A0)");
-            }
-
             // create a matcher for the search string
             matchers.add(Pattern.compile(textSearchExpression, getPatternFlags()).matcher(""));
             break;
@@ -334,11 +374,43 @@ public class Searcher {
                 searchFiles();
             }
         } finally {
+            // A number-value search lists the literal hits first; the stable
+            // sort keeps the traversal order within each group.
+            if (numberSearchTerm != null) {
+                String literalTerm = numberSearchTerm;
+                searchResults.sort(java.util.Comparator
+                        .comparingInt(entry -> containsLiteralTerm(entry, literalTerm) ? 0 : 1));
+            }
             // Mark search as completed - provides happens-before edge for safe
             // result access
             // This ensures all search results are visible to other threads
             searchCompleted = true;
         }
+    }
+
+    /** Whether one of the entry's match regions is the search term itself. */
+    private boolean containsLiteralTerm(SearchResultEntry entry, String term) {
+        return matchesLiteral(entry.getSrcText(), entry.getSrcMatch(), term)
+                || matchesLiteral(entry.getTranslation(), entry.getTargetMatch(), term);
+    }
+
+    private boolean matchesLiteral(@Nullable String text, SearchMatch @Nullable [] matches, String term) {
+        if (text == null || matches == null) {
+            return false;
+        }
+        for (SearchMatch match : matches) {
+            int end = match.getStart() + match.getLength();
+            if (end > text.length()) {
+                continue;
+            }
+            String matched = text.substring(match.getStart(), end);
+            boolean equal = searchExpression.caseSensitive ? matched.equals(term)
+                    : matched.equalsIgnoreCase(term);
+            if (equal) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -369,6 +441,50 @@ public class Searcher {
     }
 
     /**
+     * The whole (trimmed) search term as one integer value: read universally
+     * first, then with the source and the target locale's separators. Only
+     * whole values take part, because the rendering alternation enumerates
+     * integer writings.
+     */
+    private Optional<BigInteger> searchTermValue(String term) {
+        Optional<BigInteger> universal = NumeralValueParser.parseTokenWhole(term,
+                searchExpression.matchNumbersRoman);
+        if (universal.isPresent()) {
+            return universal;
+        }
+        ProjectProperties props = project.getProjectProperties();
+        if (props == null) {
+            return Optional.empty();
+        }
+        for (Locale locale : new Locale[] { props.getSourceLanguage().getLocale(),
+                props.getTargetLanguage().getLocale() }) {
+            Optional<BigInteger> localized = NumeralValueParser
+                    .parseTokenValueLocalized(term, searchExpression.matchNumbersRoman, locale)
+                    .filter(v -> BigInteger.ONE.equals(v.denominator()))
+                    .map(NumeralValueParser.Rational::numerator);
+            if (localized.isPresent()) {
+                return localized;
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * The value written with the project's source and target locale number
+     * formats, so "1234" also finds "1.234" in a German-English project.
+     */
+    private Stream<String> localeWritings(BigInteger value) {
+        ProjectProperties props = project.getProjectProperties();
+        if (props == null) {
+            return Stream.empty();
+        }
+        return Stream
+                .of(props.getSourceLanguage().getLocale(), props.getTargetLanguage().getLocale())
+                .flatMap(locale -> NumeralValueParser.localeRendering(value, locale).stream());
+    }
+
+
+    /**
      * Wrap the given regular expression so that it only matches whole words
      * (RFE#849). Lookaround on word characters is used instead of the word
      * boundary anchor so that search terms that start or end with a non-word
@@ -383,13 +499,16 @@ public class Searcher {
         return "(?<!\\w)(?:" + regex + ")(?!\\w)";
     }
 
+    /** Author matcher, created once per search (the pattern can be large). */
+    private @Nullable Matcher authorMatcher;
+
     /** create a matcher for the author search string. */
     private Matcher createAuthorSearchExpression() {
         String authorSearchExpression = searchExpression.author;
         int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
         if (searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
-            authorSearchExpression = StaticUtils.globToRegex(authorSearchExpression,
-                    searchExpression.spaceMatchNbsp);
+            authorSearchExpression = MatchEquivalence.globToRegex(authorSearchExpression,
+                    searchExpression.equivalences);
         }
         return Pattern.compile(authorSearchExpression, flags).matcher("");
     }
@@ -1020,10 +1139,10 @@ public class Searcher {
      */
     boolean searchReplaceImpl(SearchExpression newSearchExpression, List<SearchMatch> foundMatchesList,
             Matcher matcher, int end, int start, Locale targetLocale) {
+        if ((end == start) && (start > 0)) {
+            return true;
+        }
         if (newSearchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
-            if ((end == start) && (start > 0)) {
-                return true;
-            }
             String repl = newSearchExpression.replacement;
             Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
             while (replaceMatcher.find()) {
@@ -1078,7 +1197,10 @@ public class Searcher {
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(@Nullable ITMXEntry te) {
-        Matcher author = createAuthorSearchExpression();
+        if (authorMatcher == null) {
+            authorMatcher = createAuthorSearchExpression();
+        }
+        Matcher author = authorMatcher;
         if (te == null) {
             return false;
         }

@@ -29,6 +29,7 @@ import org.omegat.core.statistics.IStatsConsumer;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -61,6 +62,10 @@ public class MatchStatisticsPanel extends BaseMatchStatisticsPanel implements IS
             // so have to remove first.
             removeAll();
             add(generateTableDisplay(null, headers, data));
+            JLabel hint = buildEquivalenceHint();
+            if (hint != null) {
+                add(hint, BorderLayout.PAGE_END);
+            }
         });
     }
 }

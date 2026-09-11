@@ -29,11 +29,29 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.OptionalLong;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+
+import org.jspecify.annotations.Nullable;
+
+import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 import com.ibm.icu.lang.UCharacter;
+import com.ibm.icu.lang.UProperty;
 import com.ibm.icu.text.Normalizer2;
 import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.ibm.icu.util.ULocale;
@@ -54,8 +72,7 @@ import com.ibm.icu.util.ULocale;
  *
  * A value is only returned when a candidate system consumes the WHOLE (trimmed)
  * string, so partial or ambiguous input is rejected and the caller can fall
- * back to plain text ordering. Kaktovik/Inuktitut numerals are not available in
- * the bundled ICU version and are therefore not recognized.
+ * back to plain text ordering.
  *
  * On top of the integer core, {@link #parseValue} and {@link #firstValue}
  * expose signed real numbers as an exact reduced {@link Rational}
@@ -70,13 +87,15 @@ import com.ibm.icu.util.ULocale;
  * irreducibly locale-ambiguous), so "1,000" and "1,5" contribute only their
  * leading integer. Division by zero yields no value.
  *
- * As a final step, a single code point that carries a Unicode numeric value but
- * is neither a decimal digit nor an algorithmic numeral is resolved from its
- * value: enclosed and parenthesized numbers and many
- * historic script numerals (Aegean, cuneiform, Aramaic, Greek acrophonic ...).
- * Only single, non-negative integer values are taken; multi-sign additive
- * sequences are not composed. Symbols without a numeric value (such as the emoji
- * for a hundred points or the keycap ten) are correctly ignored.
+ * As a final step, code points that carry a Unicode numeric value but are
+ * neither decimal digits nor algorithmic numerals are resolved from their
+ * values: enclosed and parenthesized numbers and many historic script numerals
+ * (Aegean, cuneiform, Aramaic, Greek acrophonic ...). A single sign is taken
+ * directly, including small exact fractions; a sequence of signs from one of
+ * the named numeral blocks reads positionally where the block is a digit block
+ * (Mayan and Kaktovik, base twenty) and as an additive largest-first sum
+ * otherwise. Symbols without a numeric value (such as the emoji for a hundred
+ * points or the keycap ten) are correctly ignored.
  *
  * The class is stateless from the caller's perspective; the (non-thread-safe)
  * ICU formatters are cached per thread.
@@ -163,6 +182,12 @@ public final class NumeralValueParser {
             return decimal;
         }
         if (!mayBeAlgorithmicNumeral(s)) {
+            return Optional.empty();
+        }
+        // No rule set reads the sign-block scripts, so their tokens would fail
+        // through every parser at real cost; the sign-value path reads them.
+        // (Number Forms come back here through their NFKC form, which is Latin.)
+        if (SIGN_BLOCKS.contains(Character.UnicodeBlock.of(s.codePointAt(0)))) {
             return Optional.empty();
         }
         for (RuleBasedNumberFormat parser : PARSERS.get()) {
@@ -617,19 +642,23 @@ public final class NumeralValueParser {
         if (algorithmic.isPresent()) {
             return algorithmic;
         }
-        // Last resort: a single Nl/No code point that carries a Unicode numeric
-        // value but is neither a decimal digit nor an algorithmic numeral -
-        // enclosed/parenthesized numbers and many historic script
-        // numerals (Aegean, cuneiform, Aramaic, Greek acrophonic ...). Only a
-        // single, non-negative integer value is taken; fractional forms and
-        // multi-sign additive sequences are left for a later, dedicated step.
-        return singleCodePointNumericValue(u);
+        // Last resort: sign numerals read through their Unicode numeric values -
+        // enclosed/parenthesized numbers and the historic script numerals
+        // (Aegean, cuneiform, Aramaic, Greek acrophonic ...). A single code
+        // point is taken directly; a sequence of signs from one block is read
+        // positionally where the block is a digit block, additively otherwise.
+        Optional<Rational> single = singleCodePointNumericValue(u);
+        if (single.isPresent()) {
+            return single;
+        }
+        return signSequenceValue(u);
     }
 
     /**
      * The value of a single Nl/No code point via its Unicode numeric value, if it
-     * is a non-negative integer. Symbols without a numeric value, the emoji for a
-     * hundred points or the keycap ten say, and fractional values yield empty.
+     * is non-negative. Small exact fractions (a cuneiform two-thirds, a North
+     * Indic quarter) resolve to their rational; symbols without a numeric value,
+     * the emoji for a hundred points or the keycap ten say, yield empty.
      */
     private static Optional<Rational> singleCodePointNumericValue(String u) {
         if (u.codePointCount(0, u.length()) != 1) {
@@ -641,10 +670,84 @@ public final class NumeralValueParser {
             return Optional.empty();
         }
         double v = UCharacter.getUnicodeNumericValue(cp);
-        if (v == UCharacter.NO_NUMERIC_VALUE || v < 0 || Double.isInfinite(v) || v != Math.floor(v)) {
+        if (v == UCharacter.NO_NUMERIC_VALUE || v < 0 || Double.isInfinite(v)) {
             return Optional.empty();
         }
-        return Optional.of(Rational.ofInteger(BigDecimal.valueOf(v).toBigIntegerExact()));
+        if (v == Math.floor(v)) {
+            return Optional.of(Rational.ofInteger(BigDecimal.valueOf(v).toBigIntegerExact()));
+        }
+        return rationalize(v);
+    }
+
+    /**
+     * The denominators Unicode numeric values of fractional numerals use; the
+     * largest (320) belongs to the Tamil and Malayalam fraction series.
+     */
+    private static final int[] FRACTION_DENOMINATORS = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 32, 40,
+            64, 80, 160, 320 };
+
+    /** A small exact fraction for a Unicode numeric value, if one matches. */
+    private static Optional<Rational> rationalize(double v) {
+        for (int den : FRACTION_DENOMINATORS) {
+            double num = v * den;
+            if (Math.abs(num - Math.rint(num)) < 1e-9) {
+                return Optional.of(Rational.of(BigInteger.valueOf((long) Math.rint(num)),
+                        BigInteger.valueOf(den)));
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * The value of a sequence of numeral signs from one Unicode block. A digit
+     * block (a contiguous zero-based run of sign values: Mayan and Kaktovik,
+     * base twenty) reads positionally; any other block reads as an additive
+     * sum, provided the signs come largest first (the canonical order of the
+     * additive systems) - an ascending pair rejects the token, so a
+     * multiplicative notation such as Tamil is never misread as a sum.
+     */
+    private static Optional<Rational> signSequenceValue(String u) {
+        int count = u.codePointCount(0, u.length());
+        if (count < 2 || count > MAX_COMPOSED_SIGNS) {
+            return Optional.empty();
+        }
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(u.codePointAt(0));
+        if (block == null || !SIGN_BLOCKS.contains(block)) {
+            return Optional.empty();
+        }
+        List<BigInteger> sequence = new ArrayList<>();
+        for (int i = 0; i < u.length();) {
+            int cp = u.codePointAt(i);
+            int type = Character.getType(cp);
+            double v = UCharacter.getUnicodeNumericValue(cp);
+            if (!block.equals(Character.UnicodeBlock.of(cp))
+                    || (type != Character.LETTER_NUMBER && type != Character.OTHER_NUMBER)
+                    || (type == Character.OTHER_NUMBER && UCharacter.getIntPropertyValue(cp,
+                            UProperty.DECOMPOSITION_TYPE) != UCharacter.DecompositionType.NONE)
+                    || v == UCharacter.NO_NUMERIC_VALUE || v < 0 || v != Math.floor(v)) {
+                return Optional.empty();
+            }
+            sequence.add(BigDecimal.valueOf(v).toBigIntegerExact());
+            i += Character.charCount(cp);
+        }
+        Optional<BigInteger> base = positionalBase(blockSigns(u.codePointAt(0)));
+        if (base.isPresent()) {
+            BigInteger value = BigInteger.ZERO;
+            for (BigInteger digit : sequence) {
+                value = value.multiply(base.get()).add(digit);
+            }
+            return Optional.of(Rational.ofInteger(value));
+        }
+        BigInteger sum = BigInteger.ZERO;
+        BigInteger previous = null;
+        for (BigInteger sign : sequence) {
+            if (previous != null && sign.compareTo(previous) > 0) {
+                return Optional.empty();
+            }
+            sum = sum.add(sign);
+            previous = sign;
+        }
+        return Optional.of(Rational.ofInteger(sum));
     }
 
     private static boolean hasDecimalDigit(String s) {
@@ -751,6 +854,369 @@ public final class NumeralValueParser {
         return -1;
     }
 
+    // ------------------------------------------------------------------------
+    // Number tokens of a segment
+    // ------------------------------------------------------------------------
+
+    /**
+     * Matches a canonical uppercase Roman numeral; lowercase or non-canonical
+     * letter runs (like "mix" or "civil") stay ordinary words.
+     */
+    private static final Pattern CANONICAL_ROMAN = Pattern
+            .compile("M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})");
+    private static final Pattern ANY_ROMAN_DIGIT = Pattern.compile(".*[IVX].*");
+    /** Han numeral ideographs, the unambiguous CJK number tokens. */
+    private static final Pattern HAN_NUMERALS = Pattern.compile(
+            "[〇零一二三四五六七八九"
+                    + "十百千万萬億兆两兩]+");
+
+    /**
+     * Whether a token taken from running text may be read as a number at all.
+     * Tokens containing a decimal digit or a letter numeral of any script always
+     * count; letter-only tokens count only in unambiguous forms (canonical
+     * uppercase Roman where the caller allows them, Han numerals), so ordinary
+     * words are never misread as numerals.
+     *
+     * Two boundaries are deliberate. A Roman form without I, V or X is rejected,
+     * because "L", "C", "D" and "M" stand for a unit or an abbreviation far more
+     * often than for 50, 100, 500 and 1000. And a Number-Other code point counts
+     * only when it is a plain numeral or a precomposed vulgar fraction: the
+     * other presentation forms carrying a compatibility decomposition (a
+     * superscript exponent, an enclosed number) and the decoration-number
+     * symbol blocks (dingbat and negative circled digits, which carry no
+     * decomposition) stay out of the number comparisons, while the numeral
+     * systems encoded exclusively in that category (Ethiopic, Aegean, Mayan,
+     * Kaktovik, Meroitic and others) stay in.
+     */
+    private static boolean isNumeralToken(String text, boolean allowRoman) {
+        if (text == null || text.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < text.length();) {
+            int cp = text.codePointAt(i);
+            int type = Character.getType(cp);
+            if (type == Character.DECIMAL_DIGIT_NUMBER || type == Character.LETTER_NUMBER) {
+                return true;
+            }
+            if (type == Character.OTHER_NUMBER
+                    && (UCharacter.getIntPropertyValue(cp,
+                            UProperty.DECOMPOSITION_TYPE) == UCharacter.DecompositionType.NONE
+                            || VULGAR.containsKey(cp))
+                    && !SYMBOL_NUMBER_BLOCKS.contains(Character.UnicodeBlock.of(cp))) {
+                return true;
+            }
+            i += Character.charCount(cp);
+        }
+        return allowRoman && CANONICAL_ROMAN.matcher(text).matches()
+                && ANY_ROMAN_DIGIT.matcher(text).matches()
+                || HAN_NUMERALS.matcher(text).matches();
+    }
+
+    /**
+     * Render a non-negative whole value in the numeral system the template
+     * numeral is written in, or empty when that system cannot be written.
+     *
+     * Two writers are tried. The algorithmic systems go through the same ICU
+     * rule sets that read them: whichever rule set consumes the template also
+     * formats the value (Ethiopic, Roman, Greek, Hebrew, Armenian, Tamil,
+     * Georgian, Cyrillic, Han). Sign systems are composed from the template's
+     * own Unicode block: a block whose signs form a contiguous digit run
+     * starting at zero is written positionally in that base (Mayan and
+     * Kaktovik, base twenty), any other block is written greedily as an
+     * additive sequence of its sign values, largest first (Aegean, Meroitic,
+     * cuneiform), and only an exact composition of reasonable length is
+     * returned.
+     */
+    public static Optional<String> renderInSystemOf(BigInteger value, String template) {
+        if (value == null || value.signum() < 0 || template == null || template.isEmpty()) {
+            return Optional.empty();
+        }
+        String trimmed = template.trim();
+        Optional<String> algorithmic = renderAlgorithmic(value, trimmed);
+        if (algorithmic.isPresent()) {
+            return algorithmic;
+        }
+        if (Character.UnicodeBlock.NUMBER_FORMS
+                .equals(Character.UnicodeBlock.of(trimmed.codePointAt(0)))) {
+            return renderRomanForms(value, trimmed);
+        }
+        return composeFromBlockOf(value, trimmed.codePointAt(0));
+    }
+
+    /** Write the value with the ICU rule set that owns the template's system, or empty. */
+    private static Optional<String> renderAlgorithmic(BigInteger value, String trimmed) {
+        for (RuleBasedNumberFormat parser : PARSERS.get()) {
+            ParsePosition pp = new ParsePosition(0);
+            Number read;
+            try {
+                read = parser.parse(trimmed, pp);
+            } catch (RuntimeException ex) {
+                continue;
+            }
+            if (read == null || pp.getIndex() != trimmed.length() || Double.isNaN(read.doubleValue())) {
+                continue;
+            }
+            // A NUMBERING_SYSTEM instance parses with every rule set it
+            // knows, not only its default: only the instance that writes
+            // the template back verbatim owns the template's system.
+            try {
+                if (!trimmed.equals(parser.format(read.longValue()))) {
+                    continue;
+                }
+            } catch (RuntimeException ex) {
+                continue;
+            }
+            try {
+                String written = parser.format(value.longValueExact());
+                // Out-of-range values make RBNF fall back to grouped decimal
+                // digits; that is not the template's system.
+                return hasDecimalDigit(written) ? Optional.empty() : Optional.of(written);
+            } catch (RuntimeException ex) {
+                // The owning system cannot write this value at all.
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
+    }
+
+    /** The single-letter Roman forms at U+2160/U+2170, index-aligned with {@link #ROMAN_DIGITS}. */
+    private static final String ROMAN_FORMS = "ⅠⅤⅩⅬⅭⅮⅯ"
+            + "ⅰⅴⅹⅼⅽⅾⅿ";
+
+    /**
+     * Write the value with the Number Forms Roman code points. Their greedy
+     * additive composition would be invalid notation (forty is not four
+     * twelves), so the block's letter numerals go through NFKC to ASCII
+     * Roman, the Roman rule sets write the value subtractively in the
+     * template's case, and the letters map back to the single-letter forms.
+     * The rest of the block (Claudian signs, turned digits) stays unwritable.
+     */
+    private static Optional<String> renderRomanForms(BigInteger value, String trimmed) {
+        String ascii = NFKC.normalize(trimmed);
+        Optional<String> written = ascii.equals(trimmed) ? Optional.empty()
+                : renderAlgorithmic(value, ascii);
+        if (written.isEmpty()) {
+            return Optional.empty();
+        }
+        String letters = written.get();
+        boolean lower = Character.isLowerCase(letters.charAt(0));
+        // One through twelve have precomposed forms; prefer those.
+        if (value.signum() > 0 && value.compareTo(BigInteger.valueOf(12)) <= 0) {
+            return Optional.of(String.valueOf((char) ((lower ? 'ⅰ' : 'Ⅰ') + value.intValueExact() - 1)));
+        }
+        StringBuilder mapped = new StringBuilder();
+        for (char letter : letters.toCharArray()) {
+            int index = ROMAN_DIGITS.indexOf(letter);
+            if (index < 0) {
+                return Optional.empty();
+            }
+            mapped.append(ROMAN_FORMS.charAt(index));
+        }
+        return Optional.of(mapped.toString());
+    }
+
+    /**
+     * Render an exact fraction as a precomposed vulgar-fraction glyph, when
+     * the template numeral is such a glyph itself and a glyph carrying
+     * exactly the value exists; empty otherwise. The counterpart of
+     * {@link #renderInSystemOf} for the non-integer values.
+     */
+    public static Optional<String> renderVulgarFractionOf(Rational value, String template) {
+        if (value == null || template == null || template.isEmpty()) {
+            return Optional.empty();
+        }
+        String trimmed = template.trim();
+        if (trimmed.codePointCount(0, trimmed.length()) != 1
+                || !VULGAR.containsKey(trimmed.codePointAt(0))) {
+            return Optional.empty();
+        }
+        return VULGAR.entrySet().stream().filter(e -> e.getValue().equals(value))
+                .map(e -> new String(Character.toChars(e.getKey()))).findFirst();
+    }
+
+    /** Longest sign sequence a block composition may produce or read. */
+    private static final int MAX_COMPOSED_SIGNS = 24;
+
+    /** Largest base a digit block may declare; Mayan and Kaktovik use twenty. */
+    private static final int MAX_POSITIONAL_BASE = 20;
+
+    /**
+     * The Unicode blocks whose signs compose to numbers, both when reading a
+     * sign sequence and when writing a value. An allowlist, because a block
+     * that merely happens to contain number-valued symbols (the dingbat
+     * circled digits, say) must never be read or written as a numeral system.
+     * Blocks a JDK does not know are skipped: their numerals simply stay
+     * single-sign.
+     */
+    private static final Set<Character.UnicodeBlock> SIGN_BLOCKS = namedBlocks("AEGEAN NUMBERS",
+            "CUNEIFORM NUMBERS AND PUNCTUATION", "MAYAN NUMERALS", "KAKTOVIK NUMERALS",
+            "MEROITIC CURSIVE", "COUNTING ROD NUMERALS", "ANCIENT GREEK NUMBERS",
+            "OTTOMAN SIYAQ NUMBERS", "INDIC SIYAQ NUMBERS", "MEDEFAIDRIN", "KHAROSHTHI", "PHOENICIAN",
+            "NUMBER FORMS");
+
+    /**
+     * Symbol blocks whose number-valued code points are decorations rather
+     * than numerals (list bullets, dingbats); they carry no compatibility
+     * decomposition, so they need naming.
+     */
+    private static final Set<Character.UnicodeBlock> SYMBOL_NUMBER_BLOCKS = namedBlocks(
+            "DINGBATS", "ENCLOSED ALPHANUMERICS", "ENCLOSED ALPHANUMERIC SUPPLEMENT",
+            "ENCLOSED CJK LETTERS AND MONTHS", "ENCLOSED IDEOGRAPHIC SUPPLEMENT");
+
+    private static Set<Character.UnicodeBlock> namedBlocks(String... names) {
+        Set<Character.UnicodeBlock> blocks = new HashSet<>();
+        for (String name : names) {
+            try {
+                blocks.add(Character.UnicodeBlock.forName(name));
+            } catch (IllegalArgumentException unknownInThisJdk) {
+                continue;
+            }
+        }
+        return Set.copyOf(blocks);
+    }
+
+    /** The numeral signs of the given code point's block, by integer value. */
+    private static TreeMap<BigInteger, Integer> blockSigns(int templateCp) {
+        TreeMap<BigInteger, Integer> signs = new TreeMap<>();
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(templateCp);
+        if (block == null || !SIGN_BLOCKS.contains(block)) {
+            return signs;
+        }
+        for (int cp = Math.max(0, templateCp - 0x100); cp <= templateCp + 0x100; cp++) {
+            if (!block.equals(Character.UnicodeBlock.of(cp))) {
+                continue;
+            }
+            int type = Character.getType(cp);
+            if (type != Character.OTHER_NUMBER && type != Character.LETTER_NUMBER) {
+                continue;
+            }
+            // Presentation forms are filtered by their decomposition; letter
+            // numerals keep theirs (a Roman code point decomposes to letters
+            // and is a numeral all the same).
+            if (type == Character.OTHER_NUMBER && UCharacter.getIntPropertyValue(cp,
+                    UProperty.DECOMPOSITION_TYPE) != UCharacter.DecompositionType.NONE) {
+                continue;
+            }
+            double numeric = UCharacter.getUnicodeNumericValue(cp);
+            if (numeric == UCharacter.NO_NUMERIC_VALUE || numeric < 0 || numeric != Math.floor(numeric)) {
+                continue;
+            }
+            signs.putIfAbsent(BigDecimal.valueOf(numeric).toBigIntegerExact(), cp);
+        }
+        return signs;
+    }
+
+    /** The base of a contiguous zero-based digit block, or empty. */
+    private static Optional<BigInteger> positionalBase(TreeMap<BigInteger, Integer> signs) {
+        int base = signs.size();
+        if (base > 1 && base <= MAX_POSITIONAL_BASE && signs.firstKey().signum() == 0
+                && signs.lastKey().equals(BigInteger.valueOf(base - 1L))) {
+            return Optional.of(BigInteger.valueOf(base));
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Blocks that are read but never composed: counting rods are positional
+     * above the tens and the Number Forms are subtractive Roman, so a greedy
+     * additive spelling of either would be invalid notation. (Roman gets its
+     * own writer; rod values fall back to plain digits.)
+     */
+    private static final Set<Character.UnicodeBlock> READ_ONLY_BLOCKS = Set
+            .of(Character.UnicodeBlock.NUMBER_FORMS, Character.UnicodeBlock.COUNTING_ROD_NUMERALS);
+
+    /** Write the value with the numeral signs of the given code point's block. */
+    private static Optional<String> composeFromBlockOf(BigInteger value, int templateCp) {
+        if (READ_ONLY_BLOCKS.contains(Character.UnicodeBlock.of(templateCp))) {
+            return Optional.empty();
+        }
+        TreeMap<BigInteger, Integer> signs = blockSigns(templateCp);
+        if (signs.isEmpty()) {
+            return Optional.empty();
+        }
+        Optional<BigInteger> base = positionalBase(signs);
+        if (base.isPresent()) {
+            StringBuilder digits = new StringBuilder();
+            BigInteger rest = value;
+            int count = 0;
+            do {
+                BigInteger[] div = rest.divideAndRemainder(base.get());
+                digits.insert(0, Character.toChars(signs.get(div[1])));
+                rest = div[0];
+                count++;
+            } while (rest.signum() > 0 && count < MAX_COMPOSED_SIGNS);
+            return rest.signum() == 0 ? Optional.of(digits.toString()) : Optional.empty();
+        }
+        // Otherwise compose additively, largest sign first.
+        if (value.signum() == 0) {
+            return Optional.empty();
+        }
+        StringBuilder out = new StringBuilder();
+        BigInteger rest = value;
+        int count = 0;
+        for (BigInteger sign : signs.descendingKeySet()) {
+            if (sign.signum() == 0) {
+                continue;
+            }
+            while (rest.compareTo(sign) >= 0 && count < MAX_COMPOSED_SIGNS) {
+                out.append(Character.toChars(signs.get(sign)));
+                rest = rest.subtract(sign);
+                count++;
+            }
+        }
+        return rest.signum() == 0 ? Optional.of(out.toString()) : Optional.empty();
+    }
+
+    /**
+     * The integer value of a token that may be read as a number, or empty when
+     * the token is not one. The gated form of {@link #parseWhole} plus the
+     * whole-valued sign numerals: safe to apply to every token of a segment,
+     * because ordinary words are rejected before they reach the numeral
+     * parsers.
+     *
+     * Every caller decides for itself whether Roman numerals written with Latin
+     * letters count, because there is no telling "I", "V", "X", "MIX" or "DIV"
+     * apart from ordinary uppercase words. Where a false positive only shifts a
+     * similarity score it is worth reading them; where it rewrites text a
+     * translator is handed, it is not. Roman numerals written with the dedicated
+     * code points are letter numerals and count either way.
+     *
+     * @param allowRoman
+     *            whether a Latin-letter Roman numeral is a number here
+     */
+    public static Optional<BigInteger> parseTokenWhole(String token, boolean allowRoman) {
+        if (!isNumeralToken(token, allowRoman)) {
+            return Optional.empty();
+        }
+        Optional<BigInteger> whole = parseWhole(token);
+        if (whole.isPresent()) {
+            return whole;
+        }
+        // The sign numerals join the whole-number comparison through the same
+        // last resort parseValue uses, whole values only, so the match scorer
+        // pairs every numeral the insertion step can read.
+        String trimmed = token.trim();
+        if (hasDecimalDigit(trimmed)) {
+            return Optional.empty();
+        }
+        return singleCodePointNumericValue(trimmed).or(() -> signSequenceValue(trimmed))
+                .filter(value -> BigInteger.ONE.equals(value.denominator())).map(Rational::numerator);
+    }
+
+    /**
+     * The exact value of a token that may be read as a number, or empty when the
+     * token is not one. The gated form of {@link #parseValue}, so decimals,
+     * fractions and the integer numeral systems are all recognized while
+     * ordinary words are not.
+     *
+     * @param allowRoman
+     *            whether a Latin-letter Roman numeral is a number here; see
+     *            {@link #parseTokenWhole(String, boolean)} for what that costs
+     */
+    public static Optional<Rational> parseTokenValue(String token, boolean allowRoman) {
+        return isNumeralToken(token, allowRoman) ? parseValue(token) : Optional.empty();
+    }
+
     /**
      * Token boundaries for the real-value scanner. Sign, decimal point and the
      * fraction slashes stay inside a token so a signed/decimal/fraction number is
@@ -766,5 +1232,227 @@ public final class NumeralValueParser {
         int type = Character.getType(cp);
         // Number-letter (Roman numeral code points) and number-other (vulgar fractions) belong here.
         return type != Character.LETTER_NUMBER && type != Character.OTHER_NUMBER;
+    }
+
+    /**
+     * The gated token value with locale knowledge on top: when the token does
+     * not read as a plain number, grouping and decimal separators of the given
+     * locale are resolved (the universal parsers refuse them as irreducibly
+     * ambiguous - with a locale they are not). "1.234.567,89" reads as
+     * 1234567.89 under a German locale and stays unreadable under an English
+     * one.
+     */
+    public static Optional<Rational> parseTokenValueLocalized(String token, boolean allowRoman,
+            @Nullable Locale locale) {
+        Optional<Rational> plain = parseTokenValue(token, allowRoman);
+        if (plain.isPresent() || locale == null) {
+            return plain;
+        }
+        String normalized = normalizeLocaleSeparators(token.trim(), locale);
+        return normalized == null ? Optional.empty() : parseTokenValue(normalized, allowRoman);
+    }
+
+    /**
+     * Strips the locale's grouping separators and turns its decimal separator
+     * into the point the universal parser reads, but only when the token
+     * matches the locale's number shape exactly (groups of three, at most one
+     * decimal part). Space-family grouping accepts the plain, no-break and
+     * narrow no-break space interchangeably. Returns null when the token does
+     * not have the locale's number shape.
+     */
+    /**
+     * Compiled number shape per locale; tokens arrive per keystroke and per
+     * search. JCache layer (Caffeine) bounds the cache by size and age
+     * (pattern of BaseCachedTranslate); values live by reference, a copying
+     * store would re-serialize the Pattern on every hit. Keys carry no
+     * project state, so no close listener is needed. Lazy holder keeps a
+     * JCache provider failure out of class init.
+     */
+    private static final class LocaleShapeCache {
+        private static final String NAME = "numeralValueLocaleShapes";
+        static final Cache<Locale, Pattern> CACHE = create();
+
+        private static Cache<Locale, Pattern> create() {
+            CacheManager manager = Caching.getCachingProvider().getCacheManager();
+            Cache<Locale, Pattern> cache = manager.getCache(NAME);
+            if (cache == null) {
+                CaffeineConfiguration<Locale, Pattern> config = new CaffeineConfiguration<>();
+                config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+                config.setMaximumSize(OptionalLong.of(32));
+                config.setStoreByValue(false);
+                cache = manager.createCache(NAME, config);
+            }
+            return cache;
+        }
+    }
+
+    private static Pattern localeShape(Locale locale) {
+        Pattern cached = LocaleShapeCache.CACHE.get(locale);
+        if (cached != null) {
+            return cached;
+        }
+        Pattern built = buildLocaleShape(locale);
+        LocaleShapeCache.CACHE.put(locale, built);
+        return built;
+    }
+
+    private static Pattern buildLocaleShape(Locale loc) {
+        java.text.DecimalFormatSymbols symbols = java.text.DecimalFormatSymbols.getInstance(loc);
+        char group = symbols.getGroupingSeparator();
+        char decimal = symbols.getDecimalSeparator();
+        String groupClass = Character.isSpaceChar(group) ? "[\u0020\u00A0\u202F]"
+                : Pattern.quote(String.valueOf(group));
+        String decimalQuoted = Pattern.quote(String.valueOf(decimal));
+        String digit = "\\p{Nd}";
+        // The locale's grouping shape, including secondary grouping
+        // (Indian 12,34,567: last group of three, leading groups of two).
+        int primary = 3;
+        int secondary = 3;
+        com.ibm.icu.text.NumberFormat icuFormat = com.ibm.icu.text.NumberFormat
+                .getIntegerInstance(ULocale.forLocale(loc));
+        if (icuFormat instanceof com.ibm.icu.text.DecimalFormat) {
+            com.ibm.icu.text.DecimalFormat icu = (com.ibm.icu.text.DecimalFormat) icuFormat;
+            primary = Math.max(1, icu.getGroupingSize());
+            secondary = icu.getSecondaryGroupingSize() > 0 ? icu.getSecondaryGroupingSize()
+                    : primary;
+        }
+        String grouped = "[-+]?" + digit + "{1," + secondary + "}(?:" + groupClass + digit + "{"
+                + secondary + "})*" + groupClass + digit + "{" + primary + "}(?:" + decimalQuoted
+                + digit + "+)?";
+        String plainDecimal = "[-+]?" + digit + "+" + decimalQuoted + digit + "+";
+        return Pattern.compile(grouped + "|" + plainDecimal);
+    }
+
+    private static @Nullable String normalizeLocaleSeparators(String token, Locale locale) {
+        java.text.DecimalFormatSymbols symbols = java.text.DecimalFormatSymbols.getInstance(locale);
+        char group = symbols.getGroupingSeparator();
+        char decimal = symbols.getDecimalSeparator();
+        if (!localeShape(locale).matcher(token).matches()) {
+            return null;
+        }
+        StringBuilder out = new StringBuilder();
+        token.codePoints().forEach(cp -> {
+            if (cp == decimal) {
+                out.append('.');
+            } else if (cp != group && !(Character.isSpaceChar(group) && Character.isSpaceChar(cp))) {
+                // everything but the grouping separator survives
+                out.appendCodePoint(cp);
+            }
+        });
+        return out.toString();
+    }
+
+    /** Digit zero of every decimal digit script, computed once. */
+    private static volatile int @Nullable [] decimalZeros;
+
+    private static int[] decimalZeros() {
+        int[] zeros = decimalZeros;
+        if (zeros == null) {
+            zeros = IntStream.rangeClosed(0, Character.MAX_CODE_POINT)
+                    .filter(cp -> Character.getType(cp) == Character.DECIMAL_DIGIT_NUMBER
+                            && Character.digit(cp, 10) == 0)
+                    .toArray();
+            decimalZeros = zeros;
+        }
+        return zeros;
+    }
+
+    /**
+     * Every supported rendering of the value: ASCII, the positional digits of
+     * every decimal digit script, the algorithmic systems (Han, Ethiopic,
+     * Hebrew ...), the dedicated Roman numeral code points, and - only when
+     * allowed - Latin-letter Roman numerals. Lets a search match a number by
+     * its value: the alternation of these strings finds every writing the
+     * parser would read back as the same number.
+     */
+    /**
+     * Rendering lists per value: searches repeat the same terms. JCache layer
+     * (Caffeine) bounds the cache by size and age (pattern of
+     * BaseCachedTranslate); values are immutable lists held by reference.
+     * Keys carry no project state, so no close listener is needed. Lazy
+     * holder keeps a JCache provider failure out of class init.
+     */
+    private static final class RenderingsCache {
+        private static final String NAME = "numeralValueRenderings";
+        static final Cache<String, List<String>> CACHE = create();
+
+        private static Cache<String, List<String>> create() {
+            CacheManager manager = Caching.getCachingProvider().getCacheManager();
+            Cache<String, List<String>> cache = manager.getCache(NAME);
+            if (cache == null) {
+                CaffeineConfiguration<String, List<String>> config = new CaffeineConfiguration<>();
+                config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+                config.setMaximumSize(OptionalLong.of(64));
+                config.setStoreByValue(false);
+                cache = manager.createCache(NAME, config);
+            }
+            return cache;
+        }
+    }
+
+    public static List<String> renderings(BigInteger value, boolean allowRoman) {
+        String key = value + ":" + allowRoman;
+        List<String> cached = RenderingsCache.CACHE.get(key);
+        if (cached != null) {
+            return cached;
+        }
+        List<String> built = List.copyOf(computeRenderings(value, allowRoman));
+        RenderingsCache.CACHE.put(key, built);
+        return built;
+    }
+
+    /**
+     * The value written with the given locale's number format (grouping
+     * separators included), so a search can also find locale-formatted
+     * writings like "1.234" for 1234 under a German locale.
+     */
+    public static Optional<String> localeRendering(BigInteger value, Locale locale) {
+        if (value.bitLength() >= 63) {
+            return Optional.empty();
+        }
+        return Optional.of(java.text.NumberFormat.getIntegerInstance(locale)
+                .format(value.longValueExact()));
+    }
+
+    private static List<String> computeRenderings(BigInteger value, boolean allowRoman) {
+        Set<String> out = new LinkedHashSet<>();
+        String ascii = value.toString();
+        out.add(ascii);
+        if (value.signum() >= 0) {
+            for (int zero : decimalZeros()) {
+                StringBuilder sb = new StringBuilder();
+                ascii.chars().forEach(c -> sb.appendCodePoint(zero + (c - '0')));
+                out.add(sb.toString());
+            }
+            if (value.signum() > 0 && value.compareTo(BigInteger.valueOf(12)) <= 0) {
+                // The dedicated Roman numeral code points cover one to twelve.
+                int v = value.intValueExact();
+                out.add(String.valueOf((char) (0x2160 + v - 1)));
+                out.add(String.valueOf((char) (0x2170 + v - 1)));
+            }
+        }
+        if (value.bitLength() < 63) {
+            long v = value.longValueExact();
+            for (RuleSpec spec : SPECS) {
+                boolean roman = spec.ruleSet().startsWith("%roman");
+                if (roman && !allowRoman) {
+                    continue;
+                }
+                try {
+                    RuleBasedNumberFormat format = new RuleBasedNumberFormat(spec.locale(), spec.type());
+                    format.setDefaultRuleSet(spec.ruleSet());
+                    String rendered = format.format(v);
+                    // Only renderings the parser reads back as the same value
+                    // belong in the alternation; some rule sets fall back to
+                    // digits or produce unparseable text outside their range.
+                    if (parseTokenWhole(rendered, roman).filter(value::equals).isPresent()) {
+                        out.add(rendered);
+                    }
+                } catch (RuntimeException ignore) {
+                    // Rule set not available in this ICU build; skip it.
+                }
+            }
+        }
+        return new ArrayList<>(out);
     }
 }

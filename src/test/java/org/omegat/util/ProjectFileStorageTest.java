@@ -33,6 +33,7 @@ import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -537,5 +538,24 @@ public class ProjectFileStorageTest {
                 .ignoreComments()
                 .ignoreChildNodesOrder()
                 .areIdentical();
+    }
+
+    @Test
+    public void testUnknownElementsAreTolerated() throws Exception {
+        // A project file written by a newer OmegaT with an extended schema
+        // must stay readable; failing on unknown elements would let one
+        // team member on a newer version lock the whole team out.
+        ProjectProperties props = getProjectProperties();
+        props.setSourceLanguage("de-CH");
+        ProjectFileStorage.writeProjectFile(props);
+        File projectFile = new File(tempDir, OConsts.FILE_PROJECT);
+        String xml = Files.readString(projectFile.toPath(), StandardCharsets.UTF_8);
+        xml = xml.replace("</project>",
+                "  <setting_of_a_future_version>x</setting_of_a_future_version>\n  </project>");
+        Files.writeString(projectFile.toPath(), xml, StandardCharsets.UTF_8);
+
+        ProjectProperties reread = ProjectFileStorage.loadPropertiesFile(tempDir, projectFile);
+        assertEquals("known fields must survive the tolerant parse", "de-CH",
+                reread.getSourceLanguage().toString());
     }
 }

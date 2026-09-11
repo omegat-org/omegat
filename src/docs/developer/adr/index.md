@@ -13,6 +13,7 @@
 - 2025013 [Machine Translation SPI with multi-level context](2025013.MultiLevelContextSupportForMT.md)
 - 2026002 [Preferences Architecture and Testable Store Injection](2026002.PreferencesArchitecture.md)
 - 2026004 [EditorColor Registry Consistency](2026004.EditorColorRegistryConsistency.md)
+- 2026011 [Team-Negotiated Project Settings](2026011.TeamNegotiatedProjectSettings.md)
 
 ## Core features
 

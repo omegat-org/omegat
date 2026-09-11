@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.MessageFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -48,6 +49,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntPredicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.omegat.core.Core;
@@ -58,6 +60,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
@@ -156,7 +159,7 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         return null;
     }
 
-    private void appendText(String text) {
+    void appendText(String text) {
         textForLog.append(text);
         callback.appendTextData(text);
     }
@@ -245,6 +248,10 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         if (outData) {
             String[][] table = result.calcTable(rowsTotal, i -> i != 1);
             String outText = TextUtil.showTextTable(header, table, align);
+            String note = matchEquivalenceNote();
+            if (!note.isEmpty()) {
+                outText = outText + "\n" + note + "\n";
+            }
             showText(outText);
             callback.setTable(header, table);
             String fn = project.getProjectProperties().getProjectInternal() + OConsts.STATS_MATCH_FILENAME;
@@ -253,6 +260,21 @@ public class CalcMatchStatistics extends CalcStandardStatistics implements ICalc
         }
 
         return result;
+    }
+
+    /**
+     * User-visible note naming the active character equivalence classes
+     * (#1681): folding changes match percentages, so the statistics say when
+     * it was in effect.
+     */
+    String matchEquivalenceNote() {
+        Set<MatchEquivalence> active = project.getProjectProperties().getActiveMatchEquivalences();
+        if (active.isEmpty()) {
+            return "";
+        }
+        String names = active.stream().map(MatchEquivalence::getLocalizedName)
+                .collect(Collectors.joining(", "));
+        return MessageFormat.format(OStrings.getString("CT_STATSMATCH_EQUIVALENCE_ACTIVE"), names);
     }
 
     void writeLog(String fn) {

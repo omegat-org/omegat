@@ -94,6 +94,10 @@ public class CalcPerFileMatchStatistics extends CalcMatchStatistics implements I
         showTextTable(title, total, i -> i != 1, false);
         String fn = project.getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
+        String note = matchEquivalenceNote();
+        if (!note.isEmpty()) {
+            appendText(note + "\n");
+        }
         writeLog(fn);
         callback.setDataFile(fn);
     }

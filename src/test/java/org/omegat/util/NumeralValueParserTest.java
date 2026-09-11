@@ -597,4 +597,50 @@ public class NumeralValueParserTest {
         // A fractional sign is a value, not a whole number.
         assertFalse(NumeralValueParser.parseTokenWhole("꠰", false).isPresent());
     }
+
+    /**
+     * The rendering list of a value covers digits of other scripts, the
+     * algorithmic systems and the dedicated Roman code points; every entry
+     * reads back as the same value, and Latin-letter Roman renderings appear
+     * only when allowed.
+     */
+    @Test
+    public void renderingsCoverTheWritingSystems() {
+        java.util.List<String> twelve = NumeralValueParser.renderings(BigInteger.valueOf(12), false);
+        assertTrue(twelve.contains("12"));
+        assertTrue(twelve.contains("\u5341\u4e8c")); // 十二
+        assertTrue(twelve.contains("\u216b")); // Ⅻ
+        assertTrue(twelve.contains("\u0661\u0662")); // ١٢
+        assertFalse(twelve.contains("XII"));
+        for (String rendering : twelve) {
+            assertEquals(rendering, Optional.of(BigInteger.valueOf(12)),
+                    NumeralValueParser.parseTokenWhole(rendering, false));
+        }
+        assertTrue(NumeralValueParser.renderings(BigInteger.valueOf(12), true).contains("XII"));
+    }
+
+    /**
+     * Locale knowledge resolves the separators the universal parser refuses
+     * as ambiguous: grouping and decimal separators of the given locale read
+     * as one number, wrong-locale shapes stay unread.
+     */
+    @Test
+    public void localeSeparatorsParseWithTheirLocale() {
+        java.util.Locale de = java.util.Locale.GERMANY;
+        java.util.Locale en = java.util.Locale.US;
+        Rational value = NumeralValueParser.parseTokenValueLocalized("1.234.567,89", false, de)
+                .orElseThrow(AssertionError::new);
+        Rational same = NumeralValueParser.parseTokenValueLocalized("1,234,567.89", false, en)
+                .orElseThrow(AssertionError::new);
+        assertEquals(0, value.compareTo(same));
+        // The wrong locale does not read the other locale's shape as one number.
+        assertFalse(NumeralValueParser.parseTokenValueLocalized("1,234,567.89", false, de).isPresent());
+        // Without a locale the behavior stays the documented refusal.
+        assertFalse(NumeralValueParser.parseTokenValueLocalized("1.234.567,89", false, null).isPresent());
+        // Indian secondary grouping: groups of two before the final three.
+        Rational lakh = NumeralValueParser
+                .parseTokenValueLocalized("12,34,567", false, java.util.Locale.of("en", "IN"))
+                .orElseThrow(AssertionError::new);
+        assertEquals(0, lakh.compareTo(NumeralValueParser.parseValue("1234567").orElseThrow()));
+    }
 }

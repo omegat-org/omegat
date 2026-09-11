@@ -31,7 +31,12 @@
 
 package org.omegat.core.search;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import org.jspecify.annotations.Nullable;
+
+import org.omegat.core.matching.MatchEquivalence;
 import org.omegat.util.OConsts;
 
 /**
@@ -75,7 +80,22 @@ public class SearchExpression {
     public boolean caseSensitive = false;
     public boolean wholeWordsOnly = false;
     public boolean widthInsensitive = true;
-    public boolean spaceMatchNbsp = false;
+    /**
+     * Character equivalence classes applied to exact and keyword searches
+     * (feature request #1681); empty means no folding. Regular-expression
+     * searches ignore the field: folding a pattern would corrupt its syntax.
+     */
+    public Set<MatchEquivalence> equivalences = EnumSet.noneOf(MatchEquivalence.class);
+
+    /**
+     * Match a number-only search term by its numeric value: the term finds
+     * every writing of the same value across the numeral systems. Applies to
+     * exact and keyword searches only.
+     */
+    public boolean matchNumbers;
+
+    /** Whether the value matching also reads Latin-letter Roman numerals. */
+    public boolean matchNumbersRoman;
     public boolean glossary = true;
     public boolean memory = true;
     public boolean tm = true;

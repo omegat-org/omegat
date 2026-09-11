@@ -92,12 +92,17 @@ public class FindMatchesNumbersTest {
     }
 
     private List<NearString> search(String srcText, boolean matchNumbers) {
+        return search(srcText, matchNumbers, false);
+    }
+
+    private List<NearString> search(String srcText, boolean matchNumbers, boolean matchNumbersRoman) {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
         prop.setSourceLanguage("en");
         prop.setTargetLanguage("cs");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(true);
         prop.setMatchNumbersEnabled(matchNumbers);
+        prop.setMatchNumbersRomanEnabled(matchNumbersRoman);
         Segmenter segmenter = new Segmenter(Preferences.getSRX());
         IProject project = new FindMatchesTest.TestProject(prop, TMX_NUMBERS, null,
                 new LuceneEnglishTokenizer(), new DefaultTokenizer(), segmenter);
@@ -185,13 +190,18 @@ public class FindMatchesNumbersTest {
     }
 
     /**
-     * With the option on, the word passes still ignore numbers, but the
-     * verbatim pass now equates the value-identical Roman and Arabic
-     * renderings.
+     * Latin-letter Roman numerals stay ordinary words unless the Roman
+     * sub-option is also enabled; with both on, the verbatim pass equates the
+     * value-identical Roman and Arabic renderings.
      */
     @Test
     public void romanNumeralAgainstSameChapterWithOption() {
         List<NearString> result = search("Chapter 12", true);
+        assertEquals(1, result.size());
+        assertScores(result.get(0), 50, 50, 66);
+        assertEquals("Kapitola XII", result.get(0).translation);
+
+        result = search("Chapter 12", true, true);
         assertEquals(1, result.size());
         assertScores(result.get(0), 50, 50, 100);
         assertEquals("Kapitola XII", result.get(0).translation);

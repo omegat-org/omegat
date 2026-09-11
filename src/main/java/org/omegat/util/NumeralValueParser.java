@@ -30,13 +30,26 @@ import java.math.BigInteger;
 import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.OptionalLong;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+
+import org.jspecify.annotations.Nullable;
+
+import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 import com.ibm.icu.lang.UCharacter;
 import com.ibm.icu.lang.UProperty;
 import com.ibm.icu.text.Normalizer2;
@@ -1219,5 +1232,227 @@ public final class NumeralValueParser {
         int type = Character.getType(cp);
         // Number-letter (Roman numeral code points) and number-other (vulgar fractions) belong here.
         return type != Character.LETTER_NUMBER && type != Character.OTHER_NUMBER;
+    }
+
+    /**
+     * The gated token value with locale knowledge on top: when the token does
+     * not read as a plain number, grouping and decimal separators of the given
+     * locale are resolved (the universal parsers refuse them as irreducibly
+     * ambiguous - with a locale they are not). "1.234.567,89" reads as
+     * 1234567.89 under a German locale and stays unreadable under an English
+     * one.
+     */
+    public static Optional<Rational> parseTokenValueLocalized(String token, boolean allowRoman,
+            @Nullable Locale locale) {
+        Optional<Rational> plain = parseTokenValue(token, allowRoman);
+        if (plain.isPresent() || locale == null) {
+            return plain;
+        }
+        String normalized = normalizeLocaleSeparators(token.trim(), locale);
+        return normalized == null ? Optional.empty() : parseTokenValue(normalized, allowRoman);
+    }
+
+    /**
+     * Strips the locale's grouping separators and turns its decimal separator
+     * into the point the universal parser reads, but only when the token
+     * matches the locale's number shape exactly (groups of three, at most one
+     * decimal part). Space-family grouping accepts the plain, no-break and
+     * narrow no-break space interchangeably. Returns null when the token does
+     * not have the locale's number shape.
+     */
+    /**
+     * Compiled number shape per locale; tokens arrive per keystroke and per
+     * search. JCache layer (Caffeine) bounds the cache by size and age
+     * (pattern of BaseCachedTranslate); values live by reference, a copying
+     * store would re-serialize the Pattern on every hit. Keys carry no
+     * project state, so no close listener is needed. Lazy holder keeps a
+     * JCache provider failure out of class init.
+     */
+    private static final class LocaleShapeCache {
+        private static final String NAME = "numeralValueLocaleShapes";
+        static final Cache<Locale, Pattern> CACHE = create();
+
+        private static Cache<Locale, Pattern> create() {
+            CacheManager manager = Caching.getCachingProvider().getCacheManager();
+            Cache<Locale, Pattern> cache = manager.getCache(NAME);
+            if (cache == null) {
+                CaffeineConfiguration<Locale, Pattern> config = new CaffeineConfiguration<>();
+                config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+                config.setMaximumSize(OptionalLong.of(32));
+                config.setStoreByValue(false);
+                cache = manager.createCache(NAME, config);
+            }
+            return cache;
+        }
+    }
+
+    private static Pattern localeShape(Locale locale) {
+        Pattern cached = LocaleShapeCache.CACHE.get(locale);
+        if (cached != null) {
+            return cached;
+        }
+        Pattern built = buildLocaleShape(locale);
+        LocaleShapeCache.CACHE.put(locale, built);
+        return built;
+    }
+
+    private static Pattern buildLocaleShape(Locale loc) {
+        java.text.DecimalFormatSymbols symbols = java.text.DecimalFormatSymbols.getInstance(loc);
+        char group = symbols.getGroupingSeparator();
+        char decimal = symbols.getDecimalSeparator();
+        String groupClass = Character.isSpaceChar(group) ? "[\u0020\u00A0\u202F]"
+                : Pattern.quote(String.valueOf(group));
+        String decimalQuoted = Pattern.quote(String.valueOf(decimal));
+        String digit = "\\p{Nd}";
+        // The locale's grouping shape, including secondary grouping
+        // (Indian 12,34,567: last group of three, leading groups of two).
+        int primary = 3;
+        int secondary = 3;
+        com.ibm.icu.text.NumberFormat icuFormat = com.ibm.icu.text.NumberFormat
+                .getIntegerInstance(ULocale.forLocale(loc));
+        if (icuFormat instanceof com.ibm.icu.text.DecimalFormat) {
+            com.ibm.icu.text.DecimalFormat icu = (com.ibm.icu.text.DecimalFormat) icuFormat;
+            primary = Math.max(1, icu.getGroupingSize());
+            secondary = icu.getSecondaryGroupingSize() > 0 ? icu.getSecondaryGroupingSize()
+                    : primary;
+        }
+        String grouped = "[-+]?" + digit + "{1," + secondary + "}(?:" + groupClass + digit + "{"
+                + secondary + "})*" + groupClass + digit + "{" + primary + "}(?:" + decimalQuoted
+                + digit + "+)?";
+        String plainDecimal = "[-+]?" + digit + "+" + decimalQuoted + digit + "+";
+        return Pattern.compile(grouped + "|" + plainDecimal);
+    }
+
+    private static @Nullable String normalizeLocaleSeparators(String token, Locale locale) {
+        java.text.DecimalFormatSymbols symbols = java.text.DecimalFormatSymbols.getInstance(locale);
+        char group = symbols.getGroupingSeparator();
+        char decimal = symbols.getDecimalSeparator();
+        if (!localeShape(locale).matcher(token).matches()) {
+            return null;
+        }
+        StringBuilder out = new StringBuilder();
+        token.codePoints().forEach(cp -> {
+            if (cp == decimal) {
+                out.append('.');
+            } else if (cp != group && !(Character.isSpaceChar(group) && Character.isSpaceChar(cp))) {
+                // everything but the grouping separator survives
+                out.appendCodePoint(cp);
+            }
+        });
+        return out.toString();
+    }
+
+    /** Digit zero of every decimal digit script, computed once. */
+    private static volatile int @Nullable [] decimalZeros;
+
+    private static int[] decimalZeros() {
+        int[] zeros = decimalZeros;
+        if (zeros == null) {
+            zeros = IntStream.rangeClosed(0, Character.MAX_CODE_POINT)
+                    .filter(cp -> Character.getType(cp) == Character.DECIMAL_DIGIT_NUMBER
+                            && Character.digit(cp, 10) == 0)
+                    .toArray();
+            decimalZeros = zeros;
+        }
+        return zeros;
+    }
+
+    /**
+     * Every supported rendering of the value: ASCII, the positional digits of
+     * every decimal digit script, the algorithmic systems (Han, Ethiopic,
+     * Hebrew ...), the dedicated Roman numeral code points, and - only when
+     * allowed - Latin-letter Roman numerals. Lets a search match a number by
+     * its value: the alternation of these strings finds every writing the
+     * parser would read back as the same number.
+     */
+    /**
+     * Rendering lists per value: searches repeat the same terms. JCache layer
+     * (Caffeine) bounds the cache by size and age (pattern of
+     * BaseCachedTranslate); values are immutable lists held by reference.
+     * Keys carry no project state, so no close listener is needed. Lazy
+     * holder keeps a JCache provider failure out of class init.
+     */
+    private static final class RenderingsCache {
+        private static final String NAME = "numeralValueRenderings";
+        static final Cache<String, List<String>> CACHE = create();
+
+        private static Cache<String, List<String>> create() {
+            CacheManager manager = Caching.getCachingProvider().getCacheManager();
+            Cache<String, List<String>> cache = manager.getCache(NAME);
+            if (cache == null) {
+                CaffeineConfiguration<String, List<String>> config = new CaffeineConfiguration<>();
+                config.setExpiryPolicyFactory(() -> new CreatedExpiryPolicy(Duration.ONE_DAY));
+                config.setMaximumSize(OptionalLong.of(64));
+                config.setStoreByValue(false);
+                cache = manager.createCache(NAME, config);
+            }
+            return cache;
+        }
+    }
+
+    public static List<String> renderings(BigInteger value, boolean allowRoman) {
+        String key = value + ":" + allowRoman;
+        List<String> cached = RenderingsCache.CACHE.get(key);
+        if (cached != null) {
+            return cached;
+        }
+        List<String> built = List.copyOf(computeRenderings(value, allowRoman));
+        RenderingsCache.CACHE.put(key, built);
+        return built;
+    }
+
+    /**
+     * The value written with the given locale's number format (grouping
+     * separators included), so a search can also find locale-formatted
+     * writings like "1.234" for 1234 under a German locale.
+     */
+    public static Optional<String> localeRendering(BigInteger value, Locale locale) {
+        if (value.bitLength() >= 63) {
+            return Optional.empty();
+        }
+        return Optional.of(java.text.NumberFormat.getIntegerInstance(locale)
+                .format(value.longValueExact()));
+    }
+
+    private static List<String> computeRenderings(BigInteger value, boolean allowRoman) {
+        Set<String> out = new LinkedHashSet<>();
+        String ascii = value.toString();
+        out.add(ascii);
+        if (value.signum() >= 0) {
+            for (int zero : decimalZeros()) {
+                StringBuilder sb = new StringBuilder();
+                ascii.chars().forEach(c -> sb.appendCodePoint(zero + (c - '0')));
+                out.add(sb.toString());
+            }
+            if (value.signum() > 0 && value.compareTo(BigInteger.valueOf(12)) <= 0) {
+                // The dedicated Roman numeral code points cover one to twelve.
+                int v = value.intValueExact();
+                out.add(String.valueOf((char) (0x2160 + v - 1)));
+                out.add(String.valueOf((char) (0x2170 + v - 1)));
+            }
+        }
+        if (value.bitLength() < 63) {
+            long v = value.longValueExact();
+            for (RuleSpec spec : SPECS) {
+                boolean roman = spec.ruleSet().startsWith("%roman");
+                if (roman && !allowRoman) {
+                    continue;
+                }
+                try {
+                    RuleBasedNumberFormat format = new RuleBasedNumberFormat(spec.locale(), spec.type());
+                    format.setDefaultRuleSet(spec.ruleSet());
+                    String rendered = format.format(v);
+                    // Only renderings the parser reads back as the same value
+                    // belong in the alternation; some rule sets fall back to
+                    // digits or produce unparseable text outside their range.
+                    if (parseTokenWhole(rendered, roman).filter(value::equals).isPresent()) {
+                        out.add(rendered);
+                    }
+                } catch (RuntimeException ignore) {
+                    // Rule set not available in this ICU build; skip it.
+                }
+            }
+        }
+        return new ArrayList<>(out);
     }
 }

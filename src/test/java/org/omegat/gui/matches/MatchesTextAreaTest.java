@@ -27,8 +27,13 @@ package org.omegat.gui.matches;
 
 import static org.junit.Assert.assertEquals;
 
+import java.nio.file.Files;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.omegat.core.Core;
+import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneJapaneseTokenizer;
@@ -473,13 +478,10 @@ public class MatchesTextAreaTest {
 
     /**
      * Regression guard for the substitution side: a token made only of Roman
-     * letters is a numeral only in the fuzzy-matching score, where a false
-     * positive costs a little similarity. Here it rewrites text the translator
-     * gets handed, so an ordinary uppercase word must never be read as a number.
-     *
-     * These cases fail as long as the substitution side uses the same
-     * unrestricted Roman gate as the match scorer. Fix the production code, not
-     * the expectations.
+     * letters rewrites text the translator gets handed, so without the
+     * Latin-letter Roman sub-option (the default, and the state of these
+     * tests, which run without a loaded project) an ordinary uppercase word
+     * must never be read as a number.
      */
     @Test
     public void testUppercaseRomanWordsAreNotNumbers() {
@@ -516,6 +518,46 @@ public class MatchesTextAreaTest {
         trgMatch = "IV administration of 4 ml";
         assertEquals("IV administration of 3 ml",
                 MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+    }
+
+    /**
+     * With the project sub-option enabled, Latin-letter Roman numerals take
+     * part in the substitution like any other numeral system; without the
+     * main number option they stay words even when the sub-option flag is
+     * still stored.
+     */
+    @Test
+    public void testRomanSubstitutionWithSubOption() throws Exception {
+        ProjectProperties props = new ProjectProperties(Files.createTempDirectory("omegat").toFile());
+        props.setMatchNumbersEnabled(true);
+        props.setMatchNumbersRomanEnabled(true);
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public boolean isProjectLoaded() {
+                return true;
+            }
+
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+        });
+        try {
+            ITokenizer tok = new DefaultTokenizer();
+            String source = "Kapitel 14";
+            String srcMatch = "Kapitel 12";
+            String trgMatch = "Chapter XII";
+            assertEquals("Chapter XIV",
+                    MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+
+            // The stored sub-option must not act while number matching
+            // itself is off.
+            props.setMatchNumbersEnabled(false);
+            assertEquals("Chapter XII",
+                    MatchesTextArea.substituteNumbers(source, srcMatch, trgMatch, tok, tok));
+        } finally {
+            Core.setProject(new NotLoadedProject());
+        }
     }
 
     /**

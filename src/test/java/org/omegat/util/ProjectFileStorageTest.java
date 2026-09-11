@@ -81,20 +81,46 @@ public class ProjectFileStorageTest {
 
     @Test
     public void testMatchNumbersRoundTrip() throws Exception {
-        // Absent flag reads as disabled and is not written for a default
-        // project; an enabled flag survives the write/read round trip.
+        // Number matching is on by default and only the opt-out is written,
+        // so default project files stay free of the element; the disabled
+        // state survives the write/read round trip.
         ProjectProperties defaults = getProjectProperties();
-        assertFalse(defaults.isMatchNumbersEnabled());
+        assertTrue(defaults.isMatchNumbersEnabled());
         ProjectFileStorage.writeProjectFile(defaults);
         ProjectProperties reread = ProjectFileStorage.loadPropertiesFile(tempDir,
                 new File(tempDir, "omegat.project"));
+        assertTrue(reread.isMatchNumbersEnabled());
+
+        ProjectProperties disabled = getProjectProperties();
+        disabled.setMatchNumbersEnabled(false);
+        ProjectFileStorage.writeProjectFile(disabled);
+        reread = ProjectFileStorage.loadPropertiesFile(tempDir, new File(tempDir, "omegat.project"));
         assertFalse(reread.isMatchNumbersEnabled());
 
+        // A legacy opt-in element still reads as enabled.
         ProjectProperties enabled = getProjectProperties();
         enabled.setMatchNumbersEnabled(true);
         ProjectFileStorage.writeProjectFile(enabled);
         reread = ProjectFileStorage.loadPropertiesFile(tempDir, new File(tempDir, "omegat.project"));
         assertTrue(reread.isMatchNumbersEnabled());
+    }
+
+    @Test
+    public void testMatchNumbersRomanRoundTrip() throws Exception {
+        // Roman numerals stay opt-in: absent reads as disabled, the enabled
+        // state survives the write/read round trip.
+        ProjectProperties defaults = getProjectProperties();
+        assertFalse(defaults.isMatchNumbersRomanEnabled());
+        ProjectFileStorage.writeProjectFile(defaults);
+        ProjectProperties reread = ProjectFileStorage.loadPropertiesFile(tempDir,
+                new File(tempDir, "omegat.project"));
+        assertFalse(reread.isMatchNumbersRomanEnabled());
+
+        ProjectProperties enabled = getProjectProperties();
+        enabled.setMatchNumbersRomanEnabled(true);
+        ProjectFileStorage.writeProjectFile(enabled);
+        reread = ProjectFileStorage.loadPropertiesFile(tempDir, new File(tempDir, "omegat.project"));
+        assertTrue(reread.isMatchNumbersRomanEnabled());
     }
 
     @Test

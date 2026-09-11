@@ -65,6 +65,7 @@ import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.DataUtils;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
@@ -372,7 +373,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     /** The values of number tokens that {@link #isNumber} accepted. */
     private static List<Rational> values(List<String> numbers) {
         return numbers.stream()
-                .map(n -> NumeralValueParser.parseTokenValue(n, ALLOW_ROMAN).orElseThrow())
+                .map(n -> NumeralValueParser.parseTokenValue(n, allowRoman()).orElseThrow())
                 .collect(Collectors.toList());
     }
 
@@ -413,7 +414,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // The target writes a numeral system, not digits: write the source
             // value in that system, whatever system the source itself uses.
             Optional<NumeralValueParser.Rational> sourceValue = NumeralValueParser.parseTokenValue(number,
-                    ALLOW_ROMAN);
+                    allowRoman());
             if (sourceValue.isPresent()) {
                 if (BigInteger.ONE.equals(sourceValue.get().denominator())) {
                     Optional<String> rendered = NumeralValueParser
@@ -439,7 +440,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // numeral, a sign numeral such as cuneiform or Ethiopic) while
             // the target writes digits: spell the whole value out.
             Optional<NumeralValueParser.Rational> value = NumeralValueParser.parseTokenValue(number,
-                    ALLOW_ROMAN);
+                    allowRoman());
             if (value.isPresent()) {
                 if (BigInteger.ONE.equals(value.get().denominator())) {
                     return toDigitScript(value.get().numerator().toString(), zero);
@@ -492,14 +493,23 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     }
 
     /**
-     * Whether a Roman numeral written with Latin letters counts as a number when
-     * inserting a match. It does not: "I", "V", "X", "MIX" and "DIV" are ordinary
-     * uppercase words at least as often as they are numbers, and here a false
-     * positive does not cost a few similarity points, it rewrites the text the
-     * translator is handed. Roman numerals written with the dedicated code points
-     * are unambiguous and remain numbers.
+     * Whether a Roman numeral written with Latin letters counts as a number
+     * when inserting a match: only when the project opted in. By default it
+     * does not: "I", "V", "X", "MIX" and "DIV" are ordinary uppercase words at
+     * least as often as they are numbers, and here a false positive does not
+     * cost a few similarity points, it rewrites the text the translator is
+     * handed. Roman numerals written with the dedicated code points are
+     * unambiguous and always count.
      */
-    private static final boolean ALLOW_ROMAN = false;
+    private static boolean allowRoman() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return false;
+        }
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        // The sub-option only applies while number matching itself is on; the
+        // stored checkbox state survives an off/on cycle of the main option.
+        return props != null && props.isMatchNumbersEnabled() && props.isMatchNumbersRomanEnabled();
+    }
 
     /**
      * Determine whether the given string is a number: a token that may be read
@@ -511,7 +521,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * @return True if the string represents a number
      */
     private static boolean isNumber(String text) {
-        return NumeralValueParser.parseTokenValue(text, ALLOW_ROMAN).isPresent();
+        return NumeralValueParser.parseTokenValue(text, allowRoman()).isPresent();
     }
 
     /**

@@ -31,6 +31,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -60,6 +61,10 @@ public class PerFileMatchStatisticsPanel extends BaseMatchStatisticsPanel implem
         scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane);
+        JLabel hint = buildEquivalenceHint();
+        if (hint != null) {
+            add(hint, BorderLayout.PAGE_END);
+        }
     }
 
     @Override

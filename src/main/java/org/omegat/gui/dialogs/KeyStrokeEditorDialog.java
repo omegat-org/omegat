@@ -35,6 +35,8 @@ import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import org.jspecify.annotations.Nullable;
+
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -69,7 +71,7 @@ public class KeyStrokeEditorDialog {
         dialog.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                keyStroke = KeyStroke.getKeyStrokeForEvent(e);
+                keyStroke = capture(e, keyStroke);
                 panel.shortcutLabel.setText(keyStrokeToString(keyStroke));
                 e.consume();
             }
@@ -102,6 +104,19 @@ public class KeyStrokeEditorDialog {
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
         return userDidConfirm;
+    }
+
+    /**
+     * The keystroke a captured key event yields, or the current keystroke
+     * when the event carries no key code: macOS delivers the fn key as
+     * VK_UNDEFINED, which would otherwise display and store as
+     * "Unknown keyCode: 0x0".
+     */
+    static @Nullable KeyStroke capture(KeyEvent e, @Nullable KeyStroke current) {
+        if (e.getKeyCode() == KeyEvent.VK_UNDEFINED) {
+            return current;
+        }
+        return KeyStroke.getKeyStrokeForEvent(e);
     }
 
     String keyStrokeToString(KeyStroke ks) {

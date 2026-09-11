@@ -50,6 +50,7 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
+import javax.swing.InputMap;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -111,6 +112,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
+
+    /** The currently bound window-level find-in-project keystroke. */
+    private KeyStroke findInProjectStroke;
 
     /** MainWindow menu handler instance. */
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
@@ -223,6 +227,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         createMenuBar();
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
         configureActions();
+        PropertiesShortcuts.getMainMenuShortcuts().addChangeListener(this::updateShortcuts);
     }
 
     abstract void createMenuBar();
@@ -688,8 +693,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         });
 
         String key = "findInProjectReuseLastWindow";
-        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        bindFindInProjectKey();
         mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -799,6 +803,34 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         result.addActionListener(this);
         buttonGroup.add(result);
         return result;
+    }
+
+    /**
+     * (Re)binds the window-level find-in-project shortcut, replacing the
+     * previously bound keystroke.
+     */
+    private void bindFindInProjectKey() {
+        String key = "findInProjectReuseLastWindow";
+        InputMap inputMap = mainWindow.getApplicationFrame().getRootPane()
+                .getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        if (findInProjectStroke != null) {
+            inputMap.remove(findInProjectStroke);
+        }
+        findInProjectStroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
+        if (findInProjectStroke != null) {
+            inputMap.put(findInProjectStroke, key);
+        }
+    }
+
+    /**
+     * Re-reads the shortcut definitions and rebinds the menu accelerators
+     * and the window-level find-in-project binding; unbound functions lose
+     * their stale accelerator.
+     */
+    @Override
+    public void updateShortcuts() {
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
+        bindFindInProjectKey();
     }
 
     /**

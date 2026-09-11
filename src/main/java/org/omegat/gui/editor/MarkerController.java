@@ -6,6 +6,7 @@
  Copyright (C) 2010-2013 Alex Buloichik
                2014 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.function.Supplier;
 
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
@@ -252,10 +254,24 @@ public class MarkerController {
             for (MarkInfo t : markInfos) {
                 if (t != null && t.tooltip != null) {
                     if (t.tooltip.p0.getOffset() <= pos && t.tooltip.p1.getOffset() >= pos) {
+                        // A supplier resolves on hover, so expensive lookups
+                        // like spelling suggestions run only here. A broken
+                        // supplier must not break the whole tooltip.
+                        String text;
+                        try {
+                            text = t.tooltip.supplier != null ? t.tooltip.supplier.get()
+                                    : t.tooltip.text;
+                        } catch (Exception ex) {
+                            Log.log(ex);
+                            continue;
+                        }
+                        if (text == null || text.isEmpty()) {
+                            continue;
+                        }
                         if (res.length() > 0) {
                             res.append("<br>");
                         }
-                        res.append(t.tooltip.text);
+                        res.append(text);
                     }
                 }
             }
@@ -264,6 +280,8 @@ public class MarkerController {
             return null;
         }
         String r = res.toString();
+        // The suggestion tags of the language checker messages and of the
+        // spelling suggestions (SpellCheckerMarker) render bold.
         r = r.replace("<suggestion>", "<b>");
         r = r.replace("</suggestion>", "</b>");
         return "<html>" + r + "</html>";
@@ -359,9 +377,9 @@ public class MarkerController {
                 highlight = (Highlighter.Highlight) highlighter.addHighlight(startOffset + m.startOffset,
                         startOffset + m.endOffset, m.painter);
             }
-            if (m.toolTipText != null) {
+            if (m.toolTipText != null || m.toolTipSupplier != null) {
                 tooltip = new Tooltip(doc, startOffset + m.startOffset, startOffset + m.endOffset,
-                        m.toolTipText);
+                        m.toolTipText, m.toolTipSupplier);
             }
             if (m.attributes != null) {
                 doc.setCharacterAttributes(startOffset + m.startOffset, m.endOffset - m.startOffset,
@@ -374,11 +392,19 @@ public class MarkerController {
         Position p0;
         Position p1;
         String text;
+        /** Resolved on hover when set; wins over the static text. */
+        Supplier<String> supplier;
 
         public Tooltip(Document3 doc, int start, int end, String text) throws BadLocationException {
+            this(doc, start, end, text, null);
+        }
+
+        public Tooltip(Document3 doc, int start, int end, String text, Supplier<String> supplier)
+                throws BadLocationException {
             p0 = doc.createPosition(start);
             p1 = doc.createPosition(end);
             this.text = text;
+            this.supplier = supplier;
         }
     }
 }

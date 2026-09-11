@@ -7,6 +7,7 @@
                2010 Didier Briel
                2014-2015 Alex Buloichik
                2017 Didier Briel
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -71,6 +72,29 @@ public interface IProject {
      * Execute synchronization.
      */
     void teamSync();
+
+    /**
+     * Check whether lost team synchronization looks restorable: the project is
+     * a team project, currently offline, and the remote hosts accept
+     * connections again. Called from the auto-save thread WITHOUT the project
+     * lock, so implementations must not touch project data; a short network
+     * probe is allowed. Restoring happens through
+     * {@link #saveProject(boolean)} with team synchronization.
+     */
+    default boolean canRestoreTeamSync() {
+        return false;
+    }
+
+    /**
+     * Restore lost team synchronization: one save with team synchronization
+     * through the regular save path. Unlike a manual save, a failure must not
+     * interrupt the user: implementations report it without a modal dialog
+     * and back off. The auto-save thread calls it after
+     * {@link #canRestoreTeamSync()} approved.
+     */
+    default void restoreTeamSync() {
+        saveProject(true);
+    }
 
     /**
      * Close project.

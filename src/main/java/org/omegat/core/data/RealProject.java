@@ -15,6 +15,7 @@
                2018 Enrique Estevez Fernandez
                2019 Thomas Cordonnier
                2020 Briac Pilpre
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -82,6 +83,7 @@ import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.PreparedFileInfo;
 import org.omegat.core.team2.RebaseAndCommit;
+import org.omegat.core.team2.RemoteReachabilityProbe;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.operation.GlossaryRebaseOperation;
 import org.omegat.core.team2.operation.RebaseUtils;
@@ -110,6 +112,7 @@ import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.filters.Filters;
+import gen.core.project.RepositoryDefinition;
 
 import static org.omegat.core.data.IProject.AllTranslations.EMPTY_TRANSLATION;
 
@@ -160,7 +163,21 @@ public class RealProject implements IProject {
 
     private final Object projectTMXLock = new Object();
 
-    private boolean isOnlineMode;
+    /** Volatile: the auto-save thread reads it outside the project lock. */
+    private volatile boolean isOnlineMode;
+
+    /** Back-off after a restore attempt failed with a non-network error. */
+    private static final long TEAM_SYNC_RESTORE_BACKOFF_MS = 30L * 60 * 1000;
+
+    /**
+     * Earliest moment for the next automatic team sync restore attempt.
+     * Pushed into the future when a restore fails with a non-network error,
+     * so the auto-save thread does not repeat that error every interval.
+     */
+    private volatile long nextTeamSyncRestoreAttempt;
+
+    /** True while {@link #restoreTeamSync()} drives the current save. */
+    private volatile boolean teamSyncRestoreRunning;
 
     private RandomAccessFile raFile;
     private FileChannel lockChannel;
@@ -1131,7 +1148,15 @@ public class RealProject implements IProject {
                     }
                 } catch (Exception e) {
                     Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-                    Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                    if (teamSyncRestoreRunning) {
+                        // An automatic restore must not interrupt the user
+                        // with a modal dialog every auto-save interval; back
+                        // off and retry much later instead.
+                        nextTeamSyncRestoreAttempt = System.currentTimeMillis()
+                                + TEAM_SYNC_RESTORE_BACKOFF_MS;
+                    } else {
+                        Objects.requireNonNull(Core.getMainWindow()).displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                    }
                 }
 
                 LastSegmentManager.saveLastSegment();
@@ -2204,6 +2229,26 @@ public class RealProject implements IProject {
         }
         isOnlineMode = false;
         preparedStatus = PreparedStatus.NONE;
+    }
+
+    @Override
+    public boolean canRestoreTeamSync() {
+        if (!remoteRepositoryProvider.isManaged() || isOnlineMode
+                || System.currentTimeMillis() < nextTeamSyncRestoreAttempt) {
+            return false;
+        }
+        List<RepositoryDefinition> repositories = config.getRepositories();
+        return repositories != null && RemoteReachabilityProbe.canReachAll(repositories);
+    }
+
+    @Override
+    public void restoreTeamSync() {
+        teamSyncRestoreRunning = true;
+        try {
+            saveProject(true);
+        } finally {
+            teamSyncRestoreRunning = false;
+        }
     }
 
     @Override

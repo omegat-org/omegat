@@ -7,6 +7,7 @@
                2007-2013 Didier Briel
                2015-2016 Didier Briel
                2019 Didier Briel
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -209,7 +210,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             String[] words2 = s2.split("\\d+\\.");
             // Digits at the end and same text
             if ((words1.length > 1 && words2.length > 1) && // Digits
-            (words1[0].equals(words2[0]))) { // Same text
+                    words1[0].equals(words2[0])) { // Same text
                 int number1 = 0;
                 int number2 = 0;
                 Matcher getDigits = DIGITS.matcher(s1);

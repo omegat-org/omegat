@@ -50,6 +50,7 @@ import javax.swing.JOptionPane;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.DataUtils;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
@@ -63,6 +64,8 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
+import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryMatchSubstitution;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
@@ -375,6 +378,82 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
         }
         Core.getEditor().replaceEditText(toInsert);
+    }
+
+    /**
+     * Inserts the source text with glossary hits replaced by their target
+     * terms, independent of the replace-on-insert preference.
+     */
+    public void editInsertSourceGlossarySubstitutedMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        Core.getEditor()
+                .insertText(EditorUtils.replaceGlossaryEntries(Core.getEditor().getCurrentEntry().getSrcText()));
+    }
+
+    /**
+     * Inserts the active fuzzy match with glossary terms repaired: source
+     * differences whose both sides are glossary terms swap their target terms
+     * in the inserted translation (feature requests #1566, #369).
+     */
+    public void editInsertTranslationGlossarySubstitutedMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        NearString near = Core.getMatcher().getActiveMatch();
+        if (near == null || StringUtil.isEmpty(near.translation)) {
+            return;
+        }
+        String currentSource = Core.getEditor().getCurrentEntry().getSrcText();
+        String text = near.translation;
+        if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+            text = Core.getMatcher().substituteNumbers(currentSource, near.source, text);
+        }
+        text = GlossaryMatchSubstitution.substituteIntoMatch(currentSource, near.source, text,
+                Core.getGlossaryManager().getGlossaryEntries(currentSource),
+                Core.getProject().getProjectProperties().getSourceLanguage().getLocale(),
+                Core.getProject().getProjectProperties().getTargetLanguage().getLocale(),
+                Core.getProject().getSourceTokenizer());
+        // MT-memory provenance marking, like doInsertTrans.
+        if (DataUtils.isFromMTMemory(near)) {
+            Core.getEditor().insertTextAndMark(text);
+        } else {
+            Core.getEditor().insertText(text);
+        }
+        Core.getEditor().requestFocus();
+    }
+
+    /** Inserts the target term of the glossary pane entry with the given number. */
+    private void insertGlossaryHit(int number) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        List<GlossaryEntry> shown = Core.getGlossary().getDisplayedEntries();
+        if (shown.size() >= number) {
+            Core.getEditor().insertText(shown.get(number - 1).getLocText());
+            Core.getEditor().requestFocus();
+        }
+    }
+
+    public void editInsertGlossaryHit1MenuItemActionPerformed() {
+        insertGlossaryHit(1);
+    }
+
+    public void editInsertGlossaryHit2MenuItemActionPerformed() {
+        insertGlossaryHit(2);
+    }
+
+    public void editInsertGlossaryHit3MenuItemActionPerformed() {
+        insertGlossaryHit(3);
+    }
+
+    public void editInsertGlossaryHit4MenuItemActionPerformed() {
+        insertGlossaryHit(4);
+    }
+
+    public void editInsertGlossaryHit5MenuItemActionPerformed() {
+        insertGlossaryHit(5);
     }
 
     /** inserts the source text of a segment at cursor position */

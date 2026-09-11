@@ -50,6 +50,7 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
+import javax.swing.InputMap;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -111,6 +112,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
+
+    /** The currently bound window-level find-in-project keystroke. */
+    private KeyStroke findInProjectStroke;
 
     /** MainWindow menu handler instance. */
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
@@ -223,6 +227,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         createMenuBar();
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
         configureActions();
+        PropertiesShortcuts.getMainMenuShortcuts().addChangeListener(this::updateShortcuts);
     }
 
     abstract void createMenuBar();
@@ -291,6 +296,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editInsertTranslationMenuItem = createMenuItem("TF_MENU_EDIT_INSERT");
         editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE");
         editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT");
+        editInsertSourceGlossarySubstitutedMenuItem = createMenuItem(
+                "TF_MENU_EDIT_SOURCE_INSERT_GLOSSARY");
+        editInsertTranslationGlossarySubstitutedMenuItem = createMenuItem(
+                "TF_MENU_EDIT_INSERT_GLOSSARY");
         editSelectSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_SELECT");
         editOverwriteMachineTranslationMenuItem = createMenuItem(
                 "TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION");
@@ -311,6 +320,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3");
         editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4");
         editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5");
+
+        insertGlossaryHitSubMenu = createMenu("TF_MENU_EDIT_INSERT_GLOSSARY_HIT", INSERT_GLOSSARY_SUBMENU);
+        editInsertGlossaryHit1MenuItem = createMenuItem("TF_MENU_EDIT_INSERT_GLOSSARY_HIT_1");
+        editInsertGlossaryHit2MenuItem = createMenuItem("TF_MENU_EDIT_INSERT_GLOSSARY_HIT_2");
+        editInsertGlossaryHit3MenuItem = createMenuItem("TF_MENU_EDIT_INSERT_GLOSSARY_HIT_3");
+        editInsertGlossaryHit4MenuItem = createMenuItem("TF_MENU_EDIT_INSERT_GLOSSARY_HIT_4");
+        editInsertGlossaryHit5MenuItem = createMenuItem("TF_MENU_EDIT_INSERT_GLOSSARY_HIT_5");
 
         insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS", INSERT_CHARS_SUBMENU);
         insertCharsLRM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRM");
@@ -504,9 +520,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editMenu.addSeparator();
         editMenu.add(editOverwriteTranslationMenuItem);
         editMenu.add(editInsertTranslationMenuItem);
+        editMenu.add(editInsertTranslationGlossarySubstitutedMenuItem);
         editMenu.addSeparator();
         editMenu.add(editOverwriteSourceMenuItem);
         editMenu.add(editInsertSourceMenuItem);
+        editMenu.add(editInsertSourceGlossarySubstitutedMenuItem);
         editMenu.add(editSelectSourceMenuItem);
         editMenu.addSeparator();
         editMenu.add(editOverwriteMachineTranslationMenuItem);
@@ -532,6 +550,12 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         selectFuzzySubMenu.add(editSelectFuzzy3MenuItem);
         selectFuzzySubMenu.add(editSelectFuzzy4MenuItem);
         selectFuzzySubMenu.add(editSelectFuzzy5MenuItem);
+        editMenu.add(insertGlossaryHitSubMenu);
+        insertGlossaryHitSubMenu.add(editInsertGlossaryHit1MenuItem);
+        insertGlossaryHitSubMenu.add(editInsertGlossaryHit2MenuItem);
+        insertGlossaryHitSubMenu.add(editInsertGlossaryHit3MenuItem);
+        insertGlossaryHitSubMenu.add(editInsertGlossaryHit4MenuItem);
+        insertGlossaryHitSubMenu.add(editInsertGlossaryHit5MenuItem);
         editMenu.add(insertCharsSubMenu);
         insertCharsSubMenu.add(insertCharsLRM);
         insertCharsSubMenu.add(insertCharsRLM);
@@ -688,8 +712,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         });
 
         String key = "findInProjectReuseLastWindow";
-        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        bindFindInProjectKey();
         mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -802,6 +825,39 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     /**
+     * (Re)binds the window-level find-in-project shortcut, replacing the
+     * previously bound keystroke.
+     */
+    private void bindFindInProjectKey() {
+        String key = "findInProjectReuseLastWindow";
+        InputMap inputMap = mainWindow.getApplicationFrame().getRootPane()
+                .getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        if (findInProjectStroke != null) {
+            inputMap.remove(findInProjectStroke);
+        }
+        findInProjectStroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
+        if (findInProjectStroke != null) {
+            inputMap.put(findInProjectStroke, key);
+        }
+    }
+
+    @Override
+    public JMenuBar getMenuBar() {
+        return mainMenu;
+    }
+
+    /**
+     * Re-reads the shortcut definitions and rebinds the menu accelerators
+     * and the window-level find-in-project binding; unbound functions lose
+     * their stale accelerator.
+     */
+    @Override
+    public void updateShortcuts() {
+        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
+        bindFindInProjectKey();
+    }
+
+    /**
      * Set 'actionCommand' for all menu items.
      */
     protected void setActionCommands() {
@@ -836,7 +892,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
-                editOverwriteTranslationMenuItem, editRedoMenuItem, editSelectFuzzy1MenuItem,
+                editOverwriteTranslationMenuItem, editRedoMenuItem,
+                editInsertSourceGlossarySubstitutedMenuItem,
+                editInsertTranslationGlossarySubstitutedMenuItem, editInsertGlossaryHit1MenuItem,
+                editInsertGlossaryHit2MenuItem, editInsertGlossaryHit3MenuItem,
+                editInsertGlossaryHit4MenuItem, editInsertGlossaryHit5MenuItem, editSelectFuzzy1MenuItem,
                 editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
                 editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu,
                 editOverwriteMachineTranslationMenuItem, editRegisterUntranslatedMenuItem,
@@ -1032,6 +1092,14 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem editSelectFuzzy3MenuItem;
     JMenuItem editSelectFuzzy4MenuItem;
     JMenuItem editSelectFuzzy5MenuItem;
+    JMenuItem editInsertSourceGlossarySubstitutedMenuItem;
+    JMenuItem editInsertTranslationGlossarySubstitutedMenuItem;
+    JMenu insertGlossaryHitSubMenu;
+    JMenuItem editInsertGlossaryHit1MenuItem;
+    JMenuItem editInsertGlossaryHit2MenuItem;
+    JMenuItem editInsertGlossaryHit3MenuItem;
+    JMenuItem editInsertGlossaryHit4MenuItem;
+    JMenuItem editInsertGlossaryHit5MenuItem;
     JMenu insertCharsSubMenu;
     JMenuItem insertCharsLRM;
     JMenuItem insertCharsRLM;
@@ -1164,6 +1232,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String PROJECT_ACCESS_PROJECT_FILES_SUBMENU = "project_access_project_files_submenu";
     public static final String PROJECT_EDIT_MENUITEM = "project_edit_menuitem";
     public static final String SELECT_FUZZY_SUBMENU = "select_fuzzy_submenu";
+    public static final String INSERT_GLOSSARY_SUBMENU = "insert_glossary_submenu";
     public static final String INSERT_CHARS_SUBMENU = "insert_chars_submenu";
     public static final String SWITCH_CASE_SUBMENU = "switch_case_submenu";
     public static final String GOTO_X_ENTRY_SUBMENU = "goto_x_entry_submenu";

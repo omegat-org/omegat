@@ -98,6 +98,24 @@
                		details..</para>
          </listitem>
       </varlistentry>
+      <varlistentry xml:id="menus.edit.insert.match.glossary">
+         <term xml:id="menus.edit.insert.match.glossary.title">
+            <guimenuitem>Insert Match with Glossary Hits Replaced</guimenuitem>
+            	  
+            <keycombo>
+               <keycap>C</keycap>
+               <keycap>A</keycap>
+               <keycap>I</keycap>
+            </keycombo>
+            	  </term>
+         <listitem>
+            <para>Inserts the selected fuzzy match with glossary repairs:
+               where the match source differs from the current segment and
+               both sides of the difference are glossary terms, the old
+               target term is replaced with the new one in the inserted
+               text.</para>
+         </listitem>
+      </varlistentry>
       <varlistentry xml:id="menus.edit.replace.with.source">
          <term xml:id="menus.edit.replace.with.source.title">
             <guimenuitem>Replace with Source</guimenuitem>
@@ -126,6 +144,35 @@
             <para>Inserts the segment source at the cursor position. If a part of
                the target segment has been selected, that part will be
                overwritten.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.edit.insert.source.glossary">
+         <term xml:id="menus.edit.insert.source.glossary.title">
+            <guimenuitem>Insert Source with Glossary Hits Replaced</guimenuitem>
+            	  
+            <keycombo>
+               <keycap>C</keycap>
+               <keycap>A</keycap>
+               <keycap>S</keycap>
+               <keycap>I</keycap>
+            </keycombo>
+            	  </term>
+         <listitem>
+            <para>Inserts the segment source with every glossary source term
+               replaced by its first target term, independent of the
+               replace-on-insert glossary preference.</para>
+         </listitem>
+      </varlistentry>
+      <varlistentry xml:id="menus.edit.insert.glossary.hit">
+         <term xml:id="menus.edit.insert.glossary.hit.title">
+            <guimenuitem>Insert Glossary Hit</guimenuitem>
+         </term>
+         <listitem>
+            <para>Inserts the target term of one of the first five entries of
+               the Glossary pane at the cursor position
+               (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>1</keycap></keycombo>
+               to
+               <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>5</keycap></keycombo>).</para>
          </listitem>
       </varlistentry>
       <varlistentry xml:id="menus.edit.select.source.text">

@@ -140,7 +140,7 @@
       <varlistentry xml:id="application.folder.plugins">
          <term xml:id="application.folder.plugins.title">plugins/</term>
          <listitem>
-            <para>The folder where you can install external plugins. The prefered
+            <para>The folder where you can install external plugins. The preferred
                		location for plugin manual installs is the 
                <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"></link> folder
                		located in the 

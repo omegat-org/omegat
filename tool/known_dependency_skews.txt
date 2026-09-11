@@ -1,0 +1,5 @@
+# Tolerated legacy version skews between lib/provided/core and
+# lib/provided/module, checked by check_duplicate_dependencies.py.
+# Empty since module resolution aligns to application-provided versions
+# (DependencyAlignment, build-logic); add entry with reason only when
+# alignment is impossible for a library. Checker errors on stale entries.

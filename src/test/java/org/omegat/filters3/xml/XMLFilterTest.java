@@ -23,38 +23,30 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters3;
+package org.omegat.filters3.xml;
 
+import org.jspecify.annotations.NullMarked;
 import org.junit.Test;
 import org.omegat.filters.TestFilterBase;
 import org.omegat.filters2.Instance;
-import org.omegat.filters3.xml.DefaultXMLDialect;
-import org.omegat.filters3.xml.XMLDialect;
-import org.omegat.filters3.xml.XMLFilter;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.util.Map;
 
+@NullMarked
 public class XMLFilterTest extends TestFilterBase {
 
     @Test
     public void testLoadCJKPath() throws Exception {
-        TestFilter filter = new TestFilter(new DefaultXMLDialect());
-        String f = "src/test/resources/data/xml/\u6587\u4EF6/test.xml";
+        XMLFilter filter = new TestFilter(new DefaultXMLDialect());
+        String f = "src/test/resources/data/xml/文件/test.xml";
         File inputFile = new File(f);
         filter.processFile(inputFile, outFile, context);
     }
 
     public static class TestFilter extends XMLFilter {
         public TestFilter(XMLDialect dialect) {
-            super(dialect);
-            try {
-                setSAXFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
-            } catch (SAXNotSupportedException | SAXNotRecognizedException | ParserConfigurationException e) {
-                throw new RuntimeException(e);
-            }
+            super(dialect, Map.of("http://apache.org/xml/features/disallow-doctype-decl", false));
         }
 
         @Override

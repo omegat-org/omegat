@@ -1,6 +1,8 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.omegat.gradle.PropertiesUtil
+import org.omegat.module.OmegatModuleExtension
+import org.omegat.module.DependencyAlignment
 
 plugins {
     id 'org.omegat.version'
@@ -74,7 +76,14 @@ configurations {
         transitive = false
     }
 }
+// lib/provided/module of source distribution resolves through this
+// configuration; align to application versions like module classpaths
+DependencyAlignment.alignToApplication(project, configurations.moduleRuntimeLibs)
 
+def providedCoreLibsPath = OmegatModuleExtension.PROVIDED_CODE_LIBS_PATH
+def providedModuleLibsPath = OmegatModuleExtension.PROVIDED_MODULE_LIBS_PATH
+def providedBuildLogicPath = 'lib/provided/build-logic'
+def providedCoreLibsDir = project.layout.settingsDirectory.dir(providedCoreLibsPath).asFile
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedCoreLibsDir.directory) {
@@ -221,7 +230,7 @@ dependencies {
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)
-    testImplementation(libs.assertj)
+    testImplementation(libs.assertj.core)
     testImplementation(libs.bundles.xmlunit) {
         exclude module: 'assertj-core'
     }
@@ -237,14 +246,14 @@ dependencies {
     testAcceptanceImplementation(libs.commons.io)
     testAcceptanceImplementation(libs.slf4j.jdk14)
     testAcceptanceImplementation(libs.slf4j.format.jdk14)
-    testAcceptanceImplementation(testFixtures(project.rootProject))
+    testAcceptanceImplementation(testFixtures(project(':')))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
     testAcceptanceImplementation(libs.bundles.lucene)
     testAcceptanceImplementation(project(':aligner'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
-    testIntegrationImplementation(testFixtures(project.rootProject))
+    testIntegrationImplementation(testFixtures(project(':')))
     testIntegrationImplementation(libs.slf4j.api)
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
@@ -261,7 +270,7 @@ dependencies {
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
     subprojects.findAll { it.subprojects.isEmpty() }.each { sub ->
-        jacocoAggregation sub
+        jacocoAggregation(project(sub.path))
         // Declared unconditionally: a plugins.withId callback never fires for projects
         // that configure-on-demand leaves unconfigured. Every leaf subproject applies
         // org.omegat.module, which provides both target configurations.
@@ -302,12 +311,12 @@ jar {
                 }
             }
         }
-        pluginAttr('Dictionary driver[bundle]', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
-        pluginAttr('File filters[bundle]', 'org/omegat/filters2/', 'filter', desc.filters2)
-        pluginAttr('XML filters[bundle]', 'org/omegat/filters3/', 'filter', desc.filters3)
-        pluginAttr('New XML filters[bundle]', 'org/omegat/filters4/', 'filter', desc.filters4)
-        pluginAttr('Tokenizers[bundle]', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
-        pluginAttr('Themes [bundle]', 'org/omegat/gui/theme/', 'theme', desc.theme)
+        pluginAttr('Dictionary driver', 'org/omegat/core/dictionaries/', 'dictionary', desc.dictionary)
+        pluginAttr('File filters', 'org/omegat/filters2/', 'filter', desc.filters2)
+        pluginAttr('XML filters', 'org/omegat/filters3/', 'filter', desc.filters3)
+        pluginAttr('New XML filters', 'org/omegat/filters4/', 'filter', desc.filters4)
+        pluginAttr('Tokenizers', 'org/omegat/tokenizer/', 'tokenizer', desc.tokenizer)
+        pluginAttr('Themes', 'org/omegat/gui/theme/', 'theme', desc.theme)
         pluginAttr('Scripting engine', 'org/omegat/gui/script/', 'miscellaneous', desc.script)
         pluginAttr('GUI extensions', 'org/omegat/util/gui/', 'miscellaneous', desc.guiutil)
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
@@ -369,7 +378,6 @@ tasks.register('distributionSmokeTest', Test) {
 }
 
 def buildLogicLibsDir = layout.settingsDirectory.file('build-logic/build/libs/build-logic')
-def providedBuildLogicPath = 'lib/provided/build-logic'
 
 distributions {
     main {

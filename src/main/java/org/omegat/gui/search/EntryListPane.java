@@ -527,49 +527,6 @@ class EntryListPane extends JTextPane {
         return result;
     }
 
-    /**
-     * Move the active (highlighted) search result one entry forward, wrapping
-     * around to the first result after the last one, and show it in the editor
-     * regardless of the auto-sync option. Used by the Find Next button and its
-     * shortcut (feature requests #1125 and #1380).
-     *
-     * @return true when the navigation wrapped around the end of the results
-     */
-    boolean selectNextEntry() {
-        DisplayedEntry entry = getActiveDisplayedEntry();
-        DisplayedEntry next = entry.getNext();
-        boolean wrapped = false;
-        if (next == entry && getNrEntries() > 0) {
-            next = new DisplayedEntryImpl(0);
-            wrapped = true;
-        }
-        next.activate();
-        if (!autoSyncWithEditor) {
-            getActiveDisplayedEntry().gotoEntryInEditor();
-        }
-        return wrapped;
-    }
-
-    /**
-     * Counterpart of {@link #selectNextEntry()} for the Find Previous button.
-     *
-     * @return true when the navigation wrapped around the start of the results
-     */
-    boolean selectPreviousEntry() {
-        DisplayedEntry entry = getActiveDisplayedEntry();
-        DisplayedEntry previous = entry.getPrevious();
-        boolean wrapped = false;
-        if (previous == entry && getNrEntries() > 0) {
-            previous = new DisplayedEntryImpl(getNrEntries() - 1);
-            wrapped = true;
-        }
-        previous.activate();
-        if (!autoSyncWithEditor) {
-            getActiveDisplayedEntry().gotoEntryInEditor();
-        }
-        return wrapped;
-    }
-
     private void initActions() {
         ActionMap actionMap = getActionMap();
 
@@ -811,10 +768,8 @@ class EntryListPane extends JTextPane {
 
             int offset = entryListIndex == 0 ? 0
                     : offsetList.get(entryListIndex - 1) + ENTRY_SEPARATOR.length();
-            int length = offsetList.get(entryListIndex) - offset - 1; // except
-                                                                      // tail
-                                                                      // line
-                                                                      // break
+            int length = offsetList.get(entryListIndex) - offset - 1;
+            // except tail line break
 
             getStyledDocument().setCharacterAttributes(offset, length, attrActive, false);
 

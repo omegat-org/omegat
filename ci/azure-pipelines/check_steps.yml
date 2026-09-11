@@ -7,6 +7,8 @@ steps:
         gradle | "$(Agent.OS)"
         gradle
       path: '$(GRADLE_USER_HOME)'
+  - script: python3 ci/check-docs-assets.py
+    displayName: 'Check documentation assets are referenced'
   - task: Gradle@3
     displayName: Check
     inputs:

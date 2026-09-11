@@ -43,10 +43,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Filter for XHTML files.
@@ -72,13 +69,8 @@ public class XHTMLFilter extends XMLFilter {
      * Creates a new instance of XHTMLFilter
      */
     public XHTMLFilter() {
-        super(new XHTMLDialect());
+        super(new XHTMLDialect(), Map.of("http://apache.org/xml/features/disallow-doctype-decl", false));
         doNotSendToCore = false;
-        try {
-            setSAXFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
-        } catch (SAXNotSupportedException | SAXNotRecognizedException | ParserConfigurationException e) {
-            Log.log(e);
-        }
     }
 
     @Override

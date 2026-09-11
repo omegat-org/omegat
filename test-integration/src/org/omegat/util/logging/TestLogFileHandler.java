@@ -75,7 +75,7 @@ public class TestLogFileHandler extends StreamHandler {
      */
     @SuppressWarnings("resource")
     private void openFiles(final File dir) throws IOException {
-        boolean dirCreated = dir.mkdirs();
+        boolean dirCreated = dir.isDirectory() || dir.mkdirs();
         if (!dirCreated) {
             throw new IOException("Cannot create directory: " + dir.getAbsolutePath());
         }

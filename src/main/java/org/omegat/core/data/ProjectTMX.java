@@ -71,6 +71,7 @@ public class ProjectTMX {
     protected static final String PROP_XICE = "x-ice";
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
+    protected static final String PROP_XENFORCED = "x-enforced";
 
     public static final String PROP_ORIGIN = "origin";
 
@@ -256,6 +257,9 @@ public class ProjectTMX {
                     if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
                         p.add(PROP_XAUTO);
                         p.add("auto");
+                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.xENFORCED) {
+                        p.add(PROP_XENFORCED);
+                        p.add("enforced");
                     }
                 }
                 if (Preferences.isPreference(Preferences.SAVE_ORIGIN)) {
@@ -288,6 +292,9 @@ public class ProjectTMX {
                     } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
                         p.add(PROP_X100PC);
                         p.add(k.id);
+                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.xENFORCED) {
+                        p.add(PROP_XENFORCED);
+                        p.add("enforced");
                     }
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
@@ -457,6 +464,9 @@ public class ProjectTMX {
         }
         if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
             externalLinked = TMXEntry.ExternalLinked.xAUTO;
+        }
+        if (externalLinked == null && te.hasPropValue(PROP_XENFORCED, null)) {
+            externalLinked = TMXEntry.ExternalLinked.xENFORCED;
         }
         return externalLinked;
     }

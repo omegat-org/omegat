@@ -55,6 +55,10 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         super(url);
     }
 
+    /** Instantiated reflectively by MachineTranslatorsManager. */
+    public MyMemoryHumanTranslate() {
+    }
+
     @Override
     protected String getPreferenceName() {
         return ALLOW_MYMEMORY_HUMAN_TRANSLATE;

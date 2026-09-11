@@ -64,6 +64,14 @@ public class FontFallbackListener implements DocumentListener {
         doStyling(e.getDocument(), e.getOffset(), e.getLength());
     }
 
+    /**
+     * Style the supplied document as a whole. Needed once when a pane swaps
+     * in a prebuilt document, where no insert event fires (SF bug #981).
+     */
+    public void styleWholeDocument(Document document) {
+        doStyling(document, 0, document.getLength());
+    }
+
     private void doStyling(Document document, final int offset, final int length) {
         if (!Preferences.isPreference(Preferences.FONT_FALLBACK)) {
             return;

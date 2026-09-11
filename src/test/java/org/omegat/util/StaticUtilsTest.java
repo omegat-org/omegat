@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,8 +33,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 /**
@@ -99,5 +106,73 @@ public class StaticUtilsTest {
         assertTrue(Pattern.matches(StaticUtils.globToRegex("a *", true), "a\u00A0b"));
         assertFalse(Pattern.matches(StaticUtils.globToRegex("a ?", false), "a\u00A0b"));
         assertTrue(Pattern.matches(StaticUtils.globToRegex("a ?", true), "a\u00A0b"));
+    }
+
+    @Test
+    public void testDetermineUserScriptsPathFirstRun() throws Exception {
+        withTempHome(dataDir -> {
+            Path scriptsPath = StaticUtils.determineUserScriptsPath();
+            assertEquals(dataDir.resolve("scripts"), scriptsPath);
+            assertTrue(Files.isDirectory(scriptsPath));
+        });
+    }
+
+    @Test
+    public void testDetermineUserScriptsPathMigratesLegacyFolder() throws Exception {
+        withTempHome(dataDir -> {
+            Path legacyPath = dataDir.resolve("script");
+            Files.createDirectories(legacyPath);
+            Files.write(legacyPath.resolve("my_script.groovy"), "// user content".getBytes(StandardCharsets.UTF_8));
+            Path scriptsPath = StaticUtils.determineUserScriptsPath();
+            assertEquals(dataDir.resolve("scripts"), scriptsPath);
+            assertTrue(Files.exists(scriptsPath.resolve("my_script.groovy")));
+            assertFalse(Files.exists(legacyPath));
+        });
+    }
+
+    @Test
+    public void testDetermineUserScriptsPathIgnoresLegacyFile() throws Exception {
+        withTempHome(dataDir -> {
+            Path legacyFile = dataDir.resolve("script");
+            Files.write(legacyFile, "not a folder".getBytes(StandardCharsets.UTF_8));
+            Path scriptsPath = StaticUtils.determineUserScriptsPath();
+            assertEquals(dataDir.resolve("scripts"), scriptsPath);
+            assertTrue(Files.isDirectory(scriptsPath));
+            assertTrue(Files.isRegularFile(legacyFile));
+        });
+    }
+
+    @Test
+    public void testDetermineUserScriptsPathKeepsExistingFolders() throws Exception {
+        withTempHome(dataDir -> {
+            Path legacyPath = dataDir.resolve("script");
+            Files.createDirectories(legacyPath);
+            Path existingPath = dataDir.resolve("scripts");
+            Files.createDirectories(existingPath);
+            Files.write(existingPath.resolve("current.groovy"), "// current".getBytes(StandardCharsets.UTF_8));
+            Path scriptsPath = StaticUtils.determineUserScriptsPath();
+            assertEquals(existingPath, scriptsPath);
+            assertTrue(Files.exists(scriptsPath.resolve("current.groovy")));
+            assertTrue(Files.isDirectory(legacyPath));
+        });
+    }
+
+    private interface DataDirConsumer {
+        void accept(Path dataDir) throws IOException;
+    }
+
+    private static void withTempHome(DataDirConsumer test) throws IOException {
+        Path tempHome = Files.createTempDirectory("omegat-home-");
+        String originalHome = System.getProperty("user.home");
+        System.setProperty("user.home", tempHome.toString());
+        try {
+            // getApplicationDataDir on Windows requires this folder to exist
+            // to resolve under the home directory.
+            Files.createDirectories(tempHome.resolve("AppData").resolve("Local"));
+            test.accept(Paths.get(StaticUtils.getApplicationDataDir()));
+        } finally {
+            System.setProperty("user.home", originalHome);
+            FileUtils.deleteQuietly(tempHome.toFile());
+        }
     }
 }

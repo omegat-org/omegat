@@ -59,7 +59,8 @@ public interface ITranslateCallback {
      *            path of segment
      * @return translation or null if translation not exist
      */
-    @Nullable String getTranslation(@Nullable String id, String source, @Nullable String path);
+    @Nullable
+    String getTranslation(@Nullable String id, String source, @Nullable String path);
 
     /**
      * Old call without path, for compatibility
@@ -69,6 +70,11 @@ public interface ITranslateCallback {
      *              source entry text
      * @return translation or null if translation not exist
      */
-    @Nullable String getTranslation(@Nullable String id, String source);
+    @Deprecated
+    @Nullable
+    String getTranslation(@Nullable String id, String source);
 
+    default @Nullable String getNote(@Nullable String id, String source, @Nullable String path) {
+        return null;
+    }
 }

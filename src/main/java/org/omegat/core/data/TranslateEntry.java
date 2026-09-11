@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.filters2.ITranslateCallback;
@@ -41,7 +42,7 @@ import org.omegat.util.TagUtil;
 
 /**
  * Base class for entry translation.
- *
+ * <p>
  * This class collects all segments which should be translated, for ability to link prev/next segments for the
  * seconds pass.
  *
@@ -56,7 +57,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     private int pass;
 
     /** Collected segments. */
-    private List<TranslateEntryQueueItem> translateQueue = new ArrayList<TranslateEntryQueueItem>();
+    private final List<TranslateEntryQueueItem> translateQueue = new ArrayList<>();
 
     /**
      * Index of currently processed segment. It required for multiple translation for use right segment.
@@ -89,11 +90,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
         translateQueue.clear();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String getTranslation(final String id, final String origSource, final String path) {
+    public String getTranslation(@Nullable String id, String origSource, @Nullable String path) {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
         // fix for bug 3487497;
@@ -112,8 +110,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
 
         if (config.isSentenceSegmentingEnabled()) {
             boolean translated = false;
-            List<StringBuilder> spaces = new ArrayList<StringBuilder>();
-            List<Rule> brules = new ArrayList<Rule>();
+            List<StringBuilder> spaces = new ArrayList<>();
+            List<Rule> brules = new ArrayList<>();
             Language sourceLang = config.getSourceLanguage();
             Language targetLang = config.getTargetLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
@@ -196,17 +194,12 @@ public abstract class TranslateEntry implements ITranslateCallback {
         return r;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
+    @Deprecated
     public String getTranslation(final String id, final String origSource) {
         return getTranslation(id, origSource, null);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void linkPrevNextSegments() {
         for (int i = 0; i < translateQueue.size(); i++) {
@@ -226,14 +219,9 @@ public abstract class TranslateEntry implements ITranslateCallback {
         }
     }
 
-    /**
+    /*
      * This method calls real method for empty prev/next on the first pass, then with real prev/next on the
      * second pass.
-     *
-     * @param id
-     * @param segmentIndex
-     * @param segmentSource
-     * @return
      */
     private String internalGetSegmentTranslation(String id, int segmentIndex, String segmentSource, String path) {
         if (segmentSource.trim().isEmpty()) {

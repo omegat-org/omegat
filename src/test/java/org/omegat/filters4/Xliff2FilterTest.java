@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2022 Thomas Cordonnier
+               2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,11 +33,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters4.xml.xliff.Xliff2Filter;
 
+@NullMarked
 public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testParse() throws Exception {
@@ -60,7 +64,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     public void testKey() throws Exception {
         List<ParsedEntry> entries = parse3(new Xliff2Filter(), "src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
             java.util.Collections.emptyMap());
-        ParsedEntry firstEntry = entries.get(0);
+        ParsedEntry firstEntry = entries.getFirst();
         assertEquals("1", firstEntry.id); // <segment> has no id, not mandatory
         assertEquals("//groups/N65541xdocument/N65541bxmarksection-1/title-2", firstEntry.path);
         ParsedEntry secondEntry = entries.get(2);
@@ -74,21 +78,34 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         filter.translateFile(new File("src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"), 
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
-                    public String getTranslation(String id, String source, String path) {
+                    @Override
+                    public @Nullable String getTranslation(@Nullable String id, String source, @Nullable String path) {
                         if ("Birds in Oregon".equals(source)) {
                             return "Oiseaux en Oregon";
                         }
                         return null; // not translated
                     }
 
-                    public String getTranslation(String id, String source) {
+                    @Deprecated
+                    @Override
+                    public @Nullable String getTranslation(@Nullable String id, String source) {
                         return getTranslation(id, source, "");
                     }
 
+                    @Override
                     public void linkPrevNextSegments() {
                     }
 
+                    @Override
                     public void setPass(int pass) {
+                    }
+
+                    @Override
+                    public @Nullable String getNote(@Nullable String id, String source, @Nullable String path) {
+                        if ("Birds in Oregon".equals(source)) {
+                            return "Oregon notes.";
+                        }
+                        return null;
                     }
                 });
         // Check that it correctly translates
@@ -97,7 +114,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the source file, not in the Callback
         assertEquals("<t0>Oiseaux de haute altitude", entries.get(2).translation);
         // entry translated in the callback, not in the source file
-        assertEquals("Oiseaux en Oregon", entries.get(0).translation); 
+        assertEquals("Oiseaux en Oregon", entries.get(0).translation);
     }
 
     @Test

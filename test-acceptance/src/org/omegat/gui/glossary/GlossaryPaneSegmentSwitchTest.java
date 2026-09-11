@@ -63,7 +63,7 @@ import org.omegat.util.Preferences;
  */
 public class GlossaryPaneSegmentSwitchTest extends TestCoreGUI {
 
-    private static final Path PROJECT_PATH = Paths.get("src/testAcceptance/resources/data/project/");
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
     /** Match count a long segment reaches against a 12 MB glossary file. */
     private static final int ERROR_MATCHES = 800;

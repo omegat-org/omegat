@@ -599,6 +599,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getEditor().prevXEnforcedEntry();
     }
 
+    public void gotoNextIdenticalMenuItemActionPerformed() {
+        Core.getEditor().nextIdenticalEntry();
+    }
+
+    public void gotoPreviousIdenticalMenuItemActionPerformed() {
+        Core.getEditor().prevIdenticalEntry();
+    }
+
     public void gotoNextNoteMenuItemActionPerformed() {
         Core.getEditor().nextEntryWithNote();
     }
@@ -730,6 +738,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (o instanceof JCheckBoxMenuItem) {
             JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
             Core.getEditor().getSettings().setMarkAutoPopulated(jcm.isSelected());
+        }
+    }
+
+    public void viewMarkIdenticalCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+        Object o = evt.getSource();
+        if (o instanceof JCheckBoxMenuItem) {
+            JCheckBoxMenuItem jcm = (JCheckBoxMenuItem) o;
+            Core.getEditor().getSettings().setMarkIdentical(jcm.isSelected());
         }
     }
 

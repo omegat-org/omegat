@@ -48,6 +48,7 @@ public class EditorSettingsStub implements IEditorSettings {
     private boolean markAutoPopulated;
     private boolean displaySegmentSources;
     private boolean markNonUniqueSegments;
+    private boolean markIdentical;
     private boolean markNoted;
     private boolean markNBSP;
     private boolean markWhitespace;
@@ -97,6 +98,16 @@ public class EditorSettingsStub implements IEditorSettings {
     @Override
     public void setMarkAutoPopulated(boolean markAutoPopulated) {
         this.markAutoPopulated = markAutoPopulated;
+    }
+
+    @Override
+    public boolean isMarkIdentical() {
+        return markIdentical;
+    }
+
+    @Override
+    public void setMarkIdentical(boolean markIdentical) {
+        this.markIdentical = markIdentical;
     }
 
     @Override

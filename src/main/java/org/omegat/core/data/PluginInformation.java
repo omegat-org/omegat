@@ -57,22 +57,19 @@ public final class PluginInformation {
             this.value = value;
         }
 
+        @SuppressWarnings("unused")
         public String getLocalizedValue() {
-            switch (this) {
-            case UNINSTALLED:
-                return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
-            case UPDATABLE:
-                return OStrings.getString("PLUGIN_STATUS_UPDATABLE");
-            case BUNDLED:
-                return OStrings.getString("PLUGIN_STATUS_BUNDLED");
-            case NEW:
-                return OStrings.getString("PLUGIN_STATUS_NEW");
-            case INSTALLED:
-                return OStrings.getString("PLUGIN_STATUS_INSTALLED");
-            default:
-                return "Unknown";
-            }
+            return switch (this) {
+                case UNINSTALLED -> OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
+                case UPDATABLE -> OStrings.getString("PLUGIN_STATUS_UPDATABLE");
+                case BUNDLED -> OStrings.getString("PLUGIN_STATUS_BUNDLED");
+                case NEW -> OStrings.getString("PLUGIN_STATUS_NEW");
+                case INSTALLED -> OStrings.getString("PLUGIN_STATUS_INSTALLED");
+            };
+        }
 
+        public String getValue() {
+            return value;
         }
     }
 

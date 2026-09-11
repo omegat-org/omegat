@@ -31,6 +31,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.BadLocationException;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorTextArea3;
@@ -53,7 +54,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the completer.
      */
-    protected AutoCompleter completer;
+    protected @Nullable AutoCompleter completer;
 
     /**
      * Creates a new auto-completer view.
@@ -190,15 +191,18 @@ public abstract class AbstractAutoCompleterView {
     }
 
     protected String getLeadingText() {
-        try {
-            EditorTextArea3 editor = completer.getEditor();
-            int offset = editor.getCaretPosition();
-            Document3 editorDoc = editor.getOmDocument();
-            if (editorDoc != null) {
+        if (completer == null) {
+            return "";
+        }
+        EditorTextArea3 editor = completer.getEditor();
+        Document3 editorDoc = editor.getOmDocument();
+        if (editorDoc != null) {
+           try {
+                int offset = editor.getCaretPosition();
                 int translationStart = editorDoc.getTranslationStart();
                 return editor.getDocument().getText(translationStart, offset - translationStart);
-            }
-        } catch (BadLocationException ignored) {
+           } catch (BadLocationException ignored) {
+           }
         }
         return "";
     }

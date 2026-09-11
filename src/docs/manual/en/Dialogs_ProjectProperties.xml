@@ -332,6 +332,30 @@
                </note>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="dialogs.project.properties.tag.definitions">
+            <term xml:id="dialogs.project.properties.tag.definitions.title">
+               <guibutton>Local Tag Definitions...</guibutton>
+            </term>
+            <listitem>
+               <para>By default, the custom tag and flagged text definitions are
+                  		  global and shared by all projects. They are found in the
+                  <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"></link>
+                  		  preferences.</para>
+               <para>Use this button to create local tag definitions specific to
+                  		  your project. Check the
+                  <option>Use local tag definitions</option> box, and adjust the two
+                  		  regular expressions as desired. An empty field means the project
+                  		  does not use that expression at all.</para>
+               <para>The project will store the expressions in the
+                  <link linkend="project.folder.omegat.tag.patterns" endterm="project.folder.omegat.tag.patterns.title"></link> file located in its
+                  <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"></link> folder. These
+                  		  settings will supersede the global tag definitions.</para>
+               <note>
+                  <para>To disable local tag definitions, uncheck the box, or remove
+                     			that file while the project is closed.</para>
+               </note>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="dialogs.project.properties.file.locations">

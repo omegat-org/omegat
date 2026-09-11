@@ -33,6 +33,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -127,6 +130,33 @@ public final class SRXManager {
             return;
         }
 
+        try (FileOutputStream fos = new FileOutputStream(outFile)) {
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(fos, toJaxb(srx));
+        } catch (DatabindException e) {
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * Serializes segmentation rules to the same SRX text that
+     * {@link #saveToSrx} writes, for content comparisons that must not
+     * depend on file formatting.
+     *
+     * @param srx
+     *            the rules to serialize
+     * @return the rules as pretty-printed SRX
+     * @throws IOException
+     *             if the rules cannot be serialized
+     */
+    public static String writeToString(SRX srx) throws IOException {
+        try {
+            return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(toJaxb(srx));
+        } catch (DatabindException e) {
+            throw new IOException(e);
+        }
+    }
+
+    private static Srx toJaxb(SRX srx) {
         ObjectFactory factory = new ObjectFactory();
         Srx jaxbObject = factory.createSrx();
         jaxbObject.setVersion("2.0");
@@ -161,12 +191,7 @@ public final class SRXManager {
                 }
             }
         }
-
-        try (FileOutputStream fos = new FileOutputStream(outFile)) {
-            MAPPER.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
-        } catch (DatabindException e) {
-            throw new IOException(e);
-        }
+        return jaxbObject;
     }
 
     public static @Nullable SRX loadSrxFile(URI rulesUri) {
@@ -209,6 +234,62 @@ public final class SRXManager {
     }
 
     /**
+     * Parses segmentation rules from SRX text.
+     *
+     * @param content
+     *            the rules as SRX text
+     * @return the parsed rules
+     * @throws IOException
+     *             if the text cannot be parsed
+     */
+    public static SRX loadSrxFromString(String content) throws IOException {
+        return loadSrxInputStream(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    /**
+     * Like {@link #loadFromDir}, but free of side effects: a legacy
+     * {@link #CONF_SENTSEG} file is converted in memory instead of being
+     * replaced by a {@link #SRX_SENTSEG} file on disk, so the directory can
+     * be inspected without being modified.
+     *
+     * @param configDir
+     *            the directory holding the segmentation files
+     * @return the effective rules, or null when neither file is present or
+     *         readable
+     */
+    public static @Nullable SRX loadFromDirNoMigrate(File configDir) {
+        File inFile = new File(configDir, SRX_SENTSEG);
+        if (inFile.exists()) {
+            return loadSrxFile(inFile.toURI());
+        }
+        inFile = new File(configDir, CONF_SENTSEG);
+        if (inFile.exists()) {
+            return loadConfFileNoMigrate(inFile);
+        }
+        return null;
+    }
+
+    /**
+     * Parses a legacy {@link #CONF_SENTSEG} file in memory, without writing
+     * or deleting anything on disk.
+     *
+     * @param confFile
+     *            the legacy file
+     * @return the parsed rules, or null when the file is unreadable
+     */
+    public static @Nullable SRX loadConfFileNoMigrate(File confFile) {
+        try {
+            ByteArrayOutputStream converted = new ByteArrayOutputStream();
+            confToSrxTransformer().transform(new StreamSource(confFile), new StreamResult(converted));
+            return loadSrxInputStream(new ByteArrayInputStream(converted.toByteArray()));
+        } catch (Exception e) {
+            Log.logDebug("Error loading segmentation rules from file: {0}\n{1}", confFile,
+                    e.getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Loads segmentation rules from an XML file. If there's an error loading a
      * file, it calls <code>getDefault</code>.
      * <p>
@@ -218,14 +299,7 @@ public final class SRXManager {
      */
     static @Nullable SRX loadConfFile(File configFile, File configDir) throws Exception {
         try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            transformerFactory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
-            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", "");
-            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet",
-                    "");
-            // add XSLT in Transformer
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(SRX.class
-                    .getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
+            Transformer transformer = confToSrxTransformer();
             File dest = new File(configDir, SRX_SENTSEG);
             try (FileOutputStream fos = new FileOutputStream(dest)) {
                 transformer.transform(new StreamSource(configFile), new StreamResult(fos));
@@ -243,6 +317,15 @@ public final class SRXManager {
                 throw e;
             }
         }
+    }
+
+    private static Transformer confToSrxTransformer() throws Exception {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", "");
+        transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet", "");
+        return transformerFactory.newTransformer(new StreamSource(SRX.class.getClassLoader()
+                .getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
     }
 
     public static SRX loadSrxInputStream(InputStream io) throws IOException {

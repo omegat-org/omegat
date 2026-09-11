@@ -105,7 +105,9 @@ public final class TipOfTheDayModule {
 
         @Override
         public void onApplicationShutdown() {
-            if (ENABLED) {
+            // Menu item exists only when startup found tips index for UI
+            // language; nothing to remove otherwise.
+            if (ENABLED && totdMenu != null) {
                 MenuExtender.removeMenuItems(MenuExtender.MenuKey.HELP, Collections.singletonList(totdMenu));
             }
         }

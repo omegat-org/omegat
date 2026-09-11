@@ -50,7 +50,7 @@ public final class AlignerModule implements IApplicationEventListener {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private static @Nullable IApplicationEventListener alignerListener;
 
-    private AlignerModule() {
+    AlignerModule() {
     }
 
     /**
@@ -83,7 +83,12 @@ public final class AlignerModule implements IApplicationEventListener {
     }
 
     private void unregisterMenu() {
-        MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, Collections.singletonList(alignerMenu));
+        // Menu item registers via invokeLater after startup; shutdown can
+        // arrive before that ran, leaving nothing to remove.
+        if (alignerMenu != null) {
+            MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS,
+                    Collections.singletonList(alignerMenu));
+        }
     }
 
     private void registerMenu() {

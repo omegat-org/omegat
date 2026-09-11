@@ -68,6 +68,9 @@ class SpellingIssueProvider implements IIssueProvider {
 
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
+        if (tmxEntry.translation == null) {
+            return Collections.emptyList();
+        }
         List<Token> misspelled = Core.getSpellChecker().getMisspelledTokens(tmxEntry.translation);
         return misspelled.isEmpty() ? Collections.emptyList()
                 : List.of(new SpellingIssue(sourceEntry, tmxEntry, misspelled));

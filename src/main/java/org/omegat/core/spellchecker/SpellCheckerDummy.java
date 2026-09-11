@@ -29,7 +29,6 @@ package org.omegat.core.spellchecker;
 import java.util.Collections;
 import java.util.List;
 
-import org.jspecify.annotations.Nullable;
 import org.omegat.util.Token;
 
 /**

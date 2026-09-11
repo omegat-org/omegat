@@ -36,7 +36,7 @@ public interface ISpellCheckerDictionary extends Closeable {
      * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default @Nullable org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
+    default org.apache.lucene.analysis.hunspell.@Nullable Dictionary getHunspellDictionary(String language) {
         return null;
     }
 
@@ -45,7 +45,7 @@ public interface ISpellCheckerDictionary extends Closeable {
      * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default @Nullable morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
+    default morfologik.stemming.@Nullable Dictionary getMorfologikDictionary(String language) {
         return null;
     }
 

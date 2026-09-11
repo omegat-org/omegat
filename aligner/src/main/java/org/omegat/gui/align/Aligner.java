@@ -116,6 +116,8 @@ public class Aligner {
         ID
     }
 
+    static final ComparisonMode DEFAULT_COMPARISON_MODE = ComparisonMode.HEAPWISE;
+
     enum AlgorithmClass {
         /**
          * Viterbi algorithm.
@@ -135,6 +137,8 @@ public class Aligner {
          */
         FB
     }
+
+    static final AlgorithmClass DEFAULT_ALGORITHM_CLASS = AlgorithmClass.VITERBI;
 
     enum CalculatorType {
         /**
@@ -156,6 +160,8 @@ public class Aligner {
         POISSON
     }
 
+    static final CalculatorType DEFAULT_CALCULATOR_TYPE = CalculatorType.NORMAL;
+
     enum CounterType {
         /**
          * Represents the counter type for characters.
@@ -167,13 +173,9 @@ public class Aligner {
         WORD
     }
 
-    @Nullable
     ComparisonMode comparisonMode;
-    @Nullable
     AlgorithmClass algorithmClass;
-    @Nullable
     CalculatorType calculatorType;
-    @Nullable
     CounterType counterType;
 
     private @Nullable List<String> srcRaw;
@@ -190,6 +192,10 @@ public class Aligner {
         this.srcLang = srcLang;
         this.trgFile = trgFile;
         this.trgLang = trgLang;
+        comparisonMode = DEFAULT_COMPARISON_MODE;
+        algorithmClass = DEFAULT_ALGORITHM_CLASS;
+        calculatorType = DEFAULT_CALCULATOR_TYPE;
+        counterType = CounterType.WORD;
         restoreDefaults();
         SRX srx = Preferences.getSRX();
         updateSegmenter(srx != null ? srx : SRX.getDefault());
@@ -274,9 +280,9 @@ public class Aligner {
      * Restore configuration to be default.
      */
     void restoreDefaults() {
-        comparisonMode = ComparisonMode.HEAPWISE;
-        algorithmClass = AlgorithmClass.VITERBI;
-        calculatorType = CalculatorType.NORMAL;
+        comparisonMode = DEFAULT_COMPARISON_MODE;
+        algorithmClass = DEFAULT_ALGORITHM_CLASS;
+        calculatorType = DEFAULT_CALCULATOR_TYPE;
         if ((srcLang != null && !srcLang.isSpaceDelimited())
                 || (trgLang != null && !trgLang.isSpaceDelimited())) {
             counterType = CounterType.CHAR;
@@ -394,11 +400,11 @@ public class Aligner {
         if (segmenter == null) {
             throw new IllegalStateException("Segmenter not set");
         }
-        if (algorithmClass == null || calculatorType == null || counterType == null) {
-            throw new IllegalStateException("Algorithm not set");
-        }
         if (srcRaw.isEmpty()) {
             return Stream.empty();
+        }
+        if (srcLang == null || trgLang == null) {
+            throw new IllegalStateException("Source or target language not set");
         }
         return IntStream.range(0, srcRaw.size()).mapToObj(i -> {
             List<String> source = segmenter.segment(srcLang, srcRaw.get(i), null, null).stream()
@@ -442,8 +448,8 @@ public class Aligner {
         if (segmenter == null) {
             throw new IllegalStateException("Segmenter not set");
         }
-        if (algorithmClass == null || calculatorType == null || counterType == null) {
-            throw new IllegalStateException("Algorithm not set");
+        if (srcLang == null || trgLang == null) {
+            throw new IllegalStateException("Source or target language not set");
         }
         return idPairs.stream().map(e -> {
             List<String> source = segmenter.segment(srcLang, e.getKey(), null, null).stream()
@@ -465,9 +471,6 @@ public class Aligner {
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
         if (srcRaw == null || srcLang == null || trgRaw == null || trgLang == null) {
             return Stream.empty();
-        }
-        if (algorithmClass == null || calculatorType == null || counterType == null) {
-            throw new IllegalStateException("Algorithm not set");
         }
         List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
         List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
@@ -510,19 +513,11 @@ public class Aligner {
         if (srcRaw == null || trgRaw == null) {
             loadFiles();
         }
-        if (comparisonMode == null) {
-            throw new IllegalStateException("Comparison mode not set");
-        }
-        switch (comparisonMode) {
-        case PARSEWISE:
-            return segment ? alignParsewiseSegmented() : alignParsewiseNotSegmented();
-        case HEAPWISE:
-            return alignHeapwise(segment);
-        case ID:
-            return segment ? alignByIdSegmented() : alignByIdNotSegmented();
-        default:
-            throw new UnsupportedOperationException("Unknown comparison mode: " + comparisonMode);
-        }
+        return switch (comparisonMode) {
+            case PARSEWISE -> segment ? alignParsewiseSegmented() : alignParsewiseNotSegmented();
+            case HEAPWISE -> alignHeapwise(segment);
+            case ID -> segment ? alignByIdSegmented() : alignByIdNotSegmented();
+        };
     }
 
     /**
@@ -553,14 +548,10 @@ public class Aligner {
     private static Calculator getCalculator(CalculatorType calculatorType, CounterType counterType,
             List<Alignment> aligns) {
         Counter counter = getCounter(counterType);
-        switch (calculatorType) {
-        case NORMAL:
-            return new NormalDistributionCalculator(counter);
-        case POISSON:
-            return new PoissonDistributionCalculator(counter, aligns);
-        default:
-            throw new UnsupportedOperationException("Unsupported calculator type: " + calculatorType);
-        }
+        return switch (calculatorType) {
+            case NORMAL -> new NormalDistributionCalculator(counter);
+            case POISSON -> new PoissonDistributionCalculator(counter, aligns);
+        };
     }
 
     /**
@@ -572,14 +563,10 @@ public class Aligner {
      * @return counter object.
      */
     private static Counter getCounter(CounterType counterType) {
-        switch (counterType) {
-        case CHAR:
-            return new CharCounter();
-        case WORD:
-            return new SplitCounter();
-        default:
-            throw new UnsupportedOperationException("Unsupported counter type: " + counterType);
-        }
+        return switch (counterType) {
+            case CHAR -> new CharCounter();
+            case WORD -> new SplitCounter();
+        };
     }
 
     /**
@@ -595,14 +582,10 @@ public class Aligner {
     private static AlignAlgorithm getAlgorithm(AlgorithmClass algorithmClass, Calculator calculator) {
         MatrixFactory matrixFactory = new FullMatrixFactory();
         Map<Category, Float> map = CategoryDefaults.BEST_CATEGORY_MAP;
-        switch (algorithmClass) {
-        case VITERBI:
-            return new ViterbiAlgorithm(calculator, map, matrixFactory);
-        case FB:
-            return new ForwardBackwardAlgorithm(calculator, map, matrixFactory);
-        default:
-            throw new UnsupportedOperationException("Unsupported algorithm class: " + algorithmClass);
-        }
+        return switch (algorithmClass) {
+            case VITERBI -> new ViterbiAlgorithm(calculator, map, matrixFactory);
+            case FB -> new ForwardBackwardAlgorithm(calculator, map, matrixFactory);
+        };
     }
 
     /**
@@ -620,9 +603,6 @@ public class Aligner {
     }
 
     List<MutableBead> doAlign(List<MutableBead> beads) {
-        if (algorithmClass == null || calculatorType == null || counterType == null) {
-            throw new IllegalStateException("Algorithm class, calculator type, or counter type not set");
-        }
         List<String> source = new ArrayList<>();
         List<String> target = new ArrayList<>();
         for (MutableBead bead : beads) {

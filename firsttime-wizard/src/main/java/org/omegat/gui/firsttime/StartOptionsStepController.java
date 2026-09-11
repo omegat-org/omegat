@@ -33,6 +33,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.gui.preferences.IPreferencesController;
 
 /**
@@ -44,7 +45,7 @@ final class StartOptionsStepController implements IPreferencesController {
 
     private final Runnable onAdvanced;
 
-    private JPanel panel;
+    private @Nullable JPanel panel;
 
     StartOptionsStepController(Runnable onAdvanced) {
         this.onAdvanced = onAdvanced;
@@ -78,19 +79,19 @@ final class StartOptionsStepController implements IPreferencesController {
     @Override
     public Component getGui() {
         if (panel == null) {
-            initGui();
+            panel = new JPanel();
+            initGui(panel);
         }
         return panel;
     }
 
-    private void initGui() {
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+    private void initGui(JPanel myPanel) {
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+        myPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         JLabel normalSteps = new JLabel(FirstTimeConfigurationWizardUtil.getString("label.normalSteps",
                 "Click next button and customize settings."));
-        panel.add(normalSteps);
-        panel.add(Box.createVerticalStrut(8));
+        myPanel.add(normalSteps);
+        myPanel.add(Box.createVerticalStrut(8));
         JPanel advancedPanel = new JPanel();
         advancedPanel.setLayout(new BoxLayout(advancedPanel, BoxLayout.Y_AXIS));
         JLabel advancedLabel = new JLabel(FirstTimeConfigurationWizardUtil.getString(
@@ -100,7 +101,7 @@ final class StartOptionsStepController implements IPreferencesController {
                 "button.advancedPrefs", "Go to advanced configuration"));
         advancedBtn.addActionListener(e -> onAdvanced.run());
         advancedPanel.add(advancedBtn);
-        panel.add(advancedPanel);
+        myPanel.add(advancedPanel);
     }
 
     @Override

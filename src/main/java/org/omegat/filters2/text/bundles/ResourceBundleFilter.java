@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
@@ -98,7 +99,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     public static final String DEFAULT_SOURCE_ENCODING = StandardCharsets.UTF_8.name();
     public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.UTF_8.name();
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * If true, will not convert characters into \\uXXXX notation
@@ -563,7 +564,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             ResourceBundleOptionsDialog dialog = new ResourceBundleOptionsDialog(parent, config);
             dialog.setVisible(true);

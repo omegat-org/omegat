@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -47,7 +48,6 @@ import javax.swing.JPanel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -73,7 +73,6 @@ import org.omegat.util.Preferences;
  *      "https://cloud.yandex.com/docs/translate/api-ref/Translation/">Translation
  *      API</a>
  */
-@NullMarked
 @SuppressWarnings("unused")
 public class YandexCloudTranslate extends BaseCachedTranslate {
 
@@ -214,7 +213,6 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         return ALLOW_YANDEX_CLOUD_TRANSLATE;
     }
 
-    @SuppressWarnings("unchecked")
     private String extractErrorMessage(final String json) {
         JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
@@ -230,8 +228,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
             final String folderId) throws JsonProcessingException {
         Map<String, Object> params = new TreeMap<>();
-        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
-        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());
+        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase(Locale.ROOT));
+        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase(Locale.ROOT));
         params.put("folderId", folderId);
         if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
             params.put("format", "HTML");
@@ -246,7 +244,6 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         return new ObjectMapper().writeValueAsString(params);
     }
 
-    @SuppressWarnings("unchecked")
     protected String extractTranslation(final String json) throws MachineTranslateError {
         JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
@@ -260,7 +257,6 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private @Nullable String getIAMToken(final String oAuthToken) {
         if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1_000) {
 

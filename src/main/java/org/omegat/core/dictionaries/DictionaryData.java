@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
 import org.trie4j.MapTrie;
 import org.trie4j.doublearray.MapDoubleArray;
 import org.trie4j.patricia.MapPatriciaTrie;
@@ -55,8 +57,8 @@ import org.omegat.util.StringUtil;
 public class DictionaryData<T> {
 
     private final Language language;
-    private MapDoubleArray<Object> data;
-    private MapTrie<Object> temp;
+    private @Nullable MapDoubleArray<Object> data;
+    private @Nullable MapTrie<Object> temp;
 
     /**
      * @param language
@@ -95,7 +97,7 @@ public class DictionaryData<T> {
      * @param value
      */
     private void doAdd(String key, T value) {
-        Object stored = temp.get(key);
+        Object stored = Objects.requireNonNull(temp).get(key);
         if (stored == null) {
             temp.insert(key, value);
         } else {
@@ -191,7 +193,7 @@ public class DictionaryData<T> {
      * @param into
      */
     @SuppressWarnings("unchecked")
-    private <U> void get(U key, Object value, Collection<Entry<U, T>> into) {
+    private <U> void get(U key, @Nullable Object value, Collection<Entry<U, T>> into) {
         if (value == null) {
             return;
         }

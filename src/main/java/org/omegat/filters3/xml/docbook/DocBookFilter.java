@@ -27,12 +27,9 @@
 package org.omegat.filters3.xml.docbook;
 
 import java.io.BufferedReader;
-
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.Map;
 
 import org.jspecify.annotations.NullMarked;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
@@ -61,24 +58,23 @@ public class DocBookFilter extends XMLFilter {
     public static void unloadPlugins() {
     }
 
-    /**
-     * Creates a new instance of DocBookFilter
-     */
-    public DocBookFilter() {
-        super(new DocBookDialect());
-        try {
+    private static final Map<String, Boolean> ORVERRIDES = Map.of(
             // DocBook filter requires to validate docbook external DTD.
-            setSAXFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+            "http://apache.org/xml/features/disallow-doctype-decl", false,
             // The filter requires internet access.
             // XXX: this is vulnerable for XXE attack.
-            setSAXFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", true);
+            "http://apache.org/xml/features/nonvalidating/load-external-dtd", true,
             // XXX: we should take care of external entities
-            setSAXFeature("http://xml.org/sax/features/external-general-entities", true);
+            "http://xml.org/sax/features/external-general-entities", true,
             // XXX: we should take care of external entities
-            setSAXFeature("http://xml.org/sax/features/external-parameter-entities", true);
-        } catch (SAXNotSupportedException | SAXNotRecognizedException
-                | ParserConfigurationException ignored) {
-        }
+            "http://xml.org/sax/features/external-parameter-entities", true
+    );
+
+    /**
+     * Creates a new instance of DocBookFilter.
+     */
+    public DocBookFilter() {
+        super(new DocBookDialect(), ORVERRIDES);
     }
 
     /**

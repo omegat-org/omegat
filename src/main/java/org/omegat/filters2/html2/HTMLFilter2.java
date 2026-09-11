@@ -50,6 +50,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
+import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -109,13 +110,16 @@ public class HTMLFilter2 extends AbstractFilter {
     @Override
     protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
         String encoding = filterContext.getInEncoding();
-        if (encoding == null && isSourceEncodingVariable()) {
+        if (encoding != null) {
+            return encoding;
+        }
+        if (isSourceEncodingVariable()) {
             try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(),
                     StandardCharsets.UTF_8.name())) {
-                encoding = hreader.getEncoding();
+                return hreader.getEncoding();
             }
         }
-        return encoding;
+        return StandardCharsets.UTF_8.name();
     }
 
     /**
@@ -138,16 +142,20 @@ public class HTMLFilter2 extends AbstractFilter {
      * @see HTMLWriter
      */
     @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
-        HTMLWriter hwriter;
-        HTMLOptions options = new HTMLOptions(processOptions);
-        if (encoding == null) {
-            this.targetEncoding = sourceEncoding;
+    public BufferedWriter createWriter(@Nullable File outfile, @Nullable String encoding) throws IOException {
+        if (outfile == null) {
+            return new NullBufferedWriter();
         } else {
-            this.targetEncoding = encoding;
+            HTMLWriter hwriter;
+            HTMLOptions options = new HTMLOptions(processOptions);
+            if (encoding == null) {
+                targetEncoding = sourceEncoding;
+            } else {
+                targetEncoding = encoding;
+            }
+            hwriter = new HTMLWriter(outfile.getAbsolutePath(), targetEncoding, options);
+            return new BufferedWriter(hwriter);
         }
-        hwriter = new HTMLWriter(outfile.getAbsolutePath(), this.targetEncoding, options);
-        return new BufferedWriter(hwriter);
     }
 
     @Override
@@ -320,7 +328,10 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     @Override
-    public @Nullable String getInEncodingLastParsedFile() {
+    public String getInEncodingLastParsedFile() {
+        if (sourceEncoding == null) {
+            return StandardCharsets.UTF_8.name();
+        }
         return sourceEncoding;
     }
 

@@ -25,10 +25,14 @@
 
 package org.omegat.filters4.xml.xliff;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import javax.xml.namespace.QName;
@@ -41,6 +45,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
@@ -84,13 +89,13 @@ public class Xliff1Filter extends AbstractXliffFilter {
     private static final String TRANSLATED_STATE = "translated";
 
     /** Current translation unit **/
-    private String unitId = null;
+    private @Nullable String unitId = null;
     private boolean flushedUnit = false;
     private int lastGroupId = 0; // only used when group id is not present in
                                  // the file
     private final List<XMLEvent> segSource = new LinkedList<>();
     private final Map<String, List<XMLEvent>> subSegments = new TreeMap<>();
-    private StartElement targetStartEvent = null;
+    private @Nullable StartElement targetStartEvent = null;
     private int inSubSeg = 0;
 
     @Override
@@ -130,7 +135,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     @Override
-    protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
+    protected boolean processStartElement(StartElement startElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         switch (startElement.getName().getLocalPart()) {
         case "xliff":
@@ -189,11 +194,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return !inTarget;
     }
 
-    private void handleMrkElement(StartElement element, XMLStreamWriter writer) throws XMLStreamException {
+    private void handleMrkElement(StartElement element, @Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (element.getAttributeByName(new QName("mtype")).getValue().equals("seg")) {
             String mid = element.getAttributeByName(new QName("mid")).getValue();
-            currentBuffer.add(element);
-            currentBuffer = new LinkedList<>();
+            Objects.requireNonNull(currentBuffer).add(element);
+            currentBuffer = new ArrayList<>();
             if (!inTarget) {
                 subSegments.put(mid, currentBuffer);
             }
@@ -216,7 +221,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return attribute.getValue();
     }
 
-    private void handleDefaultElement(StartElement element, XMLStreamWriter writer)
+    private void handleDefaultElement(StartElement element, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         if (currentBuffer != null) {
             currentBuffer.add(element);
@@ -233,7 +238,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     @Override
-    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
+    protected boolean processEndElement(EndElement endElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         switch (endElement.getName().getLocalPart()) {
         case SOURCE_ELEMENT:
@@ -277,17 +282,17 @@ public class Xliff1Filter extends AbstractXliffFilter {
         }
     }
 
-    private void handleTransUnitEndElement(EndElement endElement, XMLStreamWriter writer) throws XMLStreamException {
+    private void handleTransUnitEndElement(EndElement endElement, @Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (ignoreScope == null || ignoreScope.startsWith("!")) {
             flushTranslations(writer); // if there was no <target> at all
         }
         if (ignoreScope == null || ignoreScope.startsWith("!")) {
             if (subSegments.isEmpty()) {
-                registerCurrentTransUnit(unitId, source, target, ".*");
+                registerCurrentTransUnit(Objects.requireNonNull(unitId), source, target, ".*");
             } else {
                 for (Map.Entry<String, List<XMLEvent>> me : subSegments.entrySet()) {
                     registerCurrentTransUnit(unitId + "/" + me.getKey(), me.getValue(),
-                            findSubsegment(target, me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]");
+                            findSubsegment(Objects.requireNonNull(target), me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]");
                 }
             }
         }
@@ -314,8 +319,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
 
     private void handleMrkEndElement(EndElement endElement) {
         if (inSubSeg == 1) {
-            List<XMLEvent> save = inTarget ? target : segSource;
-            save.addAll(currentBuffer);
+            List<XMLEvent> save = inTarget ? Objects.requireNonNull(target) : segSource;
+            save.addAll(Objects.requireNonNull(currentBuffer));
             currentBuffer = save;
             currentBuffer.add(endElement);
             inSubSeg = 0;
@@ -343,7 +348,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return new String[] { "rid", "id", "i" };
     }
 
-    protected boolean isCurrentSegmentTranslated(String mid) {
+    protected boolean isCurrentSegmentTranslated(@Nullable String mid) {
         if ((entryTranslateCallback == null) || (mid == null)) {
             return false;
         }
@@ -364,8 +369,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
             tagsMap.clear();
             tagsCount.replaceAll((c, v) -> 0);
         }
-        StringBuffer res = new StringBuffer();
-        LinkedList<StringBuffer> saveBuf = new LinkedList<>();
+        StringBuilder res = new StringBuilder();
+        Deque<StringBuilder> saveBuf = new ArrayDeque<>();
         List<XMLEvent> nativeCode = null;
         for (XMLEvent ev : srcList) {
             if (nativeCode != null) {
@@ -398,14 +403,14 @@ public class Xliff1Filter extends AbstractXliffFilter {
                     nativeCode = new LinkedList<>();
                     res.append(startPair(reuse, false, stEl, prefix, count, nativeCode));
                     saveBuf.push(res);
-                    res = new StringBuffer();
+                    res = new StringBuilder();
                     nativeCode.add(ev);
                     break;
                 case "ept": // paired native code, end
                     nativeCode = new LinkedList<>();
                     res.append(endPair(reuse, stEl, prefix, count, nativeCode));
                     saveBuf.push(res);
-                    res = new StringBuffer();
+                    res = new StringBuilder();
                     nativeCode.add(ev);
                     break;
                 default: // g, mrk, ph, it and other-namespace
@@ -433,7 +438,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                             }
                         }
                         saveBuf.push(res);
-                        res = new StringBuffer();
+                        res = new StringBuilder();
                         nativeCode.add(ev);
                         tagStack.push("mark-protected");
                         break;
@@ -441,7 +446,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                         // generate nothing, not either the contents
                         tagStack.push("mark-deleted");
                         saveBuf.add(res);
-                        res = new StringBuffer();
+                        res = new StringBuilder();
                         break;
                     } else if (isUntaggedTag(stEl)) {
                         tagStack.push("mark-ignored");
@@ -504,14 +509,16 @@ public class Xliff1Filter extends AbstractXliffFilter {
         }
 
         String name = stEl.getName().getLocalPart();
-        if (name.equals("bx") || name.equals("ex")) {
-            return 'e';
-        }
-        if (name.equals("bpt") || name.equals("ept")) {
-            return 't';
-        }
-        if (name.equals("it")) {
-            return 'a'; // alone
+        switch (name) {
+            case "bx", "ex" -> {
+                return 'e';
+            }
+            case "bpt", "ept" -> {
+                return 't';
+            }
+            case "it" -> {
+                return 'a'; // alone
+            }
         }
         if (!stEl.getName().getNamespaceURI().equals(this.namespace)) {
             return 'o'; // other: not conform to spec, but may happen
@@ -549,7 +556,6 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     protected final void generateTargetStartElement(XMLStreamWriter writer) throws XMLStreamException {
         if (!isStandardTranslationState()) {
             writeDefaultTarget(writer);
@@ -599,7 +605,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     /** Replace <target> by OmegaT's translation, if found **/
-    private void flushTranslations(XMLStreamWriter writer) throws XMLStreamException {
+    private void flushTranslations(@Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (writer == null) {
             return; // we are only reading the source file
         }
@@ -646,14 +652,14 @@ public class Xliff1Filter extends AbstractXliffFilter {
                                 tra = entryTranslateCallback.getTranslation(unitId + "/" + mid, src, path);
                             }
                             if (tra != null) {
-                                for (XMLEvent tev : restoreTags(unitId, path, src, tra)) {
+                                for (XMLEvent tev : restoreTags(Objects.requireNonNull(unitId), path, src, tra)) {
                                     fromEventToWriter(tev, writer);
                                 }
                             } else {
                                 // Second, check in the target buffer
                                 // (translation in source file)
                                 List<XMLEvent> fromTarget = findSubsegment(target, mid);
-                                if (fromTarget != null && !fromTarget.isEmpty()) {
+                                if (!fromTarget.isEmpty()) {
                                     for (XMLEvent tev : fromTarget) {
                                         fromEventToWriter(tev, writer);
                                     }
@@ -702,14 +708,14 @@ public class Xliff1Filter extends AbstractXliffFilter {
      * Extracts from <seg-source> or <target> the part between
      * <mrk type=seg mid=xxx> and </mrk>
      **/
-    private List<XMLEvent> findSubsegment(List<XMLEvent> list, String mid) {
+    private List<XMLEvent> findSubsegment(@Nullable List<XMLEvent> list, String mid) {
         if (list == null || list.isEmpty()) {
             return Collections.emptyList();
         }
 
-        List<XMLEvent> buf = new LinkedList<>();
+        List<XMLEvent> buf = new ArrayList<>();
         int depth = 0;
-        for (XMLEvent ev : target) {
+        for (XMLEvent ev : Objects.requireNonNull(target)) {
             if (ev.isEndElement()) {
                 EndElement el = ev.asEndElement();
                 if (el.getName().getLocalPart().equals("mrk")) {

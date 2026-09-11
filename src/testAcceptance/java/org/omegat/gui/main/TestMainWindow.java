@@ -41,6 +41,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.TestCoreState;
 import tokyo.northside.logging.ILogger;
@@ -251,7 +252,7 @@ class TestMainWindow implements IMainWindow {
     }
 
     @Override
-    public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
+    public void displayErrorRB(@Nullable Throwable ex, final String errorKey, Object@Nullable... params) {
     }
 
     @Override

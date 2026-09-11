@@ -34,7 +34,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -76,16 +78,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** XML dialect this filter handles. */
     private final XMLDialect dialect;
 
-    /** Creates a new instance of XMLFilter */
-    public XMLFilter(XMLDialect dialect) {
-        parserFactory = SAXParserFactory.newInstance();
-        try {
+    private static final Map<String, Boolean> DEFAULT_FEATURES = Map.of(
             // We validate XML in default
-            parserFactory.setFeature("http://xml.org/sax/features/validation", true);
-            // When a driver writer wants not to validate, please override and
-            // set features false.
-            // ex. setSAXFeature("http://xml.org/sax/features/validation",
-            // false);
+            "http://xml.org/sax/features/validation", true,
 
             // Protecting from a XXE attack.
 
@@ -93,25 +88,60 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             // help safeguard XML processing. It instructs XML processors, such
             // as parsers,
             // validators, and transformers, to try and process XML securely.
-            parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            XMLConstants.FEATURE_SECURE_PROCESSING, true,
             // Disable doctype validation in default
-            parserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            "http://apache.org/xml/features/disallow-doctype-decl", true,
             // Avoid internet connection to validate with external DTD.
-            parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            "http://apache.org/xml/features/nonvalidating/load-external-dtd", false,
             // Disable external general entities
-            parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            "http://xml.org/sax/features/external-general-entities", false,
             // Disable external parameter entities
-            parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
-            // Entity Attacks"
-            parserFactory.setXIncludeAware(false);
+            "http://xml.org/sax/features/external-parameter-entities", false,
             // Support namespaces and xmlns:prefixes
-            parserFactory.setFeature("http://xml.org/sax/features/namespaces", true);
-            parserFactory.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-        } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
-            Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
-        }
+            "http://xml.org/sax/features/namespaces", true,
+            "http://xml.org/sax/features/namespace-prefixes", true
+    );
+
+    /** Creates a new instance of XMLFilter */
+    public XMLFilter(XMLDialect dialect) {
+        parserFactory = SAXParserFactory.newInstance();
         this.dialect = dialect;
+    }
+
+    /**
+     * Constructs a new instance of XMLFilter. The XMLFilter is responsible for parsing
+     * XML documents with configurable features and dialect-specific handling.
+     * <p>
+     * The constructor initializes a new SAXParserFactory instance, sets the default
+     * parser features, and allows overriding these features with additional user-defined features.
+     * <p>
+     * When a driver writer wants not to validate, please override and set features false.
+     * ex. <code>super(dialect, Map.of("http://xml.org/sax/features/validation", false))</code>;
+     *
+     * @param dialect the XML dialect to be used for parsing and handling specific XML rules.
+     * @param features a map of SAX feature names and their respective boolean values
+     *                 (true to enable, false to disable) to configure the underlying parser.
+     *                 These features can override the default parser features.
+     */
+    public XMLFilter(XMLDialect dialect, Map<String, Boolean> features) {
+        this(dialect);
+        // per Timothy Morgan's 2014 paper: "XML Schema, DTD, and Entity Attacks"
+        parserFactory.setXIncludeAware(false);
+        for (Map.Entry<String, Boolean> entry: DEFAULT_FEATURES.entrySet()) {
+            try {
+                parserFactory.setFeature(entry.getKey(), entry.getValue());
+            } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
+                Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
+            }
+        }
+        // override defaults.
+        for (Map.Entry<String, Boolean> entry: features.entrySet()) {
+            try {
+                parserFactory.setFeature(entry.getKey(), entry.getValue());
+            } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
+                Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
+            }
+        }
     }
 
     /** Gives the dialect */
@@ -119,6 +149,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         return dialect;
     }
 
+    @Deprecated(forRemoval = true, since = "6.2")
     protected void setSAXFeature(String feature, boolean b)
             throws SAXNotSupportedException, SAXNotRecognizedException, ParserConfigurationException {
         parserFactory.setFeature(feature, b);
@@ -207,7 +238,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     @Override
     public void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
-        try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
+        String encoding = fc.getInEncoding() == null ? StandardCharsets.UTF_8.name() : fc.getInEncoding();
+        try (BufferedReader inReader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
             sourceLanguage = fc.getSourceLang();

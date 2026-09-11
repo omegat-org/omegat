@@ -35,6 +35,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -53,7 +54,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class INIFilter extends AbstractFilter {
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
     /**
      * Register plugin into OmegaT.

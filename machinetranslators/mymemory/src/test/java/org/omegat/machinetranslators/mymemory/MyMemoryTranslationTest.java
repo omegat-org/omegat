@@ -26,6 +26,7 @@
 package org.omegat.machinetranslators.mymemory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,12 +36,24 @@ import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.junit.Test;
 
 import org.omegat.core.TestCoreWireMock;
+import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
 public class MyMemoryTranslationTest extends TestCoreWireMock {
 
     private static final int HTTP_OK = 200;
+
+    // MachineTranslatorsManager instantiates connectors reflectively via
+    // no-arg constructor; connector without one vanishes from MT menu
+    // with only logged exception
+    @Test
+    public void testConnectorsProvideNoArgConstructor() throws Exception {
+        for (Class<?> connector : new Class<?>[] {MyMemoryHumanTranslate.class,
+                MyMemoryMachineTranslate.class}) {
+            assertTrue(connector.getDeclaredConstructor().newInstance() instanceof IMachineTranslation);
+        }
+    }
 
     @Test
     public void testMMMTResponse() throws Exception {

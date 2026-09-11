@@ -58,8 +58,8 @@ public class YamlOptions extends AbstractOptions {
     }
 
     private List<String> getKeys(String option) {
-        String value = getString(option, null);
-        if (value == null || value.isEmpty()) {
+        String value = getString(option, "");
+        if (value.isEmpty()) {
             return Collections.emptyList();
         }
         List<String> result = new ArrayList<>();

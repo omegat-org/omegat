@@ -31,25 +31,45 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.SwingConstants;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
+
+import org.jspecify.annotations.Nullable;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles.EditorColor;
+import org.omegat.util.gui.TableColumnSizer;
 
 /**
  * @author Briac Pilpre
@@ -59,8 +79,8 @@ public class CustomColorSelectionController extends BasePreferencesController {
 
     private static final int MAX_ROW_COUNT = 10;
     private final Map<EditorColor, Color> temporaryPreferences = new EnumMap<>(EditorColor.class);
-    private ColorIcon icon;
     private CustomColorSelectionPanel panel;
+    private @Nullable TableRowSorter<ColorTableModel> sorter;
     private boolean listenerEnabled = true;
 
     @Override
@@ -93,9 +113,190 @@ public class CustomColorSelectionController extends BasePreferencesController {
         Dimension tableSize = panel.colorStylesTable.getPreferredSize();
         panel.colorStylesTable.setPreferredScrollableViewportSize(
                 new Dimension(tableSize.width, panel.colorStylesTable.getRowHeight() * MAX_ROW_COUNT));
-        panel.colorStylesTable.setModel(new ColorTableModel());
-        icon = new ColorIcon(panel.colorStylesTable.getRowHeight());
+        ColorTableModel model = new ColorTableModel();
+        panel.colorStylesTable.setModel(model);
+        int rowHeight = panel.colorStylesTable.getRowHeight();
+        ColorCellRenderer textRenderer = new ColorCellRenderer(0);
+        ColorCellRenderer swatchRenderer = new ColorCellRenderer(rowHeight);
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.NAME.index)
+                .setCellRenderer(textRenderer);
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.COLOR.index)
+                .setCellRenderer(swatchRenderer);
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.INTERNAL.index)
+                .setCellRenderer(textRenderer);
+        // Give the running-number column 8px of horizontal padding so the
+        // numbers are not cramped against the column edges, right-aligned.
+        DefaultTableCellRenderer numberRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 8));
+                return this;
+            }
+        };
+        numberRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.NUMBER.index)
+                .setCellRenderer(numberRenderer);
+        // Filter as the user types and let header clicks sort each column. The
+        // colour column is special: repeated clicks rotate through several
+        // colour orderings (see ColorRowSorter), so give its header a tooltip
+        // that explains this. Other columns just toggle ascending/descending.
+        JTableHeader tableHeader = new JTableHeader(panel.colorStylesTable.getColumnModel()) {
+            @Override
+            public String getToolTipText(MouseEvent event) {
+                int viewColumn = columnAtPoint(event.getPoint());
+                int modelColumn = viewColumn < 0 ? -1
+                        : panel.colorStylesTable.convertColumnIndexToModel(viewColumn);
+                if (modelColumn == ColorColumns.COLOR.index) {
+                    return OStrings.getString("GUI_COLORS_COLUMN_COLOR_SORT_TOOLTIP");
+                }
+                return null;
+            }
+        };
+        // Pin the columns so the running-number column stays first and cannot be
+        // dragged out of place; resizing column widths stays enabled.
+        tableHeader.setReorderingAllowed(false);
+        panel.colorStylesTable.setTableHeader(tableHeader);
+        sorter = new ColorRowSorter(model);
+        panel.colorStylesTable.setRowSorter(sorter);
+        // Start sorted by the running number, ascending, i.e. in the natural
+        // EditorColor enum order.
+        sorter.setSortKeys(Collections.singletonList(
+                new RowSorter.SortKey(ColorColumns.NUMBER.index, SortOrder.ASCENDING)));
+        // Force a minimum width on the colour column so its swatch is never
+        // clipped, regardless of the header/content measurement.
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.COLOR.index)
+                .setMinWidth(rowHeight + 8);
+        // The running-number column carries the default sort, so its header also
+        // paints a sort arrow that the width measurement does not account for.
+        // Reserve room for the title plus the arrow so "#" is never truncated.
+        int numberColumnWidth = tableHeader.getFontMetrics(tableHeader.getFont())
+                .stringWidth(ColorColumns.NUMBER.getTitle()) + rowHeight + 8;
+        panel.colorStylesTable.getColumnModel().getColumn(ColorColumns.NUMBER.index)
+                .setMinWidth(numberColumnWidth);
+        // Size every column to its own content (the item column ends up as wide
+        // as its widest text cell) and turn off auto-resize, so the layout does
+        // not depend on the viewport width - it renders correctly even with no
+        // project open. The long internal-name column is the remainder, so it is
+        // fully sized from the start (no leading "...") and extends past the
+        // right edge, reachable via the horizontal scroll bar.
+        TableColumnSizer.autoSize(panel.colorStylesTable, ColorColumns.INTERNAL.index, false);
+        // The sizer re-measures on every model change, but only over the
+        // VIEW rows: with an active search filter the item column would
+        // shrink to the longest visible name and truncate others. Content
+        // is static, so lock the full-content width measured just now
+        // (no filter active yet) as the minimum.
+        TableColumn nameColumn = panel.colorStylesTable.getColumnModel()
+                .getColumn(ColorColumns.NAME.index);
+        nameColumn.setMinWidth(nameColumn.getPreferredWidth());
+        panel.searchTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+        });
+        panel.clearSearchButton.setToolTipText(OStrings.getString("KEYSTROKE_EDITOR_CLEAR_BUTTON"));
+        panel.clearSearchButton.addActionListener(e -> panel.searchTextField.setText(""));
+        applyFilter();
         panel.resetCurrentColorButton.addActionListener(e -> resetCurrentColor());
+    }
+
+    private void applyFilter() {
+        String text = panel.searchTextField.getText().trim();
+        if (text.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            // A row matches when the query hits either the item name or the
+            // internal identifier.
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(text),
+                    ColorColumns.NAME.index, ColorColumns.INTERNAL.index));
+        }
+        panel.clearSearchButton.setEnabled(!text.isEmpty());
+        int shown = panel.colorStylesTable.getRowCount();
+        int total = panel.colorStylesTable.getModel().getRowCount();
+        panel.matchCountLabel.setText(OStrings.getString("GUI_COLORS_MATCH_COUNT", shown, total));
+    }
+
+    static String colorSortKey(Color color) {
+        return color == null ? "" : String.format("#%02x%02x%02x", color.getRed(), color.getGreen(),
+                color.getBlue());
+    }
+
+    /** Saturation at or below which a colour is treated as grey (achromatic). */
+    private static final float ACHROMATIC_SATURATION = 0.05f;
+
+    /**
+     * Compares colours lexicographically by their {@code #rrggbb} hex value.
+     * Unset colours (null, i.e. "follows the look and feel") sort first.
+     */
+    static Comparator<Color> hexComparator() {
+        return Comparator.comparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    /**
+     * Compares colours the way a colour wheel groups them: unset colours first,
+     * then greys ordered by brightness, then chromatic colours ordered by hue,
+     * saturation and brightness. A trailing hex tie-break keeps the order total
+     * and stable.
+     */
+    static Comparator<Color> hsbComparator() {
+        return Comparator.comparingInt(CustomColorSelectionController::colorGroup)
+                .thenComparingDouble(CustomColorSelectionController::hue)
+                .thenComparingDouble(CustomColorSelectionController::saturation)
+                .thenComparingDouble(CustomColorSelectionController::brightness)
+                .thenComparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    /**
+     * Compares colours by perceived brightness (Rec. 709 relative luminance),
+     * darkest first. Unset colours sort first, with a trailing hex tie-break.
+     */
+    static Comparator<Color> luminanceComparator() {
+        return Comparator.comparingInt(CustomColorSelectionController::nullGroup)
+                .thenComparingDouble(CustomColorSelectionController::luminance)
+                .thenComparing(CustomColorSelectionController::colorSortKey);
+    }
+
+    private static int nullGroup(Color color) {
+        return color == null ? 0 : 1;
+    }
+
+    private static int colorGroup(Color color) {
+        if (color == null) {
+            return 0;
+        }
+        return saturation(color) <= ACHROMATIC_SATURATION ? 1 : 2;
+    }
+
+    private static float hue(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[0];
+    }
+
+    private static float saturation(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[1];
+    }
+
+    private static float brightness(Color color) {
+        return color == null ? 0f
+                : Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[2];
+    }
+
+    private static double luminance(Color color) {
+        return color == null ? 0d
+                : 0.2126 * color.getRed() + 0.7152 * color.getGreen() + 0.0722 * color.getBlue();
     }
 
     private Optional<EditorColor> getSelection() {
@@ -103,8 +304,9 @@ public class CustomColorSelectionController extends BasePreferencesController {
         if (row < 0) {
             return Optional.empty();
         } else {
+            int modelRow = panel.colorStylesTable.convertRowIndexToModel(row);
             ColorTableModel model = ((ColorTableModel) panel.colorStylesTable.getModel());
-            return Optional.of(model.getEditorColorAtRow(row));
+            return Optional.of(model.getEditorColorAtRow(modelRow));
         }
     }
 
@@ -118,7 +320,8 @@ public class CustomColorSelectionController extends BasePreferencesController {
     private void updateSelectionIcon() {
         int row = panel.colorStylesTable.getSelectedRow();
         if (row >= 0) {
-            ((ColorTableModel) panel.colorStylesTable.getModel()).fireTableRowsUpdated(row, row);
+            int modelRow = panel.colorStylesTable.convertRowIndexToModel(row);
+            ((ColorTableModel) panel.colorStylesTable.getModel()).fireTableRowsUpdated(modelRow, modelRow);
         }
     }
 
@@ -232,12 +435,22 @@ public class CustomColorSelectionController extends BasePreferencesController {
     }
 
     enum ColorColumns {
-        NAME(String.class), ICON(Icon.class);
+        NUMBER(0, Integer.class, "GUI_COLORS_COLUMN_NUMBER"),
+        NAME(1, String.class, "GUI_COLORS_COLUMN_NAME"), COLOR(2, Color.class, "GUI_COLORS_COLUMN_COLOR"),
+        INTERNAL(3, String.class, "GUI_COLORS_COLUMN_INTERNAL");
 
+        private final int index;
         private final Class<?> clss;
+        private final String titleKey;
 
-        ColorColumns(Class<?> clss) {
+        ColorColumns(int index, Class<?> clss, String titleKey) {
+            this.index = index;
             this.clss = clss;
+            this.titleKey = titleKey;
+        }
+
+        String getTitle() {
+            return OStrings.getString(titleKey);
         }
 
         static ColorColumns get(int index) {
@@ -245,15 +458,42 @@ public class CustomColorSelectionController extends BasePreferencesController {
         }
     }
 
+    /**
+     * Renders a cell as plain text or, in swatch mode, as a colour sample.
+     */
+    @SuppressWarnings("serial")
+    static class ColorCellRenderer extends DefaultTableCellRenderer {
+        private final @Nullable ColorIcon swatch;
+
+        ColorCellRenderer(int swatchSize) {
+            this.swatch = swatchSize > 0 ? new ColorIcon(swatchSize) : null;
+        }
+
+        @Override
+        protected void setValue(@Nullable Object value) {
+            // Swatch mode only applies to real colour values. Anything else
+            // (e.g. the header text handed in while measuring column widths)
+            // falls back to plain text rendering to avoid a class cast.
+            if (swatch != null && (value == null || value instanceof Color)) {
+                swatch.setColor((Color) value);
+                setIcon(swatch);
+                setText("");
+            } else {
+                setIcon(null);
+                super.setValue(value);
+            }
+        }
+    }
+
     static class ColorIcon implements Icon {
         private final int size;
-        private Color color;
+        private @Nullable Color color;
 
         ColorIcon(int size) {
             this.size = size;
         }
 
-        public ColorIcon setColor(Color color) {
+        public ColorIcon setColor(@Nullable Color color) {
             this.color = color;
             return this;
         }
@@ -281,6 +521,47 @@ public class CustomColorSelectionController extends BasePreferencesController {
 
     }
 
+    /**
+     * Row sorter whose colour column does not just toggle ascending/descending
+     * but rotates through several colour orderings on repeated header clicks:
+     * hex, HSB (colour wheel) and luminance, each ascending then descending.
+     * Every other column keeps the usual single ascending/descending toggle.
+     */
+    @SuppressWarnings("serial")
+    static class ColorRowSorter extends TableRowSorter<ColorTableModel> {
+
+        /** The (comparator, direction) pairs the colour header cycles through. */
+        private static final List<Map.Entry<Comparator<Color>, SortOrder>> COLOR_SORTS = List.of(
+                Map.entry(hexComparator(), SortOrder.ASCENDING),
+                Map.entry(hexComparator(), SortOrder.DESCENDING),
+                Map.entry(hsbComparator(), SortOrder.ASCENDING),
+                Map.entry(hsbComparator(), SortOrder.DESCENDING),
+                Map.entry(luminanceComparator(), SortOrder.ASCENDING),
+                Map.entry(luminanceComparator(), SortOrder.DESCENDING));
+
+        /** Index into {@link #COLOR_SORTS}, or -1 when the colour column is not sorted. */
+        private int colorSortState = -1;
+
+        ColorRowSorter(ColorTableModel model) {
+            super(model);
+            setComparator(ColorColumns.COLOR.index, hexComparator());
+        }
+
+        @Override
+        public void toggleSortOrder(int column) {
+            if (column == ColorColumns.COLOR.index) {
+                colorSortState = (colorSortState + 1) % COLOR_SORTS.size();
+                Map.Entry<Comparator<Color>, SortOrder> sort = COLOR_SORTS.get(colorSortState);
+                setComparator(ColorColumns.COLOR.index, sort.getKey());
+                setSortKeys(Collections.singletonList(
+                        new RowSorter.SortKey(ColorColumns.COLOR.index, sort.getValue())));
+            } else {
+                colorSortState = -1;
+                super.toggleSortOrder(column);
+            }
+        }
+    }
+
     @SuppressWarnings("serial")
     class ColorTableModel extends AbstractTableModel {
 
@@ -298,11 +579,14 @@ public class CustomColorSelectionController extends BasePreferencesController {
         public Object getValueAt(int rowIndex, int columnIndex) {
             EditorColor style = getEditorColorAtRow(rowIndex);
             switch (ColorColumns.get(columnIndex)) {
+            case NUMBER:
+                return rowIndex + 1;
             case NAME:
                 return style.getDisplayName();
-            case ICON:
-                Color color = temporaryPreferences.getOrDefault(style, style.getColor());
-                return icon.setColor(color);
+            case COLOR:
+                return temporaryPreferences.getOrDefault(style, style.getColor());
+            case INTERNAL:
+                return style.name();
             }
             throw new IllegalArgumentException();
         }
@@ -310,6 +594,11 @@ public class CustomColorSelectionController extends BasePreferencesController {
         @Override
         public Class<?> getColumnClass(int columnIndex) {
             return ColorColumns.get(columnIndex).clss;
+        }
+
+        @Override
+        public String getColumnName(int columnIndex) {
+            return ColorColumns.get(columnIndex).getTitle();
         }
 
         public EditorColor getEditorColorAtRow(int row) {

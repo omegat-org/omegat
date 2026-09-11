@@ -40,7 +40,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -60,7 +59,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.InputMap;
-import javax.swing.JComponent;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -203,8 +201,6 @@ public class SearchWindowController {
             form.m_allResultsCB.setVisible(false);
             form.m_fileNamesCB.setVisible(false);
             form.m_filterButton.setVisible(false);
-            form.m_findPreviousButton.setVisible(false);
-            form.m_findNextButton.setVisible(false);
             form.m_numberLabel.setVisible(false);
             form.m_numberOfResults.setVisible(false);
             form.m_panelSearch.setVisible(false);
@@ -224,48 +220,6 @@ public class SearchWindowController {
         CoreEvents.registerFontChangedEventListener(this::setFont);
     }
 
-    /**
-     * Update the results' label after walking through the results with the Find
-     * Previous and Find Next buttons: while the navigation has just wrapped
-     * around the end of the results, a short note is appended to the number of
-     * results, and it disappears with the next step.
-     *
-     * @param wrapped
-     *            whether the last navigation step wrapped around
-     */
-    private void showResultNavigationStatus(boolean wrapped) {
-        String text = StringUtil.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                ((EntryListPane) form.m_viewer).getNrEntries());
-        if (wrapped) {
-            text = text + " " + OStrings.getString("SW_RESULT_NAV_WRAPPED");
-        }
-        form.m_resultsLabel.setText(text);
-    }
-
-    /**
-     * Let F3 and Shift+F3 walk through the search results from anywhere in the
-     * Search window, mirroring the Find Next and Find Previous buttons (feature
-     * requests #1125 and #1380). The keys go through the buttons so that they
-     * stay inactive while there are no results.
-     */
-    private void bindResultNavigationKeys() {
-        InputMap inputMap = form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0), "findNext");
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_DOWN_MASK), "findPrevious");
-        form.getRootPane().getActionMap().put("findNext", new AbstractAction() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                form.m_findNextButton.doClick();
-            }
-        });
-        form.getRootPane().getActionMap().put("findPrevious", new AbstractAction() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                form.m_findPreviousButton.doClick();
-            }
-        });
-    }
-
     private void setComponentNames() {
         form.m_searchLabel.setName("SearchWindowForm.m_searchLabel");
         form.m_searchField.setName("SearchWindowForm.m_searchField");
@@ -280,8 +234,6 @@ public class SearchWindowController {
         form.m_searchTranslatedUntranslated.setName("SearchWindowForm.m_searchTranslatedUntranslated");
         form.m_searchTranslated.setName("SearchWindowForm.m_searchTranslated");
         form.m_searchButton.setName("SearchWindowForm.m_searchButton");
-        form.m_findPreviousButton.setName("SearchWindowForm.m_findPreviousButton");
-        form.m_findNextButton.setName("SearchWindowForm.m_findNextButton");
         form.m_viewer.setName("SearchWindowForm.m_viewer");
         form.m_rbDir.setName("SearchWindowForm.m_rbDir");
         form.m_rbProject.setName("SearchWindowForm.m_rbProject");
@@ -312,14 +264,6 @@ public class SearchWindowController {
         form.m_replaceAllButton.addActionListener(e -> doReplaceAll());
 
         form.m_searchButton.addActionListener(e -> doSearch());
-
-        if (mode == SearchMode.SEARCH) {
-            form.m_findPreviousButton.addActionListener(
-                    e -> showResultNavigationStatus(((EntryListPane) form.m_viewer).selectPreviousEntry()));
-            form.m_findNextButton.addActionListener(
-                    e -> showResultNavigationStatus(((EntryListPane) form.m_viewer).selectNextEntry()));
-            bindResultNavigationKeys();
-        }
 
         form.m_advancedButton
                 .addActionListener(e -> setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible()));
@@ -855,8 +799,6 @@ public class SearchWindowController {
             form.m_filterButton.setEnabled(haveResults);
             form.m_replaceButton.setEnabled(haveResults);
             form.m_replaceAllButton.setEnabled(haveResults);
-            form.m_findPreviousButton.setEnabled(haveResults);
-            form.m_findNextButton.setEnabled(haveResults);
             if (!haveResults) {
                 // RFE#1143
                 // https://sourceforge.net/p/omegat/feature-requests/1143/

@@ -110,14 +110,15 @@ public final class ConvertProject26to37team {
         String version;
         String url;
         RepositoryDefinition def = new RepositoryDefinition();
-        if (isSVNDirectory(projectRootFolder)) {
-            url = getSVNUrl(projectRootFolder);
-            def.setType("svn");
-        } else {
-            url = getGITUrl(projectRootFolder);
-            def.setType("git");
-        }
-        if (url == null) {
+        try {
+            if (isSVNDirectory(projectRootFolder)) {
+                url = getSVNUrl(projectRootFolder);
+                def.setType("svn");
+            } else {
+                url = getGITUrl(projectRootFolder);
+                def.setType("git");
+            }
+        } catch (Exception e) {
             Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(),
                     projectRootFolder.getAbsolutePath());
             return false;

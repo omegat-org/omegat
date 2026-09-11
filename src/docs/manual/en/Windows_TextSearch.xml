@@ -396,21 +396,6 @@
             </listitem>
          </varlistentry>
       </variablelist>
-      <para>The
-         <guibutton>Find Previous</guibutton> and
-         <guibutton>Find Next</guibutton> buttons below the results, as well as
-         <keycombo>
-            <keycap>S</keycap>
-            <keycap>F3</keycap>
-         </keycombo> and
-         <keycap>F3</keycap> from anywhere in the window, move the selection one
-         	result backward or forward, wrapping around at both ends of the list.
-         	The reached segment is always displayed in the
-         <link linkend="panes.editor" endterm="panes.editor.title"></link> pane,
-         	regardless of the
-         <guilabel>Auto-sync with editor</guilabel> option, without moving the
-         	focus away from the Search window. When the navigation wraps around,
-         	a short note appears next to the number of results.</para>
       <para>The selected segment is highlighted in green:</para>
       <example xml:id="select.second.match">
          <title xml:id="select.second.match.title">Select the second match</title>

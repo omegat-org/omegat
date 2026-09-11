@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -55,7 +56,7 @@ public class MozillaFTLFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
     // For the entries with attributes. Example: .title = When using
     // But, it also can be of type: .tooltiptext =
     // There always is something, then dot, then the key + space + = and
@@ -281,7 +282,7 @@ public class MozillaFTLFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             MozillaFTLOptionsDialog dialog = new MozillaFTLOptionsDialog(parent, config);
             dialog.setVisible(true);

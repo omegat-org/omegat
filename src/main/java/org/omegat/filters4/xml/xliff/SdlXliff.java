@@ -28,6 +28,7 @@ package org.omegat.filters4.xml.xliff;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -43,12 +44,14 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.FilterContext;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
@@ -103,15 +106,15 @@ public class SdlXliff extends Xliff1Filter {
 
     // ----------------------------- specific part ----------------------
 
-    private String currentMid = null;
-    private Map<String, StringBuffer> sdlComments = new TreeMap<>();
-    private StringBuffer commentBuf = null;
-    private Map<UUID, String> omegatNotes = new TreeMap<>();
-    private Map<String, UUID> defaultNoteLocations = new TreeMap<>();
-    private Map<EntryKey, UUID> altNoteLocations = new TreeMap<>();
-    private Map<String, List<XMLEvent>> tagDefs = new TreeMap<>();
-    private String currentProp = null;
-    private Set<String> midSet = new java.util.HashSet<>();
+    private @Nullable String currentMid = null;
+    private final Map<String, StringBuffer> sdlComments = new TreeMap<>();
+    private @Nullable StringBuffer commentBuf = null;
+    private final Map<UUID, String> omegatNotes = new TreeMap<>();
+    private final Map<String, UUID> defaultNoteLocations = new TreeMap<>();
+    private final Map<EntryKey, UUID> altNoteLocations = new TreeMap<>();
+    private final Map<String, List<XMLEvent>> tagDefs = new TreeMap<>();
+    private @Nullable String currentProp = null;
+    private final Set<String> midSet = new java.util.HashSet<>();
     private boolean has_seg_defs = false;
     private boolean mid_has_modifier = false;
     private boolean mid_has_modif_date = false;
@@ -135,8 +138,7 @@ public class SdlXliff extends Xliff1Filter {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
+    protected boolean processStartElement(StartElement startElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         if (startElement.getName().getLocalPart().equals("cmt-def")) {
             commentBuf = new StringBuffer();
@@ -152,11 +154,11 @@ public class SdlXliff extends Xliff1Filter {
                 String id = startElement
                         .getAttributeByName(new QName("http://sdl.com/FileTypes/SdlXliff/1.0", "cid"))
                         .getValue();
-                this.addNoteFromSource(currentMid, sdlComments.get(id).toString());
+                this.addNoteFromSource(Objects.requireNonNull(currentMid), sdlComments.get(id).toString());
             }
         }
         if (startElement.getName().getLocalPart().equals("tag")) {
-            currentBuffer = new java.util.LinkedList<XMLEvent>();
+            currentBuffer = new java.util.LinkedList<>();
             tagDefs.put(startElement.getAttributeByName(new QName("id")).getValue(), currentBuffer);
         }
         if (writer != null) {
@@ -194,7 +196,7 @@ public class SdlXliff extends Xliff1Filter {
     }
 
     @Override
-    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
+    protected boolean processEndElement(EndElement endElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         if (endElement.getName().getLocalPart().equals("seg")) {
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
@@ -217,7 +219,7 @@ public class SdlXliff extends Xliff1Filter {
         }
         if (endElement.getName().getLocalPart().equals("trans-unit")) {
             if (writer != null) {
-                if ((midSet.size() > 0) && (!has_seg_defs)) {
+                if ((!midSet.isEmpty()) && (!has_seg_defs)) {
                     writer.writeStartElement("http://sdl.com/FileTypes/SdlXliff/1.0", "seg-defs");
                 }
                 for (String mid0 : midSet) { // those which were not generated
@@ -239,7 +241,7 @@ public class SdlXliff extends Xliff1Filter {
                     }
                     writer.writeEndElement(/* "sdl:seg */);
                 }
-                if ((midSet.size() > 0) && (!has_seg_defs)) {
+                if ((!midSet.isEmpty()) && (!has_seg_defs)) {
                     writer.writeEndElement(/* "sdl:seg-defs */);
                 }
             }
@@ -355,12 +357,12 @@ public class SdlXliff extends Xliff1Filter {
             writer.writeEndElement(/* Comments */);
             writer.writeEndElement(/* cmt-def */);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 
     @Override
-    protected boolean processCharacters(Characters event, XMLStreamWriter writer) throws XMLStreamException {
+    protected boolean processCharacters(Characters event, @Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (commentBuf != null) {
             commentBuf.append(event.getData());
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
@@ -393,11 +395,11 @@ public class SdlXliff extends Xliff1Filter {
             addNote = defaultNoteLocations.get(src);
         }
         if ((addNote != null) && (omegatNotes.get(addNote) != null)) {
-            List<Attribute> attr = new java.util.LinkedList<Attribute>();
+            List<Attribute> attr = new java.util.LinkedList<>();
             attr.add(eFactory.createAttribute("sdl", "http://sdl.com/FileTypes/SdlXliff/1.0", "cid",
                     addNote.toString()));
             attr.add(eFactory.createAttribute(new QName("mtype"), "x-sdl-comment"));
-            res.add(0, eFactory.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
+            res.addFirst(eFactory.createStartElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
                     attr.iterator(), null));
             res.add(eFactory.createEndElement(new QName("urn:oasis:names:tc:xliff:document:1.2", "mrk"),
                     null));
@@ -407,7 +409,7 @@ public class SdlXliff extends Xliff1Filter {
 
     /** Remove entries with only tags **/
     @Override
-    protected boolean isToIgnore(String src, String tra) {
+    protected boolean isToIgnore(String src, @Nullable String tra) {
         if (tra == null) {
             return false;
         }
@@ -417,7 +419,7 @@ public class SdlXliff extends Xliff1Filter {
         while (tra.startsWith("<")) {
             tra = tra.substring(Math.max(1, tra.indexOf(">") + 1));
         }
-        return (src.length() == 0) && (tra.length() == 0);
+        return (src.isEmpty()) && (tra.isEmpty());
     }
 
     @Override
@@ -446,7 +448,7 @@ public class SdlXliff extends Xliff1Filter {
                     } catch (Exception ignored) {
                     }
                 }
-                return base + ": " + writer.toString();
+                return base + ": " + writer;
             }
         }
         return base;

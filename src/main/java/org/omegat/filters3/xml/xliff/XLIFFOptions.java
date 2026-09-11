@@ -57,7 +57,7 @@ public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
     private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
     private static final String OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N = "changetargetstateneedsreviewtranslation";
-    @Deprecated
+    @Deprecated(since = "3.1.2", forRemoval = true)
     private static final String OPTION_ALT_TRANS_ID = "alttransid";
     private static final String OPTION_ALT_TRANS_ID_TYPE = "alttransidtype";
 
@@ -148,8 +148,9 @@ public class XLIFFOptions extends AbstractOptions {
      * ({@link ID_TYPE#RESNAME_ATTR})</li>
      * </ul>
      */
+    @SuppressWarnings("deprecation")
     public ID_TYPE getAltTransIDType() {
-        ID_TYPE result = getEnum(ID_TYPE.class, OPTION_ALT_TRANS_ID_TYPE, null);
+        ID_TYPE result = getEnum(ID_TYPE.class, OPTION_ALT_TRANS_ID_TYPE);
         if (result == null) {
             return getBoolean(OPTION_ALT_TRANS_ID, false) ? ID_TYPE.ELEMENT_ID : ID_TYPE.CONTEXT;
         }

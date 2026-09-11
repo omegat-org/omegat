@@ -41,6 +41,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
+import org.jspecify.annotations.Nullable;
 import tokyo.northside.stardict.StarDictDictionary;
 
 import org.omegat.core.Core;
@@ -118,7 +119,7 @@ public class StarDict implements IDictionaryFactory {
 
     static class StarDictDict implements IDictionary {
         protected final File dictionaryFile;
-        protected StarDictDictionary dictionary;
+        protected @Nullable StarDictDictionary dictionary;
         protected final Language language;
 
         StarDictDict(final File file, Language language) {

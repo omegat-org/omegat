@@ -30,10 +30,12 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -87,10 +89,26 @@ public class GlossarySearcher {
         Token[] strTokens = tokenize(ste.getSrcText(),
                 TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
+        // Cheap necessary conditions, computed once per search: a term can
+        // only match when every term token occurs among the source tokens
+        // (token equality is the text hash), and a CJK term can only be a
+        // substring when each of its chars occurs in the source text. Both
+        // prefilters skip the expensive per-entry scans for the vast majority
+        // of a large glossary (SF bug #981); hash collisions merely fall
+        // through to the full check.
+        Set<Integer> srcTokenHashes = new HashSet<>();
+        for (Token token : strTokens) {
+            srcTokenHashes.add(token.hashCode());
+        }
+        Set<Integer> srcChars = new HashSet<>();
+        for (int i = 0; i < ste.getSrcText().length(); i++) {
+            srcChars.add((int) ste.getSrcText().charAt(i));
+        }
+
         for (GlossaryEntry glosEntry : entries) {
             checkCancelled();
-            if (isTokenMatch(strTokens, ste.getSrcText(), glosEntry.getSrcText())
-                    || isCjkMatch(ste.getSrcText(), glosEntry.getSrcText())) {
+            if (isTokenMatch(strTokens, srcTokenHashes, ste.getSrcText(), glosEntry.getSrcText())
+                    || isCjkMatch(srcChars, ste.getSrcText(), glosEntry.getSrcText())) {
                 result.add(glosEntry);
             }
         }
@@ -128,15 +146,35 @@ public class GlossarySearcher {
      *           tokens between the source text entry and the glossary entry
      */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+        return searchSourceMatchTokens(ste, Collections.singletonList(entry)).get(0);
+    }
+
+    /**
+     * Matching tokens for several glossary entries against one source text
+     * entry; the source text is tokenized only once (SF bug #981).
+     *
+     * @param ste
+     *              the source text entry containing the text to be tokenized
+     *              and matched
+     * @param entries
+     *              the glossary entries to match against
+     * @return   one (possibly empty) token list per glossary entry, in the
+     *           order of {@code entries}
+     */
+    public List<List<Token[]>> searchSourceMatchTokens(SourceTextEntry ste, List<GlossaryEntry> entries) {
         // Compute source entry tokens
         Token[] strTokens = tokenize(ste.getSrcText(),
                 TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
-        List<Token[]> toks = getMatchingTokens(strTokens, ste.getSrcText(), entry.getSrcText());
-        if (toks.isEmpty()) {
-            toks = getCjkMatchingTokens(ste.getSrcText(), entry.getSrcText());
+        List<List<Token[]>> result = new ArrayList<>(entries.size());
+        for (GlossaryEntry entry : entries) {
+            List<Token[]> toks = getMatchingTokens(strTokens, ste.getSrcText(), entry.getSrcText());
+            if (toks.isEmpty()) {
+                toks = getCjkMatchingTokens(ste.getSrcText(), entry.getSrcText());
+            }
+            result.add(toks);
         }
-        return toks;
+        return result;
     }
 
     public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
@@ -167,6 +205,29 @@ public class GlossarySearcher {
         return !getMatchingTokens(fullTextTokens, fullText, term).isEmpty();
     }
 
+    private boolean isTokenMatch(Token[] fullTextTokens, Set<Integer> fullTextTokenHashes,
+            String fullText, String term) {
+        Token[] glosTokens = tokenize(term);
+        if (glosTokens.length == 0) {
+            return false;
+        }
+        for (Token glosToken : glosTokens) {
+            if (!fullTextTokenHashes.contains(glosToken.hashCode())) {
+                return false;
+            }
+        }
+        return !getMatchingTokens(fullTextTokens, glosTokens, fullText, term).isEmpty();
+    }
+
+    private static boolean isCjkMatch(Set<Integer> fullTextChars, String fullText, String term) {
+        for (int i = 0; i < term.length(); i++) {
+            if (!fullTextChars.contains((int) term.charAt(i))) {
+                return false;
+            }
+        }
+        return isCjkMatch(fullText, term);
+    }
+
     @VisibleForTesting
     boolean isGlossaryNotExactMatch() {
         return Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
@@ -179,6 +240,11 @@ public class GlossarySearcher {
         if (glosTokens.length == 0) {
             return Collections.emptyList();
         }
+        return getMatchingTokens(fullTextTokens, glosTokens, fullText, term);
+    }
+
+    private List<Token[]> getMatchingTokens(Token[] fullTextTokens, Token[] glosTokens, String fullText,
+            String term) {
         boolean notExact = isGlossaryNotExactMatch();
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));

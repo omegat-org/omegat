@@ -27,6 +27,7 @@ package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.SourceTextEntry;
 
 /**
@@ -50,6 +51,7 @@ public interface IMarker {
      *         be displayed
      * @throws Exception if something went wrong
      */
+    @Nullable
     List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception;
 }

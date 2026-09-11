@@ -19,22 +19,6 @@ ext {
             }
         }
     }
-    providedCoreLibsPath = 'lib/provided/core'
-    providedModuleLibsPath = 'lib/provided/module'
-    providedCoreLibsDir = layout.settingsDirectory.dir(providedCoreLibsPath).asFile
-    providedModuleLibsDir = layout.settingsDirectory.dir(providedModuleLibsPath).asFile
-    // Resolves jars that the source distribution provides in lib/provided/module.
-    // Fails instead of returning an empty tree so that an incomplete source
-    // distribution cannot silently produce modules without their content.
-    providedModuleLib = { String... artifacts ->
-        def patterns = artifacts.collect { "**/${it}-*.jar".toString() }
-        def tree = fileTree(dir: providedModuleLibsDir, includes: patterns)
-        if (tree.isEmpty()) {
-            throw new GradleException("No jar matches ${patterns} in ${providedModuleLibsDir}; "
-                    + "the provided module libraries are incomplete.")
-        }
-        return tree
-    }
 }
 
 repositories {

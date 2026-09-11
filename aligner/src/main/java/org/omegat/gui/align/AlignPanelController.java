@@ -214,7 +214,7 @@ public class AlignPanelController {
 
         ActionListener comparisonListener = e -> {
             ComparisonMode newValue = (ComparisonMode) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.comparisonMode && confirmReset(alignMenuFrame)) {
+            if (newValue != null && newValue != aligner.comparisonMode && confirmReset(alignMenuFrame)) {
                 aligner.comparisonMode = newValue;
                 reloadBeads(aligner);
             } else {
@@ -226,7 +226,7 @@ public class AlignPanelController {
 
         ActionListener algorithmListener = e -> {
             AlgorithmClass newValue = (AlgorithmClass) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.algorithmClass && confirmReset(alignMenuFrame)) {
+            if (newValue != null && newValue != aligner.algorithmClass && confirmReset(alignMenuFrame)) {
                 aligner.algorithmClass = newValue;
                 persistSettings(aligner);
                 reloadBeads(aligner);
@@ -239,7 +239,7 @@ public class AlignPanelController {
 
         ActionListener calculatorListener = e -> {
             CalculatorType newValue = (CalculatorType) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.calculatorType && confirmReset(alignMenuFrame)) {
+            if (newValue != null && newValue != aligner.calculatorType && confirmReset(alignMenuFrame)) {
                 aligner.calculatorType = newValue;
                 persistSettings(aligner);
                 reloadBeads(aligner);
@@ -252,7 +252,7 @@ public class AlignPanelController {
 
         ActionListener counterListener = e -> {
             CounterType newValue = (CounterType) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.counterType && confirmReset(alignMenuFrame)) {
+            if (newValue != null && newValue != aligner.counterType && confirmReset(alignMenuFrame)) {
                 aligner.counterType = newValue;
                 persistSettings(aligner);
                 reloadBeads(aligner);
@@ -612,15 +612,9 @@ public class AlignPanelController {
      *            aligner whose parameters are stored
      */
     static void persistSettings(Aligner aligner) {
-        if (aligner.algorithmClass != null) {
-            Preferences.setPreference(AlignerPrefs.ALIGNER_ALGORITHM_CLASS, aligner.algorithmClass.name());
-        }
-        if (aligner.calculatorType != null) {
-            Preferences.setPreference(AlignerPrefs.ALIGNER_CALCULATOR_TYPE, aligner.calculatorType.name());
-        }
-        if (aligner.counterType != null) {
-            Preferences.setPreference(AlignerPrefs.ALIGNER_COUNTER_TYPE, aligner.counterType.name());
-        }
+        Preferences.setPreference(AlignerPrefs.ALIGNER_ALGORITHM_CLASS, aligner.algorithmClass.name());
+        Preferences.setPreference(AlignerPrefs.ALIGNER_CALCULATOR_TYPE, aligner.calculatorType.name());
+        Preferences.setPreference(AlignerPrefs.ALIGNER_COUNTER_TYPE, aligner.counterType.name());
         Preferences.setPreference(AlignerPrefs.ALIGNER_SEGMENT, aligner.segment);
         Preferences.setPreference(AlignerPrefs.ALIGNER_REMOVE_TAGS, aligner.removeTags);
     }
@@ -971,22 +965,21 @@ public class AlignPanelController {
     }
 
     private void updateCommandAvailability(AlignPanel panel, AlignMenuFrame frame) {
-        if (!(panel.table.getModel() instanceof BeadTableModel)) {
+        if (!(panel.table.getModel() instanceof BeadTableModel model)) {
             return;
         }
         int[] rows = panel.table.getSelectedRows();
         int[] cols = panel.table.getSelectedColumns();
         int col = cols.length > 0 ? cols[0] : -1;
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         boolean enabled = phase == Phase.EDIT && !realRows.isEmpty() && cols.length == 1
                 && model.isEditableColumn(col);
-        boolean canUp = enabled && model.canMove(realRows.get(0), col, true);
-        boolean canDown = enabled && model.canMove(realRows.get(realRows.size() - 1), col, false);
+        boolean canUp = enabled && model.canMove(realRows.getFirst(), col, true);
+        boolean canDown = enabled && model.canMove(realRows.getLast(), col, false);
         int beads = model.beadsInRowSpan(rows);
         boolean canSplit = (realRows.size() == 1 && rows.length == 1) || (!realRows.isEmpty() && beads == 1);
         boolean canMerge = realRows.size() > 1 || (realRows.size() == 1 && rows.length == 1
-                && realRows.get(0) < panel.table.getRowCount() - 1);
+                && realRows.getFirst() < panel.table.getRowCount() - 1);
         boolean canEdit = realRows.size() == 1;
         panel.moveDownButton.setEnabled(enabled && canDown);
         frame.moveDownItem.setEnabled(enabled && canDown);
@@ -1001,7 +994,7 @@ public class AlignPanelController {
         frame.pinpointAlignStartItem.setEnabled(enabled && rows.length == 1);
         frame.pinpointAlignEndItem.setEnabled(
                 phase == Phase.PINPOINT && rows.length == 1 && cols.length == 1 && realRows.size() == 1
-                        && realRows.get(0) != ppRow && col != ppCol && model.isEditableColumn(col));
+                        && realRows.getFirst() != ppRow && col != ppCol && model.isEditableColumn(col));
     }
 
     private String getOutFileName(Aligner aligner) {
@@ -1275,44 +1268,27 @@ public class AlignPanelController {
 
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            switch (columnIndex) {
-            case COL_CHECKBOX - 3:
-                return Integer.class;
-            case COL_CHECKBOX - 2:
-                return Integer.class;
-            case COL_CHECKBOX - 1:
-                // Bead number
-                return Integer.class;
-            case COL_CHECKBOX:
-                return Boolean.class;
-            case COL_SRC:
-                return String.class;
-            case COL_TRG:
-                return String.class;
-            default:
-                throw new IllegalArgumentException();
-            }
+            return switch (columnIndex) {
+                case COL_CHECKBOX - 3, COL_CHECKBOX - 2, COL_CHECKBOX - 1 -> Integer.class;
+                case COL_CHECKBOX -> Boolean.class;
+                case COL_SRC, COL_TRG -> String.class;
+                default -> throw new IllegalArgumentException();
+            };
         }
 
         @Override
         public String getColumnName(int column) {
-            switch (column) {
-            case COL_CHECKBOX - 3:
-                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_ROW");
-            case COL_CHECKBOX - 2:
-                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_DISTANCE");
-            case COL_CHECKBOX - 1:
-                // Bead number
-                return "";
-            case COL_CHECKBOX:
-                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_KEEP");
-            case COL_SRC:
-                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_SOURCE");
-            case COL_TRG:
-                return BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_TARGET");
-            default:
-                throw new IllegalArgumentException();
-            }
+            return switch (column) {
+                case COL_CHECKBOX - 3 -> BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_ROW");
+                case COL_CHECKBOX - 2 -> BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_DISTANCE");
+                case COL_CHECKBOX - 1 ->
+                    // Bead number
+                        "";
+                case COL_CHECKBOX -> BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_KEEP");
+                case COL_SRC -> BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_SOURCE");
+                case COL_TRG -> BUNDLE.getString("ALIGNER_PANEL_TABLE_COL_TARGET");
+                default -> throw new IllegalArgumentException();
+            };
         }
 
         @Override
@@ -1385,7 +1361,7 @@ public class AlignPanelController {
             if (trgRow < 0) {
                 // New bead created
                 trgBead = new MutableBead();
-                data.add(0, trgBead);
+                data.addFirst(trgBead);
             } else if (trgRow > rowToBead.size() - 1) {
                 // New bead created
                 trgBead = new MutableBead();
@@ -1412,8 +1388,8 @@ public class AlignPanelController {
                 fireTableDataChanged();
             }
             lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            return new int[] { Util.indexByIdentity(lines, selected.get(0)),
-                    Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
+            return new int[] { Util.indexByIdentity(lines, selected.getFirst()),
+                    Util.indexByIdentity(lines, selected.getLast()) };
         }
 
         /**
@@ -1437,10 +1413,10 @@ public class AlignPanelController {
             bead.status = Status.DEFAULT;
             for (int i = 0; i < count; i++) {
                 if (!splitSrc.isEmpty()) {
-                    bead.sourceLines.add(splitSrc.remove(0));
+                    bead.sourceLines.add(splitSrc.removeFirst());
                 }
                 if (!splitTrg.isEmpty()) {
-                    bead.targetLines.add(splitTrg.remove(0));
+                    bead.targetLines.add(splitTrg.removeFirst());
                 }
             }
             // New bead created
@@ -1608,7 +1584,7 @@ public class AlignPanelController {
             int origRowCount = getRowCount();
             List<@Nullable String> toCombine = new ArrayList<>();
             List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            toCombine.add(lines.get(rows.get(0)));
+            toCombine.add(lines.get(rows.getFirst()));
             for (int i = 1; i < rows.size(); i++) {
                 int row = rows.get(i);
                 String line = lines.get(row);
@@ -1617,11 +1593,11 @@ public class AlignPanelController {
                 Util.removeByIdentity(col == COL_SRC ? bead.sourceLines : bead.targetLines, line);
                 bead.status = Status.DEFAULT;
             }
-            MutableBead trgBead = rowToBead.get(rows.get(0));
+            MutableBead trgBead = rowToBead.get(rows.getFirst());
             List<@Nullable String> trgLines = col == COL_SRC ? trgBead.sourceLines : trgBead.targetLines;
             Language lang = col == COL_SRC ? aligner.srcLang : aligner.trgLang;
             String combined = lang != null ? Util.join(lang, toCombine) : null;
-            trgLines.set(Util.indexByIdentity(trgLines, toCombine.get(0)), combined);
+            trgLines.set(Util.indexByIdentity(trgLines, toCombine.getFirst()), combined);
             trgBead.status = Status.DEFAULT;
             makeCache();
             if (origRowCount != getRowCount()) {
@@ -1737,7 +1713,7 @@ public class AlignPanelController {
                 if (trgRow < 0) {
                     // New bead created
                     trgBead = new MutableBead();
-                    data.add(0, trgBead);
+                    data.addFirst(trgBead);
                 } else if (trgRow > rowToBead.size() - 1) {
                     // New bead created
                     trgBead = new MutableBead();
@@ -1762,8 +1738,8 @@ public class AlignPanelController {
                 fireTableDataChanged();
             }
             List<@Nullable String> lines = col == COL_SRC ? rowToSourceLine : rowToTargetLine;
-            int[] resultRows = new int[] { Util.indexByIdentity(lines, selected.get(0)),
-                    Util.indexByIdentity(lines, selected.get(selected.size() - 1)) };
+            int[] resultRows = new int[] { Util.indexByIdentity(lines, selected.getFirst()),
+                    Util.indexByIdentity(lines, selected.getLast()) };
             // Sort result rows so that callers can expect high-to-low order
             Arrays.sort(resultRows);
             return resultRows;
@@ -1875,7 +1851,7 @@ public class AlignPanelController {
             int origRowCount = getRowCount();
             MutableBead bead = rowToBead.get(row);
             // XXX: Bead modified here
-            (col == COL_SRC ? bead.sourceLines : bead.targetLines).add(lines.get(0));
+            (col == COL_SRC ? bead.sourceLines : bead.targetLines).add(lines.getFirst());
             bead.status = Status.DEFAULT;
             int beadInsertIndex = data.indexOf(bead) + 1;
             List<MutableBead> newBeads = new ArrayList<>();
@@ -1890,7 +1866,7 @@ public class AlignPanelController {
             if (origRowCount != getRowCount()) {
                 fireTableDataChanged();
             }
-            return Util.indexByIdentity(col == COL_SRC ? rowToSourceLine : rowToTargetLine, lines.get(0));
+            return Util.indexByIdentity(col == COL_SRC ? rowToSourceLine : rowToTargetLine, lines.getFirst());
         }
     }
 
@@ -1904,11 +1880,10 @@ public class AlignPanelController {
 
         @Override
         protected @Nullable Transferable createTransferable(JComponent c) {
-            if (!(c instanceof JTable)) {
-                return null;
+            if (c instanceof JTable table) {
+                return new TableSelection(table.getSelectedRows(), table.getSelectedColumns());
             }
-            JTable table = (JTable) c;
-            return new TableSelection(table.getSelectedRows(), table.getSelectedColumns());
+            return null;
         }
 
         @Override
@@ -1949,10 +1924,10 @@ public class AlignPanelController {
                 int trgRow = dloc.getRow();
 
                 List<Integer> realRows = model.realCellsInRowSpan(col, rows);
-                if (trgRow < realRows.get(0)) {
-                    return model.canMoveTo(trgRow, realRows.get(0), col, true);
-                } else if (trgRow > realRows.get(realRows.size() - 1)) {
-                    return model.canMoveTo(trgRow, realRows.get(realRows.size() - 1), col, false);
+                if (trgRow < realRows.getFirst()) {
+                    return model.canMoveTo(trgRow, realRows.getFirst(), col, true);
+                } else if (trgRow > realRows.getLast()) {
+                    return model.canMoveTo(trgRow, realRows.getLast(), col, false);
                 }
             } catch (Exception e) {
                 Log.log(e);
@@ -2058,8 +2033,8 @@ public class AlignPanelController {
         private Rectangle rectForTarget(JTable table, DropLocation loc) {
             BeadTableModel model = (BeadTableModel) table.getModel();
             List<Integer> rows = model.getRowExtentsForBeadAtRow(loc.getRow());
-            return table.getCellRect(rows.get(0), BeadTableModel.COL_SRC, true)
-                    .union(table.getCellRect(rows.get(rows.size() - 1), BeadTableModel.COL_TRG, true));
+            return table.getCellRect(rows.getFirst(), BeadTableModel.COL_SRC, true)
+                    .union(table.getCellRect(rows.getLast(), BeadTableModel.COL_TRG, true));
         }
     }
 

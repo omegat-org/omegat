@@ -25,9 +25,10 @@
 
 package org.omegat.filters4.xml.xliff;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
@@ -38,6 +39,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
@@ -93,12 +95,13 @@ public class Xliff2Filter extends AbstractXliffFilter {
     }
 
     /** Current translation unit **/
-    private String segId = null;
+    private @Nullable String segId = null;
     private boolean flushedSegment = false;
 
     @Override
-    protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
+    protected boolean processStartElement(StartElement startElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
+        Attribute idAttr;
         switch (startElement.getName().getLocalPart()) {
         case "xliff":
             if (namespace == null) {
@@ -108,7 +111,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
         case "file":
         case "group":
         case "unit":
-            Attribute idAttr = startElement.getAttributeByName(new QName(("id")));
+            idAttr = startElement.getAttributeByName(new QName(("id")));
             if (idAttr != null) {
                 path += "/" + idAttr.getValue();
             } else {
@@ -137,7 +140,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
             source.clear();
             break;
         case "target":
-            target = new LinkedList<XMLEvent>();
+            target = new ArrayList<>();
             currentBuffer = target;
             inTarget = true;
             break;
@@ -166,7 +169,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
     }
 
     @Override
-    protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
+    protected boolean processEndElement(EndElement endElement, @Nullable XMLStreamWriter writer)
             throws XMLStreamException {
         switch (endElement.getName().getLocalPart()) {
         case "source":
@@ -185,7 +188,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 flushTranslations(writer); // if there was no <target> at all
             }
             if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                registerCurrentTransUnit(segId, source, target, ".*");
+                registerCurrentTransUnit(Objects.requireNonNull(segId), source, target, ".*");
             }
             segId = null;
             cleanBuffers();
@@ -227,11 +230,9 @@ public class Xliff2Filter extends AbstractXliffFilter {
     protected String buildTags(List<XMLEvent> srcList, boolean reuse) {
         if (!reuse) {
             tagsMap.clear();
-            for (Character c : tagsCount.keySet()) {
-                tagsCount.put(c, 0);
-            }
+            tagsCount.replaceAll((c, v) -> 0);
         }
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         for (XMLEvent ev : srcList) {
             if (ev.isCharacters()) {
                 res.append(ev.asCharacters().getData());
@@ -297,14 +298,16 @@ public class Xliff2Filter extends AbstractXliffFilter {
                         // don't know which one
         }
         String name = stEl.getName().getLocalPart();
-        if (name.equals("pc")) {
-            return 'g';
-        }
-        if (name.equals("sc") || name.equals("ec")) {
-            return 't';
-        }
-        if (name.equals("sm") || name.equals("em")) {
-            return 'a';
+        switch (name) {
+            case "pc" -> {
+                return 'g';
+            }
+            case "sc", "ec" -> {
+                return 't';
+            }
+            case "sm", "em" -> {
+                return 'a';
+            }
         }
         if (!stEl.getName().getNamespaceURI().equals(this.namespace)) {
             return 'o'; // other (normally not allowed by specification)
@@ -314,7 +317,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
     }
 
     /** Replace <target> by OmegaT's translation, if found **/
-    private void flushTranslations(XMLStreamWriter writer) throws XMLStreamException {
+    private void flushTranslations(@Nullable XMLStreamWriter writer) throws XMLStreamException {
         if (writer == null) {
             return;
         }

@@ -109,14 +109,12 @@ public class AlignerTest {
         List<Entry<String, String>> result = aligner.align();
         assertEquals(4, result.size());
         assertEntry("This is sentence one.",
-                "\u3053\u308C\u304C1\u3064\u76EE\u306E\u30BB\u30F3\u30C6\u30F3\u30B9\u3002", result.get(0));
-        assertEntry("Short sentence.", "\u77ED\u3044\u6587\u3002", result.get(1));
+                "これが1つ目のセンテンス。", result.get(0));
+        assertEntry("Short sentence.", "短い文。", result.get(1));
         assertEntry("And then this is a very, very, very long sentence.",
-                "\u7D9A\u3044\u3066\u306F\u3068\u3066\u3082\u9577\u304F\u3066\u306A\u304C\u301C\u3044\u9577"
-                        + "\u86C7\u306E\u602A\u7269\u30BB\u30F3\u30C6\u30F3\u30B9\u3060\u304C\u3001\u3044"
-                        + "\u3064\u7D42\u308F\u308B\u306E\u3060\u308D\u3046\u304B\uFF1F",
+                "続いてはとても長くてなが〜い長蛇の怪物センテンスだが、いつ終わるのだろうか？",
                 result.get(2));
-        assertEntry("Where shall it end? No one knows.", "\u8AB0\u3082\u77E5\u3089\u306A\u3044\u3002",
+        assertEntry("Where shall it end? No one knows.", "誰も知らない。",
                 result.get(3));
 
         assertTrue("ID not supported for these files", assertModeUnsupported(aligner, ComparisonMode.ID));
@@ -149,14 +147,12 @@ public class AlignerTest {
         List<Entry<String, String>> result = aligner.align();
         assertEquals(4, result.size());
         assertEntry("This is sentence one.",
-                "\u3053\u308C\u304C1\u3064\u76EE\u306E\u30BB\u30F3\u30C6\u30F3\u30B9\u3002", result.get(0));
-        assertEntry("Short sentence.", "\u77ED\u3044\u6587\u3002", result.get(1));
+                "これが1つ目のセンテンス。", result.get(0));
+        assertEntry("Short sentence.", "短い文。", result.get(1));
         assertEntry("And then this is a very, very, very long sentence.",
-                "\u7D9A\u3044\u3066\u306F\u3068\u3066\u3082\u9577\u304F\u3066\u306A\u304C\u301C\u3044\u9577"
-                        + "\u86C7\u306E\u602A\u7269\u30BB\u30F3\u30C6\u30F3\u30B9\u3060\u304C\u3001\u3044"
-                        + "\u3064\u7D42\u308F\u308B\u306E\u3060\u308D\u3046\u304B\uFF1F",
+                "続いてはとても長くてなが〜い長蛇の怪物センテンスだが、いつ終わるのだろうか？",
                 result.get(2));
-        assertEntry("Where shall it end?", "\u8AB0\u3082\u77E5\u3089\u306A\u3044\u3002", result.get(3));
+        assertEntry("Where shall it end?", "誰も知らない。", result.get(3));
         // Key5 in source has no counterpart in target so it is dropped.
     }
 
@@ -238,30 +234,15 @@ public class AlignerTest {
         assertEquals(List.of("CCC"), result.get(2).targetLines);
     }
 
-    @Test
-    public void testDoAlign_missingSettingsThrows() {
-        Aligner aligner = new Aligner(null, new Language(Locale.ENGLISH), null, new Language(Locale.JAPANESE));
-        // Invalidate settings
-        aligner.algorithmClass = null;
-        try {
-            aligner.doAlign(List.of(new MutableBead("x", "y")));
-            fail("Expected IllegalStateException when required settings are not set");
-        } catch (IllegalStateException expected) {
-            // ok
-        }
-    }
-
     private void assertHeapResult(List<Entry<String, String>> result) {
         assertEquals(4, result.size());
         assertEntry("This is sentence one.",
-                "\u3053\u308C\u304C1\u3064\u76EE\u306E\u30BB\u30F3\u30C6\u30F3\u30B9\u3002", result.get(0));
-        assertEntry("Short sentence.", "\u77ED\u3044\u6587\u3002", result.get(1));
+                "これが1つ目のセンテンス。", result.get(0));
+        assertEntry("Short sentence.", "短い文。", result.get(1));
         assertEntry("And then this is a very, very, very long sentence. Where shall it end?",
-                "\u7D9A\u3044\u3066\u306F\u3068\u3066\u3082\u9577\u304F\u3066\u306A\u304C\u301C\u3044\u9577"
-                        + "\u86C7\u306E\u602A\u7269\u30BB\u30F3\u30C6\u30F3\u30B9\u3060\u304C\u3001\u3044"
-                        + "\u3064\u7D42\u308F\u308B\u306E\u3060\u308D\u3046\u304B\uFF1F",
+                "続いてはとても長くてなが〜い長蛇の怪物センテンスだが、いつ終わるのだろうか？",
                 result.get(2));
-        assertEntry("No one knows.", "\u8AB0\u3082\u77E5\u3089\u306A\u3044\u3002", result.get(3));
+        assertEntry("No one knows.", "誰も知らない。", result.get(3));
     }
 
     <T, U> void assertEntry(T expectedKey, U expectedValue, Entry<T, U> entry) {

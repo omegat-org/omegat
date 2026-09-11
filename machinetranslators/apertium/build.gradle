@@ -6,20 +6,22 @@ plugins {
     id 'org.omegat.module'
 }
 
+def providedCoreLibsDir = omegatModule.providedCoreLibsDir
+
 dependencies {
-    compileOnly(project.rootProject)
-    if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar',
-                                                                  '**/jackson*.jar'])
+    compileOnly(project(':'))
+    if (file(providedCoreLibsDir).directory) {
+        compileOnly omegatModule.providedCoreLib('jspecify', '*commons', 'slf4j', 'jackson')
     } else {
         compileOnly(libs.commons.io)
+        compileOnly(libs.jspecify)
         compileOnly(libs.commons.text)
         compileOnly(libs.slf4j.format.jdk14)
         // JSON parser
         compileOnly(libs.jackson.core)
         compileOnly(libs.jackson.databind)
     }
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project(':')))
     testImplementation(libs.jackson.core)
     testImplementation(libs.jackson.databind)
 }

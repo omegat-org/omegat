@@ -8,6 +8,7 @@
                2012 Didier Briel
                2015 Aaron Madlon-Kay
                2026 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -146,9 +147,22 @@ public class SaveThread implements IAutoSave {
 
     private static void executeSave() {
         IProject dataEngine = Core.getProject();
+        // Probed outside the project lock: a dead network may block this
+        // thread up to the probe timeout per host, but never editing. When
+        // the remote hosts answer again, one save with team sync restores the
+        // lost synchronization and switches the project back to online mode.
+        boolean restoreTeamSync = dataEngine.canRestoreTeamSync();
         try {
             Core.executeExclusively(false, () -> {
-                dataEngine.saveProject(false);
+                if (dataEngine != Core.getProject()) {
+                    // closed or replaced while the probe was running
+                    return;
+                }
+                if (restoreTeamSync) {
+                    dataEngine.restoreTeamSync();
+                } else {
+                    dataEngine.saveProject(false);
+                }
                 dataEngine.teamSyncPrepare();
             });
             Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",

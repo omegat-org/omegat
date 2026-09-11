@@ -7,6 +7,7 @@
                2010 Didier Briel
                2014-2015 Alex Buloichik
                2017 Didier Briel
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,6 +30,7 @@
 package org.omegat.core.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -72,6 +74,29 @@ public interface IProject {
     void teamSync();
 
     /**
+     * Check whether lost team synchronization looks restorable: the project is
+     * a team project, currently offline, and the remote hosts accept
+     * connections again. Called from the auto-save thread WITHOUT the project
+     * lock, so implementations must not touch project data; a short network
+     * probe is allowed. Restoring happens through
+     * {@link #saveProject(boolean)} with team synchronization.
+     */
+    default boolean canRestoreTeamSync() {
+        return false;
+    }
+
+    /**
+     * Restore lost team synchronization: one save with team synchronization
+     * through the regular save path. Unlike a manual save, a failure must not
+     * interrupt the user: implementations report it without a modal dialog
+     * and back off. The auto-save thread calls it after
+     * {@link #canRestoreTeamSync()} approved.
+     */
+    default void restoreTeamSync() {
+        saveProject(true);
+    }
+
+    /**
      * Close project.
      */
     void closeProject();
@@ -106,6 +131,51 @@ public interface IProject {
      * @throws Exception if any error occurs during the commit process
      */
     void commitSourceFiles() throws Exception;
+
+    /**
+     * Sets a registered team project setting and commits the project
+     * settings file (omegat/project_settings.properties) to the team
+     * repository, so the whole team gets the value. The setting lives in
+     * its own file because older OmegaT versions reject unknown elements in
+     * omegat.project but ignore extra files. No operation for non-team
+     * projects. Must run through Core.executeExclusively, like saveProject.
+     *
+     * @param key
+     *            key of a setting registered in {@link TeamSettingsRegistry}
+     * @param value
+     *            raw value to distribute, null for the default
+     * @throws Exception
+     *             if writing or committing the file fails
+     */
+    default void publishProjectSetting(String key, @Nullable String value) throws Exception {
+    }
+
+    /**
+     * Sets a registered team project setting for this session and writes it
+     * to the local project settings file only: the next open of the team
+     * project supersedes it with the remote value again. No operation for
+     * non-team projects. Must run through Core.executeExclusively, like
+     * saveProject.
+     *
+     * @param key
+     *            key of a setting registered in {@link TeamSettingsRegistry}
+     * @param value
+     *            raw value to restore, null for the default
+     * @throws Exception
+     *             if writing the file fails
+     */
+    default void useLocalProjectSetting(String key, @Nullable String value) throws Exception {
+    }
+
+    /**
+     * The local raw values that the team values superseded during the last
+     * load of a team project, keyed by setting key; an entry with null value
+     * means the local side had the default. Empty when everything agreed,
+     * always empty for non-team projects.
+     */
+    default Map<String, @Nullable String> getSupersededLocalSettings() {
+        return Collections.emptyMap();
+    }
 
     /**
      * Get project properties.

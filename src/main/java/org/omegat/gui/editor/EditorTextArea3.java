@@ -9,6 +9,7 @@
                2013 Zoltan Bartko
                2014 Aaron Madlon-Kay
                2015 Yu Tang
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -74,6 +75,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TagUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
 
@@ -122,6 +124,32 @@ public class EditorTextArea3 extends JEditorPane {
             .getKeyStroke("editorToggleCursorLock");
     private static final KeyStroke KEYSTROKE_TOGGLE_OVERTYPE = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorToggleOvertype");
+    private static final KeyStroke KEYSTROKE_DELETE_TO_SEGMENT_START = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorDeleteToSegmentStart");
+    private static final KeyStroke KEYSTROKE_DELETE_TO_SEGMENT_END = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorDeleteToSegmentEnd");
+    private static final KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN_ALTERNATE = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorDeleteNextTokenAlternate");
+    private static final KeyStroke KEYSTROKE_MOVE_TO_SEGMENT_START = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorMoveToSegmentStart");
+    private static final KeyStroke KEYSTROKE_MOVE_TO_SEGMENT_END = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorMoveToSegmentEnd");
+    private static final KeyStroke KEYSTROKE_MOVE_TO_SEGMENT_START_SEL = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorMoveToSegmentStartWithSelection");
+    private static final KeyStroke KEYSTROKE_MOVE_TO_SEGMENT_END_SEL = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorMoveToSegmentEndWithSelection");
+    private static final KeyStroke KEYSTROKE_INSERT_NEXT_PLACEABLE = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorInsertNextMissingPlaceable");
+    private static final KeyStroke KEYSTROKE_INSERT_PREV_PLACEABLE = PropertiesShortcuts
+            .getEditorShortcuts().getKeyStroke("editorInsertPrevMissingPlaceable");
+    private static final KeyStroke KEYSTROKE_INSERT_NBSP = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorInsertNonBreakingSpace");
+    private static final KeyStroke KEYSTROKE_INSERT_TAG_PAIR = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorInsertMissingTagPair");
+    private static final KeyStroke KEYSTROKE_MOVE_TOKEN_PREV = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorMoveTokenPrev");
+    private static final KeyStroke KEYSTROKE_MOVE_TOKEN_NEXT = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorMoveTokenNext");
 
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
@@ -459,8 +487,10 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)) {
-            // Delete next token
+        } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)
+                || s.equals(KEYSTROKE_DELETE_NEXT_TOKEN_ALTERNATE)) {
+            // Delete next token; the alternate binding serves keyboards
+            // without a forward-delete key
             try {
                 processed = wholeTagDelete(true);
                 if (!processed) {
@@ -480,6 +510,30 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
+        } else if (s.equals(KEYSTROKE_DELETE_TO_SEGMENT_START)) {
+            processed = deleteToSegmentBound(false);
+        } else if (s.equals(KEYSTROKE_DELETE_TO_SEGMENT_END)) {
+            processed = deleteToSegmentBound(true);
+        } else if (s.equals(KEYSTROKE_MOVE_TO_SEGMENT_START)) {
+            processed = moveToSegmentBound(false, false);
+        } else if (s.equals(KEYSTROKE_MOVE_TO_SEGMENT_END)) {
+            processed = moveToSegmentBound(true, false);
+        } else if (s.equals(KEYSTROKE_MOVE_TO_SEGMENT_START_SEL)) {
+            processed = moveToSegmentBound(false, true);
+        } else if (s.equals(KEYSTROKE_MOVE_TO_SEGMENT_END_SEL)) {
+            processed = moveToSegmentBound(true, true);
+        } else if (s.equals(KEYSTROKE_INSERT_NEXT_PLACEABLE)) {
+            processed = insertMissingPlaceable(true);
+        } else if (s.equals(KEYSTROKE_INSERT_PREV_PLACEABLE)) {
+            processed = insertMissingPlaceable(false);
+        } else if (s.equals(KEYSTROKE_INSERT_NBSP)) {
+            processed = insertNonBreakingSpace();
+        } else if (s.equals(KEYSTROKE_INSERT_TAG_PAIR)) {
+            processed = insertMissingTagPair();
+        } else if (s.equals(KEYSTROKE_MOVE_TOKEN_PREV)) {
+            processed = moveTokenAtCaret(false);
+        } else if (s.equals(KEYSTROKE_MOVE_TOKEN_NEXT)) {
+            processed = moveTokenAtCaret(true);
         } else if (s.equals(KEYSTROKE_FIRST_SEG)) {
             // Jump to beginning of document
             int segNum = controller.m_docSegList[0].segmentNumberInProject;
@@ -540,6 +594,243 @@ public class EditorTextArea3 extends JEditorPane {
             checkAndFixCaret(false);
             autoCompleter.updatePopup(true);
         }
+    }
+
+    /**
+     * Delete from the segment bound to the caret: everything before the
+     * caret ({@code toEnd} false) or everything after it ({@code toEnd}
+     * true), clamped to the editable range. A live selection is deleted
+     * instead, so a slipped modifier never wipes more than the visible
+     * selection. Always consumes the event, even as a no-op: the mac
+     * binding shadows a native Cocoa gesture, and letting the event fall
+     * through would put two semantics on one key.
+     */
+    private boolean deleteToSegmentBound(boolean toEnd) {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode()) {
+            return true;
+        }
+        int start = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
+        int selStart = getSelectionStart();
+        int selEnd = getSelectionEnd();
+        if (selStart != selEnd) {
+            selStart = Math.max(selStart, start);
+            selEnd = Math.min(selEnd, end);
+        } else {
+            int caret = getCaretPosition();
+            if (caret < start || caret > end) {
+                return true;
+            }
+            selStart = toEnd ? caret : start;
+            selEnd = toEnd ? end : caret;
+        }
+        if (selStart >= selEnd) {
+            return true;
+        }
+        int caretBefore = getCaretPosition();
+        int lengthBefore = getDocument().getLength();
+        int rangeStart = selStart;
+        int rangeEnd = selEnd;
+        // pause only the undo bookkeeping and record one snapshot with the
+        // caret position of the moment the shortcut fired: the automatic
+        // snapshot would stamp the end of the removed range, making an undo
+        // jump to the segment end instead of back to where the user was
+        undoManager.runAtomic(() -> {
+            setSelectionStart(rangeStart);
+            setSelectionEnd(rangeEnd);
+            replaceSelection("");
+        }, caretBefore - start);
+        if (getDocument().getLength() == lengthBefore) {
+            // the range touched a protected tag and the document filter
+            // rejected the removal: collapse the leftover selection so the
+            // editor does not sit on a dead, boundary-crossing selection
+            setCaretPosition(caretBefore);
+        }
+        autoCompleter.updatePopup(true);
+        return true;
+    }
+
+    /**
+     * Move the caret to the start or end of the editable range, optionally
+     * extending the selection. The document outside the active segment is
+     * not editable, so this is the segment-scoped reading of the native
+     * "to start/end of document" gestures.
+     */
+    private boolean moveToSegmentBound(boolean toEnd, boolean extendSelection) {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode()) {
+            return true;
+        }
+        int target = toEnd ? doc.getTranslationEnd() : doc.getTranslationStart();
+        if (extendSelection) {
+            moveCaretPosition(target);
+        } else {
+            setCaretPosition(target);
+        }
+        autoCompleter.updatePopup(true);
+        return true;
+    }
+
+    /**
+     * Insert the first (or last) placeable of the source text that is still
+     * missing from the translation: tags and other protected parts, URLs,
+     * e-mail addresses, numbers. The missing list is recomputed on every
+     * call, so pressing repeatedly works through it.
+     */
+    private boolean insertMissingPlaceable(boolean fromStart) {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode()) {
+            return true;
+        }
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
+        String translation = doc.extractTranslation();
+        if (ste == null || translation == null) {
+            return true;
+        }
+        int start = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
+        int selStart = Math.max(getSelectionStart(), start);
+        int selEnd = Math.min(getSelectionEnd(), end);
+        if (selStart < selEnd) {
+            // the insertion replaces the selection, so its content must not
+            // count as present when computing what is missing
+            translation = translation.substring(0, selStart - start) + translation.substring(selEnd - start);
+        }
+        List<String> protectedTexts = protectedTexts(ste);
+        List<String> missing = SegmentEditingOps.missingPlaceables(ste.getSrcText(), translation,
+                protectedTexts);
+        if (missing.isEmpty()) {
+            return true;
+        }
+        String insertion = fromStart ? missing.get(0) : missing.get(missing.size() - 1);
+        // the canonical insert path wraps tags in bidi controls for RTL
+        // targets and fixes the caret before inserting
+        controller.insertText(insertion);
+        autoCompleter.updatePopup(true);
+        return true;
+    }
+
+    private static List<String> protectedTexts(SourceTextEntry ste) {
+        List<String> result = new ArrayList<>();
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            result.add(pp.getTextInSourceSegment());
+        }
+        return result;
+    }
+
+    /**
+     * Insert the first missing tag pair of the segment: around the selection
+     * when one exists, otherwise at the caret with the caret placed between
+     * the tags (SF-1302).
+     */
+    private boolean insertMissingTagPair() {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode() || doc.getController().getCurrentEntry() == null) {
+            return true;
+        }
+        String[] pair = SegmentEditingOps.firstMissingTagPair(TagUtil.getGroupedMissingTagsFromTarget(),
+                TagUtil.TAG_SEPARATOR_SENTINEL);
+        if (pair == null) {
+            return true;
+        }
+        int start = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
+        int selStart = Math.max(getSelectionStart(), start);
+        int selEnd = Math.min(getSelectionEnd(), end);
+        if (selStart < selEnd) {
+            // wrap the (clamped) selection: one insertText call keeps the
+            // bidi handling of the canonical path, runAtomic keeps the
+            // remove+insert pair a single undo step
+            int caretBefore = getCaretPosition();
+            String wrapped;
+            try {
+                wrapped = pair[0] + getDocument().getText(selStart, selEnd - selStart) + pair[1];
+            } catch (BadLocationException ex) {
+                return true;
+            }
+            select(selStart, selEnd);
+            undoManager.runAtomic(() -> controller.insertText(wrapped),
+                    Math.min(Math.max(caretBefore, start), end) - start);
+        } else {
+            if (getSelectionStart() != getSelectionEnd()) {
+                // selection lies entirely outside the editable range:
+                // collapse it so insertText cannot replace protected text
+                setCaretPosition(Math.min(Math.max(getCaretPosition(), start), end));
+            }
+            controller.insertText(pair[0] + pair[1]);
+            // land the caret between the tags; search backwards so any bidi
+            // controls the canonical path added around the tags are skipped
+            String translation = doc.extractTranslation();
+            if (translation != null) {
+                int posRel = translation.lastIndexOf(pair[1],
+                        Math.min(getCaretPosition() - start, translation.length()));
+                if (posRel >= 0) {
+                    setCaretPosition(start + posRel);
+                }
+            }
+        }
+        autoCompleter.updatePopup(true);
+        return true;
+    }
+
+    /** Insert a no-break space (U+00A0) at the caret. */
+    private boolean insertNonBreakingSpace() {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode()) {
+            return true;
+        }
+        controller.insertText("\u00A0");
+        autoCompleter.updatePopup(true);
+        return true;
+    }
+
+    /**
+     * Swap the token at the caret with its neighbour in logical order,
+     * keeping the caret on the moved token so repeated presses walk the
+     * token through the segment. One document mutation, one undo step.
+     */
+    private boolean moveTokenAtCaret(boolean forward) {
+        Document3 doc = getOmDocument();
+        if (doc == null || !doc.isEditMode()) {
+            return true;
+        }
+        int start = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
+        int caret = getCaretPosition();
+        if (caret < start || caret > end) {
+            return true;
+        }
+        String translation = doc.extractTranslation();
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
+        if (translation == null || ste == null) {
+            return true;
+        }
+        Locale locale = targetLocale != null ? targetLocale : Locale.getDefault();
+        SegmentEditingOps.TokenSwap swap = SegmentEditingOps.computeTokenSwap(translation, caret - start,
+                forward, locale, protectedTexts(ste));
+        if (swap == null) {
+            return true;
+        }
+        // the swap replaces a non-empty region with non-empty text, which
+        // the undo manager would record as two snapshots (remove + insert);
+        // run it atomically with the pre-swap caret, so an undo returns the
+        // caret to where the user was, not to the moved token
+        undoManager.runAtomic(() -> {
+            setSelectionStart(start + swap.regionStart);
+            setSelectionEnd(start + swap.regionEnd);
+            replaceSelection(swap.replacement);
+        }, caret - start);
+        if (swap.replacement.equals(doc.extractTranslation().substring(swap.regionStart,
+                swap.regionStart + swap.replacement.length()))) {
+            setCaretPosition(start + swap.caretAfter);
+        } else {
+            // the document filter rejected the replacement (tag protection):
+            // collapse the leftover selection back to the original caret
+            setCaretPosition(caret);
+        }
+        autoCompleter.updatePopup(true);
+        return true;
     }
 
     private void updateLockInsertMessage() {
@@ -928,7 +1219,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (isEditable() && omDocument != null && overtypeMode && getSelectionStart() == getSelectionEnd()
                 && getCaretPosition() < omDocument.getTranslationEnd()) {
             int pos = getCaretPosition();
-            int lastPos = Math.min(getDocument().getLength(), pos + content.length());
+            int lastPos = Math.min(omDocument.getTranslationEnd(), pos + content.length());
             select(pos, lastPos);
         }
         super.replaceSelection(content);

@@ -29,6 +29,7 @@ package org.omegat.core.team2;
 import java.io.File;
 
 import gen.core.project.RepositoryDefinition;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Interface for any remote repository implementation.
@@ -51,9 +52,10 @@ public interface IRemoteRepository2 {
     /**
      * Get file version.
      */
+    @Nullable
     String getFileVersion(String file) throws Exception;
 
-    void switchToVersion(String version) throws Exception;
+    void switchToVersion(@Nullable String version) throws Exception;
 
     /**
      * Add the specified file in preparation for commit (e.g.
@@ -105,7 +107,8 @@ public interface IRemoteRepository2 {
      *            comment for commit
      * @return new version if commit was processed, or null if remote repository was updated by other user
      */
-    String commit(String[] onVersions, String comment) throws Exception;
+    @Nullable
+    String commit(@Nullable String@Nullable [] onVersions, String comment) throws Exception;
 
     /**
      * Given repository does not exist on the remote machine

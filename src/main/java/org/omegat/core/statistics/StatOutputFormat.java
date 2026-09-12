@@ -25,6 +25,7 @@
 
 package org.omegat.core.statistics;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.OStrings;
 
 public enum StatOutputFormat {
@@ -54,7 +55,7 @@ public enum StatOutputFormat {
         return (outputFormats & id) != 0;
     }
 
-    public static StatOutputFormat detect(String filename) {
+    public static @Nullable StatOutputFormat detect(@Nullable String filename) {
         if (filename == null || filename.trim().isEmpty()) {
             return null;
         }
@@ -67,7 +68,7 @@ public enum StatOutputFormat {
         return null;
     }
 
-    public static StatOutputFormat parse(String code) {
+    public static @Nullable StatOutputFormat parse(@Nullable String code) {
         if (code == null || code.trim().isEmpty()) {
             return null;
         }

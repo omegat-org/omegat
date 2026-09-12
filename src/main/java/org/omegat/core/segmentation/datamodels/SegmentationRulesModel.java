@@ -32,6 +32,7 @@ import java.util.regex.PatternSyntaxException;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.util.OStrings;
 
@@ -51,7 +52,7 @@ public class SegmentationRulesModel extends AbstractTableModel {
         this.rules = rules;
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public @Nullable Object getValueAt(int rowIndex, int columnIndex) {
         Rule rule = rules.get(rowIndex);
         switch (columnIndex) {
         case 0:

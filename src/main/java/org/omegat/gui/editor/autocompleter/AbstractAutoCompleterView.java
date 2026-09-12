@@ -31,6 +31,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.BadLocationException;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorTextArea3;
@@ -53,7 +54,7 @@ public abstract class AbstractAutoCompleterView {
     /**
      * the completer.
      */
-    protected AutoCompleter completer;
+    protected @Nullable AutoCompleter completer;
 
     /**
      * Creates a new auto-completer view.

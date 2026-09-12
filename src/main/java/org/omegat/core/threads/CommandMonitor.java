@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 
 /**
@@ -49,7 +50,7 @@ public final class CommandMonitor extends Thread {
     private final InputStream stream;
     private final Process process;
     private final boolean isStdErr;
-    private String message = null;
+    private @Nullable String message = null;
 
     public static CommandMonitor newStdoutMonitor(Process process) {
         return new CommandMonitor(process, false);

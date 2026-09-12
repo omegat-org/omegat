@@ -27,6 +27,7 @@ package org.omegat.externalfinder.gui;
 
 import java.awt.Window;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.gui.dialogs.PreferencesDialog;
 
@@ -39,7 +40,7 @@ public class ExternalFinderCustomizer {
     private final ExternalFinderPreferencesController view;
     private final PreferencesDialog dialog;
 
-    public ExternalFinderCustomizer(boolean projectSpecific, ExternalFinderConfiguration config) {
+    public ExternalFinderCustomizer(boolean projectSpecific, @Nullable ExternalFinderConfiguration config) {
         this.view = new ExternalFinderPreferencesController(projectSpecific,
                 config == null ? ExternalFinderConfiguration.empty() : config);
         this.dialog = new PreferencesDialog(view);
@@ -49,7 +50,7 @@ public class ExternalFinderCustomizer {
         return dialog.show(parent);
     }
 
-    public ExternalFinderConfiguration getResult() {
+    public @Nullable ExternalFinderConfiguration getResult() {
         ExternalFinderConfiguration result = view.getResult();
         return result.isEmpty() ? null : result;
     }

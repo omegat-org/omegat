@@ -35,6 +35,7 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
@@ -140,8 +141,8 @@ public abstract class ParseEntry implements IParseCallback {
      *            protected parts
      */
     @Override
-    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
-            String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
+    public void addEntryWithProperties(@Nullable String id, String source, @Nullable String translation, boolean isFuzzy,
+                                       String@Nullable [] props, @Nullable String path, IFilter filter, @Nullable List<ProtectedPart> protectedParts) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -204,8 +205,8 @@ public abstract class ParseEntry implements IParseCallback {
      * Kept for compatibility.
      */
     @Override
-    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-            String path, IFilter filter, List<ProtectedPart> protectedParts) {
+    public void addEntry(@Nullable String id, String source, @Nullable String translation, boolean isFuzzy, @Nullable String comment,
+            @Nullable String path, IFilter filter, @Nullable List<ProtectedPart> protectedParts) {
         String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
         addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
     }
@@ -214,7 +215,7 @@ public abstract class ParseEntry implements IParseCallback {
      * Add segment to queue because we possible need to link prev/next segments.
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource,
-            String segmentTranslation, boolean segmentTranslationFuzzy, String[] props, String path,
+            @Nullable String segmentTranslation, boolean segmentTranslationFuzzy, String[] props, String path,
             List<ProtectedPart> protectedParts) {
         if (segmentSource.trim().isEmpty()) {
             // skip empty segments
@@ -345,15 +346,15 @@ public abstract class ParseEntry implements IParseCallback {
      * Storage for collected segments.
      */
     protected static class ParseEntryQueueItem {
-        String id;
+        @Nullable String id;
         short segmentIndex;
-        String segmentSource;
-        List<ProtectedPart> protectedParts;
-        String segmentTranslation;
+        @Nullable String segmentSource;
+        @Nullable List<ProtectedPart> protectedParts;
+        @Nullable String segmentTranslation;
         boolean segmentTranslationFuzzy;
-        String[] props;
-        String prevSegment;
-        String nextSegment;
-        String path;
+        String@Nullable [] props;
+        @Nullable String prevSegment;
+        @Nullable String nextSegment;
+        @Nullable String path;
     }
 }

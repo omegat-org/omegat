@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
 import org.omegat.core.segmentation.Segmenter;
@@ -141,7 +142,7 @@ public final class ExternalTMFactory {
             List<PrepareTMXEntry> entries = new ArrayList<>();
 
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
-                public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.@Nullable ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
 
                     if (tuvSource == null) {
@@ -275,22 +276,22 @@ public final class ExternalTMFactory {
                         }
 
                         @Override
-                        public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                                String comment, String path, IFilter filter,
-                                List<ProtectedPart> protectedParts) {
+                        public void addEntry(@Nullable String id, String source, @Nullable String translation, boolean isFuzzy,
+                                             @Nullable String comment, @Nullable String path, IFilter filter,
+                                             @Nullable List<ProtectedPart> protectedParts) {
                             process(source, translation, id, comment, path, null);
                         }
 
                         @Override
-                        public void addEntryWithProperties(String id, String source, String translation,
-                                boolean isFuzzy, String[] props, String path, IFilter filter,
-                                List<ProtectedPart> protectedParts) {
+                        public void addEntryWithProperties(@Nullable String id, String source, @Nullable String translation,
+                                boolean isFuzzy, String[] props, @Nullable String path, IFilter filter,
+                                @Nullable List<ProtectedPart> protectedParts) {
                             process(source, translation, id, null, null, props);
 
                         }
 
-                        private void process(String source, String target, String id, String comment,
-                                String path, String[] props) {
+                        private void process(@Nullable String source, @Nullable String target, @Nullable String id, @Nullable String comment,
+                                @Nullable String path, String@Nullable [] props) {
                             if (source == null || target == null) {
                                 return;
                             }
@@ -313,8 +314,8 @@ public final class ExternalTMFactory {
                             }
                         }
 
-                        private void addImpl(String source, String target, String id, String comment,
-                                String path, String[] props) {
+                        private void addImpl(String source, String target, @Nullable String id, @Nullable String comment,
+                                @Nullable String path, String@Nullable [] props) {
                             if (!source.trim().isEmpty()) {
                                 entries.add(makeEntry(source, target, id, comment, path, props));
                             }
@@ -343,8 +344,8 @@ public final class ExternalTMFactory {
         }
     }
 
-    private static PrepareTMXEntry makeEntry(String source, String target, String id, String comment, String path,
-            String[] props) {
+    private static PrepareTMXEntry makeEntry(String source, String target, @Nullable String id, @Nullable String comment, @Nullable String path,
+            String@Nullable [] props) {
         PrepareTMXEntry entry = new PrepareTMXEntry();
         entry.source = source;
         entry.translation = target;

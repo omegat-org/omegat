@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.filters2.ITranslateCallback;
@@ -80,7 +81,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         currentlyProcessedSegment = 0;
     }
 
-    abstract String getCurrentFile();
+    abstract @Nullable String getCurrentFile();
 
     protected void fileFinished() {
         if (currentlyProcessedSegment != translateQueue.size()) {

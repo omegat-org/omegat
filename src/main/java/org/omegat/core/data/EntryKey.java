@@ -37,19 +37,19 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  */
 public class EntryKey implements Comparable<EntryKey> {
-    public final String file;
+    public final @Nullable String file;
     public final String sourceText;
-    public final String id;
-    public final String prev;
-    public final String next;
-    public final String path;
+    public final @Nullable String id;
+    public final @Nullable String prev;
+    public final @Nullable String next;
+    public final @Nullable String path;
 
     /**
      * When true, ignore the {@link #file} member when comparing EntryKeys.
      */
     private static boolean ignoreFileContext = false;
 
-    public EntryKey(final String file, final String sourceText, final @Nullable String id,
+    public EntryKey(@Nullable String file, final String sourceText, final @Nullable String id,
             final @Nullable String prev, final @Nullable String next, final @Nullable String path) {
         this.file = file;
         this.sourceText = sourceText;

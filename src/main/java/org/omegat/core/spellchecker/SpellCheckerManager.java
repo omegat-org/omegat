@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -42,7 +43,7 @@ import org.omegat.util.StaticUtils;
 
 public class SpellCheckerManager {
 
-    private ISpellChecker spellChecker;
+    private @Nullable ISpellChecker spellChecker;
 
     public static File getDefaultDictionaryDir() {
         return new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR);
@@ -115,7 +116,7 @@ public class SpellCheckerManager {
      *            target dictionary language.
      * @return Path of the dictionary installed.
      */
-    public static Path installHunspellDictionary(String dictionaryDir, String language) {
+    public static @Nullable Path installHunspellDictionary(String dictionaryDir, String language) {
         String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;
@@ -131,7 +132,7 @@ public class SpellCheckerManager {
      *            target language e.g, en, en_US
      * @return Lucene hunspell Dictionary object.
      */
-    public static org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
+    public static org.apache.lucene.analysis.hunspell.@Nullable Dictionary getHunspellDictionary(String language) {
         String className = HUNSPELL_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;
@@ -147,7 +148,7 @@ public class SpellCheckerManager {
      *            target language, e.g., en, en_US
      * @return Morfologik Dictionary object.
      */
-    public static morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
+    public static  morfologik.stemming.@Nullable Dictionary getMorfologikDictionary(String language) {
         String className = MORFOLOGIK_DICTIONARY_PROVIDERS.get(language);
         if (className == null) {
             return null;

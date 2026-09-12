@@ -27,6 +27,7 @@ package org.omegat.core.data;
 
 import java.io.File;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.FileUtil;
@@ -42,7 +43,7 @@ public final class DataUtils {
     }
 
     /** Check if a NearString match comes from the tm/mt/ folder. */
-    public static boolean isFromMTMemory(NearString near) {
+    public static boolean isFromMTMemory(@Nullable NearString near) {
         if (near == null) {
             return false;
         }

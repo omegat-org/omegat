@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import org.jspecify.annotations.Nullable;
 import org.mozilla.universalchardet.UniversalDetector;
 
 public final class EncodingDetector {
@@ -104,7 +105,7 @@ public final class EncodingDetector {
      * <p>
      * Note that we cannot detect UTF-16 encoding, if there's no BOM!
      */
-    public static Charset detectHtmlEncoding(String fileName, String defaultEncoding) {
+    public static Charset detectHtmlEncoding(String fileName, @Nullable String defaultEncoding) {
         Charset encoding = null;
         try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(fileName))) {
             encoding = detectBOM(inputStream);
@@ -129,7 +130,7 @@ public final class EncodingDetector {
     // Signals end of stream
     private static final char END_OF_STREAM_CHARACTER = 0;
 
-    private static Charset checkEncodingOrDefault(String fileName, Charset encoding) {
+    private static Charset checkEncodingOrDefault(String fileName, @Nullable Charset encoding) {
         Charset selectedEncoding = (encoding == null) ? StandardCharsets.UTF_8 : encoding;
         try (BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(fileName), selectedEncoding))) {
@@ -175,7 +176,7 @@ public final class EncodingDetector {
      * @throws IOException
      *             if an I/O error occurs while reading from the stream.
      */
-    private static Charset detectBOM(BufferedInputStream inputStream) throws IOException {
+    private static @Nullable Charset detectBOM(BufferedInputStream inputStream) throws IOException {
         inputStream.mark(OConsts.READ_AHEAD_LIMIT);
         byte[] cbuf = new byte[3];
         cbuf[0] = (byte) inputStream.read();

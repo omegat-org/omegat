@@ -34,6 +34,7 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
+import org.jspecify.annotations.Nullable;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
@@ -84,6 +85,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     RepositoryDefinition config;
     File baseDirectory;
     SVNClientManager ourClientManager;
+    @Nullable
     ProjectTeamSettings projectTeamSettings;
 
     /**
@@ -108,7 +110,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
+    public void init(RepositoryDefinition repo, File dir, @Nullable ProjectTeamSettings teamSettings) throws Exception {
         config = repo;
         baseDirectory = dir;
         projectTeamSettings = teamSettings;
@@ -134,7 +136,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public String getFileVersion(String file) throws Exception {
+    public @Nullable String getFileVersion(String file) throws Exception {
         File f = new File(baseDirectory, file);
         if (!f.exists()) {
             return null;
@@ -270,7 +272,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String[] onVersions, String comment) throws Exception {
+    public @Nullable String commit(@Nullable String@Nullable [] onVersions, String comment) throws Exception {
         LOGGER.atDebug().log(SVN_START_MSG, "commit");
         File[] forCommit = new File[] { baseDirectory };
 

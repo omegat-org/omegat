@@ -39,6 +39,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.common.EntryInfoPane;
@@ -115,17 +116,14 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
     static final ICommentProvider ENTRY_COMMENT_PROVIDER = new ICommentProvider() {
         public String getComment(SourceTextEntry newEntry) {
             StringBuilder text = new StringBuilder(1024);
-            if (newEntry.getKey().id != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
-                text.append(' ');
-                text.append(newEntry.getKey().id);
-                text.append('\n');
+            EntryKey key = newEntry.getKey();
+            if (key.id != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID")).append(' ')
+                        .append(newEntry.getKey().id).append('\n');
             }
-            if (newEntry.getKey().path != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
-                text.append(' ');
-                text.append(StringUtil.unescapeLinefeed(newEntry.getKey().path));
-                text.append('\n');
+            if (key.path != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"))
+                        .append(' ').append(StringUtil.unescapeLinefeed(key.path)).append('\n');
             }
             if (newEntry.getSourceTranslation() != null) {
                 text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));

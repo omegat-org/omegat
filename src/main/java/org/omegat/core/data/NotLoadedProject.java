@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
@@ -79,11 +80,11 @@ public class NotLoadedProject implements IProject {
         return Collections.emptyList();
     }
 
-    public TMXEntry getTranslationInfo(SourceTextEntry ste) {
+    public @Nullable TMXEntry getTranslationInfo(SourceTextEntry ste) {
         return null;
     }
 
-    public AllTranslations getAllTranslations(SourceTextEntry ste) {
+    public @Nullable AllTranslations getAllTranslations(SourceTextEntry ste) {
         return null;
     }
 
@@ -116,11 +117,11 @@ public class NotLoadedProject implements IProject {
         return Collections.emptyList();
     }
 
-    public ProjectProperties getProjectProperties() {
+    public @Nullable ProjectProperties getProjectProperties() {
         return null;
     }
 
-    public StatisticsInfo getStatistics() {
+    public @Nullable StatisticsInfo getStatistics() {
         return null;
     }
 
@@ -142,18 +143,18 @@ public class NotLoadedProject implements IProject {
     }
 
     public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            ExternalLinked externalLinked) {
+            @Nullable ExternalLinked externalLinked) {
     }
 
     public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            ExternalLinked externalLinked, AllTranslations previousTranslations) throws OptimisticLockingFail {
+            @Nullable ExternalLinked externalLinked, AllTranslations previousTranslations) throws OptimisticLockingFail {
     }
 
-    public ITokenizer getSourceTokenizer() {
+    public @Nullable ITokenizer getSourceTokenizer() {
         return null;
     }
 
-    public ITokenizer getTargetTokenizer() {
+    public @Nullable ITokenizer getTargetTokenizer() {
         return null;
     }
 
@@ -168,7 +169,7 @@ public class NotLoadedProject implements IProject {
     }
 
     @Override
-    public String getTargetPathForSourceFile(String sourceFile) {
+    public @Nullable String getTargetPathForSourceFile(String sourceFile) {
         return null;
     }
 

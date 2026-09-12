@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -52,11 +54,11 @@ public final class SegmentProperties {
     public static final String ID = "id";
     public static final String PATH = "path";
 
-    public static boolean isEmpty(String[] props) {
+    public static boolean isEmpty(String@Nullable [] props) {
         return props == null || props.length == 0;
     }
 
-    public static String[] copy(String[] props) {
+    public static String[] copy(String@Nullable [] props) {
         return isEmpty(props) ? EMPTY_PROPS : Arrays.copyOf(props, props.length);
     }
 

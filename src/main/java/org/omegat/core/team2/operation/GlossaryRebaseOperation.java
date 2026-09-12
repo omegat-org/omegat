@@ -29,6 +29,7 @@
 
 package org.omegat.core.team2.operation;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
@@ -42,8 +43,8 @@ import java.util.List;
 
 public class GlossaryRebaseOperation implements IRebaseOperation {
     private final ProjectProperties config;
-    private List<GlossaryEntry> baseGlossaryEntries;
-    private List<GlossaryEntry> headGlossaryEntries;
+    private @Nullable List<GlossaryEntry> baseGlossaryEntries;
+    private @Nullable List<GlossaryEntry> headGlossaryEntries;
 
     public GlossaryRebaseOperation(ProjectProperties config) {
         this.config = config;
@@ -95,7 +96,7 @@ public class GlossaryRebaseOperation implements IRebaseOperation {
     }
 
     @Override
-    public void reload(final File file) {
+    public void reload(@Nullable File file) {
         Log.logDebug("Reloading glossary file {0}", file);
         RebaseUtils.notifyGlossaryManagerFileChanged(file);
     }

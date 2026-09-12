@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.core.threads;
 
+import org.jspecify.annotations.Nullable;
+
 /**
  * Represents the completion status of a task,
  * including success, cancellation, or failure.
@@ -51,9 +53,9 @@ public final class Completion {
     }
 
     private final Completion.Status status;
-    private final Throwable error;
+    private final @Nullable Throwable error;
 
-    private Completion(Status status, Throwable error) {
+    private Completion(Status status, @Nullable Throwable error) {
         this.status = status;
         this.error = error;
     }
@@ -89,7 +91,7 @@ public final class Completion {
      * @return the {@link Throwable} describing the cause of failure,
      * or null if the completion was successful or canceled
      */
-    public Throwable getCause() {
+    public @Nullable Throwable getCause() {
         return error;
     }
 

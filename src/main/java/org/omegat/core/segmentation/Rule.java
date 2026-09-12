@@ -97,7 +97,7 @@ public class Rule {
      * A regular expression which represents the text that appears before a
      * segment break.
      */
-    private Pattern beforebreak;
+    private @Nullable Pattern beforebreak;
 
     /**
      * Returns a regular expression which represents the text that appears
@@ -134,7 +134,7 @@ public class Rule {
      * A regular expression which represents the text that appears after a
      * segment break.
      */
-    private Pattern afterbreak;
+    private @Nullable Pattern afterbreak;
 
     /**
      * Returns a regular expression which represents the text that appears after

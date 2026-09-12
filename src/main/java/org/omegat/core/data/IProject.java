@@ -112,6 +112,7 @@ public interface IProject {
      *
      * @return project properties
      */
+    @Nullable
     ProjectProperties getProjectProperties();
 
     /**
@@ -129,11 +130,13 @@ public interface IProject {
     /**
      * Returns tokenizer for source language.
      */
+    @Nullable
     ITokenizer getSourceTokenizer();
 
     /**
      * Returns tokenizer for target language.
      */
+    @Nullable
     ITokenizer getTargetTokenizer();
 
     /**
@@ -165,7 +168,7 @@ public interface IProject {
      *            translation. It can't be null
      */
     void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked, AllTranslations previousTranslations)
+            TMXEntry.@Nullable ExternalLinked externalLinked, AllTranslations previousTranslations)
             throws OptimisticLockingFail;
 
     /**
@@ -183,6 +186,7 @@ public interface IProject {
     /**
      * Get statistics info.
      */
+    @Nullable
     StatisticsInfo getStatistics();
 
     /**
@@ -195,11 +199,13 @@ public interface IProject {
      *            source entry
      * @return translation
      */
+    @Nullable
     TMXEntry getTranslationInfo(SourceTextEntry ste);
 
     /**
      * Get default and alternative translations for optimistic locking.
      */
+    @Nullable
     AllTranslations getAllTranslations(SourceTextEntry ste);
 
     /**
@@ -254,6 +260,7 @@ public interface IProject {
      * @return The relative path (under the <code>target</code> directory) of the corresponding
      * target file, e.g. <code>Bundle_fr_FR.properties</code>
      */
+    @Nullable
     String getTargetPathForSourceFile(String sourceFile);
 
     /**

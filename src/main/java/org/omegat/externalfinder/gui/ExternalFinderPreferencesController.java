@@ -38,6 +38,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.externalfinder.item.ExternalFinderItem;
@@ -55,7 +56,7 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
     private final boolean isProjectSpecific;
     private final ExternalFinderConfiguration originalConfig;
 
-    private ExternalFinderPreferencesPanel panel;
+    private @Nullable ExternalFinderPreferencesPanel panel;
 
     public ExternalFinderPreferencesController() {
         this(false, ExternalFinder.getGlobalConfig());

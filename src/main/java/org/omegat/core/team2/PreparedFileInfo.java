@@ -26,6 +26,8 @@
 
 package org.omegat.core.team2;
 
+import org.jspecify.annotations.Nullable;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -35,13 +37,13 @@ import java.util.Objects;
  */
 public final class PreparedFileInfo {
     private final String path;
-    private final File fileBase;
-    private final File fileHead;
-    private final String versionBase;
-    private final String versionHead;
+    private final @Nullable File fileBase;
+    private final @Nullable File fileHead;
+    private final @Nullable String versionBase;
+    private final @Nullable String versionHead;
     private final boolean needToCommit;
-    private final String commitComment;
-    private final String charset;
+    private final @Nullable String commitComment;
+    private final @Nullable String charset;
 
     private PreparedFileInfo(Builder builder) {
         this.path = builder.path;
@@ -69,38 +71,38 @@ public final class PreparedFileInfo {
     public String getPath() {
         return path;
     }
-    public File getFileBase() {
+    public @Nullable File getFileBase() {
         return fileBase;
     }
-    public File getFileHead() {
+    public @Nullable File getFileHead() {
         return fileHead;
     }
-    public String getVersionBase() {
+    public @Nullable String getVersionBase() {
         return versionBase;
     }
-    public String getVersionHead() {
+    public @Nullable String getVersionHead() {
         return versionHead;
     }
     public boolean needToCommit() {
         return needToCommit;
     }
-    public String getCommitComment() {
+    public @Nullable String getCommitComment() {
         return commitComment;
     }
-    public String getCharset() {
+    public @Nullable String getCharset() {
         return charset;
     }
 
     // Builder for creating instances with validation
     public static class Builder {
         private final String path;
-        private File fileBase;
-        private File fileHead;
-        private String versionBase;
-        private String versionHead;
+        private @Nullable File fileBase;
+        private @Nullable File fileHead;
+        private @Nullable String versionBase;
+        private @Nullable String versionHead;
         private boolean needToCommit = false;
-        private String commitComment;
-        private String charset;
+        private @Nullable String commitComment;
+        private @Nullable String charset;
 
         public Builder(String path) {
             this.path = Objects.requireNonNull(path, "Path cannot be null");

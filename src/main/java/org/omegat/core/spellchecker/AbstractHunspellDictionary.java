@@ -38,18 +38,19 @@ import org.apache.commons.io.IOUtils;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.NIOFSDirectory;
+import org.jspecify.annotations.Nullable;
 import org.omegat.util.Log;
 
 public abstract class AbstractHunspellDictionary implements ISpellCheckerDictionary {
 
     private static final String DICT_EXT = ".dic";
     private static final String AFFIX_EXT = ".aff";
-    private InputStream affixInputStream;
-    private InputStream dicInputStream;
+    private @Nullable InputStream affixInputStream;
+    private @Nullable InputStream dicInputStream;
 
     protected abstract String[] getDictionaries();
 
-    protected String getDictionary(String language) {
+    protected @Nullable String getDictionary(String language) {
         return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(language)).findFirst()
                 .orElse(null);
     }
@@ -57,7 +58,7 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
     protected abstract InputStream getResourceAsStream(String resource);
 
     @Override
-    public Dictionary getHunspellDictionary(String language) {
+    public @Nullable Dictionary getHunspellDictionary(String language) {
         String target = getDictionary(language);
         if (target != null) {
             affixInputStream = getResourceAsStream(target + AFFIX_EXT);
@@ -75,7 +76,7 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
     }
 
     @Override
-    public Path installHunspellDictionary(Path dictionaryDir, String language) {
+    public @Nullable Path installHunspellDictionary(Path dictionaryDir, String language) {
         String target = getDictionary(language);
         if (target != null) {
             try {

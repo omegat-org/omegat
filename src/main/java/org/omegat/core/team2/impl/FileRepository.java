@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -48,8 +49,8 @@ import gen.core.project.RepositoryMapping;
 public class FileRepository implements IRemoteRepository2 {
     private static ILogger LOGGER;
 
-    private RepositoryDefinition config;
-    private File baseDirectory;
+    private @Nullable RepositoryDefinition config;
+    private @Nullable File baseDirectory;
 
     /**
      * Plugin loader.
@@ -73,12 +74,12 @@ public class FileRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String getFileVersion(String file) throws Exception {
+    public @Nullable String getFileVersion(String file) throws Exception {
         return null;
     }
 
     @Override
-    public void switchToVersion(String version) throws Exception {
+    public void switchToVersion(@Nullable String version) throws Exception {
         if (version != null) {
             throw new RuntimeException("Not supported");
         }
@@ -141,7 +142,7 @@ public class FileRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String commit(String[] onVersions, String comment) throws Exception {
+    public @Nullable String commit(@Nullable String[] onVersions, String comment) throws Exception {
         LOGGER.atDebug().log("Commit not supported for File repositories.");
 
         return null;

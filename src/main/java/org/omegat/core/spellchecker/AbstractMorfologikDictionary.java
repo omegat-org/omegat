@@ -29,23 +29,24 @@ import java.io.InputStream;
 import java.util.Arrays;
 
 import morfologik.stemming.Dictionary;
+import org.jspecify.annotations.Nullable;
 
 public abstract class AbstractMorfologikDictionary implements ISpellCheckerDictionary {
     private static final String DICT_EXT = ".dict";
     private static final String META_EXT = ".info";
 
-    private InputStream infoInputStream;
-    private InputStream dictInputStream;
+    private @Nullable InputStream infoInputStream;
+    private @Nullable InputStream dictInputStream;
 
     protected abstract String[] getDictionaries();
 
-    protected String getDictionary(String language) {
+    protected @Nullable String getDictionary(String language) {
         return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(language)).findFirst().orElse(null);
     }
     protected abstract InputStream getResourceAsStream(String resource);
 
     @Override
-    public morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
+    public morfologik.stemming.@Nullable Dictionary getMorfologikDictionary(String language) {
         String target = getDictionary(language);
         if (target != null) {
             infoInputStream = getResourceAsStream(target + META_EXT);

@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.util.StringUtil;
@@ -88,7 +89,7 @@ public class NearString {
      *            project name.
      */
     public NearString(EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom, boolean fuzzyMark, Scores scores,
-            byte[] nearData, String projName) {
+            byte@Nullable [] nearData, @Nullable String projName) {
         this(key, entry.getSourceText(), entry.getTranslationText(), comesFrom, fuzzyMark, scores, nearData,
                 projName, entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
                 entry.getChangeDate(), entry.getProperties());
@@ -130,8 +131,8 @@ public class NearString {
      */
     @Deprecated
     public NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
-            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore, byte[] nearData,
-            String projName, String creator, long creationDate, String changer, long changedDate,
+            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore, byte@Nullable [] nearData,
+            @Nullable String projName, String creator, long creationDate, String changer, long changedDate,
             List<TMXProp> props) {
         this(key, source, translation, comesFrom, fuzzyMark,
                 new Scores(nearScore, nearScoreNoStem, adjustedScore), nearData, projName, creator,
@@ -139,7 +140,7 @@ public class NearString {
     }
 
     private NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
-            boolean fuzzyMark, Scores scores, byte[] nearData, String projName, String creator,
+            boolean fuzzyMark, Scores scores, byte@Nullable [] nearData, @Nullable String projName, String creator,
             long creationDate, String changer, long changedDate, List<TMXProp> props) {
         this.key = key;
         this.source = source;
@@ -178,7 +179,7 @@ public class NearString {
      * @return NearString merged.
      */
     public static NearString merge(NearString ns, EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom,
-            boolean fuzzyMark, Scores scores, byte[] nearData, String projName) {
+                                   boolean fuzzyMark, Scores scores, byte@Nullable [] nearData, String projName) {
 
         List<String> projs = new ArrayList<>(List.of(ns.projs));
         List<Scores> mergedScores = new ArrayList<>(List.of(ns.scores));
@@ -244,7 +245,7 @@ public class NearString {
     public String[] projs;
 
     /** matching attributes of near strEntry */
-    public byte[] attr;
+    public byte@Nullable [] attr;
 
     public final List<TMXProp> props;
     public final String creator;

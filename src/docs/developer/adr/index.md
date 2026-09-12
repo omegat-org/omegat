@@ -21,6 +21,10 @@
 - 2026001 [Glossary Search and Sort Implementation](2026001.GlossarySearchAndSort.md)
 - 2026008 [Segment Sorting in the Editor](2026008.EditorSegmentSorting.md)
 
+### Matching
+
+- 2026010 [Value-Based Fuzzy Match Numbers](2026010.ValueBasedNumberMatching.md)
+
 ### Filters
 
 - 2025009 [Yaml Filter Specification](2025009.YAMLFilterSpecification.md) 

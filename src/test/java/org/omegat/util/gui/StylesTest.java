@@ -29,10 +29,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.Color;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.MissingResourceException;
 import java.util.Properties;
@@ -40,10 +42,13 @@ import java.util.Set;
 
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.StyleConstants;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class StylesTest {
@@ -209,5 +214,100 @@ public class StylesTest {
             assertNotNull("Dark scheme key " + key + " did not load as a color",
                     defaults.getColor((String) key));
         }
+    }
+
+    /**
+     * Match diff markers carry intrinsic style defaults: struck-through
+     * deleted, underlined inserted, active variants additionally bold.
+     */
+    @Test
+    public void testMatchMarkerIntrinsicStyleDefaults() {
+        assertEquals(EnumSet.of(Styles.TextStyle.BOLD, Styles.TextStyle.STRIKETHROUGH),
+                Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getDefaultTextStyle());
+        assertEquals(EnumSet.of(Styles.TextStyle.STRIKETHROUGH),
+                Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getDefaultTextStyle());
+        assertEquals(EnumSet.of(Styles.TextStyle.BOLD, Styles.TextStyle.UNDERLINE),
+                Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getDefaultTextStyle());
+        assertEquals(EnumSet.of(Styles.TextStyle.UNDERLINE),
+                Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getDefaultTextStyle());
+        assertTrue(Styles.EditorColor.COLOR_TRANSLATED.getDefaultTextStyle().isEmpty());
+    }
+
+    /** Only entries with wired call sites expose editable style flags. */
+    @Test
+    public void testTextStyleablePinnedToWiredCallSites() {
+        assertTrue(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.isTextStyleable());
+        assertTrue(Styles.EditorColor.COLOR_TRANSLATED.isTextStyleable());
+        // underline painter marks, no attribute-based call site yet
+        assertFalse(Styles.EditorColor.COLOR_TRANSTIPS.isTextStyleable());
+        assertFalse(Styles.EditorColor.COLOR_GLOSSARY_SOURCE.isTextStyleable());
+    }
+
+    /**
+     * Configured flags round-trip through preferences, reset back to
+     * intrinsic defaults.
+     */
+    @Test
+    public void testTextStyleRoundTripAndReset() {
+        Styles.EditorColor entry = Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE;
+        Set<Styles.TextStyle> original = EnumSet.noneOf(Styles.TextStyle.class);
+        original.addAll(entry.getTextStyle());
+        try {
+            entry.setTextStyle(EnumSet.of(Styles.TextStyle.ITALIC));
+            assertTrue(entry.is(Styles.TextStyle.ITALIC));
+            assertFalse(entry.is(Styles.TextStyle.STRIKETHROUGH));
+            // overrides store plain booleans, default-following flags the
+            // sentinel
+            assertEquals("true", Preferences.getPreferenceDefault(
+                    "COLOR_MATCHES_DEL_INACTIVE_TEXT_STYLE_ITALIC", null));
+            assertEquals("false", Preferences.getPreferenceDefault(
+                    "COLOR_MATCHES_DEL_INACTIVE_TEXT_STYLE_STRIKETHROUGH", null));
+            assertEquals("__DEFAULT__", Preferences.getPreferenceDefault(
+                    "COLOR_MATCHES_DEL_INACTIVE_TEXT_STYLE_BOLD", null));
+
+            entry.setTextStyle(entry.getDefaultTextStyle());
+            assertTrue(entry.is(Styles.TextStyle.STRIKETHROUGH));
+            assertFalse(entry.is(Styles.TextStyle.ITALIC));
+            assertEquals("__DEFAULT__", Preferences.getPreferenceDefault(
+                    "COLOR_MATCHES_DEL_INACTIVE_TEXT_STYLE_STRIKETHROUGH", null));
+        } finally {
+            entry.setTextStyle(original);
+        }
+    }
+
+    /**
+     * Overlay adds configured flags onto base attributes, leaves style-less
+     * entries untouched.
+     */
+    @Test
+    public void testOverlayTextStyleAppliesConfiguredFlags() {
+        AttributeSet base = Styles.createAttributeSet(Color.BLACK, null, null, null);
+        AttributeSet styled = Styles.overlayTextStyle(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE,
+                base);
+        assertTrue(StyleConstants.isUnderline(styled));
+        assertFalse(StyleConstants.isBold(styled));
+        assertEquals(Color.BLACK, StyleConstants.getForeground(styled));
+        assertSame("Entry without flags must return the base set unchanged", base,
+                Styles.overlayTextStyle(Styles.EditorColor.COLOR_TRANSLATED, base));
+        assertSame(base, Styles.overlayTextStyle(null, base));
+        // paint-time binding keys survive the overlay copy
+        AttributeSet bound = Styles.createBoundAttributeSet(Styles.EditorColor.COLOR_TRANSLATED, null,
+                false, false);
+        AttributeSet overlaid = Styles.overlayTextStyle(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE,
+                bound);
+        assertSame(Styles.EditorColor.COLOR_TRANSLATED,
+                overlaid.getAttribute(Styles.EDITOR_COLOR_FOREGROUND));
+    }
+
+    /** Attribute composition consumed by match pane. */
+    @Test
+    public void testCreateStyledAttributeSetCarriesColorAndFlags() {
+        AttributeSet attrs = Styles
+                .createStyledAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE);
+        assertEquals(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(),
+                StyleConstants.getForeground(attrs));
+        assertTrue(StyleConstants.isBold(attrs));
+        assertTrue(StyleConstants.isStrikeThrough(attrs));
+        assertFalse(StyleConstants.isUnderline(attrs));
     }
 }

@@ -27,7 +27,6 @@ package org.omegat.core.data;
 
 import java.util.List;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
@@ -37,7 +36,6 @@ import org.omegat.util.TMXProp;
  *
  * @author Thomas Cordonnier
  */
-@NullMarked
 public interface ITMXEntry extends ITranslationEntry {
 
     /**

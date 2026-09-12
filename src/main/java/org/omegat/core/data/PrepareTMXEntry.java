@@ -31,7 +31,6 @@ package org.omegat.core.data;
 import java.util.Collections;
 import java.util.List;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
@@ -46,7 +45,6 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-@NullMarked
 public class PrepareTMXEntry implements ITMXEntry {
     public String source;
     public @Nullable String translation;

@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
 import org.omegat.util.TMXProp;
 
 /**
@@ -48,7 +47,6 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-@NullMarked
 public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/

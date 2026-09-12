@@ -37,6 +37,9 @@ public class TestingParseCallback implements IParseCallback {
 
     private final List<SourceTextEntry> steList;
 
+    /** Entries are numbered sequentially, like in a real project. */
+    private int entryNum;
+
     public TestingParseCallback(final List<SourceTextEntry> ste) {
         this.steList = ste;
     }
@@ -44,8 +47,8 @@ public class TestingParseCallback implements IParseCallback {
     @Override
     public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
                                        String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
-        SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path), 1,
-                props, translation, protectedParts);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path),
+                ++entryNum, props, translation, protectedParts);
         ste.setSourceTranslationFuzzy(isFuzzy);
         steList.add(ste);
     }

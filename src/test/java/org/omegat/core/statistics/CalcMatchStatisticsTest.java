@@ -38,6 +38,9 @@ import org.omegat.core.threads.Completion;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
+
+import org.omegat.core.statistics.dso.MatchStatCounts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -156,14 +159,56 @@ public class CalcMatchStatisticsTest extends TestCore {
         assertEquals(2, allResult.size());
         String[][] result = allResult.get(0);
         assertNotNull(result);
-        assertEquals(3, result.length);
+        String[][] finalResult = allResult.get(1);
+        assertNotNull(finalResult);
+        // Fails loudly when the row set drifts away from the pinned constant.
+        assertEquals(MatchStatCounts.FINAL_TABLE_ROWS, finalResult.length);
+        // The intermediate table has the shape of the final one: same rows,
+        // every count already in its final row, similarity buckets still empty.
+        assertEquals(finalResult.length, result.length);
+        for (int i = 0; i < result.length; i++) {
+            assertEquals(finalResult[i][0], result[i][0]);
+        }
         // Repetitions: 11 90 509 583
         assertRowValues(result[0], "11", "90", "509", "583");
-        assertRowValues(result[1], "0", "0", "0", "0");
-        assertRowValues(result[2], "0", "0", "0", "0");
-        result = allResult.get(1);
-        assertNotNull(result);
-        assertStatistics(result, false);
+        // Exact match and all similarity buckets: still empty
+        for (int i = 1; i < result.length - 1; i++) {
+            assertRowValues(result[i], "0", "0", "0", "0");
+        }
+        // Total so far: the repetitions
+        assertRowValues(result[result.length - 1], "11", "90", "509", "583");
+        assertStatistics(finalResult, false);
+    }
+
+    @Test
+    public void testEntryRowIndexes() {
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer();
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter,
+                testingStatsConsumer);
+        CancellationToken ctoken = new CancellationToken();
+        calcMatchStatistics.run(ctoken);
+        Completion completion = testingStatsConsumer.completion().join();
+        assertTrue(completion.isSuccess());
+
+        Map<Integer, Integer> rows = testingStatsConsumer.getEntryRowIndexes();
+        assertNotNull(rows);
+        // The mapping arrives after the intermediate but before the final
+        // table; the consumer wires filter buttons on that contract.
+        assertEquals(1, testingStatsConsumer.getTablesBeforeEntryRowIndexes());
+        // Every entry is assigned to exactly one category.
+        assertEquals(108, rows.size());
+        // Category sizes match the segment column of the statistics table.
+        assertCategoryCount(rows, MatchStatCounts.ROW_REPETITIONS, 11);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(Statistics.PERCENT_EXACT_MATCH), 0);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(95), 84);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(85), 0);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(75), 3);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(50), 4);
+        assertCategoryCount(rows, MatchStatCounts.getRowByPercent(0), 6);
+    }
+
+    private void assertCategoryCount(Map<Integer, Integer> rows, int categoryRow, long expected) {
+        assertEquals(expected, rows.values().stream().filter(row -> row == categoryRow).count());
     }
 
     private void assertStatistics(String[][] result, boolean perFile) {

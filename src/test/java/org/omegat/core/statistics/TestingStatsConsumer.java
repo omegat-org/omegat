@@ -26,6 +26,7 @@ package org.omegat.core.statistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.omegat.core.threads.Completion;
 
 import java.util.concurrent.CompletableFuture;
@@ -54,11 +55,32 @@ import java.util.concurrent.CompletableFuture;
 public class TestingStatsConsumer implements IStatsConsumer {
     private final List<String[][]> result = new ArrayList<>();
     private final StringBuilder buffer = new StringBuilder();
+    private Map<Integer, Integer> entryRowIndexes;
+    private int tablesBeforeEntryRowIndexes = -1;
 
     private final CompletableFuture<Completion> completion = new CompletableFuture<>();
 
     public List<String[][]> getTable() {
         return result;
+    }
+
+    public Map<Integer, Integer> getEntryRowIndexes() {
+        return entryRowIndexes;
+    }
+
+    /**
+     * Number of tables delivered before {@code setEntryRowIndexes} was called,
+     * -1 when it never was. Consumers rely on the mapping arriving before the
+     * final table.
+     */
+    public int getTablesBeforeEntryRowIndexes() {
+        return tablesBeforeEntryRowIndexes;
+    }
+
+    @Override
+    public void setEntryRowIndexes(Map<Integer, Integer> entryRowIndexes) {
+        this.entryRowIndexes = entryRowIndexes;
+        tablesBeforeEntryRowIndexes = result.size();
     }
 
     public String getTextData() {

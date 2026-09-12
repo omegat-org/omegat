@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,6 +40,24 @@ import java.util.stream.Stream;
  */
 public class MatchStatCounts {
     private static final int BASE_FOR_PERCENTS = 2;
+
+    /**
+     * Row index of the repetitions bucket (in per-file mode: repetitions within
+     * this file).
+     */
+    public static final int ROW_REPETITIONS = 0;
+
+    /**
+     * Number of rows in the total match statistics table, including the total
+     * row. Must be kept in sync with the row labels of
+     * {@link org.omegat.core.statistics.CalcMatchStatistics} (all categories
+     * plus the total row; the slot unused in total mode is skipped). Used by
+     * org.omegat.gui.stat.MatchStatisticsPanel to recognize the shape of the
+     * total table (the per-file table has one row more); whether a scan
+     * completed is decided by the entry mapping, not by this count.
+     */
+    public static final int FINAL_TABLE_ROWS = 8;
+
     private final StatCount[] counts;
 
     public MatchStatCounts() {
@@ -90,7 +109,7 @@ public class MatchStatCounts {
      *            match percent
      * @return row index
      */
-    private int getRowByPercent(int percent) {
+    public static int getRowByPercent(int percent) {
         if (percent == Statistics.PERCENT_EXACT_MATCH) {
             // exact match
             return BASE_FOR_PERCENTS;

@@ -301,20 +301,29 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         List<String> sourceNumbers = Stream.of(sourceTok.tokenizeVerbatimToStrings(source))
                 .filter(MatchesTextArea::isNumber).collect(Collectors.toList());
 
+        // Compare and map numbers on their width-normalized form so that
+        // full-width (ASCII) digits (U+FF10-U+FF19, common in Japanese) are
+        // treated as equivalent to their half-width counterparts. See feature
+        // request #1193.
+        List<String> normSourceMatchNumbers = normalizeDigitWidth(sourceMatchNumbers);
+        List<String> normTargetMatchNumbers = normalizeDigitWidth(targetMatchNumbers);
+
         if (sourceMatchNumbers.size() != sourceNumbers.size()
                 || sourceMatchNumbers.size() != targetMatchNumbers.size()
-                || !new HashSet<>(sourceMatchNumbers).equals(new HashSet<>(targetMatchNumbers))) {
+                || !new HashSet<>(normSourceMatchNumbers).equals(new HashSet<>(normTargetMatchNumbers))) {
             return targetMatch;
         }
 
-        Map<Integer, Integer> locationMap = mapIndices(sourceMatchNumbers, targetMatchNumbers);
+        Map<Integer, Integer> locationMap = mapIndices(normSourceMatchNumbers, normTargetMatchNumbers);
 
-        // Substitute new numbers in the target match
+        // Substitute new numbers in the target match. The inserted number
+        // adopts the digit width of the target token it replaces, so the
+        // target match's digit convention is preserved.
         StringBuilder result = new StringBuilder();
         int i = 0;
         for (String tok : targetTokens) {
             if (isNumber(tok)) {
-                result.append(sourceNumbers.get(locationMap.get(i)));
+                result.append(toDigitWidthOf(sourceNumbers.get(locationMap.get(i)), tok));
                 i++;
             } else {
                 result.append(tok);
@@ -322,6 +331,45 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         return result.toString();
+    }
+
+    /**
+     * Return a copy of the given number strings with every digit normalized to
+     * half-width, so that full-width and half-width digits compare equal.
+     * Feature request #1193.
+     */
+    private static List<String> normalizeDigitWidth(List<String> numbers) {
+        return numbers.stream().map(StringUtil::normalizeWidth).collect(Collectors.toList());
+    }
+
+    /**
+     * Render the given number with the digit width used by the template token:
+     * full-width when the template contains full-width digits, half-width
+     * otherwise. This makes a substituted number follow the target match's
+     * digit convention. Feature request #1193.
+     */
+    private static String toDigitWidthOf(String number, String template) {
+        return hasFullwidthDigit(template) ? toFullwidthDigits(number)
+                : StringUtil.normalizeWidth(number);
+    }
+
+    private static boolean hasFullwidthDigit(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c >= '０' && c <= '９') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String toFullwidthDigits(String number) {
+        StringBuilder sb = new StringBuilder(number.length());
+        for (int i = 0; i < number.length(); i++) {
+            char c = number.charAt(i);
+            sb.append(c >= '0' && c <= '9' ? (char) (c - '0' + 0xFF10) : c);
+        }
+        return sb.toString();
     }
 
     /**

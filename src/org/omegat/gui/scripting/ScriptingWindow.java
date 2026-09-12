@@ -987,7 +987,7 @@ public class ScriptingWindow {
             try {
                 Help.showJavadoc();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(),
+                JOptionPane.showMessageDialog(frame, StringUtil.describeException(ex),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 Log.log(ex);
             }

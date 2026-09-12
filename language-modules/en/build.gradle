@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-en-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/opennlp-*.jar'])
+        implementation providedModuleLib('language-en')
+        runtimeOnly providedModuleLib('opennlp')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

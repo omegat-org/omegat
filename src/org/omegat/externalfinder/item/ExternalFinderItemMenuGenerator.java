@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import org.omegat.util.StringUtil;
 import org.omegat.core.Core;
 import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
@@ -123,7 +124,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                     } catch (Exception ex) {
                         Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE,
                                 null, ex);
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex.getLocalizedMessage(),
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), StringUtil.describeException(ex),
                                 OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -147,7 +148,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                     } catch (Exception ex) {
                         Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE,
                                 null, ex);
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex.getLocalizedMessage(),
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), StringUtil.describeException(ex),
                                 OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
                 }

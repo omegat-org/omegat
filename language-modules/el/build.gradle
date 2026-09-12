@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-el-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/morphology-el-*.jar')
+        implementation providedModuleLib('language-el')
+        runtimeOnly providedModuleLib('morphology-el')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

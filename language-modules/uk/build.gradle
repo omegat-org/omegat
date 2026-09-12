@@ -7,9 +7,8 @@ dependencies {
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/lucene-analyzers-common-*.jar'])
-        implementation fileTree(dir: providedCoreLibsDir,
-                includes: ['**/language-uk-*.jar'])
-        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/morfologik-ukrainian-*.jar')
+        implementation providedModuleLib('language-uk')
+        runtimeOnly providedModuleLib('morfologik-ukrainian')
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core)

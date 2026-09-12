@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.html.HTMLDocument;
 
+import org.omegat.util.StringUtil;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.util.OStrings;
@@ -59,7 +60,7 @@ public class PluginDetailsPane extends EntryInfoPane<PluginInformation> {
                 try {
                     DesktopWrapper.browse(URI.create(e.getURL().toString()));
                 } catch (Exception ex) {
-                    JOptionPane.showConfirmDialog(this, ex.getLocalizedMessage(),
+                    JOptionPane.showConfirmDialog(this, StringUtil.describeException(ex),
                             OStrings.getString("ERROR_TITLE"), JOptionPane.DEFAULT_OPTION,
                             JOptionPane.ERROR_MESSAGE);
                 }

@@ -47,6 +47,11 @@ public final class SegmentProperties {
     public static final String COMMENT = "comment";
     public static final String REFERENCE = "reference";
 
+    // EntryKey-derived keys shown in the segment properties pane
+    public static final String FILE = "file";
+    public static final String ID = "id";
+    public static final String PATH = "path";
+
     public static boolean isEmpty(String[] props) {
         return props == null || props.length == 0;
     }

@@ -27,6 +27,7 @@
 package org.omegat.core.data;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -71,11 +72,11 @@ public class NotLoadedProject implements IProject {
     }
 
     public List<SourceTextEntry> getAllEntries() {
-        return null;
+        return Collections.emptyList();
     }
 
     public List<StringEntry> getUniqueEntries() {
-        return null;
+        return Collections.emptyList();
     }
 
     public TMXEntry getTranslationInfo(SourceTextEntry ste) {
@@ -104,15 +105,15 @@ public class NotLoadedProject implements IProject {
     }
 
     public Map<String, ExternalTMX> getTransMemories() {
-        return null;
+        return Collections.emptyMap();
     }
 
     public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
-        return null;
+        return Collections.emptyMap();
     }
 
     public List<FileInfo> getProjectFiles() {
-        return null;
+        return Collections.emptyList();
     }
 
     public ProjectProperties getProjectProperties() {
@@ -160,7 +161,7 @@ public class NotLoadedProject implements IProject {
     }
 
     public List<String> getSourceFilesOrder() {
-        return null;
+        return Collections.emptyList();
     }
 
     public void setSourceFilesOrder(List<String> filesList) {

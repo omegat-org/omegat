@@ -43,6 +43,7 @@ import javax.xml.stream.XMLInputFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -90,8 +91,12 @@ public final class ProjectFileStorage {
         // https://sourceforge.net/p/omegat/bugs/1170/
         xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
+        // Tolerate unknown elements: a project file written by a newer
+        // OmegaT with an extended schema must stay readable, otherwise one
+        // team member on a newer version locks the whole team out.
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
-                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
+                .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
         mapper.registerModule(new JakartaXmlBindAnnotationModule());
         SimpleModule module = new SimpleModule();
         TypeFactory typeFactory = mapper.getTypeFactory();

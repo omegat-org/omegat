@@ -49,7 +49,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.Document;
@@ -87,6 +86,171 @@ import org.omegat.util.gui.UIDesignManager;
  */
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
+
+    @Override
+    public void repaint(long tm, int x, int y, int width, int height) {
+        // Every repaint overload funnels through here, on the caller's
+        // stack: the probe names the code scheduling full viewport paints.
+        // The guard keeps this hottest funnel free of any probe cost (and
+        // of the getVisibleRect call) while the stats are off.
+        if (EditorRenderStats.ENABLED) {
+            EditorRenderStats.fullRepaintRequested(height, getVisibleRect().height);
+        }
+        super.repaint(tm, x, y, width, height);
+    }
+
+    /**
+     * Paints the alternating segment backgrounds of the metadata gutter
+     * beneath every highlight and the text: the highlighter layer sits
+     * between the background fill of the UI delegate and the text, so the
+     * editor stays opaque (keeping blit scrolling and the small dirty
+     * regions). Living in the class, the stripes survive the
+     * removeAllHighlights calls of the marker machinery.
+     */
+    private static final class ZebraHighlighter extends javax.swing.text.DefaultHighlighter {
+        private final EditorTextArea3 editor;
+
+        ZebraHighlighter(EditorTextArea3 editor) {
+            this.editor = editor;
+        }
+
+        @Override
+        public void paint(java.awt.Graphics g) {
+            SegmentMetadataGutter.paintZebraStripes(editor, g);
+            super.paint(g);
+        }
+    }
+
+    @Override
+    protected void paintComponent(java.awt.Graphics g) {
+        long renderToken = EditorRenderStats.begin();
+        super.paintComponent(g);
+        // Grid lines of the segment metadata gutter span the whole editor.
+        SegmentMetadataGutter.paintSegmentSeparators(this, g);
+        EditorRenderStats.end("editor.paint", renderToken);
+        if (EditorRenderStats.ENABLED) {
+            // A clip as tall as the viewport is a full repaint of the text;
+            // typing a character should only need the changed lines.
+            EditorRenderStats.count(g.getClipBounds().height >= getVisibleRect().height
+                    ? "editorFullClips" : "editorSmallClips", 1);
+            EditorRenderStats.paintDone();
+        }
+    }
+
+    /** The section view of the document, which owns the columns layout. */
+    @Nullable SegmentColumnsView columnsView() {
+        if (getUI() == null) {
+            return null;
+        }
+        View root = getUI().getRootView(this);
+        for (int i = 0; root != null && i < root.getViewCount(); i++) {
+            if (root.getView(i) instanceof SegmentColumnsView) {
+                return (SegmentColumnsView) root.getView(i);
+            }
+        }
+        return null;
+    }
+
+    /** True while a drag of the text cell boundary is in progress. */
+    private boolean draggingCellBoundary;
+
+    /** Width of the left text cell when the boundary drag began. */
+    private int cellDragOriginalWidth;
+
+    /** When the last drag tick laid the text out, for the throttle. */
+    private long lastCellDragLayout;
+
+    /**
+     * A drag tick lays the text out at most this often: every tick rebreaks
+     * all inactive paragraphs, which must not pile up per mouse event.
+     */
+    private static final int CELL_DRAG_LAYOUT_INTERVAL = 60;
+
+    /** The boundary between the text cells is draggable in this margin. */
+    private boolean nearCellBoundary(int x) {
+        SegmentColumnsView view = columnsView();
+        int boundary = view == null ? -1 : view.boundaryX();
+        // The view x and the component x differ by the text margin.
+        return boundary >= 0 && Math.abs(x - boundary - getInsets().left) <= 4;
+    }
+
+    @Override
+    protected void processMouseEvent(MouseEvent e) {
+        // The cell boundary drag must win over the caret, so it intercepts
+        // the events before the text component sees them.
+        if (e.getID() == MouseEvent.MOUSE_PRESSED && nearCellBoundary(e.getX())
+                && javax.swing.SwingUtilities.isLeftMouseButton(e) && !e.isPopupTrigger()) {
+            draggingCellBoundary = true;
+            SegmentColumnsView view = columnsView();
+            cellDragOriginalWidth = view == null ? 0 : view.currentLeftCellWidth();
+            e.consume();
+            return;
+        }
+        if (e.getID() == MouseEvent.MOUSE_RELEASED && draggingCellBoundary) {
+            draggingCellBoundary = false;
+            SegmentMetadataGutter.hideDragHint();
+            // The throttle may have skipped the last ticks: lay the final
+            // widths out now.
+            relayoutCells();
+            e.consume();
+            return;
+        }
+        super.processMouseEvent(e);
+    }
+
+    /** Lays the text cells out again after a boundary change. */
+    private void relayoutCells() {
+        SegmentColumnsView view = columnsView();
+        if (view != null) {
+            // The cached layout must go: the editor width is unchanged,
+            // only the cell shares moved.
+            view.relayout();
+            revalidate();
+            repaint();
+        }
+        SegmentMetadataConfigDialog.refreshOpenDialog();
+    }
+
+    @Override
+    protected void processMouseMotionEvent(MouseEvent e) {
+        if (e.getID() == MouseEvent.MOUSE_DRAGGED && draggingCellBoundary) {
+            SegmentColumnsView view = columnsView();
+            if (view != null) {
+                int viewX = e.getX() - getInsets().left;
+                long now = System.currentTimeMillis();
+                int newWidth;
+                if (now - lastCellDragLayout >= CELL_DRAG_LAYOUT_INTERVAL) {
+                    lastCellDragLayout = now;
+                    int[] width = { -1 };
+                    // The line nearest the cursor stays fixed while resizing.
+                    SegmentMetadataGutter.keepLineAnchored(this, e.getY(), () -> {
+                        width[0] = view.dragBoundaryTo(viewX);
+                        relayoutCells();
+                    });
+                    newWidth = width[0];
+                } else {
+                    // Between the layout ticks only the preference and the
+                    // hint follow the mouse.
+                    newWidth = view.dragBoundaryTo(viewX);
+                }
+                if (newWidth >= 0) {
+                    SegmentMetadataGutter.showDragHint(e, SegmentMetadataGutter.dragHintText(
+                            SegmentColumnsView.leftCell().getLabel(), cellDragOriginalWidth,
+                            newWidth));
+                }
+            }
+            e.consume();
+            return;
+        }
+        if (e.getID() == MouseEvent.MOUSE_MOVED
+                && !SegmentMetadataConfigDialog.isLayoutApplying()) {
+            // While a layout change renders, the wait cursor stays.
+            setCursor(java.awt.Cursor.getPredefinedCursor(
+                    nearCellBoundary(e.getX()) ? java.awt.Cursor.E_RESIZE_CURSOR
+                            : java.awt.Cursor.TEXT_CURSOR));
+        }
+        super.processMouseMotionEvent(e);
+    }
 
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorContextMenu");
@@ -153,6 +317,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
+        setHighlighter(new ZebraHighlighter(this));
         setEditorKit(new StyledEditorKit() {
             @Override
             public ViewFactory getViewFactory() {
@@ -897,7 +1062,7 @@ public class EditorTextArea3 extends JEditorPane {
                 } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
                     return new ViewParagraph(elem);
                 } else if (kind.equals(AbstractDocument.SectionElementName)) {
-                    return new BoxView(elem, View.Y_AXIS);
+                    return new SegmentColumnsView(elem);
                 } else if (kind.equals(StyleConstants.ComponentElementName)) {
                     return new ComponentView(elem);
                 } else if (kind.equals(StyleConstants.IconElementName)) {

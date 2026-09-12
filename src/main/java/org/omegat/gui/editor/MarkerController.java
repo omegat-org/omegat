@@ -6,6 +6,7 @@
  Copyright (C) 2010-2013 Alex Buloichik
                2014 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -147,6 +148,7 @@ public class MarkerController {
         }
 
         highlighter.removeAllHighlights();
+        ec.metadataGutterMarksChanged();
     }
 
     /**
@@ -187,6 +189,9 @@ public class MarkerController {
             }
             remove(sb, markerIndex);
         }
+        // The removal must reach the gutter even when the recalculation
+        // yields no marks and thus never triggers a marksOutput.
+        ec.metadataGutterMarksChanged();
         markerThreads[markerIndex].add(entryBuilders);
     }
 
@@ -214,6 +219,9 @@ public class MarkerController {
             }
         }
         marksOutput(evs);
+        // Not left to marksOutput: it returns early when every marker came
+        // back empty, while the removals above still have to reach the gutter.
+        ec.metadataGutterMarksChanged();
     }
 
     /**
@@ -327,6 +335,7 @@ public class MarkerController {
         } finally {
             doc.setTrustedChangesInProgress(false);
         }
+        ec.metadataGutterMarksChanged();
     }
 
     /**

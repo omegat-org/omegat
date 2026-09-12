@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2025 Hiroshi Miura
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -50,7 +51,11 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
+import javax.swing.JComponent;
+import javax.swing.RepaintManager;
+import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import java.awt.EventQueue;
@@ -69,6 +74,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -158,6 +164,55 @@ public class EditorControllerTest extends TestCore {
         fireCaretEvent(editorController.editor, 0);
         assertEquals(31, editorController.editor.getOmDocument().getTranslationEnd());
         assertEquals(31, editorController.editor.getOmDocument().getTranslationStart());
+    }
+
+    /**
+     * Marker highlights live in the editor's highlighter, but the metadata
+     * gutter mirrors them in its COLOR column: a marker change must repaint
+     * the gutter, and only while that column is enabled.
+     */
+    @Test
+    public void testMarkerChangeRepaintsGutterColorColumn() throws Exception {
+        Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER, true);
+        Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER_COLOR, true);
+        GutterRepaintProbe probe = new GutterRepaintProbe(editorController.getMetadataGutter());
+        RepaintManager original = RepaintManager.currentManager(editorController.editor);
+        RepaintManager.setCurrentManager(probe);
+        try {
+            SwingUtilities.invokeAndWait(() -> editorController.markerController.removeAll());
+            assertTrue("A marker removal must repaint the metadata gutter", probe.gutterRepainted);
+
+            probe.gutterRepainted = false;
+            Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER_COLOR, false);
+            SwingUtilities.invokeAndWait(() -> editorController.markerController.removeAll());
+            assertFalse("Without the COLOR column no gutter repaint is due", probe.gutterRepainted);
+        } finally {
+            RepaintManager.setCurrentManager(original);
+            Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER_COLOR, false);
+            Preferences.setPreference(Preferences.EDITOR_METADATA_GUTTER, false);
+        }
+    }
+
+    /**
+     * Records whether a repaint reached the given metadata gutter. Matched by
+     * instance: gutters of earlier tests stay registered on global events and
+     * their late repaints must not leak into this probe.
+     */
+    private static final class GutterRepaintProbe extends RepaintManager {
+        private final SegmentMetadataGutter gutter;
+        volatile boolean gutterRepainted;
+
+        GutterRepaintProbe(SegmentMetadataGutter gutter) {
+            this.gutter = gutter;
+        }
+
+        @Override
+        public void addDirtyRegion(JComponent c, int x, int y, int w, int h) {
+            if (c == gutter) {
+                gutterRepainted = true;
+            }
+            super.addDirtyRegion(c, x, y, w, h);
+        }
     }
 
     private void fireLoadProjectEvent() {

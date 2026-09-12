@@ -239,26 +239,64 @@ public class Document3 extends DefaultStyledDocument {
      *            false - left alignment, true - right alignment
      */
     protected void setAlignment(int beginOffset, int endOffset, boolean isRightAlignment) {
+        setAlignmentValue(beginOffset, endOffset,
+                isRightAlignment ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
+    }
+
+    /** Set a specific paragraph alignment, e.g. the user-chosen centering. */
+    protected void setAlignmentValue(int beginOffset, int endOffset, int alignment) {
         try {
             writeLock();
 
             DefaultDocumentEvent changes = new DefaultDocumentEvent(beginOffset, endOffset - beginOffset,
                     DocumentEvent.EventType.CHANGE);
 
-            Element root = getDefaultRootElement();
-            int parBeg = root.getElementIndex(beginOffset);
-            int parEnd = root.getElementIndex(endOffset - 1);
-            for (int par = parBeg; par <= parEnd; par++) {
-                Element el = root.getElement(par);
-                MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
-                attr.addAttribute(StyleConstants.Alignment,
-                        isRightAlignment ? StyleConstants.ALIGN_RIGHT : StyleConstants.ALIGN_LEFT);
-            }
+            applyAlignmentAttributes(beginOffset, endOffset, alignment);
 
             changes.end();
             fireChangedUpdate(changes);
         } finally {
             writeUnlock();
+        }
+    }
+
+    /**
+     * Set a paragraph alignment without firing a change event. For batch
+     * passes over the whole document: one event per part lets the view
+     * updates pile up, so the batch fires a single document-wide event
+     * through {@link #fireAlignmentBatchDone()} at its end.
+     */
+    protected void applyAlignmentValue(int beginOffset, int endOffset, int alignment) {
+        try {
+            writeLock();
+            applyAlignmentAttributes(beginOffset, endOffset, alignment);
+        } finally {
+            writeUnlock();
+        }
+    }
+
+    /** The one document-wide change event closing a quiet alignment batch. */
+    protected void fireAlignmentBatchDone() {
+        try {
+            writeLock();
+            DefaultDocumentEvent changes = new DefaultDocumentEvent(0, getLength(),
+                    DocumentEvent.EventType.CHANGE);
+            changes.end();
+            fireChangedUpdate(changes);
+        } finally {
+            writeUnlock();
+        }
+    }
+
+    private void applyAlignmentAttributes(int beginOffset, int endOffset, int alignment) {
+        Element root = getDefaultRootElement();
+        int parBeg = root.getElementIndex(beginOffset);
+        // An empty part still owns the paragraph at its begin offset.
+        int parEnd = root.getElementIndex(Math.max(beginOffset, endOffset - 1));
+        for (int par = parBeg; par <= parEnd; par++) {
+            Element el = root.getElement(par);
+            MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
+            attr.addAttribute(StyleConstants.Alignment, alignment);
         }
     }
 

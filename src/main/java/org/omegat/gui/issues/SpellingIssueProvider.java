@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,6 +41,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -68,7 +70,9 @@ class SpellingIssueProvider implements IIssueProvider {
 
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        List<Token> misspelled = Core.getSpellChecker().getMisspelledTokens(tmxEntry.translation);
+        List<Token> misspelled = SpellCheckerMarker.filterProtectedParts(
+                Core.getSpellChecker().getMisspelledTokens(tmxEntry.translation), sourceEntry,
+                tmxEntry.translation);
         return misspelled.isEmpty() ? Collections.emptyList()
                 : List.of(new SpellingIssue(sourceEntry, tmxEntry, misspelled));
     }

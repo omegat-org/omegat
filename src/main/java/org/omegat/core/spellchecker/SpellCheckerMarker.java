@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2026 Stephan Pakebusch
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,10 +33,12 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -61,12 +64,46 @@ public class SpellCheckerMarker implements IMarker {
         // without restarting the application
         HighlightPainter highlightPainter = new UnderlineFactory.WaveUnderline(
                 Styles.EditorColor.COLOR_SPELLCHECK.getColor());
-        return Core.getSpellChecker().getMisspelledTokens(translationText).stream().map(tok -> {
+        List<Token> misspelled = filterProtectedParts(
+                Core.getSpellChecker().getMisspelledTokens(translationText), ste, translationText);
+        return misspelled.stream().map(tok -> {
             int st = tok.getOffset();
             int en = st + tok.getLength();
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
             m.painter = highlightPainter;
             return m;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * Drop misspelled tokens lying entirely inside an occurrence of one of
+     * the entry's protected parts in the translation text. Placeholder
+     * syntax is not prose the translator can fix, so words inside it (for
+     * example the "ld" inside "%1$ld") get no spelling marks. Tokens
+     * reaching beyond a single occurrence are kept: they may point at a
+     * real problem around it.
+     *
+     * @param tokens
+     *            misspelled tokens whose offsets refer to translationText
+     * @param ste
+     *            source entry providing the protected parts; may be null,
+     *            in which case nothing is filtered
+     * @param translationText
+     *            the text that was checked
+     * @return the tokens without those inside protected parts
+     */
+    public static List<Token> filterProtectedParts(List<Token> tokens, @Nullable SourceTextEntry ste,
+            String translationText) {
+        if (tokens.isEmpty() || ste == null || ste.getProtectedParts().length == 0) {
+            return tokens;
+        }
+        List<int[]> occurrences = ProtectedPart.occurrencesIn(translationText, ste.getProtectedParts());
+        if (occurrences.isEmpty()) {
+            return tokens;
+        }
+        return tokens.stream()
+                .filter(t -> occurrences.stream()
+                        .noneMatch(o -> t.getOffset() >= o[0] && t.getOffset() + t.getLength() <= o[1]))
+                .collect(Collectors.toList());
     }
 }

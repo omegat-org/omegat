@@ -63,8 +63,11 @@ public class LanguageToolIssueProvider implements IIssueProvider {
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
         ILanguageToolBridge bridge = LanguageToolWrapper.getBridge();
         if (bridge != null) {
-            return bridge.getCheckResults(sourceEntry.getSrcText(), tmxEntry.translation).stream()
-                    .map(match -> new LanguageToolIssue(sourceEntry, tmxEntry.translation, match))
+            return LanguageToolWrapper
+                    .filterProtectedParts(
+                            bridge.getCheckResults(sourceEntry.getSrcText(), tmxEntry.translation),
+                            sourceEntry, tmxEntry.translation)
+                    .stream().map(match -> new LanguageToolIssue(sourceEntry, tmxEntry.translation, match))
                     .collect(Collectors.toList());
         } else {
             return Collections.emptyList();

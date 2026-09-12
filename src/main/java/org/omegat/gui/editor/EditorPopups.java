@@ -59,6 +59,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -136,6 +137,12 @@ public final class EditorPopups {
             }
 
             if (tok == null) {
+                return;
+            }
+
+            if (isInsideProtectedPart(tok, sb.getSourceTextEntry(), translation)) {
+                // Placeholder syntax is not prose the translator can fix, so
+                // no suggestions and especially no learn/ignore for it.
                 return;
             }
 
@@ -221,6 +228,16 @@ public final class EditorPopups {
             }
 
             ec.remarkOneMarker(SpellCheckerMarker.class.getName());
+        }
+
+        /**
+         * True when the clicked token lies entirely inside an occurrence of
+         * one of the entry's protected parts, by the same rule the marker
+         * filters use.
+         */
+        static boolean isInsideProtectedPart(Token tok, SourceTextEntry ste, String translation) {
+            return SpellCheckerMarker.filterProtectedParts(Collections.singletonList(tok), ste, translation)
+                    .isEmpty();
         }
     }
 

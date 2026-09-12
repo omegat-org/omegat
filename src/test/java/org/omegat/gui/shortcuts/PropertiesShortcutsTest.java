@@ -263,4 +263,91 @@ public class PropertiesShortcutsTest {
         PropertiesShortcuts props = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
         assertEquals(shortcuts.getData(), props.getData());
     }
+
+    @Test
+    public void testCatalogAndModificationState() {
+        assertTrue(shortcuts.getKeys().containsAll(
+                java.util.List.of(TEST_SAVE, TEST_CUT, TEST_DELETE, TEST_USER_1)));
+        assertFalse(shortcuts.getKeys().contains(OUT_OF_LIST));
+
+        // TEST_DELETE is overridden to empty by the user file, TEST_SAVE is
+        // at its bundled default
+        assertTrue(shortcuts.isModified(TEST_DELETE));
+        assertEquals("", shortcuts.getShortcutValue(TEST_DELETE));
+        assertFalse(shortcuts.isModified(TEST_SAVE));
+        assertEquals(shortcuts.getDefaultValue(TEST_SAVE), shortcuts.getShortcutValue(TEST_SAVE));
+
+        // setting a shortcut back to its default removes the override, even
+        // though the canonical format differs from the file syntax
+        shortcuts.setShortcut(TEST_DELETE, CTRL_D);
+        assertFalse(shortcuts.isModified(TEST_DELETE));
+        shortcuts.setShortcut(TEST_SAVE, CTRL_S);
+        assertFalse(shortcuts.isModified(TEST_SAVE));
+        shortcuts.setShortcut(TEST_SAVE, CTRL_P);
+        assertTrue(shortcuts.isModified(TEST_SAVE));
+        assertEquals(CTRL_P, shortcuts.getKeyStroke(TEST_SAVE));
+        shortcuts.clearUserOverride(TEST_SAVE);
+        assertFalse(shortcuts.isModified(TEST_SAVE));
+        assertEquals(CTRL_S, shortcuts.getKeyStroke(TEST_SAVE));
+
+        // null unbinds explicitly
+        shortcuts.setShortcut(TEST_CUT, null);
+        assertNull(shortcuts.getKeyStroke(TEST_CUT));
+        assertEquals("", shortcuts.getShortcutValue(TEST_CUT));
+    }
+
+    @Test
+    public void testSaveWritesOnlyOverridesAndReloadRestores() throws Exception {
+        PropertiesShortcuts props = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
+        // The save target is the platform-specific user file, which on macOS
+        // shadows the plain one on the next load.
+        File savedFile = new File(StaticUtils.getConfigDir(),
+                org.omegat.util.Platform.isMacOSX() ? "test.mac.properties" : USER_FILE_NAME);
+        boolean[] notified = { false };
+        Runnable listener = () -> notified[0] = true;
+        props.addChangeListener(listener);
+        try {
+            props.setShortcut(TEST_SAVE, CTRL_P);
+            props.save();
+            // listeners are notified on the EDT
+            javax.swing.SwingUtilities.invokeAndWait(() -> {
+            });
+            assertTrue("save must notify the change listeners", notified[0]);
+
+            java.util.Properties written = new java.util.Properties();
+            try (InputStream in = new java.io.FileInputStream(savedFile)) {
+                written.load(in);
+            }
+            assertEquals("only the overrides may be written",
+                    java.util.Set.of(TEST_SAVE, TEST_DELETE, TEST_USER_1, "TEST_USER_2"),
+                    written.stringPropertyNames());
+            assertEquals(PropertiesShortcuts.toPropertyValue(CTRL_P), written.getProperty(TEST_SAVE));
+
+            // a fresh load sees the saved override; clearing and saving again
+            // removes it from the file
+            PropertiesShortcuts reloaded = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
+            assertEquals(CTRL_P, reloaded.getKeyStroke(TEST_SAVE));
+
+            props.setShortcut(TEST_CUT, null);
+            assertNull(props.getKeyStroke(TEST_CUT));
+            props.reload();
+            assertEquals("reload must discard unsaved session changes", CTRL_X,
+                    props.getKeyStroke(TEST_CUT));
+            assertEquals("reload must keep saved overrides", CTRL_P, props.getKeyStroke(TEST_SAVE));
+
+            props.removeChangeListener(listener);
+            props.clearUserOverride(TEST_SAVE);
+            props.save();
+            PropertiesShortcuts finalState = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
+            assertEquals(CTRL_S, finalState.getKeyStroke(TEST_SAVE));
+        } finally {
+            // The save target may be the shared fixture file itself (non-mac)
+            // - restore it for the other test methods and tearDownClass.
+            savedFile.delete();
+            try (InputStream in = PropertiesShortcutsTest.class
+                    .getResourceAsStream("test.user.properties")) {
+                FileUtils.copyInputStreamToFile(in, userFile);
+            }
+        }
+    }
 }

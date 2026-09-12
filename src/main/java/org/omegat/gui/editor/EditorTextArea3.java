@@ -88,40 +88,14 @@ import org.omegat.util.gui.UIDesignManager;
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
 
-    private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorContextMenu");
-    private static final KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorNextSegment");
-    private static final KeyStroke KEYSTROKE_PREV = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorPrevSegment");
-    private static final KeyStroke KEYSTROKE_NEXT_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorNextSegmentNotTab");
-    private static final KeyStroke KEYSTROKE_PREV_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorPrevSegmentNotTab");
-    private static final KeyStroke KEYSTROKE_INSERT_LF = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorInsertLineBreak");
-    private static final KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSelectAll");
-    private static final KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorDeletePrevToken");
-    private static final KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorDeleteNextToken");
-    private static final KeyStroke KEYSTROKE_FIRST_SEG = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorFirstSegment");
-    private static final KeyStroke KEYSTROKE_LAST_SEG = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorLastSegment");
-    private static final KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSkipNextToken");
-    private static final KeyStroke KEYSTROKE_SKIP_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSkipPrevToken");
-    private static final KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSkipNextTokenWithSelection");
-    private static final KeyStroke KEYSTROKE_SKIP_PREV_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorSkipPrevTokenWithSelection");
-    private static final KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorToggleCursorLock");
-    private static final KeyStroke KEYSTROKE_TOGGLE_OVERTYPE = PropertiesShortcuts.getEditorShortcuts()
-            .getKeyStroke("editorToggleOvertype");
+
+    /**
+     * The current keystroke of an editor function, read per event so edits
+     * from the shortcut preferences apply immediately.
+     */
+    private static KeyStroke editorKey(String key) {
+        return PropertiesShortcuts.getEditorShortcuts().getKeyStroke(key);
+    }
 
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
@@ -396,7 +370,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (autoCompleter.processKeys(e)) {
             // The AutoCompleter needs special treatment.
             processed = true;
-        } else if (s.equals(KEYSTROKE_CONTEXT_MENU)) {
+        } else if (s.equals(editorKey("editorContextMenu"))) {
             // Context Menu key for contextual (right-click) menu (Shift+Esc on
             // Mac)
             JPopupMenu popup = makePopupMenu(getCaretPosition());
@@ -405,19 +379,19 @@ public class EditorTextArea3 extends JEditorPane {
                         (int) getCaret().getMagicCaretPosition().getY());
                 processed = true;
             }
-        } else if (s.equals(KEYSTROKE_NEXT)) {
+        } else if (s.equals(editorKey("editorNextSegment"))) {
             // Advance when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             }
-        } else if (s.equals(KEYSTROKE_PREV)) {
+        } else if (s.equals(editorKey("editorPrevSegment"))) {
             // Go back when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (s.equals(KEYSTROKE_NEXT_NOT_TAB)) {
+        } else if (s.equals(editorKey("editorNextSegmentNotTab"))) {
             // Advance when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
@@ -426,23 +400,23 @@ public class EditorTextArea3 extends JEditorPane {
                 Core.getMainWindow().showTimedStatusMessageRB("ETA_WARNING_TAB_ADVANCE");
                 processed = true;
             }
-        } else if (s.equals(KEYSTROKE_PREV_NOT_TAB)) {
+        } else if (s.equals(editorKey("editorPrevSegmentNotTab"))) {
             // Go back when not 'Use TAB to advance'
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (s.equals(KEYSTROKE_INSERT_LF)) {
+        } else if (s.equals(editorKey("editorInsertLineBreak"))) {
             // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
-        } else if (s.equals(KEYSTROKE_SELECT_ALL)) {
+        } else if (s.equals(editorKey("editorSelectAll"))) {
             // Select all
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (s.equals(KEYSTROKE_DELETE_PREV_TOKEN)) {
+        } else if (s.equals(editorKey("editorDeletePrevToken"))) {
             // Delete previous token
             try {
                 processed = wholeTagDelete(false);
@@ -459,7 +433,7 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)) {
+        } else if (s.equals(editorKey("editorDeleteNextToken"))) {
             // Delete next token
             try {
                 processed = wholeTagDelete(true);
@@ -480,34 +454,34 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if (s.equals(KEYSTROKE_FIRST_SEG)) {
+        } else if (s.equals(editorKey("editorFirstSegment"))) {
             // Jump to beginning of document
             int segNum = controller.m_docSegList[0].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (s.equals(KEYSTROKE_LAST_SEG)) {
+        } else if (s.equals(editorKey("editorLastSegment"))) {
             // Jump to end of document
             int lastSegIndex = controller.m_docSegList.length - 1;
             int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
             controller.gotoEntry(segNum);
             processed = true;
-        } else if (s.equals(KEYSTROKE_SKIP_PREV_TOKEN)) {
+        } else if (s.equals(editorKey("editorSkipPrevToken"))) {
             // Skip over previous token
             processed = moveCursorOverTag(false, false);
-        } else if (s.equals(KEYSTROKE_SKIP_PREV_TOKEN_SEL)) {
+        } else if (s.equals(editorKey("editorSkipPrevTokenWithSelection"))) {
             // Skip over previous token while extending selection
             processed = moveCursorOverTag(true, false);
-        } else if (s.equals(KEYSTROKE_SKIP_NEXT_TOKEN)) {
+        } else if (s.equals(editorKey("editorSkipNextToken"))) {
             // Skip over next token
             processed = moveCursorOverTag(false, true);
-        } else if (s.equals(KEYSTROKE_SKIP_NEXT_TOKEN_SEL)) {
+        } else if (s.equals(editorKey("editorSkipNextTokenWithSelection"))) {
             // Skip over next token while extending selection
             processed = moveCursorOverTag(true, true);
-        } else if (s.equals(KEYSTROKE_TOGGLE_CURSOR_LOCK)) {
+        } else if (s.equals(editorKey("editorToggleCursorLock"))) {
             boolean lockEnabled = !lockCursorToInputArea;
             lockCursorToInputArea = lockEnabled;
             updateLockInsertMessage();
-        } else if (s.equals(KEYSTROKE_TOGGLE_OVERTYPE)) {
+        } else if (s.equals(editorKey("editorToggleOvertype"))) {
             processed = switchOvertypeMode();
             updateLockInsertMessage();
         }

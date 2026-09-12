@@ -331,15 +331,17 @@ public class AutoCompleter implements IAutoCompleter {
         sb.append("</b>");
 
         if (views.size() != 1) {
+            // An explicitly unbound switch key (configurable since the
+            // shortcut preferences) simply drops its hint line.
             int nextViewN = nextViewNumber(currentView);
-            if (views.size() >= 2 && nextViewN != -1) {
+            if (views.size() >= 2 && nextViewN != -1 && keys.nextView != null) {
                 sb.append("<br>");
                 sb.append(OStrings.getString("AC_NEXT_VIEW", StaticUIUtils.getKeyStrokeText(keys.nextView),
                         views.get(nextViewN).getName()));
             }
 
             int prevViewN = prevViewNumber();
-            if (views.size() > 2 && prevViewN != -1) {
+            if (views.size() > 2 && prevViewN != -1 && keys.prevView != null) {
                 sb.append("<br>");
                 sb.append(OStrings.getString("AC_PREV_VIEW", StaticUIUtils.getKeyStrokeText(keys.prevView),
                         views.get(prevViewN).getName()));

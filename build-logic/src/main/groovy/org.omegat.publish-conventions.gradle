@@ -48,6 +48,18 @@ signing {
     }
 }
 
+remotes {
+    sourceforgeWeb {
+        host = 'web.sourceforge.net'
+        user = findProperty('sourceforgeWebUser')
+        password = findProperty('sourceforgeWebPassword')
+        agent = true
+    }
+}
+
+def htdocs = '/home/project-web/omegat/htdocs'
+def omtFlavor = 'standard'
+
 tasks.register('publishVersion') {
     description = 'Updates the version considered current by the version check.'
     group = 'publishing'

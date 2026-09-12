@@ -52,7 +52,9 @@ public class MatchesTextTest extends TestCoreGUI {
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
         window.textBox("matches_pane").requireVisible();
         window.textBox("matches_pane").requireNotEditable();
-        Pattern pattern = Pattern.compile("1. Error while reading MT results\\n"
+        // default template renders ${diff}: match source merged with current
+        // segment's insertions ({0}: {1})
+        Pattern pattern = Pattern.compile("1. Error while reading MT results\\{0}: \\{1}\\n"
                 + "Erreur lors de la lecture des résultats de TA\\n"
                 + "<\\d+/\\d+/\\d+%\\s*" + OStrings.getString(
                         "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY") + "\\s*>");

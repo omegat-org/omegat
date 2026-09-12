@@ -1,4 +1,24 @@
 ----------------------------------------------------------------------
+ OmegaT 6.1.2
+----------------------------------------------------------------------
+   0 Enhancement
+   3 Bug fixes
+   0 Localisation updates
+----------------------------------------------------------------------
+6.1.2 vs 6.1.1
+
+  Bug fixes:
+
+  - Java Exception while trying to access MyMemory (machine)
+    https://sourceforge.net/p/omegat/bugs/1319/
+
+  - 5.2.0 very slow
+    https://sourceforge.net/p/omegat/bugs/981/
+
+  - fix(team): repositories mapping cancel
+    https://github.com/omegat-org/omegat/pull/2277
+
+----------------------------------------------------------------------
  OmegaT 6.1.1 (2026-08-15)
 ----------------------------------------------------------------------
    0 Enhancement

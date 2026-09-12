@@ -80,6 +80,7 @@
 ## Architecture Designs/change log 
 
 * [Architecture Decisional Records](adr/index.md)
+* [Process Decision Records](pdr/index.md)
 * [Changelog](changes/index.md)
 
 ## Other information

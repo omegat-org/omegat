@@ -395,6 +395,12 @@
             with
             <guibutton>OK</guibutton> or
             <guibutton>Apply</guibutton>.</para>
+         <para>The <guilabel>Numerals</guilabel> colour drives the underline
+            that marks the numerals of every writing system in the editor, as
+            long as the
+            <link linkend="dialogs.project.properties.check.numbers" endterm="dialogs.project.properties.check.numbers.title"></link> project
+            property is enabled. It ships without a colour; the marks appear
+            once you assign one.</para>
          <para>Scripts can be used to set predefined themes. OmegaT is bundled with
             a script called 
             <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"></link> that

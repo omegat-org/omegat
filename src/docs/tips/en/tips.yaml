@@ -74,3 +74,5 @@ tips:
   name: Ignore a word in the dictionary
 - file: fuzzy_match_numbers.html
   name: Let fuzzy matching understand numbers
+- file: numbers_checked_in_every_system.html
+  name: Numbers are checked in every numeral system

@@ -47,6 +47,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
+import org.omegat.core.tagvalidation.TagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.LongProcessExecutor;
@@ -263,6 +264,7 @@ public final class Core {
     static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
+        TagValidation.registerCheckNumbersTeamSetting();
 
         CoreState coreState = CoreState.getInstance();
         coreState.setSegmenter(new Segmenter(Preferences.getSRX()));
@@ -295,6 +297,7 @@ public final class Core {
      */
     public static void initializeConsole() {
         CoreState coreState = CoreState.getInstance();
+        TagValidation.registerCheckNumbersTeamSetting();
         coreState.setTagValidation(new TagValidationTool());
         coreState.setProject(new NotLoadedProject());
         coreState.setMainWindow(new ConsoleWindow());

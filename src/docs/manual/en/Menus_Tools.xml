@@ -52,7 +52,10 @@
                   <para>
                      <guilabel>Tag Issues</guilabel> (always selected): detects
                      missing or misplaced tags, including custom tags and flagged
-                     text. See the 
+                     text. If the
+                     <link linkend="dialogs.project.properties.check.numbers" endterm="dialogs.project.properties.check.numbers.title"></link> project
+                     property is enabled, numerals are also compared by their
+                     numeric value, whatever the numeral system. See the
                      <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"></link> preferences for
                      details.</para>
                   <note>

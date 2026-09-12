@@ -198,7 +198,7 @@
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.match.numbers">
             <term xml:id="dialogs.project.properties.match.numbers.title">
-               <option>Consider numbers in fuzzy matching</option>
+               <option>Consider numbers in matches</option>
             </term>
             <listitem>
                <para>By default, the word-based match percentages ignore numbers, and
@@ -209,7 +209,11 @@
                   		  tokens by their numeric value: numbers written in different
                   		  numbering systems (Roman numerals, ideographic numbers,
                   		  Arabic-Indic or full-width digits, and so on) count as equal to
-                  		  their Western counterpart of the same value. Two segments that
+                  		  their Western counterpart of the same value. The sign-written
+                  		  systems (Ethiopic, cuneiform, Mayan and others) and the
+                  		  precomposed fraction glyphs are read the same way, and an
+                  		  inserted match rewrites each number in the notation the match
+                  		  itself uses. Two segments that
                   		  consist only of numbers are scored against each other as number
                   		  sequences, with a small fixed penalty, so differing dates or bare
                   		  numbers surface as fuzzy matches at all.</para>
@@ -218,6 +222,21 @@
                   <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"></link> pane to see how its score was
                   		  computed; a warning is shown there when the numbers of the match
                   		  differ in value from those of the segment.</para>
+            </listitem>
+         </varlistentry>
+         <varlistentry xml:id="dialogs.project.properties.check.numbers">
+            <term xml:id="dialogs.project.properties.check.numbers.title">
+               <option>Check numerals by value</option>
+            </term>
+            <listitem>
+               <para>Makes the tag checks compare the numerals of the source text
+                  		  and the translation by their numeric value, whatever the numeral
+                  		  system, and report a changed or missing value in the
+                  <guilabel>Issues</guilabel> window. A value rewritten in the
+                  		  notation of the target language raises no issue.</para>
+               <para>Turn the option off for language pairs where numbers are
+                  		  legitimately rewritten beyond recognition, such as a target
+                  		  language that spells numbers out in words.</para>
             </listitem>
          </varlistentry>
          <varlistentry xml:id="dialogs.project.properties.external.processing.command">

@@ -653,6 +653,31 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
                   		  Editor.</para>
             </listitem>
          </varlistentry>
+         <varlistentry xml:id="panes.editor.segment.metadata">
+            <term xml:id="panes.editor.segment.metadata.title">Segment
+               metadata</term>
+            <listitem>
+               <para>The gear icon in the title bar of the pane offers
+                  <guilabel>Configure Segment Metadata...</guilabel>, which
+                  opens a dialog to show a metadata column at the left edge of
+                  the pane.</para>
+               <para>Each of its rows describes the segment next to it. Pick
+                  and order the details in the dialog: segment number,
+                  translation state, modification or creation author and date,
+                  text lengths, marker colours and more.</para>
+               <para>The translation state is abbreviated: the first letter is
+                  <literal>T</literal> (translated) or
+                  <literal>U</literal> (untranslated), the second letter is
+                  <literal>U</literal> (unique),
+                  <literal>F</literal> (first of several identical segments)
+                  or
+                  <literal>R</literal> (repetition), and further letters
+                  describe auto-populated translations. Hover over the column
+                  for the full wording.</para>
+               <para>Grid lines and an alternating background can be added to
+                  make the rows easier to follow across the pane.</para>
+            </listitem>
+         </varlistentry>
       </variablelist>
    </section>
    <section xml:id="panes.fuzzy.matches">

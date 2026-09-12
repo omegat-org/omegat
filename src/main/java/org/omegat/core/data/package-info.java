@@ -1,9 +1,9 @@
-/**************************************************************************
+/*
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Thomas Cordonnier
+ Copyright (C) 2026 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -21,36 +21,9 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ */
 
+@NullMarked
 package org.omegat.core.data;
 
-
-import org.jspecify.annotations.Nullable;
-
-/**
- * Common interface for any object storing a pair source / translation text
- *
- * @author Thomas Cordonnier
- */
-public interface ITranslationEntry {
-
-    /**
-     * Gets the source text
-     */
-    String getSourceText();
-
-    /**
-     * Gets translation text
-     */
-    @Nullable
-    String getTranslationText();
-
-    /**
-     * Check whenever there is a translation
-     */
-    default boolean isTranslated() {
-        return getTranslationText() != null;
-    }
-
-}
+import org.jspecify.annotations.NullMarked;

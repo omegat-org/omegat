@@ -55,15 +55,15 @@ public class TMXEntry implements ITMXEntry {
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     public final String source;
-    public final String translation;
-    public final String changer;
+    public final @Nullable String translation;
+    public final @Nullable String changer;
     public final long changeDate;
-    public final String creator;
+    public final @Nullable String creator;
     public final long creationDate;
-    public final String note;
+    public final @Nullable String note;
     public final boolean defaultTranslation;
-    public final ExternalLinked linked;
-    public final String origin;
+    public final @Nullable ExternalLinked linked;
+    public final @Nullable String origin;
 
     TMXEntry(ITMXEntry from, boolean defaultTranslation, @Nullable ExternalLinked linked) {
         this.source = from.getSourceText();
@@ -85,12 +85,12 @@ public class TMXEntry implements ITMXEntry {
     }
 
     @Override
-    public String getTranslationText() {
+    public @Nullable String getTranslationText() {
         return translation;
     }
 
     @Override
-    public String getCreator() {
+    public @Nullable String getCreator() {
         return creator;
     }
 
@@ -100,7 +100,7 @@ public class TMXEntry implements ITMXEntry {
     }
 
     @Override
-    public String getChanger() {
+    public @Nullable String getChanger() {
         return changer;
     }
 
@@ -110,12 +110,12 @@ public class TMXEntry implements ITMXEntry {
     }
 
     @Override
-    public String getNote() {
+    public @Nullable String getNote() {
         return note;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(@Nullable Object obj) {
         if (this == obj) {
             return true;
         }
@@ -163,7 +163,7 @@ public class TMXEntry implements ITMXEntry {
      * Two TMXEntrys are considered interchangeable if this method returns true,
      * even if equals() != true.
      */
-    public boolean equalsTranslation(TMXEntry other) {
+    public boolean equalsTranslation(@Nullable TMXEntry other) {
         if (other == null) {
             return false;
         }
@@ -194,7 +194,7 @@ public class TMXEntry implements ITMXEntry {
      * @return mtsource when requested, otherwise null.
      */
     @Override
-    public String getPropValue(String propType) {
+    public @Nullable String getPropValue(String propType) {
         if (origin != null && propType.equals(PROP_ORIGIN)) {
             return origin;
         }
@@ -220,7 +220,7 @@ public class TMXEntry implements ITMXEntry {
      * @return singletonList of mtsource when it has, otherwise null.
      */
     @Override
-    public List<TMXProp> getProperties() {
+    public @Nullable List<TMXProp> getProperties() {
         if (origin != null) {
             return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));
         }

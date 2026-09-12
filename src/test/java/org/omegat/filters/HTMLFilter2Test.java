@@ -59,7 +59,8 @@ public class HTMLFilter2Test extends TestFilterBase {
     public void testIgnoreCommentParse() throws Exception {
         Map<String, String> options = new HashMap<>();
         options.put(HTMLOptions.OPTION_REMOVE_COMMENTS, "true");
-        List<String> entries = parse(new HTMLFilter2(), "src/test/resources/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
+        List<String> entries = parse(new HTMLFilter2(),
+                "src/test/resources/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html", options);
         assertEquals(3, entries.size());
         assertEquals("en", entries.get(0));
         assertEquals("This is the first line.", entries.get(1));

@@ -30,10 +30,12 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersUtil;
 import org.omegat.filters2.text.TextFilter;
@@ -49,7 +51,13 @@ public class FiltersTest {
 
     @Before
     public final void setUp() {
-        FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
+        TestCoreState.resetState();
+        TestCoreState.getInstance().setFilterClasses(List.of(TextFilter.class, ResourceBundleFilter.class));
+    }
+
+    @After
+    public final void tearDown() {
+        TestCoreState.resetState();
     }
 
     @Test
@@ -68,7 +76,7 @@ public class FiltersTest {
 
         // Deep change
         clone = FilterMaster.createDefaultFiltersConfig();
-        Files file = clone.getFilters().get(0).getFiles().get(0);
+        Files file = clone.getFilters().getFirst().getFiles().getFirst();
         file.setTargetEncoding(file.getTargetEncoding() + "foo");
         assertFalse(FiltersUtil.filtersEqual(orig, clone));
     }

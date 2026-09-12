@@ -35,7 +35,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
@@ -210,7 +209,7 @@ public final class CommandCommon {
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Core.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
     }

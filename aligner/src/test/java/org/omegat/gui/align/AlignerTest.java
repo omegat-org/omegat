@@ -34,7 +34,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -45,7 +44,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.TestCoreState;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 import org.omegat.gui.align.Aligner.ComparisonMode;
@@ -56,8 +54,7 @@ public class AlignerTest {
     @Before
     public final void setUp() {
         TestCoreState.resetState();
-        FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
-        TestCoreState.getInstance().setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.initFilters(List.of(TextFilter.class, ResourceBundleFilter.class));
         TestCoreState.getInstance().setSegmenter(new Segmenter(SRX.getDefault()));
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.txt"), true));
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.properties"), true));

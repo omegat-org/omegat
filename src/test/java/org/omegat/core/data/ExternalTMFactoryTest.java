@@ -39,7 +39,6 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
@@ -55,8 +54,7 @@ public class ExternalTMFactoryTest extends TestCore {
     @Before
     public final void setUp() {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.initFilters(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
         ProjectProperties props = new ProjectProperties() {
             public Language getSourceLanguage() {
                 return sourceLang;
